@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -23,7 +24,6 @@ import java.util.Date;
  * 会员优惠券实体类
  *
  * 
- * @since 2020-03-19 10:44 上午
  */
 @Entity
 @Table(name = MemberCoupon.TABLE_NAME)
@@ -33,34 +33,34 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
 
 	public static final String TABLE_NAME = "li_member_coupon";
 	
-    @ApiModelProperty(value = "从哪个模版领取的优惠券")
+    @Schema(description =  "从哪个模版领取的优惠券")
     private String couponId;
 
-    @ApiModelProperty(value = "商家id，如果是平台发送，这个值为 platform")
+    @Schema(description =  "商家id，如果是平台发送，这个值为 platform")
     private String storeId;
 
-    @ApiModelProperty(value = "商家名称，如果是平台，这个值为 platform")
+    @Schema(description =  "商家名称，如果是平台，这个值为 platform")
     private String storeName;
 
-    @ApiModelProperty(value = "面额")
+    @Schema(description =  "面额")
     private Double price;
 
-    @ApiModelProperty(value = "折扣")
+    @Schema(description =  "折扣")
     private Double discount;
 
-    @ApiModelProperty(value = "消费门槛")
+    @Schema(description =  "消费门槛")
     private Double consumeThreshold;
 
-    @ApiModelProperty(value = "会员名称")
+    @Schema(description =  "会员名称")
     private String memberName;
 
-    @ApiModelProperty(value = "会员id")
+    @Schema(description =  "会员id")
     private String memberId;
 
     /**
      * @see PromotionsScopeTypeEnum
      */
-    @ApiModelProperty(value = "关联范围类型")
+    @Schema(description =  "关联范围类型")
     private String scopeType;
 
     /**
@@ -68,40 +68,40 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
      *
      * @see cn.lili.modules.promotion.entity.enums.CouponTypeEnum
      */
-    @ApiModelProperty(value = "活动类型")
+    @Schema(description =  "活动类型")
     private String couponType;
 
 
-    @ApiModelProperty(value = "范围关联的id")
+    @Schema(description =  "范围关联的id")
     private String scopeId;
 
-    @ApiModelProperty(value = "使用起始时间")
+    @Schema(description =  "使用起始时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
-    @ApiModelProperty(value = "使用截止时间")
+    @Schema(description =  "使用截止时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
     /**
      * @see cn.lili.modules.promotion.entity.enums.CouponGetEnum
      */
-    @ApiModelProperty(value = "优惠券类型，分为免费领取和活动赠送")
+    @Schema(description =  "优惠券类型，分为免费领取和活动赠送")
     private String getType;
 
-    @ApiModelProperty(value = "是否是平台优惠券")
+    @Schema(description =  "是否是平台优惠券")
     private Boolean isPlatform;
 
-    @ApiModelProperty(value = "店铺承担比例")
+    @Schema(description =  "店铺承担比例")
     private Double storeCommission;
 
-    @ApiModelProperty(value = "核销时间")
+    @Schema(description =  "核销时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date consumptionTime;
 
     /**
      * @see MemberCouponStatusEnum
      */
-    @ApiModelProperty(value = "会员优惠券状态")
+    @Schema(description =  "会员优惠券状态")
     private String memberCouponStatus;
 
     public MemberCoupon() {

@@ -20,18 +20,18 @@ import java.util.Date;
 public class PlatformViewData extends BaseIdEntity {
 
 
-    @ApiModelProperty(value = "pv数量")
+    @Schema(description =  "pv数量")
     private Long pvNum;
 
-    @ApiModelProperty(value = "uv数量")
+    @Schema(description =  "uv数量")
     private Long uvNum;
 
 
-    @ApiModelProperty(value = "统计日")
+    @Schema(description =  "统计日")
     private Date date;
 
     //默认是平台流量统计//
 
-    @ApiModelProperty(value = "店铺id")
+    @Schema(description =  "店铺id")
     private String storeId = "-1";
 }

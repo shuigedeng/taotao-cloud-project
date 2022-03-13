@@ -1,24 +1,18 @@
 package com.taotao.cloud.distribution.biz.service.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.modules.distribution.entity.dos.Distribution;
-import cn.lili.modules.distribution.entity.dos.DistributionGoods;
-import cn.lili.modules.distribution.entity.dto.DistributionGoodsSearchParams;
-import cn.lili.modules.distribution.entity.vos.DistributionGoodsVO;
-import cn.lili.modules.distribution.mapper.DistributionGoodsMapper;
-import cn.lili.modules.distribution.service.DistributionGoodsService;
-import cn.lili.modules.distribution.service.DistributionService;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.goods.service.GoodsSkuService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
+import com.taotao.cloud.distribution.biz.mapper.DistributionGoodsMapper;
+import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +22,10 @@ import java.util.Objects;
 
 /**
  * 分销商品接口实现
- *
- * @author pikachu
- * @since 2020-03-24 23:04:56
  */
 @Service
-public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsMapper, DistributionGoods> implements DistributionGoodsService {
+public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsMapper, DistributionGoods> implements
+	DistributionGoodsService {
 
     /**
      * 分销员

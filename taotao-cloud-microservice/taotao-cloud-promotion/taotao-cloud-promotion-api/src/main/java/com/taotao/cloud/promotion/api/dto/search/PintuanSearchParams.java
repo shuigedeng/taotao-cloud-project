@@ -18,11 +18,11 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class PintuanSearchParams extends BasePromotionsSearchParams {
 
-    @ApiModelProperty(value = "商家名称，如果是平台，这个值为 platform")
+    @Schema(description =  "商家名称，如果是平台，这个值为 platform")
     private String storeName;
 
     @NotEmpty(message = "活动名称不能为空")
-    @ApiModelProperty(value = "活动名称", required = true)
+    @Schema(description =  "活动名称", required = true)
     private String promotionName;
 
 

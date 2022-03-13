@@ -1,18 +1,15 @@
 package com.taotao.cloud.operation.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.page.entity.dos.PageData;
-import cn.lili.modules.page.entity.dto.PageDataDTO;
-import cn.lili.modules.page.entity.vos.PageDataListVO;
-import cn.lili.modules.page.entity.vos.PageDataVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.operation.api.dto.PageDataDTO;
+import com.taotao.cloud.operation.api.vo.PageDataListVO;
+import com.taotao.cloud.operation.api.vo.PageDataVO;
+import com.taotao.cloud.operation.biz.entity.PageData;
 
 /**
  * 页面业务层
  *
- * @author Bulbasaur
- * @since 2020/12/10 17:23
  */
 public interface PageDataService extends IService<PageData> {
 

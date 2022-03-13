@@ -256,13 +256,13 @@ public class EsGoodsIndex implements Serializable {
     /**
      * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
      */
-    @ApiModelProperty(value = "商品类型", required = true)
+    @Schema(description =  "商品类型", required = true)
     private String goodsType;
 
     /**
      * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
      */
-    @ApiModelProperty(value = "商品sku基础分数", required = true)
+    @Schema(description =  "商品sku基础分数", required = true)
     private Integer skuSource;
 
     /**

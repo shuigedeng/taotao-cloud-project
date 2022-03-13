@@ -37,23 +37,23 @@ public class Feedback extends BaseIdEntity {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @Schema(description =  "创建时间", hidden = true)
     private Date createTime;
 
-    @ApiModelProperty(value = "会员名称", hidden = true)
+    @Schema(description =  "会员名称", hidden = true)
     private String userName;
 
-    @ApiModelProperty(value = "反馈内容")
+    @Schema(description =  "反馈内容")
     @NotEmpty(message = "反馈内容不能为空")
     @Length(max = 500, message = "反馈内容不能超过500个字符")
     private String context;
 
-    @ApiModelProperty(value = "手机号")
+    @Schema(description =  "手机号")
     @Length(max = 11, message = "手机号不能超过11位")
     @Sensitive(strategy = SensitiveStrategy.PHONE)
     private String mobile;
 
-    @ApiModelProperty(value = "图片，多个图片使用：(，)分割")
+    @Schema(description =  "图片，多个图片使用：(，)分割")
     @Length(max = 255, message = "图片上传太多啦，请选择删除掉")
     private String images;
 
@@ -62,7 +62,7 @@ public class Feedback extends BaseIdEntity {
      *
      * @see FeedbackTypeEnum
      */
-    @ApiModelProperty(value = "类型", allowableValues = "FUNCTION,OPTIMIZE,OTHER")
+    @Schema(description =  "类型", allowableValues = "FUNCTION,OPTIMIZE,OTHER")
     private String type;
 
 }

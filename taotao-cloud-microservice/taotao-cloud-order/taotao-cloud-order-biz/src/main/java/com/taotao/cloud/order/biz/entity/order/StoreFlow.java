@@ -30,85 +30,85 @@ public class StoreFlow extends BaseIdEntity {
 	 */
     private static final long serialVersionUID = -5998757398902747939L;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "流水编号")
+    @Schema(description =  "流水编号")
     private String sn;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "订单sn")
+    @Schema(description =  "订单sn")
     private String orderSn;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "子订单sn")
+    @Schema(description =  "子订单sn")
     private String orderItemSn;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "售后SN")
+    @Schema(description =  "售后SN")
     private String refundSn;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "店铺id")
+    @Schema(description =  "店铺id")
     private String storeId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "店铺名称 ")
+    @Schema(description =  "店铺名称 ")
     private String storeName;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "会员id")
+    @Schema(description =  "会员id")
     private String memberId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "会员名称")
+    @Schema(description =  "会员名称")
     private String memberName;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "商品ID")
+    @Schema(description =  "商品ID")
     private String goodsId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "货品ID")
+    @Schema(description =  "货品ID")
     private String skuId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "图片")
+    @Schema(description =  "图片")
     private String image;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "分类ID")
+    @Schema(description =  "分类ID")
     private String categoryId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "规格json")
+    @Schema(description =  "规格json")
     private String specs;
 	/**
 	 * 应用ID
@@ -117,85 +117,85 @@ public class StoreFlow extends BaseIdEntity {
     /**
      * @see FlowTypeEnum
      */
-    @ApiModelProperty(value = "流水类型：PAY/REFUND 支付/退款", allowableValues = "PAY,REFUND")
+    @Schema(description =  "流水类型：PAY/REFUND 支付/退款", allowableValues = "PAY,REFUND")
     private String flowType;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see cn.lili.modules.order.order.entity.enums.OrderPromotionTypeEnum
      */
-    @ApiModelProperty(value = "订单促销类型")
+    @Schema(description =  "订单促销类型")
     private String orderPromotionType;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "积分活动商品结算价格")
+    @Schema(description =  "积分活动商品结算价格")
     private Double pointSettlementPrice;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "砍价活动商品结算价格")
+    @Schema(description =  "砍价活动商品结算价格")
     private Double kanjiaSettlementPrice;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "平台优惠券 使用金额")
+    @Schema(description =  "平台优惠券 使用金额")
     private Double siteCouponPrice;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "站点优惠券佣金比例")
+    @Schema(description =  "站点优惠券佣金比例")
     private Double siteCouponPoint;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "站点优惠券佣金")
+    @Schema(description =  "站点优惠券佣金")
     private Double siteCouponCommission;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "单品分销返现支出")
+    @Schema(description =  "单品分销返现支出")
     private Double distributionRebate;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "平台收取交易佣金")
+    @Schema(description =  "平台收取交易佣金")
     private Double commissionPrice;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "流水金额")
+    @Schema(description =  "流水金额")
     private Double finalPrice;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "最终结算金额")
+    @Schema(description =  "最终结算金额")
     private Double billPrice;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "第三方交易流水号")
+    @Schema(description =  "第三方交易流水号")
     private String transactionId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "支付方式名称")
+    @Schema(description =  "支付方式名称")
     private String paymentName;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "销售量")
+    @Schema(description =  "销售量")
     private Integer num;
 	/**
 	 * 应用ID
@@ -205,6 +205,6 @@ public class StoreFlow extends BaseIdEntity {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @Schema(description =  "创建时间", hidden = true)
     private Date createTime;
 }

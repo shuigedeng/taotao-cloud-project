@@ -26,35 +26,35 @@ public class CouponSearchParams extends BasePromotionsSearchParams implements Se
     private static final String PRICE_COLUMN = "price";
     private static final String RANGE_DAY_TYPE_COLUMN = "range_day_type";
 
-    @ApiModelProperty(value = "会员id")
+    @Schema(description =  "会员id")
     private String memberId;
 
-    @ApiModelProperty(value = "优惠券名称")
+    @Schema(description =  "优惠券名称")
     private String couponName;
     /**
      * POINT("打折"), PRICE("减免现金");
      *
      * @see cn.lili.modules.promotion.entity.enums.CouponTypeEnum
      */
-    @ApiModelProperty(value = "活动类型")
+    @Schema(description =  "活动类型")
     private String couponType;
     /**
      * @see PromotionsScopeTypeEnum
      */
-    @ApiModelProperty(value = "关联范围类型")
+    @Schema(description =  "关联范围类型")
     private String scopeType;
-    @ApiModelProperty(value = "范围关联的id")
+    @Schema(description =  "范围关联的id")
     private String scopeId;
-    @ApiModelProperty(value = "面额,可以为范围，如10_1000")
+    @Schema(description =  "面额,可以为范围，如10_1000")
     private String price;
-    @ApiModelProperty(value = "发行数量,可以为范围，如10_1000")
+    @Schema(description =  "发行数量,可以为范围，如10_1000")
     private String publishNum;
-    @ApiModelProperty(value = "已被领取的数量,可以为范围，如10_1000")
+    @Schema(description =  "已被领取的数量,可以为范围，如10_1000")
     private String receivedNum;
     /**
      * @see cn.lili.modules.promotion.entity.enums.CouponGetEnum
      */
-    @ApiModelProperty(value = "优惠券类型，分为免费领取和活动赠送")
+    @Schema(description =  "优惠券类型，分为免费领取和活动赠送")
     private String getType;
 
 

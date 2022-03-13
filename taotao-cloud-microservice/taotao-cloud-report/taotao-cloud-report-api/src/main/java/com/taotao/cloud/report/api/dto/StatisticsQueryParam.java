@@ -12,19 +12,19 @@ import lombok.Data;
 @Data
 public class StatisticsQueryParam {
 
-    @ApiModelProperty(value = "快捷搜索", allowableValues = "TODAY, YESTERDAY, LAST_SEVEN, LAST_THIRTY")
+    @Schema(description =  "快捷搜索", allowableValues = "TODAY, YESTERDAY, LAST_SEVEN, LAST_THIRTY")
     private String searchType;
 
-    @ApiModelProperty(value = "类型：年（YEAR）、月（MONTH）")
+    @Schema(description =  "类型：年（YEAR）、月（MONTH）")
     private String timeType;
 
-    @ApiModelProperty(value = "年份")
+    @Schema(description =  "年份")
     private Integer year;
 
-    @ApiModelProperty(value = "月份")
+    @Schema(description =  "月份")
     private Integer month;
 
-    @ApiModelProperty(value = "店铺ID")
+    @Schema(description =  "店铺ID")
     private String storeId;
 
 }

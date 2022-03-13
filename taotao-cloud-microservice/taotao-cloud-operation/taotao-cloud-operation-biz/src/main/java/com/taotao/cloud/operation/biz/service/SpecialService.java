@@ -1,13 +1,10 @@
 package com.taotao.cloud.operation.biz.service;
 
-import cn.lili.modules.page.entity.dos.Special;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.operation.biz.entity.Special;
 
 /**
  * 专题活动业务层
- *
- * @author Bulbasaur
- * @since 2020/12/7 11:27
  */
 public interface SpecialService extends IService<Special> {
 

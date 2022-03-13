@@ -31,20 +31,20 @@ public class ArticleCategory extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
 
-    @ApiModelProperty(value = "分类名称")
+    @Schema(description =  "分类名称")
     @NotEmpty(message = "分类名称不能为空")
     private String articleCategoryName;
 
-    @ApiModelProperty(value = "父分类ID")
+    @Schema(description =  "父分类ID")
     private String parentId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description =  "排序")
     @Min(value = 0,message = "排序值最小0，最大9999999999")
     @Max(value = 999999999,message = "排序值最小0，最大9999999999")
     @NotNull(message = "排序值不能为空")
     private Integer sort;
 
-    @ApiModelProperty(value = "层级")
+    @Schema(description =  "层级")
     @Min(value = 0,message = "层级最小为0")
     @Max(value = 3,message = "层级最大为3")
     private Integer level;
@@ -52,7 +52,7 @@ public class ArticleCategory extends BaseEntity {
     /**
      * @see ArticleCategoryEnum
      */
-    @ApiModelProperty(value = "类型")
+    @Schema(description =  "类型")
     private String type;
 
     public Integer getSort() {

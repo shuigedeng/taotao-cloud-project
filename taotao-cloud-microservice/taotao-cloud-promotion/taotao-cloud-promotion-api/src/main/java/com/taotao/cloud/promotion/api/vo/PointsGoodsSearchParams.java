@@ -16,16 +16,16 @@ import lombok.EqualsAndHashCode;
 @Data
 public class PointsGoodsSearchParams extends BasePromotionsSearchParams {
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "商品skuId")
+    @Schema(description =  "商品skuId")
     private String skuId;
 
-    @ApiModelProperty(value = "积分商品分类编号")
+    @Schema(description =  "积分商品分类编号")
     private String pointsGoodsCategoryId;
 
-    @ApiModelProperty(value = "积分,可以为范围，如10_1000")
+    @Schema(description =  "积分,可以为范围，如10_1000")
     private String points;
 
 

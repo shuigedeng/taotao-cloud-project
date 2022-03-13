@@ -1,19 +1,16 @@
 package com.taotao.cloud.distribution.biz.service;
 
-import cn.lili.modules.distribution.entity.dos.DistributionGoods;
-import cn.lili.modules.distribution.entity.dto.DistributionGoodsSearchParams;
-import cn.lili.modules.distribution.entity.vos.DistributionGoodsVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
 import java.util.List;
 
 
 /**
  * 分销商品业务层
- *
- * @author pikachu
- * @since 2020-03-24 10:46:33
  */
 public interface DistributionGoodsService extends IService<DistributionGoods> {
 

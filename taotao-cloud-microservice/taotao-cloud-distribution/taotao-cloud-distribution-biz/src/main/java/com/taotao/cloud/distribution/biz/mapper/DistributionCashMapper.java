@@ -1,13 +1,10 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 
 /**
  * 分销佣金数据处理层
- *
- * @author pikachu
- * @since 2020-03-26 18:45:56
  */
 public interface DistributionCashMapper extends BaseMapper<DistributionCash> {
 

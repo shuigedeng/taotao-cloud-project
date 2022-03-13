@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class MemberCouponVO extends MemberCoupon {
 
-    @ApiModelProperty(value = "无法使用原因")
+    @Schema(description =  "无法使用原因")
     private String reason;
     
     public MemberCouponVO(MemberCoupon memberCoupon, String reason) {

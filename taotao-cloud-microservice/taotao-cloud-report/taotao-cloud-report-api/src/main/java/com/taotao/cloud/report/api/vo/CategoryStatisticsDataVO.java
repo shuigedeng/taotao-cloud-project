@@ -19,9 +19,9 @@ public class CategoryStatisticsDataVO {
     @ApiModelProperty("一级分类名称")
     private String categoryName;
 
-    @ApiModelProperty(value = "销售数量")
+    @Schema(description =  "销售数量")
     private String num;
 
-    @ApiModelProperty(value = "销售金额")
+    @Schema(description =  "销售金额")
     private Double price;
 }

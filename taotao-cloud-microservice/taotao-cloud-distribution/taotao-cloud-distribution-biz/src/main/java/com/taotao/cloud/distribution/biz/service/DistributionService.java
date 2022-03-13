@@ -1,18 +1,14 @@
 package com.taotao.cloud.distribution.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.distribution.entity.dos.Distribution;
-import cn.lili.modules.distribution.entity.dto.DistributionApplyDTO;
-import cn.lili.modules.distribution.entity.dto.DistributionSearchParams;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
+import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
 
 
 /**
  * 分销员业务层
- *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 public interface DistributionService extends IService<Distribution> {
 

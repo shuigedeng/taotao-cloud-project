@@ -32,55 +32,55 @@ public class PurchaseQuoted extends BaseIdEntity {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @Schema(description =  "创建时间", hidden = true)
     private Date createTime;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "采购单ID")
+    @Schema(description =  "采购单ID")
     private String purchaseOrderId;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "标题")
+    @Schema(description =  "标题")
     private String title;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "报价说明")
+    @Schema(description =  "报价说明")
     private String context;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "附件")
+    @Schema(description =  "附件")
     private String annex;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "公司名称")
+    @Schema(description =  "公司名称")
     private String companyName;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "联系人")
+    @Schema(description =  "联系人")
     private String contacts;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "联系电话")
+    @Schema(description =  "联系电话")
     private String contactNumber;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "报价人")
+    @Schema(description =  "报价人")
     private String memberId;
 
 }

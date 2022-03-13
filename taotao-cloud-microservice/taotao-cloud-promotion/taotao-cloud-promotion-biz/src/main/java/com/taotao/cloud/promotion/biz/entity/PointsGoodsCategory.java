@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,6 @@ import java.math.BigDecimal;
  * 积分商品分类
  *
  * 
- * @since 2020-03-19 10:44 上午
  **/
 @Entity
 @Table(name = PointsGoodsCategory.TABLE_NAME)
@@ -29,16 +29,16 @@ public class PointsGoodsCategory extends BaseSuperEntity<PointsGoodsCategory, Lo
 	public static final String TABLE_NAME = "li_points_goods_category";
 
     @NotEmpty(message = "分类名称不能为空")
-    @ApiModelProperty(value = "分类名称")
+    @Schema(description =  "分类名称")
     private String name;
 
-    @ApiModelProperty(value = "父id, 根节点为0")
+    @Schema(description =  "父id, 根节点为0")
     private String parentId;
 
-    @ApiModelProperty(value = "层级, 从0开始")
+    @Schema(description =  "层级, 从0开始")
     private Integer level;
 
-    @ApiModelProperty(value = "排序值")
+    @Schema(description =  "排序值")
     private BigDecimal sortOrder;
 
 }

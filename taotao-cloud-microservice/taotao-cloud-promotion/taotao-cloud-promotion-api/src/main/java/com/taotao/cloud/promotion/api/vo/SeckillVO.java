@@ -25,7 +25,7 @@ public class SeckillVO extends Seckill {
     /**
      * @see cn.lili.modules.promotion.entity.enums.SeckillApplyStatusEnum
      */
-    @ApiModelProperty(value = "报名状态")
+    @Schema(description =  "报名状态")
     private String seckillApplyStatus;
 
     /**

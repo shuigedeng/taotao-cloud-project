@@ -23,16 +23,16 @@ public class KanjiaActivityGoodsOperationDTO implements Serializable {
     private static final long serialVersionUID = -1378599087650538592L;
 
     @Min(message = "活动开始时间不能为空", value = 0)
-    @ApiModelProperty(value = "活动开始时间", required = true)
+    @Schema(description =  "活动开始时间", required = true)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     @Min(message = "活动结束时间不能为空", value = 0)
-    @ApiModelProperty(value = "活动结束时间", required = true)
+    @Schema(description =  "活动结束时间", required = true)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
-    @ApiModelProperty(value = "砍价活动商品列表")
+    @Schema(description =  "砍价活动商品列表")
     List<KanjiaActivityGoodsDTO> promotionGoodsList;
 
 }

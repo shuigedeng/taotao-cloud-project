@@ -22,33 +22,33 @@ public class RoleCommand {
     /**
      * id
      */
-    @ApiModelProperty(value = "角色id")
+    @Schema(description =  "角色id")
     @NotBlank(message = "角色id不能为空", groups = UpdateGroup.class)
     private String id;
 
     /**
      * 角色编码
      */
-    @ApiModelProperty(value = "角色编码")
+    @Schema(description =  "角色编码")
     @NotBlank(message = "角色编码不能为空", groups = AddGroup.class)
     private String roleCode;
 
     /**
      * 角色名称
      */
-    @ApiModelProperty(value = "角色名称")
+    @Schema(description =  "角色名称")
     @NotBlank(message = "角色名称不能为空", groups = AddGroup.class)
     private String roleName;
 
     /**
      * 备注
      */
-    @ApiModelProperty(value = "备注")
+    @Schema(description =  "备注")
     private String remarks;
 
     /**
      * 权限
      */
-    @ApiModelProperty(value = "权限")
+    @Schema(description =  "权限")
     private List<String> permissionIdList;
 }

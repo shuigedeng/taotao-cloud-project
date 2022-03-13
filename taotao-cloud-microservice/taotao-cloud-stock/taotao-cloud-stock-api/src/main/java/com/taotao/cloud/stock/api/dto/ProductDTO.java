@@ -28,30 +28,30 @@ public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 5126530068827085130L;
 
-//    @ApiModelProperty(value = "商品名称")
+//    @Schema(description =  "商品名称")
     private String name;
 
-//    @ApiModelProperty(value = "供应商id")
+//    @Schema(description =  "供应商id")
     private Long supplierId;
 
-//    @ApiModelProperty(value = "图片id")
+//    @Schema(description =  "图片id")
     private Long picId;
 
-//    @ApiModelProperty(value = "视频id")
+//    @Schema(description =  "视频id")
     private Long videoId;
 
-//    @ApiModelProperty(value = "商品详情图片id")
+//    @Schema(description =  "商品详情图片id")
     private Long detailPicId;
 
-//    @ApiModelProperty(value = "商品第一张图片id")
+//    @Schema(description =  "商品第一张图片id")
     private Long firstPicId;
 
-//    @ApiModelProperty(value = "商品海报id")
+//    @Schema(description =  "商品海报id")
     private Long posterPicId;
 
-//    @ApiModelProperty(value = "备注")
+//    @Schema(description =  "备注")
     private String remark;
 
-//    @ApiModelProperty(value = "商品状态")
+//    @Schema(description =  "商品状态")
     private Integer status;
 }

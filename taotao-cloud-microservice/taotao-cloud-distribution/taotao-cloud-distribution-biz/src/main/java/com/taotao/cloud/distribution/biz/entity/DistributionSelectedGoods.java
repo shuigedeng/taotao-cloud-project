@@ -1,9 +1,10 @@
-package com.taotao.cloud.marketing.biz.entity;
+package com.taotao.cloud.distribution.biz.entity;
 
 import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +22,10 @@ import lombok.NoArgsConstructor;
 public class DistributionSelectedGoods extends BaseIdEntity {
 
 
-    @ApiModelProperty(value = "分销员ID")
+    @Schema(description =  "分销员ID")
     private String distributionId;
 
-    @ApiModelProperty(value = "分销商品ID")
+    @Schema(description =  "分销商品ID")
     private String distributionGoodsId;
 
     public DistributionSelectedGoods(String distributionId, String distributionGoodsId) {

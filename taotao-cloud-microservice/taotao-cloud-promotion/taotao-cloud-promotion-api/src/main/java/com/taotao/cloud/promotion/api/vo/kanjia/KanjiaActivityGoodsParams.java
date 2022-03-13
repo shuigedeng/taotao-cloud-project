@@ -24,22 +24,22 @@ public class KanjiaActivityGoodsParams implements Serializable {
 
     private static final long serialVersionUID = 1344104067705714289L;
 
-    @ApiModelProperty(value = "活动商品")
+    @Schema(description =  "活动商品")
     private String goodsName;
 
-    @ApiModelProperty(value = "活动开始时间")
+    @Schema(description =  "活动开始时间")
     private Long startTime;
 
-    @ApiModelProperty(value = "活动结束时间")
+    @Schema(description =  "活动结束时间")
     private Long endTime;
 
-    @ApiModelProperty(value = "skuId")
+    @Schema(description =  "skuId")
     private String skuId;
 
     /**
      * @see PromotionsStatusEnum
      */
-    @ApiModelProperty(value = "活动状态")
+    @Schema(description =  "活动状态")
     private String promotionStatus;
 
     public <T> QueryWrapper<T> wrapper() {

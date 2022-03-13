@@ -1,10 +1,8 @@
 package com.taotao.cloud.operation.biz.controller.manger;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.page.entity.dos.ArticleCategory;
-import cn.lili.modules.page.entity.vos.ArticleCategoryVO;
-import cn.lili.modules.page.service.ArticleCategoryService;
+import com.taotao.cloud.operation.api.vo.ArticleCategoryVO;
+import com.taotao.cloud.operation.biz.entity.ArticleCategory;
+import com.taotao.cloud.operation.biz.service.ArticleCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -17,9 +15,6 @@ import java.util.List;
 
 /**
  * 管理端,文章分类管理接口
- *
- * @author pikachu
- * @since 2020-05-5 15:10:16
  */
 @Slf4j
 @RestController

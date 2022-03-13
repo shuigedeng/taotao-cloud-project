@@ -1,12 +1,10 @@
 package com.taotao.cloud.distribution.biz.service;
 
-import cn.lili.modules.distribution.entity.dos.DistributionSelectedGoods;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.distribution.biz.entity.DistributionSelectedGoods;
+
 /**
  * 分销选择商品业务层
- *
- * @author pikachu
- * @since 2020-03-24 10:46:33
  */
 public interface DistributionSelectedGoodsService extends IService<DistributionSelectedGoods> {
 

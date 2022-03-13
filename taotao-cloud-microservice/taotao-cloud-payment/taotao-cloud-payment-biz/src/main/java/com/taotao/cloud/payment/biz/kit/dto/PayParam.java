@@ -18,15 +18,15 @@ public class PayParam {
 
 
     @NotNull
-    @ApiModelProperty(value = "交易类型", allowableValues = "TRADE,ORDER,RECHARGE")
+    @Schema(description =  "交易类型", allowableValues = "TRADE,ORDER,RECHARGE")
     private String orderType;
 
     @NotNull
-    @ApiModelProperty(value = "订单号")
+    @Schema(description =  "订单号")
     private String sn;
 
     @NotNull
-    @ApiModelProperty(value = "客户端类型")
+    @Schema(description =  "客户端类型")
     private String clientType;
 
 

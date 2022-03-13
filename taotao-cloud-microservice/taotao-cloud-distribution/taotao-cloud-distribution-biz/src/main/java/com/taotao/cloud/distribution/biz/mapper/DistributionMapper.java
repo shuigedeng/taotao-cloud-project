@@ -1,15 +1,12 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
-import cn.lili.modules.distribution.entity.dos.Distribution;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
 import org.apache.ibatis.annotations.Update;
 
 
 /**
  * 分销员数据处理层
- *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 public interface DistributionMapper extends BaseMapper<Distribution> {
 

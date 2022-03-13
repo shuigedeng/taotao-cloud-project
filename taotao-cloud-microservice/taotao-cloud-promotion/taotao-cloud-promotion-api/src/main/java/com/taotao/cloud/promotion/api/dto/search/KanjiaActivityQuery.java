@@ -20,10 +20,10 @@ public class KanjiaActivityQuery {
 
     private static final long serialVersionUID = -1583030890805926292L;
 
-    @ApiModelProperty(value = "货品名称")
+    @Schema(description =  "货品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "会员id", hidden = true)
+    @Schema(description =  "会员id", hidden = true)
     private String memberId;
 
     public <T> QueryWrapper<T> wrapper() {

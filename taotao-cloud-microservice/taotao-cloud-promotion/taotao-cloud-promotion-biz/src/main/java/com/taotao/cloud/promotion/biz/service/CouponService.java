@@ -9,7 +9,6 @@ import com.taotao.cloud.promotion.biz.entity.Coupon;
  * 优惠券业务层
  *
  *
- * @since 2020/8/21
  */
 public interface CouponService extends AbstractPromotionsService<Coupon> {
 

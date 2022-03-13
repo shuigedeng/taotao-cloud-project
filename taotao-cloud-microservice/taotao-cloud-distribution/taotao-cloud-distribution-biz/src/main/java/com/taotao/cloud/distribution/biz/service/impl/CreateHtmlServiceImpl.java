@@ -1,11 +1,6 @@
 package com.taotao.cloud.distribution.biz.service.impl;
 
-import com.taotao.cloud.distribution.biz.common.entity.Result;
-import com.taotao.cloud.distribution.biz.common.entity.distribution;
-import com.taotao.cloud.distribution.biz.repository.distributionRepository;
 import com.taotao.cloud.distribution.biz.service.ICreateHtmlService;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;

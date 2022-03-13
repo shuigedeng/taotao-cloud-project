@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class GoodsStatisticsQueryParam extends StatisticsQueryParam {
 
-    @ApiModelProperty(value = "查询类型：按数量（NUM）、按金额（PRICE）")
+    @Schema(description =  "查询类型：按数量（NUM）、按金额（PRICE）")
     private String type;
 
 }

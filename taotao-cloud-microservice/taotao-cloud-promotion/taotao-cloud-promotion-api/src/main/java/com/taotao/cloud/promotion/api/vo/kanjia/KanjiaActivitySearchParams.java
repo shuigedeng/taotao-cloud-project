@@ -17,22 +17,22 @@ import lombok.EqualsAndHashCode;
 @Data
 public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {
 
-    @ApiModelProperty(value = "砍价活动ID")
+    @Schema(description =  "砍价活动ID")
     private String id;
 
-    @ApiModelProperty(value = "砍价商品SkuID")
+    @Schema(description =  "砍价商品SkuID")
     private String kanjiaActivityGoodsId;
 
-    @ApiModelProperty(value = "会员ID" ,hidden = true)
+    @Schema(description =  "会员ID" ,hidden = true)
     private String memberId;
 
-    @ApiModelProperty(value = "状态")
+    @Schema(description =  "状态")
     private String status;
 
-    @ApiModelProperty(value = "邀请活动ID，有值说明是被邀请人")
+    @Schema(description =  "邀请活动ID，有值说明是被邀请人")
     private String kanjiaActivityId;
 
-    @ApiModelProperty(value = "规格商品ID" ,hidden = true)
+    @Schema(description =  "规格商品ID" ,hidden = true)
     private String goodsSkuId;
 
 

@@ -21,33 +21,33 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "售后服务单号")
+	@Schema(description =  "售后服务单号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String sn;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "操作者id(可以是卖家)")
+	@Schema(description =  "操作者id(可以是卖家)")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String operatorId;
 
 	/**
 	 * @see UserEnums
 	 */
-	@ApiModelProperty(value = "操作者类型")
+	@Schema(description =  "操作者类型")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String operatorType;
 
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "操作者名称")
+	@Schema(description =  "操作者名称")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String operatorName;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "日志信息")
+	@Schema(description =  "日志信息")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String message;
 

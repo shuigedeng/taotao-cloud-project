@@ -1,13 +1,10 @@
 package com.taotao.cloud.operation.biz.controller.buyer;
 
-import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.page.entity.dos.Feedback;
-import cn.lili.modules.page.service.FeedbackService;
+import com.taotao.cloud.operation.biz.entity.Feedback;
+import com.taotao.cloud.operation.biz.service.FeedbackService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +14,6 @@ import javax.validation.Valid;
 
 /**
  * 买家端,意见反馈接口
- *
- * @author Bulbasaur
- * @since 2020-05-5 15:10:16
  */
 @RestController
 @Api(tags = "买家端,意见反馈接口")

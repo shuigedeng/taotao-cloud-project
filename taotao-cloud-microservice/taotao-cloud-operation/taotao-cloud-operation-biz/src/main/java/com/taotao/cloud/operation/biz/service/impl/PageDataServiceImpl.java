@@ -1,36 +1,29 @@
 package com.taotao.cloud.operation.biz.service.impl;
 
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.SwitchEnum;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.properties.SystemSettingProperties;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.page.entity.dos.PageData;
-import cn.lili.modules.page.entity.dto.PageDataDTO;
-import cn.lili.modules.page.entity.enums.PageEnum;
-import cn.lili.modules.page.entity.vos.PageDataListVO;
-import cn.lili.modules.page.entity.vos.PageDataVO;
-import cn.lili.modules.page.mapper.PageDataMapper;
-import cn.lili.modules.page.service.PageDataService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.operation.api.dto.PageDataDTO;
+import com.taotao.cloud.operation.api.enums.PageEnum;
+import com.taotao.cloud.operation.api.vo.PageDataListVO;
+import com.taotao.cloud.operation.api.vo.PageDataVO;
+import com.taotao.cloud.operation.biz.entity.PageData;
+import com.taotao.cloud.operation.biz.mapper.PageDataMapper;
+import com.taotao.cloud.operation.biz.service.PageDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 楼层装修管理业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/11 9:15
  */
 @Service
-public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> implements PageDataService {
+public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> implements
+	PageDataService {
 
 
     @Autowired

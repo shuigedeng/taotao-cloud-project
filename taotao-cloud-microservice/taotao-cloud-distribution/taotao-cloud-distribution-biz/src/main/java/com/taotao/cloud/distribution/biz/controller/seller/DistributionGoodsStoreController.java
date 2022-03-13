@@ -1,20 +1,16 @@
 package com.taotao.cloud.distribution.biz.controller.seller;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.security.OperationalJudgment;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.distribution.entity.dos.DistributionGoods;
-import cn.lili.modules.distribution.entity.dos.DistributionSelectedGoods;
-import cn.lili.modules.distribution.entity.dto.DistributionGoodsSearchParams;
-import cn.lili.modules.distribution.entity.vos.DistributionGoodsVO;
-import cn.lili.modules.distribution.service.DistributionGoodsService;
-import cn.lili.modules.distribution.service.DistributionSelectedGoodsService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
+import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +20,6 @@ import java.util.Objects;
 /**
  * 店铺端,分销商品接口
  *
- * @author Bulbasaur
- * @since 2020/11/16 10:06 下午
  */
 @RestController
 @Api(tags = "店铺端,分销商品接口")
@@ -46,7 +40,8 @@ public class DistributionGoodsStoreController {
 
     @ApiOperation(value = "获取分销商商品列表")
     @GetMapping
-    public Result<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
+    public Result<IPage<DistributionGoodsVO>> distributionGoods(
+	    DistributionGoodsSearchParams distributionGoodsSearchParams) {
 
         return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
     }

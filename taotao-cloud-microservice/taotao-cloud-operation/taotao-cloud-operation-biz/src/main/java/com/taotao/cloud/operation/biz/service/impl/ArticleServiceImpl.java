@@ -2,34 +2,29 @@ package com.taotao.cloud.operation.biz.service.impl;
 
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.modules.page.entity.dos.Article;
-import cn.lili.modules.page.entity.dto.ArticleSearchParams;
-import cn.lili.modules.page.entity.enums.ArticleEnum;
-import cn.lili.modules.page.entity.vos.ArticleVO;
-import cn.lili.modules.page.mapper.ArticleMapper;
-import cn.lili.modules.page.service.ArticleService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.operation.api.dto.ArticleSearchParams;
+import com.taotao.cloud.operation.api.enums.ArticleEnum;
+import com.taotao.cloud.operation.api.vo.ArticleVO;
+import com.taotao.cloud.operation.biz.entity.Article;
+import com.taotao.cloud.operation.biz.mapper.ArticleMapper;
+import com.taotao.cloud.operation.biz.service.ArticleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * 文章业务层实现
- *
- * @author Chopper
- * @since 2020/11/18 11:40 上午
  */
 @Service
-public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements
+	ArticleService {
 
     @Override
     public IPage<ArticleVO> managerArticlePage(ArticleSearchParams articleSearchParams) {

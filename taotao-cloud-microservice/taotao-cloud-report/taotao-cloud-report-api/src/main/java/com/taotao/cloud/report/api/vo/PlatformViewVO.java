@@ -16,16 +16,16 @@ import java.util.Date;
 public class PlatformViewVO {
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "展示时间")
+    @Schema(description =  "展示时间")
     private Date date;
 
-    @ApiModelProperty(value = "pv数量")
+    @Schema(description =  "pv数量")
     private Long pvNum;
 
-    @ApiModelProperty(value = "uv数量")
+    @Schema(description =  "uv数量")
     private Long uvNum;
 
-    @ApiModelProperty(value = "店铺id")
+    @Schema(description =  "店铺id")
     private String storeId = "-1";
 
 

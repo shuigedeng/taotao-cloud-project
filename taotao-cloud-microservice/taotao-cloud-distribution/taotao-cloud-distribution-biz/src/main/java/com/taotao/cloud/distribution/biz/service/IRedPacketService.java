@@ -1,8 +1,6 @@
 package com.taotao.cloud.distribution.biz.service;
 
 
-import com.taotao.cloud.distribution.biz.common.entity.RedPacket;
-import com.taotao.cloud.distribution.biz.common.entity.Result;
 
 public interface IRedPacketService {
 

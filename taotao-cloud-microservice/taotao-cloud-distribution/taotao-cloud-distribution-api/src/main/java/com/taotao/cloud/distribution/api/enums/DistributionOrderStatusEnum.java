@@ -2,8 +2,6 @@ package com.taotao.cloud.distribution.api.enums;
 
 /**
  * 分销员订单状态
- *
- * @author pikachu
  */
 public enum DistributionOrderStatusEnum {
     //待结算（冻结）

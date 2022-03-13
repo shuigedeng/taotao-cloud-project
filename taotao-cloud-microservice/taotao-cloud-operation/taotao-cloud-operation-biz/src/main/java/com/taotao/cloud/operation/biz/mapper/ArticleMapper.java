@@ -1,20 +1,17 @@
 package com.taotao.cloud.operation.biz.mapper;
 
-import cn.lili.modules.page.entity.dos.Article;
-import cn.lili.modules.page.entity.vos.ArticleVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.operation.api.vo.ArticleVO;
+import com.taotao.cloud.operation.biz.entity.Article;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 
 /**
  * 文章数据处理层
- *
- * @author pikachu
- * @since 2020-05-06 15:18:56
  */
 public interface ArticleMapper extends BaseMapper<Article> {
 

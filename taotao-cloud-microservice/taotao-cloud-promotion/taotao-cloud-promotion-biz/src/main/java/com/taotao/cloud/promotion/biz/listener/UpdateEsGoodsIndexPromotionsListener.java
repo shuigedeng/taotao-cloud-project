@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-/**
- * @author paulG
- * @since 2022/1/19
- **/
 @Component
 public class UpdateEsGoodsIndexPromotionsListener {
 

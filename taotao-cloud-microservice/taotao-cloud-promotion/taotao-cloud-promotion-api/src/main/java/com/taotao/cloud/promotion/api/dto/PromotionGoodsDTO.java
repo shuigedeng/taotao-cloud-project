@@ -21,13 +21,13 @@ public class PromotionGoodsDTO extends PromotionGoods {
 
     private static final long serialVersionUID = 9206970681612883421L;
 
-    @ApiModelProperty(value = "商品id")
+    @Schema(description =  "商品id")
     private String goodsId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "商品图片")
+    @Schema(description =  "商品图片")
     private String goodsImage;
 
     public PromotionGoodsDTO(GoodsSku sku) {

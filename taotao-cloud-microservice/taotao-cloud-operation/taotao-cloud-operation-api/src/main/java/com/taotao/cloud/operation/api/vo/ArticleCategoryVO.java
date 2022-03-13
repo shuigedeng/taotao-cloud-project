@@ -3,6 +3,7 @@ package com.taotao.cloud.operation.api.vo;
 import cn.lili.common.utils.BeanUtil;
 import cn.lili.modules.page.entity.dos.ArticleCategory;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -12,13 +13,11 @@ import java.util.List;
 /**
  * 文章分类VO
  *
- * @author Chopper
- * @since 2021-03-26 11:32
  */
 @Data
 public class ArticleCategoryVO extends ArticleCategory {
 
-    @ApiModelProperty(value = "子菜单")
+    @Schema(description =  "子菜单")
     private List<ArticleCategoryVO> children = new ArrayList<>();
 
     public ArticleCategoryVO() {

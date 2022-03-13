@@ -22,7 +22,7 @@ public class KanjiaActivityGoodsDTO extends KanjiaActivityGoods implements Seria
 
     private static final long serialVersionUID = 1969340823809319805L;
 
-    @ApiModelProperty(value = "商品规格详细信息")
+    @Schema(description =  "商品规格详细信息")
     private GoodsSku goodsSku;
 
 }

@@ -12,19 +12,19 @@ import lombok.Data;
 @Data
 public class KanjiaActivityGoodsListVO {
 
-    @ApiModelProperty(value = "砍价活动商品id")
+    @Schema(description =  "砍价活动商品id")
     private String id;
 
-    @ApiModelProperty(value = "货品名称")
+    @Schema(description =  "货品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "缩略图")
+    @Schema(description =  "缩略图")
     private String thumbnail;
 
-    @ApiModelProperty(value = "最低购买金额")
+    @Schema(description =  "最低购买金额")
     private Double purchasePrice;
 
-    @ApiModelProperty(value = "活动库存")
+    @Schema(description =  "活动库存")
     private Integer stock;
 
 }

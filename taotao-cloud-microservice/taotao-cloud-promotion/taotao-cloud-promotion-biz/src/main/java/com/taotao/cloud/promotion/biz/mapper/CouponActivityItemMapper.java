@@ -9,8 +9,6 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 优惠券活动
  *
- * 
- * @since 2021/5/20 6:11 下午
  */
 public interface CouponActivityItemMapper extends BaseMapper<CouponActivityItem> {
 

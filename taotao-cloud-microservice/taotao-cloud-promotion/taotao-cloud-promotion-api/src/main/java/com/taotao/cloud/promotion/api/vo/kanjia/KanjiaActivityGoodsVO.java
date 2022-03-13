@@ -13,10 +13,10 @@ import lombok.Data;
 @Data
 public class KanjiaActivityGoodsVO {
 
-    @ApiModelProperty(value = "商品规格详细信息")
+    @Schema(description =  "商品规格详细信息")
     private GoodsSku goodsSku;
 
-    @ApiModelProperty(value = "最低购买金额")
+    @Schema(description =  "最低购买金额")
     private Double purchasePrice;
 
     public Double getPurchasePrice() {
@@ -26,7 +26,7 @@ public class KanjiaActivityGoodsVO {
         return purchasePrice;
     }
 
-    @ApiModelProperty(value = "活动库存")
+    @Schema(description =  "活动库存")
     private Integer stock;
 
 }

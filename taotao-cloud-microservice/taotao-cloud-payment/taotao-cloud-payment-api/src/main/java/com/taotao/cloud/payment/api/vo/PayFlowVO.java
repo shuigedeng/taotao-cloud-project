@@ -18,6 +18,7 @@ package com.taotao.cloud.dubbo.api.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,37 +28,37 @@ import java.time.LocalDateTime;
  * @since 2020/11/20 上午9:42
  * @version 1.0.0
  */
-@ApiModel(value = "支付流水信息VO", description = "支付流水信息VO")
+@Schema(description = "支付流水信息VO")
 public class PayFlowVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(description =  "id")
 	private Long id;
 
-	@ApiModelProperty(value = "支付流水号")
+	@Schema(description =  "支付流水号")
 	private String code;
 
-	@ApiModelProperty(value = "订单号")
+	@Schema(description =  "订单号")
 	private String orderCode;
 
-	@ApiModelProperty(value = "商品id")
+	@Schema(description =  "商品id")
 	private Long productId;
 
-	@ApiModelProperty(value = "支付金额")
+	@Schema(description =  "支付金额")
 	private BigDecimal paidAmount;
 
-	@ApiModelProperty(value = "支付方式")
+	@Schema(description =  "支付方式")
 	private Integer paidMethod;
 
-	@ApiModelProperty(value = "购买个数")
+	@Schema(description =  "购买个数")
 	private Integer buyCount;
 
-	@ApiModelProperty(value = "支付时间")
+	@Schema(description =  "支付时间")
 	private LocalDateTime payTime;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(description =  "创建时间")
 	private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "最后修改时间")
+	@Schema(description =  "最后修改时间")
 	private LocalDateTime lastModifiedTime;
 }

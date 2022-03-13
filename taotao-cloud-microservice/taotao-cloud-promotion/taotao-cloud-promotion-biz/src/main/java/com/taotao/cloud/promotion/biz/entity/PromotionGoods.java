@@ -12,6 +12,7 @@ import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory.PromotionGoods;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -24,7 +25,6 @@ import java.util.Date;
  * 促销活动商品实体类
  *
  * 
- * @since 2020-03-19 10:44 上午
  */
 @Entity
 @Table(name = PromotionGoods.TABLE_NAME)
@@ -34,79 +34,79 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 
 	public static final String TABLE_NAME = "li_promotion_goods";
 	
-    @ApiModelProperty(value = "商家ID")
+    @Schema(description =  "商家ID")
     private String storeId;
 
-    @ApiModelProperty(value = "商家名称")
+    @Schema(description =  "商家名称")
     private String storeName;
 
-    @ApiModelProperty(value = "商品id")
+    @Schema(description =  "商品id")
     private String goodsId;
 
-    @ApiModelProperty(value = "商品SkuId")
+    @Schema(description =  "商品SkuId")
     private String skuId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "缩略图")
+    @Schema(description =  "缩略图")
     private String thumbnail;
 
-    @ApiModelProperty(value = "活动开始时间")
+    @Schema(description =  "活动开始时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
-    @ApiModelProperty(value = "活动结束时间")
+    @Schema(description =  "活动结束时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
-    @ApiModelProperty(value = "活动id")
+    @Schema(description =  "活动id")
     private String promotionId;
 
     /**
      * @see PromotionTypeEnum
      */
-    @ApiModelProperty(value = "促销工具类型")
+    @Schema(description =  "促销工具类型")
     private String promotionType;
 
     /**
      * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
      */
-    @ApiModelProperty(value = "商品类型")
+    @Schema(description =  "商品类型")
     private String goodsType;
 
-    @ApiModelProperty(value = "活动标题")
+    @Schema(description =  "活动标题")
     private String title;
 
-    @ApiModelProperty(value = "卖出的商品数量")
+    @Schema(description =  "卖出的商品数量")
     private Integer num;
 
-    @ApiModelProperty(value = "原价")
+    @Schema(description =  "原价")
     private Double originalPrice;
 
-    @ApiModelProperty(value = "促销价格")
+    @Schema(description =  "促销价格")
     private Double price;
 
-    @ApiModelProperty(value = "兑换积分")
+    @Schema(description =  "兑换积分")
     private Long points;
 
-    @ApiModelProperty(value = "限购数量")
+    @Schema(description =  "限购数量")
     private Integer limitNum;
 
-    @ApiModelProperty(value = "促销库存")
+    @Schema(description =  "促销库存")
     private Integer quantity;
 
-    @ApiModelProperty(value = "分类path")
+    @Schema(description =  "分类path")
     private String categoryPath;
 
     /**
      * @see PromotionsScopeTypeEnum
      */
-    @ApiModelProperty(value = "关联范围类型")
+    @Schema(description =  "关联范围类型")
     private String scopeType = PromotionsScopeTypeEnum.PORTION_GOODS.name();
 
 
-    @ApiModelProperty(value = "范围关联的id")
+    @Schema(description =  "范围关联的id")
     private String scopeId;
 
     public PromotionGoods(GoodsSku sku) {

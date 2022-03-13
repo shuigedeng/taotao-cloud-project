@@ -1,14 +1,8 @@
 package com.taotao.cloud.distribution.biz.controller.buyer;
 
-import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
-import cn.lili.modules.distribution.service.DistributionCashService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.distribution.biz.entity.DistributionCash;
+import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -29,8 +23,6 @@ import javax.validation.constraints.NotNull;
 /**
  * 买家端,分销商品佣金提现接口
  *
- * @author pikachu
- * @since 2020/11/16 10:03 下午
  */
 @RestController
 @Api(tags = "买家端,分销商品佣金提现接口")

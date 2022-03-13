@@ -26,49 +26,49 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "售后服务单号")
+	@Schema(description =  "售后服务单号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String sn;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "订单编号")
+	@Schema(description =  "订单编号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String orderSn;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "订单货物编号")
+	@Schema(description =  "订单货物编号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String orderItemSn;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "交易编号")
+	@Schema(description =  "交易编号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String tradeSn;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "会员ID")
+	@Schema(description =  "会员ID")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String memberId;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "会员名称")
+	@Schema(description =  "会员名称")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String memberName;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "商家ID")
+	@Schema(description =  "商家ID")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String storeId;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "商家名称")
+	@Schema(description =  "商家名称")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String storeName;
 
@@ -76,44 +76,44 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "商品ID")
+	@Schema(description =  "商品ID")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String goodsId;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "货品ID")
+	@Schema(description =  "货品ID")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String skuId;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "申请数量")
+	@Schema(description =  "申请数量")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Integer num;
 
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "商品图片")
+	@Schema(description =  "商品图片")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String goodsImage;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "商品名称")
+	@Schema(description =  "商品名称")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String goodsName;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "规格json")
+	@Schema(description =  "规格json")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String specs;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "实际金额")
+	@Schema(description =  "实际金额")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Double flowPrice;
 
@@ -121,33 +121,33 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "申请原因")
+	@Schema(description =  "申请原因")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String reason;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "问题描述")
+	@Schema(description =  "问题描述")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String problemDesc;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "评价图片")
+	@Schema(description =  "评价图片")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String afterSaleImage;
 
 	/**
 	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleTypeEnum
 	 */
-	@ApiModelProperty(value = "售后类型", allowableValues = "RETURN_GOODS,RETURN_MONEY")
+	@Schema(description =  "售后类型", allowableValues = "RETURN_GOODS,RETURN_MONEY")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String serviceType;
 
 	/**
 	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleStatusEnum
 	 */
-	@ApiModelProperty(value = "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
+	@Schema(description =  "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String serviceStatus;
 
@@ -156,67 +156,67 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	/**
 	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleRefundWayEnum
 	 */
-	@ApiModelProperty(value = "退款方式", allowableValues = "ORIGINAL,OFFLINE")
+	@Schema(description =  "退款方式", allowableValues = "ORIGINAL,OFFLINE")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String refundWay;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "账号类型", allowableValues = "ALIPAY,WECHATPAY,BANKTRANSFER")
+	@Schema(description =  "账号类型", allowableValues = "ALIPAY,WECHATPAY,BANKTRANSFER")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String accountType;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "银行账户")
+	@Schema(description =  "银行账户")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String bankAccountNumber;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "银行开户名")
+	@Schema(description =  "银行开户名")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String bankAccountName;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "银行开户行")
+	@Schema(description =  "银行开户行")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String bankDepositName;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "商家备注")
+	@Schema(description =  "商家备注")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String auditRemark;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "订单支付方式返回的交易号")
+	@Schema(description =  "订单支付方式返回的交易号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String payOrderNo;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "申请退款金额")
+	@Schema(description =  "申请退款金额")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Double applyRefundPrice;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "实际退款金额")
+	@Schema(description =  "实际退款金额")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Double actualRefundPrice;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "退还积分")
+	@Schema(description =  "退还积分")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Integer refundPoint;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "退款时间")
+	@Schema(description =  "退款时间")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Date refundTime;
 
@@ -226,19 +226,19 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "发货单号")
+	@Schema(description =  "发货单号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String mLogisticsNo;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "物流公司CODE")
+	@Schema(description =  "物流公司CODE")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String mLogisticsCode;
 	/**
 	 * 应用ID
 	 */
-	@ApiModelProperty(value = "物流公司名称")
+	@Schema(description =  "物流公司名称")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String mLogisticsName;
 	/**
@@ -246,7 +246,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	 */
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@ApiModelProperty(value = "买家发货时间")
+	@Schema(description =  "买家发货时间")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private Date mDeliverTime;
 

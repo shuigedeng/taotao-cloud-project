@@ -1,29 +1,17 @@
 package com.taotao.cloud.distribution.biz.service.impl;
 
+import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.distribution.entity.dos.Distribution;
-import cn.lili.modules.distribution.entity.dto.DistributionApplyDTO;
-import cn.lili.modules.distribution.entity.dto.DistributionSearchParams;
-import cn.lili.modules.distribution.entity.enums.DistributionStatusEnum;
-import cn.lili.modules.distribution.mapper.DistributionMapper;
-import cn.lili.modules.distribution.service.DistributionService;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.service.MemberService;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.DistributionSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
-import cn.lili.mybatis.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
+import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
+import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
+import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +22,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * 分销员接口实现
  *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 @Service
-public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Distribution> implements DistributionService {
+public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Distribution> implements
+	DistributionService {
 
     /**
      * 会员
