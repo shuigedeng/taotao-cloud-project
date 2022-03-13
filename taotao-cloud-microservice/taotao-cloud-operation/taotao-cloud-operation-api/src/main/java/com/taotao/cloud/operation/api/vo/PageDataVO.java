@@ -1,17 +1,16 @@
 package com.taotao.cloud.operation.api.vo;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 楼层装修数据VO
  *
- * @author Bulbasaur
- * @since 2020/12/10 17:42
  */
 @Data
 public class PageDataVO {
 
-    @ApiModelProperty(value = "页面数据")
+    @Schema(description =  "页面数据")
     private String pageData;
 }

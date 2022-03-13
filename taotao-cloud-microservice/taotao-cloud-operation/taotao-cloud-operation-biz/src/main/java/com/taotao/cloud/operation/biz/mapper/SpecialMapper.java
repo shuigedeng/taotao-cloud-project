@@ -1,14 +1,11 @@
 package com.taotao.cloud.operation.biz.mapper;
 
 
-import cn.lili.modules.page.entity.dos.Special;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.operation.biz.entity.Special;
 
 /**
  * 专题活动数据处理层
- *
- * @author Bulbasaur
- * @since 2020/12/7 11:26
  */
 public interface SpecialMapper extends BaseMapper<Special> {
 }

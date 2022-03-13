@@ -1,31 +1,18 @@
 
 package com.taotao.cloud.distribution.biz.service.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.properties.RocketmqCustomProperties;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.common.utils.SnowFlake;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.distribution.entity.dos.Distribution;
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
-import cn.lili.modules.distribution.entity.enums.DistributionStatusEnum;
-import cn.lili.modules.distribution.entity.vos.DistributionCashSearchParams;
-import cn.lili.modules.distribution.mapper.DistributionCashMapper;
-import cn.lili.modules.distribution.service.DistributionCashService;
-import cn.lili.modules.distribution.service.DistributionService;
-import cn.lili.modules.wallet.entity.dto.MemberWalletUpdateDTO;
-import cn.lili.modules.wallet.entity.dto.MemberWithdrawalMessage;
-import cn.lili.modules.wallet.entity.enums.DepositServiceTypeEnum;
-import cn.lili.modules.wallet.entity.enums.MemberWithdrawalDestinationEnum;
-import cn.lili.modules.wallet.entity.enums.WithdrawStatusEnum;
-import cn.lili.modules.wallet.service.MemberWalletService;
-import cn.lili.mybatis.util.PageUtil;
-import cn.lili.rocketmq.RocketmqSendCallbackBuilder;
-import cn.lili.rocketmq.tags.MemberTagsEnum;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
+import com.taotao.cloud.distribution.api.vo.DistributionCashSearchParams;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
+import com.taotao.cloud.distribution.biz.entity.DistributionCash;
+import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
+import com.taotao.cloud.distribution.biz.service.DistributionCashService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,12 +23,10 @@ import java.util.Date;
 
 /**
  * 分销佣金业务层实现
- *
- * @author pikachu
- * @since 2020-03-126 18:04:56
  */
 @Service
-public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMapper, DistributionCash> implements DistributionCashService {
+public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMapper, DistributionCash> implements
+	DistributionCashService {
     /**
      * 分销员
      */
@@ -67,7 +52,8 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
         //获取分销员
         Distribution distribution = distributionService.getDistribution();
         //如果未找到分销员或者分销员状态不是已通过则无法申请提现
-        if (distribution != null && distribution.getDistributionStatus().equals(DistributionStatusEnum.PASS.name())) {
+        if (distribution != null && distribution.getDistributionStatus().equals(
+	        DistributionStatusEnum.PASS.name())) {
             //校验分销佣金是否大于提现金额
             if (distribution.getCanRebate() < applyMoney) {
                 throw new ServiceException(ResultCode.WALLET_WITHDRAWAL_INSUFFICIENT);
@@ -105,7 +91,8 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
     }
 
     @Override
-    public IPage<DistributionCash> getDistributionCash(DistributionCashSearchParams distributionCashSearchParams) {
+    public IPage<DistributionCash> getDistributionCash(
+	    DistributionCashSearchParams distributionCashSearchParams) {
 
         return this.page(PageUtil.initPage(distributionCashSearchParams), distributionCashSearchParams.queryWrapper());
     }

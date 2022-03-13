@@ -15,13 +15,13 @@ import lombok.Data;
 @ApiModel(value = "砍价活动VO")
 public class KanjiaActivityVO extends KanjiaActivity {
 
-    @ApiModelProperty(value = "是否可以砍价")
+    @Schema(description =  "是否可以砍价")
     private Boolean help;
 
-    @ApiModelProperty(value = "是否已发起砍价")
+    @Schema(description =  "是否已发起砍价")
     private Boolean launch;
 
-    @ApiModelProperty(value = "是否可购买")
+    @Schema(description =  "是否可购买")
     private Boolean pass;
 
     public KanjiaActivityVO() {

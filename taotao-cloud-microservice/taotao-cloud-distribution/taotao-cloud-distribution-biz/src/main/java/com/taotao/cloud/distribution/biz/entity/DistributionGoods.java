@@ -1,4 +1,4 @@
-package com.taotao.cloud.marketing.biz.entity;
+package com.taotao.cloud.distribution.biz.entity;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -38,52 +39,52 @@ public class DistributionGoods extends BaseIdEntity {
 
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
+    @Schema(description =  "创建者", hidden = true)
     private String createBy;
 
     @CreatedDate
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @Schema(description =  "创建时间", hidden = true)
     private Date createTime;
 
     @NotNull(message = "商品ID不能为空")
-    @ApiModelProperty(value = "商品ID", required = true)
+    @Schema(description =  "商品ID", required = true)
     private String goodsId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 
     @NotNull(message = "规格ID不能为空")
-    @ApiModelProperty(value = "规格ID", required = true)
+    @Schema(description =  "规格ID", required = true)
     private String skuId;
 
-    @ApiModelProperty(value = "规格信息json", hidden = true)
+    @Schema(description =  "规格信息json", hidden = true)
     @JsonIgnore
     private String specs;
 
     @NotNull(message = "店铺ID不能为空")
-    @ApiModelProperty(value = "店铺ID")
+    @Schema(description =  "店铺ID")
     private String storeId;
 
     @NotNull(message = "店铺名称不能为空")
-    @ApiModelProperty(value = "店铺名称")
+    @Schema(description =  "店铺名称")
     private String storeName;
 
     @NotNull(message = "佣金金额")
-    @ApiModelProperty(value = "佣金金额", required = true)
+    @Schema(description =  "佣金金额", required = true)
     private Double commission = 0D;
 
     @Max(value = 99999999, message = "价格不能超过99999999")
-    @ApiModelProperty(value = "商品价格")
+    @Schema(description =  "商品价格")
     private Double price;
 
-    @ApiModelProperty(value = "缩略图路径")
+    @Schema(description =  "缩略图路径")
     private String thumbnail;
 
     @Max(value = 99999999, message = "库存不能超过99999999")
-    @ApiModelProperty(value = "库存")
+    @Schema(description =  "库存")
     private Integer quantity;
 
     public DistributionGoods(GoodsSku goodsSku, Double commission) {

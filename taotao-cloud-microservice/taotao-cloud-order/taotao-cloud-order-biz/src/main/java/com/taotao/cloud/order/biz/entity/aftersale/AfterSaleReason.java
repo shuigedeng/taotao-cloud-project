@@ -25,14 +25,14 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 	 * 应用ID
 	 */
 	@NotNull
-	@ApiModelProperty(value = "售后原因")
+	@Schema(description =  "售后原因")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String reason;
 
 	/**
 	 * @see AfterSaleTypeEnum
 	 */
-	@ApiModelProperty(value = "原因类型", allowableValues = "CANCEL,RETURN_GOODS,RETURN_MONEY,COMPLAIN")
+	@Schema(description =  "原因类型", allowableValues = "CANCEL,RETURN_GOODS,RETURN_MONEY,COMPLAIN")
 	@NotNull
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String serviceType;

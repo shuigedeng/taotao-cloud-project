@@ -1,12 +1,5 @@
 package com.taotao.cloud.operation.biz.controller.manger;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.page.entity.dos.Article;
-import cn.lili.modules.page.entity.dto.ArticleSearchParams;
-import cn.lili.modules.page.entity.enums.ArticleEnum;
-import cn.lili.modules.page.entity.vos.ArticleVO;
-import cn.lili.modules.page.service.ArticleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,9 +12,6 @@ import javax.validation.Valid;
 
 /**
  * 管理端,文章接口
- *
- * @author pikachu
- * @since 2020-05-06 15:18:56
  */
 @RestController
 @Api(tags = "管理端,文章接口")

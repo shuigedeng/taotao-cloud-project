@@ -1,17 +1,14 @@
 package com.taotao.cloud.operation.biz.service;
 
-import cn.lili.modules.page.entity.dos.ArticleCategory;
-import cn.lili.modules.page.entity.vos.ArticleCategoryVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.operation.api.vo.ArticleCategoryVO;
+import com.taotao.cloud.operation.biz.entity.ArticleCategory;
 import java.util.List;
 
 
 /**
  * 文章分类业务层
- *
- * @author Bulbasaur
- * @since 2020/11/24 17:07
  */
 public interface ArticleCategoryService extends IService<ArticleCategory> {
 

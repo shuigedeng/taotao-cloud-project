@@ -1,10 +1,10 @@
 package com.taotao.cloud.operation.biz.service;
 
-import cn.lili.modules.page.entity.dos.Article;
-import cn.lili.modules.page.entity.dto.ArticleSearchParams;
-import cn.lili.modules.page.entity.vos.ArticleVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.operation.api.dto.ArticleSearchParams;
+import com.taotao.cloud.operation.api.vo.ArticleVO;
+import com.taotao.cloud.operation.biz.entity.Article;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,9 +14,6 @@ import java.util.List;
 
 /**
  * 文章业务层
- *
- * @author pikachu
- * @since 2020/11/18 11:40 上午
  */
 @CacheConfig(cacheNames = "{article}")
 public interface ArticleService extends IService<Article> {

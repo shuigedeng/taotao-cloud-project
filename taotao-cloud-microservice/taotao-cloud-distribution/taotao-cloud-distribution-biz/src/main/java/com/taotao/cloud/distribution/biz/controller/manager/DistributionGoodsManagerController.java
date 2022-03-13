@@ -1,11 +1,9 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.distribution.entity.dto.DistributionGoodsSearchParams;
-import cn.lili.modules.distribution.entity.vos.DistributionGoodsVO;
-import cn.lili.modules.distribution.service.DistributionGoodsService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,6 @@ import java.util.List;
 /**
  * 管理端,分销商品管理接口
  *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 @RestController
 @Api(tags = "管理端,分销商品管理接口")
@@ -29,7 +25,8 @@ public class DistributionGoodsManagerController {
 
     @GetMapping(value = "/getByPage")
     @ApiOperation(value = "分页获取")
-    public Result<IPage<DistributionGoodsVO>> getByPage(DistributionGoodsSearchParams distributionGoodsSearchParams) {
+    public Result<IPage<DistributionGoodsVO>> getByPage(
+	    DistributionGoodsSearchParams distributionGoodsSearchParams) {
         return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
     }
 

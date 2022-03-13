@@ -1,7 +1,5 @@
 package com.taotao.cloud.distribution.biz.service;
 
-import com.taotao.cloud.distribution.biz.common.entity.Result;
-import com.taotao.cloud.distribution.biz.common.entity.distribution;
 import java.util.List;
 
 

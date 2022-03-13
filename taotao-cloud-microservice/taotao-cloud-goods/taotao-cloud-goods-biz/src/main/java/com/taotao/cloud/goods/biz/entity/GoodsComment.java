@@ -68,7 +68,7 @@ public class GoodsComment extends JpaSuperEntity {
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private LocalDateTime createTime;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    //    @ApiModelProperty(value = "0隐藏  1显示", example = "0")
+    //    @Schema(description =  "0隐藏  1显示", example = "0")
     private short status;
 
 }

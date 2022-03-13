@@ -40,32 +40,32 @@
 //	/**
 //	* IP地址
 //	*/
-//	@ApiModelProperty(value = "IP地址")
+//	@Schema(description =  "IP地址")
 //	private String ip;
 //	/**
 //	* 请求地址
 //	*/
-//	@ApiModelProperty(value = "请求地址")
+//	@Schema(description =  "请求地址")
 //	private String requestUri;
 //	/**
 //	* 请求方法
 //	*/
-//	@ApiModelProperty(value = "请求方法")
+//	@Schema(description =  "请求方法")
 //	private String requestMethod;
 //	/**
 //	* 开始时间
 //	*/
-//	@ApiModelProperty(value = "开始时间")
+//	@Schema(description =  "开始时间")
 //	private String startTime;
 //	/**
 //	* 结束时间
 //	*/
-//	@ApiModelProperty(value = "结束时间")
+//	@Schema(description =  "结束时间")
 //	private String endTime;
 //	/**
 //	* 状态：0:关闭 1:开启
 //	*/
-//	@ApiModelProperty(value = "状态：0:关闭 1:开启")
+//	@Schema(description =  "状态：0:关闭 1:开启")
 //	private String status;
 //
 //}

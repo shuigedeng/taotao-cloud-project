@@ -2,30 +2,20 @@ package com.taotao.cloud.distribution.biz.service.impl;
 
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
+import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.distribution.entity.dos.Distribution;
-import cn.lili.modules.distribution.entity.dos.DistributionOrder;
-import cn.lili.modules.distribution.entity.enums.DistributionOrderStatusEnum;
-import cn.lili.modules.distribution.entity.vos.DistributionOrderSearchParams;
-import cn.lili.modules.distribution.mapper.DistributionOrderMapper;
-import cn.lili.modules.distribution.service.DistributionOrderService;
-import cn.lili.modules.distribution.service.DistributionService;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.modules.order.order.entity.dto.StoreFlowQueryDTO;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.order.order.service.StoreFlowService;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.DistributionSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
-import cn.lili.mybatis.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
+import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
+import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
+import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
+import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,13 +26,11 @@ import java.util.List;
 
 /**
  * 分销订单接口实现
- *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 @Slf4j
 @Service
-public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderMapper, DistributionOrder> implements DistributionOrderService {
+public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderMapper, DistributionOrder> implements
+	DistributionOrderService {
 
     /**
      * 订单
@@ -66,7 +54,8 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
     private SettingService settingService;
 
     @Override
-    public IPage<DistributionOrder> getDistributionOrderPage(DistributionOrderSearchParams distributionOrderSearchParams) {
+    public IPage<DistributionOrder> getDistributionOrderPage(
+	    DistributionOrderSearchParams distributionOrderSearchParams) {
         return this.page(PageUtil.initPage(distributionOrderSearchParams), distributionOrderSearchParams.queryWrapper());
 
     }

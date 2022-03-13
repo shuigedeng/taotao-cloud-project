@@ -27,35 +27,35 @@ public class MemberCouponSearchParams extends BasePromotionsSearchParams impleme
 
     private static final String PRICE_COLUMN = "price";
 
-    @ApiModelProperty(value = "会员id")
+    @Schema(description =  "会员id")
     private String memberId;
     /**
      * POINT("打折"), PRICE("减免现金");
      *
      * @see CouponTypeEnum
      */
-    @ApiModelProperty(value = "活动类型")
+    @Schema(description =  "活动类型")
     private String couponType;
     /**
      * @see PromotionsScopeTypeEnum
      */
-    @ApiModelProperty(value = "关联范围类型")
+    @Schema(description =  "关联范围类型")
     private String scopeType;
-    @ApiModelProperty(value = "范围关联的id")
+    @Schema(description =  "范围关联的id")
     private String scopeId;
-    @ApiModelProperty(value = "面额,可以为范围，如10_1000")
+    @Schema(description =  "面额,可以为范围，如10_1000")
     private String price;
     /**
      * @see CouponGetEnum
      */
-    @ApiModelProperty(value = "优惠券类型，分为免费领取和活动赠送")
+    @Schema(description =  "优惠券类型，分为免费领取和活动赠送")
     private String getType;
     /**
      * @see MemberCouponStatusEnum
      */
-    @ApiModelProperty(value = "会员优惠券状态")
+    @Schema(description =  "会员优惠券状态")
     private String memberCouponStatus;
-    @ApiModelProperty(value = "消费门槛")
+    @Schema(description =  "消费门槛")
     private Double consumeThreshold;
 
 

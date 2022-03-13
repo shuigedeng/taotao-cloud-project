@@ -1,18 +1,14 @@
 package com.taotao.cloud.distribution.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
-import cn.lili.modules.distribution.entity.vos.DistributionCashSearchParams;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.distribution.api.vo.DistributionCashSearchParams;
+import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 分销佣金业务层
- *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 public interface DistributionCashService extends IService<DistributionCash> {
 
@@ -38,7 +34,8 @@ public interface DistributionCashService extends IService<DistributionCash> {
      * @param distributionCashSearchParams 搜索条件
      * @return 分销员提现分页列表
      */
-    IPage<DistributionCash> getDistributionCash(DistributionCashSearchParams distributionCashSearchParams);
+    IPage<DistributionCash> getDistributionCash(
+	    DistributionCashSearchParams distributionCashSearchParams);
 
     /**
      * 审核分销提现申请

@@ -12,21 +12,21 @@ import lombok.Data;
 @Data
 public class RefundOrderStatisticsDataVO {
 
-    @ApiModelProperty(value = "售后SN")
+    @Schema(description =  "售后SN")
     private String refundSn;
 
-    @ApiModelProperty(value = "商家名称 ")
+    @Schema(description =  "商家名称 ")
     private String storeName;
 
-    @ApiModelProperty(value = "会员名称")
+    @Schema(description =  "会员名称")
     private String memberName;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String name;
 
-    @ApiModelProperty(value = "规格内容")
+    @Schema(description =  "规格内容")
     private String specs;
 
-    @ApiModelProperty(value = "实际退款金额")
+    @Schema(description =  "实际退款金额")
     private Double finalPrice;
 }

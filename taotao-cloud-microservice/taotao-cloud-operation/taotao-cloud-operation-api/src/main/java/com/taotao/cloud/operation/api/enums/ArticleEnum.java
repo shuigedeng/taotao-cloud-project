@@ -3,8 +3,6 @@ package com.taotao.cloud.operation.api.enums;
 /**
  * 文章分类枚举
  *
- * @author Bulbasaur
- * @since 2020/12/7 10:50
  */
 public enum ArticleEnum {
 

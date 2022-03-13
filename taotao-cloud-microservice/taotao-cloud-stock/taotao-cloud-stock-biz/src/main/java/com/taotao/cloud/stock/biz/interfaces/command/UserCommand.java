@@ -22,34 +22,34 @@ public class UserCommand {
     /**
      * id
      */
-    @ApiModelProperty(value = "用户id")
+    @Schema(description =  "用户id")
     @NotBlank(message = "用户id不能为空", groups = UpdateGroup.class)
     private String id;
 
     /**
      * 用户名
      */
-    @ApiModelProperty(value = "用户名")
+    @Schema(description =  "用户名")
     @NotBlank(message = "用户名不能为空", groups = AddGroup.class)
     private String userName;
 
     /**
      * 手机号
      */
-    @ApiModelProperty(value = "手机号")
+    @Schema(description =  "手机号")
     @NotBlank(message = "手机号不能为空", groups = AddGroup.class)
     private String mobile;
 
     /**
      * 邮箱
      */
-    @ApiModelProperty(value = "邮箱")
+    @Schema(description =  "邮箱")
     @NotBlank(message = "邮箱不能为空", groups = AddGroup.class)
     private String email;
 
     /**
      * 角色列表
      */
-    @ApiModelProperty(value = "角色列表")
+    @Schema(description =  "角色列表")
     private List<String> roleIdList;
 }

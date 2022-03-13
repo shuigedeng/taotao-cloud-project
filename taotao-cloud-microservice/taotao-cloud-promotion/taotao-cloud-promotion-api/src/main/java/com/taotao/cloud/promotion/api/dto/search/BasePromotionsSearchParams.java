@@ -18,28 +18,28 @@ import java.util.Date;
 @Data
 public class BasePromotionsSearchParams {
 
-    @ApiModelProperty(value = "活动id")
+    @Schema(description =  "活动id")
     private String id;
 
-    @ApiModelProperty(value = "活动开始时间")
+    @Schema(description =  "活动开始时间")
     private Long startTime;
 
-    @ApiModelProperty(value = "活动结束时间")
+    @Schema(description =  "活动结束时间")
     private Long endTime;
 
     /**
      * @see PromotionsStatusEnum
      */
-    @ApiModelProperty(value = "活动状态 如需同时判断多个活动状态','分割")
+    @Schema(description =  "活动状态 如需同时判断多个活动状态','分割")
     private String promotionStatus;
 
     /**
      * @see PromotionsScopeTypeEnum
      */
-    @ApiModelProperty(value = "关联范围类型")
+    @Schema(description =  "关联范围类型")
     private String scopeType;
 
-    @ApiModelProperty(value = "店铺编号 如有多个','分割")
+    @Schema(description =  "店铺编号 如有多个','分割")
     private String storeId;
 
     public <T> QueryWrapper<T> queryWrapper() {

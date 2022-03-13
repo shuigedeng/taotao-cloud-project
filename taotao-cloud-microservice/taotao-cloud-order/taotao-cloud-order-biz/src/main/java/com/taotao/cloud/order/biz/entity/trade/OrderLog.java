@@ -37,7 +37,7 @@ public class OrderLog extends BaseIdEntity {
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
+    @Schema(description =  "创建者", hidden = true)
     private String createBy;
 	/**
 	 * 应用ID
@@ -46,17 +46,17 @@ public class OrderLog extends BaseIdEntity {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @Schema(description =  "创建时间", hidden = true)
 
     private Date createTime;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "订单编号")
+    @Schema(description =  "订单编号")
 	/**
 	 * 应用ID
 	 */
     private String orderSn;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "操作者id(可以是卖家)")
+    @Schema(description =  "操作者id(可以是卖家)")
 	/**
 	 * 应用ID
 	 */
@@ -65,19 +65,19 @@ public class OrderLog extends BaseIdEntity {
     /**
      * @see UserEnums
      */
-    @ApiModelProperty(value = "操作者类型")
+    @Schema(description =  "操作者类型")
 	/**
 	 * 应用ID
 	 */
     private String operatorType;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "操作者名称")
+    @Schema(description =  "操作者名称")
     private String operatorName;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @ApiModelProperty(value = "日志信息")
+    @Schema(description =  "日志信息")
     private String message;
 
     public OrderLog(String orderSn, String operatorId, String operatorType, String operatorName, String message) {

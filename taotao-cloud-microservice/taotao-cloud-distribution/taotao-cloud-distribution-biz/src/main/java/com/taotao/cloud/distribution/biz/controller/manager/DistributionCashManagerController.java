@@ -1,12 +1,9 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
-import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
-import cn.lili.modules.distribution.entity.vos.DistributionCashSearchParams;
-import cn.lili.modules.distribution.service.DistributionCashService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.distribution.api.vo.DistributionCashSearchParams;
+import com.taotao.cloud.distribution.biz.entity.DistributionCash;
+import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,9 +15,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 管理端,分销佣金管理接口
- *
- * @author pikachu
- * @since 2020-03-14 23:04:56
  */
 @RestController
 @Api(tags = "管理端,分销佣金管理接口")
@@ -38,7 +32,8 @@ public class DistributionCashManagerController {
 
     @ApiOperation(value = "分页获取")
     @GetMapping(value = "/getByPage")
-    public Result<IPage<DistributionCash>> getByPage(DistributionCashSearchParams distributionCashSearchParams) {
+    public Result<IPage<DistributionCash>> getByPage(
+	    DistributionCashSearchParams distributionCashSearchParams) {
 
         return Result.success(distributorCashService.getDistributionCash(distributionCashSearchParams));
     }

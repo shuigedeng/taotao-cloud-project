@@ -27,32 +27,32 @@ public class PageData extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "页面名称")
+    @Schema(description =  "页面名称")
 
     private String name;
 
-    @ApiModelProperty(value = "页面数据")
+    @Schema(description =  "页面数据")
     private String pageData;
 
     /**
      * @see SwitchEnum
      */
-    @ApiModelProperty(value = "页面开关状态", allowableValues = "OPEN,CLOSE")
+    @Schema(description =  "页面开关状态", allowableValues = "OPEN,CLOSE")
     private String pageShow;
 
     /**
      * @see PageEnum
      */
-    @ApiModelProperty(value = "页面类型", allowableValues = "INDEX,STORE,SPECIAL")
+    @Schema(description =  "页面类型", allowableValues = "INDEX,STORE,SPECIAL")
     private String pageType;
 
     /**
      * @see ClientTypeEnum
      */
-    @ApiModelProperty(value = "客户端类型", allowableValues = "PC,H5,WECHAT_MP,APP")
+    @Schema(description =  "客户端类型", allowableValues = "PC,H5,WECHAT_MP,APP")
     private String pageClientType;
 
-    @ApiModelProperty(value = "值")
+    @Schema(description =  "值")
     private String num;
 
     public PageData(String name, String pageClientType, String pageData, String num) {

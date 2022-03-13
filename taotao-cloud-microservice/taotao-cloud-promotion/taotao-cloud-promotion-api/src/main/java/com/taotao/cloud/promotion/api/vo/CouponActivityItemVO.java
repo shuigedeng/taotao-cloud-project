@@ -15,10 +15,10 @@ import lombok.EqualsAndHashCode;
 @Data
 public class CouponActivityItemVO extends CouponActivityItem {
 
-    @ApiModelProperty(value = "优惠券名称")
+    @Schema(description =  "优惠券名称")
     private String couponName;
 
-    @ApiModelProperty(value = "面额")
+    @Schema(description =  "面额")
     private Double price;
 
     /**
@@ -26,9 +26,9 @@ public class CouponActivityItemVO extends CouponActivityItem {
      *
      * @see cn.lili.modules.promotion.entity.enums.CouponTypeEnum
      */
-    @ApiModelProperty(value = "优惠券类型")
+    @Schema(description =  "优惠券类型")
     private String couponType;
 
-    @ApiModelProperty(value = "折扣")
+    @Schema(description =  "折扣")
     private Double couponDiscount;
 }

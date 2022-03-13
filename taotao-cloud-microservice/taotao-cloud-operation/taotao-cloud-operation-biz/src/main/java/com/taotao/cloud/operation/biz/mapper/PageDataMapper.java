@@ -1,20 +1,17 @@
 package com.taotao.cloud.operation.biz.mapper;
 
-import cn.lili.modules.page.entity.dos.PageData;
-import cn.lili.modules.page.entity.vos.PageDataListVO;
-import cn.lili.modules.page.entity.vos.PageDataVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.operation.api.vo.PageDataListVO;
+import com.taotao.cloud.operation.api.vo.PageDataVO;
+import com.taotao.cloud.operation.biz.entity.PageData;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
  * 楼层装修设置数据处理层
- *
- * @author paulGao
- * @since 2020/12/7 11:26
  */
 public interface PageDataMapper extends BaseMapper<PageData> {
 

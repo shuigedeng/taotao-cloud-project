@@ -1,19 +1,12 @@
 package com.taotao.cloud.operation.biz.service.impl;
 
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.page.entity.dos.Article;
-import cn.lili.modules.page.entity.dos.ArticleCategory;
-import cn.lili.modules.page.entity.enums.ArticleCategoryEnum;
-import cn.lili.modules.page.entity.enums.ArticleEnum;
-import cn.lili.modules.page.entity.vos.ArticleCategoryVO;
-import cn.lili.modules.page.mapper.ArticleCategoryMapper;
-import cn.lili.modules.page.service.ArticleCategoryService;
-import cn.lili.modules.page.service.ArticleService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
+import com.taotao.cloud.operation.biz.entity.ArticleCategory;
+import com.taotao.cloud.operation.biz.mapper.ArticleCategoryMapper;
+import com.taotao.cloud.operation.biz.service.ArticleCategoryService;
+import com.taotao.cloud.operation.biz.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +17,10 @@ import java.util.List;
 
 /**
  * 文章分类业务层实现
- *
- * @author pikachu
- * @since 2020-05-5 15:10:16
  */
 @Service
-public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMapper, ArticleCategory> implements ArticleCategoryService {
+public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMapper, ArticleCategory> implements
+	ArticleCategoryService {
 
     /**
      * 缓存

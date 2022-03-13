@@ -22,17 +22,17 @@ public class MemberStatisticsData extends BaseIdEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "统计日")
+    @Schema(description =  "统计日")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date createDate;
 
-    @ApiModelProperty(value = "当前会员数量")
+    @Schema(description =  "当前会员数量")
     private Long memberCount;
 
-    @ApiModelProperty(value = "新增会员数量")
+    @Schema(description =  "新增会员数量")
     private Long newlyAdded;
 
-    @ApiModelProperty(value = "当日活跃数量")
+    @Schema(description =  "当日活跃数量")
     private Long activeQuantity;
 
 

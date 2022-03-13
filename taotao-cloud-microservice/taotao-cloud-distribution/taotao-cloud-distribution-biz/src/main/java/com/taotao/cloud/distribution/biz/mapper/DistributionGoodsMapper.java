@@ -1,19 +1,16 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
-import cn.lili.modules.distribution.entity.dos.DistributionGoods;
-import cn.lili.modules.distribution.entity.vos.DistributionGoodsVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
  * 分销商品数据处理层
- *
- * @author pikachu
- * @since 2020-03-24 23:04:56
  */
 public interface DistributionGoodsMapper extends BaseMapper<DistributionGoods> {
 

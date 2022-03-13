@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,6 @@ import lombok.NoArgsConstructor;
  * 积分商品实体类
  *
  * 
- * @since 2020-03-19 10:44 上午
  **/
 @Entity
 @Table(name = PointsGoods.TABLE_NAME)
@@ -27,34 +27,34 @@ public class PointsGoods extends BaseSuperEntity<PointsGoods, Long> {
 
 	public static final String TABLE_NAME = "li_points_goods";
 
-    @ApiModelProperty(value = "商品编号")
+    @Schema(description =  "商品编号")
     private String goodsId;
 
-    @ApiModelProperty(value = "商品sku编号")
+    @Schema(description =  "商品sku编号")
     private String skuId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "商品原价")
+    @Schema(description =  "商品原价")
     private Double originalPrice;
 
-    @ApiModelProperty(value = "结算价格")
+    @Schema(description =  "结算价格")
     private Double settlementPrice;
 
-    @ApiModelProperty(value = "积分商品分类编号")
+    @Schema(description =  "积分商品分类编号")
     private String pointsGoodsCategoryId;
 
-    @ApiModelProperty(value = "分类名称")
+    @Schema(description =  "分类名称")
     private String pointsGoodsCategoryName;
 
-    @ApiModelProperty(value = "缩略图")
+    @Schema(description =  "缩略图")
     private String thumbnail;
 
-    @ApiModelProperty(value = "活动库存数量")
+    @Schema(description =  "活动库存数量")
     private Integer activeStock;
 
-    @ApiModelProperty(value = "兑换积分")
+    @Schema(description =  "兑换积分")
     private Long points;
 
 }

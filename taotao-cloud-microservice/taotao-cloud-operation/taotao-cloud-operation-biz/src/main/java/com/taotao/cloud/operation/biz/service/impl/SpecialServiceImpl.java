@@ -1,23 +1,21 @@
 package com.taotao.cloud.operation.biz.service.impl;
 
-import cn.lili.modules.page.entity.dos.PageData;
-import cn.lili.modules.page.entity.dos.Special;
-import cn.lili.modules.page.mapper.SpecialMapper;
-import cn.lili.modules.page.service.PageDataService;
-import cn.lili.modules.page.service.SpecialService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.operation.biz.entity.PageData;
+import com.taotao.cloud.operation.biz.entity.Special;
+import com.taotao.cloud.operation.biz.mapper.SpecialMapper;
+import com.taotao.cloud.operation.biz.service.PageDataService;
+import com.taotao.cloud.operation.biz.service.SpecialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 专题活动业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/7 11:27
  */
 @Service
-public class SpecialServiceImpl extends ServiceImpl<SpecialMapper, Special> implements SpecialService {
+public class SpecialServiceImpl extends ServiceImpl<SpecialMapper, Special> implements
+	SpecialService {
 
     /**
      * 页面数据

@@ -12,15 +12,15 @@ import lombok.Data;
 @Data
 public class StoreStatisticsDataVO {
 
-    @ApiModelProperty(value = "店铺ID")
+    @Schema(description =  "店铺ID")
     private String storeId;
 
-    @ApiModelProperty(value = "店铺名称")
+    @Schema(description =  "店铺名称")
     private String storeName;
 
-    @ApiModelProperty(value = "销售数量")
+    @Schema(description =  "销售数量")
     private String num;
 
-    @ApiModelProperty(value = "销售金额")
+    @Schema(description =  "销售金额")
     private Double price;
 }

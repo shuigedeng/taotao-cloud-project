@@ -20,7 +20,7 @@ public class KanJiaActivityLogQuery {
 
     private static final long serialVersionUID = -1583030890805926292L;
 
-    @ApiModelProperty(value = "砍价发起活动id")
+    @Schema(description =  "砍价发起活动id")
     private String kanJiaActivityId;
 
 

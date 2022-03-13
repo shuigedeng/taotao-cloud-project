@@ -1,15 +1,8 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
-import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.distribution.entity.dos.Distribution;
-import cn.lili.modules.distribution.entity.dto.DistributionSearchParams;
-import cn.lili.modules.distribution.service.DistributionService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

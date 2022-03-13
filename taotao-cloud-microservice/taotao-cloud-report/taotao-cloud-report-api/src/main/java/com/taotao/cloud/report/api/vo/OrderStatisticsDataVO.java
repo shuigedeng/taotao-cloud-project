@@ -16,20 +16,20 @@ import java.util.Date;
 @Data
 public class OrderStatisticsDataVO {
 
-    @ApiModelProperty(value = "店铺")
+    @Schema(description =  "店铺")
     private String storeName;
 
-    @ApiModelProperty(value = "购买人")
+    @Schema(description =  "购买人")
     private String memberName;
 
-    @ApiModelProperty(value = "订单金额")
+    @Schema(description =  "订单金额")
     private Double price;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description =  "创建时间")
     private Date createTime;
 
-    @ApiModelProperty(value = "订单编号")
+    @Schema(description =  "订单编号")
     private String orderItemSn;
 }

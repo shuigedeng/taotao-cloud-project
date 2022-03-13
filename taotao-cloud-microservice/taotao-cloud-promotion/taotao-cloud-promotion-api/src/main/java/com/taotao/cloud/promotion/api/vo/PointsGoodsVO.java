@@ -18,7 +18,7 @@ public class PointsGoodsVO extends PointsGoods {
 
     private static final long serialVersionUID = -5163709626742905057L;
 
-    @ApiModelProperty(value = "商品规格详细信息")
+    @Schema(description =  "商品规格详细信息")
     private GoodsSku goodsSku;
 
 }

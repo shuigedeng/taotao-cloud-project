@@ -1,11 +1,5 @@
 package com.taotao.cloud.distribution.biz.service.impl;
 
-import com.taotao.cloud.distribution.biz.common.dynamicquery.DynamicQuery;
-import com.taotao.cloud.distribution.biz.common.entity.RedPacket;
-import com.taotao.cloud.distribution.biz.common.entity.RedPacketRecord;
-import com.taotao.cloud.distribution.biz.common.entity.Result;
-import com.taotao.cloud.distribution.biz.common.redis.RedisUtil;
-import com.taotao.cloud.distribution.biz.distributedlock.redis.RedissLockUtil;
 import com.taotao.cloud.distribution.biz.service.IRedPacketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;

@@ -30,7 +30,7 @@ public class CouponVO extends Coupon {
     /**
      * 促销关联的商品
      */
-    @ApiModelProperty(value = "优惠券关联商品集合")
+    @Schema(description =  "优惠券关联商品集合")
     private List<PromotionGoods> promotionGoodsList;
 
     public CouponVO(Coupon coupon) {

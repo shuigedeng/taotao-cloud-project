@@ -12,8 +12,6 @@ import javax.persistence.Table;
 /**
  * 砍价活动参与实体类
  *
- * @author qiuqiu
- * @since 2020-7-1 10:44 上午
  */
 @Entity
 @Table(name = KanjiaActivity.TABLE_NAME)

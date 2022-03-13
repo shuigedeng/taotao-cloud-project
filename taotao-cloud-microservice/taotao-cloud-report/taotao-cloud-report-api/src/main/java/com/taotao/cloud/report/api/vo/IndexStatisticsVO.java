@@ -12,42 +12,42 @@ import lombok.Data;
 @Data
 public class IndexStatisticsVO {
 
-    @ApiModelProperty(value = "订单总数量")
+    @Schema(description =  "订单总数量")
     private Long orderNum;
-    @ApiModelProperty(value = "商品总数量")
+    @Schema(description =  "商品总数量")
     private Long goodsNum;
-    @ApiModelProperty(value = "会员总数量")
+    @Schema(description =  "会员总数量")
     private Long memberNum;
-    @ApiModelProperty(value = "店铺总数量")
+    @Schema(description =  "店铺总数量")
     private Long storeNum;
 
     /**
      * 流量概括
      */
-    @ApiModelProperty(value = "今日访问数UV")
+    @Schema(description =  "今日访问数UV")
     private Integer todayUV;
-    @ApiModelProperty(value = "昨日访问数UV")
+    @Schema(description =  "昨日访问数UV")
     private Integer yesterdayUV;
-    @ApiModelProperty(value = "前七日访问数UV")
+    @Schema(description =  "前七日访问数UV")
     private Integer lastSevenUV;
-    @ApiModelProperty(value = "三十日访问数UV")
+    @Schema(description =  "三十日访问数UV")
     private Integer lastThirtyUV;
 
     /**
      * 今日信息概括
      */
-    @ApiModelProperty(value = "今日订单数")
+    @Schema(description =  "今日订单数")
     private Long todayOrderNum;
-    @ApiModelProperty(value = "今日下单金额")
+    @Schema(description =  "今日下单金额")
     private Double todayOrderPrice;
-    @ApiModelProperty(value = "今日新增会员数量")
+    @Schema(description =  "今日新增会员数量")
     private Long todayMemberNum;
-    @ApiModelProperty(value = "今日新增商品数量")
+    @Schema(description =  "今日新增商品数量")
     private Long todayGoodsNum;
-    @ApiModelProperty(value = "今日新增店铺数量")
+    @Schema(description =  "今日新增店铺数量")
     private Long todayStoreNum;
-    @ApiModelProperty(value = "今日新增评论数量")
+    @Schema(description =  "今日新增评论数量")
     private Long todayMemberEvaluation;
-    @ApiModelProperty(value = "当前在线人数")
+    @Schema(description =  "当前在线人数")
     private Long currentNumberPeopleOnline;
 }

@@ -25,13 +25,13 @@ public class CustomWords extends BaseEntity {
     /**
      * 名称
      */
-    @ApiModelProperty(value = "名称")
+    @Schema(description =  "名称")
     @NotEmpty(message = "分词名称必填")
     @Length(max = 20, message = "分词名称长度不能大于20")
     private String name;
 
 
-    @ApiModelProperty(value = "是否禁用")
+    @Schema(description =  "是否禁用")
     private Integer disabled;
 
 

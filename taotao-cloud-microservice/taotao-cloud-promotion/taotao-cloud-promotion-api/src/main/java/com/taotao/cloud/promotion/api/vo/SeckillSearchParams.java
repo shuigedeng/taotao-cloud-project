@@ -22,31 +22,31 @@ public class SeckillSearchParams extends BasePromotionsSearchParams implements S
 
     private static final long serialVersionUID = -4052716630253333681L;
 
-    @ApiModelProperty(value = "秒杀活动活动编号")
+    @Schema(description =  "秒杀活动活动编号")
     private String seckillId;
 
-    @ApiModelProperty(value = "活动名称")
+    @Schema(description =  "活动名称")
     private String promotionName;
 
-    @ApiModelProperty(value = "时刻")
+    @Schema(description =  "时刻")
     private Integer timeLine;
 
-    @ApiModelProperty(value = "商家id")
+    @Schema(description =  "商家id")
     private String[] storeIds;
 
-    @ApiModelProperty(value = "商家编号")
+    @Schema(description =  "商家编号")
     private String storeId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description =  "商品名称")
     private String goodsName;
 
-    @ApiModelProperty(value = "商家编号")
+    @Schema(description =  "商家编号")
     private String skuId;
 
     /**
      * @see PromotionsApplyStatusEnum
      */
-    @ApiModelProperty(value = "APPLY(\"申请\"), PASS(\"通过\"), REFUSE(\"拒绝\")")
+    @Schema(description =  "APPLY(\"申请\"), PASS(\"通过\"), REFUSE(\"拒绝\")")
     private String promotionApplyStatus;
 
     @Override
