@@ -10,10 +10,6 @@ import java.util.Map;
 
 /**
  * 微信公众号消息 数据模型
- *
- * @author Chopper
- * @version v4.0
- * @since 2020/12/11 09:52
  */
 @Data
 public class WechatMessageData {

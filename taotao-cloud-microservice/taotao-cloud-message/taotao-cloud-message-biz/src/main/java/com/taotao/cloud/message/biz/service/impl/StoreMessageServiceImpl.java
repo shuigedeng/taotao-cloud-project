@@ -2,17 +2,15 @@ package com.taotao.cloud.message.biz.service.impl;
 
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.message.entity.dos.StoreMessage;
-import cn.lili.modules.message.entity.vos.StoreMessageQueryVO;
-import cn.lili.modules.message.mapper.StoreMessageMapper;
-import cn.lili.modules.message.service.StoreMessageService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
+import com.taotao.cloud.message.biz.entity.StoreMessage;
+import com.taotao.cloud.message.biz.mapper.StoreMessageMapper;
+import com.taotao.cloud.message.biz.service.StoreMessageService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +18,10 @@ import java.util.List;
 
 /**
  * 消息发送业务层实现
- *
- * @author Chopper
- * @since 2020/11/17 3:48 下午
  */
 @Service
-public class StoreMessageServiceImpl extends ServiceImpl<StoreMessageMapper, StoreMessage> implements StoreMessageService {
+public class StoreMessageServiceImpl extends ServiceImpl<StoreMessageMapper, StoreMessage> implements
+	StoreMessageService {
 
     @Override
     public boolean deleteByMessageId(String messageId) {

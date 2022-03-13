@@ -14,11 +14,17 @@ import cn.lili.modules.order.order.entity.vo.OrderDetailVO;
 import cn.lili.modules.order.order.entity.vo.OrderSimpleVO;
 import cn.lili.modules.order.order.service.OrderService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -29,15 +35,23 @@ import java.util.Objects;
 /**
  * 买家端,订单接口
  */
+@Validated
+@RestController
+@RequestMapping("/sys/manager/dept")
+@Tag(name = "买家端-部门管理API", description = "买家端-部门管理API")
+
 @RestController
 @Api(tags = "买家端,订单接口")
-@RequestMapping("/buyer/orders")
+@RequestMapping("/order/buyer/orders")
 public class OrderController {
 
 
     @Autowired
     private OrderService orderService;
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "查询会员订单列表")
     @GetMapping
     public ResultMessage<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
@@ -45,7 +59,10 @@ public class OrderController {
         orderSearchParams.setMemberId(currentUser.getId());
         return ResultUtil.data(orderService.queryByParams(orderSearchParams));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "订单明细")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, paramType = "path")
@@ -56,7 +73,10 @@ public class OrderController {
         OperationalJudgment.judgment(orderDetailVO.getOrder());
         return ResultUtil.data(orderDetailVO);
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "确认收货")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, paramType = "path")
@@ -74,7 +94,10 @@ public class OrderController {
         orderService.complete(orderSn);
         return ResultUtil.success();
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "取消订单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path"),
@@ -85,7 +108,10 @@ public class OrderController {
         orderService.cancel(orderSn, reason);
         return ResultUtil.success();
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "删除订单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path")
@@ -96,7 +122,10 @@ public class OrderController {
         orderService.deleteOrder(orderSn);
         return ResultUtil.success();
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "查询物流踪迹")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path")
@@ -107,7 +136,10 @@ public class OrderController {
         return ResultUtil.data(orderService.getTraces(orderSn));
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "开票")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path")

@@ -1,12 +1,12 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 售后申请VO
- *
- * @since 2021/3/12 10:33 上午
  */
+@Data
 @Schema(description = "售后申请VO")
 public class AfterSaleApplyVO {
 

@@ -1,31 +1,23 @@
 package com.taotao.cloud.goods.api.vo;
 
-import cn.lili.modules.goods.entity.dos.Parameters;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 参数组vo
- *
- * @author pikachu
- * @since 2020年03月02日 16:55:21
  */
-@ApiModel
 @Data
 public class ParameterGroupVO implements Serializable {
 
-    private static final long serialVersionUID = 724427321881170297L;
-    @ApiModelProperty("参数组关联的参数集合")
-    private List<Parameters> params;
-    @ApiModelProperty(value = "参数组名称")
-    private String groupName;
-    @ApiModelProperty(value = "参数组id")
-    private String groupId;
+	private static final long serialVersionUID = 724427321881170297L;
+	@Schema(description = "参数组关联的参数集合")
+	private List<Parameters> params;
+	@Schema(description = "参数组名称")
+	private String groupName;
+	@Schema(description = "参数组id")
+	private String groupId;
 
 
 }

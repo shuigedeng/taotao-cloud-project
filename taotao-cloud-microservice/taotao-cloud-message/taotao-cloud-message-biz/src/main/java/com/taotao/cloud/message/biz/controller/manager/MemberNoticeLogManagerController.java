@@ -1,64 +1,77 @@
 package com.taotao.cloud.message.biz.controller.manager;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.entity.dos.MemberNoticeLog;
-import cn.lili.modules.member.service.MemberNoticeLogService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,会员消息接口
- *
- * @author Chopper
- * @since 2020-02-25 14:10:16
  */
+@Validated
 @RestController
-@Api(tags = "管理端,会员消息接口")
-@RequestMapping("/manager/message/memberNoticeLog")
+@Tag(name = "平台管理端-会员消息日志管理API", description = "平台管理端-会员消息日志管理API")
+@RequestMapping("/message/manager/memberNoticeLog")
 public class MemberNoticeLogManagerController {
-    @Autowired
-    private MemberNoticeLogService memberNoticeLogService;
 
-    @ApiOperation(value = "通过id获取")
-    @GetMapping(value = "/get/{id}")
-    public ResultMessage<MemberNoticeLog> get(@PathVariable String id) {
-        MemberNoticeLog memberNoticeLog = memberNoticeLogService.getById(id);
-        return ResultUtil.data(memberNoticeLog);
-    }
+	@Autowired
+	private MemberNoticeLogService memberNoticeLogService;
 
-    @ApiOperation(value = "获取全部数据")
-    @GetMapping(value = "/getAll")
-    public ResultMessage<List<MemberNoticeLog>> getAll() {
-        List<MemberNoticeLog> list = memberNoticeLogService.list();
-        return ResultUtil.data(list);
-    }
+	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
+	@RequestLogger(description = "通过id获取")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/{id}")
+	public Result<MemberNoticeLog> get(@PathVariable String id) {
+		MemberNoticeLog memberNoticeLog = memberNoticeLogService.getById(id);
+		return Result.success(memberNoticeLog);
+	}
 
-    @ApiOperation(value = "分页获取")
-    @GetMapping(value = "/getByPage")
-    public ResultMessage<IPage<MemberNoticeLog>> getByPage(PageVO page) {
-        IPage<MemberNoticeLog> data = memberNoticeLogService.page(PageUtil.initPage(page));
-        return ResultUtil.data(data);
-    }
+	@Operation(summary = "获取全部数据", description = "获取全部数据", method = CommonConstant.GET)
+	@RequestLogger(description = "获取全部数据")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/all")
+	public Result<List<MemberNoticeLog>> getAll() {
+		List<MemberNoticeLog> list = memberNoticeLogService.list();
+		return Result.success(list);
+	}
 
-    @ApiOperation(value = "编辑或更新数据")
-    @PostMapping(value = "/insertOrUpdate")
-    public ResultMessage<MemberNoticeLog> saveOrUpdate(MemberNoticeLog memberNoticeLog) {
-        memberNoticeLogService.saveOrUpdate(memberNoticeLog);
-        return ResultUtil.data(memberNoticeLog);
-    }
+	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@RequestLogger(description = "分页获取")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/page")
+	public Result<IPage<MemberNoticeLog>> getByPage(PageVO page) {
+		IPage<MemberNoticeLog> data = memberNoticeLogService.page(PageUtil.initPage(page));
+		return Result.success(data);
+	}
 
-    @ApiOperation(value = "批量删除")
-    @DeleteMapping(value = "/delByIds/{ids}")
-    public ResultMessage<Object> delAllByIds(@PathVariable List ids) {
-        memberNoticeLogService.removeByIds(ids);
-        return ResultUtil.success();
-    }
+	@Operation(summary = "编辑或更新数据", description = "编辑或更新数据", method = CommonConstant.POST)
+	@RequestLogger(description = "编辑或更新数据")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PostMapping(value = "/insertOrUpdate")
+	public Result<MemberNoticeLog> saveOrUpdate(MemberNoticeLog memberNoticeLog) {
+		memberNoticeLogService.saveOrUpdate(memberNoticeLog);
+		return Result.success(memberNoticeLog);
+	}
+
+	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
+	@RequestLogger(description = "批量删除")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@DeleteMapping(value = "/delByIds/{ids}")
+	public Result<Object> delAllByIds(@PathVariable List ids) {
+		memberNoticeLogService.removeByIds(ids);
+		return ResultUtil.success();
+	}
 }

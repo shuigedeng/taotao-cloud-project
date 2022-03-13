@@ -2,9 +2,6 @@ package com.taotao.cloud.message.api.enums;
 
 /**
  * 发送消息范围枚举
- *
- * @author pikachu
- * @since 2020/12/8 9:46
  */
 public enum MessageRangeEnum {
 

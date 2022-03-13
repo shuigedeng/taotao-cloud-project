@@ -8,12 +8,12 @@ import cn.lili.modules.order.order.entity.enums.OrderTypeEnum;
 import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 订单可进行的操作
- *
- * @since 2020/11/17 7:29 下午
  */
+@Data
 @Schema(description = "订单可进行的操作")
 public class AllowOperation implements Serializable {
 

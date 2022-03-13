@@ -4,18 +4,14 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.HttpUtils;
-import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
-import cn.lili.modules.wechat.entity.dos.WechatMPMessage;
-import cn.lili.modules.wechat.entity.enums.WechatMessageItemEnums;
-import cn.lili.modules.wechat.mapper.WechatMPMessageMapper;
-import cn.lili.modules.wechat.service.WechatMPMessageService;
-import cn.lili.modules.wechat.util.WechatAccessTokenUtil;
-import cn.lili.modules.wechat.util.WechatMessageUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
+import com.taotao.cloud.message.biz.entity.WechatMPMessage;
+import com.taotao.cloud.message.biz.mapper.WechatMPMessageMapper;
+import com.taotao.cloud.message.biz.service.WechatMPMessageService;
+import com.taotao.cloud.message.biz.util.WechatAccessTokenUtil;
+import com.taotao.cloud.message.biz.util.WechatMessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,12 +26,11 @@ import java.util.Map;
 
 /**
  * 微信小程序消息订阅 业务实现
- *
- * @author Chopper
  */
 @Service
 @Slf4j
-public class WechatMPMessageServiceImpl extends ServiceImpl<WechatMPMessageMapper, WechatMPMessage> implements WechatMPMessageService {
+public class WechatMPMessageServiceImpl extends ServiceImpl<WechatMPMessageMapper, WechatMPMessage> implements
+	WechatMPMessageService {
     @Autowired
     private WechatAccessTokenUtil wechatAccessTokenUtil;
 

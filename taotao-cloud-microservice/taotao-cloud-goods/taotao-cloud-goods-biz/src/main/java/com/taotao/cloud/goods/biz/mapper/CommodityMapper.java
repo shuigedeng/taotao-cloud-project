@@ -1,11 +1,11 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import cn.lili.modules.goods.entity.dos.Commodity;
-import cn.lili.modules.goods.entity.vos.CommodityVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.goods.api.vo.CommodityVO;
+import com.taotao.cloud.goods.biz.entity.Commodity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,9 +13,6 @@ import java.util.List;
 
 /**
  * 直播商品数据层
- *
- * @author Bulbasaur
- * @since 2021/5/17 9:56 上午
  */
 public interface CommodityMapper extends BaseMapper<Commodity> {
 

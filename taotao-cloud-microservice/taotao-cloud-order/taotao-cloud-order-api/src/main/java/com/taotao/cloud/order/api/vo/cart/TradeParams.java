@@ -5,12 +5,12 @@ import cn.lili.modules.order.cart.entity.dto.StoreRemarkDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 交易参数
- *
- * @since 2021/2/23
  **/
+@Data
 @Schema(description = "交易参数")
 public class TradeParams implements Serializable {
 

@@ -1,66 +1,61 @@
 package com.taotao.cloud.message.biz.entity;
 
-import cn.lili.modules.message.entity.enums.MessageStatusEnum;
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.message.api.enums.MessageStatusEnum;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 /**
- * 店铺接收消息对象
- *
- * 
- * @since 2021/1/30 4:13 下午
+ * 店铺消息表
  */
+@Entity
+@Table(name = StoreMessage.TABLE_NAME)
+@TableName(StoreMessage.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = StoreMessage.TABLE_NAME, comment = "店铺消息表")
 @Data
-@TableName("li_store_message")
-@ApiModel(value = "店铺消息")
-public class StoreMessage extends BaseIdEntity {
+public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "tt_store_message";
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    private String createBy;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 关联消息id
+	 */
+	@Column(name = "message_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
+	private String messageId;
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	/**
+	 * 关联店铺id
+	 */
+	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联店铺id'")
+	private String storeId;
 
-    @ApiModelProperty(value = "关联消息id")
-    private String messageId;
+	/**
+	 * 关联店铺名称
+	 */
+	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联店铺名称'")
+	private String storeName;
 
-    @ApiModelProperty(value = "关联店铺id")
-    private String storeId;
+	/**
+	 * 状态 0默认未读 1已读 2回收站
+	 *
+	 * @see MessageStatusEnum
+	 */
+	@Column(name = "status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '状态 0默认未读 1已读 2回收站'")
+	private String status = MessageStatusEnum.UN_READY.name();
 
-    @ApiModelProperty(value = "关联店铺名称")
-    private String storeName;
+	/**
+	 * 消息标题
+	 */
+	@Column(name = "title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息标题'")
+	private String title;
 
-    /**
-     * @see MessageStatusEnum
-     */
-    @ApiModelProperty(value = "状态 0默认未读 1已读 2回收站")
-    private String status = MessageStatusEnum.UN_READY.name();
-
-
-    @TableField(exist = false)
-    @ApiModelProperty(value = "消息标题")
-    private String title;
-
-    @TableField(exist = false)
-    @ApiModelProperty(value = "消息内容")
-    private String content;
+	/**
+	 * 消息内容
+	 */
+	@Column(name = "content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息内容'")
+	private String content;
 }

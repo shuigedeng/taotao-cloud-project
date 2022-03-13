@@ -1,21 +1,26 @@
 package com.taotao.cloud.order.api.vo.order;
 
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.order.order.entity.enums.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
+import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import lombok.Data;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单简略信息 用于订单列表查看
- *
- * @since 2020-08-17 20:28
  */
+@Data
 @Schema(description = "订单简略信息 用于订单列表查看")
 public class OrderSimpleVO {
 

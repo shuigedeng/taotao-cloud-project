@@ -4,12 +4,12 @@ import cn.lili.modules.order.order.entity.enums.CommentStatusEnum;
 import cn.lili.modules.order.order.entity.enums.OrderComplaintStatusEnum;
 import cn.lili.modules.order.order.entity.enums.OrderItemAfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 子订单VO
- *
- * @since 2020-08-17 20:28
  */
+@Data
 @Schema(description = "子订单VO")
 public class OrderItemVO {
 

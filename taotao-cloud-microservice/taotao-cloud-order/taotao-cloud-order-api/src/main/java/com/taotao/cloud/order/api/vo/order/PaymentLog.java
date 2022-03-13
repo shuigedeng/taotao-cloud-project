@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.Data;
 
 /**
  * 订单支付日志：实际为订单部分字段提取过来的一个vo
- *
- * @since 2020/11/17 7:30 下午
  */
+@Data
 @Schema(description = "订单支付日志：实际为订单部分字段提取过来的一个vo")
 public class PaymentLog extends BaseEntity {
 

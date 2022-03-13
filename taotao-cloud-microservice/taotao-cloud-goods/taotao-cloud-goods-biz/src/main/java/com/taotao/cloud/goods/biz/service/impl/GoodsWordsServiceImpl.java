@@ -1,17 +1,16 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
-import cn.lili.modules.goods.entity.dos.GoodsWords;
-import cn.lili.modules.goods.mapper.GoodsWordsMapper;
-import cn.lili.modules.goods.service.GoodsWordsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.goods.biz.entity.GoodsWords;
+import com.taotao.cloud.goods.biz.mapper.GoodsWordsMapper;
+import com.taotao.cloud.goods.biz.service.GoodsWordsService;
 import org.springframework.stereotype.Service;
 
 /**
  * 商品关键字业务层实现
- *
- * @author paulG
- * @since 2020/10/15
  **/
 @Service
-public class GoodsWordsServiceImpl extends ServiceImpl<GoodsWordsMapper, GoodsWords> implements GoodsWordsService {
+public class GoodsWordsServiceImpl extends ServiceImpl<GoodsWordsMapper, GoodsWords> implements
+	GoodsWordsService {
+
 }

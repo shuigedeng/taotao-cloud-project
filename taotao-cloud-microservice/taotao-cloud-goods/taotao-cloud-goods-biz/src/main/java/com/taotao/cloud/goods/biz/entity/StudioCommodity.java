@@ -1,41 +1,53 @@
 package com.taotao.cloud.goods.biz.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 /**
- * 直播间商品
- *
- * 
- * @since 2021/5/18 5:42 下午
+ * 直播间商品表
  */
 @Entity
 @Table(name = StudioCommodity.TABLE_NAME)
 @TableName(StudioCommodity.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = StudioCommodity.TABLE_NAME, comment = "直播间商品")
+@org.hibernate.annotations.Table(appliesTo = StudioCommodity.TABLE_NAME, comment = "直播间商品表")
 public class StudioCommodity extends BaseSuperEntity<StudioCommodity, Long> {
 
-	public static final String TABLE_NAME = "li_studio_commodity";
+	public static final String TABLE_NAME = "tt_studio_commodity";
+	/**
+	 * 房间ID
+	 */
+	@Column(name = "room_id", nullable = false, columnDefinition = "int not null comment '房间ID'")
+	private Integer roomId;
 
-    @ApiModelProperty(value = "房间ID")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Integer roomId;
+	/**
+	 * 商品ID
+	 */
+	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
+	private String goodsId;
 
-    @ApiModelProperty(value = "商品ID")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Integer goodsId;
+	public StudioCommodity(Integer roomId, String goodsId) {
+		this.roomId = roomId;
+		this.goodsId = goodsId;
+	}
 
-    public StudioCommodity(Integer roomId, Integer goodsId) {
-        this.roomId = roomId;
-        this.goodsId = goodsId;
-    }
+
+	public Integer getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(Integer roomId) {
+		this.roomId = roomId;
+	}
+
+	public String getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
+	}
 }

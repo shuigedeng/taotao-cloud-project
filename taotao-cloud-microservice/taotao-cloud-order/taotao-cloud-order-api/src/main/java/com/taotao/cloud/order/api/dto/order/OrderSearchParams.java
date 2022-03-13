@@ -3,17 +3,21 @@ package com.taotao.cloud.order.api.dto.order;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTagEnum;
+import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单查询参数
- *
- * @since 2020/11/17 4:33 下午
  */
+@Data
 @Schema(description = "订单查询参数")
 public class OrderSearchParams extends PageVO {
 

@@ -3,12 +3,12 @@ package com.taotao.cloud.order.api.dto.order;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 发票搜索参数
- *
- * @since 2021/1/12
  **/
+@Data
 @Schema(description = "发票搜索参数")
 public class ReceiptSearchParams {
 

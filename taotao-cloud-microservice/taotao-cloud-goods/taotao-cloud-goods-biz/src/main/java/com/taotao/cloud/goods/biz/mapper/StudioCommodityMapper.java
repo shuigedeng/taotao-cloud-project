@@ -1,12 +1,10 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import cn.lili.modules.goods.entity.dos.StudioCommodity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.goods.biz.entity.StudioCommodity;
 
 /**
  * 直播间-商品关联持久层
- * @author Bulbasaur
- * @since 2021/5/17 3:14 下午
  *
  */
 public interface StudioCommodityMapper extends BaseMapper<StudioCommodity> {

@@ -3,12 +3,12 @@ package com.taotao.cloud.order.api.vo.cart;
 import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 购物车基础
- *
- * @since 2020-03-24 10:33 上午
  */
+@Data
 @Schema(description = "购物车基础")
 public class CartBase implements Serializable {
 

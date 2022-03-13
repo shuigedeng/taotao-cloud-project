@@ -1,45 +1,61 @@
 package com.taotao.cloud.message.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
-import cn.lili.modules.message.entity.enums.MessageStatusEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.message.api.enums.MessageStatusEnum;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 
 /**
- * 会员接受消息对象
- *
- * 
- * @since 2020-02-25 14:10:16
+ * 会员消息表
  */
+@Entity
+@Table(name = MemberMessage.TABLE_NAME)
+@TableName(MemberMessage.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = MemberMessage.TABLE_NAME, comment = "会员消息表")
 @Data
-@TableName("li_member_message")
-@ApiModel(value = "会员消息")
-public class MemberMessage extends BaseEntity {
+public class MemberMessage extends BaseSuperEntity<MemberMessage, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "tt_member_message";
+	/**
+	 * 会员id
+	 */
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '会员id'")
+	private String memberId;
 
-    @ApiModelProperty(value = "会员id")
-    private String memberId;
+	/**
+	 * 会员名称
+	 */
+	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '会员名称'")
+	private String memberName;
 
-    @ApiModelProperty(value = "会员名称")
-    private String memberName;
+	/**
+	 * 消息标题
+	 */
+	@Column(name = "title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息标题'")
+	private String title;
 
-    @ApiModelProperty(value = "消息标题")
-    private String title;
+	/**
+	 * 消息内容
+	 */
+	@Column(name = "content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息内容'")
+	private String content;
 
-    @ApiModelProperty(value = "消息内容")
-    private String content;
+	/**
+	 * 关联消息id
+	 */
+	@Column(name = "message_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
+	private String messageId;
 
-    @ApiModelProperty(value = "关联消息id")
-    private String messageId;
-
-    /**
-     * @see MessageStatusEnum
-     */
-    @ApiModelProperty(value = "状态")
-    private String status = MessageStatusEnum.UN_READY.name();
+	/**
+	 * 状态
+	 *
+	 * @see MessageStatusEnum
+	 */
+	@Column(name = "status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '状态'")
+	private String status = MessageStatusEnum.UN_READY.name();
 
 }

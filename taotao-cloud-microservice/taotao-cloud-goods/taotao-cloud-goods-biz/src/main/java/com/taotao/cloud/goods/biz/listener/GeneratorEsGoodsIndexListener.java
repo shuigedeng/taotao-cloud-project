@@ -1,19 +1,12 @@
 package com.taotao.cloud.goods.biz.listener;
 
-import cn.lili.common.properties.RocketmqCustomProperties;
-import cn.lili.modules.goods.event.GeneratorEsGoodsIndexEvent;
-import cn.lili.rocketmq.RocketmqSendCallbackBuilder;
-import cn.lili.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.goods.api.event.GeneratorEsGoodsIndexEvent;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-/**
- * @author paulG
- * @since 2022/1/19
- **/
 @Component
 public class GeneratorEsGoodsIndexListener {
 

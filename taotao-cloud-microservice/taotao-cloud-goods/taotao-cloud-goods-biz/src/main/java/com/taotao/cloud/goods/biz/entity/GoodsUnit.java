@@ -1,35 +1,33 @@
 package com.taotao.cloud.goods.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Data;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 /**
- * 商品计量单位
- *
- * 
- * @since 2020/11/26 16:08
+ * 商品计量单位表
  */
 @Entity
 @Table(name = GoodsUnit.TABLE_NAME)
 @TableName(GoodsUnit.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = GoodsUnit.TABLE_NAME, comment = "商品计量单位")
+@org.hibernate.annotations.Table(appliesTo = GoodsUnit.TABLE_NAME, comment = "商品计量单位表")
 public class GoodsUnit extends BaseSuperEntity<GoodsUnit, Long> {
 
-	public static final String TABLE_NAME = "li_goods_unit";
+	public static final String TABLE_NAME = "tt_goods_unit";
 
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @NotEmpty(message = "计量单位名称不能为空")
-    @Size(max = 5, message = "计量单位长度最大为5")
-    @ApiModelProperty(value = "计量单位名称")
-    private String name;
+	/**
+	 * 计量单位名称
+	 */
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '计量单位名称'")
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -5,12 +5,12 @@ import cn.lili.modules.order.aftersale.entity.enums.ComplaintStatusEnum;
 import cn.lili.modules.order.order.entity.dos.OrderComplaint;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 订单投诉查询参数
- *
- * @since 2020/12/4
  **/
+@Data
 @Schema(description = "订单投诉查询参数")
 public class OrderComplaintSearchParams {
 

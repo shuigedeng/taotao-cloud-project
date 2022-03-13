@@ -1,38 +1,48 @@
 package com.taotao.cloud.goods.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotEmpty;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
- * 自定义分词
- *
- * @author paulG
- * @since 2020/10/15
+ * 自定义分词表
  **/
-@Data
-@TableName("li_custom_words")
-@ApiModel(value = "自定义分词")
-public class CustomWords extends BaseEntity {
+@Entity
+@Table(name = CustomWords.TABLE_NAME)
+@TableName(CustomWords.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = CustomWords.TABLE_NAME, comment = "自定义分词表")
+public class CustomWords extends BaseSuperEntity<CustomWords, Long> {
 
-    private static final long serialVersionUID = 650889506808657977L;
+	public static final String TABLE_NAME = "tt_custom_words";
 
-    /**
-     * 名称
-     */
-    @ApiModelProperty(value = "名称")
-    @NotEmpty(message = "分词名称必填")
-    @Length(max = 20, message = "分词名称长度不能大于20")
-    private String name;
+	/**
+	 * 分词名称
+	 */
+	@Column(name = "name", nullable = false, columnDefinition = "varchar(64) not null comment '分词名称'")
+	private String name;
+
+	/**
+	 * 是否禁用
+	 */
+	@Column(name = "disabled", nullable = false, columnDefinition = "int not null comment '是否禁用'")
+	private Integer disabled;
 
 
-    @ApiModelProperty(value = "是否禁用")
-    private Integer disabled;
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public Integer getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Integer disabled) {
+		this.disabled = disabled;
+	}
 }

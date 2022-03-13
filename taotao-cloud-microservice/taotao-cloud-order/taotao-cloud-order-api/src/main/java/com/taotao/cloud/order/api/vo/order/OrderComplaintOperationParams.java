@@ -3,12 +3,12 @@ package com.taotao.cloud.order.api.vo.order;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 交易投诉 参数
- *
- * @since 2020/12/4
  **/
+@Data
 @Schema(description = "交易投诉 参数")
 public class OrderComplaintOperationParams {
 

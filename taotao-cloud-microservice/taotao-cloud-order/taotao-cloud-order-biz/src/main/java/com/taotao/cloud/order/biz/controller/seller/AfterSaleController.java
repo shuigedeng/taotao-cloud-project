@@ -11,11 +11,17 @@ import cn.lili.modules.order.aftersale.service.AfterSaleService;
 import cn.lili.modules.store.entity.dto.StoreAfterSaleAddressDTO;
 import cn.lili.modules.system.entity.vo.Traces;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -28,14 +34,23 @@ import java.util.Objects;
  *
  * @since 2020/11/17 4:29 下午
  */
+@Validated
+@RestController
+@RequestMapping("/sys/manager/dept")
+@Tag(name = "店铺端-部门管理API", description = "店铺端-部门管理API")
+
+
 @RestController
 @Api(tags = "店铺端,售后管理接口")
-@RequestMapping("/store/afterSale")
+@RequestMapping("/order/seller/afterSale")
 public class AfterSaleController {
 
     @Autowired
     private AfterSaleService afterSaleService;
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "查看售后服务详情")
     @ApiImplicitParam(name = "sn", value = "售后单号", required = true, paramType = "path")
     @GetMapping(value = "/{sn}")
@@ -43,7 +58,10 @@ public class AfterSaleController {
         AfterSaleVO afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
         return ResultUtil.data(afterSale);
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "分页获取售后服务")
     @GetMapping(value = "/page")
     public ResultMessage<IPage<AfterSaleVO>> getByPage(AfterSaleSearchParams searchParams) {
@@ -51,7 +69,10 @@ public class AfterSaleController {
         searchParams.setStoreId(storeId);
         return ResultUtil.data(afterSaleService.getAfterSalePages(searchParams));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "获取导出售后服务列表列表")
     @GetMapping(value = "/exportAfterSaleOrder")
     public ResultMessage<List<AfterSale>> exportAfterSaleOrder(AfterSaleSearchParams searchParams) {
@@ -59,7 +80,10 @@ public class AfterSaleController {
         searchParams.setStoreId(storeId);
         return ResultUtil.data(afterSaleService.exportAfterSaleOrder(searchParams));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "审核售后申请")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "afterSaleSn", value = "售后sn", required = true, paramType = "path"),
@@ -75,7 +99,10 @@ public class AfterSaleController {
 
         return ResultUtil.data(afterSaleService.review(afterSaleSn, serviceStatus, remark,actualRefundPrice));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "卖家确认收货")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "afterSaleSn", value = "售后sn", required = true, paramType = "path"),
@@ -89,14 +116,20 @@ public class AfterSaleController {
 
         return ResultUtil.data(afterSaleService.storeConfirm(afterSaleSn, serviceStatus, remark));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "查看买家退货物流踪迹")
     @ApiImplicitParam(name = "sn", value = "售后单号", required = true, paramType = "path")
     @GetMapping(value = "/getDeliveryTraces/{sn}")
     public ResultMessage<Traces> getDeliveryTraces(@PathVariable String sn) {
         return ResultUtil.data(afterSaleService.deliveryTraces(sn));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "获取商家售后收件地址")
     @ApiImplicitParam(name = "sn", value = "售后单号", required = true, paramType = "path")
     @GetMapping(value = "/getStoreAfterSaleAddress/{sn}")

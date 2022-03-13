@@ -1,13 +1,13 @@
 package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 
 /**
  * 发票子内容
- *
- * @since 2020/11/28 11:44
  */
+@Data
 @Schema(description = "发票子内容")
 public class ReceiptDTO {
 

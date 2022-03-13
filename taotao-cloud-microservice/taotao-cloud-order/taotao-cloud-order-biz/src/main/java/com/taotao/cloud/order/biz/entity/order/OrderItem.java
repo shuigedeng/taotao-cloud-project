@@ -37,61 +37,112 @@ import java.util.stream.Collectors;
 public class OrderItem extends BaseEntity {
 
     private static final long serialVersionUID = 2108971190191410182L;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "订单编号")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String orderSn;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "子订单编号")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String sn;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "单价")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double unitPrice;
-
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "小记")
     private Double subTotal;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "商品ID")
     private String goodsId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "货品ID")
     private String skuId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "销售量")
     private Integer num;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "交易编号")
     private String tradeSn;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "图片")
     private String image;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "商品名称")
     private String goodsName;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "分类ID")
     private String categoryId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "快照id")
     private String snapshotId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "规格json")
     private String specs;
+
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "促销类型")
     private String promotionType;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "促销id")
     private String promotionId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "销售金额")
     private Double goodsPrice;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "实际金额")
     private Double flowPrice;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see CommentStatusEnum
@@ -104,8 +155,14 @@ public class OrderItem extends BaseEntity {
      */
     @ApiModelProperty(value = "售后状态")
     private String afterSaleStatus;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "价格详情")
+	/**
+	 * 应用ID
+	 */
     private String priceDetail;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
@@ -113,9 +170,15 @@ public class OrderItem extends BaseEntity {
      */
     @ApiModelProperty(value = "投诉状态")
     private String complainStatus;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "交易投诉id")
     private String complainId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "退货商品数量")
     private Integer returnGoodsNumber;

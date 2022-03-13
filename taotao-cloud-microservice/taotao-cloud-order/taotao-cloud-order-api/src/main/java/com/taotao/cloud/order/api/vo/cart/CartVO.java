@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Data;
 
 
 /**
  * 购物车展示VO
- *
- * @since 2020-03-24 10:33 上午
  */
+@Data
 @Schema(description = "购物车展示VO")
 public class CartVO extends CartBase implements Serializable {
 
