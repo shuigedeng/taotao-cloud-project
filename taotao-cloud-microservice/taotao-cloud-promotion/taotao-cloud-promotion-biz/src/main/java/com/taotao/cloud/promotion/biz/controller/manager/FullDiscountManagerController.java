@@ -29,15 +29,15 @@ public class FullDiscountManagerController {
 
     @ApiOperation(value = "获取满优惠列表")
     @GetMapping
-    public ResultMessage<IPage<FullDiscount>> getCouponList(FullDiscountSearchParams searchParams, PageVO page) {
+    public Result<IPage<FullDiscount>> getCouponList(FullDiscountSearchParams searchParams, PageVO page) {
         page.setNotConvert(true);
-        return ResultUtil.data(fullDiscountService.pageFindAll(searchParams, page));
+        return Result.success(fullDiscountService.pageFindAll(searchParams, page));
     }
 
     @ApiOperation(value = "获取满优惠详情")
     @GetMapping("/{id}")
-    public ResultMessage<FullDiscountVO> getCouponDetail(@PathVariable String id) {
-        return ResultUtil.data(fullDiscountService.getFullDiscount(id));
+    public Result<FullDiscountVO> getCouponDetail(@PathVariable String id) {
+        return Result.success(fullDiscountService.getFullDiscount(id));
     }
 
     @ApiOperation(value = "修改满额活动状态")
@@ -46,7 +46,7 @@ public class FullDiscountManagerController {
             @ApiImplicitParam(name = "promotionStatus", value = "满额活动状态", required = true, paramType = "path")
     })
     @PutMapping("/status/{id}")
-    public ResultMessage<Object> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
+    public Result<Object> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
             return ResultUtil.success(ResultCode.SUCCESS);
         }

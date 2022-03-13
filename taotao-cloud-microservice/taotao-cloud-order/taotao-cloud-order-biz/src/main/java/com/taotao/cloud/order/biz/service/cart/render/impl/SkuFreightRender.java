@@ -1,16 +1,10 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.member.entity.dos.MemberAddress;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import cn.lili.modules.store.entity.dos.FreightTemplateChild;
-import cn.lili.modules.store.entity.dto.FreightTemplateChildDTO;
-import cn.lili.modules.store.entity.enums.FreightTemplateEnum;
-import cn.lili.modules.store.entity.vos.FreightTemplateVO;
-import cn.lili.modules.store.service.FreightTemplateService;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +13,6 @@ import java.util.List;
 
 /**
  * sku 运费计算
- *
- * 
- * @since 2020-07-02 14:47
  */
 @Service
 public class SkuFreightRender implements CartRenderStep {

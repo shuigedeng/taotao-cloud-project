@@ -3,7 +3,7 @@ package com.taotao.cloud.distribution.biz.controller.seller;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.security.OperationalJudgment;
 import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dos.DistributionGoods;
 import cn.lili.modules.distribution.entity.dos.DistributionSelectedGoods;
 import cn.lili.modules.distribution.entity.dto.DistributionGoodsSearchParams;
@@ -46,25 +46,25 @@ public class DistributionGoodsStoreController {
 
     @ApiOperation(value = "获取分销商商品列表")
     @GetMapping
-    public ResultMessage<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
+    public Result<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
 
-        return ResultUtil.data(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
+        return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
     }
 
     @ApiOperation(value = "选择商品参与分销")
     @ApiImplicitParam(name = "skuId", value = "规格ID", required = true, dataType = "String", paramType = "path")
     @PutMapping(value = "/checked/{skuId}")
-    public ResultMessage<DistributionGoods> distributionCheckGoods(@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
+    public Result<DistributionGoods> distributionCheckGoods(@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
                                                                    @NotNull(message = "佣金金额不能为空") @RequestParam Double commission) {
 
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-        return ResultUtil.data(distributionGoodsService.checked(skuId, commission, storeId));
+        return Result.success(distributionGoodsService.checked(skuId, commission, storeId));
     }
 
     @ApiOperation(value = "取消分销商品")
     @ApiImplicitParam(name = "id", value = "分销商商品ID", required = true, paramType = "path")
     @DeleteMapping(value = "/cancel/{id}")
-    public ResultMessage<Object> cancel(@NotNull @PathVariable String id) {
+    public Result<Object> cancel(@NotNull @PathVariable String id) {
         OperationalJudgment.judgment(distributionGoodsService.getById(id));
         //清除分销商已选择分销商品
         distributionSelectedGoodsService.remove(new QueryWrapper<DistributionSelectedGoods>().eq("distribution_goods_id", id));

@@ -1,21 +1,16 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.modules.order.order.entity.dto.StoreFlowQueryDTO;
-import cn.lili.modules.store.entity.vos.StoreFlowPayDownloadVO;
-import cn.lili.modules.store.entity.vos.StoreFlowRefundDownloadVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.order.api.dto.order.StoreFlowQueryDTO;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.biz.entity.order.StoreFlow;
 import java.util.List;
 
 /**
  * 商家订单流水业务层
  *
- * 
- * @since 2020/11/17 7:37 下午
  */
 public interface StoreFlowService extends IService<StoreFlow> {
 

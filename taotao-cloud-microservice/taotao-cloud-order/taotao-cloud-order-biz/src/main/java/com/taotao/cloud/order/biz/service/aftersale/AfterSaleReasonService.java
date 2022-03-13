@@ -1,15 +1,12 @@
 package com.taotao.cloud.order.biz.service.aftersale;
 
-import cn.lili.modules.order.aftersale.entity.dos.AfterSaleReason;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import java.util.List;
 
 /**
  * 售后原因业务层
- *
- *
- * @since 2020/11/17 7:37 下午
  */
 public interface AfterSaleReasonService extends IService<AfterSaleReason> {
 

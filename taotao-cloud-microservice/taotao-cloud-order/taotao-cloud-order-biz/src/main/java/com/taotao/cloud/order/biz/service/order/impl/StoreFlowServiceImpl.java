@@ -1,34 +1,24 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.common.utils.SnowFlake;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.modules.order.order.entity.dto.StoreFlowQueryDTO;
-import cn.lili.modules.order.order.entity.enums.FlowTypeEnum;
-import cn.lili.modules.order.order.entity.enums.OrderPromotionTypeEnum;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.modules.order.order.mapper.StoreFlowMapper;
-import cn.lili.modules.order.order.service.OrderItemService;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.order.order.service.StoreFlowService;
-import cn.lili.modules.payment.entity.RefundLog;
-import cn.lili.modules.payment.service.RefundLogService;
-import cn.lili.modules.store.entity.dos.Bill;
-import cn.lili.modules.store.entity.vos.StoreFlowPayDownloadVO;
-import cn.lili.modules.store.entity.vos.StoreFlowRefundDownloadVO;
-import cn.lili.modules.store.service.BillService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.order.StoreFlowQueryDTO;
+import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
+import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.biz.entity.order.Order;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
+import com.taotao.cloud.order.biz.entity.order.StoreFlow;
+import com.taotao.cloud.order.biz.mapper.order.StoreFlowMapper;
+import com.taotao.cloud.order.biz.service.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.StoreFlowService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,13 +29,12 @@ import java.util.List;
 /**
  * 商家订单流水业务层实现
  *
- *
- * @since 2020/11/17 7:38 下午
  */
 @Slf4j
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow> implements StoreFlowService {
+public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow> implements
+	StoreFlowService {
 
     /**
      * 订单
@@ -154,7 +143,8 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
         storeFlow.setNum(afterSale.getNum());
         storeFlow.setCategoryId(payStoreFlow.getCategoryId());
         //佣金
-        storeFlow.setCommissionPrice(CurrencyUtil.mul(CurrencyUtil.div(payStoreFlow.getCommissionPrice(), payStoreFlow.getNum()), afterSale.getNum()));
+        storeFlow.setCommissionPrice(
+	        CurrencyUtil.mul(CurrencyUtil.div(payStoreFlow.getCommissionPrice(), payStoreFlow.getNum()), afterSale.getNum()));
         //分销佣金
         storeFlow.setDistributionRebate(CurrencyUtil.mul(CurrencyUtil.div(payStoreFlow.getDistributionRebate(), payStoreFlow.getNum()), afterSale.getNum()));
         //流水金额

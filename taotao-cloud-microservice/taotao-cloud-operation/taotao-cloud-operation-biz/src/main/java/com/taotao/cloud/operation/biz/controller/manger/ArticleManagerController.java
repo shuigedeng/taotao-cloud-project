@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.controller.manger;
 
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.page.entity.dos.Article;
 import cn.lili.modules.page.entity.dto.ArticleSearchParams;
 import cn.lili.modules.page.entity.enums.ArticleEnum;
@@ -37,9 +37,9 @@ public class ArticleManagerController {
     @ApiOperation(value = "查看文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/{id}")
-    public ResultMessage<Article> get(@PathVariable String id) {
+    public Result<Article> get(@PathVariable String id) {
 
-        return ResultUtil.data(articleService.getById(id));
+        return Result.success(articleService.getById(id));
     }
 
     @ApiOperation(value = "分页获取")
@@ -48,24 +48,24 @@ public class ArticleManagerController {
             @ApiImplicitParam(name = "title", value = "标题", paramType = "query")
     })
     @GetMapping(value = "/getByPage")
-    public ResultMessage<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
-        return ResultUtil.data(articleService.managerArticlePage(articleSearchParams));
+    public Result<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
+        return Result.success(articleService.managerArticlePage(articleSearchParams));
     }
 
     @ApiOperation(value = "添加文章")
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResultMessage<Article> save(@RequestBody Article article) {
+    public Result<Article> save(@RequestBody Article article) {
         article.setType(ArticleEnum.OTHER.name());
         articleService.save(article);
-        return ResultUtil.data(article);
+        return Result.success(article);
     }
 
     @ApiOperation(value = "修改文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, paramType = "path")
     @PutMapping(value = "update/{id}", consumes = "application/json", produces = "application/json")
-    public ResultMessage<Article> update(@RequestBody Article article, @PathVariable("id") String id) {
+    public Result<Article> update(@RequestBody Article article, @PathVariable("id") String id) {
         article.setId(id);
-        return ResultUtil.data(articleService.updateArticle(article));
+        return Result.success(articleService.updateArticle(article));
     }
 
     @ApiOperation(value = "修改文章状态")
@@ -74,7 +74,7 @@ public class ArticleManagerController {
             @ApiImplicitParam(name = "status", value = "操作状态", required = true, paramType = "query")
     })
     @PutMapping("update/status/{id}")
-    public ResultMessage<Article> updateStatus(@PathVariable("id") String id, boolean status) {
+    public Result<Article> updateStatus(@PathVariable("id") String id, boolean status) {
         articleService.updateArticleStatus(id, status);
         return ResultUtil.success();
     }
@@ -83,7 +83,7 @@ public class ArticleManagerController {
     @ApiOperation(value = "批量删除")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, dataType = "String", paramType = "path")
     @DeleteMapping(value = "/delByIds/{id}")
-    public ResultMessage<Object> delAllByIds(@PathVariable String id) {
+    public Result<Object> delAllByIds(@PathVariable String id) {
         articleService.customRemove(id);
         return ResultUtil.success();
     }

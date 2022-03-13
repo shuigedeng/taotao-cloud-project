@@ -1,24 +1,21 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
-import cn.lili.mybatis.util.PageUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.dos.OrderComplaintCommunication;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintCommunicationSearchParams;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintCommunicationVO;
-import cn.lili.modules.order.order.mapper.OrderComplainCommunicationMapper;
-import cn.lili.modules.order.order.service.OrderComplaintCommunicationService;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationSearchParams;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationVO;
+import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
+import com.taotao.cloud.order.biz.mapper.order.OrderComplainCommunicationMapper;
+import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
 import org.springframework.stereotype.Service;
 
 /**
  * 交易投诉通信业务层实现
- *
- * 
- * @since 2020/12/5
  **/
 @Service
-public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<OrderComplainCommunicationMapper, OrderComplaintCommunication> implements OrderComplaintCommunicationService {
+public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<OrderComplainCommunicationMapper, OrderComplaintCommunication> implements
+	OrderComplaintCommunicationService {
 
     @Override
     public boolean addCommunication(OrderComplaintCommunicationVO communicationVO) {
@@ -26,7 +23,8 @@ public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<OrderCom
     }
 
     @Override
-    public IPage<OrderComplaintCommunication> getCommunication(OrderComplaintCommunicationSearchParams searchParams, PageVO pageVO) {
+    public IPage<OrderComplaintCommunication> getCommunication(
+	    OrderComplaintCommunicationSearchParams searchParams, PageVO pageVO) {
         return this.page(PageUtil.initPage(pageVO), searchParams.lambdaQueryWrapper());
     }
 }

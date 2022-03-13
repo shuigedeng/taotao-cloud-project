@@ -3,7 +3,7 @@ package com.taotao.cloud.store.biz.controller.seller;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.security.OperationalJudgment;
 import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.member.entity.dto.EvaluationQueryParams;
 import cn.lili.modules.member.entity.vo.MemberEvaluationListVO;
 import cn.lili.modules.member.entity.vo.MemberEvaluationVO;
@@ -34,17 +34,17 @@ public class MemberEvaluationStoreController {
 
     @ApiOperation(value = "分页获取会员评论列表")
     @GetMapping
-    public ResultMessage<IPage<MemberEvaluationListVO>> getByPage(EvaluationQueryParams evaluationQueryParams) {
+    public Result<IPage<MemberEvaluationListVO>> getByPage(EvaluationQueryParams evaluationQueryParams) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         evaluationQueryParams.setStoreId(storeId);
-        return ResultUtil.data(memberEvaluationService.queryPage(evaluationQueryParams));
+        return Result.success(memberEvaluationService.queryPage(evaluationQueryParams));
     }
 
     @ApiOperation(value = "通过id获取")
     @ApiImplicitParam(name = "id", value = "评价ID", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/get/{id}")
-    public ResultMessage<MemberEvaluationVO> get(@PathVariable String id) {
-        return ResultUtil.data(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
+    public Result<MemberEvaluationVO> get(@PathVariable String id) {
+        return Result.success(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
     }
 
     @ApiOperation(value = "回复评价")
@@ -54,7 +54,7 @@ public class MemberEvaluationStoreController {
             @ApiImplicitParam(name = "replyImage", value = "回复图片", dataType = "String", paramType = "query")
     })
     @PutMapping(value = "/reply/{id}")
-    public ResultMessage<MemberEvaluationVO> reply(@PathVariable String id, @RequestParam String reply, @RequestParam String replyImage) {
+    public Result<MemberEvaluationVO> reply(@PathVariable String id, @RequestParam String reply, @RequestParam String replyImage) {
         OperationalJudgment.judgment(memberEvaluationService.queryById(id));
         memberEvaluationService.reply(id, reply, replyImage);
         return ResultUtil.success();

@@ -3,7 +3,7 @@ package com.taotao.cloud.operation.biz.controller.manger;
 import cn.lili.mybatis.util.PageUtil;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.page.entity.dos.Feedback;
 import cn.lili.modules.page.service.FeedbackService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -36,15 +36,15 @@ public class FeedbackManagerController {
     @ApiOperation(value = "查询意见反馈列表")
     @ApiImplicitParam(name = "parentId", value = "父id，顶级为0", required = true, dataType = "String", paramType = "path")
     @GetMapping()
-    public ResultMessage<IPage<Feedback>> page(PageVO pageVO) {
-        return ResultUtil.data(feedbackService.page(PageUtil.initPage(pageVO)));
+    public Result<IPage<Feedback>> page(PageVO pageVO) {
+        return Result.success(feedbackService.page(PageUtil.initPage(pageVO)));
     }
 
     @ApiOperation(value = "查看意见反馈")
     @ApiImplicitParam(name = "id", value = "意见反馈ID", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/{id}")
-    public ResultMessage<Feedback> getFeedback(@PathVariable String id) {
-        return ResultUtil.data(this.feedbackService.getById(id));
+    public Result<Feedback> getFeedback(@PathVariable String id) {
+        return Result.success(this.feedbackService.getById(id));
     }
 
 }

@@ -46,33 +46,33 @@ public class CouponBuyerController {
 
     @GetMapping
     @ApiOperation(value = "获取可领取优惠券列表")
-    public ResultMessage<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
+    public Result<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
         queryParam.setPromotionStatus(PromotionsStatusEnum.START.name());
         queryParam.setGetType(CouponGetEnum.FREE.name());
         IPage<CouponVO> canUseCoupons = couponService.pageVOFindAll(queryParam, page);
-        return ResultUtil.data(canUseCoupons);
+        return Result.success(canUseCoupons);
     }
 
     @ApiOperation(value = "获取当前会员的优惠券列表")
     @GetMapping("/getCoupons")
-    public ResultMessage<IPage<MemberCoupon>> getCoupons(CouponSearchParams param, PageVO pageVo) {
+    public Result<IPage<MemberCoupon>> getCoupons(CouponSearchParams param, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         param.setMemberId(currentUser.getId());
-        return ResultUtil.data(memberCouponService.getMemberCoupons(param, pageVo));
+        return Result.success(memberCouponService.getMemberCoupons(param, pageVo));
     }
 
     @ApiOperation(value = "获取当前会员的对于当前商品可使用的优惠券列表")
     @GetMapping("/canUse")
-    public ResultMessage<IPage<MemberCoupon>> getCouponsByCanUse(CouponSearchParams param, Double totalPrice, PageVO pageVo) {
+    public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponSearchParams param, Double totalPrice, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         param.setMemberId(currentUser.getId());
-        return ResultUtil.data(memberCouponService.getMemberCouponsByCanUse(param, totalPrice, pageVo));
+        return Result.success(memberCouponService.getMemberCouponsByCanUse(param, totalPrice, pageVo));
     }
 
     @ApiOperation(value = "获取当前会员可使用的优惠券数量")
     @GetMapping("/getCouponsNum")
-    public ResultMessage<Object> getMemberCouponsNum() {
-        return ResultUtil.data(memberCouponService.getMemberCouponsNum());
+    public Result<Object> getMemberCouponsNum() {
+        return Result.success(memberCouponService.getMemberCouponsNum());
     }
 
     @ApiOperation(value = "会员领取优惠券")
@@ -80,7 +80,7 @@ public class CouponBuyerController {
             @ApiImplicitParam(name = "couponId", value = "优惠券ID", required = true, dataType = "Long", paramType = "path")
     })
     @GetMapping("/receive/{couponId}")
-    public ResultMessage<Object> receiveCoupon(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
+    public Result<Object> receiveCoupon(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         memberCouponService.receiveBuyerCoupon(couponId, currentUser.getId(), currentUser.getNickName());
         return ResultUtil.success();
@@ -91,9 +91,9 @@ public class CouponBuyerController {
             @ApiImplicitParam(name = "id", value = "优惠券ID", required = true, dataType = "Long", paramType = "path")
     })
     @GetMapping(value = "/get/{id}")
-    public ResultMessage<MemberCoupon> get(@NotNull(message = "优惠券ID不能为空") @PathVariable("id") String id) {
+    public Result<MemberCoupon> get(@NotNull(message = "优惠券ID不能为空") @PathVariable("id") String id) {
         MemberCoupon memberCoupon = OperationalJudgment.judgment(memberCouponService.getById(id));
-        return ResultUtil.data(memberCoupon);
+        return Result.success(memberCoupon);
     }
 
 

@@ -34,33 +34,33 @@ public class PintuanStoreController {
 
     @GetMapping
     @ApiOperation(value = "根据条件分页查询拼团活动列表")
-    public ResultMessage<IPage<Pintuan>> getPintuanByPage(PintuanSearchParams queryParam, PageVO pageVo) {
+    public Result<IPage<Pintuan>> getPintuanByPage(PintuanSearchParams queryParam, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         queryParam.setStoreId(currentUser.getStoreId());
-        return ResultUtil.data(pintuanService.pageFindAll(queryParam, pageVo));
+        return Result.success(pintuanService.pageFindAll(queryParam, pageVo));
     }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "通过id获取")
-    public ResultMessage<PintuanVO> get(@PathVariable String id) {
+    public Result<PintuanVO> get(@PathVariable String id) {
         PintuanVO pintuan = OperationalJudgment.judgment(pintuanService.getPintuanVO(id));
-        return ResultUtil.data(pintuan);
+        return Result.success(pintuan);
     }
 
     @GetMapping("/goods/{pintuanId}")
     @ApiOperation(value = "根据条件分页查询拼团活动商品列表")
-    public ResultMessage<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId, PageVO pageVo) {
+    public Result<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
         searchParams.setStoreId(currentUser.getStoreId());
         searchParams.setPromotionId(pintuanId);
         searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());
-        return ResultUtil.data(promotionGoodsService.pageFindAll(searchParams, pageVo));
+        return Result.success(promotionGoodsService.pageFindAll(searchParams, pageVo));
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "添加拼团活动")
-    public ResultMessage<String> addPintuan(@RequestBody @Validated PintuanVO pintuan) {
+    public Result<String> addPintuan(@RequestBody @Validated PintuanVO pintuan) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         pintuan.setStoreId(currentUser.getStoreId());
         pintuan.setStoreName(currentUser.getStoreName());
@@ -72,7 +72,7 @@ public class PintuanStoreController {
 
     @PutMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "修改拼团活动")
-    public ResultMessage<String> editPintuan(@RequestBody @Validated PintuanVO pintuan) {
+    public Result<String> editPintuan(@RequestBody @Validated PintuanVO pintuan) {
         OperationalJudgment.judgment(pintuanService.getById(pintuan.getId()));
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         pintuan.setStoreId(currentUser.getStoreId());
@@ -85,7 +85,7 @@ public class PintuanStoreController {
 
     @PutMapping("/status/{pintuanId}")
     @ApiOperation(value = "操作拼团活动状态")
-    public ResultMessage<String> openPintuan(@PathVariable String pintuanId, Long startTime, Long endTime) {
+    public Result<String> openPintuan(@PathVariable String pintuanId, Long startTime, Long endTime) {
         OperationalJudgment.judgment(pintuanService.getById(pintuanId));
         if (pintuanService.updateStatus(Collections.singletonList(pintuanId), startTime, endTime)) {
             return ResultUtil.success(ResultCode.PINTUAN_MANUAL_OPEN_SUCCESS);
@@ -96,7 +96,7 @@ public class PintuanStoreController {
 
     @DeleteMapping("/{pintuanId}")
     @ApiOperation(value = "手动删除拼团活动")
-    public ResultMessage<String> deletePintuan(@PathVariable String pintuanId) {
+    public Result<String> deletePintuan(@PathVariable String pintuanId) {
         OperationalJudgment.judgment(pintuanService.getById(pintuanId));
         if (pintuanService.removePromotions(Collections.singletonList(pintuanId))) {
             return ResultUtil.success(ResultCode.PINTUAN_DELETE_SUCCESS);

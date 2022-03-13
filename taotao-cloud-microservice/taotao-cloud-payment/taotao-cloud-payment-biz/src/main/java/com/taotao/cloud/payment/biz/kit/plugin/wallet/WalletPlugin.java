@@ -4,7 +4,7 @@ import cn.lili.common.enums.ResultCode;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.exception.ServiceException;
 import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.payment.entity.RefundLog;
 import cn.lili.modules.payment.entity.enums.CashierEnum;
 import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
@@ -63,25 +63,25 @@ public class WalletPlugin implements Payment {
     private RedissonClient redisson;
 
     @Override
-    public ResultMessage<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
+    public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
         savePaymentLog(payParam);
         return ResultUtil.success(ResultCode.PAY_SUCCESS);
     }
 
     @Override
-    public ResultMessage<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
         savePaymentLog(payParam);
         return ResultUtil.success(ResultCode.PAY_SUCCESS);
     }
 
     @Override
-    public ResultMessage<Object> appPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
         savePaymentLog(payParam);
         return ResultUtil.success(ResultCode.PAY_SUCCESS);
     }
 
     @Override
-    public ResultMessage<Object> nativePay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
         if (payParam.getOrderType().equals(CashierEnum.RECHARGE.name())) {
             throw new ServiceException(ResultCode.CAN_NOT_RECHARGE_WALLET);
         }
@@ -90,7 +90,7 @@ public class WalletPlugin implements Payment {
     }
 
     @Override
-    public ResultMessage<Object> mpPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
 
         savePaymentLog(payParam);
         return ResultUtil.success(ResultCode.PAY_SUCCESS);

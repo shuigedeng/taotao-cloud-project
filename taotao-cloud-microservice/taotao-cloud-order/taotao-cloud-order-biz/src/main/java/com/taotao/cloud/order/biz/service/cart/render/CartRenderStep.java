@@ -1,13 +1,12 @@
 package com.taotao.cloud.order.biz.service.cart.render;
 
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
+
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 
 /**
  * 购物车渲染
  *
- * 
- * @since 2020-04-01 10:27 上午
  */
 public interface CartRenderStep {
 

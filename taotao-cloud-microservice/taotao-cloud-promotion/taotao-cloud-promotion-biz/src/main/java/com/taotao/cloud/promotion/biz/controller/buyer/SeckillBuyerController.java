@@ -33,14 +33,14 @@ public class SeckillBuyerController {
 
     @ApiOperation(value = "获取当天秒杀活动信息")
     @GetMapping
-    public ResultMessage<List<SeckillTimelineVO>> getSeckillTime() {
-        return ResultUtil.data(seckillApplyService.getSeckillTimeline());
+    public Result<List<SeckillTimelineVO>> getSeckillTime() {
+        return Result.success(seckillApplyService.getSeckillTimeline());
     }
 
     @ApiOperation(value = "获取某个时刻的秒杀活动商品信息")
     @GetMapping("/{timeline}")
-    public ResultMessage<List<SeckillGoodsVO>> getSeckillGoods(@PathVariable Integer timeline) {
-        return ResultUtil.data(seckillApplyService.getSeckillGoods(timeline));
+    public Result<List<SeckillGoodsVO>> getSeckillGoods(@PathVariable Integer timeline) {
+        return Result.success(seckillApplyService.getSeckillGoods(timeline));
     }
 
 }

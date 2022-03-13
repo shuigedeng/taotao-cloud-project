@@ -1,12 +1,10 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.modules.order.order.entity.dos.Order;
+
+import com.taotao.cloud.order.biz.entity.order.Order;
 
 /**
  * 订单价格
- *
- *
- * @since 2020/11/17 7:36 下午
  */
 public interface OrderPriceService {
 

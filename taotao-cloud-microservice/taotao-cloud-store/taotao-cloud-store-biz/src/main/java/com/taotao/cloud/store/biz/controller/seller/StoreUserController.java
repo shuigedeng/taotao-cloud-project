@@ -5,7 +5,7 @@ import cn.lili.common.exception.ServiceException;
 import cn.lili.common.security.AuthUser;
 import cn.lili.common.security.context.UserContext;
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.member.entity.dos.Member;
 import cn.lili.modules.member.service.MemberService;
 import io.swagger.annotations.Api;
@@ -32,12 +32,12 @@ public class StoreUserController {
 
     @GetMapping(value = "/info")
     @ApiOperation(value = "获取当前登录用户接口")
-    public ResultMessage<Member> getUserInfo() {
+    public Result<Member> getUserInfo() {
         AuthUser tokenUser = UserContext.getCurrentUser();
         if (tokenUser != null) {
             Member member = memberService.findByUsername(tokenUser.getUsername());
             member.setPassword(null);
-            return ResultUtil.data(member);
+            return Result.success(member);
         }
         throw new ServiceException(ResultCode.USER_NOT_LOGIN);
     }

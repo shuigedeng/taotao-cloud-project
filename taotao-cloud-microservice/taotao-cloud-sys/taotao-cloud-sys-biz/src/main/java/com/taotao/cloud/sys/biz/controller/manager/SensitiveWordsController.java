@@ -46,7 +46,7 @@ public class SensitiveWordsController {
 	//@ApiOperation(value = "分页获取")
 	//@GetMapping
 	//public Result<IPage<SensitiveWord>> getByPage(PageVO page) {
-	//	return ResultUtil.data(sensitiveWordService.page(PageUtil.initPage(page)));
+	//	return Result.success(sensitiveWordService.page(PageUtil.initPage(page)));
 	//}
 
 	@Operation(summary = "添加敏感词", description = "添加敏感词")

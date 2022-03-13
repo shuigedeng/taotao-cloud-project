@@ -35,26 +35,26 @@ public class PintuanBuyerController {
 
     @ApiOperation(value = "获取拼团商品")
     @GetMapping
-    public ResultMessage<IPage<PromotionGoods>> getPintuanCategory(String goodsName, String categoryPath, PageVO pageVo) {
+    public Result<IPage<PromotionGoods>> getPintuanCategory(String goodsName, String categoryPath, PageVO pageVo) {
         PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
         searchParams.setGoodsName(goodsName);
         searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());
         searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         searchParams.setCategoryPath(categoryPath);
-        return ResultUtil.data(promotionGoodsService.pageFindAll(searchParams, pageVo));
+        return Result.success(promotionGoodsService.pageFindAll(searchParams, pageVo));
     }
 
 
     @ApiOperation(value = "获取当前拼团活动的未成团的会员")
     @GetMapping("/{pintuanId}/members")
-    public ResultMessage<List<PintuanMemberVO>> getPintuanMember(@PathVariable String pintuanId) {
-        return ResultUtil.data(pintuanService.getPintuanMember(pintuanId));
+    public Result<List<PintuanMemberVO>> getPintuanMember(@PathVariable String pintuanId) {
+        return Result.success(pintuanService.getPintuanMember(pintuanId));
     }
 
     @ApiOperation(value = "获取当前拼团订单的拼团分享信息")
     @GetMapping("/share")
-    public ResultMessage<PintuanShareVO> share(String parentOrderSn, String skuId) {
-        return ResultUtil.data(pintuanService.getPintuanShareInfo(parentOrderSn, skuId));
+    public Result<PintuanShareVO> share(String parentOrderSn, String skuId) {
+        return Result.success(pintuanService.getPintuanShareInfo(parentOrderSn, skuId));
     }
 
 }

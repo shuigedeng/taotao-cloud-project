@@ -39,29 +39,29 @@ public class SeckillManagerController {
 
     @ApiOperation(value = "修改秒杀活动")
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public ResultMessage<Seckill> updateSeckill(@RequestBody SeckillVO seckillVO) {
+    public Result<Seckill> updateSeckill(@RequestBody SeckillVO seckillVO) {
         seckillService.updatePromotions(seckillVO);
-        return ResultUtil.data(seckillVO);
+        return Result.success(seckillVO);
     }
 
     @ApiOperation(value = "通过id获取")
     @ApiImplicitParam(name = "id", value = "秒杀活动ID", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/{id}")
-    public ResultMessage<Seckill> get(@PathVariable String id) {
+    public Result<Seckill> get(@PathVariable String id) {
         Seckill seckill = seckillService.getById(id);
-        return ResultUtil.data(seckill);
+        return Result.success(seckill);
     }
 
     @ApiOperation(value = "分页查询秒杀活动列表")
     @GetMapping
-    public ResultMessage<IPage<Seckill>> getAll(SeckillSearchParams param, PageVO pageVo) {
-        return ResultUtil.data(seckillService.pageFindAll(param, pageVo));
+    public Result<IPage<Seckill>> getAll(SeckillSearchParams param, PageVO pageVo) {
+        return Result.success(seckillService.pageFindAll(param, pageVo));
     }
 
     @ApiOperation(value = "删除一个秒杀活动")
     @ApiImplicitParam(name = "id", value = "秒杀活动ID", required = true, dataType = "String", paramType = "path")
     @DeleteMapping("/{id}")
-    public ResultMessage<Object> deleteSeckill(@PathVariable String id) {
+    public Result<Object> deleteSeckill(@PathVariable String id) {
         seckillService.removePromotions(Collections.singletonList(id));
         return ResultUtil.success();
     }
@@ -69,21 +69,21 @@ public class SeckillManagerController {
     @ApiOperation(value = "操作秒杀活动状态")
     @ApiImplicitParam(name = "id", value = "秒杀活动ID", required = true, dataType = "String", paramType = "path")
     @PutMapping("/status/{id}")
-    public ResultMessage<Object> updateSeckillStatus(@PathVariable String id, Long startTime, Long endTime) {
+    public Result<Object> updateSeckillStatus(@PathVariable String id, Long startTime, Long endTime) {
         seckillService.updateStatus(Collections.singletonList(id), startTime, endTime);
         return ResultUtil.success();
     }
 
     @ApiOperation(value = "获取秒杀活动申请列表")
     @GetMapping("/apply")
-    public ResultMessage<IPage<SeckillApply>> getSeckillApply(SeckillSearchParams param, PageVO pageVo) {
+    public Result<IPage<SeckillApply>> getSeckillApply(SeckillSearchParams param, PageVO pageVo) {
         IPage<SeckillApply> seckillApply = seckillApplyService.getSeckillApply(param, pageVo);
-        return ResultUtil.data(seckillApply);
+        return Result.success(seckillApply);
     }
 
     @DeleteMapping("/apply/{seckillId}/{id}")
     @ApiOperation(value = "删除秒杀活动申请")
-    public ResultMessage<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
+    public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
         seckillApplyService.removeSeckillApply(seckillId, id);
         return ResultUtil.success();
     }

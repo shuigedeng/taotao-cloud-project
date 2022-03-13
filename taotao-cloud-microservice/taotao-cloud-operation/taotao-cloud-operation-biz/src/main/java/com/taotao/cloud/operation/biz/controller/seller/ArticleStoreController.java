@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.controller.seller;
 
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.page.entity.dos.Article;
 import cn.lili.modules.page.entity.dto.ArticleSearchParams;
 import cn.lili.modules.page.entity.vos.ArticleVO;
@@ -39,15 +39,15 @@ public class ArticleStoreController {
             @ApiImplicitParam(name = "categoryId", value = "文章分类ID", paramType = "query")
     })
     @GetMapping(value = "/getByPage")
-    public ResultMessage<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
-        return ResultUtil.data(articleService.articlePage(articleSearchParams));
+    public Result<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
+        return Result.success(articleService.articlePage(articleSearchParams));
     }
 
     @ApiOperation(value = "查看文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, paramType = "path")
     @GetMapping(value = "/{id}")
-    public ResultMessage<Article> get(@PathVariable String id) {
+    public Result<Article> get(@PathVariable String id) {
 
-        return ResultUtil.data(articleService.getById(id));
+        return Result.success(articleService.getById(id));
     }
 }

@@ -19,7 +19,7 @@ public enum RenderStepEnums {
 	CART_PRICE("购物车金额计算"),
 	CART_SN("交易编号创建");
 
-	private String distribution;
+	private final String distribution;
 
 	public String getDistribution() {
 		return distribution;

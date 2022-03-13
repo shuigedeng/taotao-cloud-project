@@ -1,14 +1,11 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.modules.order.order.entity.dos.Trade;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.biz.entity.order.Trade;
 
 /**
  * 交易业务层
- *
- * 
- * @since 2020/11/17 7:37 下午
  */
 public interface TradeService extends IService<Trade> {
 

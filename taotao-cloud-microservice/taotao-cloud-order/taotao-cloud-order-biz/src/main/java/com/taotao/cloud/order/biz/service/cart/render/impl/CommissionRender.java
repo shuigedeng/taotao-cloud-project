@@ -1,18 +1,13 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import cn.hutool.core.util.StrUtil;
-import cn.lili.modules.goods.service.CategoryService;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.entity.vo.CartVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
-import cn.lili.modules.promotion.entity.dos.KanjiaActivityGoods;
-import cn.lili.modules.promotion.entity.vos.PointsGoodsVO;
-import cn.lili.modules.promotion.service.KanjiaActivityGoodsService;
-import cn.lili.modules.promotion.service.PointsGoodsService;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.vo.cart.CartVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +15,6 @@ import java.util.List;
 
 /**
  * 佣金计算
- *
- *
- * @see CartVO
  */
 @Service
 public class CommissionRender implements CartRenderStep {

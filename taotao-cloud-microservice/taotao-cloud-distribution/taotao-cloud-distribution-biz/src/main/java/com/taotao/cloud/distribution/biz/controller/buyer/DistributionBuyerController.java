@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.controller.buyer;
 
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dos.Distribution;
 import cn.lili.modules.distribution.entity.dos.DistributionOrder;
 import cn.lili.modules.distribution.entity.dto.DistributionApplyDTO;
@@ -40,30 +40,30 @@ public class DistributionBuyerController {
 
     @ApiOperation(value = "申请分销员")
     @PostMapping
-    public ResultMessage<Object> applyDistribution(DistributionApplyDTO distributionApplyDTO) {
-        return ResultUtil.data(distributionService.applyDistribution(distributionApplyDTO));
+    public Result<Object> applyDistribution(DistributionApplyDTO distributionApplyDTO) {
+        return Result.success(distributionService.applyDistribution(distributionApplyDTO));
     }
 
     @ApiOperation(value = "获取分销员分页订单列表")
     @GetMapping("/distributionOrder")
-    public ResultMessage<IPage<DistributionOrder>> distributionOrderPage(DistributionOrderSearchParams distributionOrderSearchParams) {
+    public Result<IPage<DistributionOrder>> distributionOrderPage(DistributionOrderSearchParams distributionOrderSearchParams) {
         distributionOrderSearchParams.setDistributionId(distributionService.getDistribution().getId());
-        return ResultUtil.data(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
     }
 
     @ApiOperation(value = "获取当前会员的分销员信息", notes = "可根据分销员信息查询待提现金额以及冻结金额等信息")
     @GetMapping
-    public ResultMessage<Distribution> getDistribution() {
+    public Result<Distribution> getDistribution() {
         //检查分销开关
         distributionService.checkDistributionSetting();
 
-        return ResultUtil.data(distributionService.getDistribution());
+        return Result.success(distributionService.getDistribution());
     }
 
     @ApiOperation(value = "绑定分销员")
     @ApiImplicitParam(name = "distributionId", value = "分销员ID", required = true, paramType = "path")
     @GetMapping("/bindingDistribution/{distributionId}")
-    public ResultMessage<Object> bindingDistribution(@PathVariable String distributionId){
+    public Result<Object> bindingDistribution(@PathVariable String distributionId){
         distributionService.bindingDistribution(distributionId);
         return ResultUtil.success();
     }

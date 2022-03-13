@@ -12,7 +12,7 @@ import cn.lili.common.properties.DomainProperties;
 import cn.lili.common.utils.BeanUtil;
 import cn.lili.common.utils.SnowFlake;
 import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.payment.entity.RefundLog;
 import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
 import cn.lili.modules.payment.kit.CashierSupport;
@@ -82,7 +82,7 @@ public class AliPayPlugin implements Payment {
     private DomainProperties domainProperties;
 
     @Override
-    public ResultMessage<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
+    public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
 
         CashierParam cashierParam = cashierSupport.cashierParam(payParam);
         //请求订单编号
@@ -111,12 +111,12 @@ public class AliPayPlugin implements Payment {
 
 
     @Override
-    public ResultMessage<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
         throw new ServiceException(ResultCode.PAY_NOT_SUPPORT);
     }
 
     @Override
-    public ResultMessage<Object> appPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
         try {
 
             CashierParam cashierParam = cashierSupport.cashierParam(payParam);
@@ -139,7 +139,7 @@ public class AliPayPlugin implements Payment {
             log.info("支付宝APP支付：{}", payModel);
             String orderInfo = AliPayRequest.appPayToResponse(payModel, notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.ALIPAY)).getBody();
             log.info("支付宝APP支付返回内容：{}", orderInfo);
-            return ResultUtil.data(orderInfo);
+            return Result.success(orderInfo);
         } catch (AlipayApiException e) {
             log.error("支付宝支付异常：", e);
             throw new ServiceException(ResultCode.ALIPAY_EXCEPTION);
@@ -150,7 +150,7 @@ public class AliPayPlugin implements Payment {
     }
 
     @Override
-    public ResultMessage<Object> nativePay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
 
         try {
             CashierParam cashierParam = cashierSupport.cashierParam(payParam);
@@ -173,7 +173,7 @@ public class AliPayPlugin implements Payment {
 
             log.info("支付宝扫码交互返回：{}", resultStr);
             JSONObject jsonObject = JSONObject.parseObject(resultStr);
-            return ResultUtil.data(jsonObject.getJSONObject("alipay_trade_precreate_response").getString("qr_code"));
+            return Result.success(jsonObject.getJSONObject("alipay_trade_precreate_response").getString("qr_code"));
         } catch (Exception e) {
             log.error("支付业务异常：", e);
             throw new ServiceException(ResultCode.PAY_ERROR);

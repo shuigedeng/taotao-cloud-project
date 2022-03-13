@@ -1,17 +1,13 @@
 package com.taotao.cloud.order.biz.service.purchase;
 
 
-import cn.lili.modules.purchase.entity.dos.PurchaseQuoted;
-import cn.lili.modules.purchase.entity.vos.PurchaseQuotedVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuoted;
 import java.util.List;
 
 /**
  * 采购单报价业务层
- *
- * @author Bulbasaur
- * @since 2020/11/26 16:12
  */
 public interface PurchaseQuotedService extends IService<PurchaseQuoted> {
     /**

@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dos.DistributionOrder;
 import cn.lili.modules.distribution.entity.vos.DistributionOrderSearchParams;
 import cn.lili.modules.distribution.service.DistributionOrderService;
@@ -30,16 +30,16 @@ public class DistributionOrderManagerController {
 
     @ApiOperation(value = "通过id获取分销订单")
     @GetMapping(value = "/get/{id}")
-    public ResultMessage<DistributionOrder> get(@PathVariable String id) {
+    public Result<DistributionOrder> get(@PathVariable String id) {
 
-        return ResultUtil.data(distributionOrderService.getById(id));
+        return Result.success(distributionOrderService.getById(id));
     }
 
 
     @ApiOperation(value = "分页获取分销订单")
     @GetMapping(value = "/getByPage")
-    public ResultMessage<IPage<DistributionOrder>> getByPage(DistributionOrderSearchParams distributionOrderSearchParams) {
+    public Result<IPage<DistributionOrder>> getByPage(DistributionOrderSearchParams distributionOrderSearchParams) {
 
-        return ResultUtil.data(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
     }
 }

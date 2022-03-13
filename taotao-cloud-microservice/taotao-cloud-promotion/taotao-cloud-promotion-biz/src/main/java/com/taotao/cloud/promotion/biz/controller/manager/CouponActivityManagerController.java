@@ -31,23 +31,23 @@ public class CouponActivityManagerController {
 
     @ApiOperation(value = "获取优惠券活动分页")
     @GetMapping
-    public ResultMessage<IPage<CouponActivity>> getCouponActivityPage(PageVO page) {
-        return ResultUtil.data(couponActivityService.page(PageUtil.initPage(page)));
+    public Result<IPage<CouponActivity>> getCouponActivityPage(PageVO page) {
+        return Result.success(couponActivityService.page(PageUtil.initPage(page)));
     }
 
     @ApiOperation(value = "获取优惠券活动")
     @ApiImplicitParam(name = "couponActivityId", value = "优惠券活动ID", required = true, paramType = "path")
     @GetMapping("/{couponActivityId}")
-    public ResultMessage<CouponActivityVO> getCouponActivity(@PathVariable String couponActivityId) {
-        return ResultUtil.data(couponActivityService.getCouponActivityVO(couponActivityId));
+    public Result<CouponActivityVO> getCouponActivity(@PathVariable String couponActivityId) {
+        return Result.success(couponActivityService.getCouponActivityVO(couponActivityId));
     }
 
     @ApiOperation(value = "添加优惠券活动")
     @PostMapping
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public ResultMessage<CouponActivity> addCouponActivity(@RequestBody(required = false) CouponActivityDTO couponActivityDTO) {
+    public Result<CouponActivity> addCouponActivity(@RequestBody(required = false) CouponActivityDTO couponActivityDTO) {
         if (couponActivityService.savePromotions(couponActivityDTO)) {
-            return ResultUtil.data(couponActivityDTO);
+            return Result.success(couponActivityDTO);
         }
         return ResultUtil.error(ResultCode.COUPON_ACTIVITY_SAVE_ERROR);
     }
@@ -57,7 +57,7 @@ public class CouponActivityManagerController {
             @ApiImplicitParam(name = "id", value = "优惠券活动ID", required = true, dataType = "String", paramType = "path")
     })
     @DeleteMapping("/{id}")
-    public ResultMessage<CouponActivity> updateStatus(@PathVariable String id) {
+    public Result<CouponActivity> updateStatus(@PathVariable String id) {
         if (couponActivityService.updateStatus(Collections.singletonList(id), null, null)) {
             return ResultUtil.success(ResultCode.SUCCESS);
         }

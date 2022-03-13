@@ -1,30 +1,15 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.goods.entity.enums.GoodsAuthEnum;
-import cn.lili.modules.goods.entity.enums.GoodsStatusEnum;
-import cn.lili.modules.goods.service.GoodsSkuService;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.service.MemberService;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
-import cn.lili.modules.order.cart.entity.enums.DeliveryMethodEnum;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.entity.vo.CartVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.promotion.entity.dos.Pintuan;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-import cn.lili.modules.promotion.entity.vos.PointsGoodsVO;
-import cn.lili.modules.promotion.service.PintuanService;
-import cn.lili.modules.promotion.service.PointsGoodsService;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.vo.cart.CartVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.order.OrderService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +22,6 @@ import java.util.stream.Collectors;
 /**
  * 商品有效性校验
  *
- *
- * @since 2020-07-02 14:47
  */
 @Service
 public class CheckDataRender implements CartRenderStep {

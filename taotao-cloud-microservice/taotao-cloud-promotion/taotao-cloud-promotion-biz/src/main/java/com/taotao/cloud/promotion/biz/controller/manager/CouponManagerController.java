@@ -34,38 +34,38 @@ public class CouponManagerController {
 
     @ApiOperation(value = "获取优惠券列表")
     @GetMapping
-    public ResultMessage<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
+    public Result<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
         queryParam.setStoreId("platform");
-        return ResultUtil.data(couponService.pageVOFindAll(queryParam, page));
+        return Result.success(couponService.pageVOFindAll(queryParam, page));
     }
 
     @ApiOperation(value = "获取优惠券详情")
     @GetMapping("/{couponId}")
-    public ResultMessage<CouponVO> getCoupon(@PathVariable String couponId) {
+    public Result<CouponVO> getCoupon(@PathVariable String couponId) {
         CouponVO coupon = couponService.getDetail(couponId);
-        return ResultUtil.data(coupon);
+        return Result.success(coupon);
     }
 
     @ApiOperation(value = "添加优惠券")
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResultMessage<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
+    public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
         this.setStoreInfo(couponVO);
         couponService.savePromotions(couponVO);
-        return ResultUtil.data(couponVO);
+        return Result.success(couponVO);
     }
 
     @ApiOperation(value = "修改优惠券")
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public ResultMessage<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
+    public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
         this.setStoreInfo(couponVO);
         Coupon coupon = couponService.getById(couponVO.getId());
         couponService.updatePromotions(couponVO);
-        return ResultUtil.data(coupon);
+        return Result.success(coupon);
     }
 
     @ApiOperation(value = "修改优惠券状态")
     @PutMapping("/status")
-    public ResultMessage<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
+    public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
         String[] split = couponIds.split(",");
         if (couponService.updateStatus(Arrays.asList(split), startTime, endTime)) {
             return ResultUtil.success(ResultCode.COUPON_EDIT_STATUS_SUCCESS);
@@ -75,27 +75,27 @@ public class CouponManagerController {
 
     @ApiOperation(value = "批量删除")
     @DeleteMapping(value = "/{ids}")
-    public ResultMessage<Object> delAllByIds(@PathVariable List<String> ids) {
+    public Result<Object> delAllByIds(@PathVariable List<String> ids) {
         couponService.removePromotions(ids);
         return ResultUtil.success();
     }
 
     @ApiOperation(value = "会员优惠券作废")
     @PutMapping(value = "/member/cancellation/{id}")
-    public ResultMessage<Object> cancellation(@PathVariable String id) {
+    public Result<Object> cancellation(@PathVariable String id) {
         memberCouponService.cancellation(id);
         return ResultUtil.success(ResultCode.COUPON_CANCELLATION_SUCCESS);
     }
 
     @ApiOperation(value = "根据优惠券id券分页获取会员领详情")
     @GetMapping(value = "/member/{id}")
-    public ResultMessage<IPage<MemberCoupon>> getByPage(@PathVariable String id,
+    public Result<IPage<MemberCoupon>> getByPage(@PathVariable String id,
                                                         PageVO page) {
         QueryWrapper<MemberCoupon> queryWrapper = new QueryWrapper<>();
         IPage<MemberCoupon> data = memberCouponService.page(PageUtil.initPage(page),
                 queryWrapper.eq("coupon_id", id)
         );
-        return ResultUtil.data(data);
+        return Result.success(data);
 
     }
 

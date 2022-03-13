@@ -1,17 +1,14 @@
 package com.taotao.cloud.order.biz.service.cart;
 
 
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
-import cn.lili.modules.order.cart.entity.vo.TradeParams;
-import cn.lili.modules.order.order.entity.dos.Trade;
-import cn.lili.modules.order.order.entity.vo.ReceiptVO;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.vo.cart.TradeParams;
+import com.taotao.cloud.order.api.vo.order.ReceiptVO;
+import com.taotao.cloud.order.biz.entity.order.Trade;
 
 /**
  * 购物车业务层
- *
- *
- * @since 2020-03-23 12:29 下午
  */
 public interface CartService {
 
