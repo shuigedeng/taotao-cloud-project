@@ -1,17 +1,14 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import cn.lili.modules.goods.entity.dos.CategoryBrand;
-import cn.lili.modules.goods.entity.vos.CategoryBrandVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
+import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 /**
  * 商品分类品牌数据处理层
- *
- * @author pikachu
- * @since 2020-02-26 18:12:56
  */
 public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 

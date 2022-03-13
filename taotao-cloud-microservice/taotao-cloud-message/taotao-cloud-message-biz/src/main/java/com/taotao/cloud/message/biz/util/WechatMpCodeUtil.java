@@ -1,11 +1,9 @@
 package com.taotao.cloud.message.biz.util;
 
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.message.entity.dos.ShortLink;
-import cn.lili.modules.message.service.ShortLinkService;
 import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.message.biz.entity.ShortLink;
+import com.taotao.cloud.message.biz.service.ShortLinkService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -29,10 +27,6 @@ import java.util.Map;
 
 /**
  * 微信API交互token
- *
- * @author Chopper
- * @version v1.0
- * 2020-12-10 19:25
  */
 @Slf4j
 @Component

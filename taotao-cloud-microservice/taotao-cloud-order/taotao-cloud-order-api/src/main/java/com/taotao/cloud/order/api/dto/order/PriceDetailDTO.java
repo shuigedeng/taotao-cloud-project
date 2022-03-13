@@ -7,12 +7,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 商城流水，细节到orderItem
- *
- * @since 2020/11/17 7:25 下午
  */
+@Data
 @Schema(description = "商城流水，细节到orderItem")
 public class PriceDetailDTO implements Serializable {
 

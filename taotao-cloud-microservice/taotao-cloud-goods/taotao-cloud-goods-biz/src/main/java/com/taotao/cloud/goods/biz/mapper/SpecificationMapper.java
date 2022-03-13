@@ -1,14 +1,11 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 
-import cn.lili.modules.goods.entity.dos.Specification;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.goods.biz.entity.Specification;
 
 /**
  * 规格数据处理层
- *
- * @author pikachu
- * @since 2020-02-18 15:18:56
  */
 public interface SpecificationMapper extends BaseMapper<Specification> {
 

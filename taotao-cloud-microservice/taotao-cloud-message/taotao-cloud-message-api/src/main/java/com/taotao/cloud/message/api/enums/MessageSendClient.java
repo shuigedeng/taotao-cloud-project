@@ -2,9 +2,6 @@ package com.taotao.cloud.message.api.enums;
 
 /**
  * 消息发送客户端
- *
- * @author pikachu
- * @since 2020/12/8 9:46
  */
 public enum MessageSendClient {
 

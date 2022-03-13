@@ -1,41 +1,62 @@
 package com.taotao.cloud.message.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 /**
- * 微信小程序消息订阅
- * @author Chopper
+ * 微信小程序消息订阅表
  */
 @Data
-@TableName("li_wechat_mp_message")
-@ApiModel(value = "微信小程序消息订阅")
-public class WechatMPMessage extends BaseEntity {
+@Entity
+@Table(name = WechatMPMessage.TABLE_NAME)
+@TableName(WechatMPMessage.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = WechatMPMessage.TABLE_NAME, comment = "微信小程序消息订阅表")
+public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "tt_wechat_mp_message";
+	/**
+	 * 模版id
+	 */
+	@Column(name = "template_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版id'")
+	private String templateId;
 
+	/**
+	 * 模版名称
+	 */
+	@Column(name = "name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版名称'")
+	private String name;
 
-    @ApiModelProperty(value = "模版id")
-    private String templateId;
+	/**
+	 * 微信模版码
+	 */
+	@Column(name = "code", nullable = false, columnDefinition = "varchar(255) not null default '' comment '微信模版码'")
+	private String code;
 
-    @ApiModelProperty(value = "模版名称")
-    private String name;
+	/**
+	 * 关键字
+	 */
+	@Column(name = "keywords", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关键字'")
+	private String keywords;
 
-    @ApiModelProperty(value = "微信模版码")
-    private String code;
+	/**
+	 * 关键字描述（小程序发送消息时使用）
+	 */
+	@Column(name = "keywords_text", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关键字描述（小程序发送消息时使用）'")
+	private String keywordsText;
 
-    @ApiModelProperty(value = "关键字")
-    private String keywords;
+	/**
+	 * 是否开启
+	 */
+	@Column(name = "enable", nullable = false, columnDefinition = "boolean not null default '' comment '是否开启'")
+	private Boolean enable = true;
 
-    @ApiModelProperty(value = "关键字描述（小程序发送消息时使用）")
-    private String keywordsText;
-
-    @ApiModelProperty(value = "是否开启")
-    private Boolean enable = true;
-
-    @ApiModelProperty("订单状态")
-    private String orderStatus;
+	/**
+	 * 订单状态
+	 */
+	@Column(name = "order_status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '订单状态'")
+	private String orderStatus;
 }

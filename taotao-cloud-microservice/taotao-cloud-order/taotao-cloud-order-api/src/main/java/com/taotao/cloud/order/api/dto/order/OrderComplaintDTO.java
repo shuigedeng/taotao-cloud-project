@@ -2,12 +2,12 @@ package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
+import lombok.Data;
 
 /**
  * 交易投诉DTO
- *
- * @since 2021/1/7 19:39
  */
+@Data
 @Schema(description = "交易投诉DTO")
 public class OrderComplaintDTO {
 

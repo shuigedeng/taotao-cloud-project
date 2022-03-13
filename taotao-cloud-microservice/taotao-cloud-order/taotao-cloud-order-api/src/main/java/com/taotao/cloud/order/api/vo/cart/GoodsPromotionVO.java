@@ -5,12 +5,12 @@ import cn.lili.modules.promotion.entity.dos.PromotionGoods;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
 /**
  * 商品促销VO
- *
- * @since 2020-04-01 10:42 上午
  */
+@Data
 @Schema(description = "商品促销VO 购物车中")
 public class GoodsPromotionVO implements Serializable {
 

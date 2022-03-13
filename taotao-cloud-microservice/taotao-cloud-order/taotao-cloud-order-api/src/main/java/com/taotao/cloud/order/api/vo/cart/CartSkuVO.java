@@ -8,12 +8,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 购物车中的产品
- *
- * @since 2020-03-24 10:33 上午
  */
+@Data
 @Schema(description = "购物车中的产品")
 public class CartSkuVO extends CartBase implements Serializable {
 

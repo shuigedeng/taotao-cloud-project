@@ -1,12 +1,12 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 发票
- *
- * @since 2020/11/28 11:38
  */
+@Data
 @Schema(description = "发票")
 public class ReceiptVO {
 

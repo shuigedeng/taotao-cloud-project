@@ -1,12 +1,12 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 订单交易投诉VO
- *
- * @since 2020/12/4
  **/
+@Data
 @Schema(description = "订单交易投诉VO")
 public class StoreAppealVO {
 

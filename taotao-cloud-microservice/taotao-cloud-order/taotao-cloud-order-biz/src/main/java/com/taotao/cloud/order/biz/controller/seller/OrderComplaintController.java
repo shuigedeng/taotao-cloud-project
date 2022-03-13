@@ -12,11 +12,17 @@ import cn.lili.modules.order.order.entity.vo.*;
 import cn.lili.modules.order.order.service.OrderComplaintCommunicationService;
 import cn.lili.modules.order.order.service.OrderComplaintService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -27,9 +33,14 @@ import java.util.Objects;
  * 
  * @since 2020/12/5
  **/
+@Validated
+@RestController
+@RequestMapping("/sys/manager/dept")
+@Tag(name = "店铺端-部门管理API", description = "店铺端-部门管理API")
+
 @RestController
 @Api(tags = "店铺端,交易投诉接口")
-@RequestMapping("/store/complain")
+@RequestMapping("/order/seller/complain")
 public class OrderComplaintController {
 
     /**
@@ -43,14 +54,20 @@ public class OrderComplaintController {
      */
     @Autowired
     private OrderComplaintCommunicationService orderComplaintCommunicationService;
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "通过id获取")
     @ApiImplicitParam(name = "id", value = "投诉单ID", required = true, paramType = "path")
     @GetMapping(value = "/{id}")
     public ResultMessage<OrderComplaintVO> get(@PathVariable String id) {
         return ResultUtil.data(OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "分页获取")
     @GetMapping
     public ResultMessage<IPage<OrderComplaint>> get(OrderComplaintSearchParams searchParams, PageVO pageVO) {
@@ -58,7 +75,10 @@ public class OrderComplaintController {
         searchParams.setStoreId(storeId);
         return ResultUtil.data(orderComplaintService.getOrderComplainByPage(searchParams, pageVO));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "添加交易投诉对话")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "complainId", value = "投诉单ID", required = true, paramType = "query"),
@@ -71,7 +91,10 @@ public class OrderComplaintController {
         orderComplaintCommunicationService.addCommunication(communicationVO);
         return ResultUtil.success();
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "修改申诉信息")
     @PutMapping
     public ResultMessage<OrderComplaintVO> update(OrderComplaintVO orderComplainVO) {
@@ -80,14 +103,20 @@ public class OrderComplaintController {
         orderComplaintService.updateOrderComplain(orderComplainVO);
         return ResultUtil.data(orderComplainVO);
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "申诉")
     @PutMapping("/appeal")
     public ResultMessage<OrderComplaintVO> appeal(StoreAppealVO storeAppealVO) {
         orderComplaintService.appeal(storeAppealVO);
         return ResultUtil.data(orderComplaintService.getOrderComplainById(storeAppealVO.getOrderComplaintId()));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "修改状态")
     @PutMapping(value = "/status")
     public ResultMessage<Object> updateStatus(OrderComplaintOperationParams orderComplainVO) {

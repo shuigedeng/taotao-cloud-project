@@ -1,74 +1,85 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.goods.entity.dos.GoodsUnit;
-import cn.lili.modules.goods.service.GoodsUnitService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.biz.entity.GoodsUnit;
+import com.taotao.cloud.goods.biz.service.GoodsUnitService;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,商品计量单位接口
- *
- * @author Bulbasaur
- * @since 2020/11/26 16:15
  */
+@Validated
 @RestController
-@Api(tags = "管理端,商品计量单位接口")
-@RequestMapping("/manager/goods/goodsUnit")
+@Tag(name = "平台管理端-商品计量单位管理API", description = "平台管理端-商品计量单位管理API")
+@RequestMapping("/goods/manager/goodsUnit")
 public class GoodsUnitManagerController {
 
-    @Autowired
-    private GoodsUnitService goodsUnitService;
+	@Autowired
+	private GoodsUnitService goodsUnitService;
 
+	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位", method = CommonConstant.GET)
+	@RequestLogger(description = "分页获取商品计量单位")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/page")
+	public Result<IPage<GoodsUnit>> getByPage(PageVO pageVO) {
+		return Result.success(goodsUnitService.page(PageUtil.initPage(pageVO)));
+	}
 
-    @ApiOperation(value = "分页获取商品计量单位")
-    @GetMapping
-    public ResultMessage<IPage<GoodsUnit>> getByPage(PageVO pageVO) {
-        return ResultUtil.data(goodsUnitService.page(PageUtil.initPage(pageVO)));
-    }
+	@Operation(summary = "获取商品计量单位", description = "获取商品计量单位", method = CommonConstant.GET)
+	@RequestLogger(description = "获取商品计量单位")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/{id}")
+	public Result<GoodsUnit> getById(@NotNull @PathVariable String id) {
+		return Result.success(goodsUnitService.getById(id));
+	}
 
-    @ApiOperation(value = "获取商品计量单位")
-    @ApiImplicitParam(name = "id", value = "计量单位ID", required = true, paramType = "path")
-    @GetMapping("/get/{id}")
-    public ResultMessage<GoodsUnit> getById(@NotNull @PathVariable String id) {
-        return ResultUtil.data(goodsUnitService.getById(id));
-    }
+	@Operation(summary = "添加商品计量单位", description = "添加商品计量单位", method = CommonConstant.POST)
+	@RequestLogger(description = "添加商品计量单位")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PostMapping
+	public Result<Boolean> save(@Valid GoodsUnit goodsUnit) {
+		goodsUnitService.save(goodsUnit);
+		return Result.success(true);
+	}
 
-    @ApiOperation(value = "添加商品计量单位")
-    @PostMapping
-    public ResultMessage<GoodsUnit> save(@Valid GoodsUnit goodsUnit) {
-        goodsUnitService.save(goodsUnit);
-        return ResultUtil.data(goodsUnit);
-    }
+	@Operation(summary = "编辑商品计量单位", description = "编辑商品计量单位", method = CommonConstant.PUT)
+	@RequestLogger(description = "编辑商品计量单位")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping("/{id}")
+	public Result<Boolean> update(@NotNull @PathVariable String id,
+		@Valid GoodsUnit goodsUnit) {
+		goodsUnit.setId(id);
+		goodsUnitService.updateById(goodsUnit);
+		return Result.success(true);
+	}
 
-    @ApiOperation(value = "编辑商品计量单位")
-    @ApiImplicitParam(name = "id", value = "计量单位ID", required = true, paramType = "path")
-    @PutMapping("/{id}")
-    public ResultMessage<GoodsUnit> update(@NotNull @PathVariable String id, @Valid GoodsUnit goodsUnit) {
-        goodsUnit.setId(id);
-        goodsUnitService.updateById(goodsUnit);
-        return ResultUtil.data(goodsUnit);
-    }
-
-    @ApiOperation(value = "删除商品计量单位")
-    @ApiImplicitParam(name = "ids", value = "计量单位ID", required = true, paramType = "path")
-    @DeleteMapping("/delete/{ids}")
-    public ResultMessage<Object> delete(@NotNull @PathVariable List<String> ids) {
-        goodsUnitService.removeByIds(ids);
-        return ResultUtil.success();
-    }
+	@Operation(summary = "删除商品计量单位", description = "删除商品计量单位", method = CommonConstant.DELETE)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@DeleteMapping("/{ids}")
+	public Result<Boolean> delete(@NotNull @PathVariable List<String> ids) {
+		goodsUnitService.removeByIds(ids);
+		return Result.success(true);
+	}
 
 
 }

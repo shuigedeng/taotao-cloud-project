@@ -1,30 +1,14 @@
 package com.taotao.cloud.order.biz.entity.aftersale;
 
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 /**
  * 售后日志
- *
- * 
- * @since 2020-03-25 2:30 下午
  */
 @Entity
 @Table(name = AfterSaleLog.TABLE_NAME)
@@ -34,49 +18,45 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 
 	public static final String TABLE_NAME = "li_after_sale_log";
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String createBy;
+	/**
+	 * 应用ID
+	 */
+	@ApiModelProperty(value = "售后服务单号")
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	private String sn;
+	/**
+	 * 应用ID
+	 */
+	@ApiModelProperty(value = "操作者id(可以是卖家)")
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	private String operatorId;
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Date createTime;
+	/**
+	 * @see UserEnums
+	 */
+	@ApiModelProperty(value = "操作者类型")
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	private String operatorType;
 
-    @ApiModelProperty(value = "售后服务单号")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String sn;
+	/**
+	 * 应用ID
+	 */
+	@ApiModelProperty(value = "操作者名称")
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	private String operatorName;
+	/**
+	 * 应用ID
+	 */
+	@ApiModelProperty(value = "日志信息")
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	private String message;
 
-    @ApiModelProperty(value = "操作者id(可以是卖家)")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String operatorId;
-
-    /**
-     * @see UserEnums
-     */
-    @ApiModelProperty(value = "操作者类型")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String operatorType;
-
-
-    @ApiModelProperty(value = "操作者名称")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String operatorName;
-
-    @ApiModelProperty(value = "日志信息")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String message;
-
-    public AfterSaleLog(String sn, String operatorId, String operatorType, String operatorName, String message) {
-        this.sn = sn;
-        this.operatorId = operatorId;
-        this.operatorType = operatorType;
-        this.operatorName = operatorName;
-        this.message = message;
-    }
+	public AfterSaleLog(String sn, String operatorId, String operatorType, String operatorName,
+		String message) {
+		this.sn = sn;
+		this.operatorId = operatorId;
+		this.operatorType = operatorType;
+		this.operatorName = operatorName;
+		this.message = message;
+	}
 }

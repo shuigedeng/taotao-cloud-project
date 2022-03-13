@@ -8,7 +8,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo')
-    //api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')

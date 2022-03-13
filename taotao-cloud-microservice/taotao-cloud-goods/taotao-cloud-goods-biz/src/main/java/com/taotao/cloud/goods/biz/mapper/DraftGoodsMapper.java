@@ -1,13 +1,10 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import cn.lili.modules.goods.entity.dos.DraftGoods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.goods.biz.entity.DraftGoods;
 
 /**
  * 草稿商品数据处理层
- *
- * @author paulG
- * @since 2020/12/19
  **/
 public interface DraftGoodsMapper extends BaseMapper<DraftGoods> {
 }

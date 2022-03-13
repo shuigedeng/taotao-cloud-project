@@ -1,12 +1,12 @@
 package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 订单批量发货DTO
- *
- * @since 2021/5/26 4:21 下午
  */
+@Data
 @Schema(description = "订单批量发货DTO")
 public class OrderBatchDeliverDTO {
 

@@ -1,31 +1,24 @@
 package com.taotao.cloud.goods.api.vo;
 
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 兑换VO
- *
- * @author pikachu
- * @since 2020-02-26 23:24:13
  */
 @Data
 public class ExchangeVO {
 
-    /** 是否允许兑换 */
-    @ApiModelProperty(value="是否允许积分兑换")
-    private Integer enableExchange;
+	@Schema(description = "是否允许积分兑换")
+	private Integer enableExchange;
 
-    /** 兑换所需金额 */
-    @ApiModelProperty(value="兑换所需金额 ")
-    private Double exchangeMoney;
+	@Schema(description = "兑换所需金额 ")
+	private Double exchangeMoney;
 
-    /** 商品所属积分分类 */
-    @ApiModelProperty(value="积分兑换所属分类 ")
-    private Integer categoryId;
+	@Schema(description = "积分兑换所属分类 ")
+	private Integer categoryId;
 
-    /** 兑换所需积分 */
-    @ApiModelProperty(value="积分兑换使用的积分 ")
-    private Integer exchangePoint;
+	@Schema(description = "积分兑换使用的积分 ")
+	private Integer exchangePoint;
 }

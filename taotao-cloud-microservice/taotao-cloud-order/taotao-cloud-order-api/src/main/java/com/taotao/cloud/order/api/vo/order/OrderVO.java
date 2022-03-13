@@ -5,13 +5,12 @@ import cn.lili.modules.order.order.entity.dos.Order;
 import cn.lili.modules.order.order.entity.dos.OrderItem;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
 /**
  * 订单vo
- *
- * @since 2020/11/28 11:38
  */
+@Data
 @Schema(description = "订单vo")
 public class OrderVO extends Order {
 

@@ -3,12 +3,12 @@ package com.taotao.cloud.order.api.vo.cart;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 整比交易对象
- *
- * @since 2020-04-01 10:42 上午
  */
+@Data
 @Schema(description = "整比交易对象")
 public class TradeVO implements Serializable {
 

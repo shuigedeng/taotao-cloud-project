@@ -1,142 +1,157 @@
 package com.taotao.cloud.goods.api.dto;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.goods.entity.enums.GoodsAuthEnum;
-import cn.lili.modules.goods.entity.enums.GoodsStatusEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 /**
  * 商品查询条件
- *
- * @author pikachu
- * @since 2020-02-24 19:27:20
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class GoodsSearchParams extends PageVO {
+public class GoodsSearchParams {
 
-    private static final long serialVersionUID = 2544015852728566887L;
+	private static final long serialVersionUID = 2544015852728566887L;
 
-    @ApiModelProperty(value = "商品编号")
-    private String goodsId;
+	@Schema(description = "商品编号")
+	private String goodsId;
 
-    @ApiModelProperty(value = "商品名称")
-    private String goodsName;
+	@Schema(description = "商品名称")
+	private String goodsName;
 
-    @ApiModelProperty(value = "商品编号")
-    private String id;
+	@Schema(description = "商品编号")
+	private String id;
 
-    @ApiModelProperty(value = "商家ID")
-    private String storeId;
+	@Schema(description = "商家ID")
+	private String storeId;
 
-    @ApiModelProperty(value = "卖家名字")
-    private String storeName;
+	@Schema(description = "卖家名字")
+	private String storeName;
 
-    @ApiModelProperty(value = "价格,可以为范围，如10_1000")
-    private String price;
+	@Schema(description = "价格,可以为范围，如10_1000")
+	private String price;
 
-    @ApiModelProperty(value = "分类path")
-    private String categoryPath;
+	@Schema(description = "分类path")
+	private String categoryPath;
 
-    @ApiModelProperty(value = "店铺分类id")
-    private String storeCategoryPath;
+	@Schema(description = "店铺分类id")
+	private String storeCategoryPath;
 
-    @ApiModelProperty(value = "是否自营")
-    private Boolean selfOperated;
+	@Schema(description = "是否自营")
+	private Boolean selfOperated;
 
-    /**
-     * @see GoodsStatusEnum
-     */
-    @ApiModelProperty(value = "上下架状态")
-    private String marketEnable;
+	/**
+	 * @see GoodsStatusEnum
+	 */
+	@Schema(description = "上下架状态")
+	private String marketEnable;
 
-    /**
-     * @see GoodsAuthEnum
-     */
-    @ApiModelProperty(value = "审核状态")
-    private String authFlag;
+	/**
+	 * @see GoodsAuthEnum
+	 */
+	@Schema(description = "审核状态")
+	private String authFlag;
 
-    @ApiModelProperty(value = "库存数量")
-    private Integer leQuantity;
+	@Schema(description = "库存数量")
+	private Integer leQuantity;
 
-    @ApiModelProperty(value = "库存数量")
-    private Integer geQuantity;
+	@Schema(description = "库存数量")
+	private Integer geQuantity;
 
-    @ApiModelProperty(value = "是否为推荐商品")
-    private Boolean recommend;
+	@Schema(description = "是否为推荐商品")
+	private Boolean recommend;
 
-    /**
-     * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
-     */
-    @ApiModelProperty(value = "商品类型")
-    private String goodsType;
+	/**
+	 * @see GoodsTypeEnum
+	 */
+	@Schema(description = "商品类型")
+	private String goodsType;
 
-    public <T> QueryWrapper<T> queryWrapper() {
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-        if (CharSequenceUtil.isNotEmpty(goodsId)) {
-            queryWrapper.eq("goods_id", goodsId);
-        }
-        if (CharSequenceUtil.isNotEmpty(goodsName)) {
-            queryWrapper.like("goods_name", goodsName);
-        }
-        if (CharSequenceUtil.isNotEmpty(id)) {
-            queryWrapper.in("id", Arrays.asList(id.split(",")));
-        }
-        if (CharSequenceUtil.isNotEmpty(storeId)) {
-            queryWrapper.eq("store_id", storeId);
-        }
-        if (CharSequenceUtil.isNotEmpty(storeName)) {
-            queryWrapper.like("store_name", storeName);
-        }
-        if (CharSequenceUtil.isNotEmpty(categoryPath)) {
-            queryWrapper.like("category_path", categoryPath);
-        }
-        if (CharSequenceUtil.isNotEmpty(storeCategoryPath)) {
-            queryWrapper.like("store_category_path", storeCategoryPath);
-        }
-        if (selfOperated != null) {
-            queryWrapper.eq("self_operated", selfOperated);
-        }
-        if (CharSequenceUtil.isNotEmpty(marketEnable)) {
-            queryWrapper.eq("market_enable", marketEnable);
-        }
-        if (CharSequenceUtil.isNotEmpty(authFlag)) {
-            queryWrapper.eq("auth_flag", authFlag);
-        }
-        if (leQuantity != null) {
-            queryWrapper.le("quantity", leQuantity);
-        }
-        if (geQuantity != null) {
-            queryWrapper.ge("quantity", geQuantity);
-        }
-        if (recommend != null) {
-            queryWrapper.le("recommend", recommend);
-        }
-        if (CharSequenceUtil.isNotEmpty(goodsType)) {
-            queryWrapper.eq("goods_type", goodsType);
-        }
+	/**
+	 * 当前第几页
+	 */
+	@Schema(description = "当前第几页，默认1", example = "1", required = true)
+	@NotNull(message = "当前页显示数量不能为空")
+	@Min(value = 0)
+	@Max(value = Integer.MAX_VALUE)
+	Integer currentPage;
 
-        queryWrapper.eq("delete_flag", false);
-        this.betweenWrapper(queryWrapper);
-        return queryWrapper;
-    }
+	/**
+	 * 每页显示条数
+	 */
+	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
+	@NotNull(message = "每页数据显示数量不能为空")
+	@Min(value = 5)
+	@Max(value = 100)
+	Integer pageSize;
 
-    private <T> void betweenWrapper(QueryWrapper<T> queryWrapper) {
-        if (CharSequenceUtil.isNotEmpty(price)) {
-            String[] s = price.split("_");
-            if (s.length > 1) {
-                queryWrapper.between("price", s[0], s[1]);
-            } else {
-                queryWrapper.ge("price", s[0]);
-            }
-        }
-    }
+	public <T> QueryWrapper<T> queryWrapper() {
+		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+		if (CharSequenceUtil.isNotEmpty(goodsId)) {
+			queryWrapper.eq("goods_id", goodsId);
+		}
+		if (CharSequenceUtil.isNotEmpty(goodsName)) {
+			queryWrapper.like("goods_name", goodsName);
+		}
+		if (CharSequenceUtil.isNotEmpty(id)) {
+			queryWrapper.in("id", Arrays.asList(id.split(",")));
+		}
+		if (CharSequenceUtil.isNotEmpty(storeId)) {
+			queryWrapper.eq("store_id", storeId);
+		}
+		if (CharSequenceUtil.isNotEmpty(storeName)) {
+			queryWrapper.like("store_name", storeName);
+		}
+		if (CharSequenceUtil.isNotEmpty(categoryPath)) {
+			queryWrapper.like("category_path", categoryPath);
+		}
+		if (CharSequenceUtil.isNotEmpty(storeCategoryPath)) {
+			queryWrapper.like("store_category_path", storeCategoryPath);
+		}
+		if (selfOperated != null) {
+			queryWrapper.eq("self_operated", selfOperated);
+		}
+		if (CharSequenceUtil.isNotEmpty(marketEnable)) {
+			queryWrapper.eq("market_enable", marketEnable);
+		}
+		if (CharSequenceUtil.isNotEmpty(authFlag)) {
+			queryWrapper.eq("auth_flag", authFlag);
+		}
+		if (leQuantity != null) {
+			queryWrapper.le("quantity", leQuantity);
+		}
+		if (geQuantity != null) {
+			queryWrapper.ge("quantity", geQuantity);
+		}
+		if (recommend != null) {
+			queryWrapper.le("recommend", recommend);
+		}
+		if (CharSequenceUtil.isNotEmpty(goodsType)) {
+			queryWrapper.eq("goods_type", goodsType);
+		}
+
+		queryWrapper.eq("delete_flag", false);
+		this.betweenWrapper(queryWrapper);
+		return queryWrapper;
+	}
+
+	private <T> void betweenWrapper(QueryWrapper<T> queryWrapper) {
+		if (CharSequenceUtil.isNotEmpty(price)) {
+			String[] s = price.split("_");
+			if (s.length > 1) {
+				queryWrapper.between("price", s[0], s[1]);
+			} else {
+				queryWrapper.ge("price", s[0]);
+			}
+		}
+	}
 
 
 }

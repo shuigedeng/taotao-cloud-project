@@ -1,19 +1,16 @@
 package com.taotao.cloud.message.api.dto;
 
 import cn.lili.modules.message.entity.dos.NoticeMessage;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 站内信消息DTO
- * @author Chopper
- * @since 2020/12/8 9:46
  */
 @Data
 public class NoticeMessageDetailDTO extends NoticeMessage {
 
-    @ApiModelProperty(value = "消息变量")
-    private List<String> variables;
+	@Schema(description = "消息变量")
+	private List<String> variables;
 }

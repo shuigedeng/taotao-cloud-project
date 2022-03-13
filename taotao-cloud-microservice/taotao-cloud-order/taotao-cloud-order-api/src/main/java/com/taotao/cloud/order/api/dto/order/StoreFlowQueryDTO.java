@@ -4,12 +4,12 @@ import cn.lili.common.vo.PageVO;
 import cn.lili.modules.store.entity.dos.Bill;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 店铺流水查询DTO
- *
- * @version v1.0 2021-12-08 10:53
  */
+@Data
 @Schema(description = "店铺流水查询DTO")
 public class StoreFlowQueryDTO {
 

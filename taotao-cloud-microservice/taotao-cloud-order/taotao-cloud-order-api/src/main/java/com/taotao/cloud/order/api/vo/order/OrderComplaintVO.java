@@ -6,13 +6,13 @@ import cn.lili.modules.order.order.entity.dos.OrderComplaintCommunication;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * 订单交易投诉VO
- *
- * @since 2020/12/4
  **/
+@Data
 @Schema(description = "订单交易投诉VO")
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,16 +1,12 @@
 package com.taotao.cloud.goods.biz.util;
 
 import cn.hutool.core.util.ReflectUtil;
-import cn.lili.modules.search.entity.dos.EsGoodsIndex;
 
+import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author paulG
- * @since 2021/10/11
- **/
 public class EsIndexUtil {
 
     private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";

@@ -43,26 +43,39 @@ public class Order extends BaseEntity {
 
 
     private static final long serialVersionUID = 2233811628066468683L;
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty("订单编号")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String sn;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty("交易编号 关联Trade")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String tradeSn;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "店铺ID")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeId;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "店铺名称")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeName;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "会员ID")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String memberId;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "用户名")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String memberName;
@@ -86,25 +99,35 @@ public class Order extends BaseEntity {
     @ApiModelProperty(value = "货运状态")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String deliverStatus;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "第三方付款流水号")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String receivableNo;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "支付方式")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String paymentMethod;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "支付时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date paymentTime;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "收件人姓名")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeName;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "收件人手机")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeMobile;
@@ -115,78 +138,113 @@ public class Order extends BaseEntity {
     @ApiModelProperty(value = "配送方式")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String deliveryMethod;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "地址名称， '，'分割")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeAddressPath;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "地址id，'，'分割 ")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeAddressIdPath;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "详细地址")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeDetail;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "总价格")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double flowPrice;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "商品价格")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double goodsPrice;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "运费")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double freightPrice;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "优惠的金额")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double discountPrice;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "修改价格")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double updatePrice;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "发货单号")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String logisticsNo;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "物流公司CODE")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String logisticsCode;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "物流公司名称")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String logisticsName;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "订单商品总重量")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double weight;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "商品数量")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer goodsNum;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "买家订单备注")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String remark;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "订单取消原因")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String cancelReason;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "完成时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date completeTime;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "送货时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date logisticsTime;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "支付方式返回的交易号")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String payOrderNo;
@@ -197,15 +255,21 @@ public class Order extends BaseEntity {
     @ApiModelProperty(value = "订单来源")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String clientType;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "是否需要发票")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Boolean needReceipt;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String parentOrderSn = "";
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "是否为某订单类型的订单，如果是则为订单类型的id，否则为空")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String promotionId;
@@ -223,28 +287,40 @@ public class Order extends BaseEntity {
     @ApiModelProperty(value = "订单促销类型")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String orderPromotionType;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "价格详情")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String priceDetail;
 
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "订单是否支持原路退回")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Boolean canReturn;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "提货码")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String verificationCode;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "分销员ID")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String distributionId;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "使用的店铺会员优惠券id(,区分)")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String useStoreMemberCouponIds;
-
+	/**
+	 * 应用ID
+	 */
     @ApiModelProperty(value = "使用的平台会员优惠券id")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String usePlatformMemberCouponId;

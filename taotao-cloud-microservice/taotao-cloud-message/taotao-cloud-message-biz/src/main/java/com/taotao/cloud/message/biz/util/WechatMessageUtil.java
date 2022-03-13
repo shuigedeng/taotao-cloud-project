@@ -3,26 +3,14 @@ package com.taotao.cloud.message.biz.util;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.DateUtil;
-import cn.lili.common.utils.HttpUtils;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.connect.entity.Connect;
-import cn.lili.modules.connect.entity.enums.ConnectEnum;
-import cn.lili.modules.connect.service.ConnectService;
-import cn.lili.modules.member.entity.dto.ConnectQueryDTO;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.service.OrderItemService;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.wechat.entity.dos.WechatMPMessage;
-import cn.lili.modules.wechat.entity.dos.WechatMessage;
-import cn.lili.modules.wechat.entity.enums.WechatMessageItemEnums;
-import cn.lili.modules.wechat.service.WechatMPMessageService;
-import cn.lili.modules.wechat.service.WechatMessageService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
+import com.taotao.cloud.message.biz.entity.WechatMPMessage;
+import com.taotao.cloud.message.biz.entity.WechatMessage;
+import com.taotao.cloud.message.biz.service.WechatMPMessageService;
+import com.taotao.cloud.message.biz.service.WechatMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,10 +19,6 @@ import java.util.*;
 
 /**
  * 微信消息
- *
- * @author Chopper
- * @version v1.0
- * 2020-12-10 19:12
  */
 @Slf4j
 @Component

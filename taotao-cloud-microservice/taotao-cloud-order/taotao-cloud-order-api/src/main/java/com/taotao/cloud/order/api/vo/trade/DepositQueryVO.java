@@ -2,13 +2,12 @@ package com.taotao.cloud.order.api.vo.trade;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 预存款充值记录查询条件
- *
- * @author pikachu
- * @since 2020-02-25 14:10:16
  */
+@Data
 @Schema(description = "预存款充值记录查询条件")
 public class DepositQueryVO implements Serializable {
 

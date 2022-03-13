@@ -2,6 +2,7 @@ package com.taotao.cloud.order.api.dto.cart;
 
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.enums.cart.SuperpositionPromotionEnum;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.api.vo.cart.PriceDetailVO;
@@ -13,12 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.Data;
 
 /**
  * 购物车视图
- *
- * @since 2020-03-25 2:30 下午
  */
+@Data
 @Schema(description = "购物车视图")
 public class TradeDTO implements Serializable {
 

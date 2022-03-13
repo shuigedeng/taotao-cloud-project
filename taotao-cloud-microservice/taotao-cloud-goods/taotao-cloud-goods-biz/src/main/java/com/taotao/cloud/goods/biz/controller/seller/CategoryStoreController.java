@@ -1,71 +1,69 @@
 package com.taotao.cloud.goods.biz.controller.seller;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.goods.entity.vos.CategoryBrandVO;
-import cn.lili.modules.goods.entity.vos.CategoryVO;
-import cn.lili.modules.goods.service.CategoryBrandService;
-import cn.lili.modules.goods.service.CategoryService;
-import cn.lili.modules.store.service.StoreDetailService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
+import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.biz.service.CategoryBrandService;
+import com.taotao.cloud.goods.biz.service.CategoryService;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import java.util.Objects;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Objects;
-
 /**
  * 店铺端,商品分类接口
- *
- * @author Chopper
- * @since 2021/2/20 2:26 下午
  */
+@Validated
 @RestController
-@Api(tags = "店铺端,商品分类接口")
-@RequestMapping("/store/goods/category")
-@CacheConfig(cacheNames = "category")
+@Tag(name = "商户管理端-商品分类API", description = "商户管理端-商品分类API")
+@RequestMapping("/goods/seller/store/goods/category")
 public class CategoryStoreController {
 
-    /**
-     * 分类
-     */
-    @Autowired
-    private CategoryService categoryService;
-    /**
-     * 分类品牌
-     */
-    @Autowired
-    private CategoryBrandService categoryBrandService;
-    /**
-     * 店铺详情
-     */
-    @Autowired
-    private StoreDetailService storeDetailService;
+	/**
+	 * 分类
+	 */
+	@Autowired
+	private CategoryService categoryService;
+	/**
+	 * 分类品牌
+	 */
+	@Autowired
+	private CategoryBrandService categoryBrandService;
+	/**
+	 * 店铺详情
+	 */
+	@Autowired
+	private StoreDetailService storeDetailService;
 
-    @ApiOperation(value = "获取店铺经营的分类")
-    @GetMapping(value = "/all")
-    public ResultMessage<List<CategoryVO>> getListAll() {
-        String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-        //获取店铺经营范围
-        String goodsManagementCategory = storeDetailService.getStoreDetail(storeId).getGoodsManagementCategory();
-        return ResultUtil.data(this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
-    }
+	@Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类", method = CommonConstant.GET)
+	@RequestLogger(description = "获取店铺经营的分类")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/all")
+	public Result<List<CategoryVO>> getListAll() {
+		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		//获取店铺经营范围
+		String goodsManagementCategory = storeDetailService.getStoreDetail(storeId)
+			.getGoodsManagementCategory();
+		return Result.success(
+			this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
+	}
 
-    @ApiOperation(value = "获取所选分类关联的品牌信息")
-    @GetMapping(value = "/{categoryId}/brands")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "categoryId", value = "分类id", required = true, paramType = "path"),
-    })
-    public List<CategoryBrandVO> queryBrands(@PathVariable String categoryId) {
-        return this.categoryBrandService.getCategoryBrandList(categoryId);
-    }
+	@Operation(summary = "获取所选分类关联的品牌信息", description = "获取所选分类关联的品牌信息", method = CommonConstant.GET)
+	@RequestLogger(description = "获取所选分类关联的品牌信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/{categoryId}/brands")
+	public Result<List<CategoryBrandVO>> queryBrands(@PathVariable String categoryId) {
+		return Result.success(this.categoryBrandService.getCategoryBrandList(categoryId));
+	}
 
 }

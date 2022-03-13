@@ -1,23 +1,18 @@
 package com.taotao.cloud.goods.api.dto;
 
+import java.util.List;
 import lombok.Data;
 
-import java.util.List;
-
-/**
- * @author paulG
- * @since 2020/10/20
- **/
 @Data
 public class SelectorOptions {
 
-    private String name;
+	private String name;
 
-    private String value;
+	private String value;
 
-    private String url;
+	private String url;
 
-    private List<SelectorOptions> otherOptions;
+	private List<SelectorOptions> otherOptions;
 
 
 }

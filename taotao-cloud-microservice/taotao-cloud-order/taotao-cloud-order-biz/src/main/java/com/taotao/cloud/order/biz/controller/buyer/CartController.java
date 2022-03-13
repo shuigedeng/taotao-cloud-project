@@ -9,13 +9,19 @@ import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
 import cn.lili.modules.order.cart.entity.vo.TradeParams;
 import cn.lili.modules.order.cart.service.CartService;
 import cn.lili.modules.order.order.entity.vo.ReceiptVO;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
@@ -24,10 +30,16 @@ import javax.validation.constraints.NotNull;
 /**
  * 买家端，购物车接口
  */
+@Validated
+@RestController
+@RequestMapping("/sys/manager/dept")
+@Tag(name = "买家端-部门管理API", description = "买家端-部门管理API")
+
+
 @Slf4j
 @RestController
 @Api(tags = "买家端，购物车接口")
-@RequestMapping("/buyer/trade/carts")
+@RequestMapping("/order/buyer/carts")
 public class CartController {
 
     /**
@@ -35,7 +47,10 @@ public class CartController {
      */
     @Autowired
     private CartService cartService;
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "向购物车中添加一个产品")
     @PostMapping
     @ApiImplicitParams({
@@ -59,19 +74,28 @@ public class CartController {
         }
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "获取购物车页面购物车详情")
     @GetMapping("/all")
     public ResultMessage<TradeDTO> cartAll() {
         return ResultUtil.data(this.cartService.getAllTradeDTO());
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "获取购物车数量")
     @GetMapping("/count")
     public ResultMessage<Long> cartCount(@RequestParam(required = false) Boolean checked) {
         return ResultUtil.data(this.cartService.getCartNum(checked));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "获取购物车可用优惠券数量")
     @GetMapping("/coupon/num")
     @ApiImplicitParams({
@@ -80,7 +104,10 @@ public class CartController {
     public ResultMessage<Long> cartCouponNum(String way) {
         return ResultUtil.data(this.cartService.getCanUseCoupon(CartTypeEnum.valueOf(way)));
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "更新购物车中单个产品数量", notes = "更新购物车中的多个产品的数量或选中状态")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "skuId", value = "产品id数组", required = true, dataType = "Long", paramType = "path"),
@@ -93,7 +120,10 @@ public class CartController {
         return ResultUtil.success();
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "更新购物车中单个产品", notes = "更新购物车中的多个产品的数量或选中状态")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "skuId", value = "产品id数组", required = true, dataType = "Long", paramType = "path")
@@ -105,7 +135,10 @@ public class CartController {
         return ResultUtil.success();
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "购物车选中设置")
     @PostMapping(value = "/sku/checked", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResultMessage<Object> updateAll(boolean checked) {
@@ -113,7 +146,10 @@ public class CartController {
         return ResultUtil.success();
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "批量设置某商家的商品为选中或不选中")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "storeId", value = "卖家id", required = true, dataType = "Long", paramType = "path"),
@@ -126,7 +162,10 @@ public class CartController {
         return ResultUtil.success();
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "清空购物车")
     @DeleteMapping()
     public ResultMessage<Object> clean() {
@@ -134,7 +173,10 @@ public class CartController {
         return ResultUtil.success();
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "删除购物车中的一个或多个产品")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "skuIds", value = "产品id", required = true, dataType = "Long", paramType = "path", allowMultiple = true)
@@ -207,7 +249,10 @@ public class CartController {
             throw new ServiceException(ResultCode.CART_ERROR);
         }
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "选择发票")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "way", value = "购物车购买：CART/立即购买：BUY_NOW/拼团购买：PINTUAN / 积分购买：POINT ", required = true, paramType = "query"),
@@ -217,7 +262,10 @@ public class CartController {
         this.cartService.shippingReceipt(receiptVO, way);
         return ResultUtil.success();
     }
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "选择优惠券")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "way", value = "购物车购买：CART/立即购买：BUY_NOW/拼团购买：PINTUAN / 积分购买：POINT ", required = true, paramType = "query"),
@@ -230,7 +278,10 @@ public class CartController {
         return ResultUtil.success();
     }
 
-
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @ApiOperation(value = "创建交易")
     @PostMapping(value = "/create/trade", consumes = "application/json", produces = "application/json")
     public ResultMessage<Object> crateTrade(@RequestBody TradeParams tradeParams) {

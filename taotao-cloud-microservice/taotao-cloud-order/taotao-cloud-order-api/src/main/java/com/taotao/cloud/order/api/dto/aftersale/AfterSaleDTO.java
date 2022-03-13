@@ -1,12 +1,14 @@
 package com.taotao.cloud.order.api.dto.aftersale;
 
+import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 售后dto
- *
- * @since 2021/3/20 10:48
  */
+@Data
 @Schema(description = "售后dto")
 public class AfterSaleDTO {
 
@@ -35,13 +37,13 @@ public class AfterSaleDTO {
 	private String images;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleTypeEnum
+	 * @see AfterSaleTypeEnum
 	 */
 	@Schema(description = "售后类型", allowableValues = "RETURN_GOODS,EXCHANGE_GOODS,RETURN_MONEY")
 	private String serviceType;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleRefundWayEnum
+	 * @see AfterSaleRefundWayEnum
 	 */
 	@Schema(description = "退款方式", allowableValues = "ORIGINAL,OFFLINE")
 	private String refundWay;

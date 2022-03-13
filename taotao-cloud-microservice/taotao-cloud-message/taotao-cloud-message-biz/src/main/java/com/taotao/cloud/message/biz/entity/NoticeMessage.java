@@ -1,54 +1,58 @@
 package com.taotao.cloud.message.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotEmpty;
 
 /**
- * 通知类站内信模版对象
- *
- * 
- * @version v4.1
- * @since 2020/12/8 9:46
+ * 通知类消息模板表
  */
+@Entity
+@Table(name = NoticeMessage.TABLE_NAME)
+@TableName(NoticeMessage.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = NoticeMessage.TABLE_NAME, comment = "通知类消息模板表")
 @Data
-@TableName("li_notice_message")
-@ApiModel(value = "通知类消息模板")
-public class NoticeMessage extends BaseEntity {
+public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "tt_notice_message";
 
-    @ApiModelProperty(value = "站内信节点")
-    @NotEmpty(message = "站内信节点不能为空")
-    @Length(max = 50, message = "站内信节点名称太长,不能超过50")
-    private String noticeNode;
+	/**
+	 * 站内信节点
+	 */
+	@Column(name = "notice_node", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信节点'")
+	private String noticeNode;
 
-    @ApiModelProperty(value = "站内信标题")
-    @NotEmpty(message = "站内信标题不能为空")
-    @Length(max = 50, message = "站内信标题名称太长,不能超过50")
-    private String noticeTitle;
+	/**
+	 * 站内信标题
+	 */
+	@Column(name = "notice_title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信标题'")
+	private String noticeTitle;
 
-    @ApiModelProperty(value = "站内信内容")
-    @NotEmpty(message = "站内信内容不能为空")
-    @Length(max = 200, message = "站内信内容名称太长，不能超过200")
-    private String noticeContent;
-    /**
-     * @see cn.lili.common.enums.SwitchEnum
-     */
-    @NotEmpty(message = "站内信状态不能为空")
-    @ApiModelProperty(value = "站内信是否开启")
-    private String noticeStatus;
-    /**
-     * @see cn.lili.modules.message.entity.enums.NoticeMessageParameterEnum
-     */
-    @ApiModelProperty(value = "消息变量")
-    @NotEmpty(message = "站内信状态不能为空")
-    private String variable;
+	/**
+	 * 站内信内容
+	 */
+	@Column(name = "notice_content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信内容'")
+	private String noticeContent;
+
+	/**
+	 * 站内信是否开启
+	 *
+	 * @see SwitchEnum
+	 */
+	@Column(name = "notice_status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信是否开启'")
+	private String noticeStatus;
+
+	/**
+	 * 消息变量
+	 *
+	 * @see NoticeMessageParameterEnum
+	 */
+	@Column(name = "variable", nullable = false, columnDefinition = "varchar(255) not null default '' comment '字典名称'")
+	private String variable;
 
 
 }

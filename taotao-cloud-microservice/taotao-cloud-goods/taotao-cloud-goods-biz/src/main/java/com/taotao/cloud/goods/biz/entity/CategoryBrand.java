@@ -1,70 +1,51 @@
 package com.taotao.cloud.goods.biz.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 
 /**
- * 分类品牌关联
- *
- * 
- * @since 2020-03-02 09:34:02
+ * 商品分类品牌关联表
  */
 @Entity
 @Table(name = CategoryBrand.TABLE_NAME)
 @TableName(CategoryBrand.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = CategoryBrand.TABLE_NAME, comment = "商品分类品牌关联")
+@org.hibernate.annotations.Table(appliesTo = CategoryBrand.TABLE_NAME, comment = "商品分类品牌关联表")
 public class CategoryBrand extends BaseSuperEntity<CategoryBrand, Long> {
 
-	public static final String TABLE_NAME = "li_category_brand";
+	public static final String TABLE_NAME = "tt_category_brand";
+	/**
+	 * 分类id
+	 */
+	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '分类id'")
+	private String categoryId;
+	/**
+	 * 品牌id
+	 */
+	@Column(name = "brand_id", nullable = false, columnDefinition = "varchar(64) not null comment '品牌id'")
+	private String brandId;
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String createBy;
+	public CategoryBrand(String categoryId, String brandId) {
+		this.categoryId = categoryId;
+		this.brandId = brandId;
+	}
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Date createTime;
+	public String getCategoryId() {
+		return categoryId;
+	}
 
-    /**
-     * 分类id
-     */
-    @TableField(value = "category_id")
-    @ApiModelProperty(value = "分类id")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String categoryId;
-    /**
-     * 品牌id
-     */
-    @TableField(value = "brand_id")
-    @ApiModelProperty(value = "品牌id")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String brandId;
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public CategoryBrand(String categoryId, String brandId) {
-        this.categoryId = categoryId;
-        this.brandId = brandId;
-    }
+	public String getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(String brandId) {
+		this.brandId = brandId;
+	}
 }

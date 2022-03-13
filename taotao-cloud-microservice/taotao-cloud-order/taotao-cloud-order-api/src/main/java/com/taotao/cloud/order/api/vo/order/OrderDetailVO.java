@@ -13,12 +13,12 @@ import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 订单详情VO
- *
- * @since 2020/11/17 7:29 下午
  */
+@Data
 @Schema(description = "订单详情VO")
 public class OrderDetailVO implements Serializable {
 

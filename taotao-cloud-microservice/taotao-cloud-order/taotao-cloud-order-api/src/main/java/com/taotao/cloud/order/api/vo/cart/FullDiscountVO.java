@@ -5,13 +5,13 @@ import cn.lili.modules.promotion.entity.dos.FullDiscount;
 import cn.lili.modules.promotion.entity.dos.PromotionGoods;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 /**
  * 满额活动VO
- *
- * @since 2020-04-01 10:42 上午
  */
+@Data
 @Schema(description = "满额活动VO")
 public class FullDiscountVO extends FullDiscount {
 

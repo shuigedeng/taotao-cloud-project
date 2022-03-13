@@ -1,80 +1,103 @@
 package com.taotao.cloud.goods.biz.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
 
 /**
- * 商品相册
- *
- * 
- * @since 2020-02-23 9:14:33
+ * 商品相册表
  */
 @Entity
 @Table(name = GoodsGallery.TABLE_NAME)
 @TableName(GoodsGallery.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = GoodsGallery.TABLE_NAME, comment = "商品相册")
+@org.hibernate.annotations.Table(appliesTo = GoodsGallery.TABLE_NAME, comment = "商品相册表")
 public class GoodsGallery extends BaseSuperEntity<GoodsGallery, Long> {
 
-	public static final String TABLE_NAME = "li_goods_gallery";
+	public static final String TABLE_NAME = "tt_goods_gallery";
 
+	/**
+	 * 商品id
+	 */
+	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品id'")
+	private String goodsId;
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String createBy;
+	/**
+	 * 缩略图路径
+	 */
+	@Column(name = "thumbnail", nullable = false, columnDefinition = "varchar(64) not null comment '缩略图路径'")
+	private String thumbnail;
 
-    /**
-     * 商品主键
-     */
+	/**
+	 * 小图路径
+	 */
+	@Column(name = "small", nullable = false, columnDefinition = "varchar(64) not null comment '小图路径'")
+	private String small;
 
-    @ApiModelProperty(value = "商品id")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String goodsId;
+	/**
+	 * 原图路径
+	 */
+	@Column(name = "original", nullable = false, columnDefinition = "varchar(64) not null comment '原图路径'")
+	private String original;
 
-    /**
-     * 缩略图路径
-     */
-    @ApiModelProperty(value = "缩略图路径")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String thumbnail;
+	/**
+	 * 是否是默认图片1   0没有默认
+	 */
+	@Column(name = "is_default", nullable = false, columnDefinition = "varchar(64) not null comment '是否是默认图片1   0没有默认'")
+	private Integer isDefault;
 
-    /**
-     * 小图路径
-     */
-    @ApiModelProperty(value = "小图路径")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String small;
+	/**
+	 * 排序
+	 */
+	@Column(name = "sort", nullable = false, columnDefinition = "int not null comment '排序'")
+	private Integer sort;
 
-    /**
-     * 原图路径
-     */
-    @ApiModelProperty(value = "原图路径", required = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String original;
+	public String getGoodsId() {
+		return goodsId;
+	}
 
-    /**
-     * 是否是默认图片1   0没有默认
-     */
-    @ApiModelProperty(value = "是否是默认图片1   0没有默认")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Integer isDefault;
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
+	}
 
-    /**
-     * 排序
-     */
-    @ApiModelProperty(value = "排序", required = true)
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Integer sort;
+	public String getThumbnail() {
+		return thumbnail;
+	}
 
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public String getSmall() {
+		return small;
+	}
+
+	public void setSmall(String small) {
+		this.small = small;
+	}
+
+	public String getOriginal() {
+		return original;
+	}
+
+	public void setOriginal(String original) {
+		this.original = original;
+	}
+
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 }

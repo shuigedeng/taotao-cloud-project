@@ -6,13 +6,13 @@ import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单导出DTO
- *
- * @since 2021/6/3 6:36 下午
  */
+@Data
 @Schema(description = "订单导出DTO")
 public class OrderExportDTO {
 

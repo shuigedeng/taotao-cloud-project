@@ -1,19 +1,21 @@
 package com.taotao.cloud.goods.api.event;
 
-import lombok.Data;
 import org.springframework.context.ApplicationEvent;
 
-/**
- * @author paulG
- * @since 2022/1/19
- **/
-@Data
 public class GeneratorEsGoodsIndexEvent extends ApplicationEvent {
 
-    private String goodsId;
+	private String goodsId;
 
-    public GeneratorEsGoodsIndexEvent(Object source, String goodsId) {
-        super(source);
-        this.goodsId = goodsId;
-    }
+	public GeneratorEsGoodsIndexEvent(Object source, String goodsId) {
+		super(source);
+		this.goodsId = goodsId;
+	}
+
+	public String getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
+	}
 }

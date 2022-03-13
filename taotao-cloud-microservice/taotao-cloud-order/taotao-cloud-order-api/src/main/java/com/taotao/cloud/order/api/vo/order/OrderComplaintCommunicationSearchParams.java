@@ -4,12 +4,12 @@ import cn.hutool.core.util.StrUtil;
 import cn.lili.modules.order.order.entity.dos.OrderComplaintCommunication;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 订单投诉搜索参数
- *
- * @since 2020/12/5
  **/
+@Data
 @Schema(description = "订单投诉搜索参数")
 public class OrderComplaintCommunicationSearchParams {
 

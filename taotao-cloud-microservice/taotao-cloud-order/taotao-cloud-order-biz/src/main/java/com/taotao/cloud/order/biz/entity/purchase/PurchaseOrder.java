@@ -20,50 +20,98 @@ import java.util.Date;
 @ApiModel(value = "供求单")
 @TableName("li_purchase_order")
 public class PurchaseOrder extends BaseEntity {
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "标题")
     private String title;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "截止时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deadline;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "收货时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date receiptTime;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "价格类型", notes = "可议价、不可议价、面议")
     private String priceMethod;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "地址名称， '，'分割")
     private String consigneeAddressPath;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "地址id，'，'分割 ")
     private String consigneeAddressIdPath;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "是否需要发票")
     private Boolean needReceipt;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "补充说明")
     private String supplement;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "联系类型", notes = "联系方式什么时候可见 公开后、公开")
     private String contactType;
+
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "联系人")
     private String contacts;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "联系电话")
     private String contactNumber;
+
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "供求人")
     private String memberId;
+
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "状态，开启：OPEN，关闭：CLOSE")
     private String status;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "分类ID")
     private String categoryId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "分类名称")
     private String categoryName;

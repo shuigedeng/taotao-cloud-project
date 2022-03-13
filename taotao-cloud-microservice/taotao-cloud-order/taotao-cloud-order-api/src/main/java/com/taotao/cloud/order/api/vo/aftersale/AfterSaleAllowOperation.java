@@ -3,12 +3,12 @@ package com.taotao.cloud.order.api.vo.aftersale;
 import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
 import cn.lili.modules.order.trade.entity.enums.AfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 售后可操作类型
- *
- * @since 2021/3/12 10:33 上午
  */
+@Data
 @Schema(description = "售后可操作类型")
 public class AfterSaleAllowOperation {
 

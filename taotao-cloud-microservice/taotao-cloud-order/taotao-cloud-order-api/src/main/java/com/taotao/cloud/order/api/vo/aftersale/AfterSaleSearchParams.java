@@ -7,13 +7,13 @@ import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 售后搜索参数
- *
- * @since 2020/12/4
  **/
+@Data
 @Schema(description = "售后搜索参数")
 public class AfterSaleSearchParams extends PageVO {
 

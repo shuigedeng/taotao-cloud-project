@@ -1,20 +1,16 @@
 package com.taotao.cloud.goods.api.dto;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 /**
  * 参数属性选择器
- *
- * @author paulG
- * @since 2020/10/20
  **/
 @Data
 public class ParamOptions {
 
-    private String key;
+	private String key;
 
-    private List<String> values;
+	private List<String> values;
 
 }

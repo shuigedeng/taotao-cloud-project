@@ -4,12 +4,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map;
+import lombok.Data;
 
 /**
  * 用于计算优惠券结算详情
- *
- * @since 2020-03-25 2:30 下午
  */
+
+@Data
 @Schema(description = "用于计算优惠券结算详情")
 public class MemberCouponDTO implements Serializable {
 

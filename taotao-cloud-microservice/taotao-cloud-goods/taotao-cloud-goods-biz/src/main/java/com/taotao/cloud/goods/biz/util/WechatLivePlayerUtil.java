@@ -1,13 +1,10 @@
 package com.taotao.cloud.goods.biz.util;
 
 import cn.hutool.json.JSONObject;
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.HttpUtils;
-import cn.lili.modules.goods.entity.dos.Commodity;
-import cn.lili.modules.goods.entity.dos.Studio;
-import cn.lili.modules.goods.entity.dto.GoodsInfo;
-import cn.lili.modules.wechat.util.WechatAccessTokenUtil;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.goods.api.dto.GoodsInfo;
+import com.taotao.cloud.goods.biz.entity.Commodity;
+import com.taotao.cloud.goods.biz.entity.Studio;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,9 +15,6 @@ import java.util.Map;
 
 /**
  * 微信小程序直播工具类
- *
- * @author Bulbasaur
- * @since 2021/5/17 10:16 上午
  */
 @Slf4j
 @Component

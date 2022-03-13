@@ -24,6 +24,9 @@ import java.util.Date;
 @ApiModel(value = "供求单报价")
 @TableName("li_purchase_quoted_item")
 public class PurchaseQuotedItem extends BaseIdEntity {
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @CreatedDate
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -31,21 +34,39 @@ public class PurchaseQuotedItem extends BaseIdEntity {
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间", hidden = true)
     private Date createTime;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "报价单ID")
     private String PurchaseQuotedId;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "商品名称")
     private String goodsName;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "规格")
     private String specs;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "数量")
     private String num;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "数量单位")
     private String goodsUnit;
+	/**
+	 * 应用ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "价格")
     private Double price;

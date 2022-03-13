@@ -6,12 +6,12 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 商城退款流水
- *
- * @since 2020/11/17 7:25 下午
  */
+@Data
 @Schema(description = "商城退款流水")
 public class AfterSalePriceDetailDTO implements Serializable {
 

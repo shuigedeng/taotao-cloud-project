@@ -1,58 +1,67 @@
 package com.taotao.cloud.message.biz.controller.buyer;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.message.entity.dos.MemberMessage;
-import cn.lili.modules.message.entity.enums.MessageStatusEnum;
-import cn.lili.modules.message.entity.vos.MemberMessageQueryVO;
-import cn.lili.modules.message.service.MemberMessageService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.message.api.enums.MessageStatusEnum;
+import com.taotao.cloud.message.api.vo.MemberMessageQueryVO;
+import com.taotao.cloud.message.biz.entity.MemberMessage;
+import com.taotao.cloud.message.biz.service.MemberMessageService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 买家端,会员站内消息接口
- *
- * @author Bulbasaur
- * @since 2020/11/16 10:07 下午
  */
+@Validated
 @RestController
-@Api(tags = "买家端,会员站内消息接口")
-@RequestMapping("/buyer/message/member")
+@Tag(name = "平台管理端-会员站内消息API", description = "平台管理端-会员站内消息API")
+@RequestMapping("/message/buyer/member")
 public class MemberMessageBuyerController {
 
-    /**
-     * 会员站内消息
-     */
-    @Autowired
-    private MemberMessageService memberMessageService;
+	/**
+	 * 会员站内消息
+	 */
+	@Autowired
+	private MemberMessageService memberMessageService;
 
-    @ApiOperation(value = "分页获取会员站内消息")
-    @GetMapping
-    public ResultMessage<IPage<MemberMessage>> page(MemberMessageQueryVO memberMessageQueryVO, PageVO page) {
-        memberMessageQueryVO.setMemberId(UserContext.getCurrentUser().getId());
-        return ResultUtil.data(memberMessageService.getPage(memberMessageQueryVO, page));
-    }
+	@Operation(summary = "分页获取会员站内消息", description = "分页获取会员站内消息", method = CommonConstant.GET)
+	@RequestLogger(description = "分页获取会员站内消息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping
+	public Result<IPage<MemberMessage>> page(MemberMessageQueryVO memberMessageQueryVO,
+		PageVO page) {
+		memberMessageQueryVO.setMemberId(UserContext.getCurrentUser().getId());
+		return Result.success(memberMessageService.getPage(memberMessageQueryVO, page));
+	}
 
-    @ApiOperation(value = "消息已读")
-    @ApiImplicitParam(name = "messageId", value = "会员消息id", required = true, paramType = "path")
-    @PutMapping("/{message_id}")
-    public ResultMessage<Boolean> read(@PathVariable("message_id") String messageId) {
-        return ResultUtil.data(memberMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), messageId));
-    }
+	@Operation(summary = "消息已读", description = "消息已读", method = CommonConstant.GET)
+	@RequestLogger(description = "消息已读")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping("/{message_id}")
+	public Result<Boolean> read(@PathVariable("message_id") String messageId) {
+		return Result.success(
+			memberMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), messageId));
+	}
 
-    @ApiOperation(value = "消息放入回收站")
-    @ApiImplicitParam(name = "messageId", value = "会员消息id", required = true, paramType = "path")
-    @DeleteMapping("/{message_id}")
-    public ResultMessage<Boolean> deleteMessage(@PathVariable("message_id") String messageId) {
-        return ResultUtil.data(memberMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), messageId));
-
-    }
-
+	@Operation(summary = "消息放入回收站", description = "消息放入回收站", method = CommonConstant.DELETE)
+	@RequestLogger(description = "消息放入回收站")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@DeleteMapping("/{message_id}")
+	public Result<Boolean> deleteMessage(@PathVariable("message_id") String messageId) {
+		return Result.success(
+			memberMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), messageId));
+	}
 
 }
