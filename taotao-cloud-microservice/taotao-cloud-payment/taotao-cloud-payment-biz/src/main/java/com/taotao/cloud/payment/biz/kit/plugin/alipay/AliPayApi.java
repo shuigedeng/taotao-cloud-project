@@ -21,9 +21,6 @@ import java.util.Map;
 
 /**
  * 支付宝支付
- *
- * @author Chopper
- * @since 2020/12/15 19:26
  */
 
 public class AliPayApi {

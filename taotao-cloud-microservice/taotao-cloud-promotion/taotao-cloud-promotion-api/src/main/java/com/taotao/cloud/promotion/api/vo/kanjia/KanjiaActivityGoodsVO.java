@@ -1,14 +1,10 @@
 package com.taotao.cloud.promotion.api.vo.kanjia;
 
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 砍价商品视图对象
- *
- * 
- * @date 2021/1/13
  **/
 @Data
 public class KanjiaActivityGoodsVO {

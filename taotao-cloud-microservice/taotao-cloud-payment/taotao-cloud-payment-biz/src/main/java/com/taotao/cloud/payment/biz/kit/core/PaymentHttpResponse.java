@@ -12,8 +12,6 @@ import java.util.Map;
 /**
  * 支付接口响应
  *
- * @author Chopper
- * @since 2020/12/18 15:13
  */
 public class PaymentHttpResponse implements Serializable {
     private static final long serialVersionUID = 6089103955998013402L;

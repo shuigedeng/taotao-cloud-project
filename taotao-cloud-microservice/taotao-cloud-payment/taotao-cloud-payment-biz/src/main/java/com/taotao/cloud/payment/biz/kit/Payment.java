@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 支付接口
- *
- * @author Chopper
- * @since 2020-12-21 09:32
  */
 public interface Payment {
     /**

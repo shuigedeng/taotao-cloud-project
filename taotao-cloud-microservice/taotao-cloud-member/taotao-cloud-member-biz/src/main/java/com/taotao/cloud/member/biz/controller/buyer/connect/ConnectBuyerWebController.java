@@ -28,8 +28,6 @@ import java.io.IOException;
 
 /**
  * 买家端,web联合登录
- *
- * @author Chopper
  */
 @Slf4j
 @RestController

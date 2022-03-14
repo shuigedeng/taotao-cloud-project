@@ -1,13 +1,10 @@
 package com.taotao.cloud.report.api.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 商品统计查询参数
- *
- * @author Chopper
- * @since 2020/11/17 7:34 下午
  */
 @Data
 public class GoodsStatisticsQueryParam extends StatisticsQueryParam {

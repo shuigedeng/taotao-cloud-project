@@ -1,18 +1,13 @@
 package com.taotao.cloud.promotion.api.vo.kanjia;
 
-import cn.lili.modules.promotion.entity.dos.KanjiaActivity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 砍价活动参与实体类
- *
- * @author qiuqiu
- * @date 2020-7-1 10:44 上午
  */
 @Data
-@ApiModel(value = "砍价活动VO")
+@Schema(description = "砍价活动VO")
 public class KanjiaActivityVO extends KanjiaActivity {
 
     @Schema(description =  "是否可以砍价")

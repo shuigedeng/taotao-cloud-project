@@ -29,10 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * WalletPlugin
- *
- * @author Chopper
- * @version v1.0
- * 2021-02-20 10:14
  */
 @Slf4j
 @Component

@@ -15,9 +15,6 @@ import java.util.List;
 
 /**
  * 买家端,app/小程序 联合登录
- *
- * @author Chopper
- * @since 2020-11-25 19:29
  */
 @RestController
 @Api(tags = "买家端,app/小程序 联合登录")

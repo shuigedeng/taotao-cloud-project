@@ -13,9 +13,6 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 结算单数据处理层
- *
- * @author Chopper
- * @since 2020/11/17 4:27 下午
  */
 public interface BillStatisticsMapper extends BaseMapper<Bill> {
 

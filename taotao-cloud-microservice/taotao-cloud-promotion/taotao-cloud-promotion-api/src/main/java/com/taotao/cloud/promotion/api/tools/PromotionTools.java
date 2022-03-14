@@ -2,14 +2,9 @@ package com.taotao.cloud.promotion.api.tools;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-import cn.lili.modules.promotion.entity.dto.BasePromotions;
-import cn.lili.modules.promotion.entity.enums.PromotionsStatusEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +14,6 @@ import java.util.function.Consumer;
 /**
  * 优惠活动通用验证类
  *
- * 
- * @since 2020/8/18
  **/
 public class PromotionTools {
 

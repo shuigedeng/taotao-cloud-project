@@ -1,13 +1,10 @@
 package com.taotao.cloud.report.api.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 统计查询参数
- *
- * @author Bulbasaur
- * @since 2020/12/9 14:20
  */
 @Data
 public class StatisticsQueryParam {

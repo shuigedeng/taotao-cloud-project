@@ -3,8 +3,6 @@ package com.taotao.cloud.promotion.api.enums;
 /**
  * 促销活动申请状态枚举
  *
- * 
- * @since 2020-03-19 9:36 上午
  */
 public enum PromotionsApplyStatusEnum {
 

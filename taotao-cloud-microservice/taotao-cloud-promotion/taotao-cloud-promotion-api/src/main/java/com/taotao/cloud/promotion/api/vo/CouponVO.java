@@ -1,9 +1,6 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import cn.lili.modules.promotion.entity.dos.Coupon;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,12 +12,10 @@ import java.util.List;
 /**
  * 优惠券视图对象
  *
- * 
- * @since 2020/8/14
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel(value = "优惠券")
+@Schema(description = "优惠券")
 @ToString(callSuper = true)
 @NoArgsConstructor
 public class CouponVO extends Coupon {

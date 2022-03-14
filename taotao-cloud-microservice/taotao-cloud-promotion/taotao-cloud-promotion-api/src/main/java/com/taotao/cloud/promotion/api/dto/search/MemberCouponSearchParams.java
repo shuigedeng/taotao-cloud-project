@@ -1,12 +1,11 @@
 package com.taotao.cloud.promotion.api.dto.search;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.modules.promotion.entity.enums.CouponGetEnum;
-import cn.lili.modules.promotion.entity.enums.CouponTypeEnum;
-import cn.lili.modules.promotion.entity.enums.MemberCouponStatusEnum;
-import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
+import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,9 +14,6 @@ import java.util.Date;
 
 /**
  * 会员优惠券查询通用类
- *
- * @author paulG
- * @since 2020/8/14
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data

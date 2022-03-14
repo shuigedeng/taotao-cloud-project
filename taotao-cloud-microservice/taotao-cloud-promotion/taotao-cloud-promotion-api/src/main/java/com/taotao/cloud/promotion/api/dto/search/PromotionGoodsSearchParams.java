@@ -1,9 +1,9 @@
 package com.taotao.cloud.promotion.api.dto.search;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,9 +12,6 @@ import java.util.List;
 
 /**
  * 促销商品查询通用类
- *
- * @author paulG
- * @since 2021/2/21
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data

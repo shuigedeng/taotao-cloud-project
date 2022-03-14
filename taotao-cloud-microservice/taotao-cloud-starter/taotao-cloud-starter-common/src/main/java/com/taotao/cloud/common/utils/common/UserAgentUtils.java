@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 客户端类型统计
  *
- * @author Chopper
- * @version v1.0
- * 2021-02-26 10:53
  */
 public class UserAgentUtils {
 

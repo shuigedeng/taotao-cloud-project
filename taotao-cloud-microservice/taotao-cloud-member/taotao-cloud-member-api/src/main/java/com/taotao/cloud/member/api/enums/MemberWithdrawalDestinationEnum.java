@@ -2,9 +2,6 @@ package com.taotao.cloud.member.api.enums;
 
 /**
  * 会员提现到哪里 枚举
- *
- * @author Chopper
- * @since 2021/3/20 10:44
  */
 
 public enum MemberWithdrawalDestinationEnum {

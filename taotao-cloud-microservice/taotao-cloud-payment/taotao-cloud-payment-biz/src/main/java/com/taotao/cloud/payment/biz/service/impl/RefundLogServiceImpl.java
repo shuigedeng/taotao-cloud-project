@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 /**
  * 退款日志 业务实现
  *
- * @author Chopper
- * @since 2020-12-19 09:25
  */
 @Service
 public class RefundLogServiceImpl extends ServiceImpl<RefundLogMapper, RefundLog> implements RefundLogService {

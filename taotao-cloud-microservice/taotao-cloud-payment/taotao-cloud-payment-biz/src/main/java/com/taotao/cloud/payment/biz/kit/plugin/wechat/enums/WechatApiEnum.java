@@ -3,8 +3,6 @@ package com.taotao.cloud.payment.biz.kit.plugin.wechat.enums;
 /**
  * 微信api列表
  *
- * @author Chopper
- * @since 2020/12/17 17:43
  */
 public enum WechatApiEnum {
 

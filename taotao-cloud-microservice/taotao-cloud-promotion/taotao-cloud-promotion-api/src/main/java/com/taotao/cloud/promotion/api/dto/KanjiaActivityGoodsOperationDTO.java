@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.api.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -12,9 +12,6 @@ import java.util.List;
 
 /**
  * 砍价活动商品操作DTO
- *
- * @author qiuqiu
- * @date 2020/8/21
  **/
 @Data
 public class KanjiaActivityGoodsOperationDTO implements Serializable {

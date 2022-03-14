@@ -1,17 +1,13 @@
 package com.taotao.cloud.promotion.api.vo.kanjia;
 
 import cn.hutool.core.util.StrUtil;
-import cn.lili.modules.promotion.entity.vos.BasePromotionsSearchParams;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * 砍价活动搜索参数
- *
- * 
- * @date: 2021/7/13 2:41 下午
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

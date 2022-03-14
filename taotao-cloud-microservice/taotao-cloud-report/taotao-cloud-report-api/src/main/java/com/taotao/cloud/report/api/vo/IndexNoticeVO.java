@@ -1,13 +1,10 @@
 package com.taotao.cloud.report.api.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 消息提示
- *
- * @author Bulbasaur
- * @since 2020/12/9 14:25
  */
 @Data
 public class IndexNoticeVO {

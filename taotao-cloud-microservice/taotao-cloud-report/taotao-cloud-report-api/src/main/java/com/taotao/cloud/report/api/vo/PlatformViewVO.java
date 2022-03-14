@@ -1,16 +1,13 @@
 package com.taotao.cloud.report.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
 
 /**
  * 流量数据展示VO
- *
- * @author Chopper
- * @since 2020-06-19 17:50
  */
 @Data
 public class PlatformViewVO {

@@ -4,7 +4,6 @@ package com.taotao.cloud.promotion.api.enums;
  * 促销适用范围类型枚举
  *
  *
- * @since 2020-03-19 9:36 上午
  */
 public enum PromotionsScopeTypeEnum {
 

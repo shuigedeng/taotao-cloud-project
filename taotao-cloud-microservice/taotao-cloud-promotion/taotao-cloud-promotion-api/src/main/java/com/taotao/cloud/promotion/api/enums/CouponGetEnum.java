@@ -2,9 +2,6 @@ package com.taotao.cloud.promotion.api.enums;
 
 /**
  * 优惠券获取方式枚举
- *
- * 
- * @since 2020-03-19 9:36 上午
  */
 public enum CouponGetEnum {
 

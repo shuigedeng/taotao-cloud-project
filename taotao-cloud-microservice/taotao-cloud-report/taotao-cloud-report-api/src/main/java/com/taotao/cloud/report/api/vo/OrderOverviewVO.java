@@ -1,13 +1,10 @@
 package com.taotao.cloud.report.api.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 订单统计概述
- *
- * @author Chopper
- * @since 2021-03-03 10:27
  */
 @Data
 public class OrderOverviewVO {

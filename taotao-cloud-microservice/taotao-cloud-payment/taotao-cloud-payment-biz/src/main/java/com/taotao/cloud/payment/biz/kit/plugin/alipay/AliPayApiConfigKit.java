@@ -18,8 +18,6 @@ import java.util.Date;
 /**
  * AliPayApiConfigKit
  *
- * @author Chopper
- * @since 2020-12-16 09:31
  */
 public class AliPayApiConfigKit {
 

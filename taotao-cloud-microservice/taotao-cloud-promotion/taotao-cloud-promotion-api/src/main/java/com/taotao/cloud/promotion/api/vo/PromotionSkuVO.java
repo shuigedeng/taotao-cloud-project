@@ -1,6 +1,5 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import cn.lili.common.enums.PromotionTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +7,6 @@ import lombok.NoArgsConstructor;
 /**
  * 促销skuVO
  *
- *
- * @version v1.0
- * 2021-08-28 03:24
  */
 @Data
 @AllArgsConstructor

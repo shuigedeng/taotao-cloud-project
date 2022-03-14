@@ -57,9 +57,6 @@ import java.util.Objects;
 
 /**
  * 微信支付
- *
- * @author Chopper
- * @since 2020/12/21 17:44
  */
 @Slf4j
 @Component

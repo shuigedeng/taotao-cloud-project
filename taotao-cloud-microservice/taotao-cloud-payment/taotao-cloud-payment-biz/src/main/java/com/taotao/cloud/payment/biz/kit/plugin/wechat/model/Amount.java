@@ -5,9 +5,6 @@ import lombok.experimental.Accessors;
 
 /**
  * 统一下单-订单金额
- *
- * @author Chopper
- * @since 2020/12/17 17:44
  */
 @Data
 @Accessors(chain = true)
