@@ -1,15 +1,16 @@
 package com.taotao.cloud.member.api.vo;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 
 /**
  * 会员发票查询VO
- *
- *
- * @since 2021-03-29 14:10:16
  */
+@Data
 @Schema(description = "会员发票查询VO")
 public class MemberReceiptVO {
 
@@ -31,44 +32,19 @@ public class MemberReceiptVO {
 	//	LambdaQueryWrapper<MemberReceipt> queryWrapper = new LambdaQueryWrapper<>();
 	//
 	//	//会员名称查询
-	//	if (StringUtils.isNotEmpty(memberName)) {
+	//	if (StringUtil.isNotEmpty(memberName)) {
 	//		queryWrapper.like(MemberReceipt::getMemberName, memberName);
 	//	}
 	//	//会员id查询
-	//	if (StringUtils.isNotEmpty(memberId)) {
+	//	if (StringUtil.isNotEmpty(memberId)) {
 	//		queryWrapper.eq(MemberReceipt::getMemberId, memberId);
 	//	}
 	//	//会员id查询
-	//	if (StringUtils.isNotEmpty(receiptType)) {
+	//	if (StringUtil.isNotEmpty(receiptType)) {
 	//		queryWrapper.eq(MemberReceipt::getReceiptType, receiptType);
 	//	}
 	//	queryWrapper.eq(MemberReceipt::getDeleteFlag, true);
 	//	queryWrapper.orderByDesc(MemberReceipt::getCreateTime);
 	//	return queryWrapper;
 	//}
-
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public String getReceiptType() {
-		return receiptType;
-	}
-
-	public void setReceiptType(String receiptType) {
-		this.receiptType = receiptType;
-	}
 }

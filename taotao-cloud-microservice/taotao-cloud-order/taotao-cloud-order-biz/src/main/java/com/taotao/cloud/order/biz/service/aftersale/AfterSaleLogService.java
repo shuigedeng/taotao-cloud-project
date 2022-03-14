@@ -6,6 +6,10 @@ import java.util.List;
 
 /**
  * 订单日志业务层
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-14 11:20:47
  */
 public interface AfterSaleLogService extends IService<AfterSaleLog> {
 

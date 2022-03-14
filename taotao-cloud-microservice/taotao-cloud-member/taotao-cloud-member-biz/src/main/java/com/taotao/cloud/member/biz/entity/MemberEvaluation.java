@@ -5,6 +5,7 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.Data;
 
 /**
  * 会员商品评价表
@@ -13,6 +14,7 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:07:11
  */
+@Data
 @Entity
 @Table(name = MemberEvaluation.TABLE_NAME)
 @TableName(MemberEvaluation.TABLE_NAME)
@@ -177,180 +179,4 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	//    //默认开启评价
 	//    this.status=SwitchEnum.OPEN.name();
 	//}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public String getMemberProfile() {
-		return memberProfile;
-	}
-
-	public void setMemberProfile(String memberProfile) {
-		this.memberProfile = memberProfile;
-	}
-
-	public String getGoodsName() {
-		return goodsName;
-	}
-
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
-	}
-
-	public String getGoodsImage() {
-		return goodsImage;
-	}
-
-	public void setGoodsImage(String goodsImage) {
-		this.goodsImage = goodsImage;
-	}
-
-	public String getOrderNo() {
-		return orderNo;
-	}
-
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
-
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getImages() {
-		return images;
-	}
-
-	public void setImages(String images) {
-		this.images = images;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getReply() {
-		return reply;
-	}
-
-	public void setReply(String reply) {
-		this.reply = reply;
-	}
-
-	public String getReplyImage() {
-		return replyImage;
-	}
-
-	public void setReplyImage(String replyImage) {
-		this.replyImage = replyImage;
-	}
-
-	public Boolean getHaveImage() {
-		return haveImage;
-	}
-
-	public void setHaveImage(Boolean haveImage) {
-		this.haveImage = haveImage;
-	}
-
-	public Boolean getHaveReplyImage() {
-		return haveReplyImage;
-	}
-
-	public void setHaveReplyImage(Boolean haveReplyImage) {
-		this.haveReplyImage = haveReplyImage;
-	}
-
-	public Boolean getReplyStatus() {
-		return replyStatus;
-	}
-
-	public void setReplyStatus(Boolean replyStatus) {
-		this.replyStatus = replyStatus;
-	}
-
-	public Integer getDeliveryScore() {
-		return deliveryScore;
-	}
-
-	public void setDeliveryScore(Integer deliveryScore) {
-		this.deliveryScore = deliveryScore;
-	}
-
-	public Integer getServiceScore() {
-		return serviceScore;
-	}
-
-	public void setServiceScore(Integer serviceScore) {
-		this.serviceScore = serviceScore;
-	}
-
-	public Integer getDescriptionScore() {
-		return descriptionScore;
-	}
-
-	public void setDescriptionScore(Integer descriptionScore) {
-		this.descriptionScore = descriptionScore;
-	}
 }

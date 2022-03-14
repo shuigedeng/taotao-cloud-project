@@ -2,18 +2,25 @@ package com.taotao.cloud.member.api.dto;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 评价查询条件
  *
- * 
- * @since 2020/11/30 14:52
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-14 11:22:15
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Schema(description = "评价查询条件")
-//public class EvaluationQueryParams extends PageVO {
-public class EvaluationQueryParams {
+public class EvaluationQueryParams extends PageParam implements Serializable {
 
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "买家ID")
 	private String memberId;
@@ -52,6 +59,13 @@ public class EvaluationQueryParams {
 
 	}
 
+	/**
+	 * 构造查询条件
+	 *
+	 * @return 查询条件
+	 * @author shuigedeng
+	 * @since 2022/3/14 11:22
+	 */
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
 		if (StringUtils.isNotEmpty(startTime) && StringUtils.isNotEmpty(endTime)) {
@@ -87,93 +101,5 @@ public class EvaluationQueryParams {
 		queryWrapper.eq("delete_flag", false);
 		queryWrapper.orderByDesc("create_time");
 		return queryWrapper;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getGoodsName() {
-		return goodsName;
-	}
-
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
-
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-
-	public String getHaveImage() {
-		return haveImage;
-	}
-
-	public void setHaveImage(String haveImage) {
-		this.haveImage = haveImage;
-	}
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 }

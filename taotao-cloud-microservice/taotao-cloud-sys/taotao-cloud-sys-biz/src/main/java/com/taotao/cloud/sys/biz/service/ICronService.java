@@ -27,5 +27,6 @@ import javax.validation.constraints.NotNull;
  */
 public interface ICronService {
 
+
 	List<String> cronNextExecutionTime(@NotNull String expression);
 }

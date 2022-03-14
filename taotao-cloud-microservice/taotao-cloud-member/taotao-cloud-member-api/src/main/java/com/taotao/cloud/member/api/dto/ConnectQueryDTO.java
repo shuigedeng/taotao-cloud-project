@@ -1,55 +1,28 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import lombok.Data;
 
 /**
- * ConnectQueryDTO
+ * 联合登录查询dto
  *
- * 
- * @version v1.0 2021-12-01 14:34
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-14 11:21:35
  */
-@Schema(description = "ConnectQueryDTO")
-public class ConnectQueryDTO {
+@Data
+@Schema(description = "联合登录查询dto")
+public class ConnectQueryDTO implements Serializable {
 
-	/**
-	 * 用户id
-	 */
+	private static final long serialVersionUID = -7605952923416404638L;
+
 	@Schema(description = "租户id")
 	private String userId;
 
-	/**
-	 * 第三方id
-	 */
 	@Schema(description = "租户id")
 	private String unionId;
 
-	/**
-	 * 联合登陆类型
-	 */
 	@Schema(description = "租户id")
 	private String unionType;
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUnionId() {
-		return unionId;
-	}
-
-	public void setUnionId(String unionId) {
-		this.unionId = unionId;
-	}
-
-	public String getUnionType() {
-		return unionType;
-	}
-
-	public void setUnionType(String unionType) {
-		this.unionType = unionType;
-	}
 }

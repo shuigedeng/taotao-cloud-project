@@ -2,22 +2,27 @@ package com.taotao.cloud.member.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 会员信息修改DTO
  *
- * 
- * @since 2020/12/11 14:39
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-14 11:25:33
  */
+@Data
 @Schema(description = "会员信息修改DTO")
-public class MemberEditDTO {
+public class MemberEditDTO implements Serializable {
 
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "昵称", required = true)
 	@Size(min = 2, max = 20, message = "会员昵称必须为2到20位之间")
@@ -45,60 +50,4 @@ public class MemberEditDTO {
 
 	@Schema(description = "会员头像")
 	private String face;
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
-	public String getRegionId() {
-		return regionId;
-	}
-
-	public void setRegionId(String regionId) {
-		this.regionId = regionId;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public Integer getSex() {
-		return sex;
-	}
-
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getFace() {
-		return face;
-	}
-
-	public void setFace(String face) {
-		this.face = face;
-	}
 }

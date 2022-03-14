@@ -43,6 +43,7 @@ import org.springframework.data.domain.Sort.Order;
  */
 @Schema(name = "PageQuery", description = "通用分页查询Query")
 public record PageQuery<QueryDTO>(
+
 	/**
 	 * 当前第几页
 	 */
@@ -51,6 +52,7 @@ public record PageQuery<QueryDTO>(
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
 	Integer currentPage,
+
 	/**
 	 * 每页显示条数
 	 */
@@ -59,6 +61,7 @@ public record PageQuery<QueryDTO>(
 	@Min(value = 5)
 	@Max(value = 100)
 	Integer pageSize,
+
 	/**
 	 * 查询参数
 	 */
