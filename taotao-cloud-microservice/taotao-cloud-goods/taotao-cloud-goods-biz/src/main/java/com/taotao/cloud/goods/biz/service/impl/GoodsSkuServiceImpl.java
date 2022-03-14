@@ -113,7 +113,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 			// 添加商品sku
 			newSkuList = this.addGoodsSku(skuList, goods);
 		} else {
-			throw new ServiceException(ResultCode.MUST_HAVE_GOODS_SKU);
+			throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
 		}
 
 		this.updateStock(newSkuList);
@@ -127,7 +127,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	public void update(List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag) {
 		// 是否存在规格
 		if (skuList == null || skuList.isEmpty()) {
-			throw new ServiceException(ResultCode.MUST_HAVE_GOODS_SKU);
+			throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
 		}
 		List<GoodsSku> newSkuList;
 		//删除旧的sku信息
@@ -238,14 +238,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		GoodsSku goodsSku = this.getGoodsSkuByIdFromCache(skuId);
 		//如果使用商品ID无法查询SKU则返回错误
 		if (goodsVO == null || goodsSku == null) {
-			throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
 		//商品下架||商品未审核通过||商品删除，则提示：商品已下架
 		if (GoodsStatusEnum.DOWN.name().equals(goodsVO.getMarketEnable())
 			|| !GoodsAuthEnum.PASS.name().equals(goodsVO.getAuthFlag())
 			|| Boolean.TRUE.equals(goodsVO.getDeleteFlag())) {
-			throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
 		//获取当前商品的索引信息

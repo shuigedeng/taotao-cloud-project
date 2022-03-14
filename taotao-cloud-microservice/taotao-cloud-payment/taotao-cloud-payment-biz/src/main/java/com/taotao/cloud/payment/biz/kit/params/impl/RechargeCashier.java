@@ -62,7 +62,7 @@ public class RechargeCashier implements CashierExecute {
 
             //如果订单已支付，则不能发器支付
             if (recharge.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-                throw new ServiceException(ResultCode.PAY_DOUBLE_ERROR);
+                throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
             }
 
 
@@ -89,7 +89,7 @@ public class RechargeCashier implements CashierExecute {
             if (recharge != null) {
                 return recharge.getPayStatus().equals(PayStatusEnum.PAID.name());
             } else {
-                throw new ServiceException(ResultCode.PAY_NOT_EXIST_ORDER);
+                throw new BusinessException(ResultEnum.PAY_NOT_EXIST_ORDER);
             }
         }
         return false;

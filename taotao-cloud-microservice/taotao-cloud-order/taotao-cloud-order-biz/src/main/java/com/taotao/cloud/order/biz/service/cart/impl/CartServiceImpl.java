@@ -95,7 +95,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void add(String skuId, Integer num, String cartType, Boolean cover) {
 		if (num <= 0) {
-			throw new ServiceException(ResultCode.CART_NUM_ERROR);
+			throw new BusinessException(ResultEnum.CART_NUM_ERROR);
 		}
 		CartTypeEnum cartTypeEnum = getCartType(cartType);
 		GoodsSku dataSku = checkGoods(skuId, cartType);
@@ -174,7 +174,7 @@ public class CartServiceImpl implements CartService {
 			throw serviceException;
 		} catch (Exception e) {
 			log.error("购物车渲染异常", e);
-			throw new ServiceException(errorMessage);
+			throw new BusinessException(errorMessage);
 		}
 	}
 
@@ -191,7 +191,7 @@ public class CartServiceImpl implements CartService {
 			AuthUser currentUser = UserContext.getCurrentUser();
 			return cartTypeEnum.getPrefix() + currentUser.getId();
 		}
-		throw new ServiceException(ResultCode.ERROR);
+		throw new BusinessException(ResultEnum.ERROR);
 	}
 
 	@Override
@@ -369,11 +369,11 @@ public class CartServiceImpl implements CartService {
 	private GoodsSku checkGoods(String skuId, String cartType) {
 		GoodsSku dataSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
 		if (dataSku == null) {
-			throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		if (!GoodsAuthEnum.PASS.name().equals(dataSku.getIsAuth()) || !GoodsStatusEnum.UPPER.name()
 			.equals(dataSku.getMarketEnable())) {
-			throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		Double validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.SECKILL.name()));
@@ -402,7 +402,7 @@ public class CartServiceImpl implements CartService {
 
 		//如果sku的可用库存小于等于0或者小于用户购买的数量，则不允许购买
 		if (enableStock <= 0 || enableStock < num) {
-			throw new ServiceException(ResultCode.GOODS_SKU_QUANTITY_NOT_ENOUGH);
+			throw new BusinessException(ResultEnum.GOODS_SKU_QUANTITY_NOT_ENOUGH);
 		}
 
 		if (enableStock <= num) {
@@ -509,7 +509,7 @@ public class CartServiceImpl implements CartService {
 					.eq(MemberCoupon::getMemberId, currentUser.getId())
 					.eq(MemberCoupon::getId, couponId));
 		if (memberCoupon == null) {
-			throw new ServiceException(ResultCode.COUPON_EXPIRED);
+			throw new BusinessException(ResultEnum.COUPON_EXPIRED);
 		}
 		//使用优惠券 与否
 		if (use) {
@@ -536,7 +536,7 @@ public class CartServiceImpl implements CartService {
 		tradeDTO.setParentOrderSn(tradeParams.getParentOrderSn());
 		//订单无收货地址校验
 		if (tradeDTO.getMemberAddress() == null) {
-			throw new ServiceException(ResultCode.MEMBER_ADDRESS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.MEMBER_ADDRESS_NOT_EXIST);
 		}
 		//将购物车信息写入缓存，后续逻辑调用校验
 		this.resetTradeDTO(tradeDTO);
@@ -716,13 +716,13 @@ public class CartServiceImpl implements CartService {
 		} else {
 			//如果拼团活动被异常处理，则在这里安排mq重新写入商品索引
 			goodsSkuService.generateEs(goodsService.getById(cartSkuVO.getGoodsSku().getGoodsId()));
-			throw new ServiceException(ResultCode.CART_PINTUAN_NOT_EXIST_ERROR);
+			throw new BusinessException(ResultEnum.CART_PINTUAN_NOT_EXIST_ERROR);
 		}
 		//检测拼团限购数量
 		Pintuan pintuan = pintuanService.getById(cartSkuVO.getPintuanId());
 		Integer limitNum = pintuan.getLimitNum();
 		if (limitNum != 0 && cartSkuVO.getNum() > limitNum) {
-			throw new ServiceException(ResultCode.CART_PINTUAN_LIMIT_ERROR);
+			throw new BusinessException(ResultEnum.CART_PINTUAN_LIMIT_ERROR);
 		}
 	}
 
@@ -748,12 +748,12 @@ public class CartServiceImpl implements CartService {
 		//校验砍价活动是否满足条件
 		//判断发起砍价活动
 		if (kanjiaActivity == null) {
-			throw new ServiceException(ResultCode.KANJIA_ACTIVITY_NOT_FOUND_ERROR);
+			throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_NOT_FOUND_ERROR);
 			//判断砍价活动是否已满足条件
 		} else if (!KanJiaStatusEnum.SUCCESS.name().equals(kanjiaActivity.getStatus())) {
 			cartSkuVO.setKanjiaId(kanjiaActivity.getId());
 			cartSkuVO.setPurchasePrice(0D);
-			throw new ServiceException(ResultCode.KANJIA_ACTIVITY_NOT_PASS_ERROR);
+			throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_NOT_PASS_ERROR);
 		}
 		//砍价商品默认一件货物
 		cartSkuVO.setKanjiaId(kanjiaActivity.getId());
@@ -773,7 +773,7 @@ public class CartServiceImpl implements CartService {
 		if (pointsGoodsVO != null) {
 
 			if (pointsGoodsVO.getActiveStock() < 1) {
-				throw new ServiceException(ResultCode.POINT_GOODS_ACTIVE_STOCK_INSUFFICIENT);
+				throw new BusinessException(ResultEnum.POINT_GOODS_ACTIVE_STOCK_INSUFFICIENT);
 			}
 			cartSkuVO.setPoint(pointsGoodsVO.getPoints());
 			cartSkuVO.setPurchasePrice(0D);

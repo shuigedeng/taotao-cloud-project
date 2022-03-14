@@ -73,7 +73,7 @@ public class StatisticsDateUtil {
                 dateArray[1] = calendar.getTime();
                 break;
             default:
-                throw new ServiceException(ResultCode.ERROR);
+                throw new BusinessException(ResultEnum.ERROR);
         }
         return dateArray;
     }

@@ -158,11 +158,11 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
         Bill bill = this.getById(id);
         //判断当前结算单状态为：出账
         if (!bill.getBillStatus().equals(BillStatusEnum.OUT.name())) {
-            throw new ServiceException(ResultCode.BILL_CHECK_ERROR);
+            throw new BusinessException(ResultEnum.BILL_CHECK_ERROR);
         }
         //判断操作人员为商家
         if (!UserContext.getCurrentUser().getRole().equals(UserEnums.STORE)) {
-            throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+            throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
         LambdaUpdateWrapper<Bill> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
         lambdaUpdateWrapper.eq(Bill::getId, id);
@@ -175,11 +175,11 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
         Bill bill = this.getById(id);
         //判断当前结算单状态为：已核对
         if (!bill.getBillStatus().equals(BillStatusEnum.CHECK.name())) {
-            throw new ServiceException(ResultCode.BILL_COMPLETE_ERROR);
+            throw new BusinessException(ResultEnum.BILL_COMPLETE_ERROR);
         }
         //判断操作人员为后台管理员
         if (!UserContext.getCurrentUser().getRole().equals(UserEnums.MANAGER)) {
-            throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+            throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
         LambdaUpdateWrapper<Bill> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
         lambdaUpdateWrapper.eq(Bill::getId, id);

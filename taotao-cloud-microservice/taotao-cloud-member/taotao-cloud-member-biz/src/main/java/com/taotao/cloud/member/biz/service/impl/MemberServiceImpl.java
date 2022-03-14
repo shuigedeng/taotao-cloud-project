@@ -95,7 +95,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         if (tokenUser != null) {
             return this.findByUsername(tokenUser.getUsername());
         }
-        throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+        throw new ServiceException(ResultEnum.USER_NOT_LOGIN);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         queryWrapper.eq("mobile", mobile);
         Member member = this.baseMapper.selectOne(queryWrapper);
         if (member == null) {
-            throw new ServiceException(ResultCode.USER_NOT_PHONE);
+            throw new ServiceException(ResultEnum.USER_NOT_PHONE);
         }
         cache.put(CachePrefix.FIND_MOBILE + uuid, mobile, 300L);
 
@@ -116,11 +116,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         Member member = this.findMember(username);
         //判断用户是否存在
         if (member == null || !member.getDisabled()) {
-            throw new ServiceException(ResultCode.USER_NOT_EXIST);
+            throw new ServiceException(ResultEnum.USER_NOT_EXIST);
         }
         //判断密码是否输入正确
         if (!new BCryptPasswordEncoder().matches(password, member.getPassword())) {
-            throw new ServiceException(ResultCode.USER_PASSWORD_ERROR);
+            throw new ServiceException(ResultEnum.USER_PASSWORD_ERROR);
         }
         loginBindUser(member);
         return memberTokenGenerate.createToken(member.getUsername(), false);
@@ -132,20 +132,20 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         Member member = this.findMember(username);
         //判断用户是否存在
         if (member == null || !member.getDisabled()) {
-            throw new ServiceException(ResultCode.USER_NOT_EXIST);
+            throw new ServiceException(ResultEnum.USER_NOT_EXIST);
         }
         //判断密码是否输入正确
         if (!new BCryptPasswordEncoder().matches(password, member.getPassword())) {
-            throw new ServiceException(ResultCode.USER_PASSWORD_ERROR);
+            throw new ServiceException(ResultEnum.USER_PASSWORD_ERROR);
         }
         //对店铺状态的判定处理
         if (Boolean.TRUE.equals(member.getHaveStore())) {
             Store store = storeService.getById(member.getStoreId());
             if (!store.getStoreDisable().equals(StoreStatusEnum.OPEN.name())) {
-                throw new ServiceException(ResultCode.STORE_CLOSE_ERROR);
+                throw new ServiceException(ResultEnum.STORE_CLOSE_ERROR);
             }
         } else {
-            throw new ServiceException(ResultCode.USER_NOT_EXIST);
+            throw new ServiceException(ResultEnum.USER_NOT_EXIST);
         }
 
         return storeTokenGenerate.createToken(member.getUsername(), false);
@@ -187,7 +187,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
             throw e;
         } catch (Exception e) {
             log.error("自动注册异常：", e);
-            throw new ServiceException(ResultCode.USER_AUTO_REGISTER_ERROR);
+            throw new ServiceException(ResultEnum.USER_AUTO_REGISTER_ERROR);
         }
     }
 
@@ -239,12 +239,12 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     public Member modifyPass(String oldPassword, String newPassword) {
         AuthUser tokenUser = UserContext.getCurrentUser();
         if (tokenUser == null) {
-            throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+            throw new ServiceException(ResultEnum.USER_NOT_LOGIN);
         }
         Member member = this.getById(tokenUser.getId());
         //判断旧密码输入是否正确
         if (!new BCryptPasswordEncoder().matches(oldPassword, member.getPassword())) {
-            throw new ServiceException(ResultCode.USER_OLD_PASSWORD_ERROR);
+            throw new ServiceException(ResultEnum.USER_OLD_PASSWORD_ERROR);
         }
         //修改会员密码
         LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
@@ -277,7 +277,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
         //判断是否用户登录并且会员ID为当前登录会员ID
         if (!Objects.equals(tokenUser.getId(), member.getId())) {
-            throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+            throw new ServiceException(ResultEnum.USER_NOT_LOGIN);
         }
         //修改会员手机号
         LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
@@ -297,7 +297,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
             lambdaUpdateWrapper.set(Member::getPassword, new BCryptPasswordEncoder().encode(password));
             return this.update(lambdaUpdateWrapper);
         } else {
-            throw new ServiceException(ResultCode.USER_PHONE_NOT_EXIST);
+            throw new ServiceException(ResultEnum.USER_PHONE_NOT_EXIST);
         }
 
     }
@@ -321,7 +321,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         //判断是否用户登录并且会员ID为当前登录会员ID
         AuthUser tokenUser = UserContext.getCurrentUser();
         if (tokenUser == null) {
-            throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+            throw new ServiceException(ResultEnum.USER_NOT_LOGIN);
         }
         //过滤会员昵称敏感词
         if (com.baomidou.mybatisplus.core.toolkit.StringUtils.isNotBlank(managerMemberEditDTO.getNickName())) {
@@ -391,7 +391,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
             return false;
 
         }
-        throw new ServiceException(ResultCode.USER_NOT_EXIST);
+        throw new ServiceException(ResultEnum.USER_NOT_EXIST);
     }
 
     @Override
@@ -503,7 +503,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
             ConnectAuthUser connectAuthUser = getConnectAuthUser(uuid, connectType);
             if (connectAuthUser == null) {
-                throw new ServiceException(ResultCode.USER_OVERDUE_CONNECT_ERROR);
+                throw new ServiceException(ResultEnum.USER_OVERDUE_CONNECT_ERROR);
             }
             //检测是否已经绑定过用户
             Connect connect = connectService.queryConnect(
@@ -514,10 +514,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
                 connectAuthUser.setConnectEnum(authInterface);
                 return connectAuthUser;
             } else {
-                throw new ServiceException(ResultCode.USER_CONNECT_BANDING_ERROR);
+                throw new ServiceException(ResultEnum.USER_CONNECT_BANDING_ERROR);
             }
         } else {
-            throw new ServiceException(ResultCode.USER_CONNECT_NOT_EXIST_ERROR);
+            throw new ServiceException(ResultEnum.USER_CONNECT_NOT_EXIST_ERROR);
         }
     }
 
@@ -569,11 +569,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     private void checkMember(String userName, String mobilePhone) {
         //判断用户名是否存在
         if (findByUsername(userName) != null) {
-            throw new ServiceException(ResultCode.USER_NAME_EXIST);
+            throw new ServiceException(ResultEnum.USER_NAME_EXIST);
         }
         //判断手机号是否存在
         if (findByPhone(mobilePhone) != null) {
-            throw new ServiceException(ResultCode.USER_PHONE_EXIST);
+            throw new ServiceException(ResultEnum.USER_PHONE_EXIST);
         }
     }
 }

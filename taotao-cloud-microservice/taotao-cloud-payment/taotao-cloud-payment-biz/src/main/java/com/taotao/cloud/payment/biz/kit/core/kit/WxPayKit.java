@@ -135,7 +135,7 @@ public class WxPayKit {
         try {
             return PayKit.createSign(encrypt, privateKey);
         } catch (Exception e) {
-            throw new ServiceException(ResultCode.ERROR);
+            throw new BusinessException(ResultEnum.ERROR);
         }
     }
 

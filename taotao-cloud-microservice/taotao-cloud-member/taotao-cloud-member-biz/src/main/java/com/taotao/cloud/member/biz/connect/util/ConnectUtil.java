@@ -67,12 +67,12 @@ public class ConnectUtil {
                 token = connectService.unionLoginCallback(type, authUser, callback.getState());
                 resultMessage = ResultUtil.data(token);
             } catch (ServiceException e) {
-                throw new ServiceException(ResultCode.ERROR, e.getMessage());
+                throw new BusinessException(ResultEnum.ERROR, e.getMessage());
             }
         }
         //否则录入响应结果，等待前端获取信息
         else {
-            throw new ServiceException(ResultCode.ERROR, response.getMsg());
+            throw new BusinessException(ResultEnum.ERROR, response.getMsg());
         }
         //缓存写入登录结果，300秒有效
         cache.put(CachePrefix.CONNECT_RESULT.getPrefix() + callback.getCode(), resultMessage, 300L);
@@ -114,7 +114,7 @@ public class ConnectUtil {
     public AuthRequest getAuthRequest(String type) {
         ConnectAuthEnum authInterface = ConnectAuthEnum.valueOf(type);
         if (authInterface == null) {
-            throw new ServiceException(ResultCode.CONNECT_NOT_EXIST);
+            throw new BusinessException(ResultEnum.CONNECT_NOT_EXIST);
         }
         AuthRequest authRequest = null;
         switch (authInterface) {

@@ -201,7 +201,7 @@ public class WechatLivePlayerUtil {
             wechatAccessTokenUtil.removeAccessToken(ClientTypeEnum.WECHAT_MP);
             return this.doPostWithJson(url, map);
         } else {
-            throw new ServiceException(jsonObject.get("errmsg").toString());
+            throw new BusinessException(jsonObject.get("errmsg").toString());
         }
     }
 

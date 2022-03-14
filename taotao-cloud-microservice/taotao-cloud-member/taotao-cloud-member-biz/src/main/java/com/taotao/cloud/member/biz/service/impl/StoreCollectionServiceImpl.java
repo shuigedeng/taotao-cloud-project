@@ -59,7 +59,7 @@ public class StoreCollectionServiceImpl extends
 			storeService.updateStoreCollectionNum(new CollectionDTO(storeId, 1));
 			return memberStoreCollection;
 		}
-		throw new ServiceException(ResultCode.USER_COLLECTION_EXIST);
+		throw new BusinessException(ResultEnum.USER_COLLECTION_EXIST);
 	}
 
 	@Override

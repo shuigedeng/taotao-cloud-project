@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.google.gson.Gson;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.SeckillVO;
@@ -17,6 +20,10 @@ import com.taotao.cloud.promotion.biz.entity.SeckillApply;
 import com.taotao.cloud.promotion.biz.mapper.SeckillMapper;
 import com.taotao.cloud.promotion.biz.service.SeckillApplyService;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.setting.SeckillSetting;
+import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +35,6 @@ import java.util.List;
 /**
  * 秒杀活动业务层实现
  *
- *
- * @since 2020/8/21
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -45,7 +50,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
      * 设置
      */
     @Autowired
-    private SettingService settingService;
+    private IFeignSettingService settingService;
 
     @Autowired
     private SeckillApplyService seckillApplyService;
@@ -72,8 +77,8 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
         }
         this.remove(new QueryWrapper<>());
 
-        Setting setting = settingService.get(SettingEnum.SECKILL_SETTING.name());
-        SeckillSetting seckillSetting = new Gson().fromJson(setting.getSettingValue(), SeckillSetting.class);
+	    Result<SettingVO> settingResult = settingService.get(SettingEnum.SECKILL_SETTING.name());
+        SeckillSetting seckillSetting = new Gson().fromJson(settingResult.data().getSettingValue(), SeckillSetting.class);
 
         for (int i = 1; i <= PRE_CREATION; i++) {
             Seckill seckill = new Seckill(i, seckillSetting.getHours(), seckillSetting.getSeckillRule());
@@ -150,7 +155,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
     private Seckill checkSeckillExist(String id) {
         Seckill seckill = this.getById(id);
         if (seckill == null) {
-            throw new ServiceException(ResultCode.SECKILL_NOT_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.SECKILL_NOT_EXIST_ERROR);
         }
         return seckill;
     }
@@ -189,7 +194,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
             long sameNum = this.count(queryWrapper);
             //当前时间段是否存在同类活动
             if (sameNum > 0) {
-                throw new ServiceException(ResultCode.PROMOTION_SAME_ACTIVE_EXIST);
+                throw new BusinessException(ResultEnum.PROMOTION_SAME_ACTIVE_EXIST);
             }
         }
 

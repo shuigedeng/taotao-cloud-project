@@ -126,7 +126,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		}
 		//有正在初始化的任务，则提示异常
 		if (Boolean.TRUE.equals(flag)) {
-			throw new ServiceException(ResultCode.INDEX_BUILDING);
+			throw new BusinessException(ResultEnum.INDEX_BUILDING);
 		}
 
 		//初始化标识

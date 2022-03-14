@@ -55,11 +55,11 @@ public class OrderCashier implements CashierExecute {
 
             //如果订单已支付，则不能发器支付
             if (order.getOrder().getPayStatus().equals(PayStatusEnum.PAID.name())) {
-                throw new ServiceException(ResultCode.PAY_DOUBLE_ERROR);
+                throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
             }
             //如果订单状态不是待付款，则抛出异常
             if (!order.getOrder().getOrderStatus().equals(OrderStatusEnum.UNPAID.name())) {
-                throw new ServiceException(ResultCode.PAY_BAN);
+                throw new BusinessException(ResultEnum.PAY_BAN);
             }
             cashierParam.setPrice(order.getOrder().getFlowPrice());
 
@@ -108,7 +108,7 @@ public class OrderCashier implements CashierExecute {
             if (order != null) {
                 return PayStatusEnum.PAID.name().equals(order.getPayStatus());
             } else {
-                throw new ServiceException(ResultCode.PAY_NOT_EXIST_ORDER);
+                throw new BusinessException(ResultEnum.PAY_NOT_EXIST_ORDER);
             }
         }
         return false;

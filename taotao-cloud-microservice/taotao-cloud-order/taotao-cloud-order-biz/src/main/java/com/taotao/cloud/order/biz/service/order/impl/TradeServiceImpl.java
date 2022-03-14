@@ -113,7 +113,7 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
         //创建订单如果没有收获地址，
         MemberAddress memberAddress = tradeDTO.getMemberAddress();
         if (memberAddress == null) {
-            throw new ServiceException(ResultCode.MEMBER_ADDRESS_NOT_EXIST);
+            throw new BusinessException(ResultEnum.MEMBER_ADDRESS_NOT_EXIST);
         }
 
         /**
@@ -124,7 +124,7 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
             tradeDTO.getNotSupportFreight().forEach(sku -> {
                 stringBuilder.append(sku.getGoodsSku().getGoodsName());
             });
-            throw new ServiceException(ResultCode.ORDER_NOT_SUPPORT_DISTRIBUTION, stringBuilder.toString());
+            throw new BusinessException(ResultEnum.ORDER_NOT_SUPPORT_DISTRIBUTION, stringBuilder.toString());
         }
     }
 
@@ -189,7 +189,7 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
                     "订单【" + orderSns + "】创建，积分扣减");
 
             if (!result) {
-                throw new ServiceException(ResultCode.PAY_POINT_ENOUGH);
+                throw new BusinessException(ResultEnum.PAY_POINT_ENOUGH);
             }
         }
     }

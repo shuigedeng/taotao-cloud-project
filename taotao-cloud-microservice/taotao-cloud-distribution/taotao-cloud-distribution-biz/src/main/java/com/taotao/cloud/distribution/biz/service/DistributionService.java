@@ -2,6 +2,7 @@ package com.taotao.cloud.distribution.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
@@ -19,7 +20,7 @@ public interface DistributionService extends IService<Distribution> {
      * @param page                     分页
      * @return
      */
-    IPage<Distribution> distributionPage(DistributionSearchParams distributionSearchParams, PageVO page);
+    IPage<Distribution> distributionPage(DistributionSearchParams distributionSearchParams, PageParam page);
 
     /**
      * 获取当前登录的会员的分销员信息

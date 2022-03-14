@@ -94,7 +94,7 @@ public class PointsGoodsCategoryServiceImpl extends ServiceImpl<PointsGoodsCateg
         }
         if (this.getOne(queryWrapper) != null) {
             log.error("当前积分商品分类名称" + name + "已存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
     }
 
@@ -108,7 +108,7 @@ public class PointsGoodsCategoryServiceImpl extends ServiceImpl<PointsGoodsCateg
         PointsGoodsCategory category = this.getById(id);
         if (category == null) {
             log.error("积分商品分类id为" + id + "的分类不存在");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         return category;
     }

@@ -23,7 +23,7 @@ public interface Payment {
      * @return 移动支付所需参数
      */
     default Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**
@@ -34,7 +34,7 @@ public interface Payment {
      * @return 公众号内部支付参数
      */
     default Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**
@@ -45,7 +45,7 @@ public interface Payment {
      * @return app支付所需参数
      */
     default Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**
@@ -56,7 +56,7 @@ public interface Payment {
      * @return 二维码内容
      */
     default Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**
@@ -67,7 +67,7 @@ public interface Payment {
      * @return 二维码内容
      */
     default Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
 
@@ -77,7 +77,7 @@ public interface Payment {
      * @param refundLog 退款请求参数
      */
     default void refund(RefundLog refundLog) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
 
@@ -87,7 +87,7 @@ public interface Payment {
      * @param refundLog 支付参数
      */
     default void cancel(RefundLog refundLog) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
 
@@ -97,7 +97,7 @@ public interface Payment {
      * @param request HttpServletRequest
      */
     default void callBack(HttpServletRequest request) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**
@@ -106,7 +106,7 @@ public interface Payment {
      * @param request HttpServletRequest
      */
     default void notify(HttpServletRequest request) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**
@@ -115,7 +115,7 @@ public interface Payment {
      * @param request HttpServletRequest
      */
     default void refundNotify(HttpServletRequest request) {
-        throw new ServiceException(ResultCode.PAY_ERROR);
+        throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 
     /**

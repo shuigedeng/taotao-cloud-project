@@ -71,7 +71,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	public boolean addBrand(BrandDTO brandDTO) {
 		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName()))
 			!= null) {
-			throw new ServiceException(ResultCode.BRAND_NAME_EXIST_ERROR);
+			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
 		return this.save(BeanUtil.copy(brandDTO, Brand.class));
 	}
@@ -82,7 +82,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 
 		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName())
 			.ne(Brand::getId, brandDTO.getId())) != null) {
-			throw new ServiceException(ResultCode.BRAND_NAME_EXIST_ERROR);
+			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
 
 		return this.updateById(BeanUtil.copy(brandDTO, Brand.class));
@@ -119,7 +119,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		if (!categoryBrands.isEmpty()) {
 			List<String> categoryIds = categoryBrands.stream().map(CategoryBrand::getCategoryId)
 				.collect(Collectors.toList());
-			throw new ServiceException(ResultCode.BRAND_USE_DISABLE_ERROR,
+			throw new BusinessException(ResultEnum.BRAND_USE_DISABLE_ERROR,
 				JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
 		}
 
@@ -128,7 +128,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		if (!goods.isEmpty()) {
 			List<String> goodsNames = goods.stream().map(Goods::getGoodsName)
 				.collect(Collectors.toList());
-			throw new ServiceException(ResultCode.BRAND_BIND_GOODS_ERROR,
+			throw new BusinessException(ResultEnum.BRAND_BIND_GOODS_ERROR,
 				JSONUtil.toJsonStr(goodsNames));
 		}
 	}
@@ -143,7 +143,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		Brand brand = getById(brandId);
 		if (brand == null) {
 			log.error("品牌ID为" + brandId + "的品牌不存在");
-			throw new ServiceException(ResultCode.BRAND_NOT_EXIST);
+			throw new BusinessException(ResultEnum.BRAND_NOT_EXIST);
 		}
 		return brand;
 	}

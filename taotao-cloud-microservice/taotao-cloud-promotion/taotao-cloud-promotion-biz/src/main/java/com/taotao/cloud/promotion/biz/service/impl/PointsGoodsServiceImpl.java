@@ -58,7 +58,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
             if (this.checkSkuDuplicate(pointsGoods.getSkuId(), null) == null) {
                 pointsGoods.setPromotionName("积分商品活动");
             } else {
-                throw new ServiceException("商品id为" + pointsGoods.getSkuId() + "的商品已参加积分商品活动！");
+                throw new BusinessException("商品id为" + pointsGoods.getSkuId() + "的商品已参加积分商品活动！");
             }
             GoodsSku goodsSku = this.checkSkuExist(pointsGoods.getSkuId());
             pointsGoods.setStoreId(goodsSku.getStoreId());
@@ -112,7 +112,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
         for (String id : ids) {
             PointsGoods pointsGoods = this.getById(id);
             if (pointsGoods == null) {
-                log.error(ResultCode.POINT_GOODS_NOT_EXIST.message());
+                log.error(ResultEnum.POINT_GOODS_NOT_EXIST.message());
                 ids.remove(id);
             }
         }
@@ -146,7 +146,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
         PointsGoods pointsGoods = this.getOne(new LambdaQueryWrapper<PointsGoods>().eq(PointsGoods::getSkuId, skuId), false);
         if (pointsGoods == null) {
             log.error("skuId为" + skuId + "的积分商品不存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         PointsGoodsVO pointsGoodsVO = new PointsGoodsVO();
         BeanUtils.copyProperties(pointsGoods, pointsGoodsVO);
@@ -164,7 +164,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
         super.checkPromotions(promotions);
         GoodsSku goodsSku = this.checkSkuExist(promotions.getSkuId());
         if (promotions.getActiveStock() > goodsSku.getQuantity()) {
-            throw new ServiceException(ResultCode.POINT_GOODS_ACTIVE_STOCK_ERROR);
+            throw new BusinessException(ResultEnum.POINT_GOODS_ACTIVE_STOCK_ERROR);
         }
     }
 
@@ -217,7 +217,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
         PointsGoods pointsGoods = this.getById(id);
         if (pointsGoods == null) {
             log.error("id为" + id + "的积分商品不存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         return pointsGoods;
     }
@@ -251,7 +251,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
         GoodsSku goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
         if (goodsSku == null) {
             log.error("商品ID为" + skuId + "的商品不存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         return goodsSku;
     }

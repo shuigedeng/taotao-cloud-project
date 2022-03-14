@@ -150,7 +150,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
     private FullDiscount checkFullDiscountExist(String id) {
         FullDiscount fullDiscount = this.getById(id);
         if (fullDiscount == null) {
-            throw new ServiceException(ResultCode.FULL_DISCOUNT_NOT_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.FULL_DISCOUNT_NOT_EXIST_ERROR);
         }
         return fullDiscount;
     }
@@ -163,7 +163,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
     private void checkFullDiscount(FullDiscount fullDiscount) {
         if (fullDiscount.getIsFullMinus() == null && fullDiscount.getIsCoupon() == null && fullDiscount.getIsGift() == null
                 && fullDiscount.getIsPoint() == null && fullDiscount.getIsFullRate() == null) {
-            throw new ServiceException(ResultCode.FULL_DISCOUNT_WAY_ERROR);
+            throw new BusinessException(ResultEnum.FULL_DISCOUNT_WAY_ERROR);
         }
         //如果优惠方式是满减
         if (Boolean.TRUE.equals(fullDiscount.getIsFullMinus())) {
@@ -175,7 +175,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
             //是否没有选择赠品
             boolean noGiftSelected = fullDiscount.getGiftId() == null;
             if (noGiftSelected) {
-                throw new ServiceException(ResultCode.FULL_DISCOUNT_GIFT_ERROR);
+                throw new BusinessException(ResultEnum.FULL_DISCOUNT_GIFT_ERROR);
             }
         } else {
             fullDiscount.setGiftId(null);
@@ -207,7 +207,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
         QueryWrapper<FullDiscount> queryWrapper = PromotionTools.checkActiveTime(statTime, endTime, PromotionTypeEnum.FULL_DISCOUNT, storeId, id);
         long sameNum = this.count(queryWrapper);
         if (sameNum > 0) {
-            throw new ServiceException(ResultCode.PROMOTION_SAME_ACTIVE_EXIST);
+            throw new BusinessException(ResultEnum.PROMOTION_SAME_ACTIVE_EXIST);
         }
     }
 
@@ -220,11 +220,11 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
         //是否没有选择优惠券
         boolean noCouponSelected = couponId == null;
         if (noCouponSelected) {
-            throw new ServiceException(ResultCode.COUPON_NOT_EXIST);
+            throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
         }
         Coupon coupon = this.couponService.getById(couponId);
         if (coupon == null) {
-            throw new ServiceException(ResultCode.COUPON_NOT_EXIST);
+            throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
         }
     }
 
@@ -238,10 +238,10 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
         //是否没有填写满减金额
         boolean noFullMinusInput = fullMinus == null || fullMinus == 0;
         if (noFullMinusInput) {
-            throw new ServiceException(ResultCode.FULL_DISCOUNT_MONEY_ERROR);
+            throw new BusinessException(ResultEnum.FULL_DISCOUNT_MONEY_ERROR);
         }
         if (fullMinus > fullMoney) {
-            throw new ServiceException(ResultCode.FULL_DISCOUNT_MONEY_GREATER_THAN_MINUS);
+            throw new BusinessException(ResultEnum.FULL_DISCOUNT_MONEY_GREATER_THAN_MINUS);
         }
     }
 
@@ -254,11 +254,11 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
         //是否没有填写打折数值
         boolean noFullRateInput = fullRate == null || fullRate == 0;
         if (noFullRateInput) {
-            throw new ServiceException(ResultCode.FULL_RATE_NUM_ERROR);
+            throw new BusinessException(ResultEnum.FULL_RATE_NUM_ERROR);
         }
         int rateLimit = 10;
         if (fullRate >= rateLimit || fullRate <= 0) {
-            throw new ServiceException(ResultCode.FULL_RATE_NUM_ERROR);
+            throw new BusinessException(ResultEnum.FULL_RATE_NUM_ERROR);
         }
     }
 }

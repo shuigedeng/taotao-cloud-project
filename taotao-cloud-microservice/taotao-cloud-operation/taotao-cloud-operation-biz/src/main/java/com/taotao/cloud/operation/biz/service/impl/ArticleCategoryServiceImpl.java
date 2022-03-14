@@ -48,10 +48,10 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
         if (articleCategory.getParentId() != null && !parentId.equals(articleCategory.getParentId())) {
             ArticleCategory parent = this.getById(articleCategory.getParentId());
             if (parent == null) {
-                throw new ServiceException(ResultCode.ARTICLE_CATEGORY_PARENT_NOT_EXIST);
+                throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_PARENT_NOT_EXIST);
             }
             if (articleCategory.getLevel() >= maxLevel) {
-                throw new ServiceException(ResultCode.ARTICLE_CATEGORY_BEYOND_TWO);
+                throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_BEYOND_TWO);
             }
         }
         articleCategory.setType(ArticleCategoryEnum.OTHER.name());
@@ -68,18 +68,18 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
         if (!parentId.equals(articleCategory.getParentId())) {
             ArticleCategory parent = this.getById(articleCategory.getParentId());
             if (parent == null) {
-                throw new ServiceException(ResultCode.ARTICLE_CATEGORY_PARENT_NOT_EXIST);
+                throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_PARENT_NOT_EXIST);
             }
             //替换catPath 根据path规则来匹配级别
             if (articleCategory.getLevel() >= maxLevel) {
-                throw new ServiceException(ResultCode.ARTICLE_CATEGORY_BEYOND_TWO);
+                throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_BEYOND_TWO);
             }
         }
         //验证分类名称是否重复
         ArticleCategory category = this.getOne(
                 new LambdaQueryWrapper<ArticleCategory>().eq(ArticleCategory::getArticleCategoryName, articleCategory.getArticleCategoryName()));
         if (category != null && !category.getId().equals(articleCategory.getId())) {
-            throw new ServiceException(ResultCode.ARTICLE_CATEGORY_NAME_EXIST);
+            throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_NAME_EXIST);
         }
         if (this.updateById(articleCategory)) {
             //清除文章分类
@@ -97,18 +97,18 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
 
         //查看文章分类下是否有分类
         if (this.count(lambdaQueryWrapper) > 0) {
-            throw new ServiceException(ResultCode.ARTICLE_CATEGORY_DELETE_ERROR);
+            throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_DELETE_ERROR);
         }
 
         //查看文章分类下是否有文章
         LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new LambdaQueryWrapper<>();
         articleLambdaQueryWrapper.eq(Article::getCategoryId, id);
         if (articleService.count(articleLambdaQueryWrapper) > 0) {
-            throw new ServiceException(ResultCode.ARTICLE_CATEGORY_HAS_ARTICLE);
+            throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_HAS_ARTICLE);
         }
         //判断是否为默认的分类
         if (!this.getById(id).getType().equals(ArticleEnum.OTHER.name())) {
-            throw new ServiceException(ResultCode.ARTICLE_CATEGORY_NO_DELETION);
+            throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_NO_DELETION);
         }
 
         //清除文章分类缓存

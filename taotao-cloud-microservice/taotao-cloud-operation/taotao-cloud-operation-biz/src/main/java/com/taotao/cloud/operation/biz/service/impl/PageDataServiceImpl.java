@@ -95,7 +95,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> i
 
         //如果已经发布，不能重复发布
         if (pageData.getPageShow().equals(SwitchEnum.OPEN.name())) {
-            throw new ServiceException(ResultCode.PAGE_RELEASE_ERROR);
+            throw new BusinessException(ResultEnum.PAGE_RELEASE_ERROR);
         }
 
         LambdaUpdateWrapper<PageData> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
@@ -127,7 +127,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> i
         }
         //店铺、平台首页需要判断是否开启，开启则无法删除
         if (pageData.getPageShow().equals(SwitchEnum.OPEN.name())) {
-            throw new ServiceException(ResultCode.PAGE_OPEN_DELETE_ERROR);
+            throw new BusinessException(ResultEnum.PAGE_OPEN_DELETE_ERROR);
         }
         //判断是否有其他页面，如果没有其他的页面则无法进行删除
         QueryWrapper<Integer> queryWrapper = Wrappers.query();
@@ -139,7 +139,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> i
         }
         //判断是否为唯一的页面
         if (this.baseMapper.getPageDataNum(queryWrapper) == 1) {
-            throw new ServiceException(ResultCode.PAGE_DELETE_ERROR);
+            throw new BusinessException(ResultEnum.PAGE_DELETE_ERROR);
         }
         return this.removeById(id);
     }
@@ -149,7 +149,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> i
 
         //如果获取的是专题、店铺页面数据需要传入ID
         if (!pageDataDTO.getPageType().equals(PageEnum.INDEX.name()) && pageDataDTO.getNum() == null) {
-            throw new ServiceException(ResultCode.PAGE_NOT_EXIST);
+            throw new BusinessException(ResultEnum.PAGE_NOT_EXIST);
         }
         QueryWrapper<PageDataVO> queryWrapper = Wrappers.query();
         queryWrapper.eq(pageDataDTO.getPageType() != null, "page_type", pageDataDTO.getPageType());

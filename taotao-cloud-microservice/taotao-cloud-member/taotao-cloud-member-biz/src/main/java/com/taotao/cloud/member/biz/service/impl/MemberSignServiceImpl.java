@@ -61,7 +61,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 		//校验今天是否已经签到
 		List<MemberSign> todaySigns = this.baseMapper.getTodayMemberSign(queryWrapper);
 		if (todaySigns.size() > 0) {
-			throw new ServiceException(ResultCode.MEMBER_SIGN_REPEAT);
+			throw new BusinessException(ResultEnum.MEMBER_SIGN_REPEAT);
 		}
 		//当前签到天数的前一天日期
 		List<MemberSign> signs = this.baseMapper.getBeforeMemberSign(SecurityUtil.getUserId());

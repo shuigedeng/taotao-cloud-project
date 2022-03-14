@@ -44,8 +44,8 @@ public class DingerResponse {
 
 
 	private DingerResponse(DingerResponseCodeEnum resultCode) {
-		this.code = resultCode.code();
-		this.message = resultCode.message();
+		this.code = ResultEnum.code();
+		this.message = ResultEnum.message();
 	}
 
 	private DingerResponse(String logid, DingerResponseCodeEnum resultCode) {

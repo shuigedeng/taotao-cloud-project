@@ -79,7 +79,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
     public void receiveCoupon(String couponId, Integer receiveNum) {
         Coupon coupon = this.getById(couponId);
         if (coupon == null) {
-            throw new ServiceException(ResultCode.COUPON_NOT_EXIST);
+            throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
         }
         this.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, coupon.getId()).set(Coupon::getReceivedNum,
                 coupon.getReceivedNum() + receiveNum));
@@ -105,7 +105,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
     public void usedCoupon(String couponId, Integer usedNum) {
         Coupon coupon = this.getById(couponId);
         if (coupon == null) {
-            throw new ServiceException(ResultCode.COUPON_NOT_EXIST);
+            throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
         }
 
         this.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, coupon.getId()).set(Coupon::getUsedNum,
@@ -179,17 +179,17 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
         }
         //优惠券限制领取数量
         if (promotions.getCouponLimitNum() < 0) {
-            throw new ServiceException(ResultCode.COUPON_LIMIT_NUM_LESS_THAN_0);
+            throw new BusinessException(ResultEnum.COUPON_LIMIT_NUM_LESS_THAN_0);
         }
         //如果发行数量是0则判断领取限制数量
         if (promotions.getPublishNum() != 0 && promotions.getCouponLimitNum() > promotions.getPublishNum()) {
-            throw new ServiceException(ResultCode.COUPON_LIMIT_GREATER_THAN_PUBLISH);
+            throw new BusinessException(ResultEnum.COUPON_LIMIT_GREATER_THAN_PUBLISH);
         }
         //打折优惠券大于10折
         boolean discountCoupon = (promotions.getCouponType().equals(CouponTypeEnum.DISCOUNT.name())
                 && (promotions.getCouponDiscount() < 0 && promotions.getCouponDiscount() > 10));
         if (discountCoupon) {
-            throw new ServiceException(ResultCode.COUPON_DISCOUNT_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_DISCOUNT_ERROR);
         }
 
         //优惠券为固定时间类型
@@ -197,7 +197,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
             long nowTime = DateUtil.getDateline() * 1000;
             //固定时间的优惠券不能小于当前时间
             if (promotions.getEndTime().getTime() < nowTime) {
-                throw new ServiceException(ResultCode.PROMOTION_END_TIME_ERROR);
+                throw new BusinessException(ResultEnum.PROMOTION_END_TIME_ERROR);
             }
         }
 
@@ -213,7 +213,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
         searchParams.setCouponId(promotions.getId());
         List<FullDiscount> fullDiscounts = fullDiscountService.listFindAll(searchParams);
         if (fullDiscounts != null && !fullDiscounts.isEmpty()) {
-            throw new ServiceException("当前优惠券参与了促销活动【" + fullDiscounts.get(0).getPromotionName() + "】不能进行编辑删除操作");
+            throw new BusinessException("当前优惠券参与了促销活动【" + fullDiscounts.get(0).getPromotionName() + "】不能进行编辑删除操作");
         }
     }
 
@@ -256,13 +256,13 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
         boolean portionGoodsScope = (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())
                 && (coupon.getPromotionGoodsList() == null || coupon.getPromotionGoodsList().isEmpty()));
         if (portionGoodsScope) {
-            throw new ServiceException(ResultCode.COUPON_SCOPE_TYPE_GOODS_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_GOODS_ERROR);
         } else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name()) && CharSequenceUtil.isEmpty(coupon.getScopeId())) {
-            throw new ServiceException(ResultCode.COUPON_SCOPE_TYPE_GOODS_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_GOODS_ERROR);
         } else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name()) && CharSequenceUtil.isEmpty(coupon.getScopeId())) {
-            throw new ServiceException(ResultCode.COUPON_SCOPE_TYPE_CATEGORY_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_CATEGORY_ERROR);
         } else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name()) && CharSequenceUtil.isEmpty(coupon.getScopeId())) {
-            throw new ServiceException(ResultCode.COUPON_SCOPE_TYPE_STORE_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_STORE_ERROR);
         }
 
         if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())) {
@@ -278,12 +278,12 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
     private void checkCouponPortionGoods(CouponVO coupon) {
         String[] split = coupon.getScopeId().split(",");
         if (split.length <= 0) {
-            throw new ServiceException(ResultCode.COUPON_SCOPE_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_SCOPE_ERROR);
         }
         for (String id : split) {
             GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(id);
             if (goodsSku == null) {
-                throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+                throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
             }
         }
     }

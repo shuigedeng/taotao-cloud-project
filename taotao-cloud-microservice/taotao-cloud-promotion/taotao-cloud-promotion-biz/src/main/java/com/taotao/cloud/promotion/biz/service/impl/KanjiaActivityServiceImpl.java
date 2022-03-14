@@ -90,7 +90,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         //只有砍价商品存在且已经开始的活动才可以发起砍价
         if (kanJiaActivityGoods == null || !kanJiaActivityGoods.getPromotionStatus().equals(
 	        PromotionsStatusEnum.START.name())) {
-            throw new ServiceException(ResultCode.PROMOTION_STATUS_END);
+            throw new BusinessException(ResultEnum.PROMOTION_STATUS_END);
         }
         KanjiaActivityLog kanjiaActivityLog = new KanjiaActivityLog();
         //获取会员信息
@@ -100,7 +100,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         queryWrapper.eq("kanjia_activity_goods_id", kanJiaActivityGoods.getId());
         queryWrapper.eq("member_id", member.getId());
         if (this.count(queryWrapper) > 0) {
-            throw new ServiceException(ResultCode.KANJIA_ACTIVITY_MEMBER_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_MEMBER_ERROR);
         }
         KanjiaActivity kanJiaActivity = new KanjiaActivity();
         //获取商品信息
@@ -138,21 +138,21 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         KanjiaActivity kanjiaActivity = this.getById(kanjiaActivityId);
         //判断活动非空或非正在进行中的活动
         if (kanjiaActivity == null || !kanjiaActivity.getStatus().equals(PromotionsStatusEnum.START.name())) {
-            throw new ServiceException(ResultCode.PROMOTION_STATUS_END);
+            throw new BusinessException(ResultEnum.PROMOTION_STATUS_END);
         } else if (member == null) {
-            throw new ServiceException(ResultCode.USER_NOT_EXIST);
+            throw new BusinessException(ResultEnum.USER_NOT_EXIST);
         }
         //根据skuId查询当前sku是否参与活动并且是在活动进行中
         KanjiaActivityGoods kanJiaActivityGoods = kanjiaActivityGoodsService.getById(kanjiaActivity.getKanjiaActivityGoodsId());
         if (kanJiaActivityGoods == null) {
-            throw new ServiceException(ResultCode.PROMOTION_STATUS_END);
+            throw new BusinessException(ResultEnum.PROMOTION_STATUS_END);
         }
         //判断是否已参与
         LambdaQueryWrapper<KanjiaActivityLog> lambdaQueryWrapper = new LambdaQueryWrapper<KanjiaActivityLog>()
                 .eq(KanjiaActivityLog::getKanjiaActivityId, kanjiaActivityId)
                 .eq(KanjiaActivityLog::getKanjiaMemberId, member.getId());
         if (kanjiaActivityLogService.count(lambdaQueryWrapper) > 0) {
-            throw new ServiceException(ResultCode.PROMOTION_LOG_EXIST);
+            throw new BusinessException(ResultEnum.PROMOTION_LOG_EXIST);
         }
 
         //添加砍价记录

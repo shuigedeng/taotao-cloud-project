@@ -60,6 +60,6 @@ public class ReceiptServiceImpl extends ServiceImpl<ReceiptMapper, Receipt> impl
             this.saveOrUpdate(receipt);
             return receipt;
         }
-        throw new ServiceException(ResultCode.USER_RECEIPT_NOT_EXIST);
+        throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
     }
 }

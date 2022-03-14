@@ -60,7 +60,7 @@ public class CashierSupport {
                                          HttpServletRequest request, HttpServletResponse response,
                                          PayParam payParam) {
         if (paymentClientEnum == null || paymentMethodEnum == null) {
-            throw new ServiceException(ResultCode.PAY_NOT_SUPPORT);
+            throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
         }
         //获取支付插件
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
@@ -95,7 +95,7 @@ public class CashierSupport {
         try {
             clientTypeEnum = ClientTypeEnum.valueOf(client);
         } catch (IllegalArgumentException e) {
-            throw new ServiceException(ResultCode.PAY_CLIENT_TYPE_ERROR);
+            throw new BusinessException(ResultEnum.PAY_CLIENT_TYPE_ERROR);
         }
         //支付方式 循环获取
         Setting setting = settingService.get(SettingEnum.PAYMENT_SUPPORT.name());
@@ -105,7 +105,7 @@ public class CashierSupport {
                 return paymentSupportItem.getSupports();
             }
         }
-        throw new ServiceException(ResultCode.PAY_NOT_SUPPORT);
+        throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
     }
 
     /**
@@ -154,7 +154,7 @@ public class CashierSupport {
             }
             //如果订单不需要付款，则抛出异常，直接返回
             if (cashierParam.getPrice() <= 0) {
-                throw new ServiceException(ResultCode.PAY_UN_WANTED);
+                throw new BusinessException(ResultEnum.PAY_UN_WANTED);
             }
             cashierParam.setSupport(support(payParam.getClientType()));
             cashierParam.setWalletValue(memberWalletService.getMemberWallet(UserContext.getCurrentUser().getId()).getMemberWallet());
@@ -164,7 +164,7 @@ public class CashierSupport {
             return cashierParam;
         }
         log.error("错误的支付请求:{}", payParam.toString());
-        throw new ServiceException(ResultCode.PAY_CASHIER_ERROR);
+        throw new BusinessException(ResultEnum.PAY_CASHIER_ERROR);
     }
 
 

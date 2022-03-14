@@ -107,7 +107,7 @@ public class WechatMediaUtil {
             wechatAccessTokenUtil.removeAccessToken(ClientTypeEnum.WECHAT_MP);
             return this.uploadMedia(type, mediaFileUrl);
         } else if (jsonObject.get("errcode") != null) {
-            throw new ServiceException(jsonObject.get("errmsg").toString());
+            throw new BusinessException(jsonObject.get("errmsg").toString());
         } else {
             return jsonObject.get("media_id").toString();
         }
@@ -133,7 +133,7 @@ public class WechatMediaUtil {
                 fileExt = ".jpg";
                 break;
             default:
-                throw new ServiceException(ResultCode.IMAGE_FILE_EXT_ERROR);
+                throw new BusinessException(ResultEnum.IMAGE_FILE_EXT_ERROR);
         }
         return fileExt;
     }

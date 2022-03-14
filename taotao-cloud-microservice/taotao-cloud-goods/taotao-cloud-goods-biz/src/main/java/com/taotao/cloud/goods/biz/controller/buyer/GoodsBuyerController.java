@@ -84,8 +84,8 @@ public class GoodsBuyerController {
 			LogUtil.info(se.getMsg(), se);
 			throw se;
 		} catch (Exception e) {
-			LogUtil.error(ResultCode.GOODS_ERROR.message(), e);
-			return ResultUtil.error(ResultCode.GOODS_ERROR);
+			LogUtil.error(ResultEnum.GOODS_ERROR.message(), e);
+			return ResultUtil.error(ResultEnum.GOODS_ERROR);
 		}
 
 	}

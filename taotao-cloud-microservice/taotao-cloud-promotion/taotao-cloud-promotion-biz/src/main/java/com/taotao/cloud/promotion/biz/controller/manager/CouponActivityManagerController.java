@@ -49,7 +49,7 @@ public class CouponActivityManagerController {
         if (couponActivityService.savePromotions(couponActivityDTO)) {
             return Result.success(couponActivityDTO);
         }
-        return ResultUtil.error(ResultCode.COUPON_ACTIVITY_SAVE_ERROR);
+        return ResultUtil.error(ResultEnum.COUPON_ACTIVITY_SAVE_ERROR);
     }
 
     @ApiOperation(value = "关闭优惠券活动")
@@ -59,9 +59,9 @@ public class CouponActivityManagerController {
     @DeleteMapping("/{id}")
     public Result<CouponActivity> updateStatus(@PathVariable String id) {
         if (couponActivityService.updateStatus(Collections.singletonList(id), null, null)) {
-            return ResultUtil.success(ResultCode.SUCCESS);
+            return ResultUtil.success(ResultEnum.SUCCESS);
         }
-        throw new ServiceException(ResultCode.ERROR);
+        throw new BusinessException(ResultEnum.ERROR);
     }
 
 

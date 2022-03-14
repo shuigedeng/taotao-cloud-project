@@ -191,7 +191,7 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
                     break;
                 }
                 default:
-                    throw new ServiceException(ResultCode.ERROR);
+                    throw new BusinessException(ResultEnum.ERROR);
             }
         } else {
             //根据查询时间来确定查询参数

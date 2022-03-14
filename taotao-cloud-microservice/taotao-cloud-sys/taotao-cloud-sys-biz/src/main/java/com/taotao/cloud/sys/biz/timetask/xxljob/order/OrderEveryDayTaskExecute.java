@@ -57,7 +57,7 @@
 //        //订单设置
 //        OrderSetting orderSetting = JSONUtil.toBean(setting.getSettingValue(), OrderSetting.class);
 //        if (orderSetting == null) {
-//            throw new ServiceException(ResultCode.ORDER_SETTING_ERROR);
+//            throw new BusinessException(ResultEnum.ORDER_SETTING_ERROR);
 //        }
 //
 //        //自动确认收货

@@ -65,9 +65,9 @@ public class PintuanStoreController {
         pintuan.setStoreId(currentUser.getStoreId());
         pintuan.setStoreName(currentUser.getStoreName());
         if (pintuanService.savePromotions(pintuan)) {
-            return ResultUtil.success(ResultCode.PINTUAN_ADD_SUCCESS);
+            return ResultUtil.success(ResultEnum.PINTUAN_ADD_SUCCESS);
         }
-        throw new ServiceException(ResultCode.PINTUAN_ADD_ERROR);
+        throw new BusinessException(ResultEnum.PINTUAN_ADD_ERROR);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
@@ -78,9 +78,9 @@ public class PintuanStoreController {
         pintuan.setStoreId(currentUser.getStoreId());
         pintuan.setStoreName(currentUser.getStoreName());
         if (pintuanService.updatePromotions(pintuan)) {
-            return ResultUtil.success(ResultCode.PINTUAN_EDIT_SUCCESS);
+            return ResultUtil.success(ResultEnum.PINTUAN_EDIT_SUCCESS);
         }
-        throw new ServiceException(ResultCode.PINTUAN_EDIT_ERROR);
+        throw new BusinessException(ResultEnum.PINTUAN_EDIT_ERROR);
     }
 
     @PutMapping("/status/{pintuanId}")
@@ -88,9 +88,9 @@ public class PintuanStoreController {
     public Result<String> openPintuan(@PathVariable String pintuanId, Long startTime, Long endTime) {
         OperationalJudgment.judgment(pintuanService.getById(pintuanId));
         if (pintuanService.updateStatus(Collections.singletonList(pintuanId), startTime, endTime)) {
-            return ResultUtil.success(ResultCode.PINTUAN_MANUAL_OPEN_SUCCESS);
+            return ResultUtil.success(ResultEnum.PINTUAN_MANUAL_OPEN_SUCCESS);
         }
-        throw new ServiceException(ResultCode.PINTUAN_MANUAL_OPEN_ERROR);
+        throw new BusinessException(ResultEnum.PINTUAN_MANUAL_OPEN_ERROR);
 
     }
 
@@ -99,9 +99,9 @@ public class PintuanStoreController {
     public Result<String> deletePintuan(@PathVariable String pintuanId) {
         OperationalJudgment.judgment(pintuanService.getById(pintuanId));
         if (pintuanService.removePromotions(Collections.singletonList(pintuanId))) {
-            return ResultUtil.success(ResultCode.PINTUAN_DELETE_SUCCESS);
+            return ResultUtil.success(ResultEnum.PINTUAN_DELETE_SUCCESS);
         }
-        throw new ServiceException(ResultCode.PINTUAN_DELETE_ERROR);
+        throw new BusinessException(ResultEnum.PINTUAN_DELETE_ERROR);
     }
 
 }

@@ -50,7 +50,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 			JSONObject json = wechatLivePlayerUtil.addGoods(commodity);
 			if (!"0".equals(json.getStr("errcode"))) {
 				log.error(json.getStr("errmsg"));
-				throw new ServiceException(ResultCode.COMMODITY_ERROR);
+				throw new BusinessException(ResultEnum.COMMODITY_ERROR);
 			}
 			commodity.setLiveGoodsId(Convert.toInt(json.getStr("goodsId")));
 			commodity.setAuditId(json.getStr("auditId"));
@@ -65,13 +65,13 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 		//商品是否审核通过
 		GoodsSku goodsSku = goodsSkuService.getById(commodity.getSkuId());
 		if (!goodsSku.getAuthFlag().equals(GoodsAuthEnum.PASS.name())) {
-			throw new ServiceException(goodsSku.getGoodsName() + " 未审核通过，不能添加直播商品");
+			throw new BusinessException(goodsSku.getGoodsName() + " 未审核通过，不能添加直播商品");
 		}
 		//是否已添加规格商品
 		if (this.count(
 			new LambdaQueryWrapper<Commodity>().eq(Commodity::getSkuId, commodity.getSkuId()))
 			> 0) {
-			throw new ServiceException(goodsSku.getGoodsName() + " 已添加规格商品，无法重复增加");
+			throw new BusinessException(goodsSku.getGoodsName() + " 已添加规格商品，无法重复增加");
 		}
 	}
 
@@ -80,7 +80,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 		AuthUser currentUser = UserContext.getCurrentUser();
 		if (currentUser == null || (currentUser.getRole().equals(UserEnums.STORE)
 			&& currentUser.getStoreId() == null)) {
-			throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 		JSONObject json = wechatLivePlayerUtil.deleteGoods(goodsId);
 		if ("0".equals(json.getStr("errcode"))) {

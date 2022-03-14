@@ -54,7 +54,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
                     return this.baseMapper.notSelectGoods(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper(), distribution.getId());
                 }
             }
-            throw new ServiceException(ResultCode.DISTRIBUTION_NOT_EXIST);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_NOT_EXIST);
         }
         //如果是平台则直接进行查询
         return this.baseMapper.getDistributionGoodsVO(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper());
@@ -118,11 +118,11 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
         QueryWrapper queryWrapper = Wrappers.query().eq("sku_id", skuId);
 
         if (this.getOne(queryWrapper) != null) {
-            throw new ServiceException(ResultCode.DISTRIBUTION_GOODS_DOUBLE);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_GOODS_DOUBLE);
         }
         GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(skuId);
         if (!goodsSku.getStoreId().equals(storeId)) {
-            throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+            throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
         DistributionGoods distributionGoods = new DistributionGoods(goodsSku, commission);
         this.save(distributionGoods);

@@ -56,7 +56,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 	        DistributionStatusEnum.PASS.name())) {
             //校验分销佣金是否大于提现金额
             if (distribution.getCanRebate() < applyMoney) {
-                throw new ServiceException(ResultCode.WALLET_WITHDRAWAL_INSUFFICIENT);
+                throw new BusinessException(ResultEnum.WALLET_WITHDRAWAL_INSUFFICIENT);
             }
             //将提现金额存入冻结金额,扣减可提现金额
             distribution.setCanRebate(CurrencyUtil.sub(distribution.getCanRebate(), applyMoney));
@@ -78,7 +78,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
             return false;
 
         }
-        throw new ServiceException(ResultCode.DISTRIBUTION_NOT_EXIST);
+        throw new BusinessException(ResultEnum.DISTRIBUTION_NOT_EXIST);
 
     }
 
@@ -140,9 +140,9 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
                 }
                 return distributorCash;
             }
-            throw new ServiceException(ResultCode.DISTRIBUTION_NOT_EXIST);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_NOT_EXIST);
         }
-        throw new ServiceException(ResultCode.DISTRIBUTION_CASH_NOT_EXIST);
+        throw new BusinessException(ResultEnum.DISTRIBUTION_CASH_NOT_EXIST);
 
     }
 }

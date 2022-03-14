@@ -250,7 +250,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public OrderDetailVO queryDetail(String orderSn) {
         Order order = this.getBySn(orderSn);
         if (order == null) {
-            throw new ServiceException(ResultCode.ORDER_NOT_EXIST);
+            throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
         }
         QueryWrapper<OrderItem> orderItemWrapper = new QueryWrapper<>();
         orderItemWrapper.eq(ORDER_SN_COLUMN, orderSn);
@@ -271,7 +271,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         //如果订单促销类型不为空&&订单是拼团订单，并且订单未成团，则抛出异常
         if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderPromotionType())
                 && !order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
-            throw new ServiceException(ResultCode.ORDER_CAN_NOT_CANCEL);
+            throw new BusinessException(ResultEnum.ORDER_CAN_NOT_CANCEL);
         }
         if (CharSequenceUtil.equalsAny(order.getOrderStatus(),
                 OrderStatusEnum.UNDELIVERED.name(),
@@ -285,7 +285,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             orderStatusMessage(order);
             return order;
         } else {
-            throw new ServiceException(ResultCode.ORDER_CAN_NOT_CANCEL);
+            throw new BusinessException(ResultEnum.ORDER_CAN_NOT_CANCEL);
         }
     }
 
@@ -317,7 +317,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = this.getBySn(orderSn);
         //如果订单已支付，就不能再次进行支付
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-            throw new ServiceException(ResultCode.PAY_DOUBLE_ERROR);
+            throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
         }
 
         //修改订单状态
@@ -390,7 +390,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             //获取对应物流
             Logistics logistics = logisticsService.getById(logisticsId);
             if (logistics == null) {
-                throw new ServiceException(ResultCode.ORDER_LOGISTICS_ERROR);
+                throw new BusinessException(ResultEnum.ORDER_LOGISTICS_ERROR);
             }
             //写入物流信息
             order.setLogisticsCode(logistics.getId());
@@ -411,7 +411,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             orderMessage.setOrderSn(order.getSn());
             this.sendUpdateStatusMessage(orderMessage);
         } else {
-            throw new ServiceException(ResultCode.ORDER_DELIVER_ERROR);
+            throw new BusinessException(ResultEnum.ORDER_DELIVER_ERROR);
         }
         return order;
     }
@@ -517,7 +517,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = this.getBySn(sn);
         if (order == null) {
             log.error("订单号为" + sn + "的订单不存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         LambdaUpdateWrapper<Order> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Order::getSn, sn).set(Order::getDeleteFlag, true);
@@ -536,7 +536,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             receipt.setReceiptStatus(1);
             return receiptService.updateById(receipt);
         }
-        throw new ServiceException(ResultCode.USER_RECEIPT_NOT_EXIST);
+        throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
     }
 
     /**
@@ -610,7 +610,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 orderBatchDeliverDTOList.add(orderBatchDeliverDTO);
             }
         } catch (Exception e) {
-            throw new ServiceException(ResultCode.ORDER_BATCH_DELIVER_ERROR);
+            throw new BusinessException(ResultEnum.ORDER_BATCH_DELIVER_ERROR);
         }
         //循环检查是否符合规范
         checkBatchDeliver(orderBatchDeliverDTOList);
@@ -650,9 +650,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                     .eq(Order::getStoreId, UserContext.getCurrentUser().getStoreId())
                     .eq(Order::getSn, orderBatchDeliverDTO.getOrderSn()));
             if (order == null) {
-                throw new ServiceException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
+                throw new BusinessException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
             } else if (!order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
-                throw new ServiceException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不能发货");
+                throw new BusinessException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不能发货");
             }
             //获取物流公司
             logistics.forEach(item -> {
@@ -661,7 +661,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 }
             });
             if (StringUtils.isEmpty(orderBatchDeliverDTO.getLogisticsId())) {
-                throw new ServiceException("物流公司：'" + orderBatchDeliverDTO.getLogisticsName() + " '不存在");
+                throw new BusinessException("物流公司：'" + orderBatchDeliverDTO.getLogisticsName() + " '不存在");
             }
         }
 
@@ -791,7 +791,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             //判断用户不能参与自己发起的拼团活动
             Order parentOrder = this.getBySn(tradeDTO.getParentOrderSn());
             if (parentOrder.getMemberId().equals(UserContext.getCurrentUser().getId())) {
-                throw new ServiceException(ResultCode.PINTUAN_JOIN_ERROR);
+                throw new BusinessException(ResultEnum.PINTUAN_JOIN_ERROR);
             }
         }
     }
@@ -807,7 +807,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             Pintuan pintuan = pintuanService.getById(order.getPromotionId());
             Integer limitNum = pintuan.getLimitNum();
             if (limitNum != 0 && order.getGoodsNum() > limitNum) {
-                throw new ServiceException(ResultCode.PINTUAN_LIMIT_NUM_ERROR);
+                throw new BusinessException(ResultEnum.PINTUAN_LIMIT_NUM_ERROR);
             }
         }
     }
@@ -858,19 +858,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private void checkVerificationOrder(Order order, String verificationCode) {
         //判断查询是否可以查询到订单
         if (order == null) {
-            throw new ServiceException(ResultCode.ORDER_NOT_EXIST);
+            throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
         }
         //判断是否为虚拟订单
         else if (!order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())) {
-            throw new ServiceException(ResultCode.ORDER_TAKE_ERROR);
+            throw new BusinessException(ResultEnum.ORDER_TAKE_ERROR);
         }
         //判断虚拟订单状态
         else if (!order.getOrderStatus().equals(OrderStatusEnum.TAKE.name())) {
-            throw new ServiceException(ResultCode.ORDER_TAKE_ERROR);
+            throw new BusinessException(ResultEnum.ORDER_TAKE_ERROR);
         }
         //判断验证码是否正确
         else if (!verificationCode.equals(order.getVerificationCode())) {
-            throw new ServiceException(ResultCode.ORDER_TAKE_ERROR);
+            throw new BusinessException(ResultEnum.ORDER_TAKE_ERROR);
         }
     }
 }

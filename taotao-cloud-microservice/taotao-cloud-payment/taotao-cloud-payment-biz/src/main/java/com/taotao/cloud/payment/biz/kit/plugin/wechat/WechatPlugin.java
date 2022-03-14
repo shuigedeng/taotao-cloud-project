@@ -131,7 +131,7 @@ public class WechatPlugin implements Payment {
             WechatPaymentSetting setting = wechatPaymentSetting();
             String appid = setting.getServiceAppId();
             if (appid == null) {
-                throw new ServiceException(ResultCode.WECHAT_PAYMENT_NOT_SETTING);
+                throw new BusinessException(ResultEnum.WECHAT_PAYMENT_NOT_SETTING);
             }
             UnifiedOrderModel unifiedOrderModel = new UnifiedOrderModel()
                     .setAppid(appid)
@@ -158,7 +158,7 @@ public class WechatPlugin implements Payment {
             return Result.success(JSONUtil.toJsonStr(response.getBody()));
         } catch (Exception e) {
             log.error("微信H5支付错误", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
 
@@ -190,7 +190,7 @@ public class WechatPlugin implements Payment {
             WechatPaymentSetting setting = wechatPaymentSetting();
             String appid = setting.getServiceAppId();
             if (appid == null) {
-                throw new ServiceException(ResultCode.WECHAT_PAYMENT_NOT_SETTING);
+                throw new BusinessException(ResultEnum.WECHAT_PAYMENT_NOT_SETTING);
             }
             UnifiedOrderModel unifiedOrderModel = new UnifiedOrderModel()
                     .setAppid(appid)
@@ -229,10 +229,10 @@ public class WechatPlugin implements Payment {
                 return Result.success(map);
             }
             log.error("微信支付参数验证错误，请及时处理");
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
             log.error("支付异常", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
 
@@ -255,7 +255,7 @@ public class WechatPlugin implements Payment {
             WechatPaymentSetting setting = wechatPaymentSetting();
             String appid = setting.getAppId();
             if (appid == null) {
-                throw new ServiceException(ResultCode.WECHAT_PAYMENT_NOT_SETTING);
+                throw new BusinessException(ResultEnum.WECHAT_PAYMENT_NOT_SETTING);
             }
             UnifiedOrderModel unifiedOrderModel = new UnifiedOrderModel()
                     .setAppid(appid)
@@ -296,10 +296,10 @@ public class WechatPlugin implements Payment {
                 return Result.success(map);
             }
             log.error("微信支付参数验证错误，请及时处理");
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
             log.error("支付异常", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
 
@@ -323,7 +323,7 @@ public class WechatPlugin implements Payment {
 
             String appid = setting.getServiceAppId();
             if (appid == null) {
-                throw new ServiceException(ResultCode.WECHAT_PAYMENT_NOT_SETTING);
+                throw new BusinessException(ResultEnum.WECHAT_PAYMENT_NOT_SETTING);
             }
             UnifiedOrderModel unifiedOrderModel = new UnifiedOrderModel()
                     .setAppid(appid)
@@ -356,14 +356,14 @@ public class WechatPlugin implements Payment {
                 return Result.success(new JSONObject(response.getBody()).getStr("code_url"));
             } else {
                 log.error("微信支付参数验证错误，请及时处理");
-                throw new ServiceException(ResultCode.PAY_ERROR);
+                throw new BusinessException(ResultEnum.PAY_ERROR);
             }
         } catch (ServiceException e) {
             log.error("支付异常", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
             log.error("支付异常", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
 
@@ -394,7 +394,7 @@ public class WechatPlugin implements Payment {
             //如果有2开需求，这里需要调整，修改这个appid的获取途径即可
             String appid = wechatPaymentSetting().getMpAppId();
             if (StringUtils.isEmpty(appid)) {
-                throw new ServiceException(ResultCode.WECHAT_PAYMENT_NOT_SETTING);
+                throw new BusinessException(ResultEnum.WECHAT_PAYMENT_NOT_SETTING);
             }
             String attach = URLEncoder.createDefault().encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
 
@@ -436,10 +436,10 @@ public class WechatPlugin implements Payment {
                 return Result.success(map);
             }
             log.error("微信支付参数验证错误，请及时处理");
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
             log.error("支付异常", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
 
     }
@@ -618,7 +618,7 @@ public class WechatPlugin implements Payment {
             return wechatPaymentSetting;
         } catch (Exception e) {
             log.error("微信支付暂不支持", e);
-            throw new ServiceException(ResultCode.PAY_NOT_SUPPORT);
+            throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
         }
     }
 
@@ -664,7 +664,7 @@ public class WechatPlugin implements Payment {
                 cache.put(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix(), publicCert, second);
             } else {
                 log.error("证书获取失败：{}" + body);
-                throw new ServiceException(ResultCode.WECHAT_CERT_ERROR);
+                throw new BusinessException(ResultEnum.WECHAT_CERT_ERROR);
             }
             return PayKit.getCertificate(publicCert);
         } catch (Exception e) {

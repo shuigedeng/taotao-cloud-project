@@ -50,7 +50,7 @@ public class SpecificationServiceImpl extends
 			if (!list.isEmpty()) {
 				List<String> categoryIds = new ArrayList<>();
 				list.forEach(item -> categoryIds.add(item.getCategoryId()));
-				throw new ServiceException(ResultCode.SPEC_DELETE_ERROR,
+				throw new BusinessException(ResultEnum.SPEC_DELETE_ERROR,
 					JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
 			}
 			//删除规格

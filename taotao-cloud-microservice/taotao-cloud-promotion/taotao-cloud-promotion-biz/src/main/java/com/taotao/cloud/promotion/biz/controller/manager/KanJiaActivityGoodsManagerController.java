@@ -67,7 +67,7 @@ public class KanJiaActivityGoodsManagerController {
         if (kanJiaActivityGoodsService.deleteKanJiaGoods(Arrays.asList(ids.split(",")))) {
             return ResultUtil.success();
         }
-        throw new ServiceException(ResultCode.KANJIA_GOODS_DELETE_ERROR);
+        throw new BusinessException(ResultEnum.KANJIA_GOODS_DELETE_ERROR);
     }
 
 

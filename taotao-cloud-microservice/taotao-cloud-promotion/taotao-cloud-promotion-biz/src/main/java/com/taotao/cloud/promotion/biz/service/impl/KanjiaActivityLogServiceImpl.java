@@ -53,7 +53,7 @@ public class KanjiaActivityLogServiceImpl extends ServiceImpl<KanJiaActivityLogM
         queryWrapper.eq( KanjiaActivityLog::getKanjiaMemberId, UserContext.getCurrentUser().getId());
         long count = this.baseMapper.selectCount(queryWrapper);
         if (count > 0) {
-            throw new ServiceException(ResultCode.KANJIA_ACTIVITY_LOG_MEMBER_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_LOG_MEMBER_ERROR);
         }
         //校验当前砍价商品是否有效
         KanjiaActivityGoods kanjiaActivityGoods = kanJiaActivityGoodsService.getById(kanjiaActivityDTO.getKanjiaActivityGoodsId());
@@ -71,9 +71,9 @@ public class KanjiaActivityLogServiceImpl extends ServiceImpl<KanJiaActivityLogM
                     return kanJiaActivityLog;
                 }
             }
-            throw new ServiceException(ResultCode.KANJIA_ACTIVITY_NOT_FOUND_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_NOT_FOUND_ERROR);
         }
-        throw new ServiceException(ResultCode.PROMOTION_STATUS_END);
+        throw new BusinessException(ResultEnum.PROMOTION_STATUS_END);
 
     }
 }

@@ -112,7 +112,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		//未申请售后订单货物才能进行申请
 		if (!orderItem.getAfterSaleStatus()
 			.equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())) {
-			throw new ServiceException(ResultCode.AFTER_SALES_BAN);
+			throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
 		}
 
 		//获取售后类型
@@ -120,7 +120,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//订单未支付，不能申请申请售后
 		if (order.getPaymentMethod() == null) {
-			throw new ServiceException(ResultCode.AFTER_SALES_NOT_PAY_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_SALES_NOT_PAY_ERROR);
 		}
 		//判断支付方式是否为线上支付
 		if (order.getPaymentMethod().equals(PaymentMethodEnum.BANK_TRANSFER.name())) {
@@ -172,11 +172,11 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//判断为待审核的售后服务
 		if (!afterSale.getServiceStatus().equals(AfterSaleStatusEnum.APPLY.name())) {
-			throw new ServiceException(ResultCode.AFTER_SALES_DOUBLE_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_SALES_DOUBLE_ERROR);
 		}
 		//判断退款金额与付款金额是否正确,退款金额不能大于付款金额
 		if (NumberUtil.compare(afterSale.getFlowPrice(), actualRefundPrice) < 0) {
-			throw new ServiceException(ResultCode.AFTER_SALES_PRICE_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_SALES_PRICE_ERROR);
 		}
 
 		afterSale.setActualRefundPrice(actualRefundPrice);
@@ -226,7 +226,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//判断为已审核通过，待邮寄的售后服务
 		if (!afterSale.getServiceStatus().equals(AfterSaleStatusEnum.PASS.name())) {
-			throw new ServiceException(ResultCode.AFTER_STATUS_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_STATUS_ERROR);
 		}
 
 		//查询会员回寄的物流公司信息
@@ -234,7 +234,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//判断物流公司是否为空
 		if (logistics == null) {
-			throw new ServiceException(ResultCode.AFTER_STATUS_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_STATUS_ERROR);
 		}
 
 		afterSale.setMLogisticsCode(logistics.getId());
@@ -272,7 +272,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//判断是否为已邮寄售后单
 		if (!afterSale.getServiceStatus().equals(AfterSaleStatusEnum.BUYER_RETURN.name())) {
-			throw new ServiceException(ResultCode.AFTER_STATUS_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_STATUS_ERROR);
 		}
 		AfterSaleStatusEnum afterSaleStatusEnum;
 		String pass = "PASS";
@@ -347,7 +347,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 			this.updateOrderItemAfterSaleStatus(afterSale);
 			return afterSale;
 		}
-		throw new ServiceException(ResultCode.AFTER_SALES_CANCEL_ERROR);
+		throw new BusinessException(ResultEnum.AFTER_SALES_CANCEL_ERROR);
 	}
 
 	@Override
@@ -472,7 +472,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//判断数据是否为空
 		if (null == afterSaleDTO || CharSequenceUtil.isEmpty(afterSaleDTO.getOrderItemSn())) {
-			throw new ServiceException(ResultCode.ORDER_NOT_EXIST);
+			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
 		}
 
 		//获取订单货物判断是否可申请售后
@@ -482,12 +482,12 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		if (!orderItem.getAfterSaleStatus().equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())
 			&& !orderItem.getAfterSaleStatus()
 			.equals(OrderItemAfterSaleStatusEnum.PART_AFTER_SALE.name())) {
-			throw new ServiceException(ResultCode.AFTER_SALES_BAN);
+			throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
 		}
 
 		//申请商品数量不能超过商品总数量-售后商品数量
 		if (afterSaleDTO.getNum() > (orderItem.getNum() - orderItem.getReturnGoodsNumber())) {
-			throw new ServiceException(ResultCode.AFTER_GOODS_NUMBER_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_GOODS_NUMBER_ERROR);
 		}
 
 		//获取售后类型
@@ -498,7 +498,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 			case RETURN_MONEY:
 				//只处理已付款的售后
 				if (!PayStatusEnum.PAID.name().equals(order.getPayStatus())) {
-					throw new ServiceException(ResultCode.AFTER_SALES_BAN);
+					throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
 				}
 				this.checkAfterSaleReturnMoneyParam(afterSaleDTO);
 				break;
@@ -507,7 +507,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 				boolean availableStatus = CharSequenceUtil.equalsAny(order.getOrderStatus(),
 					OrderStatusEnum.DELIVERED.name(), OrderStatusEnum.COMPLETED.name());
 				if (!PayStatusEnum.PAID.name().equals(order.getPayStatus()) && availableStatus) {
-					throw new ServiceException(ResultCode.AFTER_SALES_BAN);
+					throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
 				}
 				break;
 			default:
@@ -528,7 +528,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 				|| CharSequenceUtil.isEmpty(afterSaleDTO.getBankAccountName())
 				|| CharSequenceUtil.isEmpty(afterSaleDTO.getBankAccountNumber());
 			if (emptyBankParam) {
-				throw new ServiceException(ResultCode.RETURN_MONEY_OFFLINE_BANK_ERROR);
+				throw new BusinessException(ResultEnum.RETURN_MONEY_OFFLINE_BANK_ERROR);
 			}
 
 		}

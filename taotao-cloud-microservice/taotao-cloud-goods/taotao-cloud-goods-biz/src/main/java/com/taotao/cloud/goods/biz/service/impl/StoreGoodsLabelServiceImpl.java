@@ -88,7 +88,7 @@ public class StoreGoodsLabelServiceImpl extends
 		//获取当前登录商家账号
 		AuthUser tokenUser = UserContext.getCurrentUser();
 		if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
-			throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		storeGoodsLabel.setStoreId(tokenUser.getStoreId());
 		//保存店铺分类
@@ -104,7 +104,7 @@ public class StoreGoodsLabelServiceImpl extends
 		//修改当前店铺的商品分类
 		AuthUser tokenUser = UserContext.getCurrentUser();
 		if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
-			throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		LambdaUpdateWrapper<StoreGoodsLabel> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.eq(StoreGoodsLabel::getStoreId, tokenUser.getStoreId());
@@ -121,7 +121,7 @@ public class StoreGoodsLabelServiceImpl extends
 
 		AuthUser tokenUser = UserContext.getCurrentUser();
 		if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
-			throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		//删除店铺分类
 		this.removeById(storeLabelId);

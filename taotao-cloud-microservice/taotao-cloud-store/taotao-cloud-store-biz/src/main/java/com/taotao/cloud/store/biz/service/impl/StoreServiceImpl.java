@@ -75,17 +75,17 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
         QueryWrapper<Store> queryWrapper = Wrappers.query();
         queryWrapper.eq("store_name", adminStoreApplyDTO.getStoreName());
         if (this.getOne(queryWrapper) != null) {
-            throw new ServiceException(ResultCode.STORE_NAME_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.STORE_NAME_EXIST_ERROR);
         }
 
         Member member = memberService.getById(adminStoreApplyDTO.getMemberId());
         //判断用户是否存在
         if (member == null) {
-            throw new ServiceException(ResultCode.USER_NOT_EXIST);
+            throw new BusinessException(ResultEnum.USER_NOT_EXIST);
         }
         //判断是否拥有店铺
         if (Boolean.TRUE.equals(member.getHaveStore())) {
-            throw new ServiceException(ResultCode.STORE_APPLY_DOUBLE_ERROR);
+            throw new BusinessException(ResultEnum.STORE_APPLY_DOUBLE_ERROR);
         }
 
         //添加店铺
@@ -112,14 +112,14 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
             //判断店铺名是否唯一
             Store storeTmp = getOne(new QueryWrapper<Store>().eq("store_name", storeEditDTO.getStoreName()));
             if (storeTmp != null && !CharSequenceUtil.equals(storeTmp.getId(), storeEditDTO.getStoreId())) {
-                throw new ServiceException(ResultCode.STORE_NAME_EXIST_ERROR);
+                throw new BusinessException(ResultEnum.STORE_NAME_EXIST_ERROR);
             }
             //修改店铺详细信息
             updateStoreDetail(storeEditDTO);
             //修改店铺信息
             return updateStore(storeEditDTO);
         } else {
-            throw new ServiceException(ResultCode.STORE_NOT_EXIST);
+            throw new BusinessException(ResultEnum.STORE_NOT_EXIST);
         }
     }
 
@@ -156,7 +156,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
     public boolean audit(String id, Integer passed) {
         Store store = this.getById(id);
         if (store == null) {
-            throw new ServiceException(ResultCode.STORE_NOT_EXIST);
+            throw new BusinessException(ResultEnum.STORE_NOT_EXIST);
         }
         if (passed == 0) {
             store.setStoreDisable(StoreStatusEnum.OPEN.value());
@@ -187,7 +187,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
             return this.updateById(store);
         }
 
-        throw new ServiceException(ResultCode.STORE_NOT_EXIST);
+        throw new BusinessException(ResultEnum.STORE_NOT_EXIST);
     }
 
     @Override
@@ -197,7 +197,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
             store.setStoreDisable(StoreStatusEnum.OPEN.value());
             return this.updateById(store);
         }
-        throw new ServiceException(ResultCode.STORE_NOT_EXIST);
+        throw new BusinessException(ResultEnum.STORE_NOT_EXIST);
     }
 
     @Override

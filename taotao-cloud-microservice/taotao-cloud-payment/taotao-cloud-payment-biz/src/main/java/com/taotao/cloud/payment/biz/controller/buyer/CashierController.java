@@ -81,7 +81,7 @@ public class CashierController {
 
         cashierSupport.callback(paymentMethodEnum, request);
 
-        return ResultUtil.success(ResultCode.PAY_SUCCESS);
+        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
     }
 
     @ApiOperation(value = "支付异步通知")

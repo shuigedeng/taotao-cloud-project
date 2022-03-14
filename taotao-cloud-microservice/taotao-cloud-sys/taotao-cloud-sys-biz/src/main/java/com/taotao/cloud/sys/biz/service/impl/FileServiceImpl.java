@@ -55,7 +55,7 @@ public class FileServiceImpl extends
 	// 		ossClient.deleteObject(ossConfig.getBucketName(), objectName);
 	// 	} catch (OSSException | ClientException e) {
 	// 		e.printStackTrace();
-	// 		return new Result<>(ResultCode.ERROR.getCode(), "删除文件失败");
+	// 		return new Result<>(ResultEnum.ERROR.getCode(), "删除文件失败");
 	// 	}
 	// 	return new Result<>();
 	// }

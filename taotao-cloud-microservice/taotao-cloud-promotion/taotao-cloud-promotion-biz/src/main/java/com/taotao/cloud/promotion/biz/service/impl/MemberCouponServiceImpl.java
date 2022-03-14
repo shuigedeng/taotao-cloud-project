@@ -48,13 +48,13 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
                 .eq(MemberCoupon::getMemberId, memberId);
         long haveCoupons = this.count(queryWrapper);
         if (!PromotionsStatusEnum.START.name().equals(coupon.getPromotionStatus())) {
-            throw new ServiceException(ResultCode.COUPON_RECEIVE_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_RECEIVE_ERROR);
         }
         if (coupon.getPublishNum() != 0 && coupon.getReceivedNum() >= coupon.getPublishNum()) {
-            throw new ServiceException(ResultCode.COUPON_NUM_INSUFFICIENT_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_NUM_INSUFFICIENT_ERROR);
         }
         if (!coupon.getCouponLimitNum().equals(0) && haveCoupons >= coupon.getCouponLimitNum()) {
-            throw new ServiceException(ResultCode.COUPON_LIMIT_ERROR, "此优惠券最多领取" + coupon.getCouponLimitNum() + "张");
+            throw new BusinessException(ResultEnum.COUPON_LIMIT_ERROR, "此优惠券最多领取" + coupon.getCouponLimitNum() + "张");
         }
     }
 
@@ -69,7 +69,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
     public void receiveBuyerCoupon(String couponId, String memberId, String memberName) {
         Coupon coupon = couponService.getById(couponId);
         if (coupon != null && !CouponGetEnum.FREE.name().equals(coupon.getGetType())) {
-            throw new ServiceException(ResultCode.COUPON_DO_NOT_RECEIVER);
+            throw new BusinessException(ResultEnum.COUPON_DO_NOT_RECEIVER);
         } else if (coupon != null) {
             this.receiverCoupon(couponId, memberId, memberName, coupon);
         }
@@ -82,7 +82,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
         if (coupon != null) {
             this.receiverCoupon(couponId, memberId, memberName, coupon);
         } else {
-            throw new ServiceException(ResultCode.COUPON_NOT_EXIST);
+            throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
         }
     }
 
@@ -182,7 +182,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
     public void updateMemberCouponStatus(MemberCouponStatusEnum status, String id) {
         MemberCoupon memberCoupon = this.getById(id);
         if (memberCoupon == null) {
-            throw new ServiceException(ResultCode.COUPON_MEMBER_NOT_EXIST);
+            throw new BusinessException(ResultEnum.COUPON_MEMBER_NOT_EXIST);
         }
         String memberCouponStatus = memberCoupon.getMemberCouponStatus();
         if (memberCouponStatus.equals(MemberCouponStatusEnum.NEW.name()) || memberCouponStatus.equals(MemberCouponStatusEnum.USED.name())) {
@@ -190,7 +190,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
             updateWrapper.eq(MemberCoupon::getId, id).set(MemberCoupon::getMemberCouponStatus, status.name());
             this.update(updateWrapper);
         } else {
-            throw new ServiceException(ResultCode.COUPON_MEMBER_STATUS_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_MEMBER_STATUS_ERROR);
         }
     }
 
@@ -202,12 +202,12 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
 
             //如果查出来的优惠券数量不一致
             if (memberCoupons.size() != ids.size()) {
-                throw new ServiceException(ResultCode.COUPON_EXPIRED);
+                throw new BusinessException(ResultEnum.COUPON_EXPIRED);
             }
             //循环处理
             memberCoupons.forEach(item -> {
                 if (!item.getMemberCouponStatus().equals(MemberCouponStatusEnum.NEW.name())) {
-                    throw new ServiceException(ResultCode.COUPON_EXPIRED);
+                    throw new BusinessException(ResultEnum.COUPON_EXPIRED);
                 }
                 item.setMemberCouponStatus(MemberCouponStatusEnum.USED.name());
                 item.setConsumptionTime(new Date());

@@ -107,7 +107,7 @@ public class WechatMessageServiceImpl extends ServiceImpl<WechatMessageMapper, W
                 if (tplContent.containsKey("template_id")) {
                     wechatMessage.setCode(tplContent.getStr("template_id"));
                 } else {
-                    throw new ServiceException(ResultCode.WECHAT_MP_MESSAGE_TMPL_ERROR);
+                    throw new BusinessException(ResultEnum.WECHAT_MP_MESSAGE_TMPL_ERROR);
                 }
 
                 wechatMessage.setName(tplData.getName());

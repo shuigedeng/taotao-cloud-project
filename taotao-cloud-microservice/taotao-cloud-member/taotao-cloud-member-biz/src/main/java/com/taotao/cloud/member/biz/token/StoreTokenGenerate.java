@@ -27,7 +27,7 @@ public class StoreTokenGenerate extends AbstractTokenGenerate<Member> {
     @Override
     public Token createToken(Member member, Boolean longTerm) {
         if (Boolean.FALSE.equals(member.getHaveStore())) {
-            throw new ServiceException(ResultCode.STORE_NOT_OPEN);
+            throw new BusinessException(ResultEnum.STORE_NOT_OPEN);
         }
         LambdaQueryWrapper<Store> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Store::getMemberId, member.getId());
