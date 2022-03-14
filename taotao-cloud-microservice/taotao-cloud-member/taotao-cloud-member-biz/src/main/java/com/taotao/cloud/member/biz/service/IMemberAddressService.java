@@ -6,8 +6,6 @@ import com.taotao.cloud.member.biz.entity.MemberAddress;
 
 /**
  * 收货地址业务层
- *
- * @since 2020/11/18 9:45 上午
  */
 public interface IMemberAddressService extends IService<MemberAddress> {
 
