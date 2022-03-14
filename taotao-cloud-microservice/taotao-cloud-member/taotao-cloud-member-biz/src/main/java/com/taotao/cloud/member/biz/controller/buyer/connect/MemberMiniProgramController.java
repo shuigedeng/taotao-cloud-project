@@ -1,7 +1,10 @@
 package com.taotao.cloud.member.biz.controller.buyer.connect;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
+import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -43,7 +46,7 @@ public class MemberMiniProgramController {
 	@Operation(summary = "消息订阅", description = "消息订阅", method = CommonConstant.GET)
 	@RequestLogger(description = "消息订阅")
 	@PreAuthorize("@el.check('admin','timing:list')")
-	@GetMapping("/subscribeMessage")
+	@GetMapping("/subscribe/message")
 	public Result<List<WechatMPMessage>> autoLogin() {
 		return Result.success(wechatMPMessageService.list());
 	}
