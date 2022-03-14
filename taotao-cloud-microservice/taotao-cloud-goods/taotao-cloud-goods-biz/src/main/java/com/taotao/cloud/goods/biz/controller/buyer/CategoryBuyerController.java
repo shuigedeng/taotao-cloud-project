@@ -6,6 +6,7 @@ import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -33,12 +34,12 @@ public class CategoryBuyerController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@Operation(summary = "获取商品分类列表", description = "获取商品分类列表", method = CommonConstant.GET)
-	@RequestLogger(description = "获取商品分类列表")
+	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表", method = CommonConstant.GET)
+	@RequestLogger(description = "根据父id获取商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}")
 	public Result<List<CategoryVO>> list(
-		@NotNull(message = "分类ID不能为空") @PathVariable String parentId) {
+		@Parameter(name = "分类父ID") @NotNull(message = "分类ID不能为空") @PathVariable String parentId) {
 		return Result.success(categoryService.listAllChildren(parentId));
 	}
 }

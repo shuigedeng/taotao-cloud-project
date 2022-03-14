@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.biz.service;
 
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
 import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
@@ -16,10 +17,10 @@ public interface EsGoodsSearchService {
 	 * 商品搜索
 	 *
 	 * @param searchDTO 搜索参数
-	 * @param pageVo    分页参数
+	 * @param pageParam    分页参数
 	 * @return 搜索结果
 	 */
-	SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO, PageVO pageVo);
+	SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO, PageParam pageParam);
 
 	/**
 	 * 获取热门关键词
@@ -50,7 +51,7 @@ public interface EsGoodsSearchService {
 	 * @param pageVo      分页参数
 	 * @return ES商品关联
 	 */
-	EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch, PageVO pageVo);
+	EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch,  PageParam pageParam);
 
 	/**
 	 * 根据SkuID列表获取ES商品

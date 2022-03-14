@@ -2,7 +2,6 @@ package com.taotao.cloud.goods.biz.service.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -11,13 +10,16 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
@@ -193,6 +195,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		if (goodsVO != null) {
 			return goodsVO;
 		}
+
 		//查询商品信息
 		Goods goods = this.getById(goodsId);
 		if (goods == null) {
@@ -235,8 +238,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public IPage<Goods> queryByParams(GoodsSearchParams goodsSearchParams) {
-		return this.page(PageUtil.initPage(goodsSearchParams), goodsSearchParams.queryWrapper());
+	public PageModel<GoodsBaseVO> queryByParams(GoodsSearchParams goodsSearchParams) {
+		IPage<Goods> goodsPage = this.page(goodsSearchParams.buildMpPage(),
+			goodsSearchParams.queryWrapper());
+		return PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class);
 	}
 
 	/**

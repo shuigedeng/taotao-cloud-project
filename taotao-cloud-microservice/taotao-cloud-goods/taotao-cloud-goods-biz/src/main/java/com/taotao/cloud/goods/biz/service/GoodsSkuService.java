@@ -2,8 +2,10 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
@@ -129,7 +131,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param searchParams 查询参数
 	 * @return 商品sku信息
 	 */
-	IPage<GoodsSku> getGoodsSkuByPage(GoodsSearchParams searchParams);
+	PageModel<GoodsSkuBaseVO> getGoodsSkuByPage(GoodsSearchParams searchParams);
 
 	/**
 	 * 列表查询商品sku信息

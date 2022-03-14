@@ -40,7 +40,7 @@ public class MemberBrowseController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<List<EsGoodsIndex>> getByPage(PageVO page) {
-		return Result.success(IMemberBrowseService.footPrintPage(page));
+		return Result.success(memberBrowseService.footPrintPage(page));
 	}
 
 	@Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史", method = CommonConstant.DELETE)
@@ -50,7 +50,7 @@ public class MemberBrowseController {
 	public Result<Boolean> delAllByIds(
 		@Parameter(description = "会员地址ID", required = true)
 		@NotEmpty(message = "商品ID不能为空") @PathVariable("ids") List<String> ids) {
-		IMemberBrowseService.deleteByIds(ids);
+		memberBrowseService.deleteByIds(ids);
 		return Result.success(true);
 	}
 
@@ -59,7 +59,7 @@ public class MemberBrowseController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping
 	public Result<Boolean> deleteAll() {
-		IMemberBrowseService.clean();
+		memberBrowseService.clean();
 		return Result.success(true);
 	}
 
@@ -68,7 +68,7 @@ public class MemberBrowseController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/foot/count")
 	public Result<Integer> getFootprintNum() {
-		return Result.success(IMemberBrowseService.getFootprintNum());
+		return Result.success(memberBrowseService.getFootprintNum());
 	}
 
 }

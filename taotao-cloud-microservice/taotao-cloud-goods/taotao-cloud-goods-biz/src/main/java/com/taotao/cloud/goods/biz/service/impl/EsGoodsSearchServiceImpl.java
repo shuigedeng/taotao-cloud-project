@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.druid.util.StringUtils;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
 import com.taotao.cloud.goods.api.dto.ParamOptions;
@@ -14,6 +15,7 @@ import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
 import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -72,6 +74,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	private static final String ATTR_BRAND_URL = "brandUrlAgg";
 	private static final String ATTR_NAME_KEY = "nameList";
 	private static final String ATTR_VALUE_KEY = "valueList";
+
 	/**
 	 * ES
 	 */
@@ -81,14 +84,15 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 
 	@Autowired
 	private EsGoodsIndexService esGoodsIndexService;
+
 	/**
 	 * 缓存
 	 */
 	@Autowired
-	private Cache<Object> cache;
+	private RedisRepository redisRepository;
 
 	@Override
-	public SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO, PageVO pageVo) {
+	public SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO,  PageParam pageParam) {
 		boolean exists = restTemplate.indexOps(EsGoodsIndex.class).exists();
 		if (!exists) {
 			esGoodsIndexService.init();
@@ -96,7 +100,8 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getKeyword())) {
 			cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), searchDTO.getKeyword());
 		}
-		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(searchDTO, pageVo);
+
+		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(searchDTO, pageParam);
 		NativeSearchQuery searchQuery = searchQueryBuilder.build();
 		log.info("searchGoods DSL:{}", searchQuery.getQuery());
 		SearchHits<EsGoodsIndex> search = restTemplate.search(searchQuery, EsGoodsIndex.class);
@@ -139,7 +144,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	}
 
 	@Override
-	public EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch, PageVO pageVo) {
+	public EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch,  PageParam pageParam) {
 		NativeSearchQueryBuilder builder = createSearchQueryBuilder(goodsSearch, null);
 		//分类
 		AggregationBuilder categoryNameBuilder = AggregationBuilders.terms("categoryNameAgg")
@@ -404,17 +409,18 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	 * @return es搜索builder
 	 */
 	private NativeSearchQueryBuilder createSearchQueryBuilder(EsGoodsSearchDTO searchDTO,
-		PageVO pageVo) {
+		PageParam pageParam) {
 		NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
-		if (pageVo != null) {
-			int pageNumber = pageVo.getPageNumber() - 1;
+		if (pageParam != null) {
+			int pageNumber = pageParam.getCurrentPage() - 1;
 			if (pageNumber < 0) {
 				pageNumber = 0;
 			}
-			Pageable pageable = PageRequest.of(pageNumber, pageVo.getPageSize());
+			Pageable pageable = PageRequest.of(pageNumber, pageParam.getPageSize());
 			//分页
 			nativeSearchQueryBuilder.withPageable(pageable);
 		}
+
 		//查询参数非空判定
 		if (searchDTO != null) {
 			//过滤条件
@@ -450,7 +456,6 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 			}
 
 			//如果是聚合查询
-
 			nativeSearchQueryBuilder.withQuery(filterBuilder);
 
 			if (pageVo != null && CharSequenceUtil.isNotEmpty(pageVo.getOrder())

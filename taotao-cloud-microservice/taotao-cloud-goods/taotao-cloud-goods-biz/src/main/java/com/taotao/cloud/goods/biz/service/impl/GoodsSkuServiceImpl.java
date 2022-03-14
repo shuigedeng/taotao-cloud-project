@@ -4,18 +4,19 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.event.GeneratorEsGoodsIndexEvent;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuSpecVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
@@ -427,8 +428,10 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	}
 
 	@Override
-	public IPage<GoodsSku> getGoodsSkuByPage(GoodsSearchParams searchParams) {
-		return this.page(PageUtil.initPage(searchParams), searchParams.queryWrapper());
+	public PageModel<GoodsSkuBaseVO> getGoodsSkuByPage(GoodsSearchParams searchParams) {
+		IPage<GoodsSku> goodsSkuPage = this.page(searchParams.buildMpPage(),
+			searchParams.queryWrapper());
+		return PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class);
 	}
 
 	/**

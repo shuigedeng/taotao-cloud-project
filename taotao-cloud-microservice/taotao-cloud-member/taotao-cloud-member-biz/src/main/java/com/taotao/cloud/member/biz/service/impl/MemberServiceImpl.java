@@ -3,6 +3,7 @@ package com.taotao.cloud.member.biz.service.impl;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.util.PageUtil;
 import com.alibaba.nacos.common.utils.UuidUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -10,9 +11,24 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.cookie.CookieUtil;
+import com.taotao.cloud.member.api.dto.ConnectQueryDTO;
+import com.taotao.cloud.member.api.dto.MemberEditDTO;
+import com.taotao.cloud.member.api.vo.MemberSearchVO;
+import com.taotao.cloud.member.api.vo.MemberVO;
+import com.taotao.cloud.member.biz.aop.annotation.PointLogPoint;
+import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
+import com.taotao.cloud.member.biz.connect.entity.Connect;
+import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
+import com.taotao.cloud.member.biz.connect.service.ConnectService;
+import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.mapper.MemberMapper;
 import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
+import com.taotao.cloud.member.biz.token.StoreTokenGenerate;
+import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,9 +40,6 @@ import java.util.Objects;
 
 /**
  * 会员接口业务层实现
- *
- * 
- * @since 2021-03-29 14:10:16
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -470,7 +483,6 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         }
 
     }
-
 
     /**
      * 检测是否可以绑定第三方联合登陆

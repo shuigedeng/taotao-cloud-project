@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
  * 商品规格VO
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class GoodsSkuVO extends GoodsSku {
+public class GoodsSkuVO extends GoodsSkuBaseVO {
 
 	private static final long serialVersionUID = -7651149660489332344L;
 
@@ -22,9 +20,5 @@ public class GoodsSkuVO extends GoodsSku {
 
 	@Schema(description = "商品图片")
 	private List<String> goodsGalleryList;
-
-	public GoodsSkuVO(GoodsSku goodsSku) {
-		BeanUtil.copyProperties(goodsSku, this);
-	}
 }
 

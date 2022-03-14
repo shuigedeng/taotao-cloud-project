@@ -115,7 +115,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 		this.version = version;
 	}
 
-	public boolean isDelFlag() {
+	public boolean getDelFlag() {
 		return delFlag;
 	}
 

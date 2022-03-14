@@ -3,6 +3,8 @@ package com.taotao.cloud.member.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.entity.MemberGoodsCollection;
 import java.util.List;
@@ -18,10 +20,10 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
     /**
      * 获取商品搜索分页
      *
-     * @param pageVo 查询参数
+     * @param pageParam 查询参数
      * @return 商品搜索分页
      */
-    IPage<GoodsCollectionVO> goodsCollection(PageVO pageVo);
+    PageModel<GoodsCollectionVO> goodsCollection(PageParam pageParam);
 
     /**
      * 是否收藏商品
@@ -37,7 +39,7 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
      * @param skuId 规格ID
      * @return 操作状态
      */
-    MemberGoodsCollection addGoodsCollection(String skuId);
+    boolean addGoodsCollection(String skuId);
 
     /**
      * 商品收藏

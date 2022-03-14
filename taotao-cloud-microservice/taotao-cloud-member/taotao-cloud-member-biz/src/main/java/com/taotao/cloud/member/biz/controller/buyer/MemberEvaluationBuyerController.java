@@ -2,6 +2,8 @@ package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
@@ -11,8 +13,10 @@ import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.apache.maven.model.building.Result;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
@@ -48,7 +52,7 @@ public class MemberEvaluationBuyerController {
 	@RequestLogger(description = "添加会员评价")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<MemberEvaluationDTO> save(@Valid MemberEvaluationDTO memberEvaluationDTO) {
+	public Result<Boolean> save(@Valid @RequestBody MemberEvaluationDTO memberEvaluationDTO) {
 		return Result.success(memberEvaluationService.addMemberEvaluation(memberEvaluationDTO));
 	}
 
@@ -56,8 +60,8 @@ public class MemberEvaluationBuyerController {
 	@RequestLogger(description = "查看会员评价详情")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberEvaluationVO> save(
-		@NotNull(message = "评价ID不能为空") @PathVariable("id") String id) {
+	public Result<MemberEvaluationVO> queryById(
+		@Parameter(description = "评价ID", required = true) @NotBlank(message = "评价ID不能为空") @PathVariable("id") String id) {
 		return Result.success(memberEvaluationService.queryById(id));
 	}
 
@@ -65,10 +69,9 @@ public class MemberEvaluationBuyerController {
 	@RequestLogger(description = "查看当前会员评价列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<IPage<MemberEvaluation>> queryMineEvaluation(
-		EvaluationQueryParams evaluationQueryParams) {
+	public Result<PageModel<MemberEvaluationVO>> queryMineEvaluation(@Validated EvaluationQueryParams evaluationQueryParams) {
 		//设置当前登录会员
-		evaluationQueryParams.setMemberId(UserContext.getCurrentUser().getId());
+		evaluationQueryParams.setMemberId(SecurityUtil.getUserId());
 		return Result.success(memberEvaluationService.managerQuery(evaluationQueryParams));
 	}
 
@@ -76,9 +79,8 @@ public class MemberEvaluationBuyerController {
 	@RequestLogger(description = "查看某一个商品的评价列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/{goodsId}")
-	public Result<IPage<MemberEvaluation>> queryGoodsEvaluation(
-		EvaluationQueryParams evaluationQueryParams,
-		@Parameter(description = "商品ID", required = true) @NotNull @PathVariable("goodsId") String goodsId) {
+	public Result<IPage<MemberEvaluationVO>> queryGoodsEvaluation(EvaluationQueryParams evaluationQueryParams,
+		@Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") String goodsId) {
 		//设置查询查询商品
 		evaluationQueryParams.setGoodsId(goodsId);
 		evaluationQueryParams.setStatus(SwitchEnum.OPEN.name());
@@ -90,7 +92,7 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/number/{goodsId}")
 	public Result<EvaluationNumberVO> queryEvaluationNumber(
-		@Parameter(description = "商品ID", required = true) @NotNull @PathVariable("goodsId") String goodsId) {
+		@Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空")  @PathVariable("goodsId") String goodsId) {
 		return Result.success(memberEvaluationService.getEvaluationNumber(goodsId));
 	}
 }
