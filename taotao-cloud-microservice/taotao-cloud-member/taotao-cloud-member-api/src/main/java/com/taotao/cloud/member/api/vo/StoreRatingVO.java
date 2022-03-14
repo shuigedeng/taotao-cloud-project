@@ -1,13 +1,12 @@
 package com.taotao.cloud.member.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /**
  * 评分VO
- *
- *
- * @since 2021/3/15 5:55 下午
  */
+@Data
 @Schema(description = "评分VO")
 public class StoreRatingVO {
 
@@ -19,28 +18,4 @@ public class StoreRatingVO {
 
 	@Schema(description = "描述评分")
 	private String descriptionScore;
-
-	public String getDeliveryScore() {
-		return deliveryScore;
-	}
-
-	public void setDeliveryScore(String deliveryScore) {
-		this.deliveryScore = deliveryScore;
-	}
-
-	public String getServiceScore() {
-		return serviceScore;
-	}
-
-	public void setServiceScore(String serviceScore) {
-		this.serviceScore = serviceScore;
-	}
-
-	public String getDescriptionScore() {
-		return descriptionScore;
-	}
-
-	public void setDescriptionScore(String descriptionScore) {
-		this.descriptionScore = descriptionScore;
-	}
 }

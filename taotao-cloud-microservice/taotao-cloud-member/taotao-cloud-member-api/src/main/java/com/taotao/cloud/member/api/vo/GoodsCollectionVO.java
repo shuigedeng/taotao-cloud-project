@@ -1,15 +1,18 @@
 package com.taotao.cloud.member.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import lombok.Data;
 
 /**
  * 会员商品收藏VO
- *
- * 
- * @since 2021/1/27 10:41 上午
  */
+@Data
 @Schema(description = "会员商品收藏VO")
-public class GoodsCollectionVO {
+public class GoodsCollectionVO implements Serializable {
+
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "id")
 	private String id;
@@ -27,64 +30,8 @@ public class GoodsCollectionVO {
 	private String image;
 
 	@Schema(description = "商品价格")
-	private Double price;
+	private BigDecimal price;
 
 	@Schema(description = "已失效")
 	private String marketEnable;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
-
-	public String getGoodsName() {
-		return goodsName;
-	}
-
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public String getMarketEnable() {
-		return marketEnable;
-	}
-
-	public void setMarketEnable(String marketEnable) {
-		this.marketEnable = marketEnable;
-	}
 }

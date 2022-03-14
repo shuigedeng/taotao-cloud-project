@@ -1,18 +1,24 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import lombok.Data;
 
 /**
  * 添加会员DTO
  *
- * 
- * @since 2020/12/14 16:31
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-14 11:24:21
  */
+@Data
 @Schema(description = "添加会员DTO")
-public class MemberAddDTO {
+public class MemberAddDTO implements Serializable {
+
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@NotEmpty(message = "会员用户名必填")
 	@Size(max = 30, message = "会员用户名最长30位")
@@ -26,28 +32,4 @@ public class MemberAddDTO {
 	@Schema(description = "手机号码", required = true)
 	@Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
 	private String mobile;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
 }

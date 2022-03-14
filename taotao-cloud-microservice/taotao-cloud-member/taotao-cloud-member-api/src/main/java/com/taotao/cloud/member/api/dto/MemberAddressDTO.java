@@ -1,17 +1,23 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import lombok.Data;
 
 /**
  * 会员地址DTO
  *
- * 
- * @since 2020/12/14 16:31
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-14 11:26:08
  */
+@Data
 @Schema(description = "租户id")
-public class MemberAddressDTO {
+public class MemberAddressDTO implements Serializable {
+
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@NotEmpty(message = "收货人姓名不能为空")
 	@Schema(description = "收货人姓名")
@@ -32,44 +38,4 @@ public class MemberAddressDTO {
 	@NotEmpty(message = "详细地址不能为空")
 	@Schema(description = "详细地址")
 	private String consigneeDetail;
-
-	public String getConsigneeName() {
-		return consigneeName;
-	}
-
-	public void setConsigneeName(String consigneeName) {
-		this.consigneeName = consigneeName;
-	}
-
-	public String getConsigneeMobile() {
-		return consigneeMobile;
-	}
-
-	public void setConsigneeMobile(String consigneeMobile) {
-		this.consigneeMobile = consigneeMobile;
-	}
-
-	public String getConsigneeAddressPath() {
-		return consigneeAddressPath;
-	}
-
-	public void setConsigneeAddressPath(String consigneeAddressPath) {
-		this.consigneeAddressPath = consigneeAddressPath;
-	}
-
-	public String getConsigneeAddressIdPath() {
-		return consigneeAddressIdPath;
-	}
-
-	public void setConsigneeAddressIdPath(String consigneeAddressIdPath) {
-		this.consigneeAddressIdPath = consigneeAddressIdPath;
-	}
-
-	public String getConsigneeDetail() {
-		return consigneeDetail;
-	}
-
-	public void setConsigneeDetail(String consigneeDetail) {
-		this.consigneeDetail = consigneeDetail;
-	}
 }

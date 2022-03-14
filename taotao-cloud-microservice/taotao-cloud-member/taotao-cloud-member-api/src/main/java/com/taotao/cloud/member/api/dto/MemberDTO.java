@@ -5,14 +5,17 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
  * 会员注册DTO
  *
  * @author shuigedeng
- * @since 2020/5/14 10:44
+ * @version 2022.03
+ * @since 2022-03-14 11:25:41
  */
+@Data
 @Schema(name = "MemberDTO", description = "会员注册DTO")
 public class MemberDTO implements Serializable {
 

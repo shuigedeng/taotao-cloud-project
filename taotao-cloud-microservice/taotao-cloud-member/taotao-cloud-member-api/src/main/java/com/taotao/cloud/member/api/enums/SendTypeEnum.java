@@ -3,8 +3,6 @@ package com.taotao.cloud.member.api.enums;
 /**
  * 发送类型
  *
- * 
- * @since 2020-03-10 11:35 上午
  */
 public enum SendTypeEnum {
 
