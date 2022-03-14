@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import lombok.Data;
 
@@ -32,14 +34,14 @@ public class PurchaseOrder extends BaseEntity {
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "截止时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date deadline;
+    private LocalDateTime deadline;
 	/**
 	 * 应用ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "收货时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date receiptTime;
+    private LocalDateTime receiptTime;
 	/**
 	 * 应用ID
 	 */

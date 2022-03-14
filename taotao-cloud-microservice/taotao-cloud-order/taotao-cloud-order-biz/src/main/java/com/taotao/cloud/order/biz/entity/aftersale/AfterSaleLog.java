@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.entity.aftersale;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = AfterSaleLog.TABLE_NAME, comment = "售后日志")
 public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 
-	public static final String TABLE_NAME = "li_after_sale_log";
+	public static final String TABLE_NAME = "tt_after_sale_log";
 
 	/**
 	 * 应用ID
