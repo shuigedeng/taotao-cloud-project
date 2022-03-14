@@ -105,7 +105,7 @@ public class ManagerUserController extends
 		if (Objects.isNull(securityUser)) {
 			throw new BusinessException("用户未登录");
 		}
-		Long userId = securityUser.getUserId();
+		String userId = securityUser.getUserId();
 		User sysUser = service().getById(userId);
 		return success(IUserMapStruct.INSTANCE.sysUserToUserQueryVO(sysUser));
 	}

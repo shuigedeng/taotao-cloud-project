@@ -62,7 +62,7 @@ public class DataScopeInterceptor  implements InnerInterceptor {
 
 		String scopeName = dataScope.getScopeName();
 		String selfScopeName = dataScope.getSelfScopeName();
-		Long userId =
+		String userId =
 			dataScope.getUserId() == null ? SecurityUtil.getUserId() : dataScope.getUserId();
 		List<Long> orgIds = dataScope.getOrgIds();
 		DataScopeTypeEnum dsType = DataScopeTypeEnum.SELF;

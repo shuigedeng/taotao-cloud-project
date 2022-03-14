@@ -27,10 +27,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * @version 2021.9
  * @since 2021-09-04 07:30:59
  */
-public class AuditorBean implements AuditorAware<Long> {
+public class AuditorBean implements AuditorAware<String> {
 
 	@Override
-	public Optional<Long> getCurrentAuditor() {
+	public Optional<String> getCurrentAuditor() {
 		SecurityUser user;
 		try {
 			user = (SecurityUser) SecurityContextHolder.getContext().getAuthentication()
