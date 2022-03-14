@@ -3,8 +3,6 @@ package com.taotao.cloud.promotion.api.enums;
 /**
  * 优惠券时间范围枚举
  *
- * 
- * @since 2021/5/24 8:31 上午
  */
 public enum CouponRangeDayEnum {
 

@@ -1,15 +1,12 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import cn.lili.modules.promotion.entity.dos.CouponActivityItem;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * 优惠券活动的优惠券VO
  *
- * 
- * @since 2021/6/18 11:00 上午
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -24,7 +21,7 @@ public class CouponActivityItemVO extends CouponActivityItem {
     /**
      * POINT("打折"), PRICE("减免现金");
      *
-     * @see cn.lili.modules.promotion.entity.enums.CouponTypeEnum
+     * @see CouponTypeEnum
      */
     @Schema(description =  "优惠券类型")
     private String couponType;

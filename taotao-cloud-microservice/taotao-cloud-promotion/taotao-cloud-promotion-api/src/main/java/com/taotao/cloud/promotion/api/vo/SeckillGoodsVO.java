@@ -1,15 +1,12 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * 秒杀活动商品视图对象
- *
- * 
- * @since 2020/8/26
  **/
 @Data
 public class SeckillGoodsVO implements Serializable {

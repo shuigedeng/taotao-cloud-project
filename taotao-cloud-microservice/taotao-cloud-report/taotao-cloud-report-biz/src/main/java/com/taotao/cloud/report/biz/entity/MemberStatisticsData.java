@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,8 +13,6 @@ import java.util.Date;
 /**
  * 会员统计
  *
- * 
- * @since 2020/11/17 7:34 下午
  */
 @Data
 @TableName("li_member_statistics_data")

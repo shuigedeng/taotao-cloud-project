@@ -5,9 +5,6 @@ import lombok.experimental.Accessors;
 
 /**
  * 统一下单-H5 场景信息
- *
- * @author Chopper
- * @since 2020/12/17 17:56
  */
 
 @Data

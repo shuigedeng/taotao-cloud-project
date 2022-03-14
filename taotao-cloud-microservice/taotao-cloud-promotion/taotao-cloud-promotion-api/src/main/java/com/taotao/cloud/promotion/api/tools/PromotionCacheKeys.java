@@ -1,6 +1,5 @@
 package com.taotao.cloud.promotion.api.tools;
 
-import cn.lili.cache.CachePrefix;
 
 /**
  * 满额活动缓存Key

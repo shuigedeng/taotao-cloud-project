@@ -1,7 +1,7 @@
 package com.taotao.cloud.report.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,9 +9,6 @@ import java.util.Date;
 
 /**
  * 订单统计数据VO
- *
- * @author Bulbasaur
- * @since 2020/12/9 17:13
  */
 @Data
 public class OrderStatisticsDataVO {

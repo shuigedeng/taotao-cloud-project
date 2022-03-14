@@ -3,8 +3,6 @@ package com.taotao.cloud.promotion.api.enums;
 /**
  * 秒杀活动状态枚举
  *
- * 
- * @since 2020/8/26
  **/
 public enum SeckillApplyStatusEnum {
 

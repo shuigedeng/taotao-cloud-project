@@ -28,10 +28,6 @@ import java.util.*;
 
 /**
  * 支付工具
- *
- * @author Chopper
- * @version v4.0
- * @since 2020/12/18 15:24
  */
 @Slf4j
 public class PayKit {

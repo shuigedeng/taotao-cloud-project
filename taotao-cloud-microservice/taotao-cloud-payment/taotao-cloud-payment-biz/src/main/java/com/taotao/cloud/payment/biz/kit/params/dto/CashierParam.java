@@ -2,6 +2,7 @@ package com.taotao.cloud.payment.biz.kit.params.dto;
 
 import cn.lili.common.utils.StringUtils;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
@@ -11,8 +12,6 @@ import java.util.List;
 /**
  * 支付参数
  *
- * @author Chopper
- * @since 2021-01-25 19:09
  */
 @Data
 @ToString

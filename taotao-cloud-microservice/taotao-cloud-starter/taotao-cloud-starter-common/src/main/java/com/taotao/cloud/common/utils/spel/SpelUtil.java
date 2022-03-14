@@ -10,9 +10,6 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 /**
  * SpelUtil
  *
- * @author Chopper
- * @version v1.0
- * 2021-01-11 10:45
  */
 public class SpelUtil {
 

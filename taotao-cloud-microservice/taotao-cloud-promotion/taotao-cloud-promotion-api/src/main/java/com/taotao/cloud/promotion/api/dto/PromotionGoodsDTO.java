@@ -1,8 +1,6 @@
 package com.taotao.cloud.promotion.api.dto;
 
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,9 +8,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 促销商品数据传输对象
- *
- * @author paulG
- * @since 2020/10/9
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data

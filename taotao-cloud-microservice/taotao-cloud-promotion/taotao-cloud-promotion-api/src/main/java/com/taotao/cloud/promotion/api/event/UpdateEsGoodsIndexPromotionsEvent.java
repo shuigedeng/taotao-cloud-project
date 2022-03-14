@@ -3,11 +3,6 @@ package com.taotao.cloud.promotion.api.event;
 import lombok.Data;
 import org.springframework.context.ApplicationEvent;
 
-/**
- * @author paulG
- * @since 2022/1/19
- **/
-@Data
 public class UpdateEsGoodsIndexPromotionsEvent extends ApplicationEvent {
 
     private String promotionsJsonStr;

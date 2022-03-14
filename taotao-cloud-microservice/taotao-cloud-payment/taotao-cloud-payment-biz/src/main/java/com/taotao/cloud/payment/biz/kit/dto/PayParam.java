@@ -1,6 +1,7 @@
 package com.taotao.cloud.payment.biz.kit.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
@@ -8,9 +9,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 支付参数
- *
- * @author Chopper
- * @since 2020/12/19 11:46
  */
 @Data
 @ToString

@@ -2,9 +2,6 @@ package com.taotao.cloud.member.api.enums;
 
 /**
  * 预存款变动日志业务类型
- *
- * @author Chopper
- * @since 2020/8/20 15:39
  */
 
 public enum DepositServiceTypeEnum {

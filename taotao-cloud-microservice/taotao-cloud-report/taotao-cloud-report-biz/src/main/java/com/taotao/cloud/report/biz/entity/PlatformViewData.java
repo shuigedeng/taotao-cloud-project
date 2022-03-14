@@ -4,6 +4,7 @@ import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,8 +12,6 @@ import java.util.Date;
 /**
  * 平台pv统计
  *
- * 
- * @since 2020-06-19 17:50
  */
 @Data
 @TableName("li_s_platform_view_data")

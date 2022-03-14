@@ -1,16 +1,10 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.modules.promotion.entity.dos.MemberCoupon;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * MemberCouponVO
- *
- * 
- * @version v1.0
- * 2021-08-24 14:30
  */
 @Data
 public class MemberCouponVO extends MemberCoupon {

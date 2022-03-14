@@ -1,16 +1,11 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.promotion.entity.dos.PointsGoods;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * 积分商品视图对象
- *
- * 
- * @since 2021/1/13
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data

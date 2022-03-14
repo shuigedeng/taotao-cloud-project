@@ -1,7 +1,6 @@
 package com.taotao.cloud.promotion.api.vo;
 
-import cn.lili.modules.member.entity.dos.Member;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +8,6 @@ import lombok.NoArgsConstructor;
 /**
  * 拼图会员视图对象
  *
- * 
- * @since 2021/3/3
  **/
 @Data
 @NoArgsConstructor

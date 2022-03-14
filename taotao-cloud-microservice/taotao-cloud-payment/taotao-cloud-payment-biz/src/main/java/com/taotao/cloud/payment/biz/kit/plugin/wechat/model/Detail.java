@@ -9,8 +9,6 @@ import java.util.List;
 /**
  * 统一下单-优惠功能
  *
- * @author Chopper
- * @since 2020/12/17 17:46
  */
 @Data
 @Accessors(chain = true)

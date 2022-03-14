@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ip工具
  *
- * @author Chopper
  */
 public class IpHelper {
 

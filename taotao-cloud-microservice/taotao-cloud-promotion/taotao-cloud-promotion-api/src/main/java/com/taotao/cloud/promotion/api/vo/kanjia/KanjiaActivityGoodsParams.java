@@ -2,12 +2,10 @@ package com.taotao.cloud.promotion.api.vo.kanjia;
 
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.modules.promotion.entity.enums.PromotionsStatusEnum;
-import cn.lili.modules.promotion.tools.PromotionTools;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,9 +13,6 @@ import java.util.Date;
 
 /**
  * 砍价活动商品查询通用类
- *
- * @author qiuqiu
- * @date 2020/8/21
  **/
 @Data
 public class KanjiaActivityGoodsParams implements Serializable {

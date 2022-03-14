@@ -16,10 +16,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 线下收款
- *
- * @author Chopper
- * @version v1.0
- * 2021-02-20 10:14
  */
 @Slf4j
 @Component

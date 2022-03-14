@@ -1,22 +1,18 @@
 package com.taotao.cloud.report.api.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
  * 分类统计VO
- *
- * @author Bulbasaur
- * @since 2020/12/10 15:42
  */
 @Data
 public class CategoryStatisticsDataVO {
 
-
-    @ApiModelProperty("一级分类ID")
+    @Schema(description="一级分类ID")
     private String categoryId;
 
-    @ApiModelProperty("一级分类名称")
+    @Schema(description="一级分类名称")
     private String categoryName;
 
     @Schema(description =  "销售数量")

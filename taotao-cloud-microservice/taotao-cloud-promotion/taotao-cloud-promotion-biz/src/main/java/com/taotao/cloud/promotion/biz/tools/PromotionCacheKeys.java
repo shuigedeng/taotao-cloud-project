@@ -4,8 +4,6 @@ import cn.lili.cache.CachePrefix;
 
 /**
  * 满额活动缓存Key
- * @author paulG
- * @since 2020/10/12
  **/
 public class PromotionCacheKeys {
 

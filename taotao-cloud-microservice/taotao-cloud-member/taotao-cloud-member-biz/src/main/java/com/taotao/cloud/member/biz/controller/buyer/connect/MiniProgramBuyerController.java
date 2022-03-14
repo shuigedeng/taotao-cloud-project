@@ -21,9 +21,6 @@ import java.util.List;
 
 /**
  * 买家端,小程序登录接口
- *
- * @author Chopper
- * @since 2021/2/19 09:28
  */
 @RestController
 @RequestMapping("/buyer/passport/connect/miniProgram")

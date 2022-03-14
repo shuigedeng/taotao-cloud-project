@@ -11,9 +11,6 @@
 //
 ///**
 // * 店铺评分
-// *
-// * @author Chopper
-// * @since 2021/3/15 5:30 下午
 // */
 //@Component
 //public class StoreRatingExecute implements EveryDayExecute {

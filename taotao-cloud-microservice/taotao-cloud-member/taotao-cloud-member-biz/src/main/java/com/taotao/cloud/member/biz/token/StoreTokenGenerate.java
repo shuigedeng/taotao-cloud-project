@@ -16,10 +16,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 商家token生成
- *
- * @author Chopper
- * @version v4.0
- * @since 2020/11/16 10:51
  */
 @Component
 public class StoreTokenGenerate extends AbstractTokenGenerate<Member> {

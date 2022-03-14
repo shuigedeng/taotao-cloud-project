@@ -1,9 +1,7 @@
 package com.taotao.cloud.promotion.api.dto;
 
 
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.promotion.entity.dos.KanjiaActivityGoods;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,9 +9,6 @@ import java.io.Serializable;
 
 /**
  * 砍价活动商品DTO
- *
- * @author qiuqiu
- * @since 2020/8/21
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data
