@@ -69,7 +69,7 @@ public class ConnectWebBindController {
 	@GetMapping("/result")
 	public Result<Object> callBackResult(String state) {
 		if (state == null) {
-			throw new ServiceException(ResultCode.USER_CONNECT_LOGIN_ERROR);
+			throw new BusinessException(ResultEnum.USER_CONNECT_LOGIN_ERROR);
 		}
 		return connectUtil.getResult(state);
 	}

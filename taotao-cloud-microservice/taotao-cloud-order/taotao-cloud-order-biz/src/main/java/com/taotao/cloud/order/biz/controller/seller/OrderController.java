@@ -157,7 +157,7 @@ public class OrderController {
 	@PostMapping(value = "/batchDeliver", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Result<Object> batchDeliver(@RequestPart("files") MultipartFile files) {
 		orderService.batchDeliver(files);
-		return ResultUtil.success(ResultCode.SUCCESS);
+		return ResultUtil.success(ResultEnum.SUCCESS);
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表", method = CommonConstant.GET)

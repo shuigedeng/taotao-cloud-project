@@ -67,7 +67,7 @@ public class MemberPcController {
 		if (smsUtil.verifyCode(mobile, VerificationEnums.LOGIN, uuid, code)) {
 			return Result.success(memberService.mobilePhoneLogin(mobile));
 		} else {
-			throw new ServiceException(ResultCode.VERIFICATION_SMS_CHECKED_ERROR);
+			throw new BusinessException(ResultEnum.VERIFICATION_SMS_CHECKED_ERROR);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class MemberPcController {
 		if (smsUtil.verifyCode(mobilePhone, VerificationEnums.REGISTER, uuid, code)) {
 			return Result.success(memberService.register(username, password, mobilePhone));
 		} else {
-			throw new ServiceException(ResultCode.VERIFICATION_SMS_CHECKED_ERROR);
+			throw new BusinessException(ResultEnum.VERIFICATION_SMS_CHECKED_ERROR);
 		}
 	}
 
@@ -111,7 +111,7 @@ public class MemberPcController {
 			memberService.findByMobile(uuid, mobile);
 			return ResultUtil.success();
 		} else {
-			throw new ServiceException(ResultCode.VERIFICATION_SMS_CHECKED_ERROR);
+			throw new BusinessException(ResultEnum.VERIFICATION_SMS_CHECKED_ERROR);
 		}
 	}
 

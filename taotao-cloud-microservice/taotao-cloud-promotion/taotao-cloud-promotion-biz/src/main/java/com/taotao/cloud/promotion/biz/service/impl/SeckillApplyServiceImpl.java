@@ -125,7 +125,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
     public void addSeckillApply(String seckillId, String storeId, List<SeckillApplyVO> seckillApplyList) {
         Seckill seckill = this.seckillService.getById(seckillId);
         if (seckill == null) {
-            throw new ServiceException(ResultCode.SECKILL_NOT_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.SECKILL_NOT_EXIST_ERROR);
         }
         if (seckillApplyList == null || seckillApplyList.isEmpty()) {
             return;
@@ -184,11 +184,11 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
     public void removeSeckillApply(String seckillId, String id) {
         Seckill seckill = this.seckillService.getById(seckillId);
         if (seckill == null) {
-            throw new ServiceException(ResultCode.SECKILL_NOT_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.SECKILL_NOT_EXIST_ERROR);
         }
         SeckillApply seckillApply = this.getById(id);
         if (seckillApply == null) {
-            throw new ServiceException(ResultCode.SECKILL_APPLY_NOT_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.SECKILL_APPLY_NOT_EXIST_ERROR);
         }
 
 
@@ -211,17 +211,17 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
         List<String> existSku = new ArrayList<>();
         for (SeckillApplyVO seckillApply : seckillApplyList) {
             if (seckillApply.getPrice() > seckillApply.getOriginalPrice()) {
-                throw new ServiceException(ResultCode.SECKILL_PRICE_ERROR);
+                throw new BusinessException(ResultEnum.SECKILL_PRICE_ERROR);
             }
             //检查秒杀活动申请的时刻，是否存在在秒杀活动的时间段内
             String[] rangeHours = hours.split(",");
             boolean containsSame = Arrays.stream(rangeHours).anyMatch(i -> i.equals(seckillApply.getTimeLine().toString()));
             if (!containsSame) {
-                throw new ServiceException(ResultCode.SECKILL_TIME_ERROR);
+                throw new BusinessException(ResultEnum.SECKILL_TIME_ERROR);
             }
             //检查商品是否参加多个时间段的活动
             if (existSku.contains(seckillApply.getSkuId())) {
-                throw new ServiceException(seckillApply.getGoodsName() + "该商品不能同时参加多个时间段的活动");
+                throw new BusinessException(seckillApply.getGoodsName() + "该商品不能同时参加多个时间段的活动");
             } else {
                 existSku.add(seckillApply.getSkuId());
             }
@@ -314,15 +314,15 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
     private void checkSeckillGoodsSku(Seckill seckill, SeckillApplyVO seckillApply, GoodsSku goodsSku, DateTime startTime) {
         //活动库存不能大于商品库存
         if (goodsSku.getQuantity() < seckillApply.getQuantity()) {
-            throw new ServiceException(seckillApply.getGoodsName() + ",此商品库存不足");
+            throw new BusinessException(seckillApply.getGoodsName() + ",此商品库存不足");
         }
         //查询是否在同一时间段参与了拼团活动
         if (promotionGoodsService.findInnerOverlapPromotionGoods(PromotionTypeEnum.PINTUAN.name(), goodsSku.getId(), startTime, seckill.getEndTime(), seckill.getId()) > 0) {
-            throw new ServiceException("商品[" + goodsSku.getGoodsName() + "]已经在重叠的时间段参加了拼团活动，不能参加秒杀活动");
+            throw new BusinessException("商品[" + goodsSku.getGoodsName() + "]已经在重叠的时间段参加了拼团活动，不能参加秒杀活动");
         }
         //查询是否在同一时间段参与了秒杀活动活动
         if (promotionGoodsService.findInnerOverlapPromotionGoods(PromotionTypeEnum.SECKILL.name(), goodsSku.getId(), startTime, seckill.getEndTime(), seckill.getId()) > 0) {
-            throw new ServiceException("商品[" + goodsSku.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动，不能参加秒杀活动活动");
+            throw new BusinessException("商品[" + goodsSku.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动，不能参加秒杀活动活动");
         }
     }
 

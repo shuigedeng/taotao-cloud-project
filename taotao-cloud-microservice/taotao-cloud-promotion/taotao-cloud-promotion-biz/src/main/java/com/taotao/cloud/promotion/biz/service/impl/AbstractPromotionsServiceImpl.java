@@ -8,7 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.promotion.api.dto.BasePromotions;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.BasePromotionsSearchParams;
@@ -198,7 +199,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
     public void checkStatus(T promotions) {
         T byId = this.getById(promotions.getId());
         if (byId == null) {
-            throw new ServiceException(ResultCode.PROMOTION_ACTIVITY_ERROR);
+            throw new BusinessException(ResultEnum.PROMOTION_ACTIVITY_ERROR);
         }
     }
 

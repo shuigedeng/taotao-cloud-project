@@ -200,7 +200,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		Goods goods = this.getById(goodsId);
 		if (goods == null) {
 			log.error("商品ID为" + goodsId + "的商品不存在");
-			throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		goodsVO = new GoodsVO();
 		//赋值
@@ -372,10 +372,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 		FreightTemplate freightTemplate = freightTemplateService.getById(templateId);
 		if (freightTemplate == null) {
-			throw new ServiceException(ResultCode.FREIGHT_TEMPLATE_NOT_EXIST);
+			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
 		}
 		if (authUser != null && !freightTemplate.getStoreId().equals(authUser.getStoreId())) {
-			throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 		LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.set(Goods::getTemplateId, templateId);
@@ -483,16 +483,16 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		switch (goods.getGoodsType()) {
 			case "PHYSICAL_GOODS":
 				if ("0".equals(goods.getTemplateId())) {
-					throw new ServiceException(ResultCode.PHYSICAL_GOODS_NEED_TEMP);
+					throw new BusinessException(ResultEnum.PHYSICAL_GOODS_NEED_TEMP);
 				}
 				break;
 			case "VIRTUAL_GOODS":
 				if (!"0".equals(goods.getTemplateId())) {
-					throw new ServiceException(ResultCode.VIRTUAL_GOODS_NOT_NEED_TEMP);
+					throw new BusinessException(ResultEnum.VIRTUAL_GOODS_NOT_NEED_TEMP);
 				}
 				break;
 			default:
-				throw new ServiceException(ResultCode.GOODS_TYPE_ERROR);
+				throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
 		}
 		//检查商品是否存在--修改商品时使用
 		if (goods.getId() != null) {
@@ -526,7 +526,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 			goods.setStoreName(storeDetail.getStoreName());
 			goods.setSelfOperated(storeDetail.getSelfOperated());
 		} else {
-			throw new ServiceException(ResultCode.STORE_NOT_LOGIN_ERROR);
+			throw new BusinessException(ResultEnum.STORE_NOT_LOGIN_ERROR);
 		}
 	}
 
@@ -540,7 +540,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		Goods goods = getById(goodsId);
 		if (goods == null) {
 			log.error("商品ID为" + goodsId + "的商品不存在");
-			throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		return goods;
 	}
@@ -587,7 +587,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		if (currentUser != null && (currentUser.getRole().equals(UserEnums.MANAGER))) {
 			return currentUser;
 		} else {
-			throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 	}
 

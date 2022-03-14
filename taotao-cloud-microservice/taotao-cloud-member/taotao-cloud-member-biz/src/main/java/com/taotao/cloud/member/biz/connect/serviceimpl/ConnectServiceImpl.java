@@ -103,11 +103,11 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 					ThreadContextHolder.getHttpResponse());
 				//自动登录失败，则把信息缓存起来
 				cache.put(ConnectService.cacheKey(type, uuid), authUser, 30L, TimeUnit.MINUTES);
-				throw new ServiceException(ResultCode.USER_NOT_BINDING);
+				throw new BusinessException(ResultEnum.USER_NOT_BINDING);
 			}
 		} catch (Exception e) {
 			log.error("联合登陆异常：", e);
-			throw new ServiceException(ResultCode.ERROR);
+			throw new BusinessException(ResultEnum.ERROR);
 		}
 		return token;
 	}
@@ -299,7 +299,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 			WechatConnectSetting.class);
 
 		if (wechatConnectSetting == null) {
-			throw new ServiceException(ResultCode.WECHAT_CONNECT_NOT_EXIST);
+			throw new BusinessException(ResultEnum.WECHAT_CONNECT_NOT_EXIST);
 		}
 		//寻找对应对微信小程序登录配置
 		for (WechatConnectSettingItem wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItems()) {
@@ -308,7 +308,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 			}
 		}
 
-		throw new ServiceException(ResultCode.WECHAT_CONNECT_NOT_EXIST);
+		throw new BusinessException(ResultEnum.WECHAT_CONNECT_NOT_EXIST);
 	}
 
 
@@ -354,6 +354,6 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 		} catch (Exception e) {
 			log.error("解密，获取微信信息错误", e);
 		}
-		throw new ServiceException(ResultCode.USER_CONNECT_ERROR);
+		throw new BusinessException(ResultEnum.USER_CONNECT_ERROR);
 	}
 }

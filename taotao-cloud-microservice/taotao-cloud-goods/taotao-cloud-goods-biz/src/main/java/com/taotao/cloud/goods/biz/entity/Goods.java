@@ -236,24 +236,24 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	//	for (Map<String, Object> sku : goodsOperationDTO.getSkuList()) {
 	//		//判定参数不能为空
 	//		if (sku.get("sn") == null) {
-	//			throw new ServiceException(ResultCode.GOODS_SKU_SN_ERROR);
+	//			throw new BusinessException(ResultEnum.GOODS_SKU_SN_ERROR);
 	//		}
 	//		if (StringUtil.isEmpty(sku.get("price").toString())
 	//			|| Convert.toDouble(sku.get("price")) <= 0) {
-	//			throw new ServiceException(ResultCode.GOODS_SKU_PRICE_ERROR);
+	//			throw new BusinessException(ResultEnum.GOODS_SKU_PRICE_ERROR);
 	//		}
 	//		if (StringUtil.isEmpty(sku.get("cost").toString())
 	//			|| Convert.toDouble(sku.get("cost")) <= 0) {
-	//			throw new ServiceException(ResultCode.GOODS_SKU_COST_ERROR);
+	//			throw new BusinessException(ResultEnum.GOODS_SKU_COST_ERROR);
 	//		}
 	//		//虚拟商品没有重量字段
 	//		if (sku.containsKey("weight") && (StringUtil.isEmpty(sku.get("weight").toString())
 	//			|| Convert.toDouble(sku.get("weight").toString()) < 0)) {
-	//			throw new ServiceException(ResultCode.GOODS_SKU_WEIGHT_ERROR);
+	//			throw new BusinessException(ResultEnum.GOODS_SKU_WEIGHT_ERROR);
 	//		}
 	//		if (StringUtil.isEmpty(sku.get("quantity").toString())
 	//			|| Convert.toInt(sku.get("quantity").toString()) < 0) {
-	//			throw new ServiceException(ResultCode.GOODS_SKU_QUANTITY_ERROR);
+	//			throw new BusinessException(ResultEnum.GOODS_SKU_QUANTITY_ERROR);
 	//		}
 	//
 	//	}

@@ -5,6 +5,7 @@ import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @Schema(description = "分销订单查询对象")
-public class DistributionOrderSearchParams extends PageVO {
+public class DistributionOrderSearchParams extends PageParam {
 
     private static final long serialVersionUID = -8736018687663645064L;
 

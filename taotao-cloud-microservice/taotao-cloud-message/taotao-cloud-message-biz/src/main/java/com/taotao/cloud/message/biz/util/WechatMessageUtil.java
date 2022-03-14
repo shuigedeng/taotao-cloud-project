@@ -61,7 +61,7 @@ public class WechatMessageUtil {
 
         Order order = orderService.getBySn(sn);
         if (order == null) {
-            throw new ServiceException("订单" + sn + "不存在，发送微信公众号消息错误");
+            throw new BusinessException("订单" + sn + "不存在，发送微信公众号消息错误");
         }
         //获取微信消息
         LambdaQueryWrapper<WechatMessage> wechatMessageQueryWrapper = new LambdaQueryWrapper();
@@ -118,7 +118,7 @@ public class WechatMessageUtil {
         log.info("发送消息订阅");
         Order order = orderService.getBySn(sn);
         if (order == null) {
-            throw new ServiceException("订单" + sn + "不存在，发送订阅消息错误");
+            throw new BusinessException("订单" + sn + "不存在，发送订阅消息错误");
         }
         //获取微信消息
         LambdaQueryWrapper<WechatMPMessage> wechatMPMessageQueryWrapper = new LambdaQueryWrapper();
@@ -264,7 +264,7 @@ public class WechatMessageUtil {
                 return;
             }
             log.error("微信接口异常，错误码" + jsonObject.get("errcode") + "，" + jsonObject.getStr("errmsg"));
-            throw new ServiceException(ResultCode.WECHAT_ERROR);
+            throw new BusinessException(ResultEnum.WECHAT_ERROR);
         }
     }
 

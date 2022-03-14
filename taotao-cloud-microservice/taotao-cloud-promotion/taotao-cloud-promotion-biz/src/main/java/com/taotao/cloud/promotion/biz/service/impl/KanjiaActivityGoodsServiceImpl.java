@@ -56,7 +56,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
             kanJiaActivityGoodsDTO.setEndTime(kanJiaActivityGoodsOperationDTO.getEndTime());
             //检测同一时间段不能允许添加相同的商品
             if (this.checkSkuDuplicate(goodsSku.getId(), kanJiaActivityGoodsDTO) != null) {
-                throw new ServiceException("商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
+                throw new BusinessException("商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
             }
             kanJiaActivityGoodsDTO.setSkuId(kanJiaActivityGoodsDTO.getSkuId());
             kanJiaActivityGoodsDTO.setThumbnail(goodsSku.getThumbnail());
@@ -97,7 +97,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         GoodsSku goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
         if (goodsSku == null) {
             log.error("商品ID为" + skuId + "的商品不存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         return goodsSku;
     }
@@ -111,35 +111,35 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
     private void checkParam(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO, GoodsSku goodsSku) {
         //校验商品是否存在
         if (goodsSku == null) {
-            throw new ServiceException(ResultCode.PROMOTION_GOODS_NOT_EXIT);
+            throw new BusinessException(ResultEnum.PROMOTION_GOODS_NOT_EXIT);
         }
         //校验商品状态
         if (goodsSku.getMarketEnable().equals(GoodsStatusEnum.DOWN.name())) {
-            throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+            throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
         }
         //校验活动库存是否超出此sku的库存
         if (goodsSku.getQuantity() < kanJiaActivityGoodsDTO.getStock()) {
-            throw new ServiceException(ResultCode.KANJIA_GOODS_ACTIVE_STOCK_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_STOCK_ERROR);
         }
         //校验最低购买金额不能高于商品金额
         if (goodsSku.getPrice() < kanJiaActivityGoodsDTO.getPurchasePrice()) {
-            throw new ServiceException(ResultCode.KANJIA_GOODS_ACTIVE_PRICE_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_PRICE_ERROR);
         }
         //校验结算价格不能超过商品金额
         if (goodsSku.getPrice() < kanJiaActivityGoodsDTO.getSettlementPrice()) {
-            throw new ServiceException(ResultCode.KANJIA_GOODS_ACTIVE_SETTLEMENT_PRICE_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_SETTLEMENT_PRICE_ERROR);
         }
         //校验最高砍价金额
         if (kanJiaActivityGoodsDTO.getHighestPrice() > goodsSku.getPrice() || kanJiaActivityGoodsDTO.getHighestPrice() <= 0) {
-            throw new ServiceException(ResultCode.KANJIA_GOODS_ACTIVE_HIGHEST_PRICE_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_HIGHEST_PRICE_ERROR);
         }
         //校验最低砍价金额
         if (kanJiaActivityGoodsDTO.getLowestPrice() > goodsSku.getPrice() || kanJiaActivityGoodsDTO.getLowestPrice() <= 0) {
-            throw new ServiceException(ResultCode.KANJIA_GOODS_ACTIVE_LOWEST_PRICE_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_LOWEST_PRICE_ERROR);
         }
         //校验最低砍价金额不能高与最低砍价金额
         if (kanJiaActivityGoodsDTO.getLowestPrice() > kanJiaActivityGoodsDTO.getHighestPrice()) {
-            throw new ServiceException(ResultCode.KANJIA_GOODS_ACTIVE_LOWEST_PRICE_ERROR);
+            throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_LOWEST_PRICE_ERROR);
         }
     }
 
@@ -177,7 +177,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         KanjiaActivityGoods kanjiaActivityGoods = this.getById(goodsId);
         if (kanjiaActivityGoods == null) {
             log.error("id为" + goodsId + "的砍价商品不存在！");
-            throw new ServiceException();
+            throw new BusinessException();
         }
         KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO = new KanjiaActivityGoodsDTO();
         BeanUtils.copyProperties(kanjiaActivityGoods, kanjiaActivityGoodsDTO);
@@ -220,13 +220,13 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         KanjiaActivityGoods dbKanJiaActivityGoods = this.getKanjiaGoodsDetail(kanJiaActivityGoodsDTO.getId());
         //校验当前活动是否已经开始,只有新建的未开始的活动可以编辑
         if (!dbKanJiaActivityGoods.getPromotionStatus().equals(PromotionsStatusEnum.NEW.name())) {
-            throw new ServiceException(ResultCode.PROMOTION_UPDATE_ERROR);
+            throw new BusinessException(ResultEnum.PROMOTION_UPDATE_ERROR);
         }
         //获取当前sku信息
         GoodsSku goodsSku = this.checkSkuExist(kanJiaActivityGoodsDTO.getSkuId());
         //校验商品状态
         if (goodsSku.getMarketEnable().equals(GoodsStatusEnum.DOWN.name())) {
-            throw new ServiceException(ResultCode.GOODS_NOT_EXIST);
+            throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
         }
         //常规校验砍价商品参数
         this.checkParam(kanJiaActivityGoodsDTO, goodsSku);
@@ -234,7 +234,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         PromotionTools.checkPromotionTime(kanJiaActivityGoodsDTO.getStartTime(), kanJiaActivityGoodsDTO.getEndTime());
         //检测同一时间段不能允许添加相同的商品
         if (this.checkSkuDuplicate(goodsSku.getId(), kanJiaActivityGoodsDTO) != null) {
-            throw new ServiceException("商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
+            throw new BusinessException("商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
         }
         //修改数据库
         return this.updateById(kanJiaActivityGoodsDTO);

@@ -10,8 +10,6 @@ import java.util.List;
  * 抽象通用促销服务 如需拓展原促销实体字段，新拓展类继承自促销实体即可
  *
  * @param <T> 促销类型，继承自促销基础类
- * 
- * @since 2021/11/18
  **/
 public interface AbstractPromotionsService<T extends BasePromotions> extends IService<T> {
 

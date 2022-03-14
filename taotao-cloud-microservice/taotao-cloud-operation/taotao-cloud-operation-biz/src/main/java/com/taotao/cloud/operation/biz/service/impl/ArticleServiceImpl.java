@@ -63,7 +63,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (this.getById(id).getType().equals(ArticleEnum.OTHER.name())) {
             this.removeById(id);
         } else {
-            throw new ServiceException(ResultCode.ARTICLE_NO_DELETION);
+            throw new BusinessException(ResultEnum.ARTICLE_NO_DELETION);
         }
     }
 

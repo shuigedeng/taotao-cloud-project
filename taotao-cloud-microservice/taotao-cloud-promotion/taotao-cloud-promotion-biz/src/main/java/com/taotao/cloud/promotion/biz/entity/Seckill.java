@@ -3,10 +3,9 @@ package com.taotao.cloud.promotion.biz.entity;
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.lili.modules.promotion.entity.dto.BasePromotions;
-import cn.lili.modules.promotion.entity.vos.SeckillVO;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.promotion.api.vo.SeckillVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,6 +25,7 @@ import java.util.Date;
  *
  * 
  */
+@Data
 @Entity
 @Table(name = Seckill.TABLE_NAME)
 @TableName(Seckill.TABLE_NAME)

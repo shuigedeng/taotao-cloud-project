@@ -149,7 +149,7 @@ public class CheckDataRender implements CartRenderStep {
                 Order parentOrder = orderService.getBySn(tradeDTO.getParentOrderSn());
                 //参与活动判定
                 if (parentOrder.getMemberId().equals(UserContext.getCurrentUser().getId())) {
-                    throw new ServiceException(ResultCode.PINTUAN_JOIN_ERROR);
+                    throw new BusinessException(ResultEnum.PINTUAN_JOIN_ERROR);
                 }
             }
             //判断拼团商品的限购数量
@@ -159,7 +159,7 @@ public class CheckDataRender implements CartRenderStep {
                 Integer limitNum = pintuan.getLimitNum();
                 for (CartSkuVO cartSkuVO : tradeDTO.getSkuList()) {
                     if (limitNum != 0 && cartSkuVO.getNum() > limitNum) {
-                        throw new ServiceException(ResultCode.PINTUAN_LIMIT_NUM_ERROR);
+                        throw new BusinessException(ResultEnum.PINTUAN_LIMIT_NUM_ERROR);
                     }
                 }
             }
@@ -169,11 +169,11 @@ public class CheckDataRender implements CartRenderStep {
             //获取积分商品VO
             PointsGoodsVO pointsGoodsVO = pointsGoodsService.getPointsGoodsDetailBySkuId(skuId);
             if (pointsGoodsVO == null) {
-                throw new ServiceException(ResultCode.POINT_GOODS_ERROR);
+                throw new BusinessException(ResultEnum.POINT_GOODS_ERROR);
             }
             Member member = memberService.getUserInfo();
             if (member.getPoint() < pointsGoodsVO.getPoints()) {
-                throw new ServiceException(ResultCode.USER_POINTS_ERROR);
+                throw new BusinessException(ResultEnum.USER_POINTS_ERROR);
             }
         }
 

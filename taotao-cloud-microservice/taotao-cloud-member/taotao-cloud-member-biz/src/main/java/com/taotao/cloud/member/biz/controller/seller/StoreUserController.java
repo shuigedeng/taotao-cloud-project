@@ -41,7 +41,7 @@ public class StoreUserController {
 			member.setPassword(null);
 			return Result.success(member);
 		}
-		throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+		throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 	}
 
 

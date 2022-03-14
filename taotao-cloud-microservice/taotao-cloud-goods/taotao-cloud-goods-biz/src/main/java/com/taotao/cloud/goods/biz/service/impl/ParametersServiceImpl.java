@@ -48,7 +48,7 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	public boolean updateParameter(Parameters parameters) {
 		Parameters origin = this.getById(parameters.getId());
 		if (origin == null) {
-			throw new ServiceException(ResultCode.CATEGORY_NOT_EXIST);
+			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
 
 		List<String> goodsIds = new ArrayList<>();

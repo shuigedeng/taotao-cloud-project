@@ -62,9 +62,9 @@ public class DistributionGoodsBuyerController {
         }
         //判断操作结果
         if(result){
-            return ResultUtil.success(ResultCode.SUCCESS);
+            return ResultUtil.success(ResultEnum.SUCCESS);
         }else{
-            throw new ServiceException(ResultCode.ERROR);
+            throw new BusinessException(ResultEnum.ERROR);
         }
 
     }

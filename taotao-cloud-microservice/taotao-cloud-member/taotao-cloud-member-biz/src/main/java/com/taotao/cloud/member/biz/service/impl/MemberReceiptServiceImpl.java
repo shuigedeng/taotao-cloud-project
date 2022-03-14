@@ -44,7 +44,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
                 .eq("receipt_title", memberReceiptAddVO.getReceiptTitle())
         );
         if (receipts.size() > 0) {
-            throw new ServiceException(ResultCode.USER_RECEIPT_REPEAT_ERROR);
+            throw new BusinessException(ResultEnum.USER_RECEIPT_REPEAT_ERROR);
         }
         //参数封装
         MemberReceipt memberReceipt = new MemberReceipt();
@@ -71,7 +71,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
             }
             return this.baseMapper.insert(memberReceipt) > 0 ? true : false;
         }
-        throw new ServiceException(ResultCode.USER_RECEIPT_NOT_EXIST);
+        throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
         if (memberReceiptDb != null) {
             //检验是否有权限修改
             if (!memberReceiptDb.getMemberId().equals(memberId)) {
-                throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+                throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
             }
             //校验发票抬头是否重复
             List<MemberReceipt> receipts = this.baseMapper.selectList(new QueryWrapper<MemberReceipt>()
@@ -90,7 +90,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
                     .ne("id", memberReceiptAddVO.getId())
             );
             if (receipts.size() > 0) {
-                throw new ServiceException(ResultCode.USER_RECEIPT_REPEAT_ERROR);
+                throw new BusinessException(ResultEnum.USER_RECEIPT_REPEAT_ERROR);
             }
             BeanUtil.copyProperties(memberReceiptAddVO, memberReceiptDb);
             //对发票默认进行处理  如果参数传递新添加的发票信息为默认，则需要把其他发票置为非默认
@@ -99,7 +99,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
             }
             return this.baseMapper.updateById(memberReceiptDb) > 0 ? true : false;
         }
-        throw new ServiceException(ResultCode.USER_RECEIPT_NOT_EXIST);
+        throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
     }
 
     @Override

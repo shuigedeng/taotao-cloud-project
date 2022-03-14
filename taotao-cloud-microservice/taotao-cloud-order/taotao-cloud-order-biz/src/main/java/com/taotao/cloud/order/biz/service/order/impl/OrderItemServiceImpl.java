@@ -53,7 +53,7 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
         queryWrapper.eq(OrderItem::getOrderSn, orderSn).eq(OrderItem::getSkuId, skuId);
         OrderItem orderItem = getOne(queryWrapper);
         if (orderItem == null) {
-            throw new ServiceException(ResultCode.ORDER_ITEM_NOT_EXIST);
+            throw new BusinessException(ResultEnum.ORDER_ITEM_NOT_EXIST);
         }
         orderItem.setComplainId(complainId);
         orderItem.setComplainStatus(complainStatusEnum.name());

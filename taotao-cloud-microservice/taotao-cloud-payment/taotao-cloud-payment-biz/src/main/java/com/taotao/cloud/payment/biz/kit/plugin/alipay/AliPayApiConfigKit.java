@@ -58,7 +58,7 @@ public class AliPayApiConfigKit {
             Setting systemSetting = settingService.get(SettingEnum.ALIPAY_PAYMENT.name());
             setting = JSONUtil.toBean(systemSetting.getSettingValue(), AlipayPaymentSetting.class);
         } catch (Exception e) {
-            throw new ServiceException(ResultCode.PAY_NOT_SUPPORT);
+            throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
         }
         CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
         certAlipayRequest.setServerUrl("https://openapi.alipay.com/gateway.do");

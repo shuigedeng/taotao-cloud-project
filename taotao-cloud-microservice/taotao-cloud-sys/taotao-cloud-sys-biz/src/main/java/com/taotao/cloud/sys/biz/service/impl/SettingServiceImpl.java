@@ -34,6 +34,14 @@ import org.springframework.stereotype.Service;
 public class SettingServiceImpl extends
 	BaseSuperServiceImpl<ISettingMapper, Setting, SettingRepository, ISettingRepository, Long>
 	implements ISettingService {
+	@Override
+	public Setting get(String key) {
+		return this.getById(key);
+	}
 
+	@Override
+	public boolean saveUpdate(Setting setting) {
+		return this.saveOrUpdate(setting);
+	}
 
 }

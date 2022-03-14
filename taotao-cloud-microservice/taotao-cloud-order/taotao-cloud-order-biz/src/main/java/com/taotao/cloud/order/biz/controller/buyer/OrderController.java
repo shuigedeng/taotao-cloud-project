@@ -69,11 +69,11 @@ public class OrderController {
 		@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
 		Order order = orderService.getBySn(orderSn);
 		if (order == null) {
-			throw new ServiceException(ResultCode.ORDER_NOT_EXIST);
+			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
 		}
 		//判定是否是待收货状态
 		if (!order.getOrderStatus().equals(OrderStatusEnum.DELIVERED.name())) {
-			throw new ServiceException(ResultCode.ORDER_DELIVERED_ERROR);
+			throw new BusinessException(ResultEnum.ORDER_DELIVERED_ERROR);
 		}
 		orderService.complete(orderSn);
 		return ResultUtil.success();

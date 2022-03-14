@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
 import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
@@ -16,6 +17,10 @@ import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.sys.api.dto.DistributionSetting;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,12 +56,12 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
      * 系统设置
      */
     @Autowired
-    private SettingService settingService;
+    private IFeignSettingService settingService;
 
     @Override
     public IPage<DistributionOrder> getDistributionOrderPage(
 	    DistributionOrderSearchParams distributionOrderSearchParams) {
-        return this.page(PageUtil.initPage(distributionOrderSearchParams), distributionOrderSearchParams.queryWrapper());
+        return this.page(distributionOrderSearchParams.buildMpPage(), distributionOrderSearchParams.queryWrapper());
 
     }
 
@@ -91,9 +96,10 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
                 distributionOrder.setDistributionName(distribution.getMemberName());
 
                 //设置结算天数(解冻日期)
-                Setting setting = settingService.get(SettingEnum.DISTRIBUTION_SETTING.name());
-                DistributionSetting distributionSetting = JSONUtil.toBean(setting.getSettingValue(), DistributionSetting.class);
-                //默认解冻1天
+	            Result<SettingVO> settingResult = settingService.get(SettingEnum.DISTRIBUTION_SETTING.name());
+	            DistributionSetting distributionSetting = JSONUtil.toBean(
+		            settingResult.data().getSettingValue(), DistributionSetting.class);
+				//默认解冻1天
                 if (distributionSetting.getCashDay().equals(0)) {
                     distributionOrder.setSettleCycle(new DateTime());
                 } else {
@@ -123,11 +129,8 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
                                 .set(DistributionOrder::getDistributionOrderStatus, DistributionOrderStatusEnum.WAIT_CASH.name()));
                     }
                 }
-
-
             }
         }
-
     }
 
     /**

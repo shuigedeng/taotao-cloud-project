@@ -61,35 +61,35 @@ public class WalletPlugin implements Payment {
     @Override
     public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultCode.PAY_SUCCESS);
+        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultCode.PAY_SUCCESS);
+        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultCode.PAY_SUCCESS);
+        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
         if (payParam.getOrderType().equals(CashierEnum.RECHARGE.name())) {
-            throw new ServiceException(ResultCode.CAN_NOT_RECHARGE_WALLET);
+            throw new BusinessException(ResultEnum.CAN_NOT_RECHARGE_WALLET);
         }
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultCode.PAY_SUCCESS);
+        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
 
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultCode.PAY_SUCCESS);
+        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class WalletPlugin implements Payment {
         //支付信息
         try {
             if (UserContext.getCurrentUser() == null) {
-                throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+                throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
             }
             boolean result = memberWalletService.reduce(new MemberWalletUpdateDTO(
                             cashierParam.getPrice(),
@@ -183,13 +183,13 @@ public class WalletPlugin implements Payment {
                     throw e;
                 }
             } else {
-                throw new ServiceException(ResultCode.WALLET_INSUFFICIENT);
+                throw new BusinessException(ResultEnum.WALLET_INSUFFICIENT);
             }
         } catch (ServiceException e) {
             throw e;
         } catch (Exception e) {
             log.info("余额支付异常", e);
-            throw new ServiceException(ResultCode.WALLET_INSUFFICIENT);
+            throw new BusinessException(ResultEnum.WALLET_INSUFFICIENT);
         }
 
     }

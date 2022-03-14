@@ -56,9 +56,9 @@ public class MemberGradeController {
 	@PostMapping(value = "")
 	public Result<Object> daa(@Validated MemberGrade memberGrade) {
 		if (memberGradeService.save(memberGrade)) {
-			return Result.success(ResultCode.SUCCESS);
+			return Result.success(ResultEnum.SUCCESS);
 		}
-		throw new ServiceException(ResultCode.ERROR);
+		throw new BusinessException(ResultEnum.ERROR);
 	}
 
 	@Operation(summary = "修改会员等级", description = "修改会员等级", method = CommonConstant.PUT)
@@ -68,9 +68,9 @@ public class MemberGradeController {
 	@PutMapping(value = "/{id}")
 	public Result<Object> update(@PathVariable String id, MemberGrade memberGrade) {
 		if (memberGradeService.updateById(memberGrade)) {
-			return Result.success(ResultCode.SUCCESS);
+			return Result.success(ResultEnum.SUCCESS);
 		}
-		throw new ServiceException(ResultCode.ERROR);
+		throw new BusinessException(ResultEnum.ERROR);
 	}
 
 	@Operation(summary = "删除会员等级", description = "删除会员等级", method = CommonConstant.DELETE)
@@ -79,10 +79,10 @@ public class MemberGradeController {
 	@DeleteMapping(value = "/{id}")
 	public Result<IPage<Object>> delete(@PathVariable String id) {
 		if (memberGradeService.getById(id).getIsDefault()) {
-			throw new ServiceException(ResultCode.USER_GRADE_IS_DEFAULT);
+			throw new BusinessException(ResultEnum.USER_GRADE_IS_DEFAULT);
 		} else if (memberGradeService.removeById(id)) {
-			return Result.success(ResultCode.SUCCESS);
+			return Result.success(ResultEnum.SUCCESS);
 		}
-		throw new ServiceException(ResultCode.ERROR);
+		throw new BusinessException(ResultEnum.ERROR);
 	}
 }

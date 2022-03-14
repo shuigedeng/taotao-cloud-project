@@ -65,7 +65,7 @@ public class StoreMessageServiceImpl extends ServiceImpl<StoreMessageMapper, Sto
         if (storeMessage != null) {
             //校验权限
             if (!storeMessage.getStoreId().equals(UserContext.getCurrentUser().getStoreId())) {
-                throw new ResourceNotFoundException(ResultCode.USER_AUTHORITY_ERROR.message());
+                throw new ResourceNotFoundException(ResultEnum.USER_AUTHORITY_ERROR.message());
             }
             storeMessage.setStatus(status);
             return this.updateById(storeMessage);

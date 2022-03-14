@@ -119,7 +119,7 @@ public class WechatMPMessageServiceImpl extends ServiceImpl<WechatMPMessageMappe
                 if (tplContent.containsKey("priTmplId")) {
                     wechatMPMessage.setCode(tplContent.getStr("priTmplId"));
                 } else {
-                    throw new ServiceException(ResultCode.WECHAT_MP_MESSAGE_TMPL_ERROR);
+                    throw new BusinessException(ResultEnum.WECHAT_MP_MESSAGE_TMPL_ERROR);
                 }
 
                 wechatMPMessage.setName(tplData.getSceneDesc());

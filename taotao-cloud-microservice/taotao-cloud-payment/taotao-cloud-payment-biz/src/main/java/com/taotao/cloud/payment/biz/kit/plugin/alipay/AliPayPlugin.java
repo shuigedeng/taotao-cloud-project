@@ -101,7 +101,7 @@ public class AliPayPlugin implements Payment {
                     notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.ALIPAY));
         } catch (Exception e) {
             log.error("H5支付异常", e);
-            throw new ServiceException(ResultCode.ALIPAY_EXCEPTION);
+            throw new BusinessException(ResultEnum.ALIPAY_EXCEPTION);
         }
         return null;
     }
@@ -109,7 +109,7 @@ public class AliPayPlugin implements Payment {
 
     @Override
     public Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
-        throw new ServiceException(ResultCode.PAY_NOT_SUPPORT);
+        throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
     }
 
     @Override
@@ -139,10 +139,10 @@ public class AliPayPlugin implements Payment {
             return Result.success(orderInfo);
         } catch (AlipayApiException e) {
             log.error("支付宝支付异常：", e);
-            throw new ServiceException(ResultCode.ALIPAY_EXCEPTION);
+            throw new BusinessException(ResultEnum.ALIPAY_EXCEPTION);
         } catch (Exception e) {
             log.error("支付业务异常：", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
 
@@ -173,7 +173,7 @@ public class AliPayPlugin implements Payment {
             return Result.success(jsonObject.getJSONObject("alipay_trade_precreate_response").getString("qr_code"));
         } catch (Exception e) {
             log.error("支付业务异常：", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
 
@@ -185,7 +185,7 @@ public class AliPayPlugin implements Payment {
         if (StringUtils.isNotEmpty(refundLog.getPaymentReceivableNo())) {
             model.setTradeNo(refundLog.getPaymentReceivableNo());
         } else {
-            throw new ServiceException(ResultCode.ALIPAY_PARAMS_EXCEPTION);
+            throw new BusinessException(ResultEnum.ALIPAY_PARAMS_EXCEPTION);
         }
         model.setRefundAmount(refundLog.getTotalAmount() + "");
         model.setRefundReason(refundLog.getRefundReason());
@@ -203,7 +203,7 @@ public class AliPayPlugin implements Payment {
             refundLogService.save(refundLog);
         } catch (Exception e) {
             log.error("支付退款异常：", e);
-            throw new ServiceException(ResultCode.PAY_ERROR);
+            throw new BusinessException(ResultEnum.PAY_ERROR);
         }
 
     }
@@ -216,7 +216,7 @@ public class AliPayPlugin implements Payment {
             model.setTradeNo(refundLog.getPaymentReceivableNo());
         } else {
             log.error("退款时，支付参数为空导致异常：{}", refundLog);
-            throw new ServiceException(ResultCode.ALIPAY_PARAMS_EXCEPTION);
+            throw new BusinessException(ResultEnum.ALIPAY_PARAMS_EXCEPTION);
         }
         try {
             //与阿里进行交互
@@ -327,7 +327,7 @@ public class AliPayPlugin implements Payment {
         if (setting != null) {
             return JSONUtil.toBean(setting.getSettingValue(), AlipayPaymentSetting.class);
         }
-        throw new ServiceException(ResultCode.ALIPAY_NOT_SETTING);
+        throw new BusinessException(ResultEnum.ALIPAY_NOT_SETTING);
     }
 
 

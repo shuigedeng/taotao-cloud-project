@@ -54,7 +54,7 @@ public class DistributionCashBuyerController {
         if (Boolean.TRUE.equals(distributionCashService.cash(price))) {
             return ResultUtil.success();
         }
-        throw new ServiceException(ResultCode.ERROR);
+        throw new BusinessException(ResultEnum.ERROR);
     }
 
     @ApiOperation(value = "分销员提现历史")

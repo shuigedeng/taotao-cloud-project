@@ -67,7 +67,7 @@ public class CategoryParameterGroupServiceImpl extends
 	public boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {
 		CategoryParameterGroup origin = this.getById(categoryParameterGroup.getId());
 		if (origin == null) {
-			throw new ServiceException(ResultCode.CATEGORY_PARAMETER_NOT_EXIST);
+			throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_NOT_EXIST);
 		}
 		LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.select(Goods::getId, Goods::getParams);

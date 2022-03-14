@@ -260,7 +260,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
             queryWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);
             SeckillApply seckillApply = this.seckillApplyService.getOne(queryWrapper, false);
             if (seckillApply == null) {
-                throw new ServiceException(ResultCode.SECKILL_NOT_EXIST_ERROR);
+                throw new BusinessException(ResultEnum.SECKILL_NOT_EXIST_ERROR);
             }
             LambdaUpdateWrapper<SeckillApply> updateWrapper = new LambdaUpdateWrapper<>();
             updateWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);

@@ -66,7 +66,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
         Order order = OperationalJudgment.judgment(orderService.getBySn(orderSn));
         //如果订单已付款，则抛出异常
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-            throw new ServiceException(ResultCode.PAY_DOUBLE_ERROR);
+            throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
         }
 
         bankTransferPlugin.callBack(order);
@@ -88,7 +88,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
         Order order = OperationalJudgment.judgment(orderService.getBySn(orderSn));
         //判定是否支付
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-            throw new ServiceException(ResultCode.ORDER_UPDATE_PRICE_ERROR);
+            throw new BusinessException(ResultEnum.ORDER_UPDATE_PRICE_ERROR);
         }
 
         //获取订单价格信息

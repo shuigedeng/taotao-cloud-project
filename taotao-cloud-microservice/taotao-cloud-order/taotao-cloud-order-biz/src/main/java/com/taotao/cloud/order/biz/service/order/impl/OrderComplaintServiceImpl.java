@@ -120,7 +120,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
             OrderItem orderItem = orderItems.stream().filter(i -> orderComplaintDTO.getSkuId().equals(i.getSkuId())).findFirst().orElse(null);
 
             if (orderItem == null) {
-                throw new ServiceException(ResultCode.COMPLAINT_ORDER_ITEM_EMPTY_ERROR);
+                throw new BusinessException(ResultEnum.COMPLAINT_ORDER_ITEM_EMPTY_ERROR);
             }
 
             //新建交易投诉
@@ -130,7 +130,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
             //获取商品规格信息
             GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());
             if (goodsSku == null) {
-                throw new ServiceException(ResultCode.COMPLAINT_SKU_EMPTY_ERROR);
+                throw new BusinessException(ResultEnum.COMPLAINT_SKU_EMPTY_ERROR);
             }
             orderComplaint.setComplainStatus(ComplaintStatusEnum.NEW.name());
             orderComplaint.setGoodsId(goodsSku.getGoodsId());
@@ -165,7 +165,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
             throw e;
         } catch (Exception e) {
             log.error("订单投诉异常：", e);
-            throw new ServiceException(ResultCode.COMPLAINT_ERROR);
+            throw new BusinessException(ResultEnum.COMPLAINT_ERROR);
         }
     }
 
@@ -210,7 +210,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
         OrderComplaint orderComplaint = OperationalJudgment.judgment(this.getById(id));
         //如果以及仲裁，则不可以进行申诉取消
         if (orderComplaint.getComplainStatus().equals(ComplaintStatusEnum.COMPLETE.name())) {
-            throw new ServiceException(ResultCode.COMPLAINT_CANCEL_ERROR);
+            throw new BusinessException(ResultEnum.COMPLAINT_CANCEL_ERROR);
         }
         LambdaUpdateWrapper<OrderComplaint> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
         lambdaUpdateWrapper.eq(OrderComplaint::getId, id);
@@ -233,7 +233,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
     private OrderComplaint checkOrderComplainExist(String id) {
         OrderComplaint orderComplaint = this.getById(id);
         if (orderComplaint == null) {
-            throw new ServiceException(ResultCode.COMPLAINT_NOT_EXIT);
+            throw new BusinessException(ResultEnum.COMPLAINT_NOT_EXIT);
         }
         return orderComplaint;
     }
@@ -242,12 +242,12 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
         ComplaintStatusEnum complaintStatusEnum = ComplaintStatusEnum.valueOf(operationParam.getComplainStatus());
         if (complaintStatusEnum == ComplaintStatusEnum.COMPLETE) {
             if (CharSequenceUtil.isEmpty(operationParam.getArbitrationResult())) {
-                throw new ServiceException(ResultCode.COMPLAINT_ARBITRATION_RESULT_ERROR);
+                throw new BusinessException(ResultEnum.COMPLAINT_ARBITRATION_RESULT_ERROR);
             }
             orderComplaint.setArbitrationResult(operationParam.getArbitrationResult());
         } else if (complaintStatusEnum == ComplaintStatusEnum.COMMUNICATION) {
             if (CharSequenceUtil.isEmpty(operationParam.getAppealContent()) || operationParam.getImages() == null) {
-                throw new ServiceException(ResultCode.COMPLAINT_APPEAL_CONTENT_ERROR);
+                throw new BusinessException(ResultEnum.COMPLAINT_APPEAL_CONTENT_ERROR);
             }
             orderComplaint.setContent(operationParam.getAppealContent());
             orderComplaint.setImages(operationParam.getImages().get(0));

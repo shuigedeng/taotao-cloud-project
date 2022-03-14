@@ -88,7 +88,7 @@ public class BrandManagerController {
 		if (brandService.updateBrand(brand)) {
 			return Result.success(brand);
 		}
-		throw new ServiceException(ResultCode.BRAND_UPDATE_ERROR);
+		throw new BusinessException(ResultEnum.BRAND_UPDATE_ERROR);
 	}
 
 	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌", method = CommonConstant.PUT)
@@ -100,7 +100,7 @@ public class BrandManagerController {
 		if (brandService.brandDisable(brandId, disable)) {
 			return Result.success;
 		}
-		throw new ServiceException(ResultCode.BRAND_DISABLE_ERROR);
+		throw new BusinessException(ResultEnum.BRAND_DISABLE_ERROR);
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
@@ -109,7 +109,7 @@ public class BrandManagerController {
 	@DeleteMapping(value = "/{ids}")
 	public Result<Object> delAllByIds(@PathVariable List<String> ids) {
 		brandService.deleteBrands(ids);
-		return Result.success(ResultCode.SUCCESS);
+		return Result.success(ResultEnum.SUCCESS);
 	}
 
 }

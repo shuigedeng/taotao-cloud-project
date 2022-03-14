@@ -151,13 +151,13 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 		if (studioCommodityService.getOne(
 			new LambdaQueryWrapper<StudioCommodity>().eq(StudioCommodity::getRoomId, roomId)
 				.eq(StudioCommodity::getGoodsId, goodsId)) != null) {
-			throw new ServiceException(ResultCode.STODIO_GOODS_EXIST_ERROR);
+			throw new BusinessException(ResultEnum.STODIO_GOODS_EXIST_ERROR);
 		}
 
 		Goods goods = goodsService.getOne(new LambdaQueryWrapper<Goods>().eq(Goods::getId, goodsId)
 			.eq(Goods::getStoreId, storeId));
 		if (goods == null) {
-			throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 
 		//调用微信接口添加直播间商品并进行记录
@@ -183,7 +183,7 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 		Goods goods = goodsService.getOne(new LambdaQueryWrapper<Goods>().eq(Goods::getId, goodsId)
 			.eq(Goods::getStoreId, storeId));
 		if (goods == null) {
-			throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 		//调用微信接口删除直播间商品并进行记录
 		if (Boolean.TRUE.equals(wechatLivePlayerUtil.goodsDeleteInRoom(roomId, goodsId))) {

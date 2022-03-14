@@ -3,8 +3,11 @@ package com.taotao.cloud.sys.biz.controller.tools;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.netty.annotation.RequestParam;
 import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.entity.Setting;
 import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
 import com.taotao.cloud.sys.biz.service.ICronService;
@@ -37,6 +40,12 @@ public class SettingController {
 
 	@Autowired
 	private ISettingService settingService;
+
+	@NotAuth
+	public Result<SettingVO> getByKey(@RequestParam String key) {
+		Setting setting = settingService.get(key);
+		return Result.success(BeanUtil.copy(setting,SettingVO.class));
+	}
 
 	@NotAuth
 	@GetMapping("/all")

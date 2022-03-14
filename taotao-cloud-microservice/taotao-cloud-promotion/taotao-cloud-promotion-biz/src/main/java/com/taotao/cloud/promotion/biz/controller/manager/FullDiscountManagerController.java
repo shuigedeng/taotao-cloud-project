@@ -48,8 +48,8 @@ public class FullDiscountManagerController {
     @PutMapping("/status/{id}")
     public Result<Object> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
-            return ResultUtil.success(ResultCode.SUCCESS);
+            return ResultUtil.success(ResultEnum.SUCCESS);
         }
-        return ResultUtil.error(ResultCode.ERROR);
+        return ResultUtil.error(ResultEnum.ERROR);
     }
 }

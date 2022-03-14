@@ -43,7 +43,7 @@ public class DistributionManagerController {
         if (distributionService.retreat(id)) {
             return ResultUtil.success();
         } else {
-            throw new ServiceException(ResultCode.DISTRIBUTION_RETREAT_ERROR);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_RETREAT_ERROR);
         }
 
     }
@@ -58,7 +58,7 @@ public class DistributionManagerController {
         if (distributionService.resume(id)) {
             return ResultUtil.success();
         } else {
-            throw new ServiceException(ResultCode.DISTRIBUTION_RETREAT_ERROR);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_RETREAT_ERROR);
         }
 
     }
@@ -74,7 +74,7 @@ public class DistributionManagerController {
         if (distributionService.audit(id, status)) {
             return ResultUtil.success();
         } else {
-            throw new ServiceException(ResultCode.DISTRIBUTION_AUDIT_ERROR);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_AUDIT_ERROR);
         }
 
     }

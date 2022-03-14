@@ -102,7 +102,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
         Pintuan pintuan = this.getById(id);
         if (pintuan == null) {
             log.error("拼团活动id[" + id + "]的拼团活动不存在！");
-            throw new ServiceException(ResultCode.PINTUAN_NOT_EXIST_ERROR);
+            throw new BusinessException(ResultEnum.PINTUAN_NOT_EXIST_ERROR);
         }
         PintuanVO pintuanVO = new PintuanVO(pintuan);
         PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
@@ -151,7 +151,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
                 long sameNum = this.count(queryWrapper);
                 //当前时间段是否存在同类活动
                 if (sameNum > 0) {
-                    throw new ServiceException(ResultCode.PROMOTION_SAME_ACTIVE_EXIST);
+                    throw new BusinessException(ResultEnum.PROMOTION_SAME_ACTIVE_EXIST);
                 }
             }
         }
@@ -170,7 +170,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
         long sameNum = this.count(queryWrapper);
         //当前时间段是否存在同类活动
         if (sameNum > 0) {
-            throw new ServiceException(ResultCode.PROMOTION_SAME_ACTIVE_EXIST);
+            throw new BusinessException(ResultEnum.PROMOTION_SAME_ACTIVE_EXIST);
         }
         super.checkPromotions(promotions);
     }
@@ -238,7 +238,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
                 searchParams.setSkuId(skuId);
                 PromotionGoods promotionGoods = promotionGoodsService.getPromotionsGoods(searchParams);
                 if (promotionGoods == null) {
-                    throw new ServiceException(ResultCode.PINTUAN_GOODS_NOT_EXIST_ERROR);
+                    throw new BusinessException(ResultEnum.PINTUAN_GOODS_NOT_EXIST_ERROR);
                 }
                 pintuanShareVO.setPromotionGoods(promotionGoods);
                 Pintuan pintuanById = this.getById(order.getPromotionId());
@@ -335,7 +335,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
             for (PromotionGoods promotionGood : promotionGoods) {
                 if (goodsSkuService.getGoodsSkuByIdFromCache(promotionGood.getSkuId()) == null) {
                     log.error("商品[" + promotionGood.getGoodsName() + "]不存在或处于不可售卖状态！");
-                    throw new ServiceException();
+                    throw new BusinessException();
                 }
                 //查询是否在同一时间段参与了拼团活动
                 Integer count = promotionGoodsService.findInnerOverlapPromotionGoods(PromotionTypeEnum.SECKILL.name(), promotionGood.getSkuId(), pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getId());
@@ -343,7 +343,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
                 count += promotionGoodsService.findInnerOverlapPromotionGoods(PromotionTypeEnum.PINTUAN.name(), promotionGood.getSkuId(), pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getId());
                 if (count > 0) {
                     log.error("商品[" + promotionGood.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
-                    throw new ServiceException("商品[" + promotionGood.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
+                    throw new BusinessException("商品[" + promotionGood.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
                 }
             }
             PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();

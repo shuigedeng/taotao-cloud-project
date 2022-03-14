@@ -33,7 +33,7 @@ public class PointsGoodsManagerController {
         if (pointsGoodsService.savePointsGoodsBatch(pointsGoodsList)) {
             return ResultUtil.success();
         }
-        return ResultUtil.error(ResultCode.POINT_GOODS_ERROR);
+        return ResultUtil.error(ResultEnum.POINT_GOODS_ERROR);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
@@ -50,7 +50,7 @@ public class PointsGoodsManagerController {
         if (pointsGoodsService.updateStatus(Arrays.asList(ids.split(",")), startTime, endTime)) {
             return ResultUtil.success();
         }
-        return ResultUtil.error(ResultCode.POINT_GOODS_ERROR);
+        return ResultUtil.error(ResultEnum.POINT_GOODS_ERROR);
     }
 
     @DeleteMapping("/{ids}")
@@ -59,7 +59,7 @@ public class PointsGoodsManagerController {
         if (pointsGoodsService.removePromotions(Arrays.asList(ids.split(",")))) {
             return ResultUtil.success();
         }
-        throw new ServiceException(ResultCode.POINT_GOODS_ERROR);
+        throw new BusinessException(ResultEnum.POINT_GOODS_ERROR);
     }
 
     @GetMapping

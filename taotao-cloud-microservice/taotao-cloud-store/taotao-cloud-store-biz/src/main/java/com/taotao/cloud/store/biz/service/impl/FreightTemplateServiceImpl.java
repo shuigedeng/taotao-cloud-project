@@ -126,7 +126,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
         //获取当前登录商家账号
         AuthUser tokenUser = UserContext.getCurrentUser();
         if (freightTemplateVO.getId().equals(tokenUser.getStoreId())) {
-            throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+            throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
         FreightTemplate freightTemplate = new FreightTemplate();
         //复制属性

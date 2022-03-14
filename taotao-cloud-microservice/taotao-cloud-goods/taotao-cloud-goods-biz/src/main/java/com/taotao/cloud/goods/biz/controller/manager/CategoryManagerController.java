@@ -73,16 +73,16 @@ public class CategoryManagerController {
 		if (category.getParentId() != null && !"0".equals(category.getParentId())) {
 			Category parent = categoryService.getById(category.getParentId());
 			if (parent == null) {
-				throw new ServiceException(ResultCode.CATEGORY_PARENT_NOT_EXIST);
+				throw new BusinessException(ResultEnum.CATEGORY_PARENT_NOT_EXIST);
 			}
 			if (category.getLevel() >= 4) {
-				throw new ServiceException(ResultCode.CATEGORY_BEYOND_THREE);
+				throw new BusinessException(ResultEnum.CATEGORY_BEYOND_THREE);
 			}
 		}
 		if (categoryService.saveCategory(category)) {
 			return Result.success(category);
 		}
-		throw new ServiceException(ResultCode.CATEGORY_SAVE_ERROR);
+		throw new BusinessException(ResultEnum.CATEGORY_SAVE_ERROR);
 	}
 
 	@Operation(summary = "修改商品分类", description = "修改商品分类", method = CommonConstant.PUT)
@@ -92,7 +92,7 @@ public class CategoryManagerController {
 	public Result<Boolean> updateCategory(@Valid CategoryVO category) {
 		Category catTemp = categoryService.getById(category.getId());
 		if (catTemp == null) {
-			throw new ServiceException(ResultCode.CATEGORY_NOT_EXIST);
+			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
 		categoryService.updateCategory(category);
 		return Result.success(true);
@@ -107,13 +107,13 @@ public class CategoryManagerController {
 		category.setParentId(id);
 		List<Category> list = categoryService.findByAllBySortOrder(category);
 		if (list != null && !list.isEmpty()) {
-			throw new ServiceException(ResultCode.CATEGORY_HAS_CHILDREN);
+			throw new BusinessException(ResultEnum.CATEGORY_HAS_CHILDREN);
 
 		}
 		//查询某商品分类的商品数量
 		long count = goodsService.getGoodsCountByCategory(id);
 		if (count > 0) {
-			throw new ServiceException(ResultCode.CATEGORY_HAS_GOODS);
+			throw new BusinessException(ResultEnum.CATEGORY_HAS_GOODS);
 		}
 		categoryService.delete(id);
 		return Result.success(true);
@@ -127,7 +127,7 @@ public class CategoryManagerController {
 		@RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {
-			throw new ServiceException(ResultCode.CATEGORY_NOT_EXIST);
+			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
 		categoryService.updateCategoryStatus(id, enableOperations);
 		return Result.success(true);

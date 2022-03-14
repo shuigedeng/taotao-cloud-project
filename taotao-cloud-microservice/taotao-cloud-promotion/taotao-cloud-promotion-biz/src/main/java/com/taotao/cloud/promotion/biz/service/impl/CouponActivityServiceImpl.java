@@ -124,7 +124,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
             CouponActivityDTO couponActivityDTO = (CouponActivityDTO) couponActivity;
             //指定会员判定
             if (couponActivity.getActivityScope().equals(CouponActivitySendTypeEnum.DESIGNATED.name()) && couponActivityDTO.getMemberDTOS().isEmpty()) {
-                throw new ServiceException(ResultCode.COUPON_ACTIVITY_MEMBER_ERROR);
+                throw new BusinessException(ResultEnum.COUPON_ACTIVITY_MEMBER_ERROR);
             }
             // 检查优惠券
             this.checkCouponActivityItem(couponActivityDTO.getCouponActivityItems());
@@ -248,13 +248,13 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
     private void checkCouponActivityItem(List<CouponActivityItem> couponActivityItems) {
         //优惠券数量判定
         if (couponActivityItems.isEmpty()) {
-            throw new ServiceException(ResultCode.COUPON_ACTIVITY_ITEM_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_ACTIVITY_ITEM_ERROR);
         } else if (couponActivityItems.size() > 10) {
-            throw new ServiceException(ResultCode.COUPON_ACTIVITY_ITEM_MUST_NUM_ERROR);
+            throw new BusinessException(ResultEnum.COUPON_ACTIVITY_ITEM_MUST_NUM_ERROR);
         } else {
             for (CouponActivityItem item : couponActivityItems) {
                 if (item.getNum() == null || item.getNum() <= 0) {
-                    throw new ServiceException(ResultCode.COUPON_ACTIVITY_ITEM_NUM_ERROR);
+                    throw new BusinessException(ResultEnum.COUPON_ACTIVITY_ITEM_NUM_ERROR);
                 }
             }
         }

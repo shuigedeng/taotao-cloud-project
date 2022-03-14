@@ -55,8 +55,8 @@ public class CartController {
 			log.info(se.getMsg(), se);
 			throw se;
 		} catch (Exception e) {
-			log.error(ResultCode.CART_ERROR.message(), e);
-			throw new ServiceException(ResultCode.CART_ERROR);
+			log.error(ResultEnum.CART_ERROR.message(), e);
+			throw new BusinessException(ResultEnum.CART_ERROR);
 		}
 	}
 
@@ -156,8 +156,8 @@ public class CartController {
 			log.error(se.getMsg(), se);
 			throw se;
 		} catch (Exception e) {
-			log.error(ResultCode.CART_ERROR.message(), e);
-			throw new ServiceException(ResultCode.CART_ERROR);
+			log.error(ResultEnum.CART_ERROR.message(), e);
+			throw new BusinessException(ResultEnum.CART_ERROR);
 		}
 	}
 
@@ -171,11 +171,11 @@ public class CartController {
 			cartService.shippingAddress(shippingAddressId, way);
 			return ResultUtil.success();
 		} catch (ServiceException se) {
-			log.error(ResultCode.SHIPPING_NOT_APPLY.message(), se);
-			throw new ServiceException(ResultCode.SHIPPING_NOT_APPLY);
+			log.error(ResultEnum.SHIPPING_NOT_APPLY.message(), se);
+			throw new BusinessException(ResultEnum.SHIPPING_NOT_APPLY);
 		} catch (Exception e) {
-			log.error(ResultCode.CART_ERROR.message(), e);
-			throw new ServiceException(ResultCode.CART_ERROR);
+			log.error(ResultEnum.CART_ERROR.message(), e);
+			throw new BusinessException(ResultEnum.CART_ERROR);
 		}
 	}
 
@@ -194,8 +194,8 @@ public class CartController {
 			log.error(se.getMsg(), se);
 			throw se;
 		} catch (Exception e) {
-			log.error(ResultCode.CART_ERROR.message(), e);
-			throw new ServiceException(ResultCode.CART_ERROR);
+			log.error(ResultEnum.CART_ERROR.message(), e);
+			throw new BusinessException(ResultEnum.CART_ERROR);
 		}
 	}
 
@@ -230,8 +230,8 @@ public class CartController {
 			log.info(se.getMsg(), se);
 			throw se;
 		} catch (Exception e) {
-			log.error(ResultCode.ORDER_ERROR.message(), e);
-			throw new ServiceException(ResultCode.ORDER_ERROR);
+			log.error(ResultEnum.ORDER_ERROR.message(), e);
+			throw new BusinessException(ResultEnum.ORDER_ERROR);
 		}
 	}
 }

@@ -91,7 +91,7 @@ public class WechatAccessTokenUtil {
             return ticket;
         } catch (Exception e) {
             log.error("微信JsApi签名异常", e);
-            throw new ServiceException(ResultCode.WECHAT_JSAPI_SIGN_ERROR);
+            throw new BusinessException(ResultEnum.WECHAT_JSAPI_SIGN_ERROR);
         }
 
     }

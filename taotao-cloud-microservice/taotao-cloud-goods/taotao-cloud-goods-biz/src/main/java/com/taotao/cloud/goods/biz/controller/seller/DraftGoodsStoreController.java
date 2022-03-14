@@ -66,7 +66,7 @@ public class DraftGoodsStoreController {
 			draftGoodsVO.setStoreId(storeId);
 		} else if (draftGoodsVO.getStoreId() != null && !storeId.equals(
 			draftGoodsVO.getStoreId())) {
-			throw new ServiceException(ResultCode.USER_AUTHORITY_ERROR);
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 		draftGoodsService.saveGoodsDraft(draftGoodsVO);
 		return Result.success();

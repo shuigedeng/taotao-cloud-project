@@ -79,7 +79,7 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSente
                 if (memberNoticeService.saveBatch(memberNotices)) {
                     return true;
                 } else {
-                    throw new ServiceException(ResultCode.NOTICE_SEND_ERROR);
+                    throw new BusinessException(ResultEnum.NOTICE_SEND_ERROR);
                 }
             }
         }

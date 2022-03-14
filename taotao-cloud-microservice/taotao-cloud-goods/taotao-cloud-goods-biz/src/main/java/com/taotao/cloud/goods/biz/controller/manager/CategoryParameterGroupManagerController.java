@@ -60,7 +60,7 @@ public class CategoryParameterGroupManagerController {
 		if (categoryParameterGroupService.save(categoryParameterGroup)) {
 			return Result.success(categoryParameterGroup);
 		}
-		throw new ServiceException(ResultCode.CATEGORY_PARAMETER_SAVE_ERROR);
+		throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_SAVE_ERROR);
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.PUT)
@@ -72,7 +72,7 @@ public class CategoryParameterGroupManagerController {
 		if (categoryParameterGroupService.updateById(categoryParameterGroup)) {
 			return Result.success(categoryParameterGroup);
 		}
-		throw new ServiceException(ResultCode.CATEGORY_PARAMETER_UPDATE_ERROR);
+		throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_UPDATE_ERROR);
 	}
 
 	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组", method = CommonConstant.DELETE)

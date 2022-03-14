@@ -68,9 +68,9 @@ public class CouponManagerController {
     public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
         String[] split = couponIds.split(",");
         if (couponService.updateStatus(Arrays.asList(split), startTime, endTime)) {
-            return ResultUtil.success(ResultCode.COUPON_EDIT_STATUS_SUCCESS);
+            return ResultUtil.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
         }
-        throw new ServiceException(ResultCode.COUPON_EDIT_STATUS_ERROR);
+        throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
     }
 
     @ApiOperation(value = "批量删除")
@@ -84,7 +84,7 @@ public class CouponManagerController {
     @PutMapping(value = "/member/cancellation/{id}")
     public Result<Object> cancellation(@PathVariable String id) {
         memberCouponService.cancellation(id);
-        return ResultUtil.success(ResultCode.COUPON_CANCELLATION_SUCCESS);
+        return ResultUtil.success(ResultEnum.COUPON_CANCELLATION_SUCCESS);
     }
 
     @ApiOperation(value = "根据优惠券id券分页获取会员领详情")
@@ -102,7 +102,7 @@ public class CouponManagerController {
     private void setStoreInfo(CouponVO couponVO) {
         AuthUser currentUser = UserContext.getCurrentUser();
         if (currentUser == null) {
-            throw new ServiceException(ResultCode.USER_NOT_EXIST);
+            throw new BusinessException(ResultEnum.USER_NOT_EXIST);
         }
         couponVO.setStoreId("platform");
         couponVO.setStoreName("platform");
