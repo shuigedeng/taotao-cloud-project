@@ -9,6 +9,7 @@ import cn.hutool.extra.pinyin.PinyinUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
@@ -67,7 +68,6 @@ import org.springframework.util.ObjectUtils;
 /**
  * 商品索引业务层实现
  **/
-@Slf4j
 @Service
 public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	EsGoodsIndexService {
@@ -86,7 +86,6 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	private GoodsWordsService goodsWordsService;
 	@Autowired
 	private PromotionService promotionService;
-
 
 	@Autowired
 	private GoodsSkuService goodsSkuService;
@@ -833,12 +832,12 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		return new ActionListener<BulkByScrollResponse>() {
 			@Override
 			public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
-				log.info("UpdateByQueryResponse: {}", bulkByScrollResponse);
+				LogUtil.info("UpdateByQueryResponse: {}", bulkByScrollResponse);
 			}
 
 			@Override
 			public void onFailure(Exception e) {
-				log.error("UpdateByQueryRequestFailure: ", e);
+				LogUtil.error("UpdateByQueryRequestFailure: ", e);
 			}
 		};
 	}

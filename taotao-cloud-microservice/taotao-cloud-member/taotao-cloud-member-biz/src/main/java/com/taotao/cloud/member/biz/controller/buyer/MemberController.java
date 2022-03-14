@@ -51,7 +51,8 @@ public class MemberController {
 
 	@RequestLogger(description = "查询会员是否已(注册)存在")
 	@GetMapping("/exist")
-	public Result<Boolean> existMember(@Validated @NotNull(message = "查询条件不能为空") MemberQuery memberQuery) {
+	public Result<Boolean> existMember(
+		@Validated @NotNull(message = "查询条件不能为空") MemberQuery memberQuery) {
 		Boolean result = memberService.existMember(memberQuery);
 		return Result.success(result);
 	}
@@ -68,7 +69,7 @@ public class MemberController {
 	@RequestLogger(description = "查询会员用户")
 	@GetMapping("/info/security")
 	public Result<MemberBack> findMember(@Validated @NotBlank(message = "查询条件不能为空")
-									 @RequestParam(value = "nicknameOrUserNameOrPhoneOrEmail") String nicknameOrUserNameOrPhoneOrEmail) {
+	@RequestParam(value = "nicknameOrUserNameOrPhoneOrEmail") String nicknameOrUserNameOrPhoneOrEmail) {
 		MemberBack result = memberService.findMember(nicknameOrUserNameOrPhoneOrEmail);
 		return Result.success(result);
 	}

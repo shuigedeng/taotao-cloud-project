@@ -26,7 +26,6 @@ public class GoodsGalleryServiceImpl extends
 	@Autowired
 	private SettingService settingService;
 
-
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void add(List<String> goodsGalleryList, String goodsId) {

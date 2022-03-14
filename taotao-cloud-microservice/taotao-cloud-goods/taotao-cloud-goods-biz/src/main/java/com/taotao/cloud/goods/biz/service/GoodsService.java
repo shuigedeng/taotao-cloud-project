@@ -1,11 +1,12 @@
 package com.taotao.cloud.goods.biz.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import java.util.List;
@@ -75,8 +76,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsSearchParams 查询参数
 	 * @return 商品分页
 	 */
-	IPage<Goods> queryByParams(GoodsSearchParams goodsSearchParams);
-
+	PageModel<GoodsBaseVO> queryByParams(GoodsSearchParams goodsSearchParams);
 
 	/**
 	 * 商品查询

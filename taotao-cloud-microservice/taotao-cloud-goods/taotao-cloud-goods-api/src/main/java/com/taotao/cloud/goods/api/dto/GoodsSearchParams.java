@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.api.dto;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
@@ -16,7 +17,7 @@ import lombok.Data;
  * 商品查询条件
  */
 @Data
-public class GoodsSearchParams {
+public class GoodsSearchParams extends PageParam {
 
 	private static final long serialVersionUID = 2544015852728566887L;
 
@@ -73,24 +74,6 @@ public class GoodsSearchParams {
 	 */
 	@Schema(description = "商品类型")
 	private String goodsType;
-
-	/**
-	 * 当前第几页
-	 */
-	@Schema(description = "当前第几页，默认1", example = "1", required = true)
-	@NotNull(message = "当前页显示数量不能为空")
-	@Min(value = 0)
-	@Max(value = Integer.MAX_VALUE)
-	Integer currentPage;
-
-	/**
-	 * 每页显示条数
-	 */
-	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
-	@NotNull(message = "每页数据显示数量不能为空")
-	@Min(value = 5)
-	@Max(value = 100)
-	Integer pageSize;
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();

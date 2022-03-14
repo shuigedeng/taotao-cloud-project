@@ -2,6 +2,9 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.member.api.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
 
@@ -21,14 +24,16 @@ public interface MemberPointsHistoryService extends IService<MemberPointsHistory
      */
     MemberPointsHistoryVO getMemberPointsHistoryVO(String memberId);
 
+	PageModel<MemberPointsHistoryPageVO> getByPage(PageParam pageParam);
+
     /**
      * 会员积分历史
      *
-     * @param page       分页
+     * @param pageParam       分页
      * @param memberId   会员ID
      * @param memberName 会员名称
      * @return 积分历史分页
      */
-    IPage<MemberPointsHistory> MemberPointsHistoryList(PageVO page, String memberId, String memberName);
+    PageModel<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam, String memberId, String memberName);
 
 }

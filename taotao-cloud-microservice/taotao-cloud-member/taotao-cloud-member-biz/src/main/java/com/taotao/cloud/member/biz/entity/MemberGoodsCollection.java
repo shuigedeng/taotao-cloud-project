@@ -33,6 +33,14 @@ public class MemberGoodsCollection extends BaseSuperEntity<MemberGoodsCollection
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(32) not null comment '商品id'")
 	private String skuId;
 
+
+	public MemberGoodsCollection(){}
+
+	public MemberGoodsCollection(String memberId, String skuId) {
+		this.memberId = memberId;
+		this.skuId = skuId;
+	}
+
 	public String getMemberId() {
 		return memberId;
 	}

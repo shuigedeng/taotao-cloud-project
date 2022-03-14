@@ -16,9 +16,9 @@
 package com.taotao.cloud.common.utils.common;
 
 import cn.hutool.core.util.CharsetUtil;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -87,8 +87,9 @@ public class SecurityUtil {
 	 */
 	public static SecurityUser getUser(Authentication authentication) {
 		if (Objects.isNull(authentication)) {
-			return null;
+			throw new BusinessException("用户未登录");
 		}
+
 		Object principal = authentication.getPrincipal();
 		if (principal instanceof SecurityUser) {
 			return (SecurityUser) principal;
@@ -119,7 +120,10 @@ public class SecurityUtil {
 	 */
 	public static String getUsername() {
 		SecurityUser user = getUser();
-		return Objects.isNull(user) ? null : user.getUsername();
+		if (Objects.isNull(user)) {
+			throw new BusinessException("用户未登录");
+		}
+		return user.getUsername();
 	}
 
 	/**
@@ -129,9 +133,12 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2021-09-02 14:56:38
 	 */
-	public static Long getUserId() {
+	public static String getUserId() {
 		SecurityUser user = getUser();
-		return Objects.isNull(user) ? null : user.getUserId();
+		if (Objects.isNull(user)) {
+			throw new BusinessException("用户未登录");
+		}
+		return user.getUserId();
 	}
 
 	///**

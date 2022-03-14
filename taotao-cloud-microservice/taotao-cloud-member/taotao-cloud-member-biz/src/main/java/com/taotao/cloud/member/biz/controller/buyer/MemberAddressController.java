@@ -4,7 +4,10 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.IMemberAddressService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,7 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -42,42 +44,44 @@ public class MemberAddressController {
 	@Autowired
 	private IMemberAddressService memberAddressService;
 
-	@Operation(summary = "分页获取会员收件地址列表", description = "分页获取会员收件地址", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取会员收件地址")
+	@Operation(summary = "分页获取当前会员收件地址列表", description = "分页获取当前会员收件地址列表", method = CommonConstant.GET)
+	@RequestLogger(description = "分页获取当前会员收件地址列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageModel<MemberAddressPageDTO>> page(@Validated PageParam page) {
+	public Result<PageModel<MemberAddressVO>> page(@Validated PageParam page) {
 		return Result.success(
-			memberAddressService.getAddressByMember(page, UserContext.getCurrentUser().getId()));
+			memberAddressService.getAddressByMember(page, SecurityUtil.getUserId()));
 	}
 
 	@Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址", method = CommonConstant.GET)
 	@RequestLogger(description = "根据ID获取会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberAddress> getShippingAddress(
+	public Result<MemberAddressVO> getShippingAddress(
 		@Parameter(description = "会员地址ID", required = true) @NotBlank(message = "id不能为空")
 		@PathVariable(value = "id") String id) {
-		return Result.success(memberAddressService.getMemberAddress(id));
+		MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
+		return Result.success(BeanUtil.copyProperties(memberAddress, MemberAddressVO.class));
 	}
 
 	@Operation(summary = "获取当前会员默认收件地址", description = "获取当前会员默认收件地址", method = CommonConstant.GET)
 	@RequestLogger(description = "获取当前会员默认收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/default")
-	public Result<MemberAddress> getDefaultShippingAddress() {
-		return Result.success(memberAddressService.getDefaultMemberAddress());
+	public Result<MemberAddressVO> getDefaultShippingAddress() {
+		MemberAddress memberAddress = memberAddressService.getDefaultMemberAddress();
+		return Result.success(BeanUtil.copyProperties(memberAddress, MemberAddressVO.class));
 	}
 
 	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址", method = CommonConstant.POST)
 	@RequestLogger(description = "新增会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<MemberAddress> addShippingAddress(@Valid MemberAddress shippingAddress) {
+	public Result<Boolean> addShippingAddress(@Valid MemberAddress shippingAddress) {
 		//添加会员地址
-		shippingAddress.setMemberId(Objects.requireNonNull(UserContext.getCurrentUser()).getId());
-		if (shippingAddress.getIsDefault() == null) {
-			shippingAddress.setIsDefault(false);
+		shippingAddress.setMemberId(Objects.requireNonNull(SecurityUtil.getUserId()));
+		if (shippingAddress.getDefaulted() == null) {
+			shippingAddress.setDefaulted(false);
 		}
 		return Result.success(memberAddressService.saveMemberAddress(shippingAddress));
 	}
@@ -87,8 +91,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<Boolean> editShippingAddress(@Valid MemberAddress shippingAddress) {
-		memberAddressService.updateMemberAddress(shippingAddress);
-		return Result.success(true);
+		return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
 	}
 
 	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址", method = CommonConstant.DELETE)
@@ -98,9 +101,7 @@ public class MemberAddressController {
 	public Result<Boolean> delShippingAddressById(
 		@Parameter(description = "会员地址ID", required = true) @NotBlank(message = "id不能为空")
 		@PathVariable(value = "id") String id) {
-		OperationalJudgment.judgment(memberAddressService.getById(id));
-		memberAddressService.removeMemberAddress(id);
-		return Result.success(true);
+		return Result.success(memberAddressService.removeMemberAddress(id));
 	}
 
 }

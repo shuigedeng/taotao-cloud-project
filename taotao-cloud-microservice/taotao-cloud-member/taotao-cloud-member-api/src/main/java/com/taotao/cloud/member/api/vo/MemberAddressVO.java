@@ -5,15 +5,15 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 会员收货地址分页DTO
+ * 会员收货地址DTO
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2022-03-11 14:55:28
  */
 @Data
-@Schema(description = "会员收货地址分页DTO")
-public class MemberAddressPageDTO {
+@Schema(description = "会员收货地址DTO")
+public class MemberAddressVO {
 
 	@Schema(description = "会员ID")
 	private String memberId;

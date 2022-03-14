@@ -1,11 +1,13 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
-import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.dto.BrandPageDTO;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
@@ -42,12 +44,14 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	private GoodsService goodsService;
 
 	@Override
-	public IPage<Brand> getBrandsByPage(BrandPageDTO page) {
+	public PageModel<BrandVO> getBrandsByPage(BrandPageDTO page) {
 		LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
 		if (page.getName() != null) {
 			queryWrapper.like(Brand::getName, page.getName());
 		}
-		return this.page(PageUtil.initPage(page), queryWrapper);
+
+		IPage<Brand> brandPage = this.page(page.buildMpPage(), queryWrapper);
+		return PageModel.convertMybatisPage(brandPage, BrandVO.class);
 	}
 
 	@Override
@@ -64,22 +68,24 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public boolean addBrand(BrandVO brandVO) {
-
-		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandVO.getName())) != null) {
+	public boolean addBrand(BrandDTO brandDTO) {
+		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName()))
+			!= null) {
 			throw new ServiceException(ResultCode.BRAND_NAME_EXIST_ERROR);
 		}
-		return this.save(brandVO);
+		return this.save(BeanUtil.copy(brandDTO, Brand.class));
 	}
 
 	@Override
-	public boolean updateBrand(BrandVO brandVO) {
-		this.checkExist(brandVO.getId());
-		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandVO.getName())
-			.ne(Brand::getId, brandVO.getId())) != null) {
+	public boolean updateBrand(BrandDTO brandDTO) {
+		this.checkExist(brandDTO.getId());
+
+		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName())
+			.ne(Brand::getId, brandDTO.getId())) != null) {
 			throw new ServiceException(ResultCode.BRAND_NAME_EXIST_ERROR);
 		}
-		return this.updateById(brandVO);
+
+		return this.updateById(BeanUtil.copy(brandDTO, Brand.class));
 	}
 
 	@Override
@@ -91,7 +97,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 			ids.add(brandId);
 			checkBind(ids);
 		}
-		brand.setDeleteFlag(disable);
+		brand.setDelFlag(disable);
 		return updateById(brand);
 	}
 
@@ -100,7 +106,6 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		checkBind(ids);
 		this.removeByIds(ids);
 	}
-
 
 	/**
 	 * 校验绑定关系

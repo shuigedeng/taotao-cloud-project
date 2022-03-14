@@ -5,6 +5,7 @@ package com.taotao.cloud.member.biz.controller.buyer.connect;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

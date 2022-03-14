@@ -2,6 +2,7 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.member.api.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.entity.MemberSign;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface MemberSignService extends IService<MemberSign> {
      * @param time 时间 格式 YYYYmm
      * @return 会员签到列表
      */
-    List<MemberSign> getMonthSignDay(String time);
+    List<MemberSignVO> getMonthSignDay(String time);
 
     /**
      * 会员签到赠送积分

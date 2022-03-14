@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,22 +35,16 @@ public class ParameterManagerController {
 	@RequestLogger(description = "添加参数添加参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> save(@Valid Parameters parameters) {
-		if (parametersService.save(parameters)) {
-			return Result.success(true);
-		}
-		throw new ServiceException(ResultCode.PARAMETER_SAVE_ERROR);
+	public Result<Boolean> save(@Valid @RequestBody Parameters parameters) {
+		return Result.success(parametersService.save(parameters));
 	}
 
 	@Operation(summary = "编辑参数", description = "编辑参数", method = CommonConstant.PUT)
 	@RequestLogger(description = "编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<Boolean> update(@Valid Parameters parameters) {
-		if (parametersService.updateParameter(parameters)) {
-			return Result.success(true);
-		}
-		throw new ServiceException(ResultCode.PARAMETER_UPDATE_ERROR);
+	public Result<Boolean> update(@Valid @RequestBody Parameters parameters) {
+		return Result.success(parametersService.updateParameter(parameters));
 	}
 
 	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息", method = CommonConstant.DELETE)
@@ -57,7 +52,6 @@ public class ParameterManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delById(@PathVariable String id) {
-		parametersService.removeById(id);
-		return Result.success(true);
+		return Result.success(parametersService.removeById(id));
 	}
 }

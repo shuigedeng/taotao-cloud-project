@@ -9,7 +9,8 @@ import lombok.Data;
  * 商品VO
  */
 @Data
-public class GoodsVO extends Goods {
+@Schema(description = "商品VO")
+public class GoodsVO extends GoodsBaseVO {
 
 	private static final long serialVersionUID = 6377623919990713567L;
 

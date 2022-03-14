@@ -2,9 +2,11 @@ package com.taotao.cloud.goods.biz.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.dto.BrandPageDTO;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
@@ -46,25 +48,26 @@ public class BrandManagerController {
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
 	@RequestLogger(description = "通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/get/{id}")
-	public Result<Brand> get(@NotNull @PathVariable String id) {
-		return Result.success(brandService.getById(id));
+	@GetMapping(value = "/{id}")
+	public Result<BrandVO> get(@NotNull @PathVariable String id) {
+		Brand brand = brandService.getById(id);
+		return Result.success(BeanUtil.copyProperties(brand, BrandVO.class));
 	}
 
 	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌", method = CommonConstant.GET)
 	@RequestLogger(description = "获取所有可用品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/all")
-	public Result<List<Brand>> getAll() {
+	@GetMapping(value = "/all/available")
+	public Result<List<BrandVO>> getAllAvailable() {
 		List<Brand> list = brandService.list(new QueryWrapper<Brand>().eq("delete_flag", 0));
-		return Result.success(list);
+		return Result.success(BeanUtil.copyProperties(list, BrandVO.class));
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<IPage<Brand>> getByPage(BrandPageDTO page) {
+	public Result<PageModel<BrandVO>> getByPage(BrandPageDTO page) {
 		return Result.success(brandService.getBrandsByPage(page));
 	}
 
@@ -72,18 +75,15 @@ public class BrandManagerController {
 	@RequestLogger(description = "新增品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<BrandVO> save(@Valid BrandVO brand) {
-		if (brandService.addBrand(brand)) {
-			return Result.success(brand);
-		}
-		throw new ServiceException(ResultCode.BRAND_SAVE_ERROR);
+	public Result<Boolean> save(@Valid BrandDTO brand) {
+		return Result.success(brandService.addBrand(brand));
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.POST)
 	@RequestLogger(description = "更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<BrandVO> update(@PathVariable String id, @Valid BrandVO brand) {
+	public Result<Boolean> update(@PathVariable String id, @Valid BrandDTO brand) {
 		brand.setId(id);
 		if (brandService.updateBrand(brand)) {
 			return Result.success(brand);

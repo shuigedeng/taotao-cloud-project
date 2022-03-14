@@ -2,6 +2,9 @@ package com.taotao.cloud.goods.biz.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import java.util.List;
 
@@ -18,4 +21,5 @@ public interface SpecificationService extends IService<Specification> {
 	 */
 	boolean deleteSpecification(List<String> ids);
 
+	PageModel<SpecificationVO> getPage(String specName, PageParam page);
 }

@@ -1,8 +1,11 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.service.GoodsCollectionService;
 import com.taotao.cloud.member.biz.service.StoreCollectionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,8 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 买家端,会员收藏接口
- *
- * @since 2020/11/17 2:32 下午
  */
 @Validated
 @RestController
@@ -36,25 +37,23 @@ public class MemberCollectionController {
 	 */
 	@Autowired
 	private GoodsCollectionService goodsCollectionService;
-
 	/**
 	 * 会员店铺
 	 */
 	@Autowired
 	private StoreCollectionService storeCollectionService;
-
 	/**
 	 * 商品收藏关键字
 	 */
-	private String goods = "GOODS";
+	private static final String goods = "GOODS";
 
 	@Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表", method = CommonConstant.GET)
 	@RequestLogger(description = "查询会员收藏列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{type}")
-	public Result<Object> goodsList(
+	public Result<PageModel<GoodsCollectionVO>> goodsListPage(
 		@Parameter(description = "类型", required = true) @PathVariable String type,
-		PageVO page) {
+		@Validated PageParam page) {
 		if (goods.equals(type)) {
 			return Result.success(goodsCollectionService.goodsCollection(page));
 		}
@@ -65,7 +64,7 @@ public class MemberCollectionController {
 	@RequestLogger(description = "添加会员收藏")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/{type}/{id}")
-	public Result<Object> addGoodsCollection(
+	public Result<Boolean> addGoodsCollection(
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
 		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable String id) {
 		if (goods.equals(type)) {
@@ -78,7 +77,6 @@ public class MemberCollectionController {
 	@Operation(summary = "删除会员收藏", description = "删除会员收藏", method = CommonConstant.DELETE)
 	@RequestLogger(description = "删除会员收藏")
 	@PreAuthorize("@el.check('admin','timing:list')")
-	@GetMapping
 	@DeleteMapping(value = "/{type}/{id}")
 	public Result<Object> deleteGoodsCollection(
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,

@@ -2,6 +2,7 @@ package com.taotao.cloud.member.biz.controller.buyer.connect;
 
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -48,7 +49,7 @@ public class ConnectBindController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/list")
 	public Result<List<String>> bindList() {
-		return ResultUtil.success(connectService.bindList());
+		return Result.success(connectService.bindList());
 	}
 
 

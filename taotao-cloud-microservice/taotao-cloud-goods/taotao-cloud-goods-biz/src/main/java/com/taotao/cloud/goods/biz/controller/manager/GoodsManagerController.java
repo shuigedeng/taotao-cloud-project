@@ -1,14 +1,14 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
-import com.taotao.cloud.goods.biz.entity.Goods;
-import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -51,7 +51,8 @@ public class GoodsManagerController {
 	@RequestLogger(description = "分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<IPage<Goods>> getByPage(GoodsSearchParams goodsSearchParams) {
+	public Result<PageModel<GoodsBaseVO>> getByPage(
+		@Validated GoodsSearchParams goodsSearchParams) {
 		return Result.success(goodsService.queryByParams(goodsSearchParams));
 	}
 
@@ -59,7 +60,8 @@ public class GoodsManagerController {
 	@RequestLogger(description = "分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<IPage<GoodsSku>> getSkuByPage(GoodsSearchParams goodsSearchParams) {
+	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(
+		@Validated GoodsSearchParams goodsSearchParams) {
 		return Result.success(goodsSkuService.getGoodsSkuByPage(goodsSearchParams));
 	}
 
@@ -67,7 +69,8 @@ public class GoodsManagerController {
 	@RequestLogger(description = "分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
-	public Result<IPage<Goods>> getAuthPage(GoodsSearchParams goodsSearchParams) {
+	public Result<PageModel<GoodsSkuBaseVO>> getAuthPage(
+		@Validated GoodsSearchParams goodsSearchParams) {
 		goodsSearchParams.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
 		return Result.success(goodsService.queryByParams(goodsSearchParams));
 	}
@@ -76,38 +79,30 @@ public class GoodsManagerController {
 	@RequestLogger(description = "管理员下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
-	public Result<Object> underGoods(@PathVariable String goodsId,
+	public Result<Boolean> underGoods(@PathVariable String goodsId,
 		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
 		List<String> goodsIds = Arrays.asList(goodsId.split(","));
-		if (Boolean.TRUE.equals(
-			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason))) {
-			return Result.success();
-		}
-		throw new ServiceException(ResultCode.GOODS_UNDER_ERROR);
+		return Result.success(
+			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason)));
 	}
 
 	@Operation(summary = "管理员审核商品", description = "管理员审核商品", method = CommonConstant.PUT)
 	@RequestLogger(description = "管理员审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
-	public Result<Object> auth(@PathVariable List<String> goodsIds,
+	public Result<Boolean> auth(@PathVariable List<String> goodsIds,
 		@RequestParam String authFlag) {
 		//校验商品是否存在
-		if (goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag))) {
-			return Result.success;
-		}
-		throw new ServiceException(ResultCode.GOODS_AUTH_ERROR);
+		return Result.success(goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag)));
 	}
 
 	@Operation(summary = "管理员上架商品", description = "管理员上架商品", method = CommonConstant.PUT)
 	@RequestLogger(description = "管理员上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/up")
-	public Result<Object> unpGoods(@PathVariable List<String> goodsId) {
-		if (goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, "")) {
-			return Result.success();
-		}
-		throw new ServiceException(ResultCode.GOODS_UPPER_ERROR);
+	public Result<Boolean> unpGoods(@PathVariable List<String> goodsId) {
+		return Result.success(
+			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 	}
 
 	@Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情", method = CommonConstant.GET)
@@ -115,8 +110,7 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<GoodsVO> get(@PathVariable String id) {
-		GoodsVO goods = goodsService.getGoodsVO(id);
-		return Result.success(goods);
+		return Result.success(goodsService.getGoodsVO(id));
 	}
 
 }

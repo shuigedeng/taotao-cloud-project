@@ -3,9 +3,9 @@ package com.taotao.cloud.member.biz.controller.buyer;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.member.biz.entity.MemberSign;
+import com.taotao.cloud.member.api.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.service.MemberSignService;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.netty.annotation.RequestParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -45,7 +45,7 @@ public class MemberSignController {
 	@RequestLogger(description = "根据时间查询会员签到表，类型是YYYYmm")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<List<MemberSign>> memberSign(String time) {
+	public Result<List<MemberSignVO>> memberSign(@RequestParam String time) {
 		return Result.success(memberSignService.getMonthSignDay(time));
 	}
 

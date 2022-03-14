@@ -1,7 +1,9 @@
 package com.taotao.cloud.member.biz.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
 
 /**
@@ -16,7 +18,7 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param memberId 会员ID
 	 * @return 会员地址分页列表
 	 */
-	IPage<MemberAddress> getAddressByMember(PageVO page, String memberId);
+	PageModel<MemberAddressVO> getAddressByMember(PageParam page, String memberId);
 
 	/**
 	 * 根据地址ID获取当前会员地址信息
@@ -39,7 +41,7 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param memberAddress 收货地址
 	 * @return 操作状态
 	 */
-	MemberAddress saveMemberAddress(MemberAddress memberAddress);
+	Boolean saveMemberAddress(MemberAddress memberAddress);
 
 	/**
 	 * 修改会员收货地址信息
@@ -47,7 +49,7 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param memberAddress 收货地址
 	 * @return 操作状态
 	 */
-	MemberAddress updateMemberAddress(MemberAddress memberAddress);
+	Boolean updateMemberAddress(MemberAddress memberAddress);
 
 	/**
 	 * 删除会员收货地址信息
@@ -55,6 +57,6 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param id 收货地址ID
 	 * @return 操作状态
 	 */
-	boolean removeMemberAddress(String id);
+	Boolean removeMemberAddress(String id);
 
 }

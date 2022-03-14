@@ -1,11 +1,14 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.IMemberAddressService;
+import com.taotao.cloud.member.biz.service.memberAddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -32,15 +35,15 @@ import javax.validation.Valid;
 public class MemberAddressController {
 
     @Autowired
-    private IMemberAddressService IMemberAddressService;
+    private IMemberAddressService memberAddressService;
 
 	@Operation(summary = "会员地址分页列表", description = "会员地址分页列表", method = CommonConstant.GET)
 	@RequestLogger(description = "会员地址分页列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping("/{memberId}")
-    public Result<IPage<MemberAddress>> getByPage(PageVO page,
+    public Result<PageModel<MemberAddressVO>> getByPage(@Validated PageParam page,
 		@Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") String memberId) {
-        return Result.success(IMemberAddressService.getAddressByMember(page, memberId));
+        return Result.success(memberAddressService.getAddressByMember(page, memberId));
     }
 
 	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址", method = CommonConstant.DELETE)
@@ -49,7 +52,7 @@ public class MemberAddressController {
     @DeleteMapping(value = "/{id}")
     public Result<Object> delShippingAddressById(
 		@Parameter(description = "会员地址ID", required = true)@PathVariable String id) {
-        IMemberAddressService.removeMemberAddress(id);
+        memberAddressService.removeMemberAddress(id);
         return Result.success();
     }
 
@@ -57,18 +60,18 @@ public class MemberAddressController {
 	@RequestLogger(description = "修改会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @PutMapping
-    public Result<MemberAddress> editShippingAddress(@Valid MemberAddress shippingAddress) {
+    public Result<Boolean> editShippingAddress(@Valid MemberAddress shippingAddress) {
         //修改会员地址
-        return Result.success(IMemberAddressService.updateMemberAddress(shippingAddress));
+        return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
     }
 
 	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址", method = CommonConstant.POST)
 	@RequestLogger(description = "新增会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @PostMapping
-    public Result<MemberAddress> addShippingAddress(@Valid MemberAddress shippingAddress) {
+    public Result<Boolean> addShippingAddress(@Valid MemberAddress shippingAddress) {
         //添加会员地址
-        return Result.success(IMemberAddressService.saveMemberAddress(shippingAddress));
+        return Result.success(memberAddressService.saveMemberAddress(shippingAddress));
     }
 
 

@@ -2,6 +2,7 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
@@ -12,7 +13,7 @@ import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 /**
  * 会员商品评价业务层
  *
- * 
+ *
  * @since 2020-02-25 14:10:16
  */
 public interface MemberEvaluationService extends IService<MemberEvaluation> {
@@ -23,7 +24,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param evaluationQueryParams 评价查询
      * @return 评价分页
      */
-    IPage<MemberEvaluation> managerQuery(EvaluationQueryParams evaluationQueryParams);
+    PageModel<MemberEvaluationVO> managerQuery(EvaluationQueryParams evaluationQueryParams);
 
     /**
      * 查询评价分页列表
@@ -43,7 +44,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param memberEvaluationDTO 评论
      * @return 操作状态
      */
-    MemberEvaluationDTO addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO);
+    boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO);
 
     /**
      * 根据ID查询会员评价

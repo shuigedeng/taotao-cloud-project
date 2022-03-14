@@ -50,7 +50,6 @@ public class CategorySpecificationManagerController {
 		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
 	}
 
-
 	@Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用", method = CommonConstant.GET)
 	@RequestLogger(description = "查询某分类下绑定的规格信息,商品操作使用")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
