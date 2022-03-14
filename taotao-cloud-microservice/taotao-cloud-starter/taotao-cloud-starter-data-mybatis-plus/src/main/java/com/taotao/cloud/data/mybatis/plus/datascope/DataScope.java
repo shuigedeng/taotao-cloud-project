@@ -52,15 +52,12 @@ public class DataScope extends HashMap {
 	/**
 	 * 当前用户ID
 	 */
-	private Long userId;
+	private String userId;
 
 	/**
 	 * 具体的数据范围
 	 */
 	private List<Long> orgIds;
-
-
-
 
 	public String getScopeName() {
 		return scopeName;
@@ -78,11 +75,11 @@ public class DataScope extends HashMap {
 		this.selfScopeName = selfScopeName;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

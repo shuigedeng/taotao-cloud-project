@@ -375,8 +375,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 
 	public static final class SecurityUserBuilder {
 
-		private static String ROLE_PREFIX = "ROLE_";
-		private Long userId;
+		private String userId;
 		private String account;
 		private String username;
 		private String nickname;
@@ -399,7 +398,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		private SecurityUserBuilder() {
 		}
 
-		public SecurityUserBuilder userId(Long userId) {
+		public SecurityUserBuilder userId(String userId) {
 			this.userId = userId;
 			return this;
 		}

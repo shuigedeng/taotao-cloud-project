@@ -91,12 +91,17 @@ public class SecurityUtil {
 		}
 
 		Object principal = authentication.getPrincipal();
+		if (Objects.isNull(principal)) {
+			throw new BusinessException("用户未登录");
+		}
+
 		if (principal instanceof SecurityUser) {
 			return (SecurityUser) principal;
 		} else if (principal instanceof Map) {
 			return JsonUtil.toObject(JsonUtil.toJSONString(principal), SecurityUser.class);
 		}
-		return null;
+
+		throw new BusinessException("用户未登录");
 	}
 
 	/**
