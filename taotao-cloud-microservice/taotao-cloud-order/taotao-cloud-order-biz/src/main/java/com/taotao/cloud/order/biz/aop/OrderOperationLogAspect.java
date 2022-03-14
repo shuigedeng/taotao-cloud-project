@@ -31,7 +31,6 @@ public class OrderOperationLogAspect {
     @After("@annotation(cn.lili.modules.order.order.aop.OrderLogPoint)")
     public void doAfter(JoinPoint joinPoint) {
         try {
-
             //日志对象拼接
             //默认操作人员，系统操作
             String userName = "系统操作", id = "-1", role = UserEnums.SYSTEM.getRole();

@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,7 +36,7 @@ public class PurchaseQuotedItem extends BaseIdEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
     @Schema(description =  "创建时间", hidden = true)
-    private Date createTime;
+    private LocalDateTime createTime;
 	/**
 	 * 应用ID
 	 */
@@ -69,5 +72,5 @@ public class PurchaseQuotedItem extends BaseIdEntity {
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "价格")
-    private Double price;
+    private BigDecimal price;
 }

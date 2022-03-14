@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,7 +35,7 @@ public class PurchaseQuoted extends BaseIdEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
     @Schema(description =  "创建时间", hidden = true)
-    private Date createTime;
+    private LocalDateTime createTime;
 	/**
 	 * 应用ID
 	 */

@@ -2,26 +2,30 @@ package com.taotao.cloud.order.biz.entity.order;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 /**
- * 交易投诉通信
+ * 订单交易投诉通信表
  *
- * 
- * @since 2020/12/5
  **/
-@Data
-@TableName("li_order_complaint_communication")
-@ApiModel(value = "订单交易投诉通信")
-@AllArgsConstructor
-@NoArgsConstructor
-public class OrderComplaintCommunication extends BaseEntity {
+@Entity
+@Table(name = OrderComplaintCommunication.TABLE_NAME)
+@TableName(OrderComplaintCommunication.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderComplaintCommunication.TABLE_NAME, comment = "订单交易投诉通信表")
+public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long> {
+
+	public static final String TABLE_NAME = "tt_order_complaint_communication";
 
     private static final long serialVersionUID = -2384351827382795547L;
 

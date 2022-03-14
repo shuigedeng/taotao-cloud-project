@@ -2,24 +2,31 @@ package com.taotao.cloud.order.biz.entity.order;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 
 /**
- * 发票
- *
- * 
- * @since 2020/11/28 11:38
+ * 发票表
  */
-@Data
-@TableName("li_receipt")
-@ApiModel(value = "发票")
-public class Receipt extends BaseEntity {
+@Entity
+@Table(name = Receipt.TABLE_NAME)
+@TableName(Receipt.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Receipt.TABLE_NAME, comment = "发票表")
+public class Receipt extends BaseSuperEntity<Receipt, Long> {
+
+	public static final String TABLE_NAME = "tt_receipt";
 
     private static final long serialVersionUID = -8210927482915675995L;
+
 	/**
 	 * 应用ID
 	 */
@@ -49,7 +56,7 @@ public class Receipt extends BaseEntity {
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "发票金额")
-    private Double receiptPrice;
+    private BigDecimal receiptPrice;
 	/**
 	 * 应用ID
 	 */

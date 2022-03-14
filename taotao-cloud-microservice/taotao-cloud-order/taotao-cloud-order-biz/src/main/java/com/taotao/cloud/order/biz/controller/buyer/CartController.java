@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.controller.buyer;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;

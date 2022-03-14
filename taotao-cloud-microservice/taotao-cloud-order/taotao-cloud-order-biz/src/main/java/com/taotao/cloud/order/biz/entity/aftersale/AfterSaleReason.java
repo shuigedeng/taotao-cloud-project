@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,16 +26,13 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 	 * 应用ID
 	 */
 	@NotNull
-	@Schema(description =  "售后原因")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "reason", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String reason;
 
 	/**
 	 * @see AfterSaleTypeEnum
 	 */
-	@Schema(description =  "原因类型", allowableValues = "CANCEL,RETURN_GOODS,RETURN_MONEY,COMPLAIN")
-	@NotNull
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "service_type", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String serviceType;
 
 }

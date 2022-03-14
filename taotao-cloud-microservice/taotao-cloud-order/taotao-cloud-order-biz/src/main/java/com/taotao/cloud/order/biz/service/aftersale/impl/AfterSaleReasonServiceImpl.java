@@ -17,8 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleReasonServiceImpl extends
-	ServiceImpl<AfterSaleReasonMapper, AfterSaleReason> implements
-	AfterSaleReasonService {
+	ServiceImpl<AfterSaleReasonMapper, AfterSaleReason> implements AfterSaleReasonService {
 
 
 	@Override

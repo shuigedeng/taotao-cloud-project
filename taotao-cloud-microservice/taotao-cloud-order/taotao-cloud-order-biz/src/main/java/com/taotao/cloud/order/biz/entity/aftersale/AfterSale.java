@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,22 +16,23 @@ import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 售后
+ * 售后表
  */
-@Data
 @Entity
 @Table(name = AfterSale.TABLE_NAME)
 @TableName(AfterSale.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = AfterSale.TABLE_NAME, comment = "售后")
+@org.hibernate.annotations.Table(appliesTo = AfterSale.TABLE_NAME, comment = "售后表")
 public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 
-	public static final String TABLE_NAME = "li_after_sale";
+	public static final String TABLE_NAME = "tt_after_sale";
+
 	/**
 	 * 应用ID
 	 */
 	@Schema(description =  "售后服务单号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String sn;
+
 	/**
 	 * 应用ID
 	 */
@@ -115,7 +119,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	 */
 	@Schema(description =  "实际金额")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private Double flowPrice;
+	private BigDecimal flowPrice;
 
 	//交涉信息
 	/**
@@ -138,14 +142,14 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	private String afterSaleImage;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleTypeEnum
+	 * @see AfterSaleTypeEnum
 	 */
 	@Schema(description =  "售后类型", allowableValues = "RETURN_GOODS,RETURN_MONEY")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String serviceType;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleStatusEnum
+	 * @see AfterSaleStatusEnum
 	 */
 	@Schema(description =  "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
@@ -154,7 +158,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	//退款信息
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleRefundWayEnum
+	 * @see AfterSaleRefundWayEnum
 	 */
 	@Schema(description =  "退款方式", allowableValues = "ORIGINAL,OFFLINE")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
@@ -200,13 +204,13 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	 */
 	@Schema(description =  "申请退款金额")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private Double applyRefundPrice;
+	private BigDecimal applyRefundPrice;
 	/**
 	 * 应用ID
 	 */
 	@Schema(description =  "实际退款金额")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private Double actualRefundPrice;
+	private BigDecimal actualRefundPrice;
 	/**
 	 * 应用ID
 	 */
@@ -218,7 +222,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	 */
 	@Schema(description =  "退款时间")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private Date refundTime;
+	private LocalDateTime refundTime;
 
 	/**
 	 * 买家物流信息
@@ -248,6 +252,6 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Schema(description =  "买家发货时间")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private Date mDeliverTime;
+	private LocalDateTime mDeliverTime;
 
 }
