@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = KanjiaActivityGoods.TABLE_NAME)
 @TableName(KanjiaActivityGoods.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = KanjiaActivityGoods.TABLE_NAME, comment = "砍价活动商品对象")
-public class KanjiaActivityGoods extends BaseSuperEntity<KanjiaActivityGoods, Long> {
+public class KanjiaActivityGoods extends BasePromotions<KanjiaActivityGoods, Long> {
 
 	public static final String TABLE_NAME = "li_kanjia_activity_goods";
 
