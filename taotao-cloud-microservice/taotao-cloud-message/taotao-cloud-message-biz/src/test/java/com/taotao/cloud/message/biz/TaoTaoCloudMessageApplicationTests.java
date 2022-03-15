@@ -1,10 +1,10 @@
-package com.taotao.cloud.dubbo.biz;
+package com.taotao.cloud.message.biz;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TaoTaoCloudPlatformPayBizApplicationTests {
+class TaoTaoCloudMessageApplicationTests {
 
     @Test
     void contextLoads() {

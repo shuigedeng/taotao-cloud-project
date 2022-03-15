@@ -54,10 +54,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
 @SpringBootApplication
-public class TaoTaoCloudNewsApplication {
+public class TaoTaoCloudMessageApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudNewsApplication.class, args);
+		SpringApplication.run(TaoTaoCloudMessageApplication.class, args);
 	}
 
 }
