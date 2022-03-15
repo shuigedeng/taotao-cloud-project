@@ -18,6 +18,7 @@ import javax.persistence.Table;
 public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 
 	public static final String TABLE_NAME = "tt_store_goods_label";
+
 	/**
 	 * 店铺ID
 	 */

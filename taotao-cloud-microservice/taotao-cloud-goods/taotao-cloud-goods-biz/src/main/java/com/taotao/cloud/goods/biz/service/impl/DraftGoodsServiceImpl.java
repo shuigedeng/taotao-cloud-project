@@ -11,6 +11,7 @@ import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
 import com.taotao.cloud.goods.api.dto.DraftGoodsSearchParams;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
+import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
@@ -19,6 +20,7 @@ import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.DraftGoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,7 +53,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 	private GoodsSkuService goodsSkuService;
 
 	@Override
-	public boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
+	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
 		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
 		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
 		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -59,7 +61,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 	}
 
 	@Override
-	public boolean updateGoodsDraft(DraftGoodsDTO draftGoods) {
+	public Boolean updateGoodsDraft(DraftGoodsDTO draftGoods) {
 		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
 		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
 		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -67,7 +69,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 	}
 
 	@Override
-	public void saveGoodsDraft(DraftGoodsDTO draftGoods) {
+	public Boolean saveGoodsDraft(DraftGoodsDTO draftGoods) {
 
 		if (draftGoods.getGoodsGalleryList() != null && !draftGoods.getGoodsGalleryList()
 			.isEmpty()) {
@@ -81,12 +83,12 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 		draftGoods.setSkuListJson(
 			JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.getSkuList())));
 		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
-		this.saveOrUpdate(draftGoods);
+		return this.saveOrUpdate(draftGoods);
 	}
 
 	@Override
-	public void deleteGoodsDraft(String id) {
-		this.removeById(id);
+	public Boolean deleteGoodsDraft(String id) {
+		return this.removeById(id);
 	}
 
 	@Override
@@ -117,7 +119,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 
 	@Override
 	public IPage<DraftGoods> getDraftGoods(DraftGoodsSearchParams searchParams) {
-		return this.page(PageUtil.initPage(searchParams), searchParams.queryWrapper());
+		return this.page(searchParams.buildMpPage(), searchParams.queryWrapper());
 	}
 
 	/**
@@ -144,16 +146,16 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 					sku.setSn(m.getValue() != null ? m.getValue().toString() : "");
 					break;
 				case "cost":
-					sku.setCost(Convert.toDouble(m.getValue()));
+					sku.setCost(Convert.toBigDecimal(m.getValue()));
 					break;
 				case "price":
-					sku.setPrice(Convert.toDouble(m.getValue()));
+					sku.setPrice(Convert.toBigDecimal(m.getValue()));
 					break;
 				case "quantity":
 					sku.setQuantity(Convert.toInt(m.getValue()));
 					break;
 				case "weight":
-					sku.setWeight(Convert.toDouble(m.getValue()));
+					sku.setWeight(Convert.toBigDecimal(m.getValue()));
 					break;
 				default:
 					specMap.put(m.getKey(), m.getValue());
@@ -163,5 +165,4 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 		sku.setSpecs(JSONUtil.toJsonStr(specMap));
 		return sku;
 	}
-
 }

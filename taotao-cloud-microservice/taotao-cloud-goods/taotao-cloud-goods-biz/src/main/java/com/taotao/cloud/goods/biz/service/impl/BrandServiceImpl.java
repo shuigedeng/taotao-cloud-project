@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.dto.BrandPageDTO;
-import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.entity.Goods;
@@ -44,14 +44,13 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	private GoodsService goodsService;
 
 	@Override
-	public PageModel<BrandVO> getBrandsByPage(BrandPageDTO page) {
+	public IPage<Brand> getBrandsByPage(BrandPageDTO page) {
 		LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
 		if (page.getName() != null) {
 			queryWrapper.like(Brand::getName, page.getName());
 		}
 
-		IPage<Brand> brandPage = this.page(page.buildMpPage(), queryWrapper);
-		return PageModel.convertMybatisPage(brandPage, BrandVO.class);
+		return this.page(page.buildMpPage(), queryWrapper);
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public boolean addBrand(BrandDTO brandDTO) {
+	public Boolean addBrand(BrandDTO brandDTO) {
 		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName()))
 			!= null) {
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
@@ -77,7 +76,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public boolean updateBrand(BrandDTO brandDTO) {
+	public Boolean updateBrand(BrandDTO brandDTO) {
 		this.checkExist(brandDTO.getId());
 
 		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName())
@@ -89,7 +88,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public boolean brandDisable(String brandId, boolean disable) {
+	public Boolean brandDisable(String brandId, boolean disable) {
 		Brand brand = this.checkExist(brandId);
 		//如果是要禁用，则需要先判定绑定关系
 		if (Boolean.TRUE.equals(disable)) {
@@ -102,9 +101,9 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public void deleteBrands(List<String> ids) {
+	public Boolean deleteBrands(List<String> ids) {
 		checkBind(ids);
-		this.removeByIds(ids);
+		return this.removeByIds(ids);
 	}
 
 	/**
@@ -119,7 +118,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		if (!categoryBrands.isEmpty()) {
 			List<String> categoryIds = categoryBrands.stream().map(CategoryBrand::getCategoryId)
 				.collect(Collectors.toList());
-			throw new BusinessException(ResultEnum.BRAND_USE_DISABLE_ERROR,
+			throw new BusinessException(ResultEnum.BRAND_USE_DISABLE_ERROR.getCode(),
 				JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
 		}
 
@@ -128,7 +127,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		if (!goods.isEmpty()) {
 			List<String> goodsNames = goods.stream().map(Goods::getGoodsName)
 				.collect(Collectors.toList());
-			throw new BusinessException(ResultEnum.BRAND_BIND_GOODS_ERROR,
+			throw new BusinessException(ResultEnum.BRAND_BIND_GOODS_ERROR.getCode(),
 				JSONUtil.toJsonStr(goodsNames));
 		}
 	}

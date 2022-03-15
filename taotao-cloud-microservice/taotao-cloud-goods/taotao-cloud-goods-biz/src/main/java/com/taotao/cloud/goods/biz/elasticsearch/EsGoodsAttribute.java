@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.biz.entity;
+package com.taotao.cloud.goods.biz.elasticsearch;
 
 import java.io.Serializable;
 import lombok.Data;

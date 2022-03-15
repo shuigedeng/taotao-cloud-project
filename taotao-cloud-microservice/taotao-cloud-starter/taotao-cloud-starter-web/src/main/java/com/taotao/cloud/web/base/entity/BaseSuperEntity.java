@@ -56,7 +56,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	private int version = 1;
 
 	@Column(name = "del_flag", nullable = false, columnDefinition = "boolean NOT NULL DEFAULT false comment '是否删除 0-正常 1-删除'")
-	private boolean delFlag;
+	private Boolean delFlag;
 
 	/**
 	 * 保存和缺省验证组
@@ -115,7 +115,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 		this.version = version;
 	}
 
-	public boolean getDelFlag() {
+	public Boolean getDelFlag() {
 		return delFlag;
 	}
 

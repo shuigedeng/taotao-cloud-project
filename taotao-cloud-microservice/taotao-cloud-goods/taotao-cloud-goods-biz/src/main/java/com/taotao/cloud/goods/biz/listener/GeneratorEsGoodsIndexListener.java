@@ -10,22 +10,25 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @Component
 public class GeneratorEsGoodsIndexListener {
 
-    /**
-     * rocketMq
-     */
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
-    /**
-     * rocketMq配置
-     */
-    @Autowired
-    private RocketmqCustomProperties rocketmqCustomProperties;
+	/**
+	 * rocketMq
+	 */
+	@Autowired
+	private RocketMQTemplate rocketMQTemplate;
 
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void generatorEsGoodsIndex(GeneratorEsGoodsIndexEvent esGoodsIndexEvent) {
-        String destination = rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GENERATOR_GOODS_INDEX.name();
-        //发送mq消息
-        rocketMQTemplate.asyncSend(destination, esGoodsIndexEvent.getGoodsId(), RocketmqSendCallbackBuilder.commonCallback());
-    }
+	/**
+	 * rocketMq配置
+	 */
+	@Autowired
+	private RocketmqCustomProperties rocketmqCustomProperties;
+
+	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+	public void generatorEsGoodsIndex(GeneratorEsGoodsIndexEvent esGoodsIndexEvent) {
+		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
+			+ GoodsTagsEnum.GENERATOR_GOODS_INDEX.name();
+		//发送mq消息
+		rocketMQTemplate.asyncSend(destination, esGoodsIndexEvent.getGoodsId(),
+			RocketmqSendCallbackBuilder.commonCallback());
+	}
 
 }

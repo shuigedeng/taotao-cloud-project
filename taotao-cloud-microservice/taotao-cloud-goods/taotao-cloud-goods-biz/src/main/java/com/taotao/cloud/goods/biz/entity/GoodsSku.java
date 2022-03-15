@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.math.BigDecimal;
@@ -125,19 +127,19 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	/**
 	 * 浏览数量
 	 */
-	@Column(name = "view_count", nullable = false, columnDefinition = "int not null comment '浏览数量'")
+	@Column(name = "view_count", nullable = false, columnDefinition = "int not null default 0 comment '浏览数量'")
 	private Integer viewCount;
 
 	/**
 	 * 购买数量
 	 */
-	@Column(name = "buy_count", nullable = false, columnDefinition = "int not null comment '购买数量'")
+	@Column(name = "buy_count", columnDefinition = "int comment '购买数量'")
 	private Integer buyCount;
 
 	/**
 	 * 库存
 	 */
-	@Column(name = "quantity", nullable = false, columnDefinition = "int not null comment '库存'")
+	@Column(name = "quantity", nullable = false, columnDefinition = "int not null default 0 comment '库存'")
 	private Integer quantity;
 
 	/**

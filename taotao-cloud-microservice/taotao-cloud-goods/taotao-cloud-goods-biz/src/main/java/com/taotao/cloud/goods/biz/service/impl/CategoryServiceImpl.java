@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
@@ -15,10 +18,10 @@ import com.taotao.cloud.goods.biz.service.CategoryBrandService;
 import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	 * 缓存
 	 */
 	@Autowired
-	private Cache cache;
+	private RedisRepository redisRepository;
 
 	@Autowired
 	private CategoryBrandService categoryBrandService;
@@ -73,7 +76,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 	@Override
 	public List<CategoryVO> categoryTree() {
-		List<CategoryVO> categoryVOList = (List<CategoryVO>) cache.get(
+		List<CategoryVO> categoryVOList = (List<CategoryVO>) redisRepository.get(
 			CachePrefix.CATEGORY.getPrefix());
 		if (categoryVOList != null) {
 			return categoryVOList;
@@ -94,10 +97,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 			}
 		}
 
-		categoryVOList.sort(Comparator.comparing(Category::getSortOrder));
+		//categoryVOList.sort(Comparator.comparing(Category::getSortOrder));
 		if (!categoryVOList.isEmpty()) {
-			cache.put(CachePrefix.CATEGORY.getPrefix(), categoryVOList);
-			cache.put(CachePrefix.CATEGORY_ARRAY.getPrefix(), list);
+			redisRepository.set(CachePrefix.CATEGORY.getPrefix(), categoryVOList);
+			redisRepository.set(CachePrefix.CATEGORY_ARRAY.getPrefix(), list);
 		}
 		return categoryVOList;
 	}
@@ -144,12 +147,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		List<CategoryVO> categoryVOList = new ArrayList<>();
 		for (Category category : list) {
 			if (("0").equals(category.getParentId())) {
-				CategoryVO categoryVO = new CategoryVO(category);
+				//CategoryVO categoryVO = new CategoryVO(category);
+				CategoryVO categoryVO = new CategoryVO();
 				categoryVO.setChildren(findChildren(list, categoryVO));
 				categoryVOList.add(categoryVO);
 			}
 		}
-		categoryVOList.sort(Comparator.comparing(Category::getSortOrder));
+		//categoryVOList.sort(Comparator.comparing(Category::getSortOrder));
 		return categoryVOList;
 	}
 
@@ -162,12 +166,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	@Override
 	public List<String> getCategoryNameByIds(List<String> ids) {
 		List<String> categoryName = new ArrayList<>();
-		List<Category> categoryVOList = (List<Category>) cache.get(
+		List<Category> categoryVOList = (List<Category>) redisRepository.get(
 			CachePrefix.CATEGORY_ARRAY.getPrefix());
 		//如果缓存中为空，则重新获取缓存
 		if (categoryVOList == null) {
 			categoryTree();
-			categoryVOList = (List<Category>) cache.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
+			categoryVOList = (List<Category>) redisRepository.get(
+				CachePrefix.CATEGORY_ARRAY.getPrefix());
 		}
 		//还为空的话，直接返回
 		if (categoryVOList == null) {
@@ -200,7 +205,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean saveCategory(Category category) {
+	public Boolean saveCategory(Category category) {
 		//判断分类佣金是否正确
 		if (category.getCommissionRate().compareTo(BigDecimal.ZERO) < 0) {
 			throw new BusinessException(ResultEnum.CATEGORY_COMMISSION_RATE_ERROR);
@@ -219,7 +224,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void updateCategory(Category category) {
+	public Boolean updateCategory(Category category) {
 		//判断分类佣金是否正确
 		if (category.getCommissionRate().compareTo(BigDecimal.ZERO) < 0) {
 			throw new BusinessException(ResultEnum.CATEGORY_COMMISSION_RATE_ERROR);
@@ -242,23 +247,25 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 			.set("commission_rate", category.getCommissionRate());
 		this.baseMapper.update(category, updateWrapper);
 		removeCache();
+		return true;
 	}
 
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void delete(String id) {
+	public Boolean delete(String id) {
 		this.removeById(id);
 		removeCache();
 		//删除关联关系
 		categoryBrandService.deleteByCategoryId(id);
 		categoryParameterGroupService.deleteByCategoryId(id);
 		categorySpecificationService.deleteByCategoryId(id);
+		return true;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void updateCategoryStatus(String categoryId, Boolean enableOperations) {
+	public Boolean updateCategoryStatus(String categoryId, Boolean enableOperations) {
 		//禁用子分类
 		Category category = this.getById(categoryId);
 		CategoryVO categoryVO = BeanUtil.copy(category, CategoryVO.class);
@@ -271,6 +278,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		updateWrapper.set(Category::getDelFlag, enableOperations);
 		this.update(updateWrapper);
 		removeCache();
+
+		return true;
 	}
 
 	/**
@@ -350,6 +359,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	 * 清除缓存
 	 */
 	private void removeCache() {
-		cache.remove(CachePrefix.CATEGORY.getPrefix());
+		redisRepository.del(CachePrefix.CATEGORY.getPrefix());
 	}
 }

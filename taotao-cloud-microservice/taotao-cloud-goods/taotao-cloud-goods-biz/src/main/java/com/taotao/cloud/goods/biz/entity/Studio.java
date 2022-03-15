@@ -78,7 +78,7 @@ public class Studio extends BaseSuperEntity<Studio, Long> {
 	/**
 	 * 房间ID
 	 */
-	@Column(name = "room_id", nullable = false, columnDefinition = "varchar(64) not null comment '房间ID'")
+	@Column(name = "room_id", nullable = false, columnDefinition = "int not null comment '房间ID'")
 	private Integer roomId;
 
 	/**

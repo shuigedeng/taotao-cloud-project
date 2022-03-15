@@ -18,6 +18,7 @@ import javax.persistence.Table;
 public class Commodity extends BaseSuperEntity<Commodity, Long> {
 
 	public static final String TABLE_NAME = "tt_commodity";
+
 	/**
 	 * 图片
 	 */
@@ -34,7 +35,10 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	 * 1：一口价（只需要传入price，price2不传） 2：价格区间（price字段为左边界，price2字段为右边界，price和price2必传）
 	 * 3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传
 	 */
-	@Column(name = "price_type", nullable = false, columnDefinition = "int not null comment '价格类型'")
+	@Column(name = "price_type", nullable = false, columnDefinition =
+		"int not null comment '1：一口价（只需要传入price，price2不传）"
+			+ "2：价格区间（price字段为左边界，price2字段为右边界，price和price2必传）"
+			+ "3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传'")
 	private Integer priceType;
 
 	/**
@@ -47,7 +51,7 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	 * 价格2
 	 */
 	@Column(name = "price2", nullable = false, columnDefinition = "decimal(10,2) not null comment '价格2'")
-	private Double price2;
+	private BigDecimal price2;
 
 	/**
 	 * 商品详情页的小程序路径
@@ -123,11 +127,11 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 		this.price = price;
 	}
 
-	public Double getPrice2() {
+	public BigDecimal getPrice2() {
 		return price2;
 	}
 
-	public void setPrice2(Double price2) {
+	public void setPrice2(BigDecimal price2) {
 		this.price2 = price2;
 	}
 

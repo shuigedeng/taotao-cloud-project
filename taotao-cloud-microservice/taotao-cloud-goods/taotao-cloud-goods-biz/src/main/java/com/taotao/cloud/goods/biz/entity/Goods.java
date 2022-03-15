@@ -31,7 +31,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	/**
 	 * 商品价格
 	 */
-	@Column(name = "price", nullable = false, columnDefinition = "deciaml(10,2) not null comment '商品价格'")
+	@Column(name = "price", nullable = false, columnDefinition = "decimal(10,2) not null comment '商品价格'")
 	private BigDecimal price;
 
 	/**
@@ -73,7 +73,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	/**
 	 * 购买数量
 	 */
-	@Column(name = "buy_count", nullable = false, columnDefinition = "varchar(64) not null comment '购买数量'")
+	@Column(name = "buy_count", nullable = false, columnDefinition = "int not null comment '购买数量'")
 	private Integer buyCount;
 
 	/**
@@ -115,13 +115,13 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	/**
 	 * 评论数量
 	 */
-	@Column(name = "comment_num", nullable = false, columnDefinition = "int not null comment '评论数量'")
+	@Column(name = "comment_num", columnDefinition = "int comment '评论数量'")
 	private Integer commentNum;
 
 	/**
 	 * 卖家id
 	 */
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员卖家idID'")
+	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员卖家id'")
 	private String storeId;
 
 	/**
@@ -187,7 +187,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	/**
 	 * 商品海报id
 	 */
-	@Column(name = "poster_pic_id", columnDefinition = "bigint default 0 comment '商品海报id'")
+	@Column(name = "poster_pic_id", columnDefinition = "bigint comment '商品海报id'")
 	private Long posterPicId;
 
 	/**

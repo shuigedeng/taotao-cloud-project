@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
@@ -43,7 +43,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param skuList sku列表
 	 * @param goods   商品信息
 	 */
-	void add(List<Map<String, Object>> skuList, Goods goods);
+	Boolean add(List<Map<String, Object>> skuList, Goods goods);
 
 	/**
 	 * 更新商品sku
@@ -52,21 +52,21 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param goods              商品信息
 	 * @param regeneratorSkuFlag 是否是否重新生成sku
 	 */
-	void update(List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag);
+	Boolean update(List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag);
 
 	/**
 	 * 更新商品sku
 	 *
 	 * @param goodsSku sku信息
 	 */
-	void update(GoodsSku goodsSku);
+	Boolean update(GoodsSku goodsSku);
 
 	/**
 	 * 清除sku缓存
 	 *
 	 * @param skuId skuid
 	 */
-	void clearCache(String skuId);
+	Boolean clearCache(String skuId);
 
 	/**
 	 * 从redis缓存中获取商品SKU信息
@@ -153,14 +153,14 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param goods 商品信息
 	 */
-	void generateEs(Goods goods);
+	Boolean generateEs(Goods goods);
 
 	/**
 	 * 更新SKU库存
 	 *
 	 * @param goodsSkuStockDTOS sku库存修改实体
 	 */
-	void updateStocks(List<GoodsSkuStockDTO> goodsSkuStockDTOS);
+	Boolean updateStocks(List<GoodsSkuStockDTO> goodsSkuStockDTOS);
 
 	/**
 	 * 更新SKU库存
@@ -168,7 +168,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param skuId    SKUId
 	 * @param quantity 设置的库存数量
 	 */
-	void updateStock(String skuId, Integer quantity);
+	Boolean updateStock(String skuId, Integer quantity);
 
 	/**
 	 * 获取商品sku库存
@@ -183,14 +183,14 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param goodsSkus
 	 */
-	void updateGoodsStuck(List<GoodsSku> goodsSkus);
+	Boolean updateGoodsStuck(List<GoodsSku> goodsSkus);
 
 	/**
 	 * 更新SKU评价数量
 	 *
 	 * @param skuId SKUId
 	 */
-	void updateGoodsSkuCommentNum(String skuId);
+	Boolean updateGoodsSkuCommentNum(String skuId);
 
 	/**
 	 * 根据商品id获取全部skuId的集合

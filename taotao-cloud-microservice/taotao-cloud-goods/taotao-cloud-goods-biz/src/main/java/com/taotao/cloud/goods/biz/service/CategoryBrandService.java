@@ -23,7 +23,7 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 *
 	 * @param categoryId 品牌ID
 	 */
-	void deleteByCategoryId(String categoryId);
+	Boolean deleteByCategoryId(String categoryId);
 
 	/**
 	 * 根据品牌ID获取分类品牌关联信息
@@ -39,6 +39,6 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * @param categoryId 分类id
 	 * @param brandIds   品牌ids
 	 */
-	void saveCategoryBrandList(String categoryId, List<String> brandIds);
+	Boolean saveCategoryBrandList(String categoryId, List<String> brandIds);
 
 }

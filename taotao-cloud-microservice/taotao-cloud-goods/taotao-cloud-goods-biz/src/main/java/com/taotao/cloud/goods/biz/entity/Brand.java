@@ -16,14 +16,15 @@ import javax.persistence.Table;
 public class Brand extends BaseSuperEntity<Brand, Long> {
 
 	public static final String TABLE_NAME = "tt_brand";
+
 	/**
-	 * 排序
+	 * 品牌名称
 	 */
 	@Column(name = "name", nullable = false, columnDefinition = "varchar(64) not null comment '品牌名称'")
 	private String name;
 
 	/**
-	 * 排序
+	 * 品牌图标
 	 */
 	@Column(name = "logo", nullable = false, columnDefinition = "varchar(64) not null comment '品牌图标'")
 	private String logo;

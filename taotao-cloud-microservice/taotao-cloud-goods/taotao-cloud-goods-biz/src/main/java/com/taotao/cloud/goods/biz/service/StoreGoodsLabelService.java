@@ -47,6 +47,6 @@ public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 	 *
 	 * @param storeLabelId 店铺 分类 ID
 	 */
-	void removeStoreGoodsLabel(String storeLabelId);
+	Boolean removeStoreGoodsLabel(String storeLabelId);
 
 }

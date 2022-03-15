@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.biz.entity;
+package com.taotao.cloud.goods.biz.elasticsearch;
 
 import com.taotao.cloud.goods.api.dto.ParamOptions;
 import com.taotao.cloud.goods.api.dto.SelectorOptions;

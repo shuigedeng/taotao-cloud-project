@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
@@ -64,7 +66,7 @@ public class CategoryParameterGroupServiceImpl extends
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {
+	public Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {
 		CategoryParameterGroup origin = this.getById(categoryParameterGroup.getId());
 		if (origin == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_NOT_EXIST);
@@ -91,9 +93,9 @@ public class CategoryParameterGroupServiceImpl extends
 	}
 
 	@Override
-	public void deleteByCategoryId(String categoryId) {
-		this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroup>().eq(
-			CategoryParameterGroup::getCategoryId, categoryId));
+	public Boolean deleteByCategoryId(String categoryId) {
+		return this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroup>().eq(
+			CategoryParameterGroup::getCategoryId, categoryId)) > 0;
 	}
 
 	/**
@@ -117,10 +119,10 @@ public class CategoryParameterGroupServiceImpl extends
 		List<ParameterGroupVO> resList = new ArrayList<>();
 		for (CategoryParameterGroup group : groupList) {
 			ParameterGroupVO groupVo = new ParameterGroupVO();
-			groupVo.setGroupId(group.getId());
+			groupVo.setGroupId(String.valueOf(group.getId()));
 			groupVo.setGroupName(group.getGroupName());
-			groupVo.setParams(
-				map.get(group.getId()) == null ? new ArrayList<>() : map.get(group.getId()));
+			//groupVo.setParams(
+			//	map.get(group.getId()) == null ? new ArrayList<>() : map.get(group.getId()));
 			resList.add(groupVo);
 		}
 		return resList;

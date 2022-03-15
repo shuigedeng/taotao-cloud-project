@@ -15,7 +15,7 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 	 * @param goodsGalleryList 商品相册列表
 	 * @param goodsId          商品ID
 	 */
-	void add(List<String> goodsGalleryList, String goodsId);
+	Boolean add(List<String> goodsGalleryList, String goodsId);
 
 	/**
 	 * 根据原图获取缩略图

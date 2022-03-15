@@ -4,6 +4,8 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsItemDTO;
 import com.taotao.cloud.goods.biz.entity.Goods;
@@ -45,7 +47,7 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean updateParameter(Parameters parameters) {
+	public Boolean updateParameter(Parameters parameters) {
 		Parameters origin = this.getById(parameters.getId());
 		if (origin == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

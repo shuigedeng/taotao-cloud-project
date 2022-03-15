@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.disruptor.util.StringUtils;
@@ -40,7 +42,7 @@ public class SpecificationServiceImpl extends
 
 
 	@Override
-	public boolean deleteSpecification(List<String> ids) {
+	public Boolean deleteSpecification(List<String> ids) {
 		boolean result = false;
 		for (String id : ids) {
 			//如果此规格绑定分类则不允许删除
@@ -50,7 +52,7 @@ public class SpecificationServiceImpl extends
 			if (!list.isEmpty()) {
 				List<String> categoryIds = new ArrayList<>();
 				list.forEach(item -> categoryIds.add(item.getCategoryId()));
-				throw new BusinessException(ResultEnum.SPEC_DELETE_ERROR,
+				throw new BusinessException(ResultEnum.SPEC_DELETE_ERROR.getCode(),
 					JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
 			}
 			//删除规格

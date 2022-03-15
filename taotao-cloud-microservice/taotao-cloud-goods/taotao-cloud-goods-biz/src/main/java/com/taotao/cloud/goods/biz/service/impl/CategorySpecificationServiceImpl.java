@@ -23,9 +23,9 @@ public class CategorySpecificationServiceImpl extends
 	}
 
 	@Override
-	public void deleteByCategoryId(String categoryId) {
-		this.baseMapper.delete(
+	public Boolean deleteByCategoryId(String categoryId) {
+		return this.baseMapper.delete(
 			new LambdaQueryWrapper<CategorySpecification>().eq(CategorySpecification::getCategoryId,
-				categoryId));
+				categoryId)) > 0;
 	}
 }
