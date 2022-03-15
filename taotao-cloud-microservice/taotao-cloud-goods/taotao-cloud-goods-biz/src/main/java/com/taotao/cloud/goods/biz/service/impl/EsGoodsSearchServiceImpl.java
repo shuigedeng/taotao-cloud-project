@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.druid.util.StringUtils;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
@@ -11,8 +12,8 @@ import com.taotao.cloud.goods.api.dto.ParamOptions;
 import com.taotao.cloud.goods.api.dto.SelectorOptions;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
-import com.taotao.cloud.goods.biz.entity.EsGoodsRelatedInfo;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
 import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -128,9 +129,10 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	}
 
 	@Override
-	public void setHotWords(HotWordsDTO hotWords) {
+	public Boolean setHotWords(HotWordsDTO hotWords) {
 		cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
 			hotWords.getPoint());
+		return true;
 	}
 
 	/**
@@ -139,8 +141,9 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	 * @param keywords 热词
 	 */
 	@Override
-	public void deleteHotWords(String keywords) {
+	public Boolean deleteHotWords(String keywords) {
 		cache.zRemove(CachePrefix.HOT_WORD.getPrefix(), keywords);
+		return true;
 	}
 
 	@Override

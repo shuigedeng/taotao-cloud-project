@@ -3,8 +3,8 @@ package com.taotao.cloud.goods.biz.service;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
-import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
-import com.taotao.cloud.goods.biz.entity.EsGoodsRelatedInfo;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import java.util.List;
 import org.springframework.data.elasticsearch.core.SearchPage;
 
@@ -35,14 +35,14 @@ public interface EsGoodsSearchService {
 	 *
 	 * @param hotWords 热词分数
 	 */
-	void setHotWords(HotWordsDTO hotWords);
+	Boolean setHotWords(HotWordsDTO hotWords);
 
 	/**
 	 * 删除热门关键词
 	 *
 	 * @param keywords 热词
 	 */
-	void deleteHotWords(String keywords);
+	Boolean deleteHotWords(String keywords);
 
 	/**
 	 * 获取筛选器

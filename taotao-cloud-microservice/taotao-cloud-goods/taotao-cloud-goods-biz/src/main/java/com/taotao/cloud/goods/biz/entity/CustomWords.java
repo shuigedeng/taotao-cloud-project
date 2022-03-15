@@ -26,9 +26,8 @@ public class CustomWords extends BaseSuperEntity<CustomWords, Long> {
 	/**
 	 * 是否禁用
 	 */
-	@Column(name = "disabled", nullable = false, columnDefinition = "int not null comment '是否禁用'")
+	@Column(name = "disabled", nullable = false, columnDefinition = "int not null default 0 comment '是否禁用'")
 	private Integer disabled;
-
 
 	public String getName() {
 		return name;

@@ -21,14 +21,14 @@ public interface BrandService extends IService<Brand> {
 	 * @param page 条件参数
 	 * @return 品牌列表
 	 */
-	PageModel<BrandVO> getBrandsByPage(BrandPageDTO page);
+	IPage<Brand> getBrandsByPage(BrandPageDTO page);
 
 	/**
 	 * 删除品牌
 	 *
 	 * @param ids 品牌id
 	 */
-	void deleteBrands(List<String> ids);
+	Boolean deleteBrands(List<String> ids);
 
 	/**
 	 * 根据分类ID获取品牌列表
@@ -44,7 +44,7 @@ public interface BrandService extends IService<Brand> {
 	 * @param brandVO 品牌信息
 	 * @return 添加结果
 	 */
-	boolean addBrand(BrandDTO brandVO);
+	Boolean addBrand(BrandDTO brandVO);
 
 	/**
 	 * 更新品牌
@@ -52,7 +52,7 @@ public interface BrandService extends IService<Brand> {
 	 * @param brandVO 品牌信息
 	 * @return 更新结果
 	 */
-	boolean updateBrand(BrandDTO brandVO);
+	Boolean updateBrand(BrandDTO brandVO);
 
 	/**
 	 * 更新品牌是否可用
@@ -61,6 +61,6 @@ public interface BrandService extends IService<Brand> {
 	 * @param disable 是否不可用
 	 * @return 更新结果
 	 */
-	boolean brandDisable(String brandId, boolean disable);
+	Boolean brandDisable(String brandId, boolean disable);
 
 }

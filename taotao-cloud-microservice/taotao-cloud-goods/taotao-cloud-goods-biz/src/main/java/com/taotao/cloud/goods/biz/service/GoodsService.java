@@ -16,7 +16,6 @@ import java.util.List;
  */
 public interface GoodsService extends IService<Goods> {
 
-
 	/**
 	 * 根据品牌获取商品
 	 *
@@ -29,7 +28,7 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param storeId 店铺ID
 	 */
-	void underStoreGoods(String storeId);
+	Boolean underStoreGoods(String storeId);
 
 	/**
 	 * 更新商品参数
@@ -37,7 +36,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsId 商品id
 	 * @param params  商品参数
 	 */
-	void updateGoodsParams(String goodsId, String params);
+	Boolean updateGoodsParams(String goodsId, String params);
 
 	/**
 	 * 获取某分类下的商品数量
@@ -45,14 +44,14 @@ public interface GoodsService extends IService<Goods> {
 	 * @param categoryId 分类ID
 	 * @return 商品数量
 	 */
-	long getGoodsCountByCategory(String categoryId);
+	Long getGoodsCountByCategory(String categoryId);
 
 	/**
 	 * 添加商品
 	 *
 	 * @param goodsOperationDTO 商品查询条件
 	 */
-	void addGoods(GoodsOperationDTO goodsOperationDTO);
+	Boolean addGoods(GoodsOperationDTO goodsOperationDTO);
 
 	/**
 	 * 修改商品
@@ -60,7 +59,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsOperationDTO 商品查询条件
 	 * @param goodsId           商品ID
 	 */
-	void editGoods(GoodsOperationDTO goodsOperationDTO, String goodsId);
+	Boolean editGoods(GoodsOperationDTO goodsOperationDTO, String goodsId);
 
 	/**
 	 * 查询商品VO
@@ -93,8 +92,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsAuthEnum 审核操作
 	 * @return 审核结果
 	 */
-	boolean auditGoods(List<String> goodsIds, GoodsAuthEnum goodsAuthEnum);
-
+	Boolean auditGoods(List<String> goodsIds, GoodsAuthEnum goodsAuthEnum);
 
 	/**
 	 * 更新商品上架状态状态
@@ -141,14 +139,14 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsId  商品ID
 	 * @param quantity 库存数量
 	 */
-	void updateStock(String goodsId, Integer quantity);
+	Boolean updateStock(String goodsId, Integer quantity);
 
 	/**
 	 * 更新商品评价数量
 	 *
 	 * @param goodsId 商品ID
 	 */
-	void updateGoodsCommentNum(String goodsId);
+	Boolean updateGoodsCommentNum(String goodsId);
 
 	/**
 	 * 更新商品的购买数量
@@ -156,14 +154,14 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsId  商品ID
 	 * @param buyCount 购买数量
 	 */
-	void updateGoodsBuyCount(String goodsId, int buyCount);
+	Boolean updateGoodsBuyCount(String goodsId, int buyCount);
 
 	/**
 	 * 批量更新商品的店铺信息
 	 *
 	 * @param store
 	 */
-	void updateStoreDetail(Store store);
+	Boolean updateStoreDetail(Store store);
 
 	/**
 	 * 统计店铺的商品数量
@@ -171,6 +169,6 @@ public interface GoodsService extends IService<Goods> {
 	 * @param storeId 店铺id
 	 * @return
 	 */
-	long countStoreGoodsNum(String storeId);
+	Long countStoreGoodsNum(String storeId);
 
 }

@@ -23,5 +23,5 @@ public interface CategorySpecificationService extends IService<CategorySpecifica
 	 *
 	 * @param categoryId 分类ID
 	 */
-	void deleteByCategoryId(String categoryId);
+	Boolean deleteByCategoryId(String categoryId);
 }

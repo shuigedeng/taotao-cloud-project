@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
@@ -68,7 +69,8 @@ public class BrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<BrandVO>> getByPage(BrandPageDTO page) {
-		return Result.success(brandService.getBrandsByPage(page));
+		IPage<Brand> brandPage = brandService.getBrandsByPage(page);
+		return Result.success(PageModel.convertMybatisPage(brandPage, BrandVO.class));
 	}
 
 	@Operation(summary = "新增品牌", description = "新增品牌", method = CommonConstant.POST)

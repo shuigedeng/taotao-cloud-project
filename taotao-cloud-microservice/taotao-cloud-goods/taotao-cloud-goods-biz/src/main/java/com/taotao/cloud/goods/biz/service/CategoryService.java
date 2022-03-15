@@ -5,15 +5,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import java.util.List;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 /**
  * 商品分类业务层
  */
-//@CacheConfig(cacheNames = "{category}")
+@CacheConfig(cacheNames = "{category}")
 public interface CategoryService extends IService<Category> {
-
 
 	/**
 	 * 管理端获取所有分类 即获取的对象不管是否删除，都要展示，而且不从缓存获取，保证内容是最新的
@@ -27,7 +27,6 @@ public interface CategoryService extends IService<Category> {
 	 * 获取分类
 	 *
 	 * @param id
-	 * @return
 	 */
 	@Cacheable(key = "#id")
 	Category getCategoryById(String id);
@@ -84,7 +83,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param category 商品分类信息
 	 * @return 添加结果
 	 */
-	boolean saveCategory(Category category);
+	Boolean saveCategory(Category category);
 
 	/**
 	 * 修改商品分类
@@ -93,14 +92,14 @@ public interface CategoryService extends IService<Category> {
 	 * @return 修改结果
 	 */
 	@CacheEvict(key = "#category.id")
-	void updateCategory(Category category);
+	Boolean updateCategory(Category category);
 
 	/**
 	 * 批量删除分类
 	 *
 	 * @param id 分类ID
 	 */
-	void delete(String id);
+	Boolean delete(String id);
 
 	/**
 	 * 分类状态的更改
@@ -108,7 +107,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param categoryId       商品分类ID
 	 * @param enableOperations 是否可用
 	 */
-	void updateCategoryStatus(String categoryId, Boolean enableOperations);
+	Boolean updateCategoryStatus(String categoryId, Boolean enableOperations);
 
 	/**
 	 * 获取商家经营类目

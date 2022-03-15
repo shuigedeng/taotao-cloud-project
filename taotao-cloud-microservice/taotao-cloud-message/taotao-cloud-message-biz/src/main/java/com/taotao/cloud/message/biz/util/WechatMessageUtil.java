@@ -5,6 +5,8 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
 import com.taotao.cloud.message.biz.entity.WechatMPMessage;
@@ -58,7 +60,6 @@ public class WechatMessageUtil {
      * @param sn
      */
     public void wechatMessage(String sn) {
-
         Order order = orderService.getBySn(sn);
         if (order == null) {
             throw new BusinessException("订单" + sn + "不存在，发送微信公众号消息错误");

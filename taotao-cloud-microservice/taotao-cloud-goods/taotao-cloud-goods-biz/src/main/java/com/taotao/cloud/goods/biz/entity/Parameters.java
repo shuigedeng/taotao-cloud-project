@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = Parameters.TABLE_NAME, comment = "商品参数表")
 public class Parameters extends BaseSuperEntity<Parameters, Long> {
 
-	public static final String TABLE_NAME = "li_parameters";
+	public static final String TABLE_NAME = "tt_parameters";
 	/**
 	 * 参数名称
 	 */

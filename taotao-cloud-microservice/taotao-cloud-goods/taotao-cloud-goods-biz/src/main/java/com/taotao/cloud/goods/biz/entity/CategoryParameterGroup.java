@@ -32,8 +32,8 @@ public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGro
 	/**
 	 * 排序
 	 */
-	@Column(name = "sort", nullable = false, columnDefinition = "int not null comment '排序'")
-	private Integer sort;
+	@Column(name = "sort_order", nullable = false, columnDefinition = "int not null default 0 comment '排序'")
+	private Integer sortOrder;
 
 	public String getGroupName() {
 		return groupName;
@@ -51,11 +51,11 @@ public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGro
 		this.categoryId = categoryId;
 	}
 
-	public Integer getSort() {
-		return sort;
+	public Integer getSortOrder() {
+		return sortOrder;
 	}
 
-	public void setSort(Integer sort) {
-		this.sort = sort;
+	public void setSortOrder(Integer sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 }

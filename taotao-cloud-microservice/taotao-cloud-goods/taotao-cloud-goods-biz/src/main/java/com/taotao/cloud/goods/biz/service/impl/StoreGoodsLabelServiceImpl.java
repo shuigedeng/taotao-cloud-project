@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
@@ -117,7 +120,7 @@ public class StoreGoodsLabelServiceImpl extends
 	}
 
 	@Override
-	public void removeStoreGoodsLabel(String storeLabelId) {
+	public Boolean removeStoreGoodsLabel(String storeLabelId) {
 
 		AuthUser tokenUser = UserContext.getCurrentUser();
 		if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
@@ -128,6 +131,8 @@ public class StoreGoodsLabelServiceImpl extends
 
 		//清除缓存
 		removeCache(tokenUser.getStoreId());
+
+		return true;
 	}
 
 	/**

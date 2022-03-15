@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.api.vo.StudioVO;
@@ -217,8 +219,8 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 	}
 
 	@Override
-	public void updateStudioStatus(BroadcastMessage broadcastMessage) {
-		this.update(new LambdaUpdateWrapper<Studio>()
+	public Boolean updateStudioStatus(BroadcastMessage broadcastMessage) {
+		return this.update(new LambdaUpdateWrapper<Studio>()
 			.eq(Studio::getId, broadcastMessage.getStudioId())
 			.set(Studio::getStatus, broadcastMessage.getStatus()));
 	}

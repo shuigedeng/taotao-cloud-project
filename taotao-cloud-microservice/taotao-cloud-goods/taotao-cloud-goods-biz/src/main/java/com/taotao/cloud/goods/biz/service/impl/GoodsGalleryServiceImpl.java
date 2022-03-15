@@ -28,7 +28,7 @@ public class GoodsGalleryServiceImpl extends
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void add(List<String> goodsGalleryList, String goodsId) {
+	public Boolean add(List<String> goodsGalleryList, String goodsId) {
 		//删除原来商品相册信息
 		this.baseMapper.delete(new UpdateWrapper<GoodsGallery>().eq("goods_id", goodsId));
 		//确定好图片选择器后进行处理
@@ -42,6 +42,7 @@ public class GoodsGalleryServiceImpl extends
 			i++;
 			this.baseMapper.insert(galley);
 		}
+		return true;
 	}
 
 	@Override

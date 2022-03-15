@@ -10,6 +10,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.CommodityDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.vo.CommodityVO;
@@ -40,8 +45,8 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addCommodity(List<Commodity> commodityList) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+	public Boolean addCommodity(List<Commodity> commodityList) {
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		for (Commodity commodity : commodityList) {
 			//检测直播商品
 			checkCommodity(commodity);
@@ -64,9 +69,10 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 	private void checkCommodity(Commodity commodity) {
 		//商品是否审核通过
 		GoodsSku goodsSku = goodsSkuService.getById(commodity.getSkuId());
-		if (!goodsSku.getAuthFlag().equals(GoodsAuthEnum.PASS.name())) {
+		if (!goodsSku.getIsAuth().equals(GoodsAuthEnum.PASS.name())) {
 			throw new BusinessException(goodsSku.getGoodsName() + " 未审核通过，不能添加直播商品");
 		}
+
 		//是否已添加规格商品
 		if (this.count(
 			new LambdaQueryWrapper<Commodity>().eq(Commodity::getSkuId, commodity.getSkuId()))
@@ -76,24 +82,25 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 	}
 
 	@Override
-	public boolean deleteCommodity(String goodsId) {
-		AuthUser currentUser = UserContext.getCurrentUser();
-		if (currentUser == null || (currentUser.getRole().equals(UserEnums.STORE)
-			&& currentUser.getStoreId() == null)) {
-			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-		}
+	public Boolean deleteCommodity(String goodsId) {
+		//SecurityUser currentUser = SecurityUtil.getUser();
+		//if (currentUser == null || (currentUser.getRoles().contains(UserEnums.STORE)
+		//	&& currentUser.getStoreId() == null)) {
+		//	throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
+		//}
+
 		JSONObject json = wechatLivePlayerUtil.deleteGoods(goodsId);
 		if ("0".equals(json.getStr("errcode"))) {
 			return this.remove(
 				new LambdaQueryWrapper<Commodity>().eq(Commodity::getLiveGoodsId, goodsId)
-					.eq(Commodity::getStoreId, currentUser.getStoreId()));
+					.eq(Commodity::getStoreId, SecurityUtil.getUser().getStoreId()));
 		}
 		return false;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void getGoodsWareHouse() {
+	public Boolean getGoodsWareHouse() {
 		//查询审核中的商品
 		List<String> goodsIdList = this.baseMapper.getAuditCommodity();
 		if (!goodsIdList.isEmpty()) {
@@ -109,11 +116,12 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 					.set(Commodity::getAuditStatus, commodityDTO.getAudit_status()));
 			}
 		}
+		return true;
 	}
 
 	@Override
-	public IPage<CommodityVO> commodityList(PageVO pageVO, String name, String auditStatus) {
-		return this.baseMapper.commodityVOList(PageUtil.initPage(pageVO),
+	public IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus) {
+		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
 			new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)
 				.eq(auditStatus != null, "c.audit_status", auditStatus)
 				.eq(Objects.requireNonNull(UserContext.getCurrentUser()).getRole()

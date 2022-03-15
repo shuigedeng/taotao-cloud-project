@@ -26,9 +26,10 @@ public class CategoryBrandServiceImpl extends
 	}
 
 	@Override
-	public void deleteByCategoryId(String categoryId) {
-		this.baseMapper.delete(
-			new LambdaUpdateWrapper<CategoryBrand>().eq(CategoryBrand::getCategoryId, categoryId));
+	public Boolean deleteByCategoryId(String categoryId) {
+		return this.baseMapper.delete(
+			new LambdaUpdateWrapper<CategoryBrand>().eq(CategoryBrand::getCategoryId, categoryId))
+			> 0;
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class CategoryBrandServiceImpl extends
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void saveCategoryBrandList(String categoryId, List<String> brandIds) {
+	public Boolean saveCategoryBrandList(String categoryId, List<String> brandIds) {
 		//删除分类品牌绑定信息
 		this.deleteByCategoryId(categoryId);
 		//绑定品牌信息
@@ -50,5 +51,7 @@ public class CategoryBrandServiceImpl extends
 			}
 			this.saveBatch(categoryBrands);
 		}
+
+		return true;
 	}
 }

@@ -3,7 +3,14 @@ package com.taotao.cloud.message.biz.util;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import com.google.gson.Gson;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;
+import com.taotao.cloud.sys.api.setting.connect.dto.WechatConnectSettingItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WechatAccessTokenUtil {
     @Autowired
-    private Cache cache;
+    private RedisRepository redisRepository;
     @Autowired
     private SettingService settingService;
 
@@ -23,7 +30,6 @@ public class WechatAccessTokenUtil {
      * 获取某一平台等cgi token 用于业务调用，例如发送公众号消息
      *
      * @param clientTypeEnum h5 公众号 / wechatMP 微信小程序
-     * @return
      */
     public String cgiAccessToken(ClientTypeEnum clientTypeEnum) {
         //h5 和MP 才有获取token的能力

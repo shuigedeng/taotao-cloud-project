@@ -76,5 +76,5 @@ public interface StudioService extends IService<Studio> {
 	 *
 	 * @param broadcastMessage 直播间消息
 	 */
-	void updateStudioStatus(BroadcastMessage broadcastMessage);
+	Boolean updateStudioStatus(BroadcastMessage broadcastMessage);
 }

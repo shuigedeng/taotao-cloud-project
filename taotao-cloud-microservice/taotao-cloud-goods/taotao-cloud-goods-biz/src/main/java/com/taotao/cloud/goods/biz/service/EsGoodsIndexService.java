@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service;
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import java.util.List;
 import java.util.Map;
@@ -29,14 +29,14 @@ public interface EsGoodsIndexService {
 	 *
 	 * @param goods 商品索引信息
 	 */
-	void addIndex(EsGoodsIndex goods);
+	Boolean addIndex(EsGoodsIndex goods);
 
 	/**
 	 * 更新商品索引
 	 *
 	 * @param goods 商品索引信息
 	 */
-	void updateIndex(EsGoodsIndex goods);
+	Boolean updateIndex(EsGoodsIndex goods);
 
 	/**
 	 * 更新商品索引的的部分属性（只填写更新的字段，不需要更新的字段不要填写）
@@ -44,7 +44,7 @@ public interface EsGoodsIndexService {
 	 * @param id    商品索引id
 	 * @param goods 更新后的购买数量
 	 */
-	void updateIndex(String id, EsGoodsIndex goods);
+	Boolean updateIndex(String id, EsGoodsIndex goods);
 
 	/**
 	 * 更新商品索引的的部分属性
@@ -52,42 +52,42 @@ public interface EsGoodsIndexService {
 	 * @param queryFields  查询字段
 	 * @param updateFields 更新字段
 	 */
-	void updateIndex(Map<String, Object> queryFields, Map<String, Object> updateFields);
+	Boolean updateIndex(Map<String, Object> queryFields, Map<String, Object> updateFields);
 
 	/**
 	 * 批量商品索引的的属性（ID 必填, 其他字段只填写更新的字段，不需要更新的字段不要填写。）
 	 *
 	 * @param goodsIndices 商品索引列表
 	 */
-	void updateBulkIndex(List<EsGoodsIndex> goodsIndices);
+	Boolean updateBulkIndex(List<EsGoodsIndex> goodsIndices);
 
 	/**
 	 * 删除索引
 	 *
 	 * @param goods 商品索引信息
 	 */
-	void deleteIndex(EsGoodsIndex goods);
+	Boolean deleteIndex(EsGoodsIndex goods);
 
 	/**
 	 * 删除索引
 	 *
 	 * @param id 商品索引信息
 	 */
-	void deleteIndexById(String id);
+	Boolean deleteIndexById(String id);
 
 	/**
 	 * 删除索引
 	 *
 	 * @param ids 商品索引id集合
 	 */
-	void deleteIndexByIds(List<String> ids);
+	Boolean deleteIndexByIds(List<String> ids);
 
 	/**
 	 * 初始化商品索引
 	 *
 	 * @param goodsIndexList 商品索引列表
 	 */
-	void initIndex(List<EsGoodsIndex> goodsIndexList);
+	Boolean initIndex(List<EsGoodsIndex> goodsIndexList);
 
 	/**
 	 * 更新商品索引的促销信息
@@ -105,7 +105,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	void updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
+	Boolean updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
 
 	/**
 	 * 根据列表更新商品索引的促销信息
@@ -114,7 +114,8 @@ public interface EsGoodsIndexService {
 	 * @param promotion          促销信息
 	 * @param key                促销信息的key
 	 */
-	void updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList, BasePromotions promotion,
+	Boolean updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList,
+		BasePromotions promotion,
 		String key);
 
 	/**
@@ -123,7 +124,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	void updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
+	Boolean updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
 
 	/**
 	 * 删除指定商品的促销信息
@@ -131,7 +132,7 @@ public interface EsGoodsIndexService {
 	 * @param skuIds        skuId列表
 	 * @param promotionType 促销类型
 	 */
-	void deleteEsGoodsPromotionIndexByList(List<String> skuIds, PromotionTypeEnum promotionType);
+	Boolean deleteEsGoodsPromotionIndexByList(List<String> skuIds, PromotionTypeEnum promotionType);
 
 	/**
 	 * 删除索引中指定的促销活动id的促销活动
@@ -139,7 +140,7 @@ public interface EsGoodsIndexService {
 	 * @param skuIds        商品skuId
 	 * @param promotionsKey 促销活动Key
 	 */
-	void deleteEsGoodsPromotionByPromotionKey(List<String> skuIds, String promotionsKey);
+	Boolean deleteEsGoodsPromotionByPromotionKey(List<String> skuIds, String promotionsKey);
 
 
 	/**
@@ -147,12 +148,12 @@ public interface EsGoodsIndexService {
 	 *
 	 * @param promotionsKey 促销活动Key
 	 */
-	void deleteEsGoodsPromotionByPromotionKey(String promotionsKey);
+	Boolean deleteEsGoodsPromotionByPromotionKey(String promotionsKey);
 
 	/**
 	 * 清除所以商品索引的无效促销活动
 	 */
-	void cleanInvalidPromotion();
+	Boolean cleanInvalidPromotion();
 
 	/**
 	 * 根据id获取商品索引信息

@@ -19,7 +19,7 @@ public interface SpecificationService extends IService<Specification> {
 	 * @param ids 规格ID
 	 * @return 是否删除成功
 	 */
-	boolean deleteSpecification(List<String> ids);
+	Boolean deleteSpecification(List<String> ids);
 
 	PageModel<SpecificationVO> getPage(String specName, PageParam page);
 }

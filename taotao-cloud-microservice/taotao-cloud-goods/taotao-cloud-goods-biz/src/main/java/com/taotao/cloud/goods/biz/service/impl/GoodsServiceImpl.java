@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
@@ -27,6 +30,7 @@ import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,8 +48,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
-
-
 	/**
 	 * 分类
 	 */
@@ -91,7 +93,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	private FreightTemplateService freightTemplateService;
 
 	@Autowired
-	private Cache<GoodsVO> cache;
+	private RedisRepository redisRepository;
 
 	@Override
 	public List<Goods> getByBrandIds(List<String> brandIds) {
@@ -102,11 +104,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void underStoreGoods(String storeId) {
+	public Boolean underStoreGoods(String storeId) {
 		//获取商品ID列表
 		List<String> list = this.baseMapper.getGoodsIdByStoreId(storeId);
 		//下架店铺下的商品
 		updateGoodsMarketAble(list, GoodsStatusEnum.DOWN, "店铺关闭");
+		return true;
 	}
 
 	/**
@@ -117,15 +120,17 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void updateGoodsParams(String goodsId, String params) {
+	public Boolean updateGoodsParams(String goodsId, String params) {
 		LambdaUpdateWrapper<Goods> updateWrapper = new LambdaUpdateWrapper<>();
 		updateWrapper.eq(Goods::getId, goodsId);
 		updateWrapper.set(Goods::getParams, params);
 		this.update(updateWrapper);
+
+		return true;
 	}
 
 	@Override
-	public final long getGoodsCountByCategory(String categoryId) {
+	public final Long getGoodsCountByCategory(String categoryId) {
 		QueryWrapper<Goods> queryWrapper = Wrappers.query();
 		queryWrapper.like("category_path", categoryId);
 		queryWrapper.eq("delete_flag", false);
@@ -134,7 +139,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void addGoods(GoodsOperationDTO goodsOperationDTO) {
+	public Boolean addGoods(GoodsOperationDTO goodsOperationDTO) {
 		Goods goods = new Goods(goodsOperationDTO);
 		//检查商品
 		this.checkGoods(goods);
@@ -155,12 +160,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
 			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
 		}
+		return true;
 	}
 
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void editGoods(GoodsOperationDTO goodsOperationDTO, String goodsId) {
+	public Boolean editGoods(GoodsOperationDTO goodsOperationDTO, String goodsId) {
 		Goods goods = new Goods(goodsOperationDTO);
 		goods.setId(goodsId);
 		//检查商品信息
@@ -186,6 +192,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 			this.deleteEsGoods(Collections.singletonList(goodsId));
 		}
 		cache.remove(CachePrefix.GOODS.getPrefix() + goodsId);
+		return true;
 	}
 
 	@Override
@@ -257,7 +264,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean auditGoods(List<String> goodsIds, GoodsAuthEnum goodsAuthEnum) {
+	public Boolean auditGoods(List<String> goodsIds, GoodsAuthEnum goodsAuthEnum) {
 		boolean result = false;
 		for (String goodsId : goodsIds) {
 			Goods goods = this.checkExist(goodsId);
@@ -384,15 +391,16 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public void updateStock(String goodsId, Integer quantity) {
+	public Boolean updateStock(String goodsId, Integer quantity) {
 		LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.set(Goods::getQuantity, quantity);
 		lambdaUpdateWrapper.eq(Goods::getId, goodsId);
 		this.update(lambdaUpdateWrapper);
+		return true;
 	}
 
 	@Override
-	public void updateGoodsCommentNum(String goodsId) {
+	public Boolean updateGoodsCommentNum(String goodsId) {
 
 		//获取商品信息
 		Goods goods = this.getById(goodsId);
@@ -410,6 +418,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 			NumberUtil.div(highPraiseNum, goods.getCommentNum().doubleValue(), 2), 100);
 		goods.setGrade(grade);
 		this.updateById(goods);
+		return true;
 	}
 
 	/**
@@ -419,25 +428,27 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 * @param buyCount 购买数量
 	 */
 	@Override
-	public void updateGoodsBuyCount(String goodsId, int buyCount) {
+	public Boolean updateGoodsBuyCount(String goodsId, int buyCount) {
 		this.update(new LambdaUpdateWrapper<Goods>()
 			.eq(Goods::getId, goodsId)
 			.set(Goods::getBuyCount, buyCount));
+		return true;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void updateStoreDetail(Store store) {
+	public Boolean updateStoreDetail(Store store) {
 		UpdateWrapper updateWrapper = new UpdateWrapper<>()
 			.eq("store_id", store.getId())
 			.set("store_name", store.getStoreName())
 			.set("self_operated", store.getSelfOperated());
 		this.update(updateWrapper);
 		goodsSkuService.update(updateWrapper);
+		return true;
 	}
 
 	@Override
-	public long countStoreGoodsNum(String storeId) {
+	public Long countStoreGoodsNum(String storeId) {
 		return this.count(
 			new LambdaQueryWrapper<Goods>()
 				.eq(Goods::getStoreId, storeId)

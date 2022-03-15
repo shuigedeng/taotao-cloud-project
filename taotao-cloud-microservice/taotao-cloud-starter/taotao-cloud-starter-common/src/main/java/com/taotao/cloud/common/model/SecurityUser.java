@@ -122,6 +122,8 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 */
 	private Set<String> roles;
 
+	private String storeId;
+
 	public SecurityUser() {
 
 	}
@@ -198,6 +200,14 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getUserId() {

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 public class Category extends BaseSuperEntity<Category, Long> {
 
 	public static final String TABLE_NAME = "tt_category";
+
 	/**
 	 * 分类名称
 	 */
@@ -32,14 +33,14 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	/**
 	 * 层级, 从0开始
 	 */
-	@Column(name = "level", nullable = false, columnDefinition = "varchar(64) not null comment '层级, 从0开始'")
+	@Column(name = "level", nullable = false, columnDefinition = "int not null default 0 comment '层级, 从0开始'")
 	private Integer level;
 
 	/**
 	 * 排序值
 	 */
-	@Column(name = "sort_order", nullable = false, columnDefinition = "decimal(10,2) not null comment '排序值'")
-	private BigDecimal sortOrder;
+	@Column(name = "sort_order", nullable = false, columnDefinition = "int not null default 0 comment '排序值'")
+	private Integer sortOrder;
 
 	/**
 	 * 佣金比例
@@ -105,11 +106,11 @@ public class Category extends BaseSuperEntity<Category, Long> {
 		this.level = level;
 	}
 
-	public BigDecimal getSortOrder() {
+	public Integer getSortOrder() {
 		return sortOrder;
 	}
 
-	public void setSortOrder(BigDecimal sortOrder) {
+	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
 	}
 

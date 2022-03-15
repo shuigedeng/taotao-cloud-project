@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.biz.entity;
+package com.taotao.cloud.goods.biz.elasticsearch;
 
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import java.io.Serializable;

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 public class StudioCommodity extends BaseSuperEntity<StudioCommodity, Long> {
 
 	public static final String TABLE_NAME = "tt_studio_commodity";
+
 	/**
 	 * 房间ID
 	 */

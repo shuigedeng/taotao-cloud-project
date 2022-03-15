@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.buyer;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
@@ -10,9 +9,8 @@ import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
-import com.taotao.cloud.goods.biz.entity.EsGoodsIndex;
-import com.taotao.cloud.goods.biz.entity.EsGoodsRelatedInfo;
-import com.taotao.cloud.goods.biz.entity.Goods;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;

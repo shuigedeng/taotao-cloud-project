@@ -4,6 +4,10 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.goods.api.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.entity.CustomWords;
 import com.taotao.cloud.goods.biz.mapper.CustomWordsMapper;
@@ -27,7 +31,7 @@ public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, Custo
 			CustomWords::getDisabled, 1);
 		List<CustomWords> list = list(queryWrapper);
 
-		HttpServletResponse response = ThreadContextHolder.getHttpResponse();
+		HttpServletResponse response = RequestUtil.getResponse();
 		StringBuilder builder = new StringBuilder();
 		if (list != null && !list.isEmpty()) {
 			boolean flag = true;
@@ -59,7 +63,7 @@ public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, Custo
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addCustomWords(CustomWordsVO customWordsVO) {
+	public Boolean addCustomWords(CustomWordsVO customWordsVO) {
 		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().eq(
 			CustomWords::getName, customWordsVO.getName());
 		CustomWords one = this.getOne(queryWrapper, false);
@@ -80,43 +84,31 @@ public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, Custo
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean deleteCustomWords(String id) {
+	public Boolean deleteCustomWords(String id) {
 		if (this.getById(id) == null) {
 			throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
 		}
 		return this.removeById(id);
 	}
 
-	/**
-	 * 修改自定义分词
-	 *
-	 * @param customWordsVO 自定义分词信息
-	 * @return 是否修改成功
-	 */
 	@Override
-	public boolean updateCustomWords(CustomWordsVO customWordsVO) {
+	public Boolean updateCustomWords(CustomWordsVO customWordsVO) {
 		if (this.getById(customWordsVO.getId()) == null) {
 			throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
 		}
+
 		return this.updateById(customWordsVO);
 	}
 
-	/**
-	 * 分页查询自定义分词
-	 *
-	 * @param words  分词
-	 * @param pageVo 分页信息
-	 * @return 自定义分词分页信息
-	 */
 	@Override
-	public IPage<CustomWords> getCustomWordsByPage(String words, PageVO pageVo) {
+	public IPage<CustomWords> getCustomWordsByPage(String words,  PageParam pageParam) {
 		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().like(
 			CustomWords::getName, words);
-		return this.page(PageUtil.initPage(pageVo), queryWrapper);
+		return this.page(pageParam.buildMpPage(), queryWrapper);
 	}
 
 	@Override
-	public boolean existWords(String words) {
+	public Boolean existWords(String words) {
 		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().eq(
 			CustomWords::getName, words);
 		long count = count(queryWrapper);
