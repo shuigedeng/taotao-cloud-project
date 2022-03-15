@@ -17,7 +17,7 @@ import javax.validation.constraints.DecimalMax;
 @Table(name = FullDiscount.TABLE_NAME)
 @TableName(FullDiscount.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = FullDiscount.TABLE_NAME, comment = "满优惠活动实体类")
-public class FullDiscount extends BaseSuperEntity<FullDiscount, Long> {
+public class FullDiscount extends BasePromotions<FullDiscount, Long> {
 
 	public static final String TABLE_NAME = "li_full_discount";
 

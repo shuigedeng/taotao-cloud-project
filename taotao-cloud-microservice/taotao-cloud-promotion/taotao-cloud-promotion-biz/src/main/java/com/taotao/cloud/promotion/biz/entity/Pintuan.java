@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = Pintuan.TABLE_NAME)
 @TableName(Pintuan.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Pintuan.TABLE_NAME, comment = "拼团活动实体类")
-public class Pintuan extends BaseSuperEntity<Pintuan, Long> {
+public class Pintuan extends BasePromotions<Pintuan, Long> {
 
 	public static final String TABLE_NAME = "li_pintuan";
 

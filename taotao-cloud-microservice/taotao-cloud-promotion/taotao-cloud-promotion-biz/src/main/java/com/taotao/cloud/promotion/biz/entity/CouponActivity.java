@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = CouponActivity.TABLE_NAME)
 @TableName(CouponActivity.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = CouponActivity.TABLE_NAME, comment = "优惠券活动实体类")
-public class CouponActivity extends BaseSuperEntity<CouponActivity, Long> {
+public class CouponActivity extends BasePromotions<CouponActivity, Long> {
 
 	public static final String TABLE_NAME = "li_coupon_activity";
 
