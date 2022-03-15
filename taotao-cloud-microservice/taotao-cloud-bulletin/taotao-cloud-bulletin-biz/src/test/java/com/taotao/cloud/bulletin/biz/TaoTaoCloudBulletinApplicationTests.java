@@ -1,10 +1,10 @@
-package com.taotao.cloud.distribution.biz;
+package com.taotao.cloud.bulletin.biz;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TaoTaoCloudPlatformSeckillBizApplicationTests {
+class TaoTaoCloudBulletinApplicationTests {
 
 	@Test
 	void contextLoads() {

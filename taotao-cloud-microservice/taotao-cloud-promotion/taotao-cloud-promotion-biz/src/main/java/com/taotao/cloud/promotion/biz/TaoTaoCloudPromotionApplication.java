@@ -19,17 +19,17 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**
- * TaoTaoCloudBulletinApplication
+ * TaoTaoCloudPromotionApplication
  *
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午7:55
  */
 @TaoTaoCloudApplication
-public class TaoTaoCloudCouponApplication {
+public class TaoTaoCloudPromotionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudCouponApplication.class, args);
+		SpringApplication.run(TaoTaoCloudPromotionApplication.class, args);
 	}
 
 }
