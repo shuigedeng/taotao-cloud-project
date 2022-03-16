@@ -21,6 +21,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
     implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
 
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:29'
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
