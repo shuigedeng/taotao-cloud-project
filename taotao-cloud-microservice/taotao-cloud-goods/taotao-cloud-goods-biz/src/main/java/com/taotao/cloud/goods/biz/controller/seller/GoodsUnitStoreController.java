@@ -4,6 +4,8 @@ package com.taotao.cloud.goods.biz.controller.seller;
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.biz.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.GoodsUnitService;
@@ -33,9 +35,9 @@ public class GoodsUnitStoreController {
 	@RequestLogger(description = "分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<IPage<GoodsUnit>> getByPage(PageVO pageVO) {
-		return Result.success(goodsUnitService.page(PageUtil.initPage(pageVO)));
+	public Result<PageModel<GoodsUnit>> getByPage(PageParam pageParam) {
+		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
+		return Result.success(PageModel.convertMybatisPage(page,GoodsUnit.class));
 	}
-
 
 }

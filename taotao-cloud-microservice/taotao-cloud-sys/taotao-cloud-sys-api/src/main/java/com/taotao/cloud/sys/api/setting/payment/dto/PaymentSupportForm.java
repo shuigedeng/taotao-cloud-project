@@ -39,15 +39,15 @@ public class PaymentSupportForm {
      *
      * @return 即支持的支付方式集合
      */
-    public List<PaymentMethodEnum> getPayments() {
-
-        List<PaymentMethodEnum> keys = new ArrayList<>();
-        for (PaymentMethodEnum paymentMethodEnum : PaymentMethodEnum.values()) {
-            if (paymentMethodEnum.equals(PaymentMethodEnum.BANK_TRANSFER)){
-                continue;
-            }
-            keys.add(paymentMethodEnum);
-        }
-        return keys;
-    }
+    //public List<PaymentMethodEnum> getPayments() {
+	//
+    //    List<PaymentMethodEnum> keys = new ArrayList<>();
+    //    for (PaymentMethodEnum paymentMethodEnum : PaymentMethodEnum.values()) {
+    //        if (paymentMethodEnum.equals(PaymentMethodEnum.BANK_TRANSFER)){
+    //            continue;
+    //        }
+    //        keys.add(paymentMethodEnum);
+    //    }
+    //    return keys;
+    //}
 }

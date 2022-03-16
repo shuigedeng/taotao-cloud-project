@@ -21,10 +21,8 @@ public class ProductMoments extends JpaSuperEntity {
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer hasVideo;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Builder.Default
     private Long sendNum = 0L;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Builder.Default
     private Integer sort = 0;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private LocalDateTime createDate;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.api.setting;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class ImSetting implements Serializable {
 
 
-    @ApiModelProperty(value = "平台地址")
+    @Schema(description =  "平台地址")
     private String httpUrl;
 
 

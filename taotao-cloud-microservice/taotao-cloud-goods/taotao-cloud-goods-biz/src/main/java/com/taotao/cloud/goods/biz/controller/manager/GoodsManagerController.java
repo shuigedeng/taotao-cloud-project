@@ -69,7 +69,7 @@ public class GoodsManagerController {
 	@RequestLogger(description = "分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
-	public Result<PageModel<GoodsSkuBaseVO>> getAuthPage(
+	public Result<PageModel<GoodsBaseVO>> getAuthPage(
 		@Validated GoodsSearchParams goodsSearchParams) {
 		goodsSearchParams.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
 		return Result.success(goodsService.queryByParams(goodsSearchParams));
@@ -83,7 +83,7 @@ public class GoodsManagerController {
 		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
 		List<String> goodsIds = Arrays.asList(goodsId.split(","));
 		return Result.success(
-			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason)));
+			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
 	}
 
 	@Operation(summary = "管理员审核商品", description = "管理员审核商品", method = CommonConstant.PUT)

@@ -7,7 +7,8 @@ import lombok.Data;
  * 直播商品VO
  */
 @Data
-public class CommodityVO extends Commodity {
+//public class CommodityVO extends Commodity {
+public class CommodityVO  {
 
 	@Schema(description = "SKU库存")
 	private Integer quantity;

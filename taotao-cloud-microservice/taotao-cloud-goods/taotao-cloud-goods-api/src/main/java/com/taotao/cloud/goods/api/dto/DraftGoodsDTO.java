@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
-import cn.lili.modules.goods.entity.dos.DraftGoods;
+//import cn.lili.modules.goods.entity.dos.DraftGoods;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,8 @@ import lombok.Data;
  * 草稿商品DTO
  **/
 @Data
-public class DraftGoodsDTO extends DraftGoods {
+//public class DraftGoodsDTO extends DraftGoods {
+public class DraftGoodsDTO {
 
 	private static final long serialVersionUID = 5255666163196674178L;
 

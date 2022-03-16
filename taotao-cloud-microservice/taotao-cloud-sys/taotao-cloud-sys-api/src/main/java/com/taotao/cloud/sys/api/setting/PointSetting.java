@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.api.setting;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,22 +15,22 @@ import java.util.List;
 public class PointSetting implements Serializable {
 
     private static final long serialVersionUID = -4261856614779031745L;
-    @ApiModelProperty(value = "注册")
+    @Schema(description =  "注册")
     private Integer register;
 
-    @ApiModelProperty(value = "消费1元赠送多少积分")
+    @Schema(description =  "消费1元赠送多少积分")
     private Integer consumer;
 
-    @ApiModelProperty(value = "积分付款X积分=1元")
+    @Schema(description =  "积分付款X积分=1元")
     private Integer money;
 
-    @ApiModelProperty(value = "每日签到积分")
+    @Schema(description =  "每日签到积分")
     private Integer signIn;
 
-    @ApiModelProperty(value = "订单评价赠送积分")
+    @Schema(description =  "订单评价赠送积分")
     private Integer comment;
 
-    @ApiModelProperty(value = "积分具体设置")
+    @Schema(description =  "积分具体设置")
     private List<PointSettingItem> pointSettingItems = new ArrayList<>();
 
     public Integer getRegister() {

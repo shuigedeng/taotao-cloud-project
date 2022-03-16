@@ -62,7 +62,7 @@ public class CategorySpecificationManagerController {
 	@RequestLogger(description = "根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}")
-	public Result<String> saveCategoryBrand(@PathVariable String categoryId,
+	public Result<Boolean> saveCategoryBrand(@PathVariable String categoryId,
 		@RequestParam String[] categorySpecs) {
 		//删除分类规格绑定信息
 		this.categorySpecificationService.remove(
@@ -75,7 +75,6 @@ public class CategorySpecificationManagerController {
 			}
 			categorySpecificationService.saveBatch(categorySpecifications);
 		}
-		return Result.success();
+		return Result.success(true);
 	}
-
 }

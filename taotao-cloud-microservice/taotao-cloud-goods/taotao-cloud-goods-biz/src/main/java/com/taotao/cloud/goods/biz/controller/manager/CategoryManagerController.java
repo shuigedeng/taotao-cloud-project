@@ -1,13 +1,14 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -68,7 +69,7 @@ public class CategoryManagerController {
 	@RequestLogger(description = "添加商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Category> saveCategory(@Valid Category category) {
+	public Result<Boolean> saveCategory(@Valid Category category) {
 		//非顶级分类
 		if (category.getParentId() != null && !"0".equals(category.getParentId())) {
 			Category parent = categoryService.getById(category.getParentId());
@@ -79,22 +80,19 @@ public class CategoryManagerController {
 				throw new BusinessException(ResultEnum.CATEGORY_BEYOND_THREE);
 			}
 		}
-		if (categoryService.saveCategory(category)) {
-			return Result.success(category);
-		}
-		throw new BusinessException(ResultEnum.CATEGORY_SAVE_ERROR);
+		return Result.success(categoryService.saveCategory(category));
 	}
 
 	@Operation(summary = "修改商品分类", description = "修改商品分类", method = CommonConstant.PUT)
 	@RequestLogger(description = "修改商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@ApiOperation(value = "修改商品分类")
+	@PutMapping
 	public Result<Boolean> updateCategory(@Valid CategoryVO category) {
 		Category catTemp = categoryService.getById(category.getId());
 		if (catTemp == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
-		categoryService.updateCategory(category);
+		//return Result.success(categoryService.updateCategory(category));
 		return Result.success(true);
 	}
 
@@ -115,8 +113,7 @@ public class CategoryManagerController {
 		if (count > 0) {
 			throw new BusinessException(ResultEnum.CATEGORY_HAS_GOODS);
 		}
-		categoryService.delete(id);
-		return Result.success(true);
+		return Result.success(categoryService.delete(id));
 	}
 
 	@Operation(summary = "后台 禁用/启用 分类", description = "后台 禁用/启用 分类", method = CommonConstant.PUT)
@@ -129,8 +126,7 @@ public class CategoryManagerController {
 		if (category == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
-		categoryService.updateCategoryStatus(id, enableOperations);
-		return Result.success(true);
+		return Result.success(categoryService.updateCategoryStatus(id, enableOperations));
 	}
 
 }

@@ -4,6 +4,8 @@ package com.taotao.cloud.goods.biz.controller.manager;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
@@ -87,10 +89,7 @@ public class BrandManagerController {
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable String id, @Valid BrandDTO brand) {
 		brand.setId(id);
-		if (brandService.updateBrand(brand)) {
-			return Result.success(brand);
-		}
-		throw new BusinessException(ResultEnum.BRAND_UPDATE_ERROR);
+		return Result.success(brandService.updateBrand(brand));
 	}
 
 	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌", method = CommonConstant.PUT)
@@ -99,10 +98,7 @@ public class BrandManagerController {
 	@PutMapping(value = "/disable/{brandId}")
 	public Result<Object> disable(@PathVariable String brandId,
 		@RequestParam Boolean disable) {
-		if (brandService.brandDisable(brandId, disable)) {
-			return Result.success;
-		}
-		throw new BusinessException(ResultEnum.BRAND_DISABLE_ERROR);
+			return Result.success(brandService.brandDisable(brandId, disable));
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)

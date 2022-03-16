@@ -5,6 +5,7 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.biz.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.GoodsUnitService;
@@ -43,8 +44,9 @@ public class GoodsUnitManagerController {
 	@RequestLogger(description = "分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<GoodsUnit>> getByPage(PageVO pageVO) {
-		return Result.success(goodsUnitService.page(PageUtil.initPage(pageVO)));
+	public Result<PageModel<GoodsUnit>> getByPage(PageParam pageParam) {
+		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
+		return Result.success(PageModel.convertMybatisPage(page, GoodsUnit.class));
 	}
 
 	@Operation(summary = "获取商品计量单位", description = "获取商品计量单位", method = CommonConstant.GET)
@@ -68,7 +70,7 @@ public class GoodsUnitManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable String id, @Valid @RequestBody GoodsUnit goodsUnit) {
-		goodsUnit.setId(id);
+		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
 

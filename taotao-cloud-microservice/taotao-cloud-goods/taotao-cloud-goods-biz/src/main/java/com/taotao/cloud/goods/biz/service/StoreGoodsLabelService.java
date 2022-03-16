@@ -32,7 +32,7 @@ public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 	 * @param storeGoodsLabel 店铺商品分类
 	 * @return 店铺商品分类
 	 */
-	StoreGoodsLabel addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel);
+	Boolean addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel);
 
 	/**
 	 * 修改商品分类
@@ -40,7 +40,7 @@ public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 	 * @param storeGoodsLabel 店铺商品分类
 	 * @return 店铺商品分类
 	 */
-	StoreGoodsLabel editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel);
+	Boolean editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel);
 
 	/**
 	 * 删除商品分类

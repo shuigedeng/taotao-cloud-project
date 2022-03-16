@@ -40,7 +40,7 @@ public class CategoryVO extends CategoryBaseVO {
 
 	public List<CategoryVO> getChildren() {
 		if (children != null) {
-			children.sort(Comparator.comparing(CategoryBaseVO::getSortOrder));
+			//children.sort(Comparator.comparing(CategoryBaseVO::getSortOrder));
 			return children;
 		}
 		return null;
