@@ -17,7 +17,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.sys.biz.entity.Logistics;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 import com.taotao.cloud.sys.biz.mapper.ILogisticsMapper;
 import com.taotao.cloud.sys.biz.repository.cls.LogisticsRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ILogisticsRepository;
@@ -33,12 +33,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LogisticsServiceImpl extends
-	BaseSuperServiceImpl<ILogisticsMapper, Logistics, LogisticsRepository, ILogisticsRepository, Long>
+	BaseSuperServiceImpl<ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
 	implements ILogisticsService {
 
 	@Override
-	public Logistics findLogisticsById(Long id) {
-		Optional<Logistics> optionalExpressCompany = ir().findById(id);
+	public LogisticsConfig findLogisticsById(Long id) {
+		Optional<LogisticsConfig> optionalExpressCompany = ir().findById(id);
 		return optionalExpressCompany.orElseThrow(
 			() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
 	}

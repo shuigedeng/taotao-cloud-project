@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.biz.entity.File;
+import com.taotao.cloud.sys.biz.entity.file.File;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

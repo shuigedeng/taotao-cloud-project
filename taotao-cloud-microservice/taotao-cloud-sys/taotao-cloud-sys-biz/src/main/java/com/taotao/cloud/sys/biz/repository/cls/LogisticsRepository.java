@@ -15,12 +15,9 @@
  */
 package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.entity.Logistics;
-import com.taotao.cloud.sys.biz.entity.UserRole;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -31,10 +28,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class LogisticsRepository  extends BaseSuperRepository<Logistics, Long> {
+public class LogisticsRepository  extends BaseSuperRepository<LogisticsConfig, Long> {
 
 	public LogisticsRepository(EntityManager em) {
-		super(Logistics.class, em);
+		super(LogisticsConfig.class, em);
 	}
 
 }

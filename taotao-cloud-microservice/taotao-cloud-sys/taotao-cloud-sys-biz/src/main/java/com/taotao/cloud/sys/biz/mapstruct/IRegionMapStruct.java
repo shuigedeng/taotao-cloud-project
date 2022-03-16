@@ -15,10 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
-import com.taotao.cloud.sys.biz.entity.Dept;
-import com.taotao.cloud.sys.biz.entity.Region;
+import com.taotao.cloud.sys.biz.entity.region.Region;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

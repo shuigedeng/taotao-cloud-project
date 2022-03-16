@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.entity.system.service;
 
-import cn.lili.modules.system.entity.dos.SensitiveWords;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.SensitiveWords;
 
 /**
  * 敏感词业务层

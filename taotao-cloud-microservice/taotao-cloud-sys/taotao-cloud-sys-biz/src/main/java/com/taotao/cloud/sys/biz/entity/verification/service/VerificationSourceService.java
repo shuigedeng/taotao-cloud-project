@@ -1,15 +1,12 @@
 package com.taotao.cloud.sys.biz.entity.verification.service;
 
-import cn.lili.cache.CachePrefix;
-import cn.lili.modules.verification.entity.dos.VerificationSource;
-import cn.lili.modules.verification.entity.dto.VerificationDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.sys.biz.entity.verification.entity.dos.VerificationSource;
+import com.taotao.cloud.sys.biz.entity.verification.entity.dto.VerificationDTO;
 
 /**
  * 验证码资源维护 业务层
- *
- * @author Chopper
- * @since 2020/11/17 3:44 下午
  */
 public interface VerificationSourceService extends IService<VerificationSource> {
 

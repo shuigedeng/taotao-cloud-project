@@ -1,12 +1,12 @@
 package com.taotao.cloud.sys.biz.entity.verification.service.impl;
 
-import cn.lili.cache.Cache;
-import cn.lili.modules.system.mapper.VerificationSourceMapper;
-import cn.lili.modules.verification.entity.dos.VerificationSource;
-import cn.lili.modules.verification.entity.dto.VerificationDTO;
-import cn.lili.modules.verification.entity.enums.VerificationSourceEnum;
-import cn.lili.modules.verification.service.VerificationSourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.sys.biz.entity.system.mapper.VerificationSourceMapper;
+import com.taotao.cloud.sys.biz.entity.verification.entity.dos.VerificationSource;
+import com.taotao.cloud.sys.biz.entity.verification.entity.dto.VerificationDTO;
+import com.taotao.cloud.sys.biz.entity.verification.entity.enums.VerificationSourceEnum;
+import com.taotao.cloud.sys.biz.entity.verification.service.VerificationSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +16,13 @@ import java.util.List;
 /**
  * 验证码资源维护 业务层实现
  *
- * @author Chopper
- * @since 2020/11/17 3:48 下午
  */
 @Service
-public class VerificationSourceServiceImpl extends ServiceImpl<VerificationSourceMapper, VerificationSource> implements VerificationSourceService {
+public class VerificationSourceServiceImpl extends ServiceImpl<VerificationSourceMapper, VerificationSource> implements
+	VerificationSourceService {
 
     @Autowired
-    private Cache<VerificationDTO> cache;
+    private RedisRepository redisRepository;
 
     @Override
     public VerificationDTO initCache() {
@@ -40,21 +39,22 @@ public class VerificationSourceServiceImpl extends ServiceImpl<VerificationSourc
         VerificationDTO verificationDTO = new VerificationDTO();
         verificationDTO.setVerificationResources(resourceList);
         verificationDTO.setVerificationSlider(sliderList);
-        cache.put(VERIFICATION_CACHE, verificationDTO);
+        //cache.put(VERIFICATION_CACHE, verificationDTO);
         return verificationDTO;
     }
 
     @Override
     public VerificationDTO getVerificationCache() {
-        VerificationDTO verificationDTO;
-        try {
-            verificationDTO = cache.get(VERIFICATION_CACHE);
-        } catch (ClassCastException cce) {
-            verificationDTO = null;
-        }
-        if (verificationDTO == null) {
-            return initCache();
-        }
-        return verificationDTO;
+        //VerificationDTO verificationDTO;
+        //try {
+        //    verificationDTO = cache.get(VERIFICATION_CACHE);
+        //} catch (ClassCastException cce) {
+        //    verificationDTO = null;
+        //}
+        //if (verificationDTO == null) {
+        //    return initCache();
+        //}
+        //return verificationDTO;
+	    return null;
     }
 }

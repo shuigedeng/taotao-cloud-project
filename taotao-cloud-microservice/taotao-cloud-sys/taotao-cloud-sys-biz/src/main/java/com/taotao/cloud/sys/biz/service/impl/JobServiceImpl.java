@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
-import com.taotao.cloud.sys.biz.entity.Job;
+import com.taotao.cloud.sys.biz.entity.system.Job;
 import com.taotao.cloud.sys.biz.mapper.IJobMapper;
 import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
 import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
@@ -8,7 +8,6 @@ import com.taotao.cloud.sys.api.dubbo.IDubboJobService;
 import com.taotao.cloud.sys.biz.service.IJobService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**

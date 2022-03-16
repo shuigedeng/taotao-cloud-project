@@ -1,29 +1,25 @@
 package com.taotao.cloud.sys.biz.entity.verification.entity.dto;
 
-import cn.lili.modules.verification.entity.dos.VerificationSource;
-import lombok.Data;
-
+import com.taotao.cloud.sys.biz.entity.verification.entity.dos.VerificationSource;
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 验证码资源缓存DTO
- *
- * @author Chopper
- * @since 2020/12/2 17:50
  */
 @Data
 public class VerificationDTO implements Serializable {
 
 
-    /**
-     * 缓存资源
-     */
-    List<VerificationSource> verificationResources;
+	/**
+	 * 缓存资源
+	 */
+	List<VerificationSource> verificationResources;
 
-    /**
-     * 缓存滑块资源
-     */
-    List<VerificationSource> verificationSlider;
+	/**
+	 * 缓存滑块资源
+	 */
+	List<VerificationSource> verificationSlider;
 
 }

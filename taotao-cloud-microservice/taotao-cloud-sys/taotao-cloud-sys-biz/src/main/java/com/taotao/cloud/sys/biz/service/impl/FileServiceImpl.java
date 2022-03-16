@@ -5,7 +5,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.oss.exception.UploadFileException;
 import com.taotao.cloud.oss.model.UploadFileInfo;
 import com.taotao.cloud.oss.service.UploadFileService;
-import com.taotao.cloud.sys.biz.entity.File;
+import com.taotao.cloud.sys.biz.entity.file.File;
 import com.taotao.cloud.sys.biz.mapper.IFileMapper;
 import com.taotao.cloud.sys.biz.repository.cls.FileRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IFileRepository;

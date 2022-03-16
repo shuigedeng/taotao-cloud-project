@@ -1,21 +1,13 @@
 package com.taotao.cloud.sys.biz.entity.system.serviceimpl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.SwitchEnum;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.system.entity.dos.Logistics;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.KuaidiSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.entity.vo.Traces;
-import cn.lili.modules.system.mapper.LogisticsMapper;
-import cn.lili.modules.system.service.LogisticsService;
-import cn.lili.modules.system.service.SettingService;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
+import com.taotao.cloud.sys.biz.entity.system.mapper.LogisticsMapper;
+import com.taotao.cloud.sys.biz.entity.system.service.LogisticsService;
+import com.taotao.cloud.sys.biz.entity.system.service.SettingService;
 import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +30,8 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class LogisticsServiceImpl extends ServiceImpl<LogisticsMapper, Logistics> implements LogisticsService {
+public class LogisticsServiceImpl extends ServiceImpl<LogisticsMapper, Logistics> implements
+	LogisticsService {
     @Autowired
     private SettingService settingService;
 

@@ -1,11 +1,9 @@
 package com.taotao.cloud.sys.biz.entity.system.serviceimpl;
 
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.modules.system.entity.dos.SensitiveWords;
-import cn.lili.modules.system.mapper.SensitiveWordsMapper;
-import cn.lili.modules.system.service.SensitiveWordsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.SensitiveWords;
+import com.taotao.cloud.sys.biz.entity.system.mapper.SensitiveWordsMapper;
+import com.taotao.cloud.sys.biz.entity.system.service.SensitiveWordsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,8 @@ import java.util.stream.Collectors;
  * @since 2020/11/17 8:02 下午
  */
 @Service
-public class SensitiveWordsServiceImpl extends ServiceImpl<SensitiveWordsMapper, SensitiveWords> implements SensitiveWordsService {
+public class SensitiveWordsServiceImpl extends ServiceImpl<SensitiveWordsMapper, SensitiveWords> implements
+	SensitiveWordsService {
     @Autowired
     private Cache<List<String>> cache;
 

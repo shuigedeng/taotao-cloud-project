@@ -1,12 +1,10 @@
 package com.taotao.cloud.sys.biz.entity.system.serviceimpl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.system.entity.dos.AppVersion;
-import cn.lili.modules.system.mapper.AppVersionMapper;
-import cn.lili.modules.system.service.AppVersionService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.AppVersion;
+import com.taotao.cloud.sys.biz.entity.system.mapper.AppVersionMapper;
+import com.taotao.cloud.sys.biz.entity.system.service.AppVersionService;
 import org.springframework.stereotype.Service;
 
 
@@ -17,7 +15,8 @@ import org.springframework.stereotype.Service;
  * @since 2020/11/17 8:02 下午
  */
 @Service
-public class AppVersionServiceImpl extends ServiceImpl<AppVersionMapper, AppVersion> implements AppVersionService {
+public class AppVersionServiceImpl extends ServiceImpl<AppVersionMapper, AppVersion> implements
+	AppVersionService {
 
     @Override
     public AppVersion getAppVersion(String appType) {

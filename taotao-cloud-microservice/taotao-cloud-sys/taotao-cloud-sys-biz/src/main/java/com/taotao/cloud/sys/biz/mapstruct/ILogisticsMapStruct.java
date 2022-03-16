@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
-import com.taotao.cloud.sys.biz.entity.Logistics;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -43,7 +43,7 @@ public interface ILogisticsMapStruct {
 	 * @since 2020/11/11 14:47
 	 * @version 1.0.0
 	 */
-	LogisticsVO logisticsToFileVO(Logistics logistics);
+	LogisticsVO logisticsToFileVO(LogisticsConfig logisticsConfig);
 
 	// /**
 	//  * SysUser转AddUserVO

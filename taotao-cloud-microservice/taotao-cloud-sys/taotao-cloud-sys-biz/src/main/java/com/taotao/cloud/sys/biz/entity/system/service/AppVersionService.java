@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.entity.system.service;
 
-import cn.lili.modules.system.entity.dos.AppVersion;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.AppVersion;
 
 /**
  * app版本业务层

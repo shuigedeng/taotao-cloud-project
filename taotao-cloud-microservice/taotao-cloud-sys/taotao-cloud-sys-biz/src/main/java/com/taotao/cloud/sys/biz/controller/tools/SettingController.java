@@ -1,22 +1,15 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.netty.annotation.RequestParam;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
-import com.taotao.cloud.sys.biz.entity.Setting;
-import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
-import com.taotao.cloud.sys.biz.service.ICronService;
+import com.taotao.cloud.sys.biz.entity.config.Setting;
 import com.taotao.cloud.sys.biz.service.ISettingService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import javax.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -5,7 +5,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.entity.Log;
+import com.taotao.cloud.sys.biz.entity.system.Log;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;

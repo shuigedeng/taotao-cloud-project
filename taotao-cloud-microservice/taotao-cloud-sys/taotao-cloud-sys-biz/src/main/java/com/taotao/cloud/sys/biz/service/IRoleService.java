@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.cloud.sys.api.bo.role.RoleBO;
-import com.taotao.cloud.sys.biz.entity.Role;
+import com.taotao.cloud.sys.biz.entity.system.Role;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Set;

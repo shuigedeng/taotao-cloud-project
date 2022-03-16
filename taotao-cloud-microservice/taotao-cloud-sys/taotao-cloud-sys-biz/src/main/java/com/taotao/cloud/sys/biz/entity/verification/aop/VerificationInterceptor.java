@@ -1,10 +1,10 @@
 package com.taotao.cloud.sys.biz.entity.verification.aop;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.verification.aop.annotation.Verification;
-import cn.lili.modules.verification.entity.enums.VerificationEnums;
-import cn.lili.modules.verification.service.VerificationService;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.sys.biz.entity.verification.aop.annotation.Verification;
+import com.taotao.cloud.sys.biz.entity.verification.entity.enums.VerificationEnums;
+import com.taotao.cloud.sys.biz.entity.verification.service.VerificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,11 +18,9 @@ import java.lang.reflect.Method;
 /**
  * 验证码验证拦截
  *
- * @author Chopper
  */
 @Aspect
 @Configuration
-@Slf4j
 public class VerificationInterceptor {
 
     @Autowired
@@ -39,6 +37,6 @@ public class VerificationInterceptor {
         if (result) {
             return;
         }
-        throw new ServiceException(ResultCode.VERIFICATION_ERROR);
+        throw new BusinessException(ResultEnum.VERIFICATION_ERROR);
     }
 }

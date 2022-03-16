@@ -29,7 +29,7 @@ import com.taotao.cloud.sys.api.dto.menu.MenuSaveDTO;
 import com.taotao.cloud.sys.api.dto.menu.MenuUpdateDTO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.entity.Menu;
+import com.taotao.cloud.sys.biz.entity.system.Menu;
 import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
 import com.taotao.cloud.sys.biz.service.IMenuService;
 import com.taotao.cloud.web.base.controller.SuperController;

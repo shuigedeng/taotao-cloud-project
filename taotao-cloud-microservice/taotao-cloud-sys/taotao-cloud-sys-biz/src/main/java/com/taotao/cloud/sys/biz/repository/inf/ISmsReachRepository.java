@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.entity.SmsReach;
+import com.taotao.cloud.sys.biz.entity.sms.SmsReach;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

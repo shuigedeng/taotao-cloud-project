@@ -7,7 +7,7 @@ package com.taotao.cloud.sys.biz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobQueryCriteria;
-import com.taotao.cloud.sys.biz.entity.QuartzJob;
+import com.taotao.cloud.sys.biz.entity.quartz.QuartzJob;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;

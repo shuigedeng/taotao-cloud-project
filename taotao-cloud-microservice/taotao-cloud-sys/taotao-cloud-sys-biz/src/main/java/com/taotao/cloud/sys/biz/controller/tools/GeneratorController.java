@@ -8,7 +8,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.biz.entity.ColumnConfig;
+import com.taotao.cloud.sys.biz.entity.config.ColumnConfig;
 import com.taotao.cloud.sys.biz.service.IGenConfigService;
 import com.taotao.cloud.sys.biz.service.IGeneratorService;
 import io.swagger.v3.oas.annotations.Operation;

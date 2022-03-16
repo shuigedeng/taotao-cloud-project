@@ -11,7 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzLogQueryCriteria;
-import com.taotao.cloud.sys.biz.entity.QuartzLog;
+import com.taotao.cloud.sys.biz.entity.quartz.QuartzLog;
 import com.taotao.cloud.sys.biz.mapper.IQuartzLogMapper;
 import com.taotao.cloud.sys.biz.service.IQuartzLogService;
 import java.io.IOException;

@@ -15,24 +15,15 @@
  */
 package com.taotao.cloud.sys.biz.controller.manager;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.model.BaseQuery;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.api.dto.dict.DictUpdateDTO;
 import com.taotao.cloud.sys.api.vo.dict.DictQueryVO;
-import com.taotao.cloud.sys.biz.entity.Dict;
+import com.taotao.cloud.sys.biz.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SuperController;
-import com.taotao.cloud.web.utils.CollectionUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Collection;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiImplicitParam;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiImplicitParams;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

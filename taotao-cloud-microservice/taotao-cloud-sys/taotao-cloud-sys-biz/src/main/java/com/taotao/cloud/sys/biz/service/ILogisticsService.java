@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.biz.entity.Logistics;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 
 /**
  * @author shuigedeng
@@ -33,5 +33,5 @@ public interface ILogisticsService {
 	 * @since 2020/11/20 下午1:08
 	 * @version 1.0.0
 	 */
-	Logistics findLogisticsById(Long id);
+	LogisticsConfig findLogisticsById(Long id);
 }
