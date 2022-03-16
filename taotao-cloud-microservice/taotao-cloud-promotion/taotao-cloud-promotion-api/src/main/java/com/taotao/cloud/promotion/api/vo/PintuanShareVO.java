@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class PintuanShareVO {
 
-    private PromotionGoods promotionGoods;
+    //private PromotionGoods promotionGoods;
 
     private List<PintuanMemberVO> pintuanMemberVOS;
 

@@ -70,9 +70,9 @@ public class MemberCouponSearchParams extends BasePromotionsSearchParams impleme
         if (CharSequenceUtil.isNotEmpty(scopeType)) {
             queryWrapper.eq("scope_type", PromotionsScopeTypeEnum.valueOf(scopeType).name());
         }
-        if (CharSequenceUtil.isNotEmpty(getType)) {
-            queryWrapper.eq("get_type", CouponGetEnum.valueOf(getType).name());
-        }
+        //if (CharSequenceUtil.isNotEmpty(getType)) {
+        //    queryWrapper.eq("get_type", CouponGetEnum.valueOf(getType).name());
+        //}
         if (CharSequenceUtil.isNotEmpty(memberCouponStatus)) {
             queryWrapper.eq("member_coupon_status", MemberCouponStatusEnum.valueOf(memberCouponStatus).name());
         }

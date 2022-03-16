@@ -16,9 +16,9 @@
 package com.taotao.cloud.coupon.api.feign.fallback;
 
 import com.taotao.cloud.coupon.api.feign.RemoteCouponService;
-import com.taotao.cloud.coupon.api.vo.CouponVO;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.promotion.api.vo.CouponVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -31,11 +31,11 @@ public class RemoteCouponFallbackImpl implements FallbackFactory<RemoteCouponSer
 	@Override
 	public RemoteCouponService create(Throwable throwable) {
 		return new RemoteCouponService() {
-			@Override
-			public Result<CouponVO> getMemberSecurityUser(Long id) {
-				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-				return Result.fail(null, 500);
-			}
+			//@Override
+			//public Result<CouponVO> getMemberSecurityUser(Long id) {
+			//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
+			//	return Result.fail(null, 500);
+			//}
 		};
 	}
 }

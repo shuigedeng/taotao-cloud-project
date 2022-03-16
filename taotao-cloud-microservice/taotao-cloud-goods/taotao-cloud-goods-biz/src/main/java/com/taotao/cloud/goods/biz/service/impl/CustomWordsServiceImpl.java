@@ -64,16 +64,17 @@ public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, Custo
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addCustomWords(CustomWordsVO customWordsVO) {
-		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().eq(
-			CustomWords::getName, customWordsVO.getName());
-		CustomWords one = this.getOne(queryWrapper, false);
-		if (one != null && one.getDisabled().equals(1)) {
-			throw new BusinessException(ResultEnum.CUSTOM_WORDS_EXIST_ERROR);
-		} else if (one != null && !one.getDisabled().equals(1)) {
-			this.remove(queryWrapper);
-		}
-		customWordsVO.setDisabled(1);
-		return this.save(customWordsVO);
+		//LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().eq(
+		//	CustomWords::getName, customWordsVO.getName());
+		//CustomWords one = this.getOne(queryWrapper, false);
+		//if (one != null && one.getDisabled().equals(1)) {
+		//	throw new BusinessException(ResultEnum.CUSTOM_WORDS_EXIST_ERROR);
+		//} else if (one != null && !one.getDisabled().equals(1)) {
+		//	this.remove(queryWrapper);
+		//}
+		//customWordsVO.setDisabled(1);
+		//return this.save(customWordsVO);
+		return true;
 	}
 
 	/**
@@ -93,11 +94,12 @@ public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, Custo
 
 	@Override
 	public Boolean updateCustomWords(CustomWordsVO customWordsVO) {
-		if (this.getById(customWordsVO.getId()) == null) {
-			throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
-		}
-
-		return this.updateById(customWordsVO);
+		//if (this.getById(customWordsVO.getId()) == null) {
+		//	throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
+		//}
+		//
+		//return this.updateById(customWordsVO);
+		return true;
 	}
 
 	@Override

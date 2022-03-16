@@ -16,7 +16,6 @@
 package com.taotao.cloud.coupon.api.feign;
 
 import com.taotao.cloud.coupon.api.feign.fallback.RemoteCouponFallbackImpl;
-import com.taotao.cloud.coupon.api.vo.CouponVO;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -32,16 +31,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteCouponFallbackImpl.class)
 public interface RemoteCouponService {
 
-	/**
-	 * 根据id查询提现申请信息
-	 *
-	 * @param id id
-	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.aftersale.api.vo.WithdrawVO>
-	 * @author shuigedeng
-	 * @since 2020/11/20 上午9:50
-	 * @version 1.0.0
-	 */
-	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
-	Result<CouponVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);
+	///**
+	// * 根据id查询提现申请信息
+	// *
+	// * @param id id
+	// * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.aftersale.api.vo.WithdrawVO>
+	// * @author shuigedeng
+	// * @since 2020/11/20 上午9:50
+	// * @version 1.0.0
+	// */
+	//@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
+	//Result<CouponVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);
 }
 

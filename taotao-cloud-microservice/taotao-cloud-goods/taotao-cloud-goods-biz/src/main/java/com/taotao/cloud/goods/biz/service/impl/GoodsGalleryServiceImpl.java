@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.GoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.setting.GoodsSetting;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +22,11 @@ public class GoodsGalleryServiceImpl extends
 	ServiceImpl<GoodsGalleryMapper, GoodsGallery> implements
 	GoodsGalleryService {
 
-	/**
-	 * 设置
-	 */
-	@Autowired
-	private SettingService settingService;
+	///**
+	// * 设置
+	// */
+	//@Autowired
+	//private SettingService settingService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -49,17 +51,17 @@ public class GoodsGalleryServiceImpl extends
 	public GoodsGallery getGoodsGallery(String origin) {
 		GoodsGallery goodsGallery = new GoodsGallery();
 		//获取商品系统配置决定是否审核
-		Setting setting = settingService.get(SettingEnum.GOODS_SETTING.name());
-		GoodsSetting goodsSetting = JSONUtil.toBean(setting.getSettingValue(), GoodsSetting.class);
-		//缩略图
-		String thumbnail = FileUtil.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),
-			goodsSetting.getAbbreviationPictureHeight());
-		//小图
-		String small = FileUtil.getUrl(origin, goodsSetting.getSmallPictureWidth(),
-			goodsSetting.getSmallPictureHeight());
-		//赋值
-		goodsGallery.setSmall(small);
-		goodsGallery.setThumbnail(thumbnail);
+		//Setting setting = settingService.get(SettingEnum.GOODS_SETTING.name());
+		//GoodsSetting goodsSetting = JSONUtil.toBean(setting.getSettingValue(), GoodsSetting.class);
+		////缩略图
+		//String thumbnail = FileUtil.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),
+		//	goodsSetting.getAbbreviationPictureHeight());
+		////小图
+		//String small = FileUtil.getUrl(origin, goodsSetting.getSmallPictureWidth(),
+		//	goodsSetting.getSmallPictureHeight());
+		////赋值
+		//goodsGallery.setSmall(small);
+		//goodsGallery.setThumbnail(thumbnail);
 		goodsGallery.setOriginal(origin);
 		return goodsGallery;
 	}

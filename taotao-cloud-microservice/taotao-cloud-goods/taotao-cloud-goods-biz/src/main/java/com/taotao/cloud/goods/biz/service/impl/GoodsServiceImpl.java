@@ -25,9 +25,7 @@ import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import java.util.List;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,11 +41,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 */
 	@Autowired
 	private CategoryService categoryService;
-	/**
-	 * 设置
-	 */
-	@Autowired
-	private IFeignSettingService settingService;
+	///**
+	// * 设置
+	// */
+	//@Autowired
+	//private IFeignSettingService settingService;
 	/**
 	 * 商品相册
 	 */
@@ -68,11 +66,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 */
 	//@Autowired
 	//private MemberEvaluationService memberEvaluationService;
-	/**
-	 * rocketMq
-	 */
-	@Autowired
-	private RocketMQTemplate rocketMQTemplate;
+	///**
+	// * rocketMq
+	// */
+	//@Autowired
+	//private RocketMQTemplate rocketMQTemplate;
 	/**
 	 * rocketMq配置
 	 */

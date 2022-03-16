@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.biz.service;
 
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
@@ -96,7 +97,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotions promotion, String key);
+	//UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotions promotion, String key);
 
 	/**
 	 * 更新商品索引的促销信息
@@ -105,7 +106,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	Boolean updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
+	//Boolean updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
 
 	/**
 	 * 根据列表更新商品索引的促销信息
@@ -114,9 +115,9 @@ public interface EsGoodsIndexService {
 	 * @param promotion          促销信息
 	 * @param key                促销信息的key
 	 */
-	Boolean updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList,
-		BasePromotions promotion,
-		String key);
+	//Boolean updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList,
+	//	BasePromotions promotion,
+	//	String key);
 
 	/**
 	 * 更新全部商品索引的促销信息
@@ -124,7 +125,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	Boolean updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
+	//Boolean updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
 
 	/**
 	 * 删除指定商品的促销信息

@@ -7,13 +7,13 @@ import lombok.EqualsAndHashCode;
 /**
  * 积分商品视图对象
  **/
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class PointsGoodsVO extends PointsGoods {
+//public class PointsGoodsVO extends PointsGoods {
+public class PointsGoodsVO  {
 
     private static final long serialVersionUID = -5163709626742905057L;
 
-    @Schema(description =  "商品规格详细信息")
-    private GoodsSku goodsSku;
+    //@Schema(description =  "商品规格详细信息")
+    //private GoodsSku goodsSku;
 
 }

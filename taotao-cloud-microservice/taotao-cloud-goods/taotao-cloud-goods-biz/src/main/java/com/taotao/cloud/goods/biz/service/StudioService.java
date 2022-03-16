@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.vo.StudioVO;
 import com.taotao.cloud.goods.biz.entity.Studio;
 
@@ -64,17 +65,17 @@ public interface StudioService extends IService<Studio> {
 	/**
 	 * 获取直播间列表
 	 *
-	 * @param pageVO    分页
+	 * @param pageParam    分页
 	 * @param recommend 是否推荐
 	 * @param status    直播间状态
 	 * @return 直播间分页
 	 */
-	IPage<Studio> studioList(PageVO pageVO, Integer recommend, String status);
+	IPage<Studio> studioList(PageParam pageParam, Integer recommend, String status);
 
-	/**
-	 * 修改直播间状态
-	 *
-	 * @param broadcastMessage 直播间消息
-	 */
-	Boolean updateStudioStatus(BroadcastMessage broadcastMessage);
+	///**
+	// * 修改直播间状态
+	// *
+	// * @param broadcastMessage 直播间消息
+	// */
+	//Boolean updateStudioStatus(BroadcastMessage broadcastMessage);
 }

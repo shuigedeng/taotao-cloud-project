@@ -8,7 +8,8 @@ import lombok.Data;
  */
 @Data
 @Schema(description = "砍价活动VO")
-public class KanjiaActivityVO extends KanjiaActivity {
+//public class KanjiaActivityVO extends KanjiaActivity {
+public class KanjiaActivityVO {
 
     @Schema(description =  "是否可以砍价")
     private Boolean help;

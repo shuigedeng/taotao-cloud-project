@@ -7,7 +7,8 @@ import lombok.EqualsAndHashCode;
  * 积分商品分类视图对象
  **/
 @Data
-public class PointsGoodsCategoryVO extends PointsGoodsCategory {
+//public class PointsGoodsCategoryVO extends PointsGoodsCategory {
+public class PointsGoodsCategoryVO  {
 
     private static final long serialVersionUID = 5528833118735059182L;
 

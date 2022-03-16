@@ -8,9 +8,9 @@ import lombok.EqualsAndHashCode;
  * 优惠券活动的优惠券VO
  *
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class CouponActivityItemVO extends CouponActivityItem {
+//public class CouponActivityItemVO extends CouponActivityItem {
+public class CouponActivityItemVO  {
 
     @Schema(description =  "优惠券名称")
     private String couponName;

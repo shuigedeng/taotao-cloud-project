@@ -10,16 +10,16 @@ import java.util.List;
 /**
  * 拼团视图对象
  **/
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class PintuanVO extends Pintuan {
+//public class PintuanVO extends Pintuan {
+public class PintuanVO  {
 
     private static final long serialVersionUID = 218582640653676201L;
 
-    private List<PromotionGoods> promotionGoodsList;
-
-    public PintuanVO(Pintuan pintuan) {
-        BeanUtils.copyProperties(pintuan, this);
-    }
+    //private List<PromotionGoods> promotionGoodsList;
+	//
+    //public PintuanVO(Pintuan pintuan) {
+    //    BeanUtils.copyProperties(pintuan, this);
+    //}
 }
