@@ -78,7 +78,7 @@ public class AuthConfig {
 	 *
 	 * @since 1.15.5
 	 */
-	private HttpConfig httpConfig;
+	//private HttpConfig httpConfig;
 
 	/**
 	 * 忽略校验 {@code state} 参数，默认不开启。当 {@code ignoreCheckState} 为 {@code true} 时， {@link

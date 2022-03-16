@@ -5,7 +5,10 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.cookie.CookieUtil;
 import com.taotao.cloud.member.api.dto.ConnectQueryDTO;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
@@ -14,9 +17,14 @@ import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
 import com.taotao.cloud.member.biz.connect.entity.enums.ConnectEnum;
 import com.taotao.cloud.member.biz.connect.mapper.ConnectMapper;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
+import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;
+import com.taotao.cloud.sys.api.setting.connect.dto.WechatConnectSettingItem;
 import java.nio.charset.StandardCharsets;
 import java.security.AlgorithmParameters;
 import java.security.Security;
@@ -41,21 +49,20 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 联合登陆接口实现
  */
-@Slf4j
 @Service
 public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> implements
 	ConnectService {
 
 	static final boolean AUTO_REGION = true;
 
-	@Autowired
-	private SettingService settingService;
+	//@Autowired
+	//private SettingService settingService;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private MemberTokenGenerate memberTokenGenerate;
 	@Autowired
-	private Cache cache;
+	private RedisRepository redisRepository;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -122,9 +129,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void unbind(String type) {
-
 		LambdaQueryWrapper<Connect> queryWrapper = new LambdaQueryWrapper<>();
-
 		queryWrapper.eq(Connect::getUserId, UserContext.getCurrentUser().getId());
 		queryWrapper.eq(Connect::getUnionType, type);
 

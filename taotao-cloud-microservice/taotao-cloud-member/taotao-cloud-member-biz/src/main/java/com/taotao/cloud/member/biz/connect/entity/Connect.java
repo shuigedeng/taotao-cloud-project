@@ -1,56 +1,48 @@
 package com.taotao.cloud.member.biz.connect.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.member.biz.connect.entity.enums.ConnectEnum;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 @Data
-@TableName("li_connect")
-@ApiModel(value = "联合登陆")
 @NoArgsConstructor
-public class Connect extends BaseIdEntity {
+@Entity
+@Table(name = Connect.TABLE_NAME)
+@TableName(Connect.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Connect.TABLE_NAME, comment = "联合登陆表")
+public class Connect extends BaseSuperEntity<Connect, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "tt_connect";
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    private String createBy;
+	/**
+	 * 用户id
+	 */
+	@Column(name = "user_id", nullable = false, columnDefinition = "varchar(32) not null comment '用户id'")
+	private String userId;
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	/**
+	 * 联合登录id
+	 */
+	@Column(name = "union_id", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录id'")
+	private String unionId;
 
-    @ApiModelProperty("用户id")
-    private String userId;
-
-    @ApiModelProperty("联合登录id")
-    private String unionId;
-
-    /**
-     * @see ConnectEnum
-     */
-    @ApiModelProperty(value = "联合登录类型")
-    private String unionType;
+	/**
+	 * 联合登录类型
+	 *
+	 * @see ConnectEnum
+	 */
+	@Column(name = "union_type", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录类型'")
+	private String unionType;
 
 
-    public Connect(String userId, String unionId, String unionType) {
-        this.userId = userId;
-        this.unionId = unionId;
-        this.unionType = unionType;
-    }
+	public Connect(String userId, String unionId, String unionType) {
+		this.userId = userId;
+		this.unionId = unionId;
+		this.unionType = unionType;
+	}
 }

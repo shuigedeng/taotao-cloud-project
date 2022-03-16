@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.connect.request;
 
-import cn.hutool.core.net.url.UrlBuilder;
 import com.alibaba.fastjson.JSONObject;
+import com.taotao.cloud.common.utils.common.UrlBuilder;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -12,13 +12,14 @@ import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthUserGender;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.member.biz.connect.util.GlobalAuthUtils;
+import com.taotao.cloud.redis.repository.RedisRepository;
 
 /**
  * 微信开放平台登录
  */
 public class BaseAuthWeChatRequest extends BaseAuthRequest {
-    public BaseAuthWeChatRequest(AuthConfig config, Cache cache) {
-        super(config, ConnectAuthEnum.WECHAT, cache);
+    public BaseAuthWeChatRequest(AuthConfig config, RedisRepository redisRepository) {
+        super(config, ConnectAuthEnum.WECHAT, redisRepository);
     }
 
     /**
@@ -86,17 +87,18 @@ public class BaseAuthWeChatRequest extends BaseAuthRequest {
      * @return token对象
      */
     private AuthToken getToken(String accessTokenUrl) {
-        String response = new HttpUtils(config.getHttpConfig()).get(accessTokenUrl);
-        JSONObject accessTokenObject = JSONObject.parseObject(response);
-
-        this.checkResponse(accessTokenObject);
-
-        return AuthToken.builder()
-                .accessToken(accessTokenObject.getString("access_token"))
-                .refreshToken(accessTokenObject.getString("refresh_token"))
-                .expireIn(accessTokenObject.getIntValue("expires_in"))
-                .openId(accessTokenObject.getString("openid"))
-                .build();
+        //String response = new HttpUtils(config.getHttpConfig()).get(accessTokenUrl);
+        //JSONObject accessTokenObject = JSONObject.parseObject(response);
+		//
+        //this.checkResponse(accessTokenObject);
+		//
+        //return AuthToken.builder()
+        //        .accessToken(accessTokenObject.getString("access_token"))
+        //        .refreshToken(accessTokenObject.getString("refresh_token"))
+        //        .expireIn(accessTokenObject.getIntValue("expires_in"))
+        //        .openId(accessTokenObject.getString("openid"))
+        //        .build();
+	    return null;
     }
 
     /**

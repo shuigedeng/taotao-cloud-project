@@ -1,10 +1,12 @@
 package com.taotao.cloud.member.biz.connect.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.member.api.dto.ConnectQueryDTO;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
+import com.taotao.cloud.member.biz.connect.token.Token;
 import java.util.List;
 import javax.naming.NoPermissionException;
 
@@ -12,7 +14,6 @@ import javax.naming.NoPermissionException;
  * 联合登陆接口
  */
 public interface ConnectService extends IService<Connect> {
-
 
 	/**
 	 * 联合登陆cookie 常量

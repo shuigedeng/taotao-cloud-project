@@ -1,9 +1,10 @@
 package com.taotao.cloud.member.biz.connect.request;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.net.url.UrlBuilder;
 import com.alibaba.fastjson.JSONObject;
 
+import com.taotao.cloud.common.utils.common.UrlBuilder;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -14,6 +15,7 @@ import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthUserGender;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.member.biz.connect.util.GlobalAuthUtils;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Map;
 
 /**
@@ -21,8 +23,8 @@ import java.util.Map;
  */
 public class BaseAuthQQRequest extends BaseAuthRequest {
 
-    public BaseAuthQQRequest(AuthConfig config, Cache cache) {
-        super(config, ConnectAuthEnum.QQ, cache);
+    public BaseAuthQQRequest(AuthConfig config, RedisRepository redisRepository) {
+        super(config, ConnectAuthEnum.QQ, redisRepository);
     }
 
     @Override
@@ -33,8 +35,9 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
 
     @Override
     public AuthResponse refresh(AuthToken authToken) {
-        String response = new HttpUtils(config.getHttpConfig()).get(refreshTokenUrl(authToken.getRefreshToken()));
-        return AuthResponse.builder().code(AuthResponseStatus.SUCCESS.getCode()).data(getAuthToken(response)).build();
+        //String response = new HttpUtils(config.getHttpConfig()).get(refreshTokenUrl(authToken.getRefreshToken()));
+        //return AuthResponse.builder().code(AuthResponseStatus.SUCCESS.getCode()).data(getAuthToken(response)).build();
+	    return null;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
             throw new AuthException(object.getString("msg"));
         }
         String avatar = object.getString("figureurl_qq_2");
-        if (StringUtils.isEmpty(avatar)) {
+        if (StringUtil.isEmpty(avatar)) {
             avatar = object.getString("figureurl_qq_1");
         }
 
@@ -72,22 +75,23 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
      * @return openId
      */
     private String getOpenId(AuthToken authToken) {
-        String response = new HttpUtils(config.getHttpConfig()).get(UrlBuilder.fromBaseUrl("https://graph.qq.com/oauth2.0/me")
-                .queryParam("access_token", authToken.getAccessToken())
-                .queryParam("unionid", config.isUnionId() ? 1 : 0)
-                .build());
-        String removePrefix = response.replace("callback(", "");
-        String removeSuffix = removePrefix.replace(");", "");
-        String openId = removeSuffix.trim();
-        JSONObject object = JSONObject.parseObject(openId);
-        if (object.containsKey("error")) {
-            throw new AuthException(object.get("error") + ":" + object.get("error_description"));
-        }
-        authToken.setOpenId(object.getString("openid"));
-        if (object.containsKey("unionid")) {
-            authToken.setUnionId(object.getString("unionid"));
-        }
-        return StringUtils.isEmpty(authToken.getUnionId()) ? authToken.getOpenId() : authToken.getUnionId();
+        //String response = new HttpUtils(config.getHttpConfig()).get(UrlBuilder.fromBaseUrl("https://graph.qq.com/oauth2.0/me")
+        //        .queryParam("access_token", authToken.getAccessToken())
+        //        .queryParam("unionid", config.isUnionId() ? 1 : 0)
+        //        .build());
+        //String removePrefix = response.replace("callback(", "");
+        //String removeSuffix = removePrefix.replace(");", "");
+        //String openId = removeSuffix.trim();
+        //JSONObject object = JSONObject.parseObject(openId);
+        //if (object.containsKey("error")) {
+        //    throw new AuthException(object.get("error") + ":" + object.get("error_description"));
+        //}
+        //authToken.setOpenId(object.getString("openid"));
+        //if (object.containsKey("unionid")) {
+        //    authToken.setUnionId(object.getString("unionid"));
+        //}
+        //return StringUtil.isEmpty(authToken.getUnionId()) ? authToken.getOpenId() : authToken.getUnionId();
+	    return null;
     }
 
     /**

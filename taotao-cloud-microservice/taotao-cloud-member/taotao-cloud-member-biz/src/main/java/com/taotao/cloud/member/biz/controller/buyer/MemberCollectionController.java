@@ -95,8 +95,8 @@ public class MemberCollectionController {
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
 		@Parameter(description = "id", required = true) @NotBlank(message = "值不能为空") @PathVariable String id) {
 		if (goods.equals(type)) {
-			return Result.data(this.goodsCollectionService.isCollection(id));
+			return Result.success(this.goodsCollectionService.isCollection(id));
 		}
-		return Result.data(this.storeCollectionService.isCollection(id));
+		return Result.success(this.storeCollectionService.isCollection(id));
 	}
 }

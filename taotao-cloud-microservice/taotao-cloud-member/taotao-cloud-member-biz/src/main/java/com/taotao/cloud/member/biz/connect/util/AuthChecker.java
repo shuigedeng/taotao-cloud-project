@@ -7,6 +7,7 @@ import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -78,8 +79,8 @@ public class AuthChecker {
      *
      * @param state {@code state}一定不为空
      */
-    public static void checkState(String state, ConnectAuth connectAuth, Cache cache) {
-        if (StringUtils.isEmpty(state) || !cache.hasKey(state)) {
+    public static void checkState(String state, ConnectAuth connectAuth, RedisRepository redisRepository) {
+        if (StringUtils.isEmpty(state) || !redisRepository.hasKey(state)) {
             throw new AuthException(AuthResponseStatus.ILLEGAL_STATUS, connectAuth);
         }
     }

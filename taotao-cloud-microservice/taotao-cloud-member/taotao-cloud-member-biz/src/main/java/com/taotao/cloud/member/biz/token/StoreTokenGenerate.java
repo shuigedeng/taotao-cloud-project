@@ -1,16 +1,12 @@
 package com.taotao.cloud.member.biz.token;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.security.token.Token;
-import cn.lili.common.security.token.TokenUtil;
-import cn.lili.common.security.token.base.AbstractTokenGenerate;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.store.entity.dos.Store;
-import cn.lili.modules.store.service.StoreService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.member.biz.connect.token.Token;
+import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
+import com.taotao.cloud.member.biz.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,11 @@
 package com.taotao.cloud.member.biz.aop.interceptor;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
+import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
+import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
+import com.taotao.cloud.member.biz.service.MemberService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -52,7 +57,7 @@ public class PointLogInterceptor {
             Member member = memberService.getById(memberId);
             if (member != null) {
                 MemberPointsHistory memberPointsHistory = new MemberPointsHistory();
-                memberPointsHistory.setMemberId(member.getId());
+                //memberPointsHistory.setMemberId(member.getId());
                 memberPointsHistory.setMemberName(member.getUsername());
                 memberPointsHistory.setPointType(type);
 
@@ -65,14 +70,11 @@ public class PointLogInterceptor {
 
                 memberPointsHistory.setPoint(member.getPoint());
                 memberPointsHistory.setContent(obj[3] == null ? "" : obj[3].toString());
-                memberPointsHistory.setCreateBy("系统");
+                //memberPointsHistory.setCreateBy("系统");
                 memberPointsHistoryService.save(memberPointsHistory);
             }
         } catch (Exception e) {
-            log.error("积分操作错误", e);
+            LogUtil.error("积分操作错误", e);
         }
-
-
     }
-
 }
