@@ -48,18 +48,15 @@ public class MemberPointsHistoryServiceImpl extends
 	}
 
 	@Override
-	public PageModel<MemberPointsHistoryPageVO> getByPage(PageParam pageParam) {
+	public IPage<MemberPointsHistory> getByPage(PageParam pageParam) {
 		LambdaQueryWrapper<MemberPointsHistory> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberPointsHistory::getMemberId, SecurityUtil.getUserId());
 		queryWrapper.orderByDesc(MemberPointsHistory::getCreateTime);
-		IPage<MemberPointsHistory> memberPointsHistoryPage = this.page(pageParam.buildMpPage(),
-			queryWrapper);
-		return PageModel.convertMybatisPage(memberPointsHistoryPage,
-			MemberPointsHistoryPageVO.class);
+		return this.page(pageParam.buildMpPage(), queryWrapper);
 	}
 
 	@Override
-	public PageModel<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam,
+	public IPage<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam,
 		String memberId, String memberName) {
 		LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistory>()
 			.eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
@@ -70,10 +67,7 @@ public class MemberPointsHistoryServiceImpl extends
 			pageParam.setSort("createTime");
 			pageParam.setOrder("desc");
 		}
-		IPage<MemberPointsHistory> memberPointsHistoryPage = this.page(pageParam.buildMpPage(),
-			lambdaQueryWrapper);
-		return PageModel.convertMybatisPage(memberPointsHistoryPage,
-			MemberPointsHistoryPageVO.class);
+		return this.page(pageParam.buildMpPage(), lambdaQueryWrapper);
 	}
 
 }

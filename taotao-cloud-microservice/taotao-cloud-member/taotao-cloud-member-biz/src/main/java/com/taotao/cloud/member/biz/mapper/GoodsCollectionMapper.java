@@ -11,8 +11,6 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 会员收藏数据处理层
- *
- * @since 2020-02-25 14:10:16
  */
 public interface GoodsCollectionMapper extends BaseMapper<MemberGoodsCollection> {
 

@@ -18,7 +18,6 @@ import org.hibernate.validator.constraints.Length;
 /**
  * 店铺详细
  *
- * @since 2020-02-18 15:18:56
  */
 @Entity
 @Table(name = StoreDetail.TABLE_NAME)
@@ -26,7 +25,7 @@ import org.hibernate.validator.constraints.Length;
 @org.hibernate.annotations.Table(appliesTo = StoreDetail.TABLE_NAME, comment = "店铺详细表")
 public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 
-	public static final String TABLE_NAME = "li_store_detail";
+	public static final String TABLE_NAME = "tt_store_detail";
 
 	@NotBlank(message = "店铺不能为空")
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺id'")

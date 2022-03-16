@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = StoreAddress.TABLE_NAME, comment = "店铺自提点表")
 public class StoreAddress extends BaseSuperEntity<StoreAddress, Long> {
 
-	public static final String TABLE_NAME = "li_store_address";
+	public static final String TABLE_NAME = "tt_store_address";
 
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺id'")
 	private String storeId;

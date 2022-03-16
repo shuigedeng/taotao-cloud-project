@@ -1,6 +1,9 @@
 package com.taotao.cloud.member.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.member.api.enums.SendTypeEnum;
 import com.taotao.cloud.member.biz.entity.MemberNotice;
 import com.taotao.cloud.member.biz.entity.MemberNoticeSenter;
@@ -18,9 +21,6 @@ import java.util.List;
 
 /**
  * 会员消息业务层实现
- *
- *
- * @since 2020/11/17 3:44 下午
  */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -46,7 +46,7 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSente
             //如果是选中会员发送
             if (memberNoticeSenter.getSendType().equals(SendTypeEnum.SELECT.name())) {
                 //判定消息是否有效
-                if (!StringUtils.isEmpty(memberNoticeSenter.getMemberIds())) {
+                if (!StringUtil.isEmpty(memberNoticeSenter.getMemberIds())) {
                     String[] ids = memberNoticeSenter.getMemberIds().split(",");
                     MemberNotice memberNotice;
                     for (String id : ids) {

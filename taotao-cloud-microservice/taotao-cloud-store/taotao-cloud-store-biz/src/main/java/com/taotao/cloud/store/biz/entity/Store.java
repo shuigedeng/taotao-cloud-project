@@ -11,8 +11,6 @@ import javax.persistence.Table;
 
 /**
  * 店铺
- *
- * @since 2020-02-18 15:18:56
  */
 @Entity
 @Table(name = Store.TABLE_NAME)
@@ -20,7 +18,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = Store.TABLE_NAME, comment = "店铺表")
 public class Store extends BaseSuperEntity<Store, Long> {
 
-	public static final String TABLE_NAME = "li_store";
+	public static final String TABLE_NAME = "tt_store";
 
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员Id'")
 	private String memberId;

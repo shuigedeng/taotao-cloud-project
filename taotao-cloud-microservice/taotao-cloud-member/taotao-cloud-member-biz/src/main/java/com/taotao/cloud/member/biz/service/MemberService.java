@@ -4,11 +4,16 @@ package com.taotao.cloud.member.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.dto.MemberEditDTO;
+import com.taotao.cloud.member.api.dto.MemberSearchPageDTO;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
 import com.taotao.cloud.member.api.vo.MemberVO;
+import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
+import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.entity.Member;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +82,7 @@ public interface MemberService extends IService<Member> {
      * @param memberEditDTO 会员修改信息
      * @return 修改后的会员
      */
-    Member editOwn(MemberEditDTO memberEditDTO);
+    Boolean editOwn(MemberEditDTO memberEditDTO);
 
     /**
      * 修改用户密码
@@ -86,7 +91,7 @@ public interface MemberService extends IService<Member> {
      * @param newPassword 新密码
      * @return 操作结果
      */
-    Member modifyPass(String oldPassword, String newPassword);
+    Boolean modifyPass(String oldPassword, String newPassword);
 
     /**
      * 注册会员
@@ -104,8 +109,7 @@ public interface MemberService extends IService<Member> {
      * @param mobile 手机号
      * @return 操作结果
      */
-    boolean changeMobile(String mobile);
-
+    Boolean changeMobile(String mobile);
 
     /**
      * 通过手机号修改密码
@@ -114,7 +118,7 @@ public interface MemberService extends IService<Member> {
      * @param password 密码
      * @return
      */
-    boolean resetByMobile(String mobile, String password);
+    Boolean resetByMobile(String mobile, String password);
 
     /**
      * 后台-添加会员
@@ -122,7 +126,7 @@ public interface MemberService extends IService<Member> {
      * @param memberAddDTO 会员
      * @return 会员
      */
-    Member addMember(MemberAddDTO memberAddDTO);
+    Boolean addMember(MemberAddDTO memberAddDTO);
 
     /**
      * 后台-修改会员
@@ -130,16 +134,15 @@ public interface MemberService extends IService<Member> {
      * @param managerMemberEditDTO 后台修改会员参数
      * @return 会员
      */
-    Member updateMember(ManagerMemberEditDTO managerMemberEditDTO);
+    Boolean updateMember(ManagerMemberEditDTO managerMemberEditDTO);
 
     /**
      * 获取会员分页
      *
-     * @param memberSearchVO 会员搜索VO
-     * @param page           分页
+     * @param memberSearchPageDTO 会员搜索VO
      * @return 会员分页
      */
-    IPage<MemberVO> getMemberPage(MemberSearchVO memberSearchVO, PageVO page);
+    IPage<Member> getMemberPage(MemberSearchPageDTO memberSearchPageDTO);
 
     /**
      * 一键注册会员
@@ -199,7 +202,7 @@ public interface MemberService extends IService<Member> {
      * @param memberSearchVO
      * @return 会员总数
      */
-    long getMemberNum(MemberSearchVO memberSearchVO);
+    Long getMemberNum(MemberSearchVO memberSearchVO);
 
     /**
      * 获取指定会员数据

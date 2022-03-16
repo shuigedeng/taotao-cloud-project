@@ -3,9 +3,13 @@ package com.taotao.cloud.member.biz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.vo.MemberSignVO;
@@ -13,37 +17,38 @@ import com.taotao.cloud.member.biz.entity.MemberSign;
 import com.taotao.cloud.member.biz.mapper.MemberSignMapper;
 import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.member.biz.service.MemberSignService;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.setting.PointSetting;
+import com.taotao.cloud.sys.api.setting.PointSettingItem;
+import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import java.util.Date;
 import java.util.List;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 会员签到业务层实现
- *
- * @author pikachu
- * @since 2020-02-25 14:10:16
  */
 @Service
 public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberSign> implements
 	MemberSignService {
 
-	/**
-	 * RocketMQ
-	 */
-	@Autowired
-	private RocketMQTemplate rocketMQTemplate;
-	/**
-	 * RocketMQ 配置
-	 */
-	@Autowired
-	private RocketmqCustomProperties rocketmqCustomProperties;
+	///**
+	// * RocketMQ
+	// */
+	//@Autowired
+	//private RocketMQTemplate rocketMQTemplate;
+	///**
+	// * RocketMQ 配置
+	// */
+	//@Autowired
+	//private RocketmqCustomProperties rocketmqCustomProperties;
 	/**
 	 * 配置
 	 */
 	@Autowired
-	private SettingService settingService;
+	private IFeignSettingService feignSettingService;
 	/**
 	 * 会员
 	 */
@@ -82,10 +87,10 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 		int result = this.baseMapper.insert(memberSign);
 		//签到成功后发送消息赠送积分
 		if (result > 0) {
-			String destination = rocketmqCustomProperties.getMemberTopic() + ":"
-				+ MemberTagsEnum.MEMBER_SING.name();
-			rocketMQTemplate.asyncSend(destination, memberSign,
-				RocketmqSendCallbackBuilder.commonCallback());
+			//String destination = rocketmqCustomProperties.getMemberTopic() + ":"
+			//	+ MemberTagsEnum.MEMBER_SING.name();
+			//rocketMQTemplate.asyncSend(destination, memberSign,
+			//	RocketmqSendCallbackBuilder.commonCallback());
 			return true;
 		}
 		return false;
@@ -102,7 +107,9 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 	public void memberSignSendPoint(String memberId, Integer day) {
 		try {
 			//获取签到积分赠送设置
-			Setting setting = settingService.get(SettingEnum.POINT_SETTING.name());
+			Result<SettingVO> settingResult = feignSettingService.get(
+				SettingEnum.POINT_SETTING.name());
+			SettingVO setting = settingResult.data();
 			if (setting != null) {
 				PointSetting pointSetting = new Gson().fromJson(setting.getSettingValue(),
 					PointSetting.class);
@@ -128,7 +135,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 					content);
 			}
 		} catch (Exception e) {
-			log.error("会员签到错误", e);
+			LogUtil.error("会员签到错误", e);
 		}
 	}
 

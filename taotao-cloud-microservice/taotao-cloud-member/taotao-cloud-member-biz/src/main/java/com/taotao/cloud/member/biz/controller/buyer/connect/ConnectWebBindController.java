@@ -2,6 +2,7 @@
 package com.taotao.cloud.member.biz.controller.buyer.connect;
 
 
+import cn.hutool.core.lang.UUID;
 import com.alibaba.nacos.common.utils.UuidUtils;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -54,10 +55,10 @@ public class ConnectWebBindController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/login/web/{type}")
 	public Result<String> webAuthorize(
-		@Parameter(allowableValues = "QQ,WECHAT,WECHAT_PC", name = "type", description = "登录方式:QQ,微信,微信_PC") @PathVariable String type,
+		@Parameter(name = "type", description = "登录方式:QQ,微信,微信_PC QQ,WECHAT,WECHAT_PC") @PathVariable String type,
 		HttpServletResponse response) throws IOException {
 		AuthRequest authRequest = connectUtil.getAuthRequest(type);
-		String authorizeUrl = authRequest.authorize(UuidUtils.getUUID());
+		String authorizeUrl = authRequest.authorize(UUID.fastUUID().toString());
 		response.sendRedirect(authorizeUrl);
 		return Result.success(authorizeUrl);
 	}

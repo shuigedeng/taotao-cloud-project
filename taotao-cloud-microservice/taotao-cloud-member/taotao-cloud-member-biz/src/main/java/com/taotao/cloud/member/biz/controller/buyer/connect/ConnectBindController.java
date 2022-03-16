@@ -29,19 +29,19 @@ public class ConnectBindController {
 	@Autowired
 	private ConnectService connectService;
 
-	@Operation(summary = "unionID绑定", description = "unionID绑定", method = CommonConstant.POST)
-	@RequestLogger(description = "unionID绑定")
+	@Operation(summary = "unionId绑定", description = "unionId绑定", method = CommonConstant.POST)
+	@RequestLogger(description = "unionId绑定")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public void unionIDBind(@RequestParam String unionID, @RequestParam String type) {
-		connectService.bind(unionID, type);
+	public void unionIdBind(@RequestParam String unionId, @RequestParam String type) {
+		connectService.bind(unionId, type);
 	}
 
 	@Operation(summary = "unionID解绑", description = "unionID解绑", method = CommonConstant.POST)
 	@RequestLogger(description = "unionID解绑")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/unbind")
-	public void unionIDBind(@RequestParam String type) {
+	public void unionIdunBind(@RequestParam String type) {
 		connectService.unbind(type);
 	}
 

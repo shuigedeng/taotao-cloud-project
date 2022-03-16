@@ -6,9 +6,6 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 会员积分历史数据处理层
- *
- * 
- * @since 2020-02-25 14:10:16
  */
 public interface MemberPointsHistoryMapper extends BaseMapper<MemberPointsHistory> {
 

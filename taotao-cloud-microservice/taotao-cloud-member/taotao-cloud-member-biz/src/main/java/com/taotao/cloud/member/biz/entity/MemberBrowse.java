@@ -5,6 +5,7 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.Data;
 
 
 /**
@@ -14,6 +15,7 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:35:23
  */
+@Data
 @Entity
 @Table(name = MemberBrowse.TABLE_NAME)
 @TableName(MemberBrowse.TABLE_NAME)
@@ -21,6 +23,7 @@ import javax.persistence.Table;
 public class MemberBrowse extends BaseSuperEntity<MemberBrowse, Long> {
 
 	public static final String TABLE_NAME = "tt_member_browse";
+
 	/**
 	 * 会员ID
 	 */
@@ -36,28 +39,4 @@ public class MemberBrowse extends BaseSuperEntity<MemberBrowse, Long> {
 	 */
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(32) not null comment '规格ID'")
 	private String skuId;
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
 }

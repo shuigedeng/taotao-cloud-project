@@ -31,18 +31,17 @@ public class GoodsCollectionServiceImpl extends
 	GoodsCollectionService {
 
 	@Override
-	public PageModel<GoodsCollectionVO> goodsCollection(PageParam pageParam) {
+	public IPage<GoodsCollectionVO> goodsCollection(PageParam pageParam) {
 		QueryWrapper<GoodsCollectionVO> queryWrapper = Wrappers.query();
 		queryWrapper.eq("gc.member_id", SecurityUtil.getUserId());
 		queryWrapper.groupBy("gc.id");
 		queryWrapper.orderByDesc("gc.create_time");
-		IPage<GoodsCollectionVO> goodsCollectionPage = this.baseMapper.goodsCollectionVOList(
+		return this.baseMapper.goodsCollectionVOList(
 			pageParam.buildMpPage(), queryWrapper);
-		return PageModel.convertMybatisPage(goodsCollectionPage, GoodsCollectionVO.class);
 	}
 
 	@Override
-	public boolean isCollection(String skuId) {
+	public Boolean isCollection(String skuId) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId());
 		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
@@ -50,7 +49,7 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public boolean addGoodsCollection(String skuId) {
+	public Boolean addGoodsCollection(String skuId) {
 		MemberGoodsCollection memberGoodsCollection = this.getOne(
 			new LambdaUpdateWrapper<MemberGoodsCollection>()
 				.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId())
@@ -64,7 +63,7 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public boolean deleteGoodsCollection(String skuId) {
+	public Boolean deleteGoodsCollection(String skuId) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId());
 		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
@@ -72,14 +71,14 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public boolean deleteGoodsCollection(List<String> goodsIds) {
+	public Boolean deleteGoodsCollection(List<String> goodsIds) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.in(MemberGoodsCollection::getSkuId, goodsIds);
 		return this.remove(queryWrapper);
 	}
 
 	@Override
-	public boolean deleteSkuCollection(List<String> skuIds) {
+	public Boolean deleteSkuCollection(List<String> skuIds) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.in(MemberGoodsCollection::getSkuId, skuIds);
 		return this.remove(queryWrapper);

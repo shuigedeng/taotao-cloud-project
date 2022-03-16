@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils.common;
 
 import cn.hutool.core.util.CharsetUtil;
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
@@ -87,12 +88,12 @@ public class SecurityUtil {
 	 */
 	public static SecurityUser getUser(Authentication authentication) {
 		if (Objects.isNull(authentication)) {
-			throw new BusinessException("用户未登录");
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 
 		Object principal = authentication.getPrincipal();
 		if (Objects.isNull(principal)) {
-			throw new BusinessException("用户未登录");
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 
 		if (principal instanceof SecurityUser) {

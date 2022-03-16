@@ -24,7 +24,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param evaluationQueryParams 评价查询
      * @return 评价分页
      */
-    PageModel<MemberEvaluationVO> managerQuery(EvaluationQueryParams evaluationQueryParams);
+    IPage<MemberEvaluation> managerQuery(EvaluationQueryParams evaluationQueryParams);
 
     /**
      * 查询评价分页列表
