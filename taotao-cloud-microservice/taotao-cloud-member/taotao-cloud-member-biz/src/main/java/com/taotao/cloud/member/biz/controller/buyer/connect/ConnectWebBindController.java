@@ -2,10 +2,19 @@
 package com.taotao.cloud.member.biz.controller.buyer.connect;
 
 
+import com.alibaba.nacos.common.utils.UuidUtils;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
+import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
+import com.taotao.cloud.member.biz.connect.request.AuthRequest;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
+import com.taotao.cloud.member.biz.connect.token.Token;
+import com.taotao.cloud.member.biz.connect.util.ConnectUtil;
 import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -98,7 +107,7 @@ public class ConnectWebBindController {
 		try {
 			return Result.success(connectService.appLoginCallback(authUser, uuid));
 		} catch (Exception e) {
-			log.error("unionID登录错误", e);
+			LogUtil.error("unionID登录错误", e);
 		}
 		return null;
 	}

@@ -5,6 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
+import com.taotao.cloud.member.biz.connect.token.Token;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;

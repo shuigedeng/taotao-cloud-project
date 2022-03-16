@@ -1,11 +1,28 @@
 package com.taotao.cloud.member.biz.connect.util;
 
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthResponse;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
+import com.taotao.cloud.member.biz.connect.exception.AuthException;
+import com.taotao.cloud.member.biz.connect.request.AuthRequest;
+import com.taotao.cloud.member.biz.connect.request.BaseAuthQQRequest;
+import com.taotao.cloud.member.biz.connect.request.BaseAuthWeChatPCRequest;
+import com.taotao.cloud.member.biz.connect.request.BaseAuthWeChatRequest;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
+import com.taotao.cloud.member.biz.connect.token.Token;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.setting.connect.QQConnectSetting;
+import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;
+import com.taotao.cloud.sys.api.setting.connect.dto.QQConnectSettingItem;
+import com.taotao.cloud.sys.api.setting.connect.dto.WechatConnectSettingItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,12 +36,11 @@ import java.util.regex.Pattern;
 /**
  * 联合登陆工具类
  */
-@Slf4j
 @Component
 public class ConnectUtil {
 
     @Autowired
-    private Cache cache;
+    private RedisRepository redisRepository;
     @Autowired
     private ConnectService connectService;
     @Autowired
@@ -193,8 +209,8 @@ public class ConnectUtil {
     /**
      * 移动设备正则匹配：手机端、平板
      */
-    static Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
-    static Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);
+    public static final Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
+    public static final Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);
 
     /**
      * 检测是否是移动设备访问
