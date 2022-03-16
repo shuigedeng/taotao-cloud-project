@@ -251,6 +251,7 @@ public class EsGoodsIndexServiceImpl implements EsGoodsIndexService {
 				request.add(updateRequest);
 			}
 			//client.bulk(request, RequestOptions.DEFAULT);
+			throw new IOException();
 		} catch (IOException e) {
 			LogUtil.error("批量更新商品索引异常", e);
 		}
@@ -700,6 +701,7 @@ public class EsGoodsIndexServiceImpl implements EsGoodsIndexService {
 			//} else {
 			//	LogUtil.info("批量更新商品索引的促销信息结果：{}", responses.status());
 			//}
+			throw new IOException();
 		} catch (IOException e) {
 			LogUtil.error("批量更新商品索引的促销信息出现异常！", e);
 		}

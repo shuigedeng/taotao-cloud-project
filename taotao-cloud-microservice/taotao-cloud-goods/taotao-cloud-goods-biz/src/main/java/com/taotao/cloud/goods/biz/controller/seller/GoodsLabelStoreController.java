@@ -63,7 +63,8 @@ public class GoodsLabelStoreController {
 	public Result<StoreGoodsLabel> add(@Validated StoreGoodsLabel storeGoodsLabel) {
 		//String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		//storeGoodsLabel.setStoreId(storeId);
-		return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
+		//return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
+		return null;
 	}
 
 	@Operation(summary = "修改店铺商品分类", description = "修改店铺商品分类", method = CommonConstant.PUT)

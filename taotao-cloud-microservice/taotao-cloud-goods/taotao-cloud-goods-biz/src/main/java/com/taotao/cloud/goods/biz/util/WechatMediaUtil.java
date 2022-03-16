@@ -100,7 +100,7 @@ public class WechatMediaUtil {
 			resultIn.close();
 			urlConn.disconnect();
 		} catch (Exception e) {
-			log.error("微信媒体上传失败", e);
+			LogUtil.error("微信媒体上传失败", e);
 		}
 
 		assert resultStr != null;
