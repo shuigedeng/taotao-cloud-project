@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 /**
  * 促销商品数据传输对象
  **/
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class PromotionGoodsDTO extends PromotionGoods {
+//public class PromotionGoodsDTO extends PromotionGoods {
+public class PromotionGoodsDTO  {
 
     private static final long serialVersionUID = 9206970681612883421L;
 
@@ -25,7 +25,7 @@ public class PromotionGoodsDTO extends PromotionGoods {
     @Schema(description =  "商品图片")
     private String goodsImage;
 
-    public PromotionGoodsDTO(GoodsSku sku) {
-        super(sku);
-    }
+    //public PromotionGoodsDTO(GoodsSku sku) {
+    //    super(sku);
+    //}
 }

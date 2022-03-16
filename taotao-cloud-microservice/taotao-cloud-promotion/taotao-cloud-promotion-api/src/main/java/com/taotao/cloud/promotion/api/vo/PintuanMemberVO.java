@@ -38,10 +38,10 @@ public class PintuanMemberVO {
     @Schema(description =  "成团人数")
     private long groupNum;
 
-    public PintuanMemberVO(Member member) {
-        this.memberId = member.getId();
-        this.memberName = member.getUsername();
-        this.face = member.getFace();
-        this.nickName = member.getNickName();
-    }
+    //public PintuanMemberVO(Member member) {
+    //    this.memberId = member.getId();
+    //    this.memberName = member.getUsername();
+    //    this.face = member.getFace();
+    //    this.nickName = member.getNickName();
+    //}
 }

@@ -9,8 +9,8 @@ import lombok.Data;
 @Data
 public class KanjiaActivityGoodsVO {
 
-    @Schema(description =  "商品规格详细信息")
-    private GoodsSku goodsSku;
+    //@Schema(description =  "商品规格详细信息")
+    //private GoodsSku goodsSku;
 
     @Schema(description =  "最低购买金额")
     private Double purchasePrice;

@@ -146,14 +146,14 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param goods 商品信息(Id,MarketEnable/AuthFlag)
 	 */
-	void updateGoodsSkuStatus(Goods goods);
+	Boolean updateGoodsSkuStatus(Goods goods);
 
 	/**
 	 * 发送生成ES商品索引
 	 *
 	 * @param goods 商品信息
 	 */
-	Boolean generateEs(Goods goods);
+	void generateEs(Goods goods);
 
 	/**
 	 * 更新SKU库存

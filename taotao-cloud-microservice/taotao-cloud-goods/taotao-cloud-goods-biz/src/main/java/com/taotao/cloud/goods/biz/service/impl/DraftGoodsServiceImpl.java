@@ -54,36 +54,39 @@ public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGo
 
 	@Override
 	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
-		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
-		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
-		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
-		return this.save(draftGoods);
+		//draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
+		//draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
+		//draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
+		//return this.save(draftGoods);
+		return true;
 	}
 
 	@Override
 	public Boolean updateGoodsDraft(DraftGoodsDTO draftGoods) {
-		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
-		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
-		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
-		return this.updateById(draftGoods);
+		//draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
+		//draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
+		//draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
+		//return this.updateById(draftGoods);
+		return true;
 	}
 
 	@Override
 	public Boolean saveGoodsDraft(DraftGoodsDTO draftGoods) {
 
-		if (draftGoods.getGoodsGalleryList() != null && !draftGoods.getGoodsGalleryList()
-			.isEmpty()) {
-			GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(
-				draftGoods.getGoodsGalleryList().get(0));
-			draftGoods.setOriginal(goodsGallery.getOriginal());
-			draftGoods.setSmall(goodsGallery.getSmall());
-			draftGoods.setThumbnail(goodsGallery.getThumbnail());
-		}
-		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
-		draftGoods.setSkuListJson(
-			JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.getSkuList())));
-		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
-		return this.saveOrUpdate(draftGoods);
+		//if (draftGoods.getGoodsGalleryList() != null && !draftGoods.getGoodsGalleryList()
+		//	.isEmpty()) {
+		//	GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(
+		//		draftGoods.getGoodsGalleryList().get(0));
+		//	draftGoods.setOriginal(goodsGallery.getOriginal());
+		//	draftGoods.setSmall(goodsGallery.getSmall());
+		//	draftGoods.setThumbnail(goodsGallery.getThumbnail());
+		//}
+		//draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
+		//draftGoods.setSkuListJson(
+		//	JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.getSkuList())));
+		//draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
+		//return this.saveOrUpdate(draftGoods);
+		return true;
 	}
 
 	@Override

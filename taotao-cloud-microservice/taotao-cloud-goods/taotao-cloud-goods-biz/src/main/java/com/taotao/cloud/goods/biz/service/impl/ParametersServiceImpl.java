@@ -33,11 +33,11 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	@Autowired
 	private GoodsService goodsService;
 
-	@Autowired
-	private RocketmqCustomProperties rocketmqCustomProperties;
+	//@Autowired
+	//private RocketmqCustomProperties rocketmqCustomProperties;
 
-	@Autowired
-	private RocketMQTemplate rocketMQTemplate;
+	//@Autowired
+	//private RocketMQTemplate rocketMQTemplate;
 
 	/**
 	 * 更新参数组信息
@@ -73,11 +73,11 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 				goodsIds.add(goods.get("id").toString());
 			}
 
-			String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
-				+ GoodsTagsEnum.UPDATE_GOODS_INDEX.name();
-			//发送mq消息
-			rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goodsIds),
-				RocketmqSendCallbackBuilder.commonCallback());
+			//String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
+			//	+ GoodsTagsEnum.UPDATE_GOODS_INDEX.name();
+			////发送mq消息
+			//rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goodsIds),
+			//	RocketmqSendCallbackBuilder.commonCallback());
 		}
 		return this.updateById(parameters);
 	}
@@ -109,7 +109,7 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	 */
 	private void setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, Parameters parameters) {
 		if (goodsParamsItemDTO.getParamId().equals(parameters.getId())) {
-			goodsParamsItemDTO.setParamId(parameters.getId());
+			//goodsParamsItemDTO.setParamId(parameters.getId());
 			goodsParamsItemDTO.setParamName(parameters.getParamName());
 			goodsParamsItemDTO.setRequired(parameters.getRequired());
 			goodsParamsItemDTO.setIsIndex(parameters.getIsIndex());

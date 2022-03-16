@@ -121,12 +121,13 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 
 	@Override
 	public IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus) {
-		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
-			new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)
-				.eq(auditStatus != null, "c.audit_status", auditStatus)
-				.eq(Objects.requireNonNull(UserContext.getCurrentUser()).getRole()
-						.equals(UserEnums.STORE), "c.store_id",
-					UserContext.getCurrentUser().getStoreId())
-				.orderByDesc("create_time"));
+		//return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
+		//	new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)
+		//		.eq(auditStatus != null, "c.audit_status", auditStatus)
+		//		.eq(Objects.requireNonNull(UserContext.getCurrentUser()).getRole()
+		//				.equals(UserEnums.STORE), "c.store_id",
+		//			UserContext.getCurrentUser().getStoreId())
+		//		.orderByDesc("create_time"));
+		return null;
 	}
 }

@@ -9,9 +9,9 @@ import lombok.EqualsAndHashCode;
 /**
  * 砍价活动搜索参数
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {
+//public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {
+public class KanjiaActivitySearchParams {
 
     @Schema(description =  "砍价活动ID")
     private String id;

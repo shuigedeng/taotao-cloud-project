@@ -1,6 +1,14 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
+import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
+import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
+import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

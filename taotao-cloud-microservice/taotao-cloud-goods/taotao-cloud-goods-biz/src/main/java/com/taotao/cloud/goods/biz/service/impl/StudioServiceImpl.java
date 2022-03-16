@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.api.vo.StudioVO;
@@ -43,17 +44,17 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 	private StudioCommodityService studioCommodityService;
 	@Resource
 	private CommodityMapper commodityMapper;
-	@Autowired
-	private TimeTrigger timeTrigger;
-	@Autowired
-	private RocketmqCustomProperties rocketmqCustomProperties;
+	//@Autowired
+	//private TimeTrigger timeTrigger;
+	//@Autowired
+	//private RocketmqCustomProperties rocketmqCustomProperties;
 	@Autowired
 	private GoodsService goodsService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId());
+		//studio.setStoreId(Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));
@@ -62,26 +63,26 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 		//直播间添加成功发送直播间开启、关闭延时任务
 		if (this.save(studio)) {
 			//直播开启延时任务
-			BroadcastMessage broadcastMessage = new BroadcastMessage(studio.getId(),
-				StudioStatusEnum.START.name());
-			TimeTriggerMsg timeTriggerMsg = new TimeTriggerMsg(
-				TimeExecuteConstant.BROADCAST_EXECUTOR,
-				Long.parseLong(studio.getStartTime()) * 1000L,
-				broadcastMessage,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
-				rocketmqCustomProperties.getPromotionTopic());
-
-			//发送促销活动开始的延时任务
-			this.timeTrigger.addDelay(timeTriggerMsg);
-
-			//直播结束延时任务
-			broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.END.name());
-			timeTriggerMsg = new TimeTriggerMsg(TimeExecuteConstant.BROADCAST_EXECUTOR,
-				Long.parseLong(studio.getEndTime()) * 1000L, broadcastMessage,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
-				rocketmqCustomProperties.getPromotionTopic());
-			//发送促销活动开始的延时任务
-			this.timeTrigger.addDelay(timeTriggerMsg);
+			//BroadcastMessage broadcastMessage = new BroadcastMessage(studio.getId(),
+			//	StudioStatusEnum.START.name());
+			//TimeTriggerMsg timeTriggerMsg = new TimeTriggerMsg(
+			//	TimeExecuteConstant.BROADCAST_EXECUTOR,
+			//	Long.parseLong(studio.getStartTime()) * 1000L,
+			//	broadcastMessage,
+			//	DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+			//	rocketmqCustomProperties.getPromotionTopic());
+			//
+			////发送促销活动开始的延时任务
+			//this.timeTrigger.addDelay(timeTriggerMsg);
+			//
+			////直播结束延时任务
+			//broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.END.name());
+			//timeTriggerMsg = new TimeTriggerMsg(TimeExecuteConstant.BROADCAST_EXECUTOR,
+			//	Long.parseLong(studio.getEndTime()) * 1000L, broadcastMessage,
+			//	DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+			//	rocketmqCustomProperties.getPromotionTopic());
+			////发送促销活动开始的延时任务
+			//this.timeTrigger.addDelay(timeTriggerMsg);
 		}
 		return true;
 
@@ -95,27 +96,27 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 		if (this.updateById(studio)) {
 			//发送更新延时任务
 			//直播间开始
-			BroadcastMessage broadcastMessage = new BroadcastMessage(studio.getId(),
-				StudioStatusEnum.START.name());
-			this.timeTrigger.edit(
-				TimeExecuteConstant.BROADCAST_EXECUTOR,
-				broadcastMessage,
-				Long.parseLong(oldStudio.getStartTime()) * 1000L,
-				Long.parseLong(studio.getStartTime()) * 1000L,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
-				DateUtil.getDelayTime(Long.parseLong(studio.getStartTime())),
-				rocketmqCustomProperties.getPromotionTopic());
-
-			//直播间结束
-			broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.START.name());
-			this.timeTrigger.edit(
-				TimeExecuteConstant.BROADCAST_EXECUTOR,
-				broadcastMessage,
-				Long.parseLong(oldStudio.getEndTime()) * 1000L,
-				Long.parseLong(studio.getEndTime()) * 1000L,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
-				DateUtil.getDelayTime(Long.parseLong(studio.getEndTime())),
-				rocketmqCustomProperties.getPromotionTopic());
+			//BroadcastMessage broadcastMessage = new BroadcastMessage(studio.getId(),
+			//	StudioStatusEnum.START.name());
+			//this.timeTrigger.edit(
+			//	TimeExecuteConstant.BROADCAST_EXECUTOR,
+			//	broadcastMessage,
+			//	Long.parseLong(oldStudio.getStartTime()) * 1000L,
+			//	Long.parseLong(studio.getStartTime()) * 1000L,
+			//	DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+			//	DateUtil.getDelayTime(Long.parseLong(studio.getStartTime())),
+			//	rocketmqCustomProperties.getPromotionTopic());
+			//
+			////直播间结束
+			//broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.START.name());
+			//this.timeTrigger.edit(
+			//	TimeExecuteConstant.BROADCAST_EXECUTOR,
+			//	broadcastMessage,
+			//	Long.parseLong(oldStudio.getEndTime()) * 1000L,
+			//	Long.parseLong(studio.getEndTime()) * 1000L,
+			//	DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+			//	DateUtil.getDelayTime(Long.parseLong(studio.getEndTime())),
+			//	rocketmqCustomProperties.getPromotionTopic());
 		}
 		return true;
 	}
@@ -124,10 +125,10 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 	public StudioVO getStudioVO(String id) {
 		StudioVO studioVO = new StudioVO();
 		Studio studio = this.getById(id);
-		//获取直播间信息
-		BeanUtil.copyProperties(studio, studioVO);
-		//获取直播间商品信息
-		studioVO.setCommodityList(commodityMapper.getCommodityByRoomId(studioVO.getRoomId()));
+		////获取直播间信息
+		//BeanUtil.copyProperties(studio, studioVO);
+		////获取直播间商品信息
+		//studioVO.setCommodityList(commodityMapper.getCommodityByRoomId(studioVO.getRoomId()));
 		return studioVO;
 	}
 
@@ -164,7 +165,7 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 
 		//调用微信接口添加直播间商品并进行记录
 		if (Boolean.TRUE.equals(wechatLivePlayerUtil.pushGoods(roomId, goodsId))) {
-			studioCommodityService.save(new StudioCommodity(roomId, goodsId));
+			//studioCommodityService.save(new StudioCommodity(roomId, goodsId));
 			//添加直播间商品数量
 			Studio studio = this.getByRoomId(roomId);
 			studio.setRoomGoodsNum(
@@ -205,25 +206,24 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 	}
 
 	@Override
-	public IPage<Studio> studioList(PageVO pageVO, Integer recommend, String status) {
+	public IPage<Studio> studioList(PageParam pageParam, Integer recommend, String status) {
 		QueryWrapper queryWrapper = new QueryWrapper<Studio>()
 			.eq(recommend != null, "recommend", true)
 			.eq(status != null, "status", status)
 			.orderByDesc("create_time");
-		if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole()
-			.equals(UserEnums.STORE)) {
-			queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
-		}
-		return this.page(PageUtil.initPage(pageVO), queryWrapper);
-
+		//if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole()
+		//	.equals(UserEnums.STORE)) {
+		//	queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
+		//}
+		return this.page(pageParam.buildMpPage(), queryWrapper);
 	}
 
-	@Override
-	public Boolean updateStudioStatus(BroadcastMessage broadcastMessage) {
-		return this.update(new LambdaUpdateWrapper<Studio>()
-			.eq(Studio::getId, broadcastMessage.getStudioId())
-			.set(Studio::getStatus, broadcastMessage.getStatus()));
-	}
+	//@Override
+	//public Boolean updateStudioStatus(BroadcastMessage broadcastMessage) {
+	//	return this.update(new LambdaUpdateWrapper<Studio>()
+	//		.eq(Studio::getId, broadcastMessage.getStudioId())
+	//		.set(Studio::getStatus, broadcastMessage.getStatus()));
+	//}
 
 	/**
 	 * 根据直播间ID获取直播间

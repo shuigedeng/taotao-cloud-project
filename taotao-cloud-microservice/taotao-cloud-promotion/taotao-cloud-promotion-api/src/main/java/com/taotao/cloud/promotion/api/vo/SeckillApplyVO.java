@@ -7,7 +7,8 @@ import lombok.EqualsAndHashCode;
  * 秒杀活动申请视图对象
  **/
 @Data
-public class SeckillApplyVO extends SeckillApply {
+//public class SeckillApplyVO extends SeckillApply {
+public class SeckillApplyVO  {
 
     private static final long serialVersionUID = 7076774723400062602L;
 

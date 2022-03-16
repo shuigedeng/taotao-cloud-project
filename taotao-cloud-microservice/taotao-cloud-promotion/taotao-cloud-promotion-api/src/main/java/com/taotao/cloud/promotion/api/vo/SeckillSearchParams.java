@@ -1,6 +1,8 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
