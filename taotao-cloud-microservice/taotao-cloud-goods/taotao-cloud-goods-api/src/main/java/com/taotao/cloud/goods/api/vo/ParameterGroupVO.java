@@ -12,8 +12,8 @@ import lombok.Data;
 public class ParameterGroupVO implements Serializable {
 
 	private static final long serialVersionUID = 724427321881170297L;
-	@Schema(description = "参数组关联的参数集合")
-	private List<Parameters> params;
+	//@Schema(description = "参数组关联的参数集合")
+	//private List<Parameters> params;
 	@Schema(description = "参数组名称")
 	private String groupName;
 	@Schema(description = "参数组id")

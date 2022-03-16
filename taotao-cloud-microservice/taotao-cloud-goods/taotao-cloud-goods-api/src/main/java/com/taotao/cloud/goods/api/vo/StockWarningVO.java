@@ -17,7 +17,7 @@ public class StockWarningVO {
 	@Schema(description = "库存警告数量")
 	private Integer stockWarningNum;
 
-	@Schema(description = "商品SKU列表")
-	private IPage<GoodsSku> goodsSkuPage;
+	//@Schema(description = "商品SKU列表")
+	//private IPage<GoodsSku> goodsSkuPage;
 
 }

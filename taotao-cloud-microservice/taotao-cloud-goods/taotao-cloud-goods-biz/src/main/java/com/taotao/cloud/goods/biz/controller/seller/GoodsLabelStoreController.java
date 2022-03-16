@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
@@ -43,7 +44,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<List<StoreGoodsLabelVO>> list() {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		return Result.success(storeGoodsLabelService.listByStoreId(storeId));
 	}
 
@@ -52,7 +53,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
 	public Result<StoreGoodsLabel> getStoreGoodsLabel(@PathVariable String id) {
-		return Result.success(OperationalJudgment.judgment(storeGoodsLabelService.getById(id)));
+		return Result.success(storeGoodsLabelService.getById(id));
 	}
 
 	@Operation(summary = "添加店铺商品分类", description = "添加店铺商品分类", method = CommonConstant.POST)
@@ -60,8 +61,8 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<StoreGoodsLabel> add(@Validated StoreGoodsLabel storeGoodsLabel) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		storeGoodsLabel.setStoreId(storeId);
+		//String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		//storeGoodsLabel.setStoreId(storeId);
 		return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
 	}
 
@@ -69,8 +70,8 @@ public class GoodsLabelStoreController {
 	@RequestLogger(description = "修改店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<StoreGoodsLabel> edit(@Validated StoreGoodsLabel storeGoodsLabel) {
-		OperationalJudgment.judgment(storeGoodsLabelService.getById(storeGoodsLabel.getId()));
+	public Result<Boolean> edit(@Validated StoreGoodsLabel storeGoodsLabel) {
+		storeGoodsLabelService.getById(storeGoodsLabel.getId());
 		return Result.success(storeGoodsLabelService.editStoreGoodsLabel(storeGoodsLabel));
 	}
 
@@ -78,9 +79,9 @@ public class GoodsLabelStoreController {
 	@RequestLogger(description = "删除店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}")
-	public Result<StoreGoodsLabel> delete(@PathVariable String id) {
-		OperationalJudgment.judgment(storeGoodsLabelService.getById(id));
+	public Result<Boolean> delete(@PathVariable String id) {
+		storeGoodsLabelService.getById(id);
 		storeGoodsLabelService.removeStoreGoodsLabel(id);
-		return Result.success();
+		return Result.success(true);
 	}
 }

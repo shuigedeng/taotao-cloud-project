@@ -161,7 +161,7 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param store
 	 */
-	Boolean updateStoreDetail(Store store);
+	//Boolean updateStoreDetail(Store store);
 
 	/**
 	 * 统计店铺的商品数量

@@ -5,6 +5,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
+import com.taotao.cloud.goods.biz.entity.Parameters;
 import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.ParametersService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -55,36 +56,29 @@ public class CategoryParameterGroupManagerController {
 	@RequestLogger(description = "保存数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<CategoryParameterGroup> saveOrUpdate(
+	public Result<Boolean> saveOrUpdate(
 		@Validated CategoryParameterGroup categoryParameterGroup) {
-		if (categoryParameterGroupService.save(categoryParameterGroup)) {
-			return Result.success(categoryParameterGroup);
-		}
-		throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_SAVE_ERROR);
+			return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.PUT)
 	@RequestLogger(description = "更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<CategoryParameterGroup> update(
+	public Result<Boolean> update(
 		@Validated CategoryParameterGroup categoryParameterGroup) {
-		if (categoryParameterGroupService.updateById(categoryParameterGroup)) {
-			return Result.success(categoryParameterGroup);
-		}
-		throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_UPDATE_ERROR);
+			return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
 	}
 
 	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组", method = CommonConstant.DELETE)
 	@RequestLogger(description = "通过id删除参数组")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Object> delAllByIds(@PathVariable String id) {
+	public Result<Boolean> delAllByIds(@PathVariable String id) {
 		//删除参数
 		parametersService.remove(new QueryWrapper<Parameters>().eq("group_id", id));
 		//删除参数组
-		categoryParameterGroupService.removeById(id);
-		return Result.success();
+		return Result.success(categoryParameterGroupService.removeById(id));
 	}
 
 }

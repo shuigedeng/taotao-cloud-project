@@ -8,9 +8,10 @@ import lombok.Data;
  * 直播间VO
  */
 @Data
-public class StudioVO extends Studio {
+//public class StudioVO extends Studio {
+public class StudioVO  {
 
-    @Schema(description = "直播间商品列表")
-    private List<Commodity> commodityList;
+    //@Schema(description = "直播间商品列表")
+    //private List<Commodity> commodityList;
 
 }

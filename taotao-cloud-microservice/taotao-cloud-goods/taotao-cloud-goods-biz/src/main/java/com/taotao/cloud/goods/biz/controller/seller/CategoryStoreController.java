@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
@@ -42,18 +43,18 @@ public class CategoryStoreController {
 	/**
 	 * 店铺详情
 	 */
-	@Autowired
-	private StoreDetailService storeDetailService;
+	//@Autowired
+	//private StoreDetailService storeDetailService;
 
 	@Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类", method = CommonConstant.GET)
 	@RequestLogger(description = "获取店铺经营的分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<CategoryVO>> getListAll() {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		//获取店铺经营范围
-		String goodsManagementCategory = storeDetailService.getStoreDetail(storeId)
-			.getGoodsManagementCategory();
+		//String goodsManagementCategory = storeDetailService.getStoreDetail(storeId).getGoodsManagementCategory();
+		String goodsManagementCategory = "";
 		return Result.success(
 			this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
 	}

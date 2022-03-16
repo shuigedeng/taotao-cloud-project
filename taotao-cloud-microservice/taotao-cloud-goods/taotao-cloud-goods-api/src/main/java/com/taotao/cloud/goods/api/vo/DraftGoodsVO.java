@@ -9,7 +9,8 @@ import lombok.Data;
  * 草稿商品VO
  */
 @Data
-public class DraftGoodsVO extends DraftGoods {
+//public class DraftGoodsVO extends DraftGoods {
+public class DraftGoodsVO {
 
 	private static final long serialVersionUID = 6377623919990713567L;
 

@@ -87,7 +87,7 @@ public class StoreGoodsLabelServiceImpl extends
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public StoreGoodsLabel addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
+	public Boolean addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//获取当前登录商家账号
 		AuthUser tokenUser = UserContext.getCurrentUser();
 		if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
@@ -98,12 +98,12 @@ public class StoreGoodsLabelServiceImpl extends
 		this.save(storeGoodsLabel);
 		//清除缓存
 		removeCache(storeGoodsLabel.getStoreId());
-		return storeGoodsLabel;
+		return true;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public StoreGoodsLabel editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
+	public Boolean editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//修改当前店铺的商品分类
 		AuthUser tokenUser = UserContext.getCurrentUser();
 		if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
@@ -116,7 +116,7 @@ public class StoreGoodsLabelServiceImpl extends
 		this.update(storeGoodsLabel, lambdaUpdateWrapper);
 		//清除缓存
 		removeCache(storeGoodsLabel.getStoreId());
-		return storeGoodsLabel;
+		return true;
 	}
 
 	@Override

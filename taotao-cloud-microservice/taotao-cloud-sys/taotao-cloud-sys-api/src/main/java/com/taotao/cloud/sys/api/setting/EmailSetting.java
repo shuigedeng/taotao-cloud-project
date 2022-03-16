@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.api.setting;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,12 +13,12 @@ import java.io.Serializable;
 public class EmailSetting implements Serializable {
 
     private static final long serialVersionUID = 7261037221941716140L;
-    @ApiModelProperty(value = "邮箱服务器")
+    @Schema(description =  "邮箱服务器")
     private String host;
 
-    @ApiModelProperty(value = "发送者邮箱账号")
+    @Schema(description =  "发送者邮箱账号")
     private String username;
 
-    @ApiModelProperty(value = "邮箱授权码")
+    @Schema(description =  "邮箱授权码")
     private String password;
 }

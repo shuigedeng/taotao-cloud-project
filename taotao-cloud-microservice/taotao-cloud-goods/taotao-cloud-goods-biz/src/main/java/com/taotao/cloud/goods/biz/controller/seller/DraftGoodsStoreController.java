@@ -2,7 +2,10 @@ package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
 import com.taotao.cloud.goods.api.dto.DraftGoodsSearchParams;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
@@ -42,7 +45,7 @@ public class DraftGoodsStoreController {
 	@GetMapping(value = "/page")
 	public Result<IPage<DraftGoods>> getDraftGoodsByPage(
 		DraftGoodsSearchParams searchParams) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		searchParams.setStoreId(storeId);
 		return Result.success(draftGoodsService.getDraftGoods(searchParams));
 	}
@@ -52,34 +55,33 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<DraftGoodsVO> getDraftGoods(@PathVariable String id) {
-		DraftGoodsVO draftGoods = OperationalJudgment.judgment(draftGoodsService.getDraftGoods(id));
-		return Result.success(draftGoods);
+		return Result.success(draftGoodsService.getDraftGoods(id));
 	}
 
 	@Operation(summary = "保存草稿商品", description = "保存草稿商品", method = CommonConstant.POST)
 	@RequestLogger(description = "保存草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<String> saveDraftGoods(@RequestBody DraftGoodsDTO draftGoodsVO) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		if (draftGoodsVO.getStoreId() == null) {
-			draftGoodsVO.setStoreId(storeId);
-		} else if (draftGoodsVO.getStoreId() != null && !storeId.equals(
-			draftGoodsVO.getStoreId())) {
-			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-		}
-		draftGoodsService.saveGoodsDraft(draftGoodsVO);
-		return Result.success();
+	public Result<Boolean> saveDraftGoods(@RequestBody DraftGoodsDTO draftGoodsVO) {
+		//String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		//if (draftGoodsVO.getStoreId() == null) {
+		//	draftGoodsVO.setStoreId(storeId);
+		//} else if (draftGoodsVO.getStoreId() != null && !storeId.equals(
+		//	draftGoodsVO.getStoreId())) {
+		//	throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
+		//}
+		//draftGoodsService.saveGoodsDraft(draftGoodsVO);
+		return Result.success(true);
 	}
 
 	@Operation(summary = "删除草稿商品", description = "删除草稿商品", method = CommonConstant.DELETE)
 	@RequestLogger(description = "删除草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
-	public Result<String> deleteDraftGoods(@PathVariable String id) {
-		OperationalJudgment.judgment(draftGoodsService.getDraftGoods(id));
+	public Result<Boolean> deleteDraftGoods(@PathVariable String id) {
+		draftGoodsService.getDraftGoods(id);
 		draftGoodsService.deleteGoodsDraft(id);
-		return Result.success();
+		return Result.success(true);
 	}
 
 }

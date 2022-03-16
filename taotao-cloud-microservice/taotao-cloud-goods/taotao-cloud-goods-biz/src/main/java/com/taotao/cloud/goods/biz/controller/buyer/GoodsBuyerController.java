@@ -4,7 +4,6 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
@@ -72,27 +71,19 @@ public class GoodsBuyerController {
 	@GetMapping(value = "/sku/{goodsId}/{skuId}")
 	//@PageViewPoint(type = PageViewEnum.SKU, id = "#id")
 	public Result<Map<String, Object>> getSku(
-		@Parameter(description = "商品ID")@NotNull(message = "商品ID不能为空") @PathVariable("goodsId") String goodsId,
-		@Parameter(description = "SKU_ID")@NotNull(message = "SKU ID不能为空") @PathVariable("skuId") String skuId) {
-		try {
-			// 读取选中的列表
-			Map<String, Object> map = goodsSkuService.getGoodsSkuDetail(goodsId, skuId);
-			return Result.success(map);
-		} catch (ServiceException se) {
-			LogUtil.info(se.getMsg(), se);
-			throw se;
-		} catch (Exception e) {
-			LogUtil.error(ResultEnum.GOODS_ERROR.message(), e);
-			return ResultUtil.error(ResultEnum.GOODS_ERROR);
-		}
-
+		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable("goodsId") String goodsId,
+		@Parameter(description = "SKU_ID") @NotNull(message = "SKU ID不能为空") @PathVariable("skuId") String skuId) {
+		// 读取选中的列表
+		Map<String, Object> map = goodsSkuService.getGoodsSkuDetail(goodsId, skuId);
+		return Result.success(map);
 	}
 
 	@Operation(summary = "获取商品分页列表", description = "获取商品分页列表", method = CommonConstant.GET)
 	@RequestLogger(description = "获取商品分页列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<GoodsBaseVO>> getByPage(@Validated GoodsSearchParams goodsSearchParams) {
+	public Result<PageModel<GoodsBaseVO>> getByPage(
+		@Validated GoodsSearchParams goodsSearchParams) {
 		return Result.success(goodsService.queryByParams(goodsSearchParams));
 	}
 
@@ -112,7 +103,7 @@ public class GoodsBuyerController {
 	@GetMapping("/es/related")
 	public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(
 		EsGoodsSearchDTO goodsSearchParams, PageParam pageParam) {
-		pageVO.setNotConvert(true);
+		//pageVO.setNotConvert(true);
 		EsGoodsRelatedInfo selector = goodsSearchService.getSelector(goodsSearchParams, pageParam);
 		return Result.success(selector);
 	}

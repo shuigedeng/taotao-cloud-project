@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.api.setting;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,19 +13,19 @@ import java.io.Serializable;
 public class ExperienceSetting implements Serializable {
 
     private static final long serialVersionUID = -4261856614779031745L;
-    @ApiModelProperty(value = "注册")
+    @Schema(description =  "注册")
     private Integer register;
 
-    @ApiModelProperty(value = "每日签到经验值")
+    @Schema(description =  "每日签到经验值")
     private Integer signIn;
 
-    @ApiModelProperty(value = "订单评价赠送经验值")
+    @Schema(description =  "订单评价赠送经验值")
     private Integer comment;
 
-    @ApiModelProperty(value = "分享获取经验值")
+    @Schema(description =  "分享获取经验值")
     private Integer share;
 
-    @ApiModelProperty(value = "购物获取经验值,一元*经验值")
+    @Schema(description =  "购物获取经验值,一元*经验值")
     private Integer money;
 
 }

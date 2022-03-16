@@ -1,13 +1,16 @@
 package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.api.vo.StockWarningVO;
@@ -22,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -55,19 +57,19 @@ public class GoodsStoreController {
 	 */
 	@Autowired
 	private GoodsSkuService goodsSkuService;
+
 	/**
 	 * 店铺详情
 	 */
-	@Autowired
-	private StoreDetailService storeDetailService;
-
+	//@Autowired
+	//private StoreDetailService storeDetailService;
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<Goods>> getByPage(GoodsSearchParams goodsSearchParams) {
+	public Result<PageModel<GoodsBaseVO>> getByPage(GoodsSearchParams goodsSearchParams) {
 		//获取当前登录商家账号
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		goodsSearchParams.setStoreId(storeId);
 		return Result.success(goodsService.queryByParams(goodsSearchParams));
 	}
@@ -76,9 +78,9 @@ public class GoodsStoreController {
 	@RequestLogger(description = "分页获取商品Sku列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<IPage<GoodsSku>> getSkuByPage(GoodsSearchParams goodsSearchParams) {
+	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(GoodsSearchParams goodsSearchParams) {
 		//获取当前登录商家账号
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		goodsSearchParams.setStoreId(storeId);
 		return Result.success(goodsSkuService.getGoodsSkuByPage(goodsSearchParams));
 	}
@@ -87,19 +89,17 @@ public class GoodsStoreController {
 	@RequestLogger(description = "分页获取库存告警商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/list/stock/page")
-	public Result<StockWarningVO> getWarningStockByPage(
-		GoodsSearchParams goodsSearchParams) {
+	public Result<StockWarningVO> getWarningStockByPage(GoodsSearchParams goodsSearchParams) {
 		//获取当前登录商家账号
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		StoreDetail storeDetail = OperationalJudgment.judgment(
-			storeDetailService.getStoreDetail(storeId));
-		Integer stockWarnNum = storeDetail.getStockWarning();
-		goodsSearchParams.setStoreId(storeId);
-		goodsSearchParams.setLeQuantity(stockWarnNum);
-		goodsSearchParams.setMarketEnable(GoodsStatusEnum.UPPER.name());
-		IPage<GoodsSku> goodsSku = goodsSkuService.getGoodsSkuByPage(goodsSearchParams);
-		StockWarningVO stockWarning = new StockWarningVO(stockWarnNum, goodsSku);
-		return Result.success(stockWarning);
+		//String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
+		//StoreDetail storeDetail = storeDetailService.getStoreDetail(storeId);
+		//Integer stockWarnNum = storeDetail.getStockWarning();
+		//goodsSearchParams.setStoreId(storeId);
+		//goodsSearchParams.setLeQuantity(stockWarnNum);
+		//goodsSearchParams.setMarketEnable(GoodsStatusEnum.UPPER.name());
+		//PageModel<GoodsSku> goodsSku = goodsSkuService.getGoodsSkuByPage(goodsSearchParams);
+		//StockWarningVO stockWarning = new StockWarningVO(stockWarnNum, goodsSku);
+		return Result.success(null);
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
@@ -107,8 +107,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<GoodsVO> get(@PathVariable String id) {
-		GoodsVO goods = OperationalJudgment.judgment(goodsService.getGoodsVO(id));
-		return Result.success(goods);
+		return Result.success(goodsService.getGoodsVO(id));
 	}
 
 	@Operation(summary = "新增商品", description = "新增商品", method = CommonConstant.POST)
@@ -117,8 +116,7 @@ public class GoodsStoreController {
 	@PostMapping
 	public Result<Boolean> save(
 		@Valid @RequestBody GoodsOperationDTO goodsOperationDTO) {
-		goodsService.addGoods(goodsOperationDTO);
-		return Result.success(true);
+		return Result.success(goodsService.addGoods(goodsOperationDTO));
 	}
 
 	@Operation(summary = "修改商品", description = "修改商品", method = CommonConstant.PUT)
@@ -127,8 +125,7 @@ public class GoodsStoreController {
 	@PutMapping(value = "/{goodsId}")
 	public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO,
 		@PathVariable String goodsId) {
-		goodsService.editGoods(goodsOperationDTO, goodsId);
-		return Result.success(true);
+		return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
 	}
 
 	@Operation(summary = "下架商品", description = "下架商品", method = CommonConstant.PUT)
@@ -136,8 +133,8 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/under")
 	public Result<Boolean> underGoods(@RequestParam List<String> goodsId) {
-		goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架");
-		return Result.success(true);
+		return Result.success(
+			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架"));
 	}
 
 	@Operation(summary = "上架商品", description = "上架商品", method = CommonConstant.PUT)
@@ -145,8 +142,8 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/up")
 	public Result<Boolean> unpGoods(@RequestParam List<String> goodsId) {
-		goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, "");
-		return Result.success(true);
+		return Result.success(
+			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 	}
 
 	@Operation(summary = "删除商品", description = "删除商品", method = CommonConstant.DELETE)
@@ -154,8 +151,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping
 	public Result<Boolean> deleteGoods(@RequestParam List<String> goodsId) {
-		goodsService.deleteGoods(goodsId);
-		return Result.success(true);
+		return Result.success(goodsService.deleteGoods(goodsId));
 	}
 
 	@Operation(summary = "设置商品运费模板", description = "设置商品运费模板", method = CommonConstant.POST)
@@ -164,8 +160,7 @@ public class GoodsStoreController {
 	@PostMapping(value = "/freight")
 	public Result<Boolean> freight(@RequestParam List<String> goodsId,
 		@RequestParam String templateId) {
-		goodsService.freight(goodsId, templateId);
-		return Result.success(true);
+		return Result.success(goodsService.freight(goodsId, templateId));
 	}
 
 	@Operation(summary = "根据goodsId分页获取商品规格列表", description = "根据goodsId分页获取商品规格列表", method = CommonConstant.GET)
@@ -173,7 +168,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
 	public Result<List<GoodsSkuVO>> getSkuByList(@PathVariable String goodsId) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		return Result.success(goodsSkuService.getGoodsSkuVOList(goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId)
 				.eq(GoodsSku::getStoreId, storeId))));
@@ -184,7 +179,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/stocks")
 	public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		// 获取商品skuId集合
 		List<String> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::getSkuId)
 			.collect(Collectors.toList());
@@ -193,12 +188,10 @@ public class GoodsStoreController {
 			new LambdaQueryWrapper<GoodsSku>().in(GoodsSku::getId, goodsSkuIds)
 				.eq(GoodsSku::getStoreId, storeId));
 		// 过滤不符合当前店铺的商品
-		List<String> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId)
-			.collect(Collectors.toList());
+		List<Long> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId).toList();
 		List<GoodsSkuStockDTO> collect = updateStockList.stream()
 			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).collect(Collectors.toList());
-		goodsSkuService.updateStocks(collect);
-		return Result.success(true);
+		return Result.success(goodsSkuService.updateStocks(collect));
 	}
 
 }

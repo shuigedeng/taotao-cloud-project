@@ -16,6 +16,7 @@
 package com.taotao.cloud.dingtalk.entity;
 
 
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.dingtalk.enums.DingerResponseCodeEnum;
 
 /**
@@ -44,8 +45,8 @@ public class DingerResponse {
 
 
 	private DingerResponse(DingerResponseCodeEnum resultCode) {
-		this.code = ResultEnum.code();
-		this.message = ResultEnum.message();
+		this.code = resultCode.code();
+		this.message = resultCode.message();
 	}
 
 	private DingerResponse(String logid, DingerResponseCodeEnum resultCode) {

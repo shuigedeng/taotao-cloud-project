@@ -24,22 +24,22 @@ public class PaymentSupportSetting {
 
     }
 
-    public PaymentSupportSetting(PaymentSupportForm paymentSupportForm) {
-
-        List<PaymentSupportItem> paymentSupportItems = new ArrayList<>();
-
-        for (ClientTypeEnum client : paymentSupportForm.getClients()) {
-            PaymentSupportItem paymentSupportItem = new PaymentSupportItem();
-
-            List<String> supports = new ArrayList<>();
-            for (PaymentMethodEnum payment : paymentSupportForm.getPayments()) {
-                supports.add(payment.name());
-            }
-            paymentSupportItem.setClient(client.name());
-            paymentSupportItem.setSupports(supports);
-            paymentSupportItems.add(paymentSupportItem);
-
-        }
-        this.paymentSupportItems = paymentSupportItems;
-    }
+    //public PaymentSupportSetting(PaymentSupportForm paymentSupportForm) {
+	//
+    //    List<PaymentSupportItem> paymentSupportItems = new ArrayList<>();
+	//
+    //    for (ClientTypeEnum client : paymentSupportForm.getClients()) {
+    //        PaymentSupportItem paymentSupportItem = new PaymentSupportItem();
+	//
+    //        List<String> supports = new ArrayList<>();
+    //        for (PaymentMethodEnum payment : paymentSupportForm.getPayments()) {
+    //            supports.add(payment.name());
+    //        }
+    //        paymentSupportItem.setClient(client.name());
+    //        paymentSupportItem.setSupports(supports);
+    //        paymentSupportItems.add(paymentSupportItem);
+	//
+    //    }
+    //    this.paymentSupportItems = paymentSupportItems;
+    //}
 }
