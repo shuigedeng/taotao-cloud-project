@@ -3,6 +3,8 @@ package com.taotao.cloud.member.biz.controller.manager;
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.entity.MemberGrade;
@@ -66,11 +68,8 @@ public class MemberGradeController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	@PutMapping(value = "/{id}")
-	public Result<Object> update(@PathVariable String id, MemberGrade memberGrade) {
-		if (memberGradeService.updateById(memberGrade)) {
-			return Result.success(ResultEnum.SUCCESS);
-		}
-		throw new BusinessException(ResultEnum.ERROR);
+	public Result<Boolean> update(@PathVariable String id, MemberGrade memberGrade) {
+		return Result.success(memberGradeService.updateById(memberGrade));
 	}
 
 	@Operation(summary = "删除会员等级", description = "删除会员等级", method = CommonConstant.DELETE)
@@ -80,9 +79,7 @@ public class MemberGradeController {
 	public Result<IPage<Object>> delete(@PathVariable String id) {
 		if (memberGradeService.getById(id).getIsDefault()) {
 			throw new BusinessException(ResultEnum.USER_GRADE_IS_DEFAULT);
-		} else if (memberGradeService.removeById(id)) {
-			return Result.success(ResultEnum.SUCCESS);
 		}
-		throw new BusinessException(ResultEnum.ERROR);
+		return Result.success(memberGradeService.removeById(id));
 	}
 }

@@ -77,8 +77,7 @@ public class MemberController {
 	@PutMapping("/status")
 	public Result<Object> updateMemberStatus(@RequestParam List<String> memberIds,
 		@RequestParam Boolean disabled) {
-		memberService.updateMemberStatus(memberIds, disabled);
-		return Result.success();
+		return Result.success(memberService.updateMemberStatus(memberIds, disabled));
 	}
 
 	@Operation(summary = "根据条件查询会员总数", description = "根据条件查询会员总数", method = CommonConstant.GET)

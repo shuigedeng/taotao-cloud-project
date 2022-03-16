@@ -58,8 +58,8 @@ public class MemberEvaluationController {
 	@GetMapping(value = "/status/{id}")
 	public Result<Boolean> updateStatus(@PathVariable String id,
 		@Parameter(description = "显示状态,OPEN 正常 ,CLOSE 关闭", required = true) @NotNull String status) {
-		memberEvaluationService.updateStatus(id, status);
-		return Result.success(true);
+		;
+		return Result.success(memberEvaluationService.updateStatus(id, status));
 	}
 
 	@Operation(summary = "删除评论", description = "删除评论", method = CommonConstant.DELETE)
@@ -67,8 +67,7 @@ public class MemberEvaluationController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delete(@PathVariable String id) {
-		memberEvaluationService.delete(id);
-		return Result.success(true);
+		return Result.success(memberEvaluationService.delete(id));
 	}
 
 }
