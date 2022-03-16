@@ -33,7 +33,7 @@ import com.taotao.cloud.sys.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.api.vo.region.RegionVO;
-import com.taotao.cloud.sys.biz.entity.Region;
+import com.taotao.cloud.sys.biz.entity.region.Region;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IRegionMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;

@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.entity.system.service;
 
-import cn.lili.modules.system.entity.dos.Logistics;
-import cn.lili.modules.system.entity.vo.Traces;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.Logistics;
+import com.taotao.cloud.sys.biz.entity.system.entity.vo.Traces;
 import java.util.List;
 
 /**

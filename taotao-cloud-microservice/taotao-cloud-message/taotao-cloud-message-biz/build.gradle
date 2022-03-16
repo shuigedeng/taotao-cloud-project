@@ -1,6 +1,7 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream')
     implementation project(':taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 

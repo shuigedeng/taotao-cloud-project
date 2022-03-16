@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.entity.system.service;
 
-import cn.lili.modules.system.entity.dos.Setting;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.Setting;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

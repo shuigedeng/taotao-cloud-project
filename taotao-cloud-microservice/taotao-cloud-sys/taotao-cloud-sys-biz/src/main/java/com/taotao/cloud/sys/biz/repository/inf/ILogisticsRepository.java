@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.entity.Logistics;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +27,6 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public interface ILogisticsRepository extends JpaRepository<Logistics, Long> {
+public interface ILogisticsRepository extends JpaRepository<LogisticsConfig, Long> {
 
 }

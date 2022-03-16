@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.entity.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import cn.lili.modules.system.entity.dos.ServiceNotice;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.ServiceNotice;
 
 /**
  * 服务订阅消息业务层

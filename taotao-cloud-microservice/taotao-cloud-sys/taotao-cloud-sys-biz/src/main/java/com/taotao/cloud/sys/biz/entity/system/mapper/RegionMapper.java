@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.entity.system.mapper;
 
-import cn.lili.modules.system.entity.dos.Region;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.Region;
 
 /**
  * 行政地区数据处理层

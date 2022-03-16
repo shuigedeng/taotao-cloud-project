@@ -6,7 +6,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
-import com.taotao.cloud.sys.biz.entity.EmailConfig;
+import com.taotao.cloud.sys.biz.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
 import org.springframework.stereotype.Service;

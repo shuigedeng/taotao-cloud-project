@@ -7,7 +7,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.entity.ScheduledLog;
+import com.taotao.cloud.sys.biz.entity.scheduled.ScheduledLog;
 import org.springframework.stereotype.Repository;
 
 @Repository

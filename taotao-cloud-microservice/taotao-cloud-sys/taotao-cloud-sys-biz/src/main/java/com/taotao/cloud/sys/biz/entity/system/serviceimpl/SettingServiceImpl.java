@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.entity.system.serviceimpl;
 
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.mapper.SettingMapper;
-import cn.lili.modules.system.service.SettingService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.Setting;
+import com.taotao.cloud.sys.biz.entity.system.mapper.SettingMapper;
+import com.taotao.cloud.sys.biz.entity.system.service.SettingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/11/17 3:52 下午
  */
 @Service
-public class SettingServiceImpl extends ServiceImpl<SettingMapper, Setting> implements SettingService {
+public class SettingServiceImpl extends ServiceImpl<SettingMapper, Setting> implements
+	SettingService {
 
     @Override
     public Setting get(String key) {

@@ -7,7 +7,7 @@ package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
-import com.taotao.cloud.sys.biz.entity.AlipayConfig;
+import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
 
 public interface IAlipayConfigService extends IService<AlipayConfig> {
 

@@ -7,7 +7,7 @@ package com.taotao.cloud.sys.biz.controller.tools;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.biz.entity.GenConfig;
+import com.taotao.cloud.sys.biz.entity.config.GenConfig;
 import com.taotao.cloud.sys.biz.service.IGenConfigService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

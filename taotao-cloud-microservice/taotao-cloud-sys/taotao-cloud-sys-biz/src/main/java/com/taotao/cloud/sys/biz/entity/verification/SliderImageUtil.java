@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.entity.verification;
 
-import cn.lili.common.utils.Base64DecodeMultipartFile;
-import cn.lili.common.vo.SerializableStream;
+import com.taotao.cloud.common.utils.secure.Base64DecodeMultipartFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Base64Utils;
 

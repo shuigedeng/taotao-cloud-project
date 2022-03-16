@@ -15,12 +15,9 @@
  */
 package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.entity.DictItem;
-import com.taotao.cloud.sys.biz.entity.UserRole;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.cloud.sys.biz.entity.dict.DictItem;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**

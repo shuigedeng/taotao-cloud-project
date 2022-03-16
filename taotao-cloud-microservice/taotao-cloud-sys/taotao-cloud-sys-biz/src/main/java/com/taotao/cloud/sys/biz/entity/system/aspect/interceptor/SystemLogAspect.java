@@ -1,16 +1,11 @@
 package com.taotao.cloud.sys.biz.entity.system.aspect.interceptor;
 
-import cn.lili.modules.system.aspect.annotation.SystemLogPoint;
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.IpHelper;
-import cn.lili.common.utils.SpelUtil;
-import cn.lili.common.utils.ThreadPoolUtil;
-import cn.lili.modules.permission.entity.vo.SystemLogVO;
-import cn.lili.common.utils.IpUtils;
-import cn.lili.modules.permission.service.SystemLogService;
+import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.utils.ip.IpHelper;
+import com.taotao.cloud.common.utils.spel.SpelUtil;
+import com.taotao.cloud.sys.biz.entity.system.aspect.annotation.SystemLogPoint;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,11 +24,9 @@ import java.util.Map;
 /**
  * Spring AOP实现日志管理
  *
- * @author Chopper
  */
 @Aspect
 @Component
-@Slf4j
 public class SystemLogAspect {
 
     /**

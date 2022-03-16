@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.entity.system.mapper;
 
 import cn.lili.modules.system.entity.dos.SensitiveWords;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.SensitiveWords;
 
 /**
  * 敏感词数据处理层

@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.entity.system.service;
 import cn.lili.modules.system.entity.dos.Region;
 import cn.lili.modules.system.entity.vo.RegionVO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.Region;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,8 +14,6 @@ import java.util.Map;
 /**
  * 行政地区业务层
  *
- * @author Chopper
- * @since 2020/12/2 14:14
  */
 @CacheConfig(cacheNames = "{regions}")
 public interface RegionService extends IService<Region> {

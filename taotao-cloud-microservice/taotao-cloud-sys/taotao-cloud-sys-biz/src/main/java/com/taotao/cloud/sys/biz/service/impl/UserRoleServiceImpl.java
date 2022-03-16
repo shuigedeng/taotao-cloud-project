@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.entity.QUserRole;
-import com.taotao.cloud.sys.biz.entity.UserRole;
+import com.taotao.cloud.sys.biz.entity.system.UserRole;
 import com.taotao.cloud.sys.biz.mapper.IUserRoleMapper;
 import com.taotao.cloud.sys.biz.repository.cls.UserRoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRoleRepository;

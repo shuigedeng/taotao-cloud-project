@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.entity.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.lili.modules.system.entity.dos.ServiceNotice;
+import com.taotao.cloud.sys.biz.entity.system.entity.dos.ServiceNotice;
 
 /**
  * 服务订阅消息数据处理层

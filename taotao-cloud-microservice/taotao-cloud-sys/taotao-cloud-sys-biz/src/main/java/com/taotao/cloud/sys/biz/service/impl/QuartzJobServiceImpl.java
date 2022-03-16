@@ -12,7 +12,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobQueryCriteria;
-import com.taotao.cloud.sys.biz.entity.QuartzJob;
+import com.taotao.cloud.sys.biz.entity.quartz.QuartzJob;
 import com.taotao.cloud.sys.biz.mapper.IQuartzJobMapper;
 import com.taotao.cloud.sys.biz.service.IQuartzJobService;
 import com.taotao.cloud.web.quartz.QuartzJobModel;

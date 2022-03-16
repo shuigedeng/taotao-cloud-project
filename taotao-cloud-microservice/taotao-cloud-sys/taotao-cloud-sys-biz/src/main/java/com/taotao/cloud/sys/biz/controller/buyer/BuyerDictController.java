@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.controller.buyer;
 
-import com.taotao.cloud.sys.biz.entity.Dict;
+import com.taotao.cloud.sys.biz.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.biz.entity.RoleMenu;
+import com.taotao.cloud.sys.biz.entity.system.RoleMenu;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.Set;
 

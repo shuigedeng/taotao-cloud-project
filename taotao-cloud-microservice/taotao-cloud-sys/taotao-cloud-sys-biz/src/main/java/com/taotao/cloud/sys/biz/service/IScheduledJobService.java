@@ -5,7 +5,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.biz.entity.ScheduledJob;
+import com.taotao.cloud.sys.biz.entity.scheduled.ScheduledJob;
 
 public interface IScheduledJobService extends IService<ScheduledJob> {
 

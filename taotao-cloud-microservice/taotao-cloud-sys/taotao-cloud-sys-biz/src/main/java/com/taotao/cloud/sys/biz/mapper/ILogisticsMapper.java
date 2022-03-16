@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.entity.Dept;
-import com.taotao.cloud.sys.biz.entity.Logistics;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -28,6 +27,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021/10/13 22:50
  */
 @Mapper
-public interface ILogisticsMapper extends BaseSuperMapper<Logistics, Long> {
+public interface ILogisticsMapper extends BaseSuperMapper<LogisticsConfig, Long> {
 
 }

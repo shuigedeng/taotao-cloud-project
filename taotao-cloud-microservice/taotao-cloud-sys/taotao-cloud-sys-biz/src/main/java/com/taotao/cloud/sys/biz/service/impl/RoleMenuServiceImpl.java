@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.entity.QRoleMenu;
-import com.taotao.cloud.sys.biz.entity.RoleMenu;
+import com.taotao.cloud.sys.biz.entity.system.RoleMenu;
 import com.taotao.cloud.sys.biz.mapper.IRoleMenuMapper;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleMenuRepository;
 import com.taotao.cloud.sys.biz.repository.cls.RoleMenuRepository;
@@ -26,7 +26,6 @@ import com.taotao.cloud.sys.biz.service.IRoleMenuService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 /**

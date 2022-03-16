@@ -19,13 +19,11 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.sys.api.dto.dict_item.DictItemSaveDTO;
 import com.taotao.cloud.sys.api.dto.dict_item.DictItemUpdateDTO;
 import com.taotao.cloud.sys.api.vo.dict_item.DictItemQueryVO;
-import com.taotao.cloud.sys.biz.entity.DictItem;
+import com.taotao.cloud.sys.biz.entity.dict.DictItem;
 import com.taotao.cloud.sys.biz.service.IDictItemService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

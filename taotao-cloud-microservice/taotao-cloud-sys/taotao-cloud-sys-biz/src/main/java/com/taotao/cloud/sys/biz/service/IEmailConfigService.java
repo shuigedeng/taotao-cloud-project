@@ -8,7 +8,7 @@ package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
-import com.taotao.cloud.sys.biz.entity.EmailConfig;
+import com.taotao.cloud.sys.biz.entity.config.EmailConfig;
 import org.springframework.scheduling.annotation.Async;
 
 public interface IEmailConfigService extends IService<EmailConfig> {

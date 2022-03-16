@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service.impl;
 
-import com.taotao.cloud.sys.biz.entity.Setting;
+import com.taotao.cloud.sys.biz.entity.config.Setting;
 import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
 import com.taotao.cloud.sys.biz.repository.cls.SettingRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISettingRepository;

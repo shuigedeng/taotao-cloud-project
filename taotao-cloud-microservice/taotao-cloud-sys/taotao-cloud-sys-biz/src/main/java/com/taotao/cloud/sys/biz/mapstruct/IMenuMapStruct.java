@@ -19,7 +19,7 @@ import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.entity.Menu;
+import com.taotao.cloud.sys.biz.entity.system.Menu;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

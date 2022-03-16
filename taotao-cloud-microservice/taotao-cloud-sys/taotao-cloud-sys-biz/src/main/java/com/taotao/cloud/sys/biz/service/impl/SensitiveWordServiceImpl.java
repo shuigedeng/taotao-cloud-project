@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.biz.entity.SensitiveWord;
+import com.taotao.cloud.sys.biz.entity.sensitive.SensitiveWord;
 import com.taotao.cloud.sys.biz.mapper.ISensitiveWordMapper;
 import com.taotao.cloud.sys.biz.repository.cls.SensitiveWordRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISensitiveWordRepository;
@@ -10,7 +10,6 @@ import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

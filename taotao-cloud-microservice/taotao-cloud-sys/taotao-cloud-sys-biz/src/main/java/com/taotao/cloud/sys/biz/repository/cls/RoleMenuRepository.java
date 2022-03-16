@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.entity.RoleMenu;
+import com.taotao.cloud.sys.biz.entity.system.RoleMenu;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
