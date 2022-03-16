@@ -104,7 +104,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 
 		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(searchDTO, pageParam);
 		NativeSearchQuery searchQuery = searchQueryBuilder.build();
-		log.info("searchGoods DSL:{}", searchQuery.getQuery());
+		LogUtil.info("searchGoods DSL:{}", searchQuery.getQuery());
 		SearchHits<EsGoodsIndex> search = restTemplate.search(searchQuery, EsGoodsIndex.class);
 		return SearchHitSupport.searchPageFor(search, searchQuery.getPageable());
 	}

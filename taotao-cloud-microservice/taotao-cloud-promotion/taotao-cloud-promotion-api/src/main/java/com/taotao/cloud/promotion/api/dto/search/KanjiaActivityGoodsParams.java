@@ -31,9 +31,9 @@ public class KanjiaActivityGoodsParams extends BasePromotionsSearchParams implem
         if (CharSequenceUtil.isNotEmpty(goodsName)) {
             queryWrapper.like("goods_name", goodsName);
         }
-        if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
-            queryWrapper.gt("stock", 0);
-        }
+        //if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
+        //    queryWrapper.gt("stock", 0);
+        //}
         queryWrapper.eq("delete_flag", false);
         return queryWrapper;
     }

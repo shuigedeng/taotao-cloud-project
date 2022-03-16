@@ -52,9 +52,9 @@ public class KanjiaActivityGoodsParams implements Serializable {
         if (endTime != null) {
             queryWrapper.ge("end_time", new Date(endTime));
         }
-        if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
-            queryWrapper.gt("stock", 0);
-        }
+        //if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
+        //    queryWrapper.gt("stock", 0);
+        //}
         queryWrapper.eq("delete_flag", false);
         return queryWrapper;
     }

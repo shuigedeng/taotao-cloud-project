@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -64,7 +65,7 @@ public class HeapHistogramImpl extends HeapHistogram {
     }
 
     public HeapHistogramImpl(String histogramText) {
-        Map<String,ClassInfoImpl> classesMap = new HashMap(1024);
+        Map<String,ClassInfoImpl> classesMap = new HashMap<>(1024);
         time = new Date();
         Scanner sc = new Scanner(histogramText);
         sc.useRadix(10);
@@ -129,7 +130,7 @@ public class HeapHistogramImpl extends HeapHistogram {
 
     @Override
     public Set<ClassInfo> getPermGenHistogram() {
-        return Collections.EMPTY_SET;
+        return new HashSet<>();
     }
 
     @Override

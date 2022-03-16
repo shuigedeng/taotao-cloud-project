@@ -1,6 +1,8 @@
 package com.taotao.cloud.promotion.api.tools;
 
 
+import com.taotao.cloud.common.enums.CachePrefix;
+
 /**
  * 满额活动缓存Key
  * 
@@ -14,7 +16,8 @@ public class PromotionCacheKeys {
      * @return 满优惠redis key
      */
     public static String getFullDiscountKey(String activityId){
-        return CachePrefix.STORE_ID_FULL_DISCOUNT + "::" + activityId;
+        //return CachePrefix.STORE_ID_FULL_DISCOUNT + "::" + activityId;
+	    return null;
     }
 
     /**
@@ -23,7 +26,8 @@ public class PromotionCacheKeys {
      * @return 满优惠redis key
      */
     public static String getPromotionGoodsKey(String id){
-        return CachePrefix.PROMOTION_GOODS + "::" + id;
+        //return CachePrefix.PROMOTION_GOODS + "::" + id;
+	    return "";
     }
 
     /**
@@ -32,7 +36,8 @@ public class PromotionCacheKeys {
      * @return 满优惠redis key
      */
     public static String getSeckillTimelineKey(String timeStr){
-        return CachePrefix.STORE_ID_SECKILL + "::" + timeStr;
+        //return CachePrefix.STORE_ID_SECKILL + "::" + timeStr;
+	    return null;
     }
 
 }

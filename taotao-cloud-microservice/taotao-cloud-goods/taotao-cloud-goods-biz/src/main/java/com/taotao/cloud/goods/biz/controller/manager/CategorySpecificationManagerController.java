@@ -42,21 +42,21 @@ public class CategorySpecificationManagerController {
 	@Autowired
 	private SpecificationService specificationService;
 
-	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息", method = CommonConstant.GET)
-	@RequestLogger(description = "查询某分类下绑定的规格信息")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{categoryId}")
-	public Result<List<Specification>> getCategorySpec(@PathVariable String categoryId) {
-		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
-	}
+	//@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息", method = CommonConstant.GET)
+	//@RequestLogger(description = "查询某分类下绑定的规格信息")
+	//@PreAuthorize("hasAuthority('dept:tree:data')")
+	//@GetMapping(value = "/{categoryId}")
+	//public Result<List<Specification>> getCategorySpec(@PathVariable String categoryId) {
+	//	return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
+	//}
 
-	@Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用", method = CommonConstant.GET)
-	@RequestLogger(description = "查询某分类下绑定的规格信息,商品操作使用")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/goods/{categoryId}")
-	public Result<List<Specification>> getSpec(@PathVariable String categoryId) {
-		return Result.success(specificationService.list());
-	}
+	//@Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用", method = CommonConstant.GET)
+	//@RequestLogger(description = "查询某分类下绑定的规格信息,商品操作使用")
+	//@PreAuthorize("hasAuthority('dept:tree:data')")
+	//@GetMapping(value = "/goods/{categoryId}")
+	//public Result<List<Specification>> getSpec(@PathVariable String categoryId) {
+	//	return Result.success(specificationService.list());
+	//}
 
 	@Operation(summary = "保存某分类下绑定的规格信息", description = "保存某分类下绑定的规格信息", method = CommonConstant.POST)
 	@RequestLogger(description = "根据id查询物流公司信息")
@@ -71,7 +71,7 @@ public class CategorySpecificationManagerController {
 		if (categorySpecs != null && categorySpecs.length > 0) {
 			List<CategorySpecification> categorySpecifications = new ArrayList<>();
 			for (String categorySpec : categorySpecs) {
-				categorySpecifications.add(new CategorySpecification(categoryId, categorySpec));
+				//categorySpecifications.add(new CategorySpecification(categoryId, categorySpec));
 			}
 			categorySpecificationService.saveBatch(categorySpecifications);
 		}
