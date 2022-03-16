@@ -48,5 +48,4 @@ public class MemberPointsHistoryController {
 		return Result.success(memberPointsHistoryService.getMemberPointsHistoryVO(memberId));
 	}
 
-
 }

@@ -2,12 +2,12 @@ package com.taotao.cloud.member.biz.controller.seller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,13 +35,9 @@ public class StoreUserController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/info")
 	public Result<Member> getUserInfo() {
-		AuthUser tokenUser = UserContext.getCurrentUser();
-		if (tokenUser != null) {
-			Member member = memberService.findByUsername(tokenUser.getUsername());
-			member.setPassword(null);
-			return Result.success(member);
-		}
-		throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+		Member member = memberService.findByUsername(SecurityUtil.getUsername());
+		member.setPassword(null);
+		return Result.success(member);
 	}
 
 

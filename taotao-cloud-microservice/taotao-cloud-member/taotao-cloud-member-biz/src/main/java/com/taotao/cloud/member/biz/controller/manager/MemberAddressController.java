@@ -50,10 +50,9 @@ public class MemberAddressController {
 	@RequestLogger(description = "删除会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{id}")
-    public Result<Object> delShippingAddressById(
+    public Result<Boolean> delShippingAddressById(
 		@Parameter(description = "会员地址ID", required = true)@PathVariable String id) {
-        memberAddressService.removeMemberAddress(id);
-        return Result.success();
+        return Result.success(memberAddressService.removeMemberAddress(id));
     }
 
 	@Operation(summary = "修改会员收件地址", description = "修改会员收件地址", method = CommonConstant.PUT)
