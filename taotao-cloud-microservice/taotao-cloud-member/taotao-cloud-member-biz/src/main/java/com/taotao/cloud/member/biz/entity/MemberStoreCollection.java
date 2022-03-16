@@ -32,6 +32,13 @@ public class MemberStoreCollection extends BaseSuperEntity<MemberStoreCollection
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺id'")
 	private String storeId;
 
+	public MemberStoreCollection(){}
+
+	public MemberStoreCollection(String memberId, String storeId) {
+		this.memberId = memberId;
+		this.storeId = storeId;
+	}
+
 	public String getMemberId() {
 		return memberId;
 	}

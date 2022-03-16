@@ -20,7 +20,8 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = MemberReceipt.TABLE_NAME, comment = "会员发票表")
 public class MemberReceipt extends BaseSuperEntity<MemberReceipt, Long> {
 
-	public static final String TABLE_NAME = "li_member_receipt";
+	public static final String TABLE_NAME = "tt_member_receipt";
+
 	/**
 	 * 发票抬头
 	 */

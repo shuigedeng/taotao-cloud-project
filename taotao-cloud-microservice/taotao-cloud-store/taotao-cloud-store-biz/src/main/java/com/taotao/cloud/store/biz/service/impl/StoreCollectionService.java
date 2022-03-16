@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.biz.service;
+package com.taotao.cloud.store.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -17,7 +17,7 @@ public interface StoreCollectionService extends IService<MemberStoreCollection> 
      * @param pageParam 分页VO
      * @return 店铺收藏分页列表
      */
-    PageModel<StoreCollectionVO> storeCollection(PageParam pageParam);
+    IPage<StoreCollectionVO> storeCollection(PageParam pageParam);
 
     /**
      * 是否收藏此店铺
@@ -25,7 +25,7 @@ public interface StoreCollectionService extends IService<MemberStoreCollection> 
      * @param storeId 店铺ID
      * @return 是否收藏
      */
-    boolean isCollection(String storeId);
+    Boolean isCollection(String storeId);
 
     /**
      * 店铺商品收藏
@@ -33,7 +33,7 @@ public interface StoreCollectionService extends IService<MemberStoreCollection> 
      * @param storeId 店铺ID
      * @return 操作状态
      */
-    boolean addStoreCollection(String storeId);
+    Boolean addStoreCollection(String storeId);
 
     /**
      * 店铺收藏
@@ -41,5 +41,5 @@ public interface StoreCollectionService extends IService<MemberStoreCollection> 
      * @param storeId 店铺ID
      * @return 操作状态
      */
-    boolean deleteStoreCollection(String storeId);
+    Boolean deleteStoreCollection(String storeId);
 }

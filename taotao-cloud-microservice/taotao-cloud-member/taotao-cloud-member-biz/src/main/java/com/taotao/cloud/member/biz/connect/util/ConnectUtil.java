@@ -5,6 +5,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -82,16 +83,16 @@ public class ConnectUtil {
             try {
                 token = connectService.unionLoginCallback(type, authUser, callback.getState());
                 resultMessage = ResultUtil.data(token);
-            } catch (ServiceException e) {
-                throw new BusinessException(ResultEnum.ERROR, e.getMessage());
+            } catch (Exception e) {
+                throw new BusinessException(ResultEnum.ERROR.getCode(), e.getMessage());
             }
         }
         //否则录入响应结果，等待前端获取信息
         else {
-            throw new BusinessException(ResultEnum.ERROR, response.getMsg());
+            throw new BusinessException(ResultEnum.ERROR.getCode(), response.getMsg());
         }
         //缓存写入登录结果，300秒有效
-        cache.put(CachePrefix.CONNECT_RESULT.getPrefix() + callback.getCode(), resultMessage, 300L);
+	    redisRepository.put(CachePrefix.CONNECT_RESULT.getPrefix() + callback.getCode(), resultMessage, 300L);
 
         //跳转地址
         String url = this.check(httpServletRequest.getHeader("user-agent")) ?
@@ -101,7 +102,7 @@ public class ConnectUtil {
         try {
             httpServletResponse.sendRedirect(url);
         } catch (Exception e) {
-            log.error("登录回调错误",e);
+            LogUtil.error("登录回调错误",e);
         }
     }
 
@@ -145,7 +146,7 @@ public class ConnectUtil {
                                 .clientId(wechatConnectSettingItem.getAppId())
                                 .clientSecret(wechatConnectSettingItem.getAppSecret())
                                 .redirectUri(getRedirectUri(authInterface))
-                                .build(), cache);
+                                .build(), redisRepository);
                     }
                 }
                 break;
@@ -160,14 +161,13 @@ public class ConnectUtil {
                                 .clientId(wechatConnectSettingItem.getAppId())
                                 .clientSecret(wechatConnectSettingItem.getAppSecret())
                                 .redirectUri(getRedirectUri(authInterface))
-                                .build(), cache);
+                                .build(), redisRepository);
                     }
                 }
 
                 break;
             }
             case QQ:
-
                 //寻找配置
                 Setting setting = settingService.get(SettingEnum.QQ_CONNECT.name());
                 QQConnectSetting qqConnectSetting = JSONUtil.toBean(setting.getSettingValue(), QQConnectSetting.class);
@@ -179,10 +179,9 @@ public class ConnectUtil {
                                 .redirectUri(getRedirectUri(authInterface))
                                 //这里qq获取unionid 需要配置为true，详情可以查阅属性说明，内部有帮助文档
                                 .unionId(true)
-                                .build(), cache);
+                                .build(), redisRepository);
                     }
                 }
-
                 break;
             default:
                 break;
@@ -217,7 +216,6 @@ public class ConnectUtil {
      *
      * @param userAgent 浏览器标识
      * @return true:移动设备接入，false:pc端接入
-     * @Title: check
      */
     private boolean check(String userAgent) {
         if (null == userAgent) {

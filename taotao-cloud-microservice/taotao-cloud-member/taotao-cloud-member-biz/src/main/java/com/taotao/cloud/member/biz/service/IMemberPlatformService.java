@@ -1,4 +1,5 @@
 package com.taotao.cloud.member.biz.service;
+
 /**
  * 第三方登录信息服务接口
  *

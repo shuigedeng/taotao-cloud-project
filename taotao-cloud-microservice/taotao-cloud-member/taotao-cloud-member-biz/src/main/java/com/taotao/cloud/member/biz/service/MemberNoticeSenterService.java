@@ -5,18 +5,15 @@ import com.taotao.cloud.member.biz.entity.MemberNoticeSenter;
 
 /**
  * 会员消息业务层
- *
- *
- * @since 2020/11/17 3:44 下午
  */
 public interface MemberNoticeSenterService extends IService<MemberNoticeSenter> {
 
-    /**
-     * 自定义保存方法
-     *
-     * @param memberNoticeSenter 会员消息
-     * @return 操作状态
-     */
-    boolean customSave(MemberNoticeSenter memberNoticeSenter);
+	/**
+	 * 自定义保存方法
+	 *
+	 * @param memberNoticeSenter 会员消息
+	 * @return 操作状态
+	 */
+	boolean customSave(MemberNoticeSenter memberNoticeSenter);
 
 }

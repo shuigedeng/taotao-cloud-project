@@ -2,8 +2,6 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.entity.MemberGoodsCollection;
@@ -12,54 +10,55 @@ import java.util.List;
 /**
  * 商品收藏业务层
  *
- *
  * @since 2020/11/18 2:25 下午
  */
 public interface GoodsCollectionService extends IService<MemberGoodsCollection> {
 
-    /**
-     * 获取商品搜索分页
-     *
-     * @param pageParam 查询参数
-     * @return 商品搜索分页
-     */
-    PageModel<GoodsCollectionVO> goodsCollection(PageParam pageParam);
+	/**
+	 * 获取商品搜索分页
+	 *
+	 * @param pageParam 查询参数
+	 * @return 商品搜索分页
+	 */
+	IPage<GoodsCollectionVO> goodsCollection(PageParam pageParam);
 
-    /**
-     * 是否收藏商品
-     *
-     * @param skuId 规格ID
-     * @return 是否收藏
-     */
-    boolean isCollection(String skuId);
+	/**
+	 * 是否收藏商品
+	 *
+	 * @param skuId 规格ID
+	 * @return 是否收藏
+	 */
+	Boolean isCollection(String skuId);
 
-    /**
-     * 添加商品收藏
-     *
-     * @param skuId 规格ID
-     * @return 操作状态
-     */
-    boolean addGoodsCollection(String skuId);
+	/**
+	 * 添加商品收藏
+	 *
+	 * @param skuId 规格ID
+	 * @return 操作状态
+	 */
+	Boolean addGoodsCollection(String skuId);
 
-    /**
-     * 商品收藏
-     *
-     * @param skuId 规格ID
-     * @return 操作状态
-     */
-    boolean deleteGoodsCollection(String skuId);
-    /**
-     * 删除商品收藏
-     *
-     * @param goodsIds 规格ID
-     * @return 操作状态
-     */
-    boolean deleteGoodsCollection(List<String> goodsIds);
-    /**
-     * 删除商品SKU收藏
-     *
-     * @param skuIds 规格ID
-     * @return 操作状态
-     */
-    boolean deleteSkuCollection(List<String> skuIds);
+	/**
+	 * 商品收藏
+	 *
+	 * @param skuId 规格ID
+	 * @return 操作状态
+	 */
+	Boolean deleteGoodsCollection(String skuId);
+
+	/**
+	 * 删除商品收藏
+	 *
+	 * @param goodsIds 规格ID
+	 * @return 操作状态
+	 */
+	Boolean deleteGoodsCollection(List<String> goodsIds);
+
+	/**
+	 * 删除商品SKU收藏
+	 *
+	 * @param skuIds 规格ID
+	 * @return 操作状态
+	 */
+	Boolean deleteSkuCollection(List<String> skuIds);
 }

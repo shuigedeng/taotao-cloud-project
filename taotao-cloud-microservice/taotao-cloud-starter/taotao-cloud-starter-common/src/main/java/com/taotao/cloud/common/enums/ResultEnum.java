@@ -63,6 +63,8 @@ public enum ResultEnum implements BaseEnum {
 	 * 用户不存在
 	 */
 	USER_NOT_EXIST(500001, "用户不存在"),
+	USER_NAME_EXIST(500001, "用户名称不存在"),
+	USER_PHONE_EXIST(500001, "用户手机不存在"),
 	/**
 	 * 用户已被禁用
 	 */

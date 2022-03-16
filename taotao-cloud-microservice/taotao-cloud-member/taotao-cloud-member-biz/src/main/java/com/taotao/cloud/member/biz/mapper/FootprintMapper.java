@@ -13,9 +13,6 @@ import java.util.List;
 
 /**
  * 浏览历史数据处理层
- *
- * 
- * @since 2020-02-25 14:10:16
  */
 public interface FootprintMapper extends BaseMapper<MemberBrowse> {
 

@@ -21,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class IMemberAddressServiceImpl extends
-	ServiceImpl<MemberAddressMapper, MemberAddress> implements
-	IMemberAddressService {
+	ServiceImpl<MemberAddressMapper, MemberAddress> implements IMemberAddressService {
 
 	@Override
 	public PageModel<MemberAddressVO> getAddressByMember(PageParam page, String memberId) {

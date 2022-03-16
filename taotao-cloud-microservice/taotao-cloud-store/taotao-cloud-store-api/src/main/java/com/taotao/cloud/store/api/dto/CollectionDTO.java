@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.api.dto;
+package com.taotao.cloud.store.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -22,4 +22,11 @@ public class CollectionDTO implements Serializable {
 
 	@Schema(description = "变化的数量 -1 减少1 / +1 增加1")
 	private Integer num;
+
+	public CollectionDTO(){}
+
+	public CollectionDTO(String id, Integer num) {
+		this.id = id;
+		this.num = num;
+	}
 }

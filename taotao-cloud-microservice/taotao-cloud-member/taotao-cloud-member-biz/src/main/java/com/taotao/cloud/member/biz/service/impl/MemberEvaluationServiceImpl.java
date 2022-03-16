@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -81,11 +83,9 @@ public class MemberEvaluationServiceImpl extends
 	private RocketmqCustomProperties rocketmqCustomProperties;
 
 	@Override
-	public PageModel<MemberEvaluationVO> managerQuery(EvaluationQueryParams queryParams) {
+	public IPage<MemberEvaluation> managerQuery(EvaluationQueryParams queryParams) {
 		//获取评价分页
-		IPage<MemberEvaluation> memberEvaluationPage = this.page(queryParams.buildMpPage(),
-			queryParams.queryWrapper());
-		return PageModel.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class);
+		return this.page(queryParams.buildMpPage(), queryParams.queryWrapper());
 	}
 
 	@Override

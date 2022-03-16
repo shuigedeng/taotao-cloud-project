@@ -8,8 +8,6 @@ import javax.persistence.Table;
 
 /**
  * 店铺-物流公司设置
- *
- * @since 2020/11/17 8:01 下午
  */
 @Entity
 @Table(name = StoreLogistics.TABLE_NAME)
@@ -17,7 +15,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = StoreLogistics.TABLE_NAME, comment = "店铺-物流公司设置表")
 public class StoreLogistics extends BaseSuperEntity<StoreLogistics, Long> {
 
-	public static final String TABLE_NAME = "li_store_logistics";
+	public static final String TABLE_NAME = "tt_store_logistics";
 
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺ID'")
 	private String storeId;

@@ -1,11 +1,13 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.api.vo.StoreCollectionVO;
 import com.taotao.cloud.member.biz.service.GoodsCollectionService;
 import com.taotao.cloud.member.biz.service.StoreCollectionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,9 +57,12 @@ public class MemberCollectionController {
 		@Parameter(description = "类型", required = true) @PathVariable String type,
 		@Validated PageParam page) {
 		if (goods.equals(type)) {
-			return Result.success(goodsCollectionService.goodsCollection(page));
+			IPage<GoodsCollectionVO> goodsCollectionPage = goodsCollectionService.goodsCollection(page);
+			return Result.success(PageModel.convertMybatisPage(goodsCollectionPage, GoodsCollectionVO.class));
 		}
-		return Result.success(storeCollectionService.storeCollection(page));
+
+		IPage<StoreCollectionVO> storeCollectionVOPage = storeCollectionService.storeCollection(page);
+		return Result.success(PageModel.convertMybatisPage(storeCollectionVOPage, StoreCollectionVO.class));
 	}
 
 	@Operation(summary = "添加会员收藏", description = "添加会员收藏", method = CommonConstant.POST)

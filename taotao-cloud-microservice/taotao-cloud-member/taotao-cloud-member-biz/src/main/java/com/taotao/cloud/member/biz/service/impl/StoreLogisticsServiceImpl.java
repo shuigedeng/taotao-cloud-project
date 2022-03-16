@@ -11,9 +11,6 @@ import java.util.List;
 
 /**
  * 物流公司业务层实现
- *
- *
- * @since 2020/11/17 8:02 下午
  */
 @Service
 public class StoreLogisticsServiceImpl extends ServiceImpl<StoreLogisticsMapper, StoreLogistics> implements
