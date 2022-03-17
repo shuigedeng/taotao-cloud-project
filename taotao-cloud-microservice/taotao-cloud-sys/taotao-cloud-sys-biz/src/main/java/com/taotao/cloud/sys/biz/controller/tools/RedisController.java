@@ -33,14 +33,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class RedisController {
 
 	@Autowired
-	private IRedisService IRedisService;
+	private IRedisService redisService;
 
 	@Operation(summary = "查询Redis缓存", description = "查询Redis缓存", method = CommonConstant.GET)
 	@RequestLogger(description = "查询Redis缓存")
 	@GetMapping
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_SELECT')")
 	public Result<Page> getRedis(String key, Pageable pageable) {
-		Page byKey = IRedisService.findByKey(key, pageable);
+		Page byKey = redisService.findByKey(key, pageable);
 		return Result.success(byKey);
 	}
 
@@ -50,7 +50,7 @@ public class RedisController {
 	@DeleteMapping(value = "/redis")
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
 	public Result<Boolean> delete(@RequestBody RedisVo resources) {
-		IRedisService.delete(resources.getKey());
+		redisService.delete(resources.getKey());
 		return Result.success(true);
 	}
 
@@ -60,7 +60,7 @@ public class RedisController {
 	@DeleteMapping(value = "/redis/all")
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
 	public Result<Boolean> deleteAll() {
-		IRedisService.flushdb();
+		redisService.flushdb();
 		return Result.success(true);
 	}
 

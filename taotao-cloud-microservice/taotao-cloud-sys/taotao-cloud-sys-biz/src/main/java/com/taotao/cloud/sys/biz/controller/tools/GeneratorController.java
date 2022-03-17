@@ -41,17 +41,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/generator")
 public class GeneratorController {
 
-	private final IGeneratorService IGeneratorService;
+	private final IGeneratorService generatorService;
 
-	private final IGenConfigService IGenConfigService;
+	private final IGenConfigService genConfigService;
 
 	@Value("${generator.enabled:false}")
 	private Boolean generatorEnabled;
 
-	public GeneratorController(IGeneratorService IGeneratorService,
-		IGenConfigService IGenConfigService) {
-		this.IGeneratorService = IGeneratorService;
-		this.IGenConfigService = IGenConfigService;
+	public GeneratorController(IGeneratorService generatorService,
+		IGenConfigService genConfigService) {
+		this.generatorService = generatorService;
+		this.genConfigService = genConfigService;
 	}
 
 	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
@@ -59,7 +59,7 @@ public class GeneratorController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/tables/all")
 	public Result<Object> getTables() {
-		return Result.success(IGeneratorService.getTables());
+		return Result.success(generatorService.getTables());
 	}
 
 	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
@@ -69,7 +69,7 @@ public class GeneratorController {
 	public Result<Object> getTables(@RequestParam(defaultValue = "") String name,
 		@RequestParam(defaultValue = "0") Integer page,
 		@RequestParam(defaultValue = "10") Integer size) {
-		return Result.success(IGeneratorService.getTables(name, page, size));
+		return Result.success(generatorService.getTables(name, page, size));
 	}
 
 	@Operation(summary = "查询字段数据", description = "查询字段数据", method = CommonConstant.GET)
@@ -77,7 +77,7 @@ public class GeneratorController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/columns")
 	public Result<List<ColumnConfig>> getTables(@RequestParam String tableName) {
-		List<ColumnConfig> columnInfos = IGeneratorService.getColumns(tableName);
+		List<ColumnConfig> columnInfos = generatorService.getColumns(tableName);
 		return Result.success(columnInfos);
 		//return new ResponseEntity<>(PageUtil.toPage(columnInfos, columnInfos.size()),
 		//	HttpStatus.OK);
@@ -88,7 +88,7 @@ public class GeneratorController {
 	@RequestLogger(description = "保存字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Boolean> save(@RequestBody List<ColumnConfig> columnInfos) {
-		IGeneratorService.save(columnInfos);
+		generatorService.save(columnInfos);
 		return Result.success(true);
 	}
 
@@ -98,8 +98,8 @@ public class GeneratorController {
 	@PostMapping(value = "/sync")
 	public Result<Boolean> sync(@RequestBody List<String> tables) {
 		for (String table : tables) {
-			IGeneratorService.sync(IGeneratorService.getColumns(table),
-				IGeneratorService.query(table));
+			generatorService.sync(generatorService.getColumns(table),
+				generatorService.query(table));
 		}
 		return Result.success(true);
 	}
@@ -116,8 +116,8 @@ public class GeneratorController {
 		switch (type) {
 			// 生成代码
 			case 0:
-				IGeneratorService.generator(IGenConfigService.find(tableName),
-					IGeneratorService.getColumns(tableName));
+				generatorService.generator(genConfigService.find(tableName),
+					generatorService.getColumns(tableName));
 				break;
 			// 预览
 			case 1:
@@ -125,8 +125,8 @@ public class GeneratorController {
 				//	generatorService.getColumns(tableName));
 				// 打包
 			case 2:
-				IGeneratorService.download(IGenConfigService.find(tableName),
-					IGeneratorService.getColumns(tableName), request, response);
+				generatorService.download(genConfigService.find(tableName),
+					generatorService.getColumns(tableName), request, response);
 				break;
 			default:
 				throw new BusinessException("没有这个选项");

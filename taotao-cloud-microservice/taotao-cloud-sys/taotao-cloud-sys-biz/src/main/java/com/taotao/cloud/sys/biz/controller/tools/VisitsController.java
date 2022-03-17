@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/visits")
 public class VisitsController {
 
-	private final IVisitsService IVisitsService;
+	private final IVisitsService visitsService;
 
-	public VisitsController(IVisitsService IVisitsService) {
-		this.IVisitsService = IVisitsService;
+	public VisitsController(IVisitsService visitsService) {
+		this.visitsService = visitsService;
 	}
 
 	@Operation(summary = "创建访问记录", description = "创建访问记录", method = CommonConstant.POST)
@@ -38,7 +38,7 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
 	public Result<Boolean> create() {
-		IVisitsService.count(RequestUtil.getHttpServletRequest());
+		visitsService.count(RequestUtil.getHttpServletRequest());
 		return Result.success(true);
 	}
 
@@ -47,7 +47,7 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<Object> get() {
-		return Result.success(IVisitsService.get());
+		return Result.success(visitsService.get());
 	}
 
 	@Operation(summary = "查询图表数据", description = "查询图表数据", method = CommonConstant.GET)
@@ -55,6 +55,6 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/chartData")
 	public Result<Object> getChartData() {
-		return Result.success(IVisitsService.getChartData());
+		return Result.success(visitsService.getChartData());
 	}
 }

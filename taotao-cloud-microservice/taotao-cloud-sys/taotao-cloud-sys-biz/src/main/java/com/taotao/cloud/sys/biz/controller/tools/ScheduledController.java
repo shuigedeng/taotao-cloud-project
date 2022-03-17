@@ -32,7 +32,7 @@ public class ScheduledController {
 	private ScheduledManager scheduledManager;
 
 	@Autowired
-	private IScheduledJobService IScheduledJobService;
+	private IScheduledJobService scheduledJobService;
 
 	/**
 	 * 手动执行一次任务
@@ -90,7 +90,6 @@ public class ScheduledController {
 		scheduledManager.setScheduledCron(name, cron);
 	}
 
-
 	/**
 	 * 以FixedDelay模式启动定时任务
 	 *
@@ -128,7 +127,6 @@ public class ScheduledController {
 		@PathVariable("fixedDelay") Long fixedDelay) {
 		scheduledManager.setScheduledFixedDelay(name, fixedDelay);
 	}
-
 
 	/**
 	 * 以FixedRate模式启动定时任务

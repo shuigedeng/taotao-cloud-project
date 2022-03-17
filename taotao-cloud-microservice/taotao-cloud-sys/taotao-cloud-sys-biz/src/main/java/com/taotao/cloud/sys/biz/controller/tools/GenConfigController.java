@@ -33,10 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/generator/config")
 public class GenConfigController {
 
-	private final IGenConfigService IGenConfigService;
+	private final IGenConfigService genConfigService;
 
-	public GenConfigController(IGenConfigService IGenConfigService) {
-		this.IGenConfigService = IGenConfigService;
+	public GenConfigController(IGenConfigService genConfigService) {
+		this.genConfigService = genConfigService;
 	}
 
 	@Operation(summary = "查询", description = "查询", method = CommonConstant.GET)
@@ -44,7 +44,7 @@ public class GenConfigController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{tableName}")
 	public Result<GenConfig> get(@PathVariable String tableName) {
-		return Result.success(IGenConfigService.find(tableName));
+		return Result.success(genConfigService.find(tableName));
 	}
 
 	@Operation(summary = "修改", description = "修改", method = CommonConstant.PUT)
@@ -52,6 +52,6 @@ public class GenConfigController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<GenConfig> emailConfig(@Validated @RequestBody GenConfig genConfig) {
-		return Result.success(IGenConfigService.update(genConfig.getTableName(), genConfig));
+		return Result.success(genConfigService.update(genConfig.getTableName(), genConfig));
 	}
 }
