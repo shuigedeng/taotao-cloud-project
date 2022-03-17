@@ -12,73 +12,73 @@ import org.springframework.boot.ApplicationRunner;
  **/
 public abstract class AbstractDelayQueueListen implements ApplicationRunner {
 
-    @Autowired
-    private RedisRepository redisRepository;
+	@Autowired
+	private RedisRepository redisRepository;
 
+	/**
+	 * 延时队列机器开始运作
+	 */
+	private void startDelayQueueMachine() {
+		LogUtil.info("延时队列机器{}开始运作", setDelayQueueName());
 
-    /**
-     * 延时队列机器开始运作
-     */
-    private void startDelayQueueMachine() {
-        LogUtil.info("延时队列机器{}开始运作", setDelayQueueName());
-
-        //监听redis队列
-        while (true) {
-            try {
-                //获取当前时间的时间戳
-                long now = System.currentTimeMillis() / 1000;
-                //获取当前时间前需要执行的任务列表
-                //Set<DefaultTypedTuple> tuples = redisRepository.zRangeByScore(setDelayQueueName(), 0, now);
+		//监听redis队列
+		while (true) {
+			try {
+				//获取当前时间的时间戳
+				long now = System.currentTimeMillis() / 1000;
+				//获取当前时间前需要执行的任务列表
+				//Set<DefaultTypedTuple> tuples = redisRepository.zRangeByScore(setDelayQueueName(), 0, now);
 				//
-                ////如果任务不为空
-                //if (!CollectionUtils.isEmpty(tuples)) {
-	            //    LogUtil.info("执行任务:{}", JSONUtil.toJsonStr(tuples));
+				////如果任务不为空
+				//if (!CollectionUtils.isEmpty(tuples)) {
+				//    LogUtil.info("执行任务:{}", JSONUtil.toJsonStr(tuples));
 				//
-                //    for (DefaultTypedTuple tuple : tuples) {
-                //        String jobId = (String) tuple.getValue();
-                //        //移除缓存，如果移除成功则表示当前线程处理了延时任务，则执行延时任务
-                //        Long num = cache.zRemove(setDelayQueueName(), jobId);
-                //        //如果移除成功, 则执行
-                //        if (num > 0) {
-                //            ThreadPoolUtil.execute(() -> invoke(jobId));
-                //        }
-                //    }
-                //}
-            } catch (Exception e) {
-	            LogUtil.error("处理延时任务发生异常,异常原因为{}", e.getMessage(), e);
-            } finally {
-                //间隔一秒钟搞一次
-                try {
-                    TimeUnit.SECONDS.sleep(5L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+				//    for (DefaultTypedTuple tuple : tuples) {
+				//        String jobId = (String) tuple.getValue();
+				//        //移除缓存，如果移除成功则表示当前线程处理了延时任务，则执行延时任务
+				//        Long num = cache.zRemove(setDelayQueueName(), jobId);
+				//        //如果移除成功, 则执行
+				//        if (num > 0) {
+				//            ThreadPoolUtil.execute(() -> invoke(jobId));
+				//        }
+				//    }
+				//}
+			} catch (Exception e) {
+				LogUtil.error("处理延时任务发生异常,异常原因为{}", e.getMessage(), e);
+			} finally {
+				//间隔一秒钟搞一次
+				try {
+					TimeUnit.SECONDS.sleep(5L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
-            }
-        }
+			}
+		}
 
-    }
+	}
 
-    /**
-     * 最终执行的任务方法
-     *
-     * @param jobId 任务id
-     */
-    public abstract void invoke(String jobId);
-
-
-    /**
-     * 要实现延时队列的名字
-     * @return 促销延时队列名称
-     */
-    public abstract String setDelayQueueName();
+	/**
+	 * 最终执行的任务方法
+	 *
+	 * @param jobId 任务id
+	 */
+	public abstract void invoke(String jobId);
 
 
-    /**
-     * 监听队列
-     */
-    public void init() {
-        ThreadUtil.execute(this::startDelayQueueMachine);
-    }
+	/**
+	 * 要实现延时队列的名字
+	 *
+	 * @return 促销延时队列名称
+	 */
+	public abstract String setDelayQueueName();
+
+
+	/**
+	 * 监听队列
+	 */
+	public void init() {
+		ThreadUtil.execute(this::startDelayQueueMachine);
+	}
 
 }

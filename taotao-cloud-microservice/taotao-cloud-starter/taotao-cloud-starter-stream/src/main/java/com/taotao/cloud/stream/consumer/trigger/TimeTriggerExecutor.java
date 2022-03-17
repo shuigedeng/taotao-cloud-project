@@ -5,12 +5,11 @@ package com.taotao.cloud.stream.consumer.trigger;
  */
 public interface TimeTriggerExecutor {
 
-
-    /**
-     * 执行任务
-     *
-     * @param object 任务参数
-     */
-    void execute(Object object);
+	/**
+	 * 执行任务
+	 *
+	 * @param object 任务参数
+	 */
+	void execute(Object object);
 
 }

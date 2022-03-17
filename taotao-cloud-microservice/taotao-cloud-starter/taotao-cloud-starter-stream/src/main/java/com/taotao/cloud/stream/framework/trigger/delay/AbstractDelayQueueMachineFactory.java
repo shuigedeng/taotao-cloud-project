@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 延时队列工厂
  **/
-public abstract class AbstractDelayQueueMachineFactory {
+public abstract class AbstractDelayQueueMachineFactory implements DelayQueueMachine {
 
 	@Autowired
 	private RedisRepository cache;
@@ -20,24 +20,15 @@ public abstract class AbstractDelayQueueMachineFactory {
 	 * @param triggerTime 执行时间 时间戳（毫秒）
 	 * @return 是否插入成功
 	 */
+	@Override
 	public boolean addJob(String jobId, Long triggerTime) {
-
 		//redis 中排序时间
 		long delaySeconds = triggerTime / 1000;
 		//增加延时任务 参数依次为：队列名称、执行时间、任务id
-		boolean result = cache.zAdd(setDelayQueueName(), jobId, delaySeconds);
-		LogUtil.info("增加延时任务, 缓存key {}, 执行时间 {},任务id {}", setDelayQueueName(),
+		boolean result = cache.zAdd(getDelayQueueName(), jobId, delaySeconds);
+		LogUtil.info("增加延时任务, 缓存key {}, 执行时间 {},任务id {}", getDelayQueueName(),
 			DateUtil.toString(triggerTime), jobId);
 		return result;
-
 	}
-
-
-	/**
-	 * 要实现延时队列的名字
-	 *
-	 * @return 延时队列的名字
-	 */
-	public abstract String setDelayQueueName();
 
 }

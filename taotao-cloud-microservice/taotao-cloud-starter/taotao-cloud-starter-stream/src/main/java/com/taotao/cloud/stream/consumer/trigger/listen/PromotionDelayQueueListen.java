@@ -15,21 +15,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class PromotionDelayQueueListen extends AbstractDelayQueueListen {
 
-    @Autowired
-    private TimeTrigger timeTrigger;
+	@Autowired
+	private TimeTrigger timeTrigger;
 
-    @Override
-    public void invoke(String jobId) {
-        timeTrigger.execute(JSONUtil.toBean(jobId, TimeTriggerMsg.class));
-    }
+	@Override
+	public void invoke(String jobId) {
+		timeTrigger.execute(JSONUtil.toBean(jobId, TimeTriggerMsg.class));
+	}
 
-    @Override
-    public String setDelayQueueName() {
-        return DelayQueueEnums.PROMOTION.name();
-    }
+	@Override
+	public String setDelayQueueName() {
+		return DelayQueueEnums.PROMOTION.name();
+	}
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        this.init();
-    }
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		this.init();
+	}
 }
