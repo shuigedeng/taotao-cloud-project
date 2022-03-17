@@ -57,13 +57,13 @@ public class QuartzController {
 
 	private static final String ENTITY_NAME = "quartzJob";
 
-	private final IQuartzJobService IQuartzJobService;
-	private final IQuartzLogService IQuartzLogService;
+	private final IQuartzJobService quartzJobService;
+	private final IQuartzLogService quartzLogService;
 
-	public QuartzController(IQuartzJobService IQuartzJobService,
-		IQuartzLogService IQuartzLogService) {
-		this.IQuartzJobService = IQuartzJobService;
-		this.IQuartzLogService = IQuartzLogService;
+	public QuartzController(IQuartzJobService quartzJobService,
+		IQuartzLogService quartzLogService) {
+		this.quartzJobService = quartzJobService;
+		this.quartzLogService = quartzLogService;
 	}
 
 	@Operation(summary = "查询定时任务", description = "查询定时任务", method = CommonConstant.GET)
@@ -71,7 +71,7 @@ public class QuartzController {
 	@GetMapping
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Map<String, Object>> getJobs(QuartzJobQueryCriteria criteria, Pageable pageable) {
-		Map<String, Object> stringObjectMap = IQuartzJobService.queryAll(criteria, pageable);
+		Map<String, Object> stringObjectMap = quartzJobService.queryAll(criteria, pageable);
 		return Result.success(stringObjectMap);
 	}
 
@@ -81,12 +81,12 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void download(HttpServletResponse response, QuartzJobQueryCriteria criteria)
 		throws IOException {
-		List<QuartzJob> quartzJobs = IQuartzJobService.queryAll(criteria);
+		List<QuartzJob> quartzJobs = quartzJobService.queryAll(criteria);
 		List<QuartzJobDto> collect = quartzJobs.stream().filter(Objects::nonNull)
 			.map(e -> BeanUtil.copyProperties(e, QuartzJobDto.class))
 			.collect(Collectors.toList());
 
-		IQuartzJobService.download(collect, response);
+		quartzJobService.download(collect, response);
 	}
 
 	@Operation(summary = "导出日志数据", description = "导出日志数据", method = CommonConstant.GET)
@@ -95,12 +95,12 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void downloadLog(HttpServletResponse response, QuartzLogQueryCriteria criteria)
 		throws IOException {
-		List<QuartzLog> quartzLogs = IQuartzLogService.queryAll(criteria);
+		List<QuartzLog> quartzLogs = quartzLogService.queryAll(criteria);
 		List<QuartzLogDto> collect = quartzLogs.stream().filter(Objects::nonNull)
 			.map(e -> BeanUtil.copyProperties(e, QuartzLogDto.class))
 			.collect(Collectors.toList());
 
-		IQuartzLogService.download(collect, response);
+		quartzLogService.download(collect, response);
 	}
 
 	@Operation(summary = "查询任务执行日志", description = "查询任务执行日志", method = CommonConstant.GET)
@@ -109,7 +109,7 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Map<String, Object>> getJobLogs(QuartzLogQueryCriteria criteria,
 		Pageable pageable) {
-		Map<String, Object> stringObjectMap = IQuartzLogService.queryAll(criteria, pageable);
+		Map<String, Object> stringObjectMap = quartzLogService.queryAll(criteria, pageable);
 		return Result.success(stringObjectMap);
 	}
 
@@ -122,11 +122,9 @@ public class QuartzController {
 		if (jobModel.getId() != null) {
 			throw new BusinessException("A new " + ENTITY_NAME + " cannot already have an ID");
 		}
-
 		QuartzJob job = new QuartzJob();
 		BeanUtil.copyProperties(jobModel, job);
-
-		return Result.success(IQuartzJobService.save(job));
+		return Result.success(quartzJobService.save(job));
 	}
 
 	@Operation(summary = "修改定时任务", description = "修改定时任务", method = CommonConstant.PUT)
@@ -137,8 +135,7 @@ public class QuartzController {
 	public Result<Boolean> update(@Validated @RequestBody QuartzJobModel jobModel) {
 		QuartzJob job = new QuartzJob();
 		BeanUtil.copyProperties(jobModel, job);
-
-		IQuartzJobService.updateById(job);
+		quartzJobService.updateById(job);
 		return Result.success(true);
 	}
 
@@ -148,8 +145,8 @@ public class QuartzController {
 	@PutMapping(value = "/{id}")
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> updateIsPause(@PathVariable Long id) {
-		IQuartzJobService.updateIsPause(
-			IQuartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>()
+		quartzJobService.updateIsPause(
+			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>()
 				.eq(QuartzJob::getId, id)));
 		return Result.success(true);
 	}
@@ -160,8 +157,8 @@ public class QuartzController {
 	@PutMapping(value = "/exec/{id}")
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> execution(@PathVariable Long id) {
-		IQuartzJobService.execution(
-			IQuartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>().eq(QuartzJob::getId, id)));
+		quartzJobService.execution(
+			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>().eq(QuartzJob::getId, id)));
 		return Result.success(true);
 	}
 
@@ -171,7 +168,7 @@ public class QuartzController {
 	@DeleteMapping
 	@PreAuthorize("@el.check('admin','timing:del')")
 	public Result<Boolean> delete(@RequestBody Integer[] ids) {
-		IQuartzJobService.removeByIds(new ArrayList<>(Arrays.asList(ids)));
+		quartzJobService.removeByIds(new ArrayList<>(Arrays.asList(ids)));
 		return Result.success(true);
 	}
 }

@@ -36,10 +36,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/logs")
 public class LogController {
 
-	private final ILogService ILogService;
+	private final ILogService logService;
 
-	public LogController(ILogService ILogService) {
-		this.ILogService = ILogService;
+	public LogController(ILogService logService) {
+		this.logService = logService;
 	}
 
 	@Operation(summary = "导出数据", description = "导出数据", method = CommonConstant.GET)
@@ -49,7 +49,7 @@ public class LogController {
 	public void download(HttpServletResponse response, LogQueryCriteria criteria)
 		throws IOException {
 		criteria.setLogType("INFO");
-		ILogService.download(ILogService.queryAll(criteria), response);
+		logService.download(ILogService.queryAll(criteria), response);
 	}
 
 	@Operation(summary = "导出错误数据", description = "导出错误数据", method = CommonConstant.GET)
@@ -59,7 +59,7 @@ public class LogController {
 	public void errorDownload(HttpServletResponse response, LogQueryCriteria criteria)
 		throws IOException {
 		criteria.setLogType("ERROR");
-		ILogService.download(ILogService.queryAll(criteria), response);
+		logService.download(ILogService.queryAll(criteria), response);
 	}
 
 	@Operation(summary = "日志查询", description = "日志查询", method = CommonConstant.GET)
@@ -69,7 +69,7 @@ public class LogController {
 	public Result<Object> getLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
 		criteria.setType(0);
-		return Result.success(ILogService.queryAll(criteria, pageable));
+		return Result.success(logService.queryAll(criteria, pageable));
 	}
 
 	@Operation(summary = "查询api日志", description = "查询api日志", method = CommonConstant.GET)
@@ -79,7 +79,7 @@ public class LogController {
 	public Result<Object> getApiLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
 		criteria.setType(1);
-		return Result.success(ILogService.findAllByPageable(criteria.getBlurry(), pageable));
+		return Result.success(logService.findAllByPageable(criteria.getBlurry(), pageable));
 	}
 
 	@Operation(summary = "用户日志查询", description = "用户日志查询", method = CommonConstant.GET)
@@ -89,7 +89,7 @@ public class LogController {
 	public Result<Object> getUserLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
 		criteria.setBlurry(SecurityUtil.getUsername());
-		return Result.success(ILogService.queryAllByUser(criteria, pageable));
+		return Result.success(logService.queryAllByUser(criteria, pageable));
 	}
 
 	@Operation(summary = "错误日志查询", description = "错误日志查询", method = CommonConstant.GET)
@@ -97,7 +97,7 @@ public class LogController {
 	@GetMapping(value = "/error")
 	public Result<Object> getErrorLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("ERROR");
-		return Result.success(ILogService.queryAll(criteria, pageable));
+		return Result.success(logService.queryAll(criteria, pageable));
 	}
 
 	@Operation(summary = "日志异常详情查询", description = "日志异常详情查询", method = CommonConstant.GET)
@@ -105,7 +105,7 @@ public class LogController {
 	@GetMapping(value = "/error/{id}")
 	@PreAuthorize("@el.check('admin','logError:detail')")
 	public Result<Object> getErrorLogs(@PathVariable Long id) {
-		return Result.success(ILogService.findByErrDetail(id));
+		return Result.success(logService.findByErrDetail(id));
 	}
 
 	@Operation(summary = "删除所有ERROR日志", description = "删除所有ERROR日志", method = CommonConstant.DELETE)
@@ -113,7 +113,7 @@ public class LogController {
 	@DeleteMapping(value = "/del/error")
 	@PreAuthorize("@el.check('admin','logError:remove')")
 	public Result<Object> delAllByError() {
-		ILogService.delAllByError();
+		logService.delAllByError();
 		return Result.success(true);
 	}
 
@@ -122,7 +122,7 @@ public class LogController {
 	@DeleteMapping(value = "/del/info")
 	@PreAuthorize("@el.check('admin','logInfo:remove')")
 	public Result<Boolean> delAllByInfo() {
-		ILogService.delAllByInfo();
+		logService.delAllByInfo();
 		return Result.success(true);
 	}
 }
