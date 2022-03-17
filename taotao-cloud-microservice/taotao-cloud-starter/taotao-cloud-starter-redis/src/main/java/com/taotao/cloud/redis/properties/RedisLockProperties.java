@@ -31,7 +31,7 @@ public class RedisLockProperties {
 
 	public static final String PREFIX = "taotao.cloud.redis.lock";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean getEnabled() {
 		return enabled;

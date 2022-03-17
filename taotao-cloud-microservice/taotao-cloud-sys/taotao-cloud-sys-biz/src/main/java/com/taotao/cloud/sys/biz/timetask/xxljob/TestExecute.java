@@ -10,10 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestExecute implements EveryMinuteExecute {
 
-
 	@Override
 	public void execute() {
-
 		LogUtil.info(Thread.currentThread().getName() + "============ 每分钟执行");
 	}
 }
