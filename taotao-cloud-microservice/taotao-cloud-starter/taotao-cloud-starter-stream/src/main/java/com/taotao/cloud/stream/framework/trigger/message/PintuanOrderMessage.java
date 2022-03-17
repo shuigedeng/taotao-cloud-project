@@ -6,15 +6,15 @@ package com.taotao.cloud.stream.framework.trigger.message;
  **/
 public class PintuanOrderMessage {
 
-    /**
-     * 拼团活动id
-     */
-    private String pintuanId;
+	/**
+	 * 拼团活动id
+	 */
+	private String pintuanId;
 
-    /**
-     * 父拼团订单sn
-     */
-    private String orderSn;
+	/**
+	 * 父拼团订单sn
+	 */
+	private String orderSn;
 
 	public String getPintuanId() {
 		return pintuanId;

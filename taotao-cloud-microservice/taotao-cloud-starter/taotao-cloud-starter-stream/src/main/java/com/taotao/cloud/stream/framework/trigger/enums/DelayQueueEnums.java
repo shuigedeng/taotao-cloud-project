@@ -5,13 +5,13 @@ package com.taotao.cloud.stream.framework.trigger.enums;
  */
 public enum DelayQueueEnums {
 
-
     /**
      * 促销活动
      */
-    PROMOTION("促销活动");
+    PROMOTION("促销活动"),
+    ORDER("订单延迟");
 
-    private String description;
+    private final String description;
 
     DelayQueueEnums(String description) {
         this.description = description;

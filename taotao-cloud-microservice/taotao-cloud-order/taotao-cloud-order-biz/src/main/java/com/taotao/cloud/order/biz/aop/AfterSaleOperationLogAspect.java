@@ -1,13 +1,11 @@
 package com.taotao.cloud.order.biz.aop;
 
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.SpelUtil;
-import cn.lili.common.utils.ThreadPoolUtil;
-import cn.lili.modules.order.aftersale.entity.dos.AfterSaleLog;
-import cn.lili.modules.order.aftersale.service.AfterSaleLogService;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.utils.spel.SpelUtil;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.biz.service.aftersale.AfterSaleLogService;
+import groovy.util.logging.Slf4j;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,7 +19,6 @@ import java.util.Map;
 /**
  * 订单操作日志
  */
-@Slf4j
 @Aspect
 @Component
 public class AfterSaleOperationLogAspect {

@@ -5,14 +5,14 @@ package com.taotao.cloud.stream.framework.trigger.model;
  **/
 public interface TimeExecuteConstant {
 
-    /**
-     * 促销延迟加载执行器
-     */
-    public static final String PROMOTION_EXECUTOR = "promotionTimeTriggerExecutor";
+	/**
+	 * 促销延迟加载执行器
+	 */
+	public static final String PROMOTION_EXECUTOR = "promotionTimeTriggerExecutor";
 
-    /**
-     * 直播间延迟加载执行器
-     */
-    public static final String BROADCAST_EXECUTOR = "broadcastTimeTriggerExecutor";
+	/**
+	 * 直播间延迟加载执行器
+	 */
+	public static final String BROADCAST_EXECUTOR = "broadcastTimeTriggerExecutor";
 
 }

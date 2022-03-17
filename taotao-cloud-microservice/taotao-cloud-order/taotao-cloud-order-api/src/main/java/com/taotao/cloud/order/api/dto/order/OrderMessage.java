@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

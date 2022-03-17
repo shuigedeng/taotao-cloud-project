@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
  * 促销延迟队列
  */
 @Component
-public class PromotionDelayQueue extends AbstractDelayQueueMachineFactory {
+public class OrderDelayQueue extends AbstractDelayQueueMachineFactory {
 
 	@Override
 	public String getDelayQueueName() {
-		return DelayQueueEnums.PROMOTION.name();
+		return DelayQueueEnums.ORDER.name();
 	}
 }

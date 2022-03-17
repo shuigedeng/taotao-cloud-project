@@ -17,30 +17,34 @@ import org.springframework.stereotype.Component;
 @Component
 @RocketMQMessageListener(topic = "${lili.data.rocketmq.promotion-topic}", consumerGroup = "${lili.data.rocketmq.promotion-group}")
 public class TimeTriggerConsumer implements RocketMQListener<TimeTriggerMsg> {
-    @Autowired
-    private RedisRepository redisRepository;
 
-    @Override
-    public void onMessage(TimeTriggerMsg timeTriggerMsg) {
-        try {
-            String key = DelayQueueTools.generateKey(timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getTriggerTime(), timeTriggerMsg.getUniqueKey());
+	@Autowired
+	private RedisRepository redisRepository;
 
-            if (redisRepository.get(key) == null) {
-                LogUtil.info("执行器执行被取消：{} | 任务标识：{}", timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getUniqueKey());
-                return;
-            }
+	@Override
+	public void onMessage(TimeTriggerMsg timeTriggerMsg) {
+		try {
+			String key = DelayQueueTools.generateKey(timeTriggerMsg.getTriggerExecutor(),
+				timeTriggerMsg.getTriggerTime(), timeTriggerMsg.getUniqueKey());
 
-	        LogUtil.info("执行器执行：" + timeTriggerMsg.getTriggerExecutor());
-	        LogUtil.info("执行器参数：" + JSONUtil.toJsonStr(timeTriggerMsg.getParam()));
+			if (redisRepository.get(key) == null) {
+				LogUtil.info("执行器执行被取消：{} | 任务标识：{}", timeTriggerMsg.getTriggerExecutor(),
+					timeTriggerMsg.getUniqueKey());
+				return;
+			}
 
-	        redisRepository.del(key);
+			LogUtil.info("执行器执行：" + timeTriggerMsg.getTriggerExecutor());
+			LogUtil.info("执行器参数：" + JSONUtil.toJsonStr(timeTriggerMsg.getParam()));
 
-            TimeTriggerExecutor executor = (TimeTriggerExecutor) ContextUtil.getBean(timeTriggerMsg.getTriggerExecutor(), true);
-            executor.execute(timeTriggerMsg.getParam());
-        } catch (Exception e) {
-	        LogUtil.error("mq延时任务异常", e);
-        }
+			redisRepository.del(key);
 
-    }
+			TimeTriggerExecutor executor = (TimeTriggerExecutor) ContextUtil.getBean(
+				timeTriggerMsg.getTriggerExecutor(), true);
+			executor.execute(timeTriggerMsg.getParam());
+		} catch (Exception e) {
+			LogUtil.error("mq延时任务异常", e);
+		}
+
+	}
 
 }

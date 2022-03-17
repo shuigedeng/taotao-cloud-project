@@ -8,29 +8,29 @@ import java.util.Date;
  **/
 public class PromotionMessage {
 
-    /**
-     * 促销id
-     */
-    private String promotionId;
-    /**
-     * 促销类型
-     */
-    private String promotionType;
+	/**
+	 * 促销id
+	 */
+	private String promotionId;
+	/**
+	 * 促销类型
+	 */
+	private String promotionType;
 
-    /**
-     * 促销状态
-     */
-    private String promotionStatus;
+	/**
+	 * 促销状态
+	 */
+	private String promotionStatus;
 
-    /**
-     * 开始时间
-     */
-    private Date startTime;
+	/**
+	 * 开始时间
+	 */
+	private Date startTime;
 
-    /**
-     * 结束时间
-     */
-    private Date endTime;
+	/**
+	 * 结束时间
+	 */
+	private Date endTime;
 
 	public String getPromotionId() {
 		return promotionId;

@@ -5,7 +5,6 @@ package com.taotao.cloud.stream.framework.trigger.enums;
  *
  */
 public enum DelayTypeEnums {
-
     /**
      * 促销活动
      */
@@ -14,7 +13,6 @@ public enum DelayTypeEnums {
      * 拼团订单
      */
     PINTUAN_ORDER("拼团订单"),
-
     /**
      * 直播
      */
