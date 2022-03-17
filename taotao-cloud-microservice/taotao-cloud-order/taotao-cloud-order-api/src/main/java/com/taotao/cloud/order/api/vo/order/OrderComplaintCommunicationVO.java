@@ -1,6 +1,5 @@
 package com.taotao.cloud.order.api.vo.order;
 
-import cn.lili.modules.order.order.entity.dos.OrderComplaintCommunication;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;

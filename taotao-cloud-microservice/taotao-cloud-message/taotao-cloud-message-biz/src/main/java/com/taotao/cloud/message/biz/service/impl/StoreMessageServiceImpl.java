@@ -6,6 +6,7 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.biz.entity.StoreMessage;
 import com.taotao.cloud.message.biz.mapper.StoreMessageMapper;
@@ -24,7 +25,7 @@ public class StoreMessageServiceImpl extends ServiceImpl<StoreMessageMapper, Sto
 	StoreMessageService {
 
     @Override
-    public boolean deleteByMessageId(String messageId) {
+    public Boolean deleteByMessageId(String messageId) {
         StoreMessage storeMessage = this.getById(messageId);
         if (storeMessage != null) {
             return this.removeById(messageId);
@@ -55,12 +56,12 @@ public class StoreMessageServiceImpl extends ServiceImpl<StoreMessageMapper, Sto
     }
 
     @Override
-    public boolean save(List<StoreMessage> messages) {
+    public Boolean save(List<StoreMessage> messages) {
         return saveBatch(messages);
     }
 
     @Override
-    public boolean editStatus(String status, String id) {
+    public Boolean editStatus(String status, String id) {
         StoreMessage storeMessage = this.getById(id);
         if (storeMessage != null) {
             //校验权限

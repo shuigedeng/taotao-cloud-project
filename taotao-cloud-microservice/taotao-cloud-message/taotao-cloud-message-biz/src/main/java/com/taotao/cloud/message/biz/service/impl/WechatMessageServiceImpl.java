@@ -5,6 +5,8 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
 import com.taotao.cloud.message.biz.entity.WechatMessage;
 import com.taotao.cloud.message.biz.mapper.WechatMessageMapper;
@@ -27,7 +29,6 @@ import java.util.Map;
  * 微信模版消息（公众号） 业务实现
  */
 @Service
-@Slf4j
 public class WechatMessageServiceImpl extends ServiceImpl<WechatMessageMapper, WechatMessage> implements
 	WechatMessageService {
 

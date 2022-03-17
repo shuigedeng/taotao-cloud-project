@@ -1,9 +1,6 @@
 package com.taotao.cloud.order.api.vo.cart;
 
-import cn.lili.modules.distribution.entity.dos.DistributionGoods;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Date;

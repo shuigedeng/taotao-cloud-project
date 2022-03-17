@@ -18,7 +18,7 @@ public interface StoreMessageService extends IService<StoreMessage> {
 	 * @param messageId 消息ID
 	 * @return 操作结果
 	 */
-	boolean deleteByMessageId(String messageId);
+	Boolean deleteByMessageId(String messageId);
 
 	/**
 	 * 多条件分页获取
@@ -35,7 +35,7 @@ public interface StoreMessageService extends IService<StoreMessage> {
 	 * @param messages 消息
 	 * @return
 	 */
-	boolean save(List<StoreMessage> messages);
+	Boolean save(List<StoreMessage> messages);
 
 
 	/**
@@ -45,6 +45,6 @@ public interface StoreMessageService extends IService<StoreMessage> {
 	 * @param id     id
 	 * @return
 	 */
-	boolean editStatus(String status, String id);
+	Boolean editStatus(String status, String id);
 
 }

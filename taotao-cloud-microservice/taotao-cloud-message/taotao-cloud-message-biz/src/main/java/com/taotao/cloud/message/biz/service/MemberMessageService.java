@@ -37,14 +37,13 @@ public interface MemberMessageService extends IService<MemberMessage> {
 	 */
 	Boolean deleteMessage(String messageId);
 
-
 	/**
 	 * 保存消息信息
 	 *
 	 * @param messages 消息
 	 * @return
 	 */
-	boolean save(List<MemberMessage> messages);
+	Boolean save(List<MemberMessage> messages);
 
 
 }

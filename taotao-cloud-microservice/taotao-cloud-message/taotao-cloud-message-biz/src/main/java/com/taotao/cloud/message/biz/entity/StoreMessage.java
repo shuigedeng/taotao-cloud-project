@@ -11,11 +11,11 @@ import lombok.Data;
 /**
  * 店铺消息表
  */
+@Data
 @Entity
 @Table(name = StoreMessage.TABLE_NAME)
 @TableName(StoreMessage.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = StoreMessage.TABLE_NAME, comment = "店铺消息表")
-@Data
 public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
 
 	public static final String TABLE_NAME = "tt_store_message";

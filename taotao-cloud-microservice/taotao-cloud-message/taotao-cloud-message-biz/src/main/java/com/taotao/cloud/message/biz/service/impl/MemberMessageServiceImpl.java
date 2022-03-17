@@ -67,7 +67,7 @@ public class MemberMessageServiceImpl extends
 	}
 
 	@Override
-	public boolean save(List<MemberMessage> messages) {
+	public Boolean save(List<MemberMessage> messages) {
 		return saveBatch(messages);
 	}
 }

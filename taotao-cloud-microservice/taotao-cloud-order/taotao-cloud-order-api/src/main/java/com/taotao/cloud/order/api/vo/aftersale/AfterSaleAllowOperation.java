@@ -1,7 +1,6 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
-import cn.lili.modules.order.trade.entity.enums.AfterSaleStatusEnum;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -65,8 +64,5 @@ public class AfterSaleAllowOperation {
 			|| serviceStatus.equals(AfterSaleStatusEnum.PASS.name())) {
 			cancel = true;
 		}
-
-
 	}
-
 }

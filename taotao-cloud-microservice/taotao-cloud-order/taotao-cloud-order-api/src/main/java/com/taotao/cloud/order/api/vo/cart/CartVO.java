@@ -1,8 +1,5 @@
 package com.taotao.cloud.order.api.vo.cart;
 
-import cn.lili.modules.order.cart.entity.enums.DeliveryMethodEnum;
-import cn.lili.modules.promotion.entity.dos.MemberCoupon;
-import cn.lili.modules.promotion.entity.vos.CouponVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -22,7 +22,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * TaoTaoCloudUcApplication
+ * TaoTaoCloudSysApplication
  * 抑制java9 module 报错
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED

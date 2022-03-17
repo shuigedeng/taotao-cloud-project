@@ -1,8 +1,6 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import cn.hutool.core.util.StrUtil;
-import cn.lili.modules.order.aftersale.entity.enums.ComplaintStatusEnum;
-import cn.lili.modules.order.order.entity.dos.OrderComplaint;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

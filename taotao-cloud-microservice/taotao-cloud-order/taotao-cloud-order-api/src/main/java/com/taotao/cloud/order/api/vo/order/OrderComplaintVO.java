@@ -1,8 +1,6 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.lili.modules.order.order.entity.dos.OrderComplaint;
-import cn.lili.modules.order.order.entity.dos.OrderComplaintCommunication;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;

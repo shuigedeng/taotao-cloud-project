@@ -8,8 +8,6 @@ import javax.persistence.Table;
 
 /**
  * 物流公司设置
- *
- * @since 2020/11/17 8:01 下午
  */
 @Entity
 @Table(name = LogisticsConfig.TABLE_NAME)

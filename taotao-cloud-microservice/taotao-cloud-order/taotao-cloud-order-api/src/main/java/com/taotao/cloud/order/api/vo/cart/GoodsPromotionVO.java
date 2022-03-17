@@ -1,7 +1,5 @@
 package com.taotao.cloud.order.api.vo.cart;
 
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Date;

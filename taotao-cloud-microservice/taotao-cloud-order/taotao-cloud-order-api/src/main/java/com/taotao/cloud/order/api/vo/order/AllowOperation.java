@@ -1,11 +1,10 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.enums.DeliverStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderTypeEnum;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
+import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import lombok.Data;

@@ -18,6 +18,7 @@ import lombok.Data;
 public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
 
 	public static final String TABLE_NAME = "tt_wechat_mp_message";
+
 	/**
 	 * 模版id
 	 */
