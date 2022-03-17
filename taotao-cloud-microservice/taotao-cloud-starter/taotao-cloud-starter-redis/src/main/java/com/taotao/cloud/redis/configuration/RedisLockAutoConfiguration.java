@@ -41,7 +41,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnBean(RedissonClient.class)
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableConfigurationProperties({RedisLockProperties.class})
-@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class RedisLockAutoConfiguration implements InitializingBean {
 
 	@Override

@@ -70,9 +70,9 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
+
 	/**
-	 * 自定义缓存异常处理
-	 * 当缓存读写异常时，忽略异常
+	 * 自定义缓存异常处理 当缓存读写异常时，忽略异常
 	 */
 	@Override
 	public CacheErrorHandler errorHandler() {
@@ -81,14 +81,17 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 			public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
 				LogUtil.error(e.getMessage(), e);
 			}
+
 			@Override
 			public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
 				LogUtil.error(e.getMessage(), e);
 			}
+
 			@Override
 			public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
 				LogUtil.error(e.getMessage(), e);
 			}
+
 			@Override
 			public void handleCacheClearError(RuntimeException e, Cache cache) {
 				LogUtil.error(e.getMessage(), e);
@@ -172,7 +175,6 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		public void onRedisKeyExpiredEvent(RedisKeyExpiredEvent<Object> event) {
 			LogUtil.info(event.toString());
 		}
-
 	}
 
 	@Configuration(proxyBeanMethods = false)
