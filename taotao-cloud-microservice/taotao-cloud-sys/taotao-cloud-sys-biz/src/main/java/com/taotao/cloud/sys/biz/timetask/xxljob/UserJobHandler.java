@@ -4,7 +4,7 @@
  * Date: 2020/6/16 14:43
  * Author: shuigedeng
  */
-package com.taotao.cloud.sys.biz.timetask;
+package com.taotao.cloud.sys.biz.timetask.xxljob;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;

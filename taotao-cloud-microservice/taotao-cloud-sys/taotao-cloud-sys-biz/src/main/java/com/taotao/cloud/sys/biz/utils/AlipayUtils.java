@@ -45,7 +45,6 @@ public class AlipayUtils {
 	 * @return boolean
 	 */
 	public boolean rsaCheck(HttpServletRequest request, AlipayConfig alipay) {
-
 		// 获取支付宝POST过来反馈信息
 		Map<String, String> params = new HashMap<>(1);
 		Map requestParams = request.getParameterMap();

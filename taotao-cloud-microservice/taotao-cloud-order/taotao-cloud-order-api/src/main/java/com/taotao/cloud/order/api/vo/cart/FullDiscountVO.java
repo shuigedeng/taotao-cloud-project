@@ -1,8 +1,5 @@
 package com.taotao.cloud.order.api.vo.cart;
 
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.promotion.entity.dos.FullDiscount;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;

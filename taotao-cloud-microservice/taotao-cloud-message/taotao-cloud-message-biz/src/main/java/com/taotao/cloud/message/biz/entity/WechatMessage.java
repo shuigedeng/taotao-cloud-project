@@ -11,11 +11,11 @@ import lombok.Data;
 /**
  * 微信消息表
  */
+@Data
 @Entity
 @Table(name = WechatMessage.TABLE_NAME)
 @TableName(WechatMessage.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = WechatMessage.TABLE_NAME, comment = "微信消息表")
-@Data
 public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
 
 	public static final String TABLE_NAME = "tt_wechat_message";

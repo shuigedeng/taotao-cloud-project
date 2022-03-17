@@ -1,8 +1,5 @@
 package com.taotao.cloud.order.api.vo.order;
 
-import cn.lili.modules.order.order.entity.enums.CommentStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderComplaintStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderItemAfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

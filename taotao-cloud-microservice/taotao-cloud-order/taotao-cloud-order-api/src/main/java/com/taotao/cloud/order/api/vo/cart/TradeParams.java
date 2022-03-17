@@ -1,7 +1,6 @@
 package com.taotao.cloud.order.api.vo.cart;
 
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.modules.order.cart.entity.dto.StoreRemarkDTO;
+import com.taotao.cloud.order.api.dto.cart.StoreRemarkDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;

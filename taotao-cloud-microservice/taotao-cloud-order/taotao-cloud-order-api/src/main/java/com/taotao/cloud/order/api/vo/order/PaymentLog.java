@@ -1,9 +1,5 @@
 package com.taotao.cloud.order.api.vo.order;
 
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.modules.order.order.entity.enums.OrderTypeEnum;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

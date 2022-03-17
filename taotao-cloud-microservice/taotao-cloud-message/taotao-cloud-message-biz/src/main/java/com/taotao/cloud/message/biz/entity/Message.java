@@ -13,11 +13,11 @@ import lombok.Data;
 /**
  * 消息表
  */
+@Data
 @Entity
 @Table(name = Message.TABLE_NAME)
 @TableName(Message.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Message.TABLE_NAME, comment = "消息表")
-@Data
 public class Message extends BaseSuperEntity<Message, Long> {
 
 	public static final String TABLE_NAME = "tt_message";

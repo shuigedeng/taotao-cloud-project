@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.vo.cart;
 
-import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import lombok.Data;

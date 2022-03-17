@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.timetask;
+package com.taotao.cloud.sys.biz.timetask.scheduled;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;

@@ -35,13 +35,13 @@ public class AfterSaleApplyVO {
 	private Double goodsPrice;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleRefundWayEnum
+	 * @see AfterSaleRefundWayEnum
 	 */
 	@Schema(description = "退款方式", allowableValues = "ORIGINAL,OFFLINE")
 	private String refundWay;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums
+	 * @see enums
 	 */
 	@Schema(description = "账号类型", allowableValues = "ALIPAY,WECHATPAY,MEMBERWALLET,BANKTRANSFER")
 	private String accountType;
