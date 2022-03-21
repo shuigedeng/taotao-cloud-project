@@ -28,7 +28,7 @@ configurations {
         //}
 
         //exclude group: 'org.codehaus.groovy', module: 'groovy'
-        exclude group: 'org.projectlombok', module: 'lombok'
+        //exclude group: 'org.projectlombok', module: 'lombok'
         exclude group: 'log4j', module: 'log4j'
         exclude group: 'log4j', module: 'slf4j-simple'
         exclude group: 'org.slf4j', module: 'slf4j-log4j12'

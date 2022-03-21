@@ -1,0 +1,154 @@
+version: '3'
+services:
+  es1:
+    image: elasticsearch:7.16.2
+    container_name: es1
+    environment:
+      - node.name=es1
+      - cluster.name=taotao-cloud-elasticsearch-cluster
+      - discovery.seed_hosts=es2,es3
+      - cluster.initial_master_nodes=es1,es2,es3
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - TZ="Asia/Shanghai"
+      - node.master=true
+      - node.data=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /root/es/es1/data:/usr/share/elasticsearch/data
+      - /root/es/es1/plugins:/usr/share/elasticsearch/plugins
+    ports:
+      - "9200:9200"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.196
+  es2:
+    image: elasticsearch:7.16.2
+    container_name: es2
+    environment:
+      - node.name=es2
+      - cluster.name=taotao-cloud-elasticsearch-cluster
+      - discovery.seed_hosts=es1,es3
+      - cluster.initial_master_nodes=es1,es2,es3
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - TZ="Asia/Shanghai"
+      - node.master=true
+      - node.data=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /root/es/es2/data:/usr/share/elasticsearch/data
+      - /root/es/es3/plugins:/usr/share/elasticsearch/plugins
+    ports:
+      - "9201:9200"
+      - 9301:9300
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.197
+  es3:
+    image: elasticsearch:7.16.2
+    container_name: es3
+    environment:
+      - node.name=es3
+      - cluster.name=taotao-cloud-elasticsearch-cluster
+      - discovery.seed_hosts=es1,es2
+      - cluster.initial_master_nodes=es1,es2,es3
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - TZ="Asia/Shanghai"
+      - node.master=true
+      - node.data=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /root/es/es3/data:/usr/share/elasticsearch/data
+      - /root/es/es3/plugins:/usr/share/elasticsearch/plugins
+    ports:
+      - "9202:9200"
+      - 9302:9300
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.198
+
+  #https://github.com/medcl/elasticsearch-analysis-ik/releases
+  kibana:
+    image: kibana:7.16.2
+    container_name: kibana
+    links:
+      - es1:elasticsearch
+    depends_on:
+      - es1
+      - es2
+      - es3
+    environment:
+      I18N_LOCALE: zh-CN
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.199
+
+  cerebro:
+    image: lmenezes/cerebro:latest
+    container_name: cerebro
+    ports:
+      - "9000:9000"
+    links:
+      - es1:elasticsearch
+    command:
+      - -Dhosts.0.host=http://elasticsearch:9200
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.200
+
+  skywalking-oap:
+    image: apache/skywalking-oap-server:8.9.0
+    container_name: skywalking-oap
+    restart: always
+    depends_on:
+      - es1
+    ports:
+      - 11800:11800
+      - 12800:12800
+    environment:
+      - TZ=Asia/Shanghai
+      - SW_STORAGE=elasticsearch7
+      - SW_STORAGE_ES_CLUSTER_NODES=es1:9200
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.201
+  skywalking-ui:
+    image: apache/skywalking-ui:8.9.0
+    container_name: skywalking-ui
+    restart: always
+    depends_on:
+      - skywalking-oap
+    ports:
+      - 1300:8080
+    environment:
+      - TZ=Asia/Shanghai
+      - SW_OAP_ADDRESS=skywalking-oap:12800
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.202
+
+networks:
+  kafka-cluster-network:
+    external:
+      name: kafka-cluster-network

@@ -1,0 +1,272 @@
+# 新建网络 docker-compose -f  3-zk-kafka-cluster.yml up -d
+# docker network ls #查看当前网络
+# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 kafka-cluster-network
+
+version: '3.7'
+services:
+  zoo1:
+    image: zookeeper:3.4.10
+    restart: always
+    hostname: zoo1
+    container_name: zoo1
+    privileged: true
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.4
+  zoo2:
+    image: zookeeper:3.4.10
+    restart: always
+    hostname: zoo2
+    container_name: zoo2
+    privileged: true
+    ports:
+      - "2182:2181"
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.5
+  zoo3:
+    image: zookeeper:3.4.10
+    restart: always
+    hostname: zoo3
+    container_name: zoo3
+    privileged: true
+    ports:
+      - "2183:2181"
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.6
+
+  broker1:
+    image: wurstmeister/kafka
+    restart: always
+    hostname: broker1
+    container_name: broker1
+    privileged: true
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_LISTENERS: PLAINTEXT://broker1:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9092
+      KAFKA_ADVERTISED_HOST_NAME: broker1
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
+      KAFKA_HEAP_OPTS: "-Xmx512M -Xms16M"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.7
+  broker2:
+    image: wurstmeister/kafka
+    restart: always
+    hostname: broker2
+    container_name: broker2
+    privileged: true
+    ports:
+      - "9093:9092"
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_LISTENERS: PLAINTEXT://broker2:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9093
+      KAFKA_ADVERTISED_HOST_NAME: broker2
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.8
+  broker3:
+    image: wurstmeister/kafka
+    restart: always
+    hostname: broker3
+    container_name: broker3
+    privileged: true
+    ports:
+      - "9094:9092"
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_LISTENERS: PLAINTEXT://broker3:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9094
+      KAFKA_ADVERTISED_HOST_NAME: broker3
+      KAFKA_ADVERTISED_PORT: 9094
+      KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.9
+
+  kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    restart: always
+    container_name: kafka-manager
+    hostname: kafka-manager
+    ports:
+      - "9095:9000"
+    environment:
+      ZK_HOSTS: zoo1:2181,zoo2:2181,zoo3:2181
+      KAFKA_BROKERS: broker1:9092,broker2:9092,broker3:9092
+      APPLICATION_SECRET: 123456
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.10
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_DB=taotao-cloud-zipkin
+      - MYSQL_USER=root
+      - MYSQL_PASS=123456
+      - MYSQL_HOST=172.16.6.151
+      - MYSQL_TCP_PORT=3316
+    ports:
+      - "9411:9411"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.20
+
+  sentinel-dashboard:
+    image: fxbin/sentinel-dashboard:1.8.2
+    container_name: sentinel-dashboard
+    ports:
+      - "8858:8858"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.21
+  nacos1:
+    image: nacos/nacos-server
+    restart: always
+    hostname: nacos1
+    container_name: nacos1
+    privileged: true
+    ports:
+      - "8846:8848"
+    environment:
+      MODE: cluster
+      PREFER_HOST_MODE: hostname
+      NACOS_APPLICATION_PORT: 8848
+      NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_PORT: 3316
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.100
+  nacos2:
+    image: nacos/nacos-server
+    restart: always
+    hostname: nacos2
+    container_name: nacos2
+    privileged: true
+    ports:
+      - "8847:8848"
+    environment:
+      MODE: cluster
+      NACOS_APPLICATION_PORT: 8848
+      PREFER_HOST_MODE: hostname
+      NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_PORT: 3316
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.101
+  nacos3:
+    image: nacos/nacos-server
+    restart: always
+    hostname: nacos3
+    container_name: nacos3
+    privileged: true
+    ports:
+      - "8848:8848"
+    environment:
+      MODE: cluster
+      NACOS_APPLICATION_PORT: 8848
+      PREFER_HOST_MODE: hostname
+      NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_PORT: 3316
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.102
+
+  nacos-nginx:
+    image: nginx
+    restart: always
+    container_name: nacos-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - /root/config.d:/etc/nginx/conf.d
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.103
+
+  seata1:
+    container_name: seata1
+    image: seataio/seata-server:1.4.2
+    restart: always
+    ports:
+      - "8091:8091"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /root/seata/registry.conf:/seata-server/resources/registry.conf
+    environment:
+      SEATA_PORT: 8091
+      SEATA_IP: 172.16.6.151
+  seata2:
+    container_name: seata2
+    image: seataio/seata-server:1.4.2
+    restart: always
+    ports:
+      - "8092:8092"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /root/seata/registry.conf:/seata-server/resources/registry.conf
+    environment:
+      SEATA_PORT: 8092
+      SEATA_IP: 172.16.6.151
+  seata3:
+    container_name: seata3
+    image: seataio/seata-server:1.4.2
+    restart: always
+    ports:
+      - "8093:8093"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /root/seata/registry.conf:/seata-server/resources/registry.conf
+    environment:
+      SEATA_PORT: 8093
+      SEATA_IP: 172.16.6.151
+
+
+networks:
+  kafka-cluster-network:
+    external:
+      name: kafka-cluster-network
