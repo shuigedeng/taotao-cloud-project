@@ -265,7 +265,7 @@ seata:
   config:
     type: nacos
     nacos:
-      namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
+      namespace: 7c67c02a-747b-40fd-ba79-57d6e92de1cd
       server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
@@ -276,10 +276,10 @@ seata:
       application: taotao-cloud-seata
       server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
       group: SEATA_GROUP
-      namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
+      namespace: 7c67c02a-747b-40fd-ba79-57d6e92de1cd
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
-      cluster: default
+      cluster: taotao-cloud-seata-cluster
   client:
     rm:
       async-commit-buffer-limit: 10000

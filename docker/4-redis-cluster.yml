@@ -1,0 +1,88 @@
+# /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -a taotao-cloud --cluster create 172.16.6.151:6381 172.16.6.151:6382 172.16.6.151:6383 172.16.6.151:6384 172.16.6.151:6385 172.16.6.151:6386 --cluster-replicas 1
+
+version: '3.8'
+services:
+  node1:
+    image: redis
+    restart: always
+    container_name: node1
+    ports:
+      - 6381:6379
+      - 16381:16379
+    command: "redis-server --requirepass taotao-cloud --masterauth taotao-cloud --appendonly yes \
+      --cluster-enabled yes \
+      --cluster-config-file nodes.conf \
+      --cluster-node-timeout 15000 \
+      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-port 6381 \
+      --cluster-announce-bus-port 16381"
+  node2:
+    image: redis
+    restart: always
+    container_name: node2
+    ports:
+      - 6382:6379
+      - 16382:16379
+    command: "redis-server --requirepass taotao-cloud --masterauth taotao-cloud --appendonly yes \
+      --cluster-enabled yes \
+      --cluster-config-file nodes.conf \
+      --cluster-node-timeout 15000 \
+      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-port 6382 \
+      --cluster-announce-bus-port 16382"
+  node3:
+    image: redis
+    restart: always
+    container_name: node3
+    ports:
+      - 6383:6379
+      - 16383:16379
+    command: "redis-server --requirepass taotao-cloud --masterauth taotao-cloud --appendonly yes \
+      --cluster-enabled yes \
+      --cluster-config-file nodes.conf \
+      --cluster-node-timeout 15000 \
+      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-port 6383 \
+      --cluster-announce-bus-port 16383"
+  node4:
+    image: redis
+    restart: always
+    container_name: node4
+    ports:
+      - 6384:6379
+      - 16384:16379
+    command: "redis-server --requirepass taotao-cloud --masterauth taotao-cloud --appendonly yes \
+      --cluster-enabled yes \
+      --cluster-config-file nodes.conf \
+      --cluster-node-timeout 15000 \
+      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-port 6384 \
+      --cluster-announce-bus-port 16384"
+  node5:
+    image: redis
+    restart: always
+    container_name: node5
+    ports:
+      - 6385:6379
+      - 16385:16379
+    command: "redis-server --requirepass taotao-cloud --masterauth taotao-cloud --appendonly yes \
+      --cluster-enabled yes \
+      --cluster-config-file nodes.conf \
+      --cluster-node-timeout 15000 \
+      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-port 6385 \
+      --cluster-announce-bus-port 16385"
+  node6:
+    image: redis
+    restart: always
+    container_name: node6
+    ports:
+      - 6386:6379
+      - 16386:16379
+    command: "redis-server --requirepass taotao-cloud --masterauth taotao-cloud --appendonly yes \
+      --cluster-enabled yes \
+      --cluster-config-file nodes.conf \
+      --cluster-node-timeout 15000 \
+      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-port 6386 \
+      --cluster-announce-bus-port 16386"

@@ -1,0 +1,101 @@
+version: '2'
+services:
+  shard1:
+    image: mongo:4.0.5
+    container_name: mongo_shard1
+    # --shardsvr: 这个参数仅仅只是将默认的27017端口改为27018,如果指定--port参数，可用不需要这个参数
+    # --directoryperdb：每个数据库使用单独的文件夹
+    command: mongod --shardsvr --directoryperdb --replSet shard1
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/base/fates/mongo/shard1:/data/db
+    privileged: true
+    mem_limit: 16000000000
+    networks:
+      - mongo
+  shard2:
+    image: mongo:4.0.5
+    container_name: mongo_shard2
+    command: mongod --shardsvr --directoryperdb --replSet shard2
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/base/fates/mongo/shard2:/data/db
+    privileged: true
+    mem_limit: 16000000000
+    networks:
+      - mongo
+  shard3:
+    image: mongo:4.0.5
+    container_name: mongo_shard3
+    command: mongod --shardsvr --directoryperdb --replSet shard3
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/base/fates/mongo/shard3:/data/db
+    privileged: true
+    mem_limit: 16000000000
+    networks:
+      - mongo
+
+  config1:
+    image: mongo:4.0.5
+    container_name: mongo_config1
+    # --configsvr: 这个参数仅仅是将默认端口由27017改为27019, 如果指定--port可不添加该参数
+    command: mongod --configsvr --directoryperdb --replSet fates-mongo-config --smallfiles
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/base/fates/mongo/config1:/data/configdb
+    networks:
+      - mongo
+  config2:
+    image: mongo:4.0.5
+    container_name: mongo_config2
+    command: mongod --configsvr --directoryperdb --replSet fates-mongo-config --smallfiles
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/base/fates/mongo/config2:/data/configdb
+    networks:
+      - mongo
+  config3:
+    image: mongo:4.0.5
+    container_name: mongo_config3
+    command: mongod --configsvr --directoryperdb --replSet fates-mongo-config --smallfiles
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/base/fates/mongo/config3:/data/configdb
+    networks:
+      - mongo
+
+  mongos:
+    image: mongo:4.0.5
+    container_name: mongo_mongos
+    # mongo3.6版默认绑定IP为127.0.0.1，此处绑定0.0.0.0是允许其他容器或主机可以访问
+    command: mongos --configdb fates-mongo-config/config1:27019,config2:27019,config3:27019 --bind_ip 0.0.0.0 --port 27017
+    ports:
+     - 27017:27017
+    volumes:
+      - /etc/localtime:/etc/localtime
+    depends_on:
+      - config1
+      - config2
+      - config3
+    networks:
+      - mongo
+networks:
+  mongo:
+    external: true
+
+
+##!/bin/sh
+#
+#  docker-compose -f fates-mongo-compose.yaml up -d
+#
+#  #睡眠两分钟，等待mongodb所有容器起来之后将它们配置加入分片
+#  sleep 30s
+#
+#docker-compose -f fates-mongo-compose.yaml exec config1 bash -c "echo 'rs.initiate({_id: \"fates-mongo-config\",configsvr: true, members: [{ _id : 0, host : \"config1:27019\" },{ _id : 1, host : \"config2:27019\" }, { _id : 2, host : \"config3:27019\" }]})' | mongo --port 27019"
+#docker-compose -f fates-mongo-compose.yaml exec shard1 bash -c "echo 'rs.initiate({_id: \"shard1\",members: [{ _id : 0, host : \"shard1:27018\" }]})' | mongo --port 27018"
+#docker-compose -f fates-mongo-compose.yaml exec shard2 bash -c "echo 'rs.initiate({_id: \"shard2\",members: [{ _id : 0, host : \"shard2:27018\" }]})' | mongo --port 27018"
+#docker-compose -f fates-mongo-compose.yaml exec shard3 bash -c "echo 'rs.initiate({_id: \"shard3\",members: [{ _id : 0, host : \"shard3:27018\" }]})' | mongo --port 27018"
+#docker-compose -f fates-mongo-compose.yaml exec mongos bash -c "echo 'sh.addShard(\"shard1/shard1:27018\")' | mongo"
+#docker-compose -f fates-mongo-compose.yaml exec mongos bash -c "echo 'sh.addShard(\"shard2/shard2:27018\")' | mongo"
+#docker-compose -f fates-mongo-compose.yaml exec mongos bash -c "echo 'sh.addShard(\"shard3/shard3:27018\")' | mongo"

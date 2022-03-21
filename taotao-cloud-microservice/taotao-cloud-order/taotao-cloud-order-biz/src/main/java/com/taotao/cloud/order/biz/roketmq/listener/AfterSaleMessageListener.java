@@ -37,8 +37,7 @@ public class AfterSaleMessageListener implements RocketMQListener<MessageExt> {
 				} catch (Exception e) {
 					LogUtil.error("售后{},在{}业务中，状态修改事件执行异常",
 						new String(messageExt.getBody()),
-						afterSaleStatusChangeEvent.getClass().getName(),
-						e);
+						afterSaleStatusChangeEvent.getClass().getName(), e);
 				}
 			}
 		}

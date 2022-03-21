@@ -1,0 +1,59 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    hostname: prometheus
+    #restart: always
+    volumes:
+      - /root/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /root/prometheus/node_down.yml:/etc/prometheus/node_down.yml
+    ports:
+      - "9090:9090"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.206
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    hostname: alertmanager
+    #restart: always
+    volumes:
+      - /root/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9091:9093"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.205
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    hostname: grafana
+    #restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.204
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    hostname: node-exporter
+    #restart: always
+    ports:
+      - "9101:9100"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.203
+
+networks:
+  kafka-cluster-network:
+    external:
+      name: kafka-cluster-network
