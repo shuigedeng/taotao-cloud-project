@@ -8,7 +8,6 @@ public interface IReader {
     /**
      * 读取内容
      * @return 字符串
-     * @since 0.1.94
      */
     String read();
 

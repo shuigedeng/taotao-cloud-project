@@ -5,10 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 敏感词实体
+ * @author dengtao
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = SensitiveWord.TABLE_NAME)
 @TableName(SensitiveWord.TABLE_NAME)
@@ -22,12 +33,4 @@ public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
 	 */
 	@Column(name = "sensitive_word", nullable = false, columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
 	private String sensitiveWord;
-
-	public String getSensitiveWord() {
-		return sensitiveWord;
-	}
-
-	public void setSensitiveWord(String sensitiveWord) {
-		this.sensitiveWord = sensitiveWord;
-	}
 }

@@ -14,7 +14,6 @@ public class DefaultPinyinSegment implements IPinyinSegment {
 
     /**
      * 默认分词实现
-     * @since 0.0.5
      */
     //private static final ICommonSegment COMMON_SEGMENT = CommonSegments.fastForward(new DefaultPinyinTrieTreeMap());
 

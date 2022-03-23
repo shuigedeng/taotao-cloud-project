@@ -49,7 +49,6 @@ public final class CharUtil {
 	 *
 	 * @param c 原始字符
 	 * @return 转换之后的字符
-	 * @since 0.1.68
 	 */
 	public static char toHalfWidth(final char c) {
 		char resultChar = c;
@@ -71,7 +70,6 @@ public final class CharUtil {
 	 *
 	 * @param c 原始字符
 	 * @return 转换之后的字符
-	 * @since 0.1.68
 	 */
 	public static char toFullWidth(final char c) {
 		char resultChar = c;
@@ -91,7 +89,6 @@ public final class CharUtil {
 	 *
 	 * @param c 编码
 	 * @return 是否为中文标点符号
-	 * @since 0.1.68
 	 */
 	public static boolean isChinesePunctuation(char c) {
 		Character.UnicodeScript sc = Character.UnicodeScript.of(c);
@@ -103,7 +100,6 @@ public final class CharUtil {
 	 *
 	 * @param c char
 	 * @return 是否为空格
-	 * @since 0.1.68
 	 */
 	public static boolean isSpace(final char c) {
 		return Character.isSpaceChar(c) || '\u0013' == c;
@@ -114,7 +110,6 @@ public final class CharUtil {
 	 *
 	 * @param c char
 	 * @return 是否为空格
-	 * @since 0.1.129
 	 */
 	public static boolean isNotSpace(final char c) {
 		return !isSpace(c);
@@ -125,7 +120,6 @@ public final class CharUtil {
 	 *
 	 * @param c 字符
 	 * @return 是否
-	 * @since 0.1.69
 	 */
 	public static boolean isDigitOrLetter(final char c) {
 		return Character.isDigit(c)
@@ -138,7 +132,6 @@ public final class CharUtil {
 	 *
 	 * @param c 字符
 	 * @return 是否
-	 * @since 0.1.69
 	 */
 	public static boolean isEmilChar(final char c) {
 		return CharUtil.isDigitOrLetter(c)
@@ -151,7 +144,6 @@ public final class CharUtil {
 	 *
 	 * @param c 字符
 	 * @return 是否
-	 * @since 0.0.12
 	 */
 	public static boolean isWebSiteChar(final char c) {
 		return CharUtil.isDigitOrLetter(c)
@@ -163,7 +155,6 @@ public final class CharUtil {
 	 *
 	 * @param ch 中文
 	 * @return 是否
-	 * @since 0.1.76
 	 */
 	public static boolean isChinese(final char ch) {
 		return ch >= 0x4E00 && ch <= 0x9FA5;
@@ -174,7 +165,6 @@ public final class CharUtil {
 	 *
 	 * @param ch 英文
 	 * @return 是否
-	 * @since 0.1.76
 	 */
 	public static boolean isEnglish(final char ch) {
 		return (ch >= 0x0041 && ch <= 0x005A) || (ch >= 0x0061 && ch <= 0x007A);
@@ -185,7 +175,6 @@ public final class CharUtil {
 	 *
 	 * @param ch 符号
 	 * @return 是否
-	 * @since 0.1.76
 	 */
 	public static boolean isDigit(char ch) {
 		return ch >= 0x0030 && ch <= 0x0039;
@@ -196,14 +185,9 @@ public final class CharUtil {
 	 *
 	 * @param c 字符
 	 * @return 结果
-	 * @since 0.1.129
 	 */
 	public static boolean isAscii(char c) {
-		if (c > 127) {
-			return false;
-		}
-
-		return true;
+		return c <= 127;
 	}
 
 	/**
@@ -211,7 +195,6 @@ public final class CharUtil {
 	 *
 	 * @param c 字符
 	 * @return 结果
-	 * @since 0.1.129
 	 */
 	public static boolean isNotAscii(char c) {
 		return !isAscii(c);

@@ -29,7 +29,6 @@ public class PinyinToneReverse implements IPinyinToneReverse {
      * （1）注意多音字的问题
      * （2）默认只返回第一个
      * （3）为了提升读取的性能，在初始化的时候，直接设计好。
-     * @since 0.0.1
      */
     private static final Map<String, List<String>> CHAR_MAP;
 

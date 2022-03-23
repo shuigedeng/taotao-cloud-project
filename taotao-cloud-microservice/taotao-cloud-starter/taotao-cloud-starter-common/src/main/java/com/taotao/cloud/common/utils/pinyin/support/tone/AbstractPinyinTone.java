@@ -21,7 +21,6 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * @param segment 单个的字
      * @param toneStyle 拼音格式
      * @return 结果
-     * @since 0.0.1
      */
     protected abstract String getCharTone(final String segment, final IPinyinToneStyle toneStyle);
 
@@ -30,7 +29,6 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * @param chinese 中文字符
      * @param toneStyle 拼音格式
      * @return 结果列表
-     * @since 0.0.2
      */
     protected abstract List<String> getCharTones(final String chinese, final IPinyinToneStyle toneStyle);
 
@@ -40,7 +38,6 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * @param toneStyle 拼音格式
      * @param connector 连接符号
      * @return 结果
-     * @since 0.0.1
      */
     protected abstract String getPhraseTone(final String phraseTone,
                                             final IPinyinToneStyle toneStyle,
@@ -81,7 +78,6 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * @param string 字符串
      * @param toneStyle 格式化
      * @return 结果
-     * @since 0.0.3
      */
     private String getCharToneDefault(final String string, final IPinyinToneStyle toneStyle) {
         String pinyin = getCharTone(string, toneStyle);
@@ -105,7 +101,6 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * @param chinese 英文字符
      * @param toneStyle 拼音格式
      * @return 结果
-     * @since 0.0.3
      */
     private List<String> getCharTonesDefault(final String chinese, final IPinyinToneStyle toneStyle) {
         List<String> toneList = getCharTones(chinese, toneStyle);

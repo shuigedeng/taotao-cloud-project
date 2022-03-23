@@ -11,7 +11,6 @@ public final class PinyinTones {
     /**
      * 默认实现
      * @return 默认实现
-     * @since 0.1.1
      */
     public static IPinyinTone defaults() {
         return Instances.singleton(DefaultPinyinTone.class);

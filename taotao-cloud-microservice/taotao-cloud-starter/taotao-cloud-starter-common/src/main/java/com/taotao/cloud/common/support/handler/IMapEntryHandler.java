@@ -18,7 +18,6 @@ public interface IMapEntryHandler<K, V, T> {
     /**
      * 获取 key
      * @param entry 明细信息
-     * @since 0.1.85
      * @return 处理结果
      */
     T handler(final Map.Entry<K,V> entry);

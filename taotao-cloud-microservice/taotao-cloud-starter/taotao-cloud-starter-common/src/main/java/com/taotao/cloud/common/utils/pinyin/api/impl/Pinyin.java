@@ -131,7 +131,6 @@ public class Pinyin implements IPinyin {
      * 转换为拼音列表
      * @param string 字符串
      * @return 结果
-     * @since 0.1.1
      */
     private List<String> toPinyinList(final String string, final IPinyinContext context) {
         if(StringUtil.isEmptyTrim(string)) {
@@ -174,7 +173,6 @@ public class Pinyin implements IPinyin {
      * @param pinyinList 拼音结果
      * @param pinyinTone 拼音标注实现
      * @return  结果
-     * @since 0.1.1
      */
     private List<Integer> buildToneNumList(List<String> pinyinList, final IPinyinTone pinyinTone) {
         List<Integer> resultList = Guavas.newArrayList(pinyinList.size());
@@ -192,7 +190,6 @@ public class Pinyin implements IPinyin {
      * @param context 上下文
      * @param handler 拼音处理类
      * @return 结果
-     * @since 0.1.1
      */
     private List<String> normalPinyinHandler(final String chinese, final IPinyinContext context,
                                              final IHandler<String, String> handler) {

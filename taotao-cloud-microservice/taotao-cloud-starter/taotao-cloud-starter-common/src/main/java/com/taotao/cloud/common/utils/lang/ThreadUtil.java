@@ -12,7 +12,6 @@ public final class ThreadUtil {
 	 * 获取 cpu 数量
 	 *
 	 * @return cpu 数量
-	 * @since 0.1.75
 	 */
 	private static int cpuNum() {
 		return Runtime.getRuntime().availableProcessors();
@@ -22,7 +21,6 @@ public final class ThreadUtil {
 	 * 最佳线程数量
 	 *
 	 * @return 线程数量
-	 * @since 0.1.75
 	 */
 	public static int bestThreadNum() {
 		int cpuNum = cpuNum();
@@ -34,7 +32,6 @@ public final class ThreadUtil {
 	 *
 	 * @param targetSize 目标大小
 	 * @return 线程数量
-	 * @since 0.1.75
 	 */
 	public static int bestThreadNum(final int targetSize) {
 		int bestNum = bestThreadNum();

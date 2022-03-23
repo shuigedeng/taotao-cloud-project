@@ -24,7 +24,6 @@ public final class PinyinHelper {
      * 默认的实现类
      *
      * 避免最基本的方法调用，多次创建对象的问题
-     * @since 0.2.0
      */
     private static final PinyinBs PINYIN_BS_DEFAULT = PinyinBs.newInstance().init();
 
@@ -32,7 +31,6 @@ public final class PinyinHelper {
      * 转换为拼音
      * @param string 原始信息
      * @return 结果
-     * @since 0.0.1
      */
     public static String toPinyin(final String string) {
         return PINYIN_BS_DEFAULT.toPinyin(string);
@@ -43,7 +41,6 @@ public final class PinyinHelper {
      * @param string 原始信息
      * @param styleEnum 样式枚举
      * @return 结果
-     * @since 0.0.3
      */
     public static String toPinyin(final String string,
                                   final PinyinStyleEnum styleEnum) {
@@ -56,7 +53,6 @@ public final class PinyinHelper {
      * @param styleEnum 样式枚举
      * @param connector 连接符号
      * @return 结果
-     * @since 0.1.2
      */
     public static String toPinyin(final String string,
                                   final PinyinStyleEnum styleEnum,
@@ -79,7 +75,6 @@ public final class PinyinHelper {
      * 返回拼音列表
      * @param chinese 中文字符
      * @return 结果
-     * @since 0.1.1
      */
     public static List<String> toPinyinList(final char chinese) {
         return PINYIN_BS_DEFAULT.toPinyinList(chinese);
@@ -90,7 +85,6 @@ public final class PinyinHelper {
      * @param chinese 中文字符
      * @param styleEnum 指定样式
      * @return 结果
-     * @since 0.1.1
      */
     public static List<String> toPinyinList(final char chinese, final PinyinStyleEnum styleEnum) {
         final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(styleEnum);
@@ -105,7 +99,6 @@ public final class PinyinHelper {
      * @param chineseOne 汉字一
      * @param chineseTwo 汉字二
      * @return 是否相同
-     * @since 0.0.8
      */
     public static boolean hasSamePinyin(final char chineseOne, final char chineseTwo) {
         return PINYIN_BS_DEFAULT.hasSamePinyin(chineseOne, chineseTwo);
@@ -120,7 +113,6 @@ public final class PinyinHelper {
      *
      * @param hanzi 汉字
      * @return 字符列表
-     * @since 0.3.0
      */
     public static Map<String, List<String>> samePinyinMap(final char hanzi) {
         //1. 获取汉字的多音字列表
@@ -144,7 +136,6 @@ public final class PinyinHelper {
      * 获取拼音对应的同音字列表
      * @param pinyinNumLast 拼音
      * @return 结果
-     * @since 0.3.0
      */
     public static List<String> samePinyinList(String pinyinNumLast) {
         final boolean sameTone = true;

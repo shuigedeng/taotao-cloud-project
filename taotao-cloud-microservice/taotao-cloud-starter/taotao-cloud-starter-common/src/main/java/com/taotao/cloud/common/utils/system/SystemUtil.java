@@ -18,7 +18,6 @@ public final class SystemUtil {
     /**
      * 获取换行符号
      * @return 换行符号
-     * @since 0.1.23
      */
     public static String getLineSeparator() {
         return getProperty(SystemConst.LINE_SEPARATOR);
@@ -28,7 +27,6 @@ public final class SystemUtil {
      * 获取属性信息
      * @param key 标识
      * @return 结果
-     * @since 0.1.23
      */
     public static String getProperty(final String key) {
         return System.getProperty(key);

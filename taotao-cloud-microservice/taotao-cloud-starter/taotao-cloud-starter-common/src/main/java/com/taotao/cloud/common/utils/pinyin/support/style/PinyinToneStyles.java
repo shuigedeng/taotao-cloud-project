@@ -6,11 +6,6 @@ import com.taotao.cloud.common.utils.pinyin.spi.IPinyinToneStyle;
 
 /**
  * 拼音标注的不同形式
- * <p> project: pinyin-PinyinTones </p>
- * <p> create on 2020/1/18 17:04 </p>
- *
- * @author Administrator
- * @since 0.1.1
  */
 public final class PinyinToneStyles {
 
@@ -20,7 +15,6 @@ public final class PinyinToneStyles {
      * 获取对应的标注实现
      * @param styleEnum 样式枚举
      * @return 标注实现
-     * @since 0.0.3
      */
     public static IPinyinToneStyle getTone(final PinyinStyleEnum styleEnum) {
         if(PinyinStyleEnum.DEFAULT.equals(styleEnum)) {
@@ -46,7 +40,6 @@ public final class PinyinToneStyles {
     /**
      * 返回默认实现
      * @return 默认实现
-     * @since 0.0.5
      */
     public static IPinyinToneStyle defaults() {
         return Instances.singleton(DefaultPinyinToneStyle.class);
@@ -55,7 +48,6 @@ public final class PinyinToneStyles {
     /**
      * 返回首字母实现
      * @return 实现
-     * @since 0.0.5
      */
     public static IPinyinToneStyle firstLetter() {
         return Instances.singleton(FirstLetterPinyinToneStyle.class);
@@ -64,7 +56,6 @@ public final class PinyinToneStyles {
     /**
      * 数字放在最后的实现
      * @return 实现
-     * @since 0.0.5
      */
     public static IPinyinToneStyle numLast() {
         return Instances.singleton(NumLastPinyinToneStyle.class);
@@ -73,7 +64,6 @@ public final class PinyinToneStyles {
     /**
      * 正常格式的实现
      * @return 实现
-     * @since 0.0.5
      */
     public static IPinyinToneStyle normal() {
         return Instances.singleton(NormalPinyinToneStyle.class);
@@ -82,7 +72,6 @@ public final class PinyinToneStyles {
     /**
      * 符合输入法的实现方式
      * @return 实现
-     * @since 0.1.4
      */
     public static IPinyinToneStyle input() {
         return Instances.singleton(InputToneStyle.class);

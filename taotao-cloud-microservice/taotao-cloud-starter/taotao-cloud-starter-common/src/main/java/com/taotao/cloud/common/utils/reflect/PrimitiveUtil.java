@@ -14,9 +14,6 @@ import java.util.Map;
  */
 public final class PrimitiveUtil {
 
-    /**
-     * @since 0.1.7
-     */
     private PrimitiveUtil(){}
 
     /**
@@ -26,7 +23,6 @@ public final class PrimitiveUtil {
 
     /**
      * 基本类型引用类型集合
-     * @since 0.0.3
      */
     private static final Map<Class, Class> PRIMITIVE_REFERENCE_MAP = new HashMap<>();
 
@@ -40,14 +36,10 @@ public final class PrimitiveUtil {
      * long 0L
      * float 0.0f
      * double 0.0d
-     * @since 0.1.37
      */
     private static final Map<Class, Object> PRIMITIVE_DEFAULT_MAP = new HashMap<>();
 
     static {
-        /**
-         * @since 0.0.3
-         */
         PRIMITIVE_REFERENCE_MAP.put(int.class, Integer.class);
         PRIMITIVE_REFERENCE_MAP.put(boolean.class, Boolean.class);
         PRIMITIVE_REFERENCE_MAP.put(byte.class, Byte.class);
@@ -90,7 +82,6 @@ public final class PrimitiveUtil {
      * 获取基础类型的引用类型
      * @param clazz 基础类型
      * @return 引用类型
-     * @since 0.0.3
      */
     public static Class getReferenceType(final Class clazz) {
         if(clazz.isPrimitive()) {
@@ -104,7 +95,6 @@ public final class PrimitiveUtil {
      * （1）8大基本类型返回默认值，其他返回 null
      * @param clazz 类型
      * @return 结果
-     * @since 0.1.37
      */
     public static Object getDefaultValue(final Class clazz) {
         return PRIMITIVE_DEFAULT_MAP.get(clazz);

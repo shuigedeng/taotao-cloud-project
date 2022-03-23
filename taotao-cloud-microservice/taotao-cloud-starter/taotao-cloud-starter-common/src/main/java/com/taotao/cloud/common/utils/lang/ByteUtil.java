@@ -1,13 +1,7 @@
 package com.taotao.cloud.common.utils.lang;
 
 /**
- * 字节工具类]
- * <p>
- * 如果是 jdk8，将有很多方法。
- * <p>
- * 比如：long result = Long.parseUnsignedLong("B62FD56EFD5B375D", 16);
- * <p>
- * 但是 jdk7 是没有的。
+ * 字节工具类
  */
 public final class ByteUtil {
 

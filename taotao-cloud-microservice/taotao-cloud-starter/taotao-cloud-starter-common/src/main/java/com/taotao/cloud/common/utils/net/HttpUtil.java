@@ -24,13 +24,11 @@ public final class HttpUtil {
 
     /**
      * get 请求
-     * @since 0.1.98
      */
     public static final String GET = "GET";
 
     /**
      * post 请求
-     * @since 0.1.98
      */
     public static final String POST = "POST";
 
@@ -38,7 +36,6 @@ public final class HttpUtil {
      * http get 请求
      * @param requestUrl 请求地址
      * @return 结果
-     * @since 0.1.98
      */
     public static String getRequest(String requestUrl) {
         return request(requestUrl, GET);
@@ -48,7 +45,6 @@ public final class HttpUtil {
      * http post 请求
      * @param requestUrl 请求地址
      * @return 结果
-     * @since 0.1.98
      */
     public static String postRequest(String requestUrl) {
         return request(requestUrl, POST);
@@ -59,7 +55,6 @@ public final class HttpUtil {
      * @param requestUrl 请求地址
      * @param requestMethod 方法
      * @return 结果
-     * @since 0.1.98
      */
     public static String request(String requestUrl, String requestMethod) {
         return request(requestUrl, requestMethod, CommonConstant.UTF8, null);
@@ -71,7 +66,6 @@ public final class HttpUtil {
      * @param requestMethod 方法
      * @param headerMap 头信息
      * @return 结果
-     * @since 0.1.100
      */
     public static String request(String requestUrl, String requestMethod,
                                  final Map<String, String> headerMap) {
@@ -85,7 +79,6 @@ public final class HttpUtil {
      * @param charset 流编码
      * @param headerMap 头信息
      * @return 结果
-     * @since 0.1.98
      */
     public static String request(String requestUrl, String requestMethod,
                                  final String charset,
@@ -140,7 +133,6 @@ public final class HttpUtil {
      * 构建文件头信息
      * @param filePath 文件路径
      * @return map 信息
-     * @since 0.1.98
      */
     public static Map<String, String> buildHeaderMap(final String filePath) {
         List<String> stringList = FileUtil.readAllLines(filePath);
@@ -160,7 +152,6 @@ public final class HttpUtil {
      * 将远程的文件下载到本地
      * @param remoteUrl 远程的 url
      * @param localUrl 本地 url
-     * @since 0.1.98
      */
     public static void download(final String remoteUrl,
                                 final String localUrl) {
@@ -172,7 +163,6 @@ public final class HttpUtil {
      * @param remoteUrl 远程的 url
      * @param localUrl 本地 url
      * @param headerMap 头信息 map
-     * @since 0.1.98
      */
     public static void download(final String remoteUrl,
                                 final String localUrl,

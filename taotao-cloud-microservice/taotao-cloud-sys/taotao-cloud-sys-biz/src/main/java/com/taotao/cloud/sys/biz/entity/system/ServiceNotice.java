@@ -5,14 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 服务订阅消息
- *
- * 
- * @since 2020-02-25 14:10:16
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = ServiceNotice.TABLE_NAME)
 @TableName(ServiceNotice.TABLE_NAME)
@@ -38,52 +45,4 @@ public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
 
 	@Column(name = "content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信内容(富文本框编辑，可以上传图片的html)'")
 	private String content;
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getBannerImage() {
-		return bannerImage;
-	}
-
-	public void setBannerImage(String bannerImage) {
-		this.bannerImage = bannerImage;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getSubTitle() {
-		return subTitle;
-	}
-
-	public void setSubTitle(String subTitle) {
-		this.subTitle = subTitle;
-	}
-
-	public String getToUrl() {
-		return toUrl;
-	}
-
-	public void setToUrl(String toUrl) {
-		this.toUrl = toUrl;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
 }

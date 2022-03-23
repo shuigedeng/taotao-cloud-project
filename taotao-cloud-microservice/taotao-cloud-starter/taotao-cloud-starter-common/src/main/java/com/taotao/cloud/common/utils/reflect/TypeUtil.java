@@ -49,7 +49,6 @@ public final class TypeUtil {
 	 *
 	 * @param type 类型
 	 * @return 集合
-	 * @since 0.1.26
 	 */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static Collection createCollection(Type type) {
@@ -61,7 +60,6 @@ public final class TypeUtil {
 	 *
 	 * @param type 类型
 	 * @return 结果
-	 * @since 0.1.27
 	 */
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static Map<Object, Object> createMap(final Type type) {
@@ -126,7 +124,6 @@ public final class TypeUtil {
 	 *
 	 * @param mapType map 类型
 	 * @return 结果
-	 * @since 0.1.27
 	 */
 	public static Pair<Type, Type> getMapKeyValueType(final Type mapType) {
 		if (mapType instanceof ParameterizedType) {
@@ -151,7 +148,6 @@ public final class TypeUtil {
 	 * @param type 类型
 	 * @param size 集合大小
 	 * @return 集合
-	 * @since 0.1.26
 	 */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static Collection createCollection(Type type,
@@ -189,7 +185,6 @@ public final class TypeUtil {
 	 *
 	 * @param type 类型
 	 * @return 结果
-	 * @since 0.1.26
 	 */
 	private static Class<?> getRawClass(Type type) {
 		if (type instanceof Class<?>) {
@@ -206,7 +201,6 @@ public final class TypeUtil {
 	 *
 	 * @param type 类型
 	 * @return 元素类型
-	 * @since 0.1.26
 	 */
 	public static Class getGenericType(final Type type) {
 		Type itemType;
@@ -224,7 +218,6 @@ public final class TypeUtil {
 	 *
 	 * @param collectionType 集合类型
 	 * @return 类型
-	 * @since 0.1.26
 	 */
 	public static Type getCollectionItemType(Type collectionType) {
 		if (collectionType instanceof ParameterizedType) {
@@ -241,7 +234,6 @@ public final class TypeUtil {
 	 *
 	 * @param clazz 类型
 	 * @return 结果
-	 * @since 0.1.26
 	 */
 	private static Type getCollectionItemType(Class<?> clazz) {
 		return clazz.getName().startsWith("java.")
@@ -334,7 +326,6 @@ public final class TypeUtil {
 	 * @param genericType 类型
 	 * @param paramIndex  泛型参数下标
 	 * @return 结果
-	 * @since 0.1.40
 	 */
 	public static Class getGenericParamType(final Type genericType, final int paramIndex) {
 		if (ObjectUtil.isNull(genericType)) {
@@ -383,7 +374,6 @@ public final class TypeUtil {
 	 *
 	 * @param genericType 类型
 	 * @return 结果
-	 * @since 0.1.40
 	 */
 	public static Class getGenericParamType(final Type genericType) {
 		return getGenericParamType(genericType, 0);
@@ -396,7 +386,6 @@ public final class TypeUtil {
 	 * @param type 预期类型
 	 * @param <T>  结果泛型
 	 * @return 结果
-	 * @since 0.1.40
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T cast(Object obj, Type type) {
@@ -433,7 +422,6 @@ public final class TypeUtil {
 	 * @param type 类型
 	 * @param <T>  泛型
 	 * @return 转换后的结果
-	 * @since 0.1.40
 	 */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	private static <T> T cast(Object obj, ParameterizedType type) {

@@ -10,14 +10,12 @@ public class StringReader implements IReader {
 
     /**
      * 字符串内容
-     * @since 0.1.94
      */
     private final String string;
 
     public StringReader(String string) {
         this.string = string;
     }
-
 
     @Override
     public String read() {

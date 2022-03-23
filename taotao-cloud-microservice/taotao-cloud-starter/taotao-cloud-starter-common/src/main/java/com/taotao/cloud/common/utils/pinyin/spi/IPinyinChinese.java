@@ -22,7 +22,6 @@ public interface IPinyinChinese {
      * 暂时不管这个格式问题。
      * @param original 原始字符串
      * @return 是否
-     * @since 0.0.1
      */
     boolean isChinese(final String original);
 
@@ -31,7 +30,6 @@ public interface IPinyinChinese {
      *
      * @param original 原始字符串
      * @return 是否
-     * @since 0.0.8
      */
     boolean isChinese(final char original);
 
@@ -40,7 +38,6 @@ public interface IPinyinChinese {
      * （1）为了兼顾性能，避免两次分词。直接使用分词后的结果进行处理。
      * @param segment 分词后的字符串
      * @return 简体中文
-     * @since 0.0.1
      */
     String toSimple(final String segment);
 
@@ -48,7 +45,6 @@ public interface IPinyinChinese {
      * 转换为简体
      * @param original 原始的字符串
      * @return 简体中文
-     * @since 0.0.8
      */
     String toSimple(final char original);
 

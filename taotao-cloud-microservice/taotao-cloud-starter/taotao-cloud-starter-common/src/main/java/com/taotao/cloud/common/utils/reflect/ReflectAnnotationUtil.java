@@ -32,7 +32,6 @@ public final class ReflectAnnotationUtil {
      * @param annotation 注解
      * @param method 方法
      * @param value 属性值
-     * @since 0.1.31
      */
     @SuppressWarnings("unchecked")
     public static void updateValue(final Annotation annotation,
@@ -50,7 +49,6 @@ public final class ReflectAnnotationUtil {
      * @param annotation 注解
      * @param method 方法
      * @return 获取的属性值
-     * @since 0.1.31
      */
     @SuppressWarnings("unchecked")
     public static Object getValue(final Annotation annotation,
@@ -67,7 +65,6 @@ public final class ReflectAnnotationUtil {
      * @param annotation 注解
      * @param method 方法
      * @return 对象值 String 形式
-     * @since 0.1.31
      */
     @SuppressWarnings("unchecked")
     public static String getValueStr(final Annotation annotation,
@@ -85,7 +82,6 @@ public final class ReflectAnnotationUtil {
      * https://segmentfault.com/a/1190000011213222?utm_source=tag-newest
      * @param annotation 直接
      * @return map
-     * @since 0.1.31
      */
     @SuppressWarnings("unchecked")
     public static Map<String, Object> getAnnotationAttributes(final Annotation annotation) {
@@ -109,7 +105,6 @@ public final class ReflectAnnotationUtil {
      * @param annotation 注解
      * @param annotationClass 标注注解类型
      * @return 注解信息
-     * @since 0.1.31
      */
     public static Optional<Annotation> getAnnotation(final Annotation annotation,
                                                      final Class<? extends Annotation> annotationClass) {
@@ -131,7 +126,6 @@ public final class ReflectAnnotationUtil {
      * @param clazz 类
      * @param annotationClass 指定注解类型
      * @return 结果
-     * @since 0.1.52
      */
     public static Optional<Annotation> getAnnotation(final Class clazz, final Class<? extends Annotation> annotationClass) {
         ArgUtil.notNull(clazz, "clazz");
@@ -152,7 +146,6 @@ public final class ReflectAnnotationUtil {
      * @param clazz 类型
      * @param annotationClass 注解类
      * @return 结果列表
-     * @since 0.1.52
      */
     public static List<Annotation> getAnnotationRefs(final Class clazz, final Class<? extends Annotation> annotationClass) {
         ArgUtil.notNull(clazz, "clazz");

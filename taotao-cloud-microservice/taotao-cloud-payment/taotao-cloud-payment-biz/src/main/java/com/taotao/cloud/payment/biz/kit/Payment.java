@@ -1,12 +1,12 @@
 package com.taotao.cloud.payment.biz.kit;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.payment.entity.RefundLog;
-import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
-import cn.lili.modules.payment.kit.dto.PayParam;
 
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.biz.entity.RefundLog;
+import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

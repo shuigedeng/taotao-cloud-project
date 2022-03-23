@@ -18,10 +18,8 @@ public class AttributeContext implements IAttributeContext {
 
 	/**
 	 * 上下文
-	 *
-	 * @since 0.1.41
 	 */
-	private Map<String, Object> context;
+	private final Map<String, Object> context;
 
 	public AttributeContext() {
 		this.context = new ConcurrentHashMap<>();
@@ -36,7 +34,6 @@ public class AttributeContext implements IAttributeContext {
 	 *
 	 * @param map map 信息
 	 * @return this
-	 * @since 0.1.44
 	 */
 	protected AttributeContext putAttrMap(final Map<String, ?> map) {
 		ArgUtil.notNull(map, "map");
@@ -49,7 +46,6 @@ public class AttributeContext implements IAttributeContext {
 	 * 获取明细集合
 	 *
 	 * @return 明细集合
-	 * @since 0.1.44
 	 */
 	protected Set<Map.Entry<String, Object>> entrySet() {
 		return this.context.entrySet();
@@ -61,7 +57,6 @@ public class AttributeContext implements IAttributeContext {
 	 * @param key   key
 	 * @param value 值
 	 * @return this
-	 * @since 0.1.41
 	 */
 	@Override
 	public AttributeContext putAttr(final String key, final Object value) {
@@ -73,7 +68,6 @@ public class AttributeContext implements IAttributeContext {
 	 * 获取配置属性
 	 *
 	 * @return 目标对象
-	 * @since 0.1.41
 	 */
 	@Override
 	public Object getAttr(final String key) {

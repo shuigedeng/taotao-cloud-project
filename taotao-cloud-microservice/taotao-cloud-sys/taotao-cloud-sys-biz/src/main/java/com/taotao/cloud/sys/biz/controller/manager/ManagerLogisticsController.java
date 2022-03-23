@@ -20,7 +20,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
-import com.taotao.cloud.sys.biz.mapstruct.ILogisticsMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.LogisticsMapStruct;
 import com.taotao.cloud.sys.biz.service.ILogisticsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -56,7 +56,7 @@ public class ManagerLogisticsController {
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<LogisticsVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {
 		LogisticsConfig logisticsConfig = logisticsService.findLogisticsById(id);
-		LogisticsVO vo = ILogisticsMapStruct.INSTANCE.logisticsToFileVO(logisticsConfig);
+		LogisticsVO vo = LogisticsMapStruct.INSTANCE.logisticsToFileVO(logisticsConfig);
 		return Result.success(vo);
 	}
 

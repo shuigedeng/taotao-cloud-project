@@ -18,18 +18,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 抽象注解类型元数据
- *
- * <p> project: heaven-AnnotationMeta </p>
- * <p> create on 2019/11/29 23:04 </p>
- *
- * @author Administrator
- * @since 0.1.52
  */
 public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta {
 
     /**
      * 注解引用 map
-     * @since 0.1.52
      */
     private Map<String, Annotation> annotationRefMap;
 
@@ -39,7 +32,6 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
      * （1）这里其实没有必要使用 {@link Map} 因为一般注解数量不会太多，只是数组性能反而更好。
      *
      * @return 注解数组
-     * @since 0.1.52
      */
     protected abstract Annotation[] getAnnotations();
 
@@ -116,7 +108,6 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
      * @param annotations 注解数组
      * @param annotationName 指定注解名称
      * @return 结果信息
-     * @since 0.1.52
      */
     private Optional<Annotation> getAnnotationOpt(final Annotation[] annotations, final String annotationName) {
         List<Annotation> annotationList = ArrayUtil.toList(annotations);
@@ -128,7 +119,6 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
      * @param annotations 注解列表
      * @param annotationName 指定注解名称
      * @return 结果信息
-     * @since 0.1.53
      */
     private Optional<Annotation> getAnnotationOpt(final List<Annotation> annotations, final String annotationName) {
         if(CollectionUtil.isEmpty(annotations)) {

@@ -9,6 +9,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Quartz任务表
@@ -17,6 +22,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = QuartzJob.TABLE_NAME)
 @TableName(QuartzJob.TABLE_NAME)
@@ -66,60 +76,4 @@ public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 	 */
 	@Column(name = "remark", nullable = false, columnDefinition = "varchar(256) not null comment '备注'")
 	private String remark;
-
-	public String getBeanName() {
-		return beanName;
-	}
-
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
-	}
-
-	public String getCronExpression() {
-		return cronExpression;
-	}
-
-	public void setCronExpression(String cronExpression) {
-		this.cronExpression = cronExpression;
-	}
-
-	public Boolean getPause() {
-		return isPause;
-	}
-
-	public void setPause(Boolean pause) {
-		isPause = pause;
-	}
-
-	public String getJobName() {
-		return jobName;
-	}
-
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public String getParams() {
-		return params;
-	}
-
-	public void setParams(String params) {
-		this.params = params;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
 }

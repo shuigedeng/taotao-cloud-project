@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * pv 与 ip 统计
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Visits.TABLE_NAME)
 @TableName(Visits.TABLE_NAME)
@@ -32,36 +42,4 @@ public class Visits extends BaseSuperEntity<Visits, Long> {
 
 	@Column(name = "week_day", nullable = false, columnDefinition = "varchar(64) not null comment '天'")
 	private String weekDay;
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public Long getPvCounts() {
-		return pvCounts;
-	}
-
-	public void setPvCounts(Long pvCounts) {
-		this.pvCounts = pvCounts;
-	}
-
-	public Long getIpCounts() {
-		return ipCounts;
-	}
-
-	public void setIpCounts(Long ipCounts) {
-		this.ipCounts = ipCounts;
-	}
-
-	public String getWeekDay() {
-		return weekDay;
-	}
-
-	public void setWeekDay(String weekDay) {
-		this.weekDay = weekDay;
-	}
 }

@@ -10,6 +10,11 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Scheduled日志表
@@ -18,6 +23,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = ScheduledLog.TABLE_NAME)
 @TableName(ScheduledLog.TABLE_NAME)
@@ -67,60 +77,4 @@ public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 	 */
 	@Column(name = "scheduled_Job", nullable = false, columnDefinition = "varchar(4096) not null comment 'scheduledJob JSON对象'")
 	private String scheduledJob;
-
-	public String getScheduledName() {
-		return scheduledName;
-	}
-
-	public void setScheduledName(String scheduledName) {
-		this.scheduledName = scheduledName;
-	}
-
-	public LocalDateTime getStatrTime() {
-		return statrTime;
-	}
-
-	public void setStatrTime(LocalDateTime statrTime) {
-		this.statrTime = statrTime;
-	}
-
-	public LocalDateTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalDateTime endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getException() {
-		return exception;
-	}
-
-	public void setException(String exception) {
-		this.exception = exception;
-	}
-
-	public Long getExecutionTime() {
-		return executionTime;
-	}
-
-	public void setExecutionTime(Long executionTime) {
-		this.executionTime = executionTime;
-	}
-
-	public Boolean getSuccess() {
-		return isSuccess;
-	}
-
-	public void setSuccess(Boolean success) {
-		isSuccess = success;
-	}
-
-	public String getScheduledJob() {
-		return scheduledJob;
-	}
-
-	public void setScheduledJob(String scheduledJob) {
-		this.scheduledJob = scheduledJob;
-	}
 }

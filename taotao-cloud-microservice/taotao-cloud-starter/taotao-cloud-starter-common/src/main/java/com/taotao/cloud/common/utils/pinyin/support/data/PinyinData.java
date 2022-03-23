@@ -14,7 +14,6 @@ public class PinyinData implements IPinyinData {
     /**
      * 零声母列表
      * a ai an ang ao e ê ei en eng er o ou
-     * @since 0.1.1
      */
     private static final List<String> ZERO_SHENG_MU_LIST = Arrays
             .asList("a", "ai", "an", "ang", "ao", "e", "ê", "ei", "en", "eng", "er", "o", "ou");
@@ -25,7 +24,6 @@ public class PinyinData implements IPinyinData {
      * zh
      * ch
      * sh
-     * @since 0.1.1
      */
     private static final List<String> DOUBLE_SHENG_MU_LIST = Arrays.asList("zh", "ch", "sh");
 

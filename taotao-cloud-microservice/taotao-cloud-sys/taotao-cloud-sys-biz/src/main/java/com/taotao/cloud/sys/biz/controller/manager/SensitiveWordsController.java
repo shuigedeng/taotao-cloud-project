@@ -10,8 +10,8 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiImplicitParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,21 +25,21 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,敏感词管理接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/sys/manager/sensitive/word")
 @Tag(name = "平台管理端-敏感词管理API", description = "平台管理端-敏感词管理API")
 public class SensitiveWordsController {
 
-	@Autowired
-	private ISensitiveWordService ISensitiveWordService;
+	private final ISensitiveWordService sensitiveWordService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
 	@GetMapping(value = "/get/{id}")
 	public Result<SensitiveWord> get(
 		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
 		@PathVariable String id) {
-		return Result.success(ISensitiveWordService.getById(id));
+		return Result.success(sensitiveWordService.getById(id));
 	}
 
 	//@ApiOperation(value = "分页获取")
@@ -51,9 +51,8 @@ public class SensitiveWordsController {
 	@Operation(summary = "添加敏感词", description = "添加敏感词")
 	@PostMapping
 	public Result<SensitiveWord> add(@Valid @RequestBody SensitiveWord sensitiveWords) {
-		ISensitiveWordService.save(sensitiveWords);
-		ISensitiveWordService.resetCache();
-
+		sensitiveWordService.save(sensitiveWords);
+		sensitiveWordService.resetCache();
 
 		return Result.success(sensitiveWords);
 	}
@@ -64,8 +63,8 @@ public class SensitiveWordsController {
 		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
 		@PathVariable Long id, @RequestBody SensitiveWord sensitiveWords) {
 		sensitiveWords.setId(id);
-		ISensitiveWordService.updateById(sensitiveWords);
-		ISensitiveWordService.resetCache();
+		sensitiveWordService.updateById(sensitiveWords);
+		sensitiveWordService.resetCache();
 
 		return Result.success(sensitiveWords);
 	}
@@ -76,8 +75,8 @@ public class SensitiveWordsController {
 	public Result<Boolean> delAllByIds(
 		@Parameter(description = "敏感词ID", required = true) @NotEmpty(message = "敏感词ID不能为空")
 		@PathVariable List<String> ids) {
-		ISensitiveWordService.removeByIds(ids);
-		ISensitiveWordService.resetCache();
+		sensitiveWordService.removeByIds(ids);
+		sensitiveWordService.resetCache();
 
 		return Result.success(true);
 	}

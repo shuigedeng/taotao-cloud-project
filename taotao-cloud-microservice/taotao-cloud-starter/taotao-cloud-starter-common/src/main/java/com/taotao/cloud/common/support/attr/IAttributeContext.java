@@ -15,7 +15,6 @@ public interface IAttributeContext {
 	 * @param key   key
 	 * @param value 值
 	 * @return this
-	 * @since 0.1.41
 	 */
 	IAttributeContext putAttr(final String key, final Object value);
 
@@ -24,7 +23,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Object getAttr(final String key);
 
@@ -33,7 +31,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Optional<Object> getAttrOptional(final String key);
 
@@ -42,7 +39,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	String getAttrString(final String key);
 
@@ -51,7 +47,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Boolean getAttrBoolean(final String key);
 
@@ -60,7 +55,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Character getAttrCharacter(final String key);
 
@@ -69,7 +63,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Byte getAttrByte(final String key);
 
@@ -78,7 +71,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Short getAttrShort(final String key);
 
@@ -87,7 +79,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Integer getAttrInteger(final String key);
 
@@ -96,7 +87,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Float getAttrFloat(final String key);
 
@@ -105,7 +95,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Double getAttrDouble(final String key);
 
@@ -114,7 +103,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return 属性
-	 * @since 0.1.41
 	 */
 	Long getAttrLong(final String key);
 
@@ -123,7 +111,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return this
-	 * @since 0.1.43
 	 */
 	IAttributeContext removeAttr(final String key);
 
@@ -132,7 +119,6 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return this
-	 * @since 0.1.43
 	 */
 	boolean containsKey(final String key);
 
@@ -140,7 +126,6 @@ public interface IAttributeContext {
 	 * 所有的 key 集合
 	 *
 	 * @return this
-	 * @since 0.1.43
 	 */
 	Set<String> keySet();
 

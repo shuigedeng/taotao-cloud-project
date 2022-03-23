@@ -15,7 +15,6 @@ public final class Instances {
 	 * @param tClass 类信息
 	 * @param <T>    泛型
 	 * @return 结果
-	 * @since 0.1.21 correct name
 	 */
 	public static <T> T singleton(Class<T> tClass) {
 		return InstanceFactory.getInstance().singleton(tClass);
@@ -28,7 +27,6 @@ public final class Instances {
 	 * @param groupName 分组名称
 	 * @param <T>       泛型
 	 * @return 结果
-	 * @since 0.1.21 correct name
 	 */
 	public static <T> T singleton(Class<T> tClass, final String groupName) {
 		return InstanceFactory.getInstance().singleton(tClass, groupName);

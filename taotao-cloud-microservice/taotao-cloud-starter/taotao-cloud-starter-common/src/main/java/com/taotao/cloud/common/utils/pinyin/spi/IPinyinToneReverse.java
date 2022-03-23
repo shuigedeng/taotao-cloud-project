@@ -15,7 +15,6 @@ public interface IPinyinToneReverse {
      * 获取对应的汉字列表
      * @param pinyinLast pinyin1 这种格式的拼音
      * @return 结果
-     * @since 0.3.0
      */
     List<String> getHanziList(String pinyinLast);
 

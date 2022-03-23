@@ -292,7 +292,6 @@ public final class PathUtil {
 	 * 结果不确定
 	 *
 	 * @return 路径
-	 * @since 0.0.7
 	 * @deprecated (因为结果具有不确定性)
 	 */
 	public static String getPath() {
@@ -303,7 +302,6 @@ public final class PathUtil {
 	 * 获取的target路径
 	 *
 	 * @return 路径
-	 * @since 0.0.7
 	 */
 	public static String getRootPath() {
 		return Class.class.getClass().getResource("/").getPath();
@@ -311,8 +309,6 @@ public final class PathUtil {
 
 	/**
 	 * 获取项目根路径。
-	 *
-	 * @return 本项目中返回: /Users/houbinbin/IT/code/script-generator since 0.0.7
 	 */
 	public static String getAppRootPath() {
 		File emptyFile = new File("");
@@ -378,7 +374,6 @@ public final class PathUtil {
 	 *
 	 * @param pathStr 路径
 	 * @return 列表
-	 * @since 0.1.6
 	 */
 	public static List<String> readAllLines(final String pathStr) {
 		return readAllLines(pathStr, CommonConstant.UTF8);
@@ -390,7 +385,6 @@ public final class PathUtil {
 	 * @param pathStr 路径
 	 * @param charset 编码
 	 * @return 列表
-	 * @since 0.1.6
 	 */
 	public static List<String> readAllLines(final String pathStr,
 		final String charset) {
@@ -405,7 +399,6 @@ public final class PathUtil {
 	 * @param startIndex 开始行下标
 	 * @param endIndex   结束行下标
 	 * @return 列表内容
-	 * @since 0.1.6
 	 */
 	public static List<String> readAllLines(final String pathStr,
 		final String charset,
@@ -433,7 +426,6 @@ public final class PathUtil {
 	 *
 	 * @param pathStr 路径
 	 * @param lines   行内容数组
-	 * @since 0.1.8
 	 */
 	public static void writeLines(final String pathStr,
 		final String... lines) {
@@ -446,7 +438,6 @@ public final class PathUtil {
 	 *
 	 * @param pathStr 路径
 	 * @param lines   行内容
-	 * @since 0.1.8
 	 */
 	public static void writeLines(final String pathStr,
 		final Collection<String> lines) {
@@ -458,7 +449,6 @@ public final class PathUtil {
 	 *
 	 * @param pathStr 路径
 	 * @param lines   行内容数组
-	 * @since 0.1.8
 	 */
 	public static void appendLines(final String pathStr,
 		final String... lines) {
@@ -471,7 +461,6 @@ public final class PathUtil {
 	 *
 	 * @param pathStr 路径
 	 * @param lines   行内容
-	 * @since 0.1.8
 	 */
 	public static void appendLines(final String pathStr,
 		final Collection<String> lines) {
@@ -485,7 +474,6 @@ public final class PathUtil {
 	 * @param charset     编码
 	 * @param lines       行内容
 	 * @param openOptions 操作
-	 * @since 0.1.8
 	 */
 	public static void writeLines(final String pathStr,
 		final Collection<String> lines,

@@ -20,6 +20,11 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 用户-角色第三方表
@@ -28,6 +33,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:04:45
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = UserRole.TABLE_NAME)
 @TableName(UserRole.TABLE_NAME)
@@ -47,67 +57,4 @@ public class UserRole extends SuperEntity<UserRole,Long> {
 	 */
 	@Column(name = "role_id", nullable = false, columnDefinition = "bigint not null comment '角色ID'")
 	private Long roleId;
-
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Long getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-
-	public UserRole() {
-	}
-
-	public UserRole(Long userId, Long roleId) {
-		this.userId = userId;
-		this.roleId = roleId;
-	}
-
-	public static SysUserRoleBuilder builder() {
-		return new SysUserRoleBuilder();
-	}
-
-	public static final class SysUserRoleBuilder {
-
-		private Long id;
-		private Long userId;
-		private Long roleId;
-
-		private SysUserRoleBuilder() {
-		}
-
-
-		public SysUserRoleBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysUserRoleBuilder userId(Long userId) {
-			this.userId = userId;
-			return this;
-		}
-
-		public SysUserRoleBuilder roleId(Long roleId) {
-			this.roleId = roleId;
-			return this;
-		}
-
-		public UserRole build() {
-			UserRole sysUserRole = new UserRole();
-			sysUserRole.setId(id);
-			sysUserRole.setUserId(userId);
-			sysUserRole.setRoleId(roleId);
-			return sysUserRole;
-		}
-	}
 }

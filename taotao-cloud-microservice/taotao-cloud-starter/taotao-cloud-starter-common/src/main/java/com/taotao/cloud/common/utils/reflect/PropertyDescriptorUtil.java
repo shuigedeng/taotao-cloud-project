@@ -23,7 +23,6 @@ public final class PropertyDescriptorUtil {
      * @param beanClass 类
      * @param propertyName 属性值
      * @return 性描述
-     * @since 0.1.62
      */
     public static PropertyDescriptor getPropertyDescriptor(final Class beanClass,
                                                            final String propertyName) {
@@ -42,7 +41,6 @@ public final class PropertyDescriptorUtil {
      * @param beanClass 对象类型
      * @param propertyName 属性名称
      * @return 属性读方法
-     * @since 0.1.62
      */
     public static Method getReadMethod(final Class<?> beanClass,
                                        final String propertyName) {
@@ -56,7 +54,6 @@ public final class PropertyDescriptorUtil {
      * @param beanClass 对象类型
      * @param propertyName 属性名称
      * @return 属性写方法
-     * @since 0.1.62
      */
     public static Method getWriteMethod(final Class beanClass,
                                        final String propertyName) {
@@ -70,7 +67,6 @@ public final class PropertyDescriptorUtil {
      * @param beanClass 对象类型
      * @param propertyName 属性名称
      * @return 属性字段类型
-     * @since 0.1.62
      */
     public static Class<?> getPropertyType(final Class beanClass,
                                         final String propertyName) {
@@ -83,7 +79,6 @@ public final class PropertyDescriptorUtil {
      * 获取所有属性描述列表
      * @param beanClass 对象信息
      * @return 列表
-     * @since 0.1.62
      */
     public static List<PropertyDescriptor> getAllPropertyDescriptorList(final Class beanClass) {
         ArgUtil.notNull(beanClass, "beanClass");
@@ -101,7 +96,6 @@ public final class PropertyDescriptorUtil {
      * @param bean       对象
      * @param descriptor 描述类
      * @param value      待设置的值
-     * @since 0.1.126
      * @return 是否设置成功
      */
     public static boolean setPropertyValue(Object bean,
@@ -127,7 +121,6 @@ public final class PropertyDescriptorUtil {
      * @param bean       对象
      * @param descriptorName 描述名称
      * @param value      待设置的值
-     * @since 0.1.126
      * @return 是否设置成功
      */
     public static boolean setPropertyValue(Object bean,
@@ -143,7 +136,6 @@ public final class PropertyDescriptorUtil {
      * @param bean       对象
      * @param descriptor 描述类
      * @return 对应的值
-     * @since 0.1.126
      */
     public static Object getPropertyValue(Object bean,
                                            PropertyDescriptor descriptor) {
@@ -164,7 +156,6 @@ public final class PropertyDescriptorUtil {
      *
      * @param bean       对象
      * @param descriptorName 描述名称
-     * @since 0.1.126
      * @return 对应的配置值
      */
     public static Object getPropertyValue(Object bean,

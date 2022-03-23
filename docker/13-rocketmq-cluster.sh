@@ -49,5 +49,6 @@ services:
     depends_on:
       - namesrv
     environment:
-      - JAVA_OPTS= -Dlogging.level.root=info   -Drocketmq.namesrv.addr=rmqnamesrv:9876
+      - JAVA_OPTS= -Dlogging.level.root=info
+      - Drocketmq.namesrv.addr=rmqnamesrv:9876
       - Dcom.rocketmq.sendMessageWithVIPChannel=false

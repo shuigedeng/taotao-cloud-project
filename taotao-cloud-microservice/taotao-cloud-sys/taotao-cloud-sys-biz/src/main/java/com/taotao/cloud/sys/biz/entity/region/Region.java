@@ -20,6 +20,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 地区表
@@ -28,11 +33,16 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:52:30
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Region.TABLE_NAME)
 @TableName(Region.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Region.TABLE_NAME, comment = "地区表")
-public class Region extends BaseSuperEntity<Region,Long> {
+public class Region extends BaseSuperEntity<Region, Long> {
 
 	public static final String TABLE_NAME = "tt_region";
 
@@ -55,13 +65,9 @@ public class Region extends BaseSuperEntity<Region,Long> {
 	private String name;
 
 	/**
-	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street）
-	 * "行政区划级别" +
-	 *  "country:国家" +
-	 *  "province:省份（直辖市会在province和city显示）" +
-	 *  "city:市（直辖市会在province和city显示）" +
-	 *  "district:区县" +
-	 *  "street:街道"
+	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street） "行政区划级别" + "country:国家" +
+	 * "province:省份（直辖市会在province和city显示）" + "city:市（直辖市会在province和city显示）" + "district:区县" +
+	 * "street:街道"
 	 */
 	@Column(name = "level", nullable = false, columnDefinition = "varchar(255) null comment '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
 	private String level;
@@ -90,85 +96,4 @@ public class Region extends BaseSuperEntity<Region,Long> {
 	@Column(name = "order_num", columnDefinition = "int not null default 0 comment '排序'")
 	private Integer orderNum;
 
-	//@CreatedDate
-	//@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
-	//@TableField(value = "create_time", fill = FieldFill.INSERT)
-	//private LocalDateTime createTime;
-	//
-	//@CreatedDate
-	//@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
-	//@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
-	//private LocalDateTime lastModifiedTime;
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getCityCode() {
-		return cityCode;
-	}
-
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
-	}
-
-	public String getLng() {
-		return lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public Integer getOrderNum() {
-		return orderNum;
-	}
-
-	public void setOrderNum(Integer orderNum) {
-		this.orderNum = orderNum;
-	}
 }

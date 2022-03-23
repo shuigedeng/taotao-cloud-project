@@ -28,7 +28,6 @@ import java.util.*;
  * 1. 用于获取文件的内容
  *
  * @author bbhou
- * @since 0.0.1
  */
 public final class FileUtil {
 
@@ -40,7 +39,6 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @return 文件不存在或异常等, 直接抛出异常
-     * @since 0.1.80
      */
     public static String getFileContent(String filePath) {
         return getFileContent(filePath, CommonConstant.UTF8);
@@ -52,7 +50,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @param charset  文件编码
      * @return 文件不存在或异常等, 直接抛出异常
-     * @since 0.1.80
      */
     public static String getFileContent(String filePath, final String charset) {
         File file = new File(filePath);
@@ -72,7 +69,6 @@ public final class FileUtil {
      *
      * @param inputStream 输入流
      * @return 文件内容
-     * @since 0.1.10
      */
     public static String getFileContent(InputStream inputStream) {
         return getFileContent(inputStream, CommonConstant.UTF8);
@@ -85,7 +81,6 @@ public final class FileUtil {
      * @param file    文件
      * @param charset 文件编码
      * @return 文件内容
-     * @since 0.1.94
      */
     public static String getFileContent(final File file,
                                         final String charset) {
@@ -102,7 +97,6 @@ public final class FileUtil {
      *
      * @param file 文件
      * @return 文件内容
-     * @since 0.1.94
      */
     public static String getFileContent(final File file) {
         try (InputStream inputStream = new FileInputStream(file)) {
@@ -118,7 +112,6 @@ public final class FileUtil {
      * @param inputStream 文件输入流
      * @param charset     文件编码
      * @return 文件内容字符串
-     * @since 0.1.10
      */
     public static String getFileContent(InputStream inputStream, String charset) {
         Charset charsetVal = Charset.forName(charset);
@@ -133,7 +126,6 @@ public final class FileUtil {
      * @param endIndex    结束下标
      * @param charset     编码
      * @return 结果
-     * @since 0.1.85
      */
     public static String getFileContent(final InputStream inputStream,
                                         int startIndex,
@@ -245,7 +237,6 @@ public final class FileUtil {
      * @param file     指定读取文件
      * @param initLine 初始读取行数
      * @return 错误返回空列表
-     * @since 1.7
      */
     public static List<String> getFileContentEachLine(File file, int initLine) {
         List<String> contentList = new LinkedList<>();
@@ -336,7 +327,6 @@ public final class FileUtil {
      * @param endLine     结束航
      * @param ignoreEmpty 是否跳过空白行
      * @return 结果列表
-     * @since 0.1.65
      */
     public static List<String> readAllLines(final File file,
                                             final String charset,
@@ -366,7 +356,6 @@ public final class FileUtil {
      * @param endLine     结束航
      * @param ignoreEmpty 是否跳过空白行
      * @return 结果列表
-     * @since 0.1.95
      */
     public static List<String> readAllLines(final InputStream inputStream,
                                             final String charset,
@@ -423,7 +412,6 @@ public final class FileUtil {
      * @param initLine    初始化行
      * @param endLine     结束航
      * @return 结果列表
-     * @since 0.1.95
      */
     public static List<String> readAllLines(final InputStream inputStream,
                                             final String charset,
@@ -440,7 +428,6 @@ public final class FileUtil {
      * @param charset     编码
      * @param initLine    初始化行
      * @return 结果列表
-     * @since 0.1.95
      */
     public static List<String> readAllLines(final InputStream inputStream,
                                             final String charset,
@@ -455,7 +442,6 @@ public final class FileUtil {
      * @param inputStream 文件输入流
      * @param charset     编码
      * @return 结果列表
-     * @since 0.1.95
      */
     public static List<String> readAllLines(final InputStream inputStream,
                                             final String charset) {
@@ -468,7 +454,6 @@ public final class FileUtil {
      *
      * @param inputStream 文件输入流
      * @return 结果列表
-     * @since 0.1.95
      */
     public static List<String> readAllLines(final InputStream inputStream) {
         return readAllLines(inputStream, CommonConstant.UTF8);
@@ -481,7 +466,6 @@ public final class FileUtil {
      * @param charset     文件编码
      * @param ignoreEmpty 是否跳过空白行
      * @return 结果列表
-     * @since 0.1.65
      */
     public static List<String> readAllLines(final String filePath,
                                             final String charset,
@@ -497,7 +481,6 @@ public final class FileUtil {
      * @param charset     文件编码
      * @param ignoreEmpty 是否跳过空白行
      * @return 结果列表
-     * @since 0.1.88
      */
     public static List<String> readAllLines(final File file,
                                             final String charset,
@@ -511,7 +494,6 @@ public final class FileUtil {
      * @param file    文件路径
      * @param charset 文件编码
      * @return 结果列表
-     * @since 0.1.88
      */
     public static List<String> readAllLines(final File file,
                                             final String charset) {
@@ -524,7 +506,6 @@ public final class FileUtil {
      *
      * @param file 文件路径
      * @return 结果列表
-     * @since 0.1.88
      */
     public static List<String> readAllLines(final File file) {
         return readAllLines(file, CommonConstant.UTF8);
@@ -536,7 +517,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @param charset  文件编码
      * @return 结果列表
-     * @since 0.1.65
      */
     public static List<String> readAllLines(final String filePath,
                                             final String charset) {
@@ -549,7 +529,6 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @return 结果列表
-     * @since 0.1.65
      */
     public static List<String> readAllLines(final String filePath) {
         return readAllLines(filePath, CommonConstant.UTF8);
@@ -561,7 +540,6 @@ public final class FileUtil {
      * @param sourceDir 原始文件夹
      * @param targetDir 目标文件夹
      * @throws IOException if any
-     * @since 1.1.2
      */
     public static void copyDir(String sourceDir, String targetDir) throws IOException {
         File file = new File(sourceDir);
@@ -595,7 +573,6 @@ public final class FileUtil {
      * @param sourceFile 原始路径
      * @param targetPath 目标路径
      * @throws IOException if any
-     * @since 1.1.2
      */
     public static void copyFile(String sourceFile, String targetPath) throws IOException {
         File oldFile = new File(sourceFile);
@@ -623,7 +600,6 @@ public final class FileUtil {
      * @param filePath    文件路径
      * @param line        行信息
      * @param openOptions 操作属性
-     * @since 0.1.78
      */
     public static void write(final String filePath, final CharSequence line, OpenOption... openOptions) {
         write(filePath, Collections.singletonList(line), openOptions);
@@ -637,7 +613,6 @@ public final class FileUtil {
      * @param filePath    文件路径
      * @param lines       行信息
      * @param openOptions 文件选项
-     * @since 0.1.22
      */
     public static void write(final String filePath, final Iterable<? extends CharSequence> lines, OpenOption... openOptions) {
         write(filePath, lines, CommonConstant.UTF8, openOptions);
@@ -650,7 +625,6 @@ public final class FileUtil {
      * @param lines       行信息
      * @param charset     文件编码
      * @param openOptions 文件操作选项
-     * @since 0.1.22
      */
     public static void write(final String filePath, final Iterable<? extends CharSequence> lines,
                              final String charset, OpenOption... openOptions) {
@@ -692,7 +666,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @return 是否成功
      * @throws CommonRuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
-     * @since 0.1.24
      */
     public static boolean createFile(final String filePath) {
         if (StringUtil.isEmpty(filePath)) {
@@ -728,7 +701,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @param options  连接选项
      * @return 是否存在
-     * @since 0.1.24
      */
     public static boolean exists(final String filePath, LinkOption... options) {
         if (StringUtil.isEmpty(filePath)) {
@@ -745,7 +717,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @param options  连接选项
      * @return 是否存在
-     * @since 0.1.24
      */
     public static boolean notExists(final String filePath, LinkOption... options) {
         return !exists(filePath, options);
@@ -757,7 +728,6 @@ public final class FileUtil {
      *
      * @param file 文件
      * @return 是否存在
-     * @since 0.1.24
      */
     public static boolean notExists(final File file) {
         ArgUtil.notNull(file, "file");
@@ -772,7 +742,6 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @return 内容是否为空
-     * @since 0.1.24
      */
     public static boolean isEmpty(final String filePath) {
         if (StringUtil.isEmpty(filePath)) {
@@ -787,7 +756,6 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @return 内容是否为不空
-     * @since 0.1.24
      */
     public static boolean isNotEmpty(final String filePath) {
         return !isEmpty(filePath);
@@ -798,7 +766,6 @@ public final class FileUtil {
      *
      * @param file 文件信息
      * @return 字节数组
-     * @since 0.1.50
      */
     public static byte[] getFileBytes(final File file) {
         ArgUtil.notNull(file, "file");
@@ -821,7 +788,6 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @return 字节数组
-     * @since 0.1.50
      */
     public static byte[] getFileBytes(final String filePath) {
         ArgUtil.notNull(filePath, "filePath");
@@ -836,7 +802,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @param bytes    字节数组
      * @see #createFileAssertSuccess 断言创建成功
-     * @since 0.1.50
      */
     public static void createFile(final String filePath, final byte[] bytes) {
         File file = createFileAssertSuccess(filePath);
@@ -854,7 +819,6 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @return 文件信息
      * @throws CommonRuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
-     * @since 0.1.50
      */
     public static File createFileAssertSuccess(final String filePath) {
         ArgUtil.notEmpty(filePath, "filePath");
@@ -890,7 +854,6 @@ public final class FileUtil {
      * 删除文件
      *
      * @param file 文件信息
-     * @since 0.1.50
      */
     public static void deleteFile(final File file) {
         ArgUtil.notNull(file, "file");
@@ -907,7 +870,6 @@ public final class FileUtil {
      * 删除文件
      *
      * @param filePath 文件信息
-     * @since 0.1.141
      */
     public static void deleteFile(final String filePath) {
         ArgUtil.notEmpty(filePath, "filePath");
@@ -921,7 +883,6 @@ public final class FileUtil {
      * @param name   文件名称
      * @param suffix 文件后缀
      * @return 临时文件
-     * @since 0.1.50
      */
     public static File createTempFile(final String name, final String suffix) {
         try {
@@ -939,7 +900,6 @@ public final class FileUtil {
      *
      * @param nameWithSuffix 文件名称全称
      * @return 临时文件
-     * @since 0.1.50
      */
     public static File createTempFile(final String nameWithSuffix) {
         try {
@@ -956,7 +916,6 @@ public final class FileUtil {
      *
      * @param string 原始字符串
      * @return 是否为图片
-     * @since 0.1.73
      */
     public static boolean isImage(final String string) {
         if (StringUtil.isEmpty(string)) {
@@ -978,7 +937,6 @@ public final class FileUtil {
      * @param <K>         key 泛型
      * @param <V>         value 泛型
      * @return 结果
-     * @since 0.1.95
      */
     public static <K, V> Map<K, V> readToMap(final InputStream inputStream,
                                              final String charset,
@@ -996,7 +954,6 @@ public final class FileUtil {
      * @param <K>        key 泛型
      * @param <V>        value 泛型
      * @return 结果
-     * @since 0.1.83
      */
     public static <K, V> Map<K, V> readToMap(final String path,
                                              final String charset,
@@ -1013,7 +970,6 @@ public final class FileUtil {
      * @param <K>        key 泛型
      * @param <V>        value 泛型
      * @return 结果
-     * @since 0.1.83
      */
     public static <K, V> Map<K, V> readToMap(final String path,
                                              final IMapHandler<K, V, String> mapHandler) {
@@ -1027,7 +983,6 @@ public final class FileUtil {
      * （2）默认使用空格分隔
      * @param path     文件路径
      * @return 结果
-     * @since 0.1.119
      */
     public static Map<String, String> readToMap(final String path) {
         return readToMap(path, " ");
@@ -1041,7 +996,6 @@ public final class FileUtil {
      * @param path     文件路径
      * @param splitter 分隔符号
      * @return 结果
-     * @since 0.1.83
      */
     public static Map<String, String> readToMap(final String path,
                                                 final String splitter) {
@@ -1063,7 +1017,6 @@ public final class FileUtil {
      *
      * @param path 完整路径
      * @return 名称
-     * @since 0.1.86
      */
     public static String getFileName(final String path) {
         if (StringUtil.isEmptyTrim(path)) {
@@ -1081,7 +1034,6 @@ public final class FileUtil {
      *
      * @param path 当前路径
      * @return 父类路径
-     * @since 0.1.86
      */
     public static String getDirPath(final String path) {
         Path path1 = Paths.get(path);
@@ -1094,7 +1046,6 @@ public final class FileUtil {
      *
      * @param name 名称
      * @return 结果
-     * @since 0.1.88
      */
     public static String trimWindowsSpecialChars(final String name) {
         if (StringUtil.isEmpty(name)) {
@@ -1110,7 +1061,6 @@ public final class FileUtil {
      * @param sourcePath 原始路径
      * @param targetPath 结果路径
      * @return 重命名结果
-     * @since 0.1.98
      */
     public static boolean rename(final String sourcePath,
                                  final String targetPath) {
@@ -1124,7 +1074,6 @@ public final class FileUtil {
      *
      * @param result  结果路径
      * @param sources 其他待合并文件路径
-     * @since 0.1.99
      */
     public static void merge(final String result,
                              final String... sources) {
@@ -1146,7 +1095,6 @@ public final class FileUtil {
      *
      * @param result     结果路径
      * @param byteArrays 其他待合并文件路径
-     * @since 0.1.99
      */
     public static void merge(final String result,
                              final byte[]... byteArrays) {
@@ -1167,7 +1115,6 @@ public final class FileUtil {
      *
      * @param result        结果路径
      * @param byteArrayList 其他待合并文件字节数组
-     * @since 0.1.99
      */
     public static void merge(final String result,
                              final List<byte[]> byteArrayList) {
@@ -1188,7 +1135,6 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @param bytes    字节信息
-     * @since 0.2.1
      */
     public static void write(final String filePath,
                              final byte[] bytes) {
@@ -1205,7 +1151,6 @@ public final class FileUtil {
      * 转义 windows 下的特殊字符
      * @param fileName 文件名称
      * @return 转义后的字符串
-     * @since 0.1.113
      */
     public static String escapeWindowsSpecial(final String fileName) {
         if(StringUtil.isEmpty(fileName)) {
@@ -1218,7 +1163,6 @@ public final class FileUtil {
      * 创建文件夹
      * @param dir 文件夹
      * @return 结果
-     * @since 0.1.113
      */
     public static boolean createDir(final String dir) {
         if(StringUtil.isEmpty(dir)) {
@@ -1235,7 +1179,6 @@ public final class FileUtil {
     /**
      * 清空文件内容
      * @param filePath 文件路径
-     * @since 0.1.116
      */
     public static void truncate(final String filePath) {
         FileUtil.write(filePath, StringUtil.EMPTY, StandardOpenOption.TRUNCATE_EXISTING);
@@ -1245,7 +1188,6 @@ public final class FileUtil {
      * 追加文件内容
      * @param filePath 文件路径
      * @param line 文件内容
-     * @since 0.1.117
      */
     public static void append(final String filePath, final String line) {
         FileUtil.write(filePath, line, StandardOpenOption.APPEND);
@@ -1255,7 +1197,6 @@ public final class FileUtil {
      * 追加文件内容
      * @param filePath 文件路径
      * @param collection 文件内容
-     * @since 0.1.117
      */
     public static void append(final String filePath, final Collection<String> collection) {
         FileUtil.write(filePath, collection, StandardOpenOption.APPEND);
@@ -1272,7 +1213,6 @@ public final class FileUtil {
      * 不同规范编码不同，会导致出现换行符号，但是解码的时候会被忽略。
      * @param filePath 文件路径
      * @return base64 字符串
-     * @since 0.1.146
      */
     public static String fileToBase64(String filePath) {
         //File file = new File(filePath);
@@ -1294,7 +1234,6 @@ public final class FileUtil {
      * 将base64字符解码保存文件
      * @param base64Code base64 内容
      * @param targetPath 目标文件
-     * @since 0.1.146
      */
     public static void base64ToFile(String base64Code,String targetPath) {
         //FileUtil.createFile(targetPath);

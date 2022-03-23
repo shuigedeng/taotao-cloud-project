@@ -14,7 +14,7 @@ public interface Pipeline<T> {
      * @param t 元素
      * @return this
      */
-    Pipeline addLast(final T t);
+	Pipeline addLast(final T t);
 
     /**
      * 加入到列表的开头

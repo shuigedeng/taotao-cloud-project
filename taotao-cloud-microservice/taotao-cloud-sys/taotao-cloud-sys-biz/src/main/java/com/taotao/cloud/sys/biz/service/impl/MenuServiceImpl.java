@@ -29,9 +29,9 @@ import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.system.Menu;
-import com.taotao.cloud.sys.biz.entity.QMenu;
+import com.taotao.cloud.sys.biz.entity.system.QMenu;
 import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
-import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.MenuMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IMenuRepository;
 import com.taotao.cloud.sys.biz.service.IMenuService;
@@ -83,25 +83,25 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuBO> findMenuByIdList(List<Long> idList) {
 		List<Menu> menus = cr().findAllById(idList);
-		return IMenuMapStruct.INSTANCE.menusToBos(menus);
+		return MenuMapStruct.INSTANCE.menusToBos(menus);
 	}
 
 	@Override
 	public List<MenuBO> findAllMenus() {
 		List<Menu> menus = ir().findAll();
-		return IMenuMapStruct.INSTANCE.menusToBos(menus);
+		return MenuMapStruct.INSTANCE.menusToBos(menus);
 	}
 
 	@Override
 	public List<MenuQueryBO> findAllById(Long id) {
 		List<Menu> menus = ir().findAll();
-		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(menus);
+		return MenuMapStruct.INSTANCE.entitysToQueryBOs(menus);
 	}
 
 	@Override
 	public List<MenuBO> findMenuByRoleIds(Set<Long> roleIds) {
 		List<Menu> menus = im().findMenuByRoleIds(roleIds);
-		return IMenuMapStruct.INSTANCE.menusToBos(menus)
+		return MenuMapStruct.INSTANCE.menusToBos(menus)
 			.stream()
 			.sorted(Comparator.comparing(MenuBO::id))
 			.toList();
@@ -180,7 +180,7 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuQueryBO> queryAllId(Long id) {
 		List<Menu> all = ir().findAll();
-		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(all);
+		return MenuMapStruct.INSTANCE.entitysToQueryBOs(all);
 	}
 
 	//@Override

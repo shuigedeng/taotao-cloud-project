@@ -14,7 +14,6 @@ public final class PinyinSegments {
     /**
      * chars 分词
      * @return 实现
-     * @since 0.1.1
      */
     public static IPinyinSegment chars() {
         return Instances.singleton(CharPinyinSegment.class);
@@ -23,7 +22,6 @@ public final class PinyinSegments {
     /**
      * 默认分词
      * @return 实现
-     * @since 0.1.1
      */
     public static IPinyinSegment defaults() {
         return Instances.singleton(DefaultPinyinSegment.class);
@@ -32,7 +30,6 @@ public final class PinyinSegments {
     /**
      * 单个分词
      * @return 实现
-     * @since 0.1.1
      */
     public static IPinyinSegment single() {
         return Instances.singleton(SinglePinyinSegment.class);

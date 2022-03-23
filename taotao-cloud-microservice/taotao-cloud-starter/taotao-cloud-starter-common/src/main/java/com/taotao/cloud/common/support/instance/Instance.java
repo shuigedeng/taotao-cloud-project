@@ -53,7 +53,6 @@ public interface Instance {
 	 * @param tClass class 类型
 	 * @param <T>    泛型
 	 * @return 实例化对象
-	 * @since 0.1.3
 	 */
 	<T> T threadSafe(final Class<T> tClass);
 

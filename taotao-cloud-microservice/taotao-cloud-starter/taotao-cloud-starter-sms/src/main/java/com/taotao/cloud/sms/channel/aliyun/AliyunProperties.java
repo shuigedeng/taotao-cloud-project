@@ -25,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = AliyunProperties.PREFIX)
 public class AliyunProperties extends AbstractHandlerProperties<String> {
 
-
 	public static final String PREFIX = "taotao.cloud.sms.aliyun";
 
 	private boolean enabled = false;

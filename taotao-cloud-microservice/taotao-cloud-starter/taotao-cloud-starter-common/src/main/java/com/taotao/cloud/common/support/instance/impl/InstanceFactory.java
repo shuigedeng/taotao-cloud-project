@@ -47,7 +47,6 @@ public final class InstanceFactory implements Instance {
      * @param tClass 类信息
      * @param <T> 泛型
      * @return 结果
-     * @since 0.1.8
      */
     public static <T> T singletion(Class<T> tClass) {
         return getInstance().singleton(tClass);
@@ -59,7 +58,6 @@ public final class InstanceFactory implements Instance {
      * @param groupName 分组名称
      * @param <T> 泛型
      * @return 结果
-     * @since 0.1.8
      */
     public static <T> T singletion(Class<T> tClass, final String groupName) {
         return getInstance().singleton(tClass, groupName);

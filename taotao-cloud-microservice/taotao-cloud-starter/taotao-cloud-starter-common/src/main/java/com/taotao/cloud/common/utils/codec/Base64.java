@@ -19,15 +19,11 @@ public final class Base64 {
 
 	/**
 	 * Base64 标准字符集合
-	 *
-	 * @since 0.1.120
 	 */
 	private static final char[] ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".toCharArray();
 
 	/**
 	 * 编码信息
-	 *
-	 * @since 0.1.120
 	 */
 	private static final byte[] CODES = new byte[256];
 
@@ -53,7 +49,6 @@ public final class Base64 {
 	 *
 	 * @param bytes 字节流
 	 * @return 字符串
-	 * @since 0.1.120
 	 */
 	public static String encodeToString(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
@@ -68,7 +63,6 @@ public final class Base64 {
 	 *
 	 * @param text 文本
 	 * @return 字符串
-	 * @since 0.1.120
 	 */
 	public static String encodeToString(String text) {
 		if (StringUtil.isEmpty(text)) {
@@ -84,7 +78,6 @@ public final class Base64 {
 	 *
 	 * @param data 数据信息
 	 * @return 结果
-	 * @since 0.1.120
 	 */
 	public static char[] encode(byte[] data) {
 		char[] out = new char[((data.length + 2) / 3) * 4];
@@ -120,7 +113,6 @@ public final class Base64 {
 	 *
 	 * @param bytes 数组
 	 * @return 结果
-	 * @since 0.1.120
 	 */
 	public static byte[] decode(byte[] bytes) {
 		char[] chars = CodecSupport.toChars(bytes);
@@ -132,7 +124,6 @@ public final class Base64 {
 	 *
 	 * @param data 数据
 	 * @return 结果
-	 * @since 0.1.120
 	 */
 	public static byte[] decode(char[] data) {
 		if (data == null) {
@@ -173,7 +164,6 @@ public final class Base64 {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.120
 	 */
 	public static String decodeToString(final String text) {
 		if (StringUtil.isEmpty(text)) {
@@ -187,7 +177,6 @@ public final class Base64 {
 	 *
 	 * @param bytes 字节数组
 	 * @return 结果
-	 * @since 0.1.120
 	 */
 	public static String decodeToString(final byte[] bytes) {
 		String text = CodecSupport.toString(bytes);
@@ -199,7 +188,6 @@ public final class Base64 {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.120
 	 */
 	public static String encode(final String text) {
 		if (StringUtil.isEmpty(text)) {

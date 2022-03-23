@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class QuartzJobInit implements ApplicationRunner {
 
 	@Autowired
-	private IQuartzJobService IQuartzJobService;
+	private IQuartzJobService quartzJobService;
 	@Autowired
 	private QuartzManager quartzManager;
 

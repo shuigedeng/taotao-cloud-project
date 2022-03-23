@@ -31,62 +31,52 @@ public final class PinyinBs {
 
     /**
      * 默认分词
-     * @since 0.0.1
      */
     private IPinyinSegment pinyinSegment = PinyinSegments.defaults();
 
     /**
      * 中文服务类
-     * @since 0.0.1
      */
     private final IPinyinChinese pinyinChinese = PinyinChineses.defaults();
 
     /**
      * 注音映射
-     * @since 0.0.1
      */
     private final IPinyinTone pinyinTone = PinyinTones.defaults();
 
     /**
      * 拼音数据实现
-     * @since 0.1.1
      */
     private final IPinyinData data = Instances.singleton(PinyinData.class);
 
     /**
      * 拼音的形式
-     * @since 0.1.1
      */
     private IPinyinToneStyle style = PinyinToneStyles.defaults();
 
     /**
      * 默认核心实现
-     * @since 0.1.1
      */
     private final IPinyin pinyin = Instances.singleton(Pinyin.class);
 
     /**
      * 连接符号
-     * @since 0.1.2
      */
     private String connector = StringUtil.BLANK;
 
     /**
      * 拼音的反向标注
-     * @since 0.3.0
      */
     private IPinyinToneReverse pinyinToneReverse = new PinyinToneReverse();
 
     /**
      * 拼音上下文
-     * @since 0.3.0
      */
     private IPinyinContext pinyinContext;
 
     /**
      * 新建引导类实例
      * @return 引导类
-     * @since 0.0.1
      */
     public static PinyinBs newInstance() {
         return new PinyinBs();
@@ -95,7 +85,6 @@ public final class PinyinBs {
     /**
      * 设置样式
      * @param style 样式
-     * @since 0.1.1
      * @return this
      */
     public PinyinBs style(IPinyinToneStyle style) {
@@ -109,7 +98,6 @@ public final class PinyinBs {
      * 设置连接符号
      * @param connector 连接符号
      * @return this
-     * @since 0.1.2
      */
     public PinyinBs connector(String connector) {
         this.connector = connector;
@@ -120,7 +108,6 @@ public final class PinyinBs {
      * 添加自定义分词
      * @param pinyinSegment 拼音分词实现
      * @return 分词
-     * @since 0.2.0
      */
     public PinyinBs segment(IPinyinSegment pinyinSegment) {
         ArgUtil.notNull(pinyinSegment, "segment");
@@ -133,7 +120,6 @@ public final class PinyinBs {
      * 拼音反向标注
      * @param pinyinToneReverse 反向拼音标注
      * @return 结果
-     * @since 0.3.0
      */
     public PinyinBs pinyinToneReverse(IPinyinToneReverse pinyinToneReverse) {
         ArgUtil.notNull(pinyinToneReverse, "pinyinToneReverse");
@@ -165,7 +151,6 @@ public final class PinyinBs {
      * 转换为拼音字符串
      * @param string 字符串
      * @return 结果
-     * @since 0.0.1
      */
     public String toPinyin(String string) {
         if(StringUtil.isEmpty(string)) {
@@ -180,7 +165,6 @@ public final class PinyinBs {
      * 转换为拼音列表
      * @param chinese 中文字符
      * @return 结果
-     * @since 0.0.1
      */
     public List<String> toPinyinList(char chinese) {
         statusCheck();
@@ -192,7 +176,6 @@ public final class PinyinBs {
      * @param chineseOne 中文1
      * @param chineseTwo 中文2
      * @return 结果
-     * @since 0.0.1
      */
     public boolean hasSamePinyin(char chineseOne, char chineseTwo) {
         statusCheck();
@@ -204,7 +187,6 @@ public final class PinyinBs {
      * @param pinyin 拼音
      * @param sameTone 相同的声调
      * @return 结果
-     * @since 0.3.0
      */
     public List<String> samePinyinList(String pinyin, final boolean sameTone) {
         statusCheck();

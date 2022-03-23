@@ -64,7 +64,6 @@ public class PropertyDescriptorListCache implements ICache<Class, List<PropertyD
 	 *
 	 * @param beanClass 类型
 	 * @return 方法列表
-	 * @since 0.1.62
 	 */
 	public Map<String, Method> getReadMethodMap(final Class beanClass) {
 		Map<String, Method> readMethodMap = READ_METHOD_MAP.get(beanClass);

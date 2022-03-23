@@ -10,6 +10,11 @@ import com.taotao.cloud.web.schedule.enums.ScheduledType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Scheduled任务表
@@ -18,6 +23,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = ScheduledJob.TABLE_NAME)
 @TableName(ScheduledJob.TABLE_NAME)
@@ -105,108 +115,4 @@ public class ScheduledJob extends BaseSuperEntity<ScheduledJob, Long> {
 	 */
 	@Column(name = "type", nullable = false, columnDefinition = "varchar(64) not null comment '类型'")
 	private String type;
-
-	public String getCron() {
-		return cron;
-	}
-
-	public void setCron(String cron) {
-		this.cron = cron;
-	}
-
-	public String getZone() {
-		return zone;
-	}
-
-	public void setZone(String zone) {
-		this.zone = zone;
-	}
-
-	public Long getFixedDelay() {
-		return fixedDelay;
-	}
-
-	public void setFixedDelay(Long fixedDelay) {
-		this.fixedDelay = fixedDelay;
-	}
-
-	public String getFixedDelayString() {
-		return fixedDelayString;
-	}
-
-	public void setFixedDelayString(String fixedDelayString) {
-		this.fixedDelayString = fixedDelayString;
-	}
-
-	public Long getFixedRate() {
-		return fixedRate;
-	}
-
-	public void setFixedRate(Long fixedRate) {
-		this.fixedRate = fixedRate;
-	}
-
-	public String getFixedRateString() {
-		return fixedRateString;
-	}
-
-	public void setFixedRateString(String fixedRateString) {
-		this.fixedRateString = fixedRateString;
-	}
-
-	public Long getInitialDelay() {
-		return initialDelay;
-	}
-
-	public void setInitialDelay(Long initialDelay) {
-		this.initialDelay = initialDelay;
-	}
-
-	public String getInitialDelayString() {
-		return initialDelayString;
-	}
-
-	public void setInitialDelayString(String initialDelayString) {
-		this.initialDelayString = initialDelayString;
-	}
-
-	public boolean isCancel() {
-		return cancel;
-	}
-
-	public void setCancel(boolean cancel) {
-		this.cancel = cancel;
-	}
-
-	public int getNum() {
-		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public String getBeanName() {
-		return beanName;
-	}
-
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 }

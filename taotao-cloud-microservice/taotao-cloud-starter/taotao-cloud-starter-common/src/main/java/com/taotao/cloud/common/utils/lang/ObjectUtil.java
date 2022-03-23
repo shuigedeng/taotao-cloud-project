@@ -26,9 +26,6 @@ import org.springframework.lang.Nullable;
 
 /**
  * Object 工具类
- *
- * @author bbhou
- * @since 0.0.1
  */
 public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 
@@ -556,7 +553,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 *
 	 * @param object 对象
 	 * @return 结果
-	 * @since 0.1.18
 	 */
 	//public static String objectToString(final Object object) {
 	//	return objectToString(object, null);
@@ -568,7 +564,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param object       对象
 	 * @param defaultValue 默认值，原始对象为 null 时返回。
 	 * @return 结果
-	 * @since 0.1.18
 	 */
 	//public static String objectToString(final Object object,
 	//	final String defaultValue) {
@@ -584,7 +579,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param object 对象
 	 * @param others 其他参数
 	 * @return 是否都为空
-	 * @since 0.1.29
 	 */
 	//public static boolean isNull(final Object object, final Object... others) {
 	//	if (ObjectUtil.isNull(object)) {
@@ -608,7 +602,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param left  元素1
 	 * @param right 元素2
 	 * @return 是否相等或者都为 Null
-	 * @since 0.1.29
 	 */
 	//public static boolean isEqualsOrNull(final Object left, final Object right) {
 	//	if (isNull(left, right)) {
@@ -627,7 +620,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param handler 转换方式
 	 * @param <R>     R 泛型
 	 * @return 结果列表
-	 * @since 0.1.25
 	 */
 	@SuppressWarnings("unchecked")
 	public static <R> List<R> toList(final Object object, IHandler<Object, R> handler) {
@@ -657,7 +649,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 *
 	 * @param object 实例对象
 	 * @return 对象 class 信息
-	 * @since 0.1.41
 	 */
 	//public static Class getClass(final Object object) {
 	//	if (com.taotao.cloud.common.utils.common.ObjectUtil.isNull(object)) {
@@ -670,7 +661,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * empty 转换为 null
 	 *
 	 * @param object 对象
-	 * @since 0.1.123
 	 */
 	public static void emptyToNull(Object object) {
 		if (null == object) {
@@ -691,7 +681,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 *
 	 * @param source 源头
 	 * @param target 目标
-	 * @since 0.1.147
 	 */
 	public static void copyProperties(Object source, Object target) {
 		if (source == null || target == null) {
@@ -724,7 +713,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param valueOne 第一个
 	 * @param valueTwo 第二个
 	 * @return 是否
-	 * @since 0.1.147
 	 */
 	//public static boolean isSameValue(Object valueOne, Object valueTwo) {
 	//	if (valueOne == null && valueTwo == null) {
@@ -889,7 +877,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 *
 	 * @param object 对象
 	 * @return 结果
-	 * @since 0.1.18
 	 */
 	public static String objectToString(final Object object) {
 		return objectToString(object, null);
@@ -901,7 +888,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param object       对象
 	 * @param defaultValue 默认值，原始对象为 null 时返回。
 	 * @return 结果
-	 * @since 0.1.18
 	 */
 	public static String objectToString(final Object object,
 		final String defaultValue) {
@@ -918,7 +904,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param others 其他参数
 	 * @return 是否都为空
 	 * @see #isNull(Object) 增强版本
-	 * @since 0.1.29
 	 */
 	public static boolean isNull(final Object object, final Object... others) {
 		if (ObjectUtil.isNull(object)) {
@@ -942,7 +927,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param left  元素1
 	 * @param right 元素2
 	 * @return 是否相等或者都为 Null
-	 * @since 0.1.29
 	 */
 	public static boolean isEqualsOrNull(final Object left, final Object right) {
 		if (isNull(left, right)) {
@@ -961,7 +945,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param handler 转换方式
 	 * @param <R>     R 泛型
 	 * @return 结果列表
-	 * @since 0.1.25
 	 */
 	@SuppressWarnings("unchecked")
 	//public static <R> List<R> toList(final Object object, IHandler<Object, R> handler) {
@@ -991,7 +974,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 *
 	 * @param object 实例对象
 	 * @return 对象 class 信息
-	 * @since 0.1.41
 	 */
 	//public static Class getClass(final Object object) {
 	//	if (ObjectUtil.isNull(object)) {
@@ -1004,7 +986,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * empty 转换为 null
 	 *
 	 * @param object 对象
-	 * @since 0.1.123
 	 */
 	//public static void emptyToNull(Object object) {
 	//	if (null == object) {
@@ -1025,7 +1006,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 *
 	 * @param source 源头
 	 * @param target 目标
-	 * @since 0.1.147
 	 */
 	//public static void copyProperties(Object source, Object target) {
 	//	if (source == null || target == null) {
@@ -1058,7 +1038,6 @@ public final class ObjectUtil extends org.springframework.util.ObjectUtils {
 	 * @param valueOne 第一个
 	 * @param valueTwo 第二个
 	 * @return 是否
-	 * @since 0.1.147
 	 */
 	public static boolean isSameValue(Object valueOne, Object valueTwo) {
 		if (valueOne == null && valueTwo == null) {

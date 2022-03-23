@@ -5,11 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 短信签名
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = SmsSign.TABLE_NAME)
 @TableName(SmsSign.TABLE_NAME)
@@ -41,60 +51,4 @@ public class SmsSign extends BaseSuperEntity<SmsSign, Long> {
 
 	@Column(name = "reason", nullable = false, columnDefinition = "varchar(2000) not null comment '审核备注'")
 	private String reason;
-
-	public String getSignName() {
-		return signName;
-	}
-
-	public void setSignName(String signName) {
-		this.signName = signName;
-	}
-
-	public Integer getSignSource() {
-		return signSource;
-	}
-
-	public void setSignSource(Integer signSource) {
-		this.signSource = signSource;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public String getBusinessLicense() {
-		return businessLicense;
-	}
-
-	public void setBusinessLicense(String businessLicense) {
-		this.businessLicense = businessLicense;
-	}
-
-	public String getLicense() {
-		return license;
-	}
-
-	public void setLicense(String license) {
-		this.license = license;
-	}
-
-	public Integer getSignStatus() {
-		return signStatus;
-	}
-
-	public void setSignStatus(Integer signStatus) {
-		this.signStatus = signStatus;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
 }

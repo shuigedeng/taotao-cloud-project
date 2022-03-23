@@ -25,6 +25,7 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	@Schema(description =  "售后服务单号")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String sn;
+
 	/**
 	 * 应用ID
 	 */

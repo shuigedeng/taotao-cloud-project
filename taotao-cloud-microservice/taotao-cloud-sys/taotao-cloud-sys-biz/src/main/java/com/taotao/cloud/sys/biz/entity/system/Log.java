@@ -9,6 +9,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -18,6 +23,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-02-15 09:25:26
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Log.TABLE_NAME)
 @TableName(Log.TABLE_NAME)
@@ -198,236 +208,4 @@ public class Log extends BaseSuperEntity<Log, Long> {
 	 */
 	@Column(name = "browser", columnDefinition = "varchar(1024) null comment '浏览器'")
 	private String browser;
-
-	public String getTraceId() {
-		return traceId;
-	}
-
-	public void setTraceId(String traceId) {
-		this.traceId = traceId;
-	}
-
-	public String getApplicationName() {
-		return applicationName;
-	}
-
-	public void setApplicationName(String applicationName) {
-		this.applicationName = applicationName;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public Integer getOperateType() {
-		return operateType;
-	}
-
-	public void setOperateType(Integer operateType) {
-		this.operateType = operateType;
-	}
-
-	public Integer getRequestType() {
-		return requestType;
-	}
-
-	public void setRequestType(Integer requestType) {
-		this.requestType = requestType;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public String getMethod() {
-		return method;
-	}
-
-	public void setMethod(String method) {
-		this.method = method;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getArgs() {
-		return args;
-	}
-
-	public void setArgs(String args) {
-		this.args = args;
-	}
-
-	public String getParams() {
-		return params;
-	}
-
-	public void setParams(String params) {
-		this.params = params;
-	}
-
-	public String getHeaders() {
-		return headers;
-	}
-
-	public void setHeaders(String headers) {
-		this.headers = headers;
-	}
-
-	public String getClasspath() {
-		return classpath;
-	}
-
-	public void setClasspath(String classpath) {
-		this.classpath = classpath;
-	}
-
-	public Long getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Long startTime) {
-		this.startTime = startTime;
-	}
-
-	public Long getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Long endTime) {
-		this.endTime = endTime;
-	}
-
-	public Long getConsumingTime() {
-		return consumingTime;
-	}
-
-	public void setConsumingTime(Long consumingTime) {
-		this.consumingTime = consumingTime;
-	}
-
-	public String getExDetail() {
-		return exDetail;
-	}
-
-	public void setExDetail(String exDetail) {
-		this.exDetail = exDetail;
-	}
-
-	public String getExDesc() {
-		return exDesc;
-	}
-
-	public void setExDesc(String exDesc) {
-		this.exDesc = exDesc;
-	}
-
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
-	public String getCtime() {
-		return ctime;
-	}
-
-	public void setCtime(String ctime) {
-		this.ctime = ctime;
-	}
-
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
-	}
-
-	public String getLogday() {
-		return logday;
-	}
-
-	public void setLogday(String logday) {
-		this.logday = logday;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getOs() {
-		return os;
-	}
-
-	public void setOs(String os) {
-		this.os = os;
-	}
-
-	public String getBrowser() {
-		return browser;
-	}
-
-	public void setBrowser(String browser) {
-		this.browser = browser;
-	}
 }

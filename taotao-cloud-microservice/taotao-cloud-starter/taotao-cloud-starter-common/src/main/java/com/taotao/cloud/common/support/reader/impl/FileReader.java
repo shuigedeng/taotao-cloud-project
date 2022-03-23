@@ -12,15 +12,11 @@ public class FileReader implements IReader {
 
 	/**
 	 * 文件路径
-	 *
-	 * @since 0.1.95
 	 */
 	private final File file;
 
 	/**
 	 * 文件编码
-	 *
-	 * @since 0.0.1
 	 */
 	private final String charset;
 

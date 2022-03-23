@@ -6,13 +6,13 @@ package com.taotao.cloud.common.support.deepcopy;
  */
 public interface IDeepCopy {
 
-    /**
-     * 深度拷贝
-     * @param object 原始对象
-     * @return 结果
-     * @since 0.0.1
-     * @param <T> 泛型
-     */
-    <T> T deepCopy(T object);
+	/**
+	 * 深度拷贝
+	 *
+	 * @param object 原始对象
+	 * @param <T>    泛型
+	 * @return 结果
+	 */
+	<T> T deepCopy(T object);
 
 }

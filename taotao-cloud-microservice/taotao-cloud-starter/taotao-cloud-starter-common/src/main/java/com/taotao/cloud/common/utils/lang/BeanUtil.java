@@ -23,7 +23,6 @@ public final class BeanUtil {
 	 *
 	 * @param bean 原始对象
 	 * @return 结果
-	 * @since 0.1.44
 	 */
 	public static Map<String, Object> beanToMap(Object bean) {
 		ArgUtil.notNull(bean, "bean");
@@ -48,7 +47,6 @@ public final class BeanUtil {
 	 *
 	 * @param map  map 信息
 	 * @param bean 原始对象
-	 * @since 0.1.44
 	 */
 	public static void mapToBean(final Map<String, Object> map, final Object bean) {
 		ArgUtil.notNull(bean, "bean");
@@ -77,7 +75,6 @@ public final class BeanUtil {
 	 *
 	 * @param source 源头
 	 * @param target 目标
-	 * @since 0.1.150
 	 */
 	public static void copyProperties(final Object source, final Object target) {
 		ObjectUtil.copyProperties(source, target);

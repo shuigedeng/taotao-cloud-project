@@ -21,6 +21,11 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -31,6 +36,11 @@ import org.springframework.data.annotation.LastModifiedDate;
  * @version 2021.10
  * @since 2021-10-09 21:10:04
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)
@@ -62,7 +72,7 @@ public class Dict extends SuperEntity<Dict,Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
-	private Integer sortNum = 0;
+	private Integer sortNum ;
 
 	/**
 	 * 备注信息
@@ -77,75 +87,4 @@ public class Dict extends SuperEntity<Dict,Long> {
 	@LastModifiedDate
 	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP comment '最后修改时间'")
 	private LocalDateTime lastModifiedTime;
-
-	public String getDictName() {
-		return dictName;
-	}
-
-	public void setDictName(String dictName) {
-		this.dictName = dictName;
-	}
-
-	public String getDictCode() {
-		return dictCode;
-	}
-
-	public void setDictCode(String dictCode) {
-		this.dictCode = dictCode;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getSortNum() {
-		return sortNum;
-	}
-
-	public void setSortNum(Integer sortNum) {
-		this.sortNum = sortNum;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
-
-	public Dict() {
-	}
-
-	public Dict(String dictName, String dictCode, String description,
-		Integer sortNum, String remark, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime) {
-		this.dictName = dictName;
-		this.dictCode = dictCode;
-		this.description = description;
-		this.sortNum = sortNum;
-		this.remark = remark;
-		this.createTime = createTime;
-		this.lastModifiedTime = lastModifiedTime;
-	}
 }

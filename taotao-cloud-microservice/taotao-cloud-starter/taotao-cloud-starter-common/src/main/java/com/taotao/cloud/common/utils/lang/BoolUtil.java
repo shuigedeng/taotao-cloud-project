@@ -10,15 +10,11 @@ public final class BoolUtil {
 
 	/**
 	 * Y 字符串
-	 *
-	 * @since 0.1.83
 	 */
 	public static final String Y = "Y";
 
 	/**
 	 * N 字符串
-	 *
-	 * @since 0.1.83
 	 */
 	public static final String N = "N";
 
@@ -53,7 +49,6 @@ public final class BoolUtil {
 	 *
 	 * @param value 布尔值
 	 * @return 结果
-	 * @since 0.1.150
 	 */
 	public static String getYesOrNo(boolean value) {
 		if (value) {

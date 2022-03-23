@@ -12,8 +12,6 @@ public final class MathUtil {
 
 	/**
 	 * 黄金分割比
-	 *
-	 * @since 0.1.107
 	 */
 	public static final double GOLD_SECTION = 0.61803398874989484820458683436565;
 
@@ -23,7 +21,6 @@ public final class MathUtil {
 	 * @param x 其中一个数
 	 * @param y 其中另一个数
 	 * @return 递归调用，最终返回最大公约数
-	 * @since 0.1.107
 	 */
 	public static int gcd(int x, int y) {
 		return y == 0 ? x : gcd(y, x % y);
@@ -34,7 +31,6 @@ public final class MathUtil {
 	 *
 	 * @param list 列表
 	 * @return 递归调用，最终返回最大公约数
-	 * @since 0.1.107
 	 */
 	public static int ngcd(List<Integer> list) {
 		return ngcd(list, list.size());
@@ -72,7 +68,6 @@ public final class MathUtil {
 	 *
 	 * @param list list n个数的集合
 	 * @return 递归调用，最终返回最小公倍数
-	 * @since 0.1.107
 	 */
 	public static int nlcm(List<Integer> list) {
 		return nlcm(list, list.size());
@@ -84,7 +79,6 @@ public final class MathUtil {
 	 * @param target list n个数的集合
 	 * @param z      数据个数
 	 * @return 递归调用，最终返回最小公倍数
-	 * @since 0.1.107
 	 */
 	private static int nlcm(List<Integer> target, int z) {
 		if (z == 1) {
