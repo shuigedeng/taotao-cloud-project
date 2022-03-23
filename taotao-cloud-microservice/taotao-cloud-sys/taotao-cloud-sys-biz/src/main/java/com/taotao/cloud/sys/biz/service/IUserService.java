@@ -38,7 +38,6 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 *
 	 * @param restPasswordDTO restPasswordDTO
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:49:02
 	 */
 	Boolean restPass(Long userId, RestPasswordUserDTO restPasswordDTO);
@@ -49,7 +48,6 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 * @param userId  userId
 	 * @param roleIds roleIds
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:49:19
 	 */
 	Boolean updateUserRoles(Long userId, Set<Long> roleIds);
@@ -59,7 +57,6 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 *
 	 * @param phone phone
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:49:35
 	 */
 	Boolean existsByPhone(String phone);
@@ -69,7 +66,6 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 *
 	 * @param id id
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:49:40
 	 */
 	Boolean existsById(Long id);

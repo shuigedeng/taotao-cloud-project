@@ -56,7 +56,6 @@ public class HttpClientManager {
 	 * @param httpClientId httpClientId
 	 * @param client       client
 	 * @return {@link com.taotao.cloud.core.http.DefaultHttpClient }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:12
 	 */
 	public HttpClient register(String httpClientId, HttpClient client) {
@@ -86,7 +85,6 @@ public class HttpClientManager {
 	 *
 	 * @param httpClientId httpClientId
 	 * @return {@link com.taotao.cloud.core.http.DefaultHttpClient }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:16
 	 */
 	public HttpClient get(String httpClientId) {
@@ -98,7 +96,6 @@ public class HttpClientManager {
 	 *
 	 * @param httpClientId httpClientId
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:20
 	 */
 	public boolean remove(String httpClientId) {
@@ -123,7 +120,6 @@ public class HttpClientManager {
 	 *
 	 * @param httpClient httpClient
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:23
 	 */
 	public boolean remove(HttpClient httpClient) {
@@ -144,7 +140,6 @@ public class HttpClientManager {
 	/**
 	 * closeAll
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:25
 	 */
 	public void closeAll() {

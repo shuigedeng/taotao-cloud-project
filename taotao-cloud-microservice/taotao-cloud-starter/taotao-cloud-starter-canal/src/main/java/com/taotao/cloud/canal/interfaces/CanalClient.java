@@ -27,7 +27,6 @@ public interface CanalClient {
 	/**
 	 * 开启 canal 客户端，并根绝配置连接到 canal ,然后进行针对性的监听
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:49:48
 	 */
 	void start();
@@ -35,7 +34,6 @@ public interface CanalClient {
 	/**
 	 * 关闭 canal 客户端
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:49:57
 	 */
 	void stop();
@@ -44,7 +42,6 @@ public interface CanalClient {
 	 * 判断 canal 客户端是否是开启状态
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:50:03
 	 */
 	boolean isRunning();

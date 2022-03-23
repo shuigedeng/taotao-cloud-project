@@ -184,7 +184,6 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param jigsawImage       jigsawImage
 	 * @param jigsawImageBase64 jigsawImageBase64
 	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:58:38
 	 */
 	public Captcha pictureTemplatesCut(BufferedImage originalImage, BufferedImage jigsawImage,
@@ -298,7 +297,6 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param jigsawWidth    jigsawWidth
 	 * @param jigsawHeight   jigsawHeight
 	 * @return {@link com.taotao.cloud.captcha.model.Point }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:59:02
 	 */
 	private static Point generateJigsawPoint(int originalWidth, int originalHeight,
@@ -330,7 +328,6 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param newImage      新抠出的小图
 	 * @param x             随机扣取坐标X
 	 * @param y             随机扣取坐标y
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:59:14
 	 */
 	private static void cutByTemplate(BufferedImage oriImage, BufferedImage templateImage,
@@ -380,7 +377,6 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param templateImage 模板图
 	 * @param x             随机扣取坐标X
 	 * @param y             随机扣取坐标y
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:59:25
 	 */
 	private static void interferenceByTemplate(BufferedImage oriImage, BufferedImage templateImage,

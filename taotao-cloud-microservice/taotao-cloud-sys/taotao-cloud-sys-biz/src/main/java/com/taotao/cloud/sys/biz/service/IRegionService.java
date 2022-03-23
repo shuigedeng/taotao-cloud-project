@@ -37,7 +37,6 @@ public interface IRegionService extends BaseSuperService<Region, Long> {
 	 *
 	 * @param parentId parentId
 	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.QueryRegionByParentIdVO&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:37:32
 	 */
 	List<RegionParentVO> queryRegionByParentId(Long parentId);
@@ -46,7 +45,6 @@ public interface IRegionService extends BaseSuperService<Region, Long> {
 	 * tree
 	 *
 	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.QueryRegionByParentIdVO&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:37:36
 	 */
 	List<RegionParentVO> tree();

@@ -540,10 +540,8 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param source 源Bean对象
 	 * @param target 目标Bean对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:45:45
 	 */
-
 	public static void copyIgnoredNull(Object source, Object target) {
 		cn.hutool.core.bean.BeanUtil
 			.copyProperties(source, target, CopyOptions.create().ignoreNullValue().ignoreError());
@@ -554,7 +552,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param source 源Bean对象
 	 * @param target 目标Bean对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:45:45
 	 */
 	public static void copyIncludeNull(Object source, Object target) {
@@ -569,7 +566,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param type  类型
 	 * @param <T>   T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:46:05
 	 */
 	public static <T> T convert(Object value, Class<T> type) {
@@ -586,7 +582,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param type  类型
 	 * @param <T>   T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:46:40
 	 */
 	public static <T> T tryConvert(Object value, Class<T> type) {
@@ -603,7 +598,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	// * @param obj obj
 	// * @param <T> T
 	// * @return T
-	// * @author shuigedeng
 	// * @since 2021-09-02 17:47:00
 	// */
 	//public static <T> T deepClone(T obj) {

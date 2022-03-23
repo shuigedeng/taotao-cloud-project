@@ -53,7 +53,6 @@ public interface HttpClient extends Closeable {
 	 *
 	 * @param url url
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:20
 	 */
 	String get(String url);
@@ -64,7 +63,6 @@ public interface HttpClient extends Closeable {
 	 * @param url    url
 	 * @param params params
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:23
 	 */
 	String get(String url, Params params);
@@ -76,7 +74,6 @@ public interface HttpClient extends Closeable {
 	 * @param tTypeReference tTypeReference
 	 * @param <T>            T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:26
 	 */
 	<T> T get(String url, TypeReference<T> tTypeReference);
@@ -89,7 +86,6 @@ public interface HttpClient extends Closeable {
 	 * @param tTypeReference tTypeReference
 	 * @param <T>            T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:35
 	 */
 	<T> T get(String url, Params params, TypeReference<T> tTypeReference);
@@ -100,7 +96,6 @@ public interface HttpClient extends Closeable {
 	 * @param url    url
 	 * @param params params
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:44
 	 */
 	String post(String url, Params params);
@@ -113,7 +108,6 @@ public interface HttpClient extends Closeable {
 	 * @param tTypeReference tTypeReference
 	 * @param <T>            T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:48
 	 */
 	<T> T post(String url, Params params, TypeReference<T> tTypeReference);
@@ -124,7 +118,6 @@ public interface HttpClient extends Closeable {
 	 * @param url    url
 	 * @param params params
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:16:57
 	 */
 	String put(String url, Params params);
@@ -137,7 +130,6 @@ public interface HttpClient extends Closeable {
 	 * @param tTypeReference tTypeReference
 	 * @param <T>            T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:17:00
 	 */
 	<T> T put(String url, Params params, TypeReference<T> tTypeReference);
@@ -147,7 +139,6 @@ public interface HttpClient extends Closeable {
 	 *
 	 * @param url url
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:17:07
 	 */
 	String delete(String url);
@@ -159,7 +150,6 @@ public interface HttpClient extends Closeable {
 	 * @param tTypeReference tTypeReference
 	 * @param <T>            T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:17:09
 	 */
 	<T> T delete(String url, TypeReference<T> tTypeReference);
@@ -170,7 +160,6 @@ public interface HttpClient extends Closeable {
 	 * @param url    url
 	 * @param params params
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:17:17
 	 */
 	String delete(String url, Params params);
@@ -183,7 +172,6 @@ public interface HttpClient extends Closeable {
 	 * @param tTypeReference tTypeReference
 	 * @param <T>            T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:17:25
 	 */
 	<T> T delete(String url, Params params, TypeReference<T> tTypeReference);
@@ -192,7 +180,6 @@ public interface HttpClient extends Closeable {
 	 * getClient
 	 *
 	 * @return {@link CloseableHttpClient }
-	 * @author shuigedeng
 	 * @since 2021-12-01 15:09:44
 	 */
 	CloseableHttpClient getClient();
@@ -201,7 +188,6 @@ public interface HttpClient extends Closeable {
 	 * getManager
 	 *
 	 * @return {@link PoolingHttpClientConnectionManager }
-	 * @author shuigedeng
 	 * @since 2021-12-01 15:10:12
 	 */
 	PoolingHttpClientConnectionManager getManager();
@@ -209,7 +195,6 @@ public interface HttpClient extends Closeable {
 	/**
 	 * open
 	 *
-	 * @author shuigedeng
 	 * @since 2021-12-01 15:11:45
 	 */
 	public void open();
@@ -285,7 +270,6 @@ public interface HttpClient extends Closeable {
 		 * toEntity
 		 *
 		 * @return {@link org.apache.http.HttpEntity }
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:18:58
 		 */
 		public HttpEntity toEntity() {

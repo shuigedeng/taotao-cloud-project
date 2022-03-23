@@ -42,7 +42,7 @@ public interface IAlipayConfigService extends IService<AlipayConfig> {
 	 * 更新配置
 	 *
 	 * @param alipayConfig 支付宝配置
-	 * @return AlipayConfig
+	 * @return 是否完成更新
 	 */
-	void update(AlipayConfig alipayConfig);
+	Boolean update(AlipayConfig alipayConfig);
 }

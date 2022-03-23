@@ -64,7 +64,6 @@ public final class DbConn implements AutoCloseable {
 	 * getPrintSql
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:28
 	 */
 	private boolean getPrintSql() {
@@ -91,7 +90,6 @@ public final class DbConn implements AutoCloseable {
 	 * beginTransaction
 	 *
 	 * @param level level
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:33
 	 */
 	public void beginTransaction(int level) {
@@ -113,7 +111,6 @@ public final class DbConn implements AutoCloseable {
 	/**
 	 * commit
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:37
 	 */
 	public void commit() {
@@ -132,7 +129,6 @@ public final class DbConn implements AutoCloseable {
 	/**
 	 * rollback
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:39
 	 */
 	public void rollback() {
@@ -155,7 +151,6 @@ public final class DbConn implements AutoCloseable {
 	 * @param sql             sql
 	 * @param parameterValues parameterValues
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:44
 	 */
 	public int executeSql(final String sql, final Object[] parameterValues) {
@@ -176,7 +171,6 @@ public final class DbConn implements AutoCloseable {
 	 * @param sql             sql
 	 * @param parameterValues parameterValues
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:48
 	 */
 	public Object executeScalar(final String sql, final Object[] parameterValues) {
@@ -199,7 +193,6 @@ public final class DbConn implements AutoCloseable {
 	 * @param sql             sql
 	 * @param parameterValues parameterValues
 	 * @return {@link java.sql.ResultSet }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:53
 	 */
 	public ResultSet executeResultSet(final String sql, final Object[] parameterValues) {
@@ -222,7 +215,6 @@ public final class DbConn implements AutoCloseable {
 	 * @param sql             sql
 	 * @param parameterValues parameterValues
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:04:57
 	 */
 	public List<Map<String, Object>> executeList(final String sql, final Object[] parameterValues) {
@@ -248,7 +240,6 @@ public final class DbConn implements AutoCloseable {
 	 *
 	 * @param rs rs
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:05:00
 	 */
 	public List<Map<String, Object>> toMapList(ResultSet rs) {
@@ -281,7 +272,6 @@ public final class DbConn implements AutoCloseable {
 	 *
 	 * @param statement statement
 	 * @param values    values
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:05:03
 	 */
 	private void attachParameterObjects(PreparedStatement statement, Object[] values)
@@ -303,7 +293,6 @@ public final class DbConn implements AutoCloseable {
 	 *
 	 * @param tablename tablename
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:05:06
 	 */
 	public boolean tableIsExist(String tablename) {
@@ -315,7 +304,6 @@ public final class DbConn implements AutoCloseable {
 	/**
 	 * DbException
 	 *
-	 * @author shuigedeng
 	 * @version 2021.9
 	 * @since 2021-09-02 20:05:11
 	 */

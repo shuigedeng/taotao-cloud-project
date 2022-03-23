@@ -98,7 +98,7 @@ public class AlipayConfigServiceImpl extends
 	@Override
 //    @CachePut(key = "'1'")
 	@Transactional(rollbackFor = Exception.class)
-	public void update(AlipayConfig alipayConfig) {
-		this.save(alipayConfig);
+	public Boolean update(AlipayConfig alipayConfig) {
+		return this.save(alipayConfig);
 	}
 }

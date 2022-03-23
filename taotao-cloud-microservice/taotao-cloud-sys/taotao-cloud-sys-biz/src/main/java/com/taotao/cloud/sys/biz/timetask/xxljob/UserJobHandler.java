@@ -12,11 +12,11 @@ import com.xxl.job.core.handler.annotation.XxlJob;
 import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
 /**
- * <br>
+ * UserJobHandler
  *
  * @author shuigedeng
- * @version v1.0.0
- * @since 2020/6/16 14:43
+ * @version 2022.03
+ * @since 2022-03-23 08:49:13
  */
 @Component
 public class UserJobHandler {

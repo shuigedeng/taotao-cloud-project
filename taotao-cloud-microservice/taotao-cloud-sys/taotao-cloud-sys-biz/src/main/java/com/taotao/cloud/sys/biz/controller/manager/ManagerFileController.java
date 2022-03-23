@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 文件管理API
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/12 17:42
  */
 @Validated

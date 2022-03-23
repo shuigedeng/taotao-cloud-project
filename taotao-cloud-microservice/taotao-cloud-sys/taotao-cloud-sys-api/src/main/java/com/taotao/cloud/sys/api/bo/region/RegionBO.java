@@ -22,8 +22,8 @@ import java.io.Serializable;
  * 地区查询对象
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/30 08:49
+ * @version 2022.03
+ * @since 2022-03-23 08:50:04
  */
 public record RegionBO(
 	/**

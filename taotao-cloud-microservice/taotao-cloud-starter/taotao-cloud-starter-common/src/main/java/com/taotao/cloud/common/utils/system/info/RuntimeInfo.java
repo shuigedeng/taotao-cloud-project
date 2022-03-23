@@ -31,7 +31,6 @@ public class RuntimeInfo implements Serializable {
 	/**
 	 * 获得运行时对象
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:26:20
 	 */
 	public final Runtime getRuntime() {
@@ -41,7 +40,6 @@ public class RuntimeInfo implements Serializable {
 	/**
 	 * 获得JVM最大可用内存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getMaxMemory() {
@@ -51,7 +49,6 @@ public class RuntimeInfo implements Serializable {
 	/**
 	 * 获得JVM已分配内存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getTotalMemory() {
@@ -61,7 +58,6 @@ public class RuntimeInfo implements Serializable {
 	/**
 	 * 获得JVM已分配内存中的剩余空间
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getFreeMemory() {
@@ -71,7 +67,6 @@ public class RuntimeInfo implements Serializable {
 	/**
 	 * 获得JVM最大可用内存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getUsableMemory() {

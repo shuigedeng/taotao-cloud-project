@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
  * 字典查询对象
  *
  * @author shuigedeng
- * @since 2020/5/14 10:44
+ * @version 2022.03
+ * @since 2022-03-23 08:49:51
  */
 public record DictBO(
 

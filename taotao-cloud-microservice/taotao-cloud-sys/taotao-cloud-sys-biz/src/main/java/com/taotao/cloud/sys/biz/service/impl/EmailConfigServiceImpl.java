@@ -34,7 +34,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, Emai
 	@Override
 //    @CachePut(key = "'1'")
 	@Transactional(rollbackFor = Exception.class)
-	public void update(EmailConfig emailConfig, EmailConfig old) {
+	public Boolean update(EmailConfig emailConfig, EmailConfig old) {
 		//try {
 		//    if (!emailConfig.getPass().equals(old.getPass())) {
 		//        // 对称加密
@@ -44,6 +44,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, Emai
 		//    e.printStackTrace();
 		//}
 		//this.save(emailConfig);
+		return true;
 	}
 
 	@Override

@@ -111,7 +111,6 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	/**
 	 * 初始化监听器
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:52:24
 	 */
 	private void initListeners() {

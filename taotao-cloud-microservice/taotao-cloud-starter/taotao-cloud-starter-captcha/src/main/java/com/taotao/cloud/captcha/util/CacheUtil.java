@@ -48,7 +48,6 @@ public final class CacheUtil {
 	 *
 	 * @param cacheMaxNumber 缓存最大个数
 	 * @param second         定时任务 秒执行清除过期缓存
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:14
 	 */
 	public static void init(int cacheMaxNumber, long second) {
@@ -82,7 +81,6 @@ public final class CacheUtil {
 	/**
 	 * 缓存刷新,清除过期数据
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:21
 	 */
 	public static void refresh() {
@@ -98,7 +96,6 @@ public final class CacheUtil {
 	 * @param key              key
 	 * @param value            value
 	 * @param expiresInSeconds expiresInSeconds
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:24
 	 */
 	public static void set(String key, String value, long expiresInSeconds) {
@@ -118,7 +115,6 @@ public final class CacheUtil {
 	 * delete
 	 *
 	 * @param key key
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:27
 	 */
 	public static void delete(String key) {
@@ -131,7 +127,6 @@ public final class CacheUtil {
 	 *
 	 * @param key key
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:30
 	 */
 	public static boolean exists(String key) {
@@ -151,7 +146,6 @@ public final class CacheUtil {
 	 *
 	 * @param key key
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:33
 	 */
 	public static String get(String key) {
@@ -164,7 +158,6 @@ public final class CacheUtil {
 	/**
 	 * 删除所有缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:03:39
 	 */
 	public static void clear() {

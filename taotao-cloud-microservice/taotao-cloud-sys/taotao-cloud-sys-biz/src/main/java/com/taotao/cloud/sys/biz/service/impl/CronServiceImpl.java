@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * CronServiceImpl
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/03/02 15:43
  */
 @Service

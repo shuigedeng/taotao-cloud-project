@@ -37,7 +37,6 @@ public class UserInfo implements Serializable {
 	/**
 	 * 取得当前登录用户的名字
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getName() {
@@ -47,7 +46,6 @@ public class UserInfo implements Serializable {
 	/**
 	 * 取得当前登录用户的home目录
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getHomeDir() {
@@ -57,7 +55,6 @@ public class UserInfo implements Serializable {
 	/**
 	 * 取得当前目录
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getCurrentDir() {
@@ -67,7 +64,6 @@ public class UserInfo implements Serializable {
 	/**
 	 * 取得临时目录
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getTempDir() {
@@ -77,7 +73,6 @@ public class UserInfo implements Serializable {
 	/**
 	 * 取得当前登录用户的语言设置
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getLanguage() {
@@ -87,7 +82,6 @@ public class UserInfo implements Serializable {
 	/**
 	 * 取得当前登录用户的国家或区域设置
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getCountry() {

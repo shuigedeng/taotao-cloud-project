@@ -674,7 +674,6 @@ public enum ResultEnum implements BaseEnum {
 	 *
 	 * @param code code
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2021/2/25 15:48
 	 */
 	public static String getMessageByCode(int code) {

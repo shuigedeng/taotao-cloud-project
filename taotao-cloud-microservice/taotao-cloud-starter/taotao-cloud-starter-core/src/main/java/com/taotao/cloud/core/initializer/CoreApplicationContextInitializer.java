@@ -111,7 +111,6 @@ public class CoreApplicationContextInitializer implements
 	 * deduceMainApplicationClass
 	 *
 	 * @return {@link Class }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:23:23
 	 */
 	private Class<?> deduceMainApplicationClass() {
@@ -132,7 +131,6 @@ public class CoreApplicationContextInitializer implements
 	 * optimizeLog
 	 *
 	 * @param environment environment
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:23:27
 	 */
 	private void optimizeLog(ConfigurableEnvironment environment) {
@@ -168,7 +166,6 @@ public class CoreApplicationContextInitializer implements
 	 * optimize
 	 *
 	 * @param environment environment
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:23:30
 	 */
 	private void optimize(ConfigurableEnvironment environment) {
@@ -197,7 +194,6 @@ public class CoreApplicationContextInitializer implements
 	 * @param key                  key
 	 * @param defaultPropertyValue defaultPropertyValue
 	 * @param message              message
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:23:33
 	 */
 	private void setDefaultProperty(String key, String defaultPropertyValue, String message) {

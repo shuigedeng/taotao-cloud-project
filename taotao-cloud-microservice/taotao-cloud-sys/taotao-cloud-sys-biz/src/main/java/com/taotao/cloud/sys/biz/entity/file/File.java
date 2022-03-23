@@ -16,7 +16,7 @@ import lombok.Setter;
  * 文件表
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/12 15:33
  */
 @NoArgsConstructor

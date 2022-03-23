@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * SensitiveWordsTopicMessageDelegate
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/02/09 20:46
  */
 @Component

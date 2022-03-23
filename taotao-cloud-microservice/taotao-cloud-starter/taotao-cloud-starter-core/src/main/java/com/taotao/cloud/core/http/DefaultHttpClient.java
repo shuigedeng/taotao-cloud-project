@@ -96,7 +96,6 @@ public class DefaultHttpClient implements HttpClient {
 	/**
 	 * open
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:11:38
 	 */
 	@Override
@@ -181,7 +180,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * checkUri
 	 *
 	 * @param uri uri
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:11:52
 	 */
 	private void checkUri(String uri) {
@@ -194,7 +192,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * checkParmas
 	 *
 	 * @param params params
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:11:55
 	 */
 	private void checkParmas(Params params) {
@@ -210,7 +207,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param params params
 	 * @param action action
 	 * @return {@link CloseableHttpResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:11:58
 	 */
 	public CloseableHttpResponse get(String uri, Params params,
@@ -260,7 +256,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param params params
 	 * @param action action
 	 * @return {@link CloseableHttpResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:04
 	 */
 	public CloseableHttpResponse post(String uri, Params params,
@@ -300,7 +295,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param params params
 	 * @param action action
 	 * @return {@link CloseableHttpResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:10
 	 */
 	public CloseableHttpResponse patch(String uri, Params params,
@@ -337,7 +331,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param params params
 	 * @param action action
 	 * @return {@link CloseableHttpResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:16
 	 */
 	public CloseableHttpResponse put(String uri, Params params,
@@ -376,7 +369,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param params params
 	 * @param action action
 	 * @return {@link CloseableHttpResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:20
 	 */
 	public CloseableHttpResponse delete(String uri, Params params,
@@ -425,7 +417,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param uri    uri
 	 * @param params params
 	 * @return {@link HttpGet }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:25
 	 */
 	private HttpGet getGet(String uri, Params params) {
@@ -462,7 +453,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param uri    uri
 	 * @param params params
 	 * @return {@link HttpPost }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:28
 	 */
 	private HttpPost getPost(String uri, Params params) {
@@ -489,7 +479,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param uri    uri
 	 * @param params params
 	 * @return {@link HttpPut }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:32
 	 */
 	private HttpPut getPut(String uri, Params params) {
@@ -516,7 +505,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param uri    uri
 	 * @param params params
 	 * @return {@link HttpPatch }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:38
 	 */
 	private HttpPatch getPatch(String uri, Params params) {
@@ -544,7 +532,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * @param uri    uri
 	 * @param params params
 	 * @return {@link HttpDelete }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:41
 	 */
 	private HttpDelete getDelete(String uri, Params params) {
@@ -580,7 +567,6 @@ public class DefaultHttpClient implements HttpClient {
 	 *
 	 * @param response response
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:44
 	 */
 	public String toString(CloseableHttpResponse response) {
@@ -595,7 +581,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * endStream
 	 *
 	 * @param response response
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:46
 	 */
 	public void endStream(CloseableHttpResponse response) {
@@ -612,7 +597,6 @@ public class DefaultHttpClient implements HttpClient {
 	 * isClose
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:12:49
 	 */
 	public boolean isClose() {

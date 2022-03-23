@@ -31,7 +31,6 @@ public interface INode extends Serializable {
 	 * getId
 	 *
 	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:22:11
 	 */
 	Long getId();
@@ -40,7 +39,6 @@ public interface INode extends Serializable {
 	 * getParentId
 	 *
 	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:22:18
 	 */
 	Long getParentId();
@@ -49,7 +47,6 @@ public interface INode extends Serializable {
 	 * getChildren
 	 *
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:22:22
 	 */
 	List<INode> getChildren();
@@ -58,7 +55,6 @@ public interface INode extends Serializable {
 	 * getHasChildren
 	 *
 	 * @return {@link java.lang.Boolean }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:22:30
 	 */
 	default Boolean getHasChildren() {

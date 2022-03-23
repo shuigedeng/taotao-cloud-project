@@ -7,7 +7,6 @@ package com.taotao.cloud.core.cron.pojo;
  *   cron       0      15     10   ?     *   MON-FRI  (2018)
  *   cron域   SECOND、MINUTE、HOUR、DAY、MONTH、WEEK     (、YEAR)
  * }
- * @author xiongshiyan at 2018/11/17 , contact me with email yanshixiong@126.com or phone 15208384257
  */
 public enum  CronPosition {
     SECOND(0 , 59) ,

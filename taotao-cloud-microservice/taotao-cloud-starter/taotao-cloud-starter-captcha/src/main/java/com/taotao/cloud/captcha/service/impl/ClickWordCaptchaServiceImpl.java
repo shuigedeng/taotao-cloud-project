@@ -241,7 +241,6 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	 *
 	 * @param backgroundImage backgroundImage
 	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:01:27
 	 */
 	private Captcha getImageData(BufferedImage backgroundImage) {
@@ -324,7 +323,6 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	 *
 	 * @param wordCount wordCount
 	 * @return {@link java.util.Set }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:01:47
 	 */
 	private Set<String> getRandomWords(int wordCount) {
@@ -345,7 +343,6 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param wordSortIndex 字体循环排序下标(i)
 	 * @param wordCount     字数量
 	 * @return {@link com.taotao.cloud.captcha.model.Point }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:01:42
 	 */
 	private static Point randomWordPoint(int imageWidth, int imageHeight, int wordSortIndex,

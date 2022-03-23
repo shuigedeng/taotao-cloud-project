@@ -63,7 +63,6 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 	 *
 	 * @param captchaType captchaType 
 	 * @return {@link com.taotao.cloud.captcha.service.CaptchaService }
-	 * @author shuigedeng
 	 * @since 2021-09-04 07:43:59
 	 */
 	private CaptchaService getService(String captchaType) {

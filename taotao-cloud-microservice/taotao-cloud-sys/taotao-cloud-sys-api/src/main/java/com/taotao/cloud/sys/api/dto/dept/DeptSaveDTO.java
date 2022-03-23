@@ -7,7 +7,8 @@ import java.io.Serializable;
  * 部门添加对象
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2022.03
+ * @since 2022-03-23 08:50:16
  */
 @Schema( description = "部门添加对象")
 public record DeptSaveDTO(

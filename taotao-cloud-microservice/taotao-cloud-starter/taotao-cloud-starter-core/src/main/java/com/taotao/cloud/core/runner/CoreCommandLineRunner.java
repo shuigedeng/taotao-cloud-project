@@ -87,7 +87,6 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 	/**
 	 * refreshContext
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:23:39
 	 */
 	private void refreshContext() {

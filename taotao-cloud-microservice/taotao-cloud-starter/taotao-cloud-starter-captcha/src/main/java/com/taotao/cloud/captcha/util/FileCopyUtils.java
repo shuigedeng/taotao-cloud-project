@@ -46,7 +46,6 @@ public class FileCopyUtils {
 	 * @param in  in
 	 * @param out out
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:45
 	 */
 	public static int copy(File in, File out) throws IOException {
@@ -58,7 +57,6 @@ public class FileCopyUtils {
 	 *
 	 * @param in  in
 	 * @param out out
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:39
 	 */
 	public static void copy(byte[] in, File out) throws IOException {
@@ -71,7 +69,6 @@ public class FileCopyUtils {
 	 *
 	 * @param in in
 	 * @return byte[]
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:35
 	 */
 	public static byte[] copyToByteArray(File in) throws IOException {
@@ -84,7 +81,6 @@ public class FileCopyUtils {
 	 * @param in  in
 	 * @param out out
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:27
 	 */
 	public static int copy(InputStream in, OutputStream out) throws IOException {
@@ -101,7 +97,6 @@ public class FileCopyUtils {
 	 *
 	 * @param in  in
 	 * @param out out
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:16
 	 */
 	public static void copy(byte[] in, OutputStream out) throws IOException {
@@ -115,7 +110,6 @@ public class FileCopyUtils {
 	 *
 	 * @param in in
 	 * @return byte[]
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:12
 	 */
 	public static byte[] copyToByteArray(InputStream in) throws IOException {
@@ -134,7 +128,6 @@ public class FileCopyUtils {
 	 * @param in  in
 	 * @param out out
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:08
 	 */
 	public static int copy(Reader in, Writer out) throws IOException {
@@ -157,7 +150,6 @@ public class FileCopyUtils {
 	 *
 	 * @param in  in
 	 * @param out out
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:02
 	 */
 	public static void copy(String in, Writer out) throws IOException {
@@ -171,7 +163,6 @@ public class FileCopyUtils {
 	 *
 	 * @param in in
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:04:00
 	 */
 	public static String copyToString(Reader in) throws IOException {

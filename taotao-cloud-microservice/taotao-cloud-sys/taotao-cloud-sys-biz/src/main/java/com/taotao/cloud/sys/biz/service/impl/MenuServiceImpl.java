@@ -132,7 +132,6 @@ public class MenuServiceImpl extends
 	 * @param pidList 初始化的父级ID
 	 * @param sumList 保存的全部ID
 	 * @return {@link List&lt;java.lang.Long&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:41:41
 	 */
 	public List<Long> recursion(List<Long> pidList, List<Long> sumList) {

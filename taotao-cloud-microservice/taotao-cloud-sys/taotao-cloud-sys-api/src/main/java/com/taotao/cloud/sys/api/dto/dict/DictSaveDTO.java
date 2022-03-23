@@ -24,8 +24,8 @@ import javax.validation.constraints.Size;
  * 字典添加对象
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/30 08:49
+ * @version 2022.03
+ * @since 2022-03-23 08:50:33
  */
 @Schema(description = "字典添加对象")
 public record DictSaveDTO(

@@ -36,7 +36,6 @@ public class ThreadUtil {
 	 * @param parallelCount 并行数量
 	 * @param taskList      任务列表
 	 * @param action        action
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:57:35
 	 */
 	public static <T> void parallelFor(String taskName, int parallelCount, Collection<T> taskList,

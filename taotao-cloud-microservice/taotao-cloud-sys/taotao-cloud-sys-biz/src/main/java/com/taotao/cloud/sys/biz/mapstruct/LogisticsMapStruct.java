@@ -25,7 +25,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * @author shuigedeng
  * @since 2020/11/11 14:42
- * @version 1.0.0
+ * @version 2022.03
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -41,7 +41,7 @@ public interface LogisticsMapStruct {
 	 * @return com.taotao.cloud.sys.api.vo.user.UserVO
 	 * @author shuigedeng
 	 * @since 2020/11/11 14:47
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	LogisticsVO logisticsToFileVO(LogisticsConfig logisticsConfig);
 
@@ -52,7 +52,7 @@ public interface LogisticsMapStruct {
 	//  * @return com.taotao.cloud.sys.api.vo.user.AddUserVO
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
 	//
@@ -63,7 +63,7 @@ public interface LogisticsMapStruct {
 	//  * @return java.util.List<com.taotao.cloud.sys.api.vo.user.UserVO>
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 15:00
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
 	//
@@ -74,7 +74,7 @@ public interface LogisticsMapStruct {
 	//  * @return com.taotao.cloud.sys.biz.entity.SysUser
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 14:52
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// SysUser userDtoToSysUser(UserDTO userDTO);
 	//
@@ -86,7 +86,7 @@ public interface LogisticsMapStruct {
 	//  * @return void
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

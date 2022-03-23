@@ -137,7 +137,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 *
 	 * @param cacheType cacheType
 	 * @return {@link com.taotao.cloud.captcha.service.CaptchaCacheService }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:41
 	 */
 	protected CaptchaCacheService getCacheService(String cacheType) {
@@ -195,7 +194,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 *
 	 * @param req req
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:47
 	 */
 	protected String getValidateClientId(Captcha req) {
@@ -214,7 +212,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 * afterValidateFail
 	 *
 	 * @param data data
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:52
 	 */
 	protected void afterValidateFail(Captcha data) {
@@ -233,7 +230,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	/**
 	 * 加载resources下的font字体 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示， 通过加载resources下的font字体解决，无需在linux中安装字体
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:56
 	 */
 	private void loadWaterMarkFont() {
@@ -259,7 +255,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 * @param imgStr imgStr
 	 * @param path   path
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:58:07
 	 */
 	public static boolean base64StrToImage(String imgStr, String path) {
@@ -298,7 +293,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 * @param point point
 	 * @param key   key
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:58:11
 	 */
 	public static String decrypt(String point, String key) throws Exception {
@@ -310,7 +304,6 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 *
 	 * @param s s
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:58:16
 	 */
 	protected static int getEnOrChLength(String s) {

@@ -92,7 +92,6 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param schemaName  实例名称
 	 * @param tableName   表名称
 	 * @param rowChange   数据
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:43:30
 	 */
 	protected void distributeByAnnotation(String destination,
@@ -136,8 +135,7 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param destination 指令
 	 * @param schemaName  库实例
 	 * @param tableName   表名
-	 * @param rowChange   參數
-	 * @author shuigedeng
+	 * @param rowChange   参数
 	 * @since 2021-09-03 20:43:40
 	 */
 	protected void distributeByImpl(String destination,
@@ -159,7 +157,6 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param tableName   表名称
 	 * @param eventType   事件类型
 	 * @return {@link java.util.function.Predicate }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:43:50
 	 */
 	protected abstract Predicate<Map.Entry<Method, ListenPoint>> getAnnotationFilter(
@@ -173,7 +170,6 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param canalMsg  其他信息
 	 * @param rowChange 处理的数据
 	 * @return java.lang.Object[]
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:43:59
 	 */
 	protected abstract Object[] getInvokeArgs(Method method, CanalMsg canalMsg,
@@ -184,7 +180,6 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * 忽略实体类的类型
 	 *
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:44:08
 	 */
 	protected List<CanalEntry.EntryType> getIgnoreEntryTypes() {

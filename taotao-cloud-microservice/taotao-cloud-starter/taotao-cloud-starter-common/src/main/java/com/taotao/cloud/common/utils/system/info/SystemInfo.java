@@ -39,7 +39,6 @@ public class SystemInfo implements Serializable {
 	 * info
 	 *
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:26:58
 	 */
 	public static String info() {

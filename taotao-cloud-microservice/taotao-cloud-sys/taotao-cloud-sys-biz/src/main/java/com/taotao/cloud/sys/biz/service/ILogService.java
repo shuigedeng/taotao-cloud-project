@@ -23,45 +23,57 @@ import org.springframework.scheduling.annotation.Async;
  */
 public interface ILogService extends IService<Log> {
 
-
+	/**
+	 * 分页获取日志数据
+	 *
+	 * @param nickname 昵称
+	 * @param pageable 分页参数
+	 * @return 日志数据
+	 * @since 2022-03-23 08:54:49
+	 */
 	Object findAllByPageable(String nickname, Pageable pageable);
 
 	/**
 	 * 分页查询
+	 *
 	 * @param criteria 查询条件
 	 * @param pageable 分页参数
-	 * @return /
+	 * @return 日志数据
 	 */
 	Object queryAll(LogQueryCriteria criteria, Pageable pageable);
 
 	/**
 	 * 查询全部数据
+	 *
 	 * @param criteria 查询条件
-	 * @return /
+	 * @return 日志数据列表
 	 */
 	List<Log> queryAll(LogQueryCriteria criteria);
 
 	/**
 	 * 查询用户日志
+	 *
 	 * @param criteria 查询条件
 	 * @param pageable 分页参数
-	 * @return -
+	 * @return 日志数据
 	 */
 	Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable);
 
 	/**
 	 * 保存日志数据
-	 * @param username 用户
-	 * @param browser 浏览器
-	 * @param ip 请求IP
+	 *
+	 * @param username  用户
+	 * @param browser   浏览器
+	 * @param ip        请求IP
 	 * @param joinPoint /
-	 * @param log 日志实体
+	 * @param log       日志实体
 	 */
 	@Async
 	void save(String username, String ip, ProceedingJoinPoint joinPoint, Log log, Long uid);
 
 	/**
 	 * 查询异常详情
+	 *
 	 * @param id 日志ID
 	 * @return Object
 	 */
@@ -69,7 +81,8 @@ public interface ILogService extends IService<Log> {
 
 	/**
 	 * 导出日志
-	 * @param logs 待导出的数据
+	 *
+	 * @param logs     待导出的数据
 	 * @param response /
 	 * @throws IOException /
 	 */

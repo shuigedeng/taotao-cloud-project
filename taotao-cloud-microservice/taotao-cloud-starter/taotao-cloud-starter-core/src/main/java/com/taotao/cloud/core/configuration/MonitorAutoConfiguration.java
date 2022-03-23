@@ -165,7 +165,6 @@ public class MonitorAutoConfiguration implements InitializingBean {
 		 * 每次执行任务时输出当前线程池状态
 		 *
 		 * @param method method
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:03:15
 		 */
 		private void showThreadPoolInfo(String method) {

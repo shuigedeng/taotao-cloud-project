@@ -20,7 +20,7 @@ import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 /**
  * @author shuigedeng
  * @since 2020/11/13 09:59
- * @version 1.0.0
+ * @version 2022.03
  */
 public interface ILogisticsService {
 
@@ -28,10 +28,8 @@ public interface ILogisticsService {
 	 * 根据id查询物流公司信息
 	 *
 	 * @param id id
-	 * @return com.taotao.cloud.log.biz.entity.MemberLogin
-	 * @author shuigedeng
+	 * @return 物流公司信息
 	 * @since 2020/11/20 下午1:08
-	 * @version 1.0.0
 	 */
 	LogisticsConfig findLogisticsById(Long id);
 }

@@ -34,7 +34,6 @@ public interface CanalEventListener {
 	 * @param schemaName  库实例
 	 * @param tableName   表名
 	 * @param rowChange   数据
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:50:20
 	 */
 	void onEvent(String destination, String schemaName, String tableName,

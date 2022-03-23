@@ -37,7 +37,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * --add-opens java.desktop/sun.font=ALL-UNNAMED
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
 @ForestScan(basePackages = "com.taotao.cloud.sys.biz.forest")

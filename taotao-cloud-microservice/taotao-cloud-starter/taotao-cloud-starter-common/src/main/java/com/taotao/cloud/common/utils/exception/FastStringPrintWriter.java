@@ -27,7 +27,7 @@ import java.io.PrintWriter;
  * 1. 默认容量为 256
  * </p>
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */

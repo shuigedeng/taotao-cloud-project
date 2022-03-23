@@ -34,7 +34,6 @@ public interface IDBOption {
 	 * @param schemaName  实例名称
 	 * @param tableName   表名称
 	 * @param rowChange   数据
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:50:48
 	 */
 	void doOption(String destination, String schemaName, String tableName,

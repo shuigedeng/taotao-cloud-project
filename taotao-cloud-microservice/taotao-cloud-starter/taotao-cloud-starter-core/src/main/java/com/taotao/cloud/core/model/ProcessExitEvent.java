@@ -48,7 +48,6 @@ public class ProcessExitEvent {
 	 * @param action0 action0
 	 * @param order   order
 	 * @param async  async
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:37:02
 	 */
 	public static void register(Callable.Action0 action0, int order, Boolean async) {

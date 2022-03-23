@@ -59,7 +59,6 @@ public class CaptchaServiceFactory {
 	 *
 	 * @param config config
 	 * @return {@link com.taotao.cloud.captcha.service.CaptchaService }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:00:32
 	 */
 	public static CaptchaService getInstance(Properties config) {
