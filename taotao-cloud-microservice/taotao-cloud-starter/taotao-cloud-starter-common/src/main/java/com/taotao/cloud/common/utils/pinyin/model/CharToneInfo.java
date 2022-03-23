@@ -4,13 +4,11 @@ public class CharToneInfo {
 
     /**
      * 音调所在位置下表
-     * @since 0.0.3
      */
     private int index;
 
     /**
      * 音调元素
-     * @since 0.0.3
      */
     private ToneItem toneItem;
 
@@ -19,7 +17,6 @@ public class CharToneInfo {
      * @param toneItem 音调信息
      * @param index 下标志
      * @return 结果
-     * @since 0.0.3
      */
     public static CharToneInfo of(final ToneItem toneItem,
                                   final int index) {

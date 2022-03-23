@@ -22,8 +22,6 @@ package com.taotao.cloud.common.utils.codec;
  * Codec 异常
  *
  * Root exception related to issues during encoding or decoding.
- *
- * @since 0.1.120
  */
 public class CodecException extends RuntimeException {
 

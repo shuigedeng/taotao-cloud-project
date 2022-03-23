@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.file.FileVO;
 import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.entity.file.File;
-import com.taotao.cloud.sys.biz.mapstruct.IFileMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.FileMapStruct;
 import com.taotao.cloud.sys.biz.service.IFileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -87,7 +87,7 @@ public class ManagerFileController {
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
 		File file = fileService.findFileById(id);
-		FileVO vo = IFileMapStruct.INSTANCE.fileToFileVO(file);
+		FileVO vo = FileMapStruct.INSTANCE.fileToFileVO(file);
 		return Result.success(vo);
 	}
 

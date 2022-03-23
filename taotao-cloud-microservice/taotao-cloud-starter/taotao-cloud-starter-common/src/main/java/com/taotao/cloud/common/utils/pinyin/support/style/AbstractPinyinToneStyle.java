@@ -14,7 +14,6 @@ public abstract class AbstractPinyinToneStyle implements IPinyinToneStyle {
      * @param tone 分段后的拼音
      * @param toneInfo 字符的声调信息
      * @return 格式化结果
-     * @since 0.0.3
      */
     protected abstract String getCharFormat(final String tone, final CharToneInfo toneInfo);
 
@@ -37,7 +36,6 @@ public abstract class AbstractPinyinToneStyle implements IPinyinToneStyle {
      * @param index 标注的下表
      * @param letter 需要额外添加的信息
      * @return 结果
-     * @since 0.0.3
      */
     String connector(final String tone,
                                final int index,

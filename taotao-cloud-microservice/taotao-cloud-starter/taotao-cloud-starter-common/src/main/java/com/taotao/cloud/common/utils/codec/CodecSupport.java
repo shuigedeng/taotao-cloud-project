@@ -24,8 +24,6 @@ import java.io.*;
  * Codec 支持类
  *
  * Base abstract class that provides useful encoding and decoding operations, especially for character data.
- *
- * @since 0.1.120
  */
 public abstract class CodecSupport {
 
@@ -170,7 +168,6 @@ public abstract class CodecSupport {
      * @param o the object to test to see if it can be easily converted to a byte array
      * @return {@code true} if the specified object can be easily converted to bytes by instances of this class,
      *         {@code false} otherwise.
-     * @since 1.0
      */
     protected boolean isByteSource(Object o) {
         return o instanceof byte[] || o instanceof char[] || o instanceof String ||
@@ -252,7 +249,6 @@ public abstract class CodecSupport {
      * @return the bytes of the input stream
      * @throws IllegalArgumentException if the {@code InputStream} argument is {@code null}.
      * @throws CodecException           if there is any problem reading from the {@link InputStream}.
-     * @since 1.0
      */
     protected byte[] toBytes(InputStream in) {
         if (in == null) {
@@ -315,7 +311,6 @@ public abstract class CodecSupport {
      * 转为字符串
      * @param text 文本
      * @return char 数组
-     * @since 0.1.120
      */
     public static char[] toChars(final String text) {
         if(null == text) {
@@ -329,7 +324,6 @@ public abstract class CodecSupport {
      * 转化为字符串
      * @param chars 字符数组
      * @return 字符串
-     * @since 0.1.120
      */
     public static String toString(final char[] chars) {
         if(null == chars) {

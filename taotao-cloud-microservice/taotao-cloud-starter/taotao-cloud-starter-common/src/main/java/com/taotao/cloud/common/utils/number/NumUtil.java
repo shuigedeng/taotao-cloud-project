@@ -28,8 +28,6 @@ public final class NumUtil {
 
     /**
      * 16 进制数组
-     *
-     * @since 0.1.26
      */
     public static final char[] HEX_CHARS = "1234567890abcdefABCDEF".toCharArray();
 
@@ -60,7 +58,6 @@ public final class NumUtil {
      *
      * @param string 原始字符串
      * @return 结果
-     * @since 0.1.26
      */
     public static Optional<Integer> toInteger(final String string) {
         if (StringUtil.isEmpty(string)) {
@@ -80,7 +77,6 @@ public final class NumUtil {
      * （1）如果参数不合法，直接抛出异常
      * @param string 字符串
      * @return 结果
-     * @since 0.1.36
      */
     public static Integer toIntegerThrows(final String string) {
         ArgUtil.notEmpty(string, "string");
@@ -98,7 +94,6 @@ public final class NumUtil {
      * @param string 字符串
      * @param defaultValue 默认值
      * @return 结果
-     * @since 0.1.36
      */
     public static int toInteger(final String string, final int defaultValue) {
         try {
@@ -113,7 +108,6 @@ public final class NumUtil {
      *
      * @param string 原始字符串
      * @return 结果
-     * @since 0.1.26
      */
     public static Optional<Long> toLong(final String string) {
         if (StringUtil.isEmpty(string)) {
@@ -133,7 +127,6 @@ public final class NumUtil {
      *
      * @param string 原始字符串
      * @return 结果
-     * @since 0.1.26
      */
     public static Optional<Double> toDouble(final String string) {
         if (StringUtil.isEmpty(string)) {
@@ -181,7 +174,6 @@ public final class NumUtil {
      * @see Short
      * @see Byte
      * @see Long
-     * @since 0.1.30
      */
     public static Long parseLong(final Object object) {
         if (ObjectUtil.isNull(object)) {
@@ -228,7 +220,6 @@ public final class NumUtil {
      * @param number 数字
      * @param format 格式化
      * @return 结果
-     * @since 0.1.48
      */
     public static String getNumFormat(final Number number, final String format) {
         ArgUtil.notNull(number, "number");
@@ -245,7 +236,6 @@ public final class NumUtil {
      * @param numberClazz 数字类型
      * @param <T> 泛型
      * @return 结果
-     * @since 0.1.48
      */
     @SuppressWarnings("unchecked")
     public static <T> T getFormatNum(final String number, final String format,
@@ -280,7 +270,6 @@ public final class NumUtil {
      * @param number 数字
      * @param format 格式化
      * @return 结果
-     * @since 0.1.48
      */
     public static Number getFormatNum(final String number, final String format) {
         return getFormatNum(number, format, Number.class);
@@ -292,7 +281,6 @@ public final class NumUtil {
      * @param format 格式化
      * @param numberClazz 数字类型
      * @return 转换后的类型
-     * @since 0.1.58
      */
     public static Object getFormatNumCast(final String numberStr,
                                           final String format,
@@ -345,7 +333,6 @@ public final class NumUtil {
      * 转换为 bigInteger
      * @param bigDecimal 数字
      * @return 结果
-     * @since 0.1.122
      */
     public static BigInteger toBigInteger(final BigDecimal bigDecimal) {
         if(null == bigDecimal) {
@@ -359,7 +346,6 @@ public final class NumUtil {
      * 转换为浮点型
      * @param bigInteger 整数
      * @return 浮点金额
-     * @since 0.1.122
      */
     public static BigDecimal parseBigDecimal(final BigInteger bigInteger) {
         if(null == bigInteger) {

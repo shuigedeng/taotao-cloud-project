@@ -9,7 +9,6 @@ public final class FieldConst {
 
     /**
      * 序列化唯一标识
-     * @since 0.1.77
      */
     public static final String SERIAL_VERSION_UID = "serialVersionUID";
 

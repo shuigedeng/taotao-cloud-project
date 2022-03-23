@@ -12,15 +12,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class VisitsInit implements ApplicationRunner {
-
-	private final IVisitsService IVisitsService;
-
+	@Autowired
+	private IVisitsService visitsService;
 	@Autowired
 	private IRegionService regionService;
-
-	public VisitsInit(IVisitsService IVisitsService) {
-		this.IVisitsService = IVisitsService;
-	}
 
 	@Override
 	public void run(ApplicationArguments args) {

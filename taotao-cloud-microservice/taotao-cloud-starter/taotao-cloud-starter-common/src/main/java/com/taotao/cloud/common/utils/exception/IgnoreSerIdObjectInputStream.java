@@ -31,7 +31,7 @@ import java.io.ObjectStreamClass;
  * 参考：https://stackoverflow.com/questions/1816559/make-java-runtime-ignore-serialversionuids
  * </p>
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */

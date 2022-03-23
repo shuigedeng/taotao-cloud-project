@@ -25,7 +25,6 @@ public final class ReflectConstructorUtil {
      * @param args 参数
      * @param <T> 泛型
      * @return 结果
-     * @since 0.1.39
      */
     public static <T> T newInstance(final Constructor<T> constructor,
                              final Object... args) {

@@ -9,6 +9,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Quartz日志表
@@ -17,6 +22,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = QuartzLog.TABLE_NAME)
 @TableName(QuartzLog.TABLE_NAME)
@@ -75,67 +85,4 @@ public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> {
 	@Column(name = "time", nullable = false, columnDefinition = "bigint not null default 1 comment '耗时（毫秒）'")
 	private Long time;
 
-	public String getBeanName() {
-		return beanName;
-	}
-
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
-	}
-
-	public String getCronExpression() {
-		return cronExpression;
-	}
-
-	public void setCronExpression(String cronExpression) {
-		this.cronExpression = cronExpression;
-	}
-
-	public String getExceptionDetail() {
-		return exceptionDetail;
-	}
-
-	public void setExceptionDetail(String exceptionDetail) {
-		this.exceptionDetail = exceptionDetail;
-	}
-
-	public Boolean getSuccess() {
-		return isSuccess;
-	}
-
-	public void setSuccess(Boolean success) {
-		isSuccess = success;
-	}
-
-	public String getJobName() {
-		return jobName;
-	}
-
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-
-	public String getParams() {
-		return params;
-	}
-
-	public void setParams(String params) {
-		this.params = params;
-	}
-
-	public Long getTime() {
-		return time;
-	}
-
-	public void setTime(Long time) {
-		this.time = time;
-	}
 }

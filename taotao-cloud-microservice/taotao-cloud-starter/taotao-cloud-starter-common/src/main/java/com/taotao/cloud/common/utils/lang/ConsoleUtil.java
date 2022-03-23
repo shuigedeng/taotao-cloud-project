@@ -18,8 +18,6 @@ public final class ConsoleUtil {
 
 	/**
 	 * 单行日志信息
-	 *
-	 * @since 0.1.106
 	 */
 	public static final String LINE = "--------------------------------------------------------";
 
@@ -30,7 +28,6 @@ public final class ConsoleUtil {
 	 * @param methodName 方法名
 	 * @param format     文本格式化
 	 * @param args       参数
-	 * @since 2.0.4
 	 */
 	public static void info(final String className,
 		final String methodName,
@@ -45,7 +42,6 @@ public final class ConsoleUtil {
 	 *
 	 * @param format 文本格式化
 	 * @param args   参数
-	 * @since 0.1.106
 	 */
 	public static void info(final String format,
 		final Object... args) {
@@ -62,7 +58,6 @@ public final class ConsoleUtil {
 	 * @param format 格式化
 	 * @param params 参数
 	 * @return 结果
-	 * @since 2.0.4
 	 */
 	private static String buildString(String format, Object[] params) {
 		String stringFormat = format;
@@ -82,7 +77,6 @@ public final class ConsoleUtil {
 	 * @param level     消息等级
 	 * @param content   内容
 	 * @param throwable 异常
-	 * @since 0.1.106
 	 */
 	private static void log(final String level,
 		final String className,
@@ -110,7 +104,6 @@ public final class ConsoleUtil {
 	 * @param className  类名
 	 * @param methodName 方法名称
 	 * @return 结果
-	 * @since 0.1.106
 	 */
 	private static String buildPrettyMethodName(final String className, final String methodName) {
 		String[] classNames = className.split("\\.");

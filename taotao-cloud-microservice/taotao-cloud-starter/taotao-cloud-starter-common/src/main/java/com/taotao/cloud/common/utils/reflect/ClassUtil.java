@@ -39,8 +39,6 @@ public final class ClassUtil {
 
 	/**
 	 * 序列版本编号常量
-	 *
-	 * @since 0.1.35
 	 */
 	public static final String SERIAL_VERSION_UID = "serialVersionUID";
 
@@ -59,7 +57,6 @@ public final class ClassUtil {
 	 *
 	 * @param clazz 类
 	 * @return 字段列表
-	 * @since 0.1.77
 	 */
 	public static List<Field> getAllFieldList(final Class clazz) {
 		List<Field> allFieldList = new ArrayList<>();
@@ -110,7 +107,6 @@ public final class ClassUtil {
 	 *
 	 * @param clazz 类
 	 * @return 字段列表 map
-	 * @since 0.1.45 修复名称
 	 */
 	public static Map<String, Field> getAllFieldMap(final Class clazz) {
 		List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
@@ -169,7 +165,6 @@ public final class ClassUtil {
 	 * @param clazz 类信息
 	 * @return 方法列表
 	 * @throws IntrospectionException if any
-	 * @since 0.0.7
 	 */
 	public static List<Method> getAllFieldsReadMethods(final Class clazz)
 		throws IntrospectionException {
@@ -192,7 +187,6 @@ public final class ClassUtil {
 	 * 获取当前的 class loader
 	 *
 	 * @return 当前的 class loader
-	 * @since 0.1.38
 	 */
 	public static ClassLoader currentClassLoader() {
 		return Thread.currentThread().getContextClassLoader();
@@ -203,7 +197,6 @@ public final class ClassUtil {
 	 *
 	 * @param className 类名称信息
 	 * @return 构建后的类信息
-	 * @since 0.1.38
 	 */
 	public static Class getClass(final String className) {
 		ArgUtil.notEmpty(className, "className");
@@ -222,7 +215,6 @@ public final class ClassUtil {
 	 * @param methodName 方法名称
 	 * @param paramTypes 参数类型
 	 * @return 方法信息
-	 * @since 0.1.39
 	 */
 	@SuppressWarnings("unchecked")
 	public static Method getMethod(final Class clazz,
@@ -244,7 +236,6 @@ public final class ClassUtil {
 	 * @param clazz      类信息
 	 * @param methodName 方法名称
 	 * @return 方法信息
-	 * @since 0.1.118
 	 */
 	@SuppressWarnings("unchecked")
 	public static Method getMethod(final Class<?> clazz,
@@ -268,7 +259,6 @@ public final class ClassUtil {
 	 * @param clazz      类
 	 * @param paramTypes 参数类型数组
 	 * @return 构造器
-	 * @since 0.1.39
 	 */
 	@SuppressWarnings("unchecked")
 	public static Constructor getConstructor(final Class clazz,
@@ -287,7 +277,6 @@ public final class ClassUtil {
 	 *
 	 * @param tClass 类型
 	 * @return 结果列表
-	 * @since 0.1.41
 	 */
 	public static List<Method> getMethodList(final Class tClass) {
 		ArgUtil.notNull(tClass, "tClass");
@@ -301,7 +290,6 @@ public final class ClassUtil {
 	 *
 	 * @param tClass 类型
 	 * @return 结果列表
-	 * @since 0.1.41
 	 */
 	public static List<Method> getDeclaredMethodList(final Class tClass) {
 		ArgUtil.notNull(tClass, "tClass");
@@ -315,7 +303,6 @@ public final class ClassUtil {
 	 *
 	 * @param clazz 类型
 	 * @return 所有父类信息
-	 * @since 0.1.53
 	 */
 	public static List<Class> getAllSuperClass(final Class clazz) {
 		ArgUtil.notNull(clazz, "clazz");
@@ -337,7 +324,6 @@ public final class ClassUtil {
 	 *
 	 * @param clazz 类型
 	 * @return 所有父类信息
-	 * @since 0.1.53
 	 */
 	public static List<Class> getAllInterfaces(final Class clazz) {
 		ArgUtil.notNull(clazz, "clazz");
@@ -365,7 +351,6 @@ public final class ClassUtil {
 	 *
 	 * @param clazz 类型
 	 * @return 接口信息和父类信息
-	 * @since 0.1.53
 	 */
 	public static List<Class> getAllInterfacesAndSuperClass(final Class clazz) {
 		ArgUtil.notNull(clazz, "clazz");
@@ -383,7 +368,6 @@ public final class ClassUtil {
 	 * @param sourceType 原始类型
 	 * @param targetType 目标类型
 	 * @return 结果
-	 * @since 0.1.101
 	 */
 	public static boolean isAssignable(final Class<?> sourceType, final Class<?> targetType) {
 		// 如果有任何一个字段为空，直接返回

@@ -7,20 +7,19 @@ services:
     ports:
       - 11111:11111
     environment:
-      - canal.instance.mysql.slaveId=1234
+      - canal.instance.mysql.slaveId=8
       - canal.auto.scan=false
       - canal.destinations=test
       - canal.instance.master.address=172.16.xx:3306
-      # mysql 复制账号
       - canal.instance.dbUsername=canal
       - canal.instance.dbPassword=canal
       - canal.mq.topic=test
       - canal.instance.filter.regex=esen_approval.apt_approval
     volumes:
-      - $PWD/conf/:/admin/canal-server/conf/
-      - $PWD/logs/:/admin/canal-server/logs/
-canal-admin:
-    image: canal/canal-admin:v1.1.4
+      - /root/canal/conf/:/admin/canal-server/conf/
+      - /root/canal/logs/:/admin/canal-server/logs/
+  canal-admin:
+    image: canal/canal-admin:v1.1.5
     container_name: canal-admin
     ports:
       - 8089:8089
@@ -29,4 +28,4 @@ canal-admin:
       - canal.adminUser=admin
       - canal.adminPasswd=admin
     volumes:
-      - ./canal-admin/logs/:/home/admin/canal-admin/logs
+      - /root/canal/canal-admin/logs/:/home/admin/canal-admin/logs

@@ -7,11 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 配置表
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-21 21:54:40
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Setting.TABLE_NAME)
 @TableName(Setting.TABLE_NAME)
@@ -27,13 +41,5 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public void setId(Long id) {
 		super.setId(id);
-	}
-
-	public String getSettingValue() {
-		return settingValue;
-	}
-
-	public void setSettingValue(String settingValue) {
-		this.settingValue = settingValue;
 	}
 }

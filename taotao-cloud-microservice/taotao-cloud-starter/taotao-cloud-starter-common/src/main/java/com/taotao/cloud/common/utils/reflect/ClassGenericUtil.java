@@ -73,7 +73,6 @@ public final class ClassGenericUtil {
      * 获取元素的泛型
      * @param list 列表
      * @return 泛型
-     * @since 0.1.26
      */
     public static Class getGenericClass(final Collection<?> list){
         if(CollectionUtil.isEmpty(list)) {
@@ -93,7 +92,6 @@ public final class ClassGenericUtil {
      * @param clazz 指定类
      * @param index 索引
      * @return 默认返回 {@link Object#getClass()}
-     * @since 0.1.102
      */
     public static Class getGenericSupperClass(final Class clazz,
                                               final int index) {
@@ -112,7 +110,6 @@ public final class ClassGenericUtil {
      * 获取当前类对应的泛型
      * @param clazz 指定类
      * @return 默认返回 {@link Object#getClass()}
-     * @since 0.1.102
      */
     public static Class getGenericSupperClass(final Class clazz) {
         return getGenericSupperClass(clazz, 0);

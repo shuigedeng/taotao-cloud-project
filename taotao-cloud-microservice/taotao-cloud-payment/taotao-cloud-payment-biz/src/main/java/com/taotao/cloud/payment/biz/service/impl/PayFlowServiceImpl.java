@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.biz.service.impl;
+package com.taotao.cloud.payment.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.dubbo.biz.repository.PayFlowSuperRepository;
-import com.taotao.cloud.dubbo.biz.service.IPayFlowService;
+import com.taotao.cloud.payment.biz.service.IPayFlowService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

@@ -20,6 +20,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 部门表
@@ -28,11 +33,16 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Dept.TABLE_NAME)
 @TableName(Dept.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Dept.TABLE_NAME, comment = "后台部门表")
-public class Dept extends BaseSuperEntity<Dept,Long> {
+public class Dept extends BaseSuperEntity<Dept, Long> {
 
 	public static final String TABLE_NAME = "tt_dept";
 
@@ -46,7 +56,7 @@ public class Dept extends BaseSuperEntity<Dept,Long> {
 	 * 上级部门id
 	 */
 	@Column(name = "parent_id", columnDefinition = "int not null default 0 comment '上级部门id'")
-	private Long parentId = 0L;
+	private Long parentId;
 
 	/**
 	 * 备注
@@ -58,63 +68,11 @@ public class Dept extends BaseSuperEntity<Dept,Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int not null default 0 comment '排序值'")
-	private Integer sortNum = 0;
+	private Integer sortNum;
 
 	/**
 	 * 租户id
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public Integer getSortNum() {
-		return sortNum;
-	}
-
-	public void setSortNum(Integer sortNum) {
-		this.sortNum = sortNum;
-	}
-
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public Dept() {
-	}
-
-	public Dept(String name, Long parentId, String remark, Integer sortNum,
-		String tenantId) {
-		this.name = name;
-		this.parentId = parentId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
 }

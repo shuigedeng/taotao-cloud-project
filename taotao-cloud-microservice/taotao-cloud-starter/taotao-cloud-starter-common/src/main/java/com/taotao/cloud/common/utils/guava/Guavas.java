@@ -66,7 +66,6 @@ public final class Guavas {
 	 * @param <E>        元素
 	 * @param collection 集合元素
 	 * @return 链表
-	 * @since 0.1.32
 	 */
 	public static <E> List<E> newArrayList(Collection<E> collection) {
 		if (CollectionUtil.isEmpty(collection)) {
@@ -106,7 +105,6 @@ public final class Guavas {
 	 * @param <K> key
 	 * @param <V> value
 	 * @return hash Map
-	 * @since 0.1.36
 	 */
 	public static <K, V> Map<K, V> newConcurrentHashMap() {
 		return new ConcurrentHashMap<>();
@@ -118,7 +116,6 @@ public final class Guavas {
 	 * @param <K> key
 	 * @param <V> value
 	 * @return hash Map
-	 * @since 0.1.63
 	 */
 	public static <K, V> Map<K, V> newLinkedHashMap() {
 		return new LinkedHashMap<>();
@@ -131,7 +128,6 @@ public final class Guavas {
 	 * @param <K>  key
 	 * @param <V>  value
 	 * @return hash Map
-	 * @since 0.1.63
 	 */
 	public static <K, V> Map<K, V> newLinkedHashMap(final int size) {
 		return new LinkedHashMap<>(size);

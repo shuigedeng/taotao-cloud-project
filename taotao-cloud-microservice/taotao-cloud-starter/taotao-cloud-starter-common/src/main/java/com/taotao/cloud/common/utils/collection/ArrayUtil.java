@@ -211,7 +211,6 @@ public final class ArrayUtil {
      * @param list 列表
      * @param <R> 泛型
      * @return 结果
-     * @since 0.1.4
      */
     public static <R> R[] listToArray(final List<R> list) {
         //1. 判断是否为空

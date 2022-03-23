@@ -17,7 +17,6 @@ public interface IPinyinTone {
      * @param segment 分词后的片段
      * @param context 上下文
      * @return 结果
-     * @since 0.0.1
      */
     String tone(final String segment, final IPinyinContext context);
 
@@ -34,7 +33,6 @@ public interface IPinyinTone {
      *
      * 作用：快速分词。
      * @return 列表
-     * @since 0.0.5
      */
     Set<String> phraseSet();
 
@@ -45,7 +43,6 @@ public interface IPinyinTone {
      * 2. 如果考虑内容不是单个字，那么结果应该变为一个列表。
      * @param defaultPinyin 中文拼音-默认格式
      * @return 声调
-     * @since 0.1.0
      */
     int toneNum(final String defaultPinyin);
 

@@ -24,7 +24,6 @@ public final class URLUtil {
      * 读取每一行的内容
      * @param url url 信息
      * @return 结果
-     * @since 0.1.108
      */
     public static List<String> readAllLines(final URL url) {
         return readAllLines(url, CommonConstant.UTF8);
@@ -35,7 +34,6 @@ public final class URLUtil {
      * @param url url 信息
      * @param charset 文件编码
      * @return 结果
-     * @since 0.1.108
      */
     public static List<String> readAllLines(final URL url,
                                      final String charset) {

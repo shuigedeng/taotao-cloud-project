@@ -34,20 +34,23 @@ public enum EventEnum {
 	/**
 	 * 类
 	 */
-	Class dataClass;
+	final Class<?> dataClass;
 
 	/**
 	 * 描述
 	 */
-	String desc;
+	final String desc;
 
-
-	public Class getDataClass() {
+	public Class<?> getDataClass() {
 		return dataClass;
 	}
 
-	EventEnum(Class dataClass, String desc) {
+	EventEnum(Class<?> dataClass, String desc) {
 		this.desc = desc;
 		this.dataClass = dataClass;
+	}
+
+	public String getDesc() {
+		return desc;
 	}
 }

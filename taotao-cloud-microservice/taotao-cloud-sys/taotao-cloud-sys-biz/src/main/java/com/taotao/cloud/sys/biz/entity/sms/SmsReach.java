@@ -5,11 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 短信任务
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = SmsReach.TABLE_NAME)
 @TableName(SmsReach.TABLE_NAME)
@@ -35,52 +45,4 @@ public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
 
 	@Column(name = "num", nullable = false, columnDefinition = "varchar(2000) not null comment '预计发送条数'")
 	private String num;
-
-	public String getSignName() {
-		return signName;
-	}
-
-	public void setSignName(String signName) {
-		this.signName = signName;
-	}
-
-	public String getSmsName() {
-		return smsName;
-	}
-
-	public void setSmsName(String smsName) {
-		this.smsName = smsName;
-	}
-
-	public String getMessageCode() {
-		return messageCode;
-	}
-
-	public void setMessageCode(String messageCode) {
-		this.messageCode = messageCode;
-	}
-
-	public String getContext() {
-		return context;
-	}
-
-	public void setContext(String context) {
-		this.context = context;
-	}
-
-	public String getSmsRange() {
-		return smsRange;
-	}
-
-	public void setSmsRange(String smsRange) {
-		this.smsRange = smsRange;
-	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		this.num = num;
-	}
 }

@@ -22,7 +22,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.api.dubbo.IDubboUserService;
-import com.taotao.cloud.sys.biz.entity.QUser;
+import com.taotao.cloud.sys.biz.entity.system.QUser;
 import com.taotao.cloud.sys.biz.entity.system.User;
 import com.taotao.cloud.sys.biz.entity.system.UserRole;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;

@@ -10,6 +10,12 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 字段配置表
@@ -18,6 +24,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-02-15 09:20:23
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = ColumnConfig.TABLE_NAME)
 @TableName(ColumnConfig.TABLE_NAME)
@@ -101,8 +112,6 @@ public class ColumnConfig extends BaseSuperEntity<ColumnConfig, Long> {
 	@Column(name = "date_annotation", nullable = false, columnDefinition = "varchar(64) not null comment '日期注解'")
 	private String dateAnnotation;
 
-	public ColumnConfig() {
-	}
 
 	public ColumnConfig(String tableName, String columnName, Boolean notNull, String columnType,
 		String remark, String keyType, String extra) {
@@ -118,109 +127,5 @@ public class ColumnConfig extends BaseSuperEntity<ColumnConfig, Long> {
 		this.remark = remark;
 		this.listShow = true;
 		this.formShow = true;
-	}
-
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
-	public String getColumnName() {
-		return columnName;
-	}
-
-	public void setColumnName(String columnName) {
-		this.columnName = columnName;
-	}
-
-	public String getColumnType() {
-		return columnType;
-	}
-
-	public void setColumnType(String columnType) {
-		this.columnType = columnType;
-	}
-
-	public String getKeyType() {
-		return keyType;
-	}
-
-	public void setKeyType(String keyType) {
-		this.keyType = keyType;
-	}
-
-	public String getExtra() {
-		return extra;
-	}
-
-	public void setExtra(String extra) {
-		this.extra = extra;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public Boolean getNotNull() {
-		return notNull;
-	}
-
-	public void setNotNull(Boolean notNull) {
-		this.notNull = notNull;
-	}
-
-	public Boolean getListShow() {
-		return listShow;
-	}
-
-	public void setListShow(Boolean listShow) {
-		this.listShow = listShow;
-	}
-
-	public Boolean getFormShow() {
-		return formShow;
-	}
-
-	public void setFormShow(Boolean formShow) {
-		this.formShow = formShow;
-	}
-
-	public String getFormType() {
-		return formType;
-	}
-
-	public void setFormType(String formType) {
-		this.formType = formType;
-	}
-
-	public String getQueryType() {
-		return queryType;
-	}
-
-	public void setQueryType(String queryType) {
-		this.queryType = queryType;
-	}
-
-	public String getDictName() {
-		return dictName;
-	}
-
-	public void setDictName(String dictName) {
-		this.dictName = dictName;
-	}
-
-	public String getDateAnnotation() {
-		return dateAnnotation;
-	}
-
-	public void setDateAnnotation(String dateAnnotation) {
-		this.dateAnnotation = dateAnnotation;
 	}
 }

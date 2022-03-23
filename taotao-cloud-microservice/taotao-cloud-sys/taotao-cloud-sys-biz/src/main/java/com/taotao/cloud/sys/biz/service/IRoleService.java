@@ -39,6 +39,7 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 * @since 2021-10-09 20:43:25
 	 */
 	List<RoleBO> findRoleByUserIds(Set<Long> userIds);
+
 	/**
 	 * 查询所有角色列表
 	 *

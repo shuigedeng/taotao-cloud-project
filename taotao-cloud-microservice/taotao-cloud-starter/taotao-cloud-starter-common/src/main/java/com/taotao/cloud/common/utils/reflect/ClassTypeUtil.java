@@ -31,7 +31,6 @@ public final class ClassTypeUtil {
      *
      * @param clazz 对象类型
      * @return 是否为 map class
-     * @since 0.0.3 fixed
      */
     public static boolean isMap(final Class<?> clazz) {
         return Map.class.isAssignableFrom(clazz);
@@ -91,7 +90,6 @@ public final class ClassTypeUtil {
      * 是否为枚举
      * @param clazz 类型
      * @return 枚举
-     * @since 0.1.47
      */
     public static boolean isEnum(Class<?> clazz) {
         ArgUtil.notNull(clazz, "clazz");
@@ -103,7 +101,6 @@ public final class ClassTypeUtil {
      *
      * @param clazz 类
      * @return 是否为抽象类
-     * @since 0.0.2
      */
     public static boolean isAbstract(Class<?> clazz) {
         return Modifier.isAbstract(clazz.getModifiers());
@@ -113,7 +110,6 @@ public final class ClassTypeUtil {
      * 是抽象类或者接口
      * @param clazz 类信息
      * @return 是否
-     * @since 0.1.14
      */
     public static boolean isAbstractOrInterface(Class<?> clazz) {
         return isAbstract(clazz)
@@ -139,7 +135,6 @@ public final class ClassTypeUtil {
      *
      * @param clazz 类
      * @return 是否为标准类
-     * @since 0.0.2
      */
     public static boolean isJavaBean(Class<?> clazz) {
         return null != clazz
@@ -188,7 +183,6 @@ public final class ClassTypeUtil {
      * 获取列表字段对应的类型
      * @param field 字段
      * @return 返回对应的 class 类型
-     * @since 0.0.7
      */
     public static Class getListType(Field field) {
         ParameterizedType listGenericType = (ParameterizedType) field.getGenericType();
@@ -200,7 +194,6 @@ public final class ClassTypeUtil {
      * 是否为通配符泛型
      * @param type 类型
      * @return 是否
-     * @since 0.1.14
      */
     public static boolean isWildcardGenericType(final Type type) {
         //final Class clazz = type.getClass();
@@ -212,7 +205,6 @@ public final class ClassTypeUtil {
      * 是否为列表
      * @param clazz 类型
      * @return 结果
-     * @since 0.1.14
      */
     public static boolean isList(final Class clazz) {
         return List.class.isAssignableFrom(clazz);
@@ -222,7 +214,6 @@ public final class ClassTypeUtil {
      * 是否为 set
      * @param clazz 类型
      * @return 结果
-     * @since 0.1.14
      */
     public static boolean isSet(final Class clazz) {
         return Set.class.isAssignableFrom(clazz);
@@ -232,7 +223,6 @@ public final class ClassTypeUtil {
      * 是否为基本类型
      * @param clazz 对象类型
      * @return 是否
-     * @since 0.1.31
      */
     public static boolean isPrimitive(final Class clazz) {
         return clazz.isPrimitive();
@@ -242,7 +232,6 @@ public final class ClassTypeUtil {
      * 是否为基本类型
      * @param object 对象
      * @return 是否
-     * @since 0.1.31
      */
     public static boolean isPrimitive(final Object object) {
         if(ObjectUtil.isNull(object)) {

@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.service.impl;
 
-import cn.lili.modules.payment.entity.RefundLog;
-import cn.lili.modules.payment.mapper.RefundLogMapper;
-import cn.lili.modules.payment.service.RefundLogService;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.payment.biz.entity.RefundLog;
+import com.taotao.cloud.payment.biz.mapper.RefundLogMapper;
+import com.taotao.cloud.payment.biz.service.RefundLogService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class RefundLogServiceImpl extends ServiceImpl<RefundLogMapper, RefundLog> implements RefundLogService {
+public class RefundLogServiceImpl extends ServiceImpl<RefundLogMapper, RefundLog> implements
+	RefundLogService {
 
     @Override
     public RefundLog queryByAfterSaleSn(String sn) {

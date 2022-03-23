@@ -14,7 +14,7 @@ public class DefaultPipeline<T> implements Pipeline<T> {
 	/**
 	 * 创建一个内部的链表
 	 */
-	private LinkedList<T> list = new LinkedList<>();
+	private final LinkedList<T> list = new LinkedList<>();
 
 	@Override
 	public Pipeline addLast(T t) {

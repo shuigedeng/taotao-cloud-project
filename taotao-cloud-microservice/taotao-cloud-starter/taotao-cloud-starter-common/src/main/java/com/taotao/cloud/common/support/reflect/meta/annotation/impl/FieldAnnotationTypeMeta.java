@@ -7,17 +7,11 @@ import java.lang.reflect.Field;
 
 /**
  * 字段注解类型信息
- * <p> project: heaven-AnnotationMeta </p>
- * <p> create on 2019/11/29 23:04 </p>
- *
- * @author Administrator
- * @since 0.1.55
  */
 public class FieldAnnotationTypeMeta extends AbstractAnnotationTypeMeta {
 
     /**
      * 注解信息
-     * @since 0.1.55
      */
     private Annotation[] annotations;
 

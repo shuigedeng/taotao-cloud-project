@@ -9,7 +9,6 @@ public class ToneItem {
 
     /**
      * 声调
-     * @since 0.0.3
      */
     private int tone;
 
@@ -18,7 +17,6 @@ public class ToneItem {
      * @param letter 字母
      * @param tone 声调
      * @return 结果
-     * @since 0.0.3
      */
     public static ToneItem of(final char letter,
                               final int tone) {

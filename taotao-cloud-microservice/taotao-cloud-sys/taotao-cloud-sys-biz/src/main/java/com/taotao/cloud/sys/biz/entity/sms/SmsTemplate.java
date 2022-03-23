@@ -5,11 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 短信模板
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = SmsTemplate.TABLE_NAME)
 @TableName(SmsTemplate.TABLE_NAME)
@@ -41,60 +51,4 @@ public class SmsTemplate extends BaseSuperEntity<SmsTemplate, Long> {
 
 	@Column(name = "reason", nullable = false, columnDefinition = "varchar(2000) not null comment '审核备注'")
 	private String reason;
-
-	public String getTemplateName() {
-		return templateName;
-	}
-
-	public void setTemplateName(String templateName) {
-		this.templateName = templateName;
-	}
-
-	public Integer getTemplateType() {
-		return templateType;
-	}
-
-	public void setTemplateType(Integer templateType) {
-		this.templateType = templateType;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public String getTemplateContent() {
-		return templateContent;
-	}
-
-	public void setTemplateContent(String templateContent) {
-		this.templateContent = templateContent;
-	}
-
-	public Integer getTemplateStatus() {
-		return templateStatus;
-	}
-
-	public void setTemplateStatus(Integer templateStatus) {
-		this.templateStatus = templateStatus;
-	}
-
-	public String getTemplateCode() {
-		return templateCode;
-	}
-
-	public void setTemplateCode(String templateCode) {
-		this.templateCode = templateCode;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
 }

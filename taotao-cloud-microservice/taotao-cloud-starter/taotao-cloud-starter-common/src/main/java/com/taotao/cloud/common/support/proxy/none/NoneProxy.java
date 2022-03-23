@@ -10,27 +10,28 @@ import java.lang.reflect.Method;
  */
 public class NoneProxy implements InvocationHandler, IProxy {
 
-    /**
-     * 代理对象
-     */
-    private final Object target;
+	/**
+	 * 代理对象
+	 */
+	private final Object target;
 
-    public NoneProxy(Object target) {
-        this.target = target;
-    }
+	public NoneProxy(Object target) {
+		this.target = target;
+	}
 
-    /**
-     * 返回原始对象，没有代理
-     * @return 原始对象
-     */
-    @Override
-    public Object proxy() {
-        return this.target;
-    }
+	/**
+	 * 返回原始对象，没有代理
+	 *
+	 * @return 原始对象
+	 */
+	@Override
+	public Object proxy() {
+		return this.target;
+	}
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(proxy, args);
-    }
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		return method.invoke(proxy, args);
+	}
 
 }

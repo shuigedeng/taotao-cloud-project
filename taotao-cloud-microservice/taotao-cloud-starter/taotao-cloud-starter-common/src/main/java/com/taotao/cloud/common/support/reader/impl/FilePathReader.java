@@ -10,30 +10,28 @@ import com.taotao.cloud.common.utils.io.FileUtil;
  */
 public class FilePathReader implements IReader {
 
-    /**
-     * 字符串内容
-     * @since 0.1.94
-     */
-    private final String path;
+	/**
+	 * 字符串内容
+	 */
+	private final String path;
 
-    /**
-     * 文件编码
-     * @since 0.1.94
-     */
-    private final String charset;
+	/**
+	 * 文件编码
+	 */
+	private final String charset;
 
-    public FilePathReader(String path, String charset) {
-        this.path = path;
-        this.charset = charset;
-    }
+	public FilePathReader(String path, String charset) {
+		this.path = path;
+		this.charset = charset;
+	}
 
-    public FilePathReader(String path) {
-        this(path, CommonConstant.UTF8);
-    }
+	public FilePathReader(String path) {
+		this(path, CommonConstant.UTF8);
+	}
 
-    @Override
-    public String read() {
-        return FileUtil.getFileContent(path, charset);
-    }
+	@Override
+	public String read() {
+		return FileUtil.getFileContent(path, charset);
+	}
 
 }

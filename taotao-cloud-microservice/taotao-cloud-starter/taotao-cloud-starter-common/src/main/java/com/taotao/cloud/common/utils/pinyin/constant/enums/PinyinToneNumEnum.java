@@ -15,7 +15,6 @@ public enum PinyinToneNumEnum {
      * 在现代汉语四声中，第一声、第二声是平声；第三声、第四声是仄声。
      *
      * 古代的入声字已经被均摊到这几种读音之中。
-     * @since 0.1.0
      */
     ONE(1, "阴平"),
     TWO(2, "阳平"),
@@ -28,14 +27,12 @@ public enum PinyinToneNumEnum {
     /**
      * 音调编号
      *
-     * @since 0.1.0
      */
     private final int num;
 
     /**
      * 中文描述
      *
-     * @since 0.1.0
      */
     private final String desc;
 
@@ -64,7 +61,6 @@ public enum PinyinToneNumEnum {
      * 是否为平声字
      * @param toneNum 音调
      * @return 结果
-     * @since 0.1.0
      */
     public static boolean isPing(final int toneNum) {
         return ONE.num == toneNum || TWO.num == toneNum;
@@ -74,7 +70,6 @@ public enum PinyinToneNumEnum {
      * 是否为仄声字
      * @param toneNum 音调
      * @return 结果
-     * @since 0.1.0
      */
     public static boolean isZe(final int toneNum) {
         return THREE.num == toneNum || FOUR.num == toneNum;
@@ -84,7 +79,6 @@ public enum PinyinToneNumEnum {
      * 是否为轻声
      * @param toneNum 音调
      * @return 结果
-     * @since 0.1.0
      */
     public static boolean isSoftly(final int toneNum) {
         return FIVE.num == toneNum;

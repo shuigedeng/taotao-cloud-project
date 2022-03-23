@@ -11,10 +11,6 @@ import java.util.Map;
 
 /**
  * 网络工具类
- *
- * @author bbhou
- * @version 0.0.7
- * @since 0.0.7
  */
 public final class NetUtil {
 
@@ -22,13 +18,11 @@ public final class NetUtil {
 
     /**
      * 默认的本地地址
-     * @since 0.1.125
      */
     public static final String LOCALHOST = "127.0.0.1";
 
     /**
      * 本地服务地址
-     * @since 0.1.37
      */
     private static final String LOCAL_HOST;
 
@@ -46,7 +40,6 @@ public final class NetUtil {
     /**
      * 获取本地 ip 地址
      * @return ip 地址
-     * @since 0.1.37
      */
     public static String getLocalHost() {
         return LOCAL_HOST;
@@ -97,7 +90,6 @@ public final class NetUtil {
     /**
      * 获取当前机器的 IP 地址
      * @return IP 地址
-     * @since 0.1.125
      */
     public static String getLocalIp() {
         InetAddress inetAddress = findLocalAddress();
@@ -116,7 +108,6 @@ public final class NetUtil {
     /**
      * 查询本地地址
      * @return 地址
-     * @since 0.1.125
      */
     private static InetAddress findLocalAddress() {
         String preferNamePrefix = "bond0";
@@ -166,7 +157,6 @@ public final class NetUtil {
 
     /**
      * 检查有否非ipv6，非127.0.0.1
-     * @since 0.1.125
      */
     private static InetAddress findAvailableAddress(NetworkInterface nic) {
         for (Enumeration<InetAddress> inetAddresses = nic.getInetAddresses(); inetAddresses.hasMoreElements(); ) {

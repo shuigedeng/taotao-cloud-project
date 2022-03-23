@@ -9,6 +9,13 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 邮件配置表
@@ -17,6 +24,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = EmailConfig.TABLE_NAME)
 @TableName(EmailConfig.TABLE_NAME)
@@ -59,44 +71,4 @@ public class EmailConfig extends BaseSuperEntity<EmailConfig, Long> {
 	 */
 	@Column(name = "user", nullable = false, columnDefinition = "varchar(64) not null comment '发件者用户名'")
 	private String user;
-
-	public String getFromUser() {
-		return fromUser;
-	}
-
-	public void setFromUser(String fromUser) {
-		this.fromUser = fromUser;
-	}
-
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getPort() {
-		return port;
-	}
-
-	public void setPort(String port) {
-		this.port = port;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
 }

@@ -29,8 +29,6 @@ package com.taotao.cloud.common.utils.codec;
  * remained in tact.
  *
  * @see <a href="http://en.wikipedia.org/wiki/Hexadecimal">Wikipedia: Hexadecimal</a>
- * @since 0.9
- * @since 0.1.120
  */
 public class Hex {
 

@@ -46,7 +46,6 @@ public class EncodeUtil {
      *
      * @param string 字符串
      * @return 结果
-     * @since 0.1.66
      */
     public static String encodeUnicode(final String string) {
         if (StringUtil.isEmpty(string)) {
@@ -86,7 +85,6 @@ public class EncodeUtil {
      *
      * @param string 字符串
      * @return 结果
-     * @since 0.1.66
      */
     public static String decodeUnicode(final String string) {
         if (StringUtil.isEmpty(string)) {

@@ -17,7 +17,6 @@ public final class InnerToneHelper {
 
     /**
      * 存放对应的拼音声调信息
-     * @since 0.0.3
      */
     private static final Map<Character, ToneItem> TONE_ITEM_MAP;
 
@@ -37,7 +36,6 @@ public final class InnerToneHelper {
      * 获取对应的拼音信息
      * @param c 拼音
      * @return 结果
-     * @since 0.0.3
      */
     public static ToneItem getToneItem(final char c) {
         return TONE_ITEM_MAP.get(c);
@@ -47,7 +45,6 @@ public final class InnerToneHelper {
      * 获取对应的声调信息
      * @param tone 拼音信息
      * @return 声调信息
-     * @since 0.0.3
      */
     public static CharToneInfo getCharToneInfo(final String tone) {
         CharToneInfo charToneInfo = new CharToneInfo();

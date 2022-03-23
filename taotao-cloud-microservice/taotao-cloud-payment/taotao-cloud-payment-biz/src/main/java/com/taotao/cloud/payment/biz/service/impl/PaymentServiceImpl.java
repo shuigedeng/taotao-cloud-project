@@ -1,9 +1,9 @@
 package com.taotao.cloud.payment.biz.service.impl;
 
-import cn.lili.modules.payment.kit.CashierSupport;
-import cn.lili.modules.payment.kit.dto.PaymentSuccessParams;
-import cn.lili.modules.payment.kit.params.CashierExecute;
-import cn.lili.modules.payment.service.PaymentService;
+import com.taotao.cloud.payment.biz.kit.CashierSupport;
+import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
+import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
+import com.taotao.cloud.payment.biz.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

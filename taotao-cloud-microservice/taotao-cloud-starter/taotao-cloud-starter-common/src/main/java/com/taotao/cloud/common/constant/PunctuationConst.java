@@ -55,79 +55,66 @@ public final class PunctuationConst {
 
     /**
      * 星
-     * @since 0.0.8
      */
     public static final String STAR = "*";
 
     /**
      * 双引号
-     * @since 0.0.8
      */
     public static final String DOUBLE_QUOTES = "\"";
 
     /**
      * 空
-     * @since 0.0.8
      */
     public static final String EMPTY = "";
 
     /**
      * 非
-     * @since 0.0.8
      */
     public static final String NOT = "!";
 
     /**
      * 与
-     * @since 0.0.8
      */
     public static final String AND = "&";
 
     /**
      * 或
-     * @since 0.0.8
      */
     public static final String OR = "|";
 
     /**
      * #
-     * @since 0.0.8
      */
     public static final String SHAPE = "#";
 
     /**
      * 美元
-     * @since 0.0.8
      */
     public static final String DOLLAR = "$";
 
     /**
      * 百分比
-     * @since 0.0.8
      */
     public static final String PERCENT = "%";
 
     /**
      * 幂
-     * @since 0.0.8
      */
     public static final String CARET = "^";
 
     /**
      * 中划线
-     * @since 0.0.8
      */
     public static final String MIDDLE_LINE = "-";
 
     /**
      * 等于号
-     * @since 0.1.17
      */
     public static final String EQUAL = "=";
 
     /**
      * 问号
-     * @since 0.1.9
      */
     public static final String QUESTION_MARK = "?";
 

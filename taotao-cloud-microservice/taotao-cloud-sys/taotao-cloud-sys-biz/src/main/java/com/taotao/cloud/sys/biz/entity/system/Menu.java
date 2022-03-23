@@ -20,6 +20,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 菜单表
@@ -28,6 +33,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:08:15
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = Menu.TABLE_NAME)
 @TableName(Menu.TABLE_NAME)
@@ -64,7 +74,7 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	 * 父菜单ID
 	 */
 	@Column(name = "parent_id", columnDefinition = "bigint not null default 0 comment '父菜单ID'")
-	private Long parentId = 0L;
+	private Long parentId;
 
 	/**
 	 * 图标
@@ -76,27 +86,27 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
-	private Integer sortNum = 0;
+	private Integer sortNum ;
 
 	/**
 	 * 是否缓存页面: 0:否 1:是 (默认值0)
 	 */
 	@Column(name = "keep_alive", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
-	private Boolean keepAlive = false;
+	private Boolean keepAlive ;
 
 	/**
 	 * 菜单类型 (1:目录 2:菜单 3：按钮)
 	 *
-	 * @see com.taotao.cloud.sys.api.enums.MenuTypeEnum
+	 * @see MenuTypeEnum
 	 */
 	@Column(name = "type", nullable = false, columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
-	private Integer type = 1;
+	private Integer type ;
 
 	/**
 	 * 是否隐藏路由菜单: 0否,1是（默认值0）
 	 */
 	@Column(name = "hidden", nullable = false, columnDefinition = "boolean DEFAULT false comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
-	private Boolean hidden = false;
+	private Boolean hidden;
 
 	/**
 	 * 重定向
@@ -115,114 +125,6 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public String getComponent() {
-		return component;
-	}
-
-	public void setComponent(String component) {
-		this.component = component;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public Boolean getKeepAlive() {
-		return keepAlive;
-	}
-
-	public void setKeepAlive(Boolean keepAlive) {
-		this.keepAlive = keepAlive;
-	}
-
-	public Boolean getHidden() {
-		return hidden;
-	}
-
-	public void setHidden(Boolean hidden) {
-		this.hidden = hidden;
-	}
-
-
-	public String getRedirect() {
-		return redirect;
-	}
-
-	public void setRedirect(String redirect) {
-		this.redirect = redirect;
-	}
-
-
-	public Integer getSortNum() {
-		return sortNum;
-	}
-
-	public void setSortNum(Integer sortNum) {
-		this.sortNum = sortNum;
-	}
-
-
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public String getPermission() {
-		return permission;
-	}
-
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public String getTarget() {
-		return target;
-	}
-
-	public void setTarget(String target) {
-		this.target = target;
-	}
 
 }
 

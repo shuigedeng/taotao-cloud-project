@@ -142,7 +142,7 @@ public class TemplateProvider {
 	 * @since 2021-09-02 22:20:05
 	 */
 	public String cutString(String str, int maxlen) {
-		if (StringUtils.isEmpty(str)) {
+		if (StringUtil.isEmpty(str)) {
 			return str;
 		}
 		if (str.length() <= maxlen) {

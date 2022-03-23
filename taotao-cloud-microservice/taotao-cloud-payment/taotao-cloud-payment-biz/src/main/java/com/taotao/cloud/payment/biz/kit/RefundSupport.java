@@ -1,15 +1,7 @@
 package com.taotao.cloud.payment.biz.kit;
 
-import cn.lili.common.utils.SnowFlake;
-import cn.lili.common.utils.SpringContextUtil;
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.service.OrderItemService;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.order.order.service.StoreFlowService;
-import cn.lili.modules.payment.entity.RefundLog;
-import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.biz.entity.RefundLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

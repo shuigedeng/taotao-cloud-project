@@ -17,8 +17,6 @@ package com.taotao.cloud.common.utils.pinyin.support.segment.trie;//package com.
 //
 //    /**
 //     * 内部单词 map
-//     *
-//     * @since 0.0.2
 //     */
 //    private static volatile Map innerWordMap = Guavas.newHashMap();
 //

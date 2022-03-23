@@ -1,6 +1,7 @@
 package com.taotao.cloud.payment.biz.service;
 
-import cn.lili.modules.payment.kit.dto.PaymentSuccessParams;
+
+import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 
 /**
  * 支付日志 业务层

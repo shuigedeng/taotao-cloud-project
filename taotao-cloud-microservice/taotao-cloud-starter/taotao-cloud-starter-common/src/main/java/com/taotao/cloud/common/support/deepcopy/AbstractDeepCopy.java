@@ -11,7 +11,6 @@ public abstract class AbstractDeepCopy implements IDeepCopy {
      * @param object 入参对象
      * @param <T> 泛型
      * @return 结果
-     * @since 0.0.1
      */
     protected abstract <T> T doDeepCopy(T object);
 

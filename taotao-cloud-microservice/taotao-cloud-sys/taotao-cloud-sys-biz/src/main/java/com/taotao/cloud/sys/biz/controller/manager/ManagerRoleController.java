@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.api.dto.role.RoleSaveDTO;
 import com.taotao.cloud.sys.api.dto.role.RoleUpdateDTO;
 import com.taotao.cloud.sys.biz.entity.system.Role;
 import com.taotao.cloud.sys.api.vo.role.RoleQueryVO;
-import com.taotao.cloud.sys.biz.mapstruct.IRoleMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.RoleMapStruct;
 import com.taotao.cloud.sys.biz.service.IRoleService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
@@ -65,7 +65,7 @@ public class ManagerRoleController extends
 		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
 		@PathVariable(name = "userId") Long userId) {
 		List<RoleBO> roles = service().findRoleByUserIds(Set.of(userId));
-		List<RoleQueryVO> result = IRoleMapStruct.INSTANCE.bosToVos(roles);
+		List<RoleQueryVO> result = RoleMapStruct.INSTANCE.bosToVos(roles);
 		return success(result);
 	}
 
@@ -77,7 +77,7 @@ public class ManagerRoleController extends
 		@Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空")
 		@RequestParam Set<Long> userIds) {
 		List<RoleBO> roles = service().findRoleByUserIds(userIds);
-		List<RoleQueryVO> result = IRoleMapStruct.INSTANCE.bosToVos(roles);
+		List<RoleQueryVO> result = RoleMapStruct.INSTANCE.bosToVos(roles);
 		return success(result);
 	}
 

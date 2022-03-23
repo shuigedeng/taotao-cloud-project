@@ -6,12 +6,6 @@ import java.util.Map;
 
 /**
  * 注解元数据
- *
- * <p> project: heaven-AnnotationMeta </p>
- * <p> create on 2019/11/29 23:04 </p>
- *
- * @author Administrator
- * @since 0.1.52
  */
 public interface IAnnotationTypeMeta {
 
@@ -23,7 +17,6 @@ public interface IAnnotationTypeMeta {
      * @param annotationName the fully qualified class name of the annotation
      * type to look for
      * @return whether a matching annotation is defined
-     * @since 0.1.52
      */
     boolean isAnnotated(String annotationName);
 
@@ -33,7 +26,6 @@ public interface IAnnotationTypeMeta {
      * @param annotationName the fully qualified class name of the annotation
      * type to look for
      * @return a matching annotation is returned
-     * @since 0.1.52
      */
     Annotation getAnnotation(String annotationName);
 
@@ -45,7 +37,6 @@ public interface IAnnotationTypeMeta {
      * @param annotationName the fully qualified class name of the annotation
      * type to look for
      * @return whether a matching annotation is defined
-     * @since 0.1.53
      */
     boolean isAnnotatedOrRef(String annotationName);
 
@@ -57,7 +48,6 @@ public interface IAnnotationTypeMeta {
      * @param classList the fully qualified class name list of the annotation
      * type to look for
      * @return whether a matching annotation is defined
-     * @since 0.1.53
      */
     boolean isAnnotatedOrRef(final List<Class> classList);
 
@@ -65,7 +55,6 @@ public interface IAnnotationTypeMeta {
      * 是否被引用了指定的注解
      * @param clazz 类信息
      * @return 是否
-     * @since 0.1.56
      */
     boolean isAnnotationRef(final Class<? extends Annotation> clazz);
 
@@ -75,7 +64,6 @@ public interface IAnnotationTypeMeta {
      * @param annotationName the fully qualified class name of the annotation
      * type to look for
      * @return all matching annotation is returned
-     * @since 0.1.53
      * @see #getAnnotation(String) 直接注解
      * @see #getAnnotationRefs(String) 元注解-间接饮用
      */
@@ -86,7 +74,6 @@ public interface IAnnotationTypeMeta {
      * （1）排除直接注解本身
      * @param annotationName 注解名称
      * @return 注解类表
-     * @since 0.1.52
      */
     List<Annotation> getAnnotationRefs(String annotationName);
 
@@ -108,7 +95,6 @@ public interface IAnnotationTypeMeta {
      * @return a Map of attributes, with the attribute name as key (e.g. "value")
      * and the defined attribute value as Map value. This return value will be
      * {@code null} if no matching annotation is defined.
-     * @since 0.1.52
      */
     Map<String, Object> getAnnotationAttributes(String annotationName);
 
@@ -124,7 +110,6 @@ public interface IAnnotationTypeMeta {
      * @return a Map of attributes, with the attribute name as key (e.g. "value")
      * and the defined attribute value as Map value. This return value will be
      * {@code null} if no matching annotation is defined.
-     * @since 0.1.54
      */
     @Deprecated
     Map<String, Object> getAnnotationOrRefAttributes(String annotationName);
@@ -142,7 +127,6 @@ public interface IAnnotationTypeMeta {
      * @return a Map of attributes, with the attribute name as key (e.g. "value")
      * and the defined attribute value as Map value. This return value will be
      * {@code null} if no matching annotation is defined.
-     * @since 0.1.54
      */
     @Deprecated
     Object getAnnotationOrRefAttribute(String annotationName, final String attrMethodName);
@@ -152,7 +136,6 @@ public interface IAnnotationTypeMeta {
      * @param annotation 注解类
      * @param methodName 方法名称
      * @return 结果
-     * @since 0.1.56
      */
     Object getAnnotationAttr(final Annotation annotation,
                             final String methodName);
@@ -162,7 +145,6 @@ public interface IAnnotationTypeMeta {
      * @param clazz 注解类
      * @param methodName 方法名称
      * @return 结果
-     * @since 0.1.56
      */
     Object getAnnotatedAttr(final Class<? extends Annotation> clazz,
                                 final String methodName);
@@ -172,7 +154,6 @@ public interface IAnnotationTypeMeta {
      * @param clazz 注解类
      * @param methodName 方法名称
      * @return 结果
-     * @since 0.1.56
      */
     Object getAnnotationReferencedAttr(final Class<? extends Annotation> clazz,
                             final String methodName);

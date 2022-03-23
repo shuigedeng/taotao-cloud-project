@@ -16,7 +16,6 @@ public enum PinyinStyleEnum {
      *
      * 普通风格，即不带声调。
      * 如：pin yin
-     * @since 0.0.1
      */
     NORMAL,
 
@@ -26,7 +25,6 @@ public enum PinyinStyleEnum {
      * 注：这是默认的风格。
      * 如：pīn yīn
      *
-     * @since 0.0.1
      */
     DEFAULT,
 
@@ -35,7 +33,6 @@ public enum PinyinStyleEnum {
      * 备注: 5 代表轻声
      * 如：pin1 yin1
      *
-     * @since 0.0.1
      */
     NUM_LAST,
 
@@ -45,7 +42,6 @@ public enum PinyinStyleEnum {
      * 首字母风格，只返回拼音的首字母部分。
      * 如：p y
      *
-     * @since 0.0.1
      */
     FIRST_LETTER,
 
@@ -54,7 +50,6 @@ public enum PinyinStyleEnum {
      *
      * 主要针对：
      * 女 绿
-     * @since 0.1.4
      */
     INPUT,
     ;

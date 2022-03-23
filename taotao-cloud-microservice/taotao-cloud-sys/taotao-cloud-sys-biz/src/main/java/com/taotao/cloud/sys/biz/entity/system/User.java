@@ -21,6 +21,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 系统用户表
@@ -29,6 +34,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:05:21
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = User.TABLE_NAME)
 @TableName(User.TABLE_NAME)
@@ -79,7 +89,7 @@ public class User extends BaseSuperEntity<User,Long> {
 	 * @see SexTypeEnum
 	 */
 	@Column(name = "sex", nullable = false, columnDefinition = "int not null default 0 comment '性别 1男 2女 0未知'")
-	private Integer sex = 0;
+	private Integer sex;
 
 	/**
 	 * 邮箱
@@ -122,121 +132,4 @@ public class User extends BaseSuperEntity<User,Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public int getSex() {
-		return sex;
-	}
-
-	public void setSex(int sex) {
-		this.sex = sex;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(Long deptId) {
-		this.deptId = deptId;
-	}
-
-	public Long getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(Long jobId) {
-		this.jobId = jobId;
-	}
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 }

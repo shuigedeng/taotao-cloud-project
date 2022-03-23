@@ -42,9 +42,8 @@ public class IPUtil {
 	 * 根据ip获取详细地址
 	 *
 	 * @param ip ip
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-02 16:41:27
+	 * @return ip地址
+	 * @since 2022-03-23 08:19:10
 	 */
 	public static String getCityInfo(String ip) {
 		if (IP_LOCAL) {
@@ -56,12 +55,11 @@ public class IPUtil {
 	}
 
 	/**
-	 * 根据ip获取详细地址 临时使用，待调整
+	 * 根据ip获取详细地址
 	 *
 	 * @param ip ip
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-02 16:41:38
+	 * @return 详细地址
+	 * @since 2022-03-23 08:17:23
 	 */
 	public static String getHttpCityInfo(String ip) {
 		String api = String.format("http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true", ip);

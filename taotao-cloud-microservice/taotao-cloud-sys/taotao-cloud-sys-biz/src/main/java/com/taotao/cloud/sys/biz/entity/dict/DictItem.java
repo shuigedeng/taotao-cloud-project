@@ -20,6 +20,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 字典项表
@@ -30,6 +35,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:09:21
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = DictItem.TABLE_NAME)
 @TableName(DictItem.TABLE_NAME)
@@ -74,57 +84,6 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
-	private Integer sortNum = 1;
+	private Integer sortNum ;
 
-	public DictItem() {
-	}
-
-
-	public Long getDictId() {
-		return dictId;
-	}
-
-	public void setDictId(Long dictId) {
-		this.dictId = dictId;
-	}
-
-	public String getItemText() {
-		return itemText;
-	}
-
-	public void setItemText(String itemText) {
-		this.itemText = itemText;
-	}
-
-	public String getItemValue() {
-		return itemValue;
-	}
-
-	public void setItemValue(String itemValue) {
-		this.itemValue = itemValue;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public Integer getSortNum() {
-		return sortNum;
-	}
-
-	public void setSortNum(Integer sortNum) {
-		this.sortNum = sortNum;
-	}
 }

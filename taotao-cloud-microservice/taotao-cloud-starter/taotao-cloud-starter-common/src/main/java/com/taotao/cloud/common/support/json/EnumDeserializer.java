@@ -35,7 +35,6 @@ import org.springframework.beans.BeanUtils;
  * @author shuigedeng
  * @version 1.0.0
  * @see com.fasterxml.jackson.databind.deser.std.EnumDeserializer
- * @since 2021/6/22 17:27
  */
 @Deprecated
 public class EnumDeserializer extends StdDeserializer<Enum<?>> {

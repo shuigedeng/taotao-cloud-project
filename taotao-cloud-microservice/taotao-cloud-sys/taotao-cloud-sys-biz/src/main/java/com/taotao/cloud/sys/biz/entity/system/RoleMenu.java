@@ -20,6 +20,11 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 角色-菜单第三方表
@@ -28,6 +33,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:07:31
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = RoleMenu.TABLE_NAME)
 @TableName(RoleMenu.TABLE_NAME)
@@ -47,20 +57,4 @@ public class RoleMenu extends SuperEntity<RoleMenu, Long> {
 	 */
 	@Column(name = "menu_id", nullable = false, columnDefinition = "bigint not null comment '菜单ID'")
 	private Long menuId;
-
-	public Long getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-
-	public Long getMenuId() {
-		return menuId;
-	}
-
-	public void setMenuId(Long menuId) {
-		this.menuId = menuId;
-	}
 }

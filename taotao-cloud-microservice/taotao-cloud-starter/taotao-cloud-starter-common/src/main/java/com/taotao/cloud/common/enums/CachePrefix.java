@@ -6,7 +6,6 @@ package com.taotao.cloud.common.enums;
  */
 public enum CachePrefix {
 
-
 	/**
 	 * nonce
 	 */

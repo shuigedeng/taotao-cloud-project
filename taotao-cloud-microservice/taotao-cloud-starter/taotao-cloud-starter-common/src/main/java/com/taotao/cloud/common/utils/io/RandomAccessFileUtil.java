@@ -23,7 +23,6 @@ public final class RandomAccessFileUtil {
      * @param startIndex 开始下标
      * @param endIndex 结束下标
      * @return 结果
-     * @since 0.1.78
      */
     public static String getFileContent(final String filePath,
                                         final int startIndex,
@@ -38,7 +37,6 @@ public final class RandomAccessFileUtil {
      * @param endIndex 结束下标
      * @param charset 编码
      * @return 结果
-     * @since 0.1.78
      */
     public static String getFileContent(final String filePath,
                                         final int startIndex,

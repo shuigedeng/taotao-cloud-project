@@ -10,13 +10,11 @@ public class FastJsonDeepCopy extends AbstractDeepCopy {
 
     /**
      * 对象单例
-     * @since 0.0.1
      */
     private static final FastJsonDeepCopy INSTANCE = new FastJsonDeepCopy();
 
     /**
      * 获取
-     * @since 0.0.1
      */
     public static FastJsonDeepCopy getInstance() {
         return INSTANCE;

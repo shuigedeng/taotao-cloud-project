@@ -35,7 +35,7 @@ import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.api.vo.region.RegionVO;
 import com.taotao.cloud.sys.biz.entity.region.Region;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
-import com.taotao.cloud.sys.biz.mapstruct.IRegionMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.RegionMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.IRegionService;
@@ -215,7 +215,7 @@ public class RegionServiceImpl extends
 		queryWrapper.orderByDesc(Region::getCreateTime);
 		List<Region> list = list(queryWrapper);
 
-		return IRegionMapStruct.INSTANCE.regionListToVoList(list)
+		return RegionMapStruct.INSTANCE.regionListToVoList(list)
 			.stream()
 			.filter(Objects::nonNull)
 			.peek(e -> {

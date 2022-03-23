@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.biz.repository;
+package com.taotao.cloud.payment.biz.repository;
 
 import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;

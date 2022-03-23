@@ -42,8 +42,6 @@ import java.io.IOException;
  * implementation based on FreeBSD 3.0's {@code /usr/src/lib/libcrypt/crypt.c} implementation.  The
  * accompanying license headers have been retained at the top of this source file.
  * This file and all that it contains is ASL 2.0 compatible.
- *
- * @since 0.1.120
  */
 public class H64 {
 

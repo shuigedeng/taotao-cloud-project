@@ -1,4 +1,4 @@
-package com.taotao.cloud.dubbo.biz.entity;
+package com.taotao.cloud.payment.biz.entity;
 
 import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;

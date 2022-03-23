@@ -16,50 +16,42 @@ public class PinyinContext implements IPinyinContext {
 
     /**
      * 格式
-     * @since 0.1.1
      */
     private IPinyinToneStyle style;
 
 
     /**
      * 分词实现
-     * @since 0.1.1
      */
     private IPinyinSegment segment;
 
     /**
      * 拼音数据实现
-     * @since 0.1.1
      */
     private IPinyinData data;
 
     /**
      * 中文服务类
-     * @since 0.0.1
      */
     private IPinyinChinese chinese;
 
     /**
      * 注音实现
-     * @since 0.0.1
      */
     private IPinyinTone tone;
 
     /**
      * 连接符
-     * @since 0.1.2
      */
     private String connector;
 
     /**
      * 拼音反向
-     * @since 0.3.0
      */
     private IPinyinToneReverse pinyinToneReverse;
 
     /**
      * 返回实例
-     * @since 0.1.1
      * @return 结果
      */
     public static PinyinContext newInstance() {

@@ -5,11 +5,12 @@ package com.taotao.cloud.common.support.filter;
  */
 public interface IFilter<T> {
 
-    /**
-     * 过滤
-     * @param t 元素
-     * @return 结果
-     */
-    boolean filter(final T t);
+	/**
+	 * 过滤
+	 *
+	 * @param t 元素
+	 * @return 结果
+	 */
+	boolean filter(final T t);
 
 }

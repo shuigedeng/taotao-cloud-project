@@ -7,9 +7,6 @@ package com.taotao.cloud.common.constant;
 
 /**
  * maven 项目常量
- *
- * @author bbhou
- * @version 0.0.1
  */
 public final class MavenConst {
 

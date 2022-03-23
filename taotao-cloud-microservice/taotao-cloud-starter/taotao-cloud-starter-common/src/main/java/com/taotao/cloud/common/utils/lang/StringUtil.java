@@ -588,7 +588,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param object 对象
 	 * @return 结果
-	 * @since 0.1.18
 	 */
 	//public static String objectToString(final Object object) {
 	//	return objectToString(object, null);
@@ -600,7 +599,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param object       对象
 	 * @param defaultValue 默认值，原始对象为 null 时返回。
 	 * @return 结果
-	 * @since 0.1.18
 	 */
 	//public static String objectToString(final Object object,
 	//	final String defaultValue) {
@@ -617,7 +615,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param others 其他参数
 	 * @return 是否都为空
 	 * @see #isNull(Object) 增强版本
-	 * @since 0.1.29
 	 */
 	public static boolean isNull(final Object object, final Object... others) {
 		if (isNull(object)) {
@@ -641,7 +638,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param left  元素1
 	 * @param right 元素2
 	 * @return 是否相等或者都为 Null
-	 * @since 0.1.29
 	 */
 	public static boolean isEqualsOrNull(final Object left, final Object right) {
 		if (isNull(left, right)) {
@@ -660,7 +656,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param handler 转换方式
 	 * @param <R>     R 泛型
 	 * @return 结果列表
-	 * @since 0.1.25
 	 */
 	@SuppressWarnings("unchecked")
 	public static <R> List<R> toList(final Object object, IHandler<Object, R> handler) {
@@ -690,7 +685,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param object 实例对象
 	 * @return 对象 class 信息
-	 * @since 0.1.41
 	 */
 	public static Class getClass(final Object object) {
 		if (isNull(object)) {
@@ -703,7 +697,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * empty 转换为 null
 	 *
 	 * @param object 对象
-	 * @since 0.1.123
 	 */
 	public static void emptyToNull(Object object) {
 		if (null == object) {
@@ -724,7 +717,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param source 源头
 	 * @param target 目标
-	 * @since 0.1.147
 	 */
 	public static void copyProperties(Object source, Object target) {
 		if (source == null || target == null) {
@@ -757,7 +749,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param valueOne 第一个
 	 * @param valueTwo 第二个
 	 * @return 是否
-	 * @since 0.1.147
 	 */
 	public static boolean isSameValue(Object valueOne, Object valueTwo) {
 		if (valueOne == null && valueTwo == null) {
@@ -773,22 +764,16 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 
 	/**
 	 * 大写的字母
-	 *
-	 * @since 0.1.66
 	 */
 	public static final String LETTERS_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWSXYZ";
 
 	/**
 	 * 小写的字母
-	 *
-	 * @since 0.1.66
 	 */
 	public static final String LETTERS_LOWER = "abcdefghijklmnopqrstuvwsxyz";
 
 	/**
 	 * 空白信息的表达式
-	 *
-	 * @since 0.1.98
 	 */
 	private static final Pattern BLANK_PATTERN = Pattern.compile("\\s*|\t|\r|\n");
 
@@ -802,8 +787,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 
 	/**
 	 * 空 json
-	 *
-	 * @since 0.1.80
 	 */
 	public static final String EMPTY_JSON = "{}";
 
@@ -816,8 +799,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * 新行
 	 * <p>
 	 * System.lineSeparator() 实际的文本效果是2行
-	 *
-	 * @since 0.1.129
 	 */
 	public static final String NEW_LINE = "";
 
@@ -826,7 +807,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param line 内容
 	 * @return 是否
-	 * @since 0.1.129
 	 */
 	public static boolean isNotReturnLine(String line) {
 		return !isReturnLine(line);
@@ -837,7 +817,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param line 内容
 	 * @return 是否
-	 * @since 0.1.129
 	 */
 	public static boolean isReturnLine(String line) {
 		if (StringUtil.isEmpty(line)) {
@@ -941,7 +920,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 结果
-	 * @since 0.1.68
 	 */
 	public static boolean isLetter(final String string) {
 		return isCharsCondition(string, new ICondition<Character>() {
@@ -958,7 +936,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 是否为数字
-	 * @since 0.1.68
 	 */
 	public static boolean isDigit(final String string) {
 		return isCharsCondition(string, new ICondition<Character>() {
@@ -974,7 +951,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 是否数字或者字母
-	 * @since 0.1.68
 	 */
 	public static boolean isDigitOrLetter(final String string) {
 		return isCharsCondition(string, new ICondition<Character>() {
@@ -991,7 +967,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string    原始字符串
 	 * @param condition 条件
 	 * @return 是否满足
-	 * @since 0.1.68
 	 */
 	private static boolean isCharsCondition(final String string,
 		final ICondition<Character> condition) {
@@ -1023,7 +998,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 原始字符串
 	 * @return 是否
-	 * @since 0.1.71
 	 */
 	public static boolean isEmptyTrim(final String string) {
 		if (isEmpty(string)) {
@@ -1039,7 +1013,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 原始字符串
 	 * @return 是否
-	 * @since 0.1.102
 	 */
 	public static boolean isNotEmptyTrim(final String string) {
 		return !isEmptyTrim(string);
@@ -1050,7 +1023,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param json json 信息
 	 * @return 是否
-	 * @since 0.1.80
 	 */
 	public static boolean isEmptyJson(final String json) {
 		if (isEmptyTrim(json)) {
@@ -1123,7 +1095,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 原始字符串
 	 * @return 过滤后的内容
-	 * @since 0.1.68
 	 */
 	public static String trimAnyBlank(final String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -1140,7 +1111,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string      原始字符串
 	 * @param replacement 待替换的文本
 	 * @return 结果
-	 * @since 0.1.98
 	 */
 	public static String replaceAnyBlank(final String string,
 		final String replacement) {
@@ -1160,7 +1130,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 原始字符串
 	 * @return 结果
-	 * @since 0.1.98
 	 */
 	public static String replaceAnyBlank(final String string) {
 		return replaceAnyBlank(string, StringUtil.EMPTY);
@@ -1171,7 +1140,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 原始字符串
 	 * @return 过滤后的内容
-	 * @since 0.1.68
 	 */
 	public static String trimAnyPunctionAndSymbol(final String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -1278,7 +1246,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param array object array
 	 * @return join string
-	 * @since 0.1.46
 	 */
 	public static String join(Object... array) {
 		return join(array, PunctuationConst.COMMA);
@@ -1291,7 +1258,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param separator 分隔符
 	 * @return join string
 	 * @see #join(Object[], String, int, int) 核心实现
-	 * @since 0.1.14
 	 */
 	//public static String join(Object[] array, String separator) {
 	//	final int endIndex = ArrayUtil.getEndIndex(-1, array);
@@ -1304,7 +1270,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param splitter 拼接符
 	 * @param objects  结果
 	 * @return 结果
-	 * @since 0.1.153
 	 */
 	public static String join(String splitter, Object... objects) {
 		return join(objects, splitter);
@@ -1349,7 +1314,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	}
 
 	/**
-	 * 字符串拼接 (1) v0.1.14 将其范围扩展到对象列表 注意：如果有 null 属性，会导致直接报错。此处不再处理。
+	 * 字符串拼接 将其范围扩展到对象列表 注意：如果有 null 属性，会导致直接报错。此处不再处理。
 	 *
 	 * @param collection 集合列表
 	 * @param splitter   分隔符
@@ -1357,7 +1322,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param endIndex   结束下标
 	 * @param <E>        泛型
 	 * @return 结果
-	 * @since 0.1.14
 	 */
 	public static <E> String join(final Collection<E> collection, final String splitter,
 		final int startIndex, final int endIndex) {
@@ -1381,13 +1345,12 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	}
 
 	/**
-	 * 字符串拼接 (1) v0.1.14 将其范围扩展到对象列表 注意：如果有 null 属性，会导致直接报错。此处不再处理。
+	 * 字符串拼接 将其范围扩展到对象列表 注意：如果有 null 属性，会导致直接报错。此处不再处理。
 	 *
 	 * @param collection 集合信息
 	 * @param splitter   分隔符
 	 * @param <E>        泛型
 	 * @return 结果
-	 * @since 0.1.14
 	 */
 	//public static <E> String join(final Collection<E> collection, final String splitter) {
 	//	final int endIndex = CollectionUtil.getEndIndex(-1, collection);
@@ -1400,7 +1363,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param collection 集合信息
 	 * @param <E>        泛型
 	 * @return 结果
-	 * @since 0.1.46
 	 */
 	//public static <E> String join(final Collection<E> collection) {
 	//	return join(collection, PunctuationConst.COMMA);
@@ -1486,7 +1448,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param middle       中间隐藏信息
 	 * @param prefixLength 前边信息长度
 	 * @return 构建后的新字符串
-	 * @since 0.0.8
 	 */
 	public static String buildString(final Object original,
 		final String middle,
@@ -1520,7 +1481,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param original 原始字符串
 	 * @return 过滤后的字符串
-	 * @since 0.1.0
 	 */
 	public static String trim(final String original) {
 		if (StringUtil.isEmpty(original)) {
@@ -1542,7 +1502,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param str        要转换的字符串
 	 * @param defaultStr 默认字符串
 	 * @return 字符串本身或指定的默认字符串
-	 * @since 0.1.0
 	 */
 	public static String nullToDefault(CharSequence str, String defaultStr) {
 		return (str == null) ? defaultStr : str.toString();
@@ -1556,7 +1515,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param len        填充长度
 	 * @param isPre      是否填充在前
 	 * @return 填充后的字符串
-	 * @since 0.1.0
 	 */
 	public static String fill(String str, char filledChar, int len, boolean isPre) {
 		final int strLen = str.length();
@@ -1574,7 +1532,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param object          对象
 	 * @param defaultWhenNull 对象为空时的默认值
 	 * @return 结果
-	 * @since 0.1.5
 	 */
 	public static String objectToString(final Object object,
 		final String defaultWhenNull) {
@@ -1594,7 +1551,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param object 对象
 	 * @return 结果
-	 * @since 0.1.5
 	 */
 	public static String objectToString(final Object object) {
 		return objectToString(object, null);
@@ -1607,7 +1563,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param times  重复次数
 	 * @return 结果
 	 * @see #repeat(String, int) 重复
-	 * @since 0.1.9
 	 */
 	@Deprecated
 	public static String times(final String single,
@@ -1631,7 +1586,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 大写的结果
-	 * @since 0.1.11
 	 */
 	public static String capitalFirst(final String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -1658,7 +1612,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param splitUnit 分隔单元
 	 * @param times     次数
 	 * @return 结果
-	 * @since 0.1.16
 	 */
 	public static List<String> splitStrictly(final String string,
 		final char splitUnit,
@@ -1732,7 +1685,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param indexCollection 下标列表
 	 * @param ignoreLength    每次忽略跳过的长度。用于跳过 split 字符。
 	 * @return 结果列表
-	 * @since 0.1.16
 	 */
 	public static List<String> subStringList(final String string,
 		final Collection<Integer> indexCollection,
@@ -1775,7 +1727,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string 原始字符串
 	 * @param split  分隔字符串
 	 * @return 下标列表
-	 * @since 0.1.16
 	 */
 	public static List<Integer> getIndexList(final String string,
 		final String split) {
@@ -1805,7 +1756,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param symbol             分隔符
 	 * @param ignoreDoubleQuotes 是否忽略双引号中的信息
 	 * @return 结果列表
-	 * @since 0.1.27
 	 */
 	public static List<Integer> getIndexList(final String string,
 		final char symbol,
@@ -1852,7 +1802,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param preChar     上一个字符
 	 * @param currentChar 当前字符
 	 * @return 结果
-	 * @since 0.1.27
 	 */
 	@Deprecated
 	private static char getPreChar(final char preChar, final char currentChar) {
@@ -1870,7 +1819,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string    原始字符串
 	 * @param indexList 结果列表
 	 * @return 结果
-	 * @since 0.1.27
 	 */
 	public static List<String> splitByIndexes(final String string, final List<Integer> indexList) {
 		if (StringUtil.isEmpty(string)) {
@@ -1903,7 +1851,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 字节数组
-	 * @since 0.1.35
 	 */
 	public static byte[] stringToBytes(final String string) {
 		if (ObjectUtil.isNull(string)) {
@@ -1918,7 +1865,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param bytes 字节数组
 	 * @return 字符串
-	 * @since 0.1.35
 	 */
 	public static String bytesToString(final byte[] bytes) {
 		if (ArrayPrimitiveUtil.isEmpty(bytes)) {
@@ -1934,7 +1880,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string   字符串
 	 * @param splitter 拆分符号
 	 * @return 字符串数组
-	 * @since 0.1.46
 	 */
 	public static String[] splitToStringArray(final String string, final String splitter) {
 		if (StringUtil.isEmpty(string)) {
@@ -1949,7 +1894,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 字符串数组
-	 * @since 0.1.46
 	 */
 	public static String[] splitToStringArray(final String string) {
 		return splitToStringArray(string, PunctuationConst.COMMA);
@@ -1961,7 +1905,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final byte[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -1984,7 +1927,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final char[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2008,7 +1950,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final short[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2031,7 +1972,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final long[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2054,7 +1994,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final float[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2077,7 +2016,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final double[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2100,7 +2038,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final boolean[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2123,7 +2060,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param array     数组
 	 * @param splitters 分隔符
 	 * @return 拼接结果
-	 * @since 0.1.49
 	 */
 	public static String join(final int[] array, final String... splitters) {
 		if (ArrayPrimitiveUtil.isEmpty(array)) {
@@ -2145,7 +2081,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param splitters 分隔符
 	 * @return 字符串
-	 * @since 0.1.49
 	 */
 	private static String getSplitter(final String... splitters) {
 		if (ArrayUtil.isEmpty(splitters)) {
@@ -2161,7 +2096,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string   字符串
 	 * @param splitter 分隔符号
 	 * @return 字符串列表
-	 * @since 0.1.49
 	 */
 	public static List<String> splitToList(final String string,
 		final String splitter) {
@@ -2180,7 +2114,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 字符串列表
-	 * @since 0.1.49
 	 */
 	public static List<String> splitToList(final String string) {
 		return splitToList(string, PunctuationConst.COMMA);
@@ -2192,7 +2125,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 结果
-	 * @since 0.1.66
 	 */
 	public static Character[] toCharacterArray(final String string) {
 		final char[] chars = string.toCharArray();
@@ -2210,7 +2142,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 结果
-	 * @since 0.1.66
 	 */
 	public static List<Character> toCharacterList(final String string) {
 		final char[] chars = string.toCharArray();
@@ -2228,7 +2159,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 字符串列表
-	 * @since 0.1.74
 	 */
 	public static List<String> toCharStringList(final String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -2249,7 +2179,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 转换之后的字符串
-	 * @since 0.1.68
 	 */
 	public static String toHalfWidth(final String string) {
 		return characterHandler(string, new IHandler<Character, Character>() {
@@ -2265,7 +2194,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 转换之后的字符串
-	 * @since 0.1.68
 	 */
 	public static String toFullWidth(final String string) {
 		return characterHandler(string, new IHandler<Character, Character>() {
@@ -2282,7 +2210,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param string  字符串
 	 * @param handler 处理类
 	 * @return 结果
-	 * @since 0.1.68
 	 */
 	private static String characterHandler(final String string,
 		final IHandler<Character, Character> handler) {
@@ -2306,7 +2233,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param string 字符串
 	 * @return 结果
-	 * @since 0.1.79
 	 */
 	public static String trimNotChinese(final String string) {
 		if (StringUtil.isEmptyTrim(string)) {
@@ -2330,7 +2256,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param object 对象
 	 * @return 结果
 	 * @see String#valueOf(Object) 默认实现会把 null 转换为 "null"
-	 * @since 0.1.102
 	 */
 	public static String valueOf(final Object object) {
 		if (ObjectUtil.isNull(object)) {
@@ -2347,7 +2272,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param targetLength 目标长度
 	 * @param unit         补的元素
 	 * @return 结果
-	 * @since 0.1.104
 	 */
 	public static String leftPadding(final String original,
 		final int targetLength,
@@ -2376,7 +2300,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param original     原始字符串
 	 * @param targetLength 目标长度
 	 * @return 结果
-	 * @since 0.1.104
 	 */
 	public static String leftPadding(final String original,
 		final int targetLength) {
@@ -2388,7 +2311,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.122
 	 */
 	public static Character getFirstChar(final String text) {
 		if (StringUtil.isEmpty(text)) {
@@ -2403,7 +2325,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.123
 	 */
 	public static String emptyToNull(String text) {
 		if (StringUtil.isEmpty(text)) {
@@ -2417,7 +2338,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Boolean toBool(final String text) {
 		return "YES".equalsIgnoreCase(text)
@@ -2430,7 +2350,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Character toChar(final String text) {
 		if (isEmpty(text)) {
@@ -2445,7 +2364,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Byte toByte(final String text) {
 		if (isEmpty(text)) {
@@ -2460,7 +2378,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Short toShort(final String text) {
 		if (isEmpty(text)) {
@@ -2475,7 +2392,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Integer toInt(final String text) {
 		if (isEmpty(text)) {
@@ -2490,7 +2406,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Long toLong(final String text) {
 		if (isEmpty(text)) {
@@ -2505,7 +2420,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Float toFloat(final String text) {
 		if (isEmpty(text)) {
@@ -2520,7 +2434,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Double toDouble(final String text) {
 		if (isEmpty(text)) {
@@ -2535,7 +2448,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static BigInteger toBigInteger(final String text) {
 		if (isEmpty(text)) {
@@ -2550,7 +2462,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static BigDecimal toBigDecimal(final String text) {
 		if (isEmpty(text)) {
@@ -2566,7 +2477,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param text       文本
 	 * @param dateFormat 格式化
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Date toDate(final String text, final String dateFormat) {
 		if (isEmpty(text)) {
@@ -2581,7 +2491,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static Date toDate(final String text) {
 		return toDate(text, DateUtil.PURE_DATE_FORMAT);
@@ -2593,7 +2502,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param date   日期
 	 * @param format 格式化
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static String toString(Date date, String format) {
 		return DateUtil.getDateFormat(date, format);
@@ -2604,7 +2512,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param date 日期
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static String toString(Date date) {
 		return toString(date, DateUtil.PURE_DATE_FORMAT);
@@ -2615,7 +2522,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param object 对象
 	 * @return 结果
-	 * @since 0.1.124
 	 */
 	public static String toString(Object object) {
 		if (null == object) {
@@ -2631,7 +2537,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param bytes   字节
 	 * @param charset 编码
 	 * @return 结果
-	 * @since 0.1.130
 	 */
 	public static String toString(byte[] bytes, String charset) {
 		try {
@@ -2646,7 +2551,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param bytes 字节
 	 * @return 结果
-	 * @since 0.1.130
 	 */
 	public static String toString(byte[] bytes) {
 		return toString(bytes, CommonConstant.UTF8);
@@ -2658,7 +2562,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param text    文本
 	 * @param charset 编码
 	 * @return 结果
-	 * @since 0.1.130
 	 */
 	public static byte[] getBytes(String text, String charset) {
 		try {
@@ -2673,7 +2576,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.130
 	 */
 	public static byte[] getBytes(String text) {
 		return getBytes(text, CommonConstant.UTF8);
@@ -2684,7 +2586,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.132
 	 */
 	public static boolean isEnglish(String text) {
 		if (StringUtil.isEmpty(text)) {
@@ -2706,7 +2607,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param text 文本
 	 * @return 结果
-	 * @since 0.1.132
 	 */
 	public static boolean isChinese(String text) {
 		if (StringUtil.isEmpty(text)) {
@@ -2728,7 +2628,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param packageName 包信息
 	 * @return 結果
-	 * @since 0.1.141
 	 */
 	public static String packageToPath(String packageName) {
 		if (StringUtil.isEmpty(packageName)) {
@@ -2745,7 +2644,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param startIndex 开始位置
 	 * @param length     长度
 	 * @return 结果
-	 * @since 0.1.142
 	 */
 	public static String subString(String text, int startIndex, int length) {
 		if (StringUtil.isEmpty(text)) {
@@ -2779,7 +2677,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param content 内容
 	 * @return 结果
-	 * @since 0.1.143
 	 */
 	public static List<String> contentToLines(String content) {
 		if (content == null) {
@@ -2796,7 +2693,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * @param lines 行
 	 * @return 结果
-	 * @since 0.1.143
 	 */
 	public static String linesToContent(List<String> lines) {
 		if (CollectionUtil.isEmpty(lines)) {
@@ -2821,7 +2717,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param text      文本
 	 * @param limitSize 限制长度
 	 * @return 结果列表
-	 * @since 0.1.149
 	 */
 	public static List<String> splitByLength(String text, int limitSize) {
 		if (StringUtil.isEmpty(text)) {
@@ -3728,7 +3623,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param padChar the character to pad with
 	 * @return left padded String or original String if no padding is necessary, {@code null} if
 	 * null String input
-	 * @since 2.0
 	 */
 	@Nullable
 	public static String leftPad(@Nullable final String str, final int size, final char padChar) {

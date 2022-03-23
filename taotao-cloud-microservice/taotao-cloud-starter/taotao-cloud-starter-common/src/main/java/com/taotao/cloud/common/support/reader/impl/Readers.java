@@ -14,7 +14,6 @@ public final class Readers {
      * 获取文本字符串
      * @param string 文本字符串
      * @return 实现
-     * @since 0.1.94
      */
     public static IReader string(final String string) {
         return new StringReader(string);
@@ -25,7 +24,6 @@ public final class Readers {
      * @param filePath 文件路径
      * @param charset 文件编码
      * @return 实现
-     * @since 0.1.94
      */
     public static IReader filePath(final String filePath,
                                    final String charset) {
@@ -37,7 +35,6 @@ public final class Readers {
      * @param file 文件
      * @param charset 文件编码
      * @return 实现
-     * @since 0.1.95
      */
     public static IReader file(final File file,
                                    final String charset) {

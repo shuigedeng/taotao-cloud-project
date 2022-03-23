@@ -17,7 +17,6 @@ public final class OsUtil {
     /**
      * 查看指定的端口号是否空闲，若空闲则返回否则返回一个随机的空闲端口号
      * @param defaultPort 默认端口
-     * @since 0.1.125
      * @return 端口
      * @throws IOException 异常
      */
@@ -31,7 +30,6 @@ public final class OsUtil {
 
     /**
      * 获取空闲端口号
-     * @since 0.1.125
      * @return 端口
      * @throws IOException 异常
      */
@@ -44,7 +42,6 @@ public final class OsUtil {
     /**
      * 检查端口号是否被占用
      * @param port 端口号
-     * @since 0.1.125
      * @return 是否
      */
     public static boolean isBusyPort(int port) {
@@ -59,7 +56,6 @@ public final class OsUtil {
     /**
      * 是否为 windows
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean isWindows() {
         return OS.contains("win");
@@ -68,7 +64,6 @@ public final class OsUtil {
     /**
      * 是否为 windows xp
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean isWindowsXP() {
         return OS.contains("win") && OS.contains("xp");
@@ -77,7 +72,6 @@ public final class OsUtil {
     /**
      * 是否为 mac
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean isMac() {
         return OS.contains("mac");
@@ -86,7 +80,6 @@ public final class OsUtil {
     /**
      * 是否为 unix
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean isUnix() {
         return OS.contains("nix") || OS.contains("nux") || OS.contains("aix");
@@ -95,7 +88,6 @@ public final class OsUtil {
     /**
      * 是否为 sunos
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean isSolaris() {
         return (OS.contains("sunos"));
@@ -104,7 +96,6 @@ public final class OsUtil {
     /**
      * 是否为 64 位
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean is64() {
         return "64".equals(ARCH);
@@ -113,7 +104,6 @@ public final class OsUtil {
     /**
      * 是否为 32 位
      * @return 是否
-     * @since 0.1.125
      */
     public static boolean is32() {
         return "32".equals(ARCH);

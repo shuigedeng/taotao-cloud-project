@@ -9,6 +9,12 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 生成器配置表
@@ -17,6 +23,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-02-15 09:25:26
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = GenConfig.TABLE_NAME)
 @TableName(GenConfig.TABLE_NAME)
@@ -79,75 +90,4 @@ public class GenConfig extends BaseSuperEntity<GenConfig, Long> {
 	@Column(name = "cover", nullable = false, columnDefinition = "boolean default false comment '是否覆盖'")
 	private Boolean cover;
 
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
-	public String getApiAlias() {
-		return apiAlias;
-	}
-
-	public void setApiAlias(String apiAlias) {
-		this.apiAlias = apiAlias;
-	}
-
-	public String getPack() {
-		return pack;
-	}
-
-	public void setPack(String pack) {
-		this.pack = pack;
-	}
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public String getApiPath() {
-		return apiPath;
-	}
-
-	public void setApiPath(String apiPath) {
-		this.apiPath = apiPath;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-
-	public Boolean getCover() {
-		return cover;
-	}
-
-	public void setCover(Boolean cover) {
-		this.cover = cover;
-	}
 }

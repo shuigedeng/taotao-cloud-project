@@ -34,7 +34,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * （1）注意多音字的问题
      * （2）默认只返回第一个
      * （3）为了提升读取的性能，在初始化的时候，直接设计好。
-     * @since 0.0.1
      */
     private static volatile Map<String, List<String>> charMap;
 
@@ -42,7 +41,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * 词组 map
      *
      * DCL 单例，惰性加载。
-     * @since 0.0.1
      */
     private static volatile Map<String, String> phraseMap;
 
@@ -97,7 +95,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * 获取单个字符的 map
      *
      * @return map
-     * @since 0.0.1
      */
     private Map<String, List<String>> getCharMap() {
         if(ObjectUtil.isNotNull(charMap)) {
@@ -129,7 +126,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * 获取词组的拼音 Map
      * （1）词组的拼音是确定的。
      * @return map
-     * @since 0.0.1
      */
     private Map<String, String> getPhraseMap() {
         if(ObjectUtil.isNotNull(phraseMap)) {
@@ -190,7 +186,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * 获取对应的声调信息
      * @param tone 拼音信息
      * @return 声调信息
-     * @since 0.0.3
      */
     protected CharToneInfo getCharToneInfo(final String tone) {
         CharToneInfo charToneInfo = new CharToneInfo();

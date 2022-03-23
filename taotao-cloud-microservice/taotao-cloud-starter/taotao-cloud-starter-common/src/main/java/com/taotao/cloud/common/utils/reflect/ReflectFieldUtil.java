@@ -19,9 +19,6 @@ import java.util.Map;
 
 /**
  * 反射字段工具类
- *
- * @since 0.0.2
- * @author bbhou
  */
 public final class ReflectFieldUtil {
 
@@ -99,7 +96,6 @@ public final class ReflectFieldUtil {
      * @param field 字段
      * @param paramIndex 泛型参数的下标
      * @return 泛型信息
-     * @since 0.1.40
      */
     public static Class getGenericParamType(final Field field, final int paramIndex) {
         if(ObjectUtil.isNull(field)) {
@@ -146,7 +142,6 @@ public final class ReflectFieldUtil {
      * @param field 集合类型的字段
      * @param typeIndex 类型的下标
      * @return 对应的类型
-     * @since 0.1.14
      */
     public static Class getComponentType(final Field field,
                                          final int typeIndex) {
@@ -174,7 +169,6 @@ public final class ReflectFieldUtil {
      * 获取字段的类型
      * @param field 集合类型的字段
      * @return 对应的类型
-     * @since 0.1.14
      */
     public static Class getComponentType(final Field field) {
         return getComponentType(field, 0);
@@ -185,7 +179,6 @@ public final class ReflectFieldUtil {
      * @param field 字段
      * @param instance 实例对象
      * @param fieldValue 值
-     * @since 0.1.18
      * @see #setValue(Object, String, Object) 设置对象
      */
     public static void setValue(final Field field, final Object instance, final Object fieldValue) {
@@ -202,7 +195,6 @@ public final class ReflectFieldUtil {
      * @param instance 实例
      * @param fieldName 字段名称
      * @param fieldValue 字段值
-     * @since 0.1.53
      */
     public static void setValue(final Object instance, final String fieldName, final Object fieldValue) {
         ArgUtil.notNull(instance, "instance");
@@ -223,7 +215,6 @@ public final class ReflectFieldUtil {
      * @param field 字段
      * @param instance 实例
      * @return 值
-     * @since 0.1.31
      */
     public static Object getValue(final Field field, final Object instance) {
         try {
@@ -239,7 +230,6 @@ public final class ReflectFieldUtil {
      * @param fieldName 字段名称
      * @param instance 实例
      * @return 值
-     * @since 0.1.90
      */
     public static Object getValue(final String fieldName, final Object instance) {
         Field field = getField(instance, fieldName);
@@ -251,7 +241,6 @@ public final class ReflectFieldUtil {
      * @param object 对象实例
      * @param fieldName 字段名称
      * @return 字段信息
-     * @since 0.1.90
      */
     public static Field getField(final Object object, final String fieldName) {
         ArgUtil.notNull(object, "object");
@@ -265,7 +254,6 @@ public final class ReflectFieldUtil {
      * @param clazz 类名称
      * @param fieldName 字段名称
      * @return 字段信息
-     * @since 0.1.90
      */
     public static Field getField(final Class clazz, final String fieldName) {
         ArgUtil.notNull(clazz, "clazz");

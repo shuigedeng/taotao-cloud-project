@@ -4,7 +4,7 @@
  * Date: 2020/6/16 14:43
  * Author: shuigedeng
  */
-package com.taotao.cloud.dubbo.biz.job;
+package com.taotao.cloud.payment.biz.job;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;

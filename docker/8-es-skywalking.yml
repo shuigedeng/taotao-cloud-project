@@ -1,18 +1,17 @@
 version: '3'
 services:
   es1:
-    image: elasticsearch:7.16.2
+    image: elasticsearch:8.1.0
     container_name: es1
     environment:
       - node.name=es1
       - cluster.name=taotao-cloud-elasticsearch-cluster
       - discovery.seed_hosts=es2,es3
-      - cluster.initial_master_nodes=es1,es2,es3
+      - cluster.initial_master_nodes=es1
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - bootstrap.memory_lock=true
       - TZ="Asia/Shanghai"
-      - node.master=true
-      - node.data=true
+      - xpack.security.enabled=false
       - http.cors.enabled=true
       - http.cors.allow-origin=*
     ulimits:
@@ -28,18 +27,17 @@ services:
       kafka-cluster-network:
         ipv4_address: 172.11.0.196
   es2:
-    image: elasticsearch:7.16.2
+    image: elasticsearch:8.1.0
     container_name: es2
     environment:
       - node.name=es2
       - cluster.name=taotao-cloud-elasticsearch-cluster
       - discovery.seed_hosts=es1,es3
-      - cluster.initial_master_nodes=es1,es2,es3
+      - cluster.initial_master_nodes=es1
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - bootstrap.memory_lock=true
       - TZ="Asia/Shanghai"
-      - node.master=true
-      - node.data=true
+      - xpack.security.enabled=false
       - http.cors.enabled=true
       - http.cors.allow-origin=*
     ulimits:
@@ -56,18 +54,17 @@ services:
       kafka-cluster-network:
         ipv4_address: 172.11.0.197
   es3:
-    image: elasticsearch:7.16.2
+    image: elasticsearch:8.1.0
     container_name: es3
     environment:
       - node.name=es3
       - cluster.name=taotao-cloud-elasticsearch-cluster
       - discovery.seed_hosts=es1,es2
-      - cluster.initial_master_nodes=es1,es2,es3
+      - cluster.initial_master_nodes=es1
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - bootstrap.memory_lock=true
       - TZ="Asia/Shanghai"
-      - node.master=true
-      - node.data=true
+      - xpack.security.enabled=false
       - http.cors.enabled=true
       - http.cors.allow-origin=*
     ulimits:
