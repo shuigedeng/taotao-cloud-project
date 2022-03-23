@@ -107,7 +107,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		/**
 		 * 初始化okHttpClient，并且允许https访问
 		 *
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:26:25
 		 */
 		private OkHttpService(OkHttpProperties okHttpProperties) {
@@ -135,7 +134,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * 用于异步请求时，控制访问线程数，返回结果
 		 *
 		 * @return {@link java.util.concurrent.Semaphore }
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:26:34
 		 */
 		private static Semaphore getSemaphoreInstance() {
@@ -151,7 +149,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		/**
 		 * 创建OkHttpService
 		 *
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:26:43
 		 */
 		public static OkHttpService builder(OkHttpProperties okHttpProperties) {
@@ -162,7 +159,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * 获取url
 		 *
 		 * @param url url
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:27:06
 		 */
 		public OkHttpService url(String url) {
@@ -177,7 +173,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * @param key   参数名
 		 * @param value 参数值
 		 * @return {@link OkHttpService }
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:27:17
 		 */
 		public OkHttpService addParam(String key, String value) {
@@ -193,7 +188,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 *
 		 * @param key   参数名
 		 * @param value 参数值
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:28:19
 		 */
 		public OkHttpService addHeader(String key, String value) {
@@ -211,7 +205,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * "参数值") .addParam("参数名", "参数值") // 也可以添加多个 .addHeader("Content-Type", "application/json;
 		 * charset=utf-8") .get() // 可选择是同步请求还是异步请求 //.async(); .sync();
 		 *
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:28:38
 		 */
 		public OkHttpService get() {
@@ -251,7 +244,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * </p>
 		 *
 		 * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:02
 		 */
 		public OkHttpService post(boolean isJsonPost) {
@@ -279,7 +271,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * 同步请求
 		 *
 		 * @return {@link java.lang.String }
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:32
 		 */
 		public String sync() {
@@ -298,7 +289,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * 异步请求，有返回值
 		 *
 		 * @return {@link java.lang.String }
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:37
 		 */
 		public String async() {
@@ -330,7 +320,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * 异步请求，带有接口回调
 		 *
 		 * @param callBack callBack
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:42
 		 */
 		public void async(ICallBack callBack) {
@@ -354,7 +343,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * 为request添加请求头
 		 *
 		 * @param request request
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:48
 		 */
 		private void setHeader(Request.Builder request) {
@@ -375,7 +363,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 *
 		 * @param trustAllCerts trustAllCerts
 		 * @return {@link javax.net.ssl.SSLSocketFactory }
-		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:54
 		 */
 		private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
@@ -394,7 +381,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * buildTrustManagers
 		 *
 		 * @return javax.net.ssl.TrustManager[]
-		 * @author shuigedeng
 		 * @since 2021-09-02 17:10:34
 		 */
 		private static TrustManager[] buildTrustManagers() {
@@ -430,7 +416,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 			 *
 			 * @param call call
 			 * @param data data
-			 * @author shuigedeng
 			 * @since 2021-12-01 15:21:47
 			 */
 			void onSuccessful(Call call, String data);
@@ -440,7 +425,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 			 *
 			 * @param call     call
 			 * @param errorMsg errorMsg
-			 * @author shuigedeng
 			 * @since 2021-12-01 15:21:52
 			 */
 			void onFailure(Call call, String errorMsg);

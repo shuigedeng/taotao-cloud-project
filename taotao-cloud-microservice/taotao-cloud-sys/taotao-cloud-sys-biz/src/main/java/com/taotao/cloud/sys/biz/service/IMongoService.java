@@ -25,8 +25,8 @@ import java.util.List;
  * IMongoService
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2022/03/02 17:04
+ * @version 2022.03
+ * @since 2022-03-23 08:59:28
  */
 public interface IMongoService {
 

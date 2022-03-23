@@ -51,7 +51,6 @@ public class JacksonModule extends SimpleModule {
 	/**
 	 * JacksonModule
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:21:04
 	 */
 	public JacksonModule() {

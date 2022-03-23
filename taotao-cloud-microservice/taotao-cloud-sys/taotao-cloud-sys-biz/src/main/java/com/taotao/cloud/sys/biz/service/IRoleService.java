@@ -35,7 +35,6 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 *
 	 * @param userIds userIds
 	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysRole&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:43:25
 	 */
 	List<RoleBO> findRoleByUserIds(Set<Long> userIds);
@@ -44,7 +43,6 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 * 查询所有角色列表
 	 *
 	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysRole&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:45:23
 	 */
 	List<RoleBO> findAllRoles();
@@ -55,7 +53,6 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 *
 	 * @param codes codes
 	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysRole&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:45:41
 	 */
 	List<RoleBO> findRoleByCodes(Set<String> codes);
@@ -65,7 +62,6 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 *
 	 * @param code code
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:43:33
 	 */
 	Boolean existRoleByCode(String code);
@@ -77,7 +73,6 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 * @param roleId      roleId
 	 * @param menuIds resourceIds
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:45:35
 	 */
 	Boolean saveRoleMenus(Long roleId, Set<Long> menuIds);

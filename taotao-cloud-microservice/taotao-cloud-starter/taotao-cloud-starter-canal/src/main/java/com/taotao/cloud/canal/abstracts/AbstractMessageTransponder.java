@@ -157,7 +157,6 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 	 * 处理监听的事件
 	 *
 	 * @param message message
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:46:45
 	 */
 	protected abstract void distributeEvent(Message message);
@@ -165,7 +164,6 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 	/**
 	 * 停止 canal 客户端
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:46:52
 	 */
 	void stop() {

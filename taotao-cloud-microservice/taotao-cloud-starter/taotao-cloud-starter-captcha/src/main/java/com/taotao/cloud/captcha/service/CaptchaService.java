@@ -31,7 +31,6 @@ public interface CaptchaService {
 	 * 配置初始化
 	 *
 	 * @param config config
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:00
 	 */
 	void init(Properties config);
@@ -41,7 +40,6 @@ public interface CaptchaService {
 	 *
 	 * @param captcha captcha
 	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:03
 	 */
 	Captcha get(Captcha captcha);
@@ -51,7 +49,6 @@ public interface CaptchaService {
 	 *
 	 * @param captcha captcha
 	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:09
 	 */
 	Captcha check(Captcha captcha);
@@ -61,7 +58,6 @@ public interface CaptchaService {
 	 *
 	 * @param captcha captcha
 	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:14
 	 */
 	Captcha verification(Captcha captcha);
@@ -70,7 +66,6 @@ public interface CaptchaService {
 	 * 验证码类型 通过java SPI机制，接入方可自定义实现类，实现新的验证类型
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:21
 	 */
 	String captchaType();
@@ -79,7 +74,6 @@ public interface CaptchaService {
 	 * 历史资源清除(过期的图片文件，生成的临时图片...)
 	 *
 	 * @param config config
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:33
 	 */
 	void destroy(Properties config);

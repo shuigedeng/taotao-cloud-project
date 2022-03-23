@@ -25,7 +25,7 @@ public interface IFeignMenuService {
      * @return com.taotao.cloud.core.model.Result<java.util.List < com.taotao.cloud.sys.api.vo.resource.ResourceVO>>
      * @author shuigedeng
      * @since 2020/10/21 15:24
-     * @version 1.0.0
+     * @version 2022.03
      */
     @GetMapping("/resource/info/codes")
     Result<List<MenuQueryVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);

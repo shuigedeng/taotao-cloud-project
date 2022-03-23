@@ -8,7 +8,8 @@ import java.io.Serializable;
  * 部门查询对象
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2022.03
+ * @since 2022-03-23 08:49:43
  */
 public record DeptBO(
 	Integer deptId,

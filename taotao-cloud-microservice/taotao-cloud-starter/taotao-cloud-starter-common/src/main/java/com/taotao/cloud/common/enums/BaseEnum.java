@@ -28,7 +28,6 @@ public interface BaseEnum {
 	 * 获取枚举编码
 	 *
 	 * @return {@link java.lang.Integer }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:30:35
 	 */
 	int getCode();
@@ -37,7 +36,6 @@ public interface BaseEnum {
 	 * 获取枚举描述
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:30:35
 	 */
 	String getDesc();
@@ -47,7 +45,6 @@ public interface BaseEnum {
 	 *
 	 * @param code code
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:30:48
 	 */
 	String getNameByCode(int code);

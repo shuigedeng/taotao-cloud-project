@@ -78,7 +78,6 @@ public abstract class AbstractCanalClient implements CanalClient {
 	 *
 	 * @param connector connector
 	 * @param config    config
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:44:39
 	 */
 	protected abstract void process(CanalConnector connector,
@@ -89,7 +88,6 @@ public abstract class AbstractCanalClient implements CanalClient {
 	 *
 	 * @param instanceEntry instanceEntry
 	 * @return {@link com.alibaba.otter.canal.client.CanalConnector }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:44:46
 	 */
 	private CanalConnector processInstanceEntry(
@@ -145,7 +143,6 @@ public abstract class AbstractCanalClient implements CanalClient {
 	 * 获取 canal 配置
 	 *
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:45:01
 	 */
 	protected Map<String, CanalProperties.Instance> getConfig() {
@@ -174,7 +171,6 @@ public abstract class AbstractCanalClient implements CanalClient {
 	 * 设置 canal 客户端状态
 	 *
 	 * @param running running
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:45:13
 	 */
 	private void setRunning(boolean running) {

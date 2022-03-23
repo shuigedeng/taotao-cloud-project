@@ -28,7 +28,7 @@ import java.util.List;
  * 树形菜单列表
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/21 11:09
  */
 @Schema(name = "MenuTreeVO", description = "树形菜单列表")

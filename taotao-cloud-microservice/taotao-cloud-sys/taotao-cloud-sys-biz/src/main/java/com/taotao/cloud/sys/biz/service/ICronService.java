@@ -22,11 +22,17 @@ import javax.validation.constraints.NotNull;
  * ICronService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/03/02 15:43
  */
 public interface ICronService {
 
-
+	/**
+	 * cron执行表达式
+	 *
+	 * @param expression cron表达式
+	 * @return 下一次执行时间列表
+	 * @since 2022-03-23 08:52:13
+	 */
 	List<String> cronNextExecutionTime(@NotNull String expression);
 }

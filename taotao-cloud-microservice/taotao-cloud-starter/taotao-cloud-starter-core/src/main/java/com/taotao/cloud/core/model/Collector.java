@@ -70,7 +70,6 @@ public class Collector {
 	 * @param key  key
 	 * @param type type
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:00
 	 */
 	protected <T> T get(String key, Class<T> type) {
@@ -90,7 +89,6 @@ public class Collector {
 	 * @param key  key
 	 * @param type type
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:04
 	 */
 	private Object createInstance(String key, Class<?> type) {
@@ -116,7 +114,6 @@ public class Collector {
 	 *
 	 * @param key key
 	 * @return {@link com.taotao.cloud.core.model.Collector.Sum }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:08
 	 */
 	public Sum sum(String key) {
@@ -128,7 +125,6 @@ public class Collector {
 	 *
 	 * @param key key
 	 * @return {@link com.taotao.cloud.core.model.Collector.Hook }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:13
 	 */
 	public Hook hook(String key) {
@@ -140,7 +136,6 @@ public class Collector {
 	 *
 	 * @param key key
 	 * @return {@link com.taotao.cloud.core.model.Collector.Call }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:16
 	 */
 	public Call call(String key) {
@@ -152,7 +147,6 @@ public class Collector {
 	 *
 	 * @param key key
 	 * @return {@link com.taotao.cloud.core.model.Collector.Value }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:18
 	 */
 	public Value value(String key) {
@@ -298,7 +292,6 @@ public class Collector {
 		 * @param methodName methodName
 		 * @param params     params
 		 * @return {@link java.lang.Object }
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:15
 		 */
 		public Object run(String tag, Object obj, String methodName, Object[] params) {
@@ -325,7 +318,6 @@ public class Collector {
 		 *
 		 * @param tag    tag
 		 * @param action action
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:19
 		 */
 		public void run(String tag, Callable.Action0 action) {
@@ -342,7 +334,6 @@ public class Collector {
 		 * @param func func
 		 * @param <T>  T
 		 * @return T
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:24
 		 */
 		public <T> T run(String tag, Callable.Func0<T> func) {
@@ -389,7 +380,6 @@ public class Collector {
 		 *
 		 * @param info     info
 		 * @param timeSpan timeSpan
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:38
 		 */
 		protected void insertOrUpdate(Object info, double timeSpan) {
@@ -415,7 +405,6 @@ public class Collector {
 		 *
 		 * @param info     info
 		 * @param timeSpan timeSpan
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:40
 		 */
 		protected void insertOrUpdatePerMinute(Object info, double timeSpan) {
@@ -440,7 +429,6 @@ public class Collector {
 		 * 最长耗时列表n条
 		 *
 		 * @return {@link com.taotao.cloud.core.model.Collector.SortList }
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:47
 		 */
 		public SortList getMaxTimeSpanList() {
@@ -451,7 +439,6 @@ public class Collector {
 		 * getCurrent
 		 *
 		 * @return long
-		 * @author shuigedeng
 		 * @since 2021-09-13 21:22:01
 		 */
 		public long getCurrent() {
@@ -462,7 +449,6 @@ public class Collector {
 		 * getLastErrorPerSecond
 		 *
 		 * @return long
-		 * @author shuigedeng
 		 * @since 2021-09-13 21:21:57
 		 */
 		public long getLastErrorPerSecond() {
@@ -473,7 +459,6 @@ public class Collector {
 		 * getLastSuccessPerSecond
 		 *
 		 * @return long
-		 * @author shuigedeng
 		 * @since 2021-09-13 21:21:53
 		 */
 		public long getLastSuccessPerSecond() {
@@ -484,7 +469,6 @@ public class Collector {
 		 * 最长耗时列表n条每分钟
 		 *
 		 * @return {@link com.taotao.cloud.core.model.Collector.SortList }
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:34:56
 		 */
 		public SortList getMaxTimeSpanListPerMinute() {
@@ -770,7 +754,6 @@ public class Collector {
 		 * getLast
 		 *
 		 * @return {@link com.taotao.cloud.core.model.Collector.SortInfo }
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:36:02
 		 */
 		public SortInfo getLast() {
@@ -788,7 +771,6 @@ public class Collector {
 		 * removeMore
 		 *
 		 * @param maxLength maxLength
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:36:05
 		 */
 		public void removeMore(int maxLength) {
@@ -811,7 +793,6 @@ public class Collector {
 		 * toText
 		 *
 		 * @return {@link java.lang.String }
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:36:10
 		 */
 		public String toText() {

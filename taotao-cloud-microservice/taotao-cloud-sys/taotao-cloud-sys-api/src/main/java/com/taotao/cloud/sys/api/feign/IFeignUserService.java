@@ -25,7 +25,7 @@ public interface IFeignUserService {
      * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.sys.api.vo.user.UserVO>
      * @author shuigedeng
      * @since 2020/10/21 15:06
-     * @version 1.0.0
+     * @version 2022.03
      */
     @GetMapping(value = "/user/info/username")
     Result<UserQueryVO> findUserInfoByUsername(@RequestParam(value = "username") String username);

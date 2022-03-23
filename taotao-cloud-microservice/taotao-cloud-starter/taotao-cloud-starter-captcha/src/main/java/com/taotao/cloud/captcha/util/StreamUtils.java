@@ -48,7 +48,6 @@ public class StreamUtils {
 	 *
 	 * @param in in
 	 * @return byte[]
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:25
 	 */
 	public static byte[] copyToByteArray(InputStream in) throws IOException {
@@ -67,7 +66,6 @@ public class StreamUtils {
 	 * @param in      in
 	 * @param charset charset
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:28
 	 */
 	public static String copyToString(InputStream in, Charset charset) throws IOException {
@@ -93,7 +91,6 @@ public class StreamUtils {
 	 *
 	 * @param in  in
 	 * @param out out
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:31
 	 */
 	public static void copy(byte[] in, OutputStream out) throws IOException {
@@ -106,7 +103,6 @@ public class StreamUtils {
 	 * @param in      in
 	 * @param charset charset
 	 * @param out     out
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:33
 	 */
 	public static void copy(String in, Charset charset, OutputStream out) throws IOException {
@@ -121,7 +117,6 @@ public class StreamUtils {
 	 * @param in  in
 	 * @param out out
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:35
 	 */
 	public static int copy(InputStream in, OutputStream out) throws IOException {
@@ -145,7 +140,6 @@ public class StreamUtils {
 	 * @param start start
 	 * @param end   end
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:37
 	 */
 	public static long copyRange(InputStream in, OutputStream out, long start, long end)
@@ -182,7 +176,6 @@ public class StreamUtils {
 	 *
 	 * @param in in
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:42
 	 */
 	public static int drain(InputStream in) throws IOException {
@@ -199,7 +192,6 @@ public class StreamUtils {
 	 * emptyInput
 	 *
 	 * @return {@link InputStream }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:44
 	 */
 	public static InputStream emptyInput() {
@@ -211,7 +203,6 @@ public class StreamUtils {
 	 *
 	 * @param in in
 	 * @return {@link InputStream }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:46
 	 */
 	public static InputStream nonClosing(InputStream in) {
@@ -233,7 +224,6 @@ public class StreamUtils {
 	/**
 	 * NonClosingOutputStream
 	 *
-	 * @author shuigedeng
 	 * @version 2021.9
 	 * @since 2021-09-03 21:06:57
 	 */
@@ -254,7 +244,6 @@ public class StreamUtils {
 	/**
 	 * NonClosingInputStream
 	 *
-	 * @author shuigedeng
 	 * @version 2021.9
 	 * @since 2021-09-03 21:07:04
 	 */

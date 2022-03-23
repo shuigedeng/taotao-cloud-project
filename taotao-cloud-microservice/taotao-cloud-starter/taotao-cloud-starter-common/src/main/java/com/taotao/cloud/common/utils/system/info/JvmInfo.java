@@ -34,7 +34,6 @@ public class JvmInfo implements Serializable {
 	/**
 	 * 取得当前JVM的名称
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getName() {
@@ -44,7 +43,6 @@ public class JvmInfo implements Serializable {
 	/**
 	 * 取得当前JVM的版本
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getVersion() {
@@ -54,7 +52,6 @@ public class JvmInfo implements Serializable {
 	/**
 	 * 取得当前JVM的厂商
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getVendor() {
@@ -64,7 +61,6 @@ public class JvmInfo implements Serializable {
 	/**
 	 * 取得当前JVM的信息
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getInfo() {

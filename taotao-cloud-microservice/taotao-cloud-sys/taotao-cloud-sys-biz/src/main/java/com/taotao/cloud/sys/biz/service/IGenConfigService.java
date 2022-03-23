@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.biz.entity.config.GenConfig;
 
 /**
- * GenConfigService 
+ * GenConfigService
  *
  * @author shuigedeng
  * @version 2021.10
@@ -19,6 +19,7 @@ public interface IGenConfigService extends IService<GenConfig> {
 
 	/**
 	 * 查询表配置
+	 *
 	 * @param tableName 表名
 	 * @return 表配置
 	 */
@@ -26,6 +27,7 @@ public interface IGenConfigService extends IService<GenConfig> {
 
 	/**
 	 * 更新表配置
+	 *
 	 * @param tableName 表名
 	 * @param genConfig 表配置
 	 * @return 表配置

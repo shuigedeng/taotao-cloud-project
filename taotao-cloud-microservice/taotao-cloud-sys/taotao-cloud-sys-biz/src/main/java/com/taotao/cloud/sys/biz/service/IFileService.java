@@ -8,17 +8,15 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author shuigedeng
  * @since 2020/11/12 21:26
- * @version 1.0.0
+ * @version 2022.03
  */
 public interface IFileService {
 	/**
 	 * 上传文件
 	 *
 	 * @param uploadFile 文件内容
-	 * @return com.taotao.cloud.dfs.biz.entity.File
-	 * @author shuigedeng
+	 * @return 文件信息
 	 * @since 2020/11/20 上午11:00
-	 * @version 1.0.0
 	 */
 	File upload(MultipartFile uploadFile);
 
@@ -26,10 +24,8 @@ public interface IFileService {
 	 * 根据id查询文件信息
 	 *
 	 * @param id id
-	 * @return com.taotao.cloud.dfs.biz.entity.File
-	 * @author shuigedeng
+	 * @return 文件信息
 	 * @since 2020/11/20 上午11:14
-	 * @version 1.0.0
 	 */
 	File findFileById(Long id);
 

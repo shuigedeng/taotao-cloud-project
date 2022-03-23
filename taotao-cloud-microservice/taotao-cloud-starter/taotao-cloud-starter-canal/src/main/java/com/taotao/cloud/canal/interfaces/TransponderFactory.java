@@ -39,7 +39,6 @@ public interface TransponderFactory {
 	 * @param listeners     实现接口的监听器
 	 * @param annoListeners 注解监听拦截
 	 * @return {@link com.taotao.cloud.canal.interfaces.MessageTransponder }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:51:12
 	 */
 	MessageTransponder newTransponder(CanalConnector connector,

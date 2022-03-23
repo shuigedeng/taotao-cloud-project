@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * SettingServiceImpl
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/03/10 10:31
  */
 @Service

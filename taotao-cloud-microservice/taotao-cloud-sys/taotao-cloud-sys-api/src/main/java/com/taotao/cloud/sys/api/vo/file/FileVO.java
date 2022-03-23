@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.api.vo.file;
  * FileVO
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/12/20 13:59
  */
 public class FileVO {

@@ -16,11 +16,11 @@
 package com.taotao.cloud.sys.biz.service;
 
 /**
- * JvmService
+ * IJvmService
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2022/03/03 14:42
+ * @version 2022.03
+ * @since 2022-03-23 08:59:04
  */
 public interface IJvmService {
 

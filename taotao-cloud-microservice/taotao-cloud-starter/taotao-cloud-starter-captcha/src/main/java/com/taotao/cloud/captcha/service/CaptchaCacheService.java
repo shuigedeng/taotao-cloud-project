@@ -30,7 +30,6 @@ public interface CaptchaCacheService {
 	 * @param key              key
 	 * @param value            value
 	 * @param expiresInSeconds expiresInSeconds
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:56
 	 */
 	void set(String key, String value, long expiresInSeconds);
@@ -40,7 +39,6 @@ public interface CaptchaCacheService {
 	 *
 	 * @param key key
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:56:59
 	 */
 	boolean exists(String key);
@@ -49,7 +47,6 @@ public interface CaptchaCacheService {
 	 * delete
 	 *
 	 * @param key key
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:02
 	 */
 	void delete(String key);
@@ -59,7 +56,6 @@ public interface CaptchaCacheService {
 	 *
 	 * @param key key
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:04
 	 */
 	String get(String key);
@@ -68,7 +64,6 @@ public interface CaptchaCacheService {
 	 * 缓存类型-local/redis/memcache/.. 通过java SPI机制，接入方可自定义实现类
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:11
 	 */
 	String type();
@@ -79,7 +74,6 @@ public interface CaptchaCacheService {
 	 * @param key key
 	 * @param val val
 	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:57:15
 	 */
 	default Long increment(String key, long val) {

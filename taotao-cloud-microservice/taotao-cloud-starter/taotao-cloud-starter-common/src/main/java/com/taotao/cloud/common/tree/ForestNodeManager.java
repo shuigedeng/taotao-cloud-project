@@ -55,7 +55,6 @@ public class ForestNodeManager<T extends INode> {
 	 *
 	 * @param id 节点ID
 	 * @return {@link INode }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:20:56
 	 */
 	public INode getTreeNodeAT(Long id) {
@@ -71,7 +70,6 @@ public class ForestNodeManager<T extends INode> {
 	 * 增加父节点ID
 	 *
 	 * @param parentId parentId
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:21:06
 	 */
 	public void addParentId(Long parentId) {
@@ -82,7 +80,6 @@ public class ForestNodeManager<T extends INode> {
 	 * 获取树的根节点(一个森林对应多颗树)
 	 *
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:21:16
 	 */
 	public List<T> getRoot() {

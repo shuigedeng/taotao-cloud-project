@@ -25,7 +25,6 @@ public class DbHelper {
 	 * @param action0    action0
 	 * @param <T>        T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:06:13
 	 */
 	public static <T> T transactionGet(DataSource dataSource, Callable.Func1<T, DbConn> action0) {
@@ -43,7 +42,6 @@ public class DbHelper {
 	 *
 	 * @param dataSource dataSource
 	 * @param action0    action0
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:06:30
 	 */
 	public static void transactionCall(DataSource dataSource, Callable.Action1<DbConn> action0) {
@@ -58,7 +56,6 @@ public class DbHelper {
 	 *
 	 * @param dataSource dataSource
 	 * @param action0    action0
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:06:33
 	 */
 	public static void call(DataSource dataSource, Callable.Action1<DbConn> action0) {
@@ -75,7 +72,6 @@ public class DbHelper {
 	 * @param action0    action0
 	 * @param <T>        T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:06:36
 	 */
 	public static <T> T get(DataSource dataSource, Callable.Func1<T, DbConn> action0) {
@@ -90,7 +86,6 @@ public class DbHelper {
 	 * @param dataSource dataSource
 	 * @param level      level
 	 * @param action0    action0
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:06:38
 	 */
 	public static void transaction(DataSource dataSource, int level, Callable.Action0 action0) {

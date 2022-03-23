@@ -79,7 +79,6 @@ public record Result<T>(
 	 * @param errorMsg errorMsg
 	 * @param <T>      T
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:12:35
 	 */
 	public static <T> Result<T> of(int code, T data, boolean success, String errorMsg) {
@@ -98,7 +97,6 @@ public record Result<T>(
 	 * @param data data
 	 * @param <T>  T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:15:21
 	 */
 	public static <T> Result<T> success(T data) {
@@ -112,7 +110,6 @@ public record Result<T>(
 	 * @param code code
 	 * @param <T>  T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:58
 	 */
 	public static <T> Result<T> success(T data, int code) {
@@ -125,7 +122,6 @@ public record Result<T>(
 	 * @param data       data
 	 * @param resultEnum resultEnum
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:13:07
 	 */
 	public static Result<String> success(String data, ResultEnum resultEnum) {
@@ -136,7 +132,6 @@ public record Result<T>(
 	 * fail
 	 *
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:13:14
 	 */
 	public static Result<String> fail() {
@@ -150,7 +145,6 @@ public record Result<T>(
 	 * @param errorMsg errorMsg
 	 * @param <T>      T
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:13:19
 	 */
 	public static <T> Result<T> fail(String errorMsg) {
@@ -164,7 +158,6 @@ public record Result<T>(
 	 * @param code code
 	 * @param <T>  T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:41
 	 */
 	public static <T> Result<T> fail(String data, int code) {
@@ -176,7 +169,6 @@ public record Result<T>(
 	 *
 	 * @param resultEnum resultEnum
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:32
 	 */
 	public static Result<String> fail(ResultEnum resultEnum) {
@@ -189,7 +181,6 @@ public record Result<T>(
 	 * @param throwable throwable
 	 * @param <T>       T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:24
 	 */
 	public static <T> Result<T> fail(Throwable throwable) {
@@ -202,7 +193,6 @@ public record Result<T>(
 	 * @param resultEnum resultEnum
 	 * @param <T>        T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:18
 	 */
 	public static <T> Result<T> validFail(ResultEnum resultEnum) {
@@ -217,7 +207,6 @@ public record Result<T>(
 	 * @param args     args
 	 * @param <T>      T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:11
 	 */
 	public static <T> Result<T> validFail(String errorMsg, Object... args) {
@@ -230,7 +219,6 @@ public record Result<T>(
 	 * @param errorMsg errorMsg
 	 * @param <T>      T
 	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:14:03
 	 */
 	public static <T> Result<T> validFail(String errorMsg) {

@@ -105,7 +105,6 @@ public class CaptchaAutoConfiguration implements InitializingBean {
 	 *
 	 * @param jigsaw   jigsaw
 	 * @param picClick picClick
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:54:00
 	 */
 	public static void initializeBaseMap(String jigsaw, String picClick) {
@@ -121,7 +120,6 @@ public class CaptchaAutoConfiguration implements InitializingBean {
 	 *
 	 * @param path path
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:54:04
 	 */
 	public static Map<String, String> getResourcesImagesFile(String path) {

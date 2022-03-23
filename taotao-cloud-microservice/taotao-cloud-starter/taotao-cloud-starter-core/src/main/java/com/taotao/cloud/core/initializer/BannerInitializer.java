@@ -151,7 +151,6 @@ public class BannerInitializer implements
 	 *
 	 * @param logoBanner      logoBanner
 	 * @param descriptionList descriptionList
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:22:45
 	 */
 	public void show(LogoBanner logoBanner, Description... descriptionList) {

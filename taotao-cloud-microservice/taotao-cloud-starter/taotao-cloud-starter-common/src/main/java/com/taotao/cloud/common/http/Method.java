@@ -18,8 +18,6 @@ package com.taotao.cloud.common.http;
 
 /**
  * http method
- *
- * @author dream.lu
  */
 public interface Method {
 	String GET = "GET";

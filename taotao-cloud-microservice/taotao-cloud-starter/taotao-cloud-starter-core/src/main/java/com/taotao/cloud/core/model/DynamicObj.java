@@ -48,7 +48,6 @@ public class DynamicObj {
 	 * @param cls  cls
 	 * @param <T>  T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:13:52
 	 */
 	public <T> T tryParse(String path, Class<T> cls) {
@@ -66,7 +65,6 @@ public class DynamicObj {
 	 * @param cls  cls
 	 * @param <T>  T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:14:07
 	 */
 	public <T> T parse(String path, Class<T> cls) {
@@ -94,7 +92,6 @@ public class DynamicObj {
 	 * @param cls      cls
 	 * @param <T>      T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:14:19
 	 */
 	public <T> T changeType(JsonNode jsonNode, Class<T> cls) {

@@ -39,7 +39,6 @@ public interface FrequencyLimitHandler {
 	 * get 接口限流
 	 *
 	 * @param captcha captcha
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:02:43
 	 */
 	void validateGet(Captcha captcha);
@@ -48,7 +47,6 @@ public interface FrequencyLimitHandler {
 	 * check接口限流
 	 *
 	 * @param captcha captcha
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:02:49
 	 */
 	void validateCheck(Captcha captcha);
@@ -57,7 +55,6 @@ public interface FrequencyLimitHandler {
 	 * verify接口限流
 	 *
 	 * @param captcha captcha
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:02:53
 	 */
 	void validateVerify(Captcha captcha);
@@ -73,7 +70,7 @@ public interface FrequencyLimitHandler {
 	 * @version 2021.9
 	 * @since 2021-09-03 21:02:28
 	 */
-	class DefaultLimitHandler implements FrequencyLimitHandler {
+	public class DefaultLimitHandler implements FrequencyLimitHandler {
 
 		private Properties config;
 		private CaptchaCacheService cacheService;

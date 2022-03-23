@@ -25,7 +25,7 @@ public interface IFeignRoleService {
      * @return com.taotao.cloud.core.model.Result<java.util.List < com.taotao.cloud.sys.api.vo.role.RoleVO>>
      * @author shuigedeng
      * @since 2020/10/21 15:13
-     * @version 1.0.0
+     * @version 2022.03
      */
     @GetMapping("/role/info/userId")
     Result<List<RoleQueryVO>> findRoleByUserId(@RequestParam(value = "userId") Long userId);

@@ -43,7 +43,6 @@ public abstract class AbstractDBOption implements IDBOption {
 	/**
 	 * 进行类型设置
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:45:52
 	 */
 	protected abstract void setEventType();
@@ -53,7 +52,6 @@ public abstract class AbstractDBOption implements IDBOption {
 	 * 设置下一个节点
 	 *
 	 * @param next next
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:45:58
 	 */
 	public void setNext(AbstractDBOption next) {
@@ -68,7 +66,6 @@ public abstract class AbstractDBOption implements IDBOption {
 	 * @param schemaName  schemaName
 	 * @param tableName   tableName
 	 * @param rowChange   rowChange
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:46:05
 	 */
 	public void doChain(String destination, String schemaName, String tableName,

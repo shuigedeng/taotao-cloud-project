@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
  * QuartzJobTest
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2022/02/18 15:43
+ * @version 2022.03
+ * @since 2022-03-23 08:49:25
  */
 @Component
 public class QuartzJobTest {

@@ -16,24 +16,22 @@
 
 package com.taotao.cloud.common.utils.exception;
 
-import org.springframework.lang.Nullable;
-
 import java.io.Writer;
+import org.springframework.lang.Nullable;
 
 /**
  * FastStringWriter，更改于 jdk CharArrayWriter
  *
  * <p>
- * 1. 去掉了锁
- * 2. 初始容量由 32 改为 64
- * 3. null 直接返回，不写入
+ * 1. 去掉了锁 2. 初始容量由 32 改为 64 3. null 直接返回，不写入
  * </p>
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
 public class FastStringWriter extends Writer {
+
 	/**
 	 * The buffer where data is stored.
 	 */

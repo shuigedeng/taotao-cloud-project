@@ -38,7 +38,6 @@ public class Callable {
 		/**
 		 * invoke
 		 *
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:29:49
 		 */
 		void invoke();
@@ -57,7 +56,6 @@ public class Callable {
 		 * invoke
 		 *
 		 * @param t1 t1
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:29:54
 		 */
 		void invoke(T1 t1);
@@ -77,7 +75,6 @@ public class Callable {
 		 *
 		 * @param t1 t1
 		 * @param t2 t2
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:30:03
 		 */
 		void invoke(T1 t1, T2 t2);
@@ -98,7 +95,6 @@ public class Callable {
 		 * @param t1 t1
 		 * @param t2 t2
 		 * @param t3 t3
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:30:06
 		 */
 		void invoke(T1 t1, T2 t2, T3 t3);
@@ -117,7 +113,6 @@ public class Callable {
 		 * invoke
 		 *
 		 * @return T0
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:30:09
 		 */
 		T0 invoke();
@@ -137,7 +132,6 @@ public class Callable {
 		 *
 		 * @param t1 t1
 		 * @return T0
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:30:14
 		 */
 		T0 invoke(T1 t1);
@@ -158,7 +152,6 @@ public class Callable {
 		 * @param t1 t1
 		 * @param t2 t2
 		 * @return T0
-		 * @author shuigedeng
 		 * @since 2021-09-02 20:30:20
 		 */
 		T0 invoke(T1 t1, T2 t2);

@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
  * 字典更新对象
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/9/30 08:49
  */
 @Schema(description = "字典更新对象")

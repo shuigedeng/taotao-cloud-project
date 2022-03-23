@@ -34,7 +34,6 @@ public interface DistributedLock {
 	 * @param unit      {@code leaseTime} 参数的时间单位
 	 * @param isFair    是否公平锁
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:19
 	 */
 	ZLock lock(String key, long leaseTime, TimeUnit unit, boolean isFair) throws Exception;
@@ -46,7 +45,6 @@ public interface DistributedLock {
 	 * @param leaseTime leaseTime
 	 * @param unit      unit
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:36
 	 */
 	default ZLock lock(String key, long leaseTime, TimeUnit unit) throws Exception {
@@ -59,7 +57,6 @@ public interface DistributedLock {
 	 * @param key    key
 	 * @param isFair isFair
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:39
 	 */
 	default ZLock lock(String key, boolean isFair) throws Exception {
@@ -71,7 +68,6 @@ public interface DistributedLock {
 	 *
 	 * @param key key
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:46
 	 */
 	default ZLock lock(String key) throws Exception {
@@ -86,7 +82,6 @@ public interface DistributedLock {
 	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
 	 * @param unit      {@code waitTime} 和 {@code leaseTime} 参数的时间单位
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:06
 	 */
 	ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair)
@@ -100,7 +95,6 @@ public interface DistributedLock {
 	 * @param leaseTime leaseTime
 	 * @param unit      unit
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:22
 	 */
 	default ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit)
@@ -116,7 +110,6 @@ public interface DistributedLock {
 	 * @param unit     unit
 	 * @param isFair   isFair
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:25
 	 */
 	default ZLock tryLock(String key, long waitTime, TimeUnit unit, boolean isFair)
@@ -131,7 +124,6 @@ public interface DistributedLock {
 	 * @param waitTime waitTime
 	 * @param unit     unit
 	 * @return {@link ZLock }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:27
 	 */
 	default ZLock tryLock(String key, long waitTime, TimeUnit unit) throws Exception {
@@ -142,7 +134,6 @@ public interface DistributedLock {
 	 * 释放锁
 	 *
 	 * @param lock 锁对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:33
 	 */
 	void unlock(Object lock) throws Exception;
@@ -151,7 +142,6 @@ public interface DistributedLock {
 	 * 释放锁
 	 *
 	 * @param zLock 锁抽象对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:42
 	 */
 	default void unlock(ZLock zLock) throws Exception {

@@ -33,7 +33,6 @@ public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 	// *
 	// * @param dictId dictId
 	// * @return {@link Boolean }
-	// * @author shuigedeng
 	// * @since 2021-10-09 20:33:32
 	// */
 	//Boolean deleteByDictId(Long dictId);
@@ -43,7 +42,6 @@ public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 	// *
 	// * @param dictItemDTO dictItemDTO
 	// * @return {@link SysDictItem }
-	// * @author shuigedeng
 	// * @since 2021-10-09 20:33:40
 	// */
 	//SysDictItem save(DictItemDTO dictItemDTO);
@@ -54,7 +52,6 @@ public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 	// * @param id          id
 	// * @param dictItemDTO dictItemDTO
 	// * @return {@link SysDictItem }
-	// * @author shuigedeng
 	// * @since 2021-10-09 20:33:47
 	// */
 	//SysDictItem updateById(Long id, DictItemDTO dictItemDTO);
@@ -64,7 +61,6 @@ public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 	// *
 	// * @param id id
 	// * @return {@link Boolean }
-	// * @author shuigedeng
 	// * @since 2021-10-09 20:33:54
 	// */
 	//Boolean deleteById(Long id);
@@ -75,7 +71,6 @@ public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 	// * @param page              page
 	// * @param dictItemPageQuery dictItemPageQuery
 	// * @return {@link Page&lt;com.taotao.cloud.sys.biz.entity.SysDictItem&gt; }
-	// * @author shuigedeng
 	// * @since 2021-10-09 20:34:02
 	// */
 	//Page<SysDictItem> getPage(Pageable page, DictItemPageQuery dictItemPageQuery);
@@ -85,7 +80,6 @@ public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 	// *
 	// * @param dictItemQuery dictItemQuery
 	// * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysDictItem&gt; }
-	// * @author shuigedeng
 	// * @since 2021-10-09 20:34:10
 	// */
 	//List<SysDictItem> getInfo(DictItemQuery dictItemQuery);

@@ -19,7 +19,7 @@ package com.taotao.cloud.common.utils.bean;
 /**
  * Bean属性
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */

@@ -31,7 +31,6 @@ public class ForestNodeMerger {
 	 *
 	 * @param items 节点域
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:21:41
 	 */
 	public static <T extends INode> List<T> merge(List<T> items) {

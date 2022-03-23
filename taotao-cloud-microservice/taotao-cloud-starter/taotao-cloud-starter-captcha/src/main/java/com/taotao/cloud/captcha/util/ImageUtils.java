@@ -66,7 +66,6 @@ public class ImageUtils {
 	 *
 	 * @param captchaOriginalPathJigsaw captchaOriginalPathJigsaw
 	 * @param captchaOriginalPathClick  captchaOriginalPathClick
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:05:36
 	 */
 	public static void cacheImage(String captchaOriginalPathJigsaw,
@@ -104,7 +103,6 @@ public class ImageUtils {
 	 * @param originalMap     originalMap
 	 * @param slidingBlockMap slidingBlockMap
 	 * @param picClickMap     picClickMap
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:05:40
 	 */
 	public static void cacheBootImage(
@@ -130,7 +128,6 @@ public class ImageUtils {
 	 * getOriginal
 	 *
 	 * @return {@link java.awt.image.BufferedImage }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:05:44
 	 */
 	public static BufferedImage getOriginal() {
@@ -147,7 +144,6 @@ public class ImageUtils {
 	 * getslidingBlock
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:05:48
 	 */
 	public static String getslidingBlock() {
@@ -163,7 +159,6 @@ public class ImageUtils {
 	 * getPicClick
 	 *
 	 * @return {@link java.awt.image.BufferedImage }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:05:50
 	 */
 	public static BufferedImage getPicClick() {
@@ -181,7 +176,6 @@ public class ImageUtils {
 	 *
 	 * @param templateImage templateImage
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:05:56
 	 */
 	public static String getImageToBase64Str(BufferedImage templateImage) {
@@ -203,7 +197,6 @@ public class ImageUtils {
 	 *
 	 * @param base64String base64String
 	 * @return {@link java.awt.image.BufferedImage }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:03
 	 */
 	public static BufferedImage getBase64StrToImage(String base64String) {
@@ -223,7 +216,6 @@ public class ImageUtils {
 	 *
 	 * @param path path
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:07
 	 */
 	private static Map<String, String> getResourcesImagesFile(String path) {
@@ -251,7 +243,6 @@ public class ImageUtils {
 	 *
 	 * @param path path
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-03 21:06:10
 	 */
 	private static Map<String, String> getImagesFile(String path) {

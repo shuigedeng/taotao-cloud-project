@@ -44,7 +44,7 @@ import org.springframework.stereotype.Component;
  * RedisListenerConfig
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/01/17 16:12
  */
 @Configuration

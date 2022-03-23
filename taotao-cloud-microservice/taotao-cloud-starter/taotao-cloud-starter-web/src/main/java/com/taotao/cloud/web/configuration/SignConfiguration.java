@@ -13,10 +13,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * 描述
+ * SignConfiguration
  *
- * @author guo
- * @date 2021年8月9日15:34:48
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-23 08:44:00
  */
 @Configuration
 @ConditionalOnProperty(prefix = SignProperties.PREFIX, name = "enabled", havingValue = "true")

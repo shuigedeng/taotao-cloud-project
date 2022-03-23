@@ -34,7 +34,6 @@ public class JavaInfo implements Serializable {
 	 * 取得当前Java impl的版本
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:22:49
 	 */
 
@@ -46,7 +45,6 @@ public class JavaInfo implements Serializable {
 	 * 取得当前Java impl.的厂商
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:22:49
 	 */
 	public final String getVendor() {
@@ -57,7 +55,6 @@ public class JavaInfo implements Serializable {
 	 * 取得当前Java impl.的厂商网站的URL
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:22:49
 	 */
 	public final String getVendorURL() {
