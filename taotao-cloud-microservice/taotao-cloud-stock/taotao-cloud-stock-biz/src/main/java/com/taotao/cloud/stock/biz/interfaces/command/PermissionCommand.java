@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * 权限Command
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-18
  **/
 @Data

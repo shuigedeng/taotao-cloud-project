@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
@@ -21,9 +22,6 @@ import java.util.Date;
 
 /**
  * 意见反馈
- *
- * @author Bulbasaur
- * @since 2020/12/10 17:42
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

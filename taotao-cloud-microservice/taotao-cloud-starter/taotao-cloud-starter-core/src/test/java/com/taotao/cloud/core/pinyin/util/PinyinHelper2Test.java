@@ -1,18 +1,13 @@
 package com.taotao.cloud.core.pinyin.util;
 
+import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @author binbin.hou
- * @since 0.0.1
- */
 public class PinyinHelper2Test {
 
     /**
      * 《施氏食狮史》
-     *
-     * @since 0.3.0
      */
     @Test
     public void toPinyinTest() {

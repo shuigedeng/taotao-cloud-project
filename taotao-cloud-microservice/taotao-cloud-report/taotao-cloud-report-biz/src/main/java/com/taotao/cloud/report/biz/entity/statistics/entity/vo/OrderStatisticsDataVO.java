@@ -9,9 +9,6 @@ import java.util.Date;
 
 /**
  * 订单统计数据VO
- *
- * @author Bulbasaur
- * @since 2020/12/9 17:13
  */
 @Data
 public class OrderStatisticsDataVO {

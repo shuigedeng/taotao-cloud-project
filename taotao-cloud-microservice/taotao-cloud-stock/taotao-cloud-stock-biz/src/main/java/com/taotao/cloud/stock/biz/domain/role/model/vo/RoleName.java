@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 角色名称
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 public class RoleName implements ValueObject<RoleName> {

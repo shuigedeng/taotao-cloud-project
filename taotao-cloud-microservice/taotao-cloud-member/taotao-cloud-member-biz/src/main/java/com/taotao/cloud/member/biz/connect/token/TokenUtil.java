@@ -12,9 +12,6 @@ import java.util.Date;
 
 /**
  * TokenUtil
- *
- * @author Chopper
- * @version v1.0 2020-11-12 18:44
  */
 public class TokenUtil {
 	//@Autowired

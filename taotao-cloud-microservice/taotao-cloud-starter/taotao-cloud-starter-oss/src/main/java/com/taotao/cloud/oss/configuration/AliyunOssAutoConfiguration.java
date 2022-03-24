@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
  * 阿里云oss自动配置
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/26 10:49
  */
 @Configuration

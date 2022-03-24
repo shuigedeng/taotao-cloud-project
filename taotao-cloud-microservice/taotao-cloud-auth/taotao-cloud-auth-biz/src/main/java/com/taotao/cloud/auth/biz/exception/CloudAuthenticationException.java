@@ -22,7 +22,7 @@ import org.springframework.security.oauth2.core.OAuth2Error;
  * AuthenticationException
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/12/22 15:36
  */
 public class CloudAuthenticationException extends OAuth2AuthenticationException {

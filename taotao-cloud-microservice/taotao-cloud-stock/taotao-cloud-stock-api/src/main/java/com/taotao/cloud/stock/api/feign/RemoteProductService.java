@@ -27,7 +27,7 @@ public interface RemoteProductService {
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
 	 * @author shuigedeng
 	 * @since 2020/11/20 下午3:23
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
 	Result<ProductVO> findProductInfoById(@PathVariable("id") Long id);
@@ -39,7 +39,7 @@ public interface RemoteProductService {
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
 	 * @author shuigedeng
 	 * @since 2020/11/20 下午3:23
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	@PostMapping(value = "/product")
 	Result<ProductVO> saveProduct(@RequestBody ProductDTO productDTO);

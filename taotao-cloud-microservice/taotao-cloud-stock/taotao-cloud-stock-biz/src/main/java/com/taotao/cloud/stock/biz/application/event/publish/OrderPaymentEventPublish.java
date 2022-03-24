@@ -24,7 +24,7 @@ import org.springframework.context.ApplicationEventPublisherAware;
  * OrderPaymentEventPublish
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/12/28 11:17
  */
 public class OrderPaymentEventPublish implements ApplicationEventPublisherAware {

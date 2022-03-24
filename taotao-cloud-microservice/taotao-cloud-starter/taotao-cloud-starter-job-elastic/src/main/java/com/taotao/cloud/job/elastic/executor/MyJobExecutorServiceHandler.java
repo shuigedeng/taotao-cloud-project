@@ -23,7 +23,7 @@ import org.apache.shardingsphere.elasticjob.infra.handler.threadpool.JobExecutor
  * MyJobExecutorServiceHandler
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/03/11 09:22
  */
 public class MyJobExecutorServiceHandler implements JobExecutorServiceHandler {

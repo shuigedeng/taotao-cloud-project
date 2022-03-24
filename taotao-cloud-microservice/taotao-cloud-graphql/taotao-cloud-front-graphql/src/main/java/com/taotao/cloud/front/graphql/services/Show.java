@@ -19,7 +19,7 @@ package com.taotao.cloud.front.graphql.services;
  * Show
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/09/24 08:08
  */
 public class Show {

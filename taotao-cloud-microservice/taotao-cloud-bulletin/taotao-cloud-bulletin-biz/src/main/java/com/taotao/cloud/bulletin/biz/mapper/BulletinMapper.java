@@ -25,7 +25,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * @author shuigedeng
  * @since 2020/11/11 14:42
- * @version 1.0.0
+ * @version 2022.03
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -42,7 +42,7 @@ public interface BulletinMapper {
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
 	 * @author shuigedeng
 	 * @since 2020/11/11 14:47
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	BulletinVO withdrawToWithdrawVO(Bulletin bulletin);
 
@@ -53,7 +53,7 @@ public interface BulletinMapper {
 	//  * @return com.taotao.cloud.uc.api.vo.user.AddUserVO
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
 	//
@@ -64,7 +64,7 @@ public interface BulletinMapper {
 	//  * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 15:00
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
 	//
@@ -75,7 +75,7 @@ public interface BulletinMapper {
 	//  * @return com.taotao.cloud.uc.biz.entity.SysUser
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 14:52
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// SysUser userDtoToSysUser(UserDTO userDTO);
 	//
@@ -87,7 +87,7 @@ public interface BulletinMapper {
 	//  * @return void
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

@@ -51,7 +51,7 @@ import reactor.core.publisher.Mono;
  * 基于nacos元数据version灰度发布
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/2 19:33
  */
 @Configuration
@@ -75,7 +75,7 @@ public class GrayConfiguration {
 	 * 灰度过滤器
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/5/2 19:33
 	 */
 	public static class GrayReactiveLoadBalancerClientFilter extends
@@ -174,7 +174,7 @@ public class GrayConfiguration {
 	 * GrayLoadBalancer<br>
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/27 13:59
 	 */
 	public static class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
@@ -271,7 +271,7 @@ public class GrayConfiguration {
 	 * WeightMeta<br>
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/29 22:10
 	 */
 	public static class WeightMeta<T> {
@@ -338,7 +338,7 @@ public class GrayConfiguration {
 	 * WeightRandomUtils<br>
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/29 22:10
 	 */
 	public static class WeightRandomUtils {

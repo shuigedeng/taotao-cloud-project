@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * 七牛云文件服务Properties
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/26 09:39
  */
 @RefreshScope

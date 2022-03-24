@@ -70,7 +70,7 @@ import org.springframework.web.client.RestTemplate;
  * FeignAutoConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/6/15 11:31
  */
 @Configuration
@@ -144,7 +144,7 @@ public class CustomFeignConfiguration implements InitializingBean {
 	 * sentinel 请求头解析判断
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/6/15 11:31
 	 */
 	public static class HeaderRequestOriginParser implements RequestOriginParser {

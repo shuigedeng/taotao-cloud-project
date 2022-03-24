@@ -6,9 +6,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * HttpContextUtils
- *
- * @author haoxin
- * @date 2021-01-25
  **/
 public class HttpContextUtils {
 

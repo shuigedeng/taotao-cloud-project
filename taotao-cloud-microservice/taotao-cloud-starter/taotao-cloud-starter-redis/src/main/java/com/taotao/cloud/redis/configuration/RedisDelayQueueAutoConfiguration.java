@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
  * RedisDelayQueueAutoConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/01/29 15:57
  */
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)

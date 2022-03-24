@@ -5,7 +5,7 @@ import com.xtoon.cloud.sys.application.command.RegisterTenantCommand;
 /**
  * 注册应用服务接口
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-06-23
  **/
 public interface RegisterApplicationService {

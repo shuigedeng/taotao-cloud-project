@@ -18,11 +18,6 @@ package com.taotao.cloud.stock.api.dto;
 
 import java.io.Serializable;
 
-/**
- * @author shuigedeng
- * @since 2020/10/22 12:29
- * @version 1.0.0
- */
 //@ApiModel(value = "商品对象DTO")
 public class ProductDTO implements Serializable {
 

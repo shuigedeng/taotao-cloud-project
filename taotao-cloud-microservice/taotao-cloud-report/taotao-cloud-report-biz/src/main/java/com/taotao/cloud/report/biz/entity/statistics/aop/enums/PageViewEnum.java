@@ -2,9 +2,6 @@ package com.taotao.cloud.report.biz.entity.statistics.aop.enums;
 
 /**
  * 统计页面类型
- *
- * @author Chopper
- * @since 2021-01-14 17:55
  */
 public enum PageViewEnum {
     /**

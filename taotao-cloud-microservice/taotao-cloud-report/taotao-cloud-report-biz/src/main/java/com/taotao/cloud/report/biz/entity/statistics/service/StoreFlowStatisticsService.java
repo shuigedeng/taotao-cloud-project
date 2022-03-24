@@ -17,9 +17,6 @@ import java.util.Map;
 
 /**
  * 流水统计业务层
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface StoreFlowStatisticsService extends IService<StoreFlow> {
 

@@ -14,8 +14,6 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * <p>工具类 AesUtil</p>
- *
- * @author 微信
  */
 public class AesUtil {
 

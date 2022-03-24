@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * 验证码
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-05-10
  **/
 public class CaptchaCode implements ValueObject<CaptchaCode> {

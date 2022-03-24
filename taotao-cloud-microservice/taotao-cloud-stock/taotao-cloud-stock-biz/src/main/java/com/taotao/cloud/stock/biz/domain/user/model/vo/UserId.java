@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 用户ID
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 @Data

@@ -106,7 +106,6 @@ public class BaseAuthWeChatRequest extends BaseAuthRequest {
      *
      * @param state state 验证授权流程的参数，可以防止csrf
      * @return 返回授权地址
-     * @since 1.9.3
      */
     @Override
     public String authorize(String state) {

@@ -20,7 +20,7 @@ import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 /**
  * @author shuigedeng
  * @since 2020/11/13 09:59
- * @version 1.0.0
+ * @version 2022.03
  */
 public interface IPayFlowService {
 
@@ -31,7 +31,7 @@ public interface IPayFlowService {
 	 * @return com.taotao.cloud.log.biz.entity.MemberLogin
 	 * @author shuigedeng
 	 * @since 2020/11/20 下午1:08
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	PayFlow findPayFlowById(Long id);
 }

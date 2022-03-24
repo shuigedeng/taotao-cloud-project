@@ -71,7 +71,7 @@
 // * @author shuigedeng
 // * @since 2020-06-23 14:52
 // * @see CompositeTokenGranter
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //public class TokenGranterComponent implements TokenGranter {
 //

@@ -8,9 +8,6 @@ import java.util.List;
 
 /**
  * 首页统计数据业务层
- *
- * @author Bulbasaur
- * @since 2020/12/15 17:57
  */
 public interface IndexStatisticsService {
 

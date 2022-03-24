@@ -12,9 +12,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 /**
  * 日期处理
- *
- * @author haoxin
- * @date 2021-02-02
  **/
 public class DateUtils {
 	/** 时间格式(yyyy-MM-dd) */

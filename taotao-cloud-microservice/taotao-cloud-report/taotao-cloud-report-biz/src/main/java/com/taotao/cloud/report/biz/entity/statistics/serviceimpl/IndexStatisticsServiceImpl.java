@@ -30,9 +30,6 @@ import java.util.Objects;
 
 /**
  * 首页统计数据业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/15 17:57
  */
 @Service
 public class IndexStatisticsServiceImpl implements IndexStatisticsService {

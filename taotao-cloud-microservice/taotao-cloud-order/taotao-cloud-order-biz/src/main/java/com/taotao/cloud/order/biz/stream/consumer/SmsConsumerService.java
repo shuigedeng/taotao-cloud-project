@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 短信消费者业务
- *
- * @author xuzhanfu
  */
 @Slf4j
 @Service

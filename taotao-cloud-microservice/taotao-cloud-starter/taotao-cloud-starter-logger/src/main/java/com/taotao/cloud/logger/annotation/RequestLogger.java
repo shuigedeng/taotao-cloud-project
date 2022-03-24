@@ -15,13 +15,17 @@
  */
 package com.taotao.cloud.logger.annotation;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 系统操作记录
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/6/3 13:32
  */
 @Retention(RetentionPolicy.RUNTIME)

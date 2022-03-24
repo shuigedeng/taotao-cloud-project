@@ -13,7 +13,7 @@ import com.xtoon.cloud.common.core.domain.Entity;
 /**
  * 账号
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-21
  **/
 public class Account implements Entity<Account> {

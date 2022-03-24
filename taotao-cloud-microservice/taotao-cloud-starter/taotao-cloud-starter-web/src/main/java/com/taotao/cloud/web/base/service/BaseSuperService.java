@@ -28,7 +28,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * BaseSuperService
  *
  * @author shuigedeng
- * @version 1.0
+ * @version 2022.03
  * @since 2021/10/10 12:53
  */
 public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Serializable> extends

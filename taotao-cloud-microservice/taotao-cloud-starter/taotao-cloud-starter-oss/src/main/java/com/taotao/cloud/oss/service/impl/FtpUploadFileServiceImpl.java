@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
  * FtpUploadFileService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/08/24 16:09
  */
 public class FtpUploadFileServiceImpl extends AbstractUploadFileService {

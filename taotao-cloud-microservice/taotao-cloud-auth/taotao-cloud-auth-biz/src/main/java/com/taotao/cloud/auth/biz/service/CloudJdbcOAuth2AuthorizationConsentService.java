@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
  * CloudJdbcOAuth2AuthorizationConsentService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/12/07 22:02
  */
 public class CloudJdbcOAuth2AuthorizationConsentService extends

@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * FeignInterceptorProperties 配置
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2017/11/17
  */
 @RefreshScope

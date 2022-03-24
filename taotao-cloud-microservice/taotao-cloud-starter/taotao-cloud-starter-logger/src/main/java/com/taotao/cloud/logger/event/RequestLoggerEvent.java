@@ -22,7 +22,7 @@ import org.springframework.context.ApplicationEvent;
  * 系统日志事件
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/6/3 13:33
  */
 public class RequestLoggerEvent extends ApplicationEvent {

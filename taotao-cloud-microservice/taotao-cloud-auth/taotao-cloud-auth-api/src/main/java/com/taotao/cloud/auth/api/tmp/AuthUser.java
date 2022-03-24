@@ -1,9 +1,6 @@
 //package com.taotao.cloud.auth.api.tmp;
 //
 //
-///**
-// * @author : zhiyi Date: 2020/2/10
-// */
 //public class AuthUser {
 //
 //	// 我们的全局永久唯一凭证是 id, security 想要的也是这个, 只是他定义的名字叫 username

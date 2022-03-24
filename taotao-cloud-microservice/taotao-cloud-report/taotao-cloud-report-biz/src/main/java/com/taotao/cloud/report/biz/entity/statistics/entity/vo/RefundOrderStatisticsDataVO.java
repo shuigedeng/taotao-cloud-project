@@ -5,9 +5,6 @@ import lombok.Data;
 
 /**
  * 退款统计VO
- *
- * @author Bulbasaur
- * @since 2020/12/10 11:24
  */
 @Data
 public class RefundOrderStatisticsDataVO {

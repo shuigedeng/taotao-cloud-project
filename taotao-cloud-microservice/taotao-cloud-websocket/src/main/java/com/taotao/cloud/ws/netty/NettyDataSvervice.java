@@ -24,7 +24,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author shuigedeng
  * @since 2020/12/30 下午4:37
- * @version 1.0.0
+ * @version 2022.03
  */
 public class NettyDataSvervice {
 

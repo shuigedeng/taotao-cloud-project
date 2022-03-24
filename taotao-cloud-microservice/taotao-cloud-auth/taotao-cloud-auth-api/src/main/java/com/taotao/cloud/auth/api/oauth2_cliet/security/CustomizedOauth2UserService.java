@@ -36,9 +36,6 @@
 //import org.springframework.web.client.RestTemplate;
 //import org.springframework.web.util.UriComponentsBuilder;
 //
-///**
-// * @author zyc
-// */
 //@Slf4j
 //public class CustomizedOauth2UserService extends DefaultOAuth2UserService {
 //

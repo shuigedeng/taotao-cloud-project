@@ -2,10 +2,6 @@ package com.taotao.cloud.gateway.captcha;
 
 import java.util.Random;
 
-/**
- * @author chenjh
- * @since 2019/7/16 16:04
- */
 public abstract class AbstractMathCaptcha extends BaseCaptcha {
 
 	/**

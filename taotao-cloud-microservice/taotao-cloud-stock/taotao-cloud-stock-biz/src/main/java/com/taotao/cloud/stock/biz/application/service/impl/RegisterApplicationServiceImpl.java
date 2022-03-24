@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 /**
  * 注册应用服务实现类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-06-23
  **/
 @Service

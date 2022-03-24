@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/20 下午3:47
  */
 @TaoTaoCloudApplication

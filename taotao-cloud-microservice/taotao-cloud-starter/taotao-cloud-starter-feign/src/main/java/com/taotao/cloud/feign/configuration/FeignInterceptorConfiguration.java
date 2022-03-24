@@ -43,7 +43,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * feign拦截器，只包含http相关数据
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/5 13:33
  */
 @Configuration

@@ -5,14 +5,12 @@ import cn.lili.common.enums.ClientTypeEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 
 /**
  * 专题活动
- *
- * @author Bulbasaur
- * @since 2020/12/10 17:42
  */
 @Data
 @TableName("li_special")

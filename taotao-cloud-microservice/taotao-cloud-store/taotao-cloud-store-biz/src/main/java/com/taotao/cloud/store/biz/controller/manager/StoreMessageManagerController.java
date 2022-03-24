@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,店铺消息消息管理接口
- *
- * @author pikachu
- * @since 2020/12/6 16:09
  */
 @RestController
 @Transactional(rollbackFor = Exception.class)

@@ -55,7 +55,7 @@
   * Loadbalancer扩展配置类
   *
   * @author shuigedeng
-  * @version 1.0.0
+  * @version 2022.03
   * @since 2020/6/15 11:31
   */
  @Configuration
@@ -82,7 +82,7 @@
 	  * CustomLoadBalancer
 	  *
 	  * @author shuigedeng
-	  * @version 1.0.0
+	  * @version 2022.03
 	  * @since 2021/07/20 08:31
 	  */
 	 public static class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {

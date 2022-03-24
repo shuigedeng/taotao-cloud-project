@@ -33,7 +33,7 @@ import org.springframework.beans.BeanUtils;
  * 传错删除没有报错
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @see com.fasterxml.jackson.databind.deser.std.EnumDeserializer
  */
 @Deprecated

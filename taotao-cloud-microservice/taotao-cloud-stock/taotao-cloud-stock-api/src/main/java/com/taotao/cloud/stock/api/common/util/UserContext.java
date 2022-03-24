@@ -4,9 +4,6 @@ import lombok.experimental.UtilityClass;
 
 /**
  * 用户ID存储器
- *
- * @author haoxin
- * @date 2021-04-23
  **/
 @UtilityClass
 public class UserContext {

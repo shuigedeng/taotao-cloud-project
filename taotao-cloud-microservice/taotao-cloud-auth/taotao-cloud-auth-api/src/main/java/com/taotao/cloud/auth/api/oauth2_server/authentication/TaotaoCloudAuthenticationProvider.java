@@ -55,7 +55,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/10/19 11:21
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //public class TaoTaoCloudAuthenticationProvider implements
 //        AuthenticationProvider, InitializingBean, MessageSourceAware {

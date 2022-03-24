@@ -20,7 +20,7 @@ import com.taotao.cloud.customer.biz.entity.Chatbot;
 /**
  * @author shuigedeng
  * @since 2020/11/13 09:59
- * @version 1.0.0
+ * @version 2022.03
  */
 public interface IChatbotService {
 	/**
@@ -30,7 +30,7 @@ public interface IChatbotService {
 	 * @return com.taotao.cloud.customer.biz.entity.Chatbot
 	 * @author shuigedeng
 	 * @since 2020/11/20 上午10:42
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	Chatbot findChatbotById(Long id);
 }

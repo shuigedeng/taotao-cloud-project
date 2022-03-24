@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
  * 生成日志链路追踪id
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/29 22:13
  */
 @Component

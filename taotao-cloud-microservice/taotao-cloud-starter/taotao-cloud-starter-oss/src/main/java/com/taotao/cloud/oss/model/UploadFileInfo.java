@@ -19,7 +19,7 @@ package com.taotao.cloud.oss.model;
  * file实体类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/12 15:54
  */
 public class UploadFileInfo {

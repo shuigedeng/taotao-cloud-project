@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 用户Assembler
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-23
  **/
 public class UserDTOAssembler {

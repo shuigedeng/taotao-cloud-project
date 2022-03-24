@@ -5,9 +5,6 @@ import lombok.Data;
 
 /**
  * 订单统计概述
- *
- * @author Chopper
- * @since 2021-03-03 10:27
  */
 @Data
 public class OrderOverviewVO {

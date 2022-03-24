@@ -19,7 +19,7 @@ package com.taotao.cloud.oss.util;
  * 媒体类型工具类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/26 10:45
  */
 public class MimeTypeUtil {

@@ -1,19 +1,15 @@
 package com.taotao.cloud.core.pinyin.util;
 
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
 import com.taotao.cloud.core.pinyin.constant.enums.PinyinStyleEnum;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @author binbin.hou
- * @since 0.1.2
- */
 public class PinyinHelperConnectorTest {
 
     /**
      * 首字母用空字符串连接
-     * @since 0.1.2
      */
     @Test
     public void firstLetterEmptyTest() {

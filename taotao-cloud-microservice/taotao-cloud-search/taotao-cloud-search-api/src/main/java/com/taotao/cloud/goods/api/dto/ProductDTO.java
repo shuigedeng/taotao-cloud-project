@@ -21,7 +21,7 @@ import java.io.Serializable;
 /**
  * @author shuigedeng
  * @since 2020/10/22 12:29
- * @version 1.0.0
+ * @version 2022.03
  */
 //@ApiModel(value = "商品对象DTO")
 public class ProductDTO implements Serializable {

@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 租户Mapper
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-14
  **/
 @Mapper

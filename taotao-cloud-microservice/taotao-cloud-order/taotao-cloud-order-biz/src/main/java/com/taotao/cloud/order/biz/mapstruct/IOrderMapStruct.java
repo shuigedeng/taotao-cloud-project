@@ -25,7 +25,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/11 14:42
  */
 @Mapper(builder = @Builder(disableBuilder = true),
@@ -44,7 +44,7 @@ public interface IOrderMapStruct {
 	 * @param orderInfo order
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/11/11 14:47
 	 */
 	OrderVO orderToOrderVO(OrderInfo orderInfo);
@@ -56,7 +56,7 @@ public interface IOrderMapStruct {
 	//  * @return com.taotao.cloud.uc.api.vo.user.AddUserVO
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
 	//
@@ -67,7 +67,7 @@ public interface IOrderMapStruct {
 	//  * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 15:00
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
 	//
@@ -78,7 +78,7 @@ public interface IOrderMapStruct {
 	//  * @return com.taotao.cloud.uc.biz.entity.SysUser
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 14:52
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// SysUser userDtoToSysUser(UserDTO userDTO);
 	//
@@ -90,7 +90,7 @@ public interface IOrderMapStruct {
 	//  * @return void
 	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

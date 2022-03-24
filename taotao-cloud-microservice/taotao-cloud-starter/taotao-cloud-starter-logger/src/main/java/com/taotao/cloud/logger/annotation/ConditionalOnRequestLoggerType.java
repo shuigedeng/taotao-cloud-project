@@ -37,7 +37,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 系统操作记录
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/6/3 13:32
  */
 @Retention(RetentionPolicy.RUNTIME)

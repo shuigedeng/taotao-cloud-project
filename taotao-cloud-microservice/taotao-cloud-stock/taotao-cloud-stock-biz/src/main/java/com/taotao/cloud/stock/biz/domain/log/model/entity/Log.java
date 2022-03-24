@@ -9,7 +9,7 @@ import com.xtoon.cloud.sys.domain.model.user.UserName;
 /**
  * 日志实体
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-02
  **/
 public class Log implements Entity<Log> {

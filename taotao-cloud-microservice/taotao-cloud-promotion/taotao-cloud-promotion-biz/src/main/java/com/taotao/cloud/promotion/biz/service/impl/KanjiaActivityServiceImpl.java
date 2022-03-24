@@ -20,6 +20,7 @@ import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityMapper;
 import com.taotao.cloud.promotion.biz.service.KanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.biz.service.KanjiaActivityLogService;
 import com.taotao.cloud.promotion.biz.service.KanjiaActivityService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +32,6 @@ import java.util.Objects;
 
 /**
  * 砍价活动参与记录业务层实现
- *
- * @author qiuqiu
- * @since 2021/7/1
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

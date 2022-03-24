@@ -32,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
  * ElkWebInterceptor
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/6/3 10:49
  */
 public class ElkWebInterceptor implements HandlerInterceptor {

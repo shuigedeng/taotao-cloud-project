@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import javax.imageio.ImageIO;
 
-/**
- * @author chenjh
- * @since 2019/7/16 16:22
- */
 public class MathCaptcha extends AbstractMathCaptcha {
 
 	public MathCaptcha(int width, int height) {

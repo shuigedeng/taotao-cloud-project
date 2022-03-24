@@ -6,14 +6,11 @@ import org.junit.Test;
 
 /**
  * 音调获取
- * @author binbin.hou
- * @since 0.1.0
  */
 public class PinyinHelperToneNumTest {
 
     /**
      * 音调列表测试
-     * @since 0.1.1
      */
     @Test
     public void toneNumListTest() {
@@ -30,7 +27,6 @@ public class PinyinHelperToneNumTest {
 
     /**
      * 音调列表测试
-     * @since 0.1.1
      */
     @Test
     public void toneNumList2Test() {

@@ -24,7 +24,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  *
  * @author shuigedeng
  * @since 2020/12/30 下午4:39
- * @version 1.0.0
+ * @version 2022.03
  */
 @Configuration
 public class NettyWebSocketConfig {

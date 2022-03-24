@@ -35,7 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
  * QiniuUploadFileService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/08/24 16:15
  */
 public class QiniuUploadFileServiceImpl extends AbstractUploadFileService {

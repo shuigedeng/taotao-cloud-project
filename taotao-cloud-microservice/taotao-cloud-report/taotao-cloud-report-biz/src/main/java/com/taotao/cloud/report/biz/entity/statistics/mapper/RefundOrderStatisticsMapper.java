@@ -11,9 +11,6 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 退款统计数据处理层
- *
- * @author Bulbasaur
- * @since 2020/12/10 11:22
  */
 public interface RefundOrderStatisticsMapper extends BaseMapper<StoreFlow> {
 

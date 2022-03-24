@@ -28,7 +28,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
  * 用户权限不足
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/8/25 09:55
  */
 public class CustomizedAccessDeniedHandler implements AccessDeniedHandler {

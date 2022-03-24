@@ -39,7 +39,7 @@ public interface RemoteWithdrawService {
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.aftersale.api.vo.WithdrawVO>
 	 * @author shuigedeng
 	 * @since 2020/11/20 上午9:50
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
 	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
 	Result<WithdrawVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);

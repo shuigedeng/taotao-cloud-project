@@ -19,7 +19,7 @@ package com.taotao.cloud.stock.biz.application.task;
  * UserTask
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/12/28 09:48
  */
 public class UserTask {

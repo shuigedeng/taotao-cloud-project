@@ -13,9 +13,6 @@ import java.util.List;
 
 /**
  * 订单统计业务层
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface OrderStatisticsService extends IService<Order> {
 

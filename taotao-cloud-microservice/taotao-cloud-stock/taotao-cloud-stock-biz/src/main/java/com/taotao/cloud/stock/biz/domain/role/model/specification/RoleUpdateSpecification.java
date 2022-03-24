@@ -6,7 +6,7 @@ import com.xtoon.cloud.sys.domain.model.role.Role;
 /**
  * 角色修改Specification
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-27
  **/
 public class RoleUpdateSpecification extends AbstractSpecification<Role> {

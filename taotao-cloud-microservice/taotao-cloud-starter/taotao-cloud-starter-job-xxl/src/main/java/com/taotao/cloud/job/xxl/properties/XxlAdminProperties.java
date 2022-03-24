@@ -19,7 +19,7 @@ package com.taotao.cloud.job.xxl.properties;
  * XxlAdminProperties
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/8/30 20:30
  */
 public class XxlAdminProperties {

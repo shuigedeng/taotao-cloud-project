@@ -39,7 +39,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  * SecurityHandlerComponent
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/30 09:05
  */
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)

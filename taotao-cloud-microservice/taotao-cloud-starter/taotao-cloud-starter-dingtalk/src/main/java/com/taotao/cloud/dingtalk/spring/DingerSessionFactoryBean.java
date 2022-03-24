@@ -11,7 +11,7 @@ import org.springframework.beans.factory.InitializingBean;
  * DingerSessionFactoryBean
  *
 
- * @version 1.2
+ * @version 2022.03
  */
 public class DingerSessionFactoryBean implements FactoryBean<DingerSessionFactory>,
 	InitializingBean {

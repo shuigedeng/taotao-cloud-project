@@ -9,9 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 退款订单统计业务层
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface RefundOrderStatisticsService extends IService<StoreFlow> {
 

@@ -23,9 +23,6 @@
 //import org.springframework.security.core.AuthenticationException;
 //import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 //
-///**
-// * @author zyc
-// */
 //public class CustomOauth2AuthenticationFailureHandler implements AuthenticationFailureHandler {
 //
 //    @Override

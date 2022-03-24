@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 系统日志查询服务实现类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-05-10
  **/
 @Service

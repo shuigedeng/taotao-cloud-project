@@ -24,7 +24,7 @@ import org.apache.ibatis.logging.Log;
  * CustomStdOutImpl
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/10/28 10:42
  */
 public class CustomStdOutImpl implements Log {

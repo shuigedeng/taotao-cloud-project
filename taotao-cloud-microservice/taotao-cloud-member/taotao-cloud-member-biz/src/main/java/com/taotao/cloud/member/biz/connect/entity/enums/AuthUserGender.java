@@ -44,7 +44,6 @@ public enum AuthUserGender {
 	 *
 	 * @param originalGender 用户第三方标注的原始性别
 	 * @return 用户性别
-	 * @since 1.13.2
 	 */
 	public static AuthUserGender getWechatRealGender(String originalGender) {
 		String noGender = "0";

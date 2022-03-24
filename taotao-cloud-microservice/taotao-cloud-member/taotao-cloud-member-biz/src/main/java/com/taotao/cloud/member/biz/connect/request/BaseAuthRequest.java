@@ -102,7 +102,6 @@ public abstract class BaseAuthRequest implements AuthRequest {
 	 *
 	 * @param state state 验证授权流程的参数，可以防止csrf
 	 * @return 返回授权地址
-	 * @since 1.9.3
 	 */
 	@Override
 	public String authorize(String state) {
@@ -259,7 +258,6 @@ public abstract class BaseAuthRequest implements AuthRequest {
 	 * @param encode        是否 encode 编码
 	 * @param defaultScopes 默认的 scope， 当客户端没有配置 {@code scopes} 时启用
 	 * @return String
-	 * @since 1.16.7
 	 */
 	protected String getScopes(String separator, boolean encode, List<String> defaultScopes) {
 		List<String> scopes = config.getScopes();

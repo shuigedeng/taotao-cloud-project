@@ -22,7 +22,7 @@ import com.taotao.cloud.common.exception.BaseException;
  * QuartzExectionExecption
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/01/17 09:05
  */
 public class QuartzExecutionExecution extends BaseException {

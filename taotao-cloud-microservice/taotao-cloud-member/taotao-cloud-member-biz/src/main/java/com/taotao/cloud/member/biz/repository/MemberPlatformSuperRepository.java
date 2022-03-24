@@ -11,7 +11,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/9/29 18:02
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //@Repository
 //public class MemberPlatformSuperRepository extends JpaSuperRepository<MemberConnect, Long> {

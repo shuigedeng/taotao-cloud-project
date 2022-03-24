@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
  * P6spy日志实现
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/14 09:38
  */
 public class P6spyLogger extends FormattedLogger {

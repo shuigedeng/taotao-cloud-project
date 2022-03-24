@@ -11,10 +11,6 @@ import java.awt.Font;
 import java.io.OutputStream;
 import java.util.Random;
 
-/**
- * @author chenjh
- * @since 2019/7/16 17:44
- */
 public class CaptchaUtil {
 
 	/**

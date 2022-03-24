@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 /**
  * @author shuigedeng
  * @since 2020/11/20 上午9:42
- * @version 1.0.0
+ * @version 2022.03
  */
 @Schema(description = "支付流水信息VO")
 public class PayFlowVO implements Serializable {

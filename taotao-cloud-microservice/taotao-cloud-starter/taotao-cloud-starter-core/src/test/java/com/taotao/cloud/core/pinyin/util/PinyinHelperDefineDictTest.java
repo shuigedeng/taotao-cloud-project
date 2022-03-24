@@ -1,5 +1,6 @@
 package com.taotao.cloud.core.pinyin.util;
 
+import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,8 +11,6 @@ import java.util.Map;
 
 /**
  * 分词测试
- * @author binbin.hou
- * @since 0.0.4
  */
 public class PinyinHelperDefineDictTest {
 
@@ -39,7 +38,6 @@ public class PinyinHelperDefineDictTest {
 
     /**
      * 自定义词典测试
-     * @since 0.0.7
      */
     @Test
     public void definePhraseDictTest() {
@@ -49,7 +47,6 @@ public class PinyinHelperDefineDictTest {
 
     /**
      * 自定义字典测试
-     * @since 0.0.7
      */
     @Test
     public void defineDictTest() {

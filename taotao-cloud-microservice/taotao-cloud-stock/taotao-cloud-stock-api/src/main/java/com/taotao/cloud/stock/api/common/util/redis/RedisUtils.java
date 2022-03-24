@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * Redis工具类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-01-23
  **/
 @Component

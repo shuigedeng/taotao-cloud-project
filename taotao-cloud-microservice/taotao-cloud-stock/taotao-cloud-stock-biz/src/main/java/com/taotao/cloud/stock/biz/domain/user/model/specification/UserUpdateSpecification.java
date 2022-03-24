@@ -8,7 +8,7 @@ import com.xtoon.cloud.sys.domain.model.user.User;
 /**
  * 用户修改Specification
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-27
  **/
 public class UserUpdateSpecification extends AbstractSpecification<User> {

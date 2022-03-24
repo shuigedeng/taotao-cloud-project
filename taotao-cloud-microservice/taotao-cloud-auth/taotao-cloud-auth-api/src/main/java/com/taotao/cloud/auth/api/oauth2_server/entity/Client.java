@@ -24,7 +24,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/5/2 11:17
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //@Table(name = "oauth_client_details")
 //@org.hibernate.annotations.Table(appliesTo = "oauth_client_details", comment = "客户端表")

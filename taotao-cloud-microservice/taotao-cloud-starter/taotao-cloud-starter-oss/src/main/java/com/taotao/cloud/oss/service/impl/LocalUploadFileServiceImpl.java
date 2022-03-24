@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
  * LocalUploadFileService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/08/24 16:10
  */
 public class LocalUploadFileServiceImpl extends AbstractUploadFileService {

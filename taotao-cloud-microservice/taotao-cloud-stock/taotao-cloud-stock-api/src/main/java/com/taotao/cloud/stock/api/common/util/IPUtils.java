@@ -7,9 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * IP地址
- *
- * @author haoxin
- * @date 2021-02-02
  **/
 public class IPUtils {
 	private static Logger logger = LoggerFactory.getLogger(IPUtils.class);

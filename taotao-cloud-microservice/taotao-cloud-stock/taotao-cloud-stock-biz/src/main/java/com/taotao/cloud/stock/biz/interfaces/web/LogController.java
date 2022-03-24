@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * 系统日志Controller
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-04
  **/
 @Api(tags = "日志管理")

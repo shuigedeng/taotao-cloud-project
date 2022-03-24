@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * 机器人客服表
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/13 09:46
  */
 @Entity

@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Import;
  * 开启qrcode
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)

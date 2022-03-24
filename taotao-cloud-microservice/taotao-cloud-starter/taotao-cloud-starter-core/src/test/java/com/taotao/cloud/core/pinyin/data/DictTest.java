@@ -13,8 +13,6 @@ import java.util.List;
 
 /**
  * 词典生成辅助类
- * @author binbin.hou
- * @since 0.0.1
  */
 @Ignore
 public class DictTest {

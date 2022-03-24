@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * 验证码Controller
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-06-23
  **/
 @Api(tags = "验证码管理")

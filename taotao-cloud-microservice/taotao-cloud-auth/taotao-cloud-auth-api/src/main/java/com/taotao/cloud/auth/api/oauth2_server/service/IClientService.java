@@ -26,7 +26,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/4/29 15:13
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //public interface IClientService {
 //
@@ -73,7 +73,7 @@
 //     *
 //     * @author shuigedeng
 //     * @since 2020/10/9 14:48
-//     * @version 1.0.0
+//     * @version 2022.03
 //     */
 //    List<Client> getAllClient();
 //
@@ -84,7 +84,7 @@
 //     * @param clientDto clientDto
 //     * @author shuigedeng
 //     * @since 2020/10/9 14:56
-//     * @version 1.0.0
+//     * @version 2022.03
 //     */
 //    Boolean updateClient(String clientId, ClientDTO clientDto);
 //}

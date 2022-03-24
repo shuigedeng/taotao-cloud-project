@@ -20,7 +20,7 @@ package com.taotao.cloud.dingtalk.session;
  * DefaultDingerSessionFactory
  *
 
- * @version 1.2
+ * @version 2022.03
  */
 public class DefaultDingerSessionFactory implements DingerSessionFactory {
 

@@ -37,7 +37,7 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
  * es配置类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 06:47
  */
 @Configuration

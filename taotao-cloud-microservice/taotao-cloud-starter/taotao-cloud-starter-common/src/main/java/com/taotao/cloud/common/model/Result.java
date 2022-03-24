@@ -30,7 +30,7 @@ import org.slf4j.MDC;
  * 返回实体类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/29 15:15
  */
 @Schema(description = "返回结果对象")

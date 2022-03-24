@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * 系统日志查询服务接口
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-05-10
  **/
 public interface LogQueryService {

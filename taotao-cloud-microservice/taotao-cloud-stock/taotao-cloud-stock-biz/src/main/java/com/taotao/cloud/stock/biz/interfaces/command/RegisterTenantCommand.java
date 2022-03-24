@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * 注册租户Command
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-14
  **/
 @Data

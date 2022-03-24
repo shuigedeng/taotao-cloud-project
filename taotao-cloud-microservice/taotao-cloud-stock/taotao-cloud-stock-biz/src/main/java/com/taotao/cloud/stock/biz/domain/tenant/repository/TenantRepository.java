@@ -12,7 +12,7 @@ import com.taotao.cloud.stock.biz.domain.tenant.model.vo.TenantName;
 /**
  * 租户-Repository接口
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-14
  **/
 public interface TenantRepository {

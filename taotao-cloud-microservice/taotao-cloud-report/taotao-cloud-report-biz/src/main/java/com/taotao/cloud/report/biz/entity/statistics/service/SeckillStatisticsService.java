@@ -5,9 +5,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 秒杀统计
- *
- * @author Chopper
- * @since 2020/11/18 9:45 上午
  */
 public interface SeckillStatisticsService extends IService<Seckill> {
 

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 验证码Mapper
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 @Mapper

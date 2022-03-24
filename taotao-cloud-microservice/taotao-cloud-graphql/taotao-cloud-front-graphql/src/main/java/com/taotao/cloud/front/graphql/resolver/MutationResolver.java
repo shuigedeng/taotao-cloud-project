@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
  *
  * @author shuigedeng
  * @since 2020/11/9 09:55
- * @version 1.0.0
+ * @version 2022.03
  */
 @Component
 public class MutationResolver implements GraphQLQueryResolver, GraphQLMutationResolver {

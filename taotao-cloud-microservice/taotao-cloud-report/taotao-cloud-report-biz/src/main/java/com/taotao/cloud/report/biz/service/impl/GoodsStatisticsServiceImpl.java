@@ -20,9 +20,6 @@ import java.util.Objects;
 
 /**
  * 商品统计业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:30
  */
 @Service
 public class GoodsStatisticsServiceImpl extends ServiceImpl<GoodsStatisticsMapper, Goods> implements GoodsStatisticsService {

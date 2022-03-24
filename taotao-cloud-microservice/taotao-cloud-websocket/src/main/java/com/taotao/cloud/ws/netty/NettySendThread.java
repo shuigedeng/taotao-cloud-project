@@ -25,7 +25,7 @@ import java.util.Objects;
  *
  * @author shuigedeng
  * @since 2020/12/30 下午4:46
- * @version 1.0.0
+ * @version 2022.03
  */
 public class NettySendThread implements Runnable {
 	private final ChannelHandlerContext ctx;

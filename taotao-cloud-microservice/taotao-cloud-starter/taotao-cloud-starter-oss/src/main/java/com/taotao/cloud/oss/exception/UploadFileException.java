@@ -21,7 +21,7 @@ import com.taotao.cloud.common.exception.BaseException;
  * 业务异常
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/2 11:21
  */
 public class UploadFileException extends BaseException {

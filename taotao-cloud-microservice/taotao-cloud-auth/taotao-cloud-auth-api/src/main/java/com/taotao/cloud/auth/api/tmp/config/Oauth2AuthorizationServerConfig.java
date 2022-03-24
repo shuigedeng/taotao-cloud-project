@@ -25,10 +25,6 @@
 //import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 //import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 //
-///**
-//
-// * @since 0.0.1
-// */
 //@Configuration(proxyBeanMethods = false)
 //@EnableConfigurationProperties(AuthorizationProperties.class)
 //public class Oauth2AuthorizationServerConfig {

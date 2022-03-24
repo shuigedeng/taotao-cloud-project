@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * XSS过滤
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-02
  **/
 public class XssFilter implements Filter {

@@ -21,7 +21,7 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
  * 消息处理者
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/9/29 15:55
  */
 public interface MessageProcess<T> {

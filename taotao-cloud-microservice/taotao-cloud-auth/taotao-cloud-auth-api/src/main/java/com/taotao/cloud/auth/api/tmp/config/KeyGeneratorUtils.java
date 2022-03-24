@@ -25,10 +25,6 @@
 //import javax.crypto.KeyGenerator;
 //import javax.crypto.SecretKey;
 //
-///**
-//
-// * @since 0.1.0
-// */
 //final class KeyGeneratorUtils {
 //
 //	private KeyGeneratorUtils() {

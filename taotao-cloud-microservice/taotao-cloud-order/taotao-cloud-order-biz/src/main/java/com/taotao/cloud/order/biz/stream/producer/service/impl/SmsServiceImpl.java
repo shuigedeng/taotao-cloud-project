@@ -8,8 +8,6 @@ import vip.mate.message.service.ISmsService;
 
 /**
  * 发送短信实现类
- *
- * @author xuzhanfu
  */
 @Service
 @AllArgsConstructor

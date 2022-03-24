@@ -22,7 +22,7 @@ import org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingConte
  * TraceIdPatternLogbackLayout
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/09/16 08:57
  */
 public class TraceIdPatternLogbackLayout extends PatternLayout {

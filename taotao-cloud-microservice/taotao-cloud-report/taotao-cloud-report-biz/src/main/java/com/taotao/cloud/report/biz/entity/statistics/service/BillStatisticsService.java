@@ -6,9 +6,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 结算单统计
- *
- * @author Chopper
- * @since 2020/11/17 4:28 下午
  */
 public interface BillStatisticsService extends IService<Bill> {
 

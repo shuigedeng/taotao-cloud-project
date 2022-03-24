@@ -5,7 +5,7 @@ import com.xtoon.cloud.sys.application.command.PermissionCommand;
 /**
  * 权限应用服务接口
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-17
  **/
 public interface PermissionApplicationService {

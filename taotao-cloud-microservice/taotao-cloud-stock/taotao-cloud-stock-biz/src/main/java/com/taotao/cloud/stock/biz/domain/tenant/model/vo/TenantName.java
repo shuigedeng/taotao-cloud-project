@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 租户名
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 public class TenantName implements ValueObject<TenantName> {

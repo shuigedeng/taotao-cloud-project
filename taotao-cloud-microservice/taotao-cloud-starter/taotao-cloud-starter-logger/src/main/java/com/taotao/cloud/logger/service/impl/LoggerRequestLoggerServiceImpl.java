@@ -24,7 +24,7 @@ import com.taotao.cloud.logger.service.IRequestLoggerService;
  * 审计日志实现类-logger
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/2 11:18
  */
 public class LoggerRequestLoggerServiceImpl implements IRequestLoggerService {

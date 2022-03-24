@@ -31,7 +31,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/5/13 16:08
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //@Component
 //public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {

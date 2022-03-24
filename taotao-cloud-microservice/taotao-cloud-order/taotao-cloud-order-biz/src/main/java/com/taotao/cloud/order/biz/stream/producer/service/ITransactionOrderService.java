@@ -2,8 +2,6 @@ package com.taotao.cloud.order.biz.stream.producer.service;
 
 /**
  * 订单事务消息
- *
- * @author xuzhanfu
  */
 public interface ITransactionOrderService {
 

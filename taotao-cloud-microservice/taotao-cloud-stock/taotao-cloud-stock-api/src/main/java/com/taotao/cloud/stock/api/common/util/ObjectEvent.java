@@ -18,10 +18,6 @@
 
 package com.taotao.cloud.stock.api.common.util;
 
-/**
- * @author Tang Zhi
- * @since 1.0
- */
 public interface ObjectEvent {
 
     Object getSource();

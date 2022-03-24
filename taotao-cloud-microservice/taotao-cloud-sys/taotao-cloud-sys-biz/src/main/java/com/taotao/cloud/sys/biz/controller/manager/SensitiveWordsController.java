@@ -35,7 +35,7 @@ public class SensitiveWordsController {
 	private final ISensitiveWordService sensitiveWordService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@GetMapping(value = "/get/{id}")
+	@GetMapping(value = "/{id}")
 	public Result<SensitiveWord> get(
 		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
 		@PathVariable String id) {
@@ -71,7 +71,7 @@ public class SensitiveWordsController {
 
 	@Operation(summary = "批量删除", description = "批量删除")
 	@ApiImplicitParam(name = "ids", value = "敏感词ID", required = true, dataType = "String", allowMultiple = true, paramType = "path")
-	@DeleteMapping(value = "/delByIds/{ids}")
+	@DeleteMapping(value = "/{ids}")
 	public Result<Boolean> delAllByIds(
 		@Parameter(description = "敏感词ID", required = true) @NotEmpty(message = "敏感词ID不能为空")
 		@PathVariable List<String> ids) {

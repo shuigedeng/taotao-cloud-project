@@ -11,7 +11,7 @@ import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysTenantDO;
 /**
  * 租户Converter
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-15
  **/
 public class TenantConverter {

@@ -5,9 +5,6 @@ import lombok.Data;
 
 /**
  * 分类统计VO
- *
- * @author Bulbasaur
- * @since 2020/12/10 15:42
  */
 @Data
 public class CategoryStatisticsDataVO {

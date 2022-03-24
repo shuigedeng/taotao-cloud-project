@@ -25,7 +25,7 @@ import java.util.Map;
  * 查询服务
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 08:01
  */
 public interface IQueryService {

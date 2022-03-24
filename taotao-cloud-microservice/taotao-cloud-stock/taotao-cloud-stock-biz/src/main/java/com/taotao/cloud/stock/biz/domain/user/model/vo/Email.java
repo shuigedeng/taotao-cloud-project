@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * 邮箱
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 public final class Email implements ValueObject<Email> {
