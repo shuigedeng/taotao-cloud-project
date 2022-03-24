@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 文件上传接口
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/26 10:42
  */
 public interface UploadFileService {

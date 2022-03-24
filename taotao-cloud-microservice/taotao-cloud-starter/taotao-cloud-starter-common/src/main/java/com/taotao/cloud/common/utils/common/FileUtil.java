@@ -623,9 +623,8 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	//  *
 	//  * @param paths 路径列表
 	//  * @return java.lang.String
-	//  * @author shuigedeng
 	//  * @since 2020/10/15 15:03
-	//  * @version 1.0.0
+	//  * @version 2022.03
 	//  */
 	// public String getFilePath(String... paths) {
 	//     StringBuilder sb = new StringBuilder();

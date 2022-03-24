@@ -8,9 +8,6 @@ import java.util.List;
 
 /**
  * 会员签到业务层
- *
- * @author pikachu
- * @since 2020-02-25 14:10:16
  */
 public interface MemberSignService extends IService<MemberSign> {
 

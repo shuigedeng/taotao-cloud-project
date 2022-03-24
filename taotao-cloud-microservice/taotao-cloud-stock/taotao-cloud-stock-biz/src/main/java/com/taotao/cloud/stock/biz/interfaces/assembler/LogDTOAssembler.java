@@ -7,7 +7,7 @@ import com.xtoon.cloud.sys.dto.LogDTO;
 /**
  * 日志Assembler
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-06-21
  **/
 public class LogDTOAssembler {

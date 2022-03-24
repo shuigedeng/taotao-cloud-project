@@ -12,9 +12,6 @@ import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
 
 /**
  * 砍价活动参与记录业务层
- *
- * @author qiuqiu
- * @date 2021/7/1 9:45 上午
  */
 public interface KanjiaActivityService extends IService<KanjiaActivity> {
 

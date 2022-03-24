@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 消息订单消息
- *
- * @author pangu
  */
 @Slf4j
 @Service

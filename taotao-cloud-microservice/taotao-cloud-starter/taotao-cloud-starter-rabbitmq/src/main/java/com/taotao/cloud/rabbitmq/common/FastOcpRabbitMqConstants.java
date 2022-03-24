@@ -19,7 +19,7 @@ package com.taotao.cloud.rabbitmq.common;
  * FastOcpRabbitMqConstants
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/28 17:28
  */
 public class FastOcpRabbitMqConstants {

@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 密码Command
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-20
  **/
 @Data

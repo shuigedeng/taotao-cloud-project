@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 用户工厂
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-24
  **/
 public class UserFactory {

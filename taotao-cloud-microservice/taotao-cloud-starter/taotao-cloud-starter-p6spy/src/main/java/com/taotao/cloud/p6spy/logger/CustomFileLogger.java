@@ -29,7 +29,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * FileLogger
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/10/28 09:33
  */
 public class CustomFileLogger extends FileLogger {

@@ -2,8 +2,6 @@ package com.taotao.cloud.report.biz.entity.statistics.entity.enums;
 
 /**
  * 统计查询
- * @author Chopper
- * @since 2021/2/9 16:17
  */
 public enum StatisticsQuery {
 

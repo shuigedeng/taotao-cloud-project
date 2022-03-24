@@ -8,7 +8,7 @@ import com.taotao.cloud.stock.biz.domain.captcha.model.vo.Uuid;
 /**
  * 验证码Repository
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-05-10
  **/
 public interface CaptchaRepository {

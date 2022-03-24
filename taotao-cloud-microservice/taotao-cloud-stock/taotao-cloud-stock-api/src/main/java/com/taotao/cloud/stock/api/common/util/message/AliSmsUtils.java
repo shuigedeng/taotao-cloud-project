@@ -16,9 +16,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 发送短信 - 阿里大鱼
- *
- * @author haoxin
- * @date 2021-01-23
  **/
 @Component
 public class AliSmsUtils {

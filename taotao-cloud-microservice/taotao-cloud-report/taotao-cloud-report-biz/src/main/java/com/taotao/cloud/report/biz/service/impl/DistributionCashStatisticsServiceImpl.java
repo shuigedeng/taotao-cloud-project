@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 分销佣金统计层实现
- *
- * @author pikachu
- * @since 2020-03-126 18:04:56
  */
 @Service
 public class DistributionCashStatisticsServiceImpl extends ServiceImpl<DistributionCashStatisticsMapper, DistributionCash>

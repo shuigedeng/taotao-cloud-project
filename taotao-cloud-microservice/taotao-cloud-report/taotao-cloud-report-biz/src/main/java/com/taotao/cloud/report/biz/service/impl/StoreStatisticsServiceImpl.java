@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 商品统计业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:30
  */
 @Service
 public class StoreStatisticsServiceImpl extends ServiceImpl<StoreStatisticsMapper, Store> implements StoreStatisticsService {

@@ -33,7 +33,7 @@ import reactor.core.publisher.Mono;
  *
  * @author shuigedeng
  * @since 2020/4/29 22:10
- * @version 1.0.0
+ * @version 2022.03
  */
 public class CustomServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 

@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @since 2020/11/9 09:54
- * @version 1.0.0
+ * @version 2022.03
  */
 @Component
 public class QueryResolver implements GraphQLQueryResolver {

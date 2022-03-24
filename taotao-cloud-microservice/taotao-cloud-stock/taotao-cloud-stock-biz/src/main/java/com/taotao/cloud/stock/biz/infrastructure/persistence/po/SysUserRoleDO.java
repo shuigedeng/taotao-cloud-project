@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * 用户角色关联DO
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-15
  **/
 @Data

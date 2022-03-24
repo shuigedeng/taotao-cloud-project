@@ -28,7 +28,7 @@ import java.util.Random;
  * 生成验证码工具类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/30 10:28
  */
 public class CaptchaUtil {

@@ -22,9 +22,6 @@
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 //
-///**
-// * @author zyc
-// */
 //public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 //
 //	@Override

@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * 用户DTO
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-23
  **/
 @Data

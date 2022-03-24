@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 /**
  * mybatis拦截器，自动注入创建人、创建时间、修改人、修改时间
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-01-25
  **/
 @Slf4j

@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  *
  * @author shuigedeng
  * @since 2020/12/30 下午4:45
- * @version 1.0.0
+ * @version 2022.03
  */
 @Component
 @ChannelHandler.Sharable

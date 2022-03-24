@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 用户应用服务实现类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-09
  **/
 @Service

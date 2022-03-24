@@ -2,9 +2,6 @@ package com.taotao.cloud.portal.util;
 
 /**
  * 常量类
- *
- * @author xiaoming
- * @blame xiaoming
  */
 public interface Constants {
     /**

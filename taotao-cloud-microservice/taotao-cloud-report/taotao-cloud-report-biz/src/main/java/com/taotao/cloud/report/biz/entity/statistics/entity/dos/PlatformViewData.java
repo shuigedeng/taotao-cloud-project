@@ -10,9 +10,6 @@ import java.util.Date;
 
 /**
  * 平台pv统计
- *
- * @author Chopper
- * @since 2020-06-19 17:50
  */
 @Data
 @TableName("li_s_platform_view_data")

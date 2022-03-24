@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 文件上传抽象类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 07:47
  */
 public abstract class AbstractUploadFileService implements UploadFileService {

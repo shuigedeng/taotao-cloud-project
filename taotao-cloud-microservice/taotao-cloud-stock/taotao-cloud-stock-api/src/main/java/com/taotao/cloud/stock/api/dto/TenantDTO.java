@@ -6,9 +6,6 @@ import java.io.Serializable;
 
 /**
  * 租户DTO
- *
- * @author haoxin
- * @date 2021-04-03
  **/
 @Data
 public class TenantDTO implements Serializable {

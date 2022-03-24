@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * IndexController related
- *
- * @author yanhom
- * @date 2021-08-13 下午11:49
  */
 @RestController
 @RequestMapping("/dtp")

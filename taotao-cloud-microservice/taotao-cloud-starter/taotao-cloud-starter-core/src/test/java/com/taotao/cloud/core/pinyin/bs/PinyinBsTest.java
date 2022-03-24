@@ -1,15 +1,11 @@
 package com.taotao.cloud.core.pinyin.bs;
 
+import com.taotao.cloud.common.utils.pinyin.bs.PinyinBs;
 import com.taotao.cloud.core.pinyin.support.style.PinyinToneStyles;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-
-/**
- * @author binbin.hou
- * @since 0.0.1
- */
 public class PinyinBsTest {
 
     /**

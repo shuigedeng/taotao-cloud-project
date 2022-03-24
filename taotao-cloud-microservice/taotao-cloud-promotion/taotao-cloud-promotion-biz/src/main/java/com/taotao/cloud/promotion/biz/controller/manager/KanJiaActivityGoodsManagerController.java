@@ -17,9 +17,6 @@ import java.util.Arrays;
 
 /**
  * 管理端,促销接口
- *
- * @author qiuqiu
- * @date 2021/7/2
  **/
 @RestController
 @Api(tags = "管理端,砍价促销接口")

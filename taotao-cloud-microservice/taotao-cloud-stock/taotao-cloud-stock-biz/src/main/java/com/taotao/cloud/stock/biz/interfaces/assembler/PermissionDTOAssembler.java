@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Assembler class for the Permission.
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-17
  **/
 public class PermissionDTOAssembler {

@@ -11,9 +11,6 @@ import java.util.List;
 
 /**
  * 平台PV统计
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface PlatformViewService extends IService<PlatformViewData> {
 

@@ -3,6 +3,7 @@ package com.taotao.cloud.store.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
+import com.taotao.cloud.store.api.dto.CollectionDTO;
 import com.taotao.cloud.store.api.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.dto.StoreEditDTO;
@@ -13,9 +14,6 @@ import com.taotao.cloud.store.biz.entity.Store;
 
 /**
  * 店铺业务层
- *
- * @author pikachu
- * @since 2020/11/18 11:45 上午
  */
 public interface StoreService extends IService<Store> {
 

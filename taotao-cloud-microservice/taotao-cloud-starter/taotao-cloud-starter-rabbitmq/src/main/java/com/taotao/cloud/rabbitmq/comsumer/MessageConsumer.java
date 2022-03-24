@@ -21,7 +21,7 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
  * MessageConsumer
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/9/29 15:57
  */
 public interface MessageConsumer {
@@ -30,7 +30,7 @@ public interface MessageConsumer {
 	 * 消费消息
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/9/29 15:57
 	 */
 	DetailResponse consume();

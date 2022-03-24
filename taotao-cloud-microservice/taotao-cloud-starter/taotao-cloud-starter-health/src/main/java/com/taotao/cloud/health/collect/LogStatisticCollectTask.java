@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 收集日志记录情况：最近一分钟增长日志条数及错误日志条数
  *
  * @author Robin.Wang
- * @version 1.0.0
+ * @version 2022.03
  * @date 2019-10-23
  */
 public class LogStatisticCollectTask extends AbstractCollectTask {

@@ -47,7 +47,7 @@
 // * 修改jpa自动生成表乱序的问题
 // *
 // * @author shuigedeng
-// * @version 1.0.0
+// * @version 2022.03
 // * @since 2020/9/30 16:36
 // */
 //class PropertyContainer {

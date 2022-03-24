@@ -10,10 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author chenjh
- * @since 2019/7/16 16:35
- */
 public class MathGifCaptcha extends AbstractMathCaptcha {
 
 	public MathGifCaptcha(int width, int height) {

@@ -9,15 +9,13 @@ import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 /**
  * 页面数据DO
- *
- * @author Bulbasaur
- * @since 2020/12/10 17:42
  */
 @Data
 @TableName("li_page_data")

@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 public interface ICronService {
 
 	/**
-	 * cron执行表达式
+	 * 获取下一次执行时间列表
 	 *
 	 * @param expression cron表达式
 	 * @return 下一次执行时间列表

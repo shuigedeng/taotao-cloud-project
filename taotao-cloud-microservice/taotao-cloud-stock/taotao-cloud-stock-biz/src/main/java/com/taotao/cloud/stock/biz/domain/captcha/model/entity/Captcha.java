@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 验证码
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-05-10
  **/
 public class Captcha implements Entity<Captcha> {

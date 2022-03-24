@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.dto.StoreCompanyDTO;
@@ -22,6 +24,7 @@ import com.taotao.cloud.store.biz.entity.StoreDetail;
 import com.taotao.cloud.store.biz.mapper.StoreMapper;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +34,6 @@ import java.util.Optional;
 
 /**
  * 店铺业务层实现
- *
- * @author pikachu
  * @since 2020-03-07 16:18:56
  */
 @Service

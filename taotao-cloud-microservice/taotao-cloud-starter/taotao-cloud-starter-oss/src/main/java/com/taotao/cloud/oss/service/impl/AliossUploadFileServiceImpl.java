@@ -47,7 +47,7 @@ import org.springframework.web.multipart.MultipartFile;
  * AliossUploadFileService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/08/24 15:59
  */
 public class AliossUploadFileServiceImpl extends AbstractUploadFileService {

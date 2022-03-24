@@ -31,7 +31,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * BaseService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/10/10 10:21
  */
 public class BaseSuperServiceImpl<

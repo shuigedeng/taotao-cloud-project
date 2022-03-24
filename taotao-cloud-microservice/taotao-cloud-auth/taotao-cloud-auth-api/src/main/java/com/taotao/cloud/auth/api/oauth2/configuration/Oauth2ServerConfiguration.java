@@ -40,10 +40,6 @@
 //import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 //import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 //
-///**
-//
-// * @since 0.0.1
-// */
 //@Configuration(proxyBeanMethods = false)
 //@Import(OAuth2AuthorizationServerConfiguration.class)
 //public class Oauth2ServerConfiguration {

@@ -138,7 +138,7 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 
 	/**
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/10/22 17:01
 	 */
 	public static class SeataXidFilter extends OncePerRequestFilter {
@@ -159,7 +159,7 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 	 * SeataInterceptor
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/10/22 17:00
 	 */
 	public static class SeataInterceptor implements RequestInterceptor {

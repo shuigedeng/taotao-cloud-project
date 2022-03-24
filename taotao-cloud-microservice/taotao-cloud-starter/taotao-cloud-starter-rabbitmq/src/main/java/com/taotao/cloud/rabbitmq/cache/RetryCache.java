@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * retryCache的容器
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/28 17:32
  */
 public class RetryCache {

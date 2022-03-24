@@ -1,18 +1,16 @@
 package com.taotao.cloud.core.pinyin.util;
 
+import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * 同音字相关
- * @author binbin.hou
- * @since 0.0.8
  */
 public class PinyinHelperSameTest {
 
     /**
      * 同音字判断
-     * @since 0.0.8
      */
     @Test
     public void hasSamePinyinTest() {

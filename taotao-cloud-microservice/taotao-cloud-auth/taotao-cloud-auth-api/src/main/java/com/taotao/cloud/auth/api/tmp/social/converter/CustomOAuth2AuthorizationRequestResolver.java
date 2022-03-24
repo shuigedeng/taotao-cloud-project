@@ -86,7 +86,6 @@
 //	 *
 //	 * @param authorizationRequestCustomizer the {@code Consumer} to be provided the {@link
 //	 *                                       OAuth2AuthorizationRequest.Builder}
-//	 * @since 5.3
 //	 */
 //	public void setAuthorizationRequestCustomizer(
 //		Consumer<OAuth2AuthorizationRequest.Builder> authorizationRequestCustomizer) {

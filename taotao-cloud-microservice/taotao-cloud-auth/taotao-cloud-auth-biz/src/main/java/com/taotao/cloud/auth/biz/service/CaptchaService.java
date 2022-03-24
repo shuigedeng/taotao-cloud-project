@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
  * CaptchaService
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/12/21 20:33
  */
 @Service

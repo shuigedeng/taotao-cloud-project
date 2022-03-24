@@ -33,7 +33,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * --add-opens java.desktop/sun.awt=ALL-UNNAMED
  * --add-exports java.desktop/sun.awt=ALL-UNNAMED
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/29 15:13
  */
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.auth.biz.repository")

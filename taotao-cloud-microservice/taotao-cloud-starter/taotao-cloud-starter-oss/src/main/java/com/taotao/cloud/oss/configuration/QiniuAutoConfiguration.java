@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/26 10:28
  */
 @Configuration
@@ -88,7 +88,7 @@ public class QiniuAutoConfiguration implements InitializingBean {
 	 * 认证信息实例
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/10/26 11:36
 	 */
 	@Bean

@@ -17,7 +17,10 @@ import com.taotao.cloud.store.biz.entity.StoreDetail;
 import com.taotao.cloud.store.biz.mapper.StoreDetailMapper;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +32,6 @@ import java.util.Objects;
 
 /**
  * 店铺详细业务层实现
- *
- * @author pikachu
  * @since 2020-03-07 16:18:56
  */
 @Service

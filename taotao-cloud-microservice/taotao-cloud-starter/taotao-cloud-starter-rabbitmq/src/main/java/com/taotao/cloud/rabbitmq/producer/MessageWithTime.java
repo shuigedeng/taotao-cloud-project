@@ -19,7 +19,7 @@ package com.taotao.cloud.rabbitmq.producer;
  * MessageWithTime
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/28 17:29
  */
 public class MessageWithTime {

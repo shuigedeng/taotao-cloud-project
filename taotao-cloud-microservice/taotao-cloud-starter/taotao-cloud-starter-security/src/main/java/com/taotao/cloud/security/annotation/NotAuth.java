@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * 免鉴权
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/8/25 09:58
  */
 @Target({ElementType.METHOD, ElementType.TYPE})

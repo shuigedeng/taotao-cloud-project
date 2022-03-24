@@ -23,7 +23,7 @@ import com.taotao.cloud.processor.annotation.AutoListener;
  * AaaaConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2022/02/07 17:13
  */
 @AutoListener

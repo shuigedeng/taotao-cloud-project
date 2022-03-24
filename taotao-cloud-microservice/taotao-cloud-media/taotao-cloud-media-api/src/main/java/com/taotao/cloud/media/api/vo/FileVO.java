@@ -23,7 +23,7 @@ import java.util.Objects;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/11/12 17:10
  */
 @Schema(name = "FileVO", description = "文件VO")

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 权限DTO
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-17
  **/
 @Data

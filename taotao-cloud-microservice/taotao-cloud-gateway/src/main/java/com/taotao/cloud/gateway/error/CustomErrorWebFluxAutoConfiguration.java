@@ -42,7 +42,7 @@ import org.springframework.web.reactive.result.view.ViewResolver;
  * 自定义异常处理
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/29 22:12
  */
 @Configuration

@@ -20,7 +20,7 @@ package com.taotao.cloud.elasticsearch.model;
  * 逻辑删除条件对象
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 07:49
  */
 public class LogicDelDto {

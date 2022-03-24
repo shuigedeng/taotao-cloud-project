@@ -19,7 +19,7 @@ package com.taotao.cloud.front.graphql.entity;
 /**
  * @author shuigedeng
  * @since 2020/11/9 09:53
- * @version 1.0.0
+ * @version 2022.03
  */
 public class Result {
 	private Integer respCode;

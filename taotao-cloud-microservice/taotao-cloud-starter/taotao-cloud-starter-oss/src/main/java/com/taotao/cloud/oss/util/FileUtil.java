@@ -42,7 +42,7 @@ import java.util.Objects;
  * 文件工具类
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/10/26 11:10
  */
 public class FileUtil {

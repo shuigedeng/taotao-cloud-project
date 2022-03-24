@@ -19,9 +19,6 @@ import java.util.List;
 
 /**
  * 会员统计业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/9 18:33
  */
 @Service
 public class MemberStatisticsServiceImpl extends ServiceImpl<MemberStatisticsMapper, MemberStatisticsData> implements MemberStatisticsService {

@@ -8,9 +8,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 售后统计业务层
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface AfterSaleStatisticsService extends IService<AfterSale> {
 

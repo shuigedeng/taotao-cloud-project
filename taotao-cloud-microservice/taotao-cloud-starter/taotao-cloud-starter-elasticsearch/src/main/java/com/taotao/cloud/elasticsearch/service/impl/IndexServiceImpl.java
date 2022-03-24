@@ -44,7 +44,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * 索引服务实现
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/6/15 11:27
  */
 public class IndexServiceImpl implements IIndexService {

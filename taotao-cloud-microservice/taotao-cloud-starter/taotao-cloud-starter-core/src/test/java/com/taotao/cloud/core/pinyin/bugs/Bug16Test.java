@@ -4,10 +4,6 @@ import com.taotao.cloud.core.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @author binbin.hou
- * @since 0.3.1
- */
 public class Bug16Test {
 
     @Test

@@ -28,7 +28,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
  * 用户未认证 接口需要特定的权限，但是当前用户是匿名用户或者是记住我的用户
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/8/25 09:55
  */
 public class CustomizedAuthenticationEntryPoint implements AuthenticationEntryPoint {

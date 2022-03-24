@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 权限-Repository接口
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-14
  **/
 public interface PermissionRepository {

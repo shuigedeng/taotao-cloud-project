@@ -12,7 +12,7 @@ import javax.persistence.Table;
  *
  * @author shuigedeng
  * @since 2020/11/13 09:46
- * @version 1.0.0
+ * @version 2022.03
  */
 @Entity
 @Table(name = "tt_pay_flow")

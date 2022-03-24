@@ -2,9 +2,6 @@ package com.taotao.cloud.stock.api.common.util.exception;
 
 /**
  * 自定义异常
- *
- * @author haoxin
- * @date 2021-02-02
  **/
 public class XTException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

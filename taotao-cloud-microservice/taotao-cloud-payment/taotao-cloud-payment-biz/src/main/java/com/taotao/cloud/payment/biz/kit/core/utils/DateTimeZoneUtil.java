@@ -12,8 +12,6 @@ import java.util.Date;
 /**
  * 时间工具类
  * 依赖 xk-time
- *
- * @author YunGouOS
  */
 public class DateTimeZoneUtil implements Serializable {
 

@@ -25,7 +25,7 @@ import javax.validation.constraints.Pattern;
  * 会员query
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/9/30 08:49
  */
 @Schema(name = "MemberQuery", description = "会员query")

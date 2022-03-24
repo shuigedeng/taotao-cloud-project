@@ -50,7 +50,7 @@ import reactor.core.publisher.Mono;
  * 基于nacos动态路由配置
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/2 19:33
  */
 @Configuration
@@ -76,7 +76,7 @@ public class DynamicRouteConfiguration {
 	 * nacos路由数据源
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/5/2 19:26
 	 */
 	public static class NacosRouteDefinitionRepository implements RouteDefinitionRepository {

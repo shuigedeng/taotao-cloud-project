@@ -24,7 +24,7 @@ import org.springframework.cloud.openfeign.loadbalancer.FeignBlockingLoadBalance
  * RestTemplate 配置
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2017/11/17
  */
 @RefreshScope

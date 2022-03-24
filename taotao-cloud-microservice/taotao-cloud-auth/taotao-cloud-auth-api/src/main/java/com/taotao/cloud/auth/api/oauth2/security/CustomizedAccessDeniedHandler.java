@@ -11,8 +11,6 @@
 //
 ///**
 // * 用户权限不足处理器
-// *
-// * @author zyc
 // */
 //public class CustomizedAccessDeniedHandler implements AccessDeniedHandler {
 //

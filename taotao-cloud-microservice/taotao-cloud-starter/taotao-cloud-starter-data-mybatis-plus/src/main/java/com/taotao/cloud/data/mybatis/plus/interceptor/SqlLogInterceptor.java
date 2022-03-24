@@ -44,7 +44,7 @@ import org.apache.ibatis.session.ResultHandler;
  * SqlLogInterceptor
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/10/30 22:01
  */
 @Intercepts({

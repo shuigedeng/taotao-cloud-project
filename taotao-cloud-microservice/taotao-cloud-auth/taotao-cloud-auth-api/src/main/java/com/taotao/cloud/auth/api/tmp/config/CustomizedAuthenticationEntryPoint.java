@@ -12,8 +12,6 @@
 //
 ///**
 // * 接口需要特定的权限，但是当前用户是匿名用户或者是记住我的用户
-// *
-// * @author zyc
 // */
 //public class CustomizedAuthenticationEntryPoint implements AuthenticationEntryPoint {
 //    @Override

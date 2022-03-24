@@ -5,9 +5,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 会员商品评价统计
- *
- * @author Bulbasaur
- * @since 2020-02-25 14:10:16
  */
 public interface MemberEvaluationStatisticsService extends IService<MemberEvaluation> {
 

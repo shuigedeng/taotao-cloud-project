@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 日志-Repository实现类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-02
  **/
 @Repository

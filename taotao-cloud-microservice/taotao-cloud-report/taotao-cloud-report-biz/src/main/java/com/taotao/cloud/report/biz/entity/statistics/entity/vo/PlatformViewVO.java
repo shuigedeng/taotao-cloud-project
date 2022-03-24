@@ -8,9 +8,6 @@ import java.util.Date;
 
 /**
  * 流量数据展示VO
- *
- * @author Chopper
- * @since 2020-06-19 17:50
  */
 @Data
 public class PlatformViewVO {

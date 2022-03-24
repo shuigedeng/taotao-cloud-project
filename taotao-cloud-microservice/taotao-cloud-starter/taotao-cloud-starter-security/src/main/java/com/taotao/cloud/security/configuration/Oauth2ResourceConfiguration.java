@@ -63,7 +63,7 @@ import org.springframework.web.util.pattern.PathPattern;
  * Oauth2ResourceSecurityConfigurer
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/8/25 09:57
  */
 @Configuration

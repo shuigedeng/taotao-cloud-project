@@ -5,9 +5,6 @@ package com.taotao.cloud.member.biz.connect;// package com.taotao.cloud.sys.biz.
 //
 // /**
 //  * qq用户表
-//  *
-//  * @author taotao
-//  * @since 2020-05-14 14:36:39
 //  */
 // public interface SysQqUserMapper extends SuperMapper<SysQqUser> {
 //

@@ -35,7 +35,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/4/29 17:40
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //@Component
 //public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService {

@@ -30,9 +30,6 @@ import java.util.Map;
 
 /**
  * 商品统计业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:30
  */
 @Service
 public class StoreFlowStatisticsServiceImpl extends ServiceImpl<StoreFlowStatisticsMapper, StoreFlow> implements StoreFlowStatisticsService {

@@ -22,7 +22,7 @@ import java.util.Objects;
  * SearchDto
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 07:49
  */
 public class SearchDto implements Serializable {

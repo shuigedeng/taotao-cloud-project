@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 身份验证应用服务实现类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-05-10
  **/
 @DubboService

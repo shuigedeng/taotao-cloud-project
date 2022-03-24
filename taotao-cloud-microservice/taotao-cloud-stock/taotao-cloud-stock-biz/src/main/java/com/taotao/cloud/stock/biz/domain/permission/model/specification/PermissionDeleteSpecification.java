@@ -8,7 +8,7 @@ import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
 /**
  * 权限删除Specification
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-20
  **/
 public class

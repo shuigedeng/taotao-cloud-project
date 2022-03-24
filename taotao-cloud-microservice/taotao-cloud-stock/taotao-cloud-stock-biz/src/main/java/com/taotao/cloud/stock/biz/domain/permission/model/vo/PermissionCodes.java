@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * 权限编码
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-15
  **/
 public class PermissionCodes implements ValueObject<PermissionCodes> {

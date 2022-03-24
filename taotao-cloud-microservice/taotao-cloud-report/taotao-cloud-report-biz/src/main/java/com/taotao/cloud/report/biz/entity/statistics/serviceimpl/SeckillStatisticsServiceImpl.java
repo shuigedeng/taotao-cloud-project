@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 秒杀活动统计
- *
- * @author Chopper
- * @since 2020/8/21
  */
 @Service
 public class SeckillStatisticsServiceImpl extends ServiceImpl<SeckillStatisticsMapper, Seckill> implements SeckillStatisticsService {

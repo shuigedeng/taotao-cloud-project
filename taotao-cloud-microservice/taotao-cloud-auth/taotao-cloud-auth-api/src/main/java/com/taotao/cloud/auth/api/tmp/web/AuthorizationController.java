@@ -20,10 +20,6 @@
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.ResponseBody;
 //
-///**
-//
-// * @since 0.0.1
-// */
 //@Controller
 //public class AuthorizationController {
 //

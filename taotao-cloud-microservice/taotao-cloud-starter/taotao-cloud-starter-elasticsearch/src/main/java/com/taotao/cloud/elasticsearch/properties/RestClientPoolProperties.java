@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * es httpClient连接池配置
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/3 06:47
  */
 @RefreshScope

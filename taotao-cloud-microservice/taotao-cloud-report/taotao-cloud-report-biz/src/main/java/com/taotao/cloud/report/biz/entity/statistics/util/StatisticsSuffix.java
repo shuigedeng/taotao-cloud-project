@@ -4,9 +4,6 @@ import java.util.Calendar;
 
 /**
  * 统计缓存后缀工具
- *
- * @author Chopper
- * @since 2021-01-15 15:30
  */
 public class StatisticsSuffix {
 

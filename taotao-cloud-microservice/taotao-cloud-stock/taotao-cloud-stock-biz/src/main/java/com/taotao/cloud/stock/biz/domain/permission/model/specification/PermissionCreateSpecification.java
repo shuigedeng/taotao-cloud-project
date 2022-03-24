@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 权限创建Specification
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-20
  **/
 public class PermissionCreateSpecification extends AbstractSpecification<Permission> {

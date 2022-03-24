@@ -12,7 +12,7 @@
 // * @Description TODO
 // * @Author shuigedeng
 // * @since 2019-07-19 09:27
-// * @Version 1.0
+// * @version 2022.03
 // */
 //public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 //

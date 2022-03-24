@@ -17,7 +17,7 @@ public interface IDeptService extends BaseSuperService<Dept, Long> {
 	/**
 	 * 获取部门树
 	 *
-	 * @return 部门树
+	 * @return 部门树列表
 	 * @since 2022-03-23 08:52:34
 	 */
 	List<DeptTreeVO> tree();

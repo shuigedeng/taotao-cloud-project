@@ -11,8 +11,6 @@ package com.taotao.cloud.core.pinyin.util;//package com.github.houbb.pinyin.test
 //
 ///**
 // * 声母韵母测试
-// * @author binbin.hou
-// * @since 0.1.1
 // */
 //public class PinyinHelperShengMuTest {
 //

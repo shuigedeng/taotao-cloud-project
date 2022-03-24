@@ -7,7 +7,7 @@ import com.xtoon.cloud.sys.domain.model.tenant.TenantRepository;
 /**
  * 租户创建Specification
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-03-29
  **/
 public class TenantCreateSpecification extends AbstractSpecification<Tenant> {

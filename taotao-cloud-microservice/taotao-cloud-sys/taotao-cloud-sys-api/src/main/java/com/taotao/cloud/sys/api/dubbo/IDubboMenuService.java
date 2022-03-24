@@ -9,7 +9,6 @@ import java.util.List;
  *
  * @author shuigedeng
  * @since 2020-10-16 15:54:05
- * @since 1.0
  */
 public interface IDubboMenuService {
 

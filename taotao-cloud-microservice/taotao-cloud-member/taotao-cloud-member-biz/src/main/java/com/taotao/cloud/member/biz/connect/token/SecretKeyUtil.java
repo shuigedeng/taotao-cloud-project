@@ -6,10 +6,6 @@ import javax.crypto.SecretKey;
 
 /**
  * SignWithUtil
- *
- * @author Chopper
- * @version v1.0
- * 2020-11-18 17:30
  */
 public class SecretKeyUtil {
     public static SecretKey generalKey() {

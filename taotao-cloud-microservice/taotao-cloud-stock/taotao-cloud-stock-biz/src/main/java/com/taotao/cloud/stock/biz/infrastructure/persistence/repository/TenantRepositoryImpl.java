@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 租户-Repository实现类
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-14
  **/
 @Repository

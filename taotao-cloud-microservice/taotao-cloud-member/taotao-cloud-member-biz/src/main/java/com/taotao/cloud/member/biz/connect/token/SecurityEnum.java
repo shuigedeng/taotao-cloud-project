@@ -2,8 +2,6 @@ package com.taotao.cloud.member.biz.connect.token;
 
 /**
  * 安全相关常量
- *
- * @author Chopper
  */
 public enum SecurityEnum {
 

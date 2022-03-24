@@ -53,7 +53,7 @@
 // *
 // * @author shuigedeng
 // * @since 2020/4/29 20:01
-// * @version 1.0.0
+// * @version 2022.03
 // */
 //@Configuration
 //@EnableAuthorizationServer

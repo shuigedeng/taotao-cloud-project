@@ -31,7 +31,7 @@
 //  *
 //  * @author shuigedeng
 //  * @since 2020/4/29 20:26
-//  * @version 1.0.0
+//  * @version 2022.03
 //  */
 // @Component
 // public class MobileAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

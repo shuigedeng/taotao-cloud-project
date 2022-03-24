@@ -60,7 +60,7 @@ import reactor.core.publisher.Mono;
  * 特殊路由配置信息
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/4/29 22:11
  */
 @Configuration
@@ -113,7 +113,7 @@ public class RouterFunctionConfiguration {
 	 * Hystrix 降级处理
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
@@ -175,7 +175,7 @@ public class RouterFunctionConfiguration {
 	 * 图形验证码处理器
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
@@ -204,7 +204,7 @@ public class RouterFunctionConfiguration {
 	 * 图形验证码处理器
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
@@ -246,7 +246,7 @@ public class RouterFunctionConfiguration {
 	 * 图形验证码处理器
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2022.03
 	 * @since 2020/4/29 22:11
 	 */
 	@Component

@@ -6,7 +6,7 @@ import com.xtoon.cloud.sys.dto.AuthenticationDTO;
 /**
  * Assembler class for the AuthenticationDTOAssembler.
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-09
  **/
 public class AuthenticationDTOAssembler {

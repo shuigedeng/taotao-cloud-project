@@ -18,8 +18,6 @@ import java.util.Map;
 
 /**
  * <p> google 开源图形码工具类</p>
- *
- * @author
  */
 @Slf4j
 public class QrCodeKit {

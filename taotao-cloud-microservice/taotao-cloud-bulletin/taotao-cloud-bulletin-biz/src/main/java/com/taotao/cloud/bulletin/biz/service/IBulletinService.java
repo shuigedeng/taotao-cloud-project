@@ -21,7 +21,7 @@ import com.taotao.cloud.bulletin.biz.entity.Bulletin;
 /**
  * @author shuigedeng
  * @since 2020/11/13 09:59
- * @version 1.0.0
+ * @version 2022.03
  */
 public interface IBulletinService {
 	/**
@@ -31,7 +31,7 @@ public interface IBulletinService {
 	 * @return com.taotao.cloud.aftersale.biz.entity.Withdraw
 	 * @author shuigedeng
 	 * @since 2020/11/20 上午9:46
-	 * @version 1.0.0
+	 * @version 2022.03
 	 */
     Bulletin findWithdrawById(Long id);
 }

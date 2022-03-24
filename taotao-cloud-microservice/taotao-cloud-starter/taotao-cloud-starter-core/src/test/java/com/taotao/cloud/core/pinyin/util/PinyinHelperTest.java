@@ -1,5 +1,6 @@
 package com.taotao.cloud.core.pinyin.util;
 
+import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
 import com.taotao.cloud.core.pinyin.constant.enums.PinyinStyleEnum;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,16 +8,10 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author binbin.hou
- * @since 0.0.1
- */
 public class PinyinHelperTest {
 
     /**
      * 转换中文测试
-     *
-     * @since 0.0.1
      */
     @Test
     public void toPinyinTest() {
@@ -27,8 +22,6 @@ public class PinyinHelperTest {
 
     /**
      * 转换英文测试
-     *
-     * @since 0.0.1
      */
     @Test
     public void toPinyinNumEnTest() {
@@ -38,8 +31,6 @@ public class PinyinHelperTest {
 
     /**
      * 转换为中文测试
-     *
-     * @since 0.0.1
      */
     @Test
     public void toPinyinEmptyTest() {
@@ -49,8 +40,6 @@ public class PinyinHelperTest {
 
     /**
      * 返回多音字列表测试
-     *
-     * @since 0.0.2
      */
     @Test
     public void toPinyinListTest() {
@@ -60,8 +49,6 @@ public class PinyinHelperTest {
 
     /**
      * 返回多音字列表测试
-     *
-     * @since 0.1.1
      */
     @Test
     public void toPinyinListNormalTest() {
@@ -71,8 +58,6 @@ public class PinyinHelperTest {
 
     /**
      * 转换中文繁体测试
-     *
-     * @since 0.0.5
      */
     @Test
     public void toPinyinChineseSimpleTest() {
@@ -84,8 +69,6 @@ public class PinyinHelperTest {
      * 中文转拼音之后如果前后不是中文，且不是空格，那么应该添加一个空格。
      * （1）句子的结尾后面不用。
      * （2）句子的开头前面不用。
-     *
-     * @since 0.1.2
      */
     @Test
     public void whiteSpaceTest() {
@@ -98,7 +81,6 @@ public class PinyinHelperTest {
 
     /**
      * 地名
-     * @since 0.2.1
      */
     @Test
     public void locationTest() {
@@ -111,7 +93,6 @@ public class PinyinHelperTest {
 
     /**
      * 同音字
-     * @since 0.3.0
      */
     @Test
     public void samePinyinMapTest() {
@@ -128,7 +109,6 @@ public class PinyinHelperTest {
 
     /**
      * 同音字列表
-     * @since 0.3.0
      */
     @Test
     public void samePinyinListTest() {

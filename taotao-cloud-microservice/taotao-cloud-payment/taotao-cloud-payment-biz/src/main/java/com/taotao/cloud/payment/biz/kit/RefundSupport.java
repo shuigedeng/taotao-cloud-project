@@ -61,12 +61,6 @@ public class RefundSupport {
 
     /**
      * 功能描述: 修改子订单中已售后退款商品数量
-     *
-     * @return void
-     * @Author ftyy
-     * @Description //TODO
-     * @Date 17:33 2021/11/18
-     * @Param [afterSale]
      **/
     private void updateReturnGoodsNumber(AfterSale afterSale) {
         //根据商品id及订单sn获取子订单

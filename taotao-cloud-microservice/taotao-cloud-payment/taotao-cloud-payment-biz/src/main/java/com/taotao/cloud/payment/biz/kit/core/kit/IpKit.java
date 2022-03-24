@@ -5,9 +5,6 @@ package com.taotao.cloud.payment.biz.kit.core.kit;
 //
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author
- */
 public class IpKit {
     public IpKit() {
     }

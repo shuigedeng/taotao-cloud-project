@@ -6,7 +6,7 @@ import com.taotao.cloud.stock.biz.domain.log.model.entity.Log;
 /**
  * 日志-Repository接口
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-02
  **/
 public interface LogRepository {

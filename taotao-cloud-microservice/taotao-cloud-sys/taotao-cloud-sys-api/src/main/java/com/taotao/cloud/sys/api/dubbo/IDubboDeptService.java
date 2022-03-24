@@ -5,7 +5,6 @@ package com.taotao.cloud.sys.api.dubbo;
  *
  * @author shuigedeng
  * @since 2020-10-16 15:54:05
- * @since 1.0
  */
 public interface IDubboDeptService {
 

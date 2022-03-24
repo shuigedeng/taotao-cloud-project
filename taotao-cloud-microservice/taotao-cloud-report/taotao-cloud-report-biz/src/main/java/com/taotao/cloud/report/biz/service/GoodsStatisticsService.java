@@ -7,9 +7,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 商品统计业务层
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface GoodsStatisticsService extends IService<Goods> {
 

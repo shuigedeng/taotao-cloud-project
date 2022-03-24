@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * 角色编码
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 public class RoleCode implements ValueObject<RoleCode> {

@@ -25,9 +25,6 @@
 //
 // /**
 //  * gitee用户表
-//  *
-//  * @author taotao
-//  * @since 2020-05-14 14:36:39
 //  */
 // @Slf4j
 // @Service

@@ -33,7 +33,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * Oauth2LoginSecurityConfigurer
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/8/25 09:58
  */
 @Order(99)

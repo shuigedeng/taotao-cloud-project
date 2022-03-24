@@ -16,9 +16,6 @@ import vip.mate.core.rocketmq.constant.MessageConstant;
 import vip.mate.core.rocketmq.entity.Order;
 import vip.mate.message.service.ITransactionOrderService;
 
-/**
- * @author pangu
- */
 @Slf4j
 @Service
 @AllArgsConstructor

@@ -22,7 +22,6 @@ public class AuthChecker {
      * @param config        config
      * @param connectAuth source
      * @return true or false
-     * @since 1.6.1-beta
      */
     public static boolean isSupportedAuth(AuthConfig config, ConnectAuth connectAuth) {
         boolean isSupported = StringUtils.isNotEmpty(config.getClientId()) && StringUtils.isNotEmpty(config.getClientSecret()) && StringUtils.isNotEmpty(config.getRedirectUri());
@@ -37,7 +36,6 @@ public class AuthChecker {
      *
      * @param config        config
      * @param connectAuth source
-     * @since 1.6.1-beta
      */
     public static void checkConfig(AuthConfig config, ConnectAuth connectAuth) {
         String redirectUri = config.getRedirectUri();
@@ -58,7 +56,6 @@ public class AuthChecker {
      *
      * @param connectAuth 当前授权平台
      * @param callback      从第三方授权回调回来时传入的参数集合
-     * @since 1.8.0
      */
     public static void checkCode(ConnectAuth connectAuth, AuthCallback callback) {
         String code = callback.getCode();

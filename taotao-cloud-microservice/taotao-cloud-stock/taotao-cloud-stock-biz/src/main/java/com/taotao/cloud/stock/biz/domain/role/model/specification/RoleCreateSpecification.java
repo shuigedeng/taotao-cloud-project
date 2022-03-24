@@ -7,7 +7,7 @@ import com.xtoon.cloud.sys.domain.model.role.RoleRepository;
 /**
  * 角色创建Specification
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-20
  **/
 public class RoleCreateSpecification extends AbstractSpecification<Role> {

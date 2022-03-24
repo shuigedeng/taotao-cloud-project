@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * 租户DO
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-14
  **/
 @Data

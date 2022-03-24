@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * mybatis-plus配置
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-01-25
  **/
 @Slf4j

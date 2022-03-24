@@ -36,7 +36,7 @@ import org.springframework.security.core.GrantedAuthority;
  * MethodSecurityConfig
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/10/13 15:40
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)

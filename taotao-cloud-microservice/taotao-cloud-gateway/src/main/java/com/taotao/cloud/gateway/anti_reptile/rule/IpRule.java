@@ -12,10 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.server.ServerWebExchange;
 
-/**
- * @author kl @kailing.pub
- * @since 2019/7/8
- */
 public class IpRule extends AbstractRule {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IpRule.class);

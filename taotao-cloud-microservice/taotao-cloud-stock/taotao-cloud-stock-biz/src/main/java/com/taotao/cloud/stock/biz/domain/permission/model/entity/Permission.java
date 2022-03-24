@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 权限
  *
- * @author haoxin
+ * @author shuigedeng
  * @date 2021-02-08
  **/
 public class Permission implements Entity<Permission> {

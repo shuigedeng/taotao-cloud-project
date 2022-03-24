@@ -50,15 +50,11 @@ public class AuthConfig {
 	/**
 	 * Stack Overflow Key
 	 * <p>
-	 *
-	 * @since 1.9.0
 	 */
 	private String stackOverflowKey;
 
 	/**
 	 * 企业微信，授权方的网页应用ID
-	 *
-	 * @since 1.10.0
 	 */
 	private String agentId;
 
@@ -66,8 +62,6 @@ public class AuthConfig {
 	 * 使用 Coding 登录时，需要传该值。
 	 * <p>
 	 * 团队域名前缀，比如以“ https://justauth.coding.net/ ”为例，{@code codingGroupName} = justauth
-	 *
-	 * @since 1.15.5
 	 */
 	private String codingGroupName;
 
@@ -75,8 +69,6 @@ public class AuthConfig {
 	 * 针对国外服务可以单独设置代理 HttpConfig config = new HttpConfig(); config.setProxy(new
 	 * Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 10080)));
 	 * config.setTimeout(15000);
-	 *
-	 * @since 1.15.5
 	 */
 	//private HttpConfig httpConfig;
 
@@ -95,14 +87,11 @@ public class AuthConfig {
 	 * 该方案主要为了解决以下类似场景的问题：
 	 *
 	 * @see <a href="https://github.com/justauth/JustAuth/issues/83">https://github.com/justauth/JustAuth/issues/83</a>
-	 * @since 1.15.6
 	 */
 	private boolean ignoreCheckState;
 
 	/**
 	 * 支持自定义授权平台的 scope 内容
-	 *
-	 * @since 1.15.7
 	 */
 	private List<String> scopes;
 }

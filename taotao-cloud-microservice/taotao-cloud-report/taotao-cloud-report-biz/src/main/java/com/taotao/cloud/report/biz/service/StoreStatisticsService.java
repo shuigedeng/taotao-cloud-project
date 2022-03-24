@@ -5,9 +5,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 店铺统计业务层
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:06
  */
 public interface StoreStatisticsService extends IService<Store> {
 

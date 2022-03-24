@@ -18,7 +18,6 @@ import vip.mate.core.rocketmq.entity.Order;
  * 发送之后用于控制原子性的类
  * 在消息发送之后，收到rocketmq的发送结果通知后才提交的本地事务。
  *
- * @author pangu
  * @link https://blog.csdn.net/guzhangyu12345/article/details/107989633
  */
 @Slf4j

@@ -23,9 +23,6 @@ import java.util.Objects;
 
 /**
  * 售后统计业务层实现
- *
- * @author Bulbasaur
- * @since 2020/12/9 11:30
  */
 @Service
 public class AfterSaleStatisticsServiceImpl extends ServiceImpl<AfterSaleStatisticsMapper, AfterSale> implements AfterSaleStatisticsService {

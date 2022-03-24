@@ -10,7 +10,7 @@ import javax.validation.Validator;
 /**
  * hibernate-validator校验工具类
  *
- * @author haoxin
+ * @author shuigedeng
  */
 public class ValidatorUtils {
     private static Validator validator;

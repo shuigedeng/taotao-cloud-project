@@ -4,9 +4,6 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 用户状态枚举
- *
- * @author haoxin
- * @date 2021-02-02
  **/
 public enum StatusEnum implements ValueObject<StatusEnum> {
 

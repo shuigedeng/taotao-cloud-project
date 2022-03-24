@@ -24,9 +24,6 @@ import java.util.Map;
 
 /**
  * 页面浏览统计拦截
- *
- * @author Chopper
- * @since 2021-01-14 18:01
  */
 @Aspect
 @Configuration

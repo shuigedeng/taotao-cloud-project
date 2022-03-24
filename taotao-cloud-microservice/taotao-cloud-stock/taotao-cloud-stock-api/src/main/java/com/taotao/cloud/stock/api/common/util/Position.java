@@ -20,10 +20,6 @@ package com.taotao.cloud.stock.api.common.util;
 
 import java.io.Serializable;
 
-/**
- * @author Tang Zhi
- * @since 1.0
- */
 public interface Position extends Comparable<Position>, Serializable {
 
     int getPosition();

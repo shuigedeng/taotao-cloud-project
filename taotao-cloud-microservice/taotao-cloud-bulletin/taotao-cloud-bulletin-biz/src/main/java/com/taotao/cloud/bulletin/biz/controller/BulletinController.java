@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author shuigedeng
  * @since 2020/11/13 09:58
- * @version 1.0.0
+ * @version 2022.03
  */
 @Validated
 @RestController

@@ -19,7 +19,7 @@ package com.taotao.cloud.sms.enums;
  * SmsType
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2021/11/23 16:43
  */
 public enum RepositoryType {

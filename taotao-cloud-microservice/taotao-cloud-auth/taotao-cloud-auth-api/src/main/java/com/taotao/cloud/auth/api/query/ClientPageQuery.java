@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * 客户端分页查询Query
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.03
  * @since 2020/5/14 17:05
  */
 @Schema(description = "客户端分页查询Query")

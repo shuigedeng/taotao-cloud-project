@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 /**
  * Aggregate interface
- *
- * @author haoxin
- * @date 2021-02-01
  **/
 public interface Aggregate<T> extends Serializable {
 

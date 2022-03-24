@@ -1,11 +1,6 @@
 package com.taotao.cloud.portal.util;
 
 
-/**
- * @author xiaoming
- * @since 2020/3/9
- * @blame xiaoming
- */
 public class ResponseBase {
 
     /**
