@@ -40,7 +40,6 @@ public class RestTemplateUtil {
 	 *
 	 * @param url url
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:26:22
 	 */
 	public static Map httpGetRequestFactoryToMap(String url) {
@@ -58,7 +57,6 @@ public class RestTemplateUtil {
 	 *
 	 * @param url url
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:26:32
 	 */
 	public static Map restTemplateGetToMap(String url) {
@@ -71,7 +69,6 @@ public class RestTemplateUtil {
 	 *
 	 * @param url url
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:26:42
 	 */
 	public static String restTemplateGetToStr(String url) {
@@ -84,7 +81,6 @@ public class RestTemplateUtil {
 	 *
 	 * @param url url
 	 * @return {@link org.springframework.http.ResponseEntity }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:26:50
 	 */
 	public static ResponseEntity<String> httpGetHeaders(String url) {
@@ -102,7 +98,6 @@ public class RestTemplateUtil {
 	 * @param map  map
 	 * @param type type
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:26:59
 	 */
 	public static String getCommonPolicyJson(String url,

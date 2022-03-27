@@ -1,11 +1,25 @@
 package com.taotao.cloud.web.schedule.common.utils.proxy;
 
-import org.springframework.cglib.core.DebuggingClassWriter;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 
+/**
+ * ProxyUtils
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:10:42
+ */
 public class ProxyUtils {
 
+	/**
+	 * getInstance
+	 *
+	 * @param clazz       clazz
+	 * @param interceptor interceptor
+	 * @return 对象
+	 * @since 2022-03-25 15:10:39
+	 */
 	public static <T> T getInstance(Class<T> clazz, MethodInterceptor interceptor) {
 		//System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\tmp\\file");
 		//字节码加强器：用来创建动态代理类

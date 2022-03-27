@@ -16,6 +16,10 @@ import java.util.List;
 
 /**
  * 依赖libreoffice实现PDF转化
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:19:26
  */
 @Component
 public class PdfUtils {

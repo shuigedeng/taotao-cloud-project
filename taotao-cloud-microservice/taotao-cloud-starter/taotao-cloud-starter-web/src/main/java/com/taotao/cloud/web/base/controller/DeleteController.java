@@ -47,11 +47,10 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	BaseController<T, I> {
 
 	/**
-	 * 通用单体id删除
+	 * 通用根据单体id删除
 	 *
 	 * @param id id
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 删除结果
 	 * @since 2021-09-02 21:06:18
 	 */
 	@Operation(summary = "通用单体id删除", description = "通用单体id删除")
@@ -72,8 +71,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 * 删除
 	 *
 	 * @param id id
-	 * @return {@link com.taotao.cloud.common.model.Result } 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
-	 * @author shuigedeng
+	 * @return 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
 	 * @since 2021-09-02 21:06:27
 	 */
 	default Boolean handlerDeleteById(I id) {
@@ -89,8 +87,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 *
 	 * @param filedName  字段名称
 	 * @param filedValue 字段值
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
+	 * @return 单体字段删除结果
 	 * @since 2021-10-11 15:04:58
 	 */
 	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除", method = CommonConstant.DELETE)
@@ -118,8 +115,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 *
 	 * @param filedName  字段名称
 	 * @param filedValue 字段值
-	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @return 单体字段删除
 	 * @since 2021-10-11 15:03:39
 	 */
 	default Boolean handlerDeleteByFiled(String filedName, Object filedValue) {

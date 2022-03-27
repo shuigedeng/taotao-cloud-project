@@ -30,9 +30,25 @@ import java.util.List;
  */
 public interface IMongoService {
 
+	/**
+	 * 获取数据库名称
+	 *
+
+	 * @return 数据库名称
+	 * @since 2022-03-25 14:30:04
+	 */
 	public List<String> databaseNames();
 
+
+	/**
+	 * 获取集合数据
+	 *
+	 * @param databaseName 数据库名称
+	 * @return 集合数据
+	 * @since 2022-03-25 14:30:30
+	 */
 	public List<CollectionDto> collectionNames(String databaseName);
+
 
 	public PageModel<String> queryDataPage(MongoQueryParam mongoQueryParam, PageQuery pageQuery);
 }

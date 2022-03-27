@@ -6,29 +6,29 @@ package com.taotao.cloud.sys.api.enums;
  */
 public enum AppType {
 
-    /**
-     * IOS
-     */
-    IOS("IOS"),
-    /**
-     * 安卓
-     */
-    ANDROID("安卓");
+	/**
+	 * IOS
+	 */
+	IOS("IOS"),
+	/**
+	 * 安卓
+	 */
+	ANDROID("安卓");
 
-    private final String description;
+	private final String description;
 
-    AppType(String description) {
-        this.description = description;
+	AppType(String description) {
+		this.description = description;
 
-    }
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String description() {
-        return this.description;
-    }
+	public String description() {
+		return this.description;
+	}
 
 }
 

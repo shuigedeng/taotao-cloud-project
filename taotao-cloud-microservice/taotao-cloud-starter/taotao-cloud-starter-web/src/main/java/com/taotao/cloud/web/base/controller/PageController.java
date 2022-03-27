@@ -54,8 +54,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 通用分页查询
 	 *
 	 * @param params 分页参数
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 分页数据对象
 	 * @since 2021-09-02 21:11:55
 	 */
 	@Operation(summary = "通用分页查询", description = "通用分页查询")
@@ -73,21 +72,17 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 处理查询参数
 	 *
-	 * @param params params
-	 * @author shuigedeng
+	 * @param params 查询参数
 	 * @since 2021-09-02 21:07:14
 	 */
 	default void handlerQueryParams(PageQuery<QueryDTO> params) {
 	}
 
 	/**
-	 * 执行分页查询
-	 * <p>
-	 * 子类可以覆盖后重写查询逻辑
+	 * 执行分页查询 子类可以覆盖后重写查询逻辑
 	 *
 	 * @param params 分页参数
-	 * @return {@link com.baomidou.mybatisplus.core.metadata.IPage }
-	 * @author shuigedeng
+	 * @return 分页查询条件
 	 * @since 2021-09-02 21:07:20
 	 */
 	default IPage<T> pageQuery(PageQuery<QueryDTO> params) {
@@ -104,8 +99,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 处理对象中的非空参数和扩展字段中的区间参数，可以覆盖后处理组装查询条件
 	 *
 	 * @param params 分页参数
-	 * @return {@link com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap }
-	 * @author shuigedeng
+	 * @return 查询条件
 	 * @since 2021-09-02 21:07:30
 	 */
 	default QueryWrap<T> handlerWrapper(QueryDTO params) {
@@ -175,17 +169,15 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 处理查询后的数据
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:37
 	 */
 	default void handlerResult(IPage<T> page) {
 	}
 
 	/**
-	 * getQueryVOClass
+	 * 获取查询类型
 	 *
-	 * @return {@link Class&lt;QueryVO&gt; }
-	 * @author shuigedeng
+	 * @return 查询类型
 	 * @since 2021-10-20 08:47:25
 	 */
 	Class<QueryVO> getQueryVOClass();

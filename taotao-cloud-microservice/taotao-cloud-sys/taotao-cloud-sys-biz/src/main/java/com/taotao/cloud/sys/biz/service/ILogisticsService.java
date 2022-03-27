@@ -18,9 +18,11 @@ package com.taotao.cloud.sys.biz.service;
 import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 
 /**
+ * ILogisticsService 
+ *
  * @author shuigedeng
- * @since 2020/11/13 09:59
  * @version 2022.03
+ * @since 2022-03-25 14:58:48
  */
 public interface ILogisticsService {
 

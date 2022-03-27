@@ -7,17 +7,18 @@ import java.util.Set;
 /**
  * 用户-角色服务类
  *
- * @since 2020/4/30 13:20
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:33:42
  */
-public interface IUserRoleService extends
-	BaseSuperService<UserRole, Long> {
+public interface IUserRoleService extends BaseSuperService<UserRole, Long> {
 
 	/**
 	 * 添加用户-角色对应关系
 	 *
-	 * @param userId
-	 * @param roleIds
-	 * @return java.lang.Boolean
+	 * @param userId  用户id
+	 * @param roleIds 角色id列表
+	 * @return 修改结果
 	 */
 	Boolean saveUserRoles(Long userId, Set<Long> roleIds);
 }

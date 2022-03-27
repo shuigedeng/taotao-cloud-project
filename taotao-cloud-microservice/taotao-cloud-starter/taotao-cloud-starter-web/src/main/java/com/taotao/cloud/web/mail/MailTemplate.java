@@ -33,7 +33,6 @@ public interface MailTemplate {
 	 * @param subject 　　邮件主题
 	 * @param content 　　邮件内容
 	 * @param cc      　　　　　抄送地址
-	 * @author shuigedeng
 	 * @since 2021-09-09 11:42:05
 	 */
 	void sendSimpleMail(String to, String subject, String content, String... cc);
@@ -46,7 +45,6 @@ public interface MailTemplate {
 	 * @param content 邮件内容
 	 * @param cc      抄送地址
 	 * @throws MessagingException 邮件发送异常
-	 * @author shuigedeng
 	 * @since 2021-09-09 11:41:55
 	 */
 	void sendHtmlMail(String to, String subject, String content, String... cc)
@@ -61,7 +59,6 @@ public interface MailTemplate {
 	 * @param filePath 附件地址
 	 * @param cc       抄送地址
 	 * @throws MessagingException 邮件发送异常
-	 * @author shuigedeng
 	 * @since 2021-09-09 11:41:41
 	 */
 	void sendAttachmentsMail(String to, String subject, String content, String filePath,
@@ -77,7 +74,6 @@ public interface MailTemplate {
 	 * @param rscId   静态资源id
 	 * @param cc      抄送地址
 	 * @throws MessagingException 邮件发送异常
-	 * @author shuigedeng
 	 * @since 2021-09-09 11:41:26
 	 */
 	void sendResourceMail(String to, String subject, String content, String rscPath, String rscId,

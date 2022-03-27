@@ -110,7 +110,6 @@ public class XssUtil {
 	 * @param paramValue           待过滤的参数
 	 * @param ignoreParamValueList 忽略过滤的参数列表
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:29:53
 	 */
 	public static String xssClean(String paramValue, List<String> ignoreParamValueList) {
@@ -152,7 +151,6 @@ public class XssUtil {
 	 * @param ignoreParamValueList ignoreParamValueList
 	 * @param param                param
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:30:03
 	 */
 	public static String xssClean(String paramValue, List<String> ignoreParamValueList,
@@ -170,7 +168,6 @@ public class XssUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:30:13
 	 */
 	public static String stripXSSAndSql(String value) {
@@ -211,7 +208,6 @@ public class XssUtil {
 	 * @param paramValue           paramValue
 	 * @param ignoreParamValueList ignoreParamValueList
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:30:21
 	 */
 	private static boolean isIgnoreParamValue(String paramValue,

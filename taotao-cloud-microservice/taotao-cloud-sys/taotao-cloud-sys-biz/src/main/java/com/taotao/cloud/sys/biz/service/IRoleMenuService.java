@@ -5,18 +5,20 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.Set;
 
 /**
- * 角色-菜单服务类
+ * 角色-菜单服务类 
  *
- * @since 2020/4/30 13:20
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:01:39
  */
 public interface IRoleMenuService extends BaseSuperService<RoleMenu, Long> {
 
 	/**
 	 * 添加角色-菜单对应关系
 	 *
-	 * @param roleId
-	 * @param menuIds
-	 * @return java.lang.Boolean
+	 * @param roleId  角色id
+	 * @param menuIds 菜单id列表
+	 * @return 是否成功
 	 * @since 2020/10/21 09:20
 	 */
 	Boolean saveRoleMenu(Long roleId, Set<Long> menuIds);

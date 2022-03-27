@@ -9,6 +9,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
 import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
 
+/**
+ * ali支付配置服务
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:24:04
+ */
 public interface IAlipayConfigService extends IService<AlipayConfig> {
 
 	/**
@@ -34,7 +41,7 @@ public interface IAlipayConfigService extends IService<AlipayConfig> {
 	/**
 	 * 查询配置
 	 *
-	 * @return AlipayConfig
+	 * @return 配置信息
 	 */
 	AlipayConfig find();
 

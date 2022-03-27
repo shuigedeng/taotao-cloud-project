@@ -18,7 +18,9 @@ import lombok.Data;
 @Data
 public class EmailVo {
 
-	/** 收件人，支持多个收件人 */
+	/**
+	 * 收件人，支持多个收件人
+	 */
 	private List<String> tos;
 	private String subject;
 	private String content;

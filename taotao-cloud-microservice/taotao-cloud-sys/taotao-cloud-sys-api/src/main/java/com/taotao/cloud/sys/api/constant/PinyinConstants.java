@@ -25,7 +25,11 @@
 package com.taotao.cloud.sys.api.constant;
 
 /**
- * 拼音模块常量
+ * 拼音模块常量 
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:22:32
  */
 public interface PinyinConstants {
 

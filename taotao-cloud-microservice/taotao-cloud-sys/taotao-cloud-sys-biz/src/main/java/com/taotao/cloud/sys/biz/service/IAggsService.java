@@ -1,7 +1,13 @@
 package com.taotao.cloud.sys.biz.service;
 
 
-
+/**
+ * es聚合服务
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:23:00
+ */
 public interface IAggsService {
 	//// 词条聚集
 	//ResultData termsAggs(QueryCommand content) throws Exception;

@@ -52,9 +52,8 @@ public class JasyptUtil {
 	/**
 	 * 编码
 	 *
-	 * @param content content
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param content 数据
+	 * @return 编码结果
 	 * @since 2021-09-02 22:25:10
 	 */
 	public String encrypt(String content) {
@@ -64,8 +63,8 @@ public class JasyptUtil {
 	/**
 	 * 解码
 	 *
-	 * @param content content
-	 * @return {@link java.lang.String }
+	 * @param content 数据
+	 * @return 解码结果
 	 * @author shuigedeng
 	 * @since 2021-09-02 22:25:16
 	 */
@@ -76,13 +75,12 @@ public class JasyptUtil {
 	/**
 	 * 获取StringEncryptor
 	 *
-	 * @param password password
-	 * @return {@link org.jasypt.encryption.StringEncryptor }
-	 * @author shuigedeng
+	 * @param password 秘钥不能为空
+	 * @return StringEncryptor对象
 	 * @since 2021-09-02 22:25:26
 	 */
 	public static StringEncryptor getInstance(String password) throws Exception {
-		if (password == null || password.trim().equals("")) {
+		if (password == null || "".equals(password.trim())) {
 			LogUtil.error("秘钥不能为空！");
 			throw new Exception("org.jasypt.encryption.StringEncryptor秘钥不能为空！");
 		}

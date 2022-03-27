@@ -35,28 +35,25 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	IService<T> {
 
 	/**
-	 * mapper
+	 * 获取mapper类型
 	 *
-	 * @return {@link BaseSuperMapper&lt;T,I&gt; }
-	 * @author shuigedeng
+	 * @return mapper类型
 	 * @since 2021-10-11 15:50:43
 	 */
 	BaseSuperMapper<T, I> im();
 
 	/**
-	 * repository
+	 * 获取repository类型
 	 *
-	 * @return {@link com.taotao.cloud.web.base.repository.BaseSuperRepository&lt;T,I&gt; }
-	 * @author shuigedeng
+	 * @return repository类型
 	 * @since 2021-10-11 18:54:30
 	 */
 	BaseSuperRepository<T, I> cr();
 
 	/**
-	 * repository
+	 * 获取jpa repository类型
 	 *
-	 * @return {@link com.taotao.cloud.web.base.repository.BaseSuperRepository&lt;T,I&gt; }
-	 * @author shuigedeng
+	 * @return jpa repository类型
 	 * @since 2021-10-11 18:54:30
 	 */
 	JpaRepository<T, I> ir();
@@ -64,7 +61,6 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	/**
 	 * 刷新缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:51
 	 */
 	void refreshCache();
@@ -72,17 +68,15 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	/**
 	 * 清理缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:55
 	 */
 	void clearCache();
 
 	/**
-	 * getByIdCache
+	 * 获取缓存数据
 	 *
 	 * @param id id
-	 * @return {@link T }
-	 * @author shuigedeng
+	 * @return 缓存数据
 	 * @since 2021-10-15 16:51:28
 	 */
 	T getByIdCache(I id);
@@ -95,8 +89,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @param lockKey   锁的key
 	 * @param predicate 判断是否存在的条件
 	 * @param msg       对象已存在提示信息
-	 * @return boolean
-	 * @author shuigedeng
+	 * @return 新增结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
@@ -109,8 +102,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @param lock      锁实例
 	 * @param lockKey   锁的key
 	 * @param predicate 判断是否存在的条件
-	 * @return boolean
-	 * @author shuigedeng
+	 * @return 结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
@@ -123,8 +115,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @param lockKey   锁的key
 	 * @param predicate 判断是否存在的条件
 	 * @param msg       对象已存在提示信息
-	 * @return boolean
-	 * @author shuigedeng
+	 * @return 结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
@@ -135,10 +126,9 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 *
 	 * @param entity    实体对象
 	 * @param lock      锁实例
-	 * @param lockKey   锁的keyø
+	 * @param lockKey   锁的key
 	 * @param predicate 判断是否存在的条件
-	 * @return boolean
-	 * @author shuigedeng
+	 * @return 结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,

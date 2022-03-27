@@ -10,13 +10,18 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 
 /**
  * sql字段转java
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:16:28
  */
 public class ColUtil {
 
 	/**
 	 * 转换mysql数据类型为java数据类型
+	 *
 	 * @param type 数据库字段类型
-	 * @return String
+	 * @return java数据类型
 	 */
 	static String cloToJava(String type) {
 		Configuration config = getConfig();
@@ -26,6 +31,9 @@ public class ColUtil {
 
 	/**
 	 * 获取配置信息
+	 *
+	 * @return 配置信息
+	 * @since 2022-03-25 14:16:53
 	 */
 	public static PropertiesConfiguration getConfig() {
 		try {

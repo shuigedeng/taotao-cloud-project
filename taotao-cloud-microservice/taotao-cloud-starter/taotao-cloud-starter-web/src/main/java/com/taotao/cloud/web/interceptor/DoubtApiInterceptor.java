@@ -94,7 +94,6 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 	 * 获取JVM内存
 	 *
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-10 17:08:03
 	 */
 	private long getJVMUsed() {
@@ -106,7 +105,6 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 	 * DoubtApiInfo
 	 *
 	 * @author shuigedeng
-	 * @version 2021.9
 	 * @since 2021-09-10 17:08:13
 	 */
 	public static class DoubtApiInfo implements Comparable<DoubtApiInfo> {

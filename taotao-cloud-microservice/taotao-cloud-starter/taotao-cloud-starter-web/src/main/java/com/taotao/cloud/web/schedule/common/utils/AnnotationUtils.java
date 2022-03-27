@@ -9,8 +9,24 @@ import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * AnnotationUtils
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:10:03
+ */
 public class AnnotationUtils {
 
+	/**
+	 * changeAnnotationValue
+	 *
+	 * @param annotation annotation
+	 * @param key        key
+	 * @param newValue   newValue
+	 * @return 对象结果
+	 * @since 2022-03-25 15:10:08
+	 */
 	public static Object changeAnnotationValue(Annotation annotation, String key, Object newValue)
 		throws Exception {
 		InvocationHandler handler = Proxy.getInvocationHandler(annotation);
@@ -33,7 +49,7 @@ public class AnnotationUtils {
 	}
 
 	/**
-	 * 根据SuperScheduledOrder排序
+	 * 根据ScheduledOrder排序
 	 */
 	public static void scheduledOrderSort(List<Point> points) {
 		if (points == null || points.isEmpty()) {

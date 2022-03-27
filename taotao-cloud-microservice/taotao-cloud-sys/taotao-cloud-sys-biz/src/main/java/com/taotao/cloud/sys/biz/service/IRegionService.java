@@ -48,9 +48,14 @@ public interface IRegionService extends BaseSuperService<Region, Long> {
 	 * @since 2021-10-09 20:37:36
 	 */
 	List<RegionParentVO> tree();
+
 	List<RegionVO> getAllCity();
+
 	void synchronizationData(String url);
+
 	List<RegionTreeVO> treeOther();
+
 	List<Region> getItem(Long parentId);
+
 	Map<String, Object> getRegion(String cityCode, String townName);
 }

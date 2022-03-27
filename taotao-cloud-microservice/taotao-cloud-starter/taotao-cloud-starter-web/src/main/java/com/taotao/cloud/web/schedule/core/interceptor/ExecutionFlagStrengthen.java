@@ -7,6 +7,13 @@ import java.lang.reflect.Method;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * ExecutionFlagStrengthen 
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:17:48
+ */
 @ScheduledInterceptorOrder
 public class ExecutionFlagStrengthen implements BaseStrengthen {
     protected final Log logger = LogFactory.getLog(getClass());

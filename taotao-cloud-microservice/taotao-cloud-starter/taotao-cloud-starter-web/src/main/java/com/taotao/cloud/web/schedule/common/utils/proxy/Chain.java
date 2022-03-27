@@ -2,6 +2,13 @@ package com.taotao.cloud.web.schedule.common.utils.proxy;
 
 import java.util.List;
 
+/**
+ * Chain 
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:17:23
+ */
 public class Chain {
 
 	private List<Point> list;

@@ -70,7 +70,6 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 * @param params   参数
 	 * @param request  请求
 	 * @param response 响应
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:08:22
 	 */
 	@Operation(summary = "通用导出Excel", description = "通用导出Excel")
@@ -102,8 +101,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 * 通用预览Excel
 	 *
 	 * @param params 预览参数
-	 * @return {@link com.taotao.cloud.common.model.Result } 预览html
-	 * @author shuigedeng
+	 * @return 预览html
 	 * @since 2021-09-02 21:08:45
 	 */
 	@Operation(summary = "通用预览Excel", description = "通用预览Excel")
@@ -125,8 +123,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 * @param file     上传文件
 	 * @param request  请求
 	 * @param response 响应
-	 * @return {@link com.taotao.cloud.common.model.Result } 是否导入成功
-	 * @author shuigedeng
+	 * @return 是否导入成功
 	 * @since 2021-09-02 21:09:09
 	 */
 	@Operation(summary = "通用导入Excel", description = "通用导入Excel")
@@ -162,8 +159,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 * 转换后保存
 	 *
 	 * @param list 集合
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 保存结果
 	 * @since 2021-09-02 21:09:35
 	 */
 	default Boolean handlerImport(List<Map<String, String>> list) {
@@ -174,8 +170,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 * 构建导出参数 子类可以重写
 	 *
 	 * @param params 分页参数
-	 * @return {@link cn.afterturn.easypoi.excel.entity.ExportParams }
-	 * @author shuigedeng
+	 * @return 分页参数对象
 	 * @since 2021-09-02 21:09:45
 	 */
 	default ExportParams getExportParams(QueryDTO params) {
@@ -201,19 +196,17 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	/**
 	 * 子类增强ExportParams
 	 *
-	 * @param ep ep
-	 * @author shuigedeng
+	 * @param params 参数
 	 * @since 2021-09-02 21:09:51
 	 */
-	default void enhanceExportParams(ExportParams ep) {
+	default void enhanceExportParams(ExportParams params) {
 	}
 
 	/**
 	 * 查询待导出的数据， 子类可以重写
 	 *
-	 * @param params params
-	 * @return {@link java.util.List }
-	 * @author shuigedeng
+	 * @param params 参数
+	 * @return 数据列表
 	 * @since 2021-09-02 21:08:33
 	 */
 	default List<T> findExportList(QueryDTO params) {
@@ -224,8 +217,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	/**
 	 * 获取实体的类型
 	 *
-	 * @return {@link java.lang.Class }
-	 * @author shuigedeng
+	 * @return 实体类型
 	 * @since 2021-09-02 21:08:15
 	 */
 	default Class<T> getExcelClass() {

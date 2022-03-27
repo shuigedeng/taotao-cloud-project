@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignSettingFallbackImpl implements FallbackFactory<IFeignSettingService> {
+public class FeignSettingFallback implements FallbackFactory<IFeignSettingService> {
 
 	@Override
 	public IFeignSettingService create(Throwable throwable) {

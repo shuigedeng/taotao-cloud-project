@@ -36,8 +36,8 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	/**
 	 * 重置密码
 	 *
-	 * @param restPasswordDTO restPasswordDTO
-	 * @return {@link Boolean }
+	 * @param restPasswordDTO 重置密码对象
+	 * @return 重置结果
 	 * @since 2021-10-09 20:49:02
 	 */
 	Boolean restPass(Long userId, RestPasswordUserDTO restPasswordDTO);
@@ -47,7 +47,7 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 *
 	 * @param userId  userId
 	 * @param roleIds roleIds
-	 * @return {@link Boolean }
+	 * @return 更新结果
 	 * @since 2021-10-09 20:49:19
 	 */
 	Boolean updateUserRoles(Long userId, Set<Long> roleIds);
@@ -56,7 +56,7 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 * 根据手机号码查询用户是否存在
 	 *
 	 * @param phone phone
-	 * @return {@link Boolean }
+	 * @return 是否存在
 	 * @since 2021-10-09 20:49:35
 	 */
 	Boolean existsByPhone(String phone);
@@ -65,7 +65,7 @@ public interface IUserService extends BaseSuperService<User, Long> {
 	 * 根据用户id查询用户是否存在
 	 *
 	 * @param id id
-	 * @return {@link Boolean }
+	 * @return 是否存在
 	 * @since 2021-10-09 20:49:40
 	 */
 	Boolean existsById(Long id);

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * 跨站攻击请求包装器 
+ * 跨站攻击请求包装器
  *
  * @author shuigedeng
  * @version 2021.9

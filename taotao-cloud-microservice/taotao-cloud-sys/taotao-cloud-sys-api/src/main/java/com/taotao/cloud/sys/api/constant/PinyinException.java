@@ -29,10 +29,11 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 
 /**
- * 拼音异常
+ * 拼音异常 
  *
- * @author fengshuonan
- * @date 2020/12/3 18:10
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:22:32
  */
 public class PinyinException extends BaseException {
 

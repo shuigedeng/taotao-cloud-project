@@ -47,9 +47,8 @@ public interface UpdateController<T extends SuperEntity<T, I>, I extends Seriali
 	 * 通用单体更新
 	 *
 	 * @param id        id
-	 * @param updateDTO 更新DTO
-	 * @return {@link Result&lt;T&gt; }
-	 * @author shuigedeng
+	 * @param updateDTO 更新对象
+	 * @return 更新结果
 	 * @since 2021-10-11 17:00:12
 	 */
 	@Operation(summary = "通用单体更新", description = "通用单体更新")
@@ -75,13 +74,11 @@ public interface UpdateController<T extends SuperEntity<T, I>, I extends Seriali
 		throw new BusinessException("通用单体更新失败");
 	}
 
-
 	/**
 	 * 自定义更新
 	 *
-	 * @param model 更新DTO
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @param model 更新对象
+	 * @return 更新结果
 	 * @since 2021-09-02 21:16:25
 	 */
 	default Boolean handlerUpdate(UpdateDTO model) {

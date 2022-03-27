@@ -4,13 +4,14 @@ import com.taotao.cloud.sys.biz.entity.file.File;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * FileService
+ * 文件服务信息
  *
  * @author shuigedeng
- * @since 2020/11/12 21:26
  * @version 2022.03
+ * @since 2020/11/12 21:26
  */
 public interface IFileService {
+
 	/**
 	 * 上传文件
 	 *

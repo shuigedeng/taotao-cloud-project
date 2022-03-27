@@ -52,9 +52,8 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	/**
 	 * 通用批量操作
 	 *
-	 * @param batchDTO batchDTO
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
+	 * @param batchDTO 批量操作对象
+	 * @return 批量操作结果
 	 * @since 2021-10-11 15:32:22
 	 */
 	@Operation(summary = "通用批量操作", description = "通用批量操作")
@@ -75,11 +74,10 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	}
 
 	/**
-	 * batchCreate
+	 * 批量新增
 	 *
-	 * @param saveDTOList saveDTOList
-	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @param saveDTOList 批量新增对象
+	 * @return 批量新增结果
 	 * @since 2021-10-15 16:37:10
 	 */
 	default Boolean batchCreate(List<SaveDTO> saveDTOList) {
@@ -98,11 +96,10 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	}
 
 	/**
-	 * batchUpdate
+	 * 批量更新
 	 *
-	 * @param updateDTOList updateDTOList
-	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @param updateDTOList 批量更新对象
+	 * @return 批量更新结果
 	 * @since 2021-10-15 16:37:15
 	 */
 	default Boolean batchUpdate(List<BatchUpdate<UpdateDTO, I>> updateDTOList) {
@@ -133,11 +130,10 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	}
 
 	/**
-	 * batchDelete
+	 * 批量删除
 	 *
-	 * @param batchDelete batchDelete
-	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @param batchDelete 批量删除对象
+	 * @return 批量删除结果
 	 * @since 2021-10-15 16:37:21
 	 */
 	default Boolean batchDelete(List<I> batchDelete) {

@@ -26,8 +26,8 @@ import java.io.Serializable;
 /**
  * BaseController
  *
- * @param <T> Entity
- * @param <I> Id
+ * @param <T> 实体
+ * @param <I> 实体Id类型
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:03:10
@@ -37,8 +37,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 获取实体的类型
 	 *
-	 * @return {@link java.lang.Class }
-	 * @author shuigedeng
+	 * @return 实体类型
 	 * @since 2021-09-02 21:03:20
 	 */
 	Class<T> getEntityClass();
@@ -46,8 +45,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 获取BaseSuperService
 	 *
-	 * @return {@link  com.taotao.cloud.web.base.service.BaseSuperService }
-	 * @author shuigedeng
+	 * @return BaseSuperService类型
 	 * @since 2021-09-02 21:03:26
 	 */
 	BaseSuperService<T, I> service();
@@ -57,8 +55,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 *
 	 * @param data 返回内容
 	 * @param <R>  返回类型
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 成功数据
 	 * @since 2021-09-02 21:03:37
 	 */
 	default <R> Result<R> success(R data) {
@@ -68,8 +65,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 成功返回
 	 *
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 成功数据
 	 * @since 2021-09-02 21:03:51
 	 */
 	default Result<Boolean> success() {
@@ -80,8 +76,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 失败返回
 	 *
 	 * @param msg 失败消息
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:00
 	 */
 	default Result<String> fail(String msg) {
@@ -93,8 +88,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 *
 	 * @param code 失败编码
 	 * @param msg  失败消息
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:08
 	 */
 	default Result<String> fail(int code, String msg) {
@@ -105,8 +99,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 失败返回
 	 *
 	 * @param exception 异常
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:19
 	 */
 	default <R> Result<R> fail(BusinessException exception) {
@@ -117,8 +110,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 失败返回
 	 *
 	 * @param throwable 异常
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:28
 	 */
 	default <R> Result<R> fail(Throwable throwable) {
@@ -129,8 +121,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 参数校验失败返回
 	 *
 	 * @param msg 错误消息
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:35
 	 */
 	default <R> Result<R> validFail(String msg) {
@@ -142,8 +133,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 *
 	 * @param msg  错误消息
 	 * @param args 错误参数
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:42
 	 */
 	default <R> Result<R> validFail(String msg, Object... args) {
@@ -154,8 +144,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * 参数校验失败返回
 	 *
 	 * @param resultEnum 错误编码
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 失败数据
 	 * @since 2021-09-02 21:04:50
 	 */
 	default <R> Result<R> validFail(ResultEnum resultEnum) {
@@ -165,8 +154,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 获取当前id
 	 *
-	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
+	 * @return 用户id
 	 * @since 2021-09-02 21:04:56
 	 */
 	default String getUserId() {
@@ -176,8 +164,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 当前请求租户
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 租户id
 	 * @since 2021-09-02 21:05:02
 	 */
 	default String getTenant() {
@@ -187,8 +174,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 登录人账号
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 登录人账号
 	 * @since 2021-09-02 21:05:12
 	 */
 	default String getNickname() {
@@ -198,8 +184,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 登录人姓名
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 登录人姓名
 	 * @since 2021-09-02 21:05:17
 	 */
 	default String getUsername() {

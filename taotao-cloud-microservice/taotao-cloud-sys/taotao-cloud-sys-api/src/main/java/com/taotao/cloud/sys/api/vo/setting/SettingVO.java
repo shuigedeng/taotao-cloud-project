@@ -1,13 +1,14 @@
 package com.taotao.cloud.sys.api.vo.setting;
 
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Data;
-
 
 /**
  * 配置表
  */
 @Data
+@Builder
 public class SettingVO {
 
 	private String settingValue;

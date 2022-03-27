@@ -77,7 +77,6 @@ public class EncryptAspect {
 	 * 加密
 	 *
 	 * @param joinPoint joinPoint
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:03:39
 	 */
 	public void encrypt(ProceedingJoinPoint joinPoint) {
@@ -103,7 +102,6 @@ public class EncryptAspect {
 	 *
 	 * @param joinPoint joinPoint
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:03:45
 	 */
 	public Object decrypt(ProceedingJoinPoint joinPoint) {
@@ -130,7 +128,6 @@ public class EncryptAspect {
 	 * @param obj  obj
 	 * @param type type
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:03:53
 	 */
 	private Object handler(Object obj, String type) throws IllegalAccessException {
@@ -160,7 +157,6 @@ public class EncryptAspect {
 	 *
 	 * @param realValue realValue
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:03:57
 	 */
 	public String encryptValue(Object realValue) {
@@ -178,7 +174,6 @@ public class EncryptAspect {
 	 *
 	 * @param realValue realValue
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:04:05
 	 */
 	public String decryptValue(Object realValue) {

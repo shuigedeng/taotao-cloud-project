@@ -107,7 +107,6 @@ public class LimitAspect {
 	 * redis Lua 限流脚本
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:06:58
 	 */
 	public String buildLuaScript() {

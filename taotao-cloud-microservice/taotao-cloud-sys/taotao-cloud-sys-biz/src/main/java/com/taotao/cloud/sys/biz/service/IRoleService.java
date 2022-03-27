@@ -34,7 +34,7 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 * 根据用户id列表获取角色列表
 	 *
 	 * @param userIds userIds
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysRole&gt; }
+	 * @return 角色列表
 	 * @since 2021-10-09 20:43:25
 	 */
 	List<RoleBO> findRoleByUserIds(Set<Long> userIds);
@@ -42,7 +42,7 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	/**
 	 * 查询所有角色列表
 	 *
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysRole&gt; }
+	 * @return 角色列表
 	 * @since 2021-10-09 20:45:23
 	 */
 	List<RoleBO> findAllRoles();
@@ -52,7 +52,7 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 * 根据code列表获取角色信息
 	 *
 	 * @param codes codes
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysRole&gt; }
+	 * @return 角色列表
 	 * @since 2021-10-09 20:45:41
 	 */
 	List<RoleBO> findRoleByCodes(Set<String> codes);
@@ -61,22 +61,20 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 	 * 根据code查询角色是否存在
 	 *
 	 * @param code code
-	 * @return {@link Boolean }
+	 * @return 是否存在
 	 * @since 2021-10-09 20:43:33
 	 */
 	Boolean existRoleByCode(String code);
 
-
 	/**
 	 * 根据角色id更新菜单信息(角色分配菜单)
 	 *
-	 * @param roleId      roleId
-	 * @param menuIds resourceIds
-	 * @return {@link Boolean }
+	 * @param roleId  角色id
+	 * @param menuIds 菜单id列表
+	 * @return 更新接口
 	 * @since 2021-10-09 20:45:35
 	 */
 	Boolean saveRoleMenus(Long roleId, Set<Long> menuIds);
-
 
 
 }

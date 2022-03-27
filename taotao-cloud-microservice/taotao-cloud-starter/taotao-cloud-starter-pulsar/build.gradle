@@ -1,9 +1,9 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api 'org.apache.pulsar:pulsar-client-admin:2.8.1'
-    api 'com.github.ben-manes.caffeine:caffeine:3.0.4'
-    api 'io.netty:netty-common:4.1.70.Final'
+    api 'org.apache.pulsar:pulsar-client-admin:2.9.1'
+    api 'com.github.ben-manes.caffeine:caffeine:3.0.6'
+    api 'io.netty:netty-common:4.1.74.Final'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

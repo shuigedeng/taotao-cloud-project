@@ -66,13 +66,12 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * findPageable
+	 * 分页查询
 	 *
-	 * @param predicate predicate
-	 * @param pageable  pageable
-	 * @param orders    orders
-	 * @return {@link Page&lt;T&gt; }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @param pageable  分页参数
+	 * @param orders    排序参数
+	 * @return 分页数据
 	 * @since 2021-10-09 20:29:49
 	 */
 	public Page<T> findPageable(Predicate predicate, Pageable pageable,
@@ -85,11 +84,10 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * count
+	 * 获取条数
 	 *
-	 * @param predicate predicate
-	 * @return {@link Long }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @return 条数
 	 * @since 2021-10-09 20:30:31
 	 */
 	public Long count(Predicate predicate) {
@@ -99,11 +97,10 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * exists
+	 * 是否存在
 	 *
-	 * @param predicate predicate
-	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @return 结果
 	 * @since 2021-10-09 20:30:15
 	 */
 	public Boolean exists(Predicate predicate) {
@@ -111,11 +108,10 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * fetch
+	 * 获取数据
 	 *
-	 * @param predicate predicate
-	 * @return {@link List&lt;T&gt; }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @return 数据列表
 	 * @since 2021-10-09 20:30:44
 	 */
 	public List<T> fetch(Predicate predicate) {
@@ -125,11 +121,10 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * fetchOne
+	 * 获取单条数据
 	 *
-	 * @param predicate predicate
-	 * @return {@link T }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @return 单条数据
 	 * @since 2021-10-09 20:30:50
 	 */
 	public T fetchOne(Predicate predicate) {
@@ -139,11 +134,10 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * fetchCount
+	 * 获取数量
 	 *
-	 * @param predicate predicate
-	 * @return {@link Long }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @return 数量
 	 * @since 2021-10-09 20:31:11
 	 */
 	public Long fetchCount(Predicate predicate) {
@@ -153,13 +147,12 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	}
 
 	/**
-	 * find
+	 * 查询
 	 *
-	 * @param predicate predicate
-	 * @param expr      expr
-	 * @param o         o
-	 * @return {@link List&lt;?&gt; }
-	 * @author shuigedeng
+	 * @param predicate 条件参数
+	 * @param expr      表达式
+	 * @param o         排序参数
+	 * @return 数据列表
 	 * @since 2021-10-09 20:31:18
 	 */
 	public List<?> find(Predicate predicate, Expression<?> expr, OrderSpecifier<?>... o) {

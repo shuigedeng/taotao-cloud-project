@@ -53,8 +53,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 	 * 通用单体查询
 	 *
 	 * @param id 主键id
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @return 单体查询对象
 	 * @since 2021-09-02 21:11:48
 	 */
 	@Operation(summary = "通用单体查询", description = "通用单体查询")
@@ -75,9 +74,8 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 	/**
 	 * 通用批量查询
 	 *
-	 * @param queryDTO 通用批量查询
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @param queryDTO 通用批量查询参数
+	 * @return 批量查询结果
 	 * @since 2021-09-02 21:12:04
 	 */
 	@Operation(summary = "通用批量查询", description = "通用批量查询")
