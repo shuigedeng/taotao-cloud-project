@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 定时执行配置
  *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:01:33
  */
 @Configuration
 public class SensitiveQuartzConfiguration {

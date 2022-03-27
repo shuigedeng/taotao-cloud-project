@@ -15,6 +15,9 @@
  */
 package com.taotao.cloud.sys.api.vo.logistics;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * LogisticsVO
  *
@@ -22,6 +25,8 @@ package com.taotao.cloud.sys.api.vo.logistics;
  * @version 2022.03
  * @since 2021/12/20 14:06
  */
+@Data
+@Builder
 public class LogisticsVO {
 
 }

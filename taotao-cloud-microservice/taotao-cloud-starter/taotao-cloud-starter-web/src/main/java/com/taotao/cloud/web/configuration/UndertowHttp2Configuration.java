@@ -72,7 +72,7 @@ public class UndertowHttp2Configuration implements InitializingBean {
 	 * @version 2021.9
 	 * @since 2021-09-02 21:30:01
 	 */
-	public class UndertowServerFactoryCustomizer implements
+	public static class UndertowServerFactoryCustomizer implements
 		WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
 		@Override
@@ -94,7 +94,6 @@ public class UndertowHttp2Configuration implements InitializingBean {
 		 * getXnioWorker
 		 *
 		 * @return {@link XnioWorker }
-		 * @author shuigedeng
 		 * @since 2021-10-10 09:08:51
 		 */
 		private XnioWorker getXnioWorker() {

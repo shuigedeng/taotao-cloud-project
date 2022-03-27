@@ -2,36 +2,21 @@ package com.taotao.cloud.sys.api.vo.redis;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
+import lombok.Data;
 
+/**
+ * RedisVo
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:07:32
+ */
+@Data
+@Builder
 public class RedisVo implements Serializable {
 
-	@NotBlank
 	private String key;
 
-	@NotBlank
 	private String value;
-
-	public RedisVo() {
-	}
-
-	public RedisVo(String key, String value) {
-		this.key = key;
-		this.value = value;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
 }

@@ -1,9 +1,9 @@
 dependencies {
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
 
-	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
-	implementation 'de.codecentric:spring-boot-admin-starter-server:2.6.2'
+	implementation 'de.codecentric:spring-boot-admin-starter-server:2.6.3'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	//implementation 'org.springframework.boot:spring-boot-starter-mail'

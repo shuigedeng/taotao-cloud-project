@@ -45,9 +45,8 @@ public interface SaveController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 通用单体新增
 	 *
-	 * @param saveDTO 保存参数
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
+	 * @param saveDTO 保存对象
+	 * @return 报错结果
 	 * @since 2021-09-02 21:12:44
 	 */
 	@Operation(summary = "通用单体新增", description = "通用单体新增")
@@ -69,9 +68,8 @@ public interface SaveController<T extends SuperEntity<T, I>, I extends Serializa
 	/**
 	 * 自定义新增
 	 *
-	 * @param model model
-	 * @return {@link java.lang.Boolean }
-	 * @author shuigedeng
+	 * @param model 新增对象
+	 * @return 新增结果
 	 * @since 2021-10-11 17:06:06
 	 */
 	default Boolean handlerSave(SaveDTO model) {

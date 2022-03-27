@@ -20,7 +20,9 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-undertow'
     api 'org.springframework.boot:spring-boot-starter-aop'
     api 'org.springframework.boot:spring-boot-starter-mail'
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
+    api('org.springframework.boot:spring-boot-starter-data-redis'){
+        exclude group: 'org.yaml', module: 'snakeyaml'
+    }
 
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.0'
     api 'com.google.guava:guava:19.0'

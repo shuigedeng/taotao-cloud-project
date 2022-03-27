@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignRoleFallbackImpl implements FallbackFactory<IFeignRoleService> {
+public class FeignRoleFallback implements FallbackFactory<IFeignRoleService> {
     @Override
     public IFeignRoleService create(Throwable throwable) {
         return new IFeignRoleService() {

@@ -37,7 +37,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param str    str
 	 * @param maxlen maxlen
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:02
 	 */
 	public String substring3(String str, int maxlen) {
@@ -50,7 +49,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param totalRecord totalRecord
 	 * @param pageSize    pageSize
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:07
 	 */
 	public int totalPageNum(int totalRecord, int pageSize) {
@@ -62,7 +60,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param str str
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:11
 	 */
 	public String help(String str) {
@@ -76,7 +73,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param o o
 	 * @return {@link java.lang.Boolean }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:16
 	 */
 	public Boolean isnull(Object o) {
@@ -88,7 +84,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param o o
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:21
 	 */
 	public Object empty(Object o) {
@@ -105,7 +100,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param o            o
 	 * @param defaultValue defaultValue
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:25
 	 */
 	public Object defaultValue(Object o, Object defaultValue) {
@@ -125,7 +119,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param trueObj   trueObj
 	 * @param falseObj  falseObj
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:31
 	 */
 	public Object w2(String condition, Object data1, Object data2, Object trueObj,
@@ -162,7 +155,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param enumClass enumClass
 	 * @param value     value
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:35
 	 */
 	public String enumDesc(String enumClass, Object value) {
@@ -184,7 +176,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param enumClass enumClass
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:39
 	 */
 	public List<Object> enums(String enumClass) {
@@ -203,7 +194,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param o         o
 	 * @param filedName filedName
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:43
 	 */
 	public Object filed(Object o, String filedName) {
@@ -222,7 +212,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param o         o
 	 * @param filedName filedName
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:47
 	 */
 	public Object filed2(Object o, String filedName) {
@@ -249,7 +238,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param o o
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:17:55
 	 */
 	public String toJson(Object o) {

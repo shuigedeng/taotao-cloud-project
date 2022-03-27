@@ -47,6 +47,13 @@ public class FormXssClean {
 		binder.registerCustomEditor(String.class, new StringPropertiesEditor(xssCleaner, properties));
 	}
 
+	/**
+	 * FormXssClean
+	 *
+	 * @author shuigedeng
+	 * @version 2022.03
+	 * @since 2022-03-25 15:10:33
+	 */
 	public static class StringPropertiesEditor extends PropertyEditorSupport {
 
 		private final XssCleaner xssCleaner;

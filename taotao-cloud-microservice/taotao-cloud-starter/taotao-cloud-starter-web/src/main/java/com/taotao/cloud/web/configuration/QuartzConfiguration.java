@@ -22,6 +22,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 定时任务配置
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:01:01
  */
 @Configuration
 public class QuartzConfiguration {

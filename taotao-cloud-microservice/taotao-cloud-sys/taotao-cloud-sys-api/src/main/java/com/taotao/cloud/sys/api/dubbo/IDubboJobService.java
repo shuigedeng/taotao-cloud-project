@@ -1,10 +1,11 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 /**
- * 岗位表服务接口
+ * 岗位表服务接口 
  *
  * @author shuigedeng
- * @since 2020-10-16 16:23:05
+ * @version 2022.03
+ * @since 2022-03-25 14:22:32
  */
 public interface IDubboJobService {
 

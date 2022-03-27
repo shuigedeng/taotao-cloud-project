@@ -50,7 +50,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 针对 某些初始化方法，在SpringContextHolder 未初始化时 提交回调方法。 在SpringContextHolder 初始化后，进行回调使用
 	 *
 	 * @param callBack callBack
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:27:35
 	 */
 	public synchronized static void addCallBacks(CallBack callBack) {
@@ -68,7 +67,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * @param name name
 	 * @param <T>  T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:27:49
 	 */
 	public static <T> T getBean(String name) {
@@ -82,7 +80,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * @param requiredType requiredType
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:27:57
 	 */
 	public static <T> T getBean(Class<T> requiredType) {
@@ -98,7 +95,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * @param requiredType 返回类型
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:28:17
 	 */
 	public static <T> T getProperties(String property, T defaultValue, Class<T> requiredType) {
@@ -115,7 +111,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 *
 	 * @param property 属性key
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:28:29
 	 */
 	public static String getProperties(String property) {
@@ -129,7 +124,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * @param requiredType 返回类型
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:28:40
 	 */
 	public static <T> T getProperties(String property, Class<T> requiredType) {
@@ -139,7 +133,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	/**
 	 * 检查ApplicationContext不为空
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:28:50
 	 */
 	private static void assertContextInjected() {
@@ -152,7 +145,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	/**
 	 * 清除SpringContextHolder中的ApplicationContext为Null
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:28:55
 	 */
 	private static void clearHolder() {
@@ -186,7 +178,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 获取ApplicationContext
 	 *
 	 * @return {@link org.springframework.context.ApplicationContext }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:29:02
 	 */
 	public static ApplicationContext getApplicationContext() {
@@ -205,7 +196,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 		/**
 		 * 回调执行方法
 		 *
-		 * @author shuigedeng
 		 * @since 2021-09-02 22:29:21
 		 */
 		void executor();
@@ -214,7 +204,6 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 		 * 本回调任务名称
 		 *
 		 * @return {@link java.lang.String }
-		 * @author shuigedeng
 		 * @since 2021-09-02 22:29:27
 		 */
 		default String getCallBackName() {

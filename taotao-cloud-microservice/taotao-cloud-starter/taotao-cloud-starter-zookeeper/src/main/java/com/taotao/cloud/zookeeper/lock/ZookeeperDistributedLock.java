@@ -79,11 +79,10 @@ public class ZookeeperDistributedLock implements DistributedLock {
 	}
 
 	/**
-	 * getPath
+	 * 锁路径
 	 *
-	 * @param key key
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param key 锁路径key
+	 * @return 锁路径
 	 * @since 2021-09-07 20:52:58
 	 */
 	private String getPath(String key) {

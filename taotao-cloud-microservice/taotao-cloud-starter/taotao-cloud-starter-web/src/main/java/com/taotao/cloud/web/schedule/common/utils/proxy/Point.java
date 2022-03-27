@@ -4,6 +4,13 @@ package com.taotao.cloud.web.schedule.common.utils.proxy;
 import com.taotao.cloud.web.schedule.core.interceptor.ScheduledRunnable;
 import com.taotao.cloud.web.schedule.model.ScheduledJobModel;
 
+/**
+ * Point 
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:17:32
+ */
 public abstract class Point {
 
 	/**

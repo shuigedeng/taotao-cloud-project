@@ -2,11 +2,14 @@ package com.taotao.cloud.sys.api.vo.region;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 地区VO
- *
  */
+@Data
+@Builder
 public class RegionVO {
 
 	@Schema(description = "id")
@@ -46,93 +49,4 @@ public class RegionVO {
 
 	@Schema(description = "子信息")
 	private List<RegionVO> children;
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getCityCode() {
-		return cityCode;
-	}
-
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
-	}
-
-	public String getLng() {
-		return lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public Integer getOrderNum() {
-		return orderNum;
-	}
-
-	public void setOrderNum(Integer orderNum) {
-		this.orderNum = orderNum;
-	}
-
-	public List<RegionVO> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<RegionVO> children) {
-		this.children = children;
-	}
 }

@@ -1,7 +1,8 @@
 dependencies {
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.1'
-    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.1'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
+    //api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2'
     api 'com.fasterxml.jackson.core:jackson-databind'
     api 'com.fasterxml.jackson.core:jackson-core'
     api 'com.fasterxml.jackson.core:jackson-annotations'
@@ -70,7 +71,7 @@ dependencies {
     api 'com.esotericsoftware:kryo:5.3.0'
     api 'com.caucho:hessian:4.0.65'
     api 'commons-codec:commons-codec'
-    api 'com.alibaba:fastjson:1.2.79'
+    api 'com.alibaba:fastjson:1.2.80'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

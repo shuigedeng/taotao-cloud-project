@@ -30,8 +30,9 @@ import com.taotao.cloud.common.constant.RuleConstants;
 /**
  * 拼音工具相关异常
  *
- * @author fengshuonan
- * @date 2020/12/4 9:32
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:14:48
  */
 public enum PinyinExceptionEnum {
 

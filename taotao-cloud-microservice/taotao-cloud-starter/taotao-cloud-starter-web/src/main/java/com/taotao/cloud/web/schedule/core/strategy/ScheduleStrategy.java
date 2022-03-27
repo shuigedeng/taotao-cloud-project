@@ -20,7 +20,6 @@ public interface ScheduleStrategy {
 	 * @param scheduledJobModel         scheduledSource
 	 * @param runnable                runnable
 	 * @return {@link java.util.concurrent.ScheduledFuture&lt;?&gt; }
-	 * @author shuigedeng
 	 * @since 2022-02-09 17:04:08
 	 */
 	ScheduledFuture<?> schedule(ThreadPoolTaskScheduler threadPoolTaskScheduler,

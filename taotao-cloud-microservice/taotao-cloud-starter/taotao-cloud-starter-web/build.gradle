@@ -57,12 +57,12 @@ dependencies {
     api 'cn.afterturn:easypoi-spring-boot-starter:4.4.0'
     api 'com.github.dozermapper:dozer-spring-boot-starter:6.5.2'
 
-    api('org.owasp.antisamy:antisamy:1.6.4') {
+    api('org.owasp.antisamy:antisamy:1.6.5') {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.slf4j', module: 'slf4j-simple'
     }
 
-    api("org.apache.poi:poi-ooxml:5.0.0") {
+    api("org.apache.poi:poi-ooxml:5.2.0") {
         exclude group: 'org.slf4j', module: '*'
         exclude group: 'commons-codec', module: 'commons-codec'
         exclude group: 'org.bouncycastle', module: '*'
@@ -70,7 +70,7 @@ dependencies {
         exclude group: 'org.apache.xmlgraphics', module: 'batik-all'
     }
     api 'org.glassfish:javax.el:3.0.1-b08'
-    api 'com.itextpdf:itextpdf:5.5.13.2'
+    api 'com.itextpdf:itextpdf:5.5.13.3'
     api 'com.itextpdf:itext-asian:5.2.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"

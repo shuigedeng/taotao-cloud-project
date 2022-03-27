@@ -15,21 +15,13 @@
  */
 package com.taotao.cloud.sys.biz.utils;
 
-import cn.hutool.core.io.FileUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.tree.TreeNode;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.system.Menu;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +39,7 @@ public class TreeUtil {
 	 *
 	 * @param treeNodes 传入的树节点列表
 	 * @param parentId  父节点
-	 * @return java.util.List<T>
-	 * @author shuigedeng
+	 * @return 树节点数据
 	 * @since 2020/10/21 11:21
 	 */
 	public static <T extends TreeNode> List<T> build(List<T> treeNodes, Long parentId) {
@@ -76,8 +67,7 @@ public class TreeUtil {
 	 *
 	 * @param treeNodes 传入的树节点列表
 	 * @param parentId  父节点
-	 * @return java.util.List<T>
-	 * @author shuigedeng
+	 * @return 树节点数据
 	 * @since 2020/10/21 11:22
 	 */
 	public static <T extends TreeNode> List<T> recursiveBuild(List<T> treeNodes, Long parentId) {
@@ -95,8 +85,7 @@ public class TreeUtil {
 	 *
 	 * @param treeNode  节点
 	 * @param treeNodes 子节点列表
-	 * @return T
-	 * @author shuigedeng
+	 * @return 树节点数据
 	 * @since 2020/10/21 11:23
 	 */
 	public static <T extends TreeNode> T findChildren(T treeNode, List<T> treeNodes) {
@@ -115,8 +104,7 @@ public class TreeUtil {
 	 * 通过SysMenu创建树形节点
 	 *
 	 * @param parentId 父id
-	 * @return java.util.List<MenuTree>
-	 * @author shuigedeng
+	 * @return 菜单树形节点
 	 * @since 2020/10/21 11:23
 	 */
 	public static List<MenuTreeVO> buildTree(List<MenuBO> menus, Long parentId) {
@@ -147,7 +135,8 @@ public class TreeUtil {
 	 * 对象转树节点
 	 *
 	 * @param menus 系统菜单
-	 * @return List
+	 * @return 菜单树形节点
+	 * @since 2020/10/21 11:23
 	 */
 	public static List<MenuTreeVO> buildTree(List<Menu> menus) {
 		List<MenuTreeVO> trees = new ArrayList<>();

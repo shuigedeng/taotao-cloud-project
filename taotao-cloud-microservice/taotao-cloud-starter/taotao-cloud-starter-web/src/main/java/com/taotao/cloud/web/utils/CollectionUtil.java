@@ -35,7 +35,6 @@ public class CollectionUtil {
 	 *
 	 * @param str 字符串
 	 * @return {@link java.util.Collection }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:23:13
 	 */
 	public static Collection<? extends Serializable> stringToCollection(String str) {
@@ -56,7 +55,6 @@ public class CollectionUtil {
 	 *
 	 * @param longArray Long数组
 	 * @return {@link java.util.Collection }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:23:21
 	 */
 	public static Collection<? extends Serializable> arrayToCollection(Long[] longArray) {
@@ -70,7 +68,6 @@ public class CollectionUtil {
 	 * @param str          str
 	 * @param defaultValue defaultValue
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:23:30
 	 */
 	public static long strToLong(@Nullable final String str, final long defaultValue) {
@@ -90,7 +87,6 @@ public class CollectionUtil {
 	 * @param str          str
 	 * @param defaultValue defaultValue
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:23:41
 	 */
 	public static long objectToLong(@Nullable final Object str, final long defaultValue) {

@@ -11,6 +11,13 @@ import com.taotao.cloud.web.schedule.model.ScheduledRunningContext;
 import java.lang.reflect.Method;
 import java.util.Date;
 
+/**
+ * LogStrengthen 
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 15:18:36
+ */
 @ScheduledInterceptorOrder(-1)
 public class LogStrengthen implements BaseStrengthen {
 

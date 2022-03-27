@@ -21,7 +21,7 @@ public interface IGeneratorService extends IService<ColumnConfig> {
 	 * @param name 表名
 	 * @param page 分页页码
 	 * @param size 分页大小
-	 * @return /
+	 * @return 数据库数据
 	 */
 	Object getTables(String name, Integer page, Integer size);
 
@@ -29,15 +29,15 @@ public interface IGeneratorService extends IService<ColumnConfig> {
 	 * 得到数据表的元数据
 	 *
 	 * @param name 表名
-	 * @return /
+	 * @return 字段配置信息
 	 */
 	List<ColumnConfig> getColumns(String name);
 
 	/**
 	 * 同步表数据
 	 *
-	 * @param columnInfos    /
-	 * @param columnInfoList
+	 * @param columnInfos    字段配置信息
+	 * @param columnInfoList 字段配置信息
 	 */
 	@Async
 	void sync(List<ColumnConfig> columnInfos, List<ColumnConfig> columnInfoList);
@@ -45,14 +45,14 @@ public interface IGeneratorService extends IService<ColumnConfig> {
 	/**
 	 * 保持数据
 	 *
-	 * @param columnInfos /
+	 * @param columnInfos 字段配置信息
 	 */
 	void save(List<ColumnConfig> columnInfos);
 
 	/**
 	 * 获取所有table
 	 *
-	 * @return /
+	 * @return 所有table
 	 */
 	Object getTables();
 
@@ -69,7 +69,7 @@ public interface IGeneratorService extends IService<ColumnConfig> {
 	 *
 	 * @param genConfig 配置信息
 	 * @param columns   字段信息
-	 * @return /
+	 * @return 预览数据
 	 */
 	List<Map<String, Object>> preview(GenConfig genConfig, List<ColumnConfig> columns);
 
@@ -78,8 +78,8 @@ public interface IGeneratorService extends IService<ColumnConfig> {
 	 *
 	 * @param genConfig 配置信息
 	 * @param columns   字段信息
-	 * @param request   /
-	 * @param response  /
+	 * @param request   请求信息
+	 * @param response  返回信息
 	 */
 	void download(GenConfig genConfig, List<ColumnConfig> columns, HttpServletRequest request,
 		HttpServletResponse response);
@@ -87,8 +87,8 @@ public interface IGeneratorService extends IService<ColumnConfig> {
 	/**
 	 * 查询数据库的表字段数据数据
 	 *
-	 * @param table /
-	 * @return /
+	 * @param table 表名
+	 * @return 表字段数据数据
 	 */
 	List<ColumnConfig> query(String table);
 

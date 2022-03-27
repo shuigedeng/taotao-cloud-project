@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 /**
- * IElasticsearchService
+ * es服务
  *
  * @author shuigedeng
  * @version v1.0

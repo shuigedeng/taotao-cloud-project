@@ -9,8 +9,8 @@ import java.util.List;
  * 后台部门表服务接口
  *
  * @author shuigedeng
- * @since 2020-10-16 15:54:05
- * @since 1.0
+ * @version 2022.03
+ * @since 2022-03-25 14:24:48
  */
 public interface IDeptService extends BaseSuperService<Dept, Long> {
 

@@ -15,63 +15,20 @@
  */
 package com.taotao.cloud.sys.api.vo.file;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * UploadFileVO
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2021/12/20 13:58
+ * @since 2021/12bu0 13:58
  */
+@Data
+@Builder
 public class UploadFileVO {
+
 	private Long id;
 	private String url;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-
-	public static UploadFileVOBuilder builder() {
-		return new UploadFileVOBuilder();
-	}
-
-	public static final class UploadFileVOBuilder {
-
-		private Long id;
-		private String url;
-
-		private UploadFileVOBuilder() {
-		}
-
-
-
-		public UploadFileVOBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public UploadFileVOBuilder url(String url) {
-			this.url = url;
-			return this;
-		}
-
-		public UploadFileVO build() {
-			UploadFileVO uploadFileVO = new UploadFileVO();
-			uploadFileVO.setId(id);
-			uploadFileVO.setUrl(url);
-			return uploadFileVO;
-		}
-	}
 }

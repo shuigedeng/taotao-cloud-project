@@ -29,7 +29,6 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 *
 	 * @param key key
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:18:19
 	 */
 	public Object g(String key) {
@@ -41,7 +40,6 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 *
 	 * @param key   key
 	 * @param value value
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:18:28
 	 */
 	public void s(String key, Object value) {
@@ -54,7 +52,6 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 * @param key   key
 	 * @param value value
 	 * @return {@link com.taotao.cloud.web.template.SimpleTemplateProvider }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:18:34
 	 */
 	public SimpleTemplateProvider s2(String key, Object value) {
@@ -69,7 +66,6 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 * @param trueObj  trueObj
 	 * @param falseObj falseObj
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:18:44
 	 */
 	public Object w(boolean istrue, Object trueObj, Object falseObj) {
@@ -81,7 +77,6 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 *
 	 * @param o o
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:18:56
 	 */
 	public String p(Object o) {

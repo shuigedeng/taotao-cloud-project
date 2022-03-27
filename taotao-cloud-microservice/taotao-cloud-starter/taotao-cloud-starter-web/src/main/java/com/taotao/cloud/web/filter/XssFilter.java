@@ -87,7 +87,6 @@ public class XssFilter implements Filter {
 	 *
 	 * @param uriPath uriPath
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:15:15
 	 */
 	private boolean isIgnorePath(String uriPath) {

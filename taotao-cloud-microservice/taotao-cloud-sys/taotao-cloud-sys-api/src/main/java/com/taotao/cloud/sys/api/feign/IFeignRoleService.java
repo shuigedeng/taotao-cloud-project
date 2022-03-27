@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallbackImpl;
+import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
 import com.taotao.cloud.sys.api.vo.role.RoleQueryVO;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 远程调用后台角色模块
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2022.03
+ * @since 2022-03-25 14:09:31
  */
-@FeignClient(contextId = "remoteRoleService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallbackImpl.class)
+@FeignClient(contextId = "remoteRoleService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallback.class)
 public interface IFeignRoleService {
 
     /**
      * 根据用户id获取角色列表
      *
      * @param userId 用户id
-     * @return com.taotao.cloud.core.model.Result<java.util.List < com.taotao.cloud.sys.api.vo.role.RoleVO>>
-     * @author shuigedeng
+     * @return 角色列表
      * @since 2020/10/21 15:13
-     * @version 2022.03
      */
     @GetMapping("/role/info/userId")
     Result<List<RoleQueryVO>> findRoleByUserId(@RequestParam(value = "userId") Long userId);

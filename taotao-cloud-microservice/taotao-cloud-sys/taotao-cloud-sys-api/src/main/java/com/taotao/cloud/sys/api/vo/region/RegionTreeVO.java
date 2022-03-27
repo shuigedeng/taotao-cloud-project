@@ -19,6 +19,10 @@ import com.taotao.cloud.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 地区查询对象
@@ -27,6 +31,9 @@ import java.io.Serializable;
  * @version 2022.03
  * @since 2020/9/30 08:49
  */
+@Getter
+@Setter
+@Builder
 @Schema(description = "地区查询对象")
 public class RegionTreeVO extends MapperNode implements Serializable {
 
@@ -74,63 +81,4 @@ public class RegionTreeVO extends MapperNode implements Serializable {
 	 */
 	@Schema(description = "地区父节点")
 	private Long parentId;
-
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public String getCityCode() {
-		return cityCode;
-	}
-
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
-	}
-
-	public String getLng() {
-		return lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	@Override
-	public Long getParentId() {
-		return parentId;
-	}
-
-	@Override
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
 }

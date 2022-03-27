@@ -296,7 +296,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		return registrationBean;
 	}
 
-
 	///**
 	// * 配置跨站攻击过滤器
 	// */
@@ -468,11 +467,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		}
 
 		/**
-		 * getUrls
+		 * 获取url
 		 *
-		 * @param urls urls
-		 * @return {@link java.lang.String }
-		 * @author shuigedeng
+		 * @param urls url列表
+		 * @return url字符串
 		 * @since 2021-09-02 21:32:06
 		 */
 		private String getUrls(Set<String> urls) {
@@ -490,8 +488,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		 * 是否是忽略的Api
 		 *
 		 * @param requestPath 请求地址
-		 * @return boolean
-		 * @author shuigedeng
+		 * @return 结果
 		 * @since 2021-09-02 21:32:13
 		 */
 		private boolean isIgnore(String requestPath) {
@@ -507,8 +504,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		 * 获取媒体类型
 		 *
 		 * @param mediaTypes 类型SET集
-		 * @return {@link java.lang.String }
-		 * @author shuigedeng
+		 * @return 媒体类型
 		 * @since 2021-09-02 21:32:23
 		 */
 		private String getMediaTypes(Set<MediaType> mediaTypes) {
@@ -525,9 +521,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		/**
 		 * 获取方法
 		 *
-		 * @param requestMethods 请求方法
-		 * @return {@link java.lang.String }
-		 * @author shuigedeng
+		 * @param requestMethods 请求方法列表
+		 * @return 请求方法字符串
 		 * @since 2021-09-02 21:32:30
 		 */
 		private String getMethods(Set<RequestMethod> requestMethods) {

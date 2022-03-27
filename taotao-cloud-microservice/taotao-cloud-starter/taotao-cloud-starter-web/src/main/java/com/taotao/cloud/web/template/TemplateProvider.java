@@ -39,7 +39,6 @@ public class TemplateProvider {
 	 * request
 	 *
 	 * @return {@link javax.servlet.http.HttpServletRequest }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:19:15
 	 */
 	public HttpServletRequest request() {
@@ -50,7 +49,6 @@ public class TemplateProvider {
 	 * response
 	 *
 	 * @return {@link javax.servlet.http.HttpServletResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:19:19
 	 */
 	public HttpServletResponse response() {
@@ -61,7 +59,6 @@ public class TemplateProvider {
 	 * session
 	 *
 	 * @return {@link javax.servlet.http.HttpSession }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:19:25
 	 */
 	public HttpSession session() {
@@ -73,7 +70,6 @@ public class TemplateProvider {
 	 *
 	 * @param key   key
 	 * @param value value
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:19:35
 	 */
 	public void setattr(String key, Object value) {
@@ -86,7 +82,6 @@ public class TemplateProvider {
 	 *
 	 * @param key key
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:19:44
 	 */
 	public Object getattr(String key) {
@@ -125,7 +120,6 @@ public class TemplateProvider {
 	 * @param trueObj  true 结果
 	 * @param falseObj false结果
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:19:55
 	 */
 	public Object where(Boolean istrue, Object trueObj, Object falseObj) {
@@ -138,7 +132,6 @@ public class TemplateProvider {
 	 * @param str    字符串
 	 * @param maxlen 最大长度
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:20:05
 	 */
 	public String cutString(String str, int maxlen) {
@@ -157,7 +150,6 @@ public class TemplateProvider {
 	 * @param date   date
 	 * @param format format
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:20:14
 	 */
 	public String dateString(Date date, String format) {
@@ -172,7 +164,6 @@ public class TemplateProvider {
 	 *
 	 * @param o o
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:20:21
 	 */
 	public String print(Object o) {

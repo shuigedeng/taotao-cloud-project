@@ -37,7 +37,6 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 *
 	 * @param entity 实体
 	 * @return 修改数量
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:17:23
 	 */
 	int updateAllById(@Param(Constants.ENTITY) T entity);
@@ -49,10 +48,16 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 *
 	 * @param entityList 实体集合
 	 * @return 插入数量
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:17:23
 	 */
 	int insertBatchSomeColumn(List<T> entityList);
 
+	/**
+	 * 更新数据
+	 *
+	 * @param id id
+	 * @return 更新结果
+	 * @since 2022-03-25 14:54:53
+	 */
 	boolean updateById(I id);
 }

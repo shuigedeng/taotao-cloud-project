@@ -32,7 +32,6 @@ public interface BusinessHandler {
 	 *
 	 * @param t 业务实体返回参数
 	 * @return R
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:15:31
 	 */
 	<R> R businessHandler(T t);

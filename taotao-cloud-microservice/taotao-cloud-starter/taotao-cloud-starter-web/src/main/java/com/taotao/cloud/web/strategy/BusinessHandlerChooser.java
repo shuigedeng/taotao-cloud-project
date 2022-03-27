@@ -39,7 +39,6 @@ public class BusinessHandlerChooser {
 	 * setBusinessHandlerMap
 	 *
 	 * @param orderHandlers orderHandlers
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:15:54
 	 */
 	public void setBusinessHandlerMap(List<BusinessHandler> orderHandlers) {
@@ -61,7 +60,6 @@ public class BusinessHandlerChooser {
 	 * @param <T>    T
 	 * @param <R>    R
 	 * @return {@link com.taotao.cloud.web.strategy.BusinessHandler }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:15:59
 	 */
 	public <R, T> BusinessHandler businessHandlerChooser(String type, String source) {

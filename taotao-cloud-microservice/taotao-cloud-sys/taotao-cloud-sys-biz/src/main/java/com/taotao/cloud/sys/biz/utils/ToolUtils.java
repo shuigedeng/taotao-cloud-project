@@ -5,6 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * ToolUtils 
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:22:32
+ */
 public class ToolUtils {
 
     /**

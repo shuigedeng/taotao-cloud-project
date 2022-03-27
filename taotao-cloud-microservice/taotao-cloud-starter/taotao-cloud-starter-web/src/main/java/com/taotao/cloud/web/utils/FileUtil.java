@@ -57,7 +57,6 @@ public class FileUtil {
 	 *
 	 * @param fileName 文件名
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:25:58
 	 */
 	public static int getFileType(String fileName) {
@@ -76,7 +75,6 @@ public class FileUtil {
 	 *
 	 * @param file 文件
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:24:07
 	 */
 	private static String getFileType(File file) throws Exception {
@@ -93,7 +91,6 @@ public class FileUtil {
 	 *
 	 * @param fileType fileType
 	 * @return {@link java.lang.Boolean }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:24:15
 	 */
 	private static Boolean fileTypeIsValid(String fileType) {
@@ -109,7 +106,6 @@ public class FileUtil {
 	 * @param fileName fileName
 	 * @param delete   delete
 	 * @param response response
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:24:23
 	 */
 	public static void download(String filePath, String fileName, Boolean delete,
@@ -145,7 +141,6 @@ public class FileUtil {
 	 * 递归删除文件或目录
 	 *
 	 * @param filePath filePath
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:24:30
 	 */
 	public static void delete(String filePath) {
@@ -164,7 +159,6 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return {@link org.springframework.http.ResponseEntity }
-	 * @author shuigedeng
 	 * @since 2021-09-02 22:24:37
 	 */
 	public static ResponseEntity<FileSystemResource> export(File file) {

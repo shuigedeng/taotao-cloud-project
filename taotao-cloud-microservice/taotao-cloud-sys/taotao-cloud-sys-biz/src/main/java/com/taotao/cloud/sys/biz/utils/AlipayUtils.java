@@ -14,15 +14,18 @@ import org.springframework.stereotype.Component;
 
 /**
  * 支付宝工具类
- * @author zhengjie
- * @date 2018/09/30 14:04:35
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-25 14:15:43
  */
 @Component
 public class AlipayUtils {
 
 	/**
 	 * 生成订单号
-	 * @return String
+	 *
+	 * @return 订单号
 	 */
 	public String getOrderCode() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -40,9 +43,10 @@ public class AlipayUtils {
 
 	/**
 	 * 校验签名
+	 *
 	 * @param request HttpServletRequest
-	 * @param alipay 阿里云配置
-	 * @return boolean
+	 * @param alipay  阿里云配置
+	 * @return 签名结果
 	 */
 	public boolean rsaCheck(HttpServletRequest request, AlipayConfig alipay) {
 		// 获取支付宝POST过来反馈信息

@@ -5,12 +5,20 @@ import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import java.util.List;
 
 /**
- * 后台部门表服务接口
+ * 后台菜单服务接口
  *
  * @author shuigedeng
- * @since 2020-10-16 15:54:05
+ * @version 2022.03
+ * @since 2022-03-25 14:13:19
  */
 public interface IDubboMenuService {
 
-	List<MenuQueryBO> queryAllId(Long id);
+	/**
+	 * 根据id获取菜单信息
+	 *
+	 * @param id id
+	 * @return 菜单信息
+	 * @since 2022-03-25 14:13:34
+	 */
+	List<MenuQueryBO> queryAllById(Long id);
 }

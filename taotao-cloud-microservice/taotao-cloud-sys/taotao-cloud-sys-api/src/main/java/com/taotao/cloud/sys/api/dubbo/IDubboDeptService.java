@@ -1,10 +1,11 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 /**
- * 后台部门表服务接口
+ * 后台部门表服务接口 
  *
  * @author shuigedeng
- * @since 2020-10-16 15:54:05
+ * @version 2022.03
+ * @since 2022-03-25 14:22:32
  */
 public interface IDubboDeptService {
 

@@ -91,11 +91,10 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * map
 		 *
-		 * @param source           source
-		 * @param destinationClass destinationClass
+		 * @param source           数据源
+		 * @param destinationClass 目标类
 		 * @param <T>              T
-		 * @return T
-		 * @author shuigedeng
+		 * @return 对象
 		 * @since 2021-09-02 21:24:52
 		 */
 		public <T> T map(Object source, Class<T> destinationClass) {
@@ -108,11 +107,9 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * map2
 		 *
-		 * @param source           source
-		 * @param destinationClass destinationClass
-		 * @param <T>              T
-		 * @return T
-		 * @author shuigedeng
+		 * @param source           数据源
+		 * @param destinationClass 目标类
+		 * @return 对象
 		 * @since 2021-09-02 21:25:04
 		 */
 		public <T> T map2(Object source, Class<T> destinationClass) {
@@ -128,9 +125,8 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * map
 		 *
-		 * @param source      source
-		 * @param destination destination
-		 * @author shuigedeng
+		 * @param source      数据源
+		 * @param destination 目标类
 		 * @since 2021-09-02 21:25:12
 		 */
 		public void map(Object source, Object destination) {
@@ -143,12 +139,10 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * map
 		 *
-		 * @param source           source
-		 * @param destinationClass destinationClass
+		 * @param source           数据源
+		 * @param destinationClass 目标类
 		 * @param mapId            mapId
-		 * @param <T>              T
-		 * @return T
-		 * @author shuigedeng
+		 * @return 结果对象
 		 * @since 2021-09-02 21:25:15
 		 */
 		public <T> T map(Object source, Class<T> destinationClass, String mapId) {
@@ -161,10 +155,9 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * map
 		 *
-		 * @param source      source
-		 * @param destination destination
+		 * @param source      数据源
+		 * @param destination 目标类
 		 * @param mapId       mapId
-		 * @author shuigedeng
 		 * @since 2021-09-02 21:25:21
 		 */
 		public void map(Object source, Object destination, String mapId) {
@@ -177,12 +170,9 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * mapList
 		 *
-		 * @param sourceList       sourceList
-		 * @param destinationClass destinationClass
-		 * @param <T>              T
-		 * @param <E>              E
-		 * @return {@link java.util.List }
-		 * @author shuigedeng
+		 * @param sourceList       数据源
+		 * @param destinationClass 目标类
+		 * @return 数据集合
 		 * @since 2021-09-02 21:25:26
 		 */
 		public <T, E> List<T> mapList(Collection<E> sourceList, Class<T> destinationClass) {
@@ -192,12 +182,9 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * mapPage
 		 *
-		 * @param sourceList       sourceList
-		 * @param destinationClass destinationClass
-		 * @param <T>              T
-		 * @param <E>              E
-		 * @return {@link List }
-		 * @author shuigedeng
+		 * @param sourceList       数据源
+		 * @param destinationClass 目标类
+		 * @return 分页结果
 		 * @since 2021-09-02 21:25:36
 		 */
 		public <T, E> List<T> mapPage(Collection<E> sourceList, Class<T> destinationClass) {
@@ -214,10 +201,9 @@ public class DozerConfiguration implements InitializingBean {
 		/**
 		 * mapSet
 		 *
-		 * @param sourceList       sourceList
-		 * @param destinationClass destinationClass
-		 * @return {@link java.util.Set }
-		 * @author shuigedeng
+		 * @param sourceList       数据源
+		 * @param destinationClass 目标类
+		 * @return 数据集合
 		 * @since 2021-09-02 21:25:56
 		 */
 		public <T, E> Set<T> mapSet(Collection<E> sourceList, Class<T> destinationClass) {

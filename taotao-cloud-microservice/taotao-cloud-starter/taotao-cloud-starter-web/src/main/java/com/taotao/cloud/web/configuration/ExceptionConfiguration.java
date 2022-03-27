@@ -239,9 +239,8 @@ public class ExceptionConfiguration implements InitializingBean {
 	/**
 	 * 获取请求路径
 	 *
-	 * @param request request
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param request 请求对象
+	 * @return 请求路径
 	 * @since 2021-09-02 21:27:08
 	 */
 	private String uri(NativeWebRequest request) {
@@ -256,9 +255,8 @@ public class ExceptionConfiguration implements InitializingBean {
 	/**
 	 * 获取请求参数
 	 *
-	 * @param request request
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param request 请求对象
+	 * @return 请求参数
 	 * @since 2021-09-02 21:27:14
 	 */
 	private String query(NativeWebRequest request) {
@@ -273,11 +271,10 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * getErrors
+	 * 获取Binding错误数据
 	 *
-	 * @param result result
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param result 请求对象
+	 * @return 错误数据
 	 * @since 2021-09-02 21:27:21
 	 */
 	private String getErrors(BindingResult result) {
@@ -290,11 +287,10 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * getErrors
+	 * 获取校验错误数据
 	 *
-	 * @param e e
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param e 异常信息
+	 * @return 校验错误数据
 	 * @since 2021-09-02 21:27:27
 	 */
 	private String getErrors(ConstraintViolationException e) {
@@ -309,11 +305,10 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * printLog
+	 * 打印日志
 	 *
-	 * @param req req
-	 * @param e   e
-	 * @author shuigedeng
+	 * @param req 请求对象
+	 * @param e   异常信息
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Exception e) {
