@@ -43,7 +43,6 @@ public class HttpUtil {
 	 * @param requestUrl  requestUrl
 	 * @param charSetName charSetName
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:44:09
 	 */
 	public static Object getRequest(String requestUrl, String charSetName) {
@@ -80,7 +79,6 @@ public class HttpUtil {
 	 * @param path path
 	 * @param post post
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:44:22
 	 */
 	public static Object postRequest(String path, String post) {

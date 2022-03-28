@@ -87,7 +87,6 @@ public class RequestUtil {
 	 * getContext
 	 *
 	 * @return {@link RequestUtil.WebContext }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:14
 	 */
 	public static WebContext getContext() {
@@ -98,7 +97,6 @@ public class RequestUtil {
 	 * getRequest
 	 *
 	 * @return {@link javax.servlet.http.HttpServletRequest }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:17
 	 */
 	public static HttpServletRequest getRequest() {
@@ -110,7 +108,6 @@ public class RequestUtil {
 	 * getResponse
 	 *
 	 * @return {@link javax.servlet.http.HttpServletResponse }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:20
 	 */
 	public static HttpServletResponse getResponse() {
@@ -123,7 +120,6 @@ public class RequestUtil {
 	 *
 	 * @param request  request
 	 * @param response response
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:23
 	 */
 	public static void bindContext(HttpServletRequest request, HttpServletResponse response) {
@@ -133,7 +129,6 @@ public class RequestUtil {
 	/**
 	 * clearContext
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:26
 	 */
 	public static void clearContext() {
@@ -143,7 +138,6 @@ public class RequestUtil {
 	/**
 	 * WebContext
 	 *
-	 * @author shuigedeng
 	 * @version 2021.9
 	 * @since 2021-09-02 20:54:32
 	 */
@@ -168,7 +162,6 @@ public class RequestUtil {
 	 * getBaseUrl
 	 *
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:35
 	 */
 	public static String getBaseUrl() {
@@ -187,7 +180,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:50
 	 */
 	public static Map<String, String> getAllRequestParam(HttpServletRequest request) {
@@ -208,7 +200,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:54
 	 */
 	public static Map<String, String> getAllRequestHeaders(HttpServletRequest request) {
@@ -228,7 +219,6 @@ public class RequestUtil {
 	 * getConfigurableWebServerApplicationContext
 	 *
 	 * @return {@link org.springframework.boot.web.context.ConfigurableWebServerApplicationContext }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:54:57
 	 */
 	public static ConfigurableWebServerApplicationContext getConfigurableWebServerApplicationContext() {
@@ -243,7 +233,6 @@ public class RequestUtil {
 	 * isWeb
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:00
 	 */
 	public static boolean isWeb() {
@@ -255,7 +244,6 @@ public class RequestUtil {
 	 *
 	 * @param serverHttpRequest serverHttpRequest
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:03
 	 */
 	public static String getBodyString(ServerHttpRequest serverHttpRequest) {
@@ -272,7 +260,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:07
 	 */
 	public static String getBodyString(HttpServletRequest request) throws IOException {
@@ -312,7 +299,6 @@ public class RequestUtil {
 	 * getHttpServletRequest
 	 *
 	 * @return {@link javax.servlet.http.HttpServletRequest }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:30
 	 */
 	public static HttpServletRequest getHttpServletRequest() {
@@ -331,7 +317,6 @@ public class RequestUtil {
 	 * getHttpServletRequestIpAddress
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:33
 	 */
 	public static String getHttpServletRequestIpAddress() {
@@ -345,7 +330,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:36
 	 */
 	public static String getHttpServletRequestIpAddress(HttpServletRequest request) {
@@ -371,7 +355,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:39
 	 */
 	public static String getServerHttpRequestIpAddress(ServerHttpRequest request) {
@@ -409,7 +392,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:43
 	 */
 	public static String getRemoteAddr(HttpServletRequest request) {
@@ -449,7 +431,6 @@ public class RequestUtil {
 	 *
 	 * @param ip ip地址
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:52
 	 */
 	public static boolean isEmptyIp(String ip) {
@@ -460,7 +441,6 @@ public class RequestUtil {
 	 * 获取本机的IP地址
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:55:59
 	 */
 	public static String getLocalAddr() {
@@ -477,7 +457,6 @@ public class RequestUtil {
 	 * 获取ip地址
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:56:05
 	 */
 	public static String getIpAddress() {
@@ -500,7 +479,6 @@ public class RequestUtil {
 	 * 获取ip地址
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:56:11
 	 */
 	public static String getIpAddress0() {
@@ -533,7 +511,6 @@ public class RequestUtil {
 	 *
 	 * @param regex 10.0.18 网址前两个或前三个地址段
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:56:20
 	 */
 	public static String getIpAddressMatched(String regex) {
@@ -570,7 +547,6 @@ public class RequestUtil {
 	 *
 	 * @param regex 10.0.18 排除地址段，两个或前三个地址段
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:56:27
 	 */
 	public static String getIpAddressExMatched(String regex) {
@@ -607,7 +583,6 @@ public class RequestUtil {
 	 *
 	 * @param source source
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:56:35
 	 */
 	private static String buildRegex(String source) {
@@ -629,7 +604,6 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:56:44
 	 */
 	public static String getRemoteAddr(ServerHttpRequest request) {

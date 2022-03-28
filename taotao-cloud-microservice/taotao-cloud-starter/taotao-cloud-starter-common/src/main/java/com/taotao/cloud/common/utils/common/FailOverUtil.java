@@ -42,7 +42,6 @@ public class FailOverUtil {
 	 * @param c1       c1
 	 * @param <T>      T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:50:56
 	 */
 	@SafeVarargs
@@ -83,7 +82,6 @@ public class FailOverUtil {
 	/**
 	 * Result
 	 *
-	 * @param <T> T
 	 * @author shuigedeng
 	 * @version 2021.9
 	 * @since 2021-09-02 20:51:11

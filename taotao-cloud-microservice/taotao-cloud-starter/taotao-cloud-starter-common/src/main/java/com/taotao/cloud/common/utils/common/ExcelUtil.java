@@ -55,7 +55,6 @@ public class ExcelUtil {
 	 * @param fileName       文件名称
 	 * @param isCreateHeader 是否创建表头
 	 * @param response       response
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:16:17
 	 */
 	public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass,
@@ -74,7 +73,6 @@ public class ExcelUtil {
 	 * @param pojoClass pojo类型
 	 * @param fileName  文件名称
 	 * @param response  response
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:16:05
 	 */
 	public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass,
@@ -91,7 +89,6 @@ public class ExcelUtil {
 	 * @param fileName     文件名称
 	 * @param response     response
 	 * @param exportParams 导出参数
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:15:54
 	 */
 	public static void exportExcel(List<?> list, Class<?> pojoClass, String fileName,
@@ -105,7 +102,6 @@ public class ExcelUtil {
 	 * @param list     数据
 	 * @param fileName 文件名称
 	 * @param response response
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:15:43
 	 */
 	public static void exportExcel(List<Map<String, Object>> list, String fileName,
@@ -121,7 +117,6 @@ public class ExcelUtil {
 	 * @param fileName     文件名称
 	 * @param response     response
 	 * @param exportParams 导出参数
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:15:33
 	 */
 	private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName,
@@ -136,7 +131,6 @@ public class ExcelUtil {
 	 * @param list     数据
 	 * @param fileName 文件名称
 	 * @param response response
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:15:22
 	 */
 	private static void defaultExport(List<Map<String, Object>> list, String fileName,
@@ -151,7 +145,6 @@ public class ExcelUtil {
 	 * @param fileName 文件名称
 	 * @param response response
 	 * @param workbook excel数据
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:15:13
 	 */
 	private static void downLoadExcel(String fileName, HttpServletResponse response,
@@ -160,7 +153,8 @@ public class ExcelUtil {
 			response.setCharacterEncoding("UTF-8");
 			response.setHeader("content-Type", "application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder
-				.encode(fileName + "." + ExcelTypeEnum.XLSX.getValue(), StandardCharsets.UTF_8));
+				.encode(fileName + "." + ExcelTypeEnum.XLSX.getValue(),
+					String.valueOf(StandardCharsets.UTF_8)));
 			workbook.write(response.getOutputStream());
 		} catch (Exception e) {
 			throw new IOException(e.getMessage());
@@ -174,8 +168,7 @@ public class ExcelUtil {
 	 * @param titleRows  标题行
 	 * @param headerRows 表头行
 	 * @param pojoClass  pojo类型
-	 * @return {@link java.util.List }
-	 * @author shuigedeng
+	 * @return 列表对象
 	 * @since 2021-09-02 17:14:57
 	 */
 	public static <T> List<T> importExcel(String filePath, Integer titleRows, Integer headerRows,
@@ -202,8 +195,7 @@ public class ExcelUtil {
 	 *
 	 * @param file      excel文件
 	 * @param pojoClass pojo类型
-	 * @return {@link java.util.List }
-	 * @author shuigedeng
+	 * @return 列表对象
 	 * @since 2021-09-02 17:14:44
 	 */
 	public static <T> List<T> importExcel(MultipartFile file, Class<T> pojoClass)
@@ -218,8 +210,7 @@ public class ExcelUtil {
 	 * @param titleRows  标题行
 	 * @param headerRows 表头行
 	 * @param pojoClass  pojo类型
-	 * @return {@link java.util.List }
-	 * @author shuigedeng
+	 * @return 列表对象
 	 * @since 2021-09-02 17:14:28
 	 */
 	public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows,
@@ -235,8 +226,7 @@ public class ExcelUtil {
 	 * @param headerRows 表头行
 	 * @param needVerfiy 是否检验excel内容
 	 * @param pojoClass  pojo类型
-	 * @return {@link java.util.List }
-	 * @author shuigedeng
+	 * @return 列表对象
 	 * @since 2021-09-02 17:14:16
 	 */
 	public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows,
@@ -259,8 +249,7 @@ public class ExcelUtil {
 	 * @param headerRows  表头行
 	 * @param needVerfiy  是否检验excel内容
 	 * @param pojoClass   pojo类型
-	 * @return {@link java.util.List }
-	 * @author shuigedeng
+	 * @return 列表对象
 	 * @since 2021-09-02 17:13:58
 	 */
 	public static <T> List<T> importExcel(InputStream inputStream, Integer titleRows,

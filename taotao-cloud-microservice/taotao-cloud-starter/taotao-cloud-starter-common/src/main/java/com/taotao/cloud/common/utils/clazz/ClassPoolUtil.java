@@ -38,8 +38,7 @@ public class ClassPoolUtil {
 	/**
 	 * 获取对象池
 	 *
-	 * @return {@link javassist.ClassPool }
-	 * @author shuigedeng
+	 * @return 对象池
 	 * @since 2021-09-02 17:44:24
 	 */
 	public static ClassPool getInstance() {

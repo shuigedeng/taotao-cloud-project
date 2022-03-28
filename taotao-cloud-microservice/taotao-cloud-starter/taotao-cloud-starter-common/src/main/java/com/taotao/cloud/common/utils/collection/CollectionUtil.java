@@ -288,7 +288,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param collection 集合
 	 * @return {@code true} 是
-	 * @since 1.1.2
 	 */
 	public static boolean isNotEmpty(Collection collection) {
 		return !isEmpty(collection);
@@ -325,7 +324,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param stringList 原始的列表
 	 * @return trim 的字符串列表
-	 * @since 0.1.70
 	 */
 	public static List<String> trimCollection(final Collection<String> stringList) {
 		if (CollectionUtil.isEmpty(stringList)) {
@@ -373,7 +371,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param <T>     入参
 	 * @param <R>     出参
 	 * @return 结果
-	 * @since 0.0.2
 	 */
 	public static <T, R> List<R> buildCollection(final T[] targets, final IHandler<T, R> handler) {
 		if (ArrayUtil.isEmpty(targets)) {
@@ -450,7 +447,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param filler 对象填充器
 	 * @param <E>    e 泛型
 	 * @return 返回类表
-	 * @since 0.1.10
 	 */
 	public static <E> List<E> fillList(final List<E> values, IFiller<E> filler) {
 		if (com.taotao.cloud.common.utils.lang.ObjectUtil.isNull(values)) {
@@ -470,7 +466,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param string 字符串
 	 * @return 拆分后的列表
-	 * @since 0.0.5
 	 */
 	public static List<String> splitByAnyBlank(String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -489,7 +484,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param filter 过滤器
 	 * @param <T>    泛型
 	 * @return 过滤后的结果
-	 * @since 0.0.6
 	 */
 	public static <T> List<T> filterList(final List<T> list, final IFilter<T> filter) {
 		if (isEmpty(list)) {
@@ -514,7 +508,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param condition 条件过滤器
 	 * @param <T>       泛型
 	 * @return 过滤后的结果
-	 * @since 0.0.6
 	 */
 	public static <T> List<T> conditionList(final List<T> list, final ICondition<T> condition) {
 		if (isEmpty(list)) {
@@ -537,7 +530,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param pathList 原始对象
 	 * @return 结果
-	 * @since 0.0.6
 	 */
 	public static List<String> toStringList(final List<?> pathList) {
 		if (CollectionUtil.isEmpty(pathList)) {
@@ -560,7 +552,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param list 列表
 	 * @param <T>  泛型
 	 * @return 不为 null 的元素
-	 * @since 0.1.6
 	 */
 	public static <T> java.util.Optional<T> firstNotNullElem(Collection<T> list) {
 		if (CollectionUtil.isEmpty(list)) {
@@ -581,7 +572,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param stringCollection 字符串集合
 	 * @param connector  连接符号
 	 * @return 结果
-	 * @since 0.1.6
 	 */
 	public static String join(final Collection<String> stringCollection,
 		final String connector) {
@@ -593,7 +583,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param stringCollection 字符串集合
 	 * @return 结果
-	 * @since 0.1.46
 	 */
 	public static String join(final Collection<String> stringCollection) {
 		return StringUtil.join(stringCollection, PunctuationConst.COMMA);
@@ -605,7 +594,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collection 集合
 	 * @param handler    处理器
 	 * @param <E>        泛型元素
-	 * @since 0.1.8
 	 */
 	public static <E> void foreach(final Collection<E> collection, IHandler<E, Void> handler) {
 		if (CollectionUtil.isEmpty(collection)) {
@@ -622,7 +610,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param collection 集合
 	 * @param <E>        泛型元素
-	 * @since 0.1.93
 	 */
 	public static <E> void foreachPrint(final Collection<E> collection) {
 		foreach(collection, new IHandler<E, Void>() {
@@ -641,7 +628,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param elem 单个元素
 	 * @param <E>  泛型
 	 * @return 列表
-	 * @since 0.1.9
 	 */
 	public static <E> List<E> fill(final int size,
 		final E elem) {
@@ -659,7 +645,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param size 大小
 	 * @param initValue 初始值
 	 * @return 列表
-	 * @since 0.1.85
 	 */
 	public static List<Integer> fill(final int size, final int initValue) {
 		List<Integer> list = Guavas.newArrayList(size);
@@ -675,7 +660,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 *
 	 * @param size 大小
 	 * @return 列表
-	 * @since 0.1.85
 	 */
 	public static List<Integer> fill(final int size) {
 		return fill(size, 0);
@@ -688,7 +672,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param list 列表
 	 * @param <E>  泛型
 	 * @return 结果
-	 * @since 0.1.10
 	 */
 	public static <E> E getFirst(final List<E> list) {
 		if (CollectionUtil.isEmpty(list)) {
@@ -703,7 +686,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param <T>        集合元素类型
 	 * @param collection 集合
 	 * @return {@link ArrayList}
-	 * @since 0.1.13
 	 */
 	public static <T> List<T> distinct(Collection<T> collection) {
 		if (isEmpty(collection)) {
@@ -720,7 +702,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collection 原始集合
 	 * @param <T> 泛型
 	 * @return 结果
-	 * @since 0.1.72
 	 */
 	public static <T extends Comparable> List<T> distinctAndSort(final Collection<T> collection) {
 		List<T> list = distinct(collection);
@@ -732,7 +713,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collection 集合
 	 * @param <T> 泛型
 	 * @return 结果列表
-	 * @since 0.1.92
 	 */
 	public static <T extends Comparable> List<T> getRepeatList(final Collection<T> collection) {
 		if(CollectionUtil.isEmpty(collection)) {
@@ -759,7 +739,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param <T> 集合元素类型
 	 * @param collection 集合
 	 * @return {@link ArrayList}
-	 * @since 0.1.13
 	 */
 	public static <T extends Comparable> List<T> sort(List<T> collection) {
 		if (isEmpty(collection)) {
@@ -778,7 +757,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param startIndex 开始下标
 	 * @param collection 集合信息
 	 * @return 尽可能安全的下标范围。如果为空，则返回 0;
-	 * @since 0.1.14
 	 */
 	public static int getStartIndex(final int startIndex,
 		final Collection<?> collection) {
@@ -802,7 +780,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param endIndex   结束下标
 	 * @param collection 集合信息
 	 * @return 尽可能安全的下标范围。如果为空，则返回 0;
-	 * @since 0.1.14
 	 */
 	public static int getEndIndex(final int endIndex,
 		final Collection<?> collection) {
@@ -825,7 +802,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collectionTwo 集合2
 	 * @param <E>           泛型
 	 * @return 结果集合
-	 * @since 0.1.16
 	 */
 	public static <E> List<E> union(final Collection<E> collectionOne,
 		final Collection<E> collectionTwo) {
@@ -842,7 +818,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collectionTwo 集合2
 	 * @param <E>           泛型
 	 * @return 结果集合
-	 * @since 0.1.16
 	 */
 	public static <E> List<E> difference(final Collection<E> collectionOne,
 		final Collection<E> collectionTwo) {
@@ -859,7 +834,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collectionTwo 集合2
 	 * @param <E>           泛型
 	 * @return 结果集合
-	 * @since 0.1.16
 	 */
 	public static <E> List<E> interSection(final Collection<E> collectionOne,
 		final Collection<E> collectionTwo) {
@@ -878,7 +852,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param firstList 第一个列表
 	 * @param secondList 第二个列表
 	 * @return 是否包含
-	 * @since 0.1.70
 	 */
 	public static boolean containAny(final Collection<String> firstList,
 		final Collection<String> secondList) {
@@ -900,7 +873,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * 获取最后一行
 	 * @param resultList 结果列表
 	 * @return 最后一行
-	 * @since 0.1.70
 	 */
 	public static String getLast(final List<String> resultList) {
 		if(CollectionUtil.isEmpty(resultList)) {
@@ -914,7 +886,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * 设置最后一行
 	 * @param resultList 结果列表
 	 * @param line 最后一行内容
-	 * @since 0.1.70
 	 */
 	public static void setLast(List<String> resultList,
 		final String line) {
@@ -936,7 +907,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param size 大小
 	 * @param <T> 泛型
 	 * @return 结果
-	 * @since 0.1.79
 	 */
 	public static <T> List<T> getTopK(final Collection<T> collection, final int size) {
 		if(CollectionUtil.isEmpty(collection)) {
@@ -962,7 +932,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param regex 正则
 	 * @param target 目标
 	 * @return 结果
-	 * @since 0.1.85
 	 */
 	public static List<String> replaceAll(final Collection<String> collection, final String regex, final String target) {
 		if(CollectionUtil.isEmpty(collection)) {
@@ -986,7 +955,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param limit   大小
 	 * @param <E>    泛型
 	 * @return 结果集合
-	 * @since 0.1.89
 	 */
 	public static <E> List<E> subList(final List<E> list,
 		final int offset,
@@ -1018,7 +986,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param list 列表
 	 * @param <E> 元素
 	 * @return 结果
-	 * @since 0.1.100
 	 */
 	public static <E> E random(final List<E> list) {
 		if(CollectionUtil.isEmpty(list)) {
@@ -1035,7 +1002,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * 空列表
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> List<T> list() {
 		return Collections.emptyList();
@@ -1046,7 +1012,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param t 实体
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> List<T> list(T t) {
 		return Collections.singletonList(t);
@@ -1057,7 +1022,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param ts 数组
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> List<T> list(T... ts) {
 		return new ArrayList<>(Arrays.asList(ts));
@@ -1068,7 +1032,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param list 列表
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> List<T> copy(List<T> list) {
 		return new ArrayList<>(list);
@@ -1079,7 +1042,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param list 列表
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> T head(List<T> list) {
 		if(CollectionUtil.isEmpty(list)) {
@@ -1093,7 +1055,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param list 列表
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> T tail(List<T> list) {
 		if(CollectionUtil.isEmpty(list)) {
@@ -1108,7 +1069,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param t 元素
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> List<T> append(List<T> list, T t) {
 		if(list == null) {
@@ -1125,7 +1085,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param t 元素
 	 * @param <T> 泛型
 	 * @return 空列表
-	 * @since 0.1.128
 	 */
 	public static <T> List<T> reverse(List<T> list, T t) {
 		if(CollectionUtil.isEmpty(list)) {
@@ -1146,7 +1105,6 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collection 集合1
 	 * @param addCollection 集合2
 	 * @param <T> 泛型
-	 * @since 0.1.147
 	 */
 	public static <T> void  addAll(Collection<T> collection, Collection<T> addCollection) {
 		if(CollectionUtil.isNotEmpty(addCollection)) {

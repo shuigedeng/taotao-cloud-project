@@ -74,7 +74,6 @@ public final class ValidatorUtil {
 	 *
 	 * @param username 用户名
 	 * @return boolean  校验通过返回true，否则返回false
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:38:30
 	 */
 	public static boolean isUserName(String username) {
@@ -86,7 +85,6 @@ public final class ValidatorUtil {
 	 *
 	 * @param password 密码
 	 * @return boolean  校验通过返回true，否则返回false
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:38:57
 	 */
 	public static boolean isPassword(String password) {
@@ -98,7 +96,6 @@ public final class ValidatorUtil {
 	 *
 	 * @param phone 手机号
 	 * @return boolean  是否校验成功
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:39:07
 	 */
 	public static boolean checkPhone(String phone) {

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.ContextConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import feign.RequestInterceptor;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
@@ -35,6 +35,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -86,10 +88,10 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 
 		return template -> {
 			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+			// job 类型的任务，可能没有Request
 			if (requestAttributes != null) {
-				ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
-					.requireNonNull(requestAttributes);
-				RequestContextHolder.setRequestAttributes(attributes, true);
+				ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
+				//RequestContextHolder.setRequestAttributes(attributes, true);
 				HttpServletRequest request = attributes.getRequest();
 				Enumeration<String> headerNames = request.getHeaderNames();
 				if (headerNames != null) {
@@ -105,18 +107,6 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 					}
 				}
 
-				//传递client
-				//传递access_token，无网络隔离时需要传递
-				String tenant = TenantContextHolder.getTenant();
-				if (StrUtil.isNotEmpty(tenant)) {
-					template.header(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, tenant);
-				}
-
-				//传递日志traceId
-				String traceId = MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
-				if (StrUtil.isNotEmpty(traceId)) {
-					template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId);
-				}
 				String token = extractHeaderToken(request);
 				if (StrUtil.isEmpty(token)) {
 					token = request.getParameter(CommonConstant.TAOTAO_CLOUD_ACCESS_TOKEN);
@@ -126,6 +116,20 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 						CommonConstant.BEARER_TYPE + " " + token);
 				}
 			}
+
+			//传递client
+			//传递access_token，无网络隔离时需要传递
+			String tenant = TenantContextHolder.getTenant();
+			if (StrUtil.isNotEmpty(tenant)) {
+				template.header(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, tenant);
+			}
+
+			//传递日志traceId
+			String traceId = MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
+			template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER,
+				StrUtil.isNotEmpty(traceId) ? traceId : IdGeneratorUtil.getIdStr());
+
+			template.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 		};
 	}
 

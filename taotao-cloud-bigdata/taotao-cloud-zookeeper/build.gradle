@@ -1,7 +1,5 @@
-
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-
 
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
@@ -15,6 +13,7 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     implementation('org.apache.zookeeper:zookeeper:3.6.2'){
+        exclude group: 'javax.jms', module: 'jms'
         exclude group: 'jmxtools', module: 'com.sun.jdmk'
         exclude group: 'jmxri', module: 'com.sun.jmx'
     }

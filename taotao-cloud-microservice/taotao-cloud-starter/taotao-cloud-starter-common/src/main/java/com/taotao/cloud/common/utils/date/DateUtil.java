@@ -142,7 +142,6 @@ public class DateUtil {
 	 *
 	 * @param start yyyy-MM-dd
 	 * @param end   yyyy-MM-dd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:56
 	 */
 	public static List<String> getBetweenWeek(Date start, Date end) {
@@ -154,7 +153,6 @@ public class DateUtil {
 	 *
 	 * @param start yyyy-MM-dd
 	 * @param end   yyyy-MM-dd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:56
 	 */
 	public static List<String> getBetweenWeek(String start, String end) {
@@ -167,7 +165,6 @@ public class DateUtil {
 	 * @param startDate yyyy-MM-dd
 	 * @param endDate   yyyy-MM-dd
 	 * @return 2个日期之间的所有的周
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:56
 	 */
 	public static List<String> getBetweenWeek(LocalDate startDate, LocalDate endDate) {
@@ -181,7 +178,6 @@ public class DateUtil {
 	 * @param endDate   endDate
 	 * @param pattern   pattern
 	 * @return {@link List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:33:20
 	 */
 	public static List<String> getBetweenWeek(LocalDate startDate, LocalDate endDate,
@@ -204,7 +200,6 @@ public class DateUtil {
 	 * @param start yyyy-MM-dd
 	 * @param end   yyyy-MM-dd
 	 * @return 2个日期之间的所有的月
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:56
 	 */
 	public static List<String> getBetweenMonth(Date start, Date end) {
@@ -219,7 +214,6 @@ public class DateUtil {
 	 * @param start yyyy-MM-dd
 	 * @param end   yyyy-MM-dd
 	 * @return {@link java.util.List } 2个日期之间的所有的月
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:56
 	 */
 	public static List<String> getBetweenMonth(String start, String end) {
@@ -232,7 +226,6 @@ public class DateUtil {
 	 * @param startDate yyyy-MM-dd
 	 * @param endDate   yyyy-MM-dd
 	 * @return {@link java.util.List } 2个日期之间的所有的月
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:42
 	 */
 	public static List<String> getBetweenMonth(LocalDate startDate, LocalDate endDate) {
@@ -246,7 +239,6 @@ public class DateUtil {
 	 * @param endDate   endDate
 	 * @param pattern   pattern
 	 * @return {@link List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:34
 	 */
 	public static List<String> getBetweenMonth(LocalDate startDate, LocalDate endDate,
@@ -270,7 +262,6 @@ public class DateUtil {
 	 * @param endTime   结束
 	 * @param dateList  日期
 	 * @return {@link java.lang.String } 计算时间区间内的日期列表
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:24
 	 */
 	public static String calculationEn(LocalDateTime startTime, LocalDateTime endTime,
@@ -291,7 +282,6 @@ public class DateUtil {
 	 * @param endDate   endDate
 	 * @param dateList  dateList
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:15
 	 */
 	public static String calculation(LocalDate startDate, LocalDate endDate,
@@ -331,7 +321,6 @@ public class DateUtil {
 	 * @param endDate   endDate
 	 * @param dateList  dateList
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:32:10
 	 */
 	public static String calculationEn(LocalDate startDate, LocalDate endDate,
@@ -370,7 +359,6 @@ public class DateUtil {
 	 *
 	 * @param time time
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:31:33
 	 */
 	public static LocalDateTime getStartTime(String time) {
@@ -394,7 +382,6 @@ public class DateUtil {
 	 *
 	 * @param time time
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:31:25
 	 */
 	public static LocalDateTime getEndTime(String time) {
@@ -425,7 +412,6 @@ public class DateUtil {
 	 * @param from from
 	 * @param to   to
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:31:18
 	 */
 	public static boolean between(LocalTime from, LocalTime to) {
@@ -444,7 +430,6 @@ public class DateUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:31:13
 	 */
 	public static Date getDate2359(LocalDateTime value) {
@@ -457,7 +442,6 @@ public class DateUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:31:08
 	 */
 	public static Date getDate2359(Date value) {
@@ -469,7 +453,6 @@ public class DateUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:31:02
 	 */
 	public static Date getDate2359(LocalDate value) {
@@ -482,7 +465,6 @@ public class DateUtil {
 	 *
 	 * @param localDateTime localDateTime
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:30:57
 	 */
 	public static Date localDateTime2Date(LocalDateTime localDateTime) {
@@ -499,7 +481,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:30:49
 	 */
 	public static LocalDateTime date2LocalDateTime(Date date) {
@@ -516,7 +497,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:30:43
 	 */
 	public static LocalDate date2LocalDate(Date date) {
@@ -533,7 +513,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.time.LocalTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:30:38
 	 */
 	public static LocalTime date2LocalTime(Date date) {
@@ -551,7 +530,6 @@ public class DateUtil {
 	 *
 	 * @param epochMilli epochMilli
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:30:32
 	 */
 	public static LocalDateTime getDateTimeOfTimestamp(long epochMilli) {
@@ -564,7 +542,6 @@ public class DateUtil {
 	 *
 	 * @param epochSecond 秒
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:30:16
 	 */
 	public static LocalDateTime getDateTimeOfSecond(long epochSecond) {
@@ -579,7 +556,6 @@ public class DateUtil {
 	 *
 	 * @param endDate 结束日期
 	 * @return long 计算结束时间与开始时间间隔的天数
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:34
 	 */
 	public static long until(Date endDate) {
@@ -592,7 +568,6 @@ public class DateUtil {
 	 * @param startDate 开始日期
 	 * @param endDate   结束日期
 	 * @return long 计算结束时间与开始时间间隔的天数
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:34
 	 */
 	public static long until(Date startDate, Date endDate) {
@@ -606,7 +581,6 @@ public class DateUtil {
 	 * @param startDate 开始日期
 	 * @param endDate   结束日期
 	 * @return long 计算结束时间与开始时间间隔的天数
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:34
 	 */
 	public static long until(LocalDateTime startDate, LocalDateTime endDate) {
@@ -619,7 +593,6 @@ public class DateUtil {
 	 * @param startDate startDate
 	 * @param endDate   endDate
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:24
 	 */
 	public static long until(LocalDate startDate, LocalDate endDate) {
@@ -632,7 +605,6 @@ public class DateUtil {
 	 * @param start start
 	 * @param end   end
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:21
 	 */
 	public static List<String> getBetweenDay(Date start, Date end) {
@@ -645,7 +617,6 @@ public class DateUtil {
 	 * @param start start
 	 * @param end   end
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:16
 	 */
 	public static List<String> getBetweenDay(String start, String end) {
@@ -658,7 +629,6 @@ public class DateUtil {
 	 * @param startDate startDate
 	 * @param endDate   endDate
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:10
 	 */
 	public static List<String> getBetweenDay(LocalDate startDate, LocalDate endDate) {
@@ -671,7 +641,6 @@ public class DateUtil {
 	 * @param startDate startDate
 	 * @param endDate   endDate
 	 * @return {@link List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:04
 	 */
 	public static List<String> getBetweenDayEn(LocalDate startDate, LocalDate endDate) {
@@ -685,7 +654,6 @@ public class DateUtil {
 	 * @param endDate   endDate
 	 * @param pattern   pattern
 	 * @return {@link List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:29:01
 	 */
 	public static List<String> getBetweenDay(LocalDate startDate, LocalDate endDate,
@@ -711,7 +679,6 @@ public class DateUtil {
 	 *
 	 * @param source source
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:28:59
 	 */
 	public static LocalDate parse(String source) {
@@ -731,7 +698,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:28:49
 	 */
 	public static String getCron(Date date) {
@@ -743,7 +709,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String } 表达式
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:28:36
 	 */
 	public static String getCron(LocalDateTime date) {
@@ -756,7 +721,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:28:27
 	 */
 	public static String format(LocalDateTime date, String pattern) {
@@ -775,7 +739,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:28:20
 	 */
 	public static String format(LocalDate date, String pattern) {
@@ -794,7 +757,6 @@ public class DateUtil {
 	 * @param d 日期
 	 * @param f 格式
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:28:05
 	 */
 	public static String format(Date d, String f) {
@@ -815,7 +777,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:57
 	 */
 	public static String formatAsDate(LocalDateTime date) {
@@ -827,7 +788,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:51
 	 */
 	public static String formatAsDate(LocalDate date) {
@@ -839,7 +799,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:48
 	 */
 	public static String formatAsDateEn(LocalDateTime date) {
@@ -851,7 +810,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:46
 	 */
 	public static String formatAsYearMonth(LocalDateTime date) {
@@ -863,7 +821,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:44
 	 */
 	public static String formatAsYearMonthEn(LocalDateTime date) {
@@ -875,7 +832,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:41
 	 */
 	public static String formatAsYearWeek(LocalDateTime date) {
@@ -887,7 +843,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:34
 	 */
 	public static String formatAsYearWeekEn(LocalDateTime date) {
@@ -899,7 +854,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:30
 	 */
 	public static String formatAsYearMonth(Date date) {
@@ -912,7 +866,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:25
 	 */
 	public static String formatAsYearWeek(Date date) {
@@ -925,7 +878,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:15
 	 */
 	public static String formatAsTime(Date date) {
@@ -938,7 +890,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:27:09
 	 */
 	public static String formatAsDate(Date date) {
@@ -951,7 +902,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:59
 	 */
 	public static String formatAsDateTime(Date date) {
@@ -964,7 +914,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:52
 	 */
 	public static String formatAsDay(Date date) {
@@ -982,7 +931,6 @@ public class DateUtil {
 	 * @param dateStr dateStr
 	 * @param format  format
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:44
 	 */
 	public static Date parse(String dateStr, String format) {
@@ -1002,7 +950,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:40
 	 */
 	public static Date getLastDateOfMonth(Date date) {
@@ -1018,7 +965,6 @@ public class DateUtil {
 	 *
 	 * @param source source
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:34
 	 */
 	public static Date parseAsDate(String source) {
@@ -1041,7 +987,6 @@ public class DateUtil {
 	 *
 	 * @param dateTime 时间对象格式为("yyyy-MM-dd HH:mm:ss");
 	 * @return {@link java.util.Date } 解析后的日期
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:16
 	 */
 	public static Date parseAsDateTime(String dateTime) {
@@ -1058,7 +1003,6 @@ public class DateUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:10
 	 */
 	public static Date getDate0000(LocalDateTime value) {
@@ -1070,7 +1014,6 @@ public class DateUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:26:04
 	 */
 	public static Date getDate0000(Date value) {
@@ -1082,7 +1025,6 @@ public class DateUtil {
 	 *
 	 * @param value value
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:25:58
 	 */
 	public static Date getDate0000(LocalDate value) {
@@ -1094,7 +1036,6 @@ public class DateUtil {
 	 * 获取当前时间戳
 	 *
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:25:51
 	 */
 	public static long getTimestamp() {
@@ -1109,7 +1050,6 @@ public class DateUtil {
 	 * 获取当前年份
 	 *
 	 * @return int yyyy
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:25:31
 	 */
 	public static int getCurrentYear() {
@@ -1120,7 +1060,6 @@ public class DateUtil {
 	 * 获取当前年月
 	 *
 	 * @return {@link java.lang.String } yyyy-MM
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:25:23
 	 */
 	public static String getCurrentYearMonth() {
@@ -1131,7 +1070,6 @@ public class DateUtil {
 	 * 获取当前日期
 	 *
 	 * @return {@link java.lang.String } yyyy-MM-dd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:25:14
 	 */
 	public static String getCurrentDate() {
@@ -1142,7 +1080,6 @@ public class DateUtil {
 	 * 获取下一天日期
 	 *
 	 * @return {@link java.lang.String } yyyy-MM-dd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:25:06
 	 */
 	public static String getNextDate() {
@@ -1153,7 +1090,6 @@ public class DateUtil {
 	 * 获取当前时间
 	 *
 	 * @return {@link java.lang.String } HHmmss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:24:58
 	 */
 	public static String getCurrentTime() {
@@ -1164,7 +1100,6 @@ public class DateUtil {
 	 * 获取当前日期时间
 	 *
 	 * @return {@link java.lang.String } yyyy-MM-dd HH:mm:ss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:24:42
 	 */
 	public static String getCurrentDateTime() {
@@ -1175,7 +1110,6 @@ public class DateUtil {
 	 * 获取当前年月
 	 *
 	 * @return {@link java.lang.String } yyyyMM
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:24:33
 	 */
 	public static String getCurrentYearMonthShort() {
@@ -1186,7 +1120,6 @@ public class DateUtil {
 	 * 获取当前日期
 	 *
 	 * @return {@link java.lang.String } yyyyMMdd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:24:24
 	 */
 	public static String getCurrentDateShort() {
@@ -1197,7 +1130,6 @@ public class DateUtil {
 	 * 获取下一天日期
 	 *
 	 * @return {@link java.lang.String } yyyy-MM-dd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:24:10
 	 */
 	public static String getNextDateShort() {
@@ -1208,7 +1140,6 @@ public class DateUtil {
 	 * 获取当前时间
 	 *
 	 * @return {@link java.lang.String } HHmmss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:24:04
 	 */
 	public static String getCurrentTimeShort() {
@@ -1219,7 +1150,6 @@ public class DateUtil {
 	 * 获取当前日期时间
 	 *
 	 * @return {@link java.lang.String } yyyyMMddHHmmss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:54
 	 */
 	public static String getCurrentDateTimeShort() {
@@ -1231,7 +1161,6 @@ public class DateUtil {
 	 *
 	 * @param pattern pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:50
 	 */
 	public static String getCurrentDate(String pattern) {
@@ -1243,7 +1172,6 @@ public class DateUtil {
 	 *
 	 * @param pattern pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:46
 	 */
 	public static String getNextDate(String pattern) {
@@ -1255,7 +1183,6 @@ public class DateUtil {
 	 *
 	 * @param pattern pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:42
 	 */
 	public static String getCurrentTime(String pattern) {
@@ -1267,7 +1194,6 @@ public class DateUtil {
 	 *
 	 * @param pattern pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:38
 	 */
 	public static String getCurrentDateTime(String pattern) {
@@ -1279,7 +1205,6 @@ public class DateUtil {
 	 *
 	 * @param timestamp timestamp
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:34
 	 */
 	public static LocalDateTime timestampToLocalDateTime(long timestamp) {
@@ -1292,7 +1217,6 @@ public class DateUtil {
 	 *
 	 * @param localDateTime localDateTime
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:29
 	 */
 	public static long localDateTimeToTimestamp(LocalDateTime localDateTime) {
@@ -1304,7 +1228,6 @@ public class DateUtil {
 	 *
 	 * @param timestamp timestamp
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:24
 	 */
 	public static String formatTimestamp(long timestamp) {
@@ -1316,7 +1239,6 @@ public class DateUtil {
 	 *
 	 * @param timestamp timestamp
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:20
 	 */
 	public static String formatTimestampShort(long timestamp) {
@@ -1329,7 +1251,6 @@ public class DateUtil {
 	 * @param timestamp timestamp
 	 * @param pattern   pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:16
 	 */
 	public static String formatTimestamp(long timestamp, String pattern) {
@@ -1343,7 +1264,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return {@link java.lang.String } yyyy-MM-dd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:07
 	 */
 	public static String formatLocalDate(LocalDate localDate) {
@@ -1355,7 +1275,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return {@link java.lang.String } yyyyMMdd
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:23:00
 	 */
 	public static String formatLocalDateShort(LocalDate localDate) {
@@ -1367,7 +1286,6 @@ public class DateUtil {
 	 *
 	 * @param localTime localTime
 	 * @return {@link java.lang.String } HH:mm:ss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:22:51
 	 */
 	public static String formatLocalTime(LocalTime localTime) {
@@ -1379,7 +1297,6 @@ public class DateUtil {
 	 *
 	 * @param localTime localTime
 	 * @return {@link java.lang.String } HHmmss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:22:37
 	 */
 	public static String formatLocalTimeShort(LocalTime localTime) {
@@ -1391,7 +1308,6 @@ public class DateUtil {
 	 *
 	 * @param localDateTime localDateTime
 	 * @return {@link String } yyyy-MM-dd HH:mm:ss
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:22:22
 	 */
 	public static String formatLocalDateTime(LocalDateTime localDateTime) {
@@ -1403,7 +1319,6 @@ public class DateUtil {
 	 *
 	 * @param localDateTime localDateTime
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:22:14
 	 */
 	public static String formatLocalDateTimeShort(LocalDateTime localDateTime) {
@@ -1416,7 +1331,6 @@ public class DateUtil {
 	 * @param localDate localDate
 	 * @param pattern   pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:22:10
 	 */
 	public static String formatLocalDate(LocalDate localDate, String pattern) {
@@ -1429,7 +1343,6 @@ public class DateUtil {
 	 * @param localTime localTime
 	 * @param pattern   pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:59
 	 */
 	public static String formatLocalTime(LocalTime localTime, String pattern) {
@@ -1442,7 +1355,6 @@ public class DateUtil {
 	 * @param localDateTime localDateTime
 	 * @param pattern       pattern
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:55
 	 */
 	public static String formatLocalDateTime(LocalDateTime localDateTime, String pattern) {
@@ -1455,7 +1367,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:51
 	 */
 	public static LocalDate parseLocalDate(String date, String pattern) {
@@ -1468,7 +1379,6 @@ public class DateUtil {
 	 * @param time    time
 	 * @param pattern pattern
 	 * @return {@link java.time.LocalTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:42
 	 */
 	public static LocalTime parseLocalTime(String time, String pattern) {
@@ -1481,7 +1391,6 @@ public class DateUtil {
 	 * @param dateTime dateTime
 	 * @param pattern  pattern
 	 * @return {@link java.time.LocalDateTime }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:36
 	 */
 	public static LocalDateTime parseLocalDateTime(String dateTime, String pattern) {
@@ -1492,7 +1401,6 @@ public class DateUtil {
 	 * 获取本周第一天
 	 *
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:31
 	 */
 	public static LocalDate getCurrentWeekFirstDate() {
@@ -1503,7 +1411,6 @@ public class DateUtil {
 	 * 获取本周最后一天
 	 *
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:26
 	 */
 	public static LocalDate getCurrentWeekLastDate() {
@@ -1514,7 +1421,6 @@ public class DateUtil {
 	 * 获取本月第一天
 	 *
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:23
 	 */
 	public static LocalDate getCurrentMonthFirstDate() {
@@ -1525,7 +1431,6 @@ public class DateUtil {
 	 * 获取本月最后一天
 	 *
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:19
 	 */
 	public static LocalDate getCurrentMonthLastDate() {
@@ -1538,7 +1443,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:12
 	 */
 	public static LocalDate getWeekFirstDate(String date, String pattern) {
@@ -1550,7 +1454,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:08
 	 */
 	public static LocalDate getWeekFirstDate(LocalDate localDate) {
@@ -1563,7 +1466,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:04
 	 */
 	public static LocalDate getWeekLastDate(String date, String pattern) {
@@ -1575,7 +1477,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:21:00
 	 */
 	public static LocalDate getWeekLastDate(LocalDate localDate) {
@@ -1589,7 +1490,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:54
 	 */
 	public static LocalDate getMonthFirstDate(String date, String pattern) {
@@ -1601,7 +1501,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return {@link java.time.LocalDate }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:49
 	 */
 	public static LocalDate getMonthFirstDate(LocalDate localDate) {
@@ -1612,7 +1511,6 @@ public class DateUtil {
 	 * 获取当前星期
 	 *
 	 * @return int 1:星期一、2:星期二、3:星期三、4:星期四、5:星期五、6:星期六、7:星期日
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:28
 	 */
 	public static int getCurrentWeek() {
@@ -1625,7 +1523,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return int 1:星期一、2:星期二、3:星期三、4:星期四、5:星期五、6:星期六、7:星期日
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:22
 	 */
 	public static int getWeek(LocalDate localDate) {
@@ -1638,7 +1535,6 @@ public class DateUtil {
 	 * @param date    date
 	 * @param pattern pattern
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:12
 	 */
 	public static int getWeek(String date, String pattern) {
@@ -1651,7 +1547,6 @@ public class DateUtil {
 	 * @param startLocalDate startLocalDate
 	 * @param endLocalDate   endLocalDate
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:07
 	 */
 	public static long intervalDays(LocalDate startLocalDate, LocalDate endLocalDate) {
@@ -1664,7 +1559,6 @@ public class DateUtil {
 	 * @param startLocalDateTime startLocalDateTime
 	 * @param endLocalDateTime   endLocalDateTime
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:20:01
 	 */
 	public static long intervalHours(LocalDateTime startLocalDateTime,
@@ -1678,7 +1572,6 @@ public class DateUtil {
 	 * @param startLocalDateTime startLocalDateTime
 	 * @param endLocalDateTime   endLocalDateTime
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:55
 	 */
 	public static long intervalMinutes(LocalDateTime startLocalDateTime,
@@ -1692,7 +1585,6 @@ public class DateUtil {
 	 * @param startLocalDateTime startLocalDateTime
 	 * @param endLocalDateTime   endLocalDateTime
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:48
 	 */
 	public static long intervalMillis(LocalDateTime startLocalDateTime,
@@ -1704,7 +1596,6 @@ public class DateUtil {
 	 * 当前是否闰年
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:43
 	 */
 	public static boolean isCurrentLeapYear() {
@@ -1716,7 +1607,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:40
 	 */
 	public static boolean isLeapYear(LocalDate localDate) {
@@ -1728,7 +1618,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:35
 	 */
 	public static boolean isToday(LocalDate localDate) {
@@ -1740,7 +1629,6 @@ public class DateUtil {
 	 *
 	 * @param localDateTime localDateTime
 	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:31
 	 */
 	public static Long toEpochMilli(LocalDateTime localDateTime) {
@@ -1753,7 +1641,6 @@ public class DateUtil {
 	 * @param localDateTime 日期时间
 	 * @param zoneId        zoneId
 	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:21
 	 */
 	public static Long toSelectEpochMilli(LocalDateTime localDateTime, ZoneId zoneId) {
@@ -1765,7 +1652,6 @@ public class DateUtil {
 	 *
 	 * @param days days
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:17
 	 */
 	public static String getDateAfterDays(int days) {
@@ -1781,7 +1667,6 @@ public class DateUtil {
 	 * @param source 源日期(yyyy-MM-dd)
 	 * @param days   指定的天数,正负皆可
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:19:03
 	 */
 	public static String addDays(String source, int days) {
@@ -1798,7 +1683,6 @@ public class DateUtil {
 	 *
 	 * @param localDate localDate
 	 * @return {@link java.util.Date }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:18:56
 	 */
 	public static Date localDateToDate(LocalDate localDate) {
@@ -1812,7 +1696,6 @@ public class DateUtil {
 	 *
 	 * @param time time
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:18:50
 	 */
 	public static boolean isValidate24(String time) {
@@ -1825,7 +1708,6 @@ public class DateUtil {
 	 *
 	 * @param date date
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:18:46
 	 */
 	public static boolean isDate(String date) {

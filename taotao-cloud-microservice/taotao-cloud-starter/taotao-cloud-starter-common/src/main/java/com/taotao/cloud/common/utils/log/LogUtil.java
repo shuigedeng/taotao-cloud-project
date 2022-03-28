@@ -48,7 +48,6 @@ public class LogUtil {
 	 * 获取栈中类信息
 	 *
 	 * @return {@link org.slf4j.spi.LocationAwareLogger }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:34:58
 	 */
 	public static LocationAwareLogger getLocationAwareLogger() {
@@ -64,7 +63,6 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:04
 	 */
 	public static void debug(String msg, Object... arguments) {
@@ -82,7 +80,6 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:18
 	 */
 	public static void info(String msg, Object... arguments) {
@@ -98,7 +95,6 @@ public class LogUtil {
 	 * @param cls     cls
 	 * @param project project
 	 * @param message message
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:32
 	 */
 	public static void started(Class<?> cls, String project, String... message) {
@@ -119,7 +115,6 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:37
 	 */
 	public static void warn(String msg, Object... arguments) {
@@ -135,7 +130,6 @@ public class LogUtil {
 	 * @param error     error
 	 * @param msg       msg
 	 * @param arguments arguments
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:43
 	 */
 	public static void error(Throwable error, String msg, Object... arguments) {
@@ -149,7 +143,6 @@ public class LogUtil {
 	 * Error级别日志
 	 *
 	 * @param error error
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:51
 	 */
 	public static void error(Throwable error) {
@@ -164,7 +157,6 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:35:57
 	 */
 	public static void error(String msg, Object... arguments) {
@@ -179,7 +171,6 @@ public class LogUtil {
 	 *
 	 * @param e e
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:36:06
 	 */
 	public static String exceptionToString(Exception e) {
@@ -200,7 +191,6 @@ public class LogUtil {
 	 *
 	 * @param throwable throwable
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:36:12
 	 */
 	public static String getStackTrace(Throwable throwable) {
@@ -216,7 +206,6 @@ public class LogUtil {
 	 *
 	 * @param methodName 方法名称
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:36:19
 	 */
 	public static int getRequestType(String methodName) {
@@ -251,7 +240,6 @@ public class LogUtil {
 	 * isDebugEnabled
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:11:49
 	 */
 	public static boolean isDebugEnabled() {
@@ -262,7 +250,6 @@ public class LogUtil {
 	 * isInfoEnabled
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:11:53
 	 */
 	public static boolean isInfoEnabled() {
@@ -273,7 +260,6 @@ public class LogUtil {
 	 * isErrorEnabled
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:11:56
 	 */
 	public static boolean isErrorEnabled() {
@@ -284,7 +270,6 @@ public class LogUtil {
 	 * isWarnEnabled
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:11:58
 	 */
 	public static boolean isWarnEnabled() {

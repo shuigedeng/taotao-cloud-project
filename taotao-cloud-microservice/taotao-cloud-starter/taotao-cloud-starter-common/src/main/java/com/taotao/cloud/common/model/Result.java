@@ -71,14 +71,13 @@ public record Result<T>(
 	private static final long serialVersionUID = -3685249101751401211L;
 
 	/**
-	 * of
+	 * 构造返回对象
 	 *
 	 * @param code     code
-	 * @param data     data
-	 * @param success  success
-	 * @param errorMsg errorMsg
-	 * @param <T>      T
-	 * @return {@link Result }
+	 * @param data     数据
+	 * @param success  是否成功
+	 * @param errorMsg 失败消息
+	 * @return 返回结果
 	 * @since 2021-09-02 19:12:35
 	 */
 	public static <T> Result<T> of(int code, T data, boolean success, String errorMsg) {
@@ -92,11 +91,10 @@ public record Result<T>(
 	}
 
 	/**
-	 * success
+	 * 成功返回
 	 *
-	 * @param data data
-	 * @param <T>  T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param data 数据
+	 * @return 返回结果
 	 * @since 2021-09-02 19:15:21
 	 */
 	public static <T> Result<T> success(T data) {
@@ -104,12 +102,11 @@ public record Result<T>(
 	}
 
 	/**
-	 * success
+	 * 成功返回
 	 *
-	 * @param data data
+	 * @param data 数据
 	 * @param code code
-	 * @param <T>  T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:58
 	 */
 	public static <T> Result<T> success(T data, int code) {
@@ -117,11 +114,11 @@ public record Result<T>(
 	}
 
 	/**
-	 * success
+	 * 成功返回
 	 *
-	 * @param data       data
-	 * @param resultEnum resultEnum
-	 * @return {@link Result }
+	 * @param data       数据
+	 * @param resultEnum 枚举
+	 * @return 返回结果
 	 * @since 2021-09-02 19:13:07
 	 */
 	public static Result<String> success(String data, ResultEnum resultEnum) {
@@ -129,9 +126,9 @@ public record Result<T>(
 	}
 
 	/**
-	 * fail
+	 * 失败返回
 	 *
-	 * @return {@link Result }
+	 * @return 返回结果
 	 * @since 2021-09-02 19:13:14
 	 */
 	public static Result<String> fail() {
@@ -140,11 +137,10 @@ public record Result<T>(
 	}
 
 	/**
-	 * fail
+	 * 失败返回
 	 *
-	 * @param errorMsg errorMsg
-	 * @param <T>      T
-	 * @return {@link Result }
+	 * @param errorMsg 失败消息
+	 * @return 返回结果
 	 * @since 2021-09-02 19:13:19
 	 */
 	public static <T> Result<T> fail(String errorMsg) {
@@ -152,12 +148,11 @@ public record Result<T>(
 	}
 
 	/**
-	 * fail
+	 * 失败返回
 	 *
-	 * @param data data
+	 * @param data 数据
 	 * @param code code
-	 * @param <T>  T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:41
 	 */
 	public static <T> Result<T> fail(String data, int code) {
@@ -165,10 +160,10 @@ public record Result<T>(
 	}
 
 	/**
-	 * fail
+	 * 失败返回
 	 *
-	 * @param resultEnum resultEnum
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param resultEnum 枚举
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:32
 	 */
 	public static Result<String> fail(ResultEnum resultEnum) {
@@ -176,11 +171,10 @@ public record Result<T>(
 	}
 
 	/**
-	 * fail
+	 * 失败返回
 	 *
-	 * @param throwable throwable
-	 * @param <T>       T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param throwable 异常信息
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:24
 	 */
 	public static <T> Result<T> fail(Throwable throwable) {
@@ -188,25 +182,22 @@ public record Result<T>(
 	}
 
 	/**
-	 * validFail
+	 * 校验失败返回
 	 *
-	 * @param resultEnum resultEnum
-	 * @param <T>        T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param resultEnum 枚举
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:18
 	 */
 	public static <T> Result<T> validFail(ResultEnum resultEnum) {
 		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getDesc());
 	}
 
-
 	/**
-	 * validFail
+	 * 校验失败返回
 	 *
-	 * @param errorMsg errorMsg
-	 * @param args     args
-	 * @param <T>      T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param errorMsg 失败消息
+	 * @param args     参数
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:11
 	 */
 	public static <T> Result<T> validFail(String errorMsg, Object... args) {
@@ -214,11 +205,10 @@ public record Result<T>(
 	}
 
 	/**
-	 * validFail
+	 * 校验失败返回
 	 *
-	 * @param errorMsg errorMsg
-	 * @param <T>      T
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param errorMsg 失败消息
+	 * @return 返回结果
 	 * @since 2021-09-02 19:14:03
 	 */
 	public static <T> Result<T> validFail(String errorMsg) {

@@ -56,7 +56,6 @@ public class ContextUtil {
 	 * setApplicationContext
 	 *
 	 * @param applicationContext applicationContext
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:37:28
 	 */
 	public static void setApplicationContext(ConfigurableApplicationContext applicationContext) {
@@ -69,7 +68,6 @@ public class ContextUtil {
 	 * getApplicationContext
 	 *
 	 * @return {@link ConfigurableApplicationContext }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:37:32
 	 */
 	public static ConfigurableApplicationContext getApplicationContext() {
@@ -80,7 +78,6 @@ public class ContextUtil {
 	 * isWeb
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:37:36
 	 */
 	public static boolean isWeb() {
@@ -91,7 +88,6 @@ public class ContextUtil {
 	 * getConfigurableWebServerApplicationContext
 	 *
 	 * @return {@link ConfigurableWebServerApplicationContext }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:37:38
 	 */
 	public static ConfigurableWebServerApplicationContext getConfigurableWebServerApplicationContext() {
@@ -108,7 +104,6 @@ public class ContextUtil {
 	 * @param type     类型
 	 * @param required 是否必须
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:37:46
 	 */
 	public static <T> T getBean(Class<T> type, boolean required) {
@@ -156,7 +151,6 @@ public class ContextUtil {
 	 * @param type     类型
 	 * @param required 是否必须
 	 * @return {@link Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:37:57
 	 */
 	public static Object getBean(String type, boolean required) {
@@ -180,7 +174,6 @@ public class ContextUtil {
 	 * 获取bean定义信息
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:08
 	 */
 	public static String getBeanDefinitionText() {
@@ -205,7 +198,6 @@ public class ContextUtil {
 	 *
 	 * @param anno anno
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:14
 	 */
 	public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> anno) {
@@ -224,7 +216,6 @@ public class ContextUtil {
 	 *
 	 * @param clazz clazz
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:22
 	 */
 	public static <T> List<T> getBeansOfType(Class<T> clazz) {
@@ -246,7 +237,6 @@ public class ContextUtil {
 	 * @param name  name
 	 * @param clazz clazz
 	 * @param args  args
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:27
 	 */
 	public static void registerBean(String name, Class clazz, Object... args) {
@@ -269,7 +259,6 @@ public class ContextUtil {
 	 * @param name                  name
 	 * @param clazz                 clazz
 	 * @param beanDefinitionBuilder beanDefinitionBuilder
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:33
 	 */
 	public static void registerBean(String name, Class clazz,
@@ -286,7 +275,6 @@ public class ContextUtil {
 	 * 取消注册bean
 	 *
 	 * @param name name
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:37
 	 */
 	public static void unRegisterBean(String name) {
@@ -303,7 +291,6 @@ public class ContextUtil {
 	 * @param applicationContext applicationContext
 	 * @param name               name
 	 * @param clazz              clazz
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:38:43
 	 */
 	public static void checkRegisterBean(ApplicationContext applicationContext, String name,

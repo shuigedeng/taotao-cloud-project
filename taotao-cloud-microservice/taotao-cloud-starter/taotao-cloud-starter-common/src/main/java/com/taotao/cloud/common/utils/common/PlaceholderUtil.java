@@ -14,22 +14,16 @@ public final class PlaceholderUtil {
 
 	/**
 	 * 默认前置
-	 *
-	 * @since 0.1.126
 	 */
 	public static final String DEFAULT_PLACEHOLDER_PREFIX = "${";
 
 	/**
 	 * 默认后置
-	 *
-	 * @since 0.1.126
 	 */
 	public static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";
 
 	/**
 	 * 默认分隔符
-	 *
-	 * @since 0.1.126
 	 */
 	public static final String DEFAULT_VALUE_SEPARATOR = ":";
 
@@ -38,7 +32,6 @@ public final class PlaceholderUtil {
 	 *
 	 * @param rawPlaceholder 原始的占位符
 	 * @return 结果
-	 * @since 0.1.126
 	 */
 	public static Pair<String, String> parsePlaceholder(String rawPlaceholder) {
 		String trim = StringUtil.trim(rawPlaceholder);

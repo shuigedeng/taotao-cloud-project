@@ -110,7 +110,7 @@ public class LockAspectUtil extends AspectUtil {
 	 * @param spEL            spEL
 	 * @param methodSignature 方法签名
 	 * @param args            参数
-	 * @return {@link java.lang.String }
+	 * @return 表达式值
 	 * @since 2021-09-02 20:28:11
 	 */
 	private String getValBySpEL(String spEL, MethodSignature methodSignature, Object[] args) {

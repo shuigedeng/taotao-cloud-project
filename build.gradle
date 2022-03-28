@@ -96,7 +96,7 @@ buildscript {
 
         maven {
             allowInsecureProtocol = true
-            url "http://maven.aliyun.com/nexus/content/groups/public/"
+            url "https://maven.aliyun.com/nexus/content/groups/public/"
         }
 
         maven {
@@ -138,7 +138,7 @@ plugins {
     id "com.github.shalousun.smart-doc" version "2.2.8"
     //id "org.jetbrains.intellij" version "0.6.5"
     id "org.owasp.dependencycheck" version "6.5.1"
-//    id "com.bmuschko.docker-spring-boot-application" version "7.2.0"
+    //id "com.bmuschko.docker-spring-boot-application" version "7.2.0"
 }
 
 allprojects {
@@ -446,21 +446,6 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
     }
 }
 
-//task deployStarter {
-//    subprojects.findAll(pro -> {
-//        if (pro.name.startsWith("taotao-cloud-starter-")) {
-////            println( pro.getAllTasks(true))
-//            Set<Task> task= pro.getTasks().findAll {ta -> ta.name.contains("publishMavenJavaPublicationToSonatypeRepository")}
-//            task.forEach( ta -> {
-//                println(ta.name)
-//            })
-//        }
-//    })
-//}
-
-//task printlnDefaultTask {
-//    println  project.properties
-//}
 
 //configurations.all{
 //    resolutionStrategy{
@@ -490,21 +475,5 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
 //    System.setProperty("gradleVersion", gradle.gradleVersion)
 //
 //    project.setProperty("version", project.version)
-//}p6spyVersion
+//}
 
-////任务图
-//gradle.taskGraph.whenReady {
-//    println 'config phase: taskGraph.whenReady'
-//}
-//
-//gradle.taskGraph.beforeTask{
-//    println 'execute phase: taskGraph.beforeTask'
-//}
-//
-//gradle.taskGraph.afterTask {
-//    println "execute phase: taskGraph.afterTask"
-//}
-//
-//gradle.buildFinished {
-//    println 'execute phase: buildFinished'
-//}

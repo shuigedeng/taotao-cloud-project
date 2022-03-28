@@ -10,7 +10,6 @@ import com.itstyle.distribution.service.ISeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import javax.jms.Destination;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;

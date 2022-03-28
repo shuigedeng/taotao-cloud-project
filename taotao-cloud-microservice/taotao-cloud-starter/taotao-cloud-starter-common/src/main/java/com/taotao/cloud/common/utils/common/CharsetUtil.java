@@ -25,7 +25,6 @@ public final class CharsetUtil {
 	 *
 	 * @param unicode 编码
 	 * @return 中文
-	 * @since 0.1.31
 	 */
 	public static String unicodeToZh(String unicode) {
 		if (StringUtil.isEmpty(unicode)) {
@@ -56,7 +55,6 @@ public final class CharsetUtil {
 	 *
 	 * @param zh 中文字符串
 	 * @return 编码
-	 * @since 0.1.31
 	 */
 	public static String zhToUnicode(String zh) {
 		if (StringUtil.isEmpty(zh)) {
@@ -76,7 +74,6 @@ public final class CharsetUtil {
 	 *
 	 * @param c char
 	 * @return 是否
-	 * @since 0.1.67
 	 */
 	public static boolean isChinese(char c) {
 		boolean result = false;
@@ -92,7 +89,6 @@ public final class CharsetUtil {
 	 *
 	 * @param string 字符串
 	 * @return 是否
-	 * @since 0.1.67
 	 */
 	public static boolean isContainsChinese(String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -114,7 +110,6 @@ public final class CharsetUtil {
 	 *
 	 * @param string 字符串
 	 * @return 是否
-	 * @since 0.1.67
 	 */
 	public static boolean isAllChinese(String string) {
 		if (StringUtil.isEmpty(string)) {
@@ -136,7 +131,6 @@ public final class CharsetUtil {
 	 *
 	 * @param unicodeText 文本
 	 * @return 结果
-	 * @since 0.1.98
 	 */
 	public static String unicodeToString(String unicodeText) {
 		if (StringUtil.isEmptyTrim(unicodeText)) {

@@ -35,7 +35,6 @@ public class TimeWatchUtil {
 	 * @param isPrint 是否打印
 	 * @param msg     消息
 	 * @param action0 action0
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:57:58
 	 */
 	public static void print(boolean isPrint, String msg, Callable.Action0 action0) {
@@ -53,7 +52,6 @@ public class TimeWatchUtil {
 	 * @param action0 action0
 	 * @param <T>     T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:58:09
 	 */
 	public static <T> T print(boolean isPrint, String msg, Callable.Func0<T> action0) {

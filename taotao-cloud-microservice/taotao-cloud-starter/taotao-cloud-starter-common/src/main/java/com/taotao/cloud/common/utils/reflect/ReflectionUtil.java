@@ -282,8 +282,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * classForName
 	 *
 	 * @param type 类型
-	 * @return {@link Class }
-	 * @author shuigedeng
+	 * @return 类型
 	 * @since 2021-09-02 15:02:32
 	 */
 	public static Class<?> classForName(String type) {
@@ -298,8 +297,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * 类型
 	 *
 	 * @param type 类型
-	 * @return {@link Class }
-	 * @author shuigedeng
+	 * @return 类型
 	 * @since 2021-09-02 15:02:39
 	 */
 	public static Class<?> tryClassForName(String type) {
@@ -315,8 +313,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 *
 	 * @param cls        类
 	 * @param methodName 方法名
-	 * @return {@link Method }
-	 * @author shuigedeng
+	 * @return 对象方法
 	 * @since 2021-09-02 15:02:47
 	 */
 	public static Method findMethod(Class<?> cls, String methodName) {
@@ -341,8 +338,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param cls        枚举类
 	 * @param methodName 方法名称
 	 * @param name       name  枚举名称 区分大小写 必须完全一样
-	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
+	 * @return 对象方法
 	 * @since 2021-09-15 15:56:01
 	 */
 	public static Object findEnumObjByName(Class<?> cls, String methodName, String name)
@@ -365,8 +361,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param cls        类型
 	 * @param methodName 方法名
 	 * @param argsTypes  参数类型
-	 * @return {@link Method }
-	 * @author shuigedeng
+	 * @return 对象方法
 	 * @since 2021-09-02 15:03:01
 	 */
 	public static Method findMethod0(Class<?> cls, String methodName, Class<?>... argsTypes)
@@ -385,9 +380,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param methodName   方法名
 	 * @param param        参数
 	 * @param defaultValue 默认值
-	 * @param <T>          T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 对象数据
 	 * @since 2021-09-02 15:03:09
 	 */
 	public static <T> T tryCallMethod(Object obj, String methodName, Object[] param,
@@ -415,8 +408,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param obj        对象
 	 * @param methodName 方法名
 	 * @param param      参数
-	 * @return {@link Object }
-	 * @author shuigedeng
+	 * @return 对象数据
 	 * @since 2021-09-02 15:03:17
 	 */
 	public static Object callMethod(Object obj, String methodName, Object[] param) {
@@ -438,8 +430,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param clazz      类型
 	 * @param methodName 方法名
 	 * @param params     参数
-	 * @return {@link Object }
-	 * @author shuigedeng
+	 * @return 对象数据
 	 * @since 2021-09-02 15:03:25
 	 */
 	public static Object callMethod(Class<?> clazz, String methodName, Object[] params) {
@@ -462,8 +453,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param methodName 方法名
 	 * @param params     参数
 	 * @param paramTypes 参数类型
-	 * @return {@link Object }
-	 * @author shuigedeng
+	 * @return 对象数据
 	 * @since 2021-09-02 15:03:38
 	 */
 	public static Object callMethodWithParams(Class<?> clazz, String methodName, Object[] params,
@@ -487,8 +477,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param methodName 方法名
 	 * @param params     参数
 	 * @param paramTypes 参数类型
-	 * @return {@link Object }
-	 * @author shuigedeng
+	 * @return 对象数据
 	 * @since 2021-09-02 15:03:48
 	 */
 	public static Object callMethodWithParams(Object object, String methodName, Object[] params,
@@ -510,8 +499,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 *
 	 * @param cls  类型
 	 * @param name 字段名称
-	 * @return {@link Field }
-	 * @author shuigedeng
+	 * @return 字段
 	 * @since 2021-09-02 15:03:57
 	 */
 	public static Field findField(Class<?> cls, String name) {
@@ -530,6 +518,14 @@ public class ReflectionUtil extends ReflectionUtils {
 		return find;
 	}
 
+	/**
+	 * 查询record
+	 *
+	 * @param cls  类型
+	 * @param name 名称
+	 * @return record类型
+	 * @since 2022-03-28 11:23:44
+	 */
 	public static RecordComponent findRecord(Class<?> cls, String name) {
 		RecordComponent find = null;
 		while (cls != null) {
@@ -552,9 +548,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 *
 	 * @param obj  对象
 	 * @param name 字段名称
-	 * @param <T>  T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 字段值
 	 * @since 2021-09-02 15:04:04
 	 */
 	public static <T> T getFieldValue(Object obj, String name) {
@@ -579,9 +573,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param obj          对象
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
-	 * @param <T>          T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 字段值
 	 * @since 2021-09-02 15:04:13
 	 */
 	public static <T> T tryGetFieldValue(Object obj, String name, T defaultValue) {
@@ -608,9 +600,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param cls          对象全路径
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
-	 * @param <T>          T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 静态字段值
 	 * @since 2021-09-02 15:04:21
 	 */
 	public static <T> T tryGetStaticFieldValue(String cls, String name, T defaultValue) {
@@ -628,9 +618,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param cls          类型
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
-	 * @param <T>          T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 静态字段值
 	 * @since 2021-09-02 15:04:28
 	 */
 	public static <T> T tryGetStaticFieldValue(Class<?> cls, String name, T defaultValue) {
@@ -657,7 +645,6 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param field 字段
 	 * @param obj   对象
 	 * @param value 值
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:04:36
 	 */
 	public static void setFieldValue(Field field, Object obj, Object value) {
@@ -673,14 +660,11 @@ public class ReflectionUtil extends ReflectionUtils {
 	}
 
 	/**
-	 * copyPropertiesIfRecord
-	 * <p>
-	 * 主要用于 复制dto对象到t对象中
+	 * copyPropertiesIfRecord 主要用于 复制dto对象到t对象中
 	 *
 	 * @param t   实体
 	 * @param dto dto
-	 * @return {@link T }
-	 * @author shuigedeng
+	 * @return 实体对象
 	 * @since 2021-10-20 09:19:45
 	 */
 	public static <T, DTO> T copyPropertiesIfRecord(T t, DTO dto) {
@@ -702,14 +686,11 @@ public class ReflectionUtil extends ReflectionUtils {
 	}
 
 	/**
-	 * copyDataIfRecord
-	 * <p>
-	 * 主要用于 复制t对象到vo对象中
+	 * copyDataIfRecord 主要用于复制t对象到vo对象中
 	 *
 	 * @param clazz vo对象class
 	 * @param t     t
-	 * @return {@link VO }
-	 * @author shuigedeng
+	 * @return vo对象
 	 * @since 2021-10-20 10:42:23
 	 */
 	public static <T, VO> VO copyPropertiesIfRecord(Class<VO> clazz, T t) {
@@ -735,6 +716,15 @@ public class ReflectionUtil extends ReflectionUtils {
 		return vo;
 	}
 
+	/**
+	 * 构造实例
+	 *
+	 * @param fields 字段
+	 * @param clazz  类型
+	 * @param params 参数
+	 * @return 对象
+	 * @since 2022-03-28 11:19:22
+	 */
 	public static <T> T newInstance(List<Field> fields, Class<T> clazz, Object... params)
 		throws UtilException {
 		if (ArrayUtil.isEmpty(params)) {
@@ -759,6 +749,13 @@ public class ReflectionUtil extends ReflectionUtils {
 		}
 	}
 
+	/**
+	 * 获取字段类型列表
+	 *
+	 * @param fields 字段列表
+	 * @return 字段类型列表
+	 * @since 2022-03-28 11:18:46
+	 */
 	public static Class<?>[] getClasses(List<Field> fields) {
 		Class<?>[] classes = new Class<?>[fields.size()];
 		for (int i = 0; i < fields.size(); i++) {
@@ -771,10 +768,9 @@ public class ReflectionUtil extends ReflectionUtils {
 	/**
 	 * 校验字段是否存在
 	 *
-	 * @param dtoClass    dtoClass
-	 * @param entityClass entityClass
-	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @param dtoClass    dto类型
+	 * @param entityClass 实体类型
+	 * @return 结果
 	 * @since 2021-10-13 17:36:08
 	 */
 	public static Boolean checkField(Class<?> dtoClass, Class<?> entityClass) {
@@ -819,9 +815,9 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * 校验字段
 	 *
 	 * @param filedName   字段名称
-	 * @param entityClass entityClass
+	 * @param entityClass 实体类
 	 * @return {@link Boolean }
-	 * @author shuigedeng
+	 * @author 结果
 	 * @since 2021-10-13 17:36:08
 	 */
 	public static Boolean checkField(String filedName, Class<?> entityClass) {
@@ -840,10 +836,8 @@ public class ReflectionUtil extends ReflectionUtils {
 	 *
 	 * @param obj  对象
 	 * @param path 路径
-	 * @param deft deft
-	 * @param <T>  T
-	 * @return T
-	 * @author shuigedeng
+	 * @param deft 默认值
+	 * @return 字段值
 	 * @since 2021-09-02 15:04:43
 	 */
 	public static <T> T tryGetValue(Object obj, String path, T deft) {
@@ -866,13 +860,11 @@ public class ReflectionUtil extends ReflectionUtils {
 	}
 
 	/**
-	 * 获取值
+	 * 获取字段值
 	 *
 	 * @param obj  对象
 	 * @param path 路径
-	 * @param <T>  T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 字段值
 	 * @since 2021-09-02 15:04:53
 	 */
 	public static <T> T tryGetValue(Object obj, String path) {

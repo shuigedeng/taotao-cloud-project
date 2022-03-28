@@ -26,7 +26,6 @@ public final class ArrayUtil {
 
     /**
      * 空字符串列表
-     * @since 0.1.49
      */
     public static final String[] STRING_EMPTY = new String[0];
 
@@ -61,7 +60,6 @@ public final class ArrayUtil {
      * @param objects 数组
      * @param <T> 泛型
      * @return 列表
-     * @since 0.1.41
      */
     public static <T> List<T> toList(final T[] objects) {
         if (ArrayUtil.isEmpty(objects)) {
@@ -98,7 +96,6 @@ public final class ArrayUtil {
      * @param <K> 泛型 K
      * @param <V> 泛型 V
      * @return 对象数组
-     * @since 0.1.32
      */
     @SuppressWarnings("unchecked")
     public static <K, V> K[] toArray(final V[] values, IHandler<? super V, K> keyFunction) {
@@ -120,7 +117,6 @@ public final class ArrayUtil {
      * @param others 其他数组信息
      * @return 对象数组
      * @param <K> 泛型
-     * @since 0.1.32
      */
     @SuppressWarnings("unchecked")
     public static <K> K[] union(final K[] values, final K ... others) {
@@ -143,7 +139,6 @@ public final class ArrayUtil {
      * @param array 数组信息
      * @param objectToFind 待发现的对象
      * @return 是否包含
-     * @since 0.0.1
      */
     public static boolean contains(Object[] array, Object objectToFind) {
         return indexOf(array, objectToFind) != -1;
@@ -154,7 +149,6 @@ public final class ArrayUtil {
      * @param array 数组信息
      * @param objectToFind 待发现的对象
      * @return 是否不包含
-     * @since 0.0.1
      */
     public static boolean notContains(Object[] array, Object objectToFind) {
         return !contains(array, objectToFind);
@@ -165,7 +159,6 @@ public final class ArrayUtil {
      * @param array 数组信息
      * @param objectToFind 待发现的对象
      * @return 下标
-     * @since 0.0.1
      */
     public static int indexOf(Object[] array, Object objectToFind) {
         return indexOf(array, objectToFind, 0);
@@ -177,7 +170,6 @@ public final class ArrayUtil {
      * @param objectToFind 待发现的对象
      * @param startIndex 开始下标
      * @return 下标
-     * @since 0.0.1
      */
     public static int indexOf(Object[] array, Object objectToFind, int startIndex) {
         if (array == null) {
@@ -230,7 +222,6 @@ public final class ArrayUtil {
      * @param array 数组
      * @param <E> 泛型原型
      * @return 列表
-     * @since 0.1.6
      */
     public static <E> List<E> arrayToList(final E... array) {
         if(ArrayUtil.isEmpty(array)) {
@@ -247,7 +238,6 @@ public final class ArrayUtil {
      * @param startIndex 开始下标
      * @param arrays 数组信息
      * @return 尽可能安全的数组范围。如果为空，则返回 0;
-     * @since 0.1.14
      */
     public static int getStartIndex(final int startIndex,
                                     final Object[] arrays) {
@@ -270,7 +260,6 @@ public final class ArrayUtil {
      * @param endIndex 结束下标
      * @param arrays 数组信息
      * @return 尽可能安全的数组范围。如果为空，则返回 0;
-     * @since 0.1.14
      */
     public static int getEndIndex(final int endIndex,
                                     final Object[] arrays) {
@@ -291,7 +280,6 @@ public final class ArrayUtil {
      *
      * @param objects 对象
      * @return 不为 null 的元素
-     * @since 0.1.18
      */
     public static Optional<Object> firstNotNullElem(Object[] objects) {
         if (ArrayUtil.isEmpty(objects)) {
@@ -310,7 +298,6 @@ public final class ArrayUtil {
      * 返回数组信息
      * @param objects 数组
      * @return 结果列表
-     * @since 0.1.20
      */
     public static Object[] newArray(Object ... objects) {
         return objects;
@@ -324,7 +311,6 @@ public final class ArrayUtil {
      * @param <K>         k 泛型
      * @param <V>         v 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K, V> List<K> toList(final V[] values, IHandler<? super V, K> keyFunction) {
         if (ObjectUtil.isNull(values)) {
@@ -345,7 +331,6 @@ public final class ArrayUtil {
      * @param arrayObject 数组对象
      * @param keyFunction 转换方式
      * @return 结果列表
-     * @since 0.1.30
      */
     @SuppressWarnings("unchecked")
     public static List toList(final Object arrayObject, IHandler keyFunction) {
@@ -400,7 +385,6 @@ public final class ArrayUtil {
      * @param array 原始数组
      * @param offset 偏移量 任意整数。
      * @return 结果
-     * @since 0.1.66
      */
     public static Object[] shift(final Object[] array, final int offset) {
         if(ArrayUtil.isEmpty(array)) {

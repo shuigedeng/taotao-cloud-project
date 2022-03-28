@@ -42,7 +42,6 @@ public final class AntiSqlFilterUtils {
 	 *
 	 * @param parameterMap parameterMap
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:50:43
 	 */
 	public static Map<String, String[]> getSafeParameterMap(Map<String, String[]> parameterMap) {
@@ -59,7 +58,6 @@ public final class AntiSqlFilterUtils {
 	 *
 	 * @param oldValues oldValues
 	 * @return java.lang.String[]
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:50:50
 	 */
 	public static String[] getSafeValues(String[] oldValues) {
@@ -78,7 +76,6 @@ public final class AntiSqlFilterUtils {
 	 *
 	 * @param oldValue oldValue
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:00
 	 */
 	public static String getSafeValue(String oldValue) {

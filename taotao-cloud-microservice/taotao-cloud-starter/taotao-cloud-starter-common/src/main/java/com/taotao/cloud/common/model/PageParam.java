@@ -17,6 +17,10 @@ import org.springframework.data.domain.Sort.Order;
 
 /**
  * 查询参数
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-28 11:24:11
  */
 public class PageParam implements Serializable {
 
@@ -57,7 +61,6 @@ public class PageParam implements Serializable {
 	 * 构造mp分页参数
 	 *
 	 * @return 分页参数
-	 * @author shuigedeng
 	 * @since 2022/3/14 13:50
 	 */
 	public <T> IPage<T> buildMpPage() {
@@ -78,7 +81,6 @@ public class PageParam implements Serializable {
 	 * 构造jpa分页参数
 	 *
 	 * @return 分页参数
-	 * @author shuigedeng
 	 * @since 2022/3/14 13:53
 	 */
 	public Pageable buildJpaPage() {

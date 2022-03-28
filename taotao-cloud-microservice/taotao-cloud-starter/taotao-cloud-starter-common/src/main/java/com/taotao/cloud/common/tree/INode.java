@@ -28,33 +28,33 @@ import java.util.List;
 public interface INode extends Serializable {
 
 	/**
-	 * getId
+	 * 获取id
 	 *
-	 * @return {@link java.lang.Long }
+	 * @return id
 	 * @since 2021-09-02 22:22:11
 	 */
 	Long getId();
 
 	/**
-	 * getParentId
+	 * 获取父id
 	 *
-	 * @return {@link java.lang.Long }
+	 * @return 父id
 	 * @since 2021-09-02 22:22:18
 	 */
 	Long getParentId();
 
 	/**
-	 * getChildren
+	 * 获取子节点
 	 *
-	 * @return {@link java.util.List }
+	 * @return 子节点数据
 	 * @since 2021-09-02 22:22:22
 	 */
 	List<INode> getChildren();
 
 	/**
-	 * getHasChildren
+	 * 判断是否有子节点
 	 *
-	 * @return {@link java.lang.Boolean }
+	 * @return 结果
 	 * @since 2021-09-02 22:22:30
 	 */
 	default Boolean getHasChildren() {

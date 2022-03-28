@@ -20,6 +20,7 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -106,7 +107,6 @@ public class Oauth2Controller {
 				// 添加用户退出日志
 
 				// 删除用户在线信息
-
 
 				return Result.success(true);
 			} catch (Exception e) {

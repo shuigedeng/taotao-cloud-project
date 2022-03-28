@@ -18,6 +18,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * AuthorizationConsentController
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-28 11:08:41
+ */
 @Controller
 public class AuthorizationConsentController {
 

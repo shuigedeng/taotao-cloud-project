@@ -76,8 +76,7 @@ public record PageQuery<QueryDTO>(
 	 * 参数：{order:"name", order:"desc,asc" }。 排序： name desc eg.3, 参数：{order:"name,id", order:"desc"
 	 * }。 排序： name desc
 	 *
-	 * @return {@link IPage }
-	 * @author shuigedeng
+	 * @return IPage对象
 	 * @since 2021-09-02 21:19:05
 	 */
 	@JsonIgnore
@@ -116,6 +115,12 @@ public record PageQuery<QueryDTO>(
 		return page;
 	}
 
+	/**
+	 * 构造JpaPage
+	 *
+	 * @return Pageable对象
+	 * @since 2022-03-28 11:24:59
+	 */
 	@JsonIgnore
 	public Pageable buildJpaPage() {
 		PageQuery<QueryDTO> params = this;
@@ -147,6 +152,12 @@ public record PageQuery<QueryDTO>(
 		return PageRequest.of(params.currentPage(), params.pageSize());
 	}
 
+	/**
+	 * offset
+	 *
+	 * @return offset
+	 * @since 2022-03-28 11:24:49
+	 */
 	@JsonIgnore
 	public long offset() {
 		long current = this.currentPage;

@@ -50,7 +50,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	private BeanUtil() {
 	}
 
-
 	/**
 	 * 实例化对象
 	 *
@@ -183,7 +182,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param source      源对象
 	 * @param sourceClazz 源类型
 	 * @param targetClazz 转换成的类型
-	 * @param <T>         泛型标记
 	 * @return T
 	 */
 	@Nullable
@@ -206,7 +204,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param sourceList  源列表
 	 * @param targetClazz 转换成的类型
-	 * @param <T>         泛型标记
 	 * @return T
 	 */
 	public static <T> List<T> copy(@Nullable Collection<?> sourceList, Class<T> targetClazz) {
@@ -223,7 +220,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param sourceList  源列表
 	 * @param targetList  目标列表
 	 * @param targetClazz 转换成的类型
-	 * @param <T>         泛型标记
 	 * @return T
 	 */
 	public static <T> List<T> copy(@Nullable Collection<?> sourceList, @Nullable List<T> targetList,
@@ -297,7 +293,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param source      源对象
 	 * @param targetClazz 转换成的类
-	 * @param <T>         泛型标记
 	 * @return T
 	 */
 	@Nullable
@@ -318,7 +313,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param source      源对象
 	 * @param sourceClazz 源类
 	 * @param targetClazz 转换成的类
-	 * @param <T>         泛型标记
 	 * @return T
 	 */
 	@Nullable
@@ -342,7 +336,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param sourceList  源对象列表
 	 * @param targetClazz 转换成的类
-	 * @param <T>         泛型标记
 	 * @return List
 	 */
 	public static <T> List<T> copyWithConvert(@Nullable Collection<?> sourceList,
@@ -374,7 +367,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param source      the source bean
 	 * @param targetClazz the target bean class
-	 * @param <T>         泛型标记
 	 * @return T
 	 * @throws BeansException if the copying failed
 	 */
@@ -398,7 +390,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param sourceList  the source list bean
 	 * @param targetClazz the target bean class
-	 * @param <T>         泛型标记
 	 * @return List
 	 * @throws BeansException if the copying failed
 	 */
@@ -447,7 +438,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param beanMap   map
 	 * @param valueType 对象类型
-	 * @param <T>       泛型标记
 	 * @return {T}
 	 */
 	public static <T> T toBean(Map<String, Object> beanMap, Class<T> valueType) {
@@ -465,7 +455,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param superBean 父级Bean
 	 * @param props     新增属性
-	 * @return {Object}
+	 * @return 对象
 	 */
 	@Nullable
 	public static Object generator(@Nullable Object superBean, BeanProperty... props) {
@@ -483,7 +473,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param superclass 父级
 	 * @param props      新增属性
-	 * @return {Object}
+	 * @return 对象
 	 */
 	public static Object generator(Class<?> superclass, BeanProperty... props) {
 		BeanGenerator generator = new BeanGenerator();
@@ -564,7 +554,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param value 值
 	 * @param type  类型
-	 * @param <T>   T
 	 * @return T
 	 * @since 2021-09-02 17:46:05
 	 */
@@ -580,7 +569,6 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 *
 	 * @param value 值
 	 * @param type  类型
-	 * @param <T>   T
 	 * @return T
 	 * @since 2021-09-02 17:46:40
 	 */

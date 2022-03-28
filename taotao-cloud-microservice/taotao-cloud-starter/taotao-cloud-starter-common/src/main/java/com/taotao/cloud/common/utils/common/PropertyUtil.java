@@ -42,7 +42,6 @@ public class PropertyUtil {
 	 * eachProperty
 	 *
 	 * @param call call
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:51:44
 	 */
 	public static void eachProperty(Callable.Action3<String, String, Object> call) {
@@ -62,7 +61,6 @@ public class PropertyUtil {
 	 * @param defaultvalue defaultvalue
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:51:48
 	 */
 	public static <T> T getProperty(String key, T defaultvalue) {
@@ -84,7 +82,6 @@ public class PropertyUtil {
 	 *
 	 * @param key key
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:51:57
 	 */
 	public static String getProperty(String key) {
@@ -107,7 +104,6 @@ public class PropertyUtil {
 	 * @param defaultvalue defaultvalue
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:52:00
 	 */
 	public static <T> T getEnvProperty(String key, T defaultvalue) {
@@ -126,7 +122,6 @@ public class PropertyUtil {
 	 * @param defaultvalue defaultvalue
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:52:08
 	 */
 	public static <T> T getSystemProperty(String key, T defaultvalue) {
@@ -145,7 +140,6 @@ public class PropertyUtil {
 	 * @param module        module
 	 * @param key           key
 	 * @param propertyValue propertyValue
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:52:16
 	 */
 	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
@@ -161,7 +155,6 @@ public class PropertyUtil {
 	 * @param key           key
 	 * @param propertyValue propertyValue
 	 * @param message       message
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:52:19
 	 */
 	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
@@ -198,7 +191,6 @@ public class PropertyUtil {
 	 * @param defaultvalue defaultvalue
 	 * @param <T>          T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:52:22
 	 */
 	public static <T> T getPropertyCache(String key, T defaultvalue) {

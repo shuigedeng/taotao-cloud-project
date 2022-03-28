@@ -32,13 +32,12 @@ public class AspectUtil {
 	 * 获取切面方法上包含的指定注解
 	 *
 	 * @param joinPoint       joinPoint
-	 * @param annotationClass annotationClass
-	 * @param <T>             T
-	 * @return T
-	 * @author shuigedeng
+	 * @param annotationClass 注解类
+	 * @return 注解类型
 	 * @since 2021-09-02 19:41:20
 	 */
-	public static <T extends Annotation> T getAnnotation(JoinPoint joinPoint, Class<T> annotationClass) {
+	public static <T extends Annotation> T getAnnotation(JoinPoint joinPoint,
+		Class<T> annotationClass) {
 		String methodName = joinPoint.getSignature().getName();
 		Object[] arguments = joinPoint.getArgs();
 		Method[] methods = joinPoint.getSignature().getDeclaringType().getMethods();
