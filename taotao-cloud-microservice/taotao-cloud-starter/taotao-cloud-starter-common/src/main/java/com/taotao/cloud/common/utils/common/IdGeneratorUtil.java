@@ -40,7 +40,6 @@ public class IdGeneratorUtil {
 	 * 获取id
 	 *
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:43:10
 	 */
 	public static long getId() {
@@ -50,8 +49,7 @@ public class IdGeneratorUtil {
 	/**
 	 * 获取id 字符串
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return id 字符串
 	 * @since 2021-09-02 16:43:20
 	 */
 	public static String getIdStr() {

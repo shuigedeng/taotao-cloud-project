@@ -42,7 +42,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(int[] objects) {
         return null == objects
@@ -54,7 +53,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(int[] objects) {
         return !isEmpty(objects);
@@ -66,7 +64,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(boolean[] objects) {
         return null == objects
@@ -78,7 +75,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(boolean[] objects) {
         return !isEmpty(objects);
@@ -89,7 +85,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(char[] objects) {
         return null == objects
@@ -101,7 +96,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(char[] objects) {
         return !isEmpty(objects);
@@ -112,7 +106,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(byte[] objects) {
         return null == objects
@@ -124,7 +117,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(byte[] objects) {
         return !isEmpty(objects);
@@ -135,7 +127,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(long[] objects) {
         return null == objects
@@ -147,7 +138,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(long[] objects) {
         return !isEmpty(objects);
@@ -158,7 +148,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(float[] objects) {
         return null == objects
@@ -170,7 +159,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(float[] objects) {
         return !isEmpty(objects);
@@ -181,7 +169,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(double[] objects) {
         return null == objects
@@ -193,7 +180,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(double[] objects) {
         return !isEmpty(objects);
@@ -204,7 +190,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isEmpty(short[] objects) {
         return null == objects
@@ -216,7 +201,6 @@ public final class ArrayPrimitiveUtil {
      *
      * @param objects 数组对象
      * @return 是否为空
-     * @since 0.1.25
      */
     public static boolean isNotEmpty(short[] objects) {
         return !isEmpty(objects);
@@ -229,7 +213,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final boolean[] values, IHandler<? super Boolean, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -251,7 +234,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final char[] values, IHandler<? super Character, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -273,7 +255,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final byte[] values, IHandler<? super Byte, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -295,7 +276,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final short[] values, IHandler<? super Short, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -317,7 +297,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final int[] values, IHandler<? super Integer, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -339,7 +318,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final float[] values, IHandler<? super Float, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -361,7 +339,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final double[] values, IHandler<? super Double, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -383,7 +360,6 @@ public final class ArrayPrimitiveUtil {
      * @param keyFunction 转换方式
      * @param <K>         k 泛型
      * @return 结果列表
-     * @since 0.1.25
      */
     public static <K> List<K> toList(final long[] values, IHandler<? super Long, K> keyFunction) {
         if (ArrayPrimitiveUtil.isEmpty(values)) {
@@ -403,7 +379,6 @@ public final class ArrayPrimitiveUtil {
      * @param chars 原始字符
      * @param c 目标
      * @return 结果
-     * @since 0.1.26
      */
     public static int indexOf(final char[] chars, final char c) {
         if(ArrayPrimitiveUtil.isEmpty(chars)) {
@@ -424,7 +399,6 @@ public final class ArrayPrimitiveUtil {
      * @param chars 原始字符
      * @param c 目标
      * @return 结果
-     * @since 0.1.76
      */
     public static boolean contains(final char[] chars, final char c) {
         if(ArrayPrimitiveUtil.isEmpty(chars)) {
@@ -444,7 +418,6 @@ public final class ArrayPrimitiveUtil {
      * @param chars 原始字符
      * @param c 目标
      * @return 结果
-     * @since 0.1.28
      */
     public static int lastIndexOf(final char[] chars, final char c) {
         if(ArrayPrimitiveUtil.isEmpty(chars)) {
@@ -466,7 +439,6 @@ public final class ArrayPrimitiveUtil {
      * @param chars 原始字符
      * @param c 目标
      * @return 结果
-     * @since 0.1.28
      */
     public static List<Integer> allIndexOf(final char[] chars, final char c) {
         if(ArrayPrimitiveUtil.isEmpty(chars)) {
@@ -491,7 +463,6 @@ public final class ArrayPrimitiveUtil {
      * @param startIndex 开始下标
      * @param symbol 特殊标志
      * @return 结果字符串
-     * @since 0.1.28
      */
     public static String getStringBeforeSymbol(final char[] chars, final int startIndex,
                                              final char symbol) {
@@ -528,7 +499,6 @@ public final class ArrayPrimitiveUtil {
      * @param preChar     上一个字符
      * @param currentChar 当前字符
      * @return 结果
-     * @since 0.1.27
      */
     private static char getPreChar(final char preChar, final char currentChar) {
         // 判断前一个字符是什么
@@ -545,7 +515,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> int[] toIntArray(final List<E> list, final IHandler<E, Integer> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -566,7 +535,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> boolean[] toBooleanArray(final List<E> list, final IHandler<E, Boolean> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -587,7 +555,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> char[] toCharArray(final List<E> list, final IHandler<E, Character> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -608,7 +575,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> byte[] toByteArray(final List<E> list, final IHandler<E, Byte> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -629,7 +595,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> short[] toShortArray(final List<E> list, final IHandler<E, Short> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -650,7 +615,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> long[] toLongArray(final List<E> list, final IHandler<E, Long> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -671,7 +635,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> float[] toFloatArray(final List<E> list, final IHandler<E, Float> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -692,7 +655,6 @@ public final class ArrayPrimitiveUtil {
      * @param handler 转换实现
      * @param <E> 泛型
      * @return 结果
-     * @since 0.1.49
      */
     public static <E> double[] toDoubleArray(final List<E> list, final IHandler<E, Double> handler) {
         if(CollectionUtil.isEmpty(list)) {
@@ -711,7 +673,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 int 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static int[] newArray(int ... arrays) {
         return arrays;
@@ -721,7 +682,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 boolean 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static boolean[] newArray(boolean ... arrays) {
         return arrays;
@@ -731,7 +691,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 char 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static char[] newArray(char ... arrays) {
         return arrays;
@@ -741,7 +700,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 short 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static short[] newArray(short ... arrays) {
         return arrays;
@@ -751,7 +709,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 long 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static long[] newArray(long ... arrays) {
         return arrays;
@@ -761,7 +718,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 byte 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static byte[] newArray(byte ... arrays) {
         return arrays;
@@ -771,7 +727,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 float 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static float[] newArray(float ... arrays) {
         return arrays;
@@ -781,7 +736,6 @@ public final class ArrayPrimitiveUtil {
      * 创建 double 数组
      * @param arrays 数组元素
      * @return 数组
-     * @since 0.1.57
      */
     public static double[] newArray(double ... arrays) {
         return arrays;

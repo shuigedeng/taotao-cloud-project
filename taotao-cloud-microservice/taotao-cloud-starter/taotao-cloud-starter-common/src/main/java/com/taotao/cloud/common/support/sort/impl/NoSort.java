@@ -9,9 +9,9 @@ import java.util.List;
 public class NoSort<T> implements
 	ISort<T> {
 
-    @Override
-    public List<T> sort(List<T> list) {
-        return list;
-    }
+	@Override
+	public List<T> sort(List<T> list) {
+		return list;
+	}
 
 }

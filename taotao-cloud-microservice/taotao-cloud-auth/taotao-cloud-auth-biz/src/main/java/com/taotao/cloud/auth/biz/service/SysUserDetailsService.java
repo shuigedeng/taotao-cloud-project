@@ -41,7 +41,7 @@ public class SysUserDetailsService implements UserDetailsService {
 
 		SecurityUser user = SecurityUser.builder()
 			.account("admin")
-			.userId(1L)
+			.userId("1")
 			.username("admin")
 			.nickname("admin")
 			.password("$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")

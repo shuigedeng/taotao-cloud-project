@@ -36,7 +36,6 @@ public final class PingYinUtil {
 	 * @param strChinese strChinese
 	 * @param bUpCase    bUpCase
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:24:30
 	 */
 	public static String getPyIndexStr(String strChinese, boolean bUpCase) {
@@ -75,7 +74,6 @@ public final class PingYinUtil {
 	 * @param charGbk charGbk
 	 * @param bUpCase bUpCase
 	 * @return char
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:24:40
 	 */
 	private static char getPyIndexChar(char charGbk, boolean bUpCase) {

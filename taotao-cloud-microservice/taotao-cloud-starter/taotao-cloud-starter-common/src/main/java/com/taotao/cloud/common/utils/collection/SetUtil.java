@@ -16,7 +16,6 @@ public final class SetUtil {
      * @param set set 集合
      * @param <T> 泛型
      * @return 结果
-     * @since 0.1.51
      */
     public static <T> T getFirst(final Set<T> set) {
         if(CollectionUtil.isEmpty(set)) {

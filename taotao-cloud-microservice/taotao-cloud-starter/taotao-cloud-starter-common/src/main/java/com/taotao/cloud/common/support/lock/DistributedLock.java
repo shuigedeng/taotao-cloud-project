@@ -29,22 +29,22 @@ public interface DistributedLock {
 	/**
 	 * 获取锁，如果获取不成功则一直等待直到lock被获取
 	 *
-	 * @param key       锁的key
+	 * @param key       锁key
 	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
-	 * @param unit      {@code leaseTime} 参数的时间单位
+	 * @param unit      参数的时间单位
 	 * @param isFair    是否公平锁
-	 * @return {@link ZLock }
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:25:19
 	 */
 	ZLock lock(String key, long leaseTime, TimeUnit unit, boolean isFair) throws Exception;
 
 	/**
-	 * lock
+	 * 加锁
 	 *
-	 * @param key       key
-	 * @param leaseTime leaseTime
-	 * @param unit      unit
-	 * @return {@link ZLock }
+	 * @param key       锁key
+	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
+	 * @param unit      参数的时间单位
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:25:36
 	 */
 	default ZLock lock(String key, long leaseTime, TimeUnit unit) throws Exception {
@@ -52,11 +52,11 @@ public interface DistributedLock {
 	}
 
 	/**
-	 * lock
+	 * 加锁
 	 *
-	 * @param key    key
-	 * @param isFair isFair
-	 * @return {@link ZLock }
+	 * @param key    锁key
+	 * @param isFair 是否是公平嗦
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:25:39
 	 */
 	default ZLock lock(String key, boolean isFair) throws Exception {
@@ -64,10 +64,10 @@ public interface DistributedLock {
 	}
 
 	/**
-	 * lock
+	 * 加锁
 	 *
-	 * @param key key
-	 * @return {@link ZLock }
+	 * @param key 锁key
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:25:46
 	 */
 	default ZLock lock(String key) throws Exception {
@@ -81,49 +81,49 @@ public interface DistributedLock {
 	 * @param waitTime  获取锁的最大尝试时间(单位 {@code unit})
 	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
 	 * @param unit      {@code waitTime} 和 {@code leaseTime} 参数的时间单位
-	 * @return {@link ZLock }
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:26:06
 	 */
 	ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair)
-			throws Exception;
+		throws Exception;
 
 	/**
-	 * tryLock
+	 * 尝试获取锁
 	 *
-	 * @param key       key
-	 * @param waitTime  waitTime
-	 * @param leaseTime leaseTime
-	 * @param unit      unit
-	 * @return {@link ZLock }
+	 * @param key       锁key
+	 * @param waitTime  获取锁的最大尝试时间
+	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
+	 * @param unit      参数的时间单位
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:26:22
 	 */
 	default ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit)
-			throws Exception {
+		throws Exception {
 		return this.tryLock(key, waitTime, leaseTime, unit, false);
 	}
 
 	/**
-	 * tryLock
+	 * 尝试获取锁
 	 *
-	 * @param key      key
-	 * @param waitTime waitTime
-	 * @param unit     unit
-	 * @param isFair   isFair
-	 * @return {@link ZLock }
+	 * @param key      锁key
+	 * @param waitTime 获取锁的最大尝试时间
+	 * @param unit     时间单位
+	 * @param isFair   是否是公平嗦
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:26:25
 	 */
 	default ZLock tryLock(String key, long waitTime, TimeUnit unit, boolean isFair)
-			throws Exception {
+		throws Exception {
 		return this.tryLock(key, waitTime, -1, unit, isFair);
 	}
 
 	/**
-	 * tryLock
+	 * 尝试获取锁
 	 *
-	 * @param key      key
-	 * @param waitTime waitTime
-	 * @param unit     unit
-	 * @return {@link ZLock }
+	 * @param key      锁key
+	 * @param waitTime 获取锁的最大尝试时间
+	 * @param unit     时间单位
+	 * @return ZLock对象
 	 * @since 2021-09-02 20:26:27
 	 */
 	default ZLock tryLock(String key, long waitTime, TimeUnit unit) throws Exception {

@@ -226,7 +226,6 @@ public final class ArgUtil {
 	 *
 	 * @param number    入参
 	 * @param paramName 参数名称
-	 * @since 0.1.2
 	 */
 	public static void positive(final int number, final String paramName) {
 		if (number <= 0) {
@@ -239,7 +238,6 @@ public final class ArgUtil {
 	 *
 	 * @param number    入参
 	 * @param paramName 参数名称
-	 * @since 0.1.2
 	 */
 	public static void notNegative(final int number, final String paramName) {
 		if (number < 0) {
@@ -252,7 +250,6 @@ public final class ArgUtil {
 	 *
 	 * @param number    入参
 	 * @param paramName 参数名称
-	 * @since 0.1.2
 	 */
 	public static void positive(final long number, final String paramName) {
 		if (number <= 0) {
@@ -265,7 +262,6 @@ public final class ArgUtil {
 	 *
 	 * @param number    入参
 	 * @param paramName 参数名称
-	 * @since 0.1.2
 	 */
 	public static void notNegative(final long number, final String paramName) {
 		if (number < 0) {
@@ -278,7 +274,6 @@ public final class ArgUtil {
 	 *
 	 * @param number    入参
 	 * @param paramName 参数名称
-	 * @since 0.1.2
 	 */
 	public static void positive(final double number, final String paramName) {
 		if (number < 0) {
@@ -291,7 +286,6 @@ public final class ArgUtil {
 	 *
 	 * @param number    入参
 	 * @param paramName 参数名称
-	 * @since 0.1.2
 	 */
 	public static void notNegative(final double number, final String paramName) {
 		if (number < 0) {
@@ -304,7 +298,6 @@ public final class ArgUtil {
 	 *
 	 * @param condition 结果
 	 * @param name      参数名称
-	 * @since 0.1.4
 	 */
 	public static void assertTrue(final boolean condition,
 		final String name) {
@@ -318,7 +311,6 @@ public final class ArgUtil {
 	 *
 	 * @param condition 结果
 	 * @param name      参数名称
-	 * @since 0.1.4
 	 */
 	public static void assertFalse(boolean condition,
 		final String name) {
@@ -332,7 +324,6 @@ public final class ArgUtil {
 	 *
 	 * @param array 数组
 	 * @param name  名称
-	 * @since 0.1.4
 	 */
 	public static void notEmpty(final Object[] array,
 		final String name) {
@@ -350,7 +341,6 @@ public final class ArgUtil {
 	 *
 	 * @param collection 集合
 	 * @param name       名称
-	 * @since 0.1.4
 	 */
 	public static void notEmpty(final Collection<?> collection,
 		final String name) {
@@ -368,7 +358,6 @@ public final class ArgUtil {
 	 *
 	 * @param actual   确切的值
 	 * @param expected 预期值
-	 * @since 0.0.8
 	 */
 	@Deprecated
 	public static void gt(final long actual,
@@ -382,7 +371,6 @@ public final class ArgUtil {
 	 * @param paramName 参数名称
 	 * @param actual    确切的值
 	 * @param expected  预期值
-	 * @since 0.1.105
 	 */
 	public static void gt(final String paramName,
 		final long actual,
@@ -401,7 +389,6 @@ public final class ArgUtil {
 	 * @param paramName 参数名称
 	 * @param actual    确切的值
 	 * @param expected  预期值
-	 * @since 0.1.105
 	 */
 	public static void gte(final String paramName,
 		final long actual,
@@ -420,7 +407,6 @@ public final class ArgUtil {
 	 * @param paramName 参数名称
 	 * @param actual    确切的值
 	 * @param expected  预期值
-	 * @since 0.1.105
 	 */
 	public static void lt(final String paramName,
 		final long actual,
@@ -439,7 +425,6 @@ public final class ArgUtil {
 	 * @param paramName 参数名称
 	 * @param actual    确切的值
 	 * @param expected  预期值
-	 * @since 0.1.105
 	 */
 	public static void lte(final String paramName,
 		final long actual,

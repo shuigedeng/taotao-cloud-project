@@ -60,7 +60,6 @@ public class AsyncUtil {
 	 * 启动线程
 	 *
 	 * @param task task
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:47:58
 	 */
 	public static void execute(Runnable task) {
@@ -72,7 +71,6 @@ public class AsyncUtil {
 	 *
 	 * @param task          task
 	 * @param maxRetryCount maxRetryCount
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:48:05
 	 */
 	public static void execute(Runnable task, int maxRetryCount) {
@@ -85,7 +83,6 @@ public class AsyncUtil {
 	 * @param task          task
 	 * @param maxRetryCount maxRetryCount
 	 * @param consumer      consumer
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:48:13
 	 */
 	public static void execute(Runnable task, int maxRetryCount,
@@ -103,7 +100,6 @@ public class AsyncUtil {
 	 * @param maxRetryCount maxRetryCount
 	 * @param delaySeconds  delaySeconds
 	 * @param consumer      consumer
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:48:22
 	 */
 	public static void execute(Runnable task, int maxRetryCount, int delaySeconds,
@@ -120,7 +116,6 @@ public class AsyncUtil {
 	 * @param maxRetryCount     maxRetryCount
 	 * @param delaySeconds      delaySeconds
 	 * @param consumer          consumer
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:48:34
 	 */
 	public static void executeDelay(Runnable task, int firstDelaySeconds, int maxRetryCount,
@@ -180,7 +175,6 @@ public class AsyncUtil {
 		/**
 		 * execute
 		 *
-		 * @author shuigedeng
 		 * @since 2021-09-02 17:49:58
 		 */
 		public void execute() {

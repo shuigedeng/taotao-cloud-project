@@ -37,7 +37,6 @@ public class TraceUtil {
 	 *
 	 * @param request 　request
 	 * @return {@link String } 跟踪ID
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:39:44
 	 */
 	public static String getTraceId(HttpServletRequest request) {
@@ -56,7 +55,6 @@ public class TraceUtil {
 	 * 获取traceId
 	 *
 	 * @return {@link String } 跟踪ID
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:40:16
 	 */
 	public static String getTraceId() {
@@ -67,7 +65,6 @@ public class TraceUtil {
 	 * 传递traceId至MDC
 	 *
 	 * @param traceId 　跟踪ID
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:48:47
 	 */
 	public static void mdcTraceId(String traceId) {
@@ -80,7 +77,6 @@ public class TraceUtil {
 	 * 传递tenantId至MDC
 	 *
 	 * @param tenantId 　租户id
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:48:59
 	 */
 	public static void mdcTenantId(String tenantId) {
@@ -93,7 +89,6 @@ public class TraceUtil {
 	 * 传递version至MDC
 	 *
 	 * @param version 　租户id
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:49:14
 	 */
 	public static void mdcVersion(String version) {
@@ -107,7 +102,6 @@ public class TraceUtil {
 	 *
 	 * @param request 　HttpServletRequest
 	 * @return {@link String } 跟踪ID
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:49:23
 	 */
 	public static String getZipkinTraceId(HttpServletRequest request) {
@@ -127,7 +121,6 @@ public class TraceUtil {
 	 *
 	 * @param request 　HttpServletRequest
 	 * @return {@link String } 跟踪ID
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:49:43
 	 */
 	public static String getZipkinSpanId(HttpServletRequest request) {
@@ -146,7 +139,6 @@ public class TraceUtil {
 	 * 传递zipkinTraceId至MDC
 	 *
 	 * @param request 　request
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:50:07
 	 */
 	public static void mdcZipkinTraceId(HttpServletRequest request) {
@@ -160,7 +152,6 @@ public class TraceUtil {
 	 * 传递zipkinSpanId至MDC
 	 *
 	 * @param request 　request
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:50:16
 	 */
 	public static void mdcZipkinSpanId(HttpServletRequest request) {

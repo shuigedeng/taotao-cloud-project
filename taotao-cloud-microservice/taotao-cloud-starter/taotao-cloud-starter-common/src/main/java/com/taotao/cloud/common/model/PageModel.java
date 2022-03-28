@@ -65,12 +65,10 @@ public record PageModel<R>(
 	private static final long serialVersionUID = -275582248840137389L;
 
 	/**
-	 * convertJpaPage
+	 * 转换JpaPage
 	 *
-	 * @param page page
-	 * @param <R>  R
-	 * @return {@link PageModel }
-	 * @author shuigedeng
+	 * @param page page数据
+	 * @return 分页对象
 	 * @since 2021-09-02 19:10:45
 	 */
 	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> r) {
@@ -91,12 +89,10 @@ public record PageModel<R>(
 	}
 
 	/**
-	 * convertMybatisPage
+	 * 转换MybatisPage
 	 *
-	 * @param page page
-	 * @param <R>  R
-	 * @return {@link PageModel }
-	 * @author shuigedeng
+	 * @param page page数据
+	 * @return 分页对象
 	 * @since 2021-09-02 19:10:49
 	 */
 	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> r) {
@@ -117,16 +113,14 @@ public record PageModel<R>(
 	}
 
 	/**
-	 * of
+	 * 构造分页对象
 	 *
-	 * @param totalSize   totalSize
-	 * @param totalPage   totalPage
-	 * @param currentPage currentPage
-	 * @param pageSize    pageSize
-	 * @param data        data
-	 * @param <R>         R
-	 * @return {@link com.taotao.cloud.common.model.PageModel }
-	 * @author shuigedeng
+	 * @param totalSize   总数
+	 * @param totalPage   总页数
+	 * @param currentPage 当前页
+	 * @param pageSize    一页数据量
+	 * @param data        数据
+	 * @return 分页对象
 	 * @since 2021-09-02 19:11:10
 	 */
 	public static <R> PageModel<R> of(

@@ -136,7 +136,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 * @param password    密码
 	 * @param permissions 权限
 	 * @param roles       权限
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:18:58
 	 */
 	public SecurityUser(String userId,

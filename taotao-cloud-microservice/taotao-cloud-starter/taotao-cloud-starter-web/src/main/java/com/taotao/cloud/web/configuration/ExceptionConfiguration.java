@@ -27,6 +27,8 @@ import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.feign.execption.FeignDecodeException;
+import feign.codec.DecodeException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
@@ -168,6 +170,20 @@ public class ExceptionConfiguration implements InitializingBean {
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
 		DataIntegrityViolationException e) {
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
+	}
+
+	@ExceptionHandler({FeignDecodeException.class})
+	public Result<String> handleFeignDecodeException(NativeWebRequest req,
+		FeignDecodeException e) {
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
+	}
+
+	@ExceptionHandler({DecodeException.class})
+	public Result<String> handleDecodeException(NativeWebRequest req,
+		DecodeException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}

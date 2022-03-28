@@ -42,11 +42,10 @@ public class Pubsub<T> {
 	private final Object lock = new Object();
 
 	/**
-	 * pub
+	 * 发布
 	 *
-	 * @param event event
-	 * @param data  data
-	 * @author shuigedeng
+	 * @param event 事件
+	 * @param data  数据
 	 * @since 2021-09-02 20:39:11
 	 */
 	public void pub(String event, T data) {
@@ -63,11 +62,10 @@ public class Pubsub<T> {
 	}
 
 	/**
-	 * sub
+	 * 监听
 	 *
-	 * @param event  event
-	 * @param action action
-	 * @author shuigedeng
+	 * @param event  事件
+	 * @param action action动作
 	 * @since 2021-09-02 20:39:20
 	 */
 	private void sub(String event, Sub<T> action) {
@@ -82,11 +80,10 @@ public class Pubsub<T> {
 	}
 
 	/**
-	 * sub
+	 * 监听
 	 *
-	 * @param event  event
-	 * @param action action
-	 * @author shuigedeng
+	 * @param event  事件
+	 * @param action action动作
 	 * @since 2021-09-02 20:39:29
 	 */
 	public void sub(EventEnum event, Sub<T> action) {
@@ -94,12 +91,11 @@ public class Pubsub<T> {
 	}
 
 	/**
-	 * removeSub
+	 * 删除监听
 	 *
-	 * @param event   event
-	 * @param subName subName
-	 * @return boolean
-	 * @author shuigedeng
+	 * @param event   事件
+	 * @param subName 名称
+	 * @return 是否成功
 	 * @since 2021-09-02 20:39:38
 	 */
 	public boolean removeSub(String event, String subName) {
@@ -117,7 +113,6 @@ public class Pubsub<T> {
 	/**
 	 * Pubsub
 	 *
-	 * @param <T> T
 	 * @author shuigedeng
 	 * @version 2021.9
 	 * @since 2021-09-02 20:39:45

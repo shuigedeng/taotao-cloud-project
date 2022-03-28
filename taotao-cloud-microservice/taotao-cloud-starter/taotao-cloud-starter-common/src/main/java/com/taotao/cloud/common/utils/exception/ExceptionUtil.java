@@ -39,7 +39,6 @@ public class ExceptionUtil {
 	 *
 	 * @param t t
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:06
 	 */
 	public static String trace2String(Throwable t) {
@@ -63,7 +62,6 @@ public class ExceptionUtil {
 	 *
 	 * @param stackTraceElements stackTraceElements
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:16
 	 */
 	public static String trace2String(StackTraceElement[] stackTraceElements) {
@@ -78,7 +76,6 @@ public class ExceptionUtil {
 	 * lineSeparator
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:20
 	 */
 	private static String lineSeparator() {
@@ -90,7 +87,6 @@ public class ExceptionUtil {
 	 *
 	 * @param e e
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:23
 	 */
 	public static String getFullMessage(Throwable e) {
@@ -106,7 +102,6 @@ public class ExceptionUtil {
 	 *
 	 * @param e e
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:27
 	 */
 	public static String getFullStackTrace(Throwable e) {
@@ -141,7 +136,6 @@ public class ExceptionUtil {
 	 *
 	 * @param ex ex
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:33
 	 */
 	public static String getDetailMessage(Throwable ex) {
@@ -163,7 +157,6 @@ public class ExceptionUtil {
 	 *
 	 * @param runnable    runnable
 	 * @param isPrintInfo isPrintInfo
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:37
 	 */
 	public static void ignoreException(Runnable runnable, boolean isPrintInfo) {
@@ -180,7 +173,6 @@ public class ExceptionUtil {
 	 * ignoreException
 	 *
 	 * @param runnable runnable
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:47:44
 	 */
 	public static void ignoreException(Runnable runnable) {
@@ -257,6 +249,7 @@ public class ExceptionUtil {
 
 	/**
 	 * 解包异常
+	 *
 	 * @param wrapped 异常
 	 * @return 被解包的异常
 	 */
@@ -307,8 +300,9 @@ public class ExceptionUtil {
 
 	/**
 	 * 获取组合本异常信息与底层异常信息的异常描述, 适用于本异常为统一包装异常类，底层异常才是根本原因的情况。
-	 * @param ex    异常
-	 * @return  异常信息
+	 *
+	 * @param ex 异常
+	 * @return 异常信息
 	 */
 	public static String getErrorMessageWithNestedException(Throwable ex) {
 		Throwable nestedException = ex.getCause();
@@ -319,8 +313,9 @@ public class ExceptionUtil {
 
 	/**
 	 * 获取异常的Root Cause.
+	 *
 	 * @param ex 异常
-	 * @return  异常的 RootCause.
+	 * @return 异常的 RootCause.
 	 */
 	public static Throwable getRootCause(Throwable ex) {
 		Throwable cause;
@@ -334,11 +329,13 @@ public class ExceptionUtil {
 
 	/**
 	 * 判断异常是否由某些底层的异常引起.
-	 * @param ex    异常
+	 *
+	 * @param ex                    异常
 	 * @param causeExceptionClasses 导致的异常原因
-	 * @return  {@code true} 是否由某个异常引起
+	 * @return {@code true} 是否由某个异常引起
 	 */
-	public static boolean isCausedBy(Exception ex, Class<? extends Exception>... causeExceptionClasses) {
+	public static boolean isCausedBy(Exception ex,
+		Class<? extends Exception>... causeExceptionClasses) {
 		Throwable cause = ex;
 		while (cause != null) {
 			for (Class<? extends Exception> causeClass : causeExceptionClasses) {
@@ -352,13 +349,13 @@ public class ExceptionUtil {
 	}
 
 	/**
-	 * 获取确切的异常信息
-	 * 1. 主要针对代理报错
+	 * 获取确切的异常信息 1. 主要针对代理报错
+	 *
 	 * @param throwable 异常
 	 * @return 确切的异常信息
 	 */
 	public static Throwable getActualThrowable(final Throwable throwable) {
-		if(InvocationTargetException.class.equals(throwable.getClass())) {
+		if (InvocationTargetException.class.equals(throwable.getClass())) {
 			InvocationTargetException exception = (InvocationTargetException) throwable;
 			return exception.getTargetException();
 		}

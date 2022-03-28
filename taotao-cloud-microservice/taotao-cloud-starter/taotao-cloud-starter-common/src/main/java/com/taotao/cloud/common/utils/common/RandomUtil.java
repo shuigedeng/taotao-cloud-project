@@ -393,7 +393,6 @@ public class RandomUtil {
 	 * 获取随机数生成器对象 ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺
 	 *
 	 * @return {@link java.util.concurrent.ThreadLocalRandom }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:07:47
 	 */
 	//public static ThreadLocalRandom getRandom() {
@@ -404,7 +403,6 @@ public class RandomUtil {
 	 * 获得随机Boolean值
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:07:35
 	 */
 	public static boolean randomBoolean() {
@@ -417,7 +415,6 @@ public class RandomUtil {
 	 * @param min 最小数（包含）
 	 * @param max 最大数（不包含）
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:16:32
 	 */
 	public static int randomInt(int min, int max) {
@@ -428,7 +425,6 @@ public class RandomUtil {
 	 * 获得随机数[0, 2^32)
 	 *
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:16:48
 	 */
 	public static int randomInt() {
@@ -440,7 +436,6 @@ public class RandomUtil {
 	 *
 	 * @param limit 限制随机数的范围，不包括这个数
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:16:54
 	 */
 	public static int randomInt(int limit) {
@@ -453,7 +448,6 @@ public class RandomUtil {
 	 * @param min 最小数（包含）
 	 * @param max 最大数（不包含）
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:02
 	 */
 	public static long randomLong(long min, long max) {
@@ -464,7 +458,6 @@ public class RandomUtil {
 	 * 获得随机数
 	 *
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:10
 	 */
 	public static long randomLong() {
@@ -476,7 +469,6 @@ public class RandomUtil {
 	 *
 	 * @param limit 限制随机数的范围，不包括这个数
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:16
 	 */
 	public static long randomLong(long limit) {
@@ -489,7 +481,6 @@ public class RandomUtil {
 	 * @param min 最小数（包含）
 	 * @param max 最大数（不包含）
 	 * @return double
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:23
 	 */
 	public static double randomDouble(double min, double max) {
@@ -500,7 +491,6 @@ public class RandomUtil {
 	 * 获得随机数[0, 1)
 	 *
 	 * @return double
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:29
 	 */
 	public static double randomDouble() {
@@ -512,7 +502,6 @@ public class RandomUtil {
 	 *
 	 * @param limit 限制随机数的范围，不包括这个数
 	 * @return double
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:35
 	 */
 	public static double randomDouble(double limit) {
@@ -524,7 +513,6 @@ public class RandomUtil {
 	 *
 	 * @param length 长度
 	 * @return byte[]
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:42
 	 */
 	public static byte[] randomBytes(int length) {
@@ -539,7 +527,6 @@ public class RandomUtil {
 	 *
 	 * @param length 字符串的长度
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:48
 	 */
 	public static String randomString(int length) {
@@ -551,7 +538,6 @@ public class RandomUtil {
 	 *
 	 * @param length 字符串的长度
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:17:54
 	 */
 	public static String randomNumbers(int length) {
@@ -564,7 +550,6 @@ public class RandomUtil {
 	 * @param baseString 随机字符选取的样本
 	 * @param length     字符串的长度
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:01
 	 */
 	public static String randomString(String baseString, int length) {
@@ -586,7 +571,6 @@ public class RandomUtil {
 	 * 随机数字，数字为0~9单个数字
 	 *
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:08
 	 */
 	public static int randomNumber() {
@@ -599,7 +583,6 @@ public class RandomUtil {
 	 * @param start start
 	 * @param end   end
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:12
 	 */
 	private static int randomNumber(int start, int end) {
@@ -610,7 +593,6 @@ public class RandomUtil {
 	 * 随机字母或数字，小写
 	 *
 	 * @return char
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:22
 	 */
 	public static char randomChar() {
@@ -622,7 +604,6 @@ public class RandomUtil {
 	 *
 	 * @param baseString 随机字符选取的样本
 	 * @return char
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:27
 	 */
 	public static char randomChar(String baseString) {
@@ -633,7 +614,6 @@ public class RandomUtil {
 	 * 随机身份证号
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:33
 	 */
 	public static String randomIdCard() {
@@ -645,7 +625,6 @@ public class RandomUtil {
 	 *
 	 * @param male 性别
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:38
 	 */
 	public static String randomIdCard(boolean male) {
@@ -670,7 +649,6 @@ public class RandomUtil {
 	 * @param birth 生日
 	 * @param male  性别
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:18:45
 	 */
 	public static String randomIdCard(String birth, boolean male) {
@@ -705,7 +683,6 @@ public class RandomUtil {
 	 *
 	 * @param sb sb
 	 * @return char
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:20:45
 	 */
 	private static char calcTrailingNumber(StringBuilder sb) {
@@ -724,7 +701,6 @@ public class RandomUtil {
 	 * 随机姓名
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:20:41
 	 */
 	public static String randomName() {
@@ -736,7 +712,6 @@ public class RandomUtil {
 	 *
 	 * @param male 性别
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:20:35
 	 */
 	public static String randomName(boolean male) {
@@ -765,7 +740,6 @@ public class RandomUtil {
 	 * 随机手机号
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:20:30
 	 */
 	public static String randomPhone() {
@@ -782,7 +756,6 @@ public class RandomUtil {
 	 * 随机地址
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:20:25
 	 */
 	public static String randomAddress() {
@@ -805,11 +778,9 @@ public class RandomUtil {
 	//private static final String BASE_CHAR_NUMBER = BASE_CHAR + BASE_NUMBER;
 
 	/**
-	 * 获取随机数生成器对象<br>
-	 * ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
+	 * 获取随机数生成器对象<br> ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
 	 *
 	 * @return {@link ThreadLocalRandom}
-	 * @since 0.1.13
 	 */
 	public static ThreadLocalRandom getRandom() {
 		return ThreadLocalRandom.current();
@@ -819,7 +790,6 @@ public class RandomUtil {
 	 * 获取{@link SecureRandom}，类提供加密的强随机数生成器 (RNG)
 	 *
 	 * @return {@link SecureRandom}
-	 * @since 0.1.13
 	 */
 	public static SecureRandom getSecureRandom() {
 		try {
@@ -834,7 +804,6 @@ public class RandomUtil {
 	 *
 	 * @param isSecure 是否为强随机数生成器 (RNG)
 	 * @return {@link Random}
-	 * @since 0.1.13
 	 * @see #getSecureRandom()
 	 * @see #getRandom()
 	 */
@@ -844,14 +813,17 @@ public class RandomUtil {
 
 	/**
 	 * 随机的字符
+	 *
 	 * @param length 长度
 	 * @return 随机的数字
 	 */
 	public static String randomChar(final int length) {
 		return randomString(BASE_CHAR, length);
 	}
+
 	/**
 	 * 随机的字符数字
+	 *
 	 * @param length 长度
 	 * @return 随机的数字
 	 */
@@ -861,6 +833,7 @@ public class RandomUtil {
 
 	/**
 	 * 随机的数字
+	 *
 	 * @param length 长度
 	 * @return 随机的数字
 	 */
@@ -891,13 +864,13 @@ public class RandomUtil {
 
 	/**
 	 * 随机选择列表中的一个元素
+	 *
 	 * @param list 列表
-	 * @param <T> 泛型
+	 * @param <T>  泛型
 	 * @return 结果
-	 * @since 0.1.97
 	 */
 	public static <T> T random(final List<T> list) {
-		if(CollectionUtil.isEmpty(list)) {
+		if (CollectionUtil.isEmpty(list)) {
 			return null;
 		}
 

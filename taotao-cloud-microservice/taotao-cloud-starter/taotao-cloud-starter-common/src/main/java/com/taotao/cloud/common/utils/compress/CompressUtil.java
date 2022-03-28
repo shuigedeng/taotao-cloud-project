@@ -57,7 +57,6 @@ public class CompressUtil {
 	 *
 	 * @param srcDir     源文件夹
 	 * @param targetFile 目标知道zip文件
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:39:25
 	 */
 	public static void zip(String srcDir, String targetFile) {
@@ -74,7 +73,6 @@ public class CompressUtil {
 	 *
 	 * @param srcDir       源文件夹
 	 * @param outputStream 压缩后文件的输出流
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:39:25
 	 */
 	public static void zip(String srcDir, OutputStream outputStream) {
@@ -122,7 +120,6 @@ public class CompressUtil {
 	 *
 	 * @param zipFileName 源zip文件路径
 	 * @param destDir     解压后输出路径
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:39:25
 	 */
 	public static void unzip(String zipFileName, String destDir) {
@@ -138,7 +135,6 @@ public class CompressUtil {
 	 *
 	 * @param inputStream zip文件输入流，可以是本地文件输入流，也可以是web请求上传流
 	 * @param destDir     解压后输出路径
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:39:25
 	 */
 	public static void unzip(InputStream inputStream, String destDir) {

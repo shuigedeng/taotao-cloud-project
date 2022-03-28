@@ -114,7 +114,6 @@ public class SequenceUtil {
 	 *
 	 * @param workerId     工作机器 ID
 	 * @param datacenterId 序列号
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:54:22
 	 */
 	public SequenceUtil(long workerId, long datacenterId) {
@@ -133,7 +132,6 @@ public class SequenceUtil {
 	 * @param datacenterId datacenterId
 	 * @param maxWorkerId  maxWorkerId
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:54:50
 	 */
 	protected static long getMaxWorkerId(long datacenterId, long maxWorkerId) {
@@ -157,7 +155,6 @@ public class SequenceUtil {
 	 *
 	 * @param maxDatacenterId maxDatacenterId
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:54:57
 	 */
 	protected static long getDatacenterId(long maxDatacenterId) {
@@ -185,7 +182,6 @@ public class SequenceUtil {
 	 * 获取下一个ID
 	 *
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:55:02
 	 */
 	public synchronized long nextId() {
@@ -238,7 +234,6 @@ public class SequenceUtil {
 	 *
 	 * @param lastTimestamp lastTimestamp
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:55:10
 	 */
 	protected long tilNextMillis(long lastTimestamp) {
@@ -253,7 +248,6 @@ public class SequenceUtil {
 	 * timeGen
 	 *
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:55:20
 	 */
 	protected long timeGen() {

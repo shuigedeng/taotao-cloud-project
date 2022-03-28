@@ -15,7 +15,6 @@ public final class EmojiUtil {
      * @param text 文本
      * @param replaceText 替换的文本
      * @return 结果
-     * @since 0.1.151
      */
     public static String replaceEmoji(final String text, final String replaceText) {
         if(StringUtil.isEmpty(text)) {
@@ -29,7 +28,6 @@ public final class EmojiUtil {
      * 替换掉 emoji 表情
      * @param text 文本
      * @return 结果
-     * @since 0.1.151
      */
     public static String replaceEmoji(final String text) {
         return replaceEmoji(text, "");

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 默认的泳道实现
+ * 默认的管道实现
  */
 public class DefaultPipeline<T> implements Pipeline<T> {
 

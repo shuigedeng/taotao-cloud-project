@@ -43,9 +43,7 @@ public class ClassUtil extends ClassUtils {
 	 *
 	 * @param method         Method
 	 * @param annotationType 注解类
-	 * @param <A>            泛型标记
-	 * @return A
-	 * @author shuigedeng
+	 * @return 注解类型
 	 * @since 2021-09-02 17:40:12
 	 */
 	@Nullable
@@ -71,9 +69,7 @@ public class ClassUtil extends ClassUtils {
 	 *
 	 * @param method         Method
 	 * @param annotationType 注解类
-	 * @param <A>            泛型标记
-	 * @return boolean
-	 * @author shuigedeng
+	 * @return 结果
 	 * @since 2021-09-02 17:40:50
 	 */
 	public static <A extends Annotation> boolean isAnnotated(Method method,
@@ -95,7 +91,7 @@ public class ClassUtil extends ClassUtils {
 	 *
 	 * @param constructor    构造器
 	 * @param parameterIndex 参数序号
-	 * @return {MethodParameter}
+	 * @return 方法参数
 	 */
 	public static MethodParameter getMethodParameter(Constructor<?> constructor,
 		int parameterIndex) {
@@ -110,7 +106,7 @@ public class ClassUtil extends ClassUtils {
 	 *
 	 * @param method         方法
 	 * @param parameterIndex 参数序号
-	 * @return {MethodParameter}
+	 * @return 方法参数
 	 */
 	public static MethodParameter getMethodParameter(Method method, int parameterIndex) {
 		MethodParameter methodParameter = new SynthesizingMethodParameter(method, parameterIndex);
@@ -123,8 +119,7 @@ public class ClassUtil extends ClassUtils {
 	 *
 	 * @param handlerMethod  HandlerMethod
 	 * @param annotationType 注解类
-	 * @param <A>            泛型标记
-	 * @return {Annotation}
+	 * @return 注解类型
 	 */
 	@Nullable
 	public static <A extends Annotation> A getAnnotation(HandlerMethod handlerMethod, Class<A> annotationType) {

@@ -5,10 +5,11 @@ package com.taotao.cloud.common.support.reader;
  */
 public interface IReader {
 
-    /**
-     * 读取内容
-     * @return 字符串
-     */
-    String read();
+	/**
+	 * 读取内容
+	 *
+	 * @return 字符串
+	 */
+	String read();
 
 }

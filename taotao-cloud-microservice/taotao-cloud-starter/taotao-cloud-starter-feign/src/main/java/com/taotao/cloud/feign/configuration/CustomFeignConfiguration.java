@@ -21,21 +21,28 @@ import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginPars
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.feign.execption.FeignDecodeException;
 import com.taotao.cloud.feign.formatter.DateFormatRegister;
 import com.taotao.cloud.feign.http.InfoFeignLoggerFactory;
 import com.taotao.cloud.feign.http.RestTemplateHeaderInterceptor;
 import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import com.taotao.cloud.feign.properties.FeignProperties;
 import com.taotao.cloud.feign.properties.LbIsolationProperties;
+import feign.FeignException;
 import feign.Logger;
 import feign.Response;
 import feign.Retryer;
 import feign.Util;
+import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
+import feign.optionals.OptionalDecoder;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -56,6 +63,8 @@ import org.springframework.cloud.commons.httpclient.OkHttpClientConnectionPoolFa
 import org.springframework.cloud.commons.httpclient.OkHttpClientFactory;
 import org.springframework.cloud.openfeign.FeignLoggerFactory;
 import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
+import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
+import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +74,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 /**
  * FeignAutoConfiguration
@@ -119,6 +129,39 @@ public class CustomFeignConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters) {
+		return new OptionalDecoder(
+			new BaseResultDecode(new SpringDecoder(messageConverters)));
+	}
+
+	public static class BaseResultDecode extends ResponseEntityDecoder {
+
+		public BaseResultDecode(Decoder decoder) {
+			super(decoder);
+		}
+
+		@Override
+		public Object decode(Response response, Type type) throws IOException, FeignException {
+			if (type != null) {
+				if (((ParameterizedType) type).getRawType() != Result.class) {
+					type = ParameterizedTypeImpl.make(null, new Type[]{type}, Result.class);
+					Object object = super.decode(response, type);
+					if (object instanceof Result<?> result) {
+						if (result.code() != 200) {
+							LogUtil.error("调用Feign接口出现异常，接口:{}, 异常: {}", response.request().url(),
+								result.errorMsg());
+							throw new FeignDecodeException(result.code(), result.errorMsg());
+						}
+						return result;
+					}
+				}
+			}
+
+			return super.decode(response, type);
+		}
+	}
+
+	@Bean
 	public FeignClientErrorDecoder feignClientErrorDecoder() {
 		return new FeignClientErrorDecoder();
 	}
@@ -169,7 +212,6 @@ public class CustomFeignConfiguration implements InitializingBean {
 
 	/**
 	 * RestTemplate 相关的配置
-	 *
 	 */
 	@ConditionalOnClass(okhttp3.OkHttpClient.class)
 	public static class RestTemplateConfiguration {
@@ -233,7 +275,8 @@ public class CustomFeignConfiguration implements InitializingBean {
 		@ConditionalOnMissingBean(okhttp3.ConnectionPool.class)
 		public okhttp3.ConnectionPool okHttp3ConnectionPool(FeignHttpClientProperties hcp,
 			OkHttpClientConnectionPoolFactory connectionPoolFactory) {
-			return connectionPoolFactory.create(hcp.getMaxConnections(), hcp.getTimeToLive(), hcp.getTimeToLiveUnit());
+			return connectionPoolFactory.create(hcp.getMaxConnections(), hcp.getTimeToLive(),
+				hcp.getTimeToLiveUnit());
 		}
 
 
@@ -256,8 +299,10 @@ public class CustomFeignConfiguration implements InitializingBean {
 		@LoadBalanced
 		@SentinelRestTemplate
 		@ConditionalOnMissingBean(RestTemplate.class)
-		public RestTemplate lbRestTemplate(okhttp3.OkHttpClient httpClient, RestTemplateHeaderInterceptor interceptor) {
-			RestTemplate lbRestTemplate = new RestTemplate(new OkHttp3ClientHttpRequestFactory(httpClient));
+		public RestTemplate lbRestTemplate(okhttp3.OkHttpClient httpClient,
+			RestTemplateHeaderInterceptor interceptor) {
+			RestTemplate lbRestTemplate = new RestTemplate(
+				new OkHttp3ClientHttpRequestFactory(httpClient));
 			lbRestTemplate.setInterceptors(Collections.singletonList(interceptor));
 			this.configMessageConverters(lbRestTemplate.getMessageConverters());
 			return lbRestTemplate;
@@ -272,13 +317,15 @@ public class CustomFeignConfiguration implements InitializingBean {
 		@Bean
 		@SentinelRestTemplate
 		public RestTemplate restTemplate(okhttp3.OkHttpClient httpClient) {
-			RestTemplate restTemplate = new RestTemplate(new OkHttp3ClientHttpRequestFactory(httpClient));
+			RestTemplate restTemplate = new RestTemplate(
+				new OkHttp3ClientHttpRequestFactory(httpClient));
 			this.configMessageConverters(restTemplate.getMessageConverters());
 			return restTemplate;
 		}
 
 		private void configMessageConverters(List<HttpMessageConverter<?>> converters) {
-			converters.removeIf(c -> c instanceof StringHttpMessageConverter || c instanceof MappingJackson2HttpMessageConverter);
+			converters.removeIf(c -> c instanceof StringHttpMessageConverter
+				|| c instanceof MappingJackson2HttpMessageConverter);
 			converters.add(new StringHttpMessageConverter(UTF_8));
 			converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));
 		}

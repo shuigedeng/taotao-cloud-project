@@ -122,7 +122,6 @@ public class JsonUtil {
 	 *
 	 * @param object 要转换的对象
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:37:25
 	 */
 	public static String toJSONString(Object object) {
@@ -135,7 +134,6 @@ public class JsonUtil {
 	 * @param object 要转换的对象
 	 * @param format 是否格式化json
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:37:57
 	 */
 	public static String toJSONString(Object object, boolean format) {
@@ -164,7 +162,6 @@ public class JsonUtil {
 	 * @param json json字符串
 	 * @param cls  目标对象
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:38:13
 	 */
 	public static <T> T toObject(String json, Class<T> cls) {
@@ -185,7 +182,6 @@ public class JsonUtil {
 	 * @param parametrized     目标对象
 	 * @param parameterClasses 泛型对象
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:38:36
 	 */
 	public static <T> T toObject(String json, Class<?> parametrized, Class<?>... parameterClasses) {
@@ -207,7 +203,6 @@ public class JsonUtil {
 	 * @param json          json字符串
 	 * @param typeReference 目标对象类型
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:38:49
 	 */
 	public static <T> T toObject(String json, TypeReference<T> typeReference) {
@@ -226,7 +221,6 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @return {@link com.fasterxml.jackson.databind.JsonNode }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:39:01
 	 */
 	public static JsonNode parse(String json) {
@@ -245,7 +239,6 @@ public class JsonUtil {
 	 *
 	 * @param object 要转换的对象
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:39:09
 	 */
 	public static <K, V> Map<K, V> toMap(Object object) {
@@ -263,7 +256,6 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:39:18
 	 */
 	public static <T> List<T> toList(String json) {
@@ -283,7 +275,6 @@ public class JsonUtil {
 	 * @param json json字符串
 	 * @param cls  list的元素类型
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:39:29
 	 */
 	public static <T> List<T> toList(String json, Class<T> cls) {
@@ -1033,7 +1024,6 @@ public class JsonUtil {
 	 * @param compressJsonPath 压缩的 json 路径
 	 * @param size 大下
 	 * @return 结果列表
-	 * @since 0.1.86
 	 */
 	public static List<String> getIndexList(final String compressJsonPath, final int size) {
 		final String json = com.taotao.cloud.common.utils.io.FileUtil.getFileContent(compressJsonPath);
@@ -1051,7 +1041,6 @@ public class JsonUtil {
 	 * @param compressJsonPath 压缩的 json 路径
 	 * @param indexPrefixList  索引前缀列表
 	 * @return 结果列表
-	 * @since 0.1.85
 	 */
 	public static List<String> getIndexList(final String compressJsonPath, final List<?> indexPrefixList) {
 		final String json = FileUtil.getFileContent(compressJsonPath);
@@ -1095,7 +1084,6 @@ public class JsonUtil {
 	 * 获取前缀
 	 * @param object 对象
 	 * @return 结果
-	 * @since 0.0.1
 	 */
 	private static String getPrefix(Object object) {
 		if(com.taotao.cloud.common.utils.lang.ObjectUtil.isNull(object)) {

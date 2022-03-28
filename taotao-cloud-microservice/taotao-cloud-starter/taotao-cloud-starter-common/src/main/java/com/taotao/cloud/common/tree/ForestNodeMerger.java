@@ -30,7 +30,7 @@ public class ForestNodeMerger {
 	 * 将节点数组归并为一个森林（多棵树）（填充节点的children域） 时间复杂度为O(n^2)
 	 *
 	 * @param items 节点域
-	 * @return {@link java.util.List }
+	 * @return INode对象
 	 * @since 2021-09-02 22:21:41
 	 */
 	public static <T extends INode> List<T> merge(List<T> items) {

@@ -32,8 +32,7 @@ public class EnumUtil {
 	 *
 	 * @param enumType enumType
 	 * @param name     name
-	 * @return T
-	 * @author shuigedeng
+	 * @return 枚举类型
 	 * @since 2021-09-02 17:18:02
 	 */
 	public static <T extends Enum<?>> T lookup(Class<T> enumType, String name) {

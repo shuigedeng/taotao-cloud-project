@@ -8,7 +8,7 @@ package com.taotao.cloud.common.utils.number;
  * 源码来自：https://v2ex.com/t/661809
  * <p>
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */

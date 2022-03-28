@@ -46,7 +46,6 @@ public class RetryUtil {
 	 * @param sleepTime        重试间隔睡眠时间(注意：阻塞当前线程)
 	 * @param expectExceptions 期待异常(抛出符合相应异常时候重试),空或者空容器默认进行重试
 	 * @return R
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:59:11
 	 */
 	public static <R> R invoke(Supplier<R> dataSupplier, Consumer<Throwable> exceptionCaught,
@@ -97,7 +96,6 @@ public class RetryUtil {
 	 *
 	 * @param exceptionCaught exceptionCaught
 	 * @param throwable       throwable
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:04:42
 	 */
 	private static void catchException(Consumer<Throwable> exceptionCaught, Throwable throwable) {

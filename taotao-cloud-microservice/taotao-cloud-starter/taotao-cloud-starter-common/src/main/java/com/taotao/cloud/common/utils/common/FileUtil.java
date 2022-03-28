@@ -59,11 +59,12 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	/**
 	 * 默认为true
 	 *
-	  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 19:41:13
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 19:41:13
 	 */
 	public static class TrueFilter implements FileFilter, Serializable {
+
 		private static final long serialVersionUID = -6420452043795072619L;
 
 		public final static TrueFilter TRUE = new TrueFilter();
@@ -298,8 +299,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	}
 
 	/**
-	 * Reads the contents of a file into a String.
-	 * The file is always closed.
+	 * Reads the contents of a file into a String. The file is always closed.
 	 *
 	 * @param file the file to read, must not be {@code null}
 	 * @return the file contents, never {@code null}
@@ -309,8 +309,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	}
 
 	/**
-	 * Reads the contents of a file into a String.
-	 * The file is always closed.
+	 * Reads the contents of a file into a String. The file is always closed.
 	 *
 	 * @param file     the file to read, must not be {@code null}
 	 * @param encoding the encoding to use, {@code null} means platform default
@@ -325,8 +324,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	}
 
 	/**
-	 * Reads the contents of a file into a String.
-	 * The file is always closed.
+	 * Reads the contents of a file into a String. The file is always closed.
 	 *
 	 * @param file the file to read, must not be {@code null}
 	 * @return the file contents, never {@code null}
@@ -354,8 +352,8 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 *
 	 * @param file   the file to write
 	 * @param data   the content to write to the file
-	 * @param append if {@code true}, then the String will be added to the
-	 *               end of the file rather than overwriting
+	 * @param append if {@code true}, then the String will be added to the end of the file rather
+	 *               than overwriting
 	 */
 	public static void writeToFile(final File file, final String data, final boolean append) {
 		writeToFile(file, data, Charsets.UTF_8, append);
@@ -378,10 +376,11 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * @param file     the file to write
 	 * @param data     the content to write to the file
 	 * @param encoding the encoding to use, {@code null} means platform default
-	 * @param append   if {@code true}, then the String will be added to the
-	 *                 end of the file rather than overwriting
+	 * @param append   if {@code true}, then the String will be added to the end of the file rather
+	 *                 than overwriting
 	 */
-	public static void writeToFile(final File file, final String data, final Charset encoding, final boolean append) {
+	public static void writeToFile(final File file, final String data, final Charset encoding,
+		final boolean append) {
 		try (OutputStream out = new FileOutputStream(file, append)) {
 			IoUtil.write(data, out, encoding);
 		} catch (IOException e) {
@@ -448,13 +447,16 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 			FileUtil.copy(srcFile, destFile);
 			if (!srcFile.delete()) {
 				FileUtil.deleteQuietly(destFile);
-				throw new IOException("Failed to delete original file '" + srcFile + "' after copy to '" + destFile + "'");
+				throw new IOException(
+					"Failed to delete original file '" + srcFile + "' after copy to '" + destFile
+						+ "'");
 			}
 		}
 	}
 
 	/**
-	 * Deletes a file, never throwing an exception. If file is a directory, delete it and all sub-directories.
+	 * Deletes a file, never throwing an exception. If file is a directory, delete it and all
+	 * sub-directories.
 	 * <p>
 	 * The difference between File.delete() and this method are:
 	 * <ul>
@@ -463,8 +465,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * </ul>
 	 *
 	 * @param file file or directory to delete, can be {@code null}
-	 * @return {@code true} if the file or directory was deleted, otherwise
-	 * {@code false}
+	 * @return {@code true} if the file or directory was deleted, otherwise {@code false}
 	 */
 	public static boolean deleteQuietly(@Nullable final File file) {
 		if (file == null) {
@@ -559,7 +560,6 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 *
 	 * @param filepath 文件路径
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:46:10
 	 */
 	public static boolean existFile(String filepath) {
@@ -571,8 +571,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * 获取文件目录路径
 	 *
 	 * @param path 文件路径
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 文件目录路径
 	 * @since 2021-09-02 16:46:03
 	 */
 	public static String getDirectoryPath(String path) {
@@ -584,8 +583,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * 获取文件目录路径
 	 *
 	 * @param cls cls
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 文件目录路径
 	 * @since 2021-09-02 16:45:57
 	 */
 	public static String getDirectoryPath(Class<?> cls) {
@@ -603,8 +601,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * 获取文件
 	 *
 	 * @param cls 类型
-	 * @return {@link java.io.File }
-	 * @author shuigedeng
+	 * @return 文件对象
 	 * @since 2021-09-02 16:45:49
 	 */
 	public static File getJarFile(Class<?> cls) {
@@ -640,8 +637,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * 创建目录
 	 *
 	 * @param path 文件路径
-	 * @return {@link java.lang.Boolean }
-	 * @author shuigedeng
+	 * @return 是否成功
 	 * @since 2021-09-02 16:45:40
 	 */
 	public static Boolean createDirectory(String path) {
@@ -661,7 +657,6 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 *
 	 * @param path     文件路径
 	 * @param contents 内容
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:45:30
 	 */
 	public static void appendAllText(String path, String contents) {
@@ -685,7 +680,6 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 *
 	 * @param path     文件路径
 	 * @param contents 内容
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:45:20
 	 */
 	public static void writeAllText(String path, String contents) {
@@ -709,8 +703,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * 读取文件内容
 	 *
 	 * @param path 文件路径
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 文件路径
 	 * @since 2021-09-02 16:45:10
 	 */
 	public static String readAllText(String path) {
@@ -736,8 +729,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	/**
 	 * 获取行分隔符
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 获取行分隔符
 	 * @since 2021-09-02 16:45:02
 	 */
 	public static String lineSeparator() {
@@ -748,8 +740,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * 根据文件路径获取文件名
 	 *
 	 * @param filePath 文件路径
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 文件路径
 	 * @since 2021-09-02 16:44:55
 	 */
 	public static String getFileName(String filePath) {

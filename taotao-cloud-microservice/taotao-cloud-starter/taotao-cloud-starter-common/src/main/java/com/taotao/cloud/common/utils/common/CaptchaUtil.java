@@ -61,8 +61,7 @@ public class CaptchaUtil {
 	/**
 	 * 获取验证码
 	 *
-	 * @return {@link com.wf.captcha.ArithmeticCaptcha }
-	 * @author shuigedeng
+	 * @return 验证码
 	 * @since 2021-09-02 17:45:06
 	 */
 	public static ArithmeticCaptcha getArithmeticCaptcha() {
@@ -74,8 +73,7 @@ public class CaptchaUtil {
 	/**
 	 * 生成图片
 	 *
-	 * @return {@link java.awt.image.BufferedImage }
-	 * @author shuigedeng
+	 * @return 图片对象
 	 * @since 2021-09-02 17:45:13
 	 */
 	public static BufferedImage createImage() {
@@ -86,9 +84,8 @@ public class CaptchaUtil {
 	/**
 	 * 随机画图
 	 *
-	 * @param verifyImg verifyImg
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @param verifyImg 图片对象
+	 * @return 字符串
 	 * @since 2021-09-02 17:45:18
 	 */
 	public static String drawRandomText(BufferedImage verifyImg) {
@@ -142,8 +139,7 @@ public class CaptchaUtil {
 	/**
 	 * 随机取色
 	 *
-	 * @return {@link java.awt.Color }
-	 * @author shuigedeng
+	 * @return 色彩对象
 	 * @since 2021-09-02 17:45:27
 	 */
 	private static Color getRandomColor() {
@@ -157,8 +153,7 @@ public class CaptchaUtil {
 	 * @param targetName targetName
 	 * @param methodName methodName
 	 * @param arguments  arguments
-	 * @return {@link String }
-	 * @author shuigedeng
+	 * @return key
 	 * @since 2021-09-02 19:41:46
 	 */
 	public String getCacheKey(String key, String targetName, String methodName,

@@ -55,13 +55,11 @@ public class PropertyCache implements CommandLineRunner {
 	}
 
 	/**
-	 * get
+	 * 获取属性值
 	 *
 	 * @param key          key
 	 * @param defaultValue defaultValue
-	 * @param <T>          T
-	 * @return T
-	 * @author shuigedeng
+	 * @return 属性值
 	 * @since 2021-09-02 20:37:54
 	 */
 	public <T> T get(String key, T defaultValue) {
@@ -93,11 +91,10 @@ public class PropertyCache implements CommandLineRunner {
 	}
 
 	/**
-	 * tryUpdateCache
+	 * 更新属性
 	 *
-	 * @param key   key
-	 * @param value value
-	 * @author shuigedeng
+	 * @param key   键
+	 * @param value 值
 	 * @since 2021-09-02 20:38:10
 	 */
 	public void tryUpdateCache(String key, Object value) {
@@ -121,11 +118,10 @@ public class PropertyCache implements CommandLineRunner {
 	}
 
 	/**
-	 * listenUpdateCache
+	 * 监听更新缓存
 	 *
-	 * @param name   name
-	 * @param action action
-	 * @author shuigedeng
+	 * @param name   名称
+	 * @param action action动作
 	 * @since 2021-09-02 20:38:14
 	 */
 	public void listenUpdateCache(String name, Callable.Action1<HashMap<String, Object>> action) {
@@ -133,9 +129,8 @@ public class PropertyCache implements CommandLineRunner {
 	}
 
 	/**
-	 * clear
+	 * 清理
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:38:20
 	 */
 	public void clear() {

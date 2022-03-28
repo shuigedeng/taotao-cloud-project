@@ -49,7 +49,6 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param data     数据对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:00:32
 	 */
 	public static void success(HttpServletResponse response, Object data) throws IOException {
@@ -62,7 +61,6 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param data     数据对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:00:41
 	 */
 	public static void fail(HttpServletResponse response, Object data) {
@@ -81,7 +79,6 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:00:50
 	 */
 	public static void result(HttpServletResponse response, Result<?> result) throws IOException {
@@ -93,7 +90,6 @@ public class ResponseUtil {
 	 *
 	 * @param response   response
 	 * @param resultEnum 数据对象
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:00:58
 	 */
 	public static void fail(HttpServletResponse response, ResultEnum resultEnum)
@@ -107,7 +103,6 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:01:08
 	 */
 	private static void writeResponse(HttpServletResponse response, Result<?> result)
@@ -129,7 +124,6 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param data     数据
 	 * @return {@link Mono }
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:01:18
 	 */
 	public static Mono<Void> success(ServerWebExchange exchange, Object data) {
@@ -143,7 +137,6 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param data     数据
 	 * @return {@link Mono }
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:01:26
 	 */
 	public static Mono<Void> fail(ServerWebExchange exchange, Object data) {
@@ -157,7 +150,6 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param result   数据
 	 * @return {@link Mono }
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:01:33
 	 */
 	public static Mono<Void> result(ServerWebExchange exchange, Result<?> result) {
@@ -170,7 +162,6 @@ public class ResponseUtil {
 	 * @param exchange   exchange
 	 * @param resultEnum 状态码
 	 * @return {@link Mono }
-	 * @author shuigedeng
 	 * @since 2021-09-02 15:01:41
 	 */
 	public static Mono<Void> fail(ServerWebExchange exchange, ResultEnum resultEnum) {
@@ -184,7 +175,7 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param result   数据
 	 * @return {@link Mono }
-	 * @author shuigedeng
+	 *
 	 * @since 2021-09-02 15:01:48
 	 */
 
@@ -194,7 +185,6 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param result   result
 	 * @return {@link Mono }
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:00:17
 	 */
 	public static Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {

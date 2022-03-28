@@ -51,7 +51,6 @@ public class YmlUtil {
 	 *
 	 * @param key 键
 	 * @return {@link Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:31:01
 	 */
 	public static Object getBootstrapValue(String key) {
@@ -63,7 +62,6 @@ public class YmlUtil {
 	 *
 	 * @param key 键
 	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:31:43
 	 */
 	public static Object getApplicationValue(String key) {
@@ -76,7 +74,6 @@ public class YmlUtil {
 	 * @param fileName 文件名称
 	 * @param key      键
 	 * @return {@link Object }
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:32:04
 	 */
 	public static Object getValueByYml(String fileName, String key) {
@@ -108,7 +105,6 @@ public class YmlUtil {
 	 *
 	 * @param fileName yml文件名
 	 * @return {@link Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 14:32:40
 	 */
 	public static Map<String, Object> getYml(String fileName) {
