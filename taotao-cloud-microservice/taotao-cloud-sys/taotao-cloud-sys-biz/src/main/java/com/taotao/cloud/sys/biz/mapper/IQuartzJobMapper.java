@@ -10,6 +10,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.entity.quartz.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * IQuartzJobMapper
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-29 09:01:48
+ */
 @Mapper
 public interface IQuartzJobMapper extends BaseMapper<QuartzJob> {
 

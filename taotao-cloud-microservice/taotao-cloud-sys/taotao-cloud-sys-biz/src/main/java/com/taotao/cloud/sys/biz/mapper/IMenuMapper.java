@@ -22,7 +22,7 @@ import java.util.Set;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * CompanyMapper
+ * IMenuMapper
  *
  * @author shuigedeng
  * @version 2022.03

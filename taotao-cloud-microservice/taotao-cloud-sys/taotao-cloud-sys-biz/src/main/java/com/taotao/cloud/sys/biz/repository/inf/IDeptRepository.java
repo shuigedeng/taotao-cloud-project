@@ -20,7 +20,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * CompanyMapper
+ * IDeptRepository
  *
  * @author shuigedeng
  * @version 2022.03

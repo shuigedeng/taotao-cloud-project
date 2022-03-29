@@ -24,6 +24,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 /**
  * TaoTaoCloudSysApplication
  * 抑制java9 module 报错
+ *
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
  * --add-opens java.base/java.lang.invoke=ALL-UNNAMED
@@ -47,7 +48,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
 

@@ -53,7 +53,6 @@ public interface RoleMapStruct {
 	 *
 	 * @param SysRole sysRole
 	 * @return {@link UserQueryVO }
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:47:46
 	 */
 	RoleQueryVO sysUserToUserQueryVO(Role sysRole);
@@ -63,7 +62,6 @@ public interface RoleMapStruct {
 	 *
 	 * @param roleList roleList
 	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.user.UserQueryVO&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:52:04
 	 */
 	List<RoleQueryVO> sysUserToUserQueryVO(List<Role> roleList);
@@ -73,7 +71,6 @@ public interface RoleMapStruct {
 	 *
 	 * @param roleQueryDTO roleQueryDTO
 	 * @param sysRole      sysRole
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:54:47
 	 */
 	void copyUserDtoToSysUser(RoleQueryDTO roleQueryDTO, @MappingTarget Role sysRole);

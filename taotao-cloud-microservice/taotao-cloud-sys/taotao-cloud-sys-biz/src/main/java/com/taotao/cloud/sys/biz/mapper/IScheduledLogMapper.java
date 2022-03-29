@@ -10,6 +10,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.entity.scheduled.ScheduledLog;
 import org.springframework.stereotype.Repository;
 
+/**
+ * IScheduledLogMapper
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-29 09:01:48
+ */
 @Repository
 public interface IScheduledLogMapper extends BaseMapper<ScheduledLog> {
 

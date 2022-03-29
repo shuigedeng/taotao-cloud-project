@@ -9,6 +9,13 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+/**
+ * IVisitsMapper
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-29 08:57:49
+ */
 @Repository
 @Mapper
 public interface IVisitsMapper extends BaseMapper<Visits> {

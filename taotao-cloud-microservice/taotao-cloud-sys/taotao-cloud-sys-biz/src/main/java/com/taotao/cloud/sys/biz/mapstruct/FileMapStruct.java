@@ -39,9 +39,7 @@ public interface FileMapStruct {
 	 *
 	 * @param file file
 	 * @return com.taotao.cloud.sys.api.vo.user.UserVO
-	 * @author shuigedeng
 	 * @since 2020/11/11 14:47
-	 * @version 2022.03
 	 */
 	FileVO fileToFileVO(File file);
 

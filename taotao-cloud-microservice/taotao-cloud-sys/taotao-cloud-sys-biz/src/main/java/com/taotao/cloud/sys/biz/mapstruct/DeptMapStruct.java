@@ -24,6 +24,8 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
+ * DeptMapStruct
+ *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/11/11 16:58
