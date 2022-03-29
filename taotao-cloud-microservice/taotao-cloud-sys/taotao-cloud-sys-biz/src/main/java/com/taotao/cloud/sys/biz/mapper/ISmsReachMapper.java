@@ -20,7 +20,7 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * CompanyMapper
+ * ISmsReachMapper
  *
  * @author shuigedeng
  * @version 2022.03

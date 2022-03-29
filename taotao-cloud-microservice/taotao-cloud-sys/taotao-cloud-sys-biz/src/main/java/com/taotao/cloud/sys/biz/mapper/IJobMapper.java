@@ -20,14 +20,13 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * CompanyMapper
+ * IJobMapper
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
 @Mapper
-public interface
-IJobMapper extends BaseSuperMapper<Job, Long> {
+public interface IJobMapper extends BaseSuperMapper<Job, Long> {
 
 }

@@ -45,7 +45,6 @@ public interface UserMapStruct {
 	 *
 	 * @param sysUser sysUser
 	 * @return {@link UserQueryVO }
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:47:46
 	 */
 	UserQueryVO sysUserToUserQueryVO(User sysUser);
@@ -55,7 +54,6 @@ public interface UserMapStruct {
 	 *
 	 * @param sysUser sysUser
 	 * @return {@link UserRegisterVO }
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:51:49
 	 */
 	UserRegisterVO sysUserToAddUserVO(User sysUser);
@@ -65,7 +63,6 @@ public interface UserMapStruct {
 	 *
 	 * @param userList userList
 	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.user.UserQueryVO&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:52:04
 	 */
 	List<UserQueryVO> sysUserToUserQueryVO(List<User> userList);
@@ -75,7 +72,6 @@ public interface UserMapStruct {
 	 *
 	 * @param userQueryDTO userQueryDTO
 	 * @param user         user
-	 * @author shuigedeng
 	 * @since 2021-10-15 17:53:08
 	 */
 	void copyUserDtoToSysUser(UserQueryDTO userQueryDTO, @MappingTarget User user);

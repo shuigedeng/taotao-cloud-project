@@ -11,6 +11,13 @@ import com.taotao.cloud.sys.biz.entity.config.GenConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+/**
+ * IGenConfigMapper
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-29 09:01:48
+ */
 @Repository
 @Mapper
 public interface IGenConfigMapper extends BaseMapper<GenConfig> {

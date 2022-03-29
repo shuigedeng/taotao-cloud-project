@@ -10,6 +10,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.entity.scheduled.ScheduledJob;
 import org.springframework.stereotype.Repository;
 
+/**
+ * IScheduledJobMapper
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-29 09:01:48
+ */
 @Repository
 public interface IScheduledJobMapper extends BaseMapper<ScheduledJob> {
 
