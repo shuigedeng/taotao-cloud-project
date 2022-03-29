@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.feign.configuration;
 
+import cn.hutool.core.lang.ParameterizedTypeImpl;
 import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
@@ -51,6 +52,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -63,6 +65,7 @@ import org.springframework.cloud.commons.httpclient.OkHttpClientConnectionPoolFa
 import org.springframework.cloud.commons.httpclient.OkHttpClientFactory;
 import org.springframework.cloud.openfeign.FeignLoggerFactory;
 import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
+import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomizer;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.cloud.openfeign.support.SpringEncoder;
@@ -74,7 +77,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 /**
  * FeignAutoConfiguration
@@ -129,9 +131,10 @@ public class CustomFeignConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters) {
+	public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters,
+		ObjectProvider<HttpMessageConverterCustomizer> customizers) {
 		return new OptionalDecoder(
-			new BaseResultDecode(new SpringDecoder(messageConverters)));
+			new BaseResultDecode(new SpringDecoder(messageConverters,customizers)));
 	}
 
 	public static class BaseResultDecode extends ResponseEntityDecoder {
@@ -144,7 +147,7 @@ public class CustomFeignConfiguration implements InitializingBean {
 		public Object decode(Response response, Type type) throws IOException, FeignException {
 			if (type != null) {
 				if (((ParameterizedType) type).getRawType() != Result.class) {
-					type = ParameterizedTypeImpl.make(null, new Type[]{type}, Result.class);
+					type = new ParameterizedTypeImpl(new Type[]{type},null, Result.class);
 					Object object = super.decode(response, type);
 					if (object instanceof Result<?> result) {
 						if (result.code() != 200) {
@@ -236,7 +239,7 @@ public class CustomFeignConfiguration implements InitializingBean {
 		}
 
 		@Bean
-		@Profile({"docker", "uat", "prod"})
+		@Profile({"docker", "pre", "prod"})
 		Logger.Level prodFeignLoggerLevel() {
 			return Logger.Level.BASIC;
 		}

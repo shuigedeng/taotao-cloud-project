@@ -78,7 +78,7 @@ public class Point {
 	}
 
 	public Point parse(String jsonStr) {
-		Map<String, Object> m = new HashMap();
+		Map<String, Object> m = new HashMap<>();
 		Arrays.stream(jsonStr
 			.replaceFirst(",\\{", "\\{")
 			.replaceFirst("\\{", "")

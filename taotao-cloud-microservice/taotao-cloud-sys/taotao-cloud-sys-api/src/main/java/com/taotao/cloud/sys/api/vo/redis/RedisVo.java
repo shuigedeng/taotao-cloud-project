@@ -2,8 +2,10 @@ package com.taotao.cloud.sys.api.vo.redis;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * RedisVo
@@ -14,6 +16,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RedisVo implements Serializable {
 
 	private String key;
