@@ -22,7 +22,7 @@ package com.taotao.cloud.common.constant;
  * @version 2021.9
  * @since 2021-09-02 20:42:27
  */
-public class SecurityConstant {
+public final class SecurityConstant {
 
 	private SecurityConstant() {
 	}

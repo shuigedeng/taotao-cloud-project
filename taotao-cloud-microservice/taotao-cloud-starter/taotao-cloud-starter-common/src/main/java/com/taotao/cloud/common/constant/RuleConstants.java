@@ -27,7 +27,7 @@ package com.taotao.cloud.common.constant;
 /**
  * 规则模块的常量
  */
-public class RuleConstants {
+public final class RuleConstants {
 
     /**
      * 用户端操作异常的错误码分类编号

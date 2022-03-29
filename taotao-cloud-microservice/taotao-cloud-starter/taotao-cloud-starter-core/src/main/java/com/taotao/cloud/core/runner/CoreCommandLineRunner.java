@@ -63,7 +63,6 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 	/**
 	 * registerContextRefreshEvent
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:23:36
 	 */
 	private void registerContextRefreshEvent() {

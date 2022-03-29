@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter;
  * @version 2021.9
  * @since 2021-09-02 19:35:37
  */
-public class CommonConstant {
+public final class CommonConstant {
 
 	private CommonConstant() {
 	}
@@ -61,25 +61,21 @@ public class CommonConstant {
 
 	/**
 	 * char 双引号
-	 * @since 0.1.25
 	 */
 	public static final char DOUBLE_QUOTES = '"';
 
 	/**
 	 * char 反斜杠
-	 * @since 0.1.25
 	 */
 	public static final char BACK_SLASH = '\\';
 
 	/**
 	 * char 空格
-	 * @since 0.1.25
 	 */
 	public static final char BLANK = ' ';
 
 	/**
 	 * 星星
-	 * @since 0.1.67
 	 */
 	public static final char STAR = '*';
 

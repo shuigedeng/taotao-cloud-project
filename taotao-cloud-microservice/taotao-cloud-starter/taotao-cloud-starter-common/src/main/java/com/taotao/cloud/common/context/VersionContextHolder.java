@@ -38,7 +38,6 @@ public class VersionContextHolder {
 	 * setVersion
 	 *
 	 * @param version version
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:26
 	 */
 	public static void setVersion(String version) {
@@ -49,7 +48,6 @@ public class VersionContextHolder {
 	 * getVersion
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:28
 	 */
 	public static String getVersion() {
@@ -59,7 +57,6 @@ public class VersionContextHolder {
 	/**
 	 * clear
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:32
 	 */
 	public static void clear() {

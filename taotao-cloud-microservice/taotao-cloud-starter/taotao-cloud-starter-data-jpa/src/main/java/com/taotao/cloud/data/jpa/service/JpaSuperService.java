@@ -38,7 +38,6 @@ public interface JpaSuperService<T extends JpaSuperEntity<I>, I extends Serializ
 	 * @param predicate 判断是否存在的条件
 	 * @param msg       对象已存在提示信息
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
@@ -52,7 +51,6 @@ public interface JpaSuperService<T extends JpaSuperEntity<I>, I extends Serializ
 	 * @param lockKey   锁的key
 	 * @param predicate 判断是否存在的条件
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
@@ -66,7 +64,6 @@ public interface JpaSuperService<T extends JpaSuperEntity<I>, I extends Serializ
 	 * @param predicate 判断是否存在的条件
 	 * @param msg       对象已存在提示信息
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
@@ -80,7 +77,6 @@ public interface JpaSuperService<T extends JpaSuperEntity<I>, I extends Serializ
 	 * @param lockKey   锁的keyø
 	 * @param predicate 判断是否存在的条件
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,

@@ -38,7 +38,6 @@ public class TraceContextHolder {
 	 * setTraceId
 	 *
 	 * @param traceId traceId
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:33:58
 	 */
 	public static void setTraceId(String traceId) {
@@ -49,7 +48,6 @@ public class TraceContextHolder {
 	 * getTraceId
 	 *
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:00
 	 */
 	public static String getTraceId() {
@@ -59,7 +57,6 @@ public class TraceContextHolder {
 	/**
 	 * clear
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:06
 	 */
 	public static void clear() {

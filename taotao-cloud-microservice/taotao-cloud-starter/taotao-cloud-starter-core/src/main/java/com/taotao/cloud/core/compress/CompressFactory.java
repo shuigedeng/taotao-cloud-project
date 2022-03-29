@@ -10,9 +10,13 @@ import java.util.ServiceLoader;
  * The Data Compress Factory.
  */
 public enum CompressFactory {
-
+	/**
+	 * 压缩
+	 */
 	CF;
-
+	/**
+	 * 压缩map
+	 */
 	Map<String, Compress> compressMap = new HashMap<>();
 
 	CompressFactory() {

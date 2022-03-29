@@ -70,7 +70,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 * @param pageable  pageable
 	 * @param orders    orders
 	 * @return {@link Page&lt;T&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:29:49
 	 */
 	public Page<T> findPageable(Predicate predicate, Pageable pageable,
@@ -87,7 +86,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 *
 	 * @param predicate predicate
 	 * @return {@link Long }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:30:31
 	 */
 	public Long count(Predicate predicate) {
@@ -101,7 +99,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 *
 	 * @param predicate predicate
 	 * @return {@link Boolean }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:30:15
 	 */
 	public Boolean exists(Predicate predicate) {
@@ -113,7 +110,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 *
 	 * @param predicate predicate
 	 * @return {@link List&lt;T&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:30:44
 	 */
 	public List<T> fetch(Predicate predicate) {
@@ -127,7 +123,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 *
 	 * @param predicate predicate
 	 * @return {@link T }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:30:50
 	 */
 	public T fetchOne(Predicate predicate) {
@@ -141,7 +136,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 *
 	 * @param predicate predicate
 	 * @return {@link Long }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:31:11
 	 */
 	public Long fetchCount(Predicate predicate) {
@@ -157,7 +151,6 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 * @param expr      expr
 	 * @param o         o
 	 * @return {@link List&lt;?&gt; }
-	 * @author shuigedeng
 	 * @since 2021-10-09 20:31:18
 	 */
 	public List<?> find(Predicate predicate, Expression<?> expr, OrderSpecifier<?>... o) {

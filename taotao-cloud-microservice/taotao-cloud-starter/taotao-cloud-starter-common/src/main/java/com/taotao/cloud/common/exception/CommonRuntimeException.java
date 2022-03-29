@@ -4,6 +4,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 
 /**
  * 通用的运行时异常
+ * @author shuigedeng
  */
 public final class CommonRuntimeException extends BaseException {
 
