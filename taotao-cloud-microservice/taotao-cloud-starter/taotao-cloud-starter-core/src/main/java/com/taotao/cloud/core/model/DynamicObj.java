@@ -46,7 +46,6 @@ public class DynamicObj {
 	 *
 	 * @param path path
 	 * @param cls  cls
-	 * @param <T>  T
 	 * @return T
 	 * @since 2021-09-02 20:13:52
 	 */
@@ -63,7 +62,6 @@ public class DynamicObj {
 	 *
 	 * @param path path
 	 * @param cls  cls
-	 * @param <T>  T
 	 * @return T
 	 * @since 2021-09-02 20:14:07
 	 */
@@ -90,7 +88,6 @@ public class DynamicObj {
 	 *
 	 * @param jsonNode jsonNode
 	 * @param cls      cls
-	 * @param <T>      T
 	 * @return T
 	 * @since 2021-09-02 20:14:19
 	 */

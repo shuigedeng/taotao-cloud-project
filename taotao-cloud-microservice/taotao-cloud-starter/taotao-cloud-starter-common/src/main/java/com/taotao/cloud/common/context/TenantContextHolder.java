@@ -38,7 +38,6 @@ public class TenantContextHolder {
 	 * setTenant
 	 *
 	 * @param tenant tenant
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:33:31
 	 */
 	public static void setTenant(String tenant) {
@@ -49,7 +48,6 @@ public class TenantContextHolder {
 	 * getTenant
 	 *
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:33:34
 	 */
 	public static String getTenant() {
@@ -59,7 +57,6 @@ public class TenantContextHolder {
 	/**
 	 * clear
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:33:39
 	 */
 	public static void clear() {

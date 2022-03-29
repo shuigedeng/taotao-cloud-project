@@ -22,7 +22,7 @@ package com.taotao.cloud.common.constant;
  * @version 2021.9
  * @since 2021-09-02 20:42:22
  */
-public class ServiceName {
+public final class ServiceName {
 
 	private ServiceName() {
 	}

@@ -38,7 +38,6 @@ public interface JpaSuperCacheService<T extends JpaSuperEntity<I>, I extends Ser
 	 *
 	 * @param id 主键
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:20
 	 */
 	T getByIdCache(I id);
@@ -49,7 +48,6 @@ public interface JpaSuperCacheService<T extends JpaSuperEntity<I>, I extends Ser
 	 * @param key    缓存key
 	 * @param loader 加载器
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:34
 	 */
 	T getByKey(CacheKey key, Function<CacheKey, I> loader);
@@ -60,7 +58,6 @@ public interface JpaSuperCacheService<T extends JpaSuperEntity<I>, I extends Ser
 	 * @param ids    主键id
 	 * @param loader 回调
 	 * @return {@link List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:44
 	 */
 	List<T> findByIds(@NonNull Collection<I> ids, Function<Collection<I>, Collection<T>> loader);
@@ -68,7 +65,6 @@ public interface JpaSuperCacheService<T extends JpaSuperEntity<I>, I extends Ser
 	/**
 	 * 刷新缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:51
 	 */
 	void refreshCache();
@@ -76,7 +72,6 @@ public interface JpaSuperCacheService<T extends JpaSuperEntity<I>, I extends Ser
 	/**
 	 * 清理缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:55
 	 */
 	void clearCache();

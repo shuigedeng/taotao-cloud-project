@@ -21,7 +21,7 @@ public interface Compress {
 	 * The Data compress.
 	 *
 	 * @param data
-	 * @return
+	 * @return 字节数组
 	 * @throws IOException
 	 */
 	byte[] compress(byte[] data) throws IOException;
@@ -30,7 +30,7 @@ public interface Compress {
 	 * The Data uncompress.
 	 *
 	 * @param data
-	 * @return
+	 * @return 字节数组
 	 * @throws IOException
 	 */
 	byte[] uncompress(byte[] data) throws IOException;

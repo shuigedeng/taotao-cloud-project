@@ -38,7 +38,6 @@ public class SqlContextHolder {
 	 * setVersion
 	 *
 	 * @param sql sql
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:26
 	 */
 	public static void setSql(String sql) {
@@ -49,7 +48,6 @@ public class SqlContextHolder {
 	 * getVersion
 	 *
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:28
 	 */
 	public static String getSql() {
@@ -59,7 +57,6 @@ public class SqlContextHolder {
 	/**
 	 * clear
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:34:32
 	 */
 	public static void clear() {

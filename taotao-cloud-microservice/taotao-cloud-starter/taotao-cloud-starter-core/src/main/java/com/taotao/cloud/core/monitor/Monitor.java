@@ -220,8 +220,6 @@ public class Monitor {
 	 * @param parallelCount parallelCount
 	 * @param array         array
 	 * @param action        action
-	 * @param <T>           T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:48:09
 	 */
 	public <T> void monitorParallelFor(String taskName, int parallelCount, List<T> array,
@@ -290,8 +288,6 @@ public class Monitor {
 	 * @param parallelCount parallelCount
 	 * @param array         array
 	 * @param action        action
-	 * @param <T>           T
-	 * @author shuigedeng
 	 * @since 2021-09-02 20:48:25
 	 */
 	public <T> void monitorParallelFor2(String taskName, int parallelCount, Collection<T> array,

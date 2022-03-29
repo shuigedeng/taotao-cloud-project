@@ -58,9 +58,9 @@ public final class ClassUtil {
 	 * @param clazz 类
 	 * @return 字段列表
 	 */
-	public static List<Field> getAllFieldList(final Class clazz) {
+	public static List<Field> getAllFieldList(final Class<?> clazz) {
 		List<Field> allFieldList = new ArrayList<>();
-		Class tempClass = clazz;
+		Class<?> tempClass = clazz;
 		while (tempClass != null) {
 			allFieldList.addAll(Guavas.newArrayList(tempClass.getDeclaredFields()));
 			tempClass = tempClass.getSuperclass();
@@ -94,12 +94,8 @@ public final class ClassUtil {
 		}
 
 		// 过滤掉 final 的字段
-		return CollectionUtil.filterList(allFieldList, new IFilter<Field>() {
-			@Override
-			public boolean filter(Field field) {
-				return Modifier.isFinal(field.getModifiers());
-			}
-		});
+		return CollectionUtil.filterList(allFieldList,
+			field -> Modifier.isFinal(field.getModifiers()));
 	}
 
 	/**
@@ -110,12 +106,7 @@ public final class ClassUtil {
 	 */
 	public static Map<String, Field> getAllFieldMap(final Class clazz) {
 		List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
-		return MapUtil.toMap(fieldList, new IHandler<Field, String>() {
-			@Override
-			public String handle(Field field) {
-				return field.getName();
-			}
-		});
+		return MapUtil.toMap(fieldList, Field::getName);
 	}
 
 

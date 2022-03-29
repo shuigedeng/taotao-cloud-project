@@ -27,7 +27,7 @@ package com.taotao.cloud.common.constant;
 /**
  * 校验器模块的常量
  */
-public class ValidatorConstants {
+public final class ValidatorConstants {
 
     /**
      * 校验器模块的名称

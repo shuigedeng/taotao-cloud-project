@@ -7,11 +7,18 @@ import java.util.ServiceLoader;
 
 /**
  * The Data Serializer Factory.
+ * @author dengtao
  */
 public enum SerializerFactory {
 
+	/**
+	 * 序列化
+	 */
 	SF;
 
+	/**
+	 * 序列化map
+	 */
 	Map<String, Serializer> serializerMap = new HashMap<>();
 
 	SerializerFactory() {

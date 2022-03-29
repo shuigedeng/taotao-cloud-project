@@ -22,7 +22,7 @@ package com.taotao.cloud.common.constant;
  * @version 2021.9
  * @since 2021-09-02 19:35:46
  */
-public class RedisConstant {
+public final class RedisConstant {
 
 	/**
 	 * 用户退出时JWT标识KEY

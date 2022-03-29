@@ -22,7 +22,7 @@ package com.taotao.cloud.common.constant;
  * @version 2021.9
  * @since 2021-09-02 19:39:05
  */
-public class StrPool {
+public final class StrPool {
 
 	private StrPool() {
 	}
