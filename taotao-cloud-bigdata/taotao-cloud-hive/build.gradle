@@ -1,7 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
@@ -13,10 +12,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-    implementation 'org.apache.hadoop:hadoop-common:3.3.0'
-    implementation 'org.apache.hadoop:hadoop-mapreduce-client-core:3.3.0'
-    implementation 'org.apache.hadoop:hadoop-mapreduce-client-common:3.3.0'
-    implementation 'org.apache.hadoop:hadoop-hdfs:3.3.0'
+    implementation 'org.apache.hadoop:hadoop-common:3.3.1'
+    implementation 'org.apache.hadoop:hadoop-mapreduce-client-core:3.3.1'
+    implementation 'org.apache.hadoop:hadoop-mapreduce-client-common:3.3.1'
+    implementation 'org.apache.hadoop:hadoop-hdfs:3.3.1'
 
     implementation 'org.apache.hive:hive-exec:3.1.2'
     implementation 'org.apache.hive:hive-service:3.1.2'
