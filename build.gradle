@@ -18,65 +18,112 @@ buildscript {
         taotaoCloudVersion = version
         taotaoCloudGroup = "io.github.shuigedeng"
 
-        springVersion = '5.3.15'
+        //https://search.maven.org/artifact/org.springframework/spring
+        springVersion = '5.3.17'
+        //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
         springBootVersion = '2.6.5'
+        //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
         springCloudVersion = '2021.0.1'
+        //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
         springCloudAlibabaVersion = '2021.1'
 
-        springSecurityVersion = '5.4.5'
-        springDataCommonsVersion = '2.4.5'
-        springKafkaVersion = '2.6.5'
+        //https://search.maven.org/artifact/org.springframework.security/spring-security-core
+        springSecurityVersion = '5.6.2'
+        //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
+        springDataCommonsVersion = '2.6.3'
+        //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
+        springKafkaVersion = '2.8.4'
 
-        fasterxmlVersion = '2.13.1'
-        transmittableVersion = '2.12.1'
-        slf4jVersion = '1.7.30'
-        easypoiVersion = '4.3.0'
-        aspectjweaverVersion = '1.9.6'
-        reactorVersion = '3.4.3'
+        //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
+        fasterxmlVersion = '2.13.2.2'
+        //https://search.maven.org/artifact/com.alibaba/transmittable-thread-local
+        transmittableVersion = '2.12.6'
+        //https://search.maven.org/artifact/org.slf4j/slf4j-api
+        slf4jVersion = '1.7.36'
+        //https://search.maven.org/artifact/cn.afterturn/easypoi-base
+        easypoiVersion = '4.4.0'
+        //https://search.maven.org/artifact/org.aspectj/aspectjweaver
+        aspectjweaverVersion = '1.9.9'
+        //https://search.maven.org/artifact/io.projectreactor/reactor-core
+        reactorVersion = '3.4.16'
+        //https://search.maven.org/artifact/javax.servlet/javax.servlet-api
         servletApiVersion = '4.0.1'
+        //https://search.maven.org/artifact/com.nepxion/banner
         bannerVersion = "1.0.2"
-        javassistVersion = '3.27.0-GA'
+        //https://search.maven.org/artifact/org.javassist/javassist
+        javassistVersion = '3.28.0-GA'
+        //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
         easyCaptchaVersion = '1.6.2'
-        hutoolVersion = '5.5.9'
+        //https://search.maven.org/artifact/cn.hutool/hutool-all
+        hutoolVersion = '5.7.22'
+        //https://search.maven.org/artifact/javax.validation/validation-api
         validationApiVersion = '2.0.1.Final'
-        querydslVersion = '4.4.0'
+        //https://search.maven.org/artifact/com.querydsl/querydsl-apt
+        querydslVersion = '5.0.0'
+        //https://search.maven.org/artifact/p6spy/p6spy
         p6spyVersion = '3.9.1'
-        mysqlVersion = '8.0.20'
-        mybatisPlusStarterVersion = '3.4.2'
-        upyunJavaSdkVersion = '4.2.1'
-        aliyunSdkOssVersion = '3.11.3'
-        qiniuJavaSdkVersion = '7.4.0'
-        gsonVersion = '2.8.6'
-        guavaVersion = '31.0.1-jre'
-        okhttpVersion = '4.9.0'
-        okioVersion = '2.10.0'
+        //https://search.maven.org/artifact/mysql/mysql-connector-java
+        mysqlVersion = '8.0.28'
+        //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
+        mybatisPlusStarterVersion = '3.5.1'
+        //https://search.maven.org/artifact/com.upyun/java-sdk
+        upyunJavaSdkVersion = '4.2.3'
+        //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
+        aliyunSdkOssVersion = '3.14.0'
+        //https://search.maven.org/artifact/com.qiniu/qiniu-java-sdk
+        qiniuJavaSdkVersion = '7.9.5'
+        //https://search.maven.org/artifact/com.google.code.gson/gson
+        gsonVersion = '2.9.0'
+        //https://search.maven.org/artifact/com.google.guava/guava
+        guavaVersion = '31.1-jre'
+        //https://search.maven.org/artifact/com.squareup.okhttp3/okhttp
+        okhttpVersion = '4.9.3'
+        //https://search.maven.org/artifact/com.squareup.okio/okio
+        okioVersion = '3.0.0'
+        //https://search.maven.org/artifact/com.github.tobato/fastdfs-client
         fastdfsClientVersion = '1.27.2'
-        commonsNetVersion = '3.7.2'
-        feignOkhttpVersion = '11.0'
+        //https://search.maven.org/artifact/commons-net/commons-net
+        commonsNetVersion = '3.8.0'
+        //https://search.maven.org/artifact/io.github.openfeign/feign-okhttp
+        feignOkhttpVersion = '11.8'
+        //https://search.maven.org/artifact/org.apache.httpcomponents/httpclient
         httpcomponentsVersion = '4.5.13'
+        //https://search.maven.org/artifact/com.github.danielwegener/logback-kafka-appender
         logbackKafkaAppenderVersion = '0.2.0-RC2'
-        logstashLogbackEncoderVersion = '6.6'
-        commonsVersion = '3.11'
+        //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
+        logstashLogbackEncoderVersion = '7.0.1'
+        //https://search.maven.org/artifact/org.apache.commons/commons-lang3
+        commonsVersion = '3.12.0'
+        //https://search.maven.org/artifact/commons-io/commons-io
         commonsIoVersion = '2.11.0'
-        commonsLang3Version = '3.12.0'
+        //https://search.maven.org/artifact/commons-collections/commons-collections
         commonsCollectionsVersion = '3.2.2'
+        //https://search.maven.org/artifact/org.apache.commons/commons-collections4
         commonsCollections4Version = '4.4'
-        lettuceVersion = '6.0.2.RELEASE'
-        redissonVersion = "3.15.0"
-        seataVersion = "1.4.1"
+        //https://search.maven.org/artifact/io.lettuce/lettuce-core
+        lettuceVersion = '6.1.8.RELEASE'
+        //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
+        redissonVersion = "3.17.0"
+        //https://search.maven.org/artifact/io.seata/seata-all
+        seataVersion = "1.4.2"
+        //https://search.maven.org/artifact/org.apache.shardingsphere/sharding-jdbc-spring-namespace
         shardingsphereVersion = "4.1.1"
 
+        //https://search.maven.org/artifact/io.springfox/springfox-swagger2
         swaggerVersion = '3.0.0'
-        swaggerUiVersion = '1.8.7'
-        swaggerModelsVersion = '1.6.2'
-        swaggerButlerVersion = '2.0.1'
-        swaggerBootstrapUiVersion = '1.9.6'
-        knife4jVersion = '3.0.2'
+        //https://search.maven.org/artifact/io.swagger.core.v3/swagger-models
+        swaggerModelsVersion = '2.1.13'
+        //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-spring-ui
+        knife4jVersion = '3.0.3'
 
+        //https://search.maven.org/artifact/com.github.qcloudsms/qcloudsms
         qcloudsmsVersion = '1.0.6'
+        //https://search.maven.org/artifact/eu.bitwalker/UserAgentUtils
         userAgentUtilsVersion = '1.21'
+        //https://search.maven.org/artifact/com.xuxueli/xxl-job-core
         xxlJobVersion = '2.3.0'
-        mapstructVersion = "1.4.1.Final"
+        //https://search.maven.org/artifact/org.mapstruct/mapstruct
+        mapstructVersion = "1.4.2.Final"
 
         //如果url不指定的话
         //Mac默认：url = https://index.docker.io/v1/
