@@ -35,8 +35,6 @@ public class DingtalkAlert implements Alerter {
 
 	private final Properties properties;
 
-
-
 	public static final String DINGTALK_SERVER_URL = "https://oapi.dingtalk.com/robot/send?access_token=";
 
 	public DingtalkAlert(Properties properties) {

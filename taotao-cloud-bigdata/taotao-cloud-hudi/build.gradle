@@ -2,22 +2,20 @@ apply plugin: 'scala'
 //import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 
 dependencies {
-    implementation "com.alibaba:fastjson:1.2.3"
+    implementation "com.alibaba:fastjson:1.2.80"
 
-    implementation("org.apache.spark:spark-core_2.12:3.1.1")
-    implementation("org.apache.spark:spark-catalyst_2.12:3.1.1")
-    implementation("org.apache.spark:spark-graphx_2.12:3.1.1")
-
-    implementation("org.apache.spark:spark-sql_2.12:3.1.1"){
+    implementation("org.apache.spark:spark-core_2.12:3.2.1")
+    implementation("org.apache.spark:spark-catalyst_2.12:3.2.1")
+    implementation("org.apache.spark:spark-graphx_2.12:3.2.1")
+    implementation("org.apache.spark:spark-sql_2.12:3.2.1"){
         exclude group: 'org.codehaus.janino', module: 'janino'
     }
-
-    implementation("org.apache.spark:spark-streaming_2.12:3.1.1")
-    implementation("org.apache.spark:spark-mllib_2.12:3.1.1")
-    implementation("org.apache.spark:spark-hive_2.12:3.1.1")
-    implementation("org.apache.spark:spark-avro_2.12:3.1.1")
-    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.12:3.1.1")
-    implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1")
+    implementation("org.apache.spark:spark-streaming_2.12:3.2.1")
+    implementation("org.apache.spark:spark-mllib_2.12:3.2.1")
+    implementation("org.apache.spark:spark-hive_2.12:3.2.1")
+    implementation("org.apache.spark:spark-avro_2.12:3.2.1")
+    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.1")
+    implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1")
 
     implementation group: 'org.elasticsearch', name: 'elasticsearch-spark-30_2.12', version: '7.13.0'
 
@@ -26,32 +24,32 @@ dependencies {
 //    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.8.0")
     implementation("org.apache.hudi:hudi-spark-bundle_2.12:0.10.1")
 
-    implementation('org.apache.hadoop:hadoop-common:3.3.0')
-    implementation('org.apache.hadoop:hadoop-client:3.3.0')
-    implementation('org.apache.hadoop:hadoop-hdfs:3.3.0')
+    implementation('org.apache.hadoop:hadoop-common:3.3.1')
+    implementation('org.apache.hadoop:hadoop-client:3.3.1')
+    implementation('org.apache.hadoop:hadoop-hdfs:3.3.1')
 
-    implementation('org.apache.hive:hive-common:2.3.7')
-    implementation('org.apache.hive:hive-metastore:2.3.7'){
+    implementation('org.apache.hive:hive-common:3.1.2')
+    implementation('org.apache.hive:hive-metastore:3.1.2'){
         exclude group: 'ch.qos.logback', module: 'logback-core'
         exclude group: 'ch.qos.logback', module: 'logback-classic'
         exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
     }
-    implementation('org.apache.hive:hive-jdbc:2.3.7'){
+    implementation('org.apache.hive:hive-jdbc:3.1.2'){
         exclude group: 'org.eclipse.jetty.aggregate', module: '*'
         exclude group: 'com.google.guava', module: 'guava'
     }
 
     implementation("mysql:mysql-connector-java")
-    implementation("commons-codec:commons-codec:1.6")
+    implementation("commons-codec:commons-codec:1.15")
 
-    implementation('com.github.scopt:scopt_2.12:4.0.0-RC2') {
+    implementation('com.github.scopt:scopt_2.12:4.0.1') {
         exclude group: 'org.scala-lang', module: 'scala-library'
         exclude group: 'com.google.guava', module: 'guava'
     }
 
     implementation('com.google.guava:guava')
 
-    implementation 'org.codehaus.janino:janino:3.0.8'
+    implementation 'org.codehaus.janino:janino:3.1.6'
 }
 
 configurations {
