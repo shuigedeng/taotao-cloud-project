@@ -7,17 +7,14 @@ public class MongoQueryParam {
 	/**
 	 * 连接名称
 	 */
-	@NotNull
 	private String connName;
 	/**
 	 * 数据库名
 	 */
-	@NotNull
 	private String databaseName;
 	/**
 	 * 集合名称
 	 */
-	@NotNull
 	private String collectionName;
 	/**
 	 * filter json

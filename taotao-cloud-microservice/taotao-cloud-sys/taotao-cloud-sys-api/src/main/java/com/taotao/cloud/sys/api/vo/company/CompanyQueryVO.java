@@ -107,8 +107,7 @@ public record CompanyQueryVO(
 	 * 公司类型
 	 */
 	@Schema(description = "公司类型")
-	byte type
-) implements Serializable {
+	byte type) implements Serializable {
 
 	@Serial
 	static final long serialVersionUID = 5126530068827085130L;

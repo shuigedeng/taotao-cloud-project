@@ -33,18 +33,19 @@ import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.jpa.repository.support.QuerydslJpaPredicateExecutor;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.querydsl.SimpleEntityPathResolver;
-import org.springframework.data.repository.support.PageableExecutionUtils;
+import org.springframework.data.support.PageableExecutionUtils;
 
 /**
  * 基础jpa Repository
  *
- * @param <T>  the type of the entity to handle
+ * @param <T> the type of the entity to handle
  * @param <I> the type of the entity's identifier
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-04 07:32:26
  */
-public abstract class JpaSuperRepository<T, I extends Serializable> extends SimpleJpaRepository<T, I> {
+public abstract class JpaSuperRepository<T, I extends Serializable> extends
+	SimpleJpaRepository<T, I> {
 
 	protected final JPAQueryFactory jpaQueryFactory;
 	protected final QuerydslJpaPredicateExecutor<T> jpaPredicateExecutor;
@@ -78,20 +79,22 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 		countQuery.where(predicate);
 		JPQLQuery<T> query = querydsl.applyPagination(pageable, countQuery);
 		query.orderBy(orders);
-		return PageableExecutionUtils.getPage(query.fetch(), pageable, countQuery::fetchCount);
+		return PageableExecutionUtils.getPage(query.fetch(), pageable,
+			() -> countQuery.fetch().size());
 	}
 
 	/**
 	 * count
 	 *
 	 * @param predicate predicate
-	 * @return {@link Long }
+	 * @return 条数
 	 * @since 2021-10-09 20:30:31
 	 */
-	public Long count(Predicate predicate) {
+	public int count(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
-			.fetchCount();
+			.fetch()
+			.size();
 	}
 
 	/**
@@ -135,13 +138,14 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends Simp
 	 * fetchCount
 	 *
 	 * @param predicate predicate
-	 * @return {@link Long }
+	 * @return 条数
 	 * @since 2021-10-09 20:31:11
 	 */
-	public Long fetchCount(Predicate predicate) {
+	public int fetchCount(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
-			.fetchCount();
+			.fetch()
+			.size();
 	}
 
 	/**

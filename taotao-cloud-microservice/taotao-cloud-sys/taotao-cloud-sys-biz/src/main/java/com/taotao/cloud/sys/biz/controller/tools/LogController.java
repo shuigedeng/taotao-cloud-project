@@ -49,7 +49,7 @@ public class LogController {
 	public void download(HttpServletResponse response, LogQueryCriteria criteria)
 		throws IOException {
 		criteria.setLogType("INFO");
-		logService.download(ILogService.queryAll(criteria), response);
+		logService.download(logService.queryAll(criteria), response);
 	}
 
 	@Operation(summary = "导出错误数据", description = "导出错误数据", method = CommonConstant.GET)
@@ -59,7 +59,7 @@ public class LogController {
 	public void errorDownload(HttpServletResponse response, LogQueryCriteria criteria)
 		throws IOException {
 		criteria.setLogType("ERROR");
-		logService.download(ILogService.queryAll(criteria), response);
+		logService.download(logService.queryAll(criteria), response);
 	}
 
 	@Operation(summary = "日志查询", description = "日志查询", method = CommonConstant.GET)

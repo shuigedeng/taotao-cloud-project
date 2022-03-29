@@ -112,19 +112,19 @@ public class TreeUtil {
 		MenuTreeVO node;
 		for (MenuBO menu : menus) {
 			node = MenuTreeVO.builder()
-				.id(menu.id())
-				.parentId(menu.parentId())
 				.name(menu.name())
 				.type(menu.type())
 				.sort(menu.sortNum())
-				.children(new ArrayList<>())
 				.keepAlive(menu.keepAlive())
-				.hasChildren(false)
 				.path(menu.path())
 				.perms(menu.perms())
 				.label(menu.name())
 				.icon(menu.icon())
 				.build();
+			node.setId(menu.id());
+			node.setParentId(menu.parentId());
+			node.setChildren(new ArrayList<>());
+			node.setHasChildren(false);
 
 			trees.add(node);
 		}

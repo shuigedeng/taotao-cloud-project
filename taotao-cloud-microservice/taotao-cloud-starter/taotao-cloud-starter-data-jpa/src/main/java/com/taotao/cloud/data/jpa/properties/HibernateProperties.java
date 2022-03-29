@@ -18,6 +18,7 @@ package com.taotao.cloud.data.jpa.properties;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.MultiTenancyStrategy;
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
@@ -52,7 +53,7 @@ public class HibernateProperties {
 	private boolean formatSql = true;
 	private boolean highlightSql = true;
 	private String implicitNamingStrategy = SpringImplicitNamingStrategy.class.getName();
-	private String physicalNamingStrategy = SpringPhysicalNamingStrategy.class.getName();
+	private String physicalNamingStrategy = CamelCaseToUnderscoresNamingStrategy.class.getName();
 	private String dialect = MySQL8Dialect.class.getName();
 	private String timeZone = "Asia/Shanghai";
 	private String statementInspector = "com.taotao.cloud.data.jpa.listener.HibernateInspector";

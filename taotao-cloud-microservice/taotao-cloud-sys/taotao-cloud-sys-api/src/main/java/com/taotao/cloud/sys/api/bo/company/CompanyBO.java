@@ -96,5 +96,4 @@ public record CompanyBO(
 
 	static final long serialVersionUID = 5126530068827085130L;
 
-
 }

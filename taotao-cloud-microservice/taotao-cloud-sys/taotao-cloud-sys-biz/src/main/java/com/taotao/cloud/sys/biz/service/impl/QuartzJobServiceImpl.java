@@ -123,13 +123,13 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		QuartzJobModel jobModel = new QuartzJobModel();
 		BeanUtil.copyProperties(quartzJob, jobModel);
 
-		if (quartzJob.getPause()) {
+		if (quartzJob.getIsPause()) {
 			quartzManager.resumeJob(jobModel);
 		} else {
 			quartzManager.pauseJob(jobModel);
 		}
 
-		quartzJob.setPause(!quartzJob.getPause());
+		quartzJob.setIsPause(!quartzJob.getIsPause());
 		this.saveOrUpdate(quartzJob);
 	}
 

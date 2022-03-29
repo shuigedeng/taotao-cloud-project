@@ -40,8 +40,8 @@ public interface MenuMapStruct {
 
 	List<MenuQueryBO> entitysToQueryBOs(List<Menu> menus);
 
-	List<MenuBO> menusToBos(List<Menu> menus);
-
-	List<MenuQueryVO> menuBosToVos(List<MenuBO> bos);
+	//List<MenuBO> menusToBos(List<Menu> menus);
+	//
+	//List<MenuQueryVO> menuBosToVos(List<MenuBO> bos);
 
 }
