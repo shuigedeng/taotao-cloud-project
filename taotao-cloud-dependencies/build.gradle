@@ -20,7 +20,6 @@ dependencies {
 
         api "commons-collections:commons-collections:${commonsCollectionsVersion}"
         api "commons-io:commons-io:${commonsIoVersion}"
-        api "commons-lang:commons-lang3:${commonsLang3Version}"
         api "commons-net:commons-net:${commonsNetVersion}"
 
         api "com.fasterxml.jackson.core:jackson-databind:${fasterxmlVersion}"
@@ -78,7 +77,7 @@ dependencies {
         api "com.xuxueli:xxl-job-core:${xxlJobVersion}"
         api "io.github.openfeign:feign-okhttp:${feignOkhttpVersion}"
 
-        api "io.swagger.core.v3:swagger-models:2.1.7"
+        api "io.swagger.core.v3:swagger-models:${swaggerModelsVersion}"
         api "io.springfox:springfox-swagger2:${swaggerVersion}"
         api "io.springfox:springfox-swagger-ui:${swaggerVersion}"
         api "io.springfox:springfox-bean-validators:${swaggerVersion}"
