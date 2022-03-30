@@ -294,6 +294,7 @@ public final class PathUtil {
 	 * @return 路径
 	 * @deprecated (因为结果具有不确定性)
 	 */
+	@Deprecated
 	public static String getPath() {
 		return System.getProperty("user.dir");
 	}

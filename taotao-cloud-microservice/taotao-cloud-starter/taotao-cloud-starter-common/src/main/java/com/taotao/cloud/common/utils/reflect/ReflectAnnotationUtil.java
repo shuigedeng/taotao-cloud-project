@@ -127,7 +127,8 @@ public final class ReflectAnnotationUtil {
      * @param annotationClass 指定注解类型
      * @return 结果
      */
-    public static Optional<Annotation> getAnnotation(final Class clazz, final Class<? extends Annotation> annotationClass) {
+    @SuppressWarnings("unchecked")
+    public static Optional<Annotation> getAnnotation(final Class<?> clazz, final Class<? extends Annotation> annotationClass) {
         ArgUtil.notNull(clazz, "clazz");
         ArgUtil.notNull(annotationClass, "annotationClass");
 

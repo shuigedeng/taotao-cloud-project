@@ -67,6 +67,7 @@ public class Pinyin implements IPinyin {
         return false;
     }
 
+	@Deprecated
     @Override
     public List<Integer> toneNumList(String chinese, IPinyinContext context) {
         // 获取拼音结果
@@ -75,6 +76,7 @@ public class Pinyin implements IPinyin {
         return this.buildToneNumList(pinyinList, context.tone());
     }
 
+	@Deprecated
     @Override
     public List<Integer> toneNumList(char chinese, IPinyinContext context) {
         List<String> pinyinList = toPinyinList(chinese, context);
@@ -82,26 +84,18 @@ public class Pinyin implements IPinyin {
         return this.buildToneNumList(pinyinList, context.tone());
     }
 
+	@Deprecated
     @Override
     public List<String> shengMuList(String chinese, IPinyinContext context) {
         final IPinyinData pinyinData = context.data();
-        return normalPinyinHandler(chinese, context, new IHandler<String, String>() {
-            @Override
-            public String handle(String s) {
-                return pinyinData.shengMu(s);
-            }
-        });
+        return normalPinyinHandler(chinese, context, pinyinData::shengMu);
     }
 
+	@Deprecated
     @Override
     public List<String> yunMuList(String chinese, IPinyinContext context) {
         final IPinyinData pinyinData = context.data();
-        return normalPinyinHandler(chinese, context, new IHandler<String, String>() {
-            @Override
-            public String handle(String s) {
-                return pinyinData.yunMu(s);
-            }
-        });
+        return normalPinyinHandler(chinese, context, pinyinData::yunMu);
     }
 
     @Override

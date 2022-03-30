@@ -204,6 +204,7 @@ public final class ArrayUtil {
      * @param <R> 泛型
      * @return 结果
      */
+    @SuppressWarnings("unchecked")
     public static <R> R[] listToArray(final List<R> list) {
         //1. 判断是否为空
         final Class elemClass = ClassGenericUtil.getGenericClass(list);
@@ -223,6 +224,7 @@ public final class ArrayUtil {
      * @param <E> 泛型原型
      * @return 列表
      */
+    @SafeVarargs
     public static <E> List<E> arrayToList(final E... array) {
         if(ArrayUtil.isEmpty(array)) {
             return Guavas.newArrayList();

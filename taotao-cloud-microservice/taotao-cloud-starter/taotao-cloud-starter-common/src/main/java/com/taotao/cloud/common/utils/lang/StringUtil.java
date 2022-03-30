@@ -495,21 +495,19 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param object 对象
 	 * @return 是否为空
 	 */
+	@SuppressWarnings("unchecked")
 	public static boolean isEmpty(Object object) {
 		if (isNull(object)) {
 			return true;
 		}
 
-		if (object instanceof String) {
-			String string = (String) object;
+		if (object instanceof String string) {
 			return isEmpty(string);
 		}
-		if (object instanceof Collection) {
-			Collection collection = (Collection) object;
+		if (object instanceof Collection collection) {
 			return CollectionUtil.isEmpty(collection);
 		}
-		if (object instanceof Map) {
-			Map map = (Map) object;
+		if (object instanceof Map map) {
 			return MapUtil.isEmpty(map);
 		}
 		if (object.getClass().isArray()) {

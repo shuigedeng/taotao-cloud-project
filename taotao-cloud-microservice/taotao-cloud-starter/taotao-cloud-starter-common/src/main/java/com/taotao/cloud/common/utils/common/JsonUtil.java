@@ -108,7 +108,7 @@ public class JsonUtil {
 		// 使用驼峰式
 		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE);
 		// 使用bean名称
-		MAPPER.enable(MapperFeature.USE_STD_BEAN_NAMING);
+		//MAPPER.enable(MapperFeature.USE_STD_BEAN_NAMING);
 		// 所有日期格式都统一为固定格式
 		MAPPER.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
 		MAPPER.registerModule(new Jdk8Module());
@@ -164,6 +164,7 @@ public class JsonUtil {
 	 * @return T
 	 * @since 2021-09-02 16:38:13
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T toObject(String json, Class<T> cls) {
 		if (StrUtil.isBlank(json) || cls == null) {
 			return null;
@@ -241,6 +242,7 @@ public class JsonUtil {
 	 * @return {@link java.util.Map }
 	 * @since 2021-09-02 16:39:09
 	 */
+	@SuppressWarnings("unchecked")
 	public static <K, V> Map<K, V> toMap(Object object) {
 		if (object == null) {
 			return null;
@@ -258,6 +260,7 @@ public class JsonUtil {
 	 * @return {@link java.util.List }
 	 * @since 2021-09-02 16:39:18
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> List<T> toList(String json) {
 		if (StrUtil.isNotBlank(json)) {
 			try {

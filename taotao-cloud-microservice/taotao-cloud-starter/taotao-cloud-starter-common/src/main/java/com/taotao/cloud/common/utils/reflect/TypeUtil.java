@@ -113,7 +113,7 @@ public final class TypeUtil {
 		}
 
 		try {
-			return (Map<Object, Object>) clazz.newInstance();
+			return (Map<Object, Object>) clazz.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			throw new CommonRuntimeException(e);
 		}
@@ -172,7 +172,7 @@ public final class TypeUtil {
 			list = new LinkedList();
 		} else {
 			try {
-				list = (Collection) rawClass.newInstance();
+				list = (Collection) rawClass.getDeclaredConstructor().newInstance();
 			} catch (Exception e) {
 				throw new CommonRuntimeException(e);
 			}
