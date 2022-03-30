@@ -65,6 +65,7 @@ configurations {
         }
 
         exclude group: "xml-apis", module: "xml-apis"
+        exclude group: "org.apache.avro", module: "avro-mapred"
         exclude group: "xerces", module: "xercesImpl"
         exclude group: "ch.qos.logback", module: "logback-core"
         exclude group: "ch.qos.logback", module: "logback-classic"
