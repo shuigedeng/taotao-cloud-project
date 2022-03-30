@@ -50,6 +50,7 @@ public final class Guavas {
 	 * @param elems 元素数组
 	 * @return 链表
 	 */
+	@SuppressWarnings("unchecked")
 	public static <E> List<E> newArrayList(E... elems) {
 		if (ArrayUtil.isEmpty(elems)) {
 			return new ArrayList<>();

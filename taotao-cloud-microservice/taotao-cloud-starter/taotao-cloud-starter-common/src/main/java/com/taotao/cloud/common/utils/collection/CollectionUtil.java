@@ -113,6 +113,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param clazz 数组类
 	 * @return 新数组
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T[] concat(T[] one, T[] other, Class<T> clazz) {
 		T[] target = (T[]) Array.newInstance(clazz, one.length + other.length);
 		System.arraycopy(one, 0, target, 0, one.length);
@@ -174,6 +175,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param <V>        value
 	 * @return map 集合
 	 */
+	@SuppressWarnings("unchecked")
 	public static <K, V> Map<K, V> toMap(Object... keysValues) {
 		int kvLength = keysValues.length;
 		if (kvLength % 2 != 0) {
@@ -740,6 +742,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param collection 集合
 	 * @return {@link ArrayList}
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T extends Comparable> List<T> sort(List<T> collection) {
 		if (isEmpty(collection)) {
 			return Collections.emptyList();
@@ -1023,6 +1026,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @param <T> 泛型
 	 * @return 空列表
 	 */
+	@SafeVarargs
 	public static <T> List<T> list(T... ts) {
 		return new ArrayList<>(Arrays.asList(ts));
 	}

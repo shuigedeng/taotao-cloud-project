@@ -26,6 +26,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.util.strategy.SensitiveStr
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -179,10 +180,10 @@ public class SensitiveService<T> implements ISensitive<T> {
             Sensitive sensitive = field.getAnnotation(Sensitive.class);
             if (ObjectUtil.isNotNull(sensitive)) {
                 Class<? extends ICondition> conditionClass = sensitive.condition();
-                ICondition condition = conditionClass.newInstance();
+                ICondition condition = conditionClass.getDeclaredConstructor().newInstance();
                 if (condition.valid(context)) {
                     Class<? extends IStrategy> strategyClass = sensitive.strategy();
-                    IStrategy strategy = strategyClass.newInstance();
+                    IStrategy strategy = strategyClass.getDeclaredConstructor().newInstance();
                     return strategy.des(entry, context);
                 }
             }
@@ -202,6 +203,8 @@ public class SensitiveService<T> implements ISensitive<T> {
             return entry;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new SensitiveRuntimeException(e);
+        } catch (InvocationTargetException | NoSuchMethodException e) {
+	        e.printStackTrace();
         }
     }
 
@@ -212,7 +215,6 @@ public class SensitiveService<T> implements ISensitive<T> {
      * @param context    上下文
      * @param copyObject 复制的对象
      * @param field      当前字段
-     * @since 0.0.2
      */
     private void handleSensitive(final SensitiveContext context,
                                  final Object copyObject,
@@ -222,10 +224,10 @@ public class SensitiveService<T> implements ISensitive<T> {
             Sensitive sensitive = field.getAnnotation(Sensitive.class);
             if (sensitive != null) {
                 Class<? extends ICondition> conditionClass = sensitive.condition();
-                ICondition condition = conditionClass.newInstance();
+                ICondition condition = conditionClass.getDeclaredConstructor().newInstance();
                 if (condition.valid(context)) {
                     Class<? extends IStrategy> strategyClass = sensitive.strategy();
-                    IStrategy strategy = strategyClass.newInstance();
+                    IStrategy strategy = strategyClass.getDeclaredConstructor().newInstance();
                     final Object originalFieldVal = field.get(copyObject);
                     final Object result = strategy.des(originalFieldVal, context);
                     field.set(copyObject, result);
@@ -248,6 +250,10 @@ public class SensitiveService<T> implements ISensitive<T> {
             }
         } catch (InstantiationException | IllegalAccessException e) {
             throw new SensitiveRuntimeException(e);
+        } catch (InvocationTargetException e) {
+	        e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+	        e.printStackTrace();
         }
     }
 

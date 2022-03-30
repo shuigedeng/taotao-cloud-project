@@ -47,6 +47,7 @@ public class DefaultContextValueFilter implements ContextValueFilter {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object process(BeanContext context, Object object, String name, Object value) {
         // 对象为 MAP 的时候，FastJson map 对应的 context 为 NULL
         if(ObjectUtil.isNull(context)) {
