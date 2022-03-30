@@ -35,7 +35,9 @@ buildscript {
         springKafkaVersion = '2.8.4'
 
         //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
-        fasterxmlVersion = '2.13.2.2'
+        fasterxmlVersion = '2.13.2'
+        //https://search.maven.org/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+        jacksonDatatypeJsr310Version = '2.13.2'
         //https://search.maven.org/artifact/com.alibaba/transmittable-thread-local
         transmittableVersion = '2.12.6'
         //https://search.maven.org/artifact/org.slf4j/slf4j-api
@@ -200,6 +202,10 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+
+        maven {
+            url "https://repo1.maven.org/maven2"
+        }
 
         maven {
             allowInsecureProtocol = true

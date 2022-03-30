@@ -23,7 +23,7 @@ dependencies {
         api "commons-net:commons-net:${commonsNetVersion}"
 
         api "com.fasterxml.jackson.core:jackson-databind:${fasterxmlVersion}"
-        api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${fasterxmlVersion}"
+        api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonDatatypeJsr310Version}"
 
         api "com.alibaba:transmittable-thread-local:${transmittableVersion}"
         api "com.github.danielwegener:logback-kafka-appender:${logbackKafkaAppenderVersion}"
