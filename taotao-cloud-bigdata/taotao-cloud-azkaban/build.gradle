@@ -15,6 +15,6 @@ dependencies {
 //    需要自行安装到本地
 //    implementation "com.dingtalk:dingtalk-api:1.0.0"
 
-    implementation fileTree(dir: "src/main/resource/lib", includes: ["*.jar"])
+    implementation fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
     implementation "com.linkedin.azkaban:azkaban:2.5.0"
 }
