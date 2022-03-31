@@ -33,4 +33,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FileVO {
 
+	private String id;
 }

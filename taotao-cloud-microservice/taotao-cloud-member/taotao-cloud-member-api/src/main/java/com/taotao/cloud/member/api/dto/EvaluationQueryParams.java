@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 评价查询条件
@@ -18,7 +20,8 @@ import lombok.NoArgsConstructor;
  * @version 2022.03
  * @since 2022-03-14 11:22:15
  */
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,10 +62,6 @@ public class EvaluationQueryParams extends PageParam implements Serializable {
 
 	@Schema(description = "状态")
 	private String status;
-
-	public EvaluationQueryParams() {
-
-	}
 
 	/**
 	 * 构造查询条件

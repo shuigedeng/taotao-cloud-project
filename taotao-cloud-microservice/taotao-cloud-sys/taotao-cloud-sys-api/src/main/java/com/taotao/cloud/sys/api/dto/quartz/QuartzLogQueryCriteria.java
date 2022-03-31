@@ -16,4 +16,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuartzLogQueryCriteria {
+	private String id;
 }
