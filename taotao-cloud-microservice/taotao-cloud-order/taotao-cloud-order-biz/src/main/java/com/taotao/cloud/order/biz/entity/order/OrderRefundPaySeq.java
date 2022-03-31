@@ -8,6 +8,11 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 退款流水表
@@ -15,6 +20,11 @@ import javax.persistence.Table;
  * @author shuigedeng
  * @since 2020/4/30 15:46
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @TableName(OrderRefundPaySeq.TABLE_NAME)
 @Table(name = OrderRefundPaySeq.TABLE_NAME)
@@ -82,239 +92,4 @@ public class OrderRefundPaySeq  extends BaseSuperEntity<OrderRefundPaySeq,Long> 
 	 */
 	@Column(name = "create_date", columnDefinition = "TIMESTAMP comment '创建日期'")
 	private LocalDateTime createDate;
-
-	public String getRefundCode() {
-		return refundCode;
-	}
-
-	public void setRefundCode(String refundCode) {
-		this.refundCode = refundCode;
-	}
-
-	public LocalDateTime getStewardAuditDate() {
-		return stewardAuditDate;
-	}
-
-	public void setStewardAuditDate(LocalDateTime stewardAuditDate) {
-		this.stewardAuditDate = stewardAuditDate;
-	}
-
-	public String getStewardId() {
-		return stewardId;
-	}
-
-	public void setStewardId(String stewardId) {
-		this.stewardId = stewardId;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public String getWxRefundId() {
-		return wxRefundId;
-	}
-
-	public void setWxRefundId(String wxRefundId) {
-		this.wxRefundId = wxRefundId;
-	}
-
-	public String getWxRefundChanel() {
-		return wxRefundChanel;
-	}
-
-	public void setWxRefundChanel(String wxRefundChanel) {
-		this.wxRefundChanel = wxRefundChanel;
-	}
-
-	public Integer getWxRefundStatus() {
-		return wxRefundStatus;
-	}
-
-	public void setWxRefundStatus(Integer wxRefundStatus) {
-		this.wxRefundStatus = wxRefundStatus;
-	}
-
-	public String getWxRefundTarget() {
-		return wxRefundTarget;
-	}
-
-	public void setWxRefundTarget(String wxRefundTarget) {
-		this.wxRefundTarget = wxRefundTarget;
-	}
-
-	public LocalDateTime getRefundDate() {
-		return refundDate;
-	}
-
-	public void setRefundDate(LocalDateTime refundDate) {
-		this.refundDate = refundDate;
-	}
-
-	public LocalDateTime getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(LocalDateTime createDate) {
-		this.createDate = createDate;
-	}
-
-	public OrderRefundPaySeq() {
-	}
-
-	public OrderRefundPaySeq(String refundCode, LocalDateTime stewardAuditDate,
-		String stewardId, BigDecimal amount, String wxRefundId, String wxRefundChanel,
-		Integer wxRefundStatus, String wxRefundTarget, LocalDateTime refundDate,
-		LocalDateTime createDate) {
-		this.refundCode = refundCode;
-		this.stewardAuditDate = stewardAuditDate;
-		this.stewardId = stewardId;
-		this.amount = amount;
-		this.wxRefundId = wxRefundId;
-		this.wxRefundChanel = wxRefundChanel;
-		this.wxRefundStatus = wxRefundStatus;
-		this.wxRefundTarget = wxRefundTarget;
-		this.refundDate = refundDate;
-		this.createDate = createDate;
-	}
-
-	public static OrderRefundPaySeqBuilder builder() {
-		return new OrderRefundPaySeqBuilder();
-	}
-
-	public static final class OrderRefundPaySeqBuilder {
-
-		private String refundCode;
-		private LocalDateTime stewardAuditDate;
-		private String stewardId;
-		private BigDecimal amount = BigDecimal.ZERO;
-		private String wxRefundId;
-		private String wxRefundChanel;
-		private Integer wxRefundStatus;
-		private String wxRefundTarget;
-		private LocalDateTime refundDate;
-		private LocalDateTime createDate;
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-
-		private OrderRefundPaySeqBuilder() {
-		}
-
-
-		public OrderRefundPaySeqBuilder refundCode(String refundCode) {
-			this.refundCode = refundCode;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder stewardAuditDate(LocalDateTime stewardAuditDate) {
-			this.stewardAuditDate = stewardAuditDate;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder stewardId(String stewardId) {
-			this.stewardId = stewardId;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder amount(BigDecimal amount) {
-			this.amount = amount;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder wxRefundId(String wxRefundId) {
-			this.wxRefundId = wxRefundId;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder wxRefundChanel(String wxRefundChanel) {
-			this.wxRefundChanel = wxRefundChanel;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder wxRefundStatus(Integer wxRefundStatus) {
-			this.wxRefundStatus = wxRefundStatus;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder wxRefundTarget(String wxRefundTarget) {
-			this.wxRefundTarget = wxRefundTarget;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder refundDate(LocalDateTime refundDate) {
-			this.refundDate = refundDate;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder createDate(LocalDateTime createDate) {
-			this.createDate = createDate;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public OrderRefundPaySeqBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public OrderRefundPaySeq build() {
-			OrderRefundPaySeq orderRefundPaySeq = new OrderRefundPaySeq();
-			orderRefundPaySeq.setRefundCode(refundCode);
-			orderRefundPaySeq.setStewardAuditDate(stewardAuditDate);
-			orderRefundPaySeq.setStewardId(stewardId);
-			orderRefundPaySeq.setAmount(amount);
-			orderRefundPaySeq.setWxRefundId(wxRefundId);
-			orderRefundPaySeq.setWxRefundChanel(wxRefundChanel);
-			orderRefundPaySeq.setWxRefundStatus(wxRefundStatus);
-			orderRefundPaySeq.setWxRefundTarget(wxRefundTarget);
-			orderRefundPaySeq.setRefundDate(refundDate);
-			orderRefundPaySeq.setCreateDate(createDate);
-			orderRefundPaySeq.setId(id);
-			orderRefundPaySeq.setCreatedBy(createBy);
-			orderRefundPaySeq.setLastModifiedBy(lastModifiedBy);
-			orderRefundPaySeq.setCreateTime(createTime);
-			orderRefundPaySeq.setLastModifiedTime(lastModifiedTime);
-			orderRefundPaySeq.setVersion(version);
-			orderRefundPaySeq.setDelFlag(delFlag);
-			return orderRefundPaySeq;
-		}
-	}
 }

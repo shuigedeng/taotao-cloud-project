@@ -10,7 +10,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,7 +27,11 @@ import java.util.Date;
  * 
  * @since 2020/11/26 19:32
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("li_purchase_order_item")
 @ApiModel(value = "采购单子内容")
 public class PurchaseOrderItem extends BaseIdEntity {

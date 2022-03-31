@@ -7,6 +7,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品表
@@ -15,6 +20,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 17:21:04
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Goods.TABLE_NAME)
 @TableName(Goods.TABLE_NAME)
@@ -272,245 +282,4 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	//	}
 	//	return mobileIntro;
 	//}
-
-
-	public String getGoodsName() {
-		return goodsName;
-	}
-
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public String getBrandId() {
-		return brandId;
-	}
-
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
-	}
-
-	public String getCategoryPath() {
-		return categoryPath;
-	}
-
-	public void setCategoryPath(String categoryPath) {
-		this.categoryPath = categoryPath;
-	}
-
-	public String getGoodsUnit() {
-		return goodsUnit;
-	}
-
-	public void setGoodsUnit(String goodsUnit) {
-		this.goodsUnit = goodsUnit;
-	}
-
-	public String getSellingPoint() {
-		return sellingPoint;
-	}
-
-	public void setSellingPoint(String sellingPoint) {
-		this.sellingPoint = sellingPoint;
-	}
-
-	public String getMarketEnable() {
-		return marketEnable;
-	}
-
-	public void setMarketEnable(String marketEnable) {
-		this.marketEnable = marketEnable;
-	}
-
-	public String getIntro() {
-		return intro;
-	}
-
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-
-	public Integer getBuyCount() {
-		return buyCount;
-	}
-
-	public void setBuyCount(Integer buyCount) {
-		this.buyCount = buyCount;
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public BigDecimal getGrade() {
-		return grade;
-	}
-
-	public void setGrade(BigDecimal grade) {
-		this.grade = grade;
-	}
-
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
-
-	public String getSmall() {
-		return small;
-	}
-
-	public void setSmall(String small) {
-		this.small = small;
-	}
-
-	public String getOriginal() {
-		return original;
-	}
-
-	public void setOriginal(String original) {
-		this.original = original;
-	}
-
-	public String getStoreCategoryPath() {
-		return storeCategoryPath;
-	}
-
-	public void setStoreCategoryPath(String storeCategoryPath) {
-		this.storeCategoryPath = storeCategoryPath;
-	}
-
-	public Integer getCommentNum() {
-		return commentNum;
-	}
-
-	public void setCommentNum(Integer commentNum) {
-		this.commentNum = commentNum;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getTemplateId() {
-		return templateId;
-	}
-
-	public void setTemplateId(String templateId) {
-		this.templateId = templateId;
-	}
-
-	public String getIsAuth() {
-		return isAuth;
-	}
-
-	public void setIsAuth(String isAuth) {
-		this.isAuth = isAuth;
-	}
-
-	public String getAuthMessage() {
-		return authMessage;
-	}
-
-	public void setAuthMessage(String authMessage) {
-		this.authMessage = authMessage;
-	}
-
-	public String getUnderMessage() {
-		return underMessage;
-	}
-
-	public void setUnderMessage(String underMessage) {
-		this.underMessage = underMessage;
-	}
-
-	public Boolean getSelfOperated() {
-		return selfOperated;
-	}
-
-	public void setSelfOperated(Boolean selfOperated) {
-		this.selfOperated = selfOperated;
-	}
-
-	public String getMobileIntro() {
-		return mobileIntro;
-	}
-
-	public void setMobileIntro(String mobileIntro) {
-		this.mobileIntro = mobileIntro;
-	}
-
-	public String getGoodsVideo() {
-		return goodsVideo;
-	}
-
-	public void setGoodsVideo(String goodsVideo) {
-		this.goodsVideo = goodsVideo;
-	}
-
-	public Boolean getRecommend() {
-		return recommend;
-	}
-
-	public void setRecommend(Boolean recommend) {
-		this.recommend = recommend;
-	}
-
-	public String getSalesModel() {
-		return salesModel;
-	}
-
-	public void setSalesModel(String salesModel) {
-		this.salesModel = salesModel;
-	}
-
-	public Long getPosterPicId() {
-		return posterPicId;
-	}
-
-	public void setPosterPicId(Long posterPicId) {
-		this.posterPicId = posterPicId;
-	}
-
-	public String getGoodsType() {
-		return goodsType;
-	}
-
-	public void setGoodsType(String goodsType) {
-		this.goodsType = goodsType;
-	}
-
-	public String getParams() {
-		return params;
-	}
-
-	public void setParams(String params) {
-		this.params = params;
-	}
 }

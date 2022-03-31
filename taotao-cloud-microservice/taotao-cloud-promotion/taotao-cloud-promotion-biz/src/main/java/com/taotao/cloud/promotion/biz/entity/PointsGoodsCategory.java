@@ -9,17 +9,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import lombok.Setter;
 
 /**
  * 积分商品分类
  *
  * 
  **/
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = PointsGoodsCategory.TABLE_NAME)
 @TableName(PointsGoodsCategory.TABLE_NAME)

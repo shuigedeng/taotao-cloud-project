@@ -7,17 +7,27 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 拼团活动实体类
  *
  * 
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Pintuan.TABLE_NAME)
 @TableName(Pintuan.TABLE_NAME)
@@ -43,6 +53,5 @@ public class Pintuan extends BasePromotions<Pintuan, Long> {
 
     @Schema(description =  "拼团规则")
     private String pintuanRule;
-
 
 }

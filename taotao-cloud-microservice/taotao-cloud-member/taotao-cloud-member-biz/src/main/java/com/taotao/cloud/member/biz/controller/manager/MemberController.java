@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -32,14 +33,14 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since 2020-02-25 14:10:16
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/manager/member")
 @Tag(name = "管理端-会员API", description = "管理端-会员API")
 public class MemberController {
 
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 
 	@Operation(summary = "会员分页列表", description = "会员分页列表", method = CommonConstant.GET)
 	@RequestLogger(description = "会员分页列表")

@@ -7,12 +7,22 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 满优惠活动实体类
  *
  * @since 2020-03-19 10:44 上午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = FullDiscount.TABLE_NAME)
 @TableName(FullDiscount.TABLE_NAME)
@@ -63,106 +73,6 @@ public class FullDiscount extends BasePromotions<FullDiscount, Long> {
 
 	@Column(name = "description", nullable = false, columnDefinition = "varchar(64) not null comment '活动说明'")
 	private String description;
-
-	public BigDecimal getFullMoney() {
-		return fullMoney;
-	}
-
-	public void setFullMoney(BigDecimal fullMoney) {
-		this.fullMoney = fullMoney;
-	}
-
-	public Boolean getFullMinus() {
-		return isFullMinus;
-	}
-
-	public void setFullMinus(BigDecimal fullMinus) {
-		this.fullMinus = fullMinus;
-	}
-
-	public Boolean getFullRate() {
-		return isFullRate;
-	}
-
-	public void setFullRate(BigDecimal fullRate) {
-		this.fullRate = fullRate;
-	}
-
-	public Boolean getPoint() {
-		return isPoint;
-	}
-
-	public void setPoint(Integer point) {
-		this.point = point;
-	}
-
-	public Boolean getFreeFreight() {
-		return isFreeFreight;
-	}
-
-	public void setFreeFreight(Boolean freeFreight) {
-		isFreeFreight = freeFreight;
-	}
-
-	public Boolean getGift() {
-		return isGift;
-	}
-
-	public void setGift(Boolean gift) {
-		isGift = gift;
-	}
-
-	public String getGiftId() {
-		return giftId;
-	}
-
-	public void setGiftId(String giftId) {
-		this.giftId = giftId;
-	}
-
-	public Boolean getCoupon() {
-		return isCoupon;
-	}
-
-	public void setCoupon(Boolean coupon) {
-		isCoupon = coupon;
-	}
-
-	public String getCouponId() {
-		return couponId;
-	}
-
-	public void setCouponId(String couponId) {
-		this.couponId = couponId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setPoint(Boolean point) {
-		isPoint = point;
-	}
-
-	public void setFullRate(Boolean fullRate) {
-		isFullRate = fullRate;
-	}
-
-	public void setFullMinus(Boolean fullMinus) {
-		isFullMinus = fullMinus;
-	}
 
 	public Boolean getIsFullMinus() {
 	    if (isFullMinus == null) {

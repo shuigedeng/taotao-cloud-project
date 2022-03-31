@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员提现申请表
@@ -15,6 +20,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:33:20
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberWithdrawApply.TABLE_NAME)
 @TableName(MemberWithdrawApply.TABLE_NAME)
@@ -58,52 +68,4 @@ public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Lo
 	 */
 	@Column(name = "sn", nullable = false, columnDefinition = "varchar(32) not null comment 'sn'")
 	private String sn;
-
-	public BigDecimal getApplyMoney() {
-		return applyMoney;
-	}
-
-	public void setApplyMoney(BigDecimal applyMoney) {
-		this.applyMoney = applyMoney;
-	}
-
-	public String getApplyStatus() {
-		return applyStatus;
-	}
-
-	public void setApplyStatus(String applyStatus) {
-		this.applyStatus = applyStatus;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getInspectRemark() {
-		return inspectRemark;
-	}
-
-	public void setInspectRemark(String inspectRemark) {
-		this.inspectRemark = inspectRemark;
-	}
-
-	public LocalDateTime getInspectTime() {
-		return inspectTime;
-	}
-
-	public void setInspectTime(LocalDateTime inspectTime) {
-		this.inspectTime = inspectTime;
-	}
-
-	public String getSn() {
-		return sn;
-	}
-
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
 }

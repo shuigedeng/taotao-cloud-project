@@ -7,10 +7,20 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 售后日志
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = AfterSaleLog.TABLE_NAME)
 @TableName(AfterSaleLog.TABLE_NAME)
@@ -52,13 +62,4 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	@Schema(description =  "日志信息")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String message;
-
-	public AfterSaleLog(String sn, String operatorId, String operatorType, String operatorName,
-		String message) {
-		this.sn = sn;
-		this.operatorId = operatorId;
-		this.operatorType = operatorType;
-		this.operatorName = operatorName;
-		this.message = message;
-	}
 }

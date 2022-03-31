@@ -1,6 +1,5 @@
 package com.taotao.cloud.promotion.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
@@ -8,13 +7,23 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 砍价活动商品实体类
  *
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = KanjiaActivityLog.TABLE_NAME)
 @TableName(KanjiaActivityLog.TABLE_NAME)
@@ -40,6 +49,4 @@ public class KanjiaActivityLog extends BaseSuperEntity<KanjiaActivityLog, Long> 
 
     @Schema(description =  "剩余购买金额")
     private Double surplusPrice;
-
-
 }

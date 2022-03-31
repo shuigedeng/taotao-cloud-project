@@ -8,12 +8,22 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 结算单
  *
  * @since 2020/11/17 4:27 下午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Bill.TABLE_NAME)
 @TableName(Bill.TABLE_NAME)
@@ -95,180 +105,4 @@ public class Bill extends BaseSuperEntity<Bill, Long> {
 
 	@Column(name = "bill_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '最终结算金额'")
 	private BigDecimal billPrice;
-
-	public String getSn() {
-		return sn;
-	}
-
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
-
-	public LocalDateTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalDateTime startTime) {
-		this.startTime = startTime;
-	}
-
-	public LocalDateTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalDateTime endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getBillStatus() {
-		return billStatus;
-	}
-
-	public void setBillStatus(String billStatus) {
-		this.billStatus = billStatus;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public LocalDateTime getPayTime() {
-		return payTime;
-	}
-
-	public void setPayTime(LocalDateTime payTime) {
-		this.payTime = payTime;
-	}
-
-	public String getBankAccountName() {
-		return bankAccountName;
-	}
-
-	public void setBankAccountName(String bankAccountName) {
-		this.bankAccountName = bankAccountName;
-	}
-
-	public String getBankAccountNumber() {
-		return bankAccountNumber;
-	}
-
-	public void setBankAccountNumber(String bankAccountNumber) {
-		this.bankAccountNumber = bankAccountNumber;
-	}
-
-	public String getBankName() {
-		return bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
-
-	public String getBankCode() {
-		return bankCode;
-	}
-
-	public void setBankCode(String bankCode) {
-		this.bankCode = bankCode;
-	}
-
-	public BigDecimal getOrderPrice() {
-		return orderPrice;
-	}
-
-	public void setOrderPrice(BigDecimal orderPrice) {
-		this.orderPrice = orderPrice;
-	}
-
-	public BigDecimal getRefundPrice() {
-		return refundPrice;
-	}
-
-	public void setRefundPrice(BigDecimal refundPrice) {
-		this.refundPrice = refundPrice;
-	}
-
-	public BigDecimal getCommissionPrice() {
-		return commissionPrice;
-	}
-
-	public void setCommissionPrice(BigDecimal commissionPrice) {
-		this.commissionPrice = commissionPrice;
-	}
-
-	public BigDecimal getRefundCommissionPrice() {
-		return refundCommissionPrice;
-	}
-
-	public void setRefundCommissionPrice(BigDecimal refundCommissionPrice) {
-		this.refundCommissionPrice = refundCommissionPrice;
-	}
-
-	public BigDecimal getDistributionCommission() {
-		return distributionCommission;
-	}
-
-	public void setDistributionCommission(BigDecimal distributionCommission) {
-		this.distributionCommission = distributionCommission;
-	}
-
-	public BigDecimal getDistributionRefundCommission() {
-		return distributionRefundCommission;
-	}
-
-	public void setDistributionRefundCommission(BigDecimal distributionRefundCommission) {
-		this.distributionRefundCommission = distributionRefundCommission;
-	}
-
-	public BigDecimal getSiteCouponCommission() {
-		return siteCouponCommission;
-	}
-
-	public void setSiteCouponCommission(BigDecimal siteCouponCommission) {
-		this.siteCouponCommission = siteCouponCommission;
-	}
-
-	public BigDecimal getSiteCouponRefundCommission() {
-		return siteCouponRefundCommission;
-	}
-
-	public void setSiteCouponRefundCommission(BigDecimal siteCouponRefundCommission) {
-		this.siteCouponRefundCommission = siteCouponRefundCommission;
-	}
-
-	public BigDecimal getPointSettlementPrice() {
-		return pointSettlementPrice;
-	}
-
-	public void setPointSettlementPrice(BigDecimal pointSettlementPrice) {
-		this.pointSettlementPrice = pointSettlementPrice;
-	}
-
-	public BigDecimal getKanjiaSettlementPrice() {
-		return kanjiaSettlementPrice;
-	}
-
-	public void setKanjiaSettlementPrice(BigDecimal kanjiaSettlementPrice) {
-		this.kanjiaSettlementPrice = kanjiaSettlementPrice;
-	}
-
-	public BigDecimal getBillPrice() {
-		return billPrice;
-	}
-
-	public void setBillPrice(BigDecimal billPrice) {
-		this.billPrice = billPrice;
-	}
 }

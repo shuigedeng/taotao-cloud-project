@@ -6,11 +6,21 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 小程序直播商品表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Commodity.TABLE_NAME)
 @TableName(Commodity.TABLE_NAME)
@@ -94,100 +104,4 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	 */
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(64) not null comment 'skuId'")
 	private String skuId;
-
-	public String getGoodsImage() {
-		return goodsImage;
-	}
-
-	public void setGoodsImage(String goodsImage) {
-		this.goodsImage = goodsImage;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getPriceType() {
-		return priceType;
-	}
-
-	public void setPriceType(Integer priceType) {
-		this.priceType = priceType;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public BigDecimal getPrice2() {
-		return price2;
-	}
-
-	public void setPrice2(BigDecimal price2) {
-		this.price2 = price2;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Integer getLiveGoodsId() {
-		return liveGoodsId;
-	}
-
-	public void setLiveGoodsId(Integer liveGoodsId) {
-		this.liveGoodsId = liveGoodsId;
-	}
-
-	public String getAuditId() {
-		return auditId;
-	}
-
-	public void setAuditId(String auditId) {
-		this.auditId = auditId;
-	}
-
-	public String getAuditStatus() {
-		return auditStatus;
-	}
-
-	public void setAuditStatus(String auditStatus) {
-		this.auditStatus = auditStatus;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
 }

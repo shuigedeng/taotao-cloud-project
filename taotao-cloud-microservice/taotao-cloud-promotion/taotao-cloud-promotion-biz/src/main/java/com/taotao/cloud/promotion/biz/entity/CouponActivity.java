@@ -7,12 +7,22 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 优惠券活动实体类
  *
  * @since 2020-03-19 10:44 上午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = CouponActivity.TABLE_NAME)
 @TableName(CouponActivity.TABLE_NAME)
@@ -35,28 +45,4 @@ public class CouponActivity extends BasePromotions<CouponActivity, Long> {
 
 	@Column(name = "activity_scope_info", nullable = false, columnDefinition = "varchar(64) not null comment '活动范围详情,只有精准发券使用'")
 	private String activityScopeInfo;
-
-	public String getCouponActivityType() {
-		return couponActivityType;
-	}
-
-	public void setCouponActivityType(String couponActivityType) {
-		this.couponActivityType = couponActivityType;
-	}
-
-	public String getActivityScope() {
-		return activityScope;
-	}
-
-	public void setActivityScope(String activityScope) {
-		this.activityScope = activityScope;
-	}
-
-	public String getActivityScopeInfo() {
-		return activityScopeInfo;
-	}
-
-	public void setActivityScopeInfo(String activityScopeInfo) {
-		this.activityScopeInfo = activityScopeInfo;
-	}
 }

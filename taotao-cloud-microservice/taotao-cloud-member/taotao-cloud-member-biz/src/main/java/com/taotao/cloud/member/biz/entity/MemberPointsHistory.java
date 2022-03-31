@@ -7,6 +7,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员积分历史表
@@ -15,6 +20,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:26:14
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberPointsHistory.TABLE_NAME)
 @TableName(MemberPointsHistory.TABLE_NAME)
@@ -66,60 +76,4 @@ public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Lo
 	 */
 	@Column(name = "point_type", nullable = false, columnDefinition = "varchar(32) not null comment '积分类型'")
 	private String pointType;
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public Long getPoint() {
-		return point;
-	}
-
-	public void setPoint(Long point) {
-		this.point = point;
-	}
-
-	public Long getBeforePoint() {
-		return beforePoint;
-	}
-
-	public void setBeforePoint(Long beforePoint) {
-		this.beforePoint = beforePoint;
-	}
-
-	public Long getVariablePoint() {
-		return variablePoint;
-	}
-
-	public void setVariablePoint(Long variablePoint) {
-		this.variablePoint = variablePoint;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getPointType() {
-		return pointType;
-	}
-
-	public void setPointType(String pointType) {
-		this.pointType = pointType;
-	}
 }

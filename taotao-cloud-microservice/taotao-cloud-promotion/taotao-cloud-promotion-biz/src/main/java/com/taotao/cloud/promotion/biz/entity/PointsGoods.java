@@ -9,9 +9,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -19,6 +22,11 @@ import lombok.NoArgsConstructor;
  *
  * 
  **/
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = PointsGoods.TABLE_NAME)
 @TableName(PointsGoods.TABLE_NAME)

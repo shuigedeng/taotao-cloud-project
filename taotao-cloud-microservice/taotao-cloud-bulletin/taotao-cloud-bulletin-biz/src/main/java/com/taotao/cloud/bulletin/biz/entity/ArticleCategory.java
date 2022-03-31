@@ -3,14 +3,18 @@ package com.taotao.cloud.bulletin.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.Setter;
 
 /**
  * 文章分类
@@ -19,7 +23,11 @@ import javax.validation.constraints.NotNull;
  * 
  * @since 2020/12/10 17:42
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("li_article_category")
 @ApiModel(value = "文章分类")
 @NoArgsConstructor

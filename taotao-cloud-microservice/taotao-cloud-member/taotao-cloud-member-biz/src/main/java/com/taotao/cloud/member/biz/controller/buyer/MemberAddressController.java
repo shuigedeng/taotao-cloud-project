@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,14 +36,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-11 15:54:53
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/buyer/member-address")
 @Tag(name = "买家端-会员地址API", description = "买家端-会员地址API")
 public class MemberAddressController {
 
-	@Autowired
-	private IMemberAddressService memberAddressService;
+	private final IMemberAddressService memberAddressService;
 
 	@Operation(summary = "分页获取当前会员收件地址列表", description = "分页获取当前会员收件地址列表", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取当前会员收件地址列表")

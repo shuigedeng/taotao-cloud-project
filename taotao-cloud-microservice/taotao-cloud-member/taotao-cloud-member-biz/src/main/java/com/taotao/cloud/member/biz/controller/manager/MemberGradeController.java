@@ -11,6 +11,7 @@ import com.taotao.cloud.member.biz.entity.MemberGrade;
 import com.taotao.cloud.member.biz.service.MemberGradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -27,14 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since 2021/5/16 11:29 下午
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/manager/member-grade")
 @Tag(name = "管理端-会员等级API", description = "管理端-会员等级API")
 public class MemberGradeController {
 
-	@Autowired
-	private MemberGradeService memberGradeService;
+	private final MemberGradeService memberGradeService;
 
 	@Operation(summary = "通过id获取会员等级", description = "通过id获取会员等级", method = CommonConstant.GET)
 	@RequestLogger(description = "通过id获取会员等级")

@@ -5,10 +5,20 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 自定义分词表
  **/
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = CustomWords.TABLE_NAME)
 @TableName(CustomWords.TABLE_NAME)
@@ -28,20 +38,4 @@ public class CustomWords extends BaseSuperEntity<CustomWords, Long> {
 	 */
 	@Column(name = "disabled", nullable = false, columnDefinition = "int not null default 0 comment '是否禁用'")
 	private Integer disabled;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getDisabled() {
-		return disabled;
-	}
-
-	public void setDisabled(Integer disabled) {
-		this.disabled = disabled;
-	}
 }

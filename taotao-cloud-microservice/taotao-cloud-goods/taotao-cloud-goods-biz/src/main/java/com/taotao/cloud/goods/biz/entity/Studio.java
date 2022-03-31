@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -12,6 +17,11 @@ import javax.persistence.Table;
  *
  * @since 2021/5/17 9:47 上午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Studio.TABLE_NAME)
 @TableName(Studio.TABLE_NAME)
@@ -116,132 +126,4 @@ public class Studio extends BaseSuperEntity<Studio, Long> {
 	 */
 	@Column(name = "status", nullable = false, columnDefinition = "varchar(64) not null comment '直播间状态'")
 	private String status;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCoverImg() {
-		return coverImg;
-	}
-
-	public void setCoverImg(String coverImg) {
-		this.coverImg = coverImg;
-	}
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getAnchorName() {
-		return anchorName;
-	}
-
-	public void setAnchorName(String anchorName) {
-		this.anchorName = anchorName;
-	}
-
-	public String getAnchorWechat() {
-		return anchorWechat;
-	}
-
-	public void setAnchorWechat(String anchorWechat) {
-		this.anchorWechat = anchorWechat;
-	}
-
-	public String getShareImg() {
-		return shareImg;
-	}
-
-	public void setShareImg(String shareImg) {
-		this.shareImg = shareImg;
-	}
-
-	public String getFeedsImg() {
-		return feedsImg;
-	}
-
-	public void setFeedsImg(String feedsImg) {
-		this.feedsImg = feedsImg;
-	}
-
-	public String getMediaUrl() {
-		return mediaUrl;
-	}
-
-	public void setMediaUrl(String mediaUrl) {
-		this.mediaUrl = mediaUrl;
-	}
-
-	public Integer getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(Integer roomId) {
-		this.roomId = roomId;
-	}
-
-	public String getQrCodeUrl() {
-		return qrCodeUrl;
-	}
-
-	public void setQrCodeUrl(String qrCodeUrl) {
-		this.qrCodeUrl = qrCodeUrl;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public Integer getRoomGoodsNum() {
-		return roomGoodsNum;
-	}
-
-	public void setRoomGoodsNum(Integer roomGoodsNum) {
-		this.roomGoodsNum = roomGoodsNum;
-	}
-
-	public String getRoomGoodsList() {
-		return roomGoodsList;
-	}
-
-	public void setRoomGoodsList(String roomGoodsList) {
-		this.roomGoodsList = roomGoodsList;
-	}
-
-	public Boolean getRecommend() {
-		return recommend;
-	}
-
-	public void setRecommend(Boolean recommend) {
-		this.recommend = recommend;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }

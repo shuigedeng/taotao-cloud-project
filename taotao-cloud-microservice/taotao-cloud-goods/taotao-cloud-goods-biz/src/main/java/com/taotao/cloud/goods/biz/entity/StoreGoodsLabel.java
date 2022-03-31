@@ -5,12 +5,22 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 店铺商品分类表
  *
  * @since 2020-02-18 15:18:56
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = StoreGoodsLabel.TABLE_NAME)
 @TableName(StoreGoodsLabel.TABLE_NAME)
@@ -48,44 +58,4 @@ public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 	 */
 	@Column(name = "level", nullable = false, columnDefinition = "int not null comment '层级, 从0开始'")
 	private Integer level;
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getLabelName() {
-		return labelName;
-	}
-
-	public void setLabelName(String labelName) {
-		this.labelName = labelName;
-	}
-
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
 }

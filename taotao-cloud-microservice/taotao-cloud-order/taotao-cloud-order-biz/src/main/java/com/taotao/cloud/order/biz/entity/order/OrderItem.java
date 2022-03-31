@@ -10,10 +10,20 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 子订单表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = OrderItem.TABLE_NAME)
 @TableName(OrderItem.TABLE_NAME)
@@ -203,189 +213,4 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	//public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
 	//    this.priceDetail = JSONUtil.toJsonStr(priceDetail);
 	//}
-
-
-	public String getOrderSn() {
-		return orderSn;
-	}
-
-	public void setOrderSn(String orderSn) {
-		this.orderSn = orderSn;
-	}
-
-	public String getSn() {
-		return sn;
-	}
-
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
-
-	public BigDecimal getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(BigDecimal unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
-	public BigDecimal getSubTotal() {
-		return subTotal;
-	}
-
-	public void setSubTotal(BigDecimal subTotal) {
-		this.subTotal = subTotal;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
-
-	public Integer getNum() {
-		return num;
-	}
-
-	public void setNum(Integer num) {
-		this.num = num;
-	}
-
-	public String getTradeSn() {
-		return tradeSn;
-	}
-
-	public void setTradeSn(String tradeSn) {
-		this.tradeSn = tradeSn;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getGoodsName() {
-		return goodsName;
-	}
-
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
-	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getSnapshotId() {
-		return snapshotId;
-	}
-
-	public void setSnapshotId(String snapshotId) {
-		this.snapshotId = snapshotId;
-	}
-
-	public String getSpecs() {
-		return specs;
-	}
-
-	public void setSpecs(String specs) {
-		this.specs = specs;
-	}
-
-	public String getPromotionType() {
-		return promotionType;
-	}
-
-	public void setPromotionType(String promotionType) {
-		this.promotionType = promotionType;
-	}
-
-	public String getPromotionId() {
-		return promotionId;
-	}
-
-	public void setPromotionId(String promotionId) {
-		this.promotionId = promotionId;
-	}
-
-	public BigDecimal getGoodsPrice() {
-		return goodsPrice;
-	}
-
-	public void setGoodsPrice(BigDecimal goodsPrice) {
-		this.goodsPrice = goodsPrice;
-	}
-
-	public BigDecimal getFlowPrice() {
-		return flowPrice;
-	}
-
-	public void setFlowPrice(BigDecimal flowPrice) {
-		this.flowPrice = flowPrice;
-	}
-
-	public String getCommentStatus() {
-		return commentStatus;
-	}
-
-	public void setCommentStatus(String commentStatus) {
-		this.commentStatus = commentStatus;
-	}
-
-	public String getAfterSaleStatus() {
-		return afterSaleStatus;
-	}
-
-	public void setAfterSaleStatus(String afterSaleStatus) {
-		this.afterSaleStatus = afterSaleStatus;
-	}
-
-	public String getPriceDetail() {
-		return priceDetail;
-	}
-
-	public void setPriceDetail(String priceDetail) {
-		this.priceDetail = priceDetail;
-	}
-
-	public String getComplainStatus() {
-		return complainStatus;
-	}
-
-	public void setComplainStatus(String complainStatus) {
-		this.complainStatus = complainStatus;
-	}
-
-	public String getComplainId() {
-		return complainId;
-	}
-
-	public void setComplainId(String complainId) {
-		this.complainId = complainId;
-	}
-
-	public Integer getReturnGoodsNumber() {
-		return returnGoodsNumber;
-	}
-
-	public void setReturnGoodsNumber(Integer returnGoodsNumber) {
-		this.returnGoodsNumber = returnGoodsNumber;
-	}
 }

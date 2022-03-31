@@ -5,11 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 直播间商品表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = StudioCommodity.TABLE_NAME)
 @TableName(StudioCommodity.TABLE_NAME)
@@ -29,26 +39,4 @@ public class StudioCommodity extends BaseSuperEntity<StudioCommodity, Long> {
 	 */
 	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
 	private String goodsId;
-
-	public StudioCommodity(Integer roomId, String goodsId) {
-		this.roomId = roomId;
-		this.goodsId = goodsId;
-	}
-
-
-	public Integer getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(Integer roomId) {
-		this.roomId = roomId;
-	}
-
-	public String getGoodsId() {
-		return goodsId;
-	}
-
-	public void setGoodsId(String goodsId) {
-		this.goodsId = goodsId;
-	}
 }

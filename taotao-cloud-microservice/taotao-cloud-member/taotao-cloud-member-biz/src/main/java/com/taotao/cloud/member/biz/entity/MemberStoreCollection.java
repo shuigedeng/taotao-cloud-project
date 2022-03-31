@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员店铺收藏表
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:42:32
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberStoreCollection.TABLE_NAME)
 @TableName(MemberStoreCollection.TABLE_NAME)
@@ -31,27 +41,4 @@ public class MemberStoreCollection extends BaseSuperEntity<MemberStoreCollection
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺id'")
 	private String storeId;
-
-	public MemberStoreCollection(){}
-
-	public MemberStoreCollection(String memberId, String storeId) {
-		this.memberId = memberId;
-		this.storeId = storeId;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
 }

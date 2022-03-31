@@ -11,6 +11,7 @@ import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,14 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since 2020-02-25 14:10:16
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/manager/member-evaluation")
 @Tag(name = "店铺端-商品评价管理接口", description = "店铺端-商品评价管理接口")
 public class MemberEvaluationController {
 
-	@Autowired
-	private MemberEvaluationService memberEvaluationService;
+	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取会员评论列表")

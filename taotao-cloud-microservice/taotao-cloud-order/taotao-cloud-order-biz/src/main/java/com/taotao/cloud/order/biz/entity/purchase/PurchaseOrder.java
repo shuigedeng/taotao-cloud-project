@@ -7,9 +7,14 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 供求单
@@ -17,7 +22,11 @@ import java.util.Date;
  * 
  * @since 2020-03-14 23:04:56
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(value = "供求单")
 @TableName("li_purchase_order")
 public class PurchaseOrder extends BaseEntity {

@@ -6,10 +6,20 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品分类表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Category.TABLE_NAME)
 @TableName(Category.TABLE_NAME)
@@ -80,61 +90,4 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	//    this.image = image;
 	//    this.supportChannel = supportChannel;
 	//}
-
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-
-	public BigDecimal getCommissionRate() {
-		return commissionRate;
-	}
-
-	public void setCommissionRate(BigDecimal commissionRate) {
-		this.commissionRate = commissionRate;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public Boolean getSupportChannel() {
-		return supportChannel;
-	}
-
-	public void setSupportChannel(Boolean supportChannel) {
-		this.supportChannel = supportChannel;
-	}
 }

@@ -5,7 +5,13 @@ import cn.lili.common.enums.ClientTypeEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -14,7 +20,11 @@ import lombok.Data;
  * 
  * @since 2020/12/10 17:42
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("li_special")
 @ApiModel(value = "专题活动")
 public class Special extends BaseEntity {

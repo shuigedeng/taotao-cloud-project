@@ -13,12 +13,22 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 /**
  * 店铺详细
  *
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = StoreDetail.TABLE_NAME)
 @TableName(StoreDetail.TABLE_NAME)
@@ -137,262 +147,6 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 
 	@Column(name = "sales_consignee_detail", nullable = false, columnDefinition = "varchar(64) not null comment '详细地址'")
 	private String salesConsigneeDetail;
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getCompanyAddress() {
-		return companyAddress;
-	}
-
-	public void setCompanyAddress(String companyAddress) {
-		this.companyAddress = companyAddress;
-	}
-
-	public String getCompanyAddressIdPath() {
-		return companyAddressIdPath;
-	}
-
-	public void setCompanyAddressIdPath(String companyAddressIdPath) {
-		this.companyAddressIdPath = companyAddressIdPath;
-	}
-
-	public String getCompanyAddressPath() {
-		return companyAddressPath;
-	}
-
-	public void setCompanyAddressPath(String companyAddressPath) {
-		this.companyAddressPath = companyAddressPath;
-	}
-
-	public String getCompanyPhone() {
-		return companyPhone;
-	}
-
-	public void setCompanyPhone(String companyPhone) {
-		this.companyPhone = companyPhone;
-	}
-
-	public String getCompanyEmail() {
-		return companyEmail;
-	}
-
-	public void setCompanyEmail(String companyEmail) {
-		this.companyEmail = companyEmail;
-	}
-
-	public Integer getEmployeeNum() {
-		return employeeNum;
-	}
-
-	public void setEmployeeNum(Integer employeeNum) {
-		this.employeeNum = employeeNum;
-	}
-
-	public BigDecimal getRegisteredCapital() {
-		return registeredCapital;
-	}
-
-	public void setRegisteredCapital(BigDecimal registeredCapital) {
-		this.registeredCapital = registeredCapital;
-	}
-
-	public String getLinkName() {
-		return linkName;
-	}
-
-	public void setLinkName(String linkName) {
-		this.linkName = linkName;
-	}
-
-	public String getLinkPhone() {
-		return linkPhone;
-	}
-
-	public void setLinkPhone(String linkPhone) {
-		this.linkPhone = linkPhone;
-	}
-
-	public String getLicenseNum() {
-		return licenseNum;
-	}
-
-	public void setLicenseNum(String licenseNum) {
-		this.licenseNum = licenseNum;
-	}
-
-	public String getScope() {
-		return scope;
-	}
-
-	public void setScope(String scope) {
-		this.scope = scope;
-	}
-
-	public String getLicencePhoto() {
-		return licencePhoto;
-	}
-
-	public void setLicencePhoto(String licencePhoto) {
-		this.licencePhoto = licencePhoto;
-	}
-
-	public String getLegalName() {
-		return legalName;
-	}
-
-	public void setLegalName(String legalName) {
-		this.legalName = legalName;
-	}
-
-	public String getLegalId() {
-		return legalId;
-	}
-
-	public void setLegalId(String legalId) {
-		this.legalId = legalId;
-	}
-
-	public String getLegalPhoto() {
-		return legalPhoto;
-	}
-
-	public void setLegalPhoto(String legalPhoto) {
-		this.legalPhoto = legalPhoto;
-	}
-
-	public String getSettlementBankAccountName() {
-		return settlementBankAccountName;
-	}
-
-	public void setSettlementBankAccountName(String settlementBankAccountName) {
-		this.settlementBankAccountName = settlementBankAccountName;
-	}
-
-	public String getSettlementBankAccountNum() {
-		return settlementBankAccountNum;
-	}
-
-	public void setSettlementBankAccountNum(String settlementBankAccountNum) {
-		this.settlementBankAccountNum = settlementBankAccountNum;
-	}
-
-	public String getSettlementBankBranchName() {
-		return settlementBankBranchName;
-	}
-
-	public void setSettlementBankBranchName(String settlementBankBranchName) {
-		this.settlementBankBranchName = settlementBankBranchName;
-	}
-
-	public String getSettlementBankJointName() {
-		return settlementBankJointName;
-	}
-
-	public void setSettlementBankJointName(String settlementBankJointName) {
-		this.settlementBankJointName = settlementBankJointName;
-	}
-
-	public String getGoodsManagementCategory() {
-		return goodsManagementCategory;
-	}
-
-	public void setGoodsManagementCategory(String goodsManagementCategory) {
-		this.goodsManagementCategory = goodsManagementCategory;
-	}
-
-	public String getSettlementCycle() {
-		return settlementCycle;
-	}
-
-	public void setSettlementCycle(String settlementCycle) {
-		this.settlementCycle = settlementCycle;
-	}
-
-	public LocalDateTime getSettlementDay() {
-		return settlementDay;
-	}
-
-	public void setSettlementDay(LocalDateTime settlementDay) {
-		this.settlementDay = settlementDay;
-	}
-
-	public Integer getStockWarning() {
-		return stockWarning;
-	}
-
-	public void setStockWarning(Integer stockWarning) {
-		this.stockWarning = stockWarning;
-	}
-
-	public String getDdCode() {
-		return ddCode;
-	}
-
-	public void setDdCode(String ddCode) {
-		this.ddCode = ddCode;
-	}
-
-	public String getSalesConsigneeName() {
-		return salesConsigneeName;
-	}
-
-	public void setSalesConsigneeName(String salesConsigneeName) {
-		this.salesConsigneeName = salesConsigneeName;
-	}
-
-	public String getSalesConsigneeMobile() {
-		return salesConsigneeMobile;
-	}
-
-	public void setSalesConsigneeMobile(String salesConsigneeMobile) {
-		this.salesConsigneeMobile = salesConsigneeMobile;
-	}
-
-	public String getSalesConsigneeAddressId() {
-		return salesConsigneeAddressId;
-	}
-
-	public void setSalesConsigneeAddressId(String salesConsigneeAddressId) {
-		this.salesConsigneeAddressId = salesConsigneeAddressId;
-	}
-
-	public String getSalesConsigneeAddressPath() {
-		return salesConsigneeAddressPath;
-	}
-
-	public void setSalesConsigneeAddressPath(String salesConsigneeAddressPath) {
-		this.salesConsigneeAddressPath = salesConsigneeAddressPath;
-	}
-
-	public String getSalesConsigneeDetail() {
-		return salesConsigneeDetail;
-	}
-
-	public void setSalesConsigneeDetail(String salesConsigneeDetail) {
-		this.salesConsigneeDetail = salesConsigneeDetail;
-	}
 
 	//public StoreDetail(Store store, AdminStoreApplyDTO adminStoreApplyDTO) {
 	//    this.storeId = store.getId();

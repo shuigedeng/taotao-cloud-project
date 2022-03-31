@@ -6,6 +6,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员预存款表
@@ -14,6 +19,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:32:26
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberWallet.TABLE_NAME)
 @TableName(MemberWallet.TABLE_NAME)
@@ -46,35 +56,4 @@ public class MemberWallet extends BaseSuperEntity<MemberWallet, Long> {
 	@Column(name = "wallet_password", nullable = false, columnDefinition = "varchar(32) not null comment '预存款密码'")
 	private String walletPassword;
 
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public BigDecimal getMemberWallet() {
-		return memberWallet;
-	}
-
-	public void setMemberWallet(BigDecimal memberWallet) {
-		this.memberWallet = memberWallet;
-	}
-
-	public BigDecimal getMemberFrozenWallet() {
-		return memberFrozenWallet;
-	}
-
-	public void setMemberFrozenWallet(BigDecimal memberFrozenWallet) {
-		this.memberFrozenWallet = memberFrozenWallet;
-	}
-
-	public String getWalletPassword() {
-		return walletPassword;
-	}
-
-	public void setWalletPassword(String walletPassword) {
-		this.walletPassword = walletPassword;
-	}
 }

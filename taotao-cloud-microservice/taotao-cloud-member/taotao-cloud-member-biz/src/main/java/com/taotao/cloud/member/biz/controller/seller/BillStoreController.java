@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,17 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since 2020/11/17 4:29 下午
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/seller/bill-store")
 @Tag(name = "店铺端-结算单接口", description = "店铺端-结算单接口")
 public class BillStoreController {
 
-	@Autowired
-	private BillService billService;
-
-	@Autowired
-	private StoreFlowService storeFlowService;
+	private final BillService billService;
+	private final StoreFlowService storeFlowService;
 
 	@Operation(summary = "获取结算单分页", description = "获取结算单分页", method = CommonConstant.GET)
 	@RequestLogger(description = "获取结算单分页")

@@ -5,10 +5,20 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品参数表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Parameters.TABLE_NAME)
 @TableName(Parameters.TABLE_NAME)
@@ -57,60 +67,4 @@ public class Parameters extends BaseSuperEntity<Parameters, Long> {
 	 */
 	@Column(name = "sort", nullable = false, columnDefinition = "int not null comment '排序'")
 	private Integer sort;
-
-	public String getParamName() {
-		return paramName;
-	}
-
-	public void setParamName(String paramName) {
-		this.paramName = paramName;
-	}
-
-	public String getOptions() {
-		return options;
-	}
-
-	public void setOptions(String options) {
-		this.options = options;
-	}
-
-	public Integer getIsIndex() {
-		return isIndex;
-	}
-
-	public void setIsIndex(Integer isIndex) {
-		this.isIndex = isIndex;
-	}
-
-	public Integer getRequired() {
-		return required;
-	}
-
-	public void setRequired(Integer required) {
-		this.required = required;
-	}
-
-	public String getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
-	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
 }

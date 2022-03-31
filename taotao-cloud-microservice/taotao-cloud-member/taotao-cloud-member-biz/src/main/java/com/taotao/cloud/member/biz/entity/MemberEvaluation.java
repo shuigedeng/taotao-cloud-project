@@ -5,7 +5,12 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员商品评价表
@@ -14,7 +19,11 @@ import lombok.Data;
  * @version 2021.10
  * @since 2022-03-11 15:07:11
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberEvaluation.TABLE_NAME)
 @TableName(MemberEvaluation.TABLE_NAME)

@@ -4,8 +4,13 @@ import cn.hutool.http.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -14,7 +19,11 @@ import lombok.NoArgsConstructor;
  * 
  * @since 2020/12/10 17:42
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("li_page_data")
 @ApiModel(value = "页面数据DO")
 @NoArgsConstructor

@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 预存款充值记录表
@@ -15,6 +20,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:39:33
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberWalletRecharge.TABLE_NAME)
 @TableName(MemberWalletRecharge.TABLE_NAME)
@@ -86,67 +96,4 @@ public class MemberWalletRecharge extends BaseSuperEntity<MemberWalletRecharge, 
 	//	this.rechargeMoney = money;
 	//	this.payStatus = PayStatusEnum.UNPAID.name();
 	//}
-	public String getRechargeSn() {
-		return rechargeSn;
-	}
-
-	public void setRechargeSn(String rechargeSn) {
-		this.rechargeSn = rechargeSn;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public BigDecimal getRechargeMoney() {
-		return rechargeMoney;
-	}
-
-	public void setRechargeMoney(BigDecimal rechargeMoney) {
-		this.rechargeMoney = rechargeMoney;
-	}
-
-	public String getRechargeWay() {
-		return rechargeWay;
-	}
-
-	public void setRechargeWay(String rechargeWay) {
-		this.rechargeWay = rechargeWay;
-	}
-
-	public String getPayStatus() {
-		return payStatus;
-	}
-
-	public void setPayStatus(String payStatus) {
-		this.payStatus = payStatus;
-	}
-
-	public String getPaymentPluginId() {
-		return paymentPluginId;
-	}
-
-	public void setPaymentPluginId(String paymentPluginId) {
-		this.paymentPluginId = paymentPluginId;
-	}
-
-	public String getReceivableNo() {
-		return receivableNo;
-	}
-
-	public void setReceivableNo(String receivableNo) {
-		this.receivableNo = receivableNo;
-	}
-
-	public LocalDateTime getPayTime() {
-		return payTime;
-	}
-
-	public void setPayTime(LocalDateTime payTime) {
-		this.payTime = payTime;
-	}
 }

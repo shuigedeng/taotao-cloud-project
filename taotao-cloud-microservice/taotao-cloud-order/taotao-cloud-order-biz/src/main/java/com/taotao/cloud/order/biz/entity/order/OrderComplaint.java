@@ -11,10 +11,20 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 订单交易投诉表
  **/
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = OrderComplaint.TABLE_NAME)
 @TableName(OrderComplaint.TABLE_NAME)
@@ -184,6 +194,4 @@ public class OrderComplaint extends BaseSuperEntity<OrderInfo, Long> {
 	@Schema(description = "仲裁结果")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String arbitrationResult;
-
-
 }

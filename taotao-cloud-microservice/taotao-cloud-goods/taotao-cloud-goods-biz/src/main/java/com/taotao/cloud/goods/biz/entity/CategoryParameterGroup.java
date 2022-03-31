@@ -5,10 +5,20 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 分类绑定参数组表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = CategoryParameterGroup.TABLE_NAME)
 @TableName(CategoryParameterGroup.TABLE_NAME)
@@ -34,28 +44,4 @@ public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGro
 	 */
 	@Column(name = "sort_order", nullable = false, columnDefinition = "int not null default 0 comment '排序'")
 	private Integer sortOrder;
-
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
-	}
 }

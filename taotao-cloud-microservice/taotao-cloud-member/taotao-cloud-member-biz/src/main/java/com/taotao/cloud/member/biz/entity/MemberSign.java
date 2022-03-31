@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员签到表
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:31:33
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberSign.TABLE_NAME)
 @TableName(MemberSign.TABLE_NAME)
@@ -38,27 +48,4 @@ public class MemberSign extends BaseSuperEntity<MemberSign, Long> {
 	@Column(name = "sign_day", nullable = false, columnDefinition = "int not null default 0 comment '连续签到天数'")
 	private Integer signDay;
 
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public Integer getSignDay() {
-		return signDay;
-	}
-
-	public void setSignDay(Integer signDay) {
-		this.signDay = signDay;
-	}
 }
