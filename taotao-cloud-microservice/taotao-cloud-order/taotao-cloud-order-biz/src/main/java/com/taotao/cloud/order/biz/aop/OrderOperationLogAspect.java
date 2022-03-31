@@ -24,7 +24,7 @@ public class OrderOperationLogAspect {
 	@Autowired
 	private OrderLogService orderLogService;
 
-	@After("@annotation(cn.lili.modules.order.order.aop.OrderLogPoint)")
+	@After("@annotation(modules.order.order.aop.OrderLogPoint)")
 	public void doAfter(JoinPoint joinPoint) {
 		try {
 			//日志对象拼接

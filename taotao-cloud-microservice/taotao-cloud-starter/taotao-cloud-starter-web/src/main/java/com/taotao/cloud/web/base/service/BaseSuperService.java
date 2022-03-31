@@ -15,14 +15,20 @@
  */
 package com.taotao.cloud.web.base.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.common.support.lock.DistributedLock;
+import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
 
 /**
  * BaseSuperService
@@ -82,56 +88,81 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	T getByIdCache(I id);
 
 	/**
+	 * 根据 key 查询缓存中存放的id，缓存不存在根据loader加载并写入数据，然后根据查询出来的id查询 实体
+	 *
+	 * @param key    缓存key
+	 * @param loader 加载器
+	 * @return 对象
+	 */
+	T getByKey(CacheKey key, Function<CacheKey, Object> loader);
+
+	/**
+	 * 可能会缓存穿透
+	 *
+	 * @param ids    主键id
+	 * @param loader 回调
+	 * @return 对象集合
+	 */
+	List<T> findByIds(@NonNull Collection<? extends Serializable> ids, Function<Collection<? extends Serializable>, Collection<T>> loader);
+
+
+	/**
 	 * 幂等性新增记录
 	 *
-	 * @param entity    实体对象
-	 * @param lock      锁实例
-	 * @param lockKey   锁的key
-	 * @param predicate 判断是否存在的条件
-	 * @param msg       对象已存在提示信息
+	 * @param entity       实体对象
+	 * @param lock         锁实例
+	 * @param lockKey      锁的key
+	 * @param predicate    判断是否存在的条件 不为空则用jpa判断
+	 * @param countWrapper 判断是否存在的条件 不用空则用mybatis判断
+	 * @param msg          对象已存在提示信息
 	 * @return 新增结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
+		Wrapper<T> countWrapper,
 		String msg);
 
 	/**
 	 * 幂等性新增记录
 	 *
-	 * @param entity    实体对象
-	 * @param lock      锁实例
-	 * @param lockKey   锁的key
-	 * @param predicate 判断是否存在的条件
+	 * @param entity       实体对象
+	 * @param lock         锁实例
+	 * @param lockKey      锁的key
+	 * @param predicate    判断是否存在的条件 不为空则用jpa判断
+	 * @param countWrapper 判断是否存在的条件 不用空则用mybatis判断
 	 * @return 结果
 	 * @since 2021-09-04 07:32:26
 	 */
-	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
+	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
+		Wrapper<T> countWrapper);
 
 	/**
 	 * 幂等性新增或更新记录
 	 *
-	 * @param entity    实体对象
-	 * @param lock      锁实例
-	 * @param lockKey   锁的key
-	 * @param predicate 判断是否存在的条件
-	 * @param msg       对象已存在提示信息
+	 * @param entity       实体对象
+	 * @param lock         锁实例
+	 * @param lockKey      锁的key
+	 * @param predicate    判断是否存在的条件 不为空则用jpa判断
+	 * @param countWrapper 判断是否存在的条件 不用空则用mybatis判断
+	 * @param msg          对象已存在提示信息
 	 * @return 结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, String msg);
+		Predicate predicate, Wrapper<T> countWrapper, String msg);
 
 	/**
 	 * 幂等性新增或更新记录
 	 *
-	 * @param entity    实体对象
-	 * @param lock      锁实例
-	 * @param lockKey   锁的key
-	 * @param predicate 判断是否存在的条件
+	 * @param entity       实体对象
+	 * @param lock         锁实例
+	 * @param lockKey      锁的key
+	 * @param predicate    判断是否存在的条件 不为空则用jpa判断
+	 * @param countWrapper 判断是否存在的条件 不用空则用mybatis判断
 	 * @return 结果
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate);
+		Predicate predicate, Wrapper<T> countWrapper);
 
 }

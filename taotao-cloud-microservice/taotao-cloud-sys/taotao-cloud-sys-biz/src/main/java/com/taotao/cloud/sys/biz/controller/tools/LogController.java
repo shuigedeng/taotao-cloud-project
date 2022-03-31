@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-02-15 08:51:32
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-日志管理API", description = "工具管理端-日志管理API")
@@ -37,10 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController {
 
 	private final ILogService logService;
-
-	public LogController(ILogService logService) {
-		this.logService = logService;
-	}
 
 	@Operation(summary = "导出数据", description = "导出数据", method = CommonConstant.GET)
 	@RequestLogger(description = "导出数据")
@@ -110,7 +108,7 @@ public class LogController {
 
 	@Operation(summary = "删除所有ERROR日志", description = "删除所有ERROR日志", method = CommonConstant.DELETE)
 	@RequestLogger(description = "删除所有ERROR日志")
-	@DeleteMapping(value = "/del/error")
+	@DeleteMapping(value = "/error")
 	@PreAuthorize("@el.check('admin','logError:remove')")
 	public Result<Object> delAllByError() {
 		logService.delAllByError();
@@ -119,7 +117,7 @@ public class LogController {
 
 	@Operation(summary = "删除所有INFO日志", description = "删除所有INFO日志", method = CommonConstant.DELETE)
 	@RequestLogger(description = "删除所有INFO日志")
-	@DeleteMapping(value = "/del/info")
+	@DeleteMapping(value = "/info")
 	@PreAuthorize("@el.check('admin','logInfo:remove')")
 	public Result<Boolean> delAllByInfo() {
 		logService.delAllByInfo();

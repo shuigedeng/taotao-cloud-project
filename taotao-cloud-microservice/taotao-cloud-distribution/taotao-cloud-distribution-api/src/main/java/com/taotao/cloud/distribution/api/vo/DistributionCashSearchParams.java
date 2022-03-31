@@ -1,7 +1,5 @@
 package com.taotao.cloud.distribution.api.vo;
 
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

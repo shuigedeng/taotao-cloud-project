@@ -1,6 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event;
 //
-//import cn.lili.modules.member.entity.dos.Member;
 //
 ///**
 // * 会员登录消息

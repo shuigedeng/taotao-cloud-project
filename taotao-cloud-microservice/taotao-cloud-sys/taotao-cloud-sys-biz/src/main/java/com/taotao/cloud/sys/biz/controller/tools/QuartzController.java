@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -49,6 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-02 16:38:25
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/sys/tools/quart")
@@ -59,12 +61,6 @@ public class QuartzController {
 
 	private final IQuartzJobService quartzJobService;
 	private final IQuartzLogService quartzLogService;
-
-	public QuartzController(IQuartzJobService quartzJobService,
-		IQuartzLogService quartzLogService) {
-		this.quartzJobService = quartzJobService;
-		this.quartzLogService = quartzLogService;
-	}
 
 	@Operation(summary = "查询定时任务", description = "查询定时任务", method = CommonConstant.GET)
 	@RequestLogger(description = "查询定时任务")

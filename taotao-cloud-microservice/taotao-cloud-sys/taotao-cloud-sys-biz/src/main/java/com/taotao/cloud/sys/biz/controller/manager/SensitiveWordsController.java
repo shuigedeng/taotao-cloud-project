@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class SensitiveWordsController {
 	@Operation(summary = "通过id获取", description = "通过id获取")
 	@GetMapping(value = "/{id}")
 	public Result<SensitiveWord> get(
-		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
+		@Parameter(description = "敏感词ID", required = true) @NotBlank(message = "敏感词ID不能为空")
 		@PathVariable String id) {
 		return Result.success(sensitiveWordService.getById(id));
 	}
@@ -53,7 +54,6 @@ public class SensitiveWordsController {
 	public Result<SensitiveWord> add(@Valid @RequestBody SensitiveWord sensitiveWords) {
 		sensitiveWordService.save(sensitiveWords);
 		sensitiveWordService.resetCache();
-
 		return Result.success(sensitiveWords);
 	}
 
@@ -65,19 +65,16 @@ public class SensitiveWordsController {
 		sensitiveWords.setId(id);
 		sensitiveWordService.updateById(sensitiveWords);
 		sensitiveWordService.resetCache();
-
 		return Result.success(sensitiveWords);
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除")
-	@ApiImplicitParam(name = "ids", value = "敏感词ID", required = true, dataType = "String", allowMultiple = true, paramType = "path")
 	@DeleteMapping(value = "/{ids}")
 	public Result<Boolean> delAllByIds(
 		@Parameter(description = "敏感词ID", required = true) @NotEmpty(message = "敏感词ID不能为空")
 		@PathVariable List<String> ids) {
 		sensitiveWordService.removeByIds(ids);
 		sensitiveWordService.resetCache();
-
 		return Result.success(true);
 	}
 }

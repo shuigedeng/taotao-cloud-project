@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-02 15:48:47
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-cron管理API", description = "工具管理端-cron管理API")
 @RequestMapping("/sys/tools/cron")
 public class CronController {
 
-	@Autowired
-	private ICronService cronService;
+	private final ICronService cronService;
 
 	@Operation(summary = "计算cron表达式下次执行时间 计算的后面所有执行时间", description = "计算cron表达式下次执行时间 计算的后面所有执行时间", method = CommonConstant.GET)
 	@RequestLogger(description = "计算cron表达式下次执行时间 计算的后面所有执行时间")

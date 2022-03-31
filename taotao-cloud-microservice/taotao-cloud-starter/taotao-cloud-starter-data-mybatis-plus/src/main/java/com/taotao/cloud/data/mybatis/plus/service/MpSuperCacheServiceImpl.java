@@ -71,7 +71,9 @@ public abstract class MpSuperCacheServiceImpl<M extends MpSuperMapper<T, I>, T e
 
 	protected static final int MAX_BATCH_KEY_SIZE = 20;
 
-	protected abstract CacheKeyBuilder cacheKeyBuilder();
+	protected CacheKeyBuilder cacheKeyBuilder(){
+		return () -> super.getEntityClass().getSimpleName();
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -96,7 +98,7 @@ public abstract class MpSuperCacheServiceImpl<M extends MpSuperMapper<T, I>, T e
 		List<T> valueList = partitionKeys.stream()
 			.map(ks -> (List<T>) redisRepository.findByListCacheKey(ks))
 			.flatMap(Collection::stream)
-			.collect(Collectors.toList());
+			.toList();
 
 		// 所有的key
 		List<I> keysList = Lists.newArrayList(ids);

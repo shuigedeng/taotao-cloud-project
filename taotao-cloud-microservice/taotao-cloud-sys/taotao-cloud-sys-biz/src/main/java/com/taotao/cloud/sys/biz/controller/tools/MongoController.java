@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -28,14 +29,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-02 15:53:37
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-mongo管理API", description = "工具管理端-mongo管理API")
 @RequestMapping("/sys/tools/mongo")
 public class MongoController {
 
-	@Autowired
-	private IMongoService mongoService;
+	private final IMongoService mongoService;
 
 	@Operation(summary = "查询所有的库", description = "查询所有的库", method = CommonConstant.GET)
 	@RequestLogger(description = "导出数据")

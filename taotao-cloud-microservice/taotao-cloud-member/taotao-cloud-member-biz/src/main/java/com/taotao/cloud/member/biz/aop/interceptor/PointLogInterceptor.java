@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 /**
  * 积分操作切面
  *
- * 
- * @since 2020/11/17 7:22 下午
  */
 @Aspect
 @Component
@@ -28,7 +26,7 @@ public class PointLogInterceptor {
     @Autowired
     private MemberService memberService;
 
-    @After("@annotation(cn.lili.modules.member.aop.annotation.PointLogPoint)")
+    @After("@annotation(member.aop.annotation.PointLogPoint)")
     public void doAfter(JoinPoint pjp) {
         //参数
         Object[] obj = pjp.getArgs();
