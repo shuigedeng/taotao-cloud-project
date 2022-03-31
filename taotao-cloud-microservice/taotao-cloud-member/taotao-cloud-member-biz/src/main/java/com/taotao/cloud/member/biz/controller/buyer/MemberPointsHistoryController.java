@@ -11,6 +11,7 @@ import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,会员积分历史接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/buyer/member-points-history")
 @Tag(name = "买家端-会员积分历史API", description = "买家端-会员积分历史API")
 public class MemberPointsHistoryController {
 
-	@Autowired
-	private MemberPointsHistoryService memberPointsHistoryService;
+	private final MemberPointsHistoryService memberPointsHistoryService;
 
 	@Operation(summary = "分页获取当前会员积分历史", description = "分页获取当前会员积分历史", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取当前会员积分历史")

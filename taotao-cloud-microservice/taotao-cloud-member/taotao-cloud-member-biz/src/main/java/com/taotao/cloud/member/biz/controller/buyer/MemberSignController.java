@@ -9,6 +9,7 @@ import com.taotao.cloud.netty.annotation.RequestParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-11 15:58:40
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/buyer/member-sign")
 @Tag(name = "买家端-会员签到API", description = "买家端-会员签到API")
 public class MemberSignController {
 
-	@Autowired
-	private MemberSignService memberSignService;
+	private final MemberSignService memberSignService;
 
 	@Operation(summary = "会员签到", description = "会员签到", method = CommonConstant.POST)
 	@RequestLogger(description = "会员签到")

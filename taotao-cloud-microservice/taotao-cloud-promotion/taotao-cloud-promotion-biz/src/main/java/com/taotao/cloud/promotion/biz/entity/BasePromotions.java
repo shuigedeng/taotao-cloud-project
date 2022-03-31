@@ -8,14 +8,22 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 促销活动基础类
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable> extends
 	BaseSuperEntity<T, I> {
 
@@ -64,59 +72,4 @@ public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable>
 	//	}
 	//	return PromotionsStatusEnum.CLOSE.name();
 	//}
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getPromotionName() {
-		return promotionName;
-	}
-
-	public void setPromotionName(String promotionName) {
-		this.promotionName = promotionName;
-	}
-
-	public LocalDateTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalDateTime startTime) {
-		this.startTime = startTime;
-	}
-
-	public LocalDateTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalDateTime endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getScopeType() {
-		return scopeType;
-	}
-
-	public void setScopeType(String scopeType) {
-		this.scopeType = scopeType;
-	}
-
-	public String getScopeId() {
-		return scopeId;
-	}
-
-	public void setScopeId(String scopeId) {
-		this.scopeId = scopeId;
-	}
 }

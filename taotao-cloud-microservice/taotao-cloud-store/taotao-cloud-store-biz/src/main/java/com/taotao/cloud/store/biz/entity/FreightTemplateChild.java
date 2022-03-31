@@ -6,6 +6,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  *
  * @since 2020/11/17 4:27 下午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = FreightTemplateChild.TABLE_NAME)
 @TableName(FreightTemplateChild.TABLE_NAME)
@@ -41,60 +51,4 @@ public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, 
 
 	@Column(name = "area_id", nullable = false, columnDefinition = "varchar(32) not null comment '地区ID，示例参数：1,2,3,4'")
 	private String areaId;
-
-	public String getFreightTemplateId() {
-		return freightTemplateId;
-	}
-
-	public void setFreightTemplateId(String freightTemplateId) {
-		this.freightTemplateId = freightTemplateId;
-	}
-
-	public BigDecimal getFirstCompany() {
-		return firstCompany;
-	}
-
-	public void setFirstCompany(BigDecimal firstCompany) {
-		this.firstCompany = firstCompany;
-	}
-
-	public BigDecimal getFirstPrice() {
-		return firstPrice;
-	}
-
-	public void setFirstPrice(BigDecimal firstPrice) {
-		this.firstPrice = firstPrice;
-	}
-
-	public BigDecimal getContinuedCompany() {
-		return continuedCompany;
-	}
-
-	public void setContinuedCompany(BigDecimal continuedCompany) {
-		this.continuedCompany = continuedCompany;
-	}
-
-	public BigDecimal getContinuedPrice() {
-		return continuedPrice;
-	}
-
-	public void setContinuedPrice(BigDecimal continuedPrice) {
-		this.continuedPrice = continuedPrice;
-	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
-	public String getAreaId() {
-		return areaId;
-	}
-
-	public void setAreaId(String areaId) {
-		this.areaId = areaId;
-	}
 }

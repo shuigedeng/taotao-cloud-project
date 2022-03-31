@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员商品收藏表
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:37:12
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberGoodsCollection.TABLE_NAME)
 @TableName(MemberGoodsCollection.TABLE_NAME)
@@ -32,28 +42,4 @@ public class MemberGoodsCollection extends BaseSuperEntity<MemberGoodsCollection
 	 */
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(32) not null comment '商品id'")
 	private String skuId;
-
-
-	public MemberGoodsCollection(){}
-
-	public MemberGoodsCollection(String memberId, String skuId) {
-		this.memberId = memberId;
-		this.skuId = skuId;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
 }

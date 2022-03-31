@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员站内信表
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:18:49
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberNotice.TABLE_NAME)
 @TableName(MemberNotice.TABLE_NAME)
@@ -50,44 +60,4 @@ public class MemberNotice extends BaseSuperEntity<MemberNotice, Long> {
 	 */
 	@Column(name = "content", nullable = false, columnDefinition = "varchar(1024) not null comment '站内信内容'")
 	private String content;
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public Long getReceiveTime() {
-		return receiveTime;
-	}
-
-	public void setReceiveTime(Long receiveTime) {
-		this.receiveTime = receiveTime;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Boolean getRead() {
-		return read;
-	}
-
-	public void setRead(Boolean read) {
-		this.read = read;
-	}
 }

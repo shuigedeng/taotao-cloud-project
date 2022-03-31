@@ -8,6 +8,7 @@ import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since 2020/11/16 10:57
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/seller/store-user")
 @Tag(name = "店铺端-管理员接口", description = "店铺端-管理员接口")
 public class StoreUserController {
 
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 
 	@Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口", method = CommonConstant.GET)
 	@RequestLogger(description = "获取当前登录用户接口")

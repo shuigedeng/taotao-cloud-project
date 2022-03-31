@@ -5,10 +5,20 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 店铺-物流公司设置
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = StoreLogistics.TABLE_NAME)
 @TableName(StoreLogistics.TABLE_NAME)
@@ -22,20 +32,4 @@ public class StoreLogistics extends BaseSuperEntity<StoreLogistics, Long> {
 
 	@Column(name = "logistics_id", nullable = false, columnDefinition = "varchar(64) not null comment '物流公司ID'")
 	private String logisticsId;
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getLogisticsId() {
-		return logisticsId;
-	}
-
-	public void setLogisticsId(String logisticsId) {
-		this.logisticsId = logisticsId;
-	}
 }

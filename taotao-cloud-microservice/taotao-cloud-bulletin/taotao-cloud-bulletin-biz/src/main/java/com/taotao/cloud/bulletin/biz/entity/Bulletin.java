@@ -21,6 +21,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 提现申请表
@@ -29,6 +34,11 @@ import java.math.BigDecimal;
  * @since 2020/11/13 09:46
  * @version 2022.03
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tt_bulletin")
 @org.hibernate.annotations.Table(appliesTo = "tt_bulletin", comment = "提现申请表")

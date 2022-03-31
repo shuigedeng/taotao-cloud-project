@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.apache.maven.model.building.Result;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-11 15:57:55
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/buyer/member-evaluation")
@@ -45,8 +47,7 @@ public class MemberEvaluationBuyerController {
 	/**
 	 * 会员商品评价
 	 */
-	@Autowired
-	private MemberEvaluationService memberEvaluationService;
+	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "添加会员评价", description = "添加会员评价", method = CommonConstant.POST)
 	@RequestLogger(description = "添加会员评价")

@@ -12,6 +12,7 @@ import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -27,18 +28,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,会员接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-会员登录API", description = "买家端-会员登录API")
 @RequestMapping("/member/buyer/passport/connect/pc")
 public class MemberPcController {
 
-	@Autowired
-	private MemberService memberService;
-	@Autowired
-	private SmsUtil smsUtil;
-	@Autowired
-	private VerificationService verificationService;
+	private final MemberService memberService;
+	private final SmsUtil smsUtil;
+	private final VerificationService verificationService;
 
 	@Operation(summary = "登录接口", description = "登录接口", method = CommonConstant.POST)
 	@RequestLogger(description = "登录接口")

@@ -4,6 +4,11 @@ import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 机器人客服表
@@ -12,6 +17,11 @@ import javax.persistence.Table;
  * @version 2022.03
  * @since 2020/11/13 09:46
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tt_chatbot")
 @org.hibernate.annotations.Table(appliesTo = "tt_chatbot", comment = "机器人客服表")
@@ -73,76 +83,4 @@ public class Chatbot extends JpaSuperEntity {
 	 */
 	@Column(name = "work_mode", nullable = false, columnDefinition = "int not null default 0 comment '工作模式'")
 	private int workMode;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getBaseUrl() {
-		return baseUrl;
-	}
-
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
-
-	public String getPrimaryLanguage() {
-		return primaryLanguage;
-	}
-
-	public void setPrimaryLanguage(String primaryLanguage) {
-		this.primaryLanguage = primaryLanguage;
-	}
-
-	public String getFallback() {
-		return fallback;
-	}
-
-	public void setFallback(String fallback) {
-		this.fallback = fallback;
-	}
-
-	public String getWelcome() {
-		return welcome;
-	}
-
-	public void setWelcome(String welcome) {
-		this.welcome = welcome;
-	}
-
-	public String getChannel() {
-		return channel;
-	}
-
-	public void setChannel(String channel) {
-		this.channel = channel;
-	}
-
-	public String getChannelMark() {
-		return channelMark;
-	}
-
-	public void setChannelMark(String channelMark) {
-		this.channelMark = channelMark;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public int getWorkMode() {
-		return workMode;
-	}
-
-	public void setWorkMode(int workMode) {
-		this.workMode = workMode;
-	}
 }

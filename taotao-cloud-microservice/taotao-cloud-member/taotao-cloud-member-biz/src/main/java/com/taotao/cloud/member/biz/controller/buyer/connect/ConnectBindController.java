@@ -8,6 +8,7 @@ import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,app/小程序 联合登录
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-app/小程序联合登录API", description = "买家端-app/小程序联合登录API")
 @RequestMapping("/member/buyer/passport/connect/bind")
 public class ConnectBindController {
 
-	@Autowired
-	private ConnectService connectService;
+	private final ConnectService connectService;
 
 	@Operation(summary = "unionId绑定", description = "unionId绑定", method = CommonConstant.POST)
 	@RequestLogger(description = "unionId绑定")

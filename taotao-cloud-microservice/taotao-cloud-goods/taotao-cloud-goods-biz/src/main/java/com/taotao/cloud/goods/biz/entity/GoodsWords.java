@@ -5,11 +5,21 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 商品关键字表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = GoodsWords.TABLE_NAME)
 @TableName(GoodsWords.TABLE_NAME)
@@ -48,44 +58,4 @@ public class GoodsWords extends BaseSuperEntity<GoodsWords, Long> {
 	 */
 	@Column(name = "sort", nullable = false, columnDefinition = "int not null comment '排序'")
 	private Integer sort;
-
-	public String getWords() {
-		return words;
-	}
-
-	public void setWords(String words) {
-		this.words = words;
-	}
-
-	public String getWholeSpell() {
-		return wholeSpell;
-	}
-
-	public void setWholeSpell(String wholeSpell) {
-		this.wholeSpell = wholeSpell;
-	}
-
-	public String getAbbreviate() {
-		return abbreviate;
-	}
-
-	public void setAbbreviate(String abbreviate) {
-		this.abbreviate = abbreviate;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
 }

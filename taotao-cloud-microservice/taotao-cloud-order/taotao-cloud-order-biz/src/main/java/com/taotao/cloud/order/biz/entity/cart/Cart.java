@@ -20,6 +20,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 提现申请表
@@ -28,6 +33,11 @@ import javax.persistence.Table;
  * @since 2020/11/13 09:46
  * @version 2022.03
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tt_cart")
 @org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "提现申请表")

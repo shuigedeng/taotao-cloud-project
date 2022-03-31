@@ -9,6 +9,7 @@ import com.taotao.cloud.member.biz.connect.token.Token;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,20 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,小程序登录接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-会员小程序登录API", description = "买家端-会员小程序登录API")
 @RequestMapping("/member/buyer/passport/connect/miniProgram")
 public class MemberMiniProgramController {
 
-	@Autowired
-	public ConnectService connectService;
-	@Autowired
-	public WechatMpCodeUtil wechatMpCodeUtil;
-	@Autowired
-	public WechatMPMessageService wechatMPMessageService;
-	@Autowired
-	public ShortLinkService shortLinkService;
+	public final ConnectService connectService;
+	public final WechatMpCodeUtil wechatMpCodeUtil;
+	public final WechatMPMessageService wechatMPMessageService;
+	public final ShortLinkService shortLinkService;
 
 	@Operation(summary = "小程序自动登录", description = "小程序自动登录", method = CommonConstant.GET)
 	@RequestLogger(description = "小程序自动登录")

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,14 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-11 15:52:08
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/buyer/member-browse")
 @Tag(name = "买家端-会员浏览历史API", description = "买家端-会员浏览历史API")
 public class MemberBrowseController {
 
-	@Autowired
-	private IMemberBrowseService memberBrowseService;
+	private final IMemberBrowseService memberBrowseService;
 
 	@Operation(summary = "分页获取浏览历史", description = "分页获取浏览历史", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取浏览历史")

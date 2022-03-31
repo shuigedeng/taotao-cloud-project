@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -14,6 +19,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:24:19
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberNoticeSenter.TABLE_NAME)
 @TableName(MemberNoticeSenter.TABLE_NAME)
@@ -45,36 +55,4 @@ public class MemberNoticeSenter extends BaseSuperEntity<MemberNoticeSenter, Long
 	 */
 	@Column(name = "send_type", nullable = false, columnDefinition = "varchar(32) not null comment '发送类型,ALL 全站，SELECT 指定会员'")
 	private String sendType;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getMemberIds() {
-		return memberIds;
-	}
-
-	public void setMemberIds(String memberIds) {
-		this.memberIds = memberIds;
-	}
-
-	public String getSendType() {
-		return sendType;
-	}
-
-	public void setSendType(String sendType) {
-		this.sendType = sendType;
-	}
 }

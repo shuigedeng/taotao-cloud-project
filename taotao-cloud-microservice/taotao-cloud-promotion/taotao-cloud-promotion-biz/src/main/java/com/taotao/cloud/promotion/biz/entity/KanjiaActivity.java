@@ -7,12 +7,22 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
  * 砍价活动参与实体类
  *
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = KanjiaActivity.TABLE_NAME)
 @TableName(KanjiaActivity.TABLE_NAME)
@@ -50,77 +60,4 @@ public class KanjiaActivity extends BaseSuperEntity<KanjiaActivity, Long> {
 	 */
 	@Column(name = "status", nullable = false, columnDefinition = "varchar(64) not null comment '砍价活动状态'")
 	private String status;
-
-
-	public String getKanjiaActivityGoodsId() {
-		return kanjiaActivityGoodsId;
-	}
-
-	public void setKanjiaActivityGoodsId(String kanjiaActivityGoodsId) {
-		this.kanjiaActivityGoodsId = kanjiaActivityGoodsId;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public BigDecimal getSurplusPrice() {
-		return surplusPrice;
-	}
-
-	public void setSurplusPrice(BigDecimal surplusPrice) {
-		this.surplusPrice = surplusPrice;
-	}
-
-	public BigDecimal getPurchasePrice() {
-		return purchasePrice;
-	}
-
-	public void setPurchasePrice(BigDecimal purchasePrice) {
-		this.purchasePrice = purchasePrice;
-	}
-
-	public String getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(String skuId) {
-		this.skuId = skuId;
-	}
-
-	public String getGoodsName() {
-		return goodsName;
-	}
-
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
-	}
-
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }

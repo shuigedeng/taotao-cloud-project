@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -27,14 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since 2020-02-25 14:10:16
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/manager/membe-evaluation")
 @Tag(name = "管理端-会员商品评价API", description = "管理端-会员商品评价API")
 public class MemberEvaluationController {
 
-	@Autowired
-	private MemberEvaluationService memberEvaluationService;
+	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "通过id获取评论", description = "通过id获取评论", method = CommonConstant.GET)
 	@RequestLogger(description = "通过id获取评论")

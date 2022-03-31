@@ -5,7 +5,12 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -15,7 +20,11 @@ import lombok.Data;
  * @version 2021.10
  * @since 2022-03-11 15:35:23
  */
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberBrowse.TABLE_NAME)
 @TableName(MemberBrowse.TABLE_NAME)

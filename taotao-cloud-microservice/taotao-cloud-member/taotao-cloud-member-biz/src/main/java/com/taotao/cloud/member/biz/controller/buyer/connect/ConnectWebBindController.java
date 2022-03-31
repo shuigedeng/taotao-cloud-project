@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,20 +36,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,web联合登录
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-web联合登录API", description = "买家端-web联合登录API")
 @RequestMapping("/member/buyer/passport/connect/connect")
 public class ConnectWebBindController {
 
-	@Autowired
-	private ConnectService connectService;
-
-	@Autowired
-	private MemberService memberService;
-
-	@Autowired
-	private ConnectUtil connectUtil;
+	private final ConnectService connectService;
+	private final MemberService memberService;
+	private final ConnectUtil connectUtil;
 
 	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权", method = CommonConstant.GET)
 	@RequestLogger(description = "WEB信任登录授权")

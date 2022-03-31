@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员等级表
@@ -13,6 +18,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:16:55
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberGrade.TABLE_NAME)
 @TableName(MemberGrade.TABLE_NAME)
@@ -44,36 +54,4 @@ public class MemberGrade extends BaseSuperEntity<MemberGrade, Long> {
 	 */
 	@Column(name = "defaulted", nullable = false, columnDefinition = "boolean not null default false comment '是否为默认等级'")
 	private Boolean defaulted;
-
-	public String getGradeName() {
-		return gradeName;
-	}
-
-	public void setGradeName(String gradeName) {
-		this.gradeName = gradeName;
-	}
-
-	public String getGradeImage() {
-		return gradeImage;
-	}
-
-	public void setGradeImage(String gradeImage) {
-		this.gradeImage = gradeImage;
-	}
-
-	public Integer getExperienceValue() {
-		return experienceValue;
-	}
-
-	public void setExperienceValue(Integer experienceValue) {
-		this.experienceValue = experienceValue;
-	}
-
-	public Boolean getDefaulted() {
-		return defaulted;
-	}
-
-	public void setDefaulted(Boolean defaulted) {
-		this.defaulted = defaulted;
-	}
 }

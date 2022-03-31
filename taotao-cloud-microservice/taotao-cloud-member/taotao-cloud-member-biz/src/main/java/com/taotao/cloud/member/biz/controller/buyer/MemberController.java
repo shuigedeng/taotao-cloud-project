@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author shuigedeng
  * @since 2020-10-16 16:23:49
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member")
@@ -34,10 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
 	private final IMemberService memberService;
-
-	public MemberController(IMemberService memberService) {
-		this.memberService = memberService;
-	}
 
 	@RequestLogger(description = "根据id查询会员信息")
 	@PreAuthorize("hasAuthority('member:info:id')")

@@ -7,6 +7,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 钱包变动日志表
@@ -14,7 +19,11 @@ import javax.persistence.Table;
  * @author shuigedeng
  * @version 2021.10
  * @since 2022-03-11 15:43:36
- */
+ */@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberWalletLog.TABLE_NAME)
 @TableName(MemberWalletLog.TABLE_NAME)
@@ -78,36 +87,4 @@ public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
 	//	this.setDetail(memberWalletUpdateDTO.getDetail());
 	//	this.setServiceType(memberWalletUpdateDTO.getServiceType());
 	//}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public BigDecimal getMoney() {
-		return money;
-	}
-
-	public void setMoney(BigDecimal money) {
-		this.money = money;
-	}
-
-	public String getServiceType() {
-		return serviceType;
-	}
-
-	public void setServiceType(String serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	public String getDetail() {
-		return detail;
-	}
-
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
 }

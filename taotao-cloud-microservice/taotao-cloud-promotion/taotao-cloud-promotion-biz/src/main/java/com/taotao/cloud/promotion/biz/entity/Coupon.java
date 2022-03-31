@@ -9,6 +9,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 /**
@@ -16,6 +21,11 @@ import javax.persistence.Table;
  *
  * @since 2020-03-19 10:44 上午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Coupon.TABLE_NAME)
 @TableName(Coupon.TABLE_NAME)
@@ -76,118 +86,6 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 
 	@Column(name = "effective_days", nullable = false, columnDefinition = "int not null defaultt 0  comment '有效期'")
 	private Integer effectiveDays;
-
-	public String getCouponName() {
-		return couponName;
-	}
-
-	public void setCouponName(String couponName) {
-		this.couponName = couponName;
-	}
-
-	public String getCouponType() {
-		return couponType;
-	}
-
-	public void setCouponType(String couponType) {
-		this.couponType = couponType;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public BigDecimal getCouponDiscount() {
-		return couponDiscount;
-	}
-
-	public void setCouponDiscount(BigDecimal couponDiscount) {
-		this.couponDiscount = couponDiscount;
-	}
-
-	public String getGetType() {
-		return getType;
-	}
-
-	public void setGetType(String getType) {
-		this.getType = getType;
-	}
-
-	public BigDecimal getStoreCommission() {
-		return storeCommission;
-	}
-
-	public void setStoreCommission(BigDecimal storeCommission) {
-		this.storeCommission = storeCommission;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getPublishNum() {
-		return publishNum;
-	}
-
-	public void setPublishNum(Integer publishNum) {
-		this.publishNum = publishNum;
-	}
-
-	public Integer getCouponLimitNum() {
-		return couponLimitNum;
-	}
-
-	public void setCouponLimitNum(Integer couponLimitNum) {
-		this.couponLimitNum = couponLimitNum;
-	}
-
-	public Integer getUsedNum() {
-		return usedNum;
-	}
-
-	public void setUsedNum(Integer usedNum) {
-		this.usedNum = usedNum;
-	}
-
-	public Integer getReceivedNum() {
-		return receivedNum;
-	}
-
-	public void setReceivedNum(Integer receivedNum) {
-		this.receivedNum = receivedNum;
-	}
-
-	public BigDecimal getConsumeThreshold() {
-		return consumeThreshold;
-	}
-
-	public void setConsumeThreshold(BigDecimal consumeThreshold) {
-		this.consumeThreshold = consumeThreshold;
-	}
-
-	public String getRangeDayType() {
-		return rangeDayType;
-	}
-
-	public void setRangeDayType(String rangeDayType) {
-		this.rangeDayType = rangeDayType;
-	}
-
-	public Integer getEffectiveDays() {
-		return effectiveDays;
-	}
-
-	public void setEffectiveDays(Integer effectiveDays) {
-		this.effectiveDays = effectiveDays;
-	}
 
 	//public Coupon(CouponVO couponVO) {
 	//    BeanUtils.copyProperties(couponVO, this);

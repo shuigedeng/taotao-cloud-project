@@ -5,12 +5,22 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 规格项表规格项表
  *
  * @since 2020-02-18 15:18:56
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = Specification.TABLE_NAME)
 @TableName(Specification.TABLE_NAME)
@@ -38,28 +48,4 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
 	 */
 	@Column(name = "spec_value", nullable = false, columnDefinition = "varchar(64) not null comment '规格值名字'")
 	private String specValue;
-
-	public String getSpecName() {
-		return specName;
-	}
-
-	public void setSpecName(String specName) {
-		this.specName = specName;
-	}
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getSpecValue() {
-		return specValue;
-	}
-
-	public void setSpecValue(String specValue) {
-		this.specValue = specValue;
-	}
 }

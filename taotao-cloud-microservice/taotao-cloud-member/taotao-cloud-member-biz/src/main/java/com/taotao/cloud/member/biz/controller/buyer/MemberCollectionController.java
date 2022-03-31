@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,会员收藏接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/member/buyer/member-collection")
@@ -37,13 +39,11 @@ public class MemberCollectionController {
 	/**
 	 * 会员商品收藏
 	 */
-	@Autowired
-	private GoodsCollectionService goodsCollectionService;
+	private final GoodsCollectionService goodsCollectionService;
 	/**
 	 * 会员店铺
 	 */
-	@Autowired
-	private StoreCollectionService storeCollectionService;
+	private final StoreCollectionService storeCollectionService;
 	/**
 	 * 商品收藏关键字
 	 */

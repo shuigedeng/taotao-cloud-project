@@ -6,12 +6,22 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 运费模板
  *
  * @since 2020/11/17 4:27 下午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = FreightTemplate.TABLE_NAME)
 @TableName(FreightTemplate.TABLE_NAME)
@@ -31,29 +41,4 @@ public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 	 */
 	@Column(name = "pricing_method", nullable = false, columnDefinition = "varchar(32) not null comment '计价方式：按件、按重量 WEIGHT,NUM,FREE'")
 	private String pricingMethod;
-
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPricingMethod() {
-		return pricingMethod;
-	}
-
-	public void setPricingMethod(String pricingMethod) {
-		this.pricingMethod = pricingMethod;
-	}
 }

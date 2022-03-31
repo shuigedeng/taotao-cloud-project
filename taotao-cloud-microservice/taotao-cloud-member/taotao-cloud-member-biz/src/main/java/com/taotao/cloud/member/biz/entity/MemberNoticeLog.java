@@ -6,6 +6,11 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 会员消息发送日志表
@@ -14,6 +19,11 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2022-03-11 15:20:59
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberNoticeLog.TABLE_NAME)
 @TableName(MemberNoticeLog.TABLE_NAME)
@@ -63,61 +73,4 @@ public class MemberNoticeLog extends BaseSuperEntity<MemberNoticeLog, Long> {
 	 */
 	@Column(name = "send_type", nullable = false, columnDefinition = "int not null default 0 comment '发送类型,0全站，1指定会员'")
 	private Integer sendType;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getMemberIds() {
-		return memberIds;
-	}
-
-	public void setMemberIds(String memberIds) {
-		this.memberIds = memberIds;
-	}
-
-	public String getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
-	}
-
-	public String getAdminName() {
-		return adminName;
-	}
-
-	public void setAdminName(String adminName) {
-		this.adminName = adminName;
-	}
-
-	public LocalDateTime getSendTime() {
-		return sendTime;
-	}
-
-	public void setSendTime(LocalDateTime sendTime) {
-		this.sendTime = sendTime;
-	}
-
-	public Integer getSendType() {
-		return sendType;
-	}
-
-	public void setSendType(Integer sendType) {
-		this.sendType = sendType;
-	}
-
 }

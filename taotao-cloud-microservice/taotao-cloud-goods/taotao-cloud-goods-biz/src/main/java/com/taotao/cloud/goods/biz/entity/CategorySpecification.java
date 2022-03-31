@@ -5,10 +5,20 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品分类规格关联表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = CategorySpecification.TABLE_NAME)
 @TableName(CategorySpecification.TABLE_NAME)
@@ -28,20 +38,4 @@ public class CategorySpecification extends BaseSuperEntity<CategorySpecification
 	 */
 	@Column(name = "specification_id", nullable = false, columnDefinition = "varchar(64) not null comment '规格id'")
 	private String specificationId;
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getSpecificationId() {
-		return specificationId;
-	}
-
-	public void setSpecificationId(String specificationId) {
-		this.specificationId = specificationId;
-	}
 }

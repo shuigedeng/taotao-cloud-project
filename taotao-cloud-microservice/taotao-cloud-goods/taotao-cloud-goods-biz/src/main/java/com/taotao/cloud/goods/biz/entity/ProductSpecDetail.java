@@ -4,11 +4,21 @@ import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.math3.stat.descriptive.summary.Product;
 
 /**
  * @author shuigedeng
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //@Entity
 @Table(name = "tt_product_spec_detail")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_spec_detail", comment = "商品信息扩展表")

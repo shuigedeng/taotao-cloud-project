@@ -5,10 +5,20 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品计量单位表
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = GoodsUnit.TABLE_NAME)
 @TableName(GoodsUnit.TABLE_NAME)
@@ -22,12 +32,4 @@ public class GoodsUnit extends BaseSuperEntity<GoodsUnit, Long> {
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '计量单位名称'")
 	private String name;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 }

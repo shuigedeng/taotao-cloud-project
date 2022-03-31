@@ -5,6 +5,11 @@ import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品评论表
@@ -12,6 +17,11 @@ import javax.persistence.Table;
  * @author shuigedeng
  * @since 2020/4/30 16:06
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //@Entity
 @Table(name = "tt_product_comment")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_comment", comment = "商品评论表")

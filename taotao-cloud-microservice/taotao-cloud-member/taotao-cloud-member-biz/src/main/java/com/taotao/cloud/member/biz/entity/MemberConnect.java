@@ -5,6 +5,11 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 联合登陆表
@@ -12,6 +17,11 @@ import javax.persistence.Table;
  * @author shuigedeng
  * @since 2020/6/15 11:00
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = MemberConnect.TABLE_NAME)
 @TableName(MemberConnect.TABLE_NAME)
@@ -39,7 +49,7 @@ public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 	 * 平台id
 	 */
 	@Column(name = "platform_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '平台id'")
-	private String platformId = "";
+	private String platformId;
 
 	/**
 	 * 平台类型
@@ -47,7 +57,7 @@ public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 	 * @see PlatformTypeEnum
 	 */
 	@Column(name = "type", nullable = false, columnDefinition = "int NOT NULL DEFAULT 0 COMMENT '平台类型 0:未知,1:facebook,2:google,3:wechat,4:qq,5:weibo,6:twitter'")
-	private Integer type = 0;
+	private Integer type;
 
 	/**
 	 * 昵称
@@ -59,69 +69,5 @@ public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 	 * 头像
 	 */
 	@Column(name = "avatar", columnDefinition = "varchar(255) NOT NULL DEFAULT '' comment '头像'")
-	private String avatar = "";
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUnionId() {
-		return unionId;
-	}
-
-	public void setUnionId(String unionId) {
-		this.unionId = unionId;
-	}
-
-	public String getUnionType() {
-		return unionType;
-	}
-
-	public void setUnionType(String unionType) {
-		this.unionType = unionType;
-	}
-
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getPlatformId() {
-		return platformId;
-	}
-
-	public void setPlatformId(String platformId) {
-		this.platformId = platformId;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+	private String avatar;
 }

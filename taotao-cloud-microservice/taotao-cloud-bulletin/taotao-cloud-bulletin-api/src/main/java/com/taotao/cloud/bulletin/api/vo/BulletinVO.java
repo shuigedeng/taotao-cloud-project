@@ -33,7 +33,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "WithdrawVO", description = "提现申请VO")
+@Schema(description = "提现申请VO")
 public class BulletinVO implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;

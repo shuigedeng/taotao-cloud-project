@@ -5,12 +5,22 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 优惠券活动实体类
  *
  * @since 2020-03-19 10:44 上午
  */
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = CouponActivityItem.TABLE_NAME)
 @TableName(CouponActivityItem.TABLE_NAME)
@@ -28,27 +38,4 @@ public class CouponActivityItem extends BaseSuperEntity<CouponActivityItem, Long
 	@Column(name = "num", nullable = false, columnDefinition = "int not null default 0 comment '优惠券数量'")
 	private Integer num;
 
-	public String getActivityId() {
-		return activityId;
-	}
-
-	public void setActivityId(String activityId) {
-		this.activityId = activityId;
-	}
-
-	public String getCouponId() {
-		return couponId;
-	}
-
-	public void setCouponId(String couponId) {
-		this.couponId = couponId;
-	}
-
-	public Integer getNum() {
-		return num;
-	}
-
-	public void setNum(Integer num) {
-		this.num = num;
-	}
 }
