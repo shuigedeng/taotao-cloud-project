@@ -15,6 +15,7 @@ import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -32,29 +33,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-02-21 17:11:55
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-邮件管理API", description = "工具管理端-邮件管理API")
 @RequestMapping("/sys/tools/email")
 public class EmailController {
 
-	@Autowired
-	private RedisDelayQueue redisDelayQueue;
-
-	@Autowired
-	private RedissonTemplate redissonTemplate;
-
-	@Autowired
-	private QuartzManager quartzManager;
-
-	@Autowired
-	private ScheduledManager scheduledManager;
-
+	private final RedisDelayQueue redisDelayQueue;
+	private final RedissonTemplate redissonTemplate;
+	private final QuartzManager quartzManager;
+	private final ScheduledManager scheduledManager;
 	private final IEmailConfigService emailService;
-
-	public EmailController(IEmailConfigService emailService) {
-		this.emailService = emailService;
-	}
 
 	@Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息", method = CommonConstant.GET)
 	@RequestLogger(description = "查询邮件配置信息")

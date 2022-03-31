@@ -24,6 +24,7 @@ import com.taotao.cloud.sys.biz.mapstruct.LogisticsMapStruct;
 import com.taotao.cloud.sys.biz.service.ILogisticsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2022.03
  * @since 2020/11/13 09:58
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/sys/manager/logistics")
@@ -45,10 +47,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerLogisticsController {
 
 	private final ILogisticsService logisticsService;
-
-	public ManagerLogisticsController(ILogisticsService logisticsService) {
-		this.logisticsService = logisticsService;
-	}
 
 	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息", method = CommonConstant.GET)
 	@RequestLogger(description = "根据id查询物流公司信息")

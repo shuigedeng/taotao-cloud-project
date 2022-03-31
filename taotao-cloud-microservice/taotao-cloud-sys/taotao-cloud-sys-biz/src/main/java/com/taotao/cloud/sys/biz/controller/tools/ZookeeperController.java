@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.controller.tools;
 
 import com.taotao.cloud.sys.biz.service.IZookeeperService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-02 15:56:19
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-zookeeper管理API", description = "工具管理端-zookeeper管理API")
 @RequestMapping("/sys/tools/zookeeper")
 public class ZookeeperController {
 
-	@Autowired
-	private IZookeeperService zookeeperService;
+	private final IZookeeperService zookeeperService;
 
 	///**
 	// * 添加路径收藏

@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-02 16:19:02
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-支付宝管理API", description = "工具管理端-支付宝管理API")
@@ -41,11 +43,6 @@ public class AliPayController {
 	private final AlipayUtils alipayUtils;
 
 	private final IAlipayConfigService alipayService;
-
-	public AliPayController(AlipayUtils alipayUtils, IAlipayConfigService alipayService) {
-		this.alipayUtils = alipayUtils;
-		this.alipayService = alipayService;
-	}
 
 	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息", method = CommonConstant.GET)
 	@RequestLogger(description = "查询阿里支付配置信息")

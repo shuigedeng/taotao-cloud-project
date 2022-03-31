@@ -1,12 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
-//import cn.lili.event.MemberRegisterEvent;
-//import cn.lili.modules.member.entity.dos.Member;
-//import cn.lili.modules.promotion.entity.dos.CouponActivity;
-//import cn.lili.modules.promotion.entity.enums.CouponActivityTypeEnum;
-//import cn.lili.modules.promotion.entity.enums.PromotionsStatusEnum;
-//import cn.lili.modules.promotion.service.CouponActivityService;
-//import cn.lili.modules.promotion.tools.PromotionTools;
 //import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 //import java.util.List;
 //import org.springframework.beans.factory.annotation.Autowired;

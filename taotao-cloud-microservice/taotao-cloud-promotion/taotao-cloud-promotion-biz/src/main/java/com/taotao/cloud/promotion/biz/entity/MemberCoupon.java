@@ -3,10 +3,6 @@ package com.taotao.cloud.promotion.biz.entity;
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.lili.modules.promotion.entity.enums.CouponRangeDayEnum;
-import cn.lili.modules.promotion.entity.enums.MemberCouponStatusEnum;
-import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -66,7 +62,7 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
     /**
      * POINT("打折"), PRICE("减免现金");
      *
-     * @see cn.lili.modules.promotion.entity.enums.CouponTypeEnum
+     * @see CouponTypeEnum
      */
     @Schema(description =  "活动类型")
     private String couponType;
@@ -83,7 +79,7 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
     /**
-     * @see cn.lili.modules.promotion.entity.enums.CouponGetEnum
+     * @see CouponGetEnum
      */
     @Schema(description =  "优惠券类型，分为免费领取和活动赠送")
     private String getType;

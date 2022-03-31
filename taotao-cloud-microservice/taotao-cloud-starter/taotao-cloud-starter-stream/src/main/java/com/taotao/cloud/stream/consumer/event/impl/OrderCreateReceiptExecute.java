@@ -1,13 +1,6 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
 //import cn.hutool.json.JSONUtil;
-//import cn.lili.common.utils.BeanUtil;
-//import cn.lili.event.TradeEvent;
-//import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-//import cn.lili.modules.order.order.entity.dos.Receipt;
-//import cn.lili.modules.order.order.entity.vo.OrderVO;
-//import cn.lili.modules.order.order.entity.vo.ReceiptVO;
-//import cn.lili.modules.order.order.service.ReceiptService;
 //import java.util.ArrayList;
 //import java.util.List;
 //import org.springframework.beans.factory.annotation.Autowired;

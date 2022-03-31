@@ -63,7 +63,7 @@ public class OrderSearchParams extends PageVO {
 
 	/**
 	 * @see OrderTypeEnum
-	 * @see cn.lili.modules.order.order.entity.enums.OrderPromotionTypeEnum
+	 * @see OrderPromotionTypeEnum
 	 */
 	@Schema(description = "订单类型", allowableValues = "NORMAL,VIRTUAL,GIFT,PINTUAN,POINT")
 	private String orderType;

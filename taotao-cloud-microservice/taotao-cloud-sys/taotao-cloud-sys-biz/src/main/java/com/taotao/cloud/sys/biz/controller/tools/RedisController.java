@@ -8,6 +8,7 @@ import com.taotao.cloud.sys.biz.service.IRedisService;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,14 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-02-11 16:13:03
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-redis管理API", description = "工具管理端-redis管理API")
 @RequestMapping("/sys/tools/redis")
 public class RedisController {
 
-	@Autowired
-	private IRedisService redisService;
+	private final IRedisService redisService;
 
 	@Operation(summary = "查询Redis缓存", description = "查询Redis缓存", method = CommonConstant.GET)
 	@RequestLogger(description = "查询Redis缓存")

@@ -3801,7 +3801,7 @@ public class RedisRepository {
 	}
 
 	public Object findByListCacheKey(List<CacheKey> ks) {
-
-		return null;
+		 return mGetByCacheKey(ks);
 	}
+
 }

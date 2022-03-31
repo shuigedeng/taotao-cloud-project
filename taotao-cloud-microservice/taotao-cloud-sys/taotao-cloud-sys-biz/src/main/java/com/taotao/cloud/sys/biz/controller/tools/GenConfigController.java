@@ -11,6 +11,7 @@ import com.taotao.cloud.sys.biz.entity.config.GenConfig;
 import com.taotao.cloud.sys.biz.service.IGenConfigService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-02-15 09:03:18
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-代码生成器配置管理API", description = "工具管理端-代码生成器配置管理API")
@@ -34,10 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GenConfigController {
 
 	private final IGenConfigService genConfigService;
-
-	public GenConfigController(IGenConfigService genConfigService) {
-		this.genConfigService = genConfigService;
-	}
 
 	@Operation(summary = "查询", description = "查询", method = CommonConstant.GET)
 	@RequestLogger(description = "查询")

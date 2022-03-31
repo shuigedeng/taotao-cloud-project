@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,16 +27,15 @@ import org.springframework.web.multipart.MultipartFile;
  * > 【必须】程序运行所在环境安装 LibreOffice，PDF 转换基于 LibreOffice 完成(OpenOffice 也一样可用) >
  * 安装参考教程：http://wiki.nooss.cn/archives/420.html > Linux 安装字体(不安装会出现乱码问题)：http://wiki.nooss.cn/archives/406.html
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-pdf管理API", description = "工具管理端-pdf管理API")
 @RequestMapping("/sys/tools/pdf")
 public class PdfController {
 
-	@Autowired
-	private FileUploaderUtils fileUploaderUtils;
-	@Autowired
-	private PdfUtils pdfUtils;
+	private final FileUploaderUtils fileUploaderUtils;
+	private final PdfUtils pdfUtils;
 
 	@Operation(summary = "文件上传", description = "文件上传", method = CommonConstant.POST)
 	@RequestLogger(description = "文件上传")

@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-02-15 08:59:11
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-代码生成管理API", description = "工具管理端-代码生成管理API")
@@ -42,17 +44,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class GeneratorController {
 
 	private final IGeneratorService generatorService;
-
 	private final IGenConfigService genConfigService;
 
 	@Value("${generator.enabled:false}")
 	private Boolean generatorEnabled;
-
-	public GeneratorController(IGeneratorService generatorService,
-		IGenConfigService genConfigService) {
-		this.generatorService = generatorService;
-		this.genConfigService = genConfigService;
-	}
 
 	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
 	@RequestLogger(description = "查询数据库数据")

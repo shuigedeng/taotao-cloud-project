@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterAspect;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterClient;
+import com.taotao.cloud.redis.repository.CaffeineRepository;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.List;
 import org.redisson.api.RedissonClient;
@@ -141,6 +142,11 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 	@Bean
 	public RedisRepository redisRepository(RedisTemplate<String, Object> redisTemplate) {
 		return new RedisRepository(redisTemplate, false);
+	}
+
+	@Bean
+	public CaffeineRepository caffeineRepository() {
+		return new CaffeineRepository();
 	}
 
 	@Bean("stringRedisTemplate")

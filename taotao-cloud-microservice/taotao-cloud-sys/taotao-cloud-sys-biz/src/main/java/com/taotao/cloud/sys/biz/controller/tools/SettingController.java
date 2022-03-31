@@ -10,6 +10,7 @@ import com.taotao.cloud.sys.biz.entity.config.Setting;
 import com.taotao.cloud.sys.biz.service.ISettingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-03-02 15:48:47
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-配置管理API", description = "工具管理端-配置管理API")
 @RequestMapping("/sys/tools/setting")
 public class SettingController {
 
-	@Autowired
-	private ISettingService settingService;
+	private final ISettingService settingService;
 
 	@NotAuth
 	public Result<SettingVO> getByKey(@RequestParam String key) {

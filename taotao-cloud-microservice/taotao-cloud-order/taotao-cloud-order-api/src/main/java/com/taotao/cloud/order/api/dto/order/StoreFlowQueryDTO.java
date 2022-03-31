@@ -1,7 +1,5 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.store.entity.dos.Bill;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

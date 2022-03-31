@@ -52,7 +52,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerRegionController extends
 	SuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
-
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")

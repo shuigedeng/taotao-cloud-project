@@ -1,15 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
-//import cn.lili.common.utils.SnowFlake;
-//import cn.lili.common.utils.SpringContextUtil;
-//import cn.lili.event.OrderStatusChangeEvent;
-//import cn.lili.modules.order.order.entity.dos.Order;
-//import cn.lili.modules.order.order.entity.dto.OrderMessage;
-//import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-//import cn.lili.modules.order.order.service.OrderService;
-//import cn.lili.modules.payment.entity.RefundLog;
-//import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
-//import cn.lili.modules.payment.kit.Payment;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;

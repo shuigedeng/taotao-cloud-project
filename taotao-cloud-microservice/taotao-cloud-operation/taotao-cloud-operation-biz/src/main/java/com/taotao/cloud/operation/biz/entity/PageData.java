@@ -1,11 +1,6 @@
 package com.taotao.cloud.operation.biz.entity;
 
 import cn.hutool.http.HtmlUtil;
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.common.enums.SwitchEnum;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.page.entity.enums.PageEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

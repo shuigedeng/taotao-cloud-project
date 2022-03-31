@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class AlipayConfigServiceImpl extends
 	ServiceImpl<IAlipayConfigMapper, AlipayConfig> implements IAlipayConfigService {
 
-
 	@Override
 	public String toPayAsPc(AlipayConfig alipay, TradeVo trade) throws Exception {
 

@@ -1,6 +1,5 @@
 package com.taotao.cloud.operation.api.dto;
 
-import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import io.swagger.annotations.ApiModelProperty;

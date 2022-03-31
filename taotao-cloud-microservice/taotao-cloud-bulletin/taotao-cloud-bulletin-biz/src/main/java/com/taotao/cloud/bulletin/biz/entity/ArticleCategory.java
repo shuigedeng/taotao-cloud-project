@@ -1,7 +1,5 @@
 package com.taotao.cloud.bulletin.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
-import cn.lili.modules.page.entity.enums.ArticleCategoryEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.controller.tools;
 
 import com.taotao.cloud.sys.biz.service.IPinYinService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2022.03
  * @since 2022/03/03 14:57
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "工具管理端-拼音管理API", description = "工具管理端-拼音管理API")
 @RequestMapping("/sys/tools/pinyin")
 public class PinYinController {
 
-	@Autowired
-	private IPinYinService pinYinService;
+	private final IPinYinService pinYinService;
 
 }
