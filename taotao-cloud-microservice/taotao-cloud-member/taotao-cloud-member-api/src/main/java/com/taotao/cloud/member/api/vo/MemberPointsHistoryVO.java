@@ -21,9 +21,4 @@ public class MemberPointsHistoryVO {
 
 	@Schema(description = "累计获得积分")
 	private Long totalPoint;
-
-	public MemberPointsHistoryVO() {
-		this.point = 0L;
-		this.totalPoint = 0L;
-	}
 }

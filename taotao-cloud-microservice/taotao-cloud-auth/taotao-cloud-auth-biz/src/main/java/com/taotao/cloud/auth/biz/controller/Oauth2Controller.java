@@ -19,7 +19,6 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.redis.repository.RedisRepository;
