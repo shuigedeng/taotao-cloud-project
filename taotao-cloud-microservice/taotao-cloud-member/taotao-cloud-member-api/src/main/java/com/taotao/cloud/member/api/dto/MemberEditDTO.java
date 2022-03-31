@@ -8,7 +8,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -19,6 +22,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @since 2022-03-14 11:25:33
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "会员信息修改DTO")
 public class MemberEditDTO implements Serializable {
 

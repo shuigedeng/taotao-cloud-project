@@ -27,6 +27,7 @@ public class CreateTimeShardingTableAlgorithm implements StandardShardingAlgorit
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Collection<String> doSharding(Collection collection,
 		RangeShardingValue rangeShardingValue) {
 		Collection<String> collect = new ArrayList<>();

@@ -2,13 +2,19 @@ package com.taotao.cloud.operation.api.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 文章VO
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArticleVO {
 
     @Schema(description =  "文章ID")

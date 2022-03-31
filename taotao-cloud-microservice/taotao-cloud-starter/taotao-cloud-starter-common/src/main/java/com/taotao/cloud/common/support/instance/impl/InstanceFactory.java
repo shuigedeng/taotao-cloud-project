@@ -6,6 +6,7 @@ import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.support.instance.Instance;
 import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -101,10 +102,13 @@ public final class InstanceFactory implements Instance {
         this.notNull(tClass);
 
         try {
-            return tClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return tClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
             throw new CommonRuntimeException(e);
+        } catch (InvocationTargetException e) {
+	        e.printStackTrace();
         }
+	    throw new CommonRuntimeException("类型异常");
     }
 
     @Override
@@ -123,6 +127,7 @@ public final class InstanceFactory implements Instance {
      * @param instanceMap 实例化对象 map
      * @return 单例对象
      */
+    @SuppressWarnings("unchecked")
     private <T> T getSingleton(final Class<T> tClass, final Map<String, Object> instanceMap) {
         this.notNull(tClass);
 
@@ -142,6 +147,7 @@ public final class InstanceFactory implements Instance {
      * @param instanceMap 实例化对象 map
      * @return 单例对象
      */
+    @SuppressWarnings("unchecked")
     private <T> T getSingleton(final Class<T> tClass,
                                final String group, final Map<String, Object> instanceMap) {
         this.notNull(tClass);

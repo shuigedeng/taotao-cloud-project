@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -103,9 +104,9 @@ public class JacksonConfiguration implements InitializingBean {
 			// 包含null
 			mapper.setSerializationInclusion(Include.ALWAYS);
 			// 使用驼峰式
-			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+			mapper.setPropertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE);
 			// 使用bean名称
-			mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
+			//mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
 			// 所有日期格式都统一为固定格式
 			mapper.setDateFormat(
 				new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));

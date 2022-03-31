@@ -4,17 +4,23 @@ import cn.lili.common.utils.BeanUtil;
 import cn.lili.modules.page.entity.dos.ArticleCategory;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
  * 文章分类VO
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArticleCategoryVO extends ArticleCategory {
 
     @Schema(description =  "子菜单")

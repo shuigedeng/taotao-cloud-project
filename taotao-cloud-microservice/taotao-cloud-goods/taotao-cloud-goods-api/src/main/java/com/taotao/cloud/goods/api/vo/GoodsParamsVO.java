@@ -3,12 +3,18 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品关联参数的VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GoodsParamsVO extends GoodsParamsDTO {
 
 	private static final long serialVersionUID = -4904700751774005326L;

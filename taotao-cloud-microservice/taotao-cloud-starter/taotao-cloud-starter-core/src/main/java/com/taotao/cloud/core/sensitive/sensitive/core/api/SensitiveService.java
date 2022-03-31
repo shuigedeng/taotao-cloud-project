@@ -206,6 +206,7 @@ public class SensitiveService<T> implements ISensitive<T> {
         } catch (InvocationTargetException | NoSuchMethodException e) {
 	        e.printStackTrace();
         }
+	    throw new SensitiveRuntimeException("");
     }
 
 

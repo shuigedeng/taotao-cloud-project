@@ -3,14 +3,22 @@ package com.taotao.cloud.promotion.api.vo;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 积分商品查询通用类
  **/
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PointsGoodsSearchParams extends BasePromotionsSearchParams {
 
     @Schema(description =  "商品名称")

@@ -84,7 +84,7 @@ public record PageQuery<QueryDTO>(
 		PageQuery<QueryDTO> params = this;
 		QueryDTO query = params.query();
 
-		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page(
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(
 			params.currentPage(), params.pageSize());
 		if (query instanceof BaseQuery baseQuery) {
 			//没有排序参数

@@ -43,6 +43,7 @@ public class ConvertUtil {
 	 *                                  but source is not {@code null}
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public static <T> T convert(@Nullable Object source, Class<T> targetType) {
 		if (source == null) {
 			return null;
@@ -68,6 +69,7 @@ public class ConvertUtil {
 	 *                                  but source is not {@code null}
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public static <T> T convert(@Nullable Object source, TypeDescriptor sourceType,
 		TypeDescriptor targetType) {
 		if (source == null) {
@@ -91,6 +93,7 @@ public class ConvertUtil {
 	 *                                  but source is not {@code null}
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public static <T> T convert(@Nullable Object source, TypeDescriptor targetType) {
 		if (source == null) {
 			return null;

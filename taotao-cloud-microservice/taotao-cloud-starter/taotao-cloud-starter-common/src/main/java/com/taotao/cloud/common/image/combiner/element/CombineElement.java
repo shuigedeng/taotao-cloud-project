@@ -21,6 +21,7 @@ public abstract class CombineElement<T extends CombineElement> {
         return x;
     }
 
+	@SuppressWarnings("unchecked")
     public T setX(int x) {
         this.x = x;
         return (T) this;
@@ -30,6 +31,7 @@ public abstract class CombineElement<T extends CombineElement> {
         return y;
     }
 
+	@SuppressWarnings("unchecked")
     public T setY(int y) {
         this.y = y;
         return (T) this;
@@ -39,6 +41,7 @@ public abstract class CombineElement<T extends CombineElement> {
         return center;
     }
 
+	@SuppressWarnings("unchecked")
     public T setCenter(boolean center) {
         this.center = center;
         return (T) this;
@@ -48,6 +51,7 @@ public abstract class CombineElement<T extends CombineElement> {
         return direction;
     }
 
+	@SuppressWarnings("unchecked")
     public T setDirection(Direction direction) {
         this.direction = direction;
         return (T) this;
@@ -57,6 +61,7 @@ public abstract class CombineElement<T extends CombineElement> {
         return alpha;
     }
 
+	@SuppressWarnings("unchecked")
     public T setAlpha(float alpha) {
         this.alpha = alpha;
         return (T) this;

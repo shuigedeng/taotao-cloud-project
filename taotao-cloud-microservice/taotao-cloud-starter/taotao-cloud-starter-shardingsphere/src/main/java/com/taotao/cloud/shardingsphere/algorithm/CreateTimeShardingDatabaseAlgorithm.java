@@ -23,6 +23,7 @@ public class CreateTimeShardingDatabaseAlgorithm implements StandardShardingAlgo
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Collection<String> doSharding(Collection collection,
 		RangeShardingValue rangeShardingValue) {
 		Collection<String> collect = new ArrayList<>();

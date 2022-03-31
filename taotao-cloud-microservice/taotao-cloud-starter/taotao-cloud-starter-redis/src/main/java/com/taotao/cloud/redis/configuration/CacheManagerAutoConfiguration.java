@@ -281,6 +281,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		}
 
 		@Nullable
+		@SuppressWarnings("unchecked")
 		protected CacheLoader<Object, Object> getCacheLoader() {
 			return (CacheLoader<Object, Object>) ReflectionUtils.getField(CACHE_LOADER_FIELD, this);
 		}

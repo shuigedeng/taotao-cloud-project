@@ -9,7 +9,10 @@ import com.taotao.cloud.common.model.PageParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -18,6 +21,9 @@ import java.util.Date;
  * 分销员对象
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "分销订单查询对象")
 public class DistributionOrderSearchParams extends PageParam {
 

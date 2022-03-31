@@ -7,9 +7,15 @@ import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BasePromotionsSearchParams {
 
 	@Schema(description = "活动id")

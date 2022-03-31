@@ -115,7 +115,7 @@ public class DozerConfiguration implements InitializingBean {
 		public <T> T map2(Object source, Class<T> destinationClass) {
 			if (source == null) {
 				try {
-					return destinationClass.newInstance();
+					return destinationClass.getDeclaredConstructor().newInstance();
 				} catch (Exception e) {
 				}
 			}

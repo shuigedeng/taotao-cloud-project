@@ -1,13 +1,19 @@
 package com.taotao.cloud.report.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 首页统计内容
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class IndexStatisticsVO {
 
     @Schema(description =  "订单总数量")

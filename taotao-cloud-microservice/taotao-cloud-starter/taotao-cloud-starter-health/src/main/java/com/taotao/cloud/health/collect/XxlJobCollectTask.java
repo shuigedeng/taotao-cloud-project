@@ -65,6 +65,7 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected CollectInfo getData() {
 		try {
 			Class<?> xxlJobSpringExecutorClass = ReflectionUtil.tryClassForName(XXL_JOB_SPRING_EXECUTOR_CLASS);

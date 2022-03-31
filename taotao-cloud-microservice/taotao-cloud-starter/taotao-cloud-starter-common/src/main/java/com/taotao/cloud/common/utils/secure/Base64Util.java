@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils.secure;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.Charsets;
 
 /**
@@ -34,7 +35,7 @@ public class Base64Util extends org.springframework.util.Base64Utils {
 	 * @return {String}
 	 */
 	public static String encode(String value) {
-		return Base64Util.encode(value, Charsets.UTF_8);
+		return Base64Util.encode(value, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class Base64Util extends org.springframework.util.Base64Utils {
 	 * @return {String}
 	 */
 	public static String encodeUrlSafe(String value) {
-		return Base64Util.encodeUrlSafe(value, Charsets.UTF_8);
+		return Base64Util.encodeUrlSafe(value, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class Base64Util extends org.springframework.util.Base64Utils {
 	 * @return {String}
 	 */
 	public static String decode(String value) {
-		return Base64Util.decode(value, Charsets.UTF_8);
+		return Base64Util.decode(value, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class Base64Util extends org.springframework.util.Base64Utils {
 	 * @return {String}
 	 */
 	public static String decodeUrlSafe(String value) {
-		return Base64Util.decodeUrlSafe(value, Charsets.UTF_8);
+		return Base64Util.decodeUrlSafe(value, StandardCharsets.UTF_8);
 	}
 
 	/**

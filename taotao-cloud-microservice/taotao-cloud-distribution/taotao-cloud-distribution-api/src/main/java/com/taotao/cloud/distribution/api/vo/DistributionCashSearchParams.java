@@ -2,12 +2,18 @@ package com.taotao.cloud.distribution.api.vo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 分销佣金查询信息
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "分销佣金查询信息")
 public class DistributionCashSearchParams extends PageVO {
 

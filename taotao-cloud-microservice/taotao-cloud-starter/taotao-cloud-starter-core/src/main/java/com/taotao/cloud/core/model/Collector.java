@@ -72,6 +72,7 @@ public class Collector {
 	 * @return {@link java.lang.Object }
 	 * @since 2021-09-02 20:31:00
 	 */
+	@SuppressWarnings("unchecked")
 	protected <T> T get(String key, Class<T> type) {
 		if (!map.containsKey(key)) {
 			synchronized (lock) {

@@ -62,6 +62,7 @@ public class PropertyCache implements CommandLineRunner {
 	 * @return 属性值
 	 * @since 2021-09-02 20:37:54
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T get(String key, T defaultValue) {
 		if (!isStart) {
 			String v = PropertyUtil.getProperty(key);

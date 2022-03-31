@@ -3,6 +3,7 @@ package com.taotao.cloud.goods.api.vo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +11,9 @@ import lombok.NoArgsConstructor;
  * 库存警告封装类
  **/
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class StockWarningVO {
 
 	@Schema(description = "库存警告数量")

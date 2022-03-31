@@ -123,7 +123,6 @@ public class RedisRepository {
 	 * 清空DB
 	 *
 	 * @param node redis 节点
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:59:47
 	 */
 	public void flushDB(RedisClusterNode node) {
@@ -134,7 +133,6 @@ public class RedisRepository {
 	/**
 	 * 发送数据
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:59:30
 	 */
 	public void send(String channel, Object data) {
@@ -145,7 +143,6 @@ public class RedisRepository {
 	 * 设置超时
 	 *
 	 * @param key key
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:59:30
 	 */
 	public void setExpire(CacheKey key) {
@@ -160,7 +157,6 @@ public class RedisRepository {
 	 * @param value value
 	 * @param <T>   T
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:59:47
 	 */
 	public static <T> boolean isNullVal(T value) {
@@ -173,7 +169,6 @@ public class RedisRepository {
 	 * new 一个空值
 	 *
 	 * @return {@link com.taotao.cloud.redis.val.NullVal }
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:20
 	 */
 	public NullVal newNullVal() {
@@ -186,7 +181,6 @@ public class RedisRepository {
 	 * @param value value
 	 * @param <T>   T
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:35
 	 */
 	public <T> T returnVal(T value) {
@@ -198,7 +192,6 @@ public class RedisRepository {
 	 *
 	 * @param keys 一定不能为 {@literal null}.
 	 * @return key 被删除返回true
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/del">Redis Documentation: DEL</a>
 	 * @since 2021-09-07 21:01:35
 	 */
@@ -211,7 +204,6 @@ public class RedisRepository {
 	 * 从当前数据库中随机返回(不删除)一个 key 。
 	 *
 	 * @return 当数据库不为空时，返回一个 key 。 当数据库为空时，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/randomkey">Redis Documentation: RANDOMKEY</a>
 	 * @since 2021-09-07 21:01:35
 	 */
@@ -224,7 +216,6 @@ public class RedisRepository {
 	 *
 	 * @param oldKey 一定不能为 {@literal null}.
 	 * @param newKey 一定不能为 {@literal null}.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/rename">Redis Documentation: RENAME</a>
 	 * @since 2021-09-07 21:01:35
 	 */
@@ -237,7 +228,6 @@ public class RedisRepository {
 	 *
 	 * @param keys 一定不能为 {@literal null}.
 	 * @return key 被删除返回true
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/del">Redis Documentation: DEL</a>
 	 * @since 2021-09-07 21:01:35
 	 */
@@ -252,7 +242,6 @@ public class RedisRepository {
 	 * @param oldKey 一定不能为 {@literal null}.
 	 * @param newKey 一定不能为 {@literal null}.
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/renamenx">Redis Documentation: RENAMENX</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -267,7 +256,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param dbIndex 数据库索引
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/move">Redis Documentation: MOVE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -293,7 +281,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param seconds 过期时间 单位：秒
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIRE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -319,7 +306,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param timeout 过期时间
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIRE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -333,7 +319,6 @@ public class RedisRepository {
 	 * @param key  一定不能为 {@literal null}.
 	 * @param date 过期时间
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/expireat">Redis Documentation: EXPIREAT</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -347,7 +332,6 @@ public class RedisRepository {
 	 * @param key          一定不能为 {@literal null}.
 	 * @param milliseconds 过期时间 单位： 毫米
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIRE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -360,7 +344,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/persist">Redis Documentation: PERSIST</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -374,7 +357,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return none (key不存在)、string (字符串)、list (列表)、set (集合)、zset (有序集)、hash (哈希表) 、stream （流）
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/type">Redis Documentation: TYPE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -392,7 +374,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/ttl">Redis Documentation: TTL</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -406,7 +387,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 当 key 不存在时，返回 -2 。当 key 存在但没有设置剩余生存时间时，返回 -1 。否则，以毫秒为单位，返回 key 的剩余生存时间
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/pttl">Redis Documentation: PTTL</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -422,7 +402,6 @@ public class RedisRepository {
 	 * @param key             一定不能为 {@literal null}.
 	 * @param value           值
 	 * @param cacheNullValues 是否缓存null对象
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -442,7 +421,6 @@ public class RedisRepository {
 	 * @param key           一定不能为 {@literal null}.
 	 * @param unixTimestamp 过期时间戳
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/expireat">Redis Documentation: EXPIREAT</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -456,7 +434,6 @@ public class RedisRepository {
 	 * @param cacheKey        缓存key 一定不能为 {@literal null}.
 	 * @param value           缓存value
 	 * @param cacheNullValues 是否缓存null对象
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:46
 	 */
 	public void set(@NonNull CacheKey cacheKey, Object value, boolean... cacheNullValues) {
@@ -485,7 +462,6 @@ public class RedisRepository {
 	 * @param cacheNullValues 是否缓存null对象
 	 * @throws IllegalArgumentException if either {@code key}, {@code value} or {@code timeout} is
 	 *                                  not present.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/setex">Redis Documentation: SETEX</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -506,7 +482,6 @@ public class RedisRepository {
 	 * @param key   redis主键
 	 * @param value 值
 	 * @param time  过期时间(单位秒)
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:46
 	 */
 	public void setExpire(final byte[] key, final byte[] value, final long time) {
@@ -529,7 +504,6 @@ public class RedisRepository {
 	 * @param value           值
 	 * @param cacheNullValues 是否缓存null对象
 	 * @param seconds         过期时间 单位秒
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/setex">Redis Documentation: SETEX</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -544,7 +518,6 @@ public class RedisRepository {
 	 * @param value 一定不能为 {@literal null}.
 	 * @return 设置成功返回true。
 	 * @throws IllegalArgumentException 如果{@code key} 或 {@code value} 不存在
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -564,7 +537,6 @@ public class RedisRepository {
 	 * @param seconds 过期时间 单位秒
 	 * @return 设置成功返回true。
 	 * @throws IllegalArgumentException 如果{@code key} 或 {@code value} 不存在
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -584,7 +556,6 @@ public class RedisRepository {
 	 * @param key   redis主键
 	 * @param value 值
 	 * @param time  过期时间(单位秒)
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:46
 	 */
 	public void setExpire(final String key, final Object value, final long time) {
@@ -602,11 +573,11 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为  {@literal null}.
 	 * @return 列表的头元素。 当 key 不存在时，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lpop">Redis Documentation: LPOP</a>
 	 * @since 2021-09-07 21:01:46
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T lPop(@NonNull String key) {
 		return (T) redisTemplate.opsForList().leftPop(key);
 	}
@@ -617,10 +588,10 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为  {@literal null}.
 	 * @return 列表的尾元素。 当 key 不存在时，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/rpop">Redis Documentation: RPOP</a>
 	 * @since 2021-09-07 21:01:46
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T rPop(@NonNull String key) {
 		return (T) redisTemplate.opsForList().rightPop(key);
 	}
@@ -639,10 +610,10 @@ public class RedisRepository {
 	 * @param sourceKey      一定不能为 {@literal null}.
 	 * @param destinationKey 一定不能为 {@literal null}.
 	 * @return 被弹出的元素
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/rpoplpush">Redis Documentation: RPOPLPUSH</a>
 	 * @since 2021-09-07 21:01:46
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T rPoplPush(String sourceKey, String destinationKey) {
 		return (T) redisTemplate.opsForList().rightPopAndLeftPush(sourceKey, destinationKey);
 	}
@@ -657,7 +628,6 @@ public class RedisRepository {
 	 * @param count 数量
 	 * @param value 值
 	 * @return 被移除元素的数量。 因为不存在的 key 被视作空表(empty list)，所以当 key 不存在时， LREM 命令总是返回 0 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lrem">Redis Documentation: LREM</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -671,7 +641,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return {列表 key 的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/llen">Redis Documentation: LLEN</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -687,7 +656,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param index 索引
 	 * @return 列表中下标为 index 的元素。 如果 index 参数的值不在列表的区间范围内(out of range)，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lindex">Redis Documentation: LINDEX</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -705,7 +673,6 @@ public class RedisRepository {
 	 * @param pivot 对比值
 	 * @param value 值
 	 * @return 如果命令执行成功，返回插入操作完成之后，列表的长度。 如果没有找到 pivot ，返回 -1 。 如果 key 不存在或为空列表，返回 0 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/linsert">Redis Documentation: LINSERT</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -722,7 +689,6 @@ public class RedisRepository {
 	 * @param pivot 对比值
 	 * @param value 值
 	 * @return 如果命令执行成功，返回插入操作完成之后，列表的长度。 如果没有找到 pivot ，返回 -1 。 如果 key 不存在或为空列表，返回 0 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/linsert">Redis Documentation: LINSERT</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -738,7 +704,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param index 下标
 	 * @param value 值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lset">Redis Documentation: LSET</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -763,7 +728,6 @@ public class RedisRepository {
 	 * @param start 开始索引
 	 * @param end   结束索引
 	 * @return 一个列表，包含指定区间内的元素。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lrange">Redis Documentation: LRANGE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -780,7 +744,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param start 开始索引
 	 * @param end   结束索引
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/ltrim">Redis Documentation: LTRIM</a>
 	 * @since 2021-09-07 21:01:46
 	 */
@@ -795,7 +758,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param members 元素
 	 * @return 被添加到集合中的新元素的数量，不包括被忽略的元素。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sadd">Redis Documentation: SADD</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -812,7 +774,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param members 元素
 	 * @return 被添加到集合中的新元素的数量，不包括被忽略的元素。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sadd">Redis Documentation: SADD</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -828,7 +789,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param member 元素
 	 * @return 如果 member 元素是集合的成员，返回 1 。 如果 member 元素不是集合的成员，或 key 不存在，返回 0 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sismember">Redis Documentation: SISMEMBER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -841,7 +801,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 被移除的随机元素。 当 key 不存在或 key 是空集时，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/spop">Redis Documentation: SPOP</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -855,7 +814,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 只提供 key 参数时，返回一个元素；如果集合为空，返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: SRANDMEMBER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -873,7 +831,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param count 数量
 	 * @return 只提供 key 参数时，返回一个元素；如果集合为空，返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: SRANDMEMBER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -892,7 +849,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param count 数量
 	 * @return 只提供 key 参数时，返回一个元素；如果集合为空，返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: SRANDMEMBER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -907,7 +863,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param members 元素
 	 * @return 被成功移除的元素的数量，不包括被忽略的元素
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/srem">Redis Documentation: SREM</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -926,7 +881,6 @@ public class RedisRepository {
 	 * @param destinationKey 目的key
 	 * @param value          值
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/smove">Redis Documentation: SMOVE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -939,7 +893,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 集合的基数。 当 key 不存在时，返回 0 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/scard">Redis Documentation: SCARD</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -952,7 +905,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 集合中的所有成员。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/smembers">Redis Documentation: SMEMBERS</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -972,7 +924,6 @@ public class RedisRepository {
 	 * @param key      一定不能为{@literal null}.
 	 * @param otherKey 一定不能为 {@literal null}.
 	 * @return 交集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sinter">Redis Documentation: SINTER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -991,7 +942,6 @@ public class RedisRepository {
 	 * @param key       一定不能为{@literal null}.
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @return 交集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sinter">Redis Documentation: SINTER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1010,7 +960,6 @@ public class RedisRepository {
 	 *
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @return 交集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sinter">Redis Documentation: SINTER</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1029,7 +978,6 @@ public class RedisRepository {
 	 * @param otherKey 一定不能为 {@literal null}.
 	 * @param destKey  一定不能为{@literal null}.
 	 * @return 结果集中的成员数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sinterstore">Redis Documentation: SINTERSTORE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1048,7 +996,6 @@ public class RedisRepository {
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @param destKey   一定不能为{@literal null}.
 	 * @return 结果集中的成员数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sinterstore">Redis Documentation: SINTERSTORE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1067,7 +1014,6 @@ public class RedisRepository {
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @param destKey   一定不能为{@literal null}.
 	 * @return 结果集中的成员数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sinterstore">Redis Documentation: SINTERSTORE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1085,7 +1031,6 @@ public class RedisRepository {
 	 * @param key      一定不能为 {@literal null}.
 	 * @param otherKey 一定不能为 {@literal null}.
 	 * @return {@literal null} when used in pipeline / transaction.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sunion">Redis Documentation: SUNION</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1100,7 +1045,6 @@ public class RedisRepository {
 	 * @param key       一定不能为 {@literal null}.
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @return {@literal null} when used in pipeline / transaction.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sunion">Redis Documentation: SUNION</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1115,7 +1059,6 @@ public class RedisRepository {
 	 *
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @return {@literal null} when used in pipeline / transaction.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sunion">Redis Documentation: SUNION</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1133,7 +1076,6 @@ public class RedisRepository {
 	 * @param otherKey 一定不能为 {@literal null}.
 	 * @param distKey  一定不能为 {@literal null}.
 	 * @return {@literal null} when used in pipeline / transaction.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sunionstore">Redis Documentation: SUNIONSTORE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1150,7 +1092,6 @@ public class RedisRepository {
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @param distKey   一定不能为 {@literal null}.
 	 * @return {@literal null} when used in pipeline / transaction.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sunionstore">Redis Documentation: SUNIONSTORE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1166,7 +1107,6 @@ public class RedisRepository {
 	 * @param key      一定不能为 {@literal null}.
 	 * @param otherKey 一定不能为 {@literal null}.
 	 * @return 一个包含差集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sdiff">Redis Documentation: SDIFF</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1180,7 +1120,6 @@ public class RedisRepository {
 	 *
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @return 一个包含差集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sdiff">Redis Documentation: SDIFF</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1197,7 +1136,6 @@ public class RedisRepository {
 	 * @param distKey  一定不能为 {@literal null}.
 	 * @param otherKey 一定不能为 {@literal null}.
 	 * @return 结果集中的元素数量。。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sdiffstore">Redis Documentation: sdiffstore</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1212,7 +1150,6 @@ public class RedisRepository {
 	 *
 	 * @param otherKeys 一定不能为 {@literal null}.
 	 * @return 结果集中的元素数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/sdiffstore">Redis Documentation: sdiffstore</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1231,7 +1168,6 @@ public class RedisRepository {
 	 * @param score  得分
 	 * @param member 值
 	 * @return 是否成功
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zadd">Redis Documentation: ZADD</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1247,7 +1183,6 @@ public class RedisRepository {
 	 * @param key          一定不能为 {@literal null}.
 	 * @param scoreMembers 一定不能为 {@literal null}.
 	 * @return 被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zadd">Redis Documentation: ZADD</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1263,7 +1198,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param member the value.
 	 * @return member 成员的 score 值，以字符串形式表示
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zscore">Redis Documentation: ZSCORE</a>
 	 * @since 2021-09-07 21:01:58
 	 */
@@ -1281,7 +1215,6 @@ public class RedisRepository {
 	 * @param score  得分
 	 * @param member the value.
 	 * @return member 成员的新 score 值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zincrby">Redis Documentation: ZINCRBY</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1294,7 +1227,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 当 key 存在且是有序集类型时，返回有序集的基数。 当 key 不存在时，返回 0 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zcard">Redis Documentation: ZCARD</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1309,7 +1241,6 @@ public class RedisRepository {
 	 * @param min 最小值
 	 * @param max 最大值
 	 * @return {@literal null} when used in pipeline / transaction.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zcount">Redis Documentation: ZCOUNT</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1334,7 +1265,6 @@ public class RedisRepository {
 	 * @param start 索引
 	 * @param end   索引
 	 * @return 指定区间内，不带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrange">Redis Documentation: ZRANGE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1360,7 +1290,6 @@ public class RedisRepository {
 	 * @param start 索引
 	 * @param end   索引
 	 * @return 指定区间内，带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrange">Redis Documentation: ZRANGE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1379,7 +1308,6 @@ public class RedisRepository {
 	 * @param start 索引
 	 * @param end   索引
 	 * @return 指定区间内，不带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrevrange">Redis Documentation: ZREVRANGE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1397,7 +1325,6 @@ public class RedisRepository {
 	 * @param start 索引
 	 * @param end   索引
 	 * @return 指定区间内，不带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrevrange">Redis Documentation: ZREVRANGE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1415,7 +1342,6 @@ public class RedisRepository {
 	 * @param min 最小得分
 	 * @param max 最大得分
 	 * @return 指定区间内 不带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrangebyscore">Redis Documentation: ZRANGEBYSCORE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1431,7 +1357,6 @@ public class RedisRepository {
 	 * @param min 最小得分
 	 * @param max 最大得分
 	 * @return 指定区间内，带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrangebyscore">Redis Documentation: ZRANGEBYSCORE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1448,7 +1373,6 @@ public class RedisRepository {
 	 * @param min 最小得分
 	 * @param max 最大得分
 	 * @return 指定区间内 不带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrevrange">Redis Documentation: ZRANGEBYSCORE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1464,7 +1388,6 @@ public class RedisRepository {
 	 * @param min 最小得分
 	 * @param max 最大得分
 	 * @return 指定区间内，带有 score 值(可选)的有序集成员的列表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrevrangebyscore">Redis Documentation:
 	 * ZRANGEBYSCORE</a>
 	 * @since 2021-09-07 21:04:53
@@ -1481,7 +1404,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param member the value.
 	 * @return 如果 member 是有序集 key 的成员，返回 member 的排名。 如果 member 不是有序集 key 的成员，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrank">Redis Documentation: ZRANK</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1497,7 +1419,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param member the value.
 	 * @return 如果 member 是有序集 key 的成员，返回 member 的排名。 如果 member 不是有序集 key 的成员，返回 nil 。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrevrank">Redis Documentation: ZREVRANK</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1511,7 +1432,6 @@ public class RedisRepository {
 	 * @param key     一定不能为 {@literal null}.
 	 * @param members 一定不能为 {@literal null}.
 	 * @return 被成功移除的成员的数量，不包括被忽略的成员
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zrem">Redis Documentation: ZREM</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1528,7 +1448,6 @@ public class RedisRepository {
 	 * @param start 下标
 	 * @param end   下标
 	 * @return 被移除成员的数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zremrangebyrank">Redis Documentation:
 	 * ZREMRANGEBYRANK</a>
 	 * @since 2021-09-07 21:04:53
@@ -1545,7 +1464,6 @@ public class RedisRepository {
 	 * @param min 最小得分
 	 * @param max 最大得分
 	 * @return 被移除成员的数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/zremrangebyscore">Redis Documentation:
 	 * ZREMRANGEBYSCORE</a>
 	 * @since 2021-09-07 21:04:53
@@ -1560,7 +1478,6 @@ public class RedisRepository {
 	 * @param keys   redis主键数组
 	 * @param values 值数组
 	 * @param time   过期时间(单位秒)
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void setExpire(final String[] keys, final Object[] values, final long time) {
@@ -1583,7 +1500,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return key中存储的的数字
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long getCounter(@NonNull CacheKey key, Long... defaultValue) {
@@ -1599,7 +1515,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return key中存储的的数字
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long getCounter(@NonNull CacheKey key, Function<CacheKey, Long> loader) {
@@ -1616,7 +1531,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 在减去增量 1 之后， 键 key 的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/decr">Redis Documentation: DECR</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1632,7 +1546,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 在减去增量 decrement 之后， 键 key 的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/decr">Redis Documentation: DECR</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1653,7 +1566,6 @@ public class RedisRepository {
 	 * @param field           一定不能为 {@literal null}.
 	 * @param cacheNullValues 是否缓存空对象
 	 * @param value           值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hset">Redis Documentation: HSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1675,7 +1587,6 @@ public class RedisRepository {
 	 * @param key             一定不能为 {@literal null}.
 	 * @param value           值
 	 * @param cacheNullValues 是否缓存空对象
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hset">Redis Documentation: HSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1691,7 +1602,6 @@ public class RedisRepository {
 	 * @param field           一定不能为 {@literal null}.
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 默认情况下返回给定域的值, 如果给定域不存在于哈希表中， 又或者给定的哈希表并不存在， 那么命令返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1714,7 +1624,6 @@ public class RedisRepository {
 	 * @param loader          加载器
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 默认情况下返回给定域的值, 如果给定域不存在于哈希表中， 又或者给定的哈希表并不存在， 那么命令返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1751,7 +1660,6 @@ public class RedisRepository {
 	 * @param key             一定不能为 {@literal null}.
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 默认情况下返回给定域的值, 如果给定域不存在于哈希表中， 又或者给定的哈希表并不存在， 那么命令返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1775,7 +1683,6 @@ public class RedisRepository {
 	 * @param cacheNullValues 是否缓存空值
 	 * @param loader          加载器
 	 * @return 默认情况下返回给定域的值, 如果给定域不存在于哈希表中， 又或者给定的哈希表并不存在， 那么命令返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1810,7 +1717,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param field 一定不能为 {@literal null}.
 	 * @return 是否存在
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hexists">Redis Documentation: HEXISTS</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1823,7 +1729,6 @@ public class RedisRepository {
 	 *
 	 * @param cacheHashKey 一定不能为 {@literal null}.
 	 * @return 是否存在
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hexists">Redis Documentation: HEXISTS</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1837,7 +1742,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param fields 一定不能为 {@literal null}.
 	 * @return 删除的数量
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hdel">Redis Documentation: HDEL</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1850,7 +1754,6 @@ public class RedisRepository {
 	 *
 	 * @param key key
 	 * @return {@link java.lang.Long }
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:09:14
 	 */
 	public Long hDel(@NonNull CacheHashKey key) {
@@ -1863,7 +1766,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 哈希表中域的数量。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hlen">Redis Documentation: HLEN</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1877,7 +1779,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param field 一定不能为 {@literal null}.
 	 * @return 返回哈希表 key 中， 与给定域 field 相关联的值的字符串长度。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hstrlen">Redis Documentation: HSTRLEN</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1893,7 +1794,6 @@ public class RedisRepository {
 	 * @param key       一定不能为 {@literal null}.
 	 * @param increment 增量
 	 * @return 执行 HINCRBY 命令之后，哈希表 key 中域 field 的值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hincrby">Redis Documentation: HINCRBY</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1916,7 +1816,6 @@ public class RedisRepository {
 	 * @param key       一定不能为 {@literal null}.
 	 * @param increment 增量
 	 * @return 执行 HINCRBY 命令之后，哈希表 key 中域 field 的值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hincrbyfloat">Redis Documentation: HINCRBYFLOAT</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1935,7 +1834,6 @@ public class RedisRepository {
 	 * @param key             一定不能为 {@literal null}.
 	 * @param hash            一定不能为 {@literal null}.
 	 * @param cacheNullValues 是否缓存空值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hmset">Redis Documentation: hmset</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1962,7 +1860,6 @@ public class RedisRepository {
 	 *
 	 * @param key    一定不能为 {@literal null}.
 	 * @param fields 一定不能为 {@literal null}.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hmget">Redis Documentation: hmget</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1976,7 +1873,6 @@ public class RedisRepository {
 	 *
 	 * @param key    一定不能为 {@literal null}.
 	 * @param fields 一定不能为 {@literal null}.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hmget">Redis Documentation: hmget</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -1990,7 +1886,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 所有的 filed
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hkeys">Redis Documentation: hkeys</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2004,7 +1899,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 一个包含哈希表中所有值的表。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hvals">Redis Documentation: hvals</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2018,7 +1912,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 以列表形式返回哈希表的域和域的值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hgetall">Redis Documentation: hgetall</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2032,7 +1925,6 @@ public class RedisRepository {
 	 *
 	 * @param key key
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:09:47
 	 */
 	public <K, V> Map<K, V> hGetAll(@NonNull CacheHashKey key) {
@@ -2045,7 +1937,6 @@ public class RedisRepository {
 	 *
 	 * @param map map
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:09:51
 	 */
 	private <K, V> Map<K, V> returnMapVal(Map<K, V> map) {
@@ -2067,7 +1958,6 @@ public class RedisRepository {
 	 * @param cacheNullValues 是否缓存空值
 	 * @param loader          加载器
 	 * @return 默认情况下返回给定域的值, 如果给定域不存在于哈希表中， 又或者给定的哈希表并不存在， 那么命令返回 nil
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2107,7 +1997,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param values 值
 	 * @return 返回列表的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lpush">Redis Documentation: LPUSH</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2124,7 +2013,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param values 值
 	 * @return 返回列表的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lpush">Redis Documentation: LPUSH</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2140,7 +2028,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param values 值
 	 * @return 返回列表的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/lpushx">Redis Documentation: LPUSHX</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2157,7 +2044,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param values 值
 	 * @return 返回列表的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/rpush">Redis Documentation: RPUSH</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2174,7 +2060,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param values 值
 	 * @return 返回列表的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/rpush">Redis Documentation: RPUSH</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2191,7 +2076,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param value 值
 	 * @return 返回列表的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/rpushx">Redis Documentation: RPUSHX</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2208,7 +2092,6 @@ public class RedisRepository {
 	 * @param timeout 一定不能为 {@literal null}.
 	 * @return 设置成功返回true。
 	 * @throws IllegalArgumentException 如果{@code key} 或 {@code value} 不存在
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2231,7 +2114,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param value 一定不能为 {@literal null}.
 	 * @return 设置成功返回true
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/setnx">Redis Documentation: SETNX</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2251,7 +2133,6 @@ public class RedisRepository {
 	 * @param key             一定不能为 {@literal null}.
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 如果键 key 不存在， 那么返回特殊值 null ； 否则， 返回键 key 的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/get">Redis Documentation: GET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2276,7 +2157,6 @@ public class RedisRepository {
 	 * @param loader          缓存加载器
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 如果redis中没值，先加载loader 的数据，若加载loader 的值为null，直接返回， 否则 设置后loader值后返回。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/get">Redis Documentation: GET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2316,7 +2196,6 @@ public class RedisRepository {
 	 * @param key   一定不能为 {@literal null}.
 	 * @param value 值
 	 * @return 如果键 key 不存在， 那么返回特殊值 null ； 否则， 返回给定键 key 的旧值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/getset">Redis Documentation: GETSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2334,7 +2213,6 @@ public class RedisRepository {
 	 * @param key             一定不能为 {@literal null}.
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 如果键 key 不存在， 那么返回特殊值 null ； 否则， 返回键 key 的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/get">Redis Documentation: GET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2359,7 +2237,6 @@ public class RedisRepository {
 	 * @param loader          加载器
 	 * @param cacheNullValues 是否缓存空值
 	 * @return 如果键 key 不存在， 那么返回特殊值 null ； 否则， 返回键 key 的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/get">Redis Documentation: GET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2394,7 +2271,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 字符串值的长度。 当键 key 不存在时， 命令返回 0
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/strlen">Redis Documentation: STRLEN</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2409,7 +2285,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 追加 value 之后， 键 key 的值的长度
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/append">Redis Documentation: APPEND</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2432,7 +2307,6 @@ public class RedisRepository {
 	 * @param key    一定不能为 {@literal null}.
 	 * @param value  字符串
 	 * @param offset 最大不能超过 536870911
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/setrange">Redis Documentation: SETRANGE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2449,7 +2323,6 @@ public class RedisRepository {
 	 * @param start 开始偏移量
 	 * @param end   结束偏移量
 	 * @return GETRANGE 命令会返回字符串值的指定部分。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/getrange">Redis Documentation: GETRANGE</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2464,7 +2337,6 @@ public class RedisRepository {
 	 * @param map          map
 	 * @param cacheNullVal cacheNullVal
 	 * @return {@link Map }
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:10:56
 	 */
 	private Map<String, Object> mSetMap(@NonNull Map<String, Object> map, boolean cacheNullVal) {
@@ -2486,7 +2358,6 @@ public class RedisRepository {
 	 *
 	 * @param map          一定不能为 {@literal null}.
 	 * @param cacheNullVal 是否缓存空值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/mset">Redis Documentation: MSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2502,7 +2373,6 @@ public class RedisRepository {
 	 * 不会出现某些键被设置了但是另一些键没有被设置的情况。
 	 *
 	 * @param map 一定不能为 {@literal null}.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/mset">Redis Documentation: MSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2516,7 +2386,6 @@ public class RedisRepository {
 	 *
 	 * @param map          一定不能为 {@literal null}.
 	 * @param cacheNullVal 是否缓存空值
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/msetnx">Redis Documentation: MSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2531,7 +2400,6 @@ public class RedisRepository {
 	 * 所有给定键要么就全部都被设置， 要么就全部都不设置， 不可能出现第三种状态。
 	 *
 	 * @param map 一定不能为 {@literal null}.
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/msetnx">Redis Documentation: MSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2545,7 +2413,6 @@ public class RedisRepository {
 	 *
 	 * @param keys 一定不能为 {@literal null}.
 	 * @return 返回一个列表， 列表中包含了所有给定键的值,并按给定key的顺序排列
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/mget">Redis Documentation: MGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2558,7 +2425,6 @@ public class RedisRepository {
 	 *
 	 * @param keys 一定不能为 {@literal null}.
 	 * @return 返回一个列表， 列表中包含了所有给定键的值,并按给定key的顺序排列
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/mget">Redis Documentation: MGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2571,7 +2437,6 @@ public class RedisRepository {
 	 *
 	 * @param keys 一定不能为 {@literal null}.
 	 * @return 返回一个列表， 列表中包含了所有给定键的值,并按给定key的顺序排列
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/mget">Redis Documentation: MGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2586,7 +2451,6 @@ public class RedisRepository {
 	 *
 	 * @param cacheKeys 一定不能为 {@literal null}.
 	 * @return 返回一个列表， 列表中包含了所有给定键的值,并按给定key的顺序排列
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/mget">Redis Documentation: MGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2605,7 +2469,6 @@ public class RedisRepository {
 	 *
 	 * @param key 一定不能为 {@literal null}.
 	 * @return 返回键 key 在执行加一操作之后的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/incr">Redis Documentation: INCR</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2623,7 +2486,6 @@ public class RedisRepository {
 	 * @param key       一定不能为 {@literal null}.
 	 * @param increment 增量值
 	 * @return 返回键 key 在执行加上 increment ，操作之后的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/incrby">Redis Documentation: INCRBY</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2648,7 +2510,6 @@ public class RedisRepository {
 	 * @param key       一定不能为 {@literal null}.
 	 * @param increment 增量值
 	 * @return 在加上增量 increment 之后， 键 key 的值。
-	 * @author shuigedeng
 	 * @see <a href="https://redis.io/commands/incrbyfloat">Redis Documentation: INCRBYFLOAT</a>
 	 * @since 2021-09-07 21:04:53
 	 */
@@ -2663,7 +2524,6 @@ public class RedisRepository {
 	 *
 	 * @param keys   the keys
 	 * @param values the values
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void set(final String[] keys, final Object[] values) {
@@ -2685,7 +2545,6 @@ public class RedisRepository {
 	 *
 	 * @param key   the key
 	 * @param value the value
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void set(final String key, final Object value) {
@@ -2707,7 +2566,6 @@ public class RedisRepository {
 	 * @param key  the key
 	 * @param time the time
 	 * @return the list
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public List<String> willExpire(final String key, final long time) {
@@ -2731,7 +2589,6 @@ public class RedisRepository {
 	 *
 	 * @param keyPatten the key patten
 	 * @return the set
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Set<String> keys(final String keyPatten) {
@@ -2744,7 +2601,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the byte [ ]
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public byte[] get(final byte[] key) {
@@ -2759,7 +2615,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the string
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object get(final String key) {
@@ -2786,7 +2641,6 @@ public class RedisRepository {
 	 *
 	 * @param keyPatten the key patten
 	 * @return the keys values
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Map<String, Object> getKeysValues(final String keyPatten) {
@@ -2811,7 +2665,6 @@ public class RedisRepository {
 	 * Ops for hash hash operations.
 	 *
 	 * @return the hash operations
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public HashOperations<String, String, Object> opsForHash() {
@@ -2824,7 +2677,6 @@ public class RedisRepository {
 	 * @param key       the key
 	 * @param hashKey   the hash key
 	 * @param hashValue the hash value
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void putHashValue(String key, String hashKey, Object hashValue) {
@@ -2839,7 +2691,6 @@ public class RedisRepository {
 	 * @param key     the key
 	 * @param hashKey the hash key
 	 * @return the hash values
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object getHashValues(String key, String hashKey) {
@@ -2852,7 +2703,6 @@ public class RedisRepository {
 	 *
 	 * @param key      the key
 	 * @param hashKeys the hash keys
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void delHashValues(String key, Object... hashKeys) {
@@ -2865,7 +2715,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the hash value
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Map<String, Object> getHashValue(String key) {
@@ -2878,7 +2727,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @param map the map
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void putHashValues(String key, Map<String, Object> map) {
@@ -2889,7 +2737,6 @@ public class RedisRepository {
 	 * 集合数量
 	 *
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public long dbSize() {
@@ -2900,7 +2747,6 @@ public class RedisRepository {
 	 * 清空redis存储的数据
 	 *
 	 * @return the string
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public String flushDB() {
@@ -2915,7 +2761,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean exists(final String key) {
@@ -2929,7 +2774,6 @@ public class RedisRepository {
 	 *
 	 * @param keys the keys
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long del(final String... keys) {
@@ -2946,7 +2790,6 @@ public class RedisRepository {
 	 * 获取 RedisSerializer
 	 *
 	 * @return the redis serializer
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	protected RedisSerializer<String> getRedisSerializer() {
@@ -2958,7 +2801,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public long incr(final String key) {
@@ -2972,7 +2814,6 @@ public class RedisRepository {
 	 * redis List 引擎
 	 *
 	 * @return the list operations
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public ListOperations<String, Object> opsForList() {
@@ -2985,7 +2826,6 @@ public class RedisRepository {
 	 * @param key   the key
 	 * @param value the value
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long leftPush(String key, Object value) {
@@ -2997,7 +2837,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the string
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object leftPop(String key) {
@@ -3010,7 +2849,6 @@ public class RedisRepository {
 	 * @param key   the key
 	 * @param value the value
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long in(String key, Object value) {
@@ -3022,7 +2860,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the string
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object rightPop(String key) {
@@ -3035,7 +2872,6 @@ public class RedisRepository {
 	 *
 	 * @param key the key
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long length(String key) {
@@ -3049,7 +2885,6 @@ public class RedisRepository {
 	 * @param key   the key
 	 * @param i     the
 	 * @param value the value
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void remove(String key, long i, Object value) {
@@ -3062,7 +2897,6 @@ public class RedisRepository {
 	 * @param key   the key
 	 * @param index the index
 	 * @param value the value
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void set(String key, long index, Object value) {
@@ -3076,7 +2910,6 @@ public class RedisRepository {
 	 * @param start the start
 	 * @param end   the end
 	 * @return the list
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public List<Object> getList(String key, int start, int end) {
@@ -3089,7 +2922,6 @@ public class RedisRepository {
 	 * @param key  the key
 	 * @param list the list
 	 * @return the long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long leftPushAll(String key, List<String> list) {
@@ -3102,7 +2934,6 @@ public class RedisRepository {
 	 * @param key   the key
 	 * @param index the index
 	 * @param value the value
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void insert(String key, long index, Object value) {
@@ -3116,7 +2947,6 @@ public class RedisRepository {
 	 * @param key  键
 	 * @param time 时间(秒)
 	 * @return Boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean expire(String key, Long time) {
@@ -3138,7 +2968,6 @@ public class RedisRepository {
 	 * @param value    值
 	 * @param time     过期时间
 	 * @param timeUnit 过期时间单位
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void setExpire(final String key, final Object value, final long time,
@@ -3154,7 +2983,6 @@ public class RedisRepository {
 	 * @param time            time
 	 * @param timeUnit        timeUnit
 	 * @param valueSerializer valueSerializer
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:13:21
 	 */
 	public void setExpire(final String key, final Object value, final long time,
@@ -3192,7 +3020,6 @@ public class RedisRepository {
 	 *
 	 * @param key 键 不能为 null
 	 * @return 时间(秒) 返回 0代表为永久有效
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long getExpire(String key) {
@@ -3204,7 +3031,6 @@ public class RedisRepository {
 	 *
 	 * @param key 键
 	 * @return true 存在 false不存在
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean hasKey(String key) {
@@ -3223,7 +3049,6 @@ public class RedisRepository {
 	 * @param key             the key
 	 * @param valueSerializer 序列化
 	 * @return the string
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object get(final String key, RedisSerializer<Object> valueSerializer) {
@@ -3239,7 +3064,6 @@ public class RedisRepository {
 	 * @param value 值
 	 * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
 	 * @return true成功 false 失败
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean set(String key, Object value, Long time) {
@@ -3262,7 +3086,6 @@ public class RedisRepository {
 	 * @param key   键
 	 * @param value 值
 	 * @return true成功 false 失败
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean set(String key, Object value, Duration timeout) {
@@ -3287,7 +3110,6 @@ public class RedisRepository {
 	 * @param key   键
 	 * @param delta 要增加几(大于0)
 	 * @return Long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long incr(String key, Long delta) {
@@ -3303,7 +3125,6 @@ public class RedisRepository {
 	 * @param key   键
 	 * @param delta 要减少几(小于0)
 	 * @return Long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long decr(String key, Long delta) {
@@ -3319,7 +3140,6 @@ public class RedisRepository {
 	 * @param key  键 不能为 null
 	 * @param item 项 不能为 null
 	 * @return 值
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object hget(String key, String item) {
@@ -3331,7 +3151,6 @@ public class RedisRepository {
 	 *
 	 * @param key 键
 	 * @return 对应的多个键值
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Map<Object, Object> hmget(String key) {
@@ -3344,7 +3163,6 @@ public class RedisRepository {
 	 * @param key 键
 	 * @param map 对应多个键值
 	 * @return true 成功 false 失败
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean hmset(String key, Map<String, Object> map) {
@@ -3364,7 +3182,6 @@ public class RedisRepository {
 	 * @param map  对应多个键值
 	 * @param time 时间(秒)
 	 * @return true成功 false失败
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean hmset(String key, Map<String, Object> map, Long time) {
@@ -3387,7 +3204,6 @@ public class RedisRepository {
 	 * @param item  项
 	 * @param value 值
 	 * @return true 成功 false失败
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean hset(String key, String item, Object value) {
@@ -3408,7 +3224,6 @@ public class RedisRepository {
 	 * @param value 值
 	 * @param time  时间(秒) 注意:如果已存在的hash表有时间,这里将会替换原有的时间
 	 * @return true 成功 false失败
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean hset(String key, String item, Object value, Long time) {
@@ -3429,7 +3244,6 @@ public class RedisRepository {
 	 *
 	 * @param key  键 不能为 null
 	 * @param item 项 可以使多个不能为 null
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void hdel(String key, Object... item) {
@@ -3442,7 +3256,6 @@ public class RedisRepository {
 	 * @param key  键 不能为 null
 	 * @param item 项 不能为 null
 	 * @return true 存在 false不存在
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean hHasKey(String key, String item) {
@@ -3456,7 +3269,6 @@ public class RedisRepository {
 	 * @param item 项
 	 * @param by   要增加几(大于0)
 	 * @return Double
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Double hincr(String key, String item, Double by) {
@@ -3470,7 +3282,6 @@ public class RedisRepository {
 	 * @param item 项
 	 * @param by   要减少记(小于0)
 	 * @return Double
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Double hdecr(String key, String item, Double by) {
@@ -3482,7 +3293,6 @@ public class RedisRepository {
 	 *
 	 * @param key 键
 	 * @return Set
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Set<Object> sGet(String key) {
@@ -3500,7 +3310,6 @@ public class RedisRepository {
 	 * @param key   键
 	 * @param value 值
 	 * @return true 存在 false不存在
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean sHasKey(String key, Object value) {
@@ -3518,7 +3327,6 @@ public class RedisRepository {
 	 * @param key    键
 	 * @param values 值 可以是多个
 	 * @return 成功个数
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long sSet(String key, Object... values) {
@@ -3537,7 +3345,6 @@ public class RedisRepository {
 	 * @param time   时间(秒)
 	 * @param values 值 可以是多个
 	 * @return 成功个数
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long sSetAndTime(String key, Long time, Object... values) {
@@ -3558,7 +3365,6 @@ public class RedisRepository {
 	 *
 	 * @param key 键
 	 * @return Long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long sGetSetSize(String key) {
@@ -3576,7 +3382,6 @@ public class RedisRepository {
 	 * @param key    键
 	 * @param values 值 可以是多个
 	 * @return 移除的个数
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long setRemove(String key, Object... values) {
@@ -3595,7 +3400,6 @@ public class RedisRepository {
 	 * @param start 开始
 	 * @param end   结束 0 到 -1代表所有值
 	 * @return List
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public List<Object> lGet(String key, Long start, Long end) {
@@ -3612,7 +3416,6 @@ public class RedisRepository {
 	 *
 	 * @param key 键
 	 * @return Long
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long lGetListSize(String key) {
@@ -3630,7 +3433,6 @@ public class RedisRepository {
 	 * @param key   键
 	 * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推； index<0时，-1，表尾，-2倒数第二个元素，依次类推
 	 * @return Object
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object lGetIndex(String key, Long index) {
@@ -3650,7 +3452,6 @@ public class RedisRepository {
 	 * @param value 值
 	 * @param time  时间(秒)
 	 * @return Boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean lSet(String key, Object value, Long time) {
@@ -3672,7 +3473,6 @@ public class RedisRepository {
 	 * @param key   键
 	 * @param value 值
 	 * @return Boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean lSet(String key, List<Object> value) {
@@ -3692,7 +3492,6 @@ public class RedisRepository {
 	 * @param value 值
 	 * @param time  时间(秒)
 	 * @return Boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean lSet(String key, List<Object> value, Long time) {
@@ -3715,7 +3514,6 @@ public class RedisRepository {
 	 * @param index 索引
 	 * @param value 值
 	 * @return Boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Boolean lUpdateIndex(String key, Long index, Object value) {
@@ -3735,7 +3533,6 @@ public class RedisRepository {
 	 * @param count 移除多少个
 	 * @param value 值
 	 * @return 移除的个数
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Long lRemove(String key, Long count, Object value) {
@@ -3755,7 +3552,6 @@ public class RedisRepository {
 	 * @param end             the end
 	 * @param valueSerializer 序列化
 	 * @return the list
-	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53l
 	 */
 	public List<Object> getList(String key, int start, int end,
@@ -3801,7 +3597,7 @@ public class RedisRepository {
 	}
 
 	public Object findByListCacheKey(List<CacheKey> ks) {
-		 return mGetByCacheKey(ks);
+		return mGetByCacheKey(ks);
 	}
 
 }

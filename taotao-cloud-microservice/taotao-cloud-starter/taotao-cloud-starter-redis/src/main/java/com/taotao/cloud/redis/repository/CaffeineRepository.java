@@ -65,6 +65,7 @@ public class CaffeineRepository {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull CacheKey key, boolean... cacheNullValues) {
 		Cache<String, Object> ifPresent = cacheMap.getIfPresent(key.getKey());
 		if (ifPresent == null) {
@@ -73,7 +74,7 @@ public class CaffeineRepository {
 		return (T) ifPresent.getIfPresent(key.getKey());
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public <T> T get(String key, boolean... cacheNullValues) {
 		Cache<String, Object> ifPresent = cacheMap.getIfPresent(key);
 		if (ifPresent == null) {
@@ -82,13 +83,13 @@ public class CaffeineRepository {
 		return (T) ifPresent.getIfPresent(key);
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public <T> List<T> find(@NonNull Collection<CacheKey> keys) {
 		return keys.stream().map(k -> (T) get(k, false)).filter(Objects::nonNull)
 			.collect(Collectors.toList());
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull CacheKey key, Function<CacheKey, ? extends T> loader,
 		boolean... cacheNullValues) {
 		Cache<String, Object> cache = cacheMap.get(key.getKey(), (k) -> {

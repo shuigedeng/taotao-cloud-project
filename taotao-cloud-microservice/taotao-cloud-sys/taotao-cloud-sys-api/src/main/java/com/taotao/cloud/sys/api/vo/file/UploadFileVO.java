@@ -15,8 +15,10 @@
  */
 package com.taotao.cloud.sys.api.vo.file;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * UploadFileVO
@@ -27,6 +29,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UploadFileVO {
 
 	private Long id;

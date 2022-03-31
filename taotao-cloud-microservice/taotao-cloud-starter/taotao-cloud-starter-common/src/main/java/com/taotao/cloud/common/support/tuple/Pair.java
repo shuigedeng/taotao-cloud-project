@@ -35,6 +35,7 @@ public class Pair<L, R> {
 	/**
 	 * Returns an empty pair.
 	 */
+	@SuppressWarnings("unchecked")
 	public static <L, R> Pair<L, R> empty() {
 		return (Pair<L, R>) EMPTY;
 	}

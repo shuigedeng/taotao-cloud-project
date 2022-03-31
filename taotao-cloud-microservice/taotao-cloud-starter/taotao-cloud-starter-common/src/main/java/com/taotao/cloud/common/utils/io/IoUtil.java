@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.Charsets;
 import org.springframework.lang.Nullable;
 
@@ -65,7 +66,7 @@ public class IoUtil extends org.springframework.util.StreamUtils {
 	 * @return the requested String
 	 */
 	public static String readToString(InputStream input) {
-		return readToString(input, Charsets.UTF_8);
+		return readToString(input, StandardCharsets.UTF_8);
 	}
 
 	/**

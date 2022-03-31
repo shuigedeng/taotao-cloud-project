@@ -3,6 +3,8 @@ package com.taotao.cloud.goods.api.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,8 @@ import lombok.NoArgsConstructor;
  * 店铺商品分类VO
  */
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class StoreGoodsLabelVO {
 

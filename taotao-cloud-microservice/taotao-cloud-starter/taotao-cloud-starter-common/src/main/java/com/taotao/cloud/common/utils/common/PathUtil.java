@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.taotao.cloud.common.utils.common.UrlUtil;
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.Charsets;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ResourceUtils;
@@ -54,7 +55,7 @@ public class PathUtil {
 			return null;
 		}
 		String protocol = url.getProtocol();
-		String file = UrlUtil.decode(url.getPath(), Charsets.UTF_8);
+		String file = UrlUtil.decode(url.getPath(), StandardCharsets.UTF_8);
 		if (ResourceUtils.URL_PROTOCOL_FILE.equals(protocol)) {
 			return new File(file).getParentFile().getParentFile().getAbsolutePath();
 		} else if (ResourceUtils.URL_PROTOCOL_JAR.equals(protocol)

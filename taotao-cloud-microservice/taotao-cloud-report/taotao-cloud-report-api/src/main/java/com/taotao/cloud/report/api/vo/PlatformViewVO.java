@@ -2,14 +2,20 @@ package com.taotao.cloud.report.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import lombok.NoArgsConstructor;
 
 /**
  * 流量数据展示VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PlatformViewVO {
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
@@ -24,13 +30,6 @@ public class PlatformViewVO {
 
     @Schema(description =  "店铺id")
     private String storeId = "-1";
-
-
-    public PlatformViewVO() {
-        //初始化参数
-        pvNum = 0L;
-        uvNum = 0L;
-    }
 
     public Long getPvNum() {
         if(pvNum==null){

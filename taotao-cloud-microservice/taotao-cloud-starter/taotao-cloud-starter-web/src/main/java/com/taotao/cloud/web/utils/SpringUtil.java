@@ -69,6 +69,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * @return T
 	 * @since 2021-09-02 22:27:49
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String name) {
 		assertContextInjected();
 		return (T) applicationContext.getBean(name);

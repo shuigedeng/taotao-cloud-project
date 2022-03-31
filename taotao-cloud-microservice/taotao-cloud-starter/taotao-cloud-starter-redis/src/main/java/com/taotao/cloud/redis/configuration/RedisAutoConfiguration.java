@@ -187,6 +187,7 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 	@ConditionalOnProperty(value = "taotao.cloud.redis.rate-limiter.enable")
 	public static class RateLimiterAutoConfiguration {
 
+		@SuppressWarnings("unchecked")
 		private RedisScript<List<Long>> redisRateLimiterScript() {
 			DefaultRedisScript redisScript = new DefaultRedisScript<>();
 			redisScript.setScriptSource(new ResourceScriptSource(

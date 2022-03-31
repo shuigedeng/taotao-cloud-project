@@ -6,6 +6,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
+import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.service.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;

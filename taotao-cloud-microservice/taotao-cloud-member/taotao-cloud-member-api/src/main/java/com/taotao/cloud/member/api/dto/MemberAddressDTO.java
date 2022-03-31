@@ -4,7 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 会员地址DTO
@@ -14,6 +17,9 @@ import lombok.Data;
  * @since 2022-03-14 11:26:08
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "租户id")
 public class MemberAddressDTO implements Serializable {
 

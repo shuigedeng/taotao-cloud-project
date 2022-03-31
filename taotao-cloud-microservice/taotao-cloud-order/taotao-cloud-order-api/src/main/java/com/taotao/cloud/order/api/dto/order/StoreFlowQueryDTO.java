@@ -2,12 +2,18 @@ package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 店铺流水查询DTO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺流水查询DTO")
 public class StoreFlowQueryDTO {
 

@@ -2,6 +2,10 @@ package com.taotao.cloud.store.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -10,6 +14,10 @@ import org.hibernate.validator.constraints.Length;
  * 
  * @since 2020/12/7 15:54
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺-银行信息")
 public class StoreBankDTO {
 
@@ -36,44 +44,4 @@ public class StoreBankDTO {
 	@NotBlank(message = "开户银行许可证电子版不能为空")
 	@Schema(description = "开户银行许可证电子版")
 	private String settlementBankLicencePhoto;
-
-	public String getSettlementBankAccountName() {
-		return settlementBankAccountName;
-	}
-
-	public void setSettlementBankAccountName(String settlementBankAccountName) {
-		this.settlementBankAccountName = settlementBankAccountName;
-	}
-
-	public String getSettlementBankAccountNum() {
-		return settlementBankAccountNum;
-	}
-
-	public void setSettlementBankAccountNum(String settlementBankAccountNum) {
-		this.settlementBankAccountNum = settlementBankAccountNum;
-	}
-
-	public String getSettlementBankBranchName() {
-		return settlementBankBranchName;
-	}
-
-	public void setSettlementBankBranchName(String settlementBankBranchName) {
-		this.settlementBankBranchName = settlementBankBranchName;
-	}
-
-	public String getSettlementBankJointName() {
-		return settlementBankJointName;
-	}
-
-	public void setSettlementBankJointName(String settlementBankJointName) {
-		this.settlementBankJointName = settlementBankJointName;
-	}
-
-	public String getSettlementBankLicencePhoto() {
-		return settlementBankLicencePhoto;
-	}
-
-	public void setSettlementBankLicencePhoto(String settlementBankLicencePhoto) {
-		this.settlementBankLicencePhoto = settlementBankLicencePhoto;
-	}
 }

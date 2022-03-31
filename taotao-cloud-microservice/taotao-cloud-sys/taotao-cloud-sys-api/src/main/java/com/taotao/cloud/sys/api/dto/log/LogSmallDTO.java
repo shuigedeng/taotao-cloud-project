@@ -9,7 +9,15 @@ package com.taotao.cloud.sys.api.dto.log;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LogSmallDTO implements Serializable {
 
     private String description;
@@ -23,52 +31,4 @@ public class LogSmallDTO implements Serializable {
     private String browser;
 
     private Timestamp createTime;
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getRequestIp() {
-		return requestIp;
-	}
-
-	public void setRequestIp(String requestIp) {
-		this.requestIp = requestIp;
-	}
-
-	public Long getTime() {
-		return time;
-	}
-
-	public void setTime(Long time) {
-		this.time = time;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getBrowser() {
-		return browser;
-	}
-
-	public void setBrowser(String browser) {
-		this.browser = browser;
-	}
-
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
 }

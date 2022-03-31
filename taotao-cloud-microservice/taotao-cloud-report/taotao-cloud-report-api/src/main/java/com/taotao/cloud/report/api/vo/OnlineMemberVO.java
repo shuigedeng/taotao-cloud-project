@@ -2,15 +2,19 @@ package com.taotao.cloud.report.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import lombok.NoArgsConstructor;
 
 /**
  * 在线会员
  */
 @Data
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class OnlineMemberVO {
 
     /**

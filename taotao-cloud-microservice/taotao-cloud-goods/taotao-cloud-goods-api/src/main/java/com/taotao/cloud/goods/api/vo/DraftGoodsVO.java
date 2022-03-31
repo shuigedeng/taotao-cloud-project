@@ -3,12 +3,18 @@ package com.taotao.cloud.goods.api.vo;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 草稿商品VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //public class DraftGoodsVO extends DraftGoods {
 public class DraftGoodsVO {
 

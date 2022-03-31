@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,8 @@ import lombok.NoArgsConstructor;
  * 微信小程序直播商品DTO
  */
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class GoodsInfo {
 

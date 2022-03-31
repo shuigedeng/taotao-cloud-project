@@ -46,6 +46,7 @@ public class EnumDeserializer extends StdDeserializer<Enum<?>> {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Enum<?> deserialize(JsonParser jp, DeserializationContext context) {
 		try {
 			// 读取

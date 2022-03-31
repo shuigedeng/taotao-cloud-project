@@ -15,8 +15,12 @@
  */
 package com.taotao.cloud.sys.api.vo.logistics;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * LogisticsVO
@@ -27,6 +31,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LogisticsVO {
 
+	private String id;
 }

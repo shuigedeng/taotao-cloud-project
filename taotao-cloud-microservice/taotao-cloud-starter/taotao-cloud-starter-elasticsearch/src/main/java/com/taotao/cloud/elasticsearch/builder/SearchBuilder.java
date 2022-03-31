@@ -283,6 +283,7 @@ public class SearchBuilder {
 	 * @author shuigedeng
 	 * @since 2021/2/26 08:55
 	 */
+	@SuppressWarnings("unchecked")
 	private List<String> getList(SearchHits searchHits) {
 		List<String> list = new ArrayList<>();
 		if (searchHits != null) {

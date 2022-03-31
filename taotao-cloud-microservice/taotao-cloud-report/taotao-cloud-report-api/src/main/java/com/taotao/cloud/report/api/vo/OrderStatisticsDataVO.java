@@ -2,7 +2,10 @@ package com.taotao.cloud.report.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -11,6 +14,9 @@ import java.util.Date;
  * 订单统计数据VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderStatisticsDataVO {
 
     @Schema(description =  "店铺")

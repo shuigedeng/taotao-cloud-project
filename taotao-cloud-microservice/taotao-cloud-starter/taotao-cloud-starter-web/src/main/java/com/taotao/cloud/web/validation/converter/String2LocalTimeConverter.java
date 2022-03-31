@@ -36,7 +36,7 @@ public class String2LocalTimeConverter extends BaseDateConverter<LocalTime> impl
 	/**
 	 * FORMAT
 	 */
-	protected static final Map<String, String> FORMAT = new LinkedHashMap(5);
+	protected static final Map<String, String> FORMAT = new LinkedHashMap<>(5);
 
 	static {
 		FORMAT.put(DEFAULT_TIME_FORMAT, "^\\d{1,2}:\\d{1,2}:\\d{1,2}$");

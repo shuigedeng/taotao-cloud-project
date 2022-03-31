@@ -2579,8 +2579,9 @@ public class DateUtil {
 		if (date == null) {
 			return null;
 		}
-
-		return date.getHours();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.HOUR_OF_DAY);
 	}
 
 	/**

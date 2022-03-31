@@ -76,6 +76,7 @@ public class YmlUtil {
 	 * @return {@link Object }
 	 * @since 2021-09-02 14:32:04
 	 */
+	@SuppressWarnings("unchecked")
 	public static Object getValueByYml(String fileName, String key) {
 		Map<String, Object> map = getYml(fileName);
 		if (MapUtils.isEmpty(map)) {
@@ -107,6 +108,7 @@ public class YmlUtil {
 	 * @return {@link Map }
 	 * @since 2021-09-02 14:32:40
 	 */
+	@SuppressWarnings("unchecked")
 	public static Map<String, Object> getYml(String fileName) {
 		if (StringUtils.isBlank(fileName)) {
 			return null;

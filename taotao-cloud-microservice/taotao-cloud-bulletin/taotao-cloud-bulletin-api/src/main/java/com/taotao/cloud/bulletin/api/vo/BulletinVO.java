@@ -19,12 +19,20 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/11/20 上午9:42
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(name = "WithdrawVO", description = "提现申请VO")
 public class BulletinVO implements Serializable {
 
@@ -53,69 +61,4 @@ public class BulletinVO implements Serializable {
 
 	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
-	public Long getMallId() {
-		return mallId;
-	}
-
-	public void setMallId(Long mallId) {
-		this.mallId = mallId;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public BigDecimal getBalanceAmount() {
-		return balanceAmount;
-	}
-
-	public void setBalanceAmount(BigDecimal balanceAmount) {
-		this.balanceAmount = balanceAmount;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
 }

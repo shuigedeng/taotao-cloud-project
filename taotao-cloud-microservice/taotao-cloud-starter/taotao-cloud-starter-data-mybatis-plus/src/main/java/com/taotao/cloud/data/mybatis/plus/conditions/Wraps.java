@@ -151,6 +151,7 @@ public final class Wraps {
 	 * @param source 源对象
 	 * @return 最新源对象
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T replace(Object source) {
 		if (source == null) {
 			return null;

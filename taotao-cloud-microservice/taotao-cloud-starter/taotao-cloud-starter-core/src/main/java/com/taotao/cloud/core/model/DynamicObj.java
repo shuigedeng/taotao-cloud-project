@@ -91,6 +91,7 @@ public class DynamicObj {
 	 * @return T
 	 * @since 2021-09-02 20:14:19
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T changeType(JsonNode jsonNode, Class<T> cls) {
 		String name = cls.getSimpleName();
 		if ("String".equals(name)) {

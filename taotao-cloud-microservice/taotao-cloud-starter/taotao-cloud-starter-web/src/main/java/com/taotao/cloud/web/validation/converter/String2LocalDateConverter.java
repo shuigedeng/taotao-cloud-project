@@ -41,7 +41,7 @@ public class String2LocalDateConverter extends BaseDateConverter<LocalDate> impl
     /**
      * FORMAT
      */
-    protected static final Map<String, String> FORMAT = new LinkedHashMap(5);
+    protected static final Map<String, String> FORMAT = new LinkedHashMap<>(5);
 
     static {
         FORMAT.put(DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMAT_MATCHES);

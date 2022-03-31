@@ -1,15 +1,21 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
  * 秒杀活动时刻视图对象
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeckillTimelineVO implements Serializable {
 
     private static final long serialVersionUID = -8171512491016990179L;

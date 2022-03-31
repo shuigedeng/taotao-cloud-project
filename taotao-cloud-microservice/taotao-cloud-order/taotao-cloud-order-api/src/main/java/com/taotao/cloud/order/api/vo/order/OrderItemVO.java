@@ -1,12 +1,18 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 子订单VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "子订单VO")
 public class OrderItemVO {
 

@@ -1,12 +1,18 @@
 package com.taotao.cloud.report.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 统计查询参数
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class StatisticsQueryParam {
 
     @Schema(description =  "快捷搜索", allowableValues = "TODAY, YESTERDAY, LAST_SEVEN, LAST_THIRTY")

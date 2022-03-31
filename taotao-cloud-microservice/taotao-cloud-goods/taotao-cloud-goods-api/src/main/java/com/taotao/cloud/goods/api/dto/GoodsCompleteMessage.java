@@ -1,12 +1,18 @@
 package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品购买完成信息
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GoodsCompleteMessage {
 
 

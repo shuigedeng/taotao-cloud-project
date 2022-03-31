@@ -3,13 +3,19 @@ package com.taotao.cloud.operation.api.vo;
 import cn.lili.common.enums.SwitchEnum;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 楼层装修数据VO
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PageDataListVO {
 
     @Schema(description =  "页面ID")

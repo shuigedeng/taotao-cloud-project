@@ -4,6 +4,7 @@ import com.taotao.cloud.message.api.enums.MessageShowType;
 import com.taotao.cloud.message.api.enums.RangeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +12,10 @@ import lombok.NoArgsConstructor;
  * 消息
  */
 @Data
-@Schema(description = "消息")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "消息")
 public class MessageShowVO {
 
 	private static final long serialVersionUID = 1L;

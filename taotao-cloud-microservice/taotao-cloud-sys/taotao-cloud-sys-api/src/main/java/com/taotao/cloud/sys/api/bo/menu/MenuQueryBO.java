@@ -15,9 +15,14 @@
  */
 package com.taotao.cloud.sys.api.bo.menu;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 菜单查询对象
@@ -26,9 +31,12 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:27:42
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MenuQueryBO implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = 5126530068827085130L;
 
 	/**
@@ -95,198 +103,5 @@ public class MenuQueryBO implements Serializable {
 	 * 最后修改时间
 	 */
 	private LocalDateTime lastModifiedTime;
-
-	public MenuQueryBO() {
-	}
-
-	public MenuQueryBO(long id, String name, int type, String perms, String path,
-		String component, long parentId, String icon, boolean keepAlive, boolean hidden,
-		boolean alwaysShow, String redirect, boolean isFrame, int sortNum,
-		LocalDateTime createTime, LocalDateTime lastModifiedTime) {
-		this.id = id;
-		this.name = name;
-		this.type = type;
-		this.perms = perms;
-		this.path = path;
-		this.component = component;
-		this.parentId = parentId;
-		this.icon = icon;
-		this.keepAlive = keepAlive;
-		this.hidden = hidden;
-		this.alwaysShow = alwaysShow;
-		this.redirect = redirect;
-		this.isFrame = isFrame;
-		this.sortNum = sortNum;
-		this.createTime = createTime;
-		this.lastModifiedTime = lastModifiedTime;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public boolean isKeepAlive() {
-		return keepAlive;
-	}
-
-	public void setKeepAlive(boolean keepAlive) {
-		this.keepAlive = keepAlive;
-	}
-
-	public boolean isHidden() {
-		return hidden;
-	}
-
-	public void setHidden(boolean hidden) {
-		this.hidden = hidden;
-	}
-
-	public boolean isAlwaysShow() {
-		return alwaysShow;
-	}
-
-	public void setAlwaysShow(boolean alwaysShow) {
-		this.alwaysShow = alwaysShow;
-	}
-
-	public boolean isFrame() {
-		return isFrame;
-	}
-
-	public void setFrame(boolean frame) {
-		isFrame = frame;
-	}
-
-	public void setSortNum(int sortNum) {
-		this.sortNum = sortNum;
-	}
-
-	public String getPerms() {
-		return perms;
-	}
-
-	public void setPerms(String perms) {
-		this.perms = perms;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public String getComponent() {
-		return component;
-	}
-
-	public void setComponent(String component) {
-		this.component = component;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public Boolean getKeepAlive() {
-		return keepAlive;
-	}
-
-	public void setKeepAlive(Boolean keepAlive) {
-		this.keepAlive = keepAlive;
-	}
-
-	public Boolean getHidden() {
-		return hidden;
-	}
-
-	public void setHidden(Boolean hidden) {
-		this.hidden = hidden;
-	}
-
-	public Boolean getAlwaysShow() {
-		return alwaysShow;
-	}
-
-	public void setAlwaysShow(Boolean alwaysShow) {
-		this.alwaysShow = alwaysShow;
-	}
-
-	public String getRedirect() {
-		return redirect;
-	}
-
-	public void setRedirect(String redirect) {
-		this.redirect = redirect;
-	}
-
-	public Boolean getFrame() {
-		return isFrame;
-	}
-
-	public void setFrame(Boolean frame) {
-		isFrame = frame;
-	}
-
-	public Integer getSortNum() {
-		return sortNum;
-	}
-
-	public void setSortNum(Integer sortNum) {
-		this.sortNum = sortNum;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
 }
 

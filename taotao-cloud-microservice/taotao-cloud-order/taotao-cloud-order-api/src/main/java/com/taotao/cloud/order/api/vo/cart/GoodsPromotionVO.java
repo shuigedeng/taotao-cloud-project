@@ -3,12 +3,18 @@ package com.taotao.cloud.order.api.vo.cart;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品促销VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "商品促销VO 购物车中")
 public class GoodsPromotionVO implements Serializable {
 

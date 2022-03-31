@@ -3,19 +3,24 @@ package com.taotao.cloud.promotion.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
  * 砍价活动商品操作DTO
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class KanjiaActivityGoodsOperationDTO implements Serializable {
-
 
     private static final long serialVersionUID = -1378599087650538592L;
 

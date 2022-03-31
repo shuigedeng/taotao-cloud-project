@@ -98,6 +98,7 @@ public class BatchRedissonListenerContainer extends AbstractRedissonListenerCont
 			this.currentThread = null;
 		}
 
+		@SuppressWarnings("unchecked")
 		private List<RedissonMessage> fetch() {
 			final String queue = BatchRedissonListenerContainer.this.getContainerProperties()
 				.getQueue();

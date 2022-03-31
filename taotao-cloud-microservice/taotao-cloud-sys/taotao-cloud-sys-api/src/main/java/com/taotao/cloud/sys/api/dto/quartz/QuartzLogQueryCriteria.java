@@ -6,5 +6,14 @@
  */
 package com.taotao.cloud.sys.api.dto.quartz;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class QuartzLogQueryCriteria {
 }

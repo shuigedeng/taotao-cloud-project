@@ -1,7 +1,10 @@
 package com.taotao.cloud.member.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 会员签到DTO
@@ -11,6 +14,9 @@ import lombok.Data;
  * @since 2022-03-11 15:31:33
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "会员签到DTO")
 public class MemberSignVO {
 

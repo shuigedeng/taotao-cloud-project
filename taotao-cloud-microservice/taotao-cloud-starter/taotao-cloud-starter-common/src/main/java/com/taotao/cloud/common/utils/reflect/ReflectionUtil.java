@@ -383,13 +383,14 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @return 对象数据
 	 * @since 2021-09-02 15:03:09
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T tryCallMethod(Object obj, String methodName, Object[] param,
 		T defaultValue) {
 		try {
 			if (obj != null) {
 				Method find = findMethod(obj.getClass(), methodName);
 				if (find != null) {
-					if (!find.isAccessible()) {
+					if (!find.canAccess(null)) {
 						find.setAccessible(true);
 					}
 					return (T) find.invoke(obj, param);
@@ -551,11 +552,12 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @return 字段值
 	 * @since 2021-09-02 15:04:04
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getFieldValue(Object obj, String name) {
 		try {
 			Field find = findField(obj.getClass(), name);
 			if (find != null) {
-				if (!find.isAccessible()) {
+				if (!find.canAccess(null)) {
 					find.setAccessible(true);
 				}
 				return (T) find.get(obj);
@@ -576,12 +578,13 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @return 字段值
 	 * @since 2021-09-02 15:04:13
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T tryGetFieldValue(Object obj, String name, T defaultValue) {
 		try {
 			if (obj != null) {
 				Field find = findField(obj.getClass(), name);
 				if (find != null) {
-					if (!find.isAccessible()) {
+					if (!find.canAccess(null)) {
 						find.setAccessible(true);
 					}
 					return (T) find.get(obj);
@@ -621,12 +624,13 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @return 静态字段值
 	 * @since 2021-09-02 15:04:28
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T tryGetStaticFieldValue(Class<?> cls, String name, T defaultValue) {
 		try {
 			if (cls != null) {
 				Field find = findField(cls, name);
 				if (find != null) {
-					if (!find.isAccessible()) {
+					if (!find.canAccess(null)) {
 						find.setAccessible(true);
 					}
 					return (T) find.get(cls);
@@ -647,9 +651,10 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param value 值
 	 * @since 2021-09-02 15:04:36
 	 */
+	@SuppressWarnings("unchecked")
 	public static void setFieldValue(Field field, Object obj, Object value) {
 		try {
-			if (!field.isAccessible()) {
+			if (!field.canAccess(null)) {
 				field.setAccessible(true);
 			}
 			field.set(obj, value);
@@ -840,6 +845,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @return 字段值
 	 * @since 2021-09-02 15:04:43
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T tryGetValue(Object obj, String path, T deft) {
 		if (obj == null || path == null || path.length() == 0) {
 			return deft;

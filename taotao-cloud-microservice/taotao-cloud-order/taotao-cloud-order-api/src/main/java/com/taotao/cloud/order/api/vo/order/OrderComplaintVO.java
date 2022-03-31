@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +12,10 @@ import lombok.NoArgsConstructor;
  * 订单交易投诉VO
  **/
 @Data
-@Schema(description = "订单交易投诉VO")
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Schema(description = "订单交易投诉VO")
 public class OrderComplaintVO extends OrderComplaint {
 
 

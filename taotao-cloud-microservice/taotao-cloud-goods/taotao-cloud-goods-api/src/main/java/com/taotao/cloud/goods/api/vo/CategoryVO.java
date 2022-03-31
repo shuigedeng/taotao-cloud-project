@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Comparator;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,9 @@ import lombok.NoArgsConstructor;
  * 分类VO
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryVO extends CategoryBaseVO {
 
 	private static final long serialVersionUID = 3775766246075838410L;

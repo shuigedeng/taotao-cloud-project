@@ -63,6 +63,7 @@ public class PropertyUtil {
 	 * @return T
 	 * @since 2021-09-02 20:51:48
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getProperty(String key, T defaultvalue) {
 		String value = System.getProperty(key);
 		if (value == null) {
@@ -106,6 +107,7 @@ public class PropertyUtil {
 	 * @return T
 	 * @since 2021-09-02 20:52:00
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getEnvProperty(String key, T defaultvalue) {
 		String value = System.getenv(key);
 		if (value == null) {
@@ -124,6 +126,7 @@ public class PropertyUtil {
 	 * @return T
 	 * @since 2021-09-02 20:52:08
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getSystemProperty(String key, T defaultvalue) {
 		String value = System.getProperty(key);
 		if (value == null) {

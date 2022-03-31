@@ -18,14 +18,15 @@ package com.taotao.cloud.sys.api.vo.menu;
 import com.taotao.cloud.common.tree.INode;
 import com.taotao.cloud.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -38,10 +39,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(name = "MenuTreeVO", description = "树形菜单列表")
 public class MenuTreeVO extends MapperNode implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = -5853343562172855421L;
 
 	@Schema(description = "图标")
@@ -54,22 +56,22 @@ public class MenuTreeVO extends MapperNode implements Serializable {
 	private String perms;
 
 	@Schema(description = "spread")
-	private Boolean spread = false;
+	private Boolean spread;
 
 	@Schema(description = "前端path / 即跳转路由")
 	private String path;
 
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
-	private boolean keepAlive;
+	private Boolean keepAlive;
 
 	@Schema(description = "菜单类型 1：目录 2：菜单 3：按钮")
-	private int type;
+	private Integer type;
 
 	@Schema(description = "菜单标签")
 	private String label;
 
 	@Schema(description = "排序值")
-	private int sort;
+	private Integer sort;
 
 	private String component;
 

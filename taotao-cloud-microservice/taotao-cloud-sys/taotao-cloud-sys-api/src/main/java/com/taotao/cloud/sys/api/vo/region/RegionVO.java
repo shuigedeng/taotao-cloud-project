@@ -5,7 +5,9 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 地区VO
@@ -49,7 +51,7 @@ public class RegionVO {
 	private String path;
 
 	@Schema(description = "排序")
-	private Integer orderNum = 1;
+	private Integer orderNum;
 
 	@Schema(description = "子信息")
 	private List<RegionVO> children;

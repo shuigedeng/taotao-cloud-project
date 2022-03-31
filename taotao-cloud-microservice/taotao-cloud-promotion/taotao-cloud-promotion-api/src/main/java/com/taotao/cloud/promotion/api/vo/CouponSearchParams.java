@@ -10,18 +10,26 @@ import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 优惠券查询通用类
  **/
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CouponSearchParams extends BasePromotionsSearchParams implements Serializable {
 
     private static final long serialVersionUID = 4566880169478260409L;
@@ -40,7 +48,7 @@ public class CouponSearchParams extends BasePromotionsSearchParams implements Se
     /**
      * POINT("打折"), PRICE("减免现金");
      *
-     * @see cn.lili.modules.promotion.entity.enums.CouponTypeEnum
+     * @see CouponTypeEnum
      */
     @Schema(description =  "活动类型")
     private String couponType;
@@ -58,7 +66,7 @@ public class CouponSearchParams extends BasePromotionsSearchParams implements Se
     @Schema(description =  "已被领取的数量,可以为范围，如10_1000")
     private String receivedNum;
     /**
-     * @see cn.lili.modules.promotion.entity.enums.CouponGetEnum
+     * @see CouponGetEnum
      */
     @Schema(description =  "优惠券类型，分为免费领取和活动赠送")
     private String getType;

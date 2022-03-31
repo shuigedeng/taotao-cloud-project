@@ -2,9 +2,18 @@
 package com.taotao.cloud.sys.api.dto.mongo;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 集合信息展示
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CollectionDto {
     private String collectionName;
 //    private CommandResult stats;
@@ -21,18 +30,4 @@ public class CollectionDto {
 //    private double fsUsedSize;
 //    private double fsTotalSize;
 
-    public CollectionDto() {
-    }
-
-	public CollectionDto(String collectionName) {
-		this.collectionName = collectionName;
-	}
-
-	public String getCollectionName() {
-		return collectionName;
-	}
-
-	public void setCollectionName(String collectionName) {
-		this.collectionName = collectionName;
-	}
 }

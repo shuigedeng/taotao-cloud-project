@@ -18,12 +18,12 @@ package com.taotao.cloud.elk.aspect;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
-import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -101,7 +101,7 @@ public class WebControllerAspect {
 
 		for (String tokenKey : TOKEN_KEYS) {
 			String token = request.getHeader(tokenKey);
-			if (StringUtils.isNotBlank(token)) {
+			if (StringUtil.isNotBlank(token)) {
 				sb.append("token:").append(token).append(",");
 				break;
 			}
@@ -127,13 +127,13 @@ public class WebControllerAspect {
 	private String getRemoteHost(HttpServletRequest request) {
 		String unknown = "unknown";
 		String ip = request.getHeader("x-forwarded-for");
-		if (StringUtils.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
 		}
-		if (StringUtils.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (StringUtils.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
+		if (StringUtil.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
 		return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;

@@ -7,12 +7,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商城流水，细节到orderItem
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "商城流水，细节到orderItem")
 public class PriceDetailDTO implements Serializable {
 
@@ -101,33 +107,6 @@ public class PriceDetailDTO implements Serializable {
 		}
 		return originalPrice;
 	}
-
-	public PriceDetailDTO() {
-		originalPrice = 0d;
-		goodsPrice = 0d;
-		freightPrice = 0d;
-
-		payPoint = 0L;
-		discountPrice = 0d;
-		couponPrice = 0d;
-
-		distributionCommission = 0d;
-		platFormCommissionPoint = 0d;
-		platFormCommission = 0d;
-
-		siteCouponPrice = 0d;
-		siteCouponPoint = 0d;
-		siteCouponCommission = 0d;
-
-		updatePrice = 0d;
-
-		flowPrice = 0d;
-		billPrice = 0d;
-		settlementPrice = 0d;
-
-		joinPromotion = new ArrayList<>();
-	}
-
 
 	/**
 	 * 写入修改金额，自动计算订单各个金额

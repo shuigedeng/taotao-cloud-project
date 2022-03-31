@@ -4,6 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 店铺入驻其他信息
@@ -11,6 +15,10 @@ import javax.validation.constraints.Size;
  * 
  * @since 2020/12/7 16:16
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺入驻其他信息")
 public class StoreOtherInfoDTO {
 
@@ -46,68 +54,4 @@ public class StoreOtherInfoDTO {
 	@NotBlank(message = "地址详情")
 	@Schema(description = "地址详情")
 	private String storeAddressDetail;
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getStoreLogo() {
-		return storeLogo;
-	}
-
-	public void setStoreLogo(String storeLogo) {
-		this.storeLogo = storeLogo;
-	}
-
-	public String getStoreDesc() {
-		return storeDesc;
-	}
-
-	public void setStoreDesc(String storeDesc) {
-		this.storeDesc = storeDesc;
-	}
-
-	public String getStoreCenter() {
-		return storeCenter;
-	}
-
-	public void setStoreCenter(String storeCenter) {
-		this.storeCenter = storeCenter;
-	}
-
-	public String getGoodsManagementCategory() {
-		return goodsManagementCategory;
-	}
-
-	public void setGoodsManagementCategory(String goodsManagementCategory) {
-		this.goodsManagementCategory = goodsManagementCategory;
-	}
-
-	public String getStoreAddressPath() {
-		return storeAddressPath;
-	}
-
-	public void setStoreAddressPath(String storeAddressPath) {
-		this.storeAddressPath = storeAddressPath;
-	}
-
-	public String getStoreAddressIdPath() {
-		return storeAddressIdPath;
-	}
-
-	public void setStoreAddressIdPath(String storeAddressIdPath) {
-		this.storeAddressIdPath = storeAddressIdPath;
-	}
-
-	public String getStoreAddressDetail() {
-		return storeAddressDetail;
-	}
-
-	public void setStoreAddressDetail(String storeAddressDetail) {
-		this.storeAddressDetail = storeAddressDetail;
-	}
 }

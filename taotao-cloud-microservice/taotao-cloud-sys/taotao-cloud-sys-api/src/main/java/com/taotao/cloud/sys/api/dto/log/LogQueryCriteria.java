@@ -9,7 +9,15 @@ package com.taotao.cloud.sys.api.dto.log;
 
 import java.sql.Timestamp;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LogQueryCriteria {
 
     private String blurry;
@@ -20,35 +28,4 @@ public class LogQueryCriteria {
 
     private Integer type;
 
-	public String getBlurry() {
-		return blurry;
-	}
-
-	public void setBlurry(String blurry) {
-		this.blurry = blurry;
-	}
-
-	public String getLogType() {
-		return logType;
-	}
-
-	public void setLogType(String logType) {
-		this.logType = logType;
-	}
-
-	public List<Timestamp> getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(List<Timestamp> createTime) {
-		this.createTime = createTime;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
 }

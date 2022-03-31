@@ -145,8 +145,8 @@ public class ChineseCharUtils {
         String str = null;
         int highPos = (176 + Math.abs(random.nextInt(39)));
         int lowPos = 161 + Math.abs(random.nextInt(93));
-        byte[] b = new byte[] { (new Integer(highPos)).byteValue(),
-            (new Integer(lowPos)).byteValue() };
+        byte[] b = new byte[] { (Integer.valueOf(highPos)).byteValue(),
+            (Integer.valueOf(lowPos)).byteValue() };
 
         try {
             str = new String(b, "GB2312");

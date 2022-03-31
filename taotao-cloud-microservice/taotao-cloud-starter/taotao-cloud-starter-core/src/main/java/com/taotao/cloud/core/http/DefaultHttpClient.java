@@ -24,6 +24,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import okhttp3.MediaType;
 import org.apache.commons.codec.Charsets;
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;

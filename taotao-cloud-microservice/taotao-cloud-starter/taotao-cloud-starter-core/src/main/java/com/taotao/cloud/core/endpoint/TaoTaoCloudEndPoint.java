@@ -39,8 +39,8 @@ public class TaoTaoCloudEndPoint {
 	@ReadOperation
 	public JSONObject test() {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("status", STATUS);
-		jsonObject.put("detail", DETAIL);
+		jsonObject.set("status", STATUS);
+		jsonObject.set("detail", DETAIL);
 		return jsonObject;
 	}
 
@@ -48,9 +48,9 @@ public class TaoTaoCloudEndPoint {
 	public JSONObject testSelector(@Selector String name) {
 		JSONObject jsonObject = new JSONObject();
 		if ("status".equals(name)) {
-			jsonObject.put("status", STATUS);
+			jsonObject.set("status", STATUS);
 		} else if ("detail".equals(name)) {
-			jsonObject.put("detail", DETAIL);
+			jsonObject.set("detail", DETAIL);
 		}
 		return jsonObject;
 	}

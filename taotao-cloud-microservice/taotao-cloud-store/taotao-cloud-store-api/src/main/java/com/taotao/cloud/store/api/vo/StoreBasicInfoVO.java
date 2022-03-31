@@ -1,6 +1,10 @@
 package com.taotao.cloud.store.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 店铺基本信息DTO
@@ -8,6 +12,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * 
  * @since 2020/12/7 14:43
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺基本信息DTO")
 public class StoreBasicInfoVO {
 
@@ -55,116 +63,4 @@ public class StoreBasicInfoVO {
 
 	@Schema(description = "udesk标识")
 	private String merchantEuid;
-
-	public String getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public String getStoreDisable() {
-		return storeDisable;
-	}
-
-	public void setStoreDisable(String storeDisable) {
-		this.storeDisable = storeDisable;
-	}
-
-	public String getCompanyAddressPath() {
-		return companyAddressPath;
-	}
-
-	public void setCompanyAddressPath(String companyAddressPath) {
-		this.companyAddressPath = companyAddressPath;
-	}
-
-	public String getStoreLogo() {
-		return storeLogo;
-	}
-
-	public void setStoreLogo(String storeLogo) {
-		this.storeLogo = storeLogo;
-	}
-
-	public String getStoreDesc() {
-		return storeDesc;
-	}
-
-	public void setStoreDesc(String storeDesc) {
-		this.storeDesc = storeDesc;
-	}
-
-	public String getPcPageData() {
-		return pcPageData;
-	}
-
-	public void setPcPageData(String pcPageData) {
-		this.pcPageData = pcPageData;
-	}
-
-	public String getMobilePageData() {
-		return mobilePageData;
-	}
-
-	public void setMobilePageData(String mobilePageData) {
-		this.mobilePageData = mobilePageData;
-	}
-
-	public String getSelfOperated() {
-		return selfOperated;
-	}
-
-	public void setSelfOperated(String selfOperated) {
-		this.selfOperated = selfOperated;
-	}
-
-	public Integer getGoodsNum() {
-		return goodsNum;
-	}
-
-	public void setGoodsNum(Integer goodsNum) {
-		this.goodsNum = goodsNum;
-	}
-
-	public Integer getCollectionNum() {
-		return collectionNum;
-	}
-
-	public void setCollectionNum(Integer collectionNum) {
-		this.collectionNum = collectionNum;
-	}
-
-	public String getYzfSign() {
-		return yzfSign;
-	}
-
-	public void setYzfSign(String yzfSign) {
-		this.yzfSign = yzfSign;
-	}
-
-	public String getYzfMpSign() {
-		return yzfMpSign;
-	}
-
-	public void setYzfMpSign(String yzfMpSign) {
-		this.yzfMpSign = yzfMpSign;
-	}
-
-	public String getMerchantEuid() {
-		return merchantEuid;
-	}
-
-	public void setMerchantEuid(String merchantEuid) {
-		this.merchantEuid = merchantEuid;
-	}
 }

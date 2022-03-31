@@ -4,8 +4,10 @@
  */
 package com.taotao.cloud.sys.api.vo.generator;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * ColumnInfo
@@ -16,6 +18,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ColumnInfo {
 
 	/**

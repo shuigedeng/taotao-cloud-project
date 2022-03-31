@@ -3,12 +3,18 @@ package com.taotao.cloud.goods.api.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品参数vo
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GoodsParamsGroupVO implements Serializable {
 
 	private static final long serialVersionUID = 1450550797436233753L;

@@ -1,21 +1,24 @@
 package com.taotao.cloud.order.api.dto.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 用于计算优惠券结算详情
  */
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "用于计算优惠券结算详情")
 public class MemberCouponDTO implements Serializable {
 
-
-	@Serial
 	private static final long serialVersionUID = 8276369124551043085L;
 
 	/**

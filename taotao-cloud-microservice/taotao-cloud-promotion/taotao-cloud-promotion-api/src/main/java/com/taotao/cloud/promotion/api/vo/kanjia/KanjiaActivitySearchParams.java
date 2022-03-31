@@ -3,13 +3,19 @@ package com.taotao.cloud.promotion.api.vo.kanjia;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 砍价活动搜索参数
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {
 public class KanjiaActivitySearchParams {
 

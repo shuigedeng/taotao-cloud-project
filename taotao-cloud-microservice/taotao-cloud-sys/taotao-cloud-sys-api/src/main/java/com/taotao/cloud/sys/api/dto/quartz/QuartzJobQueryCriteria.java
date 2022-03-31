@@ -7,7 +7,15 @@ package com.taotao.cloud.sys.api.dto.quartz;
 
 import java.sql.Timestamp;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class QuartzJobQueryCriteria {
 
 	private String jobName;
@@ -17,36 +25,4 @@ public class QuartzJobQueryCriteria {
 	private Boolean isPause;
 
 	private List<Timestamp> createTime;
-
-	public String getJobName() {
-		return jobName;
-	}
-
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
-
-	public Boolean getSuccess() {
-		return isSuccess;
-	}
-
-	public void setSuccess(Boolean success) {
-		isSuccess = success;
-	}
-
-	public Boolean getPause() {
-		return isPause;
-	}
-
-	public void setPause(Boolean pause) {
-		isPause = pause;
-	}
-
-	public List<Timestamp> getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(List<Timestamp> createTime) {
-		this.createTime = createTime;
-	}
 }

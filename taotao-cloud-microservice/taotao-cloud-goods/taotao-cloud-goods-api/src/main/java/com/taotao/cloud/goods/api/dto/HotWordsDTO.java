@@ -5,12 +5,18 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 搜索热词
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class HotWordsDTO {
 
 	@NotBlank(message = "搜索热词不能为空")

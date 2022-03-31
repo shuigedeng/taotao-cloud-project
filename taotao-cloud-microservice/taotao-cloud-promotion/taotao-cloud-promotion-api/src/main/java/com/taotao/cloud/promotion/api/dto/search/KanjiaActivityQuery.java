@@ -3,7 +3,10 @@ package com.taotao.cloud.promotion.api.dto.search;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -11,9 +14,11 @@ import lombok.Data;
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "砍价活动参与记录查询对象")
 public class KanjiaActivityQuery {
-
 
     private static final long serialVersionUID = -1583030890805926292L;
 

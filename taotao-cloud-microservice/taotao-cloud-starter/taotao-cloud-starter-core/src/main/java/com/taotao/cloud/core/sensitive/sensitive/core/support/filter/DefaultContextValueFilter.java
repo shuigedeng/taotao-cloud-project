@@ -19,6 +19,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.util.strategy.SensitiveStr
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -143,10 +144,10 @@ public class DefaultContextValueFilter implements ContextValueFilter {
             Sensitive sensitive = field.getAnnotation(Sensitive.class);
             if (ObjectUtil.isNotNull(sensitive)) {
                 Class<? extends ICondition> conditionClass = sensitive.condition();
-                ICondition condition = conditionClass.newInstance();
+                ICondition condition = conditionClass.getDeclaredConstructor().newInstance();
                 if (condition.valid(context)) {
                     Class<? extends IStrategy> strategyClass = sensitive.strategy();
-                    IStrategy strategy = strategyClass.newInstance();
+                    IStrategy strategy = strategyClass.getDeclaredConstructor().newInstance();
                     sensitiveContext.setEntry(null);
                     return strategy.des(originalFieldVal, context);
                 }
@@ -170,7 +171,12 @@ public class DefaultContextValueFilter implements ContextValueFilter {
             return originalFieldVal;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new SensitiveRuntimeException(e);
+        } catch (InvocationTargetException e) {
+	        e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+	        e.printStackTrace();
         }
+	    throw new SensitiveRuntimeException("");
     }
 
     /**

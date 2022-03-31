@@ -20,6 +20,10 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 会员query
@@ -28,6 +32,10 @@ import javax.validation.constraints.Pattern;
  * @version 2022.03
  * @since 2020/9/30 08:49
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(name = "MemberQuery", description = "会员query")
 public class MemberQuery implements Serializable {
 
@@ -46,124 +54,4 @@ public class MemberQuery implements Serializable {
 	@Schema(description = "邮箱")
 	@Email(message = "邮箱格式错误")
 	private String email;
-
-
-	public MemberQuery() {
-	}
-
-	public MemberQuery(String nickname, String username, String phone, String email) {
-		this.nickname = nickname;
-		this.username = username;
-		this.phone = phone;
-		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "MemberQuery{" +
-			"nickname='" + nickname + '\'' +
-			", username='" + username + '\'' +
-			", phone='" + phone + '\'' +
-			", email='" + email + '\'' +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		MemberQuery that = (MemberQuery) o;
-		return Objects.equals(nickname, that.nickname) && Objects.equals(username,
-			that.username) && Objects.equals(phone, that.phone)
-			&& Objects.equals(email, that.email);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(nickname, username, phone, email);
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public static MemberQueryBuilder builder() {
-		return new MemberQueryBuilder();
-	}
-
-	public static final class MemberQueryBuilder {
-
-		private String nickname;
-		private String username;
-		private String phone;
-		private String email;
-
-		private MemberQueryBuilder() {
-		}
-
-		public static MemberQueryBuilder aMemberQuery() {
-			return new MemberQueryBuilder();
-		}
-
-		public MemberQueryBuilder nickname(String nickname) {
-			this.nickname = nickname;
-			return this;
-		}
-
-		public MemberQueryBuilder username(String username) {
-			this.username = username;
-			return this;
-		}
-
-		public MemberQueryBuilder phone(String phone) {
-			this.phone = phone;
-			return this;
-		}
-
-		public MemberQueryBuilder email(String email) {
-			this.email = email;
-			return this;
-		}
-
-		public MemberQuery build() {
-			MemberQuery memberQuery = new MemberQuery();
-			memberQuery.setNickname(nickname);
-			memberQuery.setUsername(username);
-			memberQuery.setPhone(phone);
-			memberQuery.setEmail(email);
-			return memberQuery;
-		}
-	}
 }
