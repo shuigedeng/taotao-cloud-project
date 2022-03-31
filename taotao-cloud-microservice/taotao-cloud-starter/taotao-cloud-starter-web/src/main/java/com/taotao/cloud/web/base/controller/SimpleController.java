@@ -44,6 +44,7 @@ public abstract class SimpleController<S extends BaseSuperService<T, I>,
 	private S service;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Class<T> getEntityClass() {
 		if (entityClass == null) {
 			Type genericSuperclass = this.getClass().getGenericSuperclass();

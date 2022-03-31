@@ -2,12 +2,18 @@ package com.taotao.cloud.goods.api.vo;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 兑换VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExchangeVO {
 
 	@Schema(description = "是否允许积分兑换")

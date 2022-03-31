@@ -20,6 +20,7 @@ public class ProxyUtils {
 	 * @return 对象
 	 * @since 2022-03-25 15:10:39
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T getInstance(Class<T> clazz, MethodInterceptor interceptor) {
 		//System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\tmp\\file");
 		//字节码加强器：用来创建动态代理类

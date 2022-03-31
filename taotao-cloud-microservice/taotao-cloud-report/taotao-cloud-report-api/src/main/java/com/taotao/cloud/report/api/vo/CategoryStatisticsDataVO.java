@@ -1,12 +1,18 @@
 package com.taotao.cloud.report.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 分类统计VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryStatisticsDataVO {
 
     @Schema(description="一级分类ID")

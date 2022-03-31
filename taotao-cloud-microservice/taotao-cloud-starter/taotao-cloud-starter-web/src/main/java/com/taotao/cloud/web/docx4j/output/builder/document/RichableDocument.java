@@ -26,6 +26,7 @@ abstract class RichableDocument<T extends RichableDocument> extends Paragraphabl
      * @param consumer 表格消费
      * @return {@link T}
      */
+    @SuppressWarnings("unchecked")
     public T table(int rows, int columns, Consumer<DslTable> consumer) {
         XWPFTable table = this.createTable(rows, columns);
         // 表格宽度自适应
@@ -46,6 +47,7 @@ abstract class RichableDocument<T extends RichableDocument> extends Paragraphabl
      * @param <U>            迭代器内容类型
      * @return {@link T}
      */
+    @SuppressWarnings("unchecked")
     public <U> T tables(Iterable<U> iterable, Function<U, Integer> rowFunction, Function<U, Integer> columnFunction,
                         BiConsumer<U, DslTable> consumer) {
         if (Objects.nonNull(iterable)) {

@@ -151,6 +151,7 @@ public final class ClassUtil {
 		} catch (InvocationTargetException | NoSuchMethodException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**

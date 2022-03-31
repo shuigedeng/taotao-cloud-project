@@ -11,7 +11,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
@@ -19,7 +22,9 @@ import org.hibernate.validator.constraints.Length;
  * 商品编辑DTO
  */
 @Data
-@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GoodsOperationDTO implements Serializable {
 
 	private static final long serialVersionUID = -509667581371776913L;

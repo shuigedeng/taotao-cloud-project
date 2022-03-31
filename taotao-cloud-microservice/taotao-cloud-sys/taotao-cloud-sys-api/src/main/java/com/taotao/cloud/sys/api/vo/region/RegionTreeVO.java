@@ -19,9 +19,11 @@ import com.taotao.cloud.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -34,10 +36,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "地区查询对象")
 public class RegionTreeVO extends MapperNode implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = -5853343562172855421L;
 
 	/**

@@ -3,12 +3,18 @@ package com.taotao.cloud.order.api.dto.cart;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 店铺备注
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺备注")
 public class StoreRemarkDTO implements Serializable {
 

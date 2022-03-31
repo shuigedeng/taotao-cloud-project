@@ -3,12 +3,18 @@ package com.taotao.cloud.message.api.dto;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 站内信消息
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NoticeMessageDTO {
 
 	@Schema(description = "会员ID")

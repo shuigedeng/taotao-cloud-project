@@ -3,12 +3,18 @@ package com.taotao.cloud.member.api.dto;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 会员发票查询DTO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "会员发票查询DTO")
 public class MemberReceiptPageDTO extends PageParam {
 

@@ -8,12 +8,18 @@ package com.taotao.cloud.sys.api.vo.alipay;
 import java.sql.Date;
 import java.sql.Timestamp;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 交易详情，按需应该存入数据库
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TradeVo {
 
 	/**

@@ -3,6 +3,7 @@ package com.taotao.cloud.goods.api.vo;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
  * 商品操作允许的范围
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsOperateAllowable implements Serializable {

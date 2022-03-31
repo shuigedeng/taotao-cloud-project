@@ -53,6 +53,7 @@ public abstract class SuperController<S extends BaseSuperService<T, I>, T extend
 	private Class<QueryVO> queryVOClass;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Class<QueryVO> getQueryVOClass() {
 		if (queryVOClass == null) {
 			Type genericSuperclass = this.getClass().getGenericSuperclass();

@@ -11,13 +11,19 @@ import com.taotao.cloud.order.api.enums.order.OrderTagEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单查询参数
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "订单查询参数")
 public class OrderSearchParams extends PageVO {
 

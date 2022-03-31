@@ -332,8 +332,9 @@ public class ExceptionUtil {
 	 *
 	 * @param ex                    异常
 	 * @param causeExceptionClasses 导致的异常原因
-	 * @return {@code true} 是否由某个异常引起
+	 * @return 是否由某个异常引起
 	 */
+	@SuppressWarnings("unchecked")
 	public static boolean isCausedBy(Exception ex,
 		Class<? extends Exception>... causeExceptionClasses) {
 		Throwable cause = ex;

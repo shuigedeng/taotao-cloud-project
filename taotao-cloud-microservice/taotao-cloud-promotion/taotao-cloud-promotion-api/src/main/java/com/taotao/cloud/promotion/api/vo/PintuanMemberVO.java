@@ -2,6 +2,7 @@ package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +11,9 @@ import lombok.NoArgsConstructor;
  *
  **/
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class PintuanMemberVO {
 
     @Schema(description =  "会员编号")

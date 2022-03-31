@@ -2,13 +2,19 @@ package com.taotao.cloud.order.api.vo.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 /**
  * 满额活动VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "满额活动VO")
 public class FullDiscountVO extends FullDiscount {
 

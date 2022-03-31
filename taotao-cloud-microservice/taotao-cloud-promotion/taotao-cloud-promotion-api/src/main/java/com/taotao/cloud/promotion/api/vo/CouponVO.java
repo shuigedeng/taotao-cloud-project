@@ -1,6 +1,8 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,9 +16,10 @@ import java.util.List;
  *
  */
 @Data
-@Schema(description = "优惠券")
-@ToString(callSuper = true)
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "优惠券")
 //public class CouponVO extends Coupon {
 public class CouponVO  {
 

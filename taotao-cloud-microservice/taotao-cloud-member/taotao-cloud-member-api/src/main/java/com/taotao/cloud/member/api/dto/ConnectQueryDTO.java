@@ -2,8 +2,10 @@ package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 联合登录查询dto
@@ -12,8 +14,10 @@ import lombok.Data;
  * @version 2022.03
  * @since 2022-03-14 11:21:35
  */
-@Builder
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "联合登录查询dto")
 public class ConnectQueryDTO implements Serializable {
 

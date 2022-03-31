@@ -3,12 +3,18 @@ package com.taotao.cloud.order.api.vo.cart;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 订单价格详情
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "订单价格详情")
 public class PriceDetailVO implements Serializable {
 

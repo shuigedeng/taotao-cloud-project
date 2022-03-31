@@ -6,6 +6,7 @@ import com.taotao.cloud.order.api.enums.cart.SuperpositionPromotionEnum;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.api.vo.cart.PriceDetailVO;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -14,12 +15,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 购物车视图
  */
 @Data
+@Builder
+@AllArgsConstructor
 @Schema(description = "购物车视图")
 public class TradeDTO implements Serializable {
 
@@ -141,8 +147,6 @@ public class TradeDTO implements Serializable {
 
 	/**
 	 * 过滤购物车中已选择的sku
-	 *
-	 * @return
 	 */
 	public List<CartSkuVO> getCheckedSkuList() {
 		if (skuList != null && !skuList.isEmpty()) {

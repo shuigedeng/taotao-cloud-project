@@ -4,18 +4,26 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 秒杀活动查询通用类
  *
  **/
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeckillSearchParams extends BasePromotionsSearchParams implements Serializable {
 
     private static final long serialVersionUID = -4052716630253333681L;

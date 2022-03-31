@@ -1,14 +1,20 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 优惠券活动的优惠券VO
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //public class CouponActivityItemVO extends CouponActivityItem {
 public class CouponActivityItemVO  {
 

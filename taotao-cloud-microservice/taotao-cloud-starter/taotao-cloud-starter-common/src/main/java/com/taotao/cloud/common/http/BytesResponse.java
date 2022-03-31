@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import java.nio.charset.StandardCharsets;
 import okhttp3.*;
 import okhttp3.internal.Util;
 
@@ -81,7 +82,7 @@ public class BytesResponse implements ResponseSpec, Closeable {
 
 	@Override
 	public String asString() {
-		return asString(Charsets.UTF_8);
+		return asString(StandardCharsets.UTF_8);
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import cn.lili.common.enums.ClientTypeEnum;
 import cn.lili.modules.page.entity.enums.PageEnum;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +15,8 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class PageDataDTO {
 

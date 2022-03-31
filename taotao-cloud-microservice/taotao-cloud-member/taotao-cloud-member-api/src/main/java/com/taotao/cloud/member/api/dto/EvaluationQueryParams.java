@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 评价查询条件
@@ -15,8 +18,10 @@ import lombok.EqualsAndHashCode;
  * @version 2022.03
  * @since 2022-03-14 11:22:15
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "评价查询条件")
 public class EvaluationQueryParams extends PageParam implements Serializable {
 

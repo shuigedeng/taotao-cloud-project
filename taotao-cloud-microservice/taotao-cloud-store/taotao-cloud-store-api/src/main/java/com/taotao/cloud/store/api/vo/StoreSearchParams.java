@@ -6,6 +6,10 @@ import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 店铺搜索参数VO
@@ -13,6 +17,10 @@ import java.io.Serializable;
  * 
  * @since 2020-03-07 17:02:05
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺搜索参数VO")
 //public class StoreSearchParams extends PageVO implements Serializable {
 public class StoreSearchParams implements Serializable {

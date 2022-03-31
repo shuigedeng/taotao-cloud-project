@@ -36,6 +36,7 @@ public class StringToEnumConverterFactory implements ConverterFactory<String, Ba
 	private static final Map<Class, Converter> CONVERTERS = MapUtil.newHashMap();
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
 		Converter<String, T> converter = CONVERTERS.get(targetType);
 		if (converter == null) {

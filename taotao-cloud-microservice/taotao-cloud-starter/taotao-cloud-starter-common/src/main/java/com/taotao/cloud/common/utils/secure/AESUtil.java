@@ -146,7 +146,7 @@ public class AESUtil {
 		return null;
 	}
 
-	public static final Charset DEFAULT_CHARSET = Charsets.UTF_8;
+	public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
 	public static String genAesKey() {
 		return StringUtil.random(32);

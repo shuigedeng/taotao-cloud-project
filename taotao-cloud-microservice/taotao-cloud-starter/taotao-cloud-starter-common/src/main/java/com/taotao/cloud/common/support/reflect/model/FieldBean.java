@@ -59,6 +59,7 @@ public class FieldBean {
      * @param <T> 泛型
      * @return 结果
      */
+    @SuppressWarnings("unchecked")
     public <T extends Annotation> T annotationByType(final Class<T> tClass) {
         if(ObjectUtil.isNull(annotation)) {
             return null;

@@ -1,6 +1,10 @@
 package com.taotao.cloud.store.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 店铺售后收件地址
@@ -8,6 +12,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * 
  * @since 2020-08-22 15:10:51
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺售后收件地址")
 public class StoreAfterSaleAddressDTO {
 
@@ -25,44 +33,4 @@ public class StoreAfterSaleAddressDTO {
 
 	@Schema(description = "详细地址")
 	private String salesConsigneeDetail;
-
-	public String getSalesConsigneeName() {
-		return salesConsigneeName;
-	}
-
-	public void setSalesConsigneeName(String salesConsigneeName) {
-		this.salesConsigneeName = salesConsigneeName;
-	}
-
-	public String getSalesConsigneeMobile() {
-		return salesConsigneeMobile;
-	}
-
-	public void setSalesConsigneeMobile(String salesConsigneeMobile) {
-		this.salesConsigneeMobile = salesConsigneeMobile;
-	}
-
-	public String getSalesConsigneeAddressId() {
-		return salesConsigneeAddressId;
-	}
-
-	public void setSalesConsigneeAddressId(String salesConsigneeAddressId) {
-		this.salesConsigneeAddressId = salesConsigneeAddressId;
-	}
-
-	public String getSalesConsigneeAddressPath() {
-		return salesConsigneeAddressPath;
-	}
-
-	public void setSalesConsigneeAddressPath(String salesConsigneeAddressPath) {
-		this.salesConsigneeAddressPath = salesConsigneeAddressPath;
-	}
-
-	public String getSalesConsigneeDetail() {
-		return salesConsigneeDetail;
-	}
-
-	public void setSalesConsigneeDetail(String salesConsigneeDetail) {
-		this.salesConsigneeDetail = salesConsigneeDetail;
-	}
 }

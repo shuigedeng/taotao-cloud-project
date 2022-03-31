@@ -2,12 +2,18 @@ package com.taotao.cloud.order.api.vo.aftersale;
 
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 售后可操作类型
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "售后可操作类型")
 public class AfterSaleAllowOperation {
 

@@ -1,8 +1,11 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
@@ -11,7 +14,9 @@ import java.util.List;
  * 秒杀活动视图对象
  **/
 @Data
-@ToString(callSuper = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //public class SeckillVO extends Seckill {
 public class SeckillVO  {
 

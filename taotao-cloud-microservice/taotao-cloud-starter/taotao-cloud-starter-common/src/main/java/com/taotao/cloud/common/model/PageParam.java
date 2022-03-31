@@ -64,7 +64,7 @@ public class PageParam implements Serializable {
 	 * @since 2022/3/14 13:50
 	 */
 	public <T> IPage<T> buildMpPage() {
-		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page(
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(
 			currentPage, pageSize);
 
 		if (StringUtil.isNotBlank(sort) && StringUtil.isNotBlank(order)) {

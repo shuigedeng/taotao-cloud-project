@@ -73,6 +73,7 @@ public final class SensitiveBs {
      * @return 结果 json
      * @since 0.0.9
      */
+    @SuppressWarnings("unchecked")
     public String desJson(Object object) {
         ISensitiveConfig config = buildConfig();
         return sensitive.desJson(object, config);

@@ -1,12 +1,18 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 售后申请VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "售后申请VO")
 public class AfterSaleApplyVO {
 

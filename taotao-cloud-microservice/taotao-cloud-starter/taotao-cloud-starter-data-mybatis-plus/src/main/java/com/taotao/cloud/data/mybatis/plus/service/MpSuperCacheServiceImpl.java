@@ -83,6 +83,7 @@ public abstract class MpSuperCacheServiceImpl<M extends MpSuperMapper<T, I>, T e
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> findByIds(@NonNull Collection<I> ids,
 		Function<Collection<I>, Collection<T>> loader) {

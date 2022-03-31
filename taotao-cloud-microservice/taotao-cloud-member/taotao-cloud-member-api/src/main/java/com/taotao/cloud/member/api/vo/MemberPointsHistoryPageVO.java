@@ -4,7 +4,10 @@ package com.taotao.cloud.member.api.vo;
 
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 会员积分历史表
@@ -14,6 +17,9 @@ import lombok.Data;
  * @since 2022-03-11 15:26:14
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "会员积分历史VO")
 public class MemberPointsHistoryPageVO {
 

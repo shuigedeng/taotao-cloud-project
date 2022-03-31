@@ -1,5 +1,6 @@
 package com.taotao.cloud.core.generator;
 
+import com.google.common.io.FileWriteMode;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -38,7 +39,7 @@ public class CSVFileGenerator {
 
             String lineData = Joiner.on(",").skipNulls().join(result);
             try {
-                Files.append(lineData + LINE_SEPERATOR, file, charset);
+	            Files.asCharSink(file, charset, FileWriteMode.APPEND).write(lineData + LINE_SEPERATOR);
             } catch (IOException e) {
                 e.printStackTrace();
             }

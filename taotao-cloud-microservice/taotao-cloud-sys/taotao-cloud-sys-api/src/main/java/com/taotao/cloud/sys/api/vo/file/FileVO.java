@@ -15,6 +15,11 @@
  */
 package com.taotao.cloud.sys.api.vo.file;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * FileVO
  *
@@ -22,6 +27,10 @@ package com.taotao.cloud.sys.api.vo.file;
  * @version 2022.03
  * @since 2021/12/20 13:59
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FileVO {
 
 }

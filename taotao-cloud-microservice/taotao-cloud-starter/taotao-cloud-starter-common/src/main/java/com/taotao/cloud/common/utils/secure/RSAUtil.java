@@ -387,7 +387,7 @@ public class RSAUtil {
 		if (StringUtil.isBlank(data)) {
 			return null;
 		}
-		return Base64Utils.encodeToString(encrypt(publicKey, data.getBytes(Charsets.UTF_8)));
+		return Base64Utils.encodeToString(encrypt(publicKey, data.getBytes(StandardCharsets.UTF_8)));
 	}
 
 	/**
@@ -499,7 +499,7 @@ public class RSAUtil {
 			return null;
 		}
 		return new String(decrypt(privateKey, Base64Utils.decodeFromString(base64Data)),
-			Charsets.UTF_8);
+			StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -539,7 +539,7 @@ public class RSAUtil {
 			return null;
 		}
 		return new String(decryptByPublicKey(publicKey, Base64Utils.decodeFromString(base64Data)),
-			Charsets.UTF_8);
+			StandardCharsets.UTF_8);
 	}
 
 	/**

@@ -4,12 +4,18 @@ import com.taotao.cloud.order.api.dto.cart.StoreRemarkDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 交易参数
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "交易参数")
 public class TradeParams implements Serializable {
 

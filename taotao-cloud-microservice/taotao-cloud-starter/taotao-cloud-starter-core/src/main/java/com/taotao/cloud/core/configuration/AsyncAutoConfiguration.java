@@ -203,11 +203,11 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 			super.execute(ttlRunnable);
 		}
 
-		@Override
-		public void execute(@NotNull Runnable task, long startTimeout) {
-			showThreadPoolInfo("execute(Runnable task, long startTimeout)");
-			super.execute(task, startTimeout);
-		}
+		//@Override
+		//public void execute(@NotNull Runnable task, long startTimeout) {
+		//	showThreadPoolInfo("execute(Runnable task, long startTimeout)");
+		//	super.execute(task, startTimeout);
+		//}
 
 		@Override
 		public <T> Future<T> submit(@NotNull Callable<T> task) {

@@ -1,12 +1,18 @@
 package com.taotao.cloud.promotion.api.vo.kanjia;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 砍价商品视图对象
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class KanjiaActivityGoodsVO {
 
     //@Schema(description =  "商品规格详细信息")

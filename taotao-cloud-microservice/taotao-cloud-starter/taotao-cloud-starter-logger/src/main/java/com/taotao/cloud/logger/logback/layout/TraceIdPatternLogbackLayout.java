@@ -31,7 +31,7 @@ public class TraceIdPatternLogbackLayout extends PatternLayout {
 	}
 
 	static {
-		defaultConverterMap.put("tid", LogbackPatternConverter.class.getName());
-		defaultConverterMap.put("sw_ctx", LogbackSkyWalkingContextPatternConverter.class.getName());
+		DEFAULT_CONVERTER_MAP.put("tid", LogbackPatternConverter.class.getName());
+		DEFAULT_CONVERTER_MAP.put("sw_ctx", LogbackSkyWalkingContextPatternConverter.class.getName());
 	}
 }

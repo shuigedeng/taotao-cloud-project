@@ -35,6 +35,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -305,7 +306,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * @return the file contents, never {@code null}
 	 */
 	public static String readToString(final File file) {
-		return readToString(file, Charsets.UTF_8);
+		return readToString(file, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -344,7 +345,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * @param data the content to write to the file
 	 */
 	public static void writeToFile(final File file, final String data) {
-		writeToFile(file, data, Charsets.UTF_8, false);
+		writeToFile(file, data,StandardCharsets.UTF_8, false);
 	}
 
 	/**
@@ -356,7 +357,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 *               than overwriting
 	 */
 	public static void writeToFile(final File file, final String data, final boolean append) {
-		writeToFile(file, data, Charsets.UTF_8, append);
+		writeToFile(file, data, StandardCharsets.UTF_8, append);
 	}
 
 	/**
@@ -512,7 +513,7 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 	 * @return 行列表
 	 */
 	public static List<String> readLines(Path path) {
-		return readLines(path, Charsets.UTF_8);
+		return readLines(path, StandardCharsets.UTF_8);
 	}
 
 	/**

@@ -133,8 +133,8 @@ public class MemoryCollectTask extends AbstractCollectTask {
 			}
 
 			SystemInfo systemInfo = new SystemInfo();
-			systemInfo.free = systemMXBean.getFreePhysicalMemorySize() / byteToMb;
-			systemInfo.total = systemMXBean.getTotalPhysicalMemorySize() / byteToMb;
+			systemInfo.free = systemMXBean.getFreeMemorySize() / byteToMb;
+			systemInfo.total = systemMXBean.getFreeMemorySize() / byteToMb;
 			systemInfo.use = systemInfo.total - systemInfo.free;
 
 			return new MemeryInfo(jvmInfo, systemInfo);

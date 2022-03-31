@@ -116,6 +116,7 @@ public class BaseSuperServiceImpl<
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public T getByKey(CacheKey key, Function<CacheKey, Object> loader) {
 		Object id = redisRepository.get(key, loader);
@@ -123,6 +124,7 @@ public class BaseSuperServiceImpl<
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
 		Function<Collection<? extends Serializable>, Collection<T>> loader) {

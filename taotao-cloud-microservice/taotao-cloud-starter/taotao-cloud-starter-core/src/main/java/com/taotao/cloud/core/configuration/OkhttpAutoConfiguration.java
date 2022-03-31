@@ -254,7 +254,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 					json = JsonUtil.toJSONString(paramMap);
 				}
 				requestBody = RequestBody
-					.create(MediaType.parse("application/json; charset=utf-8"), json);
+					.create(json,MediaType.parse("application/json; charset=utf-8"));
 			} else {
 				FormBody.Builder formBody = new FormBody.Builder();
 				if (paramMap != null) {

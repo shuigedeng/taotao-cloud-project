@@ -49,6 +49,7 @@ public class RequeueRedissonListenerErrorHandler implements RedissonListenerErro
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void handleError(RedissonMessage message, Message<?> messagingMessage,
 		Throwable throwable) {
 		Object payload = messagingMessage.getPayload();

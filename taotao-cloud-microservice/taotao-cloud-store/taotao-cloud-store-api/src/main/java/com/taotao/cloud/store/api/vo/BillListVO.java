@@ -2,7 +2,13 @@ package com.taotao.cloud.store.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 结算单VO
@@ -10,6 +16,10 @@ import java.util.Date;
  * 
  * @since 2020年3月07日 上午11:04:25
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "结算单VO")
 public class BillListVO {
 
@@ -21,15 +31,15 @@ public class BillListVO {
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	@Schema(description = "结算开始时间")
-	private Date startTime;
+	private LocalDateTime startTime;
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	@Schema(description = "结算结束时间")
-	private Date endTime;
+	private LocalDateTime endTime;
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	@Schema(description = "出账时间")
-	private Date createTime;
+	private LocalDateTime createTime;
 
 	/**
 	 * @see BillStatusEnum
@@ -41,69 +51,5 @@ public class BillListVO {
 	private String storeName;
 
 	@Schema(description = "最终结算金额")
-	private Double billPrice;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getSn() {
-		return sn;
-	}
-
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
-
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getBillStatus() {
-		return billStatus;
-	}
-
-	public void setBillStatus(String billStatus) {
-		this.billStatus = billStatus;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public Double getBillPrice() {
-		return billPrice;
-	}
-
-	public void setBillPrice(Double billPrice) {
-		this.billPrice = billPrice;
-	}
+	private BigDecimal billPrice;
 }

@@ -27,6 +27,7 @@ public class AnnotationUtils {
 	 * @return 对象结果
 	 * @since 2022-03-25 15:10:08
 	 */
+	@SuppressWarnings("unchecked")
 	public static Object changeAnnotationValue(Annotation annotation, String key, Object newValue)
 		throws Exception {
 		InvocationHandler handler = Proxy.getInvocationHandler(annotation);

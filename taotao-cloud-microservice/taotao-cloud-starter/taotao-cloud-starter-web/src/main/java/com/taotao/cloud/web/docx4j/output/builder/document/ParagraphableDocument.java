@@ -23,6 +23,7 @@ abstract class ParagraphableDocument<T extends ParagraphableDocument> {
      * 添加一个段落
      * @param consumer 段落消费
      */
+    @SuppressWarnings("unchecked")
     public T paragraph(Consumer<DslParagraph> consumer) {
         consumer.accept(new DslParagraph(this.createParagraph()));
         return (T) this;
@@ -35,6 +36,7 @@ abstract class ParagraphableDocument<T extends ParagraphableDocument> {
      * @param <U>      段落迭代类型
      * @return {@link T}
      */
+    @SuppressWarnings("unchecked")
     public <U> T paragraphs(Iterable<U> iterable, BiConsumer<U, DslParagraph> consumer) {
         if (Objects.nonNull(iterable)) {
             iterable.forEach(it -> this.paragraph(p -> consumer.accept(it, p)));

@@ -1,6 +1,8 @@
 package com.taotao.cloud.promotion.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,8 @@ import lombok.NoArgsConstructor;
  * 促销商品数据传输对象
  **/
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 //public class PromotionGoodsDTO extends PromotionGoods {
 public class PromotionGoodsDTO  {

@@ -18,6 +18,7 @@ package com.taotao.cloud.common.utils.number;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Random;
 import javax.annotation.Nullable;
@@ -146,7 +147,7 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 			i = i / radix;
 		}
 		buf[charPos] = DIGITS[(int) (-i)];
-		return new String(buf, charPos, (65 - charPos), Charsets.UTF_8);
+		return new String(buf, charPos, (65 - charPos), StandardCharsets.UTF_8);
 	}
 
 

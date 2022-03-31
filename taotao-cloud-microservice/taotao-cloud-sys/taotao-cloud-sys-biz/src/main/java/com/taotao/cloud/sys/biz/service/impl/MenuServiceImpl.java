@@ -177,7 +177,7 @@ public class MenuServiceImpl extends
 	}
 
 	@Override
-	public List<MenuQueryBO> queryAllId(Long id) {
+	public List<MenuQueryBO> queryAllById(Long id) {
 		List<Menu> all = ir().findAll();
 		return MenuMapStruct.INSTANCE.entitysToQueryBOs(all);
 	}

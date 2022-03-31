@@ -44,6 +44,7 @@ public class IntegerToEnumConverterFactory implements ConverterFactory<Integer, 
 	 * @since 2021-09-02 22:10:37
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends BaseEnum> Converter<Integer, T> getConverter(Class<T> targetType) {
 		Converter<Integer, T> converter = CONVERTERS.get(targetType);
 		if (converter == null) {

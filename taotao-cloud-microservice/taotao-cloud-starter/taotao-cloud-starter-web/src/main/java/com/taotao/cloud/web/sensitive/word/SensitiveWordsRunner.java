@@ -25,6 +25,7 @@ public class SensitiveWordsRunner implements ApplicationRunner {
 	 * @param args 启动参数
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public void run(ApplicationArguments args) {
 		Object words = redisRepository.get(RedisConstant.SENSITIVE_WORDS_KEY);
 		if (Objects.nonNull(words)) {

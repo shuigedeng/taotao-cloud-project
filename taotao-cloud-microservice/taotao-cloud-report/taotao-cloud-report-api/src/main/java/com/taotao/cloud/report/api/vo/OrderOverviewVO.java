@@ -1,12 +1,18 @@
 package com.taotao.cloud.report.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 订单统计概述
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderOverviewVO {
 
     @Schema(description =  "UV人次")

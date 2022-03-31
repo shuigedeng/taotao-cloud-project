@@ -63,6 +63,7 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected CollectInfo getData() {
 		try {
 			DataSourceInfo info = new DataSourceInfo();

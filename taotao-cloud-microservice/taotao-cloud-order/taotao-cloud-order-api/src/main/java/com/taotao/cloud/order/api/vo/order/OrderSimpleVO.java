@@ -13,7 +13,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,6 +24,9 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 订单简略信息 用于订单列表查看
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "订单简略信息 用于订单列表查看")
 public class OrderSimpleVO {
 

@@ -23,6 +23,7 @@ public class SensitiveWordsJob extends QuartzJobBean {
 	private static volatile Integer code = 0;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected void executeInternal(JobExecutionContext jobExecutionContext) {
 		Future<Integer> submit = EXECUTOR.submit(() -> {
 			Object words = redisRepository.get(RedisConstant.SENSITIVE_WORDS_KEY);

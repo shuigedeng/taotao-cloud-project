@@ -6,13 +6,19 @@ import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单导出DTO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "订单导出DTO")
 public class OrderExportDTO {
 
@@ -46,16 +52,16 @@ public class OrderExportDTO {
 	private String logisticsName;
 
 	@Schema(description = "运费")
-	private Double freightPrice;
+	private BigDecimal freightPrice;
 
 	@Schema(description = "商品价格")
-	private Double goodsPrice;
+	private BigDecimal goodsPrice;
 
 	@Schema(description = "优惠的金额")
-	private Double discountPrice;
+	private BigDecimal discountPrice;
 
 	@Schema(description = "总价格")
-	private Double flowPrice;
+	private BigDecimal flowPrice;
 
 	@Schema(description = "商品名称")
 	private String goodsName;

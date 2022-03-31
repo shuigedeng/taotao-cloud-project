@@ -5,7 +5,10 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 添加会员DTO
@@ -15,6 +18,9 @@ import lombok.Data;
  * @since 2022-03-14 11:24:21
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "添加会员DTO")
 public class MemberAddDTO implements Serializable {
 

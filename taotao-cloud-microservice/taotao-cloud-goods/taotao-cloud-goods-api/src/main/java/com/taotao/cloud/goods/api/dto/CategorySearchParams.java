@@ -2,12 +2,18 @@ package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 分类查询参数
  **/
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategorySearchParams {
 
 	@Schema(description = "分类名称")

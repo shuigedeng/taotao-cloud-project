@@ -6,6 +6,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -14,6 +18,10 @@ import org.hibernate.validator.constraints.Length;
  * 
  * @since 2020/12/7 15:50
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "店铺-公司信息")
 public class StoreCompanyDTO {
 
@@ -90,132 +98,4 @@ public class StoreCompanyDTO {
 	@NotBlank(message = "法人身份证不能为空")
 	@Schema(description = "法人身份证照片")
 	private String legalPhoto;
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getCompanyAddressIdPath() {
-		return companyAddressIdPath;
-	}
-
-	public void setCompanyAddressIdPath(String companyAddressIdPath) {
-		this.companyAddressIdPath = companyAddressIdPath;
-	}
-
-	public String getCompanyAddressPath() {
-		return companyAddressPath;
-	}
-
-	public void setCompanyAddressPath(String companyAddressPath) {
-		this.companyAddressPath = companyAddressPath;
-	}
-
-	public String getCompanyAddress() {
-		return companyAddress;
-	}
-
-	public void setCompanyAddress(String companyAddress) {
-		this.companyAddress = companyAddress;
-	}
-
-	public String getCompanyPhone() {
-		return companyPhone;
-	}
-
-	public void setCompanyPhone(String companyPhone) {
-		this.companyPhone = companyPhone;
-	}
-
-	public String getCompanyEmail() {
-		return companyEmail;
-	}
-
-	public void setCompanyEmail(String companyEmail) {
-		this.companyEmail = companyEmail;
-	}
-
-	public Integer getEmployeeNum() {
-		return employeeNum;
-	}
-
-	public void setEmployeeNum(Integer employeeNum) {
-		this.employeeNum = employeeNum;
-	}
-
-	public Double getRegisteredCapital() {
-		return registeredCapital;
-	}
-
-	public void setRegisteredCapital(Double registeredCapital) {
-		this.registeredCapital = registeredCapital;
-	}
-
-	public String getLinkName() {
-		return linkName;
-	}
-
-	public void setLinkName(String linkName) {
-		this.linkName = linkName;
-	}
-
-	public String getLinkPhone() {
-		return linkPhone;
-	}
-
-	public void setLinkPhone(String linkPhone) {
-		this.linkPhone = linkPhone;
-	}
-
-	public String getLicenseNum() {
-		return licenseNum;
-	}
-
-	public void setLicenseNum(String licenseNum) {
-		this.licenseNum = licenseNum;
-	}
-
-	public String getScope() {
-		return scope;
-	}
-
-	public void setScope(String scope) {
-		this.scope = scope;
-	}
-
-	public String getLicencePhoto() {
-		return licencePhoto;
-	}
-
-	public void setLicencePhoto(String licencePhoto) {
-		this.licencePhoto = licencePhoto;
-	}
-
-	public String getLegalName() {
-		return legalName;
-	}
-
-	public void setLegalName(String legalName) {
-		this.legalName = legalName;
-	}
-
-	public String getLegalId() {
-		return legalId;
-	}
-
-	public void setLegalId(String legalId) {
-		this.legalId = legalId;
-	}
-
-	public String getLegalPhoto() {
-		return legalPhoto;
-	}
-
-	public void setLegalPhoto(String legalPhoto) {
-		this.legalPhoto = legalPhoto;
-	}
 }

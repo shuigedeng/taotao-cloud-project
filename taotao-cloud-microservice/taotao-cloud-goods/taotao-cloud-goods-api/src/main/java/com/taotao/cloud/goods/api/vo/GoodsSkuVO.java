@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,9 @@ import lombok.NoArgsConstructor;
  * 商品规格VO
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GoodsSkuVO extends GoodsSkuBaseVO {
 
 	private static final long serialVersionUID = -7651149660489332344L;

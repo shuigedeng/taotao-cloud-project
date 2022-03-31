@@ -57,8 +57,9 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param <T>   泛型标记
 	 * @return 对象
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T newInstance(Class<?> clazz) {
-		return (T) instantiateClass(clazz);
+		return (T)instantiateClass(clazz);
 	}
 
 	/**
@@ -68,6 +69,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @param <T>      泛型标记
 	 * @return 对象
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T newInstance(String clazzStr) {
 		try {
 			Class<?> clazz = ClassUtil.forName(clazzStr, null);
@@ -133,6 +135,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	 * @return 拷贝之后的对象
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public static <T> T deepClone(@Nullable T source) {
 		if (source == null) {
 			return null;
