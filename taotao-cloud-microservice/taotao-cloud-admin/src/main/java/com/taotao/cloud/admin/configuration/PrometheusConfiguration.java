@@ -44,7 +44,7 @@ import org.springframework.scheduling.annotation.Async;
 @Configuration
 @EnableConfigurationProperties({PrometheusProperties.class})
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true")
-public class PrometheusAutoConfiguration {
+public class PrometheusConfiguration {
 
 	@Configuration(proxyBeanMethods = false)
 	@ConditionalOnBean(DiscoveryClient.class)
@@ -58,7 +58,6 @@ public class PrometheusAutoConfiguration {
 			ApplicationEventPublisher eventPublisher) {
 			return new PrometheusApi(discoveryClient, eventPublisher);
 		}
-
 
 		@Async
 		@EventListener

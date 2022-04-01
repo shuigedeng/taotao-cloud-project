@@ -42,6 +42,7 @@ import reactor.core.publisher.Mono;
  */
 @Configuration
 public class NotifierConfiguration {
+
 	@Bean
 	public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
 		return new DingDingNotifier(repository);
@@ -111,8 +112,6 @@ public class NotifierConfiguration {
 					Map<String, Object> details = ((InstanceStatusChangedEvent) event).getStatusInfo()
 						.getDetails();
 					str.append("[服务详情]: ").append(JsonUtil.toJSONString(details));
-
-
 
 					sender.send(
 						MessageSubType.TEXT,

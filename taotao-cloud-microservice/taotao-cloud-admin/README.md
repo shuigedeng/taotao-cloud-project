@@ -1,4 +1,4 @@
-# taotao-cloud-prometheus 模块
+# prometheus 模块
 
 ## 功能
 - `Spring cloud` 对接 Prometheus `http_sd`，支持 `servlet` 和 `webflux`，建议集成到 Spring boot admin 这类非业务服务中。
