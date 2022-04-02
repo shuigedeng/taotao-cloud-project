@@ -1,7 +1,7 @@
 dependencies {
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2'
-    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     //api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2'
     //api 'org.yaml:snakeyaml:1.30'
     api 'com.fasterxml.jackson.core:jackson-databind'
@@ -18,28 +18,28 @@ dependencies {
     api 'com.github.whvcse:easy-captcha'
     api 'javax.validation:validation-api'
     api 'io.projectreactor:reactor-core'
-    api 'cn.afterturn:easypoi-base:4.4.0'
+    api 'cn.afterturn:easypoi-base'
     api 'com.nepxion:banner'
-    api 'com.github.xkzhangsan:xk-time:3.2.3'
-    api 'com.baomidou:mybatis-plus-core:3.5.1'
-    api 'com.baomidou:mybatis-plus-extension:3.5.1'
+    api 'com.github.xkzhangsan:xk-time'
+    api 'com.baomidou:mybatis-plus-core'
+    api 'com.baomidou:mybatis-plus-extension'
     api 'com.squareup.okhttp3:okhttp'
-    api "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    api "com.squareup.okhttp3:logging-interceptor"
     api "eu.bitwalker:UserAgentUtils"
 
     api('org.apache.httpcomponents:httpclient') {
         exclude group: 'junit', module: 'junit'
     }
     api 'org.apache.httpcomponents:httpmime'
-    api 'commons-configuration:commons-configuration:1.10'
+    api 'commons-configuration:commons-configuration'
     
-    api "io.swagger.core.v3:swagger-models:2.1.13"
-    api 'io.swagger.core.v3:swagger-annotations:2.1.13'
+    api "io.swagger.core.v3:swagger-models"
+    api 'io.swagger.core.v3:swagger-annotation'
 
-    api 'com.thoughtworks.xstream:xstream:1.4.19'
+    api 'com.thoughtworks.xstream:xstream'
 
-    api "org.jsoup:jsoup:1.14.3"
-    api "com.google.zxing:javase:3.4.1"
+    api "org.jsoup:jsoup"
+    api "com.google.zxing:javase"
 
     api 'org.springframework:spring-core'
     api 'org.springframework:spring-tx'
@@ -51,7 +51,7 @@ dependencies {
     api 'org.springframework:spring-aspects'
 
     // jdk11删除了NashornScriptEngineFactory 引入此依赖支持其他框架以及jdk11以上版本
-    api group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.3'
+    api "org.openjdk.nashorn:nashorn-core"
 
     api "io.github.openfeign:feign-okhttp"
     api "com.squareup.okhttp3:okhttp"
@@ -69,10 +69,10 @@ dependencies {
     api "org.springframework.cloud:spring-cloud-context"
 
     // serializable
-    api 'com.esotericsoftware:kryo:5.3.0'
-    api 'com.caucho:hessian:4.0.65'
+    api 'com.esotericsoftware:kryo'
+    api 'com.caucho:hessian'
     api 'commons-codec:commons-codec'
-    api 'com.alibaba:fastjson:1.2.80'
+    api 'com.alibaba:fastjson'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

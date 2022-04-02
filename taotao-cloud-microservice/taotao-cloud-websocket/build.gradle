@@ -5,7 +5,7 @@ dependencies {
 
     implementation 'cn.hutool:hutool-all'
 
-    implementation 'io.netty:netty-all:4.1.51.Final'
+    implementation 'io.netty:netty-all'
 
 }
 
