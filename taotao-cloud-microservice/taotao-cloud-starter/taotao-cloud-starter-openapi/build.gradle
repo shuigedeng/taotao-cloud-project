@@ -5,6 +5,5 @@ dependencies {
     api group: 'org.springdoc', name: 'springdoc-openapi-common', version: '1.5.5'
     api 'com.google.guava:guava'
 
-    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

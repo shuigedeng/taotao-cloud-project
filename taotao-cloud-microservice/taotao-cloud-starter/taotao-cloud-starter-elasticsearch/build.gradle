@@ -2,7 +2,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     api "org.springframework.boot:spring-boot-starter-data-elasticsearch"
-    api('io.github.xpc1024:easy-es-boot-starter:0.9.6') {
+    api('io.github.xpc1024:easy-es-boot-starter') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 

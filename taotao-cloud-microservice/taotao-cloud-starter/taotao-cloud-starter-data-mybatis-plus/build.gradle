@@ -5,10 +5,10 @@ dependencies {
 
     api "mysql:mysql-connector-java"
 
-    api 'com.baomidou:mybatis-plus-boot-starter:3.5.1'
-    api 'com.baomidou:dynamic-datasource-spring-boot-starter:3.5.1'
+    api 'com.baomidou:mybatis-plus-boot-starter'
+    api 'com.baomidou:dynamic-datasource-spring-boot-starter'
     api 'com.baomidou:mybatis-plus-extension'
-    api 'com.github.pagehelper:pagehelper:5.3.0'
+    api 'com.github.pagehelper:pagehelper'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
