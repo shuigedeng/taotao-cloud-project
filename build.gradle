@@ -126,34 +126,60 @@ buildscript {
         xxlJobVersion = '2.3.0'
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.4.2.Final"
+        //https://search.maven.org/artifact/com.alibaba/fastjson
         fastjsonVersion = "1.2.80"
+        //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.65"
+        //https://search.maven.org/artifact/com.esotericsoftware/kryo
         kryoVersion = "5.3.0"
+        //https://search.maven.org/artifact/org.openjdk.nashorn/nashorn-core
         nashornVersion = "15.3"
+        //https://search.maven.org/artifact/com.google.zxing/javase
         zxingJavaseVersion = "3.4.1"
+        //https://search.maven.org/artifact/org.jsoup/jsoup
         jsoupVersion = "1.14.3"
+        //https://search.maven.org/artifact/com.thoughtworks.xstream/xstream
         xstreamVersion = "1.4.19"
+        //https://search.maven.org/artifact/commons-configuration/commons-configuration
         commonsConfigurationVersion = "1.10"
+        //https://search.maven.org/artifact/com.squareup.okhttp3/logging-interceptor
         okhttpLoggingInterceptorVersion = "4.9.3"
+        //https://search.maven.org/artifact/com.baomidou/mybatis-plus-core
         mybatisPlusVersion = "3.5.1"
+        //https://search.maven.org/artifact/com.github.xkzhangsan/xk-time
         xkTimeVersion = "3.2.3"
+        //https://search.maven.org/artifact/cn.afterturn/easypoi-base
         easypoiVersion = "4.4.0"
-        arthasVersion = "3.5.6"
+        //https://search.maven.org/artifact/com.taobao.arthas/arthas-spring-boot-starter
+        arthasVersion = "3.6.0"
+        //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
         adminVersion = "2.6.3"
+        //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
+        //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
         dynamicTpVersion = "1.0.3"
-        jodaTimeVersion = "2.10.13"
+        //https://search.maven.org/artifact/joda-time/joda-time
+        jodaTimeVersion = "2.10.14"
+        //https://search.maven.org/artifact/org.anarres.lzo/lzo-core
         lzoVersion = "1.0.6"
+        //https://search.maven.org/artifact/net.jpountz.lz4/lz4
         lz4Version = "1.3.0"
+        //https://search.maven.org/artifact/org.xerial.snappy/snappy-java
         snappyVersion = "1.1.8.4"
+        //https://search.maven.org/artifact/com.github.pagehelper/pagehelper
         pagehelperVersion = "5.3.0"
+        //https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-runtime
         jaxbVersion = "3.0.2"
+        //https://search.maven.org/artifact/com.lmax/disruptor
         disruptorVersion = "3.4.4"
+        //https://search.maven.org/artifact/io.github.xpc1024/easy-es-boot-starter
         easyEsVersion = "0.9.7"
+        //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
         elasticjobVersion = "3.0.1"
+        //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
         skywalkingVersion = "8.9.0"
+        //https://search.maven.org/artifact/com.github.danielwegener/logback-kafka-appender
         logbackKafkaAppenderVersion = "0.2.0-RC2"
-
 
         //如果url不指定的话
         //Mac默认：url = https://index.docker.io/v1/
