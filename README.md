@@ -166,27 +166,26 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-javase -- javase模块
 │  │  ├─taotao-cloud-javaweb -- javaweb模块
 │  ├─taotao-cloud-microservice -- 微服务业务模块
-│  │  ├─taotao-cloud-admin  -- admin模块
+│  │  ├─taotao-cloud-admin  -- admin server模块
+│  │  ├─taotao-cloud-auth  -- oauth2认证模块
 │  │  ├─taotao-cloud-bullein  -- 公告模块
 │  │  ├─taotao-cloud-config  -- 通用配置模块
 │  │  ├─taotao-cloud-customer  -- 客服模块
 │  │  ├─taotao-cloud-distribution  -- 营销/分销模块
 │  │  ├─taotao-cloud-front  -- 前端pc模块
 │  │  ├─taotao-cloud-gateway  -- 网关模块
+│  │  ├─taotao-cloud-goods  -- 商品模块
 │  │  ├─taotao-cloud-graphql  -- graphql模块
 │  │  ├─taotao-cloud-member  -- 会员模块
 │  │  ├─taotao-cloud-message  -- 消息模块
-│  │  ├─taotao-cloud-auth  -- oauth2认证模块
-│  │  ├─taotao-cloud-opencv  -- opencv模块
+│  │  ├─taotao-cloud-open  -- 开放模块
 │  │  ├─taotao-cloud-operation  -- 运营模块
 │  │  ├─taotao-cloud-order  -- 订单模块
 │  │  ├─taotao-cloud-payment -- 支付模块
-│  │  ├─taotao-cloud-goods  -- 商品模块
 │  │  ├─taotao-cloud-promotion  -- 促销模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-report  -- 报表模块
 │  │  ├─taotao-cloud-search  -- 搜索模块
-│  │  ├─taotao-cloud-settlement  -- 售后模块
 │  │  ├─taotao-cloud-starter  -- starter组件模块
 │  │  ├─taotao-cloud-stock  -- 库存模块
 │  │  ├─taotao-cloud-store  -- 店铺模块

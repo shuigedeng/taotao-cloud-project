@@ -282,23 +282,52 @@ seata:
       cluster: taotao-cloud-seata-cluster
   client:
     rm:
+      # 异步提交缓存队列长度（默认10000）
       async-commit-buffer-limit: 10000
+      # 一阶段结果上报TC重试次数（默认5）
       report-retry-count: 5
+      # 自动刷新缓存中的表结构（默认false）
       table-meta-check-enable: false
-      report-success-enable: false
+      report-success-enable: true
       lock:
+        # 校验或占用全局锁重试间隔（默认10ms）
         retry-interval: 10
+        # 校验或占用全局锁重试次数（默认30）
         retry-times: 30
+        # 分支事务与其它全局回滚事务冲突时锁策略（优先释放本地锁让回滚成功）
         retry-policy-branch-rollback-on-conflict: true
     tm:
+      # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
       commit-retry-count: 5
+      # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
       rollback-retry-count: 5
     undo:
+      # 二阶段回滚镜像校验（默认true开启）
       data-validation: true
-      log-serialization: jackson
+      # undo序列化方式（默认jackson 不支持 LocalDateTime）
+      log-serialization: kryo
+      # 自定义undo表名（默认undo_log）
       log-table: undo_log
   log:
+    # 日志异常输出概率（默认100）
     exception-rate: 100
+  transport:
+    shutdown:
+      wait: 3
+    thread-factory:
+      boss-thread-prefix: TaoTaoCloudSysNettyBoss
+      worker-thread-prefix: TaoTaoCloudSysNettyServerNIOWorker
+      server-executor-thread-prefix: TaoTaoCloudSysNettyServerBizHandler
+      share-boss-worker: false
+      client-selector-thread-prefix: TaoTaoCloudSysNettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: TaoTaoCloudSysNettyClientWorkerThread
+    type: TCP
+    server: NIO
+    heartbeat: true
+    serialization: seata
+    compressor: none
+    enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
 
 spring:
   quartz:
