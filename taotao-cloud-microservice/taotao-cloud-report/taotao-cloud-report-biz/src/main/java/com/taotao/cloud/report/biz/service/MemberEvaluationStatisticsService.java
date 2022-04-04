@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.service;
 
-import cn.lili.modules.member.entity.dos.MemberEvaluation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

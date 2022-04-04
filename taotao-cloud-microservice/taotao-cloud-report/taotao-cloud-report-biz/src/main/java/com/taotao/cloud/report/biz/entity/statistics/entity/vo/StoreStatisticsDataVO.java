@@ -19,5 +19,5 @@ public class StoreStatisticsDataVO {
     private String num;
 
     @ApiModelProperty(value = "销售金额")
-    private Double price;
+    private BigDecimal price;
 }

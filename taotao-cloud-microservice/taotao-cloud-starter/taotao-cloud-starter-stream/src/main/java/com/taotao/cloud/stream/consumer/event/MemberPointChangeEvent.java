@@ -1,6 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event;
 //
-//import cn.lili.modules.member.entity.dto.MemberPointMessage;
 //
 ///**
 // * 会员积分改变消息

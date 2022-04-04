@@ -67,14 +67,14 @@ public class FullDiscountRender implements CartRenderStep {
 
                     //写入满减活动
                     cart.setFullDiscount(fullDiscount);
-                    Map<String, Double> skuPriceDetail;
+                    Map<String, BigDecimal> skuPriceDetail;
                     //参与活动的sku判定
                     skuPriceDetail = initFullDiscountGoods(fullDiscount, cart.getCheckedSkuList());
                     if (!skuPriceDetail.isEmpty()) {
                         //记录参与满减活动的sku
                         cart.setFullDiscountSkuIds(new ArrayList<>(skuPriceDetail.keySet()));
 
-                        Double countPrice = countPrice(skuPriceDetail);
+                        BigDecimal countPrice = countPrice(skuPriceDetail);
 
 
                         if (isFull(countPrice, cart)) {
@@ -104,7 +104,7 @@ public class FullDiscountRender implements CartRenderStep {
      * @param cart
      * @param skuPriceDetail
      */
-    private void renderFullRate(CartVO cart, Map<String, Double> skuPriceDetail, Double rate) {
+    private void renderFullRate(CartVO cart, Map<String, BigDecimal> skuPriceDetail, BigDecimal rate) {
 
         List<CartSkuVO> cartSkuVOS = cart.getCheckedSkuList().stream().filter(cartSkuVO -> {
             return skuPriceDetail.containsKey(cartSkuVO.getGoodsSku().getId());
@@ -134,8 +134,8 @@ public class FullDiscountRender implements CartRenderStep {
      * @param cartSkuVOS   购物车商品sku信息
      * @return 参与满优惠的商品id
      */
-    public Map<String, Double> initFullDiscountGoods(FullDiscountVO fullDiscount, List<CartSkuVO> cartSkuVOS) {
-        Map<String, Double> skuPriceDetail = new HashMap<>(16);
+    public Map<String, BigDecimal> initFullDiscountGoods(FullDiscountVO fullDiscount, List<CartSkuVO> cartSkuVOS) {
+        Map<String, BigDecimal> skuPriceDetail = new HashMap<>(16);
 
         //全品类参与
         if (PromotionsScopeTypeEnum.ALL.name().equals(fullDiscount.getScopeType())) {
@@ -188,7 +188,7 @@ public class FullDiscountRender implements CartRenderStep {
      * @param cart 购物车展示信息
      * @return 是否满足满优惠
      */
-    private boolean isFull(Double price, CartVO cart) {
+    private boolean isFull(BigDecimal price, CartVO cart) {
         if (cart.getFullDiscount().getFullMoney() <= price) {
             cart.setPromotionNotice("正在参与满优惠活动[" + cart.getFullDiscount().getPromotionName() + "]" + cart.getFullDiscount().notice());
             return true;
@@ -204,10 +204,10 @@ public class FullDiscountRender implements CartRenderStep {
      * @param skuPriceMap sku价格
      * @return 总价
      */
-    private Double countPrice(Map<String, Double> skuPriceMap) {
-        double count = 0d;
+    private BigDecimal countPrice(Map<String, BigDecimal> skuPriceMap) {
+        BigDecimal count = 0d;
 
-        for (Double price : skuPriceMap.values()) {
+        for (BigDecimal price : skuPriceMap.values()) {
             count = CurrencyUtil.add(count, price);
         }
 

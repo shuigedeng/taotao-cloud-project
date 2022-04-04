@@ -22,8 +22,8 @@ public class PromotionPriceUtil {
 	 * @param discountPrice      需要分发的优惠金额
 	 * @param promotionTypeEnum  促销类型
 	 */
-	public void recountPrice(TradeDTO tradeDTO, Map<String, Double> skuPromotionDetail,
-		Double discountPrice, PromotionTypeEnum promotionTypeEnum) {
+	public void recountPrice(TradeDTO tradeDTO, Map<String, BigDecimal> skuPromotionDetail,
+		BigDecimal discountPrice, PromotionTypeEnum promotionTypeEnum) {
 
 		// sku 促销信息非空判定
 		if (skuPromotionDetail == null || skuPromotionDetail.size() == 0) {
@@ -31,8 +31,8 @@ public class PromotionPriceUtil {
 		}
 
 		//计算总金额
-		Double totalPrice = 0D;
-		for (Double value : skuPromotionDetail.values()) {
+		BigDecimal totalPrice = 0D;
+		for (BigDecimal value : skuPromotionDetail.values()) {
 			totalPrice = CurrencyUtil.add(totalPrice, value);
 		}
 
@@ -66,7 +66,7 @@ public class PromotionPriceUtil {
 		Integer count = skuPromotionDetail.size();
 
 		//已优惠金额
-		Double deducted = 0D;
+		BigDecimal deducted = 0D;
 
 		for (String skuId : skuPromotionDetail.keySet()) {
 
@@ -78,12 +78,12 @@ public class PromotionPriceUtil {
 					count--;
 
 					//sku 优惠金额
-					Double skuDiscountPrice = 0d;
+					BigDecimal skuDiscountPrice = 0d;
 
 					//非最后一个商品，则按照比例计算
 					if (count > 0) {
 						//商品金额占比
-						Double point = CurrencyUtil.div(
+						BigDecimal point = CurrencyUtil.div(
 							cartSkuVO.getPriceDetailDTO().getGoodsPrice(), totalPrice, 4);
 						//商品优惠金额
 						skuDiscountPrice = CurrencyUtil.mul(discountPrice, point);

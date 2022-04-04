@@ -202,7 +202,7 @@ public class RectificationController extends BaseController {
 		int cols = circles.cols();
 		if (cols > 0) {
 			for (int i = 0; i < circles.cols(); i++) {
-				double vCircle[] = circles.get(0, i);
+				BigDecimal vCircle[] = circles.get(0, i);
 				Point center = new Point(vCircle[0], vCircle[1]);
 				int radius = (int) Math.round(vCircle[2]);
 				Core.circle(src01, center, 3, new Scalar(0, 255, 0), -1, 8, 0);
@@ -219,7 +219,7 @@ public class RectificationController extends BaseController {
 		System.out.println(circles.cols());
 		if (circles.cols() > 0) {
 			for (int i = 0; i < circles.cols(); i++) {
-				double vCircle[] = circles.get(0, i);
+				BigDecimal vCircle[] = circles.get(0, i);
 				Point center = new Point(vCircle[0], vCircle[1]);
 				int radius = (int) Math.round(vCircle[2]);
 				Core.circle(src02, center, 3, new Scalar(0, 255, 0), -1, 8, 0);
@@ -235,7 +235,7 @@ public class RectificationController extends BaseController {
 		System.out.println(circles.cols());
 		if (circles.cols() > 0) {
 			for (int i = 0; i < circles.cols(); i++) {
-				double vCircle[] = circles.get(0, i);
+				BigDecimal vCircle[] = circles.get(0, i);
 				Point center = new Point(vCircle[0], vCircle[1]);
 				int radius = (int) Math.round(vCircle[2]);
 				Core.circle(src03, center, 3, new Scalar(0, 255, 0), -1, 8, 0);
@@ -251,7 +251,7 @@ public class RectificationController extends BaseController {
 		System.out.println(circles.cols());
 		if (circles.cols() > 0) {
 			for (int i = 0; i < circles.cols(); i++) {
-				double vCircle[] = circles.get(0, i);
+				BigDecimal vCircle[] = circles.get(0, i);
 				Point center = new Point(vCircle[0], vCircle[1]);
 				int radius = (int) Math.round(vCircle[2]);
 				Core.circle(src04, center, 3, new Scalar(0, 255, 0), -1, 8, 0);

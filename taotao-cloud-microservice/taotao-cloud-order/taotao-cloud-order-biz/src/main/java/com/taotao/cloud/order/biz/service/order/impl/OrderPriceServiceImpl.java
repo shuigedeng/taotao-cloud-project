@@ -50,7 +50,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
     @Override
     @SystemLogPoint(description = "修改订单价格", customerLog = "'订单编号:'+#orderSn +'，价格修改为：'+#orderPrice")
     @OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn = "#orderSn")
-    public Order updatePrice(String orderSn, Double orderPrice) {
+    public Order updatePrice(String orderSn, BigDecimal orderPrice) {
 
         //修改订单金额
         Order order = updateOrderPrice(orderSn, orderPrice);
@@ -66,7 +66,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
         Order order = OperationalJudgment.judgment(orderService.getBySn(orderSn));
         //如果订单已付款，则抛出异常
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-            throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
+            throw new BusinessException(ResultEnum.PAY_BigDecimal_ERROR);
         }
 
         bankTransferPlugin.callBack(order);
@@ -84,7 +84,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
      * @param orderSn    订单编号
      * @param orderPrice 修改订单金额
      */
-    private Order updateOrderPrice(String orderSn, Double orderPrice) {
+    private Order updateOrderPrice(String orderSn, BigDecimal orderPrice) {
         Order order = OperationalJudgment.judgment(orderService.getBySn(orderSn));
         //判定是否支付
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
@@ -127,7 +127,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
 
         //获取总数，入欧最后一个则将其他orderitem的修改金额累加，然后进行扣减
         Integer index = orderItems.size();
-        Double countUpdatePrice = 0D;
+        BigDecimal countUpdatePrice = 0D;
         for (OrderItem orderItem : orderItems) {
 
             //获取订单货物价格信息
@@ -147,7 +147,7 @@ public class OrderPriceServiceImpl implements OrderPriceService {
             } else {
 
                 //SKU占总订单 金额的百分比
-                Double priceFluctuationRatio = CurrencyUtil.div(priceDetailDTO.getOriginalPrice(), order.getPriceDetailDTO().getOriginalPrice(), 4);
+                BigDecimal priceFluctuationRatio = CurrencyUtil.div(priceDetailDTO.getOriginalPrice(), order.getPriceDetailDTO().getOriginalPrice(), 4);
 
                 //记录修改金额
                 priceDetailDTO.setUpdatePrice(CurrencyUtil.mul(order.getUpdatePrice(), priceFluctuationRatio));

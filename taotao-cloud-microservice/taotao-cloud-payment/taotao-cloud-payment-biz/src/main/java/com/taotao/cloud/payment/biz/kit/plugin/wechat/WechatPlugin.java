@@ -5,44 +5,13 @@ import cn.hutool.core.net.URLEncoder;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.properties.ApiProperties;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.common.utils.SnowFlake;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.connect.entity.Connect;
-import cn.lili.modules.connect.entity.enums.ConnectEnum;
-import cn.lili.modules.connect.service.ConnectService;
-import cn.lili.modules.member.entity.dto.ConnectQueryDTO;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.payment.entity.RefundLog;
-import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
-import cn.lili.modules.payment.kit.CashierSupport;
-import cn.lili.modules.payment.kit.Payment;
-import cn.lili.modules.payment.kit.core.PaymentHttpResponse;
-import cn.lili.modules.payment.kit.core.enums.RequestMethodEnums;
-import cn.lili.modules.payment.kit.core.enums.SignType;
-import cn.lili.modules.payment.kit.core.kit.*;
-import cn.lili.modules.payment.kit.core.utils.DateTimeZoneUtil;
-import cn.lili.modules.payment.kit.dto.PayParam;
-import cn.lili.modules.payment.kit.dto.PaymentSuccessParams;
-import cn.lili.modules.payment.kit.params.dto.CashierParam;
-import cn.lili.modules.payment.kit.plugin.wechat.enums.WechatApiEnum;
-import cn.lili.modules.payment.kit.plugin.wechat.enums.WechatDomain;
-import cn.lili.modules.payment.kit.plugin.wechat.model.*;
-import cn.lili.modules.payment.service.PaymentService;
-import cn.lili.modules.payment.service.RefundLogService;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.payment.WechatPaymentSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.payment.biz.kit.CashierSupport;
+import com.taotao.cloud.payment.biz.kit.core.kit.IpKit;
+import com.taotao.cloud.payment.biz.kit.dto.PayParam;
+import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
+import com.taotao.cloud.payment.biz.service.PaymentService;
+import com.taotao.cloud.payment.biz.service.RefundLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -494,7 +463,7 @@ public class WechatPlugin implements Payment {
 
 
         String tradeNo = jsonObject.getStr("transaction_id");
-        Double totalAmount = CurrencyUtil.reversalFen(jsonObject.getJSONObject("amount").getDouble("total"));
+        BigDecimal totalAmount = CurrencyUtil.reversalFen(jsonObject.getJSONObject("amount").getBigDecimal("total"));
 
         PaymentSuccessParams paymentSuccessParams = new PaymentSuccessParams(
                 PaymentMethodEnum.WECHAT.name(),

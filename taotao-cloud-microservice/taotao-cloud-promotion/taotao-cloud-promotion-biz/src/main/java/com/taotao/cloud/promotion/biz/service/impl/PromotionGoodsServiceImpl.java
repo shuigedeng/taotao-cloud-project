@@ -167,7 +167,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      * @return 促销商品价格
      */
     @Override
-    public Double getValidPromotionsGoodsPrice(String skuId, List<String> promotionTypes) {
+    public BigDecimal getValidPromotionsGoodsPrice(String skuId, List<String> promotionTypes) {
         QueryWrapper<PromotionGoods> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("sku_id", skuId);
         queryWrapper.in("promotion_type", promotionTypes);

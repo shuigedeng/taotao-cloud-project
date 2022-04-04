@@ -121,7 +121,7 @@ public class PageController extends BaseController {
 			Imgproc.drawContours(result, contours, i, new Scalar(0, 0, 255), 1);
 			MatOfPoint mop = contours.get(i);
 			// 获取轮廓面积
-			double contArea = Math.abs(Imgproc.contourArea(mop, false));
+			BigDecimal contArea = Math.abs(Imgproc.contourArea(mop, false));
 			Rect r = Imgproc.boundingRect(mop);
 			System.out.println("轮廓面积：" + contArea);
 			if (contArea > 1200) {// 此处是根据轮廓面积
@@ -184,7 +184,7 @@ public class PageController extends BaseController {
 	 * @param x
 	 * @return int
 	 */
-	public int getPage(double x) {
+	public int getPage(BigDecimal x) {
 		// 减去2像素，是因为shuzi.png外边框是预留了2像素的，因此匹配结果坐标为：2,2;72,2;142,2
 		// Math.floor 返回不大于的最大整数
 		return (int) Math.floor((x - 2) / 70) + 1;
@@ -198,9 +198,9 @@ public class PageController extends BaseController {
 	//	Vector<MatOfPoint> contours2 = OpenCVUtil.findContours(markmat2);
 	//	Mat mat1 = getSimMark("D:\\test\\abc\\1.png");
 	//	Mat mat2 = getSimMark("D:\\test\\abc\\2.png");
-	//	double result1 = Imgproc.matchShapes(contours1.get(0), contours2.get(0),
+	//	BigDecimal result1 = Imgproc.matchShapes(contours1.get(0), contours2.get(0),
 	//		Imgproc.CV_CONTOURS_MATCH_I1, 0);
-	//	double result2 = Imgproc.matchShapes(mat1, mat2, Imgproc.CV_CONTOURS_MATCH_I1, 0);
+	//	BigDecimal result2 = Imgproc.matchShapes(mat1, mat2, Imgproc.CV_CONTOURS_MATCH_I1, 0);
 	//	System.out.println(result1);
 	//	System.out.println(result2);
 	//}

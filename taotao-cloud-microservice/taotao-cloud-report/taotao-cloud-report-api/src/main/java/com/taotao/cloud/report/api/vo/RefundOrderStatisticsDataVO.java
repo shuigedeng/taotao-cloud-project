@@ -31,5 +31,5 @@ public class RefundOrderStatisticsDataVO {
     private String specs;
 
     @Schema(description =  "实际退款金额")
-    private Double finalPrice;
+    private BigDecimal finalPrice;
 }

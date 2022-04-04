@@ -44,7 +44,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean cash(Double applyMoney) {
+    public Boolean cash(BigDecimal applyMoney) {
 
         //检查分销功能开关
         distributionService.checkDistributionSetting();

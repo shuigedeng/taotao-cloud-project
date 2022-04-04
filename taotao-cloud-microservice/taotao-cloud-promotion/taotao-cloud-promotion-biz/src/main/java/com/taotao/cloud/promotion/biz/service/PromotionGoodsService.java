@@ -86,7 +86,7 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
      * @param promotionTypes 特定促销类型
      * @return 促销商品价格
      */
-    Double getValidPromotionsGoodsPrice(String skuId, List<String> promotionTypes);
+    BigDecimal getValidPromotionsGoodsPrice(String skuId, List<String> promotionTypes);
 
     /**
      * 查询参加活动促销商品是否同时参加指定类型的活动

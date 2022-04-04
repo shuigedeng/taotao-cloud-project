@@ -1,10 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.serviceimpl;
 
-import cn.lili.modules.promotion.entity.dos.Seckill;
-import cn.lili.modules.promotion.entity.enums.PromotionsStatusEnum;
-import cn.lili.modules.promotion.tools.PromotionTools;
-import cn.lili.modules.statistics.mapper.SeckillStatisticsMapper;
-import cn.lili.modules.statistics.service.SeckillStatisticsService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

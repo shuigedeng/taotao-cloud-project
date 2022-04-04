@@ -400,8 +400,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		////好评数量
 		//long highPraiseNum = memberEvaluationService.count(goodEvaluationQueryWrapper);
 		////好评率
-		//double grade = NumberUtil.mul(
-		//	NumberUtil.div(highPraiseNum, goods.getCommentNum().doubleValue(), 2), 100);
+		//BigDecimal grade = NumberUtil.mul(
+		//	NumberUtil.div(highPraiseNum, goods.getCommentNum().BigDecimalValue(), 2), 100);
 		//goods.setGrade(grade);
 		this.updateById(goods);
 		return true;

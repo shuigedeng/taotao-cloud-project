@@ -84,7 +84,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
             //根据订单编号获取有分销金额的店铺流水记录
             List<StoreFlow> storeFlowList = storeFlowService
                     .listStoreFlow(StoreFlowQueryDTO.builder().justDistribution(true).orderSn(orderSn).build());
-            double rebate = 0.0;
+            BigDecimal rebate = 0.0;
             //循环店铺流水记录判断是否包含分销商品
             //包含分销商品则进行记录分销订单、计算分销总额
             for (StoreFlow storeFlow : storeFlowList) {
@@ -158,7 +158,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
                 return;
             }
             //分销金额
-            double rebate = 0.0;
+            BigDecimal rebate = 0.0;
 
             //包含分销商品则进行记录分销订单、计算分销总额
             for (DistributionOrder distributionOrder : distributionOrderList) {

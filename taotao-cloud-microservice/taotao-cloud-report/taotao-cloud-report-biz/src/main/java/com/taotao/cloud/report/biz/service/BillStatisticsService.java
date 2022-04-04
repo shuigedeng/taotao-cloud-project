@@ -1,7 +1,5 @@
 package com.taotao.cloud.report.biz.service;
 
-import cn.lili.modules.store.entity.dos.Bill;
-import cn.lili.modules.store.entity.enums.BillStatusEnum;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

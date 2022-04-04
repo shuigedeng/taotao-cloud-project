@@ -65,7 +65,7 @@ public class StoreEditDTO {
 
 	@Min(value = 1, message = "注册资金,至少一位")
 	@Schema(description = "注册资金")
-	private Double registeredCapital;
+	private BigDecimal registeredCapital;
 
 	@NotBlank(message = "联系人姓名为空")
 	@Length(min = 2, max = 20, message = "联系人长度为：2-20位字符")

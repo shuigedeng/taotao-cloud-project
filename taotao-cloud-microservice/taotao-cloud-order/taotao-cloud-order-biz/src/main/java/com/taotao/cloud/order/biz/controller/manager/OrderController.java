@@ -95,7 +95,7 @@ public class OrderController {
 	@RequestLogger(description = "根据id查询物流公司信息")
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Order> updateOrderPrice(@PathVariable String orderSn,
-		@NotNull(message = "订单价格不能为空") @RequestParam Double price) {
+		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
 		return Result.success(orderPriceService.updatePrice(orderSn, price));
 	}
 

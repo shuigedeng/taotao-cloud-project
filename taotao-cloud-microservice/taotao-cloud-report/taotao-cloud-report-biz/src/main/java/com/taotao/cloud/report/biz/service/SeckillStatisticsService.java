@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.service;
 
-import cn.lili.modules.promotion.entity.dos.Seckill;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

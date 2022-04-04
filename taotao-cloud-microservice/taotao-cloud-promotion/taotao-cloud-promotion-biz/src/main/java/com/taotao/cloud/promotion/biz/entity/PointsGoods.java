@@ -1,6 +1,5 @@
 package com.taotao.cloud.promotion.biz.entity;
 
-import cn.lili.modules.promotion.entity.dto.BasePromotions;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
@@ -45,10 +44,10 @@ public class PointsGoods extends BasePromotions<PointsGoods, Long> {
     private String goodsName;
 
     @Schema(description =  "商品原价")
-    private Double originalPrice;
+    private BigDecimal originalPrice;
 
     @Schema(description =  "结算价格")
-    private Double settlementPrice;
+    private BigDecimal settlementPrice;
 
     @Schema(description =  "积分商品分类编号")
     private String pointsGoodsCategoryId;

@@ -1,8 +1,5 @@
 package com.taotao.cloud.report.biz.service;
 
-import cn.lili.modules.member.entity.vo.MemberDistributionVO;
-import cn.lili.modules.statistics.entity.dos.MemberStatisticsData;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Date;

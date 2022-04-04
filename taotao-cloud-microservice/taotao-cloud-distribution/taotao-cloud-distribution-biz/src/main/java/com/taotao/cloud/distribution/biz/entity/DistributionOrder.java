@@ -1,8 +1,5 @@
 package com.taotao.cloud.distribution.biz.entity;
 
-import cn.lili.modules.distribution.entity.enums.DistributionOrderStatusEnum;
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -54,9 +51,9 @@ public class DistributionOrder extends BaseIdEntity {
     @Schema(description =  "解冻日期")
     private Date settleCycle;
     @Schema(description =  "提成金额")
-    private Double rebate;
+    private BigDecimal rebate;
     @Schema(description =  "退款金额")
-    private Double sellBackRebate;
+    private BigDecimal sellBackRebate;
     @Schema(description =  "店铺id")
     private String storeId;
     @Schema(description =  "店铺名称")

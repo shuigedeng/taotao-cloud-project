@@ -1,29 +1,14 @@
 package com.taotao.cloud.report.biz.entity.statistics.serviceimpl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.enums.FlowTypeEnum;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.modules.order.order.entity.vo.OrderSimpleVO;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.vo.OrderOverviewVO;
-import cn.lili.modules.statistics.entity.vo.OrderStatisticsDataVO;
-import cn.lili.modules.statistics.mapper.OrderStatisticsMapper;
-import cn.lili.modules.statistics.service.OrderStatisticsService;
-import cn.lili.modules.statistics.service.PlatformViewService;
-import cn.lili.modules.statistics.service.StoreFlowStatisticsService;
-import cn.lili.modules.statistics.util.StatisticsDateUtil;
-import cn.lili.mybatis.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,19 +58,19 @@ public class OrderStatisticsServiceImpl extends ServiceImpl<OrderStatisticsMappe
     private void conversionRateOperation(OrderOverviewVO orderOverviewVO) {
 
         //下单转换率 订单数/UV
-        Double orderConversionRate = CurrencyUtil.div(orderOverviewVO.getOrderNum(), orderOverviewVO.getUvNum(), 4);
+        BigDecimal orderConversionRate = CurrencyUtil.div(orderOverviewVO.getOrderNum(), orderOverviewVO.getUvNum(), 4);
         if (orderConversionRate > 1) {
             orderConversionRate = 1d;
         }
         orderOverviewVO.setOrderConversionRate(CurrencyUtil.mul(orderConversionRate, 100) + "%");
         //付款转换率 付款订单数/订单数
-        Double paymentsConversionRate = CurrencyUtil.div(orderOverviewVO.getPaymentOrderNum(), orderOverviewVO.getOrderNum(), 4);
+        BigDecimal paymentsConversionRate = CurrencyUtil.div(orderOverviewVO.getPaymentOrderNum(), orderOverviewVO.getOrderNum(), 4);
         if (paymentsConversionRate > 1) {
             paymentsConversionRate = 1d;
         }
         orderOverviewVO.setPaymentsConversionRate(CurrencyUtil.mul(paymentsConversionRate, 100) + "%");
         //整体转换率 付款数/UV
-        Double overallConversionRate = CurrencyUtil.div(orderOverviewVO.getPaymentOrderNum(), orderOverviewVO.getUvNum(), 4);
+        BigDecimal overallConversionRate = CurrencyUtil.div(orderOverviewVO.getPaymentOrderNum(), orderOverviewVO.getUvNum(), 4);
         if (overallConversionRate > 1) {
             overallConversionRate = 1d;
         }

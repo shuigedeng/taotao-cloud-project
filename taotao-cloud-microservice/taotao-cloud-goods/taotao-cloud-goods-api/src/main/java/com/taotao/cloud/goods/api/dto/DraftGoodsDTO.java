@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.api.dto;
 
-//import cn.lili.modules.goods.entity.dos.DraftGoods;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.Map;

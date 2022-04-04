@@ -1,7 +1,5 @@
 package com.taotao.cloud.operation.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
-import cn.lili.common.enums.ClientTypeEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

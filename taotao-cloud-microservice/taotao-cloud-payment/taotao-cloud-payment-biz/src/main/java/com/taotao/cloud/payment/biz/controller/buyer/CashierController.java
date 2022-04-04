@@ -1,14 +1,6 @@
 package com.taotao.cloud.payment.biz.controller.buyer;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.payment.kit.CashierSupport;
-import cn.lili.modules.payment.kit.dto.PayParam;
-import cn.lili.modules.payment.entity.enums.PaymentClientEnum;
-import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
-import cn.lili.modules.payment.kit.params.dto.CashierParam;
+import com.taotao.cloud.payment.biz.kit.CashierSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.api.vo;
 
-//import cn.lili.modules.search.entity.dos.CustomWords;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

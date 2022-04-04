@@ -169,13 +169,13 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	@SystemLogPoint(description = "售后-审核售后", customerLog = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
 	@Override
 	public AfterSale review(String afterSaleSn, String serviceStatus, String remark,
-		Double actualRefundPrice) {
+		BigDecimal actualRefundPrice) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
 		//判断为待审核的售后服务
 		if (!afterSale.getServiceStatus().equals(AfterSaleStatusEnum.APPLY.name())) {
-			throw new BusinessException(ResultEnum.AFTER_SALES_DOUBLE_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_SALES_BigDecimal_ERROR);
 		}
 		//判断退款金额与付款金额是否正确,退款金额不能大于付款金额
 		if (NumberUtil.compare(afterSale.getFlowPrice(), actualRefundPrice) < 0) {
@@ -412,7 +412,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 			afterSale.setApplyRefundPrice(orderItem.getFlowPrice());
 		} else {
 			//单价计算
-			double utilPrice = CurrencyUtil.div(orderItem.getPriceDetailDTO().getFlowPrice(),
+			BigDecimal utilPrice = CurrencyUtil.div(orderItem.getPriceDetailDTO().getFlowPrice(),
 				orderItem.getNum());
 			afterSale.setApplyRefundPrice(CurrencyUtil.mul(afterSale.getNum(), utilPrice));
 		}

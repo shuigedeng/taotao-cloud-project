@@ -50,13 +50,13 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
     private String storeName;
 
     @Schema(description =  "面额")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description =  "折扣")
-    private Double discount;
+    private BigDecimal discount;
 
     @Schema(description =  "消费门槛")
-    private Double consumeThreshold;
+    private BigDecimal consumeThreshold;
 
     @Schema(description =  "会员名称")
     private String memberName;
@@ -99,7 +99,7 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
     private Boolean isPlatform;
 
     @Schema(description =  "店铺承担比例")
-    private Double storeCommission;
+    private BigDecimal storeCommission;
 
     @Schema(description =  "核销时间")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")

@@ -14,7 +14,7 @@ public class StoreIndexStatisticsVO {
     @ApiModelProperty(value = "订单总数量")
     private Integer orderNum;
     @ApiModelProperty(value = "订单总额")
-    private Double orderPrice;
+    private BigDecimal orderPrice;
     @ApiModelProperty(value = "访客数UV")
     private Integer storeUV;
 

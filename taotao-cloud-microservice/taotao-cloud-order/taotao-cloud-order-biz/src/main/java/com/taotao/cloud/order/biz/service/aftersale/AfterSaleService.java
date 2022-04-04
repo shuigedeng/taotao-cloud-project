@@ -67,7 +67,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param actualRefundPrice 退款金额
      * @return 售后
      */
-    AfterSale review(String afterSaleSn, String serviceStatus, String remark, Double actualRefundPrice);
+    AfterSale review(String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice);
 
     /**
      * 买家退货,物流填写

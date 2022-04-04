@@ -6,8 +6,7 @@ import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.HmacAlgorithm;
-import cn.lili.modules.payment.kit.core.XmlHelper;
-import cn.lili.modules.payment.kit.core.enums.RequestMethodEnums;
+import com.taotao.cloud.payment.biz.kit.core.XmlHelper;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.BadPaddingException;

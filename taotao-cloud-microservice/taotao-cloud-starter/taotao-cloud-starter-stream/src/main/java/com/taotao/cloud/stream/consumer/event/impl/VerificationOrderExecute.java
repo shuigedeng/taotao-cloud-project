@@ -1,15 +1,6 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
 //import cn.hutool.core.util.RandomUtil;
-//import cn.lili.event.OrderStatusChangeEvent;
-//import cn.lili.modules.order.order.entity.dos.Order;
-//import cn.lili.modules.order.order.entity.dos.OrderItem;
-//import cn.lili.modules.order.order.entity.dto.OrderMessage;
-//import cn.lili.modules.order.order.entity.enums.OrderComplaintStatusEnum;
-//import cn.lili.modules.order.order.entity.enums.OrderItemAfterSaleStatusEnum;
-//import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
-//import cn.lili.modules.order.order.service.OrderItemService;
-//import cn.lili.modules.order.order.service.OrderService;
 //import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 //import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 //import org.springframework.beans.factory.annotation.Autowired;

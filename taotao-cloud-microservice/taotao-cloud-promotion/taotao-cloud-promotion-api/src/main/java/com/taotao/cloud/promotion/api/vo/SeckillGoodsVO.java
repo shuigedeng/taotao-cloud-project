@@ -44,7 +44,7 @@ public class SeckillGoodsVO implements Serializable {
     private String storeId;
 
     @Schema(description =  "价格")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description =  "促销数量")
     private Integer quantity;
@@ -53,6 +53,6 @@ public class SeckillGoodsVO implements Serializable {
     private Integer salesNum;
 
     @Schema(description =  "商品原始价格")
-    private Double originalPrice;
+    private BigDecimal originalPrice;
 
 }

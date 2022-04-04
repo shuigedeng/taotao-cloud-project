@@ -1,12 +1,5 @@
 package com.taotao.cloud.report.biz.service;
 
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.modules.statistics.entity.dto.GoodsStatisticsQueryParam;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.vo.CategoryStatisticsDataVO;
-import cn.lili.modules.statistics.entity.vo.GoodsStatisticsDataVO;
-import cn.lili.modules.statistics.entity.vo.OrderOverviewVO;
-import cn.lili.modules.statistics.entity.vo.StoreStatisticsDataVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;

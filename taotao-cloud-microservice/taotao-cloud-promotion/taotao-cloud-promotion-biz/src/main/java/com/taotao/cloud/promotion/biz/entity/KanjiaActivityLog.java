@@ -45,8 +45,8 @@ public class KanjiaActivityLog extends BaseSuperEntity<KanjiaActivityLog, Long> 
     private String kanjiaMemberFace;
 
     @Schema(description =  "砍价金额")
-    private Double kanjiaPrice;
+    private BigDecimal kanjiaPrice;
 
     @Schema(description =  "剩余购买金额")
-    private Double surplusPrice;
+    private BigDecimal surplusPrice;
 }

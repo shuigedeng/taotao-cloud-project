@@ -3,7 +3,7 @@ package com.taotao.cloud.distribution.biz.controller;
 
 import com.itstyle.distribution.common.entity.Result;
 import com.itstyle.distribution.common.redis.RedisUtil;
-import com.itstyle.distribution.common.utils.DoubleUtil;
+import com.itstyle.distribution.common.utils.BigDecimalUtil;
 import com.itstyle.distribution.queue.delay.jvm.RedPacketMessage;
 import com.itstyle.distribution.queue.delay.jvm.RedPacketQueue;
 import com.itstyle.distribution.service.IRedPacketService;
@@ -79,8 +79,8 @@ public class RedPacketController {
 				long count = redisUtil.decr(redPacketId + "-num", 1);
 				if (count >= 0) {
 					Result result = redPacketService.startSeckil(redPacketId, userId);
-					Double amount = DoubleUtil.divide(
-						Double.parseDouble(result.get("msg").toString()), (double) 100);
+					BigDecimal amount = BigDecimalUtil.divide(
+						BigDecimal.parseBigDecimal(result.get("msg").toString()), (BigDecimal) 100);
 					LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
 				} else {
 					LOGGER.info("用户{}抢红包失败", userId);
@@ -138,8 +138,8 @@ public class RedPacketController {
 					if (result.get("code").toString().equals("500")) {
 						LOGGER.info("用户{}手慢了，红包派完了", userId);
 					} else {
-						Double amount = DoubleUtil.divide(
-							Double.parseDouble(result.get("msg").toString()), (double) 100);
+						BigDecimal amount = BigDecimalUtil.divide(
+							BigDecimal.parseBigDecimal(result.get("msg").toString()), (BigDecimal) 100);
 						LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
 					}
 				} else {
@@ -202,8 +202,8 @@ public class RedPacketController {
 					if (result.get("code").toString().equals("500")) {
 						LOGGER.info("用户{}手慢了，红包派完了", userId);
 					} else {
-						Double amount = DoubleUtil.divide(
-							Double.parseDouble(result.get("msg").toString()), (double) 100);
+						BigDecimal amount = BigDecimalUtil.divide(
+							BigDecimal.parseBigDecimal(result.get("msg").toString()), (BigDecimal) 100);
 						LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
 					}
 				}

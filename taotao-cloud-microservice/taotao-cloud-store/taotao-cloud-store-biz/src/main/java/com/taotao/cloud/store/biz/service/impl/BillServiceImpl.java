@@ -81,7 +81,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
                 .eq("store_id", storeId)
                 .eq("flow_type", FlowTypeEnum.PAY.name())
                 .between("create_time", startTime, endTime));
-        Double orderPrice = 0D;
+        BigDecimal orderPrice = 0D;
         if (orderBill != null) {
             bill.setOrderPrice(orderBill.getOrderPrice());
             bill.setCommissionPrice(orderBill.getCommissionPrice());
@@ -100,7 +100,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
                 .eq("store_id", storeId)
                 .eq("flow_type", FlowTypeEnum.REFUND.name())
                 .between("create_time", startTime, endTime));
-        Double refundPrice = 0D;
+        BigDecimal refundPrice = 0D;
         if (refundBill != null) {
             bill.setRefundPrice(refundBill.getRefundPrice());
             bill.setRefundCommissionPrice(refundBill.getRefundCommissionPrice());
@@ -110,7 +110,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
         }
 
         //最终结算金额=入款结算金额-退款结算金额
-        Double finalPrice = CurrencyUtil.sub(orderPrice, refundPrice);
+        BigDecimal finalPrice = CurrencyUtil.sub(orderPrice, refundPrice);
         bill.setBillPrice(finalPrice);
 
         //添加结算单

@@ -57,7 +57,7 @@ public class StoreCompanyDTO {
 
 	@Min(1)
 	@Schema(description = "注册资金")
-	private Double registeredCapital;
+	private BigDecimal registeredCapital;
 
 	@Length(min = 2, max = 20)
 	@NotBlank(message = "联系人姓名为空")

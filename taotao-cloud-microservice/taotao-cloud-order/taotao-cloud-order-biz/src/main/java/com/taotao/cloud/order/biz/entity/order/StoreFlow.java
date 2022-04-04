@@ -189,7 +189,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "最终结算金额")
-	private Double billPrice;
+	private BigDecimal billPrice;
 	/**
 	 * 应用ID
 	 */

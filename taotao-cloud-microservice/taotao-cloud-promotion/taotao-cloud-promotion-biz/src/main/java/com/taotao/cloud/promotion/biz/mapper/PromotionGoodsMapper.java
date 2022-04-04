@@ -63,5 +63,5 @@ public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
      * @return 共参加了几种活动
      */
     @Select("select price from li_promotion_goods ${ew.customSqlSegment} ")
-    Double selectPromotionsGoodsPrice(@Param(Constants.WRAPPER) Wrapper<PromotionGoods> queryWrapper);
+    BigDecimal selectPromotionsGoodsPrice(@Param(Constants.WRAPPER) Wrapper<PromotionGoods> queryWrapper);
 }

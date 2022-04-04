@@ -43,13 +43,13 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 	private String idNumber;
 
 	@Schema(description = "分销总额")
-	private Double rebateTotal = 0D;
+	private BigDecimal rebateTotal = 0D;
 
 	@Schema(description = "可提现金额")
-	private Double canRebate = 0D;
+	private BigDecimal canRebate = 0D;
 
 	@Schema(description = "冻结金额")
-	private Double commissionFrozen = 0D;
+	private BigDecimal commissionFrozen = 0D;
 
 	@Schema(description = "分销订单数")
 	private Integer distributionOrderCount;

@@ -3,6 +3,7 @@ package com.taotao.cloud.order.api.dto.aftersale;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +29,7 @@ public class AfterSaleDTO {
 	private String skuId;
 
 	@Schema(description = "申请退款金额")
-	private Double applyRefundPrice;
+	private BigDecimal applyRefundPrice;
 
 	@Schema(description = "申请数量")
 	private Integer num;

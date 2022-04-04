@@ -1,7 +1,5 @@
 package com.taotao.cloud.distribution.biz.entity;
 
-import cn.lili.modules.wallet.entity.enums.WithdrawStatusEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -41,7 +39,7 @@ public class DistributionCash extends BaseEntity {
     private String distributionName;
 
     @Schema(description =  "分销佣金")
-    private Double price;
+    private BigDecimal price;
 
     @CreatedDate
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
@@ -52,7 +50,7 @@ public class DistributionCash extends BaseEntity {
     @Schema(description =  "状态")
     private String distributionCashStatus;
 
-    public DistributionCash(String sn, String distributionId, Double price, String memberName) {
+    public DistributionCash(String sn, String distributionId, BigDecimal price, String memberName) {
         this.sn = sn;
         this.distributionId = distributionId;
         this.price = price;

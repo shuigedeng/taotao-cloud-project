@@ -1,7 +1,5 @@
 package com.taotao.cloud.distribution.api.vo;
 
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fasterxml.jackson.annotation.JsonFormat;

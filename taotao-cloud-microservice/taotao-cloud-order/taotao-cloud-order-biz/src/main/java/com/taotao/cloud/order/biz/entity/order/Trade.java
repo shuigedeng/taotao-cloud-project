@@ -1,6 +1,5 @@
 package com.taotao.cloud.order.biz.entity.order;
 
-import cn.lili.modules.order.cart.entity.enums.DeliveryMethodEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;

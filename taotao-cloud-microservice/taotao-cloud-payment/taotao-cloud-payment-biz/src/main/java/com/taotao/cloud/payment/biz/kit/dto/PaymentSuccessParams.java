@@ -24,7 +24,7 @@ public class PaymentSuccessParams {
     /**
      * 支付金额
      */
-    private Double price;
+    private BigDecimal price;
 
     /**
      * 支付参数

@@ -19,9 +19,9 @@ public class KanjiaActivityGoodsVO {
     //private GoodsSku goodsSku;
 
     @Schema(description =  "最低购买金额")
-    private Double purchasePrice;
+    private BigDecimal purchasePrice;
 
-    public Double getPurchasePrice() {
+    public BigDecimal getPurchasePrice() {
         if (purchasePrice < 0) {
             return 0D;
         }

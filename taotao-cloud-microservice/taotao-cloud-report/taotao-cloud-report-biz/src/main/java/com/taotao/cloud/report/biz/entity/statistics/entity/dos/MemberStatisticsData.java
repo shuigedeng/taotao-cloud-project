@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.entity.dos;
 
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;

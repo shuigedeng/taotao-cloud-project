@@ -1,9 +1,8 @@
 package com.taotao.cloud.promotion.biz.listener;
 
-import cn.lili.common.properties.RocketmqCustomProperties;
-import cn.lili.modules.promotion.event.UpdateEsGoodsIndexPromotionsEvent;
-import cn.lili.rocketmq.RocketmqSendCallbackBuilder;
-import cn.lili.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.promotion.api.event.UpdateEsGoodsIndexPromotionsEvent;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

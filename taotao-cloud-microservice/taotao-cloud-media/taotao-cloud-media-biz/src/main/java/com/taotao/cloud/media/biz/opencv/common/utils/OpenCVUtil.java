@@ -70,7 +70,7 @@ public class OpenCVUtil {
 		return eroding(source, 1);
 	}
 
-	public static Mat eroding(Mat source, double erosion_size) {
+	public static Mat eroding(Mat source, BigDecimal erosion_size) {
 		Mat resultMat = new Mat(source.rows(), source.cols(), source.type());
 		Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2 * erosion_size + 1,
 				2 * erosion_size + 1));
@@ -94,7 +94,7 @@ public class OpenCVUtil {
 	 * @param dilationSize 膨胀因子2*x+1 里的x
 	 * @return Mat
 	 */
-	public static Mat dilation(Mat source, double dilation_size) {
+	public static Mat dilation(Mat source, BigDecimal dilation_size) {
 		Mat resultMat = new Mat(source.rows(), source.cols(), source.type());
 		Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2 * dilation_size + 1,
 				2 * dilation_size + 1));

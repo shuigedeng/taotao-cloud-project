@@ -2,14 +2,9 @@ package com.taotao.cloud.payment.biz.kit.plugin.wechat;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.ContentType;
-import cn.lili.modules.payment.kit.core.PaymentHttpResponse;
-import cn.lili.modules.payment.kit.core.enums.RequestMethodEnums;
-import cn.lili.modules.payment.kit.core.kit.HttpKit;
-import cn.lili.modules.payment.kit.core.kit.PayKit;
-import cn.lili.modules.payment.kit.core.kit.WxPayKit;
-import cn.lili.modules.payment.kit.plugin.wechat.enums.WechatApiEnum;
-import cn.lili.modules.payment.kit.plugin.wechat.enums.WechatDomain;
 
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatApiEnum;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatDomain;
 import java.io.File;
 import java.io.InputStream;
 import java.security.PrivateKey;

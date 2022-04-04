@@ -1,7 +1,7 @@
 package com.taotao.cloud.report.biz.entity.statistics.aop;
 
-import cn.lili.modules.statistics.aop.enums.PageViewEnum;
 
+import com.taotao.cloud.report.biz.entity.statistics.aop.enums.PageViewEnum;
 import java.lang.annotation.*;
 
 /**

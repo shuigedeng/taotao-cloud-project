@@ -1,6 +1,5 @@
 package com.taotao.cloud.payment.biz.kit.params.dto;
 
-import cn.lili.common.utils.StringUtils;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -18,7 +17,7 @@ import java.util.List;
 public class CashierParam {
 
     @Schema(description =  "价格")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description =  "支付title")
     private String title;
@@ -40,7 +39,7 @@ public class CashierParam {
     private Long autoCancel;
 
     @Schema(description =  "剩余余额")
-    private Double walletValue;
+    private BigDecimal walletValue;
 
     public String getDetail() {
         if (StringUtils.isEmpty(detail)) {

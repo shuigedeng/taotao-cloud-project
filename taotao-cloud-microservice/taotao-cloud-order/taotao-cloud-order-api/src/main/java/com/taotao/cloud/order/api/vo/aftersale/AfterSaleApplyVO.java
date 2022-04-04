@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class AfterSaleApplyVO {
 
 	@Schema(description = "申请退款金额单价")
-	private Double applyRefundPrice;
+	private BigDecimal applyRefundPrice;
 
 	@Schema(description = "可申请数量")
 	private Integer num;
@@ -38,7 +39,7 @@ public class AfterSaleApplyVO {
 	private String image;
 
 	@Schema(description = "商品价格")
-	private Double goodsPrice;
+	private BigDecimal goodsPrice;
 
 	/**
 	 * @see AfterSaleRefundWayEnum

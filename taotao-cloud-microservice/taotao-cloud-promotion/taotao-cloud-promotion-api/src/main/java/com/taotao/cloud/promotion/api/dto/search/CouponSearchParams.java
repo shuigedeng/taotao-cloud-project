@@ -61,7 +61,7 @@ public class CouponSearchParams extends BasePromotionsSearchParams implements Se
     @Schema(description =  "已被领取的数量,可以为范围，如10_1000")
     private String receivedNum;
     /**
-     * @see cn.lili.modules.promotion.entity.enums.CouponGetEnum
+     * @see CouponGetEnum
      */
     @Schema(description =  "优惠券类型，分为免费领取和活动赠送")
     private String getType;

@@ -1,8 +1,6 @@
 
 package com.taotao.cloud.operation.api.dto;
 
-import cn.lili.common.enums.ClientTypeEnum;
-import cn.lili.modules.page.entity.enums.PageEnum;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

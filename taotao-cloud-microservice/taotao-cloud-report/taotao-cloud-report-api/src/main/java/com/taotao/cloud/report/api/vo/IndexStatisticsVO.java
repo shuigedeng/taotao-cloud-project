@@ -43,7 +43,7 @@ public class IndexStatisticsVO {
     @Schema(description =  "今日订单数")
     private Long todayOrderNum;
     @Schema(description =  "今日下单金额")
-    private Double todayOrderPrice;
+    private BigDecimal todayOrderPrice;
     @Schema(description =  "今日新增会员数量")
     private Long todayMemberNum;
     @Schema(description =  "今日新增商品数量")

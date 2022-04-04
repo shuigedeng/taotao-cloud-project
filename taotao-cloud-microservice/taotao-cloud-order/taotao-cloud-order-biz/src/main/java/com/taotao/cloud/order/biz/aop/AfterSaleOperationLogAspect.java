@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.biz.aop;
 
+import com.dtp.common.util.ThreadPoolUtil;
 import com.taotao.cloud.common.enums.UserEnums;
 import com.taotao.cloud.common.utils.spel.SpelUtil;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
@@ -26,7 +27,7 @@ public class AfterSaleOperationLogAspect {
     @Autowired
     private AfterSaleLogService afterSaleLogService;
 
-    @AfterReturning(returning = "rvt", pointcut = "@annotation(cn.lili.modules.order.aftersale.aop.AfterSaleLogPoint)")
+    @AfterReturning(returning = "rvt", pointcut = "@annotation(.order.aftersale.aop.AfterSaleLogPoint)")
     public void afterReturning(JoinPoint joinPoint, Object rvt) {
         try {
             AuthUser auth = UserContext.getCurrentUser();

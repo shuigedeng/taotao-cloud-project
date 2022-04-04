@@ -2,8 +2,6 @@ package com.taotao.cloud.bulletin.biz.entity;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.http.HtmlUtil;
-import cn.lili.modules.page.entity.enums.ArticleEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

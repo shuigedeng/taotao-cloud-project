@@ -1,8 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.service;
 
-import cn.lili.modules.statistics.entity.dto.GoodsStatisticsQueryParam;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.vo.*;
 
 import java.util.List;
 

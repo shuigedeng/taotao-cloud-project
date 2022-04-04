@@ -45,12 +45,12 @@ public class DistributionCashBuyerController {
     @PreventDuplicateSubmissions
     @ApiOperation(value = "分销员提现")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "price", value = "申请金额", required = true, paramType = "query", dataType = "double")
+            @ApiImplicitParam(name = "price", value = "申请金额", required = true, paramType = "query", dataType = "BigDecimal")
     })
     @PostMapping
     public Result<Object> cash(@Validated @Max(value = 9999, message = "提现金额单次最多允许提现9999元")
                                           @Min(value = 1, message = "提现金额单次最少提现金额为1元")
-                                          @NotNull @ApiIgnore Double price) {
+                                          @NotNull @ApiIgnore BigDecimal price) {
         if (Boolean.TRUE.equals(distributionCashService.cash(price))) {
             return ResultUtil.success();
         }

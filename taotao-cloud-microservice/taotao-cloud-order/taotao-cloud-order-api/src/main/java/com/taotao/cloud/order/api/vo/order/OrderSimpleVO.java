@@ -34,7 +34,7 @@ public class OrderSimpleVO {
 	private String sn;
 
 	@Schema(description = "总价格")
-	private Double flowPrice;
+	private BigDecimal flowPrice;
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -161,7 +161,7 @@ public class OrderSimpleVO {
 			orderItemVOS.add(
 				new OrderItemVO(orderItemsSn[i], goodsId[i], skuId[i], num[i], image[i], name[i],
 					afterSaleStatus[i], complainStatus[i], commentStatus[i],
-					Double.parseDouble(goodsPrice[i])));
+					BigDecimal.parseBigDecimal(goodsPrice[i])));
 		}
 		return orderItemVOS;
 

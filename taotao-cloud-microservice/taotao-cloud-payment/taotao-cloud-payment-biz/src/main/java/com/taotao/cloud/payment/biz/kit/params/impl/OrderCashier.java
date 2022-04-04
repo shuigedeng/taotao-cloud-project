@@ -1,22 +1,12 @@
 package com.taotao.cloud.payment.biz.kit.params.impl;
 
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.modules.order.order.entity.vo.OrderDetailVO;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.payment.kit.dto.PayParam;
-import cn.lili.modules.payment.kit.dto.PaymentSuccessParams;
-import cn.lili.modules.payment.entity.enums.CashierEnum;
-import cn.lili.modules.payment.kit.params.CashierExecute;
-import cn.lili.modules.payment.kit.params.dto.CashierParam;
-import cn.lili.modules.system.entity.dto.BaseSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.payment.api.enums.CashierEnum;
+import com.taotao.cloud.payment.biz.kit.dto.PayParam;
+import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
+import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,7 +45,7 @@ public class OrderCashier implements CashierExecute {
 
             //如果订单已支付，则不能发器支付
             if (order.getOrder().getPayStatus().equals(PayStatusEnum.PAID.name())) {
-                throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
+                throw new BusinessException(ResultEnum.PAY_BigDecimal_ERROR);
             }
             //如果订单状态不是待付款，则抛出异常
             if (!order.getOrder().getOrderStatus().equals(OrderStatusEnum.UNPAID.name())) {

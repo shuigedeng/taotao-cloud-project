@@ -75,7 +75,7 @@ public class CardController extends BaseController {
 	 * 创建时间	2018年3月22日
 	 */
 	@RequestMapping(value = "step2")
-	public void step2(HttpServletResponse response, String imagefile, Double thresh) {
+	public void step2(HttpServletResponse response, String imagefile, BigDecimal thresh) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 二值化处理");
 

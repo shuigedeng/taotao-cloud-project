@@ -22,7 +22,7 @@ public class CouponActivityItemVO  {
     private String couponName;
 
     @Schema(description =  "面额")
-    private Double price;
+    private BigDecimal price;
 
     /**
      * POINT("打折"), PRICE("减免现金");
@@ -33,5 +33,5 @@ public class CouponActivityItemVO  {
     private String couponType;
 
     @Schema(description =  "折扣")
-    private Double couponDiscount;
+    private BigDecimal couponDiscount;
 }

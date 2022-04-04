@@ -120,14 +120,14 @@ public class EsGoodsIndex implements Serializable {
 	/**
 	 * 商品价格
 	 */
-	@Field(type = FieldType.Double)
-	private Double price;
+	@Field(type = FieldType.BigDecimal)
+	private BigDecimal price;
 
 	/**
 	 * 促销价
 	 */
-	@Field(type = FieldType.Double)
-	private Double promotionPrice;
+	@Field(type = FieldType.BigDecimal)
+	private BigDecimal promotionPrice;
 
 	/**
 	 * 如果是积分商品需要使用的积分
@@ -150,8 +150,8 @@ public class EsGoodsIndex implements Serializable {
 	/**
 	 * 好评率
 	 */
-	@Field(type = FieldType.Double)
-	private Double grade;
+	@Field(type = FieldType.BigDecimal)
+	private BigDecimal grade;
 
 	/**
 	 * 详情
