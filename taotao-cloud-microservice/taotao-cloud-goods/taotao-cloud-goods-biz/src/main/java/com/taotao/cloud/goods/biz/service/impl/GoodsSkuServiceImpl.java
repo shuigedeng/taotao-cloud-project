@@ -543,8 +543,8 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		//goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);
 		//
 		////好评率
-		//double grade = NumberUtil.mul(
-		//	NumberUtil.div(highPraiseNum, goodsSku.getCommentNum().doubleValue(), 2), 100);
+		//BigDecimal grade = NumberUtil.mul(
+		//	NumberUtil.div(highPraiseNum, goodsSku.getCommentNum().BigDecimalValue(), 2), 100);
 		//goodsSku.setGrade(grade);
 		////修改规格
 		//this.update(goodsSku);
@@ -750,9 +750,9 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		//规格信息
 		//sku.setId(Convert.toStr(map.get("id"), ""));
 		//sku.setSn(Convert.toStr(map.get("sn")));
-		//sku.setWeight(Convert.toDouble(map.get("weight"), 0D));
-		//sku.setPrice(Convert.toDouble(map.get("price"), 0D));
-		//sku.setCost(Convert.toDouble(map.get("cost"), 0D));
+		//sku.setWeight(Convert.toBigDecimal(map.get("weight"), 0D));
+		//sku.setPrice(Convert.toBigDecimal(map.get("price"), 0D));
+		//sku.setCost(Convert.toBigDecimal(map.get("cost"), 0D));
 		//sku.setQuantity(Convert.toInt(map.get("quantity"), 0));
 		//sku.setSpecs(JSONUtil.toJsonStr(specMap));
 		//sku.setSimpleSpecs(simpleSpecs.toString());

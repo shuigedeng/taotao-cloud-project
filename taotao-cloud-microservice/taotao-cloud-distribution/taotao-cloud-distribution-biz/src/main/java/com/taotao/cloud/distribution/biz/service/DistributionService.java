@@ -80,7 +80,7 @@ public interface DistributionService extends IService<Distribution> {
      * @param canRebate      修改金额
      * @param distributionId 分销员ID
      */
-    void subCanRebate(Double canRebate, String distributionId);
+    void subCanRebate(BigDecimal canRebate, String distributionId);
 
     /**
      * 添加分销金额
@@ -88,5 +88,5 @@ public interface DistributionService extends IService<Distribution> {
      * @param rebate         金额
      * @param distributionId 分销员ID
      */
-    void addRebate(Double rebate, String distributionId);
+    void addRebate(BigDecimal rebate, String distributionId);
 }

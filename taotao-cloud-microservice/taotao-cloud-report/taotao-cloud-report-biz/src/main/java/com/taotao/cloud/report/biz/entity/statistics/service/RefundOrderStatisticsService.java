@@ -1,9 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.vo.RefundOrderStatisticsDataVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -28,5 +24,5 @@ public interface RefundOrderStatisticsService extends IService<StoreFlow> {
      * @param statisticsQueryParam 查询参数
      * @return 退款统计金额
      */
-    Double getRefundOrderStatisticsPrice(StatisticsQueryParam statisticsQueryParam);
+    BigDecimal getRefundOrderStatisticsPrice(StatisticsQueryParam statisticsQueryParam);
 }

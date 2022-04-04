@@ -28,7 +28,7 @@ public class OrderOverviewVO {
     private Long orderMemberNum;
 
     @Schema(description =  "下单金额")
-    private Double orderAmount;
+    private BigDecimal orderAmount;
 
     /**
      * 付款统计
@@ -40,7 +40,7 @@ public class OrderOverviewVO {
     private Long paymentsNum;
 
     @Schema(description =  "付款金额")
-    private Double paymentAmount;
+    private BigDecimal paymentAmount;
 
 
     /**
@@ -50,7 +50,7 @@ public class OrderOverviewVO {
     private Long refundOrderNum;
 
     @Schema(description =  "退单金额")
-    private Double refundOrderPrice;
+    private BigDecimal refundOrderPrice;
 
     /**
      * 转换率
@@ -85,7 +85,7 @@ public class OrderOverviewVO {
         return orderMemberNum;
     }
 
-    public Double getOrderAmount() {
+    public BigDecimal getOrderAmount() {
         if (orderAmount == null) {
             return 0D;
         }
@@ -106,7 +106,7 @@ public class OrderOverviewVO {
         return paymentsNum;
     }
 
-    public Double getPaymentAmount() {
+    public BigDecimal getPaymentAmount() {
         if (paymentAmount == null) {
             return 0D;
         }
@@ -120,7 +120,7 @@ public class OrderOverviewVO {
         return refundOrderNum;
     }
 
-    public Double getRefundOrderPrice() {
+    public BigDecimal getRefundOrderPrice() {
         if (refundOrderPrice == null) {
             return 0D;
         }

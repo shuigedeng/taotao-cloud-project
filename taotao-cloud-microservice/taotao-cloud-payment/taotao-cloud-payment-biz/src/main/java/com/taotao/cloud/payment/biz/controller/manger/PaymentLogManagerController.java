@@ -1,13 +1,6 @@
 package com.taotao.cloud.payment.biz.controller.manger;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.Result;
-import cn.lili.common.vo.SearchVO;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.vo.PaymentLog;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +27,7 @@ public class PaymentLogManagerController {
     public Result<IPage<PaymentLog>> getByPage(Order order,
                                                       SearchVO searchVo,
                                                       PageVO page) {
-        return Result.success(orderService.queryPaymentLogs(PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
+        return Result.success(orderService.queryPaymentLogs(
+	        PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
     }
 }

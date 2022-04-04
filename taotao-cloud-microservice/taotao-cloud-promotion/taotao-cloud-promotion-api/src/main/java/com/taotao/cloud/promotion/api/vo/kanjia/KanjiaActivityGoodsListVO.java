@@ -25,7 +25,7 @@ public class KanjiaActivityGoodsListVO {
     private String thumbnail;
 
     @Schema(description =  "最低购买金额")
-    private Double purchasePrice;
+    private BigDecimal purchasePrice;
 
     @Schema(description =  "活动库存")
     private Integer stock;

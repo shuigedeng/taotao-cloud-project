@@ -1,8 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.mapper;
 
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.vo.OrderSimpleVO;
-import cn.lili.modules.statistics.entity.vo.OrderStatisticsDataVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

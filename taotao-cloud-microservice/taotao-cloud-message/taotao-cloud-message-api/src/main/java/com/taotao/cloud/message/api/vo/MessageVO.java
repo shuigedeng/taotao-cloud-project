@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.api.vo;
 
 import cn.hutool.core.util.StrUtil;
-import cn.lili.modules.message.entity.dos.Message;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

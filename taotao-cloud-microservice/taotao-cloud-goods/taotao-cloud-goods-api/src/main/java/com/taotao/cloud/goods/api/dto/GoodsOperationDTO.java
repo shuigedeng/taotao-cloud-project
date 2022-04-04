@@ -36,7 +36,7 @@ public class GoodsOperationDTO implements Serializable {
 	@NotNull(message = "商品价格不能为空")
 	@Min(value = 0, message = "商品价格不能为负数")
 	@Max(value = 99999999, message = "商品价格不能超过99999999")
-	private Double price;
+	private BigDecimal price;
 
 	@Schema(description = "分类path")
 	private String categoryPath;

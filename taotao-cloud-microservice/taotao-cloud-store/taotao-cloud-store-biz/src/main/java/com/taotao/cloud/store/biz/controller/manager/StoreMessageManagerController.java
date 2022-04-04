@@ -1,11 +1,5 @@
 package com.taotao.cloud.store.biz.controller.manager;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.message.entity.dos.StoreMessage;
-import cn.lili.modules.message.entity.vos.StoreMessageQueryVO;
-import cn.lili.modules.message.service.StoreMessageService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

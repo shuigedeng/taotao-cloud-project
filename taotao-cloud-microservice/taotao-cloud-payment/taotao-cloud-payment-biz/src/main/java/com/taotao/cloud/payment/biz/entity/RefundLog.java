@@ -1,6 +1,5 @@
 package com.taotao.cloud.payment.biz.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -41,10 +40,10 @@ public class RefundLog extends BaseIdEntity {
     private String orderSn;
 
     @Schema(description =  "金额")
-    private Double totalAmount;
+    private BigDecimal totalAmount;
 
     @Schema(description =  "改笔交易支付金额")
-    private Double payPrice;
+    private BigDecimal payPrice;
 
     @Schema(description =  "是否已退款")
     private Boolean isRefund;

@@ -29,10 +29,10 @@ public class GoodsInfo {
 	private Integer priceType;
 
 	@Schema(description = "价格")
-	private Double price;
+	private BigDecimal price;
 
 	@Schema(description = "价格2")
-	private Double price2;
+	private BigDecimal price2;
 
 	@Schema(description = "商品详情页的小程序路径")
 	private String url;

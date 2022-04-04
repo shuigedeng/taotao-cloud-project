@@ -3,6 +3,7 @@ package com.taotao.cloud.order.api.vo.cart;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,19 +22,19 @@ public class PriceDetailVO implements Serializable {
 	private static final long serialVersionUID = -960537582096338500L;
 
 	@Schema(description = "商品原价")
-	private Double originalPrice;
+	private BigDecimal originalPrice;
 
 	@Schema(description = "配送费")
-	private Double freight;
+	private BigDecimal freight;
 
 	@Schema(description = "优惠金额")
-	private Double discountPrice;
+	private BigDecimal discountPrice;
 
 	@Schema(description = "支付积分")
 	private Long payPoint;
 
 	@Schema(description = "最终成交金额")
-	private Double finalePrice;
+	private BigDecimal finalePrice;
 
 
 	/**
@@ -47,7 +48,4 @@ public class PriceDetailVO implements Serializable {
 		this.originalPrice = dto.getGoodsPrice();
 	}
 
-	public PriceDetailVO() {
-
-	}
 }

@@ -34,7 +34,7 @@ dependencies {
     api 'commons-configuration:commons-configuration'
     
     api "io.swagger.core.v3:swagger-models"
-    api 'io.swagger.core.v3:swagger-annotation'
+    api 'io.swagger.core.v3:swagger-annotations'
 
     api 'com.thoughtworks.xstream:xstream'
 

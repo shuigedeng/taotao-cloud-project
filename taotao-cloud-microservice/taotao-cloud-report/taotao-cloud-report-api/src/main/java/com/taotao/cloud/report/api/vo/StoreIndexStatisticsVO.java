@@ -20,7 +20,7 @@ public class StoreIndexStatisticsVO {
     @Schema(description =  "订单总数量")
     private Integer orderNum;
     @Schema(description =  "订单总额")
-    private Double orderPrice;
+    private BigDecimal orderPrice;
     @Schema(description =  "访客数UV")
     private Integer storeUV;
 

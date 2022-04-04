@@ -18,7 +18,7 @@ public interface DistributionCashService extends IService<DistributionCash> {
      * @param applyMoney 申请金额
      * @return 操作状态
      */
-    Boolean cash(Double applyMoney);
+    Boolean cash(BigDecimal applyMoney);
 
     /**
      * 获取当前会员的分销提现分页列表

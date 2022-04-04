@@ -317,7 +317,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = this.getBySn(orderSn);
         //如果订单已支付，就不能再次进行支付
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-            throw new BusinessException(ResultEnum.PAY_DOUBLE_ERROR);
+            throw new BusinessException(ResultEnum.PAY_BigDecimal_ERROR);
         }
 
         //修改订单状态
@@ -622,7 +622,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 
     @Override
-    public Double getPaymentTotal(String orderSn) {
+    public BigDecimal getPaymentTotal(String orderSn) {
         Order order = this.getBySn(orderSn);
         Trade trade = tradeService.getBySn(order.getTradeSn());
         if (trade.getPayStatus().equals(PayStatusEnum.PAID.name())) {

@@ -1,8 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
-//import cn.lili.event.MemberLoginEvent;
-//import cn.lili.modules.member.entity.dos.Member;
-//import cn.lili.modules.member.service.MemberService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //

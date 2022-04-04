@@ -60,7 +60,7 @@ public class CartVO extends CartBase implements Serializable {
 	private Integer giftPoint;
 
 	@Schema(description = "重量")
-	private Double weight;
+	private BigDecimal weight;
 
 	@Schema(description = "购物车商品数量")
 	private Integer goodsNum;

@@ -1,21 +1,13 @@
 package com.taotao.cloud.report.biz.entity.statistics.serviceimpl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
-import cn.lili.modules.order.trade.entity.enums.AfterSaleStatusEnum;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.mapper.AfterSaleStatisticsMapper;
-import cn.lili.modules.statistics.service.AfterSaleStatisticsService;
-import cn.lili.modules.statistics.util.StatisticsDateUtil;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.UserEnums;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

@@ -36,7 +36,7 @@ public class IndexStatisticsVO {
     @ApiModelProperty(value = "今日订单数")
     private Long todayOrderNum;
     @ApiModelProperty(value = "今日下单金额")
-    private Double todayOrderPrice;
+    private BigDecimal todayOrderPrice;
     @ApiModelProperty(value = "今日新增会员数量")
     private Long todayMemberNum;
     @ApiModelProperty(value = "今日新增商品数量")

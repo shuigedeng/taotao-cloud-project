@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.mapper;
 
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

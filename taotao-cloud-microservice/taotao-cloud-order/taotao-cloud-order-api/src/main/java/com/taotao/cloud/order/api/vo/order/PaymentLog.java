@@ -57,7 +57,7 @@ public class PaymentLog extends BaseEntity {
 
 
 	@Schema(description = "总价格")
-	private Double flowPrice;
+	private BigDecimal flowPrice;
 
 	@Schema(description = "支付方式返回的交易号")
 	private String payOrderNo;

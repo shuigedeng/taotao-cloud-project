@@ -1,6 +1,5 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import cn.lili.modules.order.order.entity.dos.Receipt;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

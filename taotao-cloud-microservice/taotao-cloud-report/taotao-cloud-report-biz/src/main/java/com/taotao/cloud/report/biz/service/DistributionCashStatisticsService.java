@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.service;
 
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

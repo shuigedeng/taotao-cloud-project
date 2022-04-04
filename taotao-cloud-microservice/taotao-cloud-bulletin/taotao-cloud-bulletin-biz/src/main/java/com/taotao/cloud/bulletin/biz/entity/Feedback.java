@@ -1,13 +1,10 @@
 package com.taotao.cloud.bulletin.biz.entity;
 
-import cn.lili.common.security.sensitive.Sensitive;
-import cn.lili.common.security.sensitive.enums.SensitiveStrategy;
-import cn.lili.modules.page.entity.enums.FeedbackTypeEnum;
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.web.enums.SensitiveStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

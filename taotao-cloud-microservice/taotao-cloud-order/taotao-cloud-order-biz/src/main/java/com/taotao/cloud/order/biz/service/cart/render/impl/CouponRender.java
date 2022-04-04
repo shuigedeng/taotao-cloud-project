@@ -220,9 +220,9 @@ public class CouponRender implements CartRenderStep {
     private void renderSku(TradeDTO tradeDTO, MemberCouponDTO memberCouponDTO) {
 
         //计算优惠总金额
-        Double countPrice = 0D;
-        Map<String, Double> couponMap = memberCouponDTO.getSkuDetail();
-        for (Double skuPrice : couponMap.values()) {
+        BigDecimal countPrice = 0D;
+        Map<String, BigDecimal> couponMap = memberCouponDTO.getSkuDetail();
+        for (BigDecimal skuPrice : couponMap.values()) {
             countPrice = CurrencyUtil.add(countPrice, skuPrice);
         }
 
@@ -251,7 +251,7 @@ public class CouponRender implements CartRenderStep {
      * @param coupon          优惠券信息
      * @param memberCouponDTO 用于计算优惠券结算详情
      */
-    private void renderCouponPrice(Map<String, Double> couponMap, TradeDTO tradeDTO, MemberCoupon coupon, MemberCouponDTO memberCouponDTO) {
+    private void renderCouponPrice(Map<String, BigDecimal> couponMap, TradeDTO tradeDTO, MemberCoupon coupon, MemberCouponDTO memberCouponDTO) {
         //分发优惠券
         promotionPriceUtil.recountPrice(tradeDTO, memberCouponDTO.getSkuDetail(), memberCouponDTO.getMemberCoupon().getPrice(),
                 Boolean.TRUE.equals(coupon.getIsPlatform()) ?
@@ -281,7 +281,7 @@ public class CouponRender implements CartRenderStep {
      * @param tradeDTO  交易dto
      * @param coupon    优惠券信息
      */
-    private void renderCouponDiscount(Map<String, Double> couponMap, TradeDTO tradeDTO, MemberCoupon coupon) {
+    private void renderCouponDiscount(Map<String, BigDecimal> couponMap, TradeDTO tradeDTO, MemberCoupon coupon) {
         //循环所有优惠券
         for (String skuId : couponMap.keySet()) {
 
@@ -293,7 +293,7 @@ public class CouponRender implements CartRenderStep {
                     PriceDetailDTO priceDetailDTO = item.getPriceDetailDTO();
 
                     // 打折金额=商品金额*折扣/10
-                    Double discountCouponPrice = CurrencyUtil.mul(priceDetailDTO.getGoodsPrice(),
+                    BigDecimal discountCouponPrice = CurrencyUtil.mul(priceDetailDTO.getGoodsPrice(),
                             CurrencyUtil.sub(1, CurrencyUtil.div(coupon.getDiscount(), 10, 3)));
 
                     //平台券则写入店铺承担优惠券比例

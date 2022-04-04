@@ -77,7 +77,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 					return;
 				}
 				//计算赠送积分数量
-				Double point = CurrencyUtil.mul(pointSetting.getConsumer(), order.getFlowPrice(),
+				BigDecimal point = CurrencyUtil.mul(pointSetting.getConsumer(), order.getFlowPrice(),
 					0);
 				//赠送会员积分
 				memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),
@@ -102,7 +102,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 			//获取积分设置
 			PointSetting pointSetting = getPointSetting();
 			//计算扣除积分数量
-			Double point = CurrencyUtil.mul(pointSetting.getMoney(),
+			BigDecimal point = CurrencyUtil.mul(pointSetting.getMoney(),
 				afterSale.getActualRefundPrice(), 0);
 			//扣除会员积分
 			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.REDUCE.name(),

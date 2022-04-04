@@ -270,7 +270,7 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	@Column(name = "goods_type", nullable = false, columnDefinition = "varchar(64) not null comment '商品类型'")
 	private String goodsType;
 
-	//public Double getWeight() {
+	//public BigDecimal getWeight() {
 	//	if (weight == null) {
 	//		return 0d;
 	//	}

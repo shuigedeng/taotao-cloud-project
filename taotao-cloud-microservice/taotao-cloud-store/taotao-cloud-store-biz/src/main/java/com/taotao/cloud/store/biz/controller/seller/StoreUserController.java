@@ -1,13 +1,5 @@
 package com.taotao.cloud.store.biz.controller.seller;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

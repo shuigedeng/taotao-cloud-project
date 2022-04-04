@@ -1,6 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event;
 //
-//import cn.lili.modules.member.entity.dos.MemberEvaluation;
 //
 ///**
 // * 订单状态改变事件

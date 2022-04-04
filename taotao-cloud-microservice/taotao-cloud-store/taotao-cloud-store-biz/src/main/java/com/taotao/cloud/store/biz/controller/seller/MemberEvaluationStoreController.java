@@ -1,18 +1,14 @@
 package com.taotao.cloud.store.biz.controller.seller;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.security.OperationalJudgment;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.member.entity.dto.EvaluationQueryParams;
-import cn.lili.modules.member.entity.vo.MemberEvaluationListVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationVO;
-import cn.lili.modules.member.service.MemberEvaluationService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +30,8 @@ public class MemberEvaluationStoreController {
 
     @ApiOperation(value = "分页获取会员评论列表")
     @GetMapping
-    public Result<IPage<MemberEvaluationListVO>> getByPage(EvaluationQueryParams evaluationQueryParams) {
+    public Result<IPage<MemberEvaluationListVO>> getByPage(
+	    EvaluationQueryParams evaluationQueryParams) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         evaluationQueryParams.setStoreId(storeId);
         return Result.success(memberEvaluationService.queryPage(evaluationQueryParams));

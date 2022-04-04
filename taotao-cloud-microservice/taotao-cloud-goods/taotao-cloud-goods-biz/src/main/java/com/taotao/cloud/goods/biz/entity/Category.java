@@ -70,7 +70,7 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	@Column(name = "support_channel", nullable = false, columnDefinition = "boolean not null comment '是否支持频道'")
 	private Boolean supportChannel;
 
-	//public Category(String id, String createBy, Date createTime, String updateBy, Date updateTime, Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder, Double commissionRate, String image, Boolean supportChannel) {
+	//public Category(String id, String createBy, Date createTime, String updateBy, Date updateTime, Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder, BigDecimal commissionRate, String image, Boolean supportChannel) {
 	//    super(id, createBy, createTime, updateBy, updateTime, deleteFlag);
 	//    this.name = name;
 	//    this.parentId = parentId;
@@ -81,7 +81,7 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	//    this.supportChannel = supportChannel;
 	//}
 	//
-	//public Category(String id, String name, String parentId, Integer level, BigDecimal sortOrder, Double commissionRate, String image, Boolean supportChannel) {
+	//public Category(String id, String name, String parentId, Integer level, BigDecimal sortOrder, BigDecimal commissionRate, String image, Boolean supportChannel) {
 	//    this.name = name;
 	//    this.parentId = parentId;
 	//    this.level = level;

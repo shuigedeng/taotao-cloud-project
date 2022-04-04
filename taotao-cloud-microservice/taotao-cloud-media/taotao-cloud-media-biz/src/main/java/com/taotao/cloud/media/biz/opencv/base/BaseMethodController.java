@@ -61,7 +61,7 @@ public class BaseMethodController extends BaseController {
 	 */
 	@RequestMapping(value = "binary")
 	public void binary(HttpServletResponse response, String imagefile, Integer binaryType,
-		Double thresh, Double maxval) {
+		BigDecimal thresh, BigDecimal maxval) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 二值化方法");
 
@@ -92,7 +92,7 @@ public class BaseMethodController extends BaseController {
 			default:
 				break;
 		}
-		Imgproc.threshold(source, destination, Double.valueOf(thresh), Double.valueOf(maxval),
+		Imgproc.threshold(source, destination, BigDecimal.valueOf(thresh), BigDecimal.valueOf(maxval),
 			binaryType);
 //		Imgproc.adaptiveThreshold(source, destination, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY_INV, 31, 15);
 //		Imgproc.threshold(source, destination, 170, 255, Imgproc.THRESH_BINARY_INV);
@@ -142,7 +142,7 @@ public class BaseMethodController extends BaseController {
 	public void adaptiveBinary(HttpServletResponse response, String imagefile,
 		Integer adaptiveMethod,
 		Integer binaryType, Integer blockSize,
-		Double constantC) {
+		BigDecimal constantC) {
 		//
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 自适用二值化方法");
@@ -208,7 +208,7 @@ public class BaseMethodController extends BaseController {
 	@RequestMapping(value = "zxing")
 	public void zxing(HttpServletResponse response, String imagefile, Integer adaptiveMethod,
 		Integer binaryType,
-		Integer blockSize, Double constantC) {
+		Integer blockSize, BigDecimal constantC) {
 		//
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 自适用二值化方法");
@@ -324,9 +324,9 @@ public class BaseMethodController extends BaseController {
 	 * @param gamma     gamma越大合并的影像越明亮 void
 	 */
 	@RequestMapping(value = "sharpness")
-	public void sharpness(HttpServletResponse response, String imagefile, int ksize, double alpha,
-		double beta,
-		double gamma) {
+	public void sharpness(HttpServletResponse response, String imagefile, int ksize, BigDecimal alpha,
+		BigDecimal beta,
+		BigDecimal gamma) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 锐化操作");
 
@@ -337,7 +337,7 @@ public class BaseMethodController extends BaseController {
 		// 先进行中值滤波操作
 		Imgproc.medianBlur(source, destination, 2 * ksize + 1);
 		// 通过合并图层的方式进行效果增强 alpha控制src1的透明度，beta控制src2 的透明图；gamma越大合并的影像越明亮
-		// public static void addWeighted(Mat src1, double alpha, Mat src2, double beta, double gamma, Mat dst)
+		// public static void addWeighted(Mat src1, BigDecimal alpha, Mat src2, BigDecimal beta, BigDecimal gamma, Mat dst)
 		Core.addWeighted(source, alpha, destination, beta, gamma, destination);
 
 		try {
@@ -355,9 +355,9 @@ public class BaseMethodController extends BaseController {
 	 * @param imagefile
 	 */
 	@RequestMapping(value = "floodfill")
-	public void floodfill(HttpServletResponse response, String imagefile, double graysize,
-		double lodiff,
-		double updiff, int flag) {
+	public void floodfill(HttpServletResponse response, String imagefile, BigDecimal graysize,
+		BigDecimal lodiff,
+		BigDecimal updiff, int flag) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 漫水填充操作");
 
@@ -416,12 +416,12 @@ public class BaseMethodController extends BaseController {
 	 * 图片缩放方法测试 创建者 Songer 创建时间	2018年3月15日
 	 */
 	@RequestMapping(value = "resize")
-	public void resize(HttpServletResponse response, String imagefile, Double rewidth,
-		Double reheight,
+	public void resize(HttpServletResponse response, String imagefile, BigDecimal rewidth,
+		BigDecimal reheight,
 		Integer resizeType) {
 		// 默认都是放大
-		double width = rewidth;
-		double height = reheight;
+		BigDecimal width = rewidth;
+		BigDecimal height = reheight;
 
 		if (resizeType == 2) {
 			width = 1 / width;
@@ -447,7 +447,7 @@ public class BaseMethodController extends BaseController {
 	 * 腐蚀膨胀测试 创建者 Songer 创建时间	2018年3月15日
 	 */
 	@RequestMapping(value = "erodingAndDilation")
-	public void erodingAndDilation(HttpServletResponse response, String imagefile, Double kSize,
+	public void erodingAndDilation(HttpServletResponse response, String imagefile, BigDecimal kSize,
 		Integer operateType,
 		Integer shapeType, boolean isBinary) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -460,7 +460,7 @@ public class BaseMethodController extends BaseController {
 			source = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
 			// Imgproc.threshold(source, source, 100, 255, Imgproc.THRESH_BINARY);
 		}
-		double size = Double.valueOf(kSize);
+		BigDecimal size = BigDecimal.valueOf(kSize);
 		int shape = 0;
 		switch (shapeType) {
 			case 0:
@@ -493,7 +493,7 @@ public class BaseMethodController extends BaseController {
 	 * 腐蚀膨胀使用进阶 更高级的形态学变换处理：morphologyEx 创建者 Songer 创建时间	2018年3月15日
 	 */
 	@RequestMapping(value = "morphologyEx")
-	public void morphologyEx(HttpServletResponse response, String imagefile, Double kSize,
+	public void morphologyEx(HttpServletResponse response, String imagefile, BigDecimal kSize,
 		Integer operateType,
 		Integer shapeType, boolean isBinary) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -506,7 +506,7 @@ public class BaseMethodController extends BaseController {
 			source = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
 			// Imgproc.threshold(source, source, 100, 255, Imgproc.THRESH_BINARY);
 		}
-		double size = Double.valueOf(kSize);
+		BigDecimal size = BigDecimal.valueOf(kSize);
 		int shape = 0;
 		switch (shapeType) {
 			case 0:
@@ -560,8 +560,8 @@ public class BaseMethodController extends BaseController {
 	 * 边缘检测Canny 创建者 Songer 创建时间	2018年3月15日
 	 */
 	@RequestMapping(value = "canny")
-	public void canny(HttpServletResponse response, String imagefile, Double threshold1,
-		Double threshold2,
+	public void canny(HttpServletResponse response, String imagefile, BigDecimal threshold1,
+		BigDecimal threshold2,
 		boolean isBinary) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 边缘检测测试");
@@ -582,9 +582,9 @@ public class BaseMethodController extends BaseController {
 	 * 霍夫线变换 创建者 Songer 创建时间	2018年3月19日
 	 */
 	@RequestMapping(value = "houghline")
-	public void houghline(HttpServletResponse response, String imagefile, Double threshold1,
-		Double threshold2,
-		Integer threshold, Double minLineLength, Double maxLineGap) {
+	public void houghline(HttpServletResponse response, String imagefile, BigDecimal threshold1,
+		BigDecimal threshold2,
+		Integer threshold, BigDecimal minLineLength, BigDecimal maxLineGap) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 霍夫线变换测试");
 		String sourcePath = Constants.PATH + imagefile;
@@ -618,9 +618,9 @@ public class BaseMethodController extends BaseController {
 	 * 霍夫圆变换 创建者 Songer 创建时间	2018年3月20日
 	 */
 	@RequestMapping(value = "houghcircle")
-	public void houghcircle(HttpServletResponse response, String imagefile, Double minDist,
-		Double param1,
-		Double param2, Integer minRadius, Integer maxRadius) {
+	public void houghcircle(HttpServletResponse response, String imagefile, BigDecimal minDist,
+		BigDecimal param1,
+		BigDecimal param2, Integer minRadius, Integer maxRadius) {
 
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 霍夫圆变换测试");
@@ -638,7 +638,7 @@ public class BaseMethodController extends BaseController {
 		// Point anchor01 = new Point();
 		if (cols > 0) {
 			for (int i = 0; i < cols; i++) {
-				double vCircle[] = circleMat.get(0, i);
+				BigDecimal vCircle[] = circleMat.get(0, i);
 				Point center = new Point(vCircle[0], vCircle[1]);
 				int radius = (int) Math.round(vCircle[2]);
 				Core.circle(source1, center, 3, new Scalar(0, 255, 0), -1, 8, 0);// 绿色圆心
@@ -670,9 +670,9 @@ public class BaseMethodController extends BaseController {
 		Mat source = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_COLOR);
 		Mat destination = new Mat(source.rows(), source.cols(), source.type());
 		if (colorType == 1) {// 1为RGB方式，2为HSV方式
-			double B = 0;
-			double G = 0;
-			double R = 0;
+			BigDecimal B = 0;
+			BigDecimal G = 0;
+			BigDecimal R = 0;
 			switch (color) {
 				case 1:// red
 					B = 0;
@@ -698,8 +698,8 @@ public class BaseMethodController extends BaseController {
 			Core.inRange(source, new Scalar(B, G, R), new Scalar(B, G, R), destination);
 		} else {// HSV方式
 			Imgproc.cvtColor(source, source, Imgproc.COLOR_BGR2HSV);
-			double min = 0;
-			double max = 0;
+			BigDecimal min = 0;
+			BigDecimal max = 0;
 			// 泛红色系(176,90,90)-(0, 90, 90)-(20,255,255) 简易：0-20
 			// 泛蓝色系(100, 90, 90)-(120,255,255)
 			// 泛绿色系(60, 90, 90)-(80,255,255)
@@ -808,7 +808,7 @@ public class BaseMethodController extends BaseController {
 	@RequestMapping(value = "findtemplate")
 	public void findtemplate(HttpServletResponse response, String imagefile, Integer method,
 		Integer imageType,
-		Double x1, Double y1, Double x2, Double y2, Double width, Double height) {
+		BigDecimal x1, BigDecimal y1, BigDecimal x2, BigDecimal y2, BigDecimal width, BigDecimal height) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 模板查找测试");
 		String sourcePath = Constants.PATH + imagefile;
@@ -919,7 +919,7 @@ public class BaseMethodController extends BaseController {
 
 		int max = (int) minmaxLoc.maxVal;
 		System.out.println("max--------" + max);
-		double bin_u = (double) (histImg.height() - 20) / max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度
+		BigDecimal bin_u = (BigDecimal) (histImg.height() - 20) / max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度
 		int kedu = 0;
 		for (int i = 1; kedu <= minmaxLoc.maxVal; i++) {
 			kedu = i * max / 10;
@@ -962,7 +962,7 @@ public class BaseMethodController extends BaseController {
 
 	}
 
-	// public void qrCode(HttpServletResponse response, String imagefile, Integer binaryType, Double thresh, Double maxval) {
+	// public void qrCode(HttpServletResponse response, String imagefile, Integer binaryType, BigDecimal thresh, BigDecimal maxval) {
 	// System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	// String sourcePath = Constants.PATH + imagefile;
 	// // 加载为灰度图显示
@@ -1036,8 +1036,8 @@ public class BaseMethodController extends BaseController {
 	// theta = lines[l][1];
 	// float aa=(theta/CV_PI)*180;
 	// Point pt1, pt2;
-	// double a = cos(theta), b = sin(theta);
-	// double x0 = a*rho, y0 = b*rho;
+	// BigDecimal a = cos(theta), b = sin(theta);
+	// BigDecimal x0 = a*rho, y0 = b*rho;
 	// pt1.x = cvRound(x0 + 1000*(-b));
 	// pt1.y = cvRound(y0 + 1000*(a));
 	// pt2.x = cvRound(x0 - 1000*(-b));
@@ -1101,9 +1101,9 @@ public class BaseMethodController extends BaseController {
 		//为了加速图像处理，以及使我们的边缘检测步骤更加准确，我们将扫描图像的大小调整为具有500像素的高度。
 		Mat dst = source.clone();
 		//缩放比例
-		double ratio = NumberUtil.div(500, orign.height());
+		BigDecimal ratio = NumberUtil.div(500, orign.height());
 		System.out.println("----------" + ratio);
-		double width = ratio * orign.width();
+		BigDecimal width = ratio * orign.width();
 		Imgproc.resize(source, dst, new Size(width, 500));
 		// 灰度化,加载为灰度图显示
 		Mat gray = dst.clone();
@@ -1126,7 +1126,7 @@ public class BaseMethodController extends BaseController {
 		for (int i = 0; i < contours.size(); i++) {
 			MatOfPoint2f newPoint = new MatOfPoint2f(contours.get(i).toArray());
 			// 周长，第1个参数是轮廓，第二个参数代表是否是闭环的图形
-			double peri = 0.01 * Imgproc.arcLength(newPoint, true);
+			BigDecimal peri = 0.01 * Imgproc.arcLength(newPoint, true);
 			MatOfPoint2f approx = new MatOfPoint2f();
 //			approx.convertTo(approx, CvType.CV_32F);
 			//近似轮廓逼近，然后通过获取多边形的所有定点，如果是四个定点，就代表是矩形
@@ -1136,10 +1136,10 @@ public class BaseMethodController extends BaseController {
 				//通过reshape函数将4个点取出来（4行2列的矩阵）
 				Mat points = approx.reshape(2, 4);
 				System.out.println(points.dump());
-				double[] point1 = points.get(0, 0);
-				double[] point2 = points.get(1, 0);
-				double[] point3 = points.get(2, 0);
-				double[] point4 = points.get(3, 0);
+				BigDecimal[] point1 = points.get(0, 0);
+				BigDecimal[] point2 = points.get(1, 0);
+				BigDecimal[] point3 = points.get(2, 0);
+				BigDecimal[] point4 = points.get(3, 0);
 				//之前因为我们已经将图片进行了缩放，所以此处要将图片尺寸还原
 				listPoint.add(new Point(point1[0] / ratio, point1[1] / ratio));
 				listPoint.add(new Point(point2[0] / ratio, point2[1] / ratio));
@@ -1187,17 +1187,17 @@ public class BaseMethodController extends BaseController {
 		Point rightTop = newOrderList.get(1);
 		Point rightBottom = newOrderList.get(2);
 		Point leftBottom = newOrderList.get(3);
-		double widthA = Math.sqrt(Math.pow(rightBottom.x - leftBottom.x, 2)
+		BigDecimal widthA = Math.sqrt(Math.pow(rightBottom.x - leftBottom.x, 2)
 			+ Math.pow(rightBottom.y - leftBottom.y, 2));
-		double widthB = Math.sqrt(Math.pow(rightTop.x - leftTop.x, 2)
+		BigDecimal widthB = Math.sqrt(Math.pow(rightTop.x - leftTop.x, 2)
 			+ Math.pow(rightTop.y - leftTop.y, 2));
 		int maxWidth = Math.max((int) widthA, (int) widthB);
 
 		//计算新图像的高度，这将是右上角和右下角y坐标或左上角和左下角y坐标之间的最大距离，
 		//这里用到的初中数学知识点和点的距离计算(x1,y1),(x2,y2)距离=√((x2-x1)^2+(y2-y1)^2)
-		double heightA = Math.sqrt(Math.pow(rightTop.x - rightBottom.x, 2)
+		BigDecimal heightA = Math.sqrt(Math.pow(rightTop.x - rightBottom.x, 2)
 			+ Math.pow(rightTop.y - rightBottom.y, 2));
-		double heightB = Math.sqrt(Math.pow(leftTop.x - leftBottom.x, 2)
+		BigDecimal heightB = Math.sqrt(Math.pow(leftTop.x - leftBottom.x, 2)
 			+ Math.pow(leftTop.y - leftBottom.y, 2));
 		int maxHeight = Math.max((int) heightA, (int) heightB);
 		System.out.println("宽度：" + maxWidth);
@@ -1268,9 +1268,9 @@ public class BaseMethodController extends BaseController {
 		//定位右侧的2个点右上和右下使用方法是毕达哥拉斯定理，就是勾股定理距离长的认为是右下角
 		//计算左上方点和右侧两个点的欧氏距离
 		//(y2-y1)^2+(x2-x1)^2 开根号
-		double rightLength1 = Math.sqrt(Math.pow((rightPoint1.y - top_left.y), 2)
+		BigDecimal rightLength1 = Math.sqrt(Math.pow((rightPoint1.y - top_left.y), 2)
 			+ Math.pow((rightPoint1.x - top_left.x), 2));
-		double rightLength2 = Math.sqrt(Math.pow((rightPoint2.y - top_left.y), 2)
+		BigDecimal rightLength2 = Math.sqrt(Math.pow((rightPoint2.y - top_left.y), 2)
 			+ Math.pow((rightPoint2.x - top_left.x), 2));
 		if (rightLength1 > rightLength2) {
 			//长度长的那个是右下角,短的为右上角；这个算法有一种情况会有可能出问题，比如倒梯形，但是在正常的俯角拍摄时不会出现这种情况

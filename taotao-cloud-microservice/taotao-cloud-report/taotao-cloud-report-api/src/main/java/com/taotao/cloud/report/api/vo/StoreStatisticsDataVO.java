@@ -25,5 +25,5 @@ public class StoreStatisticsDataVO {
     private String num;
 
     @Schema(description =  "销售金额")
-    private Double price;
+    private BigDecimal price;
 }

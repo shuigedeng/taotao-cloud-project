@@ -249,16 +249,16 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	//			throw new BusinessException(ResultEnum.GOODS_SKU_SN_ERROR);
 	//		}
 	//		if (StringUtil.isEmpty(sku.get("price").toString())
-	//			|| Convert.toDouble(sku.get("price")) <= 0) {
+	//			|| Convert.toBigDecimal(sku.get("price")) <= 0) {
 	//			throw new BusinessException(ResultEnum.GOODS_SKU_PRICE_ERROR);
 	//		}
 	//		if (StringUtil.isEmpty(sku.get("cost").toString())
-	//			|| Convert.toDouble(sku.get("cost")) <= 0) {
+	//			|| Convert.toBigDecimal(sku.get("cost")) <= 0) {
 	//			throw new BusinessException(ResultEnum.GOODS_SKU_COST_ERROR);
 	//		}
 	//		//虚拟商品没有重量字段
 	//		if (sku.containsKey("weight") && (StringUtil.isEmpty(sku.get("weight").toString())
-	//			|| Convert.toDouble(sku.get("weight").toString()) < 0)) {
+	//			|| Convert.toBigDecimal(sku.get("weight").toString()) < 0)) {
 	//			throw new BusinessException(ResultEnum.GOODS_SKU_WEIGHT_ERROR);
 	//		}
 	//		if (StringUtil.isEmpty(sku.get("quantity").toString())

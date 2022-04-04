@@ -89,7 +89,7 @@ public class MemberWalletRecharge extends BaseSuperEntity<MemberWalletRecharge, 
 	 * @param memberName 会员名称
 	 * @param money      充值金额
 	 */
-	//public Recharge(String rechargeSn, String memberId, String memberName, Double money) {
+	//public Recharge(String rechargeSn, String memberId, String memberName, BigDecimal money) {
 	//	this.rechargeSn = rechargeSn;
 	//	this.memberId = memberId;
 	//	this.memberName = memberName;

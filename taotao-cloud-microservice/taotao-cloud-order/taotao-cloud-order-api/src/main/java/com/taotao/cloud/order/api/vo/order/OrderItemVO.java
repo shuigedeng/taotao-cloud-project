@@ -35,7 +35,7 @@ public class OrderItemVO {
 	private String name;
 
 	@Schema(description = "商品名称")
-	private Double goodsPrice;
+	private BigDecimal goodsPrice;
 
 	/**
 	 * @see OrderItemAfterSaleStatusEnum
@@ -58,7 +58,7 @@ public class OrderItemVO {
 
 	public OrderItemVO(String sn, String goodsId, String skuId, String num, String image,
 		String name, String afterSaleStatus, String complainStatus, String commentStatus,
-		Double goodsPrice) {
+		BigDecimal goodsPrice) {
 		this.sn = sn;
 		this.goodsId = goodsId;
 		this.skuId = skuId;

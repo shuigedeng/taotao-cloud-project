@@ -66,7 +66,7 @@ public interface MemberCouponService extends IService<MemberCoupon> {
      * @param totalPrice 当前商品总价
      * @return 会员优惠券列表
      */
-    IPage<MemberCoupon> getMemberCouponsByCanUse(CouponSearchParams param, Double totalPrice, PageVO pageVo);
+    IPage<MemberCoupon> getMemberCouponsByCanUse(CouponSearchParams param, BigDecimal totalPrice, PageVO pageVo);
 
     /**
      * 获取当前会员当前商品可用的会员优惠券
@@ -76,7 +76,7 @@ public interface MemberCouponService extends IService<MemberCoupon> {
      * @param totalPrice 当前商品总价
      * @return 会员优惠券列表
      */
-    List<MemberCoupon> getCurrentGoodsCanUse(String memberId, List<String> couponIds, Double totalPrice);
+    List<MemberCoupon> getCurrentGoodsCanUse(String memberId, List<String> couponIds, BigDecimal totalPrice);
 
     /**
      * 获取当前会员全品类优惠券

@@ -1,26 +1,12 @@
 package com.taotao.cloud.report.biz.service.impl;
 
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.order.order.entity.dos.StoreFlow;
-import cn.lili.modules.order.order.entity.enums.FlowTypeEnum;
-import cn.lili.modules.statistics.entity.dto.GoodsStatisticsQueryParam;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.enums.StatisticsQuery;
-import cn.lili.modules.statistics.entity.vo.CategoryStatisticsDataVO;
-import cn.lili.modules.statistics.entity.vo.GoodsStatisticsDataVO;
-import cn.lili.modules.statistics.entity.vo.OrderOverviewVO;
-import cn.lili.modules.statistics.entity.vo.StoreStatisticsDataVO;
-import cn.lili.modules.statistics.mapper.StoreFlowStatisticsMapper;
-import cn.lili.modules.statistics.service.OrderStatisticsService;
-import cn.lili.modules.statistics.service.StoreFlowStatisticsService;
-import cn.lili.modules.statistics.util.StatisticsDateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.utils.date.DateUtil;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +63,7 @@ public class StoreFlowStatisticsServiceImpl extends ServiceImpl<StoreFlowStatist
             queryWrapper.eq("store_id", authUser.getStoreId());
         }
         //大于今天凌晨
-        queryWrapper.ge("create_time", cn.lili.common.utils.DateUtil.startOfTodDayTime());
+        queryWrapper.ge("create_time", DateUtil.startOfTodDayTime());
 
         queryWrapper.select("SUM(final_price) AS price , COUNT(0) AS num");
         return this.getMap(queryWrapper);
@@ -117,7 +103,7 @@ public class StoreFlowStatisticsServiceImpl extends ServiceImpl<StoreFlowStatist
         Map order = orderStatisticsService.getMap(queryWrapper);
         //赋予订单数和流水金额
         orderOverviewVO.setOrderNum(order != null && order.containsKey("num") ? (Long) order.get("num") : 0L);
-        orderOverviewVO.setOrderAmount(order != null && order.containsKey("price") ? (double) order.get("price") : 0L);
+        orderOverviewVO.setOrderAmount(order != null && order.containsKey("price") ? (BigDecimal) order.get("price") : 0L);
 
         //查询下单人数
         queryWrapper = Wrappers.query();
@@ -154,7 +140,7 @@ public class StoreFlowStatisticsServiceImpl extends ServiceImpl<StoreFlowStatist
         Map payment = this.getMap(queryWrapper);
 
         orderOverviewVO.setPaymentOrderNum(payment != null && payment.containsKey("num") ? (Long) payment.get("num") : 0L);
-        orderOverviewVO.setPaymentAmount(payment != null && payment.containsKey("price") ? (Double) payment.get("price") : 0D);
+        orderOverviewVO.setPaymentAmount(payment != null && payment.containsKey("price") ? (BigDecimal) payment.get("price") : 0D);
 
         //付款人数
         queryWrapper = Wrappers.query();
@@ -188,7 +174,7 @@ public class StoreFlowStatisticsServiceImpl extends ServiceImpl<StoreFlowStatist
         queryWrapper.eq("flow_type", FlowTypeEnum.REFUND.name());
         Map payment = this.getMap(queryWrapper);
         orderOverviewVO.setRefundOrderNum(payment != null && payment.containsKey("num") ? (Long) payment.get("num") : 0L);
-        orderOverviewVO.setRefundOrderPrice(payment != null && payment.containsKey("price") ? (Double) payment.get("price") : 0D);
+        orderOverviewVO.setRefundOrderPrice(payment != null && payment.containsKey("price") ? (BigDecimal) payment.get("price") : 0D);
     }
 
 

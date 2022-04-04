@@ -89,7 +89,7 @@ public class AfterSaleController {
 	public Result<AfterSale> review(
 		@NotNull(message = "请选择售后单") @PathVariable String afterSaleSn,
 		@NotNull(message = "请审核") String serviceStatus,
-		String remark, Double actualRefundPrice) {
+		String remark, BigDecimal actualRefundPrice) {
 
 		return Result.success(
 			afterSaleService.review(afterSaleSn, serviceStatus, remark, actualRefundPrice));

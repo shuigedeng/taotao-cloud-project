@@ -172,7 +172,7 @@ public class CardPlusController extends BaseController {
 				// Imgproc.threshold(select, selectdst, 170, 255, Imgproc.THRESH_BINARY);
 
 				// System.out.println("rectx.x, recty.y=="+rectx.x+","+recty.y+"rectx.width,recty.height=="+rectx.width+","+recty.height);
-				double p100 = Core.countNonZero(selectdst) * 100 / (selectdst.size().area());
+				BigDecimal p100 = Core.countNonZero(selectdst) * 100 / (selectdst.size().area());
 				String que_answer = getQA(no, an);
 				Integer que = Integer.valueOf(que_answer.split("_")[0]);
 				String answer = que_answer.split("_")[1];
@@ -255,7 +255,7 @@ public class CardPlusController extends BaseController {
 
 		int max = (int) minmaxLoc.maxVal;
 		System.out.println("--------" + max);
-		double bin_u = (double) (histImgRows - 20)
+		BigDecimal bin_u = (BigDecimal) (histImgRows - 20)
 			/ max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度，因为画直方图的时候上移了20像素，要减去
 		int kedu = 0;
 		for (int i = 1; kedu <= minmaxLoc.maxVal; i++) {

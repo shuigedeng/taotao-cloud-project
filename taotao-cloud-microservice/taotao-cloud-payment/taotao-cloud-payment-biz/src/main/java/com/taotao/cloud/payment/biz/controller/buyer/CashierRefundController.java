@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.controller.buyer;
 
-import cn.lili.modules.payment.kit.RefundSupport;
-import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.biz.kit.RefundSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

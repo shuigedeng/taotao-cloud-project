@@ -1,20 +1,9 @@
 package com.taotao.cloud.store.biz.controller.manager;
 
-import cn.lili.common.aop.annotation.DemoSite;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.store.entity.dos.Store;
-import cn.lili.modules.store.entity.dto.AdminStoreApplyDTO;
-import cn.lili.modules.store.entity.dto.StoreEditDTO;
-import cn.lili.modules.store.entity.vos.StoreDetailVO;
-import cn.lili.modules.store.entity.vos.StoreManagementCategoryVO;
-import cn.lili.modules.store.entity.vos.StoreSearchParams;
-import cn.lili.modules.store.entity.vos.StoreVO;
-import cn.lili.modules.store.service.StoreDetailService;
-import cn.lili.modules.store.service.StoreService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.store.biz.service.StoreDetailService;
+import com.taotao.cloud.store.biz.service.StoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

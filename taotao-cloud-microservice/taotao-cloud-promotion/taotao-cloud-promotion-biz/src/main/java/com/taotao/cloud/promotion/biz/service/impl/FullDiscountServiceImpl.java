@@ -234,7 +234,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
      * @param fullMinus 满减金额
      * @param fullMoney 优惠门槛
      */
-    private void checkFullMinus(Double fullMinus, Double fullMoney) {
+    private void checkFullMinus(BigDecimal fullMinus, BigDecimal fullMoney) {
         //是否没有填写满减金额
         boolean noFullMinusInput = fullMinus == null || fullMinus == 0;
         if (noFullMinusInput) {
@@ -250,7 +250,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
      *
      * @param fullRate 打折数值
      */
-    private void checkFullRate(Double fullRate) {
+    private void checkFullRate(BigDecimal fullRate) {
         //是否没有填写打折数值
         boolean noFullRateInput = fullRate == null || fullRate == 0;
         if (noFullRateInput) {

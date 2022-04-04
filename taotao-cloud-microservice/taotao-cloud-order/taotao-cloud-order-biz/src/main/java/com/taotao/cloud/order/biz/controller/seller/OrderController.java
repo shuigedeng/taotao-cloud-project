@@ -90,7 +90,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Object> updateOrderPrice(@PathVariable String orderSn,
-		@NotNull(message = "订单价格不能为空") @RequestParam Double orderPrice) {
+		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal orderPrice) {
 		return Result.success(orderPriceService.updatePrice(orderSn, orderPrice));
 	}
 

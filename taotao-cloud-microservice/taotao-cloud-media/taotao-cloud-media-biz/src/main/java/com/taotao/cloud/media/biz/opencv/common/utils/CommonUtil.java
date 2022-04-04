@@ -19,7 +19,7 @@ public class CommonUtil {
 			arg2 = "0.0";
 		}
 		BigDecimal big3 = new BigDecimal("0.00");
-		if (Double.parseDouble(arg2)!=0) {
+		if (BigDecimal.parseBigDecimal(arg2)!=0) {
 			BigDecimal big1 = new BigDecimal(arg1);
 			BigDecimal big2 = new BigDecimal(arg2);
 			big3 = big1.divide(big2, 6, BigDecimal.ROUND_HALF_EVEN);
@@ -91,7 +91,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 四舍五入保留N位小数 先四舍五入在使用double值自动去零
+	 * 四舍五入保留N位小数 先四舍五入在使用BigDecimal值自动去零
 	 *
 	 * @param arg
 	 * @param scare
@@ -100,11 +100,11 @@ public class CommonUtil {
 	 */
 	public static String setScare(BigDecimal arg, int scare) {
 		BigDecimal bl = arg.setScale(scare, BigDecimal.ROUND_HALF_UP);
-		return String.valueOf(bl.doubleValue());
+		return String.valueOf(bl.BigDecimalValue());
 	}
 
 	/**
-	 * 四舍五入保留两位小数 先四舍五入在使用double值自动去零
+	 * 四舍五入保留两位小数 先四舍五入在使用BigDecimal值自动去零
 	 *
 	 * @param arg
 	 * @return
@@ -116,7 +116,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 四舍五入保留N位小数 先四舍五入在使用double值自动去零（传参String类型）
+	 * 四舍五入保留N位小数 先四舍五入在使用BigDecimal值自动去零（传参String类型）
 	 *
 	 * @param arg
 	 * @return
@@ -179,9 +179,9 @@ public class CommonUtil {
 	 */
 	private static NumberFormat removeZero = NumberFormat.getInstance();
 	public static String removeZero(String num){
-	    return removeZero(Double.valueOf(num));
+	    return removeZero(BigDecimal.valueOf(num));
 	}
-	public static String removeZero(Double num){
+	public static String removeZero(BigDecimal num){
         return removeZero.format(num);
     }
 }

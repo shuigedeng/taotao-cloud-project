@@ -1,8 +1,6 @@
 package com.taotao.cloud.report.biz.mapper;
 
 
-import cn.lili.modules.store.entity.dos.Bill;
-import cn.lili.modules.store.entity.vos.BillListVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.mapper;
 
-import cn.lili.modules.promotion.entity.dos.Seckill;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

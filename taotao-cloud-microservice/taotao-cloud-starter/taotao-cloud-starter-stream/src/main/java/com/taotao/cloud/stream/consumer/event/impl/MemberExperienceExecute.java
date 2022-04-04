@@ -1,22 +1,6 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
 //
-//import cn.lili.common.utils.CurrencyUtil;
-//import cn.lili.event.GoodsCommentCompleteEvent;
-//import cn.lili.event.MemberRegisterEvent;
-//import cn.lili.event.OrderStatusChangeEvent;
-//import cn.lili.modules.member.entity.dos.Member;
-//import cn.lili.modules.member.entity.dos.MemberEvaluation;
-//import cn.lili.modules.member.entity.enums.PointTypeEnum;
-//import cn.lili.modules.member.service.MemberService;
-//import cn.lili.modules.order.order.entity.dos.Order;
-//import cn.lili.modules.order.order.entity.dto.OrderMessage;
-//import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
-//import cn.lili.modules.order.order.service.OrderService;
-//import cn.lili.modules.system.entity.dos.Setting;
-//import cn.lili.modules.system.entity.dto.ExperienceSetting;
-//import cn.lili.modules.system.entity.enums.SettingEnum;
-//import cn.lili.modules.system.service.SettingService;
 //import com.google.gson.Gson;
 //import org.springframework.beans.factory.annotation.Autowired;
 //

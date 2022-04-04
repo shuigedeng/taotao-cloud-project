@@ -1,8 +1,5 @@
 package com.taotao.cloud.order.biz.entity.trade;
 
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

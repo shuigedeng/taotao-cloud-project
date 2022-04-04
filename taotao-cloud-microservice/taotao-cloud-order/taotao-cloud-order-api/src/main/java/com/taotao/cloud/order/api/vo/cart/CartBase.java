@@ -32,10 +32,6 @@ public class CartBase implements Serializable {
 	@Schema(description = "此商品价格展示")
 	private PriceDetailVO priceDetailVO;
 
-	public CartBase() {
-		priceDetailDTO = new PriceDetailDTO();
-	}
-
 	public PriceDetailVO getPriceDetailVO() {
 		if (this.priceDetailDTO != null) {
 			return new PriceDetailVO(priceDetailDTO);

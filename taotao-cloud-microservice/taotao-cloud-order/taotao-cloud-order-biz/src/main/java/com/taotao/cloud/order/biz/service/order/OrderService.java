@@ -261,7 +261,7 @@ public interface OrderService extends IService<Order> {
      * @param orderSn 订单sn
      * @return 金额
      */
-    Double getPaymentTotal(String orderSn);
+    BigDecimal getPaymentTotal(String orderSn);
 
     /**
      * 查询订单支付记录

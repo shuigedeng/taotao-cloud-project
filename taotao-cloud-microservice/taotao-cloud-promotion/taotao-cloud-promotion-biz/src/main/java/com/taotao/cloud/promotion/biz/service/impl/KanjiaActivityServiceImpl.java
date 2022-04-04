@@ -158,7 +158,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         kanjiaActivityDTO.setKanjiaActivityGoodsId(kanjiaActivity.getKanjiaActivityGoodsId());
         kanjiaActivityDTO.setKanjiaActivityId(kanjiaActivityId);
         //获取砍价金额
-        Double price = this.getKanjiaPrice(kanJiaActivityGoods, kanjiaActivity.getSurplusPrice());
+        BigDecimal price = this.getKanjiaPrice(kanJiaActivityGoods, kanjiaActivity.getSurplusPrice());
         kanjiaActivityDTO.setKanjiaPrice(price);
         //计算剩余金额
         kanjiaActivityDTO.setSurplusPrice(CurrencyUtil.sub(kanjiaActivity.getSurplusPrice(), price));
@@ -168,7 +168,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         KanjiaActivityLog kanjiaActivityLog = kanjiaActivityLogService.addKanJiaActivityLog(kanjiaActivityDTO);
 
         //如果可砍金额为0的话说明活动成功了
-        if (Double.doubleToLongBits(kanjiaActivityDTO.getSurplusPrice()) == Double.doubleToLongBits(0D)) {
+        if (BigDecimal.BigDecimalToLongBits(kanjiaActivityDTO.getSurplusPrice()) == BigDecimal.BigDecimalToLongBits(0D)) {
             kanjiaActivity.setStatus(KanJiaStatusEnum.SUCCESS.name());
         }
         kanjiaActivity.setSurplusPrice(kanjiaActivityLog.getSurplusPrice());
@@ -184,7 +184,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
      * @param surplusPrice        剩余可砍金额
      * @return 砍一刀价格
      */
-    private Double getKanjiaPrice(KanjiaActivityGoods kanjiaActivityGoods, Double surplusPrice) {
+    private BigDecimal getKanjiaPrice(KanjiaActivityGoods kanjiaActivityGoods, BigDecimal surplusPrice) {
 
         //如果剩余砍价金额小于最低砍价金额则返回0
         if (kanjiaActivityGoods.getLowestPrice() > surplusPrice) {
@@ -198,7 +198,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         //获取随机砍价金额
         BigDecimal bigDecimal = RandomUtil.randomBigDecimal(Convert.toBigDecimal(kanjiaActivityGoods.getLowestPrice()),
                 Convert.toBigDecimal(kanjiaActivityGoods.getHighestPrice()));
-        return bigDecimal.setScale(2, RoundingMode.UP).doubleValue();
+        return bigDecimal.setScale(2, RoundingMode.UP).BigDecimalValue();
 
     }
 

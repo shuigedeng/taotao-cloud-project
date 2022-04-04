@@ -2,8 +2,6 @@ package com.taotao.cloud.distribution.biz.entity;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -74,11 +72,11 @@ public class DistributionGoods extends BaseIdEntity {
 
     @NotNull(message = "佣金金额")
     @Schema(description =  "佣金金额", required = true)
-    private Double commission = 0D;
+    private BigDecimal commission = 0D;
 
     @Max(value = 99999999, message = "价格不能超过99999999")
     @Schema(description =  "商品价格")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description =  "缩略图路径")
     private String thumbnail;
@@ -87,7 +85,7 @@ public class DistributionGoods extends BaseIdEntity {
     @Schema(description =  "库存")
     private Integer quantity;
 
-    public DistributionGoods(GoodsSku goodsSku, Double commission) {
+    public DistributionGoods(GoodsSku goodsSku, BigDecimal commission) {
         this.goodsId = goodsSku.getGoodsId();
         this.goodsName = goodsSku.getGoodsName();
         this.skuId = goodsSku.getId();

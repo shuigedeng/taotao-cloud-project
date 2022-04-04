@@ -3,29 +3,6 @@ package com.taotao.cloud.payment.biz.kit.plugin.alipay;
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.net.URLEncoder;
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.context.ThreadContextHolder;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.properties.ApiProperties;
-import cn.lili.common.properties.DomainProperties;
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.common.utils.SnowFlake;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.Result;
-import cn.lili.modules.payment.entity.RefundLog;
-import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
-import cn.lili.modules.payment.kit.CashierSupport;
-import cn.lili.modules.payment.kit.Payment;
-import cn.lili.modules.payment.kit.dto.PayParam;
-import cn.lili.modules.payment.kit.dto.PaymentSuccessParams;
-import cn.lili.modules.payment.kit.params.dto.CashierParam;
-import cn.lili.modules.payment.service.PaymentService;
-import cn.lili.modules.payment.service.RefundLogService;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.payment.AlipayPaymentSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.*;
@@ -302,7 +279,7 @@ public class AliPayPlugin implements Payment {
 
             if (verifyResult) {
                 String tradeNo = map.get("trade_no");
-                Double totalAmount = Double.parseDouble(map.get("total_amount"));
+                BigDecimal totalAmount = BigDecimal.parseBigDecimal(map.get("total_amount"));
                 PaymentSuccessParams paymentSuccessParams =
                         new PaymentSuccessParams(PaymentMethodEnum.ALIPAY.name(), tradeNo, totalAmount, payParam);
 

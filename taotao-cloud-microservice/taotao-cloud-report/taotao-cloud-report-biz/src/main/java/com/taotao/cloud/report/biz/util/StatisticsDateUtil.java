@@ -1,10 +1,5 @@
 package com.taotao.cloud.report.biz.util;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.enums.SearchTypeEnum;
 
 import java.util.Calendar;
 import java.util.Date;

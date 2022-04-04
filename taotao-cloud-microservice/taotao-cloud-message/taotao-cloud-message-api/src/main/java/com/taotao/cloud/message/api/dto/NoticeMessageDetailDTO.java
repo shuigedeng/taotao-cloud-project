@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.api.dto;
 
-import cn.lili.modules.message.entity.dos.NoticeMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,7 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.StringUtil;
-import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.enums.UserEnums;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;

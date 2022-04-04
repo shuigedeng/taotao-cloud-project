@@ -42,13 +42,13 @@ public class CartSkuVO extends CartBase implements Serializable {
 	private Integer num;
 
 	@Schema(description = "购买时的成交价")
-	private Double purchasePrice;
+	private BigDecimal purchasePrice;
 
 	@Schema(description = "小记")
-	private Double subTotal;
+	private BigDecimal subTotal;
 
 	@Schema(description = "小记")
-	private Double utilPrice;
+	private BigDecimal utilPrice;
 	/**
 	 * 是否选中，要去结算 0:未选中 1:已选中，默认
 	 */

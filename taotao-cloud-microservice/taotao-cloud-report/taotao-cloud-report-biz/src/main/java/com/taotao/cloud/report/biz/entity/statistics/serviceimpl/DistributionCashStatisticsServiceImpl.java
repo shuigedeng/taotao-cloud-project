@@ -1,9 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.serviceimpl;
 
-import cn.lili.modules.distribution.entity.dos.DistributionCash;
-import cn.lili.modules.statistics.mapper.DistributionCashStatisticsMapper;
-import cn.lili.modules.statistics.service.DistributionCashStatisticsService;
-import cn.lili.modules.wallet.entity.enums.WithdrawStatusEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

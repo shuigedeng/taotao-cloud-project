@@ -1,6 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event;
 //
-//import cn.lili.modules.wallet.entity.dto.MemberWithdrawalMessage;
 //
 ///**
 // * 会员提现消息

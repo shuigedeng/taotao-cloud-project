@@ -2,24 +2,10 @@ package com.taotao.cloud.report.biz.entity.statistics.serviceimpl;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateTime;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.modules.goods.entity.enums.GoodsAuthEnum;
-import cn.lili.modules.goods.entity.enums.GoodsStatusEnum;
-import cn.lili.modules.order.order.entity.enums.FlowTypeEnum;
-import cn.lili.modules.order.order.entity.enums.OrderStatusEnum;
-import cn.lili.modules.order.trade.entity.enums.AfterSaleTypeEnum;
-import cn.lili.modules.statistics.entity.dto.GoodsStatisticsQueryParam;
-import cn.lili.modules.statistics.entity.dto.StatisticsQueryParam;
-import cn.lili.modules.statistics.entity.enums.SearchTypeEnum;
-import cn.lili.modules.statistics.entity.vo.*;
-import cn.lili.modules.statistics.service.*;
-import cn.lili.modules.statistics.util.StatisticsDateUtil;
-import cn.lili.modules.store.entity.enums.BillStatusEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -134,7 +120,7 @@ public class IndexStatisticsServiceImpl implements IndexStatisticsService {
         //今日下单数
         indexStatisticsVO.setTodayOrderNum(map.get("num") == null ? 0L : (Long) map.get("num"));
         //今日下单金额
-        indexStatisticsVO.setTodayOrderPrice(map.get("price") == null ? 0D : (Double) map.get("price"));
+        indexStatisticsVO.setTodayOrderPrice(map.get("price") == null ? 0D : (BigDecimal) map.get("price"));
 
         //今日新增会员数量
         indexStatisticsVO.setTodayMemberNum(memberStatisticsService.todayMemberNum());
@@ -182,7 +168,7 @@ public class IndexStatisticsServiceImpl implements IndexStatisticsService {
         //订单总数量、订单总金额
         Map<String, Object> map = storeFlowStatisticsService.getOrderStatisticsPrice();
         storeIndexStatisticsVO.setOrderNum(Convert.toInt(map.get("num").toString()));
-        storeIndexStatisticsVO.setOrderPrice(map.get("price") != null ? Double.parseDouble(map.get("price").toString()) : 0.0);
+        storeIndexStatisticsVO.setOrderPrice(map.get("price") != null ? BigDecimal.parseBigDecimal(map.get("price").toString()) : 0.0);
 
         //访问量
         StatisticsQueryParam queryParam = new StatisticsQueryParam();

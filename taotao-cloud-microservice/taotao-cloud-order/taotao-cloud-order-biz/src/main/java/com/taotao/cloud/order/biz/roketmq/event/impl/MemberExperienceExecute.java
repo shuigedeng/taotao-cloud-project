@@ -48,7 +48,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
             //获取订单信息
             Order order = orderService.getBySn(orderMessage.getOrderSn());
             //计算赠送经验值数量
-            Double point = CurrencyUtil.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
+            BigDecimal point = CurrencyUtil.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
             //赠送会员经验值
             memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(), order.getMemberId(), "会员下单，赠送经验值" + point + "分");
         }

@@ -199,7 +199,7 @@ public class MemberEvaluationServiceImpl extends
 
 		//根据子订单编号判断是否评价过
 		if (orderItem.getCommentStatus().equals(CommentStatusEnum.FINISHED.name())) {
-			throw new BusinessException(ResultEnum.EVALUATION_DOUBLE_ERROR);
+			throw new BusinessException(ResultEnum.EVALUATION_BigDecimal_ERROR);
 		}
 
 		//判断是否是当前会员的订单

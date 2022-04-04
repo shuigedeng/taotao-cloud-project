@@ -1,6 +1,5 @@
 package com.taotao.cloud.operation.api.vo;
 
-import cn.lili.common.enums.SwitchEnum;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

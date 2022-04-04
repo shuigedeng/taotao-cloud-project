@@ -1,7 +1,5 @@
 package com.taotao.cloud.search.biz.entity;
 
-import cn.lili.modules.search.entity.dto.ParamOptions;
-import cn.lili.modules.search.entity.dto.SelectorOptions;
 import lombok.Data;
 
 import java.util.List;

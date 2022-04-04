@@ -1,10 +1,5 @@
 package com.taotao.cloud.payment.biz.kit.params;
 
-import cn.lili.modules.payment.kit.dto.PaymentSuccessParams;
-import cn.lili.modules.payment.kit.dto.PayParam;
-import cn.lili.modules.payment.entity.enums.CashierEnum;
-import cn.lili.modules.payment.kit.params.dto.CashierParam;
-
 /**
  * 收银台接口
  */

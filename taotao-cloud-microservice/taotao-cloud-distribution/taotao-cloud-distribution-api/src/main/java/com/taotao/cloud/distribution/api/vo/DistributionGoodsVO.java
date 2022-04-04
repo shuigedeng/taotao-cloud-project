@@ -35,7 +35,7 @@ public class DistributionGoodsVO {
 	private String thumbnail;
 
 	@Schema(description = "商品价格")
-	private Double price;
+	private BigDecimal price;
 
 	@Schema(description = "商品编号")
 	private String sn;
@@ -50,7 +50,7 @@ public class DistributionGoodsVO {
 	private String storeName;
 
 	@Schema(description = "佣金金额")
-	private Double commission;
+	private BigDecimal commission;
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

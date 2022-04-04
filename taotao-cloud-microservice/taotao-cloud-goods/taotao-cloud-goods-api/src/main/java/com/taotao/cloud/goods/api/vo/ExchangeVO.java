@@ -20,7 +20,7 @@ public class ExchangeVO {
 	private Integer enableExchange;
 
 	@Schema(description = "兑换所需金额 ")
-	private Double exchangeMoney;
+	private BigDecimal exchangeMoney;
 
 	@Schema(description = "积分兑换所属分类 ")
 	private Integer categoryId;

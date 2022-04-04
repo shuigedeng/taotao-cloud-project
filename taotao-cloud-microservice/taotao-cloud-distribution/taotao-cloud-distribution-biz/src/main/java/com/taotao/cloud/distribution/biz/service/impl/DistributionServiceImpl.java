@@ -189,12 +189,12 @@ public class DistributionServiceImpl extends
 	}
 
 	@Override
-	public void subCanRebate(Double canRebate, String distributionId) {
+	public void subCanRebate(BigDecimal canRebate, String distributionId) {
 		this.baseMapper.subCanRebate(canRebate, distributionId);
 	}
 
 	@Override
-	public void addRebate(Double rebate, String distributionId) {
+	public void addRebate(BigDecimal rebate, String distributionId) {
 		this.baseMapper.addCanRebate(rebate, distributionId);
 	}
 

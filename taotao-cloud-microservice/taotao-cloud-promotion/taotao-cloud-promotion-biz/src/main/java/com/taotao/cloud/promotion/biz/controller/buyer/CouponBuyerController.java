@@ -63,7 +63,7 @@ public class CouponBuyerController {
 
     @ApiOperation(value = "获取当前会员的对于当前商品可使用的优惠券列表")
     @GetMapping("/canUse")
-    public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponSearchParams param, Double totalPrice, PageVO pageVo) {
+    public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponSearchParams param, BigDecimal totalPrice, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         param.setMemberId(currentUser.getId());
         return Result.success(memberCouponService.getMemberCouponsByCanUse(param, totalPrice, pageVo));

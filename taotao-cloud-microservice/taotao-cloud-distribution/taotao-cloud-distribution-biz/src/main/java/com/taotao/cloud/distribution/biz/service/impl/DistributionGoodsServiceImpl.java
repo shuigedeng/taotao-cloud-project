@@ -109,7 +109,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
     }
 
     @Override
-    public DistributionGoods checked(String skuId, Double commission, String storeId) {
+    public DistributionGoods checked(String skuId, BigDecimal commission, String storeId) {
 
         //检查分销功能开关
         distributionService.checkDistributionSetting();
@@ -118,7 +118,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
         QueryWrapper queryWrapper = Wrappers.query().eq("sku_id", skuId);
 
         if (this.getOne(queryWrapper) != null) {
-            throw new BusinessException(ResultEnum.DISTRIBUTION_GOODS_DOUBLE);
+            throw new BusinessException(ResultEnum.DISTRIBUTION_GOODS_BigDecimal);
         }
         GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(skuId);
         if (!goodsSku.getStoreId().equals(storeId)) {

@@ -1,7 +1,5 @@
 package com.taotao.cloud.operation.api.vo;
 
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.modules.page.entity.dos.ArticleCategory;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

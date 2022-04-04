@@ -1,10 +1,10 @@
 package com.taotao.cloud.order.api.dto.order;
 
 
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.promotion.entity.vos.PromotionSkuVO;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -28,13 +28,13 @@ public class PriceDetailDTO implements Serializable {
 	 * 订单原始总价格 用于订单价格修改金额计算使用
 	 */
 	@Schema(description = "订单原始总价格")
-	private Double originalPrice;
+	private BigDecimal originalPrice;
 
 	@Schema(description = "商品总金额（商品原价）")
-	private Double goodsPrice;
+	private BigDecimal goodsPrice;
 
 	@Schema(description = "配送费")
-	private Double freightPrice;
+	private BigDecimal freightPrice;
 
 	//============discount price============
 
@@ -42,54 +42,54 @@ public class PriceDetailDTO implements Serializable {
 	private Long payPoint;
 
 	@Schema(description = "优惠金额")
-	private Double discountPrice;
+	private BigDecimal discountPrice;
 
 	@Schema(description = "优惠券金额")
-	private Double couponPrice;
+	private BigDecimal couponPrice;
 
 	//===========end discount price =============
 
 	//=========distribution==========
 
 	@Schema(description = "单品分销返现支出")
-	private Double distributionCommission;
+	private BigDecimal distributionCommission;
 
 
 	@Schema(description = "平台收取交易佣金比例")
-	private Double platFormCommissionPoint;
+	private BigDecimal platFormCommissionPoint;
 
 	@Schema(description = "平台收取交易佣金")
-	private Double platFormCommission;
+	private BigDecimal platFormCommission;
 
 	//=========end distribution==========
 
 	//========= platform coupon==========
 
 	@Schema(description = "平台优惠券 使用金额")
-	private Double siteCouponPrice;
+	private BigDecimal siteCouponPrice;
 
 	@Schema(description = "站点优惠券佣金比例")
-	private Double siteCouponPoint;
+	private BigDecimal siteCouponPoint;
 
 	@Schema(description = "站点优惠券佣金")
-	private Double siteCouponCommission;
+	private BigDecimal siteCouponCommission;
 	//=========end platform coupon==========
 
 	//========= update price ==========
 
 	@Schema(description = "订单修改金额")
-	private Double updatePrice;
+	private BigDecimal updatePrice;
 
 	//=========end update price==========
 
 	@Schema(description = "流水金额(入账 出帐金额) = goodsPrice + freight - discountPrice - couponPrice + updatePrice")
-	private Double flowPrice;
+	private BigDecimal flowPrice;
 
 	@Schema(description = "结算价格 与 商家/供应商 结算价格（例如积分商品/砍价商品）")
-	private Double settlementPrice;
+	private BigDecimal settlementPrice;
 
 	@Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission")
-	private Double billPrice;
+	private BigDecimal billPrice;
 
 	/**
 	 * 参与的促销活动
@@ -98,7 +98,7 @@ public class PriceDetailDTO implements Serializable {
 	private List<PromotionSkuVO> joinPromotion;
 
 
-	public Double getOriginalPrice() {
+	public BigDecimal getOriginalPrice() {
 		if (originalPrice == 0D) {
 			return flowPrice;
 		}
@@ -113,7 +113,7 @@ public class PriceDetailDTO implements Serializable {
 	 *
 	 * @param updatePrice 修改后的订单金额
 	 */
-	public void setUpdatePrice(Double updatePrice) {
+	public void setUpdatePrice(BigDecimal updatePrice) {
 		this.updatePrice = updatePrice;
 		this.recount();
 	}
@@ -193,14 +193,14 @@ public class PriceDetailDTO implements Serializable {
 	}
 
 
-	public Double getGoodsPrice() {
+	public BigDecimal getGoodsPrice() {
 		if (goodsPrice == null || goodsPrice <= 0) {
 			return 0D;
 		}
 		return goodsPrice;
 	}
 
-	public Double getFreightPrice() {
+	public BigDecimal getFreightPrice() {
 		if (freightPrice == null || freightPrice <= 0) {
 			return 0D;
 		}
@@ -214,49 +214,49 @@ public class PriceDetailDTO implements Serializable {
 		return payPoint;
 	}
 
-	public Double getDiscountPrice() {
+	public BigDecimal getDiscountPrice() {
 		if (discountPrice == null || discountPrice <= 0) {
 			return 0D;
 		}
 		return discountPrice;
 	}
 
-	public Double getCouponPrice() {
+	public BigDecimal getCouponPrice() {
 		if (couponPrice == null || couponPrice <= 0) {
 			return 0D;
 		}
 		return couponPrice;
 	}
 
-	public Double getDistributionCommission() {
+	public BigDecimal getDistributionCommission() {
 		if (distributionCommission == null || distributionCommission <= 0) {
 			return 0D;
 		}
 		return distributionCommission;
 	}
 
-	public Double getPlatFormCommission() {
+	public BigDecimal getPlatFormCommission() {
 		if (platFormCommission == null || platFormCommission <= 0) {
 			return 0D;
 		}
 		return platFormCommission;
 	}
 
-	public Double getSiteCouponPrice() {
+	public BigDecimal getSiteCouponPrice() {
 		if (siteCouponPrice == null || siteCouponPrice <= 0) {
 			return 0D;
 		}
 		return siteCouponPrice;
 	}
 
-	public Double getSiteCouponPoint() {
+	public BigDecimal getSiteCouponPoint() {
 		if (siteCouponPoint == null || siteCouponPoint <= 0) {
 			return 0D;
 		}
 		return siteCouponPoint;
 	}
 
-	public Double getSiteCouponCommission() {
+	public BigDecimal getSiteCouponCommission() {
 		if (siteCouponCommission == null || siteCouponCommission <= 0) {
 			return 0D;
 		}
@@ -264,28 +264,28 @@ public class PriceDetailDTO implements Serializable {
 	}
 
 
-	public Double getFlowPrice() {
+	public BigDecimal getFlowPrice() {
 		if (flowPrice == null || flowPrice <= 0) {
 			return 0D;
 		}
 		return flowPrice;
 	}
 
-	public Double getSettlementPrice() {
+	public BigDecimal getSettlementPrice() {
 		if (settlementPrice == null || settlementPrice <= 0) {
 			return 0D;
 		}
 		return settlementPrice;
 	}
 
-	public Double getBillPrice() {
+	public BigDecimal getBillPrice() {
 		if (billPrice == null || billPrice <= 0) {
 			return 0D;
 		}
 		return billPrice;
 	}
 
-	public Double getUpdatePrice() {
+	public BigDecimal getUpdatePrice() {
 		if (updatePrice == null || updatePrice <= 0) {
 			return 0D;
 		}
@@ -293,7 +293,7 @@ public class PriceDetailDTO implements Serializable {
 	}
 
 
-	public void setSiteCouponPrice(Double siteCouponPrice) {
+	public void setSiteCouponPrice(BigDecimal siteCouponPrice) {
 		this.siteCouponPrice = siteCouponPrice;
 
 		if (siteCouponPoint != null && siteCouponPoint != 0) {
@@ -301,7 +301,7 @@ public class PriceDetailDTO implements Serializable {
 		}
 	}
 
-	public void setSiteCouponPoint(Double siteCouponPoint) {
+	public void setSiteCouponPoint(BigDecimal siteCouponPoint) {
 		this.siteCouponPoint = siteCouponPoint;
 
 		if (siteCouponPoint != null && siteCouponPoint != 0) {
@@ -311,12 +311,12 @@ public class PriceDetailDTO implements Serializable {
 	}
 
 
-	public void setGoodsPrice(Double goodsPrice) {
+	public void setGoodsPrice(BigDecimal goodsPrice) {
 		this.goodsPrice = goodsPrice;
 		this.recount();
 	}
 
-	public void setFreightPrice(Double freightPrice) {
+	public void setFreightPrice(BigDecimal freightPrice) {
 		this.freightPrice = freightPrice;
 		this.recount();
 	}
@@ -325,47 +325,47 @@ public class PriceDetailDTO implements Serializable {
 		this.payPoint = payPoint;
 	}
 
-	public void setDiscountPrice(Double discountPrice) {
+	public void setDiscountPrice(BigDecimal discountPrice) {
 		this.discountPrice = discountPrice;
 		this.recount();
 	}
 
-	public void setCouponPrice(Double couponPrice) {
+	public void setCouponPrice(BigDecimal couponPrice) {
 		this.couponPrice = couponPrice;
 		this.recount();
 	}
 
-	public void setDistributionCommission(Double distributionCommission) {
+	public void setDistributionCommission(BigDecimal distributionCommission) {
 		this.distributionCommission = distributionCommission;
 		this.recount();
 	}
 
-	public void setPlatFormCommissionPoint(Double platFormCommissionPoint) {
+	public void setPlatFormCommissionPoint(BigDecimal platFormCommissionPoint) {
 		this.platFormCommissionPoint = platFormCommissionPoint;
 		this.recount();
 	}
 
-	public void setPlatFormCommission(Double platFormCommission) {
+	public void setPlatFormCommission(BigDecimal platFormCommission) {
 		this.platFormCommission = platFormCommission;
 		this.recount();
 	}
 
-	public void setSiteCouponCommission(Double siteCouponCommission) {
+	public void setSiteCouponCommission(BigDecimal siteCouponCommission) {
 		this.siteCouponCommission = siteCouponCommission;
 		this.recount();
 	}
 
-	public void setFlowPrice(Double flowPrice) {
+	public void setFlowPrice(BigDecimal flowPrice) {
 		this.flowPrice = flowPrice;
 		this.recount();
 	}
 
-	public void setSettlementPrice(Double settlementPrice) {
+	public void setSettlementPrice(BigDecimal settlementPrice) {
 		this.settlementPrice = settlementPrice;
 		this.recount();
 	}
 
-	public void setBillPrice(Double billPrice) {
+	public void setBillPrice(BigDecimal billPrice) {
 		this.billPrice = billPrice;
 		this.recount();
 	}

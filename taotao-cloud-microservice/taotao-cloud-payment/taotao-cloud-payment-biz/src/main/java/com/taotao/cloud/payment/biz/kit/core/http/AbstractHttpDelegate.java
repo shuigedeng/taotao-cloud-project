@@ -5,8 +5,8 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.http.ssl.SSLSocketFactoryBuilder;
-import cn.lili.modules.payment.kit.core.PaymentHttpResponse;
 
+import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import java.io.File;

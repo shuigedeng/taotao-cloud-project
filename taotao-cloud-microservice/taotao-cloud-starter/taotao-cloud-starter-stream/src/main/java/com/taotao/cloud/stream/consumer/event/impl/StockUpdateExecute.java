@@ -1,25 +1,6 @@
 //package com.taotao.cloud.stream.consumer.event.impl;
 //
 //import cn.hutool.core.convert.Convert;
-//import cn.lili.cache.Cache;
-//import cn.lili.common.enums.PromotionTypeEnum;
-//import cn.lili.event.OrderStatusChangeEvent;
-//import cn.lili.modules.goods.entity.dos.GoodsSku;
-//import cn.lili.modules.goods.service.GoodsSkuService;
-//import cn.lili.modules.order.order.entity.dos.OrderItem;
-//import cn.lili.modules.order.order.entity.dto.OrderMessage;
-//import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-//import cn.lili.modules.order.order.entity.vo.OrderDetailVO;
-//import cn.lili.modules.order.order.service.OrderService;
-//import cn.lili.modules.promotion.entity.dos.KanjiaActivity;
-//import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-//import cn.lili.modules.promotion.entity.dto.KanjiaActivityGoodsDTO;
-//import cn.lili.modules.promotion.entity.dto.search.PromotionGoodsSearchParams;
-//import cn.lili.modules.promotion.entity.vos.PointsGoodsVO;
-//import cn.lili.modules.promotion.service.KanjiaActivityGoodsService;
-//import cn.lili.modules.promotion.service.KanjiaActivityService;
-//import cn.lili.modules.promotion.service.PointsGoodsService;
-//import cn.lili.modules.promotion.service.PromotionGoodsService;
 //import java.util.ArrayList;
 //import java.util.List;
 //import lombok.extern.slf4j.Slf4j;

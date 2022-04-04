@@ -311,8 +311,8 @@ public class CartServiceImpl implements CartService {
 	public Long getCanUseCoupon(CartTypeEnum checkedWay) {
 		TradeDTO tradeDTO = this.readDTO(checkedWay);
 		long count = 0L;
-		double totalPrice = tradeDTO.getSkuList().stream()
-			.mapToDouble(i -> i.getPurchasePrice() * i.getNum()).sum();
+		BigDecimal totalPrice = tradeDTO.getSkuList().stream()
+			.mapToBigDecimal(i -> i.getPurchasePrice() * i.getNum()).sum();
 		if (tradeDTO.getSkuList() != null && !tradeDTO.getSkuList().isEmpty()) {
 			List<String> ids = tradeDTO.getSkuList().parallelStream()
 				.filter(i -> Boolean.TRUE.equals(i.getChecked())).map(i -> i.getGoodsSku().getId())
@@ -375,13 +375,13 @@ public class CartServiceImpl implements CartService {
 			.equals(dataSku.getMarketEnable())) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
-		Double validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
+		BigDecimal validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.SECKILL.name()));
 		if (validSeckillGoodsPrice != null) {
 			dataSku.setIsPromotion(true);
 			dataSku.setPromotionPrice(validSeckillGoodsPrice);
 		}
-		Double validPintuanGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
+		BigDecimal validPintuanGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.PINTUAN.name()));
 		if (validPintuanGoodsPrice != null && CartTypeEnum.PINTUAN.name().equals(cartType)) {
 			dataSku.setIsPromotion(true);
@@ -580,10 +580,10 @@ public class CartServiceImpl implements CartService {
 		List<CartSkuVO> cartSkuVOS = checkCoupon(memberCoupon, tradeDTO);
 
 		//定义使用优惠券的信息商品信息
-		Map<String, Double> skuPrice = new HashMap<>(1);
+		Map<String, BigDecimal> skuPrice = new HashMap<>(1);
 
 		//购物车价格
-		Double cartPrice = 0d;
+		BigDecimal cartPrice = 0d;
 
 		//循环符合优惠券的商品
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {

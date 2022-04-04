@@ -79,12 +79,12 @@ public class SkuFreightRender implements CartRenderStep {
                 freightTemplateChildDTO.setPricingMethod(freightTemplate.getPricingMethod());
 
                 //要计算的基数 数量/重量
-                Double count = (freightTemplateChildDTO.getPricingMethod().equals(FreightTemplateEnum.NUM.name())) ?
+                BigDecimal count = (freightTemplateChildDTO.getPricingMethod().equals(FreightTemplateEnum.NUM.name())) ?
                         cartSkuVO.getNum() :
                         cartSkuVO.getGoodsSku().getWeight() * cartSkuVO.getNum();
 
                 //计算运费
-                Double countFreight = countFreight(count, freightTemplateChildDTO);
+                BigDecimal countFreight = countFreight(count, freightTemplateChildDTO);
                 //写入SKU运费
                 cartSkuVO.getPriceDetailDTO().setFreightPrice(countFreight);
             }
@@ -98,9 +98,9 @@ public class SkuFreightRender implements CartRenderStep {
      * @param template 计算模版
      * @return 运费
      */
-    private Double countFreight(Double count, FreightTemplateChildDTO template) {
+    private BigDecimal countFreight(BigDecimal count, FreightTemplateChildDTO template) {
         try {
-            Double finalFreight = template.getFirstPrice();
+            BigDecimal finalFreight = template.getFirstPrice();
             //不满首重 / 首件
             if (template.getFirstCompany() >= count) {
                 return finalFreight;
@@ -111,7 +111,7 @@ public class SkuFreightRender implements CartRenderStep {
             }
 
             //计算 续重 / 续件 价格
-            Double continuedCount = count - template.getFirstCompany();
+            BigDecimal continuedCount = count - template.getFirstCompany();
             return CurrencyUtil.add(finalFreight,
                     CurrencyUtil.mul(Math.ceil(continuedCount / template.getContinuedCompany()), template.getContinuedPrice()));
         } catch (Exception e) {

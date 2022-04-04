@@ -50,7 +50,7 @@ public class DistributionGoodsStoreController {
     @ApiImplicitParam(name = "skuId", value = "规格ID", required = true, dataType = "String", paramType = "path")
     @PutMapping(value = "/checked/{skuId}")
     public Result<DistributionGoods> distributionCheckGoods(@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
-                                                                   @NotNull(message = "佣金金额不能为空") @RequestParam Double commission) {
+                                                                   @NotNull(message = "佣金金额不能为空") @RequestParam BigDecimal commission) {
 
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         return Result.success(distributionGoodsService.checked(skuId, commission, storeId));

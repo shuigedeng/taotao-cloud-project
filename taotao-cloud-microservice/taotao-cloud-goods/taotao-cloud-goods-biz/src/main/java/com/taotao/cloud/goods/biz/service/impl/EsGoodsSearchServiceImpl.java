@@ -521,11 +521,11 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 			if (prices.length == 0) {
 				return;
 			}
-			double min = Convert.toDouble(prices[0], 0.0);
-			double max = Integer.MAX_VALUE;
+			BigDecimal min = Convert.toBigDecimal(prices[0], 0.0);
+			BigDecimal max = Integer.MAX_VALUE;
 
 			if (prices.length == 2) {
-				max = Convert.toDouble(prices[1], Double.MAX_VALUE);
+				max = Convert.toBigDecimal(prices[1], BigDecimal.MAX_VALUE);
 			}
 			filterBuilder.must(
 				QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true)

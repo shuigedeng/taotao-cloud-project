@@ -142,9 +142,9 @@ public class Card2Controller extends BaseController {
 			//此处是筛选表格框，面积大于40000
 			if (approx.rows() == 4 && Math.abs(Imgproc.contourArea(approx)) > 40000 &&
 				Imgproc.isContourConvex(approxf1)) {
-				double maxCosine = 0;
+				BigDecimal maxCosine = 0;
 				for (int j = 2; j < 5; j++) {
-					double cosine = Math.abs(
+					BigDecimal cosine = Math.abs(
 						getAngle(approxf1.toArray()[j % 4], approxf1.toArray()[j - 2],
 							approxf1.toArray()[j - 1]));
 					maxCosine = Math.max(maxCosine, cosine);
@@ -173,7 +173,7 @@ public class Card2Controller extends BaseController {
 		contourHull.convertTo(tmp, CvType.CV_32F);
 		Imgproc.approxPolyDP(tmp, approx, 3, true);
 		List<Point> newPointList = new ArrayList<>();
-		double maxL = Imgproc.arcLength(approx, true) * 0.02;
+		BigDecimal maxL = Imgproc.arcLength(approx, true) * 0.02;
 
 		// 找到高精度拟合时得到的顶点中 距离小于低精度拟合得到的四个顶点maxL的顶点，排除部分顶点的干扰
 		for (Point p : approx.toArray()) {
@@ -186,12 +186,12 @@ public class Card2Controller extends BaseController {
 		}
 
 		// 找到剩余顶点连线中，边长大于 2 * maxL的四条边作为四边形物体的四条边
-		List<double[]> lines = new ArrayList<>();
+		List<BigDecimal[]> lines = new ArrayList<>();
 		for (int i = 0; i < newPointList.size(); i++) {
 			Point p1 = newPointList.get(i);
 			Point p2 = newPointList.get((i + 1) % newPointList.size());
 			if (getSpacePointToPoint(p1, p2) > 2 * maxL) {
-				lines.add(new double[]{p1.x, p1.y, p2.x, p2.y});
+				lines.add(new BigDecimal[]{p1.x, p1.y, p2.x, p2.y});
 				logger.info("p1x:" + p1.x + "  p1y:" + p1.y + "  p2x:" + p2.x + "  p2y:" + p2.y);
 				//画出4条边线，真正识别过程中这些都是可以注释掉的，只是为了方便观察
 				Core.line(source, new Point(p1.x, p1.y), new Point(p2.x, p2.y),
@@ -222,18 +222,18 @@ public class Card2Controller extends BaseController {
 		logger.info("   " + p1.x + "   " + p1.y);
 		logger.info("   " + p2.x + "   " + p2.y);
 		logger.info("   " + p3.x + "   " + p3.y);
-		double space0 = getSpacePointToPoint(p0, p1);
-		double space1 = getSpacePointToPoint(p1, p2);
-		double space2 = getSpacePointToPoint(p2, p3);
-		double space3 = getSpacePointToPoint(p3, p0);
+		BigDecimal space0 = getSpacePointToPoint(p0, p1);
+		BigDecimal space1 = getSpacePointToPoint(p1, p2);
+		BigDecimal space2 = getSpacePointToPoint(p2, p3);
+		BigDecimal space3 = getSpacePointToPoint(p3, p0);
 		// 使用最宽和最长的边作为进行图像矫正目标图像的长宽
-		double imgWidth = space1 > space3 ? space1 : space3;
-		double imgHeight = space0 > space2 ? space0 : space2;
+		BigDecimal imgWidth = space1 > space3 ? space1 : space3;
+		BigDecimal imgHeight = space0 > space2 ? space0 : space2;
 		logger.info("imgWidth:" + imgWidth + "    imgHeight:" + imgHeight);
 		// 如果提取出的图片宽小于高，则旋转90度，因为示例中的矩形框是宽>高的，如果宽小于高应该是图片旋转了
 		if (imgWidth > imgHeight) {
 			logger.info("----in");
-			double temp = imgWidth;
+			BigDecimal temp = imgWidth;
 			imgWidth = imgHeight;
 			imgHeight = temp;
 			Point tempPoint = p0.clone();
@@ -266,11 +266,11 @@ public class Card2Controller extends BaseController {
 	}
 
 	// 根据三个点计算中间那个点的夹角   pt1 pt0 pt2
-	private static double getAngle(Point pt1, Point pt2, Point pt0) {
-		double dx1 = pt1.x - pt0.x;
-		double dy1 = pt1.y - pt0.y;
-		double dx2 = pt2.x - pt0.x;
-		double dy2 = pt2.y - pt0.y;
+	private static BigDecimal getAngle(Point pt1, Point pt2, Point pt0) {
+		BigDecimal dx1 = pt1.x - pt0.x;
+		BigDecimal dy1 = pt1.y - pt0.y;
+		BigDecimal dx2 = pt2.x - pt0.x;
+		BigDecimal dy2 = pt2.y - pt0.y;
 		return (dx1 * dx2 + dy1 * dy2) / Math.sqrt(
 			(dx1 * dx1 + dy1 * dy1) * (dx2 * dx2 + dy2 * dy2) + 1e-10);
 	}
@@ -297,19 +297,19 @@ public class Card2Controller extends BaseController {
 	}
 
 	// 点到点的距离
-	private static double getSpacePointToPoint(Point p1, Point p2) {
-		double a = p1.x - p2.x;
-		double b = p1.y - p2.y;
+	private static BigDecimal getSpacePointToPoint(Point p1, Point p2) {
+		BigDecimal a = p1.x - p2.x;
+		BigDecimal b = p1.y - p2.y;
 		return Math.sqrt(a * a + b * b);
 	}
 
 	// 两直线的交点
-	private static Point computeIntersect(double[] a, double[] b) {
+	private static Point computeIntersect(BigDecimal[] a, BigDecimal[] b) {
 		if (a.length != 4 || b.length != 4) {
 			throw new ClassFormatError();
 		}
-		double x1 = a[0], y1 = a[1], x2 = a[2], y2 = a[3], x3 = b[0], y3 = b[1], x4 = b[2], y4 = b[3];
-		double d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
+		BigDecimal x1 = a[0], y1 = a[1], x2 = a[2], y2 = a[3], x3 = b[0], y3 = b[1], x4 = b[2], y4 = b[3];
+		BigDecimal d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
 		if (d != 0) {
 			Point pt = new Point();
 			pt.x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
@@ -532,7 +532,7 @@ public class Card2Controller extends BaseController {
 				Mat dst = new Mat();
 				Core.bitwise_and(cut_gray, mask, dst);
 				//获取填涂百分比,填涂区域的二值化后取出非0点/掩模的轮廓面积
-				double p100 = Core.countNonZero(dst) * 100 / Core.countNonZero(mask);
+				BigDecimal p100 = Core.countNonZero(dst) * 100 / Core.countNonZero(mask);
 				String anno = index2ColName(j);
 				//认为非0像素超过80%的算是填涂
 				if (p100 > 80) {

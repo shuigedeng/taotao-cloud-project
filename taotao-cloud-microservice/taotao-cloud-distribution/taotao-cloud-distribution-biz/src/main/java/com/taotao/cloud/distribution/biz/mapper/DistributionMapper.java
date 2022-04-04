@@ -18,7 +18,7 @@ public interface DistributionMapper extends BaseMapper<Distribution> {
      */
     @Update("UPDATE li_distribution set commission_frozen = (commission_frozen+#{commissionFrozen}) " +
             ", rebate_total=(rebate_total+#{commissionFrozen})  WHERE id = #{distributionId}")
-    void subCanRebate(Double commissionFrozen, String distributionId);
+    void subCanRebate(BigDecimal commissionFrozen, String distributionId);
 
     /**
      * 添加分销金额
@@ -29,6 +29,6 @@ public interface DistributionMapper extends BaseMapper<Distribution> {
     @Update("UPDATE li_distribution set commission_frozen = (commission_frozen+#{commissionFrozen}) " +
             ", rebate_total=(rebate_total+#{commissionFrozen}) " +
             ", distribution_order_count=(distribution_order_count+1) WHERE id = #{distributionId}")
-    void addCanRebate(Double commissionFrozen, String distributionId);
+    void addCanRebate(BigDecimal commissionFrozen, String distributionId);
 
 }

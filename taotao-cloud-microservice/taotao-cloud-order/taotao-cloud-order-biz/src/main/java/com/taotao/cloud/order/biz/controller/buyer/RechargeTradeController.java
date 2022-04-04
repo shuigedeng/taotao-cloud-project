@@ -32,7 +32,7 @@ public class RechargeTradeController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Recharge> create(
-		@Max(value = 10000, message = "充值金额单次最多允许充值10000元") @Min(value = 1, message = "充值金额单次最少充值金额为1元") Double price) {
+		@Max(value = 10000, message = "充值金额单次最多允许充值10000元") @Min(value = 1, message = "充值金额单次最少充值金额为1元") BigDecimal price) {
 		Recharge recharge = this.rechargeService.recharge(price);
 		return Result.success(recharge);
 	}

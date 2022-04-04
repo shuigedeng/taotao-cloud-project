@@ -78,6 +78,6 @@ public interface DistributionGoodsService extends IService<DistributionGoods> {
      * @param storeId 店铺id
      * @return
      */
-    DistributionGoods checked(String skuId, Double commission, String storeId);
+    DistributionGoods checked(String skuId, BigDecimal commission, String storeId);
 
 }

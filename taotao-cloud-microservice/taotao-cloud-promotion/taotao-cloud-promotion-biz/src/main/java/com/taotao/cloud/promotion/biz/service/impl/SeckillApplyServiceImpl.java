@@ -259,7 +259,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
                     //当前时间的秒数
                     long currentTime = DateUtil.currentSeconds();
                     //秒杀活动的时刻
-                    long timeLine = cn.lili.common.utils.DateUtil.getDateline(date + " " + hoursSored[i], "yyyy-MM-dd HH");
+                    long timeLine = DateUtil.getDateline(date + " " + hoursSored[i], "yyyy-MM-dd HH");
 
                     Long distanceTime = timeLine - currentTime < 0 ? 0 : timeLine - currentTime;
                     tempTimeline.setDistanceStartTime(distanceTime);

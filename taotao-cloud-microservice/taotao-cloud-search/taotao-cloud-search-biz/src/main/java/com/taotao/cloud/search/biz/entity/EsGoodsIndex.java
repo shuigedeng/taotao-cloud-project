@@ -1,11 +1,8 @@
 package com.taotao.cloud.search.biz.entity;
 
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.elasticsearch.EsSuffix;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.goods.entity.dto.GoodsParamsDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -254,13 +251,13 @@ public class EsGoodsIndex implements Serializable {
     private Date releaseTime;
 
     /**
-     * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
+     * @see GoodsTypeEnum
      */
     @Schema(description =  "商品类型", required = true)
     private String goodsType;
 
     /**
-     * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
+     * @see GoodsTypeEnum
      */
     @Schema(description =  "商品sku基础分数", required = true)
     private Integer skuSource;

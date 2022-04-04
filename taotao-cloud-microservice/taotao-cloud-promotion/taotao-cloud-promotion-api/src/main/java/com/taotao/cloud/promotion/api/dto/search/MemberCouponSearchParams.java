@@ -60,7 +60,7 @@ public class MemberCouponSearchParams extends BasePromotionsSearchParams impleme
     @Schema(description =  "会员优惠券状态")
     private String memberCouponStatus;
     @Schema(description =  "消费门槛")
-    private Double consumeThreshold;
+    private BigDecimal consumeThreshold;
 
 
     @Override

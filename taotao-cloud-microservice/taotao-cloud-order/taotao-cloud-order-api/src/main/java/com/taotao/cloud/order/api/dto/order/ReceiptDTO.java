@@ -30,8 +30,8 @@ public class ReceiptDTO {
 	private Integer num;
 
 	@Schema(description = "单价")
-	private Double goodPrice;
+	private BigDecimal goodPrice;
 
 	@Schema(description = "小计")
-	private Double subtotal;
+	private BigDecimal subtotal;
 }

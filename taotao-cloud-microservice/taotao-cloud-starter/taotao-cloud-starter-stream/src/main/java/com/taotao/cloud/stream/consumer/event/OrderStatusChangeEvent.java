@@ -1,6 +1,5 @@
 //package com.taotao.cloud.stream.consumer.event;
 //
-//import cn.lili.modules.order.order.entity.dto.OrderMessage;
 //
 ///**
 // * 订单状态改变事件

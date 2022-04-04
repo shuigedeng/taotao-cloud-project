@@ -25,5 +25,5 @@ public class RefundOrderStatisticsDataVO {
     private String specs;
 
     @ApiModelProperty(value = "实际退款金额")
-    private Double finalPrice;
+    private BigDecimal finalPrice;
 }

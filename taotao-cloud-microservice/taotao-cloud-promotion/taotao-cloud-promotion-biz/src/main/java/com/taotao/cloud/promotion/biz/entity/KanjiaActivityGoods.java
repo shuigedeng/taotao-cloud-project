@@ -31,14 +31,14 @@ public class KanjiaActivityGoods extends BasePromotions<KanjiaActivityGoods, Lon
 
 	@Schema(description =  "结算价格")
 	@NotEmpty(message = "结算价格不能为空")
-	private Double settlementPrice;
+	private BigDecimal settlementPrice;
 
 	@Schema(description =  "商品原价")
-	private Double originalPrice;
+	private BigDecimal originalPrice;
 
 	@Schema(description =  "最低购买金额")
 	@NotEmpty(message = "最低购买金额不能为空")
-	private Double purchasePrice;
+	private BigDecimal purchasePrice;
 
 	@Schema(description =  "货品id")
 	@NotEmpty(message = "货品id不能为空")
@@ -60,9 +60,9 @@ public class KanjiaActivityGoods extends BasePromotions<KanjiaActivityGoods, Lon
 
 	@Schema(description =  "每人最低砍价金额")
 	@NotEmpty(message = "每人最低砍价金额不能为空")
-	private Double lowestPrice;
+	private BigDecimal lowestPrice;
 
 	@Schema(description =  "每人最高砍价金额")
 	@NotEmpty(message = "每人最高砍价金额不能为空")
-	private Double highestPrice;
+	private BigDecimal highestPrice;
 }

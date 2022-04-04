@@ -1,6 +1,5 @@
 package com.taotao.cloud.report.biz.entity.statistics.mapper;
 
-import cn.lili.modules.statistics.entity.dos.PlatformViewData;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;

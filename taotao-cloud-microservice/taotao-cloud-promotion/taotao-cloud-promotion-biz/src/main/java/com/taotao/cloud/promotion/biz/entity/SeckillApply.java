@@ -1,7 +1,5 @@
 package com.taotao.cloud.promotion.biz.entity;
 
-import cn.lili.modules.promotion.entity.enums.PromotionsApplyStatusEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
@@ -65,7 +63,7 @@ public class SeckillApply extends BaseSuperEntity<SeckillApply, Long> {
     @Schema(description =  "价格")
     @NotNull(message = "价格参数不能为空")
     @Min(value = 0, message = "价格参数不能小于0")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description =  "促销数量")
     @NotNull(message = "促销数量参数不能为空")
@@ -85,7 +83,7 @@ public class SeckillApply extends BaseSuperEntity<SeckillApply, Long> {
     private Integer salesNum;
 
     @Schema(description =  "商品原始价格")
-    private Double originalPrice;
+    private BigDecimal originalPrice;
 
 
 }

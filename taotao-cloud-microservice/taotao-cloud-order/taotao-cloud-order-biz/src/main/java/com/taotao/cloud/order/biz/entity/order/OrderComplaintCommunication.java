@@ -1,6 +1,5 @@
 package com.taotao.cloud.order.biz.entity.order;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;

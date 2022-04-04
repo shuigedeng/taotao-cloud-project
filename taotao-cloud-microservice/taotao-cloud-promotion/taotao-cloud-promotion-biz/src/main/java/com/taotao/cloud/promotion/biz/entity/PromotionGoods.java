@@ -1,13 +1,9 @@
 package com.taotao.cloud.promotion.biz.entity;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.promotion.entity.dto.KanjiaActivityGoodsDTO;
-import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory.PromotionGoods;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
@@ -79,7 +75,7 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
     private String promotionType;
 
     /**
-     * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum
+     * @see GoodsTypeEnum
      */
     @Schema(description =  "商品类型")
     private String goodsType;
@@ -91,10 +87,10 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
     private Integer num;
 
     @Schema(description =  "原价")
-    private Double originalPrice;
+    private BigDecimal originalPrice;
 
     @Schema(description =  "促销价格")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description =  "兑换积分")
     private Long points;

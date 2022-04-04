@@ -1,15 +1,9 @@
 package com.taotao.cloud.report.biz.entity.statistics.aop.aspect;
 
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.common.context.ThreadContextHolder;
-import cn.lili.common.utils.IpUtils;
-import cn.lili.common.utils.SpelUtil;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.goods.entity.vos.GoodsSkuVO;
-import cn.lili.modules.statistics.aop.PageViewPoint;
-import cn.lili.modules.statistics.aop.enums.PageViewEnum;
-import cn.lili.modules.statistics.util.StatisticsSuffix;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.utils.spel.SpelUtil;
+import com.taotao.cloud.report.biz.entity.statistics.aop.PageViewPoint;
+import com.taotao.cloud.report.biz.entity.statistics.aop.enums.PageViewEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -35,7 +29,7 @@ public class PageViewInterceptor {
 
 
 
-    @AfterReturning(returning = "rvt", pointcut = "@annotation(cn.lili.modules.statistics.aop.PageViewPoint)")
+    @AfterReturning(returning = "rvt", pointcut = "@annotation(modules.statistics.aop.PageViewPoint)")
     public void interceptor(JoinPoint point, Object rvt) {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();

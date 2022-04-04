@@ -93,7 +93,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 	//
 	///**
 	// * @return 促销状态
-	// * @see cn.lili.modules.promotion.entity.enums.PromotionsStatusEnum
+	// * @see PromotionsStatusEnum
 	// */
 	//@Override
 	//public String getPromotionStatus() {
