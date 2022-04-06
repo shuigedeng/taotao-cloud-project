@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.CachePrefix;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
@@ -188,7 +188,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
         order.setClientType(originOrder.getClientType());
         //订单日志
         String message = "赠品订单[" + order.getSn() + "]创建";
-        orderLogs.add(new OrderLog(order.getSn(), originOrder.getMemberId(), UserEnums.MEMBER.name(), originOrder.getMemberName(), message));
+        orderLogs.add(new OrderLog(order.getSn(), originOrder.getMemberId(), UserEnum.MEMBER.name(), originOrder.getMemberName(), message));
 
         //生成子订单
         for (GoodsSku goodsSku : skuList) {

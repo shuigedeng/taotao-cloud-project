@@ -3,12 +3,9 @@ package com.taotao.cloud.order.biz.entity.aftersale;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,17 +29,19 @@ import lombok.Setter;
 public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 
 	public static final String TABLE_NAME = "li_after_sale_reason";
+
 	/**
-	 * 应用ID
+	 * 售后原因
 	 */
-	@NotNull
-	@Column(name = "reason", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "reason", nullable = false, columnDefinition = "varchar(1024) not null comment '售后原因'")
 	private String reason;
 
 	/**
+	 * 售后类型
+	 *
 	 * @see AfterSaleTypeEnum
 	 */
-	@Column(name = "service_type", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "service_type", nullable = false, columnDefinition = "varchar(64) not null comment '售后类型'")
 	private String serviceType;
 
 }

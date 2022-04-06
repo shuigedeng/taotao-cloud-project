@@ -3,7 +3,7 @@ package com.taotao.cloud.report.biz.entity.statistics.serviceimpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class OrderComplaintStatisticsServiceImpl extends ServiceImpl<OrderCompla
     public long waitComplainNum() {
         QueryWrapper queryWrapper = Wrappers.query();
         queryWrapper.ne("complain_status", ComplaintStatusEnum.COMPLETE.name());
-        queryWrapper.eq(StringUtils.equals(UserContext.getCurrentUser().getRole().name(), UserEnums.STORE.name()),
+        queryWrapper.eq(StringUtils.equals(UserContext.getCurrentUser().getRole().name(), UserEnum.STORE.name()),
                 "store_id", UserContext.getCurrentUser().getStoreId());
         return this.count(queryWrapper);
     }

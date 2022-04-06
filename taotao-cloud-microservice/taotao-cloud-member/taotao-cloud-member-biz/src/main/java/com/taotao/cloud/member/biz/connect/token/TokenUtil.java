@@ -1,13 +1,8 @@
 package com.taotao.cloud.member.biz.connect.token;
 
 import com.google.gson.Gson;
-import com.taotao.cloud.common.enums.CachePrefix;
-import com.taotao.cloud.common.enums.UserEnums;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
+import com.taotao.cloud.common.enums.UserEnum;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import java.util.Date;
 
 /**
@@ -25,10 +20,10 @@ public class TokenUtil {
 	 * @param username 主体
 	 * @param claim    私有声明
 	 * @param longTerm 长时间特殊token 如：移动端，微信小程序等
-	 * @param userEnums 用户枚举
+	 * @param userEnum 用户枚举
 	 * @return TOKEN
 	 */
-	public Token createToken(String username, Object claim, boolean longTerm, UserEnums userEnums) {
+	public Token createToken(String username, Object claim, boolean longTerm, UserEnum userEnum) {
 	    Token token = new Token();
 	    //访问token
 	    //String accessToken = createToken(username, claim, tokenProperties.getTokenExpireTime());
@@ -50,10 +45,10 @@ public class TokenUtil {
 	 * 刷新token
 	 *
 	 * @param oldRefreshToken 刷新token
-	 * @param userEnums 用户枚举
+	 * @param userEnum 用户枚举
 	 * @return token
 	 */
-	public Token refreshToken(String oldRefreshToken, UserEnums userEnums) {
+	public Token refreshToken(String oldRefreshToken, UserEnum userEnum) {
 
 	    //Claims claims;
 	    //try {

@@ -6,6 +6,7 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "订单可进行的操作")
 public class AllowOperation implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -5109440403955543227L;
 
 	@Schema(description = "可以取消")
@@ -101,7 +103,6 @@ public class AllowOperation implements Serializable {
 	 * @param order
 	 */
 	public AllowOperation(OrderSimpleVO order) {
-
 		//获取订单类型
 		String status = order.getOrderStatus();
 		String payStatus = order.getPayStatus();

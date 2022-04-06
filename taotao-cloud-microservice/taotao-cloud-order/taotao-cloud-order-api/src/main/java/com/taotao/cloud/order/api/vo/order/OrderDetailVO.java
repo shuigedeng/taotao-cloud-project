@@ -71,6 +71,7 @@ public class OrderDetailVO implements Serializable {
 	 * 获取订单日志
 	 */
 	private List<OrderLog> orderLogs;
+
 	@Schema(description = "价格详情")
 	private String priceDetail;
 

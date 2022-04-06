@@ -39,11 +39,11 @@ public class AfterSaleAllowOperation {
 	/**
 	 * 根据各种状态构建对象
 	 *
-	 * @param afterSale
+	 * @param afterSaleVO
 	 */
-	public AfterSaleAllowOperation(AfterSale afterSale) {
+	public AfterSaleAllowOperation(AfterSaleVO afterSaleVO) {
 		//售后单状态
-		String serviceStatus = afterSale.getServiceStatus();
+		String serviceStatus = afterSaleVO.getServiceStatus();
 
 		//新提交售后
 		if (serviceStatus.equals(AfterSaleStatusEnum.APPLY.name())) {

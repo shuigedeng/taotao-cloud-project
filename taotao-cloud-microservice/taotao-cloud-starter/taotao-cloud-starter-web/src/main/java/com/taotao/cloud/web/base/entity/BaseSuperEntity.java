@@ -13,6 +13,7 @@ import javax.validation.groups.Default;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -31,7 +32,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	private static final long serialVersionUID = -4603650115461757622L;
 
 	@CreatedDate
-	@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
+	@Column(name = "create_time", updatable = false, columnDefinition = "DATETIME NULL DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
 	private LocalDateTime createTime;
 
@@ -40,8 +41,8 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	@TableField(value = "create_by", fill = FieldFill.INSERT)
 	private Long createdBy;
 
-	@CreatedDate
-	@Column(name = "update_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
+	@LastModifiedDate
+	@Column(name = "update_time", columnDefinition = "DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
 	private LocalDateTime updateTime;
 

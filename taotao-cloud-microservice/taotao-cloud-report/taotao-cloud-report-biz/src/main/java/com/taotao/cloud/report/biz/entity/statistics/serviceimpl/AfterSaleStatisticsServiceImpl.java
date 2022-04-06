@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class AfterSaleStatisticsServiceImpl extends ServiceImpl<AfterSaleStatist
         LambdaQueryWrapper<AfterSale> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(AfterSale::getServiceStatus, AfterSaleStatusEnum.APPLY.name());
         queryWrapper.eq(CharSequenceUtil.isNotEmpty(serviceType), AfterSale::getServiceType, serviceType);
-        queryWrapper.eq(CharSequenceUtil.equals(authUser.getRole().name(), UserEnums.STORE.name()),
+        queryWrapper.eq(CharSequenceUtil.equals(authUser.getRole().name(), UserEnum.STORE.name()),
                 AfterSale::getStoreId, authUser.getStoreId());
         return this.count(queryWrapper);
     }

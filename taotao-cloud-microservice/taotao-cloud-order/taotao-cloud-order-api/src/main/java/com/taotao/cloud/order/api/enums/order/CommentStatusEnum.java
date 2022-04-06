@@ -13,12 +13,10 @@ public enum CommentStatusEnum {
 	 * 未完成的评论
 	 */
 	UNFINISHED("未完成评论"),
-
 	/**
 	 * 待追评的评论信息
 	 */
 	WAIT_CHASE("待追评评论"),
-
 	/**
 	 * 已经完成评论
 	 */

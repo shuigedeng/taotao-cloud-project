@@ -133,7 +133,7 @@ public class SecurityUtil {
 	 * @return {@link Long }
 	 * @since 2021-09-02 14:56:38
 	 */
-	public static String getUserId() {
+	public static Long getUserId() {
 		SecurityUser user = getUser();
 		if (Objects.isNull(user)) {
 			throw new BusinessException("用户未登录");

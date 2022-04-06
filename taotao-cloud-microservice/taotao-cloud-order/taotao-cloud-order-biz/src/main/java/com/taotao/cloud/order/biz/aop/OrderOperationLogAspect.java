@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.biz.aop;
 
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.spel.SpelUtil;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import com.taotao.cloud.order.biz.service.trade.OrderLogService;
@@ -29,7 +29,7 @@ public class OrderOperationLogAspect {
 		try {
 			//日志对象拼接
 			//默认操作人员，系统操作
-			String userName = "系统操作", id = "-1", role = UserEnums.SYSTEM.getRole();
+			String userName = "系统操作", id = "-1", role = UserEnum.SYSTEM.getRole();
 			if (UserContext.getCurrentUser() != null) {
 				//日志对象拼接
 				userName = UserContext.getCurrentUser().getUsername();

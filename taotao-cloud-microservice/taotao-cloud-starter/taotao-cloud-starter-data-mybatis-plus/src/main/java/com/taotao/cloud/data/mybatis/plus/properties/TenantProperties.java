@@ -53,14 +53,14 @@ public class TenantProperties {
 	 * 需要排除的多租户的表
 	 */
 	private List<String> ignoreTables = Arrays.asList(
-		"mate_sys_menu",
-		"mate_sys_dict",
-		"mate_sys_client",
-		"mate_sys_tenant",
-		"mate_sys_role_permission",
-		"mate_sys_config",
-		"mate_sys_data_source",
-		"mate_sys_attachment");
+		"tt_sys_menu",
+		"tt_sys_dict",
+		"tt_sys_client",
+		"tt_sys_tenant",
+		"tt_sys_role_permission",
+		"tt_sys_config",
+		"tt_sys_data_source",
+		"tt_sys_attachment");
 
 	/**
 	 * 多租户字段名称

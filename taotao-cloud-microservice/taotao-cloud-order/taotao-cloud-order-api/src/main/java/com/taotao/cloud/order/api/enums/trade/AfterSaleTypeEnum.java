@@ -3,7 +3,6 @@ package com.taotao.cloud.order.api.enums.trade;
 /**
  * 售后类型
  */
-
 public enum AfterSaleTypeEnum {
 	/**
 	 * 售后服务类型枚举

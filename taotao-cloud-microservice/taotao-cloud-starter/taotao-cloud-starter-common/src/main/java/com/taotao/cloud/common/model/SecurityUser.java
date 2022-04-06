@@ -47,7 +47,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	/**
 	 * userId
 	 */
-	private String userId;
+	private Long userId;
 	/**
 	 * 账号
 	 */
@@ -138,7 +138,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 * @param roles       权限
 	 * @since 2021-09-02 19:18:58
 	 */
-	public SecurityUser(String userId,
+	public SecurityUser(Long userId,
 		String username,
 		String password,
 		Set<String> permissions,
@@ -209,11 +209,11 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		this.storeId = storeId;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

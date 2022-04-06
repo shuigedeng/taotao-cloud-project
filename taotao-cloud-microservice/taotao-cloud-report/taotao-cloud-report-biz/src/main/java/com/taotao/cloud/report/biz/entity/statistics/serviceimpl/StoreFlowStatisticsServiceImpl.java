@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class StoreFlowStatisticsServiceImpl extends ServiceImpl<StoreFlowStatist
 
         //商家查询，则增加商家判定
         AuthUser authUser = UserContext.getCurrentUser();
-        if (authUser.getRole().equals(UserEnums.STORE)) {
+        if (authUser.getRole().equals(UserEnum.STORE)) {
             queryWrapper.eq("store_id", authUser.getStoreId());
         }
         //大于今天凌晨

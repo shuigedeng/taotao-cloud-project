@@ -1,27 +1,31 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Setter;
 
 /**
  * 售后搜索参数
  **/
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后搜索参数")
-public class AfterSaleSearchParams extends PageVO {
+public class AfterSaleSearchParams extends PageParam {
 
 	@Schema(description = "售后服务单号")
 	private String sn;
@@ -59,13 +63,11 @@ public class AfterSaleSearchParams extends PageVO {
 	@Schema(description = "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
 	private String serviceStatus;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Schema(description = "开始时间")
-	private Date startDate;
+	@Schema(description = "开始时间 yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime startDate;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Schema(description = "结束时间")
-	private Date endDate;
+	@Schema(description = "结束时间 yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime endDate;
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
@@ -77,20 +79,17 @@ public class AfterSaleSearchParams extends PageVO {
 		}
 
 		//按买家查询
-		if (StringUtil.equals(UserContext.getCurrentUser().getRole().name(),
-			UserEnums.MEMBER.name())) {
-			queryWrapper.eq("member_id", UserContext.getCurrentUser().getId());
-		}
-		//按卖家查询
-		if (StringUtil.equals(UserContext.getCurrentUser().getRole().name(),
-			UserEnums.STORE.name())) {
-			queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
+		if (SecurityUtil.getUser().getType() == UserEnum.MEMBER.getCode()) {
+			queryWrapper.eq("member_id", SecurityUtil.getUser().getUserId());
 		}
 
-		if (StringUtil.equals(UserContext.getCurrentUser().getRole().name(),
-			UserEnums.MANAGER.name())
-			&& StringUtil.isNotEmpty(storeId)
-		) {
+		//按卖家查询
+		if (SecurityUtil.getUser().getType() == UserEnum.STORE.getCode()) {
+			queryWrapper.eq("store_id", SecurityUtil.getUser().getStoreId());
+		}
+
+		if (SecurityUtil.getUser().getType() == UserEnum.MANAGER.getCode() && StringUtil.isNotEmpty(
+			storeId)) {
 			queryWrapper.eq("store_id", storeId);
 		}
 		if (StringUtil.isNotEmpty(memberName)) {

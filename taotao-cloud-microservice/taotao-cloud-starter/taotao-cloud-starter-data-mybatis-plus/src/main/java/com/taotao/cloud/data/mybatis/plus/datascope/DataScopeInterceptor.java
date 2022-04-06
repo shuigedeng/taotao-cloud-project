@@ -46,7 +46,6 @@ import org.apache.ibatis.session.RowBounds;
 	Integer.class})})
 public class DataScopeInterceptor  implements InnerInterceptor {
 
-
 	public DataScopeInterceptor() {
 	}
 
@@ -62,7 +61,7 @@ public class DataScopeInterceptor  implements InnerInterceptor {
 
 		String scopeName = dataScope.getScopeName();
 		String selfScopeName = dataScope.getSelfScopeName();
-		String userId =
+		Long userId =
 			dataScope.getUserId() == null ? SecurityUtil.getUserId() : dataScope.getUserId();
 		List<Long> orgIds = dataScope.getOrgIds();
 		DataScopeTypeEnum dsType = DataScopeTypeEnum.SELF;
@@ -71,7 +70,7 @@ public class DataScopeInterceptor  implements InnerInterceptor {
 			//userId
 
 			//dsType orgIds
-//			Map<String, Object> result = function.apply(userId);
+			//Map<String, Object> result = function.apply(userId);
 			Map<String, Object> result = null;
 			if (result == null) {
 				return;

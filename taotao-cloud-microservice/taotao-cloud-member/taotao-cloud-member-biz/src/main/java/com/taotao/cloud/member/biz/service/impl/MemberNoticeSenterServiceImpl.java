@@ -5,6 +5,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.member.api.enums.SendTypeEnum;
+import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.entity.MemberNotice;
 import com.taotao.cloud.member.biz.entity.MemberNoticeSenter;
 import com.taotao.cloud.member.biz.mapper.MemberNoticeSenterMapper;
@@ -51,7 +52,7 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSente
                     MemberNotice memberNotice;
                     for (String id : ids) {
                         memberNotice = new MemberNotice();
-                        memberNotice.setIsRead(false);
+                        memberNotice.setRead(false);
                         memberNotice.setContent(memberNoticeSenter.getContent());
                         memberNotice.setMemberId(id);
                         memberNotice.setTitle(memberNoticeSenter.getTitle());
@@ -66,7 +67,7 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSente
                 MemberNotice memberNotice;
                 for (Member member : members) {
                     memberNotice = new MemberNotice();
-                    memberNotice.setIsRead(false);
+                    memberNotice.setRead(false);
                     memberNotice.setContent(memberNoticeSenter.getContent());
                     memberNotice.setMemberId(member.getId());
                     memberNotice.setTitle(memberNoticeSenter.getTitle());

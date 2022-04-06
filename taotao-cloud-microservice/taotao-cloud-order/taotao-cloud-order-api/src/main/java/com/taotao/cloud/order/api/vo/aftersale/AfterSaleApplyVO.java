@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
+import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -47,9 +48,6 @@ public class AfterSaleApplyVO {
 	@Schema(description = "退款方式", allowableValues = "ORIGINAL,OFFLINE")
 	private String refundWay;
 
-	/**
-	 * @see enums
-	 */
 	@Schema(description = "账号类型", allowableValues = "ALIPAY,WECHATPAY,MEMBERWALLET,BANKTRANSFER")
 	private String accountType;
 

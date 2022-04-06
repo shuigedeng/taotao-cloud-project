@@ -1,23 +1,21 @@
 package com.taotao.cloud.order.biz.entity.aftersale;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 售后表
@@ -36,231 +34,229 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	public static final String TABLE_NAME = "tt_after_sale";
 
 	/**
-	 * 应用ID
+	 * 售后服务单号
 	 */
-	@Schema(description =  "售后服务单号")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "sn", columnDefinition = "varchar(64) null comment '售后服务单号'")
 	private String sn;
 
 	/**
-	 * 应用ID
+	 * 订单编号
 	 */
-	@Schema(description =  "订单编号")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "order_sn", columnDefinition = "varchar(64) null comment '订单编号'")
 	private String orderSn;
+
 	/**
-	 * 应用ID
+	 * 订单货物编号
 	 */
-	@Schema(description =  "订单货物编号")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "order_item_sn", columnDefinition = "varchar(64) null comment '订单货物编号'")
 	private String orderItemSn;
+
 	/**
-	 * 应用ID
+	 * 交易编号
 	 */
-	@Schema(description =  "交易编号")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "trade_sn", columnDefinition = "varchar(64) not null comment '交易编号'")
 	private String tradeSn;
+
 	/**
-	 * 应用ID
+	 * 会员ID
 	 */
-	@Schema(description =  "会员ID")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String memberId;
+	@Column(name = "member_id", columnDefinition = "bigint null comment '会员ID'")
+	private Long memberId;
+
 	/**
-	 * 应用ID
+	 * 会员名称
 	 */
-	@Schema(description =  "会员名称")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_name", columnDefinition = "varchar(64) null comment '会员名称'")
 	private String memberName;
+
 	/**
-	 * 应用ID
+	 * 商家ID
 	 */
-	@Schema(description =  "商家ID")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String storeId;
+	@Column(name = "store_id", columnDefinition = "bigint null comment '商家ID'")
+	private Long storeId;
+
 	/**
-	 * 应用ID
+	 * 商家名称
 	 */
-	@Schema(description =  "商家名称")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "store_name", columnDefinition = "varchar(64) null comment '商家名称'")
 	private String storeName;
 
-	//商品信息
+	// ****************商品信息************
 	/**
-	 * 应用ID
+	 * 商品ID
 	 */
-	@Schema(description =  "商品ID")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String goodsId;
+	@Column(name = "goods_id", columnDefinition = "bigint null comment '商品ID'")
+	private Long goodsId;
+
 	/**
-	 * 应用ID
+	 * 货品ID
 	 */
-	@Schema(description =  "货品ID")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String skuId;
+	@Column(name = "sku_id", columnDefinition = "bigint null comment '货品ID'")
+	private Long skuId;
+
 	/**
-	 * 应用ID
+	 * 申请数量
 	 */
-	@Schema(description =  "申请数量")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "num", columnDefinition = "int null comment '申请数量'")
 	private Integer num;
 
 	/**
-	 * 应用ID
+	 * 商品图片
 	 */
-	@Schema(description =  "商品图片")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "goods_image", columnDefinition = "text null comment '商品图片'")
 	private String goodsImage;
+
 	/**
-	 * 应用ID
+	 * 商品名称
 	 */
-	@Schema(description =  "商品名称")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "goods_name", columnDefinition = "varchar(255) null comment '商品名称'")
 	private String goodsName;
+
 	/**
-	 * 应用ID
+	 * 规格json
 	 */
-	@Schema(description =  "规格json")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "specs", columnDefinition = "varchar(1024) null comment '规格json'")
 	private String specs;
+
 	/**
-	 * 应用ID
+	 * 实际金额
 	 */
-	@Schema(description =  "实际金额")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "flow_price", columnDefinition = "decimal(10,2) null comment '实际金额'")
 	private BigDecimal flowPrice;
 
-	//交涉信息
+	// ***************交涉信息************
 	/**
-	 * 应用ID
+	 * 申请原因
 	 */
-	@Schema(description =  "申请原因")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Schema(description = "申请原因")
+	@Column(name = "reason", columnDefinition = "varchar(255) null comment '申请原因'")
 	private String reason;
+
 	/**
-	 * 应用ID
+	 * 问题描述
 	 */
-	@Schema(description =  "问题描述")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "problem_desc", columnDefinition = "text null comment '问题描述'")
 	private String problemDesc;
+
 	/**
-	 * 应用ID
+	 * 评价图片
 	 */
-	@Schema(description =  "评价图片")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "after_sale_image", columnDefinition = "text null comment '评价图片'")
 	private String afterSaleImage;
 
 	/**
+	 * 售后类型
+	 *
 	 * @see AfterSaleTypeEnum
 	 */
-	@Schema(description =  "售后类型", allowableValues = "RETURN_GOODS,RETURN_MONEY")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Schema(description = "售后类型", allowableValues = "RETURN_GOODS,RETURN_MONEY")
+	@Column(name = "service_type", columnDefinition = "varchar(64) null comment '售后类型'")
 	private String serviceType;
 
 	/**
+	 * 售后单状态
+	 *
 	 * @see AfterSaleStatusEnum
 	 */
-	@Schema(description =  "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Schema(description = "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
+	@Column(name = "service_status", columnDefinition = "varchar(64) null comment '售后单状态'")
 	private String serviceStatus;
 
-	//退款信息
+	//*************退款信息***************
 
 	/**
+	 * 退款方式
+	 *
 	 * @see AfterSaleRefundWayEnum
 	 */
-	@Schema(description =  "退款方式", allowableValues = "ORIGINAL,OFFLINE")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Schema(description = "退款方式", allowableValues = "ORIGINAL,OFFLINE")
+	@Column(name = "refund_way", columnDefinition = "varchar(64) null comment '退款方式'")
 	private String refundWay;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "账号类型", allowableValues = "ALIPAY,WECHATPAY,BANKTRANSFER")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String accountType;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "银行账户")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String bankAccountNumber;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "银行开户名")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String bankAccountName;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "银行开户行")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String bankDepositName;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "商家备注")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String auditRemark;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "订单支付方式返回的交易号")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String payOrderNo;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "申请退款金额")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private BigDecimal applyRefundPrice;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "实际退款金额")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private BigDecimal actualRefundPrice;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "退还积分")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private Integer refundPoint;
-	/**
-	 * 应用ID
-	 */
-	@Schema(description =  "退款时间")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private LocalDateTime refundTime;
 
 	/**
-	 * 买家物流信息
+	 * 账号类型
 	 */
+	@Schema(description = "账号类型", allowableValues = "ALIPAY,WECHATPAY,BANKTRANSFER")
+	@Column(name = "account_type", columnDefinition = "varchar(64) null comment '账号类型'")
+	private String accountType;
+
 	/**
-	 * 应用ID
+	 * 银行账户
 	 */
-	@Schema(description =  "发货单号")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String mLogisticsNo;
+	@Column(name = "bank_account_number", columnDefinition = "varchar(64) null comment '银行账户'")
+	private String bankAccountNumber;
+
 	/**
-	 * 应用ID
+	 * 银行开户名
 	 */
-	@Schema(description =  "物流公司CODE")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String mLogisticsCode;
+	@Column(name = "bank_account_name", columnDefinition = "varchar(64) null comment '银行开户名'")
+	private String bankAccountName;
+
 	/**
-	 * 应用ID
+	 * 银行开户行
 	 */
-	@Schema(description =  "物流公司名称")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String mLogisticsName;
+	@Column(name = "bank_deposit_name", columnDefinition = "varchar(64) null comment '银行开户行'")
+	private String bankDepositName;
+
 	/**
-	 * 应用ID
+	 * 商家备注
 	 */
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Schema(description =  "买家发货时间")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private LocalDateTime mDeliverTime;
+	@Column(name = "audit_remark", columnDefinition = "varchar(255) null comment '商家备注'")
+	private String auditRemark;
+
+	/**
+	 * 订单支付方式返回的交易号
+	 */
+	@Column(name = "pay_order_no", columnDefinition = "varchar(64) null comment '订单支付方式返回的交易号'")
+	private String payOrderNo;
+
+	/**
+	 * 申请退款金额
+	 */
+	@Column(name = "apply_refund_price", columnDefinition = "decimal(10,2) null comment '申请退款金额'")
+	private BigDecimal applyRefundPrice;
+
+	/**
+	 * 实际退款金额
+	 */
+	@Column(name = "actual_refund_price", columnDefinition = "decimal(10,2) null comment '实际退款金额'")
+	private BigDecimal actualRefundPrice;
+
+	/**
+	 * 退还积分
+	 */
+	@Column(name = "refund_point", columnDefinition = "int null comment '退还积分'")
+	private Integer refundPoint;
+
+	/**
+	 * 退款时间
+	 */
+	@Column(name = "refund_time", columnDefinition = "DATETIME null comment '退款时间'")
+	private LocalDateTime refundTime;
+
+	// *****************买家物流信息****************
+	/**
+	 * 发货单号
+	 */
+	@Column(name = "logistics_no", columnDefinition = "varchar(64) null comment '发货单号'")
+	private String logisticsNo;
+
+	/**
+	 * 物流公司CODE
+	 */
+	@Column(name = "logistics_code", columnDefinition = "varchar(64) null comment '物流公司CODE'")
+	private String logisticsCode;
+
+	/**
+	 * 物流公司名称
+	 */
+	@Column(name = "logistics_name", columnDefinition = "varchar(64) null comment '物流公司名称'")
+	private String logisticsName;
+
+	/**
+	 * 买家发货时间
+	 */
+	@Column(name = "deliver_time", columnDefinition = "DATETIME null comment '买家发货时间'")
+	private LocalDateTime deliverTime;
 
 }

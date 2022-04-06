@@ -1,13 +1,14 @@
 package com.taotao.cloud.order.api.vo.cart;
 
+import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -503,7 +503,7 @@ public enum CachePrefix {
 	 * @param user 角色
 	 * @return 缓存key值 + 用户端
 	 */
-	public String getPrefix(UserEnums user) {
+	public String getPrefix(UserEnum user) {
 	    return "{" + this.name() + "_" + user.name() + "}_";
 	}
 }
