@@ -21,24 +21,23 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @MappedSuperclass
 public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
-	extends Model<T>
-	implements Serializable {
+	extends Model<T> implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4603650115461757622L;
 
 	@Id
+	@GenericGenerator(name="snowFlakeIdGenerator", strategy="com.taotao.cloud.data.jpa.bean.SnowFlakeIdGenerator")
+	@GeneratedValue(generator="snowFlakeIdGenerator")
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigint comment 'id'")
-	@TableId(value = "id", type = IdType.INPUT)
+	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigint not null comment 'id'")
+	@TableId(value = "id", type = IdType.ASSIGN_ID)
 	private I id;
 
 	public I getId() {
 		return id;
 	}
 
-	@GenericGenerator(name="snowFlakeIdGenerator", strategy="com.taotao.cloud.data.jpa.bean.SnowFlakeIdGenerator")
-	@GeneratedValue(generator="snowFlakeIdGenerator")
 	public void setId(I id) {
 		this.id = id;
 	}

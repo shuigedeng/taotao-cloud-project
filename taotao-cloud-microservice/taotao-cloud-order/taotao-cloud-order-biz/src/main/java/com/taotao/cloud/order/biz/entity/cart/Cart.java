@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 提现申请表
+ * 购物车表
  *
  * @author shuigedeng
  * @since 2020/11/13 09:46
@@ -40,7 +40,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "tt_cart")
-@org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "提现申请表")
+@org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "购物车表")
 public class Cart extends JpaSuperEntity<Long> {
 
 	private static final long serialVersionUID = 6887296988458221221L;
@@ -67,12 +67,12 @@ public class Cart extends JpaSuperEntity<Long> {
 	 * 提现金额
 	 */
 	@Column(name = "amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '提现金额'")
-	private BigDecimal amount = BigDecimal.ZERO;
+	private BigDecimal amount;
 
 	/**
 	 * 钱包余额
 	 */
 	@Column(name = "balance_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
-	private BigDecimal balanceAmount = BigDecimal.ZERO;
+	private BigDecimal balanceAmount ;
 
 }

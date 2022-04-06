@@ -1,12 +1,12 @@
 package com.taotao.cloud.order.api.dto.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Map;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 用于计算优惠券结算详情
@@ -14,11 +14,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "用于计算优惠券结算详情")
 public class MemberCouponDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 8276369124551043085L;
 
 	/**
@@ -29,12 +28,11 @@ public class MemberCouponDTO implements Serializable {
 	/**
 	 * 优惠券详情
 	 */
-	//private MemberCoupon memberCoupon;
-	//
-	//public MemberCouponDTO(Map<String, BigDecimal> skuDetail, MemberCoupon memberCoupon) {
-	//	this.skuDetail = skuDetail;
-	//	this.memberCoupon = memberCoupon;
-	//}
+	private MemberCoupon memberCoupon;
 
+	public MemberCouponDTO(Map<String, BigDecimal> skuDetail, MemberCoupon memberCoupon) {
+		this.skuDetail = skuDetail;
+		this.memberCoupon = memberCoupon;
+	}
 
 }

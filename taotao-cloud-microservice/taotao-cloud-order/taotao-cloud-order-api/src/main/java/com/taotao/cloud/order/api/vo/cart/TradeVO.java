@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.vo.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "整比交易对象")
 public class TradeVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4563542542090139404L;
 
 	/**

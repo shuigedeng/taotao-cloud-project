@@ -4,14 +4,12 @@ package com.taotao.cloud.member.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import com.taotao.cloud.common.enums.UserEnums;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.dto.MemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberSearchPageDTO;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
-import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.entity.Member;
@@ -216,7 +214,7 @@ public interface MemberService extends IService<Member> {
     /**
      * 登出
      *
-     * @param userEnums token角色类型
+     * @param userEnum token角色类型
      */
-    void logout(UserEnums userEnums);
+    void logout(UserEnum userEnum);
 }

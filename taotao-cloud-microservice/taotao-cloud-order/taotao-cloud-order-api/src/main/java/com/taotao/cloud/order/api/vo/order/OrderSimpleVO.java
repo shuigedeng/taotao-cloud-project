@@ -2,6 +2,7 @@ package com.taotao.cloud.order.api.vo.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -10,6 +11,7 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -142,7 +144,7 @@ public class OrderSimpleVO {
 	private String deliverStatus;
 
 	public List<OrderItemVO> getOrderItems() {
-		if (StringUtils.isEmpty(groupGoodsId)) {
+		if (StringUtil.isEmpty(groupGoodsId)) {
 			return new ArrayList<>();
 		}
 		List<OrderItemVO> orderItemVOS = new ArrayList<>();

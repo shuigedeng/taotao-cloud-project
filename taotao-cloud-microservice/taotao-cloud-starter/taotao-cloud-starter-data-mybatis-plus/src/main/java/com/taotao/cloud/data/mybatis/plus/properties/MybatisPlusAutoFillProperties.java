@@ -63,6 +63,14 @@ public class MybatisPlusAutoFillProperties {
 	 * 更新时间字段名
 	 */
 	private String updateTimeField = "updateTime";
+	/**
+	 * 创建时间字段名
+	 */
+	private String createByField = "createBy";
+	/**
+	 * 更新时间字段名
+	 */
+	private String updateByField = "updateBy";
 
 	public Boolean getEnabled() {
 		return enabled;
@@ -102,5 +110,21 @@ public class MybatisPlusAutoFillProperties {
 
 	public void setUpdateTimeField(String updateTimeField) {
 		this.updateTimeField = updateTimeField;
+	}
+
+	public String getCreateByField() {
+		return createByField;
+	}
+
+	public void setCreateByField(String createByField) {
+		this.createByField = createByField;
+	}
+
+	public String getUpdateByField() {
+		return updateByField;
+	}
+
+	public void setUpdateByField(String updateByField) {
+		this.updateByField = updateByField;
 	}
 }

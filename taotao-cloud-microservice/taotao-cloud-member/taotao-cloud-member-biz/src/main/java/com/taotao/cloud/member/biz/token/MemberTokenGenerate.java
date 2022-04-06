@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.token;
 
 import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
 import com.taotao.cloud.member.biz.entity.Member;
@@ -46,14 +46,14 @@ public class MemberTokenGenerate extends AbstractTokenGenerate<Member> {
         String destination = rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_LOGIN.name();
         rocketMQTemplate.asyncSend(destination, member, RocketmqSendCallbackBuilder.commonCallback());
 
-        AuthUser authUser = new AuthUser(member.getUsername(), member.getId(), member.getNickName(), member.getFace(), UserEnums.MEMBER);
+        AuthUser authUser = new AuthUser(member.getUsername(), member.getId(), member.getNickName(), member.getFace(), UserEnum.MEMBER);
         //登陆成功生成token
-        return tokenUtil.createToken(member.getUsername(), authUser, longTerm, UserEnums.MEMBER);
+        return tokenUtil.createToken(member.getUsername(), authUser, longTerm, UserEnum.MEMBER);
     }
 
     @Override
     public Token refreshToken(String refreshToken) {
-        return tokenUtil.refreshToken(refreshToken, UserEnums.MEMBER);
+        return tokenUtil.refreshToken(refreshToken, UserEnum.MEMBER);
     }
 
 }

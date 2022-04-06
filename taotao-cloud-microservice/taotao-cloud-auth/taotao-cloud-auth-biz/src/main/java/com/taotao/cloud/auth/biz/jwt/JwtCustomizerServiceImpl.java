@@ -42,7 +42,7 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 				if (authentication != null) {
 					if (authentication instanceof UsernamePasswordAuthenticationToken) {
 						SecurityUser principal = (SecurityUser) authentication.getPrincipal();
-						String userId = principal.getUserId();
+						Long userId = principal.getUserId();
 
 						Set<String> authorities = principal
 							.getAuthorities()

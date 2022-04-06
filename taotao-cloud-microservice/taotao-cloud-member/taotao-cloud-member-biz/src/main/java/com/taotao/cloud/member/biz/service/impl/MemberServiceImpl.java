@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
@@ -586,11 +586,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	 * 登出
 	 */
 	@Override
-	public void logout(UserEnums userEnums) {
+	public void logout(UserEnum userEnum) {
 		// 获取当前用户的token
 		String currentUserToken = RequestUtil.getRequest().getHeader("token");
 		if (CharSequenceUtil.isNotEmpty(currentUserToken)) {
-			redisRepository.del(CachePrefix.ACCESS_TOKEN.getPrefix(userEnums) + currentUserToken);
+			redisRepository.del(CachePrefix.ACCESS_TOKEN.getPrefix(userEnum) + currentUserToken);
 		}
 	}
 

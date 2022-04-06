@@ -23,7 +23,7 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
 import com.taotao.cloud.order.biz.aop.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -89,7 +89,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	private RocketMQTemplate rocketMQTemplate;
 
 	@Override
-	public IPage<AfterSaleVO> getAfterSalePages(AfterSaleSearchParams saleSearchParams) {
+	public IPage<AfterSaleVOVO123> getAfterSalePages(AfterSaleSearchParams saleSearchParams) {
 		return baseMapper.queryByParams(PageUtil.initPage(saleSearchParams),
 			saleSearchParams.queryWrapper());
 	}
@@ -100,7 +100,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	}
 
 	@Override
-	public AfterSaleVO getAfterSale(String sn) {
+	public AfterSaleVOVO123 getAfterSale(String sn) {
 		return this.baseMapper.getAfterSaleVO(sn);
 	}
 

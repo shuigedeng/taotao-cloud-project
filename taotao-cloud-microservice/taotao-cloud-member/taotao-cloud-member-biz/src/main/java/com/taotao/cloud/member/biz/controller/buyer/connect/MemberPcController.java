@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.controller.buyer.connect;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.enums.UserEnums;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +55,7 @@ public class MemberPcController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/logout")
 	public Result<Object> logout() {
-		this.memberService.logout(UserEnums.MEMBER);
+		this.memberService.logout(UserEnum.MEMBER);
 		return ResultUtil.success();
 	}
 
