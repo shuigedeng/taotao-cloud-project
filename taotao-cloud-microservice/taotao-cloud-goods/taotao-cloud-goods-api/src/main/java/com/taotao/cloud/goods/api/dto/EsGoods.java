@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,11 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EsGoods {
 
+	@Schema(description = "skuId")
 	private String skuId;
 
+	@Schema(description = "商品id")
 	private String goodsId;
 
+	@Schema(description = "商品名称")
 	private String goodsName;
-
 
 }

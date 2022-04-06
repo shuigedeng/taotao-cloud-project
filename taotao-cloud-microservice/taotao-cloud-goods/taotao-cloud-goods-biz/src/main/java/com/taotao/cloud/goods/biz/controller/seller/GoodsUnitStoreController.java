@@ -12,6 +12,7 @@ import com.taotao.cloud.goods.biz.service.GoodsUnitService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -22,14 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 店铺端,商品计量单位接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "商户管理端-商品计量单位API", description = "商户管理端-商品计量单位API")
 @RequestMapping("/goods/seller/store/goods/goodsUnit")
 public class GoodsUnitStoreController {
 
-	@Autowired
-	private GoodsUnitService goodsUnitService;
+	/**
+	 * 商品计量单位服务
+	 */
+	private final GoodsUnitService goodsUnitService;
 
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取商品计量单位")

@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -34,14 +35,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,商品规格接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-商品规格管理API", description = "平台管理端-商品规格管理API")
 @RequestMapping("/goods/manager/spec")
 public class SpecificationManagerController {
 
-	@Autowired
-	private SpecificationService specificationService;
+	/**
+	 * 商品规格服务
+	 */
+	private final SpecificationService specificationService;
 
 	@Operation(summary = "获取所有可用规格", description = "获取所有可用规格", method = CommonConstant.GET)
 	@RequestLogger(description = "获取所有可用规格")
@@ -73,8 +77,8 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Valid @RequestBody Specification specification,
-		@PathVariable String id) {
-		specification.setId(Long.valueOf(id));
+		@PathVariable Long id) {
+		specification.setId(id);
 		return Result.success(specificationService.saveOrUpdate(specification));
 	}
 

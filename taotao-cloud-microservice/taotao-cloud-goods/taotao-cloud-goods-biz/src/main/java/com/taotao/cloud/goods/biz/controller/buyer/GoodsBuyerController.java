@@ -71,8 +71,8 @@ public class GoodsBuyerController {
 	@GetMapping(value = "/sku/{goodsId}/{skuId}")
 	//@PageViewPoint(type = PageViewEnum.SKU, id = "#id")
 	public Result<Map<String, Object>> getSku(
-		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable("goodsId") String goodsId,
-		@Parameter(description = "SKU_ID") @NotNull(message = "SKU ID不能为空") @PathVariable("skuId") String skuId) {
+		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId,
+		@Parameter(description = "SKU_ID") @NotNull(message = "SKU ID不能为空") @PathVariable("skuId") Long skuId) {
 		// 读取选中的列表
 		Map<String, Object> map = goodsSkuService.getGoodsSkuDetail(goodsId, skuId);
 		return Result.success(map);

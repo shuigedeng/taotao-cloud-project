@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GoodsCompleteMessage {
 
-
 	@Schema(description = "商品id")
 	private String goodsId;
 

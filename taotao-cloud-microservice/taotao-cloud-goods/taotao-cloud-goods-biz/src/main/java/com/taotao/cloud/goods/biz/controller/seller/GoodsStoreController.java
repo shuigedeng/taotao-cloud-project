@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -41,6 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 店铺端,商品接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "商户管理端-商品管理API", description = "商户管理端-商品管理API")
@@ -50,19 +52,16 @@ public class GoodsStoreController {
 	/**
 	 * 商品
 	 */
-	@Autowired
-	private GoodsService goodsService;
+	private final GoodsService goodsService;
 	/**
 	 * 商品sku
 	 */
-	@Autowired
-	private GoodsSkuService goodsSkuService;
-
+	private final GoodsSkuService goodsSkuService;
 	/**
 	 * 店铺详情
 	 */
-	//@Autowired
-	//private StoreDetailService storeDetailService;
+	private final StoreDetailService storeDetailService;
+
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")

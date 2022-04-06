@@ -3,10 +3,8 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.dto.BrandPageDTO;
-import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import java.util.List;
 
@@ -62,5 +60,14 @@ public interface BrandService extends IService<Brand> {
 	 * @return 更新结果
 	 */
 	Boolean brandDisable(String brandId, boolean disable);
+
+	/**
+	 * 获取所有可用品牌
+	 *
+	 * @return 品牌列表
+	 * @since 2022-04-06 14:40:02
+	 */
+	List<Brand> getAllAvailable();
+
 
 }

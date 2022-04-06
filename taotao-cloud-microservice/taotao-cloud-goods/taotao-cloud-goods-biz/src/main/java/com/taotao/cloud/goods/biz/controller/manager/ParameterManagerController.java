@@ -8,7 +8,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,20 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,分类绑定参数组管理接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-分类绑定参数组管理API", description = "平台管理端-分类绑定参数组管理API")
 @RequestMapping("/goods/manager/parameters")
 public class ParameterManagerController {
 
-	@Autowired
-	private ParametersService parametersService;
+	/**
+	 * 分类绑定参数服务
+	 */
+	private final ParametersService parametersService;
 
 	@Operation(summary = "添加参数", description = "添加参数", method = CommonConstant.POST)
 	@RequestLogger(description = "添加参数添加参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> save(@Valid @RequestBody Parameters parameters) {
+	public Result<Boolean> save(@Validated @RequestBody Parameters parameters) {
 		return Result.success(parametersService.save(parameters));
 	}
 
@@ -43,7 +46,7 @@ public class ParameterManagerController {
 	@RequestLogger(description = "编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<Boolean> update(@Valid @RequestBody Parameters parameters) {
+	public Result<Boolean> update(@Validated @RequestBody Parameters parameters) {
 		return Result.success(parametersService.updateParameter(parameters));
 	}
 

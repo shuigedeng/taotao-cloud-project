@@ -13,13 +13,16 @@ import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.dto.BrandPageDTO;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
+import com.taotao.cloud.goods.biz.mapstruct.BrandMapStruct;
 import com.taotao.cloud.goods.biz.service.BrandService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,品牌接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-品牌管理API", description = "平台管理端-品牌管理API")
@@ -45,16 +50,15 @@ public class BrandManagerController {
 	/**
 	 * 品牌
 	 */
-	@Autowired
-	private BrandService brandService;
+	private final BrandService brandService;
 
-	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger(description = "通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<BrandVO> get(@NotNull @PathVariable String id) {
+	public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable String id) {
 		Brand brand = brandService.getById(id);
-		return Result.success(BeanUtil.copyProperties(brand, BrandVO.class));
+		return Result.success(BrandMapStruct.INSTANCE.brandToBrandVO(brand));
 	}
 
 	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌", method = CommonConstant.GET)
@@ -62,15 +66,15 @@ public class BrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all/available")
 	public Result<List<BrandVO>> getAllAvailable() {
-		List<Brand> list = brandService.list(new QueryWrapper<Brand>().eq("delete_flag", 0));
-		return Result.success(BeanUtil.copyProperties(list, BrandVO.class));
+		List<Brand> list = brandService.getAllAvailable();
+		return Result.success(BrandMapStruct.INSTANCE.brandsToBrandVOs(list));
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<BrandVO>> getByPage(BrandPageDTO page) {
+	public Result<PageModel<BrandVO>> page(@Validated BrandPageDTO page) {
 		IPage<Brand> brandPage = brandService.getBrandsByPage(page);
 		return Result.success(PageModel.convertMybatisPage(brandPage, BrandVO.class));
 	}
@@ -79,15 +83,15 @@ public class BrandManagerController {
 	@RequestLogger(description = "新增品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> save(@Valid BrandDTO brand) {
+	public Result<Boolean> save(@Validated @RequestBody BrandDTO brand) {
 		return Result.success(brandService.addBrand(brand));
 	}
 
-	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.POST)
-	@RequestLogger(description = "更新数据")
+	@Operation(summary = "更新品牌", description = "更新品牌", method = CommonConstant.PUT)
+	@RequestLogger(description = "更新品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@PathVariable String id, @Valid BrandDTO brand) {
+	public Result<Boolean> update(@PathVariable String id, @Validated BrandDTO brand) {
 		brand.setId(id);
 		return Result.success(brandService.updateBrand(brand));
 	}

@@ -3,6 +3,7 @@ package com.taotao.cloud.goods.api.dto;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -15,7 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 /**

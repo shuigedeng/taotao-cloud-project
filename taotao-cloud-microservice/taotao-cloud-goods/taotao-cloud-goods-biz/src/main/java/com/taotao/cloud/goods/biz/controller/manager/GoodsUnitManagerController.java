@@ -16,6 +16,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -31,14 +32,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,商品计量单位接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-商品计量单位管理API", description = "平台管理端-商品计量单位管理API")
 @RequestMapping("/goods/manager/goodsUnit")
 public class GoodsUnitManagerController {
 
-	@Autowired
-	private GoodsUnitService goodsUnitService;
+	/**
+	 * 商品计量服务
+	 */
+	private final GoodsUnitService goodsUnitService;
 
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取商品计量单位")

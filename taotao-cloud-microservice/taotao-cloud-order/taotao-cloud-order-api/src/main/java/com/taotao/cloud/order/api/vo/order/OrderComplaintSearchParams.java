@@ -2,6 +2,7 @@ package com.taotao.cloud.order.api.vo.order;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

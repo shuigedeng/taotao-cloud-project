@@ -12,6 +12,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,分类绑定参数组接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-分类绑定参数组API", description = "平台管理端-分类绑定参数组API")
@@ -33,16 +35,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryParameterGroupManagerController {
 
 	/**
-	 * 参数组
+	 * 商品参数组服务
 	 */
-	@Autowired
-	private ParametersService parametersService;
-
+	private final ParametersService parametersService;
 	/**
-	 * 分类参数
+	 * 分类绑定参数组服务
 	 */
-	@Autowired
-	private CategoryParameterGroupService categoryParameterGroupService;
+	private final CategoryParameterGroupService categoryParameterGroupService;
 
 	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息", method = CommonConstant.GET)
 	@RequestLogger(description = "查询某分类下绑定的参数信息")

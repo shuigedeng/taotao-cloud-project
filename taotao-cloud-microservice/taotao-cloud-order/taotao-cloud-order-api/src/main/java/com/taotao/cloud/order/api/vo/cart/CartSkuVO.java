@@ -49,10 +49,8 @@ public class CartSkuVO extends CartBase implements Serializable {
 
 	@Schema(description = "小记")
 	private BigDecimal utilPrice;
-	/**
-	 * 是否选中，要去结算 0:未选中 1:已选中，默认
-	 */
-	@Schema(description = "是否选中，要去结算")
+
+	@Schema(description = "是否选中，要去结算 0:未选中 1:已选中，默认")
 	private Boolean checked;
 
 	@Schema(description = "是否免运费")

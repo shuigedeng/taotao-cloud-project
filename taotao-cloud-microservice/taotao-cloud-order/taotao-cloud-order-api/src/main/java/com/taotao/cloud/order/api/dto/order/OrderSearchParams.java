@@ -3,6 +3,7 @@ package com.taotao.cloud.order.api.dto.order;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
@@ -25,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单查询参数")
-public class OrderSearchParams extends PageVO {
+public class OrderSearchParams extends PageParam {
 
 	private static final long serialVersionUID = -6380573339089959194L;
 

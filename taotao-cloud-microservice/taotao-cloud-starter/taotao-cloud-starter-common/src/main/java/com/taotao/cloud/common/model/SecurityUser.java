@@ -384,7 +384,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 
 	public static final class SecurityUserBuilder {
 
-		private String userId;
+		private Long userId;
 		private String account;
 		private String username;
 		private String nickname;

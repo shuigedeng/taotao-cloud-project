@@ -21,5 +21,13 @@ public interface SpecificationService extends IService<Specification> {
 	 */
 	Boolean deleteSpecification(List<String> ids);
 
+	/**
+	 * 分页查询
+	 *
+	 * @param specName 名称
+	 * @param page     分页参数
+	 * @return 数据
+	 * @since 2022-04-06 16:10:19
+	 */
 	PageModel<SpecificationVO> getPage(String specName, PageParam page);
 }

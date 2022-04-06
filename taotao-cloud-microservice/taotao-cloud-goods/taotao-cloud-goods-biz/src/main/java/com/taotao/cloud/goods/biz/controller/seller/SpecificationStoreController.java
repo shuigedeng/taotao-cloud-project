@@ -9,7 +9,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 商户管理端-规格接口API
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/goods/seller/store/goods/spec")
 @Tag(name = "商户管理端-规格接口API", description = "商户管理端-规格接口API")
 public class SpecificationStoreController {
 
-	@Autowired
-	private CategorySpecificationService categorySpecificationService;
+	/**
+	 * 商品规格服务
+	 */
+	private final CategorySpecificationService categorySpecificationService;
 
 	@Operation(summary = "获取分类规格", description = "获取分类规格", method = CommonConstant.GET)
 	@RequestLogger(description = "获取分类规格")

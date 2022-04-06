@@ -27,9 +27,7 @@ public class SpecValueVO implements Serializable {
 
 	@Schema(description = "该规格是否有图片，1 有 0 没有")
 	private Integer specType;
-	/**
-	 * 规格图片
-	 */
+
 	@Schema(description = "规格的图片")
 	private List<SpecImages> specImage;
 

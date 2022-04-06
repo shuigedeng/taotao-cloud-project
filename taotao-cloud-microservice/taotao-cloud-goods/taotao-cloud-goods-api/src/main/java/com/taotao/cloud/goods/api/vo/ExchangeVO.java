@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.api.vo;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

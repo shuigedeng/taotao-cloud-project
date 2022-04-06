@@ -18,25 +18,15 @@ import lombok.NoArgsConstructor;
 @Schema(description = "订单投诉搜索参数")
 public class OrderComplaintCommunicationSearchParams {
 
-	/**
-	 * 投诉id
-	 */
 	@Schema(description = "投诉id")
 	private String complainId;
 
-	/**
-	 * 所属，买家/卖家
-	 */
 	@Schema(description = "所属，买家/卖家")
 	private String owner;
-	/**
-	 * 对话所属名称
-	 */
+
 	@Schema(description = "对话所属名称")
 	private String ownerName;
-	/**
-	 * 对话所属id,卖家id/买家id
-	 */
+
 	@Schema(description = "对话所属id,卖家id/买家id")
 	private String ownerId;
 

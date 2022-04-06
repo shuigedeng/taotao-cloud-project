@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import java.io.Serializable;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -63,27 +64,27 @@ public class GoodsOperateAllowable implements Serializable {
 
 	public Boolean getAllowDown() {
 		//上架状态 不在回收站的商品可以下架
-		return marketEnable == GoodsStatusEnum.UPPER.name() && deleteFlag == false;
+		return Objects.equals(marketEnable, GoodsStatusEnum.UPPER.name()) && !deleteFlag;
 	}
 
 	public Boolean getAllowReduction() {
 		//下架状态 在回收站的商品可以还原
-		return marketEnable == GoodsStatusEnum.DOWN.name() && deleteFlag == true;
+		return Objects.equals(marketEnable, GoodsStatusEnum.DOWN.name()) && deleteFlag;
 	}
 
 	public Boolean getAllowClear() {
 		//下架状态 在回收站的商品可以彻底删除
-		return marketEnable == GoodsStatusEnum.DOWN.name() && deleteFlag == true;
+		return Objects.equals(marketEnable, GoodsStatusEnum.DOWN.name()) && deleteFlag;
 	}
 
 	public Boolean getAllowUpper() {
 		//下架状态 未删除的商品可以上架
-		return marketEnable == GoodsStatusEnum.DOWN.name() && deleteFlag == false;
+		return Objects.equals(marketEnable, GoodsStatusEnum.DOWN.name()) && !deleteFlag;
 	}
 
 	public Boolean getAllowDelete() {
 		//下架状态 未删除的商品可以删除
-		return marketEnable == GoodsStatusEnum.DOWN.name() && deleteFlag == false;
+		return Objects.equals(marketEnable, GoodsStatusEnum.DOWN.name()) && !deleteFlag;
 	}
 
 }

@@ -23,7 +23,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param id SkuId
 	 * @return 商品SKU缓存ID
 	 */
-	static String getCacheKeys(String id) {
+	static String getCacheKeys(Long id) {
 		return CachePrefix.GOODS_SKU.getPrefix() + id;
 	}
 
@@ -33,7 +33,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param id SkuId
 	 * @return 商品SKU缓存ID
 	 */
-	static String getStockCacheKey(String id) {
+	static String getStockCacheKey(Long id) {
 		return CachePrefix.SKU_STOCK.getPrefix() + id;
 	}
 
@@ -66,7 +66,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param skuId skuid
 	 */
-	Boolean clearCache(String skuId);
+	Boolean clearCache(Long skuId);
 
 	/**
 	 * 从redis缓存中获取商品SKU信息
@@ -74,7 +74,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param id SkuId
 	 * @return 商品SKU信息
 	 */
-	GoodsSku getGoodsSkuByIdFromCache(String id);
+	GoodsSku getGoodsSkuByIdFromCache(Long id);
 
 	/**
 	 * 获取商品sku详情
@@ -83,7 +83,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param skuId   skuID
 	 * @return 商品sku详情
 	 */
-	Map<String, Object> getGoodsSkuDetail(String goodsId, String skuId);
+	Map<String, Object> getGoodsSkuDetail(Long goodsId, Long skuId);
 
 	/**
 	 * 批量从redis中获取商品SKU信息
@@ -91,7 +91,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param ids SkuId集合
 	 * @return 商品SKU信息集合
 	 */
-	List<GoodsSku> getGoodsSkuByIdFromCache(List<String> ids);
+	List<GoodsSku> getGoodsSkuByIdFromCache(List<Long> ids);
 
 	/**
 	 * 获取goodsId下所有的goodsSku
@@ -99,7 +99,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param goodsId 商品id
 	 * @return goodsSku列表
 	 */
-	List<GoodsSkuVO> getGoodsListByGoodsId(String goodsId);
+	List<GoodsSkuVO> getGoodsListByGoodsId(Long goodsId);
 
 	/**
 	 * 获取goodsId下所有的goodsSku
@@ -107,7 +107,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param goodsId 商品id
 	 * @return goodsSku列表
 	 */
-	List<GoodsSku> getGoodsSkuListByGoodsId(String goodsId);
+	List<GoodsSku> getGoodsSkuListByGoodsId(Long goodsId);
 
 	/**
 	 * 根据goodsSku组装goodsSkuVO
@@ -168,7 +168,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param skuId    SKUId
 	 * @param quantity 设置的库存数量
 	 */
-	Boolean updateStock(String skuId, Integer quantity);
+	Boolean updateStock(Long skuId, Integer quantity);
 
 	/**
 	 * 获取商品sku库存
@@ -176,7 +176,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param skuId 商品skuId
 	 * @return 库存数量
 	 */
-	Integer getStock(String skuId);
+	Integer getStock(Long skuId);
 
 	/**
 	 * 修改商品库存字段
@@ -190,7 +190,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param skuId SKUId
 	 */
-	Boolean updateGoodsSkuCommentNum(String skuId);
+	Boolean updateGoodsSkuCommentNum(Long skuId);
 
 	/**
 	 * 根据商品id获取全部skuId的集合
@@ -198,5 +198,5 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param goodsId goodsId
 	 * @return 全部skuId的集合
 	 */
-	List<String> getSkuIdsByGoodsId(String goodsId);
+	List<String> getSkuIdsByGoodsId(Long goodsId);
 }

@@ -2,6 +2,8 @@ package com.taotao.cloud.distribution.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,9 +54,7 @@ public class DistributionGoodsVO {
 	@Schema(description = "佣金金额")
 	private BigDecimal commission;
 
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Schema(description = "添加时间")
-	private Date createTime;
+	private LocalDateTime createTime;
 
 }

@@ -1,7 +1,11 @@
 package com.taotao.cloud.order.api.dto.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

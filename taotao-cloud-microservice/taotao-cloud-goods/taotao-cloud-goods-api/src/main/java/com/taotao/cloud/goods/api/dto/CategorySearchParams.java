@@ -2,6 +2,9 @@ package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +32,9 @@ public class CategorySearchParams {
 	private BigDecimal sortOrder;
 
 	@Schema(description = "佣金比例")
+	@Digits(integer = 9, fraction=2, message = "佣金比例格式不正确")
+	@DecimalMin(value = "0.00", message = "佣金比例最小为0.00")
+	@DecimalMax(value = "1.00", message = "佣金比例最大为1.00")
 	private BigDecimal commissionRate;
 
 	@Schema(description = "父节点名称")

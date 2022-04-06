@@ -15,6 +15,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,14 +31,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 店铺端,草稿商品接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "商户管理端-草稿商品API", description = "商户管理端-草稿商品API")
 @RequestMapping("/goods/seller/store/goods/draftGoods")
 public class DraftGoodsStoreController {
 
-	@Autowired
-	private DraftGoodsService draftGoodsService;
+	/**
+	 * 草稿商品服务
+	 */
+	private final DraftGoodsService draftGoodsService;
 
 	@Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取草稿商品列表")

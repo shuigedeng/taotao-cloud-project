@@ -17,21 +17,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品参数业务层实现
  */
+@AllArgsConstructor
 @Service
 public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Parameters> implements
 	ParametersService {
 
-
-	@Autowired
-	private GoodsService goodsService;
+	/**
+	 * 商品服务
+	 */
+	private final GoodsService goodsService;
 
 	//@Autowired
 	//private RocketmqCustomProperties rocketmqCustomProperties;
@@ -39,12 +40,6 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	//@Autowired
 	//private RocketMQTemplate rocketMQTemplate;
 
-	/**
-	 * 更新参数组信息
-	 *
-	 * @param parameters 参数组信息
-	 * @return 是否更新成功
-	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateParameter(Parameters parameters) {
