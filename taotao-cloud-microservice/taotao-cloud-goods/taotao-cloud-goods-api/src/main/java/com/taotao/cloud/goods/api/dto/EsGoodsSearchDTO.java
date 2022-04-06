@@ -43,6 +43,6 @@ public class EsGoodsSearchDTO {
 	private String storeCatId;
 
 	@Schema(hidden = true)
-	private Map<String, List<String>> notShowCol = new HashMap<>();
+	private Map<String, List<String>> notShowCol;
 
 }

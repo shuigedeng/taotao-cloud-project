@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "售后dto")
 public class AfterSaleDTO {
 

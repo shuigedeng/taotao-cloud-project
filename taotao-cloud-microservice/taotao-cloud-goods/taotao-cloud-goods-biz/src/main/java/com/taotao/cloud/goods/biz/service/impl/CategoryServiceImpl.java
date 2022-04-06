@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,25 +32,28 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 商品分类业务层实现
  */
+@AllArgsConstructor
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements
 	CategoryService {
 
 	private static final String DELETE_FLAG_COLUMN = "delete_flag";
 	/**
-	 * 缓存
+	 * 缓存服务
 	 */
-	@Autowired
-	private RedisRepository redisRepository;
-
-	@Autowired
-	private CategoryBrandService categoryBrandService;
-
-	@Autowired
-	private CategoryParameterGroupService categoryParameterGroupService;
-
-	@Autowired
-	private CategorySpecificationService categorySpecificationService;
+	private final RedisRepository redisRepository;
+	/**
+	 * 分类品牌服务
+	 */
+	private final CategoryBrandService categoryBrandService;
+	/**
+	 * 分类绑定参数服务
+	 */
+	private final CategoryParameterGroupService categoryParameterGroupService;
+	/**
+	 * 分类规格服务
+	 */
+	private final CategorySpecificationService categorySpecificationService;
 
 	@Override
 	public List<Category> dbList(String parentId) {
@@ -62,12 +65,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		return this.getById(id);
 	}
 
-	/**
-	 * 根据分类id集合获取所有分类根据层级排序
-	 *
-	 * @param ids 分类ID集合
-	 * @return 商品分类列表
-	 */
 	@Override
 	public List<Category> listByIdsOrderByLevel(List<String> ids) {
 		return this.list(new LambdaQueryWrapper<Category>().in(Category::getId, ids)
@@ -157,12 +154,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		return categoryVOList;
 	}
 
-	/**
-	 * 获取指定分类的分类名称
-	 *
-	 * @param ids 指定分类id集合
-	 * @return 分类名称集合
-	 */
 	@Override
 	public List<String> getCategoryNameByIds(List<String> ids) {
 		List<String> categoryName = new ArrayList<>();

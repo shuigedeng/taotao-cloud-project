@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 店铺端,商品分类接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "商户管理端-商品分类API", description = "商户管理端-商品分类API")
@@ -31,20 +33,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryStoreController {
 
 	/**
-	 * 分类
+	 * 分类服务
 	 */
-	@Autowired
-	private CategoryService categoryService;
+	private final CategoryService categoryService;
 	/**
-	 * 分类品牌
+	 * 分类品牌服务
 	 */
-	@Autowired
-	private CategoryBrandService categoryBrandService;
+	private final CategoryBrandService categoryBrandService;
 	/**
-	 * 店铺详情
+	 * 店铺详情服务
 	 */
-	//@Autowired
-	//private StoreDetailService storeDetailService;
+	private final StoreDetailService storeDetailService;
 
 	@Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类", method = CommonConstant.GET)
 	@RequestLogger(description = "获取店铺经营的分类")

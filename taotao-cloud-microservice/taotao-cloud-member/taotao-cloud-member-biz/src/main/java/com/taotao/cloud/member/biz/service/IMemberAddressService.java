@@ -18,7 +18,7 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param memberId 会员ID
 	 * @return 会员地址分页列表
 	 */
-	PageModel<MemberAddressVO> getAddressByMember(PageParam page, String memberId);
+	PageModel<MemberAddressVO> getAddressByMember(PageParam page, Long memberId);
 
 	/**
 	 * 根据地址ID获取当前会员地址信息
@@ -26,7 +26,7 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param id 地址ID
 	 * @return 当前会员的地址信息
 	 */
-	MemberAddress getMemberAddress(String id);
+	MemberAddress getMemberAddress(Long id);
 
 	/**
 	 * 根据地址ID获取当前会员地址信息
@@ -57,6 +57,6 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param id 收货地址ID
 	 * @return 操作状态
 	 */
-	Boolean removeMemberAddress(String id);
+	Boolean removeMemberAddress(Long id);
 
 }

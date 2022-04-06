@@ -53,7 +53,7 @@ public class MemberCollectionController {
 	@RequestLogger(description = "查询会员收藏列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{type}")
-	public Result<PageModel<GoodsCollectionVO>> goodsListPage(
+	public Result<PageModel<StoreCollectionVO>> goodsListPage(
 		@Parameter(description = "类型", required = true) @PathVariable String type,
 		@Validated PageParam page) {
 		if (goods.equals(type)) {

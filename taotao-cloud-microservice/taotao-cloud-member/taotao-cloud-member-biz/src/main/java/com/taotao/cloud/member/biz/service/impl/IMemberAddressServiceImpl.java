@@ -24,7 +24,7 @@ public class IMemberAddressServiceImpl extends
 	ServiceImpl<MemberAddressMapper, MemberAddress> implements IMemberAddressService {
 
 	@Override
-	public PageModel<MemberAddressVO> getAddressByMember(PageParam page, String memberId) {
+	public PageModel<MemberAddressVO> getAddressByMember(PageParam page, Long memberId) {
 		IPage<MemberAddress> memberAddressPage = this.page(page.buildMpPage(),
 			new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getMemberId, memberId));
 
@@ -32,7 +32,7 @@ public class IMemberAddressServiceImpl extends
 	}
 
 	@Override
-	public MemberAddress getMemberAddress(String id) {
+	public MemberAddress getMemberAddress(Long id) {
 		return this.getOne(new LambdaQueryWrapper<MemberAddress>()
 			.eq(MemberAddress::getMemberId, Objects.requireNonNull(SecurityUtil.getUserId()))
 			.eq(MemberAddress::getId, id));
@@ -59,7 +59,7 @@ public class IMemberAddressServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateMemberAddress(MemberAddress memberAddress) {
 		MemberAddress originalMemberAddress = this.getMemberAddress(
-			String.valueOf(memberAddress.getId()));
+			memberAddress.getId());
 
 		if (originalMemberAddress != null &&
 			originalMemberAddress.getMemberId()
@@ -78,7 +78,7 @@ public class IMemberAddressServiceImpl extends
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean removeMemberAddress(String id) {
+	public Boolean removeMemberAddress(Long id) {
 		return this.remove(new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getId, id));
 	}
 

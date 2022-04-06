@@ -1,8 +1,11 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,14 +20,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单支付日志：实际为订单部分字段提取过来的一个vo")
-public class PaymentLog extends BaseEntity {
-
+public class PaymentLog {
 
 	private static final long serialVersionUID = 2233811628066468683L;
-	@ApiModelProperty("订单编号")
+
+	@Schema(description = "订单编号")
 	private String sn;
 
-	@ApiModelProperty("交易编号 关联Trade")
+	@Schema(description = "交易编号 关联Trade")
 	private String tradeSn;
 
 	@Schema(description = "店铺ID")
@@ -55,7 +58,6 @@ public class PaymentLog extends BaseEntity {
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date paymentTime;
 
-
 	@Schema(description = "总价格")
 	private BigDecimal flowPrice;
 
@@ -73,5 +75,4 @@ public class PaymentLog extends BaseEntity {
 	 */
 	@Schema(description = "订单类型")
 	private String orderType;
-
 }

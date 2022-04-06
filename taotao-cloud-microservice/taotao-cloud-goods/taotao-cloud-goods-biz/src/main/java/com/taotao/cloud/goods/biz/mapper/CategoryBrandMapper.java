@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -22,5 +23,5 @@ public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 		FROM li_brand b INNER join li_category_brand cb on b.id = cb.brand_id and cb.category_id = #{categoryId}
 		where b.delete_flag = 0
 		""")
-	List<CategoryBrandVO> getCategoryBrandList(String categoryId);
+	List<CategoryBrandVO> getCategoryBrandList(@Param(value = "categoryId") String categoryId);
 }

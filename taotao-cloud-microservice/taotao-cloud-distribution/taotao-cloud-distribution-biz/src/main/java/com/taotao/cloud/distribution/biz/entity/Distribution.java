@@ -13,11 +13,11 @@ import org.hibernate.validator.constraints.Length;
 /**
  * 分销员表
  */
+@Data
 @Entity
 @Table(name = Distribution.TABLE_NAME)
 @TableName(Distribution.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Distribution.TABLE_NAME, comment = "分销员表")
-@Data
 public class Distribution extends BaseSuperEntity<Distribution, Long> {
 
 	public static final String TABLE_NAME = "tt_distribution";

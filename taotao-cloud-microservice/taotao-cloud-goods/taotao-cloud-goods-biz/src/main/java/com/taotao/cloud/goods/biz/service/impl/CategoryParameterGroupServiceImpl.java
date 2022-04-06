@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,19 +29,20 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 分类绑定参数组接口实现
  */
+@AllArgsConstructor
 @Service
 public class CategoryParameterGroupServiceImpl extends
 	ServiceImpl<CategoryParameterGroupMapper, CategoryParameterGroup> implements
 	CategoryParameterGroupService {
 
 	/**
-	 * 商品参数
+	 * 商品参数服务
 	 */
-	@Autowired
-	private ParametersService parametersService;
-
-	@Autowired
-	private GoodsService goodsService;
+	private final ParametersService parametersService;
+	/**
+	 * 商品服务
+	 */
+	private final GoodsService goodsService;
 
 	@Override
 	public List<ParameterGroupVO> getCategoryParams(String categoryId) {
@@ -58,12 +60,6 @@ public class CategoryParameterGroupServiceImpl extends
 		return this.list(new QueryWrapper<CategoryParameterGroup>().eq("category_id", categoryId));
 	}
 
-	/**
-	 * 更新分类参数组绑定信息
-	 *
-	 * @param categoryParameterGroup 分类参数组信息
-	 * @return 是否成功
-	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {

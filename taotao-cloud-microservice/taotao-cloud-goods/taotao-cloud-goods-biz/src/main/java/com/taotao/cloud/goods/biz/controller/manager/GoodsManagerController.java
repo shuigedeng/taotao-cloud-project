@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,商品管理接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-商品管理API", description = "平台管理端-商品管理API")
@@ -37,15 +39,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsManagerController {
 
 	/**
-	 * 商品
+	 * 商品服务
 	 */
-	@Autowired
-	private GoodsService goodsService;
+	private final GoodsService goodsService;
 	/**
-	 * 规格商品
+	 * 规格商品服务
 	 */
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final GoodsSkuService goodsSkuService;
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取")

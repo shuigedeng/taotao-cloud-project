@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,11 @@ public class GoodsInfo {
 	private String name;
 
 	/**
-	 * 1：一口价（只需要传入price，price2不传） 2：价格区间（price字段为左边界，price2字段为右边界，price和price2必传）
-	 * 3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传
+	 * 1：一口价（只需要传入price，price2不传）
+	 * <p></p>
+	 * 2：价格区间（price字段为左边界，price2字段为右边界，price和price2必传）
+	 * <p></p>
+	 * 3：显示折扣价（price字段为原价，price2字段为现价 price和price2必传
 	 */
 	@Schema(description = "价格类型")
 	private Integer priceType;

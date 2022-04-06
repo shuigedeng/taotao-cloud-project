@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,20 +15,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommodityDTO {
 
-	/**
-	 * 商品ID
-	 */
-	private Integer goods_id;
-	/**
-	 * 商品名称
-	 */
+	@Schema(description = "商品ID")
+	private Integer goodsId;
+
+	@Schema(description = "商品名称")
 	private String name;
-	/**
-	 * 地址
-	 */
+
+	@Schema(description = "url")
 	private String url;
-	/**
-	 * 审核状态
-	 */
-	private Integer audit_status;
+
+	@Schema(description = "审核状态")
+	private Integer auditStatus;
 }

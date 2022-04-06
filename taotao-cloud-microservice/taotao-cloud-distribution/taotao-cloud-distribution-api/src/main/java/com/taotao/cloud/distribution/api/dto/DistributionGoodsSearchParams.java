@@ -2,23 +2,27 @@ package com.taotao.cloud.distribution.api.dto;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 分销员商品查询条件
  */
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销员商品查询条件")
-public class DistributionGoodsSearchParams extends PageVO {
+public class DistributionGoodsSearchParams extends PageParam {
 
 	@Schema(description = "商品ID")
 	private String goodsId;

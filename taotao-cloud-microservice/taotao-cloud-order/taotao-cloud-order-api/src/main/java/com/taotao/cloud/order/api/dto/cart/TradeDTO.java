@@ -54,7 +54,6 @@ public class TradeDTO implements Serializable {
 	@Schema(description = "是否需要发票")
 	private Boolean needReceipt;
 
-
 	@Schema(description = "不支持配送方式")
 	private List<CartSkuVO> notSupportFreight;
 
@@ -62,6 +61,7 @@ public class TradeDTO implements Serializable {
 	 * 购物车类型
 	 */
 	private CartTypeEnum cartTypeEnum;
+
 	/**
 	 * 店铺备注
 	 */
@@ -128,7 +128,6 @@ public class TradeDTO implements Serializable {
 
 	public TradeDTO(CartTypeEnum cartTypeEnum) {
 		this.cartTypeEnum = cartTypeEnum;
-
 		this.skuList = new ArrayList<>();
 		this.cartList = new ArrayList<>();
 		this.skuPromotionDetail = new HashMap<>();

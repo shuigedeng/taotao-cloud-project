@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "投诉通信VO")
 @NoArgsConstructor
 public class OrderComplaintCommunicationVO extends OrderComplaintCommunication {

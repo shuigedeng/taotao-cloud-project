@@ -4,6 +4,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
@@ -274,7 +275,7 @@ public class EsGoodsIndexServiceImpl implements EsGoodsIndexService {
 	 * @param id 商品索引信息
 	 */
 	@Override
-	public Boolean deleteIndexById(String id) {
+	public Boolean deleteIndexById(Long id) {
 		//goodsIndexRepository.deleteById(id);
 		return true;
 	}
@@ -285,7 +286,7 @@ public class EsGoodsIndexServiceImpl implements EsGoodsIndexService {
 	 * @param ids 商品索引id集合
 	 */
 	@Override
-	public Boolean deleteIndexByIds(List<String> ids) {
+	public Boolean deleteIndexByIds(List<Long> ids) {
 		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
 		queryBuilder.withQuery(QueryBuilders.termsQuery("id", ids.toArray()));
 		//this.restTemplate.delete(queryBuilder.build(), EsGoodsIndex.class);
@@ -306,38 +307,38 @@ public class EsGoodsIndexServiceImpl implements EsGoodsIndexService {
 		//索引初始化，因为mapping结构问题：
 		//但是如果索引已经自动生成过，这里就不会创建索引，设置mapping，所以这里决定在初始化索引的同时，将已有索引删除，重新创建
 
-		////如果索引存在，则删除，重新生成。 这里应该有更优解。
-		//if (this.indexExist(indexName)) {
-		//	deleteIndexRequest(indexName);
-		//}
-		//
-		////如果索引不存在，则创建索引
-		//createIndexRequest(indexName);
-		//Map<String, Integer> resultMap = new HashMap<>(16);
-		//final String KEY_SUCCESS = "success";
-		//final String KEY_FAIL = "fail";
-		//final String KEY_PROCESSED = "processed";
-		//resultMap.put("total", goodsIndexList.size());
-		//resultMap.put(KEY_SUCCESS, 0);
-		//resultMap.put(KEY_FAIL, 0);
-		//resultMap.put(KEY_PROCESSED, 0);
-		//cache.put(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
-		//if (!goodsIndexList.isEmpty()) {
-		//	goodsIndexRepository.deleteAll();
-		//	for (EsGoodsIndex goodsIndex : goodsIndexList) {
-		//		try {
-		//			addIndex(goodsIndex);
-		//			resultMap.put(KEY_SUCCESS, resultMap.get(KEY_SUCCESS) + 1);
-		//		} catch (Exception e) {
-		//			log.error("商品{}生成索引错误！", goodsIndex);
-		//			resultMap.put(KEY_FAIL, resultMap.get(KEY_FAIL) + 1);
-		//		}
-		//		resultMap.put(KEY_PROCESSED, resultMap.get(KEY_PROCESSED) + 1);
-		//		cache.put(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
-		//	}
-		//}
-		//cache.put(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
-		//cache.put(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
+		//如果索引存在，则删除，重新生成。 这里应该有更优解。
+		if (this.indexExist(indexName)) {
+			deleteIndexRequest(indexName);
+		}
+
+		//如果索引不存在，则创建索引
+		createIndexRequest(indexName);
+		Map<String, Integer> resultMap = new HashMap<>(16);
+		final String KEY_SUCCESS = "success";
+		final String KEY_FAIL = "fail";
+		final String KEY_PROCESSED = "processed";
+		resultMap.put("total", goodsIndexList.size());
+		resultMap.put(KEY_SUCCESS, 0);
+		resultMap.put(KEY_FAIL, 0);
+		resultMap.put(KEY_PROCESSED, 0);
+		cache.put(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
+		if (!goodsIndexList.isEmpty()) {
+			goodsIndexRepository.deleteAll();
+			for (EsGoodsIndex goodsIndex : goodsIndexList) {
+				try {
+					addIndex(goodsIndex);
+					resultMap.put(KEY_SUCCESS, resultMap.get(KEY_SUCCESS) + 1);
+				} catch (Exception e) {
+					log.error("商品{}生成索引错误！", goodsIndex);
+					resultMap.put(KEY_FAIL, resultMap.get(KEY_FAIL) + 1);
+				}
+				resultMap.put(KEY_PROCESSED, resultMap.get(KEY_PROCESSED) + 1);
+				cache.put(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
+			}
+		}
+		cache.put(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
+		cache.put(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
 		return true;
 	}
 

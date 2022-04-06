@@ -29,7 +29,7 @@ public class StoreFlowQueryDTO {
 	@Schema(description = "过滤只看分销订单")
 	private Boolean justDistribution;
 
-	@ApiModelProperty("结算单")
+	@Schema(description = "结算单")
 	private Bill bill;
 
 	@Schema(description = "分页")

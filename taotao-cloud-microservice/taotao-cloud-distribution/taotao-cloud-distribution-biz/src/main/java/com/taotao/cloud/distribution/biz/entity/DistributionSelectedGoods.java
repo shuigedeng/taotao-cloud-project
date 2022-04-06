@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DistributionSelectedGoods extends BaseIdEntity {
 
-
     @Schema(description =  "分销员ID")
     private String distributionId;
 

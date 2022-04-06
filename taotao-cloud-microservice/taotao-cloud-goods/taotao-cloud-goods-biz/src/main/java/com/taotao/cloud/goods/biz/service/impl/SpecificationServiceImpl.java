@@ -18,28 +18,25 @@ import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.SpecificationService;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * 商品规格业务层实现
  */
+@AllArgsConstructor
 @Service
 public class SpecificationServiceImpl extends
-	ServiceImpl<SpecificationMapper, Specification> implements
-	SpecificationService {
+	ServiceImpl<SpecificationMapper, Specification> implements SpecificationService {
 
 	/**
-	 * 分类-规格绑定
+	 * 分类-规格绑定服务
 	 */
-	@Autowired
-	private CategorySpecificationService categorySpecificationService;
+	private final CategorySpecificationService categorySpecificationService;
 	/**
-	 * 分类
+	 * 分类服务
 	 */
-	@Autowired
-	private CategoryServiceImpl categoryService;
-
+	private final CategoryServiceImpl categoryService;
 
 	@Override
 	public Boolean deleteSpecification(List<String> ids) {

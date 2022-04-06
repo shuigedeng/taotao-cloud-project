@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -72,7 +73,7 @@ public class DistributionGoods extends BaseIdEntity {
 
     @NotNull(message = "佣金金额")
     @Schema(description =  "佣金金额", required = true)
-    private BigDecimal commission = 0D;
+    private BigDecimal commission;
 
     @Max(value = 99999999, message = "价格不能超过99999999")
     @Schema(description =  "商品价格")

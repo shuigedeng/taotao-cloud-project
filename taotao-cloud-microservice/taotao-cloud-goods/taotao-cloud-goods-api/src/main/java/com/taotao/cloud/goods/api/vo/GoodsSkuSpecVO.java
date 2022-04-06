@@ -16,9 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GoodsSkuSpecVO {
 
-
 	@Schema(description = "商品skuId")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "商品sku所包含规格")
 	private List<SpecValueVO> specValues;

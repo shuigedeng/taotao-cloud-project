@@ -74,14 +74,14 @@ public interface EsGoodsIndexService {
 	 *
 	 * @param id 商品索引信息
 	 */
-	Boolean deleteIndexById(String id);
+	Boolean deleteIndexById(Long id);
 
 	/**
 	 * 删除索引
 	 *
 	 * @param ids 商品索引id集合
 	 */
-	Boolean deleteIndexByIds(List<String> ids);
+	Boolean deleteIndexByIds(List<Long> ids);
 
 	/**
 	 * 初始化商品索引

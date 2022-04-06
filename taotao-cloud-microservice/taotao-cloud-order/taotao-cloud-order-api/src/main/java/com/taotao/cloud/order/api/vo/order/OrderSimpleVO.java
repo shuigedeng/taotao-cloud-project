@@ -32,7 +32,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "订单简略信息 用于订单列表查看")
 public class OrderSimpleVO {
 
-	@ApiModelProperty("sn")
+	@Schema(description = "sn")
 	private String sn;
 
 	@Schema(description = "总价格")

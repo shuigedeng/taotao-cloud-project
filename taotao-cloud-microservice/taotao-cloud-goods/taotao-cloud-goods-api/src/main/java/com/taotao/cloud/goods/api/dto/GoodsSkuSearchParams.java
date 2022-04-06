@@ -28,6 +28,4 @@ public class GoodsSkuSearchParams extends GoodsSearchParams {
 		queryWrapper.eq(StringUtil.isNotEmpty(goodsId), "goods_id", goodsId);
 		return queryWrapper;
 	}
-
-
 }

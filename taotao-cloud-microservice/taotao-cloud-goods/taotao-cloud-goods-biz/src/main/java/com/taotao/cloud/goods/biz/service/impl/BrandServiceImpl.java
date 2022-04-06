@@ -14,6 +14,7 @@ import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.mapper.BrandMapper;
+import com.taotao.cloud.goods.biz.mapstruct.BrandMapStruct;
 import com.taotao.cloud.goods.biz.service.BrandService;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
 import com.taotao.cloud.goods.biz.service.CategoryService;
@@ -21,27 +22,29 @@ import com.taotao.cloud.goods.biz.service.GoodsService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 /**
  * 商品品牌业务层实现
  */
+@AllArgsConstructor
 @Service
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
 
 	/**
-	 * 分类品牌绑定
+	 * 分类品牌绑定服务
 	 */
-	@Autowired
-	private CategoryBrandService categoryBrandService;
-
-	@Autowired
-	private CategoryService categoryService;
-
-	@Autowired
-	private GoodsService goodsService;
+	private final CategoryBrandService categoryBrandService;
+	/**
+	 * 分类服务
+	 */
+	private final CategoryService categoryService;
+	/**
+	 * 商品服务
+	 */
+	private final GoodsService goodsService;
 
 	@Override
 	public IPage<Brand> getBrandsByPage(BrandPageDTO page) {
@@ -72,7 +75,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 			!= null) {
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
-		return this.save(BeanUtil.copy(brandDTO, Brand.class));
+		return this.save(BrandMapStruct.INSTANCE.brandDTOToBrand(brandDTO));
 	}
 
 	@Override
@@ -101,6 +104,11 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
+	public List<Brand> getAllAvailable() {
+		return this.list(new LambdaQueryWrapper<Brand>().eq(Brand::getDelFlag, 0));
+	}
+
+	@Override
 	public Boolean deleteBrands(List<String> ids) {
 		checkBind(ids);
 		return this.removeByIds(ids);
@@ -115,6 +123,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 		//分了绑定关系查询
 		List<CategoryBrand> categoryBrands = categoryBrandService.getCategoryBrandListByBrandId(
 			brandIds);
+
 		if (!categoryBrands.isEmpty()) {
 			List<String> categoryIds = categoryBrands.stream().map(CategoryBrand::getCategoryId)
 				.collect(Collectors.toList());

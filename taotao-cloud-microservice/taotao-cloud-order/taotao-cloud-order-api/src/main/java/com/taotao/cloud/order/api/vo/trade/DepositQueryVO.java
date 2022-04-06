@@ -20,14 +20,9 @@ public class DepositQueryVO implements Serializable {
 
 	private static final long serialVersionUID = -6413611244037073693L;
 
-	/**
-	 * 会员ID
-	 */
 	@Schema(description = "会员Id")
 	private String memberId;
-	/**
-	 * 会员名称
-	 */
+
 	@Schema(description = "会员名称")
 	private String memberName;
 
@@ -36,6 +31,5 @@ public class DepositQueryVO implements Serializable {
 
 	@Schema(description = "结束日期")
 	private String endDate;
-
 
 }

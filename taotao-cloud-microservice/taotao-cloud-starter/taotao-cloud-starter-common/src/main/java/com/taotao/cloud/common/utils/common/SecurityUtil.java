@@ -69,7 +69,7 @@ public class SecurityUtil {
 	/**
 	 * 获取认证信息
 	 *
-	 * @return {@link Authentication }
+	 * @return 认证信息
 	 * @since 2021-09-02 14:56:05
 	 */
 	public static Authentication getAuthentication() {
@@ -80,7 +80,7 @@ public class SecurityUtil {
 	 * 获取用户信息
 	 *
 	 * @param authentication 认证信息
-	 * @return {@link SecurityUser }
+	 * @return 用户信息
 	 * @since 2021-09-02 14:56:13
 	 */
 	public static SecurityUser getUser(Authentication authentication) {
@@ -105,7 +105,7 @@ public class SecurityUtil {
 	/**
 	 * 获取用户信息
 	 *
-	 * @return {@link SecurityUser }
+	 * @return 用户信息
 	 * @since 2021-09-02 14:56:28
 	 */
 	public static SecurityUser getUser() {
@@ -116,7 +116,7 @@ public class SecurityUtil {
 	/**
 	 * 获取用户姓名
 	 *
-	 * @return {@link String }
+	 * @return 用户姓名
 	 * @since 2021-09-02 14:56:33
 	 */
 	public static String getUsername() {
@@ -130,7 +130,7 @@ public class SecurityUtil {
 	/**
 	 * 获取用户id
 	 *
-	 * @return {@link Long }
+	 * @return 用户id
 	 * @since 2021-09-02 14:56:38
 	 */
 	public static Long getUserId() {
@@ -181,7 +181,7 @@ public class SecurityUtil {
 	 *
 	 * @param newPass                密码
 	 * @param passwordEncoderOldPass 加密后的密码
-	 * @return boolean
+	 * @return 是否成功
 	 * @since 2021-09-02 14:57:20
 	 */
 	public static boolean validatePass(String newPass, String passwordEncoderOldPass) {
@@ -191,7 +191,7 @@ public class SecurityUtil {
 	/**
 	 * 获取密码加密工具
 	 *
-	 * @return {@link BCryptPasswordEncoder }
+	 * @return 加密对象
 	 * @since 2021-09-02 14:57:28
 	 */
 	public static BCryptPasswordEncoder getPasswordEncoder() {
@@ -247,8 +247,8 @@ public class SecurityUtil {
 	/**
 	 * 从header 请求中的clientId:clientSecret
 	 *
-	 * @param header header中的参数
-	 * @return String[]
+	 * @param header header
+	 * @return header参数列表
 	 * @since 2021-09-02 14:57:55
 	 */
 	public static String[] extractHeaderClient(String header) {
@@ -266,7 +266,7 @@ public class SecurityUtil {
 	 * 获取登陆的用户名
 	 *
 	 * @param authentication 认证信息
-	 * @return {@link String }
+	 * @return 用户名
 	 * @since 2021-09-02 14:58:07
 	 */
 	public static String getUsername(Authentication authentication) {
@@ -283,7 +283,7 @@ public class SecurityUtil {
 	/**
 	 * 获取租户信息
 	 *
-	 * @return {@link String }
+	 * @return 租户信息
 	 * @since 2021-09-02 14:58:20
 	 */
 	public static String getTenant() {
@@ -294,7 +294,7 @@ public class SecurityUtil {
 	/**
 	 * getClientId
 	 *
-	 * @return {@link String }
+	 * @return ClientId
 	 * @since 2021-09-02 14:58:29
 	 */
 	public static String getClientId() {
