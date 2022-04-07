@@ -21,7 +21,7 @@ public class AfterSaleLogServiceImpl extends
 
 	@Override
 	public List<AfterSaleLog> getAfterSaleLog(String sn) {
-		QueryWrapper queryWrapper = Wrappers.query();
+		QueryWrapper<AfterSaleLog> queryWrapper = Wrappers.query();
 		queryWrapper.eq("sn", sn);
 		return this.list(queryWrapper);
 	}

@@ -27,11 +27,12 @@ import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.ip.IPUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
@@ -116,18 +117,18 @@ public class RequestLoggerAspect {
 	public RequestLoggerAspect() {
 	}
 
-
 	/***
 	 * 定义controller切入点拦截规则：拦截标记SysLog注解和指定包下的方法
 	 * 2个表达式加起来才能拦截所有Controller 或者继承了BaseController的方法
 	 *
 	 * execution(public * com.taotao.cloud.*.biz.controller.*(..)) 解释：
+	 *
 	 * 第一个* 任意返回类型
-	 * 第二个* top.tangyh.basic.base.controller包下的所有类
+	 * 第二个* com.taotao.cloud.*.biz.controller包下的所有类
 	 * 第三个* 类下的所有方法
 	 * ()中间的.. 任意参数
 	 *
-	 * \@annotation(top.tangyh.basic.annotation.log.SysLog) 解释：
+	 * @annotation(com.taotao.cloud.logger.annotation.RequestLogger) 解释：
 	 */
 	@Pointcut("@annotation(com.taotao.cloud.logger.annotation.RequestLogger)")
 	public void requestLogAspect() {
@@ -138,14 +139,14 @@ public class RequestLoggerAspect {
 	public void doBefore(JoinPoint joinPoint) throws Throwable {
 		if (requestLoggerProperties.getEnabled()) {
 			tryCatch(val -> {
-				RequestLogger requestOperateLog = getTargetAnnotation(joinPoint);
-				if (check(joinPoint, requestOperateLog)) {
+				RequestLogger requestLoggerAnnotation = getTargetAnnotation(joinPoint);
+				if (check(joinPoint, requestLoggerAnnotation)) {
 					return;
 				}
 
 				com.taotao.cloud.logger.model.RequestLogger requestLogger = buildRequestLog(
 					joinPoint,
-					requestOperateLog);
+					requestLoggerAnnotation);
 				REQUEST_LOG_THREAD_LOCAL.set(requestLogger);
 			});
 		}
@@ -239,7 +240,7 @@ public class RequestLoggerAspect {
 
 	@NonNull
 	private com.taotao.cloud.logger.model.RequestLogger buildRequestLog(JoinPoint joinPoint,
-		RequestLogger requestOperateLog) {
+		RequestLogger requestLoggerAnnotation) {
 		com.taotao.cloud.logger.model.RequestLogger requestLogger = new com.taotao.cloud.logger.model.RequestLogger();
 		ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
 			.requireNonNull(RequestContextHolder.getRequestAttributes());
@@ -257,7 +258,7 @@ public class RequestLoggerAspect {
 		requestLogger.setMethod(request.getMethod());
 		Object[] args = joinPoint.getArgs();
 		List<String> argsList = new ArrayList<>();
-		if(ArrayUtil.isNotEmpty(args)) {
+		if (ArrayUtil.isNotEmpty(args)) {
 			for (Object arg : args) {
 				argsList.add(JsonUtil.toJSONString(arg));
 			}
@@ -290,25 +291,25 @@ public class RequestLoggerAspect {
 		String uaStr = request.getHeader("user-agent");
 		requestLogger.setOs(UserAgentUtil.parse(uaStr).getOs().toString());
 
-		setDescription(joinPoint, requestOperateLog, requestLogger);
+		setDescription(joinPoint, requestLoggerAnnotation, requestLogger);
 		return requestLogger;
 	}
 
 	/**
 	 * 监测是否需要记录日志
 	 *
-	 * @param joinPoint     端点
-	 * @param requestLogger 操作日志
+	 * @param joinPoint               端点
+	 * @param requestLoggerAnnotation 操作日志
 	 * @return true 表示需要记录日志
 	 */
-	private boolean check(JoinPoint joinPoint, RequestLogger requestLogger) {
-		if (requestLogger == null || !requestLogger.enabled()) {
+	private boolean check(JoinPoint joinPoint, RequestLogger requestLoggerAnnotation) {
+		if (requestLoggerAnnotation == null || !requestLoggerAnnotation.enabled()) {
 			return true;
 		}
 		// 读取目标类上的注解
 		RequestLogger targetClass = joinPoint.getTarget().getClass()
 			.getAnnotation(RequestLogger.class);
-		// 加上 sysLog == null 会导致父类上的方法永远需要记录日志
+		// 加上 RequestLogger == null 会导致父类上的方法永远需要记录日志
 		return targetClass != null && !targetClass.enabled();
 	}
 
@@ -361,7 +362,7 @@ public class RequestLoggerAspect {
 		return StrUtil.sub(val, 0, 65535);
 	}
 
-	private void setDescription(JoinPoint joinPoint, RequestLogger sysLog,
+	private void setDescription(JoinPoint joinPoint, RequestLogger requestLoggerAnnotation,
 		com.taotao.cloud.logger.model.RequestLogger requestLogger) {
 		String controllerDescription = "";
 		Operation api = joinPoint.getTarget().getClass().getAnnotation(Operation.class);
@@ -370,29 +371,33 @@ public class RequestLoggerAspect {
 			if (ArrayUtil.isNotEmpty(tags)) {
 				controllerDescription = tags[0];
 			}
+
+			String summary = api.summary();
+			if (StringUtil.isNotBlank(summary)) {
+				controllerDescription = summary;
+			}
+			String description = api.description();
+			if (StringUtil.isNotBlank(description)) {
+				controllerDescription = description;
+			}
 		}
 
-		String controllerMethodDescription = getDescribe(sysLog);
-
+		String controllerMethodDescription = getDescribe(requestLoggerAnnotation);
 		if (StrUtil.isNotBlank(controllerMethodDescription) && StrUtil.contains(
 			controllerMethodDescription, StrPool.HASH)) {
 			//获取方法参数值
 			Object[] args = joinPoint.getArgs();
-
 			MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 			controllerMethodDescription = getValBySpEl(controllerMethodDescription, methodSignature,
 				args);
 		}
 
-		if (StrUtil.isNotBlank(controllerDescription)) {
-			requestLogger.setDescription(controllerMethodDescription);
+		if (requestLoggerAnnotation.controllerApiValue() && StringUtil.isNotBlank(
+			controllerDescription)) {
+			requestLogger.setDescription(
+				controllerDescription + "-" + controllerMethodDescription);
 		} else {
-			if (sysLog.controllerApiValue()) {
-				requestLogger.setDescription(
-					controllerDescription + "-" + controllerMethodDescription);
-			} else {
-				requestLogger.setDescription(controllerMethodDescription);
-			}
+			requestLogger.setDescription(controllerDescription);
 		}
 	}
 
@@ -426,13 +431,13 @@ public class RequestLoggerAspect {
 		if (annotation == null) {
 			return StrPool.EMPTY;
 		}
-		return annotation.value();
+		return annotation.description();
 	}
 
 	public static String getDescribe(RequestLogger annotation) {
 		if (annotation == null) {
 			return StrPool.EMPTY;
 		}
-		return annotation.value();
+		return annotation.description();
 	}
 }

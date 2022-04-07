@@ -46,13 +46,6 @@ public @interface RequestLogger {
 	boolean enabled() default true;
 
 	/**
-	 * 描述
-	 *
-	 * @return {String}
-	 */
-	String value() default "";
-
-	/**
 	 * 是否拼接Controller类上的描述值
 	 *
 	 * @return 是否拼接Controller类上的描述值

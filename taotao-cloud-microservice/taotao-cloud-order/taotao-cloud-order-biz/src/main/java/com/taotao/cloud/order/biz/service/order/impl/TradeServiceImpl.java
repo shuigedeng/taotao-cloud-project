@@ -3,6 +3,9 @@ package com.taotao.cloud.order.biz.service.order.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.dto.cart.MemberCouponDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
@@ -12,6 +15,9 @@ import com.taotao.cloud.order.biz.entity.order.Trade;
 import com.taotao.cloud.order.biz.mapper.order.TradeMapper;
 import com.taotao.cloud.order.biz.service.order.OrderService;
 import com.taotao.cloud.order.biz.service.order.TradeService;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +40,7 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
      * 缓存
      */
     @Autowired
-    private Cache<Object> cache;
+    private RedisRepository redisRepository;
     /**
      * 订单
      */
@@ -60,7 +66,6 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
      */
     @Autowired
     private KanjiaActivityService kanjiaActivityService;
-
     /**
      * RocketMQ
      */
@@ -79,7 +84,6 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
 
         //创建订单预校验
         createTradeCheck(tradeDTO);
-
 
         Trade trade = new Trade(tradeDTO);
         String key = CachePrefix.TRADE.getPrefix() + trade.getSn();

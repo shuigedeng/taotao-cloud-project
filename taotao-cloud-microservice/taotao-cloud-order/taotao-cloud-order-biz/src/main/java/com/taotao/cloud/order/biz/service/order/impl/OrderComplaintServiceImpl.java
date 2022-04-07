@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -23,6 +25,7 @@ import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationServi
 import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
 import com.taotao.cloud.order.biz.service.order.OrderItemService;
 import com.taotao.cloud.order.biz.service.order.OrderService;
+import java.time.LocalDateTime;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -224,7 +227,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
         OrderComplaint orderComplaint = OperationalJudgment.judgment(this.checkOrderComplainExist(storeAppealVO.getOrderComplaintId()));
         orderComplaint.setAppealContent(storeAppealVO.getAppealContent());
         orderComplaint.setAppealImages(storeAppealVO.getAppealImages());
-        orderComplaint.setAppealTime(new Date());
+        orderComplaint.setAppealTime(LocalDateTime.now());
         orderComplaint.setComplainStatus(ComplaintStatusEnum.WAIT_ARBITRATION.name());
         this.updateById(orderComplaint);
         return true;

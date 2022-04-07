@@ -25,7 +25,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param saleSearchParams 查询参数
      * @return 分页售后信息
      */
-    IPage<AfterSaleVOVO123> getAfterSalePages(AfterSaleSearchParams saleSearchParams);
+    IPage<AfterSale> getAfterSalePages(AfterSaleSearchParams saleSearchParams);
 
     /**
      * 查询导出售后信息

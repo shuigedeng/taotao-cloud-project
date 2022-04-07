@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class AfterSaleReasonServiceImpl extends
 	ServiceImpl<AfterSaleReasonMapper, AfterSaleReason> implements AfterSaleReasonService {
 
-
 	@Override
 	public List<AfterSaleReason> afterSaleReasonList(String serviceType) {
 		LambdaQueryWrapper<AfterSaleReason> lambdaQueryWrapper = Wrappers.lambdaQuery();
