@@ -39,21 +39,21 @@ public class StoreBuyerController {
     @ApiOperation(value = "获取店铺列表分页")
     @GetMapping
     public ResultMessage<IPage<StoreVO>> getByPage(StoreSearchParams entity, PageVO page) {
-        return ResultUtil.data(storeService.findByConditionPage(entity, page));
+        return Result.data(storeService.findByConditionPage(entity, page));
     }
 
     @ApiOperation(value = "通过id获取店铺信息")
     @ApiImplicitParam(name = "id", value = "店铺ID", required = true, paramType = "path")
     @GetMapping(value = "/get/detail/{id}")
     public ResultMessage<StoreBasicInfoVO> detail(@NotNull @PathVariable String id) {
-        return ResultUtil.data(storeDetailService.getStoreBasicInfoDTO(id));
+        return Result.data(storeDetailService.getStoreBasicInfoDTO(id));
     }
 
     @ApiOperation(value = "通过id获取店铺详细信息-营业执照")
     @ApiImplicitParam(name = "id", value = "店铺ID", required = true, paramType = "path")
     @GetMapping(value = "/get/licencePhoto/{id}")
     public ResultMessage<StoreOtherVO> licencePhoto(@NotNull @PathVariable String id) {
-        return ResultUtil.data(storeDetailService.getStoreOtherVO(id));
+        return Result.data(storeDetailService.getStoreOtherVO(id));
     }
 
     @ApiOperation(value = "通过id获取店铺商品分类")
@@ -62,33 +62,33 @@ public class StoreBuyerController {
     })
     @GetMapping(value = "/label/get/{id}")
     public ResultMessage<List<StoreGoodsLabelVO>> storeGoodsLabel(@NotNull @PathVariable String id) {
-        return ResultUtil.data(storeGoodsLabelService.listByStoreId(id));
+        return Result.data(storeGoodsLabelService.listByStoreId(id));
     }
 
     @ApiOperation(value = "申请店铺第一步-填写企业信息")
     @PutMapping(value = "/apply/first")
     public ResultMessage<Object> applyFirstStep(StoreCompanyDTO storeCompanyDTO) {
         storeService.applyFirstStep(storeCompanyDTO);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "申请店铺第二步-填写银行信息")
     @PutMapping(value = "/apply/second")
     public ResultMessage<Object> applyFirstStep(StoreBankDTO storeBankDTO) {
         storeService.applySecondStep(storeBankDTO);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "申请店铺第三步-填写其他信息")
     @PutMapping(value = "/apply/third")
     public ResultMessage<Object> applyFirstStep(StoreOtherInfoDTO storeOtherInfoDTO) {
         storeService.applyThirdStep(storeOtherInfoDTO);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "获取当前登录会员的店铺信息-入驻店铺")
     @GetMapping(value = "/apply")
     public ResultMessage<StoreDetailVO> apply() {
-        return ResultUtil.data(storeDetailService.getStoreDetailVOByMemberId(UserContext.getCurrentUser().getId()));
+        return Result.data(storeDetailService.getStoreDetailVOByMemberId(UserContext.getCurrentUser().getId()));
     }
 }

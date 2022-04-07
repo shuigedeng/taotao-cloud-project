@@ -30,7 +30,7 @@ public class KanJiaActivityGoodsManagerController {
     @ApiOperation(value = "添加砍价活动")
     public Result<Object> add(@RequestBody KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {
         kanJiaActivityGoodsService.add(kanJiaActivityGoodsOperationDTO);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 
@@ -54,7 +54,7 @@ public class KanJiaActivityGoodsManagerController {
     @ApiOperation(value = "修改砍价商品")
     public Result<Object> updatePointsGoods(@RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
         kanJiaActivityGoodsService.updateKanjiaActivityGoods(kanJiaActivityGoodsDTO);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 
@@ -62,7 +62,7 @@ public class KanJiaActivityGoodsManagerController {
     @ApiOperation(value = "删除砍价商品")
     public Result<Object> delete(@PathVariable String ids) {
         if (kanJiaActivityGoodsService.deleteKanJiaGoods(Arrays.asList(ids.split(",")))) {
-            return ResultUtil.success();
+            return Result.success();
         }
         throw new BusinessException(ResultEnum.KANJIA_GOODS_DELETE_ERROR);
     }

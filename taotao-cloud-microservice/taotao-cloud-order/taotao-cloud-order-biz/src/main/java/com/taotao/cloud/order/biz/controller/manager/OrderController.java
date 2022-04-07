@@ -13,6 +13,7 @@ import com.taotao.cloud.order.biz.service.order.OrderPriceService;
 import com.taotao.cloud.order.biz.service.order.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -79,7 +80,7 @@ public class OrderController {
 	@PostMapping(value = "/{orderSn}/pay")
 	public Result<Object> payOrder(@PathVariable String orderSn) {
 		orderPriceService.adminPayOrder(orderSn);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "修改收货人信息", description = "修改收货人信息", method = CommonConstant.PUT)

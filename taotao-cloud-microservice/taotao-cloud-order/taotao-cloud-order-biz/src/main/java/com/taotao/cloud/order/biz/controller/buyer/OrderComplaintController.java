@@ -99,7 +99,7 @@ public class OrderComplaintController {
 	@PutMapping(value = "/status/{id}")
 	public Result<Object> cancel(@PathVariable String id) {
 		orderComplaintService.cancel(id);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 

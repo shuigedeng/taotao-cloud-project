@@ -55,7 +55,7 @@ public class BillManagerController {
     @PutMapping(value = "/pay/{id}")
     public Result<Object> pay(@PathVariable String id) {
         billService.complete(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 }

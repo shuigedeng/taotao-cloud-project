@@ -1,12 +1,16 @@
 package com.taotao.cloud.distribution.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +56,7 @@ public class DistributionCashBuyerController {
                                           @Min(value = 1, message = "提现金额单次最少提现金额为1元")
                                           @NotNull @ApiIgnore BigDecimal price) {
         if (Boolean.TRUE.equals(distributionCashService.cash(price))) {
-            return ResultUtil.success();
+            return Result.success();
         }
         throw new BusinessException(ResultEnum.ERROR);
     }

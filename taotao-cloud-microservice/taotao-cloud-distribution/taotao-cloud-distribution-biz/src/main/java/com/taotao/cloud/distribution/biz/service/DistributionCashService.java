@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.distribution.api.vo.DistributionCashSearchParams;
+import com.taotao.cloud.distribution.api.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,11 +31,11 @@ public interface DistributionCashService extends IService<DistributionCash> {
     /**
      * 获取分销员提现分页列表
      *
-     * @param distributionCashSearchParams 搜索条件
+     * @param distributionCashSearchVO 搜索条件
      * @return 分销员提现分页列表
      */
     IPage<DistributionCash> getDistributionCash(
-	    DistributionCashSearchParams distributionCashSearchParams);
+	    DistributionCashSearchVO distributionCashSearchVO);
 
     /**
      * 审核分销提现申请

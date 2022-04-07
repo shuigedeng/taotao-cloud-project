@@ -82,7 +82,7 @@ public class ConnectUtil {
             Token token;
             try {
                 token = connectService.unionLoginCallback(type, authUser, callback.getState());
-                resultMessage = ResultUtil.data(token);
+                resultMessage = Result.data(token);
             } catch (Exception e) {
                 throw new BusinessException(ResultEnum.ERROR.getCode(), e.getMessage());
             }

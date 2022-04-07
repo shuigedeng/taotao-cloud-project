@@ -35,7 +35,7 @@ public class FullDiscountStoreController {
         fullDiscountVO.setStoreId(currentUser.getStoreId());
         fullDiscountVO.setStoreName(currentUser.getStoreName());
         if (!fullDiscountService.savePromotions(fullDiscountVO)) {
-            return ResultUtil.error(ResultEnum.PINTUAN_ADD_ERROR);
+            return Result.error(ResultEnum.PINTUAN_ADD_ERROR);
         }
         return Result.success(fullDiscountVO);
     }
@@ -65,9 +65,9 @@ public class FullDiscountStoreController {
         fullDiscountVO.setStoreId(currentUser.getStoreId());
         fullDiscountVO.setStoreName(currentUser.getStoreName());
         if (!fullDiscountService.updatePromotions(fullDiscountVO)) {
-            return ResultUtil.error(ResultEnum.PINTUAN_EDIT_ERROR);
+            return Result.error(ResultEnum.PINTUAN_EDIT_ERROR);
         }
-        return ResultUtil.success(ResultEnum.FULL_DISCOUNT_EDIT_SUCCESS);
+        return Result.success(ResultEnum.FULL_DISCOUNT_EDIT_SUCCESS);
     }
 
     @ApiOperation(value = "删除满优惠活动")
@@ -75,7 +75,7 @@ public class FullDiscountStoreController {
     public Result<String> deleteFullDiscount(@PathVariable String id) {
         OperationalJudgment.judgment(fullDiscountService.getById(id));
         fullDiscountService.removePromotions(Collections.singletonList(id));
-        return ResultUtil.success(ResultEnum.FULL_DISCOUNT_EDIT_DELETE);
+        return Result.success(ResultEnum.FULL_DISCOUNT_EDIT_DELETE);
     }
 
 
@@ -88,9 +88,9 @@ public class FullDiscountStoreController {
     public Result<Object> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
         OperationalJudgment.judgment(fullDiscountService.getFullDiscount(id));
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
-            return ResultUtil.success(ResultEnum.SUCCESS);
+            return Result.success(ResultEnum.SUCCESS);
         }
-        return ResultUtil.error(ResultEnum.ERROR);
+        return Result.error(ResultEnum.ERROR);
     }
 
 }

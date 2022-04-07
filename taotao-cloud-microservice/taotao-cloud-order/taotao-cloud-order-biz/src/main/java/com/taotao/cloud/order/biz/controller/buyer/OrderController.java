@@ -2,6 +2,8 @@ package com.taotao.cloud.order.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
@@ -35,7 +37,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "买家端-订单API", description = "买家端-订单API")
 @RequestMapping("/order/buyer/orders")
 public class OrderController {
-
 
 	@Autowired
 	private OrderService orderService;
@@ -76,7 +77,7 @@ public class OrderController {
 			throw new BusinessException(ResultEnum.ORDER_DELIVERED_ERROR);
 		}
 		orderService.complete(orderSn);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
@@ -86,7 +87,7 @@ public class OrderController {
 	public Result<Object> cancel(@PathVariable String orderSn,
 		@RequestParam String reason) {
 		orderService.cancel(orderSn, reason);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "删除订单", description = "删除订单", method = CommonConstant.DELETE)
@@ -96,7 +97,7 @@ public class OrderController {
 	public Result<Object> deleteOrder(@PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		orderService.deleteOrder(orderSn);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)

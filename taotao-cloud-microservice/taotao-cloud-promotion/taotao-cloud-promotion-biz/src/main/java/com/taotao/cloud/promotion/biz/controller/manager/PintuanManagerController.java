@@ -57,7 +57,7 @@ public class PintuanManagerController {
     @ApiOperation(value = "操作拼团活动状态")
     public Result<String> openPintuan(@PathVariable String pintuanIds, Long startTime, Long endTime) {
         if (pintuanService.updateStatus(Arrays.asList(pintuanIds.split(",")), startTime, endTime)) {
-            return ResultUtil.success(ResultEnum.PINTUAN_MANUAL_OPEN_SUCCESS);
+            return Result.success(ResultEnum.PINTUAN_MANUAL_OPEN_SUCCESS);
         }
         throw new BusinessException(ResultEnum.PINTUAN_MANUAL_OPEN_ERROR);
 

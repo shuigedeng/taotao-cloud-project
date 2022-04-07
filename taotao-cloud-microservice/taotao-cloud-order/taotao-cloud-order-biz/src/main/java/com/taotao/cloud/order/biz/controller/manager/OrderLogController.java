@@ -33,7 +33,6 @@ public class OrderLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderLog> get(@PathVariable String id) {
-
 		return Result.success(orderLogService.getById(id));
 	}
 

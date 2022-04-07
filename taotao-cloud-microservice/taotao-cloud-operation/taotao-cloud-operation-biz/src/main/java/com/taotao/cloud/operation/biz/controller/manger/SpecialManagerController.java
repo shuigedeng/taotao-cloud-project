@@ -41,7 +41,7 @@ public class SpecialManagerController {
     @DeleteMapping("/{id}")
     public Result<Object> deleteSpecial(@PathVariable String id) {
         specialService.removeSpecial(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "分页获取专题活动")

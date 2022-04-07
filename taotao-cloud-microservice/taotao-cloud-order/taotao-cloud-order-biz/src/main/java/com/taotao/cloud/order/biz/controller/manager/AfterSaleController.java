@@ -5,11 +5,12 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class AfterSaleController {
 	@RequestLogger(description = "查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
-	public Result<AfterSaleVOVO123> get(
+	public Result<AfterSaleVO> get(
 		@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
 		return Result.success(afterSaleService.getAfterSale(sn));
 	}
@@ -70,7 +71,6 @@ public class AfterSaleController {
 	public Result<Traces> getDeliveryTraces(@PathVariable String sn) {
 		return Result.success(afterSaleService.deliveryTraces(sn));
 	}
-
 
 	@Operation(summary = "售后线下退款", description = "售后线下退款", method = CommonConstant.PUT)
 	@RequestLogger(description = "售后线下退款")

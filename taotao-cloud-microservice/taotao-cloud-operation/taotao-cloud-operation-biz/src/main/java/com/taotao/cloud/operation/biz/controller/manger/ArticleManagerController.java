@@ -66,7 +66,7 @@ public class ArticleManagerController {
     @PutMapping("update/status/{id}")
     public Result<Article> updateStatus(@PathVariable("id") String id, boolean status) {
         articleService.updateArticleStatus(id, status);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 
@@ -75,7 +75,7 @@ public class ArticleManagerController {
     @DeleteMapping(value = "/delByIds/{id}")
     public Result<Object> delAllByIds(@PathVariable String id) {
         articleService.customRemove(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 

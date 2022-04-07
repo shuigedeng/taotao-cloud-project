@@ -53,19 +53,19 @@ public class WalletPlugin implements Payment {
     @Override
     public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
+        return Result.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
+        return Result.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
+        return Result.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
@@ -74,14 +74,14 @@ public class WalletPlugin implements Payment {
             throw new BusinessException(ResultEnum.CAN_NOT_RECHARGE_WALLET);
         }
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
+        return Result.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override
     public Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
 
         savePaymentLog(payParam);
-        return ResultUtil.success(ResultEnum.PAY_SUCCESS);
+        return Result.success(ResultEnum.PAY_SUCCESS);
     }
 
     @Override

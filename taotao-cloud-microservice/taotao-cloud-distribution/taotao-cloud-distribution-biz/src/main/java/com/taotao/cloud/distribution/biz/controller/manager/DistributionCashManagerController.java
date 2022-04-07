@@ -1,7 +1,8 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.distribution.api.vo.DistributionCashSearchParams;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.distribution.api.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import io.swagger.annotations.Api;
@@ -33,9 +34,9 @@ public class DistributionCashManagerController {
     @ApiOperation(value = "分页获取")
     @GetMapping(value = "/getByPage")
     public Result<IPage<DistributionCash>> getByPage(
-	    DistributionCashSearchParams distributionCashSearchParams) {
+	    DistributionCashSearchVO distributionCashSearchVO) {
 
-        return Result.success(distributorCashService.getDistributionCash(distributionCashSearchParams));
+        return Result.success(distributorCashService.getDistributionCash(distributionCashSearchVO));
     }
 
 

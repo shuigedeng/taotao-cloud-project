@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import java.util.Date;
@@ -40,7 +41,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param sn 售后单号
      * @return 售后信息
      */
-    AfterSaleVOVO123 getAfterSale(String sn);
+    AfterSale getAfterSale(String sn);
 
     /**
      * 获取申请售后页面信息

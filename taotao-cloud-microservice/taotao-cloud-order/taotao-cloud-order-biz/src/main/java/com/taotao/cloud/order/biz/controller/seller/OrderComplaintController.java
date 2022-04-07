@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationVO;
@@ -79,7 +80,7 @@ public class OrderComplaintController {
 			complainId, content, CommunicationOwnerEnum.STORE.name(), currentUser.getStoreId(),
 			currentUser.getUsername());
 		orderComplaintCommunicationService.addCommunication(communicationVO);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "修改申诉信息", description = "修改申诉信息", method = CommonConstant.PUT)
@@ -109,7 +110,7 @@ public class OrderComplaintController {
 	@PutMapping(value = "/status")
 	public Result<Object> updateStatus(OrderComplaintOperationParams orderComplainVO) {
 		orderComplaintService.updateOrderComplainByStatus(orderComplainVO);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 }

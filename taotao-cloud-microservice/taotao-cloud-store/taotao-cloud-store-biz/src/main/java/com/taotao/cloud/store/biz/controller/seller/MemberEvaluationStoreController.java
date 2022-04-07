@@ -54,6 +54,6 @@ public class MemberEvaluationStoreController {
     public Result<MemberEvaluationVO> reply(@PathVariable String id, @RequestParam String reply, @RequestParam String replyImage) {
         OperationalJudgment.judgment(memberEvaluationService.queryById(id));
         memberEvaluationService.reply(id, reply, replyImage);
-        return ResultUtil.success();
+        return Result.success();
     }
 }

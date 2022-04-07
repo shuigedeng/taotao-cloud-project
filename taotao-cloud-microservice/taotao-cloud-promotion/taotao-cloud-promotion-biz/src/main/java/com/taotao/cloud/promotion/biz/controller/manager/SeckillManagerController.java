@@ -63,7 +63,7 @@ public class SeckillManagerController {
     @DeleteMapping("/{id}")
     public Result<Object> deleteSeckill(@PathVariable String id) {
         seckillService.removePromotions(Collections.singletonList(id));
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "操作秒杀活动状态")
@@ -71,7 +71,7 @@ public class SeckillManagerController {
     @PutMapping("/status/{id}")
     public Result<Object> updateSeckillStatus(@PathVariable String id, Long startTime, Long endTime) {
         seckillService.updateStatus(Collections.singletonList(id), startTime, endTime);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "获取秒杀活动申请列表")
@@ -85,7 +85,7 @@ public class SeckillManagerController {
     @ApiOperation(value = "删除秒杀活动申请")
     public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
         seckillApplyService.removeSeckillApply(seckillId, id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 

@@ -70,7 +70,7 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<AfterSaleReason> update(@Valid AfterSaleReason afterSaleReason,
-		@PathVariable("id") String id) {
+		@PathVariable("id") Long id) {
 		afterSaleReason.setId(id);
 		return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReason));
 	}
@@ -81,6 +81,6 @@ public class AfterSaleReasonController {
 	@DeleteMapping(value = "/{id}")
 	public Result<Object> delAllByIds(@PathVariable String id) {
 		afterSaleReasonService.removeById(id);
-		return ResultUtil.success();
+		return Result.success();
 	}
 }
