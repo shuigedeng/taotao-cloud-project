@@ -36,7 +36,7 @@ public enum UserEnum implements BaseEnum {
 
 	@Override
 	public String getNameByCode(int code) {
-		for (SexTypeEnum result : SexTypeEnum.values()) {
+		for (UserEnum result : UserEnum.values()) {
 			if (result.getCode() == code) {
 				return result.name().toLowerCase();
 			}
@@ -49,5 +49,22 @@ public enum UserEnum implements BaseEnum {
 		return code;
 	}
 
+	public static String getByCode(int code) {
+		for (UserEnum result : UserEnum.values()) {
+			if (result.getCode() == code) {
+				return result.name().toLowerCase();
+			}
+		}
+		return null;
+	}
+
+	public static UserEnum getEnumByCode(int code) {
+		for (UserEnum result : UserEnum.values()) {
+			if (result.getCode() == code) {
+				return result;
+			}
+		}
+		return null;
+	}
 
 }

@@ -8,8 +8,11 @@ import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import zipkin2.storage.Traces;
@@ -79,7 +82,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param mDeliverTime 买家退货发货时间
      * @return 售后
      */
-    AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, String logisticsId, Date mDeliverTime);
+    AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, String logisticsId, LocalDateTime mDeliverTime);
 
     /**
      * 获取买家退货物流踪迹
@@ -87,7 +90,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param afterSaleSn 售后服务单号
      * @return 物流踪迹
      */
-    Traces deliveryTraces(String afterSaleSn);
+    TracesVO deliveryTraces(String afterSaleSn);
 
     /**
      * 商家收货

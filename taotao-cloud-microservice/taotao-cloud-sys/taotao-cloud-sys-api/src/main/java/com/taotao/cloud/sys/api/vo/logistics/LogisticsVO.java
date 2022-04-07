@@ -18,9 +18,7 @@ package com.taotao.cloud.sys.api.vo.logistics;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * LogisticsVO
@@ -35,5 +33,40 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LogisticsVO {
 
-	private String id;
+	private Long id;
+
+	/**
+	 * 物流公司名称
+	 */
+	private String name;
+
+	/**
+	 * 物流公司code
+	 */
+	private String code;
+
+	/**
+	 * 物流公司联系人
+	 */
+	private String contactName;
+
+	/**
+	 * 物流公司联系电话
+	 */
+	private String contactMobile;
+
+	/**
+	 * 支持电子面单
+	 */
+	private String standBy;
+
+	/**
+	 * 物流公司电子面单表单
+	 */
+	private String formItems;
+
+	/**
+	 * 禁用状态 OPEN：开启，CLOSE：禁用
+	 */
+	private String disabled;
 }

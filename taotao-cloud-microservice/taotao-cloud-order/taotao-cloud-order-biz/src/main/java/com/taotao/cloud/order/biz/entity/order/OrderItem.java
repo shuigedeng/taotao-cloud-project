@@ -1,6 +1,8 @@
 package com.taotao.cloud.order.biz.entity.order;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
@@ -60,13 +62,13 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	 * 商品ID
 	 */
 	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
-	private String goodsId;
+	private Long goodsId;
 
 	/**
 	 * 货品ID
 	 */
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(64) not null comment '货品ID'")
-	private String skuId;
+	private Long skuId;
 
 	/**
 	 * 销售量
@@ -96,13 +98,13 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	 * 分类ID
 	 */
 	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '分类ID'")
-	private String categoryId;
+	private Long categoryId;
 
 	/**
 	 * 快照id
 	 */
 	@Column(name = "snapshot_id", nullable = false, columnDefinition = "varchar(64) not null comment '快照id'")
-	private String snapshotId;
+	private Long snapshotId;
 
 	/**
 	 * 规格json
@@ -120,7 +122,7 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	 * 促销id
 	 */
 	@Column(name = "promotion_id", nullable = false, columnDefinition = "varchar(64) not null comment '促销id'")
-	private String promotionId;
+	private Long promotionId;
 
 	/**
 	 * 销售金额
@@ -168,7 +170,7 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	 * 交易投诉id
 	 */
 	@Column(name = "complain_id", nullable = false, columnDefinition = "varchar(64) not null comment '交易投诉id'")
-	private String complainId;
+	private Long complainId;
 
 	/**
 	 * 退货商品数量
@@ -206,11 +208,11 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	//
 	//}
 	//
-	//public PriceDetailDTO getPriceDetailDTO() {
-	//    return JSONUtil.toBean(priceDetail, PriceDetailDTO.class);
-	//}
-	//
-	//public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
-	//    this.priceDetail = JSONUtil.toJsonStr(priceDetail);
-	//}
+	public PriceDetailDTO getPriceDetailDTO() {
+	    return JSONUtil.toBean(priceDetail, PriceDetailDTO.class);
+	}
+
+	public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
+	    this.priceDetail = JSONUtil.toJsonStr(priceDetail);
+	}
 }

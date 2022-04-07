@@ -6,12 +6,8 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * 售后表
@@ -20,6 +16,9 @@ import lombok.Setter;
 @Builder
 @Schema(description = "售后VO")
 public class AfterSaleVO {
+
+	@Schema(description = "id")
+	private String id;
 
 	@Schema(description = "售后服务单号")
 	private String sn;
@@ -45,7 +44,7 @@ public class AfterSaleVO {
 	@Schema(description = "商家名称")
 	private String storeName;
 
-	//商品信息
+	// **********商品信息*************
 	@Schema(description = "商品ID")
 	private String goodsId;
 
@@ -89,8 +88,7 @@ public class AfterSaleVO {
 	@Schema(description = "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
 	private String serviceStatus;
 
-	//退款信息
-
+	// **********退款信息*************
 	/**
 	 * @see AfterSaleRefundWayEnum
 	 */
@@ -127,9 +125,7 @@ public class AfterSaleVO {
 	@Schema(description = "退款时间")
 	private LocalDateTime refundTime;
 
-	/**
-	 * 买家物流信息
-	 */
+	// **********买家物流信息*************
 	@Schema(description = "发货单号")
 	private String mLogisticsNo;
 

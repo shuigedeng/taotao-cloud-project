@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -66,7 +67,7 @@ public class OrderLog extends BaseIdEntity {
 	/**
 	 * 应用ID
 	 */
-    private String operatorId;
+    private Long operatorId;
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see UserEnums
@@ -86,7 +87,7 @@ public class OrderLog extends BaseIdEntity {
     @Schema(description =  "日志信息")
     private String message;
 
-    public OrderLog(String orderSn, String operatorId, String operatorType, String operatorName, String message) {
+    public OrderLog(String orderSn, Long operatorId, String operatorType, String operatorName, String message) {
         this.orderSn = orderSn;
         this.operatorId = operatorId;
         this.operatorType = operatorType;
@@ -95,7 +96,7 @@ public class OrderLog extends BaseIdEntity {
     }
 
     public String getCreateBy() {
-        if (StringUtils.isEmpty(createBy)) {
+        if (StringUtil.isEmpty(createBy)) {
             return "系统";
         }
         return createBy;

@@ -16,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleLogServiceImpl extends
-	ServiceImpl<AfterSaleLogMapper, AfterSaleLog> implements
-	AfterSaleLogService {
+	ServiceImpl<AfterSaleLogMapper, AfterSaleLog> implements AfterSaleLogService {
 
 	@Override
 	public List<AfterSaleLog> getAfterSaleLog(String sn) {

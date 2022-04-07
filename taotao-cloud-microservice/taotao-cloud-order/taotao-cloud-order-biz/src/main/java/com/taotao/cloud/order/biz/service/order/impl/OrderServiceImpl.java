@@ -18,7 +18,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.OperationalJudgment;
+import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
+import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderBatchDeliverDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
@@ -37,6 +41,7 @@ import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.PaymentLog;
 import com.taotao.cloud.order.biz.aop.OrderLogPoint;
+import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
@@ -50,6 +55,8 @@ import com.taotao.cloud.order.biz.service.order.ReceiptService;
 import com.taotao.cloud.order.biz.service.order.StoreFlowService;
 import com.taotao.cloud.order.biz.service.order.TradeService;
 import com.taotao.cloud.order.biz.service.trade.OrderLogService;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
@@ -58,9 +65,11 @@ import com.taotao.cloud.stream.framework.trigger.message.PintuanOrderMessage;
 import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
+import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -111,7 +120,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	 * 物流公司
 	 */
 	@Autowired
-	private LogisticsService logisticsService;
+	private IFeignLogisticsService logisticsService;
 	/**
 	 * 订单日志
 	 */
@@ -136,7 +145,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	 * 拼团
 	 */
 	@Autowired
-	private PintuanService pintuanService;
+	private IFeignPintuanService pintuanService;
 
 	@Autowired
 	private TradeService tradeService;
@@ -191,12 +200,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		return this.baseMapper.queryByParams(PageUtil.initPage(orderSearchParams), queryWrapper);
 	}
 
-	/**
-	 * 订单信息
-	 *
-	 * @param orderSearchParams 查询参数
-	 * @return 订单信息
-	 */
 	@Override
 	public List<Order> queryListByParams(OrderSearchParams orderSearchParams) {
 		return this.baseMapper.queryListByParams(orderSearchParams.queryWrapper());
@@ -306,11 +309,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		Order order = this.getBySn(orderSn);
 		//如果订单已支付，就不能再次进行支付
 		if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-			throw new BusinessException(ResultEnum.PAY_BigDecimal_ERROR);
+			throw new BusinessException(ResultEnum.PAY_ERROR);
 		}
 
 		//修改订单状态
-		order.setPaymentTime(new Date());
+		order.setPaymentTime(LocalDateTime.now());
 		order.setPaymentMethod(paymentMethod);
 		order.setPayStatus(PayStatusEnum.PAID.name());
 		order.setOrderStatus(OrderStatusEnum.PAID.name());
@@ -331,7 +334,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 		String message =
 			"订单付款，付款方式[" + PaymentMethodEnum.valueOf(paymentMethod).paymentName() + "]";
-		OrderLog orderLog = new OrderLog(orderSn, "-1", UserEnums.SYSTEM.getRole(), "系统操作",
+		OrderLog orderLog = new OrderLog(orderSn, -1L, UserEnum.SYSTEM.name(), "系统操作",
 			message);
 		orderLogService.save(orderLog);
 
@@ -357,7 +360,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 
 	@Override
-	@SystemLogPoint(description = "修改订单", customerLog = "'订单[' + #orderSn + ']收货信息修改，修改为'+#memberAddressDTO.consigneeDetail+'")
+	//@SystemLogPoint(description = "修改订单", customerLog = "'订单[' + #orderSn + ']收货信息修改，修改为'+#memberAddressDTO.consigneeDetail+'")
 	public Order updateConsignee(String orderSn, MemberAddressDTO memberAddressDTO) {
 		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
 

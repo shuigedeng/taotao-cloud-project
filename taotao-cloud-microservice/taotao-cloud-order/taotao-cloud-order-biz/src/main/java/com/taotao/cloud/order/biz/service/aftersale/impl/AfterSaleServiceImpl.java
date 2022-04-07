@@ -1,8 +1,6 @@
 package com.taotao.cloud.order.biz.service.aftersale.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -12,8 +10,13 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
@@ -24,9 +27,7 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
-import com.taotao.cloud.order.biz.aop.AfterSaleLogPoint;
+import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
@@ -34,11 +35,16 @@ import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleMapper;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
 import com.taotao.cloud.order.biz.service.order.OrderItemService;
 import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
+import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
+import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
+import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -47,7 +53,6 @@ import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementPa
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zipkin2.storage.Traces;
 
 /**
  * 售后业务层实现
@@ -56,7 +61,6 @@ import zipkin2.storage.Traces;
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale> implements
 	AfterSaleService {
-
 	/**
 	 * 订单
 	 */
@@ -71,12 +75,12 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	 * 物流公司
 	 */
 	@Autowired
-	private LogisticsService logisticsService;
+	private IFeignLogisticsService logisticsService;
 	/**
 	 * 店铺详情
 	 */
 	@Autowired
-	private StoreDetailService storeDetailService;
+	private IFeignStoreDetailService storeDetailService;
 	/**
 	 * 售后支持，这里用于退款操作
 	 */
@@ -95,7 +99,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	public IPage<AfterSale> getAfterSalePages(AfterSaleSearchParams saleSearchParams) {
-		return baseMapper.queryByParams(PageUtil.initPage(saleSearchParams),
+		return baseMapper.queryByParams(saleSearchParams.buildMpPage(),
 			saleSearchParams.queryWrapper());
 	}
 
@@ -106,7 +110,9 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	public AfterSale getAfterSale(String sn) {
-		return this.baseMapper.getAfterSaleVO(sn);
+		LambdaQueryWrapper<AfterSale> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(AfterSale::getSn, sn);
+		return this.getOne(queryWrapper);
 	}
 
 	@Override
@@ -159,18 +165,15 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	@AfterSaleLogPoint(sn = "#rvt.sn", description = "'售后申请:售后编号['+#rvt.sn+']'")
-	@SystemLogPoint(description = "售后-售后申请", customerLog = "'售后申请:售后编号['+#rvt.sn+']'")
 	public AfterSale saveAfterSale(AfterSaleDTO afterSaleDTO) {
-
 		//检查当前订单是否可申请售后
 		this.checkAfterSaleType(afterSaleDTO);
-
 		//添加售后
 		return addAfterSale(afterSaleDTO);
 	}
 
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
-	@SystemLogPoint(description = "售后-审核售后", customerLog = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
+	//@SystemLogPoint(description = "售后-审核售后", customerLog = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
 	@Override
 	public AfterSale review(String afterSaleSn, String serviceStatus, String remark,
 		BigDecimal actualRefundPrice) {
@@ -179,15 +182,13 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 		//判断为待审核的售后服务
 		if (!afterSale.getServiceStatus().equals(AfterSaleStatusEnum.APPLY.name())) {
-			throw new BusinessException(ResultEnum.AFTER_SALES_BigDecimal_ERROR);
+			throw new BusinessException(ResultEnum.AFTER_SALES_PRICE_ERROR);
 		}
 		//判断退款金额与付款金额是否正确,退款金额不能大于付款金额
 		if (NumberUtil.compare(afterSale.getFlowPrice(), actualRefundPrice) < 0) {
 			throw new BusinessException(ResultEnum.AFTER_SALES_PRICE_ERROR);
 		}
-
 		afterSale.setActualRefundPrice(actualRefundPrice);
-
 		//判断审核状态
 		//如果售后类型为：退款，审核状态为已通过并且退款方式为原路退回，售后单状态为已完成。
 		//如果售后类型为：退款，审核状态已通过并且退款方式为线下退回，售后单状态为待退款。
@@ -223,11 +224,10 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	}
 
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
-	@SystemLogPoint(description = "售后-买家退货,物流填写", customerLog = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
+	//@SystemLogPoint(description = "售后-买家退货,物流填写", customerLog = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
 	@Override
 	public AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, String logisticsId,
-		Date mDeliverTime) {
-
+		LocalDateTime mDeliverTime) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -237,17 +237,17 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		}
 
 		//查询会员回寄的物流公司信息
-		Logistics logistics = logisticsService.getById(logisticsId);
+		Result<LogisticsVO> logistics = logisticsService.getById(logisticsId);
 
 		//判断物流公司是否为空
 		if (logistics == null) {
 			throw new BusinessException(ResultEnum.AFTER_STATUS_ERROR);
 		}
 
-		afterSale.setMLogisticsCode(logistics.getId());
-		afterSale.setMLogisticsName(logistics.getName());
-		afterSale.setMLogisticsNo(logisticsNo);
-		afterSale.setMDeliverTime(mDeliverTime);
+		afterSale.setLogisticsCode(logistics.data().getCode());
+		afterSale.setLogisticsName(logistics.data().getName());
+		afterSale.setLogisticsNo(logisticsNo);
+		afterSale.setDeliverTime(mDeliverTime);
 		//修改售后单状态
 		afterSale.setServiceStatus(AfterSaleStatusEnum.BUYER_RETURN.name());
 
@@ -257,21 +257,21 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	}
 
 	@Override
-	public Traces deliveryTraces(String afterSaleSn) {
+	public TracesVO deliveryTraces(String afterSaleSn) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
-		return logisticsService.getLogistic(afterSale.getMLogisticsCode(),
-			afterSale.getMLogisticsNo());
+		return logisticsService.getLogistic(afterSale.getId(),
+			afterSale.getLogisticsNo()).data();
 	}
 
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description =
 		"'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']" +
 			",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
-	@SystemLogPoint(description = "售后-商家收货", customerLog =
-		"'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']" +
-			",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
+	//@SystemLogPoint(description = "售后-商家收货", customerLog =
+	//	"'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']" +
+	//		",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
 	public AfterSale storeConfirm(String afterSaleSn, String serviceStatus, String remark) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
@@ -308,7 +308,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
-	@SystemLogPoint(description = "售后-平台退款", customerLog = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
+	//@SystemLogPoint(description = "售后-平台退款", customerLog = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
 	public AfterSale refund(String afterSaleSn, String remark) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
@@ -324,7 +324,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
-	@SystemLogPoint(description = "售后-买家确认解决", customerLog = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
+	//@SystemLogPoint(description = "售后-买家确认解决", customerLog = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
 	public AfterSale complete(String afterSaleSn) {
 		AfterSale afterSale = this.getBySn(afterSaleSn);
 		afterSale.setServiceStatus(AfterSaleStatusEnum.COMPLETE.name());
@@ -334,9 +334,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-买家取消:单号['+#afterSaleSn+']'")
-	@SystemLogPoint(description = "售后-取消售后", customerLog = "'售后-买家取消:单号['+#afterSaleSn+']'")
+	//@SystemLogPoint(description = "售后-取消售后", customerLog = "'售后-买家取消:单号['+#afterSaleSn+']'")
 	public AfterSale cancel(String afterSaleSn) {
-
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -359,7 +358,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	@Override
 	public StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO(String sn) {
 		return storeDetailService.getStoreAfterSaleAddressDTO(
-			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId());
+			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId()).data();
 	}
 
 	/**
@@ -370,14 +369,14 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	 */
 	private AfterSale addAfterSale(AfterSaleDTO afterSaleDTO) {
 		//写入其他属性
-		AuthUser tokenUser = Objects.requireNonNull(UserContext.getCurrentUser());
+		SecurityUser user = SecurityUtil.getUser();
 
 		AfterSale afterSale = new AfterSale();
 		BeanUtil.copyProperties(afterSaleDTO, afterSale);
 
 		//写入会员信息
-		afterSale.setMemberId(tokenUser.getId());
-		afterSale.setMemberName(tokenUser.getNickName());
+		afterSale.setMemberId(user.getUserId());
+		afterSale.setMemberName(user.getNickname());
 
 		//写入商家信息
 		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.getOrderItemSn());
@@ -463,7 +462,6 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	 * @param afterSaleDTO 售后
 	 */
 	private void checkAfterSaleType(AfterSaleDTO afterSaleDTO) {
-
 		//判断数据是否为空
 		if (null == afterSaleDTO || CharSequenceUtil.isEmpty(afterSaleDTO.getOrderItemSn())) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
@@ -594,8 +592,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		//获取已完成售后订单数量
 		List<AfterSale> completeList = afterSaleList.stream()
 			.filter(afterSale -> afterSale.getServiceStatus()
-				.equals(AfterSaleStatusEnum.COMPLETE.name()))
-			.collect(Collectors.toList());
+				.equals(AfterSaleStatusEnum.COMPLETE.name())).toList();
 
 		if (!completeList.isEmpty()) {
 			//遍历售后记录获取已完成售后商品数量
@@ -607,7 +604,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	/**
 	 * 功能描述:  修改orderItem订单
 	 *
-	 * @param orderItem
+	 * @param orderItem 订单子项
 	 **/
 	private void updateOrderItem(OrderItem orderItem) {
 		//订单状态不能为新订单,已失效订单或未申请订单才可以去修改订单信息
@@ -615,9 +612,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 			orderItem.getAfterSaleStatus());
 		switch (afterSaleTypeEnum) {
 			//售后状态为：未申请 部分售后 已申请
-			case NOT_APPLIED:
-			case PART_AFTER_SALE:
-			case ALREADY_APPLIED: {
+			case NOT_APPLIED, PART_AFTER_SALE, ALREADY_APPLIED -> {
 				//通过正在售后商品总数修改订单售后状态
 				if (orderItem.getReturnGoodsNumber().equals(orderItem.getNum())) {
 					//修改订单的售后状态--已申请
@@ -631,12 +626,11 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 					orderItem.setAfterSaleStatus(
 						OrderItemAfterSaleStatusEnum.PART_AFTER_SALE.name());
 				}
-				break;
 			}
-
-			default:
-				break;
+			default -> {
+			}
 		}
+
 		orderItemService.update(new LambdaUpdateWrapper<OrderItem>()
 			.eq(OrderItem::getSn, orderItem.getSn())
 			.set(OrderItem::getAfterSaleStatus, orderItem.getAfterSaleStatus())

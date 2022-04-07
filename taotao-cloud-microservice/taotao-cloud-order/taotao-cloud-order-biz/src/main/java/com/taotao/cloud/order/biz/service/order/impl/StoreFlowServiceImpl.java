@@ -19,6 +19,10 @@ import com.taotao.cloud.order.biz.mapper.order.StoreFlowMapper;
 import com.taotao.cloud.order.biz.service.order.OrderItemService;
 import com.taotao.cloud.order.biz.service.order.OrderService;
 import com.taotao.cloud.order.biz.service.order.StoreFlowService;
+import com.taotao.cloud.payment.api.feign.IFeignRefundLogService;
+import com.taotao.cloud.store.api.feign.IFeignBillService;
+import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
+import com.taotao.cloud.store.api.vo.StoreFlowRefundDownloadVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,10 +54,10 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
      * 退款日志
      */
     @Autowired
-    private RefundLogService refundLogService;
+    private IFeignRefundLogService refundLogService;
 
     @Autowired
-    private BillService billService;
+    private IFeignBillService billService;
 
     @Override
     public void payOrder(String orderSn) {

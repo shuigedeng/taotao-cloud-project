@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.coupon.api.feign;
+package com.taotao.cloud.promotion.api.feign;
 
-import com.taotao.cloud.coupon.api.feign.fallback.RemoteCouponFallbackImpl;
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.coupon.api.feign.fallback.RemoteCouponFallbackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 远程调用售后模块
@@ -28,8 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteCouponFallbackImpl.class)
-public interface RemoteCouponService {
+@FeignClient(contextId = "IFeignPintuanService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteCouponFallbackImpl.class)
+public interface IFeignPintuanService {
 
 	///**
 	// * 根据id查询提现申请信息
