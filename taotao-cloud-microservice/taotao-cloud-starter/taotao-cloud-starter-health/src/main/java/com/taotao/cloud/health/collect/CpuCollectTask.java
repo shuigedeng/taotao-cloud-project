@@ -67,14 +67,14 @@ public class CpuCollectTask extends AbstractCollectTask {
 		try {
 			CpuInfo info = new CpuInfo();
 			info.processCpuLoad = systemBean.getProcessCpuLoad();
-			info.systemCpuLoad = systemBean.getSystemCpuLoad();
+			info.systemCpuLoad = systemBean. getCpuLoad();
 
 			info.committedVirtualMemorySize = systemBean.getCommittedVirtualMemorySize();
 			info.totalSwapSpaceSize = systemBean.getTotalSwapSpaceSize();
 			info.freeSwapSpaceSize = systemBean.getFreeSwapSpaceSize();
 			info.processCpuTime = systemBean.getProcessCpuTime();
-			info.freePhysicalMemorySize = systemBean.getFreePhysicalMemorySize();
-			info.totalPhysicalMemorySize = systemBean.getTotalPhysicalMemorySize();
+			info.freePhysicalMemorySize = systemBean.getFreeMemorySize();
+			info.totalPhysicalMemorySize = systemBean.getTotalMemorySize();
 
 			info.cpuCoreNumber = Runtime.getRuntime().availableProcessors();
 			return info;

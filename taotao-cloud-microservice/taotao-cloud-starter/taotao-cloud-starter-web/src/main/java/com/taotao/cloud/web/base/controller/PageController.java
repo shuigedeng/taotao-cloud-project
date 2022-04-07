@@ -59,7 +59,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	 */
 	@Operation(summary = "通用分页查询", description = "通用分页查询")
 	@PostMapping("/page")
-	@RequestLogger(value = "通用分页查询")
+	@RequestLogger(description = "通用分页查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('page')")
 	default Result<PageModel<QueryVO>> page(
 		@Parameter(description = "分页查询DTO", required = true)

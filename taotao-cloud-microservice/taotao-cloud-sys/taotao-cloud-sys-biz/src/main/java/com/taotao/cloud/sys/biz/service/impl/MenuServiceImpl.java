@@ -158,21 +158,22 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> vos,
 		Long parentId) {
-		List<MenuTreeVO> menuTreeList = vos.stream()
-			.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
-			.map(e -> MenuTreeVO.builder()
-				.id(e.id())
-				.name(e.name())
-				.title(e.name())
-				.key(e.id())
-				.value(e.id())
-				// 此处还需要设置其他属性
-				.build())
-			.sorted(Comparator.comparingInt(MenuTreeVO::getSort))
-			.collect(Collectors.toList());
+		//List<MenuTreeVO> menuTreeList = vos.stream()
+		//	.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
+		//	.map(e -> MenuTreeVO.builder()
+		//		.id(e.id())
+		//		.name(e.name())
+		//		.title(e.name())
+		//		.key(e.id())
+		//		.value(e.id())
+		//		// 此处还需要设置其他属性
+		//		.build())
+		//	.sorted(Comparator.comparingInt(MenuTreeVO::getSort))
+		//	.collect(Collectors.toList());
 
-		Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
-		return TreeUtil.build(menuTreeList, parent);
+		//Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
+		//return TreeUtil.build(menuTreeList, parent);
+		return null;
 		//return ForestNodeMerger.merge(TreeUtil.buildTree(menus));
 	}
 

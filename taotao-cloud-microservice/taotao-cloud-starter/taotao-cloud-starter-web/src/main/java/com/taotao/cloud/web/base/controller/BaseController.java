@@ -157,7 +157,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * @return 用户id
 	 * @since 2021-09-02 21:04:56
 	 */
-	default String getUserId() {
+	default Long getUserId() {
 		return SecurityUtil.getUserId();
 	}
 
