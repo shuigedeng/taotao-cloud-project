@@ -114,7 +114,7 @@ buildscript {
         //https://search.maven.org/artifact/io.springfox/springfox-swagger2
         swaggerVersion = '3.0.0'
         //https://search.maven.org/artifact/io.swagger.core.v3/swagger-models
-        swaggerModelsVersion = '2.1.13'
+        swaggerModelsVersion = '2.2.0'
         //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-spring-ui
         knife4jVersion = '3.0.3'
 
