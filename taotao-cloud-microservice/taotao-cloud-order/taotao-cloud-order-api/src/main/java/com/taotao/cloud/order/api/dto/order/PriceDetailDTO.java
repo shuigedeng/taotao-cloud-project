@@ -97,7 +97,6 @@ public class PriceDetailDTO implements Serializable {
 	@Schema(description = "参与的促销活动")
 	private List<PromotionSkuVO> joinPromotion;
 
-
 	public BigDecimal getOriginalPrice() {
 		if (originalPrice == 0D) {
 			return flowPrice;

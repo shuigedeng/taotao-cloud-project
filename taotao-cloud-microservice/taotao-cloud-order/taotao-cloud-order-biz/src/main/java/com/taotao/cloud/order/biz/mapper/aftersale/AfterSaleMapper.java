@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 售后数据处理层
+ *
  * @author shuigedeng
  */
 public interface AfterSaleMapper extends BaseMapper<AfterSale> {
@@ -22,16 +23,7 @@ public interface AfterSaleMapper extends BaseMapper<AfterSale> {
 	 * @param queryWrapper 查询条件
 	 * @return 售后VO分页
 	 */
-	@Select("SELECT * FROM li_after_sale ${ew.customSqlSegment}")
+	@Select("SELECT * FROM tt_after_sale ${ew.customSqlSegment}")
 	IPage<AfterSale> queryByParams(IPage<AfterSaleVO> page,
 		@Param(Constants.WRAPPER) Wrapper<AfterSaleVO> queryWrapper);
-
-	/**
-	 * 根据售后编号获取售后VO
-	 *
-	 * @param sn 售后编号
-	 * @return 售后VO
-	 */
-	@Select("SELECT * FROM li_after_sale WHERE sn=#{sn}")
-	AfterSale getAfterSaleVO(String sn);
 }

@@ -57,6 +57,7 @@ public class IgnoreSerIdObjectInputStream extends ObjectInputStream {
 			LogUtil.warn("No local class for " + resultClassDescriptor.getName());
 			return resultClassDescriptor;
 		}
+
 		ObjectStreamClass localClassDescriptor = ObjectStreamClass.lookup(localClass);
 		// only if class implements serializable
 		if (localClassDescriptor != null) {

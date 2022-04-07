@@ -28,10 +28,10 @@ public class AfterSaleApplyVO {
 	private String orderItemSn;
 
 	@Schema(description = "商品ID")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "货品ID")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
@@ -58,7 +58,7 @@ public class AfterSaleApplyVO {
 	private Boolean returnMoney;
 
 	@Schema(description = "会员ID")
-	private String memberId;
+	private Long memberId;
 
 
 }

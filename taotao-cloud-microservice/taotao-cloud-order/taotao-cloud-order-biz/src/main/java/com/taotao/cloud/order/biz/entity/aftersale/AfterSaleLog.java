@@ -38,7 +38,7 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	 * 操作者id(可以是卖家)
 	 */
 	@Column(name = "operator_id", nullable = false, columnDefinition = "varchar(64) not null comment '操作者id(可以是卖家)'")
-	private String operatorId;
+	private Long operatorId;
 
 	/**
 	 * 操作者类型

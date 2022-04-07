@@ -190,7 +190,6 @@ public class ManagerMenuController extends
 		return Result.success(true);
 	}
 
-
 	//@Operation(summary = "测试异步", description = "测试异步")
 	//@RequestLogger("测试异步")
 	//@GetMapping("/test/async")

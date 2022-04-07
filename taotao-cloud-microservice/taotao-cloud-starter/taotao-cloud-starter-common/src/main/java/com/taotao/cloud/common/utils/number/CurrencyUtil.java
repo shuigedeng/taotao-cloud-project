@@ -62,6 +62,11 @@ public final class CurrencyUtil {
 		return b1.multiply(b2).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 
+	public static  BigDecimal mul(Integer v1, BigDecimal v2) {
+		BigDecimal b1 = BigDecimal.valueOf(v1);
+		return b1.multiply(v2).setScale(2, RoundingMode.HALF_UP);
+	}
+
 	/**
 	 * 提供精确的乘法运算。
 	 *
@@ -89,6 +94,14 @@ public final class CurrencyUtil {
 	 */
 	public static double div(double v1, double v2) {
 		return div(v1, v2, DEF_DIV_SCALE);
+	}
+
+	public static BigDecimal div(BigDecimal v1, BigDecimal v2) {
+		return v1.divide(v2, DEF_DIV_SCALE, RoundingMode.HALF_UP);
+	}
+
+	public static BigDecimal div(BigDecimal v1, Integer v2) {
+		return v1.divide(BigDecimal.valueOf(v2), DEF_DIV_SCALE, RoundingMode.HALF_UP);
 	}
 
 	/**

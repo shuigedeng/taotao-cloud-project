@@ -166,7 +166,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 * @param number number
 	 * @param scale  scale
 	 * @return double
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:32:28
 	 */
 	public static double scale(Number number, int scale) {
@@ -188,7 +187,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 *
 	 * @param string string
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:33:31
 	 */
 	public static int stoi(String string) {
@@ -201,7 +199,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 * @param string       string
 	 * @param defaultValue defaultValue
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:33:43
 	 */
 	public static int stoi(String string, int defaultValue) {
@@ -223,7 +220,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 *
 	 * @param string string
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:33:50
 	 */
 	public static long stol(String string) {
@@ -236,7 +232,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 * @param string       string
 	 * @param defaultValue defaultValue
 	 * @return long
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:33:53
 	 */
 	public static long stol(String string, long defaultValue) {
@@ -259,7 +254,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 *
 	 * @param string string
 	 * @return double
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:34:04
 	 */
 	public static double stod(String string) {
@@ -272,7 +266,6 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 * @param string       string
 	 * @param defaultValue defaultValue
 	 * @return double
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:34:07
 	 */
 	public static double stod(String string, double defaultValue) {
@@ -294,8 +287,7 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 * 将整数转成中文表示
 	 *
 	 * @param number number
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
+	 * @return 中文
 	 * @since 2021-09-02 16:34:12
 	 */
 	public static String toChineseNum(int number) {
@@ -325,11 +317,13 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 * @param min min
 	 * @param max max
 	 * @return int
-	 * @author shuigedeng
 	 * @since 2021-09-02 16:34:18
 	 */
 	public static int random(int min, int max) {
 		return new Random().nextInt(max - min) + min;
 	}
 
+	public static int compare(BigDecimal flowPrice, BigDecimal actualRefundPrice) {
+		return flowPrice.compareTo(actualRefundPrice);
+	}
 }

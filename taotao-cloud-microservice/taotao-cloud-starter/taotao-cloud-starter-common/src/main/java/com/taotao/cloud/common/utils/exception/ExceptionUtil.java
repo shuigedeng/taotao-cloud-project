@@ -37,8 +37,8 @@ public class ExceptionUtil {
 	/**
 	 * trace2String
 	 *
-	 * @param t t
-	 * @return {@link java.lang.String }
+	 * @param t 异常信息
+	 * @return 异常信息
 	 * @since 2021-09-02 16:47:06
 	 */
 	public static String trace2String(Throwable t) {
@@ -60,8 +60,8 @@ public class ExceptionUtil {
 	/**
 	 * trace2String
 	 *
-	 * @param stackTraceElements stackTraceElements
-	 * @return {@link java.lang.String }
+	 * @param stackTraceElements 栈数据
+	 * @return 异常信息
 	 * @since 2021-09-02 16:47:16
 	 */
 	public static String trace2String(StackTraceElement[] stackTraceElements) {
@@ -75,7 +75,7 @@ public class ExceptionUtil {
 	/**
 	 * lineSeparator
 	 *
-	 * @return {@link java.lang.String }
+	 * @return 行分隔符
 	 * @since 2021-09-02 16:47:20
 	 */
 	private static String lineSeparator() {
@@ -85,8 +85,8 @@ public class ExceptionUtil {
 	/**
 	 * getFullMessage
 	 *
-	 * @param e e
-	 * @return {@link java.lang.String }
+	 * @param e 异常对象
+	 * @return 异常信息
 	 * @since 2021-09-02 16:47:23
 	 */
 	public static String getFullMessage(Throwable e) {
@@ -100,8 +100,8 @@ public class ExceptionUtil {
 	/**
 	 * getFullStackTrace
 	 *
-	 * @param e e
-	 * @return {@link java.lang.String }
+	 * @param e 异常对象
+	 * @return 异常信息
 	 * @since 2021-09-02 16:47:27
 	 */
 	public static String getFullStackTrace(Throwable e) {
@@ -134,8 +134,8 @@ public class ExceptionUtil {
 	/**
 	 * getDetailMessage
 	 *
-	 * @param ex ex
-	 * @return {@link java.lang.String }
+	 * @param ex 异常对象
+	 * @return 异常信息
 	 * @since 2021-09-02 16:47:33
 	 */
 	public static String getDetailMessage(Throwable ex) {
@@ -156,7 +156,7 @@ public class ExceptionUtil {
 	 * ignoreException
 	 *
 	 * @param runnable    runnable
-	 * @param isPrintInfo isPrintInfo
+	 * @param isPrintInfo 是否打印信息
 	 * @since 2021-09-02 16:47:37
 	 */
 	public static void ignoreException(Runnable runnable, boolean isPrintInfo) {
@@ -182,8 +182,8 @@ public class ExceptionUtil {
 	/**
 	 * 将CheckedException转换为UncheckedException.
 	 *
-	 * @param e Throwable
-	 * @return {RuntimeException}
+	 * @param e 异常信息
+	 * @return 异常信息对象
 	 */
 	public static RuntimeException unchecked(Throwable e) {
 		if (e instanceof Error) {
@@ -205,10 +205,8 @@ public class ExceptionUtil {
 	/**
 	 * 不采用 RuntimeException 包装，直接抛出，使异常更加精准
 	 *
-	 * @param throwable Throwable
-	 * @param <T>       泛型标记
-	 * @return Throwable
-	 * @throws T 泛型
+	 * @param throwable 异常信息
+	 * @return 异常信息对象
 	 */
 	@SuppressWarnings("unchecked")
 	private static <T extends Throwable> T runtime(Throwable throwable) throws T {
@@ -237,8 +235,8 @@ public class ExceptionUtil {
 	/**
 	 * 将ErrorStack转化为String.
 	 *
-	 * @param ex Throwable
-	 * @return {String}
+	 * @param ex 异常信息
+	 * @return 异常信息
 	 */
 	public static String getStackTraceAsString(Throwable ex) {
 		FastStringPrintWriter printWriter = new FastStringPrintWriter(512);

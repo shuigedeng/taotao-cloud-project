@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface IFeignMemberService {
 
 	/**
-	 * 通过用户名查询用户包括角色权限等o
+	 * 通过用户名查询用户包括角色权限等
 	 *
 	 * @param nicknameOrUserNameOrPhoneOrEmail 用户名
-	 * @return com.taotao.cloud.common.model.Result<com.taotao.cloud.uc.api.dto.UserDetailsInfo>
-	 * @author shuigedeng
+	 * @return 用户信息
 	 * @since 2020/4/29 17:48
 	 */
 	@GetMapping(value = "/member/info/security")
@@ -33,11 +32,12 @@ public interface IFeignMemberService {
 	 * 根据id查询会员信息
 	 *
 	 * @param id id
-	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.member.api.vo.MemberVO>
-	 * @author shuigedeng
+	 * @return 会员信息
 	 * @since 2020/11/20 下午4:10
 	 */
 	@GetMapping("/member/info/id/{id:[0-9]*}")
 	Result<MemberVO> findMemberById(@PathVariable(value = "id") Long id);
+
+	Result<Boolean> updateMemberPoint(Long payPoint, String name, String memberId, String s);
 }
 

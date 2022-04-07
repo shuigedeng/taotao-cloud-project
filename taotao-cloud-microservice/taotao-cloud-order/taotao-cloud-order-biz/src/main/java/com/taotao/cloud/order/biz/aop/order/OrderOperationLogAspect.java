@@ -1,18 +1,19 @@
-package com.taotao.cloud.order.biz.aop;
+package com.taotao.cloud.order.biz.aop.order;
 
-import com.dtp.common.util.ThreadPoolUtil;
 import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.spel.SpelUtil;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
-import com.taotao.cloud.order.biz.service.trade.OrderLogService;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,27 +24,31 @@ import org.springframework.stereotype.Component;
 public class OrderOperationLogAspect {
 
 	@Autowired
-	private OrderLogService orderLogService;
+	private ApplicationEventPublisher publisher;
 
-	@After("@annotation(modules.order.order.aop.OrderLogPoint)")
+	@After("@annotation(com.taotao.cloud.order.biz.aop.order.OrderLogPoint)")
 	public void doAfter(JoinPoint joinPoint) {
 		try {
+			SecurityUser securityUser = SecurityUtil.getUser();
 			//日志对象拼接
 			//默认操作人员，系统操作
-			String userName = "系统操作", id = "-1", role = UserEnum.SYSTEM.getRole();
-			if (UserContext.getCurrentUser() != null) {
+			String userName = "系统操作";
+			Long id = -1L;
+			String role = UserEnum.SYSTEM.name();
+			if (securityUser != null) {
 				//日志对象拼接
-				userName = UserContext.getCurrentUser().getUsername();
-				id = UserContext.getCurrentUser().getId();
-				role = UserContext.getCurrentUser().getRole().getRole();
+				userName = securityUser.getUsername();
+				id = securityUser.getUserId();
+				role = UserEnum.getByCode(securityUser.getType());
 			}
+
 			Map<String, String> orderLogPoints = spelFormat(joinPoint);
 			OrderLog orderLog = new OrderLog(orderLogPoints.get("orderSn"), id, role, userName,
 				orderLogPoints.get("description"));
-			//调用线程保存
-			ThreadPoolUtil.getPool().execute(new SaveOrderLogThread(orderLog, orderLogService));
+
+			publisher.publishEvent(new OrderLogEvent(orderLog));
 		} catch (Exception e) {
-			log.error("订单日志错误", e);
+			LogUtil.error("订单日志错误", e);
 		}
 	}
 
@@ -52,9 +57,8 @@ public class OrderOperationLogAspect {
 	 *
 	 * @param joinPoint 切点
 	 * @return 方法描述
-	 * @throws Exception
 	 */
-	private static Map<String, String> spelFormat(JoinPoint joinPoint) throws Exception {
+	private static Map<String, String> spelFormat(JoinPoint joinPoint) {
 
 		Map<String, String> result = new HashMap<>(2);
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -66,24 +70,4 @@ public class OrderOperationLogAspect {
 		result.put("orderSn", orderSn);
 		return result;
 	}
-
-	/**
-	 * 保存日志
-	 */
-	private static class SaveOrderLogThread implements Runnable {
-
-		private final OrderLog orderLog;
-		private final OrderLogService orderLogService;
-
-		public SaveOrderLogThread(OrderLog orderLog, OrderLogService orderLogService) {
-			this.orderLog = orderLog;
-			this.orderLogService = orderLogService;
-		}
-
-		@Override
-		public void run() {
-			orderLogService.save(orderLog);
-		}
-	}
-
 }
