@@ -11,6 +11,7 @@ import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.PaymentLog;
 import com.taotao.cloud.order.biz.entity.order.Order;
+import java.math.BigDecimal;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;

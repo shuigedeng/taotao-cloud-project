@@ -48,7 +48,6 @@ public @interface ConditionalOnRequestLoggerType {
 
 	RequestLoggerTypeEnum logType() default RequestLoggerTypeEnum.LOGGER;
 
-
 	public static class RequestLogTypeCondition extends SpringBootCondition {
 
 		@Autowired

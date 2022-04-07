@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.service.purchase.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuoted;
 import com.taotao.cloud.order.biz.mapper.purchase.PurchaseQuotedMapper;
 import com.taotao.cloud.order.biz.service.purchase.PurchaseQuotedItemService;
@@ -23,11 +24,10 @@ public class PurchaseQuotedServiceImpl extends ServiceImpl<PurchaseQuotedMapper,
 	PurchaseQuotedService {
     @Autowired
     private PurchaseQuotedItemService purchaseQuotedItemService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public PurchaseQuotedVO addPurchaseQuoted(PurchaseQuotedVO purchaseQuotedVO) {
-
-
         PurchaseQuoted purchaseQuoted = new PurchaseQuoted();
         BeanUtil.copyProperties(purchaseQuotedVO, purchaseQuoted);
         //添加报价单

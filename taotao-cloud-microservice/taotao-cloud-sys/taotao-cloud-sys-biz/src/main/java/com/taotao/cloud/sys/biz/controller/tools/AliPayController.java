@@ -42,10 +42,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AliPayController {
 
 	private final AlipayUtils alipayUtils;
-
 	private final IAlipayConfigService alipayService;
 
-	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息", method = CommonConstant.GET)
+	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息",method = CommonConstant.GET)
 	@RequestLogger(description = "查询阿里支付配置信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping

@@ -1,8 +1,11 @@
 package com.taotao.cloud.order.biz.service.cart.render.util;
 
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +42,9 @@ public class PromotionPriceUtil {
 		//极端情况，如果扣减金额小于需要支付的金额，则扣减金额=支付金额，不能成为负数
 		if (discountPrice > totalPrice) {
 			discountPrice = totalPrice;
-
 			for (String skuId : skuPromotionDetail.keySet()) {
-
 				//获取对应商品进行计算
 				for (CartSkuVO cartSkuVO : tradeDTO.getSkuList()) {
-
 					if (cartSkuVO.getGoodsSku().getId().equals(skuId)) {
 						//优惠券金额，则计入优惠券 ，其他则计入总的discount price
 						if (promotionTypeEnum == PromotionTypeEnum.COUPON) {
@@ -67,19 +67,14 @@ public class PromotionPriceUtil {
 
 		//已优惠金额
 		BigDecimal deducted = 0D;
-
 		for (String skuId : skuPromotionDetail.keySet()) {
-
 			//获取对应商品进行计算
 			for (CartSkuVO cartSkuVO : skuVOList) {
-
 				if (cartSkuVO.getGoodsSku().getId().equals(skuId)) {
-
 					count--;
 
 					//sku 优惠金额
 					BigDecimal skuDiscountPrice = 0d;
-
 					//非最后一个商品，则按照比例计算
 					if (count > 0) {
 						//商品金额占比
@@ -135,11 +130,11 @@ public class PromotionPriceUtil {
 		String promotionId) {
 		long now = System.currentTimeMillis();
 		if (startTime.getTime() > now) {
-			log.error("商品ID为{}的{}活动开始时间小于当时时间，活动未开始！", promotionId, promotionType);
+			LogUtil.error("商品ID为{}的{}活动开始时间小于当时时间，活动未开始！", promotionId, promotionType);
 			return false;
 		}
 		if (endTime.getTime() < now) {
-			log.error("活动ID为{}的{}活动结束时间大于当时时间，活动已结束！", promotionId, promotionType);
+			LogUtil.error("活动ID为{}的{}活动结束时间大于当时时间，活动已结束！", promotionId, promotionType);
 			return false;
 		}
 		return true;

@@ -5,6 +5,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
@@ -41,8 +42,8 @@ public class AfterSaleController {
 	@RequestLogger(description = "查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
-	public Result<AfterSaleVOVO123> get(@PathVariable String sn) {
-		AfterSaleVOVO123 afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
+	public Result<AfterSaleVO> get(@PathVariable String sn) {
+		AfterSaleVO afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
 		return Result.success(afterSale);
 	}
 

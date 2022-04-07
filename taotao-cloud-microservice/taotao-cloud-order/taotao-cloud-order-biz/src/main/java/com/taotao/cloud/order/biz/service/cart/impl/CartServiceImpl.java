@@ -2,6 +2,8 @@ package com.taotao.cloud.order.biz.service.cart.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.dto.cart.MemberCouponDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -14,6 +16,7 @@ import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.cart.CartService;
 import com.taotao.cloud.order.biz.service.cart.render.TradeBuilder;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,7 +41,7 @@ public class CartServiceImpl implements CartService {
 	 * 缓存
 	 */
 	@Autowired
-	private Cache<Object> cache;
+	private RedisRepository redisRepository;
 	/**
 	 * 会员优惠券
 	 */
