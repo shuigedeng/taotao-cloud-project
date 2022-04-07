@@ -44,7 +44,7 @@ public class DraftGoodsStoreController {
 	private final DraftGoodsService draftGoodsService;
 
 	@Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取草稿商品列表")
+	@RequestLogger("分页获取草稿商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<DraftGoods>> getDraftGoodsByPage(
@@ -55,7 +55,7 @@ public class DraftGoodsStoreController {
 	}
 
 	@Operation(summary = "获取草稿商品", description = "获取草稿商品", method = CommonConstant.GET)
-	@RequestLogger(description = "获取草稿商品")
+	@RequestLogger("获取草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<DraftGoodsVO> getDraftGoods(@PathVariable String id) {
@@ -63,7 +63,7 @@ public class DraftGoodsStoreController {
 	}
 
 	@Operation(summary = "保存草稿商品", description = "保存草稿商品", method = CommonConstant.POST)
-	@RequestLogger(description = "保存草稿商品")
+	@RequestLogger("保存草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveDraftGoods(@RequestBody DraftGoodsDTO draftGoodsVO) {
@@ -79,7 +79,7 @@ public class DraftGoodsStoreController {
 	}
 
 	@Operation(summary = "删除草稿商品", description = "删除草稿商品", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除草稿商品")
+	@RequestLogger("删除草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> deleteDraftGoods(@PathVariable String id) {

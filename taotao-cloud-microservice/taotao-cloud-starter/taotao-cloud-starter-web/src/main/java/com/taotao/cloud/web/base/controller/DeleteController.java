@@ -55,7 +55,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 */
 	@Operation(summary = "通用单体id删除", description = "通用单体id删除")
 	@DeleteMapping("/{id:[0-9]*}")
-	@RequestLogger(description = "通用单体id删除")
+	@RequestLogger("通用单体id删除")
 	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteById(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
@@ -92,7 +92,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 */
 	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除", method = CommonConstant.DELETE)
 	@DeleteMapping("/{filedName}/{filedValue}")
-	@RequestLogger(description = "通用单体字段删除")
+	@RequestLogger("通用单体字段删除")
 	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteByFiled(
 		@Parameter(description = "字段名称", required = true) @NotEmpty(message = "字段名称不能为空")

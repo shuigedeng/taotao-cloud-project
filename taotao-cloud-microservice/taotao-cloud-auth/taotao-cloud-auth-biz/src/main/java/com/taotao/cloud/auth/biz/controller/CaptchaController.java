@@ -31,7 +31,7 @@ public class CaptchaController {
 	private CaptchaService captchaService;
 
 	@Operation(summary = "获取验证码", description = "获取验证码", method = CommonConstant.GET)
-	@RequestLogger(description = "获取验证码")
+	@RequestLogger("获取验证码")
 	@GetMapping("/code")
 	public Result<String> getCaptcha(HttpServletRequest request) {
 		ArithmeticCaptcha captcha = captchaService.getCaptcha(request);

@@ -50,7 +50,7 @@ public class OrderComplaintController {
 	private OrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable String id) {
@@ -61,7 +61,7 @@ public class OrderComplaintController {
 
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderComplaint>> get(OrderComplaintSearchParams searchParams,
@@ -72,7 +72,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉", description = "添加交易投诉", method = CommonConstant.POST)
-	@RequestLogger(description = "添加交易投诉")
+	@RequestLogger("添加交易投诉")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<OrderComplaint> add(@Valid OrderComplaintDTO orderComplaintDTO) {
@@ -80,7 +80,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话", method = CommonConstant.POST)
-	@RequestLogger(description = "添加交易投诉对话")
+	@RequestLogger("添加交易投诉对话")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication")
 	public Result<OrderComplaintCommunicationVO> addCommunication(
@@ -94,7 +94,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "取消售后", description = "取消售后", method = CommonConstant.PUT)
-	@RequestLogger(description = "取消售后")
+	@RequestLogger("取消售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status/{id}")
 	public Result<Object> cancel(@PathVariable String id) {

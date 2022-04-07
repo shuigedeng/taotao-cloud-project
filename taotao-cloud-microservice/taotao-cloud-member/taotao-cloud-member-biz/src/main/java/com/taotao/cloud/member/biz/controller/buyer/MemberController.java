@@ -37,7 +37,7 @@ public class MemberController {
 
 	private final IMemberService memberService;
 
-	@RequestLogger(description = "根据id查询会员信息")
+	@RequestLogger("根据id查询会员信息")
 	@PreAuthorize("hasAuthority('member:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<MemberVO> findMemberById(@PathVariable(value = "id") Long id) {
@@ -46,7 +46,7 @@ public class MemberController {
 		return Result.success(vo);
 	}
 
-	@RequestLogger(description = "查询会员是否已(注册)存在")
+	@RequestLogger("查询会员是否已(注册)存在")
 	@GetMapping("/exist")
 	public Result<Boolean> existMember(
 		@Validated @NotNull(message = "查询条件不能为空") MemberQuery memberQuery) {
@@ -54,7 +54,7 @@ public class MemberController {
 		return Result.success(result);
 	}
 
-	@RequestLogger(description = "注册新会员用户")
+	@RequestLogger("注册新会员用户")
 	@PostMapping
 	public Result<Boolean> registerUser(@Validated @RequestBody MemberDTO memberDTO) {
 		MemberBack result = memberService.registerUser(memberDTO);
@@ -63,7 +63,7 @@ public class MemberController {
 
 	// **********************内部微服务接口*****************************
 
-	@RequestLogger(description = "查询会员用户")
+	@RequestLogger("查询会员用户")
 	@GetMapping("/info/security")
 	public Result<MemberBack> findMember(@Validated @NotBlank(message = "查询条件不能为空")
 	@RequestParam(value = "nicknameOrUserNameOrPhoneOrEmail") String nicknameOrUserNameOrPhoneOrEmail) {

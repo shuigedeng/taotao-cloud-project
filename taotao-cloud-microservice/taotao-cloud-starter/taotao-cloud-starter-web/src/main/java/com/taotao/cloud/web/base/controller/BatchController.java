@@ -58,7 +58,7 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用批量操作", description = "通用批量操作")
 	@PostMapping("/batch")
-	@RequestLogger(description = "通用批量操作")
+	@RequestLogger("通用批量操作")
 	//@PreAuthorize("hasPermission(#batchDTO, 'batch')")
 	@PreAuthorize("@permissionVerifier.hasPermission('batch')")
 	default Result<Boolean> batch(

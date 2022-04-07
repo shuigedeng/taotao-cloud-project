@@ -38,7 +38,7 @@ public class PdfController {
 	private final PdfUtils pdfUtils;
 
 	@Operation(summary = "文件上传", description = "文件上传", method = CommonConstant.POST)
-	@RequestLogger(description = "文件上传")
+	@RequestLogger("文件上传")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/upload")
 	public Result<Map<String, Object>> upload(@RequestParam("file") MultipartFile file)
@@ -56,7 +56,7 @@ public class PdfController {
 	}
 
 	@Operation(summary = "文件上传并转为PDF", description = "文件上传并转为PDF", method = CommonConstant.POST)
-	@RequestLogger(description = "文件上传并转为PDF")
+	@RequestLogger("文件上传并转为PDF")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/topdf")
 	public Result<Map<String, Object>> toPdf(@RequestParam("file") MultipartFile file)
@@ -76,7 +76,7 @@ public class PdfController {
 	}
 
 	@Operation(summary = "文件上传并转为图片PNG格式", description = "文件上传并转为图片PNG格式", method = CommonConstant.POST)
-	@RequestLogger(description = "文件上传并转为图片PNG格式")
+	@RequestLogger("文件上传并转为图片PNG格式")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/topng")
 	public Result<Map<String, Object>> toPng(@RequestParam("file") MultipartFile file)

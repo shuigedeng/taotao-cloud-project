@@ -38,7 +38,7 @@ public class MemberGradeController {
 	private final MemberGradeService memberGradeService;
 
 	@Operation(summary = "通过id获取会员等级", description = "通过id获取会员等级", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取会员等级")
+	@RequestLogger("通过id获取会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberGrade> get(@PathVariable String id) {
@@ -46,7 +46,7 @@ public class MemberGradeController {
 	}
 
 	@Operation(summary = "获取会员等级分页", description = "获取会员等级分页", method = CommonConstant.GET)
-	@RequestLogger(description = "获取会员等级分页")
+	@RequestLogger("获取会员等级分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
 	public Result<IPage<MemberGrade>> getByPage(PageVO page) {
@@ -54,7 +54,7 @@ public class MemberGradeController {
 	}
 
 	@Operation(summary = "添加会员等级", description = "添加会员等级", method = CommonConstant.POST)
-	@RequestLogger(description = "添加会员等级")
+	@RequestLogger("添加会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "")
 	public Result<Object> daa(@Validated MemberGrade memberGrade) {
@@ -65,7 +65,7 @@ public class MemberGradeController {
 	}
 
 	@Operation(summary = "修改会员等级", description = "修改会员等级", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改会员等级")
+	@RequestLogger("修改会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	@PutMapping(value = "/{id}")
@@ -74,7 +74,7 @@ public class MemberGradeController {
 	}
 
 	@Operation(summary = "删除会员等级", description = "删除会员等级", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除会员等级")
+	@RequestLogger("删除会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
 	public Result<IPage<Object>> delete(@PathVariable String id) {

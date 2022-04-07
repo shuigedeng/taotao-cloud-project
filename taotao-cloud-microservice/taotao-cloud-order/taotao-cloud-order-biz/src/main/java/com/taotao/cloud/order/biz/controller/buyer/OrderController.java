@@ -42,7 +42,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表", method = CommonConstant.GET)
-	@RequestLogger(description = "查询会员订单列表")
+	@RequestLogger("查询会员订单列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
@@ -52,7 +52,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细", method = CommonConstant.GET)
-	@RequestLogger(description = "订单明细")
+	@RequestLogger("订单明细")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<OrderDetailVO> detail(
@@ -63,7 +63,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "确认收货", description = "确认收货", method = CommonConstant.POST)
-	@RequestLogger(description = "确认收货")
+	@RequestLogger("确认收货")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/receiving")
 	public Result<Object> receiving(
@@ -81,7 +81,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
-	@RequestLogger(description = "取消订单")
+	@RequestLogger("取消订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Object> cancel(@PathVariable String orderSn,
@@ -91,7 +91,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "删除订单", description = "删除订单", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除订单")
+	@RequestLogger("删除订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{orderSn}")
 	public Result<Object> deleteOrder(@PathVariable String orderSn) {
@@ -101,7 +101,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)
-	@RequestLogger(description = "查询物流踪迹")
+	@RequestLogger("查询物流踪迹")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(
@@ -111,7 +111,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "开票", description = "开票", method = CommonConstant.GET)
-	@RequestLogger(description = "开票")
+	@RequestLogger("开票")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/receipt/{orderSn}")
 	public Result<Object> invoice(

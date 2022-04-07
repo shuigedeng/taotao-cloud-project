@@ -55,7 +55,7 @@ public class AfterSaleController {
 	private AfterSaleLogService afterSaleLogService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情", method = CommonConstant.GET)
-	@RequestLogger(description = "查看售后服务详情")
+	@RequestLogger("查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> get(
@@ -65,7 +65,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取售后服务")
+	@RequestLogger("分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<AfterSaleVO>> getByPage(AfterSaleSearchParams searchParams) {
@@ -73,7 +73,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息", method = CommonConstant.GET)
-	@RequestLogger(description = "获取申请售后页面信息")
+	@RequestLogger("获取申请售后页面信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/applyAfterSaleInfo/{sn}")
 	public Result<AfterSaleApplyVO> applyAfterSaleInfo(@PathVariable String sn) {
@@ -81,7 +81,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "申请售后", description = "申请售后", method = CommonConstant.POST)
-	@RequestLogger(description = "申请售后")
+	@RequestLogger("申请售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/save/{orderItemSn}")
 	public Result<AfterSale> save(AfterSaleDTO afterSaleDTO) {
@@ -90,7 +90,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "买家 退回 物流信息", description = "买家 退回 物流信息", method = CommonConstant.POST)
-	@RequestLogger(description = "买家 退回 物流信息")
+	@RequestLogger("买家 退回 物流信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/delivery/{afterSaleSn}")
 	public Result<AfterSale> delivery(
@@ -103,7 +103,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "售后，取消售后", description = "售后，取消售后", method = CommonConstant.POST)
-	@RequestLogger(description = "售后，取消售后")
+	@RequestLogger("售后，取消售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/cancel/{afterSaleSn}")
 	public Result<AfterSale> cancel(
@@ -112,7 +112,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址", method = CommonConstant.GET)
-	@RequestLogger(description = "获取商家售后收件地址")
+	@RequestLogger("获取商家售后收件地址")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
 	public Result<StoreAfterSaleAddressDTO> getStoreAfterSaleAddress(
@@ -121,7 +121,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取售后原因", description = "获取售后原因", method = CommonConstant.GET)
-	@RequestLogger(description = "获取售后原因")
+	@RequestLogger("获取售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleReason/{serviceType}")
 	public Result<List<AfterSaleReason>> getAfterSaleReason(
@@ -130,7 +130,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取售后日志", description = "获取售后日志", method = CommonConstant.GET)
-	@RequestLogger(description = "获取售后日志")
+	@RequestLogger("获取售后日志")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/get/getAfterSaleLog/{sn}")
 	public Result<List<AfterSaleLog>> getAfterSaleLog(@PathVariable String sn) {

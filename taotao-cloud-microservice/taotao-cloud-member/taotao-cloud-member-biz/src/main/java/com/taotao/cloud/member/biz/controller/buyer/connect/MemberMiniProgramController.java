@@ -34,7 +34,7 @@ public class MemberMiniProgramController {
 	public final ShortLinkService shortLinkService;
 
 	@Operation(summary = "小程序自动登录", description = "小程序自动登录", method = CommonConstant.GET)
-	@RequestLogger(description = "小程序自动登录")
+	@RequestLogger("小程序自动登录")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/auto-login")
 	public Result<Token> autoLogin(@RequestHeader String uuid, WechatMPLoginParams params) {
@@ -43,7 +43,7 @@ public class MemberMiniProgramController {
 	}
 
 	@Operation(summary = "消息订阅", description = "消息订阅", method = CommonConstant.GET)
-	@RequestLogger(description = "消息订阅")
+	@RequestLogger("消息订阅")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/subscribe/message")
 	public Result<List<WechatMPMessage>> autoLogin() {
@@ -51,7 +51,7 @@ public class MemberMiniProgramController {
 	}
 
 	@Operation(summary = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", description = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", method = CommonConstant.GET)
-	@RequestLogger(description = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
+	@RequestLogger("小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/unlimited")
 	public Result<String> unlimited(String page, String scene) {
@@ -59,7 +59,7 @@ public class MemberMiniProgramController {
 	}
 
 	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现", description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现", method = CommonConstant.GET)
-	@RequestLogger(description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现")
+	@RequestLogger("小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/qrcode")
 	public Result<String> qrcode(String page) {
@@ -67,7 +67,7 @@ public class MemberMiniProgramController {
 	}
 
 	@Operation(summary = "根据shortlink获取页面参数", description = "根据shortlink获取页面参数", method = CommonConstant.GET)
-	@RequestLogger(description = "根据shortlink获取页面参数")
+	@RequestLogger("根据shortlink获取页面参数")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/unlimited/scene")
 	public Result<String> getScene(String id) {

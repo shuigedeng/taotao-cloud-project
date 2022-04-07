@@ -39,7 +39,7 @@ public class MemberPcController {
 	private final VerificationService verificationService;
 
 	@Operation(summary = "登录接口", description = "登录接口", method = CommonConstant.POST)
-	@RequestLogger(description = "登录接口")
+	@RequestLogger("登录接口")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/login")
 	public Result<Object> userLogin(
@@ -51,7 +51,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "注销接口", description = "注销接口", method = CommonConstant.POST)
-	@RequestLogger(description = "注销接口")
+	@RequestLogger("注销接口")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/logout")
 	public Result<Object> logout() {
@@ -60,7 +60,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "短信登录接口", description = "短信登录接口", method = CommonConstant.POST)
-	@RequestLogger(description = "短信登录接口")
+	@RequestLogger("短信登录接口")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/sms/login")
 	public Result<Object> smsLogin(@NotNull(message = "手机号为空") @RequestParam String mobile,
@@ -74,7 +74,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "注册用户", description = "注册用户", method = CommonConstant.POST)
-	@RequestLogger(description = "注册用户")
+	@RequestLogger("注册用户")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/register")
 	public Result<Object> register(
@@ -91,7 +91,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口", method = CommonConstant.GET)
-	@RequestLogger(description = "获取当前登录用户接口")
+	@RequestLogger("获取当前登录用户接口")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<Member> getUserInfo() {
@@ -99,7 +99,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "通过短信重置密码", description = "通过短信重置密码", method = CommonConstant.POST)
-	@RequestLogger(description = "通过短信重置密码")
+	@RequestLogger("通过短信重置密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	@PostMapping("/reset/mobile")
@@ -118,7 +118,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "修改密码", description = "修改密码", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改密码")
+	@RequestLogger("修改密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/password")
 	public Result<Object> resetByMobile(
@@ -127,7 +127,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "修改用户自己资料", description = "修改用户自己资料", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改用户自己资料")
+	@RequestLogger("修改用户自己资料")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/own")
 	public Result<Member> editOwn(MemberEditDTO memberEditDTO) {
@@ -135,7 +135,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "修改密码", description = "修改密码", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改密码")
+	@RequestLogger("修改密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/modifyPass")
 	public Result<Member> modifyPass(
@@ -145,7 +145,7 @@ public class MemberPcController {
 	}
 
 	@Operation(summary = "刷新token", description = "刷新token", method = CommonConstant.GET)
-	@RequestLogger(description = "刷新token")
+	@RequestLogger("刷新token")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/refresh/{refreshToken}")
 	public Result<Object> refreshToken(

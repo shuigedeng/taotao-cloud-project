@@ -65,7 +65,7 @@ public class ManagerUserController extends
 	SuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
 	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
-	@RequestLogger(description = "根据手机号码查询用户是否存在")
+	@RequestLogger("根据手机号码查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone/{phone}")
 	public Result<Boolean> existsByPhone(
@@ -75,7 +75,7 @@ public class ManagerUserController extends
 	}
 
 	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在")
-	@RequestLogger(description = "根据用户id查询用户是否存在")
+	@RequestLogger("根据用户id查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:id')")
 	@GetMapping("/exists/id/{userId}")
 	public Result<Boolean> existsByUserId(
@@ -85,7 +85,7 @@ public class ManagerUserController extends
 	}
 
 	@Operation(summary = "重置密码", description = "重置密码")
-	@RequestLogger(description = "重置密码")
+	@RequestLogger("重置密码")
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PostMapping("/rest/password/{userId}")
 	public Result<Boolean> restPass(
@@ -97,7 +97,7 @@ public class ManagerUserController extends
 	}
 
 	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息")
-	@RequestLogger(description = "获取当前登录人信息")
+	@RequestLogger("获取当前登录人信息")
 	@PreAuthorize("hasAuthority('sys:user:info:current')")
 	@GetMapping("/current")
 	public Result<UserQueryVO> getCurrentUser() {
@@ -112,7 +112,7 @@ public class ManagerUserController extends
 
 
 	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)")
-	@RequestLogger(description = "根据用户id更新角色信息(用户分配角色)")
+	@RequestLogger("根据用户id更新角色信息(用户分配角色)")
 	@PreAuthorize("hasAuthority('sys:user:role')")
 	@PutMapping("/roles/{userId}")
 	public Result<Boolean> updateUserRoles(

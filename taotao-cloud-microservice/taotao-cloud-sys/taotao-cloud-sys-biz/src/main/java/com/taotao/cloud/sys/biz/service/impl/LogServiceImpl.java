@@ -90,7 +90,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
-		RequestLogger aopLog = method.getAnnotation(RequestLogger.class);
+		RequestLogger requestLogger = method.getAnnotation(RequestLogger.class);
 
 		// 方法路径
 		String methodName =
@@ -108,7 +108,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 		}
 		// 描述
 		if (log != null) {
-			log.setDescription(aopLog.description());
+			log.setDescription(requestLogger.value());
 		}
 		//类型 0-后台 1-前台
 		//log.setType(aopLog.getType());

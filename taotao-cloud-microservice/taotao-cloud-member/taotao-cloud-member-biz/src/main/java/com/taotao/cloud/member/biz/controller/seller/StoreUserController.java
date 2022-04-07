@@ -32,7 +32,7 @@ public class StoreUserController {
 	private final MemberService memberService;
 
 	@Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口", method = CommonConstant.GET)
-	@RequestLogger(description = "获取当前登录用户接口")
+	@RequestLogger("获取当前登录用户接口")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/info")
 	public Result<Member> getUserInfo() {

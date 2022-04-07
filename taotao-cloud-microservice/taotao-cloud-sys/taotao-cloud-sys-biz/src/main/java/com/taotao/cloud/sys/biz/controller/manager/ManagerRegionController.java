@@ -53,7 +53,7 @@ public class ManagerRegionController extends
 	SuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
-	@RequestLogger(description = "根据父id查询")
+	@RequestLogger("根据父id查询")
 	@GetMapping("/parentId/{parentId}")
 	@NotAuth
 	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
@@ -65,7 +65,7 @@ public class ManagerRegionController extends
 	}
 
 	@Operation(summary = "树形结构查询", description = "树形结构查询")
-	@RequestLogger(description = "树形结构查询")
+	@RequestLogger("树形结构查询")
 	@GetMapping(value = "/tree")
 	@NotAuth
 	//@PreAuthorize("hasAuthority('sys:region:info:true')")
@@ -75,7 +75,7 @@ public class ManagerRegionController extends
 	}
 
 	@Operation(summary = "另一种树形结构查询", description = "另一种树形结构查询")
-	@RequestLogger(description = "另一种树形结构查询")
+	@RequestLogger("另一种树形结构查询")
 	@GetMapping(value = "/other/tree")
 	@PreAuthorize("hasAuthority('sys:region:info:true')")
 	public Result<List<RegionTreeVO>> treeOther() {

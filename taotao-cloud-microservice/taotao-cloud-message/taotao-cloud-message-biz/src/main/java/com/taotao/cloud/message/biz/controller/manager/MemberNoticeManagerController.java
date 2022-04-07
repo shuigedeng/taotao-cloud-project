@@ -34,7 +34,7 @@ public class MemberNoticeManagerController {
 	private MemberNoticeService memberNoticeService;
 
 	@Operation(summary = "获取详情", description = "获取详情", method = CommonConstant.GET)
-	@RequestLogger(description = "获取详情")
+	@RequestLogger("获取详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberNotice> get(@PathVariable String id) {
@@ -43,7 +43,7 @@ public class MemberNoticeManagerController {
 	}
 
 	@Operation(summary = "分页获取站内信", description = "分页获取站内信", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取站内信")
+	@RequestLogger("分页获取站内信")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<MemberNotice>> getByPage(PageVO page) {
@@ -52,7 +52,7 @@ public class MemberNoticeManagerController {
 	}
 
 	@Operation(summary = "阅读消息", description = "阅读消息", method = CommonConstant.POST)
-	@RequestLogger(description = "阅读消息")
+	@RequestLogger("阅读消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/read/{ids}")
 	public Result<Object> read(@PathVariable List ids) {
@@ -64,7 +64,7 @@ public class MemberNoticeManagerController {
 	}
 
 	@Operation(summary = "阅读全部", description = "阅读全部", method = CommonConstant.POST)
-	@RequestLogger(description = "阅读全部")
+	@RequestLogger("阅读全部")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/read/all")
 	public Result<Object> readAll() {
@@ -76,7 +76,7 @@ public class MemberNoticeManagerController {
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
-	@RequestLogger(description = "批量删除")
+	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
 	public Result<Object> delAllByIds(@PathVariable List ids) {
@@ -85,7 +85,7 @@ public class MemberNoticeManagerController {
 	}
 
 	@Operation(summary = "删除所有", description = "删除所有", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除所有")
+	@RequestLogger("删除所有")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/all")
 	public Result<Object> deleteAll() {

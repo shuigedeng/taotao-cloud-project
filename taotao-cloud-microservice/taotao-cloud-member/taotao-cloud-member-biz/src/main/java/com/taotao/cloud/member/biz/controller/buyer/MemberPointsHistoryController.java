@@ -32,7 +32,7 @@ public class MemberPointsHistoryController {
 	private final MemberPointsHistoryService memberPointsHistoryService;
 
 	@Operation(summary = "分页获取当前会员积分历史", description = "分页获取当前会员积分历史", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取当前会员积分历史")
+	@RequestLogger("分页获取当前会员积分历史")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<MemberPointsHistoryPageVO>> getByPage(PageParam page) {
@@ -41,7 +41,7 @@ public class MemberPointsHistoryController {
 	}
 
 	@Operation(summary = "获取当前会员积分", description = "获取当前会员积分", method = CommonConstant.GET)
-	@RequestLogger(description = "获取当前会员积分")
+	@RequestLogger("获取当前会员积分")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/points")
 	public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO() {

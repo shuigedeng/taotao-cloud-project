@@ -43,7 +43,7 @@ public class CategorySpecificationManagerController {
 	private final SpecificationService specificationService;
 
 	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息", method = CommonConstant.GET)
-	@RequestLogger(description = "查询某分类下绑定的规格信息")
+	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<Specification>> getCategorySpec(@PathVariable String categoryId) {
@@ -51,7 +51,7 @@ public class CategorySpecificationManagerController {
 	}
 
 	@Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用", method = CommonConstant.GET)
-	@RequestLogger(description = "查询某分类下绑定的规格信息,商品操作使用")
+	@RequestLogger("查询某分类下绑定的规格信息,商品操作使用")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/goods/{categoryId}")
 	public Result<List<Specification>> getSpec(@PathVariable String categoryId) {
@@ -59,7 +59,7 @@ public class CategorySpecificationManagerController {
 	}
 
 	@Operation(summary = "保存某分类下绑定的规格信息", description = "保存某分类下绑定的规格信息", method = CommonConstant.POST)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}")
 	public Result<Boolean> saveCategoryBrand(@PathVariable String categoryId,

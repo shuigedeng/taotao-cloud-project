@@ -39,7 +39,7 @@ public class MemberAddressController {
     private final IMemberAddressService memberAddressService;
 
 	@Operation(summary = "会员地址分页列表", description = "会员地址分页列表", method = CommonConstant.GET)
-	@RequestLogger(description = "会员地址分页列表")
+	@RequestLogger("会员地址分页列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping("/{memberId}")
     public Result<PageModel<MemberAddressVO>> getByPage(@Validated PageParam page,
@@ -48,7 +48,7 @@ public class MemberAddressController {
     }
 
 	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除会员收件地址")
+	@RequestLogger("删除会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{id}")
     public Result<Boolean> delShippingAddressById(
@@ -57,7 +57,7 @@ public class MemberAddressController {
     }
 
 	@Operation(summary = "修改会员收件地址", description = "修改会员收件地址", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改会员收件地址")
+	@RequestLogger("修改会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @PutMapping
     public Result<Boolean> editShippingAddress(@Valid MemberAddress shippingAddress) {
@@ -66,7 +66,7 @@ public class MemberAddressController {
     }
 
 	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址", method = CommonConstant.POST)
-	@RequestLogger(description = "新增会员收件地址")
+	@RequestLogger("新增会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
     @PostMapping
     public Result<Boolean> addShippingAddress(@Valid MemberAddress shippingAddress) {

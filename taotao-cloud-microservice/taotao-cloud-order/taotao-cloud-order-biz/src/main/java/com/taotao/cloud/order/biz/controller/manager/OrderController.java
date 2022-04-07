@@ -50,7 +50,7 @@ public class OrderController {
 	private OrderPriceService orderPriceService;
 
 	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页", method = CommonConstant.GET)
-	@RequestLogger(description = "查询订单列表分页")
+	@RequestLogger("查询订单列表分页")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
@@ -58,7 +58,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表", method = CommonConstant.GET)
-	@RequestLogger(description = "查询订单导出列表")
+	@RequestLogger("查询订单导出列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
 	public Result<List<OrderExportDTO>> queryExportOrder(
@@ -67,7 +67,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细", method = CommonConstant.GET)
-	@RequestLogger(description = "订单明细")
+	@RequestLogger("订单明细")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<OrderDetailVO> detail(@PathVariable String orderSn) {
@@ -75,7 +75,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "确认收款", description = "确认收款", method = CommonConstant.POST)
-	@RequestLogger(description = "确认收款")
+	@RequestLogger("确认收款")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/pay")
 	public Result<Object> payOrder(@PathVariable String orderSn) {
@@ -84,7 +84,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "修改收货人信息", description = "修改收货人信息", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改收货人信息")
+	@RequestLogger("修改收货人信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/consignee")
 	public Result<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
@@ -93,7 +93,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "修改订单价格", description = "修改订单价格", method = CommonConstant.PUT)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@RequestLogger("根据id查询物流公司信息")
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Order> updateOrderPrice(@PathVariable String orderSn,
 		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
@@ -101,7 +101,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
-	@RequestLogger(description = "取消订单")
+	@RequestLogger("取消订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Order> cancel(@PathVariable String orderSn,
@@ -110,7 +110,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)
-	@RequestLogger(description = "查询物流踪迹")
+	@RequestLogger("查询物流踪迹")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(

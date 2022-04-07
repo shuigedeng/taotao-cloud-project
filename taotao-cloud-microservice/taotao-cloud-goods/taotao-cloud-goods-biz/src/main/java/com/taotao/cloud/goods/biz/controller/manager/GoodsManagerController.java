@@ -48,7 +48,7 @@ public class GoodsManagerController {
 	private final GoodsSkuService goodsSkuService;
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<GoodsBaseVO>> getByPage(
@@ -57,7 +57,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取商品列表")
+	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
 	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(
@@ -66,7 +66,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取待审核商品")
+	@RequestLogger("分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
 	public Result<PageModel<GoodsBaseVO>> getAuthPage(
@@ -76,7 +76,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "管理员下架商品", description = "管理员下架商品", method = CommonConstant.PUT)
-	@RequestLogger(description = "管理员下架商品")
+	@RequestLogger("管理员下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
 	public Result<Boolean> underGoods(@PathVariable String goodsId,
@@ -87,7 +87,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "管理员审核商品", description = "管理员审核商品", method = CommonConstant.PUT)
-	@RequestLogger(description = "管理员审核商品")
+	@RequestLogger("管理员审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
 	public Result<Boolean> auth(@PathVariable List<String> goodsIds,
@@ -97,7 +97,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "管理员上架商品", description = "管理员上架商品", method = CommonConstant.PUT)
-	@RequestLogger(description = "管理员上架商品")
+	@RequestLogger("管理员上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/up")
 	public Result<Boolean> unpGoods(@PathVariable List<String> goodsId) {
@@ -106,7 +106,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取商品详情")
+	@RequestLogger("通过id获取商品详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<GoodsVO> get(@PathVariable String id) {

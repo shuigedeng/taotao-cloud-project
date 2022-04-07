@@ -50,7 +50,7 @@ public class GeneratorController {
 	private Boolean generatorEnabled;
 
 	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
-	@RequestLogger(description = "查询数据库数据")
+	@RequestLogger("查询数据库数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/tables/all")
 	public Result<Object> getTables() {
@@ -58,7 +58,7 @@ public class GeneratorController {
 	}
 
 	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
-	@RequestLogger(description = "查询数据库数据")
+	@RequestLogger("查询数据库数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/tables")
 	public Result<Object> getTables(@RequestParam(defaultValue = "") String name,
@@ -68,7 +68,7 @@ public class GeneratorController {
 	}
 
 	@Operation(summary = "查询字段数据", description = "查询字段数据", method = CommonConstant.GET)
-	@RequestLogger(description = "查询字段数据")
+	@RequestLogger("查询字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/columns")
 	public Result<List<ColumnConfig>> getTables(@RequestParam String tableName) {
@@ -80,7 +80,7 @@ public class GeneratorController {
 
 	@PutMapping
 	@Operation(summary = "保存字段数据", description = "保存字段数据", method = CommonConstant.PUT)
-	@RequestLogger(description = "保存字段数据")
+	@RequestLogger("保存字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Boolean> save(@RequestBody List<ColumnConfig> columnInfos) {
 		generatorService.save(columnInfos);
@@ -88,7 +88,7 @@ public class GeneratorController {
 	}
 
 	@Operation(summary = "同步字段数据", description = "同步字段数据", method = CommonConstant.POST)
-	@RequestLogger(description = "同步字段数据")
+	@RequestLogger("同步字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/sync")
 	public Result<Boolean> sync(@RequestBody List<String> tables) {
@@ -100,7 +100,7 @@ public class GeneratorController {
 	}
 
 	@Operation(summary = "生成代码", description = "生成代码", method = CommonConstant.POST)
-	@RequestLogger(description = "生成代码")
+	@RequestLogger("生成代码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/{tableName}/{type}")
 	public Result<Object> generator(@PathVariable String tableName,

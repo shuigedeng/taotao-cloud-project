@@ -30,7 +30,7 @@ public class MemberMessageManagerController {
 	private MemberMessageService memberMessageService;
 
 	@Operation(summary = "多条件分页获取", description = "多条件分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "多条件分页获取")
+	@RequestLogger("多条件分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<MemberMessage>> getByCondition(

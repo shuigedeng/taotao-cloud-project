@@ -50,7 +50,7 @@ public class MemberCollectionController {
 	private static final String goods = "GOODS";
 
 	@Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表", method = CommonConstant.GET)
-	@RequestLogger(description = "查询会员收藏列表")
+	@RequestLogger("查询会员收藏列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{type}")
 	public Result<PageModel<StoreCollectionVO>> goodsListPage(
@@ -66,7 +66,7 @@ public class MemberCollectionController {
 	}
 
 	@Operation(summary = "添加会员收藏", description = "添加会员收藏", method = CommonConstant.POST)
-	@RequestLogger(description = "添加会员收藏")
+	@RequestLogger("添加会员收藏")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/{type}/{id}")
 	public Result<Boolean> addGoodsCollection(
@@ -80,7 +80,7 @@ public class MemberCollectionController {
 	}
 
 	@Operation(summary = "删除会员收藏", description = "删除会员收藏", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除会员收藏")
+	@RequestLogger("删除会员收藏")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{type}/{id}")
 	public Result<Object> deleteGoodsCollection(
@@ -93,7 +93,7 @@ public class MemberCollectionController {
 	}
 
 	@Operation(summary = "查询会员是否收藏", description = "查询会员是否收藏", method = CommonConstant.GET)
-	@RequestLogger(description = "查询会员是否收藏")
+	@RequestLogger("查询会员是否收藏")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{type}/{id}/collection")
 	public Result<Boolean> isCollection(

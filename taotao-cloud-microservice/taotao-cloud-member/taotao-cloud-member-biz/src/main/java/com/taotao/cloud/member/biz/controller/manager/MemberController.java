@@ -43,7 +43,7 @@ public class MemberController {
 	private final MemberService memberService;
 
 	@Operation(summary = "会员分页列表", description = "会员分页列表", method = CommonConstant.GET)
-	@RequestLogger(description = "会员分页列表")
+	@RequestLogger("会员分页列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageModel<MemberVO>> getByPage(MemberSearchPageDTO memberSearchPageDTO) {
@@ -52,7 +52,7 @@ public class MemberController {
 	}
 
 	@Operation(summary = "通过ID获取会员信息", description = "通过ID获取会员信息", method = CommonConstant.GET)
-	@RequestLogger(description = "通过ID获取会员信息")
+	@RequestLogger("通过ID获取会员信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<Member> get(@PathVariable String id) {
@@ -60,7 +60,7 @@ public class MemberController {
 	}
 
 	@Operation(summary = "添加会员", description = "添加会员", method = CommonConstant.POST)
-	@RequestLogger(description = "添加会员")
+	@RequestLogger("添加会员")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
 	public Result<Member> save(@Valid MemberAddDTO member) {
@@ -68,7 +68,7 @@ public class MemberController {
 	}
 
 	@Operation(summary = "修改会员基本信息", description = "修改会员基本信息", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改会员基本信息")
+	@RequestLogger("修改会员基本信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<Member> update(@Valid ManagerMemberEditDTO managerMemberEditDTO) {
@@ -76,7 +76,7 @@ public class MemberController {
 	}
 
 	@Operation(summary = "修改会员状态,开启关闭会员", description = "修改会员状态,开启关闭会员", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改会员状态,开启关闭会员")
+	@RequestLogger("修改会员状态,开启关闭会员")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/status")
 	public Result<Object> updateMemberStatus(@RequestParam List<String> memberIds,
@@ -85,7 +85,7 @@ public class MemberController {
 	}
 
 	@Operation(summary = "根据条件查询会员总数", description = "根据条件查询会员总数", method = CommonConstant.GET)
-	@RequestLogger(description = "根据条件查询会员总数")
+	@RequestLogger("根据条件查询会员总数")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/num")
 	public Result<Long> getByPage(MemberSearchVO memberSearchVO) {

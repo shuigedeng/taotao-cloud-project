@@ -50,7 +50,7 @@ public class OrderComplaintController {
 	private OrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable String id) {
@@ -59,7 +59,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderComplaint>> get(OrderComplaintSearchParams searchParams,
@@ -70,7 +70,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话", method = CommonConstant.POST)
-	@RequestLogger(description = "添加交易投诉对话")
+	@RequestLogger("添加交易投诉对话")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication")
 	public Result<OrderComplaintCommunicationVO> addCommunication(
@@ -84,7 +84,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "修改申诉信息", description = "修改申诉信息", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改申诉信息")
+	@RequestLogger("修改申诉信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<OrderComplaintVO> update(OrderComplaintVO orderComplainVO) {
@@ -95,7 +95,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "申诉", description = "申诉", method = CommonConstant.POST)
-	@RequestLogger(description = "申诉")
+	@RequestLogger("申诉")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/appeal")
 	public Result<OrderComplaintVO> appeal(StoreAppealVO storeAppealVO) {
@@ -105,7 +105,7 @@ public class OrderComplaintController {
 	}
 	
 	@Operation(summary = "修改状态", description = "修改状态", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改状态")
+	@RequestLogger("修改状态")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status")
 	public Result<Object> updateStatus(OrderComplaintOperationParams orderComplainVO) {

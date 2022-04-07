@@ -49,7 +49,7 @@ public class OrderComplaintController {
 	private OrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable String id) {
@@ -57,7 +57,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderComplaint>> get(OrderComplaintSearchParams searchParams,
@@ -66,7 +66,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.PUT)
-	@RequestLogger(description = "更新数据")
+	@RequestLogger("更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<OrderComplaintVO> update(OrderComplaintVO orderComplainVO) {
@@ -75,7 +75,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话", method = CommonConstant.POST)
-	@RequestLogger(description = "添加交易投诉对话")
+	@RequestLogger("添加交易投诉对话")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication")
 	public Result<OrderComplaintCommunicationVO> addCommunication(
@@ -89,7 +89,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "修改状态", description = "修改状态", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改状态")
+	@RequestLogger("修改状态")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status")
 	public Result<Object> updateStatus(OrderComplaintOperationParams orderComplainVO) {
@@ -98,7 +98,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "仲裁", description = "仲裁", method = CommonConstant.PUT)
-	@RequestLogger(description = "仲裁")
+	@RequestLogger("仲裁")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/complete/{id}")
 	public Result<Object> complete(@PathVariable String id, String arbitrationResult) {

@@ -41,7 +41,7 @@ public class StoreMessageController {
 	private StoreMessageService storeMessageService;
 
 	@Operation(summary = "获取商家消息", description = "获取商家消息", method = CommonConstant.GET)
-	@RequestLogger(description = "获取商家消息")
+	@RequestLogger("获取商家消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<IPage<StoreMessage>> getPage(String status, PageVO pageVo) {
@@ -54,7 +54,7 @@ public class StoreMessageController {
 	}
 
 	@Operation(summary = "获取商家消息总汇", description = "获取商家消息总汇", method = CommonConstant.GET)
-	@RequestLogger(description = "获取商家消息总汇")
+	@RequestLogger("获取商家消息总汇")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
 	public Result<Map<String, Object>> getPage(PageVO pageVo) {
@@ -79,7 +79,7 @@ public class StoreMessageController {
 	}
 
 	@Operation(summary = "已读操作", description = "已读操作", method = CommonConstant.PUT)
-	@RequestLogger(description = "已读操作")
+	@RequestLogger("已读操作")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}/read")
 	public Result<Boolean> readMessage(@PathVariable String id) {
@@ -89,7 +89,7 @@ public class StoreMessageController {
 	}
 
 	@Operation(summary = "回收站还原消息", description = "回收站还原消息", method = CommonConstant.PUT)
-	@RequestLogger(description = "回收站还原消息")
+	@RequestLogger("回收站还原消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}/reduction")
 	public Result<Boolean> reductionMessage(@PathVariable String id) {
@@ -99,7 +99,7 @@ public class StoreMessageController {
 	}
 
 	@Operation(summary = "删除操作", description = "删除操作", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除操作")
+	@RequestLogger("删除操作")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}")
 	public Result<Boolean> deleteMessage(@PathVariable String id) {
@@ -110,7 +110,7 @@ public class StoreMessageController {
 	}
 
 	@Operation(summary = "彻底删除操作", description = "彻底删除操作", method = CommonConstant.DELETE)
-	@RequestLogger(description = "彻底删除操作")
+	@RequestLogger("彻底删除操作")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}/thorough")
 	public Result<Boolean> disabled(@PathVariable String id) {

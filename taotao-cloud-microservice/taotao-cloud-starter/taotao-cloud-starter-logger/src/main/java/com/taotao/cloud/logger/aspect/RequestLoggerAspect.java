@@ -324,7 +324,7 @@ public class RequestLoggerAspect {
 	}
 
 	/**
-	 * 优先从子类获取 @RequestOperateLog： 1，若子类重写了该方法，有标记就记录日志，没标记就忽略日志 2，若子类没有重写该方法，就从父类获取，父类有标记就记录日志，没标记就忽略日志
+	 * 优先从子类获取 @RequestLogger： 1，若子类重写了该方法，有标记就记录日志，没标记就忽略日志 2，若子类没有重写该方法，就从父类获取，父类有标记就记录日志，没标记就忽略日志
 	 */
 	public static RequestLogger getTargetAnnotation(JoinPoint point) {
 		try {
@@ -431,13 +431,13 @@ public class RequestLoggerAspect {
 		if (annotation == null) {
 			return StrPool.EMPTY;
 		}
-		return annotation.description();
+		return annotation.value();
 	}
 
 	public static String getDescribe(RequestLogger annotation) {
 		if (annotation == null) {
 			return StrPool.EMPTY;
 		}
-		return annotation.description();
+		return annotation.value();
 	}
 }

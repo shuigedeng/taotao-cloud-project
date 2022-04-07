@@ -36,7 +36,7 @@ public class BillStoreController {
 	private final StoreFlowService storeFlowService;
 
 	@Operation(summary = "获取结算单分页", description = "获取结算单分页", method = CommonConstant.GET)
-	@RequestLogger(description = "获取结算单分页")
+	@RequestLogger("获取结算单分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
 	public Result<IPage<BillListVO>> getByPage(BillSearchParams billSearchParams) {
@@ -46,7 +46,7 @@ public class BillStoreController {
 	}
 
 	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取结算单")
+	@RequestLogger("通过id获取结算单")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<Bill> get(@PathVariable String id) {
@@ -54,7 +54,7 @@ public class BillStoreController {
 	}
 
 	@Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页", method = CommonConstant.GET)
-	@RequestLogger(description = "获取商家结算单流水分页")
+	@RequestLogger("获取商家结算单流水分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/flow/{id}")
 	public Result<IPage<StoreFlow>> getStoreFlow(@PathVariable String id,
@@ -65,7 +65,7 @@ public class BillStoreController {
 	}
 
 	@Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页", method = CommonConstant.GET)
-	@RequestLogger(description = "获取商家分销订单流水分页")
+	@RequestLogger("获取商家分销订单流水分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/distribution/flow/{id}")
 	public Result<IPage<StoreFlow>> getDistributionFlow(@PathVariable String id, PageVO pageVO) {
@@ -74,7 +74,7 @@ public class BillStoreController {
 	}
 
 	@Operation(summary = "核对结算单", description = "核对结算单", method = CommonConstant.PUT)
-	@RequestLogger(description = "核对结算单")
+	@RequestLogger("核对结算单")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping(value = "/check/{id}")
 	public Result<Object> examine(@PathVariable String id) {
@@ -84,7 +84,7 @@ public class BillStoreController {
 	}
 
 	@Operation(summary = "下载结算单", description = "下载结算单", method = CommonConstant.GET)
-	@RequestLogger(description = "下载结算单")
+	@RequestLogger("下载结算单")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/download/{id}")
 	public void downLoadDeliverExcel(@PathVariable String id) {

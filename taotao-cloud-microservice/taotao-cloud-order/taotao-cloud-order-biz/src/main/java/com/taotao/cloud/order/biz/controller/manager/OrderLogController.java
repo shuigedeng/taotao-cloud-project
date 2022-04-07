@@ -29,7 +29,7 @@ public class OrderLogController {
 	private OrderLogService orderLogService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderLog> get(@PathVariable String id) {
@@ -37,7 +37,7 @@ public class OrderLogController {
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<OrderLog>> getByPage(OrderLog entity,

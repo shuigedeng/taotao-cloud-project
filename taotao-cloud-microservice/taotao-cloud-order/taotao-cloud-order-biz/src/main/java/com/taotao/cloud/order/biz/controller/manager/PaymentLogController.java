@@ -29,7 +29,7 @@ public class PaymentLogController {
 	private OrderService orderService;
 
 	@Operation(summary = "分页获取支付日志", description = "分页获取支付日志", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取支付日志")
+	@RequestLogger("分页获取支付日志")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<PaymentLog>> getByPage(Order order,

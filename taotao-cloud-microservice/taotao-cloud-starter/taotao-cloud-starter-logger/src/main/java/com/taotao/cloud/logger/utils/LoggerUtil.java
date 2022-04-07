@@ -52,7 +52,7 @@ public class LoggerUtil {
 			if (method.getName().equals(methodName)) {
 				Class<?>[] clazzs = method.getParameterTypes();
 				if (clazzs.length == args.length) {
-					description = method.getAnnotation(RequestLogger.class).description();
+					description = method.getAnnotation(RequestLogger.class).value();
 					break;
 				}
 			}

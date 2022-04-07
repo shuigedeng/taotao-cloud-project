@@ -51,7 +51,7 @@ public class OrderInfoController extends
 	SuperController<IOrderInfoService, OrderInfo, Long, BaseQuery, OrderSaveDTO, OrderUpdateDTO, OrderVO> {
 
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
-	@RequestLogger(description = "根据父id查询")
+	@RequestLogger("根据父id查询")
 	@GetMapping("/parentId/{parentId}")
 	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<OrderBO>> queryRegionByParentId(
