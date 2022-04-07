@@ -6,15 +6,12 @@ package com.taotao.cloud.sys.biz.entity.scheduled;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.time.LocalDateTime;
 
 /**
  * Scheduled日志表
@@ -45,8 +42,8 @@ public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 	/**
 	 * 开始时间
 	 */
-	@Column(name = "statr_time", nullable = false, columnDefinition = "TIMESTAMP comment '开始时间'")
-	private LocalDateTime statrTime;
+	@Column(name = "start_time", nullable = false, columnDefinition = "TIMESTAMP comment '开始时间'")
+	private LocalDateTime startTime;
 
 	/**
 	 * 结束时间

@@ -497,8 +497,8 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
                     developers {
                         developer {
-                            id = 'dengtao'
-                            name = 'dengtao'
+                            id = 'shuigedeng'
+                            name = 'shuigedeng'
                             email = '981376577@qq.com'
                         }
                     }

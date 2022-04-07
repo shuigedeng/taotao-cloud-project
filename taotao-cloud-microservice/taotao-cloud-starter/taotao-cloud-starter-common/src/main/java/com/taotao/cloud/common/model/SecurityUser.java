@@ -407,7 +407,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		private SecurityUserBuilder() {
 		}
 
-		public SecurityUserBuilder userId(String userId) {
+		public SecurityUserBuilder userId(Long userId) {
 			this.userId = userId;
 			return this;
 		}

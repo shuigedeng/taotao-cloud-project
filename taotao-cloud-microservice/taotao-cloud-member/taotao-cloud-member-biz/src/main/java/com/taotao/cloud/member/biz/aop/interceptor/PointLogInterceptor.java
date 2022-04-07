@@ -26,7 +26,7 @@ public class PointLogInterceptor {
     @Autowired
     private MemberService memberService;
 
-    @After("@annotation(member.aop.annotation.PointLogPoint)")
+    @After("@annotation(com.taotao.cloud.member.biz.aop.annotation.PointLogPoint)")
     public void doAfter(JoinPoint pjp) {
         //参数
         Object[] obj = pjp.getArgs();

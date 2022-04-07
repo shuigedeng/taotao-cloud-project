@@ -236,8 +236,8 @@ publishing {
 
                 developers {
                     developer {
-                        id = 'dengtao'
-                        name = 'dengtao'
+                        id = 'shuigedeng'
+                        name = 'shuigedeng'
                         email = '981376577@qq.com'
                     }
                 }
