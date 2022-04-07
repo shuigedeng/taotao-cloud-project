@@ -35,7 +35,7 @@ public class CategoryBuyerController {
 	private CategoryService categoryService;
 
 	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表", method = CommonConstant.GET)
-	@RequestLogger(description = "根据父id获取商品分类列表")
+	@RequestLogger("根据父id获取商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}")
 	public Result<List<CategoryVO>> list(

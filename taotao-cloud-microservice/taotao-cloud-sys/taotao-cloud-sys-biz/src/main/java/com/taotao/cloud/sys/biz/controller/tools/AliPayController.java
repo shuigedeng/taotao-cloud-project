@@ -45,7 +45,7 @@ public class AliPayController {
 	private final IAlipayConfigService alipayService;
 
 	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息",method = CommonConstant.GET)
-	@RequestLogger(description = "查询阿里支付配置信息")
+	@RequestLogger("查询阿里支付配置信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<AlipayConfig> get() {
@@ -53,7 +53,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "配置支付宝", description = "配置支付宝", method = CommonConstant.PUT)
-	@RequestLogger(description = "配置支付宝")
+	@RequestLogger("配置支付宝")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<Boolean> payConfig(@Validated @RequestBody AlipayConfig alipayConfig) {
@@ -63,7 +63,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付宝PC网页支付", description = "支付宝PC网页支付", method = CommonConstant.POST)
-	@RequestLogger(description = "支付宝PC网页支付")
+	@RequestLogger("支付宝PC网页支付")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsPC")
 	public Result<String> toPayAsPc(@Validated @RequestBody TradeVo trade)
@@ -75,7 +75,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付宝手机网页支付", description = "支付宝手机网页支付", method = CommonConstant.POST)
-	@RequestLogger(description = "支付宝手机网页支付")
+	@RequestLogger("支付宝手机网页支付")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsWeb")
 	public Result<String> toPayAsWeb(@Validated @RequestBody TradeVo trade)
@@ -87,7 +87,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付之后跳转的链接", description = "支付之后跳转的链接", method = CommonConstant.GET)
-	@RequestLogger(description = "支付之后跳转的链接")
+	@RequestLogger("支付之后跳转的链接")
 	@Hidden
 	@GetMapping("/return")
 	@NotAuth
@@ -117,7 +117,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理", description = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理")
-	@RequestLogger(description = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理")
+	@RequestLogger("支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理")
 	@Hidden
 	@RequestMapping("/notify")
 	@NotAuth

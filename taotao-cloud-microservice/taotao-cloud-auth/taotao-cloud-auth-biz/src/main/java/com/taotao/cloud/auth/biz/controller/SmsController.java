@@ -29,7 +29,7 @@ public class SmsController {
 	private SmsService smsService;
 
 	@Operation(summary = "发送短信", description = "发送短信", method = CommonConstant.POST)
-	@RequestLogger(description = "发送短信")
+	@RequestLogger("发送短信")
 	@PostMapping("/phone")
 	public Result<Boolean> sendSms(String phone) {
 		boolean result = smsService.sendSms(phone);

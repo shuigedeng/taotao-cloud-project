@@ -57,7 +57,7 @@
 //    private IClientService clientService;
 //
 //    @ApiOperation(value = "应用列表")
-//    @RequestLogger(description = "应用列表")
+//    @RequestLogger("应用列表")
 //    @PreAuthorize("hasAuthority('sys:dict:update')")
 //    @GetMapping("/page")
 //    public PageResult<Client> list(@Validated ClientPageQuery clientPageQuery) {
@@ -66,7 +66,7 @@
 //    }
 //
 //    @ApiOperation(value = "根据id获取应用")
-//    @RequestLogger(description = "根据id获取应用")
+//    @RequestLogger("根据id获取应用")
 //    @PreAuthorize("hasAuthority('sys:dict:update')")
 //    @GetMapping("/{clientId}")
 //    public Result<Client> getByClientId(@PathVariable(value = "clientId") String clientId) {
@@ -75,7 +75,7 @@
 //    }
 //
 //    @ApiOperation(value = "获取所有应用")
-//    @RequestLogger(description = "获取所有应用")
+//    @RequestLogger("获取所有应用")
 //    @PreAuthorize("hasAuthority('sys:dict:update')")
 //    @GetMapping
 //    public Result<List<Client>> getAllClient() {
@@ -85,7 +85,7 @@
 //    }
 //
 //    @ApiOperation(value = "删除应用")
-//    @RequestLogger(description = "删除应用")
+//    @RequestLogger("删除应用")
 //    @PreAuthorize("hasAuthority('sys:dict:update')")
 //    @DeleteMapping("/{clientId}")
 //    public Result<Boolean> delete(@PathVariable(value = "clientId") String clientId) {
@@ -94,7 +94,7 @@
 //    }
 //
 //    @ApiOperation(value = "保存应用")
-//    @RequestLogger(description = "保存应用")
+//    @RequestLogger("保存应用")
 //    @PreAuthorize("hasAuthority('sys:dict:update')")
 //    @PostMapping
 //    public Result<Boolean> save(@Validated @RequestBody ClientDTO clientDto) {
@@ -103,7 +103,7 @@
 //    }
 //
 //    @ApiOperation(value = "修改应用")
-//    @RequestLogger(description = "修改应用")
+//    @RequestLogger("修改应用")
 //    @PreAuthorize("hasAuthority('sys:dict:update')")
 //    @PutMapping("/{clientId}")
 //    public Result<Boolean> update(@PathVariable(value = "clientId") String clientId,

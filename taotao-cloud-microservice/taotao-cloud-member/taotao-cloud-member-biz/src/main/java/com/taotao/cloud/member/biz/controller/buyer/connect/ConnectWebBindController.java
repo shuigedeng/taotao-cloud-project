@@ -48,7 +48,7 @@ public class ConnectWebBindController {
 	private final ConnectUtil connectUtil;
 
 	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权", method = CommonConstant.GET)
-	@RequestLogger(description = "WEB信任登录授权")
+	@RequestLogger("WEB信任登录授权")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/login/web/{type}")
 	public Result<String> webAuthorize(
@@ -61,7 +61,7 @@ public class ConnectWebBindController {
 	}
 
 	@Operation(summary = "信任登录统一回调地址", description = "信任登录统一回调地址", method = CommonConstant.GET)
-	@RequestLogger(description = "信任登录统一回调地址")
+	@RequestLogger("信任登录统一回调地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/callback/{type}")
 	public void callBack(@PathVariable String type, AuthCallback callback,
@@ -71,7 +71,7 @@ public class ConnectWebBindController {
 	}
 
 	@Operation(summary = "信任登录响应结果获取", description = "信任登录响应结果获取", method = CommonConstant.GET)
-	@RequestLogger(description = "信任登录响应结果获取")
+	@RequestLogger("信任登录响应结果获取")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/result")
 	public Result<Object> callBackResult(String state) {
@@ -82,7 +82,7 @@ public class ConnectWebBindController {
 	}
 
 	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权", method = CommonConstant.GET)
-	@RequestLogger(description = "WEB信任登录授权")
+	@RequestLogger("WEB信任登录授权")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/register/auto")
 	public Result<Token> webAuthorize() {
@@ -91,7 +91,7 @@ public class ConnectWebBindController {
 	}
 
 	@Operation(summary = "unionID登录", description = "unionID登录", method = CommonConstant.GET)
-	@RequestLogger(description = "unionID登录")
+	@RequestLogger("unionID登录")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	//@ApiImplicitParams({
 	//	@ApiImplicitParam(name = "openId", value = "openid", required = true, paramType = "query"),

@@ -36,7 +36,7 @@ public @interface RequestLogger {
 	/**
 	 * 功能描述
 	 */
-	String description() default "";
+	String value() default "";
 
 	/**
 	 * 是否启用 操作日志

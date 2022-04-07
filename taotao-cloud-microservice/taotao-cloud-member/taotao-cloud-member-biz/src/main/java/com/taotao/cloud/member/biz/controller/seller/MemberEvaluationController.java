@@ -38,7 +38,7 @@ public class MemberEvaluationController {
 	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取会员评论列表")
+	@RequestLogger("分页获取会员评论列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<IPage<MemberEvaluationListVO>> getByPage(
@@ -49,7 +49,7 @@ public class MemberEvaluationController {
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> get(@PathVariable String id) {
@@ -57,7 +57,7 @@ public class MemberEvaluationController {
 	}
 
 	@Operation(summary = "回复评价", description = "回复评价", method = CommonConstant.PUT)
-	@RequestLogger(description = "回复评价")
+	@RequestLogger("回复评价")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping(value = "/reply/{id}")
 	public Result<MemberEvaluationVO> reply(@PathVariable String id, @RequestParam String reply,

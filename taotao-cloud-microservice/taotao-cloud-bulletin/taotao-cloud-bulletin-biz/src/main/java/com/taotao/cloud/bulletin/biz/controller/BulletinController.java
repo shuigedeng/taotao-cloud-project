@@ -51,7 +51,7 @@ public class BulletinController {
 	}
 
 	@Operation(summary = "根据id查询提现申请信息", description = "根据id查询提现申请信息", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询提现申请信息")
+	@RequestLogger("根据id查询提现申请信息")
 	@PreAuthorize("hasAuthority('withdraw:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<BulletinVO> findWithdrawById(@PathVariable(value = "id") Long id) {

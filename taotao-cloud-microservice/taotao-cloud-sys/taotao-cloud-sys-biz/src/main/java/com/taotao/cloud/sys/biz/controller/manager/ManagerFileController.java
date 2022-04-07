@@ -44,7 +44,7 @@ public class ManagerFileController {
 	private final IFileService fileService;
 
 	@Operation(summary = "上传单个文件", description = "上传单个文件", method = CommonConstant.POST)
-	@RequestLogger(description = "上传单个文件")
+	@RequestLogger("上传单个文件")
 	@PreAuthorize("hasAuthority('file:upload')")
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
 	public Result<UploadFileVO> upload(@RequestPart("file") MultipartFile file) {
@@ -59,7 +59,7 @@ public class ManagerFileController {
 	}
 
 	@Operation(summary = "上传多个文件", description = "上传多个文件", method = CommonConstant.POST)
-	@RequestLogger(description = "上传多个文件")
+	@RequestLogger("上传多个文件")
 	@PreAuthorize("hasAuthority('file:multiple:upload')")
 	@PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
 	public Result<List<UploadFileVO>> uploadMultipleFiles(
@@ -83,7 +83,7 @@ public class ManagerFileController {
 	}
 
 	@Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询文件信息")
+	@RequestLogger("根据id查询文件信息")
 	@PreAuthorize("hasAuthority('file:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {

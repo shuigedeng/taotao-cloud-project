@@ -47,7 +47,7 @@ public class EmailController {
 	private final IEmailConfigService emailService;
 
 	@Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息", method = CommonConstant.GET)
-	@RequestLogger(description = "查询邮件配置信息")
+	@RequestLogger("查询邮件配置信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<EmailConfig> get() {
@@ -55,7 +55,7 @@ public class EmailController {
 	}
 
 	@Operation(summary = "配置邮件", description = "配置邮件", method = CommonConstant.PUT)
-	@RequestLogger(description = "配置邮件")
+	@RequestLogger("配置邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<Boolean> update(@Validated @RequestBody EmailConfig emailConfig) {
@@ -64,7 +64,7 @@ public class EmailController {
 	}
 
 	@Operation(summary = "添加配置邮件", description = "添加配置邮件", method = CommonConstant.POST)
-	@RequestLogger(description = "添加配置邮件")
+	@RequestLogger("添加配置邮件")
 	@NotAuth
 	@PostMapping
 	public Result<Boolean> add(@Validated @RequestBody EmailConfig emailConfig) {
@@ -107,7 +107,7 @@ public class EmailController {
 	}
 
 	@Operation(summary = "发送邮件", description = "发送邮件", method = CommonConstant.POST)
-	@RequestLogger(description = "发送邮件")
+	@RequestLogger("发送邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/send")
 	public Result<Boolean> send(@Validated @RequestBody EmailVo emailVo) throws Exception {

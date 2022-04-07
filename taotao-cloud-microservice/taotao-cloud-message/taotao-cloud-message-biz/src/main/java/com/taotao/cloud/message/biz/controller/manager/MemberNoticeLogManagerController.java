@@ -31,7 +31,7 @@ public class MemberNoticeLogManagerController {
 	private MemberNoticeLogService memberNoticeLogService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberNoticeLog> get(@PathVariable String id) {
@@ -40,7 +40,7 @@ public class MemberNoticeLogManagerController {
 	}
 
 	@Operation(summary = "获取全部数据", description = "获取全部数据", method = CommonConstant.GET)
-	@RequestLogger(description = "获取全部数据")
+	@RequestLogger("获取全部数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<MemberNoticeLog>> getAll() {
@@ -49,7 +49,7 @@ public class MemberNoticeLogManagerController {
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<MemberNoticeLog>> getByPage(PageVO page) {
@@ -58,7 +58,7 @@ public class MemberNoticeLogManagerController {
 	}
 
 	@Operation(summary = "编辑或更新数据", description = "编辑或更新数据", method = CommonConstant.POST)
-	@RequestLogger(description = "编辑或更新数据")
+	@RequestLogger("编辑或更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/insertOrUpdate")
 	public Result<MemberNoticeLog> saveOrUpdate(MemberNoticeLog memberNoticeLog) {
@@ -67,7 +67,7 @@ public class MemberNoticeLogManagerController {
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
-	@RequestLogger(description = "批量删除")
+	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/delByIds/{ids}")
 	public Result<Object> delAllByIds(@PathVariable List ids) {

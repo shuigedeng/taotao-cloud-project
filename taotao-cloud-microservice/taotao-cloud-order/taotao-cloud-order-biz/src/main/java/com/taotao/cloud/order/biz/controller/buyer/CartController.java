@@ -41,7 +41,7 @@ public class CartController {
 	private CartService cartService;
 
 	@Operation(summary = "向购物车中添加一个产品", description = "向购物车中添加一个产品", method = CommonConstant.POST)
-	@RequestLogger(description = "向购物车中添加一个产品")
+	@RequestLogger("向购物车中添加一个产品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Object> add(@NotNull(message = "产品id不能为空") String skuId,
@@ -61,7 +61,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "获取购物车页面购物车详情", description = "获取购物车页面购物车详情", method = CommonConstant.GET)
-	@RequestLogger(description = "获取购物车页面购物车详情")
+	@RequestLogger("获取购物车页面购物车详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
 	public Result<TradeDTO> cartAll() {
@@ -69,7 +69,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "获取购物车数量", description = "获取购物车数量", method = CommonConstant.GET)
-	@RequestLogger(description = "获取购物车数量")
+	@RequestLogger("获取购物车数量")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/count")
 	public Result<Long> cartCount(@RequestParam(required = false) Boolean checked) {
@@ -77,7 +77,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "获取购物车可用优惠券数量", description = "获取购物车可用优惠券数量", method = CommonConstant.GET)
-	@RequestLogger(description = "获取购物车可用优惠券数量")
+	@RequestLogger("获取购物车可用优惠券数量")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon/num")
 	public Result<Long> cartCouponNum(String way) {
@@ -85,7 +85,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "更新购物车中的多个产品的数量或选中状态", description = "更新购物车中的多个产品的数量或选中状态", method = CommonConstant.POST)
-	@RequestLogger(description = "更新购物车中的多个产品的数量或选中状态")
+	@RequestLogger("更新购物车中的多个产品的数量或选中状态")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/num/{skuId}")
 	public Result<Object> update(
@@ -96,7 +96,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "更新购物车中单个产品 更新购物车中的多个产品的数量或选中状态", description = "更新购物车中的多个产品的数量或选中状态", method = CommonConstant.POST)
-	@RequestLogger(description = "更新购物车中的多个产品的数量或选中状态")
+	@RequestLogger("更新购物车中的多个产品的数量或选中状态")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/checked/{skuId}")
 	public Result<Object> updateChecked(
@@ -107,7 +107,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "购物车选中设置", description = "购物车选中设置", method = CommonConstant.POST)
-	@RequestLogger(description = "购物车选中设置")
+	@RequestLogger("购物车选中设置")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/checked", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Result<Object> updateAll(boolean checked) {
@@ -116,7 +116,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "批量设置某商家的商品为选中或不选中", description = "批量设置某商家的商品为选中或不选中", method = CommonConstant.POST)
-	@RequestLogger(description = "批量设置某商家的商品为选中或不选中")
+	@RequestLogger("批量设置某商家的商品为选中或不选中")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/store/{storeId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Result<Object> updateStoreAll(
@@ -127,7 +127,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "清空购物车", description = "清空购物车", method = CommonConstant.DELETE)
-	@RequestLogger(description = "清空购物车")
+	@RequestLogger("清空购物车")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping()
 	public Result<Object> clean() {
@@ -136,7 +136,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "删除购物车中的一个或多个产品", description = "删除购物车中的一个或多个产品", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除购物车中的一个或多个产品")
+	@RequestLogger("删除购物车中的一个或多个产品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/sku/remove")
 	public Result<Object> delete(String[] skuIds) {
@@ -145,7 +145,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "获取结算页面购物车详情", description = "获取结算页面购物车详情", method = CommonConstant.DELETE)
-	@RequestLogger(description = "获取结算页面购物车详情")
+	@RequestLogger("获取结算页面购物车详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/checked")
 	public Result<TradeDTO> cartChecked(@NotNull(message = "读取选中列表") String way) {
@@ -162,7 +162,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "选择收货地址", description = "选择收货地址", method = CommonConstant.DELETE)
-	@RequestLogger(description = "选择收货地址")
+	@RequestLogger("选择收货地址")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/shippingAddress")
 	public Result<Object> shippingAddress(
@@ -180,7 +180,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "选择配送方式", description = "选择配送方式", method = CommonConstant.DELETE)
-	@RequestLogger(description = "选择配送方式")
+	@RequestLogger("选择配送方式")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/shippingMethod")
 	public Result<Object> shippingMethod(
@@ -200,7 +200,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "选择发票", description = "选择发票", method = CommonConstant.GET)
-	@RequestLogger(description = "选择发票")
+	@RequestLogger("选择发票")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/receipt")
 	public Result<Object> selectReceipt(String way, ReceiptVO receiptVO) {
@@ -209,7 +209,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "选择优惠券", description = "选择优惠券", method = CommonConstant.GET)
-	@RequestLogger(description = "选择优惠券")
+	@RequestLogger("选择优惠券")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon")
 	public Result<Object> selectCoupon(String way,
@@ -219,7 +219,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "创建交易", description = "创建交易", method = CommonConstant.POST)
-	@RequestLogger(description = "创建交易")
+	@RequestLogger("创建交易")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/trade", consumes = "application/json", produces = "application/json")
 	public Result<Object> crateTrade(@RequestBody TradeParams tradeParams) {

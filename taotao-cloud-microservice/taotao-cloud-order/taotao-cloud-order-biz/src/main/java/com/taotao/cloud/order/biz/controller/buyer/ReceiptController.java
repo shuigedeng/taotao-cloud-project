@@ -33,7 +33,7 @@ public class ReceiptController {
 	private ReceiptService receiptService;
 
 	@Operation(summary = "获取发票详情", description = "获取发票详情", method = CommonConstant.GET)
-	@RequestLogger(description = "获取发票详情")
+	@RequestLogger("获取发票详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
 	public Result<Receipt> getDetail(@PathVariable String id) {
@@ -41,7 +41,7 @@ public class ReceiptController {
 	}
 
 	@Operation(summary = "获取发票分页信息", description = "获取发票分页信息", method = CommonConstant.GET)
-	@RequestLogger(description = "获取发票分页信息")
+	@RequestLogger("获取发票分页信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderReceiptDTO>> getPage(ReceiptSearchParams searchParams,
@@ -50,7 +50,7 @@ public class ReceiptController {
 	}
 
 	@Operation(summary = "保存发票信息", description = "保存发票信息", method = CommonConstant.POST)
-	@RequestLogger(description = "保存发票信息")
+	@RequestLogger("保存发票信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Receipt> save(@Valid Receipt receipt) {

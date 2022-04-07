@@ -50,7 +50,7 @@ public class PayFlowController {
 	}
 
 	@ApiOperation("根据id查询支付信息")
-	@RequestLogger(description = "根据id查询支付信息")
+	@RequestLogger("根据id查询支付信息")
 	@PreAuthorize("hasAuthority('pag:flow:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id) {

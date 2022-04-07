@@ -33,7 +33,7 @@ public class ServiceNoticeManagerController {
 	private ServiceNoticeService serviceNoticeService;
 
 	@Operation(summary = "查看服务订阅消息详情", description = "查看服务订阅消息详情", method = CommonConstant.GET)
-	@RequestLogger(description = "查看服务订阅消息详情")
+	@RequestLogger("查看服务订阅消息详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<ServiceNotice> get(@PathVariable String id) {
@@ -42,7 +42,7 @@ public class ServiceNoticeManagerController {
 	}
 
 	@Operation(summary = "分页获取服务订阅消息", description = "分页获取服务订阅消息", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取服务订阅消息")
+	@RequestLogger("分页获取服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<ServiceNotice>> getByPage(ServiceNotice entity,
@@ -53,7 +53,7 @@ public class ServiceNoticeManagerController {
 	}
 
 	@Operation(summary = "新增服务订阅消息", description = "新增服务订阅消息", method = CommonConstant.POST)
-	@RequestLogger(description = "新增服务订阅消息")
+	@RequestLogger("新增服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<ServiceNotice> save(ServiceNotice serviceNotice) {
@@ -64,7 +64,7 @@ public class ServiceNoticeManagerController {
 	}
 
 	@Operation(summary = "更新服务订阅消息", description = "更新服务订阅消息", method = CommonConstant.PUT)
-	@RequestLogger(description = "更新服务订阅消息")
+	@RequestLogger("更新服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<ServiceNotice> update(@PathVariable String id,
@@ -74,7 +74,7 @@ public class ServiceNoticeManagerController {
 	}
 
 	@Operation(summary = "删除服务订阅消息", description = "删除服务订阅消息", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除服务订阅消息")
+	@RequestLogger("删除服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
 	public Result<Object> delAllByIds(@PathVariable List ids) {

@@ -38,7 +38,7 @@ public class ReceiptController {
 	private OrderService orderService;
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取")
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderReceiptDTO>> getByPage(PageVO page,
@@ -49,7 +49,7 @@ public class ReceiptController {
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取")
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<Receipt> get(@PathVariable String id) {
@@ -57,7 +57,7 @@ public class ReceiptController {
 	}
 
 	@Operation(summary = "开发票", description = "开发票", method = CommonConstant.POST)
-	@RequestLogger(description = "开发票")
+	@RequestLogger("开发票")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{id}/invoicing")
 	public Result<Receipt> invoicing(@PathVariable String id) {
@@ -66,7 +66,7 @@ public class ReceiptController {
 	}
 
 	@Operation(summary = "通过订单编号获取", description = "通过订单编号获取", method = CommonConstant.GET)
-	@RequestLogger(description = "通过订单编号获取")
+	@RequestLogger("通过订单编号获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/orderSn/{orderSn}")
 	public Result<Receipt> getByOrderSn(@PathVariable String orderSn) {

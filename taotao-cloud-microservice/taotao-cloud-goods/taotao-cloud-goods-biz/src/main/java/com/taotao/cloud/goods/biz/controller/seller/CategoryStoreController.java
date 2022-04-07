@@ -46,7 +46,7 @@ public class CategoryStoreController {
 	private final StoreDetailService storeDetailService;
 
 	@Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类", method = CommonConstant.GET)
-	@RequestLogger(description = "获取店铺经营的分类")
+	@RequestLogger("获取店铺经营的分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<CategoryVO>> getListAll() {
@@ -59,7 +59,7 @@ public class CategoryStoreController {
 	}
 
 	@Operation(summary = "获取所选分类关联的品牌信息", description = "获取所选分类关联的品牌信息", method = CommonConstant.GET)
-	@RequestLogger(description = "获取所选分类关联的品牌信息")
+	@RequestLogger("获取所选分类关联的品牌信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}/brands")
 	public Result<List<CategoryBrandVO>> queryBrands(@PathVariable String categoryId) {

@@ -50,7 +50,7 @@ public class MemberEvaluationBuyerController {
 	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "添加会员评价", description = "添加会员评价", method = CommonConstant.POST)
-	@RequestLogger(description = "添加会员评价")
+	@RequestLogger("添加会员评价")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
 	public Result<Boolean> save(@Valid @RequestBody MemberEvaluationDTO memberEvaluationDTO) {
@@ -58,7 +58,7 @@ public class MemberEvaluationBuyerController {
 	}
 
 	@Operation(summary = "查看会员评价详情", description = "查看会员评价详情", method = CommonConstant.GET)
-	@RequestLogger(description = "查看会员评价详情")
+	@RequestLogger("查看会员评价详情")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> queryById(
@@ -67,7 +67,7 @@ public class MemberEvaluationBuyerController {
 	}
 
 	@Operation(summary = "查看当前会员评价列表", description = "查看当前会员评价列表", method = CommonConstant.GET)
-	@RequestLogger(description = "查看当前会员评价列表")
+	@RequestLogger("查看当前会员评价列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageModel<MemberEvaluationVO>> queryMineEvaluation(@Validated EvaluationQueryParams evaluationQueryParams) {
@@ -77,7 +77,7 @@ public class MemberEvaluationBuyerController {
 	}
 
 	@Operation(summary = "查看某一个商品的评价列表", description = "查看某一个商品的评价列表", method = CommonConstant.GET)
-	@RequestLogger(description = "查看某一个商品的评价列表")
+	@RequestLogger("查看某一个商品的评价列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/{goodsId}")
 	public Result<IPage<MemberEvaluationVO>> queryGoodsEvaluation(EvaluationQueryParams evaluationQueryParams,
@@ -89,7 +89,7 @@ public class MemberEvaluationBuyerController {
 	}
 
 	@Operation(summary = "查看某一个商品的评价数量", description = "查看某一个商品的评价数量", method = CommonConstant.GET)
-	@RequestLogger(description = "查看某一个商品的评价数量")
+	@RequestLogger("查看某一个商品的评价数量")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/number/{goodsId}")
 	public Result<EvaluationNumberVO> queryEvaluationNumber(

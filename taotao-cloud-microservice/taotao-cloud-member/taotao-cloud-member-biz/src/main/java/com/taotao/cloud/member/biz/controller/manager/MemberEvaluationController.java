@@ -38,7 +38,7 @@ public class MemberEvaluationController {
 	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "通过id获取评论", description = "通过id获取评论", method = CommonConstant.GET)
-	@RequestLogger(description = "通过id获取评论")
+	@RequestLogger("通过id获取评论")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> get(@PathVariable String id) {
@@ -46,7 +46,7 @@ public class MemberEvaluationController {
 	}
 
 	@Operation(summary = "获取评价分页", description = "获取评价分页", method = CommonConstant.GET)
-	@RequestLogger(description = "获取评价分页")
+	@RequestLogger("获取评价分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<IPage<MemberEvaluationListVO>> getByPage(
 		EvaluationQueryParams evaluationQueryParams, PageVO page) {
@@ -54,7 +54,7 @@ public class MemberEvaluationController {
 	}
 
 	@Operation(summary = "修改评价状态", description = "修改评价状态", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改评价状态")
+	@RequestLogger("修改评价状态")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/status/{id}")
 	public Result<Boolean> updateStatus(@PathVariable String id,
@@ -64,7 +64,7 @@ public class MemberEvaluationController {
 	}
 
 	@Operation(summary = "删除评论", description = "删除评论", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除评论")
+	@RequestLogger("删除评论")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delete(@PathVariable String id) {

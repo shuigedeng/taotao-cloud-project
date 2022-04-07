@@ -33,7 +33,7 @@ public class CronController {
 	private final ICronService cronService;
 
 	@Operation(summary = "计算cron表达式下次执行时间 计算的后面所有执行时间", description = "计算cron表达式下次执行时间 计算的后面所有执行时间", method = CommonConstant.GET)
-	@RequestLogger(description = "计算cron表达式下次执行时间 计算的后面所有执行时间")
+	@RequestLogger("计算cron表达式下次执行时间 计算的后面所有执行时间")
 	@GetMapping("/next-execution-time")
 	public Result<List<String>> cronNextExecutionTime(
 		@Parameter(description = "cron 表达式", required = true) @NotBlank String expression) {

@@ -39,7 +39,7 @@ public class MongoController {
 	private final IMongoService mongoService;
 
 	@Operation(summary = "查询所有的库", description = "查询所有的库", method = CommonConstant.GET)
-	@RequestLogger(description = "导出数据")
+	@RequestLogger("导出数据")
 	@PreAuthorize("@el.check('admin','log:list')")
 	@GetMapping("/database-names")
 	public Result<List<String>> databaseNames() {
@@ -47,7 +47,7 @@ public class MongoController {
 	}
 
 	@Operation(summary = "查询某个库里的所有集合", description = "查询某个库里的所有集合", method = CommonConstant.GET)
-	@RequestLogger(description = "查询某个库里的所有集合")
+	@RequestLogger("查询某个库里的所有集合")
 	@PreAuthorize("@el.check('admin','log:list')")
 	@GetMapping("/collection-names/{databaseName}")
 	public Result<List<CollectionDto>> collectionNames(
@@ -56,7 +56,7 @@ public class MongoController {
 	}
 
 	@Operation(summary = "分页数据查询", description = "分页数据查询", method = CommonConstant.GET)
-	@RequestLogger(description = "分页数据查询")
+	@RequestLogger("分页数据查询")
 	@PreAuthorize("@el.check('admin','log:list')")
 	@GetMapping("/page")
 	public Result<PageModel<String>> queryPage(@Valid MongoQueryParam mongoQueryParam,

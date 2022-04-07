@@ -38,7 +38,7 @@ public class GenConfigController {
 	private final IGenConfigService genConfigService;
 
 	@Operation(summary = "查询", description = "查询", method = CommonConstant.GET)
-	@RequestLogger(description = "查询")
+	@RequestLogger("查询")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{tableName}")
 	public Result<GenConfig> get(@PathVariable String tableName) {
@@ -46,7 +46,7 @@ public class GenConfigController {
 	}
 
 	@Operation(summary = "修改", description = "修改", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改")
+	@RequestLogger("修改")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<GenConfig> emailConfig(@Validated @RequestBody GenConfig genConfig) {

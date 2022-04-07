@@ -58,7 +58,7 @@ public class ManagerRoleController extends
 	SuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
 	@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
-	@RequestLogger(description = "根据用户id获取角色列表")
+	@RequestLogger("根据用户id获取角色列表")
 	@PreAuthorize("hasAuthority('sys:role:info:userId')")
 	@GetMapping("/userId/{userId}")
 	public Result<List<RoleQueryVO>> findRoleByUserId(
@@ -70,7 +70,7 @@ public class ManagerRoleController extends
 	}
 
 	@Operation(summary = "根据用户id列表获取角色列表", description = "根据用户id列表获取角色列表")
-	@RequestLogger(description = "根据用户id列表获取角色列表")
+	@RequestLogger("根据用户id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:role:info:userIds')")
 	@GetMapping("/userId")
 	public Result<List<RoleQueryVO>> findRoleByUserIds(
@@ -82,7 +82,7 @@ public class ManagerRoleController extends
 	}
 
 	@Operation(summary = "根据角色id更新菜单信息(角色分配菜单)", description = "根据角色id更新菜单信息(角色分配菜单)")
-	@RequestLogger(description = "根据角色id更新菜单信息(角色分配菜单)")
+	@RequestLogger("根据角色id更新菜单信息(角色分配菜单)")
 	@PreAuthorize("hasAuthority('sys:role:menu')")
 	@PutMapping("/resources/{roleId}")
 	public Result<Boolean> saveRoleMenus(

@@ -35,7 +35,7 @@ public class ParameterManagerController {
 	private final ParametersService parametersService;
 
 	@Operation(summary = "添加参数", description = "添加参数", method = CommonConstant.POST)
-	@RequestLogger(description = "添加参数添加参数")
+	@RequestLogger("添加参数添加参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody Parameters parameters) {
@@ -43,7 +43,7 @@ public class ParameterManagerController {
 	}
 
 	@Operation(summary = "编辑参数", description = "编辑参数", method = CommonConstant.PUT)
-	@RequestLogger(description = "编辑参数")
+	@RequestLogger("编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> update(@Validated @RequestBody Parameters parameters) {
@@ -51,7 +51,7 @@ public class ParameterManagerController {
 	}
 
 	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息", method = CommonConstant.DELETE)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delById(@PathVariable String id) {

@@ -49,7 +49,7 @@ public class ManagerLogisticsController {
 	private final ILogisticsService logisticsService;
 
 	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<LogisticsVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {

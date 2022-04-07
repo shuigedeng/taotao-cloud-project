@@ -39,7 +39,7 @@ public class AfterSaleReasonController {
 	private AfterSaleReasonService afterSaleReasonService;
 
 	@Operation(summary = "查看售后原因", description = "查看售后原因", method = CommonConstant.GET)
-	@RequestLogger(description = "查看售后原因")
+	@RequestLogger("查看售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<AfterSaleReason> get(@PathVariable String id) {
@@ -47,7 +47,7 @@ public class AfterSaleReasonController {
 	}
 
 	@Operation(summary = "分页获取售后原因", description = "分页获取售后原因", method = CommonConstant.GET)
-	@RequestLogger(description = "分页获取售后原因")
+	@RequestLogger("分页获取售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<AfterSaleReason>> getByPage(PageVO page,
@@ -57,7 +57,7 @@ public class AfterSaleReasonController {
 	}
 
 	@Operation(summary = "添加售后原因", description = "添加售后原因", method = CommonConstant.POST)
-	@RequestLogger(description = "添加售后原因")
+	@RequestLogger("添加售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<AfterSaleReason> save(@Valid AfterSaleReason afterSaleReason) {
@@ -66,7 +66,7 @@ public class AfterSaleReasonController {
 	}
 
 	@Operation(summary = "修改售后原因", description = "修改售后原因", method = CommonConstant.PUT)
-	@RequestLogger(description = "修改售后原因")
+	@RequestLogger("修改售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<AfterSaleReason> update(@Valid AfterSaleReason afterSaleReason,
@@ -76,7 +76,7 @@ public class AfterSaleReasonController {
 	}
 
 	@Operation(summary = "删除售后原因", description = "删除售后原因", method = CommonConstant.DELETE)
-	@RequestLogger(description = "删除售后原因")
+	@RequestLogger("删除售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Object> delAllByIds(@PathVariable String id) {

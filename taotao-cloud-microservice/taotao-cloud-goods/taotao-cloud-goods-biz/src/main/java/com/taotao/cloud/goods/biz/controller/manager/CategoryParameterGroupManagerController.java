@@ -44,7 +44,7 @@ public class CategoryParameterGroupManagerController {
 	private final CategoryParameterGroupService categoryParameterGroupService;
 
 	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息", method = CommonConstant.GET)
-	@RequestLogger(description = "查询某分类下绑定的参数信息")
+	@RequestLogger("查询某分类下绑定的参数信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable String categoryId) {
@@ -52,7 +52,7 @@ public class CategoryParameterGroupManagerController {
 	}
 
 	@Operation(summary = "保存数据", description = "保存数据", method = CommonConstant.POST)
-	@RequestLogger(description = "保存数据")
+	@RequestLogger("保存数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveOrUpdate(
@@ -61,7 +61,7 @@ public class CategoryParameterGroupManagerController {
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.PUT)
-	@RequestLogger(description = "更新数据")
+	@RequestLogger("更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> update(
@@ -70,7 +70,7 @@ public class CategoryParameterGroupManagerController {
 	}
 
 	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组", method = CommonConstant.DELETE)
-	@RequestLogger(description = "通过id删除参数组")
+	@RequestLogger("通过id删除参数组")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delAllByIds(@PathVariable String id) {
