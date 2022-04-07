@@ -6,14 +6,11 @@ package com.taotao.cloud.sys.biz.entity.quartz;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * Quartz日志表
@@ -34,7 +31,6 @@ import lombok.Setter;
 public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> {
 
 	public static final String TABLE_NAME = "tt_quartz_log";
-
 
 	/**
 	 * Spring Bean名称

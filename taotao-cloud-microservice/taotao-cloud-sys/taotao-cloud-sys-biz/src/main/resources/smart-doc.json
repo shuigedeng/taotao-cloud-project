@@ -51,7 +51,7 @@
       "version": "2022.04", //文档版本号
       "revisionTime": "2021-10-08 10:30", //文档修订时间
       "status": "update", //变更操作状态，一般为：创建、更新等
-      "author": "dengtao", //文档变更作者
+      "author": "shuigedeng", //文档变更作者
       "remarks": "初始化文档" //变更描述
     }
   ],

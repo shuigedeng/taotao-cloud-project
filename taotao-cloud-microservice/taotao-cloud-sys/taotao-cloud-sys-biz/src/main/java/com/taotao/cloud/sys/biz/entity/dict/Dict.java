@@ -16,11 +16,14 @@
 package com.taotao.cloud.sys.biz.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
+
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,15 +48,14 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
-public class Dict extends SuperEntity<Dict,Long> {
+public class Dict extends BaseSuperEntity<Dict, Long> {
 
 	public static final String TABLE_NAME = "tt_dict";
-
 
 	/**
 	 * 字典名称
 	 */
-	@Column(name = "dict_name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '字典名称'")
+	@Column(name = "dict_name", nullable = false, columnDefinition = "varchar(255) not null  comment '字典名称'")
 	private String dictName;
 
 	/**
@@ -72,19 +74,11 @@ public class Dict extends SuperEntity<Dict,Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
-	private Integer sortNum ;
+	private Integer sortNum;
 
 	/**
 	 * 备注信息
 	 */
 	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注信息'")
 	private String remark;
-
-	@CreatedDate
-	@Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
-	private LocalDateTime createTime;
-
-	@LastModifiedDate
-	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP comment '最后修改时间'")
-	private LocalDateTime lastModifiedTime;
 }

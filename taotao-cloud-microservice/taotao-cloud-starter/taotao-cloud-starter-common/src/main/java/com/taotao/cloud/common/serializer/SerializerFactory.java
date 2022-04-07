@@ -7,7 +7,7 @@ import java.util.ServiceLoader;
 
 /**
  * The Data Serializer Factory.
- * @author dengtao
+ * @author shuigedeng
  */
 public enum SerializerFactory {
 
