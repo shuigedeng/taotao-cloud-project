@@ -1,8 +1,10 @@
 package com.taotao.cloud.distribution.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
@@ -51,15 +53,14 @@ public class DistributionBuyerController {
     public Result<Distribution> getDistribution() {
         //检查分销开关
         distributionService.checkDistributionSetting();
-
         return Result.success(distributionService.getDistribution());
     }
 
     @ApiOperation(value = "绑定分销员")
     @ApiImplicitParam(name = "distributionId", value = "分销员ID", required = true, paramType = "path")
     @GetMapping("/bindingDistribution/{distributionId}")
-    public Result<Object> bindingDistribution(@PathVariable String distributionId){
+    public Result<Boolean> bindingDistribution(@PathVariable String distributionId){
         distributionService.bindingDistribution(distributionId);
-        return ResultUtil.success();
+        return Result.success(true);
     }
 }

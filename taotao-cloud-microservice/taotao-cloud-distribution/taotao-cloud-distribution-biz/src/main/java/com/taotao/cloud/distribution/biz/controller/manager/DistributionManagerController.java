@@ -1,7 +1,11 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
+import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -38,7 +42,7 @@ public class DistributionManagerController {
     })
     public Result<Object> retreat(@PathVariable String id) {
         if (distributionService.retreat(id)) {
-            return ResultUtil.success();
+            return Result.success();
         } else {
             throw new BusinessException(ResultEnum.DISTRIBUTION_RETREAT_ERROR);
         }
@@ -53,7 +57,7 @@ public class DistributionManagerController {
     })
     public Result<Object> resume(@PathVariable String id) {
         if (distributionService.resume(id)) {
-            return ResultUtil.success();
+            return Result.success();
         } else {
             throw new BusinessException(ResultEnum.DISTRIBUTION_RETREAT_ERROR);
         }
@@ -69,7 +73,7 @@ public class DistributionManagerController {
     })
     public Result<Object> audit(@NotNull @PathVariable String id, @NotNull String status) {
         if (distributionService.audit(id, status)) {
-            return ResultUtil.success();
+            return Result.success();
         } else {
             throw new BusinessException(ResultEnum.DISTRIBUTION_AUDIT_ERROR);
         }

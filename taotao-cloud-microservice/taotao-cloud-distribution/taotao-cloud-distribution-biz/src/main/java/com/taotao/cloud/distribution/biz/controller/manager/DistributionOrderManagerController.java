@@ -1,6 +1,7 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;

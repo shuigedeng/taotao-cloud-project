@@ -31,9 +31,9 @@ public class PointsGoodsManagerController {
     @ApiOperation(value = "添加积分商品")
     public Result<Object> addPointsGoods(@RequestBody List<PointsGoods> pointsGoodsList) {
         if (pointsGoodsService.savePointsGoodsBatch(pointsGoodsList)) {
-            return ResultUtil.success();
+            return Result.success();
         }
-        return ResultUtil.error(ResultEnum.POINT_GOODS_ERROR);
+        return Result.error(ResultEnum.POINT_GOODS_ERROR);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
@@ -41,23 +41,23 @@ public class PointsGoodsManagerController {
     public Result<Object> updatePointsGoods(@RequestBody PointsGoodsVO pointsGoods) {
         Objects.requireNonNull(UserContext.getCurrentUser());
         pointsGoodsService.updatePromotions(pointsGoods);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @PutMapping("/status/{ids}")
     @ApiOperation(value = "修改积分商品状态")
     public Result<Object> updatePointsGoodsStatus(@PathVariable String ids, Long startTime, Long endTime) {
         if (pointsGoodsService.updateStatus(Arrays.asList(ids.split(",")), startTime, endTime)) {
-            return ResultUtil.success();
+            return Result.success();
         }
-        return ResultUtil.error(ResultEnum.POINT_GOODS_ERROR);
+        return Result.error(ResultEnum.POINT_GOODS_ERROR);
     }
 
     @DeleteMapping("/{ids}")
     @ApiOperation(value = "删除积分商品")
     public Result<Object> delete(@PathVariable String ids) {
         if (pointsGoodsService.removePromotions(Arrays.asList(ids.split(",")))) {
-            return ResultUtil.success();
+            return Result.success();
         }
         throw new BusinessException(ResultEnum.POINT_GOODS_ERROR);
     }

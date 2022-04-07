@@ -16,22 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销佣金查询信息")
-public class DistributionCashSearchParams extends PageVO {
+public class DistributionCashSearchVO {
 
-	/**
-	 * 编号
-	 */
 	@Schema(description = "编号")
 	private String sn;
-	/**
-	 * 会员名称
-	 */
+
 	@Schema(description = "会员名称")
 	private String memberName;
 
-	/**
-	 * 分销员提现状态
-	 */
 	@Schema(description = "分销员提现状态", allowableValues = "APPLY,PASS,REFUSE")
 	private String distributionCashStatus;
 

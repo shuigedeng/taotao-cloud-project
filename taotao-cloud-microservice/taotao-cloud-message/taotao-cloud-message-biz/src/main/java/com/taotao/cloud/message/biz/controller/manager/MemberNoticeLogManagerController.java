@@ -72,6 +72,6 @@ public class MemberNoticeLogManagerController {
 	@DeleteMapping(value = "/delByIds/{ids}")
 	public Result<Object> delAllByIds(@PathVariable List ids) {
 		memberNoticeLogService.removeByIds(ids);
-		return ResultUtil.success();
+		return Result.success();
 	}
 }

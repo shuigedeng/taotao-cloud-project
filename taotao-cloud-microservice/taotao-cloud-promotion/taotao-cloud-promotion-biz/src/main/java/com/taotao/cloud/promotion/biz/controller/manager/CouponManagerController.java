@@ -68,7 +68,7 @@ public class CouponManagerController {
     public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
         String[] split = couponIds.split(",");
         if (couponService.updateStatus(Arrays.asList(split), startTime, endTime)) {
-            return ResultUtil.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
+            return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
         }
         throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
     }
@@ -77,14 +77,14 @@ public class CouponManagerController {
     @DeleteMapping(value = "/{ids}")
     public Result<Object> delAllByIds(@PathVariable List<String> ids) {
         couponService.removePromotions(ids);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "会员优惠券作废")
     @PutMapping(value = "/member/cancellation/{id}")
     public Result<Object> cancellation(@PathVariable String id) {
         memberCouponService.cancellation(id);
-        return ResultUtil.success(ResultEnum.COUPON_CANCELLATION_SUCCESS);
+        return Result.success(ResultEnum.COUPON_CANCELLATION_SUCCESS);
     }
 
     @ApiOperation(value = "根据优惠券id券分页获取会员领详情")

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.data.domain.Sort.Order;
  */
 public class PageParam implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,7 +33,7 @@ public class PageParam implements Serializable {
 	 */
 	@Schema(description = "当前第几页，默认1", example = "1", required = true)
 	@NotNull(message = "当前页显示数量不能为空")
-	@Min(value = 0)
+	@Min(value = 0, message = "当前页数不能小于0")
 	@Max(value = Integer.MAX_VALUE)
 	private Integer currentPage;
 
@@ -40,8 +42,8 @@ public class PageParam implements Serializable {
 	 */
 	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
 	@NotNull(message = "每页数据显示数量不能为空")
-	@Min(value = 5)
-	@Max(value = 100)
+	@Min(value = 5, message = "每页显示条数最小为5条")
+	@Max(value = 100, message = "每页显示条数最大为100条")
 	private Integer pageSize;
 
 	/**
@@ -55,7 +57,6 @@ public class PageParam implements Serializable {
 	 */
 	@Schema(description = "排序方式 asc/desc")
 	private String order;
-
 
 	/**
 	 * 构造mp分页参数

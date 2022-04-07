@@ -1,6 +1,7 @@
 package com.taotao.cloud.distribution.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
@@ -36,6 +37,6 @@ public class DistributionGoodsManagerController {
     public Result<Object> delAllByIds(@PathVariable List ids) {
 
         distributionGoodsService.removeByIds(ids);
-        return ResultUtil.success();
+        return Result.success();
     }
 }

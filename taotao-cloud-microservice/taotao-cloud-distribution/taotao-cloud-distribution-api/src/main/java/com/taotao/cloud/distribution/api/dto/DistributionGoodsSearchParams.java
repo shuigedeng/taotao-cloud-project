@@ -3,6 +3,7 @@ package com.taotao.cloud.distribution.api.dto;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -42,8 +43,7 @@ public class DistributionGoodsSearchParams extends PageParam {
 
 	public <T> QueryWrapper<T> storeQueryWrapper() {
 		QueryWrapper<T> queryWrapper = this.distributionQueryWrapper();
-		queryWrapper.eq("dg.store_id",
-			Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId());
+		queryWrapper.eq("dg.store_id", SecurityUtil.getUser().getStoreId());
 		return queryWrapper;
 	}
 

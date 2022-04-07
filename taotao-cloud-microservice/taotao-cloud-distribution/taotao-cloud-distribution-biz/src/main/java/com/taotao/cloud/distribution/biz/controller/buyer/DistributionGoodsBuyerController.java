@@ -1,6 +1,9 @@
 package com.taotao.cloud.distribution.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
@@ -54,15 +57,16 @@ public class DistributionGoodsBuyerController {
     @GetMapping(value = "/checked/{distributionGoodsId}")
     public Result<Object> distributionCheckGoods(
             @NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId,Boolean checked) {
-        Boolean result=false;
+        boolean result=false;
         if(checked){
             result=distributionSelectedGoodsService.add(distributionGoodsId);
         }else {
             result=distributionSelectedGoodsService.delete(distributionGoodsId);
         }
+
         //判断操作结果
         if(result){
-            return ResultUtil.success(ResultEnum.SUCCESS);
+            return Result.success(ResultEnum.SUCCESS);
         }else{
             throw new BusinessException(ResultEnum.ERROR);
         }

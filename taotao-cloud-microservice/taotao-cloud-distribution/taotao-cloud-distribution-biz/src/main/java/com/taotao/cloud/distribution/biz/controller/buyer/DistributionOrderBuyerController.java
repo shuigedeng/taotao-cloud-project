@@ -1,6 +1,7 @@
 package com.taotao.cloud.distribution.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
@@ -31,7 +32,6 @@ public class DistributionOrderBuyerController {
      */
     @Autowired
     private DistributionService distributionService;
-
 
     @ApiOperation(value = "分销员订单")
     @GetMapping

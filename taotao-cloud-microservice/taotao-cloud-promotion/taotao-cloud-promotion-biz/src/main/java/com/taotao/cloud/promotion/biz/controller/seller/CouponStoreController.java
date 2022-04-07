@@ -56,7 +56,7 @@ public class CouponStoreController {
         if (couponService.savePromotions(couponVO)) {
             return Result.success(couponVO);
         }
-        return ResultUtil.error(ResultEnum.COUPON_SAVE_ERROR);
+        return Result.error(ResultEnum.COUPON_SAVE_ERROR);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
@@ -69,7 +69,7 @@ public class CouponStoreController {
         if (couponService.updatePromotions(couponVO)) {
             return Result.success(couponVO);
         }
-        return ResultUtil.error(ResultEnum.COUPON_SAVE_ERROR);
+        return Result.error(ResultEnum.COUPON_SAVE_ERROR);
     }
 
     @DeleteMapping(value = "/{ids}")
@@ -81,7 +81,7 @@ public class CouponStoreController {
         queryWrapper.eq(Coupon::getStoreId, storeId);
         List<Coupon> list = couponService.list(queryWrapper);
         List<String> filterIds = list.stream().map(Coupon::getId).collect(Collectors.toList());
-        return couponService.removePromotions(filterIds) ? ResultUtil.success() : ResultUtil.error(ResultEnum.COUPON_DELETE_ERROR);
+        return couponService.removePromotions(filterIds) ? Result.success() : Result.error(ResultEnum.COUPON_DELETE_ERROR);
     }
 
     @ApiOperation(value = "修改优惠券状态")
@@ -91,7 +91,7 @@ public class CouponStoreController {
         String[] split = couponIds.split(",");
         List<String> couponIdList = couponService.list(new LambdaQueryWrapper<Coupon>().in(Coupon::getId, Arrays.asList(split)).eq(Coupon::getStoreId, currentUser.getStoreId())).stream().map(Coupon::getId).collect(Collectors.toList());
         if (couponService.updateStatus(couponIdList, startTime, endTime)) {
-            return ResultUtil.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
+            return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
         }
         throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
     }

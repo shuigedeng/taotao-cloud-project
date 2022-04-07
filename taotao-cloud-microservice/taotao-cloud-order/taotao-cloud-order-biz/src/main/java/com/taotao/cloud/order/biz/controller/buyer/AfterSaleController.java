@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
@@ -38,7 +38,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "买家端-售后API", description = "买家端-售后API")
 @RequestMapping("/order/buyer/afterSale")
 public class AfterSaleController {
-
 	/**
 	 * 售后
 	 */
@@ -59,9 +58,9 @@ public class AfterSaleController {
 	@RequestLogger(description = "查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
-	public Result<AfterSaleVOVO123> get(
+	public Result<AfterSaleVO> get(
 		@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
-		AfterSaleVOVO123 afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
+		AfterSaleVO afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
 		return Result.success(afterSale);
 	}
 
@@ -69,7 +68,7 @@ public class AfterSaleController {
 	@RequestLogger(description = "分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<IPage<AfterSaleVOVO123>> getByPage(AfterSaleSearchParams searchParams) {
+	public Result<IPage<AfterSaleVO>> getByPage(AfterSaleSearchParams searchParams) {
 		return Result.success(afterSaleService.getAfterSalePages(searchParams));
 	}
 

@@ -50,7 +50,7 @@ public class CartController {
 		try {
 			//读取选中的列表
 			cartService.add(skuId, num, cartType, false);
-			return ResultUtil.success();
+			return Result.success();
 		} catch (ServiceException se) {
 			log.info(se.getMsg(), se);
 			throw se;
@@ -92,7 +92,7 @@ public class CartController {
 		@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
 		Integer num) {
 		cartService.add(skuId, num, CartTypeEnum.CART.name(), true);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "更新购物车中单个产品 更新购物车中的多个产品的数量或选中状态", description = "更新购物车中的多个产品的数量或选中状态", method = CommonConstant.POST)
@@ -103,7 +103,7 @@ public class CartController {
 		@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
 		boolean checked) {
 		cartService.checked(skuId, checked);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "购物车选中设置", description = "购物车选中设置", method = CommonConstant.POST)
@@ -112,7 +112,7 @@ public class CartController {
 	@PostMapping(value = "/sku/checked", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Result<Object> updateAll(boolean checked) {
 		cartService.checkedAll(checked);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "批量设置某商家的商品为选中或不选中", description = "批量设置某商家的商品为选中或不选中", method = CommonConstant.POST)
@@ -123,7 +123,7 @@ public class CartController {
 		@NotNull(message = "卖家id不能为空") @PathVariable(name = "storeId") String storeId,
 		boolean checked) {
 		cartService.checkedStore(storeId, checked);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "清空购物车", description = "清空购物车", method = CommonConstant.DELETE)
@@ -132,7 +132,7 @@ public class CartController {
 	@DeleteMapping()
 	public Result<Object> clean() {
 		cartService.clean();
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "删除购物车中的一个或多个产品", description = "删除购物车中的一个或多个产品", method = CommonConstant.DELETE)
@@ -141,7 +141,7 @@ public class CartController {
 	@DeleteMapping(value = "/sku/remove")
 	public Result<Object> delete(String[] skuIds) {
 		cartService.delete(skuIds);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "获取结算页面购物车详情", description = "获取结算页面购物车详情", method = CommonConstant.DELETE)
@@ -169,7 +169,7 @@ public class CartController {
 		@NotNull(message = "收货地址ID不能为空") String shippingAddressId, String way) {
 		try {
 			cartService.shippingAddress(shippingAddressId, way);
-			return ResultUtil.success();
+			return Result.success();
 		} catch (ServiceException se) {
 			log.error(ResultEnum.SHIPPING_NOT_APPLY.message(), se);
 			throw new BusinessException(ResultEnum.SHIPPING_NOT_APPLY);
@@ -189,7 +189,7 @@ public class CartController {
 		String way) {
 		try {
 			cartService.shippingMethod(selleId, shippingMethod, way);
-			return ResultUtil.success();
+			return Result.success();
 		} catch (ServiceException se) {
 			log.error(se.getMsg(), se);
 			throw se;
@@ -205,7 +205,7 @@ public class CartController {
 	@GetMapping("/receipt")
 	public Result<Object> selectReceipt(String way, ReceiptVO receiptVO) {
 		this.cartService.shippingReceipt(receiptVO, way);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "选择优惠券", description = "选择优惠券", method = CommonConstant.GET)
@@ -215,7 +215,7 @@ public class CartController {
 	public Result<Object> selectCoupon(String way,
 		@NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
 		this.cartService.selectCoupon(memberCouponId, way, used);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "创建交易", description = "创建交易", method = CommonConstant.POST)

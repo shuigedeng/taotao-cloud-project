@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
-import com.taotao.cloud.distribution.api.vo.DistributionCashSearchParams;
+import com.taotao.cloud.distribution.api.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
@@ -92,9 +92,9 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 
     @Override
     public IPage<DistributionCash> getDistributionCash(
-	    DistributionCashSearchParams distributionCashSearchParams) {
+	    DistributionCashSearchVO distributionCashSearchVO) {
 
-        return this.page(PageUtil.initPage(distributionCashSearchParams), distributionCashSearchParams.queryWrapper());
+        return this.page(PageUtil.initPage(distributionCashSearchVO), distributionCashSearchVO.queryWrapper());
     }
 
     @Override

@@ -71,7 +71,7 @@ public class BillStoreController {
     public Result<Object> examine(@PathVariable String id) {
         OperationalJudgment.judgment(billService.getById(id));
         billService.check(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "下载结算单", produces = "application/octet-stream")

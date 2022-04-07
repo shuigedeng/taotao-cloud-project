@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -93,7 +94,7 @@ public class OrderComplaintController {
 	@PutMapping(value = "/status")
 	public Result<Object> updateStatus(OrderComplaintOperationParams orderComplainVO) {
 		orderComplaintService.updateOrderComplainByStatus(orderComplainVO);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "仲裁", description = "仲裁", method = CommonConstant.PUT)
@@ -109,6 +110,6 @@ public class OrderComplaintController {
 
 		//修改状态
 		orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationParams);
-		return ResultUtil.success();
+		return Result.success();
 	}
 }

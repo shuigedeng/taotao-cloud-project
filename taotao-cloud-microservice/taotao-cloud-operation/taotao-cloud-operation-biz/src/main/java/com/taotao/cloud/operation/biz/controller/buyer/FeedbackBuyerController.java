@@ -32,7 +32,7 @@ public class FeedbackBuyerController {
     public Result<Object> save(@Valid Feedback feedback) {
         feedback.setUserName(UserContext.getCurrentUser().getNickName());
         feedbackService.save(feedback);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 }

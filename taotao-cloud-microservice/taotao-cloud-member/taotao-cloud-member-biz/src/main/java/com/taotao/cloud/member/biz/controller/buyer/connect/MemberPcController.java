@@ -56,7 +56,7 @@ public class MemberPcController {
 	@PostMapping("/logout")
 	public Result<Object> logout() {
 		this.memberService.logout(UserEnum.MEMBER);
-		return ResultUtil.success();
+		return Result.success();
 	}
 
 	@Operation(summary = "短信登录接口", description = "短信登录接口", method = CommonConstant.POST)
@@ -111,7 +111,7 @@ public class MemberPcController {
 		if (smsUtil.verifyCode(mobile, VerificationEnums.FIND_USER, uuid, code)) {
 			//校验是否通过手机号可获取会员,存在则将会员信息存入缓存，有效时间3分钟
 			memberService.findByMobile(uuid, mobile);
-			return ResultUtil.success();
+			return Result.success();
 		} else {
 			throw new BusinessException(ResultEnum.VERIFICATION_SMS_CHECKED_ERROR);
 		}

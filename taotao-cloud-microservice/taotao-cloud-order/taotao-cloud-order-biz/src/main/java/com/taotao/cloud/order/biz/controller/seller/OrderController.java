@@ -2,6 +2,8 @@ package com.taotao.cloud.order.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
@@ -11,6 +13,7 @@ import com.taotao.cloud.order.biz.service.order.OrderPriceService;
 import com.taotao.cloud.order.biz.service.order.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import javax.servlet.http.HttpServletResponse;
@@ -157,7 +160,7 @@ public class OrderController {
 	@PostMapping(value = "/batchDeliver", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Result<Object> batchDeliver(@RequestPart("files") MultipartFile files) {
 		orderService.batchDeliver(files);
-		return ResultUtil.success(ResultEnum.SUCCESS);
+		return Result.success(ResultEnum.SUCCESS);
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表", method = CommonConstant.GET)

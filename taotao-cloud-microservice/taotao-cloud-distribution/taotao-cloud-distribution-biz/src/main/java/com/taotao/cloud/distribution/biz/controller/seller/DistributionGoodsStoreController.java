@@ -2,6 +2,7 @@ package com.taotao.cloud.distribution.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
@@ -65,7 +66,7 @@ public class DistributionGoodsStoreController {
         distributionSelectedGoodsService.remove(new QueryWrapper<DistributionSelectedGoods>().eq("distribution_goods_id", id));
         //清除分销商品
         distributionGoodsService.removeById(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 }

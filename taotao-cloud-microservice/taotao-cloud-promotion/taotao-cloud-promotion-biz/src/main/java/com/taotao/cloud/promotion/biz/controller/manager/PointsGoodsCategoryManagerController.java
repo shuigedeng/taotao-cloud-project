@@ -26,21 +26,21 @@ public class PointsGoodsCategoryManagerController {
     @ApiOperation(value = "添加积分商品分类")
     public Result<Object> add(PointsGoodsCategoryVO pointsGoodsCategory) {
         pointsGoodsCategoryService.addCategory(pointsGoodsCategory);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @PutMapping
     @ApiOperation(value = "修改积分商品分类")
     public Result<Object> update(PointsGoodsCategoryVO pointsGoodsCategory) {
         pointsGoodsCategoryService.updateCategory(pointsGoodsCategory);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除积分商品分类")
     public Result<Object> delete(@PathVariable String id) {
         pointsGoodsCategoryService.deleteCategory(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @GetMapping

@@ -64,7 +64,7 @@ public class SeckillStoreController {
     public Result<String> addSeckillApply(@PathVariable String seckillId, @RequestBody List<SeckillApplyVO> applyVos) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         seckillApplyService.addSeckillApply(seckillId, storeId, applyVos);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @DeleteMapping("/apply/{seckillId}/{id}")
@@ -72,7 +72,7 @@ public class SeckillStoreController {
     public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
         OperationalJudgment.judgment(seckillApplyService.getById(id));
         seckillApplyService.removeSeckillApply(seckillId, id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 

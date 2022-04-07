@@ -77,7 +77,7 @@ public class StoreManagerController {
     @PutMapping(value = "/audit/{id}/{passed}")
     public Result<Object> audit(@PathVariable String id, @PathVariable Integer passed) {
         storeService.audit(id, passed);
-        return ResultUtil.success();
+        return Result.success();
     }
 
 
@@ -87,7 +87,7 @@ public class StoreManagerController {
     @PutMapping(value = "/disable/{id}")
     public Result<Store> disable(@PathVariable String id) {
         storeService.disable(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "开启店铺")
@@ -95,7 +95,7 @@ public class StoreManagerController {
     @PutMapping(value = "/enable/{id}")
     public Result<Store> enable(@PathVariable String id) {
         storeService.enable(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 
     @ApiOperation(value = "查询一级分类列表")

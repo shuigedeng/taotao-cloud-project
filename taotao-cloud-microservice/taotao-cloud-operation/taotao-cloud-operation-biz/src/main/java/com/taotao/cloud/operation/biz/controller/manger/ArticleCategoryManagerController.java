@@ -80,6 +80,6 @@ public class ArticleCategoryManagerController {
     @DeleteMapping("/{id}")
     public Result<ArticleCategory> deleteById(@PathVariable String id) {
         articleCategoryService.deleteById(id);
-        return ResultUtil.success();
+        return Result.success();
     }
 }
