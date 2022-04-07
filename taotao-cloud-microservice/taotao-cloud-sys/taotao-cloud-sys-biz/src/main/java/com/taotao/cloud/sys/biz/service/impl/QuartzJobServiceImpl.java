@@ -83,7 +83,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 			Map<String, Object> map = new LinkedHashMap<>();
 			map.put("Spring Bean名称", quartzJob.getBeanName());
 			map.put("cron 表达式", quartzJob.getCronExpression());
-			map.put("状态：1暂停、0启用", quartzJob.getPause());
+			map.put("状态：1暂停、0启用", quartzJob.getIsPause());
 			map.put("任务名称", quartzJob.getJobName());
 			map.put("方法名称", quartzJob.getMethodName());
 			map.put("参数", quartzJob.getParams());
@@ -91,7 +91,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 			map.put("创建日期", quartzJob.getCreateTime());
 			map.put("Spring Bean名称", quartzJob.getBeanName());
 			map.put("cron 表达式", quartzJob.getCronExpression());
-			map.put("状态：1暂停、0启用", quartzJob.getPause());
+			map.put("状态：1暂停、0启用", quartzJob.getIsPause());
 			map.put("任务名称", quartzJob.getJobName());
 			map.put("方法名称", quartzJob.getMethodName());
 			map.put("参数", quartzJob.getParams());
@@ -99,7 +99,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 			map.put("创建日期", quartzJob.getCreateTime());
 			map.put("Spring Bean名称", quartzJob.getBeanName());
 			map.put("cron 表达式", quartzJob.getCronExpression());
-			map.put("状态：1暂停、0启用", quartzJob.getPause());
+			map.put("状态：1暂停、0启用", quartzJob.getIsPause());
 			map.put("任务名称", quartzJob.getJobName());
 			map.put("方法名称", quartzJob.getMethodName());
 			map.put("参数", quartzJob.getParams());
@@ -174,7 +174,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	@Override
 	public List<QuartzJob> findByIsPauseIsFalse() {
 		QuartzJobQueryCriteria criteria = new QuartzJobQueryCriteria();
-		criteria.setPause(false);
+		criteria.setIsPause(false);
 
 		// todo 需要修改查询条件
 		LambdaQueryWrapper<QuartzJob> query = Wrappers.<QuartzJob>lambdaQuery()

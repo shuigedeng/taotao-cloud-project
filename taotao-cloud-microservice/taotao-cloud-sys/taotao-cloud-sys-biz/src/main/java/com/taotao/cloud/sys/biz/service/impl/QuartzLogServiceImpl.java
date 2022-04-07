@@ -82,7 +82,7 @@ public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLo
 			map.put("createTime", quartzLog.getCreateTime());
 			map.put("cronExpression", quartzLog.getCronExpression());
 			map.put("exceptionDetail", quartzLog.getExceptionDetail());
-			map.put("isSuccess", quartzLog.getSuccess());
+			map.put("isSuccess", quartzLog.getIsSuccess());
 			map.put("jobName", quartzLog.getJobName());
 			map.put("methodName", quartzLog.getMethodName());
 			map.put("params", quartzLog.getParams());
@@ -91,7 +91,7 @@ public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLo
 			map.put("Bean名称 ", quartzLog.getCreateTime());
 			map.put("cron表达式", quartzLog.getCronExpression());
 			map.put("异常详细 ", quartzLog.getExceptionDetail());
-			map.put("状态", quartzLog.getSuccess());
+			map.put("状态", quartzLog.getIsSuccess());
 			map.put("任务名称", quartzLog.getJobName());
 			map.put("方法名称", quartzLog.getMethodName());
 			map.put("参数", quartzLog.getParams());
