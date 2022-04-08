@@ -3,14 +3,11 @@ package com.taotao.cloud.order.biz.entity.aftersale;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * 售后日志

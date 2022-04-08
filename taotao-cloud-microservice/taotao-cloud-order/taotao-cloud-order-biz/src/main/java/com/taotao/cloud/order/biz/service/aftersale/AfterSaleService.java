@@ -6,16 +6,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import zipkin2.storage.Traces;
 
 /**
  * 售后业务层
@@ -28,7 +26,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param saleSearchParams 查询参数
      * @return 分页售后信息
      */
-    IPage<AfterSale> getAfterSalePages(AfterSaleSearchParams saleSearchParams);
+    IPage<AfterSale> getAfterSalePages(AfterSalePageQuery saleSearchParams);
 
     /**
      * 查询导出售后信息
@@ -36,7 +34,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param saleSearchParams 查询参数
      * @return 分页售后信息
      */
-    List<AfterSale> exportAfterSaleOrder(AfterSaleSearchParams saleSearchParams);
+    List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery saleSearchParams);
 
     /**
      * 查询售后信息
@@ -50,7 +48,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * 获取申请售后页面信息
      *
      * @param sn 订单编号
-     * @return
+     * @return AfterSaleApplyVO
      */
     AfterSaleApplyVO getAfterSaleVO(String sn);
 
@@ -60,7 +58,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param afterSaleDTO 售后对象
      * @return 售后信息
      */
-    AfterSale saveAfterSale(AfterSaleDTO afterSaleDTO);
+    Boolean saveAfterSale(AfterSaleDTO afterSaleDTO);
 
     /**
      * 商家审核售后申请
@@ -71,7 +69,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param actualRefundPrice 退款金额
      * @return 售后
      */
-    AfterSale review(String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice);
+	Boolean review(String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice);
 
     /**
      * 买家退货,物流填写
@@ -109,7 +107,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param remark      备注
      * @return 售后服务
      */
-    AfterSale refund(String afterSaleSn, String remark);
+	Boolean refund(String afterSaleSn, String remark);
 
     /**
      * 买家确认解决问题
@@ -125,7 +123,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param afterSaleSn 售后订单sn
      * @return 售后服务
      */
-    AfterSale cancel(String afterSaleSn);
+	Boolean cancel(String afterSaleSn);
 
 
     /**
@@ -134,6 +132,6 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param sn 售后单号
      * @return 店铺退货收件地址
      */
-    StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO(String sn);
+	StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn);
 
 }

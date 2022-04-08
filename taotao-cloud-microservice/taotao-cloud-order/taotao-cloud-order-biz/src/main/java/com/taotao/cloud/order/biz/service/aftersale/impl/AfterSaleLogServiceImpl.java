@@ -1,14 +1,15 @@
 package com.taotao.cloud.order.biz.service.aftersale.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleLogMapper;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleLogService;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 订单日志业务层实现
@@ -20,8 +21,8 @@ public class AfterSaleLogServiceImpl extends
 
 	@Override
 	public List<AfterSaleLog> getAfterSaleLog(String sn) {
-		QueryWrapper<AfterSaleLog> queryWrapper = Wrappers.query();
-		queryWrapper.eq("sn", sn);
+		LambdaQueryWrapper<AfterSaleLog> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(AfterSaleLog::getSn, sn);
 		return this.list(queryWrapper);
 	}
 }

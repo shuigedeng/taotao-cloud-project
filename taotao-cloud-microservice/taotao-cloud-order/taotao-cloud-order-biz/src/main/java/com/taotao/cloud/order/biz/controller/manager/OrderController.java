@@ -18,6 +18,8 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -32,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,订单API
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-订单管理API", description = "平台管理端-订单管理API")
@@ -41,13 +44,11 @@ public class OrderController {
 	/**
 	 * 订单
 	 */
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 	/**
 	 * 订单价格
 	 */
-	@Autowired
-	private OrderPriceService orderPriceService;
+	private final OrderPriceService orderPriceService;
 
 	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页", method = CommonConstant.GET)
 	@RequestLogger("查询订单列表分页")

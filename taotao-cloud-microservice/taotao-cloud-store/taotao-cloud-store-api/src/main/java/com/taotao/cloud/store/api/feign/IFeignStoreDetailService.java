@@ -5,6 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.store.api.dto.CollectionDTO;
 import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreServiceFallbackImpl;
+import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,6 @@ public interface IFeignStoreDetailService {
 	Result<StoreVO> findSotreById(@RequestParam String id);
 
 	@GetMapping(value = "/sotre/info/id/{id:[0-9]*}")
-	Result<StoreAfterSaleAddressDTO> getStoreAfterSaleAddressDTO(@RequestParam Long storeId);
+	Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddressDTO(@RequestParam Long storeId);
 }
 

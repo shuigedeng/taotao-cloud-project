@@ -27,5 +27,5 @@ public class TracesVO {
 	/**
 	 * 物流详细信息
 	 */
-	private List<Map> traces;
+	private List<Map<String, Object>> traces;
 }

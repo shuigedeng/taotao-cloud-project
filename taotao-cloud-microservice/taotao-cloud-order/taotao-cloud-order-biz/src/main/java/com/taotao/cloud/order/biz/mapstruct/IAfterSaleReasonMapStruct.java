@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.order.biz.mapstruct;
 
-import com.taotao.cloud.order.api.bo.order_info.OrderBO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
-import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.entity.order.OrderInfo;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSaleReasonDTO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleLogVO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleReasonVO;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -37,11 +37,12 @@ import java.util.List;
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IAfterSaleMapStruct {
+public interface IAfterSaleReasonMapStruct {
 
-	IAfterSaleMapStruct INSTANCE = Mappers.getMapper(IAfterSaleMapStruct.class);
+	IAfterSaleReasonMapStruct INSTANCE = Mappers.getMapper(IAfterSaleReasonMapStruct.class);
 
-	AfterSaleVO afterSaleToAfterSaleVO(AfterSale afterSale);
+	List<AfterSaleReasonVO> afterSaleReasonsToAfterSaleReasonVOs(List<AfterSaleReason> afterSaleReasonList);
+	AfterSaleReasonVO afterSaleReasonToAfterSaleReasonVO(AfterSaleReason afterSaleReason);
+	AfterSaleReason afterSaleReasonDTOToAfterSaleReason(AfterSaleReasonDTO afterSaleReasonDTO);
 
-	List<AfterSaleVO> afterSalesToAfterSaleVOs(List<AfterSale> afterSales);
 }

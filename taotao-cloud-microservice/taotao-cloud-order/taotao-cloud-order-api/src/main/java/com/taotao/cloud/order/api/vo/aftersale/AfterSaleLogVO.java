@@ -13,6 +13,9 @@ import lombok.Data;
 @Schema(description = "售后日志VO")
 public class AfterSaleLogVO {
 
+	@Schema(description = "id")
+	private Long id;
+
 	/**
 	 * 售后服务单号
 	 */

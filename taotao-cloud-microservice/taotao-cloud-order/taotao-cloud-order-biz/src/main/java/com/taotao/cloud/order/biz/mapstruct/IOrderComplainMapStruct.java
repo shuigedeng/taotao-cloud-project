@@ -16,32 +16,27 @@
 package com.taotao.cloud.order.biz.mapstruct;
 
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.entity.order.OrderInfo;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-
 /**
- * IAfterSaleMapStruct
- *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-07 20:55:46
+ * @version 2022.03
+ * @since 2020/11/11 14:42
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IAfterSaleMapStruct {
+public interface IOrderComplainMapStruct {
 
-	IAfterSaleMapStruct INSTANCE = Mappers.getMapper(IAfterSaleMapStruct.class);
+	IOrderComplainMapStruct INSTANCE = Mappers.getMapper(IOrderComplainMapStruct.class);
 
-	AfterSaleVO afterSaleToAfterSaleVO(AfterSale afterSale);
+	OrderComplaint orderComplaintDTOToOrderComplaint(OrderComplaintDTO orderComplaintDTO);
 
-	List<AfterSaleVO> afterSalesToAfterSaleVOs(List<AfterSale> afterSales);
 }

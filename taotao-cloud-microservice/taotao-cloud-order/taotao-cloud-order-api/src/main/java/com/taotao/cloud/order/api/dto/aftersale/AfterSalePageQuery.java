@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.vo.aftersale;
+package com.taotao.cloud.order.api.dto.aftersale;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.UserEnum;
@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后搜索参数")
-public class AfterSaleSearchParams extends PageParam {
+public class AfterSalePageQuery extends PageParam {
 
 	@Schema(description = "售后服务单号")
 	private String sn;

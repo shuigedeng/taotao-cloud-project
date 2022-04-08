@@ -41,7 +41,7 @@ public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long
      */
     @Schema(description =  "投诉id")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String complainId;
+    private Long complainId;
     /**
      * 对话内容
      */
@@ -65,7 +65,7 @@ public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long
      */
     @Schema(description =  "对话所属id,卖家id/买家id")
     @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String ownerId;
+    private Long ownerId;
 
 
 

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVOVO123;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
@@ -51,7 +51,7 @@ public class AfterSaleController {
 	@RequestLogger("分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<IPage<AfterSaleVOVO123>> getByPage(AfterSaleSearchParams searchParams) {
+	public Result<IPage<AfterSaleVOVO123>> getByPage(AfterSalePageQuery searchParams) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		searchParams.setStoreId(storeId);
 		return Result.success(afterSaleService.getAfterSalePages(searchParams));
@@ -61,7 +61,7 @@ public class AfterSaleController {
 	@RequestLogger("获取导出售后服务列表列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
-	public Result<List<AfterSale>> exportAfterSaleOrder(AfterSaleSearchParams searchParams) {
+	public Result<List<AfterSale>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		searchParams.setStoreId(storeId);
 		return Result.success(afterSaleService.exportAfterSaleOrder(searchParams));
@@ -71,7 +71,7 @@ public class AfterSaleController {
 	@RequestLogger("审核售后申请")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/review/{afterSaleSn}")
-	public Result<AfterSale> review(
+	public Result<Boolean> review(
 		@NotNull(message = "请选择售后单") @PathVariable String afterSaleSn,
 		@NotNull(message = "请审核") String serviceStatus,
 		String remark,

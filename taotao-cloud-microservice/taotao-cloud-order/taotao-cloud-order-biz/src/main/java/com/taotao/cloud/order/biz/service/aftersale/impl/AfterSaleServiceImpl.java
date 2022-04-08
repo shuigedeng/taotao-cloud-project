@@ -18,6 +18,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
@@ -26,7 +27,6 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
 import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -38,21 +38,20 @@ import com.taotao.cloud.order.biz.service.order.OrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
+import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 售后业务层实现
@@ -98,13 +97,13 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	private RocketMQTemplate rocketMQTemplate;
 
 	@Override
-	public IPage<AfterSale> getAfterSalePages(AfterSaleSearchParams saleSearchParams) {
+	public IPage<AfterSale> getAfterSalePages(AfterSalePageQuery saleSearchParams) {
 		return baseMapper.queryByParams(saleSearchParams.buildMpPage(),
 			saleSearchParams.queryWrapper());
 	}
 
 	@Override
-	public List<AfterSale> exportAfterSaleOrder(AfterSaleSearchParams saleSearchParams) {
+	public List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery saleSearchParams) {
 		return this.list(saleSearchParams.queryWrapper());
 	}
 
@@ -165,18 +164,19 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 
 	@Override
 	@AfterSaleLogPoint(sn = "#rvt.sn", description = "'售后申请:售后编号['+#rvt.sn+']'")
-	public AfterSale saveAfterSale(AfterSaleDTO afterSaleDTO) {
+	public Boolean saveAfterSale(AfterSaleDTO afterSaleDTO) {
 		//检查当前订单是否可申请售后
 		this.checkAfterSaleType(afterSaleDTO);
 		//添加售后
-		return addAfterSale(afterSaleDTO);
+		addAfterSale(afterSaleDTO);
+		return true;
 	}
 
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
 	//@SystemLogPoint(description = "售后-审核售后", customerLog = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
 	@Override
-	public AfterSale review(String afterSaleSn, String serviceStatus, String remark,
-		BigDecimal actualRefundPrice) {
+	public Boolean review(String afterSaleSn, String serviceStatus, String remark,
+							BigDecimal actualRefundPrice) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -220,14 +220,14 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		//发送售后消息
 		this.sendAfterSaleMessage(afterSale);
 
-		return afterSale;
+		return true;
 	}
 
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
 	//@SystemLogPoint(description = "售后-买家退货,物流填写", customerLog = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
 	@Override
 	public AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, String logisticsId,
-		LocalDateTime mDeliverTime) {
+								   LocalDateTime mDeliverTime) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -309,7 +309,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
 	//@SystemLogPoint(description = "售后-平台退款", customerLog = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
-	public AfterSale refund(String afterSaleSn, String remark) {
+	public Boolean refund(String afterSaleSn, String remark) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 		afterSale.setServiceStatus(AfterSaleStatusEnum.COMPLETE.name());
@@ -319,17 +319,17 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		refundSupport.refund(afterSale);
 		//发送退款消息
 		this.sendAfterSaleMessage(afterSale);
-		return afterSale;
+		return true;
 	}
 
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
 	//@SystemLogPoint(description = "售后-买家确认解决", customerLog = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
-	public AfterSale complete(String afterSaleSn) {
+	public Boolean complete(String afterSaleSn) {
 		AfterSale afterSale = this.getBySn(afterSaleSn);
 		afterSale.setServiceStatus(AfterSaleStatusEnum.COMPLETE.name());
 		this.updateAfterSale(afterSaleSn, afterSale);
-		return afterSale;
+		return true;
 	}
 
 	@Override
@@ -356,7 +356,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	}
 
 	@Override
-	public StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO(String sn) {
+	public StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn) {
 		return storeDetailService.getStoreAfterSaleAddressDTO(
 			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId()).data();
 	}
