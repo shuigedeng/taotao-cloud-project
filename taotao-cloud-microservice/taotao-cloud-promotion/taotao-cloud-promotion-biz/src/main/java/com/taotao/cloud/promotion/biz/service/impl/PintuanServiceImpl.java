@@ -4,6 +4,9 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -46,17 +49,17 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
      * 规格商品
      */
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
     /**
      * 会员
      */
     @Autowired
-    private MemberService memberService;
+    private IFeignMemberService memberService;
     /**
      * 订单
      */
     @Autowired
-    private OrderService orderService;
+    private IFeignOrderService orderService;
 
     /**
      * 获取当前拼团的会员

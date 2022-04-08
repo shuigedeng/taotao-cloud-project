@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.dto.StoreSettingDTO;
 import com.taotao.cloud.store.api.vo.StoreBasicInfoVO;
@@ -48,10 +50,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
      * 分类
      */
     @Autowired
-    private CategoryService categoryService;
+    private IFeignCategoryService categoryService;
 
     @Autowired
-    private GoodsService goodsService;
+    private IFeignGoodsService goodsService;
 
     @Autowired
     private RocketmqCustomProperties rocketmqCustomProperties;

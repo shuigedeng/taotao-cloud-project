@@ -41,7 +41,7 @@ public class DistributionServiceImpl extends
 	 * 会员
 	 */
 	@Autowired
-	private MemberService memberService;
+	private IFeignMemberService memberService;
 	/**
 	 * 缓存
 	 */

@@ -2,6 +2,7 @@ package com.taotao.cloud.promotion.biz.service.impl;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.promotion.api.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
@@ -43,7 +44,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
     @Autowired
     private CouponActivityItemService couponActivityItemService;
     @Autowired
-    private MemberService memberService;
+    private IFeignMemberService memberService;
 
     @Override
     public CouponActivityVO getCouponActivityVO(String couponActivityId) {

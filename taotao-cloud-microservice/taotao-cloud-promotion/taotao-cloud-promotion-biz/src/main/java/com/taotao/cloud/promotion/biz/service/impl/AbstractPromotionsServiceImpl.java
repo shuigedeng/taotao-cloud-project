@@ -13,6 +13,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.BasePromotionsSearchParams;
+import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.AbstractPromotionsService;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;

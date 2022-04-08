@@ -1,5 +1,6 @@
 package com.taotao.cloud.promotion.biz.service.impl;
 
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.vo.CouponSearchParams;
@@ -77,7 +78,7 @@ public class PromotionServiceImpl implements PromotionService {
     private PointsGoodsService pointsGoodsService;
 
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
 
 
     /**

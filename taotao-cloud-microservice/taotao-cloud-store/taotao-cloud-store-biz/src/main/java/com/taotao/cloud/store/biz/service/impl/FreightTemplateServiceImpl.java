@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.vo.FreightTemplateVO;
 import com.taotao.cloud.store.biz.entity.FreightTemplate;
 import com.taotao.cloud.store.biz.entity.FreightTemplateChild;
@@ -38,13 +40,13 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
      * 缓存
      */
     @Autowired
-    private Cache cache;
+    private RedisRepository redisRepository;
 
 
     @Override
     public List<FreightTemplateVO> getFreightTemplateList(String storeId) {
         //先从缓存中获取运费模板，如果有则直接返回，如果没有则查询数据后再返回
-        List<FreightTemplateVO> list = (List<FreightTemplateVO>) cache.get(CachePrefix.SHIP_TEMPLATE.getPrefix() + storeId);
+        List<FreightTemplateVO> list = (List<FreightTemplateVO>) redisRepository.get(CachePrefix.SHIP_TEMPLATE.getPrefix() + storeId);
         if (list != null) {
             return list;
         }
@@ -65,7 +67,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
                 list.add(freightTemplateVO);
             }
         }
-        cache.put(CachePrefix.SHIP_TEMPLATE.getPrefix() + storeId, list);
+		redisRepository.set(CachePrefix.SHIP_TEMPLATE.getPrefix() + storeId, list);
         return list;
 
     }

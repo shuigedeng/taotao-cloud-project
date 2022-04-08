@@ -35,11 +35,11 @@ public class MemberGoodsCollection extends BaseSuperEntity<MemberGoodsCollection
 	 * 会员id
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员id'")
-	private String memberId;
+	private Long memberId;
 
 	/**
 	 * 商品id
 	 */
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(32) not null comment '商品id'")
-	private String skuId;
+	private Long skuId;
 }

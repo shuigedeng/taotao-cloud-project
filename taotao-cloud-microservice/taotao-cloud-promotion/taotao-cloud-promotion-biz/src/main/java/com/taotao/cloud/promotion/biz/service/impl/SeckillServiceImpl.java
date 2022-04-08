@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.SeckillVO;
@@ -45,7 +46,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
      * 商品索引
      */
     @Autowired
-    private EsGoodsIndexService goodsIndexService;
+    private IFeignEsGoodsIndexService goodsIndexService;
     /**
      * 设置
      */

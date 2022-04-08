@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
+import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.dto.StoreCompanyDTO;
@@ -44,12 +46,12 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
      * 会员
      */
     @Autowired
-    private MemberService memberService;
+    private IFeignMemberService memberService;
     /**
      * 商品
      */
     @Autowired
-    private GoodsService goodsService;
+    private IFeignGoodsService goodsService;
     /**
      * 店铺详情
      */

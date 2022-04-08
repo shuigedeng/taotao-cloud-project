@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityQuery;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
@@ -43,9 +45,9 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
     @Autowired
     private KanjiaActivityLogService kanjiaActivityLogService;
     @Autowired
-    private MemberService memberService;
+    private IFeignMemberService memberService;
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
 
     @Override
     public KanjiaActivity getKanjiaActivity(KanjiaActivitySearchParams kanJiaActivitySearchParams) {

@@ -14,6 +14,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
@@ -25,6 +26,8 @@ import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.mapper.MemberEvaluationMapper;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
@@ -55,12 +58,12 @@ public class MemberEvaluationServiceImpl extends
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IFeignOrderService orderService;
 	/**
 	 * 子订单
 	 */
 	@Autowired
-	private OrderItemService orderItemService;
+	private IFeignOrderItemService orderItemService;
 	/**
 	 * 会员
 	 */
@@ -70,7 +73,7 @@ public class MemberEvaluationServiceImpl extends
 	 * 商品
 	 */
 	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private IFeignGoodsSkuService goodsSkuService;
 	/**
 	 * rocketMq
 	 */

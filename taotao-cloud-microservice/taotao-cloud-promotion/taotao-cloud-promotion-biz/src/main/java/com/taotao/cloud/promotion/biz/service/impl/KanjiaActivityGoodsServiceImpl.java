@@ -5,6 +5,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -33,7 +34,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
      * 规格商品
      */
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
 
     @Autowired
     private PromotionGoodsService promotionGoodsService;

@@ -7,6 +7,7 @@ import com.taotao.cloud.operation.biz.entity.ArticleCategory;
 import com.taotao.cloud.operation.biz.mapper.ArticleCategoryMapper;
 import com.taotao.cloud.operation.biz.service.ArticleCategoryService;
 import com.taotao.cloud.operation.biz.service.ArticleService;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
      * 缓存
      */
     @Autowired
-    private Cache cache;
+    private RedisRepository redisRepository;
     /**
      * 文章
      */
