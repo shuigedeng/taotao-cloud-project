@@ -1,9 +1,12 @@
 package com.taotao.cloud.order.biz.service.aftersale.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleReasonMapper;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;
@@ -27,12 +30,19 @@ public class AfterSaleReasonServiceImpl extends
 	}
 
 	@Override
-	public AfterSaleReason editAfterSaleReason(AfterSaleReason afterSaleReason) {
+	public Boolean editAfterSaleReason(AfterSaleReason afterSaleReason) {
 		LambdaUpdateWrapper<AfterSaleReason> lambdaQueryWrapper = Wrappers.lambdaUpdate();
 		lambdaQueryWrapper.eq(AfterSaleReason::getId, afterSaleReason.getId());
 		lambdaQueryWrapper.set(AfterSaleReason::getReason, afterSaleReason.getReason());
 		lambdaQueryWrapper.set(AfterSaleReason::getServiceType, afterSaleReason.getServiceType());
 		this.update(lambdaQueryWrapper);
-		return afterSaleReason;
+		return true;
 	}
+
+    @Override
+    public IPage<AfterSaleReason> getByPage(AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
+		LambdaQueryWrapper<AfterSaleReason> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(AfterSaleReason::getServiceType, afterSaleReasonPageQuery.getServiceType());
+        return this.page(afterSaleReasonPageQuery.buildMpPage(), queryWrapper);
+    }
 }

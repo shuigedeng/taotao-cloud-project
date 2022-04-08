@@ -1,4 +1,4 @@
-package com.taotao.cloud.store.api.dto;
+package com.taotao.cloud.store.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺售后收件地址")
-public class StoreAfterSaleAddressDTO {
+public class StoreAfterSaleAddressVO {
 
 	@Schema(description = "收货人姓名")
 	private String salesConsigneeName;

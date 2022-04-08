@@ -3,24 +3,15 @@ package com.taotao.cloud.order.api.vo.order;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
-import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
-import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.enums.order.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单简略信息 用于订单列表查看

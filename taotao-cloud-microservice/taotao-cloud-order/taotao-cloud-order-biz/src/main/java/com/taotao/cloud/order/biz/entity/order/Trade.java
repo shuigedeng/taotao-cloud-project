@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;

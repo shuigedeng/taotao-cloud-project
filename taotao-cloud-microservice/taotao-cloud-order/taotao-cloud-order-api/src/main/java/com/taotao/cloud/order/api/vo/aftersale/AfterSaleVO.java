@@ -4,13 +4,14 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
- * 售后表
+ * 售后
  */
 @Data
 @Builder
@@ -18,7 +19,7 @@ import lombok.Data;
 public class AfterSaleVO {
 
 	@Schema(description = "id")
-	private String id;
+	private Long id;
 
 	@Schema(description = "售后服务单号")
 	private String sn;

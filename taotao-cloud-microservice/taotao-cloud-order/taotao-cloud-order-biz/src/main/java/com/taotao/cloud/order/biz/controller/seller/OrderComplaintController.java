@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationVO;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintOperationParams;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintSearchParams;
+import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.api.vo.order.StoreAppealVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
@@ -62,8 +62,8 @@ public class OrderComplaintController {
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<OrderComplaint>> get(OrderComplaintSearchParams searchParams,
-		PageVO pageVO) {
+	public Result<IPage<OrderComplaint>> get(OrderComplaintPageQuery searchParams,
+											 PageVO pageVO) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		searchParams.setStoreId(storeId);
 		return Result.success(orderComplaintService.getOrderComplainByPage(searchParams, pageVO));

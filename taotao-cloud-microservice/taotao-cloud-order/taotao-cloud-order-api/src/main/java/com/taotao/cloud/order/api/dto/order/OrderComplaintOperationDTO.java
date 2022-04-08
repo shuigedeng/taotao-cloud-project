@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.vo.order;
+package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -16,13 +16,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "交易投诉 参数")
-public class OrderComplaintOperationParams {
+public class OrderComplaintOperationDTO {
 
 	@Schema(description = "要更改的状态状态")
 	private String complainStatus;
 
 	@Schema(description = "交易投诉主键")
-	private String complainId;
+	private Long complainId;
 
 	@Schema(description = "商家申诉内容")
 	private String appealContent;

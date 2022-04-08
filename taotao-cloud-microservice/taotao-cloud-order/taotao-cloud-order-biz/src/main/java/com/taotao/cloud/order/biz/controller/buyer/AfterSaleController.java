@@ -7,34 +7,34 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleLogVO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
+import com.taotao.cloud.order.biz.mapstruct.IAfterSaleLogMapStruct;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleMapStruct;
+import com.taotao.cloud.order.biz.mapstruct.IAfterSaleReasonMapStruct;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleLogService;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
 import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 买家端,售后管理接口
@@ -77,8 +77,8 @@ public class AfterSaleController {
 	@RequestLogger("分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<AfterSaleVO>> page(@Validated AfterSaleSearchParams searchParams) {
-		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(searchParams);
+	public Result<PageModel<AfterSaleVO>> page(@Validated AfterSalePageQuery afterSalePageQuery) {
+		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(afterSalePageQuery);
 		return Result.success(PageModel.convertMybatisPage(afterSalePages, AfterSaleVO.class));
 	}
 
@@ -86,15 +86,18 @@ public class AfterSaleController {
 	@RequestLogger("获取申请售后页面信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/applyAfterSaleInfo/{sn}")
-	public Result<AfterSaleApplyVO> applyAfterSaleInfo(@PathVariable String sn) {
+	public Result<AfterSaleApplyVO> applyAfterSaleInfo(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		return Result.success(afterSaleService.getAfterSaleVO(sn));
 	}
 
 	@Operation(summary = "申请售后", description = "申请售后", method = CommonConstant.POST)
 	@RequestLogger("申请售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping(value = "/save/{orderItemSn}")
-	public Result<AfterSale> save(AfterSaleDTO afterSaleDTO) {
+	@PostMapping(value = "/{orderItemSn}")
+	public Result<Boolean> save(
+		@NotBlank(message = "售后单号不能为空") @PathVariable String orderItemSn,
+		@Validated @RequestBody AfterSaleDTO afterSaleDTO) {
+		afterSaleDTO.setOrderItemSn(orderItemSn);
 		return Result.success(afterSaleService.saveAfterSale(afterSaleDTO));
 	}
 
@@ -115,8 +118,8 @@ public class AfterSaleController {
 	@RequestLogger("售后，取消售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/cancel/{afterSaleSn}")
-	public Result<AfterSale> cancel(
-		@NotNull(message = "参数非法") @PathVariable("afterSaleSn") String afterSaleSn) {
+	public Result<Boolean> cancel(
+		@NotNull(message = "售后订单编码不能为空") @PathVariable String afterSaleSn) {
 		return Result.success(afterSaleService.cancel(afterSaleSn));
 	}
 
@@ -124,7 +127,7 @@ public class AfterSaleController {
 	@RequestLogger("获取商家售后收件地址")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
-	public Result<StoreAfterSaleAddressDTO> getStoreAfterSaleAddress(
+	public Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddress(
 		@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
 		return Result.success(afterSaleService.getStoreAfterSaleAddressDTO(sn));
 	}
@@ -133,17 +136,19 @@ public class AfterSaleController {
 	@RequestLogger("获取售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleReason/{serviceType}")
-	public Result<List<AfterSaleReason>> getAfterSaleReason(
-		@PathVariable String serviceType) {
-		return Result.success(afterSaleReasonService.afterSaleReasonList(serviceType));
+	public Result<List<AfterSaleReasonVO>> getAfterSaleReason(
+		@NotBlank(message = "售后类型不能为空") @PathVariable String serviceType) {
+		List<AfterSaleReason> afterSaleReasons = afterSaleReasonService.afterSaleReasonList(serviceType);
+		return Result.success(IAfterSaleReasonMapStruct.INSTANCE.afterSaleReasonsToAfterSaleReasonVOs(afterSaleReasons));
 	}
 
 	@Operation(summary = "获取售后日志", description = "获取售后日志", method = CommonConstant.GET)
 	@RequestLogger("获取售后日志")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/get/getAfterSaleLog/{sn}")
-	public Result<List<AfterSaleLog>> getAfterSaleLog(@PathVariable String sn) {
-		return Result.success(afterSaleLogService.getAfterSaleLog(sn));
+	@GetMapping(value = "/afterSaleLog/{sn}")
+	public Result<List<AfterSaleLogVO>> getAfterSaleLog(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
+		List<AfterSaleLog> afterSaleLogList = afterSaleLogService.getAfterSaleLog(sn);
+		return Result.success(IAfterSaleLogMapStruct.INSTANCE.afterSaleLogsToAfterSaleVOs(afterSaleLogList));
 	}
 
 }
