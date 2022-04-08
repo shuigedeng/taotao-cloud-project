@@ -35,8 +35,8 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	private Long memberId;
 
 	/**
 	 * 会员名称
@@ -53,8 +53,8 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	/**
 	 * 店铺ID
 	 */
-	@Column(name = "store_id", columnDefinition = "varchar(64) comment '店铺ID'")
-	private String storeId;
+	@Column(name = "store_id", columnDefinition = "bigint comment '店铺ID'")
+	private Long storeId;
 
 	/**
 	 * 店铺名称
@@ -65,14 +65,14 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	/**
 	 * 商品ID
 	 */
-	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
-	private String goodsId;
+	@Column(name = "goods_id", nullable = false, columnDefinition = "bigint not null comment '商品ID'")
+	private Long goodsId;
 
 	/**
 	 * SKU_ID
 	 */
-	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(64) not null comment 'SKU_ID'")
-	private String skuId;
+	@Column(name = "sku_id", nullable = false, columnDefinition = "bigint not null comment 'SKU_ID'")
+	private Long skuId;
 
 	/**
 	 * 会员ID

@@ -50,8 +50,8 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 	/**
 	 * 租户id
 	 */
-	@Column(name = "tenant_id", nullable = false, unique = true, columnDefinition = "varchar(32) NOT NULL COMMENT '租户id'")
-	private String tenantId;
+	@Column(name = "tenant_id", nullable = false, unique = true, columnDefinition = "bigint NOT NULL COMMENT '租户id'")
+	private Long tenantId;
 
 	/**
 	 * 租户密钥
@@ -81,25 +81,25 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 	/**
 	 * 邮箱
 	 */
-	@Column(name = "email", unique = true, columnDefinition = "varchar(30) comment '邮箱'")
+	@Column(name = "email", unique = true, columnDefinition = "varchar(255) comment '邮箱'")
 	private String email;
 
 	/**
 	 * 联系人
 	 */
-	@Column(name = "username", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '联系人'")
+	@Column(name = "username", unique = true, nullable = false, columnDefinition = "varchar(64) not null comment '联系人'")
 	private String username;
 
 	/**
 	 * 联系人手机号
 	 */
-	@Column(name = "phone", unique = true, nullable = false, columnDefinition = "varchar(14) not null comment '联系人手机号'")
+	@Column(name = "phone", unique = true, nullable = false, columnDefinition = "varchar(64) not null comment '联系人手机号'")
 	private String phone;
 
 	/**
 	 * 联系人地址
 	 */
-	@Column(name = "address", nullable = false, columnDefinition = "varchar(32) not null comment '联系人地址'")
+	@Column(name = "address", nullable = false, columnDefinition = "varchar(255) not null comment '联系人地址'")
 	private String address;
 
 	/**
@@ -117,12 +117,12 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 	/**
 	 * 所在地区
 	 */
-	@Column(name = "region_info", columnDefinition = "varchar(32) comment '所在地区'")
+	@Column(name = "region_info", columnDefinition = "varchar(255) comment '所在地区'")
 	private String regionInfo;
 
 	/**
 	 * 公司类型
 	 */
 	@Column(name = "type", nullable = false, columnDefinition = "int not null default 1 comment '公司类型 1运营商 2供应商'")
-	private Integer type = 1;
+	private Integer type;
 }

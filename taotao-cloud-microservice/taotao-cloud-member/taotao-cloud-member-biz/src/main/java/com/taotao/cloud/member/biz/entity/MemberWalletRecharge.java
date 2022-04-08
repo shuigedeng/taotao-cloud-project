@@ -42,8 +42,8 @@ public class MemberWalletRecharge extends BaseSuperEntity<MemberWalletRecharge, 
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员id'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员id'")
+	private Long memberId;
 
 	/**
 	 * 充值金额
@@ -78,7 +78,7 @@ public class MemberWalletRecharge extends BaseSuperEntity<MemberWalletRecharge, 
 	/**
 	 * 支付时间
 	 */
-	@Column(name = "pay_time", nullable = false, columnDefinition = "TIMESTAMP  comment '支付时间'")
+	@Column(name = "pay_time", nullable = false, columnDefinition = "datetime not null  comment '支付时间'")
 	private LocalDateTime payTime;
 
 	/**

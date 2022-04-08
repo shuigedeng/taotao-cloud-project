@@ -82,6 +82,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	private String storeName;
 
 	// ****************商品信息************
+
 	/**
 	 * 商品ID
 	 */
@@ -125,6 +126,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	private BigDecimal flowPrice;
 
 	// ***************交涉信息************
+
 	/**
 	 * 申请原因
 	 */
@@ -235,6 +237,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	private LocalDateTime refundTime;
 
 	// *****************买家物流信息****************
+
 	/**
 	 * 发货单号
 	 */

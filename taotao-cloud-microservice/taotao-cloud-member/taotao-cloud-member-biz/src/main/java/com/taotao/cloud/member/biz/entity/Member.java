@@ -37,13 +37,13 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 昵称
 	 */
-	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(32) not null comment '昵称'")
+	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(64) not null comment '昵称'")
 	private String nickname;
 
 	/**
 	 * 会员用户名
 	 */
-	@Column(name = "username", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户名'")
+	@Column(name = "username", nullable = false, columnDefinition = "varchar(64) not null comment '会员用户名'")
 	private String username;
 
 	/**
@@ -73,8 +73,8 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 会员地址ID
 	 */
-	@Column(name = "region_id", columnDefinition = "varchar(32) comment '会员地址ID'")
-	private String regionId;
+	@Column(name = "region_id", columnDefinition = "bigint null comment '会员地址ID'")
+	private Long regionId;
 
 	/**
 	 * 会员地址
@@ -115,7 +115,7 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 会员头像地址
 	 */
-	@Column(name = "face", columnDefinition = "varchar(1024) comment '会员头像地址'")
+	@Column(name = "face", columnDefinition = "text null comment '会员头像地址'")
 	private String face;
 
 	/**
@@ -139,8 +139,8 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 店铺ID
 	 */
-	@Column(name = "store_id", columnDefinition = "varchar(64) comment '店铺ID'")
-	private String storeId;
+	@Column(name = "store_id", columnDefinition = "bigint null comment '店铺ID'")
+	private Long storeId;
 
 	/**
 	 * 最近一次登录的客户端类型
@@ -165,8 +165,8 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 会员等级ID 用户等级 0:普通用户 1:vip
 	 */
-	@Column(name = "grade_id", columnDefinition = "int default 0 comment '会员等级ID 用户等级 0:普通用户 1:vip'")
-	private Integer gradeId;
+	@Column(name = "grade", columnDefinition = "int default 0 comment '会员等级ID 用户等级 0:普通用户 1:vip'")
+	private Integer grade;
 
 	/**
 	 * 用户类型 1个人用户 2企业用户

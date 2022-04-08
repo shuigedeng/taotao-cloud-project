@@ -48,14 +48,14 @@ public class OrderRefundPaySeq  extends BaseSuperEntity<OrderRefundPaySeq,Long> 
 	/**
 	 * 管家id
 	 */
-	@Column(name = "steward_id", columnDefinition = "varchar(32) not null comment '管家id'")
-	private String stewardId;
+	@Column(name = "steward_id", columnDefinition = "bigint not null comment '管家id'")
+	private Long stewardId;
 
 	/**
 	 * 退款金额
 	 */
 	@Column(name = "amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '退款金额'")
-	private BigDecimal amount = BigDecimal.ZERO;
+	private BigDecimal amount;
 
 	/**
 	 * 微信退款ID
@@ -84,12 +84,12 @@ public class OrderRefundPaySeq  extends BaseSuperEntity<OrderRefundPaySeq,Long> 
 	/**
 	 * 退款时间
 	 */
-	@Column(name = "refund_date", columnDefinition = "TIMESTAMP comment '退款时间'")
+	@Column(name = "refund_date", columnDefinition = "datetime comment '退款时间'")
 	private LocalDateTime refundDate;
 
 	/**
 	 * 创建日期
 	 */
-	@Column(name = "create_date", columnDefinition = "TIMESTAMP comment '创建日期'")
+	@Column(name = "create_date", columnDefinition = "datetime comment '创建日期'")
 	private LocalDateTime createDate;
 }

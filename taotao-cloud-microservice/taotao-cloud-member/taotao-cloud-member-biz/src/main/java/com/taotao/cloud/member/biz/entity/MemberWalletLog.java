@@ -34,8 +34,8 @@ public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员id'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员id'")
+	private Long memberId;
 
 	/**
 	 * 金额

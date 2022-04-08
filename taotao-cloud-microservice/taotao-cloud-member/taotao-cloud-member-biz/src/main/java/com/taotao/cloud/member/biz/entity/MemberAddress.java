@@ -34,7 +34,7 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
 
 	/**
@@ -52,13 +52,13 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 	/**
 	 * 地址名称，逗号分割
 	 */
-	@Column(name = "consignee_address_path", nullable = false, columnDefinition = "varchar(32) not null comment '地址名称，逗号分割'")
+	@Column(name = "consignee_address_path", nullable = false, columnDefinition = "varchar(255) not null comment '地址名称，逗号分割'")
 	private String consigneeAddressPath;
 
 	/**
 	 * 地址id,逗号分割
 	 */
-	@Column(name = "consignee_address_id_path", nullable = false, columnDefinition = "varchar(32) not null comment '地址id,逗号分割'")
+	@Column(name = "consignee_address_id_path", nullable = false, columnDefinition = "varchar(255) not null comment '地址id,逗号分割'")
 	private String consigneeAddressIdPath;
 
 	/**

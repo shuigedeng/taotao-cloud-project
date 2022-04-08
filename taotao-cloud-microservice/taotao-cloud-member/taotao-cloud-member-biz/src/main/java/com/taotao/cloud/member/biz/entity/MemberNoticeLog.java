@@ -53,8 +53,8 @@ public class MemberNoticeLog extends BaseSuperEntity<MemberNoticeLog, Long> {
 	/**
 	 * 管理员id
 	 */
-	@Column(name = "admin_id", nullable = false, columnDefinition = "varchar(64) not null comment '管理员id'")
-	private String adminId;
+	@Column(name = "admin_id", nullable = false, columnDefinition = "bigint not null comment '管理员id'")
+	private Long adminId;
 
 	/**
 	 * 管理员名称
@@ -65,7 +65,7 @@ public class MemberNoticeLog extends BaseSuperEntity<MemberNoticeLog, Long> {
 	/**
 	 * 发送时间
 	 */
-	@Column(name = "send_time", nullable = false, columnDefinition = "TIMESTAMP not null comment '发送时间'")
+	@Column(name = "send_time", nullable = false, columnDefinition = "datetime not null comment '发送时间'")
 	private LocalDateTime sendTime;
 
 	/**

@@ -46,7 +46,7 @@ public class OrderWaitEvent extends BaseSuperEntity<OrderWaitEvent, Long> {
 	/**
 	 * 触发时间
 	 */
-	@Column(name = "trigger_time", columnDefinition = "TIMESTAMP comment '触发时间'")
+	@Column(name = "trigger_time", columnDefinition = "datetime comment '触发时间'")
 	private LocalDateTime triggerTime;
 
 	/**

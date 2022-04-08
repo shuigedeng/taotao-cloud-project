@@ -34,8 +34,8 @@ public class MemberNotice extends BaseSuperEntity<MemberNotice, Long> {
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员id'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员id'")
+	private Long memberId;
 
 	/**
 	 * 是否已读

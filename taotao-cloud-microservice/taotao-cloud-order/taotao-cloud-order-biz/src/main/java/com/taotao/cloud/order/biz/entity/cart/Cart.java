@@ -16,22 +16,19 @@
 package com.taotao.cloud.order.biz.entity.cart;
 
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
-import java.math.BigDecimal;
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.math.BigDecimal;
 
 /**
  * 购物车表
  *
  * @author shuigedeng
- * @since 2020/11/13 09:46
  * @version 2022.03
+ * @since 2020/11/13 09:46
  */
 @Setter
 @Getter
@@ -73,6 +70,6 @@ public class Cart extends JpaSuperEntity<Long> {
 	 * 钱包余额
 	 */
 	@Column(name = "balance_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
-	private BigDecimal balanceAmount ;
+	private BigDecimal balanceAmount;
 
 }
