@@ -24,6 +24,8 @@ import com.taotao.cloud.sys.api.setting.PointSettingItem;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +36,16 @@ import org.springframework.stereotype.Service;
 public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberSign> implements
 	MemberSignService {
 
-	///**
-	// * RocketMQ
-	// */
-	//@Autowired
-	//private RocketMQTemplate rocketMQTemplate;
-	///**
-	// * RocketMQ 配置
-	// */
-	//@Autowired
-	//private RocketmqCustomProperties rocketmqCustomProperties;
+	/**
+	 * RocketMQ
+	 */
+	@Autowired
+	private RocketMQTemplate rocketMQTemplate;
+	/**
+	 * RocketMQ 配置
+	 */
+	@Autowired
+	private RocketmqCustomProperties rocketmqCustomProperties;
 	/**
 	 * 配置
 	 */

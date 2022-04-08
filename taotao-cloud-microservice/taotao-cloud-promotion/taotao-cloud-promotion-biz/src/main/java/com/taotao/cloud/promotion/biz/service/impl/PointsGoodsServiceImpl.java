@@ -4,6 +4,8 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
@@ -42,10 +44,10 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
      * 规格商品
      */
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
 
     @Autowired
-    private EsGoodsIndexService goodsIndexService;
+    private IFeignEsGoodsIndexService goodsIndexService;
 
 
     @Override

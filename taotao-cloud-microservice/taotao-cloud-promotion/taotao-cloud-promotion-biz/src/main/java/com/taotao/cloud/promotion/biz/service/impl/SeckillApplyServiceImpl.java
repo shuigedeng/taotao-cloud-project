@@ -9,6 +9,7 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.tools.PromotionCacheKeys;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
@@ -21,6 +22,7 @@ import com.taotao.cloud.promotion.biz.mapper.SeckillApplyMapper;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.SeckillApplyService;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,12 +46,12 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
      * 缓存
      */
     @Autowired
-    private Cache<List<SeckillTimelineVO>> cache;
+    private RedisRepository redisRepository;
     /**
      * 规格商品
      */
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
     /**
      * 促销商品
      */

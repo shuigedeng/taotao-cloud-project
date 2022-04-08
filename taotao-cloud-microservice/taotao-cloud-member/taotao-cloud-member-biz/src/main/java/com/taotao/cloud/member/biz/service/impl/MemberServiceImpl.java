@@ -49,6 +49,8 @@ import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -81,16 +83,16 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	 */
 	@Autowired
 	private IFeignStoreService feignStoreService;
-	///**
-	// * RocketMQ 配置
-	// */
-	//@Autowired
-	//private RocketmqCustomProperties rocketmqCustomProperties;
-	///**
-	// * RocketMQ
-	// */
-	//@Autowired
-	//private RocketMQTemplate rocketMQTemplate;
+	/**
+	 * RocketMQ 配置
+	 */
+	@Autowired
+	private RocketmqCustomProperties rocketmqCustomProperties;
+	/**
+	 * RocketMQ
+	 */
+	@Autowired
+	private RocketMQTemplate rocketMQTemplate;
 	/**
 	 * 缓存
 	 */

@@ -27,8 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class GoodsCollectionServiceImpl extends
-	ServiceImpl<GoodsCollectionMapper, MemberGoodsCollection> implements
-	GoodsCollectionService {
+	ServiceImpl<GoodsCollectionMapper, MemberGoodsCollection> implements GoodsCollectionService {
 
 	@Override
 	public IPage<GoodsCollectionVO> goodsCollection(PageParam pageParam) {
@@ -41,7 +40,7 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public Boolean isCollection(String skuId) {
+	public Boolean isCollection(Long skuId) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId());
 		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
@@ -49,7 +48,7 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public Boolean addGoodsCollection(String skuId) {
+	public Boolean addGoodsCollection(Long skuId) {
 		MemberGoodsCollection memberGoodsCollection = this.getOne(
 			new LambdaUpdateWrapper<MemberGoodsCollection>()
 				.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId())
@@ -63,7 +62,7 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public Boolean deleteGoodsCollection(String skuId) {
+	public Boolean deleteGoodsCollection(Long skuId) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId());
 		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
@@ -71,14 +70,14 @@ public class GoodsCollectionServiceImpl extends
 	}
 
 	@Override
-	public Boolean deleteGoodsCollection(List<String> goodsIds) {
+	public Boolean deleteGoodsCollection(List<Long> goodsIds) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.in(MemberGoodsCollection::getSkuId, goodsIds);
 		return this.remove(queryWrapper);
 	}
 
 	@Override
-	public Boolean deleteSkuCollection(List<String> skuIds) {
+	public Boolean deleteSkuCollection(List<Long> skuIds) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.in(MemberGoodsCollection::getSkuId, skuIds);
 		return this.remove(queryWrapper);

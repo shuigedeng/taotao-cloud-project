@@ -4,6 +4,7 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
 import com.taotao.cloud.member.biz.entity.MemberBrowse;
 import com.taotao.cloud.member.biz.mapper.FootprintMapper;
 import com.taotao.cloud.member.biz.service.IMemberBrowseService;
@@ -31,7 +32,7 @@ public class IMemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Membe
      * es商品业务层
      */
     @Autowired
-    private EsGoodsSearchService esGoodsSearchService;
+    private IFeignEsGoodsSearchService esGoodsSearchService;
 
     @Override
     public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {

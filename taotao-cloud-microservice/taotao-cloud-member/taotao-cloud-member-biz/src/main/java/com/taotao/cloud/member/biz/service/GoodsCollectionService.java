@@ -28,7 +28,7 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
 	 * @param skuId 规格ID
 	 * @return 是否收藏
 	 */
-	Boolean isCollection(String skuId);
+	Boolean isCollection(Long skuId);
 
 	/**
 	 * 添加商品收藏
@@ -36,7 +36,7 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
 	 * @param skuId 规格ID
 	 * @return 操作状态
 	 */
-	Boolean addGoodsCollection(String skuId);
+	Boolean addGoodsCollection(Long skuId);
 
 	/**
 	 * 商品收藏
@@ -44,7 +44,7 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
 	 * @param skuId 规格ID
 	 * @return 操作状态
 	 */
-	Boolean deleteGoodsCollection(String skuId);
+	Boolean deleteGoodsCollection(Long skuId);
 
 	/**
 	 * 删除商品收藏
@@ -52,7 +52,7 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
 	 * @param goodsIds 规格ID
 	 * @return 操作状态
 	 */
-	Boolean deleteGoodsCollection(List<String> goodsIds);
+	Boolean deleteGoodsCollection(List<Long> goodsIds);
 
 	/**
 	 * 删除商品SKU收藏
@@ -60,5 +60,5 @@ public interface GoodsCollectionService extends IService<MemberGoodsCollection> 
 	 * @param skuIds 规格ID
 	 * @return 操作状态
 	 */
-	Boolean deleteSkuCollection(List<String> skuIds);
+	Boolean deleteSkuCollection(List<Long> skuIds);
 }

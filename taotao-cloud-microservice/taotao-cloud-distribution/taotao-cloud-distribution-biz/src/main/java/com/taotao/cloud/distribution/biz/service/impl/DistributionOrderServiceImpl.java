@@ -17,6 +17,7 @@ import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
@@ -41,7 +42,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
      * 订单
      */
     @Autowired
-    private OrderService orderService;
+    private IFeignOrderService orderService;
     /**
      * 店铺流水
      */

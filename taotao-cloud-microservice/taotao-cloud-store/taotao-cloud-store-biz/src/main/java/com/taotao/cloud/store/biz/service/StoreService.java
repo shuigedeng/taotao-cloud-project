@@ -101,7 +101,6 @@ public interface StoreService extends IService<Store> {
      */
     boolean applyThirdStep(StoreOtherInfoDTO storeOtherInfoDTO);
 
-
     /**
      * 更新店铺商品数量
      *

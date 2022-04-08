@@ -35,7 +35,7 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 	 * 会员ID
 	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String memberId;
+	private Long memberId;
 
 	/**
 	 * 收货人姓名

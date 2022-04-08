@@ -12,6 +12,7 @@ import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.mapper.DistributionGoodsMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
      * 规格商品
      */
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
 
     @Override
     public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsSearchParams searchParams) {
