@@ -4,16 +4,19 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintBaseVO;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintOperationParams;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
+import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.mapstruct.IOrderComplainMapStruct;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
@@ -48,7 +51,7 @@ public class OrderComplaintController {
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<OrderComplaintVO> get(@PathVariable String id) {
+	public Result<OrderComplaintVO> get(@PathVariable Long id) {
 		return Result.success(orderComplaintService.getOrderComplainById(id));
 	}
 
@@ -68,8 +71,7 @@ public class OrderComplaintController {
 	public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
 		OrderComplaint orderComplaint = IOrderComplainMapStruct.INSTANCE.orderComplaintDTOToOrderComplaint(orderComplaintDTO);
 		orderComplaint.setId(id);
-
-		return Result.success(orderComplaintService.updateOrderComplain(orderComplaintDTO));
+		return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话", method = CommonConstant.POST)
@@ -78,7 +80,15 @@ public class OrderComplaintController {
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
 											@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
-		return Result.success(orderComplaintCommunicationService.addCommunication(complainId, orderComplaintCommunicationDTO.getContent()));
+		SecurityUser user = SecurityUtil.getUser();
+		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
+			.complainId(complainId)
+			.content(orderComplaintCommunicationDTO.getContent())
+			.owner(CommunicationOwnerEnum.PLATFORM.name())
+			.ownerName(user.getUsername())
+			.ownerId(user.getUserId())
+			.build();
+		return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
 	}
 
 	@Operation(summary = "修改状态", description = "修改状态", method = CommonConstant.PUT)

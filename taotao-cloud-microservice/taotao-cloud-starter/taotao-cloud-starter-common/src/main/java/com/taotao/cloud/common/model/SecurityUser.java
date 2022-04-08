@@ -122,7 +122,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 */
 	private Set<String> roles;
 
-	private String storeId;
+	private Long storeId;
 
 	public SecurityUser() {
 
@@ -201,11 +201,11 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		return true;
 	}
 
-	public String getStoreId() {
+	public Long getStoreId() {
 		return storeId;
 	}
 
-	public void setStoreId(String storeId) {
+	public void setStoreId(Long storeId) {
 		this.storeId = storeId;
 	}
 

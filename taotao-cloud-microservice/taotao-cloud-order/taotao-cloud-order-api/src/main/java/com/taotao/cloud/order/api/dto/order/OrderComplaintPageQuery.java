@@ -28,13 +28,13 @@ public class OrderComplaintPageQuery extends PageParam {
 	private String orderSn;
 
 	@Schema(description = "会员id")
-	private String memberId;
+	private Long memberId;
 
 	@Schema(description = "会员名称")
 	private String memberName;
 
 	@Schema(description = "商家id")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "商家名称")
 	private String storeName;

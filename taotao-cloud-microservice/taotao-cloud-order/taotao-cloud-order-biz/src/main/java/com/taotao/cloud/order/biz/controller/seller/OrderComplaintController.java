@@ -2,35 +2,32 @@ package com.taotao.cloud.order.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.order.api.dto.order.*;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationVO;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintOperationParams;
-import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintBaseVO;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
-import com.taotao.cloud.order.api.vo.order.StoreAppealVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
+import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
+import com.taotao.cloud.order.biz.mapstruct.IOrderComplainMapStruct;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Objects;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 店铺端,交易投诉接口
  **/
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-交易投诉API", description = "店铺端-交易投诉API")
@@ -40,20 +37,18 @@ public class OrderComplaintController {
 	/**
 	 * 交易投诉
 	 */
-	@Autowired
-	private OrderComplaintService orderComplaintService;
+	private final OrderComplaintService orderComplaintService;
 
 	/**
 	 * 投诉沟通
 	 */
-	@Autowired
-	private OrderComplaintCommunicationService orderComplaintCommunicationService;
+	private final OrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<OrderComplaintVO> get(@PathVariable String id) {
+	public Result<OrderComplaintVO> get(@PathVariable Long id) {
 		return Result.success(
 			OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
 	}
@@ -62,55 +57,57 @@ public class OrderComplaintController {
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<OrderComplaint>> get(OrderComplaintPageQuery searchParams,
-											 PageVO pageVO) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		searchParams.setStoreId(storeId);
-		return Result.success(orderComplaintService.getOrderComplainByPage(searchParams, pageVO));
+	public Result<PageModel<OrderComplaintBaseVO>> get(OrderComplaintPageQuery orderComplaintPageQuery) {
+		Long storeId = SecurityUtil.getUser().getStoreId();
+		orderComplaintPageQuery.setStoreId(storeId);
+		IPage<OrderComplaint> orderComplainPage = orderComplaintService.getOrderComplainByPage(orderComplaintPageQuery);
+		return Result.success(PageModel.convertMybatisPage(orderComplainPage, OrderComplaintBaseVO.class));
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话", method = CommonConstant.POST)
 	@RequestLogger("添加交易投诉对话")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping("/communication")
-	public Result<OrderComplaintCommunicationVO> addCommunication(
-		@RequestParam String complainId, @RequestParam String content) {
-		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-		OrderComplaintCommunicationVO communicationVO = new OrderComplaintCommunicationVO(
-			complainId, content, CommunicationOwnerEnum.STORE.name(), currentUser.getStoreId(),
-			currentUser.getUsername());
-		orderComplaintCommunicationService.addCommunication(communicationVO);
-		return Result.success();
+	@PostMapping("/communication/{complainId}")
+	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
+											@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
+		SecurityUser user = SecurityUtil.getUser();
+		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
+			.complainId(complainId)
+			.content(orderComplaintCommunicationDTO.getContent())
+			.owner(CommunicationOwnerEnum.STORE.name())
+			.ownerName(user.getUsername())
+			.ownerId(user.getStoreId())
+			.build();
+		return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
 	}
 
 	@Operation(summary = "修改申诉信息", description = "修改申诉信息", method = CommonConstant.PUT)
 	@RequestLogger("修改申诉信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping
-	public Result<OrderComplaintVO> update(OrderComplaintVO orderComplainVO) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		orderComplainVO.setStoreId(storeId);
-		orderComplaintService.updateOrderComplain(orderComplainVO);
-		return Result.success(orderComplainVO);
+	@PutMapping("/{id}")
+	public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
+		Long storeId =  SecurityUtil.getUser().getStoreId();
+		OrderComplaint orderComplaint = IOrderComplainMapStruct.INSTANCE.orderComplaintDTOToOrderComplaint(orderComplaintDTO);
+		orderComplaint.setStoreId(storeId);
+		return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));
 	}
 
 	@Operation(summary = "申诉", description = "申诉", method = CommonConstant.POST)
 	@RequestLogger("申诉")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/appeal")
-	public Result<OrderComplaintVO> appeal(StoreAppealVO storeAppealVO) {
-		orderComplaintService.appeal(storeAppealVO);
+	public Result<OrderComplaintVO> appeal( @Validated @RequestBody StoreAppealDTO storeAppealDTO) {
+		orderComplaintService.appeal(storeAppealDTO);
 		return Result.success(
-			orderComplaintService.getOrderComplainById(storeAppealVO.getOrderComplaintId()));
+			orderComplaintService.getOrderComplainById(storeAppealDTO.getOrderComplaintId()));
 	}
-	
+
 	@Operation(summary = "修改状态", description = "修改状态", method = CommonConstant.PUT)
 	@RequestLogger("修改状态")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status")
-	public Result<Object> updateStatus(OrderComplaintOperationParams orderComplainVO) {
-		orderComplaintService.updateOrderComplainByStatus(orderComplainVO);
-		return Result.success();
+	public Result<Boolean> updateStatus( @Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
+		return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
 	}
 
 }
