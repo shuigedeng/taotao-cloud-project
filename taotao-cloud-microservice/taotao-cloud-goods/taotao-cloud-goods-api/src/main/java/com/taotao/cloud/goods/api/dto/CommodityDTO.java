@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class CommodityDTO {
 
 	@Schema(description = "商品ID")
-	private Integer goodsId;
+	private Long goodsId;
 
 	@Schema(description = "商品名称")
 	private String name;

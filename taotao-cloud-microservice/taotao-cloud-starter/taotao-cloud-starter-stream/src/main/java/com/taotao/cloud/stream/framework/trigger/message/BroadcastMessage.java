@@ -8,7 +8,7 @@ public class BroadcastMessage {
 	/**
 	 * 直播间ID
 	 */
-	private String studioId;
+	private Long studioId;
 
 	/**
 	 * 状态
@@ -16,16 +16,16 @@ public class BroadcastMessage {
 	private String status;
 
 
-	public BroadcastMessage(String studioId, String status) {
+	public BroadcastMessage(Long studioId, String status) {
 		this.studioId = studioId;
 		this.status = status;
 	}
 
-	public String getStudioId() {
+	public Long getStudioId() {
 		return studioId;
 	}
 
-	public void setStudioId(String studioId) {
+	public void setStudioId(Long studioId) {
 		this.studioId = studioId;
 	}
 

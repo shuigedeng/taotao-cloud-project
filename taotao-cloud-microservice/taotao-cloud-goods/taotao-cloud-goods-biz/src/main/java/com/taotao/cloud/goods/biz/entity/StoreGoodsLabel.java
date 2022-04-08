@@ -32,30 +32,30 @@ public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 	/**
 	 * 店铺ID
 	 */
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺ID'")
+	@Column(name = "store_id", columnDefinition = "bigint not null comment '店铺ID'")
 	private Long storeId;
 
 	/**
 	 * 店铺商品分类名称
 	 */
-	@Column(name = "label_name", nullable = false, columnDefinition = "varchar(64) not null comment '店铺商品分类名称'")
+	@Column(name = "label_name", columnDefinition = "varchar(255) not null comment '店铺商品分类名称'")
 	private String labelName;
 
 	/**
 	 * 店铺商品分类排序
 	 */
-	@Column(name = "sort_order", nullable = false, columnDefinition = "int not null comment '店铺商品分类排序'")
+	@Column(name = "sort_order", columnDefinition = "int not null comment '店铺商品分类排序'")
 	private Integer sortOrder;
 
 	/**
 	 * 父id, 根节点为0
 	 */
-	@Column(name = "parent_id", nullable = false, columnDefinition = "varchar(64) not null comment '父id, 根节点为0'")
+	@Column(name = "parent_id", columnDefinition = "bigint not null comment '父id, 根节点为0'")
 	private Long parentId;
 
 	/**
 	 * 层级, 从0开始
 	 */
-	@Column(name = "level", nullable = false, columnDefinition = "int not null comment '层级, 从0开始'")
+	@Column(name = "level", columnDefinition = "int not null comment '层级, 从0开始'")
 	private Integer level;
 }

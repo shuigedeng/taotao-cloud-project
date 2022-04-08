@@ -30,8 +30,8 @@ public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 
 	public static final String TABLE_NAME = "li_freight_template";
 
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺ID'")
-	private String storeId;
+	@Column(name = "store_id", nullable = false, columnDefinition = "bigint not null comment '店铺ID'")
+	private Long storeId;
 
 	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '模板名称'")
 	private String name;

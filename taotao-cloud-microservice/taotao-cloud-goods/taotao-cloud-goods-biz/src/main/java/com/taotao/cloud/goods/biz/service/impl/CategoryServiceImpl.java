@@ -22,12 +22,12 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 /**
  * 商品分类业务层实现
@@ -56,17 +56,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	private final CategorySpecificationService categorySpecificationService;
 
 	@Override
-	public List<Category> dbList(String parentId) {
+	public List<Category> dbList(Long parentId) {
 		return this.list(new LambdaQueryWrapper<Category>().eq(Category::getParentId, parentId));
 	}
 
 	@Override
-	public Category getCategoryById(String id) {
+	public Category getCategoryById(Long id) {
 		return this.getById(id);
 	}
 
 	@Override
-	public List<Category> listByIdsOrderByLevel(List<String> ids) {
+	public List<Category> listByIdsOrderByLevel(List<Long> ids) {
 		return this.list(new LambdaQueryWrapper<Category>().in(Category::getId, ids)
 			.orderByAsc(Category::getLevel));
 	}
@@ -87,14 +87,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		//构造分类树
 		categoryVOList = new ArrayList<>();
 		for (Category category : list) {
-			if ("0".equals(category.getParentId())) {
+			if (Long.valueOf(0).equals(category.getParentId())) {
 				CategoryVO categoryVO = BeanUtil.copyProperties(category, CategoryVO.class);
 				categoryVO.setChildren(findChildren(list, categoryVO));
 				categoryVOList.add(categoryVO);
 			}
 		}
 
-		//categoryVOList.sort(Comparator.comparing(Category::getSortOrder));
+		categoryVOList.sort(Comparator.comparing(CategoryVO::getSortOrder));
+
 		if (!categoryVOList.isEmpty()) {
 			redisRepository.set(CachePrefix.CATEGORY.getPrefix(), categoryVOList);
 			redisRepository.set(CachePrefix.CATEGORY_ARRAY.getPrefix(), list);
@@ -117,8 +118,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	}
 
 	@Override
-	public List<CategoryVO> listAllChildren(String parentId) {
-		if ("0".equals(parentId)) {
+	public List<CategoryVO> listAllChildren(Long parentId) {
+		if (Long.valueOf(0).equals(parentId)) {
 			return categoryTree();
 		}
 
@@ -143,7 +144,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		//构造分类树
 		List<CategoryVO> categoryVOList = new ArrayList<>();
 		for (Category category : list) {
-			if (("0").equals(category.getParentId())) {
+			if (Long.valueOf(0).equals(category.getParentId())) {
 				//CategoryVO categoryVO = new CategoryVO(category);
 				CategoryVO categoryVO = new CategoryVO();
 				categoryVO.setChildren(findChildren(list, categoryVO));
@@ -155,7 +156,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	}
 
 	@Override
-	public List<String> getCategoryNameByIds(List<String> ids) {
+	public List<String> getCategoryNameByIds(List<Long> ids) {
 		List<String> categoryName = new ArrayList<>();
 		List<Category> categoryVOList = (List<Category>) redisRepository.get(
 			CachePrefix.CATEGORY_ARRAY.getPrefix());
@@ -165,14 +166,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 			categoryVOList = (List<Category>) redisRepository.get(
 				CachePrefix.CATEGORY_ARRAY.getPrefix());
 		}
+
 		//还为空的话，直接返回
 		if (categoryVOList == null) {
 			return new ArrayList<>();
 		}
+
 		//循环顶级分类
 		for (Category category : categoryVOList) {
 			//循环查询的id匹配
-			for (String id : ids) {
+			for (Long id : ids) {
 				if (category.getId().equals(id)) {
 					//写入商品分类
 					categoryName.add(category.getName());
@@ -203,7 +206,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		}
 
 		//子分类与父分类的状态一致
-		if (category.getParentId() != null && !("0").equals(category.getParentId())) {
+		if (category.getParentId() != null && !Long.valueOf(0).equals(category.getParentId())) {
 			Category parentCategory = this.getById(category.getParentId());
 			category.setDelFlag(parentCategory.getDelFlag()
 			);
@@ -222,7 +225,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		}
 
 		//判断父分类与子分类的状态是否一致
-		if (category.getParentId() != null && !"0".equals(category.getParentId())) {
+		if (category.getParentId() != null && !Long.valueOf(0).equals(category.getParentId())) {
 			Category parentCategory = this.getById(category.getParentId());
 			if (!parentCategory.getDelFlag().equals(category.getDelFlag())) {
 				throw new BusinessException(ResultEnum.CATEGORY_DELETE_FLAG_ERROR);
@@ -244,9 +247,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean delete(String id) {
+	public Boolean delete(Long id) {
 		this.removeById(id);
 		removeCache();
+
 		//删除关联关系
 		categoryBrandService.deleteByCategoryId(id);
 		categoryParameterGroupService.deleteByCategoryId(id);
@@ -256,11 +260,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean updateCategoryStatus(String categoryId, Boolean enableOperations) {
+	public Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations) {
 		//禁用子分类
 		Category category = this.getById(categoryId);
 		CategoryVO categoryVO = BeanUtil.copy(category, CategoryVO.class);
-		List<String> ids = new ArrayList<>();
+		List<Long> ids = new ArrayList<>();
 		ids.add(categoryVO.getId());
 		this.findAllChild(categoryVO);
 		this.findAllChildIds(categoryVO, ids);
@@ -318,7 +322,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	 * @param category 分类
 	 * @param ids      ID列表
 	 */
-	private void findAllChildIds(CategoryVO category, List<String> ids) {
+	private void findAllChildIds(CategoryVO category, List<Long> ids) {
 		if (category.getChildren() != null && !category.getChildren().isEmpty()) {
 			for (CategoryVO child : category.getChildren()) {
 				ids.add(child.getId());
@@ -334,11 +338,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	 * @param categoryVOList 分类VO
 	 * @return 子分类列表VO
 	 */
-	private List<CategoryVO> getChildren(String parentId, List<CategoryVO> categoryVOList) {
+	private List<CategoryVO> getChildren(Long parentId, List<CategoryVO> categoryVOList) {
 		for (CategoryVO item : categoryVOList) {
 			if (item.getId().equals(parentId)) {
 				return item.getChildren();
 			}
+
 			if (item.getChildren() != null && !item.getChildren().isEmpty()) {
 				return getChildren(parentId, categoryVOList);
 			}

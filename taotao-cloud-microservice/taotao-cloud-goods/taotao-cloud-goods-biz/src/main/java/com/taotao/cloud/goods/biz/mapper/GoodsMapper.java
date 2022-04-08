@@ -22,8 +22,12 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 	 * @param storeId 店铺ID
 	 * @return 商品ID列表
 	 */
-	@Select("SELECT id FROM li_goods WHERE store_id = #{storeId}")
-	List<String> getGoodsIdByStoreId(String storeId);
+	@Select("""
+		SELECT id
+		FROM li_goods
+		WHERE store_id = #{storeId}
+		""")
+	List<Long> getGoodsIdByStoreId(@Param("storeId") Long storeId);
 
 	/**
 	 * 添加商品评价数量
@@ -31,8 +35,13 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 	 * @param commentNum 评价数量
 	 * @param goodsId    商品ID
 	 */
-	@Update("UPDATE li_goods SET comment_num = comment_num + #{commentNum} WHERE id = #{goodsId}")
-	void addGoodsCommentNum(Integer commentNum, String goodsId);
+	@Update("""
+		UPDATE li_goods
+		SET comment_num = comment_num + #{commentNum}
+		WHERE id = #{goodsId}
+		""")
+	void addGoodsCommentNum(@Param("commentNum") Integer commentNum,
+		@Param("goodsId") Long goodsId);
 
 	/**
 	 * 查询商品VO分页
@@ -41,7 +50,10 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 	 * @param queryWrapper 查询条件
 	 * @return 商品VO分页
 	 */
-	@Select("select g.* from li_goods as g ")
+	@Select("""
+		select g.*
+		from li_goods as g
+		""")
 	IPage<GoodsVO> queryByParams(IPage<GoodsVO> page,
 		@Param(Constants.WRAPPER) Wrapper<GoodsVO> queryWrapper);
 }

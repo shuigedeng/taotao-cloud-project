@@ -53,7 +53,7 @@ public class GoodsLabelStoreController {
 	@RequestLogger("获取店铺商品分类详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
-	public Result<StoreGoodsLabel> getStoreGoodsLabel(@PathVariable String id) {
+	public Result<StoreGoodsLabel> getStoreGoodsLabel(@PathVariable Long id) {
 		return Result.success(storeGoodsLabelService.getById(id));
 	}
 
@@ -62,10 +62,9 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<StoreGoodsLabel> add(@Validated StoreGoodsLabel storeGoodsLabel) {
-		//String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		//storeGoodsLabel.setStoreId(storeId);
-		//return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
-		return null;
+		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		storeGoodsLabel.setStoreId(storeId);
+		return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
 	}
 
 	@Operation(summary = "修改店铺商品分类", description = "修改店铺商品分类", method = CommonConstant.PUT)
@@ -81,7 +80,7 @@ public class GoodsLabelStoreController {
 	@RequestLogger("删除店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}")
-	public Result<Boolean> delete(@PathVariable String id) {
+	public Result<Boolean> delete(@PathVariable Long id) {
 		storeGoodsLabelService.getById(id);
 		storeGoodsLabelService.removeStoreGoodsLabel(id);
 		return Result.success(true);

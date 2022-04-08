@@ -32,7 +32,7 @@ public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, 
 	public static final String TABLE_NAME = "li_freight_template_child";
 
 	@Column(name = "freight_template_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺模板ID'")
-	private String freightTemplateId;
+	private Long freightTemplateId;
 
 	@Column(name = "first_company", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '首重/首件'")
 	private BigDecimal firstCompany;

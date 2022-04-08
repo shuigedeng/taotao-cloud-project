@@ -18,17 +18,17 @@ import lombok.NoArgsConstructor;
 public class StoreGoodsLabelVO {
 
 	@Schema(description = "店铺商品分类ID")
-	private String id;
+	private Long id;
 	@Schema(description = "店铺商品分类名称")
 	private String labelName;
 	@Schema(description = "层级, 从0开始")
 	private Integer level;
 	@Schema(description = "店铺商品分类排序")
-	private BigDecimal sortOrder;
+	private Integer sortOrder;
 	@Schema(description = "下级分类列表")
 	private List<StoreGoodsLabelVO> children;
 
-	public StoreGoodsLabelVO(String id, String labelName, Integer level, BigDecimal sortOrder) {
+	public StoreGoodsLabelVO(Long id, String labelName, Integer level, Integer sortOrder) {
 		this.id = id;
 		this.labelName = labelName;
 		this.level = level;

@@ -33,12 +33,12 @@ public class CategoryBrand extends SuperEntity<CategoryBrand, Long> {
 	/**
 	 * 分类id
 	 */
-	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '分类id'")
+	@Column(name = "category_id", columnDefinition = "bigint not null comment '分类id'")
 	private Long categoryId;
 
 	/**
 	 * 品牌id
 	 */
-	@Column(name = "brand_id", nullable = false, columnDefinition = "varchar(64) not null comment '品牌id'")
+	@Column(name = "brand_id", columnDefinition = "bigint not null comment '品牌id'")
 	private Long brandId;
 }

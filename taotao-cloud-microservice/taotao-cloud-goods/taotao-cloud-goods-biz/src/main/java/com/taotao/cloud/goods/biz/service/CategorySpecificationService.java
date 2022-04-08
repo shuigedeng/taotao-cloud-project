@@ -16,12 +16,12 @@ public interface CategorySpecificationService extends IService<CategorySpecifica
 	 * @param categoryId 分类id
 	 * @return 分类规格关联信息
 	 */
-	List<Specification> getCategorySpecList(String categoryId);
+	List<Specification> getCategorySpecList(Long categoryId);
 
 	/**
 	 * 通过分类ID删除关联规格
 	 *
 	 * @param categoryId 分类ID
 	 */
-	Boolean deleteByCategoryId(String categoryId);
+	Boolean deleteByCategoryId(Long categoryId);
 }

@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.controller.manager;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
+import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,8 +51,8 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<GoodsBaseVO>> getByPage(
-		@Validated GoodsSearchParams goodsSearchParams) {
-		return Result.success(goodsService.queryByParams(goodsSearchParams));
+		@Validated GoodsPageQuery goodsPageQuery) {
+		return Result.success(goodsService.queryByParams(goodsPageQuery));
 	}
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
@@ -61,8 +60,8 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
 	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(
-		@Validated GoodsSearchParams goodsSearchParams) {
-		return Result.success(goodsSkuService.getGoodsSkuByPage(goodsSearchParams));
+		@Validated GoodsPageQuery goodsPageQuery) {
+		return Result.success(goodsSkuService.getGoodsSkuByPage(goodsPageQuery));
 	}
 
 	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品", method = CommonConstant.GET)
@@ -70,16 +69,16 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
 	public Result<PageModel<GoodsBaseVO>> getAuthPage(
-		@Validated GoodsSearchParams goodsSearchParams) {
-		goodsSearchParams.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
-		return Result.success(goodsService.queryByParams(goodsSearchParams));
+		@Validated GoodsPageQuery goodsPageQuery) {
+		goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
+		return Result.success(goodsService.queryByParams(goodsPageQuery));
 	}
 
 	@Operation(summary = "管理员下架商品", description = "管理员下架商品", method = CommonConstant.PUT)
 	@RequestLogger("管理员下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
-	public Result<Boolean> underGoods(@PathVariable String goodsId,
+	public Result<Boolean> underGoods(@PathVariable Long goodsId,
 		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
 		List<String> goodsIds = Arrays.asList(goodsId.split(","));
 		return Result.success(
@@ -90,7 +89,7 @@ public class GoodsManagerController {
 	@RequestLogger("管理员审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
-	public Result<Boolean> auth(@PathVariable List<String> goodsIds,
+	public Result<Boolean> auth(@PathVariable List<Long> goodsIds,
 		@RequestParam String authFlag) {
 		//校验商品是否存在
 		return Result.success(goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag)));
@@ -100,7 +99,7 @@ public class GoodsManagerController {
 	@RequestLogger("管理员上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/up")
-	public Result<Boolean> unpGoods(@PathVariable List<String> goodsId) {
+	public Result<Boolean> unpGoods(@PathVariable List<Long> goodsId) {
 		return Result.success(
 			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 	}
@@ -109,7 +108,7 @@ public class GoodsManagerController {
 	@RequestLogger("通过id获取商品详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<GoodsVO> get(@PathVariable String id) {
+	public Result<GoodsVO> get(@PathVariable Long id) {
 		return Result.success(goodsService.getGoodsVO(id));
 	}
 

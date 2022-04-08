@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
-import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -8,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
@@ -16,7 +17,7 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class StoreGoodsLabelServiceImpl extends
-	ServiceImpl<StoreGoodsLabelMapper, StoreGoodsLabel> implements
-	StoreGoodsLabelService {
+	ServiceImpl<StoreGoodsLabelMapper, StoreGoodsLabel> implements StoreGoodsLabelService {
 
 	/**
 	 * 缓存
@@ -36,41 +36,42 @@ public class StoreGoodsLabelServiceImpl extends
 	private RedisRepository redisRepository;
 
 	@Override
-	public List<StoreGoodsLabelVO> listByStoreId(String storeId) {
+	public List<StoreGoodsLabelVO> listByStoreId(Long storeId) {
 
 		//从缓存中获取店铺分类
-		//if (cache.hasKey(CachePrefix.STORE_CATEGORY.getPrefix() + storeId)) {
-		//	return (List<StoreGoodsLabelVO>) cache.get(
-		//		CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
-		//}
+		if (redisRepository.hasKey(CachePrefix.STORE_CATEGORY.getPrefix() + storeId)) {
+			return (List<StoreGoodsLabelVO>) redisRepository.get(
+				CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
+		}
 
 		List<StoreGoodsLabel> list = list(storeId);
 		List<StoreGoodsLabelVO> storeGoodsLabelVOList = new ArrayList<>();
 
-		////循环列表判断是否为顶级，如果为顶级获取下级数据
-		//list.stream()
-		//	.filter(storeGoodsLabel -> storeGoodsLabel.getLevel() == 0)
-		//	.forEach(storeGoodsLabel -> {
-		//		StoreGoodsLabelVO storeGoodsLabelVO = new StoreGoodsLabelVO(storeGoodsLabel.getId(),
-		//			storeGoodsLabel.getLabelName(), storeGoodsLabel.getLevel(),
-		//			storeGoodsLabel.getSortOrder());
-		//		List<StoreGoodsLabelVO> storeGoodsLabelVOChildList = new ArrayList<>();
-		//		list.stream()
-		//			.filter(label -> label.getParentId().equals(storeGoodsLabel.getId()))
-		//			.forEach(storeGoodsLabelChild -> storeGoodsLabelVOChildList.add(
-		//				new StoreGoodsLabelVO(storeGoodsLabelChild.getId(),
-		//					storeGoodsLabelChild.getLabelName(), storeGoodsLabelChild.getLevel(),
-		//					storeGoodsLabelChild.getSortOrder())));
-		//		storeGoodsLabelVO.setChildren(storeGoodsLabelVOChildList);
-		//		storeGoodsLabelVOList.add(storeGoodsLabelVO);
-		//	});
-		//
-		////调整店铺分类排序
-		//storeGoodsLabelVOList.sort(Comparator.comparing(StoreGoodsLabelVO::getSortOrder));
-		//
-		//if (!storeGoodsLabelVOList.isEmpty()) {
-		//	cache.put(CachePrefix.CATEGORY.getPrefix() + storeId + "tree", storeGoodsLabelVOList);
-		//}
+		//循环列表判断是否为顶级，如果为顶级获取下级数据
+		list.stream()
+			.filter(storeGoodsLabel -> storeGoodsLabel.getLevel() == 0)
+			.forEach(storeGoodsLabel -> {
+				StoreGoodsLabelVO storeGoodsLabelVO = new StoreGoodsLabelVO(storeGoodsLabel.getId(),
+					storeGoodsLabel.getLabelName(), storeGoodsLabel.getLevel(),
+					storeGoodsLabel.getSortOrder());
+				List<StoreGoodsLabelVO> storeGoodsLabelVOChildList = new ArrayList<>();
+				list.stream()
+					.filter(label -> label.getParentId().equals(storeGoodsLabel.getId()))
+					.forEach(storeGoodsLabelChild -> storeGoodsLabelVOChildList.add(
+						new StoreGoodsLabelVO(storeGoodsLabelChild.getId(),
+							storeGoodsLabelChild.getLabelName(), storeGoodsLabelChild.getLevel(),
+							storeGoodsLabelChild.getSortOrder())));
+				storeGoodsLabelVO.setChildren(storeGoodsLabelVOChildList);
+				storeGoodsLabelVOList.add(storeGoodsLabelVO);
+			});
+
+		//调整店铺分类排序
+		storeGoodsLabelVOList.sort(Comparator.comparing(StoreGoodsLabelVO::getSortOrder));
+
+		if (!storeGoodsLabelVOList.isEmpty()) {
+			redisRepository.set(CachePrefix.CATEGORY.getPrefix() + storeId + "tree",
+				storeGoodsLabelVOList);
+		}
 		return storeGoodsLabelVOList;
 	}
 
@@ -81,7 +82,7 @@ public class StoreGoodsLabelServiceImpl extends
 	 * @return 店铺分类列表
 	 */
 	@Override
-	public List<StoreGoodsLabel> listByStoreIds(List<String> ids) {
+	public List<StoreGoodsLabel> listByStoreIds(List<Long> ids) {
 		return this.list(new LambdaQueryWrapper<StoreGoodsLabel>().in(StoreGoodsLabel::getId, ids)
 			.orderByAsc(StoreGoodsLabel::getLevel));
 	}
@@ -90,15 +91,15 @@ public class StoreGoodsLabelServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//获取当前登录商家账号
-		//AuthUser tokenUser = UserContext.getCurrentUser();
-		//if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
-		//	throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
-		//}
-		//storeGoodsLabel.setStoreId(tokenUser.getStoreId());
-		////保存店铺分类
-		//this.save(storeGoodsLabel);
-		////清除缓存
-		//removeCache(storeGoodsLabel.getStoreId());
+		SecurityUser tokenUser = SecurityUtil.getUser();
+		if (tokenUser == null || Objects.isNull(tokenUser.getStoreId())) {
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+		}
+		storeGoodsLabel.setStoreId(tokenUser.getStoreId());
+		//保存店铺分类
+		this.save(storeGoodsLabel);
+		//清除缓存
+		removeCache(storeGoodsLabel.getStoreId());
 		return true;
 	}
 
@@ -106,32 +107,31 @@ public class StoreGoodsLabelServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//修改当前店铺的商品分类
-		//AuthUser tokenUser = UserContext.getCurrentUser();
-		//if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
-		//	throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
-		//}
-		//LambdaUpdateWrapper<StoreGoodsLabel> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-		//lambdaUpdateWrapper.eq(StoreGoodsLabel::getStoreId, tokenUser.getStoreId());
-		//lambdaUpdateWrapper.eq(StoreGoodsLabel::getId, storeGoodsLabel.getId());
-		////修改店铺分类
-		//this.update(storeGoodsLabel, lambdaUpdateWrapper);
-		////清除缓存
-		//removeCache(storeGoodsLabel.getStoreId());
+		SecurityUser tokenUser = SecurityUtil.getUser();
+		if (tokenUser == null || Objects.isNull(tokenUser.getStoreId())) {
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+		}
+		LambdaUpdateWrapper<StoreGoodsLabel> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+		lambdaUpdateWrapper.eq(StoreGoodsLabel::getStoreId, tokenUser.getStoreId());
+		lambdaUpdateWrapper.eq(StoreGoodsLabel::getId, storeGoodsLabel.getId());
+		//修改店铺分类
+		this.update(storeGoodsLabel, lambdaUpdateWrapper);
+		//清除缓存
+		removeCache(storeGoodsLabel.getStoreId());
 		return true;
 	}
 
 	@Override
-	public Boolean removeStoreGoodsLabel(String storeLabelId) {
+	public Boolean removeStoreGoodsLabel(Long storeLabelId) {
+		SecurityUser tokenUser = SecurityUtil.getUser();
+		if (tokenUser == null || Objects.isNull(tokenUser.getStoreId())) {
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+		}
+		//删除店铺分类
+		this.removeById(storeLabelId);
 
-		//AuthUser tokenUser = UserContext.getCurrentUser();
-		//if (tokenUser == null || CharSequenceUtil.isEmpty(tokenUser.getStoreId())) {
-		//	throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
-		//}
-		////删除店铺分类
-		//this.removeById(storeLabelId);
-		//
-		////清除缓存
-		//removeCache(tokenUser.getStoreId());
+		//清除缓存
+		removeCache(tokenUser.getStoreId());
 
 		return true;
 	}
@@ -142,7 +142,7 @@ public class StoreGoodsLabelServiceImpl extends
 	 * @param storeId 店铺ID
 	 * @return 店铺商品分类列表
 	 */
-	private List<StoreGoodsLabel> list(String storeId) {
+	private List<StoreGoodsLabel> list(Long storeId) {
 		LambdaQueryWrapper<StoreGoodsLabel> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(StoreGoodsLabel::getStoreId, storeId);
 		queryWrapper.orderByDesc(StoreGoodsLabel::getSortOrder);
@@ -152,7 +152,7 @@ public class StoreGoodsLabelServiceImpl extends
 	/**
 	 * 清除缓存
 	 */
-	//private void removeCache(String storeId) {
-	//	cache.remove(CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
-	//}
+	private void removeCache(Long storeId) {
+		redisRepository.del(CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
+	}
 }

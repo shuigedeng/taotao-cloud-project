@@ -53,7 +53,7 @@ public class CategoryManagerController {
 	@RequestLogger("查询某分类下的全部子分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}/children/all")
-	public Result<List<Category>> list(@PathVariable String parentId) {
+	public Result<List<Category>> list(@PathVariable Long parentId) {
 		return Result.success(this.categoryService.dbList(parentId));
 	}
 
@@ -99,7 +99,7 @@ public class CategoryManagerController {
 	@RequestLogger("通过id删除分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> delAllByIds(@NotBlank(message = "id不能为空") @PathVariable String id) {
+	public Result<Boolean> delAllByIds(@NotBlank(message = "id不能为空") @PathVariable Long id) {
 		Category category = new Category();
 		category.setParentId(id);
 		List<Category> list = categoryService.findByAllBySortOrder(category);
@@ -119,7 +119,7 @@ public class CategoryManagerController {
 	@RequestLogger("后台 禁用/启用 分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
-	public Result<Boolean> disable(@PathVariable String id,
+	public Result<Boolean> disable(@PathVariable Long id,
 		@RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {

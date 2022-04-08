@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
-import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
+import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
@@ -61,7 +61,7 @@ public class GoodsBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
 	public Result<GoodsVO> get(
-		@Parameter(description = "商品ID") @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") String goodsId) {
+		@Parameter(description = "商品ID") @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
@@ -83,8 +83,8 @@ public class GoodsBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageModel<GoodsBaseVO>> getByPage(
-		@Validated GoodsSearchParams goodsSearchParams) {
-		return Result.success(goodsService.queryByParams(goodsSearchParams));
+		@Validated GoodsPageQuery goodsPageQuery) {
+		return Result.success(goodsService.queryByParams(goodsPageQuery));
 	}
 
 	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息", method = CommonConstant.GET)

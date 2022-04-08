@@ -86,7 +86,7 @@ public class SpecificationManagerController {
 	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{ids}")
-	public Result<Boolean> delAllByIds(@PathVariable List<String> ids) {
+	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
 		return Result.success(specificationService.deleteSpecification(ids));
 	}
 }

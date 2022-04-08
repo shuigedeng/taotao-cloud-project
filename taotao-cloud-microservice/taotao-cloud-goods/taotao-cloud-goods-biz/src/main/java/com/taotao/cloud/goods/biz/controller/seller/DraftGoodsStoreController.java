@@ -2,12 +2,10 @@ package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
-import com.taotao.cloud.goods.api.dto.DraftGoodsSearchParams;
+import com.taotao.cloud.goods.api.dto.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.service.DraftGoodsService;
@@ -16,8 +14,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,7 +44,7 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<DraftGoods>> getDraftGoodsByPage(
-		DraftGoodsSearchParams searchParams) {
+		DraftGoodsPageQuery searchParams) {
 		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		searchParams.setStoreId(storeId);
 		return Result.success(draftGoodsService.getDraftGoods(searchParams));
@@ -58,7 +54,7 @@ public class DraftGoodsStoreController {
 	@RequestLogger("获取草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<DraftGoodsVO> getDraftGoods(@PathVariable String id) {
+	public Result<DraftGoodsVO> getDraftGoods(@PathVariable Long id) {
 		return Result.success(draftGoodsService.getDraftGoods(id));
 	}
 
@@ -67,14 +63,14 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveDraftGoods(@RequestBody DraftGoodsDTO draftGoodsVO) {
-		//String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		//if (draftGoodsVO.getStoreId() == null) {
-		//	draftGoodsVO.setStoreId(storeId);
-		//} else if (draftGoodsVO.getStoreId() != null && !storeId.equals(
-		//	draftGoodsVO.getStoreId())) {
-		//	throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-		//}
-		//draftGoodsService.saveGoodsDraft(draftGoodsVO);
+		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+		if (draftGoodsVO.getStoreId() == null) {
+			draftGoodsVO.setStoreId(storeId);
+		} else if (draftGoodsVO.getStoreId() != null && !storeId.equals(
+			draftGoodsVO.getStoreId())) {
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
+		}
+		draftGoodsService.saveGoodsDraft(draftGoodsVO);
 		return Result.success(true);
 	}
 
@@ -82,7 +78,7 @@ public class DraftGoodsStoreController {
 	@RequestLogger("删除草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> deleteDraftGoods(@PathVariable String id) {
+	public Result<Boolean> deleteDraftGoods(@PathVariable Long id) {
 		draftGoodsService.getDraftGoods(id);
 		draftGoodsService.deleteGoodsDraft(id);
 		return Result.success(true);

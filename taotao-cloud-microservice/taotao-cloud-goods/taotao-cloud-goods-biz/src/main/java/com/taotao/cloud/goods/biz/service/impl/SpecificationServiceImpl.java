@@ -7,10 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.disruptor.util.StringUtils;
-import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.mapper.SpecificationMapper;
@@ -39,15 +37,15 @@ public class SpecificationServiceImpl extends
 	private final CategoryServiceImpl categoryService;
 
 	@Override
-	public Boolean deleteSpecification(List<String> ids) {
+	public Boolean deleteSpecification(List<Long> ids) {
 		boolean result = false;
-		for (String id : ids) {
+		for (Long id : ids) {
 			//如果此规格绑定分类则不允许删除
 			List<CategorySpecification> list = categorySpecificationService.list(
 				new QueryWrapper<CategorySpecification>().eq("specification_id", id));
 
 			if (!list.isEmpty()) {
-				List<String> categoryIds = new ArrayList<>();
+				List<Long> categoryIds = new ArrayList<>();
 				list.forEach(item -> categoryIds.add(item.getCategoryId()));
 				throw new BusinessException(ResultEnum.SPEC_DELETE_ERROR.getCode(),
 					JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
@@ -59,12 +57,11 @@ public class SpecificationServiceImpl extends
 	}
 
 	@Override
-	public PageModel<SpecificationVO> getPage(String specName, PageParam page) {
+	public IPage<Specification> getPage(String specName, PageParam page) {
 		LambdaQueryWrapper<Specification> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.like(StringUtils.isNotEmpty(specName), Specification::getSpecName,
 			specName);
-		IPage<Specification> specificationPage = page(page.buildMpPage(), lambdaQueryWrapper);
-		return PageModel.convertMybatisPage(specificationPage, SpecificationVO.class);
+		return page(page.buildMpPage(), lambdaQueryWrapper);
 	}
 
 }

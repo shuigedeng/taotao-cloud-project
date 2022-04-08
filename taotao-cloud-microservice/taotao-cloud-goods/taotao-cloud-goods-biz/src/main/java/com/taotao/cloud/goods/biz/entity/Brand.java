@@ -30,12 +30,12 @@ public class Brand extends BaseSuperEntity<Brand, Long> {
 	/**
 	 * 品牌名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(64) not null comment '品牌名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null comment '品牌名称'")
 	private String name;
 
 	/**
 	 * 品牌图标
 	 */
-	@Column(name = "logo", nullable = false, columnDefinition = "varchar(64) not null comment '品牌图标'")
+	@Column(name = "logo", columnDefinition = "varchar(255) not null comment '品牌图标'")
 	private String logo;
 }

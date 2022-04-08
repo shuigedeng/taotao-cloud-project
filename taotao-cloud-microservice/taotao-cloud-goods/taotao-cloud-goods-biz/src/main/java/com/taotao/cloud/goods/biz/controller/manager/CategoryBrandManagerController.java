@@ -38,7 +38,7 @@ public class CategoryBrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<CategoryBrandVO>> getCategoryBrand(
-		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") String categoryId) {
+		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
 		return Result.success(categoryBrandService.getCategoryBrandList(categoryId));
 	}
 
@@ -47,8 +47,8 @@ public class CategoryBrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}/{categoryBrands}")
 	public Result<Boolean> saveCategoryBrand(
-		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") String categoryId,
-		@NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<String> categoryBrands) {
+		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId,
+		@NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<Long> categoryBrands) {
 		return Result.success(
 			categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
 	}

@@ -5,6 +5,8 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-promotion:taotao-cloud-promotion-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-store:taotao-cloud-store-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api')
 
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'

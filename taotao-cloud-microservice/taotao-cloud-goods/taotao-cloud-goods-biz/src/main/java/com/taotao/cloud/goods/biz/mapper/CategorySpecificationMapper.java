@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.goods.biz.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -18,9 +19,9 @@ public interface CategorySpecificationMapper extends BaseMapper<CategorySpecific
 	 * @return 分类绑定规格列表
 	 */
 	@Select("""
-		select s.* 
-		from  li_specification s 
-			INNER join li_category_specification cs on s.id = cs.specification_id and cs.category_id = #{categoryId}
+		select s.*
+		from  tt_specification s
+		INNER join tt_category_specification cs on s.id = cs.specification_id and cs.category_id = #{categoryId}
 		""")
-	List<Specification> getCategorySpecList(String categoryId);
+	List<Specification> getCategorySpecList(@Param("categoryId") Long categoryId);
 }

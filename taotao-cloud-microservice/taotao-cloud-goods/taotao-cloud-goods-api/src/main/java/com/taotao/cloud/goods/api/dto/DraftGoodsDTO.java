@@ -6,18 +6,19 @@ import java.util.Map;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 草稿商品DTO
  **/
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//public class DraftGoodsDTO extends DraftGoods {
-public class DraftGoodsDTO {
+public class DraftGoodsDTO extends DraftGoodsBaseDTO {
 
 	private static final long serialVersionUID = 5255666163196674178L;
 

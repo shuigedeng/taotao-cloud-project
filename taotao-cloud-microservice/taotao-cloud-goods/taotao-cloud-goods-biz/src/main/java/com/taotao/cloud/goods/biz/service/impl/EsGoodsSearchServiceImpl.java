@@ -18,6 +18,7 @@ import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
 import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.common.lucene.search.function.FieldValueFactorFunction;
 import org.elasticsearch.common.lucene.search.function.FunctionScoreQuery;
@@ -46,7 +46,6 @@ import org.elasticsearch.search.aggregations.bucket.nested.ParsedNested;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.sort.SortBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
@@ -58,6 +57,7 @@ import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
 
 /**
@@ -93,16 +93,18 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	private RedisRepository redisRepository;
 
 	@Override
-	public SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO,  PageParam pageParam) {
+	public SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO, PageParam pageParam) {
 		boolean exists = restTemplate.indexOps(EsGoodsIndex.class).exists();
 		if (!exists) {
 			esGoodsIndexService.init();
 		}
-		//if (CharSequenceUtil.isNotEmpty(searchDTO.getKeyword())) {
-		//	cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), searchDTO.getKeyword());
-		//}
 
-		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(searchDTO, pageParam);
+		if (CharSequenceUtil.isNotEmpty(searchDTO.getKeyword())) {
+			cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), searchDTO.getKeyword());
+		}
+
+		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(searchDTO,
+			pageParam);
 		NativeSearchQuery searchQuery = searchQueryBuilder.build();
 		LogUtil.info("searchGoods DSL:{}", searchQuery.getQuery());
 		SearchHits<EsGoodsIndex> search = restTemplate.search(searchQuery, EsGoodsIndex.class);
@@ -116,22 +118,22 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 		}
 		List<String> hotWords = new ArrayList<>();
 		// redis 排序中，下标从0开始，所以这里需要 -1 处理
-		//count = count - 1;
-		//Set<ZSetOperations.TypedTuple<Object>> set = cache.reverseRangeWithScores(
-		//	CachePrefix.HOT_WORD.getPrefix(), count);
-		//if (set == null || set.isEmpty()) {
-		//	return new ArrayList<>();
-		//}
-		//for (ZSetOperations.TypedTuple<Object> defaultTypedTuple : set) {
-		//	hotWords.add(Objects.requireNonNull(defaultTypedTuple.getValue()).toString());
-		//}
+		count = count - 1;
+		Set<TypedTuple<Object>> set = cache.reverseRangeWithScores(
+			CachePrefix.HOT_WORD.getPrefix(), count);
+		if (set == null || set.isEmpty()) {
+			return new ArrayList<>();
+		}
+		for (ZSetOperations.TypedTuple<Object> defaultTypedTuple : set) {
+			hotWords.add(Objects.requireNonNull(defaultTypedTuple.getValue()).toString());
+		}
 		return hotWords;
 	}
 
 	@Override
 	public Boolean setHotWords(HotWordsDTO hotWords) {
-		//cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
-		//	hotWords.getPoint());
+		cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
+			hotWords.getPoint());
 		return true;
 	}
 
@@ -142,12 +144,12 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	 */
 	@Override
 	public Boolean deleteHotWords(String keywords) {
-		//cache.zRemove(CachePrefix.HOT_WORD.getPrefix(), keywords);
+		cache.zRemove(CachePrefix.HOT_WORD.getPrefix(), keywords);
 		return true;
 	}
 
 	@Override
-	public EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch,  PageParam pageParam) {
+	public EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch, PageParam pageParam) {
 		NativeSearchQueryBuilder builder = createSearchQueryBuilder(goodsSearch, null);
 		//分类
 		AggregationBuilder categoryNameBuilder = AggregationBuilders.terms("categoryNameAgg")
@@ -186,13 +188,12 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	}
 
 	@Override
-	public List<EsGoodsIndex> getEsGoodsBySkuIds(List<String> skuIds) {
+	public List<EsGoodsIndex> getEsGoodsBySkuIds(List<Long> skuIds) {
 		NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder();
 		NativeSearchQuery build = searchQueryBuilder.build();
 		build.setIds(skuIds);
-		//return restTemplate.multiGet(build, EsGoodsIndex.class,
-		//	restTemplate.getIndexCoordinatesFor(EsGoodsIndex.class));
-		return null;
+		return restTemplate.multiGet(build, EsGoodsIndex.class,
+			restTemplate.getIndexCoordinatesFor(EsGoodsIndex.class));
 	}
 
 	/**
@@ -202,7 +203,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	 * @return 商品索引
 	 */
 	@Override
-	public EsGoodsIndex getEsGoodsById(String id) {
+	public EsGoodsIndex getEsGoodsById(Long id) {
 		return this.restTemplate.get(id, EsGoodsIndex.class);
 	}
 
@@ -464,13 +465,13 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 			//如果是聚合查询
 			nativeSearchQueryBuilder.withQuery(filterBuilder);
 
-			//if (pageVo != null && CharSequenceUtil.isNotEmpty(pageVo.getOrder())
-			//	&& CharSequenceUtil.isNotEmpty(pageVo.getSort())) {
-			//	nativeSearchQueryBuilder.withSort(SortBuilders.fieldSort(pageVo.getSort())
-			//		.order(SortOrder.valueOf(pageVo.getOrder().toUpperCase())));
-			//} else {
-			//	nativeSearchQueryBuilder.withSort(SortBuilders.scoreSort().order(SortOrder.DESC));
-			//}
+			if (pageVo != null && CharSequenceUtil.isNotEmpty(pageVo.getOrder())
+				&& CharSequenceUtil.isNotEmpty(pageVo.getSort())) {
+				nativeSearchQueryBuilder.withSort(SortBuilders.fieldSort(pageVo.getSort())
+					.order(SortOrder.valueOf(pageVo.getOrder().toUpperCase())));
+			} else {
+				nativeSearchQueryBuilder.withSort(SortBuilders.scoreSort().order(SortOrder.DESC));
+			}
 
 		}
 		return nativeSearchQueryBuilder;
@@ -521,11 +522,11 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 			if (prices.length == 0) {
 				return;
 			}
-			BigDecimal min = Convert.toBigDecimal(prices[0], 0.0);
-			BigDecimal max = Integer.MAX_VALUE;
+			BigDecimal min = Convert.toBigDecimal(prices[0], BigDecimal.ZERO);
+			BigDecimal max = BigDecimal.valueOf(Integer.MAX_VALUE);
 
 			if (prices.length == 2) {
-				max = Convert.toBigDecimal(prices[1], BigDecimal.MAX_VALUE);
+				max = Convert.toBigDecimal(prices[1], BigDecimal.valueOf(Integer.MAX_VALUE));
 			}
 			filterBuilder.must(
 				QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true)

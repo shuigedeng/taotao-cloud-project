@@ -30,6 +30,6 @@ public class GoodsUnit extends BaseSuperEntity<GoodsUnit, Long> {
 	/**
 	 * 计量单位名称
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '计量单位名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null comment '计量单位名称'")
 	private String name;
 }

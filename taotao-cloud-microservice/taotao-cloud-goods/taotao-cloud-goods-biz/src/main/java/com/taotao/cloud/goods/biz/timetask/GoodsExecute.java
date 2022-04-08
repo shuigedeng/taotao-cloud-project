@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.timetask.xxljob.goods;
+package com.taotao.cloud.goods.biz.timetask;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateTime;

@@ -23,5 +23,8 @@ public interface IFeignStoreService {
 
 	Result<Boolean> updateStoreCollectionNum(CollectionDTO collectionDTO);
 
+	Result<StoreVO> getStoreDetail();
+
+
 }
 

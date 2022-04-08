@@ -52,7 +52,7 @@ public class CategoryStoreController {
 	public Result<List<CategoryVO>> getListAll() {
 		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
 		//获取店铺经营范围
-		//String goodsManagementCategory = storeDetailService.getStoreDetail(storeId).getGoodsManagementCategory();
+		String goodsManagementCategory = storeDetailService.getStoreDetail(storeId).getGoodsManagementCategory();
 		String goodsManagementCategory = "";
 		return Result.success(
 			this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
@@ -62,7 +62,7 @@ public class CategoryStoreController {
 	@RequestLogger("获取所选分类关联的品牌信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}/brands")
-	public Result<List<CategoryBrandVO>> queryBrands(@PathVariable String categoryId) {
+	public Result<List<CategoryBrandVO>> queryBrands(@PathVariable Long categoryId) {
 		return Result.success(this.categoryBrandService.getCategoryBrandList(categoryId));
 	}
 

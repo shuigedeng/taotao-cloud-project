@@ -19,9 +19,9 @@ public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 	 * @return 分类绑定的品牌列表
 	 */
 	@Select("""
-		SELECT b.id,b.name 
-		FROM li_brand b INNER join li_category_brand cb on b.id = cb.brand_id and cb.category_id = #{categoryId}
+		SELECT b.id,b.name
+		FROM tt_brand b INNER join tt_category_brand cb on b.id = cb.brand_id and cb.category_id = #{categoryId}
 		where b.delete_flag = 0
 		""")
-	List<CategoryBrandVO> getCategoryBrandList(@Param(value = "categoryId") String categoryId);
+	List<CategoryBrandVO> getCategoryBrandList(@Param(value = "categoryId") Long categoryId);
 }

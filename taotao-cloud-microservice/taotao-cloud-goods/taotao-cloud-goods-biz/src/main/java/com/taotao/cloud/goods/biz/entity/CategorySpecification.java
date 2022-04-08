@@ -32,12 +32,12 @@ public class CategorySpecification extends SuperEntity<CategorySpecification, Lo
 	/**
 	 * 分类id
 	 */
-	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '分类id'")
+	@Column(name = "category_id", columnDefinition = "bigint not null comment '分类id'")
 	private Long categoryId;
 
 	/**
 	 * 规格id
 	 */
-	@Column(name = "specification_id", nullable = false, columnDefinition = "varchar(64) not null comment '规格id'")
+	@Column(name = "specification_id", columnDefinition = "bigint not null comment '规格id'")
 	private Long specificationId;
 }

@@ -88,12 +88,12 @@ public class WechatLivePlayerUtil {
 	 * @param goodsId 商品ID
 	 * @return 操作结果
 	 */
-	public Boolean pushGoods(Integer roomId, Integer goodsId) {
+	public Boolean pushGoods(Integer roomId, Long goodsId) {
 		//发送url
 		String url = "https://api.weixin.qq.com/wxaapi/broadcast/room/addgoods?access_token=";
 		Map<String, Object> map = new HashMap<>(16);
 		//直播间回放
-		Integer[] ids = {goodsId};
+		Long[] ids = {goodsId};
 		map.put("ids", ids);
 		//商品ID
 		map.put("roomId", roomId);
@@ -108,10 +108,10 @@ public class WechatLivePlayerUtil {
 	 * @param goodsId 商品ID
 	 * @return 操作结果
 	 */
-	public Boolean goodsDeleteInRoom(Integer roomId, Integer goodsId) {
+	public Boolean goodsDeleteInRoom(Integer roomId, Long goodsId) {
 		//发送url
 		String url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/deleteInRoom?access_token=";
-		Map<String, Integer> map = new HashMap<>(2);
+		Map<String, Object> map = new HashMap<>(2);
 		//直播间回放
 		map.put("goodsId", goodsId);
 		//商品ID
@@ -153,7 +153,7 @@ public class WechatLivePlayerUtil {
 	 * @param goodsId 商品ID
 	 * @return 删除结果
 	 */
-	public JSONObject deleteGoods(String goodsId) {
+	public JSONObject deleteGoods(Long goodsId) {
 		//发送url
 		String url = "https://api.weixin.qq.com/wxaapi/broadcast/goods/delete?access_token=";
 		Map<String, Object> map = new HashMap<>(2);

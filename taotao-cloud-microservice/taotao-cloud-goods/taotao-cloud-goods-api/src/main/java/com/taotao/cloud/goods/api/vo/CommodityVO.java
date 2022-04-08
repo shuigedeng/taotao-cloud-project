@@ -3,18 +3,19 @@ package com.taotao.cloud.goods.api.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 直播商品VO
  */
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//public class CommodityVO extends Commodity {
-public class CommodityVO  {
+public class CommodityVO extends CommodityBaseVO {
 
 	@Schema(description = "SKU库存")
 	private Integer quantity;

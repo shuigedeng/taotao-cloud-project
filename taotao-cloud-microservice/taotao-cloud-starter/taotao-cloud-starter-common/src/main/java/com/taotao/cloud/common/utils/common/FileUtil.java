@@ -748,4 +748,17 @@ public class FileUtil extends org.springframework.util.FileCopyUtils {
 		String path = filePath.replace("\\\\", "/");
 		return path.substring(path.lastIndexOf("/") + 1, path.length());
 	}
+
+	/**
+	 * 根据原图生成规定尺寸的图片
+	 *
+	 * @param url    连接
+	 * @param width  宽
+	 * @param height 高
+	 * @return 缩略图全路径
+	 */
+	public static String getUrl(String url, Integer width, Integer height) {
+		//缩略图全路径
+		return url + "?x-oss-process=style/" + width + "X" + height;
+	}
 }

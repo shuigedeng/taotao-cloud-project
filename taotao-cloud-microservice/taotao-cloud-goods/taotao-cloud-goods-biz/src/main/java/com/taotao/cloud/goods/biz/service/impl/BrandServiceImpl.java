@@ -8,8 +8,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.BrandPageDTO;
+import com.taotao.cloud.goods.api.dto.BrandPageQuery;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.entity.Goods;
@@ -47,9 +49,9 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	private final GoodsService goodsService;
 
 	@Override
-	public IPage<Brand> getBrandsByPage(BrandPageDTO page) {
+	public IPage<Brand> getBrandsByPage(BrandPageQuery page) {
 		LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
-		if (page.getName() != null) {
+		if (StringUtil.isNotBlank(page.getName())) {
 			queryWrapper.like(Brand::getName, page.getName());
 		}
 
@@ -57,13 +59,12 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public List<Brand> getBrandsByCategory(String categoryId) {
+	public List<Brand> getBrandsByCategory(Long categoryId) {
 		QueryWrapper<CategoryBrand> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("category_id", categoryId);
 		List<CategoryBrand> list = categoryBrandService.list(queryWrapper);
 		if (list != null && !list.isEmpty()) {
-			List<String> collect = list.stream().map(CategoryBrand::getBrandId)
-				.collect(Collectors.toList());
+			List<Long> collect = list.stream().map(CategoryBrand::getBrandId).toList();
 			return this.list(new LambdaQueryWrapper<Brand>().in(Brand::getId, collect));
 		}
 		return new ArrayList<>();
@@ -91,11 +92,11 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public Boolean brandDisable(String brandId, boolean disable) {
+	public Boolean brandDisable(Long brandId, boolean disable) {
 		Brand brand = this.checkExist(brandId);
 		//如果是要禁用，则需要先判定绑定关系
 		if (Boolean.TRUE.equals(disable)) {
-			List<String> ids = new ArrayList<>();
+			List<Long> ids = new ArrayList<>();
 			ids.add(brandId);
 			checkBind(ids);
 		}
@@ -109,7 +110,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	}
 
 	@Override
-	public Boolean deleteBrands(List<String> ids) {
+	public Boolean deleteBrands(List<Long> ids) {
 		checkBind(ids);
 		return this.removeByIds(ids);
 	}
@@ -119,14 +120,14 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	 *
 	 * @param brandIds 品牌Ids
 	 */
-	private void checkBind(List<String> brandIds) {
+	private void checkBind(List<Long> brandIds) {
 		//分了绑定关系查询
 		List<CategoryBrand> categoryBrands = categoryBrandService.getCategoryBrandListByBrandId(
 			brandIds);
 
 		if (!categoryBrands.isEmpty()) {
-			List<String> categoryIds = categoryBrands.stream().map(CategoryBrand::getCategoryId)
-				.collect(Collectors.toList());
+			List<Long> categoryIds = categoryBrands.stream().map(CategoryBrand::getCategoryId)
+				.toList();
 			throw new BusinessException(ResultEnum.BRAND_USE_DISABLE_ERROR.getCode(),
 				JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
 		}
@@ -147,10 +148,10 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 	 * @param brandId 品牌ID
 	 * @return 品牌
 	 */
-	private Brand checkExist(String brandId) {
+	private Brand checkExist(Long brandId) {
 		Brand brand = getById(brandId);
 		if (brand == null) {
-			log.error("品牌ID为" + brandId + "的品牌不存在");
+			LogUtil.error("品牌ID为" + brandId + "的品牌不存在");
 			throw new BusinessException(ResultEnum.BRAND_NOT_EXIST);
 		}
 		return brand;

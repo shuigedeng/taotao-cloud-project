@@ -26,45 +26,46 @@ import lombok.Setter;
 public class Parameters extends BaseSuperEntity<Parameters, Long> {
 
 	public static final String TABLE_NAME = "tt_parameters";
+
 	/**
 	 * 参数名称
 	 */
-	@Column(name = "param_name", nullable = false, columnDefinition = "varchar(64) not null comment '参数名称'")
+	@Column(name = "param_name", columnDefinition = "varchar(255) not null comment '参数名称'")
 	private String paramName;
 
 	/**
 	 * 选择值
 	 */
-	@Column(name = "options", nullable = false, columnDefinition = "varchar(64) not null comment '选择值'")
+	@Column(name = "options", columnDefinition = "varchar(255) not null comment '选择值'")
 	private String options;
 
 	/**
 	 * 是否可索引，0 不显示 1 显示
 	 */
-	@Column(name = "is_index", nullable = false, columnDefinition = "int not null comment '是否可索引，0 不显示 1 显示'")
+	@Column(name = "is_index", columnDefinition = "int not null default 1 comment '是否可索引，0 不显示 1 显示'")
 	private Integer isIndex;
 
 	/**
 	 * 是否必填 是1否0
 	 */
-	@Column(name = "required", nullable = false, columnDefinition = "int not null comment '是否必填 是1否0'")
+	@Column(name = "required", columnDefinition = "int not null comment '是否必填 是1否0'")
 	private Integer required;
 
 	/**
 	 * 参数分组id
 	 */
-	@Column(name = "group_id", nullable = false, columnDefinition = "varchar(64) not null comment '参数分组id'")
+	@Column(name = "group_id", columnDefinition = "bigint not null comment '参数分组id'")
 	private Long groupId;
 
 	/**
 	 * 分类id
 	 */
-	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '分类id'")
+	@Column(name = "category_id", columnDefinition = "bigint not null comment '分类id'")
 	private Long categoryId;
 
 	/**
 	 * 排序
 	 */
-	@Column(name = "sort", nullable = false, columnDefinition = "int not null comment '排序'")
+	@Column(name = "sort", columnDefinition = "int not null comment '排序'")
 	private Integer sort;
 }
