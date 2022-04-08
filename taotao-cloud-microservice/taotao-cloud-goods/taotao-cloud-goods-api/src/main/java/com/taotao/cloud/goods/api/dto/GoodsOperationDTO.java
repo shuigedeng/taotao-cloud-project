@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.api.dto;
 
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class GoodsOperationDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -509667581371776913L;
 
 	@Schema(hidden = true)
@@ -47,7 +49,7 @@ public class GoodsOperationDTO implements Serializable {
 
 	@Schema(description = "品牌id")
 	@Min(value = 0, message = "品牌值不正确")
-	private String brandId;
+	private Long brandId;
 
 	@Schema(description = "商品名称", required = true)
 	@NotEmpty(message = "商品名称不能为空")
@@ -80,7 +82,7 @@ public class GoodsOperationDTO implements Serializable {
 	@Schema(description = "运费模板id,不需要运费模板时值是0", required = true)
 	@NotNull(message = "运费模板不能为空，没有运费模板时，传值0")
 	@Min(value = 0, message = "运费模板值不正确")
-	private String templateId;
+	private Long templateId;
 
 	@Schema(description = "sku列表")
 	@Valid

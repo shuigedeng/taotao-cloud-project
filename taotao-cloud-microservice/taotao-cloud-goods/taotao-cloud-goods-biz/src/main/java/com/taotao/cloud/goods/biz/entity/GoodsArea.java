@@ -1,8 +1,10 @@
 package com.taotao.cloud.goods.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +15,8 @@ import lombok.Setter;
 /**
  * 商品销售范围表
  *
+ * todo 暂时未用
+ *
  * @author shuigedeng
  * @since 2020/4/30 16:04
  */
@@ -21,19 +25,24 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@Entity
-@Table(name = "tt_product_area")
-@org.hibernate.annotations.Table(appliesTo = "tt_product_area", comment = "商品销售范围表")
-public class GoodsArea extends JpaSuperEntity {
+@Entity
+@Table(name = GoodsArea.TABLE_NAME)
+@TableName(GoodsArea.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = GoodsArea.TABLE_NAME, comment = "商品销售范围表")
+public class GoodsArea extends BaseSuperEntity<GoodsArea, Long> {
+
+	public static final String TABLE_NAME = "tt_goods_area";
+
+	/**
+	 * 区域json
+	 */
+	@Column(name = "region_json", columnDefinition = "mediumtext not null comment '区域json'")
+	private String regionJson;
+
 	/**
 	 * 商品id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String regionJson;
-	/**
-	 * 商品id
-	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-    private int type;
+	@Column(name = "type", columnDefinition = "int not null comment '类型'")
+	private Integer type;
 
 }

@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
+import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
@@ -131,7 +131,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param searchParams 查询参数
 	 * @return 商品sku信息
 	 */
-	PageModel<GoodsSkuBaseVO> getGoodsSkuByPage(GoodsSearchParams searchParams);
+	PageModel<GoodsSkuBaseVO> getGoodsSkuByPage(GoodsPageQuery searchParams);
 
 	/**
 	 * 列表查询商品sku信息
@@ -139,7 +139,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param searchParams 查询参数
 	 * @return 商品sku信息
 	 */
-	List<GoodsSku> getGoodsSkuByList(GoodsSearchParams searchParams);
+	List<GoodsSku> getGoodsSkuByList(GoodsPageQuery searchParams);
 
 	/**
 	 * 更新商品sku状态

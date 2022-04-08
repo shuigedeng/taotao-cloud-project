@@ -47,7 +47,7 @@ public class CategoryParameterGroupManagerController {
 	@RequestLogger("查询某分类下绑定的参数信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
-	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable String categoryId) {
+	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable Long categoryId) {
 		return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
 	}
 
@@ -73,7 +73,7 @@ public class CategoryParameterGroupManagerController {
 	@RequestLogger("通过id删除参数组")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> delAllByIds(@PathVariable String id) {
+	public Result<Boolean> delAllByIds(@PathVariable Long id) {
 		//删除参数
 		parametersService.remove(new QueryWrapper<Parameters>().eq("group_id", id));
 		//删除参数组

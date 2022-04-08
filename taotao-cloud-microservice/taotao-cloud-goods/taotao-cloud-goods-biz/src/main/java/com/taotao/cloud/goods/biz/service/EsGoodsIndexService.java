@@ -41,11 +41,10 @@ public interface EsGoodsIndexService {
 
 	/**
 	 * 更新商品索引的的部分属性（只填写更新的字段，不需要更新的字段不要填写）
-	 *
-	 * @param id    商品索引id
+	 *  @param id    商品索引id
 	 * @param goods 更新后的购买数量
 	 */
-	Boolean updateIndex(String id, EsGoodsIndex goods);
+	Boolean updateIndex(Long id, EsGoodsIndex goods);
 
 	/**
 	 * 更新商品索引的的部分属性
@@ -97,7 +96,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	//UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotions promotion, String key);
+	UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotions promotion, String key);
 
 	/**
 	 * 更新商品索引的促销信息
@@ -106,7 +105,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	//Boolean updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
+	Boolean updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
 
 	/**
 	 * 根据列表更新商品索引的促销信息
@@ -115,9 +114,9 @@ public interface EsGoodsIndexService {
 	 * @param promotion          促销信息
 	 * @param key                促销信息的key
 	 */
-	//Boolean updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList,
-	//	BasePromotions promotion,
-	//	String key);
+	Boolean updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList,
+		BasePromotions promotion,
+		String key);
 
 	/**
 	 * 更新全部商品索引的促销信息
@@ -125,23 +124,21 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	//Boolean updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
+	Boolean updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
 
 	/**
 	 * 删除指定商品的促销信息
-	 *
-	 * @param skuIds        skuId列表
+	 *  @param skuIds        skuId列表
 	 * @param promotionType 促销类型
 	 */
-	Boolean deleteEsGoodsPromotionIndexByList(List<String> skuIds, PromotionTypeEnum promotionType);
+	Boolean deleteEsGoodsPromotionIndexByList(List<Long> skuIds, PromotionTypeEnum promotionType);
 
 	/**
 	 * 删除索引中指定的促销活动id的促销活动
-	 *
-	 * @param skuIds        商品skuId
+	 *  @param skuIds        商品skuId
 	 * @param promotionsKey 促销活动Key
 	 */
-	Boolean deleteEsGoodsPromotionByPromotionKey(List<String> skuIds, String promotionsKey);
+	Boolean deleteEsGoodsPromotionByPromotionKey(List<Long> skuIds, String promotionsKey);
 
 
 	/**
@@ -162,7 +159,7 @@ public interface EsGoodsIndexService {
 	 * @param id skuId
 	 * @return 商品索引信息
 	 */
-	EsGoodsIndex findById(String id);
+	EsGoodsIndex findById(Long id);
 
 	/**
 	 * 根据id获取商品索引信息的促销信息
@@ -170,7 +167,7 @@ public interface EsGoodsIndexService {
 	 * @param id skuId
 	 * @return 促销信息map
 	 */
-	Map<String, Object> getPromotionMap(String id);
+	Map<String, Object> getPromotionMap(Long id);
 
 	/**
 	 * 根据id获取商品索引信息的指定促销活动的id
@@ -179,7 +176,7 @@ public interface EsGoodsIndexService {
 	 * @param promotionTypeEnum 促销活动类型
 	 * @return 当前商品参与的促销活动id集合
 	 */
-	List<String> getPromotionIdByPromotionType(String id, PromotionTypeEnum promotionTypeEnum);
+	List<Long> getPromotionIdByPromotionType(Long id, PromotionTypeEnum promotionTypeEnum);
 
 	/**
 	 * 获取重置的商品索引

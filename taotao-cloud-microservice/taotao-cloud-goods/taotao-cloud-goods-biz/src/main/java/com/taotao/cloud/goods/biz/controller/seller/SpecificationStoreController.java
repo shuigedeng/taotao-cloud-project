@@ -37,7 +37,7 @@ public class SpecificationStoreController {
 	@RequestLogger("获取分类规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
-	public Result<List<Specification>> getSpecifications(@PathVariable String categoryId) {
+	public Result<List<Specification>> getSpecifications(@PathVariable Long categoryId) {
 		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
 	}
 

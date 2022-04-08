@@ -16,14 +16,15 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * @param categoryId 分类id
 	 * @return 分类品牌关联信息列表
 	 */
-	List<CategoryBrandVO> getCategoryBrandList(String categoryId);
+	List<CategoryBrandVO> getCategoryBrandList(Long categoryId);
 
 	/**
 	 * 通过分类ID删除关联品牌
 	 *
 	 * @param categoryId 品牌ID
+	 * @return 是否删除成功
 	 */
-	Boolean deleteByCategoryId(String categoryId);
+	Boolean deleteByCategoryId(Long categoryId);
 
 	/**
 	 * 根据品牌ID获取分类品牌关联信息
@@ -31,7 +32,7 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * @param brandId 品牌ID
 	 * @return 分类品牌关联信息
 	 */
-	List<CategoryBrand> getCategoryBrandListByBrandId(List<String> brandId);
+	List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId);
 
 	/**
 	 * 保存分类品牌关系
@@ -39,6 +40,6 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * @param categoryId 分类id
 	 * @param brandIds   品牌ids
 	 */
-	Boolean saveCategoryBrandList(String categoryId, List<String> brandIds);
+	Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds);
 
 }

@@ -17,10 +17,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺VO")
-//public class StoreVO extends Store {
 public class StoreVO {
+	private Long id;
 
-	private String memberId;
+	private Long memberId;
 
 	private String memberName;
 
@@ -63,9 +63,5 @@ public class StoreVO {
 
 	private String merchantEuid;
 
-	@Schema(description = "库存预警数量")
-	private Integer stockWarning;
-
-	@Schema(description = "登录用户的昵称")
-	private String nickName;
 }
+

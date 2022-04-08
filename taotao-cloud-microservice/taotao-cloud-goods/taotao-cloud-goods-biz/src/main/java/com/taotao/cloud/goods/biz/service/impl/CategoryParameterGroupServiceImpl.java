@@ -13,6 +13,7 @@ import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Parameters;
 import com.taotao.cloud.goods.biz.mapper.CategoryParameterGroupMapper;
+import com.taotao.cloud.goods.biz.mapstruct.IParametersMapStruct;
 import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.ParametersService;
@@ -20,14 +21,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 分类绑定参数组接口实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-08 22:37:47
  */
 @AllArgsConstructor
 @Service
@@ -45,7 +48,7 @@ public class CategoryParameterGroupServiceImpl extends
 	private final GoodsService goodsService;
 
 	@Override
-	public List<ParameterGroupVO> getCategoryParams(String categoryId) {
+	public List<ParameterGroupVO> getCategoryParams(Long categoryId) {
 		//根据id查询参数组
 		List<CategoryParameterGroup> groups = this.getCategoryGroup(categoryId);
 		//查询参数
@@ -56,7 +59,7 @@ public class CategoryParameterGroupServiceImpl extends
 	}
 
 	@Override
-	public List<CategoryParameterGroup> getCategoryGroup(String categoryId) {
+	public List<CategoryParameterGroup> getCategoryGroup(Long categoryId) {
 		return this.list(new QueryWrapper<CategoryParameterGroup>().eq("category_id", categoryId));
 	}
 
@@ -67,6 +70,7 @@ public class CategoryParameterGroupServiceImpl extends
 		if (origin == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_NOT_EXIST);
 		}
+
 		LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.select(Goods::getId, Goods::getParams);
 		queryWrapper.like(Goods::getParams, origin.getId());
@@ -77,11 +81,12 @@ public class CategoryParameterGroupServiceImpl extends
 			List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params, GoodsParamsDTO.class);
 			List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
 				.filter(i -> i.getGroupId() != null && i.getGroupId().equals(origin.getId()))
-				.collect(Collectors.toList());
+				.toList();
 			for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
 				goodsParamsDTO.setGroupName(categoryParameterGroup.getGroupName());
 			}
-			this.goodsService.updateGoodsParams(goods.get("id").toString(),
+
+			this.goodsService.updateGoodsParams(Long.valueOf(goods.get("id").toString()),
 				JSONUtil.toJsonStr(goodsParamsDTOS));
 		}
 
@@ -89,7 +94,7 @@ public class CategoryParameterGroupServiceImpl extends
 	}
 
 	@Override
-	public Boolean deleteByCategoryId(String categoryId) {
+	public Boolean deleteByCategoryId(Long categoryId) {
 		return this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroup>().eq(
 			CategoryParameterGroup::getCategoryId, categoryId)) > 0;
 	}
@@ -103,7 +108,7 @@ public class CategoryParameterGroupServiceImpl extends
 	 */
 	public List<ParameterGroupVO> convertParamList(List<CategoryParameterGroup> groupList,
 		List<Parameters> paramList) {
-		Map<String, List<Parameters>> map = new HashMap<>(paramList.size());
+		Map<Long, List<Parameters>> map = new HashMap<>(paramList.size());
 		for (Parameters param : paramList) {
 			List<Parameters> list = map.get(param.getGroupId());
 			if (list == null) {
@@ -112,13 +117,16 @@ public class CategoryParameterGroupServiceImpl extends
 			list.add(param);
 			map.put(param.getGroupId(), list);
 		}
+
 		List<ParameterGroupVO> resList = new ArrayList<>();
 		for (CategoryParameterGroup group : groupList) {
 			ParameterGroupVO groupVo = new ParameterGroupVO();
-			groupVo.setGroupId(String.valueOf(group.getId()));
+			groupVo.setGroupId(group.getId());
 			groupVo.setGroupName(group.getGroupName());
-			//groupVo.setParams(
-			//	map.get(group.getId()) == null ? new ArrayList<>() : map.get(group.getId()));
+			groupVo.setParams(
+				map.get(group.getId()) == null ? new ArrayList<>()
+					: IParametersMapStruct.INSTANCE.parametersToParametersVOs(
+						map.get(group.getId())));
 			resList.add(groupVo);
 		}
 		return resList;

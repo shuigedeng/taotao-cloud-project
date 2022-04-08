@@ -9,6 +9,4 @@ import com.taotao.cloud.goods.biz.entity.GoodsGallery;
  */
 public interface GoodsGalleryMapper extends BaseMapper<GoodsGallery> {
 
-
-
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.vo.StudioVO;
 import com.taotao.cloud.goods.biz.entity.Studio;
+import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
 
 /**
  * 直播间业务层
@@ -33,7 +34,7 @@ public interface StudioService extends IService<Studio> {
 	 * @param id 直播间ID
 	 * @return 直播间VO
 	 */
-	StudioVO getStudioVO(String id);
+	StudioVO getStudioVO(Long id);
 
 	/**
 	 * 获取直播间回放
@@ -51,16 +52,17 @@ public interface StudioService extends IService<Studio> {
 	 * @param storeId 店铺ID
 	 * @return 操作结果
 	 */
-	Boolean push(Integer roomId, Integer goodsId, String storeId);
+	Boolean push(Integer roomId, Long goodsId, Long storeId);
 
 	/**
 	 * 删除商品
 	 *
 	 * @param roomId  店铺ID
 	 * @param goodsId 商品ID
+	 * @param storeId
 	 * @return 操作结果
 	 */
-	Boolean goodsDeleteInRoom(Integer roomId, Integer goodsId, String storeId);
+	Boolean goodsDeleteInRoom(Integer roomId, Long goodsId, Long storeId);
 
 	/**
 	 * 获取直播间列表
@@ -72,10 +74,10 @@ public interface StudioService extends IService<Studio> {
 	 */
 	IPage<Studio> studioList(PageParam pageParam, Integer recommend, String status);
 
-	///**
-	// * 修改直播间状态
-	// *
-	// * @param broadcastMessage 直播间消息
-	// */
-	//Boolean updateStudioStatus(BroadcastMessage broadcastMessage);
+	/**
+	 * 修改直播间状态
+	 *
+	 * @param broadcastMessage 直播间消息
+	 */
+	Boolean updateStudioStatus(BroadcastMessage broadcastMessage);
 }

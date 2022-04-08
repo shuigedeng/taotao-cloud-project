@@ -17,17 +17,20 @@ import lombok.NoArgsConstructor;
 @Schema(description = "商品分类VO")
 public class CategoryBaseVO {
 
+	@Schema(description = "id")
+	private Long id;
+
 	@Schema(description = "分类名称")
 	private String name;
 
 	@Schema(description = " 父id, 根节点为0")
-	private String parentId;
+	private Long parentId;
 
 	@Schema(description = "层级, 从0开始")
 	private Integer level;
 
 	@Schema(description = "排序值")
-	private BigDecimal sortOrder;
+	private Integer sortOrder;
 
 	@Schema(description = "佣金比例")
 	private BigDecimal commissionRate;

@@ -1,16 +1,20 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.Comparator;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 分类VO
  **/
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +23,7 @@ public class CategoryVO extends CategoryBaseVO {
 	private static final long serialVersionUID = 3775766246075838410L;
 
 	@Schema(description = "id")
-	private String id;
+	private Long id;
 
 	@Schema(description = "父节点名称")
 	private String parentTitle;
@@ -30,20 +34,9 @@ public class CategoryVO extends CategoryBaseVO {
 	@Schema(description = "分类关联的品牌列表")
 	private List<BrandVO> brandList;
 
-	//public CategoryVO(Category category) {
-	//	BeanUtil.copyProperties(category, this);
-	//}
-	//
-	//public CategoryVO(String id, String createBy, Date createTime, String updateBy, Date updateTime,
-	//	Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder,
-	//	BigDecimal commissionRate, String image, Boolean supportChannel) {
-	//	super(id, createBy, createTime, updateBy, updateTime, deleteFlag, name, parentId, level,
-	//		sortOrder, commissionRate, image, supportChannel);
-	//}
-
 	public List<CategoryVO> getChildren() {
 		if (children != null) {
-			//children.sort(Comparator.comparing(CategoryBaseVO::getSortOrder));
+			children.sort(Comparator.comparing(CategoryBaseVO::getSortOrder));
 			return children;
 		}
 		return null;

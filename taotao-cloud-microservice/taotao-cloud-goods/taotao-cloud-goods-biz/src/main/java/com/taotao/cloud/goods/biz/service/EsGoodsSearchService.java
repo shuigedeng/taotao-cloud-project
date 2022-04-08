@@ -17,7 +17,7 @@ public interface EsGoodsSearchService {
 	 * 商品搜索
 	 *
 	 * @param searchDTO 搜索参数
-	 * @param pageParam    分页参数
+	 * @param pageParam 分页参数
 	 * @return 搜索结果
 	 */
 	SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO, PageParam pageParam);
@@ -48,10 +48,10 @@ public interface EsGoodsSearchService {
 	 * 获取筛选器
 	 *
 	 * @param goodsSearch 搜索条件
-	 * @param pageVo      分页参数
+	 * @param pageParam      分页参数
 	 * @return ES商品关联
 	 */
-	EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch,  PageParam pageParam);
+	EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch, PageParam pageParam);
 
 	/**
 	 * 根据SkuID列表获取ES商品
@@ -59,7 +59,7 @@ public interface EsGoodsSearchService {
 	 * @param skuIds SkuId列表
 	 * @return ES商品列表
 	 */
-	List<EsGoodsIndex> getEsGoodsBySkuIds(List<String> skuIds);
+	List<EsGoodsIndex> getEsGoodsBySkuIds(List<Long> skuIds);
 
 	/**
 	 * 根据id获取商品索引
@@ -67,5 +67,5 @@ public interface EsGoodsSearchService {
 	 * @param id 商品skuId
 	 * @return 商品索引
 	 */
-	EsGoodsIndex getEsGoodsById(String id);
+	EsGoodsIndex getEsGoodsById(Long id);
 }

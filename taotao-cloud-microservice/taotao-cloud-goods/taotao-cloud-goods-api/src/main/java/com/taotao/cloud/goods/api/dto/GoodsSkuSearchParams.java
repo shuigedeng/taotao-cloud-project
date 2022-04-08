@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsSkuSearchParams extends GoodsSearchParams {
+public class GoodsSkuSearchParams extends GoodsPageQuery {
 
 	private static final long serialVersionUID = -6235885068610635045L;
 

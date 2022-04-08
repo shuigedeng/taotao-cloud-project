@@ -54,7 +54,7 @@ public class ParameterManagerController {
 	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> delById(@PathVariable String id) {
+	public Result<Boolean> delById(@PathVariable Long id) {
 		return Result.success(parametersService.removeById(id));
 	}
 }

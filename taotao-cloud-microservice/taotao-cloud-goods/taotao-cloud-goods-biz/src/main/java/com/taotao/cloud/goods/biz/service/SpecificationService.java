@@ -1,10 +1,9 @@
 package com.taotao.cloud.goods.biz.service;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface SpecificationService extends IService<Specification> {
 	 * @param ids 规格ID
 	 * @return 是否删除成功
 	 */
-	Boolean deleteSpecification(List<String> ids);
+	Boolean deleteSpecification(List<Long> ids);
 
 	/**
 	 * 分页查询
@@ -29,5 +28,5 @@ public interface SpecificationService extends IService<Specification> {
 	 * @return 数据
 	 * @since 2022-04-06 16:10:19
 	 */
-	PageModel<SpecificationVO> getPage(String specName, PageParam page);
+	IPage<Specification> getPage(String specName, PageParam page);
 }

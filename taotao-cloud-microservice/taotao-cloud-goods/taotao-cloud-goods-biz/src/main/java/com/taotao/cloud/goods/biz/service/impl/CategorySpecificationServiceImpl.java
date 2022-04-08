@@ -18,12 +18,12 @@ public class CategorySpecificationServiceImpl extends
 	CategorySpecificationService {
 
 	@Override
-	public List<Specification> getCategorySpecList(String categoryId) {
+	public List<Specification> getCategorySpecList(Long categoryId) {
 		return this.baseMapper.getCategorySpecList(categoryId);
 	}
 
 	@Override
-	public Boolean deleteByCategoryId(String categoryId) {
+	public Boolean deleteByCategoryId(Long categoryId) {
 		return this.baseMapper.delete(
 			new LambdaQueryWrapper<CategorySpecification>().eq(CategorySpecification::getCategoryId,
 				categoryId)) > 0;

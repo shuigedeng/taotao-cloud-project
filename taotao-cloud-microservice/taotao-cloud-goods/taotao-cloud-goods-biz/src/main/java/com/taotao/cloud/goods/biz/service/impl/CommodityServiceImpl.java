@@ -1,7 +1,6 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -11,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.SecurityUser;
@@ -25,40 +25,39 @@ import com.taotao.cloud.goods.biz.service.CommodityService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import java.util.List;
-import java.util.Objects;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 直播商品业务层实现
  */
+@AllArgsConstructor
 @Service
 public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity> implements
 	CommodityService {
 
-	@Autowired
-	private WechatLivePlayerUtil wechatLivePlayerUtil;
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final WechatLivePlayerUtil wechatLivePlayerUtil;
+	private final GoodsSkuService goodsSkuService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addCommodity(List<Commodity> commodityList) {
-		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
+		Long storeId = SecurityUtil.getUser().getStoreId();
 		for (Commodity commodity : commodityList) {
 			//检测直播商品
 			checkCommodity(commodity);
 			commodity.setStoreId(storeId);
+
 			//添加直播商品
 			JSONObject json = wechatLivePlayerUtil.addGoods(commodity);
 			if (!"0".equals(json.getStr("errcode"))) {
 				log.error(json.getStr("errmsg"));
 				throw new BusinessException(ResultEnum.COMMODITY_ERROR);
 			}
-			commodity.setLiveGoodsId(Convert.toInt(json.getStr("goodsId")));
-			commodity.setAuditId(json.getStr("auditId"));
+
+			commodity.setLiveGoodsId(Convert.toLong(json.getStr("goodsId")));
+			commodity.setAuditId(json.getLong("auditId"));
 			//默认为待审核状态
 			commodity.setAuditStatus("0");
 			this.save(commodity);
@@ -82,12 +81,12 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 	}
 
 	@Override
-	public Boolean deleteCommodity(String goodsId) {
-		//SecurityUser currentUser = SecurityUtil.getUser();
-		//if (currentUser == null || (currentUser.getRoles().contains(UserEnums.STORE)
-		//	&& currentUser.getStoreId() == null)) {
-		//	throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-		//}
+	public Boolean deleteCommodity(Long goodsId) {
+		SecurityUser currentUser = SecurityUtil.getUser();
+		if (currentUser == null || (currentUser.getType().equals(UserEnum.STORE.getCode())
+			&& currentUser.getStoreId() == null)) {
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
+		}
 
 		JSONObject json = wechatLivePlayerUtil.deleteGoods(goodsId);
 		if ("0".equals(json.getStr("errcode"))) {
@@ -112,8 +111,8 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 			for (CommodityDTO commodityDTO : commodityDTOList) {
 				//修改审核状态
 				this.update(new LambdaUpdateWrapper<Commodity>()
-					.eq(Commodity::getLiveGoodsId, commodityDTO.getGoods_id())
-					.set(Commodity::getAuditStatus, commodityDTO.getAudit_status()));
+					.eq(Commodity::getLiveGoodsId, commodityDTO.getGoodsId())
+					.set(Commodity::getAuditStatus, commodityDTO.getAuditStatus()));
 			}
 		}
 		return true;
@@ -121,13 +120,13 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 
 	@Override
 	public IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus) {
-		//return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
-		//	new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)
-		//		.eq(auditStatus != null, "c.audit_status", auditStatus)
-		//		.eq(Objects.requireNonNull(UserContext.getCurrentUser()).getRole()
-		//				.equals(UserEnums.STORE), "c.store_id",
-		//			UserContext.getCurrentUser().getStoreId())
-		//		.orderByDesc("create_time"));
-		return null;
+		SecurityUser currentUser = SecurityUtil.getUser();
+
+		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
+			new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)
+				.eq(auditStatus != null, "c.audit_status", auditStatus)
+				.eq(currentUser.getType().equals(UserEnum.STORE.getCode()), "c.store_id",
+					currentUser.getStoreId())
+				.orderByDesc("create_time"));
 	}
 }

@@ -37,7 +37,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	private LocalDateTime createTime;
 
 	@CreatedBy
-	@Column(name = "create_by", columnDefinition = "bigint comment '创建人'")
+	@Column(name = "create_by", columnDefinition = "bigint null comment '创建人'")
 	@TableField(value = "create_by", fill = FieldFill.INSERT)
 	private Long createdBy;
 
@@ -47,16 +47,16 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	private LocalDateTime updateTime;
 
 	@LastModifiedBy
-	@Column(name = "update_by", columnDefinition = "bigint comment '最后修改人'")
+	@Column(name = "update_by", columnDefinition = "bigint null comment '最后修改人'")
 	@TableField(value = "update_by", fill = FieldFill.INSERT_UPDATE)
 	private Long updateBy;
 
 	@Version
 	@com.baomidou.mybatisplus.annotation.Version
 	@Column(name = "version", nullable = false, columnDefinition = "int not null default 1 comment '版本号'")
-	private int version = 1;
+	private Integer version;
 
-	@Column(name = "del_flag", nullable = false, columnDefinition = "boolean NOT NULL DEFAULT false comment '是否删除 0-正常 1-删除'")
+	@Column(name = "del_flag", nullable = false, columnDefinition = "boolean not null DEFAULT false comment '是否删除 0-正常 1-删除'")
 	private Boolean delFlag;
 
 	/**

@@ -30,12 +30,12 @@ public class CustomWords extends BaseSuperEntity<CustomWords, Long> {
 	/**
 	 * 分词名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(64) not null comment '分词名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null comment '分词名称'")
 	private String name;
 
 	/**
 	 * 是否禁用
 	 */
-	@Column(name = "disabled", nullable = false, columnDefinition = "int not null default 0 comment '是否禁用'")
+	@Column(name = "disabled", columnDefinition = "int null default 0 comment '是否禁用'")
 	private Integer disabled;
 }

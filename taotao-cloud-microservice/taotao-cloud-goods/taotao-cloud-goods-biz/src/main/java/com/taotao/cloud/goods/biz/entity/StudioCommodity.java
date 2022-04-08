@@ -31,12 +31,12 @@ public class StudioCommodity extends BaseSuperEntity<StudioCommodity, Long> {
 	/**
 	 * 房间ID
 	 */
-	@Column(name = "room_id", nullable = false, columnDefinition = "bigint not null comment '房间ID'")
+	@Column(name = "room_id", columnDefinition = "bigint not null comment '房间ID'")
 	private Long roomId;
 
 	/**
 	 * 商品ID
 	 */
-	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
+	@Column(name = "goods_id", columnDefinition = "varchar(255) not null comment '商品ID'")
 	private Long goodsId;
 }

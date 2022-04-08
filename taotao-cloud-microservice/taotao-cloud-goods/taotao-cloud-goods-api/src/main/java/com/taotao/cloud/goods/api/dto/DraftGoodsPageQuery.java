@@ -4,9 +4,9 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,8 +19,9 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DraftGoodsSearchParams extends GoodsSearchParams {
+public class DraftGoodsPageQuery extends GoodsPageQuery {
 
+	@Serial
 	private static final long serialVersionUID = -1057830772267228050L;
 
 	/**

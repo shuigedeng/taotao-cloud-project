@@ -18,7 +18,6 @@ public enum GoodsTypeEnum {
 	 */
 	E_COUPON("电子卡券");
 
-
 	private final String description;
 
 	GoodsTypeEnum(String description) {

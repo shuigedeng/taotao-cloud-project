@@ -34,15 +34,15 @@ public class PromotionTools {
      * @param num       参与活动商品数量
      * @param goodsList 选择的商品
      */
-    //public static void paramValid(Date startTime, Date endTime, int num, List<PromotionGoods> goodsList) {
-	//
-    //    checkPromotionTime(startTime, endTime);
-	//
-    //    //如果促销活动选择的是部分商品参加活动
-    //    if (num != -1 && goodsList == null) {
-    //        throw new BusinessException(ResultEnum.PROMOTION_GOODS_ERROR);
-    //    }
-    //}
+    public static void paramValid(Date startTime, Date endTime, int num, List<PromotionGoods> goodsList) {
+
+        checkPromotionTime(startTime, endTime);
+
+        //如果促销活动选择的是部分商品参加活动
+        if (num != -1 && goodsList == null) {
+            throw new BusinessException(ResultEnum.PROMOTION_GOODS_ERROR);
+        }
+    }
 
     /**
      * 参数验证
@@ -85,28 +85,28 @@ public class PromotionTools {
      * @param activityId 排除的促销活动id
      * @return mybatis plus query wrapper对象
      */
-    //public static <T extends BasePromotions> QueryWrapper<T> checkActiveTime(Date startTime, Date endTime, PromotionTypeEnum typeEnum, String storeId, String activityId) {
-    //    QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-    //    if (PromotionTypeEnum.SECKILL != typeEnum) {
-    //        queryWrapper.nested(i -> {
-    //            //新活动起始时间 大于 之前活动的起始时间 小于 之前活动的截止时间
-    //            i.nested(i2 -> i2.le(START_TIME_COLUMN, startTime).ge(END_TIME_COLUMN, startTime));
-    //            //新活动结束时间 大于 之前活动的起始时间 小于 之前活动的截止时间
-    //            i.or(i1 -> i1.le(START_TIME_COLUMN, endTime).ge(END_TIME_COLUMN, endTime));
-    //        });
-    //    } else {
-    //        queryWrapper.ge(START_TIME_COLUMN, DateUtil.beginOfDay(startTime)).le(END_TIME_COLUMN, DateUtil.endOfDay(endTime));
-    //    }
-    //    if (storeId != null) {
-    //        queryWrapper.eq("store_id", storeId);
-    //    }
-    //    if (activityId != null) {
-    //        queryWrapper.ne("id", activityId);
-    //    }
-    //    queryWrapper.and(i -> i.or(queryPromotionStatus(PromotionsStatusEnum.NEW)).or(queryPromotionStatus(PromotionsStatusEnum.START)));
-    //    queryWrapper.eq("delete_flag", false);
-    //    return queryWrapper;
-    //}
+    public static <T extends BasePromotions> QueryWrapper<T> checkActiveTime(Date startTime, Date endTime, PromotionTypeEnum typeEnum, String storeId, String activityId) {
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+        if (PromotionTypeEnum.SECKILL != typeEnum) {
+            queryWrapper.nested(i -> {
+                //新活动起始时间 大于 之前活动的起始时间 小于 之前活动的截止时间
+                i.nested(i2 -> i2.le(START_TIME_COLUMN, startTime).ge(END_TIME_COLUMN, startTime));
+                //新活动结束时间 大于 之前活动的起始时间 小于 之前活动的截止时间
+                i.or(i1 -> i1.le(START_TIME_COLUMN, endTime).ge(END_TIME_COLUMN, endTime));
+            });
+        } else {
+            queryWrapper.ge(START_TIME_COLUMN, DateUtil.beginOfDay(startTime)).le(END_TIME_COLUMN, DateUtil.endOfDay(endTime));
+        }
+        if (storeId != null) {
+            queryWrapper.eq("store_id", storeId);
+        }
+        if (activityId != null) {
+            queryWrapper.ne("id", activityId);
+        }
+        queryWrapper.and(i -> i.or(queryPromotionStatus(PromotionsStatusEnum.NEW)).or(queryPromotionStatus(PromotionsStatusEnum.START)));
+        queryWrapper.eq("delete_flag", false);
+        return queryWrapper;
+    }
 
 
     public static <T> Consumer<QueryWrapper<T>> queryPromotionStatus(PromotionsStatusEnum promotionsStatusEnum) {
@@ -131,26 +131,26 @@ public class PromotionTools {
      * @param promotion  促销信息
      * @return 促销商品列表
      */
-    //public static List<PromotionGoods> promotionGoodsInit(List<PromotionGoods> originList, BasePromotions promotion, PromotionTypeEnum promotionTypeEnum) {
-    //    if (originList != null) {
-    //        //本次促销商品入库
-    //        for (PromotionGoods promotionGoods : originList) {
-    //            promotionGoods.setPromotionId(promotion.getId());
-    //            promotionGoods.setStoreName(promotion.getStoreName());
-    //            promotionGoods.setTitle(promotion.getPromotionName());
-    //            if (promotionGoods.getStartTime() == null) {
-    //                promotionGoods.setStartTime(promotion.getStartTime());
-    //            }
-    //            if (promotionGoods.getEndTime() == null) {
-    //                promotionGoods.setEndTime(promotion.getEndTime());
-    //            }
-    //            promotionGoods.setPromotionType(promotionTypeEnum.name());
-    //            promotionGoods.setNum(0);
-    //            promotionGoods.setDeleteFlag(promotion.getDeleteFlag());
-    //        }
-    //    }
-    //    return originList;
-    //}
+    public static List<PromotionGoods> promotionGoodsInit(List<PromotionGoods> originList, BasePromotions promotion, PromotionTypeEnum promotionTypeEnum) {
+        if (originList != null) {
+            //本次促销商品入库
+            for (PromotionGoods promotionGoods : originList) {
+                promotionGoods.setPromotionId(promotion.getId());
+                promotionGoods.setStoreName(promotion.getStoreName());
+                promotionGoods.setTitle(promotion.getPromotionName());
+                if (promotionGoods.getStartTime() == null) {
+                    promotionGoods.setStartTime(promotion.getStartTime());
+                }
+                if (promotionGoods.getEndTime() == null) {
+                    promotionGoods.setEndTime(promotion.getEndTime());
+                }
+                promotionGoods.setPromotionType(promotionTypeEnum.name());
+                promotionGoods.setNum(0);
+                promotionGoods.setDeleteFlag(promotion.getDeleteFlag());
+            }
+        }
+        return originList;
+    }
 
 
     public static int nextHour(String[] totalHours, Integer timeline) {

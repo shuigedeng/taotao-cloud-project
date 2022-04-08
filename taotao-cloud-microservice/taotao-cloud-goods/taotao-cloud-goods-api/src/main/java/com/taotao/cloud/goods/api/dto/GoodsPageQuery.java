@@ -7,21 +7,25 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 商品查询条件
  */
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsSearchParams extends PageParam {
+public class GoodsPageQuery extends PageParam {
 
+	@Serial
 	private static final long serialVersionUID = 2544015852728566887L;
 
 	@Schema(description = "商品编号")

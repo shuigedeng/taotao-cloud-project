@@ -16,7 +16,7 @@ public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 	 * @param storeId 商家ID
 	 * @return 店铺分类列表
 	 */
-	List<StoreGoodsLabelVO> listByStoreId(String storeId);
+	List<StoreGoodsLabelVO> listByStoreId(Long storeId);
 
 	/**
 	 * 根据分类id集合获取所有店铺分类根据层级排序
@@ -24,7 +24,7 @@ public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 	 * @param ids 商家ID
 	 * @return 店铺分类列表
 	 */
-	List<StoreGoodsLabel> listByStoreIds(List<String> ids);
+	List<StoreGoodsLabel> listByStoreIds(List<Long> ids);
 
 	/**
 	 * 添加商品分类
@@ -47,6 +47,6 @@ public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 	 *
 	 * @param storeLabelId 店铺 分类 ID
 	 */
-	Boolean removeStoreGoodsLabel(String storeLabelId);
+	Boolean removeStoreGoodsLabel(Long storeLabelId);
 
 }

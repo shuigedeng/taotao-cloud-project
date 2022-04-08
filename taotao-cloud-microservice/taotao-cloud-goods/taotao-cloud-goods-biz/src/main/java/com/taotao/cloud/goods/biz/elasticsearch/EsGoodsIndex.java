@@ -1,9 +1,17 @@
 package com.taotao.cloud.goods.biz.elasticsearch;
 
+import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import com.taotao.cloud.goods.biz.entity.GoodsSku;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,13 +35,13 @@ public class EsGoodsIndex implements Serializable {
 	private static final long serialVersionUID = -6856471777036048874L;
 
 	@Id
-	private String id;
+	private Long id;
 
 	/**
 	 * 商品id
 	 */
-	@Field(type = FieldType.Text)
-	private String goodsId;
+	@Field(type = FieldType.Long)
+	private Long goodsId;
 
 	/**
 	 * 商品名称
@@ -50,8 +58,8 @@ public class EsGoodsIndex implements Serializable {
 	/**
 	 * 卖家id
 	 */
-	@Field(type = FieldType.Text)
-	private String storeId;
+	@Field(type = FieldType.Long)
+	private Long storeId;
 
 	/**
 	 * 卖家名称
@@ -78,8 +86,8 @@ public class EsGoodsIndex implements Serializable {
 	/**
 	 * 品牌id
 	 */
-	@Field(type = FieldType.Integer, fielddata = true)
-	private String brandId;
+	@Field(type = FieldType.Long, fielddata = true)
+	private Long brandId;
 
 	/**
 	 * 品牌名称
@@ -120,13 +128,13 @@ public class EsGoodsIndex implements Serializable {
 	/**
 	 * 商品价格
 	 */
-	@Field(type = FieldType.BigDecimal)
+	@Field(type = FieldType.Double)
 	private BigDecimal price;
 
 	/**
 	 * 促销价
 	 */
-	@Field(type = FieldType.BigDecimal)
+	@Field(type = FieldType.Double)
 	private BigDecimal promotionPrice;
 
 	/**
@@ -150,7 +158,7 @@ public class EsGoodsIndex implements Serializable {
 	/**
 	 * 好评率
 	 */
-	@Field(type = FieldType.BigDecimal)
+	@Field(type = FieldType.Double)
 	private BigDecimal grade;
 
 	/**
@@ -236,104 +244,104 @@ public class EsGoodsIndex implements Serializable {
 	@Field(type = FieldType.Nested)
 	private String promotionMapJson;
 
-	//public EsGoodsIndex(GoodsSku sku) {
-	//	if (sku != null) {
-	//		this.id = sku.getId();
-	//		this.goodsId = sku.getGoodsId();
-	//		this.goodsName = sku.getGoodsName();
-	//		this.price = sku.getPrice();
-	//		this.storeName = sku.getStoreName();
-	//		this.storeId = sku.getStoreId();
-	//		this.thumbnail = sku.getThumbnail();
-	//		this.categoryPath = sku.getCategoryPath();
-	//		this.goodsVideo = sku.getGoodsVideo();
-	//		this.mobileIntro = sku.getMobileIntro();
-	//		this.buyCount = sku.getBuyCount() != null ? sku.getBuyCount() : 0;
-	//		this.commentNum = sku.getCommentNum();
-	//		this.small = sku.getSmall();
-	//		this.brandId = sku.getBrandId();
-	//		this.sn = sku.getSn();
-	//		this.storeCategoryPath = sku.getStoreCategoryPath();
-	//		this.sellingPoint = sku.getSellingPoint();
-	//		this.selfOperated = sku.getSelfOperated();
-	//		this.salesModel = sku.getSalesModel();
-	//		this.marketEnable = sku.getMarketEnable();
-	//		this.authFlag = sku.getAuthFlag();
-	//		this.intro = sku.getIntro();
-	//		this.grade = sku.getGrade();
-	//		this.recommend = sku.getRecommend();
-	//		this.goodsType = sku.getGoodsType();
-	//		this.releaseTime = new Date();
-	//	}
-	//}
-	//
-	///**
-	// * 参数索引增加
-	// *
-	// * @param sku            商品sku信息
-	// * @param goodsParamDTOS 商品参数信息
-	// */
-	//public EsGoodsIndex(GoodsSku sku, List<GoodsParamsDTO> goodsParamDTOS) {
-	//	this(sku);
-	//	//如果参数不为空
-	//	if (goodsParamDTOS != null && !goodsParamDTOS.isEmpty()) {
-	//		//接受不了参数索引
-	//		List<EsGoodsAttribute> attributes = new ArrayList<>();
-	//		//循环参数分组
-	//		goodsParamDTOS.forEach(goodsParamGroup -> {
-	//			//如果参数有配置，则增加索引
-	//			if (goodsParamGroup.getGoodsParamsItemDTOList() != null
-	//				&& !goodsParamGroup.getGoodsParamsItemDTOList().isEmpty()) {
-	//				//循环分组的内容
-	//				goodsParamGroup.getGoodsParamsItemDTOList().forEach(goodsParam -> {
-	//						//如果字段需要索引，则增加索引字段
-	//						if (goodsParam.getIsIndex() != null && goodsParam.getIsIndex() == 1) {
-	//							EsGoodsAttribute attribute = new EsGoodsAttribute();
-	//							attribute.setType(1);
-	//							attribute.setName(goodsParam.getParamName());
-	//							attribute.setValue(goodsParam.getParamValue());
-	//							attribute.setSort(goodsParam.getSort());
-	//							attributes.add(attribute);
-	//						}
-	//					}
-	//				);
-	//			}
-	//
-	//		});
-	//		this.attrList = attributes;
-	//	}
-	//}
-	//
-	//public void setGoodsSku(GoodsSku sku) {
-	//	if (sku != null) {
-	//		this.id = sku.getId();
-	//		this.goodsId = sku.getGoodsId();
-	//		this.goodsName = sku.getGoodsName();
-	//		this.price = sku.getPrice();
-	//		this.storeName = sku.getStoreName();
-	//		this.storeId = sku.getStoreId();
-	//		this.thumbnail = sku.getThumbnail();
-	//		this.categoryPath = sku.getCategoryPath();
-	//		this.goodsVideo = sku.getGoodsVideo();
-	//		this.mobileIntro = sku.getMobileIntro();
-	//		this.buyCount = sku.getBuyCount();
-	//		this.commentNum = sku.getCommentNum();
-	//		this.small = sku.getSmall();
-	//		this.brandId = sku.getBrandId();
-	//		this.sn = sku.getSn();
-	//		this.storeCategoryPath = sku.getStoreCategoryPath();
-	//		this.sellingPoint = sku.getSellingPoint();
-	//		this.selfOperated = sku.getSelfOperated();
-	//		this.salesModel = sku.getSalesModel();
-	//		this.marketEnable = sku.getMarketEnable();
-	//		this.authFlag = sku.getAuthFlag();
-	//		this.intro = sku.getIntro();
-	//		this.grade = sku.getGrade();
-	//		this.releaseTime = new Date();
-	//	}
-	//}
-	//
-	//public Map<String, Object> getPromotionMap() {
-	//	return PromotionTools.filterInvalidPromotionsMap(JSONUtil.parseObj(this.promotionMapJson));
-	//}
+	public EsGoodsIndex(GoodsSku sku) {
+		if (sku != null) {
+			this.id = sku.getId();
+			this.goodsId = sku.getGoodsId();
+			this.goodsName = sku.getGoodsName();
+			this.price = sku.getPrice();
+			this.storeName = sku.getStoreName();
+			this.storeId = sku.getStoreId();
+			this.thumbnail = sku.getThumbnail();
+			this.categoryPath = sku.getCategoryPath();
+			this.goodsVideo = sku.getGoodsVideo();
+			this.mobileIntro = sku.getMobileIntro();
+			this.buyCount = sku.getBuyCount() != null ? sku.getBuyCount() : 0;
+			this.commentNum = sku.getCommentNum();
+			this.small = sku.getSmall();
+			this.brandId = sku.getBrandId();
+			this.sn = sku.getSn();
+			this.storeCategoryPath = sku.getStoreCategoryPath();
+			this.sellingPoint = sku.getSellingPoint();
+			this.selfOperated = sku.getSelfOperated();
+			this.salesModel = sku.getSalesModel();
+			this.marketEnable = sku.getMarketEnable();
+			this.authFlag = sku.getIsAuth();
+			this.intro = sku.getIntro();
+			this.grade = sku.getGrade();
+			this.recommend = sku.getRecommend();
+			this.goodsType = sku.getGoodsType();
+			this.releaseTime = LocalDateTime.now();
+		}
+	}
+
+	/**
+	 * 参数索引增加
+	 *
+	 * @param sku            商品sku信息
+	 * @param goodsParamDTOS 商品参数信息
+	 */
+	public EsGoodsIndex(GoodsSku sku, List<GoodsParamsDTO> goodsParamDTOS) {
+		this(sku);
+		//如果参数不为空
+		if (goodsParamDTOS != null && !goodsParamDTOS.isEmpty()) {
+			//接受不了参数索引
+			List<EsGoodsAttribute> attributes = new ArrayList<>();
+			//循环参数分组
+			goodsParamDTOS.forEach(goodsParamGroup -> {
+				//如果参数有配置，则增加索引
+				if (goodsParamGroup.getGoodsParamsItemDTOList() != null
+					&& !goodsParamGroup.getGoodsParamsItemDTOList().isEmpty()) {
+					//循环分组的内容
+					goodsParamGroup.getGoodsParamsItemDTOList().forEach(goodsParam -> {
+							//如果字段需要索引，则增加索引字段
+							if (goodsParam.getIsIndex() != null && goodsParam.getIsIndex() == 1) {
+								EsGoodsAttribute attribute = new EsGoodsAttribute();
+								attribute.setType(1);
+								attribute.setName(goodsParam.getParamName());
+								attribute.setValue(goodsParam.getParamValue());
+								attribute.setSort(goodsParam.getSort());
+								attributes.add(attribute);
+							}
+						}
+					);
+				}
+
+			});
+			this.attrList = attributes;
+		}
+	}
+
+	public void setGoodsSku(GoodsSku sku) {
+		if (sku != null) {
+			this.id = sku.getId();
+			this.goodsId = sku.getGoodsId();
+			this.goodsName = sku.getGoodsName();
+			this.price = sku.getPrice();
+			this.storeName = sku.getStoreName();
+			this.storeId = sku.getStoreId();
+			this.thumbnail = sku.getThumbnail();
+			this.categoryPath = sku.getCategoryPath();
+			this.goodsVideo = sku.getGoodsVideo();
+			this.mobileIntro = sku.getMobileIntro();
+			this.buyCount = sku.getBuyCount();
+			this.commentNum = sku.getCommentNum();
+			this.small = sku.getSmall();
+			this.brandId = sku.getBrandId();
+			this.sn = sku.getSn();
+			this.storeCategoryPath = sku.getStoreCategoryPath();
+			this.sellingPoint = sku.getSellingPoint();
+			this.selfOperated = sku.getSelfOperated();
+			this.salesModel = sku.getSalesModel();
+			this.marketEnable = sku.getMarketEnable();
+			this.authFlag = sku.getIsAuth();
+			this.intro = sku.getIntro();
+			this.grade = sku.getGrade();
+			this.releaseTime = LocalDateTime.now();
+		}
+	}
+
+	public Map<String, Object> getPromotionMap() {
+		return PromotionTools.filterInvalidPromotionsMap(JSONUtil.parseObj(this.promotionMapJson));
+	}
 }

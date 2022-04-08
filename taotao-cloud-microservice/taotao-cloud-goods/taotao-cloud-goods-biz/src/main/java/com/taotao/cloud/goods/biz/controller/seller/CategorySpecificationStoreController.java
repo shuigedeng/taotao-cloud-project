@@ -35,8 +35,8 @@ public class CategorySpecificationStoreController {
 	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息", method = CommonConstant.GET)
 	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{category_id}")
-	public Result<List<Specification>> getCategorySpec(@PathVariable("category_id") String categoryId) {
+	@GetMapping(value = "/{categoryId}")
+	public Result<List<Specification>> getCategorySpec(@PathVariable("categoryId") Long categoryId) {
 		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
 	}
 

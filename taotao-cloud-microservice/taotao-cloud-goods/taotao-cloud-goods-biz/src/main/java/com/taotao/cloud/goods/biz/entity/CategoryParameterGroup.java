@@ -30,18 +30,18 @@ public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGro
 	/**
 	 * 参数组名称
 	 */
-	@Column(name = "group_name", nullable = false, columnDefinition = "varchar(64) not null comment '参数组名称'")
+	@Column(name = "group_name", columnDefinition = "varchar(255) not null comment '参数组名称'")
 	private String groupName;
 
 	/**
 	 * 关联分类id
 	 */
-	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '关联分类id'")
+	@Column(name = "category_id", columnDefinition = "bigint not null comment '关联分类id'")
 	private Long categoryId;
 
 	/**
 	 * 排序
 	 */
-	@Column(name = "sort_order", nullable = false, columnDefinition = "int not null default 0 comment '排序'")
+	@Column(name = "sort_order", columnDefinition = "int not null default 0 comment '排序'")
 	private Integer sortOrder;
 }

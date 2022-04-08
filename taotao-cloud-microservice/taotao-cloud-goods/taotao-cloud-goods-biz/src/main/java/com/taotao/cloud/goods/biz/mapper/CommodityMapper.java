@@ -21,8 +21,8 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 	 * @return 直播商品ID列表
 	 */
 	@Select("""
-		SELECT live_goods_id 
-		FROM li_commodity 
+		SELECT live_goods_id
+		FROM li_commodity
 		WHERE audit_status='0' or audit_status='1'
 		""")
 	List<String> getAuditCommodity();
@@ -34,8 +34,8 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 	 * @return 直播商品列表
 	 */
 	@Select("""
-		SELECT * 
-		FROM li_commodity c INNER JOIN li_studio_commodity sc ON sc.goods_id = c.live_goods_id 
+		SELECT *
+		FROM li_commodity c INNER JOIN li_studio_commodity sc ON sc.goods_id = c.live_goods_id
 		WHERE sc.room_id =#{roomId}
 		""")
 	List<Commodity> getCommodityByRoomId(Integer roomId);
@@ -47,7 +47,7 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 	 * @return 直播商品图片列表
 	 */
 	@Select("""
-		SELECT goods_image 
+		SELECT goods_image
 		FROM li_commodity c INNER JOIN li_studio_commodity sc ON sc.goods_id = c.live_goods_id
 		WHERE sc.room_id =#{roomId}
 		""")

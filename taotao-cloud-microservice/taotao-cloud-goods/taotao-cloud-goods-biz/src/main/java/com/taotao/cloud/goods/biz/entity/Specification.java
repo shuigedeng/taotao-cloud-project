@@ -32,7 +32,7 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
 	/**
 	 * 规格名称
 	 */
-	@Column(name = "spec_name", nullable = false, columnDefinition = "varchar(64) not null comment '会员规格名称ID'")
+	@Column(name = "spec_name", columnDefinition = "varchar(255) not null comment '会员规格名称ID'")
 	private String specName;
 
 	/**
@@ -40,12 +40,12 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
 	 * <p>
 	 * 店铺自定义规格暂时废弃 2021-06-23 后续推出新配置方式
 	 */
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '所属卖家'")
+	@Column(name = "store_id", columnDefinition = "bigint not null comment '所属卖家'")
 	private Long storeId;
 
 	/**
 	 * 规格值名字, 《,》分割
 	 */
-	@Column(name = "spec_value", nullable = false, columnDefinition = "varchar(64) not null comment '规格值名字'")
+	@Column(name = "spec_value", columnDefinition = "varchar(1024) not null comment '规格值名字'")
 	private String specValue;
 }

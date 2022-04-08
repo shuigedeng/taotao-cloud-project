@@ -16,7 +16,7 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 * @param categoryId 分类Id
 	 * @return 分类参数
 	 */
-	List<ParameterGroupVO> getCategoryParams(String categoryId);
+	List<ParameterGroupVO> getCategoryParams(Long categoryId);
 
 	/**
 	 * 查询分类绑定参数组信息
@@ -24,7 +24,7 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 * @param categoryId 分类id
 	 * @return 参数组列表
 	 */
-	List<CategoryParameterGroup> getCategoryGroup(String categoryId);
+	List<CategoryParameterGroup> getCategoryGroup(Long categoryId);
 
 	/**
 	 * 更新分类参数组绑定信息
@@ -39,6 +39,6 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 *
 	 * @param categoryId 品牌ID
 	 */
-	Boolean deleteByCategoryId(String categoryId);
+	Boolean deleteByCategoryId(Long categoryId);
 
 }

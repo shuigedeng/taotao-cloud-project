@@ -1,22 +1,32 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
-import com.taotao.cloud.goods.api.dto.GoodsSearchParams;
+import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
+import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
@@ -24,66 +34,75 @@ import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
+import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.store.api.feign.IFeignFreightTemplateService;
+import com.taotao.cloud.store.api.feign.IFeignStoreService;
+import com.taotao.cloud.store.api.vo.FreightTemplateVO;
+import com.taotao.cloud.store.api.vo.StoreVO;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品业务层实现
  */
+@AllArgsConstructor
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
 
 	/**
 	 * 分类
 	 */
-	@Autowired
-	private CategoryService categoryService;
-	///**
-	// * 设置
-	// */
-	//@Autowired
-	//private IFeignSettingService settingService;
+	private final CategoryService categoryService;
+	/**
+	 * 设置
+	 */
+	private final IFeignSettingService settingService;
 	/**
 	 * 商品相册
 	 */
-	@Autowired
-	private GoodsGalleryService goodsGalleryService;
+	private final GoodsGalleryService goodsGalleryService;
 	/**
 	 * 商品规格
 	 */
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final GoodsSkuService goodsSkuService;
 	/**
 	 * 店铺详情
 	 */
-	//@Autowired
-	//private StoreService storeService;
+	private final IFeignStoreService storeService;
+	/**
+	 * 运费模板
+	 */
+	private final IFeignFreightTemplateService freightTemplateService;
 	/**
 	 * 会员评价
 	 */
-	//@Autowired
-	//private MemberEvaluationService memberEvaluationService;
-	///**
-	// * rocketMq
-	// */
-	//@Autowired
-	//private RocketMQTemplate rocketMQTemplate;
+	private final IFeignMemberEvaluationService memberEvaluationService;
+	/**
+	 * rocketMq
+	 */
+	private final RocketMQTemplate rocketMQTemplate;
 	/**
 	 * rocketMq配置
 	 */
-	//@Autowired
-	//private RocketmqCustomProperties rocketmqCustomProperties;
-	//@Autowired
-	//private FreightTemplateService freightTemplateService;
-
-	@Autowired
-	private RedisRepository redisRepository;
+	private final RocketmqCustomProperties rocketmqCustomProperties;
+	private final RedisRepository redisRepository;
 
 	@Override
-	public List<Goods> getByBrandIds(List<String> brandIds) {
+	public List<Goods> getByBrandIds(List<Long> brandIds) {
 		LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.in(Goods::getBrandId, brandIds);
 		return list(lambdaQueryWrapper);
@@ -91,9 +110,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean underStoreGoods(String storeId) {
+	public Boolean underStoreGoods(Long storeId) {
 		//获取商品ID列表
-		List<String> list = this.baseMapper.getGoodsIdByStoreId(storeId);
+		List<Long> list = this.baseMapper.getGoodsIdByStoreId(storeId);
 		//下架店铺下的商品
 		updateGoodsMarketAble(list, GoodsStatusEnum.DOWN, "店铺关闭");
 		return true;
@@ -107,7 +126,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 */
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean updateGoodsParams(String goodsId, String params) {
+	public Boolean updateGoodsParams(Long goodsId, String params) {
 		LambdaUpdateWrapper<Goods> updateWrapper = new LambdaUpdateWrapper<>();
 		updateWrapper.eq(Goods::getId, goodsId);
 		updateWrapper.set(Goods::getParams, params);
@@ -117,7 +136,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public final Long getGoodsCountByCategory(String categoryId) {
+	public final Long getGoodsCountByCategory(Long categoryId) {
 		QueryWrapper<Goods> queryWrapper = Wrappers.query();
 		queryWrapper.like("category_path", categoryId);
 		queryWrapper.eq("delete_flag", false);
@@ -127,153 +146,146 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addGoods(GoodsOperationDTO goodsOperationDTO) {
-		//Goods goods = new Goods(goodsOperationDTO);
-		////检查商品
-		//this.checkGoods(goods);
-		////向goods加入图片
-		//this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
-		////添加商品参数
-		//if (goodsOperationDTO.getGoodsParamsDTOList() != null
-		//	&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
-		//	//给商品参数填充值
-		//	goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
-		//}
-		////添加商品
-		//this.save(goods);
-		////添加商品sku信息
-		//this.goodsSkuService.add(goodsOperationDTO.getSkuList(), goods);
-		////添加相册
-		//if (goodsOperationDTO.getGoodsGalleryList() != null
-		//	&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
-		//	this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
-		//}
+		Goods goods = new Goods(goodsOperationDTO);
+		//检查商品
+		this.checkGoods(goods);
+		//向goods加入图片
+		this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
+		//添加商品参数
+		if (goodsOperationDTO.getGoodsParamsDTOList() != null
+			&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
+			//给商品参数填充值
+			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
+		}
+		//添加商品
+		this.save(goods);
+		//添加商品sku信息
+		this.goodsSkuService.add(goodsOperationDTO.getSkuList(), goods);
+		//添加相册
+		if (goodsOperationDTO.getGoodsGalleryList() != null
+			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
+			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
+		}
 		return true;
 	}
 
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean editGoods(GoodsOperationDTO goodsOperationDTO, String goodsId) {
-		//Goods goods = new Goods(goodsOperationDTO);
-		//goods.setId(goodsId);
-		////检查商品信息
-		//this.checkGoods(goods);
-		////向goods加入图片
-		//this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
-		////添加商品参数
-		//if (goodsOperationDTO.getGoodsParamsDTOList() != null
-		//	&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
-		//	goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
-		//}
-		////修改商品
-		//this.updateById(goods);
-		////修改商品sku信息
-		//this.goodsSkuService.update(goodsOperationDTO.getSkuList(), goods,
-		//	goodsOperationDTO.getRegeneratorSkuFlag());
-		////添加相册
-		//if (goodsOperationDTO.getGoodsGalleryList() != null
-		//	&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
-		//	this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
-		//}
-		//if (GoodsAuthEnum.TOBEAUDITED.name().equals(goods.getAuthFlag())) {
-		//	this.deleteEsGoods(Collections.singletonList(goodsId));
-		//}
-		//cache.remove(CachePrefix.GOODS.getPrefix() + goodsId);
+	public Boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId) {
+		Goods goods = new Goods(goodsOperationDTO);
+		goods.setId(goodsId);
+		//检查商品信息
+		this.checkGoods(goods);
+		//向goods加入图片
+		this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
+		//添加商品参数
+		if (goodsOperationDTO.getGoodsParamsDTOList() != null
+			&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
+			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
+		}
+		//修改商品
+		this.updateById(goods);
+		//修改商品sku信息
+		this.goodsSkuService.update(goodsOperationDTO.getSkuList(), goods,
+			goodsOperationDTO.getRegeneratorSkuFlag());
+		//添加相册
+		if (goodsOperationDTO.getGoodsGalleryList() != null
+			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
+			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
+		}
+		if (GoodsAuthEnum.TOBEAUDITED.name().equals(goods.getIsAuth())) {
+			this.deleteEsGoods(Collections.singletonList(goodsId));
+		}
+		redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsId);
 		return true;
 	}
 
 	@Override
-	public GoodsVO getGoodsVO(String goodsId) {
-		////缓存获取，如果没有则读取缓存
-		//GoodsVO goodsVO = cache.get(CachePrefix.GOODS.getPrefix() + goodsId);
-		//if (goodsVO != null) {
-		//	return goodsVO;
-		//}
-		//
-		////查询商品信息
-		//Goods goods = this.getById(goodsId);
-		//if (goods == null) {
-		//	log.error("商品ID为" + goodsId + "的商品不存在");
-		//	throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
-		//}
-		//goodsVO = new GoodsVO();
-		////赋值
-		//BeanUtils.copyProperties(goods, goodsVO);
-		////商品id
-		//goodsVO.setId(goods.getId());
-		////商品相册赋值
-		//List<String> images = new ArrayList<>();
-		//List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-		//for (GoodsGallery goodsGallery : galleryList) {
-		//	images.add(goodsGallery.getOriginal());
-		//}
-		//goodsVO.setGoodsGalleryList(images);
-		////商品sku赋值
-		//List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
-		//if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
-		//	goodsVO.setSkuList(goodsListByGoodsId);
-		//}
-		////商品分类名称赋值
-		//List<String> categoryName = new ArrayList<>();
-		//String categoryPath = goods.getCategoryPath();
-		//String[] strArray = categoryPath.split(",");
-		//List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
-		//for (Category category : categories) {
-		//	categoryName.add(category.getName());
-		//}
-		//goodsVO.setCategoryName(categoryName);
-		//
-		////参数非空则填写参数
-		//if (CharSequenceUtil.isNotEmpty(goods.getParams())) {
-		//	goodsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
-		//}
-		//cache.put(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
-		//return goodsVO;
-		return null;
+	public GoodsVO getGoodsVO(Long goodsId) {
+		//缓存获取，如果没有则读取缓存
+		GoodsVO goodsVO = (GoodsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
+		if (goodsVO != null) {
+			return goodsVO;
+		}
+
+		//查询商品信息
+		Goods goods = this.getById(goodsId);
+		if (goods == null) {
+			log.error("商品ID为" + goodsId + "的商品不存在");
+			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
+		}
+		goodsVO = new GoodsVO();
+		//赋值
+		BeanUtil.copyProperties(goods, goodsVO);
+		//商品id
+		goodsVO.setId(goods.getId());
+		//商品相册赋值
+		List<String> images = new ArrayList<>();
+		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
+		for (GoodsGallery goodsGallery : galleryList) {
+			images.add(goodsGallery.getOriginal());
+		}
+		goodsVO.setGoodsGalleryList(images);
+		//商品sku赋值
+		List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
+		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
+			goodsVO.setSkuList(goodsListByGoodsId);
+		}
+		//商品分类名称赋值
+		List<String> categoryName = new ArrayList<>();
+		String categoryPath = goods.getCategoryPath();
+		String[] strArray = categoryPath.split(",");
+		List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
+		for (Category category : categories) {
+			categoryName.add(category.getName());
+		}
+		goodsVO.setCategoryName(categoryName);
+
+		//参数非空则填写参数
+		if (CharSequenceUtil.isNotEmpty(goods.getParams())) {
+			goodsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
+		}
+		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
+		return goodsVO;
 	}
 
 	@Override
-	public PageModel<GoodsBaseVO> queryByParams(GoodsSearchParams goodsSearchParams) {
-		IPage<Goods> goodsPage = this.page(goodsSearchParams.buildMpPage(),
-			goodsSearchParams.queryWrapper());
+	public PageModel<GoodsBaseVO> queryByParams(GoodsPageQuery goodsPageQuery) {
+		IPage<Goods> goodsPage = this.page(goodsPageQuery.buildMpPage(),
+			goodsPageQuery.queryWrapper());
 		return PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class);
 	}
 
-	/**
-	 * 商品查询
-	 *
-	 * @param goodsSearchParams 查询参数
-	 * @return 商品信息
-	 */
 	@Override
-	public List<Goods> queryListByParams(GoodsSearchParams goodsSearchParams) {
-		return this.list(goodsSearchParams.queryWrapper());
+	public List<Goods> queryListByParams(GoodsPageQuery goodsPageQuery) {
+		return this.list(goodsPageQuery.queryWrapper());
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean auditGoods(List<String> goodsIds, GoodsAuthEnum goodsAuthEnum) {
+	public Boolean auditGoods(List<Long> goodsIds, GoodsAuthEnum goodsAuthEnum) {
 		boolean result = false;
-		for (String goodsId : goodsIds) {
-			//Goods goods = this.checkExist(goodsId);
-			//goods.setAuthFlag(goodsAuthEnum.name());
-			//result = this.updateById(goods);
-			//goodsSkuService.updateGoodsSkuStatus(goods);
-			////删除之前的缓存
-			//cache.remove(CachePrefix.GOODS.getPrefix() + goodsId);
-			////商品审核消息
-			//String destination =
-			//	rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_AUDIT.name();
-			////发送mq消息
-			//rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goods),
-			//	RocketmqSendCallbackBuilder.commonCallback());
+		for (Long goodsId : goodsIds) {
+			Goods goods = this.checkExist(goodsId);
+			goods.setIsAuth(goodsAuthEnum.name());
+			result = this.updateById(goods);
+			goodsSkuService.updateGoodsSkuStatus(goods);
+			//删除之前的缓存
+			redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsId);
+			//商品审核消息
+			String destination =
+				rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_AUDIT.name();
+			//发送mq消息
+			rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goods),
+				RocketmqSendCallbackBuilder.commonCallback());
 		}
 		return result;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean updateGoodsMarketAble(List<String> goodsIds, GoodsStatusEnum goodsStatusEnum,
+	public Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
 		String underReason) {
 		boolean result;
 
@@ -304,7 +316,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean managerUpdateGoodsMarketAble(List<String> goodsIds,
+	public Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds,
 		GoodsStatusEnum goodsStatusEnum, String underReason) {
 		boolean result;
 
@@ -337,7 +349,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean deleteGoods(List<String> goodsIds) {
+	public Boolean deleteGoods(List<Long> goodsIds) {
 		LambdaUpdateWrapper<Goods> updateWrapper = this.getUpdateWrapperByStoreAuthority();
 		updateWrapper.set(Goods::getMarketEnable, GoodsStatusEnum.DOWN.name());
 		updateWrapper.set(Goods::getDelFlag, true);
@@ -354,30 +366,30 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		}
 
 		this.deleteEsGoods(goodsIds);
-
 		return true;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean freight(List<String> goodsIds, String templateId) {
+	public Boolean freight(List<Long> goodsIds, Long templateId) {
 		SecurityUser authUser = this.checkStoreAuthority();
 
-		//FreightTemplate freightTemplate = freightTemplateService.getById(templateId);
-		//if (freightTemplate == null) {
-		//	throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
-		//}
-		//if (authUser != null && !freightTemplate.getStoreId().equals(authUser.getStoreId())) {
-		//	throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-		//}
+		FreightTemplateVO freightTemplate = freightTemplateService.getById(templateId).data();
+		if (freightTemplate == null) {
+			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
+		}
+		if (authUser != null && !freightTemplate.getStoreId().equals(authUser.getStoreId())) {
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
+		}
 		LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-		//lambdaUpdateWrapper.set(Goods::getTemplateId, templateId);
-		//lambdaUpdateWrapper.in(Goods::getId, goodsIds);
+		lambdaUpdateWrapper.set(Goods::getTemplateId, templateId);
+		lambdaUpdateWrapper.in(Goods::getId, goodsIds);
+
 		return this.update(lambdaUpdateWrapper);
 	}
 
 	@Override
-	public Boolean updateStock(String goodsId, Integer quantity) {
+	public Boolean updateStock(Long goodsId, Integer quantity) {
 		LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.set(Goods::getQuantity, quantity);
 		lambdaUpdateWrapper.eq(Goods::getId, goodsId);
@@ -386,35 +398,29 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public Boolean updateGoodsCommentNum(String goodsId) {
-
+	public Boolean updateGoodsCommentNum(Long goodsId) {
 		//获取商品信息
 		Goods goods = this.getById(goodsId);
-		////修改商品评价数量
-		//goods.setCommentNum(goods.getCommentNum() + 1);
-		//
-		////修改商品好评率
-		//LambdaQueryWrapper<MemberEvaluation> goodEvaluationQueryWrapper = new LambdaQueryWrapper<>();
-		//goodEvaluationQueryWrapper.eq(MemberEvaluation::getId, goodsId);
-		//goodEvaluationQueryWrapper.eq(MemberEvaluation::getGrade, EvaluationGradeEnum.GOOD.name());
-		////好评数量
-		//long highPraiseNum = memberEvaluationService.count(goodEvaluationQueryWrapper);
-		////好评率
-		//BigDecimal grade = NumberUtil.mul(
-		//	NumberUtil.div(highPraiseNum, goods.getCommentNum().BigDecimalValue(), 2), 100);
-		//goods.setGrade(grade);
-		this.updateById(goods);
-		return true;
+		//修改商品评价数量
+		goods.setCommentNum(goods.getCommentNum() + 1);
+
+		//好评数量
+		Long highPraiseNum = memberEvaluationService.count(goodsId, EvaluationGradeEnum.GOOD.name())
+			.data();
+
+		//好评率
+		BigDecimal grade = NumberUtil.mul(
+			NumberUtil.div(BigDecimal.valueOf(highPraiseNum),
+				BigDecimal.valueOf(goods.getCommentNum()), 2), 100);
+
+		//修改商品好评率
+		goods.setGrade(grade);
+		return this.updateById(goods);
 	}
 
-	/**
-	 * 更新商品的购买数量
-	 *
-	 * @param goodsId  商品ID
-	 * @param buyCount 购买数量
-	 */
+
 	@Override
-	public Boolean updateGoodsBuyCount(String goodsId, int buyCount) {
+	public Boolean updateGoodsBuyCount(Long goodsId, int buyCount) {
 		this.update(new LambdaUpdateWrapper<Goods>()
 			.eq(Goods::getId, goodsId)
 			.set(Goods::getBuyCount, buyCount));
@@ -434,7 +440,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	//}
 
 	@Override
-	public Long countStoreGoodsNum(String storeId) {
+	public Long countStoreGoodsNum(Long storeId) {
 		return this.count(
 			new LambdaQueryWrapper<Goods>()
 				.eq(Goods::getStoreId, storeId)
@@ -448,13 +454,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 *
 	 * @param goodsIds 商品id
 	 */
-	private void deleteEsGoods(List<String> goodsIds) {
-		////商品删除消息
-		//String destination =
-		//	rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_DELETE.name();
-		////发送mq消息
-		//rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goodsIds),
-		//	RocketmqSendCallbackBuilder.commonCallback());
+	private void deleteEsGoods(List<Long> goodsIds) {
+		//商品删除消息
+		String destination =
+			rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_DELETE.name();
+		//发送mq消息
+		rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goodsIds),
+			RocketmqSendCallbackBuilder.commonCallback());
 	}
 
 	/**
@@ -476,55 +482,55 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 * @param goods 商品
 	 */
 	private void checkGoods(Goods goods) {
-		////判断商品类型
-		//switch (goods.getGoodsType()) {
-		//	case "PHYSICAL_GOODS":
-		//		if ("0".equals(goods.getTemplateId())) {
-		//			throw new BusinessException(ResultEnum.PHYSICAL_GOODS_NEED_TEMP);
-		//		}
-		//		break;
-		//	case "VIRTUAL_GOODS":
-		//		if (!"0".equals(goods.getTemplateId())) {
-		//			throw new BusinessException(ResultEnum.VIRTUAL_GOODS_NOT_NEED_TEMP);
-		//		}
-		//		break;
-		//	default:
-		//		throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
-		//}
-		////检查商品是否存在--修改商品时使用
-		//if (goods.getId() != null) {
-		//	this.checkExist(goods.getId());
-		//} else {
-		//	//评论次数
-		//	goods.setCommentNum(0);
-		//	//购买次数
-		//	goods.setBuyCount(0);
-		//	//购买次数
-		//	goods.setQuantity(0);
-		//	//商品评分
-		//	goods.setGrade(100.0);
-		//}
-		//
-		////获取商品系统配置决定是否审核
-		//Setting setting = settingService.get(SettingEnum.GOODS_SETTING.name());
-		//GoodsSetting goodsSetting = JSONUtil.toBean(setting.getSettingValue(), GoodsSetting.class);
-		////是否需要审核
-		//goods.setAuthFlag(
-		//	Boolean.TRUE.equals(goodsSetting.getGoodsCheck()) ? GoodsAuthEnum.TOBEAUDITED.name()
-		//		: GoodsAuthEnum.PASS.name());
-		////判断当前用户是否为店铺
-		//if (Objects.requireNonNull(UserContext.getCurrentUser()).getRole()
-		//	.equals(UserEnums.STORE)) {
-		//	StoreVO storeDetail = this.storeService.getStoreDetail();
-		//	if (storeDetail.getSelfOperated() != null) {
-		//		goods.setSelfOperated(storeDetail.getSelfOperated());
-		//	}
-		//	goods.setStoreId(storeDetail.getId());
-		//	goods.setStoreName(storeDetail.getStoreName());
-		//	goods.setSelfOperated(storeDetail.getSelfOperated());
-		//} else {
-		//	throw new BusinessException(ResultEnum.STORE_NOT_LOGIN_ERROR);
-		//}
+		//判断商品类型
+		switch (goods.getGoodsType()) {
+			case "PHYSICAL_GOODS":
+				if (Long.valueOf(0).equals(goods.getTemplateId())) {
+					throw new BusinessException(ResultEnum.PHYSICAL_GOODS_NEED_TEMP);
+				}
+				break;
+			case "VIRTUAL_GOODS":
+				if (!Long.valueOf(0).equals(goods.getTemplateId())) {
+					throw new BusinessException(ResultEnum.VIRTUAL_GOODS_NOT_NEED_TEMP);
+				}
+				break;
+			default:
+				throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
+		}
+
+		//检查商品是否存在--修改商品时使用
+		if (goods.getId() != null) {
+			this.checkExist(goods.getId());
+		} else {
+			//评论次数
+			goods.setCommentNum(0);
+			//购买次数
+			goods.setBuyCount(0);
+			//购买次数
+			goods.setQuantity(0);
+			//商品评分
+			goods.setGrade(BigDecimal.valueOf(100));
+		}
+
+		//获取商品系统配置决定是否审核
+		GoodsSettingVO goodsSetting = settingService.getGoodsSetting(
+			SettingEnum.GOODS_SETTING.name()).data();
+		//是否需要审核
+		goods.setIsAuth(
+			Boolean.TRUE.equals(goodsSetting.getGoodsCheck()) ? GoodsAuthEnum.TOBEAUDITED.name()
+				: GoodsAuthEnum.PASS.name());
+		//判断当前用户是否为店铺
+		if (SecurityUtil.getUser().getType().equals(UserEnum.STORE.getCode())) {
+			StoreVO storeDetail = storeService.getStoreDetail().data();
+			if (storeDetail.getSelfOperated() != null) {
+				goods.setSelfOperated(storeDetail.getSelfOperated());
+			}
+			goods.setStoreId(storeDetail.getId());
+			goods.setStoreName(storeDetail.getStoreName());
+			goods.setSelfOperated(storeDetail.getSelfOperated());
+		} else {
+			throw new BusinessException(ResultEnum.STORE_NOT_LOGIN_ERROR);
+		}
 	}
 
 	/**
@@ -533,10 +539,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 * @param goodsId 商品id
 	 * @return 商品信息
 	 */
-	private Goods checkExist(String goodsId) {
+	private Goods checkExist(Long goodsId) {
 		Goods goods = getById(goodsId);
 		if (goods == null) {
-			log.error("商品ID为" + goodsId + "的商品不存在");
+			LogUtil.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		return goods;
@@ -566,8 +572,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	private SecurityUser checkStoreAuthority() {
 		SecurityUser currentUser = SecurityUtil.getUser();
 		//如果当前会员不为空，且为店铺角色
-		//if (currentUser != null && (currentUser.getRole().equals(UserEnums.STORE) && currentUser.getStoreId() != null)) {
-		if (currentUser != null) {
+		if (currentUser != null && (currentUser.getType().equals(UserEnum.STORE.getCode())
+			&& currentUser.getStoreId() != null)) {
 			return currentUser;
 		}
 		return null;
@@ -581,8 +587,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	private SecurityUser checkManagerAuthority() {
 		SecurityUser currentUser = SecurityUtil.getUser();
 		//如果当前会员不为空，且为店铺角色
-		//if (currentUser != null && (currentUser.getRoles().contains(UserEnums.MANAGER))) {
-		if (currentUser != null) {
+		if (currentUser != null && (currentUser.getType().equals(UserEnum.MANAGER.getCode()))) {
 			return currentUser;
 		} else {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
@@ -596,10 +601,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	 */
 	private LambdaQueryWrapper<Goods> getQueryWrapperByStoreAuthority() {
 		LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
-		//AuthUser authUser = this.checkStoreAuthority();
-		//if (authUser != null) {
-		//	queryWrapper.eq(Goods::getStoreId, authUser.getStoreId());
-		//}
+		SecurityUser authUser = this.checkStoreAuthority();
+		if (authUser != null) {
+			queryWrapper.eq(Goods::getStoreId, authUser.getStoreId());
+		}
 		return queryWrapper;
 	}
 

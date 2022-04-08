@@ -35,8 +35,8 @@ public class CategoryParameterGroupStoreController {
 	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息", method = CommonConstant.GET)
 	@RequestLogger("查询某分类下绑定的参数信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{category_id}")
-	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable("category_id") String categoryId) {
+	@GetMapping(value = "/{categoryId}")
+	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable("categoryId") Long categoryId) {
 		return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
 	}
 

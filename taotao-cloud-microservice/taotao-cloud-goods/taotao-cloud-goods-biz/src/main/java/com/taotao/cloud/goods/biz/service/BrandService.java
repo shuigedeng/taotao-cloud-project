@@ -4,7 +4,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.BrandPageDTO;
+import com.taotao.cloud.goods.api.dto.BrandPageQuery;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import java.util.List;
 
@@ -19,14 +19,15 @@ public interface BrandService extends IService<Brand> {
 	 * @param page 条件参数
 	 * @return 品牌列表
 	 */
-	IPage<Brand> getBrandsByPage(BrandPageDTO page);
+	IPage<Brand> getBrandsByPage(BrandPageQuery page);
 
 	/**
 	 * 删除品牌
 	 *
 	 * @param ids 品牌id
+	 * @return 是否成功
 	 */
-	Boolean deleteBrands(List<String> ids);
+	Boolean deleteBrands(List<Long> ids);
 
 	/**
 	 * 根据分类ID获取品牌列表
@@ -34,23 +35,23 @@ public interface BrandService extends IService<Brand> {
 	 * @param categoryId 分类ID
 	 * @return 品牌列表
 	 */
-	List<Brand> getBrandsByCategory(String categoryId);
+	List<Brand> getBrandsByCategory(Long categoryId);
 
 	/**
 	 * 添加品牌
 	 *
-	 * @param brandVO 品牌信息
+	 * @param brandDTO 品牌信息
 	 * @return 添加结果
 	 */
-	Boolean addBrand(BrandDTO brandVO);
+	Boolean addBrand(BrandDTO brandDTO);
 
 	/**
 	 * 更新品牌
 	 *
-	 * @param brandVO 品牌信息
+	 * @param brandDTO 品牌信息
 	 * @return 更新结果
 	 */
-	Boolean updateBrand(BrandDTO brandVO);
+	Boolean updateBrand(BrandDTO brandDTO);
 
 	/**
 	 * 更新品牌是否可用
@@ -59,7 +60,7 @@ public interface BrandService extends IService<Brand> {
 	 * @param disable 是否不可用
 	 * @return 更新结果
 	 */
-	Boolean brandDisable(String brandId, boolean disable);
+	Boolean brandDisable(Long brandId, boolean disable);
 
 	/**
 	 * 获取所有可用品牌

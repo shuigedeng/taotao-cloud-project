@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 /**
  * 商品关键字表
  */
@@ -31,30 +30,30 @@ public class GoodsWords extends BaseSuperEntity<GoodsWords, Long> {
 	/**
 	 * 商品关键字
 	 */
-	@Column(name = "words", nullable = false, columnDefinition = "varchar(64) not null comment '商品关键字'")
+	@Column(name = "words", columnDefinition = "varchar(255) not null comment '商品关键字'")
 	private String words;
 
 	/**
 	 * 全拼音
 	 */
-	@Column(name = "whole_spell", nullable = false, columnDefinition = "varchar(64) not null comment '全拼音'")
+	@Column(name = "whole_spell", columnDefinition = "varchar(255) not null comment '全拼音'")
 	private String wholeSpell;
 
 	/**
 	 * 缩写
 	 */
-	@Column(name = "abbreviate", nullable = false, columnDefinition = "varchar(64) not null comment '缩写'")
+	@Column(name = "abbreviate", columnDefinition = "varchar(255) not null comment '缩写'")
 	private String abbreviate;
 
 	/**
 	 * 类型
 	 */
-	@Column(name = "type", nullable = false, columnDefinition = "varchar(64) not null comment '类型'")
+	@Column(name = "type", columnDefinition = "varchar(255) not null comment '类型'")
 	private String type;
 
 	/**
 	 * 排序
 	 */
-	@Column(name = "sort", nullable = false, columnDefinition = "int not null comment '排序'")
+	@Column(name = "sort", columnDefinition = "int not null default 0  comment '排序'")
 	private Integer sort;
 }

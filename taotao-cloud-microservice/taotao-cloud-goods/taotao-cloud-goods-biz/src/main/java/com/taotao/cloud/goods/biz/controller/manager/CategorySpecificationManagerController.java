@@ -46,7 +46,7 @@ public class CategorySpecificationManagerController {
 	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
-	public Result<List<Specification>> getCategorySpec(@PathVariable String categoryId) {
+	public Result<List<Specification>> getCategorySpec(@PathVariable Long categoryId) {
 		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
 	}
 
@@ -54,7 +54,7 @@ public class CategorySpecificationManagerController {
 	@RequestLogger("查询某分类下绑定的规格信息,商品操作使用")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/goods/{categoryId}")
-	public Result<List<Specification>> getSpec(@PathVariable String categoryId) {
+	public Result<List<Specification>> getSpec(@PathVariable Long categoryId) {
 		return Result.success(specificationService.list());
 	}
 
@@ -62,7 +62,7 @@ public class CategorySpecificationManagerController {
 	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}")
-	public Result<Boolean> saveCategoryBrand(@PathVariable String categoryId,
+	public Result<Boolean> saveCategoryBrand(@PathVariable Long categoryId,
 		@RequestParam String[] categorySpecs) {
 		//删除分类规格绑定信息
 		this.categorySpecificationService.remove(

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class GoodsSkuStockDTO {
 
 	@Schema(description = "商品skuId")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "库存")
 	private Integer quantity;

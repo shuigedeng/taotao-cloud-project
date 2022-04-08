@@ -11,11 +11,10 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 
 	/**
 	 * 添加商品相册
-	 *
-	 * @param goodsGalleryList 商品相册列表
+	 *  @param goodsGalleryList 商品相册列表
 	 * @param goodsId          商品ID
 	 */
-	Boolean add(List<String> goodsGalleryList, String goodsId);
+	Boolean add(List<String> goodsGalleryList, Long goodsId);
 
 	/**
 	 * 根据原图获取缩略图
@@ -31,6 +30,6 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 	 * @param goodsId 商品ID
 	 * @return 商品相册列表
 	 */
-	List<GoodsGallery> goodsGalleryList(String goodsId);
+	List<GoodsGallery> goodsGalleryList(Long goodsId);
 
 }

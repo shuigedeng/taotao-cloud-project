@@ -17,23 +17,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CategoryBrandServiceImpl extends
-	ServiceImpl<CategoryBrandMapper, CategoryBrand> implements
-	CategoryBrandService {
+	ServiceImpl<CategoryBrandMapper, CategoryBrand> implements CategoryBrandService {
 
 	@Override
-	public List<CategoryBrandVO> getCategoryBrandList(String categoryId) {
+	public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {
 		return this.baseMapper.getCategoryBrandList(categoryId);
 	}
 
 	@Override
-	public Boolean deleteByCategoryId(String categoryId) {
+	public Boolean deleteByCategoryId(Long categoryId) {
 		return this.baseMapper.delete(
 			new LambdaUpdateWrapper<CategoryBrand>().eq(CategoryBrand::getCategoryId, categoryId))
 			> 0;
 	}
 
 	@Override
-	public List<CategoryBrand> getCategoryBrandListByBrandId(List<String> brandId) {
+	public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
 		return this.list(
 			new LambdaQueryWrapper<CategoryBrand>().in(CategoryBrand::getBrandId, brandId));
 	}
@@ -43,10 +42,11 @@ public class CategoryBrandServiceImpl extends
 	public Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
 		//删除分类品牌绑定信息
 		this.deleteByCategoryId(categoryId);
+
 		//绑定品牌信息
 		if (!brandIds.isEmpty()) {
 			List<CategoryBrand> categoryBrands = new ArrayList<>();
-			for (String brandId : brandIds) {
+			for (Long brandId : brandIds) {
 				categoryBrands.add(new CategoryBrand(categoryId, brandId));
 			}
 			this.saveBatch(categoryBrands);

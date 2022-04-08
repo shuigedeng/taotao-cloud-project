@@ -1,16 +1,13 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.BrandPageDTO;
+import com.taotao.cloud.goods.api.dto.BrandPageQuery;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.mapstruct.BrandMapStruct;
@@ -19,11 +16,8 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,7 +50,7 @@ public class BrandManagerController {
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable String id) {
+	public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
 		Brand brand = brandService.getById(id);
 		return Result.success(BrandMapStruct.INSTANCE.brandToBrandVO(brand));
 	}
@@ -74,7 +68,7 @@ public class BrandManagerController {
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<BrandVO>> page(@Validated BrandPageDTO page) {
+	public Result<PageModel<BrandVO>> page(@Validated BrandPageQuery page) {
 		IPage<Brand> brandPage = brandService.getBrandsByPage(page);
 		return Result.success(PageModel.convertMybatisPage(brandPage, BrandVO.class));
 	}
@@ -91,7 +85,7 @@ public class BrandManagerController {
 	@RequestLogger("更新品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@PathVariable String id, @Validated BrandDTO brand) {
+	public Result<Boolean> update(@PathVariable Long id, @Validated BrandDTO brand) {
 		brand.setId(id);
 		return Result.success(brandService.updateBrand(brand));
 	}
@@ -100,7 +94,7 @@ public class BrandManagerController {
 	@RequestLogger("后台禁用品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{brandId}")
-	public Result<Object> disable(@PathVariable String brandId,
+	public Result<Object> disable(@PathVariable Long brandId,
 		@RequestParam Boolean disable) {
 			return Result.success(brandService.brandDisable(brandId, disable));
 	}
@@ -109,7 +103,7 @@ public class BrandManagerController {
 	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
-	public Result<Object> delAllByIds(@PathVariable List<String> ids) {
+	public Result<Object> delAllByIds(@PathVariable List<Long> ids) {
 		brandService.deleteBrands(ids);
 		return Result.success(ResultEnum.SUCCESS);
 	}

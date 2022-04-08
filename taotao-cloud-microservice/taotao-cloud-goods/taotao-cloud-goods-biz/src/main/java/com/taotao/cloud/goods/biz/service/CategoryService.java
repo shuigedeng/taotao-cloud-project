@@ -21,7 +21,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param parentId 分类父ID
 	 * @return 商品分类列表
 	 */
-	List<Category> dbList(String parentId);
+	List<Category> dbList(Long parentId);
 
 	/**
 	 * 获取分类
@@ -29,7 +29,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param id
 	 */
 	@Cacheable(key = "#id")
-	Category getCategoryById(String id);
+	Category getCategoryById(Long id);
 
 	/**
 	 * 根据分类id集合获取所有分类根据层级排序
@@ -37,7 +37,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param ids 分类ID集合
 	 * @return 商品分类列表
 	 */
-	List<Category> listByIdsOrderByLevel(List<String> ids);
+	List<Category> listByIdsOrderByLevel(List<Long> ids);
 
 	/**
 	 * 获取分类树
@@ -52,7 +52,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param parentId 分类父ID
 	 * @return 所有的分类，父子关系
 	 */
-	List<CategoryVO> listAllChildren(String parentId);
+	List<CategoryVO> listAllChildren(Long parentId);
 
 	/**
 	 * 查询所有的分类，父子关系 数据库获取
@@ -67,7 +67,7 @@ public interface CategoryService extends IService<Category> {
 	 * @param ids 指定分类id集合
 	 * @return 分类名称集合
 	 */
-	List<String> getCategoryNameByIds(List<String> ids);
+	List<String> getCategoryNameByIds(List<Long> ids);
 
 	/**
 	 * 获取商品分类list
@@ -99,15 +99,14 @@ public interface CategoryService extends IService<Category> {
 	 *
 	 * @param id 分类ID
 	 */
-	Boolean delete(String id);
+	Boolean delete(Long id);
 
 	/**
 	 * 分类状态的更改
-	 *
-	 * @param categoryId       商品分类ID
+	 *  @param categoryId       商品分类ID
 	 * @param enableOperations 是否可用
 	 */
-	Boolean updateCategoryStatus(String categoryId, Boolean enableOperations);
+	Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations);
 
 	/**
 	 * 获取商家经营类目

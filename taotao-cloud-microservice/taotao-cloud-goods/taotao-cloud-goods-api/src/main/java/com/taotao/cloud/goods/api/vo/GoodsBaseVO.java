@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "商品基础VO")
 public class GoodsBaseVO {
-	private String id;
+	private Long id;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
@@ -115,4 +115,6 @@ public class GoodsBaseVO {
 
 	@Schema(description = "商品参数json")
 	private String params;
+
+	private Boolean delFlag;
 }

@@ -48,12 +48,12 @@ public interface CustomWordsService extends IService<CustomWords> {
 	 * @param id 自定义分词id
 	 * @return 是否删除成功
 	 */
-	Boolean deleteCustomWords(String id);
+	Boolean deleteCustomWords(Long id);
 
 	/**
 	 * 分页查询自定义分词
 	 *
-	 * @param words  分词
+	 * @param words     分词
 	 * @param pageParam 分页信息
 	 * @return 自定义分词分页信息
 	 */

@@ -13,11 +13,15 @@ import com.taotao.cloud.goods.biz.entity.Parameters;
 import com.taotao.cloud.goods.biz.mapper.ParametersMapper;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.ParametersService;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,11 +38,8 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	 */
 	private final GoodsService goodsService;
 
-	//@Autowired
-	//private RocketmqCustomProperties rocketmqCustomProperties;
-
-	//@Autowired
-	//private RocketMQTemplate rocketMQTemplate;
+	private final RocketmqCustomProperties rocketmqCustomProperties;
+	private final RocketMQTemplate rocketMQTemplate;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -68,11 +69,11 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 				goodsIds.add(goods.get("id").toString());
 			}
 
-			//String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
-			//	+ GoodsTagsEnum.UPDATE_GOODS_INDEX.name();
-			////发送mq消息
-			//rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goodsIds),
-			//	RocketmqSendCallbackBuilder.commonCallback());
+			String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
+				+ GoodsTagsEnum.UPDATE_GOODS_INDEX.name();
+			//发送mq消息
+			rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(goodsIds),
+				RocketmqSendCallbackBuilder.commonCallback());
 		}
 		return this.updateById(parameters);
 	}
@@ -104,7 +105,7 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	 */
 	private void setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, Parameters parameters) {
 		if (goodsParamsItemDTO.getParamId().equals(parameters.getId())) {
-			//goodsParamsItemDTO.setParamId(parameters.getId());
+			goodsParamsItemDTO.setParamId(parameters.getId());
 			goodsParamsItemDTO.setParamName(parameters.getParamName());
 			goodsParamsItemDTO.setRequired(parameters.getRequired());
 			goodsParamsItemDTO.setIsIndex(parameters.getIsIndex());

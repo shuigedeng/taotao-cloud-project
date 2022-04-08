@@ -57,7 +57,7 @@ public class GoodsUnitManagerController {
 	@RequestLogger("获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
-	public Result<GoodsUnit> getById(@NotNull @PathVariable String id) {
+	public Result<GoodsUnit> getById(@NotNull @PathVariable Long id) {
 		return Result.success(goodsUnitService.getById(id));
 	}
 
@@ -73,7 +73,7 @@ public class GoodsUnitManagerController {
 	@RequestLogger("编辑商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@NotNull @PathVariable String id, @Valid @RequestBody GoodsUnit goodsUnit) {
+	public Result<Boolean> update(@NotNull @PathVariable Long id, @Valid @RequestBody GoodsUnit goodsUnit) {
 		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
@@ -82,7 +82,7 @@ public class GoodsUnitManagerController {
 	@RequestLogger("删除商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{ids}")
-	public Result<Boolean> delete(@NotEmpty(message = "id不能为空") @PathVariable List<String> ids) {
+	public Result<Boolean> delete(@NotEmpty(message = "id不能为空") @PathVariable List<Long> ids) {
 		return Result.success(goodsUnitService.removeByIds(ids));
 	}
 

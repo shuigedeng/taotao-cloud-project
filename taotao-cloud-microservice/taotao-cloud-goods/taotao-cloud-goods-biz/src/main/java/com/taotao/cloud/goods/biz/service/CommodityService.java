@@ -26,7 +26,7 @@ public interface CommodityService extends IService<Commodity> {
 	 * @param goodsId 直播商品ID
 	 * @return 删除结果
 	 */
-	Boolean deleteCommodity(String goodsId);
+	Boolean deleteCommodity(Long goodsId);
 
 	/**
 	 * 查询微信小程序直播商品审核状态
@@ -36,7 +36,7 @@ public interface CommodityService extends IService<Commodity> {
 	/**
 	 * 查看直播商品分页
 	 *
-	 * @param pageParam      分页
+	 * @param pageParam   分页
 	 * @param name        商品名称
 	 * @param auditStatus 审核状态
 	 * @return 直播商品分页
