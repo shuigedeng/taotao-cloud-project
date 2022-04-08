@@ -14,11 +14,10 @@ public interface OrderComplaintCommunicationService extends IService<OrderCompla
     /**
      * 添加订单投诉通信
      *
-     * @param complainId id
-     * @param content 内容
+     * @param orderComplaintCommunication 订单投诉通信
      * @return 状态
      */
-    Boolean addCommunication(Long complainId, String content);
+    Boolean addCommunication(OrderComplaintCommunication orderComplaintCommunication);
 
     /**
      * 获取通信记录

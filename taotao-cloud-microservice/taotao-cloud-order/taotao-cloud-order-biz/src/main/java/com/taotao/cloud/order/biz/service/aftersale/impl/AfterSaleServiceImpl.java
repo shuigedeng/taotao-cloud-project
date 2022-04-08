@@ -272,7 +272,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	//@SystemLogPoint(description = "售后-商家收货", customerLog =
 	//	"'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']" +
 	//		",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
-	public AfterSale storeConfirm(String afterSaleSn, String serviceStatus, String remark) {
+	public Boolean storeConfirm(String afterSaleSn, String serviceStatus, String remark) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -303,7 +303,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 		this.updateOrderItemAfterSaleStatus(afterSale);
 		//发送售后消息
 		this.sendAfterSaleMessage(afterSale);
-		return afterSale;
+		return true;
 	}
 
 	@Override

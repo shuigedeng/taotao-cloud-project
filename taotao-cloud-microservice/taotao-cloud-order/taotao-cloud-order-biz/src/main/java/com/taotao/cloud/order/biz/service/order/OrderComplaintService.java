@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintOperationParams;
+import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
-import com.taotao.cloud.order.api.vo.order.StoreAppealVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 
 /**
@@ -30,7 +29,7 @@ public interface OrderComplaintService extends IService<OrderComplaint> {
 	 * @param id 交易投诉ID
 	 * @return 交易投诉详情
 	 */
-	OrderComplaintVO getOrderComplainById(String id);
+	OrderComplaintVO getOrderComplainById(Long id);
 
 	/**
 	 * 获取交易投诉详情
@@ -38,7 +37,7 @@ public interface OrderComplaintService extends IService<OrderComplaint> {
 	 * @param storeId 店铺id
 	 * @return 交易投诉详情
 	 */
-	OrderComplaint getOrderComplainByStoreId(String storeId);
+	OrderComplaint getOrderComplainByStoreId(Long storeId);
 
 	/**
 	 * 添加交易投诉
@@ -77,7 +76,7 @@ public interface OrderComplaintService extends IService<OrderComplaint> {
 	 * @param id 交易投诉ID
 	 * @return 操作状态
 	 */
-	boolean cancel(String id);
+	Boolean cancel(Long id);
 
 	/**
 	 * 店铺申诉
@@ -85,5 +84,5 @@ public interface OrderComplaintService extends IService<OrderComplaint> {
 	 * @param storeAppealVO
 	 * @return 操作状态
 	 */
-	boolean appeal(StoreAppealVO storeAppealVO);
+	Boolean appeal(StoreAppealDTO storeAppealDTO);
 }

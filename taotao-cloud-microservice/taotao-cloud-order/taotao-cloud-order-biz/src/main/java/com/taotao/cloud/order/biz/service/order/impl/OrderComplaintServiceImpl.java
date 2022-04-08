@@ -11,9 +11,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.OperationalJudgment;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
@@ -21,6 +23,7 @@ import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.StoreAppealVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.mapper.order.OrderComplaintMapper;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
@@ -103,7 +106,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	 * @return 交易投诉详情
 	 */
 	@Override
-	public OrderComplaintVO getOrderComplainById(String id) {
+	public OrderComplaintVO getOrderComplainById(Long id) {
 		OrderComplaint orderComplaint = this.checkOrderComplainExist(id);
 		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(OrderComplaintCommunication::getComplainId, id);
@@ -124,7 +127,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	 * @return 交易投诉详情
 	 */
 	@Override
-	public OrderComplaint getOrderComplainByStoreId(String storeId) {
+	public OrderComplaint getOrderComplainByStoreId(Long storeId) {
 		return this.getOne(new LambdaQueryWrapper<OrderComplaint>().eq(OrderComplaint::getStoreId, storeId));
 	}
 
@@ -136,7 +139,6 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	 */
 	@Override
 	public OrderComplaint addOrderComplain(OrderComplaintDTO orderComplaintDTO) {
-
 		try {
 			AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
 			//查询订单信息
@@ -219,7 +221,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	}
 
 	@Override
-	public boolean cancel(String id) {
+	public Boolean cancel(String id) {
 		OrderComplaint orderComplaint = OperationalJudgment.judgment(this.getById(id));
 		//如果以及仲裁，则不可以进行申诉取消
 		if (orderComplaint.getComplainStatus().equals(ComplaintStatusEnum.COMPLETE.name())) {
@@ -232,11 +234,11 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	}
 
 	@Override
-	public boolean appeal(StoreAppealVO storeAppealVO) {
+	public Boolean appeal(StoreAppealDTO storeAppealDTO) {
 		//获取投诉信息
-		OrderComplaint orderComplaint = OperationalJudgment.judgment(this.checkOrderComplainExist(storeAppealVO.getOrderComplaintId()));
-		orderComplaint.setAppealContent(storeAppealVO.getAppealContent());
-		orderComplaint.setAppealImages(storeAppealVO.getAppealImages());
+		OrderComplaint orderComplaint = OperationalJudgment.judgment(this.checkOrderComplainExist(storeAppealDTO.getOrderComplaintId()));
+		orderComplaint.setAppealContent(storeAppealDTO.getAppealContent());
+		orderComplaint.setAppealImages(storeAppealDTO.getAppealImages());
 		orderComplaint.setAppealTime(LocalDateTime.now());
 		orderComplaint.setComplainStatus(ComplaintStatusEnum.WAIT_ARBITRATION.name());
 		this.updateById(orderComplaint);

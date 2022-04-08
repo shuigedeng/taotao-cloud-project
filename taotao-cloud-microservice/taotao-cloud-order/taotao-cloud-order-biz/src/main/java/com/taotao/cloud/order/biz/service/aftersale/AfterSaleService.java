@@ -98,7 +98,7 @@ public interface AfterSaleService extends IService<AfterSale> {
      * @param remark        商家备注
      * @return 售后服务
      */
-    AfterSale storeConfirm(String afterSaleSn, String serviceStatus, String remark);
+    Boolean storeConfirm(String afterSaleSn, String serviceStatus, String remark);
 
     /**
      * 平台退款-线下支付

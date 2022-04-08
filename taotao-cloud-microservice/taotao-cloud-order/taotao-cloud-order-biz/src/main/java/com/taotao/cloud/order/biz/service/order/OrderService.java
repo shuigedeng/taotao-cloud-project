@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.service.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
@@ -85,7 +86,7 @@ public interface OrderService extends IService<Order> {
      * @param pintuanId 拼团id
      * @return 拼团订单信息
      */
-    List<Order> queryListByPromotion(String pintuanId);
+    List<Order> queryListByPromotion(Long pintuanId);
 
 
 
@@ -161,7 +162,7 @@ public interface OrderService extends IService<Order> {
      * @param logisticsId   物流公司
      * @return 订单
      */
-    Order delivery(String orderSn, String invoiceNumber, String logisticsId);
+    Order delivery(String orderSn, String invoiceNumber, Long logisticsId);
 
     /**
      * 获取物流踪迹
@@ -238,7 +239,7 @@ public interface OrderService extends IService<Order> {
      * @param pintuanId     拼团活动id
      * @param parentOrderSn 拼团订单sn
      */
-    void agglomeratePintuanOrder(String pintuanId, String parentOrderSn);
+    void agglomeratePintuanOrder(Long pintuanId, String parentOrderSn);
 
     /**
      * 获取待发货订单编号列表

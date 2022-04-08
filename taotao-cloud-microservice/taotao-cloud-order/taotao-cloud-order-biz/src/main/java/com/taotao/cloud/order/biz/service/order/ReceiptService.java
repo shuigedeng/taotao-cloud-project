@@ -52,7 +52,7 @@ public interface ReceiptService extends IService<Receipt> {
      * @param receiptId 发票id
      * @return
      */
-    Receipt invoicing(String receiptId);
+    Receipt invoicing(Long receiptId);
 
 
 }

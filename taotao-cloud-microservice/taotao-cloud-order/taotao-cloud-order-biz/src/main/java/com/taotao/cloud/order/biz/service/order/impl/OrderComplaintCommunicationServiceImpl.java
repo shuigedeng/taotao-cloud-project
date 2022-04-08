@@ -20,15 +20,7 @@ public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<OrderCom
 	OrderComplaintCommunicationService {
 
 	@Override
-	public Boolean addCommunication(Long complainId, String content) {
-		SecurityUser user = SecurityUtil.getUser();
-		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
-			.complainId(complainId)
-			.content(content)
-			.owner(CommunicationOwnerEnum.PLATFORM.name())
-			.ownerName(user.getUsername())
-			.ownerId(user.getUserId())
-			.build();
+	public Boolean addCommunication(OrderComplaintCommunication orderComplaintCommunication) {
 		return this.save(orderComplaintCommunication);
 	}
 

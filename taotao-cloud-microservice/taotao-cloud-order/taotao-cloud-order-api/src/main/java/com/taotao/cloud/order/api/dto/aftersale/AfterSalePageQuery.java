@@ -39,7 +39,7 @@ public class AfterSalePageQuery extends PageParam {
 	private String storeName;
 
 	@Schema(description = "商家ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;

@@ -99,13 +99,13 @@ public class OrderComplaint extends BaseSuperEntity<OrderInfo, Long> {
 	 */
 	@Schema(description = "商品id")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String goodsId;
+	private Long goodsId;
 	/**
 	 * 应用ID
 	 */
 	@Schema(description = "sku主键")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String skuId;
+	private Long skuId;
 	/**
 	 * 应用ID
 	 */
@@ -147,7 +147,7 @@ public class OrderComplaint extends BaseSuperEntity<OrderInfo, Long> {
 	 */
 	@Schema(description = "商家id")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String storeId;
+	private Long storeId;
 	/**
 	 * 应用ID
 	 */
@@ -159,7 +159,7 @@ public class OrderComplaint extends BaseSuperEntity<OrderInfo, Long> {
 	 */
 	@Schema(description = "会员id")
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
-	private String memberId;
+	private Long memberId;
 	/**
 	 * 应用ID
 	 */
