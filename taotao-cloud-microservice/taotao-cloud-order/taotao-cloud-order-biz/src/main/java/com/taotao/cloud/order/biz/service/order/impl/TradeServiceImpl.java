@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 交易业务层实现
  */
+@AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements TradeService {
@@ -45,43 +48,35 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
 	/**
 	 * 缓存
 	 */
-	@Autowired
-	private RedisRepository redisRepository;
+	private final RedisRepository redisRepository;
 	/**
 	 * 订单
 	 */
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 	/**
 	 * 会员
 	 */
-	@Autowired
-	private IFeignMemberService memberService;
+	private final IFeignMemberService memberService;
 	/**
 	 * 优惠券
 	 */
-	@Autowired
-	private IFeignCouponService couponService;
+	private final IFeignCouponService couponService;
 	/**
 	 * 会员优惠券
 	 */
-	@Autowired
-	private IFeignMemberCouponService memberCouponService;
+	private final IFeignMemberCouponService memberCouponService;
 	/**
 	 * 砍价
 	 */
-	@Autowired
-	private IFeignKanjiaActivityService kanjiaActivityService;
+	private final IFeignKanjiaActivityService kanjiaActivityService;
 	/**
 	 * RocketMQ
 	 */
-	@Autowired
-	private RocketMQTemplate rocketMQTemplate;
+	private final RocketMQTemplate rocketMQTemplate;
 	/**
 	 * RocketMQ 配置
 	 */
-	@Autowired
-	private RocketmqCustomProperties rocketmqCustomProperties;
+	private final RocketmqCustomProperties rocketmqCustomProperties;
 
 
 	@Override

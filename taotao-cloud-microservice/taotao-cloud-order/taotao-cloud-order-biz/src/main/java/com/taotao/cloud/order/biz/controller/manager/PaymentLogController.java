@@ -8,6 +8,7 @@ import com.taotao.cloud.order.api.vo.order.PaymentLog;
 import com.taotao.cloud.order.biz.service.order.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -19,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,收款日志接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-收款日志管理API", description = "平台管理端-收款日志管理API")
 @RequestMapping("/order/manager/paymentLog")
 public class PaymentLogController {
 
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 
 	@Operation(summary = "分页获取支付日志", description = "分页获取支付日志", method = CommonConstant.GET)
 	@RequestLogger("分页获取支付日志")

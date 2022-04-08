@@ -29,6 +29,7 @@ import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationServi
 import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
 import com.taotao.cloud.order.biz.service.order.OrderItemService;
 import com.taotao.cloud.order.biz.service.order.OrderService;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,7 @@ import java.util.Objects;
 /**
  * 交易投诉业务层实现
  **/
+@AllArgsConstructor
 @Service
 public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper, OrderComplaint> implements
 	OrderComplaintService {
@@ -47,23 +49,19 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	/**
 	 * 订单
 	 */
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 	/**
 	 * 订单货物
 	 */
-	@Autowired
-	private OrderItemService orderItemService;
+	private final OrderItemService orderItemService;
 	/**
 	 * 商品规格
 	 */
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final GoodsSkuService goodsSkuService;
 	/**
 	 * 交易投诉沟通
 	 */
-	@Autowired
-	private OrderComplaintCommunicationService orderComplaintCommunicationService;
+	private final OrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	/**
 	 * 分页获取交易投诉信息

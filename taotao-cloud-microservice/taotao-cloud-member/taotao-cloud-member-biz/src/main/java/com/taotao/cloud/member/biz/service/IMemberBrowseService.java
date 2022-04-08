@@ -34,7 +34,7 @@ public interface IMemberBrowseService extends IService<MemberBrowse> {
 	 * @param ids 商品ID列表
 	 * @return 处理结果
 	 */
-	boolean deleteByIds(List<String> ids);
+	boolean deleteByIds(List<Long> ids);
 
 	/**
 	 * 获取会员浏览历史分页

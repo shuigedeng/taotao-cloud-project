@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.controller.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
@@ -12,6 +13,8 @@ import com.taotao.cloud.order.biz.service.order.ReceiptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
+
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,17 +28,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 店铺端,发票接口
  **/
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-发票API", description = "店铺端-发票API")
 @RequestMapping("/order/seller/receipt")
 public class ReceiptController {
 
-	@Autowired
-	private ReceiptService receiptService;
+	private final ReceiptService receiptService;
 
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 
 	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
 	@RequestLogger("分页获取")

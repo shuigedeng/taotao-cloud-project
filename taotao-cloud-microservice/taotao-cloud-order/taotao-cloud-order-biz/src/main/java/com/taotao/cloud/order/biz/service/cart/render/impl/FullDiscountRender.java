@@ -17,23 +17,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * FullDiscountRender
  */
+@AllArgsConstructor
 @Service
 public class FullDiscountRender implements CartRenderStep {
 
-	@Autowired
-	private FullDiscountService fullDiscountService;
+	private final FullDiscountService fullDiscountService;
 
-	@Autowired
-	private PromotionPriceUtil promotionPriceUtil;
+	private final PromotionPriceUtil promotionPriceUtil;
 
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final GoodsSkuService goodsSkuService;
 
 	@Override
 	public RenderStepEnums step() {

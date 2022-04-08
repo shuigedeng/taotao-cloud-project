@@ -28,7 +28,6 @@ public class GoodsWords extends BaseSuperEntity<GoodsWords, Long> {
 
 	public static final String TABLE_NAME = "tt_goods_words";
 
-
 	/**
 	 * 商品关键字
 	 */

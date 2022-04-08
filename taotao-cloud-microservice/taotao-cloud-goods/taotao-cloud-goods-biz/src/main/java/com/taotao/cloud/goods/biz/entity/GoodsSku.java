@@ -34,7 +34,7 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	 * 商品id
 	 */
 	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品id'")
-	private String goodsId;
+	private Long goodsId;
 
 	/**
 	 * 规格信息json
@@ -52,7 +52,7 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	 * 配送模版id
 	 */
 	@Column(name = "freight_template_id", nullable = false, columnDefinition = "varchar(64) not null comment '配送模版id'")
-	private String freightTemplateId;
+	private Long freightTemplateId;
 
 	/**
 	 * 是否是促销商品
@@ -82,7 +82,7 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	 * 品牌id
 	 */
 	@Column(name = "brand_id", nullable = false, columnDefinition = "varchar(64) not null comment '品牌id'")
-	private String brandId;
+	private Long brandId;
 
 	/**
 	 * 分类path
@@ -198,7 +198,7 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	 * 卖家id
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '卖家id'")
-	private String storeId;
+	private Long storeId;
 
 	/**
 	 * 卖家名字
@@ -210,7 +210,7 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	 * 运费模板id
 	 */
 	@Column(name = "template_id", nullable = false, columnDefinition = "varchar(64) not null comment '运费模板id'")
-	private String templateId;
+	private Long templateId;
 
 	/**
 	 * 审核状态

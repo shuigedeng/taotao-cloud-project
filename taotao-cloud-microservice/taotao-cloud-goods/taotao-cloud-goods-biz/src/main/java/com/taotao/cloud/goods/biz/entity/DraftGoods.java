@@ -49,7 +49,7 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 	 * 品牌id
 	 */
 	@Column(name = "brand_id", nullable = false, columnDefinition = "varchar(64) not null comment '品牌id'")
-	private String brandId;
+	private Long brandId;
 
 	/**
 	 * 分类path
@@ -153,7 +153,7 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 	 * 卖家id
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '卖家id'")
-	private String storeId;
+	private Long storeId;
 
 	/**
 	 * 卖家名字
@@ -165,7 +165,7 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 	 * 运费模板id
 	 */
 	@Column(name = "template_id", nullable = false, columnDefinition = "varchar(64) not null comment '运费模板id'")
-	private String templateId;
+	private Long templateId;
 
 	/**
 	 * 是否自营

@@ -4,6 +4,8 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
@@ -18,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,24 +30,19 @@ import org.springframework.stereotype.Service;
 /**
  * 商品有效性校验
  */
+@AllArgsConstructor
 @Service
 public class CheckDataRender implements CartRenderStep {
 
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final IFeignGoodsSkuService goodsSkuService;
 
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 
-	@Autowired
-	private PintuanService pintuanService;
+	private final IFeignPintuanService pintuanService;
 
-	@Autowired
-	private MemberService memberService;
+	private final IFeignMemberService memberService;
 
-	@Autowired
-	private PointsGoodsService pointsGoodsService;
-
+	private final PointsGoodsService pointsGoodsService;
 
 	@Override
 	public RenderStepEnums step() {

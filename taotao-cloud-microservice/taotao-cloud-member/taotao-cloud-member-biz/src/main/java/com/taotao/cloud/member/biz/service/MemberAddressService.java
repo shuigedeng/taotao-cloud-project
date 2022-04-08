@@ -9,7 +9,7 @@ import com.taotao.cloud.member.biz.entity.MemberAddress;
 /**
  * 收货地址业务层
  */
-public interface IMemberAddressService extends IService<MemberAddress> {
+public interface MemberAddressService extends IService<MemberAddress> {
 
 	/**
 	 * 根据会员获取会员地址分页列表

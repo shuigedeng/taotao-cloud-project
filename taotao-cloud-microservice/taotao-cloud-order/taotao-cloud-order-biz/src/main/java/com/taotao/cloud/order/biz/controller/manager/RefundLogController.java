@@ -7,6 +7,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -18,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,退款日志接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-退款日志管理API", description = "平台管理端-退款日志管理API")
 @RequestMapping("/order/manager/refundLog")
 public class RefundLogController {
 
-	@Autowired
-	private RefundLogService refundLogService;
+	private final RefundLogService refundLogService;
 
 	@Operation(summary = "查看退款日志详情", description = "查看退款日志详情", method = CommonConstant.GET)
 	@RequestLogger("查看退款日志详情")

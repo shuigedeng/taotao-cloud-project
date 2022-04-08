@@ -62,7 +62,7 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> queryById(
-		@Parameter(description = "评价ID", required = true) @NotBlank(message = "评价ID不能为空") @PathVariable("id") String id) {
+		@Parameter(description = "评价ID", required = true) @NotBlank(message = "评价ID不能为空") @PathVariable("id") Long id) {
 		return Result.success(memberEvaluationService.queryById(id));
 	}
 

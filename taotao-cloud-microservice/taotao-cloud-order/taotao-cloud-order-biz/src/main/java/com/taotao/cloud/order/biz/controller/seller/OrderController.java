@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,28 +43,25 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 店铺端,订单接口
  **/
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-订单API", description = "店铺端-订单API")
-@Slf4j
 @RequestMapping("/order/seller/orders")
 public class OrderController {
 
 	/**
 	 * 订单
 	 */
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 	/**
 	 * 订单价格
 	 */
-	@Autowired
-	private OrderPriceService orderPriceService;
+	private final OrderPriceService orderPriceService;
 	/**
 	 * 物流公司
 	 */
-	@Autowired
-	private StoreLogisticsService storeLogisticsService;
+	private final StoreLogisticsService storeLogisticsService;
 
 	@Operation(summary = "查询订单列表", description = "查询订单列表", method = CommonConstant.GET)
 	@RequestLogger("查询订单列表")

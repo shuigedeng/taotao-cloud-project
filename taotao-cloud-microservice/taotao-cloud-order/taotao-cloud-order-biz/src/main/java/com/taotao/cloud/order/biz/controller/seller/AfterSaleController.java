@@ -16,6 +16,7 @@ import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,14 +30,14 @@ import java.util.List;
 /**
  * 店铺端,售后管理接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-售后API", description = "店铺端-售后API")
 @RequestMapping("/order/seller/afterSale")
 public class AfterSaleController {
 
-	@Autowired
-	private AfterSaleService afterSaleService;
+	private final  AfterSaleService afterSaleService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情", method = CommonConstant.GET)
 	@RequestLogger("查看售后服务详情")

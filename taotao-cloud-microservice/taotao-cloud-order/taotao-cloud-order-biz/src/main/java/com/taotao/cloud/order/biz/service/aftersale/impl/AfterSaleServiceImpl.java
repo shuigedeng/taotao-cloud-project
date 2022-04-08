@@ -44,6 +44,7 @@ import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
+import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,7 @@ import java.util.List;
 /**
  * 售后业务层实现
  */
+@AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale> implements
@@ -63,38 +65,31 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	/**
 	 * 订单
 	 */
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 	/**
 	 * 订单货物
 	 */
-	@Autowired
-	private OrderItemService orderItemService;
+	private final OrderItemService orderItemService;
 	/**
 	 * 物流公司
 	 */
-	@Autowired
-	private IFeignLogisticsService logisticsService;
+	private final IFeignLogisticsService logisticsService;
 	/**
 	 * 店铺详情
 	 */
-	@Autowired
-	private IFeignStoreDetailService storeDetailService;
+	private final IFeignStoreDetailService storeDetailService;
 	/**
 	 * 售后支持，这里用于退款操作
 	 */
-	@Autowired
-	private RefundSupport refundSupport;
+	private final RefundSupport refundSupport;
 	/**
 	 * RocketMQ配置
 	 */
-	@Autowired
-	private RocketmqCustomProperties rocketmqCustomProperties;
+	private final RocketmqCustomProperties rocketmqCustomProperties;
 	/**
 	 * RocketMQ
 	 */
-	@Autowired
-	private RocketMQTemplate rocketMQTemplate;
+	private final RocketMQTemplate rocketMQTemplate;
 
 	@Override
 	public IPage<AfterSale> getAfterSalePages(AfterSalePageQuery saleSearchParams) {

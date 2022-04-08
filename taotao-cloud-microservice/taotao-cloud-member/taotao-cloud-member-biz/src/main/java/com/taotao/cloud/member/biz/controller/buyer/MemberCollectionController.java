@@ -71,7 +71,7 @@ public class MemberCollectionController {
 	@PostMapping("/{type}/{id}")
 	public Result<Boolean> addGoodsCollection(
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable String id) {
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
 		if (goods.equals(type)) {
 			return Result.success(goodsCollectionService.addGoodsCollection(id));
 		}
@@ -85,7 +85,7 @@ public class MemberCollectionController {
 	@DeleteMapping(value = "/{type}/{id}")
 	public Result<Object> deleteGoodsCollection(
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable String id) {
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
 		if (goods.equals(type)) {
 			return Result.success(goodsCollectionService.deleteGoodsCollection(id));
 		}
@@ -98,7 +98,7 @@ public class MemberCollectionController {
 	@GetMapping(value = "/{type}/{id}/collection")
 	public Result<Boolean> isCollection(
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-		@Parameter(description = "id", required = true) @NotBlank(message = "值不能为空") @PathVariable String id) {
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
 		if (goods.equals(type)) {
 			return Result.success(this.goodsCollectionService.isCollection(id));
 		}

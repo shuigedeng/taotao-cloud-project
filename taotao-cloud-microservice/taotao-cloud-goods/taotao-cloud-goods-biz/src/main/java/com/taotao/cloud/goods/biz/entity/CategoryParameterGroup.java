@@ -37,7 +37,7 @@ public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGro
 	 * 关联分类id
 	 */
 	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '关联分类id'")
-	private String categoryId;
+	private Long categoryId;
 
 	/**
 	 * 排序

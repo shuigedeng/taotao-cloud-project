@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.order.api.dto.cart.MemberCouponDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
@@ -16,6 +19,9 @@ import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.cart.CartService;
 import com.taotao.cloud.order.biz.service.cart.render.TradeBuilder;
+import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
+import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +31,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +40,7 @@ import org.springframework.stereotype.Service;
 /**
  * 购物车业务层实现
  */
+@AllArgsConstructor
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -40,55 +49,44 @@ public class CartServiceImpl implements CartService {
 	/**
 	 * 缓存
 	 */
-	@Autowired
-	private RedisRepository redisRepository;
+	private final RedisRepository redisRepository;
 	/**
 	 * 会员优惠券
 	 */
-	@Autowired
-	private MemberCouponService memberCouponService;
+	private final IFeignMemberCouponService memberCouponService;
 	/**
 	 * 规格商品
 	 */
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final IFeignGoodsSkuService goodsSkuService;
 	/**
 	 * 促销商品
 	 */
-	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private final PromotionGoodsService promotionGoodsService;
 	/**
 	 * 促销商品
 	 */
-	@Autowired
-	private PointsGoodsService pointsGoodsService;
+	private final PointsGoodsService pointsGoodsService;
 	/**
 	 * 会员地址
 	 */
-	@Autowired
-	private MemberAddressService memberAddressService;
+	private final MemberAddressService memberAddressService;
 	/**
 	 * ES商品
 	 */
-	@Autowired
-	private EsGoodsSearchService esGoodsSearchService;
+	private final IFeignEsGoodsSearchService esGoodsSearchService;
 	/**
 	 * ES商品
 	 */
-	@Autowired
-	private GoodsService goodsService;
+	private final IFeignGoodsService goodsService;
 	/**
 	 * 拼团
 	 */
-	@Autowired
-	private PintuanService pintuanService;
+	private final IFeignPintuanService pintuanService;
 	/**
 	 * 砍价
 	 */
-	@Autowired
-	private KanjiaActivityService kanjiaActivityService;
-	@Autowired
-	private KanjiaActivityGoodsService kanjiaActivityGoodsService;
+	private final IFeignKanjiaActivityService kanjiaActivityService;
+	private final KanjiaActivityGoodsService kanjiaActivityGoodsService;
 	/**
 	 * 交易
 	 */

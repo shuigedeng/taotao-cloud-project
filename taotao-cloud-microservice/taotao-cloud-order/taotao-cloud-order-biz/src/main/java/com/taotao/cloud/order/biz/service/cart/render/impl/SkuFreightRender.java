@@ -7,17 +7,19 @@ import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * sku 运费计算
  */
+@AllArgsConstructor
 @Service
 public class SkuFreightRender implements CartRenderStep {
 
-	@Autowired
-	private FreightTemplateService freightTemplateService;
+	private final FreightTemplateService freightTemplateService;
 
 	@Override
 	public RenderStepEnums step() {

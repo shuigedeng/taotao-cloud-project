@@ -77,6 +77,8 @@ import java.util.Objects;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+
+import lombok.AllArgsConstructor;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
@@ -90,6 +92,7 @@ import zipkin2.storage.Traces;
 /**
  * 子订单业务层实现
  */
+@AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
@@ -99,56 +102,45 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	/**
 	 * 延时任务
 	 */
-	@Autowired
-	private TimeTrigger timeTrigger;
+	private final TimeTrigger timeTrigger;
 	/**
 	 * 订单货物数据层
 	 */
-	@Resource
-	private OrderItemMapper orderItemMapper;
+	private final OrderItemMapper orderItemMapper;
 	/**
 	 * 发票
 	 */
-	@Autowired
-	private ReceiptService receiptService;
+	private final ReceiptService receiptService;
 	/**
 	 * 订单货物
 	 */
-	@Autowired
-	private OrderItemService orderItemService;
+	private final OrderItemService orderItemService;
 	/**
 	 * 物流公司
 	 */
-	@Autowired
-	private IFeignLogisticsService logisticsService;
+	private final IFeignLogisticsService logisticsService;
 	/**
 	 * 订单日志
 	 */
-	@Autowired
-	private OrderLogService orderLogService;
+	private final OrderLogService orderLogService;
 	/**
 	 * RocketMQ
 	 */
-	@Autowired
-	private RocketMQTemplate rocketMQTemplate;
+	private final RocketMQTemplate rocketMQTemplate;
 	/**
 	 * RocketMQ配置
 	 */
-	@Autowired
-	private RocketmqCustomProperties rocketmqCustomProperties;
+	private final RocketmqCustomProperties rocketmqCustomProperties;
 	/**
 	 * 订单流水
 	 */
-	@Autowired
-	private StoreFlowService storeFlowService;
+	private final StoreFlowService storeFlowService;
 	/**
 	 * 拼团
 	 */
-	@Autowired
-	private IFeignPintuanService pintuanService;
+	private final IFeignPintuanService pintuanService;
 
-	@Autowired
-	private TradeService tradeService;
+	private final TradeService tradeService;
 
 	@Override
 	public void intoDB(TradeDTO tradeDTO) {

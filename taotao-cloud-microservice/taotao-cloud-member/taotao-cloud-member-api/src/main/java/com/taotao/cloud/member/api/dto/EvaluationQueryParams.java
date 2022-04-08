@@ -31,7 +31,7 @@ public class EvaluationQueryParams extends PageParam implements Serializable {
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "买家ID")
-	private String memberId;
+	private Long memberId;
 
 	@Schema(description = "会员名称")
 	private String memberName;
@@ -40,13 +40,13 @@ public class EvaluationQueryParams extends PageParam implements Serializable {
 	private String storeName;
 
 	@Schema(description = "卖家ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
 
 	@Schema(description = "商品ID")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评", allowableValues = "GOOD,MODERATE,WORSE")
 	private String grade;

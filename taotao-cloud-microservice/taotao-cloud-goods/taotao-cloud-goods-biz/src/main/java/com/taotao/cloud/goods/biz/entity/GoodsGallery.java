@@ -31,7 +31,7 @@ public class GoodsGallery extends BaseSuperEntity<GoodsGallery, Long> {
 	 * 商品id
 	 */
 	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品id'")
-	private String goodsId;
+	private Long goodsId;
 
 	/**
 	 * 缩略图路径
