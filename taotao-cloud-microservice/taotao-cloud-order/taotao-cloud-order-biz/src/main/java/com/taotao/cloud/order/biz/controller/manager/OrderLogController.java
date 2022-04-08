@@ -8,6 +8,7 @@ import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import com.taotao.cloud.order.biz.service.trade.OrderLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -19,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,订单日志管理接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-订单日志管理API", description = "平台管理端-订单日志管理API")
 @RequestMapping("/order/manager/orderLog")
 public class OrderLogController {
 
-	@Autowired
-	private OrderLogService orderLogService;
+	private final  OrderLogService orderLogService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
 	@RequestLogger("通过id获取")

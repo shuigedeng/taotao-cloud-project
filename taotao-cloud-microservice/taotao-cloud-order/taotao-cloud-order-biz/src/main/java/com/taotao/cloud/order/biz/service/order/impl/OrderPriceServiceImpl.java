@@ -16,6 +16,8 @@ import com.taotao.cloud.order.biz.service.order.OrderService;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.annotation.Resource;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 订单价格业务层实现
  */
+@AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class OrderPriceServiceImpl implements OrderPriceService {
@@ -30,23 +33,19 @@ public class OrderPriceServiceImpl implements OrderPriceService {
 	/**
 	 * 线下收款
 	 */
-	@Autowired
-	private BankTransferPlugin bankTransferPlugin;
+	private final BankTransferPlugin bankTransferPlugin;
 	/**
 	 * 订单货物
 	 */
-	@Autowired
-	private OrderItemService orderItemService;
+	private final OrderItemService orderItemService;
 	/**
 	 * 交易数据层
 	 */
-	@Resource
-	private TradeMapper tradeMapper;
+	private final TradeMapper tradeMapper;
 	/**
 	 * 订单
 	 */
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 
 	@Override
 	@SystemLogPoint(description = "修改订单价格", customerLog = "'订单编号:'+#orderSn +'，价格修改为：'+#orderPrice")

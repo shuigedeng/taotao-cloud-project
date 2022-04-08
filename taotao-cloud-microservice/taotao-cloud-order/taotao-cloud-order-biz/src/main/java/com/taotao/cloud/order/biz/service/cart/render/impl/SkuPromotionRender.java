@@ -8,6 +8,7 @@ import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +16,16 @@ import org.springframework.stereotype.Service;
 /**
  * 购物促销信息渲染实现
  */
+@AllArgsConstructor
 @Service
 public class SkuPromotionRender implements CartRenderStep {
 
 	/**
 	 * 促销商品
 	 */
-	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private final PromotionGoodsService promotionGoodsService;
 
-	@Autowired
-	private KanjiaActivityService kanjiaActivityService;
+	private final KanjiaActivityService kanjiaActivityService;
 
 	@Override
 	public RenderStepEnums step() {

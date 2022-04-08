@@ -2,15 +2,13 @@ package com.taotao.cloud.goods.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * 商品分类表
@@ -38,7 +36,7 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	 * 父id, 根节点为0
 	 */
 	@Column(name = "parent_id", nullable = false, columnDefinition = "varchar(64) not null comment '父id, 根节点为0'")
-	private String parentId;
+	private Long parentId;
 
 	/**
 	 * 层级, 从0开始
@@ -70,15 +68,15 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	@Column(name = "support_channel", nullable = false, columnDefinition = "boolean not null comment '是否支持频道'")
 	private Boolean supportChannel;
 
-	public Category(Long id, String createBy, Date createTime, String updateBy, Date updateTime, Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder, BigDecimal commissionRate, String image, Boolean supportChannel) {
-	    super(id, createBy, createTime, updateBy, updateTime, deleteFlag);
-	    this.name = name;
-	    this.parentId = parentId;
-	    this.level = level;
-	    this.sortOrder = sortOrder;
-	    this.commissionRate = commissionRate;
-	    this.image = image;
-	    this.supportChannel = supportChannel;
+	public Category(Long id, String createBy, LocalDateTime createTime, String updateBy, LocalDateTime updateTime, Boolean deleteFlag, String name, String parentId, Integer level, BigDecimal sortOrder, BigDecimal commissionRate, String image, Boolean supportChannel) {
+		super(id, createBy, createTime, updateBy, updateTime, deleteFlag);
+		this.name = name;
+		this.parentId = parentId;
+		this.level = level;
+		this.sortOrder = sortOrder;
+		this.commissionRate = commissionRate;
+		this.image = image;
+		this.supportChannel = supportChannel;
 	}
 	//
 	//public Category(String id, String name, String parentId, Integer level, BigDecimal sortOrder, BigDecimal commissionRate, String image, Boolean supportChannel) {

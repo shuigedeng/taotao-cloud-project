@@ -192,7 +192,7 @@ public interface MemberService extends IService<Member> {
      * @param status    状态
      * @return 修改结果
      */
-    Boolean updateMemberStatus(List<String> memberIds, Boolean status);
+    Boolean updateMemberStatus(List<Long> memberIds, Boolean status);
 
     /**
      * 根据条件查询会员总数
@@ -209,7 +209,7 @@ public interface MemberService extends IService<Member> {
      * @param memberIds 会员ids
      * @return 指定会员数据
      */
-    List<Map<String, Object>> listFieldsByMemberIds(String columns, List<String> memberIds);
+    List<Map<String, Object>> listFieldsByMemberIds(String columns, List<Long> memberIds);
 
     /**
      * 登出

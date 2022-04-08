@@ -8,25 +8,26 @@ import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.taotao.cloud.redis.repository.RedisRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 分销佣金计算
  */
+@AllArgsConstructor
 @Service
 public class DistributionPriceRender implements CartRenderStep {
 
 	/**
 	 * 缓存
 	 */
-	@Autowired
-	private Cache cache;
+	private final RedisRepository redisRepository;
 
-	@Autowired
-	private DistributionGoodsService distributionGoodsService;
+	private final DistributionGoodsService distributionGoodsService;
 
-	@Override
 	public RenderStepEnums step() {
 		return RenderStepEnums.DISTRIBUTION;
 	}

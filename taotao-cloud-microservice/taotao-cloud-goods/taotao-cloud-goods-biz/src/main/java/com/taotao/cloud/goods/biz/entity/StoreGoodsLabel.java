@@ -33,7 +33,7 @@ public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 	 * 店铺ID
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺ID'")
-	private String storeId;
+	private Long storeId;
 
 	/**
 	 * 店铺商品分类名称
@@ -51,7 +51,7 @@ public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 	 * 父id, 根节点为0
 	 */
 	@Column(name = "parent_id", nullable = false, columnDefinition = "varchar(64) not null comment '父id, 根节点为0'")
-	private String parentId;
+	private Long parentId;
 
 	/**
 	 * 层级, 从0开始

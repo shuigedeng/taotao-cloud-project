@@ -10,11 +10,13 @@ import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationSearchPara
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.mapper.order.OrderComplainCommunicationMapper;
 import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * 交易投诉通信业务层实现
  **/
+@AllArgsConstructor
 @Service
 public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<OrderComplainCommunicationMapper, OrderComplaintCommunication> implements
 	OrderComplaintCommunicationService {

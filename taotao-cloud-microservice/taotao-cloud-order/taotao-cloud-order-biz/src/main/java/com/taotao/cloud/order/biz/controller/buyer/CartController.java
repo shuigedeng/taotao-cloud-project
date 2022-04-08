@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端，购物车接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-购物车API", description = "买家端-购物车API")
@@ -37,8 +40,7 @@ public class CartController {
 	/**
 	 * 购物车
 	 */
-	@Autowired
-	private CartService cartService;
+	private final CartService cartService;
 
 	@Operation(summary = "向购物车中添加一个产品", description = "向购物车中添加一个产品", method = CommonConstant.POST)
 	@RequestLogger("向购物车中添加一个产品")

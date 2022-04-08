@@ -10,30 +10,30 @@ import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import java.math.BigDecimal;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 佣金计算
  */
+@AllArgsConstructor
 @Service
 public class CommissionRender implements CartRenderStep {
 
 	/**
 	 * 商品分类
 	 */
-	@Autowired
-	private CategoryService categoryService;
+	private final CategoryService categoryService;
 	/**
 	 * 积分商品
 	 */
-	@Autowired
-	private PointsGoodsService pointsGoodsService;
+	private final PointsGoodsService pointsGoodsService;
 	/**
 	 * 砍价商品
 	 */
-	@Autowired
-	private KanjiaActivityGoodsService kanjiaActivityGoodsService;
+	private final KanjiaActivityGoodsService kanjiaActivityGoodsService;
 
 	@Override
 	public RenderStepEnums step() {

@@ -41,7 +41,7 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
 	 * 店铺自定义规格暂时废弃 2021-06-23 后续推出新配置方式
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '所属卖家'")
-	private String storeId;
+	private Long storeId;
 
 	/**
 	 * 规格值名字, 《,》分割

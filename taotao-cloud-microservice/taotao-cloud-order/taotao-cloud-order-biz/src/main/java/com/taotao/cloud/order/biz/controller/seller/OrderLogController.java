@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.controller.seller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import com.taotao.cloud.order.biz.service.order.OrderService;
@@ -9,6 +10,8 @@ import com.taotao.cloud.order.biz.service.trade.OrderLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,18 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 店铺端,订单日志接口
  **/
-
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-订单日志API", description = "店铺端-订单日志API")
 @RequestMapping("/order/seller/orderLog")
 public class OrderLogController {
 
-	@Autowired
-	private OrderLogService orderLogService;
+	private final OrderLogService orderLogService;
 
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 	
 	@Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志", method = CommonConstant.GET)
 	@RequestLogger("通过订单编号获取订单日志")

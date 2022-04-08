@@ -54,13 +54,13 @@ public class Parameters extends BaseSuperEntity<Parameters, Long> {
 	 * 参数分组id
 	 */
 	@Column(name = "group_id", nullable = false, columnDefinition = "varchar(64) not null comment '参数分组id'")
-	private String groupId;
+	private Long groupId;
 
 	/**
 	 * 分类id
 	 */
 	@Column(name = "category_id", nullable = false, columnDefinition = "varchar(64) not null comment '分类id'")
-	private String categoryId;
+	private Long categoryId;
 
 	/**
 	 * 排序

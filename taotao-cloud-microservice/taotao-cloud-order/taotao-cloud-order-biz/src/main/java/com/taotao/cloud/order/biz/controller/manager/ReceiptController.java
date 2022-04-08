@@ -9,6 +9,7 @@ import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
 import com.taotao.cloud.order.biz.service.order.ReceiptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -19,15 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 管理端,发票记录接口
  **/
-
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-发票记录管理API", description = "平台管理端-发票记录管理API")
 @RequestMapping("/order/manager/receipt")
 public class ReceiptController {
 
-	@Autowired
-	private ReceiptService receiptService;
+	private final ReceiptService receiptService;
 
 	@Operation(summary = "获取发票分页信息", description = "获取发票分页信息", method = CommonConstant.GET)
 	@RequestLogger("获取发票分页信息")

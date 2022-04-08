@@ -79,7 +79,7 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	 * 审核单ID
 	 */
 	@Column(name = "audit_id", nullable = false, columnDefinition = "varchar(64) not null comment '审核单ID'")
-	private String auditId;
+	private Long auditId;
 
 	/**
 	 * 审核状态
@@ -91,17 +91,17 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	 * 店铺ID
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺ID'")
-	private String storeId;
+	private Long storeId;
 
 	/**
 	 * 商品ID
 	 */
 	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
-	private String goodsId;
+	private Long goodsId;
 
 	/**
 	 * skuId
 	 */
 	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(64) not null comment 'skuId'")
-	private String skuId;
+	private Long skuId;
 }

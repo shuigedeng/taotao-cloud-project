@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,预存款充值记录接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-预存款充值记录API", description = "买家端-预存款充值记录API")
@@ -24,8 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional(rollbackFor = Exception.class)
 public class RechargeTradeController {
 
-	@Autowired
-	private RechargeService rechargeService;
+	private final RechargeService rechargeService;
 
 	@Operation(summary = "创建余额充值订单", description = "创建余额充值订单", method = CommonConstant.POST)
 	@RequestLogger("创建余额充值订单")

@@ -12,11 +12,13 @@ import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
 import com.taotao.cloud.order.biz.mapper.order.ReceiptMapper;
 import com.taotao.cloud.order.biz.service.order.ReceiptService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * 发票业务层实现
  */
+@AllArgsConstructor
 @Service
 public class ReceiptServiceImpl extends ServiceImpl<ReceiptMapper, Receipt> implements
 	ReceiptService {

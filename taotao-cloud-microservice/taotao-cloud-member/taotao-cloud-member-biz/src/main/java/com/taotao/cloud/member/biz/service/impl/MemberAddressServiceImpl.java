@@ -11,7 +11,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
 import com.taotao.cloud.member.biz.mapper.MemberAddressMapper;
-import com.taotao.cloud.member.biz.service.IMemberAddressService;
+import com.taotao.cloud.member.biz.service.MemberAddressService;
 import java.util.Objects;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 收货地址业务层实现
  */
 @Service
-public class IMemberAddressServiceImpl extends
-	ServiceImpl<MemberAddressMapper, MemberAddress> implements IMemberAddressService {
+public class MemberAddressServiceImpl extends
+	ServiceImpl<MemberAddressMapper, MemberAddress> implements MemberAddressService {
 
 	@Override
 	public PageModel<MemberAddressVO> getAddressByMember(PageParam page, Long memberId) {

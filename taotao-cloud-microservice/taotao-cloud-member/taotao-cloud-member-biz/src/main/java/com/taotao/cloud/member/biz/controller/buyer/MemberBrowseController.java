@@ -50,7 +50,7 @@ public class MemberBrowseController {
 	@DeleteMapping(value = "/{ids}")
 	public Result<Boolean> delAllByIds(
 		@Parameter(description = "会员地址ID", required = true)
-		@NotEmpty(message = "商品ID不能为空") @PathVariable("ids") List<String> ids) {
+		@NotEmpty(message = "商品ID不能为空") @PathVariable("ids") List<Long> ids) {
 		memberBrowseService.deleteByIds(ids);
 		return Result.success(true);
 	}

@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class IMemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, MemberBrowse> implements
+public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, MemberBrowse> implements
 	IMemberBrowseService {
 
     /**

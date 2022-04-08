@@ -52,7 +52,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param id 评价ID
      * @return 会员评价
      */
-    MemberEvaluationVO queryById(String id);
+    MemberEvaluationVO queryById(Long id);
 
     /**
      * 更改评论状态
@@ -61,7 +61,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param status 状态
      * @return 会员评价
      */
-    boolean updateStatus(String id, String status);
+    boolean updateStatus(Long id, String status);
 
     /**
      * 删除评论
@@ -69,7 +69,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param id 评论ID
      * @return 操作状态
      */
-    boolean delete(String id);
+    boolean delete(Long id);
 
     /**
      * 商家回复评价
@@ -79,7 +79,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param replyImage 回复图片
      * @return 操作状态
      */
-    boolean reply(String id, String reply, String replyImage);
+    boolean reply(Long id, String reply, String replyImage);
 
     /**
      * 获取商品评价数量
@@ -87,7 +87,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
      * @param goodsId 商品ID
      * @return 评价数量数据
      */
-    EvaluationNumberVO getEvaluationNumber(String goodsId);
+    EvaluationNumberVO getEvaluationNumber(Long goodsId);
 
 
 }

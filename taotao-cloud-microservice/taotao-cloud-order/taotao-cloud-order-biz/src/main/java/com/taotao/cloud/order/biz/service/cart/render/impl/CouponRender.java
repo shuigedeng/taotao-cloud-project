@@ -16,19 +16,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 购物促销信息渲染实现
  */
+@AllArgsConstructor
 @Service
 public class CouponRender implements CartRenderStep {
 
-	@Autowired
-	private PromotionPriceUtil promotionPriceUtil;
-	@Autowired
-	private MemberCouponService memberCouponService;
+	private final PromotionPriceUtil promotionPriceUtil;
+	private final MemberCouponService memberCouponService;
 
 	@Override
 	public RenderStepEnums step() {

@@ -33,7 +33,7 @@ public interface MemberSignService extends IService<MemberSign> {
      * @param memberId 会员id
      * @param day      签到天数
      */
-    void memberSignSendPoint(String memberId, Integer day);
+    void memberSignSendPoint(Long memberId, Integer day);
 
 
 }

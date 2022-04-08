@@ -11,12 +11,15 @@ import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleReasonMapper;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 售后原因业务层实现
  */
+@AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleReasonServiceImpl extends

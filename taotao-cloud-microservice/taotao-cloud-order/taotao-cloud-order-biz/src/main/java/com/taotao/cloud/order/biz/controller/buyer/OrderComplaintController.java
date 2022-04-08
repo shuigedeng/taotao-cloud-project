@@ -23,6 +23,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.validation.Valid;
+
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 买家端,交易投诉接口
  **/
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-交易投诉API", description = "买家端-交易投诉API")
@@ -41,14 +44,12 @@ public class OrderComplaintController {
 	/**
 	 * 交易投诉
 	 */
-	@Autowired
-	private OrderComplaintService orderComplaintService;
+	private final OrderComplaintService orderComplaintService;
 
 	/**
 	 * 交易投诉沟通
 	 */
-	@Autowired
-	private OrderComplaintCommunicationService orderComplaintCommunicationService;
+	private final OrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
 	@RequestLogger("通过id获取")

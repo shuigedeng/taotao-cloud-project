@@ -40,7 +40,7 @@ public class CategoryBrandServiceImpl extends
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean saveCategoryBrandList(String categoryId, List<String> brandIds) {
+	public Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
 		//删除分类品牌绑定信息
 		this.deleteByCategoryId(categoryId);
 		//绑定品牌信息

@@ -23,6 +23,7 @@ import com.taotao.cloud.payment.api.feign.IFeignRefundLogService;
 import com.taotao.cloud.store.api.feign.IFeignBillService;
 import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.vo.StoreFlowRefundDownloadVO;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ import java.util.List;
  * 商家订单流水业务层实现
  *
  */
-@Slf4j
+@AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow> implements
@@ -43,21 +44,17 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
     /**
      * 订单
      */
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
     /**
      * 订单货物
      */
-    @Autowired
-    private OrderItemService orderItemService;
+    private final OrderItemService orderItemService;
     /**
      * 退款日志
      */
-    @Autowired
-    private IFeignRefundLogService refundLogService;
+    private final IFeignRefundLogService refundLogService;
 
-    @Autowired
-    private IFeignBillService billService;
+    private final IFeignBillService billService;
 
     @Override
     public void payOrder(String orderSn) {

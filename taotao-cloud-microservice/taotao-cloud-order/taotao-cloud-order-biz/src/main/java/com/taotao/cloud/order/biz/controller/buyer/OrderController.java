@@ -17,6 +17,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,14 +34,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,订单接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-订单API", description = "买家端-订单API")
 @RequestMapping("/order/buyer/orders")
 public class OrderController {
 
-	@Autowired
-	private OrderService orderService;
+	private final OrderService orderService;
 
 	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表", method = CommonConstant.GET)
 	@RequestLogger("查询会员订单列表")

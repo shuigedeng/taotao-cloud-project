@@ -88,8 +88,8 @@ public class Studio extends BaseSuperEntity<Studio, Long> {
 	/**
 	 * 房间ID
 	 */
-	@Column(name = "room_id", nullable = false, columnDefinition = "int not null comment '房间ID'")
-	private Integer roomId;
+	@Column(name = "room_id", nullable = false, columnDefinition = "bigint not null comment '房间ID'")
+	private Long roomId;
 
 	/**
 	 * 小程序直播码
@@ -101,7 +101,7 @@ public class Studio extends BaseSuperEntity<Studio, Long> {
 	 * 店铺ID
 	 */
 	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺ID'")
-	private String storeId;
+	private Long storeId;
 
 	/**
 	 * 直播间商品数量

@@ -9,15 +9,16 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
-import com.taotao.cloud.member.biz.service.IMemberAddressService;
+import com.taotao.cloud.member.biz.service.MemberAddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "买家端-会员地址API", description = "买家端-会员地址API")
 public class MemberAddressController {
 
-	private final IMemberAddressService memberAddressService;
+	private final MemberAddressService memberAddressService;
 
 	@Operation(summary = "分页获取当前会员收件地址列表", description = "分页获取当前会员收件地址列表", method = CommonConstant.GET)
 	@RequestLogger("分页获取当前会员收件地址列表")
@@ -59,8 +60,8 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberAddressVO> getShippingAddress(
-		@Parameter(description = "会员地址ID", required = true) @NotBlank(message = "id不能为空")
-		@PathVariable(value = "id") String id) {
+		@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
+		@PathVariable(value = "id") Long id) {
 		MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
 		return Result.success(BeanUtil.copyProperties(memberAddress, MemberAddressVO.class));
 	}
@@ -100,8 +101,8 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delShippingAddressById(
-		@Parameter(description = "会员地址ID", required = true) @NotBlank(message = "id不能为空")
-		@PathVariable(value = "id") String id) {
+		@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
+		@PathVariable(value = "id") Long id) {
 		return Result.success(memberAddressService.removeMemberAddress(id));
 	}
 

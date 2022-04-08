@@ -7,7 +7,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
-import com.taotao.cloud.member.biz.service.IMemberAddressService;
+import com.taotao.cloud.member.biz.service.MemberAddressService;
 import com.taotao.cloud.member.biz.service.memberAddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,7 @@ import javax.validation.Valid;
 @Tag(name = "管理端-会员地址API", description = "管理端-会员地址API")
 public class MemberAddressController {
 
-    private final IMemberAddressService memberAddressService;
+    private final MemberAddressService memberAddressService;
 
 	@Operation(summary = "会员地址分页列表", description = "会员地址分页列表", method = CommonConstant.GET)
 	@RequestLogger("会员地址分页列表")
