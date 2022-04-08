@@ -48,7 +48,7 @@ public class OrderOvertime extends BaseSuperEntity<OrderOvertime,Long> {
     /**
      * 支付时间--支付成功后的时间
      */
-    @Column(name = "pay_success_time", columnDefinition = "TIMESTAMP comment '支付时间--支付成功后的时间'")
+    @Column(name = "pay_success_time", columnDefinition = "datetime comment '支付时间--支付成功后的时间'")
     private LocalDateTime paySuccessTime;
 
     /**
@@ -60,6 +60,6 @@ public class OrderOvertime extends BaseSuperEntity<OrderOvertime,Long> {
     /**
      * 超时时间
      */
-    @Column(name = "over_time", columnDefinition = "TIMESTAMP not null comment '超时时间'")
+    @Column(name = "over_time", columnDefinition = "datetime not null comment '超时时间'")
     private LocalDateTime overTime;
 }

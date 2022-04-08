@@ -32,8 +32,7 @@ public class BulletinServiceImpl implements IBulletinService {
 
 	private final BulletinSuperRepository bulletinRepository;
 
-	public BulletinServiceImpl(
-		BulletinSuperRepository bulletinRepository) {
+	public BulletinServiceImpl(BulletinSuperRepository bulletinRepository) {
 		this.bulletinRepository = bulletinRepository;
 	}
 

@@ -30,6 +30,7 @@ import lombok.Setter;
 public class MemberSign extends BaseSuperEntity<MemberSign, Long> {
 
 	public static final String TABLE_NAME = "tt_member_sign";
+
 	/**
 	 * 会员用户名
 	 */
@@ -39,8 +40,8 @@ public class MemberSign extends BaseSuperEntity<MemberSign, Long> {
 	/**
 	 * 会员用户ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户ID'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员用户ID'")
+	private Long memberId;
 
 	/**
 	 * 连续签到天数

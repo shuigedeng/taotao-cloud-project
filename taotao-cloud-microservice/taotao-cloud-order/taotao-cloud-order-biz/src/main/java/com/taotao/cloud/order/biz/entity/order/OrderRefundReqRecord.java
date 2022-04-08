@@ -72,7 +72,7 @@ public class OrderRefundReqRecord extends BaseSuperEntity<OrderRefundReqRecord,L
 	/**
 	 * 扩展信息
 	 */
-	@Column(name = "ext", columnDefinition = "varchar(32) not null comment '扩展信息'")
+	@Column(name = "ext", columnDefinition = "text null comment '扩展信息'")
 	private String ext;
 
 	@Column(name = "req_record_type", columnDefinition = "int not null default 0 comment '记录类型'")

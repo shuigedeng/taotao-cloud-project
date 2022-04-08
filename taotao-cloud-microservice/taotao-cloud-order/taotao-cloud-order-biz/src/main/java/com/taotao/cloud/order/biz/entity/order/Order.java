@@ -236,13 +236,13 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 完成时间
 	 */
-	@Column(name = "complete_time", nullable = false, columnDefinition = "datetime not null comment '完成时间'")
+	@Column(name = "complete_time", nullable = false, columnDefinition = "datetime null comment '完成时间'")
 	private LocalDateTime completeTime;
 
 	/**
 	 * 送货时间
 	 */
-	@Column(name = "logistics_time", nullable = false, columnDefinition = "datetime not null comment '送货时间'")
+	@Column(name = "logistics_time", nullable = false, columnDefinition = "datetime null comment '送货时间'")
 	private LocalDateTime logisticsTime;
 
 	/**
@@ -256,7 +256,7 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see ClientTypeEnum
 	 */
-	@Column(name = "client_type", nullable = false, columnDefinition = "varchar(64) not null comment '订单来源'")
+	@Column(name = "client_type", nullable = false, columnDefinition = "varchar(64) null comment '订单来源'")
 	private String clientType;
 
 	/**
@@ -320,7 +320,7 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 使用的店铺会员优惠券id(,区分)
 	 */
-	@Column(name = "use_store_member_coupon_ids", nullable = false, columnDefinition = "varchar(64) not null comment '使用的店铺会员优惠券id(,区分)'")
+	@Column(name = "use_store_member_coupon_ids", nullable = false, columnDefinition = "varchar(255) not null comment '使用的店铺会员优惠券id(,区分)'")
 	private String useStoreMemberCouponIds;
 
 	/**

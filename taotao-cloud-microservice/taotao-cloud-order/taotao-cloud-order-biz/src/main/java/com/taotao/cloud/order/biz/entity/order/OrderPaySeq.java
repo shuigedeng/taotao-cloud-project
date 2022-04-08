@@ -56,7 +56,7 @@ public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
 	 * 交易金额
 	 */
 	@Column(name = "actual_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
-	private BigDecimal actualAmount = BigDecimal.ZERO;
+	private BigDecimal actualAmount;
 
 	/**
 	 * 微信预支付ID

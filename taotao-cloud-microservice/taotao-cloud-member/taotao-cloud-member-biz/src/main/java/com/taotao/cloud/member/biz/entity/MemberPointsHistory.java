@@ -36,8 +36,8 @@ public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Lo
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(65) not null comment '会员ID'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	private Long memberId;
 
 	/**
 	 * 会员名称

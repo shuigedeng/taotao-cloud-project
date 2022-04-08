@@ -48,8 +48,8 @@ public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Lo
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员id'")
-	private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员id'")
+	private Long memberId;
 
 	/**
 	 * 审核备注
@@ -60,7 +60,7 @@ public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Lo
 	/**
 	 * 审核时间
 	 */
-	@Column(name = "inspect_time", nullable = false, columnDefinition = "TIMESTAMP comment '审核时间'")
+	@Column(name = "inspect_time", columnDefinition = "datetime  null comment '审核时间'")
 	private LocalDateTime inspectTime;
 
 	/**

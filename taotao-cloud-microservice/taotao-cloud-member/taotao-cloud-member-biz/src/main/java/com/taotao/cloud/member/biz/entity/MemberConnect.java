@@ -31,7 +31,7 @@ public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 	public static final String TABLE_NAME = "tt_sys_dept";
 
 	@Column(name = "user_id", nullable = false, columnDefinition = "varchar(32) not null comment '用户id'")
-	private String userId;
+	private Long userId;
 
 	@Column(name = "union_id", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录id'")
 	private String unionId;
