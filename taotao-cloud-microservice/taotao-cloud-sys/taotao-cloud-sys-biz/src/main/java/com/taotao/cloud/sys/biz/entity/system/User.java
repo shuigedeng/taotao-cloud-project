@@ -50,31 +50,31 @@ public class User extends BaseSuperEntity<User,Long> {
 	/**
 	 * 账号
 	 */
-	@Column(name = "account", nullable = false, columnDefinition = "varchar(255) not null comment '账号'")
+	@Column(name = "account", columnDefinition = "varchar(255) not null comment '账号'")
 	private String account;
 
 	/**
 	 * 昵称
 	 */
-	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(255) not null comment '昵称'")
+	@Column(name = "nickname", columnDefinition = "varchar(255) not null comment '昵称'")
 	private String nickname;
 
 	/**
 	 * 姓名
 	 */
-	@Column(name = "username", nullable = false, columnDefinition = "varchar(255) not null comment '真实用户名'")
+	@Column(name = "username", columnDefinition = "varchar(255) not null comment '真实用户名'")
 	private String username;
 
 	/**
 	 * 密码
 	 */
-	@Column(name = "password", nullable = false, columnDefinition = "varchar(255) not null comment '密码'")
+	@Column(name = "password", columnDefinition = "varchar(255) not null comment '密码'")
 	private String password;
 
 	/**
 	 * 手机号
 	 */
-	@Column(name = "mobile", unique = true, nullable = false, columnDefinition = "varchar(11) not null comment '手机号'")
+	@Column(name = "mobile", unique = true, columnDefinition = "varchar(11) not null comment '手机号'")
 	private String mobile;
 
 	/**
@@ -88,7 +88,7 @@ public class User extends BaseSuperEntity<User,Long> {
 	 *
 	 * @see SexTypeEnum
 	 */
-	@Column(name = "sex", nullable = false, columnDefinition = "int not null default 0 comment '性别 1男 2女 0未知'")
+	@Column(name = "sex", columnDefinition = "int not null default 0 comment '性别 1男 2女 0未知'")
 	private Integer sex;
 
 	/**
@@ -124,7 +124,7 @@ public class User extends BaseSuperEntity<User,Long> {
 	/**
 	 * 状态 1-启用，2-禁用
 	 */
-	@Column(name = "status", nullable = false, columnDefinition = "int NOT NULL DEFAULT 1 comment '状态 1-启用，2-禁用'")
+	@Column(name = "status", columnDefinition = "int NOT NULL DEFAULT 1 comment '状态 1-启用，2-禁用'")
 	private Integer status;
 
 	/**

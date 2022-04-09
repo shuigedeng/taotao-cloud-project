@@ -3,7 +3,10 @@ package com.taotao.cloud.member.biz.controller.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.store.api.dto.BillSearchParams;
+import com.taotao.cloud.store.api.vo.BillListVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,15 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 店铺端,结算单接口
+ * 店铺端,结算单API
  *
  * @since 2020/11/17 4:29 下午
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/seller/bill-store")
-@Tag(name = "店铺端-结算单接口", description = "店铺端-结算单接口")
+@Tag(name = "店铺端-结算单API", description = "店铺端-结算单API")
+@RequestMapping("/member/seller/bill/store")
 public class BillStoreController {
 
 	private final BillService billService;

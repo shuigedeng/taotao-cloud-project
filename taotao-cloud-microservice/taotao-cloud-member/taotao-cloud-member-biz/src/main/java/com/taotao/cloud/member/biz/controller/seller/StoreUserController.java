@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * 店铺端,管理员接口
+ * 店铺端,管理员API
  *
  * @since 2020/11/16 10:57
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/seller/store-user")
-@Tag(name = "店铺端-管理员接口", description = "店铺端-管理员接口")
+@Tag(name = "店铺端-管理员API", description = "店铺端-管理员API")
+@RequestMapping("/member/seller/store/user")
 public class StoreUserController {
 
 	private final MemberService memberService;
 
-	@Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口", method = CommonConstant.GET)
-	@RequestLogger("获取当前登录用户接口")
+	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API", method = CommonConstant.GET)
+	@RequestLogger("获取当前登录用户API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/info")
 	public Result<Member> getUserInfo() {

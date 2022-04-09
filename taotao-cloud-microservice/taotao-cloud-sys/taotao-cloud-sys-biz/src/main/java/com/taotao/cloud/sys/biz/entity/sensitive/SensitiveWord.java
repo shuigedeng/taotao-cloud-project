@@ -29,6 +29,6 @@ public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
 	/**
 	 * 敏感词名称
 	 */
-	@Column(name = "sensitive_word", nullable = false, columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
+	@Column(name = "sensitive_word", columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
 	private String sensitiveWord;
 }

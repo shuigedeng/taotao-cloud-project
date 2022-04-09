@@ -61,7 +61,7 @@
 //		return Result.success(Objects.nonNull(result));
 //	}
 //
-//	// **********************内部微服务接口*****************************
+//	// **********************内部微服务API*****************************
 //
 //	@RequestLogger("查询会员用户")
 //	@GetMapping("/info/security")

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "买家端-商品分类API", description = "买家端-商品分类API")
-@RequestMapping("/buyer/goods/category")
+@RequestMapping("/goods/buyer/category")
 public class CategoryBuyerController {
 
 	/**

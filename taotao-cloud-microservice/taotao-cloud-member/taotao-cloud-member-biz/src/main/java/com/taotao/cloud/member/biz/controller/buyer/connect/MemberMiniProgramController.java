@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,小程序登录接口
+ * 买家端,小程序登录API
  */
 @AllArgsConstructor
 @Validated
@@ -58,8 +58,8 @@ public class MemberMiniProgramController {
 		return Result.success(wechatMpCodeUtil.createCode(page, scene));
 	}
 
-	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现", description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现", method = CommonConstant.GET)
-	@RequestLogger("小程序二维码生成:只适用于少量场景，多数场景需要unlimited接口实现")
+	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", method = CommonConstant.GET)
+	@RequestLogger("小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/qrcode")
 	public Result<String> qrcode(String page) {

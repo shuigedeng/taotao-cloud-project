@@ -52,13 +52,13 @@ public class Region extends BaseSuperEntity<Region, Long> {
 	/**
 	 * 地区编码
 	 */
-	@Column(name = "code", nullable = false, columnDefinition = "varchar(255) not null comment '地区编码'")
+	@Column(name = "code", columnDefinition = "varchar(255) not null comment '地区编码'")
 	private String code;
 
 	/**
 	 * 地区名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '地区名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null default '' comment '地区名称'")
 	private String name;
 
 	/**
@@ -66,7 +66,7 @@ public class Region extends BaseSuperEntity<Region, Long> {
 	 * "province:省份（直辖市会在province和city显示）" + "city:市（直辖市会在province和city显示）" + "district:区县" +
 	 * "street:街道"
 	 */
-	@Column(name = "level", nullable = false, columnDefinition = "varchar(255) null comment '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
+	@Column(name = "level", columnDefinition = "varchar(255) null comment '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
 	private String level;
 
 	/**

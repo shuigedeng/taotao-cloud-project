@@ -27,13 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,会员收藏接口
+ * 买家端,会员收藏API
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/buyer/member-collection")
 @Tag(name = "买家端-会员收藏API", description = "买家端-会员收藏API")
+@RequestMapping("/member/buyer/member/collection")
 public class MemberCollectionController {
 
 	/**

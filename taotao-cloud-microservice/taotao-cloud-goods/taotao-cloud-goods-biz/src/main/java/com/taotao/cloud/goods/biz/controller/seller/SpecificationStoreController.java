@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * 商户管理端-规格接口API
+ * 店铺端-规格接口API
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/goods/seller/store/goods/spec")
-@Tag(name = "商户管理端-规格接口API", description = "商户管理端-规格接口API")
+@Tag(name = "店铺端-规格API", description = "店铺端-规格API")
+@RequestMapping("/goods/seller/goods/spec")
 public class SpecificationStoreController {
 
 	/**

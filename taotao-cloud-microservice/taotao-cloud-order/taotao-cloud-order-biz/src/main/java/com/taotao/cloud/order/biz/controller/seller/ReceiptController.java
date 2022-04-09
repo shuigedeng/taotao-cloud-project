@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 店铺端,发票接口
+ * 店铺端,发票API
  **/
 @AllArgsConstructor
 @Validated
@@ -62,7 +62,7 @@ public class ReceiptController {
 	@RequestLogger("开发票")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{id}/invoicing")
-	public Result<Receipt> invoicing(@PathVariable String id) {
+	public Result<Receipt> invoicing(@PathVariable Long id) {
 		OperationalJudgment.judgment(receiptService.getById(id));
 		return Result.success(receiptService.invoicing(id));
 	}

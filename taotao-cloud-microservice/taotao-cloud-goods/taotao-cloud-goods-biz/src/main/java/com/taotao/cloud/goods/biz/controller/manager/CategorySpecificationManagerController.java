@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "平台管理端-商品分类规格管理API", description = "平台管理端-商品分类规格管理API")
-@RequestMapping("/goods/manager/categorySpec")
+@RequestMapping("/goods/manager/category/spec")
 public class CategorySpecificationManagerController {
 
 	/**

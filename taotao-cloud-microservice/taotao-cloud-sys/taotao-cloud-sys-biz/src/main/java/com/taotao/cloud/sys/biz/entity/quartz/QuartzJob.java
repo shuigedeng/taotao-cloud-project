@@ -35,42 +35,42 @@ public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 	/**
 	 * Spring Bean名称
 	 */
-	@Column(name = "bean_name", nullable = false, columnDefinition = "varchar(64) not null comment ' Spring Bean名称'")
+	@Column(name = "bean_name", columnDefinition = "varchar(64) not null comment ' Spring Bean名称'")
 	private String beanName;
 
 	/**
 	 * cron 表达式
 	 */
-	@Column(name = "cron_expression", nullable = false, columnDefinition = "varchar(64) not null comment 'cron 表达式'")
+	@Column(name = "cron_expression", columnDefinition = "varchar(64) not null comment 'cron 表达式'")
 	private String cronExpression;
 
 	/**
 	 * 状态：1暂停、0启用
 	 */
-	@Column(name = "is_pause", nullable = false, columnDefinition = "boolean DEFAULT false comment '收件人'")
+	@Column(name = "is_pause", columnDefinition = "boolean DEFAULT false comment '收件人'")
 	private Boolean isPause;
 
 	/**
 	 * 任务名称
 	 */
-	@Column(name = "job_name", nullable = false, columnDefinition = "varchar(64) not null comment '任务名称'")
+	@Column(name = "job_name", columnDefinition = "varchar(64) not null comment '任务名称'")
 	private String jobName;
 
 	/**
 	 * 方法名称
 	 */
-	@Column(name = "method_name", nullable = false, columnDefinition = "varchar(64) not null comment '方法名称'")
+	@Column(name = "method_name", columnDefinition = "varchar(64) not null comment '方法名称'")
 	private String methodName;
 
 	/**
 	 * 参数
 	 */
-	@Column(name = "params", nullable = false, columnDefinition = "varchar(64) not null comment '参数'")
+	@Column(name = "params", columnDefinition = "varchar(64) not null comment '参数'")
 	private String params;
 
 	/**
 	 * 备注
 	 */
-	@Column(name = "remark", nullable = false, columnDefinition = "varchar(256) not null comment '备注'")
+	@Column(name = "remark", columnDefinition = "varchar(256) not null comment '备注'")
 	private String remark;
 }

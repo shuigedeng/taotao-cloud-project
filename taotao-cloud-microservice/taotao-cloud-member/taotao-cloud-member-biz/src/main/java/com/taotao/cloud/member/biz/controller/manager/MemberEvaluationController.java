@@ -24,15 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,会员商品评价接口
+ * 管理端,会员商品评价API
  *
  * @since 2020-02-25 14:10:16
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/manager/membe-evaluation")
-@Tag(name = "管理端-会员商品评价API", description = "管理端-会员商品评价API")
+@RequestMapping("/member/manager/membe/evaluation")
+@Tag(name = "管理端-会员商品评价管理API", description = "管理端-会员商品评价管理API")
 public class MemberEvaluationController {
 
 	private final MemberEvaluationService memberEvaluationService;

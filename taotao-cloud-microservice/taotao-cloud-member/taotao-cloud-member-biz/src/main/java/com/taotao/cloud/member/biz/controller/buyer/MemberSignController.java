@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/buyer/member-sign")
 @Tag(name = "买家端-会员签到API", description = "买家端-会员签到API")
+@RequestMapping("/member/buyer/member/sign")
 public class MemberSignController {
 
 	private final MemberSignService memberSignService;

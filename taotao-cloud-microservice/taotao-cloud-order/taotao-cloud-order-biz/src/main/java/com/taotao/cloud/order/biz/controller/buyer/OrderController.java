@@ -32,13 +32,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,订单接口
+ * 买家端,订单API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-订单API", description = "买家端-订单API")
-@RequestMapping("/order/buyer/orders")
+@RequestMapping("/order/buyer/order")
 public class OrderController {
 
 	private final OrderService orderService;

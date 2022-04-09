@@ -27,9 +27,9 @@ public class StoreLogistics extends BaseSuperEntity<StoreLogistics, Long> {
 
 	public static final String TABLE_NAME = "tt_store_logistics";
 
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺ID'")
+	@Column(name = "store_id", columnDefinition = "varchar(64) not null comment '店铺ID'")
 	private String storeId;
 
-	@Column(name = "logistics_id", nullable = false, columnDefinition = "varchar(64) not null comment '物流公司ID'")
+	@Column(name = "logistics_id", columnDefinition = "varchar(64) not null comment '物流公司ID'")
 	private String logisticsId;
 }

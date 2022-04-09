@@ -1,6 +1,8 @@
 package com.taotao.cloud.order.biz.controller.buyer;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -28,13 +30,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端，购物车接口
+ * 买家端，购物车API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-购物车API", description = "买家端-购物车API")
-@RequestMapping("/order/buyer/carts")
+@RequestMapping("/order/buyer/cart")
 public class CartController {
 
 	/**

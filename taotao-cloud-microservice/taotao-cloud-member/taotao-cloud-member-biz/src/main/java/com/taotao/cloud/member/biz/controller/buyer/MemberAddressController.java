@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * 买家端-会员地址接口
+ * 买家端-会员地址API
  *
  * @author shuigedeng
  * @version 2021.10
@@ -40,8 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/buyer/member-address")
 @Tag(name = "买家端-会员地址API", description = "买家端-会员地址API")
+@RequestMapping("/member/buyer/member/address")
 public class MemberAddressController {
 
 	private final MemberAddressService memberAddressService;

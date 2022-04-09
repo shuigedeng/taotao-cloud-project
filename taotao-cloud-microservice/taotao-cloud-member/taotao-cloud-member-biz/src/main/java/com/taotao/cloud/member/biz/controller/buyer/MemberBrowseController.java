@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * 买家端-浏览历史接口
+ * 买家端-浏览历史API
  *
  * @author shuigedeng
  * @version 2021.10
@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/buyer/member-browse")
 @Tag(name = "买家端-会员浏览历史API", description = "买家端-会员浏览历史API")
+@RequestMapping("/member/buyer/member/browse")
 public class MemberBrowseController {
 
 	private final IMemberBrowseService memberBrowseService;

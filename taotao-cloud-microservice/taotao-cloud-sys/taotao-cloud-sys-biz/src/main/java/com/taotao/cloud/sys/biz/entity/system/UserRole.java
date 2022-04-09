@@ -49,12 +49,12 @@ public class UserRole extends SuperEntity<UserRole,Long> {
 	/**
 	 * 用户ID
 	 */
-	@Column(name = "user_id", nullable = false, columnDefinition = "bigint not null comment '用户ID'")
+	@Column(name = "user_id", columnDefinition = "bigint not null comment '用户ID'")
 	private Long userId;
 
 	/**
 	 * 角色ID
 	 */
-	@Column(name = "role_id", nullable = false, columnDefinition = "bigint not null comment '角色ID'")
+	@Column(name = "role_id", columnDefinition = "bigint not null comment '角色ID'")
 	private Long roleId;
 }

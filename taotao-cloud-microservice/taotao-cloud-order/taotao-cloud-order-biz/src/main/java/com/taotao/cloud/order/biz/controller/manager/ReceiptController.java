@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,发票记录接口
+ * 管理端,发票记录API
  **/
 @AllArgsConstructor
 @Validated

@@ -31,43 +31,43 @@ public class LogisticsConfig extends BaseSuperEntity<LogisticsConfig, Long> {
 	/**
 	 * 物流公司名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(255) not null COMMENT '物流公司名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null COMMENT '物流公司名称'")
 	private String name;
 
 	/**
 	 * 物流公司code
 	 */
-	@Column(name = "code", nullable = false, columnDefinition = "varchar(255) not null COMMENT '物流公司code'")
+	@Column(name = "code", columnDefinition = "varchar(255) not null COMMENT '物流公司code'")
 	private String code;
 
 	/**
 	 * 物流公司联系人
 	 */
-	@Column(name = "contact_name", nullable = false, columnDefinition = "varchar(32) not null COMMENT '物流公司联系人'")
+	@Column(name = "contact_name", columnDefinition = "varchar(32) not null COMMENT '物流公司联系人'")
 	private String contactName;
 
 	/**
 	 * 物流公司联系电话
 	 */
-	@Column(name = "contact_mobile", nullable = false, columnDefinition = "varchar(32) not null COMMENT '物流公司联系电话'")
+	@Column(name = "contact_mobile", columnDefinition = "varchar(32) not null COMMENT '物流公司联系电话'")
 	private String contactMobile;
 
 	/**
 	 * 支持电子面单
 	 */
-	@Column(name = "stand_by", nullable = false, columnDefinition = "varchar(255) not null COMMENT '支持电子面单'")
+	@Column(name = "stand_by", columnDefinition = "varchar(255) not null COMMENT '支持电子面单'")
 	private String standBy;
 
 	/**
 	 * 物流公司电子面单表单
 	 */
-	@Column(name = "form_items", nullable = false, columnDefinition = "varchar(255) not null COMMENT '物流公司电子面单表单'")
+	@Column(name = "form_items", columnDefinition = "varchar(255) not null COMMENT '物流公司电子面单表单'")
 	private String formItems;
 
 	/**
 	 * 禁用状态 OPEN：开启，CLOSE：禁用
 	 */
-	@Column(name = "disabled", nullable = false, columnDefinition = "varchar(12) not null COMMENT '禁用状态 OPEN：开启，CLOSE：禁用'")
+	@Column(name = "disabled", columnDefinition = "varchar(12) not null COMMENT '禁用状态 OPEN：开启，CLOSE：禁用'")
 	private String disabled;
 
 }

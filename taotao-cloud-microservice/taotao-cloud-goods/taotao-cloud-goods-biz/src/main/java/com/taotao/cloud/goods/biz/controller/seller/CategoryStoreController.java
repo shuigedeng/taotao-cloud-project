@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "商户管理端-商品分类API", description = "商户管理端-商品分类API")
-@RequestMapping("/goods/seller/store/goods/category")
+@Tag(name = "店铺端-商品分类API", description = "店铺端-商品分类API")
+@RequestMapping("/goods/seller/category/store")
 public class CategoryStoreController {
 
 	/**

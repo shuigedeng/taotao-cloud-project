@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * 管理端,收款日志接口
+ * 管理端,收款日志API
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-收款日志管理API", description = "平台管理端-收款日志管理API")
-@RequestMapping("/order/manager/paymentLog")
+@Tag(name = "平台管理端-支付日志管理API", description = "平台管理端-支付日志管理API")
+@RequestMapping("/order/manager/payment/log")
 public class PaymentLogController {
 
 	private final OrderService orderService;

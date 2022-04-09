@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-分类绑定参数组管理API", description = "平台管理端-分类绑定参数组管理API")
+@Tag(name = "平台管理端-参数管理API", description = "平台管理端-参数管理API")
 @RequestMapping("/goods/manager/parameters")
 public class ParameterManagerController {
 
 	/**
-	 * 分类绑定参数服务
+	 * 参数服务
 	 */
 	private final ParametersService parametersService;
 

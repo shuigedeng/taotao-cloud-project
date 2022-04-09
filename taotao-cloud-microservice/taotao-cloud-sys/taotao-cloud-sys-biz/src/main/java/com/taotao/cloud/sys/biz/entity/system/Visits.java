@@ -31,15 +31,15 @@ public class Visits extends BaseSuperEntity<Visits, Long> {
 
 	public static final String TABLE_NAME = "tt_visits";
 
-	@Column(name = "date", nullable = false, columnDefinition = "varchar(64) not null comment '日期'")
+	@Column(name = "date", columnDefinition = "varchar(64) not null comment '日期'")
 	private String date;
 
-	@Column(name = "pv_counts", nullable = false, columnDefinition = "bigint not null default 0 comment 'pv'")
+	@Column(name = "pv_counts", columnDefinition = "bigint not null default 0 comment 'pv'")
 	private Long pvCounts;
 
-	@Column(name = "ip_counts", nullable = false, columnDefinition = "bigint not null default 0 comment 'ip'")
+	@Column(name = "ip_counts", columnDefinition = "bigint not null default 0 comment 'ip'")
 	private Long ipCounts;
 
-	@Column(name = "week_day", nullable = false, columnDefinition = "varchar(64) not null comment '天'")
+	@Column(name = "week_day", columnDefinition = "varchar(64) not null comment '天'")
 	private String weekDay;
 }

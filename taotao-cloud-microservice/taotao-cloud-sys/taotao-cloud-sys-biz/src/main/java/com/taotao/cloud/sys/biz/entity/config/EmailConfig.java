@@ -41,34 +41,34 @@ public class EmailConfig extends BaseSuperEntity<EmailConfig, Long> {
 	/**
 	 * 收件人
 	 */
-	@Column(name = "from_user", nullable = false, columnDefinition = "varchar(64) not null comment '收件人'")
+	@Column(name = "from_user", columnDefinition = "varchar(64) not null comment '收件人'")
 	private String fromUser;
 
 
 	/**
 	 * 邮件服务器SMTP地址
 	 */
-	@Column(name = "host", nullable = false, columnDefinition = "varchar(64) not null comment '邮件服务器SMTP地址'")
+	@Column(name = "host", columnDefinition = "varchar(64) not null comment '邮件服务器SMTP地址'")
 	private String host;
 
 
 	/**
 	 * 密码
 	 */
-	@Column(name = "pass", nullable = false, columnDefinition = "varchar(64) not null comment '密码'")
+	@Column(name = "pass", columnDefinition = "varchar(64) not null comment '密码'")
 	private String pass;
 
 
 	/**
 	 * 端口
 	 */
-	@Column(name = "port", nullable = false, columnDefinition = "varchar(64) not null comment '端口'")
+	@Column(name = "port", columnDefinition = "varchar(64) not null comment '端口'")
 	private String port;
 
 
 	/**
 	 * 发件者用户名
 	 */
-	@Column(name = "user", nullable = false, columnDefinition = "varchar(64) not null comment '发件者用户名'")
+	@Column(name = "user", columnDefinition = "varchar(64) not null comment '发件者用户名'")
 	private String user;
 }

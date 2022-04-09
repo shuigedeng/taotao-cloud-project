@@ -37,7 +37,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 买家端,售后管理接口
+ * 买家端,售后管理API
  *
  * @author shuigedeng
  * @version 2022.04
@@ -47,7 +47,7 @@ import java.util.List;
 @Validated
 @RestController
 @Tag(name = "买家端-售后API", description = "买家端-售后API")
-@RequestMapping("/order/buyer/afterSale")
+@RequestMapping("/order/buyer/aftersale")
 public class AfterSaleController {
 
 	/**
