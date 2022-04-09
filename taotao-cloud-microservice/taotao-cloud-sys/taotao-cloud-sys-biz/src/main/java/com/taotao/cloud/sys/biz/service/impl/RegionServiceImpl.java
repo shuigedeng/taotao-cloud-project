@@ -241,7 +241,7 @@ public class RegionServiceImpl extends
 			});
 		}
 
-		//vo.children(regions);
+		vo.children(regions);
 		if (regions.size() > 0) {
 			regions.forEach(this::findAllChild);
 		}

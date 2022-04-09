@@ -3,13 +3,12 @@ package com.taotao.cloud.sys.biz.controller.tools;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.api.vo.redis.RedisVo;
+import com.taotao.cloud.sys.api.vo.redis.RedisVO;
 import com.taotao.cloud.sys.biz.service.IRedisService;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,7 +49,7 @@ public class RedisController {
 	@Idempotent(key = "delete", perFix = "redis")
 	@DeleteMapping(value = "/redis")
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
-	public Result<Boolean> delete(@RequestBody RedisVo resources) {
+	public Result<Boolean> delete(@RequestBody RedisVO resources) {
 		redisService.delete(resources.getKey());
 		return Result.success(true);
 	}

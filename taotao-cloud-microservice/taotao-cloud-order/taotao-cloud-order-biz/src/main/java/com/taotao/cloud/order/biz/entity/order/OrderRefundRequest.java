@@ -85,19 +85,19 @@ public class OrderRefundRequest extends BaseSuperEntity<OrderRefundRequest, Long
 	/**
 	 * 订单总金额
 	 */
-	@Column(name = "total_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '订单总金额'")
+	@Column(name = "total_amount", columnDefinition = "decimal(10,2) not null default 0 comment '订单总金额'")
 	private BigDecimal totalAmount;
 
 	/**
 	 * 申请退款金额
 	 */
-	@Column(name = "req_refund_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '申请退款金额'")
+	@Column(name = "req_refund_amount", columnDefinition = "decimal(10,2) not null default 0 comment '申请退款金额'")
 	private BigDecimal reqRefundAmount;
 
 	/**
 	 * 实际退款金额--定时任务设置
 	 */
-	@Column(name = "act_refund_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '实际退款金额--定时任务设置'")
+	@Column(name = "act_refund_amount", columnDefinition = "decimal(10,2) not null default 0 comment '实际退款金额--定时任务设置'")
 	private BigDecimal actRefundAmount;
 
 	/**
@@ -200,7 +200,7 @@ public class OrderRefundRequest extends BaseSuperEntity<OrderRefundRequest, Long
 	/**
 	 * 商品单价
 	 */
-	@Column(name = "product_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '商品单价'")
+	@Column(name = "product_price", columnDefinition = "decimal(10,2) not null default 0 comment '商品单价'")
 	private BigDecimal productPrice = BigDecimal.ZERO;
 
 	/**

@@ -38,7 +38,7 @@ public class PurchaseQuotedItem extends BaseIdEntity {
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @CreatedDate
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -48,37 +48,37 @@ public class PurchaseQuotedItem extends BaseIdEntity {
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "报价单ID")
     private String PurchaseQuotedId;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "商品名称")
     private String goodsName;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "规格")
     private String specs;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "数量")
     private String num;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "数量单位")
     private String goodsUnit;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "价格")
     private BigDecimal price;
 }

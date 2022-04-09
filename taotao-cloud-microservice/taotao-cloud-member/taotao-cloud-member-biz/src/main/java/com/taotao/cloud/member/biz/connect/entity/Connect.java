@@ -25,13 +25,13 @@ public class Connect extends BaseSuperEntity<Connect, Long> {
 	/**
 	 * 用户id
 	 */
-	@Column(name = "user_id", nullable = false, columnDefinition = "varchar(32) not null comment '用户id'")
+	@Column(name = "user_id", columnDefinition = "varchar(32) not null comment '用户id'")
 	private String userId;
 
 	/**
 	 * 联合登录id
 	 */
-	@Column(name = "union_id", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录id'")
+	@Column(name = "union_id", columnDefinition = "varchar(32) not null comment '联合登录id'")
 	private String unionId;
 
 	/**
@@ -39,7 +39,7 @@ public class Connect extends BaseSuperEntity<Connect, Long> {
 	 *
 	 * @see ConnectEnum
 	 */
-	@Column(name = "union_type", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录类型'")
+	@Column(name = "union_type", columnDefinition = "varchar(32) not null comment '联合登录类型'")
 	private String unionType;
 
 

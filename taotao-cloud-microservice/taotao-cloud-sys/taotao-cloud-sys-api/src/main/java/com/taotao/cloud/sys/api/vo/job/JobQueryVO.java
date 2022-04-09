@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.api.vo.job;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 岗位查询对象
@@ -26,41 +28,27 @@ import java.io.Serializable;
  * @version 2022.03
  * @since 2020/9/30 08:49
  */
+@Data
+@Builder
 @Schema(description = "岗位查询对象")
-public record JobQueryVO(
-	/**
-	 * 岗位名称
-	 */
-	@Schema(description = "岗位名称")
-	String name,
-
-	/**
-	 * 部门id
-	 */
-	@Schema(description = "部门id")
-	Long deptId,
-
-	/**
-	 * 备注
-	 */
-	@Schema(description = "备注")
-	String remark,
-
-	/**
-	 * 排序值
-	 */
-	@Schema(description = "排序值")
-	Integer sortNum,
-
-	/**
-	 * 租户id
-	 */
-	@Schema(description = "租户id")
-	String tenantId
-) implements Serializable {
+public class JobQueryVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -4132785717179910025L;
 
+	@Schema(description = "岗位名称")
+	private String name;
+
+	@Schema(description = "部门id")
+	private Long deptId;
+
+	@Schema(description = "备注")
+	private String remark;
+
+	@Schema(description = "排序值")
+	private Integer sortNum;
+
+	@Schema(description = "租户id")
+	private String tenantId;
 
 }

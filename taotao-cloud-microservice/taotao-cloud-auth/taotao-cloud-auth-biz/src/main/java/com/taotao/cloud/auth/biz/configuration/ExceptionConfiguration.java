@@ -240,7 +240,6 @@ public class ExceptionConfiguration implements InitializingBean {
 	 *
 	 * @param request request
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:27:08
 	 */
 	private String uri(NativeWebRequest request) {
@@ -257,7 +256,6 @@ public class ExceptionConfiguration implements InitializingBean {
 	 *
 	 * @param request request
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:27:14
 	 */
 	private String query(NativeWebRequest request) {
@@ -276,7 +274,6 @@ public class ExceptionConfiguration implements InitializingBean {
 	 *
 	 * @param result result
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:27:21
 	 */
 	private String getErrors(BindingResult result) {
@@ -293,7 +290,6 @@ public class ExceptionConfiguration implements InitializingBean {
 	 *
 	 * @param e e
 	 * @return {@link String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:27:27
 	 */
 	private String getErrors(ConstraintViolationException e) {
@@ -312,7 +308,6 @@ public class ExceptionConfiguration implements InitializingBean {
 	 *
 	 * @param req req
 	 * @param e   e
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Exception e) {

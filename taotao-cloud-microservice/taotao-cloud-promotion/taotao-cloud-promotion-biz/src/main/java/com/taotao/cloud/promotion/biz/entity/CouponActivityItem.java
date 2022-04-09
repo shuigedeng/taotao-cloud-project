@@ -29,13 +29,13 @@ public class CouponActivityItem extends BaseSuperEntity<CouponActivityItem, Long
 
 	public static final String TABLE_NAME = "li_coupon_activity_item";
 
-	@Column(name = "activity_id", nullable = false, columnDefinition = "varchar(64) not null comment '优惠券活动ID'")
+	@Column(name = "activity_id", columnDefinition = "varchar(64) not null comment '优惠券活动ID'")
 	private String activityId;
 
-	@Column(name = "coupon_id", nullable = false, columnDefinition = "varchar(64) not null comment '优惠券ID'")
+	@Column(name = "coupon_id", columnDefinition = "varchar(64) not null comment '优惠券ID'")
 	private String couponId;
 
-	@Column(name = "num", nullable = false, columnDefinition = "int not null default 0 comment '优惠券数量'")
+	@Column(name = "num", columnDefinition = "int not null default 0 comment '优惠券数量'")
 	private Integer num;
 
 }

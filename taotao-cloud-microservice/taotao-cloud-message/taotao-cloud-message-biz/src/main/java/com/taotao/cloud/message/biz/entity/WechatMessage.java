@@ -23,43 +23,43 @@ public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
 	/**
 	 * 模版名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null default '' comment '模版名称'")
 	private String name;
 
 	/**
 	 * 微信模版码
 	 */
-	@Column(name = "code", nullable = false, columnDefinition = "varchar(255) not null default '' comment '微信模版码'")
+	@Column(name = "code", columnDefinition = "varchar(255) not null default '' comment '微信模版码'")
 	private String code;
 
 	/**
 	 * 关键字
 	 */
-	@Column(name = "keywords", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关键字'")
+	@Column(name = "keywords", columnDefinition = "varchar(255) not null default '' comment '关键字'")
 	private String keywords;
 
 	/**
 	 * 是否开启
 	 */
-	@Column(name = "enable", nullable = false, columnDefinition = "boolean not null default '' comment '是否开启'")
+	@Column(name = "enable", columnDefinition = "boolean not null default '' comment '是否开启'")
 	private Boolean enable = true;
 
 	/**
 	 * 订单状态
 	 */
-	@Column(name = "order_status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '订单状态'")
+	@Column(name = "order_status", columnDefinition = "varchar(255) not null default '' comment '订单状态'")
 	private String orderStatus;
 
 	/**
 	 * 模版头部信息
 	 */
-	@Column(name = "first", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版头部信息'")
+	@Column(name = "first", columnDefinition = "varchar(255) not null default '' comment '模版头部信息'")
 	private String first;
 
 	/**
 	 * 模版备注（位于最下方）
 	 */
-	@Column(name = "remark", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版备注（位于最下方）'")
+	@Column(name = "remark", columnDefinition = "varchar(255) not null default '' comment '模版备注（位于最下方）'")
 	private String remark;
 
 

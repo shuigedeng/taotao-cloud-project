@@ -48,37 +48,37 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 订单编号
 	 */
-	@Column(name = "sn", nullable = false, columnDefinition = "varchar(64) not null comment '订单编号'")
+	@Column(name = "sn", columnDefinition = "varchar(64) not null comment '订单编号'")
 	private String sn;
 
 	/**
 	 * 交易编号 关联Trade
 	 */
-	@Column(name = "trade_sn", nullable = false, columnDefinition = "varchar(64) not null comment '交易编号 关联Trade'")
+	@Column(name = "trade_sn", columnDefinition = "varchar(64) not null comment '交易编号 关联Trade'")
 	private String tradeSn;
 
 	/**
 	 * 店铺ID
 	 */
-	@Column(name = "store_id", nullable = false, columnDefinition = "bigint not null comment '店铺ID'")
+	@Column(name = "store_id", columnDefinition = "bigint not null comment '店铺ID'")
 	private Long storeId;
 
 	/**
 	 * 店铺名称
 	 */
-	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(64) not null comment '店铺名称'")
+	@Column(name = "store_name", columnDefinition = "varchar(64) not null comment '店铺名称'")
 	private String storeName;
 
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
 
 	/**
 	 * 用户名
 	 */
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(64) not null comment '用户名'")
+	@Column(name = "member_name", columnDefinition = "varchar(64) not null comment '用户名'")
 	private String memberName;
 
 	/**
@@ -86,7 +86,7 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see OrderStatusEnum
 	 */
-	@Column(name = "order_status", nullable = false, columnDefinition = "varchar(64) not null comment '订单状态'")
+	@Column(name = "order_status", columnDefinition = "varchar(64) not null comment '订单状态'")
 	private String orderStatus;
 
 	/**
@@ -94,7 +94,7 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see PayStatusEnum
 	 */
-	@Column(name = "pay_status", nullable = false, columnDefinition = "varchar(64) not null comment '付款状态'")
+	@Column(name = "pay_status", columnDefinition = "varchar(64) not null comment '付款状态'")
 	private String payStatus;
 
 	/**
@@ -102,19 +102,19 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see DeliverStatusEnum
 	 */
-	@Column(name = "deliver_status", nullable = false, columnDefinition = "varchar(64) not null comment '货运状态'")
+	@Column(name = "deliver_status", columnDefinition = "varchar(64) not null comment '货运状态'")
 	private String deliverStatus;
 
 	/**
 	 * 第三方付款流水号
 	 */
-	@Column(name = "receivable_no", nullable = false, columnDefinition = "varchar(255) not null comment '第三方付款流水号'")
+	@Column(name = "receivable_no", columnDefinition = "varchar(255) not null comment '第三方付款流水号'")
 	private String receivableNo;
 
 	/**
 	 * 支付方式
 	 */
-	@Column(name = "payment_method", nullable = false, columnDefinition = "varchar(64) not null comment '支付方式'")
+	@Column(name = "payment_method", columnDefinition = "varchar(64) not null comment '支付方式'")
 	private String paymentMethod;
 
 	/**
@@ -126,13 +126,13 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 收件人姓名
 	 */
-	@Column(name = "consignee_name", nullable = false, columnDefinition = "varchar(64) not null comment '收件人姓名'")
+	@Column(name = "consignee_name", columnDefinition = "varchar(64) not null comment '收件人姓名'")
 	private String consigneeName;
 
 	/**
 	 * 收件人手机
 	 */
-	@Column(name = "consignee_mobile", nullable = false, columnDefinition = "varchar(64) not null comment '收件人手机'")
+	@Column(name = "consignee_mobile", columnDefinition = "varchar(64) not null comment '收件人手机'")
 	private String consigneeMobile;
 
 	/**
@@ -140,115 +140,115 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see DeliveryMethodEnum
 	 */
-	@Column(name = "delivery_method", nullable = false, columnDefinition = "varchar(64) not null comment '配送方式'")
+	@Column(name = "delivery_method", columnDefinition = "varchar(64) not null comment '配送方式'")
 	private String deliveryMethod;
 
 	/**
 	 * 地址名称， ','分割
 	 */
-	@Column(name = "consignee_address_path", nullable = false, columnDefinition = "varchar(64) not null comment '地址名称，逗号分割'")
+	@Column(name = "consignee_address_path", columnDefinition = "varchar(64) not null comment '地址名称，逗号分割'")
 	private String consigneeAddressPath;
 
 	/**
 	 * 地址id，','分割
 	 */
-	@Column(name = "consignee_address_id_path", nullable = false, columnDefinition = "varchar(64) not null comment '地址id，逗号分割'")
+	@Column(name = "consignee_address_id_path", columnDefinition = "varchar(64) not null comment '地址id，逗号分割'")
 	private String consigneeAddressIdPath;
 
 	/**
 	 * 详细地址
 	 */
-	@Column(name = "consignee_detail", nullable = false, columnDefinition = "varchar(1024) not null comment '详细地址'")
+	@Column(name = "consignee_detail", columnDefinition = "varchar(1024) not null comment '详细地址'")
 	private String consigneeDetail;
 
 	/**
 	 * 总价格
 	 */
-	@Column(name = "flow_price", nullable = false, columnDefinition = "decimal(10,2) not null comment '总价格'")
+	@Column(name = "flow_price", columnDefinition = "decimal(10,2) not null comment '总价格'")
 	private BigDecimal flowPrice;
 
 	/**
 	 * 商品价格
 	 */
-	@Column(name = "goods_price", nullable = false, columnDefinition = "decimal(10,2) not null comment '商品价格'")
+	@Column(name = "goods_price", columnDefinition = "decimal(10,2) not null comment '商品价格'")
 	private BigDecimal goodsPrice;
 
 	/**
 	 * 运费
 	 */
-	@Column(name = "freight_price", nullable = false, columnDefinition = "decimal(10,2) not null comment '运费'")
+	@Column(name = "freight_price", columnDefinition = "decimal(10,2) not null comment '运费'")
 	private BigDecimal freightPrice;
 
 	/**
 	 * 优惠的金额
 	 */
-	@Column(name = "discount_price", nullable = false, columnDefinition = "decimal(10,2) not null comment '优惠的金额'")
+	@Column(name = "discount_price", columnDefinition = "decimal(10,2) not null comment '优惠的金额'")
 	private BigDecimal discountPrice;
 
 	/**
 	 * 修改价格
 	 */
-	@Column(name = "update_price", nullable = false, columnDefinition = "decimal(10,2) not null comment '修改价格'")
+	@Column(name = "update_price", columnDefinition = "decimal(10,2) not null comment '修改价格'")
 	private BigDecimal updatePrice;
 
 	/**
 	 * 发货单号
 	 */
-	@Column(name = "logistics_no", nullable = false, columnDefinition = "varchar(64) not null comment '发货单号'")
+	@Column(name = "logistics_no", columnDefinition = "varchar(64) not null comment '发货单号'")
 	private String logisticsNo;
 
 	/**
 	 * 物流公司CODE
 	 */
-	@Column(name = "logistics_code", nullable = false, columnDefinition = "varchar(64) not null comment '物流公司CODE'")
+	@Column(name = "logistics_code", columnDefinition = "varchar(64) not null comment '物流公司CODE'")
 	private String logisticsCode;
 
 	/**
 	 * 物流公司名称
 	 */
-	@Column(name = "logistics_name", nullable = false, columnDefinition = "varchar(255) not null comment '物流公司名称'")
+	@Column(name = "logistics_name", columnDefinition = "varchar(255) not null comment '物流公司名称'")
 	private String logisticsName;
 
 	/**
 	 * 订单商品总重量
 	 */
-	@Column(name = "weight", nullable = false, columnDefinition = "decimal(10,2) not null comment '订单商品总重量'")
+	@Column(name = "weight", columnDefinition = "decimal(10,2) not null comment '订单商品总重量'")
 	private BigDecimal weight;
 
 	/**
 	 * 商品数量
 	 */
-	@Column(name = "goods_num", nullable = false, columnDefinition = "int not null comment '商品数量'")
+	@Column(name = "goods_num", columnDefinition = "int not null comment '商品数量'")
 	private Integer goodsNum;
 
 	/**
 	 * 买家订单备注
 	 */
-	@Column(name = "remark", nullable = false, columnDefinition = "text not null comment '买家订单备注'")
+	@Column(name = "remark", columnDefinition = "text not null comment '买家订单备注'")
 	private String remark;
 
 	/**
 	 * 订单取消原因
 	 */
-	@Column(name = "cancel_reason", nullable = false, columnDefinition = "varchar(255) not null comment '订单取消原因'")
+	@Column(name = "cancel_reason", columnDefinition = "varchar(255) not null comment '订单取消原因'")
 	private String cancelReason;
 
 	/**
 	 * 完成时间
 	 */
-	@Column(name = "complete_time", nullable = false, columnDefinition = "datetime null comment '完成时间'")
+	@Column(name = "complete_time", columnDefinition = "datetime null comment '完成时间'")
 	private LocalDateTime completeTime;
 
 	/**
 	 * 送货时间
 	 */
-	@Column(name = "logistics_time", nullable = false, columnDefinition = "datetime null comment '送货时间'")
+	@Column(name = "logistics_time", columnDefinition = "datetime null comment '送货时间'")
 	private LocalDateTime logisticsTime;
 
 	/**
 	 * 支付方式返回的交易号
 	 */
-	@Column(name = "pay_order_no", nullable = false, columnDefinition = "varchar(64) not null comment '支付方式返回的交易号'")
+	@Column(name = "pay_order_no", columnDefinition = "varchar(64) not null comment '支付方式返回的交易号'")
 	private String payOrderNo;
 
 	/**
@@ -256,25 +256,25 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see ClientTypeEnum
 	 */
-	@Column(name = "client_type", nullable = false, columnDefinition = "varchar(64) null comment '订单来源'")
+	@Column(name = "client_type", columnDefinition = "varchar(64) null comment '订单来源'")
 	private String clientType;
 
 	/**
 	 * 是否需要发票
 	 */
-	@Column(name = "need_receipt", nullable = false, columnDefinition = "boolean not null comment '是否需要发票'")
+	@Column(name = "need_receipt", columnDefinition = "boolean not null comment '是否需要发票'")
 	private Boolean needReceipt;
 
 	/**
 	 * 是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空
 	 */
-	@Column(name = "parent_order_sn", nullable = false, columnDefinition = "varchar(64) not null comment '是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空'")
+	@Column(name = "parent_order_sn", columnDefinition = "varchar(64) not null comment '是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空'")
 	private String parentOrderSn;
 
 	/**
 	 * 是否为某订单类型的订单，如果是则为订单类型的id，否则为空
 	 */
-	@Column(name = "promotion_id", nullable = false, columnDefinition = "varchar(64) not null comment '是否为某订单类型的订单，如果是则为订单类型的id，否则为空'")
+	@Column(name = "promotion_id", columnDefinition = "varchar(64) not null comment '是否为某订单类型的订单，如果是则为订单类型的id，否则为空'")
 	private String promotionId;
 
 	/**
@@ -282,7 +282,7 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see OrderTypeEnum
 	 */
-	@Column(name = "order_type", nullable = false, columnDefinition = "varchar(64) not null comment '订单类型'")
+	@Column(name = "order_type", columnDefinition = "varchar(64) not null comment '订单类型'")
 	private String orderType;
 
 	/**
@@ -290,43 +290,43 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 *
 	 * @see OrderPromotionTypeEnum
 	 */
-	@Column(name = "order_promotion_type", nullable = false, columnDefinition = "varchar(64) not null comment '订单促销类型'")
+	@Column(name = "order_promotion_type", columnDefinition = "varchar(64) not null comment '订单促销类型'")
 	private String orderPromotionType;
 
 	/**
 	 * 价格详情
 	 */
-	@Column(name = "price_detail", nullable = false, columnDefinition = "varchar(64) not null comment '价格详情'")
+	@Column(name = "price_detail", columnDefinition = "varchar(64) not null comment '价格详情'")
 	private String priceDetail;
 
 	/**
 	 * 订单是否支持原路退回
 	 */
-	@Column(name = "can_return", nullable = false, columnDefinition = "boolean not null comment '订单是否支持原路退回'")
+	@Column(name = "can_return", columnDefinition = "boolean not null comment '订单是否支持原路退回'")
 	private Boolean canReturn;
 
 	/**
 	 * 提货码
 	 */
-	@Column(name = "verification_code", nullable = false, columnDefinition = "varchar(64) not null comment '提货码'")
+	@Column(name = "verification_code", columnDefinition = "varchar(64) not null comment '提货码'")
 	private String verificationCode;
 
 	/**
 	 * 分销员ID
 	 */
-	@Column(name = "distribution_id", nullable = false, columnDefinition = "bigint not null comment '分销员ID'")
+	@Column(name = "distribution_id", columnDefinition = "bigint not null comment '分销员ID'")
 	private Long distributionId;
 
 	/**
 	 * 使用的店铺会员优惠券id(,区分)
 	 */
-	@Column(name = "use_store_member_coupon_ids", nullable = false, columnDefinition = "varchar(255) not null comment '使用的店铺会员优惠券id(,区分)'")
+	@Column(name = "use_store_member_coupon_ids", columnDefinition = "varchar(255) not null comment '使用的店铺会员优惠券id(,区分)'")
 	private String useStoreMemberCouponIds;
 
 	/**
 	 * 使用的平台会员优惠券id
 	 */
-	@Column(name = "use_platform_member_coupon_id", nullable = false, columnDefinition = "varchar(64) not null comment '使用的平台会员优惠券id'")
+	@Column(name = "use_platform_member_coupon_id", columnDefinition = "varchar(64) not null comment '使用的平台会员优惠券id'")
 	private String usePlatformMemberCouponId;
 
 	/**

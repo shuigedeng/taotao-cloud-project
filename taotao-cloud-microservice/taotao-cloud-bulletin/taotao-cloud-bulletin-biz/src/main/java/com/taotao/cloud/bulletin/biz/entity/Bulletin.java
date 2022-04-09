@@ -49,33 +49,33 @@ public class Bulletin extends JpaSuperEntity {
 	/**
 	 * 申请单号
 	 */
-	@Column(name = "code", nullable = false, unique = true, columnDefinition = "varchar(32) not null comment '申请单号'")
+	@Column(name = "code", unique = true, columnDefinition = "varchar(32) not null comment '申请单号'")
 	private String code;
 
 	/**
 	 * 公司ID
 	 */
-	@Column(name = "company_id", nullable = false, columnDefinition = "bigint not null comment '公司ID'")
+	@Column(name = "company_id", columnDefinition = "bigint not null comment '公司ID'")
 	private Long companyId;
 
 	/**
 	 * 商城ID
 	 */
-	@Column(name = "mall_id", nullable = false, columnDefinition = "bigint not null comment '商城ID'")
+	@Column(name = "mall_id", columnDefinition = "bigint not null comment '商城ID'")
 	private Long mallId;
 
 	/**
 	 * 提现金额
 	 */
 	@Builder.Default
-	@Column(name = "amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '提现金额'")
+	@Column(name = "amount", columnDefinition = "decimal(10,2) not null default 0 comment '提现金额'")
 	private BigDecimal amount = BigDecimal.ZERO;
 
 	/**
 	 * 钱包余额
 	 */
 	@Builder.Default
-	@Column(name = "balance_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
+	@Column(name = "balance_amount", columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
 	private BigDecimal balanceAmount = BigDecimal.ZERO;
 
 }

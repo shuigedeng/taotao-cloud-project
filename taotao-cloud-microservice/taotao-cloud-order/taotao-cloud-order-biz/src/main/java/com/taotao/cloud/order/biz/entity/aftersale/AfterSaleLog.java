@@ -28,13 +28,13 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	/**
 	 * 售后服务单号
 	 */
-	@Column(name = "sn", nullable = false, columnDefinition = "varchar(64) not null comment '售后服务单号'")
+	@Column(name = "sn", columnDefinition = "varchar(64) not null comment '售后服务单号'")
 	private String sn;
 
 	/**
 	 * 操作者id(可以是卖家)
 	 */
-	@Column(name = "operator_id", nullable = false, columnDefinition = "varchar(64) not null comment '操作者id(可以是卖家)'")
+	@Column(name = "operator_id", columnDefinition = "varchar(64) not null comment '操作者id(可以是卖家)'")
 	private Long operatorId;
 
 	/**
@@ -42,18 +42,18 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	 *
 	 * @see UserEnum
 	 */
-	@Column(name = "operator_type", nullable = false, columnDefinition = "varchar(64) not null comment '操作者类型'")
+	@Column(name = "operator_type", columnDefinition = "varchar(64) not null comment '操作者类型'")
 	private String operatorType;
 
 	/**
 	 * 操作者名称
 	 */
-	@Column(name = "operator_name", nullable = false, columnDefinition = "varchar(64) not null comment '操作者名称'")
+	@Column(name = "operator_name", columnDefinition = "varchar(64) not null comment '操作者名称'")
 	private String operatorName;
 
 	/**
 	 * 日志信息
 	 */
-	@Column(name = "message", nullable = false, columnDefinition = "varchar(1024) not null comment '日志信息'")
+	@Column(name = "message", columnDefinition = "varchar(1024) not null comment '日志信息'")
 	private String message;
 }

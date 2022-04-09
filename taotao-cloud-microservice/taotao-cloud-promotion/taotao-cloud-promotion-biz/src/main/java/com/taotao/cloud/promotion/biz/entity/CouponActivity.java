@@ -34,15 +34,15 @@ public class CouponActivity extends BasePromotions<CouponActivity, Long> {
 	/**
 	 * @see CouponActivityTypeEnum
 	 */
-	@Column(name = "coupon_activity_type", nullable = false, columnDefinition = "varchar(64) not null comment '优惠券活动类型 REGISTERED:新人赠券,SPECIFY：精确发券'")
+	@Column(name = "coupon_activity_type", columnDefinition = "varchar(64) not null comment '优惠券活动类型 REGISTERED:新人赠券,SPECIFY：精确发券'")
 	private String couponActivityType;
 
 	/**
 	 * @see CouponActivitySendTypeEnum
 	 */
-	@Column(name = "activity_scope", nullable = false, columnDefinition = "varchar(64) not null comment '活动范围 ALL:全部会员,DESIGNATED：指定会员'")
+	@Column(name = "activity_scope", columnDefinition = "varchar(64) not null comment '活动范围 ALL:全部会员,DESIGNATED：指定会员'")
 	private String activityScope;
 
-	@Column(name = "activity_scope_info", nullable = false, columnDefinition = "varchar(64) not null comment '活动范围详情,只有精准发券使用'")
+	@Column(name = "activity_scope_info", columnDefinition = "varchar(64) not null comment '活动范围详情,只有精准发券使用'")
 	private String activityScopeInfo;
 }

@@ -25,6 +25,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 地区查询对象
@@ -35,53 +36,34 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "地区查询对象")
+@Schema(description = "地区查询VO")
 public class RegionTreeVO extends MapperNode implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -5853343562172855421L;
 
-	/**
-	 * 地区编码
-	 */
 	@Schema(description = "地区编码")
 	private String code;
 
-	/**
-	 * 地区名称
-	 */
 	@Schema(description = "地区名称")
 	private String name;
 
-	/**
-	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street）
-	 */
 	@Schema(description = "地区级别（1:省份province,2:市city,3:区县district,4:街道street）")
 	private Integer level;
 
-	/**
-	 * 城市编码
-	 */
 	@Schema(description = "城市编码")
 	private String cityCode;
 
-	/**
-	 * 城市中心经度
-	 */
 	@Schema(description = "城市中心经度")
 	private String lng;
 
-	/**
-	 * 城市中心纬度
-	 */
 	@Schema(description = "城市中心纬度")
 	private String lat;
 
-	/**
-	 * 地区父节点
-	 */
 	@Schema(description = "地区父节点")
 	private Long parentId;
 }

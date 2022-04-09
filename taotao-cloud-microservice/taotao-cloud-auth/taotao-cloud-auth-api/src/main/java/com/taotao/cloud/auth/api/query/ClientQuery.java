@@ -16,6 +16,7 @@
 package com.taotao.cloud.auth.api.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -28,6 +29,7 @@ import java.io.Serializable;
 @Schema(name = "ClientQuery", description = "客户端查询query")
 public class ClientQuery implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "应用标识")

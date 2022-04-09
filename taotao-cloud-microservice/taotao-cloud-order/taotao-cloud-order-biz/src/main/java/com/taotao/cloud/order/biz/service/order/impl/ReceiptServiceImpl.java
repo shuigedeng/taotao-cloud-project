@@ -56,7 +56,7 @@ public class ReceiptServiceImpl extends ServiceImpl<ReceiptMapper, Receipt> impl
     }
 
     @Override
-    public Receipt invoicing(String receiptId) {
+    public Receipt invoicing(Long receiptId) {
         //根据id查询发票信息
         Receipt receipt = this.getById(receiptId);
         if (receipt != null) {

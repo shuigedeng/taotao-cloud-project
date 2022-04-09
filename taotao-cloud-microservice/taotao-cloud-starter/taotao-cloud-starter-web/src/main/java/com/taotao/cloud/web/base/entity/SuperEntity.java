@@ -30,7 +30,7 @@ public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
 	@GenericGenerator(name="snowFlakeIdGenerator", strategy="com.taotao.cloud.data.jpa.bean.SnowFlakeIdGenerator")
 	@GeneratedValue(generator="snowFlakeIdGenerator")
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigint not null comment 'id'")
+	@Column(name = "id", updatable = false, columnDefinition = "bigint not null comment 'id'")
 	@TableId(value = "id", type = IdType.ASSIGN_ID)
 	private I id;
 

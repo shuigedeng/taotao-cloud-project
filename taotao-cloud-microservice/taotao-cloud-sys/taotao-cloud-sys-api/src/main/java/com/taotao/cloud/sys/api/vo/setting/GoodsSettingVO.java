@@ -1,14 +1,22 @@
 package com.taotao.cloud.sys.api.vo.setting;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 商品设置
+ * 商品配置
  */
 @Data
+@Builder
+@Schema(description = "商品配置VO")
 public class GoodsSettingVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
 
 	/**

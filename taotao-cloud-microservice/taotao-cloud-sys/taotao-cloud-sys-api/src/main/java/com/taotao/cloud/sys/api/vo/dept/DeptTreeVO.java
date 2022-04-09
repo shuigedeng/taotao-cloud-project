@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.taotao.cloud.common.tree.INode;
 import com.taotao.cloud.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * DepartVO
@@ -25,33 +27,33 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeptTreeVO extends MapperNode implements INode {
 
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
+
 	/**
 	 * 主键ID
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 
 	/**
 	 * 父节点ID
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	private Long parentId;
 
 	/**
 	 * 子孙节点
 	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<INode> children;
 
 	/**
 	 * 是否有子孙节点
 	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Boolean hasChildren;
 
 	/**

@@ -23,7 +23,7 @@ public class ShortLink extends BaseSuperEntity<ShortLink, Long> {
 	/**
 	 * 原始参数
 	 */
-	@Column(name = "original_params", nullable = false, columnDefinition = "varchar(255) not null default '' comment '原始参数'")
+	@Column(name = "original_params", columnDefinition = "varchar(255) not null default '' comment '原始参数'")
 	private String originalParams;
 
 

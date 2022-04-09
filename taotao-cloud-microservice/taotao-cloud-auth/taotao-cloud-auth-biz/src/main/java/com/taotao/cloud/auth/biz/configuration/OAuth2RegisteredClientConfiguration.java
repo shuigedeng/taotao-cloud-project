@@ -155,10 +155,8 @@ public class OAuth2RegisteredClientConfiguration {
 	}
 
 	private TokenSettings getTokenSettings() {
-
 		Duration accessTokenDuration = setTokenTime(accessTokenTimeUnit, accessTokenTime, 5);
 		Duration refreshTokenDuration = setTokenTime(refreshTokenTimeUnit, refreshTokenTime, 60);
-
 		TokenSettings.Builder tokenSettingsBuilder = TokenSettings.builder()
 			.accessTokenTimeToLive(accessTokenDuration)
 			.refreshTokenTimeToLive(refreshTokenDuration);
@@ -167,38 +165,17 @@ public class OAuth2RegisteredClientConfiguration {
 	}
 
 	private Duration setTokenTime(String tokenTimeUnit, long tokenTime, long durationInMinutes) {
-
 		Duration duration = Duration.ofMinutes(durationInMinutes);
-
 		if (StringUtils.hasText(tokenTimeUnit)) {
-
-			switch (tokenTimeUnit.toUpperCase()) {
-				case "M":
-				case "MINUTE":
-				case "MINUTES":
-					duration = Duration.ofMinutes(tokenTime);
-					break;
-				case "H":
-				case "HOUR":
-				case "HOURS":
-					duration = Duration.ofHours(tokenTime);
-					break;
-				case "D":
-				case "DAY":
-				case "DAYS":
-					duration = Duration.ofDays(tokenTime);
-					break;
-				case "W":
-				case "WEEK":
-				case "WEEKS":
-					duration = Duration.of(tokenTime, ChronoUnit.WEEKS);
-					break;
-				default:
-					duration = Duration.of(tokenTime, ChronoUnit.WEEKS);
-			}
+			duration = switch (tokenTimeUnit.toUpperCase()) {
+				case "M", "MINUTE", "MINUTES" -> Duration.ofMinutes(tokenTime);
+				case "H", "HOUR", "HOURS" -> Duration.ofHours(tokenTime);
+				case "D", "DAY", "DAYS" -> Duration.ofDays(tokenTime);
+				case "W", "WEEK", "WEEKS" -> Duration.of(tokenTime, ChronoUnit.WEEKS);
+				default -> Duration.of(tokenTime, ChronoUnit.WEEKS);
+			};
 		}
 
 		return duration;
 	}
-
 }

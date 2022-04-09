@@ -1,6 +1,8 @@
 package com.taotao.cloud.sys.api.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,13 +16,15 @@ import lombok.Setter;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Setter
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "MenuMetaVo", description = "菜单元数据VO")
-public class MenuMetaVO {
+@Schema(description = "菜单元数据VO")
+public class MenuMetaVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
 
 	@Schema(description = "名称")
 	private String title;

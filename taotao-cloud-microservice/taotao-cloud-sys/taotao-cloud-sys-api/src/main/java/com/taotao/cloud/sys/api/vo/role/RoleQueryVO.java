@@ -19,6 +19,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 角色查询对象
@@ -27,41 +29,42 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:23:58
  */
+@Data
+@Builder
 @Schema( description = "角色查询对象")
-public record RoleQueryVO(
-	/**
-	 * id
-	 */
-	@Schema(description = "id")
-	Long id,
-	/**
-	 * 角色名称
-	 */
-	@Schema(description = "角色名称")
-	String name,
-	/**
-	 * 角色code
-	 */
-	@Schema(description = "角色code")
-	String code,
-	/**
-	 * 备注
-	 */
-	@Schema(description = "备注")
-	String remark,
-	/**
-	 * 创建时间
-	 */
-	@Schema(description = "创建时间")
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
-	@Schema(description = "最后修改时间")
-	LocalDateTime lastModifiedTime) implements Serializable {
+public class RoleQueryVO implements Serializable {
 
 	@Serial
 	static final long serialVersionUID = 5126530068827085130L;
 
-
+	/**
+	 * id
+	 */
+	@Schema(description = "id")
+	private Long id;
+	/**
+	 * 角色名称
+	 */
+	@Schema(description = "角色名称")
+	private String name;
+	/**
+	 * 角色code
+	 */
+	@Schema(description = "角色code")
+	private String code;
+	/**
+	 * 备注
+	 */
+	@Schema(description = "备注")
+	private String remark;
+	/**
+	 * 创建时间
+	 */
+	@Schema(description = "创建时间")
+	private LocalDateTime createTime;
+	/**
+	 * 最后修改时间
+	 */
+	@Schema(description = "最后修改时间")
+	private LocalDateTime lastModifiedTime;
 }

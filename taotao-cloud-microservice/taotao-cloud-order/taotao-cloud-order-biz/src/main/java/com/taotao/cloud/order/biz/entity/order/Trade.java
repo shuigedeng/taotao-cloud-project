@@ -37,31 +37,31 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "交易编号")
 	private String sn;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "买家id")
 	private String memberId;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "买家用户名")
 	private String memberName;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "支付方式")
 	private String paymentMethod;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	/**
 	 * @see PayStatusEnum
 	 */
@@ -70,25 +70,25 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "总价格")
 	private BigDecimal flowPrice;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "原价")
 	private BigDecimal goodsPrice;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "运费")
 	private BigDecimal freightPrice;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "优惠的金额")
 	private BigDecimal discountPrice;
 
@@ -96,30 +96,30 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	 * @see DeliveryMethodEnum
 	 */
 	@Schema(description = "配送方式")
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String deliveryMethod;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "收货人姓名")
 	private String consigneeName;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "收件人手机")
 	private String consigneeMobile;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "地址名称， '，'分割")
 	private String consigneeAddressPath;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	@Schema(description = "地址id，'，'分割 ")
 	private String consigneeAddressIdPath;
 

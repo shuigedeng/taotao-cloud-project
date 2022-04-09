@@ -16,9 +16,12 @@
 package com.taotao.cloud.sys.api.dto.role;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import lombok.Builder;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -28,32 +31,25 @@ import org.hibernate.validator.constraints.Length;
  * @version 2021.10
  * @since 2021-10-09 15:25:01
  */
+@Data
+@Builder
 @Schema(description = "角色查询对象")
-public record RoleQueryDTO(
-	/**
-	 * 角色名称
-	 */
+public class RoleQueryDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
+
 	@Schema(description = "角色名称", required = true)
 	@NotBlank(message = "角色名称不能超过为空")
 	@Length(max = 20, message = "角色名称不能超过20个字符")
-	String name,
+	private String name;
 
-	/**
-	 * 角色标识
-	 */
 	@Schema(description = "角色标识", required = true)
 	@NotBlank(message = "角色标识不能超过为空")
 	@Length(max = 20, message = "角色标识不能超过20个字符")
 	@Pattern(regexp = "^[0-9a-zA-Z_]+$", message = "角色标识格式错误：最多20字符，只能包含字母或者下划线")
-	String code,
+	private String code;
 
-	/**
-	 * 备注
-	 */
 	@Schema(description = "备注")
-	String remark) implements Serializable {
-
-	static final long serialVersionUID = -1972549738577159538L;
-
-
+	private String remark;
 }

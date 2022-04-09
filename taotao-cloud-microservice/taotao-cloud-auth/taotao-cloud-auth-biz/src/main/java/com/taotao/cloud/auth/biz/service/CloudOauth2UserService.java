@@ -40,9 +40,7 @@ public class CloudOauth2UserService extends DefaultOAuth2UserService {
 
 		// 获取qq用户信息的流程很奇葩需要我们自定义
 		if (QQ.equals(registrationId)) {
-
 			String tokenValue = userRequest.getAccessToken().getTokenValue();
-
 			// openId请求
 			RequestEntity<?> openIdRequest = RequestEntity.get(
 				UriComponentsBuilder.fromUriString(QQ_OPEN_ID_URL)

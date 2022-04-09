@@ -3,6 +3,10 @@ package com.taotao.cloud.sys.api.vo.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户注册VO
@@ -10,20 +14,21 @@ import java.io.Serializable;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
+@Data
+@Builder
 @Schema(description = "用户注册VO")
-public record UserRegisterVO(
-
-	@Schema(description = "真实用户名")
-	String username,
-
-	@Schema(description = "手机号")
-	String phone,
-
-	@Schema(description = "密码")
-	String password) implements Serializable {
+public class UserRegisterVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
+	@Schema(description = "真实用户名")
+	String username;
+
+	@Schema(description = "手机号")
+	String phone;
+
+	@Schema(description = "密码")
+	String password;
 
 }

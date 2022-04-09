@@ -3,6 +3,8 @@ package com.taotao.cloud.sys.api.dto.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 重复校验DTO
@@ -10,15 +12,17 @@ import java.io.Serializable;
  * @author shuigedeng
  * @since 2020/5/2 16:40
  */
+@Data
+@Builder
 @Schema(description = "重复检查DTO")
-public record RepeatCheckDTO(
-	@Schema(description = "字段值 邮箱 手机号 用户名", required = true)
-	String fieldVal,
-
-	@Schema(description = "指用户id 主要作用编辑情况过滤自己的校验", required = true)
-	Integer dataId) implements Serializable {
+public class RepeatCheckDTO implements Serializable {
 
 	@Serial
-	private static final long serialVersionUID = -5002412807608124376L;
+	private static final long serialVersionUID = -4132785717179910025L;
 
+	@Schema(description = "字段值 邮箱 手机号 用户名", required = true)
+	private String fieldVal;
+
+	@Schema(description = "指用户id 主要作用编辑情况过滤自己的校验", required = true)
+	private Integer dataId;
 }
