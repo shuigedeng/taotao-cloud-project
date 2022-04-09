@@ -43,7 +43,7 @@ public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
 	/**
 	 * 买家ID
 	 */
-	@Column(name = "customer_id", nullable = false, columnDefinition = "bigint not null comment '买家ID'")
+	@Column(name = "customer_id", columnDefinition = "bigint not null comment '买家ID'")
 	private Long customerId;
 
 	/**
@@ -55,7 +55,7 @@ public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
 	/**
 	 * 交易金额
 	 */
-	@Column(name = "actual_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
+	@Column(name = "actual_amount", columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
 	private BigDecimal actualAmount;
 
 	/**

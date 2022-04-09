@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.api.vo.menu;
 import com.taotao.cloud.common.tree.INode;
 import com.taotao.cloud.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 树形菜单列表
@@ -38,12 +40,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "MenuTreeVO", description = "树形菜单列表")
 public class MenuTreeVO extends MapperNode implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -5853343562172855421L;
 
 	@Schema(description = "图标")

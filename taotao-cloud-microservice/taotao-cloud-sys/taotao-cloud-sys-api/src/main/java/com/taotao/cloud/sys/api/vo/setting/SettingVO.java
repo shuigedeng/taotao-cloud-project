@@ -13,8 +13,6 @@ import lombok.Setter;
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class SettingVO {
 
 	private String settingValue;

@@ -30,7 +30,7 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 	/**
 	 * 售后原因
 	 */
-	@Column(name = "reason", nullable = false, columnDefinition = "varchar(1024) not null comment '售后原因'")
+	@Column(name = "reason", columnDefinition = "varchar(1024) not null comment '售后原因'")
 	private String reason;
 
 	/**
@@ -38,7 +38,7 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 	 *
 	 * @see AfterSaleTypeEnum
 	 */
-	@Column(name = "service_type", nullable = false, columnDefinition = "varchar(64) not null comment '售后类型'")
+	@Column(name = "service_type", columnDefinition = "varchar(64) not null comment '售后类型'")
 	private String serviceType;
 
 }

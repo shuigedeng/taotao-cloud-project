@@ -23,19 +23,19 @@ public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 	/**
 	 * 站内信节点
 	 */
-	@Column(name = "notice_node", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信节点'")
+	@Column(name = "notice_node", columnDefinition = "varchar(255) not null default '' comment '站内信节点'")
 	private String noticeNode;
 
 	/**
 	 * 站内信标题
 	 */
-	@Column(name = "notice_title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信标题'")
+	@Column(name = "notice_title", columnDefinition = "varchar(255) not null default '' comment '站内信标题'")
 	private String noticeTitle;
 
 	/**
 	 * 站内信内容
 	 */
-	@Column(name = "notice_content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信内容'")
+	@Column(name = "notice_content", columnDefinition = "varchar(255) not null default '' comment '站内信内容'")
 	private String noticeContent;
 
 	/**
@@ -43,7 +43,7 @@ public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 	 *
 	 * @see SwitchEnum
 	 */
-	@Column(name = "notice_status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信是否开启'")
+	@Column(name = "notice_status", columnDefinition = "varchar(255) not null default '' comment '站内信是否开启'")
 	private String noticeStatus;
 
 	/**
@@ -51,7 +51,7 @@ public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 	 *
 	 * @see NoticeMessageParameterEnum
 	 */
-	@Column(name = "variable", nullable = false, columnDefinition = "varchar(255) not null default '' comment '字典名称'")
+	@Column(name = "variable", columnDefinition = "varchar(255) not null default '' comment '字典名称'")
 	private String variable;
 
 

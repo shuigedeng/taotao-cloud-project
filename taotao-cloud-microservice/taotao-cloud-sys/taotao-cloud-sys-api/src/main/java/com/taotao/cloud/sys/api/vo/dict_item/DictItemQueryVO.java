@@ -19,6 +19,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 字典项查询对象
@@ -27,51 +29,29 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:32:25
  */
-@Schema( description = "字典项查询对象")
-public record DictItemQueryVO(
-	/**
-	 * id
-	 */
-	@Schema(description = "id")
-	Long id,
-	/**
-	 * 字典id
-	 */
-	@Schema(description = "字典id")
-	Long dictId,
-	/**
-	 * 字典项文本
-	 */
-	@Schema(description = "字典项文本")
-	String itemText,
-	/**
-	 * 字典项值
-	 */
-	@Schema(description = "字典项值")
-	String itemValue,
-	/**
-	 * 描述
-	 */
-	@Schema(description = "描述")
-	String description,
-	/**
-	 * 状态(1不启用 2启用)
-	 */
-	@Schema(description = "状态(1不启用 2启用)")
-	Integer status,
-	/**
-	 * 创建时间
-	 */
-	@Schema(description = "创建时间")
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
-	@Schema(description = "最后修改时间")
-	LocalDateTime lastModifiedTime) implements Serializable {
+@Data
+@Builder
+@Schema(description = "字典项查询对象")
+public class DictItemQueryVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = -4132785717179910025L;
 
+	@Schema(description = "id")
+	private Long id;
+	@Schema(description = "字典id")
+	private Long dictId;
+	@Schema(description = "字典项文本")
+	String itemText;
+	@Schema(description = "字典项值")
+	private String itemValue;
+	@Schema(description = "描述")
+	private String description;
+	@Schema(description = "状态(1不启用 2启用)")
+	private Integer status;
+	@Schema(description = "创建时间")
+	private LocalDateTime createTime;
+	@Schema(description = "最后修改时间")
+	private LocalDateTime lastModifiedTime;
 
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.vo.redis.RedisVo;
+import com.taotao.cloud.sys.api.vo.redis.RedisVO;
 import com.taotao.cloud.sys.biz.service.IRedisService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ public class RedisServiceImpl implements IRedisService {
 	private RedisRepository redisRepository;
 
 	@Override
-	public Page<RedisVo> findByKey(String key, Pageable pageable) {
-		List<RedisVo> redisVos = new ArrayList<>();
+	public Page<RedisVO> findByKey(String key, Pageable pageable) {
+		List<RedisVO> redisVOS = new ArrayList<>();
 		if (!"*".equals(key)) {
 			key = "*" + key + "*";
 		}
@@ -44,9 +44,9 @@ public class RedisServiceImpl implements IRedisService {
 			if (!"string".equals(dataType.code())) {
 				continue;
 			}
-			RedisVo redisVo = new RedisVo(s.toString(),
+			RedisVO redisVo = new RedisVO(s.toString(),
 				redisRepository.get(s.toString()).toString());
-			redisVos.add(redisVo);
+			redisVOS.add(redisVo);
 		}
 		//Page<RedisVo> page = new PageImpl<RedisVo>(
 		//	PageUtil.toPage(pageable.getPageNumber(), pageable.getPageSize(), redisVos),

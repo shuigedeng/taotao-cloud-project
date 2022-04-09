@@ -1,11 +1,8 @@
 package com.taotao.cloud.auth.biz.actuator;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.info.Info.Builder;
 import org.springframework.boot.actuate.info.InfoContributor;
@@ -20,9 +17,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AppInfoContributor implements InfoContributor {
+	public static final Map<String, Object> appInfoMap = new HashMap<>();
 
-	public AppInfoContributor(@Value("${release:1}") String release, @Value("${build:7}")String build) {
-		LOGGER.debug("in AppInfoContributor release=" + release + " build=" + build);
+	public AppInfoContributor(@Value("${release:1}") String release,
+		@Value("${build:7}") String build) {
+		LogUtil.debug("in AppInfoContributor release=" + release + " build=" + build);
 		appInfoMap.put("release", release);
 		appInfoMap.put("build", build);
 	}

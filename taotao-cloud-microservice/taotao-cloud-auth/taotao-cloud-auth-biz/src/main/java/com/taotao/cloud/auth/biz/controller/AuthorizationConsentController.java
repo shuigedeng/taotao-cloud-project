@@ -56,6 +56,7 @@ public class AuthorizationConsentController {
 		} else {
 			authorizedScopes = Collections.emptySet();
 		}
+
 		for (String requestedScope : StringUtils.delimitedListToStringArray(scope, " ")) {
 			if (authorizedScopes.contains(requestedScope)) {
 				previouslyApprovedScopes.add(requestedScope);

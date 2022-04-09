@@ -41,7 +41,7 @@ public class OrderLog extends BaseIdEntity {
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
     @Schema(description =  "创建者", hidden = true)
@@ -49,26 +49,26 @@ public class OrderLog extends BaseIdEntity {
 	/**
 	 * 应用ID
 	 */
-    @CreatedDate@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+    @CreatedDate@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
     @Schema(description =  "创建时间", hidden = true)
 
     private Date createTime;
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "订单编号")
 	/**
 	 * 应用ID
 	 */
     private String orderSn;
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "操作者id(可以是卖家)")
 	/**
 	 * 应用ID
 	 */
     private Long operatorId;
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see UserEnums
      */
@@ -77,13 +77,13 @@ public class OrderLog extends BaseIdEntity {
 	 * 应用ID
 	 */
     private String operatorType;
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "操作者名称")
     private String operatorName;
 	/**
 	 * 应用ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     @Schema(description =  "日志信息")
     private String message;
 

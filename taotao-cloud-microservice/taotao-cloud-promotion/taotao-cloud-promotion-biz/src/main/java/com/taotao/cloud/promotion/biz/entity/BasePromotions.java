@@ -29,28 +29,28 @@ public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable>
 
 	private static final long serialVersionUID = 7814832369110695758L;
 
-	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(64) not null comment '商家名称，如果是平台，这个值为 platform'")
+	@Column(name = "store_name", columnDefinition = "varchar(64) not null comment '商家名称，如果是平台，这个值为 platform'")
 	private String storeName;
 
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '商家id，如果是平台，这个值为 platform'")
+	@Column(name = "store_id", columnDefinition = "varchar(64) not null comment '商家id，如果是平台，这个值为 platform'")
 	private String storeId;
 
-	@Column(name = "promotion_name", nullable = false, columnDefinition = "varchar(64) not null comment '活动名称'")
+	@Column(name = "promotion_name", columnDefinition = "varchar(64) not null comment '活动名称'")
 	private String promotionName;
 
-	@Column(name = "start_time", nullable = false, columnDefinition = "varchar(64) not null comment '活动开始时间'")
+	@Column(name = "start_time", columnDefinition = "varchar(64) not null comment '活动开始时间'")
 	private LocalDateTime startTime;
 
-	@Column(name = "end_time", nullable = false, columnDefinition = "varchar(64) not null comment '活动结束时间'")
+	@Column(name = "end_time", columnDefinition = "varchar(64) not null comment '活动结束时间'")
 	private LocalDateTime endTime;
 
 	/**
 	 * @see PromotionsScopeTypeEnum
 	 */
-	@Column(name = "scope_type", nullable = false, columnDefinition = "varchar(64) not null comment '关联范围类型'")
+	@Column(name = "scope_type", columnDefinition = "varchar(64) not null comment '关联范围类型'")
 	private String scopeType = PromotionsScopeTypeEnum.PORTION_GOODS.name();
 
-	@Column(name = "scope_id", nullable = false, columnDefinition = "varchar(64) not null comment '范围关联的id'")
+	@Column(name = "scope_id", columnDefinition = "varchar(64) not null comment '范围关联的id'")
 	private String scopeId;
 
 	/**

@@ -1,23 +1,26 @@
 /*
  * Copyright 2002-2021 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License; Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * Unless required by applicable law or agreed to in writing; software
+ * distributed under the License is distributed on an "AS IS" BASIS;
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND; either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package com.taotao.cloud.sys.api.dto.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -27,80 +30,43 @@ import org.hibernate.validator.constraints.Length;
  * @version 2021.10
  * @since 2021-10-09 15:26:19
  */
+@Data
+@Builder
 @Schema(description = "菜单更新对象")
-public record MenuUpdateDTO(
+public class MenuUpdateDTO implements Serializable {
 
-	/**
-	 * 菜单名称
-	 */
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
+
 	@Schema(description = "菜单名称", required = true)
 	@NotBlank(message = "菜单名称不能超过为空")
 	@Length(max = 20, message = "菜单名称不能超过20个字符")
-	String name,
-	/**
-	 * 菜单类型 1：目录 2：菜单 3：按钮
-	 */
+	private String name;
 	@Schema(description = "菜单类型 1：目录 2：菜单 3：按钮", required = true)
 	@NotBlank(message = "菜单类型不能超过为空")
-	//@IntEnums(value = {1, 2, 3})
-	Byte type,
-	/**
-	 * 权限标识
-	 */
+	//@IntEnums(value = {1; 2; 3})
+	private Byte type;
 	@Schema(description = "权限标识")
-	String perms,
-	/**
-	 * 前端path / 即跳转路由
-	 */
+	private String perms;
 	@Schema(description = "前端path / 即跳转路由")
-	String path,
-	/**
-	 * 菜单组件
-	 */
+	private String path;
 	@Schema(description = "菜单组件")
-	String component,
-	/**
-	 * 父菜单ID
-	 */
+	private String component;
 	@Schema(description = "父菜单ID")
-	Long parentId,
-	/**
-	 * 图标
-	 */
+	private Long parentId;
 	@Schema(description = "图标")
-	String icon,
-	/**
-	 * 是否缓存页面: 0:否 1:是 (默认值0)
-	 */
+	private String icon;
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
-	Boolean keepAlive,
-	/**
-	 * 是否隐藏路由菜单: 0否,1是（默认值0
-	 */
-	@Schema(description = "是否隐藏路由菜单: 0否,1是（默认值0）")
-	Boolean hidden,
-	/**
-	 * 聚合路由 0否,1是（默认值0）
-	 */
-	@Schema(description = "聚合路由 0否,1是（默认值0）")
-	Boolean alwaysShow,
-	/**
-	 * 重定向
-	 */
+	private Boolean keepAlive;
+	@Schema(description = "是否隐藏路由菜单: 0否;1是（默认值0）")
+	private Boolean hidden;
+	@Schema(description = "聚合路由 0否;1是（默认值0）")
+	private Boolean alwaysShow;
 	@Schema(description = "重定向")
-	String redirect,
-	/**
-	 * 是否为外链 0否,1是（默认值0）
-	 */
-	@Schema(description = "是否为外链 0否,1是（默认值0）")
-	Boolean isFrame,
-	/**
-	 * 排序值
-	 */
+	private String redirect;
+	@Schema(description = "是否为外链 0否;1是（默认值0）")
+	private Boolean isFrame;
 	@Schema(description = "排序值")
-	Integer sortNum) implements Serializable {
-
-	static final long serialVersionUID = -1972549738577159538L;
-
+	private Integer sortNum;
 }
 

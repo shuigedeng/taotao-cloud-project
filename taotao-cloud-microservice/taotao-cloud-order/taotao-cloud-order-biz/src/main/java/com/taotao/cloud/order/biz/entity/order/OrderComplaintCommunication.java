@@ -40,31 +40,31 @@ public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long
      * 投诉id
      */
     @Schema(description =  "投诉id")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     private Long complainId;
     /**
      * 对话内容
      */
     @Schema(description =  "对话内容")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     private String content;
     /**
      * 所属，买家/卖家
      */
     @Schema(description =  "所属，买家/卖家")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     private String owner;
     /**
      * 对话所属名称
      */
     @Schema(description =  "对话所属名称")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     private String ownerName;
     /**
      * 对话所属id,卖家id/买家id
      */
     @Schema(description =  "对话所属id,卖家id/买家id")
-    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
+    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
     private Long ownerId;
 
 

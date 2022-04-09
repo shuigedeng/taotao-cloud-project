@@ -16,7 +16,11 @@
 package com.taotao.cloud.sys.api.vo.region;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * QueryRegionByParentIdVO
@@ -25,26 +29,32 @@ import java.util.List;
  * @version 2021.10
  * @since 2021-10-09 15:31:45
  */
-@Schema( description = "查询应用列表数据VO")
-public record RegionParentVO(
+@Data
+@Builder
+@Schema(description = "查询应用列表数据VO")
+public class RegionParentVO implements Serializable {
+
+	@Serial
+	static final long serialVersionUID = 5126530068827085130L;
+
 	/**
 	 * 主键ID
 	 */
 	@Schema(description = "主键ID")
-	Long id,
+	private Long id;
 	/**
 	 * 名称
 	 */
 	@Schema(description = "名称")
-	String label,
+	private String label;
 	/**
 	 * 应用名称
 	 */
 	@Schema(description = "应用名称")
-	String value,
+	private String value;
 	/**
 	 * 子数据
 	 */
 	@Schema(description = "子数据")
-	List<RegionParentVO> children) {
+	private List<RegionParentVO> children;
 }

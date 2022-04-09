@@ -36,43 +36,43 @@ public class OrderItemBack extends BaseSuperEntity<OrderItemBack,Long> {
 	/**
 	 * 订单子编码
 	 */
-	@Column(name = "item_code", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '订单子编码'")
+	@Column(name = "item_code", unique = true, columnDefinition = "varchar(32) not null comment '订单子编码'")
 	private String itemCode;
 
 	/**
 	 * 商品SPU ID
 	 */
-	@Column(name = "product_spu_id", nullable = false, columnDefinition = "bigint not null comment '商品SPU ID'")
+	@Column(name = "product_spu_id", columnDefinition = "bigint not null comment '商品SPU ID'")
 	private Long productSpuId;
 
 	/**
 	 * 商品SPU_CODE
 	 */
-	@Column(name = "product_spu_code", nullable = false, columnDefinition = "varchar(32) not null comment '商品SPU CODE'")
+	@Column(name = "product_spu_code", columnDefinition = "varchar(32) not null comment '商品SPU CODE'")
 	private String productSpuCode;
 
 	/**
 	 * 商品SPU名称
 	 */
-	@Column(name = "product_spu_name", nullable = false, columnDefinition = "varchar(32) not null comment '商品SPU名称'")
+	@Column(name = "product_spu_name", columnDefinition = "varchar(32) not null comment '商品SPU名称'")
 	private String productSpuName;
 
 	/**
 	 * 商品SKU ID
 	 */
-	@Column(name = "product_sku_id", nullable = false, columnDefinition = "bigint not null comment '商品SKU ID'")
+	@Column(name = "product_sku_id", columnDefinition = "bigint not null comment '商品SKU ID'")
 	private Long productSkuId;
 
 	/**
 	 * 商品SKU 规格名称
 	 */
-	@Column(name = "product_sku_name", nullable = false, columnDefinition = "varchar(255) not null comment '商品SKU 规格名称'")
+	@Column(name = "product_sku_name", columnDefinition = "varchar(255) not null comment '商品SKU 规格名称'")
 	private String productSkuName;
 
 	/**
 	 * 商品单价
 	 */
-	@Column(name = "product_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '商品单价'")
+	@Column(name = "product_price", columnDefinition = "decimal(10,2) not null default 0 comment '商品单价'")
 	private BigDecimal productPrice = BigDecimal.ZERO;
 
 	/**
@@ -96,13 +96,13 @@ public class OrderItemBack extends BaseSuperEntity<OrderItemBack,Long> {
 	/**
 	 * 供应商id
 	 */
-	@Column(name = "supplier_id", nullable = false, columnDefinition = "bigint not null comment '供应商id'")
+	@Column(name = "supplier_id", columnDefinition = "bigint not null comment '供应商id'")
 	private Long supplierId;
 
 	/**
 	 * 供应商名称
 	 */
-	@Column(name = "supplier_name", nullable = false, columnDefinition = "varchar(255) not null comment '供应商名称'")
+	@Column(name = "supplier_name", columnDefinition = "varchar(255) not null comment '供应商名称'")
 	private String supplierName;
 
 	/**

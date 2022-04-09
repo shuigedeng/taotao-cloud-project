@@ -32,22 +32,22 @@
 //    /**
 //     * 用于唯一标识每一个客户端(client)
 //     */
-//    @Column(name = "client_id", nullable = false, unique = true, columnDefinition = "varchar(32) NOT NULL COMMENT '应用标识'")
+//    @Column(name = "client_id", unique = true, columnDefinition = "varchar(32) NOT NULL COMMENT '应用标识'")
 //    private String clientId;
 //    /**
 //     * 应用名称
 //     */
-//    @Column(name = "client_name", nullable = false, columnDefinition = "varchar(128)  NOT NULL COMMENT '应用名称'")
+//    @Column(name = "client_name", columnDefinition = "varchar(128)  NOT NULL COMMENT '应用名称'")
 //    private String clientName;
 //    /**
 //     * 客户端密钥
 //     */
-//    @Column(name = "client_secret", nullable = false, columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(bcyt) 加密'")
+//    @Column(name = "client_secret", columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(bcyt) 加密'")
 //    private String clientSecret;
 //    /**
 //     * 客户端密钥(明文)
 //     */
-//    @Column(name = "client_secret_str", nullable = false, columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(明文)'")
+//    @Column(name = "client_secret_str", columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(明文)'")
 //    private String clientSecretStr;
 //    /**
 //     * 资源ID

@@ -22,42 +22,42 @@ public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
 	/**
 	 * 模版id
 	 */
-	@Column(name = "template_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版id'")
+	@Column(name = "template_id", columnDefinition = "varchar(255) not null default '' comment '模版id'")
 	private String templateId;
 
 	/**
 	 * 模版名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '模版名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null default '' comment '模版名称'")
 	private String name;
 
 	/**
 	 * 微信模版码
 	 */
-	@Column(name = "code", nullable = false, columnDefinition = "varchar(255) not null default '' comment '微信模版码'")
+	@Column(name = "code", columnDefinition = "varchar(255) not null default '' comment '微信模版码'")
 	private String code;
 
 	/**
 	 * 关键字
 	 */
-	@Column(name = "keywords", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关键字'")
+	@Column(name = "keywords", columnDefinition = "varchar(255) not null default '' comment '关键字'")
 	private String keywords;
 
 	/**
 	 * 关键字描述（小程序发送消息时使用）
 	 */
-	@Column(name = "keywords_text", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关键字描述（小程序发送消息时使用）'")
+	@Column(name = "keywords_text", columnDefinition = "varchar(255) not null default '' comment '关键字描述（小程序发送消息时使用）'")
 	private String keywordsText;
 
 	/**
 	 * 是否开启
 	 */
-	@Column(name = "enable", nullable = false, columnDefinition = "boolean not null default '' comment '是否开启'")
+	@Column(name = "enable", columnDefinition = "boolean not null default '' comment '是否开启'")
 	private Boolean enable = true;
 
 	/**
 	 * 订单状态
 	 */
-	@Column(name = "order_status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '订单状态'")
+	@Column(name = "order_status", columnDefinition = "varchar(255) not null default '' comment '订单状态'")
 	private String orderStatus;
 }

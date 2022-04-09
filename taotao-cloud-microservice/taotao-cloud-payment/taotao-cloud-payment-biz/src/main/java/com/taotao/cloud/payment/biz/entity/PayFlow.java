@@ -24,37 +24,37 @@ public class PayFlow extends JpaSuperEntity {
 	/**
 	 * 支付流水号
 	 */
-	@Column(name = "code", nullable = false, unique = true, updatable = false, columnDefinition = "varchar(32) not null COMMENT '支付流水号'")
+	@Column(name = "code", unique = true, updatable = false, columnDefinition = "varchar(32) not null COMMENT '支付流水号'")
 	private String code;
 
 	/**
 	 * 订单号
 	 */
-	@Column(name = "order_code", nullable = false, updatable = false, columnDefinition = "varchar(32) not null COMMENT '订单号'")
+	@Column(name = "order_code", updatable = false, columnDefinition = "varchar(32) not null COMMENT '订单号'")
 	private String orderCode;
 
 	/**
 	 * 商品id
 	 */
-	@Column(name = "product_id", nullable = false, columnDefinition = "bigint not null comment '商品id'")
+	@Column(name = "product_id", columnDefinition = "bigint not null comment '商品id'")
 	private Long productId;
 
 	/**
 	 * 支付金额
 	 */
-	@Column(name = "paid_amount", nullable = false, columnDefinition = "decimal(10,2) not null comment '支付金额'")
+	@Column(name = "paid_amount", columnDefinition = "decimal(10,2) not null comment '支付金额'")
 	private BigDecimal paidAmount;
 
 	/**
 	 * 支付方式
 	 */
-	@Column(name = "paid_method", nullable = false, columnDefinition = "int not null comment '支付方式 1-微信 2-支付宝'")
+	@Column(name = "paid_method", columnDefinition = "int not null comment '支付方式 1-微信 2-支付宝'")
 	private Integer paidMethod;
 
 	/**
 	 * 购买个数
 	 */
-	@Column(name = "buy_count", nullable = false, columnDefinition = "int not null comment '购买个数'")
+	@Column(name = "buy_count", columnDefinition = "int not null comment '购买个数'")
 	private Integer buyCount;
 
 	/**

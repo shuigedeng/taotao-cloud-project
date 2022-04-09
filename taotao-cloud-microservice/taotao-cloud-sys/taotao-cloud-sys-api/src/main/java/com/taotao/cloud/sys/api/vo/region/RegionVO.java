@@ -1,6 +1,8 @@
 package com.taotao.cloud.sys.api.vo.region;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,9 +16,11 @@ import lombok.Setter;
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class RegionVO {
+@Schema(description = "地区VO")
+public class RegionVO implements Serializable {
+
+	@Serial
+	static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "id")
 	private Long id;

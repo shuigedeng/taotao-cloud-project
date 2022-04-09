@@ -31,10 +31,8 @@ public class MapperNode extends TreeNode {
 
 	private String title;
 
-	@JsonSerialize(using = ToStringSerializer.class)
 	private Long key;
 
-	@JsonSerialize(using = ToStringSerializer.class)
 	private Long value;
 
 	public MapperNode() {

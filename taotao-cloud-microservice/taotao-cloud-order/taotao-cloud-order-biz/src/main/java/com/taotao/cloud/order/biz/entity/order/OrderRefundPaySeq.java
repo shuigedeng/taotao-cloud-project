@@ -54,7 +54,7 @@ public class OrderRefundPaySeq  extends BaseSuperEntity<OrderRefundPaySeq,Long> 
 	/**
 	 * 退款金额
 	 */
-	@Column(name = "amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '退款金额'")
+	@Column(name = "amount", columnDefinition = "decimal(10,2) not null default 0 comment '退款金额'")
 	private BigDecimal amount;
 
 	/**

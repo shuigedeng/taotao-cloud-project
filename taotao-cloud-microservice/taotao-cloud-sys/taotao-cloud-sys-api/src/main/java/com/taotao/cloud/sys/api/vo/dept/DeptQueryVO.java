@@ -1,7 +1,10 @@
 package com.taotao.cloud.sys.api.vo.dept;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 部门查询对象
@@ -9,24 +12,26 @@ import java.io.Serializable;
  * @author shuigedeng
  * @since 2020/6/15 11:00
  */
+@Data
+@Builder
 @Schema(description = "部门查询对象")
-public record DeptQueryVO(
+public class DeptQueryVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
+
 	@Schema(description = "部门id", required = true)
-	Integer deptId,
+	private Long deptId;
 
 	@Schema(description = "部门名称")
-	String name,
+	private String name;
 
 	@Schema(description = "上级部门id")
-	Integer parentId,
+	private Long parentId;
 
 	@Schema(description = "排序")
-	Integer sort,
+	private Integer sort;
 
 	@Schema(description = "备注")
-	String remark
-) implements Serializable {
-
-	public static final long serialVersionUID = 1L;
-
+	private String remark;
 }

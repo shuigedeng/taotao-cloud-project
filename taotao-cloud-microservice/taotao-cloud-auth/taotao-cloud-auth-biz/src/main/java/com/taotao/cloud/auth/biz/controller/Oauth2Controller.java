@@ -91,7 +91,6 @@ public class Oauth2Controller {
 	@PostMapping("/logout")
 	public Result<Boolean> logout() {
 		Authentication authentication = SecurityUtil.getAuthentication();
-
 		if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
 			Jwt jwt = jwtAuthenticationToken.getToken();
 			String kid = (String) jwt.getHeaders().get("kid");

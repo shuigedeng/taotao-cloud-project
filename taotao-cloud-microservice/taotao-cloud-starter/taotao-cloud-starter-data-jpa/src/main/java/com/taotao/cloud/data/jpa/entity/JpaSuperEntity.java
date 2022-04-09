@@ -72,7 +72,7 @@ public class JpaSuperEntity<I extends Serializable> implements Serializable {
 	 * 创建时间
 	 */
 	@CreatedDate
-	@Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
+	@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
 	private LocalDateTime createTime;
 
 	/**
@@ -86,13 +86,13 @@ public class JpaSuperEntity<I extends Serializable> implements Serializable {
 	 * 版本号
 	 */
 	@Version
-	@Column(name = "version", nullable = false, columnDefinition = "int not null default 1 comment '版本号'")
+	@Column(name = "version", columnDefinition = "int not null default 1 comment '版本号'")
 	private int version = 1;
 
 	/**
 	 * 是否删除 0-正常 1-删除
 	 */
-	@Column(name = "del_flag", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否删除 0-正常 1-删除'")
+	@Column(name = "del_flag", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否删除 0-正常 1-删除'")
 	private Boolean delFlag = false;
 
 	/**

@@ -37,7 +37,7 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 买家ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '买家ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '买家ID'")
 	private Long memberId;
 
 	/**
@@ -55,13 +55,13 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 订单编码
 	 */
-	@Column(name = "code", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '订单编码'")
+	@Column(name = "code", unique = true, columnDefinition = "varchar(32) not null comment '订单编码'")
 	private String code;
 
 	/**
 	 * 订单金额
 	 */
-	@Column(name = "amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '订单金额'")
+	@Column(name = "amount", columnDefinition = "decimal(10,2) not null default 0 comment '订单金额'")
 	private BigDecimal amount = BigDecimal.ZERO;
 
 	/**
@@ -125,7 +125,7 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 申请售后是否撤销 1--已撤销 0--未撤销
 	 */
-	@Column(name = "has_cancel", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '申请售后是否撤销 1-已撤销 0-未撤销'")
+	@Column(name = "has_cancel", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '申请售后是否撤销 1-已撤销 0-未撤销'")
 	private Boolean hasCancel = false;
 
 	/**
@@ -209,7 +209,7 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 是否结算 0-未结算，1-已结算
 	 */
-	@Column(name = "has_settlement", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否结算 0-未结算，1-已结算'")
+	@Column(name = "has_settlement", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否结算 0-未结算，1-已结算'")
 	private Boolean hasSettlement = false;
 
 	/**

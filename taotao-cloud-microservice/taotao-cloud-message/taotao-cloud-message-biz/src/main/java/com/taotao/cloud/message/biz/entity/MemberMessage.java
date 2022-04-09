@@ -23,31 +23,31 @@ public class MemberMessage extends BaseSuperEntity<MemberMessage, Long> {
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '会员id'")
+	@Column(name = "member_id", columnDefinition = "varchar(255) not null default '' comment '会员id'")
 	private String memberId;
 
 	/**
 	 * 会员名称
 	 */
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '会员名称'")
+	@Column(name = "member_name", columnDefinition = "varchar(255) not null default '' comment '会员名称'")
 	private String memberName;
 
 	/**
 	 * 消息标题
 	 */
-	@Column(name = "title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息标题'")
+	@Column(name = "title", columnDefinition = "varchar(255) not null default '' comment '消息标题'")
 	private String title;
 
 	/**
 	 * 消息内容
 	 */
-	@Column(name = "content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息内容'")
+	@Column(name = "content", columnDefinition = "varchar(255) not null default '' comment '消息内容'")
 	private String content;
 
 	/**
 	 * 关联消息id
 	 */
-	@Column(name = "message_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
+	@Column(name = "message_id", columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
 	private String messageId;
 
 	/**
@@ -55,7 +55,7 @@ public class MemberMessage extends BaseSuperEntity<MemberMessage, Long> {
 	 *
 	 * @see MessageStatusEnum
 	 */
-	@Column(name = "status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '状态'")
+	@Column(name = "status", columnDefinition = "varchar(255) not null default '' comment '状态'")
 	private String status = MessageStatusEnum.UN_READY.name();
 
 }

@@ -34,27 +34,22 @@ public class TreeNode implements INode {
 	/**
 	 * 主键ID
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	protected Long id;
 
 	/**
 	 * 父节点ID
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	protected Long parentId;
 
 	/**
 	 * 子孙节点
 	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	protected List<INode> children = new ArrayList<>();
 
 	/**
 	 * 是否有子孙节点
 	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Boolean hasChildren;
-
+	private Boolean hasChildren = false;
 
 	public TreeNode() {
 	}

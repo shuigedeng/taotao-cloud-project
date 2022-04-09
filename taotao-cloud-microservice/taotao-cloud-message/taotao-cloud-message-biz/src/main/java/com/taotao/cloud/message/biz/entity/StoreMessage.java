@@ -24,19 +24,19 @@ public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
 	/**
 	 * 关联消息id
 	 */
-	@Column(name = "message_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
+	@Column(name = "message_id", columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
 	private String messageId;
 
 	/**
 	 * 关联店铺id
 	 */
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联店铺id'")
+	@Column(name = "store_id", columnDefinition = "varchar(255) not null default '' comment '关联店铺id'")
 	private String storeId;
 
 	/**
 	 * 关联店铺名称
 	 */
-	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '关联店铺名称'")
+	@Column(name = "store_name", columnDefinition = "varchar(255) not null default '' comment '关联店铺名称'")
 	private String storeName;
 
 	/**
@@ -44,18 +44,18 @@ public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
 	 *
 	 * @see MessageStatusEnum
 	 */
-	@Column(name = "status", nullable = false, columnDefinition = "varchar(255) not null default '' comment '状态 0默认未读 1已读 2回收站'")
+	@Column(name = "status", columnDefinition = "varchar(255) not null default '' comment '状态 0默认未读 1已读 2回收站'")
 	private String status = MessageStatusEnum.UN_READY.name();
 
 	/**
 	 * 消息标题
 	 */
-	@Column(name = "title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息标题'")
+	@Column(name = "title", columnDefinition = "varchar(255) not null default '' comment '消息标题'")
 	private String title;
 
 	/**
 	 * 消息内容
 	 */
-	@Column(name = "content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '消息内容'")
+	@Column(name = "content", columnDefinition = "varchar(255) not null default '' comment '消息内容'")
 	private String content;
 }

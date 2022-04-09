@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 字典查询对象
@@ -11,50 +13,29 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Schema( description = "字典查询对象")
-public record DictQueryVO(
-	/**
-	 * id
-	 */
+@Data
+@Builder
+@Schema(description = "字典查询对象")
+public class DictQueryVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
+
 	@Schema(description = "id")
-	Long id,
-	/**
-	 * 字典名称
-	 */
+	private Long id;
 	@Schema(description = "字典名称")
-	String dictName,
-	/**
-	 * 字典编码
-	 */
+	private String dictName;
 	@Schema(description = "字典编码")
-	String dictCode,
-	/**
-	 * 描述
-	 */
+	private String dictCode;
 	@Schema(description = "描述")
-	String description,
-	/**
-	 * 排序值
-	 */
+	private String description;
 	@Schema(description = "排序值")
-	Integer dictSort,
-	/**
-	 * 备注信息
-	 */
+	private Integer dictSort;
 	@Schema(description = "备注信息")
-	String remark,
-	/**
-	 * 创建时间
-	 */
+	private String remark;
 	@Schema(description = "创建时间")
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
+	private LocalDateTime createTime;
 	@Schema(description = "最后修改时间")
-	LocalDateTime lastModifiedTime) implements Serializable {
-
-	static final long serialVersionUID = 5126530068827085130L;
-
+	private LocalDateTime lastModifiedTime;
 
 }

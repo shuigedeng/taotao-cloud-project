@@ -53,10 +53,10 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 
 	@Version
 	@com.baomidou.mybatisplus.annotation.Version
-	@Column(name = "version", nullable = false, columnDefinition = "int not null default 1 comment '版本号'")
+	@Column(name = "version", columnDefinition = "int not null default 1 comment '版本号'")
 	private Integer version;
 
-	@Column(name = "del_flag", nullable = false, columnDefinition = "boolean not null DEFAULT false comment '是否删除 0-正常 1-删除'")
+	@Column(name = "del_flag", columnDefinition = "boolean not null DEFAULT false comment '是否删除 0-正常 1-删除'")
 	private Boolean delFlag;
 
 	/**

@@ -20,89 +20,67 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 用户查询对象
+ * 用户查询VO
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 15:19:37
  */
-@Schema(description = "用户查询对象")
-public record UserQueryVO(
-	/**
-	 * id
-	 */
-	@Schema(description = "id")
-	Long id,
-	/**
-	 * 昵称
-	 */
-	@Schema(description = "昵称")
-	String nickname,
-	/**
-	 * 真实用户名
-	 */
-	@Schema(description = "真实用户名")
-	String username,
-	/**
-	 * 手机号
-	 */
-	@Schema(description = "手机号")
-	String phone,
-	/**
-	 * 性别 1男 2女 0未知
-	 */
-	@Schema(description = "性别 1男 2女 0未知")
-	Integer sex,
-	/**
-	 * 邮箱
-	 */
-	@Schema(description = "邮箱")
-	String email,
-	/**
-	 * 部门ID
-	 */
-	@Schema(description = "部门ID")
-	Long deptId,
-	/**
-	 * 岗位ID
-	 */
-	@Schema(description = "岗位ID")
-	Long jobId,
-	/**
-	 * 头像
-	 */
-	@Schema(description = "头像")
-	String avatar,
-	/**
-	 * 是否锁定 1-正常，2-锁定
-	 */
-	@Schema(description = "是否锁定 1-正常，2-锁定")
-	Integer lockFlag,
-	/**
-	 * 角色列表
-	 */
-	@Schema(description = "角色列表")
-	Set<String> roles,
-	/**
-	 * 权限列表
-	 */
-	@Schema(description = "权限列表")
-	Set<String> permissions,
-	/**
-	 * 创建时间
-	 */
-	@Schema(description = "创建时间")
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
-	@Schema(description = "最后修改时间")
-	LocalDateTime lastModifiedTime) implements Serializable {
+@Data
+@Builder
+@Schema(description = "用户查询VO")
+public class UserQueryVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
+	@Schema(description = "id")
+	private Long id;
+
+	@Schema(description = "昵称")
+	private String nickname;
+
+	@Schema(description = "真实用户名")
+	private String username;
+
+	@Schema(description = "手机号")
+	private String phone;
+
+	@Schema(description = "性别 1男 2女 0未知")
+	private Integer sex;
+
+	@Schema(description = "邮箱")
+	private String email;
+
+	@Schema(description = "部门ID")
+	private Long deptId;
+
+	@Schema(description = "岗位ID")
+	private Long jobId;
+
+	@Schema(description = "头像")
+	private String avatar;
+
+	@Schema(description = "是否锁定 1-正常，2-锁定")
+	private Integer lockFlag;
+
+	@Schema(description = "角色列表")
+	private Set<String> roles;
+
+	@Schema(description = "权限列表")
+	private Set<String> permissions;
+
+	@Schema(description = "创建时间")
+	private LocalDateTime createTime;
+
+	@Schema(description = "最后修改时间")
+	private LocalDateTime lastModifiedTime;
 
 }
+

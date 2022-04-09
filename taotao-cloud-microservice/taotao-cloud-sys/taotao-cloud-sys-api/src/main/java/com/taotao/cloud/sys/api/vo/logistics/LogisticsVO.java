@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.sys.api.vo.logistics;
 
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +33,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LogisticsVO {
+public class LogisticsVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
 
 	private Long id;
 
