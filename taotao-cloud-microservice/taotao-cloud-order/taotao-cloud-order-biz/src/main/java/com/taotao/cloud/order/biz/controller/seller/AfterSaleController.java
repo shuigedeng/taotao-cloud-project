@@ -28,13 +28,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 店铺端,售后管理接口
+ * 店铺端,售后管理API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-售后API", description = "店铺端-售后API")
-@RequestMapping("/order/seller/afterSale")
+@RequestMapping("/order/seller/aftersale")
 public class AfterSaleController {
 
 	private final  AfterSaleService afterSaleService;

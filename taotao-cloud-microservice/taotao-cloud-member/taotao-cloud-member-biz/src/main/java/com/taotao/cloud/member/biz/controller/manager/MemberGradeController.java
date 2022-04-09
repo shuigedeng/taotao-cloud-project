@@ -24,15 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,会员等级接口
+ * 管理端,会员等级API
  *
  * @since 2021/5/16 11:29 下午
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/manager/member-grade")
-@Tag(name = "管理端-会员等级API", description = "管理端-会员等级API")
+@RequestMapping("/member/manager/member/grade")
+@Tag(name = "管理端-会员等级管理API", description = "管理端-会员等级管理API")
 public class MemberGradeController {
 
 	private final MemberGradeService memberGradeService;

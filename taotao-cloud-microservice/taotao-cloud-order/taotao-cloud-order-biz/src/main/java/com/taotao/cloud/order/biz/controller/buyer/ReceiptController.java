@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,发票接口
+ * 买家端,发票API
  **/
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-发票API", description = "买家端-发票API")
-@RequestMapping("/order/buyer/trade/receipt")
+@RequestMapping("/order/buyer/receipt")
 public class ReceiptController {
 
 	private final ReceiptService receiptService;

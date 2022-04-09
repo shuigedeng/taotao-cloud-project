@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,退款日志接口
+ * 管理端,退款日志API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-退款日志管理API", description = "平台管理端-退款日志管理API")
-@RequestMapping("/order/manager/refundLog")
+@RequestMapping("/order/manager/refund/log")
 public class RefundLogController {
 
 	private final RefundLogService refundLogService;

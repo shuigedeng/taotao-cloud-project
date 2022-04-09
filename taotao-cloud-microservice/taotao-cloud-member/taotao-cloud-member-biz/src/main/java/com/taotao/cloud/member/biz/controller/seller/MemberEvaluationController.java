@@ -25,15 +25,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 店铺端,商品评价管理接口
+ * 店铺端,商品评价管理API
  *
  * @since 2020-02-25 14:10:16
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/manager/member-evaluation")
-@Tag(name = "店铺端-商品评价管理接口", description = "店铺端-商品评价管理接口")
+@Tag(name = "店铺端-商品评价API", description = "店铺端-商品评价API")
+@RequestMapping("/member/seller/member/evaluation")
 public class MemberEvaluationController {
 
 	private final MemberEvaluationService memberEvaluationService;

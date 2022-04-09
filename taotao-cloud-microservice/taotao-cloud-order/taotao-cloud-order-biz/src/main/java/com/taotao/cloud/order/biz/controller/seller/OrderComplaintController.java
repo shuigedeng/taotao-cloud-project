@@ -25,13 +25,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 店铺端,交易投诉接口
+ * 店铺端,交易投诉API
  **/
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-交易投诉API", description = "店铺端-交易投诉API")
-@RequestMapping("/order/seller/complain")
+@RequestMapping("/order/seller/order/complain")
 public class OrderComplaintController {
 
 	/**

@@ -49,12 +49,12 @@ public class RoleMenu extends SuperEntity<RoleMenu, Long> {
 	/**
 	 * 角色ID
 	 */
-	@Column(name = "role_id", nullable = false, columnDefinition = "bigint not null comment '角色ID'")
+	@Column(name = "role_id", columnDefinition = "bigint not null comment '角色ID'")
 	private Long roleId;
 
 	/**
 	 * 菜单ID
 	 */
-	@Column(name = "menu_id", nullable = false, columnDefinition = "bigint not null comment '菜单ID'")
+	@Column(name = "menu_id", columnDefinition = "bigint not null comment '菜单ID'")
 	private Long menuId;
 }

@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "平台管理端-商品计量单位管理API", description = "平台管理端-商品计量单位管理API")
-@RequestMapping("/goods/manager/goodsUnit")
+@RequestMapping("/goods/manager/goods/unit")
 public class GoodsUnitManagerController {
 
 	/**

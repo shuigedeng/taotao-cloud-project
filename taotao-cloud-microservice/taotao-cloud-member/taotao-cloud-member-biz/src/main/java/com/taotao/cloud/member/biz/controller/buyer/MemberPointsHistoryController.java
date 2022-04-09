@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,会员积分历史接口
+ * 买家端,会员积分历史API
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/buyer/member-points-history")
 @Tag(name = "买家端-会员积分历史API", description = "买家端-会员积分历史API")
+@RequestMapping("/member/buyer/member/points/history")
 public class MemberPointsHistoryController {
 
 	private final MemberPointsHistoryService memberPointsHistoryService;

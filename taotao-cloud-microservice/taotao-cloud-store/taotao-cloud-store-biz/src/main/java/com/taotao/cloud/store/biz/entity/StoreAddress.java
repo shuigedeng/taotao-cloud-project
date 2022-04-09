@@ -29,18 +29,18 @@ public class StoreAddress extends BaseSuperEntity<StoreAddress, Long> {
 
 	public static final String TABLE_NAME = "tt_store_address";
 
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(64) not null comment '店铺id'")
+	@Column(name = "store_id", columnDefinition = "varchar(64) not null comment '店铺id'")
 	private String storeId;
 
-	@Column(name = "address_name", nullable = false, columnDefinition = "varchar(64) not null comment '自提点名称'")
+	@Column(name = "address_name", columnDefinition = "varchar(64) not null comment '自提点名称'")
 	private String addressName;
 
-	@Column(name = "center", nullable = false, columnDefinition = "varchar(64) not null comment '经纬度'")
+	@Column(name = "center", columnDefinition = "varchar(64) not null comment '经纬度'")
 	private String center;
 
-	@Column(name = "address", nullable = false, columnDefinition = "varchar(64) not null comment '地址'")
+	@Column(name = "address", columnDefinition = "varchar(64) not null comment '地址'")
 	private String address;
 
-	@Column(name = "mobile", nullable = false, columnDefinition = "varchar(64) not null comment '电话'")
+	@Column(name = "mobile", columnDefinition = "varchar(64) not null comment '电话'")
 	private String mobile;
 }

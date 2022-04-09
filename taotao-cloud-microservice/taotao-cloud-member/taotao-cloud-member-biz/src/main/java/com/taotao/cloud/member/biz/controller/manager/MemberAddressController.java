@@ -31,8 +31,8 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/manager/member-address")
-@Tag(name = "管理端-会员地址API", description = "管理端-会员地址API")
+@RequestMapping("/member/manager/member/address")
+@Tag(name = "管理端-会员地址管理API", description = "管理端-会员地址管理API")
 public class MemberAddressController {
 
     private final MemberAddressService memberAddressService;

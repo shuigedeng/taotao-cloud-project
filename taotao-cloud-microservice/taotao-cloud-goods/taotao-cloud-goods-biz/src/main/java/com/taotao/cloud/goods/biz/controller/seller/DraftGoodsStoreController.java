@@ -2,6 +2,8 @@ package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
@@ -14,6 +16,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,8 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "商户管理端-草稿商品API", description = "商户管理端-草稿商品API")
-@RequestMapping("/goods/seller/store/goods/draftGoods")
+@Tag(name = "店铺端-草稿商品API", description = "店铺端-草稿商品API")
+@RequestMapping("/goods/seller/draft/goods")
 public class DraftGoodsStoreController {
 
 	/**

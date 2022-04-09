@@ -30,15 +30,15 @@ public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 
 	public static final String TABLE_NAME = "li_freight_template";
 
-	@Column(name = "store_id", nullable = false, columnDefinition = "bigint not null comment '店铺ID'")
+	@Column(name = "store_id", columnDefinition = "bigint not null comment '店铺ID'")
 	private Long storeId;
 
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '模板名称'")
+	@Column(name = "name", columnDefinition = "varchar(32) not null comment '模板名称'")
 	private String name;
 
 	/**
 	 * @see FreightTemplateEnum
 	 */
-	@Column(name = "pricing_method", nullable = false, columnDefinition = "varchar(32) not null comment '计价方式：按件、按重量 WEIGHT,NUM,FREE'")
+	@Column(name = "pricing_method", columnDefinition = "varchar(32) not null comment '计价方式：按件、按重量 WEIGHT,NUM,FREE'")
 	private String pricingMethod;
 }

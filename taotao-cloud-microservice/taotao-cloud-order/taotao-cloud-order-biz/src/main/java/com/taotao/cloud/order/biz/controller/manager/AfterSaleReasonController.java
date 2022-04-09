@@ -19,13 +19,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 管理端,售后原因接口
+ * 管理端,售后原因API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-售后原因管理API", description = "平台管理端-售后原因管理API")
-@RequestMapping("/order/manager/afterSaleReason")
+@RequestMapping("/order/manager/aftersale/reason")
 public class AfterSaleReasonController {
 
 	/**

@@ -41,13 +41,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 店铺端,订单接口
+ * 店铺端,订单API
  **/
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "店铺端-订单API", description = "店铺端-订单API")
-@RequestMapping("/order/seller/orders")
+@RequestMapping("/order/seller/order")
 public class OrderController {
 
 	/**

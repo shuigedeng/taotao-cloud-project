@@ -36,19 +36,19 @@ public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 	/**
 	 * 调度器名称
 	 */
-	@Column(name = "scheduled_name", nullable = false, columnDefinition = "varchar(64) not null comment '调度器名称'")
+	@Column(name = "scheduled_name", columnDefinition = "varchar(64) not null comment '调度器名称'")
 	private String scheduledName;
 
 	/**
 	 * 开始时间
 	 */
-	@Column(name = "start_time", nullable = false, columnDefinition = "TIMESTAMP comment '开始时间'")
+	@Column(name = "start_time", columnDefinition = "TIMESTAMP comment '开始时间'")
 	private LocalDateTime startTime;
 
 	/**
 	 * 结束时间
 	 */
-	@Column(name = "end_time", nullable = false, columnDefinition = "TIMESTAMP comment '结束时间'")
+	@Column(name = "end_time", columnDefinition = "TIMESTAMP comment '结束时间'")
 	private LocalDateTime endTime;
 
 	/**
@@ -60,18 +60,18 @@ public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 	/**
 	 * 执行时间
 	 */
-	@Column(name = "execution_time", nullable = false, columnDefinition = "bigint default 0  comment '执行时间'")
+	@Column(name = "execution_time", columnDefinition = "bigint default 0  comment '执行时间'")
 	private Long executionTime;
 
 	/**
 	 * 是否成功
 	 */
-	@Column(name = "is_success", nullable = false, columnDefinition = "boolean default false comment '是否成功'")
+	@Column(name = "is_success", columnDefinition = "boolean default false comment '是否成功'")
 	private Boolean isSuccess;
 
 	/**
 	 * 调度器名称
 	 */
-	@Column(name = "scheduled_Job", nullable = false, columnDefinition = "varchar(4096) not null comment 'scheduledJob JSON对象'")
+	@Column(name = "scheduled_Job", columnDefinition = "varchar(4096) not null comment 'scheduledJob JSON对象'")
 	private String scheduledJob;
 }

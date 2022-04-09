@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 店铺端,分类绑定参数组管理接口
+ * 店铺端,分类绑定参数组接口
  */
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "商户管理端-分类绑定参数组管理API", description = "商户管理端-分类绑定参数组管理API")
-@RequestMapping("/goods/seller/store/goods/categoryParameters")
+@Tag(name = "店铺端-分类绑定参数组API", description = "店铺端-分类绑定参数组API")
+@RequestMapping("/goods/seller/category/parameters")
 public class CategoryParameterGroupStoreController {
 
 	/**

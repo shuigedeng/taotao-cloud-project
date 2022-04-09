@@ -39,55 +39,55 @@ public class GenConfig extends BaseSuperEntity<GenConfig, Long> {
 	/**
 	 * 表明
 	 **/
-	@Column(name = "table_name", nullable = false, columnDefinition = "varchar(64) not null comment '表名称'")
+	@Column(name = "table_name", columnDefinition = "varchar(64) not null comment '表名称'")
 	private String tableName;
 
 	/**
 	 * 接口名称
 	 **/
-	@Column(name = "api_alias", nullable = false, columnDefinition = "varchar(64) not null comment '接口名称'")
+	@Column(name = "api_alias", columnDefinition = "varchar(64) not null comment '接口名称'")
 	private String apiAlias;
 
 	/**
 	 * 包路径
 	 */
-	@Column(name = "pack", nullable = false, columnDefinition = "varchar(64) not null comment '包路径'")
+	@Column(name = "pack", columnDefinition = "varchar(64) not null comment '包路径'")
 	private String pack;
 
 	/**
 	 * 模块名
 	 */
-	@Column(name = "module_name", nullable = false, columnDefinition = "varchar(64) not null comment '模块名'")
+	@Column(name = "module_name", columnDefinition = "varchar(64) not null comment '模块名'")
 	private String moduleName;
 
 	/**
 	 * 前端文件路径
 	 */
-	@Column(name = "path", nullable = false, columnDefinition = "varchar(64) not null comment '前端文件路径'")
+	@Column(name = "path", columnDefinition = "varchar(64) not null comment '前端文件路径'")
 	private String path;
 
 	/**
 	 * 前端文件路径
 	 */
-	@Column(name = "api_path", nullable = false, columnDefinition = "varchar(64) not null comment '前端文件路径'")
+	@Column(name = "api_path", columnDefinition = "varchar(64) not null comment '前端文件路径'")
 	private String apiPath;
 
 	/**
 	 * 作者
 	 */
-	@Column(name = "author", nullable = false, columnDefinition = "varchar(64) not null comment '作者'")
+	@Column(name = "author", columnDefinition = "varchar(64) not null comment '作者'")
 	private String author;
 
 	/**
 	 * 表前缀
 	 */
-	@Column(name = "prefix", nullable = false, columnDefinition = "varchar(64) not null comment '表前缀'")
+	@Column(name = "prefix", columnDefinition = "varchar(64) not null comment '表前缀'")
 	private String prefix;
 
 	/**
 	 * 是否覆盖
 	 */
-	@Column(name = "cover", nullable = false, columnDefinition = "boolean default false comment '是否覆盖'")
+	@Column(name = "cover", columnDefinition = "boolean default false comment '是否覆盖'")
 	private Boolean cover;
 
 }

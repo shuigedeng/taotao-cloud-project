@@ -46,7 +46,7 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	/**
 	 * 部门名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '部门名称'")
+	@Column(name = "name", columnDefinition = "varchar(32) not null comment '部门名称'")
 	private String name;
 
 	/**

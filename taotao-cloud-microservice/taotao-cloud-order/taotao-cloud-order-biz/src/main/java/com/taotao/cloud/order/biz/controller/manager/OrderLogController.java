@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,订单日志管理接口
+ * 管理端,订单日志管理API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "平台管理端-订单日志管理API", description = "平台管理端-订单日志管理API")
-@RequestMapping("/order/manager/orderLog")
+@RequestMapping("/order/manager/order/log")
 public class OrderLogController {
 
 	private final  OrderLogService orderLogService;

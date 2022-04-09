@@ -30,13 +30,13 @@ public class Store extends BaseSuperEntity<Store, Long> {
 
 	public static final String TABLE_NAME = "tt_store";
 
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员Id'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员Id'")
 	private String memberId;
 
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(64) not null comment '会员名称'")
+	@Column(name = "member_name", columnDefinition = "varchar(64) not null comment '会员名称'")
 	private String memberName;
 
-	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(64) not null comment '店铺名称'")
+	@Column(name = "store_name", columnDefinition = "varchar(64) not null comment '店铺名称'")
 	private String storeName;
 
 	@Column(name = "store_end_time", columnDefinition = "TIMESTAMP comment '店铺关闭时间'")
@@ -45,52 +45,52 @@ public class Store extends BaseSuperEntity<Store, Long> {
 	/**
 	 * @see StoreStatusEnum
 	 */
-	@Column(name = "store_disable", nullable = false, columnDefinition = "varchar(64) not null comment '店铺状态'")
+	@Column(name = "store_disable", columnDefinition = "varchar(64) not null comment '店铺状态'")
 	private String storeDisable;
 
-	@Column(name = "self_operated", nullable = false, columnDefinition = "boolean not null default true comment '是否自营'")
+	@Column(name = "self_operated", columnDefinition = "boolean not null default true comment '是否自营'")
 	private Boolean selfOperated;
 
-	@Column(name = "store_logo", nullable = false, columnDefinition = "varchar(64) not null comment '店铺logo'")
+	@Column(name = "store_logo", columnDefinition = "varchar(64) not null comment '店铺logo'")
 	private String storeLogo;
 
-	@Column(name = "store_center", nullable = false, columnDefinition = "varchar(64) not null comment '经纬度'")
+	@Column(name = "store_center", columnDefinition = "varchar(64) not null comment '经纬度'")
 	private String storeCenter;
 
-	@Column(name = "store_desc", nullable = false, columnDefinition = "varchar(64) not null comment '店铺简介'")
+	@Column(name = "store_desc", columnDefinition = "varchar(64) not null comment '店铺简介'")
 	private String storeDesc;
 
-	@Column(name = "store_address_path", nullable = false, columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
+	@Column(name = "store_address_path", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
 	private String storeAddressPath;
 
-	@Column(name = "store_address_id_path", nullable = false, columnDefinition = "varchar(64) not null comment '地址id 逗号分割 '")
+	@Column(name = "store_address_id_path", columnDefinition = "varchar(64) not null comment '地址id 逗号分割 '")
 	private String storeAddressIdPath;
 
-	@Column(name = "store_address_detail", nullable = false, columnDefinition = "varchar(64) not null comment '详细地址'")
+	@Column(name = "store_address_detail", columnDefinition = "varchar(64) not null comment '详细地址'")
 	private String storeAddressDetail;
 
-	@Column(name = "description_score", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '描述评分'")
+	@Column(name = "description_score", columnDefinition = "decimal(10,2) not null default 0 comment '描述评分'")
 	private BigDecimal descriptionScore;
 
-	@Column(name = "service_score", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '服务评分'")
+	@Column(name = "service_score", columnDefinition = "decimal(10,2) not null default 0 comment '服务评分'")
 	private BigDecimal serviceScore;
 
-	@Column(name = "delivery_score", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '交付分数'")
+	@Column(name = "delivery_score", columnDefinition = "decimal(10,2) not null default 0 comment '交付分数'")
 	private BigDecimal deliveryScore;
 
-	@Column(name = "goods_num", nullable = false, columnDefinition = "int not null default 0 comment '商品数量'")
+	@Column(name = "goods_num", columnDefinition = "int not null default 0 comment '商品数量'")
 	private Integer goodsNum;
 
-	@Column(name = "collection_num", nullable = false, columnDefinition = "int not null default 0 comment '收藏数量'")
+	@Column(name = "collection_num", columnDefinition = "int not null default 0 comment '收藏数量'")
 	private Integer collectionNum;
 
-	@Column(name = "yzf_sign", nullable = false, columnDefinition = "varchar(64) not null comment '腾讯云智服唯一标识'")
+	@Column(name = "yzf_sign", columnDefinition = "varchar(64) not null comment '腾讯云智服唯一标识'")
 	private String yzfSign;
 
-	@Column(name = "yzf_mp_sign", nullable = false, columnDefinition = "varchar(64) not null comment '腾讯云智服小程序唯一标识'")
+	@Column(name = "yzf_mp_sign", columnDefinition = "varchar(64) not null comment '腾讯云智服小程序唯一标识'")
 	private String yzfMpSign;
 
-	@Column(name = "merchant_euid", nullable = false, columnDefinition = "varchar(64) not null comment 'udesk IM标识'")
+	@Column(name = "merchant_euid", columnDefinition = "varchar(64) not null comment 'udesk IM标识'")
 	private String merchantEuid;
 
 	//public Store(Member member) {

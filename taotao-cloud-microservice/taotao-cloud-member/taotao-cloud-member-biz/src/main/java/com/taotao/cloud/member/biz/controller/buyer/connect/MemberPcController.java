@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,会员接口
+ * 买家端,会员API
  */
 @AllArgsConstructor
 @Validated
@@ -38,8 +38,8 @@ public class MemberPcController {
 	private final SmsUtil smsUtil;
 	private final VerificationService verificationService;
 
-	@Operation(summary = "登录接口", description = "登录接口", method = CommonConstant.POST)
-	@RequestLogger("登录接口")
+	@Operation(summary = "登录API", description = "登录API", method = CommonConstant.POST)
+	@RequestLogger("登录API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/login")
 	public Result<Object> userLogin(
@@ -50,8 +50,8 @@ public class MemberPcController {
 		return Result.success(this.memberService.usernameLogin(username, password));
 	}
 
-	@Operation(summary = "注销接口", description = "注销接口", method = CommonConstant.POST)
-	@RequestLogger("注销接口")
+	@Operation(summary = "注销API", description = "注销API", method = CommonConstant.POST)
+	@RequestLogger("注销API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/logout")
 	public Result<Object> logout() {
@@ -59,8 +59,8 @@ public class MemberPcController {
 		return Result.success();
 	}
 
-	@Operation(summary = "短信登录接口", description = "短信登录接口", method = CommonConstant.POST)
-	@RequestLogger("短信登录接口")
+	@Operation(summary = "短信登录API", description = "短信登录API", method = CommonConstant.POST)
+	@RequestLogger("短信登录API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/sms/login")
 	public Result<Object> smsLogin(@NotNull(message = "手机号为空") @RequestParam String mobile,
@@ -90,8 +90,8 @@ public class MemberPcController {
 		}
 	}
 
-	@Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口", method = CommonConstant.GET)
-	@RequestLogger("获取当前登录用户接口")
+	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API", method = CommonConstant.GET)
+	@RequestLogger("获取当前登录用户API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<Member> getUserInfo() {

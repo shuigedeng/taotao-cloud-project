@@ -28,21 +28,21 @@ public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
 
 	public static final String TABLE_NAME = "tt_service_notice";
 
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '商家id，为-1时，代表是平台发布的消息'")
+	@Column(name = "store_id", columnDefinition = "varchar(255) not null default '' comment '商家id，为-1时，代表是平台发布的消息'")
 	private String storeId;
 
-	@Column(name = "banner_image", nullable = false, columnDefinition = "varchar(255) not null default '' comment 'banner图'")
+	@Column(name = "banner_image", columnDefinition = "varchar(255) not null default '' comment 'banner图'")
 	private String bannerImage;
 
-	@Column(name = "title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '标题'")
+	@Column(name = "title", columnDefinition = "varchar(255) not null default '' comment '标题'")
 	private String title;
 
-	@Column(name = "sub_title", nullable = false, columnDefinition = "varchar(255) not null default '' comment '副标题'")
+	@Column(name = "sub_title", columnDefinition = "varchar(255) not null default '' comment '副标题'")
 	private String subTitle;
 
-	@Column(name = "to_url", nullable = false, columnDefinition = "varchar(255) not null default '' comment '点击跳转（此内容与站内信内容只能有一个生效）'")
+	@Column(name = "to_url", columnDefinition = "varchar(255) not null default '' comment '点击跳转（此内容与站内信内容只能有一个生效）'")
 	private String toUrl;
 
-	@Column(name = "content", nullable = false, columnDefinition = "varchar(255) not null default '' comment '站内信内容(富文本框编辑，可以上传图片的html)'")
+	@Column(name = "content", columnDefinition = "varchar(255) not null default '' comment '站内信内容(富文本框编辑，可以上传图片的html)'")
 	private String content;
 }

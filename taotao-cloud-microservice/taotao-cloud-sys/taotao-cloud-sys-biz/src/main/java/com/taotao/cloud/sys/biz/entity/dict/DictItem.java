@@ -53,19 +53,19 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	 *
 	 * @see Dict
 	 */
-	@Column(name = "dict_id", nullable = false, columnDefinition = "bigint not null comment '字典id'")
+	@Column(name = "dict_id", columnDefinition = "bigint not null comment '字典id'")
 	private Long dictId;
 
 	/**
 	 * 字典项文本
 	 */
-	@Column(name = "item_text", nullable = false, columnDefinition = "varchar(2000) not null comment '字典项文本'")
+	@Column(name = "item_text", columnDefinition = "varchar(2000) not null comment '字典项文本'")
 	private String itemText;
 
 	/**
 	 * 字典项值
 	 */
-	@Column(name = "item_value", nullable = false, columnDefinition = "varchar(2000) not null comment '字典项文本'")
+	@Column(name = "item_value", columnDefinition = "varchar(2000) not null comment '字典项文本'")
 	private String itemValue;
 
 	/**
@@ -77,7 +77,7 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	/**
 	 * 状态 0不启用 1启用
 	 */
-	@Column(name = "status", nullable = false, columnDefinition = "int NOT NULL DEFAULT 1 comment ' 状态 0不启用 1启用'")
+	@Column(name = "status", columnDefinition = "int NOT NULL DEFAULT 1 comment ' 状态 0不启用 1启用'")
 	private Integer status;
 
 	/**

@@ -34,7 +34,7 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 
 	public static final String TABLE_NAME = "tt_setting";
 
-	@Column(name = "setting_value", nullable = false, columnDefinition = "varchar(3660) not null comment '值'")
+	@Column(name = "setting_value", columnDefinition = "varchar(3660) not null comment '值'")
 	private String settingValue;
 
 	@Override

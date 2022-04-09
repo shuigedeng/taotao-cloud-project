@@ -49,7 +49,7 @@ public class Job extends BaseSuperEntity<Job,Long> {
 	/**
 	 * 岗位名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '岗位名称'")
+	@Column(name = "name", columnDefinition = "varchar(32) not null comment '岗位名称'")
 	private String name;
 
 	/**

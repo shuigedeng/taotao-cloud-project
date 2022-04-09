@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,预存款充值记录接口
+ * 买家端,预存款充值记录API
  */
 @AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-预存款充值记录API", description = "买家端-预存款充值记录API")
-@RequestMapping("/order/buyer/trade/recharge")
+@RequestMapping("/order/buyer/recharge")
 @Transactional(rollbackFor = Exception.class)
 public class RechargeTradeController {
 

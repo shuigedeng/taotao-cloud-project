@@ -49,7 +49,7 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	/**
 	 * 菜单标题
 	 */
-	@Column(name = "name", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '菜单名称'")
+	@Column(name = "name", unique = true, columnDefinition = "varchar(32) not null comment '菜单名称'")
 	private String name;
 
 	/**
@@ -91,7 +91,7 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	/**
 	 * 是否缓存页面: 0:否 1:是 (默认值0)
 	 */
-	@Column(name = "keep_alive", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
+	@Column(name = "keep_alive", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
 	private Boolean keepAlive ;
 
 	/**
@@ -99,13 +99,13 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	 *
 	 * @see MenuTypeEnum
 	 */
-	@Column(name = "type", nullable = false, columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
+	@Column(name = "type", columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
 	private Integer type ;
 
 	/**
 	 * 是否隐藏路由菜单: 0否,1是（默认值0）
 	 */
-	@Column(name = "hidden", nullable = false, columnDefinition = "boolean DEFAULT false comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
+	@Column(name = "hidden", columnDefinition = "boolean DEFAULT false comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
 	private Boolean hidden;
 
 	/**
@@ -117,7 +117,7 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	/**
 	 * 是否为外链
 	 */
-	@Column(name = "target", nullable = false, columnDefinition = "varchar(32) comment '是否为外链'")
+	@Column(name = "target", columnDefinition = "varchar(32) comment '是否为外链'")
 	private String target;
 
 	/**

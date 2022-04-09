@@ -37,79 +37,79 @@ public class ColumnConfig extends BaseSuperEntity<ColumnConfig, Long> {
 
 	public static final String TABLE_NAME = "tt_column_config";
 
-	@Column(name = "table_name", nullable = false, columnDefinition = "varchar(64) not null comment '表名称'")
+	@Column(name = "table_name", columnDefinition = "varchar(64) not null comment '表名称'")
 	private String tableName;
 
 	/**
 	 * 数据库字段名称
 	 */
-	@Column(name = "column_name", nullable = false, columnDefinition = "varchar(64) not null comment '数据库字段名称'")
+	@Column(name = "column_name", columnDefinition = "varchar(64) not null comment '数据库字段名称'")
 	private String columnName;
 
 	/**
 	 * 数据库字段类型
 	 */
-	@Column(name = "column_type", nullable = false, columnDefinition = "varchar(64) not null comment '数据库字段类型'")
+	@Column(name = "column_type", columnDefinition = "varchar(64) not null comment '数据库字段类型'")
 	private String columnType;
 
 	/**
 	 * 数据库字段键类型
 	 */
-	@Column(name = "key_type", nullable = false, columnDefinition = "varchar(64) not null comment '数据库字段键类型'")
+	@Column(name = "key_type", columnDefinition = "varchar(64) not null comment '数据库字段键类型'")
 	private String keyType;
 
 	/**
 	 * 字段额外的参数
 	 */
-	@Column(name = "extra", nullable = false, columnDefinition = "varchar(128) not null comment '字段额外的参数'")
+	@Column(name = "extra", columnDefinition = "varchar(128) not null comment '字段额外的参数'")
 	private String extra;
 
 	/**
 	 * 数据库字段描述
 	 */
-	@Column(name = "remark", nullable = false, columnDefinition = "varchar(256) not null comment '数据库字段描述'")
+	@Column(name = "remark", columnDefinition = "varchar(256) not null comment '数据库字段描述'")
 	private String remark;
 
 	/**
 	 * 必填
 	 */
-	@Column(name = "not_null", nullable = false, columnDefinition = "boolean default false comment '必填'")
+	@Column(name = "not_null", columnDefinition = "boolean default false comment '必填'")
 	private Boolean notNull;
 
 	/**
 	 * 是否在列表显示
 	 */
-	@Column(name = "list_show", nullable = false, columnDefinition = "boolean default false comment '是否在列表显示'")
+	@Column(name = "list_show", columnDefinition = "boolean default false comment '是否在列表显示'")
 	private Boolean listShow;
 
 	/**
 	 * 是否表单显示
 	 */
-	@Column(name = "form_show", nullable = false, columnDefinition = "boolean default false comment '是否表单显示'")
+	@Column(name = "form_show", columnDefinition = "boolean default false comment '是否表单显示'")
 	private Boolean formShow;
 
 	/**
 	 * 表单类型
 	 */
-	@Column(name = "form_type", nullable = false, columnDefinition = "varchar(64) not null comment '表单类型'")
+	@Column(name = "form_type", columnDefinition = "varchar(64) not null comment '表单类型'")
 	private String formType;
 
 	/**
 	 * 查询 1:模糊 2：精确
 	 */
-	@Column(name = "query_type", nullable = false, columnDefinition = "varchar(64) not null comment '查询 1:模糊 2：精确'")
+	@Column(name = "query_type", columnDefinition = "varchar(64) not null comment '查询 1:模糊 2：精确'")
 	private String queryType;
 
 	/**
 	 * 字典名称
 	 */
-	@Column(name = "dict_name", nullable = false, columnDefinition = "varchar(64) not null comment '字典名称'")
+	@Column(name = "dict_name", columnDefinition = "varchar(64) not null comment '字典名称'")
 	private String dictName;
 
 	/**
 	 * 日期注解
 	 */
-	@Column(name = "date_annotation", nullable = false, columnDefinition = "varchar(64) not null comment '日期注解'")
+	@Column(name = "date_annotation", columnDefinition = "varchar(64) not null comment '日期注解'")
 	private String dateAnnotation;
 
 

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "平台管理端-分类品牌管理API", description = "平台管理端-分类品牌管理API")
-@RequestMapping("/goods/manager/categoryBrand")
+@RequestMapping("/goods/manager/category/brand")
 public class CategoryBrandManagerController {
 
 	/**

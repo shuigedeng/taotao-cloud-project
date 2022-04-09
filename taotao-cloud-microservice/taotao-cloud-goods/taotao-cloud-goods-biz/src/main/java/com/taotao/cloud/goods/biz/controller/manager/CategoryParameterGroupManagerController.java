@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "平台管理端-分类绑定参数组API", description = "平台管理端-分类绑定参数组API")
-@RequestMapping("/goods/manager/categoryParameters")
+@RequestMapping("/goods/manager/category/parameters")
 public class CategoryParameterGroupManagerController {
 
 	/**

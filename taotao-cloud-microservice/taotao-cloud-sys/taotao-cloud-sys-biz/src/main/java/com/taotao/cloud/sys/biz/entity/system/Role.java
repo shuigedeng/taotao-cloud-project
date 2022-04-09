@@ -49,13 +49,13 @@ public class Role extends BaseSuperEntity<Role,Long> {
 	/**
 	 * 角色名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '角色名称'")
+	@Column(name = "name", columnDefinition = "varchar(32) not null comment '角色名称'")
 	private String name;
 
 	/**
 	 * 角色标识
 	 */
-	@Column(name = "code", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '角色标识'")
+	@Column(name = "code", unique = true, columnDefinition = "varchar(32) not null comment '角色标识'")
 	private String code;
 
 	/**

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,会员接口
+ * 管理端,会员API
  *
  * @since 2020-02-25 14:10:16
  */
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/member/manager/member")
-@Tag(name = "管理端-会员API", description = "管理端-会员API")
+@Tag(name = "管理端-会员管理API", description = "管理端-会员管理API")
 public class MemberController {
 
 	private final MemberService memberService;

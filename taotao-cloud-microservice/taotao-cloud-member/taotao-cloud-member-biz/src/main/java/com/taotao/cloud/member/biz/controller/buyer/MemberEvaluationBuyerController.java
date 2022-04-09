@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端-会员商品评价接口
+ * 买家端-会员商品评价API
  *
  * @author shuigedeng
  * @version 2021.10
@@ -40,8 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/member/buyer/member-evaluation")
 @Tag(name = "买家端-会员商品评价API", description = "买家端-会员商品评价API")
+@RequestMapping("/member/buyer/member/evaluation")
 public class MemberEvaluationBuyerController {
 
 	/**
