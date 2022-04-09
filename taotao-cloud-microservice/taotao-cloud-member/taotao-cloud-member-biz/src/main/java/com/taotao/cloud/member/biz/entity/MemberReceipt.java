@@ -35,31 +35,31 @@ public class MemberReceipt extends BaseSuperEntity<MemberReceipt, Long> {
 	/**
 	 * 发票抬头
 	 */
-	@Column(name = "receipt_title", nullable = false, columnDefinition = "varchar(32) not null comment '发票抬头'")
+	@Column(name = "receipt_title", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String receiptTitle;
 
 	/**
 	 * 纳税人识别号
 	 */
-	@Column(name = "taxpayer_id", nullable = false, columnDefinition = "varchar(32) not null comment '纳税人识别号'")
+	@Column(name = "taxpayer_id", columnDefinition = "varchar(32) not null comment '纳税人识别号'")
 	private String taxpayerId;
 
 	/**
 	 * 发票内容
 	 */
-	@Column(name = "receipt_content", nullable = false, columnDefinition = "varchar(32) not null comment '发票内容'")
+	@Column(name = "receipt_content", columnDefinition = "varchar(32) not null comment '发票内容'")
 	private String receiptContent;
 
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
 
 	/**
 	 * 会员名称
 	 */
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(32) not null comment '会员名称'")
+	@Column(name = "member_name", columnDefinition = "varchar(32) not null comment '会员名称'")
 	private String memberName;
 
 	/**
@@ -67,18 +67,18 @@ public class MemberReceipt extends BaseSuperEntity<MemberReceipt, Long> {
 	 *
 	 * @see MemberReceiptEnum
 	 */
-	@Column(name = "receipt_type", nullable = false, columnDefinition = "varchar(32) not null comment '发票类型'")
+	@Column(name = "receipt_type", columnDefinition = "varchar(32) not null comment '发票类型'")
 	private String receiptType;
 
 	/**
 	 * 是否为默认选项 0：否，1：是
 	 */
-	@Column(name = "defaulted", nullable = false, columnDefinition = "int not null default 0 comment '是否为默认选项 0：否，1：是'")
+	@Column(name = "defaulted", columnDefinition = "int not null default 0 comment '是否为默认选项 0：否，1：是'")
 	private Integer defaulted;
 
 	/**
 	 * 删除标志 true/false 删除/未删除
 	 */
-	@Column(name = "delete_flag", nullable = false, columnDefinition = "boolean not null default false comment '删除标志 true/false 删除/未删除'")
+	@Column(name = "delete_flag", columnDefinition = "boolean not null default false comment '删除标志 true/false 删除/未删除'")
 	private Boolean deleteFlag;
 }

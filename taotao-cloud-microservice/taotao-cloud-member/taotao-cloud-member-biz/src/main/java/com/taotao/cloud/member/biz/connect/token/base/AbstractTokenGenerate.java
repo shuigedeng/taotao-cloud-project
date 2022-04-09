@@ -1,6 +1,7 @@
 package com.taotao.cloud.member.biz.connect.token.base;
 
 
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.member.biz.connect.token.Token;
 
 /**
@@ -29,6 +30,6 @@ public abstract class AbstractTokenGenerate<T> {
     /**
      * 默认role
      */
-    //public UserEnums role = UserEnums.MANAGER;
+    public UserEnum role = UserEnum.MANAGER;
 
 }

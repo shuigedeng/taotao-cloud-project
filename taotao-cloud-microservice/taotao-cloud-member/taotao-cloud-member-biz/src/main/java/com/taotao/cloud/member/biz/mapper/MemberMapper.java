@@ -21,10 +21,17 @@ public interface MemberMapper extends BaseMapper<Member> {
 	 *
 	 * @return 会员手机号
 	 */
-	@Select("select m.mobile from li_member m")
+	@Select("""
+		select m.mobile
+		from li_member m
+		""")
 	List<String> getAllMemberMobile();
 
-	@Select("select * from li_member ${ew.customSqlSegment}")
+	@Select("""
+		select *
+		from li_member
+		${ew.customSqlSegment}
+		""")
 	IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page,
 		@Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
 }

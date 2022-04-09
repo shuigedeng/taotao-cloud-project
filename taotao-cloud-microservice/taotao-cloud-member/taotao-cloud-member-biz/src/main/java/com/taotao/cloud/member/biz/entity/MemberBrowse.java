@@ -36,16 +36,18 @@ public class MemberBrowse extends BaseSuperEntity<MemberBrowse, Long> {
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
+
 	/**
 	 * 商品ID
 	 */
-	@Column(name = "goods_id", nullable = false, columnDefinition = "bigint not null comment '商品ID'")
+	@Column(name = "goods_id", columnDefinition = "bigint not null comment '商品ID'")
 	private Long goodsId;
+
 	/**
 	 * 规格ID
 	 */
-	@Column(name = "sku_id", nullable = false, columnDefinition = "bigint not null comment '规格ID'")
+	@Column(name = "sku_id", columnDefinition = "bigint not null comment '规格ID'")
 	private Long skuId;
 }

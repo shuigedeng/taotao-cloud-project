@@ -45,6 +45,8 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
 import com.taotao.cloud.store.api.vo.StoreVO;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
@@ -230,10 +232,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 			member = new Member(mobilePhone, UUID.fastUUID().toString(), mobilePhone);
 			//保存会员
 			this.save(member);
-			//String destination = rocketmqCustomProperties.getMemberTopic() + ":"
-			//	+ MemberTagsEnum.MEMBER_REGISTER.name();
-			//rocketMQTemplate.asyncSend(destination, member,
-			//	RocketmqSendCallbackBuilder.commonCallback());
+
+			String destination = rocketmqCustomProperties.getMemberTopic() + ":"
+				+ MemberTagsEnum.MEMBER_REGISTER.name();
+			rocketMQTemplate.asyncSend(destination, member,
+				RocketmqSendCallbackBuilder.commonCallback());
 		}
 		loginBindUser(member);
 		return memberTokenGenerate.createToken(member, false);
@@ -276,10 +279,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 		//注册成功后用户自动登录
 		if (this.save(member)) {
 			Token token = memberTokenGenerate.createToken(member, false);
-			//String destination = rocketmqCustomProperties.getMemberTopic() + ":"
-			//	+ MemberTagsEnum.MEMBER_REGISTER.name();
-			//rocketMQTemplate.asyncSend(destination, member,
-			//	RocketmqSendCallbackBuilder.commonCallback());
+			String destination = rocketmqCustomProperties.getMemberTopic() + ":"
+				+ MemberTagsEnum.MEMBER_REGISTER.name();
+			rocketMQTemplate.asyncSend(destination, member,
+				RocketmqSendCallbackBuilder.commonCallback());
 			return token;
 		}
 		return null;
@@ -326,10 +329,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 			memberAddDTO.getMobile());
 		this.save(member);
 
-		//String destination =
-		//	rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_REGISTER.name();
-		//rocketMQTemplate.asyncSend(destination, member,
-		//	RocketmqSendCallbackBuilder.commonCallback());
+		String destination =
+			rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_REGISTER.name();
+		rocketMQTemplate.asyncSend(destination, member,
+			RocketmqSendCallbackBuilder.commonCallback());
 		return true;
 	}
 
@@ -409,10 +412,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 				memberPointMessage.setPoint(point);
 				memberPointMessage.setType(type);
 				memberPointMessage.setMemberId(memberId);
-				//String destination = rocketmqCustomProperties.getMemberTopic() + ":"
-				//	+ MemberTagsEnum.MEMBER_POINT_CHANGE.name();
-				//rocketMQTemplate.asyncSend(destination, memberPointMessage,
-				//	RocketmqSendCallbackBuilder.commonCallback());
+				String destination = rocketmqCustomProperties.getMemberTopic() + ":"
+					+ MemberTagsEnum.MEMBER_POINT_CHANGE.name();
+				rocketMQTemplate.asyncSend(destination, memberPointMessage,
+					RocketmqSendCallbackBuilder.commonCallback());
 				return true;
 			}
 			return false;
@@ -422,7 +425,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	}
 
 	@Override
-	public Boolean updateMemberStatus(List<String> memberIds, Boolean status) {
+	public Boolean updateMemberStatus(List<Long> memberIds, Boolean status) {
 		UpdateWrapper<Member> updateWrapper = Wrappers.update();
 		updateWrapper.set("disabled", status);
 		updateWrapper.in("id", memberIds);
@@ -578,7 +581,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	 * @return 指定会员数据
 	 */
 	@Override
-	public List<Map<String, Object>> listFieldsByMemberIds(String columns, List<String> memberIds) {
+	public List<Map<String, Object>> listFieldsByMemberIds(String columns, List<Long> memberIds) {
 		return this.listMaps(new QueryWrapper<Member>()
 			.select(columns)
 			.in(memberIds != null && !memberIds.isEmpty(), "id", memberIds));

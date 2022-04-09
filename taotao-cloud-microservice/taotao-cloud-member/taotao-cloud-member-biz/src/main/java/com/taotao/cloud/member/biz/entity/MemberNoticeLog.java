@@ -35,42 +35,42 @@ public class MemberNoticeLog extends BaseSuperEntity<MemberNoticeLog, Long> {
 	/**
 	 * 标题
 	 */
-	@Column(name = "title", nullable = false, columnDefinition = "varchar(64) not null comment '标题'")
+	@Column(name = "title", columnDefinition = "varchar(255) not null comment '标题'")
 	private String title;
 
 	/**
 	 * 消息内容
 	 */
-	@Column(name = "content", nullable = false, columnDefinition = "varchar(1024) not null comment '消息内容'")
+	@Column(name = "content", columnDefinition = "varchar(1024) not null comment '消息内容'")
 	private String content;
 
 	/**
 	 * 会员id 逗号分割
 	 */
-	@Column(name = "member_ids", nullable = false, columnDefinition = "text not null comment '会员id 逗号分割'")
+	@Column(name = "member_ids", columnDefinition = "text not null comment '会员id 逗号分割'")
 	private String memberIds;
 
 	/**
 	 * 管理员id
 	 */
-	@Column(name = "admin_id", nullable = false, columnDefinition = "bigint not null comment '管理员id'")
+	@Column(name = "admin_id", columnDefinition = "bigint not null comment '管理员id'")
 	private Long adminId;
 
 	/**
 	 * 管理员名称
 	 */
-	@Column(name = "admin_name", nullable = false, columnDefinition = "varchar(64) not null comment '管理员名称'")
+	@Column(name = "admin_name", columnDefinition = "varchar(255) not null comment '管理员名称'")
 	private String adminName;
 
 	/**
 	 * 发送时间
 	 */
-	@Column(name = "send_time", nullable = false, columnDefinition = "datetime not null comment '发送时间'")
+	@Column(name = "send_time", columnDefinition = "datetime not null comment '发送时间'")
 	private LocalDateTime sendTime;
 
 	/**
 	 * 发送类型,0全站，1指定会员
 	 */
-	@Column(name = "send_type", nullable = false, columnDefinition = "int not null default 0 comment '发送类型,0全站，1指定会员'")
+	@Column(name = "send_type", columnDefinition = "int not null default 0 comment '发送类型,0全站，1指定会员'")
 	private Integer sendType;
 }

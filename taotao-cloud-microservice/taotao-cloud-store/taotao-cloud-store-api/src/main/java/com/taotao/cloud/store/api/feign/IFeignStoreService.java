@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IFeignStoreService {
 
 	@GetMapping(value = "/sotre/info/id/{id:[0-9]*}")
-	Result<StoreVO> findSotreById(@RequestParam String id);
+	Result<StoreVO> findSotreById(@RequestParam Long id);
 
 	Result<Boolean> updateStoreCollectionNum(CollectionDTO collectionDTO);
 

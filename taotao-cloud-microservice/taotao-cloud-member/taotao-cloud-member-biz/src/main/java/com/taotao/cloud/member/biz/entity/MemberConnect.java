@@ -28,27 +28,27 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = MemberConnect.TABLE_NAME, comment = "联合登陆表表")
 public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 
-	public static final String TABLE_NAME = "tt_sys_dept";
+	public static final String TABLE_NAME = "tt_member_connect";
 
-	@Column(name = "user_id", nullable = false, columnDefinition = "varchar(32) not null comment '用户id'")
+	@Column(name = "user_id", columnDefinition = "varchar(32) not null comment '用户id'")
 	private Long userId;
 
-	@Column(name = "union_id", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录id'")
+	@Column(name = "union_id", columnDefinition = "varchar(32) not null comment '联合登录id'")
 	private String unionId;
 
-	@Column(name = "union_type", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录类型'")
+	@Column(name = "union_type", columnDefinition = "varchar(32) not null comment '联合登录类型'")
 	private String unionType;
 
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "int(11) not null comment '会员id'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
 	private Long memberId;
 
 	/**
 	 * 平台id
 	 */
-	@Column(name = "platform_id", nullable = false, columnDefinition = "varchar(255) not null default '' comment '平台id'")
+	@Column(name = "platform_id", columnDefinition = "varchar(255) not null default '' comment '平台id'")
 	private String platformId;
 
 	/**
@@ -56,13 +56,13 @@ public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 	 *
 	 * @see PlatformTypeEnum
 	 */
-	@Column(name = "type", nullable = false, columnDefinition = "int NOT NULL DEFAULT 0 COMMENT '平台类型 0:未知,1:facebook,2:google,3:wechat,4:qq,5:weibo,6:twitter'")
+	@Column(name = "type", columnDefinition = "int NOT NULL DEFAULT 0 COMMENT '平台类型 0:未知,1:facebook,2:google,3:wechat,4:qq,5:weibo,6:twitter'")
 	private Integer type;
 
 	/**
 	 * 昵称
 	 */
-	@Column(name = "nickname", unique = true, nullable = false, columnDefinition = "varchar(255) not null comment '昵称'")
+	@Column(name = "nickname", unique = true, columnDefinition = "varchar(255) not null comment '昵称'")
 	private String nickname;
 
 	/**

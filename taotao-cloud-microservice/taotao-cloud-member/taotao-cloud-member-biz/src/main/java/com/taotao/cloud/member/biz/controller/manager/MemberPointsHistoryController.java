@@ -35,7 +35,7 @@ public class MemberPointsHistoryController {
 	@RequestLogger("分页获取")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<IPage<MemberPointsHistory>> getByPage(PageVO page, String memberId,
+	public Result<IPage<MemberPointsHistory>> getByPage(PageVO page, Long memberId,
 		String memberName) {
 		return Result.success(
 			memberPointsHistoryService.MemberPointsHistoryList(page, memberId, memberName));
@@ -45,7 +45,7 @@ public class MemberPointsHistoryController {
 	@RequestLogger("获取会员积分")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "")
-	public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO(String memberId) {
+	public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO(Long memberId) {
 		return Result.success(memberPointsHistoryService.getMemberPointsHistoryVO(memberId));
 	}
 

@@ -41,33 +41,32 @@ public class BaseAuthWeiboRequest extends BaseAuthRequest {
 
     @Override
     protected ConnectAuthUser getUserInfo(AuthToken authToken) {
-        //String accessToken = authToken.getAccessToken();
-        //String uid = authToken.getUid();
-        //String oauthParam = String.format("uid=%s&access_token=%s", uid, accessToken);
-		//
-        //HttpHeader httpHeader = new HttpHeader();
-        //httpHeader.add("Authorization", "OAuth2 " + oauthParam);
-        //httpHeader.add("API-RemoteIP", IpUtils.getLocalIp());
-        //String userInfo = new HttpUtils(config.getHttpConfig()).get(userInfoUrl(authToken), null, httpHeader, false);
-        //JSONObject object = JSONObject.parseObject(userInfo);
-        //if (object.containsKey("error")) {
-        //    throw new AuthException(object.getString("error"));
-        //}
-        //return ConnectAuthUser.builder()
-        //        .rawUserInfo(object)
-        //        .uuid(object.getString("id"))
-        //        .username(object.getString("name"))
-        //        .avatar(object.getString("profile_image_url"))
-        //        .blog(StringUtils.isEmpty(object.getString("url")) ? "https://weibo.com/" + object.getString("profile_url") : object
-        //                .getString("url"))
-        //        .nickname(object.getString("screen_name"))
-        //        .location(object.getString("location"))
-        //        .remark(object.getString("description"))
-        //        .gender(AuthUserGender.getRealGender(object.getString("gender")))
-        //        .token(authToken)
-        //        .source(source.toString())
-        //        .build();
-	    return null;
+        String accessToken = authToken.getAccessToken();
+        String uid = authToken.getUid();
+        String oauthParam = String.format("uid=%s&access_token=%s", uid, accessToken);
+
+        HttpHeader httpHeader = new HttpHeader();
+        httpHeader.add("Authorization", "OAuth2 " + oauthParam);
+        httpHeader.add("API-RemoteIP", IpUtils.getLocalIp());
+        String userInfo = new HttpUtils(config.getHttpConfig()).get(userInfoUrl(authToken), null, httpHeader, false);
+        JSONObject object = JSONObject.parseObject(userInfo);
+        if (object.containsKey("error")) {
+            throw new AuthException(object.getString("error"));
+        }
+        return ConnectAuthUser.builder()
+                .rawUserInfo(object)
+                .uuid(object.getString("id"))
+                .username(object.getString("name"))
+                .avatar(object.getString("profile_image_url"))
+                .blog(StringUtils.isEmpty(object.getString("url")) ? "https://weibo.com/" + object.getString("profile_url") : object
+                        .getString("url"))
+                .nickname(object.getString("screen_name"))
+                .location(object.getString("location"))
+                .remark(object.getString("description"))
+                .gender(AuthUserGender.getRealGender(object.getString("gender")))
+                .token(authToken)
+                .source(source.toString())
+                .build();
     }
 
     /**

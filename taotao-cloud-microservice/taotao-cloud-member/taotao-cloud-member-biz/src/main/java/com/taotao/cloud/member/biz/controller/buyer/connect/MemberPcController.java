@@ -130,7 +130,7 @@ public class MemberPcController {
 	@RequestLogger("修改用户自己资料")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/own")
-	public Result<Member> editOwn(MemberEditDTO memberEditDTO) {
+	public Result<Boolean> editOwn(MemberEditDTO memberEditDTO) {
 		return Result.success(memberService.editOwn(memberEditDTO));
 	}
 
@@ -138,7 +138,7 @@ public class MemberPcController {
 	@RequestLogger("修改密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/modifyPass")
-	public Result<Member> modifyPass(
+	public Result<Boolean> modifyPass(
 		@NotNull(message = "旧密码不能为空") @RequestParam String password,
 		@NotNull(message = "新密码不能为空") @RequestParam String newPassword) {
 		return Result.success(memberService.modifyPass(password, newPassword));

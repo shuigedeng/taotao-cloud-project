@@ -8,6 +8,7 @@ import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
 import com.taotao.cloud.member.biz.entity.MemberBrowse;
 import com.taotao.cloud.member.biz.mapper.FootprintMapper;
 import com.taotao.cloud.member.biz.service.IMemberBrowseService;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,7 +65,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
     }
 
     @Override
-    public boolean deleteByIds(List<String> ids) {
+    public boolean deleteByIds(List<Long> ids) {
         LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.eq(MemberBrowse::getMemberId, UserContext.getCurrentUser().getId());
         lambdaQueryWrapper.in(MemberBrowse::getGoodsId, ids);

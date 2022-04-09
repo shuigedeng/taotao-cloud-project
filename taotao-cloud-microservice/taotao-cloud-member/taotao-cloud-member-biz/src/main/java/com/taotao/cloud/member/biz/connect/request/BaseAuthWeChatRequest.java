@@ -87,18 +87,17 @@ public class BaseAuthWeChatRequest extends BaseAuthRequest {
      * @return token对象
      */
     private AuthToken getToken(String accessTokenUrl) {
-        //String response = new HttpUtils(config.getHttpConfig()).get(accessTokenUrl);
-        //JSONObject accessTokenObject = JSONObject.parseObject(response);
-		//
-        //this.checkResponse(accessTokenObject);
-		//
-        //return AuthToken.builder()
-        //        .accessToken(accessTokenObject.getString("access_token"))
-        //        .refreshToken(accessTokenObject.getString("refresh_token"))
-        //        .expireIn(accessTokenObject.getIntValue("expires_in"))
-        //        .openId(accessTokenObject.getString("openid"))
-        //        .build();
-	    return null;
+        String response = new HttpUtils(config.getHttpConfig()).get(accessTokenUrl);
+        JSONObject accessTokenObject = JSONObject.parseObject(response);
+
+        this.checkResponse(accessTokenObject);
+
+        return AuthToken.builder()
+                .accessToken(accessTokenObject.getString("access_token"))
+                .refreshToken(accessTokenObject.getString("refresh_token"))
+                .expireIn(accessTokenObject.getIntValue("expires_in"))
+                .openId(accessTokenObject.getString("openid"))
+                .build();
     }
 
     /**

@@ -45,7 +45,7 @@ public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 		Where goods_id=#{goodsId} and status='OPEN'
 		GROUP BY grade
 		""")
-	List<Map<String, Object>> getEvaluationNumber(String goodsId);
+	List<Map<String, Object>> getEvaluationNumber(Long goodsId);
 
 	/**
 	 * 获取店铺评分

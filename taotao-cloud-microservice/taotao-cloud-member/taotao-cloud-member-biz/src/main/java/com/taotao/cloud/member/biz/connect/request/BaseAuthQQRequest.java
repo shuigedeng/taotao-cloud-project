@@ -35,9 +35,8 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
 
     @Override
     public AuthResponse refresh(AuthToken authToken) {
-        //String response = new HttpUtils(config.getHttpConfig()).get(refreshTokenUrl(authToken.getRefreshToken()));
-        //return AuthResponse.builder().code(AuthResponseStatus.SUCCESS.getCode()).data(getAuthToken(response)).build();
-	    return null;
+        String response = new HttpUtils(config.getHttpConfig()).get(refreshTokenUrl(authToken.getRefreshToken()));
+        return AuthResponse.builder().code(AuthResponseStatus.SUCCESS.getCode()).data(getAuthToken(response)).build();
     }
 
     @Override
@@ -75,23 +74,22 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
      * @return openId
      */
     private String getOpenId(AuthToken authToken) {
-        //String response = new HttpUtils(config.getHttpConfig()).get(UrlBuilder.fromBaseUrl("https://graph.qq.com/oauth2.0/me")
-        //        .queryParam("access_token", authToken.getAccessToken())
-        //        .queryParam("unionid", config.isUnionId() ? 1 : 0)
-        //        .build());
-        //String removePrefix = response.replace("callback(", "");
-        //String removeSuffix = removePrefix.replace(");", "");
-        //String openId = removeSuffix.trim();
-        //JSONObject object = JSONObject.parseObject(openId);
-        //if (object.containsKey("error")) {
-        //    throw new AuthException(object.get("error") + ":" + object.get("error_description"));
-        //}
-        //authToken.setOpenId(object.getString("openid"));
-        //if (object.containsKey("unionid")) {
-        //    authToken.setUnionId(object.getString("unionid"));
-        //}
-        //return StringUtil.isEmpty(authToken.getUnionId()) ? authToken.getOpenId() : authToken.getUnionId();
-	    return null;
+        String response = new HttpUtils(config.getHttpConfig()).get(UrlBuilder.fromBaseUrl("https://graph.qq.com/oauth2.0/me")
+                .queryParam("access_token", authToken.getAccessToken())
+                .queryParam("unionid", config.isUnionId() ? 1 : 0)
+                .build());
+        String removePrefix = response.replace("callback(", "");
+        String removeSuffix = removePrefix.replace(");", "");
+        String openId = removeSuffix.trim();
+        JSONObject object = JSONObject.parseObject(openId);
+        if (object.containsKey("error")) {
+            throw new AuthException(object.get("error") + ":" + object.get("error_description"));
+        }
+        authToken.setOpenId(object.getString("openid"));
+        if (object.containsKey("unionid")) {
+            authToken.setUnionId(object.getString("unionid"));
+        }
+        return StringUtil.isEmpty(authToken.getUnionId()) ? authToken.getOpenId() : authToken.getUnionId();
     }
 
     /**

@@ -5,6 +5,8 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
 import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +28,6 @@ public class MemberTokenGenerate extends AbstractTokenGenerate<Member> {
 
     @Override
     public Token createToken(Member member, Boolean longTerm) {
-
         //获取客户端类型
         String clientType = ThreadContextHolder.getHttpRequest().getHeader("clientType");
         ClientTypeEnum clientTypeEnum;

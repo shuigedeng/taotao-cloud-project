@@ -30,15 +30,16 @@ import lombok.Setter;
 public class MemberStoreCollection extends BaseSuperEntity<MemberStoreCollection, Long> {
 
 	public static final String TABLE_NAME = "tt_member_store_collection";
+
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员id'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
 	private Long memberId;
 
 	/**
 	 * 店铺id
 	 */
-	@Column(name = "store_id", nullable = false, columnDefinition = "bigint not null comment '店铺id'")
+	@Column(name = "store_id", columnDefinition = "bigint not null comment '店铺id'")
 	private Long storeId;
 }

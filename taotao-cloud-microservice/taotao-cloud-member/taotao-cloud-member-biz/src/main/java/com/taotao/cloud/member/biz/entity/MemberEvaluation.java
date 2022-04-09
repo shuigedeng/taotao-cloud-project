@@ -1,6 +1,7 @@
 package com.taotao.cloud.member.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,13 +36,13 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
 
 	/**
 	 * 会员名称
 	 */
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(256) not null comment '会员名称'")
+	@Column(name = "member_name", columnDefinition = "varchar(256) not null comment '会员名称'")
 	private String memberName;
 
 	/**
@@ -65,37 +66,37 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	/**
 	 * 商品ID
 	 */
-	@Column(name = "goods_id", nullable = false, columnDefinition = "bigint not null comment '商品ID'")
+	@Column(name = "goods_id", columnDefinition = "bigint not null comment '商品ID'")
 	private Long goodsId;
 
 	/**
 	 * SKU_ID
 	 */
-	@Column(name = "sku_id", nullable = false, columnDefinition = "bigint not null comment 'SKU_ID'")
+	@Column(name = "sku_id", columnDefinition = "bigint not null comment 'SKU_ID'")
 	private Long skuId;
 
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "goods_name", nullable = false, columnDefinition = "varchar(32) not null comment '商品名称'")
+	@Column(name = "goods_name", columnDefinition = "varchar(255) not null comment '商品名称'")
 	private String goodsName;
 
 	/**
 	 * 商品图片
 	 */
-	@Column(name = "goods_image", nullable = false, columnDefinition = "varchar(1024) not null comment '商品图片'")
+	@Column(name = "goods_image", columnDefinition = "varchar(1024) not null comment '商品图片'")
 	private String goodsImage;
 
 	/**
 	 * 订单号
 	 */
-	@Column(name = "order_no", nullable = false, columnDefinition = "varchar(64) not null comment '订单号'")
+	@Column(name = "order_no", columnDefinition = "varchar(255) not null comment '订单号'")
 	private String orderNo;
 
 	/**
 	 * 好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评
 	 */
-	@Column(name = "grade", nullable = false, columnDefinition = "varchar(32) not null default 'GOOD' comment '好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评'")
+	@Column(name = "grade", columnDefinition = "varchar(32) not null default 'GOOD' comment '好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评'")
 	private String grade;
 
 	/**
@@ -164,28 +165,28 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	@Column(name = "description_score", columnDefinition = "int default 0 comment '描述评分'")
 	private Integer descriptionScore;
 
-	//public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSku goodsSku, Member member,Order order){
-	//    //复制评价信息
-	//    BeanUtils.copyProperties(memberEvaluationDTO, this);
-	//    //设置会员
-	//    this.memberId=member.getId();
-	//    //会员名称
-	//    this.memberName=member.getNickName();
-	//    //设置会员头像
-	//    this.memberProfile=member.getFace();
-	//    //商品名称
-	//    this.goodsName=goodsSku.getGoodsName();
-	//    //商品图片
-	//    this.goodsImage=goodsSku.getThumbnail();
-	//    //设置店铺ID
-	//    this.storeId=order.getStoreId();
-	//    //设置店铺名称
-	//    this.storeName=order.getStoreName();
-	//    //设置订单编号
-	//    this.orderNo=order.getSn();
-	//    //是否包含图片
-	//    this.haveImage=StringUtils.isNotEmpty(memberEvaluationDTO.getImages());
-	//    //默认开启评价
-	//    this.status=SwitchEnum.OPEN.name();
-	//}
+	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSku goodsSku, Member member,Order order){
+	    //复制评价信息
+	    BeanUtils.copyProperties(memberEvaluationDTO, this);
+	    //设置会员
+	    this.memberId=member.getId();
+	    //会员名称
+	    this.memberName=member.getNickName();
+	    //设置会员头像
+	    this.memberProfile=member.getFace();
+	    //商品名称
+	    this.goodsName=goodsSku.getGoodsName();
+	    //商品图片
+	    this.goodsImage=goodsSku.getThumbnail();
+	    //设置店铺ID
+	    this.storeId=order.getStoreId();
+	    //设置店铺名称
+	    this.storeName=order.getStoreName();
+	    //设置订单编号
+	    this.orderNo=order.getSn();
+	    //是否包含图片
+	    this.haveImage=StringUtils.isNotEmpty(memberEvaluationDTO.getImages());
+	    //默认开启评价
+	    this.status=SwitchEnum.OPEN.name();
+	}
 }

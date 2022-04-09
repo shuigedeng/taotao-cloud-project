@@ -26,8 +26,11 @@ import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.mapper.MemberEvaluationMapper;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
@@ -128,13 +131,13 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public MemberEvaluationVO queryById(String id) {
+	public MemberEvaluationVO queryById(Long id) {
 		MemberEvaluation memberEvaluation = this.getById(id);
 		return BeanUtil.copy(memberEvaluation, MemberEvaluationVO.class);
 	}
 
 	@Override
-	public boolean updateStatus(String id, String status) {
+	public boolean updateStatus(Long id, String status) {
 		UpdateWrapper updateWrapper = Wrappers.update();
 		updateWrapper.eq("id", id);
 		updateWrapper.set("status", status.equals(SwitchEnum.OPEN.name()) ? SwitchEnum.OPEN.name()
@@ -143,7 +146,7 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public boolean delete(String id) {
+	public boolean delete(Long id) {
 		LambdaUpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.lambdaUpdate();
 		updateWrapper.set(MemberEvaluation::getDelFlag, true);
 		updateWrapper.eq(MemberEvaluation::getId, id);
@@ -151,7 +154,7 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public boolean reply(String id, String reply, String replyImage) {
+	public boolean reply(Long id, String reply, String replyImage) {
 		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
 		updateWrapper.set("reply_status", true);
 		updateWrapper.set("reply", reply);
@@ -164,7 +167,7 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public EvaluationNumberVO getEvaluationNumber(String goodsId) {
+	public EvaluationNumberVO getEvaluationNumber(Long goodsId) {
 		EvaluationNumberVO evaluationNumberVO = new EvaluationNumberVO();
 		List<Map<String, Object>> list = this.baseMapper.getEvaluationNumber(goodsId);
 
@@ -198,7 +201,6 @@ public class MemberEvaluationServiceImpl extends
 	 * @param order     订单
 	 */
 	public void checkMemberEvaluation(OrderItem orderItem, Order order) {
-
 		//根据子订单编号判断是否评价过
 		if (orderItem.getCommentStatus().equals(CommentStatusEnum.FINISHED.name())) {
 			throw new BusinessException(ResultEnum.EVALUATION_BigDecimal_ERROR);

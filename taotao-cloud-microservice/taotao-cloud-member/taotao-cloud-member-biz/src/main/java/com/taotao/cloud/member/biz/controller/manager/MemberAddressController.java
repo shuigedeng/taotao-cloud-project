@@ -42,7 +42,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping("/{memberId}")
     public Result<PageModel<MemberAddressVO>> getByPage(@Validated PageParam page,
-		@Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") String memberId) {
+		@Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
         return Result.success(memberAddressService.getAddressByMember(page, memberId));
     }
 
@@ -51,7 +51,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{id}")
     public Result<Boolean> delShippingAddressById(
-		@Parameter(description = "会员地址ID", required = true)@PathVariable String id) {
+		@Parameter(description = "会员地址ID", required = true)@PathVariable Long id) {
         return Result.success(memberAddressService.removeMemberAddress(id));
     }
 
