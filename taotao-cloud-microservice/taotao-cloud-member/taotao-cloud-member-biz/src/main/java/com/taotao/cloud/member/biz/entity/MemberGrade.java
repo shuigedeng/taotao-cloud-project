@@ -34,24 +34,24 @@ public class MemberGrade extends BaseSuperEntity<MemberGrade, Long> {
 	/**
 	 * 等级名称
 	 */
-	@Column(name = "grade_name", nullable = false, columnDefinition = "varchar(64) not null comment '等级名称'")
+	@Column(name = "grade_name", columnDefinition = "varchar(255) not null comment '等级名称'")
 	private String gradeName;
 
 	/**
 	 * 等级图片
 	 */
-	@Column(name = "grade_image", nullable = false, columnDefinition = "varchar(1024) not null comment '等级图片'")
+	@Column(name = "grade_image", columnDefinition = "varchar(1024) not null comment '等级图片'")
 	private String gradeImage;
 
 	/**
 	 * 所需经验值
 	 */
-	@Column(name = "experience_value", nullable = false, columnDefinition = "int not null default 0 comment '所需经验值'")
+	@Column(name = "experience_value", columnDefinition = "int not null default 0 comment '所需经验值'")
 	private Integer experienceValue;
 
 	/**
 	 * 是否为默认等级
 	 */
-	@Column(name = "defaulted", nullable = false, columnDefinition = "boolean not null default false comment '是否为默认等级'")
+	@Column(name = "defaulted", columnDefinition = "boolean not null default false comment '是否为默认等级'")
 	private Boolean defaulted;
 }

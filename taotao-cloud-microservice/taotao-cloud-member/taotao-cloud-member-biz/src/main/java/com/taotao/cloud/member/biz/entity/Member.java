@@ -37,25 +37,25 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 昵称
 	 */
-	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(64) not null comment '昵称'")
+	@Column(name = "nickname", columnDefinition = "varchar(255) not null comment '昵称'")
 	private String nickname;
 
 	/**
 	 * 会员用户名
 	 */
-	@Column(name = "username", nullable = false, columnDefinition = "varchar(64) not null comment '会员用户名'")
+	@Column(name = "username", columnDefinition = "varchar(255) not null comment '会员用户名'")
 	private String username;
 
 	/**
 	 * 会员密码
 	 */
-	@Column(name = "password", nullable = false, columnDefinition = "varchar(64) not null comment '会员密码'")
+	@Column(name = "password", columnDefinition = "varchar(255) not null comment '会员密码'")
 	private String password;
 
 	/**
 	 * 手机号码
 	 */
-	@Column(name = "mobile", nullable = false, columnDefinition = "varchar(64) not null comment '手机号码'")
+	@Column(name = "mobile", columnDefinition = "varchar(255) not null comment '手机号码'")
 	private String mobile;
 
 	/**
@@ -67,7 +67,7 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 会员生日 yyyy-MM-dd
 	 */
-	@Column(name = "birthday", columnDefinition = "varchar(64) comment '会员生日 yyyy-MM-dd'")
+	@Column(name = "birthday", columnDefinition = "varchar(255) comment '会员生日 yyyy-MM-dd'")
 	private String birthday;
 
 	/**
@@ -127,7 +127,7 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 是否锁定 false正常 true禁用
 	 */
-	@Column(name = "locked", nullable = false, columnDefinition = "boolean default false comment '是否锁定 false正常 true禁用'")
+	@Column(name = "locked", columnDefinition = "boolean default false comment '是否锁定 false正常 true禁用'")
 	private Boolean locked;
 
 	/**
@@ -153,13 +153,13 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 最近一次登录时间
 	 */
-	@Column(name = "last_login_date", columnDefinition = "TIMESTAMP comment '最近一次登录时间'")
+	@Column(name = "last_login_date", columnDefinition = "datetime null comment '最近一次登录时间'")
 	private LocalDateTime lastLoginDate;
 
 	/**
 	 * 最近一次登录ip
 	 */
-	@Column(name = "last_login_ip", columnDefinition = "varchar(12) COMMENT '最近一次登录ip'")
+	@Column(name = "last_login_ip", columnDefinition = "varchar(255) COMMENT '最近一次登录ip'")
 	private String lastLoginIp;
 
 	/**
@@ -177,7 +177,7 @@ public class Member extends BaseSuperEntity<Member, Long> {
 	/**
 	 * 创建ip
 	 */
-	@Column(name = "create_ip", columnDefinition = "varchar(12) DEFAULT '' COMMENT '创建ip'")
+	@Column(name = "create_ip", columnDefinition = "varchar(255) null COMMENT '创建ip'")
 	private String createIp;
 
 	/**

@@ -3,6 +3,7 @@ package com.taotao.cloud.member.biz.controller.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
@@ -52,7 +53,7 @@ public class MemberEvaluationController {
 	@RequestLogger("通过id获取")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberEvaluationVO> get(@PathVariable String id) {
+	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
 		return Result.success(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
 	}
 
@@ -60,7 +61,7 @@ public class MemberEvaluationController {
 	@RequestLogger("回复评价")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping(value = "/reply/{id}")
-	public Result<MemberEvaluationVO> reply(@PathVariable String id, @RequestParam String reply,
+	public Result<MemberEvaluationVO> reply(@PathVariable Long id, @RequestParam String reply,
 		@RequestParam String replyImage) {
 		OperationalJudgment.judgment(memberEvaluationService.queryById(id));
 		memberEvaluationService.reply(id, reply, replyImage);

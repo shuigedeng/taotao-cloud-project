@@ -35,24 +35,24 @@ public class MemberNoticeSenter extends BaseSuperEntity<MemberNoticeSenter, Long
 	/**
 	 * 标题
 	 */
-	@Column(name = "title", nullable = false, columnDefinition = "varchar(64) not null comment '标题'")
+	@Column(name = "title", columnDefinition = "varchar(255) not null comment '标题'")
 	private String title;
 
 	/**
 	 * 消息内容
 	 */
-	@Column(name = "content", nullable = false, columnDefinition = "text not null comment '消息内容'")
+	@Column(name = "content", columnDefinition = "text not null comment '消息内容'")
 	private String content;
 
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_ids", nullable = false, columnDefinition = "varchar(1024) not null comment '会员id'")
+	@Column(name = "member_ids", columnDefinition = "varchar(1024) not null comment '会员id'")
 	private String memberIds;
 
 	/**
 	 * 发送类型,ALL 全站，SELECT 指定会员
 	 */
-	@Column(name = "send_type", nullable = false, columnDefinition = "varchar(32) not null comment '发送类型,ALL 全站，SELECT 指定会员'")
+	@Column(name = "send_type", columnDefinition = "varchar(32) not null comment '发送类型,ALL 全站，SELECT 指定会员'")
 	private String sendType;
 }

@@ -34,19 +34,19 @@ public class MemberSign extends BaseSuperEntity<MemberSign, Long> {
 	/**
 	 * 会员用户名
 	 */
-	@Column(name = "member_ame", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户名'")
+	@Column(name = "member_ame", columnDefinition = "varchar(32) not null comment '会员用户名'")
 	private String memberName;
 
 	/**
 	 * 会员用户ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员用户ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员用户ID'")
 	private Long memberId;
 
 	/**
 	 * 连续签到天数
 	 */
-	@Column(name = "sign_day", nullable = false, columnDefinition = "int not null default 0 comment '连续签到天数'")
+	@Column(name = "sign_day", columnDefinition = "int not null default 0 comment '连续签到天数'")
 	private Integer signDay;
 
 }

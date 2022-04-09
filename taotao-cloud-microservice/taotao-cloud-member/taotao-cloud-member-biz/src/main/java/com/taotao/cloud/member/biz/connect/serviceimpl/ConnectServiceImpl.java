@@ -55,8 +55,8 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 
 	static final boolean AUTO_REGION = true;
 
-	//@Autowired
-	//private SettingService settingService;
+	@Autowired
+	private SettingService settingService;
 	@Autowired
 	private MemberService memberService;
 	@Autowired

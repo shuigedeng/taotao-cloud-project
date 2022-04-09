@@ -50,32 +50,32 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 	/**
 	 * 租户id
 	 */
-	@Column(name = "tenant_id", nullable = false, unique = true, columnDefinition = "bigint NOT NULL COMMENT '租户id'")
+	@Column(name = "tenant_id", unique = true, columnDefinition = "bigint NOT NULL COMMENT '租户id'")
 	private Long tenantId;
 
 	/**
 	 * 租户密钥
 	 */
-	@Column(name = "tenant_secret", nullable = false, columnDefinition = "varchar(256)  NOT NULL COMMENT '租户密钥'")
+	@Column(name = "tenant_secret", columnDefinition = "varchar(255)  NOT NULL COMMENT '租户密钥'")
 	private String tenantSecret;
 
 	/**
 	 * 公司名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '公司名称'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null comment '公司名称'")
 	private String name;
 
 	/**
 	 * 企业全称
 	 */
-	@Column(name = "full_name", nullable = false, columnDefinition = "varchar(64) not null comment '企业全称'")
+	@Column(name = "full_name", columnDefinition = "varchar(255) not null comment '企业全称'")
 	private String fullName;
 
 	/**
 	 * 信用代码
 	 */
 	@Pattern(regexp = "^|[a-zA-Z0-9]{18}$", message = "信用代码格式错误")
-	@Column(name = "credit_code", nullable = false, columnDefinition = "varchar(18) not null comment '信用代码'")
+	@Column(name = "credit_code", columnDefinition = "varchar(18) not null comment '信用代码'")
 	private String creditCode;
 
 	/**
@@ -87,19 +87,19 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 	/**
 	 * 联系人
 	 */
-	@Column(name = "username", unique = true, nullable = false, columnDefinition = "varchar(64) not null comment '联系人'")
+	@Column(name = "username", unique = true, columnDefinition = "varchar(255) not null comment '联系人'")
 	private String username;
 
 	/**
 	 * 联系人手机号
 	 */
-	@Column(name = "phone", unique = true, nullable = false, columnDefinition = "varchar(64) not null comment '联系人手机号'")
+	@Column(name = "phone", unique = true, columnDefinition = "varchar(255) not null comment '联系人手机号'")
 	private String phone;
 
 	/**
 	 * 联系人地址
 	 */
-	@Column(name = "address", nullable = false, columnDefinition = "varchar(255) not null comment '联系人地址'")
+	@Column(name = "address", columnDefinition = "varchar(255) not null comment '联系人地址'")
 	private String address;
 
 	/**
@@ -123,6 +123,6 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 	/**
 	 * 公司类型
 	 */
-	@Column(name = "type", nullable = false, columnDefinition = "int not null default 1 comment '公司类型 1运营商 2供应商'")
+	@Column(name = "type", columnDefinition = "int not null default 1 comment '公司类型 1运营商 2供应商'")
 	private Integer type;
 }

@@ -55,7 +55,7 @@ public class MemberController {
 	@RequestLogger("通过ID获取会员信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<Member> get(@PathVariable String id) {
+	public Result<Member> get(@PathVariable Long id) {
 		return Result.data(memberService.getById(id));
 	}
 
@@ -63,7 +63,7 @@ public class MemberController {
 	@RequestLogger("添加会员")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<Member> save(@Valid MemberAddDTO member) {
+	public Result<Boolean> save(@Valid MemberAddDTO member) {
 		return Result.success(memberService.addMember(member));
 	}
 
@@ -79,7 +79,7 @@ public class MemberController {
 	@RequestLogger("修改会员状态,开启关闭会员")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/status")
-	public Result<Object> updateMemberStatus(@RequestParam List<String> memberIds,
+	public Result<Object> updateMemberStatus(@RequestParam List<Long> memberIds,
 		@RequestParam Boolean disabled) {
 		return Result.success(memberService.updateMemberStatus(memberIds, disabled));
 	}

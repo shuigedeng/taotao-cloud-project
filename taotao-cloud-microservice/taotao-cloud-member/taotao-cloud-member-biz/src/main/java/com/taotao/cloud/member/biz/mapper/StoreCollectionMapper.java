@@ -21,8 +21,8 @@ public interface StoreCollectionMapper extends BaseMapper<MemberStoreCollection>
 	 * @param queryWrapper 查询条件
 	 */
 	@Select("""
-		select s.id,s.store_name,s.store_logo,s.self_operated 
-		from li_store s INNER JOIN li_store_collection sc 
+		select s.id,s.store_name,s.store_logo,s.self_operated
+		from li_store s INNER JOIN li_store_collection sc
 		ON s.id=sc.store_id ${ew.customSqlSegment}
 		""")
 	IPage<StoreCollectionVO> storeCollectionVOList(IPage<StoreCollectionVO> page,

@@ -68,7 +68,8 @@ public class PointLogInterceptor {
 
                 memberPointsHistory.setPoint(member.getPoint());
                 memberPointsHistory.setContent(obj[3] == null ? "" : obj[3].toString());
-                //memberPointsHistory.setCreateBy("系统");
+				// 系统
+                memberPointsHistory.setCreatedBy(0L);
                 memberPointsHistoryService.save(memberPointsHistory);
             }
         } catch (Exception e) {

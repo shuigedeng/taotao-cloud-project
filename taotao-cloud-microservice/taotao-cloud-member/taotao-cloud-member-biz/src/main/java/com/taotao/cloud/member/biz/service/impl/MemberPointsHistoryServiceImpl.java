@@ -26,15 +26,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberPointsHistoryServiceImpl extends
-	ServiceImpl<MemberPointsHistoryMapper, MemberPointsHistory> implements
-	MemberPointsHistoryService {
+	ServiceImpl<MemberPointsHistoryMapper, MemberPointsHistory> implements MemberPointsHistoryService {
 
 
 	@Autowired
 	private MemberService memberService;
 
 	@Override
-	public MemberPointsHistoryVO getMemberPointsHistoryVO(String memberId) {
+	public MemberPointsHistoryVO getMemberPointsHistoryVO(Long memberId) {
 		//获取会员积分历史
 		Member member = memberService.getById(memberId);
 
@@ -57,7 +56,7 @@ public class MemberPointsHistoryServiceImpl extends
 
 	@Override
 	public IPage<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam,
-		String memberId, String memberName) {
+		Long memberId, String memberName) {
 		LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistory>()
 			.eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
 			.like(memberName != null, MemberPointsHistory::getMemberName, memberName);

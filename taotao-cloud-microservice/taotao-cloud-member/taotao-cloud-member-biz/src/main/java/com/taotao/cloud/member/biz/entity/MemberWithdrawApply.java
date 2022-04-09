@@ -36,25 +36,25 @@ public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Lo
 	/**
 	 * 申请提现金额
 	 */
-	@Column(name = "apply_money", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '申请提现金额'")
+	@Column(name = "apply_money", columnDefinition = "decimal(10,2) not null default 0 comment '申请提现金额'")
 	private BigDecimal applyMoney;
 
 	/**
 	 * 提现状态
 	 */
-	@Column(name = "apply_status", nullable = false, columnDefinition = "varchar(32) not null comment '提现状态'")
+	@Column(name = "apply_status", columnDefinition = "varchar(32) not null comment '提现状态'")
 	private String applyStatus;
 
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员id'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
 	private Long memberId;
 
 	/**
 	 * 审核备注
 	 */
-	@Column(name = "inspect_remark", nullable = false, columnDefinition = "varchar(32) not null comment '审核备注'")
+	@Column(name = "inspect_remark", columnDefinition = "varchar(32) not null comment '审核备注'")
 	private String inspectRemark;
 
 	/**
@@ -66,6 +66,6 @@ public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Lo
 	/**
 	 * sn
 	 */
-	@Column(name = "sn", nullable = false, columnDefinition = "varchar(32) not null comment 'sn'")
+	@Column(name = "sn", columnDefinition = "varchar(32) not null comment 'sn'")
 	private String sn;
 }

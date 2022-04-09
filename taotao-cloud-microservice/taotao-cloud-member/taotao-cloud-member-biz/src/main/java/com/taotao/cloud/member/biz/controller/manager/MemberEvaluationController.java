@@ -41,7 +41,7 @@ public class MemberEvaluationController {
 	@RequestLogger("通过id获取评论")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberEvaluationVO> get(@PathVariable String id) {
+	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
 		return Result.success(memberEvaluationService.queryById(id));
 	}
 
@@ -57,7 +57,7 @@ public class MemberEvaluationController {
 	@RequestLogger("修改评价状态")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/status/{id}")
-	public Result<Boolean> updateStatus(@PathVariable String id,
+	public Result<Boolean> updateStatus(@PathVariable Long id,
 		@Parameter(description = "显示状态,OPEN 正常 ,CLOSE 关闭", required = true) @NotNull String status) {
 		;
 		return Result.success(memberEvaluationService.updateStatus(id, status));
@@ -67,7 +67,7 @@ public class MemberEvaluationController {
 	@RequestLogger("删除评论")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> delete(@PathVariable String id) {
+	public Result<Boolean> delete(@PathVariable Long id) {
 		return Result.success(memberEvaluationService.delete(id));
 	}
 

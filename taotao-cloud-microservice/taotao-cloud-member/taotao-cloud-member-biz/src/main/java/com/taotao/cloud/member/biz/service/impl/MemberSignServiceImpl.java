@@ -24,7 +24,6 @@ import com.taotao.cloud.sys.api.setting.PointSettingItem;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,7 +105,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 	}
 
 	@Override
-	public void memberSignSendPoint(String memberId, Integer day) {
+	public void memberSignSendPoint(Long memberId, Integer day) {
 		try {
 			//获取签到积分赠送设置
 			Result<SettingVO> settingResult = feignSettingService.get(

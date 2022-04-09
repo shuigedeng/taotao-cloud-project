@@ -34,91 +34,91 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 	/**
 	 * 会员ID
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
 
 	/**
 	 * 收货人姓名
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(64) not null comment '收货人姓名'")
+	@Column(name = "name", columnDefinition = "varchar(255) not null comment '收货人姓名'")
 	private String name;
 
 	/**
 	 * 手机号码
 	 */
-	@Column(name = "mobile", nullable = false, columnDefinition = "varchar(64) not null comment '手机号码'")
+	@Column(name = "mobile", columnDefinition = "varchar(255) not null comment '手机号码'")
 	private String mobile;
 
 	/**
 	 * 地址名称，逗号分割
 	 */
-	@Column(name = "consignee_address_path", nullable = false, columnDefinition = "varchar(255) not null comment '地址名称，逗号分割'")
+	@Column(name = "consignee_address_path", columnDefinition = "varchar(255) not null comment '地址名称，逗号分割'")
 	private String consigneeAddressPath;
 
 	/**
 	 * 地址id,逗号分割
 	 */
-	@Column(name = "consignee_address_id_path", nullable = false, columnDefinition = "varchar(255) not null comment '地址id,逗号分割'")
+	@Column(name = "consignee_address_id_path", columnDefinition = "varchar(255) not null comment '地址id,逗号分割'")
 	private String consigneeAddressIdPath;
 
 	/**
 	 * 省
 	 */
-	@Column(name = "province", nullable = false, columnDefinition = "varchar(64) not null COMMENT '省'")
+	@Column(name = "province", columnDefinition = "varchar(255) not null COMMENT '省'")
 	private String province;
 
 	/**
 	 * 市
 	 */
-	@Column(name = "city", nullable = false, columnDefinition = "varchar(64) not null COMMENT '市'")
+	@Column(name = "city", columnDefinition = "varchar(255) not null COMMENT '市'")
 	private String city;
 
 	/**
 	 * 区县
 	 */
-	@Column(name = "area", nullable = false, columnDefinition = "varchar(64) not null COMMENT '区县'")
+	@Column(name = "area", columnDefinition = "varchar(255) not null COMMENT '区县'")
 	private String area;
 
 	/**
 	 * 省code
 	 */
-	@Column(name = "province_code", nullable = false, columnDefinition = "varchar(64) not null COMMENT '省code'")
+	@Column(name = "province_code", columnDefinition = "varchar(255) not null COMMENT '省code'")
 	private String provinceCode;
 
 	/**
 	 * 市code
 	 */
-	@Column(name = "city_code", nullable = false, columnDefinition = "varchar(64) not null COMMENT '市code'")
+	@Column(name = "city_code", columnDefinition = "varchar(255) not null COMMENT '市code'")
 	private String cityCode;
 
 	/**
 	 * 区县code
 	 */
-	@Column(name = "area_code", nullable = false, columnDefinition = "varchar(64) not null COMMENT '区县code'")
+	@Column(name = "area_code", columnDefinition = "varchar(255) not null COMMENT '区县code'")
 	private String areaCode;
 
 	/**
 	 * 街道地址
 	 */
-	@Column(name = "address", nullable = false, columnDefinition = "varchar(255) not null COMMENT '街道地址'")
+	@Column(name = "address", columnDefinition = "varchar(255) not null COMMENT '街道地址'")
 	private String address;
 
 	/**
 	 * 详细地址
 	 */
-	@Column(name = "detail", nullable = false, columnDefinition = "varchar(255) not null comment '详细地址'")
+	@Column(name = "detail", columnDefinition = "varchar(255) not null comment '详细地址'")
 	private String detail;
 
 	/**
 	 * 是否为默认收货地址
 	 */
-	@Column(name = "defaulted", nullable = false, columnDefinition = "boolean not null default true comment '是否为默认收货地址'")
+	@Column(name = "defaulted", columnDefinition = "boolean not null default true comment '是否为默认收货地址'")
 	private Boolean defaulted;
 
 	/**
 	 * 地址别名
 	 */
-	@Column(name = "alias", columnDefinition = "varchar(64) comment '地址别名'")
+	@Column(name = "alias", columnDefinition = "varchar(255) comment '地址别名'")
 	private String alias;
 
 	/**
@@ -136,6 +136,6 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 	/**
 	 * 邮政编码
 	 */
-	@Column(name = "postal_code", columnDefinition = "varchar(64) comment '邮政编码'")
+	@Column(name = "postal_code", columnDefinition = "varchar(255) comment '邮政编码'")
 	private String postalCode;
 }

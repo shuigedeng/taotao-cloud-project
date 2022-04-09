@@ -54,7 +54,7 @@ public class MemberReceiptServiceImpl extends
 	}
 
 	@Override
-	public Boolean addMemberReceipt(MemberReceiptAddVO memberReceiptAddVO, String memberId) {
+	public Boolean addMemberReceipt(MemberReceiptAddVO memberReceiptAddVO, Long memberId) {
 		//校验发票抬头是否重复
 		List<MemberReceipt> receipts = this.baseMapper.selectList(new QueryWrapper<MemberReceipt>()
 			.eq("member_id", memberId)
@@ -93,7 +93,7 @@ public class MemberReceiptServiceImpl extends
 	}
 
 	@Override
-	public Boolean editMemberReceipt(MemberReceiptAddVO memberReceiptAddVO, String memberId) {
+	public Boolean editMemberReceipt(MemberReceiptAddVO memberReceiptAddVO, Long memberId) {
 		//根据会员id查询发票信息
 		MemberReceipt memberReceiptDb = this.baseMapper.selectById(memberReceiptAddVO.getId());
 		if (memberReceiptDb != null) {
@@ -122,7 +122,7 @@ public class MemberReceiptServiceImpl extends
 	}
 
 	@Override
-	public Boolean deleteMemberReceipt(String id) {
+	public Boolean deleteMemberReceipt(Long id) {
 		//根据会员id查询发票信息
 		MemberReceipt memberReceiptDb = this.baseMapper.selectById(id);
 		if (memberReceiptDb != null) {

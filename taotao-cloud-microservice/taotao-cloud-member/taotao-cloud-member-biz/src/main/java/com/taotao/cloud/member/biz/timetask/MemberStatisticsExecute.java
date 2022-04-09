@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.timetask.xxljob.statistics;
+package com.taotao.cloud.member.biz.timetask;
 
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import java.util.Calendar;
@@ -22,7 +22,6 @@ public class MemberStatisticsExecute implements EveryDayExecute {
 
     @Override
     public void execute() {
-
         try {
             //统计的时间（开始。结束时间）
             Date startTime, endTime;

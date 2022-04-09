@@ -36,37 +36,37 @@ public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Lo
 	/**
 	 * 会员id
 	 */
-	@Column(name = "member_id", nullable = false, columnDefinition = "bigint not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员ID'")
 	private Long memberId;
 
 	/**
 	 * 会员名称
 	 */
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(64) not null comment '会员名称'")
+	@Column(name = "member_name", columnDefinition = "varchar(255) not null comment '会员名称'")
 	private String memberName;
 
 	/**
 	 * 当前积分
 	 */
-	@Column(name = "point", nullable = false, columnDefinition = "bigint not null default 0 comment '当前积分'")
+	@Column(name = "point", columnDefinition = "bigint not null default 0 comment '当前积分'")
 	private Long point;
 
 	/**
 	 * 消费之前积分
 	 */
-	@Column(name = "before_point", nullable = false, columnDefinition = "bigint not null default 0 comment '消费之前积分'")
+	@Column(name = "before_point", columnDefinition = "bigint not null default 0 comment '消费之前积分'")
 	private Long beforePoint;
 
 	/**
 	 * 变动积分
 	 */
-	@Column(name = "variable_point", nullable = false, columnDefinition = "bigint not null default 0 comment '变动积分'")
+	@Column(name = "variable_point", columnDefinition = "bigint not null default 0 comment '变动积分'")
 	private Long variablePoint;
 
 	/**
 	 * 内容
 	 */
-	@Column(name = "content", nullable = false, columnDefinition = "varchar(32) not null comment '内容'")
+	@Column(name = "content", columnDefinition = "varchar(32) not null comment '内容'")
 	private String content;
 
 	/**
@@ -74,6 +74,6 @@ public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Lo
 	 *
 	 * @see PointTypeEnum
 	 */
-	@Column(name = "point_type", nullable = false, columnDefinition = "varchar(32) not null comment '积分类型'")
+	@Column(name = "point_type", columnDefinition = "varchar(32) not null comment '积分类型'")
 	private String pointType;
 }

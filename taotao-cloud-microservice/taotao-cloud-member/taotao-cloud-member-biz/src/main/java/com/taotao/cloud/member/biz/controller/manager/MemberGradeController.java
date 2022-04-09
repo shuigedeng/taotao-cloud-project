@@ -41,7 +41,7 @@ public class MemberGradeController {
 	@RequestLogger("通过id获取会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberGrade> get(@PathVariable String id) {
+	public Result<MemberGrade> get(@PathVariable Long id) {
 		return Result.success(memberGradeService.getById(id));
 	}
 
@@ -69,7 +69,7 @@ public class MemberGradeController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	@PutMapping(value = "/{id}")
-	public Result<Boolean> update(@PathVariable String id, MemberGrade memberGrade) {
+	public Result<Boolean> update(@PathVariable Long id, MemberGrade memberGrade) {
 		return Result.success(memberGradeService.updateById(memberGrade));
 	}
 
@@ -77,7 +77,7 @@ public class MemberGradeController {
 	@RequestLogger("删除会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
-	public Result<IPage<Object>> delete(@PathVariable String id) {
+	public Result<IPage<Object>> delete(@PathVariable Long id) {
 		if (memberGradeService.getById(id).getIsDefault()) {
 			throw new BusinessException(ResultEnum.USER_GRADE_IS_DEFAULT);
 		}

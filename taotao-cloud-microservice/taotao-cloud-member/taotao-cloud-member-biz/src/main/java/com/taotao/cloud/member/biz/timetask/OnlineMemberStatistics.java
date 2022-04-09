@@ -1,5 +1,6 @@
-package com.taotao.cloud.sys.biz.timetask.xxljob.statistics;
+package com.taotao.cloud.member.biz.timetask;
 
+import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.web.timetask.EveryHourExecute;
 import java.util.ArrayList;
 import java.util.Calendar;
