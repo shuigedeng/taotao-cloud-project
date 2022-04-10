@@ -42,7 +42,7 @@ public class DictItemQueryVO implements Serializable {
 	@Schema(description = "字典id")
 	private Long dictId;
 	@Schema(description = "字典项文本")
-	String itemText;
+	private String itemText;
 	@Schema(description = "字典项值")
 	private String itemValue;
 	@Schema(description = "描述")

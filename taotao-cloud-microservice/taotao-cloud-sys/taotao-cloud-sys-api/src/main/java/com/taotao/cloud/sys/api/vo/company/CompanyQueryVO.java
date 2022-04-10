@@ -38,82 +38,42 @@ public class CompanyQueryVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
 	
-	/**
-	 * 租户id
-	 */
 	@Schema(description = "租户id")
 	private String tenantId;
 
-	/**
-	 * 租户密钥
-	 */
 	@Schema(description = "租户密钥")
 	private String tenantSecret;
 
-	/**
-	 * 公司名称
-	 */
 	@Schema(description = "公司名称")
 	private String name;
 
-	/**
-	 * 企业全称
-	 */
 	@Schema(description = "企业全称")
 	private String fullName;
 
-	/**
-	 * 信用代码
-	 */
-	@Pattern(regexp = "^|[a-zA-Z0-9]{18}$", message = "信用代码格式错误")
 	@Schema(description = "信用代码")
 	private String creditCode;
 
-	/**
-	 * 邮箱
-	 */
 	@Schema(description = "邮箱")
 	private String email;
 
-	/**
-	 * 联系人
-	 */
 	@Schema(description = "联系人")
 	private String username;
 
-	/**
-	 * 联系人手机号
-	 */
 	@Schema(description = "联系人手机号")
 	private String phone;
 
-	/**
-	 * 联系人地址
-	 */
 	@Schema(description = "联系人地址")
 	private String address;
 
-	/**
-	 * 请求域名
-	 */
 	@Schema(description = "请求域名")
 	private String domain;
 
-	/**
-	 * 公司网址
-	 */
 	@Schema(description = "公司网址")
 	private String webSite;
 
-	/**
-	 * 所在地区
-	 */
 	@Schema(description = "所在地区")
 	private String regionInfo;
 
-	/**
-	 * 公司类型
-	 */
 	@Schema(description = "公司类型")
 	private Integer type;
 

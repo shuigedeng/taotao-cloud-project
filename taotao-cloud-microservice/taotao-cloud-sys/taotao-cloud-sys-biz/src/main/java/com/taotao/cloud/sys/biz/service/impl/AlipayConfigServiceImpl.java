@@ -5,7 +5,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
+import com.taotao.cloud.sys.api.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.mapper.IAlipayConfigMapper;
 import com.taotao.cloud.sys.biz.service.IAlipayConfigService;
@@ -26,7 +26,7 @@ public class AlipayConfigServiceImpl extends
 	ServiceImpl<IAlipayConfigMapper, AlipayConfig> implements IAlipayConfigService {
 
 	@Override
-	public String toPayAsPc(AlipayConfig alipay, TradeVo trade) throws Exception {
+	public String toPayAsPc(AlipayConfig alipay, TradeVO trade) throws Exception {
 
 		//if (alipay.getId() == null) {
 		//    throw new BadRequestException("请先添加相应配置，再操作");
@@ -58,7 +58,7 @@ public class AlipayConfigServiceImpl extends
 	}
 
 	@Override
-	public String toPayAsWeb(AlipayConfig alipay, TradeVo trade) throws Exception {
+	public String toPayAsWeb(AlipayConfig alipay, TradeVO trade) throws Exception {
 		//if (alipay.getId() == null) {
 		//    throw new BadRequestException("请先添加相应配置，再操作");
 		//}

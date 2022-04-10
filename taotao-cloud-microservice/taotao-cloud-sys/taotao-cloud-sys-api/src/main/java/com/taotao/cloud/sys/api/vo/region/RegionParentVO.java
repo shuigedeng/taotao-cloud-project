@@ -37,24 +37,12 @@ public class RegionParentVO implements Serializable {
 	@Serial
 	static final long serialVersionUID = 5126530068827085130L;
 
-	/**
-	 * 主键ID
-	 */
 	@Schema(description = "主键ID")
 	private Long id;
-	/**
-	 * 名称
-	 */
 	@Schema(description = "名称")
 	private String label;
-	/**
-	 * 应用名称
-	 */
 	@Schema(description = "应用名称")
 	private String value;
-	/**
-	 * 子数据
-	 */
 	@Schema(description = "子数据")
 	private List<RegionParentVO> children;
 }

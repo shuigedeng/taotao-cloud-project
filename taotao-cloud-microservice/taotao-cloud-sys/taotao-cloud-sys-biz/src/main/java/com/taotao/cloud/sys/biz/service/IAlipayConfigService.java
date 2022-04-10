@@ -6,7 +6,7 @@ package com.taotao.cloud.sys.biz.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
+import com.taotao.cloud.sys.api.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
 
 /**
@@ -26,7 +26,7 @@ public interface IAlipayConfigService extends IService<AlipayConfig> {
 	 * @return String
 	 * @throws Exception 异常
 	 */
-	String toPayAsPc(AlipayConfig alipay, TradeVo trade) throws Exception;
+	String toPayAsPc(AlipayConfig alipay, TradeVO trade) throws Exception;
 
 	/**
 	 * 处理来自手机网页的交易请求
@@ -36,7 +36,7 @@ public interface IAlipayConfigService extends IService<AlipayConfig> {
 	 * @return String
 	 * @throws Exception 异常
 	 */
-	String toPayAsWeb(AlipayConfig alipay, TradeVo trade) throws Exception;
+	String toPayAsWeb(AlipayConfig alipay, TradeVO trade) throws Exception;
 
 	/**
 	 * 查询配置

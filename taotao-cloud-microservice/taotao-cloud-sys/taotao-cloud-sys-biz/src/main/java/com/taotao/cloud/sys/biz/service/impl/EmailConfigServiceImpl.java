@@ -5,7 +5,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
+import com.taotao.cloud.sys.api.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
@@ -56,7 +56,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, Emai
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void send(EmailVo emailVo, EmailConfig emailConfig) {
+	public void send(EmailVO emailVo, EmailConfig emailConfig) {
 		//if (emailConfig == null) {
 		//    throw new BadRequestException("请先配置，再操作");
 		//}
