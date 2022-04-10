@@ -23,12 +23,12 @@ public class UserRegisterVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "真实用户名")
-	String username;
+	private String username;
 
 	@Schema(description = "手机号")
-	String phone;
+	private String phone;
 
 	@Schema(description = "密码")
-	String password;
+	private String password;
 
 }

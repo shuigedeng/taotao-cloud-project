@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailVo {
+public class EmailVO {
 
 	/**
 	 * 收件人，支持多个收件人

@@ -35,36 +35,18 @@ import lombok.Data;
 public class RoleQueryVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
-	/**
-	 * id
-	 */
 	@Schema(description = "id")
 	private Long id;
-	/**
-	 * 角色名称
-	 */
 	@Schema(description = "角色名称")
 	private String name;
-	/**
-	 * 角色code
-	 */
 	@Schema(description = "角色code")
 	private String code;
-	/**
-	 * 备注
-	 */
 	@Schema(description = "备注")
 	private String remark;
-	/**
-	 * 创建时间
-	 */
 	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
-	/**
-	 * 最后修改时间
-	 */
 	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
 }

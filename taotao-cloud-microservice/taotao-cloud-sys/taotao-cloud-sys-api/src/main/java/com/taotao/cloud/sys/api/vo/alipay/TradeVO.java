@@ -7,7 +7,6 @@ package com.taotao.cloud.sys.api.vo.alipay;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TradeVo {
+public class TradeVO {
 
 	/**
 	 * （必填）商品描述

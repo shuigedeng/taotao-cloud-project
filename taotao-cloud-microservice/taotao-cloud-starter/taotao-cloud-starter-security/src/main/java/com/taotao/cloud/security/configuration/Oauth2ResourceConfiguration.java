@@ -100,8 +100,7 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.csrf().disable()
+		http.csrf().disable()
 			.authorizeRequests(registry -> {
 				permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
 				registry.anyRequest().authenticated();

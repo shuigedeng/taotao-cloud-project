@@ -5,8 +5,7 @@ import com.taotao.cloud.common.enums.AliPayStatusEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
-import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
-import com.taotao.cloud.sys.api.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.service.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;
@@ -66,7 +65,7 @@ public class AliPayController {
 	@RequestLogger("支付宝PC网页支付")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsPC")
-	public Result<String> toPayAsPc(@Validated @RequestBody TradeVo trade)
+	public Result<String> toPayAsPc(@Validated @RequestBody TradeVO trade)
 		throws Exception {
 		AlipayConfig aliPay = alipayService.find();
 		trade.setOutTradeNo(alipayUtils.getOrderCode());
@@ -78,7 +77,7 @@ public class AliPayController {
 	@RequestLogger("支付宝手机网页支付")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsWeb")
-	public Result<String> toPayAsWeb(@Validated @RequestBody TradeVo trade)
+	public Result<String> toPayAsWeb(@Validated @RequestBody TradeVO trade)
 		throws Exception {
 		AlipayConfig alipay = alipayService.find();
 		trade.setOutTradeNo(alipayUtils.getOrderCode());

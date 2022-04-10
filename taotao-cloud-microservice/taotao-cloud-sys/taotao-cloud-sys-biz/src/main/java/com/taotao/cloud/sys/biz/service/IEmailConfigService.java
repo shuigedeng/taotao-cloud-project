@@ -5,7 +5,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
+import com.taotao.cloud.sys.api.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.entity.config.EmailConfig;
 import org.springframework.scheduling.annotation.Async;
 
@@ -42,5 +42,5 @@ public interface IEmailConfigService extends IService<EmailConfig> {
 	 * @throws Exception 异常信息
 	 */
 	@Async
-	void send(EmailVo emailVo, EmailConfig emailConfig) throws Exception;
+	void send(EmailVO emailVo, EmailConfig emailConfig) throws Exception;
 }

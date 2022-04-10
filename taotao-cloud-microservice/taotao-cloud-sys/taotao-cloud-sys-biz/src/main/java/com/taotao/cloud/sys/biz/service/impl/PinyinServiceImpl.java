@@ -193,7 +193,6 @@ public class PinyinServiceImpl implements IPinYinService {
 				// 如果字符是字母,取字母
 				else if (str.matches("[a-zA-Z]+")) {
 					hanyupinyin.append(word);
-
 				}
 				// 否则不转换，如果是标点符号的话，也带着
 				else {

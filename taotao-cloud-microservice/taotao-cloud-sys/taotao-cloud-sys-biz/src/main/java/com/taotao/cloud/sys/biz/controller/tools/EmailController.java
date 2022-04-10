@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.security.annotation.NotAuth;
-import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
+import com.taotao.cloud.sys.api.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
 import com.taotao.cloud.web.quartz.QuartzManager;
@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -110,7 +109,7 @@ public class EmailController {
 	@RequestLogger("发送邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/send")
-	public Result<Boolean> send(@Validated @RequestBody EmailVo emailVo) throws Exception {
+	public Result<Boolean> send(@Validated @RequestBody EmailVO emailVo) throws Exception {
 		emailService.send(emailVo, emailService.find());
 		return Result.success(true);
 	}
