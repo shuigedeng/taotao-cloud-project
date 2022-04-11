@@ -101,6 +101,7 @@ dependencies {
         api "com.baomidou:mybatis-plus-extension:${mybatisPlusVersion}"
         api "com.github.xkzhangsan:xk-time:${xkTimeVersion}"
         api "cn.afterturn:easypoi-base:${easypoiVersion}"
+        api "cn.afterturn:easypoi-annotation:${easypoiVersion}"
         api "com.taobao.arthas:arthas-spring-boot-starter:${arthasVersion}"
         api "de.codecentric:spring-boot-admin-starter-server:${adminVersion}"
         api "de.codecentric:spring-boot-admin-starter-client:${adminVersion}"

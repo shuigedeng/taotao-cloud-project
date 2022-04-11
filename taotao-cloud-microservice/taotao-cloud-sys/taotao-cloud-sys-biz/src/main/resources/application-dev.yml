@@ -44,7 +44,7 @@ easy-es:
 
 redisson:
   single_server_config:
-    address: "redis://127.0.0.1:6379"
+    address: "redis://172.16.6.151:6379"
     subscription_connection_minimum_idle_size: 1
     subscription_connection_pool_size: 50
     connection_minimum_idle_size: 24
