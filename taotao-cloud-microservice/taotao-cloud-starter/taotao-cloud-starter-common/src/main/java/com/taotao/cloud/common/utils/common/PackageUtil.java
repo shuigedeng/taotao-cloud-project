@@ -37,7 +37,7 @@ public final class PackageUtil {
 	}
 
 	/**
-	 * 获取简化包名称 1. 针对 com.github.houbb.PackageUtil 简化为 c.g.h.PackageUtil
+	 * 获取简化包名称 1. 针对 com.github.taotao.PackageUtil 简化为 c.g.h.PackageUtil
 	 *
 	 * @param fullPackageName 包名称
 	 * @return 包名称
@@ -90,7 +90,6 @@ public final class PackageUtil {
 	 *
 	 * @param packageName 包名称
 	 * @return 结果列表
-	 * @since 0.1.54
 	 */
 	public static Set<String> scanPackageClassNameSet(final String packageName) {
 		ArgUtil.notEmpty(packageName, "packageNames");
@@ -152,7 +151,6 @@ public final class PackageUtil {
 	 * @param packageNamePrefix 包名称前缀
 	 * @param file              根路径
 	 * @param classNameSet      类的全称信息集合
-	 * @since 0.1.54
 	 */
 	private static void recursiveFile(String packageNamePrefix,
 		final File file,

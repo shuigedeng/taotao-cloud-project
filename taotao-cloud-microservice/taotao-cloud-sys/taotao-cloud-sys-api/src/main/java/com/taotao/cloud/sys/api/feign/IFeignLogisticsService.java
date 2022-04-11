@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.sys.api.feign.fallback.FeignLogisticsFallback;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@FeignClient(contextId = "IFeignLogisticsService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallback.class)
+@FeignClient(contextId = "IFeignLogisticsService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignLogisticsFallback.class)
 public interface IFeignLogisticsService {
 
 	@GetMapping("/resource/info/codes")

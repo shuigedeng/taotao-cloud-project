@@ -35,6 +35,18 @@ public class MongodbProperties {
 	 * mongodb 总开关
 	 */
 	private boolean enabled = false;
+	/**
+	 * 是否打印日志
+	 */
+	private Boolean print = false;
+	/**
+	 * 是否记录慢查询到数据库中
+	 */
+	private Boolean slowQuery = false;
+	/**
+	 * 慢查询最短时间,默认为1000毫秒
+	 */
+	private Long slowTime = 1000L;
 
 	public boolean getEnabled() {
 		return enabled;
@@ -42,5 +54,29 @@ public class MongodbProperties {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Boolean getPrint() {
+		return print;
+	}
+
+	public void setPrint(Boolean print) {
+		this.print = print;
+	}
+
+	public Boolean getSlowQuery() {
+		return slowQuery;
+	}
+
+	public void setSlowQuery(Boolean slowQuery) {
+		this.slowQuery = slowQuery;
+	}
+
+	public Long getSlowTime() {
+		return slowTime;
+	}
+
+	public void setSlowTime(Long slowTime) {
+		this.slowTime = slowTime;
 	}
 }

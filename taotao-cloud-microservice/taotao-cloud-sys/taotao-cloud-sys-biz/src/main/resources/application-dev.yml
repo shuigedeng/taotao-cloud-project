@@ -551,6 +551,8 @@ spring:
       port: 27017
       #username:
       #password:
+      slowQuery: true  #是否记录慢查询到数据库中
+      slowTime: 2000 #慢查询最短时间,默认为1000毫秒
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:

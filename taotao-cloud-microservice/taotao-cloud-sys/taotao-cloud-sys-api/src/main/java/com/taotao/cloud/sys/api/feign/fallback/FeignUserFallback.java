@@ -14,7 +14,6 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @since 2020/4/29 21:43
  */
 public class FeignUserFallback implements FallbackFactory<IFeignUserService> {
-
 	@Override
 	public IFeignUserService create(Throwable throwable) {
 		return new IFeignUserService() {

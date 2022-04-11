@@ -23,9 +23,11 @@ import org.springframework.data.mongodb.core.query.Update;
  */
 public class MongoDaoSupport implements BaseMongoDAO {
 
-	@Autowired
-	@Qualifier("mongoTemplate")
 	private MongoTemplate mongoTemplate;
+
+	public MongoDaoSupport(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
 
 	/**
 	 * 保存一个对象到mongodb

@@ -41,12 +41,10 @@ public class AopTargetUtils {
      * 获取代理对象的原始对象
      */
     public static Object getTarget(Object proxy) {
-
         // 不是代理对象，直接返回参数对象
         if (!AopUtils.isAopProxy(proxy)) {
             return proxy;
         }
-
         // 判断是否是jdk还是cglib代理的对象
         try {
             if (AopUtils.isJdkDynamicProxy(proxy)) {
