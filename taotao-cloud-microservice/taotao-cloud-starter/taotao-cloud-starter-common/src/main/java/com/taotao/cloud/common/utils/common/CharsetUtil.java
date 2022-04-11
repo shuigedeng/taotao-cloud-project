@@ -15,8 +15,6 @@ public final class CharsetUtil {
 
 	/**
 	 * unicode 编码模式
-	 *
-	 * @since 0.1.98
 	 */
 	private static final Pattern UNICODE_PATTERN = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
 
