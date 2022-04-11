@@ -46,8 +46,8 @@ public class GeneratorController {
 	private final IGeneratorService generatorService;
 	private final IGenConfigService genConfigService;
 
-	@Value("${generator.enabled:false}")
-	private Boolean generatorEnabled;
+	//@Value("${generator.enabled:false}")
+	//private Boolean generatorEnabled = false;
 
 	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
 	@RequestLogger("查询数据库数据")
@@ -105,9 +105,9 @@ public class GeneratorController {
 	@PostMapping(value = "/{tableName}/{type}")
 	public Result<Object> generator(@PathVariable String tableName,
 		@PathVariable Integer type, HttpServletRequest request, HttpServletResponse response) {
-		if (!generatorEnabled && type == 0) {
-			throw new BusinessException("此环境不允许生成代码，请选择预览或者下载查看！");
-		}
+		//if (!generatorEnabled && type == 0) {
+		//	throw new BusinessException("此环境不允许生成代码，请选择预览或者下载查看！");
+		//}
 		switch (type) {
 			// 生成代码
 			case 0:

@@ -1,9 +1,10 @@
 dependencies {
+    //api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2'
+    //api 'org.yaml:snakeyaml:1.30'
+    //jackson
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
     api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
-    //api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2'
-    //api 'org.yaml:snakeyaml:1.30'
     api 'com.fasterxml.jackson.core:jackson-databind'
     api 'com.fasterxml.jackson.core:jackson-core'
     api 'com.fasterxml.jackson.core:jackson-annotations'
@@ -18,7 +19,6 @@ dependencies {
     api 'com.github.whvcse:easy-captcha'
     api 'javax.validation:validation-api'
     api 'io.projectreactor:reactor-core'
-    api 'cn.afterturn:easypoi-base'
     api 'com.nepxion:banner'
     api 'com.github.xkzhangsan:xk-time'
     api 'com.baomidou:mybatis-plus-core'
@@ -32,7 +32,7 @@ dependencies {
     }
     api 'org.apache.httpcomponents:httpmime'
     api 'commons-configuration:commons-configuration'
-    
+
     api "io.swagger.core.v3:swagger-models"
     api 'io.swagger.core.v3:swagger-annotations'
 
@@ -73,6 +73,16 @@ dependencies {
     api 'com.caucho:hessian'
     api 'commons-codec:commons-codec'
     api 'com.alibaba:fastjson'
+
+    // execl
+    api 'cn.afterturn:easypoi-base'
+    api 'cn.afterturn:easypoi-annotation'
+    api ('com.github.liaochong:myexcel:4.1.0'){
+        exclude group: 'org.projectlombok', module: 'lombok'
+    }
+    api ('com.alibaba:easyexcel:3.0.5'){
+        exclude group: 'org.projectlombok', module: 'lombok'
+    }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
