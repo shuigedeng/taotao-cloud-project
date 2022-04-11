@@ -3,16 +3,17 @@ package com.taotao.cloud.sys.api.vo.setting;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * 商品配置
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "商品配置VO")
 public class GoodsSettingVO implements Serializable {
 

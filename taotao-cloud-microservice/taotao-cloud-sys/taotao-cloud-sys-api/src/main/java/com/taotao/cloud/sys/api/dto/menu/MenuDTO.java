@@ -3,8 +3,8 @@ package com.taotao.cloud.sys.api.dto.menu;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 菜单DTO
@@ -14,6 +14,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "菜单DTO")
 public class MenuDTO implements Serializable {
 

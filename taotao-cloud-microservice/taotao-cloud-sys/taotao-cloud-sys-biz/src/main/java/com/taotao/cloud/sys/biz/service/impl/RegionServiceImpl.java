@@ -228,7 +228,7 @@ public class RegionServiceImpl extends
 
 	public void findAllChild(RegionParentVO vo) {
 		LambdaQueryWrapper<Region> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(Region::getParentId, vo.id());
+		wrapper.eq(Region::getParentId, vo.getId());
 		List<Region> sysRegions = getBaseMapper().selectList(wrapper);
 		List<RegionParentVO> regions = new ArrayList<>();
 		if (CollectionUtil.isNotEmpty(sysRegions)) {
@@ -241,7 +241,7 @@ public class RegionServiceImpl extends
 			});
 		}
 
-		vo.children(regions);
+		vo.setChildren(regions);
 		if (regions.size() > 0) {
 			regions.forEach(this::findAllChild);
 		}

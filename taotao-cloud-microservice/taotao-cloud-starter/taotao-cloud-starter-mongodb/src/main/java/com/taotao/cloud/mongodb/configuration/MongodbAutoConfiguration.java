@@ -24,7 +24,6 @@ import com.taotao.cloud.mongodb.converter.LocalDateToString;
 import com.taotao.cloud.mongodb.converter.StringToLocalDate;
 import com.taotao.cloud.mongodb.converter.StringToLocalDateTime;
 import com.taotao.cloud.mongodb.helper.config.MongoStartedEventListener;
-import com.taotao.cloud.mongodb.helper.config.ScanNewField;
 import com.taotao.cloud.mongodb.helper.utils.ImportExportUtil;
 import com.taotao.cloud.mongodb.helper.utils.MongoHelper;
 import com.taotao.cloud.mongodb.properties.MongodbProperties;

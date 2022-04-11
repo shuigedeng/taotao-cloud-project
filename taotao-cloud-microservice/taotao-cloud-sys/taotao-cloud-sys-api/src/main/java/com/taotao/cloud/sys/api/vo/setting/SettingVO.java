@@ -1,18 +1,17 @@
 package com.taotao.cloud.sys.api.vo.setting;
 
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  * 配置表
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class SettingVO {
 
 	private String settingValue;

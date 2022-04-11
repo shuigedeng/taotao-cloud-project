@@ -20,10 +20,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * 用户查询VO
@@ -34,6 +32,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "用户查询VO")
 public class UserQueryVO implements Serializable {
 

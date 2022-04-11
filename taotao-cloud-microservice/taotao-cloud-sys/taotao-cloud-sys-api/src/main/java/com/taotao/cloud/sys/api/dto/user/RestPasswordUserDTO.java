@@ -20,8 +20,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -33,6 +33,9 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "用户重置密码DTO")
 public class RestPasswordUserDTO implements Serializable {
 

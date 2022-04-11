@@ -19,8 +19,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -32,6 +32,9 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "菜单添加对象")
 public class MenuSaveDTO implements Serializable {
 

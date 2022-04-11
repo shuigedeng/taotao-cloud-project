@@ -20,8 +20,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.Pattern;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 公司查询对象
@@ -32,6 +32,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "公司查询VO")
 public class CompanyQueryVO implements Serializable {
 

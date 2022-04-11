@@ -8,8 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 用户更新DTO
@@ -19,6 +19,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "用户更新DTO")
 public class UpdateUserDTO implements Serializable {
 

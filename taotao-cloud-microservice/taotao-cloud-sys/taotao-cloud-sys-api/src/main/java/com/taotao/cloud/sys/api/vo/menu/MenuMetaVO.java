@@ -3,12 +3,8 @@ package com.taotao.cloud.sys.api.vo.menu;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  * 菜单DTO
@@ -18,8 +14,9 @@ import lombok.Setter;
  */
 @Data
 @Builder
-@NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "菜单元数据VO")
 public class MenuMetaVO implements Serializable {
 

@@ -17,6 +17,7 @@ package com.taotao.cloud.oss.configuration;
 
 import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
+import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.taotao.cloud.common.constant.StarterName;
@@ -56,12 +57,12 @@ public class QiniuAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public Zone zone() {
+	public Region zone() {
 		return switch (properties.getZone()) {
-			case "zone0" -> Zone.zone0();
-			case "zone1" -> Zone.zone1();
-			case "zone2" -> Zone.zone2();
-			default -> Zone.autoZone();
+			case "z0" -> Region.region0();
+			case "z1" -> Region.region1();
+			case "z2" -> Region.region2();
+			default -> Region.autoRegion();
 		};
 	}
 
@@ -69,8 +70,8 @@ public class QiniuAutoConfiguration implements InitializingBean {
 	 * 华南机房
 	 */
 	@Bean
-	public com.qiniu.storage.Configuration config(@Autowired Zone zone) {
-		return new com.qiniu.storage.Configuration(zone);
+	public com.qiniu.storage.Configuration config(@Autowired Region region) {
+		return new com.qiniu.storage.Configuration(region);
 	}
 
 	/**

@@ -19,8 +19,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * QueryRegionByParentIdVO
@@ -31,11 +31,14 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "查询应用列表数据VO")
 public class RegionParentVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "主键ID")
 	private Long id;

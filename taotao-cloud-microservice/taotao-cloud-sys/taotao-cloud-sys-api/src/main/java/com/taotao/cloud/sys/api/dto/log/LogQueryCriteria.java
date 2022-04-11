@@ -9,13 +9,12 @@ package com.taotao.cloud.sys.api.dto.log;
 
 import java.sql.Timestamp;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Data
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class LogQueryCriteria {

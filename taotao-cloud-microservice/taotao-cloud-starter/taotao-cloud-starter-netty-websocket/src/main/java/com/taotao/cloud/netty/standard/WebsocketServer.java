@@ -1,5 +1,6 @@
 package com.taotao.cloud.netty.standard;
 
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.netty.pojo.PojoEndpointServer;
 import com.taotao.cloud.netty.util.SslUtils;
 import io.netty.bootstrap.ServerBootstrap;
@@ -54,7 +55,7 @@ public class WebsocketServer {
 	public void init() throws InterruptedException, SSLException {
 		EventExecutorGroup eventExecutorGroup = null;
 		final SslContext sslCtx;
-		if (!StringUtils.isEmpty(config.getKeyStore())) {
+		if (!StringUtil.isEmpty(config.getKeyStore())) {
 			sslCtx = SslUtils.createSslContext(config.getKeyPassword(), config.getKeyStore(),
 				config.getKeyStoreType(), config.getKeyStorePassword(), config.getTrustStore(),
 				config.getTrustStoreType(), config.getTrustStorePassword());

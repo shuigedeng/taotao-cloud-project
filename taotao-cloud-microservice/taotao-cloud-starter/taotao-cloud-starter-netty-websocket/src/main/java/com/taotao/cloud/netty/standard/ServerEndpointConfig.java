@@ -3,6 +3,8 @@ package com.taotao.cloud.netty.standard;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import org.springframework.util.StringUtils;
 
 /**
@@ -57,7 +59,7 @@ public class ServerEndpointConfig {
 		String keyStore, String keyStorePassword, String keyStoreType, String trustStore,
 		String trustStorePassword, String trustStoreType, String[] corsOrigins,
 		Boolean corsAllowCredentials) {
-		if (StringUtils.isEmpty(host) || "0.0.0.0".equals(host) || "0.0.0.0/0.0.0.0".equals(host)) {
+		if (StringUtil.isEmpty(host) || "0.0.0.0".equals(host) || "0.0.0.0/0.0.0.0".equals(host)) {
 			this.HOST = "0.0.0.0";
 		} else {
 			this.HOST = host;

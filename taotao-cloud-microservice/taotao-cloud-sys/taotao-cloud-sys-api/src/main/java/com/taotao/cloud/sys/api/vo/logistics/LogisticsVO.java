@@ -17,10 +17,8 @@ package com.taotao.cloud.sys.api.vo.logistics;
 
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * LogisticsVO
@@ -31,6 +29,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class LogisticsVO implements Serializable {

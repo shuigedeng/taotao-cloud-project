@@ -21,8 +21,8 @@ import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 字典项添加对象
@@ -33,6 +33,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema( description = "字典项添加对象")
 public class DictItemSaveDTO implements Serializable {
 

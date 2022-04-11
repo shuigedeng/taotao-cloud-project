@@ -4,16 +4,17 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * 物流信息
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class TracesVO implements Serializable {
 
 	@Serial

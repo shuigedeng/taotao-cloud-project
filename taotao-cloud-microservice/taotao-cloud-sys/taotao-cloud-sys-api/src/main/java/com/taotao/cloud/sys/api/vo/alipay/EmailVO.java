@@ -6,10 +6,8 @@ package com.taotao.cloud.sys.api.vo.alipay;
 
 
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * EmailVo
@@ -20,6 +18,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailVO {

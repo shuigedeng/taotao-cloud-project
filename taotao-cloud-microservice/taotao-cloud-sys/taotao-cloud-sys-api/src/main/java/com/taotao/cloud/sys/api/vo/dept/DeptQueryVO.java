@@ -3,8 +3,8 @@ package com.taotao.cloud.sys.api.vo.dept;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 部门查询对象
@@ -14,6 +14,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "部门查询对象")
 public class DeptQueryVO implements Serializable {
 

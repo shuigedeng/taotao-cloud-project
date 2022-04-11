@@ -10,13 +10,8 @@ import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 /**
  * DepartVO
@@ -25,12 +20,12 @@ import lombok.ToString;
  * @version 2021.10
  * @since 2021-12-22 20:59:37
  */
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Schema(description = "部门树VO")
 public class DeptTreeVO extends MapperNode implements INode {
 
 	@Serial
