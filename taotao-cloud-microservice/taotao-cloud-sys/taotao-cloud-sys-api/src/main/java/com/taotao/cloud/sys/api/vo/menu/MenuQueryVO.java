@@ -19,8 +19,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 菜单查询对象
@@ -31,6 +31,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema( description = "菜单查询对象")
 public class MenuQueryVO implements Serializable {
 

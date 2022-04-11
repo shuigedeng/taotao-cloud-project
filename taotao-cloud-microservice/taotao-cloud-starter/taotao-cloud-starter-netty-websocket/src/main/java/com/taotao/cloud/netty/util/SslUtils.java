@@ -1,5 +1,6 @@
 package com.taotao.cloud.netty.util;
 
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import java.net.URL;
@@ -32,9 +33,9 @@ public final class SslUtils {
 			KeyStore keyStore = loadKeyStore(type, resource, keyStorePassword);
 			KeyManagerFactory keyManagerFactory = KeyManagerFactory
 				.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-			char[] keyPasswordBytes = (!StringUtils.isEmpty(keyPassword)
+			char[] keyPasswordBytes = (!StringUtil.isEmpty(keyPassword)
 				? keyPassword.toCharArray() : null);
-			if (keyPasswordBytes == null && !StringUtils.isEmpty(keyStorePassword)) {
+			if (keyPasswordBytes == null && !StringUtil.isEmpty(keyStorePassword)) {
 				keyPasswordBytes = keyStorePassword.toCharArray();
 			}
 			keyManagerFactory.init(keyStore, keyPasswordBytes);
@@ -59,13 +60,13 @@ public final class SslUtils {
 
 	private static KeyStore loadKeyStore(String type, String resource, String password)
 		throws Exception {
-		type = (StringUtils.isEmpty(type) ? "JKS" : type);
-		if (StringUtils.isEmpty(resource)) {
+		type = (StringUtil.isEmpty(type) ? "JKS" : type);
+		if (StringUtil.isEmpty(resource)) {
 			return null;
 		}
 		KeyStore store = KeyStore.getInstance(type);
 		URL url = ResourceUtils.getURL(resource);
-		store.load(url.openStream(), StringUtils.isEmpty(password) ? null : password.toCharArray());
+		store.load(url.openStream(), StringUtil.isEmpty(password) ? null : password.toCharArray());
 		return store;
 	}
 }

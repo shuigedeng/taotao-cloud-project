@@ -23,13 +23,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 /**
  * 树形菜单列表
@@ -38,13 +33,12 @@ import lombok.ToString;
  * @version 2022.03
  * @since 2020/10/21 11:09
  */
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "MenuTreeVO", description = "树形菜单列表")
+@EqualsAndHashCode(callSuper = true)
+@Schema(description = "树形菜单列表")
 public class MenuTreeVO extends MapperNode implements Serializable {
 
 	@Serial

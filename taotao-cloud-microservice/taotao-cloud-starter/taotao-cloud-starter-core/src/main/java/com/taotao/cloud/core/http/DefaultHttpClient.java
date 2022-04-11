@@ -621,7 +621,7 @@ public class DefaultHttpClient implements HttpClient {
 		try {
 			if (this.client != null) {
 				this.client.close();
-				this.client.getConnectionManager().shutdown();
+				getManager().shutdown();
 				this.client = null;
 			}
 		} catch (Exception e) {

@@ -16,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 规格项业务层实现
  */
 @Service
-public class CategoryBrandServiceImpl extends
-	ServiceImpl<CategoryBrandMapper, CategoryBrand> implements CategoryBrandService {
+public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, CategoryBrand>
+	implements CategoryBrandService {
 
 	@Override
 	public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {

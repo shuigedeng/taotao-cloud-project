@@ -5,8 +5,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * @author shuigedeng
@@ -14,6 +14,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "部门树VO")
 public class SysDeptTreeVo implements Serializable {
 

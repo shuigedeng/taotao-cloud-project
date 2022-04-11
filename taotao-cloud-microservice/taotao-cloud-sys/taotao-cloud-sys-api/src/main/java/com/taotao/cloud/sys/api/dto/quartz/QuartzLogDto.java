@@ -9,13 +9,12 @@ package com.taotao.cloud.sys.api.dto.quartz;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Data
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuartzLogDto implements Serializable {

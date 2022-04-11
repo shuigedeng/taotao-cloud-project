@@ -4,23 +4,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  * 地区VO
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "地区VO")
 public class RegionVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "id")
 	private Long id;

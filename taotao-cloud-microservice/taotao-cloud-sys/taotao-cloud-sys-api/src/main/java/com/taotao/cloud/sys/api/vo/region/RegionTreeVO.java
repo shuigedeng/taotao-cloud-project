@@ -19,13 +19,8 @@ import com.taotao.cloud.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 /**
  * 地区查询对象
@@ -34,10 +29,9 @@ import lombok.ToString;
  * @version 2022.03
  * @since 2020/9/30 08:49
  */
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "地区查询VO")

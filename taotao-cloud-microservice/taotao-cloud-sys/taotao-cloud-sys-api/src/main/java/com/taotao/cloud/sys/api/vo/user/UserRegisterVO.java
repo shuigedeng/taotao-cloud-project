@@ -3,10 +3,8 @@ package com.taotao.cloud.sys.api.vo.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * 用户注册VO
@@ -16,6 +14,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "用户注册VO")
 public class UserRegisterVO implements Serializable {
 

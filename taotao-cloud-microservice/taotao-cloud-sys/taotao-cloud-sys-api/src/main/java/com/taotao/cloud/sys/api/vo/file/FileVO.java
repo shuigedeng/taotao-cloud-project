@@ -17,10 +17,8 @@ package com.taotao.cloud.sys.api.vo.file;
 
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * FileVO
@@ -31,6 +29,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileVO implements Serializable {

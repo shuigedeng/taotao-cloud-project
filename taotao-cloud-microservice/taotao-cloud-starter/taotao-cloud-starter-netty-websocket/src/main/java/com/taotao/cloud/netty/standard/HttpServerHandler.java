@@ -11,6 +11,7 @@ import static io.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.netty.pojo.PojoEndpointServer;
 import com.taotao.cloud.netty.support.WsPathMatcher;
 import io.netty.buffer.ByteBuf;
@@ -162,7 +163,7 @@ class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 		HttpHeaders headers = req.headers();
 		String host = headers.get(HttpHeaderNames.HOST);
-		if (StringUtils.isEmpty(host)) {
+		if (StringUtil.isEmpty(host)) {
 			if (forbiddenByteBuf != null) {
 				res = new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN,
 					forbiddenByteBuf.retainedDuplicate());
@@ -173,7 +174,7 @@ class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 			return;
 		}
 
-		if (!StringUtils.isEmpty(pojoEndpointServer.getHost()) && !pojoEndpointServer.getHost()
+		if (!StringUtil.isEmpty(pojoEndpointServer.getHost()) && !pojoEndpointServer.getHost()
 			.equals("0.0.0.0") && !pojoEndpointServer.getHost().equals(host.split(":")[0])) {
 			if (forbiddenByteBuf != null) {
 				res = new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN,

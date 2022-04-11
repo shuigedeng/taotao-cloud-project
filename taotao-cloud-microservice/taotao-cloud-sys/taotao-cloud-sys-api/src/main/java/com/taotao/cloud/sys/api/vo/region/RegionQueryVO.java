@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.api.vo.region;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 地区查询对象
@@ -30,11 +30,14 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "地区查询对象")
 public class RegionQueryVO implements Serializable {
 
 	@Serial
-	static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "地区编码")
 	private String code;

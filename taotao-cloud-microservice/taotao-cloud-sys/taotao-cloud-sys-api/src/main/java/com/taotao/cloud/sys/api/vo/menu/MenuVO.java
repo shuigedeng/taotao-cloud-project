@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 菜单
@@ -15,6 +15,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "菜单VO")
 public class MenuVO implements Serializable {
 

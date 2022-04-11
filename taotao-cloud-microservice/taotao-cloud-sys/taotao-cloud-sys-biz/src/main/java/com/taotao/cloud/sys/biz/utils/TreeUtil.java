@@ -187,11 +187,11 @@ public class TreeUtil {
 	//		//3、获取数据库操作对象（statement专门执行sql语句）
 	//		stmt = conn.createStatement();
 	//
-	//		//String strings = FileUtil.readString("/Users/dengtao/projects/taotao-projects/sensitive-word/src/main/resources/dict.json",
+	//		//String strings = FileUtil.readString("/Users/shuigdeng/projects/taotao-projects/sensitive-word/src/main/resources/dict.json",
 	//		//	StandardCharsets.UTF_8);
 	//		//List<String> strings = JsonUtil.readList(str, String.class);
 	//
-	//		List<String> strings = FileUtil.readLines("/Users/dengtao/projects/taotao-projects/sensitive-word/src/main/resources/dict.txt",
+	//		List<String> strings = FileUtil.readLines("/Users/shuigeng/projects/taotao-projects/sensitive-word/src/main/resources/dict.txt",
 	//			StandardCharsets.UTF_8);
 	//
 	//		String sql = "insert into tt_sys_sensitive_words(sensitive_word)values(?)";

@@ -3,8 +3,8 @@ package com.taotao.cloud.sys.api.dto.dept;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.Builder;
-import lombok.Data;
+
+import lombok.*;
 
 /**
  * 部门添加对象
@@ -15,6 +15,9 @@ import lombok.Data;
  */
 @Data
 @Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema( description = "部门添加对象")
 public class DeptSaveDTO implements Serializable {
 
