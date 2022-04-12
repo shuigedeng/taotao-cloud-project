@@ -1,5 +1,6 @@
 package com.taotao.cloud.member.api.dto;
 
+import cn.hutool.core.lang.RegexPool;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
@@ -42,7 +43,7 @@ public class MemberDTO implements Serializable {
 
 	@Schema(description = "手机号", required = true)
 	@NotBlank(message = "手机号不能为空")
-	@Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码格式错误")
+	@Pattern(regexp = RegexPool.MOBILE, message = "手机号码格式错误")
 	private String phone;
 
 	@Override

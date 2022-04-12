@@ -37,13 +37,7 @@ public interface DeptMapStruct {
 
 	DeptMapStruct INSTANCE = Mappers.getMapper(DeptMapStruct.class);
 
-	/**
-	 * deptListToVoList
-	 *
-	 * @param deptList deptList
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.dept.DepartVO&gt; }
-	 * @since 2021-12-22 21:20:33
-	 */
+
 	List<DeptTreeVO> deptListToVoList(List<Dept> deptList);
 
 

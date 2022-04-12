@@ -34,13 +34,7 @@ public interface LogisticsMapStruct {
 
 	LogisticsMapStruct INSTANCE = Mappers.getMapper(LogisticsMapStruct.class);
 
-	/**
-	 * file转FileVO
-	 *
-	 * @param file file
-	 * @return com.taotao.cloud.sys.api.vo.user.UserVO
-	 * @since 2020/11/11 14:47
-	 */
+
 	LogisticsVO logisticsToFileVO(LogisticsConfig logisticsConfig);
 
 	// /**
