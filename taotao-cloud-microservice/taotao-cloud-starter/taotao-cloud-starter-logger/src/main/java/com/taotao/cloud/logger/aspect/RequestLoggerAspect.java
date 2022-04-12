@@ -160,7 +160,7 @@ public class RequestLoggerAspect {
 				return;
 			}
 
-			com.taotao.cloud.logger.model.RequestLogger requestLogger = get();
+			com.taotao.cloud.logger.model.RequestLogger requestLogger = getRequestLogger();
 			if (Objects.nonNull(ret)) {
 				try {
 					Result<?> r = Convert.convert(Result.class, ret);
@@ -196,7 +196,7 @@ public class RequestLoggerAspect {
 			if (check(joinPoint, requestOperateLog)) {
 				return;
 			}
-			com.taotao.cloud.logger.model.RequestLogger requestLogger = get();
+			com.taotao.cloud.logger.model.RequestLogger requestLogger = getRequestLogger();
 			requestLogger.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
 			String stackTrace = LogUtil.getStackTrace(e);
 			requestLogger.setExDetail(stackTrace.replaceAll("\"", "'")
@@ -313,7 +313,6 @@ public class RequestLoggerAspect {
 		return targetClass != null && !targetClass.enabled();
 	}
 
-
 	private void tryCatch(Consumer<String> consumer) {
 		try {
 			consumer.accept("");
@@ -344,7 +343,7 @@ public class RequestLoggerAspect {
 		}
 	}
 
-	private com.taotao.cloud.logger.model.RequestLogger get() {
+	private com.taotao.cloud.logger.model.RequestLogger getRequestLogger() {
 		com.taotao.cloud.logger.model.RequestLogger requestLogger = REQUEST_LOG_THREAD_LOCAL.get();
 		if (requestLogger == null) {
 			return new com.taotao.cloud.logger.model.RequestLogger();

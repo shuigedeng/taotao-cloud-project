@@ -35,8 +35,6 @@ public interface RegionMapStruct {
 
 	RegionMapStruct INSTANCE = Mappers.getMapper(RegionMapStruct.class);
 
-
 	List<RegionTreeVO> regionListToVoList(List<Region> regionList);
-
 
 }

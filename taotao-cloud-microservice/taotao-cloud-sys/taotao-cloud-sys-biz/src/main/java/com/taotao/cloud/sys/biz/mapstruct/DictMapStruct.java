@@ -15,8 +15,11 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
+import com.taotao.cloud.sys.api.dto.dict.DictSaveDTO;
+import com.taotao.cloud.sys.biz.entity.dict.Dict;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -60,14 +63,6 @@ public interface DictMapStruct {
 	// * @since 2020/11/11 14:47
 	// */
 	//DictQueryVO sysDictToDictVO(Dict sysDict);
-	//
-	///**
-	// * 拷贝 DictDTO 到SysUser
-	// *
-	// * @param dictSaveDTO dictDTO
-	// * @param dict    dict
-	//
-	// * @since 2020/11/11 16:59
-	// */
-	//void copyDictDtoToSysDict(DictSaveDTO dictSaveDTO, @MappingTarget Dict dict);
+
+	void copyDictDtoToSysDict(DictSaveDTO dictSaveDTO, @MappingTarget Dict dict);
 }

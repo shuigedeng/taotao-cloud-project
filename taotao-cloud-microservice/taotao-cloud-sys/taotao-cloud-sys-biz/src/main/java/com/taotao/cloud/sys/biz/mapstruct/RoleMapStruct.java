@@ -42,36 +42,16 @@ public interface RoleMapStruct {
 	RoleMapStruct INSTANCE = Mappers.getMapper(RoleMapStruct.class);
 
 	List<RoleQueryVO> bosToVos(List<RoleBO> bos);
+
 	RoleQueryVO boToVo(RoleBO bo);
 
 	RoleBO roleToBo(Role role);
+
 	List<RoleBO> rolesToBos(List<Role> roles);
 
-
-	/**
-	 * SysRole转RoleQueryVO
-	 *
-	 * @param SysRole sysRole
-	 * @return {@link UserQueryVO }
-	 * @since 2021-10-15 17:47:46
-	 */
 	RoleQueryVO sysUserToUserQueryVO(Role sysRole);
 
-	/**
-	 * list -> SysRole转RoleQueryVO
-	 *
-	 * @param roleList roleList
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.user.UserQueryVO&gt; }
-	 * @since 2021-10-15 17:52:04
-	 */
 	List<RoleQueryVO> sysUserToUserQueryVO(List<Role> roleList);
 
-	/**
-	 * copyUserDtoToSysUser
-	 *
-	 * @param roleQueryDTO roleQueryDTO
-	 * @param sysRole      sysRole
-	 * @since 2021-10-15 17:54:47
-	 */
 	void copyUserDtoToSysUser(RoleQueryDTO roleQueryDTO, @MappingTarget Role sysRole);
 }

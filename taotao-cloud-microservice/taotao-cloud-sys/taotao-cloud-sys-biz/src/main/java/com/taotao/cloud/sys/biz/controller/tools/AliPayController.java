@@ -1,8 +1,11 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.AliPayStatusEnum;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.regex.RegexUtil;
+import com.taotao.cloud.common.utils.regex.RegularUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVO;
@@ -73,23 +76,11 @@ public class AliPayController {
 		return Result.success(payUrl);
 	}
 
-	@Operation(summary = "支付宝手机网页支付", description = "支付宝手机网页支付", method = CommonConstant.POST)
-	@RequestLogger("支付宝手机网页支付")
-	@PreAuthorize("@el.check('admin','timing:list')")
-	@PostMapping(value = "/toPayAsWeb")
-	public Result<String> toPayAsWeb(@Validated @RequestBody TradeVO trade)
-		throws Exception {
-		AlipayConfig alipay = alipayService.find();
-		trade.setOutTradeNo(alipayUtils.getOrderCode());
-		String payUrl = alipayService.toPayAsWeb(alipay, trade);
-		return Result.success(payUrl);
-	}
-
+	@Hidden
+	@NotAuth
 	@Operation(summary = "支付之后跳转的链接", description = "支付之后跳转的链接", method = CommonConstant.GET)
 	@RequestLogger("支付之后跳转的链接")
-	@Hidden
 	@GetMapping("/return")
-	@NotAuth
 	public Result<Boolean> returnPage(HttpServletRequest request,
 		HttpServletResponse response) {
 		AlipayConfig alipay = alipayService.find();
@@ -113,6 +104,18 @@ public class AliPayController {
 			return Result.success(false);
 			//return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@Operation(summary = "支付宝手机网页支付", description = "支付宝手机网页支付", method = CommonConstant.POST)
+	@RequestLogger("支付宝手机网页支付")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping(value = "/toPayAsWeb")
+	public Result<String> toPayAsWeb(@Validated @RequestBody TradeVO trade)
+		throws Exception {
+		AlipayConfig alipay = alipayService.find();
+		trade.setOutTradeNo(alipayUtils.getOrderCode());
+		String payUrl = alipayService.toPayAsWeb(alipay, trade);
+		return Result.success(payUrl);
 	}
 
 	@Operation(summary = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理", description = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理")

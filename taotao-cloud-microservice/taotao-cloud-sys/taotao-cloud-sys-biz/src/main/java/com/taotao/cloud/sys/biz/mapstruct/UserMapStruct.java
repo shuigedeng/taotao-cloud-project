@@ -40,39 +40,11 @@ public interface UserMapStruct {
 
 	UserMapStruct INSTANCE = Mappers.getMapper(UserMapStruct.class);
 
-	/**
-	 * SysUser转UserQueryVO
-	 *
-	 * @param sysUser sysUser
-	 * @return {@link UserQueryVO }
-	 * @since 2021-10-15 17:47:46
-	 */
 	UserQueryVO sysUserToUserQueryVO(User sysUser);
 
-	/**
-	 * SysUser转UserRegisterVO
-	 *
-	 * @param sysUser sysUser
-	 * @return {@link UserRegisterVO }
-	 * @since 2021-10-15 17:51:49
-	 */
 	UserRegisterVO sysUserToAddUserVO(User sysUser);
 
-	/**
-	 * list -> SysUser转UserVO
-	 *
-	 * @param userList userList
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.user.UserQueryVO&gt; }
-	 * @since 2021-10-15 17:52:04
-	 */
 	List<UserQueryVO> sysUserToUserQueryVO(List<User> userList);
 
-	/**
-	 * copyUserDtoToSysUser
-	 *
-	 * @param userQueryDTO userQueryDTO
-	 * @param user         user
-	 * @since 2021-10-15 17:53:08
-	 */
 	void copyUserDtoToSysUser(UserQueryDTO userQueryDTO, @MappingTarget User user);
 }
