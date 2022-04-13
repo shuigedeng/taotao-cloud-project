@@ -41,7 +41,8 @@ public interface EsGoodsIndexService {
 
 	/**
 	 * 更新商品索引的的部分属性（只填写更新的字段，不需要更新的字段不要填写）
-	 *  @param id    商品索引id
+	 *
+	 * @param id    商品索引id
 	 * @param goods 更新后的购买数量
 	 */
 	Boolean updateIndex(Long id, EsGoodsIndex goods);
@@ -128,14 +129,16 @@ public interface EsGoodsIndexService {
 
 	/**
 	 * 删除指定商品的促销信息
-	 *  @param skuIds        skuId列表
+	 *
+	 * @param skuIds        skuId列表
 	 * @param promotionType 促销类型
 	 */
 	Boolean deleteEsGoodsPromotionIndexByList(List<Long> skuIds, PromotionTypeEnum promotionType);
 
 	/**
 	 * 删除索引中指定的促销活动id的促销活动
-	 *  @param skuIds        商品skuId
+	 *
+	 * @param skuIds        商品skuId
 	 * @param promotionsKey 促销活动Key
 	 */
 	Boolean deleteEsGoodsPromotionByPromotionKey(List<Long> skuIds, String promotionsKey);

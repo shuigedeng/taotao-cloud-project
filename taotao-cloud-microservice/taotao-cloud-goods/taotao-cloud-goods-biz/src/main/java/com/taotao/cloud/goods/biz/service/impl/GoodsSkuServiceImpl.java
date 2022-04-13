@@ -9,6 +9,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
@@ -30,6 +31,7 @@ import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
+import com.taotao.cloud.goods.biz.mapstruct.IGoodsSkuMapStruct;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
@@ -204,25 +206,25 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	}
 
 	@Override
-	public GoodsSku getGoodsSkuByIdFromCache(Long id) {
+	public GoodsSku getGoodsSkuByIdFromCache(Long skuId) {
 		//获取缓存中的sku
-		GoodsSku goodsSku = (GoodsSku) redisRepository.get(GoodsSkuService.getCacheKeys(id));
+		GoodsSku goodsSku = (GoodsSku) redisRepository.get(GoodsSkuService.getCacheKeys(skuId));
 		//如果缓存中没有信息，则查询数据库，然后写入缓存
 		if (goodsSku == null) {
-			goodsSku = this.getById(id);
+			goodsSku = this.getById(skuId);
 			if (goodsSku == null) {
 				return null;
 			}
-			redisRepository.set(GoodsSkuService.getCacheKeys(id), goodsSku);
+			redisRepository.set(GoodsSkuService.getCacheKeys(skuId), goodsSku);
 		}
 
 		//获取商品库存
-		Integer integer = (Integer) redisRepository.get(GoodsSkuService.getStockCacheKey(id));
+		Integer stock = (Integer) redisRepository.get(GoodsSkuService.getStockCacheKey(skuId));
 
 		//库存不为空,库存与缓存中不一致
-		if (integer != null && !goodsSku.getQuantity().equals(integer)) {
+		if (stock != null && !goodsSku.getQuantity().equals(stock)) {
 			//写入最新的库存信息
-			goodsSku.setQuantity(integer);
+			goodsSku.setQuantity(stock);
 			redisRepository.set(GoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
 		}
 		return goodsSku;
@@ -234,9 +236,10 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		//获取商品VO
 		GoodsVO goodsVO = goodsService.getGoodsVO(goodsId);
 		//如果skuid为空，则使用商品VO中sku信息获取
-		if (Objects.nonNull(skuId) || "undefined".equals(skuId)) {
+		if (Objects.nonNull(skuId)) {
 			skuId = goodsVO.getSkuList().get(0).getId();
 		}
+
 		//从缓存拿商品Sku
 		GoodsSku goodsSku = this.getGoodsSkuByIdFromCache(skuId);
 		//如果使用商品ID无法查询SKU则返回错误
@@ -366,8 +369,9 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 
 	@Override
 	public List<GoodsSkuVO> getGoodsListByGoodsId(Long goodsId) {
-		List<GoodsSku> list = this.list(
-			new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId));
+		LambdaQueryWrapper<GoodsSku> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(GoodsSku::getGoodsId, goodsId);
+		List<GoodsSku> list = this.list(queryWrapper);
 		return this.getGoodsSkuVOList(list);
 	}
 
@@ -389,13 +393,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	@Override
 	public GoodsSkuVO getGoodsSkuVO(GoodsSku goodsSku) {
 		//初始化商品
-		GoodsSkuVO goodsSkuVO = new GoodsSkuVO(goodsSku);
-		//获取sku信息
+		GoodsSkuVO goodsSkuVO = IGoodsSkuMapStruct.INSTANCE.goodsSkuToGoodsSkuVO(goodsSku);
+		//获取规格信息
 		JSONObject jsonObject = JSONUtil.parseObj(goodsSku.getSpecs());
-		//用于接受sku信息
+		//规格值信息
 		List<SpecValueVO> specValueVOS = new ArrayList<>();
-		//用于接受sku相册
+		//sku相册信息
 		List<String> goodsGalleryList = new ArrayList<>();
+
 		//循环提交的sku表单
 		for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
 			SpecValueVO specValueVO = new SpecValueVO();
@@ -405,8 +410,8 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 					List<SpecValueVO.SpecImages> specImages = JSONUtil.toList(
 						JSONUtil.parseArray(entry.getValue()), SpecValueVO.SpecImages.class);
 					specValueVO.setSpecImage(specImages);
-					goodsGalleryList = specImages.stream().map(SpecValueVO.SpecImages::getUrl)
-						.collect(Collectors.toList());
+					goodsGalleryList = specImages.stream()
+						.map(SpecValueVO.SpecImages::getUrl).toList();
 				}
 			} else {
 				specValueVO.setSpecName(entry.getKey());
@@ -417,7 +422,6 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		goodsSkuVO.setGoodsGalleryList(goodsGalleryList);
 		goodsSkuVO.setSpecList(specValueVOS);
 		return goodsSkuVO;
-		return null;
 	}
 
 	@Override

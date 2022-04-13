@@ -16,7 +16,9 @@ import lombok.Setter;
 /**
  * 运费模板子配置
  *
- * @since 2020/11/17 4:27 下午
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-12 21:24:28
  */
 @Setter
 @Getter
@@ -31,7 +33,7 @@ public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, 
 
 	public static final String TABLE_NAME = "li_freight_template_child";
 
-	@Column(name = "freight_template_id", columnDefinition = "varchar(32) not null comment '店铺模板ID'")
+	@Column(name = "freight_template_id", columnDefinition = "bigint not null comment '店铺模板ID'")
 	private Long freightTemplateId;
 
 	@Column(name = "first_company", columnDefinition = "decimal(10,2) not null default 0 comment '首重/首件'")

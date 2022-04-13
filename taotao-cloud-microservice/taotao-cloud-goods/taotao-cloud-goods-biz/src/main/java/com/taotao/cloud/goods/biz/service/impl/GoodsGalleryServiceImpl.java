@@ -1,7 +1,9 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.FileUtil;
@@ -73,6 +75,8 @@ public class GoodsGalleryServiceImpl extends
 	@Override
 	public List<GoodsGallery> goodsGalleryList(Long goodsId) {
 		//根据商品id查询商品相册
-		return this.baseMapper.selectList(new QueryWrapper<GoodsGallery>().eq("goods_id", goodsId));
+		LambdaQueryWrapper<GoodsGallery> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(GoodsGallery::getGoodsId, goodsId);
+		return this.list(queryWrapper);
 	}
 }

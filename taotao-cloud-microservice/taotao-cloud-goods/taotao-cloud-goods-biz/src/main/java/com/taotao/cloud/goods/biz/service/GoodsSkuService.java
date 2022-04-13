@@ -71,10 +71,10 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	/**
 	 * 从redis缓存中获取商品SKU信息
 	 *
-	 * @param id SkuId
+	 * @param skuId SkuId
 	 * @return 商品SKU信息
 	 */
-	GoodsSku getGoodsSkuByIdFromCache(Long id);
+	GoodsSku getGoodsSkuByIdFromCache(Long skuId);
 
 	/**
 	 * 获取商品sku详情

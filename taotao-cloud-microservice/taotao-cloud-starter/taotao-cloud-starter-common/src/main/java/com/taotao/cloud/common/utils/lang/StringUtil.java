@@ -540,19 +540,16 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 			return false;
 		}
 
-		final Class exceptClass = except.getClass();
-		final Class realClass = except.getClass();
+		final Class<?> exceptClass = except.getClass();
+		final Class<?> realClass = except.getClass();
 
 		//2. 基本类型
-		if (exceptClass.isPrimitive()
-			&& realClass.isPrimitive()
-			&& except != real) {
+		if (exceptClass.isPrimitive() && realClass.isPrimitive() && except != real) {
 			return false;
 		}
 
 		//3. 数组
-		if (ClassTypeUtil.isArray(exceptClass)
-			&& ClassTypeUtil.isArray(realClass)) {
+		if (ClassTypeUtil.isArray(exceptClass) && ClassTypeUtil.isArray(realClass)) {
 			Object[] exceptArray = (Object[]) except;
 			Object[] realArray = (Object[]) real;
 			return Arrays.equals(exceptArray, realArray);
@@ -684,7 +681,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param object 实例对象
 	 * @return 对象 class 信息
 	 */
-	public static Class getClass(final Object object) {
+	public static Class<?> getClass(final Object object) {
 		if (isNull(object)) {
 			return null;
 		}

@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -10,9 +11,13 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsWordsTypeEnum;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsAttribute;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
@@ -32,6 +37,7 @@ import com.taotao.cloud.goods.biz.service.GoodsSkuService;
 import com.taotao.cloud.goods.biz.service.GoodsWordsService;
 import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionService;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -75,7 +81,8 @@ import org.springframework.stereotype.Service;
  * 商品索引业务层实现
  **/
 @Service
-public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements EsGoodsIndexService {
+public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
+	EsGoodsIndexService {
 //public class EsGoodsIndexServiceImpl implements EsGoodsIndexService {
 
 	private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";
@@ -91,7 +98,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Autowired
 	private GoodsWordsService goodsWordsService;
 	@Autowired
-	private PromotionService promotionService;
+	private IFeignPromotionService feignPromotionService;
 	@Autowired
 	private GoodsSkuService goodsSkuService;
 	@Autowired
@@ -192,21 +199,23 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public Boolean addIndex(EsGoodsIndex goods) {
 		try {
 			//分词器分词
-            AnalyzeRequest analyzeRequest = AnalyzeRequest.withIndexAnalyzer(getIndexName(), "ik_max_word", goods.getGoodsName());
-            AnalyzeResponse analyze = client.indices().analyze(analyzeRequest, RequestOptions.DEFAULT);
-            List<AnalyzeResponse.AnalyzeToken> tokens = analyze.getTokens();
+			AnalyzeRequest analyzeRequest = AnalyzeRequest.withIndexAnalyzer(getIndexName(),
+				"ik_max_word", goods.getGoodsName());
+			AnalyzeResponse analyze = client.indices()
+				.analyze(analyzeRequest, RequestOptions.DEFAULT);
+			List<AnalyzeResponse.AnalyzeToken> tokens = analyze.getTokens();
 
-            if (goods.getAttrList() != null && !goods.getAttrList().isEmpty()) {
-                //保存分词
-                for (EsGoodsAttribute esGoodsAttribute : goods.getAttrList()) {
-                    wordsToDb(esGoodsAttribute.getValue());
-                }
-            }
-            //分析词条
-            for (AnalyzeResponse.AnalyzeToken token : tokens) {
-                //保存词条进入数据库
-                wordsToDb(token.getTerm());
-            }
+			if (goods.getAttrList() != null && !goods.getAttrList().isEmpty()) {
+				//保存分词
+				for (EsGoodsAttribute esGoodsAttribute : goods.getAttrList()) {
+					wordsToDb(esGoodsAttribute.getValue());
+				}
+			}
+			//分析词条
+			for (AnalyzeResponse.AnalyzeToken token : tokens) {
+				//保存词条进入数据库
+				wordsToDb(token.getTerm());
+			}
 			//生成索引
 			goodsIndexRepository.save(goods);
 		} catch (Exception e) {
@@ -223,7 +232,8 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	/**
 	 * 更新商品索引的的部分属性（只填写更新的字段，不需要更新的字段不要填写）
-	 *  @param id    商品索引id
+	 *
+	 * @param id    商品索引id
 	 * @param goods 更新后的购买数量
 	 */
 	@Override
@@ -574,7 +584,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Override
 	public EsGoodsIndex findById(Long id) {
 		Optional<EsGoodsIndex> goodsIndex = goodsIndexRepository.findById(id);
-		if (!goodsIndex.isPresent()) {
+		if (goodsIndex.isEmpty()) {
 			LogUtil.error("商品skuId为" + id + "的es索引不存在！");
 			return null;
 		}
@@ -640,9 +650,11 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public EsGoodsIndex getResetEsGoodsIndex(GoodsSku goodsSku,
 		List<GoodsParamsDTO> goodsParamDTOS) {
 		EsGoodsIndex index = new EsGoodsIndex(goodsSku, goodsParamDTOS);
+
 		//获取活动信息
-		Map<String, Object> goodsCurrentPromotionMap = promotionService.getGoodsSkuPromotionMap(
+		Map<String, Object> goodsCurrentPromotionMap = feignPromotionService.getGoodsSkuPromotionMap(
 			index.getStoreId(), index.getId());
+
 		//写入促销信息
 		index.setPromotionMapJson(JSONUtil.toJsonStr(goodsCurrentPromotionMap));
 
@@ -699,8 +711,8 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		UpdateRequest updateRequest = new UpdateRequest();
 		updateRequest.index(getIndexName());
 		updateRequest.id(id);
-        updateRequest.retryOnConflict(5);
-        updateRequest.version(promotionMap.size());
+		updateRequest.retryOnConflict(5);
+		updateRequest.version(promotionMap.size());
 		Map<String, Object> params = new HashMap<>();
 		params.put("promotionMap", JSONUtil.toJsonStr(promotionMap));
 		Script script = new Script(ScriptType.INLINE, "painless",

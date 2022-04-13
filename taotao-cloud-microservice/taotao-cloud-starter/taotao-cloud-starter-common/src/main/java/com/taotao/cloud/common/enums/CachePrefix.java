@@ -109,12 +109,10 @@ public enum CachePrefix {
 	 * 促销商品sku库存
 	 */
 	PROMOTION_GOODS_STOCK,
-
 	/**
 	 * 商品库存
 	 */
 	GOODS_STOCK,
-
 	/**
 	 * 商品分类 树状结构
 	 */
@@ -135,7 +133,6 @@ public enum CachePrefix {
 	 * 地区
 	 */
 	REGION,
-
 	/**
 	 * 短信网关
 	 */

@@ -52,6 +52,7 @@ public class Article extends BaseEntity {
 
     @Schema(description =  "状态")
     private Boolean openStatus;
+
     /**
      * @see ArticleEnum
      */
