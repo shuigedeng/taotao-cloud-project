@@ -9,6 +9,7 @@ dependencies {
     api 'com.squareup.okio:okio'
     api 'com.github.tobato:fastdfs-client'
     api 'commons-net:commons-net'
+    api 'io.minio:minio:8.2.1'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

@@ -80,7 +80,11 @@ public class OssProperties {
 		/**
 		 * 又拍云存储
 		 */
-		UPYUN;
+		UPYUN,
+		/**
+		 * minio存储
+		 */
+		MINIO;
 
 
 	}

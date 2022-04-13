@@ -3,6 +3,7 @@ com.taotao.cloud.oss.configuration.AliyunOssAutoConfiguration, \
 com.taotao.cloud.oss.configuration.FdfsDfsAutoConfiguration, \
 com.taotao.cloud.oss.configuration.FtpAutoConfiguration, \
 com.taotao.cloud.oss.configuration.LocalAutoConfiguration, \
+com.taotao.cloud.oss.configuration.MinioOssAutoConfiguration, \
 com.taotao.cloud.oss.configuration.NginxAutoConfiguration, \
 com.taotao.cloud.oss.configuration.OssAutoConfiguration, \
 com.taotao.cloud.oss.configuration.QCloudAutoConfiguration, \

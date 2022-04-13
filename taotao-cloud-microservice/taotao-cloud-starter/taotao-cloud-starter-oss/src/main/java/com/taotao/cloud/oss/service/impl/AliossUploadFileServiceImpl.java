@@ -275,7 +275,6 @@ public class AliossUploadFileServiceImpl extends AbstractUploadFileService {
 	 * 计算所需要的分片数量
 	 *
 	 * @param uploadFile uploadFile
-	 * @author shuigedeng
 	 * @since 2020/9/9 11:44
 	 */
 	public int calPartCount(MultipartFile uploadFile) {
