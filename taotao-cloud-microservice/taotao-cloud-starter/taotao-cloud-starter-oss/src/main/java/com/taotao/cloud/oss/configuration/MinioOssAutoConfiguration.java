@@ -17,52 +17,50 @@ package com.taotao.cloud.oss.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.oss.propeties.MinioProperties;
 import com.taotao.cloud.oss.propeties.OssProperties;
-import com.taotao.cloud.oss.propeties.FtpProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
-import com.taotao.cloud.oss.service.impl.FtpUploadFileServiceImpl;
-import com.taotao.cloud.oss.util.FtpClientUtil;
+import com.taotao.cloud.oss.service.impl.MinioUploadFileServiceImpl;
+import io.minio.MinioClient;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * minio自动配置
+ *
  * @author shuigedeng
  * @version 2022.03
- * @since 2020/10/26 10:28
+ * @since 2020/10/26 10:49
  */
 @Configuration
-@EnableConfigurationProperties({FtpProperties.class,})
-@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "FTP")
-public class FtpAutoConfiguration implements InitializingBean {
+@EnableConfigurationProperties({MinioProperties.class,})
+@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "MINIO")
+public class MinioOssAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FtpAutoConfiguration.class, StarterName.OSS_STARTER);
+		LogUtil.started(MinioOssAutoConfiguration.class, StarterName.OSS_STARTER);
 	}
-	private final FtpProperties properties;
 
-	public FtpAutoConfiguration(FtpProperties properties) {
+	private final MinioProperties properties;
+
+	public MinioOssAutoConfiguration(MinioProperties properties) {
 		this.properties = properties;
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
-	public FtpClientUtil ftpClient() {
-		return new FtpClientUtil(properties.getHost(),
-			properties.getPort(),
-			properties.getUsername(),
-			properties.getPassword(),
-			properties.getRemoteDicrory());
+	public MinioClient minioClient() {
+		return MinioClient.builder()
+			.endpoint(properties.getUrl())
+			.credentials(properties.getAccessKey(), properties.getSecretKey())
+			.build();
 	}
 
 	@Bean
-	public UploadFileService fileUpload(FtpClientUtil ftpClientUtil) {
-		return new FtpUploadFileServiceImpl(ftpClientUtil);
+	public UploadFileService fileUpload(MinioProperties properties, MinioClient minioClient) {
+		return new MinioUploadFileServiceImpl(properties, minioClient);
 	}
-
-
 }
