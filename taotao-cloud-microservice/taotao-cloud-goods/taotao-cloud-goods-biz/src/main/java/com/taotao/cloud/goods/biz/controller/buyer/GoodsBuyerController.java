@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,商品接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-商品API", description = "买家端-商品API")
@@ -43,36 +45,33 @@ public class GoodsBuyerController {
 	/**
 	 * 商品
 	 */
-	@Autowired
-	private GoodsService goodsService;
+	private final GoodsService goodsService;
 	/**
 	 * 商品SKU
 	 */
-	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private final GoodsSkuService goodsSkuService;
 	/**
 	 * ES商品搜索
 	 */
-	@Autowired
-	private EsGoodsSearchService goodsSearchService;
+	private final EsGoodsSearchService goodsSearchService;
 
 	@Operation(summary = "通过id获取商品信息", description = "通过id获取商品信息", method = CommonConstant.GET)
 	@RequestLogger("通过id获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
 	public Result<GoodsVO> get(
-		@Parameter(description = "商品ID") @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
+		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable Long goodsId) {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
-	@Operation(summary = "通过sku_id获取商品信息", description = "通过sku_id获取商品信息", method = CommonConstant.GET)
-	@RequestLogger("通过sku_id获取商品信息")
+	@Operation(summary = "通过skuId获取商品信息", description = "通过skuId获取商品信息", method = CommonConstant.GET)
+	@RequestLogger("通过skuId获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/sku/{goodsId}/{skuId}")
+	@GetMapping(value = "/{goodsId}/{skuId}")
 	//@PageViewPoint(type = PageViewEnum.SKU, id = "#id")
 	public Result<Map<String, Object>> getSku(
-		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId,
-		@Parameter(description = "SKU_ID") @NotNull(message = "SKU ID不能为空") @PathVariable("skuId") Long skuId) {
+		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable Long goodsId,
+		@Parameter(description = "skuId") @NotNull(message = "skuId不能为空") @PathVariable Long skuId) {
 		// 读取选中的列表
 		Map<String, Object> map = goodsSkuService.getGoodsSkuDetail(goodsId, skuId);
 		return Result.success(map);

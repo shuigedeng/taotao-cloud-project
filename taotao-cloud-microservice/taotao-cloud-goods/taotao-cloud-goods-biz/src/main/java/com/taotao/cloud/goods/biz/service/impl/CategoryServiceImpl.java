@@ -14,6 +14,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.mapper.CategoryMapper;
+import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
 import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.CategoryService;
@@ -73,6 +74,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 	@Override
 	public List<CategoryVO> categoryTree() {
+		// 获取缓存数据
 		List<CategoryVO> categoryVOList = (List<CategoryVO>) redisRepository.get(
 			CachePrefix.CATEGORY.getPrefix());
 		if (categoryVOList != null) {
@@ -88,7 +90,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		categoryVOList = new ArrayList<>();
 		for (Category category : list) {
 			if (Long.valueOf(0).equals(category.getParentId())) {
-				CategoryVO categoryVO = BeanUtil.copyProperties(category, CategoryVO.class);
+				CategoryVO categoryVO = ICategoryMapStruct.INSTANCE.categoryToCategoryVO(category);
 				categoryVO.setChildren(findChildren(list, categoryVO));
 				categoryVOList.add(categoryVO);
 			}
@@ -288,7 +290,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		List<CategoryVO> children = new ArrayList<>();
 		categories.forEach(item -> {
 			if (item.getParentId().equals(categoryVO.getId())) {
-				CategoryVO temp = BeanUtil.copyProperties(item, CategoryVO.class);
+				CategoryVO temp = ICategoryMapStruct.INSTANCE.categoryToCategoryVO(item);
 				temp.setChildren(findChildren(categories, temp));
 				children.add(temp);
 			}

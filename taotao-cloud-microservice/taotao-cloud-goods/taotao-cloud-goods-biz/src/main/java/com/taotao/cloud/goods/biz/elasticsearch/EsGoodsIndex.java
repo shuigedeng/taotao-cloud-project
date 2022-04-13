@@ -306,7 +306,6 @@ public class EsGoodsIndex implements Serializable {
 						}
 					);
 				}
-
 			});
 			this.attrList = attributes;
 		}

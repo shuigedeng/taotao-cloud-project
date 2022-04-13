@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,商品分类接口
  */
+@AllArgsConstructor
 @Validated
 @RestController
 @Tag(name = "买家端-商品分类API", description = "买家端-商品分类API")
@@ -31,8 +33,7 @@ public class CategoryBuyerController {
 	/**
 	 * 商品分类
 	 */
-	@Autowired
-	private CategoryService categoryService;
+	private final CategoryService categoryService;
 
 	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表", method = CommonConstant.GET)
 	@RequestLogger("根据父id获取商品分类列表")

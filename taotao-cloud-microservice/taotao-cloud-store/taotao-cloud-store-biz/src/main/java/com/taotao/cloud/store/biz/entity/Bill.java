@@ -30,15 +30,15 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = Bill.TABLE_NAME, comment = "结算清单表")
 public class Bill extends BaseSuperEntity<Bill, Long> {
 
-	public static final String TABLE_NAME = "tt_sys_bill";
+	public static final String TABLE_NAME = "tt_bill";
 
 	@Column(name = "sn", columnDefinition = "varchar(64) not null comment '账单号'")
 	private String sn;
 
-	@Column(name = "create_time", columnDefinition = "TIMESTAMP comment '结算开始时间'")
+	@Column(name = "start_time", columnDefinition = "datetime null comment '结算开始时间'")
 	private LocalDateTime startTime;
 
-	@Column(name = "end_time", columnDefinition = "TIMESTAMP comment '结算结束时间'")
+	@Column(name = "end_time", columnDefinition = "datetime null comment '结算结束时间'")
 	private LocalDateTime endTime;
 
 	/**

@@ -11,7 +11,8 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 
 	/**
 	 * 添加商品相册
-	 *  @param goodsGalleryList 商品相册列表
+	 *
+	 * @param goodsGalleryList 商品相册列表
 	 * @param goodsId          商品ID
 	 */
 	Boolean add(List<String> goodsGalleryList, Long goodsId);
@@ -25,7 +26,7 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 	GoodsGallery getGoodsGallery(String origin);
 
 	/**
-	 * 根据商品 id查询商品相册原图
+	 * 根据商品id查询商品相册原图
 	 *
 	 * @param goodsId 商品ID
 	 * @return 商品相册列表

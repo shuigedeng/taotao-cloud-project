@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.service.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -30,6 +31,7 @@ import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
+import com.taotao.cloud.goods.biz.mapstruct.IGoodsMapStruct;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
@@ -51,6 +53,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.stereotype.Service;
@@ -212,40 +216,34 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 		//查询商品信息
 		Goods goods = this.getById(goodsId);
 		if (goods == null) {
-			log.error("商品ID为" + goodsId + "的商品不存在");
+			LogUtil.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
-		goodsVO = new GoodsVO();
 		//赋值
-		BeanUtil.copyProperties(goods, goodsVO);
+		goodsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsVO(goods);
 		//商品id
 		goodsVO.setId(goods.getId());
-		//商品相册赋值
-		List<String> images = new ArrayList<>();
+		//商品相册
 		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-		for (GoodsGallery goodsGallery : galleryList) {
-			images.add(goodsGallery.getOriginal());
-		}
-		goodsVO.setGoodsGalleryList(images);
+		goodsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
+			.map(GoodsGallery::getOriginal).toList());
 		//商品sku赋值
 		List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
 		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
 			goodsVO.setSkuList(goodsListByGoodsId);
 		}
 		//商品分类名称赋值
-		List<String> categoryName = new ArrayList<>();
 		String categoryPath = goods.getCategoryPath();
 		String[] strArray = categoryPath.split(",");
 		List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
-		for (Category category : categories) {
-			categoryName.add(category.getName());
-		}
-		goodsVO.setCategoryName(categoryName);
+		goodsVO.setCategoryName(categories.stream().filter(Objects::nonNull)
+			.map(Category::getName).toList());
 
 		//参数非空则填写参数
-		if (CharSequenceUtil.isNotEmpty(goods.getParams())) {
+		if (StrUtil.isNotEmpty(goods.getParams())) {
 			goodsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
 		}
+
 		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
 		return goodsVO;
 	}

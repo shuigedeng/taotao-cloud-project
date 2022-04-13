@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,9 +20,6 @@ import lombok.Setter;
 public class CategoryVO extends CategoryBaseVO {
 
 	private static final long serialVersionUID = 3775766246075838410L;
-
-	@Schema(description = "id")
-	private Long id;
 
 	@Schema(description = "父节点名称")
 	private String parentTitle;
