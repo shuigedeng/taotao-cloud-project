@@ -2,6 +2,7 @@ package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,14 +20,15 @@ import lombok.Setter;
 /**
  * 购物车展示VO
  */
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "购物车展示VO")
-public class CartVO extends CartBase implements Serializable {
+public class CartVO extends CartBaseVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -5651775413457562422L;
 
 	@Schema(description = "购物车中的产品列表")

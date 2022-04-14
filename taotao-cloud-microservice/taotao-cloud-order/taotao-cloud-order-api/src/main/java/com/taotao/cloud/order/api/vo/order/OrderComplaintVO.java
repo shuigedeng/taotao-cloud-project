@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 订单交易投诉VO
  **/
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

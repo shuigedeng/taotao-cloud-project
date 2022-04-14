@@ -5,6 +5,8 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.order.api.enums.order.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,7 +23,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单简略信息 用于订单列表查看")
-public class OrderSimpleVO {
+public class OrderSimpleVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -6293102172184734928L;
 
 	@Schema(description = "sn")
 	private String sn;

@@ -2,18 +2,24 @@ package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 购物车基础
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "购物车基础")
-public class CartBase implements Serializable {
+public class CartBaseVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -5172752506920017597L;
 
 	@Schema(description = "卖家id")

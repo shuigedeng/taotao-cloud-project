@@ -4,6 +4,8 @@ import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +20,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "子订单VO")
-public class OrderItemVO {
+public class OrderItemVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -6293102172184734928L;
 
 	@Schema(description = "编号")
 	private String sn;

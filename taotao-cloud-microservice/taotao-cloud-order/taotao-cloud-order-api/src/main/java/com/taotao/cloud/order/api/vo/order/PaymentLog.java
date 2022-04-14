@@ -5,7 +5,10 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +23,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单支付日志：实际为订单部分字段提取过来的一个vo")
-public class PaymentLog {
+public class PaymentLog implements Serializable {
 
-	private static final long serialVersionUID = 2233811628066468683L;
+	@Serial
+	private static final long serialVersionUID = -6293102172184734928L;
 
 	@Schema(description = "订单编号")
 	private String sn;
@@ -31,13 +35,13 @@ public class PaymentLog {
 	private String tradeSn;
 
 	@Schema(description = "店铺ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "店铺名称")
 	private String storeName;
 
 	@Schema(description = "会员ID")
-	private String memberId;
+	private Long memberId;
 
 	@Schema(description = "用户名")
 	private String memberName;
@@ -56,7 +60,7 @@ public class PaymentLog {
 
 	@Schema(description = "支付时间")
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date paymentTime;
+	private LocalDateTime paymentTime;
 
 	@Schema(description = "总价格")
 	private BigDecimal flowPrice;
