@@ -22,15 +22,9 @@ public class TradeVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -4563542542090139404L;
 
-	/**
-	 * 购物车列表
-	 */
 	@Schema(description = "购物车列表")
 	private List<CartVO> cartList;
 
-	/**
-	 * 购物车计算后的总价
-	 */
 	@Schema(description = "购物车车计算后的总价")
 	private PriceDetailVO priceDetailVO;
 

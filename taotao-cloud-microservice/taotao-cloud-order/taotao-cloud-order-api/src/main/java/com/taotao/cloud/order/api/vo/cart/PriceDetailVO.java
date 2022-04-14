@@ -2,6 +2,7 @@ package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "订单价格详情")
 public class PriceDetailVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -960537582096338500L;
 
 	@Schema(description = "商品原价")
@@ -35,7 +37,6 @@ public class PriceDetailVO implements Serializable {
 
 	@Schema(description = "最终成交金额")
 	private BigDecimal finalePrice;
-
 
 	/**
 	 * 构造器，初始化默认值

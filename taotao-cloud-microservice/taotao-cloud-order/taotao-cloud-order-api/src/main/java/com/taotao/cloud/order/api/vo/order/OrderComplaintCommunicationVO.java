@@ -1,9 +1,12 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.io.Serial;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 投诉通信VO
@@ -19,8 +22,8 @@ public class OrderComplaintCommunicationVO extends OrderComplaintCommunicationBa
 	@Serial
 	private static final long serialVersionUID = -8460949951683122695L;
 
-	public OrderComplaintCommunicationVO(String complainId, String content, String owner,
-										 String ownerName, Long ownerId) {
+	public OrderComplaintCommunicationVO(Long complainId, String content, String owner,
+		String ownerName, Long ownerId) {
 		super(complainId, content, owner, ownerName, ownerId);
 	}
 }

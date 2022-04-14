@@ -2,12 +2,15 @@ package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,19 +18,19 @@ import lombok.Setter;
 /**
  * 购物车中的产品
  */
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "购物车中的产品")
-public class CartSkuVO extends CartBase implements Serializable {
+public class CartSkuVO extends CartBaseVO implements Serializable {
 
-
+	@Serial
 	private static final long serialVersionUID = -894598033321906974L;
 
-
 	private String sn;
+
 	/**
 	 * 对应的sku DO
 	 */

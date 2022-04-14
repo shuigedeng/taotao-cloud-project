@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Schema(description = "商品促销VO 购物车中")
 public class GoodsPromotionVO implements Serializable {
 
-
 	private static final long serialVersionUID = 1622051257060817414L;
 	@Schema(description = "活动开始时间")
 	private Date startTime;
@@ -50,7 +49,4 @@ public class GoodsPromotionVO implements Serializable {
 		this.setLimitNum(promotionGoods.getLimitNum());
 	}
 
-	public GoodsPromotionVO() {
-
-	}
 }
