@@ -2,6 +2,8 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +22,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "商品基础VO")
-public class GoodsBaseVO {
+public class GoodsBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1450550797436233753L;
+
 	private Long id;
 
 	@Schema(description = "商品名称")

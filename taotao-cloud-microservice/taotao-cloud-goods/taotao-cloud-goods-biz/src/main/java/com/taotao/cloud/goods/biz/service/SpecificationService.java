@@ -4,6 +4,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.goods.api.dto.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import java.util.List;
 
@@ -23,10 +24,9 @@ public interface SpecificationService extends IService<Specification> {
 	/**
 	 * 分页查询
 	 *
-	 * @param specName 名称
-	 * @param page     分页参数
-	 * @return 数据
+	 * @param specificationPageQuery 查询条件
+	 * @return 分页数据
 	 * @since 2022-04-06 16:10:19
 	 */
-	IPage<Specification> getPage(String specName, PageParam page);
+	IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery);
 }

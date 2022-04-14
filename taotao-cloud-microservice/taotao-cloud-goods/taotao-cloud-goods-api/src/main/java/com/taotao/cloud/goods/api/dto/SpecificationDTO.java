@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.api.vo;
+package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -16,12 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "参数组关联的参数集合")
-public class SpecificationVO implements Serializable {
+public class SpecificationDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4433579132929428572L;
-
-	private Long id;
 
 	@Schema(description = "规格名称")
 	private String specName;

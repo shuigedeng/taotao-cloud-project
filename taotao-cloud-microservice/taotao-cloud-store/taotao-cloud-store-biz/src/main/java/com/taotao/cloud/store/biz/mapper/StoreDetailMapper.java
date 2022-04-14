@@ -9,6 +9,7 @@ import com.taotao.cloud.store.api.vo.StoreDetailVO;
 import com.taotao.cloud.store.api.vo.StoreOtherVO;
 import com.taotao.cloud.store.biz.entity.StoreDetail;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -90,5 +91,5 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	 * @return 店铺营业执照
 	 */
 	@Select("SELECT * FROM li_store_detail WHERE store_id=#{storeId}")
-	StoreOtherVO getLicencePhoto(String storeId);
+	StoreOtherVO getLicencePhoto(@Param("storeId") String storeId);
 }

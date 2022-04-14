@@ -8,6 +8,7 @@ import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -43,17 +44,17 @@ public class CategoryStoreController {
 	/**
 	 * 店铺详情服务
 	 */
-	private final StoreDetailService storeDetailService;
+	private final IFeignStoreDetailService storeDetailService;
 
 	@Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类", method = CommonConstant.GET)
 	@RequestLogger("获取店铺经营的分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<CategoryVO>> getListAll() {
-		String storeId = Objects.requireNonNull(SecurityUtil.getUser()).getStoreId();
+		Long storeId = SecurityUtil.getUser().getStoreId();
 		//获取店铺经营范围
-		String goodsManagementCategory = storeDetailService.getStoreDetail(storeId).getGoodsManagementCategory();
-		String goodsManagementCategory = "";
+		String goodsManagementCategory = storeDetailService.getStoreDetailVO(storeId).data()
+			.getGoodsManagementCategory();
 		return Result.success(
 			this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
 	}

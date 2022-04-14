@@ -7,6 +7,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.api.vo.GoodsUnitVO;
 import com.taotao.cloud.goods.biz.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.GoodsUnitService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -21,7 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 店铺端,商品计量单位接口
+ * 店铺端-商品计量单位接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 21:05:11
  */
 @AllArgsConstructor
 @Validated
@@ -39,9 +44,9 @@ public class GoodsUnitStoreController {
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<GoodsUnit>> getByPage(PageParam pageParam) {
+	public Result<PageModel<GoodsUnitVO>> getByPage(PageParam pageParam) {
 		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
-		return Result.success(PageModel.convertMybatisPage(page,GoodsUnit.class));
+		return Result.success(PageModel.convertMybatisPage(page,GoodsUnitVO.class));
 	}
 
 }

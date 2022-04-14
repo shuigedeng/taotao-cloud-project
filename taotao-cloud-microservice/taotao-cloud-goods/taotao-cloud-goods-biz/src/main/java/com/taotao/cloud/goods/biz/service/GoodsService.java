@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.biz.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
@@ -75,7 +76,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsPageQuery 查询参数
 	 * @return 商品分页
 	 */
-	PageModel<GoodsBaseVO> queryByParams(GoodsPageQuery goodsPageQuery);
+	IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery);
 
 	/**
 	 * 商品查询

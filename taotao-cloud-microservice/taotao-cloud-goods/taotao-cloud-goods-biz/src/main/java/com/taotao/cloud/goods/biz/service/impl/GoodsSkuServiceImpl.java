@@ -425,10 +425,9 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	}
 
 	@Override
-	public PageModel<GoodsSkuBaseVO> getGoodsSkuByPage(GoodsPageQuery searchParams) {
-		IPage<GoodsSku> goodsSkuPage = this.page(searchParams.buildMpPage(),
+	public IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams) {
+		return this.page(searchParams.buildMpPage(),
 			searchParams.queryWrapper());
-		return PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class);
 	}
 
 	@Override

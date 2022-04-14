@@ -15,12 +15,11 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.ParametersDTO;
-import com.taotao.cloud.goods.api.vo.BrandVO;
-import com.taotao.cloud.goods.api.vo.ParametersVO;
-import com.taotao.cloud.goods.biz.entity.Brand;
-import com.taotao.cloud.goods.biz.entity.Parameters;
+import com.taotao.cloud.goods.api.dto.SpecificationDTO;
+import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.SpecificationVO;
+import com.taotao.cloud.goods.biz.entity.Category;
+import com.taotao.cloud.goods.biz.entity.Specification;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -28,7 +27,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * IParametersMapStruct
+ * ISpecificationMapStruct
  *
  * @author shuigedeng
  * @version 2022.03
@@ -37,13 +36,13 @@ import org.mapstruct.factory.Mappers;
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IParametersMapStruct {
+public interface ISpecificationMapStruct {
 
-	IParametersMapStruct INSTANCE = Mappers.getMapper(IParametersMapStruct.class);
+	ISpecificationMapStruct INSTANCE = Mappers.getMapper(ISpecificationMapStruct.class);
 
-	List<ParametersVO> parametersToParametersVOs(List<Parameters> parameters);
+	List<SpecificationVO> specificationsToSpecificationVOs(List<Specification> specifications);
+	Specification specificationDTOToSpecification(SpecificationDTO specificationDTO);
 
-	Parameters parametersDTOToParameters(ParametersDTO parametersDTO);
 
 
 }

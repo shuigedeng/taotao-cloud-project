@@ -20,11 +20,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreGoodsLabelVO implements Serializable {
+public class StoreGoodsLabelInfoVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
-
 
 	@Schema(description = "店铺商品分类ID")
 	private Long id;
@@ -38,13 +37,9 @@ public class StoreGoodsLabelVO implements Serializable {
 	@Schema(description = "店铺商品分类排序")
 	private Integer sortOrder;
 
-	@Schema(description = "下级分类列表")
-	private List<StoreGoodsLabelVO> children;
+	@Schema(description = "父id, 根节点为0")
+	private Long parentId;
 
-	public StoreGoodsLabelVO(Long id, String labelName, Integer level, Integer sortOrder) {
-		this.id = id;
-		this.labelName = labelName;
-		this.level = level;
-		this.sortOrder = sortOrder;
-	}
+	@Schema(description = "店铺ID")
+	private Long storeId;
 }

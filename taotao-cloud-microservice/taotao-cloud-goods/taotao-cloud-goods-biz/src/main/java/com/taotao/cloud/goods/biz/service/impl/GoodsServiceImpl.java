@@ -179,6 +179,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	public Boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId) {
 		Goods goods = new Goods(goodsOperationDTO);
 		goods.setId(goodsId);
+
 		//检查商品信息
 		this.checkGoods(goods);
 		//向goods加入图片
@@ -249,10 +250,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public PageModel<GoodsBaseVO> queryByParams(GoodsPageQuery goodsPageQuery) {
-		IPage<Goods> goodsPage = this.page(goodsPageQuery.buildMpPage(),
+	public IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery) {
+		return this.page(goodsPageQuery.buildMpPage(),
 			goodsPageQuery.queryWrapper());
-		return PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class);
 	}
 
 	@Override

@@ -2,22 +2,25 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
  * 草稿商品VO
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//public class DraftGoodsVO extends DraftGoods {
-public class DraftGoodsVO {
+public class DraftGoodsVO extends DraftGoodsBaseVO{
 
+	@Serial
 	private static final long serialVersionUID = 6377623919990713567L;
 
 	@Schema(description = "分类名称")

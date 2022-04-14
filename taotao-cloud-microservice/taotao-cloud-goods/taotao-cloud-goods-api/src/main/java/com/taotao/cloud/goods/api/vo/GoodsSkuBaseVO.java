@@ -4,6 +4,8 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,18 +14,25 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品sku基础VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 21:15:33
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "商品sku基础VO")
-public class GoodsSkuBaseVO {
+public class GoodsSkuBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1450550797436233753L;
 
 	private Long id;
 
 	@Schema(description = "商品id")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "规格信息json")
 	private String specs;
@@ -32,7 +41,7 @@ public class GoodsSkuBaseVO {
 	private String simpleSpecs;
 
 	@Schema(description = "配送模版id")
-	private String freightTemplateId;
+	private Long freightTemplateId;
 
 	@Schema(description = "是否是促销商品")
 	private Boolean isPromotion;
@@ -47,7 +56,7 @@ public class GoodsSkuBaseVO {
 	private String sn;
 
 	@Schema(description = "品牌id")
-	private String brandId;
+	private Long brandId;
 
 	@Schema(description = "分类path")
 	private String categoryPath;
@@ -107,7 +116,7 @@ public class GoodsSkuBaseVO {
 	private Integer commentNum;
 
 	@Schema(description = "卖家id")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "卖家名字")
 	private String storeName;

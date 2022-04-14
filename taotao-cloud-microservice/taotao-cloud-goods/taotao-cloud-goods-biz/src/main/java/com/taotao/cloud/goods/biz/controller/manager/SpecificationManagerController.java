@@ -11,8 +11,10 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.disruptor.util.StringUtils;
+import com.taotao.cloud.goods.api.dto.SpecificationPageQuery;
 import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
+import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
 import com.taotao.cloud.goods.biz.service.SpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,23 +54,26 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
 	public Result<List<SpecificationVO>> getAll() {
-		List<Specification> list = specificationService.list();
-		return Result.success(BeanUtil.copy(list, SpecificationVO.class));
+		List<Specification> specifications = specificationService.list();
+		return Result.success(ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(specifications));
 	}
 
 	@Operation(summary = "搜索规格", description = "搜索规格", method = CommonConstant.GET)
 	@RequestLogger("搜索规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<SpecificationVO>> page(String specName, PageParam page) {
-		return Result.success(specificationService.getPage(specName, page));
+	public Result<PageModel<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
+		IPage<Specification> specificationPage = specificationService.getPage(specificationPageQuery);
+		return Result.success(PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
 	@Operation(summary = "保存规格", description = "保存规格", method = CommonConstant.POST)
 	@RequestLogger("保存规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> save(@Valid @RequestBody Specification specification) {
+	public Result<Boolean> save(@Valid @RequestBody SpecificationDTO specificationDTO) {
+		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(
+			specificationDTO);
 		return Result.success(specificationService.save(specification));
 	}
 
@@ -76,9 +81,12 @@ public class SpecificationManagerController {
 	@RequestLogger("更改规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@Valid @RequestBody Specification specification,
+	public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
 		@PathVariable Long id) {
+		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(
+			specificationDTO);
 		specification.setId(id);
+
 		return Result.success(specificationService.saveOrUpdate(specification));
 	}
 

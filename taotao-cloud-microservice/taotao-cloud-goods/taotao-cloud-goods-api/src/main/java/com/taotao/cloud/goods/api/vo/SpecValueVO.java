@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SpecValueVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4433579132929428572L;
 
 	@Schema(description = "规格项名字")
