@@ -5,6 +5,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
@@ -40,9 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "买家端-订单API", description = "买家端-订单API")
 @RequestMapping("/order/buyer/order")
 public class OrderController {
-
 	private final OrderService orderService;
-
 	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表", method = CommonConstant.GET)
 	@RequestLogger("查询会员订单列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
@@ -68,7 +67,7 @@ public class OrderController {
 	@RequestLogger("确认收货")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/receiving")
-	public Result<Object> receiving(
+	public Result<Boolean> receiving(
 		@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
 		Order order = orderService.getBySn(orderSn);
 		if (order == null) {
@@ -79,27 +78,27 @@ public class OrderController {
 			throw new BusinessException(ResultEnum.ORDER_DELIVERED_ERROR);
 		}
 		orderService.complete(orderSn);
-		return Result.success();
+		return Result.success(true);
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
 	@RequestLogger("取消订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
-	public Result<Object> cancel(@PathVariable String orderSn,
+	public Result<Boolean> cancel(@PathVariable String orderSn,
 		@RequestParam String reason) {
 		orderService.cancel(orderSn, reason);
-		return Result.success();
+		return Result.success(true);
 	}
 
 	@Operation(summary = "删除订单", description = "删除订单", method = CommonConstant.DELETE)
 	@RequestLogger("删除订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{orderSn}")
-	public Result<Object> deleteOrder(@PathVariable String orderSn) {
+	public Result<Boolean> deleteOrder(@PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		orderService.deleteOrder(orderSn);
-		return Result.success();
+		return Result.success(true);
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)

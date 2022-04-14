@@ -1,5 +1,8 @@
 package com.taotao.cloud.order.api.vo.order;
 
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;

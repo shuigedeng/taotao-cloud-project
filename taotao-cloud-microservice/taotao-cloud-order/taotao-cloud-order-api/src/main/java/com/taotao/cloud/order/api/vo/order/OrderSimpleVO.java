@@ -73,51 +73,51 @@ public class OrderSimpleVO {
 	 */
 	private List<OrderItemVO> orderItems;
 
-	@ApiModelProperty(hidden = true, value = "item goods_id")
+	@Schema(hidden = true, description = "item goods_id")
 	@Setter
 	private String groupGoodsId;
 
-	@ApiModelProperty(hidden = true, value = "item sku id")
+	@Schema(hidden = true, description = "item sku id")
 	@Setter
 	private String groupSkuId;
 
-	@ApiModelProperty(hidden = true, value = "item 数量")
+	@Schema(hidden = true, description = "item 数量")
 	@Setter
 	private String groupNum;
 
-	@ApiModelProperty(hidden = true, value = "item 图片")
+	@Schema(hidden = true, description = "item 图片")
 	@Setter
 	private String groupImages;
 
-	@ApiModelProperty(hidden = true, value = "item 名字")
+	@Schema(hidden = true, description = "item 名字")
 	@Setter
 	private String groupName;
 
-	@ApiModelProperty(hidden = true, value = "item 编号")
+	@Schema(hidden = true, description = "item 编号")
 	@Setter
 	private String groupOrderItemsSn;
 
-	@ApiModelProperty(hidden = true, value = "item 商品价格")
+	@Schema(hidden = true, description = "item 商品价格")
 	@Setter
 	private String groupGoodsPrice;
 	/**
 	 * @see OrderItemAfterSaleStatusEnum
 	 */
-	@ApiModelProperty(hidden = true, value = "item 售后状态", allowableValues = "NOT_APPLIED(未申请),ALREADY_APPLIED(已申请),EXPIRED(已失效不允许申请售后)")
+	@Schema(hidden = true, description = "item 售后状态", allowableValues = "NOT_APPLIED(未申请),ALREADY_APPLIED(已申请),EXPIRED(已失效不允许申请售后)")
 	@Setter
 	private String groupAfterSaleStatus;
 
 	/**
 	 * @see OrderComplaintStatusEnum
 	 */
-	@ApiModelProperty(hidden = true, value = "item 投诉状态")
+	@Schema(hidden = true, description = "item 投诉状态")
 	@Setter
 	private String groupComplainStatus;
 
 	/**
 	 * @see CommentStatusEnum
 	 */
-	@ApiModelProperty(hidden = true, value = "item 评价状态")
+	@Schema(hidden = true, description = "item 评价状态")
 	@Setter
 	private String groupCommentStatus;
 
@@ -154,7 +154,7 @@ public class OrderSimpleVO {
 			orderItemVOS.add(
 				new OrderItemVO(orderItemsSn[i], goodsId[i], skuId[i], num[i], image[i], name[i],
 					afterSaleStatus[i], complainStatus[i], commentStatus[i],
-					BigDecimal.parseBigDecimal(goodsPrice[i])));
+					BigDecimal.parseBigDecimal()));
 		}
 		return orderItemVOS;
 

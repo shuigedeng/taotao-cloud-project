@@ -21,6 +21,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -40,7 +41,6 @@ import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.PaymentLog;
-import com.taotao.cloud.order.biz.aop.OrderLogPoint;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
@@ -61,6 +61,7 @@ import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
+import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
 import com.taotao.cloud.stream.framework.trigger.message.PintuanOrderMessage;
 import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
@@ -74,19 +75,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.terracotta.quartz.collections.TimeTrigger;
 import zipkin2.storage.Traces;
 
 /**
@@ -139,11 +135,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	 * 拼团
 	 */
 	private final IFeignPintuanService pintuanService;
-
+	/**
+	 * 交易服务
+	 */
 	private final TradeService tradeService;
 
 	@Override
-	public void intoDB(TradeDTO tradeDTO) {
+	public Boolean intoDB(TradeDTO tradeDTO) {
 		//检查TradeDTO信息
 		checkTradeDTO(tradeDTO);
 		//存放购物车，即业务中的订单
@@ -151,9 +149,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		//存放自订单/订单日志
 		List<OrderItem> orderItems = new ArrayList<>();
 		List<OrderLog> orderLogs = new ArrayList<>();
-
 		//订单集合
 		List<OrderVO> orderVOS = new ArrayList<>();
+
 		//循环购物车
 		tradeDTO.getCartList().forEach(item -> {
 			Order order = new Order(item, tradeDTO);
@@ -164,9 +162,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 			orders.add(order);
 			String message = "订单[" + item.getSn() + "]创建";
 			//记录日志
-			orderLogs.add(new OrderLog(item.getSn(), UserContext.getCurrentUser().getId(),
-				UserContext.getCurrentUser().getRole().getRole(),
-				UserContext.getCurrentUser().getUsername(), message));
+			orderLogs.add(new OrderLog(item.getSn(), SecurityUtil.getUserId(),
+				SecurityUtil.getUser().getType(),
+				SecurityUtil.getUsername(), message));
 			item.getCheckedSkuList().forEach(
 				sku -> orderItems.add(new OrderItem(sku, item, tradeDTO))
 			);
@@ -182,6 +180,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		orderItemService.saveBatch(orderItems);
 		//批量记录订单操作日志
 		orderLogService.saveBatch(orderLogs);
+		return true;
 	}
 
 	@Override
@@ -222,7 +221,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	}
 
 	@Override
-	public List<Order> queryListByPromotion(String pintuanId) {
+	public List<Order> queryListByPromotion(Long pintuanId) {
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(Order::getOrderPromotionType, PromotionTypeEnum.PINTUAN.name());
 		queryWrapper.eq(Order::getPromotionId, pintuanId);
@@ -373,7 +372,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']发货，发货单号['+#logisticsNo+']'", orderSn = "#orderSn")
-	public Order delivery(String orderSn, String logisticsNo, String logisticsId) {
+	public Order delivery(String orderSn, String logisticsNo, Long logisticsId) {
 		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
 		//如果订单未发货，并且订单状态值等于待发货
 		if (order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
@@ -387,7 +386,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 			order.setLogisticsCode(logistics.getId());
 			order.setLogisticsName(logistics.getName());
 			order.setLogisticsNo(logisticsNo);
-			order.setLogisticsTime(new Date());
+			order.setLogisticsTime(LocalDateTime.now());
 			order.setDeliverStatus(DeliverStatusEnum.DELIVERED.name());
 			this.updateById(order);
 			//修改订单状态为已发送
@@ -535,7 +534,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	}
 
 	@Override
-	public void agglomeratePintuanOrder(String pintuanId, String parentOrderSn) {
+	public void agglomeratePintuanOrder(Long pintuanId, String parentOrderSn) {
 		//获取拼团配置
 		Pintuan pintuan = pintuanService.getById(pintuanId);
 		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
@@ -584,7 +583,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 	@Override
 	public void batchDeliver(MultipartFile files) {
-
 		InputStream inputStream = null;
 		List<OrderBatchDeliverDTO> orderBatchDeliverDTOList = new ArrayList<>();
 		try {
@@ -640,7 +638,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
 			//查看订单号是否存在-是否是当前店铺的订单
 			Order order = this.getOne(new LambdaQueryWrapper<Order>()
-				.eq(Order::getStoreId, UserContext.getCurrentUser().getStoreId())
+				.eq(Order::getStoreId, SecurityUtil.getUser().getStoreId())
 				.eq(Order::getSn, orderBatchDeliverDTO.getOrderSn()));
 			if (order == null) {
 				throw new BusinessException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
@@ -654,7 +652,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 					orderBatchDeliverDTO.setLogisticsId(item.getId());
 				}
 			});
-			if (StringUtils.isEmpty(orderBatchDeliverDTO.getLogisticsId())) {
+			if (StringUtil.isEmpty(orderBatchDeliverDTO.getLogisticsId())) {
 				throw new BusinessException(
 					"物流公司：'" + orderBatchDeliverDTO.getLogisticsName() + " '不存在");
 			}
@@ -783,7 +781,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		if (tradeDTO.getParentOrderSn() != null) {
 			//判断用户不能参与自己发起的拼团活动
 			Order parentOrder = this.getBySn(tradeDTO.getParentOrderSn());
-			if (parentOrder.getMemberId().equals(UserContext.getCurrentUser().getId())) {
+			if (parentOrder.getMemberId().equals(SecurityUtil.getUserId())) {
 				throw new BusinessException(ResultEnum.PINTUAN_JOIN_ERROR);
 			}
 		}
