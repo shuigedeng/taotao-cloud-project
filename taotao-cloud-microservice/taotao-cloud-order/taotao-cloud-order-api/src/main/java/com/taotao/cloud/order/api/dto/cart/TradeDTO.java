@@ -9,6 +9,7 @@ import com.taotao.cloud.order.api.vo.cart.PriceDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import lombok.Data;
 @Schema(description = "购物车视图")
 public class TradeDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -3137165707807057810L;
 
 	@Schema(description = "sn")

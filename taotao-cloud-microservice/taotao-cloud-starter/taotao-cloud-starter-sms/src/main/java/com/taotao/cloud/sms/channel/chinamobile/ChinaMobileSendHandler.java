@@ -13,6 +13,7 @@
 package com.taotao.cloud.sms.channel.chinamobile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
@@ -113,16 +114,17 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 			}
 		}
 
-		StringBuilder receiverBuilder = new StringBuilder();
-		for (String phone : phones) {
-			if (StringUtils.isBlank(phone)) {
-				continue;
-			}
-			receiverBuilder.append(phone.trim());
-			receiverBuilder.append(",");
-		}
+		//StringBuilder receiverBuilder = new StringBuilder();
+		//for (String phone : phones) {
+		//	if (StringUtils.isBlank(phone)) {
+		//		continue;
+		//	}
+		//	receiverBuilder.append(phone.trim());
+		//	receiverBuilder.append(",");
+		//}
+		//String mobiles = receiverBuilder.substring(0, receiverBuilder.length() - 1);
 
-		String mobiles = receiverBuilder.substring(0, receiverBuilder.length() - 1);
+		String mobiles = StringUtil.join(phones, ",");
 		String paramsString = buildTemplateParas(params);
 		String body = buildRequestBody(mobiles, templateId, paramsString);
 
