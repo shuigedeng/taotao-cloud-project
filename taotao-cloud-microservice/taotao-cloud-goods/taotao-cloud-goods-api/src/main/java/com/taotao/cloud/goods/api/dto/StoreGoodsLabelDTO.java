@@ -1,9 +1,8 @@
-package com.taotao.cloud.goods.api.vo;
+package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,14 +19,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreGoodsLabelVO implements Serializable {
+public class StoreGoodsLabelDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
-
-
-	@Schema(description = "店铺商品分类ID")
-	private Long id;
 
 	@Schema(description = "店铺商品分类名称")
 	private String labelName;
@@ -38,13 +33,9 @@ public class StoreGoodsLabelVO implements Serializable {
 	@Schema(description = "店铺商品分类排序")
 	private Integer sortOrder;
 
-	@Schema(description = "下级分类列表")
-	private List<StoreGoodsLabelVO> children;
+	@Schema(description = "父id, 根节点为0")
+	private Long parentId;
 
-	public StoreGoodsLabelVO(Long id, String labelName, Integer level, Integer sortOrder) {
-		this.id = id;
-		this.labelName = labelName;
-		this.level = level;
-		this.sortOrder = sortOrder;
-	}
+	@Schema(description = "店铺ID")
+	private Long storeId;
 }

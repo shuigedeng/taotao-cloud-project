@@ -15,12 +15,11 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.ParametersDTO;
-import com.taotao.cloud.goods.api.vo.BrandVO;
-import com.taotao.cloud.goods.api.vo.ParametersVO;
-import com.taotao.cloud.goods.biz.entity.Brand;
-import com.taotao.cloud.goods.biz.entity.Parameters;
+import com.taotao.cloud.goods.api.dto.StoreGoodsLabelDTO;
+import com.taotao.cloud.goods.api.vo.SpecificationVO;
+import com.taotao.cloud.goods.api.vo.StoreGoodsLabelInfoVO;
+import com.taotao.cloud.goods.biz.entity.Specification;
+import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -28,7 +27,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * IParametersMapStruct
+ * IGoodsLabelStoreMapStruct
  *
  * @author shuigedeng
  * @version 2022.03
@@ -37,13 +36,11 @@ import org.mapstruct.factory.Mappers;
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IParametersMapStruct {
+public interface IGoodsLabelStoreMapStruct {
 
-	IParametersMapStruct INSTANCE = Mappers.getMapper(IParametersMapStruct.class);
+	IGoodsLabelStoreMapStruct INSTANCE = Mappers.getMapper(IGoodsLabelStoreMapStruct.class);
 
-	List<ParametersVO> parametersToParametersVOs(List<Parameters> parameters);
-
-	Parameters parametersDTOToParameters(ParametersDTO parametersDTO);
-
+	StoreGoodsLabelInfoVO storeGoodsLabelToStoreGoodsLabelInfoVO(StoreGoodsLabel storeGoodsLabel);
+	StoreGoodsLabel storeGoodsLabelDTOToStoreGoodsLabel(StoreGoodsLabelDTO storeGoodsLabelDTO);
 
 }

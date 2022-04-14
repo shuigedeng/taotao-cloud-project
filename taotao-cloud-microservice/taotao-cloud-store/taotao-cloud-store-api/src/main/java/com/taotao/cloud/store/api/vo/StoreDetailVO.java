@@ -1,27 +1,26 @@
 package com.taotao.cloud.store.api.vo;
 
-import com.taotao.cloud.store.api.dto.StoreEditDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * 店铺详细VO
  *
- * 
- * @since 2020-03-09 21:53:20
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 21:25:08
  */
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺详细VO")
-public class StoreDetailVO extends StoreEditDTO {
+public class StoreDetailVO extends StoreDetailBaseVO {
 
 	@Schema(description = "会员名称")
 	private String memberName;

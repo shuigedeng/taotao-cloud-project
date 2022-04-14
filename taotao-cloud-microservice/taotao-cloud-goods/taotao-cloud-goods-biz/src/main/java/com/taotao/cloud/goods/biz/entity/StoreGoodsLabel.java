@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,10 +16,12 @@ import lombok.Setter;
 /**
  * 店铺商品分类表
  *
- * @since 2020-02-18 15:18:56
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 21:50:58
  */
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

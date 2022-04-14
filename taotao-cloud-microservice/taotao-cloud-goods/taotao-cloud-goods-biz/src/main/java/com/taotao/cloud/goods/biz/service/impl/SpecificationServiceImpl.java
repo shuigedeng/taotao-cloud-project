@@ -9,6 +9,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.disruptor.util.StringUtils;
+import com.taotao.cloud.goods.api.dto.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.mapper.SpecificationMapper;
@@ -57,11 +58,11 @@ public class SpecificationServiceImpl extends
 	}
 
 	@Override
-	public IPage<Specification> getPage(String specName, PageParam page) {
+	public IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery) {
 		LambdaQueryWrapper<Specification> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.like(StringUtils.isNotEmpty(specName), Specification::getSpecName,
-			specName);
-		return page(page.buildMpPage(), lambdaQueryWrapper);
+		lambdaQueryWrapper.like(StringUtils.isNotEmpty(specificationPageQuery.getSpecName()), Specification::getSpecName,
+			specificationPageQuery.getSpecName());
+		return this.page(specificationPageQuery.buildMpPage(), lambdaQueryWrapper);
 	}
 
 }

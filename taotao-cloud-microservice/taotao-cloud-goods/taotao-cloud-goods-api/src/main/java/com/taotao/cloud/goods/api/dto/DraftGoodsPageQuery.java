@@ -7,15 +7,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * 草稿商品搜索对象
- **/
-@Setter
-@Getter
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 22:07:42
+ */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

@@ -70,5 +70,4 @@ public interface BrandService extends IService<Brand> {
 	 */
 	List<Brand> getAllAvailable();
 
-
 }

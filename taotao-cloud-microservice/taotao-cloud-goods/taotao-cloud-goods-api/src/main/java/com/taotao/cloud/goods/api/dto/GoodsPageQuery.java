@@ -9,17 +9,24 @@ import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.util.Arrays;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 商品查询条件
+ * 商品查询参数
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 21:11:30
  */
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +36,7 @@ public class GoodsPageQuery extends PageParam {
 	private static final long serialVersionUID = 2544015852728566887L;
 
 	@Schema(description = "商品编号")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
@@ -38,7 +45,7 @@ public class GoodsPageQuery extends PageParam {
 	private String id;
 
 	@Schema(description = "商家ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "卖家名字")
 	private String storeName;
@@ -84,7 +91,7 @@ public class GoodsPageQuery extends PageParam {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (CharSequenceUtil.isNotEmpty(goodsId)) {
+		if (Objects.nonNull(goodsId)) {
 			queryWrapper.eq("goods_id", goodsId);
 		}
 		if (CharSequenceUtil.isNotEmpty(goodsName)) {
@@ -93,7 +100,7 @@ public class GoodsPageQuery extends PageParam {
 		if (CharSequenceUtil.isNotEmpty(id)) {
 			queryWrapper.in("id", Arrays.asList(id.split(",")));
 		}
-		if (CharSequenceUtil.isNotEmpty(storeId)) {
+		if (Objects.nonNull(storeId)) {
 			queryWrapper.eq("store_id", storeId);
 		}
 		if (CharSequenceUtil.isNotEmpty(storeName)) {

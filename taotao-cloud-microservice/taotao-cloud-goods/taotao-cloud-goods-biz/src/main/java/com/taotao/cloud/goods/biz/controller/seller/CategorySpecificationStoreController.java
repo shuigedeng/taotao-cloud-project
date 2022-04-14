@@ -2,7 +2,9 @@ package com.taotao.cloud.goods.biz.controller.seller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
+import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
 import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,8 +38,11 @@ public class CategorySpecificationStoreController {
 	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
-	public Result<List<Specification>> getCategorySpec(@PathVariable("categoryId") Long categoryId) {
-		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
+	public Result<List<SpecificationVO>> getCategorySpec(@PathVariable("categoryId") Long categoryId) {
+		List<Specification> categorySpecList = categorySpecificationService.getCategorySpecList(
+			categoryId);
+
+		return Result.success(ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(categorySpecList));
 	}
 
 

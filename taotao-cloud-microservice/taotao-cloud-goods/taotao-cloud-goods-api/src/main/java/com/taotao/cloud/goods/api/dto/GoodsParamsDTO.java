@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品关联参数
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 21:36:45
  */
 @Data
 @Builder

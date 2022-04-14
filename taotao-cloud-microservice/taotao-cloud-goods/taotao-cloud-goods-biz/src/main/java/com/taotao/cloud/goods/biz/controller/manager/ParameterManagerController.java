@@ -2,7 +2,9 @@ package com.taotao.cloud.goods.biz.controller.manager;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.api.dto.ParametersDTO;
 import com.taotao.cloud.goods.biz.entity.Parameters;
+import com.taotao.cloud.goods.biz.mapstruct.IParametersMapStruct;
 import com.taotao.cloud.goods.biz.service.ParametersService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,20 +40,25 @@ public class ParameterManagerController {
 	@RequestLogger("添加参数添加参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> save(@Validated @RequestBody Parameters parameters) {
+	public Result<Boolean> save(@Validated @RequestBody ParametersDTO parametersDTO) {
+		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
+			parametersDTO);
 		return Result.success(parametersService.save(parameters));
 	}
 
 	@Operation(summary = "编辑参数", description = "编辑参数", method = CommonConstant.PUT)
 	@RequestLogger("编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping
-	public Result<Boolean> update(@Validated @RequestBody Parameters parameters) {
+	@PutMapping("/{id}")
+	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO, @PathVariable Long id) {
+		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
+			parametersDTO);
+		parameters.setId(id);
 		return Result.success(parametersService.updateParameter(parameters));
 	}
 
-	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息", method = CommonConstant.DELETE)
-	@RequestLogger("根据id查询物流公司信息")
+	@Operation(summary = "根据id删除参数", description = "根据id删除参数", method = CommonConstant.DELETE)
+	@RequestLogger("根据id删除参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delById(@PathVariable Long id) {
