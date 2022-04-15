@@ -4,8 +4,10 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
+import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -53,8 +55,9 @@ public class CategoryManagerController {
 	@RequestLogger("查询某分类下的全部子分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}/children/all")
-	public Result<List<Category>> list(@PathVariable Long parentId) {
-		return Result.success(this.categoryService.dbList(parentId));
+	public Result<List<CategoryBaseVO>> list(@PathVariable Long parentId) {
+		List<Category> categories = this.categoryService.dbList(parentId);
+		return Result.success(ICategoryMapStruct.INSTANCE.categorysToCategoryBaseVOs(categories));
 	}
 
 	@Operation(summary = "查询全部分类列表", description = "查询全部分类列表", method = CommonConstant.GET)
@@ -71,7 +74,7 @@ public class CategoryManagerController {
 	@PostMapping
 	public Result<Boolean> saveCategory(@Validated @RequestBody Category category) {
 		//非顶级分类
-		if (category.getParentId() != null && !"0".equals(category.getParentId())) {
+		if (category.getParentId() != null && !Long.valueOf(0).equals(category.getParentId())) {
 			Category parent = categoryService.getById(category.getParentId());
 			if (parent == null) {
 				throw new BusinessException(ResultEnum.CATEGORY_PARENT_NOT_EXIST);
@@ -87,7 +90,7 @@ public class CategoryManagerController {
 	@RequestLogger("修改商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<Boolean> updateCategory(@Valid CategoryVO category) {
+	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryVO category) {
 		Category catTemp = categoryService.getById(category.getId());
 		if (catTemp == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

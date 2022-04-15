@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
+import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.api.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
@@ -23,6 +24,8 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * ICategoryMapStruct
@@ -39,6 +42,7 @@ public interface ICategoryMapStruct {
 	ICategoryMapStruct INSTANCE = Mappers.getMapper(ICategoryMapStruct.class);
 
 	CategoryVO categoryToCategoryVO(Category category);
+	List<CategoryBaseVO> categorysToCategoryBaseVOs(List<Category> categorys);
 
 
 }
