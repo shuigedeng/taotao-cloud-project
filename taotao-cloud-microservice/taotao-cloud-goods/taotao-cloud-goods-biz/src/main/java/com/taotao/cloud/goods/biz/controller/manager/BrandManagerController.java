@@ -93,8 +93,7 @@ public class BrandManagerController {
 	@RequestLogger("后台禁用品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{brandId}")
-	public Result<Object> disable(@PathVariable Long brandId,
-		@RequestParam Boolean disable) {
+	public Result<Boolean> disable(@PathVariable Long brandId, @RequestParam Boolean disable) {
 			return Result.success(brandService.brandDisable(brandId, disable));
 	}
 
@@ -102,7 +101,7 @@ public class BrandManagerController {
 	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
-	public Result<Object> delAllByIds(@PathVariable List<Long> ids) {
+	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
 		brandService.deleteBrands(ids);
 		return Result.success(ResultEnum.SUCCESS);
 	}

@@ -153,7 +153,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 				categoryVOList.add(categoryVO);
 			}
 		}
-		//categoryVOList.sort(Comparator.comparing(Category::getSortOrder));
+		categoryVOList.sort(Comparator.comparing(CategoryVO::getSortOrder));
 		return categoryVOList;
 	}
 
