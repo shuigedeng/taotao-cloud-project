@@ -19,11 +19,10 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = QuartzJob.TABLE_NAME)
 @TableName(QuartzJob.TABLE_NAME)

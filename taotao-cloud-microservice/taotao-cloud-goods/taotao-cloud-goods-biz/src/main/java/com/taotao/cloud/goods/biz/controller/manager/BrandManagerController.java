@@ -102,8 +102,7 @@ public class BrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
 	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
-		brandService.deleteBrands(ids);
-		return Result.success(ResultEnum.SUCCESS);
+		return Result.success(brandService.deleteBrands(ids));
 	}
 
 }

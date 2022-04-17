@@ -37,8 +37,6 @@ public interface DeptMapStruct {
 
 	DeptMapStruct INSTANCE = Mappers.getMapper(DeptMapStruct.class);
 
-
 	List<DeptTreeVO> deptListToVoList(List<Dept> deptList);
-
 
 }

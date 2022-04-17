@@ -30,11 +30,10 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:52:30
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = Region.TABLE_NAME)
 @TableName(Region.TABLE_NAME)

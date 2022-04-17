@@ -44,21 +44,24 @@ public class TreeNode implements INode {
 	/**
 	 * 子孙节点
 	 */
-	protected List<INode> children = new ArrayList<>();
+	protected List<? extends INode> children = new ArrayList<>();
 
 	/**
 	 * 是否有子孙节点
 	 */
 	private Boolean hasChildren = false;
 
+	private Integer sort = 0;
+
 	public TreeNode() {
 	}
 
-	public TreeNode(Long id, Long parentId, List<INode> children, Boolean hasChildren) {
+	public TreeNode(Long id, Long parentId, List<INode> children, Boolean hasChildren, Integer sort) {
 		this.id = id;
 		this.parentId = parentId;
 		this.children = children;
 		this.hasChildren = hasChildren;
+		this.sort = sort;
 	}
 
 	@Override
@@ -113,21 +116,28 @@ public class TreeNode implements INode {
 		return parentId;
 	}
 
-
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
 	@Override
-	public List<INode> getChildren() {
+	public List<? extends INode> getChildren() {
 		return children;
 	}
 
-	public void setChildren(List<INode> children) {
+	public void setChildren(List<? extends INode> children) {
 		this.children = children;
 	}
 
 	public void setHasChildren(Boolean hasChildren) {
 		this.hasChildren = hasChildren;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = Objects.isNull(sort)? 0: sort;
 	}
 }

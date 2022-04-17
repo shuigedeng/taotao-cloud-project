@@ -22,6 +22,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,11 +35,10 @@ import lombok.Setter;
  * @version 2021.10
  * @since 2021-10-09 21:07:31
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = RoleMenu.TABLE_NAME)
 @TableName(RoleMenu.TABLE_NAME)

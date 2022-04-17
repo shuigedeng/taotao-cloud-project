@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.logger.properties;
 
-import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 

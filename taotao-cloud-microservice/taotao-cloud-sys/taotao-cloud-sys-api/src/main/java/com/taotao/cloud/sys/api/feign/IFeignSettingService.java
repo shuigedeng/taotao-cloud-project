@@ -29,5 +29,6 @@ public interface IFeignSettingService {
 	@GetMapping("/sys/tools/setting")
 	Result<SettingVO> get(@RequestParam(value = "key") String key);
 
+	@GetMapping("/sys/tools/setting/goods")
 	Result<GoodsSettingVO> getGoodsSetting(String name);
 }

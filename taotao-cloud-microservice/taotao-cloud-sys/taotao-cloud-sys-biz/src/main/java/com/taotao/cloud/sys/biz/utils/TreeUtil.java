@@ -16,14 +16,17 @@
 package com.taotao.cloud.sys.biz.utils;
 
 import com.taotao.cloud.common.tree.TreeNode;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.system.Menu;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * TreeUtil
@@ -114,7 +117,6 @@ public class TreeUtil {
 			node = MenuTreeVO.builder()
 				.name(menu.name())
 				.type(menu.type())
-				.sort(menu.sortNum())
 				.keepAlive(menu.keepAlive())
 				.path(menu.path())
 				.perms(menu.perms())
@@ -125,7 +127,7 @@ public class TreeUtil {
 			node.setParentId(menu.parentId());
 			node.setChildren(new ArrayList<>());
 			node.setHasChildren(false);
-
+			node.setSort(menu.sortNum());
 			trees.add(node);
 		}
 		return TreeUtil.build(trees, parentId);
@@ -139,34 +141,57 @@ public class TreeUtil {
 	 * @since 2020/10/21 11:23
 	 */
 	public static List<MenuTreeVO> buildTree(List<Menu> menus) {
-		List<MenuTreeVO> trees = new ArrayList<>();
-		menus.forEach(sysMenu -> {
-			MenuTreeVO tree = new MenuTreeVO();
-			BeanUtil.copyProperties(sysMenu, tree);
-			tree.setHidden("1".equals(sysMenu.getHidden()));
-			MenuMetaVO meta = new MenuMetaVO();
-			meta.setIcon(sysMenu.getIcon());
-			meta.setTitle(sysMenu.getName());
+		return menus.stream()
+			.filter(Objects::nonNull)
+			.map(sysMenu -> {
+				MenuTreeVO tree = OrikaUtil.convert(sysMenu, MenuTreeVO.class);
+				tree.setHidden(sysMenu.getHidden());
 
-			// 只有当菜单类型为目录的时候，如果是顶级，则强制修改为Layout
-			if (sysMenu.getParentId() == -1L && MenuTypeEnum.DIR.getCode()
-				.equals(sysMenu.getType())) {
-				tree.setComponent("Layout");
-				tree.setRedirect("noRedirect");
-				tree.setAlwaysShow(true);
-			}
-			tree.setMeta(meta);
+				MenuMetaVO meta = new MenuMetaVO();
+				meta.setIcon(sysMenu.getIcon());
+				meta.setTitle(sysMenu.getName());
+				tree.setMeta(meta);
 
-			if (MenuTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
-				tree.setTypeName(MenuTypeEnum.DIR.getMessage());
-			} else if (MenuTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
-				tree.setTypeName(MenuTypeEnum.MENU.getMessage());
-			} else if (MenuTypeEnum.BUTTON.getCode().equals(sysMenu.getType())) {
-				tree.setTypeName(MenuTypeEnum.BUTTON.getMessage());
-			}
-			trees.add(tree);
-		});
-		return trees;
+				// 只有当菜单类型为目录的时候，如果是顶级，则强制修改为Layout
+				if (sysMenu.getParentId() == -1L && MenuTypeEnum.DIR.getCode()
+					.equals(sysMenu.getType())) {
+					tree.setComponent("Layout");
+					tree.setRedirect("noRedirect");
+					tree.setAlwaysShow(true);
+				}
+				tree.setSort(sysMenu.getSortNum());
+
+				if (MenuTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(MenuTypeEnum.DIR.getMessage());
+				} else if (MenuTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(MenuTypeEnum.MENU.getMessage());
+				} else if (MenuTypeEnum.BUTTON.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(MenuTypeEnum.BUTTON.getMessage());
+				}
+				return tree;
+			}).toList();
+	}
+
+	/**
+	 * list转树形方法
+	 *
+	 * @param treeList treeList
+	 * @param parentId parentId
+	 * @return tree
+	 * @since 2022-04-17 10:29:02
+	 */
+	public static <E extends TreeNode> List<E> streamToTree(List<E> treeList, Long parentId) {
+		return treeList.stream()
+			.filter(Objects::nonNull)
+			// 过滤父节点
+			.filter(parent -> parent.getParentId().equals(parentId))
+			// 把父节点children递归赋值成为子节点
+			.peek(child -> {
+				List<E> list = streamToTree(treeList, child.getId());
+				list.sort(Comparator.comparing(E::getSort));
+				child.setChildren(list);
+			})
+			.collect(Collectors.toList());
 	}
 
 	//public static void main(String[] args) {

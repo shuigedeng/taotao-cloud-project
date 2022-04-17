@@ -95,10 +95,7 @@ public record BaseQuery(
 		 * 字段值
 		 */
 		@Schema(description = "字段值")
-
-		Object[] values
-	) {
-
+		Object[] values) {
 	}
 
 	@Schema(name = "EqDTO", description = "相同参数查询DTO")
@@ -114,7 +111,6 @@ public record BaseQuery(
 		 */
 		@Schema(description = "字段值")
 		Object value) {
-
 
 	}
 

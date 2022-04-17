@@ -5,14 +5,13 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintBaseVO;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationVO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
@@ -21,12 +20,9 @@ import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationServi
 import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Objects;
 import javax.validation.Valid;
 
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

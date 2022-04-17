@@ -25,6 +25,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
 import com.taotao.cloud.disruptor.util.StringUtils;
@@ -169,7 +170,7 @@ public class RegionServiceImpl extends
 		List<RegionVO> regionVOS = new ArrayList<>();
 		regions.stream().filter(region -> ("province").equals(region.getLevel())).forEach(item -> {
 			RegionVO vo = new RegionVO();
-			BeanUtil.copyProperties(item, vo);
+			OrikaUtil.copy(item, vo);
 			regionVOS.add(vo);
 		});
 
@@ -177,7 +178,7 @@ public class RegionServiceImpl extends
 			for (RegionVO region : regionVOS) {
 				if (region.getId().equals(item.getParentId())) {
 					RegionVO vo = new RegionVO();
-					BeanUtil.copyProperties(item, vo);
+					OrikaUtil.copy(item, vo);
 					region.getChildren().add(vo);
 				}
 			}

@@ -20,11 +20,10 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = ScheduledLog.TABLE_NAME)
 @TableName(ScheduledLog.TABLE_NAME)

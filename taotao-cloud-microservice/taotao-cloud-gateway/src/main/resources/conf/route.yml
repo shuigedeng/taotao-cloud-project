@@ -2,8 +2,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: taotao-cloud-stock-biz
-          uri: lb://taotao-cloud-stock-biz
+        - id: taotao-cloud-stock
+          uri: lb://taotao-cloud-stock
           metadata:
             name: 库存管理模块
           predicates:
@@ -25,8 +25,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-settlement-biz
-          uri: lb://taotao-cloud-settlement-biz
+        - id: taotao-cloud-settlement
+          uri: lb://taotao-cloud-settlement
           metadata:
             name: 售后管理模块
           predicates:
@@ -46,8 +46,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-search-biz
-          uri: lb://taotao-cloud-search-biz
+        - id: taotao-cloud-search
+          uri: lb://taotao-cloud-search
           metadata:
             name: 搜索管理模块
           predicates:
@@ -67,8 +67,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-report-biz
-          uri: lb://taotao-cloud-report-biz
+        - id: taotao-cloud-report
+          uri: lb://taotao-cloud-report
           metadata:
             name: 报表管理模块
           predicates:
@@ -88,8 +88,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-recommend-biz
-          uri: lb://taotao-cloud-recommend-biz
+        - id: taotao-cloud-recommend
+          uri: lb://taotao-cloud-recommend
           metadata:
             name: 推荐管理模块
           predicates:
@@ -109,8 +109,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-promotion-biz
-          uri: lb://taotao-cloud-promotion-biz
+        - id: taotao-cloud-promotion
+          uri: lb://taotao-cloud-promotion
           metadata:
             name: 促销管理模块
           predicates:
@@ -130,8 +130,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-payment-biz
-          uri: lb://taotao-cloud-payment-biz
+        - id: taotao-cloud-payment
+          uri: lb://taotao-cloud-payment
           metadata:
             name: 支付管理模块
           predicates:
@@ -151,8 +151,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-operation-biz
-          uri: lb://taotao-cloud-operation-biz
+        - id: taotao-cloud-operation
+          uri: lb://taotao-cloud-operation
           metadata:
             name: 运营管理模块
           predicates:
@@ -172,8 +172,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-message-biz
-          uri: lb://taotao-cloud-message-biz
+        - id: taotao-cloud-message
+          uri: lb://taotao-cloud-message
           metadata:
             name: 消息管理模块
           predicates:
@@ -193,8 +193,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-member-biz
-          uri: lb://taotao-cloud-member-biz
+        - id: taotao-cloud-member
+          uri: lb://taotao-cloud-member
           metadata:
             name: 会员管理模块
           predicates:
@@ -214,8 +214,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-distribution-biz
-          uri: lb://taotao-cloud-distribution-biz
+        - id: taotao-cloud-distribution
+          uri: lb://taotao-cloud-distribution
           metadata:
             name: 营销管理模块
           predicates:
@@ -235,8 +235,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-customer-biz
-          uri: lb://taotao-cloud-customer-biz
+        - id: taotao-cloud-customer
+          uri: lb://taotao-cloud-customer
           metadata:
             name: 客服管理模块
           predicates:
@@ -256,8 +256,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-bulletin-biz
-          uri: lb://taotao-cloud-bulletin-biz
+        - id: taotao-cloud-bulletin
+          uri: lb://taotao-cloud-bulletin
           metadata:
             name: 公告管理模块
           predicates:
@@ -310,7 +310,6 @@ spring:
             - RequestTime=true
             - PreserveHostHeader
             - SwaggerHeader
-
         - id: taotao-cloud-order
           uri: lb://taotao-cloud-order
           metadata:

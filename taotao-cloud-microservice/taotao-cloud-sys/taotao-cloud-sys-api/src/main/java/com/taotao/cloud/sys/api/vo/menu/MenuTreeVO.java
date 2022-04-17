@@ -68,9 +68,6 @@ public class MenuTreeVO extends MapperNode implements Serializable {
 	@Schema(description = "菜单标签")
 	private String label;
 
-	@Schema(description = "排序值")
-	private Integer sort;
-
 	private String component;
 
 	private Boolean hidden;

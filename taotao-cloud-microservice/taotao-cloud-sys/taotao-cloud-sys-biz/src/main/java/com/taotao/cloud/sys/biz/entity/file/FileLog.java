@@ -16,11 +16,10 @@ import javax.persistence.Table;
  * @version 2022.03
  * @since 2020/11/12 15:33
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = FileLog.TABLE_NAME)
 @TableName(FileLog.TABLE_NAME)

@@ -26,6 +26,8 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,11 +41,10 @@ import org.springframework.data.annotation.LastModifiedDate;
  * @version 2021.10
  * @since 2021-10-09 21:10:04
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)

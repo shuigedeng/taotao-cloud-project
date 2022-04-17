@@ -2,7 +2,7 @@ server:
   port: 33333
   shutdown: graceful
   http2:
-    enabled: true
+    enabled: false
   ssl:
     enabled: false
     key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks

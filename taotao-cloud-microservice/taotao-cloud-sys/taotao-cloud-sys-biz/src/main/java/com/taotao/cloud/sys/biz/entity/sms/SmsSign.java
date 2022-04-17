@@ -12,11 +12,10 @@ import javax.persistence.Table;
 /**
  * 短信签名
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = SmsSign.TABLE_NAME)
 @TableName(SmsSign.TABLE_NAME)

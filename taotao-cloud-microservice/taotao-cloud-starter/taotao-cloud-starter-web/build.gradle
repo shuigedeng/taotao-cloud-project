@@ -1,77 +1,77 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-laytpl')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-metrics')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mongodb')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pay')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pulsar')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rabbitmq')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rocketmq')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-laytpl")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-metrics")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mongodb")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pay")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pulsar")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rabbitmq")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rocketmq")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
 
-    api('org.springframework.boot:spring-boot-starter-web') {
+    api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
-    api 'org.springframework.boot:spring-boot-starter-actuator'
-    api 'org.springframework.boot:spring-boot-starter-undertow'
-    api 'org.springframework.boot:spring-boot-starter-aop'
-    api 'org.springframework.boot:spring-boot-starter-json'
-    api 'org.springframework.boot:spring-boot-starter-quartz'
+    api "org.springframework.boot:spring-boot-starter-actuator"
+    api "org.springframework.boot:spring-boot-starter-undertow"
+    api "org.springframework.boot:spring-boot-starter-aop"
+    api "org.springframework.boot:spring-boot-starter-json"
+    api "org.springframework.boot:spring-boot-starter-quartz"
     api "org.springframework.boot:spring-boot-starter-validation"
     //api "org.springframework.boot:spring-boot-devtools"
     api "org.springframework.boot:spring-boot-starter-test"
-    api 'org.springframework.boot:spring-boot-starter-mail'
+    api "org.springframework.boot:spring-boot-starter-mail"
 
-    api 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    api "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     api "org.mapstruct:mapstruct"
-    api 'cn.afterturn:easypoi-spring-boot-starter:4.4.0'
-    api 'com.github.dozermapper:dozer-spring-boot-starter:6.5.2'
+    api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
+    api "com.github.dozermapper:dozer-spring-boot-starter:6.5.2"
 
-    api('org.owasp.antisamy:antisamy:1.6.5') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.slf4j', module: 'slf4j-simple'
+    api("org.owasp.antisamy:antisamy:1.6.6.1") {
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "org.slf4j", module: "slf4j-simple"
     }
 
-    api("org.apache.poi:poi-ooxml:5.2.0") {
-        exclude group: 'org.slf4j', module: '*'
-        exclude group: 'commons-codec', module: 'commons-codec'
-        exclude group: 'org.bouncycastle', module: '*'
-        exclude group: 'com.github.virtuald', module: 'curvesapi'
-        exclude group: 'org.apache.xmlgraphics', module: 'batik-all'
+    api("org.apache.poi:poi-ooxml:5.2.2") {
+        exclude group: "org.slf4j", module: "*"
+        exclude group: "commons-codec", module: "commons-codec"
+        exclude group: "org.bouncycastle", module: "*"
+        exclude group: "com.github.virtuald", module: "curvesapi"
+        exclude group: "org.apache.xmlgraphics", module: "batik-all"
     }
-    api 'org.glassfish:javax.el:3.0.1-b08'
-    api 'com.itextpdf:itextpdf:5.5.13.3'
-    api 'com.itextpdf:itext-asian:5.2.0'
+    api "org.glassfish:javax.el:3.0.1-b08"
+    api "com.itextpdf:itextpdf:5.5.13.3"
+    api "com.itextpdf:itext-asian:5.2.0"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
@@ -79,7 +79,7 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation "junit:junit:4.13.2"
 }
 
 //configurations {

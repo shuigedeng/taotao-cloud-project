@@ -1,7 +1,7 @@
 taotao:
   cloud:
     core:
-      env: test
+      env: dev
     health:
       enabled: true
       dump:

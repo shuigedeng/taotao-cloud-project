@@ -1,17 +1,86 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api 'com.upyun:java-sdk'
-    api 'com.qiniu:qiniu-java-sdk'
-    api 'com.aliyun.oss:aliyun-sdk-oss'
-    api 'com.google.guava:guava'
-    api 'com.squareup.okhttp3:okhttp'
+    //青云
+    api 'com.yunify:qingstor.sdk.java:2.5.2'
+
+    //平安云
+    api fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
+    //api 'com.pingan.obs:fincloud-pingan-obs-java-sdk:3.9.0.1'
+
+    //UCloud
+    api 'cn.ucloud.ufile:ufile-client-java:2.6.6'
+    //网易数帆
+    api('com.netease.cloud:nos-sdk-java-publiccloud:1.3.1'){
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-core-asl'
+    }
+    //金山云
+    api('com.ksyun:ks3-kss-java-sdk:1.0.2') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+    //又拍云
+    api('com.github.tobato:fastdfs-client:1.27.2'){
+        exclude group: 'commons-beanutils', module: 'commons-beanutils'
+    }
+    api('com.upyun:java-sdk:4.2.3'){
+        exclude group: 'org.json', module: 'json'
+    }
+    //亚马逊
+    api 'software.amazon.awssdk:s3:2.17.165'
+    //京东云存储
+    api 'com.amazonaws:aws-java-sdk-s3:1.12.196'
+    //华为云存储
+    api 'com.huaweicloud:esdk-obs-java-bundle:3.22.3'
+    //腾讯云存储
+    api 'com.qcloud:cos_api:5.6.72'
+    //百度云对象存储
+    api('com.baidubce:bce-java-sdk:0.10.202'){
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: 'commons-collections', module: 'commons-collections'
+        exclude group: 'commons-httpclient', module: 'commons-httpclient'
+        exclude group: 'io.netty', module: 'netty'
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'org.apache.hadoop', module: 'hadoop-common'
+        exclude group: 'org.apache.hadoop', module: 'hadoop-yarn-common'
+        exclude group: 'org.apache.hadoop', module: 'hadoop-mapreduce-client-core'
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-core-asl'
+        exclude group: 'org.codehaus.jackson', module: 'jackson-mapper-asl'
+        exclude group: 'org.mortbay.jetty', module: 'jetty'
+        exclude group: 'org.mortbay.jetty', module: 'jetty-util'
+    }
+    //minio存储
+    api 'io.minio:minio:8.3.7'
+    api 'com.squareup.okhttp3:okhttp:4.9.3'
     api 'com.squareup.okio:okio'
-    api 'com.github.tobato:fastdfs-client'
-    api 'commons-net:commons-net'
-    api 'io.minio:minio:8.2.1'
+    api 'com.google.guava:guava'
+    //七牛云依赖
+    api 'com.qiniu:qiniu-java-sdk:7.9.5'
+    api 'com.qiniu:happy-dns-java:0.1.6'
+    //jsch依赖
+    api 'com.jcraft:jsch:0.1.55'
+    api 'commons-net:commons-net:3.8.0'
+    //阿里OSS对象存储依赖
+    api 'com.aliyun.oss:aliyun-sdk-oss:3.14.0'
+
+    api 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    //api 'com.upyun:java-sdk'
+    //api 'com.qiniu:qiniu-java-sdk'
+    //api 'com.aliyun.oss:aliyun-sdk-oss'
+    //api 'com.google.guava:guava'
+    //api 'com.squareup.okhttp3:okhttp'
+    //api 'com.squareup.okio:okio'
+    //api 'com.github.tobato:fastdfs-client'
+    //api 'commons-net:commons-net'
+    //api 'io.minio:minio:8.2.1'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+repositories {
+    mavenCentral()
 }
 
 //shadowJar {

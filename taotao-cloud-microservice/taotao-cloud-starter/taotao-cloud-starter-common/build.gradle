@@ -10,6 +10,7 @@ dependencies {
     api 'com.fasterxml.jackson.core:jackson-annotations'
     api 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
+    api 'ma.glasnost.orika:orika-core:1.5.4'
     api 'org.slf4j:slf4j-api'
     api 'javax.servlet:javax.servlet-api'
     api 'cn.hutool:hutool-all'
@@ -83,6 +84,7 @@ dependencies {
     api ('com.alibaba:easyexcel:3.0.5'){
         exclude group: 'org.projectlombok', module: 'lombok'
     }
+
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

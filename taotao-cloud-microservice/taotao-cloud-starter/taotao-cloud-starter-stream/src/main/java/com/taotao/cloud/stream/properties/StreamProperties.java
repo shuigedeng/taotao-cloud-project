@@ -30,7 +30,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class StreamProperties {
 
 
-	public static final String PREFIX = "taotao.cloud.kafka";
+	public static final String PREFIX = "taotao.cloud.stream";
 
 	private boolean enabled = false;
 
