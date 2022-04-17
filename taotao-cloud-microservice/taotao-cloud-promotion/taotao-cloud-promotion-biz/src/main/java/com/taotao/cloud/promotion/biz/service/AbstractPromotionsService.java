@@ -2,8 +2,9 @@ package com.taotao.cloud.promotion.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.promotion.api.dto.BasePromotions;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.promotion.api.vo.BasePromotionsSearchParams;
+import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 import java.util.List;
 
 /**

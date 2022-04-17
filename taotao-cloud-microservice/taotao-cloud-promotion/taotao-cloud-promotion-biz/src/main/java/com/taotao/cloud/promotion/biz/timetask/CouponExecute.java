@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.timetask.xxljob.coupon;
+package com.taotao.cloud.promotion.biz.timetask;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;

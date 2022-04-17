@@ -100,7 +100,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 		}
 
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getKeyword())) {
-			cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), searchDTO.getKeyword());
+			redisRepository.incrementScore(CachePrefix.HOT_WORD.getPrefix(), searchDTO.getKeyword());
 		}
 
 		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(searchDTO,
@@ -119,7 +119,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 		List<String> hotWords = new ArrayList<>();
 		// redis 排序中，下标从0开始，所以这里需要 -1 处理
 		count = count - 1;
-		Set<TypedTuple<Object>> set = cache.reverseRangeWithScores(
+		Set<TypedTuple<Object>> set = redisRepository.reverseRangeWithScores(
 			CachePrefix.HOT_WORD.getPrefix(), count);
 		if (set == null || set.isEmpty()) {
 			return new ArrayList<>();
@@ -132,7 +132,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 
 	@Override
 	public Boolean setHotWords(HotWordsDTO hotWords) {
-		cache.incrementScore(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
+		redisRepository.incrementScore(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
 			hotWords.getPoint());
 		return true;
 	}
@@ -144,7 +144,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	 */
 	@Override
 	public Boolean deleteHotWords(String keywords) {
-		cache.zRemove(CachePrefix.HOT_WORD.getPrefix(), keywords);
+		redisRepository.zRemove(CachePrefix.HOT_WORD.getPrefix(), keywords);
 		return true;
 	}
 
@@ -266,7 +266,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 			String brandId = brandBuckets.get(i).getKey().toString();
 			//当商品品牌id为0时，代表商品没有选择品牌，所以过滤掉品牌选择器
 			//当品牌id为空并且
-			if (brandId.equals("0") ||
+			if ("0".equals(brandId) ||
 				(CharSequenceUtil.isNotEmpty(goodsSearch.getBrandId())
 					&& Arrays.asList(goodsSearch.getBrandId().split("@")).contains(brandId))) {
 				continue;
@@ -314,7 +314,6 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 		}
 		return "";
 	}
-
 
 	/**
 	 * 将分类聚合结果转换分类选择项

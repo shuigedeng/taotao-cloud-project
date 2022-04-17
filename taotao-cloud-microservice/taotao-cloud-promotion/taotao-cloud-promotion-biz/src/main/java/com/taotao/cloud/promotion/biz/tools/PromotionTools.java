@@ -7,6 +7,12 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.biz.entity.BasePromotions;
+import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;

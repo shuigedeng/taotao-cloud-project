@@ -10,6 +10,7 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -110,9 +111,6 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
      */
     @Schema(description =  "会员优惠券状态")
     private String memberCouponStatus;
-
-    public MemberCoupon() {
-    }
 
     public MemberCoupon(Coupon coupon) {
         setCouponId(coupon.getId());

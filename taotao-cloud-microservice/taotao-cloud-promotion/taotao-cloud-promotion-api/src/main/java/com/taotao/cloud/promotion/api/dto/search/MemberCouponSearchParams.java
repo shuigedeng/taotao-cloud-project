@@ -2,17 +2,16 @@ package com.taotao.cloud.promotion.api.dto.search;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

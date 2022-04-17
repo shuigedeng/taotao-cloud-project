@@ -557,10 +557,10 @@ public enum ResultEnum implements BaseEnum {
 	KANJIA_ACTIVITY_MEMBER_ERROR(48010, "当前会员已经发起此砍价商品活动"),
 	KANJIA_ACTIVITY_NOT_PASS_ERROR(48011, "当前砍价未满足条件，不能进行购买"),
 	KANJIA_NUM_BUY_ERROR(48012, "砍价商品购买数量不正确"),
+
 	/**
 	 * 店铺
 	 */
-
 	STORE_NOT_EXIST(50001, "此店铺不存在"),
 	STORE_NAME_EXIST_ERROR(50002, "店铺名称已存在!"),
 	STORE_APPLY_DOUBLE_ERROR(50003, "已有店铺，无需重复申请!"),
@@ -585,7 +585,6 @@ public enum ResultEnum implements BaseEnum {
 	ARTICLE_CATEGORY_HAS_ARTICLE(60005, "该文章分类下存在文章，不能删除"),
 	ARTICLE_CATEGORY_NO_DELETION(60007, "默认文章分类不能进行删除"),
 	ARTICLE_NO_DELETION(60008, "默认文章不能进行删除"),
-
 
 	/**
 	 * 页面

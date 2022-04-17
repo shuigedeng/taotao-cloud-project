@@ -3,6 +3,7 @@ package com.taotao.cloud.promotion.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
