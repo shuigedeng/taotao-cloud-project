@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.quartz.QuartzJob;
@@ -54,11 +55,10 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		Map<String, Object> map = new LinkedHashMap<>(2);
 
 		List<QuartzJob> list = page.getList();
-		List<QuartzJobDto> collect = list.stream().filter(Objects::nonNull).map(e -> {
-			QuartzJobDto dto = new QuartzJobDto();
-			BeanUtil.copyProperties(e, dto);
-			return dto;
-		}).collect(Collectors.toList());
+		List<QuartzJobDto> collect = list.stream()
+			.filter(Objects::nonNull)
+			.map(e -> OrikaUtil.convert(e, QuartzJobDto.class))
+			.collect(Collectors.toList());
 
 		map.put("content", collect);
 		map.put("totalElements", page.getTotal());

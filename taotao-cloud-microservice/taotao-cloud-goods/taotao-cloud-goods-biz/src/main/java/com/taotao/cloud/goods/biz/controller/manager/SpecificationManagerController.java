@@ -11,6 +11,7 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.disruptor.util.StringUtils;
+import com.taotao.cloud.goods.api.dto.SpecificationDTO;
 import com.taotao.cloud.goods.api.dto.SpecificationPageQuery;
 import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;

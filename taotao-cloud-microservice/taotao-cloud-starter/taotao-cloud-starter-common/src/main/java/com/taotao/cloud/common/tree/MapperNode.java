@@ -17,6 +17,7 @@ package com.taotao.cloud.common.tree;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,9 +45,9 @@ public class MapperNode extends TreeNode {
 		this.value = value;
 	}
 
-	public MapperNode(Long id, Long parentId, List<INode> children,
+	public MapperNode(Long id, Long parentId, List<INode> children, Integer sort,
 		Boolean hasChildren, String title, Long key, Long value) {
-		super(id, parentId, children, hasChildren);
+		super(id, parentId, children, hasChildren, sort);
 		this.title = title;
 		this.key = key;
 		this.value = value;
@@ -105,4 +106,5 @@ public class MapperNode extends TreeNode {
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), title, key, value);
 	}
+
 }

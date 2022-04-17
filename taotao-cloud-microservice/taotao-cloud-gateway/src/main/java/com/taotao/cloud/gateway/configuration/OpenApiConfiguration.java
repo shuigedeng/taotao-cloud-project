@@ -39,6 +39,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
@@ -49,17 +50,17 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  * @version 2022.03
  * @since 2021/03/04 13:48
  */
+@Profile(value = {"dev"})
 @EnableKnife4j
 @EnableOpenApi
 @Component
 public class OpenApiConfiguration {
 
 	@Value("${taotaoCloudVersion}")
-	String version;
+	private String version;
 
 	@Bean
-	public List<GroupedOpenApi> apis(
-		SwaggerUiConfigParameters swaggerUiConfigParameters,
+	public List<GroupedOpenApi> apis(SwaggerUiConfigParameters swaggerUiConfigParameters,
 		RouteDefinitionLocator locator) {
 		List<GroupedOpenApi> groups = new ArrayList<>();
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();

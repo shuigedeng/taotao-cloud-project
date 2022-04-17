@@ -22,7 +22,7 @@ public final class AbbreviationUtil {
 	}
 
 	/**
-	 * 地图
+	 * map
 	 */
 	private static final Map<String, String> MAP = new ConcurrentHashMap<>();
 

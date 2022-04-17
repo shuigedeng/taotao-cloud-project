@@ -16,12 +16,14 @@
 package com.taotao.cloud.common.model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.common.OrikaUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -64,6 +66,10 @@ public record PageModel<R>(
 	@Serial
 	private static final long serialVersionUID = -275582248840137389L;
 
+	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> rClass) {
+		return convertJpaPage(page, rClass, new HashMap<>());
+	}
+
 	/**
 	 * 转换JpaPage
 	 *
@@ -71,14 +77,14 @@ public record PageModel<R>(
 	 * @return 分页对象
 	 * @since 2021-09-02 19:10:45
 	 */
-	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> r) {
+	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> rClass,
+		Map<String, String> configMap) {
 		List<T> records = page.getContent();
 		List<R> collect = Optional.of(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> ReflectionUtil.copyPropertiesIfRecord(r, t))
+			.map(t -> OrikaUtil.convert(t, rClass, configMap))
 			.toList();
-
 		return of(
 			page.getTotalElements(),
 			page.getTotalPages(),
@@ -88,6 +94,10 @@ public record PageModel<R>(
 		);
 	}
 
+	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> rClass) {
+		return convertMybatisPage(page, rClass, new HashMap<>());
+	}
+
 	/**
 	 * 转换MybatisPage
 	 *
@@ -95,12 +105,13 @@ public record PageModel<R>(
 	 * @return 分页对象
 	 * @since 2021-09-02 19:10:49
 	 */
-	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> r) {
+	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> rClass,
+		Map<String, String> configMap) {
 		List<T> records = page.getRecords();
 		List<R> collect = Optional.ofNullable(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> ReflectionUtil.copyPropertiesIfRecord(r, t))
+			.map(t -> OrikaUtil.convert(t, rClass, configMap))
 			.toList();
 
 		return of(

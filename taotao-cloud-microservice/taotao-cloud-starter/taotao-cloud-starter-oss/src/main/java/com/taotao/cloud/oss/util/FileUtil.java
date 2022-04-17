@@ -570,8 +570,6 @@ public class FileUtil {
 			while ((len = inputStream.read(bs)) != -1) {
 				os.write(bs, 0, len);
 			}
-		} catch (IOException e) {
-			LogUtil.error("生成excel失败");
 		} catch (Exception e) {
 			LogUtil.error("生成excel失败");
 		} finally {

@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
@@ -9,6 +10,8 @@ import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.biz.entity.Goods;
+import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -52,7 +55,8 @@ public class GoodsManagerController {
 	@GetMapping(value = "/page")
 	public Result<PageModel<GoodsBaseVO>> getByPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
-		return Result.success(goodsService.queryByParams(goodsPageQuery));
+		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
+		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
@@ -61,7 +65,8 @@ public class GoodsManagerController {
 	@GetMapping(value = "/sku/page")
 	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
-		return Result.success(goodsSkuService.getGoodsSkuByPage(goodsPageQuery));
+		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
+		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
 	}
 
 	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品", method = CommonConstant.GET)
@@ -71,7 +76,8 @@ public class GoodsManagerController {
 	public Result<PageModel<GoodsBaseVO>> getAuthPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
 		goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
-		return Result.success(goodsService.queryByParams(goodsPageQuery));
+		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
+		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
 	@Operation(summary = "管理员下架商品", description = "管理员下架商品", method = CommonConstant.PUT)
@@ -80,7 +86,7 @@ public class GoodsManagerController {
 	@PutMapping(value = "/{goodsId}/under")
 	public Result<Boolean> underGoods(@PathVariable Long goodsId,
 		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
-		List<String> goodsIds = Arrays.asList(goodsId.split(","));
+		List<Long> goodsIds = Arrays.asList(goodsId);
 		return Result.success(
 			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
 	}

@@ -13,11 +13,10 @@ import javax.persistence.Table;
  *
  * @author shuigedeng
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = SensitiveWord.TABLE_NAME)
 @TableName(SensitiveWord.TABLE_NAME)

@@ -6,6 +6,7 @@ import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Accessors(chain = true)
 public class EsGoodsIndex implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -6856471777036048874L;
 
 	@Id

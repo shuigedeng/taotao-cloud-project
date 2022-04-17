@@ -12,11 +12,10 @@ import javax.persistence.Table;
 /**
  * 短信任务
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
-@Setter
 @Entity
 @Table(name = SmsReach.TABLE_NAME)
 @TableName(SmsReach.TABLE_NAME)

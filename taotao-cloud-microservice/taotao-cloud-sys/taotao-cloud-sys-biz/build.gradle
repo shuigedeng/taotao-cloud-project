@@ -5,10 +5,10 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
-    implementation "org.apache.pdfbox:pdfbox:2.0.1"
+    implementation 'org.apache.pdfbox:pdfbox:2.0.24'
     implementation 'io.soabase.record-builder:record-builder-core:29'
 
-    implementation 'com.google.protobuf:protobuf-java:3.18.1'
+    implementation 'com.google.protobuf:protobuf-java:3.18.2'
     implementation 'com.google.protobuf:protobuf-java-util:3.11.0'
     implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.2'
 

@@ -51,12 +51,12 @@ spring:
         outputRabbit-out-0:
           binder: rabbit
           destination: destination-test-rabbit
-          producer:
-            partitioned: true
-            partition-key-expression: headers['partitionKey']
-            partition-count: 2
-            required-groups:
-              - myGroup
+          #producer:
+          #  partitioned: true
+          #  partition-key-expression: headers['partitionKey']
+          #  partition-count: 2
+          #  required-groups:
+          #    - myGroup
         inputRabbit1-in-0:
           binder: rabbit
           destination: destination-test-rabbit

@@ -1,7 +1,7 @@
 server:
   port: 33337
   http2:
-    enabled: true
+    enabled: false
   undertow:
     buffer-size: 2048
     direct-buffers: true
@@ -14,6 +14,14 @@ server:
   servlet:
     application-display-name: ${spring.application.name}
 
+oss:
+  minio:
+    enable: true
+    endpoint: 地址
+    access-key: 用户名
+    secret-key: 密码
+    bucket-name: bucketName
+    base-path: Minio存储根路径
 
 logging:
   level:
@@ -129,5 +137,3 @@ apollo:
     namespaces: application                  #设置 Namespace
     eagerLoad:
       enabled: false                         #将 Apollo 加载提到初始化日志系统之前
-
-

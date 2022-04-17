@@ -8,5 +8,5 @@ spring:
       - conf/logging.yml
       - conf/management.yml
       - conf/arthas.yml
-  profiles:
-    active: test
+    activate:
+      on-profile: dev

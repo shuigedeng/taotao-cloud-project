@@ -2,7 +2,7 @@ server:
   port: 33333
   shutdown: graceful
   http2:
-    enabled: true
+    enabled: false
   ssl:
     enabled: false
     key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
@@ -12,6 +12,8 @@ server:
 spring:
   main:
     allow-bean-definition-overriding: true
+    web-application-type: reactive
+    banner-mode: off
   application:
     name: taotao-cloud-gateway
   cloud:
@@ -29,7 +31,7 @@ spring:
         username: nacos
         password: nacos
       config:
-        enabled: false
+        enabled: true
         server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace:
         file-extension: yml

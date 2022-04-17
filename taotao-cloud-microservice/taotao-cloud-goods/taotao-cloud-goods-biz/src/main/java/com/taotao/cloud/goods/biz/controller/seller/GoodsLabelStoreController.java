@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "店铺端-店铺标签API", description = "店铺端-店铺标签API")
+@Tag(name = "店铺端-店铺分类API", description = "店铺端-店铺分类API")
 @RequestMapping("/goods/seller/label")
 public class GoodsLabelStoreController {
 

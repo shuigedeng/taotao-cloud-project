@@ -26,5 +26,4 @@ public class EsGoodsRelatedInfo {
 	 */
 	List<ParamOptions> paramOptions;
 
-
 }

@@ -65,7 +65,7 @@ public class DefalutPayMessageConfigurer implements PayMessageConfigurer {
 		List<PayMessageInterceptor<PayMessage, PayService>> interceptors = this.interceptors.get(
 			platform);
 		if (null == interceptors) {
-			interceptors = new ArrayList<PayMessageInterceptor<PayMessage, PayService>>();
+			interceptors = new ArrayList<>();
 			this.interceptors.put(platform, interceptors);
 		}
 		interceptors.add(interceptor);

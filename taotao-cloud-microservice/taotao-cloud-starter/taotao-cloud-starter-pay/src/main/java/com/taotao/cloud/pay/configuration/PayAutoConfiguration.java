@@ -44,15 +44,12 @@ public class PayAutoConfiguration implements InitializingBean {
 	}
 
 	@Autowired
-	@Order
 	public void loadPaymentPlatforms(List<PaymentPlatform> platforms) {
 		LogUtil.started(PaymentPlatform.class, StarterName.PAY_STARTER);
-
 		for (PaymentPlatform platform : platforms) {
 			PaymentPlatforms.loadPaymentPlatform(platform);
 		}
 	}
-
 
 	@Bean
 	@ConditionalOnMissingBean(MerchantDetailsServiceConfigurer.class)

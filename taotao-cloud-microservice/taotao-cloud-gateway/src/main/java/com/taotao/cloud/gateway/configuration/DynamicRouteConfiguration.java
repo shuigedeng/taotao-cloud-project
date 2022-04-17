@@ -24,8 +24,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,7 @@ public class DynamicRouteConfiguration {
 				List<RouteDefinition> routeDefinitions = getListByStr(content);
 				return Flux.fromIterable(routeDefinitions);
 			} catch (NacosException e) {
-				LogUtil.error(e,PropertyUtil.getProperty(SpringApplicationName)
+				LogUtil.error(e, PropertyUtil.getProperty(SpringApplicationName)
 					+ "get route definitions from nacos error info: {}", e.getErrMsg());
 			}
 			return Flux.fromIterable(CollUtil.newArrayList());
@@ -182,7 +182,6 @@ public class DynamicRouteConfiguration {
 		 * 删除路由
 		 *
 		 * @param id
-		 * @return
 		 */
 		public String delete(String id) {
 			try {
@@ -199,7 +198,6 @@ public class DynamicRouteConfiguration {
 		 * 更新路由
 		 *
 		 * @param definitions
-		 * @return
 		 */
 		public String updateList(List<RouteDefinition> definitions) {
 			LogUtil.info("gateway update route {}", definitions);
@@ -243,7 +241,6 @@ public class DynamicRouteConfiguration {
 		 * 增加路由
 		 *
 		 * @param definition
-		 * @return
 		 */
 		public String add(RouteDefinition definition) {
 			LogUtil.info("gateway add route {}", definition);

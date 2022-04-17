@@ -4,5 +4,4 @@ knife4j:
     enable: true
     username: admin
     password: 123456
-
   production: true

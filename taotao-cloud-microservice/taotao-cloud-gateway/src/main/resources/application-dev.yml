@@ -2,13 +2,12 @@ server:
   port: 33333
   shutdown: graceful
   http2:
-    enabled: true
+    enabled: false
   ssl:
     enabled: false
     key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
     key-store-type: JKS
     key-store-password: 1234
-
 
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
