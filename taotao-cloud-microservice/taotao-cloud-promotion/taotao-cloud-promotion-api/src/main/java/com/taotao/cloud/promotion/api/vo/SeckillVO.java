@@ -1,14 +1,11 @@
 package com.taotao.cloud.promotion.api.vo;
 
+import com.taotao.cloud.promotion.api.enums.SeckillApplyStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.util.List;
 
 /**
  * 秒杀活动视图对象
@@ -18,19 +15,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 //public class SeckillVO extends Seckill {
-public class SeckillVO  {
+public class SeckillVO {
 
-    private static final long serialVersionUID = 2891461638257152270L;
+	private static final long serialVersionUID = 2891461638257152270L;
 
-    /**
-     * @see SeckillApplyStatusEnum
-     */
-    @Schema(description =  "报名状态")
-    private String seckillApplyStatus;
+	/**
+	 * @see SeckillApplyStatusEnum
+	 */
+	@Schema(description = "报名状态")
+	private String seckillApplyStatus;
 
-    /**
-     * 当前秒杀活动下所有的秒杀申请信息
-     */
-    //private List<SeckillApply> seckillApplyList;
+	/**
+	 * 当前秒杀活动下所有的秒杀申请信息
+	 */
+	//private List<SeckillApply> seckillApplyList;
 
 }

@@ -1,5 +1,6 @@
 package com.taotao.cloud.promotion.biz.service.impl;
 
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;

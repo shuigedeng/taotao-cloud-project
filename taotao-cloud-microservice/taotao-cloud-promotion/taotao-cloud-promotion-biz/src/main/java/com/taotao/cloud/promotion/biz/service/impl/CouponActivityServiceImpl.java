@@ -2,6 +2,9 @@ package com.taotao.cloud.promotion.biz.service.impl;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.promotion.api.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;

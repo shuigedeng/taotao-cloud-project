@@ -45,6 +45,7 @@ import com.taotao.cloud.store.api.vo.FreightTemplateVO;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;

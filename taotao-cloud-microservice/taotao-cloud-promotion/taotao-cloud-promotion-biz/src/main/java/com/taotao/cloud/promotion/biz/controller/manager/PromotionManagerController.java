@@ -1,53 +1,61 @@
 package com.taotao.cloud.promotion.biz.controller.manager;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.vo.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.PromotionService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 /**
  * 管理端,促销接口
  *
- * 
  * @since 2021/2/2
  **/
 @RestController
-@Api(tags = "管理端,促销接口")
+@Tag(name = "管理端,促销接口")
 @RequestMapping("/manager/promotion")
 public class PromotionManagerController {
 
-    @Autowired
-    private PromotionService promotionService;
-    @Autowired
-    private PromotionGoodsService promotionGoodsService;
+	@Autowired
+	private PromotionService promotionService;
+	@Autowired
+	private PromotionGoodsService promotionGoodsService;
 
-    @GetMapping("/current")
-    @ApiOperation(value = "获取当前进行中的促销活动")
-    public Result<Map<String, Object>> getCurrentPromotion() {
-        Map<String, Object> currentPromotion = promotionService.getCurrentPromotion();
-        return Result.success(currentPromotion);
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@GetMapping("/current")
+	@Operation(summary = "获取当前进行中的促销活动")
+	public Result<Map<String, Object>> getCurrentPromotion() {
+		Map<String, Object> currentPromotion = promotionService.getCurrentPromotion();
+		return Result.success(currentPromotion);
+	}
 
-    @GetMapping("/{promotionId}/goods")
-    @ApiOperation(value = "获取当前进行中的促销活动商品")
-    public Result<IPage<PromotionGoods>> getPromotionGoods(@PathVariable String promotionId, String promotionType, PageVO pageVO) {
-        PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
-        searchParams.setPromotionId(promotionId);
-        searchParams.setPromotionType(promotionType);
-        searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
-        IPage<PromotionGoods> promotionGoods = promotionGoodsService.pageFindAll(searchParams, pageVO);
-        return Result.success(promotionGoods);
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@GetMapping("/{promotionId}/goods")
+	@Operation(summary = "获取当前进行中的促销活动商品")
+	public Result<IPage<PromotionGoods>> getPromotionGoods(@PathVariable String promotionId,
+		String promotionType, PageVO pageVO) {
+		PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+		searchParams.setPromotionId(promotionId);
+		searchParams.setPromotionType(promotionType);
+		searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
+		IPage<PromotionGoods> promotionGoods = promotionGoodsService.pageFindAll(searchParams,
+			pageVO);
+		return Result.success(promotionGoods);
+	}
 
 
 }

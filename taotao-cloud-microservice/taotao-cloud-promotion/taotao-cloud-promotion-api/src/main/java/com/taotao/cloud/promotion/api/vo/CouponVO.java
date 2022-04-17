@@ -28,13 +28,13 @@ public class CouponVO  {
     /**
      * 促销关联的商品
      */
-    //@Schema(description =  "优惠券关联商品集合")
-    //private List<PromotionGoods> promotionGoodsList;
-	//
-    //public CouponVO(Coupon coupon) {
-    //    if (coupon == null) {
-    //        return;
-    //    }
-    //    BeanUtils.copyProperties(coupon, this);
-    //}
+    @Schema(description =  "优惠券关联商品集合")
+    private List<PromotionGoods> promotionGoodsList;
+
+    public CouponVO(Coupon coupon) {
+        if (coupon == null) {
+            return;
+        }
+        BeanUtils.copyProperties(coupon, this);
+    }
 }

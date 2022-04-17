@@ -1,19 +1,26 @@
 package com.taotao.cloud.promotion.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.vo.CouponVO;
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 
 /**
@@ -21,8 +28,10 @@ import lombok.Setter;
  *
  * @since 2020-03-19 10:44 上午
  */
-@Setter
 @Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -87,20 +96,40 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 	@Column(name = "effective_days", columnDefinition = "int not null defaultt 0  comment '有效期'")
 	private Integer effectiveDays;
 
-	//public Coupon(CouponVO couponVO) {
-	//    BeanUtils.copyProperties(couponVO, this);
-	//}
-	//
-	///**
-	// * @return 促销状态
-	// * @see PromotionsStatusEnum
-	// */
-	//@Override
-	//public String getPromotionStatus() {
-	//    if (this.rangeDayType != null && this.rangeDayType.equals(CouponRangeDayEnum.DYNAMICTIME.name())
-	//            && (this.effectiveDays != null && this.effectiveDays > 0 && this.effectiveDays <= 365)) {
-	//        return PromotionsStatusEnum.START.name();
-	//    }
-	//    return super.getPromotionStatus();
-	//}
+	public Coupon(CouponVO couponVO) {
+		BeanUtil.copyProperties(couponVO, this);
+	}
+
+	/**
+	 * @return 促销状态
+	 * @see PromotionsStatusEnum
+	 */
+	@Override
+	public String getPromotionStatus() {
+		if (this.rangeDayType != null && this.rangeDayType.equals(
+			CouponRangeDayEnum.DYNAMICTIME.name())
+			&& (this.effectiveDays != null && this.effectiveDays > 0
+			&& this.effectiveDays <= 365)) {
+			return PromotionsStatusEnum.START.name();
+		}
+		return super.getPromotionStatus();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		Coupon coupon = (Coupon) o;
+		return getId() != null && Objects.equals(getId(), coupon.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

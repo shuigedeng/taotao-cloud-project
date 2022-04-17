@@ -46,6 +46,7 @@ import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,7 +107,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	 */
 	private final EsGoodsIndexService goodsIndexService;
 	/**
-	 * 商品索引服务
+	 * 促销活动商品服务
 	 */
 	private final PromotionGoodsService promotionGoodsService;
 	/**

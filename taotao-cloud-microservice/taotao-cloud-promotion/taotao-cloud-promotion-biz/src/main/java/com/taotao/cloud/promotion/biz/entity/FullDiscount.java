@@ -1,7 +1,6 @@
 package com.taotao.cloud.promotion.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,44 +74,44 @@ public class FullDiscount extends BasePromotions<FullDiscount, Long> {
 	private String description;
 
 	public Boolean getIsFullMinus() {
-	    if (isFullMinus == null) {
-	        return false;
-	    }
-	    return isFullMinus;
+		if (isFullMinus == null) {
+			return false;
+		}
+		return isFullMinus;
 	}
 
 	public Boolean getIsFullRate() {
-	    if (isFullRate == null) {
-	        return false;
-	    }
-	    return isFullRate;
+		if (isFullRate == null) {
+			return false;
+		}
+		return isFullRate;
 	}
 
 	public Boolean getIsPoint() {
-	    if (isPoint == null) {
-	        return false;
-	    }
-	    return isPoint;
+		if (isPoint == null) {
+			return false;
+		}
+		return isPoint;
 	}
 
 	public Boolean getIsFreeFreight() {
-	    if (isFreeFreight == null) {
-	        return false;
-	    }
-	    return isFreeFreight;
+		if (isFreeFreight == null) {
+			return false;
+		}
+		return isFreeFreight;
 	}
 
 	public Boolean getIsGift() {
-	    if (isGift == null) {
-	        return false;
-	    }
-	    return isGift;
+		if (isGift == null) {
+			return false;
+		}
+		return isGift;
 	}
 
 	public Boolean getIsCoupon() {
-	    if (isCoupon == null) {
-	        return false;
-	    }
-	    return isCoupon;
+		if (isCoupon == null) {
+			return false;
+		}
+		return isCoupon;
 	}
 }

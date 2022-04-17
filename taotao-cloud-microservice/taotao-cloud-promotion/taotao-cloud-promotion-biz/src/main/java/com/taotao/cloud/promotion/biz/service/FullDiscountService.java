@@ -1,6 +1,7 @@
 package com.taotao.cloud.promotion.biz.service;
 
 
+import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
 import java.util.List;
 

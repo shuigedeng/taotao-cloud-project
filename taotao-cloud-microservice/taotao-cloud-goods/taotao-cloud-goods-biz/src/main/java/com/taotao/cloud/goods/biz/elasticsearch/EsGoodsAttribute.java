@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.biz.elasticsearch;
 
+import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -10,9 +12,11 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  * 商品属性索引
  **/
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class EsGoodsAttribute implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 4018042777559970062L;
 
 	/**
@@ -49,14 +53,4 @@ public class EsGoodsAttribute implements Serializable {
 	 */
 	@Field(type = FieldType.Integer)
 	private Integer sort;
-
-	public EsGoodsAttribute(Integer type, String nameId, String name, String valueId, String value,
-		Integer sort) {
-		this.type = type;
-		this.nameId = nameId;
-		this.name = name;
-		this.valueId = valueId;
-		this.value = value;
-		this.sort = sort;
-	}
 }

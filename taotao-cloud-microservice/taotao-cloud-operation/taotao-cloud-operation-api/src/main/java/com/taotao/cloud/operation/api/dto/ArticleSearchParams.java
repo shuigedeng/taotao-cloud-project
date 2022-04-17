@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ArticleSearchParams extends PageVO {
 
-    @Schema(description =  "分类ID")
+    @Schema(description =  "文章分类ID")
     private String categoryId;
 
     @Schema(description =  "标题")
