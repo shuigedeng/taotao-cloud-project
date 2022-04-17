@@ -27,9 +27,9 @@ bootBuildImage {
 	imageName = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:${project.version}"
 	pullPolicy = "IF_NOT_PRESENT"
 	environment = [
-				   'BPL_SPRING_CLOUD_BINDINGS_ENABLED': 'true',
+				   "BPL_SPRING_CLOUD_BINDINGS_ENABLED": "true",
 
-				   'BP_IMAGE_LABELS': 'application_name=taotao-cloud-admin application_version=2022.04',
+				   "BP_IMAGE_LABELS": "application_name=taotao-cloud-admin application_version=2022.04",
 				   'BP_OCI_AUTHORS': '981376577@qq.com',
 				   //'BP_OCI_CREATED': ' ',
 				   //'BP_OCI_DESCRIPTION': ' ',

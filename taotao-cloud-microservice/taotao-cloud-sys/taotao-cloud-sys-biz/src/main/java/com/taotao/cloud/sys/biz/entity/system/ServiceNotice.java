@@ -21,6 +21,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = ServiceNotice.TABLE_NAME)
 @TableName(ServiceNotice.TABLE_NAME)

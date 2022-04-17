@@ -4,11 +4,6 @@ import com.qcloud.cos.ClientConfig;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version TencentOssConfig.java, v 1.1 2022/2/20 9:10 chenmin Exp $
- * Created on 2022/2/20
- */
 public class TencentOssConfig {
 
     private String basePath;

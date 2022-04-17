@@ -38,9 +38,6 @@ import java.util.stream.Collectors;
 
 /**
  * https://cloud.tencent.com/document/product/436
- * @author 陈敏
- * @version TencentOssClient.java, v 1.1 2021/11/24 15:35 chenmin Exp $
- * Created on 2021/11/24
  */
 public class TencentOssClient implements StandardOssClient {
 

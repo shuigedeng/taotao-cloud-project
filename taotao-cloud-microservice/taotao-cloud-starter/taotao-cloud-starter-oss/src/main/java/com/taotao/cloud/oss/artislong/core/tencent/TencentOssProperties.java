@@ -9,11 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version TencentProperties.java, v 1.1 2021/11/24 15:22 chenmin Exp $
- * Created on 2021/11/24
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.TENCENT)
 public class TencentOssProperties extends TencentOssConfig implements InitializingBean {
 

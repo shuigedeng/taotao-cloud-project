@@ -1,10 +1,6 @@
 package com.taotao.cloud.oss.artislong.model;
 
 
-/**
- * @author 陈敏
- * @version Info.java, v 1.1 2021/11/15 10:16 chenmin Exp $ Created on 2021/11/15
- */
 public class OssInfo {
 
 	/**

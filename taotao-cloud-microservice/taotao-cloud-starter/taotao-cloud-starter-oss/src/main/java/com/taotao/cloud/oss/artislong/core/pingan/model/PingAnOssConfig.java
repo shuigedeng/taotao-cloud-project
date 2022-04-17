@@ -4,11 +4,6 @@ package com.taotao.cloud.oss.artislong.core.pingan.model;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version PingAnOssConfig.java, v 1.1 2022/3/8 10:26 chenmin Exp $
- * Created on 2022/3/8
- */
 public class PingAnOssConfig {
 
     private String userAgent;

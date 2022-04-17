@@ -1,18 +1,18 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-    implementation 'mysql:mysql-connector-java'
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    implementation "org.springframework.boot:spring-boot-starter-freemarker"
+    implementation "org.springframework.boot:spring-boot-starter-mail"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"
+    implementation "mysql:mysql-connector-java"
     implementation "com.xuxueli:xxl-job-core"
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
 
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

@@ -19,11 +19,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version QingYunOssConfiguration.java, v 1.0 2022/3/10 23:43 chenmin Exp $
- * Created on 2022/3/10
- */
 @Configuration
 @ConditionalOnClass(OSSClient.class)
 @EnableConfigurationProperties({QingYunOssProperties.class})

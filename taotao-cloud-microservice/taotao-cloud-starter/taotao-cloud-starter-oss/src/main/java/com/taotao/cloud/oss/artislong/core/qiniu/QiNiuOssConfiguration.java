@@ -17,11 +17,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version QiNiuOssConfiguration.java, v 1.1 2021/11/16 15:31 chenmin Exp $
- * Created on 2021/11/16
- */
 @Configuration
 @EnableConfigurationProperties({QiNiuOssProperties.class})
 @ConditionalOnProperty(prefix = OssConstant.OSS, name = OssConstant.OssType.QINIU + CharPool.DOT + OssConstant.ENABLE,

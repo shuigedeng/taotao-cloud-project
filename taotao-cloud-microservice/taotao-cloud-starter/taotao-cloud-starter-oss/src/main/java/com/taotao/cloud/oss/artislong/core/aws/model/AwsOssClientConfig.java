@@ -1,11 +1,6 @@
 package com.taotao.cloud.oss.artislong.core.aws.model;
 
 
-/**
- * @author 陈敏
- * @version AwsOssClientConfig.java, v 1.0 2022/4/2 16:05 chenmin Exp $
- * Created on 2022/4/2
- */
 public class AwsOssClientConfig {
 
     private Boolean accelerateModeEnabled = false;

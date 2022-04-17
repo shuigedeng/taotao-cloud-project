@@ -5,11 +5,6 @@ import cn.ucloud.ufile.http.HttpClient.Config;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version UCloudOssConfig.java, v 1.1 2022/3/7 0:20 chenmin Exp $
- * Created on 2022/3/7
- */
 public class UCloudOssConfig {
 
     private String basePath;

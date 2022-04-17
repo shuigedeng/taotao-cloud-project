@@ -41,6 +41,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = DictItem.TABLE_NAME)
 @TableName(DictItem.TABLE_NAME)

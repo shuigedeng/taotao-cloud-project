@@ -5,9 +5,6 @@ import java.io.Serializable;
 
 /**
  * 分块标签
- *
- * @author 陈敏
- * @version PartETag.java, v 1.1 2022/2/10 23:38 chenmin Exp $ Created on 2022/2/10
  */
 public class UpLoadPartEntityTag implements Serializable {
 

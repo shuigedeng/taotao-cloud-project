@@ -25,11 +25,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version JdOssConfiguration.java, v 1.1 2021/11/25 10:44 chenmin Exp $
- * Created on 2021/11/25
- */
 @Configuration
 @ConditionalOnClass(AmazonS3.class)
 @EnableConfigurationProperties({JdOssProperties.class})

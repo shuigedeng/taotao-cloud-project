@@ -6,9 +6,6 @@ import com.taotao.cloud.oss.artislong.constant.OssConstant;
 
 /**
  * 断点续传参数
- * @author 陈敏
- * @version Slice.java, v 1.1 2022/2/10 17:09 chenmin Exp $
- * Created on 2022/2/10
  */
 public class SliceConfig {
     /**

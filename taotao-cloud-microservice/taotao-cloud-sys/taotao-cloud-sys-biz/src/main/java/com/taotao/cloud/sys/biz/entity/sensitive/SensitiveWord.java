@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = SensitiveWord.TABLE_NAME)
 @TableName(SensitiveWord.TABLE_NAME)

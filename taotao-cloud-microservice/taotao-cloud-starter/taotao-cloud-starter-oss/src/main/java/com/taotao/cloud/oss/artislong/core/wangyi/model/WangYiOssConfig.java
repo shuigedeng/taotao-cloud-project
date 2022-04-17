@@ -7,12 +7,6 @@ import com.netease.cloud.ClientConfiguration;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version $Id: WangYiOssConfig.java,v 1.1 2022/3/4 9:54 PM chenmin Exp $
- * Created on 2022/3/4 9:54 PM
- * My blog： https://www.chenmin.info
- */
 public class WangYiOssConfig {
 
     private String accessKey;

@@ -31,34 +31,34 @@ public class DeptTreeVO extends MapperNode implements INode {
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
 
-	/**
-	 * 主键ID
-	 */
-	private Long id;
+	///**
+	// * 主键ID
+	// */
+	//private Long id;
 
-	/**
-	 * 父节点ID
-	 */
-	private Long parentId;
+	///**
+	// * 父节点ID
+	// */
+	//private Long parentId;
 
-	/**
-	 * 子孙节点
-	 */
-	private List<INode> children;
+	///**
+	// * 子孙节点
+	// */
+	//private List<INode> children;
 
-	/**
-	 * 是否有子孙节点
-	 */
-	private Boolean hasChildren;
+	///**
+	// * 是否有子孙节点
+	// */
+	//private Boolean hasChildren;
 
 	/**
 	 * 部门名称
 	 */
 	private String name;
-	/**
-	 * 排序
-	 */
-	private Integer sort;
+	///**
+	// * 排序
+	// */
+	//private Integer sort;
 	/**
 	 * 删除标识
 	 */
@@ -77,11 +77,16 @@ public class DeptTreeVO extends MapperNode implements INode {
 	@Schema(description = "修改时间")
 	private LocalDateTime updateTime;
 
+	//@Override
+	//public List<INode> getChildren() {
+	//	if (this.children == null) {
+	//		this.children = new ArrayList<>();
+	//	}
+	//	return this.children;
+	//}
+
 	@Override
-	public List<INode> getChildren() {
-		if (this.children == null) {
-			this.children = new ArrayList<>();
-		}
-		return this.children;
+	public <T extends INode> List<T> getChildren() {
+		return super.getChildren();
 	}
 }

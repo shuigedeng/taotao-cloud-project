@@ -5,7 +5,7 @@ dependencies {
     api 'com.aliyun:aliyun-java-sdk-core:4.6.0'
     api 'com.aliyun:aliyun-java-sdk-dysmsapi:2.2.1'
 
-    api('com.baidubce:bce-java-sdk:0.10.201') {
+    api('com.baidubce:bce-java-sdk:0.10.202') {
         exclude group: 'org.apache.hbase', module: 'hbase-client'
         exclude group: 'commons-io', module: 'commons-io'
         exclude group: 'ch.qos.logback', module: 'logback-core'

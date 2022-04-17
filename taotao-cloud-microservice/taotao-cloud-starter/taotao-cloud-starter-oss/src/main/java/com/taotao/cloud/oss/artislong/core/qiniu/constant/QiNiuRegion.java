@@ -5,11 +5,6 @@ import com.qiniu.storage.Region;
 
 import java.lang.reflect.Method;
 
-/**
- * @author 陈敏
- * @version QiNiuRegion.java, v 1.1 2021/11/24 14:29 chenmin Exp $
- * Created on 2021/11/24
- */
 public enum QiNiuRegion {
     /**
      * 华东区域

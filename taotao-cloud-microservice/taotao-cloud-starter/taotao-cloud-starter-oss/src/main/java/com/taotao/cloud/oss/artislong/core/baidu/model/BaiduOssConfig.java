@@ -4,11 +4,6 @@ import com.baidubce.services.bos.BosClientConfiguration;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version BaiduOssConfig.java, v 1.1 2022/2/19 18:25 chenmin Exp $
- * Created on 2022/2/19
- */
 public class BaiduOssConfig {
 
     private String basePath;

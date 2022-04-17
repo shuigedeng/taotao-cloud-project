@@ -24,6 +24,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = ScheduledJob.TABLE_NAME)
 @TableName(ScheduledJob.TABLE_NAME)

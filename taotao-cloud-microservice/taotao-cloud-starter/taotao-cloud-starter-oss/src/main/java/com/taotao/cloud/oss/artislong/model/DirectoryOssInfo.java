@@ -6,9 +6,6 @@ import java.util.List;
 
 /**
  * 文件夹信息对象
- *
- * @author 陈敏
- * @version DirectoryInfo.java, v 1.1 2021/11/15 10:21 chenmin Exp $ Created on 2021/11/15
  */
 public class DirectoryOssInfo extends OssInfo {
 

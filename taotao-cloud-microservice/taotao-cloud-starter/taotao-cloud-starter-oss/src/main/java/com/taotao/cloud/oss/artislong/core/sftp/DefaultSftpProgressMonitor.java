@@ -11,12 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author 陈敏
- * @version $Id: DefaultSftpProgressMonitor.java,v 1.1 2022/2/12 5:11 PM chenmin Exp $
- * Created on 2022/2/12 5:11 PM
- * My blog： https://www.chenmin.info
- */
+
 public class DefaultSftpProgressMonitor implements SftpProgressMonitor, Runnable {
 
     private long maxFileSize = 0L;

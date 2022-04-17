@@ -13,11 +13,6 @@ import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 import java.util.Date;
 
-/**
- * @author 陈敏
- * @version JdbcOssInfo.java, v 1.0 2022/3/12 15:49 chenmin Exp $
- * Created on 2022/3/12
- */
 public class JdbcOssInfo {
     private String id;
     private String name;

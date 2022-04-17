@@ -25,6 +25,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = File.TABLE_NAME)
 @TableName(File.TABLE_NAME)

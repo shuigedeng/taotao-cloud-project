@@ -2,11 +2,6 @@ package com.taotao.cloud.oss.artislong.constant;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author 陈敏
- * @version OssConstant.java, v 1.1 2021/11/5 11:06 chenmin Exp $
- * Created on 2021/11/5
- */
 public class OssConstant {
 
     public static final String OSS = "oss";

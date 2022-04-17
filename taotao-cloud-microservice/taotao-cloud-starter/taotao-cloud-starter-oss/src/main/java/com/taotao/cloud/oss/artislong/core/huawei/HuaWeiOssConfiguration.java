@@ -17,11 +17,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version HuaWeiOssConfiguration.java, v 1.1 2021/11/25 9:58 chenmin Exp $
- * Created on 2021/11/25
- */
 @Configuration
 @ConditionalOnClass(ObsClient.class)
 @EnableConfigurationProperties({HuaWeiOssProperties.class})

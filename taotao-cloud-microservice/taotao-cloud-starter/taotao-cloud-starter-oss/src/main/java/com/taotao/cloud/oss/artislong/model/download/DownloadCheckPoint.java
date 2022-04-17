@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author 陈敏
- * @version DownloadCheckPoint.java, v 1.1 2022/2/21 15:14 chenmin Exp $ Created on 2022/2/21
- */
 public class DownloadCheckPoint implements Serializable {
 
 	private static final long serialVersionUID = 4682293344365787077L;

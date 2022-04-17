@@ -1,10 +1,6 @@
 package com.taotao.cloud.oss.artislong.model.download;
 
 
-/**
- * @author 陈敏
- * @version PartResult.java, v 1.1 2022/2/21 15:17 chenmin Exp $ Created on 2022/2/21
- */
 public class DownloadPartResult {
 
 	private int number;

@@ -36,13 +36,6 @@ import java.nio.file.attribute.FileTime;
 import java.nio.file.attribute.UserPrincipal;
 import java.util.*;
 
-/**
- * 本地文件操作客户端
- *
- * @author 陈敏
- * @version LocalOssClient.java, v 1.1 2021/11/5 15:44 chenmin Exp $
- * Created on 2021/11/5
- */
 public class LocalOssClient implements StandardOssClient {
 
     private LocalOssConfig localOssConfig;

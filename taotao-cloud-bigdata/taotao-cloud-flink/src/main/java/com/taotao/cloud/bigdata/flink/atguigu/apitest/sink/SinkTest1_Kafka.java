@@ -8,7 +8,7 @@ package com.taotao.cloud.bigdata.flink.atguigu.apitest.sink;/**
  * Created by wushengran on 2020/11/9 10:24
  */
 
-import com.atguigu.apitest.beans.SensorReading;
+import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

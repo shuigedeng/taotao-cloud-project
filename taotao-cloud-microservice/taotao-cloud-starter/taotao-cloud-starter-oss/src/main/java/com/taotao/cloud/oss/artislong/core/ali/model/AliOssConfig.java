@@ -4,11 +4,6 @@ import com.aliyun.oss.ClientBuilderConfiguration;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version AliGroupInfo.java, v 1.1 2022/2/18 17:48 chenmin Exp $
- * Created on 2022/2/18
- */
 public class AliOssConfig {
     /**
      * 数据存储路径

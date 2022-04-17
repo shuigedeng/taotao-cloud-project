@@ -9,11 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version JinShanOssProperties.java, v 1.1 2022/3/3 22:10 chenmin Exp $
- * Created on 2022/3/3
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.JINSHAN)
 public class JinShanOssProperties extends JinShanOssConfig implements InitializingBean {
 

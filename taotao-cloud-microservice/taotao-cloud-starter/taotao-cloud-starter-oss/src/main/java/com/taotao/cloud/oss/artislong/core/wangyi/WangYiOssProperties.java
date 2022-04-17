@@ -12,12 +12,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version $Id: WangYiOssProperties.java,v 1.1 2022/3/4 9:51 PM chenmin Exp $
- * Created on 2022/3/4 9:51 PM
- * My blog： https://www.chenmin.info
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.WANGYI)
 public class WangYiOssProperties extends WangYiOssConfig implements InitializingBean {
 

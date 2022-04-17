@@ -32,9 +32,6 @@ import java.util.Map;
 
 /**
  * https://github.com/upyun/java-sdk
- * @author 陈敏
- * @version UpOssClient.java, v 1.1 2021/11/30 12:03 chenmin Exp $
- * Created on 2021/11/30
  */
 public class UpOssClient implements StandardOssClient {
 

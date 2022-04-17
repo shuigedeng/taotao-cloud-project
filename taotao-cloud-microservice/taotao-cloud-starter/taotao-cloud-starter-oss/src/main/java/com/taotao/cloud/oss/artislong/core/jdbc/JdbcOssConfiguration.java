@@ -19,11 +19,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version JdbcOssConfiguration.java, v 1.0 2022/3/11 21:35 chenmin Exp $
- * Created on 2022/3/11
- */
 @Configuration
 @ConditionalOnClass(JdbcTemplate.class)
 @EnableConfigurationProperties({JdbcOssProperties.class})

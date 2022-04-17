@@ -50,9 +50,6 @@ import java.util.stream.Collectors;
 
 /**
  * https://docs.ucloud.cn/ufile/README
- *
- * @author 陈敏
- * @version UCloudOssClient.java, v 1.1 2022/3/7 0:20 chenmin Exp $ Created on 2022/3/7
  */
 public class UCloudOssClient implements StandardOssClient {
 

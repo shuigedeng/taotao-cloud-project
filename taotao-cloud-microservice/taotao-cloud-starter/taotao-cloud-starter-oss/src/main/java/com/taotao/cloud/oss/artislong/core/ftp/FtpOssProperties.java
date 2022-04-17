@@ -9,11 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version FtpOssProperties.java, v 1.1 2021/11/16 15:29 chenmin Exp $
- * Created on 2021/11/16
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.FTP)
 public class FtpOssProperties extends FtpOssConfig implements InitializingBean {
 
