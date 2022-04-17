@@ -15,11 +15,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version LocalConfiguration.java, v 1.1 2022/2/11 15:28 chenmin Exp $
- * Created on 2022/2/11
- */
 @Configuration
 @ConditionalOnClass(OSSClient.class)
 @EnableConfigurationProperties({LocalOssProperties.class})

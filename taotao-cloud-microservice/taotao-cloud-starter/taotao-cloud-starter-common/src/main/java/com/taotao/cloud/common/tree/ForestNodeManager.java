@@ -95,9 +95,9 @@ public class ForestNodeManager<T extends INode> {
 	@Override
 	public String toString() {
 		return "ForestNodeManager{" +
-				"list=" + list +
-				", parentIds=" + parentIds +
-				'}';
+			"list=" + list +
+			", parentIds=" + parentIds +
+			'}';
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class ForestNodeManager<T extends INode> {
 		}
 		ForestNodeManager<?> that = (ForestNodeManager<?>) o;
 		return Objects.equals(list, that.list) && Objects.equals(parentIds,
-				that.parentIds);
+			that.parentIds);
 	}
 
 	@Override

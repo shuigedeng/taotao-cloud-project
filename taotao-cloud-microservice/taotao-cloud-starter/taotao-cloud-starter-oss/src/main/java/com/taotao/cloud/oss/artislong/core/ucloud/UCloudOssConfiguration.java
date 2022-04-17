@@ -21,11 +21,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version UCloudOssConfiguration.java, v 1.1 2022/3/7 0:20 chenmin Exp $
- * Created on 2022/3/7
- */
 @Configuration
 @ConditionalOnClass(UfileClient.class)
 @EnableConfigurationProperties({UCloudOssProperties.class})

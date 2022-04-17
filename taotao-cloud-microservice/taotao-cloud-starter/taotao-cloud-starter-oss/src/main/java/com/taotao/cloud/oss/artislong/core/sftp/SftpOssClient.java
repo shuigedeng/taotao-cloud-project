@@ -30,11 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version SftpOssClient.java, v 1.1 2021/11/15 11:12 chenmin Exp $
- * Created on 2021/11/15
- */
 public class SftpOssClient implements StandardOssClient {
 
     public static final String SFTP_OBJECT_NAME = "sftp";

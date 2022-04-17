@@ -1,10 +1,5 @@
 package com.taotao.cloud.oss.artislong.constant;
 
-/**
- * @author 陈敏
- * @version OssType.java, v 1.1 2021/11/16 21:54 chenmin Exp $
- * Created on 2021/11/16
- */
 public enum OssType {
 
     /**

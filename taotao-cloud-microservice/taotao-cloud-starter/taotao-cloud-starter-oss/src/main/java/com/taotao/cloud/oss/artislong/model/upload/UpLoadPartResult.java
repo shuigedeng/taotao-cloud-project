@@ -3,9 +3,6 @@ package com.taotao.cloud.oss.artislong.model.upload;
 
 /**
  * 分块结果集
- *
- * @author 陈敏
- * @version PartResult.java, v 1.1 2022/2/10 10:01 chenmin Exp $ Created on 2022/2/10
  */
 public class UpLoadPartResult {
 

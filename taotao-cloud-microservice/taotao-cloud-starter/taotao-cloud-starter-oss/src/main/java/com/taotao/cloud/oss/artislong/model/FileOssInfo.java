@@ -3,9 +3,6 @@ package com.taotao.cloud.oss.artislong.model;
 
 /**
  * 文件信息对象
- *
- * @author 陈敏
- * @version FileInfo.java, v 1.1 2021/11/15 10:19 chenmin Exp $ Created on 2021/11/15
  */
 public class FileOssInfo extends OssInfo {
 

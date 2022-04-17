@@ -9,12 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- * @author 陈敏
- * @version LocalProperties.java, v 1.1 2022/2/11 15:28 chenmin Exp $
- * Created on 2022/2/11
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.LOCAL)
 public class LocalOssProperties extends LocalOssConfig implements InitializingBean {
 

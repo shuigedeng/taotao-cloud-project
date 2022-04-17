@@ -45,8 +45,8 @@ public class ForestNode extends TreeNode {
 	}
 
 	public ForestNode(Long id, Long parentId, List<INode> children,
-		Boolean hasChildren, Object content) {
-		super(id, parentId, children, hasChildren);
+		Boolean hasChildren, Object content, Integer sort) {
+		super(id, parentId, children, hasChildren,sort);
 		this.content = content;
 	}
 

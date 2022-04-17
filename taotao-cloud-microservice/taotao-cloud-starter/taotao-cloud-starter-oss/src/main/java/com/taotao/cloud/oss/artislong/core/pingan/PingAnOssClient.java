@@ -39,8 +39,6 @@ import repkg.com.amazonaws.services.s3.model.S3Object;
 /**
  * https://yun.pingan.com/ssr/help/storage/obs?menuItem=OBS_SDK_.Java_SDK_
  *
- * @author 陈敏
- * @version PingAnOssClient.java, v 1.1 2022/3/8 10:25 chenmin Exp $ Created on 2022/3/8
  */
 public class PingAnOssClient implements StandardOssClient {
 

@@ -48,8 +48,6 @@ import okhttp3.Headers;
 /**
  * http://docs.minio.org.cn/docs/master/minio-monitoring-guide https://docs.min.io/
  *
- * @author 陈敏
- * @version MinioOssClient.java, v 1.1 2021/11/24 15:35 chenmin Exp $ Created on 2021/11/24
  */
 public class MinioOssClient implements StandardOssClient {
 

@@ -42,8 +42,6 @@ import java.util.Map;
 /**
  * https://developer.qiniu.com/kodo
  *
- * @author 陈敏
- * @version QiNiuOssClient.java, v 1.1 2021/11/15 11:13 chenmin Exp $ Created on 2021/11/15
  */
 public class QiNiuOssClient implements StandardOssClient {
 

@@ -19,11 +19,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version MinioConfiguration.java, v 1.1 2021/11/24 15:20 chenmin Exp $
- * Created on 2021/11/24
- */
 @Configuration
 @ConditionalOnClass(MinioClient.class)
 @EnableConfigurationProperties({MinioOssProperties.class})

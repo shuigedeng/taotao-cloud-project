@@ -60,7 +60,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	public SimpleCanalClient(CanalProperties canalProperties) {
 		super(canalProperties);
 
-		//这边上可能需要调整，紧跟德叔脚步走，默认核心线程数5个，最大线程数20个，
+		// 可能需要调整，紧跟德叔脚步走，默认核心线程数5个，最大线程数20个，
 		// 线程两分钟分钟不执行就。。。
 		executor = new ThreadPoolExecutor(
 			5,

@@ -121,8 +121,8 @@ public class TreeNode implements INode {
 	}
 
 	@Override
-	public List<? extends INode> getChildren() {
-		return children;
+	public <T extends INode> List<T> getChildren() {
+		return null;
 	}
 
 	public void setChildren(List<? extends INode> children) {

@@ -3,10 +3,6 @@ package com.taotao.cloud.oss.artislong.utils;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 
-/**
- * @author 陈敏
- * @version PathUtil.java, v 1.1 2022/2/18 17:01 chenmin Exp $ Created on 2022/2/18
- */
 public class OssPathUtil {
 
 	public static String valid(String basePath) {

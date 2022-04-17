@@ -8,7 +8,7 @@ dependencies {
 
     implementation 'org.springframework.cloud:spring-cloud-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     implementation 'org.apache.hbase:hbase-client:2.4.11'
 

@@ -9,11 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version HuaWeiOssProperties.java, v 1.1 2021/11/25 9:56 chenmin Exp $
- * Created on 2021/11/25
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.HUAWEI)
 public class HuaWeiOssProperties extends HuaweiOssConfig implements InitializingBean {
 

@@ -19,11 +19,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version PingAnOssConfiguration.java, v 1.1 2022/3/8 10:25 chenmin Exp $
- * Created on 2022/3/8
- */
 @Configuration
 @ConditionalOnClass(RadosgwService.class)
 @EnableConfigurationProperties({PingAnOssProperties.class})

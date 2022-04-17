@@ -5,9 +5,6 @@ import java.io.Serializable;
 
 /**
  * 分块
- *
- * @author 陈敏
- * @version UploadPart.java, v 1.1 2022/2/9 23:01 chenmin Exp $ Created on 2022/2/9
  */
 public class UploadPart implements Serializable {
 

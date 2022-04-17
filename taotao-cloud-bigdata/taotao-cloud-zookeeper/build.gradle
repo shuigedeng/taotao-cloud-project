@@ -10,10 +10,11 @@ dependencies {
 
     implementation 'org.springframework.cloud:spring-cloud-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    implementation('org.apache.zookeeper:zookeeper:3.7.0'){
+    implementation('org.apache.zookeeper:zookeeper:3.8.0'){
         exclude group: 'javax.jms', module: 'jms'
+        exclude group: 'log4j', module: 'log4j'
         exclude group: 'jmxtools', module: 'com.sun.jdmk'
         exclude group: 'jmxri', module: 'com.sun.jmx'
     }

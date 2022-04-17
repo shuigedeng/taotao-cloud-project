@@ -6,7 +6,7 @@ dependencies {
     }
 
     api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    api "com.alibaba.csp:sentinel-spring-webmvc-adapter:1.8.1"
+    api "com.alibaba.csp:sentinel-spring-webmvc-adapter:1.8.3"
 
     api "io.github.openfeign:feign-okhttp"
 

@@ -8,10 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * @author 陈敏
- * @version AliOssProperties.java, v 1.1 2021/11/16 15:25 chenmin Exp $ Created on 2021/11/16
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.ALI)
 public class AliOssProperties extends AliOssConfig implements InitializingBean {
 

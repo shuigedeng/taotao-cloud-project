@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = FileLog.TABLE_NAME)
 @TableName(FileLog.TABLE_NAME)

@@ -6,9 +6,6 @@ import java.io.Serializable;
 
 /**
  * 文件状态
- *
- * @author 陈敏
- * @version FileStat.java, v 1.1 2022/2/9 22:54 chenmin Exp $ Created on 2022/2/9
  */
 public class UpLoadFileStat implements Serializable {
 

@@ -1,15 +1,15 @@
 dependencies {
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger'))
+    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core"))
+    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health"))
+    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
+    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
 
-    implementation 'org.springframework.security:spring-security-core:5.6.2'
-    implementation 'org.springframework.security:spring-security-config'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.security:spring-security-oauth2-resource-server'
-    implementation 'org.springframework.security:spring-security-oauth2-jose'
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.21'
+    implementation "org.springframework.security:spring-security-core:5.6.2"
+    implementation "org.springframework.security:spring-security-config"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    implementation "org.springframework.security:spring-security-oauth2-resource-server"
+    implementation "org.springframework.security:spring-security-oauth2-jose"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.21"
 
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
@@ -27,8 +27,8 @@ dependencies {
 
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
 
-    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.6'
-    implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.6'
+    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.7'
+    implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.7'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.3'
     implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.3'
 

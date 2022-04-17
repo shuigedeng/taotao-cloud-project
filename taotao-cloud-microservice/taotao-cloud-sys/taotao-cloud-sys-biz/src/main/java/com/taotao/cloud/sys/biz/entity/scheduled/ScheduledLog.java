@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = ScheduledLog.TABLE_NAME)
 @TableName(ScheduledLog.TABLE_NAME)

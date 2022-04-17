@@ -4,11 +4,6 @@ import com.ksyun.ks3.service.Ks3ClientConfig;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version JinShanOssConfig.java, v 1.1 2022/3/3 22:28 chenmin Exp $
- * Created on 2022/3/3
- */
 public class JinShanOssConfig {
     private String accessKeyId;
     private String accessKeySecret;

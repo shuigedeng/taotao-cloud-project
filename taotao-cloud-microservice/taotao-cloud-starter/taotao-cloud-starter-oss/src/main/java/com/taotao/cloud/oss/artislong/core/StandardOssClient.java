@@ -32,10 +32,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author 陈敏
- * @version AbstractOssClient.java, v 1.1 2021/11/5 15:44 chenmin Exp $ Created on 2021/11/5
- */
 public interface StandardOssClient {
 
 	/**

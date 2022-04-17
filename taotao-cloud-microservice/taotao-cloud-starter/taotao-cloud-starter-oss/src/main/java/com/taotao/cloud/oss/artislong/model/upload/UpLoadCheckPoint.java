@@ -12,9 +12,6 @@ import java.util.List;
 
 /**
  * 断点对象
- *
- * @author 陈敏
- * @version UpLoadCheckPoint.java, v 1.1 2022/2/9 22:52 chenmin Exp $ Created on 2022/2/9
  */
 public class UpLoadCheckPoint implements Serializable {
 

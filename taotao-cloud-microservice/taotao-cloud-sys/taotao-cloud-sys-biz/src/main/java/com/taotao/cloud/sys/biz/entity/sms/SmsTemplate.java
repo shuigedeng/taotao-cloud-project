@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = SmsTemplate.TABLE_NAME)
 @TableName(SmsTemplate.TABLE_NAME)

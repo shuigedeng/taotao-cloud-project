@@ -9,11 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version PingAnOssProperties.java, v 1.1 2022/3/8 10:26 chenmin Exp $
- * Created on 2022/3/8
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.PINGAN)
 public class PingAnOssProperties extends PingAnOssConfig implements InitializingBean {
 

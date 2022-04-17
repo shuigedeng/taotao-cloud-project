@@ -2,11 +2,6 @@ package com.taotao.cloud.oss.artislong.core.aws.constant;
 
 import software.amazon.awssdk.regions.Region;
 
-/**
- * @author 陈敏
- * @version Region.java, v 1.0 2022/4/1 23:05 chenmin Exp $
- * Created on 2022/4/1
- */
 public enum AwsRegion {
 
     AP_SOUTH_1(Region.AP_SOUTH_1),

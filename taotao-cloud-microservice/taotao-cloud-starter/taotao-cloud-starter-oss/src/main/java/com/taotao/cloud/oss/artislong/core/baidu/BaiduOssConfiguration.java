@@ -18,11 +18,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version BaiduConfiguration.java, v 1.1 2021/11/24 15:26 chenmin Exp $
- * Created on 2021/11/24
- */
 @Configuration
 @ConditionalOnClass(BosClient.class)
 @EnableConfigurationProperties({BaiduOssProperties.class})

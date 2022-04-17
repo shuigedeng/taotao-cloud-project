@@ -5,11 +5,6 @@ import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 import software.amazon.awssdk.awscore.defaultsmode.DefaultsMode;
 
-/**
- * @author 陈敏
- * @version AwsOssConfig.java, v 1.0 2022/4/1 18:05 chenmin Exp $
- * Created on 2022/4/1
- */
 public class AwsOssConfig {
     /**
      * 数据存储路径

@@ -38,11 +38,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.*;
 
-/**
- * @author 陈敏
- * @version QingYunOssClient.java, v 1.0 2022/3/10 23:52 chenmin Exp $
- * Created on 2022/3/10
- */
 public class QingYunOssClient implements StandardOssClient {
 
     public static final String QINGSTORE_OBJECT_NAME = "qingStor";

@@ -39,6 +39,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = Role.TABLE_NAME)
 @TableName(Role.TABLE_NAME)

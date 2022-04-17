@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = QuartzLog.TABLE_NAME)
 @TableName(QuartzLog.TABLE_NAME)

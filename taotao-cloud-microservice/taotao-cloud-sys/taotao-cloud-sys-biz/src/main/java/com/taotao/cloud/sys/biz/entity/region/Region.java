@@ -34,6 +34,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = Region.TABLE_NAME)
 @TableName(Region.TABLE_NAME)

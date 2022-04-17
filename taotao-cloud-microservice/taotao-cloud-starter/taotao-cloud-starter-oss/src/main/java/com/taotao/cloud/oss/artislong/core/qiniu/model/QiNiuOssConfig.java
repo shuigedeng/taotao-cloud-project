@@ -4,11 +4,6 @@ import com.taotao.cloud.oss.artislong.core.qiniu.constant.QiNiuRegion;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
-/**
- * @author 陈敏
- * @version QiNiuOssConfig.java, v 1.1 2022/2/20 9:02 chenmin Exp $
- * Created on 2022/2/20
- */
 public class QiNiuOssConfig {
 
     private String basePath;

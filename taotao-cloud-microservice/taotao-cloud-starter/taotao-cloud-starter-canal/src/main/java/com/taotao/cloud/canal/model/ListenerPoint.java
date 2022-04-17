@@ -47,7 +47,6 @@ public class ListenerPoint {
 	/**
 	 * 返回目标类
 	 *
-	 * @return {@link java.lang.Object }
 	 * @since 2021-09-03 20:51:57
 	 */
 	public Object getTarget() {
@@ -57,7 +56,6 @@ public class ListenerPoint {
 	/**
 	 * 获取监听的操作方法和节点
 	 *
-	 * @return {@link java.util.Map }
 	 * @since 2021-09-03 20:52:04
 	 */
 	public Map<Method, ListenPoint> getInvokeMap() {

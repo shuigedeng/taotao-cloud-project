@@ -9,11 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version QingYunOssProperties.java, v 1.0 2022/3/10 23:52 chenmin Exp $
- * Created on 2022/3/10
- */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.QINGYUN)
 public class QingYunOssProperties extends QingYunOssConfig implements InitializingBean {
 

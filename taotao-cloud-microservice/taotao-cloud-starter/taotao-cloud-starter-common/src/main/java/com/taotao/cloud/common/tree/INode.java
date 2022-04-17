@@ -49,7 +49,7 @@ public interface INode extends Serializable {
 	 * @return 子节点数据
 	 * @since 2021-09-02 22:22:22
 	 */
-	List<? extends INode> getChildren();
+	<T extends INode> List<T> getChildren();
 
 	/**
 	 * 判断是否有子节点

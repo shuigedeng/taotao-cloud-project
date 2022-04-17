@@ -45,6 +45,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)

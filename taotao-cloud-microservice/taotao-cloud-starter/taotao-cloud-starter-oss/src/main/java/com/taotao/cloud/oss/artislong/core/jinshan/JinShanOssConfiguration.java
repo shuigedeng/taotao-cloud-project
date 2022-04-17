@@ -18,11 +18,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version JinShanOssConfiguration.java, v 1.1 2022/3/3 22:10 chenmin Exp $
- * Created on 2022/3/3
- */
 @Configuration
 @ConditionalOnClass(Ks3.class)
 @EnableConfigurationProperties({JinShanOssProperties.class})

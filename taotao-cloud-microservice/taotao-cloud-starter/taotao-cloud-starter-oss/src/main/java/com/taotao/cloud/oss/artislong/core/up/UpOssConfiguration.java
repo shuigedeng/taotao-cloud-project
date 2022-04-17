@@ -18,11 +18,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * @author 陈敏
- * @version UpOssConfiguration.java, v 1.1 2021/11/30 12:03 chenmin Exp $
- * Created on 2021/11/30
- */
 @Configuration
 @ConditionalOnClass(RestManager.class)
 @EnableConfigurationProperties({UpOssProperties.class})

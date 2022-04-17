@@ -18,10 +18,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author 陈敏
- * @version AliOssConfiguration.java, v 1.1 2021/11/16 15:25 chenmin Exp $ Created on 2021/11/16
- */
 @Configuration
 @ConditionalOnClass(OSSClient.class)
 @EnableConfigurationProperties({AliOssProperties.class})
