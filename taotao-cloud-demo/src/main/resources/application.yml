@@ -93,7 +93,7 @@ taotao:
       # - /Event-DC-Output/TagA-Output/** = emailHandler
       # - /Event-DC-Output/TagB-Output/** = smsHandler
     dinger:
-      enabled: true
+      enabled: false
       project-id: ${spring.application.name}
       dingers:
         dingtalk:
@@ -118,7 +118,7 @@ taotao:
           retryCount: 3
           acquireInterval: 3000
     zookeeper:
-      enabled: true
+      enabled: false
       connectString: 172.16.6.151:2181
       lock:
         enabled: true
@@ -127,13 +127,13 @@ taotao:
 #Apollo 配置
 app:
   id: taotao-cloud-demo                          #应用ID
-apollo:
-  cacheDir: ${user.dir}/logs/apolloconfig/                       #配置本地配置缓存目录
-  cluster: default                           #指定使用哪个集群的配置
-  meta: http://172.16.6.151:8080            #DEV环境配置中心地址
-  autoUpdateInjectedSpringProperties: true   #是否开启 Spring 参数自动更新
-  bootstrap:
-    enabled: true                            #是否开启 Apollo
-    namespaces: application                  #设置 Namespace
-    eagerLoad:
-      enabled: false                         #将 Apollo 加载提到初始化日志系统之前
+#apollo:
+#  cacheDir: ${user.dir}/logs/apolloconfig/                       #配置本地配置缓存目录
+#  cluster: default                           #指定使用哪个集群的配置
+#  meta: http://172.16.6.151:8080            #DEV环境配置中心地址
+#  autoUpdateInjectedSpringProperties: true   #是否开启 Spring 参数自动更新
+#  bootstrap:
+#    enabled: true                            #是否开启 Apollo
+#    namespaces: application                  #设置 Namespace
+#    eagerLoad:
+#      enabled: false                         #将 Apollo 加载提到初始化日志系统之前
