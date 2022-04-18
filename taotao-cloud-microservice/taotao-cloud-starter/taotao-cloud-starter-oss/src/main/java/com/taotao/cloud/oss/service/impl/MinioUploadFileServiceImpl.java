@@ -229,7 +229,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 */
 	public void uploadFiles(String filePath, String bucketName, String fileName)
 		throws IOException {
-		MultipartFile file = FileUtil.createFileItem(new File(filePath));
+		MultipartFile file = FileUtil.fileToMultipartFile(new File(filePath));
 		//开始上传
 		try {
 			InputStream inputStream = file.getInputStream();
@@ -471,7 +471,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 			}
 			//压缩文件后上传到minio
 			FileUtil.toZip(filePath + ".zip", true, filePath);
-			MultipartFile multipartFile = FileUtil.createFileItem(
+			MultipartFile multipartFile = FileUtil.fileToMultipartFile(
 				new File(filePath + ".zip"));
 			//上传到minio
 			uploadFile(multipartFile, bucketName, objectName + ".zip");

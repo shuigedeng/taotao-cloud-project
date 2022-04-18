@@ -1,6 +1,8 @@
 package com.taotao.cloud.oss.artislong.model;
 
 
+import com.taotao.cloud.oss.model.UploadFileInfo;
+
 public class OssInfo {
 
 	/**
@@ -12,9 +14,13 @@ public class OssInfo {
 	 */
 	private String path;
 	/**
+	 * 访问路径
+	 */
+	private String url;
+	/**
 	 * 对象大小
 	 */
-	private String length;
+	private Long length;
 	/**
 	 * 创建时间
 	 */
@@ -24,16 +30,9 @@ public class OssInfo {
 	 */
 	private String lastUpdateTime;
 
-	public OssInfo() {
-	}
+	private UploadFileInfo uploadFileInfo;
 
-	public OssInfo(String name, String path, String length, String createTime,
-		String lastUpdateTime) {
-		this.name = name;
-		this.path = path;
-		this.length = length;
-		this.createTime = createTime;
-		this.lastUpdateTime = lastUpdateTime;
+	public OssInfo() {
 	}
 
 	public String getName() {
@@ -52,14 +51,6 @@ public class OssInfo {
 		this.path = path;
 	}
 
-	public String getLength() {
-		return length;
-	}
-
-	public void setLength(String length) {
-		this.length = length;
-	}
-
 	public String getCreateTime() {
 		return createTime;
 	}
@@ -74,5 +65,41 @@ public class OssInfo {
 
 	public void setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Long getLength() {
+		return length;
+	}
+
+	public void setLength(Long length) {
+		this.length = length;
+	}
+
+	@Override
+	public String toString() {
+		return "OssInfo{" +
+			"name='" + name + '\'' +
+			", path='" + path + '\'' +
+			", url='" + url + '\'' +
+			", length=" + length +
+			", createTime='" + createTime + '\'' +
+			", lastUpdateTime='" + lastUpdateTime + '\'' +
+			'}';
+	}
+
+	public UploadFileInfo getUploadFileInfo() {
+		return uploadFileInfo;
+	}
+
+	public void setUploadFileInfo(UploadFileInfo uploadFileInfo) {
+		this.uploadFileInfo = uploadFileInfo;
 	}
 }

@@ -252,7 +252,7 @@ public class LocalOssClient implements StandardOssClient {
             }
             ossInfo.setLastUpdateTime(DateUtil.date(lastModifiedTime.toMillis()).toString(DatePattern.NORM_DATETIME_PATTERN));
             ossInfo.setCreateTime(DateUtil.date(creationTime.toMillis()).toString(DatePattern.NORM_DATETIME_PATTERN));
-            ossInfo.setLength(Convert.toStr(size));
+            ossInfo.setLength(size);
         } catch (Exception e) {
             LogUtil.error("获取{}文件属性失败", targetName, e);
         }

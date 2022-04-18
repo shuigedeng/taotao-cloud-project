@@ -6,6 +6,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.exception.OssException;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
@@ -19,7 +20,10 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+import com.taotao.cloud.oss.model.UploadFileInfo;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
@@ -31,8 +35,37 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface StandardOssClient {
+
+	default OssInfo upLoad(MultipartFile multipartFile) {
+		try {
+			UploadFileInfo uploadFileInfo = com.taotao.cloud.oss.util.FileUtil.getMultipartFileInfo(
+				multipartFile);
+			OssInfo ossInfo = upLoad(multipartFile.getInputStream(), uploadFileInfo.getName());
+			ossInfo.setUploadFileInfo(uploadFileInfo);
+			return ossInfo;
+		} catch (IOException e) {
+			LogUtil.error(e);
+			throw new RuntimeException(e);
+		}
+	}
+	default OssInfo upLoad(String path) {
+		return upLoad(new File(path));
+	}
+	default OssInfo upLoad(File file) {
+		try {
+			UploadFileInfo uploadFileInfo = com.taotao.cloud.oss.util.FileUtil.getFileInfo(
+				file);
+			OssInfo ossInfo = upLoad(new FileInputStream(file), uploadFileInfo.getName());
+			ossInfo.setUploadFileInfo(uploadFileInfo);
+			return ossInfo;
+		} catch (IOException e) {
+			LogUtil.error(e);
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * 上传文件，默认覆盖
@@ -54,6 +87,7 @@ public interface StandardOssClient {
 	 * @return 文件信息
 	 */
 	OssInfo upLoad(InputStream is, String targetName, Boolean isOverride);
+
 
 	/**
 	 * 断点续传

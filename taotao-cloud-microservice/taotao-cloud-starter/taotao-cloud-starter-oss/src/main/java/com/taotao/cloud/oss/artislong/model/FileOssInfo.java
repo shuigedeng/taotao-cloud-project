@@ -15,12 +15,6 @@ public class FileOssInfo extends OssInfo {
 		this.id = id;
 	}
 
-	public FileOssInfo(String name, String path, String length, String createTime,
-		String lastUpdateTime, String id) {
-		super(name, path, length, createTime, lastUpdateTime);
-		this.id = id;
-	}
-
 	public String getId() {
 		return id;
 	}

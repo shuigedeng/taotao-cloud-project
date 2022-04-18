@@ -1,13 +1,14 @@
 package com.taotao.cloud.demo.utils;
 
 
-import com.taotao.cloud.common.utils.common.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class StringTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException {
 		long startNs1 = System.nanoTime();
 		for (int i = 0; i < 10000; i++) {
 			System.out.println(StringUtil.getUUID());

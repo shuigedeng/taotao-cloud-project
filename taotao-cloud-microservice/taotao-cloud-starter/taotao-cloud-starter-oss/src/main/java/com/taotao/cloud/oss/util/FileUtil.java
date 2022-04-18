@@ -43,6 +43,9 @@ import javax.imageio.ImageIO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -70,7 +73,6 @@ public class FileUtil {
 	 *
 	 * @param multipartFile 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static UploadFileInfo getMultipartFileInfo(MultipartFile multipartFile) {
@@ -104,7 +106,6 @@ public class FileUtil {
 	 *
 	 * @param file 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static UploadFileInfo getFileInfo(File file) {
@@ -129,7 +130,6 @@ public class FileUtil {
 	 *
 	 * @param inputStream inputStream
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static String fileMd5(InputStream inputStream) {
@@ -142,7 +142,6 @@ public class FileUtil {
 	 * @param file 文件对象
 	 * @param path 保存路径
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static String saveFile(MultipartFile file, String path) {
@@ -167,7 +166,6 @@ public class FileUtil {
 	 *
 	 * @param path 文件路径
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static boolean deleteFile(String path) {
@@ -190,8 +188,6 @@ public class FileUtil {
 	 *
 	 * @param file        文件对象
 	 * @param acceptTypes 接受类型
-	 * @return com.taotao.cloud.file.pojo.ResultBody
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static Boolean validType(MultipartFile file, String[] acceptTypes) {
@@ -219,7 +215,6 @@ public class FileUtil {
 	 *
 	 * @param file 文件对象
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static String extractFilename(MultipartFile file) {
@@ -234,7 +229,6 @@ public class FileUtil {
 	 * @param fileName  文件名称
 	 * @param extension 扩展名称
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static String extractFilename(String fileName, String extension) {
@@ -248,7 +242,6 @@ public class FileUtil {
 	 *
 	 * @param fileName fileName
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	private static String encodingFilename(String fileName) {
@@ -262,7 +255,6 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static String getExtension(MultipartFile file) {
@@ -278,7 +270,6 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:45
 	 */
 	public static boolean isImage(File file) {
@@ -290,7 +281,6 @@ public class FileUtil {
 			image = ImageIO.read(file);
 			return image != null && image.getWidth() > 0 && image.getHeight() > 0;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -300,7 +290,6 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2020/10/26 10:45
 	 */
 	public static boolean isImage(MultipartFile file) {
@@ -312,7 +301,6 @@ public class FileUtil {
 			image = ImageIO.read(file.getInputStream());
 			return image != null && image.getWidth() > 0 && image.getHeight() > 0;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -327,7 +315,7 @@ public class FileUtil {
 		try (FileInputStream fi = new FileInputStream(file)) {
 			buffer = new byte[(int) fileSize];
 			int offset = 0;
-			int numRead = 0;
+			int numRead;
 			while (offset < buffer.length
 				&& (numRead = fi.read(buffer, offset, buffer.length - offset)) >= 0) {
 				offset += numRead;
@@ -349,23 +337,44 @@ public class FileUtil {
 	 * @param file 文件
 	 * @return MultipartFile
 	 */
-	public static MultipartFile createFileItem(File file) {
+	public static MultipartFile fileToMultipartFile(File file) {
 		FileItemFactory factory = new DiskFileItemFactory(16, null);
 		FileItem item = factory.createItem("textField", "text/plain", true, file.getName());
 		int bytesRead;
 		byte[] buffer = new byte[8192];
-		try {
-			FileInputStream fis = new FileInputStream(file);
-			OutputStream os = item.getOutputStream();
+		try (FileInputStream fis = new FileInputStream(file);
+			OutputStream os = item.getOutputStream()) {
 			while ((bytesRead = fis.read(buffer, 0, 8192)) != -1) {
 				os.write(buffer, 0, bytesRead);
 			}
-			os.close();
-			fis.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return new CommonsMultipartFile(item);
+	}
+
+	public static MultipartFile fileToMultipartFileByMock(File file) {
+		MultipartFile multipartFile;
+		try {
+			FileInputStream input = new FileInputStream(file);
+			multipartFile = new MockMultipartFile("file",
+				file.getName(), "text/plain", IOUtils.toByteArray(input));
+		} catch (IOException e) {
+			LogUtil.error(e);
+			throw new RuntimeException(e);
+		}
+		return multipartFile;
+	}
+
+	public static File multipartFileToFile(String path, MultipartFile multipartFile) {
+		File file = new File(path);
+		try {
+			FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
+		} catch (IOException e) {
+			LogUtil.error(e);
+			throw new RuntimeException(e);
+		}
+		return file;
 	}
 
 	/**
@@ -450,7 +459,6 @@ public class FileUtil {
 							compress(file, zos, file.getName(),
 								keepDirStructure);
 						}
-
 					}
 				}
 			}
@@ -465,7 +473,6 @@ public class FileUtil {
 	 * @param name             压缩后的名称
 	 * @param keepDirStructure 是否保留原来的目录结构, true:保留目录结构;
 	 *                         false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
-	 * @throws Exception
 	 */
 	private static void compress(File sourceFile, ZipOutputStream zos, String name,
 		boolean keepDirStructure) throws Exception {
@@ -526,8 +533,6 @@ public class FileUtil {
 			while ((len = inputStream.read(bs)) != -1) {
 				os.write(bs, 0, len);
 			}
-		} catch (IOException e) {
-			LogUtil.error("生成excel失败");
 		} catch (Exception e) {
 			LogUtil.error("生成excel失败");
 		} finally {
@@ -584,4 +589,6 @@ public class FileUtil {
 			}
 		}
 	}
+
+
 }

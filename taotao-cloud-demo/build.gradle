@@ -14,6 +14,7 @@ dependencies {
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket')
 
 	api 'com.ctrip.framework.apollo:apollo-client:1.9.1'
+	api "mysql:mysql-connector-java"
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 //	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'

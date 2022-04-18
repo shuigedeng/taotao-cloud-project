@@ -236,7 +236,9 @@ public class JinShanOssClient implements StandardOssClient {
                     if (FileNameUtil.getName(ks3ObjectSummary.getKey()).equals(FileNameUtil.getName(key))) {
                         ossInfo.setLastUpdateTime(DateUtil.date(ks3ObjectSummary.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
                         ossInfo.setCreateTime(DateUtil.date(ks3ObjectSummary.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
-                        ossInfo.setLength(Convert.toStr(ks3ObjectSummary.getSize()));
+	                    ossInfo.setLength(ks3ObjectSummary.getSize());
+	                    // todo 需要设置访问路径
+	                    //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
                     } else {
                         fileOssInfos.add(getInfo(OssPathUtil.replaceKey(ks3ObjectSummary.getKey(), getBasePath(), false), false));
                     }
@@ -297,7 +299,9 @@ public class JinShanOssClient implements StandardOssClient {
                 ObjectMetadata objectMetadata = objectResult.getObject().getObjectMetadata();
                 ossInfo.setLastUpdateTime(DateUtil.date(objectMetadata.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
                 ossInfo.setCreateTime(DateUtil.date(objectMetadata.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
-                ossInfo.setLength(Convert.toStr(objectMetadata.getContentLength()));
+	            ossInfo.setLength(objectMetadata.getContentLength());
+	            // todo 需要设置访问路径
+	            //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
             } catch (Exception e) {
                 LogUtil.error("获取{}文件属性失败", key, e);
             }

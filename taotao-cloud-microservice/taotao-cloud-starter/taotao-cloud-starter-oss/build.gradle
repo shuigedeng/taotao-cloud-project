@@ -1,6 +1,9 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
+    api 'commons-fileupload:commons-fileupload:1.4'
+    api 'org.springframework:spring-test'
+
     //青云
     api 'com.yunify:qingstor.sdk.java:2.5.2'
 

@@ -3,11 +3,19 @@ package com.taotao.cloud.sys.biz.entity.file;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
-
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 /**
  * 文件表
@@ -16,8 +24,10 @@ import javax.persistence.Table;
  * @version 2022.03
  * @since 2020/11/12 15:33
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -92,4 +102,22 @@ public class FileLog extends BaseSuperEntity<FileLog, Long> {
 	 */
 	@Column(name = "size", columnDefinition = "bigint not null comment '大小'")
 	private Long size;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		FileLog fileLog = (FileLog) o;
+		return getId() != null && Objects.equals(getId(), fileLog.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

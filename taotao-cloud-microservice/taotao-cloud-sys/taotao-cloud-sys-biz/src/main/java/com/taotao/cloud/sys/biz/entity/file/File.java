@@ -3,16 +3,19 @@ package com.taotao.cloud.sys.biz.entity.file;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 /**
  * 文件表
@@ -21,8 +24,10 @@ import lombok.Setter;
  * @version 2022.03
  * @since 2020/11/12 15:33
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -35,32 +40,28 @@ public class File extends BaseSuperEntity<File, Long> {
 	public static final String TABLE_NAME = "tt_file";
 
 	/**
-	 * 业务ID
+	 * 创建人
 	 */
-	@Column(name = "biz_id", columnDefinition = "bigint comment '业务ID'")
-	private Long bizId;
+	@Column(name = "create_name", columnDefinition = "varchar(255) not null comment '创建人'")
+	private String createName;
 
 	/**
-	 * 业务类型
-	 *
-	 * @see BizType
+	 * 业务类型 供应商上传图片 供应商上传附件 商品上传图片
 	 */
-	@Column(name = "biz_type", columnDefinition = "varchar(32) not null comment '业务类型'")
+	@Column(name = "biz_type", columnDefinition = "varchar(255) not null comment '业务类型 '")
 	private String bizType;
 
 	/**
-	 * 数据类型
-	 *
-	 * @see DataType {IMAGE:图片;VIDEO:视频;AUDIO:音频;DOC:文档;OTHER:其他}
+	 * 数据类型 {IMAGE:图片;VIDEO:视频;AUDIO:音频;DOC:文档;OTHER:其他}
 	 */
-	@Column(name = "data_type", columnDefinition = "varchar(32) not null comment '数据类型'")
+	@Column(name = "data_type", columnDefinition = "varchar(255) not null comment '数据类型'")
 	private String dataType;
 
 	/**
 	 * 原始文件名
 	 */
-	@Column(name = "original_file_name", columnDefinition = "varchar(255) not null comment '原始文件名'")
-	private String originalFileName;
+	@Column(name = "original", columnDefinition = "varchar(255) not null comment '原始文件名'")
+	private String original;
 
 	/**
 	 * 文件访问链接
@@ -71,8 +72,14 @@ public class File extends BaseSuperEntity<File, Long> {
 	/**
 	 * 文件md5值
 	 */
-	@Column(name = "file_md5", columnDefinition = "varchar(255) not null comment '文件md5值'")
-	private String fileMd5;
+	@Column(name = "md5", columnDefinition = "varchar(255) not null comment '文件md5值'")
+	private String md5;
+
+	/**
+	 * 文件上传类型 取上传文件的值
+	 */
+	@Column(name = "type", columnDefinition = "varchar(255) not null comment '文件上传类型'")
+	private String type;
 
 	/**
 	 * 文件上传类型 取上传文件的值
@@ -83,19 +90,36 @@ public class File extends BaseSuperEntity<File, Long> {
 	/**
 	 * 唯一文件名
 	 */
-	@Column(name = "filename", columnDefinition = "varchar(255) not null comment '唯一文件名'")
-	private String filename;
+	@Column(name = "name", columnDefinition = "varchar(255) not null comment '唯一文件名'")
+	private String name;
 
 	/**
 	 * 后缀(没有.)
 	 */
-	@Column(name = "ext", columnDefinition = "varchar(64) not null comment '后缀'")
+	@Column(name = "ext", columnDefinition = "varchar(255) not null comment '后缀'")
 	private String ext;
 
 	/**
 	 * 大小
 	 */
-	@Column(name = "size", columnDefinition = "bigint not null comment '大小'")
-	private Long size;
+	@Column(name = "length", columnDefinition = "bigint null comment '大小'")
+	private Long length;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		File file = (File) o;
+		return getId() != null && Objects.equals(getId(), file.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

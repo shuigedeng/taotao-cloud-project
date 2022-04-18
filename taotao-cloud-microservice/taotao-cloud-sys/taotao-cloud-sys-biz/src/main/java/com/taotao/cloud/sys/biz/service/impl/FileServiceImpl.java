@@ -1,16 +1,24 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.io.FileTypeUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.oss.artislong.core.StandardOssClient;
+import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.exception.UploadFileException;
 import com.taotao.cloud.oss.model.UploadFileInfo;
 import com.taotao.cloud.oss.service.UploadFileService;
+import com.taotao.cloud.oss.util.FileUtil;
+import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.entity.file.File;
 import com.taotao.cloud.sys.biz.mapper.IFileMapper;
 import com.taotao.cloud.sys.biz.repository.cls.FileRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IFileRepository;
 import com.taotao.cloud.sys.biz.service.IFileService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +38,8 @@ public class FileServiceImpl extends
 
 	@Autowired(required = false)
 	private UploadFileService uploadFileService;
+	@Autowired(required = false)
+	private StandardOssClient standardOssClient;
 
 	@Override
 	public File upload(MultipartFile file) {
@@ -47,6 +57,42 @@ public class FileServiceImpl extends
 	public File findFileById(Long id) {
 		Optional<File> optionalFile = ir().findById(id);
 		return optionalFile.orElseThrow(() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
+	}
+
+	@Override
+	public UploadFileVO uploadFile(String type, MultipartFile multipartFile) {
+		// 上传文件
+		OssInfo ossInfo = standardOssClient.upLoad(multipartFile);
+
+		// 添加文件
+		File file = File.builder()
+			.bizType(type)
+			.type(Optional.of(ossInfo.getUploadFileInfo().getFileType()).get())
+			.contextType(multipartFile.getContentType())
+			.ext(FileUtil.getExtension(multipartFile))
+			.original(multipartFile.getOriginalFilename())
+			.url(ossInfo.getUrl())
+			.name(ossInfo.getName())
+			.length(ossInfo.getLength())
+			.md5(Optional.of(ossInfo.getUploadFileInfo().getFileMd5()).get())
+			.build();
+
+		try {
+			file.setCreateTime(
+				LocalDateTime.parse(ossInfo.getCreateTime(), DatePattern.NORM_DATETIME_FORMATTER));
+			file.setUpdateTime(
+				LocalDateTime.parse(ossInfo.getLastUpdateTime(),
+					DatePattern.NORM_DATETIME_FORMATTER));
+			file.setDataType(FileTypeUtil.getType(multipartFile.getInputStream()));
+			file.setCreatedBy(SecurityUtil.getUser().getUserId());
+			file.setCreateName(SecurityUtil.getUser().getUsername());
+		} catch (Exception ignored) {
+		}
+		file.setDelFlag(false);
+		this.save(file);
+
+		// 添加文件日志
+		return null;
 	}
 	//
 	// @Override
@@ -90,4 +136,6 @@ public class FileServiceImpl extends
 	// 		e.printStackTrace();
 	// 	}
 	// }
+
+
 }

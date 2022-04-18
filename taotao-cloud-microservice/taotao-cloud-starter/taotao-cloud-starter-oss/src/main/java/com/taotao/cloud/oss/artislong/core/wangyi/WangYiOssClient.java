@@ -269,7 +269,7 @@ public class WangYiOssClient implements StandardOssClient {
 							.toString(DatePattern.NORM_DATETIME_PATTERN));
 						ossInfo.setCreateTime(DateUtil.date(nosObjectSummary.getLastModified())
 							.toString(DatePattern.NORM_DATETIME_PATTERN));
-						ossInfo.setLength(Convert.toStr(nosObjectSummary.getSize()));
+						ossInfo.setLength(nosObjectSummary.getSize());
 					} else {
 						fileOssInfos.add(getInfo(
 							OssPathUtil.replaceKey(nosObjectSummary.getKey(), getBasePath(), false),
@@ -334,7 +334,7 @@ public class WangYiOssClient implements StandardOssClient {
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setCreateTime(DateUtil.date(objectMetadata.getLastModified())
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Convert.toStr(objectMetadata.getContentLength()));
+				ossInfo.setLength(objectMetadata.getContentLength());
 			} catch (Exception e) {
 				LogUtil.error("获取{}文件属性失败", key, e);
 			}

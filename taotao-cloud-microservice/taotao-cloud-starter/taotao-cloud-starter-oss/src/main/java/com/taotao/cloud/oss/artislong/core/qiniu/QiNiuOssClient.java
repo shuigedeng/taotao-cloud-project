@@ -295,7 +295,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				FileInfo fileInfo = bucketManager.stat(getBucket(), key);
 				String putTime = DateUtil.date(fileInfo.putTime / 10000)
 					.toString(DatePattern.NORM_DATETIME_PATTERN);
-				ossInfo.setLength(Convert.toStr(fileInfo.fsize));
+				ossInfo.setLength(fileInfo.fsize);
 				ossInfo.setCreateTime(putTime);
 				ossInfo.setLastUpdateTime(putTime);
 			} catch (QiniuException e) {

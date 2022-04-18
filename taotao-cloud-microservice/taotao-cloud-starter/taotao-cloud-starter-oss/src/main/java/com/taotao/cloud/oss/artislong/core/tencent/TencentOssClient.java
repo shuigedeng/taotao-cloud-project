@@ -232,7 +232,7 @@ public class TencentOssClient implements StandardOssClient {
                 if (FileNameUtil.getName(cosObjectSummary.getKey()).equals(FileNameUtil.getName(key))) {
                     ossInfo.setLastUpdateTime(DateUtil.date(cosObjectSummary.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
                     ossInfo.setCreateTime(DateUtil.date(cosObjectSummary.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
-                    ossInfo.setLength(Convert.toStr(cosObjectSummary.getSize()));
+                    ossInfo.setLength(cosObjectSummary.getSize());
                 } else {
                     fileOssInfos.add(getInfo(OssPathUtil.replaceKey(cosObjectSummary.getKey(), getBasePath(), false), false));
                 }
@@ -289,7 +289,7 @@ public class TencentOssClient implements StandardOssClient {
                 ObjectMetadata objectMetadata = cosClient.getObjectMetadata(getBucket(), OssPathUtil.replaceKey(key, getBasePath(), false));
                 ossInfo.setLastUpdateTime(DateUtil.date(objectMetadata.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
                 ossInfo.setCreateTime(DateUtil.date(objectMetadata.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
-                ossInfo.setLength(Convert.toStr(objectMetadata.getContentLength()));
+                ossInfo.setLength(objectMetadata.getContentLength());
             } catch (Exception e) {
                 LogUtil.error("获取{}文件属性失败", key, e);
             }

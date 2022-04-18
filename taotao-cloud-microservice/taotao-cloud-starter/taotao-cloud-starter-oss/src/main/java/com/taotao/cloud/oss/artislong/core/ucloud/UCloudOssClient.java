@@ -302,7 +302,7 @@ public class UCloudOssClient implements StandardOssClient {
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
 					ossInfo.setCreateTime(DateUtil.date(objectInfoBean.getCreateTime())
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
-					ossInfo.setLength(Convert.toStr(objectInfoBean.getSize()));
+					ossInfo.setLength(objectInfoBean.getSize());
 				} else if (isDirectory(fileName)) {
 					directoryInfos.add(
 						getInfo(OssPathUtil.replaceKey(fileName, getBasePath(), false), true));
@@ -366,7 +366,7 @@ public class UCloudOssClient implements StandardOssClient {
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setCreateTime(DateUtil.parse(objectProfile.getCreateTime())
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Convert.toStr(objectProfile.getContentLength()));
+				ossInfo.setLength(objectProfile.getContentLength());
 			} catch (Exception e) {
 				LogUtil.error("获取{}文件属性失败", key, e);
 			}

@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.common.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
