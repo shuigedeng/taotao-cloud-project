@@ -169,7 +169,8 @@ public class AliOssClient implements StandardOssClient {
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
 					ossInfo.setCreateTime(DateUtil.date(ossObjectSummary.getLastModified())
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
-					ossInfo.setLength(Convert.toStr(ossObjectSummary.getSize()));
+					ossInfo.setLength(ossObjectSummary.getSize());
+					ossInfo.setUrl(aliOssConfig.getEndpoint() + "/" + bucketName + "/" + key);
 				} else {
 					fileOssInfos.add(getInfo(
 						OssPathUtil.replaceKey(ossObjectSummary.getKey(), getBasePath(), false),
@@ -234,7 +235,8 @@ public class AliOssClient implements StandardOssClient {
 				ossInfo.setCreateTime(
 					DateUtil.date((Date) objectMetadata.getRawMetadata().get(HttpHeaders.DATE))
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Convert.toStr(objectMetadata.getContentLength()));
+				ossInfo.setLength(objectMetadata.getContentLength());
+				ossInfo.setUrl(aliOssConfig.getEndpoint() + "/" + bucketName + "/" + key);
 			} catch (Exception e) {
 				LogUtil.error("获取{}文件属性失败", key, e);
 			}

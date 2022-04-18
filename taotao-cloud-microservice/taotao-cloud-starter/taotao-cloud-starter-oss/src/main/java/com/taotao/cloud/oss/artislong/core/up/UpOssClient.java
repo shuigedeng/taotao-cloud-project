@@ -200,7 +200,8 @@ public class UpOssClient implements StandardOssClient {
             ossInfo = new FileOssInfo();
             Response fileInfo = restManager.getFileInfo(key);
             Headers headers = fileInfo.headers();
-            ossInfo.setLength(headers.get(RestManager.PARAMS.X_UPYUN_FILE_SIZE.getValue()));
+            ossInfo.setLength(
+	            Long.valueOf(headers.get(RestManager.PARAMS.X_UPYUN_FILE_SIZE.getValue())));
             ossInfo.setCreateTime(DateUtil.date(headers.getDate(RestManager.PARAMS.X_UPYUN_FILE_DATE.getValue())).toString(DatePattern.NORM_DATETIME_PATTERN));
             ossInfo.setLastUpdateTime(DateUtil.date(headers.getDate(RestManager.PARAMS.X_UPYUN_FILE_DATE.getValue())).toString(DatePattern.NORM_DATETIME_PATTERN));
         } else {
@@ -221,7 +222,7 @@ public class UpOssClient implements StandardOssClient {
             if (name.equals(fields.get(0))) {
                 ossInfo.setName(fields.get(0));
                 ossInfo.setPath(OssPathUtil.replaceKey(newKey, getBasePath(), true));
-                ossInfo.setLength(fields.get(2));
+                ossInfo.setLength(Long.valueOf(fields.get(2)));
                 ossInfo.setCreateTime(DateUtil.date(Convert.toLong(fields.get(3)) * 1000).toString(DatePattern.NORM_DATETIME_PATTERN));
                 ossInfo.setLastUpdateTime(DateUtil.date(Convert.toLong(fields.get(3)) * 1000).toString(DatePattern.NORM_DATETIME_PATTERN));
             }

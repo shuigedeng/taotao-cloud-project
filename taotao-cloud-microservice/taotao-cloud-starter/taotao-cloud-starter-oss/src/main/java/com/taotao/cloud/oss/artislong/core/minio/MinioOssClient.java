@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.minio;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
@@ -47,7 +46,6 @@ import okhttp3.Headers;
 
 /**
  * http://docs.minio.org.cn/docs/master/minio-monitoring-guide https://docs.min.io/
- *
  */
 public class MinioOssClient implements StandardOssClient {
 
@@ -121,7 +119,8 @@ public class MinioOssClient implements StandardOssClient {
 			DownloadObjectStat downloadObjectStat = new DownloadObjectStat();
 			downloadObjectStat.setSize(contentLength);
 			downloadObjectStat.setDigest(eTag);
-			downloadObjectStat.setLastModified(Date.from(statObjectResponse.lastModified().toInstant()));
+			downloadObjectStat.setLastModified(
+				Date.from(statObjectResponse.lastModified().toInstant()));
 			return downloadObjectStat;
 		} catch (Exception e) {
 			throw new OssException(e);
@@ -277,7 +276,8 @@ public class MinioOssClient implements StandardOssClient {
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setLastUpdateTime(DateUtil.date(headers.getDate(HttpHeaders.LAST_MODIFIED))
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Convert.toStr(headers.get(HttpHeaders.CONTENT_LENGTH)));
+				ossInfo.setLength(Long.valueOf(headers.get(HttpHeaders.CONTENT_LENGTH)));
+				ossInfo.setUrl(minioOssConfig.getEndpoint() + "/" + bucketName + key);
 			} catch (Exception e) {
 				LogUtil.error("获取{}文件属性失败", key, e);
 			}
@@ -286,7 +286,7 @@ public class MinioOssClient implements StandardOssClient {
 		}
 		ossInfo.setName(StrUtil.equals(targetName, StrUtil.SLASH) ? targetName
 			: FileNameUtil.getName(targetName));
-		ossInfo.setPath(OssPathUtil.replaceKey(targetName, ossInfo.getName(), true));
+		ossInfo.setPath(OssPathUtil.replaceKey(targetName,minioOssConfig.getBasePath() , true));
 		return ossInfo;
 	}
 

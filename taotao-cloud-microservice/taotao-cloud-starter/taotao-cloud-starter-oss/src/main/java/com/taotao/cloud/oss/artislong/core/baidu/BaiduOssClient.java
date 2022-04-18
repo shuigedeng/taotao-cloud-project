@@ -236,7 +236,9 @@ public class BaiduOssClient implements StandardOssClient {
                     if (FileNameUtil.getName(bosObjectSummary.getKey()).equals(FileNameUtil.getName(key))) {
                         ossInfo.setLastUpdateTime(DateUtil.date(bosObjectSummary.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
                         ossInfo.setCreateTime(DateUtil.date(bosObjectSummary.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
-                        ossInfo.setLength(Convert.toStr(bosObjectSummary.getSize()));
+	                    ossInfo.setLength(bosObjectSummary.getSize());
+	                    // todo 需要设置访问路径
+	                    //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
                     } else {
                         fileOssInfos.add(getInfo(OssPathUtil.replaceKey(bosObjectSummary.getKey(), getBasePath(), false), false));
                     }
@@ -296,7 +298,9 @@ public class BaiduOssClient implements StandardOssClient {
                 ObjectMetadata objectMetadata = bosClient.getObjectMetadata(getBucket(), key);
                 ossInfo.setLastUpdateTime(DateUtil.date(objectMetadata.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
                 ossInfo.setCreateTime(DateUtil.date(objectMetadata.getLastModified()).toString(DatePattern.NORM_DATETIME_PATTERN));
-                ossInfo.setLength(Convert.toStr(objectMetadata.getContentLength()));
+	            ossInfo.setLength(objectMetadata.getContentLength());
+	            // todo 需要设置访问路径
+	            //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
             } catch (Exception e) {
                 LogUtil.error("获取{}文件属性失败", key, e);
             }

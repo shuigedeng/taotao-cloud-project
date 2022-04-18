@@ -38,7 +38,7 @@ public class PdfController {
 	private final PdfUtils pdfUtils;
 
 	@Operation(summary = "文件上传", description = "文件上传", method = CommonConstant.POST)
-	@RequestLogger("文件上传")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/upload")
 	public Result<Map<String, Object>> upload(@RequestParam("file") MultipartFile file)
@@ -46,6 +46,7 @@ public class PdfController {
 		if (file.isEmpty()) {
 			throw new BusinessException("请上传文件");
 		}
+
 		String fileName = file.getOriginalFilename();
 		String urlFileName = fileUploaderUtils.getRandomFileName(
 			FileUploaderUtils.getSuffix(fileName));

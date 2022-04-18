@@ -56,7 +56,7 @@ dependencies {
 
     api "io.github.openfeign:feign-okhttp"
     api "com.squareup.okhttp3:okhttp"
-    api "org.springframework.cloud:spring-cloud-openfeign-core"
+    //api "org.springframework.cloud:spring-cloud-openfeign-core"
 
     api 'org.springframework.data:spring-data-commons'
     api('org.springframework.security:spring-security-core') {

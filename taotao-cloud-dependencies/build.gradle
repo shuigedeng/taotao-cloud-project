@@ -54,6 +54,7 @@ dependencies {
         api "javax.validation:validation-api:${validationApiVersion}"
 
         api "org.springframework:spring-core:${springVersion}"
+        api "org.springframework:spring-test:${springVersion}"
         api "org.springframework:spring-web:${springVersion}"
         api "org.springframework:spring-tx:${springVersion}"
         api "org.springframework:spring-context:${springVersion}"

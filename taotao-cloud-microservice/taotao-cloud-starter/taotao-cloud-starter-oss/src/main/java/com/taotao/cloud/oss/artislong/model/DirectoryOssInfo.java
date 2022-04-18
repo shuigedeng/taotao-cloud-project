@@ -26,12 +26,6 @@ public class DirectoryOssInfo extends OssInfo {
 		this.fileInfos = fileInfos;
 	}
 
-	public DirectoryOssInfo(String name, String path, String length, String createTime,
-		String lastUpdateTime, List<FileOssInfo> fileInfos) {
-		super(name, path, length, createTime, lastUpdateTime);
-		this.fileInfos = fileInfos;
-	}
-
 	public List<FileOssInfo> getFileInfos() {
 		return fileInfos;
 	}

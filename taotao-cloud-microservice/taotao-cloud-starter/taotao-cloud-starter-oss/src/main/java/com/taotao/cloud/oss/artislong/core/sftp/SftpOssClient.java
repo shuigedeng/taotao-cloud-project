@@ -197,7 +197,7 @@ public class SftpOssClient implements StandardOssClient {
             }
             ossInfo.setName(name);
             ossInfo.setPath(path);
-            ossInfo.setLength(Convert.toStr(sftpattrs.getSize()));
+            ossInfo.setLength(sftpattrs.getSize());
             ossInfo.setCreateTime(DateUtil.date(sftpattrs.getMTime() * 1000L).toString(DatePattern.NORM_DATETIME_PATTERN));
             ossInfo.setLastUpdateTime(DateUtil.date(sftpattrs.getATime() * 1000L).toString(DatePattern.NORM_DATETIME_PATTERN));
         }

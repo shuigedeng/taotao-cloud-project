@@ -176,8 +176,7 @@ public class PingAnOssClient implements StandardOssClient {
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
 					ossInfo.setCreateTime(DateUtil.date(s3Object.getCreateTimestamp())
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
-					ossInfo.setLength(
-						Convert.toStr(s3Object.getObjectMetadata().getContentLength()));
+					ossInfo.setLength(s3Object.getObjectMetadata().getContentLength());
 				} else {
 					fileOssInfos.add(
 						getInfo(OssPathUtil.replaceKey(s3Object.getKey(), getBasePath(), false),
@@ -244,7 +243,7 @@ public class PingAnOssClient implements StandardOssClient {
 				ossInfo.setCreateTime(
 					DateUtil.parse(objectMetadata.getMetadata().get(HttpHeaders.DATE))
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Convert.toStr(objectMetadata.getContentLength()));
+				ossInfo.setLength(objectMetadata.getContentLength());
 			} catch (Exception e) {
 				LogUtil.error("获取{}文件属性失败", key, e);
 			}

@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.xml;
 
-import com.taotao.cloud.common.utils.XmlHelper;
+import com.taotao.cloud.common.utils.common.XmlHelper;
 import org.junit.Test;
 import org.xml.sax.SAXParseException;
 

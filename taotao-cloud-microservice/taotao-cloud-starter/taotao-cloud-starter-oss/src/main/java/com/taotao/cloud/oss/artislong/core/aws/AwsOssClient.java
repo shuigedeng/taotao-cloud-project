@@ -265,7 +265,9 @@ public class AwsOssClient implements StandardOssClient {
 								.toString(DatePattern.NORM_DATETIME_PATTERN));
 						ossInfo.setCreateTime(DateUtil.date(s3Object.lastModified())
 							.toString(DatePattern.NORM_DATETIME_PATTERN));
-						ossInfo.setLength(Convert.toStr(s3Object.size()));
+						ossInfo.setLength(s3Object.size());
+						// todo 需要设置访问路径
+						//ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
 					} else {
 						fileOssInfos.add(
 							getInfo(OssPathUtil.replaceKey(s3Object.key(), getBasePath(), false),
@@ -332,7 +334,9 @@ public class AwsOssClient implements StandardOssClient {
 					DateUtil.date(date).toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setCreateTime(
 					DateUtil.date(date).toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Convert.toStr(contentLength));
+				ossInfo.setLength(contentLength);
+				// todo 需要设置访问路径
+				//ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
 			} catch (Exception e) {
 				LogUtil.error("获取{}文件属性失败", key, e);
 			}

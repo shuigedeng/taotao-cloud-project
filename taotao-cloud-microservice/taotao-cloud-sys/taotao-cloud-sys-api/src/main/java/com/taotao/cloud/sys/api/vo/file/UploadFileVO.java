@@ -38,5 +38,8 @@ public class UploadFileVO implements Serializable {
 	private static final long serialVersionUID = -4132785717179910025L;
 
 	private Long id;
+
+	private String name;
+
 	private String url;
 }

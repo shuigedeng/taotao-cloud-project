@@ -1,5 +1,7 @@
 package com.taotao.cloud.sys.biz.service;
 
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.entity.file.File;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +31,8 @@ public interface IFileService {
 	 * @since 2020/11/20 上午11:14
 	 */
 	File findFileById(Long id);
+
+	UploadFileVO uploadFile(String type, MultipartFile file);
 
 	// /**
 	//  * 删除文件

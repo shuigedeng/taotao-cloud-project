@@ -17,11 +17,11 @@ server:
 oss:
   minio:
     enable: true
-    endpoint: 地址
-    access-key: 用户名
-    secret-key: 密码
-    bucket-name: bucketName
-    base-path: Minio存储根路径
+    endpoint: https://111111.1000fun.com
+    access-key: admin
+    secret-key: adminminio
+    bucket-name: annexpic
+    base-path: /test
 
 logging:
   level:
@@ -34,6 +34,34 @@ logging:
     org.springframework.cloud.openfeign: off
 
 spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://1111111111:63308/wushan-data-share-db?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: wushan
+    password: wushan@weifuwu2021
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      # 从池返回的连接的默认自动提交行为 默认true
+      auto-commit: true
+      # 客户端等待连接池的最大毫秒数
+      connection-timeout: 350000
+      # 允许连接在连接池中空闲的最大时间（毫秒）
+      idle-timeout: 180000
+      login-timeout: 5
+      # 连接测试活动的最大时间量
+      validation-timeout: 3000
+      # 池中关闭连接后的最长生命周期
+      max-lifetime: 1800000
+      read-only: false
+      connection-test-query: SELECT 1
+      maximum-pool-size: 200
+      minimum-idle: 10
+      pool-name: DatebookHikariCP
+      register-mbeans: true
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
@@ -122,7 +150,6 @@ taotao:
       connectString: 172.16.6.151:2181
       lock:
         enabled: true
-
 
 #Apollo 配置
 app:
