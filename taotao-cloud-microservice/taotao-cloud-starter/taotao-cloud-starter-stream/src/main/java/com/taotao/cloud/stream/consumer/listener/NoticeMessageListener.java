@@ -11,7 +11,7 @@
 // * 站内信通知
 // */
 //@Component
-//@RocketMQMessageListener(topic = "${lili.data.rocketmq.notice-topic}", consumerGroup = "${lili.data.rocketmq.notice-group}")
+//@RocketMQMessageListener(topic = "${taotao.data.rocketmq.notice-topic}", consumerGroup = "${taotao.data.rocketmq.notice-group}")
 //public class NoticeMessageListener implements RocketMQListener<MessageExt> {
 //
 //    /**

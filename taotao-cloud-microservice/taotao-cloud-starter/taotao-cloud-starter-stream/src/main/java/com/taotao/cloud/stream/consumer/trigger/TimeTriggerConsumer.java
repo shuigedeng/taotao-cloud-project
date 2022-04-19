@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * 事件触发消费者
  */
 @Component
-@RocketMQMessageListener(topic = "${lili.data.rocketmq.promotion-topic}", consumerGroup = "${lili.data.rocketmq.promotion-group}")
+@RocketMQMessageListener(topic = "${taotao.data.rocketmq.promotion-topic}", consumerGroup = "${taotao.data.rocketmq.promotion-group}")
 public class TimeTriggerConsumer implements RocketMQListener<TimeTriggerMsg> {
 
 	@Autowired

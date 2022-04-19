@@ -25,7 +25,7 @@
 // * 商品消息
 // **/
 //@Component
-//@RocketMQMessageListener(topic = "${lili.data.rocketmq.goods-topic}", consumerGroup = "${lili.data.rocketmq.goods-group}")
+//@RocketMQMessageListener(topic = "${taotao.data.rocketmq.goods-topic}", consumerGroup = "${taotao.data.rocketmq.goods-group}")
 //public class GoodsMessageListener implements RocketMQListener<MessageExt> {
 //
 //    /**

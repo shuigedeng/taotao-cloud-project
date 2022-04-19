@@ -16,7 +16,7 @@ import java.util.List;
 @Component("elasticsearchProperties")
 @NoArgsConstructor
 @AllArgsConstructor
-@ConfigurationProperties(prefix = "lili.data.elasticsearch")
+@ConfigurationProperties(prefix = "taotao.data.elasticsearch")
 public class ElasticsearchProperties {
 
     /**
