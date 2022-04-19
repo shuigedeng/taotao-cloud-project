@@ -3,17 +3,20 @@ package com.taotao.cloud.sys.biz.entity.sms;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
 
 /**
  * 短信模板
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -48,4 +51,17 @@ public class SmsTemplate extends BaseSuperEntity<SmsTemplate, Long> {
 
 	@Column(name = "reason", columnDefinition = "varchar(2000) not null comment '审核备注'")
 	private String reason;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		SmsTemplate that = (SmsTemplate) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

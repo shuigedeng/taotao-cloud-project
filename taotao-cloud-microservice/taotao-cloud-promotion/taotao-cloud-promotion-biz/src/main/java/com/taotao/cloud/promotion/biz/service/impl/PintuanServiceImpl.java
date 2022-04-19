@@ -19,7 +19,7 @@ import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.vo.PintuanShareVO;
 import com.taotao.cloud.promotion.api.vo.PintuanVO;
-import com.taotao.cloud.promotion.api.vo.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.biz.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.mapper.PintuanMapper;

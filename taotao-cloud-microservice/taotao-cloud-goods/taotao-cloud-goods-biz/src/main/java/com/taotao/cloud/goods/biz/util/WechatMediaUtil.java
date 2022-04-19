@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 /**
  * 微信媒体工具
  */
+@Component
 public class WechatMediaUtil {
 
 	//@Autowired
@@ -115,30 +116,19 @@ public class WechatMediaUtil {
 		} else {
 			return jsonObject.get("media_id").toString();
 		}
-
 	}
 
 	/**
 	 * 通过传过来的contentType判断是哪一种类型
 	 *
 	 * @param contentType 获取来自连接的contentType
-	 * @return
 	 */
 	public String judgeType(String contentType) {
-		String fileExt = "";
-		switch (contentType) {
-			case "image/png":
-				fileExt = ".png";
-				break;
-			case "image/jpeg":
-				fileExt = ".jpeg";
-				break;
-			case "image/jpg":
-				fileExt = ".jpg";
-				break;
-			default:
-				throw new BusinessException(ResultEnum.IMAGE_FILE_EXT_ERROR);
-		}
-		return fileExt;
+		return switch (contentType) {
+			case "image/png" -> ".png";
+			case "image/jpeg" -> ".jpeg";
+			case "image/jpg" -> ".jpg";
+			default -> throw new BusinessException(ResultEnum.IMAGE_FILE_EXT_ERROR);
+		};
 	}
 }

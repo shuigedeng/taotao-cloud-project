@@ -11,7 +11,7 @@ import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.vo.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponSearchParams;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.mapper.MemberCouponMapper;

@@ -1,10 +1,15 @@
 package com.taotao.cloud.member.api.feign;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.feign.fallback.RemoteMemberFallbackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 远程调用会员用户模块
@@ -24,5 +29,12 @@ public interface IFeignMemberEvaluationService {
 	Result<Long> count(Long goodsId, String name);
 
 
+	Result<Long> getEvaluationCount(EvaluationQueryParams queryParams);
+
+	/**
+	 * new QueryWrapper<MemberEvaluation>()
+	 * 				.between("create_time", DateUtil.yesterday(), new DateTime())
+	 */
+	Result<List<Map<String, Object>>> memberEvaluationNum();
 }
 

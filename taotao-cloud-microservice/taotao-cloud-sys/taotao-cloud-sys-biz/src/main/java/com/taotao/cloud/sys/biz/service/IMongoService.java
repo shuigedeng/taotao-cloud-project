@@ -49,6 +49,11 @@ public interface IMongoService {
 	 */
 	public List<CollectionDto> collectionNames(String databaseName);
 
-
+	/**
+	 * 分页 mongo 数据查询
+	 *
+	 * @param mongoQueryParam
+	 * @param pageQuery
+	 */
 	public PageModel<String> queryDataPage(MongoQueryParam mongoQueryParam, PageQuery pageQuery);
 }

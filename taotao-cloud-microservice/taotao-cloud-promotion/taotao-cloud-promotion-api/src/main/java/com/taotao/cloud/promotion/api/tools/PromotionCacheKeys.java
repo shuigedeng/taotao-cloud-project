@@ -1,4 +1,4 @@
-package com.taotao.cloud.promotion.biz.tools;
+package com.taotao.cloud.promotion.api.tools;
 
 
 import com.taotao.cloud.common.enums.CachePrefix;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.promotion.api.vo.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponSearchParams;
 import com.taotao.cloud.promotion.api.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 

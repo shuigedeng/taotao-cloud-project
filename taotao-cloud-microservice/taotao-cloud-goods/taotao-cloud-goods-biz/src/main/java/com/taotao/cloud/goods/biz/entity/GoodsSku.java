@@ -5,26 +5,23 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Objects;
 
 /**
  * 商品sku表
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -63,8 +60,8 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 	/**
 	 * 是否是促销商品
 	 */
-	@Column(name = "is_promotion", columnDefinition = "boolean not null comment '是否是促销商品'")
-	private Boolean isPromotion;
+	@Column(name = "promotion_flag", columnDefinition = "boolean not null comment '是否是促销商品'")
+	private Boolean promotionFlag;
 
 	/**
 	 * 促销价
@@ -290,5 +287,18 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 		} else {
 			return super.getUpdateTime();
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		GoodsSku goodsSku = (GoodsSku) o;
+		return getId() != null && Objects.equals(getId(), goodsSku.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 }

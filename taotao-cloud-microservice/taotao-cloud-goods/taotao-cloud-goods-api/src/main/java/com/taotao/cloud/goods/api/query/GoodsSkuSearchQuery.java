@@ -1,22 +1,23 @@
-package com.taotao.cloud.goods.api.dto;
+package com.taotao.cloud.goods.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serial;
 
 /**
  * 规格商品查询条件
  **/
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsSkuSearchParams extends GoodsPageQuery {
+public class GoodsSkuSearchQuery extends GoodsPageQuery {
 
+	@Serial
 	private static final long serialVersionUID = -6235885068610635045L;
 
 	@Schema(description = "商品id")

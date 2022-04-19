@@ -2,14 +2,13 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
-import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
+
 import java.util.List;
 
 /**
@@ -104,7 +103,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @return 更新结果
 	 */
 	Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
-		String underReason);
+								  String underReason);
 
 	/**
 	 * 更新商品上架状态状态
@@ -115,7 +114,7 @@ public interface GoodsService extends IService<Goods> {
 	 * @return 更新结果
 	 */
 	Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
-		String underReason);
+										 String underReason);
 
 	/**
 	 * 删除商品

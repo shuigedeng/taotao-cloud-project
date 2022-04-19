@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -15,15 +16,16 @@ import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.ParametersService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品参数业务层实现
@@ -64,7 +66,7 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 						i -> i.getGroupId() != null && i.getGroupId().equals(parameters.getGroupId()))
 					.collect(Collectors.toList());
 				this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
-				this.goodsService.updateGoodsParams(goods.get("id").toString(),
+				this.goodsService.updateGoodsParams(Convert.toLong(goods.get("id")),
 					JSONUtil.toJsonStr(goodsParamsDTOS));
 				goodsIds.add(goods.get("id").toString());
 			}
@@ -85,7 +87,7 @@ public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Paramet
 	 * @param parameters         参数信息
 	 */
 	private void setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList,
-		Parameters parameters) {
+									 Parameters parameters) {
 		for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
 			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList()
 				.stream()

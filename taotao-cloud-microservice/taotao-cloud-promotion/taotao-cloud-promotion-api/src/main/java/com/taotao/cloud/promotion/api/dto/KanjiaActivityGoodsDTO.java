@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +22,8 @@ import lombok.NoArgsConstructor;
 public class KanjiaActivityGoodsDTO  implements Serializable {
 
 
-    private static final long serialVersionUID = 1969340823809319805L;
+    @Serial
+	private static final long serialVersionUID = 1969340823809319805L;
 
     //@Schema(description =  "商品规格详细信息")
     //private GoodsSku goodsSku;

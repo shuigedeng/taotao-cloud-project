@@ -7,11 +7,13 @@ package com.taotao.cloud.sys.biz.entity.scheduled;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Scheduled日志表
@@ -20,8 +22,9 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -74,4 +77,17 @@ public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 	 */
 	@Column(name = "scheduled_Job", columnDefinition = "varchar(4096) not null comment 'scheduledJob JSON对象'")
 	private String scheduledJob;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		ScheduledLog that = (ScheduledLog) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

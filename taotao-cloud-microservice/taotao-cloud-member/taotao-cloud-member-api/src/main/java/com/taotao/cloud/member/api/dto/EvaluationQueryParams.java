@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +32,11 @@ import lombok.Setter;
 @Schema(description = "评价查询条件")
 public class EvaluationQueryParams extends PageParam implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
+
+	@Schema(description = "skuid")
+	private Long skuId;
 
 	@Schema(description = "买家ID")
 	private Long memberId;
@@ -87,13 +95,13 @@ public class EvaluationQueryParams extends PageParam implements Serializable {
 		if (StringUtils.isNotEmpty(memberName)) {
 			queryWrapper.like("member_name", memberName);
 		}
-		if (StringUtils.isNotEmpty(goodsId)) {
+		if (Objects.nonNull(goodsId)) {
 			queryWrapper.eq("goods_id", goodsId);
 		}
-		if (StringUtils.isNotEmpty(storeId)) {
+		if (Objects.nonNull(storeId)) {
 			queryWrapper.eq("store_id", storeId);
 		}
-		if (StringUtils.isNotEmpty(memberId)) {
+		if (Objects.nonNull(memberId)) {
 			queryWrapper.eq("member_id", memberId);
 		}
 		if (StringUtils.isNotEmpty(haveImage)) {

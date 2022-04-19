@@ -44,7 +44,7 @@ public class GoodsSkuBaseVO implements Serializable {
 	private Long freightTemplateId;
 
 	@Schema(description = "是否是促销商品")
-	private Boolean isPromotion;
+	private Boolean promotionFlag;
 
 	@Schema(description = "促销价")
 	private BigDecimal promotionPrice;

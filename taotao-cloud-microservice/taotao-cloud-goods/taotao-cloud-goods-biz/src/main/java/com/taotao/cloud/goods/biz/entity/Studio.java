@@ -2,16 +2,13 @@ package com.taotao.cloud.goods.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 
 /**
@@ -19,8 +16,9 @@ import lombok.Setter;
  *
  * @since 2021/5/17 9:47 上午
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -128,4 +126,17 @@ public class Studio extends BaseSuperEntity<Studio, Long> {
 	 */
 	@Column(name = "status", columnDefinition = "varchar(255) not null comment '直播间状态'")
 	private String status;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Studio studio = (Studio) o;
+		return getId() != null && Objects.equals(getId(), studio.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

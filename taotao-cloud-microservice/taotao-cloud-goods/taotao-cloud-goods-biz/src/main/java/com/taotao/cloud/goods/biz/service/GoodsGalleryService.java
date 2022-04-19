@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
+
 import java.util.List;
 
 /**

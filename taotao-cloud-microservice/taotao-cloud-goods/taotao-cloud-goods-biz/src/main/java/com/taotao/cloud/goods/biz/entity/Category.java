@@ -3,18 +3,20 @@ package com.taotao.cloud.goods.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 商品分类表
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -35,7 +37,7 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	/**
 	 * 父id, 根节点为0
 	 */
-	@Column(name = "parent_id", columnDefinition = "varchar(255) not null comment '父id, 根节点为0'")
+	@Column(name = "parent_id", columnDefinition = "bigint not null comment '父id, 根节点为0'")
 	private Long parentId;
 
 	/**
@@ -67,4 +69,17 @@ public class Category extends BaseSuperEntity<Category, Long> {
 	 */
 	@Column(name = "support_channel", columnDefinition = "boolean null default false comment '是否支持频道'")
 	private Boolean supportChannel;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Category category = (Category) o;
+		return getId() != null && Objects.equals(getId(), category.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

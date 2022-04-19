@@ -1,20 +1,19 @@
 package com.taotao.cloud.goods.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.goods.api.feign.RemoteProductService;
+import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
- * RemoteLogFallbackImpl
+ * FeignEsGoodsIndexServiceFallback
  *
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class RemoteProductFallbackImpl implements FallbackFactory<RemoteProductService> {
+public class FeignEsGoodsIndexServiceFallback implements FallbackFactory<IFeignEsGoodsIndexService> {
 	@Override
-	public RemoteProductService create(Throwable throwable) {
-		return new RemoteProductService() {
+	public IFeignEsGoodsIndexService create(Throwable throwable) {
+		return new IFeignEsGoodsIndexService() {
 			//@Override
 			//public Result<ProductVO> findProductInfoById(Long id) {
 			//	LogUtil.error("调用findProductInfoById异常：{}", id, throwable);

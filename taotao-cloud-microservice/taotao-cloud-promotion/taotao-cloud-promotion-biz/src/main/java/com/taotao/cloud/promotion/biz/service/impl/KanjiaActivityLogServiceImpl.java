@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityDTO;
-import com.taotao.cloud.promotion.api.dto.search.KanJiaActivityLogQuery;
+import com.taotao.cloud.promotion.api.query.KanJiaActivityLogQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityGoods;

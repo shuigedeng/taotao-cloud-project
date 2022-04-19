@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.goods.api.feign.fallback.RemoteProductFallbackImpl;
+import com.taotao.cloud.goods.api.feign.fallback.FeignCategoryServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignGoodsService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = RemoteProductFallbackImpl.class)
+@FeignClient(contextId = "IFeignGoodsService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryServiceFallback.class)
 public interface IFeignGoodsService {
 
 	///**

@@ -16,6 +16,7 @@
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.coupon.api.feign.fallback.RemoteCouponFallbackImpl;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(contextId = "IFeignPromotionService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteCouponFallbackImpl.class)
 public interface IFeignPromotionService {
 
-	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
-	Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
+	@GetMapping(value = "/withdraw/info/}")
+	Result<Map<String, Object>> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
 }
 

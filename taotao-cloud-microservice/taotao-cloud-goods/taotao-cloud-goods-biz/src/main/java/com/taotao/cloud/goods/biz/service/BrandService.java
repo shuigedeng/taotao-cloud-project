@@ -4,7 +4,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.BrandPageQuery;
+import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import java.util.List;
 
@@ -16,10 +16,10 @@ public interface BrandService extends IService<Brand> {
 	/**
 	 * 根据条件分页获取品牌列表
 	 *
-	 * @param page 条件参数
+	 * @param brandPageQuery 条件参数
 	 * @return 品牌列表
 	 */
-	IPage<Brand> getBrandsByPage(BrandPageQuery page);
+	IPage<Brand> getBrandsByPage(BrandPageQuery brandPageQuery);
 
 	/**
 	 * 删除品牌

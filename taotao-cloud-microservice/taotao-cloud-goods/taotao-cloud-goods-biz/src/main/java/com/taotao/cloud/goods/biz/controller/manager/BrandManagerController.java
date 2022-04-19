@@ -2,12 +2,10 @@ package com.taotao.cloud.goods.biz.controller.manager;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
-import com.taotao.cloud.goods.api.dto.BrandPageQuery;
+import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.mapstruct.BrandMapStruct;

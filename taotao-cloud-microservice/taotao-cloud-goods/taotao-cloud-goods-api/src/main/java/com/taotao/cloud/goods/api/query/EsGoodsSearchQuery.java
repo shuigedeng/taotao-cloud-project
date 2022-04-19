@@ -1,19 +1,19 @@
-package com.taotao.cloud.goods.api.dto;
+package com.taotao.cloud.goods.api.query;
 
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EsGoodsSearchDTO {
+public class EsGoodsSearchQuery extends PageParam {
 
 	@Schema(description = "关键字")
 	private String keyword;

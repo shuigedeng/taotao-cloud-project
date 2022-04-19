@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 /**
  * 微信小程序直播工具类
  */
-@Slf4j
 @Component
 public class WechatLivePlayerUtil {
 
 	//@Autowired
 	//private WechatAccessTokenUtil wechatAccessTokenUtil;
+
 	@Autowired
 	private WechatMediaUtil wechatMediaUtil;
 

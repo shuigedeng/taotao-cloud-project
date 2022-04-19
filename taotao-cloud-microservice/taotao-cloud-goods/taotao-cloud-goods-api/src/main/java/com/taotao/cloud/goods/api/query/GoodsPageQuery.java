@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.api.dto;
+package com.taotao.cloud.goods.api.query;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

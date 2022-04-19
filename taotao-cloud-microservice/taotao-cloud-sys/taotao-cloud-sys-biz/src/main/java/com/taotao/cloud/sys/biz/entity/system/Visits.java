@@ -2,16 +2,13 @@ package com.taotao.cloud.sys.biz.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 /**
  * pv 与 ip 统计
@@ -20,8 +17,9 @@ import lombok.Setter;
  * @version 2021.10
  * @since 2021-10-09 21:10:22
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -44,4 +42,17 @@ public class Visits extends BaseSuperEntity<Visits, Long> {
 
 	@Column(name = "week_day", columnDefinition = "varchar(64) not null comment '天'")
 	private String weekDay;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Visits visits = (Visits) o;
+		return getId() != null && Objects.equals(getId(), visits.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

@@ -27,8 +27,6 @@ public class PageViewInterceptor {
     @Autowired
     private Cache cache;
 
-
-
     @AfterReturning(returning = "rvt", pointcut = "@annotation(modules.statistics.aop.PageViewPoint)")
     public void interceptor(JoinPoint point, Object rvt) {
         MethodSignature signature = (MethodSignature) point.getSignature();

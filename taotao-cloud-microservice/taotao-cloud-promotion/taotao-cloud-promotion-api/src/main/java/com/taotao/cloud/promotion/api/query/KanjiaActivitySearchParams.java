@@ -1,7 +1,8 @@
-package com.taotao.cloud.promotion.api.dto.search;
+package com.taotao.cloud.promotion.api.query;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.promotion.api.dto.search.BasePromotionsSearchParams;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

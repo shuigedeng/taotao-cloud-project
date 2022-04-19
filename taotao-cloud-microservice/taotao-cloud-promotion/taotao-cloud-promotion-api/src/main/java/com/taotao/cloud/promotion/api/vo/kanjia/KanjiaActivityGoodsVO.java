@@ -23,10 +23,10 @@ public class KanjiaActivityGoodsVO {
 	private BigDecimal purchasePrice;
 
 	public BigDecimal getPurchasePrice() {
-		if (purchasePrice < 0) {
-			return 0D;
-		}
-		return purchasePrice;
+//		if (purchasePrice < 0) {
+//			return 0D;
+//		}
+//		return purchasePrice;
 	}
 
 	@Schema(description = "活动库存")

@@ -2,16 +2,13 @@ package com.taotao.cloud.goods.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 /**
  * 店铺商品分类表
@@ -20,11 +17,12 @@ import lombok.Setter;
  * @version 2022.04
  * @since 2022-04-14 21:50:58
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@Builder
+@Getter
+@Setter
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = StoreGoodsLabel.TABLE_NAME)
 @TableName(StoreGoodsLabel.TABLE_NAME)
@@ -62,4 +60,17 @@ public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 	 */
 	@Column(name = "level", columnDefinition = "int not null comment '层级, 从0开始'")
 	private Integer level;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		StoreGoodsLabel that = (StoreGoodsLabel) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

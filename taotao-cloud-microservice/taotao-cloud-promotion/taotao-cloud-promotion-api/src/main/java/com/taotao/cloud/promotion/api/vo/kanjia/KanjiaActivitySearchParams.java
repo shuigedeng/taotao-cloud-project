@@ -2,17 +2,15 @@ package com.taotao.cloud.promotion.api.vo.kanjia;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.promotion.api.vo.BasePromotionsSearchParams;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * 砍价活动搜索参数
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

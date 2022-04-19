@@ -1,12 +1,12 @@
 package com.taotao.cloud.goods.biz.service;
 
-import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
+import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
-import java.util.List;
 import org.springframework.data.elasticsearch.core.SearchPage;
+
+import java.util.List;
 
 /**
  * ES商品搜索业务层
@@ -16,11 +16,10 @@ public interface EsGoodsSearchService {
 	/**
 	 * 商品搜索
 	 *
-	 * @param searchDTO 搜索参数
-	 * @param pageParam 分页参数
+	 * @param esGoodsSearchQuery 搜索参数
 	 * @return 搜索结果
 	 */
-	SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchDTO searchDTO, PageParam pageParam);
+	SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchQuery esGoodsSearchQuery);
 
 	/**
 	 * 获取热门关键词
@@ -47,11 +46,10 @@ public interface EsGoodsSearchService {
 	/**
 	 * 获取筛选器
 	 *
-	 * @param goodsSearch 搜索条件
-	 * @param pageParam      分页参数
+	 * @param esGoodsSearchQuery 搜索条件
 	 * @return ES商品关联
 	 */
-	EsGoodsRelatedInfo getSelector(EsGoodsSearchDTO goodsSearch, PageParam pageParam);
+	EsGoodsRelatedInfo getSelector(EsGoodsSearchQuery esGoodsSearchQuery);
 
 	/**
 	 * 根据SkuID列表获取ES商品

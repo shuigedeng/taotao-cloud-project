@@ -24,7 +24,4 @@ public class MemberCouponVO  {
     //    this.reason = reason;
     //}
 
-    public MemberCouponVO(){
-
-    }
 }

@@ -18,10 +18,12 @@ package com.taotao.cloud.sys.biz.entity.region;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 地区表
@@ -30,8 +32,9 @@ import javax.persistence.Table;
  * @version 2021.10
  * @since 2021-10-09 21:52:30
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -93,4 +96,16 @@ public class Region extends BaseSuperEntity<Region, Long> {
 	@Column(name = "order_num", columnDefinition = "int not null default 0 comment '排序'")
 	private Integer orderNum;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Region region = (Region) o;
+		return getId() != null && Objects.equals(getId(), region.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

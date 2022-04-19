@@ -17,16 +17,13 @@ package com.taotao.cloud.sys.biz.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 /**
  * 字典项表
@@ -37,8 +34,9 @@ import lombok.Setter;
  * @version 2021.10
  * @since 2021-10-09 21:09:21
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -88,4 +86,16 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	@Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
 	private Integer sortNum ;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		DictItem dictItem = (DictItem) o;
+		return getId() != null && Objects.equals(getId(), dictItem.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

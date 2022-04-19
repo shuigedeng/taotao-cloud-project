@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
-import com.taotao.cloud.promotion.api.vo.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
 import com.taotao.cloud.promotion.api.vo.SeckillTimelineVO;
 import com.taotao.cloud.promotion.biz.entity.SeckillApply;
 import java.util.List;

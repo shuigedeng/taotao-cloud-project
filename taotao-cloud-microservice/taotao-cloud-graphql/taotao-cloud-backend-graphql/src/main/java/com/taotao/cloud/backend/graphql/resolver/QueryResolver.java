@@ -19,7 +19,6 @@ import com.taotao.cloud.backend.graphql.entity.User;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.backend.graphql.entity.Article;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
-import com.taotao.cloud.goods.api.feign.RemoteProductService;
 import com.taotao.cloud.uc.api.feign.IFeignUserService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;

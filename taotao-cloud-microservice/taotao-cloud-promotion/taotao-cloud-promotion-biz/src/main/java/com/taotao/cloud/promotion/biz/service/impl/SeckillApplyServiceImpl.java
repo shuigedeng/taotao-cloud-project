@@ -13,7 +13,7 @@ import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.tools.PromotionCacheKeys;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
-import com.taotao.cloud.promotion.api.vo.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
 import com.taotao.cloud.promotion.api.vo.SeckillTimelineVO;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.entity.Seckill;

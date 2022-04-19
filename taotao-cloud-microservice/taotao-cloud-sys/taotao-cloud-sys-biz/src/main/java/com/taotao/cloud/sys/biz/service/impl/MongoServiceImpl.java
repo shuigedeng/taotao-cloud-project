@@ -33,9 +33,6 @@ public class MongoServiceImpl implements IMongoService {
 	@Autowired(required = false)
 	private MongoClient mongoClient;
 
-	/**
-	 * 查询当前连接所有数据库
-	 */
 	@Override
 	public List<String> databaseNames() {
 		MongoIterable<String> mongoIterable = mongoClient.listDatabaseNames();
@@ -46,11 +43,6 @@ public class MongoServiceImpl implements IMongoService {
 		return list;
 	}
 
-	/**
-	 * 列出某个库的所有集合
-	 *
-	 * @param databaseName
-	 */
 	@Override
 	public List<CollectionDto> collectionNames(String databaseName) {
 		MongoDatabase mongoDatabase = mongoClient.getDatabase(databaseName);
@@ -67,12 +59,6 @@ public class MongoServiceImpl implements IMongoService {
 		return collectionDtos;
 	}
 
-	/**
-	 * 分页 mongo 数据查询
-	 *
-	 * @param mongoQueryParam
-	 * @param pageQuery
-	 */
 	@Override
 	public PageModel<String> queryDataPage(MongoQueryParam mongoQueryParam, PageQuery pageQuery) {
 		List<String> objects = new ArrayList<>();
