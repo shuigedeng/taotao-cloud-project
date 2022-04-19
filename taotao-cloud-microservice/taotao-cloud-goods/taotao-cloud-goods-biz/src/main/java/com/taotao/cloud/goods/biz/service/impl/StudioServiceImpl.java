@@ -11,9 +11,13 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.OrikaUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
+import com.taotao.cloud.goods.api.vo.CommodityBaseVO;
 import com.taotao.cloud.goods.api.vo.StudioVO;
+import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Studio;
 import com.taotao.cloud.goods.biz.entity.StudioCommodity;
@@ -24,17 +28,19 @@ import com.taotao.cloud.goods.biz.service.StudioCommodityService;
 import com.taotao.cloud.goods.biz.service.StudioService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
+import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
 import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
 import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
-import java.util.Map;
-import javax.annotation.Resource;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.terracotta.quartz.collections.TimeTrigger;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 小程序直播间业务层实现
@@ -58,7 +64,7 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId());
+		studio.setStoreId(SecurityUtil.getUser().getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));
@@ -73,7 +79,8 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 				TimeExecuteConstant.BROADCAST_EXECUTOR,
 				Long.parseLong(studio.getStartTime()) * 1000L,
 				broadcastMessage,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST,
+					String.valueOf(studio.getId())),
 				rocketmqCustomProperties.getPromotionTopic());
 
 			//发送促销活动开始的延时任务
@@ -83,8 +90,10 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 			broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.END.name());
 			timeTriggerMsg = new TimeTriggerMsg(TimeExecuteConstant.BROADCAST_EXECUTOR,
 				Long.parseLong(studio.getEndTime()) * 1000L, broadcastMessage,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST,
+					String.valueOf(studio.getId())),
 				rocketmqCustomProperties.getPromotionTopic());
+
 			//发送促销活动开始的延时任务
 			this.timeTrigger.addDelay(timeTriggerMsg);
 		}
@@ -107,7 +116,8 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 				broadcastMessage,
 				Long.parseLong(oldStudio.getStartTime()) * 1000L,
 				Long.parseLong(studio.getStartTime()) * 1000L,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST,
+					String.valueOf(studio.getId())),
 				DateUtil.getDelayTime(Long.parseLong(studio.getStartTime())),
 				rocketmqCustomProperties.getPromotionTopic());
 
@@ -118,7 +128,8 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 				broadcastMessage,
 				Long.parseLong(oldStudio.getEndTime()) * 1000L,
 				Long.parseLong(studio.getEndTime()) * 1000L,
-				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, studio.getId()),
+				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST,
+					String.valueOf(studio.getId())),
 				DateUtil.getDelayTime(Long.parseLong(studio.getEndTime())),
 				rocketmqCustomProperties.getPromotionTopic());
 		}
@@ -132,7 +143,8 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 		//获取直播间信息
 		BeanUtil.copyProperties(studio, studioVO);
 		//获取直播间商品信息
-		studioVO.setCommodityList(commodityMapper.getCommodityByRoomId(studioVO.getRoomId()));
+		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioVO.getRoomId());
+		studioVO.setCommodityList(OrikaUtil.converts(commodities, CommodityBaseVO.class));
 		return studioVO;
 	}
 
@@ -214,10 +226,10 @@ public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> impleme
 			.eq(recommend != null, "recommend", true)
 			.eq(status != null, "status", status)
 			.orderByDesc("create_time");
-		if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole()
-			.equals(UserEnums.STORE)) {
-			queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
-		}
+		//if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole()
+		//	.equals(UserEnums.STORE)) {
+		//	queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
+		//}
 		return this.page(pageParam.buildMpPage(), queryWrapper);
 	}
 

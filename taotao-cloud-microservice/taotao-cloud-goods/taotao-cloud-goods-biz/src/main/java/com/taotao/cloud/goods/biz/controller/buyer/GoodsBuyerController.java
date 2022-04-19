@@ -1,12 +1,10 @@
 package com.taotao.cloud.goods.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.dto.EsGoodsSearchDTO;
-import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
+import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
+import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
@@ -20,12 +18,7 @@ import com.taotao.cloud.netty.annotation.RequestParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.Map;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -33,6 +26,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 买家端,商品接口
@@ -57,8 +54,8 @@ public class GoodsBuyerController {
 	 */
 	private final EsGoodsSearchService goodsSearchService;
 
+	@RequestLogger
 	@Operation(summary = "通过id获取商品信息", description = "通过id获取商品信息")
-	@RequestLogger("通过id获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
 	public Result<GoodsVO> get(
@@ -66,25 +63,23 @@ public class GoodsBuyerController {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
+	@RequestLogger
 	@Operation(summary = "通过skuId获取商品信息", description = "通过skuId获取商品信息")
-	@RequestLogger("通过skuId获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}/{skuId}")
 	//@PageViewPoint(type = PageViewEnum.SKU, id = "#id")
 	public Result<Map<String, Object>> getSku(
 		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable Long goodsId,
 		@Parameter(description = "skuId") @NotNull(message = "skuId不能为空") @PathVariable Long skuId) {
-		// 读取选中的列表
 		Map<String, Object> map = goodsSkuService.getGoodsSkuDetail(goodsId, skuId);
 		return Result.success(map);
 	}
 
+	@RequestLogger
 	@Operation(summary = "获取商品分页列表", description = "获取商品分页列表")
-	@RequestLogger("获取商品分页列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<GoodsBaseVO>> getByPage(
-		@Validated GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsBaseVO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
@@ -92,10 +87,8 @@ public class GoodsBuyerController {
 	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")
 	@RequestLogger("从ES中获取商品信息")
 	@GetMapping("/es")
-	public Result<SearchPage<EsGoodsIndex>> getGoodsByPageFromEs(
-		EsGoodsSearchDTO goodsSearchParams, PageParam pageParam) {
-		SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(goodsSearchParams,
-			pageParam);
+	public Result<SearchPage<EsGoodsIndex>> getGoodsByPageFromEs(@Validated EsGoodsSearchQuery goodsSearchParams) {
+		SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(goodsSearchParams);
 		return Result.success(esGoodsIndices);
 	}
 
@@ -103,10 +96,9 @@ public class GoodsBuyerController {
 	@RequestLogger("从ES中获取相关商品品牌名称，分类名称及属性")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/es/related")
-	public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(
-		EsGoodsSearchDTO goodsSearchParams, PageParam pageParam) {
+	public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(@Validated EsGoodsSearchQuery esGoodsSearchQuery) {
 		//pageVO.setNotConvert(true);
-		EsGoodsRelatedInfo selector = goodsSearchService.getSelector(goodsSearchParams, pageParam);
+		EsGoodsRelatedInfo selector = goodsSearchService.getSelector(esGoodsSearchQuery);
 		return Result.success(selector);
 	}
 

@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GoodsSkuVO extends GoodsSkuBaseVO {
 
+	@Serial
 	private static final long serialVersionUID = -7651149660489332344L;
 
 	@Schema(description = "规格列表")

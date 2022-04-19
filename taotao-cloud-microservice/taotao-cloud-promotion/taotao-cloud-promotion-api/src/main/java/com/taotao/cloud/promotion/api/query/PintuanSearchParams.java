@@ -1,12 +1,11 @@
-package com.taotao.cloud.promotion.api.dto.search;
+package com.taotao.cloud.promotion.api.query;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -22,6 +21,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PintuanSearchParams extends BasePromotionsSearchParams {
+
+    @Schema(description =  "商家id")
+    private String storeId;
 
     @Schema(description =  "商家名称，如果是平台，这个值为 platform")
     private String storeName;
@@ -39,6 +41,9 @@ public class PintuanSearchParams extends BasePromotionsSearchParams {
         }
         if (CharSequenceUtil.isNotEmpty(storeName)) {
             queryWrapper.like("store_name", storeName);
+        }
+        if (CharSequenceUtil.isNotEmpty(storeId)) {
+            queryWrapper.eq("store_id", storeId);
         }
         return queryWrapper;
     }

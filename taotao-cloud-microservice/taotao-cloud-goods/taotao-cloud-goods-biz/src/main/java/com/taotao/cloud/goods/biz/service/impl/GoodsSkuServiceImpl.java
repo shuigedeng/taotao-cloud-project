@@ -15,13 +15,11 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.goods.api.dto.GoodsPageQuery;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.event.GeneratorEsGoodsIndexEvent;
-import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
+import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsSkuSpecVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
@@ -32,39 +30,30 @@ import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IGoodsSkuMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
-import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.*;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
-import com.taotao.cloud.promotion.api.dto.search.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * 商品sku业务层实现
@@ -109,7 +98,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	/**
 	 * 促销活动商品服务
 	 */
-	private final PromotionGoodsService promotionGoodsService;
+	private final IFeignPromotionGoodsService promotionGoodsService;
 	/**
 	 * ApplicationEventPublisher
 	 */
@@ -138,7 +127,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean update(List<Map<String, Object>> skuList, Goods goods,
-		Boolean regeneratorSkuFlag) {
+						  Boolean regeneratorSkuFlag) {
 		// 是否存在规格
 		if (skuList == null || skuList.isEmpty()) {
 			throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
@@ -288,10 +277,10 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 			if (containsPromotion.isPresent()) {
 				JSONObject jsonObject = JSONUtil.parseObj(containsPromotion.get().getValue());
 				PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
-				searchParams.setSkuId(skuId);
+				searchParams.setSkuId(String.valueOf(skuId));
 				searchParams.setPromotionId(jsonObject.get("id").toString());
-				PromotionGoods promotionsGoods = promotionGoodsService.getPromotionsGoods(
-					searchParams);
+				PromotionGoodsVO promotionsGoods = promotionGoodsService.getPromotionsGoods(
+					searchParams).data();
 				if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
 					goodsSkuDetail.setPromotionFlag(true);
 					goodsSkuDetail.setPromotionPrice(promotionsGoods.getPrice());
@@ -305,7 +294,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 
 		//获取分类
 		String[] split = goodsSkuDetail.getCategoryPath().split(",");
-		map.put("categoryName", categoryService.getCategoryNameByIds(Arrays.asList(split)));
+		//map.put("categoryName", categoryService.getCategoryNameByIds(Arrays.asList(split)));
 
 		//获取规格信息
 		map.put("specs", this.groupBySkuAndSpec(goodsVO.getSkuList()));
@@ -317,14 +306,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		}
 
 		//记录用户足迹
-		if (UserContext.getCurrentUser() != null) {
-			FootPrint footPrint = new FootPrint(UserContext.getCurrentUser().getId(), goodsId,
-				skuId);
-			String destination =
-				rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.VIEW_GOODS.name();
-			rocketMQTemplate.asyncSend(destination, footPrint,
-				RocketmqSendCallbackBuilder.commonCallback());
-		}
+		//if (UserContext.getCurrentUser() != null) {
+		//	FootPrint footPrint = new FootPrint(UserContext.getCurrentUser().getId(), goodsId,
+		//		skuId);
+		//	String destination =
+		//		rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.VIEW_GOODS.name();
+		//	rocketMQTemplate.asyncSend(destination, footPrint,
+		//		RocketmqSendCallbackBuilder.commonCallback());
+		//}
 		return map;
 	}
 
@@ -523,14 +512,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		queryParams.setGrade(EvaluationGradeEnum.GOOD.name());
 		queryParams.setSkuId(goodsSku.getId());
 		//好评数量
-		long highPraiseNum = memberEvaluationService.getEvaluationCount(queryParams);
+		long highPraiseNum = memberEvaluationService.getEvaluationCount(queryParams).data();
 
 		//更新商品评价数量
 		goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);
 
-		//好评率
-		BigDecimal grade = NumberUtil.mul(
-			NumberUtil.div(highPraiseNum, goodsSku.getCommentNum().BigDecimalValue(), 2), 100);
+		//todo 此处需要修改 好评率
+		BigDecimal grade = BigDecimal.valueOf(NumberUtil.mul(
+			NumberUtil.div(highPraiseNum, goodsSku.getCommentNum().doubleValue(), 2), 100));
 		goodsSku.setGrade(grade);
 		//修改规格
 		this.update(goodsSku);
@@ -671,7 +660,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	 * @param esGoodsIndex 商品索引
 	 */
 	private void skuInfo(GoodsSku sku, Goods goods, Map<String, Object> map,
-		EsGoodsIndex esGoodsIndex) {
+						 EsGoodsIndex esGoodsIndex) {
 		//规格简短信息
 		StringBuilder simpleSpecs = new StringBuilder();
 		//商品名称
@@ -691,7 +680,6 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 				spec.getKey())
 				|| ("price").equals(spec.getKey()) || ("quantity").equals(spec.getKey())
 				|| ("weight").equals(spec.getKey())) {
-				continue;
 			} else {
 				specMap.put(spec.getKey(), spec.getValue());
 				if (("images").equals(spec.getKey())) {

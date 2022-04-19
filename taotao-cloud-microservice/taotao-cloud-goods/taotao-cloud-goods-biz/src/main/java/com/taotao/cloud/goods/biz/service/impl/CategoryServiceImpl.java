@@ -20,21 +20,26 @@ import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品分类业务层实现
  */
 @AllArgsConstructor
 @Service
+@CacheConfig(cacheNames = "{category}")
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements
 	CategoryService {
 
@@ -62,6 +67,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	}
 
 	@Override
+	@Cacheable(key = "#id")
 	public Category getCategoryById(Long id) {
 		return this.getById(id);
 	}
@@ -219,6 +225,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	}
 
 	@Override
+	@CacheEvict(key = "#category.id")
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateCategory(Category category) {
 		//判断分类佣金是否正确
@@ -254,10 +261,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		removeCache();
 
 		//删除关联关系
-		categoryBrandService.deleteByCategoryId(id);
 		categoryParameterGroupService.deleteByCategoryId(id);
 		categorySpecificationService.deleteByCategoryId(id);
-		return true;
+		return categoryBrandService.deleteByCategoryId(id);
 	}
 
 	@Override
@@ -267,6 +273,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 		Category category = this.getById(categoryId);
 		CategoryVO categoryVO = BeanUtil.copy(category, CategoryVO.class);
 		List<Long> ids = new ArrayList<>();
+
+		assert categoryVO != null;
+
 		ids.add(categoryVO.getId());
 		this.findAllChild(categoryVO);
 		this.findAllChildIds(categoryVO, ids);

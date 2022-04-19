@@ -14,13 +14,14 @@ import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 店铺商品分类业务层实现

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "砍价活动VO")
 //public class KanjiaActivityVO extends KanjiaActivity {
 public class KanjiaActivityVO {

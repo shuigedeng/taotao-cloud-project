@@ -1,18 +1,11 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
 
-import cn.hutool.core.util.PageUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.goods.api.dto.SpecificationDTO;
-import com.taotao.cloud.goods.api.dto.SpecificationPageQuery;
+import com.taotao.cloud.goods.api.query.SpecificationPageQuery;
 import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
@@ -23,7 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;

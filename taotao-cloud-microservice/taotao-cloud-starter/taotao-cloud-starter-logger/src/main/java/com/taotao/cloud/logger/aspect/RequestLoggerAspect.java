@@ -40,25 +40,8 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;
 import io.swagger.v3.oas.annotations.Operation;
-import java.lang.reflect.Method;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Consumer;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +56,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 
 /**
@@ -128,7 +125,7 @@ public class RequestLoggerAspect {
 	 * 第三个* 类下的所有方法
 	 * ()中间的.. 任意参数
 	 *
-	 * @annotation(com.taotao.cloud.logger.annotation.RequestLogger) 解释：
+	 * &#064;annotation(com.taotao.cloud.logger.annotation.RequestLogger)  解释：
 	 */
 	@Pointcut("@annotation(com.taotao.cloud.logger.annotation.RequestLogger)")
 	public void requestLogAspect() {
@@ -240,7 +237,7 @@ public class RequestLoggerAspect {
 
 	@NonNull
 	private com.taotao.cloud.logger.model.RequestLogger buildRequestLog(JoinPoint joinPoint,
-		RequestLogger requestLoggerAnnotation) {
+																		RequestLogger requestLoggerAnnotation) {
 		com.taotao.cloud.logger.model.RequestLogger requestLogger = new com.taotao.cloud.logger.model.RequestLogger();
 		ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
 			.requireNonNull(RequestContextHolder.getRequestAttributes());
@@ -362,22 +359,23 @@ public class RequestLoggerAspect {
 	}
 
 	private void setDescription(JoinPoint joinPoint, RequestLogger requestLoggerAnnotation,
-		com.taotao.cloud.logger.model.RequestLogger requestLogger) {
-		String controllerDescription = "";
+								com.taotao.cloud.logger.model.RequestLogger requestLogger) {
+		StringBuilder controllerDescription = new StringBuilder();
 		Operation api = joinPoint.getTarget().getClass().getAnnotation(Operation.class);
 		if (api != null) {
-			String[] tags = api.tags();
-			if (ArrayUtil.isNotEmpty(tags)) {
-				controllerDescription = tags[0];
-			}
-
 			String summary = api.summary();
 			if (StringUtil.isNotBlank(summary)) {
-				controllerDescription = summary;
+				controllerDescription.append("-").append(summary);
 			}
+
+			String[] tags = api.tags();
+			if (ArrayUtil.isNotEmpty(tags)) {
+				controllerDescription.append("-").append(tags[0]);
+			}
+
 			String description = api.description();
 			if (StringUtil.isNotBlank(description)) {
-				controllerDescription = description;
+				controllerDescription.append("-").append(description);
 			}
 		}
 
@@ -396,7 +394,7 @@ public class RequestLoggerAspect {
 			requestLogger.setDescription(
 				controllerDescription + "-" + controllerMethodDescription);
 		} else {
-			requestLogger.setDescription(controllerDescription);
+			requestLogger.setDescription(controllerDescription.toString());
 		}
 	}
 

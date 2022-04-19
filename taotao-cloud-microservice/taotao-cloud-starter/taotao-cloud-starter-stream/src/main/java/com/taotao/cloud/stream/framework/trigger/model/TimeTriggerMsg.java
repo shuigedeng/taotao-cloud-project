@@ -1,6 +1,7 @@
 package com.taotao.cloud.stream.framework.trigger.model;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -9,6 +10,7 @@ import java.io.Serializable;
 public class TimeTriggerMsg implements Serializable {
 
 
+	@Serial
 	private static final long serialVersionUID = 8897917127201859535L;
 
 	/**

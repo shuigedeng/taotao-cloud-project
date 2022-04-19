@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
-import com.taotao.cloud.promotion.api.vo.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
 import com.taotao.cloud.promotion.biz.entity.Seckill;
 import com.taotao.cloud.promotion.biz.entity.SeckillApply;
 import com.taotao.cloud.promotion.biz.service.SeckillApplyService;

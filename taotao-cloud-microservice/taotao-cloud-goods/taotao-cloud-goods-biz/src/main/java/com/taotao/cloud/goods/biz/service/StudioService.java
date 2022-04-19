@@ -67,7 +67,7 @@ public interface StudioService extends IService<Studio> {
 	/**
 	 * 获取直播间列表
 	 *
-	 * @param pageParam    分页
+	 * @param pageParam 分页
 	 * @param recommend 是否推荐
 	 * @param status    直播间状态
 	 * @return 直播间分页

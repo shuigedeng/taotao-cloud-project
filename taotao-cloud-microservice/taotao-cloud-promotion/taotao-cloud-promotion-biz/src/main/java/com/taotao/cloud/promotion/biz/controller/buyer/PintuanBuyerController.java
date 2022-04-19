@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.vo.PintuanShareVO;
-import com.taotao.cloud.promotion.api.vo.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.PintuanService;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;

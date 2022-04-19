@@ -29,7 +29,7 @@ public class CouponVO  {
      * 促销关联的商品
      */
     @Schema(description =  "优惠券关联商品集合")
-    private List<PromotionGoods> promotionGoodsList;
+    private List<PromotionGoodsVO> promotionGoodsList;
 
     public CouponVO(Coupon coupon) {
         if (coupon == null) {

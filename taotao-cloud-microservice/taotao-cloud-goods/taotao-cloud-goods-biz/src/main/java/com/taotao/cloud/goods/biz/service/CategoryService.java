@@ -4,15 +4,15 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
-import java.util.List;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
+import java.util.List;
+
 /**
  * 商品分类业务层
  */
-@CacheConfig(cacheNames = "{category}")
 public interface CategoryService extends IService<Category> {
 
 	/**
@@ -26,9 +26,8 @@ public interface CategoryService extends IService<Category> {
 	/**
 	 * 获取分类
 	 *
-	 * @param id
+	 * @param id 分类id
 	 */
-	@Cacheable(key = "#id")
 	Category getCategoryById(Long id);
 
 	/**
@@ -91,7 +90,6 @@ public interface CategoryService extends IService<Category> {
 	 * @param category 商品分类信息
 	 * @return 修改结果
 	 */
-	@CacheEvict(key = "#category.id")
 	Boolean updateCategory(Category category);
 
 	/**
@@ -103,7 +101,8 @@ public interface CategoryService extends IService<Category> {
 
 	/**
 	 * 分类状态的更改
-	 *  @param categoryId       商品分类ID
+	 *
+	 * @param categoryId       商品分类ID
 	 * @param enableOperations 是否可用
 	 */
 	Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations);

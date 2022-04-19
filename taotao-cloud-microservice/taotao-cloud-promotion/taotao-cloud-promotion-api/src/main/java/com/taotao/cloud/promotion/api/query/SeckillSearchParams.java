@@ -1,13 +1,12 @@
-package com.taotao.cloud.promotion.api.dto.search;
+package com.taotao.cloud.promotion.api.query;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -17,6 +16,7 @@ import lombok.Setter;
 
 /**
  * 秒杀活动查询通用类
+ *
  **/
 @Setter
 @Getter
@@ -38,6 +38,9 @@ public class SeckillSearchParams extends BasePromotionsSearchParams implements S
 
     @Schema(description =  "商家id")
     private String[] storeIds;
+
+    @Schema(description =  "商家编号")
+    private String storeId;
 
     @Schema(description =  "商品名称")
     private String goodsName;

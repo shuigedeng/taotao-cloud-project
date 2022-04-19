@@ -4,7 +4,7 @@ package com.taotao.cloud.promotion.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityDTO;
-import com.taotao.cloud.promotion.api.dto.search.KanJiaActivityLogQuery;
+import com.taotao.cloud.promotion.api.query.KanJiaActivityLogQuery;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
 
 

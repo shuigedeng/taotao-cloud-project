@@ -6,7 +6,7 @@ import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.vo.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponSearchParams;
 import com.taotao.cloud.promotion.api.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.service.CouponService;

@@ -3,20 +3,21 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serial;
 
 /**
  * 商品关联参数的VO
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsParamsVO extends GoodsParamsDTO {
 
+	@Serial
 	private static final long serialVersionUID = -4904700751774005326L;
 	@Schema(description = "1 输入项   2 选择项")
 	private Integer paramType;

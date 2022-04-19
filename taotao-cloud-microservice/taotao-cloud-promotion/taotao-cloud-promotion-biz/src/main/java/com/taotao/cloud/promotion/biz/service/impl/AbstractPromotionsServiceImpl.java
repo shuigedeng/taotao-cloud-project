@@ -13,7 +13,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.api.vo.BasePromotionsSearchParams;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.AbstractPromotionsService;
@@ -31,7 +31,7 @@ import java.util.*;
  * 
  * @since 2021/11/30
  **/
-public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions> extends ServiceImpl<M, T> implements
+public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions<T, Long>> extends ServiceImpl<M, T> implements
 	AbstractPromotionsService<T> {
 
     /**

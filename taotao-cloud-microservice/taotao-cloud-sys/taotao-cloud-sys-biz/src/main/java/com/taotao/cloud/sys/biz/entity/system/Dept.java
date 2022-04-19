@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
  */
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StudioCommodityServiceImpl extends
-	ServiceImpl<StudioCommodityMapper, StudioCommodity> implements
-	StudioCommodityService {
+	ServiceImpl<StudioCommodityMapper, StudioCommodity> implements StudioCommodityService {
 
 }

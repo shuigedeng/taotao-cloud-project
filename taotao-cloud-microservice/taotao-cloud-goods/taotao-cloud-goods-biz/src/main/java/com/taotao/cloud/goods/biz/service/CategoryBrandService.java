@@ -3,6 +3,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
+
 import java.util.List;
 
 /**
@@ -41,5 +42,4 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * @param brandIds   品牌ids
 	 */
 	Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds);
-
 }

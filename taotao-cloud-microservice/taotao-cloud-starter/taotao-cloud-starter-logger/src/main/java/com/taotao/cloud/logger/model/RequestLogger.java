@@ -193,11 +193,13 @@ public class RequestLogger implements Serializable {
 	 */
 	@JsonProperty(value = "location")
 	private String location;
+
 	/**
 	 * 操作系统
 	 */
 	@JsonProperty(value = "os")
 	private String os;
+
 	/**
 	 * 浏览器
 	 */

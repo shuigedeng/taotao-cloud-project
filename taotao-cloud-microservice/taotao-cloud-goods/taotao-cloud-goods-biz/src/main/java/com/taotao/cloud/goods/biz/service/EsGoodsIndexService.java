@@ -4,9 +4,12 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
+import com.taotao.cloud.promotion.api.vo.BasePromotionsVO;
+import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
+import org.elasticsearch.action.update.UpdateRequest;
+
 import java.util.List;
 import java.util.Map;
-import org.elasticsearch.action.update.UpdateRequest;
 
 /**
  * 商品索引业务层
@@ -21,7 +24,7 @@ public interface EsGoodsIndexService {
 	/**
 	 * 获取es生成索引进度
 	 *
-	 * @return
+	 * @return 索引进度
 	 */
 	Map<String, Integer> getProgress();
 
@@ -97,7 +100,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotions promotion, String key);
+	UpdateRequest updateEsGoodsIndexPromotions(Long id, BasePromotionsVO promotion, String key);
 
 	/**
 	 * 更新商品索引的促销信息
@@ -106,7 +109,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	Boolean updateEsGoodsIndexPromotions(List<String> ids, BasePromotions promotion, String key);
+	Boolean updateEsGoodsIndexPromotions(List<Long> ids, BasePromotionsVO promotion, String key);
 
 	/**
 	 * 根据列表更新商品索引的促销信息
@@ -115,9 +118,9 @@ public interface EsGoodsIndexService {
 	 * @param promotion          促销信息
 	 * @param key                促销信息的key
 	 */
-	Boolean updateEsGoodsIndexByList(List<PromotionGoods> promotionGoodsList,
-		BasePromotions promotion,
-		String key);
+	Boolean updateEsGoodsIndexByList(List<PromotionGoodsVO> promotionGoodsList,
+									 BasePromotionsVO promotion,
+									 String key);
 
 	/**
 	 * 更新全部商品索引的促销信息
@@ -125,7 +128,7 @@ public interface EsGoodsIndexService {
 	 * @param promotion 促销信息
 	 * @param key       促销信息的key
 	 */
-	Boolean updateEsGoodsIndexAllByList(BasePromotions promotion, String key);
+	Boolean updateEsGoodsIndexAllByList(BasePromotionsVO promotion, String key);
 
 	/**
 	 * 删除指定商品的促销信息

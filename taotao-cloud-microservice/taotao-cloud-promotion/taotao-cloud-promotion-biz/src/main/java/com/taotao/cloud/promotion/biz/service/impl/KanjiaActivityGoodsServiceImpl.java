@@ -15,7 +15,7 @@ import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.api.vo.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsListVO;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsParams;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsVO;

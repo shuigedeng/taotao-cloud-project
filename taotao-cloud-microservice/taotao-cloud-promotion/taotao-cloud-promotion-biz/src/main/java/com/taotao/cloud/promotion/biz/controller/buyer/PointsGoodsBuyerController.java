@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.controller.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.vo.PointsGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PointsGoodsSearchParams;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory;

@@ -33,12 +33,12 @@ public class CategoryBuyerController {
 	 */
 	private final CategoryService categoryService;
 
+	@RequestLogger
 	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")
-	@RequestLogger("根据父id获取商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}")
 	public Result<List<CategoryVO>> list(
-		@Parameter(name = "分类父ID") @NotNull(message = "分类ID不能为空") @PathVariable Long parentId) {
+		@Parameter(description = "分类父ID") @NotNull(message = "分类ID不能为空") @PathVariable Long parentId) {
 		return Result.success(categoryService.listAllChildren(parentId));
 	}
 }

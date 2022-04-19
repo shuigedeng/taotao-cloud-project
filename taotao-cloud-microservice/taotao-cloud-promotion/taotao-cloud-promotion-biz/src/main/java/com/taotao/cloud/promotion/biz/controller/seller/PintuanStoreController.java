@@ -7,7 +7,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.vo.PintuanSearchParams;
+import com.taotao.cloud.promotion.api.query.PintuanSearchParams;
 import com.taotao.cloud.promotion.api.vo.PintuanVO;
 import com.taotao.cloud.promotion.biz.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
