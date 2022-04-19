@@ -36,7 +36,7 @@ public class MemberMessageBuyerController {
 	@Autowired
 	private MemberMessageService memberMessageService;
 
-	@Operation(summary = "分页获取会员站内消息", description = "分页获取会员站内消息", method = CommonConstant.GET)
+	@Operation(summary = "分页获取会员站内消息", description = "分页获取会员站内消息")
 	@RequestLogger("分页获取会员站内消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
@@ -46,7 +46,7 @@ public class MemberMessageBuyerController {
 		return Result.success(memberMessageService.getPage(memberMessageQueryVO, page));
 	}
 
-	@Operation(summary = "消息已读", description = "消息已读", method = CommonConstant.GET)
+	@Operation(summary = "消息已读", description = "消息已读")
 	@RequestLogger("消息已读")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{message_id}")
@@ -55,7 +55,7 @@ public class MemberMessageBuyerController {
 			memberMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), messageId));
 	}
 
-	@Operation(summary = "消息放入回收站", description = "消息放入回收站", method = CommonConstant.DELETE)
+	@Operation(summary = "消息放入回收站", description = "消息放入回收站")
 	@RequestLogger("消息放入回收站")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{message_id}")

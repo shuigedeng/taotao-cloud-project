@@ -40,7 +40,7 @@ public class LogController {
 
 	private final ILogService logService;
 
-	@Operation(summary = "导出数据", description = "导出数据", method = CommonConstant.GET)
+	@Operation(summary = "导出数据", description = "导出数据")
 	@RequestLogger("导出数据")
 	@GetMapping(value = "/download")
 	@PreAuthorize("@el.check('admin','log:list')")
@@ -50,7 +50,7 @@ public class LogController {
 		logService.download(logService.queryAll(criteria), response);
 	}
 
-	@Operation(summary = "导出错误数据", description = "导出错误数据", method = CommonConstant.GET)
+	@Operation(summary = "导出错误数据", description = "导出错误数据")
 	@RequestLogger("导出错误数据")
 	@GetMapping(value = "/error/download")
 	@PreAuthorize("@el.check('admin','log:list')")
@@ -60,7 +60,7 @@ public class LogController {
 		logService.download(logService.queryAll(criteria), response);
 	}
 
-	@Operation(summary = "日志查询", description = "日志查询", method = CommonConstant.GET)
+	@Operation(summary = "日志查询", description = "日志查询")
 	@RequestLogger("日志查询")
 	@GetMapping
 	@PreAuthorize("@el.check('admin','log:list')")
@@ -70,7 +70,7 @@ public class LogController {
 		return Result.success(logService.queryAll(criteria, pageable));
 	}
 
-	@Operation(summary = "查询api日志", description = "查询api日志", method = CommonConstant.GET)
+	@Operation(summary = "查询api日志", description = "查询api日志")
 	@RequestLogger("查询api日志")
 	@GetMapping(value = "/mlogs")
 	@PreAuthorize("@el.check('admin','log:list')")
@@ -80,7 +80,7 @@ public class LogController {
 		return Result.success(logService.findAllByPageable(criteria.getBlurry(), pageable));
 	}
 
-	@Operation(summary = "用户日志查询", description = "用户日志查询", method = CommonConstant.GET)
+	@Operation(summary = "用户日志查询", description = "用户日志查询")
 	@RequestLogger("用户日志查询")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/user")
@@ -90,7 +90,7 @@ public class LogController {
 		return Result.success(logService.queryAllByUser(criteria, pageable));
 	}
 
-	@Operation(summary = "错误日志查询", description = "错误日志查询", method = CommonConstant.GET)
+	@Operation(summary = "错误日志查询", description = "错误日志查询")
 	@RequestLogger("错误日志查询")
 	@GetMapping(value = "/error")
 	public Result<Object> getErrorLogs(LogQueryCriteria criteria, Pageable pageable) {
@@ -98,7 +98,7 @@ public class LogController {
 		return Result.success(logService.queryAll(criteria, pageable));
 	}
 
-	@Operation(summary = "日志异常详情查询", description = "日志异常详情查询", method = CommonConstant.GET)
+	@Operation(summary = "日志异常详情查询", description = "日志异常详情查询")
 	@RequestLogger("日志异常详情查询")
 	@GetMapping(value = "/error/{id}")
 	@PreAuthorize("@el.check('admin','logError:detail')")
@@ -106,7 +106,7 @@ public class LogController {
 		return Result.success(logService.findByErrDetail(id));
 	}
 
-	@Operation(summary = "删除所有ERROR日志", description = "删除所有ERROR日志", method = CommonConstant.DELETE)
+	@Operation(summary = "删除所有ERROR日志", description = "删除所有ERROR日志")
 	@RequestLogger("删除所有ERROR日志")
 	@DeleteMapping(value = "/error")
 	@PreAuthorize("@el.check('admin','logError:remove')")
@@ -115,7 +115,7 @@ public class LogController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "删除所有INFO日志", description = "删除所有INFO日志", method = CommonConstant.DELETE)
+	@Operation(summary = "删除所有INFO日志", description = "删除所有INFO日志")
 	@RequestLogger("删除所有INFO日志")
 	@DeleteMapping(value = "/info")
 	@PreAuthorize("@el.check('admin','logInfo:remove')")

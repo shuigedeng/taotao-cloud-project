@@ -1,7 +1,7 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
+    //api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region')
 
     api 'com.fasterxml.jackson.core:jackson-databind'
@@ -14,7 +14,9 @@ dependencies {
     api 'org.apache.skywalking:apm-toolkit-logback-1.x'
     api 'org.apache.skywalking:apm-toolkit-trace'
 
-    implementation 'com.baomidou:mybatis-plus-extension'
+    api 'com.baomidou:mybatis-plus-extension'
+
+    api 'org.springframework.kafka:spring-kafka'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

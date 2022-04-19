@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/buyer/order")
 public class OrderController {
 	private final OrderService orderService;
-	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表", method = CommonConstant.GET)
+	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表")
 	@RequestLogger("查询会员订单列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
@@ -51,7 +51,7 @@ public class OrderController {
 		return Result.success(orderService.queryByParams(orderSearchParams));
 	}
 
-	@Operation(summary = "订单明细", description = "订单明细", method = CommonConstant.GET)
+	@Operation(summary = "订单明细", description = "订单明细")
 	@RequestLogger("订单明细")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
@@ -62,7 +62,7 @@ public class OrderController {
 		return Result.success(orderDetailVO);
 	}
 
-	@Operation(summary = "确认收货", description = "确认收货", method = CommonConstant.POST)
+	@Operation(summary = "确认收货", description = "确认收货")
 	@RequestLogger("确认收货")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/receiving")
@@ -80,7 +80,7 @@ public class OrderController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
+	@Operation(summary = "取消订单", description = "取消订单")
 	@RequestLogger("取消订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
@@ -90,7 +90,7 @@ public class OrderController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "删除订单", description = "删除订单", method = CommonConstant.DELETE)
+	@Operation(summary = "删除订单", description = "删除订单")
 	@RequestLogger("删除订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{orderSn}")
@@ -100,7 +100,7 @@ public class OrderController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)
+	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
 	@RequestLogger("查询物流踪迹")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
@@ -110,7 +110,7 @@ public class OrderController {
 		return Result.success(orderService.getTraces(orderSn));
 	}
 
-	@Operation(summary = "开票", description = "开票", method = CommonConstant.GET)
+	@Operation(summary = "开票", description = "开票")
 	@RequestLogger("开票")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/receipt/{orderSn}")

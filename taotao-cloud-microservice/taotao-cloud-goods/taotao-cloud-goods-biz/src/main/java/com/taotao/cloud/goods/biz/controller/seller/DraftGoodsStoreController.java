@@ -48,7 +48,7 @@ public class DraftGoodsStoreController {
 	 */
 	private final DraftGoodsService draftGoodsService;
 
-	@Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表", method = CommonConstant.GET)
+	@Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表")
 	@RequestLogger("分页获取草稿商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -59,7 +59,7 @@ public class DraftGoodsStoreController {
 		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsBaseVO.class));
 	}
 
-	@Operation(summary = "获取草稿商品", description = "获取草稿商品", method = CommonConstant.GET)
+	@Operation(summary = "获取草稿商品", description = "获取草稿商品")
 	@RequestLogger("获取草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
@@ -67,7 +67,7 @@ public class DraftGoodsStoreController {
 		return Result.success(draftGoodsService.getDraftGoods(id));
 	}
 
-	@Operation(summary = "保存草稿商品", description = "保存草稿商品", method = CommonConstant.POST)
+	@Operation(summary = "保存草稿商品", description = "保存草稿商品")
 	@RequestLogger("保存草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -82,7 +82,7 @@ public class DraftGoodsStoreController {
 		return Result.success(draftGoodsService.saveGoodsDraft(draftGoodsDTO));
 	}
 
-	@Operation(summary = "删除草稿商品", description = "删除草稿商品", method = CommonConstant.DELETE)
+	@Operation(summary = "删除草稿商品", description = "删除草稿商品")
 	@RequestLogger("删除草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")

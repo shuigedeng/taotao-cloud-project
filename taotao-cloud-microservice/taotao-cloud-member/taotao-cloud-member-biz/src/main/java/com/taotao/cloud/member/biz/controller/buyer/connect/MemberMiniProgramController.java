@@ -33,7 +33,7 @@ public class MemberMiniProgramController {
 	public final WechatMPMessageService wechatMPMessageService;
 	public final ShortLinkService shortLinkService;
 
-	@Operation(summary = "小程序自动登录", description = "小程序自动登录", method = CommonConstant.GET)
+	@Operation(summary = "小程序自动登录", description = "小程序自动登录")
 	@RequestLogger("小程序自动登录")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/auto-login")
@@ -42,7 +42,7 @@ public class MemberMiniProgramController {
 		return Result.success(this.connectService.miniProgramAutoLogin(params));
 	}
 
-	@Operation(summary = "消息订阅", description = "消息订阅", method = CommonConstant.GET)
+	@Operation(summary = "消息订阅", description = "消息订阅")
 	@RequestLogger("消息订阅")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/subscribe/message")
@@ -50,7 +50,7 @@ public class MemberMiniProgramController {
 		return Result.success(wechatMPMessageService.list());
 	}
 
-	@Operation(summary = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", description = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", method = CommonConstant.GET)
+	@Operation(summary = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", description = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
 	@RequestLogger("小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/unlimited")
@@ -58,7 +58,7 @@ public class MemberMiniProgramController {
 		return Result.success(wechatMpCodeUtil.createCode(page, scene));
 	}
 
-	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", method = CommonConstant.GET)
+	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现")
 	@RequestLogger("小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/qrcode")
@@ -66,7 +66,7 @@ public class MemberMiniProgramController {
 		return Result.success(wechatMpCodeUtil.createQrCode(page));
 	}
 
-	@Operation(summary = "根据shortlink获取页面参数", description = "根据shortlink获取页面参数", method = CommonConstant.GET)
+	@Operation(summary = "根据shortlink获取页面参数", description = "根据shortlink获取页面参数")
 	@RequestLogger("根据shortlink获取页面参数")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/mp/unlimited/scene")

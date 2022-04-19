@@ -34,7 +34,7 @@ public class ReceiptController {
 
 	private final ReceiptService receiptService;
 
-	@Operation(summary = "获取发票详情", description = "获取发票详情", method = CommonConstant.GET)
+	@Operation(summary = "获取发票详情", description = "获取发票详情")
 	@RequestLogger("获取发票详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
@@ -42,7 +42,7 @@ public class ReceiptController {
 		return Result.success(this.receiptService.getDetail(id));
 	}
 
-	@Operation(summary = "获取发票分页信息", description = "获取发票分页信息", method = CommonConstant.GET)
+	@Operation(summary = "获取发票分页信息", description = "获取发票分页信息")
 	@RequestLogger("获取发票分页信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
@@ -51,7 +51,7 @@ public class ReceiptController {
 		return Result.success(this.receiptService.getReceiptData(searchParams, pageVO));
 	}
 
-	@Operation(summary = "保存发票信息", description = "保存发票信息", method = CommonConstant.POST)
+	@Operation(summary = "保存发票信息", description = "保存发票信息")
 	@RequestLogger("保存发票信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping

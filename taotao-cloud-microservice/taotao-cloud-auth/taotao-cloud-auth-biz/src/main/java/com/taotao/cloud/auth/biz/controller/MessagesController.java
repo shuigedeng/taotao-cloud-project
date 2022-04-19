@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class MessagesController {
 
-	@Operation(summary = "测试消息", description = "测试消息", method = CommonConstant.GET)
+	@Operation(summary = "测试消息", description = "测试消息")
 	@RequestLogger("获取验证码")
 	@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/messages")

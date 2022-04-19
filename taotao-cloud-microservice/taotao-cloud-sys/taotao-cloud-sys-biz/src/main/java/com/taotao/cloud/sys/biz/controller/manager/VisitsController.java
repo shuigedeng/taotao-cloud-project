@@ -31,7 +31,7 @@ public class VisitsController {
 
 	private final IVisitsService visitsService;
 
-	@Operation(summary = "创建访问记录", description = "创建访问记录", method = CommonConstant.POST)
+	@Operation(summary = "创建访问记录", description = "创建访问记录")
 	@RequestLogger("创建访问记录")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
@@ -40,7 +40,7 @@ public class VisitsController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "查询访问记录", description = "查询访问记录", method = CommonConstant.GET)
+	@Operation(summary = "查询访问记录", description = "查询访问记录")
 	@RequestLogger("查询访问记录")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -48,7 +48,7 @@ public class VisitsController {
 		return Result.success(visitsService.get());
 	}
 
-	@Operation(summary = "查询图表数据", description = "查询图表数据", method = CommonConstant.GET)
+	@Operation(summary = "查询图表数据", description = "查询图表数据")
 	@RequestLogger("查询图表数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/chartData")

@@ -50,7 +50,7 @@ public class ChatbotController {
 		this.chatbotService = chatbotService;
 	}
 
-	@Operation(summary = "根据id查询机器人客服信息", description = "根据id查询机器人客服信息", method = CommonConstant.GET)
+	@Operation(summary = "根据id查询机器人客服信息", description = "根据id查询机器人客服信息")
 	@RequestLogger("根据id查询机器人客服信息")
 	@PreAuthorize("hasAuthority('chatbot:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")

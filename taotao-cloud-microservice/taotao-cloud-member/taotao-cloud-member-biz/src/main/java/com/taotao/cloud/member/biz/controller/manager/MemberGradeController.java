@@ -37,7 +37,7 @@ public class MemberGradeController {
 
 	private final MemberGradeService memberGradeService;
 
-	@Operation(summary = "通过id获取会员等级", description = "通过id获取会员等级", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取会员等级", description = "通过id获取会员等级")
 	@RequestLogger("通过id获取会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
@@ -45,7 +45,7 @@ public class MemberGradeController {
 		return Result.success(memberGradeService.getById(id));
 	}
 
-	@Operation(summary = "获取会员等级分页", description = "获取会员等级分页", method = CommonConstant.GET)
+	@Operation(summary = "获取会员等级分页", description = "获取会员等级分页")
 	@RequestLogger("获取会员等级分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
@@ -53,7 +53,7 @@ public class MemberGradeController {
 		return Result.success(memberGradeService.page(PageUtil.initPage(page)));
 	}
 
-	@Operation(summary = "添加会员等级", description = "添加会员等级", method = CommonConstant.POST)
+	@Operation(summary = "添加会员等级", description = "添加会员等级")
 	@RequestLogger("添加会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "")
@@ -64,7 +64,7 @@ public class MemberGradeController {
 		throw new BusinessException(ResultEnum.ERROR);
 	}
 
-	@Operation(summary = "修改会员等级", description = "修改会员等级", method = CommonConstant.PUT)
+	@Operation(summary = "修改会员等级", description = "修改会员等级")
 	@RequestLogger("修改会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -73,7 +73,7 @@ public class MemberGradeController {
 		return Result.success(memberGradeService.updateById(memberGrade));
 	}
 
-	@Operation(summary = "删除会员等级", description = "删除会员等级", method = CommonConstant.DELETE)
+	@Operation(summary = "删除会员等级", description = "删除会员等级")
 	@RequestLogger("删除会员等级")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")

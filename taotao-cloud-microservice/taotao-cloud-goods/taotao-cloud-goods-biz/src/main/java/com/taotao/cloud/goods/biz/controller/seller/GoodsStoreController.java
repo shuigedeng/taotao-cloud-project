@@ -68,7 +68,7 @@ public class GoodsStoreController {
 	 */
 	private final IFeignStoreDetailService storeDetailService;
 
-	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
+	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
 	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
@@ -80,7 +80,7 @@ public class GoodsStoreController {
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
-	@Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表", method = CommonConstant.GET)
+	@Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
 	@RequestLogger("分页获取商品Sku列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
@@ -92,7 +92,7 @@ public class GoodsStoreController {
 		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
 	}
 
-	@Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表", method = CommonConstant.GET)
+	@Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
 	@RequestLogger("分页获取库存告警商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/stock/warning")
@@ -112,7 +112,7 @@ public class GoodsStoreController {
 		return Result.success(stockWarning);
 	}
 
-	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
@@ -120,7 +120,7 @@ public class GoodsStoreController {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
-	@Operation(summary = "新增商品", description = "新增商品", method = CommonConstant.POST)
+	@Operation(summary = "新增商品", description = "新增商品")
 	@RequestLogger("新增商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -129,7 +129,7 @@ public class GoodsStoreController {
 		return Result.success(goodsService.addGoods(goodsOperationDTO));
 	}
 
-	@Operation(summary = "修改商品", description = "修改商品", method = CommonConstant.PUT)
+	@Operation(summary = "修改商品", description = "修改商品")
 	@RequestLogger("修改商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}")
@@ -138,7 +138,7 @@ public class GoodsStoreController {
 		return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
 	}
 
-	@Operation(summary = "下架商品", description = "下架商品", method = CommonConstant.PUT)
+	@Operation(summary = "下架商品", description = "下架商品")
 	@RequestLogger("下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/under")
@@ -147,7 +147,7 @@ public class GoodsStoreController {
 			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架"));
 	}
 
-	@Operation(summary = "上架商品", description = "上架商品", method = CommonConstant.PUT)
+	@Operation(summary = "上架商品", description = "上架商品")
 	@RequestLogger("上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/up")
@@ -156,7 +156,7 @@ public class GoodsStoreController {
 			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 	}
 
-	@Operation(summary = "删除商品", description = "删除商品", method = CommonConstant.DELETE)
+	@Operation(summary = "删除商品", description = "删除商品")
 	@RequestLogger("删除商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping
@@ -164,7 +164,7 @@ public class GoodsStoreController {
 		return Result.success(goodsService.deleteGoods(goodsId));
 	}
 
-	@Operation(summary = "设置商品运费模板", description = "设置商品运费模板", method = CommonConstant.POST)
+	@Operation(summary = "设置商品运费模板", description = "设置商品运费模板")
 	@RequestLogger("设置商品运费模板")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/freight")
@@ -173,7 +173,7 @@ public class GoodsStoreController {
 		return Result.success(goodsService.freight(goodsId, templateId));
 	}
 
-	@Operation(summary = "根据goodsId分页获取商品规格列表", description = "根据goodsId分页获取商品规格列表", method = CommonConstant.GET)
+	@Operation(summary = "根据goodsId分页获取商品规格列表", description = "根据goodsId分页获取商品规格列表")
 	@RequestLogger("根据goodsId分页获取商品规格列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
@@ -184,7 +184,7 @@ public class GoodsStoreController {
 				.eq(GoodsSku::getStoreId, storeId))));
 	}
 
-	@Operation(summary = "修改商品库存", description = "修改商品库存", method = CommonConstant.PUT)
+	@Operation(summary = "修改商品库存", description = "修改商品库存")
 	@RequestLogger("修改商品库存")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/stocks")

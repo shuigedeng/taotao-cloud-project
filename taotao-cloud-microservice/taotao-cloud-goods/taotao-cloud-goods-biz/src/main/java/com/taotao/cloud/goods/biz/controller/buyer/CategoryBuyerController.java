@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.buyer;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.service.CategoryService;
@@ -11,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +33,7 @@ public class CategoryBuyerController {
 	 */
 	private final CategoryService categoryService;
 
-	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表", method = CommonConstant.GET)
+	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")
 	@RequestLogger("根据父id获取商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}")

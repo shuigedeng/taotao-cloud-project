@@ -54,7 +54,7 @@ public class AliPayController {
 		return Result.success(alipayService.find());
 	}
 
-	@Operation(summary = "配置支付宝", description = "配置支付宝", method = CommonConstant.PUT)
+	@Operation(summary = "配置支付宝", description = "配置支付宝")
 	@RequestLogger("配置支付宝")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
@@ -64,7 +64,7 @@ public class AliPayController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "支付宝PC网页支付", description = "支付宝PC网页支付", method = CommonConstant.POST)
+	@Operation(summary = "支付宝PC网页支付", description = "支付宝PC网页支付")
 	@RequestLogger("支付宝PC网页支付")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsPC")
@@ -78,7 +78,7 @@ public class AliPayController {
 
 	@Hidden
 	@NotAuth
-	@Operation(summary = "支付之后跳转的链接", description = "支付之后跳转的链接", method = CommonConstant.GET)
+	@Operation(summary = "支付之后跳转的链接", description = "支付之后跳转的链接")
 	@RequestLogger("支付之后跳转的链接")
 	@GetMapping("/return")
 	public Result<Boolean> returnPage(HttpServletRequest request,
@@ -106,7 +106,7 @@ public class AliPayController {
 		}
 	}
 
-	@Operation(summary = "支付宝手机网页支付", description = "支付宝手机网页支付", method = CommonConstant.POST)
+	@Operation(summary = "支付宝手机网页支付", description = "支付宝手机网页支付")
 	@RequestLogger("支付宝手机网页支付")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsWeb")

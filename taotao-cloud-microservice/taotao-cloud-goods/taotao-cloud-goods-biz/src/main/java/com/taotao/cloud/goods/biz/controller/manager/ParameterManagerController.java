@@ -36,7 +36,7 @@ public class ParameterManagerController {
 	 */
 	private final ParametersService parametersService;
 
-	@Operation(summary = "添加参数", description = "添加参数", method = CommonConstant.POST)
+	@Operation(summary = "添加参数", description = "添加参数")
 	@RequestLogger("添加参数添加参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -46,7 +46,7 @@ public class ParameterManagerController {
 		return Result.success(parametersService.save(parameters));
 	}
 
-	@Operation(summary = "编辑参数", description = "编辑参数", method = CommonConstant.PUT)
+	@Operation(summary = "编辑参数", description = "编辑参数")
 	@RequestLogger("编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -57,7 +57,7 @@ public class ParameterManagerController {
 		return Result.success(parametersService.updateParameter(parameters));
 	}
 
-	@Operation(summary = "根据id删除参数", description = "根据id删除参数", method = CommonConstant.DELETE)
+	@Operation(summary = "根据id删除参数", description = "根据id删除参数")
 	@RequestLogger("根据id删除参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")

@@ -39,7 +39,7 @@ public class SpecificationStoreController {
 	 */
 	private final CategorySpecificationService categorySpecificationService;
 
-	@Operation(summary = "获取分类规格", description = "获取分类规格", method = CommonConstant.GET)
+	@Operation(summary = "获取分类规格", description = "获取分类规格")
 	@RequestLogger("获取分类规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")

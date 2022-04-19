@@ -47,7 +47,7 @@ public class ConnectWebBindController {
 	private final MemberService memberService;
 	private final ConnectUtil connectUtil;
 
-	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权", method = CommonConstant.GET)
+	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权")
 	@RequestLogger("WEB信任登录授权")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/login/web/{type}")
@@ -60,7 +60,7 @@ public class ConnectWebBindController {
 		return Result.success(authorizeUrl);
 	}
 
-	@Operation(summary = "信任登录统一回调地址", description = "信任登录统一回调地址", method = CommonConstant.GET)
+	@Operation(summary = "信任登录统一回调地址", description = "信任登录统一回调地址")
 	@RequestLogger("信任登录统一回调地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/callback/{type}")
@@ -70,7 +70,7 @@ public class ConnectWebBindController {
 		connectUtil.callback(type, callback, httpServletRequest, httpServletResponse);
 	}
 
-	@Operation(summary = "信任登录响应结果获取", description = "信任登录响应结果获取", method = CommonConstant.GET)
+	@Operation(summary = "信任登录响应结果获取", description = "信任登录响应结果获取")
 	@RequestLogger("信任登录响应结果获取")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/result")
@@ -81,7 +81,7 @@ public class ConnectWebBindController {
 		return connectUtil.getResult(state);
 	}
 
-	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权", method = CommonConstant.GET)
+	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权")
 	@RequestLogger("WEB信任登录授权")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/register/auto")
@@ -90,7 +90,7 @@ public class ConnectWebBindController {
 		return Result.success(token);
 	}
 
-	@Operation(summary = "unionID登录", description = "unionID登录", method = CommonConstant.GET)
+	@Operation(summary = "unionID登录", description = "unionID登录")
 	@RequestLogger("unionID登录")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	//@ApiImplicitParams({

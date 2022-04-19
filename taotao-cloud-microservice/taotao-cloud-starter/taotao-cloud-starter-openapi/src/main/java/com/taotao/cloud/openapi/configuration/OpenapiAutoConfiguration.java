@@ -78,6 +78,24 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 			.build();
 	}
 
+	//@Bean
+	//public GroupedOpenApi groupedOpenApi1() {
+	//	return GroupedOpenApi
+	//		.builder()
+	//		.group("buyer")
+	//		.packagesToScan("com.taotao.cloud.sys.biz.controller.buyer")
+	//		.build();
+	//}
+	//
+	//@Bean
+	//public GroupedOpenApi groupedOpenApi2() {
+	//	return GroupedOpenApi
+	//		.builder()
+	//		.group("seller")
+	//		.packagesToScan("com.taotao.cloud.sys.biz.controller.buyer")
+	//		.build();
+	//}
+
 	@Bean
 	public OpenApiCustomiser openApiCustomiser() {
 		return openApi -> {

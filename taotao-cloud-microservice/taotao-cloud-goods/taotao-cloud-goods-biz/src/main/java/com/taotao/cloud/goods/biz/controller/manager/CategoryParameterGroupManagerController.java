@@ -43,7 +43,7 @@ public class CategoryParameterGroupManagerController {
 	 */
 	private final CategoryParameterGroupService categoryParameterGroupService;
 
-	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息", method = CommonConstant.GET)
+	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
 	@RequestLogger("查询某分类下绑定的参数信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
@@ -51,7 +51,7 @@ public class CategoryParameterGroupManagerController {
 		return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
 	}
 
-	@Operation(summary = "保存数据", description = "保存数据", method = CommonConstant.POST)
+	@Operation(summary = "保存数据", description = "保存数据")
 	@RequestLogger("保存数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -60,7 +60,7 @@ public class CategoryParameterGroupManagerController {
 			return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
 	}
 
-	@Operation(summary = "更新数据", description = "更新数据", method = CommonConstant.PUT)
+	@Operation(summary = "更新数据", description = "更新数据")
 	@RequestLogger("更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
@@ -69,7 +69,7 @@ public class CategoryParameterGroupManagerController {
 			return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
 	}
 
-	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组", method = CommonConstant.DELETE)
+	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组")
 	@RequestLogger("通过id删除参数组")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")

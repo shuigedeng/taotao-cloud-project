@@ -37,7 +37,7 @@ public class PdfController {
 	private final FileUploaderUtils fileUploaderUtils;
 	private final PdfUtils pdfUtils;
 
-	@Operation(summary = "文件上传", description = "文件上传", method = CommonConstant.POST)
+	@Operation(summary = "文件上传", description = "文件上传")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/upload")
@@ -56,7 +56,7 @@ public class PdfController {
 		return Result.success(data);
 	}
 
-	@Operation(summary = "文件上传并转为PDF", description = "文件上传并转为PDF", method = CommonConstant.POST)
+	@Operation(summary = "文件上传并转为PDF", description = "文件上传并转为PDF")
 	@RequestLogger("文件上传并转为PDF")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/topdf")
@@ -76,7 +76,7 @@ public class PdfController {
 		return Result.success(data);
 	}
 
-	@Operation(summary = "文件上传并转为图片PNG格式", description = "文件上传并转为图片PNG格式", method = CommonConstant.POST)
+	@Operation(summary = "文件上传并转为图片PNG格式", description = "文件上传并转为图片PNG格式")
 	@RequestLogger("文件上传并转为图片PNG格式")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/topng")

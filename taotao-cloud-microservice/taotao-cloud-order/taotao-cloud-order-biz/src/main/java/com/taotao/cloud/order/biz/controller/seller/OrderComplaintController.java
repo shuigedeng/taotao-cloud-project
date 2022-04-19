@@ -44,7 +44,7 @@ public class OrderComplaintController {
 	 */
 	private final OrderComplaintCommunicationService orderComplaintCommunicationService;
 
-	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
@@ -53,7 +53,7 @@ public class OrderComplaintController {
 			OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
 	}
 
-	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
@@ -64,7 +64,7 @@ public class OrderComplaintController {
 		return Result.success(PageModel.convertMybatisPage(orderComplainPage, OrderComplaintBaseVO.class));
 	}
 
-	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话", method = CommonConstant.POST)
+	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")
 	@RequestLogger("添加交易投诉对话")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication/{complainId}")
@@ -81,7 +81,7 @@ public class OrderComplaintController {
 		return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
 	}
 
-	@Operation(summary = "修改申诉信息", description = "修改申诉信息", method = CommonConstant.PUT)
+	@Operation(summary = "修改申诉信息", description = "修改申诉信息")
 	@RequestLogger("修改申诉信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -92,7 +92,7 @@ public class OrderComplaintController {
 		return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));
 	}
 
-	@Operation(summary = "申诉", description = "申诉", method = CommonConstant.POST)
+	@Operation(summary = "申诉", description = "申诉")
 	@RequestLogger("申诉")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/appeal")
@@ -102,7 +102,7 @@ public class OrderComplaintController {
 			orderComplaintService.getOrderComplainById(storeAppealDTO.getOrderComplaintId()));
 	}
 
-	@Operation(summary = "修改状态", description = "修改状态", method = CommonConstant.PUT)
+	@Operation(summary = "修改状态", description = "修改状态")
 	@RequestLogger("修改状态")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status")

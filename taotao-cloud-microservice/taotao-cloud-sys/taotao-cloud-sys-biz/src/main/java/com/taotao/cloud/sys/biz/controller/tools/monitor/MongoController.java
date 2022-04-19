@@ -38,7 +38,7 @@ public class MongoController {
 
 	private final IMongoService mongoService;
 
-	@Operation(summary = "查询所有的库", description = "查询所有的库", method = CommonConstant.GET)
+	@Operation(summary = "查询所有的库", description = "查询所有的库")
 	@RequestLogger("导出数据")
 	@PreAuthorize("@el.check('admin','log:list')")
 	@GetMapping("/database-names")
@@ -46,7 +46,7 @@ public class MongoController {
 		return Result.success(mongoService.databaseNames());
 	}
 
-	@Operation(summary = "查询某个库里的所有集合", description = "查询某个库里的所有集合", method = CommonConstant.GET)
+	@Operation(summary = "查询某个库里的所有集合", description = "查询某个库里的所有集合")
 	@RequestLogger("查询某个库里的所有集合")
 	@PreAuthorize("@el.check('admin','log:list')")
 	@GetMapping("/collection-names/{databaseName}")
@@ -55,7 +55,7 @@ public class MongoController {
 		return Result.success(mongoService.collectionNames(databaseName));
 	}
 
-	@Operation(summary = "分页数据查询", description = "分页数据查询", method = CommonConstant.GET)
+	@Operation(summary = "分页数据查询", description = "分页数据查询")
 	@RequestLogger("分页数据查询")
 	@PreAuthorize("@el.check('admin','log:list')")
 	@GetMapping("/page")

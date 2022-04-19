@@ -50,7 +50,7 @@ public class GeneratorController {
 	//@Value("${generator.enabled:false}")
 	//private Boolean generatorEnabled = false;
 
-	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
+	@Operation(summary = "查询数据库数据", description = "查询数据库数据")
 	@RequestLogger("查询数据库数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/tables/all")
@@ -58,7 +58,7 @@ public class GeneratorController {
 		return Result.success(generatorService.getTables());
 	}
 
-	@Operation(summary = "查询数据库数据", description = "查询数据库数据", method = CommonConstant.GET)
+	@Operation(summary = "查询数据库数据", description = "查询数据库数据")
 	@RequestLogger("查询数据库数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/tables")
@@ -68,7 +68,7 @@ public class GeneratorController {
 		return Result.success(generatorService.getTables(name, page, size));
 	}
 
-	@Operation(summary = "查询字段数据", description = "查询字段数据", method = CommonConstant.GET)
+	@Operation(summary = "查询字段数据", description = "查询字段数据")
 	@RequestLogger("查询字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/columns")
@@ -80,7 +80,7 @@ public class GeneratorController {
 	}
 
 	@PutMapping
-	@Operation(summary = "保存字段数据", description = "保存字段数据", method = CommonConstant.PUT)
+	@Operation(summary = "保存字段数据", description = "保存字段数据")
 	@RequestLogger("保存字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Boolean> save(@RequestBody List<ColumnConfig> columnInfos) {
@@ -88,7 +88,7 @@ public class GeneratorController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "同步字段数据", description = "同步字段数据", method = CommonConstant.POST)
+	@Operation(summary = "同步字段数据", description = "同步字段数据")
 	@RequestLogger("同步字段数据")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/sync")
@@ -100,7 +100,7 @@ public class GeneratorController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "生成代码", description = "生成代码", method = CommonConstant.POST)
+	@Operation(summary = "生成代码", description = "生成代码")
 	@RequestLogger("生成代码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/{tableName}/{type}")

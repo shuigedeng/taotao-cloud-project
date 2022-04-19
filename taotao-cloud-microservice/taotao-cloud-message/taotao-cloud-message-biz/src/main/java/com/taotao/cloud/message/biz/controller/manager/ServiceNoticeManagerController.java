@@ -32,7 +32,7 @@ public class ServiceNoticeManagerController {
 	@Autowired
 	private ServiceNoticeService serviceNoticeService;
 
-	@Operation(summary = "查看服务订阅消息详情", description = "查看服务订阅消息详情", method = CommonConstant.GET)
+	@Operation(summary = "查看服务订阅消息详情", description = "查看服务订阅消息详情")
 	@RequestLogger("查看服务订阅消息详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
@@ -41,7 +41,7 @@ public class ServiceNoticeManagerController {
 		return Result.success(serviceNotice);
 	}
 
-	@Operation(summary = "分页获取服务订阅消息", description = "分页获取服务订阅消息", method = CommonConstant.GET)
+	@Operation(summary = "分页获取服务订阅消息", description = "分页获取服务订阅消息")
 	@RequestLogger("分页获取服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -52,7 +52,7 @@ public class ServiceNoticeManagerController {
 		return Result.success(data);
 	}
 
-	@Operation(summary = "新增服务订阅消息", description = "新增服务订阅消息", method = CommonConstant.POST)
+	@Operation(summary = "新增服务订阅消息", description = "新增服务订阅消息")
 	@RequestLogger("新增服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -63,7 +63,7 @@ public class ServiceNoticeManagerController {
 		return Result.success(serviceNotice);
 	}
 
-	@Operation(summary = "更新服务订阅消息", description = "更新服务订阅消息", method = CommonConstant.PUT)
+	@Operation(summary = "更新服务订阅消息", description = "更新服务订阅消息")
 	@RequestLogger("更新服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -73,7 +73,7 @@ public class ServiceNoticeManagerController {
 		return Result.success(serviceNotice);
 	}
 
-	@Operation(summary = "删除服务订阅消息", description = "删除服务订阅消息", method = CommonConstant.DELETE)
+	@Operation(summary = "删除服务订阅消息", description = "删除服务订阅消息")
 	@RequestLogger("删除服务订阅消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")

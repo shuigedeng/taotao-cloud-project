@@ -50,7 +50,7 @@ public class OrderController {
 	 */
 	private final OrderPriceService orderPriceService;
 
-	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页", method = CommonConstant.GET)
+	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页")
 	@RequestLogger("查询订单列表分页")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
@@ -58,7 +58,7 @@ public class OrderController {
 		return Result.success(orderService.queryByParams(orderSearchParams));
 	}
 
-	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表", method = CommonConstant.GET)
+	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
 	@RequestLogger("查询订单导出列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
@@ -67,7 +67,7 @@ public class OrderController {
 		return Result.success(orderService.queryExportOrder(orderSearchParams));
 	}
 
-	@Operation(summary = "订单明细", description = "订单明细", method = CommonConstant.GET)
+	@Operation(summary = "订单明细", description = "订单明细")
 	@RequestLogger("订单明细")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
@@ -75,7 +75,7 @@ public class OrderController {
 		return Result.success(orderService.queryDetail(orderSn));
 	}
 
-	@Operation(summary = "确认收款", description = "确认收款", method = CommonConstant.POST)
+	@Operation(summary = "确认收款", description = "确认收款")
 	@RequestLogger("确认收款")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/pay")
@@ -84,7 +84,7 @@ public class OrderController {
 		return Result.success();
 	}
 
-	@Operation(summary = "修改收货人信息", description = "修改收货人信息", method = CommonConstant.PUT)
+	@Operation(summary = "修改收货人信息", description = "修改收货人信息")
 	@RequestLogger("修改收货人信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/consignee")
@@ -93,7 +93,7 @@ public class OrderController {
 		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
 	}
 
-	@Operation(summary = "修改订单价格", description = "修改订单价格", method = CommonConstant.PUT)
+	@Operation(summary = "修改订单价格", description = "修改订单价格")
 	@RequestLogger("根据id查询物流公司信息")
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Order> updateOrderPrice(@PathVariable String orderSn,
@@ -101,7 +101,7 @@ public class OrderController {
 		return Result.success(orderPriceService.updatePrice(orderSn, price));
 	}
 
-	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
+	@Operation(summary = "取消订单", description = "取消订单")
 	@RequestLogger("取消订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
@@ -110,7 +110,7 @@ public class OrderController {
 		return Result.success(orderService.cancel(orderSn, reason));
 	}
 
-	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)
+	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
 	@RequestLogger("查询物流踪迹")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")

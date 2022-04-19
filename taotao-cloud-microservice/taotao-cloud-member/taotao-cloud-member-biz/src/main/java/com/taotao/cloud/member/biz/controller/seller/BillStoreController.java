@@ -37,7 +37,7 @@ public class BillStoreController {
 	private final BillService billService;
 	private final StoreFlowService storeFlowService;
 
-	@Operation(summary = "获取结算单分页", description = "获取结算单分页", method = CommonConstant.GET)
+	@Operation(summary = "获取结算单分页", description = "获取结算单分页")
 	@RequestLogger("获取结算单分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
@@ -47,7 +47,7 @@ public class BillStoreController {
 		return Result.success(billService.billPage(billSearchParams));
 	}
 
-	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
 	@RequestLogger("通过id获取结算单")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
@@ -55,7 +55,7 @@ public class BillStoreController {
 		return Result.success(OperationalJudgment.judgment(billService.getById(id)));
 	}
 
-	@Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页", method = CommonConstant.GET)
+	@Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页")
 	@RequestLogger("获取商家结算单流水分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/flow/{id}")
@@ -66,7 +66,7 @@ public class BillStoreController {
 		return Result.success(storeFlowService.getStoreFlow(id, flowType, pageVO));
 	}
 
-	@Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页", method = CommonConstant.GET)
+	@Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页")
 	@RequestLogger("获取商家分销订单流水分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/distribution/flow/{id}")
@@ -75,7 +75,7 @@ public class BillStoreController {
 		return Result.success(storeFlowService.getDistributionFlow(id, pageVO));
 	}
 
-	@Operation(summary = "核对结算单", description = "核对结算单", method = CommonConstant.PUT)
+	@Operation(summary = "核对结算单", description = "核对结算单")
 	@RequestLogger("核对结算单")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping(value = "/check/{id}")
@@ -85,7 +85,7 @@ public class BillStoreController {
 		return Result.success();
 	}
 
-	@Operation(summary = "下载结算单", description = "下载结算单", method = CommonConstant.GET)
+	@Operation(summary = "下载结算单", description = "下载结算单")
 	@RequestLogger("下载结算单")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/download/{id}")

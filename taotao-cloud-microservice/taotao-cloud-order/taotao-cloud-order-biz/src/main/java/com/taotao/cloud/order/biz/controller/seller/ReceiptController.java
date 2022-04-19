@@ -38,7 +38,7 @@ public class ReceiptController {
 
 	private final OrderService orderService;
 
-	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
@@ -49,7 +49,7 @@ public class ReceiptController {
 		return Result.success(receiptService.getReceiptData(receiptSearchParams, page));
 	}
 
-	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
@@ -57,7 +57,7 @@ public class ReceiptController {
 		return Result.success(OperationalJudgment.judgment(receiptService.getById(id)));
 	}
 
-	@Operation(summary = "开发票", description = "开发票", method = CommonConstant.POST)
+	@Operation(summary = "开发票", description = "开发票")
 	@RequestLogger("开发票")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{id}/invoicing")
@@ -66,7 +66,7 @@ public class ReceiptController {
 		return Result.success(receiptService.invoicing(id));
 	}
 
-	@Operation(summary = "通过订单编号获取", description = "通过订单编号获取", method = CommonConstant.GET)
+	@Operation(summary = "通过订单编号获取", description = "通过订单编号获取")
 	@RequestLogger("通过订单编号获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/orderSn/{orderSn}")

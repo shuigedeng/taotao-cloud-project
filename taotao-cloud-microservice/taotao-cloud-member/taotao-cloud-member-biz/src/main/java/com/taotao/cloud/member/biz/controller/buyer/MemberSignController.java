@@ -34,7 +34,7 @@ public class MemberSignController {
 
 	private final MemberSignService memberSignService;
 
-	@Operation(summary = "会员签到", description = "会员签到", method = CommonConstant.POST)
+	@Operation(summary = "会员签到", description = "会员签到")
 	@RequestLogger("会员签到")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
@@ -42,7 +42,7 @@ public class MemberSignController {
 		return Result.success(memberSignService.memberSign());
 	}
 
-	@Operation(summary = "根据时间查询会员签到表，类型是YYYYmm", description = "根据时间查询会员签到表，类型是YYYYmm", method = CommonConstant.GET)
+	@Operation(summary = "根据时间查询会员签到表，类型是YYYYmm", description = "根据时间查询会员签到表，类型是YYYYmm")
 	@RequestLogger("根据时间查询会员签到表，类型是YYYYmm")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping

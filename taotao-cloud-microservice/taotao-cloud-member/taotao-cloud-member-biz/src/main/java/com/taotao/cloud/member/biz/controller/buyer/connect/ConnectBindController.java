@@ -30,7 +30,7 @@ public class ConnectBindController {
 
 	private final ConnectService connectService;
 
-	@Operation(summary = "unionId绑定", description = "unionId绑定", method = CommonConstant.POST)
+	@Operation(summary = "unionId绑定", description = "unionId绑定")
 	@RequestLogger("unionId绑定")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
@@ -38,7 +38,7 @@ public class ConnectBindController {
 		connectService.bind(unionId, type);
 	}
 
-	@Operation(summary = "unionID解绑", description = "unionID解绑", method = CommonConstant.POST)
+	@Operation(summary = "unionID解绑", description = "unionID解绑")
 	@RequestLogger("unionID解绑")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/unbind")
@@ -46,7 +46,7 @@ public class ConnectBindController {
 		connectService.unbind(type);
 	}
 
-	@Operation(summary = "绑定列表", description = "绑定列表", method = CommonConstant.GET)
+	@Operation(summary = "绑定列表", description = "绑定列表")
 	@RequestLogger("绑定列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/list")
