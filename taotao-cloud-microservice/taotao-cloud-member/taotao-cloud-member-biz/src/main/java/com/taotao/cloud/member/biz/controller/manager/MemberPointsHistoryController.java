@@ -31,7 +31,7 @@ public class MemberPointsHistoryController {
 
 	private final MemberPointsHistoryService memberPointsHistoryService;
 
-	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
@@ -41,7 +41,7 @@ public class MemberPointsHistoryController {
 			memberPointsHistoryService.MemberPointsHistoryList(page, memberId, memberName));
 	}
 
-	@Operation(summary = "获取会员积分", description = "获取会员积分", method = CommonConstant.GET)
+	@Operation(summary = "获取会员积分", description = "获取会员积分")
 	@RequestLogger("获取会员积分")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "")

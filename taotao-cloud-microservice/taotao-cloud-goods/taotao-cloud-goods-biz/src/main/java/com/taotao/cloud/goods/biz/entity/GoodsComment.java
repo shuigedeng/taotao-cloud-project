@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,11 +23,11 @@ import lombok.Setter;
  * @author shuigedeng
  * @since 2020/4/30 16:06
  */
-@Setter
-@Getter
-@Builder
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = GoodsComment.TABLE_NAME)
 @TableName(GoodsComment.TABLE_NAME)

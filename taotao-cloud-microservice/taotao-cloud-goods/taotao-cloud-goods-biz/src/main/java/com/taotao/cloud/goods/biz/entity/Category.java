@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 /**
  * 商品分类表
  */
-@Setter
-@Getter
-@Builder
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = Category.TABLE_NAME)
 @TableName(Category.TABLE_NAME)

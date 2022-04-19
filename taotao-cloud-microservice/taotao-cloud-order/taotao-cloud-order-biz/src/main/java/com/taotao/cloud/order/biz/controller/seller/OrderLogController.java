@@ -33,7 +33,7 @@ public class OrderLogController {
 
 	private final OrderService orderService;
 	
-	@Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志", method = CommonConstant.GET)
+	@Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志")
 	@RequestLogger("通过订单编号获取订单日志")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")

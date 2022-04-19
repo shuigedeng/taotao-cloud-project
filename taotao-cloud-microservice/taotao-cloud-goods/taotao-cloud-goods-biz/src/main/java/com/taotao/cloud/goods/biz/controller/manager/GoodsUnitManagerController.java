@@ -44,7 +44,7 @@ public class GoodsUnitManagerController {
 	 */
 	private final GoodsUnitService goodsUnitService;
 
-	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位", method = CommonConstant.GET)
+	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -53,7 +53,7 @@ public class GoodsUnitManagerController {
 		return Result.success(PageModel.convertMybatisPage(page, GoodsUnit.class));
 	}
 
-	@Operation(summary = "获取商品计量单位", description = "获取商品计量单位", method = CommonConstant.GET)
+	@Operation(summary = "获取商品计量单位", description = "获取商品计量单位")
 	@RequestLogger("获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
@@ -61,7 +61,7 @@ public class GoodsUnitManagerController {
 		return Result.success(goodsUnitService.getById(id));
 	}
 
-	@Operation(summary = "添加商品计量单位", description = "添加商品计量单位", method = CommonConstant.POST)
+	@Operation(summary = "添加商品计量单位", description = "添加商品计量单位")
 	@RequestLogger("添加商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -69,7 +69,7 @@ public class GoodsUnitManagerController {
 		return Result.success(goodsUnitService.save(goodsUnit));
 	}
 
-	@Operation(summary = "编辑商品计量单位", description = "编辑商品计量单位", method = CommonConstant.PUT)
+	@Operation(summary = "编辑商品计量单位", description = "编辑商品计量单位")
 	@RequestLogger("编辑商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -78,7 +78,7 @@ public class GoodsUnitManagerController {
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
 
-	@Operation(summary = "删除商品计量单位", description = "删除商品计量单位", method = CommonConstant.DELETE)
+	@Operation(summary = "删除商品计量单位", description = "删除商品计量单位")
 	@RequestLogger("删除商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{ids}")

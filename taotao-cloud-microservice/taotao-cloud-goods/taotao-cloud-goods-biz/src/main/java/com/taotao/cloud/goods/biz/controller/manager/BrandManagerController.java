@@ -54,7 +54,7 @@ public class BrandManagerController {
 		return Result.success(BrandMapStruct.INSTANCE.brandToBrandVO(brand));
 	}
 
-	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌", method = CommonConstant.GET)
+	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
 	@RequestLogger("获取所有可用品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all/available")
@@ -63,7 +63,7 @@ public class BrandManagerController {
 		return Result.success(BrandMapStruct.INSTANCE.brandsToBrandVOs(list));
 	}
 
-	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -72,7 +72,7 @@ public class BrandManagerController {
 		return Result.success(PageModel.convertMybatisPage(brandPage, BrandVO.class));
 	}
 
-	@Operation(summary = "新增品牌", description = "新增品牌", method = CommonConstant.POST)
+	@Operation(summary = "新增品牌", description = "新增品牌")
 	@RequestLogger("新增品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -80,7 +80,7 @@ public class BrandManagerController {
 		return Result.success(brandService.addBrand(brand));
 	}
 
-	@Operation(summary = "更新品牌", description = "更新品牌", method = CommonConstant.PUT)
+	@Operation(summary = "更新品牌", description = "更新品牌")
 	@RequestLogger("更新品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -89,7 +89,7 @@ public class BrandManagerController {
 		return Result.success(brandService.updateBrand(brand));
 	}
 
-	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌", method = CommonConstant.PUT)
+	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌")
 	@RequestLogger("后台禁用品牌")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{brandId}")
@@ -97,7 +97,7 @@ public class BrandManagerController {
 			return Result.success(brandService.brandDisable(brandId, disable));
 	}
 
-	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
+	@Operation(summary = "批量删除", description = "批量删除")
 	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")

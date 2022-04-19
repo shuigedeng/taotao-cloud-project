@@ -51,7 +51,7 @@ public class CategoryManagerController {
 	 */
 	private final GoodsService goodsService;
 
-	@Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表", method = CommonConstant.GET)
+	@Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表")
 	@RequestLogger("查询某分类下的全部子分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}/children/all")
@@ -60,7 +60,7 @@ public class CategoryManagerController {
 		return Result.success(ICategoryMapStruct.INSTANCE.categorysToCategoryBaseVOs(categories));
 	}
 
-	@Operation(summary = "查询全部分类列表", description = "查询全部分类列表", method = CommonConstant.GET)
+	@Operation(summary = "查询全部分类列表", description = "查询全部分类列表")
 	@RequestLogger("查询全部分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/children/all")
@@ -68,7 +68,7 @@ public class CategoryManagerController {
 		return Result.success(this.categoryService.listAllChildren());
 	}
 
-	@Operation(summary = "添加商品分类", description = "添加商品分类", method = CommonConstant.POST)
+	@Operation(summary = "添加商品分类", description = "添加商品分类")
 	@RequestLogger("添加商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -86,7 +86,7 @@ public class CategoryManagerController {
 		return Result.success(categoryService.saveCategory(category));
 	}
 
-	@Operation(summary = "修改商品分类", description = "修改商品分类", method = CommonConstant.PUT)
+	@Operation(summary = "修改商品分类", description = "修改商品分类")
 	@RequestLogger("修改商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
@@ -98,7 +98,7 @@ public class CategoryManagerController {
 		return Result.success(categoryService.updateCategory(catTemp));
 	}
 
-	@Operation(summary = "通过id删除分类", description = "通过id删除分类", method = CommonConstant.DELETE)
+	@Operation(summary = "通过id删除分类", description = "通过id删除分类")
 	@RequestLogger("通过id删除分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
@@ -118,7 +118,7 @@ public class CategoryManagerController {
 		return Result.success(categoryService.delete(id));
 	}
 
-	@Operation(summary = "后台 禁用/启用 分类", description = "后台 禁用/启用 分类", method = CommonConstant.PUT)
+	@Operation(summary = "后台 禁用/启用 分类", description = "后台 禁用/启用 分类")
 	@RequestLogger("后台 禁用/启用 分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")

@@ -45,7 +45,7 @@ public class EmailController {
 	private final ScheduledManager scheduledManager;
 	private final IEmailConfigService emailService;
 
-	@Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息", method = CommonConstant.GET)
+	@Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息")
 	@RequestLogger("查询邮件配置信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -53,7 +53,7 @@ public class EmailController {
 		return Result.success(emailService.find());
 	}
 
-	@Operation(summary = "配置邮件", description = "配置邮件", method = CommonConstant.PUT)
+	@Operation(summary = "配置邮件", description = "配置邮件")
 	@RequestLogger("配置邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
@@ -62,7 +62,7 @@ public class EmailController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "添加配置邮件", description = "添加配置邮件", method = CommonConstant.POST)
+	@Operation(summary = "添加配置邮件", description = "添加配置邮件")
 	@RequestLogger("添加配置邮件")
 	@NotAuth
 	@PostMapping
@@ -105,7 +105,7 @@ public class EmailController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "发送邮件", description = "发送邮件", method = CommonConstant.POST)
+	@Operation(summary = "发送邮件", description = "发送邮件")
 	@RequestLogger("发送邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/send")

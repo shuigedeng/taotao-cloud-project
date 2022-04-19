@@ -35,7 +35,7 @@ public class RedisController {
 
 	private final IRedisService redisService;
 
-	@Operation(summary = "查询Redis缓存", description = "查询Redis缓存", method = CommonConstant.GET)
+	@Operation(summary = "查询Redis缓存", description = "查询Redis缓存")
 	@RequestLogger("查询Redis缓存")
 	@GetMapping
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_SELECT')")
@@ -44,7 +44,7 @@ public class RedisController {
 		return Result.success(byKey);
 	}
 
-	@Operation(summary = "删除Redis缓存", description = "删除Redis缓存", method = CommonConstant.DELETE)
+	@Operation(summary = "删除Redis缓存", description = "删除Redis缓存")
 	@RequestLogger("删除Redis缓存")
 	@Idempotent(key = "delete", perFix = "redis")
 	@DeleteMapping(value = "/redis")
@@ -54,7 +54,7 @@ public class RedisController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "清空Redis缓存", description = "清空Redis缓存", method = CommonConstant.DELETE)
+	@Operation(summary = "清空Redis缓存", description = "清空Redis缓存")
 	@RequestLogger("清空Redis缓存")
 	@Idempotent(key = "deleteAll", perFix = "redis")
 	@DeleteMapping(value = "/redis/all")

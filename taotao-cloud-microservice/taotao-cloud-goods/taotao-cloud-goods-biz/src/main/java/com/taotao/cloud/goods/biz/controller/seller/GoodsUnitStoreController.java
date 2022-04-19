@@ -40,7 +40,7 @@ public class GoodsUnitStoreController {
 	 */
 	private final GoodsUnitService goodsUnitService;
 
-	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位", method = CommonConstant.GET)
+	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping

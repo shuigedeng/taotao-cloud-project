@@ -49,7 +49,7 @@ public class GoodsManagerController {
 	 */
 	private final GoodsSkuService goodsSkuService;
 
-	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -59,7 +59,7 @@ public class GoodsManagerController {
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
-	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表", method = CommonConstant.GET)
+	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
 	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
@@ -69,7 +69,7 @@ public class GoodsManagerController {
 		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
 	}
 
-	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品", method = CommonConstant.GET)
+	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品")
 	@RequestLogger("分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
@@ -80,7 +80,7 @@ public class GoodsManagerController {
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
-	@Operation(summary = "管理员下架商品", description = "管理员下架商品", method = CommonConstant.PUT)
+	@Operation(summary = "管理员下架商品", description = "管理员下架商品")
 	@RequestLogger("管理员下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
@@ -91,7 +91,7 @@ public class GoodsManagerController {
 			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
 	}
 
-	@Operation(summary = "管理员审核商品", description = "管理员审核商品", method = CommonConstant.PUT)
+	@Operation(summary = "管理员审核商品", description = "管理员审核商品")
 	@RequestLogger("管理员审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
@@ -101,7 +101,7 @@ public class GoodsManagerController {
 		return Result.success(goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag)));
 	}
 
-	@Operation(summary = "管理员上架商品", description = "管理员上架商品", method = CommonConstant.PUT)
+	@Operation(summary = "管理员上架商品", description = "管理员上架商品")
 	@RequestLogger("管理员上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/up")
@@ -110,7 +110,7 @@ public class GoodsManagerController {
 			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 	}
 
-	@Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情")
 	@RequestLogger("通过id获取商品详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")

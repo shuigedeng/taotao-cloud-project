@@ -31,7 +31,7 @@ public class StoreUserController {
 
 	private final MemberService memberService;
 
-	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API", method = CommonConstant.GET)
+	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API")
 	@RequestLogger("获取当前登录用户API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/info")

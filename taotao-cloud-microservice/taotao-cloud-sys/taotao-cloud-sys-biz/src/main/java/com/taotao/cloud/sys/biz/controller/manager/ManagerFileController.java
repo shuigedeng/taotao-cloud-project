@@ -10,12 +10,13 @@ import com.taotao.cloud.sys.biz.entity.file.File;
 import com.taotao.cloud.sys.biz.mapstruct.FileMapStruct;
 import com.taotao.cloud.sys.biz.service.IFileService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -43,14 +44,13 @@ public class ManagerFileController {
 
 	private final IFileService fileService;
 
-	@Operation(summary = "上传单个文件", description = "上传单个文件", method = CommonConstant.POST)
+	@Operation(summary = "上传单个文件", description = "上传单个文件1111")
 	@RequestLogger("上传单个文件")
 	@PreAuthorize("hasAuthority('file:upload')")
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
-	public Result<UploadFileVO> upload(@RequestPart("file") MultipartFile file) {
-		if (file.isEmpty()) {
-			throw new BusinessException("文件不能为空");
-		}
+	public Result<UploadFileVO> upload(
+		@Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空")
+		@RequestPart("file") MultipartFile file) {
 
 		File upload = fileService.upload(file);
 		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
@@ -58,7 +58,7 @@ public class ManagerFileController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "上传多个文件", description = "上传多个文件", method = CommonConstant.POST)
+	@Operation(summary = "上传多个文件", description = "上传多个文件")
 	@RequestLogger("上传多个文件")
 	@PreAuthorize("hasAuthority('file:multiple:upload')")
 	@PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
@@ -82,7 +82,7 @@ public class ManagerFileController {
 		throw new BusinessException("文件上传失败");
 	}
 
-	@Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息", method = CommonConstant.GET)
+	@Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息")
 	@RequestLogger("根据id查询文件信息")
 	@PreAuthorize("hasAuthority('file:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")

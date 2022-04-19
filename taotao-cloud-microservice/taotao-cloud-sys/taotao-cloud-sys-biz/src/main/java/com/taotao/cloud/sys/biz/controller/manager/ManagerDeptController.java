@@ -50,7 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerDeptController extends
 	SuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@Operation(summary = "获取部门树", description = "获取部门树")
 	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")

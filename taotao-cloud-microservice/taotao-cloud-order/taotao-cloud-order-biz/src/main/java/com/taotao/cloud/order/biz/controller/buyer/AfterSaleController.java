@@ -62,7 +62,7 @@ public class AfterSaleController {
 	 */
 	private final AfterSaleLogService afterSaleLogService;
 
-	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情", method = CommonConstant.GET)
+	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
 	@RequestLogger("查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
@@ -72,7 +72,7 @@ public class AfterSaleController {
 		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSaleToAfterSaleVO(afterSale));
 	}
 
-	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务", method = CommonConstant.GET)
+	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
 	@RequestLogger("分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -81,7 +81,7 @@ public class AfterSaleController {
 		return Result.success(PageModel.convertMybatisPage(afterSalePages, AfterSaleVO.class));
 	}
 
-	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息", method = CommonConstant.GET)
+	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息")
 	@RequestLogger("获取申请售后页面信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/applyAfterSaleInfo/{sn}")
@@ -89,7 +89,7 @@ public class AfterSaleController {
 		return Result.success(afterSaleService.getAfterSaleVO(sn));
 	}
 
-	@Operation(summary = "申请售后", description = "申请售后", method = CommonConstant.POST)
+	@Operation(summary = "申请售后", description = "申请售后")
 	@RequestLogger("申请售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderItemSn}")
@@ -100,7 +100,7 @@ public class AfterSaleController {
 		return Result.success(afterSaleService.saveAfterSale(afterSaleDTO));
 	}
 
-	@Operation(summary = "买家 退回 物流信息", description = "买家 退回 物流信息", method = CommonConstant.POST)
+	@Operation(summary = "买家 退回 物流信息", description = "买家 退回 物流信息")
 	@RequestLogger("买家 退回 物流信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/delivery/{afterSaleSn}")
@@ -113,7 +113,7 @@ public class AfterSaleController {
 			afterSaleService.buyerDelivery(afterSaleSn, logisticsNo, logisticsId, mDeliverTime));
 	}
 
-	@Operation(summary = "售后，取消售后", description = "售后，取消售后", method = CommonConstant.POST)
+	@Operation(summary = "售后，取消售后", description = "售后，取消售后")
 	@RequestLogger("售后，取消售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/cancel/{afterSaleSn}")
@@ -122,7 +122,7 @@ public class AfterSaleController {
 		return Result.success(afterSaleService.cancel(afterSaleSn));
 	}
 
-	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址", method = CommonConstant.GET)
+	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址")
 	@RequestLogger("获取商家售后收件地址")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
@@ -131,7 +131,7 @@ public class AfterSaleController {
 		return Result.success(afterSaleService.getStoreAfterSaleAddressDTO(sn));
 	}
 
-	@Operation(summary = "获取售后原因", description = "获取售后原因", method = CommonConstant.GET)
+	@Operation(summary = "获取售后原因", description = "获取售后原因")
 	@RequestLogger("获取售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleReason/{serviceType}")
@@ -141,7 +141,7 @@ public class AfterSaleController {
 		return Result.success(IAfterSaleReasonMapStruct.INSTANCE.afterSaleReasonsToAfterSaleReasonVOs(afterSaleReasons));
 	}
 
-	@Operation(summary = "获取售后日志", description = "获取售后日志", method = CommonConstant.GET)
+	@Operation(summary = "获取售后日志", description = "获取售后日志")
 	@RequestLogger("获取售后日志")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleLog/{sn}")

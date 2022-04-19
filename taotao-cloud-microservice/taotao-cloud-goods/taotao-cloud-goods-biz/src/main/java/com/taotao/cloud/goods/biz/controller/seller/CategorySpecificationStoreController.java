@@ -34,7 +34,7 @@ public class CategorySpecificationStoreController {
 	 */
 	private final CategorySpecificationService categorySpecificationService;
 
-	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息", method = CommonConstant.GET)
+	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息")
 	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")

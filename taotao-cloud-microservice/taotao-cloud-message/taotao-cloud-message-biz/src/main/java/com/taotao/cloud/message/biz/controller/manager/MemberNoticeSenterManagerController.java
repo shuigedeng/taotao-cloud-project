@@ -32,7 +32,7 @@ public class MemberNoticeSenterManagerController {
 	@Autowired
 	private MemberNoticeSenterService memberNoticeSenterService;
 
-	@Operation(summary = "通过id获取", description = "通过id获取", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
@@ -41,7 +41,7 @@ public class MemberNoticeSenterManagerController {
 		return Result.success(memberNoticeSenter);
 	}
 
-	@Operation(summary = "获取全部数据", description = "获取全部数据", method = CommonConstant.GET)
+	@Operation(summary = "获取全部数据", description = "获取全部数据")
 	@RequestLogger("获取全部数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
@@ -50,7 +50,7 @@ public class MemberNoticeSenterManagerController {
 		return Result.success(list);
 	}
 
-	@Operation(summary = "分页获取", description = "分页获取", method = CommonConstant.GET)
+	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -61,7 +61,7 @@ public class MemberNoticeSenterManagerController {
 		return Result.success(data);
 	}
 
-	@Operation(summary = "编辑或更新数据", description = "编辑或更新数据", method = CommonConstant.PUT)
+	@Operation(summary = "编辑或更新数据", description = "编辑或更新数据")
 	@RequestLogger("编辑或更新数据")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
@@ -70,7 +70,7 @@ public class MemberNoticeSenterManagerController {
 		return Result.successResult.success(memberNoticeSenter);
 	}
 
-	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
+	@Operation(summary = "批量删除", description = "批量删除")
 	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")

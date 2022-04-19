@@ -90,7 +90,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 * @return 单体字段删除结果
 	 * @since 2021-10-11 15:04:58
 	 */
-	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除", method = CommonConstant.DELETE)
+	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除")
 	@DeleteMapping("/{filedName}/{filedValue}")
 	@RequestLogger("通用单体字段删除")
 	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")

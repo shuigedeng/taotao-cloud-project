@@ -36,7 +36,7 @@ public class MemberBrowseController {
 
 	private final IMemberBrowseService memberBrowseService;
 
-	@Operation(summary = "分页获取浏览历史", description = "分页获取浏览历史", method = CommonConstant.GET)
+	@Operation(summary = "分页获取浏览历史", description = "分页获取浏览历史")
 	@RequestLogger("分页获取浏览历史")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -44,7 +44,7 @@ public class MemberBrowseController {
 		return Result.success(memberBrowseService.footPrintPage(page));
 	}
 
-	@Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史", method = CommonConstant.DELETE)
+	@Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史")
 	@RequestLogger("根据id删除浏览历史")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{ids}")
@@ -55,7 +55,7 @@ public class MemberBrowseController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "清空足迹", description = "清空足迹", method = CommonConstant.DELETE)
+	@Operation(summary = "清空足迹", description = "清空足迹")
 	@RequestLogger("清空足迹")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping
@@ -64,7 +64,7 @@ public class MemberBrowseController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "获取当前会员足迹数量", description = "获取当前会员足迹数量", method = CommonConstant.GET)
+	@Operation(summary = "获取当前会员足迹数量", description = "获取当前会员足迹数量")
 	@RequestLogger("获取当前会员足迹数量")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/foot/count")

@@ -57,7 +57,7 @@ public class GoodsBuyerController {
 	 */
 	private final EsGoodsSearchService goodsSearchService;
 
-	@Operation(summary = "通过id获取商品信息", description = "通过id获取商品信息", method = CommonConstant.GET)
+	@Operation(summary = "通过id获取商品信息", description = "通过id获取商品信息")
 	@RequestLogger("通过id获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
@@ -66,7 +66,7 @@ public class GoodsBuyerController {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
-	@Operation(summary = "通过skuId获取商品信息", description = "通过skuId获取商品信息", method = CommonConstant.GET)
+	@Operation(summary = "通过skuId获取商品信息", description = "通过skuId获取商品信息")
 	@RequestLogger("通过skuId获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}/{skuId}")
@@ -79,7 +79,7 @@ public class GoodsBuyerController {
 		return Result.success(map);
 	}
 
-	@Operation(summary = "获取商品分页列表", description = "获取商品分页列表", method = CommonConstant.GET)
+	@Operation(summary = "获取商品分页列表", description = "获取商品分页列表")
 	@RequestLogger("获取商品分页列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
@@ -89,7 +89,7 @@ public class GoodsBuyerController {
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
-	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息", method = CommonConstant.GET)
+	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")
 	@RequestLogger("从ES中获取商品信息")
 	@GetMapping("/es")
 	public Result<SearchPage<EsGoodsIndex>> getGoodsByPageFromEs(
@@ -99,7 +99,7 @@ public class GoodsBuyerController {
 		return Result.success(esGoodsIndices);
 	}
 
-	@Operation(summary = "从ES中获取相关商品品牌名称，分类名称及属性", description = "从ES中获取相关商品品牌名称，分类名称及属性", method = CommonConstant.GET)
+	@Operation(summary = "从ES中获取相关商品品牌名称，分类名称及属性", description = "从ES中获取相关商品品牌名称，分类名称及属性")
 	@RequestLogger("从ES中获取相关商品品牌名称，分类名称及属性")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/es/related")
@@ -110,7 +110,7 @@ public class GoodsBuyerController {
 		return Result.success(selector);
 	}
 
-	@Operation(summary = "获取热门关键词", description = "获取热门关键词", method = CommonConstant.GET)
+	@Operation(summary = "获取热门关键词", description = "获取热门关键词")
 	@RequestLogger("获取热门关键词")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/hot-words")

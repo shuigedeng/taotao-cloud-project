@@ -40,7 +40,7 @@ public class AfterSaleController {
 	 */
 	private final AfterSaleService afterSaleService;
 
-	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务", method = CommonConstant.GET)
+	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
 	@RequestLogger("分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
@@ -49,7 +49,7 @@ public class AfterSaleController {
 		return Result.success(PageModel.convertMybatisPage(afterSalePages, AfterSaleVO.class));
 	}
 
-	@Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表", method = CommonConstant.GET)
+	@Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表")
 	@RequestLogger("获取导出售后服务列表列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
@@ -58,7 +58,7 @@ public class AfterSaleController {
 		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSalesToAfterSaleVOs(afterSales));
 	}
 
-	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情", method = CommonConstant.GET)
+	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
 	@RequestLogger("查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
@@ -68,7 +68,7 @@ public class AfterSaleController {
 		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSaleToAfterSaleVO(afterSale));
 	}
 
-	@Operation(summary = "查看买家退货物流踪迹", description = "查看买家退货物流踪迹", method = CommonConstant.GET)
+	@Operation(summary = "查看买家退货物流踪迹", description = "查看买家退货物流踪迹")
 	@RequestLogger("查看买家退货物流踪迹")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/delivery/traces/{sn}")
@@ -76,7 +76,7 @@ public class AfterSaleController {
 		return Result.success(afterSaleService.deliveryTraces(sn));
 	}
 
-	@Operation(summary = "售后线下退款", description = "售后线下退款", method = CommonConstant.PUT)
+	@Operation(summary = "售后线下退款", description = "售后线下退款")
 	@RequestLogger("售后线下退款")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/refund/{afterSaleSn}")
@@ -86,7 +86,7 @@ public class AfterSaleController {
 		return Result.success(afterSaleService.refund(afterSaleSn, remark));
 	}
 
-	@Operation(summary = "审核售后申请", description = "审核售后申请", method = CommonConstant.PUT)
+	@Operation(summary = "审核售后申请", description = "审核售后申请")
 	@RequestLogger("审核售后申请")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/review/{afterSaleSn}")
@@ -98,7 +98,7 @@ public class AfterSaleController {
 			afterSaleService.review(afterSaleSn, serviceStatus, remark, actualRefundPrice));
 	}
 
-	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址", method = CommonConstant.GET)
+	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址")
 	@RequestLogger("获取商家售后收件地址")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")

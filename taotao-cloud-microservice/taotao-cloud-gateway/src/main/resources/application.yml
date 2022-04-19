@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   config:
     import:
       - conf/route.yml
@@ -8,5 +10,5 @@ spring:
       - conf/logging.yml
       - conf/management.yml
       - conf/arthas.yml
-    activate:
-      on-profile: dev
+#    activate:
+#      on-profile: dev

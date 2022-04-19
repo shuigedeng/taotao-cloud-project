@@ -50,7 +50,7 @@ public class SpecificationManagerController {
 	 */
 	private final SpecificationService specificationService;
 
-	@Operation(summary = "获取所有可用规格", description = "获取所有可用规格", method = CommonConstant.GET)
+	@Operation(summary = "获取所有可用规格", description = "获取所有可用规格")
 	@RequestLogger("获取所有可用规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
@@ -59,7 +59,7 @@ public class SpecificationManagerController {
 		return Result.success(ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(specifications));
 	}
 
-	@Operation(summary = "搜索规格", description = "搜索规格", method = CommonConstant.GET)
+	@Operation(summary = "搜索规格", description = "搜索规格")
 	@RequestLogger("搜索规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
@@ -68,7 +68,7 @@ public class SpecificationManagerController {
 		return Result.success(PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
-	@Operation(summary = "保存规格", description = "保存规格", method = CommonConstant.POST)
+	@Operation(summary = "保存规格", description = "保存规格")
 	@RequestLogger("保存规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -78,7 +78,7 @@ public class SpecificationManagerController {
 		return Result.success(specificationService.save(specification));
 	}
 
-	@Operation(summary = "更改规格", description = "更改规格", method = CommonConstant.PUT)
+	@Operation(summary = "更改规格", description = "更改规格")
 	@RequestLogger("更改规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -91,7 +91,7 @@ public class SpecificationManagerController {
 		return Result.success(specificationService.saveOrUpdate(specification));
 	}
 
-	@Operation(summary = "批量删除", description = "批量删除", method = CommonConstant.DELETE)
+	@Operation(summary = "批量删除", description = "批量删除")
 	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{ids}")

@@ -38,7 +38,7 @@ public class MemberPcController {
 	private final SmsUtil smsUtil;
 	private final VerificationService verificationService;
 
-	@Operation(summary = "登录API", description = "登录API", method = CommonConstant.POST)
+	@Operation(summary = "登录API", description = "登录API")
 	@RequestLogger("登录API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/login")
@@ -50,7 +50,7 @@ public class MemberPcController {
 		return Result.success(this.memberService.usernameLogin(username, password));
 	}
 
-	@Operation(summary = "注销API", description = "注销API", method = CommonConstant.POST)
+	@Operation(summary = "注销API", description = "注销API")
 	@RequestLogger("注销API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/logout")
@@ -59,7 +59,7 @@ public class MemberPcController {
 		return Result.success();
 	}
 
-	@Operation(summary = "短信登录API", description = "短信登录API", method = CommonConstant.POST)
+	@Operation(summary = "短信登录API", description = "短信登录API")
 	@RequestLogger("短信登录API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/sms/login")
@@ -73,7 +73,7 @@ public class MemberPcController {
 		}
 	}
 
-	@Operation(summary = "注册用户", description = "注册用户", method = CommonConstant.POST)
+	@Operation(summary = "注册用户", description = "注册用户")
 	@RequestLogger("注册用户")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/register")
@@ -90,7 +90,7 @@ public class MemberPcController {
 		}
 	}
 
-	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API", method = CommonConstant.GET)
+	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API")
 	@RequestLogger("获取当前登录用户API")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -98,7 +98,7 @@ public class MemberPcController {
 		return Result.success(memberService.getUserInfo());
 	}
 
-	@Operation(summary = "通过短信重置密码", description = "通过短信重置密码", method = CommonConstant.POST)
+	@Operation(summary = "通过短信重置密码", description = "通过短信重置密码")
 	@RequestLogger("通过短信重置密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -117,7 +117,7 @@ public class MemberPcController {
 		}
 	}
 
-	@Operation(summary = "修改密码", description = "修改密码", method = CommonConstant.PUT)
+	@Operation(summary = "修改密码", description = "修改密码")
 	@RequestLogger("修改密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/password")
@@ -126,7 +126,7 @@ public class MemberPcController {
 		return Result.success(memberService.resetByMobile(uuid, password));
 	}
 
-	@Operation(summary = "修改用户自己资料", description = "修改用户自己资料", method = CommonConstant.PUT)
+	@Operation(summary = "修改用户自己资料", description = "修改用户自己资料")
 	@RequestLogger("修改用户自己资料")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/own")
@@ -134,7 +134,7 @@ public class MemberPcController {
 		return Result.success(memberService.editOwn(memberEditDTO));
 	}
 
-	@Operation(summary = "修改密码", description = "修改密码", method = CommonConstant.PUT)
+	@Operation(summary = "修改密码", description = "修改密码")
 	@RequestLogger("修改密码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/modifyPass")
@@ -144,7 +144,7 @@ public class MemberPcController {
 		return Result.success(memberService.modifyPass(password, newPassword));
 	}
 
-	@Operation(summary = "刷新token", description = "刷新token", method = CommonConstant.GET)
+	@Operation(summary = "刷新token", description = "刷新token")
 	@RequestLogger("刷新token")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/refresh/{refreshToken}")

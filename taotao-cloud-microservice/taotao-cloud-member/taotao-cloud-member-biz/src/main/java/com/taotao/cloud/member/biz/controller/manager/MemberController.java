@@ -42,7 +42,7 @@ public class MemberController {
 
 	private final MemberService memberService;
 
-	@Operation(summary = "会员分页列表", description = "会员分页列表", method = CommonConstant.GET)
+	@Operation(summary = "会员分页列表", description = "会员分页列表")
 	@RequestLogger("会员分页列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -51,7 +51,7 @@ public class MemberController {
 		return Result.success(PageModel.convertMybatisPage(memberPage, MemberVO.class));
 	}
 
-	@Operation(summary = "通过ID获取会员信息", description = "通过ID获取会员信息", method = CommonConstant.GET)
+	@Operation(summary = "通过ID获取会员信息", description = "通过ID获取会员信息")
 	@RequestLogger("通过ID获取会员信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
@@ -59,7 +59,7 @@ public class MemberController {
 		return Result.data(memberService.getById(id));
 	}
 
-	@Operation(summary = "添加会员", description = "添加会员", method = CommonConstant.POST)
+	@Operation(summary = "添加会员", description = "添加会员")
 	@RequestLogger("添加会员")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
@@ -67,7 +67,7 @@ public class MemberController {
 		return Result.success(memberService.addMember(member));
 	}
 
-	@Operation(summary = "修改会员基本信息", description = "修改会员基本信息", method = CommonConstant.PUT)
+	@Operation(summary = "修改会员基本信息", description = "修改会员基本信息")
 	@RequestLogger("修改会员基本信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
@@ -75,7 +75,7 @@ public class MemberController {
 		return Result.success(memberService.updateMember(managerMemberEditDTO));
 	}
 
-	@Operation(summary = "修改会员状态,开启关闭会员", description = "修改会员状态,开启关闭会员", method = CommonConstant.PUT)
+	@Operation(summary = "修改会员状态,开启关闭会员", description = "修改会员状态,开启关闭会员")
 	@RequestLogger("修改会员状态,开启关闭会员")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/status")
@@ -84,7 +84,7 @@ public class MemberController {
 		return Result.success(memberService.updateMemberStatus(memberIds, disabled));
 	}
 
-	@Operation(summary = "根据条件查询会员总数", description = "根据条件查询会员总数", method = CommonConstant.GET)
+	@Operation(summary = "根据条件查询会员总数", description = "根据条件查询会员总数")
 	@RequestLogger("根据条件查询会员总数")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/num")

@@ -88,6 +88,7 @@ public class OpenApiConfiguration {
 
 						SwaggerUrl url = new SwaggerUrl();
 						url.setName(name);
+						url.setDisplayName(name);
 						url.setUrl("/v3/api-docs/" + id);
 						urls.add(url);
 

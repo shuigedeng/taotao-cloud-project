@@ -42,7 +42,7 @@ public class CategorySpecificationManagerController {
 	 */
 	private final SpecificationService specificationService;
 
-	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息", method = CommonConstant.GET)
+	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息")
 	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
@@ -50,7 +50,7 @@ public class CategorySpecificationManagerController {
 		return Result.success(categorySpecificationService.getCategorySpecList(categoryId));
 	}
 
-	@Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用", method = CommonConstant.GET)
+	@Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用")
 	@RequestLogger("查询某分类下绑定的规格信息,商品操作使用")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/goods/{categoryId}")
@@ -58,7 +58,7 @@ public class CategorySpecificationManagerController {
 		return Result.success(specificationService.list());
 	}
 
-	@Operation(summary = "保存某分类下绑定的规格信息", description = "保存某分类下绑定的规格信息", method = CommonConstant.POST)
+	@Operation(summary = "保存某分类下绑定的规格信息", description = "保存某分类下绑定的规格信息")
 	@RequestLogger("根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}")

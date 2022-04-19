@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,11 +19,11 @@ import lombok.Setter;
 /**
  * 商品分类品牌关联表
  */
-@Setter
-@Getter
-@Builder
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = CategoryBrand.TABLE_NAME)
 @TableName(CategoryBrand.TABLE_NAME)

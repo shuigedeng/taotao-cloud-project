@@ -40,7 +40,7 @@ public class StoreMessageController {
 	@Autowired
 	private StoreMessageService storeMessageService;
 
-	@Operation(summary = "获取商家消息", description = "获取商家消息", method = CommonConstant.GET)
+	@Operation(summary = "获取商家消息", description = "获取商家消息")
 	@RequestLogger("获取商家消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
@@ -53,7 +53,7 @@ public class StoreMessageController {
 		return Result.success(page);
 	}
 
-	@Operation(summary = "获取商家消息总汇", description = "获取商家消息总汇", method = CommonConstant.GET)
+	@Operation(summary = "获取商家消息总汇", description = "获取商家消息总汇")
 	@RequestLogger("获取商家消息总汇")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
@@ -78,7 +78,7 @@ public class StoreMessageController {
 		return Result.success(map);
 	}
 
-	@Operation(summary = "已读操作", description = "已读操作", method = CommonConstant.PUT)
+	@Operation(summary = "已读操作", description = "已读操作")
 	@RequestLogger("已读操作")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}/read")
@@ -88,7 +88,7 @@ public class StoreMessageController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "回收站还原消息", description = "回收站还原消息", method = CommonConstant.PUT)
+	@Operation(summary = "回收站还原消息", description = "回收站还原消息")
 	@RequestLogger("回收站还原消息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}/reduction")
@@ -98,7 +98,7 @@ public class StoreMessageController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "删除操作", description = "删除操作", method = CommonConstant.DELETE)
+	@Operation(summary = "删除操作", description = "删除操作")
 	@RequestLogger("删除操作")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}")
@@ -109,7 +109,7 @@ public class StoreMessageController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "彻底删除操作", description = "彻底删除操作", method = CommonConstant.DELETE)
+	@Operation(summary = "彻底删除操作", description = "彻底删除操作")
 	@RequestLogger("彻底删除操作")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}/thorough")

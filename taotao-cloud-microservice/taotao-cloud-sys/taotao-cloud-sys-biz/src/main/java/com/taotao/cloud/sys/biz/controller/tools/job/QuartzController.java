@@ -62,7 +62,7 @@ public class QuartzController {
 	private final IQuartzJobService quartzJobService;
 	private final IQuartzLogService quartzLogService;
 
-	@Operation(summary = "查询定时任务", description = "查询定时任务", method = CommonConstant.GET)
+	@Operation(summary = "查询定时任务", description = "查询定时任务")
 	@RequestLogger("查询定时任务")
 	@GetMapping
 	@PreAuthorize("@el.check('admin','timing:list')")
@@ -71,7 +71,7 @@ public class QuartzController {
 		return Result.success(stringObjectMap);
 	}
 
-	@Operation(summary = "导出任务数据", description = "导出任务数据", method = CommonConstant.GET)
+	@Operation(summary = "导出任务数据", description = "导出任务数据")
 	@RequestLogger("导出任务数据")
 	@GetMapping(value = "/download")
 	@PreAuthorize("@el.check('admin','timing:list')")
@@ -85,7 +85,7 @@ public class QuartzController {
 		quartzJobService.download(collect, response);
 	}
 
-	@Operation(summary = "导出日志数据", description = "导出日志数据", method = CommonConstant.GET)
+	@Operation(summary = "导出日志数据", description = "导出日志数据")
 	@RequestLogger("导出日志数据")
 	@GetMapping(value = "/logs/download")
 	@PreAuthorize("@el.check('admin','timing:list')")
@@ -99,7 +99,7 @@ public class QuartzController {
 		quartzLogService.download(collect, response);
 	}
 
-	@Operation(summary = "查询任务执行日志", description = "查询任务执行日志", method = CommonConstant.GET)
+	@Operation(summary = "查询任务执行日志", description = "查询任务执行日志")
 	@RequestLogger("查询任务执行日志")
 	@GetMapping(value = "/logs")
 	@PreAuthorize("@el.check('admin','timing:list')")
@@ -109,7 +109,7 @@ public class QuartzController {
 		return Result.success(stringObjectMap);
 	}
 
-	@Operation(summary = "新增定时任务", description = "新增定时任务", method = CommonConstant.POST)
+	@Operation(summary = "新增定时任务", description = "新增定时任务")
 	@RequestLogger("新增定时任务")
 	@Idempotent(key = "create", perFix = "quartzJob")
 	@PostMapping
@@ -123,7 +123,7 @@ public class QuartzController {
 		return Result.success(quartzJobService.save(job));
 	}
 
-	@Operation(summary = "修改定时任务", description = "修改定时任务", method = CommonConstant.PUT)
+	@Operation(summary = "修改定时任务", description = "修改定时任务")
 	@RequestLogger("修改定时任务")
 	@Idempotent(key = "update", perFix = "quartzJob")
 	@PutMapping
@@ -135,7 +135,7 @@ public class QuartzController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "更改定时任务状态", description = "更改定时任务状态", method = CommonConstant.PUT)
+	@Operation(summary = "更改定时任务状态", description = "更改定时任务状态")
 	@RequestLogger("更改定时任务状态")
 	@Idempotent(key = "updateIsPause", perFix = "quartzJob")
 	@PutMapping(value = "/{id}")
@@ -147,7 +147,7 @@ public class QuartzController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "执行定时任务", description = "执行定时任务", method = CommonConstant.PUT)
+	@Operation(summary = "执行定时任务", description = "执行定时任务")
 	@RequestLogger("执行定时任务")
 	@Idempotent(key = "execution", perFix = "quartzJob")
 	@PutMapping(value = "/exec/{id}")
@@ -158,7 +158,7 @@ public class QuartzController {
 		return Result.success(true);
 	}
 
-	@Operation(summary = "删除定时任务", description = "删除定时任务", method = CommonConstant.DELETE)
+	@Operation(summary = "删除定时任务", description = "删除定时任务")
 	@RequestLogger("删除定时任务")
 	@Idempotent(key = "delete", perFix = "quartzJob")
 	@DeleteMapping

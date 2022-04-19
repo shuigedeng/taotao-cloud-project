@@ -29,7 +29,7 @@ public class RechargeTradeController {
 
 	private final RechargeService rechargeService;
 
-	@Operation(summary = "创建余额充值订单", description = "创建余额充值订单", method = CommonConstant.POST)
+	@Operation(summary = "创建余额充值订单", description = "创建余额充值订单")
 	@RequestLogger("创建余额充值订单")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping

@@ -46,7 +46,7 @@ public class MemberAddressController {
 
 	private final MemberAddressService memberAddressService;
 
-	@Operation(summary = "分页获取当前会员收件地址列表", description = "分页获取当前会员收件地址列表", method = CommonConstant.GET)
+	@Operation(summary = "分页获取当前会员收件地址列表", description = "分页获取当前会员收件地址列表")
 	@RequestLogger("分页获取当前会员收件地址列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -55,7 +55,7 @@ public class MemberAddressController {
 			memberAddressService.getAddressByMember(page, SecurityUtil.getUserId()));
 	}
 
-	@Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址", method = CommonConstant.GET)
+	@Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址")
 	@RequestLogger("根据ID获取会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
@@ -66,7 +66,7 @@ public class MemberAddressController {
 		return Result.success(BeanUtil.copyProperties(memberAddress, MemberAddressVO.class));
 	}
 
-	@Operation(summary = "获取当前会员默认收件地址", description = "获取当前会员默认收件地址", method = CommonConstant.GET)
+	@Operation(summary = "获取当前会员默认收件地址", description = "获取当前会员默认收件地址")
 	@RequestLogger("获取当前会员默认收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/default")
@@ -75,7 +75,7 @@ public class MemberAddressController {
 		return Result.success(BeanUtil.copyProperties(memberAddress, MemberAddressVO.class));
 	}
 
-	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址", method = CommonConstant.POST)
+	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址")
 	@RequestLogger("新增会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
@@ -88,7 +88,7 @@ public class MemberAddressController {
 		return Result.success(memberAddressService.saveMemberAddress(shippingAddress));
 	}
 
-	@Operation(summary = "修改会员收件地址", description = "修改会员收件地址", method = CommonConstant.PUT)
+	@Operation(summary = "修改会员收件地址", description = "修改会员收件地址")
 	@RequestLogger("修改会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
@@ -96,7 +96,7 @@ public class MemberAddressController {
 		return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
 	}
 
-	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址", method = CommonConstant.DELETE)
+	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址")
 	@RequestLogger("删除会员收件地址")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")

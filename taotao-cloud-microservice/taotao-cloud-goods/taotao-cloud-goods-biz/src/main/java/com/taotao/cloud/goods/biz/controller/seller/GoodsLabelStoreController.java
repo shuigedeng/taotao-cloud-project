@@ -47,7 +47,7 @@ public class GoodsLabelStoreController {
 	 */
 	private final StoreGoodsLabelService storeGoodsLabelService;
 
-	@Operation(summary = "获取当前店铺商品分类列表", description = "获取当前店铺商品分类列表", method = CommonConstant.GET)
+	@Operation(summary = "获取当前店铺商品分类列表", description = "获取当前店铺商品分类列表")
 	@RequestLogger("获取当前店铺商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
@@ -56,7 +56,7 @@ public class GoodsLabelStoreController {
 		return Result.success(storeGoodsLabelService.listByStoreId(storeId));
 	}
 
-	@Operation(summary = "获取店铺商品分类详情", description = "获取店铺商品分类详情", method = CommonConstant.GET)
+	@Operation(summary = "获取店铺商品分类详情", description = "获取店铺商品分类详情")
 	@RequestLogger("获取店铺商品分类详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
@@ -68,7 +68,7 @@ public class GoodsLabelStoreController {
 			));
 	}
 
-	@Operation(summary = "添加店铺商品分类", description = "添加店铺商品分类", method = CommonConstant.POST)
+	@Operation(summary = "添加店铺商品分类", description = "添加店铺商品分类")
 	@RequestLogger("添加店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
@@ -78,7 +78,7 @@ public class GoodsLabelStoreController {
 		return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
 	}
 
-	@Operation(summary = "修改店铺商品分类", description = "修改店铺商品分类", method = CommonConstant.PUT)
+	@Operation(summary = "修改店铺商品分类", description = "修改店铺商品分类")
 	@RequestLogger("修改店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
@@ -89,7 +89,7 @@ public class GoodsLabelStoreController {
 		return Result.success(storeGoodsLabelService.editStoreGoodsLabel(storeGoodsLabel));
 	}
 
-	@Operation(summary = "删除店铺商品分类", description = "删除店铺商品分类", method = CommonConstant.DELETE)
+	@Operation(summary = "删除店铺商品分类", description = "删除店铺商品分类")
 	@RequestLogger("删除店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}")

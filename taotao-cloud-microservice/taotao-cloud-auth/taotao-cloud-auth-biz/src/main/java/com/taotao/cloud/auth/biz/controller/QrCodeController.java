@@ -28,7 +28,7 @@ public class QrCodeController {
 	@Autowired
 	private QrCodeService qrCodeService;
 
-	@Operation(summary = "获取二维码", description = "获取二维码", method = CommonConstant.GET)
+	@Operation(summary = "获取二维码", description = "获取二维码")
 	@RequestLogger("获取二维码")
 	@GetMapping("/code")
 	public Result<String> qrcode() {
