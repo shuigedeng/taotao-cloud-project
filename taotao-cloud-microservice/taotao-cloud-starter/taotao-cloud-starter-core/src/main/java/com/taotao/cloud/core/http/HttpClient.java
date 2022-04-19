@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import java.io.Closeable;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -262,7 +263,7 @@ public interface HttpClient extends Closeable {
 						entry.getValue().toString()));
 				}
 
-				return URLEncodedUtils.format(tmp, Charsets.UTF_8);
+				return URLEncodedUtils.format(tmp, StandardCharsets.UTF_8);
 			}
 		}
 
@@ -322,7 +323,7 @@ public interface HttpClient extends Closeable {
 			public Builder add(Object object) {
 				try {
 					for (Field field : object.getClass().getDeclaredFields()) {
-						if (!field.isAccessible()) {
+						if (!field.canAccess(null)) {
 							field.setAccessible(true);
 						}
 						this.data.put(field.getName(), field.get(object));

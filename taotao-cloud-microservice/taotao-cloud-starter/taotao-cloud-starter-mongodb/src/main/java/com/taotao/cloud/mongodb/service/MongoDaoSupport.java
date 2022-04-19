@@ -237,6 +237,7 @@ public class MongoDaoSupport implements BaseMongoDAO {
 	/**
 	 * 获取需要操作的实体类class
 	 */
+	@SuppressWarnings("unchecked")
 	protected <T> Class<T> getEntityClass() {
 		return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 	}

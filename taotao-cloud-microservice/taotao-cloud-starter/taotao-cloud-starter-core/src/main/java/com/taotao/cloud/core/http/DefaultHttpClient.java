@@ -21,6 +21,7 @@ import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -430,10 +431,10 @@ public class DefaultHttpClient implements HttpClient {
 		String query = URI.create(uri).getQuery();
 		List<NameValuePair> pairs = new ArrayList<>();
 		if (query != null) {
-			pairs = URLEncodedUtils.parse(query, Charsets.UTF_8);
+			pairs = URLEncodedUtils.parse(query, StandardCharsets.UTF_8);
 		}
 
-		if (((List<?>) pairs).size() == 0) {
+		if (pairs.size() == 0) {
 			uri = uri + "?";
 		} else {
 			uri = uri + "&";
@@ -467,7 +468,7 @@ public class DefaultHttpClient implements HttpClient {
 			|| params.getContentType() != null && params.getContentType()
 			.equals(ContentType.DEFAULT_TEXT)) {
 			params.setContentType(
-				ContentType.create("application/x-www-form-urlencoded", Charsets.UTF_8));
+				ContentType.create("application/x-www-form-urlencoded", StandardCharsets.UTF_8));
 		}
 
 		httpPost.setEntity(params.toEntity());
@@ -493,7 +494,7 @@ public class DefaultHttpClient implements HttpClient {
 			|| params.getContentType() != null && params.getContentType()
 			.equals(ContentType.DEFAULT_TEXT)) {
 			params.setContentType(
-				ContentType.create("application/x-www-form-urlencoded", Charsets.UTF_8));
+				ContentType.create("application/x-www-form-urlencoded", StandardCharsets.UTF_8));
 		}
 
 		httpPut.setEntity(params.toEntity());
@@ -519,7 +520,7 @@ public class DefaultHttpClient implements HttpClient {
 			|| params.getContentType() != null && params.getContentType()
 			.equals(ContentType.DEFAULT_TEXT)) {
 			params.setContentType(
-				ContentType.create("application/x-www-form-urlencoded", Charsets.UTF_8));
+				ContentType.create("application/x-www-form-urlencoded", StandardCharsets.UTF_8));
 		}
 
 		httpPatch.setEntity(params.toEntity());
@@ -545,7 +546,7 @@ public class DefaultHttpClient implements HttpClient {
 		String query = URI.create(uri).getQuery();
 		List<NameValuePair> pairs = new ArrayList<>();
 		if (query != null) {
-			pairs = URLEncodedUtils.parse(query, Charsets.UTF_8);
+			pairs = URLEncodedUtils.parse(query, StandardCharsets.UTF_8);
 		}
 
 		if (((List<?>) pairs).size() == 0) {
