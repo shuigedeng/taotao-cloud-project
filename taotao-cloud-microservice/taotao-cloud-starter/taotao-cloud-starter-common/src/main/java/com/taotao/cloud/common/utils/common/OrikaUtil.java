@@ -113,6 +113,7 @@ public class OrikaUtil {
 	 * @param source      数据（集合） DO对象
 	 * @return 映射类对象
 	 */
+	@SuppressWarnings("unchecked")
 	public static <S, D> Page<D> page(Page<S> source, Class<D> targetClass) {
 		Page<D> dPage = convert(source, Page.class);
 		dPage.setRecords(converts(source.getRecords(), targetClass));

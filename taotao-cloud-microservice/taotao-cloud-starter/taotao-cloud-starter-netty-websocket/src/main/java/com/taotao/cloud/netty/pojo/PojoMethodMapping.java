@@ -260,7 +260,7 @@ public class PojoMethodMapping {
 		}
 		return false;
 	}
-
+	@SuppressWarnings("unchecked")
 	Object getEndpointInstance()
 		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 		Object implement = pojoClazz.getDeclaredConstructor().newInstance();

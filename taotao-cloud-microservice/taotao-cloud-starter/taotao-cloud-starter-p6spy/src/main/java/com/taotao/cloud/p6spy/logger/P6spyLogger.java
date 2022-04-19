@@ -17,6 +17,7 @@ package com.taotao.cloud.p6spy.logger;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.FormattedLogger;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.util.StringUtils;
 /**
@@ -47,7 +48,7 @@ public class P6spyLogger extends FormattedLogger {
 		final String msg = strategy.formatMessage(connectionId, now, elapsed,
 			category.toString(), prepared, sql, url);
 
-		if (StringUtils.isEmpty(msg)) {
+		if (StringUtil.isEmpty(msg)) {
 			return;
 		}
 		if (Category.ERROR.equals(category)) {

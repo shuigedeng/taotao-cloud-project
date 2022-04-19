@@ -1,14 +1,9 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
-import com.taotao.cloud.sys.api.feign.IFeignMenuService;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
-import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
-import java.util.List;
-import java.util.Set;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

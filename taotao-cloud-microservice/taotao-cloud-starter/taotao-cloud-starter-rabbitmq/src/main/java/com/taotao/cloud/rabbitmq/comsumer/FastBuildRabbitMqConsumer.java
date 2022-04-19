@@ -69,7 +69,7 @@ public class FastBuildRabbitMqConsumer {
 				channel = connection.createChannel(false);
 			}
 
-
+			@SuppressWarnings("unchecked")
 			@Override
 			public DetailResponse consume() {
 				try {

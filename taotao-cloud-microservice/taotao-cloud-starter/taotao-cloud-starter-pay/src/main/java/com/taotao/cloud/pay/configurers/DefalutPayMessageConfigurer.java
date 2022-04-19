@@ -35,6 +35,7 @@ public class DefalutPayMessageConfigurer implements PayMessageConfigurer {
 	 * @param platform 商户平台，渠道
 	 * @param handler  处理器
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addHandler(PaymentPlatform platform, PayMessageHandler handler) {
 		if (handlers.containsKey(platform)) {
