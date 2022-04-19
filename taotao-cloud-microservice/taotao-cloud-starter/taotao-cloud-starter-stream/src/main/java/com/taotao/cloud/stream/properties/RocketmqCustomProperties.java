@@ -3,7 +3,7 @@ package com.taotao.cloud.stream.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "lili.data.rocketmq")
+@ConfigurationProperties(prefix = "taotao.data.rocketmq")
 public class RocketmqCustomProperties {
 
     private String promotionTopic;

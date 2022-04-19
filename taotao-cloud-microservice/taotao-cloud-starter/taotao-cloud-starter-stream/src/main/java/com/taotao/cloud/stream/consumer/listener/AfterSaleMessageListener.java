@@ -14,7 +14,7 @@
 // * 售后通知
 // */
 //@Component
-//@RocketMQMessageListener(topic = "${lili.data.rocketmq.after-sale-topic}", consumerGroup = "${lili.data.rocketmq.after-sale-group}")
+//@RocketMQMessageListener(topic = "${taotao.data.rocketmq.after-sale-topic}", consumerGroup = "${taotao.data.rocketmq.after-sale-group}")
 //public class AfterSaleMessageListener implements RocketMQListener<MessageExt> {
 //
 //    /**

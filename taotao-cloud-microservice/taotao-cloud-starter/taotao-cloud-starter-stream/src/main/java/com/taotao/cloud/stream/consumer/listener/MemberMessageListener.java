@@ -17,7 +17,7 @@
 // * 会员消息
 // **/
 //@Component
-//@RocketMQMessageListener(topic = "${lili.data.rocketmq.member-topic}", consumerGroup = "${lili.data.rocketmq.member-group}")
+//@RocketMQMessageListener(topic = "${taotao.data.rocketmq.member-topic}", consumerGroup = "${taotao.data.rocketmq.member-group}")
 //public class MemberMessageListener implements RocketMQListener<MessageExt> {
 //
 //    /**

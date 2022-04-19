@@ -16,7 +16,7 @@
 // * 消息发送
 // */
 //@Component
-//@RocketMQMessageListener(topic = "${lili.data.rocketmq.notice-send-topic}", consumerGroup = "${lili.data.rocketmq.notice-send-group}")
+//@RocketMQMessageListener(topic = "${taotao.data.rocketmq.notice-send-topic}", consumerGroup = "${taotao.data.rocketmq.notice-send-group}")
 //public class NoticeSendMessageListener implements RocketMQListener<MessageExt> {
 //
 //    /**
