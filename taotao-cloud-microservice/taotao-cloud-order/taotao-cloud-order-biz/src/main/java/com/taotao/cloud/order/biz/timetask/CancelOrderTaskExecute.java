@@ -11,10 +11,11 @@ import com.taotao.cloud.order.biz.service.order.OrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.OrderSetting;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 订单自动取消（每分钟执行）

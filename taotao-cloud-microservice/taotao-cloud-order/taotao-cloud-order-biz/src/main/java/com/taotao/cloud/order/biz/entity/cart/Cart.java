@@ -17,11 +17,14 @@ package com.taotao.cloud.order.biz.entity.cart;
 
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * 购物车表
@@ -30,8 +33,10 @@ import java.math.BigDecimal;
  * @version 2022.03
  * @since 2020/11/13 09:46
  */
-@Setter
 @Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,6 +45,7 @@ import java.math.BigDecimal;
 @org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "购物车表")
 public class Cart extends JpaSuperEntity<Long> {
 
+	@Serial
 	private static final long serialVersionUID = 6887296988458221221L;
 
 	/**
@@ -72,4 +78,16 @@ public class Cart extends JpaSuperEntity<Long> {
 	@Column(name = "balance_amount", columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
 	private BigDecimal balanceAmount;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Cart cart = (Cart) o;
+		return getId() != null && Objects.equals(getId(), cart.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

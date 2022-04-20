@@ -10,14 +10,15 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * 订单交易投诉表
  **/
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +30,7 @@ public class OrderComplaint extends BaseSuperEntity<OrderInfo, Long> {
 
 	public static final String TABLE_NAME = "tt_order_complaint";
 
+	@Serial
 	private static final long serialVersionUID = 7185050229757228184L;
 
 	/**

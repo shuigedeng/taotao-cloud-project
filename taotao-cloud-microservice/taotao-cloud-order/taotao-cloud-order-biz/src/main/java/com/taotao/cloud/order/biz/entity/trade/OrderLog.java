@@ -1,103 +1,85 @@
 package com.taotao.cloud.order.biz.entity.trade;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.lang.StringUtil;
-import io.swagger.annotations.ApiModel;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 订单日志
  *
  * @since 2020-03-25 2:30 下午
  */
-@Setter
 @Getter
-@Builder
+@Setter
+@ToString(callSuper = true)
+@NoArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
-@TableName("li_order_log")
-@ApiModel(value = "订单日志")
-@NoArgsConstructor
-public class OrderLog extends BaseIdEntity {
+@Builder
+@Entity
+@Table(name = OrderLog.TABLE_NAME)
+@TableName(OrderLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderLog.TABLE_NAME, comment = "订单日志")
+public class OrderLog extends BaseSuperEntity<OrderLog, Long> {
 
-	private static final long serialVersionUID = -1599270944927160096L;
-	/**
-	 * 应用ID
-	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@CreatedBy
-	@TableField(fill = FieldFill.INSERT)
-	@Schema(description = "创建者", hidden = true)
-	private String createBy;
-	/**
-	 * 应用ID
-	 */
-	@CreatedDate
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@TableField(fill = FieldFill.INSERT)
-	@Schema(description = "创建时间", hidden = true)
+	public static final String TABLE_NAME = "tt_order_log";
 
-	private Date createTime;
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "订单编号")
 	/**
-	 * 应用ID
+	 * 订单编号
 	 */
+	@Column(name = "order_sn", columnDefinition = "varchar(255) not null comment '订单编号'")
 	private String orderSn;
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "操作者id(可以是卖家)")
+
 	/**
-	 * 应用ID
+	 * 操作者id(可以是卖家)
 	 */
+	@Column(name = "operator_id", columnDefinition = "bigint not null comment ' 操作者id(可以是卖家)'")
 	private Long operatorId;
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+
 	/**
+	 * 操作者类型
+	 *
 	 * @see UserEnum
 	 */
-	@Schema(description = "操作者类型")
-	/**
-	 * 应用ID
-	 */
-	private Integer operatorType;
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "操作者名称")
-	private String operatorName;
-	/**
-	 * 应用ID
-	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "日志信息")
-	private String message;
+	@Column(name = "operator_type", columnDefinition = "varchar(64) not null comment '会员ID'")
+	private String operatorType;
 
-	public OrderLog(String orderSn, Long operatorId, Integer operatorType, String operatorName,
-		String message) {
-		this.orderSn = orderSn;
-		this.operatorId = operatorId;
-		this.operatorType = operatorType;
-		this.operatorName = operatorName;
-		this.message = message;
-	}
+	/**
+	 * 操作者名称
+	 */
+	@Column(name = "operator_name", columnDefinition = "varchar(64) not null comment '操作者名称'")
+	private String operatorName;
+
+	/**
+	 * 日志信息
+	 */
+	@Column(name = "message", columnDefinition = "text not null comment '日志信息'")
+	private String message;
 
 	public String getCreateBy() {
 		if (StringUtil.isEmpty(createBy)) {
 			return "系统";
 		}
 		return createBy;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		OrderLog orderLog = (OrderLog) o;
+		return getId() != null && Objects.equals(getId(), orderLog.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 }
