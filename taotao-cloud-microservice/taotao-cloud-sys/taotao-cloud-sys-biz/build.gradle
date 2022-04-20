@@ -38,6 +38,8 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+mainClassName="com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
+
 smartdoc {
     configFile = file("src/main/resources/smart-doc.json")
     // exclude artifact
