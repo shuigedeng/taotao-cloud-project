@@ -34,7 +34,6 @@ dependencies {
     api 'org.apache.httpcomponents:httpmime'
     api 'commons-configuration:commons-configuration'
 
-
     api "io.swagger.core.v3:swagger-models"
     api 'io.swagger.core.v3:swagger-annotations'
 
