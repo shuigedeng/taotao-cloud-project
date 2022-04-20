@@ -13,27 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.promotion.api.feign;
+package com.taotao.cloud.promotion.api.feign.fallback;
 
-import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionService;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.Map;
 
-import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionServiceFallback;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-
 /**
- * 远程调用售后模块
+ * RemoteLogFallbackImpl
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @since 2020/4/29 21:43
  */
-@FeignClient(contextId = "IFeignPromotionService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPromotionServiceFallback.class)
-public interface IFeignPromotionService {
+public class FeignPromotionServiceFallback implements FallbackFactory<IFeignPromotionService> {
+	@Override
+	public IFeignPromotionService create(Throwable throwable) {
+		return new IFeignPromotionService() {
 
-	@GetMapping(value = "/withdraw/info/}")
-	Result<Map<String, Object>> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
+			@Override
+			public Result<Map<String, Object>> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId) {
+				return null;
+			}
+		};
+	}
 }
-

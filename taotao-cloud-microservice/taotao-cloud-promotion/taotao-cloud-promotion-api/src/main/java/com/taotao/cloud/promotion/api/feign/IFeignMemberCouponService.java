@@ -2,6 +2,8 @@ package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import java.util.List;
+
+import com.taotao.cloud.promotion.api.feign.fallback.FeignMemberCouponServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -10,7 +12,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignMemberService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = RemoteMemberFallbackImpl.class)
+@FeignClient(contextId = "IFeignMemberService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberCouponServiceFallback.class)
 public interface IFeignMemberCouponService {
 
 

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PintuanShareVO {
 
-    //private PromotionGoods promotionGoods;
+    private PromotionGoodsVO promotionGoods;
 
     private List<PintuanMemberVO> pintuanMemberVOS;
 

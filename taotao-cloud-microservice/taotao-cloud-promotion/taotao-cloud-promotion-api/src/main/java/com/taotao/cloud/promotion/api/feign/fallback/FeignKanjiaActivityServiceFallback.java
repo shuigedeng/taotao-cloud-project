@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.coupon.api.feign.fallback;
+package com.taotao.cloud.promotion.api.feign.fallback;
 
-import com.taotao.cloud.coupon.api.feign.RemoteCouponService;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.promotion.api.vo.CouponVO;
+import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
+import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -27,10 +25,10 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class RemoteCouponFallbackImpl implements FallbackFactory<RemoteCouponService> {
+public class FeignKanjiaActivityServiceFallback implements FallbackFactory<IFeignKanjiaActivityService> {
 	@Override
-	public RemoteCouponService create(Throwable throwable) {
-		return new RemoteCouponService() {
+	public IFeignKanjiaActivityService create(Throwable throwable) {
+		return new IFeignKanjiaActivityService() {
 			//@Override
 			//public Result<CouponVO> getMemberSecurityUser(Long id) {
 			//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);

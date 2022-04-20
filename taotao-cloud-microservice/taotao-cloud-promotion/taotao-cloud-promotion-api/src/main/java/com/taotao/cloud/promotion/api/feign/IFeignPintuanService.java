@@ -16,7 +16,7 @@
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.coupon.api.feign.fallback.RemoteCouponFallbackImpl;
+import com.taotao.cloud.promotion.api.feign.fallback.FeignPintuanServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignPintuanService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteCouponFallbackImpl.class)
+@FeignClient(contextId = "IFeignPintuanService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPintuanServiceFallback.class)
 public interface IFeignPintuanService {
 
 	///**

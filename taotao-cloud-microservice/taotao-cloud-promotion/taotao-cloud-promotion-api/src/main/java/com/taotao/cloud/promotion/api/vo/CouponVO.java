@@ -31,10 +31,10 @@ public class CouponVO  {
     @Schema(description =  "优惠券关联商品集合")
     private List<PromotionGoodsVO> promotionGoodsList;
 
-    public CouponVO(Coupon coupon) {
-        if (coupon == null) {
-            return;
-        }
-        BeanUtils.copyProperties(coupon, this);
-    }
+//    public CouponVO(Coupon coupon) {
+//        if (coupon == null) {
+//            return;
+//        }
+//        BeanUtils.copyProperties(coupon, this);
+//    }
 }

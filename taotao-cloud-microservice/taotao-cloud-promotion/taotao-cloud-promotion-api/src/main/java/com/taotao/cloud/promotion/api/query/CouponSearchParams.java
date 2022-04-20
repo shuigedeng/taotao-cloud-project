@@ -11,6 +11,8 @@ import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
@@ -30,6 +32,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CouponSearchParams extends BasePromotionsSearchParams implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 4566880169478260409L;
 
 	private static final String PRICE_COLUMN = "price";
@@ -104,30 +107,23 @@ public class CouponSearchParams extends BasePromotionsSearchParams implements Se
 		}
 		if (CharSequenceUtil.isNotEmpty(this.getPromotionStatus())) {
 			switch (PromotionsStatusEnum.valueOf(this.getPromotionStatus())) {
-				case NEW:
-					queryWrapper.nested(i -> i.gt(PromotionTools.START_TIME_COLUMN, new Date())
-						.gt(PromotionTools.END_TIME_COLUMN, new Date()))
-					;
-					break;
-				case START:
-					queryWrapper.nested(i -> i.le(PromotionTools.START_TIME_COLUMN, new Date())
-							.ge(PromotionTools.END_TIME_COLUMN, new Date()))
-						.or(i -> i.gt("effective_days", 0)
-							.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name()));
-					break;
-				case END:
-					queryWrapper.nested(i -> i.lt(PromotionTools.START_TIME_COLUMN, new Date())
-						.lt(PromotionTools.END_TIME_COLUMN, new Date()));
-					break;
-				case CLOSE:
-					queryWrapper.nested(n -> n.nested(
-							i -> i.isNull(PromotionTools.START_TIME_COLUMN)
-								.isNull(PromotionTools.END_TIME_COLUMN)
-								.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.FIXEDTIME.name())).
-						or(i -> i.le("effective_days", 0)
-							.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name())));
-					break;
-				default:
+				case NEW -> queryWrapper.nested(i -> i.gt(PromotionTools.START_TIME_COLUMN, new Date())
+					.gt(PromotionTools.END_TIME_COLUMN, new Date()))
+				;
+				case START -> queryWrapper.nested(i -> i.le(PromotionTools.START_TIME_COLUMN, new Date())
+						.ge(PromotionTools.END_TIME_COLUMN, new Date()))
+					.or(i -> i.gt("effective_days", 0)
+						.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name()));
+				case END -> queryWrapper.nested(i -> i.lt(PromotionTools.START_TIME_COLUMN, new Date())
+					.lt(PromotionTools.END_TIME_COLUMN, new Date()));
+				case CLOSE -> queryWrapper.nested(n -> n.nested(
+						i -> i.isNull(PromotionTools.START_TIME_COLUMN)
+							.isNull(PromotionTools.END_TIME_COLUMN)
+							.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.FIXEDTIME.name())).
+					or(i -> i.le("effective_days", 0)
+						.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name())));
+				default -> {
+				}
 			}
 		}
 		if (this.getStartTime() != null) {
