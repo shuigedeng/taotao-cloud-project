@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 拼团活动实体类
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PintuanBaseVO {

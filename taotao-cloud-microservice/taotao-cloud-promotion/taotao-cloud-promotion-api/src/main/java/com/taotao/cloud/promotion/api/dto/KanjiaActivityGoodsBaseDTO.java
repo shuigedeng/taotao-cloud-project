@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动商品实体类
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsBaseDTO {

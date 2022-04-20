@@ -3,6 +3,7 @@ package com.taotao.cloud.promotion.api.dto;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 优惠券活动实体类
@@ -11,7 +12,7 @@ import lombok.*;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponActivityBaseDTO extends BasePromotionsDTO {

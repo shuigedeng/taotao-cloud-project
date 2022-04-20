@@ -9,13 +9,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品VO
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DraftGoodsVO extends DraftGoodsBaseVO{

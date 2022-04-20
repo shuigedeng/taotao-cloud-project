@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 促销活动基础类
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class BasePromotionsDTO {

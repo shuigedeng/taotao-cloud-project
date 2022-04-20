@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DraftGoodsPageQuery extends GoodsPageQuery {

@@ -3,6 +3,7 @@ package com.taotao.cloud.promotion.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 /**
@@ -10,7 +11,7 @@ import lombok.*;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "砍价活动参与记录对象")

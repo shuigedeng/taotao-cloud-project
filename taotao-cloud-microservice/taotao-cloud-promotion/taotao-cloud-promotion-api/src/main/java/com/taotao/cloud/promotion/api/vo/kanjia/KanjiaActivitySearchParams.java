@@ -5,13 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动搜索参数
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {

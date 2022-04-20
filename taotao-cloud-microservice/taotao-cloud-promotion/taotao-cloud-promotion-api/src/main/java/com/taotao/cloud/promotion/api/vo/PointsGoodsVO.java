@@ -2,13 +2,14 @@ package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 积分商品视图对象
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsVO extends PointsGoodsBaseVO {

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品基础VO
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-14 22:10:24
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DraftGoodsBaseVO implements Serializable {

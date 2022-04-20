@@ -12,7 +12,6 @@ import java.io.Serial;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsSkuSearchQuery extends GoodsPageQuery {
