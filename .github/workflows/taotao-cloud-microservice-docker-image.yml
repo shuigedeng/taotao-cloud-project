@@ -47,22 +47,6 @@ jobs:
         MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
         MESSAGES: ${{ github.event.head_commit.message }}
 
-    - name: build and publish dependencies
-      run: |
-        cd ${{ github.workspace }}/taotao-cloud-dependencies
-        gradle publishToMavenLocal 
-
-    - name: build and publish starter
-      run: |
-        starter_dir=${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-starter
-        for starter in `ls $starter_dir`
-        do
-          if [ -d $starter_dir"/"$starter ];then
-            cd $starter_dir"/"$starter
-            gradle --continue clean build -x test -x bootJar
-          fi
-        done        
-
     - name: gradle bootJar taotao-cloud-admin
       uses: gradle/gradle-build-action@v2
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
@@ -88,7 +72,7 @@ jobs:
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
       with:
         gradle-version: 7.3
-        arguments: clean build bootJar
+        arguments: clean bootJar -x test
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway
 
     - name: pulish docker image taotao-cloud-gateway
@@ -108,7 +92,7 @@ jobs:
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
       with:
         gradle-version: 7.3
-        arguments: clean bootJar
+        arguments: clean bootJar -x test
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth
 
     - name: pulish docker image taotao-cloud-auth
@@ -128,7 +112,7 @@ jobs:
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
       with:
         gradle-version: 7.3
-        arguments: clean bootJar
+        arguments: clean bootJar -x test
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
     - name: pulish docker image taotao-cloud-xxljob
@@ -148,7 +132,7 @@ jobs:
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
       with:
         gradle-version: 7.3
-        arguments: clean bootJar
+        arguments: clean bootJar -x test
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
 
     - name: pulish docker image taotao-cloud-order
@@ -168,7 +152,7 @@ jobs:
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
       with:
         gradle-version: 7.3
-        arguments: clean build bootJar
+        arguments: clean bootJar -x test
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
 
     - name: pulish docker image taotao-cloud-sys
