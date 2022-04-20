@@ -152,7 +152,7 @@ jobs:
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
       with:
         gradle-version: 7.3
-        arguments: clean bootJar
+        arguments: clean build bootJar
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
 
     - name: pulish docker image taotao-cloud-sys
