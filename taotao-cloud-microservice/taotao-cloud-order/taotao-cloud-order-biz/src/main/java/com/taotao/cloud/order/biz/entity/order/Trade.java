@@ -21,8 +21,7 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,7 +39,7 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	/**
 	 * 交易编号
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '交易编号'")
+	@Column(name = "sn", columnDefinition = "varchar(64) not null comment '交易编号'")
 	private String sn;
 	/**
 	 * 买家id
@@ -50,12 +49,12 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	/**
 	 * 买家用户名
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '买家用户名'")
+	@Column(name = "member_name", columnDefinition = "varchar(64) not null comment '买家用户名'")
 	private String memberName;
 	/**
 	 * 支付方式
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '支付方式'")
+	@Column(name = "payment_method", columnDefinition = "varchar(64) not null comment '支付方式'")
 	private String paymentMethod;
 
 
@@ -63,54 +62,54 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	 * 付款状态
 	 * @see PayStatusEnum
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "pay_status", columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String payStatus;
 	/**
 	 * 总价格
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '总价格'")
+	@Column(name = "flow_price", columnDefinition = "varchar(64) not null comment '总价格'")
 	private BigDecimal flowPrice;
 	/**
 	 * 原价
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '原价'")
+	@Column(name = "goods_price", columnDefinition = "varchar(64) not null comment '原价'")
 	private BigDecimal goodsPrice;
 	/**
 	 * 运费
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '运费'")
+	@Column(name = "freight_price", columnDefinition = "varchar(64) not null comment '运费'")
 	private BigDecimal freightPrice;
 	/**
 	 * 优惠的金额
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '优惠的金额'")
+	@Column(name = "discount_price", columnDefinition = "varchar(64) not null comment '优惠的金额'")
 	private BigDecimal discountPrice;
 
 	/**
 	 * 配送方式
 	 * @see DeliveryMethodEnum
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '配送方式'")
+	@Column(name = "delivery_method", columnDefinition = "varchar(64) not null comment '配送方式'")
 	private String deliveryMethod;
 	/**
 	 * 收货人姓名
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '收货人姓名'")
+	@Column(name = "consignee_name", columnDefinition = "varchar(64) not null comment '收货人姓名'")
 	private String consigneeName;
 	/**
 	 * 收件人手机
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '收件人手机'")
+	@Column(name = "consignee_mobile", columnDefinition = "varchar(64) not null comment '收件人手机'")
 	private String consigneeMobile;
 	/**
 	 * 地址名称 逗号分割
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
+	@Column(name = "consignee_address_path", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
 	private String consigneeAddressPath;
 	/**
 	 * 地址id逗号分割
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '地址id逗号分割'")
+	@Column(name = "consignee_address_id_path", columnDefinition = "varchar(64) not null comment '地址id逗号分割'")
 	private String consigneeAddressIdPath;
 
 	//public Trade(TradeDTO tradeDTO) {

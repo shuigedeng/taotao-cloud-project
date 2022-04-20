@@ -13,20 +13,22 @@ import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.promotion.api.vo.PromotionSkuVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import java.util.stream.Collectors;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import lombok.*;
+import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 子订单表
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -218,5 +220,18 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 
 	public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
 	    this.priceDetail = JSONUtil.toJsonStr(priceDetail);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		OrderItem orderItem = (OrderItem) o;
+		return getId() != null && Objects.equals(getId(), orderItem.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 }

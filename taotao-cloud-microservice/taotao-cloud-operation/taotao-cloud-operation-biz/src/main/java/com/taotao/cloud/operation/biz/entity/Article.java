@@ -17,6 +17,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
+
 /**
  * 文章DO
  */
@@ -33,6 +35,7 @@ public class Article extends BaseSuperEntity<Article, Long> {
 
 	public static final String TABLE_NAME = "li_article";
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "文章标题")

@@ -3,13 +3,14 @@ package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import lombok.*;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 售后退款操作记录表
@@ -17,8 +18,9 @@ import lombok.*;
  * @author shuigedeng
  * @since 2020/4/30 15:49
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -80,4 +82,17 @@ public class OrderRefundReqRecord extends BaseSuperEntity<OrderRefundReqRecord,L
 	 */
 	@Column(name = "create_Date", columnDefinition = "TIMESTAMP comment '创建时间'")
 	private LocalDateTime createDate;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		OrderRefundReqRecord that = (OrderRefundReqRecord) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

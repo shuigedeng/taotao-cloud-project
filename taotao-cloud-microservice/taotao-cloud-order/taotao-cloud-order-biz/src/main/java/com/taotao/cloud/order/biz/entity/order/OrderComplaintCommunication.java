@@ -1,26 +1,23 @@
 package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import lombok.*;
-
 import java.io.Serial;
+import java.util.Objects;
 
 
 /**
  * 订单交易投诉通信表
- *
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,40 +29,45 @@ public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long
 
 	public static final String TABLE_NAME = "tt_order_complaint_communication";
 
-    @Serial
+	@Serial
 	private static final long serialVersionUID = -2384351827382795547L;
 
-    /**
-     * 投诉id
-     */
-    @Schema(description =  "投诉id")
-    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Long complainId;
-    /**
-     * 对话内容
-     */
-    @Schema(description =  "对话内容")
-    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String content;
-    /**
-     * 所属，买家/卖家
-     */
-    @Schema(description =  "所属，买家/卖家")
-    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String owner;
-    /**
-     * 对话所属名称
-     */
-    @Schema(description =  "对话所属名称")
-    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String ownerName;
-    /**
-     * 对话所属id,卖家id/买家id
-     */
-    @Schema(description =  "对话所属id,卖家id/买家id")
-    @Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    private Long ownerId;
+	/**
+	 * 投诉id
+	 */
+	@Column(name = "complain_id", columnDefinition = "varchar(64) not null comment '投诉id'")
+	private Long complainId;
+	/**
+	 * 对话内容
+	 */
+	@Column(name = "content", columnDefinition = "varchar(64) not null comment '对话内容'")
+	private String content;
+	/**
+	 * 所属，买家/卖家
+	 */
+	@Column(name = "owner", columnDefinition = "varchar(64) not null comment '所属，买家/卖家'")
+	private String owner;
+	/**
+	 * 对话所属名称
+	 */
+	@Column(name = "owner_name", columnDefinition = "varchar(64) not null comment '对话所属名称'")
+	private String ownerName;
+	/**
+	 * 对话所属id,卖家id/买家id
+	 */
+	@Column(name = "owner_id", columnDefinition = "varchar(64) not null comment '对话所属id,卖家id/买家id'")
+	private Long ownerId;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		OrderComplaintCommunication that = (OrderComplaintCommunication) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
 
-
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

@@ -47,6 +47,11 @@ jobs:
         MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
         MESSAGES: ${{ github.event.head_commit.message }}
 
+    - name: build and publish dependencies
+      run: |
+        cd ${{ github.workspace }}/taotao-cloud-dependencies
+        gradle publishToMavenLocal 
+
     - name: gradle bootJar taotao-cloud-admin
       uses: gradle/gradle-build-action@v2
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}

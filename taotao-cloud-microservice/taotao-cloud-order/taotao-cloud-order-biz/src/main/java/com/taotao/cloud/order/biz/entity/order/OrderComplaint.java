@@ -1,11 +1,10 @@
 package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +12,14 @@ import javax.persistence.Table;
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 订单交易投诉表
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,162 +35,149 @@ public class OrderComplaint extends BaseSuperEntity<OrderInfo, Long> {
 	private static final long serialVersionUID = 7185050229757228184L;
 
 	/**
-	 * 应用ID
+	 * 投诉主题
 	 */
-	@Schema(description = "投诉主题")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "complain_topic", columnDefinition = "varchar(255) not null comment '投诉主题'")
 	private String complainTopic;
 	/**
-	 * 应用ID
+	 * 投诉内容
 	 */
-	@Schema(description = "投诉内容")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "content", columnDefinition = "varchar(255) not null comment '投诉内容'")
 	private String content;
 	/**
-	 * 应用ID
+	 * 投诉凭证图片
 	 */
-	@Schema(description = "投诉凭证图片")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "images", columnDefinition = "varchar(255) not null comment '投诉凭证图片'")
 	private String images;
 
 	/**
+	 * 交易投诉状态
+	 *
 	 * @see ComplaintStatusEnum
 	 */
-	@Schema(description = "交易投诉状态")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "complain_status", columnDefinition = "varchar(255) not null comment '交易投诉状态'")
 	private String complainStatus;
 	/**
-	 * 应用ID
+	 * 申诉商家内容
 	 */
-	@Schema(description = "申诉商家内容")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "appeal_content", columnDefinition = "varchar(255) not null comment '申诉商家内容'")
 	private String appealContent;
 	/**
-	 * 应用ID
+	 * 申诉商家时间
 	 */
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@Schema(description = "申诉商家时间")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "appeal_time", columnDefinition = "varchar(255) not null comment '申诉商家时间'")
 	private LocalDateTime appealTime;
 	/**
-	 * 应用ID
+	 * 申诉商家上传的图片
 	 */
-	@Schema(description = "申诉商家上传的图片")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "appealImages", columnDefinition = "varchar(255) not null comment '申诉商家上传的图片'")
 	private String appealImages;
 	/**
-	 * 应用ID
+	 * 订单号
 	 */
-	@Schema(description = "订单号")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "order_sn", columnDefinition = "varchar(255) not null comment '订单号'")
 	private String orderSn;
 	/**
-	 * 应用ID
+	 * 下单时间
 	 */
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@Schema(description = "下单时间")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "order_time", columnDefinition = "varchar(255) not null comment '下单时间'")
 	private LocalDateTime orderTime;
 	/**
-	 * 应用ID
+	 * 商品名称
 	 */
-	@Schema(description = "商品名称")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "goods_name", columnDefinition = "varchar(255) not null comment '商品名称'")
 	private String goodsName;
 	/**
-	 * 应用ID
+	 * 商品id
 	 */
-	@Schema(description = "商品id")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "goods_id", columnDefinition = "varchar(255) not null comment '商品id'")
 	private Long goodsId;
 	/**
-	 * 应用ID
+	 * sku主键
 	 */
-	@Schema(description = "sku主键")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "sku_id", columnDefinition = "varchar(255) not null comment 'sku主键'")
 	private Long skuId;
 	/**
-	 * 应用ID
+	 * 商品价格
 	 */
-	@Schema(description = "商品价格")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "goods_price", columnDefinition = "varchar(255) not null comment '商品价格'")
 	private BigDecimal goodsPrice;
 	/**
-	 * 应用ID
+	 * 商品图片
 	 */
-	@Schema(description = "商品图片")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "goods_image", columnDefinition = "varchar(255) not null comment '商品图片'")
 	private String goodsImage;
 	/**
-	 * 应用ID
+	 * 购买的商品数量
 	 */
-	@Schema(description = "购买的商品数量")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "num", columnDefinition = "varchar(255) not null comment '购买的商品数量'")
 	private Integer num;
 	/**
-	 * 应用ID
+	 * 运费
 	 */
-	@Schema(description = "运费")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "freight_price", columnDefinition = "varchar(255) not null comment '运费'")
 	private BigDecimal freightPrice;
 	/**
-	 * 应用ID
+	 * 订单金额
 	 */
-	@Schema(description = "订单金额")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "order_price", columnDefinition = "varchar(255) not null comment '订单金额'")
 	private BigDecimal orderPrice;
 	/**
-	 * 应用ID
+	 * 物流单号
 	 */
-	@Schema(description = "物流单号")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "logistics_no", columnDefinition = "varchar(255) not null comment '物流单号'")
 	private String logisticsNo;
 	/**
-	 * 应用ID
+	 * 商家id
 	 */
-	@Schema(description = "商家id")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "store_id", columnDefinition = "varchar(255) not null comment '商家id'")
 	private Long storeId;
 	/**
-	 * 应用ID
+	 * 商家名称
 	 */
-	@Schema(description = "商家名称")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "store_name", columnDefinition = "varchar(255) not null comment '商家名称'")
 	private String storeName;
 	/**
-	 * 应用ID
+	 * 会员id
 	 */
-	@Schema(description = "会员id")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(255) not null comment '会员id'")
 	private Long memberId;
 	/**
-	 * 应用ID
+	 * 会员名称
 	 */
-	@Schema(description = "会员名称")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_name", columnDefinition = "varchar(255) not null comment '会员名称'")
 	private String memberName;
 	/**
-	 * 应用ID
+	 * 收货人
 	 */
-	@Schema(description = "收货人")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "consignee_name", columnDefinition = "varchar(255) not null comment '收货人'")
 	private String consigneeName;
 	/**
-	 * 应用ID
+	 * 收货地址
 	 */
-	@Schema(description = "收货地址")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "consignee_address_path", columnDefinition = "varchar(255) not null comment '收货地址'")
 	private String consigneeAddressPath;
 	/**
-	 * 应用ID
+	 * 收货人手机
 	 */
-	@Schema(description = "收货人手机")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "consignee_mobile", columnDefinition = "varchar(255) not null comment '收货人手机'")
 	private String consigneeMobile;
 	/**
-	 * 应用ID
+	 * 仲裁结果
 	 */
-	@Schema(description = "仲裁结果")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "arbitration_result", columnDefinition = "varchar(255) not null comment '仲裁结果'")
 	private String arbitrationResult;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		OrderComplaint that = (OrderComplaint) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

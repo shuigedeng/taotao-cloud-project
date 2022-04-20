@@ -46,28 +46,28 @@ public class PurchaseQuotedItem extends BaseSuperEntity<PurchaseQuotedItem, Long
 	/**
 	 * 报价单ID
 	 */
-	@Column(name = "purchase_quoted_id", columnDefinition = "varchar(64) not null comment '报价单ID'")
-    private String purchaseQuotedId;
+	@Column(name = "purchase_quoted_id", columnDefinition = "bigint not null comment '报价单ID'")
+    private Long purchaseQuotedId;
 
 	/**
 	 * 商品名称
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '商品名称'")
+	@Column(name = "goods_name", columnDefinition = "varchar(255) not null comment '商品名称'")
     private String goodsName;
 	/**
 	 * 规格
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '规格'")
+	@Column(name = "specs", columnDefinition = "varchar(255) not null comment '规格'")
     private String specs;
 	/**
 	 * 数量
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '数量'")
-    private String num;
+	@Column(name = "num", columnDefinition = "int not null comment '数量'")
+    private Integer num;
 	/**
 	 * 数量单位
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '数量单位'")
+	@Column(name = "goods_unit", columnDefinition = "varchar(255) not null comment '数量单位'")
     private String goodsUnit;
 	/**
 	 * 价格
