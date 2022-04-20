@@ -4,5 +4,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.experimental/spring-native
     //implementation group: 'org.springframework.experimental', name: 'spring-native', version: '0.10.5'
 
+    //https://github.com/maxmind/GeoIP2-java
+    api 'com.maxmind.geoip2:geoip2:3.0.1'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
