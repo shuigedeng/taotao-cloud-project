@@ -5,22 +5,24 @@ import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.io.Serial;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 
 /**
  * 交易表
  */
-@Setter
 @Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,95 +34,83 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 
 	public static final String TABLE_NAME = "li_trade";
 
+	@Serial
 	private static final long serialVersionUID = 5177608752643561827L;
 
 	/**
-	 * 应用ID
+	 * 交易编号
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "交易编号")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '交易编号'")
 	private String sn;
 	/**
-	 * 应用ID
+	 * 买家id
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "买家id")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '买家id'")
 	private String memberId;
 	/**
-	 * 应用ID
+	 * 买家用户名
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "买家用户名")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '买家用户名'")
 	private String memberName;
 	/**
-	 * 应用ID
+	 * 支付方式
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "支付方式")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '支付方式'")
 	private String paymentMethod;
+
+
 	/**
-	 * 应用ID
-	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	/**
+	 * 付款状态
 	 * @see PayStatusEnum
 	 */
-	@Schema(description = "付款状态")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String payStatus;
 	/**
-	 * 应用ID
+	 * 总价格
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "总价格")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '总价格'")
 	private BigDecimal flowPrice;
 	/**
-	 * 应用ID
+	 * 原价
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "原价")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '原价'")
 	private BigDecimal goodsPrice;
 	/**
-	 * 应用ID
+	 * 运费
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "运费")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '运费'")
 	private BigDecimal freightPrice;
 	/**
-	 * 应用ID
+	 * 优惠的金额
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "优惠的金额")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '优惠的金额'")
 	private BigDecimal discountPrice;
 
 	/**
+	 * 配送方式
 	 * @see DeliveryMethodEnum
 	 */
-	@Schema(description = "配送方式")
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '配送方式'")
 	private String deliveryMethod;
 	/**
-	 * 应用ID
+	 * 收货人姓名
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "收货人姓名")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '收货人姓名'")
 	private String consigneeName;
 	/**
-	 * 应用ID
+	 * 收件人手机
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "收件人手机")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '收件人手机'")
 	private String consigneeMobile;
 	/**
-	 * 应用ID
+	 * 地址名称 逗号分割
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "地址名称， '，'分割")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
 	private String consigneeAddressPath;
 	/**
-	 * 应用ID
+	 * 地址id逗号分割
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-	@Schema(description = "地址id，'，'分割 ")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '地址id逗号分割'")
 	private String consigneeAddressIdPath;
 
 	//public Trade(TradeDTO tradeDTO) {
@@ -134,4 +124,17 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	//    BeanUtil.copyProperties(tradeDTO.getPriceDetailDTO(), this);
 	//    this.setId(originId);
 	//}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Trade trade = (Trade) o;
+		return getId() != null && Objects.equals(getId(), trade.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

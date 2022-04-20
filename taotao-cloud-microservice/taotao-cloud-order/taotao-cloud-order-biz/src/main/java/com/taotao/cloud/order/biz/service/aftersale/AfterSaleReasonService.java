@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
+
 import java.util.List;
 
 /**
@@ -19,7 +20,6 @@ public interface AfterSaleReasonService extends IService<AfterSaleReason> {
 	 */
 	List<AfterSaleReason> afterSaleReasonList(String serviceType);
 
-
 	/**
 	 * 修改售后原因
 	 *
@@ -34,6 +34,6 @@ public interface AfterSaleReasonService extends IService<AfterSaleReason> {
 	 * @param afterSaleReasonPageQuery 查询条件
 	 * @return 售后原因
 	 */
-    IPage<AfterSaleReason> getByPage(AfterSaleReasonPageQuery afterSaleReasonPageQuery);
+	IPage<AfterSaleReason> getByPage(AfterSaleReasonPageQuery afterSaleReasonPageQuery);
 
 }

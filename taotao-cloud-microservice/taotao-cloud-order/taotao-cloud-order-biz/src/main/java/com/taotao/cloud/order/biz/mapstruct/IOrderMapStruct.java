@@ -37,16 +37,6 @@ public interface IOrderMapStruct {
 
 	OrderBO entityToBo(OrderInfo entity);
 
-
-	/**
-	 * order转OrderVO
-	 *
-	 * @param orderInfo order
-	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
-	 * @author shuigedeng
-	 * @version 2022.03
-	 * @since 2020/11/11 14:47
-	 */
 	OrderVO orderToOrderVO(OrderInfo orderInfo);
 
 	// /**

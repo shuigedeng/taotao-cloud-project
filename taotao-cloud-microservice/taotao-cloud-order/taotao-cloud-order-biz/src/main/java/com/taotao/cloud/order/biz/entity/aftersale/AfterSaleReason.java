@@ -4,18 +4,22 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 售后原因
  *
  * @since 2021/7/9 1:39 上午
  */
-@Setter
 @Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,4 +45,16 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 	@Column(name = "service_type", columnDefinition = "varchar(64) not null comment '售后类型'")
 	private String serviceType;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		AfterSaleReason that = (AfterSaleReason) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

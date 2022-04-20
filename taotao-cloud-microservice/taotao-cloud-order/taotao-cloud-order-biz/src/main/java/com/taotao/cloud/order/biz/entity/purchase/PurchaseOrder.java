@@ -2,19 +2,21 @@ package com.taotao.cloud.order.biz.entity.purchase;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.order.biz.entity.trade.OrderLog;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.Date;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 /**
  * 供求单
@@ -22,108 +24,107 @@ import lombok.Setter;
  * 
  * @since 2020-03-14 23:04:56
  */
-@Setter
 @Getter
-@Builder
-@AllArgsConstructor
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
-@ApiModel(value = "供求单")
-@TableName("li_purchase_order")
-public class PurchaseOrder extends BaseEntity {
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = PurchaseOrder.TABLE_NAME)
+@TableName(PurchaseOrder.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = PurchaseOrder.TABLE_NAME, comment = "供求单表")
+public class PurchaseOrder extends BaseSuperEntity<PurchaseOrder, Long> {
+
+	public static final String TABLE_NAME = "li_purchase_order";
 	/**
-	 * 应用ID
+	 * 标题
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "标题")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '标题'")
     private String title;
 	/**
-	 * 应用ID
+	 * 截止时间
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "截止时间")
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '截止时间'")
     private LocalDateTime deadline;
 	/**
-	 * 应用ID
+	 * 收货时间
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "收货时间")
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '收货时间'")
     private LocalDateTime receiptTime;
 	/**
-	 * 应用ID
+	 * 价格类型
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "价格类型", notes = "可议价、不可议价、面议")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '价格类型 可议价、不可议价、面议'")
     private String priceMethod;
 	/**
-	 * 应用ID
+	 * 地址名称 逗号分割
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "地址名称， '，'分割")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
     private String consigneeAddressPath;
 	/**
-	 * 应用ID
+	 * 地址id 逗号分割
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "地址id，'，'分割 ")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '地址id 逗号分割'")
     private String consigneeAddressIdPath;
 	/**
-	 * 应用ID
+	 * 是否需要发票
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "是否需要发票")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '是否需要发票'")
     private Boolean needReceipt;
 	/**
-	 * 应用ID
+	 * 补充说明
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "补充说明")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '补充说明'")
     private String supplement;
 	/**
-	 * 应用ID
+	 * 联系类型
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "联系类型", notes = "联系方式什么时候可见 公开后、公开")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '联系方式什么时候可见 公开后、公开'")
     private String contactType;
 
 	/**
-	 * 应用ID
+	 * 联系人
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "联系人")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '联系人'")
     private String contacts;
 	/**
-	 * 应用ID
+	 * 联系电话
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "联系电话")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '联系电话'")
     private String contactNumber;
 
 	/**
-	 * 应用ID
+	 * 供求人
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "供求人")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '供求人'")
     private String memberId;
 
 	/**
-	 * 应用ID
+	 * 状态，开启：OPEN，关闭：CLOSE
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "状态，开启：OPEN，关闭：CLOSE")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '状态，开启：OPEN，关闭：CLOSE'")
     private String status;
 	/**
-	 * 应用ID
+	 * 分类ID
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "分类ID")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '分类ID'")
     private String categoryId;
 	/**
-	 * 应用ID
+	 * 分类名称
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    @Schema(description =  "分类名称")
+	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '分类名称'")
     private String categoryName;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		PurchaseOrder purchaseOrder = (PurchaseOrder) o;
+		return getId() != null && Objects.equals(getId(), purchaseOrder.getId());
+	}
 
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

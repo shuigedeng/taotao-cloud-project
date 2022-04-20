@@ -6,34 +6,32 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
-import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
-import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
-import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.enums.order.*;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 订单表
  */
-@Setter
 @Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -419,5 +417,18 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 
 	public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
 		this.priceDetail = JSONUtil.toJsonStr(priceDetail);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Order order = (Order) o;
+		return getId() != null && Objects.equals(getId(), order.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 }

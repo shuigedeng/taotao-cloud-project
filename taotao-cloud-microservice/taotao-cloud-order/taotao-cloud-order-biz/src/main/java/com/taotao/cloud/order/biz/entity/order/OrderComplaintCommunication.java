@@ -9,20 +9,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
+
+import java.io.Serial;
 
 
 /**
  * 订单交易投诉通信表
  *
  **/
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +32,8 @@ public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long
 
 	public static final String TABLE_NAME = "tt_order_complaint_communication";
 
-    private static final long serialVersionUID = -2384351827382795547L;
+    @Serial
+	private static final long serialVersionUID = -2384351827382795547L;
 
     /**
      * 投诉id

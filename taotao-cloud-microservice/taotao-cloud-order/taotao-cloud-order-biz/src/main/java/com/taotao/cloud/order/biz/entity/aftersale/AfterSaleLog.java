@@ -4,16 +4,20 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 售后日志
  */
-@Setter
 @Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,4 +60,17 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 	 */
 	@Column(name = "message", columnDefinition = "varchar(1024) not null comment '日志信息'")
 	private String message;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		AfterSaleLog that = (AfterSaleLog) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }
