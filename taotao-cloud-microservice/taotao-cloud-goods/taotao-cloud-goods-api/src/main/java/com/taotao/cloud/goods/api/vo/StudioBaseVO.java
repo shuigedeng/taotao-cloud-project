@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
 /**
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
  * @since 2021/5/17 9:47 上午
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudioBaseVO {

@@ -7,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
 
 
 /**
  * 砍价活动商品实体
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityLogDTO {

@@ -7,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import lombok.experimental.SuperBuilder;
 
 
 /**
  * 积分商品实体类
  **/
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsBaseVO {

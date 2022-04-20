@@ -8,13 +8,14 @@ import lombok.*;
 
 import java.util.Arrays;
 import java.util.List;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 促销商品查询通用类
  **/
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {

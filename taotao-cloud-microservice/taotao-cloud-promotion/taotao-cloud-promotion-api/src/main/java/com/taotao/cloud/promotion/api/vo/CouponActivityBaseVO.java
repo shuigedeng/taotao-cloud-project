@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 优惠券活动实体类
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
  * @since 2020-03-19 10:44 上午
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponActivityBaseVO {

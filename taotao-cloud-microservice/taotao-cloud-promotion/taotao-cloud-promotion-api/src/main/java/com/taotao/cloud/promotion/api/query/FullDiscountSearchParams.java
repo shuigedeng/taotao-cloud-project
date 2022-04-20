@@ -13,13 +13,14 @@ import java.util.Arrays;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 满优惠查询通用类
  **/
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class FullDiscountSearchParams extends BasePromotionsSearchParams implements Serializable {

@@ -2,6 +2,7 @@ package com.taotao.cloud.promotion.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 /**
@@ -9,7 +10,7 @@ import lombok.*;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionGoodsDTO extends PromotionGoodsBaseDTO {

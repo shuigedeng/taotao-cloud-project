@@ -8,13 +8,14 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动商品查询通用类
  **/
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsParams extends BasePromotionsSearchParams implements Serializable {

@@ -5,13 +5,14 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动商品DTO
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsDTO extends KanjiaActivityGoodsBaseDTO implements Serializable {

@@ -9,13 +9,14 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 秒杀活动查询通用类
  **/
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeckillSearchParams extends BasePromotionsSearchParams implements Serializable {

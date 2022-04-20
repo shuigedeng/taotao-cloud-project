@@ -6,13 +6,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 拼团查询通用类
  **/
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PintuanSearchParams extends BasePromotionsSearchParams {

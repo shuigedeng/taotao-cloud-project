@@ -13,13 +13,14 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 会员优惠券查询通用类
  **/
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCouponSearchParams extends BasePromotionsSearchParams implements Serializable {

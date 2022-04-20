@@ -27,6 +27,7 @@ public class KanjiaActivityGoodsVO {
 //			return 0D;
 //		}
 //		return purchasePrice;
+		return BigDecimal.ZERO;
 	}
 
 	@Schema(description = "活动库存")

@@ -6,13 +6,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.io.Serial;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 商品关联参数的VO
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsParamsVO extends GoodsParamsDTO {
@@ -25,8 +26,8 @@ public class GoodsParamsVO extends GoodsParamsDTO {
 	private String options;
 	@Schema(description = "是否必填是  1    否   0")
 	private Integer required;
-	@Schema(description = "参数组id")
-	private String groupId;
+	//@Schema(description = "参数组id")
+	//private String groupId;
 	@Schema(description = "是否可索引  1 可以   0不可以")
 	private Integer isIndex;
 

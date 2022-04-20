@@ -18,14 +18,20 @@ public class FeignStoreServiceFallbackImpl implements FallbackFactory<IFeignStor
 	public IFeignStoreService create(Throwable throwable) {
 		return new IFeignStoreService() {
 
+
 			@Override
-			public Result<StoreVO> findSotreById(String id) {
+			public Result<StoreVO> findSotreById(Long id) {
 				return null;
 			}
 
 			@Override
 			public Result<Boolean> updateStoreCollectionNum(
 				CollectionDTO collectionDTO) {
+				return null;
+			}
+
+			@Override
+			public Result<StoreVO> getStoreDetail() {
 				return null;
 			}
 		};

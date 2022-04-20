@@ -5,13 +5,14 @@ import lombok.*;
 
 import java.util.Comparator;
 import java.util.List;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 分类VO
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryVO extends CategoryBaseVO {
