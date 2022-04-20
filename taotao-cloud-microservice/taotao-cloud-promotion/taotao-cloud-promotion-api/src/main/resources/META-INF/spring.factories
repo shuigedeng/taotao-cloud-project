@@ -1,2 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.coupon.api.feign.fallback.RemoteCouponFallbackImpl
+com.taotao.cloud.promotion.api.feign.fallback.FeignCouponServiceFallback, \
+com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityServiceFallback, \
+com.taotao.cloud.promotion.api.feign.fallback.FeignMemberCouponServiceFallback, \
+com.taotao.cloud.promotion.api.feign.fallback.FeignPintuanServiceFallback, \
+com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsServiceFallback, \
+com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionServiceFallback

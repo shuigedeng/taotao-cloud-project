@@ -29,6 +29,11 @@ public class RemoteMemberFallbackImpl implements FallbackFactory<IFeignMemberSer
 				LogUtil.error("调用findMemberById异常：{}", throwable, id);
 				return Result.fail(null, 500);
 			}
+
+			@Override
+			public Result<Boolean> updateMemberPoint(Long payPoint, String name, String memberId, String s) {
+				return null;
+			}
 		};
 	}
 }

@@ -1,31 +1,27 @@
 package com.taotao.cloud.promotion.api.dto;
 
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.NoArgsConstructor;
 
 /**
  * 砍价活动商品DTO
  **/
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//public class KanjiaActivityGoodsDTO extends KanjiaActivityGoods implements Serializable {
-public class KanjiaActivityGoodsDTO  implements Serializable {
+public class KanjiaActivityGoodsDTO extends KanjiaActivityGoodsBaseDTO implements Serializable {
 
-
-    @Serial
+	@Serial
 	private static final long serialVersionUID = 1969340823809319805L;
 
-    //@Schema(description =  "商品规格详细信息")
-    //private GoodsSku goodsSku;
+	//@Schema(description =  "商品规格详细信息")
+	//private GoodsSku goodsSku;
+
+	private Long id;
 
 }

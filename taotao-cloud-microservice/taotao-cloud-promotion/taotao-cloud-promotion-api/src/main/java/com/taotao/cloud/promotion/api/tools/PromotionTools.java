@@ -94,9 +94,10 @@ public class PromotionTools {
 		return map.entrySet().stream().filter(i -> {
 			JSONObject promotionsObj = JSONUtil.parseObj(i.getValue());
 			BasePromotionsVO basePromotions = promotionsObj.toBean(BasePromotionsVO.class);
-			if (basePromotions.getStartTime() != null && basePromotions.getEndTime() != null) {
-				return basePromotions.getStartTime().getTime() <= System.currentTimeMillis() && basePromotions.getEndTime().getTime() >= System.currentTimeMillis();
-			}
+			// todo 此处需要修改
+//			if (basePromotions.getStartTime() != null && basePromotions.getEndTime() != null) {
+//				return basePromotions.getStartTime().getTime() <= System.currentTimeMillis() && basePromotions.getEndTime().getTime() >= System.currentTimeMillis();
+//			}
 			return true;
 		}).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}

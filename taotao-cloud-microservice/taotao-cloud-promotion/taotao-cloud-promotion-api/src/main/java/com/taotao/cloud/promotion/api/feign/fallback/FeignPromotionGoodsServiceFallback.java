@@ -13,27 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.promotion.api.feign;
+package com.taotao.cloud.promotion.api.feign.fallback;
 
-import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsServiceFallback;
+import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
- * 远程调用售后模块
+ * RemoteLogFallbackImpl
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @since 2020/4/29 21:43
  */
-@FeignClient(contextId = "IFeignPromotionGoodsService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPromotionGoodsServiceFallback.class)
-public interface IFeignPromotionGoodsService {
+public class FeignPromotionGoodsServiceFallback implements FallbackFactory<IFeignPromotionGoodsService> {
+	@Override
+	public IFeignPromotionGoodsService create(Throwable throwable) {
+		return new IFeignPromotionGoodsService() {
 
-	@GetMapping(value = "/withdraw/info")
-	Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsSearchParams searchParams);
-
+			@Override
+			public Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsSearchParams searchParams) {
+				return null;
+			}
+		};
+	}
 }
-

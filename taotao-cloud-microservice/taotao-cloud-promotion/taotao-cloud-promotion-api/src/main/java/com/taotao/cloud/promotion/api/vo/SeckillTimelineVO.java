@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeckillTimelineVO implements Serializable {
 
-    private static final long serialVersionUID = -8171512491016990179L;
+    @Serial
+	private static final long serialVersionUID = -8171512491016990179L;
 
     @Schema(description =  "时刻")
     private Integer timeLine;

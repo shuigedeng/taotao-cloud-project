@@ -14,17 +14,13 @@ import java.util.List;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//public class CouponActivityVO extends CouponActivity {
-public class CouponActivityVO  {
+public class CouponActivityVO extends CouponActivityBaseVO {
 
     @Schema(description =  "优惠券活动下的优惠券列表")
     private List<CouponActivityItemVO> couponActivityItems;
 
-    //public CouponActivityVO(CouponActivity couponActivity, List<CouponActivityItemVO> couponActivityItemVOS) {
-    //    BeanUtil.copyProperties(couponActivity, this);
-    //    this.couponActivityItems = couponActivityItemVOS;
-    //}
 }

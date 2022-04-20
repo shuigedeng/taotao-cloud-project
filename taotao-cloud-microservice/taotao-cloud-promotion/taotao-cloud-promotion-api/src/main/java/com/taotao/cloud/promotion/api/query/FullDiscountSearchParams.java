@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 import lombok.Getter;
@@ -23,7 +24,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FullDiscountSearchParams extends BasePromotionsSearchParams implements Serializable {
 
-    private static final long serialVersionUID = -4052716630253333681L;
+    @Serial
+	private static final long serialVersionUID = -4052716630253333681L;
 
 
     @Schema(description =  "活动名称")
