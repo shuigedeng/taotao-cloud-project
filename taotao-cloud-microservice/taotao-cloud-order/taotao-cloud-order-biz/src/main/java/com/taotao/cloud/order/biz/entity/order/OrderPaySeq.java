@@ -3,14 +3,14 @@ package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import lombok.*;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * 订单支付流水表
@@ -18,8 +18,9 @@ import lombok.*;
  * @author shuigedeng
  * @since 2020/4/30 15:45
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -90,4 +91,17 @@ public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
 	 */
 	@Column(name = "remark", columnDefinition = "varchar(3200) comment '备注'")
 	private String remark;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		OrderPaySeq that = (OrderPaySeq) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

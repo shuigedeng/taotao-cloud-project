@@ -31,14 +31,14 @@ public interface ILogMapper extends BaseMapper<Log> {
 		<script>
 		select l.id,
 				l.create_time as createTime,
-				l.description, 
+				l.description,
 				l.request_ip as requestIp,
-				l.address,u.nickname 
-		from log l left join yx_user u on u.uid=l.uid 
+				l.address,u.nickname
+		from log l left join yx_user u on u.uid=l.uid
 		where l.type=1
-		<if test ="nickname !=null"> 
+		<if test ="nickname !=null">
 			and u.nickname LIKE CONCAT('%',#{nickname},'%')
-		</if> 
+		</if>
 		order by l.id desc
 		</script>
 		""")

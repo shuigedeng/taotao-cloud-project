@@ -46,37 +46,37 @@ public class PurchaseOrderItem extends BaseSuperEntity<PurchaseOrderItem, Long> 
 	/**
 	 * 采购ID
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '采购ID'")
-    private String purchaseOrderId;
+	@Column(name = "purchase_order_id", columnDefinition = "bigint not null comment '采购ID'")
+    private Long purchaseOrderId;
 	/**
 	 * 商品名称
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '商品名称'")
+	@Column(name = "goods_name", columnDefinition = "varchar(255) not null comment '商品名称'")
     private String goodsName;
 	/**
 	 * 数量
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '数量'")
-    private String num;
+	@Column(name = "num", columnDefinition = "int not null comment '数量'")
+    private Integer num;
 	/**
 	 * 数量单位
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '数量单位'")
+	@Column(name = "goods_unit", columnDefinition = "varchar(255) not null comment '数量单位'")
     private String goodsUnit;
 	/**
 	 * 价格
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '价格'")
+	@Column(name = "price", columnDefinition = "decimal(10,2) not null comment '价格'")
     private BigDecimal price;
 	/**
 	 * 规格
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '规格'")
+	@Column(name = "specs", columnDefinition = "varchar(255) not null comment '规格'")
     private String specs;
 	/**
 	 * 图片
 	 */
-	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '图片'")
+	@Column(name = "images", columnDefinition = "text not null comment '图片'")
     private String images;
 
 	@Override
