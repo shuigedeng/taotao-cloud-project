@@ -5,7 +5,7 @@ package com.taotao.cloud.stock.biz.infrastructure.external;
  *
  * @author shuigedeng
  * @date 2021-04-23
- **/
+ */
 public interface TokenGeneratorExternalService {
 
     /**

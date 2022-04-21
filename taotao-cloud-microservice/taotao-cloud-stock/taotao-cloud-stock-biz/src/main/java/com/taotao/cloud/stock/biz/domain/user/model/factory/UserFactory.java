@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-24
- **/
+ */
 public class UserFactory {
 
     private UserRepository userRepository;

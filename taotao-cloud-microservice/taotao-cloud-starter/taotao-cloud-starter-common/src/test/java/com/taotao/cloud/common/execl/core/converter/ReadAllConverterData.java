@@ -1,20 +1,10 @@
-package com.alibaba.easyexcel.test.core.converter;
+package com.taotao.cloud.common.execl.core.converter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-/**
- * @author Jiaju Zhuang
- */
-@Getter
-@Setter
-@EqualsAndHashCode
 public class ReadAllConverterData {
     private BigDecimal bigDecimalBoolean;
     private BigDecimal bigDecimalNumber;

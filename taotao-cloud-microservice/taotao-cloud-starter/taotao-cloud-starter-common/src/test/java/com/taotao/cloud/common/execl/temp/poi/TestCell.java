@@ -1,21 +1,12 @@
-package com.alibaba.easyexcel.test.temp.poi;
+package com.taotao.cloud.common.execl.temp.poi;
 
 import java.util.List;
 
 import com.alibaba.excel.metadata.data.CellData;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-/**
- * TODO
- *
- * @author 罗成
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+com.taotao.cloud.common.execl
 public class TestCell {
     private CellData<?> c1;
     private CellData<List<String>> c2;

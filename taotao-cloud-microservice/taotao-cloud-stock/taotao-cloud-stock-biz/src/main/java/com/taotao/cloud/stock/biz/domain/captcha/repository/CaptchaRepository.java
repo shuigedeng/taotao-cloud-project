@@ -10,7 +10,7 @@ import com.taotao.cloud.stock.biz.domain.captcha.model.vo.Uuid;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 public interface CaptchaRepository {
 
     /**

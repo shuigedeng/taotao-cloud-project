@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 @DubboService
 public class AuthenticationServiceImpl implements AuthenticationService {
 

@@ -61,7 +61,7 @@ public class RefundSupport {
 
     /**
      * 功能描述: 修改子订单中已售后退款商品数量
-     **/
+     */
     private void updateReturnGoodsNumber(AfterSale afterSale) {
         //根据商品id及订单sn获取子订单
         OrderItem orderItem = orderItemService.getByOrderSnAndSkuId(afterSale.getOrderSn(), afterSale.getSkuId());

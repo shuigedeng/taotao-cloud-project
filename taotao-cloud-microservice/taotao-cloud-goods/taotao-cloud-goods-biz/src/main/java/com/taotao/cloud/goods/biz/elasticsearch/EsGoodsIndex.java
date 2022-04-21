@@ -27,7 +27,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * 商品索引
- **/
+ */
 @Data
 @Document(indexName = "#{@elasticsearchProperties.indexPrefix}_" + EsSuffix.GOODS_INDEX_NAME)
 @NoArgsConstructor

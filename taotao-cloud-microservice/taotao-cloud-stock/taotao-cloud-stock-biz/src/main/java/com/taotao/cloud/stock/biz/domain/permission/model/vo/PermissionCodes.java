@@ -11,7 +11,7 @@ import java.util.Set;
  *
  * @author shuigedeng
  * @date 2021-02-15
- **/
+ */
 public class PermissionCodes implements ValueObject<PermissionCodes> {
 
     private Set<String> codes;

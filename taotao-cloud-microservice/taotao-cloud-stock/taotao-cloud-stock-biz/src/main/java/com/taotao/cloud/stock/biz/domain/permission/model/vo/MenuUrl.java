@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public class MenuUrl implements ValueObject<MenuUrl> {
 
     private String url;

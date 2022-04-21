@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-18
- **/
+ */
 @Data
 @ApiModel(value = "角色", description = "角色")
 public class RoleCommand {

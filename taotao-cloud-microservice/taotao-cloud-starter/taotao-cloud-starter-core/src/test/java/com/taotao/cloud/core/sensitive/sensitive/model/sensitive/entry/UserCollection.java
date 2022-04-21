@@ -10,9 +10,6 @@ import java.util.Set;
 
 /**
  * 对象集合
- * @author binbin.hou
- * date 2019/1/9
- * @since 0.0.6
  */
 public class UserCollection {
 

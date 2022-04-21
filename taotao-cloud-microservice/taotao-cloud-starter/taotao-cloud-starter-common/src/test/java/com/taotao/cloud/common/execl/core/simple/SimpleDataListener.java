@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.simple;
+package com.taotao.cloud.common.execl.core.simple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
 
 /**
- * @author Jiaju Zhuang
+
  */
 public class SimpleDataListener extends AnalysisEventListener<SimpleData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleDataListener.class);

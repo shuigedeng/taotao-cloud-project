@@ -19,7 +19,7 @@ public class IndexController {
 
     @GetMapping("/test")
     public void test() {
-        DtpExecutor dtpExecutor = DtpRegistry.getExecutor("dynamic-tp-test");
+        DtpExecutor dtpExecutor = DtpRegistry.getDtpExecutor("dynamic-tp-test");
         dtpExecutor.execute(() -> System.out.println("test"));
     }
 }

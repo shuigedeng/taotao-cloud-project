@@ -1,2 +1,3 @@
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.uc.api.feign.fallback.RemoteUserFallbackImpl
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.payment.api.feign.fallback.FeignPayFlowServiceFallback, \
+com.taotao.cloud.payment.api.feign.fallback.FeignRefundLogServiceFallback

@@ -7,7 +7,7 @@ import com.xtoon.cloud.sys.application.command.PermissionCommand;
  *
  * @author shuigedeng
  * @date 2021-02-17
- **/
+ */
 public interface PermissionApplicationService {
 
     /**

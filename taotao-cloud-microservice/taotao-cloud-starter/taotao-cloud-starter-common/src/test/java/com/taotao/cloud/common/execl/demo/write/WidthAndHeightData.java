@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.write;
+package com.taotao.cloud.common.execl.demo.write;
 
 import java.util.Date;
 
@@ -7,18 +7,14 @@ import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * 基础数据类
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 @ContentRowHeight(10)
 @HeadRowHeight(20)
 @ColumnWidth(25)

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-18
- **/
+ */
 public class RoleDTOAssembler {
 
     public static RoleDTO fromRole(final Role role) {

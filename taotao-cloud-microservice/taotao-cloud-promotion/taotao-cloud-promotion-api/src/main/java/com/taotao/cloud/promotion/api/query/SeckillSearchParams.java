@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 秒杀活动查询通用类
- **/
+ */
 @Setter
 @Getter
 @SuperBuilder

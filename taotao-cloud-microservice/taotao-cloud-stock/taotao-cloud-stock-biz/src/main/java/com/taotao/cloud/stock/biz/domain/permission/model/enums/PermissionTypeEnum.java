@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public enum PermissionTypeEnum implements ValueObject<PermissionTypeEnum> {
 
     /**

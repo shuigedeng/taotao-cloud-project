@@ -9,7 +9,7 @@ import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
  *
  * @author shuigedeng
  * @date 2021-05-11
- **/
+ */
 public class PermissionDisableService {
 
     private PermissionRepository permissionRepository;

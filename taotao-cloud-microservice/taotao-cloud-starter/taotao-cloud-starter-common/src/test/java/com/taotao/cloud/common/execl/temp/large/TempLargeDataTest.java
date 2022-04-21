@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.large;
+package com.taotao.cloud.common.execl.temp.large;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import com.alibaba.easyexcel.test.core.large.LargeDataTest;
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.core.large.LargeDataTest;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Jiaju Zhuang
+
  */
 @Ignore
 public class TempLargeDataTest {
@@ -86,7 +86,7 @@ public class TempLargeDataTest {
     @Test
     public void t04Write() throws Exception {
         ExcelWriter excelWriter = EasyExcel.write(fileWriteTemp07,
-            com.alibaba.easyexcel.test.core.large.LargeData.class).build();
+            com.taotao.cloud.common.execl.core.large.LargeData.class).build();
         WriteSheet writeSheet = EasyExcel.writerSheet().build();
         for (int j = 0; j < 2; j++) {
             excelWriter.write(data(), writeSheet);
@@ -94,7 +94,7 @@ public class TempLargeDataTest {
         excelWriter.finish();
 
         long start = System.currentTimeMillis();
-        excelWriter = EasyExcel.write(fileWrite07, com.alibaba.easyexcel.test.core.large.LargeData.class).build();
+        excelWriter = EasyExcel.write(fileWrite07, com.taotao.cloud.common.execl.core.large.LargeData.class).build();
         writeSheet = EasyExcel.writerSheet().build();
         for (int j = 0; j < 5000; j++) {
             excelWriter.write(data(), writeSheet);
@@ -131,7 +131,7 @@ public class TempLargeDataTest {
     public void t04WriteExcel() throws Exception {
         IntStream.rangeClosed(0, 100).forEach(index -> {
             ExcelWriter excelWriter = EasyExcel.write(fileWriteTemp07,
-                com.alibaba.easyexcel.test.core.large.LargeData.class).build();
+                com.taotao.cloud.common.execl.core.large.LargeData.class).build();
             WriteSheet writeSheet = EasyExcel.writerSheet().build();
             for (int j = 0; j < 5000; j++) {
                 excelWriter.write(data(), writeSheet);
@@ -145,7 +145,7 @@ public class TempLargeDataTest {
     public void t04WriteExcelNo() throws Exception {
         IntStream.rangeClosed(0, 10000).forEach(index -> {
             ExcelWriter excelWriter = EasyExcel.write(fileWriteTemp07,
-                com.alibaba.easyexcel.test.core.large.LargeData.class).build();
+                com.taotao.cloud.common.execl.core.large.LargeData.class).build();
             WriteSheet writeSheet = EasyExcel.writerSheet().build();
             for (int j = 0; j < 50; j++) {
                 excelWriter.write(data(), writeSheet);

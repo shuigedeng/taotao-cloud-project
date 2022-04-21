@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 店铺端,满额活动接口
  *
  * @since 2020/8/19
- **/
+ */
 @RestController
 @Tag(name = "店铺端,满额活动接口")
 @RequestMapping("/store/promotion/fullDiscount")

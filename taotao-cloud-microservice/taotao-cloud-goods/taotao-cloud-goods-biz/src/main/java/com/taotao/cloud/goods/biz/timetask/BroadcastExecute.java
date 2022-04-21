@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * 小程序直播状态获取
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @Component
 public class BroadcastExecute implements EveryHourExecute {

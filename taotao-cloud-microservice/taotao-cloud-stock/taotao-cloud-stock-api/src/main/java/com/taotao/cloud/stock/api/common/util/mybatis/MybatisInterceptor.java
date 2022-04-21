@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  *
  * @author shuigedeng
  * @date 2021-01-25
- **/
+ */
 @Slf4j
 @Component
 @Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }) })

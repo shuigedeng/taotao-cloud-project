@@ -27,7 +27,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 @Repository
 public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> implements UserRepository, IService<SysUserDO> {
 

@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.simple;
+package com.taotao.cloud.common.execl.temp.simple;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.easyexcel.test.temp.LockData;
+import com.taotao.cloud.common.execl.temp.LockData;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.read.metadata.ReadSheet;
@@ -18,8 +18,8 @@ import com.alibaba.fastjson.JSON;
 /**
  * 测试poi
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class RepeatTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(RepeatTest.class);

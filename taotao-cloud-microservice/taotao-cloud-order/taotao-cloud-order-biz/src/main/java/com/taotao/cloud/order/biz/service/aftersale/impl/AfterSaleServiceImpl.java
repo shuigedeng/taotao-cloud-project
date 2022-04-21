@@ -18,7 +18,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.dto.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
@@ -562,7 +562,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	 * 功能描述: 获取售后商品数量及已完成售后商品数量修改orderItem订单
 	 *
 	 * @param orderItem,afterSaleList
-	 **/
+	 */
 	private void updateOrderItemGoodsNumber(OrderItem orderItem, List<AfterSale> afterSaleList) {
 		//根据售后状态获取不是已结束的售后记录
 		List<AfterSale> implementList = afterSaleList.stream()
@@ -598,7 +598,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale
 	 * 功能描述:  修改orderItem订单
 	 *
 	 * @param orderItem 订单子项
-	 **/
+	 */
 	private void updateOrderItem(OrderItem orderItem) {
 		//订单状态不能为新订单,已失效订单或未申请订单才可以去修改订单信息
 		OrderItemAfterSaleStatusEnum afterSaleTypeEnum = OrderItemAfterSaleStatusEnum.valueOf(

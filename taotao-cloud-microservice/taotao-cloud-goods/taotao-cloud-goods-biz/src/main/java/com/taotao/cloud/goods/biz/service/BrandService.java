@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * 商品品牌业务层
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 public interface BrandService extends IService<Brand> {
 

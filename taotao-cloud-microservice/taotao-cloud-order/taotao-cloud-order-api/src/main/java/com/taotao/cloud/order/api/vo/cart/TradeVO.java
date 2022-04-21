@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * 整比交易对象
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
 @Builder

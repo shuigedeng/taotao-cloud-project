@@ -2,7 +2,7 @@ package com.taotao.cloud.stream.framework.rocketmq.tags;
 
 /**
  * 其他操作枚举
- **/
+ */
 public enum OtherTagsEnum {
     /**
      * 站内消息提醒

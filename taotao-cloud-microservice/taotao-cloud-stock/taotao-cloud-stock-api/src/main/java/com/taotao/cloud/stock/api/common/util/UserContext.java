@@ -4,7 +4,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * 用户ID存储器
- **/
+ */
 @UtilityClass
 public class UserContext {
 

@@ -5,25 +5,26 @@ import cn.hutool.http.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-
 import java.io.Serial;
+import java.util.Objects;
 
 /**
  * 文章DO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
-@Setter
 @Getter
+@Setter
+@ToString(callSuper = true)
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,33 +34,41 @@ import java.io.Serial;
 @org.hibernate.annotations.Table(appliesTo = Article.TABLE_NAME, comment = "文章表")
 public class Article extends BaseSuperEntity<Article, Long> {
 
-	public static final String TABLE_NAME = "li_article";
+	public static final String TABLE_NAME = "tt_article";
 
 	@Serial
 	private static final long serialVersionUID = 1L;
-
-	@Schema(description = "文章标题")
-	@NotEmpty(message = "文章标题不能为空")
-	@Length(max = 30, message = "文章标题不能超过30个字符")
+	/**
+	 * 文章标题
+	 */
+	@Column(name = "title", columnDefinition = "varchar(255) not null comment '文章标题 '")
 	private String title;
-
-	@Schema(description = "分类id")
-	@NotNull(message = "文章分类不能为空")
+	/**
+	 * 分类id
+	 */
+	@Column(name = "category_id", columnDefinition = "varchar(255) not null comment '分类id '")
 	private String categoryId;
-
-	@Schema(description = "文章排序")
-	private Integer sort;
-
-	@Schema(description = "文章内容")
-	@NotEmpty(message = "文章内容不能为空")
+	/**
+	 * 文章排序
+	 */
+	@Column(name = "sort_num", columnDefinition = "int not null comment '文章排序 '")
+	private Integer sortNum;
+	/**
+	 * 文章内容
+	 */
+	@Column(name = "content", columnDefinition = "varchar(255) not null comment '文章内容 '")
 	private String content;
-
-	@Schema(description = "状态")
+	/**
+	 * 状态
+	 */
+	@Column(name = "open_status", columnDefinition = "boolean not null comment '状态 '")
 	private Boolean openStatus;
 	/**
+	 * 业务类型
+	 *
 	 * @see ArticleEnum
 	 */
-	@Schema(description = "类型")
+	@Column(name = "type", columnDefinition = "varchar(255) not null comment '业务类型 '")
 	private String type;
 
 	public String getContent() {
@@ -69,4 +78,16 @@ public class Article extends BaseSuperEntity<Article, Long> {
 		return content;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Article article = (Article) o;
+		return getId() != null && Objects.equals(getId(), article.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

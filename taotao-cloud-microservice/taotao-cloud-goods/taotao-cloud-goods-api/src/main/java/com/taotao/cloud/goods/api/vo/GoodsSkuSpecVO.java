@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品规格VO
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 15:59:38
  */
 @Data
 @Builder

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 交易参数
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

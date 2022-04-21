@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.pinyin.util;
 
+import com.taotao.cloud.common.utils.pinyin.constant.enums.PinyinStyleEnum;
 import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
-import com.taotao.cloud.core.pinyin.constant.enums.PinyinStyleEnum;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +9,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 默认格式-中文测试
-     * @since 0.0.3
      */
     @Test
     public void toPinyinDefaultTest() {
@@ -19,7 +18,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 默认格式-中文测试
-     * @since 0.0.3
      */
     @Test
     public void toPinyinDefault2Test() {
@@ -29,7 +27,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 普通格式-中文
-     * @since 0.0.9
      */
     @Test
     public void toPinyinPhraseTest() {
@@ -40,7 +37,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 普通格式-中文测试
-     * @since 0.0.3
      */
     @Test
     public void toPinyinNormalTest() {
@@ -50,7 +46,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 普通格式-中文
-     * @since 0.0.9
      */
     @Test
     public void toPinyinPhraseNormalTest() {
@@ -60,7 +55,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 数字标注在最后格式-中文测试
-     * @since 0.0.3
      */
     @Test
     public void toPinyinNumLastTest() {
@@ -70,7 +64,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * num-last 格式-中文
-     * @since 0.0.9
      */
     @Test
     public void toPinyinPhraseNumLastTest() {
@@ -80,7 +73,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 首字母格式-中文测试
-     * @since 0.0.3
      */
     @Test
     public void toPinyinFirstLetterTest() {
@@ -90,7 +82,6 @@ public class PinyinHelperStyleTest {
 
     /**
      * 首字母格式-中文测试
-     * @since 0.0.9
      */
     @Test
     public void toPinyinPhraseFirstLetterTest() {

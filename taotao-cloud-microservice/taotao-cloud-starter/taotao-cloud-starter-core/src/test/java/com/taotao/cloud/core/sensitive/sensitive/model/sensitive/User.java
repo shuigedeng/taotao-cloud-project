@@ -8,11 +8,6 @@ import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyEma
 import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyPassword;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyPhone;
 
-/**
- * @author binbin.hou
- * date 2018/12/29
- * @since 0.0.1
- */
 public class User {
 
     @Sensitive(strategy = StrategyChineseName.class)

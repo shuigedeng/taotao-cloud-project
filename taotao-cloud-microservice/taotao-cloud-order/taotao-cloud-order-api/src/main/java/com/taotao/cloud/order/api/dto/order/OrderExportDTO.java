@@ -15,6 +15,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单导出DTO
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
 @Builder

@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 草稿商品业务层实现
- **/
+ */
 @AllArgsConstructor
 @Service
 public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGoods> implements

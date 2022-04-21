@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.fill.annotation;
+package com.taotao.cloud.common.execl.core.fill.annotation;
 
 import java.util.Date;
 
@@ -8,16 +8,7 @@ import com.alibaba.excel.annotation.format.NumberFormat;
 import com.alibaba.excel.annotation.write.style.ContentLoopMerge;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-/**
- * @author Jiaju Zhuang
- */
-@Getter
-@Setter
-@EqualsAndHashCode
 @ContentRowHeight(100)
 public class FillAnnotationData {
     @ExcelProperty("日期")

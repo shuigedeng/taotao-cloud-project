@@ -25,7 +25,6 @@ public class PinyinHelperDefineDictTest {
 
     /**
      * 自定义词典测试
-     * @since 0.0.7
      */
     @Test
     public void defineCharDictTest() {

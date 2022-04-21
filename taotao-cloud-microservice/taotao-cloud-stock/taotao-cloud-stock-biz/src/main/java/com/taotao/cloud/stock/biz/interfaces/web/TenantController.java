@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-02-24
- **/
+ */
 @Api(tags = "租户管理")
 @RestController
 @RequestMapping("/tenant")

@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 public class User implements Entity<User> {
 
     /**

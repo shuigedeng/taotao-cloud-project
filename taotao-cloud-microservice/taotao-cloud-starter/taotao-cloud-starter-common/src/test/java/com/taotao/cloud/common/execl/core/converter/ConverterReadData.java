@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.converter;
+package com.taotao.cloud.common.execl.core.converter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -8,16 +8,6 @@ import java.util.Date;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.data.ReadCellData;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-/**
- * @author Jiaju Zhuang
- */
-@Getter
-@Setter
-@EqualsAndHashCode
 public class ConverterReadData {
     @ExcelProperty("日期")
     private Date date;

@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 public class TenantRegisterService {
 
     private TenantRepository tenantRepository;

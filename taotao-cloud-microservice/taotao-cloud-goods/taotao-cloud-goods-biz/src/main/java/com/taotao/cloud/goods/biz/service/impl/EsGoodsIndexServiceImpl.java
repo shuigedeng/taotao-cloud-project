@@ -66,7 +66,7 @@ import java.util.stream.Collectors;
 
 /**
  * 商品索引业务层实现
- **/
+ */
 @Service
 public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	EsGoodsIndexService {

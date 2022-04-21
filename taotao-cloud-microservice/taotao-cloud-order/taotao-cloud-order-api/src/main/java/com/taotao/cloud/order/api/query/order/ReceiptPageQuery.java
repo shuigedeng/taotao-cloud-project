@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.dto.order;
+package com.taotao.cloud.order.api.query.order;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,13 +10,16 @@ import lombok.NoArgsConstructor;
 
 /**
  * 发票搜索参数
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "发票搜索参数")
-public class ReceiptSearchParams {
+public class ReceiptPageQuery {
 
 	@Schema(description = "发票抬头")
 	private String receiptTitle;

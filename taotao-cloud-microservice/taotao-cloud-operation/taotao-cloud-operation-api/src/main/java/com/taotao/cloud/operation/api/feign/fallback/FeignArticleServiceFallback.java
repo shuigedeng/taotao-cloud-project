@@ -15,26 +15,26 @@
  */
 package com.taotao.cloud.operation.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.operation.api.feign.RemoteWithdrawService;
-import com.taotao.cloud.operation.api.vo.WithdrawVO;
+import com.taotao.cloud.operation.api.feign.IFeignArticleService;
+import com.taotao.cloud.operation.api.vo.ArticleVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
- * RemoteLogFallbackImpl
+ * FeignArticleServiceFallback
  *
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class RemoteWithdrawFallbackImpl implements FallbackFactory<RemoteWithdrawService> {
+public class FeignArticleServiceFallback implements FallbackFactory<IFeignArticleService> {
 	@Override
-	public RemoteWithdrawService create(Throwable throwable) {
-		return new RemoteWithdrawService() {
+	public IFeignArticleService create(Throwable throwable) {
+		return new IFeignArticleService() {
 			@Override
-			public Result<WithdrawVO> getMemberSecurityUser(Long id) {
+			public Result<ArticleVO> getMemberSecurityUser(Long id) {
 				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-				return Result.failed(null, 500);
+				return Result.fail(null, 500);
 			}
 		};
 	}

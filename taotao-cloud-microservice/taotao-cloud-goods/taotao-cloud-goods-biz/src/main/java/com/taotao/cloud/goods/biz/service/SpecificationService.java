@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * 规格业务层
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 public interface SpecificationService extends IService<Specification> {
 

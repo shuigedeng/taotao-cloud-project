@@ -4,11 +4,6 @@ import cn.hutool.core.io.FileUtil;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 
-/**
- * @author 陈敏
- * @version StandardOssClientTest.java, v 1.1 2022/3/1 11:32 chenmin Exp $
- * Created on 2022/3/1
- */
 public interface StandardOssClientTest {
 
     default void upLoad() {

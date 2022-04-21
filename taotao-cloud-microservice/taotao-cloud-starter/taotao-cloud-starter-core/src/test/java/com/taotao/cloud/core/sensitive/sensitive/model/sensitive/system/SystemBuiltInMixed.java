@@ -7,9 +7,6 @@ import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyPas
 
 /**
  * 系统内置+Sensitive注解混合模式
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.3
  */
 public class SystemBuiltInMixed {
 

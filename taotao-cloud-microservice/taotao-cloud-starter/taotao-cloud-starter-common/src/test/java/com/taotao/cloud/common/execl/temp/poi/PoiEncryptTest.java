@@ -1,13 +1,13 @@
-package com.alibaba.easyexcel.test.temp.poi;
+package com.taotao.cloud.common.execl.temp.poi;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.easyexcel.test.core.encrypt.EncryptData;
-import com.alibaba.easyexcel.test.core.simple.SimpleData;
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.core.encrypt.EncryptData;
+import com.taotao.cloud.common.execl.core.simple.SimpleData;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 
 import org.apache.poi.poifs.crypt.EncryptionInfo;
@@ -23,7 +23,7 @@ import org.junit.Test;
 /**
  * TODO
  *
- * @author Jiaju Zhuang
+
  */
 @Ignore
 public class PoiEncryptTest {

@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.service.order;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
+import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
 
 /**
@@ -18,7 +18,7 @@ public interface ReceiptService extends IService<Receipt> {
 	 * @param pageVO       分页参数
 	 * @return 发票信息列表
 	 */
-	IPage<OrderReceiptDTO> getReceiptData(ReceiptSearchParams searchParams, PageVO pageVO);
+	IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery searchParams, PageVO pageVO);
 
 	/**
 	 * 根据订单编号获取发票信息

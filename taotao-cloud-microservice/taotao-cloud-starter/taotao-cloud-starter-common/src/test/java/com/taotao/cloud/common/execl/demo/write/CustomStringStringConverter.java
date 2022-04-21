@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.write;
+package com.taotao.cloud.common.execl.demo.write;
 
 import com.alibaba.excel.converters.Converter;
 import com.alibaba.excel.converters.ReadConverterContext;
@@ -9,7 +9,7 @@ import com.alibaba.excel.metadata.data.WriteCellData;
 /**
  * String and string converter
  *
- * @author Jiaju Zhuang
+
  */
 public class CustomStringStringConverter implements Converter<String> {
     @Override

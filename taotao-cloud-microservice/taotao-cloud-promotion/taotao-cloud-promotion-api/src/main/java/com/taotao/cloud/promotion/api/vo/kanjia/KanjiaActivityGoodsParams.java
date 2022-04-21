@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 砍价活动商品查询通用类
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

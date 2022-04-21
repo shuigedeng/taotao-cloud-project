@@ -3,24 +3,25 @@ package com.taotao.cloud.operation.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 /**
  * 文章分类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
-@Setter
 @Getter
+@Setter
+@ToString(callSuper = true)
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,37 +31,41 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = ArticleCategory.TABLE_NAME, comment = "文章分类表")
 public class ArticleCategory extends BaseSuperEntity<ArticleCategory, Long> {
 
-	public static final String TABLE_NAME = "li_article_category";
-
-	@Schema(description = "分类名称")
-	@NotEmpty(message = "分类名称不能为空")
+	public static final String TABLE_NAME = "tt_article_category";
+	/**
+	 * 分类名称
+	 */
+	@Column(name = "article_category_name", columnDefinition = "varchar(255) not null comment '分类名称 '")
 	private String articleCategoryName;
-
-	@Schema(description = "父分类ID")
+	/**
+	 * 父分类ID
+	 */
+	@Column(name = "parent_id", columnDefinition = "varchar(255) not null comment '父分类ID '")
 	private String parentId;
-
-	@Schema(description = "排序")
-	@Min(value = 0, message = "排序值最小0，最大9999999999")
-	@Max(value = 999999999, message = "排序值最小0，最大9999999999")
-	@NotNull(message = "排序值不能为空")
-	private Integer sort;
-
-	@Schema(description = "层级")
-	@Min(value = 0, message = "层级最小为0")
-	@Max(value = 3, message = "层级最大为3")
+	/**
+	 * 排序
+	 */
+	@Column(name = "sort_num", columnDefinition = "int not null comment '排序 '")
+	private Integer sortNum;
+	/**
+	 * 层级 层级最小为0 层级最大为3
+	 */
+	@Column(name = "level", columnDefinition = "int not null comment '层级 层级最小为0 层级最大为3'")
 	private Integer level;
 
 	/**
+	 * 业务类型
+	 *
 	 * @see ArticleCategoryEnum
 	 */
-	@Schema(description = "类型")
+	@Column(name = "biz_type", columnDefinition = "varchar(255) not null comment '业务类型 '")
 	private String type;
 
 	public Integer getSort() {
-		if (sort == null) {
+		if (sortNum == null) {
 			return 0;
 		}
-		return sort;
+		return sortNum;
 	}
 
 	public Integer getLevel() {
@@ -68,5 +73,18 @@ public class ArticleCategory extends BaseSuperEntity<ArticleCategory, Long> {
 			return 1;
 		}
 		return level;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		ArticleCategory that = (ArticleCategory) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 }

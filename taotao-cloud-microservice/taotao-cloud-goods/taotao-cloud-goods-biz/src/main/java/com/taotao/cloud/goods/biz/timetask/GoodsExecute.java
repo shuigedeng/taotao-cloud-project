@@ -12,6 +12,9 @@ import java.util.Map;
 
 /**
  * 商品定时器
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @Component
 public class GoodsExecute implements EveryDayExecute {

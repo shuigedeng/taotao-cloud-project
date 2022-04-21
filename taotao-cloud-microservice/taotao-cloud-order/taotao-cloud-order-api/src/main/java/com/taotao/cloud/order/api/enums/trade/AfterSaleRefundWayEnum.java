@@ -2,7 +2,7 @@ package com.taotao.cloud.order.api.enums.trade;
 
 /**
  * 退款方式
- **/
+ */
 public enum AfterSaleRefundWayEnum {
 
 	/**

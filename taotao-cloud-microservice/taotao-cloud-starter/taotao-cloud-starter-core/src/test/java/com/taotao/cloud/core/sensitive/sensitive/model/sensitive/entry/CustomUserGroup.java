@@ -10,11 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author dev-sxl
- * date 2020-09-14
- * @since 0.0.12
- */
 public class CustomUserGroup {
 
     /**
@@ -46,7 +41,6 @@ public class CustomUserGroup {
      * SensitiveEntry 注解不会生效
      *
      * 后续考虑添加 map 的支持
-     * @since 0.0.12
      */
 //    @SensitiveEntryCustom
     private Map<String, User> userMap;

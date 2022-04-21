@@ -10,7 +10,7 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-store:taotao-cloud-store-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-promotion:taotao-cloud-promotion-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-stock:taotao-cloud-stock-api')
+    //implementation project(':taotao-cloud-microservice:taotao-cloud-stock:taotao-cloud-stock-api')
 
     implementation "org.springframework.amqp:spring-amqp:2.3.10"
     implementation('io.github.majusko:pulsar-java-spring-boot-starter:1.0.7'){

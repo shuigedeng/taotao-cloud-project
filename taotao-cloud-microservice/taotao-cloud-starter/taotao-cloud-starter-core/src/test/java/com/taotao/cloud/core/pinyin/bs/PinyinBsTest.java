@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.pinyin.bs;
 
 import com.taotao.cloud.common.utils.pinyin.bs.PinyinBs;
-import com.taotao.cloud.core.pinyin.support.style.PinyinToneStyles;
+import com.taotao.cloud.common.utils.pinyin.support.style.PinyinToneStyles;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +10,6 @@ public class PinyinBsTest {
 
     /**
      * 拼音转换测试
-     * @since 0.0.1
      */
     @Test
     public void toPinyinTest() {
@@ -26,7 +25,6 @@ public class PinyinBsTest {
 
     /**
      * 返回多音字列表测试
-     * @since 0.0.2
      */
     @Test
     public void toPinyinListTest() {
@@ -38,7 +36,6 @@ public class PinyinBsTest {
 
     /**
      * 普通格式
-     * @since 0.0.3
      */
     @Test
     public void normalStyleTest() {
@@ -52,7 +49,6 @@ public class PinyinBsTest {
 
     /**
      * 首字母格式
-     * @since 0.0.3
      */
     @Test
     public void firstLetterStyleTest() {

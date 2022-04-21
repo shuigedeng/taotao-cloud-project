@@ -2,6 +2,8 @@ package com.taotao.cloud.order.api.dto.aftersale;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "商城退款流水")
 public class AfterSalePriceDetailDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "商品总金额（商品原价）")

@@ -7,16 +7,21 @@ import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * 订单详情VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
 @Builder
@@ -31,7 +36,7 @@ public class OrderDetailVO implements Serializable {
 	/**
 	 * 订单
 	 */
-	private Order order;
+	private OrderSimpleVO order;
 
 	/**
 	 * 子订单信息
@@ -66,23 +71,23 @@ public class OrderDetailVO implements Serializable {
 	/**
 	 * 发票
 	 */
-	private Receipt receipt;
+	private ReceiptVO receipt;
 
 	/**
 	 * 获取订单日志
 	 */
-	private List<OrderLog> orderLogs;
+	private List<OrderLogVO> orderLogs;
 
 	@Schema(description = "价格详情")
 	private String priceDetail;
 
-	public OrderDetailVO(Order order, List<OrderItem> orderItems, List<OrderLog> orderLogs,
-		Receipt receipt) {
-		this.order = order;
-		this.orderItems = orderItems;
-		this.orderLogs = orderLogs;
-		this.receipt = receipt;
-	}
+//	public OrderDetailVO(Order order, List<OrderItem> orderItems, List<OrderLog> orderLogs,
+//						 Receipt receipt) {
+//		this.order = order;
+//		this.orderItems = orderItems;
+//		this.orderLogs = orderLogs;
+//		this.receipt = receipt;
+//	}
 
 	/**
 	 * 可操作类型

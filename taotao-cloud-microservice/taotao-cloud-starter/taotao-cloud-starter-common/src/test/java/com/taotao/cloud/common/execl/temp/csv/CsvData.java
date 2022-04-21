@@ -1,22 +1,18 @@
-package com.alibaba.easyexcel.test.temp.csv;
+package com.taotao.cloud.common.execl.temp.csv;
 
 import java.util.Date;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * TODO
  *
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class CsvData {
     @ExcelProperty("字符串标题")
     private String string;

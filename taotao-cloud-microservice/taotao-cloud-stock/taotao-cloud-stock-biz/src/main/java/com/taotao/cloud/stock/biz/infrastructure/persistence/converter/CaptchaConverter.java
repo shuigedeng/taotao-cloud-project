@@ -10,7 +10,7 @@ import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysCaptchaDO;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 public class CaptchaConverter {
 
     public static SysCaptchaDO fromCaptcha(Captcha captcha) {

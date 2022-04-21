@@ -1,19 +1,15 @@
-package com.alibaba.easyexcel.test.core.style;
+package com.taotao.cloud.common.execl.core.style;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.HeadFontStyle;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 @HeadStyle
 @HeadFontStyle
 public class StyleData {

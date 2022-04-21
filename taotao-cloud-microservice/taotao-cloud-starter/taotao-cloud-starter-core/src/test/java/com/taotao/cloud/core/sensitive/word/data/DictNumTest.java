@@ -8,8 +8,6 @@ import java.util.List;
 
 /**
  * 数据数据的格式统一化
- * @author binbin.hou
- * @since 0.0.5
  */
 @Ignore
 public class DictNumTest {
@@ -21,7 +19,6 @@ public class DictNumTest {
      * 2. 将所有的全角转换为半角
      * 3. 移除所有【空格】【符号】(这个就是各种符号的过滤了)
      * 4. 繁体字统一转换为简体字
-     * @since 0.0.3
      */
     @Test
     @Ignore

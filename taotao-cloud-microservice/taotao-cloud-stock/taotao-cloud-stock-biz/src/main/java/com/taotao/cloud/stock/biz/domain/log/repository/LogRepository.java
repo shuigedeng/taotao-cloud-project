@@ -8,7 +8,7 @@ import com.taotao.cloud.stock.biz.domain.log.model.entity.Log;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 public interface LogRepository {
 
     /**

@@ -25,7 +25,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 优惠券查询通用类
- **/
+ */
 @Setter
 @Getter
 @SuperBuilder

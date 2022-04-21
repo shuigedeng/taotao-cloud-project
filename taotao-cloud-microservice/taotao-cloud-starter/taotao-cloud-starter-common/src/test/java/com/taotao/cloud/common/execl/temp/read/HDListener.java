@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.read;
+package com.taotao.cloud.common.execl.temp.read;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 /**
  * 模板的读取类
  *
- * @author Jiaju Zhuang
+
  */
 public class HDListener extends AnalysisEventListener<HeadReadData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(HDListener.class);

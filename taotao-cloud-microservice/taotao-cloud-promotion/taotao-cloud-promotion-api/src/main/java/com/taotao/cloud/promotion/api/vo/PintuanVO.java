@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * 拼团视图对象
- **/
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder

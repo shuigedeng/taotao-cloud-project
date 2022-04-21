@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author shuigedeng
  * @date 2021-02-17
- **/
+ */
 public class PermissionDTOAssembler {
 
     public static PermissionDTO fromPermission(final Permission permission) {

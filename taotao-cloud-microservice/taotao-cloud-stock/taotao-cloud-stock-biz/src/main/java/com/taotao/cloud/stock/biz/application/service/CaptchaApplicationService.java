@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
  *
  * @author shuigedeng
  * @date 2021-06-23
- **/
+ */
 public interface CaptchaApplicationService {
 
     /**

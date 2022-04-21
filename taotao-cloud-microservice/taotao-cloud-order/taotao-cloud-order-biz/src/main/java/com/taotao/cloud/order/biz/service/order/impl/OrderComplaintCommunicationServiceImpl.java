@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 交易投诉通信业务层实现
- **/
+ */
 @AllArgsConstructor
 @Service
 public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<OrderComplainCommunicationMapper, OrderComplaintCommunication> implements

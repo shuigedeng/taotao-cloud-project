@@ -9,7 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单支付日志：实际为订单部分字段提取过来的一个vo")
-public class PaymentLog implements Serializable {
+public class PaymentLogVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -6293102172184734928L;

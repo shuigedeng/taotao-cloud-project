@@ -13,24 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.api.vo;
+package com.taotao.cloud.payment.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
+ * 支付流水信息VO
+ *
  * @author shuigedeng
- * @since 2020/11/20 上午9:42
  * @version 2022.03
+ * @since 2020/11/20 上午9:42
  */
 @Data
 @Builder
@@ -38,35 +40,36 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "支付流水信息VO")
 public class PayFlowVO implements Serializable {
+	@Serial
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@Schema(description =  "id")
+	@Schema(description = "id")
 	private Long id;
 
-	@Schema(description =  "支付流水号")
+	@Schema(description = "支付流水号")
 	private String code;
 
-	@Schema(description =  "订单号")
+	@Schema(description = "订单号")
 	private String orderCode;
 
-	@Schema(description =  "商品id")
+	@Schema(description = "商品id")
 	private Long productId;
 
-	@Schema(description =  "支付金额")
+	@Schema(description = "支付金额")
 	private BigDecimal paidAmount;
 
-	@Schema(description =  "支付方式")
+	@Schema(description = "支付方式")
 	private Integer paidMethod;
 
-	@Schema(description =  "购买个数")
+	@Schema(description = "购买个数")
 	private Integer buyCount;
 
-	@Schema(description =  "支付时间")
+	@Schema(description = "支付时间")
 	private LocalDateTime payTime;
 
-	@Schema(description =  "创建时间")
+	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
 
-	@Schema(description =  "最后修改时间")
+	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
 }

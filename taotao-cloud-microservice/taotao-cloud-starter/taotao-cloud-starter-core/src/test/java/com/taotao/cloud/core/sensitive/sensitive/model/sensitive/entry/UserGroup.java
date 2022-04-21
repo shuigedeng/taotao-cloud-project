@@ -10,11 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author binbin.hou
- * date 2019/1/9
- * @since 0.0.2
- */
 public class UserGroup {
 
     /**

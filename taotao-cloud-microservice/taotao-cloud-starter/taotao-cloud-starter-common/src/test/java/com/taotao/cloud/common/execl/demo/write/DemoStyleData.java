@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.write;
+package com.taotao.cloud.common.execl.demo.write;
 
 import java.util.Date;
 
@@ -9,18 +9,14 @@ import com.alibaba.excel.annotation.write.style.HeadFontStyle;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
 import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * 样式的数据类
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 // 头背景设置成红色 IndexedColors.RED.getIndex()
 @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 10)
 // 头字体设置成20

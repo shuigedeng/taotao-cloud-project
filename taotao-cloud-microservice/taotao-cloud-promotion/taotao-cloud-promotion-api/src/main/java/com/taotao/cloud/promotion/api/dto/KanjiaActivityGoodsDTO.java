@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动商品DTO
- **/
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder

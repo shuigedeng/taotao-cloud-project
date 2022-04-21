@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-02-04
- **/
+ */
 @Api(tags = "日志管理")
 @RestController
 @RequestMapping("/log")

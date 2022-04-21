@@ -1,12 +1,11 @@
 package com.taotao.cloud.order.biz.service.aftersale.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.api.dto.aftersale.AfterSaleReasonPageQuery;
+import com.taotao.cloud.order.api.query.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleReasonMapper;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;

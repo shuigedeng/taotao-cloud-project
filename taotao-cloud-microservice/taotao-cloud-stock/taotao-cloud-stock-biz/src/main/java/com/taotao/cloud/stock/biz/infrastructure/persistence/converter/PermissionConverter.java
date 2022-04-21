@@ -13,7 +13,7 @@ import java.util.*;
  *
  * @author shuigedeng
  * @date 2021-02-16
- **/
+ */
 public class PermissionConverter {
 
     public static Permission toPermission(SysPermissionDO sysPermissionDO, SysPermissionDO parentPermissionDO, List<SysPermissionDO> subPermissionDOList) {

@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 @Data
 @TableName("sys_captcha")
 public class SysCaptchaDO {

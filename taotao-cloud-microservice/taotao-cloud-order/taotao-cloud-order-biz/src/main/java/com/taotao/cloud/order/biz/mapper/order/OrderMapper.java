@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
-import com.taotao.cloud.order.api.vo.order.PaymentLog;
+import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -51,8 +51,8 @@ public interface OrderMapper extends BaseMapper<Order> {
 	 * @return 订单支付记录分页
 	 */
 	@Select("select * from li_order ${ew.customSqlSegment} ")
-	IPage<PaymentLog> queryPaymentLogs(IPage<PaymentLog> page,
-		@Param(Constants.WRAPPER) Wrapper<PaymentLog> queryWrapper);
+	IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page,
+                                         @Param(Constants.WRAPPER) Wrapper<PaymentLogVO> queryWrapper);
 
 	/**
 	 * 查询订单简短信息分页

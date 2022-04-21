@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public class PermissionName implements ValueObject<PermissionName> {
 
     private String name;

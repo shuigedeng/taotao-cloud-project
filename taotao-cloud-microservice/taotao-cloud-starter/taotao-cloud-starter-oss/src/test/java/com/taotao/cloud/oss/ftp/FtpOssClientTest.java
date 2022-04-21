@@ -1,8 +1,7 @@
 package com.taotao.cloud.oss.ftp;
 
 import com.taotao.cloud.oss.artislong.core.ftp.FtpOssConfiguration;
-import io.github.artislong.core.StandardOssClient;
-import io.github.artislong.core.StandardOssClientTest;
+
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

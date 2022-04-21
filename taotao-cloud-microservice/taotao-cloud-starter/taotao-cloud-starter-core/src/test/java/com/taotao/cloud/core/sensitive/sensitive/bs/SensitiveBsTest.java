@@ -1,16 +1,12 @@
 package com.taotao.cloud.core.sensitive.sensitive.bs;
 
-import com.taotao.cloud.core.heaven.deepcopy.FastJsonDeepCopy;
+import com.taotao.cloud.common.support.deepcopy.FastJsonDeepCopy;
 import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.bs.SensitiveBs;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.User;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @author binbin.hou
- * @since 0.0.9
- */
 public class SensitiveBsTest {
 
     @Test

@@ -9,9 +9,6 @@ import java.util.List;
 
 /**
  * 属性为列表，列表中放置的为基础属性
- * @author binbin.hou
- * date 2019/1/9
- * @since 0.0.2
  */
 public class UserEntryBaseType {
 

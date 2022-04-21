@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.write;
+package com.taotao.cloud.common.execl.demo.write;
 
 import java.util.Date;
 
@@ -6,18 +6,14 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.format.NumberFormat;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * 基础数据类.这里的排序和excel里面的排序一致
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 public class ConverterData {
     /**
      * 我想所有的 字符串起前面加上"自定义："三个字

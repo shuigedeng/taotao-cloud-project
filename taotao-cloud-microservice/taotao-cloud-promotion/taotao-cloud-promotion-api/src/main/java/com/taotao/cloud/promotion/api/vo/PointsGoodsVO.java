@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 积分商品视图对象
- **/
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder

@@ -7,7 +7,7 @@ import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 
 /**
  * 订单投诉通信业务层
- **/
+ */
 public interface OrderComplaintCommunicationService extends IService<OrderComplaintCommunication> {
 
 	/**

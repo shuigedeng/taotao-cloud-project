@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 店铺端,优惠券接口
  *
  * @since 2020/8/28
- **/
+ */
 @RestController
 @Tag(name = "店铺端,优惠券接口")
 @RequestMapping("/store/promotion/coupon")

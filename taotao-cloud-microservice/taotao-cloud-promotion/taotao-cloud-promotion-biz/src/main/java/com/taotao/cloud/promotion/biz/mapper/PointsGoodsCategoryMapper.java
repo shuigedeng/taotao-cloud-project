@@ -8,7 +8,7 @@ import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory;
  *
  * 
  * @since 2020/8/21
- **/
+ */
 public interface PointsGoodsCategoryMapper extends BaseMapper<PointsGoodsCategory> {
 
 }

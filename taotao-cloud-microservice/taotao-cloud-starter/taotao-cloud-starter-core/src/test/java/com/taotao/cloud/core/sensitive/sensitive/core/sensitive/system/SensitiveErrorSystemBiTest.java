@@ -7,9 +7,6 @@ import org.junit.Test;
 
 /**
  * 错误的使用系统内置类测试
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.3
  */
 public class SensitiveErrorSystemBiTest {
 
@@ -28,7 +25,6 @@ public class SensitiveErrorSystemBiTest {
 
     /**
      * 错误的使用系统的内置类JSON
-     * @since 0.0.6
      */
     @Test
     public void errorSystemBuiltInJsonTest() {

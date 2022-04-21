@@ -10,9 +10,6 @@ import java.util.List;
 /**
  * 属性为列表，列表中放置的为基础属性
  *
- * @author dev-sxl
- * date 2020-09-14
- * @since 0.0.11
  */
 public class CustomUserEntryBaseType {
 

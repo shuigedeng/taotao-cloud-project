@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 管理端,秒杀活动接口
  *
  * @since 2020/8/20
- **/
+ */
 @RestController
 @Tag(name = "管理端,秒杀活动接口")
 @RequestMapping("/manager/promotion/seckill")

@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.poi;
+package com.taotao.cloud.common.execl.temp.poi;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +15,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 
 /**
  * 测试poi
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class PoiFormatTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(PoiFormatTest.class);

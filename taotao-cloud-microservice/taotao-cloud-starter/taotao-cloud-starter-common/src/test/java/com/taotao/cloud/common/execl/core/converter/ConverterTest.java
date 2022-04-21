@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.converter;
+package com.taotao.cloud.common.execl.core.converter;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
- * @author Jiaju Zhuang
+
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConverterTest {

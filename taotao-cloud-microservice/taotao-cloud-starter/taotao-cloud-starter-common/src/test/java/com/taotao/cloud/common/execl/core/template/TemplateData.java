@@ -1,17 +1,13 @@
-package com.alibaba.easyexcel.test.core.template;
+package com.taotao.cloud.common.execl.core.template;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class TemplateData {
     @ExcelProperty("字符串0")
     private String string0;

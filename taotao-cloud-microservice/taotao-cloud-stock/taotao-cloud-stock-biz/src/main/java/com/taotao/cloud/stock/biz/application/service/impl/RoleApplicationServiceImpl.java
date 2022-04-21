@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-18
- **/
+ */
 @Service
 public class RoleApplicationServiceImpl implements RoleApplicationService {
 

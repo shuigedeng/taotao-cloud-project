@@ -7,11 +7,6 @@ import com.taotao.cloud.core.sensitive.word.support.allow.WordAllows;
 import com.taotao.cloud.core.sensitive.word.support.deny.WordDenys;
 import org.junit.Assert;
 import org.junit.Test;
-
-/**
- * @author binbin.hou
- * @since 1.0.0
- */
 public class SensitiveWordBsDefineTest {
 
     @Test

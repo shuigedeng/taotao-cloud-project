@@ -1,15 +1,11 @@
-package com.alibaba.easyexcel.test.core.multiplesheets;
+package com.taotao.cloud.common.execl.core.multiplesheets;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class MultipleSheetsData {
     private String title;
 }

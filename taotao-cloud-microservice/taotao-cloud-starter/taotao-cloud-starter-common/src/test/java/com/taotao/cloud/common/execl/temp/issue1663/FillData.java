@@ -1,12 +1,8 @@
-package com.alibaba.easyexcel.test.temp.issue1663;
+package com.taotao.cloud.common.execl.temp.issue1663;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+
+com.taotao.cloud.common.execl
 public class FillData {
     private String name;
     private double number;

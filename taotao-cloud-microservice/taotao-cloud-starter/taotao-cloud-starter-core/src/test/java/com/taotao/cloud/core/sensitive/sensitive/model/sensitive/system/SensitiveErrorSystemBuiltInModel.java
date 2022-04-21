@@ -5,9 +5,6 @@ import com.taotao.cloud.core.sensitive.sensitive.annotation.SensitiveErrorSystem
 
 /**
  * 模拟错误的注解使用
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.03
  */
 public class SensitiveErrorSystemBuiltInModel {
 

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 充值订单自动取消（每分钟执行）
- **/
+ */
 @Component
 public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 

@@ -1,11 +1,10 @@
 package com.taotao.cloud.order.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
-import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -20,7 +19,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,8 +52,8 @@ public class OrderController {
 	@RequestLogger("查询订单列表分页")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
-		return Result.success(orderService.queryByParams(orderSearchParams));
+	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
+		return Result.success(orderService.queryByParams(orderPageQuery));
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
@@ -63,8 +61,8 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
 	public Result<List<OrderExportDTO>> queryExportOrder(
-		OrderSearchParams orderSearchParams) {
-		return Result.success(orderService.queryExportOrder(orderSearchParams));
+		OrderPageQuery orderPageQuery) {
+		return Result.success(orderService.queryExportOrder(orderPageQuery));
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")

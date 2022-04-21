@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-19
- **/
+ */
 public class RoleConverter {
 
     public static Role toRole(SysRoleDO sysRoleDO, List<SysPermissionDO> sysPermissionDOList) {

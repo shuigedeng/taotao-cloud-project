@@ -2,7 +2,7 @@ package com.taotao.cloud.order.api.enums.cart;
 
 /**
  * 配送方式
- **/
+ */
 public enum DeliveryMethodEnum {
 
 	/**

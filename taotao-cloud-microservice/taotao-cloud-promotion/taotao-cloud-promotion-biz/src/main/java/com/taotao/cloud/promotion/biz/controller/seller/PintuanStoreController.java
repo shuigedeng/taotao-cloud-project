@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 店铺端,拼团管理接口
  *
  * @since 2020/10/9
- **/
+ */
 @RestController
 @Tag(name = "店铺端,拼团管理接口")
 @RequestMapping("/store/promotion/pintuan")

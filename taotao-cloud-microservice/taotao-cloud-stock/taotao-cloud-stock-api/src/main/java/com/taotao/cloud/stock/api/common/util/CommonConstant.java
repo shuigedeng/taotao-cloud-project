@@ -2,7 +2,7 @@ package com.taotao.cloud.stock.api.common.util;
 
 /**
  * 公共常量
- **/
+ */
 public interface CommonConstant {
 
     /**

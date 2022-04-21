@@ -53,7 +53,7 @@ import java.util.*;
 
 /**
  * ES商品搜索业务层实现
- **/
+ */
 @Service
 public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 

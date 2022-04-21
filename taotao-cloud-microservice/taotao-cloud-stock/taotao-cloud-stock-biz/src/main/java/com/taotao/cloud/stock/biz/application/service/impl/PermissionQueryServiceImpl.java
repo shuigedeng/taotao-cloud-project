@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 @Service
 public class PermissionQueryServiceImpl implements PermissionQueryService {
 

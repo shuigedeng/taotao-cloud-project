@@ -14,7 +14,7 @@ import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -38,7 +38,7 @@ import java.util.Objects;
 
 /**
  * 交易投诉业务层实现
- **/
+ */
 @AllArgsConstructor
 @Service
 public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper, OrderComplaint> implements

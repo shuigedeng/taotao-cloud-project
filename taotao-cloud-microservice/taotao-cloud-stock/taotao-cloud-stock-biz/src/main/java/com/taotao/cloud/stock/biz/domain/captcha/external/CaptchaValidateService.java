@@ -10,7 +10,7 @@ import com.xtoon.cloud.sys.domain.model.captcha.Uuid;
  *
  * @author shuigedeng
  * @date 2021-05-11
- **/
+ */
 public class CaptchaValidateService {
 
     private CaptchaRepository captchaRepository;

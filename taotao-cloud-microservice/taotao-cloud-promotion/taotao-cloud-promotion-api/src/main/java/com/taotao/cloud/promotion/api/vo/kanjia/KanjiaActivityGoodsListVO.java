@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 砍价商品视图对象
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

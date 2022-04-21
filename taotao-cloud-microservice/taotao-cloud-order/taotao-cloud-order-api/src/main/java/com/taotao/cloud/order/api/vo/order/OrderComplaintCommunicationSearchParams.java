@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 订单投诉搜索参数
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -30,21 +33,21 @@ public class OrderComplaintCommunicationSearchParams {
 	@Schema(description = "对话所属id,卖家id/买家id")
 	private String ownerId;
 
-	public LambdaQueryWrapper<OrderComplaintCommunication> lambdaQueryWrapper() {
-		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
-		if (StrUtil.isNotEmpty(complainId)) {
-			queryWrapper.eq(OrderComplaintCommunication::getComplainId, complainId);
-		}
-		if (StrUtil.isNotEmpty(owner)) {
-			queryWrapper.eq(OrderComplaintCommunication::getOwner, owner);
-		}
-		if (StrUtil.isNotEmpty(ownerName)) {
-			queryWrapper.eq(OrderComplaintCommunication::getOwnerName, ownerName);
-		}
-		if (StrUtil.isNotEmpty(ownerId)) {
-			queryWrapper.eq(OrderComplaintCommunication::getOwnerId, ownerId);
-		}
-		return queryWrapper;
-	}
+//	public LambdaQueryWrapper<OrderComplaintCommunication> lambdaQueryWrapper() {
+//		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
+//		if (StrUtil.isNotEmpty(complainId)) {
+//			queryWrapper.eq(OrderComplaintCommunication::getComplainId, complainId);
+//		}
+//		if (StrUtil.isNotEmpty(owner)) {
+//			queryWrapper.eq(OrderComplaintCommunication::getOwner, owner);
+//		}
+//		if (StrUtil.isNotEmpty(ownerName)) {
+//			queryWrapper.eq(OrderComplaintCommunication::getOwnerName, ownerName);
+//		}
+//		if (StrUtil.isNotEmpty(ownerId)) {
+//			queryWrapper.eq(OrderComplaintCommunication::getOwnerId, ownerId);
+//		}
+//		return queryWrapper;
+//	}
 
 }

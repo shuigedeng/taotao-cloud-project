@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.parameter;
+package com.taotao.cloud.common.execl.core.parameter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
 
 /**
- * @author Jiaju Zhuang
+
  */
 public class ParameterDataListener extends AnalysisEventListener<ParameterData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterDataListener.class);

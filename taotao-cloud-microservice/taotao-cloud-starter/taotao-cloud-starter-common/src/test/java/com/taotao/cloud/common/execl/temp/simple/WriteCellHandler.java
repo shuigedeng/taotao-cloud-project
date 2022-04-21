@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.simple;
+package com.taotao.cloud.common.execl.temp.simple;
 
 import com.alibaba.excel.metadata.Head;
 import com.alibaba.excel.metadata.data.WriteCellData;
@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
 /**
- * @author Jiaju Zhuang
+
  */
 @Slf4j
 public class WriteCellHandler implements CellWriteHandler {

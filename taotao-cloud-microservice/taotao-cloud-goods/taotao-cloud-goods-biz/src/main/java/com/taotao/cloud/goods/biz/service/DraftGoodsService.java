@@ -9,7 +9,10 @@ import com.taotao.cloud.goods.biz.entity.DraftGoods;
 
 /**
  * 草稿商品业务层
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
+ */
 public interface DraftGoodsService extends IService<DraftGoods> {
 
 	/**

@@ -14,7 +14,6 @@
  */
 package com.taotao.cloud.common.myexecl.controller;
 
-import com.github.liaochong.example.pojo.ArtCrowd;
 import com.github.liaochong.myexcel.core.DefaultExcelReader;
 import com.taotao.cloud.common.myexecl.pojo.ArtCrowd;
 import org.springframework.web.bind.annotation.GetMapping;

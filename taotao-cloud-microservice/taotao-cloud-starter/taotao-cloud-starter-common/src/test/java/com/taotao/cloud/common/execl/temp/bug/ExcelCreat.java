@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.bug;
+package com.taotao.cloud.common.execl.temp.bug;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
@@ -9,11 +9,6 @@ import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author jiaosong
- * @desc
- * @date 2020/4/6
- */
 public class ExcelCreat {
 
 

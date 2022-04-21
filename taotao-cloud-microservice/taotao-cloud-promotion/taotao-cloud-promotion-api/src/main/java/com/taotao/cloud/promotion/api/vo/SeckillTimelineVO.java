@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 秒杀活动时刻视图对象
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

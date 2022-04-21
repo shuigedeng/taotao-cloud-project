@@ -28,7 +28,7 @@ import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderBatchDeliverDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
-import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -40,7 +40,7 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
-import com.taotao.cloud.order.api.vo.order.PaymentLog;
+import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
@@ -184,16 +184,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	}
 
 	@Override
-	public IPage<OrderSimpleVO> queryByParams(OrderSearchParams orderSearchParams) {
-		QueryWrapper queryWrapper = orderSearchParams.queryWrapper();
+	public IPage<OrderSimpleVO> queryByParams(OrderPageQuery orderPageQuery) {
+		QueryWrapper queryWrapper = orderPageQuery.queryWrapper();
 		queryWrapper.groupBy("o.id");
 		queryWrapper.orderByDesc("o.id");
-		return this.baseMapper.queryByParams(PageUtil.initPage(orderSearchParams), queryWrapper);
+		return this.baseMapper.queryByParams(PageUtil.initPage(orderPageQuery), queryWrapper);
 	}
 
 	@Override
-	public List<Order> queryListByParams(OrderSearchParams orderSearchParams) {
-		return this.baseMapper.queryListByParams(orderSearchParams.queryWrapper());
+	public List<Order> queryListByParams(OrderPageQuery orderPageQuery) {
+		return this.baseMapper.queryListByParams(orderPageQuery.queryWrapper());
 	}
 
 	@Override
@@ -231,8 +231,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	}
 
 	@Override
-	public List<OrderExportDTO> queryExportOrder(OrderSearchParams orderSearchParams) {
-		return this.baseMapper.queryExportOrder(orderSearchParams.queryWrapper());
+	public List<OrderExportDTO> queryExportOrder(OrderPageQuery orderPageQuery) {
+		return this.baseMapper.queryExportOrder(orderPageQuery.queryWrapper());
 	}
 
 	@Override
@@ -623,8 +623,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	}
 
 	@Override
-	public IPage<PaymentLog> queryPaymentLogs(IPage<PaymentLog> page,
-		Wrapper<PaymentLog> queryWrapper) {
+	public IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page,
+                                                Wrapper<PaymentLogVO> queryWrapper) {
 		return baseMapper.queryPaymentLogs(page, queryWrapper);
 	}
 

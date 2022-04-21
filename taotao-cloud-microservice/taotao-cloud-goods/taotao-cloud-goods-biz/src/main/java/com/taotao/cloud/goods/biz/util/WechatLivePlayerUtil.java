@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * 微信小程序直播工具类
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @Component
 public class WechatLivePlayerUtil {

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 @Repository
 public class LogRepositoryImpl extends ServiceImpl<SysLogMapper, SysLogDO> implements LogRepository, IService<SysLogDO> {
 

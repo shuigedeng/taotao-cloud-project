@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  *
  * @author shuigedeng
  * @date 2021-01-23
- **/
+ */
 @Component
 public class RedisUtils {
     @Autowired

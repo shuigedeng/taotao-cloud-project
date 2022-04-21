@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 测试（每分钟执行）
- **/
+ */
 @Component
 public class TestExecute implements EveryMinuteExecute {
 

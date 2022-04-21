@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp;
+package com.taotao.cloud.common.execl.temp;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,8 +33,8 @@ import com.alibaba.fastjson.JSON;
 /**
  * 临时测试
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class StyleTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(StyleTest.class);

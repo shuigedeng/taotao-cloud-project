@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 会员消息
- **/
+ */
 @Component
 @RocketMQMessageListener(topic = "${taotao.data.rocketmq.member-topic}", consumerGroup = "${taotao.data.rocketmq.member-group}")
 public class MemberMessageListener implements RocketMQListener<MessageExt> {

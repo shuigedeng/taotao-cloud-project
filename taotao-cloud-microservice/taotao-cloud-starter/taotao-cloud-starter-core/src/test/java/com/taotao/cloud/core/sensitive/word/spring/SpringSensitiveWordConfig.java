@@ -5,11 +5,6 @@
 //import com.taotao.cloud.core.sensitive.word.spring.database.MyDdWordAllow;
 //import com.taotao.cloud.core.sensitive.word.spring.database.MyDdWordDeny;
 //import com.taotao.cloud.core.sensitive.word.support.allow.WordAllows;
-//
-///**
-// * @author binbin.hou
-// * @since 1.0.0
-// */
 //@Configuration
 //public class SpringSensitiveWordConfig {
 //
@@ -22,7 +17,6 @@
 //    /**
 //     * 初始化引导类
 //     * @return 初始化引导类
-//     * @since 1.0.0
 //     */
 //    @Bean
 //    public SensitiveWordBs sensitiveWordBs() {

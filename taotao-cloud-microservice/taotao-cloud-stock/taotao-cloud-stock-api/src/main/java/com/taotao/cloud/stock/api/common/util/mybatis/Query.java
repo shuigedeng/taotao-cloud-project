@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 public class Query<T> {
 
 

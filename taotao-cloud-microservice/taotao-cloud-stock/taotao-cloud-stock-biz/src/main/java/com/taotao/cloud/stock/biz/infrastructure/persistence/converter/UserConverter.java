@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-10
- **/
+ */
 public class UserConverter {
 
     public static User toUser(SysUserDO sysUserDO, Account account, List<RoleId> roleIdList) {

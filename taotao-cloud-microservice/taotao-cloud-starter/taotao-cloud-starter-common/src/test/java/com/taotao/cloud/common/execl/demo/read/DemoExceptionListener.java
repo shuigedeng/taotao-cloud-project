@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.read;
+package com.taotao.cloud.common.execl.demo.read;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 读取转换异常
  *
- * @author Jiaju Zhuang
+
  */
 @Slf4j
 public class DemoExceptionListener implements ReadListener<ExceptionDemoData> {

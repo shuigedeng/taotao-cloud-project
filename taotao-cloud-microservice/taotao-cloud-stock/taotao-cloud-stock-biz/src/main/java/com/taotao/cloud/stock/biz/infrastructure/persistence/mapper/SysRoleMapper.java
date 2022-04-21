@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-02-14
- **/
+ */
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRoleDO> {
 

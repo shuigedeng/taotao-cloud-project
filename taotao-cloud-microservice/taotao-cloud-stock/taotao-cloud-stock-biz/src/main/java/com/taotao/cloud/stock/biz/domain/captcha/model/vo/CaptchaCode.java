@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 public class CaptchaCode implements ValueObject<CaptchaCode> {
 
     private String code;

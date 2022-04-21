@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 管理端,平台拼团接口
  *
  * @since 2020/10/9
- **/
+ */
 @RestController
 @Tag(name = "管理端,平台拼团接口")
 @RequestMapping("/manager/promotion/pintuan")

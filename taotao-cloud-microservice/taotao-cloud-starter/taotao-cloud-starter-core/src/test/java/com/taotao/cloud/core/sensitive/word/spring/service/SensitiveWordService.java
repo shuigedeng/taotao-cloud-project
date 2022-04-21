@@ -4,10 +4,6 @@ package com.taotao.cloud.core.sensitive.word.spring.service;
 import com.taotao.cloud.core.sensitive.word.bs.SensitiveWordBs;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author binbin.hou
- * @since 1.0.0
- */
 //@Component
 public class SensitiveWordService {
 

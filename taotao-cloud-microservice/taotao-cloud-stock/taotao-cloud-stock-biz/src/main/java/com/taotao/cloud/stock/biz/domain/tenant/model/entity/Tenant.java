@@ -15,7 +15,7 @@ import com.xtoon.cloud.sys.domain.model.user.UserId;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public class Tenant implements Entity<Tenant> {
 
     /**

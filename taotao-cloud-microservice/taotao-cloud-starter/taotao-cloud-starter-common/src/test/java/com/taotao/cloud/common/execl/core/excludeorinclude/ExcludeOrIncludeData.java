@@ -1,17 +1,8 @@
-package com.alibaba.easyexcel.test.core.excludeorinclude;
+package com.taotao.cloud.common.execl.core.excludeorinclude;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-/**
- * @author Jiaju Zhuang
- */
-@Getter
-@Setter
-@EqualsAndHashCode
 public class ExcludeOrIncludeData {
     @ExcelProperty(order = 1)
     private String column1;

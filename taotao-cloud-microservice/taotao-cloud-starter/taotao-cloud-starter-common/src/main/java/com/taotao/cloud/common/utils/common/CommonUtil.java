@@ -622,7 +622,7 @@ public class CommonUtil {
 	 * @param regex java.lang.String
 	 * @author liubolin
 	 * @date 2020/9/18 11:19
-	 **/
+	 */
 	public static String getSqlWhereIn(String str, String regex) {
 		String[] arr = str.split(regex);
 		StringBuffer stringBuffer = new StringBuffer();

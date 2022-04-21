@@ -1,17 +1,13 @@
-package com.alibaba.easyexcel.test.temp;
+package com.taotao.cloud.common.execl.temp;
 
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 @ContentRowHeight(30)
 public class TempFillData {
     private String name;

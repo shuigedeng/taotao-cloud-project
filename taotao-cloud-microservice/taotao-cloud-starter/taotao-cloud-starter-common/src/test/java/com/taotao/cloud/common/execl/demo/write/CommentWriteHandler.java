@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.write;
+package com.taotao.cloud.common.execl.demo.write;
 
 import com.alibaba.excel.util.BooleanUtils;
 import com.alibaba.excel.write.handler.RowWriteHandler;
@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 /**
  * 自定义拦截器.新增注释,第一行头加批注
  *
- * @author Jiaju Zhuang
+
  */
 @Slf4j
 public class CommentWriteHandler implements RowWriteHandler {

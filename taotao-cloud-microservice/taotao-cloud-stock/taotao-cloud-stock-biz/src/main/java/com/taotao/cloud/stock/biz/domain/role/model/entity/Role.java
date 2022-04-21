@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public class Role implements Entity<Role> {
 
     /**

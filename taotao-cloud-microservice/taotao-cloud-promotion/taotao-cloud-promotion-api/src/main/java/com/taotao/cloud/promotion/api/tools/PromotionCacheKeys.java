@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 
 /**
  * 满额活动缓存Key
- **/
+ */
 public class PromotionCacheKeys {
 
     /**

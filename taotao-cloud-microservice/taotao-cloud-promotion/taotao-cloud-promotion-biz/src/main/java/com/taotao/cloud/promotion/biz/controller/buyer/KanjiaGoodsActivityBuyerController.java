@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 买家端,砍价活动商品
- **/
+ */
 @RestController
 @Tag(name = "买家端,砍价商品接口")
 @RequestMapping("/buyer/promotion/kanjiaGoods")

@@ -1,17 +1,13 @@
-package com.alibaba.easyexcel.test.demo.fill;
+package com.taotao.cloud.common.execl.demo.fill;
 
 import java.util.Date;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class FillData {
     private String name;
     private double number;

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author shuigedeng
  * @date 2021-02-14
- **/
+ */
 @Service
 public class TenantApplicationServiceImpl implements TenantApplicationService {
 

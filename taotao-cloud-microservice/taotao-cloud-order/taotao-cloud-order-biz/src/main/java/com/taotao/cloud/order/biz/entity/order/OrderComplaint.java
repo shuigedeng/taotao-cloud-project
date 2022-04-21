@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  * 订单交易投诉表
- **/
+ */
 @Getter
 @Setter
 @ToString(callSuper = true)

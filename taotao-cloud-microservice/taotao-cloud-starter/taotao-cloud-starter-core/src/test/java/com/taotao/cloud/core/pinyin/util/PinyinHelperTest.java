@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.pinyin.util;
 
+import com.taotao.cloud.common.utils.pinyin.constant.enums.PinyinStyleEnum;
 import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
-import com.taotao.cloud.core.pinyin.constant.enums.PinyinStyleEnum;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 交易投诉业务层实现
- **/
+ */
 @Service
 public class OrderComplaintStatisticsServiceImpl extends ServiceImpl<OrderComplaintStatisticsMapper, OrderComplaint> implements OrderComplaintStatisticsService {
 

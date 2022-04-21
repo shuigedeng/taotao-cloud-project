@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-23
- **/
+ */
 public class UserDTOAssembler {
 
     public static User toUser(final UserCommand userCommand) {

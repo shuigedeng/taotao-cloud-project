@@ -49,13 +49,13 @@ public class GenConfig extends BaseSuperEntity<GenConfig, Long> {
 
 	/**
 	 * 表明
-	 **/
+	 */
 	@Column(name = "table_name", columnDefinition = "varchar(64) not null comment '表名称'")
 	private String tableName;
 
 	/**
 	 * 接口名称
-	 **/
+	 */
 	@Column(name = "api_alias", columnDefinition = "varchar(64) not null comment '接口名称'")
 	private String apiAlias;
 

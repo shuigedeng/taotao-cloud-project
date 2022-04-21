@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * 基础PO
- **/
+ */
 @Data
 public class BaseDO implements Serializable {
 

@@ -108,7 +108,7 @@ public class RequestLoggerAspect {
 
 	/**
 	 * log实体类
-	 **/
+	 */
 	private final TransmittableThreadLocal<com.taotao.cloud.logger.model.RequestLogger> REQUEST_LOG_THREAD_LOCAL = new TransmittableThreadLocal<>();
 
 	public RequestLoggerAspect() {

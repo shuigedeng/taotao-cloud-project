@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 
 /**
  * 秒杀活动申请视图对象
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

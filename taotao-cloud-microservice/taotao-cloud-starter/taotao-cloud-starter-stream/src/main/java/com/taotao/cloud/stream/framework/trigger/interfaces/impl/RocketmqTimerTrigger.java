@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 延时任务实现
- **/
+ */
 @Component
 public class RocketmqTimerTrigger implements TimeTrigger {
 

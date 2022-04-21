@@ -1,11 +1,11 @@
-package com.alibaba.easyexcel.test.core.style;
+package com.taotao.cloud.common.execl.core.style;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.easyexcel.test.core.StyleTestUtils;
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.core.StyleTestUtils;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.annotation.write.style.HeadFontStyle;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
@@ -40,7 +40,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
- * @author Jiaju Zhuang
+
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StyleDataTest {

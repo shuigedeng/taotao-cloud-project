@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.dto.order;
+package com.taotao.cloud.order.api.query.order;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -11,6 +11,8 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTagEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,14 +22,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单查询参数
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单查询参数")
-public class OrderSearchParams extends PageParam {
+public class OrderPageQuery extends PageParam {
 
+	@Serial
 	private static final long serialVersionUID = -6380573339089959194L;
 
 	@Schema(description = "商品名称")

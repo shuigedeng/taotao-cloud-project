@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-18
- **/
+ */
 @Data
 public class RoleDTO implements Serializable {
 

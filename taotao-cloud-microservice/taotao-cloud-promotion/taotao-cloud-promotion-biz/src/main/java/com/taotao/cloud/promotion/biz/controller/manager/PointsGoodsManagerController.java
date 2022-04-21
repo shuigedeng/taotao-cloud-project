@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 管理端,积分商品接口
  *
  * @since 2021/1/14
- **/
+ */
 @RestController
 @Tag(name = "管理端,积分商品接口")
 @RequestMapping("/manager/promotion/pointsGoods")

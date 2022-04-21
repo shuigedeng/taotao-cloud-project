@@ -9,7 +9,7 @@
 ///**
 // * 通知类消息实现
 // *
-// **/
+// */
 //@Service
 //public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent, AfterSaleStatusChangeEvent, MemberPointChangeEvent, MemberWithdrawalEvent {
 //
