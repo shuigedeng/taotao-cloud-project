@@ -6,10 +6,6 @@ import com.taotao.cloud.message.biz.austin.handler.deduplication.service.Abstrac
 
 import java.util.Set;
 
-/**
- * @author cao
- * @date 2022-04-20 11:58
- */
 public interface LimitService {
 
 

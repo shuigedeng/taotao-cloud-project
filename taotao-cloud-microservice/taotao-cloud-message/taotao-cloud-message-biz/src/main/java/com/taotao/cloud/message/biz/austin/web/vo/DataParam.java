@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 全链路 请求参数
- *
- *
- * @date 2022/2/22
  */
 @Data
 @Builder

@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * 
- * @date 2021/11/22
  * @description 发送消息任务模型
  */
 @Data

@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 
- * @date 2022/2/22
  * 无Spring环境下使用Redis，基于Lettuce封装
  */
 public class LettuceRedisUtils {

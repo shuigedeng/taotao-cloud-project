@@ -13,9 +13,6 @@ import java.util.List;
 
 /**
  * 启动消费者
- *
- *
- * @date 2021/12/4
  */
 @Service
 public class ReceiverStart {

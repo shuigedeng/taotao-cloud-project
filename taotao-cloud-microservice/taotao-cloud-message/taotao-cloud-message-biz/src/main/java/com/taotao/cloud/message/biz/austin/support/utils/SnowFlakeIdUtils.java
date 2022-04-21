@@ -3,8 +3,6 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 /**
  * 雪花算法生成唯一id工具类
  *
- * @author cao
- * @date 2022-04-20 13:12
  */
 public class SnowFlakeIdUtils {
 

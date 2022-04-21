@@ -7,7 +7,6 @@ import org.apache.flink.util.Collector;
 
 /**
  * 
- * @date 2022/2/22
  * process 处理
  */
 public class AustinFlatMapFunction implements FlatMapFunction<String, AnchorInfo> {
