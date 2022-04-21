@@ -1,12 +1,4 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.tableapi;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.tableapi
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/13 14:01
- */
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.tableapi;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.DataTypes;

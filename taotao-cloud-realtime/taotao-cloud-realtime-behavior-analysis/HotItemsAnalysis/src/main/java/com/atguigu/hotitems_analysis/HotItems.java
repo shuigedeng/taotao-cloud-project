@@ -1,13 +1,4 @@
 package com.atguigu.hotitems_analysis;
-/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: com.atguigu.hotitems_analysis
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/14 15:16
- */
 
 import com.atguigu.hotitems_analysis.beans.ItemViewCount;
 import com.atguigu.hotitems_analysis.beans.UserBehavior;

@@ -1,12 +1,4 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.processfunction;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.processfunction
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/11 11:32
- */
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.processfunction;
 
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -16,12 +8,6 @@ import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
-/**
- * @ClassName: ProcessTest3_SideOuptCase
- * @Description:
- * @Author: wushengran on 2020/11/11 11:32
- * @Version: 1.0
- */
 public class ProcessTest3_SideOuptCase {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

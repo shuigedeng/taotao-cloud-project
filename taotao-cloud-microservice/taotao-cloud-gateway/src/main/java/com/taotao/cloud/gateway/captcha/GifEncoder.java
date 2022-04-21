@@ -18,7 +18,7 @@ import java.io.*;
  *    e.addFrame(image2);
  *    e.finish();
  * </pre>
- * No copyright asserted on the source code of this class.  May be used
+ * No Copyright (c) asserted on the source code of this class.  May be used
  * for any purpose, however, refer to the Unisys LZW patent for restrictions
  * on use of the associated Encoder class.  Please forward any corrections
  * to questions at fmsware.com.

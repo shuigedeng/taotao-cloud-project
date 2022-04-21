@@ -1,12 +1,3 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.sink;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.sink
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/9 11:21
- */
 
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import java.util.ArrayList;

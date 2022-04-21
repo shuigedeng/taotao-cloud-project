@@ -1,14 +1,5 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.window;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.window
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/9 16:19
- */
-
-import com.atguigu.apitest.beans.SensorReading;
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.window;
+import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;

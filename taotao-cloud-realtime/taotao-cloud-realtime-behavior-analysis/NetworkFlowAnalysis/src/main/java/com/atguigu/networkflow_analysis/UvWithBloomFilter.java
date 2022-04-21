@@ -1,12 +1,4 @@
-package com.atguigu.networkflow_analysis;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: com.atguigu.networkflow_analysis
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/16 15:28
- */
+package com.atguigu.networkflow_analysis;
 
 import com.atguigu.networkflow_analysis.beans.PageViewCount;
 import com.atguigu.networkflow_analysis.beans.UserBehavior;

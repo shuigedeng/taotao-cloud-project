@@ -1,12 +1,4 @@
-package com.taotao.cloud.bigdata.flink.atguigu.wc;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.wc
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/6 11:22
- */
+package com.taotao.cloud.bigdata.flink.atguigu.wc;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.DataSet;

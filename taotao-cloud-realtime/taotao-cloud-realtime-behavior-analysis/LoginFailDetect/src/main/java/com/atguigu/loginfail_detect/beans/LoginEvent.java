@@ -1,13 +1,4 @@
-package com.atguigu.loginfail_detect.beans;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: com.atguigu.loginfail_detect.beans
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/17 14:04
- */
-
+package com.atguigu.loginfail_detect.beans;
 /**
  * @ClassName: LoginEvent
  * @Description:

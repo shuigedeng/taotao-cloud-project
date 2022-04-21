@@ -1,12 +1,4 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.transform;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.transform
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/7 14:28
- */
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.transform;
 
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.FlatMapFunction;

@@ -1,5 +1,5 @@
 package com.taotao.cloud.media.biz.opencv.common.mapper.adapters;///**
-// * Copyright &copy; 2016-2020 公众学业 All rights reserved.
+// * Copyright (c) &copy; 2016-2020 公众学业 All rights reserved.
 // */
 //package com.taotao.cloud.opencv.biz.opencv.common.mapper.adapters;
 //
