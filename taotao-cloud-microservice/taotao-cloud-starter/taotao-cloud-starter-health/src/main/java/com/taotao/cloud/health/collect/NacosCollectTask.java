@@ -27,7 +27,7 @@ import java.util.Objects;
  *
  * @author: chejiangyi
  * @version: 2019-07-31 16:32
- **/
+ */
 public class NacosCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.nacos";

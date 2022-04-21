@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * 自定义分词表
- **/
+ */
 @Getter
 @Setter
 @ToString(callSuper = true)

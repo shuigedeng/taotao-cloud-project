@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public final class Mobile implements ValueObject<Mobile> {
 
     private String mobile;

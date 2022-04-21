@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.fill.style;
+package com.taotao.cloud.common.execl.core.fill.style;
 
 import java.util.Date;
 
@@ -7,16 +7,7 @@ import com.alibaba.excel.annotation.write.style.ContentStyle;
 import com.alibaba.excel.enums.BooleanEnum;
 import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-/**
- * @author Jiaju Zhuang
- */
-@Getter
-@Setter
-@EqualsAndHashCode
 public class FillStyleAnnotatedData {
     @ContentStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 13)
     @ContentFontStyle(bold = BooleanEnum.TRUE, color = 19)

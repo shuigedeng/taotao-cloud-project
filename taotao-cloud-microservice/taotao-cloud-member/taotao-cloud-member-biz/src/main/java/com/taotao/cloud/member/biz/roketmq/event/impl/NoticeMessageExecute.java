@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 /**
  * 通知类消息实现
  *
- **/
+ */
 @Service
 public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithdrawalEvent {
 

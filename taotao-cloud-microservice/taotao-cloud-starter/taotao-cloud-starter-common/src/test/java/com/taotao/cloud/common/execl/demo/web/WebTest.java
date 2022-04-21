@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.demo.web;
+package com.taotao.cloud.common.execl.demo.web;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -23,8 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * web读写案例
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Controller
 public class WebTest {
 
@@ -55,7 +55,6 @@ public class WebTest {
     /**
      * 文件下载并且失败的时候返回json（默认失败了会返回一个有部分数据的Excel）
      *
-     * @since 2.1.1
      */
     @GetMapping("downloadFailedUsingJson")
     public void downloadFailedUsingJson(HttpServletResponse response) throws IOException {

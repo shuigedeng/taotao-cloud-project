@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 订单交易投诉VO
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Data
 @Builder
 @AllArgsConstructor

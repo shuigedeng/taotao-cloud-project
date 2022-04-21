@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 用户状态枚举
- **/
+ */
 public enum StatusEnum implements ValueObject<StatusEnum> {
 
     /**

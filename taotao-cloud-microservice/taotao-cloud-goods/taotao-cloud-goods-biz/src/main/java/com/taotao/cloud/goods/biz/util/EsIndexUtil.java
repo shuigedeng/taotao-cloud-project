@@ -6,6 +6,11 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
+ */
 public class EsIndexUtil {
 
 	private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";

@@ -10,8 +10,6 @@ import org.junit.Test;
 
 /**
  * 性能测试
- * @author binbin.hou
- * @since 0.0.9
  */
 @Ignore
 public class SensitiveBenchmarkTest {

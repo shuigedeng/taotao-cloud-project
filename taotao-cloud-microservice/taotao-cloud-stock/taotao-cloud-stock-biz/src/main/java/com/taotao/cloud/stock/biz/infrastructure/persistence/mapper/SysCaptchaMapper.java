@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 @Mapper
 public interface SysCaptchaMapper extends BaseMapper<SysCaptchaDO> {
 }

@@ -3,6 +3,9 @@ package com.taotao.cloud.operation.api.enums;
 /**
  * 文章分类枚举
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 public enum ArticleCategoryEnum {
 

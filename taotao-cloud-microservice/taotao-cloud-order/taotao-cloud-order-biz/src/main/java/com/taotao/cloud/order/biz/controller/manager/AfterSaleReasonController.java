@@ -1,12 +1,11 @@
 package com.taotao.cloud.order.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleReasonDTO;
-import com.taotao.cloud.order.api.dto.aftersale.AfterSaleReasonPageQuery;
+import com.taotao.cloud.order.api.query.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleReasonMapStruct;

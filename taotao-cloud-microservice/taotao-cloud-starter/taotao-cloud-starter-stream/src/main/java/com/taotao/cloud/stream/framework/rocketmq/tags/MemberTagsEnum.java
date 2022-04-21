@@ -2,7 +2,7 @@ package com.taotao.cloud.stream.framework.rocketmq.tags;
 
 /**
  * 会员操作枚举
- **/
+ */
 public enum MemberTagsEnum {
     /**
      * 会员注册

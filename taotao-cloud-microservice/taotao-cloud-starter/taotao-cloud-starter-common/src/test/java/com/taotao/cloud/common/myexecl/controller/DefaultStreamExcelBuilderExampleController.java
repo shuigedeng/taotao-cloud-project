@@ -1,6 +1,5 @@
 package com.taotao.cloud.common.myexecl.controller;
 
-import com.github.liaochong.example.pojo.ArtCrowd;
 import com.github.liaochong.myexcel.core.DefaultStreamExcelBuilder;
 import com.github.liaochong.myexcel.utils.AttachmentExportUtil;
 import com.taotao.cloud.common.myexecl.pojo.ArtCrowd;

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 管理端,满额活动接口
  *
  * @since 2021/1/12
- **/
+ */
 @RestController
 @Tag(name = "管理端,满额活动接口")
 @RequestMapping("/manager/promotion/fullDiscount")

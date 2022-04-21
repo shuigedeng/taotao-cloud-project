@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * ValueObject interface
- **/
+ */
 public interface ValueObject<T> extends Serializable {
 
     /**

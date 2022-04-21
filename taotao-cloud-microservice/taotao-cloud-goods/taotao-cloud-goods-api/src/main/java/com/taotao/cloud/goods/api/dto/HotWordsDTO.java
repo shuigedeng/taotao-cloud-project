@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * 搜索热词
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-18 21:59:38
  */
 @Data
 @Builder

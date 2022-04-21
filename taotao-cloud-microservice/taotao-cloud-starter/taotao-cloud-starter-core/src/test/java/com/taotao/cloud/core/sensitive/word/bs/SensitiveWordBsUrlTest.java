@@ -4,19 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-
-/**
- * <p> project: sensitive-word-SensitiveWordBsTest </p>
- * <p> create on 2020/1/7 23:43 </p>
- *
- * @author Administrator
- * @since 0.0.12
- */
 public class SensitiveWordBsUrlTest {
 
     /**
      * 忽略中文繁简体
-     * @since 0.0.12
      */
     @Test
     public void commonUrlTest() {
@@ -35,7 +26,6 @@ public class SensitiveWordBsUrlTest {
      * （1）可以检测
      * （2）默认不替换
      *
-     * @since 0.0.12
      */
     @Test
     public void imageUrlTest() {

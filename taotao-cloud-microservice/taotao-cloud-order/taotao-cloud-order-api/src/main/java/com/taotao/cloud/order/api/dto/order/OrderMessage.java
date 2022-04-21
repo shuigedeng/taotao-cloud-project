@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 信息队列传输订单信息实体
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

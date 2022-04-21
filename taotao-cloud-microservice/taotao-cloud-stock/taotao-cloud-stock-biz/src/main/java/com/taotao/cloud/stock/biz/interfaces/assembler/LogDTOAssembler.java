@@ -9,7 +9,7 @@ import com.xtoon.cloud.sys.dto.LogDTO;
  *
  * @author shuigedeng
  * @date 2021-06-21
- **/
+ */
 public class LogDTOAssembler {
 
     public static Log toLog(final LogDTO logDTO) {

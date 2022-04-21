@@ -2,7 +2,7 @@ package com.taotao.cloud.order.api.enums.order;
 
 /**
  * 订单的投诉状态
- **/
+ */
 public enum OrderComplaintStatusEnum {
 
 	/**

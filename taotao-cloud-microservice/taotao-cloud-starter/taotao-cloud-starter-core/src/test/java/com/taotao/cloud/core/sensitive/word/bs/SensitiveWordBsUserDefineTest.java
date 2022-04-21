@@ -5,18 +5,10 @@ import org.junit.Test;
 
 import java.util.List;
 
-/**
- * <p> project: sensitive-word-SensitiveWordBsTest </p>
- * <p> create on 2020/1/7 23:43 </p>
- *
- * @author Administrator
- * @since 0.0.8
- */
 public class SensitiveWordBsUserDefineTest {
 
     /**
      * 自定义允许和拒绝的文件
-     * @since 0.0.8
      */
     @Test
     public void allowAndDenyTest() {

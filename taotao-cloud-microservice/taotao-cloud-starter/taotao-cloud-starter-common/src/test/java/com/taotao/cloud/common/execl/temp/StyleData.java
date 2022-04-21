@@ -1,18 +1,14 @@
-package com.alibaba.easyexcel.test.temp;
+package com.taotao.cloud.common.execl.temp;
 
 import java.util.List;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 public class StyleData {
     private byte[] byteValue;
     private Byte[] byteValue2;

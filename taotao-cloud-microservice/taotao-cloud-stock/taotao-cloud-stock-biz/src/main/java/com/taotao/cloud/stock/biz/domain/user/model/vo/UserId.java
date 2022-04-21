@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 @Data
 public class UserId implements ValueObject<UserId> {
 

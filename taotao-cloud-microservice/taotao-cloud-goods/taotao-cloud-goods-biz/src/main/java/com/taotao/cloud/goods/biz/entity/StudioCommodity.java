@@ -13,6 +13,9 @@ import java.util.Objects;
 
 /**
  * 直播间商品表
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @Getter
 @Setter

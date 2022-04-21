@@ -1,21 +1,17 @@
-package com.alibaba.easyexcel.test.demo.write;
+package com.taotao.cloud.common.execl.demo.write;
 
 import java.util.Date;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * 基础数据类
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 public class IndexData {
     @ExcelProperty(value = "字符串标题", index = 0)
     private String string;

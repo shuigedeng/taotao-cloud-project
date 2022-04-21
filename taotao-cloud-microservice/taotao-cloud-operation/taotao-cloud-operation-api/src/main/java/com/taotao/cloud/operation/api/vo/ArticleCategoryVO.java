@@ -1,47 +1,36 @@
 package com.taotao.cloud.operation.api.vo;
 
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import lombok.NoArgsConstructor;
 
 /**
  * 文章分类VO
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticleCategoryVO extends ArticleCategory {
+public class ArticleCategoryVO extends ArticleCategoryBaseVO {
 
-    @Schema(description =  "子菜单")
-    private List<ArticleCategoryVO> children = new ArrayList<>();
+	@Builder.Default
+	@Schema(description = "子菜单")
+	private List<ArticleCategoryVO> children = new ArrayList<>();
 
-    public ArticleCategoryVO() {
-
-    }
-
-    public ArticleCategoryVO(ArticleCategory articleCategory) {
-        BeanUtil.copyProperties(articleCategory, this);
-    }
-
-    public List<ArticleCategoryVO> getChildren() {
-        if (children != null) {
-            children.sort(new Comparator<ArticleCategoryVO>() {
-                @Override
-                public int compare(ArticleCategoryVO o1, ArticleCategoryVO o2) {
-                    return o1.getSort().compareTo(o2.getSort());
-                }
-            });
-            return children;
-        }
-        return null;
-    }
+	public List<ArticleCategoryVO> getChildren() {
+		if (children != null) {
+			children.sort(Comparator.comparing(ArticleCategoryBaseVO::getSortNum));
+			return children;
+		}
+		return null;
+	}
 }

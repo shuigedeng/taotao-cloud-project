@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.pinyin.util;
 
-import com.taotao.cloud.core.pinyin.constant.enums.PinyinToneNumEnum;
+import com.taotao.cloud.common.utils.pinyin.constant.enums.PinyinToneNumEnum;
 import org.junit.Assert;
 import org.junit.Test;
 

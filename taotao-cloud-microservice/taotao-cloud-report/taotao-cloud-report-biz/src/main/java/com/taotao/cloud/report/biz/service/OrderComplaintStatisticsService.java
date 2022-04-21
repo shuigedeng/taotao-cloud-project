@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 交易投诉统计
- **/
+ */
 public interface OrderComplaintStatisticsService extends IService<OrderComplaint> {
 
     /**

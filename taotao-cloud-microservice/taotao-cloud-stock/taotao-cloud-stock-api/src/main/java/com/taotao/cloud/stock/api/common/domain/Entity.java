@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Entity interface
- **/
+ */
 public interface Entity<T> extends Serializable {
 
     /**

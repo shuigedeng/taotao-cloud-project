@@ -30,6 +30,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * 商品品牌业务层实现
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @AllArgsConstructor
 @Service

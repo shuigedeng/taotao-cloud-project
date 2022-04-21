@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author shuigedeng
  * @date 2021-02-13
- **/
+ */
 @Api(tags = "注册")
 @RestController
 @RequestMapping("/register")

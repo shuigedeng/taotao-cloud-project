@@ -5,9 +5,6 @@ import com.taotao.cloud.core.sensitive.sensitive.annotation.SensitiveEntry;
 
 /**
  * 系统内置注解-对象
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.3
  */
 public class SystemBuiltInAtEntry {
 

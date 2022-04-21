@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.dto.order;
+package com.taotao.cloud.order.api.query.order;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -9,7 +9,10 @@ import lombok.*;
 
 /**
  * 订单投诉查询参数
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Setter
 @Getter
 @Builder

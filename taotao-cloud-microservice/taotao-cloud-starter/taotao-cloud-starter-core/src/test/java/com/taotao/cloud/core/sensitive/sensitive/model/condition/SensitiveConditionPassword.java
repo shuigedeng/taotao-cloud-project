@@ -9,11 +9,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyPas
 import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyPhone;
 import com.taotao.cloud.core.sensitive.sensitive.core.condition.ConditionFooPassword;
 
-/**
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.1
- */
+
 public class SensitiveConditionPassword {
 
     @Sensitive(strategy = StrategyChineseName.class)

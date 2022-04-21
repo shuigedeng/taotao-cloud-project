@@ -7,7 +7,7 @@ import com.xtoon.cloud.sys.application.command.RegisterTenantCommand;
  *
  * @author shuigedeng
  * @date 2021-06-23
- **/
+ */
 public interface RegisterApplicationService {
 
     /**

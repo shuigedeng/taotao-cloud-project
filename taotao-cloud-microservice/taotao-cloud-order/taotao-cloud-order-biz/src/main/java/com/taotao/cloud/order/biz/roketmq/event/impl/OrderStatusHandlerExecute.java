@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * 订单状态处理类
  *
- **/
+ */
 @Service
 public class OrderStatusHandlerExecute implements TradeEvent {
 

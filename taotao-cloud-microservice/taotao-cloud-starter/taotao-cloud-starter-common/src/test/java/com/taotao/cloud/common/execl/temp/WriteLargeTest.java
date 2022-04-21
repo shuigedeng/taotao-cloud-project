@@ -1,10 +1,10 @@
-package com.alibaba.easyexcel.test.temp;
+package com.taotao.cloud.common.execl.temp;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.easyexcel.test.core.large.LargeData;
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.core.large.LargeData;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 临时测试
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class WriteLargeTest {
 

@@ -1,15 +1,11 @@
-package com.alibaba.easyexcel.test.demo.read;
+package com.taotao.cloud.common.execl.demo.read;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class DemoExtraData {
 
     private String row1;

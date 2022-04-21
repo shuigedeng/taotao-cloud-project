@@ -4,7 +4,7 @@ import lombok.experimental.UtilityClass;
 
 /**
  * 多租户 tenant_id存储器
- **/
+ */
 @UtilityClass
 public class TenantContext {
 

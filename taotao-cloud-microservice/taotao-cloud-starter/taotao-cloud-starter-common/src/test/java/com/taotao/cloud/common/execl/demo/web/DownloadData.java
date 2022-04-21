@@ -1,21 +1,17 @@
-package com.alibaba.easyexcel.test.demo.web;
+package com.taotao.cloud.common.execl.demo.web;
 
 import java.util.Date;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * 基础数据类
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 public class DownloadData {
     @ExcelProperty("字符串标题")
     private String string;

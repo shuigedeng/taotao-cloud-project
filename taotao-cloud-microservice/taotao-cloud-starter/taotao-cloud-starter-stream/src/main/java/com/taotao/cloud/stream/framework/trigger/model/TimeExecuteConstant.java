@@ -2,7 +2,7 @@ package com.taotao.cloud.stream.framework.trigger.model;
 
 /**
  * 延时任务执行器常量
- **/
+ */
 public interface TimeExecuteConstant {
 
 	/**

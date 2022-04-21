@@ -1,31 +1,28 @@
 package com.taotao.cloud.operation.biz.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.operation.api.enums.FeedbackTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.enums.SensitiveStrategy;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
+import com.taotao.cloud.web.sensitive.desensitize.Sensitive;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Objects;
 
 /**
  * 意见反馈
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
-@Setter
 @Getter
+@Setter
+@ToString(callSuper = true)
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,38 +32,48 @@ import org.springframework.format.annotation.DateTimeFormat;
 @org.hibernate.annotations.Table(appliesTo = Feedback.TABLE_NAME, comment = "意见反馈表")
 public class Feedback extends BaseSuperEntity<Feedback, Long> {
 
-	public static final String TABLE_NAME = "li_feedback";
+	public static final String TABLE_NAME = "tt_feedback";
 
-	@CreatedDate
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@TableField(fill = FieldFill.INSERT)
-	@Schema(description = "创建时间", hidden = true)
-	private Date createTime;
-
-	@Schema(description = "会员名称", hidden = true)
+	/**
+	 * 会员名称
+	 */
+	@Column(name = "user_name", columnDefinition = "varchar(255) not null comment '会员名称 '")
 	private String userName;
-
-	@Schema(description = "反馈内容")
-	@NotEmpty(message = "反馈内容不能为空")
-	@Length(max = 500, message = "反馈内容不能超过500个字符")
+	/**
+	 * 反馈内容
+	 */
+	@Column(name = "context", columnDefinition = "varchar(255) not null comment '反馈内容 '")
 	private String context;
-
-	@Schema(description = "手机号")
-	@Length(max = 11, message = "手机号不能超过11位")
+	/**
+	 * 手机号
+	 */
+	@Column(name = "mobile", columnDefinition = "varchar(255) not null comment '手机号 '")
 	@Sensitive(strategy = SensitiveStrategy.PHONE)
 	private String mobile;
-
-	@Schema(description = "图片，多个图片使用：(，)分割")
-	@Length(max = 255, message = "图片上传太多啦，请选择删除掉")
+	/**
+	 * 图片，多个图片使用：(，)分割
+	 */
+	@Column(name = "images", columnDefinition = "text not null comment '图片，多个图片使用：(，)分割 '")
 	private String images;
 
 	/**
-	 * 类型
+	 * 业务类型
 	 *
 	 * @see FeedbackTypeEnum
 	 */
-	@Schema(description = "类型", allowableValues = "FUNCTION,OPTIMIZE,OTHER")
+	@Column(name = "biz_type", columnDefinition = "varchar(255) not null comment '业务类型 FUNCTION,OPTIMIZE,OTHER'")
 	private String type;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Feedback feedback = (Feedback) o;
+		return getId() != null && Objects.equals(getId(), feedback.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

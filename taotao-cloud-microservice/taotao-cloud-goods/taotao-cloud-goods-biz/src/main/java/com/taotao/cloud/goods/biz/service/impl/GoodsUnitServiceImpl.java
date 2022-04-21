@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * 计量单位业务层实现
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @Service
 public class GoodsUnitServiceImpl extends ServiceImpl<GoodsUnitMapper, GoodsUnit> implements

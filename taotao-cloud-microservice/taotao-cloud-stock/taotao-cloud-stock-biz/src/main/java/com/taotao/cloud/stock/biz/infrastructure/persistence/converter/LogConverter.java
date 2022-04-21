@@ -8,7 +8,7 @@ import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysLogDO;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 public class LogConverter {
 
     public static SysLogDO fromLog(Log log) {

@@ -1,10 +1,10 @@
-package com.alibaba.easyexcel.test.demo.read;
+package com.taotao.cloud.common.execl.demo.read;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.annotation.ExcelProperty;
@@ -26,7 +26,7 @@ import org.junit.Test;
 /**
  * 读的常见写法
  *
- * @author Jiaju Zhuang
+
  */
 @Ignore
 @Slf4j
@@ -242,7 +242,6 @@ public class ReadTest {
      * <p>
      * 3. 直接读即可
      *
-     * @since 2.2.0-beat1
      */
     @Test
     public void extraRead() {
@@ -267,7 +266,6 @@ public class ReadTest {
      * <p>
      * 3. 直接读即可
      *
-     * @since 2.2.0-beat1
      */
     @Test
     public void cellDataRead() {

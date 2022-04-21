@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动商品查询通用类
- **/
+ */
 @Setter
 @Getter
 @SuperBuilder

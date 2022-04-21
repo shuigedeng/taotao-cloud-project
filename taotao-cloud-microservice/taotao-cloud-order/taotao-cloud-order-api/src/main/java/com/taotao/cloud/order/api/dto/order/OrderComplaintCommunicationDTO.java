@@ -8,7 +8,10 @@ import java.io.Serial;
 
 /**
  * 投诉通信VO
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Setter
 @Getter
 @Builder

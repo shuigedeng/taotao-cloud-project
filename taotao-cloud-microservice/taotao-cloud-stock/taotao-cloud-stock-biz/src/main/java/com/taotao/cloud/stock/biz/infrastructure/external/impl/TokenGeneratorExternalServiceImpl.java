@@ -12,7 +12,7 @@ import java.util.UUID;
  *
  * @author shuigedeng
  * @date 2021-04-23
- **/
+ */
 @Component
 public class TokenGeneratorExternalServiceImpl implements TokenGeneratorExternalService {
 

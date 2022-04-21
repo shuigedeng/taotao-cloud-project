@@ -1,10 +1,10 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
-import com.taotao.cloud.core.heaven.support.filter.IFilter;
+import com.taotao.cloud.common.support.filter.IFilter;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.io.FileUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.common.CharsetUtil;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -13,8 +13,6 @@ import java.util.List;
 
 /**
  * 数据初始化
- * @author binbin.hou
- * @since 0.0.1
  */
 @Ignore
 public class DataInitTest {
@@ -45,7 +43,6 @@ public class DataInitTest {
      * 获取对应文件的独一无二内容
      * @param name 名称
      * @return 结果
-     * @since 0.0.1
      */
     private List<String> distinctLines(final String name) {
         final String dir = "D:\\github\\sensitive-word\\src\\main\\resources\\";

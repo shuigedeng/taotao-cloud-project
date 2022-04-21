@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.dto.aftersale;
+package com.taotao.cloud.order.api.query.aftersale;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.UserEnum;
@@ -17,7 +17,10 @@ import lombok.Setter;
 
 /**
  * 售后搜索参数
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Setter
 @Getter
 @Builder

@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author shuigedeng
  * @date 2021-02-17
- **/
+ */
 @Service
 public class PermissionApplicationServiceImpl implements PermissionApplicationService {
 

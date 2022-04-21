@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,促销接口
- **/
+ */
 @RestController
 @Tag(name = "管理端,砍价促销接口")
 @RequestMapping("/manager/promotion/kan-jia-goods")

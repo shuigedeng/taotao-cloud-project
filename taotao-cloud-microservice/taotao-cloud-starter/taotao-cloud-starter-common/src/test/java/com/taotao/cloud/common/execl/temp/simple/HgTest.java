@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.simple;
+package com.taotao.cloud.common.execl.temp.simple;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,8 +18,8 @@ import com.alibaba.fastjson.JSON;
 /**
  * 测试poi
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class HgTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(HgTest.class);

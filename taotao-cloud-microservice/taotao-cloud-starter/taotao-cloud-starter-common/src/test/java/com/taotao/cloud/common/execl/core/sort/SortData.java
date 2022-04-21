@@ -1,17 +1,13 @@
-package com.alibaba.easyexcel.test.core.sort;
+package com.taotao.cloud.common.execl.core.sort;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class SortData {
     private String column5;
     private String column6;

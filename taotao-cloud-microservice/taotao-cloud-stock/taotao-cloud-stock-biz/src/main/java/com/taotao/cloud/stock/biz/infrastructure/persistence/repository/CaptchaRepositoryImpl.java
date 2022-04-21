@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 @Repository
 public class CaptchaRepositoryImpl extends ServiceImpl<SysCaptchaMapper, SysCaptchaDO> implements CaptchaRepository, IService<SysCaptchaDO> {
 

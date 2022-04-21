@@ -8,6 +8,9 @@ import java.util.List;
 
 /**
  * 店铺商品分类业务层
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 public interface StoreGoodsLabelService extends IService<StoreGoodsLabel> {
 

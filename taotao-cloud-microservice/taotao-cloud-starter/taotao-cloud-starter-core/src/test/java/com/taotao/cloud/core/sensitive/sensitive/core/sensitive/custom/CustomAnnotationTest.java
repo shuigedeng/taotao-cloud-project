@@ -8,9 +8,6 @@ import org.junit.Test;
 
 /**
  * 自定义注解测试
- * @author binbin.hou
- * date 2019/1/17
- * @since 0.0.4
  */
 public class CustomAnnotationTest {
 
@@ -49,7 +46,6 @@ public class CustomAnnotationTest {
 
     /**
      * 自定义注解测试 JSON
-     * @since 0.0.6
      */
     @Test
     public void customAnnotationJsonTest() {
@@ -63,7 +59,6 @@ public class CustomAnnotationTest {
 
     /**
      * 自定义注解测试 JSON
-     * @since 0.0.6
      */
     @Test
     public void customAnnotationEntryJsonTest() {

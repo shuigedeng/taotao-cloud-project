@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-02-20
- **/
+ */
 public class PermissionCreateSpecification extends AbstractSpecification<Permission> {
 
     private PermissionRepository permissionRepository;

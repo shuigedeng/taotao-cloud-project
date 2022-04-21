@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.handler;
+package com.taotao.cloud.common.execl.core.handler;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.junit.Assert;
 
 /**
- * @author JiaJu Zhuang
- **/
+
+ */
 public class WriteHandler implements WorkbookWriteHandler, SheetWriteHandler, RowWriteHandler, CellWriteHandler {
 
     private long beforeCellCreate = 0L;

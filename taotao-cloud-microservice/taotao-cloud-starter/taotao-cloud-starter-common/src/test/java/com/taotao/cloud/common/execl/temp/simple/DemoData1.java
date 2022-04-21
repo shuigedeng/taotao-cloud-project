@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.simple;
+package com.taotao.cloud.common.execl.temp.simple;
 
 import java.util.Date;
 
@@ -7,13 +7,9 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
 import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+
+com.taotao.cloud.common.execl
 public class DemoData1 {
     @ExcelProperty("字符串标题")
     @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 42)

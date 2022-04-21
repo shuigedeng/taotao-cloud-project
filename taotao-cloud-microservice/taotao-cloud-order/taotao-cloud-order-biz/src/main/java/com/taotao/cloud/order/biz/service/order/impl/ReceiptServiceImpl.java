@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
+import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
 import com.taotao.cloud.order.biz.mapper.order.ReceiptMapper;
 import com.taotao.cloud.order.biz.service.order.ReceiptService;
@@ -24,7 +24,7 @@ public class ReceiptServiceImpl extends ServiceImpl<ReceiptMapper, Receipt> impl
 	ReceiptService {
 
     @Override
-    public IPage<OrderReceiptDTO> getReceiptData(ReceiptSearchParams searchParams, PageVO pageVO) {
+    public IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery searchParams, PageVO pageVO) {
         return this.baseMapper.getReceipt(PageUtil.initPage(pageVO), searchParams.wrapper());
     }
 

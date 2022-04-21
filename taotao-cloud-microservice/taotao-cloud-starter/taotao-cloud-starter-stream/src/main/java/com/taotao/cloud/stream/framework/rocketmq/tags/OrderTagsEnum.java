@@ -2,7 +2,7 @@ package com.taotao.cloud.stream.framework.rocketmq.tags;
 
 /**
  * 订单操作枚举
- **/
+ */
 public enum OrderTagsEnum {
 
     /**

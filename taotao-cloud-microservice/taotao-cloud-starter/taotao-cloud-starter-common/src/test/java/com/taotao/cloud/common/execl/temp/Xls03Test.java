@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp;
+package com.taotao.cloud.common.execl.temp;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 临时测试
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class Xls03Test {
     private static final Logger LOGGER = LoggerFactory.getLogger(Xls03Test.class);

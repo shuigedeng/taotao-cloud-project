@@ -1,19 +1,15 @@
-package com.alibaba.easyexcel.test.temp;
+package com.taotao.cloud.common.execl.temp;
 
 import com.alibaba.excel.annotation.format.NumberFormat;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * 基础数据类.这里的排序和excel里面的排序一致
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 public class LockData {
     @NumberFormat("#.##%")
     private Double string0;

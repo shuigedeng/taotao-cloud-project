@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.api.event;
 
 import org.springframework.context.ApplicationEvent;
 
+
 public class GeneratorEsGoodsIndexEvent extends ApplicationEvent {
 
 	private Long goodsId;

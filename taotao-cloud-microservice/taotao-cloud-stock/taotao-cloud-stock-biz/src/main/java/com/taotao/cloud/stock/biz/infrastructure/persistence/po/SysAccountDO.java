@@ -9,7 +9,7 @@ import lombok.Data;
  *
  * @author shuigedeng
  * @date 2021-02-09
- **/
+ */
 @Data
 @TableName("sys_account")
 public class SysAccountDO extends BaseDO {

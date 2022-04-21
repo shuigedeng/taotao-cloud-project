@@ -1,16 +1,16 @@
-package com.alibaba.easyexcel.test.demo.web;
+package com.taotao.cloud.common.execl.demo.web;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.alibaba.easyexcel.test.demo.read.DemoData;
+import com.taotao.cloud.common.execl.demo.read.DemoData;
 
 /**
  * 假设这个是你的DAO存储。当然还要这个类让spring管理，当然你不用需要存储，也不需要这个类。
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Repository
 public class UploadDAO {
 

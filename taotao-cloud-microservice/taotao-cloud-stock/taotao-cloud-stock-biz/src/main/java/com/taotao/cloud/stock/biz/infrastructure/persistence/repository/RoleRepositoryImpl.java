@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-18
- **/
+ */
 @Repository
 public class RoleRepositoryImpl extends ServiceImpl<SysRoleMapper, SysRoleDO> implements RoleRepository, IService<SysRoleDO> {
 

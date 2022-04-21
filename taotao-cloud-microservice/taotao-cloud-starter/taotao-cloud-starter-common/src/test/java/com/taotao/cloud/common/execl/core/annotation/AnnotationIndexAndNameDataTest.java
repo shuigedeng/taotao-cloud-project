@@ -1,10 +1,10 @@
-package com.alibaba.easyexcel.test.core.annotation;
+package com.taotao.cloud.common.execl.core.annotation;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 
 import org.junit.BeforeClass;
@@ -15,7 +15,6 @@ import org.junit.runners.MethodSorters;
 /**
  * Annotation data test
  *
- * @author Jiaju Zhuang
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AnnotationIndexAndNameDataTest {

@@ -16,7 +16,6 @@ package com.taotao.cloud.core.pinyin.util;//package com.github.houbb.pinyin.test
 //
 //    /**
 //     * 声母测试
-//     * @since 0.1.1
 //     */
 //    @Test
 //    public void shengMuTest() {
@@ -26,7 +25,6 @@ package com.taotao.cloud.core.pinyin.util;//package com.github.houbb.pinyin.test
 //
 //    /**
 //     * 韵母测试
-//     * @since 0.1.1
 //     */
 //    @Test
 //    public void defineDictTest() {

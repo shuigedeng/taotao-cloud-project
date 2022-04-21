@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.large;
+package com.taotao.cloud.common.execl.temp.large;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 @NoArgsConstructor
 public class LargeData {
 

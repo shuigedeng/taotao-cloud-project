@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public class Permission implements Entity<Permission> {
 
     public final static String ROOT_ID = "0";

@@ -9,6 +9,10 @@ import com.taotao.cloud.order.api.vo.cart.PriceDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,9 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 
 /**
  * 购物车视图

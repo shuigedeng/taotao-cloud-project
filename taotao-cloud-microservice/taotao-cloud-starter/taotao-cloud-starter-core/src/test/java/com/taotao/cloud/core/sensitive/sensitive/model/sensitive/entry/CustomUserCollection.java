@@ -10,9 +10,6 @@ import java.util.Set;
 
 /**
  * 对象集合
- * @author dev-sxl
- * date 2020-09-14
- * @since 0.0.11
  */
 public class CustomUserCollection {
 

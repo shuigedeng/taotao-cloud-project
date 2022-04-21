@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
  *
  * @author shuigedeng
  * @date 2021-06-23
- **/
+ */
 @Service
 public class RegisterApplicationServiceImpl implements RegisterApplicationService {
 

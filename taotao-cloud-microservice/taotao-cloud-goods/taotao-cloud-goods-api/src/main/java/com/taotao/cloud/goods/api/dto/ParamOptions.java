@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 参数属性选择器
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-18 21:59:38
+ */
 @Data
 @Builder
 @AllArgsConstructor

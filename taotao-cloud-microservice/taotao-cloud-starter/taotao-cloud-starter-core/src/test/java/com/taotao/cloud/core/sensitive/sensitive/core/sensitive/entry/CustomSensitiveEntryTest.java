@@ -12,15 +12,11 @@ import org.junit.Test;
 
 /**
  * SensitiveEntry 注解-脱敏测试类
- * @author dev-sxl
- * date 2020-09-14
- * @since 0.0.10
  */
 public class CustomSensitiveEntryTest {
 
     /**
      * 用户属性中有集合或者map，集合中属性是基础类型-脱敏测试
-     * @since 0.0.10
      */
     @Test
     public void sensitiveEntryBaseTypeTest() {
@@ -37,7 +33,6 @@ public class CustomSensitiveEntryTest {
 
     /**
      * 用户属性中有集合或者对象，集合中属性是对象-脱敏测试
-     * @since 0.0.10
      */
     @Test
     public void sensitiveEntryObjectTest() {
@@ -54,7 +49,6 @@ public class CustomSensitiveEntryTest {
 
     /**
      * 用户属性中有集合或者对象-脱敏测试
-     * @since 0.0.10
      */
     @Test
     public void sensitiveUserGroupTest() {
@@ -71,7 +65,6 @@ public class CustomSensitiveEntryTest {
 
     /**
      * 用户属性中有集合或者map，集合中属性是基础类型-脱敏测试-JSON
-     * @since 0.0.6
      */
     @Test
     public void sensitiveEntryBaseTypeJsonTest() {
@@ -86,7 +79,6 @@ public class CustomSensitiveEntryTest {
 
     /**
      * 用户属性中有集合或者对象，集合中属性是对象-脱敏测试-JSON
-     * @since 0.0.6
      */
     @Test
     public void sensitiveEntryObjectJsonTest() {
@@ -102,7 +94,6 @@ public class CustomSensitiveEntryTest {
     /**
      * 用户属性中有集合或者对象-脱敏测试-JSON
      * 备注：当为对象前台集合对象时，FastJSON 本身的转换结果就是不尽人意的。（或者说是 JSON 的规范）
-     * @since 0.0.6
      */
     @Test
     public void sensitiveUserCollectionJsonTest() {

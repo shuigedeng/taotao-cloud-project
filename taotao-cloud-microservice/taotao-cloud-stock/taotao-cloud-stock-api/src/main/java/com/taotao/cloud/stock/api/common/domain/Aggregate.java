@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Aggregate interface
- **/
+ */
 public interface Aggregate<T> extends Serializable {
 
     /**

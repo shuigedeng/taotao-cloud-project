@@ -4,18 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品DTO
- **/
+ */
 @Setter
 @Getter
+@ToString(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor

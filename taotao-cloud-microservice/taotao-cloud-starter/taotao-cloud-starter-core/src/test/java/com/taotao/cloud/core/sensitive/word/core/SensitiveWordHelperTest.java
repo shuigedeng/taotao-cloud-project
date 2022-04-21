@@ -9,18 +9,10 @@ import org.junit.Test;
 
 import java.util.List;
 
-/**
- * <p> project: sensitive-word-SensitiveWordBsTest </p>
- * <p> create on 2020/1/7 23:43 </p>
- *
- * @author Administrator
- * @since 0.0.13
- */
 public class SensitiveWordHelperTest {
 
     /**
      * 是否包含
-     * @since 0.0.1
      */
     @Test
     public void containsTest() {
@@ -31,7 +23,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 返回所有敏感词
-     * @since 0.0.1
      */
     @Test
     public void findAllTest() {
@@ -43,7 +34,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 返回所有敏感词
-     * @since 0.1.0
      */
     @Test
     public void findAllWordTest() {
@@ -55,7 +45,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 返回所有敏感词-包含下标志
-     * @since 0.1.0
      */
     @Test
     public void findAllRawTest() {
@@ -68,7 +57,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 返回所有第一个匹配的敏感词
-     * @since 0.0.1
      */
     @Test
     public void findFirstTest() {
@@ -80,7 +68,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 返回所有第一个匹配的敏感词
-     * @since 0.0.1
      */
     @Test
     public void findFirstWordTest() {
@@ -92,7 +79,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 返回所有第一个匹配的敏感词
-     * @since 0.0.1
      */
     @Test
     public void findFirstRawTest() {
@@ -104,7 +90,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 默认的替换策略
-     * @since 0.0.2
      */
     @Test
     public void replaceTest() {
@@ -116,7 +101,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 自定义字符的替换策略
-     * @since 0.0.2
      */
     @Test
     public void replaceCharTest() {
@@ -128,7 +112,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 忽略大小写
-     * @since 0.0.4
      */
     @Test
     public void ignoreCaseTest() {
@@ -140,7 +123,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 忽略半角圆角
-     * @since 0.0.4
      */
     @Test
     public void ignoreWidthTest() {
@@ -152,7 +134,6 @@ public class SensitiveWordHelperTest {
 
     /**
      * 自定替换策略
-     * @since 0.2.0
      */
     @Test
     public void defineReplaceTest() {

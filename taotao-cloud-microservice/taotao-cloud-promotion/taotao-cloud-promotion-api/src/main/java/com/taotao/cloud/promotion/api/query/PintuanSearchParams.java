@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 拼团查询通用类
- **/
+ */
 @Setter
 @Getter
 @SuperBuilder

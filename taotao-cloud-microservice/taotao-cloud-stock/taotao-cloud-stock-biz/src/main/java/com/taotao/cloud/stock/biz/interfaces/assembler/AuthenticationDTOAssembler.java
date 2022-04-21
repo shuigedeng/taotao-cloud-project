@@ -8,7 +8,7 @@ import com.xtoon.cloud.sys.dto.AuthenticationDTO;
  *
  * @author shuigedeng
  * @date 2021-02-09
- **/
+ */
 public class AuthenticationDTOAssembler {
 
     public static AuthenticationDTO fromUser(final User user) {

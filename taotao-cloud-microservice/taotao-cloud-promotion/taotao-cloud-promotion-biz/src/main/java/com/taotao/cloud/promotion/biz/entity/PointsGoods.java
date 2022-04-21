@@ -14,7 +14,7 @@ import lombok.Setter;
 
 /**
  * 积分商品实体类
- **/
+ */
 @Setter
 @Getter
 @Builder

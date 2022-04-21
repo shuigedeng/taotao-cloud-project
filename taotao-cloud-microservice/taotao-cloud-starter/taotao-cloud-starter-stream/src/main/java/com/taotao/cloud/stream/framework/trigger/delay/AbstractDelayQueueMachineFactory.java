@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 延时队列工厂
- **/
+ */
 public abstract class AbstractDelayQueueMachineFactory implements DelayQueueMachine {
 
 	@Autowired

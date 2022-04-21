@@ -5,7 +5,7 @@ package com.taotao.cloud.stock.biz.application.service;
  *
  * @author shuigedeng
  * @date 2021-02-14
- **/
+ */
 public interface TenantApplicationService {
 
     /**

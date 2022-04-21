@@ -3,6 +3,8 @@ package com.taotao.cloud.order.api.dto.order;
 
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import lombok.NoArgsConstructor;
 public class PriceDetailDTO implements Serializable {
 
 
+	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;
 	/**
 	 * 订单原始总价格 用于订单价格修改金额计算使用

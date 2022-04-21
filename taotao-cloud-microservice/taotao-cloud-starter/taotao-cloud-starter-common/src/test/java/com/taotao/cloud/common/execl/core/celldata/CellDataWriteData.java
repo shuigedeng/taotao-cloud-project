@@ -1,20 +1,11 @@
-package com.alibaba.easyexcel.test.core.celldata;
+package com.taotao.cloud.common.execl.core.celldata;
 
 import java.util.Date;
 
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.metadata.data.WriteCellData;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-/**
- * @author Jiaju Zhuang
- */
-@Getter
-@Setter
-@EqualsAndHashCode
 public class CellDataWriteData {
     @DateTimeFormat("yyyy年MM月dd日")
     private WriteCellData<Date> date;

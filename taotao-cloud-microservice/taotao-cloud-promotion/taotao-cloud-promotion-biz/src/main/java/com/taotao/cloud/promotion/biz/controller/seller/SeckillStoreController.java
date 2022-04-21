@@ -27,7 +27,7 @@ import java.util.Objects;
  *
  * 
  * @since 2020/8/26
- **/
+ */
 @RestController
 @Tag(name = "店铺端,秒杀活动接口")
 @RequestMapping("/store/promotion/seckill")

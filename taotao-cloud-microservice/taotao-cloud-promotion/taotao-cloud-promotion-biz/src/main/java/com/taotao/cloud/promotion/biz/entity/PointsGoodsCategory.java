@@ -19,7 +19,7 @@ import lombok.Setter;
  * 积分商品分类
  *
  * 
- **/
+ */
 @Setter
 @Getter
 @Builder

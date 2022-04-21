@@ -14,6 +14,9 @@ import java.util.Objects;
 /**
  * 小程序直播间表
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  * @since 2021/5/17 9:47 上午
  */
 @Getter
@@ -37,7 +40,8 @@ public class Studio extends BaseSuperEntity<Studio, Long> {
 	private String name;
 
 	/**
-	 * 背景图，填入mediaID（mediaID获取后，三天内有效）；图片mediaID的获取，请参考以下文档： https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html；直播间背景图，图片规则：建议像素1080*1920，大小不超过2M
+	 * 背景图，填入mediaID（mediaID获取后，三天内有效）；图片mediaID的获取，请参考以下文档：
+	 * <a href="https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html">https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html</a>；直播间背景图，图片规则：建议像素1080*1920，大小不超过2M
 	 */
 	@Column(name = "cover_img", columnDefinition = "varchar(255) not null comment '背景图'")
 	private String coverImg;

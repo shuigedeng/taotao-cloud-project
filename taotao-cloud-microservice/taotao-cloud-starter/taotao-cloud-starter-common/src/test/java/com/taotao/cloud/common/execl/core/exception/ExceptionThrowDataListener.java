@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.exception;
+package com.taotao.cloud.common.execl.core.exception;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Jiaju Zhuang
+
  */
 public class ExceptionThrowDataListener implements ReadListener<ExceptionData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionData.class);

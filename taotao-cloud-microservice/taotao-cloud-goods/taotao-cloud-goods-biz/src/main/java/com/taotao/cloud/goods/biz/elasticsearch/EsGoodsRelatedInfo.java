@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * 搜索相关商品品牌名称，分类名称及属性
- **/
+ */
 @Data
 public class EsGoodsRelatedInfo {
 

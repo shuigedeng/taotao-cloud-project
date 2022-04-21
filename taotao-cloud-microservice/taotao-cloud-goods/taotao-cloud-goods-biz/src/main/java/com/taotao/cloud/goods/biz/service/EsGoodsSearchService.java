@@ -10,7 +10,10 @@ import java.util.List;
 
 /**
  * ES商品搜索业务层
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
+ */
 public interface EsGoodsSearchService {
 
 	/**

@@ -16,9 +16,9 @@
 package com.taotao.cloud.operation.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.operation.api.feign.fallback.RemoteWithdrawFallbackImpl;
-import com.taotao.cloud.operation.api.vo.WithdrawVO;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.operation.api.feign.fallback.FeignArticleServiceFallback;
+import com.taotao.cloud.operation.api.vo.ArticleVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,19 +29,17 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteWithdrawFallbackImpl.class)
-public interface RemoteWithdrawService {
+@FeignClient(contextId = "IFeignArticleService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignArticleServiceFallback.class)
+public interface IFeignArticleService {
 
 	/**
-	 * 根据id查询提现申请信息
+	 * 根据id查询文章详情
 	 *
 	 * @param id id
-	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.aftersale.api.vo.WithdrawVO>
-	 * @author shuigedeng
+	 * @return 文章详情
 	 * @since 2020/11/20 上午9:50
-	 * @version 2022.03
 	 */
 	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
-	Result<WithdrawVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);
+	Result<ArticleVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);
 }
 

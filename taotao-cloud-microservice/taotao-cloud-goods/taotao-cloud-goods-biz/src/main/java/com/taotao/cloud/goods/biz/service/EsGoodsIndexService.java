@@ -13,7 +13,10 @@ import java.util.Map;
 
 /**
  * 商品索引业务层
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
+ */
 public interface EsGoodsIndexService {
 
 	/**

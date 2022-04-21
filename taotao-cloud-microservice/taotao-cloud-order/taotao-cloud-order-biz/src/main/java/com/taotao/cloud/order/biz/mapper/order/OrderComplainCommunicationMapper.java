@@ -5,7 +5,7 @@ import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 
 /**
  * 交易投诉通信数据处理层
- **/
+ */
 public interface OrderComplainCommunicationMapper extends BaseMapper<OrderComplaintCommunication> {
 
 }

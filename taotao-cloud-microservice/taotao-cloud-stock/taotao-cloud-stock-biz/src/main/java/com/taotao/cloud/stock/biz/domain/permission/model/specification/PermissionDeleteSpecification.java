@@ -10,7 +10,7 @@ import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
  *
  * @author shuigedeng
  * @date 2021-02-20
- **/
+ */
 public class
 PermissionDeleteSpecification extends AbstractSpecification<PermissionId> {
 

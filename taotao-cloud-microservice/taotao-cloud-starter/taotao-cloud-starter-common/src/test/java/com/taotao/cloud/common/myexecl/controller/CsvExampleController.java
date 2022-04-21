@@ -14,8 +14,6 @@
  */
 package com.taotao.cloud.common.myexecl.controller;
 
-import com.github.liaochong.example.pojo.ArtCrowd;
-import com.github.liaochong.example.pojo.People;
 import com.github.liaochong.myexcel.core.Csv;
 import com.github.liaochong.myexcel.core.CsvBuilder;
 import com.github.liaochong.myexcel.utils.AttachmentExportUtil;

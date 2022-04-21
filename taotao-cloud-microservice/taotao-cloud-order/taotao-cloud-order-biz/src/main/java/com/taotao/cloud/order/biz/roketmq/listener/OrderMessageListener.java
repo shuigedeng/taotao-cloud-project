@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 订单消息
- **/
+ */
 @Component
 @RocketMQMessageListener(topic = "${taotao.data.rocketmq.order-topic}", consumerGroup = "${taotao.data.rocketmq.order-group}")
 public class OrderMessageListener implements RocketMQListener<MessageExt> {

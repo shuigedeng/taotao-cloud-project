@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 砍价活动商品操作DTO
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

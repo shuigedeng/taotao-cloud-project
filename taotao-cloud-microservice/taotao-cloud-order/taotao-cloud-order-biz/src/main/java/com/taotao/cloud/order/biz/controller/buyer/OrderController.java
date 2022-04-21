@@ -1,13 +1,12 @@
 package com.taotao.cloud.order.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
@@ -45,10 +44,10 @@ public class OrderController {
 	@RequestLogger("查询会员订单列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
+	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
 		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-		orderSearchParams.setMemberId(currentUser.getId());
-		return Result.success(orderService.queryByParams(orderSearchParams));
+		orderPageQuery.setMemberId(currentUser.getId());
+		return Result.success(orderService.queryByParams(orderPageQuery));
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")

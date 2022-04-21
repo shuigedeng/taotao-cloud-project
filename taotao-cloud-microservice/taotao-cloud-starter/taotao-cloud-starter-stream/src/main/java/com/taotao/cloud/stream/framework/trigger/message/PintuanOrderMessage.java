@@ -3,7 +3,7 @@ package com.taotao.cloud.stream.framework.trigger.message;
 
 /**
  * 拼团订单延时任务信息
- **/
+ */
 public class PintuanOrderMessage {
 
 	/**

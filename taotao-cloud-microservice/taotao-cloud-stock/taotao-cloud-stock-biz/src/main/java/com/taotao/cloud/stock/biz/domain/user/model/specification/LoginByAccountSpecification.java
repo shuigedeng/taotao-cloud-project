@@ -8,7 +8,7 @@ import com.xtoon.cloud.sys.domain.model.user.User;
  *
  * @author shuigedeng
  * @date 2021-02-20
- **/
+ */
 public class
 LoginByAccountSpecification extends AbstractSpecification<User> {
 

@@ -2,7 +2,7 @@ package com.taotao.cloud.stream.framework.rocketmq.tags;
 
 /**
  * 售后标签枚举
- **/
+ */
 public enum AfterSaleTagsEnum {
 
     /**

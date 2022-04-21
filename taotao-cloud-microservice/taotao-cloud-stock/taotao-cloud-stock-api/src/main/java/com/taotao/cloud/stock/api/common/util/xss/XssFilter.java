@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 public class XssFilter implements Filter {
 
 	@Override

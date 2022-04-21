@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @author shuigedeng
  * @date 2021-02-14
- **/
+ */
 @Data
 @ApiModel(value = "注册租户", description = "注册租户")
 public class RegisterTenantCommand {

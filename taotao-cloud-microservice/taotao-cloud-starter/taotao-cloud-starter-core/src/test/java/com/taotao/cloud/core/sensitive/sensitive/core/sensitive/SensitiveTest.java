@@ -10,15 +10,11 @@ import org.junit.Test;
 
 /**
  * Sensitive 脱敏测试类
- * @author binbin.hou
- * date 2018/12/29
- * @since 0.0.1
  */
 public class SensitiveTest {
 
     /**
      * 单个属性测试
-     * @since 0.0.1
      */
     @Test
     public void singleSensitiveTest() {
@@ -31,7 +27,6 @@ public class SensitiveTest {
 
     /**
      * 普通脱敏测试
-     * @since 0.0.1
      */
     @Test
     public void commonSensitiveTest() {

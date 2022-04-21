@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.poi;
+package com.taotao.cloud.common.execl.temp.poi;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.util.FileUtils;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -36,8 +36,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 测试poi
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class PoiTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(PoiTest.class);

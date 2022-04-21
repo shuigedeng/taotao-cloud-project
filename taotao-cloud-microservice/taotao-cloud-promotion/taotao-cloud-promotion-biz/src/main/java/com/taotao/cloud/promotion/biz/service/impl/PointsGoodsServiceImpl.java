@@ -32,7 +32,7 @@ import java.util.Map;
  *
  * 
  * @since 2020/8/21
- **/
+ */
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods> implements

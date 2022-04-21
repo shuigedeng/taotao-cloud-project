@@ -1,14 +1,10 @@
-package com.alibaba.easyexcel.test.temp.data;
+package com.taotao.cloud.common.execl.temp.data;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+
+com.taotao.cloud.common.execl
 public class DataType {
     /**
      * 任务id

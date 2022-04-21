@@ -19,6 +19,9 @@ import lombok.Setter;
 
 /**
  * 购物车展示VO
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

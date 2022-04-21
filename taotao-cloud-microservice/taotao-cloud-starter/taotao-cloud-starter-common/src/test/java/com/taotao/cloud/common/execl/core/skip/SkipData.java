@@ -1,17 +1,13 @@
-package com.alibaba.easyexcel.test.core.skip;
+package com.taotao.cloud.common.execl.core.skip;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
- * @author Jiaju Zhuang
+
  */
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 public class SkipData {
 
     @ExcelProperty("姓名")

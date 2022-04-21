@@ -10,6 +10,9 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 商品分类
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 15:59:38
  */
 @Data
 @SuperBuilder

@@ -24,7 +24,7 @@ import java.util.Objects;
   * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
- **/
+ */
 public class Pair<L, R> {
 
 	private static final Pair<Object, Object> EMPTY = new Pair<>(null, null);

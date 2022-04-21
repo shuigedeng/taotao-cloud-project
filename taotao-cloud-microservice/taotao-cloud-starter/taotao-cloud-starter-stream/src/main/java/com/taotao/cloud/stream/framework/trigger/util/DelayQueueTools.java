@@ -5,7 +5,7 @@ import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
 
 /**
  * 延时任务工具类
- **/
+ */
 public class DelayQueueTools {
 
 	/**

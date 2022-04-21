@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 会员vo
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

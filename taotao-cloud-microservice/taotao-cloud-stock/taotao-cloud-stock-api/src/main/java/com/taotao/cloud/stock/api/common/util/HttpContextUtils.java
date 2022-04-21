@@ -6,7 +6,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * HttpContextUtils
- **/
+ */
 public class HttpContextUtils {
 
     public static HttpServletRequest getHttpServletRequest() {

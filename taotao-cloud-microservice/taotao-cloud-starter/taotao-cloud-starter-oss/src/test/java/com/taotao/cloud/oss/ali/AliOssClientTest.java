@@ -9,11 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * @author 陈敏
- * @version AliOssClientTest.java, v 1.1 2021/11/16 21:19 chenmin Exp $
- * Created on 2021/11/16
- */
 @SpringBootTest
 class AliOssClientTest implements StandardOssClientTest {
 

@@ -10,7 +10,7 @@ import lombok.Setter;
 
 /**
  * 投诉通信VO
- **/
+ */
 @Setter
 @Getter
 @Builder

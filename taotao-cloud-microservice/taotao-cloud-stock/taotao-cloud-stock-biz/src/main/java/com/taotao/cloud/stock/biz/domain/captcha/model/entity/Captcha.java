@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 public class Captcha implements Entity<Captcha> {
 
     private com.taotao.cloud.stock.biz.domain.model.captcha.Uuid uuid;

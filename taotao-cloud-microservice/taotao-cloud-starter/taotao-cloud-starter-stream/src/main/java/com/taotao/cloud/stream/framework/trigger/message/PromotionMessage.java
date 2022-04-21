@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * 信息队列传输促销信息实体
- **/
+ */
 public class PromotionMessage {
 
 	/**

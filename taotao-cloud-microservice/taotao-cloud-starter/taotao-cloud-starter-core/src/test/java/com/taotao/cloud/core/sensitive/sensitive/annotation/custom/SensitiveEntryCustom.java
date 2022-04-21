@@ -11,9 +11,6 @@ import java.lang.annotation.*;
  * 2. 如果是普通对象，则处理对象中的脱敏信息
  * 3. 如果是普通字段/MAP，则不做处理
  *
- * @author dev-sxl
- * date 2020-09-14
- * @since 0.0.11
  */
 @Inherited
 @Documented

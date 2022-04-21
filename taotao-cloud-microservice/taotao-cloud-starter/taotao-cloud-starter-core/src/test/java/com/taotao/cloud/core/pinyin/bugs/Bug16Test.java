@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.pinyin.bugs;
 
-import com.taotao.cloud.core.pinyin.util.PinyinHelper;
+import com.taotao.cloud.common.utils.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
 

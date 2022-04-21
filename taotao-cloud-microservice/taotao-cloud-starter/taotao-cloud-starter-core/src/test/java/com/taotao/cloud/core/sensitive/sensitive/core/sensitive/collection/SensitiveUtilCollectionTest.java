@@ -11,14 +11,11 @@ import java.util.List;
 
 /**
  * 脱敏集合相关测试
- * @author binbin.hou
- * @since 0.0.7
  */
 public class SensitiveUtilCollectionTest {
 
     /**
      * 脱敏集合测试
-     * @since 0.0.7
      */
     @Test
     public void desCopyCollectionTest() {
@@ -30,7 +27,6 @@ public class SensitiveUtilCollectionTest {
 
     /**
      * 脱敏集合空测试
-     * @since 0.0.7
      */
     @Test
     public void desCopyCollectionEmptyTest() {
@@ -43,7 +39,6 @@ public class SensitiveUtilCollectionTest {
 
     /**
      * 脱敏集合测试
-     * @since 0.0.7
      */
     @Test
     public void desJsonCollectionTest() {
@@ -55,7 +50,6 @@ public class SensitiveUtilCollectionTest {
 
     /**
      * 脱敏集合 json 空场景测试
-     * @since 0.0.7
      */
     @Test
     public void desJsonCollectionEmptyTest() {

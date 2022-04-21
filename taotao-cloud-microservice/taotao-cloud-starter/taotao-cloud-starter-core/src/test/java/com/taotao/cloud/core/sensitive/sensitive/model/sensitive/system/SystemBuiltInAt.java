@@ -9,8 +9,6 @@ import com.taotao.cloud.core.sensitive.sensitive.annotation.strategy.SensitiveSt
 
 /**
  * 系统内置注解
- * @author binbin.hou
- * date 2019/1/15
  */
 public class SystemBuiltInAt {
 

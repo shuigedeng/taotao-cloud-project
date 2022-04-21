@@ -3,10 +3,7 @@ package com.taotao.cloud.core.sensitive.sensitive.model.bugs;
 
 import com.taotao.cloud.core.sensitive.sensitive.annotation.SensitiveEntry;
 
-/**
- * @author binbin.hou
- * @since 0.0.11
- */
+
 public class Father {
 
     @SensitiveEntry

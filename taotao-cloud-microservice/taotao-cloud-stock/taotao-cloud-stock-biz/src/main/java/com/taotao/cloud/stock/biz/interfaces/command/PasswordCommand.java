@@ -7,7 +7,7 @@ import lombok.Data;
  *
  * @author shuigedeng
  * @date 2021-02-20
- **/
+ */
 @Data
 public class PasswordCommand {
 

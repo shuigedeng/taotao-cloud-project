@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.poi;
+package com.taotao.cloud.common.execl.temp.poi;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 测试poi
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class PoiWriteTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(PoiWriteTest.class);

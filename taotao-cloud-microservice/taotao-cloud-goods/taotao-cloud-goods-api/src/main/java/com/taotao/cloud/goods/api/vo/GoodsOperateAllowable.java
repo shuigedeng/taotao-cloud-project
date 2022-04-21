@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品操作允许的范围
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 15:59:38
  */
 @Data
 @Builder
@@ -50,12 +53,6 @@ public class GoodsOperateAllowable implements Serializable {
 	 */
 	private Boolean allowUpper;
 
-	/**
-	 * 构造函数
-	 *
-	 * @param marketEnable
-	 * @param deleteFlag
-	 */
 	public GoodsOperateAllowable(String marketEnable, Boolean deleteFlag) {
 		this.marketEnable = marketEnable;
 		this.deleteFlag = deleteFlag;

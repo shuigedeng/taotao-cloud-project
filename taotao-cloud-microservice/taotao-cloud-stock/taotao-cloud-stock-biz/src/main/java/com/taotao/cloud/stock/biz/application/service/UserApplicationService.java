@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author shuigedeng
  * @date 2021-02-09
- **/
+ */
 public interface UserApplicationService {
 
     /**

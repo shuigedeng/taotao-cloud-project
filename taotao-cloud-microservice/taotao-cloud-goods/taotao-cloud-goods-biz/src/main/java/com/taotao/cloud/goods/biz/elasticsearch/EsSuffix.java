@@ -5,7 +5,7 @@ package com.taotao.cloud.goods.biz.elasticsearch;
  *
  * @author paulG
  * @since 2020/10/13
- **/
+ */
 public class EsSuffix {
 
     /**

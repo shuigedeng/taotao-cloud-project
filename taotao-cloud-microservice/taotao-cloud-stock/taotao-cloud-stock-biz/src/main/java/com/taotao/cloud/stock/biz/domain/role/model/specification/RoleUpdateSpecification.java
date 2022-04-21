@@ -8,7 +8,7 @@ import com.xtoon.cloud.sys.domain.model.role.Role;
  *
  * @author shuigedeng
  * @date 2021-02-27
- **/
+ */
 public class RoleUpdateSpecification extends AbstractSpecification<Role> {
 
     @Override

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author shuigedeng
  * @date 2021-05-10
- **/
+ */
 public class Uuid implements ValueObject<Uuid> {
 
     private String id;

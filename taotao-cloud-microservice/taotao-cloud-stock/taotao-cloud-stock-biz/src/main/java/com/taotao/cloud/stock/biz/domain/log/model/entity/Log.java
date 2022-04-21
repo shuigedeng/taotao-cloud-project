@@ -11,7 +11,7 @@ import com.xtoon.cloud.sys.domain.model.user.UserName;
  *
  * @author shuigedeng
  * @date 2021-02-02
- **/
+ */
 public class Log implements Entity<Log> {
 
     /**

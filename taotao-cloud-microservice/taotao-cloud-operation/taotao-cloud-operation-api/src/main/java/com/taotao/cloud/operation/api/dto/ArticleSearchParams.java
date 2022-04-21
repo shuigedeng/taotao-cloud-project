@@ -2,36 +2,36 @@ package com.taotao.cloud.operation.api.dto;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * 商品查询条件
- *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticleSearchParams extends PageVO {
+public class ArticleSearchParams extends PageParam {
 
-    @Schema(description =  "文章分类ID")
-    private String categoryId;
+	@Schema(description = "文章分类ID")
+	private String categoryId;
 
-    @Schema(description =  "标题")
-    private String title;
+	@Schema(description = "标题")
+	private String title;
 
-    @Schema(description =  "分类类型")
-    private String type;
+	@Schema(description = "分类类型")
+	private String type;
 
-    public <T> QueryWrapper<T> queryWrapper() {
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(StringUtils.isNotBlank(categoryId), "category_id", categoryId);
-        queryWrapper.like(StringUtils.isNotBlank(title), "title", title);
-        return queryWrapper;
-    }
+	public <T> QueryWrapper<T> queryWrapper() {
+		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq(StringUtils.isNotBlank(categoryId), "category_id", categoryId);
+		queryWrapper.like(StringUtils.isNotBlank(title), "title", title);
+		return queryWrapper;
+	}
 }

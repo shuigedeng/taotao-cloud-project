@@ -5,11 +5,7 @@ import com.taotao.cloud.core.sensitive.sensitive.annotation.custom.SensitiveCust
 import com.taotao.cloud.core.sensitive.sensitive.annotation.custom.SensitiveCustomPasswordStrategy;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.strategy.SensitiveStrategyPassword;
 
-/**
- * @author binbin.hou
- * date 2019/1/17
- * @since 0.0.4
- */
+
 public class CustomPasswordModel {
 
     @SensitiveCustomPasswordCondition

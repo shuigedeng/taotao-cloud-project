@@ -9,7 +9,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
@@ -81,7 +81,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
             log.error("拼团活动为" + pintuanId + "的拼团活动不存在！");
             return new ArrayList<>();
         }
-        OrderSearchParams searchParams = new OrderSearchParams();
+        OrderPageQuery searchParams = new OrderPageQuery();
         searchParams.setOrderStatus(OrderStatusEnum.PAID.name());
         searchParams.setPromotionId(pintuanId);
         searchParams.setOrderPromotionType(PromotionTypeEnum.PINTUAN.name());

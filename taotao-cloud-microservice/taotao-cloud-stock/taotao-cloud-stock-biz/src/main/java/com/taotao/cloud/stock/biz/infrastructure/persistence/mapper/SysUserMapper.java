@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-01-23
- **/
+ */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUserDO> {
 

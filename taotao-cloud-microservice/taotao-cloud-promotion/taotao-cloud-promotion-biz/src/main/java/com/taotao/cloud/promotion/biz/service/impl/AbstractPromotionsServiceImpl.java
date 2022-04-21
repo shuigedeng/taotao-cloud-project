@@ -30,7 +30,7 @@ import java.util.*;
 /**
  * 
  * @since 2021/11/30
- **/
+ */
 public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions<T, Long>> extends ServiceImpl<M, T> implements
 	AbstractPromotionsService<T> {
 

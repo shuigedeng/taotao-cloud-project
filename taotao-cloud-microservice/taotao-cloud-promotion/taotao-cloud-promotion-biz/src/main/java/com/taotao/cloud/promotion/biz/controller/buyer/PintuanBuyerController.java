@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 买家端,拼团接口
  *
  * @since 2021/2/20
- **/
+ */
 @Tag(name = "买家端,拼团接口")
 @RestController
 @RequestMapping("/buyer/promotion/pintuan")

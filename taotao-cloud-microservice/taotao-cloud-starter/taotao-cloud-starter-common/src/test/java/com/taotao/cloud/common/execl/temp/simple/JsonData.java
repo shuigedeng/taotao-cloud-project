@@ -1,17 +1,13 @@
-package com.alibaba.easyexcel.test.temp.simple;
+package com.taotao.cloud.common.execl.temp.simple;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  * TODO
  *
- * @author Jiaju Zhuang
- **/
-@Getter
-@Setter
-@EqualsAndHashCode
+
+ */
+com.taotao.cloud.common.execl
 public class JsonData {
     private String SS1;
     private String sS2;

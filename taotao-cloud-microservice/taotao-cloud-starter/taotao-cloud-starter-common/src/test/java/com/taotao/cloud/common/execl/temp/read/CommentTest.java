@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.read;
+package com.taotao.cloud.common.execl.temp.read;
 
 import java.io.File;
 import java.util.List;
@@ -16,8 +16,8 @@ import com.alibaba.fastjson.JSON;
 /**
  * 临时测试
  *
- * @author Jiaju Zhuang
- **/
+
+ */
 @Ignore
 public class CommentTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentTest.class);

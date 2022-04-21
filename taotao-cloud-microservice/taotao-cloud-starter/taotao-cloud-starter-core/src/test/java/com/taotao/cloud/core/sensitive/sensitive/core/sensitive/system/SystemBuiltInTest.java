@@ -9,9 +9,6 @@ import org.junit.Test;
 
 /**
  * 系统内置注解测试
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.3
  */
 public class SystemBuiltInTest {
 
@@ -49,7 +46,6 @@ public class SystemBuiltInTest {
 
     /**
      * 普通属性脱敏 JSON 测试
-     * @since 0.0.6
      */
     @Test
     public void sensitiveJsonTest() {
@@ -63,7 +59,7 @@ public class SystemBuiltInTest {
 
     /**
      * 属性包含对象 JSON
-     * @since 0.0.6
+
      */
     @Test
     public void sensitiveEntryJsonTest() {

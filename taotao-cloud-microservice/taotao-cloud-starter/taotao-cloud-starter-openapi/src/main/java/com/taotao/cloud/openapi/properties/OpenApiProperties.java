@@ -41,66 +41,66 @@ public class OpenApiProperties {
 
 	/**
 	 * 是否开启springdoc
-	 **/
+	 */
 	private Boolean enabled = false;
 	/**
 	 * group default applicationName
-	 **/
+	 */
 	private String group = PropertyUtil.getProperty("spring.application.name");
 
 	/**
 	 * pathsToMatch default /**
-	 **/
+	 */
 	private String[] pathsToMatch = new String[]{"/**"};
 
 	/**
 	 * version default taotaoCloudVersion
-	 **/
+	 */
 	private String version = PropertyUtil.getProperty("taotaoCloudVersion");
 	/**
 	 * SecuritySchemes
-	 **/
+	 */
 	private Map<String, SecurityScheme> securitySchemes = new HashMap<>();
 	/**
 	 * Headers
-	 **/
+	 */
 	private Map<String, Header> headers = new HashMap<>();
 	/**
 	 * Headers
-	 **/
+	 */
 	private List<Server> servers = new ArrayList<>();
 	/**
 	 * title
-	 **/
+	 */
 	private String title =
 		PropertyUtil.getProperty("spring.application.name").toUpperCase() + " API";
 	/**
 	 * description
-	 **/
+	 */
 	private String description = "TAOTAO CLOUD 电商及大数据平台";
 	/**
 	 * contact
-	 **/
+	 */
 	private Contact contact;
 	/**
 	 * termsOfService
-	 **/
+	 */
 	private String termsOfService = "http://taotaocloud.com/terms/";
 	/**
 	 * license
-	 **/
+	 */
 	private License license;
 	/**
 	 * externalDescription
-	 **/
+	 */
 	private String externalDescription = "TaoTao Cloud Wiki Documentation";
 	/**
 	 * externalUrl
-	 **/
+	 */
 	private String externalUrl = "https://github.com/shuigedeng/taotao-cloud-project/wiki";
 	/**
 	 * openapi
-	 **/
+	 */
 	private String openapi = "3.0.1";
 
 	public Boolean getEnabled() {

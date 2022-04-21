@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * 商品分类规格业务层实现
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @Service
 public class CategorySpecificationServiceImpl extends

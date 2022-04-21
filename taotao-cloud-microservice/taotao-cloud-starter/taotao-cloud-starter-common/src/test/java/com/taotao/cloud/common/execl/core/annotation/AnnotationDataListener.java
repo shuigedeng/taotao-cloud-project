@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.annotation;
+package com.taotao.cloud.common.execl.core.annotation;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -14,9 +14,6 @@ import com.alibaba.excel.exception.ExcelCommonException;
 import com.alibaba.excel.util.DateUtils;
 import com.alibaba.fastjson.JSON;
 
-/**
- * @author Jiaju Zhuang
- */
 public class AnnotationDataListener extends AnalysisEventListener<AnnotationData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationDataListener.class);
     List<AnnotationData> list = new ArrayList<AnnotationData>();

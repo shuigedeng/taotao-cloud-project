@@ -10,7 +10,7 @@ import com.xtoon.cloud.sys.domain.model.user.User;
  *
  * @author shuigedeng
  * @date 2021-02-27
- **/
+ */
 public class UserUpdateSpecification extends AbstractSpecification<User> {
 
     private TenantRepository tenantRepository;

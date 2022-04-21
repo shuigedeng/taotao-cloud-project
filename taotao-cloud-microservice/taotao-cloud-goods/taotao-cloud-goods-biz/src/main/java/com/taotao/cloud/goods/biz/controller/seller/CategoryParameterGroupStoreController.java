@@ -18,6 +18,9 @@ import java.util.List;
 
 /**
  * 店铺端,分类绑定参数组接口
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  */
 @AllArgsConstructor
 @Validated

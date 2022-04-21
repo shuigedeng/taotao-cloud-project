@@ -3,6 +3,9 @@ package com.taotao.cloud.payment.api.enums;
 /**
  * 支付方式枚举
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
  */
 public enum PaymentMethodEnum {
 
@@ -43,8 +46,8 @@ public enum PaymentMethodEnum {
     /**
      * 根据支付方式名称返回对象
      *
-     * @param name
-     * @return
+     * @param name 支付方式
+     * @return 对象
      */
     public static PaymentMethodEnum paymentNameOf(String name) {
         for (PaymentMethodEnum value : PaymentMethodEnum.values()) {

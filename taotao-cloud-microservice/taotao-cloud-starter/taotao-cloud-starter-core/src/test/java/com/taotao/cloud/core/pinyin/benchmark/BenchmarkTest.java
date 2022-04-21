@@ -15,25 +15,16 @@
 //import java.util.List;
 //import java.util.concurrent.ThreadLocalRandom;
 //
-///**
-// * <p> project: pinyin-BenchmarkTest </p>
-// * <p> create on 2020/1/18 21:36 </p>
-// *
-// * @author Administrator
-// * @since 0.0.4
-// */
 //@Ignore
 //public class BenchmarkTest {
 //
 //    /**
 //     * 1w 次
-//     * @since 0.0.4
 //     */
 //    private static final int TIMES = 10000;
 //
 //    /**
 //     * 单个字符次数统计
-//     * @since 0.0.4
 //     */
 //    private static final int SINGLE_TIMES = 1000000;
 //
@@ -43,7 +34,6 @@
 //     * Pinyin4j 有中文分词，不过拼音的格式效果不是很好。
 //     *
 //     * 重庆火锅：chong qing huoguo
-//     * @since 0.2.0
 //     */
 //    @Test
 //    public void pinyin4jTest() throws BadHanyuPinyinOutputFormatCombination {
@@ -99,7 +89,6 @@
 //     *
 //     * 使用指定的 chars 分词测试
 //     *
-//     * @since 0.2.0
 //     */
 //    @Test
 //    public void pinyinWithCharSegmentTest() {
@@ -122,7 +111,6 @@
 //    /**
 //     * 获取文本内容
 //     * @return 内容
-//     * @since 0.0.1
 //     */
 //    private String getText() {
 //        return StreamUtil.getFileContent("back/永远的夏娃.txt");

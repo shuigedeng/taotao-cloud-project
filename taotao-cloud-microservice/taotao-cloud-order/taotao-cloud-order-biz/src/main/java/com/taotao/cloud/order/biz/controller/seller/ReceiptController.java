@@ -1,12 +1,11 @@
 package com.taotao.cloud.order.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
+import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
 import com.taotao.cloud.order.biz.service.order.OrderService;
 import com.taotao.cloud.order.biz.service.order.ReceiptService;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 店铺端,发票API
- **/
+ */
 @AllArgsConstructor
 @Validated
 @RestController
@@ -43,10 +42,10 @@ public class ReceiptController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderReceiptDTO>> getByPage(PageVO page,
-		ReceiptSearchParams receiptSearchParams) {
+		ReceiptPageQuery receiptPageQuery) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		receiptSearchParams.setStoreId(storeId);
-		return Result.success(receiptService.getReceiptData(receiptSearchParams, page));
+		receiptPageQuery.setStoreId(storeId);
+		return Result.success(receiptService.getReceiptData(receiptPageQuery, page));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

@@ -7,8 +7,6 @@ import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplaceContext;
 /**
  * 自定义敏感词替换策略
  *
- * @author binbin.hou
- * @since 0.2.0
  */
 public class MySensitiveWordReplace implements ISensitiveWordReplace {
 

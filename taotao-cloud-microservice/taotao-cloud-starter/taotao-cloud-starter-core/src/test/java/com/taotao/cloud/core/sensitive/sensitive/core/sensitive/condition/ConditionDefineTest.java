@@ -7,9 +7,6 @@ import org.junit.Test;
 
 /**
  * 自定义条件测试
- * @author binbin.hou
- * date 2019/1/15
- * @since 1.0.0
  */
 public class ConditionDefineTest {
 
@@ -30,7 +27,6 @@ public class ConditionDefineTest {
 
     /**
      * 条件测试 JSON
-     * @since 0.0.6
      */
     @Test
     public void conditionPasswordJsonTest() {
@@ -46,7 +42,6 @@ public class ConditionDefineTest {
     /**
      * 构建测试用户对象
      * @return 创建后的对象
-     * @since 0.0.1
      */
     private static SensitiveConditionPassword buildUser() {
         SensitiveConditionPassword user = new SensitiveConditionPassword();

@@ -7,10 +7,10 @@ import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
-import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
-import com.taotao.cloud.order.api.vo.order.PaymentLog;
+import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,18 +43,18 @@ public interface OrderService extends IService<Order> {
 	/**
 	 * 订单查询
 	 *
-	 * @param orderSearchParams 查询参数
+	 * @param orderPageQuery 查询参数
 	 * @return 简短订单分页
 	 */
-	IPage<OrderSimpleVO> queryByParams(OrderSearchParams orderSearchParams);
+	IPage<OrderSimpleVO> queryByParams(OrderPageQuery orderPageQuery);
 
 	/**
 	 * 订单信息
 	 *
-	 * @param orderSearchParams 查询参数
+	 * @param orderPageQuery 查询参数
 	 * @return 订单信息
 	 */
-	List<Order> queryListByParams(OrderSearchParams orderSearchParams);
+	List<Order> queryListByParams(OrderPageQuery orderPageQuery);
 
 	/**
 	 * 根据促销查询订单
@@ -92,10 +92,10 @@ public interface OrderService extends IService<Order> {
 	/**
 	 * 查询导出订单列表
 	 *
-	 * @param orderSearchParams 查询参数
+	 * @param orderPageQuery 查询参数
 	 * @return 导出订单列表
 	 */
-	List<OrderExportDTO> queryExportOrder(OrderSearchParams orderSearchParams);
+	List<OrderExportDTO> queryExportOrder(OrderPageQuery orderPageQuery);
 
 
 	/**
@@ -264,5 +264,5 @@ public interface OrderService extends IService<Order> {
 	 * @param queryWrapper 查询条件
 	 * @return 订单支付记录分页
 	 */
-	IPage<PaymentLog> queryPaymentLogs(IPage<PaymentLog> page, Wrapper<PaymentLog> queryWrapper);
+	IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page, Wrapper<PaymentLogVO> queryWrapper);
 }

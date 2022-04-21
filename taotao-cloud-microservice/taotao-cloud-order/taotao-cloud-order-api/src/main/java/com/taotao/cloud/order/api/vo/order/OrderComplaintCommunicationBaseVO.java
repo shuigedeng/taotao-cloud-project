@@ -12,7 +12,10 @@ import java.io.Serializable;
 
 /**
  * 订单交易投诉通信表
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-21 16:59:38
+ */
 @Data
 @Builder
 @AllArgsConstructor

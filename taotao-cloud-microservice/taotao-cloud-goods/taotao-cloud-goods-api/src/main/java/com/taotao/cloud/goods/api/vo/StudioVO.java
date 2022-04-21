@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 直播间VO
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-15 20:59:38
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -8,9 +8,6 @@ import org.junit.Test;
 
 /**
  * 混合模式测试
- * @author binbin.hou
- * date 2019/1/15
- * @since 0.0.3
  */
 public class SystemBuiltInMixedTest {
 
@@ -31,7 +28,6 @@ public class SystemBuiltInMixedTest {
 
     /**
      * 系统内置+Sensitive注解测试JSON
-     * @since 0.0.6
      */
     @Test
     public void systemBuiltInAndSensitiveJsonTest() {

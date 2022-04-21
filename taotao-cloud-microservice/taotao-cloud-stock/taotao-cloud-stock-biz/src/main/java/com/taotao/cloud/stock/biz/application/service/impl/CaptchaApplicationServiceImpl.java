@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  *
  * @author shuigedeng
  * @date 2021-06-23
- **/
+ */
 @Service
 public class CaptchaApplicationServiceImpl implements CaptchaApplicationService {
 

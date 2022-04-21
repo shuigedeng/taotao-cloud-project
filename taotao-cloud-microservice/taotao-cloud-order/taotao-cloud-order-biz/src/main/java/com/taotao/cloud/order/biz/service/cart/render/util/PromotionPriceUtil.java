@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 促销价格计算业务层实现
- **/
+ */
 @Service
 public class PromotionPriceUtil {
 

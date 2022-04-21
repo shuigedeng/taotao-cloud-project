@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * 订单自动取消（每分钟执行）
- **/
+ */
 @Component
 public class CancelOrderTaskExecute implements EveryMinuteExecute {
 

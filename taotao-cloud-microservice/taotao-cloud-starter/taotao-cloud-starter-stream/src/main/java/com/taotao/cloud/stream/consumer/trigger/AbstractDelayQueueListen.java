@@ -9,7 +9,7 @@ import org.springframework.boot.ApplicationRunner;
 
 /**
  * 延时队列工厂
- **/
+ */
 public abstract class AbstractDelayQueueListen implements ApplicationRunner {
 
 	@Autowired

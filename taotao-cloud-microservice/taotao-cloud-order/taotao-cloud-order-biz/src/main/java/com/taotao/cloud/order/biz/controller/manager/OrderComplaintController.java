@@ -1,7 +1,6 @@
 package com.taotao.cloud.order.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
@@ -10,7 +9,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.api.dto.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintBaseVO;

@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 积分商品实体类
- **/
+ */
 @Data
 @SuperBuilder
 @AllArgsConstructor

@@ -28,7 +28,6 @@ import lombok.experimental.SuperBuilder;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsPageQuery extends PageParam {

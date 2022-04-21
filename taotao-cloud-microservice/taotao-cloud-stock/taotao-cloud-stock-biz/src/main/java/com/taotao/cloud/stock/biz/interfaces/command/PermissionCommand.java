@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @author shuigedeng
  * @date 2021-02-18
- **/
+ */
 @Data
 @ApiModel(value = "权限", description = "权限")
 public class PermissionCommand {

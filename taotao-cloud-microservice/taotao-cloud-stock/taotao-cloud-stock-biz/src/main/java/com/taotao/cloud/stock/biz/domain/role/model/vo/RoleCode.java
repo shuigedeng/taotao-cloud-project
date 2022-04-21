@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *
  * @author shuigedeng
  * @date 2021-02-08
- **/
+ */
 public class RoleCode implements ValueObject<RoleCode> {
 
     /**

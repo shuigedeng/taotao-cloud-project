@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.temp.issue1662;
+package com.taotao.cloud.common.execl.temp.issue1662;
 
 import java.util.Date;
 
@@ -10,9 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+com.taotao.cloud.common.execl
 @AllArgsConstructor
 @NoArgsConstructor
 public class Data1662 {

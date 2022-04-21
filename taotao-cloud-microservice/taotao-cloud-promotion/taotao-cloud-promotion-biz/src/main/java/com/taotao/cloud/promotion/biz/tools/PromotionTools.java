@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  * 优惠活动通用验证类
- **/
+ */
 public class PromotionTools {
 
 	public static final String START_TIME_COLUMN = "start_time";

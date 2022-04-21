@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
+ */
 @Slf4j
 @Component
 public class HotWordsEveryDayTaskExecute implements EveryDayExecute {

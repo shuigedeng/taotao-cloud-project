@@ -1,6 +1,8 @@
 package com.taotao.cloud.order.api.vo.trade;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "预存款充值记录查询条件")
 public class RechargeQueryVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 318396158590640917L;
 
 	@Schema(description = "充值订单编号")

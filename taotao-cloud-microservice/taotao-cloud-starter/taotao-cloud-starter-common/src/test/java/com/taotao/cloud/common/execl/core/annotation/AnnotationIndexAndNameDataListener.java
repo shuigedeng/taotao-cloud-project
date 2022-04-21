@@ -1,4 +1,4 @@
-package com.alibaba.easyexcel.test.core.annotation;
+package com.taotao.cloud.common.execl.core.annotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,6 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
 
-/**
- * @author Jiaju Zhuang
- */
 public class AnnotationIndexAndNameDataListener extends AnalysisEventListener<AnnotationIndexAndNameData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationIndexAndNameDataListener.class);
     List<AnnotationIndexAndNameData> list = new ArrayList<AnnotationIndexAndNameData>();

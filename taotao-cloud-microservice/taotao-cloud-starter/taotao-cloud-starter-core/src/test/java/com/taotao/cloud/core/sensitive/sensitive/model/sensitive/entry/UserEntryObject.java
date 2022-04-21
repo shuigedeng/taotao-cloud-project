@@ -8,9 +8,6 @@ import java.util.List;
 
 /**
  * 对象中有列表，列表中放置的为对象
- * @author binbin.hou
- * date 2019/1/9
- * @since 0.0.2
  */
 public class UserEntryObject {
 

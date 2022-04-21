@@ -3,13 +3,6 @@ package com.taotao.cloud.core.sensitive.word.bs;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * <p> project: sensitive-word-SensitiveWordBsConfigTest </p>
- * <p> create on 2020/1/7 23:43 </p>
- *
- * @author Administrator
- * @since 0.0.14
- */
 public class SensitiveWordBsConfigTest {
 
     @Test

@@ -10,7 +10,7 @@ import java.util.List;
  *
  * 
  * @since 2020/11/18 9:45 上午
- **/
+ */
 public interface PointsGoodsService extends AbstractPromotionsService<PointsGoods> {
 
     /**

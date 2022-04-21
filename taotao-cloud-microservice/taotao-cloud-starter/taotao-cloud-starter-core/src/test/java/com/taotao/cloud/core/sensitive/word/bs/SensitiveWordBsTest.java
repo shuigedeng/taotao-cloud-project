@@ -7,18 +7,10 @@ import org.junit.Test;
 
 import java.util.List;
 
-/**
- * <p> project: sensitive-word-SensitiveWordBsTest </p>
- * <p> create on 2020/1/7 23:43 </p>
- *
- * @author Administrator
- * @since 0.0.1
- */
 public class SensitiveWordBsTest {
 
     /**
      * 是否包含
-     * @since 0.0.1
      */
     @Test
     public void containsTest() {
@@ -29,7 +21,6 @@ public class SensitiveWordBsTest {
 
     /**
      * 返回所有敏感词
-     * @since 0.0.1
      */
     @Test
     public void findAllTest() {
@@ -41,7 +32,6 @@ public class SensitiveWordBsTest {
 
     /**
      * 返回所有第一个匹配的敏感词
-     * @since 0.0.1
      */
     @Test
     public void findFirstTest() {
@@ -53,7 +43,6 @@ public class SensitiveWordBsTest {
 
     /**
      * 默认的替换策略
-     * @since 0.0.2
      */
     @Test
     public void replaceTest() {
@@ -65,7 +54,6 @@ public class SensitiveWordBsTest {
 
     /**
      * 自定义字符的替换策略
-     * @since 0.0.2
      */
     @Test
     public void replaceCharTest() {
@@ -77,7 +65,6 @@ public class SensitiveWordBsTest {
 
     /**
      * 忽略大小写
-     * @since 0.0.4
      */
     @Test
     public void ignoreCaseTest() {
@@ -89,7 +76,6 @@ public class SensitiveWordBsTest {
 
     /**
      * 忽略半角圆角
-     * @since 0.0.4
      */
     @Test
     public void ignoreWidthTest() {

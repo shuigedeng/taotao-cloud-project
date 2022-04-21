@@ -5,10 +5,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author binbin.hou
- * @since 0.0.11
- */
 public class NumUtilTest {
 
     @Test

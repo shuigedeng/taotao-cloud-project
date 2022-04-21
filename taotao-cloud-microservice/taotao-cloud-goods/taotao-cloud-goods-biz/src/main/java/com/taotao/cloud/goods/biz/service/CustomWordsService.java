@@ -8,7 +8,10 @@ import com.taotao.cloud.goods.biz.entity.CustomWords;
 
 /**
  * 自定义分词业务层
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
+ */
 public interface CustomWordsService extends IService<CustomWords> {
 
 	/**

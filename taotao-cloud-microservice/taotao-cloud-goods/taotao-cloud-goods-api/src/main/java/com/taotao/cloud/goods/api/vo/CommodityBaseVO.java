@@ -11,6 +11,9 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 小程序直播商品
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-15 20:59:38
  */
 @Data
 @SuperBuilder

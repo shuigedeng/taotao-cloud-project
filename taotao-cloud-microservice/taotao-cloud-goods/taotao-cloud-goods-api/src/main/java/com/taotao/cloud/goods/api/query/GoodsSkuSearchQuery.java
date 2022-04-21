@@ -9,7 +9,10 @@ import java.io.Serial;
 
 /**
  * 规格商品查询条件
- **/
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 15:59:38
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

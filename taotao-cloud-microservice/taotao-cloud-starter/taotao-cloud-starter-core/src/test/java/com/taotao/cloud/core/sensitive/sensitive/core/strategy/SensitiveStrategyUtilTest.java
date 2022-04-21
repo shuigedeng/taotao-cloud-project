@@ -6,8 +6,7 @@ import org.junit.Test;
 
 /**
  * 脱敏策略工具类测试
- * @author binbin.hou
- * @since 0.0.6
+
  */
 public class SensitiveStrategyUtilTest {
 

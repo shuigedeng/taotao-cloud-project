@@ -13,6 +13,9 @@ import java.util.Objects;
 /**
  * 规格项表规格项表
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-20 16:59:38
  * @since 2020-02-18 15:18:56
  */
 @Getter

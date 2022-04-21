@@ -5,10 +5,6 @@ import com.taotao.cloud.core.sensitive.word.api.IWordDeny;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author binbin.hou
- * @since 1.0.0
- */
 //@Component
 public class MyDdWordDeny implements IWordDeny {
 

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 店铺端,订单日志API
- **/
+ */
 @AllArgsConstructor
 @Validated
 @RestController

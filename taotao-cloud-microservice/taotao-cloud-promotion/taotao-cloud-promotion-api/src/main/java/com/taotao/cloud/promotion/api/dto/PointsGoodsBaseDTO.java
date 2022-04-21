@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 /**
  * 积分商品实体类
- **/
+ */
 @Data
 @Builder
 @AllArgsConstructor

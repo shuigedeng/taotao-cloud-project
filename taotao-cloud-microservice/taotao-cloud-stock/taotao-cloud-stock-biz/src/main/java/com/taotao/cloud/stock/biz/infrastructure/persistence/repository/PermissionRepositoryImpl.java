@@ -24,7 +24,7 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @date 2021-02-14
- **/
+ */
 @Repository
 public class PermissionRepositoryImpl extends ServiceImpl<SysPermissionMapper, SysPermissionDO> implements PermissionRepository, IService<SysPermissionDO> {
 

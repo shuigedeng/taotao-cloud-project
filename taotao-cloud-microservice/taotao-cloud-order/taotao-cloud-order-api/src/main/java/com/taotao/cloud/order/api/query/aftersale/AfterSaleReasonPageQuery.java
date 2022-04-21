@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.api.dto.aftersale;
+package com.taotao.cloud.order.api.query.aftersale;
 
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -6,7 +6,7 @@ import lombok.*;
 
 /**
  * 售后原因搜索参数
- **/
+ */
 @Setter
 @Getter
 @Builder
