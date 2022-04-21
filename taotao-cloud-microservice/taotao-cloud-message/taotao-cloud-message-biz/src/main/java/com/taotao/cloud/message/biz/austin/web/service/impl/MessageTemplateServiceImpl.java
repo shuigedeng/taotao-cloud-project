@@ -26,7 +26,6 @@ import java.util.List;
  * 消息模板管理 Service
  *
  * 
- * @date 2022/1/22
  */
 @Service
 public class MessageTemplateServiceImpl implements MessageTemplateService {

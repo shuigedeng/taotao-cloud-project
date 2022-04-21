@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 
 /**
  * 简单去重器（目前承载着 N分钟相同内容去重）
- * @author cao
- * @date 2022-04-20 13:41
  */
 @Service(value = "SimpleLimitService")
 public class SimpleLimitService extends AbstractLimitService {

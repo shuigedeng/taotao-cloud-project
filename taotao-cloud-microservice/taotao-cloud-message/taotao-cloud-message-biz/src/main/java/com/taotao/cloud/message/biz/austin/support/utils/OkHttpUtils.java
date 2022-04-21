@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-/**
- *
- * @date 2021/11/4
- */
 @Slf4j
 @Component
 public class OkHttpUtils {

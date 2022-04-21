@@ -14,10 +14,6 @@ import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlServic
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-/**
- * 
- * @date 2022/4/18
- */
 @Service
 @Slf4j
 public class FlowControlServiceImpl implements FlowControlService {

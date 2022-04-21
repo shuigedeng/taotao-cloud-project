@@ -6,8 +6,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- * 
- * @date 2022/2/16
  * Kafka工具类
  */
 @Component

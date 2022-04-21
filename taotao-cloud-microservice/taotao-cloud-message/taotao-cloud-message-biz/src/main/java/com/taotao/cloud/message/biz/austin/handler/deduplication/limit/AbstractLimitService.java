@@ -5,10 +5,6 @@ import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
 import java.util.*;
 
-/**
- * @author cao
- * @date 2022-04-20 12:00
- */
 public abstract class AbstractLimitService implements LimitService {
 
 

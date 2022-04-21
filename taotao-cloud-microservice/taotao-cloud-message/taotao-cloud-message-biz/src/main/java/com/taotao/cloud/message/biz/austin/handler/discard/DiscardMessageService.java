@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 丢弃模板消息
- * .
  */
 @Service
 public class DiscardMessageService {

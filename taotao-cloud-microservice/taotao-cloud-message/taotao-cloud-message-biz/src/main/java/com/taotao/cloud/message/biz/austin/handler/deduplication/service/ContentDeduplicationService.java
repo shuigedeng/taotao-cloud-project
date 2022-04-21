@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @date 2021/12/11
  * 内容去重服务（默认5分钟相同的文案发给相同的用户去重）
  */
 @Service
