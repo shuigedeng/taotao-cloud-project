@@ -1,12 +1,4 @@
-package com.atguigu.market_analysis;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: com.atguigu.market_analysis
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/17 10:23
- */
+package com.atguigu.market_analysis;
 
 import com.atguigu.market_analysis.beans.ChannelPromotionCount;
 import com.atguigu.market_analysis.beans.MarketingUserBehavior;

@@ -1,14 +1,4 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.processfunction;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.processfunction
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/11 10:54
- */
-
-import com.atguigu.apitest.beans.SensorReading;
+import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.api.java.tuple.Tuple;
@@ -18,12 +8,6 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
-/**
- * @ClassName: ProcessTest2_ApplicationCase
- * @Description:
- * @Author: wushengran on 2020/11/11 10:54
- * @Version: 1.0
- */
 public class ProcessTest2_ApplicationCase {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

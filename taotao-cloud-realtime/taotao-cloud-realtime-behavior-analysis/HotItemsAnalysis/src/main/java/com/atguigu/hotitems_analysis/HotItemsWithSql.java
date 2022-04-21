@@ -1,12 +1,4 @@
-package com.atguigu.hotitems_analysis;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: com.atguigu.hotitems_analysis
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/14 16:35
- */
+package com.atguigu.hotitems_analysis;
 
 import com.atguigu.hotitems_analysis.beans.UserBehavior;
 import org.apache.flink.streaming.api.TimeCharacteristic;

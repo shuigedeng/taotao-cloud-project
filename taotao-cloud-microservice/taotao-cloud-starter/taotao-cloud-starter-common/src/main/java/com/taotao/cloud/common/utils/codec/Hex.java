@@ -2,7 +2,7 @@
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * regarding Copyright (c) ownership.  The ASF licenses this file
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -25,7 +25,7 @@ package com.taotao.cloud.common.utils.codec;
  * This class was borrowed from Apache Commons Codec SVN repository (rev. {@code 560660}) with modifications
  * to enable Hex conversion without a full dependency on Commons Codec.  We didn't want to reinvent the wheel of
  * great work they've done, but also didn't want to force every Shiro user to depend on the commons-codec.jar
- * As per the Apache 2.0 license, the original copyright notice and all author and copyright information have
+ * As per the Apache 2.0 license, the original Copyright (c) notice and all author and Copyright (c) information have
  * remained in tact.
  *
  * @see <a href="http://en.wikipedia.org/wiki/Hexadecimal">Wikipedia: Hexadecimal</a>

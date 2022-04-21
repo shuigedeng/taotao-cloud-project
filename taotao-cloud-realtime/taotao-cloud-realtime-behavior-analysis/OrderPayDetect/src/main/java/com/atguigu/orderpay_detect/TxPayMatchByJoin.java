@@ -1,12 +1,4 @@
-package com.atguigu.orderpay_detect;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: com.atguigu.orderpay_detect
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/18 15:42
- */
+package com.atguigu.orderpay_detect;
 
 import com.atguigu.orderpay_detect.beans.OrderEvent;
 import com.atguigu.orderpay_detect.beans.ReceiptEvent;

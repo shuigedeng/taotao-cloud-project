@@ -1,14 +1,6 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.tableapi.udf;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.tableapi.udf
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/14 9:24
- */
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.tableapi.udf;
 
-import com.atguigu.apitest.beans.SensorReading;
+import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

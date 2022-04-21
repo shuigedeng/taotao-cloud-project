@@ -1,14 +1,5 @@
-package com.taotao.cloud.bigdata.flink.atguigu.apitest.state;/**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: FlinkTutorial
- * Package: com.atguigu.apitest.state
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/10 15:30
- */
-
-import com.atguigu.apitest.beans.SensorReading;
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.state;
+import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.checkpoint.ListCheckpointed;
 import org.apache.flink.streaming.api.datastream.DataStream;

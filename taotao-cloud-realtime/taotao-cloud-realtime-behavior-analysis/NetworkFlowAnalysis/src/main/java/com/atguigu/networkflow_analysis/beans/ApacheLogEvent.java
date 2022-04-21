@@ -1,12 +1,4 @@
-package com.atguigu.networkflow_analysis.beans; /**
- * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
- * <p>
- * Project: UserBehaviorAnalysis
- * Package: PACKAGE_NAME
- * Version: 1.0
- * <p>
- * Created by wushengran on 2020/11/16 9:25
- */
+package com.atguigu.networkflow_analysis.beans;
 
 /**
  * @ClassName: com.atguigu.networkflow_analysis.beans.ApacheLogEvent
