@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 优雅关闭线程池
  *
- * @author 3y
+ * 
  */
 @Component
 @Slf4j

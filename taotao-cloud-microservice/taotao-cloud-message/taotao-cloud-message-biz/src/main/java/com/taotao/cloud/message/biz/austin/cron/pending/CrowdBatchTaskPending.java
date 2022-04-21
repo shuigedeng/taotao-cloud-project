@@ -28,7 +28,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 延迟批量处理人群信息
  * 调用 batch 发送接口 进行消息推送
  *
- * @author 3y
+ * 
  */
 @Slf4j
 @Component

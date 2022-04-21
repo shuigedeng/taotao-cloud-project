@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 3y
+ * 
  * @date 2022/4/18
  * <p>
  * 流量控制所需要的参数

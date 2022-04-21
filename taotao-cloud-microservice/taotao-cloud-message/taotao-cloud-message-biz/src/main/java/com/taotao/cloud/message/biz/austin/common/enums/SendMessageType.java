@@ -7,7 +7,7 @@ import lombok.ToString;
 /**
  * 微信应用消息/钉钉/服务号均有多种的消息类型下发
  *
- * @author 3y
+ * 
  */
 @Getter
 @ToString

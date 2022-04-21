@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * groupId 标识着每一个消费者组
  *
- * @author 3y
+ * 
  */
 public class GroupIdMappingUtils {
 

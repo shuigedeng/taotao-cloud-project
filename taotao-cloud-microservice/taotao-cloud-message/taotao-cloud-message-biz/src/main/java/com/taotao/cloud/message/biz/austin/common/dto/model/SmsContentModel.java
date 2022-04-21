@@ -1,18 +1,16 @@
 package com.taotao.cloud.message.biz.austin.common.dto.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
- * @author 3y
+ *
  * <p>
  * 短信内容模型
  *
  * 在前端填写的时候分开，但最后处理的时候会将url拼接在content上
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

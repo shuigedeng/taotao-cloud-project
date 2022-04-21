@@ -16,7 +16,7 @@ import java.util.*;
 
 /**
  * api层的pipeline配置类
- * @author 3y
+ * 
  */
 @Configuration
 public class PipelineConfig {

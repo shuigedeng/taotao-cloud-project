@@ -1,17 +1,15 @@
 package com.taotao.cloud.message.biz.austin.common.dto.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
- * @author 3y
+ * 
  * <p>
  * <p>
  * 邮件消息体
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

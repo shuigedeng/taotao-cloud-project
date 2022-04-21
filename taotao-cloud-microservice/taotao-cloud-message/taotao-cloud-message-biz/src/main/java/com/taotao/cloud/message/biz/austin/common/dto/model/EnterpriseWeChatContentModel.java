@@ -1,15 +1,13 @@
 package com.taotao.cloud.message.biz.austin.common.dto.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
- * @author 3y
+ *
  * 企业微信 应用消息
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,7 +29,7 @@ public class EnterpriseWeChatContentModel extends ContentModel {
     private String mediaId;
 
     /**
-     *  其他消息类型： https://developer.work.weixin.qq.com/document/path/90372#%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF
+     *  其他消息类型： <a href="https://developer.work.weixin.qq.com/document/path/90372#%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF">https://developer.work.weixin.qq.com/document/path/90372#%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF</a>
      */
 
 

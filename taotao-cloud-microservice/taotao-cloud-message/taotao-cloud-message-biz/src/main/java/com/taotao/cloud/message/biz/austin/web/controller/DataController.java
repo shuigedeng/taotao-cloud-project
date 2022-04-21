@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 获取数据接口（全链路追踪)
  *
- * @author 3y
+ * 
  */
 @Slf4j
 @RestController

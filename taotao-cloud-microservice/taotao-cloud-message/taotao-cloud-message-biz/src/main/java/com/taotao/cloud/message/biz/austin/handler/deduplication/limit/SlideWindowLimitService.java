@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
-import com.java3y.austin.support.utils.RedisUtils;
-import com.java3y.austin.support.utils.SnowFlakeIdUtils;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.SnowFlakeIdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.script.DefaultRedisScript;

@@ -8,7 +8,7 @@ import com.taotao.cloud.message.biz.austin.api.domain.SendResponse;
 /**
  * 发送接口
  *
- * @author 3y
+ * 
  */
 public interface SendService {
 

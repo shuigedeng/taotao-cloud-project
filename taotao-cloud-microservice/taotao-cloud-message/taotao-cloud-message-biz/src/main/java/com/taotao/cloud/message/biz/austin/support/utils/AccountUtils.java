@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * 获取账号信息工具类
  *
- * @author 3y
+ * 
  */
 @Component
 public class AccountUtils {

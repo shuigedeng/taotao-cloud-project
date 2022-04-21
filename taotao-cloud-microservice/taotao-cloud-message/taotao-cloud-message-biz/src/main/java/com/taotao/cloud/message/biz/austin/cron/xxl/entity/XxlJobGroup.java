@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 执行器组信息
  *
- * @author 3y
+ * 
  */
 @Data
 @Accessors(chain = true)

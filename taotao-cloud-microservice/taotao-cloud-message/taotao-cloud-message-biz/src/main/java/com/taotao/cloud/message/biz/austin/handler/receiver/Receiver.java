@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author 3y
+ *
  * 消费MQ的消息
  */
 @Slf4j

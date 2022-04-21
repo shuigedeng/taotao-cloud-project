@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 生成 消息推送的URL 工具类
  *
- * @author 3y
+ *
  */
 public class TaskInfoUtils {
 

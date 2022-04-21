@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  * 2.通用去重功能
  * 3.发送消息
  *
- * @author 3y
+ * 
  */
 @Data
 @Accessors(chain = true)

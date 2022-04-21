@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.enums;
 
 /**
  * 执行阻塞队列
- * @author 3y
+ * 
  */
 public enum ExecutorBlockStrategyEnum {
     /**

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 延迟消费 阻塞队列-消费者和生产者实现
  *
- * @author 3y
+ * 
  */
 @Slf4j
 @Data

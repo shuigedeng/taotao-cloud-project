@@ -8,7 +8,7 @@ package com.taotao.cloud.message.biz.austin.common.constant;
  * <p>
  * 约定：所有的账号都从10开始，步长为10
  *
- * @author 3y
+ *
  */
 public class SendAccountConstant {
 

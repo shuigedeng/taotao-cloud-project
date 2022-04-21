@@ -1,16 +1,15 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
 import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.DeduplicationType;
-import com.java3y.austin.handler.deduplication.limit.LimitService;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.limit.LimitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 
 /**
- * @author 3y
+ *
  * @date 2021/12/12
  * 频次去重服务
  */

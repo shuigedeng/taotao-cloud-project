@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * 消息模板管理 请求参数
  *
- * @author 3y
+ * 
  * @date 2022/1/22
  */
 @Data

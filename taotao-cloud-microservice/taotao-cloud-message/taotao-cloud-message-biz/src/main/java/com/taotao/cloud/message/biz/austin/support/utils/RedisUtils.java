@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 3y
+ * 
  * @date 2021/12/10
  * 对Redis的某些操作二次封装
  */

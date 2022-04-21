@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 消息模板Dao
- * @author 3y
+ * 
  */
 public interface MessageTemplateDao extends JpaRepository<MessageTemplate, Long> {
 

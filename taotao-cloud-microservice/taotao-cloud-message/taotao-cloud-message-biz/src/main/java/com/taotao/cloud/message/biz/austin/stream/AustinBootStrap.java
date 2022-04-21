@@ -15,7 +15,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * flink启动类
  *
- * @author 3y
+ * 
  */
 @Slf4j
 public class AustinBootStrap {

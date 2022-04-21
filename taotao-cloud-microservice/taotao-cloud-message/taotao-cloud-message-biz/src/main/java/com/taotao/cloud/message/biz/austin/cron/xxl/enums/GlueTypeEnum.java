@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.enums;
 
 /**
  * GlueTyp 类型（默认BEAN)
- * @author 3y
+ *
  */
 public enum GlueTypeEnum {
 

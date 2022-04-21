@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 3y
+ * 
  * 企业微信推送处理
  */
 @Component
