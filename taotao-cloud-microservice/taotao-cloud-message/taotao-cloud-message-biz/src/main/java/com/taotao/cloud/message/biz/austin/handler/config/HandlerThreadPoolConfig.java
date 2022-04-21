@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * handler模块 线程池的配置
  *
- * @author 3y
+ *
  */
 public class HandlerThreadPoolConfig {
 

@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author 3y
+ *
  * @date 2021/11/6
  * 1. 发送短信接入文档：https://cloud.tencent.com/document/api/382/55981
  * 2. 推荐直接使用SDK调用

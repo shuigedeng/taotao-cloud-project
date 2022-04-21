@@ -8,7 +8,7 @@ import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsIni
 /**
  * 消息队列工具类
  *
- * @author 3y
+ *
  */
 @Slf4j
 public class MessageQueueUtils {

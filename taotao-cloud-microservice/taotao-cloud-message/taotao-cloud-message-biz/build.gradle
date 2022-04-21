@@ -10,6 +10,33 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    //阿里云 钉钉 SDK
+    implementation 'com.aliyun:alibaba-dingtalk-service-sdk:2.0.0'
+    //企业微信第三方SDK
+    implementation 'com.github.binarywang:weixin-java-cp:4.1.0'
+    //动态线程池引入
+    implementation 'io.github.lyh200:dynamic-tp-spring-boot-starter-apollo:1.0.2'
+    //微信服务号第三方SDK
+    implementation 'com.github.binarywang:weixin-java-mp:4.1.0'
+    //kafkaFlink连接器
+    implementation 'org.apache.flink:flink-connector-kafka_2.11:1.14.3'
+    //flink相关依赖
+    implementation 'org.apache.flink:flink-walkthrough-common_2.11:1.14.3'
+    compileOnly 'org.apache.flink:flink-streaming-java_2.11:1.14.3'
+    compileOnly 'org.apache.flink:flink-clients_2.11:1.14.3'
+    //xxl-job分布式定时任务
+    implementation 'com.xuxueli:xxl-job-core:2.3.0'
+    //graylog
+    implementation 'de.siegmar:logback-gelf:3.0.0'
+    //邮件发送
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    //注解打印日志
+    implementation 'cn.monitor4all:log-record-starter:1.0.4.1'
+    //apollo
+    implementation 'com.ctrip.framework.apollo:apollo-client-config-data:1.9.1'
+    //腾讯sdk(目前用在短信上)
+    implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.390'
 }
 
 //shadowJar {

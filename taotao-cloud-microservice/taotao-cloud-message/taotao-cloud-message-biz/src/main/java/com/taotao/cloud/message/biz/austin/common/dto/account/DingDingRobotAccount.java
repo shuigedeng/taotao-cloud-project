@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 钉钉自定义机器人 账号信息
  *
- * @author 3y
+ * 
  */
 @Data
 @Builder

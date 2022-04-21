@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * 线程池工具类
  *
- * @author 3y
+ *
  */
 @Component
 public class ThreadPoolUtils {
@@ -25,7 +25,7 @@ public class ThreadPoolUtils {
      * 2. 注册 线程池 被Spring管理，优雅关闭
      */
     public void register(DtpExecutor dtpExecutor) {
-        DtpRegistry.register(dtpExecutor, SOURCE_NAME);
+        DtpRegistry.registerDtp(dtpExecutor, SOURCE_NAME);
         shutdownDefinition.registryExecutor(dtpExecutor);
     }
 }

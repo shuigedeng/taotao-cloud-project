@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
 
 import java.util.Set;
 

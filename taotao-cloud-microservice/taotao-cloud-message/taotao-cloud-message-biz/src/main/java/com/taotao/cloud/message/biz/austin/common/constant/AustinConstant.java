@@ -4,7 +4,7 @@ package com.taotao.cloud.message.biz.austin.common.constant;
 /**
  * 基础的常量信息
  *
- * @author 3y
+ * 
  */
 public class AustinConstant {
 

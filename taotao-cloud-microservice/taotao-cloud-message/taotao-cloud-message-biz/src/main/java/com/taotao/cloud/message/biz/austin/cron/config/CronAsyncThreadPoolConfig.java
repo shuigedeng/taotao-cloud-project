@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author 3y
+ * 
  * 动态线程池配置。实际的具体配置以apollo的为准！实际的具体配置以apollo的为准！实际的具体配置以apollo的为准
  */
 public class CronAsyncThreadPoolConfig {

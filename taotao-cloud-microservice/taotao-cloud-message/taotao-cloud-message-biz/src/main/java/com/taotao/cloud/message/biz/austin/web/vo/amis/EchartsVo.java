@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * @author 3y
+ * 
  * 图表的Vo
  * https://aisuda.bce.baidu.com/amis/zh-CN/components/chart
  * https://www.runoob.com/echarts/echarts-setup.html

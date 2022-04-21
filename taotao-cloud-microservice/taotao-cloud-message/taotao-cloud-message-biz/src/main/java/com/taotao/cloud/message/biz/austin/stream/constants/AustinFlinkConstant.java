@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.stream.constants;
 
 /**
  * Flink常量信息
- * @author 3y
+ * 
  */
 public class AustinFlinkConstant {
 

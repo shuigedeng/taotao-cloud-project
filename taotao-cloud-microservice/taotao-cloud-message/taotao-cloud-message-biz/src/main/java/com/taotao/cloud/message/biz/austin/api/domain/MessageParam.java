@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 消息参数
  * single
- * @author 3y
+ * 
  */
 @Data
 @Accessors(chain = true)

@@ -25,9 +25,9 @@ import org.springframework.stereotype.Service;
 /**
  * 钉钉消息自定义机器人 消息处理器
  * <p>
- * https://open.dingtalk.com/document/group/custom-robot-access
+ * <a href="https://open.dingtalk.com/document/group/custom-robot-access">https://open.dingtalk.com/document/group/custom-robot-access</a>
  *
- * @author 3y
+ * 
  */
 @Slf4j
 @Service

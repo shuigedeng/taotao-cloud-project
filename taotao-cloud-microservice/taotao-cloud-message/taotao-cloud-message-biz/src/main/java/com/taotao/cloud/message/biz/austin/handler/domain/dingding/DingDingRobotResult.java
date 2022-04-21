@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * <p>
  * 正常的返回：{"errcode":0,"errmsg":"ok"}
  *
- * @author 3y
+ *
  */
 @NoArgsConstructor
 @Data

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 短信脚本 接口
- * @author 3y
+ * 
  */
 public interface SmsScript {
 

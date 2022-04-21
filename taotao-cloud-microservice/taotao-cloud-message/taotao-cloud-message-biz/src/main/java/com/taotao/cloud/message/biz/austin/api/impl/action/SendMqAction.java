@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * @author 3y
+ * 
  * 将消息发送到MQ
  */
 @Slf4j
@@ -32,7 +32,7 @@ public class SendMqAction implements BusinessProcess<SendTaskModel> {
     @Override
     public void process(ProcessContext<SendTaskModel> context) {
         SendTaskModel sendTaskModel = context.getProcessModel();
-        String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[]{SerializerFeature.WriteClassName});
+        String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), SerializerFeature.WriteClassName);
 
         try {
             kafkaUtils.send(topicName, message);

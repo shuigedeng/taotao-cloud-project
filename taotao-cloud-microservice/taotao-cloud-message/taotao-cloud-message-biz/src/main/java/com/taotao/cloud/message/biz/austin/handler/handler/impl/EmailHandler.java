@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 /**
  * 邮件发送处理
  *
- * @author 3y
+ *
  */
 @Component
 @Slf4j

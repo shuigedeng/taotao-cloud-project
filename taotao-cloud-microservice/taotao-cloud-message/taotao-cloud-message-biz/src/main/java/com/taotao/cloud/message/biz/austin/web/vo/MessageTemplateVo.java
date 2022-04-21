@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 消息模板的Vo
  *
- * @author 3y
+ * 
  */
 @Data
 @Builder
