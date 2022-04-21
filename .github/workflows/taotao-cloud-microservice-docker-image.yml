@@ -47,11 +47,6 @@ jobs:
         MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
         MESSAGES: ${{ github.event.head_commit.message }}
 
-    - name: build and publish dependencies
-      run: |
-        cd ${{ github.workspace }}/taotao-cloud-dependencies
-        gradle publishToMavenLocal 
-
     - name: gradle bootJar taotao-cloud-admin
       uses: gradle/gradle-build-action@v2
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
@@ -61,7 +56,7 @@ jobs:
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-admin
 
     - name: pulish docker image taotao-cloud-admin
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin
@@ -81,7 +76,7 @@ jobs:
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway
 
     - name: pulish docker image taotao-cloud-gateway
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway
@@ -101,7 +96,7 @@ jobs:
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth
 
     - name: pulish docker image taotao-cloud-auth
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth
@@ -121,7 +116,7 @@ jobs:
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
     - name: pulish docker image taotao-cloud-xxljob
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob
@@ -141,7 +136,7 @@ jobs:
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
 
     - name: pulish docker image taotao-cloud-order
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order
@@ -161,7 +156,7 @@ jobs:
         build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
 
     - name: pulish docker image taotao-cloud-sys
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v4
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys

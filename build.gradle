@@ -157,7 +157,7 @@ buildscript {
         //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
-        dynamicTpVersion = "1.0.3"
+        dynamicTpVersion = "1.0.4"
         //https://search.maven.org/artifact/joda-time/joda-time
         jodaTimeVersion = "2.10.14"
         //https://search.maven.org/artifact/org.anarres.lzo/lzo-core
@@ -173,7 +173,7 @@ buildscript {
         //https://search.maven.org/artifact/com.lmax/disruptor
         disruptorVersion = "3.4.4"
         //https://search.maven.org/artifact/io.github.xpc1024/easy-es-boot-starter
-        easyEsVersion = "0.9.7"
+        easyEsVersion = "0.9.10"
         //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
         elasticjobVersion = "3.0.1"
         //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
