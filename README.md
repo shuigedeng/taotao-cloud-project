@@ -95,7 +95,7 @@ Maven:
 依赖 | 版本
 ---|---
 Spring |  5.3.15 
-Spring Boot |  2.6.3
+Spring Boot |  2.6.6
 Spring Cloud | 2021.0.1
 Spring Cloud alibaba | 2021.1  
 Spring Security OAuth2 | 5.4.5
@@ -107,7 +107,7 @@ Swagger | 3.3.0
 Knife4j | 3.0.2
 Redisson | 3.15.0
 Lettuce | 6.0.2.RELEASE
-Elasticsearch | 6.8.7
+Elasticsearch | 7.1.2
 Xxl-job | 2.2.0
 EasyCaptcha | 1.6.2
 Guava | 29.0-jre
@@ -157,19 +157,11 @@ Guava | 29.0-jre
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
 │  ├─taotao-cloud-container -- 容器模块
-│  │  ├─taotao-cloud-docker -- docker模块
-│  │  ├─taotao-cloud-kubernetes -- kubernetes模块
 │  ├─taotao-cloud-dependencies -- 全局公共依赖模块
 │  ├─taotao-cloud-java -- java模块
-│  │  ├─taotao-cloud-concurrent  -- concurrent模块
-│  │  ├─taotao-cloud-javaee -- javaee模块
-│  │  ├─taotao-cloud-javase -- javase模块
-│  │  ├─taotao-cloud-javaweb -- javaweb模块
 │  ├─taotao-cloud-microservice -- 微服务业务模块
 │  │  ├─taotao-cloud-admin  -- admin server模块
 │  │  ├─taotao-cloud-auth  -- oauth2认证模块
-│  │  ├─taotao-cloud-bullein  -- 公告模块
-│  │  ├─taotao-cloud-config  -- 通用配置模块
 │  │  ├─taotao-cloud-customer  -- 客服模块
 │  │  ├─taotao-cloud-distribution  -- 营销/分销模块
 │  │  ├─taotao-cloud-front  -- 前端pc模块
@@ -185,7 +177,6 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-promotion  -- 促销模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-report  -- 报表模块
-│  │  ├─taotao-cloud-search  -- 搜索模块
 │  │  ├─taotao-cloud-starter  -- starter组件模块
 │  │  ├─taotao-cloud-stock  -- 库存模块
 │  │  ├─taotao-cloud-store  -- 店铺模块
@@ -202,11 +193,6 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-idea-plugin -- idea-plugin模块
 │  ├─taotao-cloud-processor -- java processor模块
 │  ├─taotao-cloud-python -- python模块
-│  │  ├─taotao-cloud-django  -- django模块
-│  │  ├─taotao-cloud-oldboy  -- oldboy模块
-│  │  ├─taotao-cloud-scrapy  -- scrapy模块
-│  │  ├─taotao-cloud-spider  -- spider模块
-│  │  ├─taotao-cloud-tornado  -- tornado模块
 │  ├─taotao-cloud-reactive -- spring web响应式模块
 │  ├─taotao-cloud-realtime -- 实时数据分析模块
 │  │  ├─taotao-cloud-realtime-datalake  -- 数据湖模块
