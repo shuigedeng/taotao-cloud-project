@@ -17,6 +17,10 @@ package com.taotao.cloud.common.constant;
 
 /**
  * 规则模块的常量
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:44:20
  */
 public final class RuleConstants {
 

@@ -18,6 +18,10 @@ package com.taotao.cloud.common.constant;
 
 /**
  * 文件类型常量
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:45:25
  */
 public final class FileTypeConst {
 

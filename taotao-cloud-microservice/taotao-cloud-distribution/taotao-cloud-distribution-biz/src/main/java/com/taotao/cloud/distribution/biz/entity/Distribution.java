@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+import java.math.BigDecimal;
 
 /**
  * 分销员表
@@ -42,14 +45,17 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 	@Schema(description = "身份证号")
 	private String idNumber;
 
+	@Builder.Default
 	@Schema(description = "分销总额")
-	private BigDecimal rebateTotal = 0D;
+	private BigDecimal rebateTotal = BigDecimal.ZERO;
 
+	@Builder.Default
 	@Schema(description = "可提现金额")
-	private BigDecimal canRebate = 0D;
+	private BigDecimal canRebate = BigDecimal.ZERO;
 
+	@Builder.Default
 	@Schema(description = "冻结金额")
-	private BigDecimal commissionFrozen = 0D;
+	private BigDecimal commissionFrozen = BigDecimal.ZERO;
 
 	@Schema(description = "分销订单数")
 	private Integer distributionOrderCount;

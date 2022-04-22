@@ -19,7 +19,7 @@ import org.apache.flink.util.OutputTag;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 /**
- * Author: Felix Date: 2021/2/1 Desc: 准备业务数据的DWD层
+ * 准备业务数据的DWD层
  */
 public class BaseDBApp {
 

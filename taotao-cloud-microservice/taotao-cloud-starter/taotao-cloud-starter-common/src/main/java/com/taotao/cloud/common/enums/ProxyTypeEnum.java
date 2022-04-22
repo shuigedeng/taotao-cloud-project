@@ -16,7 +16,11 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * <p> 代理类型枚举 </p>
+ * 代理类型枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:47:37
  */
 public enum ProxyTypeEnum {
 

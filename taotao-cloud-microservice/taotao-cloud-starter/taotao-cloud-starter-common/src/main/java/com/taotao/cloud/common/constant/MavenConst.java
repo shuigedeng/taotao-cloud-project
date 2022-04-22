@@ -17,6 +17,10 @@ package com.taotao.cloud.common.constant;
 
 /**
  * maven 项目常量
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:45:11
  */
 public final class MavenConst {
 

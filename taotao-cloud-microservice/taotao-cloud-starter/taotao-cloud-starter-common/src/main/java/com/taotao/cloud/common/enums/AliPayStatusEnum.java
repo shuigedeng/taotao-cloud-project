@@ -17,6 +17,10 @@ package com.taotao.cloud.common.enums;
 
 /**
  * 支付状态
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:48:29
  */
 public enum AliPayStatusEnum {
 
