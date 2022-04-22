@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 package com.taotao.cloud.common.constant;
-
 /**
- * 文件协议常量
+ * FileProtocolConst
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:45:30
  */
 public final class FileProtocolConst {
 

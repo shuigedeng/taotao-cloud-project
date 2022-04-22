@@ -21,6 +21,10 @@ import com.taotao.cloud.common.enums.ResultEnum;
 
 /**
  * 参数校验异常
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:49:21
  */
 public class ParamValidateException extends BusinessException {
 

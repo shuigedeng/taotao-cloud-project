@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
 import org.apache.ibatis.annotations.Update;
 
+import java.math.BigDecimal;
+
 
 /**
  * 分销员数据处理层

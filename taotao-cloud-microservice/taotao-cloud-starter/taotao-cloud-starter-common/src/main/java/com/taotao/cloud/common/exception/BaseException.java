@@ -16,6 +16,8 @@
 package com.taotao.cloud.common.exception;
 
 import com.taotao.cloud.common.enums.ResultEnum;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -27,6 +29,7 @@ import java.io.Serializable;
  */
 public class BaseException extends RuntimeException implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 6610083281801529147L;
 
 	/**

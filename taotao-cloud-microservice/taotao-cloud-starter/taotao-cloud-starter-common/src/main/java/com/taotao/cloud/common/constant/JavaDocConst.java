@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.common.constant;
 
 /**
  * Java 注释常量
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:45:17
  */
 public final class JavaDocConst {
 

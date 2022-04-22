@@ -17,6 +17,8 @@ package com.taotao.cloud.common.exception;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 
+import java.io.Serial;
+
 /**
  * BusinessException 
  *
@@ -26,6 +28,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
  */
 public class BusinessException extends BaseException {
 
+	@Serial
 	private static final long serialVersionUID = 6610083281801529147L;
 
 	public BusinessException(String message) {

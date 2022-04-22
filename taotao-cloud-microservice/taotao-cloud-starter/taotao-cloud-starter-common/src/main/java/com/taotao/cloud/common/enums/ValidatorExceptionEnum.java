@@ -21,6 +21,10 @@ import com.taotao.cloud.common.constant.ValidatorConstants;
 
 /**
  * 参数校验错误
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-22 10:46:32
  */
 public enum ValidatorExceptionEnum implements BaseEnum {
 
