@@ -365,7 +365,7 @@ public abstract class BaseElasticsearchService {
 	}
 
 	/**
-	 * Description: 判断某个index是否存在
+	 * 判断某个index是否存在
 	 *
 	 * @param index index名
 	 * @return boolean

@@ -1,5 +1,6 @@
 dependencies {
     implementation project(":taotao-cloud-standalone:taotao-cloud-standalone-common")
-    implementation 'org.springframework.boot:spring-boot-starter-security:2.4.1'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.6'
 
 }
+

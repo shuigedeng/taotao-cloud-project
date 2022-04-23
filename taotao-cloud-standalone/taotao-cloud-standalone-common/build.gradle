@@ -1,12 +1,12 @@
 dependencies {
     api 'org.lionsoul:ip2region:1.7.2'
-    api 'org.springframework.security:spring-security-core:5.4.2'
+    api 'org.springframework.security:spring-security-core:5.6.2'
 
-    api 'org.springframework:spring-test:5.1.9.RELEASE'
-    api 'commons-collections:commons-collections:3.2.1'
-    api 'com.aliyun:aliyun-java-sdk-core:4.1.0'
+    api 'org.springframework:spring-test:5.3.18'
+    api 'commons-collections:commons-collections:3.2.2'
+    api 'com.aliyun:aliyun-java-sdk-core:4.6.0'
 
-    api 'com.github.binarywang:weixin-java-mp:3.6.0'
+    api 'com.github.binarywang:weixin-java-mp:4.2.9.B'
 
     api 'org.springframework.social:spring-social-security:1.1.6.RELEASE'
     api 'org.springframework.social:spring-social-core:1.1.6.RELEASE'
@@ -24,22 +24,26 @@ dependencies {
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
 
-    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.0'
-    api 'com.google.guava:guava:19.0'
+    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+    api 'com.google.guava:guava:23.0'
     api 'com.github.whvcse:easy-captcha:1.6.2'
-    api 'commons-io:commons-io:2.2'
+    api 'commons-io:commons-io:2.11.0'
 
     api "mysql:mysql-connector-java"
 
-    api 'com.baomidou:mybatis-plus-boot-starter:3.3.0'
-    api 'com.baomidou:mybatis-plus-generator:3.3.0'
+    api 'com.baomidou:mybatis-plus-boot-starter:3.5.1'
+    api 'com.baomidou:mybatis-plus-generator:3.5.2'
 
-    api 'org.apache.velocity:velocity-engine-core:2.1'
+    api 'org.apache.velocity:velocity-engine-core:2.3'
 
-    api 'cn.hutool:hutool-all:4.5.6'
-    api 'com.alibaba:fastjson:1.2.58'
+    api 'cn.hutool:hutool-all:5.7.22'
+    api 'com.alibaba:fastjson:1.2.80'
 
     api 'io.jsonwebtoken:jjwt:0.9.1'
-    api 'joda-time:joda-time:2.10.1'
+    api 'joda-time:joda-time:2.10.14'
 
+}
+
+repositories {
+    mavenCentral()
 }

@@ -6,71 +6,40 @@ dependencies {
     implementation 'org.springframework:spring-test'
 
     implementation "com.google.code.gson:gson"
-    implementation "org.mybatis:mybatis:3.5.6"
-    implementation "com.alibaba:druid:1.1.23"
+    implementation 'org.mybatis:mybatis:3.5.9'
+    implementation 'com.alibaba:druid:1.2.8'
     implementation 'org.aspectj:aspectjweaver'
-    implementation "mysql:mysql-connector-java:8.0.23"
-// https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper
-    implementation group: 'com.github.pagehelper', name: 'pagehelper', version: '5.2.0'
-// https://mvnrepository.com/artifact/junit/junit
-    // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
-    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
-// https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
-    implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
-// https://mvnrepository.com/artifact/redis.clients/jedis
-    implementation group: 'redis.clients', name: 'jedis', version: '3.5.1'
-    // https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch
-    implementation group: 'org.elasticsearch', name: 'elasticsearch', version: '7.11.1'
-// https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client
-    implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-client', version: '7.11.1'
-// https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client
-    implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '7.11.1'
-// https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
-    implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.11.0'
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'com.github.pagehelper:pagehelper:5.3.0'
+    implementation 'commons-fileupload:commons-fileupload:1.4'
+    implementation 'org.quartz-scheduler:quartz:2.3.2'
+    implementation 'redis.clients:jedis:4.2.1'
+    implementation 'org.elasticsearch:elasticsearch:8.1.2'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-client:8.1.2'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.1'
+    implementation 'com.rabbitmq:amqp-client:5.14.2'
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-eureka:1.4.7.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.10.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-netflix-sidecar:2.2.10.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config:3.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-config-server:3.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.10.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-stream:3.2.2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard:2.2.10.RELEASE'
 
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version: '1.4.7.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-server
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: '3.0.1'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-zuul', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-netflix-sidecar
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-netflix-sidecar', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-server
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.3.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-stream
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream', version: '3.0.8.RELEASE'
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix-dashboard
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix-dashboard', version: '2.2.6.RELEASE'
-// https://mvnrepository.com/artifact/io.github.openfeign/feign-hystrix
-    implementation group: 'io.github.openfeign', name: 'feign-hystrix', version: '10.9'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.6'
+    implementation 'org.springframework.amqp:spring-amqp:2.4.3'
 
-// https://mvnrepository.com/artifact/org.springframework.amqp/spring-amqp
-    implementation group: 'org.springframework.amqp', name: 'spring-amqp', version: '2.3.1'
+    implementation 'org.apache.curator:curator-client:5.2.1'
+    implementation 'org.apache.curator:curator-recipes:5.2.1'
+    implementation 'com.codingapi.txlcn:txlcn-tm:5.0.2.RELEASE'
+    implementation 'com.codingapi.txlcn:txlcn-tc:5.0.2.RELEASE'
+    implementation 'com.dangdang:elastic-job-lite-core:2.1.5'
+    implementation 'com.dangdang:elastic-job-lite-spring:2.1.5'
 
-// https://mvnrepository.com/artifact/org.apache.curator/curator-client
-    implementation group: 'org.apache.curator', name: 'curator-client', version: '5.0.0'
-// https://mvnrepository.com/artifact/org.apache.curator/curator-recipes
-    implementation group: 'org.apache.curator', name: 'curator-recipes', version: '5.0.0'
-// https://mvnrepository.com/artifact/com.codingapi.txlcn/txlcn-tm
-    implementation group: 'com.codingapi.txlcn', name: 'txlcn-tm', version: '5.0.2.RELEASE'
-    implementation group: 'com.codingapi.txlcn', name: 'txlcn-tc', version: '5.0.2.RELEASE'
-// https://mvnrepository.com/artifact/com.dangdang/elastic-job-lite-core
-    implementation group: 'com.dangdang', name: 'elastic-job-lite-core', version: '2.1.5'
-    implementation group: 'com.dangdang', name: 'elastic-job-lite-spring', version: '2.1.5'
-
-
-    // spring boot
-    //developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
@@ -84,11 +53,13 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-extension'
 
     implementation "org.apache.httpcomponents:httpclient"
-    implementation group: 'junit', name: 'junit', version: '4.13.1'
+    implementation 'junit:junit:4.13.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'com.alibaba:fastjson:1.2.3'
+    implementation 'com.alibaba:fastjson:1.2.80'
     implementation 'javax.servlet:javax.servlet-api'
     implementation 'org.slf4j:slf4j-api'
+}
 
-    
+repositories {
+    mavenCentral()
 }
