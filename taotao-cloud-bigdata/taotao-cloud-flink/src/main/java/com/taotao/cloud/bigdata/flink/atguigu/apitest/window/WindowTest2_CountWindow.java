@@ -6,12 +6,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-/**
- * @ClassName: WindowTest2_CountWindow
- * @Description:
- * @Author: wushengran on 2020/11/9 16:19
- * @Version: 1.0
- */
+
 public class WindowTest2_CountWindow {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

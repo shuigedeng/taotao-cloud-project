@@ -1,11 +1,6 @@
 package com.atguigu.orderpay_detect.beans;
 
-/**
- * @ClassName: OrderEvent
- * @Description:
- * @Author: wushengran on 2020/11/18 10:37
- * @Version: 1.0
- */
+
 public class OrderEvent {
     private Long orderId;
     private String eventType;

@@ -1,10 +1,5 @@
 package com.atguigu.loginfail_detect.beans;
-/**
- * @ClassName: LoginEvent
- * @Description:
- * @Author: wushengran on 2020/11/17 14:04
- * @Version: 1.0
- */
+
 public class LoginEvent {
     private Long userId;
     private String ip;

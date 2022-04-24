@@ -3,7 +3,7 @@ package com.taotao.cloud.bigdata.realtime.mall.app.func;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/19
  * Desc:  维度关联接口
  */

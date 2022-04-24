@@ -9,12 +9,7 @@ import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: UdfTest1_ScalarFunction
- * @Description:
- * @Author: wushengran on 2020/11/14 9:24
- * @Version: 1.0
- */
+
 public class UdfTest1_ScalarFunction {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

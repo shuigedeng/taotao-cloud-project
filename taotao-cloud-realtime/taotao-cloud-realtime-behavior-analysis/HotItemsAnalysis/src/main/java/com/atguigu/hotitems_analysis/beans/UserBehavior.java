@@ -1,10 +1,5 @@
 package com.atguigu.hotitems_analysis.beans;
-/**
- * @ClassName: UserBehavior
- * @Description:
- * @Author: wushengran on 2020/11/14 15:11
- * @Version: 1.0
- */
+
 public class UserBehavior {
     // 定义私有属性
     private Long userId;

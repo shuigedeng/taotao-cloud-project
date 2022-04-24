@@ -7,12 +7,7 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-/**
- * @ClassName: TransformTest3_Reduce
- * @Description:
- * @Author: wushengran on 2020/11/7 15:39
- * @Version: 1.0
- */
+
 public class TransformTest3_Reduce {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

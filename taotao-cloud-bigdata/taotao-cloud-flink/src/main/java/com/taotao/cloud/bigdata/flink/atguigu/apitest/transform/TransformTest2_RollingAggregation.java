@@ -6,12 +6,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-/**
- * @ClassName: TransformTest2_RollingAggregation
- * @Description:
- * @Author: wushengran on 2020/11/7 15:09
- * @Version: 1.0
- */
+
 public class TransformTest2_RollingAggregation {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

@@ -18,7 +18,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 
 /**
- * Author: Felix Date: 2021/2/3 Desc:  独立访客UV的计算
+ * Date: 2021/2/3 Desc:  独立访客UV的计算
  * <p>
  * 前期准备： -启动ZK、Kafka、Logger.sh、BaseLogApp、UniqueVisitApp 执行流程: 模式生成日志的jar->nginx->日志采集服务->kafka(ods)
  * ->BaseLogApp(分流)->kafka(dwd) dwd_page_log ->UniqueVisitApp(独立访客)->kafka(dwm_unique_visit)

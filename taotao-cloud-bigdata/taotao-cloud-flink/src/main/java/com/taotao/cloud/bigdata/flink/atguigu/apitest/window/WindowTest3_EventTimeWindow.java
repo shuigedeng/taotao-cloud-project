@@ -8,12 +8,6 @@ import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrderness
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.OutputTag;
 
-/**
- * @ClassName: WindowTest3_EventTimeWindow
- * @Description:
- * @Author: wushengran on 2020/11/10 9:33
- * @Version: 1.0
- */
 public class WindowTest3_EventTimeWindow {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

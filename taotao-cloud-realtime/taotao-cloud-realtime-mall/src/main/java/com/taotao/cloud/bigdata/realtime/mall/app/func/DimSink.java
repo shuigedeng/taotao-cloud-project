@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * Author: Felix Date: 2021/2/3 Desc:  写出维度数据的Sink实现类
+ * Date: 2021/2/3 Desc:  写出维度数据的Sink实现类
  */
 public class DimSink extends RichSinkFunction<JSONObject> {
 

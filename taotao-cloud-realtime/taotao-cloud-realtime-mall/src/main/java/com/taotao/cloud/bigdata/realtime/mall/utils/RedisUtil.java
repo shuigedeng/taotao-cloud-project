@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/5
  * Desc: 通过JedisPool连接池获取Jedis连接
  */

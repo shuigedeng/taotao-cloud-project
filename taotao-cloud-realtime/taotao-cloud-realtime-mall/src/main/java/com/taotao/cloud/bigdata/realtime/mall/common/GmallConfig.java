@@ -1,7 +1,7 @@
 package com.taotao.cloud.bigdata.realtime.mall.common;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/2
  * Desc: 项目配置的常量类
  */

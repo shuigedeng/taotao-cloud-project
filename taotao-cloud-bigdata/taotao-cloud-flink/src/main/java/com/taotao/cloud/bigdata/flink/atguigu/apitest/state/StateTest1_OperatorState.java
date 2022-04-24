@@ -9,12 +9,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @ClassName: StateTest1_OperatorState
- * @Description:
- * @Author: wushengran on 2020/11/10 15:30
- * @Version: 1.0
- */
+
 public class StateTest1_OperatorState {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

@@ -1,11 +1,5 @@
 package com.atguigu.market_analysis.beans;
 
-/**
- * @ClassName: AdCountViewByProvince
- * @Description:
- * @Author: wushengran on 2020/11/17 10:43
- * @Version: 1.0
- */
 public class AdCountViewByProvince {
     private String province;
     private String windowEnd;

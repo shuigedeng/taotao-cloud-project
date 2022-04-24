@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/1
  * Desc: 从MySQL数据中查询数据的工具类
  * 完成ORM，对象关系映射

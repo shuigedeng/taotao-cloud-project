@@ -1,11 +1,6 @@
 package com.atguigu.loginfail_detect.beans;
 
-/**
- * @ClassName: LoginFailWarning
- * @Description:
- * @Author: wushengran on 2020/11/17 14:06
- * @Version: 1.0
- */
+
 public class LoginFailWarning {
     private Long userId;
     private Long firstFailTime;

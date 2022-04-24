@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Author: Felix Date: 2021/1/30 Desc: 准备用户行为日志的DWD层
+ * Date: 2021/1/30 Desc: 准备用户行为日志的DWD层
  */
 public class BaseLogApp {
 

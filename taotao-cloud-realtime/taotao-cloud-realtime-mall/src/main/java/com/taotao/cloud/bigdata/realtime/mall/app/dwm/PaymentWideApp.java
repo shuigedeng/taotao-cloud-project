@@ -19,7 +19,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.util.Collector;
 
 /**
- * Author: Felix Date: 2021/2/20 Desc: 支付宽表处理程序
+ * Date: 2021/2/20 Desc: 支付宽表处理程序
  */
 public class PaymentWideApp {
 

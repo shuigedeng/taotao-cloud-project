@@ -7,12 +7,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Properties;
 
-/**
- * @ClassName: KafkaProducerUtil
- * @Description:
- * @Author: wushengran on 2020/11/14 16:25
- * @Version: 1.0
- */
 public class KafkaProducerUtil {
     public static void main(String[] args) throws Exception{
         writeToKafka("hotitems");
