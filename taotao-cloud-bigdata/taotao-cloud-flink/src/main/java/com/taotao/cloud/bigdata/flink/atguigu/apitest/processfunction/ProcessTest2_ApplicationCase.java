@@ -1,3 +1,5 @@
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.processfunction;
+
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;

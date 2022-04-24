@@ -9,7 +9,7 @@ import org.apache.flink.types.Row;
 import java.util.List;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/26
  * Desc:  自定义UDTF函数实现分词操作
  */

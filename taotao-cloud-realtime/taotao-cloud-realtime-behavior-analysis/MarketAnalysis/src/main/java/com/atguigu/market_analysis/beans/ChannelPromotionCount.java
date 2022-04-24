@@ -1,11 +1,6 @@
 package com.atguigu.market_analysis.beans;
 
-/**
- * @ClassName: ChannelPromotionCount
- * @Description:
- * @Author: wushengran on 2020/11/17 9:32
- * @Version: 1.0
- */
+
 public class ChannelPromotionCount {
     private String channel;
     private String behavior;

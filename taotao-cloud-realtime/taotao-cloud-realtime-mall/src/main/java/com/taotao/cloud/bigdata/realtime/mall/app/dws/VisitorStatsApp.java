@@ -31,7 +31,7 @@ import java.time.Duration;
 import java.util.Date;
 
 /**
- * Author: Felix Date: 2021/2/22 Desc:  访客主题统计 需要启动的服务 -logger.sh(Nginx以及日志处理服务)、zk、kafka
+ * Date: 2021/2/22 Desc:  访客主题统计 需要启动的服务 -logger.sh(Nginx以及日志处理服务)、zk、kafka
  * -BaseLogApp、UniqueVisitApp、UserJumpDetailApp、VisitorStatsApp 执行流程分析 -模拟生成日志数据 -交给Nginx进行反向代理
  * -交给日志处理服务 将日志发送到kafka的ods_base_log -BaseLogApp从ods层读取数据，进行分流，将分流的数据发送到kakfa的dwd(dwd_page_log)
  * -UniqueVisitApp从dwd_page_log读取数据，将独立访客明细发送到dwm_unique_visit -UserJumpDetailApp从dwd_page_log读取数据，将页面跳出明细发送到dwm_user_jump_detail

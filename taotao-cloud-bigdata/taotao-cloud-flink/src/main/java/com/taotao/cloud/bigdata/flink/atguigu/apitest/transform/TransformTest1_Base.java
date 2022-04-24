@@ -7,12 +7,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
-/**
- * @ClassName: TransformTest1_Base
- * @Description:
- * @Author: wushengran on 2020/11/7 14:28
- * @Version: 1.0
- */
+
 public class TransformTest1_Base {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

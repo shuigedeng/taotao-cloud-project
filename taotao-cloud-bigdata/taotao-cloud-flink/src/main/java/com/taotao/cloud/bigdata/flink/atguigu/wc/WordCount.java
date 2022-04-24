@@ -6,12 +6,6 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 
-/**
- * @ClassName: WordCount
- * @Description:
- * @Author: wushengran on 2020/11/6 11:22
- * @Version: 1.0
- */
 
 // 批处理word count
 public class WordCount {

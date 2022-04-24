@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/1
  * Desc:  配置表处理函数
  */

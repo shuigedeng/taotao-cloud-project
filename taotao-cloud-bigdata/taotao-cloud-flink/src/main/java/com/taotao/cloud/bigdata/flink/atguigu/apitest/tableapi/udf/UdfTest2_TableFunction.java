@@ -9,12 +9,7 @@ import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.TableFunction;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: UdfTest2_TableFunction
- * @Description:
- * @Author: wushengran on 2020/11/14 10:07
- * @Version: 1.0
- */
+
 public class UdfTest2_TableFunction {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

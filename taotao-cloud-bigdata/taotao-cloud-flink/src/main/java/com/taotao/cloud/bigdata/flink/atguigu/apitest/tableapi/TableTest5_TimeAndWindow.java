@@ -12,12 +12,7 @@ import org.apache.flink.table.api.Tumble;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: TableTest5_TimeAndWindow
- * @Description:
- * @Author: wushengran on 2020/11/13 15:45
- * @Version: 1.0
- */
+
 public class TableTest5_TimeAndWindow {
     public static void main(String[] args) throws Exception {
         // 1. 创建环境

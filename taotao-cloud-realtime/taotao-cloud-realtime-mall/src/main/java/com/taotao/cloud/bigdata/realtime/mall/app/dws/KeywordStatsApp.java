@@ -12,7 +12,7 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 /**
- * Author: Felix Date: 2021/2/26 Desc: dWS层 搜索关键字
+ * Date: 2021/2/26 Desc: dWS层 搜索关键字
  */
 public class KeywordStatsApp {
 

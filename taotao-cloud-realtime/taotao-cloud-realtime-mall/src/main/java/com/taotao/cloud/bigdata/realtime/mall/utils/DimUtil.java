@@ -8,7 +8,7 @@ import redis.clients.jedis.Jedis;
 import java.util.List;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/5
  * Desc: 用于维度查询的工具类  底层调用的是PhoenixUtil
  * select * from dim_base_trademark where id=10 and name=zs;

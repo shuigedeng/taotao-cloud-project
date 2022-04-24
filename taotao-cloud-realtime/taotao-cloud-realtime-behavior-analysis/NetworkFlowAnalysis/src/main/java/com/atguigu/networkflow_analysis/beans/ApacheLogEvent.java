@@ -1,11 +1,6 @@
 package com.atguigu.networkflow_analysis.beans;
 
-/**
- * @ClassName: com.atguigu.networkflow_analysis.beans.ApacheLogEvent
- * @Description:
- * @Author: wushengran on 2020/11/16 9:25
- * @Version: 1.0
- */
+
 public class ApacheLogEvent {
     private String ip;
     private String userId;

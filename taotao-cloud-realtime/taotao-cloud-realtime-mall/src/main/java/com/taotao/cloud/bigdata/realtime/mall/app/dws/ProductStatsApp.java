@@ -34,7 +34,7 @@ import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Author: Felix Date: 2021/2/23 Desc: 商品主题统计应用 执行前需要启动的服务 -zk,kafka,logger.sh(nginx +
+ * Date: 2021/2/23 Desc: 商品主题统计应用 执行前需要启动的服务 -zk,kafka,logger.sh(nginx +
  * 日志处理服务),maxwell,hdfs,hbase,Redis,ClichHouse -BaseLogApp,BaseDBApp,OrderWideApp,PaymentWide,ProductStatsApp
  * 执行流程
  */

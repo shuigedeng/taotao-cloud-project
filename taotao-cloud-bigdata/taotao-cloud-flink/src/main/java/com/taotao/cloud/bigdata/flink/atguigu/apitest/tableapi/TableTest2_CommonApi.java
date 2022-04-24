@@ -14,12 +14,7 @@ import org.apache.flink.table.descriptors.OldCsv;
 import org.apache.flink.table.descriptors.Schema;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: TableTest2_CommonApi
- * @Description:
- * @Author: wushengran on 2020/11/13 10:29
- * @Version: 1.0
- */
+
 public class TableTest2_CommonApi {
     public static void main(String[] args) throws Exception{
         // 1. 创建环境

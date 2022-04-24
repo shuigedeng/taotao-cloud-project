@@ -1,15 +1,11 @@
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.source;
+
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import java.util.Arrays;
 
-/**
- * @ClassName: SourceTest1_Collection
- * @Description:
- * @Author: wushengran on 2020/11/7 11:33
- * @Version: 1.0
- */
 public class SourceTest1_Collection {
     public static void main(String[] args) throws Exception{
         // 创建执行环境

@@ -21,12 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * @ClassName: LoginFail
- * @Description:
- * @Author: wushengran on 2020/11/17 14:02
- * @Version: 1.0
- */
+
 public class LoginFail {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

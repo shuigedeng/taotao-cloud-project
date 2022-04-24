@@ -7,12 +7,6 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: TableTest1_Example
- * @Description:
- * @Author: wushengran on 2020/11/13 9:40
- * @Version: 1.0
- */
 public class TableTest1_Example {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

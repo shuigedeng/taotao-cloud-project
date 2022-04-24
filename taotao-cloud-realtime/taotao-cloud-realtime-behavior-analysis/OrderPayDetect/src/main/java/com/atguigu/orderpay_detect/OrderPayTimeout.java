@@ -20,12 +20,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @ClassName: OrderPayTimeout
- * @Description:
- * @Author: wushengran on 2020/11/18 10:41
- * @Version: 1.0
- */
+
 public class OrderPayTimeout {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
 /**
- * Author: Felix
+ *
  * Desc: 支付宽表实体类
  */
 @Data
