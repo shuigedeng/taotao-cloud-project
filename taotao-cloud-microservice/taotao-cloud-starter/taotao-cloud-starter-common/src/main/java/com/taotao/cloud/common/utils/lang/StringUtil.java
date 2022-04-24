@@ -46,6 +46,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -505,7 +506,6 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @param object 对象
 	 * @return 是否为空
 	 */
-	@SuppressWarnings("unchecked")
 	public static boolean isEmpty(Object object) {
 		if (isNull(object)) {
 			return true;
@@ -3268,7 +3268,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 		formatUnsignedLong(msb, buf, 12, 4);
 		formatUnsignedLong(msb >>> 16, buf, 8, 4);
 		formatUnsignedLong(msb >>> 32, buf, 0, 8);
-		return new String(buf, CommonConstant.UTF8);
+		return new String(buf, StandardCharsets.UTF_8);
 	}
 
 	private static void formatUnsignedLong(long val, byte[] buf, int offset, int len) {
