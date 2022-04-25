@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,分类品牌接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38

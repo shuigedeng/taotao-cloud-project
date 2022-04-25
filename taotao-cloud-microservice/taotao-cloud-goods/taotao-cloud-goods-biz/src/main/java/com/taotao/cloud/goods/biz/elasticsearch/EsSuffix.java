@@ -3,8 +3,9 @@ package com.taotao.cloud.goods.biz.elasticsearch;
 /**
  * elasticsearch 索引后缀
  *
- * @author paulG
- * @since 2020/10/13
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:18:20
  */
 public class EsSuffix {
 

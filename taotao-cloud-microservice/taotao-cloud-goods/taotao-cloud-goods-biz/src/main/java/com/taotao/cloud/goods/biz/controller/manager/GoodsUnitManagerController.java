@@ -1,9 +1,7 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
@@ -17,7 +15,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,商品计量单位接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38
@@ -76,7 +74,8 @@ public class GoodsUnitManagerController {
 	@RequestLogger("编辑商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@NotNull @PathVariable Long id, @Valid @RequestBody GoodsUnit goodsUnit) {
+	public Result<Boolean> update(@NotNull @PathVariable Long id,
+		@Valid @RequestBody GoodsUnit goodsUnit) {
 		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}

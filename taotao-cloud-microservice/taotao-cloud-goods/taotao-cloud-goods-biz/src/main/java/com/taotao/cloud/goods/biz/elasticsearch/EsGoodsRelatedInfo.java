@@ -7,6 +7,10 @@ import lombok.Data;
 
 /**
  * 搜索相关商品品牌名称，分类名称及属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:18:14
  */
 @Data
 public class EsGoodsRelatedInfo {

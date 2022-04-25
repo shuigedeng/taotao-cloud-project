@@ -30,6 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,品牌接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:16:20
  */
 @AllArgsConstructor
 @Validated

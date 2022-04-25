@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * elasticsearch属性
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-25 16:17:57
  */
 @Data
 @Builder

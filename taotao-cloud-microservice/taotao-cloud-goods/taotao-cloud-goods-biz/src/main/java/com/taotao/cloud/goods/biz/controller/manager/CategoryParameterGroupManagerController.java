@@ -1,7 +1,6 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
@@ -13,7 +12,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,分类绑定参数组接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38
@@ -60,7 +59,7 @@ public class CategoryParameterGroupManagerController {
 	@PostMapping
 	public Result<Boolean> saveOrUpdate(
 		@Validated CategoryParameterGroup categoryParameterGroup) {
-			return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
+		return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据")
@@ -69,7 +68,7 @@ public class CategoryParameterGroupManagerController {
 	@PutMapping
 	public Result<Boolean> update(
 		@Validated CategoryParameterGroup categoryParameterGroup) {
-			return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
+		return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
 	}
 
 	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组")

@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.seller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
@@ -12,10 +11,7 @@ import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import java.util.Objects;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 店铺端,商品分类接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:17:12
  */
 @AllArgsConstructor
 @Validated
