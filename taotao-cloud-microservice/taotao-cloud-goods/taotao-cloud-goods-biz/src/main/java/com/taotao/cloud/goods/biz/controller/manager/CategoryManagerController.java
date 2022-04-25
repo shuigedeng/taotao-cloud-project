@@ -33,6 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,商品分类接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:16:38
  */
 @AllArgsConstructor
 @Validated

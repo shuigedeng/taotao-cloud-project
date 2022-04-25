@@ -11,9 +11,11 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 /**
+ * 生成es商品索引监听器
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-25 16:18:31
  */
 @Component
 public class GeneratorEsGoodsIndexListener {

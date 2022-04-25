@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,商品规格接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38
@@ -51,7 +52,8 @@ public class SpecificationManagerController {
 	@GetMapping("/all")
 	public Result<List<SpecificationVO>> getAll() {
 		List<Specification> specifications = specificationService.list();
-		return Result.success(ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(specifications));
+		return Result.success(
+			ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(specifications));
 	}
 
 	@Operation(summary = "搜索规格", description = "搜索规格")
@@ -59,8 +61,10 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<PageModel<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
-		IPage<Specification> specificationPage = specificationService.getPage(specificationPageQuery);
-		return Result.success(PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
+		IPage<Specification> specificationPage = specificationService.getPage(
+			specificationPageQuery);
+		return Result.success(
+			PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
 	@Operation(summary = "保存规格", description = "保存规格")

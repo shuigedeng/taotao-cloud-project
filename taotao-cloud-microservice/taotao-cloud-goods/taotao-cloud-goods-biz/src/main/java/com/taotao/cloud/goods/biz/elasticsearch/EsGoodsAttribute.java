@@ -10,9 +10,10 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * 商品属性索引
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-25 16:18:03
  */
 @Data
 @AllArgsConstructor

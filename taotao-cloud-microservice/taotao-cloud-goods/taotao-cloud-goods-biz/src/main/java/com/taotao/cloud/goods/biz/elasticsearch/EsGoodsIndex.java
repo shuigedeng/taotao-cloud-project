@@ -27,6 +27,10 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * 商品索引
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:18:08
  */
 @Data
 @Document(indexName = "#{@elasticsearchProperties.indexPrefix}_" + EsSuffix.GOODS_INDEX_NAME)

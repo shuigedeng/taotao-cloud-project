@@ -3,9 +3,9 @@ package com.taotao.cloud.goods.biz.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,商品管理接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38

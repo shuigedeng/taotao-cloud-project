@@ -29,6 +29,13 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+/**
+ * 基础elasticsearch服务
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:17:28
+ */
 @Slf4j
 public abstract class BaseElasticsearchService {
 
@@ -55,7 +62,6 @@ public abstract class BaseElasticsearchService {
 	 * build DeleteIndexRequest
 	 *
 	 * @param index elasticsearch index name
-	 * @author fxbin
 	 */
 	private static DeleteIndexRequest buildDeleteIndexRequest(String index) {
 		return new DeleteIndexRequest(index);
@@ -68,7 +74,6 @@ public abstract class BaseElasticsearchService {
 	 * @param id     request object id
 	 * @param object request object
 	 * @return {@link IndexRequest}
-	 * @author fxbin
 	 */
 	protected static IndexRequest buildIndexRequest(String index, String id, Object object) {
 		return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(object), XContentType.JSON);
@@ -78,7 +83,6 @@ public abstract class BaseElasticsearchService {
 	 * create elasticsearch index (asyc)
 	 *
 	 * @param index elasticsearch index
-	 * @author fxbin
 	 */
 	protected void createIndexRequest(String index) {
 		try {

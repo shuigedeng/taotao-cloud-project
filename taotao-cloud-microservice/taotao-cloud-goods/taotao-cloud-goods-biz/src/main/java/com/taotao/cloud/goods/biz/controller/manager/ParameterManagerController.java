@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.dto.ParametersDTO;
 import com.taotao.cloud.goods.biz.entity.Parameters;
@@ -9,7 +8,6 @@ import com.taotao.cloud.goods.biz.service.ParametersService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,分类绑定参数组管理接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38
@@ -53,7 +52,8 @@ public class ParameterManagerController {
 	@RequestLogger("编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO, @PathVariable Long id) {
+	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
+		@PathVariable Long id) {
 		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
 			parametersDTO);
 		parameters.setId(id);
