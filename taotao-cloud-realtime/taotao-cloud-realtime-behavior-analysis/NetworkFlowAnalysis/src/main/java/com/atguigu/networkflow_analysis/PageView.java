@@ -23,12 +23,7 @@ import org.apache.flink.util.Collector;
 import java.net.URL;
 import java.util.Random;
 
-/**
- * @ClassName: PageView
- * @Description:
- * @Author: wushengran on 2020/11/16 11:46
- * @Version: 1.0
- */
+
 public class PageView {
     public static void main(String[] args) throws Exception{
         // 1. 创建执行环境

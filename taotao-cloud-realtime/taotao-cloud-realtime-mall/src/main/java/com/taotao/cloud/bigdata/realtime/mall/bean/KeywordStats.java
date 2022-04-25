@@ -2,7 +2,7 @@ package com.taotao.cloud.bigdata.realtime.mall.bean;
 
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/26
  * Desc: 关键词统计实体类
  */

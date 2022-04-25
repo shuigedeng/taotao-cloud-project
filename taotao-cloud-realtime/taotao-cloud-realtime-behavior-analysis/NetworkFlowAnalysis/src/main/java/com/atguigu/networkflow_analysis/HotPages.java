@@ -29,12 +29,6 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/**
- * @ClassName: HotPages
- * @Description:
- * @Author: wushengran on 2020/11/16 9:31
- * @Version: 1.0
- */
 public class HotPages {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

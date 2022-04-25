@@ -1,7 +1,7 @@
 package com.taotao.cloud.bigdata.realtime.mall.bean;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/23
  * @Builder注解
  *      可以使用构造者方式创建对象，给属性赋值

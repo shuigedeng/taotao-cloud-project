@@ -26,7 +26,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.util.Collector;
 
 /**
- * Author: Felix Date: 2021/2/5 Desc: 合并订单宽表 测试需要启动服务： -Maxwell、zk、kafka、hdfs、hbase、BaseDBApp
+ * Date: 2021/2/5 Desc: 合并订单宽表 测试需要启动服务： -Maxwell、zk、kafka、hdfs、hbase、BaseDBApp
  * OrderwideApp -准备配置表
  * <p>
  * 业务执行流程 1.模拟生成数据jar 2.在MySQL数据库的表中插入相关的业务数据 3.MySQL的Binlog记录变化的数据 4.Maxwell会将变化的数据采集到，并且发送到Kafka的ods_base_db_m

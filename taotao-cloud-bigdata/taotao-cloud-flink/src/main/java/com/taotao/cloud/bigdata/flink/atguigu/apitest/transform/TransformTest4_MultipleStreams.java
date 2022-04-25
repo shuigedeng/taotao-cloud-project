@@ -12,12 +12,7 @@ import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 
 import java.util.Collections;
 
-/**
- * @ClassName: TransformTest4_MultipleStreams
- * @Description:
- * @Author: wushengran on 2020/11/7 16:14
- * @Version: 1.0
- */
+
 public class TransformTest4_MultipleStreams {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

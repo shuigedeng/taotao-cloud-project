@@ -14,12 +14,7 @@ import org.apache.flink.util.Collector;
 
 import java.net.URL;
 
-/**
- * @ClassName: TxPayMatchByJoin
- * @Description:
- * @Author: wushengran on 2020/11/18 15:42
- * @Version: 1.0
- */
+
 public class TxPayMatchByJoin {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

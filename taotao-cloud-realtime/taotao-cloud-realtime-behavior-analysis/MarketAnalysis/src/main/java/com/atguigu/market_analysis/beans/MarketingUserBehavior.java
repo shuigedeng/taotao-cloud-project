@@ -1,11 +1,6 @@
 package com.atguigu.market_analysis.beans;
 
-/**
- * @ClassName: MarketingUserBehavior
- * @Description:
- * @Author: wushengran on 2020/11/17 9:28
- * @Version: 1.0
- */
+
 public class MarketingUserBehavior {
     private Long userId;
     private String behavior;

@@ -1,11 +1,5 @@
 package com.atguigu.market_analysis.beans;
 
-/**
- * @ClassName: BlackListUserWarning
- * @Description:
- * @Author: wushengran on 2020/11/17 11:32
- * @Version: 1.0
- */
 public class BlackListUserWarning {
     private Long userId;
     private Long adId;

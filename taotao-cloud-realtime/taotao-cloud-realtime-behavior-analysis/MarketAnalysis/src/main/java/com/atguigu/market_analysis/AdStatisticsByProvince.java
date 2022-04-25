@@ -24,12 +24,7 @@ import sun.awt.SunHints;
 import java.net.URL;
 import java.sql.Timestamp;
 
-/**
- * @ClassName: AdStatisticsByProvince
- * @Description:
- * @Author: wushengran on 2020/11/17 10:38
- * @Version: 1.0
- */
+
 public class AdStatisticsByProvince {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

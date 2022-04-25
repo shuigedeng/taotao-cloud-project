@@ -17,12 +17,7 @@ import org.apache.flink.util.OutputTag;
 
 import java.net.URL;
 
-/**
- * @ClassName: TxPayMatch
- * @Description:
- * @Author: wushengran on 2020/11/18 14:18
- * @Version: 1.0
- */
+
 public class TxPayMatch {
     // 定义侧输出流标签
     private final static OutputTag<OrderEvent> unmatchedPays = new OutputTag<OrderEvent>("unmatched-pays"){};

@@ -13,12 +13,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
-/**
- * @ClassName: WindowTest1_TimeWindow
- * @Description:
- * @Author: wushengran on 2020/11/9 14:37
- * @Version: 1.0
- */
+
 public class WindowTest1_TimeWindow {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

@@ -7,7 +7,7 @@ import java.beans.Transient;
 import java.lang.annotation.Target;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/22
  * Desc: 访客统计实体类
  *  在当前类中定义类访客统计相关的维度和度量

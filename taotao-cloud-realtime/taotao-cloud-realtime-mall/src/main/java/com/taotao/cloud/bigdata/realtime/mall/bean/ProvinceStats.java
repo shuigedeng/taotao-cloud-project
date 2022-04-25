@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/24
  * Desc:地区统计宽表实体类
  */

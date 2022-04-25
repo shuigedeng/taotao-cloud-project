@@ -8,12 +8,6 @@ import org.apache.flink.table.descriptors.Csv;
 import org.apache.flink.table.descriptors.Kafka;
 import org.apache.flink.table.descriptors.Schema;
 
-/**
- * @ClassName: TableTest4_KafkaPipeLine
- * @Description:
- * @Author: wushengran on 2020/11/13 14:01
- * @Version: 1.0
- */
 public class TableTest4_KafkaPipeLine {
     public static void main(String[] args) throws Exception {
         // 1. 创建环境

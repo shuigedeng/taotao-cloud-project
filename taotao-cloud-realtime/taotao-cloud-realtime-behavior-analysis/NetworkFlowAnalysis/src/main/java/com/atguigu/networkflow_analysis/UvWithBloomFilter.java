@@ -19,12 +19,7 @@ import redis.clients.jedis.Jedis;
 
 import java.net.URL;
 
-/**
- * @ClassName: UvWithBloomFilter
- * @Description:
- * @Author: wushengran on 2020/11/16 15:28
- * @Version: 1.0
- */
+
 public class UvWithBloomFilter {
     public static void main(String[] args) throws Exception {
         // 1. 创建执行环境

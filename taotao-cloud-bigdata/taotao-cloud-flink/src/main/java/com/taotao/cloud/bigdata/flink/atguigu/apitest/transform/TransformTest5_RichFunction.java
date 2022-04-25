@@ -7,12 +7,7 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-/**
- * @ClassName: TransformTest5_RichFunction
- * @Description:
- * @Author: wushengran on 2020/11/9 9:29
- * @Version: 1.0
- */
+
 public class TransformTest5_RichFunction {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

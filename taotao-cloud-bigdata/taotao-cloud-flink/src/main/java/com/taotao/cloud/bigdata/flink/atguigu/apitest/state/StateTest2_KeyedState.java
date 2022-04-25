@@ -7,12 +7,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-/**
- * @ClassName: StateTest2_KeyedState
- * @Description:
- * @Author: wushengran on 2020/11/10 15:49
- * @Version: 1.0
- */
+
 public class StateTest2_KeyedState {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

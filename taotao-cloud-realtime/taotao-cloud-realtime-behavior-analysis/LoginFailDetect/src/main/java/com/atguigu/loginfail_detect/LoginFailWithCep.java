@@ -19,12 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @ClassName: LoginFailWithCep
- * @Description:
- * @Author: wushengran on 2020/11/17 15:29
- * @Version: 1.0
- */
+
 public class LoginFailWithCep {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

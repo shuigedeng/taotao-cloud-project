@@ -17,12 +17,7 @@ import org.apache.flink.util.Collector;
 import java.net.URL;
 import java.util.HashSet;
 
-/**
- * @ClassName: UniqueVisitor
- * @Description:
- * @Author: wushengran on 2020/11/16 14:31
- * @Version: 1.0
- */
+
 public class UniqueVisitor {
     public static void main(String[] args) throws Exception {
         // 1. 创建执行环境

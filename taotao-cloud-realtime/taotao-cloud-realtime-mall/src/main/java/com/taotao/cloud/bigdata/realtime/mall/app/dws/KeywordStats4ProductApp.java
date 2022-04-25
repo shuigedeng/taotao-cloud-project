@@ -12,7 +12,7 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/3/1
  * Desc:  从商品统计中获取关键词
  */

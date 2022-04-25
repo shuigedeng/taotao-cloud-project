@@ -3,7 +3,7 @@ package com.taotao.cloud.bigdata.realtime.mall.bean;
 import lombok.Data;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/1
  * Desc:  配置表对应的实体类
  */

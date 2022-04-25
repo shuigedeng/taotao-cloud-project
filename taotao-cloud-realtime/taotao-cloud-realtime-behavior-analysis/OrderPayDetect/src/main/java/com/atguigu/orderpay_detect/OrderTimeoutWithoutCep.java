@@ -16,12 +16,7 @@ import org.apache.flink.util.OutputTag;
 
 import java.net.URL;
 
-/**
- * @ClassName: OrderTimeoutWithoutCep
- * @Description:
- * @Author: wushengran on 2020/11/18 11:27
- * @Version: 1.0
- */
+
 public class OrderTimeoutWithoutCep {
     // 定义超时事件的侧输出流标签
     private final static OutputTag<OrderResult> orderTimeoutTag = new OutputTag<OrderResult>("order-timeout"){};

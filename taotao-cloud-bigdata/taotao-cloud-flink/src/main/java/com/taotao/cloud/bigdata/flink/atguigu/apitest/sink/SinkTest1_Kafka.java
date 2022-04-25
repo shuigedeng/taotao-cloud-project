@@ -9,12 +9,6 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer011;
 
 import java.util.Properties;
 
-/**
- * @ClassName: SinkTest1_Kafka
- * @Description:
- * @Author: wushengran on 2020/11/9 10:24
- * @Version: 1.0
- */
 public class SinkTest1_Kafka {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

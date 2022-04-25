@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/19
  * Desc:  创建单例的线程池对象的工具类
  */

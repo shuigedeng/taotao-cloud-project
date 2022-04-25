@@ -10,7 +10,7 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 /**
- * Author: Felix Date: 2021/2/24 Desc: 使用FlinkSQL对地区主题统计
+ * Date: 2021/2/24 Desc: 使用FlinkSQL对地区主题统计
  */
 public class ProvinceStatsSqlApp {
 

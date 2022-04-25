@@ -19,12 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @ClassName: AppMarketingByChannel
- * @Description:
- * @Author: wushengran on 2020/11/17 9:34
- * @Version: 1.0
- */
+
 public class AppMarketingByChannel {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

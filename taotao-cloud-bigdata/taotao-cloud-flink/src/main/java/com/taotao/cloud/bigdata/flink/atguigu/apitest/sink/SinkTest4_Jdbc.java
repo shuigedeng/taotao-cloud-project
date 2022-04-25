@@ -1,3 +1,5 @@
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.sink;
+
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.source.SourceTest4_UDF;
 import org.apache.flink.configuration.Configuration;
@@ -9,12 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-/**
- * @ClassName: SinkTest4_Jdbc
- * @Description:
- * @Author: wushengran on 2020/11/9 11:43
- * @Version: 1.0
- */
+
 public class SinkTest4_Jdbc {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

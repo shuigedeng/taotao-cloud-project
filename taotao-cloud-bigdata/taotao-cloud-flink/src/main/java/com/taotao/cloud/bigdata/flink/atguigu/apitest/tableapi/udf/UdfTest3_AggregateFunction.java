@@ -9,12 +9,7 @@ import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.AggregateFunction;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: UdfTest3_AggregateFunction
- * @Description:
- * @Author: wushengran on 2020/11/14 10:32
- * @Version: 1.0
- */
+
 public class UdfTest3_AggregateFunction {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
