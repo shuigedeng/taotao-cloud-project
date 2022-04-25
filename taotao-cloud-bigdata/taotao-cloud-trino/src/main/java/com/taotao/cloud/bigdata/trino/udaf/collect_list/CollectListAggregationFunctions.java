@@ -29,7 +29,7 @@ import io.trino.spi.type.VarcharType;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 17:52
  */
 public class CollectListAggregationFunctions {

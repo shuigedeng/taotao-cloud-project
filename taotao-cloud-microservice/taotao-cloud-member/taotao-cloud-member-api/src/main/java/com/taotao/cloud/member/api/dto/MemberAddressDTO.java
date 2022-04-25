@@ -1,6 +1,8 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -23,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "租户id")
 public class MemberAddressDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@NotEmpty(message = "收货人姓名不能为空")

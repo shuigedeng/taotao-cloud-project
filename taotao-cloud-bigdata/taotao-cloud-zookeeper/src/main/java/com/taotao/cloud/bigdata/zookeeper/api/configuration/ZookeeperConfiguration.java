@@ -30,7 +30,7 @@ import java.util.concurrent.CountDownLatch;
  *
  * @author shuigedeng
  * @since 2020/12/3 下午3:16
- * @version 1.0.0
+ * @version 2022.04
  */
 @EnableConfigurationProperties(ZkProperties.class)
 public class ZookeeperConfiguration {

@@ -23,7 +23,7 @@ import reactor.core.publisher.Flux;
  * EmployeeDao
  *
  * @author shuigedeng
- * @version 1.0.0
+ * 
  * @since 2021/03/03 16:48
  */
 public interface EmployeeRepository extends ReactiveCrudRepository<Employee, Long> {

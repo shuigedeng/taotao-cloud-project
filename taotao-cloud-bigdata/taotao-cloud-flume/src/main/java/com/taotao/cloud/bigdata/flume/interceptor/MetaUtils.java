@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/25 下午5:42
  */
 public class MetaUtils {

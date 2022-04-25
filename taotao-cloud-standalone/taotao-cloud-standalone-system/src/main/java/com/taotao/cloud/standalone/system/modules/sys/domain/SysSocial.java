@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @Description 社交实体类
  * @Author shuigedeng
  * @since 2019-07-17 15:57
- * @Version 1.0
+ * 
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

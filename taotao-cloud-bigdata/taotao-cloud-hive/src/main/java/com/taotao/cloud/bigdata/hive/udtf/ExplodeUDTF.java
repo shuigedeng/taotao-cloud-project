@@ -32,7 +32,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.StructObjectInspector;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 17:25
  */
 public class ExplodeUDTF extends GenericUDTF {

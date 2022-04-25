@@ -20,7 +20,7 @@ package com.taotao.cloud.java.javase;
  *
  * @author shuigedeng
  * @since 2021/1/28 下午3:38
- * @version 1.0.0
+ * @version 2022.04
  */
 public class Index {
 

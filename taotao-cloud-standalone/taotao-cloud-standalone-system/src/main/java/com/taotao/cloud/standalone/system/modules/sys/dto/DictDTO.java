@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
  * @Description 字典dto
  * @Author shuigedeng
  * @since 2019-06-02 09:36
- * @Version 1.0
+ * 
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

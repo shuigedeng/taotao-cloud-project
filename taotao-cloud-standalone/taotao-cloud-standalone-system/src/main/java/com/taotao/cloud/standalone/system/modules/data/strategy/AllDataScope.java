@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @Description 所有
  * @Author shuigedeng
  * @since 2019-06-08 16:27
- * @Version 1.0
+ * 
  */
 @Component("1")
 public class AllDataScope implements AbstractDataScopeHandler {

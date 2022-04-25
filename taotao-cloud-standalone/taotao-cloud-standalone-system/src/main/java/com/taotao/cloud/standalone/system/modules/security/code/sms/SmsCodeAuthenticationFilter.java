@@ -21,7 +21,7 @@ import java.io.IOException;
  * 4.调用 AuthenticationManager 的 authenticate 方法进行验证（即SmsCodeAuthenticationProvider）
  * @Author shuigedeng
  * @since 2019-07-08 11:46
- * @Version 1.0
+ * 
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     /**

@@ -6,7 +6,7 @@ package com.taotao.cloud.standalone.common.sensitive;
  * @Description 脱敏类型枚举类
  * @Author shuigedeng
  * @since 2019/12/9 4:20 下午
- * @Version 1.0
+ * 
  */
 public enum SensitiveType {
     /**

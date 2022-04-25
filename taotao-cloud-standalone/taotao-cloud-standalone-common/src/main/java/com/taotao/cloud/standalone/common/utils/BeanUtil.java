@@ -10,7 +10,7 @@ import java.util.Map;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-09-23 15:22
- * @Version 1.0
+ *
  */
 public class BeanUtil {
 	/**

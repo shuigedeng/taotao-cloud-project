@@ -29,7 +29,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
  * WholeFileInputFormat
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:15
  */
 public class WholeFileInputFormat extends FileInputFormat<NullWritable, BytesWritable> {

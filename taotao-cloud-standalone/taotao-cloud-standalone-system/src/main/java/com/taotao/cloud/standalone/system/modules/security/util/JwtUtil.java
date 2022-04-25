@@ -25,7 +25,7 @@ import java.util.Set;
  * @Description JWT工具类
  * @Author shuigedeng
  * @since 2019-05-07 09:23
- * @Version 1.0
+ * 
  */
 @Log4j2
 @Component

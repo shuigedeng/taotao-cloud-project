@@ -5,7 +5,7 @@ package com.taotao.cloud.standalone.system.modules.security.properties;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-08-06 14:50
- * @Version 1.0
+ * 
  */
 public abstract class SocialProperties {
     private String appId;

@@ -17,7 +17,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * /user/atguigu/output
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2021/7/16 09:56
  */
 public class WordCountDriver {

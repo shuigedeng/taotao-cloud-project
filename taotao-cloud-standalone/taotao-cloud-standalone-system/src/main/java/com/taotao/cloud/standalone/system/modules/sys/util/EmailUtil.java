@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description 邮件工具类
  * @Author shuigedeng
  * @since 2019-06-15 10:47
- * @Version 1.0
+ * 
  */
 @Component
 public class EmailUtil {

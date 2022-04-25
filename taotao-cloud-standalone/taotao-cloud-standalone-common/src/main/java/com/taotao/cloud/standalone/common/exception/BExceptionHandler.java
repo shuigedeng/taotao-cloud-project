@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * @Description 自定义异常处理
  * @Author shuigedeng
  * @since 2019-03-29 13:23
- * @Version 1.0
+ * 
  */
 @RestControllerAdvice
 public class BExceptionHandler {

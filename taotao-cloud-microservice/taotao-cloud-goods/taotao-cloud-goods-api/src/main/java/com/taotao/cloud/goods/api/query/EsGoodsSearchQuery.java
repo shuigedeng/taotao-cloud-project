@@ -8,6 +8,13 @@ import java.util.Map;
 
 import lombok.*;
 
+/**
+ * es商品搜索查询
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:33:11
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder

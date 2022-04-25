@@ -1,13 +1,12 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
-import com.taotao.cloud.member.api.dto.MemberSearchPageDTO;
+import com.taotao.cloud.member.api.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.member.biz.entity.Member;
@@ -17,7 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,8 +44,8 @@ public class MemberController {
 	@RequestLogger("会员分页列表")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageModel<MemberVO>> getByPage(MemberSearchPageDTO memberSearchPageDTO) {
-		IPage<Member> memberPage = memberService.getMemberPage(memberSearchPageDTO);
+	public Result<PageModel<MemberVO>> getByPage(MemberSearchPageQuery memberSearchPageQuery) {
+		IPage<Member> memberPage = memberService.getMemberPage(memberSearchPageQuery);
 		return Result.success(PageModel.convertMybatisPage(memberPage, MemberVO.class));
 	}
 

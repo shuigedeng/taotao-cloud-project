@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets;
  * <br>
  *
  * @author shuigedeng
- * @version v1.0.0
+ * 
  * @date 2020/9/10 15:22
  */
 @Component

@@ -2,6 +2,10 @@ package com.taotao.cloud.member.api.enums;
 
 /**
  * 发票类型
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:37:15
  */
 public enum MemberReceiptEnum {
 

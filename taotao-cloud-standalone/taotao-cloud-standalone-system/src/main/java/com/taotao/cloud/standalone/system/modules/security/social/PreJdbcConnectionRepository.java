@@ -38,7 +38,7 @@ import java.util.Set;
  * @Description 个别sql语句问题 需要重写
  * @Author shuigedeng
  * @since 2019-07-19 09:18
- * @Version 1.0
+ * 
  */
 @ConditionalOnClass(ConnectionRepository.class)
 public class PreJdbcConnectionRepository implements ConnectionRepository {

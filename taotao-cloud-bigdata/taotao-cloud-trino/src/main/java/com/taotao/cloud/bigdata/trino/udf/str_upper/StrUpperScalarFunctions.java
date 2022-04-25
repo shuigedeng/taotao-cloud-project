@@ -26,7 +26,7 @@ import io.trino.spi.type.StandardTypes;
  * 开发标量函数 my_upper
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2021/1/25 下午2:59
  */
 public class StrUpperScalarFunctions {

@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by jackiechan on 2020-03-31 23:07
  *
- * @Author jackiechan
+ * @author shuigedeng
  */
 @RestController
 @RequestMapping("/sys/systemparaters")

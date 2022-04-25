@@ -59,7 +59,7 @@ import java.util.Objects;
  * HBaseClient
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/30 11:32
  */
 @Slf4j

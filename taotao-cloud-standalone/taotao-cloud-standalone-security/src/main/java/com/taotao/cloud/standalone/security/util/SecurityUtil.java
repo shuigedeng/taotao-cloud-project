@@ -18,7 +18,7 @@ import java.io.PrintWriter;
  * @Description 安全服务工具类
  * @Author shuigedeng
  * @since 2019-05-08 10:12
- * @Version 1.0
+ * 
  */
 @UtilityClass
 public class SecurityUtil {

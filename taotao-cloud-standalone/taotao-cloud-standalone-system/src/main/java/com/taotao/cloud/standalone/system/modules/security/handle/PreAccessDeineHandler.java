@@ -17,7 +17,7 @@ import java.io.IOException;
  * @Description 用来解决匿名用户访问无权限资源时的异常
  * @Author shuigedeng
  * @since 2019/12/19 3:35 下午
- * @Version 1.0
+ * 
  */
 @Slf4j
 public class PreAccessDeineHandler implements AccessDeniedHandler {

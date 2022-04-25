@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.connect.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
-import com.taotao.cloud.member.api.dto.ConnectQueryDTO;
+import com.taotao.cloud.member.api.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
@@ -103,8 +103,8 @@ public interface ConnectService extends IService<Connect> {
 	/**
 	 * 根据查询dto获取查询对象
 	 *
-	 * @param connectQueryDTO
+	 * @param connectQuery
 	 * @return
 	 */
-	Connect queryConnect(ConnectQueryDTO connectQueryDTO);
+	Connect queryConnect(ConnectQuery connectQuery);
 }

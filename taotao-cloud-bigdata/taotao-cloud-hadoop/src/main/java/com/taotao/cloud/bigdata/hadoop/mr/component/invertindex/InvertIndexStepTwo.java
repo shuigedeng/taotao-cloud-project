@@ -31,7 +31,7 @@ import java.io.IOException;
  * InvertIndexStepTwo
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:24
  */
 public class InvertIndexStepTwo {

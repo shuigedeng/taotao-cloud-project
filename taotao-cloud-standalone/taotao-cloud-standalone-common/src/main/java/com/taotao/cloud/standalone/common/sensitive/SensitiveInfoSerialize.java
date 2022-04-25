@@ -16,7 +16,7 @@ import java.util.Objects;
  * @Description 脱敏序列化类
  * @Author shuigedeng
  * @since 2019/12/9 4:20 下午
- * @Version 1.0
+ * 
  */
 public class SensitiveInfoSerialize extends JsonSerializer<String> implements ContextualSerializer {
 

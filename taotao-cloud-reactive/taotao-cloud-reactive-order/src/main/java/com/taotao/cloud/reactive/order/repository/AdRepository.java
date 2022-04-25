@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
  * AdRepository
  *
  * @author shuigedeng
- * @version 1.0.0
+ * 
  * @since 2021/03/03 16:27
  */
 public interface AdRepository extends ReactiveCrudRepository<AdBean,Integer> {

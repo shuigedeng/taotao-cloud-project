@@ -21,7 +21,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
  * @Description 微信配置
  * @Author shuigedeng
  * @since 2019-08-23 16:50
- * @Version 1.0
+ * 
  */
 @Configuration
 @EnableSocial

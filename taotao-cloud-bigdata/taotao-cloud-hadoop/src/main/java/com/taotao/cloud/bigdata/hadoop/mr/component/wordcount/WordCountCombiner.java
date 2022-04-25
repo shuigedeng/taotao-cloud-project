@@ -24,7 +24,7 @@ import org.apache.hadoop.mapreduce.Reducer;
  * 输入为map的输出
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:06
  */
 public class WordCountCombiner extends Reducer<Text, IntWritable, Text, IntWritable> {

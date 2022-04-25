@@ -12,7 +12,7 @@ import java.util.List;
  * @Description 多租户动态配置
  * @Author shuigedeng
  * @since 2019-08-09 23:36
- * @Version 1.0
+ * 
  */
 @Data
 @Component

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @Description 注解形式的监听 异步监听日志事件
  * @Author shuigedeng
  * @since 2019-04-28 11:34
- * @Version 1.0
+ * 
  */
 @Component
 public class SysLogListener {

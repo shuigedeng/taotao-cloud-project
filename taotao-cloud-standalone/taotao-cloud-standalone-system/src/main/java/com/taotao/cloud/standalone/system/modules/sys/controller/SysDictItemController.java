@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  * @Author shuigedeng
  * @since 2019-09-02 18:14
- * @Version 1.0
+ * 
  */
 @RestController
 @RequestMapping("/dictItem")

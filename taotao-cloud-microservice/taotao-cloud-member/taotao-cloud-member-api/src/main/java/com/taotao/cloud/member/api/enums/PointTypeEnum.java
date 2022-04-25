@@ -2,8 +2,11 @@ package com.taotao.cloud.member.api.enums;
 
 /**
  * 积分类型枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:37:20
  */
-
 public enum PointTypeEnum {
 	/**
 	 * 增加

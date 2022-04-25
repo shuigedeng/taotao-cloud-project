@@ -22,7 +22,7 @@ import java.io.IOException;
  * @Description 登录成功处理器
  * @Author shuigedeng
  * @since 2019-07-08 13:50
- * @Version 1.0
+ * 
  */
 @Component
 public class PreAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.api.dto;
+package com.taotao.cloud.member.api.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "联合登录查询dto")
-public class ConnectQueryDTO implements Serializable {
+public class ConnectQuery implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

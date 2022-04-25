@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @Description 租户处理器 -主要实现mybatis-plus https://mp.baomidou.com/guide/tenant.html
  * @Author shuigedeng
  * @since 2019-08-09 23:34
- * @Version 1.0
+ * 
  */
 @Slf4j
 @Component

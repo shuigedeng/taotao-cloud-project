@@ -12,7 +12,7 @@ import java.util.List;
  * @Description 代码生成mapper
  * @Author shuigedeng
  * @since 2019-07-29 18:51
- * @Version 1.0
+ * 
  */
 @Repository
 public interface SysCodeMapper {

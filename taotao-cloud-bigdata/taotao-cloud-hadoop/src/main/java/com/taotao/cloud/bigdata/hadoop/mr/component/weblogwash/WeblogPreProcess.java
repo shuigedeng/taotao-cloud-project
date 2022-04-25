@@ -30,7 +30,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * WeblogPreProcess
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:35
  */
 public class WeblogPreProcess {

@@ -8,7 +8,7 @@ import lombok.Data;
  * @Description QQ第三方登录配置
  * @Author shuigedeng
  * @since 2019-07-08 20:16
- * @Version 1.0
+ * 
  */
 @Data
 public class QQProperties extends SocialProperties{

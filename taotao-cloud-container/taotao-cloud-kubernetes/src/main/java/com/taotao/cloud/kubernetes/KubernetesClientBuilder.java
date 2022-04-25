@@ -51,7 +51,7 @@ import java.util.Map;
  * KubernetesClientBuilder
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04 1.0.0
  * @since 2021/03/08 14:35
  */
 public class KubernetesClientBuilder {

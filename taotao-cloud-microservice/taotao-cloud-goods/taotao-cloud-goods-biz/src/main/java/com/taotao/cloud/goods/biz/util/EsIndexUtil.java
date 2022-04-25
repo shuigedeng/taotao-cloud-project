@@ -15,6 +15,14 @@ public class EsIndexUtil {
 
 	private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";
 
+	/**
+	 * 更新索引字段映射
+	 *
+	 * @param queryGoodsIndex  查询商品指数
+	 * @param updateGoodsIndex 更新商品指数
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-04-25 16:30:15
+	 */
 	public static Map<String, Object> getUpdateIndexFieldsMap(EsGoodsIndex queryGoodsIndex,
 		EsGoodsIndex updateGoodsIndex) {
 		Map<String, Object> queryFieldsMap = new HashMap<>();
@@ -35,6 +43,14 @@ public class EsIndexUtil {
 		return getUpdateIndexFieldsMap(queryFieldsMap, updateFieldsMap);
 	}
 
+	/**
+	 * 更新索引字段映射
+	 *
+	 * @param queryFieldsMap  查询字段映射
+	 * @param updateFieldsMap 更新字段映射
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-04-25 16:30:28
+	 */
 	public static Map<String, Object> getUpdateIndexFieldsMap(Map<String, Object> queryFieldsMap,
 		Map<String, Object> updateFieldsMap) {
 		Map<String, Object> updateIndexMap = new HashMap<>();

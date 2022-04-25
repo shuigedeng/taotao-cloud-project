@@ -15,7 +15,7 @@ import java.util.List;
  * @Description 本级以及子级
  * @Author shuigedeng
  * @since 2019-06-08 16:30
- * @Version 1.0
+ * 
  */
 @Component("3")
 public class ThisLevelChildenDataScope implements AbstractDataScopeHandler {

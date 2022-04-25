@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
  * @Description
  * @Author shuigedeng
  * @since 2019-07-08 21:49
- * @Version 1.0
+ * 
  */
 @Slf4j
 public class GiteeOAuth2Template extends OAuth2Template {

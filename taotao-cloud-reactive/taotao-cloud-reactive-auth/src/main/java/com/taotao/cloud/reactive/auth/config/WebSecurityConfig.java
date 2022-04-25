@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * <br>
  *
  * @author shuigedeng
- * @version v1.0.0
+ * 
  * @date 2020/9/10 17:14
  */
 @Configuration

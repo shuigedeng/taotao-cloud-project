@@ -14,7 +14,7 @@ import org.springframework.data.repository.reactive.ReactiveSortingRepository;
  * 〈〉<br>
  *
  * @author shuigedeng
- * @version v1.0.0
+ * 
  * @create 2020/9/10 14:07
  * @see
  * @since v1.0.0

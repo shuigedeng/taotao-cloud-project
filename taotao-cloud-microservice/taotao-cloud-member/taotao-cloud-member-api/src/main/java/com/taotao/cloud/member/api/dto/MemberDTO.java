@@ -2,6 +2,8 @@ package com.taotao.cloud.member.api.dto;
 
 import cn.hutool.core.lang.RegexPool;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
@@ -26,6 +28,7 @@ import org.hibernate.validator.constraints.Length;
 @Schema(name = "MemberDTO", description = "会员注册DTO")
 public class MemberDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -1972549738577159538L;
 
 	@Schema(description = "用户昵称", required = true)

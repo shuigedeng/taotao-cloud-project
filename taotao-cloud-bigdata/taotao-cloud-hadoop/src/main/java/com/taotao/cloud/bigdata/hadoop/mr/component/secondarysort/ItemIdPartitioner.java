@@ -22,7 +22,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
  * ItemIdPartitioner
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:33
  */
 public class ItemIdPartitioner extends Partitioner<OrderBean, NullWritable> {

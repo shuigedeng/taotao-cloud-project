@@ -27,7 +27,7 @@ import org.apache.hadoop.hive.ql.exec.UDF;
  * 自定义函数不失效，则需要将导出的Jar包放到HIVE_HOME/lib目录
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 16:58
  */
 public final class StringExt extends UDF {

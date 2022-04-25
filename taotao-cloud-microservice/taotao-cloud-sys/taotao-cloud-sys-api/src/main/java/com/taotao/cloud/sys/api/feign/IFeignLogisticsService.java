@@ -23,9 +23,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(contextId = "IFeignLogisticsService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignLogisticsFallback.class)
 public interface IFeignLogisticsService {
 
+	/**
+	 * 通过id
+	 *
+	 * @param logisticsId 物流id
+	 * @return {@link Result }<{@link LogisticsVO }>
+	 * @since 2022-04-25 16:47:29
+	 */
 	@GetMapping("/resource/info/codes")
 	Result<LogisticsVO> getById(@RequestParam String logisticsId);
 
+	/**
+	 * 得到物流
+	 *
+	 * @param logisticsId 物流id
+	 * @param logisticsNo 物流不
+	 * @return {@link Result }<{@link TracesVO }>
+	 * @since 2022-04-25 16:47:32
+	 */
 	@GetMapping("/resource/info/codes")
 	Result<TracesVO> getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
 }

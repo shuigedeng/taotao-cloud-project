@@ -12,7 +12,7 @@ import java.util.List;
  * @Description 代码生成服务类
  * @Author shuigedeng
  * @since 2019-08-02 14:21
- * @Version 1.0
+ * 
  */
 public interface SysCodeService {
 

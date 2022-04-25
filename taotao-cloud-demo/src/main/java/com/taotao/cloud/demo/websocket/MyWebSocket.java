@@ -36,7 +36,7 @@ import org.springframework.util.MultiValueMap;
  * MyWebSokcet
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04 1.0.0
  * @since 2021/09/06 11:51
  */
 @ServerEndpoint(path = "/ws/websocket", port = "80", host = "0.0.0.0")

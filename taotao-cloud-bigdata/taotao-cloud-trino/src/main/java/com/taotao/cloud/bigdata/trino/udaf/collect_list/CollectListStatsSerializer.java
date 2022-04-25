@@ -26,7 +26,7 @@ import io.trino.spi.type.Type;
  * CollectListStatsSerializer
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 18:04
  */
 public class CollectListStatsSerializer implements

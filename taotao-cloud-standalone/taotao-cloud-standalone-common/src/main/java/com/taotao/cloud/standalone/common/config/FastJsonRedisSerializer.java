@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-07-19 09:27
- * @Version 1.0
+ *
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 

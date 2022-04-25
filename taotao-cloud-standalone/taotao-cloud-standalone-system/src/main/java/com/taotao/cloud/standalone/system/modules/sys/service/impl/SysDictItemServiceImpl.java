@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-09-02 18:07
- * @Version 1.0
+ * 
  */
 @Service
 public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDictItem> implements ISysDictItemService {

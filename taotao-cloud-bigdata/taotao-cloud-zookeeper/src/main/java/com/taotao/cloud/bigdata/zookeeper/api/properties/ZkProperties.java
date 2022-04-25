@@ -23,7 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  *
  * @author shuigedeng
  * @since 2017/11/17
- * @version 1.0.0
+ * @version 2022.04
  */
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.zookeeper")

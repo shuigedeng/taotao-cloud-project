@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-07-08 12:08
- * @Version 1.0
+ *
  */
 @Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

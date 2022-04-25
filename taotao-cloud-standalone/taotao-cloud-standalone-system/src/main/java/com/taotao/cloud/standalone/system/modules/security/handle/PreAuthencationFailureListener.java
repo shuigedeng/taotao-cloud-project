@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @Description 用户登录失败监听器事件
  * @Author shuigedeng
  * @since 2019/12/19 5:24 下午
- * @Version 1.0
+ * 
  */
 @Component
 public class PreAuthencationFailureListener implements ApplicationListener<AbstractAuthenticationFailureEvent> {

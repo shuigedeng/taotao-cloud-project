@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description 代码生成
  * @Author shuigedeng
  * @since 2019-08-02 14:32
- * @Version 1.0
+ * 
  */
 @RestController
 @RequestMapping("/codegen")

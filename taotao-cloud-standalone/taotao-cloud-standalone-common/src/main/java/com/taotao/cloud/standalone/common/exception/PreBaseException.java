@@ -10,7 +10,7 @@ import jdk.nashorn.internal.objects.annotations.Setter;
  * @Description 自定义异常
  * @Author shuigedeng
  * @since 2019-03-29 13:21
- * @Version 1.0
+ * 
  */
 public class PreBaseException extends RuntimeException implements Serializable {
 

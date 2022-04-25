@@ -32,7 +32,7 @@ import org.apache.flink.util.Collector;
  * JBatchWordCount
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/3 09:05
  */
 public class JBatchWordCount {

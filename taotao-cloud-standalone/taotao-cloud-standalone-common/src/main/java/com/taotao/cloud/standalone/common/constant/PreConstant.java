@@ -5,7 +5,7 @@ package com.taotao.cloud.standalone.common.constant;
  * @Description pre常量
  * @Author shuigedeng
  * @since 2019-06-15 11:05
- * @Version 1.0
+ *
  */
 public class PreConstant {
 

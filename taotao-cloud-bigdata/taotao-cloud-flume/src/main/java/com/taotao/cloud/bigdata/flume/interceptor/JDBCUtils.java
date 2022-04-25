@@ -26,7 +26,7 @@ import java.util.Properties;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/25 下午4:59
  */
 public class JDBCUtils {

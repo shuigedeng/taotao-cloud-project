@@ -10,7 +10,7 @@ import java.util.Map;
  * @Description 多租户上下文
  * @Author shuigedeng
  * @since 2019-08-10 10:40
- * @Version 1.0
+ *
  */
 @UtilityClass
 public class PreTenantContextHolder {

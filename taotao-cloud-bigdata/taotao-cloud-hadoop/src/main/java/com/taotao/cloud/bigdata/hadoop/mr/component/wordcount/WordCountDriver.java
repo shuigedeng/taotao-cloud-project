@@ -28,7 +28,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * 相当于一个yarn集群的客户端 需要在此封装我们的mr程序的相关运行参数，指定jar包 最后提交给yarn
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:04
  */
 public class WordCountDriver {

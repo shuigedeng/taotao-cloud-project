@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Created by jackiechan on 2020-04-05 02:32
  *
- * @Author jackiechan
+ * @author shuigedeng
  */
 public interface CustomerService {
 

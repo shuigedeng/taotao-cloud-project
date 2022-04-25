@@ -17,7 +17,7 @@ import java.io.IOException;
  * @Description 登录失败处理器
  * @Author shuigedeng
  * @since 2019-07-07 23:45
- * @Version 1.0
+ * 
  */
 @Component
 public class PreAuthenticationFailureHandler implements AuthenticationFailureHandler {

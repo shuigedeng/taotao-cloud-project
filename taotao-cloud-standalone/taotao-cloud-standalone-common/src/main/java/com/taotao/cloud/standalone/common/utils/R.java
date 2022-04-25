@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
  * @Description 响应信息主体
  * @Author shuigedeng
  * @since 2019-03-27 21:54
- * @Version 1.0
+ *
  */
 public class R implements Serializable {
 

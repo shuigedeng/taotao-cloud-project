@@ -2,6 +2,10 @@ package com.taotao.cloud.goods.api.enums;
 
 /**
  * 草稿商品保存类型
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:32:07
  */
 public enum DraftGoodsSaveType {
 

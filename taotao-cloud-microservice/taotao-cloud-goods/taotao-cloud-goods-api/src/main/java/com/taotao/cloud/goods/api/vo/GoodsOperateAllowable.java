@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品操作允许的范围
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 15:59:38
+ * @since 2022-04-25 16:34:05
  */
 @Data
 @Builder

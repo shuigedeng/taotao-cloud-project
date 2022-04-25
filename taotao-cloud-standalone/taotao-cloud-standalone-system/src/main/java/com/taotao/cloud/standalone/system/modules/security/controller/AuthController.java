@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019/12/15 4:04 下午
- * @Version 1.0
+ * 
  */
 @RequestMapping("/auth")
 @RestController

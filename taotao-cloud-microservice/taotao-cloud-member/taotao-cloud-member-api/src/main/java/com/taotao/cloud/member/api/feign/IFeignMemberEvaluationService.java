@@ -1,11 +1,9 @@
 package com.taotao.cloud.member.api.feign;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
-import com.taotao.cloud.member.api.feign.fallback.RemoteMemberFallbackImpl;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
@@ -15,25 +13,40 @@ import java.util.Map;
  * 远程调用会员用户模块
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2022.04
+ * @since 2022-04-25 16:37:49
  */
-@FeignClient(contextId = "IFeignMemberEvaluationService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = RemoteMemberFallbackImpl.class)
+@FeignClient(contextId = "IFeignMemberEvaluationService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberServiceFallback.class)
 public interface IFeignMemberEvaluationService {
 
 
 	/**
 	 * LambdaQueryWrapper<MemberEvaluation> goodEvaluationQueryWrapper = new LambdaQueryWrapper<>();
-	 * 		goodEvaluationQueryWrapper.eq(MemberEvaluation::getId, goodsId);
-	 * 		goodEvaluationQueryWrapper.eq(MemberEvaluation::getGrade, EvaluationGradeEnum.GOOD.name());
+	 * goodEvaluationQueryWrapper.eq(MemberEvaluation::getId, goodsId);
+	 * goodEvaluationQueryWrapper.eq(MemberEvaluation::getGrade, EvaluationGradeEnum.GOOD.name());
+	 *
+	 * @param goodsId 商品id
+	 * @param name    名字
+	 * @return {@link Result }<{@link Long }>
+	 * @since 2022-04-25 16:39:41
 	 */
 	Result<Long> count(Long goodsId, String name);
 
-
-	Result<Long> getEvaluationCount(EvaluationQueryParams queryParams);
+	/**
+	 * 得到评价数
+	 *
+	 * @param queryParams 查询参数
+	 * @return {@link Result }<{@link Long }>
+	 * @since 2022-04-25 16:39:46
+	 */
+	Result<Long> getEvaluationCount(EvaluationPageQuery queryParams);
 
 	/**
 	 * new QueryWrapper<MemberEvaluation>()
-	 * 				.between("create_time", DateUtil.yesterday(), new DateTime())
+	 * .between("create_time", DateUtil.yesterday(), new DateTime())
+	 *
+	 * @return {@link Result }<{@link List }<{@link Map }<{@link String }, {@link Object }>>>
+	 * @since 2022-04-25 16:39:49
 	 */
 	Result<List<Map<String, Object>>> memberEvaluationNum();
 }

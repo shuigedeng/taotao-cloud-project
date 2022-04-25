@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
@@ -19,18 +19,18 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	/**
 	 * 查询会员的评价分页列表
 	 *
-	 * @param evaluationQueryParams 评价查询
+	 * @param evaluationPageQuery 评价查询
 	 * @return 评价分页
 	 */
-	IPage<MemberEvaluation> managerQuery(EvaluationQueryParams evaluationQueryParams);
+	IPage<MemberEvaluation> managerQuery(EvaluationPageQuery evaluationPageQuery);
 
 	/**
 	 * 查询评价分页列表
 	 *
-	 * @param evaluationQueryParams 评价查询条件
+	 * @param evaluationPageQuery 评价查询条件
 	 * @return 评价分页列表
 	 */
-	IPage<MemberEvaluationListVO> queryPage(EvaluationQueryParams evaluationQueryParams);
+	IPage<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery);
 
 	/**
 	 * 添加会员评价 1.检测用户是否重复评价 2.获取评价相关信息添加评价 3.修改子订单为已评价状态 4.发送用户评价消息修改商品的评价数量以及好评率

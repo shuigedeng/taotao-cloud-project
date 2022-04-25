@@ -10,7 +10,7 @@ import java.util.List;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-05-05 16:38
- * @Version 1.0
+ * 
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MenuVo {

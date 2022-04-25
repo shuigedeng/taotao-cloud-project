@@ -31,7 +31,7 @@ import io.trino.spi.type.StandardTypes;
  * 开发聚合函数 TaoTaoCloudSumDoubleAggregationsFunctions
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2021/1/25 下午3:19
  */
 @AggregationFunction("my_sum_double")

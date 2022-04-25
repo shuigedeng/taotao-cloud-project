@@ -10,9 +10,10 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 商品关联参数的VO
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-15 20:59:38
+ * @since 2022-04-25 16:34:13
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

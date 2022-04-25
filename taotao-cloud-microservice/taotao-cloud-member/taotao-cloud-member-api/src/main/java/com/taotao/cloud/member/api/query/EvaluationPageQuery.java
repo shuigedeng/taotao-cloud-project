@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.api.dto;
+package com.taotao.cloud.member.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -11,8 +11,6 @@ import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "评价查询条件")
-public class EvaluationQueryParams extends PageParam implements Serializable {
+public class EvaluationPageQuery extends PageParam implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

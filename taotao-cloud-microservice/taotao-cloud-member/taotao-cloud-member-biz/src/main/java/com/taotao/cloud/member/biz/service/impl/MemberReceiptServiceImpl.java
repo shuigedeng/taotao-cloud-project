@@ -10,7 +10,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.member.api.dto.MemberReceiptPageDTO;
+import com.taotao.cloud.member.api.query.MemberReceiptPageQuery;
 import com.taotao.cloud.member.api.vo.MemberReceiptAddVO;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.entity.MemberReceipt;
@@ -34,23 +34,23 @@ public class MemberReceiptServiceImpl extends
 	private MemberService memberService;
 
 	@Override
-	public IPage<MemberReceipt> getPage(MemberReceiptPageDTO memberReceiptPageDTO) {
+	public IPage<MemberReceipt> getPage(MemberReceiptPageQuery memberReceiptPageQuery) {
 		LambdaQueryWrapper<MemberReceipt> queryWrapper = new LambdaQueryWrapper<>();
 		//会员名称查询
-		if (StringUtil.isNotEmpty(memberReceiptPageDTO.getMemberName())) {
-			queryWrapper.like(MemberReceipt::getMemberName, memberReceiptPageDTO.getMemberName());
+		if (StringUtil.isNotEmpty(memberReceiptPageQuery.getMemberName())) {
+			queryWrapper.like(MemberReceipt::getMemberName, memberReceiptPageQuery.getMemberName());
 		}
 		//会员id查询
-		if (StringUtil.isNotEmpty(memberReceiptPageDTO.getMemberId())) {
-			queryWrapper.eq(MemberReceipt::getMemberId, memberReceiptPageDTO.getMemberId());
+		if (StringUtil.isNotEmpty(memberReceiptPageQuery.getMemberId())) {
+			queryWrapper.eq(MemberReceipt::getMemberId, memberReceiptPageQuery.getMemberId());
 		}
 		//会员id查询
-		if (StringUtil.isNotEmpty(memberReceiptPageDTO.getReceiptType())) {
-			queryWrapper.eq(MemberReceipt::getReceiptType, memberReceiptPageDTO.getReceiptType());
+		if (StringUtil.isNotEmpty(memberReceiptPageQuery.getReceiptType())) {
+			queryWrapper.eq(MemberReceipt::getReceiptType, memberReceiptPageQuery.getReceiptType());
 		}
 		queryWrapper.eq(MemberReceipt::getDeleteFlag, true);
 		queryWrapper.orderByDesc(MemberReceipt::getCreateTime);
-		return this.page(memberReceiptPageDTO.buildMpPage(), queryWrapper);
+		return this.page(memberReceiptPageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

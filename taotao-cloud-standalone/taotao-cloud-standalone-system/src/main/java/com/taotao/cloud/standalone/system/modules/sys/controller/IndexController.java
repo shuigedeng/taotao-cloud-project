@@ -39,7 +39,7 @@ import java.util.UUID;
  * @Description 主页模块
  * @Author shuigedeng
  * @since 2019-05-07 12:38
- * @Version 1.0
+ * 
  */
 @RestController
 public class IndexController {

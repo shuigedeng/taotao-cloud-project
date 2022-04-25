@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 18:09
  */
 public class CollectListStats {

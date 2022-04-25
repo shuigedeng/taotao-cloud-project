@@ -7,7 +7,7 @@ import lombok.Data;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-08-04 16:34
- * @Version 1.0
+ * 
  */
 @Data
 public class CodeGenConfig {

@@ -10,6 +10,10 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品DTO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:31:15
  */
 @Setter
 @Getter

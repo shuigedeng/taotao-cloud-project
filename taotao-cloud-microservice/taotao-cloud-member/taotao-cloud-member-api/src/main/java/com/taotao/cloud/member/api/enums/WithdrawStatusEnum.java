@@ -2,6 +2,10 @@ package com.taotao.cloud.member.api.enums;
 
 /**
  * 提现申请状态枚举类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:37:42
  */
 public enum WithdrawStatusEnum {
 	/**

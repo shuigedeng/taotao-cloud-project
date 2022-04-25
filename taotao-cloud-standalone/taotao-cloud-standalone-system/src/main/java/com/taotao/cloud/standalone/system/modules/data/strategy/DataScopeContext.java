@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description 创建环境角色Context:
  * @Author shuigedeng
  * @since 2019-06-08 16:11
- * @Version 1.0
+ * 
  */
 @Service
 public class DataScopeContext {

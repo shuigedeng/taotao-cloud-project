@@ -30,7 +30,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * 然后再调用RecordWriter的write(k,v)方法将数据写出
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:25
  */
 public class LogEnhanceOutputFormat extends FileOutputFormat<Text, NullWritable> {

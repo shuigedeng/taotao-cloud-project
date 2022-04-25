@@ -10,7 +10,7 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.cookie.CookieUtil;
-import com.taotao.cloud.member.api.dto.ConnectQueryDTO;
+import com.taotao.cloud.member.api.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
@@ -39,7 +39,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.naming.NoPermissionException;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -238,15 +238,15 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	}
 
 	@Override
-	public Connect queryConnect(ConnectQueryDTO connectQueryDTO) {
+	public Connect queryConnect(ConnectQuery connectQuery) {
 
 		LambdaQueryWrapper<Connect> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(CharSequenceUtil.isNotEmpty(connectQueryDTO.getUserId()),
-				Connect::getUserId, connectQueryDTO.getUserId())
-			.eq(CharSequenceUtil.isNotEmpty(connectQueryDTO.getUnionType()), Connect::getUnionType,
-				connectQueryDTO.getUnionType())
-			.eq(CharSequenceUtil.isNotEmpty(connectQueryDTO.getUnionId()), Connect::getUnionId,
-				connectQueryDTO.getUnionId());
+		queryWrapper.eq(CharSequenceUtil.isNotEmpty(connectQuery.getUserId()),
+				Connect::getUserId, connectQuery.getUserId())
+			.eq(CharSequenceUtil.isNotEmpty(connectQuery.getUnionType()), Connect::getUnionType,
+				connectQuery.getUnionType())
+			.eq(CharSequenceUtil.isNotEmpty(connectQuery.getUnionId()), Connect::getUnionId,
+				connectQuery.getUnionId());
 		return this.getOne(queryWrapper);
 	}
 

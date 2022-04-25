@@ -32,7 +32,7 @@ import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IGoodsSkuMapStruct;
 import com.taotao.cloud.goods.biz.service.*;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
@@ -45,7 +45,6 @@ import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -508,7 +507,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		//获取商品信息
 		GoodsSku goodsSku = this.getGoodsSkuByIdFromCache(skuId);
 
-		EvaluationQueryParams queryParams = new EvaluationQueryParams();
+		EvaluationPageQuery queryParams = new EvaluationPageQuery();
 		queryParams.setGrade(EvaluationGradeEnum.GOOD.name());
 		queryParams.setSkuId(goodsSku.getId());
 		//好评数量

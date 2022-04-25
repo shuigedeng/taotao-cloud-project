@@ -7,7 +7,7 @@ import java.util.Map;
  * @Description 短信服务
  * @Author shuigedeng
  * @since 2019-07-08 11:03
- * @Version 1.0
+ * 
  */
 public interface SmsCodeService {
 

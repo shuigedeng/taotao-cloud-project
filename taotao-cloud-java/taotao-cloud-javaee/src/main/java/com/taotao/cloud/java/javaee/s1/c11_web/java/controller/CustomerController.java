@@ -47,7 +47,7 @@ import java.util.List;
 /**
  * Created by jackiechan on 2020-04-05 04:48
  *
- * @Author jackiechan
+ * @author shuigedeng
  */
 @RestController
 @RequestMapping("/sys/customer")

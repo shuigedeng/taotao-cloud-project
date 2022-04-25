@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @Description 将第三方用户信息保存到redis里面
  * @Author shuigedeng
  * @since 2019-07-06 11:48
- * @Version 1.0
+ * 
  */
 @Component
 public class SocialRedisHelper {

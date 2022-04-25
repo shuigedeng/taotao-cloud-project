@@ -22,7 +22,7 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.dto.MemberEditDTO;
-import com.taotao.cloud.member.api.dto.MemberSearchPageDTO;
+import com.taotao.cloud.member.api.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.token.Token;
@@ -149,10 +149,10 @@ public interface MemberService extends IService<Member> {
 	/**
 	 * 获取会员分页
 	 *
-	 * @param memberSearchPageDTO 会员搜索VO
+	 * @param memberSearchPageQuery 会员搜索VO
 	 * @return 会员分页
 	 */
-	IPage<Member> getMemberPage(MemberSearchPageDTO memberSearchPageDTO);
+	IPage<Member> getMemberPage(MemberSearchPageQuery memberSearchPageQuery);
 
 	/**
 	 * 一键注册会员
