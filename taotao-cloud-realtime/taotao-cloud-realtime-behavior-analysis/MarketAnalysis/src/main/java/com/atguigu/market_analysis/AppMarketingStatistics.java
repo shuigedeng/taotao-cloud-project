@@ -18,12 +18,6 @@ import org.apache.flink.util.Collector;
 
 import java.sql.Timestamp;
 
-/**
- * @ClassName: AppMarketingStatistics
- * @Description:
- * @Author: wushengran on 2020/11/17 10:23
- * @Version: 1.0
- */
 public class AppMarketingStatistics {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

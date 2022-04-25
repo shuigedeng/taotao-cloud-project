@@ -7,7 +7,7 @@ import org.apache.flink.table.functions.TableFunction;
 import org.apache.flink.types.Row;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/3/1
  * Desc:
  */

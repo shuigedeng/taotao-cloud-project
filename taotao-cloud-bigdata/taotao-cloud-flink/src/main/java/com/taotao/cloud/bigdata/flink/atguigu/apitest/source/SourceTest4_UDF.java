@@ -7,11 +7,9 @@ import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import java.util.HashMap;
 import java.util.Random;
 
+
 /**
- * @ClassName: SourceTest4_UDF
- * @Description:
- * @Author: wushengran on 2020/11/7 14:03
- * @Version: 1.0
+ * @author Administrator
  */
 public class SourceTest4_UDF {
     public static void main(String[] args) throws Exception{

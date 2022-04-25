@@ -24,7 +24,7 @@ import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
 /**
- * Author: Felix Date: 2021/2/4 Desc:  用户跳出行为过滤
+ * Date: 2021/2/4 Desc:  用户跳出行为过滤
  */
 public class UserJumpDetailApp {
 

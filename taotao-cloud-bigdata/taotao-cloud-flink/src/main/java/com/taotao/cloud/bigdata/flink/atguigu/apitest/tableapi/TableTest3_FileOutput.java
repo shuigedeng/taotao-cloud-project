@@ -8,12 +8,7 @@ import org.apache.flink.table.descriptors.Csv;
 import org.apache.flink.table.descriptors.FileSystem;
 import org.apache.flink.table.descriptors.Schema;
 
-/**
- * @ClassName: TableTest3_FileOutput
- * @Description:
- * @Author: wushengran on 2020/11/13 11:54
- * @Version: 1.0
- */
+
 public class TableTest3_FileOutput {
     public static void main(String[] args) throws Exception {
         // 1. 创建环境

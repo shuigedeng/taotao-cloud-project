@@ -1,10 +1,5 @@
 package com.atguigu.orderpay_detect.beans;
-/**
- * @ClassName: ReceiptEvent
- * @Description:
- * @Author: wushengran on 2020/11/18 14:16
- * @Version: 1.0
- */
+
 public class ReceiptEvent {
     private String txId;
     private String payChannel;

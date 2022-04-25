@@ -25,12 +25,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Properties;
 
-/**
- * @ClassName: HotItems
- * @Description:
- * @Author: wushengran on 2020/11/14 15:16
- * @Version: 1.0
- */
 public class HotItems {
     public static void main(String[] args) throws Exception {
         // 1. 创建执行环境

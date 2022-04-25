@@ -4,12 +4,7 @@ import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-/**
- * @ClassName: StreamWordCount
- * @Description:
- * @Author: wushengran on 2020/11/6 11:48
- * @Version: 1.0
- */
+
 public class StreamWordCount {
     public static void main(String[] args) throws Exception{
         // 创建流处理执行环境

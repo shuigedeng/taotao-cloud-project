@@ -1,7 +1,7 @@
 package com.taotao.cloud.bigdata.realtime.mall.common;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/24
  * Desc: 电商业务常量
  */

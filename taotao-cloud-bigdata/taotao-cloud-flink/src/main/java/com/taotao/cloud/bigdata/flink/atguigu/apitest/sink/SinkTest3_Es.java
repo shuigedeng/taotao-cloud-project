@@ -1,3 +1,4 @@
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.sink;
 
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import java.util.ArrayList;
@@ -12,12 +13,7 @@ import org.apache.http.HttpHost;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.Requests;
 
-/**
- * @ClassName: SinkTest3_Es
- * @Description:
- * @Author: wushengran on 2020/11/9 11:21
- * @Version: 1.0
- */
+
 public class SinkTest3_Es {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

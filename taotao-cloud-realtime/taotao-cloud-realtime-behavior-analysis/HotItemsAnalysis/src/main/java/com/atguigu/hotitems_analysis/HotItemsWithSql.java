@@ -11,12 +11,6 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
-/**
- * @ClassName: HotItemsWithSql
- * @Description:
- * @Author: wushengran on 2020/11/14 16:35
- * @Version: 1.0
- */
 public class HotItemsWithSql {
     public static void main(String[] args) throws Exception {
         // 1. 创建执行环境

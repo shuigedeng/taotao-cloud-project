@@ -1,11 +1,5 @@
 package com.atguigu.hotitems_analysis.beans;
 
-/**
- * @ClassName: ItemViewCount
- * @Description:
- * @Author: wushengran on 2020/11/14 15:13
- * @Version: 1.0
- */
 public class ItemViewCount {
     private Long itemId;
     private Long windowEnd;

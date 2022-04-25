@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/2/23
  * Desc: 操作ClickHouse的工具类
  */

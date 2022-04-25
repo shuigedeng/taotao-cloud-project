@@ -10,7 +10,7 @@ import org.apache.flink.streaming.api.functions.async.ResultFuture;
 import org.apache.flink.streaming.api.functions.async.RichAsyncFunction;
 
 /**
- * Author: Felix Date: 2021/2/19 Desc:  自定义维度异步查询的函数 模板方法设计模式 在父类中只定义方法的声明，让整个流程跑通 具体的实现延迟到子类中实现
+ * Date: 2021/2/19 Desc:  自定义维度异步查询的函数 模板方法设计模式 在父类中只定义方法的声明，让整个流程跑通 具体的实现延迟到子类中实现
  */
 public abstract class DimAsyncFunction<T> extends RichAsyncFunction<T, T> implements
 	DimJoinFunction<T> {

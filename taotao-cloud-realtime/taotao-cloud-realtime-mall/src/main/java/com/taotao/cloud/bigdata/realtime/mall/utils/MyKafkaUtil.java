@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 import java.util.Properties;
 
 /**
- * Author: Felix
+ *
  * Date: 2021/1/30
  * Desc: 操作Kafka的工具类
  */

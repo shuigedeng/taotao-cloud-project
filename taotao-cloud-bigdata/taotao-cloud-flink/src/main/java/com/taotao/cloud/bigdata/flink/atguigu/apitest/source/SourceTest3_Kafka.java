@@ -8,10 +8,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
 import java.util.Properties;
 
 /**
- * @ClassName: SourceTest3_Kafka
- * @Description:
- * @Author: wushengran on 2020/11/7 11:54
- * @Version: 1.0
+ * @author Administrator
  */
 public class SourceTest3_Kafka {
     public static void main(String[] args) throws Exception{

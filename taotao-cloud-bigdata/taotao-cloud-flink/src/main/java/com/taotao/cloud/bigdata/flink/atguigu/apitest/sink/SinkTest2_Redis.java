@@ -1,3 +1,5 @@
+package com.taotao.cloud.bigdata.flink.atguigu.apitest.sink;
+
 import com.taotao.cloud.bigdata.flink.atguigu.apitest.beans.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -7,12 +9,7 @@ import org.apache.flink.streaming.connectors.redis.common.mapper.RedisCommand;
 import org.apache.flink.streaming.connectors.redis.common.mapper.RedisCommandDescription;
 import org.apache.flink.streaming.connectors.redis.common.mapper.RedisMapper;
 
-/**
- * @ClassName: SinkTest2_Redis
- * @Description:
- * @Author: wushengran on 2020/11/9 10:42
- * @Version: 1.0
- */
+
 public class SinkTest2_Redis {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

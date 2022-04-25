@@ -1,10 +1,5 @@
 package com.atguigu.orderpay_detect.beans;
-/**
- * @ClassName: OrderResult
- * @Description:
- * @Author: wushengran on 2020/11/18 10:40
- * @Version: 1.0
- */
+
 public class OrderResult {
     private Long orderId;
     private String resultState;
