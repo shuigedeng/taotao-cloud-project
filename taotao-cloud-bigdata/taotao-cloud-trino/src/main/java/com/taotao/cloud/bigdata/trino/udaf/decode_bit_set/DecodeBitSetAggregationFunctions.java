@@ -30,7 +30,7 @@ import io.trino.spi.type.StandardTypes;
  * DecodeBitSetAggregationFunctions
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 17:47
  */
 @AggregationFunction("tapdb_bitset_decode")

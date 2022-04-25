@@ -9,6 +9,10 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 分类VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:33:40
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

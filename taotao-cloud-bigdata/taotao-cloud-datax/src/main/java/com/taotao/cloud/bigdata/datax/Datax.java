@@ -19,7 +19,7 @@ package com.taotao.cloud.bigdata.datax;
  * Datax
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2022/02/16 09:10
  */
 public class Datax {

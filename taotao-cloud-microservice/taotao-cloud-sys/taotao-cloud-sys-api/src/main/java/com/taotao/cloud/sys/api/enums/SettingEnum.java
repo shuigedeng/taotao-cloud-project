@@ -2,6 +2,10 @@ package com.taotao.cloud.sys.api.enums;
 
 /**
  * 系统设置常量
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:47:16
  */
 public enum SettingEnum {
 	//基础配置

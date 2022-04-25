@@ -1,16 +1,19 @@
-package com.taotao.cloud.member.api.dto;
+package com.taotao.cloud.member.api.query;
 
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * 会员搜索DTO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:36:30
  */
 @Setter
 @Getter
@@ -18,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员搜索DTO")
-public class MemberSearchPageDTO extends PageParam {
+public class MemberSearchPageQuery extends PageParam {
 
 	@Schema(description = "用户名")
 	private String username;

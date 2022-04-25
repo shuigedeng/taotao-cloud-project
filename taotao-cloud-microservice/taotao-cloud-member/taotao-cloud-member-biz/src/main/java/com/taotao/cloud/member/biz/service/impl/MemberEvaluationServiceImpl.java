@@ -1,6 +1,5 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -11,11 +10,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
@@ -88,15 +86,15 @@ public class MemberEvaluationServiceImpl extends
 	private RocketmqCustomProperties rocketmqCustomProperties;
 
 	@Override
-	public IPage<MemberEvaluation> managerQuery(EvaluationQueryParams queryParams) {
+	public IPage<MemberEvaluation> managerQuery(EvaluationPageQuery queryParams) {
 		//获取评价分页
 		return this.page(queryParams.buildMpPage(), queryParams.queryWrapper());
 	}
 
 	@Override
-	public IPage<MemberEvaluationListVO> queryPage(EvaluationQueryParams evaluationQueryParams) {
+	public IPage<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery) {
 		return memberEvaluationMapper.getMemberEvaluationList(
-			evaluationQueryParams.buildMpPage(), evaluationQueryParams.queryWrapper());
+			evaluationPageQuery.buildMpPage(), evaluationPageQuery.queryWrapper());
 	}
 
 	@Override

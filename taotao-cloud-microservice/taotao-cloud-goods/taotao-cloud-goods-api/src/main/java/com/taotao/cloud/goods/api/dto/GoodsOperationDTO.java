@@ -21,6 +21,10 @@ import org.hibernate.validator.constraints.Length;
 
 /**
  * 商品编辑DTO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:31:26
  */
 @Data
 @Builder

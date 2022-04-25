@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
  *
  * @author shuigedeng
  * @since v1.0.0
- * @version v1.0.0
+ * 
  * @see
  * @create 2020/9/10 14:14
  */

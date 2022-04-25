@@ -10,7 +10,7 @@ import jdk.nashorn.internal.objects.annotations.Setter;
  * @Description 构建部门树vo
  * @Author shuigedeng
  * @since 2019-06-09 15:15
- * @Version 1.0
+ *
  */
 public class DeptTreeVo {
 

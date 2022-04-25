@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 直播商品DTO 用于获取直播商品状态时使用
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:31:07
  */
 @Data
 @Builder

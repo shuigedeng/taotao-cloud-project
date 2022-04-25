@@ -22,7 +22,7 @@ import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, createT
  *
  * @author shuigedeng
  * @since 2020/11/3 09:05
- * @version 1.0.0
+ * @version 2022.04
  */
 object SBatchWordCount {
   def main(args: Array[String]): Unit = {

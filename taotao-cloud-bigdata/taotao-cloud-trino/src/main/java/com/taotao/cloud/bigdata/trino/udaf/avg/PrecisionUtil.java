@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 17:59
  */
 public class PrecisionUtil {

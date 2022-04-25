@@ -1,6 +1,8 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "租户id")
 public class MemberEvaluationDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "子订单编号")

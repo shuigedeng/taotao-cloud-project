@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Description 第三方数据类
  * @Author shuigedeng
  * @since 2019-07-19 09:18
- * @Version 1.0
+ * 
  */
 @Data
 public class PreConnectionData implements Serializable {

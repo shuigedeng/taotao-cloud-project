@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * @Description 日志工具类
  * @Author shuigedeng
  * @since 2019-04-28 11:30
- * @Version 1.0
+ * 
  */
 public class LogUtil {
 

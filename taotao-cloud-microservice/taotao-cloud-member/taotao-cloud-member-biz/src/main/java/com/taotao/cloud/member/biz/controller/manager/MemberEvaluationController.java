@@ -1,10 +1,9 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
@@ -13,13 +12,11 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,8 +46,8 @@ public class MemberEvaluationController {
 	@RequestLogger("获取评价分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<IPage<MemberEvaluationListVO>> getByPage(
-		EvaluationQueryParams evaluationQueryParams, PageVO page) {
-		return Result.success(memberEvaluationService.queryPage(evaluationQueryParams));
+		EvaluationPageQuery evaluationPageQuery, PageVO page) {
+		return Result.success(memberEvaluationService.queryPage(evaluationPageQuery));
 	}
 
 	@Operation(summary = "修改评价状态", description = "修改评价状态")

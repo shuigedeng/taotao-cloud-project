@@ -24,7 +24,7 @@ import java.util.Set;
  * @Description 用户身份验证
  * @Author shuigedeng
  * @since 2019-05-07 20:30
- * @Version 1.0
+ * 
  */
 @Slf4j
 @Service

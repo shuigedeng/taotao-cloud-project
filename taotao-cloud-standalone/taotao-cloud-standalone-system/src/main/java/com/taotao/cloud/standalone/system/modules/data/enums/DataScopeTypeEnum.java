@@ -8,7 +8,7 @@ import lombok.Getter;
  * @Description 数据权限枚举
  * @Author shuigedeng
  * @since 2019-06-08 16:02
- * @Version 1.0
+ * 
  */
 @Getter
 @AllArgsConstructor

@@ -28,7 +28,7 @@ import org.apache.hadoop.mapreduce.Reducer;
  * KEYOUT是单词 VLAUEOUT是总次数
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:08
  */
 public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {

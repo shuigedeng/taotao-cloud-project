@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019/12/28 3:29 下午
- * @Version 1.0
+ * 
  */
 public class RequestUtil {
 

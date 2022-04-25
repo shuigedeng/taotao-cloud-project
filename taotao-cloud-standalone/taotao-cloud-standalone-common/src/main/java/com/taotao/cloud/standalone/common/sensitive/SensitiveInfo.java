@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  * @Description 脱敏注解类
  * @Author shuigedeng
  * @since 2019/12/9 4:20 下午
- * @Version 1.0
+ * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @JacksonAnnotationsInside

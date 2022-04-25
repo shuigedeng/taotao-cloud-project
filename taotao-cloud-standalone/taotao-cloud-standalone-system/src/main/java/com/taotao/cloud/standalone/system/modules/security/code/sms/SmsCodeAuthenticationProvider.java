@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-07-08 11:49
- * @Version 1.0
+ * 
  */
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 

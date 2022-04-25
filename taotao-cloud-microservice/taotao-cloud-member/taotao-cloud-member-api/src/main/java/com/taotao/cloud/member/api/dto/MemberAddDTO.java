@@ -1,6 +1,8 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -24,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "添加会员DTO")
 public class MemberAddDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@NotEmpty(message = "会员用户名必填")

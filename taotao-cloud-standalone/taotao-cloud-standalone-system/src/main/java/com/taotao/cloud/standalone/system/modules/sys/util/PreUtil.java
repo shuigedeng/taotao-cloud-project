@@ -21,7 +21,7 @@ import java.util.Random;
  * @Description pre系统用户工具类
  * @Author shuigedeng
  * @since 2019-04-27 16:52
- * @Version 1.0
+ * 
  */
 @UtilityClass
 public class PreUtil {

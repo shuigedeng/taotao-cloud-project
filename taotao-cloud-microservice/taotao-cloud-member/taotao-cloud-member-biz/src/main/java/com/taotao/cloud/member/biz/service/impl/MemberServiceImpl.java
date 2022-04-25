@@ -22,12 +22,12 @@ import com.taotao.cloud.common.utils.cookie.CookieUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.member.api.dto.ConnectQueryDTO;
+import com.taotao.cloud.member.api.query.ConnectQuery;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.dto.MemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberPointMessage;
-import com.taotao.cloud.member.api.dto.MemberSearchPageDTO;
+import com.taotao.cloud.member.api.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
 import com.taotao.cloud.member.biz.aop.annotation.PointLogPoint;
@@ -362,25 +362,25 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	}
 
 	@Override
-	public IPage<Member> getMemberPage(MemberSearchPageDTO memberSearchPageDTO) {
+	public IPage<Member> getMemberPage(MemberSearchPageQuery memberSearchPageQuery) {
 		QueryWrapper<Member> queryWrapper = Wrappers.query();
 		//用户名查询
-		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageDTO.getUsername()),
+		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageQuery.getUsername()),
 			"username",
-			memberSearchPageDTO.getUsername());
+			memberSearchPageQuery.getUsername());
 		//用户名查询
-		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageDTO.getNickName()),
+		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageQuery.getNickName()),
 			"nick_name",
-			memberSearchPageDTO.getNickName());
+			memberSearchPageQuery.getNickName());
 		//按照电话号码查询
-		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageDTO.getMobile()), "mobile",
-			memberSearchPageDTO.getMobile());
+		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageQuery.getMobile()), "mobile",
+			memberSearchPageQuery.getMobile());
 		//按照会员状态查询
 		//queryWrapper.eq(CharSequenceUtil.isNotBlank(memberSearchPageDTO.getDisabled()), "disabled",
 		//	memberSearchPageDTO.getDisabled().equals(SwitchEnum.OPEN.name()) ? 1 : 0);
 		queryWrapper.orderByDesc("create_time");
 
-		return this.page(memberSearchPageDTO.buildMpPage(), queryWrapper);
+		return this.page(memberSearchPageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override
@@ -469,7 +469,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	 */
 	private void loginBindUser(Member member, String unionId, String type) {
 		Connect connect = connectService.queryConnect(
-			ConnectQueryDTO.builder().unionId(unionId).unionType(type).build()
+			ConnectQuery.builder().unionId(unionId).unionType(type).build()
 		);
 
 		if (connect == null) {
@@ -499,7 +499,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 					return;
 				}
 				Connect connect = connectService.queryConnect(
-					ConnectQueryDTO.builder().unionId(connectAuthUser.getUuid())
+					ConnectQuery.builder().unionId(connectAuthUser.getUuid())
 						.unionType(connectType).build()
 				);
 				if (connect == null) {
@@ -542,7 +542,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 			}
 			//检测是否已经绑定过用户
 			Connect connect = connectService.queryConnect(
-				ConnectQueryDTO.builder().unionType(connectType).unionId(connectAuthUser.getUuid())
+				ConnectQuery.builder().unionType(connectType).unionId(connectAuthUser.getUuid())
 					.build()
 			);
 			//没有关联则返回true，表示可以继续绑定

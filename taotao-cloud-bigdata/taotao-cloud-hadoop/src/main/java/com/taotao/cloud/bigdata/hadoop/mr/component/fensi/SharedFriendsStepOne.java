@@ -30,7 +30,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * SharedFriendsStepOne
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:17
  */
 public class SharedFriendsStepOne {

@@ -2,6 +2,8 @@ package com.taotao.cloud.member.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.Max;
@@ -28,6 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "会员信息修改DTO")
 public class MemberEditDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "昵称", required = true)

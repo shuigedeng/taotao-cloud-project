@@ -42,7 +42,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  *
  * @author shuigedeng
  * @since 2020/11/26 上午9:35
- * @version 1.0.0
+ * @version 2022.04
  */
 object ScalaWordCount {
 

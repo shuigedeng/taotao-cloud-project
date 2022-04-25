@@ -1,17 +1,22 @@
-package com.taotao.cloud.member.api.dto;
+package com.taotao.cloud.member.api.query;
 
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+
 /**
  * 会员发票查询DTO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:38:47
  */
 @Getter
 @Setter
@@ -19,8 +24,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员发票查询DTO")
-public class MemberReceiptPageDTO extends PageParam {
+public class MemberReceiptPageQuery extends PageParam {
 
+	@Serial
 	private static final long serialVersionUID = -8210927982915677995L;
 
 	@Schema(description = "会员ID")

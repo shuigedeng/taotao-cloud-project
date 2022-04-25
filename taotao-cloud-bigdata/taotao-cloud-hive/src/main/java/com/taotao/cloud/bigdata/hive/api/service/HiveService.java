@@ -17,7 +17,7 @@ package com.taotao.cloud.bigdata.hive.api.service;
 
 /**
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/30 10:12
  */
 public interface HiveService {

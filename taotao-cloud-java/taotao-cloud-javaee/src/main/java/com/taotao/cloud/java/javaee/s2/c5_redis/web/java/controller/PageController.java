@@ -3,7 +3,7 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.controller;
 import org.springframework.stereotype.Controller;
 
 /**
- * @author 徒有琴
+ * @author shuigedeng
  */
 @Controller
 public class PageController {

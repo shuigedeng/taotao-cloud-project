@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import io.swagger.annotations.Api;
@@ -31,10 +31,10 @@ public class MemberEvaluationStoreController {
     @ApiOperation(value = "分页获取会员评论列表")
     @GetMapping
     public Result<IPage<MemberEvaluationListVO>> getByPage(
-	    EvaluationQueryParams evaluationQueryParams) {
+	    EvaluationPageQuery evaluationPageQuery) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-        evaluationQueryParams.setStoreId(storeId);
-        return Result.success(memberEvaluationService.queryPage(evaluationQueryParams));
+        evaluationPageQuery.setStoreId(storeId);
+        return Result.success(memberEvaluationService.queryPage(evaluationPageQuery));
     }
 
     @ApiOperation(value = "通过id获取")

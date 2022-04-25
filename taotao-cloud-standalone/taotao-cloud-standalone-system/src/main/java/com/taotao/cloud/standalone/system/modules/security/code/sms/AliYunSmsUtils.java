@@ -18,7 +18,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-08-25 17:40
- * @Version 1.0
+ * 
  */
 @Slf4j
 public class AliYunSmsUtils {

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @Description Gitee 用户信息
  * @Author shuigedeng
  * @since 2019-07-08 21:49
- * @Version 1.0
+ * 
  */
 @Data
 @NoArgsConstructor

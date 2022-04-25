@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * ProductServiceImpl
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/30 11:13
  */
 @Service

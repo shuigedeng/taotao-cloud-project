@@ -8,9 +8,10 @@ import java.io.Serial;
 
 /**
  * 商品品牌dto
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-19 20:59:38
+ * @since 2022-04-25 16:33:01
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

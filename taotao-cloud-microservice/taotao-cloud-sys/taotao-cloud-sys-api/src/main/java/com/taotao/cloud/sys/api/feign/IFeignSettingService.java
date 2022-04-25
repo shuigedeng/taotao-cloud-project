@@ -29,6 +29,13 @@ public interface IFeignSettingService {
 	@GetMapping("/sys/tools/setting")
 	Result<SettingVO> get(@RequestParam(value = "key") String key);
 
+	/**
+	 * 获得商品设置
+	 *
+	 * @param name 名字
+	 * @return {@link Result }<{@link GoodsSettingVO }>
+	 * @since 2022-04-25 16:47:40
+	 */
 	@GetMapping("/sys/tools/setting/goods")
 	Result<GoodsSettingVO> getGoodsSetting(String name);
 }

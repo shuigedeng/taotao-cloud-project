@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @Description redisVo
  * @Author shuigedeng
  * @since 2019-07-18 16:17
- * @Version 1.0
+ * 
  */
 public class RedisVo implements Serializable {
 

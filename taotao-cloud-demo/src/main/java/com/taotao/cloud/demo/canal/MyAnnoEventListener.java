@@ -17,7 +17,7 @@ import org.springframework.util.CollectionUtils;
  * 注解方式
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04 1.0.0
  * @return
  * @since 2021/8/31 09:08
  */

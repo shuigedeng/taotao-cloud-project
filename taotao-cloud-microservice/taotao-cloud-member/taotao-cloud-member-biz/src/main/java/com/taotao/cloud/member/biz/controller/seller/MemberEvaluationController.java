@@ -1,11 +1,10 @@
 package com.taotao.cloud.member.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
@@ -42,10 +41,10 @@ public class MemberEvaluationController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<IPage<MemberEvaluationListVO>> getByPage(
-		EvaluationQueryParams evaluationQueryParams) {
+		EvaluationPageQuery evaluationPageQuery) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		evaluationQueryParams.setStoreId(storeId);
-		return Result.success(memberEvaluationService.queryPage(evaluationQueryParams));
+		evaluationPageQuery.setStoreId(storeId);
+		return Result.success(memberEvaluationService.queryPage(evaluationPageQuery));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

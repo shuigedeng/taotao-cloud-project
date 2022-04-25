@@ -14,7 +14,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @since 2020/11/20 下午4:10
  * @version 2022.03
  */
-public class RemoteMemberFallbackImpl implements FallbackFactory<IFeignMemberService> {
+public class FeignMemberServiceFallback implements FallbackFactory<IFeignMemberService> {
 	@Override
 	public IFeignMemberService create(Throwable throwable) {
 		return new IFeignMemberService() {

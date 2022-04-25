@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
  * @Classname DataScopeInterceptor
  * @Description Mybatis 拦截器 主要用于数据权限拦截
  * @Author shuigedeng
- * @Version 1.0
+ *
  * @since 2019-06-08 10:29
  */
 @Order(90)

@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 规格项表规格项
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-18 21:59:38
+ * @since 2022-04-25 16:31:51
  */
 @Data
 @Builder

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description 社交登录
  * @Author shuigedeng
  * @since 2019-07-17 16:51
- * @Version 1.0
+ *
  */
 @RestController
 @RequestMapping("/social")

@@ -10,7 +10,7 @@ import java.util.List;
  * @Description 用户Dto
  * @Author shuigedeng
  * @since 2019-04-23 21:26
- * @Version 1.0
+ * 
  */
 @Data
 public class UserDTO implements Serializable {

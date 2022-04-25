@@ -5,7 +5,7 @@ package com.taotao.cloud.standalone.common.constant;
  * @Description 菜单常量
  * @Author shuigedeng
  * @since 2019-04-29 19:49
- * @Version 1.0
+ *
  */
 public class MenuConstant {
 

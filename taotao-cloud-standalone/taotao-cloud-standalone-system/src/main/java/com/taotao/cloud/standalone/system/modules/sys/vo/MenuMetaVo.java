@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @Description
  * @Author shuigedeng
  * @since 2019-05-05 16:39
- * @Version 1.0
+ *
  */
 public class MenuMetaVo implements Serializable {
 

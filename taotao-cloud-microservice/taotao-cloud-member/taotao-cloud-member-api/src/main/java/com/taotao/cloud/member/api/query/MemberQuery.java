@@ -16,6 +16,8 @@
 package com.taotao.cloud.member.api.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.Email;
@@ -39,6 +41,7 @@ import lombok.NoArgsConstructor;
 @Schema(name = "MemberQuery", description = "会员query")
 public class MemberQuery implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "用户昵称")

@@ -20,7 +20,7 @@ import java.io.IOException;
  * @Description 图形验证码过滤器
  * @Author shuigedeng
  * @since 2019-07-07 23:02
- * @Version 1.0
+ * 
  */
 @Component
 public class ImageCodeFilter extends OncePerRequestFilter {

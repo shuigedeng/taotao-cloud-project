@@ -13,7 +13,7 @@ import java.util.Collection;
  * @Description 用户社交登录 身份权限认证类 登陆身份认证
  * @Author shuigedeng
  * @since 2019-07-08 23:13
- * @Version 1.0
+ * 
  */
 @Setter
 @Getter

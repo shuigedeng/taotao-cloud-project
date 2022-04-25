@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 品牌VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:33:30
  */
 @Data
 @Builder

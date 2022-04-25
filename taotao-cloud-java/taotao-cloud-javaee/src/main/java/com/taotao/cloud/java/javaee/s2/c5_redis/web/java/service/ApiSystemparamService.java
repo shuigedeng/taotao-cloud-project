@@ -37,7 +37,7 @@ import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.ApiSystemparam;
 /**
  * Created by jackiechan on 2020-04-05 02:32
  *
- * @Author jackiechan
+ * @author shuigedeng
  */
 public interface ApiSystemparamService {
 

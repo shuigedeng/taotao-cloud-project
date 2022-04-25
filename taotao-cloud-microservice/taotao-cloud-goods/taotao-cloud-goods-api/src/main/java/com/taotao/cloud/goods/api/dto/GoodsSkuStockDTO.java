@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品库存DTO
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-18 21:59:38
+ * @since 2022-04-25 16:31:36
  */
 @Data
 @Builder

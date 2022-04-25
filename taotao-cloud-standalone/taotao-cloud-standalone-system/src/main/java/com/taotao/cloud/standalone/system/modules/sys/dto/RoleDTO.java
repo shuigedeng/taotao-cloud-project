@@ -11,7 +11,7 @@ import java.util.List;
  * @Description 角色Dto
  * @Author shuigedeng
  * @since 2019-04-23 21:26
- * @Version 1.0
+ * 
  */
 @Setter
 @Getter

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
  * @Classname SensitiveInfoUtils
  * @Description 脱敏处理工具类
  * @Author shuigedeng
- * @Version 1.0
+ *
  * @since 2019/12/9 4:21 下午
  */
 public class SensitiveInfoUtils {

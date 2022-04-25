@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @Description TODO
  * @Author shuigedeng
  * @since 2019-09-24 09:54
- * @Version 1.0
+ * 
  */
 public class ThreadLocalDateUtil {
 

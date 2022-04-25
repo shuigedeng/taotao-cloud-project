@@ -16,7 +16,7 @@ import java.util.Set;
  * @Description 自定义
  * @Author shuigedeng
  * @since 2019-06-08 16:31
- * @Version 1.0
+ * 
  */
 @Component("4")
 public class CustomizeDataScope implements AbstractDataScopeHandler {

@@ -23,7 +23,6 @@ import org.gradle.api.Project;
  *
  * @author shuigedeng
  * @since 2021/2/4 下午2:54
- * @version 1.0.0
  */
 public class MyPlugin implements Plugin<Project> {
 

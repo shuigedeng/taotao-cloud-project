@@ -35,7 +35,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * P0002	锤子T1	1000	3 P0003	锤子	1002	4
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:30
  */
 public class RJoin {

@@ -10,6 +10,10 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * 直播商品VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:33:46
  */
 @Setter
 @Getter

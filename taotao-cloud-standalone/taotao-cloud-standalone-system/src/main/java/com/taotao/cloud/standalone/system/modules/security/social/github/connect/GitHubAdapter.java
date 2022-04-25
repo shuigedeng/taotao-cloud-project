@@ -11,7 +11,7 @@ import org.springframework.social.connect.UserProfile;
  * @Description
  * @Author shuigedeng
  * @since 2019-07-08 21:49
- * @Version 1.0
+ * 
  */
 public class GitHubAdapter implements ApiAdapter<GitHub> {
 

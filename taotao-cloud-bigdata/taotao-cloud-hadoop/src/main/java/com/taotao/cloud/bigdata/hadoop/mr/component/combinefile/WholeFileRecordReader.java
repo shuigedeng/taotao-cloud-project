@@ -33,7 +33,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
  * getCurrentValue来返回上面构造好的key和value
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:14
  */
 class WholeFileRecordReader extends RecordReader<NullWritable, BytesWritable> {

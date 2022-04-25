@@ -23,6 +23,10 @@ import lombok.*;
 
 /**
  * 交易详情，按需应该存入数据库
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:47:58
  */
 @Data
 @Builder

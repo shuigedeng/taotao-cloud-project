@@ -7,9 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 选择器选择
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-18 21:59:38
+ * @since 2022-04-25 16:31:48
  */
 @Data
 @Builder

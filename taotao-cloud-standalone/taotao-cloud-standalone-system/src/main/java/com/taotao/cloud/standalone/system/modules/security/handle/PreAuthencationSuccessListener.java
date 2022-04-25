@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @Description 用户登录成功监听器事件
  * @Author shuigedeng
  * @since 2019/12/19 5:28 下午
- * @Version 1.0
+ * 
  */
 @Slf4j
 @Component

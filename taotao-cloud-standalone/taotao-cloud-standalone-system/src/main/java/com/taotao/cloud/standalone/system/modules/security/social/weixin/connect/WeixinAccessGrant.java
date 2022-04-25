@@ -10,7 +10,7 @@ import org.springframework.social.oauth2.AccessGrant;
  *              所以在这里继承了标准AccessGrant，添加了openId字段，作为对微信access_token信息的封装。
  * @Author shuigedeng
  * @since 2019-08-23 16:50
- * @Version 1.0
+ * 
  */
 @Setter
 @Getter

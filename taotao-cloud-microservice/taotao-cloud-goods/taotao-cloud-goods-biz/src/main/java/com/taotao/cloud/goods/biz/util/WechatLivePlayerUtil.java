@@ -207,6 +207,13 @@ public class WechatLivePlayerUtil {
 		return null;
 	}
 
+	/**
+	 * 模拟房间
+	 *
+	 * @param studio 工作室
+	 * @return {@link Map }<{@link String }, {@link String }>
+	 * @since 2022-04-25 16:30:40
+	 */
 	private Map<String, String> mockRoom(Studio studio) {
 		Map<String, String> map = new HashMap<>(16);
 		//背景图

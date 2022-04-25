@@ -4,7 +4,7 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.bean;
 import java.util.List;
 
 /**
- * @author 徒有琴
+ * @author shuigedeng
  */
 public class TableData<T> {
     private int code=0;

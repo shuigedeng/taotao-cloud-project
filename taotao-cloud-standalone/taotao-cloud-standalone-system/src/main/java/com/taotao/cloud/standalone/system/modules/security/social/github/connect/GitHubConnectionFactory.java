@@ -8,7 +8,7 @@ import org.springframework.social.connect.support.OAuth2ConnectionFactory;
  * @Description
  * @Author shuigedeng
  * @since 2019-07-08 21:49
- * @Version 1.0
+ * 
  */
 public class GitHubConnectionFactory extends OAuth2ConnectionFactory<GitHub> {
 

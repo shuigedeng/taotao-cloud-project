@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * 实现接口方式
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04 1.0.0
  * @since 2021/8/31 09:07
  */
 @Component

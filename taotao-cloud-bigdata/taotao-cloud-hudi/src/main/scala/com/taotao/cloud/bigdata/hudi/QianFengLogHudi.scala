@@ -41,7 +41,7 @@ import scala.collection.mutable
  *
  * @author shuigedeng
  * @since 2020/11/27 下午3:06
- * @version 1.0.0
+ * @version 2022.04
  */
 object QianFengLogHudi {
   val LOGGER: Logger = LoggerFactory.getLogger(QianFengLogHudi.getClass)

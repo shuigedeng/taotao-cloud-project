@@ -2,9 +2,10 @@ package com.taotao.cloud.goods.api.enums;
 
 /**
  * 商品类型枚举
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-19 20:59:38
+ * @since 2022-04-25 16:32:20
  */
 public enum GoodsStatusEnum {
 	/**

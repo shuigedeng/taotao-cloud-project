@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * 真正的删除表操作
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04 1.0.0
  * @since 2021/8/31 09:04
  */
 @Component

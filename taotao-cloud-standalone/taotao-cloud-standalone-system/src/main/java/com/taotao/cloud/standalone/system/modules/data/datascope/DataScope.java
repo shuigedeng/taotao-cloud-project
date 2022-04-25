@@ -12,7 +12,7 @@ import java.util.List;
  * @Description 数据权限查询参数
  * @Author shuigedeng
  * @since 2019-06-13 13:17
- * @Version 1.0
+ * 
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -24,7 +24,7 @@ import org.apache.hadoop.io.WritableComparable;
  * FlowBean
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 下午8:20
  */
 public class FlowBean implements WritableComparable<FlowBean> {

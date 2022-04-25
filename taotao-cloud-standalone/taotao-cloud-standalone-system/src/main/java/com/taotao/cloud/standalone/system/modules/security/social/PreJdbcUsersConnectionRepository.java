@@ -26,7 +26,7 @@ import java.util.Set;
  * @Description jdbc连接
  * @Author shuigedeng
  * @since 2019-07-19 13:09
- * @Version 1.0
+ *
  */
 public class PreJdbcUsersConnectionRepository implements UsersConnectionRepository {
 

@@ -24,7 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 之后如果有需要可以添加到toatoa cloud中 作为一个资源服务器( 添加依赖 添加注解 添加配置)
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/30 16:06
  */
 @SpringBootApplication

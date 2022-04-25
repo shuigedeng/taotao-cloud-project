@@ -35,7 +35,7 @@ import org.apache.hadoop.io.Text;
  * 'hdfs://172.16.6.1511:8020/script/HiveUDF.jar';
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/10/29 17:16
  */
 public class LowerUDF extends UDF {

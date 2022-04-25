@@ -27,7 +27,7 @@ import java.util.Map;
  * 漏斗基础信息
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2021/1/25 下午3:44
  */
 public class FunnelBase {

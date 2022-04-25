@@ -1,7 +1,7 @@
 /**
  * add auto hide when mouse moveout
  * 
- * @version 1.0.1 
+ * @version 2022.04 
  * @date 2010-11-23
  * @author coraldane@gmail.com
 */
@@ -226,10 +226,7 @@ Calendar.language = {
  * @param   lang      0(English)|1(Chinese)  
  * @param   dateFormatStyle  "yyyy-MM-dd";
  * @param   type  d Date Picker/m Month Picker 
- * @version 2010-08-20
- * @author  Coral(coraldane@gmail.com) 
- * @update 
- */   
+ */
 function Calendar(inputObj, dateFormatStyle, beginDate, endDate, lang, type) {   
   this.beginDate = "1900-01-01".toDate();
   this.endDate = "2020-01-01".toDate();

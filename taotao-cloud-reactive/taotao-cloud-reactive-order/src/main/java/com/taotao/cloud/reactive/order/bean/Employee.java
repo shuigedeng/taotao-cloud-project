@@ -27,7 +27,7 @@ import org.springframework.data.relational.core.mapping.Table;
  * Employee
  *
  * @author shuigedeng
- * @version 1.0.0
+ * 
  * @since 2021/03/03 16:47
  */
 @Table("employee")

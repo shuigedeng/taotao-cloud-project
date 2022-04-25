@@ -40,7 +40,7 @@ import java.util.Arrays;
  * <p>
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2022.04
  * @since 2020/11/26 上午9:35
  */
 public class JavaWordCount {

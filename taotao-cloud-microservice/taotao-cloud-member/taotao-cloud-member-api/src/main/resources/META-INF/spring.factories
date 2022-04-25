@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.member.api.feign.fallback.RemoteMemberFallbackImpl
+com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback, \
+com.taotao.cloud.member.api.feign.fallback.FeignMemberEvaluationServiceFallback

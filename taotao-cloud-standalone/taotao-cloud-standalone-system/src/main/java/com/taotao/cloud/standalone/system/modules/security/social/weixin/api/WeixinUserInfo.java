@@ -7,7 +7,7 @@ import lombok.Data;
  * @Description 微信返回的用户信息
  * @Author shuigedeng
  * @since 2019-08-23 16:50
- * @Version 1.0
+ * 
  */
 @Data
 public class WeixinUserInfo {
