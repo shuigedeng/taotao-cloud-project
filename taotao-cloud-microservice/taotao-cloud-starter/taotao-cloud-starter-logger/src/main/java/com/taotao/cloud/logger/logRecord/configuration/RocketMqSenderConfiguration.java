@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.logger.logRecord.configuration;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -13,22 +28,55 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 
+/**
+ * 火箭mq发送器配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-26 14:44:40
+ */
 @Configuration
 @ConditionalOnProperty(name = "log-record.data-pipeline", havingValue = LogConstants.DataPipeline.ROCKET_MQ)
 @EnableConfigurationProperties({LogRecordProperties.class})
 public class RocketMqSenderConfiguration {
 
-    private String namesrvAddr;
-    private String groupName;
-    private int maxMessageSize;
-    private int sendMsgTimeout;
-    private int retryTimesWhenSendFailed;
-    private String topic;
+	/**
+	 * namesrv addr
+	 */
+	private String namesrvAddr;
+	/**
+	 * 组名称
+	 */
+	private String groupName;
+	/**
+	 * 最大消息大小
+	 */
+	private int maxMessageSize;
+	/**
+	 * 味精发送超时
+	 */
+	private int sendMsgTimeout;
+	/**
+	 * 重试发送失败时候
+	 */
+	private int retryTimesWhenSendFailed;
+	/**
+	 * 主题
+	 */
+	private String topic;
 
-    @Autowired
+	/**
+	 * 属性
+	 */
+	@Autowired
     private LogRecordProperties properties;
 
-    @PostConstruct
+	/**
+	 * 兔子mq配置
+	 *
+	 * @since 2022-04-26 14:44:40
+	 */
+	@PostConstruct
     public void rabbitMqConfig() {
         this.namesrvAddr = properties.getRocketMqProperties().getNamesrvAddr();
         this.groupName = properties.getRocketMqProperties().getGroupName();
@@ -40,7 +88,13 @@ public class RocketMqSenderConfiguration {
                 namesrvAddr, groupName, maxMessageSize, sendMsgTimeout, retryTimesWhenSendFailed, topic);
     }
 
-    @Bean
+	/**
+	 * 默认mq生产商
+	 *
+	 * @return {@link DefaultMQProducer }
+	 * @since 2022-04-26 14:44:40
+	 */
+	@Bean
     public DefaultMQProducer defaultMqProducer() throws RuntimeException {
         DefaultMQProducer producer = new DefaultMQProducer(this.groupName);
         producer.setNamesrvAddr(this.namesrvAddr);

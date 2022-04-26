@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.logger.logRecord.aop;
 
 import com.alibaba.fastjson.JSON;
@@ -27,29 +42,66 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+/**
+ * 系统日志方面
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-26 14:49:42
+ */
 @Aspect
 @Component
 public class SystemLogAspect {
 
-    @Autowired
+	/**
+	 * 日志记录线程池
+	 */
+	@Autowired
     private LogRecordThreadPool logRecordThreadPool;
 
-    @Autowired(required = false)
+	/**
+	 * 日志服务
+	 */
+	@Autowired(required = false)
     private LogService logService;
 
-    @Autowired(required = false)
+	/**
+	 * 我操作日志获取服务
+	 */
+	@Autowired(required = false)
     private IOperationLogGetService iOperationLogGetService;
 
-    @Autowired(required = false)
+	/**
+	 * 我算符id获得服务
+	 */
+	@Autowired(required = false)
     private IOperatorIdGetService iOperatorIdGetService;
 
-    private final SpelExpressionParser parser = new SpelExpressionParser();
+	/**
+	 * 解析器
+	 */
+	private final SpelExpressionParser parser = new SpelExpressionParser();
 
-    private final DefaultParameterNameDiscoverer discoverer = new DefaultParameterNameDiscoverer();
+	/**
+	 * 发现者
+	 */
+	private final DefaultParameterNameDiscoverer discoverer = new DefaultParameterNameDiscoverer();
 
-    @Around("@annotation(cn.monitor4all.logRecord.annotation.OperationLog) || @annotation(cn.monitor4all.logRecord.annotation.OperationLogs)")
+	/**
+	 * 在
+	 *
+	 * @param pjp pjp
+	 * @return {@link Object }
+	 * @since 2022-04-26 14:49:42
+	 */
+	@Around("@annotation(com.taotao.cloud.logger.logRecord.annotation.OperationLog) || @annotation(com.taotao.cloud.logger.logRecord.annotation.OperationLogs)")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable{
         Object result;
         List<LogDTO> logDTOList = new ArrayList<>();
@@ -125,7 +177,15 @@ public class SystemLogAspect {
         return result;
     }
 
-    public LogDTO resolveExpress(OperationLog annotation, JoinPoint joinPoint) {
+	/**
+	 * 解决表达
+	 *
+	 * @param annotation 注释
+	 * @param joinPoint  连接点
+	 * @return {@link LogDTO }
+	 * @since 2022-04-26 14:49:43
+	 */
+	public LogDTO resolveExpress(OperationLog annotation, JoinPoint joinPoint) {
         LogDTO logDTO = new LogDTO();
         String bizIdSpel = annotation.bizId();
         String msgSpel = annotation.msg();
@@ -192,7 +252,14 @@ public class SystemLogAspect {
         return logDTO;
     }
 
-    protected Method getMethod(JoinPoint joinPoint) {
+	/**
+	 * get方法
+	 *
+	 * @param joinPoint 连接点
+	 * @return {@link Method }
+	 * @since 2022-04-26 14:49:43
+	 */
+	protected Method getMethod(JoinPoint joinPoint) {
         Method method = null;
         try {
             Signature signature = joinPoint.getSignature();
