@@ -14,9 +14,13 @@ dependencies {
     api 'org.apache.skywalking:apm-toolkit-logback-1.x'
     api 'org.apache.skywalking:apm-toolkit-trace'
 
-    api 'com.baomidou:mybatis-plus-extension'
+    implementation 'com.baomidou:mybatis-plus-extension'
 
-    api 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.amqp:spring-amqp:2.4.3'
+    implementation 'org.springframework.amqp:spring-rabbit:2.4.3'
+    implementation 'org.apache.rocketmq:rocketmq-client:4.6.1'
+    implementation 'org.springframework.cloud:spring-cloud-stream'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
