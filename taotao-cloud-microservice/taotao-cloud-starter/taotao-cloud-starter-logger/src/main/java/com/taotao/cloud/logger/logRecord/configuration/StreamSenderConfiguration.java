@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.logger.logRecord.configuration;
 
 import com.taotao.cloud.logger.logRecord.constants.LogConstants;
@@ -19,6 +34,13 @@ import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 
+/**
+ * 流发送器配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-26 14:44:31
+ */
 @Configuration
 @ConditionalOnProperty(name = "log-record.data-pipeline", havingValue = LogConstants.DataPipeline.STREAM)
 @EnableConfigurationProperties({LogRecordProperties.class})
@@ -27,22 +49,47 @@ import java.util.Optional;
 @EnableBinding(StreamSenderConfiguration.LogRecordChannel.class)
 public class StreamSenderConfiguration {
 
-    @Value("${spring.application.name:}")
+	/**
+	 * 应用程序名称
+	 */
+	@Value("${spring.application.name:}")
     private String applicationName;
 
-    @Value("${spring.profiles.active:}")
+	/**
+	 * 当前文件
+	 */
+	@Value("${spring.profiles.active:}")
     private String activeProfile;
 
-    private final LogRecordProperties properties;
+	/**
+	 * 属性
+	 */
+	private final LogRecordProperties properties;
 
-    private final BindingServiceProperties bindings;
+	/**
+	 * 绑定
+	 */
+	private final BindingServiceProperties bindings;
 
-    public StreamSenderConfiguration(BindingServiceProperties bindings, LogRecordProperties logRecordProperties) {
+	/**
+	 * 流发送器配置
+	 *
+	 * @param bindings            绑定
+	 * @param logRecordProperties 日志记录属性
+	 * @return
+	 * @since 2022-04-26 14:44:31
+	 */
+	public StreamSenderConfiguration(BindingServiceProperties bindings, LogRecordProperties logRecordProperties) {
         this.properties = logRecordProperties;
         this.bindings = bindings;
     }
 
-    @PostConstruct
+	/**
+	 * 初始化
+	 *
+	 * @since 2022-04-26 14:44:31
+	 */
+	@PostConstruct
     public void init() {
         BindingProperties inputBinding = this.bindings.getBindings().get(LogRecordChannel.OUTPUT);
         if (inputBinding == null) {
@@ -63,15 +110,27 @@ public class StreamSenderConfiguration {
 
     }
 
-    public interface LogRecordChannel {
+	/**
+	 * 日志记录频道
+	 *
+	 * @author shuigedeng
+	 * @version 2022.04
+	 * @since 2022-04-26 14:44:32
+	 */
+	public interface LogRecordChannel {
 
-        String OUTPUT = "LogRecordChannel";
+		/**
+		 * 输出
+		 */
+		String OUTPUT = "LogRecordChannel";
 
-        /**
-         * 日志输出
-         * @return SubscribableChannel messageLoggingQueueInput();
-         */
-        @Output(OUTPUT)
+		/**
+		 * 日志输出
+		 *
+		 * @return {@link MessageChannel }
+		 * @since 2022-04-26 14:44:32
+		 */
+		@Output(OUTPUT)
         MessageChannel messageLoggingQueueInput();
 
     }
