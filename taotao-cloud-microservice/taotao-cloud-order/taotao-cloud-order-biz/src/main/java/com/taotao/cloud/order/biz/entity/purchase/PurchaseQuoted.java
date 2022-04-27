@@ -1,25 +1,18 @@
 package com.taotao.cloud.order.biz.entity.purchase;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import lombok.*;
-import org.hibernate.Hibernate;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -85,8 +78,12 @@ public class PurchaseQuoted extends BaseSuperEntity<PurchaseQuoted, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		PurchaseQuoted purchaseQuoted = (PurchaseQuoted) o;
 		return getId() != null && Objects.equals(getId(), purchaseQuoted.getId());
 	}

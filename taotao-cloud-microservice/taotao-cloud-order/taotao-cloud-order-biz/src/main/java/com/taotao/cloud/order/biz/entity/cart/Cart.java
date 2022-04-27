@@ -16,7 +16,12 @@
 package com.taotao.cloud.order.biz.entity.cart;
 
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -79,8 +84,12 @@ public class Cart extends JpaSuperEntity<Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		Cart cart = (Cart) o;
 		return getId() != null && Objects.equals(getId(), cart.getId());
 	}

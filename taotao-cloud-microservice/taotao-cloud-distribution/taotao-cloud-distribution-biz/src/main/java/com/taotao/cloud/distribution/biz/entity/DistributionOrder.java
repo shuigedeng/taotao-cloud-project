@@ -1,97 +1,170 @@
 package com.taotao.cloud.distribution.biz.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import lombok.Data;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 分销订单
  *
- * 
- * @since 2020-03-14 23:04:56
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 14:59:13
  */
-@Data
-@ApiModel(value = "分销订单")
-@TableName("li_distribution_order")
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
-public class DistributionOrder extends BaseIdEntity {
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = DistributionOrder.TABLE_NAME)
+@TableName(DistributionOrder.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = DistributionOrder.TABLE_NAME, comment = "分销订单表")
+public class DistributionOrder extends BaseSuperEntity<DistributionOrder, Long> {
 
-    private static final long serialVersionUID = 501799944909496507L;
+	public static final String TABLE_NAME = "tt_distribution_order";
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @Schema(description =  "创建时间", hidden = true)
-    private Date createTime;
 
-    /**
-     * @see DistributionOrderStatusEnum
-     */
-    @Schema(description =  "分销订单状态")
-    private String distributionOrderStatus;
-    @Schema(description =  "购买会员的id")
-    private String memberId;
-    @Schema(description =  "购买会员的名称")
-    private String memberName;
-    @Schema(description =  "分销员id")
-    private String distributionId;
-    @Schema(description =  "分销员名称")
-    private String distributionName;
-    @Schema(description =  "解冻日期")
-    private Date settleCycle;
-    @Schema(description =  "提成金额")
-    private BigDecimal rebate;
-    @Schema(description =  "退款金额")
-    private BigDecimal sellBackRebate;
-    @Schema(description =  "店铺id")
-    private String storeId;
-    @Schema(description =  "店铺名称")
-    private String storeName;
-    @Schema(description =  "订单编号")
-    private String orderSn;
-    @Schema(description =  "子订单编号")
-    private String orderItemSn;
-    @Schema(description =  "商品ID")
-    private String goodsId;
-    @Schema(description =  "商品名称")
-    private String goodsName;
-    @Schema(description =  "货品ID")
-    private String skuId;
-    @Schema(description =  "规格")
-    private String specs;
-    @Schema(description =  "图片")
-    private String image;
-    @Schema(description =  "商品数量")
-    private Integer num;
+	/**
+	 * 分销订单状态
+	 *
+	 * @see DistributionOrderStatusEnum
+	 */
+	@Column(name = "distribution_order_status", columnDefinition = "varchar(255) not null  comment '分销订单状态'")
+	private String distributionOrderStatus;
+	/**
+	 * 购买会员的id
+	 */
+	@Column(name = "member_id", columnDefinition = "bigint not null  comment '购买会员的id'")
+	private Long memberId;
+	/**
+	 * 购买会员的名称
+	 */
+	@Column(name = "member_name", columnDefinition = "varchar(255) not null  comment '购买会员的名称'")
+	private String memberName;
+	/**
+	 * 分销员id
+	 */
+	@Column(name = "distribution_id", columnDefinition = "bigint not null  comment '分销员id'")
+	private Long distributionId;
+	/**
+	 * 分销员名称
+	 */
+	@Column(name = "distribution_name", columnDefinition = "varchar(255) not null  comment '分销员名称'")
+	private String distributionName;
+	/**
+	 * 解冻日期
+	 */
+	@Column(name = "settle_cycle", columnDefinition = "datetime not null  comment '解冻日期'")
+	private LocalDateTime settleCycle;
+	/**
+	 * 提成金额
+	 */
+	@Column(name = "rebate", columnDefinition = "decimal(10,2) not null  comment '提成金额'")
+	private BigDecimal rebate;
+	/**
+	 * 退款金额
+	 */
+	@Column(name = "sell_back_rebate", columnDefinition = "decimal(10,2) not null  comment '退款金额'")
+	private BigDecimal sellBackRebate;
+	/**
+	 * 店铺id
+	 */
+	@Column(name = "store_id", columnDefinition = "bigint not null  comment '店铺id'")
+	private Long storeId;
+	/**
+	 * 店铺名称
+	 */
+	@Column(name = "store_name", columnDefinition = "varchar(255) not null  comment '店铺名称'")
+	private String storeName;
+	/**
+	 * 订单编号
+	 */
+	@Column(name = "order_sn", columnDefinition = "varchar(255) not null  comment '订单编号'")
+	private String orderSn;
+	/**
+	 * 子订单编号
+	 */
+	@Column(name = "order_item_sn", columnDefinition = "varchar(255) not null  comment '子订单编号'")
+	private String orderItemSn;
+	/**
+	 * 商品ID
+	 */
+	@Column(name = "goods_id", columnDefinition = "bigint not null  comment '商品ID'")
+	private Long goodsId;
+	/**
+	 * 商品名称
+	 */
+	@Column(name = "goods_name", columnDefinition = "varchar(255) not null  comment '商品名称'")
+	private String goodsName;
+	/**
+	 * 货品ID
+	 */
+	@Column(name = "sku_id", columnDefinition = "bigint not null  comment '货品ID'")
+	private Long skuId;
+	/**
+	 * 规格
+	 */
+	@Column(name = "specs", columnDefinition = "varchar(255) not null  comment '规格'")
+	private String specs;
+	/**
+	 * 图片
+	 */
+	@Column(name = "image", columnDefinition = "varchar(255) not null  comment '图片'")
+	private String image;
+	/**
+	 * 商品数量
+	 */
+	@Column(name = "num", columnDefinition = "int not null  comment '商品数量'")
+	private Integer num;
 
-    public DistributionOrder(StoreFlow storeFlow) {
-        distributionOrderStatus = DistributionOrderStatusEnum.WAIT_BILL.name();
-        memberId = storeFlow.getMemberId();
-        memberName = storeFlow.getMemberName();
-        rebate = storeFlow.getDistributionRebate();
-        storeId = storeFlow.getStoreId();
-        storeName = storeFlow.getStoreName();
-        orderSn = storeFlow.getOrderSn();
-        orderItemSn = storeFlow.getOrderItemSn();
-        goodsId = storeFlow.getGoodsId();
-        goodsName = storeFlow.getGoodsName();
-        skuId = storeFlow.getSkuId();
-        specs = storeFlow.getSpecs();
-        image = storeFlow.getImage();
-        num = storeFlow.getNum();
-    }
+	public DistributionOrder(StoreFlow storeFlow) {
+		distributionOrderStatus = DistributionOrderStatusEnum.WAIT_BILL.name();
+		memberId = storeFlow.getMemberId();
+		memberName = storeFlow.getMemberName();
+		rebate = storeFlow.getDistributionRebate();
+		storeId = storeFlow.getStoreId();
+		storeName = storeFlow.getStoreName();
+		orderSn = storeFlow.getOrderSn();
+		orderItemSn = storeFlow.getOrderItemSn();
+		goodsId = storeFlow.getGoodsId();
+		goodsName = storeFlow.getGoodsName();
+		skuId = storeFlow.getSkuId();
+		specs = storeFlow.getSpecs();
+		image = storeFlow.getImage();
+		num = storeFlow.getNum();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
+		DistributionOrder distributionOrder = (DistributionOrder) o;
+		return getId() != null && Objects.equals(getId(), distributionOrder.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 
 }

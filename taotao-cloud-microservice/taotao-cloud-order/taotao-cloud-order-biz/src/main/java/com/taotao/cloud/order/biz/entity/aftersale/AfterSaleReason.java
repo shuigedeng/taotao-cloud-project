@@ -3,7 +3,12 @@ package com.taotao.cloud.order.biz.entity.aftersale;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -46,8 +51,12 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		AfterSaleReason that = (AfterSaleReason) o;
 		return getId() != null && Objects.equals(getId(), that.getId());
 	}

@@ -4,7 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -101,7 +106,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	/**
 	 * 规格json
 	 */
-	@Column(name = "specs", columnDefinition = "varchar(64) not null comment '规格json'")
+	@Column(name = "specs", columnDefinition = "json not null comment '规格json'")
 	private String specs;
 	/**
 	 * 流水类型：PAY/REFUND 支付/退款
@@ -181,8 +186,12 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		StoreFlow storeFlow = (StoreFlow) o;
 		return getId() != null && Objects.equals(getId(), storeFlow.getId());
 	}

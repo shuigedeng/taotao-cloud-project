@@ -6,7 +6,12 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -116,7 +121,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 	/**
 	 * 规格json
 	 */
-	@Column(name = "specs", columnDefinition = "varchar(1024) null comment '规格json'")
+	@Column(name = "specs", columnDefinition = "json null comment '规格json'")
 	private String specs;
 
 	/**
@@ -264,8 +269,12 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		AfterSale afterSale = (AfterSale) o;
 		return getId() != null && Objects.equals(getId(), afterSale.getId());
 	}

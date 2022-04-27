@@ -3,20 +3,33 @@ package com.taotao.cloud.distribution.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * 分销员表
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 14:59:27
  */
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = Distribution.TABLE_NAME)
 @TableName(Distribution.TABLE_NAME)
@@ -33,52 +46,87 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 	//    BeanUtil.copyProperties(distributionApplyDTO, this);
 	//}
 
-	@Schema(description = "会员id")
-	private String memberId;
-
-	@Schema(description = "会员名称")
+	/**
+	 * 会员id
+	 */
+	@Column(name = "member_id", columnDefinition = "bigint not null  comment '会员id'")
+	private Long memberId;
+	/**
+	 * 会员名称
+	 */
+	@Column(name = "member_name", columnDefinition = "varchar(255) not null  comment '会员名称'")
 	private String memberName;
-
-	@Schema(description = "会员姓名")
+	/**
+	 * 会员姓名
+	 */
+	@Column(name = "name", columnDefinition = "varchar(255) not null  comment '会员姓名'")
 	private String name;
-
-	@Schema(description = "身份证号")
+	/**
+	 * 身份证号
+	 */
+	@Column(name = "id_number", columnDefinition = "varchar(255) not null  comment '身份证号'")
 	private String idNumber;
-
+	/**
+	 * 分销总额
+	 */
+	@Column(name = "rebate_total", columnDefinition = "decimal(10,2) not null  comment '分销总额'")
 	@Builder.Default
-	@Schema(description = "分销总额")
 	private BigDecimal rebateTotal = BigDecimal.ZERO;
-
+	/**
+	 * 可提现金额
+	 */
+	@Column(name = "can_rebate", columnDefinition = "decimal(10,2) not null  comment '可提现金额'")
 	@Builder.Default
-	@Schema(description = "可提现金额")
 	private BigDecimal canRebate = BigDecimal.ZERO;
-
+	/**
+	 * 冻结金额
+	 */
+	@Column(name = "commission_frozen", columnDefinition = "decimal(10,2) not null  comment '冻结金额'")
 	@Builder.Default
-	@Schema(description = "冻结金额")
 	private BigDecimal commissionFrozen = BigDecimal.ZERO;
-
-	@Schema(description = "分销订单数")
+	/**
+	 * 分销订单数
+	 */
+	@Column(name = "distribution_order_count", columnDefinition = "int not null  comment '分销订单数'")
 	private Integer distributionOrderCount;
 
 	/**
+	 * 分销员状态
+	 *
 	 * @see DistributionStatusEnum
 	 */
-	@Schema(description = "分销员状态", required = true)
+	@Column(name = "distribution_status", columnDefinition = "varchar(255) not null  comment '分销员状态'")
 	private String distributionStatus;
-
-	@Length(min = 1, max = 200, message = "结算银行开户行名称长度为1-200位")
-	@NotBlank(message = "结算银行开户行名称不能为空")
-	@Schema(description = "结算银行开户行名称")
+	/**
+	 * 结算银行开户行名称
+	 */
+	@Column(name = "settlement_bank_account_name", columnDefinition = "varchar(255) not null  comment '结算银行开户行名称'")
 	private String settlementBankAccountName;
-
-	@Length(min = 1, max = 200, message = "结算银行开户账号长度为1-200位")
-	@NotBlank(message = "结算银行开户账号不能为空")
-	@Schema(description = "结算银行开户账号")
+	/**
+	 * 结算银行开户账号
+	 */
+	@Column(name = "settlement_bank_account_num", columnDefinition = "varchar(255) not null  comment '结算银行开户账号'")
 	private String settlementBankAccountNum;
-
-	@Length(min = 1, max = 200, message = "结算银行开户支行名称长度为1-200位")
-	@NotBlank(message = "结算银行开户支行名称不能为空")
-	@Schema(description = "结算银行开户支行名称")
+	/**
+	 * 结算银行开户支行名称
+	 */
+	@Column(name = "settlement_bank_branch_name", columnDefinition = "varchar(255) not null  comment '结算银行开户支行名称'")
 	private String settlementBankBranchName;
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
+		Distribution distribution = (Distribution) o;
+		return getId() != null && Objects.equals(getId(), distribution.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

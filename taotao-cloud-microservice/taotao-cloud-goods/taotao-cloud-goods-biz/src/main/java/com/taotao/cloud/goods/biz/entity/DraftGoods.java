@@ -7,7 +7,12 @@ import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -202,25 +207,25 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 	/**
 	 * 分类名称JSON
 	 */
-	@Column(name = "category_name_json", columnDefinition = "varchar(255) not null comment '分类名称JSON'")
+	@Column(name = "category_name_json", columnDefinition = "json not null comment '分类名称JSON'")
 	private String categoryNameJson;
 
 	/**
 	 * 商品参数JSON
 	 */
-	@Column(name = "goods_params_list_json", columnDefinition = "mediumtext not null comment '商品参数JSON'")
+	@Column(name = "goods_params_list_json", columnDefinition = "json not null comment '商品参数JSON'")
 	private String goodsParamsListJson;
 
 	/**
 	 * 商品图片JSON
 	 */
-	@Column(name = "goods_gallery_list_json", columnDefinition = "mediumtext not null comment '商品图片JSON'")
+	@Column(name = "goods_gallery_list_json", columnDefinition = "json not null comment '商品图片JSON'")
 	private String goodsGalleryListJson;
 
 	/**
 	 * sku列表JSON
 	 */
-	@Column(name = "sku_list_json", columnDefinition = "mediumtext not null comment 'sku列表JSON'")
+	@Column(name = "sku_list_json", columnDefinition = "json not null comment 'sku列表JSON'")
 	private String skuListJson;
 
 	/**
@@ -247,8 +252,12 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		DraftGoods that = (DraftGoods) o;
 		return getId() != null && Objects.equals(getId(), that.getId());
 	}
