@@ -13,7 +13,12 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -224,7 +229,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 	/**
 	 * 商品参数json
 	 */
-	@Column(name = "params", columnDefinition = "mediumtext not null comment '商品参数json'")
+	@Column(name = "params", columnDefinition = "json not null comment '商品参数json'")
 	private String params;
 
 	public Goods(GoodsOperationDTO goodsOperationDTO) {
@@ -298,8 +303,12 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		Goods goods = (Goods) o;
 		return getId() != null && Objects.equals(getId(), goods.getId());
 	}

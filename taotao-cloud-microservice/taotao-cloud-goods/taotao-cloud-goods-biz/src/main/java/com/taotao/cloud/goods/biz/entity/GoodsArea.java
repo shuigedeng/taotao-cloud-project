@@ -3,7 +3,12 @@ package com.taotao.cloud.goods.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -36,7 +41,7 @@ public class GoodsArea extends BaseSuperEntity<GoodsArea, Long> {
 	/**
 	 * 区域json
 	 */
-	@Column(name = "region_json", columnDefinition = "mediumtext not null comment '区域json'")
+	@Column(name = "region_json", columnDefinition = "json not null comment '区域json'")
 	private String regionJson;
 
 	/**
@@ -47,8 +52,12 @@ public class GoodsArea extends BaseSuperEntity<GoodsArea, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		GoodsArea goodsArea = (GoodsArea) o;
 		return getId() != null && Objects.equals(getId(), goodsArea.getId());
 	}

@@ -4,7 +4,12 @@ package com.taotao.cloud.order.biz.entity.order;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.constant.OrderConstant;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -161,7 +166,7 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 收货地址:json的形式存储 {"province":"省","city":"市","zone":"区","detail":"详细地址"}
 	 */
-	@Column(name = "receiver_address_json", columnDefinition = "varchar(2550) not null comment '收货地址:json的形式存储'")
+	@Column(name = "receiver_address_json", columnDefinition = "json not null comment '收货地址:json的形式存储'")
 	private String receiverAddressJson;
 
 	/**
@@ -226,8 +231,12 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+				if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
 		OrderInfo orderInfo = (OrderInfo) o;
 		return getId() != null && Objects.equals(getId(), orderInfo.getId());
 	}
