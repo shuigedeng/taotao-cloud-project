@@ -1,4 +1,4 @@
-package com.taotao.cloud.search.biz.entity;
+package com.taotao.cloud.report.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;

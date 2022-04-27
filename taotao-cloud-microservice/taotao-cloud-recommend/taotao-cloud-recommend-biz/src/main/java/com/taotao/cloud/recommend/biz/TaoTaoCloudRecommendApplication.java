@@ -1,4 +1,4 @@
-package com.taotao.cloud.report.biz;
+package com.taotao.cloud.recommend.biz;
 
 import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
 @SpringBootApplication
-public class TaoTaoCloudReportApplication {
+public class TaoTaoCloudRecommendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudReportApplication.class, args);
+		SpringApplication.run(TaoTaoCloudRecommendApplication.class, args);
 	}
 
 }
