@@ -26,7 +26,6 @@ import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderBatchDeliverDTO;
-import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
@@ -37,6 +36,7 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
@@ -237,7 +237,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public List<OrderExportDTO> queryExportOrder(OrderPageQuery orderPageQuery) {
+	public List<OrderExportVO> queryExportOrder(OrderPageQuery orderPageQuery) {
 		return this.baseMapper.queryExportOrder(orderPageQuery.queryWrapper());
 	}
 

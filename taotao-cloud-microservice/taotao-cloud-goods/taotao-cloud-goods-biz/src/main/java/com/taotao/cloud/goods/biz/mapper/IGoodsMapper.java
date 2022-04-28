@@ -30,7 +30,7 @@ public interface IGoodsMapper extends BaseMapper<Goods> {
 	 */
 	@Select("""
 		SELECT id
-		FROM li_goods
+		FROM tt_goods
 		WHERE store_id = #{storeId}
 		""")
 	List<Long> getGoodsIdByStoreId(@Param("storeId") Long storeId);
@@ -43,7 +43,7 @@ public interface IGoodsMapper extends BaseMapper<Goods> {
 	 * @since 2022-04-27 16:56:00
 	 */
 	@Update("""
-		UPDATE li_goods
+		UPDATE tt_goods
 		SET comment_num = comment_num + #{commentNum}
 		WHERE id = #{goodsId}
 		""")
@@ -60,7 +60,7 @@ public interface IGoodsMapper extends BaseMapper<Goods> {
 	 */
 	@Select("""
 		select g.*
-		from li_goods as g
+		from tt_goods as g
 		""")
 	IPage<GoodsVO> queryByParams(IPage<GoodsVO> page,
 		@Param(Constants.WRAPPER) Wrapper<GoodsVO> queryWrapper);

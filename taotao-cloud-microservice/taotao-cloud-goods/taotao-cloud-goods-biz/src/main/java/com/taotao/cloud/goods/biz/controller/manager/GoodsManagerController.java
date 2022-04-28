@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -77,8 +76,7 @@ public class GoodsManagerController {
 	@RequestLogger("分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
-	public Result<PageModel<GoodsBaseVO>> getAuthPage(
-		@Validated GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsBaseVO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
 		goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
@@ -90,7 +88,7 @@ public class GoodsManagerController {
 	@PutMapping(value = "/{goodsId}/under")
 	public Result<Boolean> underGoods(@PathVariable Long goodsId,
 		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
-		List<Long> goodsIds = Arrays.asList(goodsId);
+		List<Long> goodsIds = List.of(goodsId);
 		return Result.success(
 			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
 	}

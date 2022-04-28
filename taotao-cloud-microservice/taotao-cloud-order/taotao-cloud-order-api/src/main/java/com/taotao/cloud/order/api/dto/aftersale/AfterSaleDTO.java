@@ -3,17 +3,17 @@ package com.taotao.cloud.order.api.dto.aftersale;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 /**
  * 售后dto
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-21 16:59:38
+ * @since 2022-04-28 09:16:46
  */
 @Data
 @Builder

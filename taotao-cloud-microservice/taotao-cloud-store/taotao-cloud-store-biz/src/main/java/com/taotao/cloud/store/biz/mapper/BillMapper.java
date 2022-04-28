@@ -25,7 +25,7 @@ public interface BillMapper extends BaseMapper<Bill> {
 	 * @param queryWrapper 查询条件
 	 * @return 结算单分页
 	 */
-	@Select("select b.id,b.sn,b.start_time,b.end_time,b.bill_status,b.store_name,b.bill_price,b.create_time from li_bill as b ${ew.customSqlSegment}")
+	@Select("select b.id,b.sn,b.start_time,b.end_time,b.bill_status,b.store_name,b.bill_price,b.create_time from tt_bill as b ${ew.customSqlSegment}")
 	IPage<BillListVO> queryBillPage(IPage<BillListVO> page,
 		@Param(Constants.WRAPPER) Wrapper<BillListVO> queryWrapper);
 
@@ -41,7 +41,7 @@ public interface BillMapper extends BaseMapper<Bill> {
 		",SUM( point_settlement_price ) AS pointSettlementPrice " +
 		",SUM( kanjia_settlement_price ) AS kanjiaSettlementPrice " +
 		",SUM( bill_price ) AS billPrice " +
-		"FROM li_store_flow ${ew.customSqlSegment}")
+		"FROM tt_store_flow ${ew.customSqlSegment}")
 	Bill getOrderBill(@Param(Constants.WRAPPER) QueryWrapper<Bill> queryWrapper);
 
 	/**
@@ -55,6 +55,6 @@ public interface BillMapper extends BaseMapper<Bill> {
 			+
 			",SUM( distribution_rebate ) AS distributionRefundCommission,SUM( site_coupon_commission ) AS siteCouponRefundCommission"
 			+
-			",SUM( bill_price ) AS billPrice FROM li_store_flow ${ew.customSqlSegment}")
+			",SUM( bill_price ) AS billPrice FROM tt_store_flow ${ew.customSqlSegment}")
 	Bill getRefundBill(@Param(Constants.WRAPPER) QueryWrapper<Bill> queryWrapper);
 }

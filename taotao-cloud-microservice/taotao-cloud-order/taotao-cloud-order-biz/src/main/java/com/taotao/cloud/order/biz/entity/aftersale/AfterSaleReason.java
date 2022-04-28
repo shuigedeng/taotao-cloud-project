@@ -35,7 +35,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = AfterSaleReason.TABLE_NAME, comment = "售后原因")
 public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 
-	public static final String TABLE_NAME = "li_after_sale_reason";
+	public static final String TABLE_NAME = "tt_after_sale_reason";
 
 	/**
 	 * 售后原因

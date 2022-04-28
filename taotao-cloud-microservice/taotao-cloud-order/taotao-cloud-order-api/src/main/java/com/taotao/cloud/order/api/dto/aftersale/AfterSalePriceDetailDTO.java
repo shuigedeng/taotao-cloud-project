@@ -2,24 +2,23 @@ package com.taotao.cloud.order.api.dto.aftersale;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 商城退款流水
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:16:50
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "商城退款流水")
 public class AfterSalePriceDetailDTO implements Serializable {
 

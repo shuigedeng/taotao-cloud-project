@@ -1,38 +1,31 @@
-package com.taotao.cloud.order.api.dto.order;
+package com.taotao.cloud.order.api.vo.cart;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
- * 订单导出DTO
+ * 订单导出VO
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "订单导出DTO")
-public class OrderExportDTO {
+public class OrderExportVO {
 
 	@Schema(description = "订单编号")
 	private String sn;
 
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Schema(description = "创建时间")
-	private Date createTime;
+	private LocalDateTime createTime;
 
 	@Schema(description = "用户名")
 	private String memberName;

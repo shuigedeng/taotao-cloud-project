@@ -1,6 +1,7 @@
 package com.taotao.cloud.promotion.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PromotionGoodsVO {
 
-	public static final String TABLE_NAME = "li_promotion_goods";
+	public static final String TABLE_NAME = "tt_promotion_goods";
 
 	@Schema(description = "商家ID")
 	private Long storeId;

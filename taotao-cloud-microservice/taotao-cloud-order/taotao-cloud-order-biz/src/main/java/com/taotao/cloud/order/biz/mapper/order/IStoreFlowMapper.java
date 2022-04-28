@@ -22,7 +22,7 @@ public interface IStoreFlowMapper extends BaseMapper<StoreFlow> {
 	 * @param queryWrapper 查询条件
 	 * @return 入账流水
 	 */
-	@Select("SELECT * FROM li_store_flow ${ew.customSqlSegment}")
+	@Select("SELECT * FROM tt_store_flow ${ew.customSqlSegment}")
 	List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(
 		@Param(Constants.WRAPPER) Wrapper<StoreFlow> queryWrapper);
 
@@ -32,7 +32,7 @@ public interface IStoreFlowMapper extends BaseMapper<StoreFlow> {
 	 * @param queryWrapper 查询条件
 	 * @return 退款流水
 	 */
-	@Select("SELECT * FROM li_store_flow ${ew.customSqlSegment}")
+	@Select("SELECT * FROM tt_store_flow ${ew.customSqlSegment}")
 	List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(
 		@Param(Constants.WRAPPER) Wrapper<StoreFlow> queryWrapper);
 }

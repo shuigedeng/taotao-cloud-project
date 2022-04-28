@@ -5,6 +5,10 @@ import java.util.List;
 
 /**
  * 订单出库的类型枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:22:18
  */
 public enum OrderOutTypeEnum {
 

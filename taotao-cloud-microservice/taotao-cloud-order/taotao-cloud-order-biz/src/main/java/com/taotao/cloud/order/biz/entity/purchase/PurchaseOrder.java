@@ -35,7 +35,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = PurchaseOrder.TABLE_NAME, comment = "供求单表")
 public class PurchaseOrder extends BaseSuperEntity<PurchaseOrder, Long> {
 
-	public static final String TABLE_NAME = "li_purchase_order";
+	public static final String TABLE_NAME = "tt_purchase_order";
 	/**
 	 * 标题
 	 */

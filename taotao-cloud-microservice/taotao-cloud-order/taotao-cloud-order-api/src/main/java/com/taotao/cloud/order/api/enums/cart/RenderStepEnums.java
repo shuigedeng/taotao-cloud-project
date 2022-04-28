@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.cart;
 
 /**
  * 购物车渲染枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:21:43
  */
 public enum RenderStepEnums {
 

@@ -28,7 +28,7 @@ public interface CouponActivityItemMapper extends BaseMapper<CouponActivityItem>
 				c.price,
 				c.coupon_type,
 				c.coupon_discount 
-		FROM li_coupon_activity_item cai INNER JOIN li_coupon c ON cai.coupon_id = c.id 
+		FROM tt_coupon_activity_item cai INNER JOIN tt_coupon c ON cai.coupon_id = c.id 
 		WHERE cai.activity_id= #{activityId} 
 		""")
 	List<CouponActivityItemVO> getCouponActivityItemListVO(String activityId);

@@ -55,7 +55,7 @@ public class CategoryManagerController {
 	private final IGoodsService goodsService;
 
 	@Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表")
-	@RequestLogger("查询某分类下的全部子分类列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}/children/all")
 	public Result<List<CategoryBaseVO>> list(@PathVariable Long parentId) {
@@ -64,7 +64,7 @@ public class CategoryManagerController {
 	}
 
 	@Operation(summary = "查询全部分类列表", description = "查询全部分类列表")
-	@RequestLogger("查询全部分类列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/children/all")
 	public Result<List<CategoryVO>> list() {
@@ -72,7 +72,7 @@ public class CategoryManagerController {
 	}
 
 	@Operation(summary = "添加商品分类", description = "添加商品分类")
-	@RequestLogger("添加商品分类")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveCategory(@Validated @RequestBody Category category) {
@@ -90,7 +90,7 @@ public class CategoryManagerController {
 	}
 
 	@Operation(summary = "修改商品分类", description = "修改商品分类")
-	@RequestLogger("修改商品分类")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryVO category) {
@@ -102,7 +102,7 @@ public class CategoryManagerController {
 	}
 
 	@Operation(summary = "通过id删除分类", description = "通过id删除分类")
-	@RequestLogger("通过id删除分类")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delAllByIds(@NotBlank(message = "id不能为空") @PathVariable Long id) {
@@ -122,7 +122,7 @@ public class CategoryManagerController {
 	}
 
 	@Operation(summary = "后台 禁用/启用 分类", description = "后台 禁用/启用 分类")
-	@RequestLogger("后台 禁用/启用 分类")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
 	public Result<Boolean> disable(@PathVariable Long id,

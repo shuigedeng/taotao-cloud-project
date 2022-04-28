@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
+import com.taotao.cloud.order.api.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -25,7 +25,7 @@ public interface IOrderMapper extends BaseMapper<Order> {
 	 * @param status  状态
 	 * @param orderSn 订单编号
 	 */
-	@Update({"update li_order set order_status = #{status} where sn = #{orderSn}"})
+	@Update({"update tt_order set order_status = #{status} where sn = #{orderSn}"})
 	void updateStatus(String status, String orderSn);
 
 	/**
@@ -38,10 +38,10 @@ public interface IOrderMapper extends BaseMapper<Order> {
 		SELECT o.sn,o.create_time,o.member_name,o.consignee_name,o.consignee_mobile,o.consignee_address_path,o.consignee_detail,
 			   o.payment_method, o.logistics_name,o.freight_price,o.goods_price,o.discount_price,o.flow_price,oi.goods_name,oi.num,
 			   o.remark,o.order_status,o.pay_status,o.deliver_status,o.need_receipt,o.store_name 
-		FROM li_order o LEFT JOIN li_order_item oi ON oi.order_sn=o.sn
+		FROM tt_order o LEFT JOIN tt_order_item oi ON oi.order_sn=o.sn
 		${ew.customSqlSegment}
 		""")
-	List<OrderExportDTO> queryExportOrder(
+	List<OrderExportVO> queryExportOrder(
 		@Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
 
 	/**
@@ -51,7 +51,7 @@ public interface IOrderMapper extends BaseMapper<Order> {
 	 * @param queryWrapper 查询条件
 	 * @return 订单支付记录分页
 	 */
-	@Select("select * from li_order ${ew.customSqlSegment} ")
+	@Select("select * from tt_order ${ew.customSqlSegment} ")
 	IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page,
                                          @Param(Constants.WRAPPER) Wrapper<PaymentLogVO> queryWrapper);
 
@@ -74,7 +74,7 @@ public interface IOrderMapper extends BaseMapper<Order> {
 				GROUP_CONCAT(oi.comment_status) as group_comment_status,
 				GROUP_CONCAT(oi.sn) as group_order_items_sn,
 				GROUP_CONCAT(oi.goods_price) as group_goods_price
-		FROM li_order o LEFT JOIN li_order_item AS oi on o.sn = oi.order_sn
+		FROM tt_order o LEFT JOIN tt_order_item AS oi on o.sn = oi.order_sn
 		${ew.customSqlSegment}
 		""")
 	IPage<OrderSimpleVO> queryByParams(IPage<OrderSimpleVO> page,
@@ -88,7 +88,7 @@ public interface IOrderMapper extends BaseMapper<Order> {
 	 */
 	@Select("""
 		select o.* 
-		FROM li_order o INNER JOIN li_order_item AS oi on o.sn = oi.order_sn 
+		FROM tt_order o INNER JOIN tt_order_item AS oi on o.sn = oi.order_sn 
 		${ew.customSqlSegment} 
 		""")
 	List<Order> queryListByParams(@Param(Constants.WRAPPER) Wrapper<Order> queryWrapper);

@@ -22,9 +22,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.member.biz.entity.Member;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * 会员数据处理层
@@ -38,13 +39,13 @@ public interface MemberMapper extends BaseMapper<Member> {
 	 */
 	@Select("""
 		select m.mobile
-		from li_member m
+		from tt_member m
 		""")
 	List<String> getAllMemberMobile();
 
 	@Select("""
 		select *
-		from li_member
+		from tt_member
 		${ew.customSqlSegment}
 		""")
 	IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page,

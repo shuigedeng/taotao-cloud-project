@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.trade;
 
 /**
  * 售后类型
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:23:38
  */
 public enum AfterSaleTypeEnum {
 	/**

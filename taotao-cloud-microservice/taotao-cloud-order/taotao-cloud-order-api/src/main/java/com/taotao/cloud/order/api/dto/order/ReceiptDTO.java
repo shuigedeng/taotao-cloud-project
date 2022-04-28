@@ -1,15 +1,20 @@
 package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 
 /**
  * 发票子内容
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:19:44
  */
 @Data
 @Builder

@@ -18,15 +18,16 @@ package com.taotao.cloud.member.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  * 钱包变动日志表
@@ -45,7 +46,7 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = MemberWalletLog.TABLE_NAME, comment = "钱包变动日志表")
 public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
 
-	public static final String TABLE_NAME = "li_wallet_log";
+	public static final String TABLE_NAME = "tt_wallet_log";
 	/**
 	 * 会员id
 	 */

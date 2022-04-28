@@ -57,7 +57,7 @@ public class OrderComplaintController {
 	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger("通过id获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable Long id) {
@@ -65,7 +65,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取")
-	@RequestLogger("分页获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageModel<OrderComplaintBaseVO>> get(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
@@ -74,7 +74,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据")
-	@RequestLogger("更新数据")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
@@ -84,7 +84,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")
-	@RequestLogger("添加交易投诉对话")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
@@ -101,7 +101,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "修改状态", description = "修改状态")
-	@RequestLogger("修改状态")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status")
 	public Result<Boolean> updateStatus(@Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
@@ -109,7 +109,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "仲裁", description = "仲裁")
-	@RequestLogger("仲裁")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/complete/{id}")
 	public Result<Object> complete(@PathVariable String id, String arbitrationResult) {

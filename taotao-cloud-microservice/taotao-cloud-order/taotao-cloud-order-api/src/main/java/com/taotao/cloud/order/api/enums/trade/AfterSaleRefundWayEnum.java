@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.trade;
 
 /**
  * 退款方式
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:23:33
  */
 public enum AfterSaleRefundWayEnum {
 

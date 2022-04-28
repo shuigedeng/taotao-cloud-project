@@ -23,6 +23,10 @@ import java.util.stream.Collectors;
 
 /**
  * 购物车视图
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:17:07
  */
 @Data
 @Builder

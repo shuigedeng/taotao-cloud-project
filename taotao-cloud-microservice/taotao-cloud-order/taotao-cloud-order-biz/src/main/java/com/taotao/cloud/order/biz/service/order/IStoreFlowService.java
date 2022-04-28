@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.dto.order.StoreFlowQueryDTO;
+import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.StoreFlow;
 import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
@@ -42,7 +42,7 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * @return {@link IPage }<{@link StoreFlow }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	IPage<StoreFlow> getStoreFlow(StoreFlowQueryDTO storeFlowQueryDTO);
+	IPage<StoreFlow> getStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
 
 	/**
 	 * 根据参数查询一条数据
@@ -51,7 +51,7 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * @return {@link StoreFlow }
 	 * @since 2022-04-28 08:54:53
 	 */
-	StoreFlow queryOne(StoreFlowQueryDTO storeFlowQueryDTO);
+	StoreFlow queryOne(StoreFlowPageQuery storeFlowQueryDTO);
 
 	/**
 	 * 获取结算单地入账流水
@@ -60,7 +60,7 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * @return {@link List }<{@link StoreFlowPayDownloadVO }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowQueryDTO storeFlowQueryDTO);
+	List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowPageQuery storeFlowQueryDTO);
 
 	/**
 	 * 获取结算单的退款流水
@@ -70,7 +70,7 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * @since 2022-04-28 08:54:53
 	 */
 	List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(
-		StoreFlowQueryDTO storeFlowQueryDTO);
+		StoreFlowPageQuery storeFlowQueryDTO);
 
 
 	/**
@@ -102,5 +102,5 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * @return {@link List }<{@link StoreFlow }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	List<StoreFlow> listStoreFlow(StoreFlowQueryDTO storeFlowQueryDTO);
+	List<StoreFlow> listStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
 }

@@ -1,8 +1,8 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationBaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serial;
 
@@ -12,12 +12,9 @@ import java.io.Serial;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Setter
-@Getter
+@Data
 @Builder
-@AllArgsConstructor
 @Schema(description = "投诉通信VO")
-@NoArgsConstructor
 public class OrderComplaintCommunicationDTO {
 
 	@Serial

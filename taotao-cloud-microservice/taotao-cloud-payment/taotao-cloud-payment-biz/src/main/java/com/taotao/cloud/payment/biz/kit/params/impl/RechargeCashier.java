@@ -59,7 +59,6 @@ public class RechargeCashier implements CashierExecute {
                 throw new BusinessException(ResultEnum.PAY_BigDecimal_ERROR);
             }
 
-
             cashierParam.setPrice(recharge.getRechargeMoney());
 
             try {

@@ -30,7 +30,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = CategoryParameterGroup.TABLE_NAME, comment = "分类绑定参数组表")
 public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGroup, Long> {
 
-	public static final String TABLE_NAME = "li_category_parameter_group";
+	public static final String TABLE_NAME = "tt_category_parameter_group";
 
 	/**
 	 * 参数组名称

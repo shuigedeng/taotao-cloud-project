@@ -2,15 +2,16 @@ package com.taotao.cloud.store.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.math.BigDecimal;
 
 
 /**
@@ -31,7 +32,7 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = FreightTemplateChild.TABLE_NAME, comment = "运费模板子配置表")
 public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, Long> {
 
-	public static final String TABLE_NAME = "li_freight_template_child";
+	public static final String TABLE_NAME = "tt_freight_template_child";
 
 	@Column(name = "freight_template_id", columnDefinition = "bigint not null comment '店铺模板ID'")
 	private Long freightTemplateId;

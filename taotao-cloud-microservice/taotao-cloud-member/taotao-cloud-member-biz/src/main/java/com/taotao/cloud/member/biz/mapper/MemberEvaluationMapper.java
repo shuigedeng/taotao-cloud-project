@@ -22,10 +22,11 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.StoreRatingVO;
 import com.taotao.cloud.member.biz.entity.MemberEvaluation;
-import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 会员商品评价数据处理层
@@ -42,7 +43,7 @@ public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 	 */
 	@Select("""
 		select me.* 
-		from li_member_evaluation as me 
+		from tt_member_evaluation as me 
 		${ew.customSqlSegment}
 		""")
 	IPage<MemberEvaluationListVO> getMemberEvaluationList(IPage<MemberEvaluationListVO> page,
@@ -56,7 +57,7 @@ public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 	 */
 	@Select("""
 		select grade,count(1) as num 
-		from li_member_evaluation 
+		from tt_member_evaluation 
 		Where goods_id=#{goodsId} and status='OPEN'
 		GROUP BY grade
 		""")
@@ -72,7 +73,7 @@ public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 		SELECT round( AVG( delivery_score ), 2 ) AS delivery_score
 				,round( AVG( description_score ), 2 ) AS description_score
 				,round( AVG( service_score ), 2 ) AS service_score
-		FROM li_member_evaluation 
+		FROM tt_member_evaluation 
 		${ew.customSqlSegment}
 		""")
 	StoreRatingVO getStoreRatingVO(
@@ -86,7 +87,7 @@ public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 	 */
 	@Select("""
 		SELECT goods_id,COUNT(goods_id) AS num 
-		FROM li_member_evaluation
+		FROM tt_member_evaluation
 		GROUP BY goods_id
 		""")
 	List<Map<String, Object>> memberEvaluationNum(

@@ -16,9 +16,9 @@ import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
-import com.taotao.cloud.order.api.dto.order.StoreFlowQueryDTO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
@@ -84,7 +84,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
         if (order.getDistributionId() != null) {
             //根据订单编号获取有分销金额的店铺流水记录
             List<StoreFlow> storeFlowList = storeFlowService
-                    .listStoreFlow(StoreFlowQueryDTO.builder().justDistribution(true).orderSn(orderSn).build());
+                    .listStoreFlow(StoreFlowPageQuery.builder().justDistribution(true).orderSn(orderSn).build());
             BigDecimal rebate = 0.0;
             //循环店铺流水记录判断是否包含分销商品
             //包含分销商品则进行记录分销订单、计算分销总额
@@ -181,7 +181,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
     @Override
     public void refundOrder(String afterSaleSn) {
         //判断是否为分销订单
-        StoreFlow storeFlow = storeFlowService.queryOne(StoreFlowQueryDTO.builder().justDistribution(true).refundSn(afterSaleSn).build());
+        StoreFlow storeFlow = storeFlowService.queryOne(StoreFlowPageQuery.builder().justDistribution(true).refundSn(afterSaleSn).build());
         if (storeFlow != null) {
 
             //获取收款分销订单

@@ -88,7 +88,7 @@ public class GoodsBuyerController {
 	}
 
 	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")
-	@RequestLogger("从ES中获取商品信息")
+	@RequestLogger
 	@GetMapping("/es")
 	public Result<SearchPage<EsGoodsIndex>> getGoodsByPageFromEs(@Validated EsGoodsSearchQuery goodsSearchParams) {
 		SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(goodsSearchParams);
@@ -96,7 +96,7 @@ public class GoodsBuyerController {
 	}
 
 	@Operation(summary = "从ES中获取相关商品品牌名称，分类名称及属性", description = "从ES中获取相关商品品牌名称，分类名称及属性")
-	@RequestLogger("从ES中获取相关商品品牌名称，分类名称及属性")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/es/related")
 	public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(@Validated EsGoodsSearchQuery esGoodsSearchQuery) {
@@ -106,7 +106,7 @@ public class GoodsBuyerController {
 	}
 
 	@Operation(summary = "获取热门关键词", description = "获取热门关键词")
-	@RequestLogger("获取热门关键词")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/hot-words")
 	public Result<List<String>> getGoodsHotWords(@RequestParam Integer count) {

@@ -7,10 +7,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
-import com.taotao.cloud.order.api.dto.order.StoreFlowQueryDTO;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
@@ -161,23 +161,23 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     }
 
     @Override
-    public IPage<StoreFlow> getStoreFlow(StoreFlowQueryDTO storeFlowQueryDTO) {
+    public IPage<StoreFlow> getStoreFlow(StoreFlowPageQuery storeFlowQueryDTO) {
 
         return this.page(PageUtil.initPage(storeFlowQueryDTO.getPageVO()), generatorQueryWrapper(storeFlowQueryDTO));
     }
 
     @Override
-    public StoreFlow queryOne(StoreFlowQueryDTO storeFlowQueryDTO) {
+    public StoreFlow queryOne(StoreFlowPageQuery storeFlowQueryDTO) {
         return this.getOne(generatorQueryWrapper(storeFlowQueryDTO));
     }
 
     @Override
-    public List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowQueryDTO storeFlowQueryDTO) {
+    public List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowPageQuery storeFlowQueryDTO) {
         return baseMapper.getStoreFlowPayDownloadVO(generatorQueryWrapper(storeFlowQueryDTO));
     }
 
     @Override
-    public List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(StoreFlowQueryDTO storeFlowQueryDTO) {
+    public List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(StoreFlowPageQuery storeFlowQueryDTO) {
         return baseMapper.getStoreFlowRefundDownloadVO(generatorQueryWrapper(storeFlowQueryDTO));
     }
 
@@ -185,17 +185,17 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     @Override
     public IPage<StoreFlow> getStoreFlow(String id, String type, PageVO pageVO) {
         Bill bill = billService.getById(id);
-        return this.getStoreFlow(StoreFlowQueryDTO.builder().type(type).pageVO(pageVO).bill(bill).build());
+        return this.getStoreFlow(StoreFlowPageQuery.builder().type(type).pageVO(pageVO).bill(bill).build());
     }
 
     @Override
     public IPage<StoreFlow> getDistributionFlow(String id, PageVO pageVO) {
         Bill bill = billService.getById(id);
-        return this.getStoreFlow(StoreFlowQueryDTO.builder().pageVO(pageVO).bill(bill).build());
+        return this.getStoreFlow(StoreFlowPageQuery.builder().pageVO(pageVO).bill(bill).build());
     }
 
     @Override
-    public List<StoreFlow> listStoreFlow(StoreFlowQueryDTO storeFlowQueryDTO) {
+    public List<StoreFlow> listStoreFlow(StoreFlowPageQuery storeFlowQueryDTO) {
         return this.list(generatorQueryWrapper(storeFlowQueryDTO));
     }
 
@@ -205,7 +205,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
      * @param storeFlowQueryDTO 搜索参数
      * @return 查询wrapper
      */
-    private LambdaQueryWrapper generatorQueryWrapper(StoreFlowQueryDTO storeFlowQueryDTO) {
+    private LambdaQueryWrapper generatorQueryWrapper(StoreFlowPageQuery storeFlowQueryDTO) {
 
 
         LambdaQueryWrapper<StoreFlow> lambdaQueryWrapper = Wrappers.lambdaQuery();

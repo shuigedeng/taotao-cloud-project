@@ -21,11 +21,17 @@ import com.taotao.cloud.order.api.bo.order_info.OrderBO;
  * IDubboOrderService
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2021/10/20 22:25
+ * @version 2022.04
+ * @since 2022-04-28 09:21:20
  */
 public interface IDubboOrderService {
 
-
+	/**
+	 * 查询
+	 *
+	 * @param id id
+	 * @return {@link OrderBO }
+	 * @since 2022-04-28 09:21:20
+	 */
 	OrderBO query(Long id);
 }

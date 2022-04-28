@@ -6,8 +6,8 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
-import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.service.order.IOrderPriceService;
@@ -65,7 +65,7 @@ public class OrderController {
 	private final StoreLogisticsService storeLogisticsService;
 
 	@Operation(summary = "查询订单列表", description = "查询订单列表")
-	@RequestLogger("查询订单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
@@ -73,7 +73,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")
-	@RequestLogger("订单明细")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<OrderDetailVO> detail(@NotNull @PathVariable String orderSn) {
@@ -82,7 +82,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "修改收货人信息", description = "修改收货人信息")
-	@RequestLogger("修改收货人信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/update/{orderSn}/consignee")
 	public Result<Object> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
@@ -91,7 +91,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "修改订单价格", description = "修改订单价格")
-	@RequestLogger("修改订单价格")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Object> updateOrderPrice(@PathVariable String orderSn,
@@ -100,7 +100,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "订单发货", description = "订单发货")
-	@RequestLogger("订单发货")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/delivery")
 	public Result<Object> delivery(@NotNull(message = "参数非法") @PathVariable String orderSn,
@@ -110,7 +110,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单")
-	@RequestLogger("取消订单")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Object> cancel(@PathVariable String orderSn, @RequestParam String reason) {
@@ -118,7 +118,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "根据核验码获取订单信息", description = "根据核验码获取订单信息")
-	@RequestLogger("根据核验码获取订单信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/verificationCode/{verificationCode}")
 	public Result<Object> getOrderByVerificationCode(@PathVariable String verificationCode) {
@@ -126,7 +126,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "订单核验", description = "订单核验")
-	@RequestLogger("订单核验")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/take/{orderSn}/{verificationCode}")
 	public Result<Object> take(@PathVariable String orderSn,
@@ -135,7 +135,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
-	@RequestLogger("查询物流踪迹")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(
@@ -145,7 +145,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "下载待发货的订单列表", description = "下载待发货的订单列表")
-	@RequestLogger("下载待发货的订单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/downLoadDeliverExcel")
 	public void downLoadDeliverExcel() {
@@ -158,7 +158,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "上传文件进行订单批量发货", description = "上传文件进行订单批量发货")
-	@RequestLogger("上传文件进行订单批量发货")
+	@RequestLogger
 	@PostMapping(value = "/batchDeliver", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public Result<Object> batchDeliver(@RequestPart("files") MultipartFile files) {
 		orderService.batchDeliver(files);
@@ -166,10 +166,10 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
-	@RequestLogger("查询订单导出列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
-	public Result<List<OrderExportDTO>> queryExportOrder(
+	public Result<List<OrderExportVO>> queryExportOrder(
 		OrderPageQuery orderPageQuery) {
 		return Result.success(orderService.queryExportOrder(orderPageQuery));
 	}

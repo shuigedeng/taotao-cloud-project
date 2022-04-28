@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.cart;
 
 /**
  * 配送方式
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:21:40
  */
 public enum DeliveryMethodEnum {
 
