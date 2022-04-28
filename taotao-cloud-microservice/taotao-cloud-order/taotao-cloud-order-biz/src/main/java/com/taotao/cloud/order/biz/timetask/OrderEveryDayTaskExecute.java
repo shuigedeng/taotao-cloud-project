@@ -8,25 +8,35 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.mapper.order.OrderItemMapper;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.OrderSetting;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * 每天订单任务执行
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:48:39
+ */
 @Component
 public class OrderEveryDayTaskExecute implements EveryDayExecute {
 
@@ -34,14 +44,14 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IOrderService orderService;
 	/**
 	 * 订单货物
 	 */
 	@Autowired
-	private OrderItemService orderItemService;
+	private IOrderItemService orderItemService;
 	@Resource
-	private OrderItemMapper orderItemMapper;
+	private IOrderItemMapper orderItemMapper;
 	/**
 	 * 设置
 	 */
@@ -54,7 +64,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	private MemberEvaluationService memberEvaluationService;
 
 	@Autowired
-	private AfterSaleService afterSaleService;
+	private IAfterSaleService afterSaleService;
 
 	/**
 	 * 执行每日任务

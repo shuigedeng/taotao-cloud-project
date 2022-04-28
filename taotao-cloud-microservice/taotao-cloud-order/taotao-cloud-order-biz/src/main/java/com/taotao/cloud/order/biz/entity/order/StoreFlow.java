@@ -21,6 +21,10 @@ import java.util.Objects;
 
 /**
  * 商家订单流水表
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:04
  */
 @Getter
 @Setter

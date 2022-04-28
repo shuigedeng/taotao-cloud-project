@@ -9,12 +9,10 @@ import com.taotao.cloud.goods.api.query.SpecificationPageQuery;
 import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
-import com.taotao.cloud.goods.biz.service.SpecificationService;
+import com.taotao.cloud.goods.biz.service.ISpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +24,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 管理端,商品规格接口
@@ -44,7 +45,7 @@ public class SpecificationManagerController {
 	/**
 	 * 商品规格服务
 	 */
-	private final SpecificationService specificationService;
+	private final ISpecificationService specificationService;
 
 	@Operation(summary = "获取所有可用规格", description = "获取所有可用规格")
 	@RequestLogger("获取所有可用规格")

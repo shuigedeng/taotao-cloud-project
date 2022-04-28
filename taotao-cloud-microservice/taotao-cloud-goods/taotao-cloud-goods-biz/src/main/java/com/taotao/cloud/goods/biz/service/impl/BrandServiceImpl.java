@@ -15,12 +15,12 @@ import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.entity.Goods;
-import com.taotao.cloud.goods.biz.mapper.BrandMapper;
-import com.taotao.cloud.goods.biz.mapstruct.BrandMapStruct;
-import com.taotao.cloud.goods.biz.service.BrandService;
-import com.taotao.cloud.goods.biz.service.CategoryBrandService;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
+import com.taotao.cloud.goods.biz.mapper.IBrandMapper;
+import com.taotao.cloud.goods.biz.mapstruct.IBrandMapStruct;
+import com.taotao.cloud.goods.biz.service.IBrandService;
+import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,20 +38,20 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 @Service
-public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
+public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implements IBrandService {
 
 	/**
 	 * 分类品牌绑定服务
 	 */
-	private final CategoryBrandService categoryBrandService;
+	private final ICategoryBrandService categoryBrandService;
 	/**
 	 * 分类服务
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 	/**
 	 * 商品服务
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 
 	@Override
 	public IPage<Brand> getBrandsByPage(BrandPageQuery page) {
@@ -81,7 +81,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 			!= null) {
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
-		return this.save(BrandMapStruct.INSTANCE.brandDTOToBrand(brandDTO));
+		return this.save(IBrandMapStruct.INSTANCE.brandDTOToBrand(brandDTO));
 	}
 
 	@Override

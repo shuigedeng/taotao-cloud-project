@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.goods.biz.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.entity.Specification;
-import com.taotao.cloud.goods.biz.mapper.CategorySpecificationMapper;
-import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
+import com.taotao.cloud.goods.biz.mapper.ICategorySpecificationMapper;
+import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +19,8 @@ import java.util.List;
  */
 @Service
 public class CategorySpecificationServiceImpl extends
-	ServiceImpl<CategorySpecificationMapper, CategorySpecification> implements
-	CategorySpecificationService {
+	ServiceImpl<ICategorySpecificationMapper, CategorySpecification> implements
+	ICategorySpecificationService {
 
 	@Override
 	public List<Specification> getCategorySpecList(Long categoryId) {

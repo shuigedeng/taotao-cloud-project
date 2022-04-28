@@ -16,9 +16,9 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.Trade;
-import com.taotao.cloud.order.biz.mapper.order.TradeMapper;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import com.taotao.cloud.order.biz.service.order.TradeService;
+import com.taotao.cloud.order.biz.mapper.order.ITradeMapper;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.order.ITradeService;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
@@ -26,24 +26,28 @@ import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 /**
  * 交易业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:19
  */
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements TradeService {
+public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implements ITradeService {
 
 	/**
 	 * 缓存
@@ -52,7 +56,7 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
 	/**
 	 * 订单
 	 */
-	private final OrderService orderService;
+	private final IOrderService orderService;
 	/**
 	 * 会员
 	 */

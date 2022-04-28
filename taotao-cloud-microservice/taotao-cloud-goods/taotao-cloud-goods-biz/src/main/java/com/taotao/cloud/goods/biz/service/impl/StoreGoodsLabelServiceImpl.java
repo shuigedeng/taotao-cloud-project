@@ -11,8 +11,8 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
-import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
-import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
+import com.taotao.cloud.goods.biz.mapper.IStoreGoodsLabelMapper;
+import com.taotao.cloud.goods.biz.service.IStoreGoodsLabelService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ import java.util.Objects;
  */
 @Service
 public class StoreGoodsLabelServiceImpl extends
-	ServiceImpl<StoreGoodsLabelMapper, StoreGoodsLabel> implements StoreGoodsLabelService {
+	ServiceImpl<IStoreGoodsLabelMapper, StoreGoodsLabel> implements IStoreGoodsLabelService {
 
 	/**
 	 * 缓存

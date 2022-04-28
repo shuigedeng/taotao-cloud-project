@@ -9,7 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.util.ClassUtils;
 
 /**
  * --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED
@@ -17,8 +16,8 @@ import org.springframework.util.ClassUtils;
  * --add-opens java.base/java.math=ALL-UNNAMED
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-12 10:45:43
+ * @version 2022.04
+ * @since 2022-04-28 08:48:21
  */
 @EnableBinding({TaoTaoCloudSink.class, TaoTaoCloudSource.class})
 @TaoTaoCloudApplication

@@ -3,14 +3,18 @@ package com.taotao.cloud.order.biz.service.cart.render.impl;
 import com.taotao.cloud.order.api.dto.cart.StoreRemarkDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
 import org.springframework.stereotype.Service;
 
 /**
  * sn 生成
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:35
  */
 @Service
-public class CartSnRender implements CartRenderStep {
+public class CartSnRender implements ICartRenderStep {
 
 	@Override
 	public RenderStepEnums step() {

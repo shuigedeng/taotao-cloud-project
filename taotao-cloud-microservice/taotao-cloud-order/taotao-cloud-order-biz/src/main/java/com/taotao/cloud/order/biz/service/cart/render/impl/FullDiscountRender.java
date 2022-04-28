@@ -8,8 +8,12 @@ import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
 import com.taotao.cloud.order.biz.service.cart.render.util.PromotionPriceUtil;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,16 +22,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
  * FullDiscountRender
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:49
  */
 @AllArgsConstructor
 @Service
-public class FullDiscountRender implements CartRenderStep {
+public class FullDiscountRender implements ICartRenderStep {
 
 	private final FullDiscountService fullDiscountService;
 
@@ -107,8 +111,9 @@ public class FullDiscountRender implements CartRenderStep {
 	/**
 	 * 渲染满折
 	 *
-	 * @param cart
-	 * @param skuPriceDetail
+	 * @param cart cart
+	 * @param skuPriceDetail skuPriceDetail
+	 * @param rate rate
 	 */
 	private void renderFullRate(CartVO cart, Map<String, BigDecimal> skuPriceDetail,
 		BigDecimal rate) {

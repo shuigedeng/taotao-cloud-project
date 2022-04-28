@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.google.gson.Gson;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
@@ -11,7 +12,7 @@ import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.PointSetting;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IOrderService orderService;
 
 	/**
 	 * 非积分订单订单完成后赠送积分

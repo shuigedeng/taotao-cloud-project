@@ -1,6 +1,5 @@
 package com.taotao.cloud.order.biz.controller.buyer;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
@@ -9,14 +8,10 @@ import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.vo.cart.TradeParams;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
-import com.taotao.cloud.order.biz.service.cart.CartService;
+import com.taotao.cloud.order.biz.service.cart.ICartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,8 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * 买家端，购物车API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:56:54
  */
 @AllArgsConstructor
 @Validated
@@ -42,7 +44,7 @@ public class CartController {
 	/**
 	 * 购物车
 	 */
-	private final CartService cartService;
+	private final ICartService cartService;
 
 	@Operation(summary = "向购物车中添加一个产品", description = "向购物车中添加一个产品")
 	@RequestLogger("向购物车中添加一个产品")

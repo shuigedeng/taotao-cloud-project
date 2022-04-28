@@ -9,8 +9,8 @@ import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +21,9 @@ import org.springframework.stereotype.Component;
 public class VerificationOrderExecute implements OrderStatusChangeEvent {
 
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
     @Autowired
-    private OrderItemService orderItemService;
+    private IOrderItemService orderItemService;
     @Override
     public void orderChange(OrderMessage orderMessage) {
         //订单状态为待核验，添加订单添加核验码

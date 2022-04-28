@@ -13,12 +13,12 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
-import com.taotao.cloud.goods.biz.mapper.CategoryMapper;
+import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryBrandService;
-import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
+import com.taotao.cloud.goods.biz.service.ICategoryParameterGroupService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
@@ -44,8 +44,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 @CacheConfig(cacheNames = "{category}")
-public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements
-	CategoryService {
+public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> implements
+	ICategoryService {
 
 	private static final String DELETE_FLAG_COLUMN = "delete_flag";
 	/**
@@ -55,15 +55,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	/**
 	 * 分类品牌服务
 	 */
-	private final CategoryBrandService categoryBrandService;
+	private final ICategoryBrandService categoryBrandService;
 	/**
 	 * 分类绑定参数服务
 	 */
-	private final CategoryParameterGroupService categoryParameterGroupService;
+	private final ICategoryParameterGroupService categoryParameterGroupService;
 	/**
 	 * 分类规格服务
 	 */
-	private final CategorySpecificationService categorySpecificationService;
+	private final ICategorySpecificationService categorySpecificationService;
 
 	@Override
 	public List<Category> dbList(Long parentId) {

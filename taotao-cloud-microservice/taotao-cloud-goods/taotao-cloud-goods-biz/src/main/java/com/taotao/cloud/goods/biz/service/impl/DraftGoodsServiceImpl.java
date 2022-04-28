@@ -14,12 +14,12 @@ import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.mapper.DraftGoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.IDraftGoodsMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IDraftGoodsMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.DraftGoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.IDraftGoodsService;
+import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,21 +38,21 @@ import java.util.Map;
  */
 @AllArgsConstructor
 @Service
-public class DraftGoodsServiceImpl extends ServiceImpl<DraftGoodsMapper, DraftGoods> implements
-	DraftGoodsService {
+public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftGoods> implements
+	IDraftGoodsService {
 
 	/**
 	 * 分类
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 	/**
 	 * 商品相册
 	 */
-	private final GoodsGalleryService goodsGalleryService;
+	private final IGoodsGalleryService goodsGalleryService;
 	/**
 	 * 规格商品
 	 */
-	private final GoodsSkuService goodsSkuService;
+	private final IGoodsSkuService goodsSkuService;
 
 	@Override
 	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {

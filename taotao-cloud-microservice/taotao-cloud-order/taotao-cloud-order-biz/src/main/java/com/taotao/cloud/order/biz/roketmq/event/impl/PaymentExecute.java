@@ -5,7 +5,8 @@ import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class PaymentExecute implements OrderStatusChangeEvent {
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IOrderService orderService;
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {

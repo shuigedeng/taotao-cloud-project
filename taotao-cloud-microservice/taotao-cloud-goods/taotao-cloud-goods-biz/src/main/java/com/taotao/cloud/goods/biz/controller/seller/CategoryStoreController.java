@@ -4,13 +4,12 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
-import com.taotao.cloud.goods.biz.service.CategoryBrandService;
-import com.taotao.cloud.goods.biz.service.CategoryService;
+import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 店铺端,商品分类接口
@@ -36,11 +37,11 @@ public class CategoryStoreController {
 	/**
 	 * 分类服务
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 	/**
 	 * 分类品牌服务
 	 */
-	private final CategoryBrandService categoryBrandService;
+	private final ICategoryBrandService categoryBrandService;
 	/**
 	 * 店铺详情服务
 	 */

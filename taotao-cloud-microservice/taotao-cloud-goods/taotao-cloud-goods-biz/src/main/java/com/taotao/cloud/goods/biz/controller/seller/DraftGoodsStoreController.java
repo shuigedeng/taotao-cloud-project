@@ -11,7 +11,7 @@ import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.DraftGoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
-import com.taotao.cloud.goods.biz.service.DraftGoodsService;
+import com.taotao.cloud.goods.biz.service.IDraftGoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -43,7 +43,7 @@ public class DraftGoodsStoreController {
 	/**
 	 * 草稿商品服务
 	 */
-	private final DraftGoodsService draftGoodsService;
+	private final IDraftGoodsService draftGoodsService;
 
 	@Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表")
 	@RequestLogger("分页获取草稿商品列表")

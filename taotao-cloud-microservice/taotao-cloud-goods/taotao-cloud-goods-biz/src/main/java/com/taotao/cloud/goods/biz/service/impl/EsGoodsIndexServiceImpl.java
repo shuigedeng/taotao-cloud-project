@@ -24,6 +24,7 @@ import com.taotao.cloud.goods.biz.elasticsearch.BaseElasticsearchService;
 import com.taotao.cloud.goods.biz.elasticsearch.ElasticsearchProperties;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsAttribute;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndexRepository;
 import com.taotao.cloud.goods.biz.elasticsearch.EsSuffix;
 import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.entity.Category;
@@ -31,15 +32,14 @@ import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.entity.GoodsWords;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
-import com.taotao.cloud.goods.biz.repository.EsGoodsIndexRepository;
-import com.taotao.cloud.goods.biz.service.BrandService;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
-import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
-import com.taotao.cloud.goods.biz.service.GoodsWordsService;
-import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
+import com.taotao.cloud.goods.biz.service.IBrandService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.IEsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.IEsGoodsSearchService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.IGoodsWordsService;
+import com.taotao.cloud.goods.biz.service.IStoreGoodsLabelService;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionService;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -95,7 +95,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
-	EsGoodsIndexService {
+	IEsGoodsIndexService {
 
 	private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";
 
@@ -106,21 +106,21 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Autowired
 	private EsGoodsIndexRepository goodsIndexRepository;
 	@Autowired
-	private EsGoodsSearchService goodsSearchService;
+	private IEsGoodsSearchService goodsSearchService;
 	@Autowired
-	private GoodsWordsService goodsWordsService;
+	private IGoodsWordsService goodsWordsService;
 	@Autowired
 	private IFeignPromotionService feignPromotionService;
 	@Autowired
-	private GoodsSkuService goodsSkuService;
+	private IGoodsSkuService goodsSkuService;
 	@Autowired
-	private GoodsService goodsService;
+	private IGoodsService goodsService;
 	@Autowired
-	private BrandService brandService;
+	private IBrandService brandService;
 	@Autowired
-	private CategoryService categoryService;
+	private ICategoryService categoryService;
 	@Autowired
-	private StoreGoodsLabelService storeGoodsLabelService;
+	private IStoreGoodsLabelService storeGoodsLabelService;
 	@Autowired
 	private RedisRepository redisRepository;
 	/**
@@ -178,7 +178,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 						esGoodsIndex.setSkuSource(skuSource--);
 						esGoodsIndices.add(esGoodsIndex);
 						//库存锁是在redis做的，所以生成索引，同时更新一下redis中的库存数量
-						redisRepository.set(GoodsSkuService.getStockCacheKey(goodsSku.getId()),
+						redisRepository.set(IGoodsSkuService.getStockCacheKey(goodsSku.getId()),
 							goodsSku.getQuantity());
 					}
 				}

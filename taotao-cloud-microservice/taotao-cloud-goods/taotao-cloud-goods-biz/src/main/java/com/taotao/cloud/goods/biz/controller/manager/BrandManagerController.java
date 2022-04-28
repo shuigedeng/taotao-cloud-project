@@ -8,13 +8,11 @@ import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
-import com.taotao.cloud.goods.biz.mapstruct.BrandMapStruct;
-import com.taotao.cloud.goods.biz.service.BrandService;
+import com.taotao.cloud.goods.biz.mapstruct.IBrandMapStruct;
+import com.taotao.cloud.goods.biz.service.IBrandService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * 管理端,品牌接口
@@ -45,7 +46,7 @@ public class BrandManagerController {
 	/**
 	 * 品牌
 	 */
-	private final BrandService brandService;
+	private final IBrandService brandService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")
@@ -53,7 +54,7 @@ public class BrandManagerController {
 	@GetMapping(value = "/{id}")
 	public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
 		Brand brand = brandService.getById(id);
-		return Result.success(BrandMapStruct.INSTANCE.brandToBrandVO(brand));
+		return Result.success(IBrandMapStruct.INSTANCE.brandToBrandVO(brand));
 	}
 
 	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
@@ -62,7 +63,7 @@ public class BrandManagerController {
 	@GetMapping(value = "/all/available")
 	public Result<List<BrandVO>> getAllAvailable() {
 		List<Brand> list = brandService.getAllAvailable();
-		return Result.success(BrandMapStruct.INSTANCE.brandsToBrandVOs(list));
+		return Result.success(IBrandMapStruct.INSTANCE.brandsToBrandVOs(list));
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取")

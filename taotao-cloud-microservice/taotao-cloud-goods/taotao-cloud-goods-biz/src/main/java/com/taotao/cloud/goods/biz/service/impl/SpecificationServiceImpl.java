@@ -11,9 +11,9 @@ import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.goods.api.query.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.entity.Specification;
-import com.taotao.cloud.goods.biz.mapper.SpecificationMapper;
-import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
-import com.taotao.cloud.goods.biz.service.SpecificationService;
+import com.taotao.cloud.goods.biz.mapper.ISpecificationMapper;
+import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.ISpecificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +30,12 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class SpecificationServiceImpl extends
-	ServiceImpl<SpecificationMapper, Specification> implements SpecificationService {
+	ServiceImpl<ISpecificationMapper, Specification> implements ISpecificationService {
 
 	/**
 	 * 分类-规格绑定服务
 	 */
-	private final CategorySpecificationService categorySpecificationService;
+	private final ICategorySpecificationService categorySpecificationService;
 	/**
 	 * 分类服务
 	 */

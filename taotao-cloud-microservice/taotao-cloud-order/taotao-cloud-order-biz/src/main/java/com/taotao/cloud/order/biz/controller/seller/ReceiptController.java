@@ -7,12 +7,10 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import com.taotao.cloud.order.biz.service.order.ReceiptService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.order.IReceiptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Objects;
-
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,8 +21,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 /**
  * 店铺端,发票API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:45
  */
 @AllArgsConstructor
 @Validated
@@ -33,9 +37,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/seller/receipt")
 public class ReceiptController {
 
-	private final ReceiptService receiptService;
+	private final IReceiptService receiptService;
 
-	private final OrderService orderService;
+	private final IOrderService orderService;
 
 	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")

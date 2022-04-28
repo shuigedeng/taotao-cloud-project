@@ -21,6 +21,10 @@ import java.util.Objects;
 
 /**
  * 订单交易投诉表
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:01:27
  */
 @Getter
 @Setter

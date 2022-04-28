@@ -10,7 +10,7 @@ import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleMapStruct;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +18,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -26,6 +31,10 @@ import java.util.List;
 
 /**
  * 店铺端,售后管理API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:33
  */
 @AllArgsConstructor
 @Validated
@@ -34,7 +43,7 @@ import java.util.List;
 @RequestMapping("/order/seller/aftersale")
 public class AfterSaleController {
 
-	private final  AfterSaleService afterSaleService;
+	private final IAfterSaleService afterSaleService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
 	@RequestLogger("查看售后服务详情")

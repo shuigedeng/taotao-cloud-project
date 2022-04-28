@@ -8,8 +8,14 @@ import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
 import com.taotao.cloud.order.biz.service.cart.render.util.PromotionPriceUtil;
+import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import com.taotao.cloud.promotion.api.vo.MemberCouponVO;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,16 +23,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
  * 购物促销信息渲染实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:44
  */
 @AllArgsConstructor
 @Service
-public class CouponRender implements CartRenderStep {
+public class CouponRender implements ICartRenderStep {
 
 	private final PromotionPriceUtil promotionPriceUtil;
 	private final MemberCouponService memberCouponService;
@@ -49,6 +55,7 @@ public class CouponRender implements CartRenderStep {
 	 * 渲染优惠券规则
 	 *
 	 * @param tradeDTO 交易dto
+	 * @since 2022-04-28 08:52:38
 	 */
 	private void renderCouponRule(TradeDTO tradeDTO) {
 		List<MemberCoupon> memberCouponList = memberCouponService.getMemberCoupons();
@@ -67,6 +74,7 @@ public class CouponRender implements CartRenderStep {
 	 *
 	 * @param tradeDTO         交易dto
 	 * @param memberCouponList 会员优惠券列表
+	 * @since 2022-04-28 08:52:40
 	 */
 	private void checkMemberExistCoupon(TradeDTO tradeDTO, List<MemberCoupon> memberCouponList) {
 		if (tradeDTO.getPlatformCoupon() != null
@@ -92,6 +100,7 @@ public class CouponRender implements CartRenderStep {
 	 *
 	 * @param tradeDTO     交易dto
 	 * @param memberCoupon 会员优惠券
+	 * @since 2022-04-28 08:52:50
 	 */
 	private void available(TradeDTO tradeDTO, MemberCoupon memberCoupon) {
 		if (memberCoupon == null) {

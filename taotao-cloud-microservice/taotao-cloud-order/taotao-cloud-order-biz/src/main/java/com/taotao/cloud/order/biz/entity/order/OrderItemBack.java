@@ -21,7 +21,8 @@ import java.util.Objects;
  * 订单明细表
  *
  * @author shuigedeng
- * @since 2020/4/30 15:42
+ * @version 2022.04
+ * @since 2022-04-28 09:01:38
  */
 @Getter
 @Setter

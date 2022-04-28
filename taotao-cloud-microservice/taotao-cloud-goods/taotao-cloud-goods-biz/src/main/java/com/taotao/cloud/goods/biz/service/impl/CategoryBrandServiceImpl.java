@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
-import com.taotao.cloud.goods.biz.mapper.CategoryBrandMapper;
-import com.taotao.cloud.goods.biz.service.CategoryBrandService;
+import com.taotao.cloud.goods.biz.mapper.ICategoryBrandMapper;
+import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +21,8 @@ import java.util.List;
  * @since 2022-04-27 17:01:32
  */
 @Service
-public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, CategoryBrand>
-	implements CategoryBrandService {
+public class CategoryBrandServiceImpl extends ServiceImpl<ICategoryBrandMapper, CategoryBrand>
+	implements ICategoryBrandService {
 
 	@Override
 	public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {

@@ -35,8 +35,8 @@ import java.util.Objects;
  * 购物车表
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/13 09:46
+ * @version 2022.04
+ * @since 2022-04-28 09:01:11
  */
 @Getter
 @Setter
@@ -84,7 +84,7 @@ public class Cart extends JpaSuperEntity<Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

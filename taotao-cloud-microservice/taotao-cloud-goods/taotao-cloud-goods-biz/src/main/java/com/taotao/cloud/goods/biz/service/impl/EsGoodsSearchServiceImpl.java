@@ -14,8 +14,8 @@ import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
-import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
-import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
+import com.taotao.cloud.goods.biz.service.IEsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.IEsGoodsSearchService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.common.lucene.search.function.FieldValueFactorFunction;
@@ -69,7 +69,7 @@ import java.util.Set;
  * @since 2022-04-27 17:02:32
  */
 @Service
-public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
+public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 
 	private static final String ATTR_PATH = "attrList";
 	private static final String ATTR_VALUE = "attrList.value";
@@ -89,7 +89,7 @@ public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 	private ElasticsearchRestTemplate restTemplate;
 
 	@Autowired
-	private EsGoodsIndexService esGoodsIndexService;
+	private IEsGoodsIndexService esGoodsIndexService;
 
 	/**
 	 * 缓存

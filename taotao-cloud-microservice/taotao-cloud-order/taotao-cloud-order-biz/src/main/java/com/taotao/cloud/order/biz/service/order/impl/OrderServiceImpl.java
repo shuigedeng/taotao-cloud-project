@@ -28,7 +28,6 @@ import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderBatchDeliverDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
-import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -37,6 +36,7 @@ import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
@@ -47,14 +47,14 @@ import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
 import com.taotao.cloud.order.biz.entity.order.Trade;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
-import com.taotao.cloud.order.biz.mapper.order.OrderItemMapper;
-import com.taotao.cloud.order.biz.mapper.order.OrderMapper;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import com.taotao.cloud.order.biz.service.order.ReceiptService;
-import com.taotao.cloud.order.biz.service.order.StoreFlowService;
-import com.taotao.cloud.order.biz.service.order.TradeService;
-import com.taotao.cloud.order.biz.service.trade.OrderLogService;
+import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
+import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.order.IReceiptService;
+import com.taotao.cloud.order.biz.service.order.IStoreFlowService;
+import com.taotao.cloud.order.biz.service.order.ITradeService;
+import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -66,17 +66,8 @@ import com.taotao.cloud.stream.framework.trigger.message.PintuanOrderMessage;
 import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.net.URLEncoder;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -85,13 +76,28 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import zipkin2.storage.Traces;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 子订单业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:12
  */
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implements IOrderService {
 
 	private static final String ORDER_SN_COLUMN = "order_sn";
 
@@ -102,15 +108,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	/**
 	 * 订单货物数据层
 	 */
-	private final OrderItemMapper orderItemMapper;
+	private final IOrderItemMapper orderItemMapper;
 	/**
 	 * 发票
 	 */
-	private final ReceiptService receiptService;
+	private final IReceiptService receiptService;
 	/**
 	 * 订单货物
 	 */
-	private final OrderItemService orderItemService;
+	private final IOrderItemService orderItemService;
 	/**
 	 * 物流公司
 	 */
@@ -118,7 +124,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	/**
 	 * 订单日志
 	 */
-	private final OrderLogService orderLogService;
+	private final IOrderLogService orderLogService;
 	/**
 	 * RocketMQ
 	 */
@@ -130,7 +136,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	/**
 	 * 订单流水
 	 */
-	private final StoreFlowService storeFlowService;
+	private final IStoreFlowService storeFlowService;
 	/**
 	 * 拼团
 	 */
@@ -138,7 +144,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	/**
 	 * 交易服务
 	 */
-	private final TradeService tradeService;
+	private final ITradeService tradeService;
 
 	@Override
 	public Boolean intoDB(TradeDTO tradeDTO) {

@@ -18,6 +18,10 @@ import java.util.Objects;
 
 /**
  * 售后日志
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:00:49
  */
 @Getter
 @Setter

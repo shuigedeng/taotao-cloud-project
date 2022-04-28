@@ -22,6 +22,10 @@ import java.util.Objects;
 
 /**
  * 交易表
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:09
  */
 @Getter
 @Setter

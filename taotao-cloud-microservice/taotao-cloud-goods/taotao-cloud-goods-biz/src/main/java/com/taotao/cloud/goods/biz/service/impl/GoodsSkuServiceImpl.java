@@ -28,13 +28,13 @@ import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsAttribute;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
+import com.taotao.cloud.goods.biz.mapper.IGoodsSkuMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IGoodsSkuMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
-import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.IEsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
@@ -75,8 +75,8 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 @Service
-public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> implements
-	GoodsSkuService {
+public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> implements
+	IGoodsSkuService {
 
 	/**
 	 * 缓存服务
@@ -85,11 +85,11 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	/**
 	 * 分类服务
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 	/**
 	 * 商品相册服务
 	 */
-	private final GoodsGalleryService goodsGalleryService;
+	private final IGoodsGalleryService goodsGalleryService;
 	/**
 	 * rocketMq服务
 	 */
@@ -105,11 +105,11 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	/**
 	 * 商品服务
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 	/**
 	 * 商品索引服务
 	 */
-	private final EsGoodsIndexService goodsIndexService;
+	private final IEsGoodsIndexService goodsIndexService;
 	/**
 	 * 促销活动商品服务
 	 */
@@ -155,7 +155,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 			//删除旧索引
 			for (GoodsSkuVO goodsSkuVO : goodsListByGoodsId) {
 				oldSkuIds.add(goodsSkuVO.getId());
-				redisRepository.del(GoodsSkuService.getCacheKeys(goodsSkuVO.getId()));
+				redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSkuVO.getId()));
 			}
 			goodsIndexService.deleteIndexByIds(oldSkuIds);
 			this.removeByIds(oldSkuIds);
@@ -199,38 +199,38 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean update(GoodsSku goodsSku) {
 		this.updateById(goodsSku);
-		redisRepository.del(GoodsSkuService.getCacheKeys(goodsSku.getId()));
-		redisRepository.set(GoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
+		redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSku.getId()));
+		redisRepository.set(IGoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
 		return true;
 	}
 
 	@Override
 	public Boolean clearCache(Long skuId) {
-		redisRepository.del(GoodsSkuService.getCacheKeys(skuId));
+		redisRepository.del(IGoodsSkuService.getCacheKeys(skuId));
 		return true;
 	}
 
 	@Override
 	public GoodsSku getGoodsSkuByIdFromCache(Long skuId) {
 		//获取缓存中的sku
-		GoodsSku goodsSku = (GoodsSku) redisRepository.get(GoodsSkuService.getCacheKeys(skuId));
+		GoodsSku goodsSku = (GoodsSku) redisRepository.get(IGoodsSkuService.getCacheKeys(skuId));
 		//如果缓存中没有信息，则查询数据库，然后写入缓存
 		if (goodsSku == null) {
 			goodsSku = this.getById(skuId);
 			if (goodsSku == null) {
 				return null;
 			}
-			redisRepository.set(GoodsSkuService.getCacheKeys(skuId), goodsSku);
+			redisRepository.set(IGoodsSkuService.getCacheKeys(skuId), goodsSku);
 		}
 
 		//获取商品库存
-		Integer stock = (Integer) redisRepository.get(GoodsSkuService.getStockCacheKey(skuId));
+		Integer stock = (Integer) redisRepository.get(IGoodsSkuService.getStockCacheKey(skuId));
 
 		//库存不为空,库存与缓存中不一致
 		if (stock != null && !goodsSku.getQuantity().equals(stock)) {
 			//写入最新的库存信息
 			goodsSku.setQuantity(stock);
-			redisRepository.set(GoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
+			redisRepository.set(IGoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
 		}
 		return goodsSku;
 	}
@@ -344,8 +344,8 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 		if (Boolean.TRUE.equals(update)) {
 			List<GoodsSku> goodsSkus = this.getGoodsSkuListByGoodsId(goods.getId());
 			for (GoodsSku sku : goodsSkus) {
-				redisRepository.del(GoodsSkuService.getCacheKeys(sku.getId()));
-				redisRepository.set(GoodsSkuService.getCacheKeys(sku.getId()), sku);
+				redisRepository.del(IGoodsSkuService.getCacheKeys(sku.getId()));
+				redisRepository.set(IGoodsSkuService.getCacheKeys(sku.getId()), sku);
 			}
 			if (!goodsSkus.isEmpty()) {
 				generateEs(goods);
@@ -358,14 +358,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 	public List<GoodsSku> getGoodsSkuByIdFromCache(List<Long> ids) {
 		List<String> keys = new ArrayList<>();
 		for (Long id : ids) {
-			keys.add(GoodsSkuService.getCacheKeys(id));
+			keys.add(IGoodsSkuService.getCacheKeys(id));
 		}
 		List<GoodsSku> list = redisRepository.mGet(keys);
 		if (list == null || list.isEmpty()) {
 			list = new ArrayList<>();
 			List<GoodsSku> goodsSkus = listByIds(ids);
 			for (GoodsSku skus : goodsSkus) {
-				redisRepository.set(GoodsSkuService.getCacheKeys(skus.getId()), skus);
+				redisRepository.set(IGoodsSkuService.getCacheKeys(skus.getId()), skus);
 				list.add(skus);
 			}
 		}
@@ -464,8 +464,8 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 			if (update) {
 				redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsSku.getGoodsId());
 			}
-			redisRepository.set(GoodsSkuService.getCacheKeys(skuId), goodsSku);
-			redisRepository.set(GoodsSkuService.getStockCacheKey(skuId), quantity);
+			redisRepository.set(IGoodsSkuService.getCacheKeys(skuId), goodsSku);
+			redisRepository.set(IGoodsSkuService.getStockCacheKey(skuId), quantity);
 
 			//更新商品库存
 			List<GoodsSku> goodsSkus = new ArrayList<>();
@@ -477,7 +477,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 
 	@Override
 	public Integer getStock(Long skuId) {
-		String cacheKeys = GoodsSkuService.getStockCacheKey(skuId);
+		String cacheKeys = IGoodsSkuService.getStockCacheKey(skuId);
 		Integer stock = (Integer) redisRepository.get(cacheKeys);
 		if (stock != null) {
 			return stock;
@@ -605,7 +605,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<GoodsSkuMapper, GoodsSku> i
 			}
 			goodsSku.setGoodsType(goods.getGoodsType());
 			skus.add(goodsSku);
-			redisRepository.set(GoodsSkuService.getStockCacheKey(goodsSku.getId()),
+			redisRepository.set(IGoodsSkuService.getStockCacheKey(goodsSku.getId()),
 				goodsSku.getQuantity());
 		}
 		this.saveBatch(skus);

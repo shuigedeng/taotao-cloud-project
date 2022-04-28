@@ -1,14 +1,16 @@
 package com.taotao.cloud.order.biz.service.purchase.impl;
 
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.biz.entity.purchase.PurchaseOrder;
-import com.taotao.cloud.order.biz.mapper.purchase.PurchaseOrderMapper;
-import com.taotao.cloud.order.biz.service.purchase.PurchaseOrderItemService;
-import com.taotao.cloud.order.biz.service.purchase.PurchaseOrderService;
+import com.taotao.cloud.order.biz.entity.purchase.PurchaseOrderItem;
+import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseOrderMapper;
+import com.taotao.cloud.order.biz.service.purchase.IPurchaseOrderItemService;
+import com.taotao.cloud.order.biz.service.purchase.IPurchaseOrderService;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 采购单业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:40
  */
 @Service
-public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, PurchaseOrder> implements
-	PurchaseOrderService {
+public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, PurchaseOrder> implements
+	IPurchaseOrderService {
     @Autowired
-    private PurchaseOrderItemService purchaseOrderItemService;
+    private IPurchaseOrderItemService purchaseOrderItemService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

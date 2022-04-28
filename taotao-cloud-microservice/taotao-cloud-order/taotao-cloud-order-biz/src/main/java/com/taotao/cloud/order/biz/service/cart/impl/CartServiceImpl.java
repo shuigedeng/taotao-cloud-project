@@ -2,9 +2,12 @@ package com.taotao.cloud.order.biz.service.cart.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
@@ -17,11 +20,15 @@ import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.api.vo.cart.TradeParams;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.cart.CartService;
+import com.taotao.cloud.order.biz.service.cart.ICartService;
 import com.taotao.cloud.order.biz.service.cart.render.TradeBuilder;
+import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
+import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
+import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
 import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
@@ -29,15 +36,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * 购物车业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:49:47
  */
 @AllArgsConstructor
 @Service
-public class CartServiceImpl implements CartService {
+public class CartServiceImpl implements ICartService {
 
 	static String errorMessage = "购物车异常，请稍后重试";
 

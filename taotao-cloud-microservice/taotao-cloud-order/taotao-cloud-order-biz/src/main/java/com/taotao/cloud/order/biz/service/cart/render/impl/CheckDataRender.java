@@ -4,6 +4,8 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -13,30 +15,34 @@ import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
+import lombok.AllArgsConstructor;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
-import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
  * 商品有效性校验
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:37
  */
 @AllArgsConstructor
 @Service
-public class CheckDataRender implements CartRenderStep {
+public class CheckDataRender implements ICartRenderStep {
 
 	private final IFeignGoodsSkuService goodsSkuService;
 
-	private final OrderService orderService;
+	private final IOrderService orderService;
 
 	private final IFeignPintuanService pintuanService;
 
@@ -65,6 +71,7 @@ public class CheckDataRender implements CartRenderStep {
 	 * 校验商品属性
 	 *
 	 * @param tradeDTO 购物车视图
+	 * @since 2022-04-28 08:52:11
 	 */
 	private void checkData(TradeDTO tradeDTO) {
 		//循环购物车中的商品
@@ -114,7 +121,7 @@ public class CheckDataRender implements CartRenderStep {
 	/**
 	 * 店铺分组
 	 *
-	 * @param tradeDTO
+	 * @param tradeDTO tradeDTO
 	 */
 	private void groupStore(TradeDTO tradeDTO) {
 		//渲染的购物车
@@ -141,7 +148,7 @@ public class CheckDataRender implements CartRenderStep {
 	/**
 	 * 订单预校验 1、自己拼团自己创建都拼团判定、拼团限购 2、积分购买，积分足够与否
 	 *
-	 * @param tradeDTO
+	 * @param tradeDTO tradeDTO
 	 */
 	private void preCalibration(TradeDTO tradeDTO) {
 

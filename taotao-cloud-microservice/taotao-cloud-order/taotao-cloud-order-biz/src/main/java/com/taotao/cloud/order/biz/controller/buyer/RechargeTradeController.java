@@ -1,14 +1,9 @@
 package com.taotao.cloud.order.biz.controller.buyer;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -16,8 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 /**
  * 买家端,预存款充值记录API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:06
  */
 @AllArgsConstructor
 @Validated

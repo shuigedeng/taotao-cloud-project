@@ -11,14 +11,11 @@ import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Arrays;
-import java.util.List;
-import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +25,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotEmpty;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 管理端,商品管理接口
@@ -46,11 +47,11 @@ public class GoodsManagerController {
 	/**
 	 * 商品服务
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 	/**
 	 * 规格商品服务
 	 */
-	private final GoodsSkuService goodsSkuService;
+	private final IGoodsSkuService goodsSkuService;
 
 	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger("分页获取")

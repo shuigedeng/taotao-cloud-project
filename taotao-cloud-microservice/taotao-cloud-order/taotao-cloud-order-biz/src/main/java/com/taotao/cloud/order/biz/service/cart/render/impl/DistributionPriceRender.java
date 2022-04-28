@@ -5,21 +5,24 @@ import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.taotao.cloud.redis.repository.RedisRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
  * 分销佣金计算
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:47
  */
 @AllArgsConstructor
 @Service
-public class DistributionPriceRender implements CartRenderStep {
+public class DistributionPriceRender implements ICartRenderStep {
 
 	/**
 	 * 缓存
@@ -40,7 +43,7 @@ public class DistributionPriceRender implements CartRenderStep {
 	/**
 	 * 渲染分销佣金
 	 *
-	 * @param tradeDTO
+	 * @param tradeDTO tradeDTO
 	 */
 	private void renderDistribution(TradeDTO tradeDTO) {
 

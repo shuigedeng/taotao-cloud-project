@@ -5,14 +5,19 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Service;
 
 /**
  * 促销价格计算业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:15
  */
 @Service
 public class PromotionPriceUtil {

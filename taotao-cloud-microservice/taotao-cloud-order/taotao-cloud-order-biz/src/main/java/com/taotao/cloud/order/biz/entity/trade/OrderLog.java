@@ -20,7 +20,9 @@ import java.util.Objects;
 /**
  * 订单日志
  *
- * @since 2020-03-25 2:30 下午
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:36
  */
 @Getter
 @Setter

@@ -10,18 +10,22 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
-import com.taotao.cloud.order.biz.mapper.order.ReceiptMapper;
-import com.taotao.cloud.order.biz.service.order.ReceiptService;
+import com.taotao.cloud.order.biz.mapper.order.IReceiptMapper;
+import com.taotao.cloud.order.biz.service.order.IReceiptService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * 发票业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:14
  */
 @AllArgsConstructor
 @Service
-public class ReceiptServiceImpl extends ServiceImpl<ReceiptMapper, Receipt> implements
-	ReceiptService {
+public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> implements
+	IReceiptService {
 
     @Override
     public IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery searchParams, PageVO pageVO) {

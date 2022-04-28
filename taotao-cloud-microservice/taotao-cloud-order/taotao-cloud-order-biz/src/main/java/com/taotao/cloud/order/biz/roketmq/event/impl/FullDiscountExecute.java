@@ -4,6 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
@@ -19,17 +21,19 @@ import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import com.taotao.cloud.order.biz.service.trade.OrderLogService;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 订单状态处理类
@@ -46,13 +50,13 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
     private MemberService memberService;
 
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
 
     @Autowired
-    private OrderItemService orderItemService;
+    private IOrderItemService orderItemService;
 
     @Autowired
-    private OrderLogService orderLogService;
+    private IOrderLogService orderLogService;
     @Autowired
     private MemberCouponService memberCouponService;
 

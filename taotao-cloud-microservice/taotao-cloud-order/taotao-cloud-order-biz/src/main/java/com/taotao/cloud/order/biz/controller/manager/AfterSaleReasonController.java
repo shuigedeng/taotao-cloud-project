@@ -9,16 +9,27 @@ import com.taotao.cloud.order.api.query.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleReasonMapStruct;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleReasonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,售后原因API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:11
  */
 @AllArgsConstructor
 @Validated
@@ -30,7 +41,7 @@ public class AfterSaleReasonController {
 	/**
 	 * 售后原因
 	 */
-	private final AfterSaleReasonService afterSaleReasonService;
+	private final IAfterSaleReasonService afterSaleReasonService;
 
 	@Operation(summary = "查看售后原因", description = "查看售后原因")
 	@RequestLogger("查看售后原因")

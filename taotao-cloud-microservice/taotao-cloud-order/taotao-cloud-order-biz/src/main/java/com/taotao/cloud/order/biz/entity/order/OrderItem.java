@@ -30,6 +30,10 @@ import java.util.stream.Collectors;
 
 /**
  * 子订单表
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:01:35
  */
 @Getter
 @Setter

@@ -4,17 +4,22 @@ import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
 /**
  * 佣金计算
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:40
  */
 @Service
-public class CheckedFilterRender implements CartRenderStep {
+public class CheckedFilterRender implements ICartRenderStep {
 
 	@Override
 	public RenderStepEnums step() {

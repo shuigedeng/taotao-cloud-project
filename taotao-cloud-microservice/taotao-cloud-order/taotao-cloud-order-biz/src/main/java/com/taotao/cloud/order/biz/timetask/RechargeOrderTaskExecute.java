@@ -8,13 +8,18 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.OrderSetting;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * 充值订单自动取消（每分钟执行）
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:48:27
  */
 @Component
 public class RechargeOrderTaskExecute implements EveryMinuteExecute {

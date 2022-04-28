@@ -2,13 +2,11 @@ package com.taotao.cloud.goods.biz.controller.buyer;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
-import com.taotao.cloud.goods.biz.service.CategoryService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 /**
@@ -35,7 +36,7 @@ public class CategoryBuyerController {
 	/**
 	 * 商品分类
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 
 	@RequestLogger
 	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")

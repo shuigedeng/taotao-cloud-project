@@ -1,20 +1,17 @@
 package com.taotao.cloud.goods.biz.controller.seller;
 
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.GoodsUnitVO;
 import com.taotao.cloud.goods.biz.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.service.GoodsUnitService;
+import com.taotao.cloud.goods.biz.service.IGoodsUnitService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +35,7 @@ public class GoodsUnitStoreController {
 	/**
 	 * 商品计量单位服务
 	 */
-	private final GoodsUnitService goodsUnitService;
+	private final IGoodsUnitService goodsUnitService;
 
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
 	@RequestLogger("分页获取商品计量单位")

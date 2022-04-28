@@ -3,21 +3,16 @@ package com.taotao.cloud.order.biz.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
-import com.taotao.cloud.order.biz.service.order.OrderPriceService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderPriceService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,8 +24,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.List;
+
 /**
  * 管理端,订单API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:16
  */
 @AllArgsConstructor
 @Validated
@@ -42,11 +47,11 @@ public class OrderController {
 	/**
 	 * 订单
 	 */
-	private final OrderService orderService;
+	private final IOrderService orderService;
 	/**
 	 * 订单价格
 	 */
-	private final OrderPriceService orderPriceService;
+	private final IOrderPriceService orderPriceService;
 
 	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页")
 	@RequestLogger("查询订单列表分页")

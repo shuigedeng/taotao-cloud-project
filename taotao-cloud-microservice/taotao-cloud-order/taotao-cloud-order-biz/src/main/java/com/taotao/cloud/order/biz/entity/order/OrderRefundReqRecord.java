@@ -21,7 +21,8 @@ import java.util.Objects;
  * 售后退款操作记录表
  *
  * @author shuigedeng
- * @since 2020/4/30 15:49
+ * @version 2022.04
+ * @since 2022-04-28 09:01:53
  */
 @Getter
 @Setter

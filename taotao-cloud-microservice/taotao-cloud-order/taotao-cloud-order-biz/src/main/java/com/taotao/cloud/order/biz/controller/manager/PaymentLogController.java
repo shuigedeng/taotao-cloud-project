@@ -4,7 +4,7 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,收款日志API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:22
  */
 @AllArgsConstructor
 @Validated
@@ -25,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/manager/payment/log")
 public class PaymentLogController {
 
-	private final OrderService orderService;
+	private final IOrderService orderService;
 
 	@Operation(summary = "分页获取支付日志", description = "分页获取支付日志")
 	@RequestLogger("分页获取支付日志")
