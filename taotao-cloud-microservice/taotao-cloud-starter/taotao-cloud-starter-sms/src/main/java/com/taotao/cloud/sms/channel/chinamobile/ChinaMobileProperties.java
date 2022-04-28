@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 移动云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:37
  */
 @ConfigurationProperties(prefix = ChinaMobileProperties.PREFIX)
 public class ChinaMobileProperties extends AbstractHandlerProperties<String> {

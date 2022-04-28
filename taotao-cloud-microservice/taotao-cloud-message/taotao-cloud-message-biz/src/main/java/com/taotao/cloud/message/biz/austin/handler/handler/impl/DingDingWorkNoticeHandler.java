@@ -16,7 +16,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
 import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,7 +28,7 @@ import org.springframework.stereotype.Service;
  *
  * 
  */
-@Slf4j
+
 @Service
 public class DingDingWorkNoticeHandler extends BaseHandler implements Handler {
 

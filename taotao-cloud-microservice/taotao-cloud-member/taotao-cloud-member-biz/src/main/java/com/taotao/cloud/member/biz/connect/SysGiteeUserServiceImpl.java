@@ -26,7 +26,7 @@
 // /**
 //  * gitee用户表
 //  */
-// @Slf4j
+// 
 // @Service
 // @AllArgsConstructor
 // public class SysGiteeUserServiceImpl extends SuperServiceImpl<SysGiteeUserMapper, SysGiteeUser> implements ISysGiteeUserService {

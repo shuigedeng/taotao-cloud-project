@@ -5,6 +5,10 @@ import com.taotao.cloud.goods.biz.entity.Parameters;
 
 /**
  * 商品参数数据处理层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:57:35
  */
 public interface ParametersMapper extends BaseMapper<Parameters> {
 

@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.HmacAlgorithm;
 import com.taotao.cloud.payment.biz.kit.core.XmlHelper;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -22,13 +22,21 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.cert.*;
-import java.util.*;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateExpiredException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.CertificateNotYetValidException;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 支付工具
  */
-@Slf4j
+
 public class PayKit {
 
     /**

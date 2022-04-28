@@ -21,8 +21,8 @@ import com.taotao.cloud.health.model.Message;
  * AbstractWarn
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-10 16:18:21
+ * @version 2022.04
+ * @since 2022-04-27 17:26:07
  */
 public abstract class AbstractWarn {
 
@@ -30,8 +30,7 @@ public abstract class AbstractWarn {
 	 * notify
 	 *
 	 * @param message message
-	 * @author shuigedeng
-	 * @since 2021-09-10 16:18:26
+	 * @since 2022-04-27 17:26:07
 	 */
 	public abstract void notify(Message message);
 

@@ -6,8 +6,10 @@ import com.taotao.cloud.common.support.tuple.IValueTwo;
 
 /**
  * 二元的
- * @param <A> 第一个元素
- * @param <B> 第二个元素
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:16
  */
 public class Pair<A,B> extends AbstractTuple
         implements IValueOne<A>, IValueTwo<B> {

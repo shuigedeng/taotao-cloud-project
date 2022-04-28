@@ -13,13 +13,15 @@
 package com.taotao.cloud.sms.loadbalancer;
 
 
-import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.handler.SendHandler;
+import com.taotao.cloud.sms.model.NoticeData;
 
 /**
  * 短信发送负载均衡
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:53:09
  */
 public interface SmsSenderLoadBalancer extends ILoadBalancer<SendHandler, NoticeData> {
 

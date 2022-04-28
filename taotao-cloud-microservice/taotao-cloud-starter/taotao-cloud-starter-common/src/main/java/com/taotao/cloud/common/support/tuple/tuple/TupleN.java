@@ -6,6 +6,10 @@ import static java.util.Objects.requireNonNull;
  * 表示有N个元素的元组类型
  * 可迭代
  * 不可变，线程安全
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:47
  */
 public final class TupleN extends Tuple {
 

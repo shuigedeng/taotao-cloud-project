@@ -14,6 +14,7 @@ package com.taotao.cloud.sms.service;
 
 import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.utils.StringUtils;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,6 +23,8 @@ import java.util.Collections;
  * 短信通知服务
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:29
  */
 public interface NoticeService {
 
@@ -29,7 +32,8 @@ public interface NoticeService {
 	 * 手机号码规则验证
 	 *
 	 * @param phone 手机号码
-	 * @return 是否验证通过
+	 * @return boolean
+	 * @since 2022-04-27 17:49:29
 	 */
 	boolean phoneRegValidation(String phone);
 
@@ -38,7 +42,8 @@ public interface NoticeService {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
-	 * @return 是否发送成功
+	 * @return boolean
+	 * @since 2022-04-27 17:49:29
 	 */
 	boolean send(NoticeData noticeData, Collection<String> phones);
 
@@ -47,7 +52,8 @@ public interface NoticeService {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phone      手机号
-	 * @return 是否发送成功
+	 * @return boolean
+	 * @since 2022-04-27 17:49:29
 	 */
 	default boolean send(NoticeData noticeData, String phone) {
 		if (StringUtils.isBlank(phone)) {
@@ -62,7 +68,8 @@ public interface NoticeService {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
-	 * @return 是否发送成功
+	 * @return boolean
+	 * @since 2022-04-27 17:49:29
 	 */
 	default boolean send(NoticeData noticeData, String... phones) {
 		if (phones.length <= 0) {
@@ -77,6 +84,7 @@ public interface NoticeService {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
+	 * @since 2022-04-27 17:49:29
 	 */
 	void asyncSend(NoticeData noticeData, Collection<String> phones);
 
@@ -85,6 +93,7 @@ public interface NoticeService {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phone      手机号
+	 * @since 2022-04-27 17:49:29
 	 */
 	default void asyncSend(NoticeData noticeData, String phone) {
 		if (!StringUtils.isBlank(phone)) {
@@ -97,6 +106,7 @@ public interface NoticeService {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
+	 * @since 2022-04-27 17:49:29
 	 */
 	default void asyncSend(NoticeData noticeData, String... phones) {
 		if (phones.length > 0) {

@@ -1,9 +1,6 @@
 package com.taotao.cloud.data.mybatis.plus.conditions;
 
 
-import static com.taotao.cloud.common.constant.StrPool.PERCENT;
-import static com.taotao.cloud.common.constant.StrPool.UNDERSCORE;
-
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -14,9 +11,13 @@ import com.taotao.cloud.data.mybatis.plus.conditions.query.LbqWrapper;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.data.mybatis.plus.conditions.update.LbuWrapper;
 import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
+
+import static com.taotao.cloud.common.constant.StrPool.PERCENT;
+import static com.taotao.cloud.common.constant.StrPool.UNDERSCORE;
 
 /**
  * Wrappers 工具类， 该方法的主要目的是为了 缩短代码长度
@@ -43,7 +44,7 @@ public final class Wraps {
 	/**
 	 * 获取 QueryWrap&lt;T&gt;
 	 *
-	 * @param entity 实体类
+	 * @param entityClass 实体类
 	 * @param <T>    实体类泛型
 	 * @return QueryWrapper&lt;T&gt;
 	 */
@@ -156,7 +157,6 @@ public final class Wraps {
 		if (source == null) {
 			return null;
 		}
-		Object target = source;
 
 		Class<?> srcClass = source.getClass();
 		Field[] fields = ReflectUtil.getFields(srcClass);
@@ -170,20 +170,19 @@ public final class Wraps {
 				continue;
 			}
 
-			if (replaceByRemoteData(target, field, classValue)) {
+			if (replaceByRemoteData(source, field, classValue)) {
 				continue;
 			}
 
-			if (!(classValue instanceof String)) {
+			if (!(classValue instanceof String srcValue)) {
 				continue;
 			}
-			String srcValue = (String) classValue;
 			if (srcValue.contains(PERCENT) || srcValue.contains(UNDERSCORE)) {
 				String tarValue = StrHelper.keywordConvert(srcValue);
-				ReflectUtil.setFieldValue(target, field, tarValue);
+				ReflectUtil.setFieldValue(source, field, tarValue);
 			}
 		}
-		return (T) target;
+		return (T) source;
 	}
 
 	private static boolean replaceByRemoteData(Object target, Field field, Object classValue) {

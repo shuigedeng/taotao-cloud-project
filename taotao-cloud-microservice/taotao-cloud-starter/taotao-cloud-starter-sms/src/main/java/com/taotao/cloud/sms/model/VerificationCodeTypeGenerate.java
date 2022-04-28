@@ -12,13 +12,16 @@
  */
 package com.taotao.cloud.sms.model;
 
-import java.util.Map;
 import org.springframework.lang.Nullable;
+
+import java.util.Map;
 
 /**
  * 验证码类型生成
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:05
  */
 @FunctionalInterface
 public interface VerificationCodeTypeGenerate {

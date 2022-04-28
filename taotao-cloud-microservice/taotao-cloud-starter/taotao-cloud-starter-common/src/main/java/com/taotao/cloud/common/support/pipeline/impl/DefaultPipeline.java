@@ -2,12 +2,17 @@ package com.taotao.cloud.common.support.pipeline.impl;
 
 
 import com.taotao.cloud.common.support.pipeline.Pipeline;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 默认的管道实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:10:57
  */
 public class DefaultPipeline<T> implements Pipeline<T> {
 

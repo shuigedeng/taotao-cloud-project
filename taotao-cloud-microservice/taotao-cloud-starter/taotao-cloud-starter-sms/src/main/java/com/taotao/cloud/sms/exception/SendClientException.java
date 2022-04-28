@@ -18,6 +18,8 @@ import java.util.Locale;
  * 短信发送客户端错误
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:33
  */
 public class SendClientException extends SmsException {
 

@@ -16,6 +16,8 @@ package com.taotao.cloud.sms.enums;
  * 拒绝策略
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:08
  */
 public enum RejectPolicy {
     /**

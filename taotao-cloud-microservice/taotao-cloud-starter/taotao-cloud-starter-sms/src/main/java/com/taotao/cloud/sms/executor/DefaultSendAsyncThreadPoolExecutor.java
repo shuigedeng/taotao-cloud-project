@@ -14,6 +14,7 @@ package com.taotao.cloud.sms.executor;
 
 
 import com.taotao.cloud.sms.properties.SmsAsyncProperties;
+
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -21,6 +22,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 默认发送异步处理线程池实现
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:01
  */
 public class DefaultSendAsyncThreadPoolExecutor extends AbstractSendAsyncThreadPoolExecutor {
 

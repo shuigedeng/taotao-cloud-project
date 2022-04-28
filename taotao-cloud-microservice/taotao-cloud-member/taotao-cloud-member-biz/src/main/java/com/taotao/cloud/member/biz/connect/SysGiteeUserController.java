@@ -16,7 +16,7 @@
 // /**
 //  * gitee用户表
 //  */
-// @Slf4j
+// 
 // @RestController
 // @RequestMapping("/gitee")
 // @Api(tags = "gitee用户API")

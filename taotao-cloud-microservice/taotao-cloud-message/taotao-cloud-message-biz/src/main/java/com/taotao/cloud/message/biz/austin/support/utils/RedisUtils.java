@@ -3,7 +3,6 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -18,7 +17,7 @@ import java.util.Map;
  * 对Redis的某些操作二次封装
  */
 @Component
-@Slf4j
+
 public class RedisUtils {
 
     @Autowired

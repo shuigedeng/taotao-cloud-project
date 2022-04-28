@@ -16,6 +16,8 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.model.VerificationCode;
 import com.taotao.cloud.sms.properties.VerificationCodeMemoryRepositoryProperties;
 import com.taotao.cloud.sms.utils.StringUtils;
+import org.springframework.lang.Nullable;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +26,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import org.springframework.lang.Nullable;
 
 /**
  * 验证码内存储存实现
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:13
  */
 public class VerificationCodeMemoryRepository implements VerificationCodeRepository {
 

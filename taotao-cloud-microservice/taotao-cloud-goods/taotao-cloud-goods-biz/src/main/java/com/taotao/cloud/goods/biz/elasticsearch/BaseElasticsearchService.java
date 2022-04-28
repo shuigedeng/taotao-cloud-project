@@ -1,11 +1,6 @@
 package com.taotao.cloud.goods.biz.elasticsearch;
 
 import cn.hutool.core.bean.BeanUtil;
-import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -29,16 +24,23 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+
 /**
  * 基础elasticsearch服务
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-25 16:17:28
+ * @since 2022-04-27 17:03:51
  */
-@Slf4j
 public abstract class BaseElasticsearchService {
 
+	/**
+	 * 常见选项
+	 */
 	protected static final RequestOptions COMMON_OPTIONS;
 
 	static {
@@ -51,10 +53,16 @@ public abstract class BaseElasticsearchService {
 		COMMON_OPTIONS = builder.build();
 	}
 
+	/**
+	 * 客户端
+	 */
 	@Autowired
 	@Qualifier("elasticsearchClient")
 	protected RestHighLevelClient client;
 
+	/**
+	 * elasticsearch属性
+	 */
 	@Autowired
 	private ElasticsearchProperties elasticsearchProperties;
 
@@ -62,6 +70,8 @@ public abstract class BaseElasticsearchService {
 	 * build DeleteIndexRequest
 	 *
 	 * @param index elasticsearch index name
+	 * @return {@link DeleteIndexRequest }
+	 * @since 2022-04-27 17:03:51
 	 */
 	private static DeleteIndexRequest buildDeleteIndexRequest(String index) {
 		return new DeleteIndexRequest(index);
@@ -73,7 +83,8 @@ public abstract class BaseElasticsearchService {
 	 * @param index  elasticsearch index name
 	 * @param id     request object id
 	 * @param object request object
-	 * @return {@link IndexRequest}
+	 * @return {@link IndexRequest }
+	 * @since 2022-04-27 17:03:51
 	 */
 	protected static IndexRequest buildIndexRequest(String index, String id, Object object) {
 		return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(object), XContentType.JSON);
@@ -83,6 +94,7 @@ public abstract class BaseElasticsearchService {
 	 * create elasticsearch index (asyc)
 	 *
 	 * @param index elasticsearch index
+	 * @since 2022-04-27 17:03:51
 	 */
 	protected void createIndexRequest(String index) {
 		try {
@@ -110,6 +122,12 @@ public abstract class BaseElasticsearchService {
 		}
 	}
 
+	/**
+	 * 创建映射
+	 *
+	 * @param index 指数
+	 * @since 2022-04-27 17:03:51
+	 */
 	public void createMapping(String index) throws Exception {
 		String source =
 			" {\n" +
@@ -373,7 +391,7 @@ public abstract class BaseElasticsearchService {
 	 *
 	 * @param index index名
 	 * @return boolean
-	 * @since 2019/7/24 14:57
+	 * @since 2022-04-27 17:03:51
 	 */
 	public boolean indexExist(String index) {
 		try {
@@ -391,7 +409,7 @@ public abstract class BaseElasticsearchService {
 	 * delete elasticsearch index
 	 *
 	 * @param index elasticsearch index name
-	 * @author fxbin
+	 * @since 2022-04-27 17:03:51
 	 */
 	protected void deleteIndexRequest(String index) {
 		DeleteIndexRequest deleteIndexRequest = buildDeleteIndexRequest(index);
@@ -408,7 +426,7 @@ public abstract class BaseElasticsearchService {
 	 * @param index  elasticsearch index name
 	 * @param id     Document id
 	 * @param object request object
-	 * @author fxbin
+	 * @since 2022-04-27 17:03:51
 	 */
 	protected void updateRequest(String index, String id, Object object) {
 		try {
@@ -426,7 +444,7 @@ public abstract class BaseElasticsearchService {
 	 *
 	 * @param index elasticsearch index name
 	 * @param id    Document id
-	 * @author fxbin
+	 * @since 2022-04-27 17:03:51
 	 */
 	protected void deleteRequest(String index, String id) {
 		try {
@@ -442,8 +460,8 @@ public abstract class BaseElasticsearchService {
 	 * search all
 	 *
 	 * @param index elasticsearch index name
-	 * @return {@link SearchResponse}
-	 * @author fxbin
+	 * @return {@link SearchResponse }
+	 * @since 2022-04-27 17:03:51
 	 */
 	protected SearchResponse search(String index) {
 		SearchRequest searchRequest = new SearchRequest(index);

@@ -1,13 +1,19 @@
 package com.taotao.cloud.oss.artislong.model.upload;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * 分块标签
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:36
  */
 public class UpLoadPartEntityTag implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 2471854027355307627L;
 
 	/**

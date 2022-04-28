@@ -18,7 +18,7 @@
 // /**
 //  * qq用户表
 //  */
-// @Slf4j
+// 
 // @Service
 // public class SysQqUserServiceImpl extends SuperServiceImpl<SysQqUserMapper, SysQqUser> implements ISysQqUserService {
 //     @Override

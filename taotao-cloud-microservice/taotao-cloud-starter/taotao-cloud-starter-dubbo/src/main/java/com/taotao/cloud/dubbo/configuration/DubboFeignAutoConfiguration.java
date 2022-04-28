@@ -1,14 +1,9 @@
 package com.taotao.cloud.dubbo.configuration;
 
-import static java.util.Collections.emptySet;
-import static org.apache.dubbo.spring.boot.util.DubboUtils.BASE_PACKAGES_PROPERTY_NAME;
-import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
-
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dubbo.properties.DubboProperties;
 import feign.Feign;
-import java.util.Set;
 import org.apache.dubbo.config.AbstractConfig;
 import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignBuilder;
 import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignProviderBeanPostProcessor;
@@ -22,10 +17,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
+import java.util.Set;
+
+import static java.util.Collections.emptySet;
+import static org.apache.dubbo.spring.boot.util.DubboUtils.BASE_PACKAGES_PROPERTY_NAME;
+import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
+
 /**
  * Dubbo配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:21:27
  */
 @Configuration
 @ConditionalOnClass(AbstractConfig.class)

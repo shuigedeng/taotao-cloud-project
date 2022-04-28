@@ -4,6 +4,13 @@ import com.aliyun.oss.ClientBuilderConfiguration;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * 阿里oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:38:59
+ */
 public class AliOssConfig {
     /**
      * 数据存储路径

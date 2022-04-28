@@ -15,21 +15,24 @@ package com.taotao.cloud.sms.channel.qcloud;
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsMultiSenderResult;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.exception.SendFailedException;
-import com.taotao.cloud.sms.utils.StringUtils;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
+import com.taotao.cloud.sms.model.NoticeData;
+import com.taotao.cloud.sms.utils.StringUtils;
+import org.springframework.context.ApplicationEventPublisher;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.context.ApplicationEventPublisher;
 
 /**
  * 腾讯云发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:52
  */
 public class QCloudSendHandler extends AbstractSendHandler<QCloudProperties> {
 

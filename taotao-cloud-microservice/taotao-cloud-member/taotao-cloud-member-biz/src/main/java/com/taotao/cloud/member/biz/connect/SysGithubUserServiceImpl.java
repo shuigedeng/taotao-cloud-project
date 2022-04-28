@@ -18,7 +18,7 @@
 // /**
 //  * github用户表
 //  */
-// @Slf4j
+// 
 // @Service
 // public class SysGithubUserServiceImpl extends SuperServiceImpl<SysGithubUserMapper, SysGithubUser> implements ISysGithubUserService {
 //     /**

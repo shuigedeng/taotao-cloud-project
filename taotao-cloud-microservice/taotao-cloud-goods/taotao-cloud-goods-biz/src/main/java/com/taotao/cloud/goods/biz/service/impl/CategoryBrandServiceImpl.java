@@ -7,13 +7,18 @@ import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.mapper.CategoryBrandMapper;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 规格项业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:01:32
  */
 @Service
 public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, CategoryBrand>

@@ -18,11 +18,6 @@ import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.utils.RandomUtils;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -33,10 +28,18 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 网易云信发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:36
  */
 public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudProperties> {
 

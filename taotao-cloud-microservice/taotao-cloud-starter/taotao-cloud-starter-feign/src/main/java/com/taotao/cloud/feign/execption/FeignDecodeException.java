@@ -19,7 +19,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 
 /**
- * BusinessException 
+ * FeignDecodeException
  *
  * @author shuigedeng
  * @version 2021.9

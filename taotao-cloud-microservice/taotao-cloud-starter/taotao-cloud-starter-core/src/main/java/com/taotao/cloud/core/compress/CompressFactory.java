@@ -1,6 +1,7 @@
 package com.taotao.cloud.core.compress;
 
 import com.taotao.cloud.core.compress.support.SPI;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -8,6 +9,10 @@ import java.util.ServiceLoader;
 
 /**
  * The Data Compress Factory.
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:14:25
  */
 public enum CompressFactory {
 	/**
@@ -39,9 +44,10 @@ public enum CompressFactory {
 
 	/**
 	 * The get compress @SPI value is {#name} extension.
-	 * 
+	 *
 	 * @param name
-	 * @return
+	 * @return {@link Compress }
+	 * @since 2022-04-27 17:14:25
 	 */
 	public Compress getExtension(String name) {
 		return compressMap.get(name);

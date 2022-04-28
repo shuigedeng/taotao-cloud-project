@@ -4,6 +4,13 @@ package com.taotao.cloud.oss.artislong.core.local.model;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * 本地操作系统配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:26
+ */
 public class LocalOssConfig {
 
     /**

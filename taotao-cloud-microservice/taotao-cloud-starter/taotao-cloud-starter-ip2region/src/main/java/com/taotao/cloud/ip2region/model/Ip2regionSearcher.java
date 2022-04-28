@@ -17,12 +17,16 @@
 package com.taotao.cloud.ip2region.model;
 
 import com.taotao.cloud.ip2region.utils.IpInfoUtil;
-import java.util.function.Function;
 import org.springframework.lang.Nullable;
+
+import java.util.function.Function;
 
 /**
  * ip 搜索器
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:28:22
  */
 public interface Ip2regionSearcher {
 
@@ -30,7 +34,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ip ip
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo memorySearch(long ip);
@@ -39,7 +44,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ip ip
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo memorySearch(String ip);
@@ -48,7 +54,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ptr ptr
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo getByIndexPtr(long ptr);
@@ -57,7 +64,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ip ip
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo btreeSearch(long ip);
@@ -66,7 +74,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ip ip
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo btreeSearch(String ip);
@@ -75,7 +84,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ip ip
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo binarySearch(long ip);
@@ -84,7 +94,8 @@ public interface Ip2regionSearcher {
 	 * ip 位置 搜索
 	 *
 	 * @param ip ip
-	 * @return 位置
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	IpInfo binarySearch(String ip);
@@ -94,7 +105,8 @@ public interface Ip2regionSearcher {
 	 *
 	 * @param ip       ip
 	 * @param function Function
-	 * @return 地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	default String getInfo(long ip, Function<IpInfo, String> function) {
@@ -106,7 +118,8 @@ public interface Ip2regionSearcher {
 	 *
 	 * @param ip       ip
 	 * @param function Function
-	 * @return 地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	default String getInfo(String ip, Function<IpInfo, String> function) {
@@ -117,7 +130,8 @@ public interface Ip2regionSearcher {
 	 * 获取地址信息
 	 *
 	 * @param ip ip
-	 * @return 地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	default String getAddress(long ip) {
@@ -128,7 +142,8 @@ public interface Ip2regionSearcher {
 	 * 获取地址信息
 	 *
 	 * @param ip ip
-	 * @return 地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:28:22
 	 */
 	@Nullable
 	default String getAddress(String ip) {
@@ -139,7 +154,8 @@ public interface Ip2regionSearcher {
 	 * 获取地址信息包含 isp
 	 *
 	 * @param ip ip
-	 * @return 地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:28:23
 	 */
 	@Nullable
 	default String getAddressAndIsp(long ip) {
@@ -150,7 +166,8 @@ public interface Ip2regionSearcher {
 	 * 获取地址信息包含 isp
 	 *
 	 * @param ip ip
-	 * @return 地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:28:23
 	 */
 	@Nullable
 	default String getAddressAndIsp(String ip) {

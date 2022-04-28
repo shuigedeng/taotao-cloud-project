@@ -4,6 +4,13 @@ import cn.hutool.extra.ftp.FtpConfig;
 import cn.hutool.extra.ftp.FtpMode;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * ftp操作系统配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:00
+ */
 public class FtpOssConfig extends FtpConfig {
 
     private String basePath;

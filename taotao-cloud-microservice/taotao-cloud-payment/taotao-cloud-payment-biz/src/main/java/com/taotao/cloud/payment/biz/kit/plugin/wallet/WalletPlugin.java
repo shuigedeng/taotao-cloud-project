@@ -3,13 +3,14 @@ package com.taotao.cloud.payment.biz.kit.plugin.wallet;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
+import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * WalletPlugin
  */
-@Slf4j
+
 @Component
 public class WalletPlugin implements Payment {
 

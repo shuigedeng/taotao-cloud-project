@@ -19,6 +19,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * 平安oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:08
+ */
 @Configuration
 @ConditionalOnClass(RadosgwService.class)
 @EnableConfigurationProperties({PingAnOssProperties.class})

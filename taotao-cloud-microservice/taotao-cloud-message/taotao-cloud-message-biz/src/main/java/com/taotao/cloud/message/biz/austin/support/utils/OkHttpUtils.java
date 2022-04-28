@@ -2,15 +2,19 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.hutool.core.map.MapUtil;
 import com.google.common.base.Throwables;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-@Slf4j
+
 @Component
 public class OkHttpUtils {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");

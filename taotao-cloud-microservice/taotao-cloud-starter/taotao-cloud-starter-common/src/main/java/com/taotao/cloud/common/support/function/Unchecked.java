@@ -18,6 +18,7 @@ package com.taotao.cloud.common.support.function;
 
 
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -30,7 +31,9 @@ import java.util.function.Supplier;
  * Lambda 受检异常处理
  *
  * <p>
- * https://segmentfault.com/a/1190000007832130 https://github.com/jOOQ/jOOL
+ * https://segmentfault.com/a/1190000007832130
+ * <p>
+ * https://github.com/jOOQ/jOOL
  * </p>
  *
  * @author shuigedeng

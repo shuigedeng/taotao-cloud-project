@@ -2,18 +2,28 @@ package com.taotao.cloud.oss.artislong.model.download;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 检查下载点
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:44
+ */
 public class DownloadCheckPoint implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 4682293344365787077L;
 	public static final String DOWNLOAD_MAGIC = "92611BED-89E2-46B6-89E5-72F273D4B0A3";
 

@@ -4,6 +4,8 @@ import cn.hutool.json.JSONObject;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -11,11 +13,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
  * 微信媒体工具
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:03:39
  */
 @Component
 public class WechatMediaUtil {
@@ -26,7 +30,10 @@ public class WechatMediaUtil {
 	/**
 	 * 上传多媒体数据到微信服务器
 	 *
+	 * @param type         类型
 	 * @param mediaFileUrl 来自网络上面的媒体文件地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:03:39
 	 */
 	public String uploadMedia(String type, String mediaFileUrl) {
 		//获取token
@@ -122,6 +129,8 @@ public class WechatMediaUtil {
 	 * 通过传过来的contentType判断是哪一种类型
 	 *
 	 * @param contentType 获取来自连接的contentType
+	 * @return {@link String }
+	 * @since 2022-04-27 17:03:39
 	 */
 	public String judgeType(String contentType) {
 		return switch (contentType) {

@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
-import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -28,16 +26,26 @@ import org.mapstruct.factory.Mappers;
  * IGoodsSkuMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:24
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IGoodsSkuMapStruct {
 
+	/**
+	 * 实例
+	 */
 	IGoodsSkuMapStruct INSTANCE = Mappers.getMapper(IGoodsSkuMapStruct.class);
 
+	/**
+	 * 产品sku产品sku签证官
+	 *
+	 * @param goodsSku 产品sku
+	 * @return {@link GoodsSkuVO }
+	 * @since 2022-04-27 16:58:24
+	 */
 	GoodsSkuVO goodsSkuToGoodsSkuVO(GoodsSku goodsSku);
 
 

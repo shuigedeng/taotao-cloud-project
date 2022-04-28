@@ -20,9 +20,9 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatis.plus.mapper.MpSuperMapper;
+
 import java.io.Serializable;
 import java.util.List;
-import org.apache.poi.ss.formula.functions.T;
 
 /**
  * 基于MP的 IService 新增了2个方法： saveBatchSomeColumn、updateAllById 其中： 1，updateAllById 执行后，会清除缓存
@@ -40,7 +40,6 @@ public interface MpSuperService<T extends MpSuperEntity<I>, I extends Serializab
 	 * 注意：该方法仅仅测试过mysql
 	 *
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:22:06
 	 */
 	default boolean saveBatchSomeColumn(List<T> entityList) {
@@ -58,7 +57,6 @@ public interface MpSuperService<T extends MpSuperEntity<I>, I extends Serializab
 	 *
 	 * @param entity entity
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:22:14
 	 */
 	boolean updateAllById(T entity);

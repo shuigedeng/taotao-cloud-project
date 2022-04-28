@@ -15,11 +15,11 @@ import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.query.CouponSearchParams;
-import com.taotao.cloud.promotion.api.vo.CouponVO;
 import com.taotao.cloud.promotion.api.query.FullDiscountSearchParams;
 import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
+import com.taotao.cloud.promotion.api.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
@@ -40,8 +40,9 @@ import java.util.stream.Collectors;
 /**
  * 优惠券活动业务层实现
  *
- * 
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:06
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

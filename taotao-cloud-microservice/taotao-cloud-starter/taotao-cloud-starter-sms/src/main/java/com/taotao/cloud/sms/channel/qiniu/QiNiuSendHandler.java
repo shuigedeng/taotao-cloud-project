@@ -19,13 +19,16 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.model.NoticeData;
-import java.util.Collection;
 import org.springframework.context.ApplicationEventPublisher;
+
+import java.util.Collection;
 
 /**
  * 七牛云发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:09
  */
 public class QiNiuSendHandler extends AbstractSendHandler<QiNiuProperties> {
 

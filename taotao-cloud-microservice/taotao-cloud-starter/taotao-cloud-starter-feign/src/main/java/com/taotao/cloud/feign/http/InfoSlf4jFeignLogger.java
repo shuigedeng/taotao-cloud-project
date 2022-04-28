@@ -16,6 +16,11 @@ package com.taotao.cloud.feign.http;
 import org.slf4j.Logger;
 
 /**
+ * 信息slf4j假装记录器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:24:49
  */
 public class InfoSlf4jFeignLogger extends feign.Logger {
     private final Logger logger;

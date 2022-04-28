@@ -6,12 +6,17 @@ import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.support.instance.Instance;
 import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 实例化工厂类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:10:28
  */
 public final class InstanceFactory implements Instance {
 

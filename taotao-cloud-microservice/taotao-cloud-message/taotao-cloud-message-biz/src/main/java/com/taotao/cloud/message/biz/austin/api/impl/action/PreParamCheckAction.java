@@ -8,7 +8,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * @description 前置参数校验
  */
-@Slf4j
+
 @Service
 public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
 

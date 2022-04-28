@@ -6,12 +6,17 @@ import cn.hutool.core.thread.ThreadUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.redisson.handle.RedisDelayQueueHandle;
+import org.springframework.boot.CommandLineRunner;
+
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
-import org.springframework.boot.CommandLineRunner;
 
 /**
  * 启动延迟队列
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:45:59
  */
 public class RedisDelayQueueRunner implements CommandLineRunner {
 

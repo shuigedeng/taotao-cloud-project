@@ -4,6 +4,13 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.shardingsphere.elasticjob.infra.listener.ElasticJobListener;
 import org.apache.shardingsphere.elasticjob.infra.listener.ShardingContexts;
 
+/**
+ * 我工作侦听器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:29:54
+ */
 public class MyJobListener implements ElasticJobListener {
 
 	@Override

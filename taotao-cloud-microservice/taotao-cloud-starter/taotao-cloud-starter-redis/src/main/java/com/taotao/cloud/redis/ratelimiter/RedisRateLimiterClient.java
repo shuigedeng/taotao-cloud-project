@@ -17,17 +17,20 @@
 package com.taotao.cloud.redis.ratelimiter;
 
 import com.taotao.cloud.common.model.CharPool;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 /**
  * redis 限流服务
  *
-
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:45:35
  */
 public class RedisRateLimiterClient implements RateLimiterClient {
 

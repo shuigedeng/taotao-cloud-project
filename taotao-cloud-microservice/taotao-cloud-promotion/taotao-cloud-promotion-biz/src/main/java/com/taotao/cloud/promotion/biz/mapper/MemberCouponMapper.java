@@ -6,8 +6,9 @@ import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 /**
  * 会员优惠券数据处理层
  *
- *
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:37:00
  */
 public interface MemberCouponMapper extends BaseMapper<MemberCoupon> {
 

@@ -3,12 +3,19 @@ package com.taotao.cloud.oss.artislong.core.local;
 import cn.hutool.core.text.CharPool;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.local.model.LocalOssConfig;
-import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * 本地操作系统属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:35
+ */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.LOCAL)
 public class LocalOssProperties extends LocalOssConfig implements InitializingBean {
 

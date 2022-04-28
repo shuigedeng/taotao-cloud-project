@@ -1,7 +1,14 @@
 package com.taotao.cloud.payment.biz.kit.params.impl;
 
 import cn.hutool.json.JSONUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.payment.api.enums.CashierEnum;
+import com.taotao.cloud.payment.biz.kit.dto.PayParam;
+import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
+import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
+import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * 整笔交易信息获取
  */
-@Slf4j
+
 @Component
 public class TradeCashier implements CashierExecute {
 

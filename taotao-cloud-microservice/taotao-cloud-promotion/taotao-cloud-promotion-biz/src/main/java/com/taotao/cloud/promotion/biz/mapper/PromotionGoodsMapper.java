@@ -4,16 +4,18 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
-import java.math.BigDecimal;
-import java.util.Date;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 促销商品数据处理层
  *
- *
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:37:11
  */
 public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
 

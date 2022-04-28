@@ -3,8 +3,6 @@ package com.taotao.cloud.common.execl.demo.write;
 import com.alibaba.excel.util.BooleanUtils;
 import com.alibaba.excel.write.handler.RowWriteHandler;
 import com.alibaba.excel.write.handler.context.RowWriteHandlerContext;
-
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Comment;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -16,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFRichTextString;
  *
 
  */
-@Slf4j
+
 public class CommentWriteHandler implements RowWriteHandler {
 
     @Override

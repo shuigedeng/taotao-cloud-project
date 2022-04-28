@@ -15,6 +15,7 @@ package com.taotao.cloud.sms.handler;
 
 import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.utils.StringUtils;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,6 +24,8 @@ import java.util.Collections;
  * 发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:31
  */
 public interface SendHandler {
 
@@ -30,7 +33,8 @@ public interface SendHandler {
 	 * 是否允许发送通知
 	 *
 	 * @param type 通知类型
-	 * @return 是否允许
+	 * @return boolean
+	 * @since 2022-04-27 17:48:31
 	 */
 	boolean acceptSend(String type);
 
@@ -39,7 +43,8 @@ public interface SendHandler {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
-	 * @return 是否发送成功
+	 * @return boolean
+	 * @since 2022-04-27 17:48:31
 	 */
 	boolean send(NoticeData noticeData, Collection<String> phones);
 
@@ -48,7 +53,8 @@ public interface SendHandler {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phone      手机号列表
-	 * @return 是否发送成功
+	 * @return boolean
+	 * @since 2022-04-27 17:48:31
 	 */
 	default boolean send(NoticeData noticeData, String phone) {
 		if (StringUtils.isBlank(phone)) {
@@ -63,7 +69,8 @@ public interface SendHandler {
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
-	 * @return 是否发送成功
+	 * @return boolean
+	 * @since 2022-04-27 17:48:31
 	 */
 	default boolean send(NoticeData noticeData, String... phones) {
 		if (phones == null) {

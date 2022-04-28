@@ -1,14 +1,14 @@
 package com.taotao.cloud.order.biz.stream.consumer;
 
-import java.util.function.Consumer;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
+import java.util.function.Consumer;
 
 /**
  * 短信消费者业务
  */
-@Slf4j
+
 @Service
 public class SmsConsumerService {
 

@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 网易云信短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:30
  */
 @ConfigurationProperties(prefix = NeteaseCloudProperties.PREFIX)
 public class NeteaseCloudProperties extends AbstractHandlerProperties<String> {

@@ -3,6 +3,13 @@ package com.taotao.cloud.oss.artislong.core.minio.model;
 
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 
+/**
+ * minio oss客户端配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:41
+ */
 public class MinioOssClientConfig {
     private Long connectTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
     private Long writeTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;

@@ -18,6 +18,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * 金山开源软件配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:20
+ */
 @Configuration
 @ConditionalOnClass(Ks3.class)
 @EnableConfigurationProperties({JinShanOssProperties.class})

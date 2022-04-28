@@ -1,5 +1,15 @@
 package com.taotao.cloud.common.execl.temp.csv;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.poi.poifs.filesystem.FileMagic;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,20 +19,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.taotao.cloud.common.execl.util.TestFileUtil;
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.fastjson.JSON;
-
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.poi.poifs.filesystem.FileMagic;
-import org.junit.Ignore;
-import org.junit.Test;
-
 @Ignore
-@Slf4j
+
 public class CsvReadTest {
 
     @Test

@@ -2,9 +2,6 @@ package com.taotao.cloud.order.biz.stream.producer;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
@@ -14,13 +11,16 @@ import org.springframework.messaging.MessageHeaders;
 import vip.mate.core.rocketmq.constant.MessageConstant;
 import vip.mate.core.rocketmq.entity.Order;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 发送之后用于控制原子性的类
  * 在消息发送之后，收到rocketmq的发送结果通知后才提交的本地事务。
  *
  * @link https://blog.csdn.net/guzhangyu12345/article/details/107989633
  */
-@Slf4j
+
 @RocketMQTransactionListener(txProducerGroup = MessageConstant.ORDER_BINDER_GROUP)
 public class OrderTransactionListener implements RocketMQLocalTransactionListener {
 

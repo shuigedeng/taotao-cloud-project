@@ -4,6 +4,10 @@ import java.lang.reflect.Method;
 
 /**
  * 方法的处理
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:08
  */
 public interface IMethodHandler {
 

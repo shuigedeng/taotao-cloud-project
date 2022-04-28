@@ -32,6 +32,8 @@ import org.springframework.web.client.RestTemplate;
  * 网易云信发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:28
  */
 @Configuration
 @ConditionalOnProperty(prefix = NeteaseCloudProperties.PREFIX, name = "enabled", havingValue = "true")

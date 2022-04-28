@@ -4,6 +4,13 @@ import com.amazonaws.ClientConfiguration;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * jd oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:30
+ */
 public class JdOssConfig {
 
     private String basePath;

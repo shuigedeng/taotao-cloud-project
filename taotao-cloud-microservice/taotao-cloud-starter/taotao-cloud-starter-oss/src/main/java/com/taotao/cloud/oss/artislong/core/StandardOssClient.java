@@ -21,6 +21,8 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 import com.taotao.cloud.oss.model.UploadFileInfo;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,10 +37,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * 标准操作系统客户端
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:35:46
+ */
 public interface StandardOssClient {
 
+	/**
+	 * 上传文件
+	 *
+	 * @param multipartFile 多部分文件
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:35:53
+	 */
 	default OssInfo upLoad(MultipartFile multipartFile) {
 		try {
 			UploadFileInfo uploadFileInfo = com.taotao.cloud.oss.util.FileUtil.getMultipartFileInfo(
@@ -51,9 +66,25 @@ public interface StandardOssClient {
 			throw new RuntimeException(e);
 		}
 	}
+
+	/**
+	 * 上传文件
+	 *
+	 * @param path 路径
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:35:55
+	 */
 	default OssInfo upLoad(String path) {
 		return upLoad(new File(path));
 	}
+
+	/**
+	 * 上传文件
+	 *
+	 * @param file 文件
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:35:58
+	 */
 	default OssInfo upLoad(File file) {
 		try {
 			UploadFileInfo uploadFileInfo = com.taotao.cloud.oss.util.FileUtil.getFileInfo(
@@ -72,7 +103,8 @@ public interface StandardOssClient {
 	 *
 	 * @param is         输入流
 	 * @param targetName 目标文件路径
-	 * @return 文件信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:36:18
 	 */
 	default OssInfo upLoad(InputStream is, String targetName) {
 		return upLoad(is, targetName, true);
@@ -84,7 +116,8 @@ public interface StandardOssClient {
 	 * @param is         输入流
 	 * @param targetName 目标文件路径
 	 * @param isOverride 是否覆盖
-	 * @return 文件信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:36:21
 	 */
 	OssInfo upLoad(InputStream is, String targetName, Boolean isOverride);
 
@@ -94,7 +127,8 @@ public interface StandardOssClient {
 	 *
 	 * @param file       本地文件路径
 	 * @param targetName 目标文件路径
-	 * @return 文件信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:36:24
 	 */
 	default OssInfo upLoadCheckPoint(String file, String targetName) {
 		return upLoadCheckPoint(new File(file), targetName);
@@ -105,7 +139,8 @@ public interface StandardOssClient {
 	 *
 	 * @param file       本地文件
 	 * @param targetName 目标文件路径
-	 * @return 文件信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:36:27
 	 */
 	OssInfo upLoadCheckPoint(File file, String targetName);
 
@@ -116,7 +151,8 @@ public interface StandardOssClient {
 	 * @param targetName 目标对象路径
 	 * @param slice      分片参数
 	 * @param ossType    OSS类型
-	 * @return 上传文件信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:36:29
 	 */
 	default OssInfo uploadFile(File upLoadFile, String targetName, SliceConfig slice,
 		String ossType) {
@@ -170,11 +206,28 @@ public interface StandardOssClient {
 		return getInfo(targetName);
 	}
 
+	/**
+	 * 完成上传
+	 *
+	 * @param upLoadCheckPoint 检查负载点
+	 * @param partEntityTags   实体标记部分
+	 * @since 2022-04-27 17:36:35
+	 */
 	default void completeUpload(UpLoadCheckPoint upLoadCheckPoint,
 		List<UpLoadPartEntityTag> partEntityTags) {
 		FileUtil.del(upLoadCheckPoint.getCheckpointFile());
 	}
 
+	/**
+	 * 准备上传
+	 *
+	 * @param uploadCheckPoint 上传检查
+	 * @param upLoadFile       加载文件
+	 * @param targetName       目标名称
+	 * @param checkpointFile   检查点文件
+	 * @param slice            片
+	 * @since 2022-04-27 17:36:37
+	 */
 	default void prepareUpload(UpLoadCheckPoint uploadCheckPoint, File upLoadFile,
 		String targetName, String checkpointFile, SliceConfig slice) {
 		throw new OssException("初始化断点续传对象未实现，默认不支持此方法");
@@ -185,7 +238,8 @@ public interface StandardOssClient {
 	 *
 	 * @param fileSize 文件大小
 	 * @param partSize 分片大小
-	 * @return 所有分片对象
+	 * @return {@link ArrayList }<{@link UploadPart }>
+	 * @since 2022-04-27 17:36:44
 	 */
 	default ArrayList<UploadPart> splitUploadFile(long fileSize, long partSize) {
 		ArrayList<UploadPart> parts = new ArrayList<>();
@@ -219,6 +273,10 @@ public interface StandardOssClient {
 
 	/**
 	 * 分片上传Task
+	 *
+	 * @author shuigedeng
+	 * @version 2022.04
+	 * @since 2022-04-27 17:36:49
 	 */
 	class UploadPartTask implements Callable<UpLoadPartResult> {
 
@@ -285,7 +343,9 @@ public interface StandardOssClient {
 	 *
 	 * @param upLoadCheckPoint 断点续传对象
 	 * @param partNum          分片索引
-	 * @return 上传结果
+	 * @param inputStream      输入流
+	 * @return {@link UpLoadPartResult }
+	 * @since 2022-04-27 17:36:54
 	 */
 	default UpLoadPartResult uploadPart(UpLoadCheckPoint upLoadCheckPoint, int partNum,
 		InputStream inputStream) {
@@ -302,6 +362,7 @@ public interface StandardOssClient {
 	 *
 	 * @param os         输出流
 	 * @param targetName 目标文件路径
+	 * @since 2022-04-27 17:36:58
 	 */
 	void downLoad(OutputStream os, String targetName);
 
@@ -310,6 +371,7 @@ public interface StandardOssClient {
 	 *
 	 * @param localFile  本地文件路径
 	 * @param targetName 目标文件路径
+	 * @since 2022-04-27 17:37:00
 	 */
 	default void downLoadCheckPoint(String localFile, String targetName) {
 		downLoadCheckPoint(new File(localFile), targetName);
@@ -320,6 +382,7 @@ public interface StandardOssClient {
 	 *
 	 * @param localFile  本地文件
 	 * @param targetName 目标文件路径
+	 * @since 2022-04-27 17:37:02
 	 */
 	void downLoadCheckPoint(File localFile, String targetName);
 
@@ -330,6 +393,7 @@ public interface StandardOssClient {
 	 * @param targetName 目标对象
 	 * @param slice      分片参数
 	 * @param ossType    OSS类型
+	 * @since 2022-04-27 17:37:05
 	 */
 	default void downLoadFile(File localFile, String targetName, SliceConfig slice,
 		String ossType) {
@@ -387,8 +451,12 @@ public interface StandardOssClient {
 
 	/**
 	 * 分片下载Task
+	 *
+	 * @author shuigedeng
+	 * @version 2022.04
+	 * @since 2022-04-27 17:37:11
 	 */
-	public static class DownloadPartTask implements Callable<DownloadPartResult> {
+	public class DownloadPartTask implements Callable<DownloadPartResult> {
 
 		/**
 		 * Oss客户端
@@ -477,7 +545,8 @@ public interface StandardOssClient {
 	 * 获取目标文件状态
 	 *
 	 * @param targetName 目标对象路径
-	 * @return 目标文件状态
+	 * @return {@link DownloadObjectStat }
+	 * @since 2022-04-27 17:37:17
 	 */
 	default DownloadObjectStat getDownloadObjectStat(String targetName) {
 		throw new OssException("获取下载对象状态方法未实现，默认不支持此方法");
@@ -490,6 +559,7 @@ public interface StandardOssClient {
 	 * @param localFile          本地文件
 	 * @param targetName         目标对象路径
 	 * @param checkpointFile     下载进度缓存文件
+	 * @since 2022-04-27 17:37:19
 	 */
 	default void prepareDownload(DownloadCheckPoint downloadCheckPoint, File localFile,
 		String targetName, String checkpointFile) {
@@ -502,7 +572,8 @@ public interface StandardOssClient {
 	 * @param start      开始字节数
 	 * @param objectSize 对象大小
 	 * @param partSize   预设分片大小
-	 * @return 所有分片对象
+	 * @return {@link ArrayList }<{@link DownloadPart }>
+	 * @since 2022-04-27 17:37:22
 	 */
 	default ArrayList<DownloadPart> splitDownloadFile(long start, long objectSize, long partSize) {
 		ArrayList<DownloadPart> parts = new ArrayList<>();
@@ -531,7 +602,8 @@ public interface StandardOssClient {
 	 * @param begin 开始字节数
 	 * @param total 目标对象大小
 	 * @param per   预设分片大小
-	 * @return 分片结束字节数
+	 * @return long
+	 * @since 2022-04-27 17:37:25
 	 */
 	default long getPartEnd(long begin, long total, long per) {
 		if (begin + per > total) {
@@ -543,7 +615,8 @@ public interface StandardOssClient {
 	/**
 	 * 拆分单独一个文件分片
 	 *
-	 * @return 一个文件分片
+	 * @return {@link ArrayList }<{@link DownloadPart }>
+	 * @since 2022-04-27 17:37:27
 	 */
 	default ArrayList<DownloadPart> splitDownloadOneFile() {
 		ArrayList<DownloadPart> parts = new ArrayList<>();
@@ -561,7 +634,8 @@ public interface StandardOssClient {
 	 *
 	 * @param range     分片
 	 * @param totalSize 目标文件大小
-	 * @return 返回分片范围
+	 * @return {@link long[] }
+	 * @since 2022-04-27 17:37:30
 	 */
 	default long[] getDownloadSlice(long[] range, long totalSize) {
 		long start = 0;
@@ -596,6 +670,7 @@ public interface StandardOssClient {
 	 *
 	 * @param downloadTempFile 下载缓存文件
 	 * @param length           文件大小
+	 * @since 2022-04-27 17:37:34
 	 */
 	default void createDownloadTemp(String downloadTempFile, long length) {
 		File file = new File(downloadTempFile);
@@ -616,7 +691,8 @@ public interface StandardOssClient {
 	 * @param key   目标文件
 	 * @param start 文件开始字节
 	 * @param end   文件结束字节
-	 * @return 此范围的文件流
+	 * @return {@link InputStream }
+	 * @since 2022-04-27 17:37:36
 	 */
 	default InputStream downloadPart(String key, long start, long end) throws Exception {
 		throw new OssException("下载文件分片方法未实现，默认不支持此方法");
@@ -626,6 +702,7 @@ public interface StandardOssClient {
 	 * 删除文件
 	 *
 	 * @param targetName 目标文件路径
+	 * @since 2022-04-27 17:37:39
 	 */
 	void delete(String targetName);
 
@@ -634,6 +711,7 @@ public interface StandardOssClient {
 	 *
 	 * @param sourceName 源文件路径
 	 * @param targetName 目标文件路径
+	 * @since 2022-04-27 17:37:41
 	 */
 	default void copy(String sourceName, String targetName) {
 		copy(sourceName, targetName, true);
@@ -645,6 +723,7 @@ public interface StandardOssClient {
 	 * @param sourceName 源文件路径
 	 * @param targetName 目标文件路径
 	 * @param isOverride 是否覆盖
+	 * @since 2022-04-27 17:37:43
 	 */
 	void copy(String sourceName, String targetName, Boolean isOverride);
 
@@ -653,6 +732,7 @@ public interface StandardOssClient {
 	 *
 	 * @param sourceName 源文件路径
 	 * @param targetName 目标路径
+	 * @since 2022-04-27 17:37:45
 	 */
 	default void move(String sourceName, String targetName) {
 		move(sourceName, targetName, true);
@@ -664,6 +744,7 @@ public interface StandardOssClient {
 	 * @param sourceName 源文件路径
 	 * @param targetName 目标路径
 	 * @param isOverride 是否覆盖
+	 * @since 2022-04-27 17:37:47
 	 */
 	default void move(String sourceName, String targetName, Boolean isOverride) {
 		copy(sourceName, targetName, isOverride);
@@ -675,6 +756,7 @@ public interface StandardOssClient {
 	 *
 	 * @param sourceName 源文件路径
 	 * @param targetName 目标文件路径
+	 * @since 2022-04-27 17:37:50
 	 */
 	default void rename(String sourceName, String targetName) {
 		rename(sourceName, targetName, true);
@@ -686,6 +768,7 @@ public interface StandardOssClient {
 	 * @param sourceName 源文件路径
 	 * @param targetName 目标路径
 	 * @param isOverride 是否覆盖
+	 * @since 2022-04-27 17:37:52
 	 */
 	default void rename(String sourceName, String targetName, Boolean isOverride) {
 		move(sourceName, targetName, isOverride);
@@ -695,7 +778,8 @@ public interface StandardOssClient {
 	 * 获取文件信息，默认获取目标文件信息
 	 *
 	 * @param targetName 目标文件路径
-	 * @return 文件基本信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:37:54
 	 */
 	default OssInfo getInfo(String targetName) {
 		return getInfo(targetName, false);
@@ -706,7 +790,8 @@ public interface StandardOssClient {
 	 *
 	 * @param targetName  目标文件路径
 	 * @param isRecursion 是否递归
-	 * @return 文件基本信息
+	 * @return {@link OssInfo }
+	 * @since 2022-04-27 17:37:56
 	 */
 	OssInfo getInfo(String targetName, Boolean isRecursion);
 
@@ -714,7 +799,8 @@ public interface StandardOssClient {
 	 * 是否存在
 	 *
 	 * @param targetName 目标文件路径
-	 * @return true/false
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:37:58
 	 */
 	default Boolean isExist(String targetName) {
 		OssInfo info = getInfo(targetName);
@@ -725,7 +811,8 @@ public interface StandardOssClient {
 	 * 是否为文件 默认根据路径最后一段名称是否有后缀名来判断是否为文件，此方式不准确，当存储平台不提供类似方法时，可使用此方法
 	 *
 	 * @param targetName 目标文件路径
-	 * @return true/false
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:38:01
 	 */
 	default Boolean isFile(String targetName) {
 		String name = FileNameUtil.getName(targetName);
@@ -736,12 +823,19 @@ public interface StandardOssClient {
 	 * 是否为目录 与判断是否为文件相反
 	 *
 	 * @param targetName 目标文件路径
-	 * @return true/false
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:38:03
 	 */
 	default Boolean isDirectory(String targetName) {
 		return !isFile(targetName);
 	}
 
+	/**
+	 * 获取客户端对象
+	 *
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-04-27 17:38:05
+	 */
 	Map<String, Object> getClientObject();
 
 	/**
@@ -749,7 +843,8 @@ public interface StandardOssClient {
 	 *
 	 * @param targetName 目标地址
 	 * @param isAbsolute 是否绝对路径 true：绝对路径；false：相对路径
-	 * @return 完整路径
+	 * @return {@link String }
+	 * @since 2022-04-27 17:38:08
 	 */
 	default String getKey(String targetName, Boolean isAbsolute) {
 		String key = OssPathUtil.convertPath(getBasePath() + targetName, isAbsolute);
@@ -764,7 +859,8 @@ public interface StandardOssClient {
 	/**
 	 * 获取文件存储根路径
 	 *
-	 * @return 根路径
+	 * @return {@link String }
+	 * @since 2022-04-27 17:38:13
 	 */
 	String getBasePath();
 

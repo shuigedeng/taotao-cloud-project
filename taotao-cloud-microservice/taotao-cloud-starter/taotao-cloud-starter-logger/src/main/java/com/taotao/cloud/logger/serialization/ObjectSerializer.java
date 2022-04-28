@@ -16,16 +16,21 @@
  */
 package com.taotao.cloud.logger.serialization;
 
+import org.apache.kafka.common.errors.SerializationException;
+import org.apache.kafka.common.serialization.Serializer;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-import org.apache.kafka.common.errors.SerializationException;
-import org.apache.kafka.common.serialization.Serializer;
 
 /**
  * String encoding defaults to UTF8 and can be customized by setting the property
  * key.serializer.encoding, value.serializer.encoding or serializer.encoding. The first two take
  * precedence over the last.
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:31:49
  */
 public class ObjectSerializer implements Serializer<Object> {
 

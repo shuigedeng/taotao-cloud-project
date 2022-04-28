@@ -3,24 +3,30 @@ package com.taotao.cloud.promotion.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 优惠券活动实体类
  *
- * @since 2020-03-19 10:44 上午
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:25:09
  */
-@Setter
 @Getter
-@Builder
+@Setter
+@ToString(callSuper = true)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -29,20 +35,44 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = CouponActivity.TABLE_NAME, comment = "优惠券活动实体类")
 public class CouponActivity extends BasePromotions<CouponActivity, Long> {
 
-	public static final String TABLE_NAME = "li_coupon_activity";
+	public static final String TABLE_NAME = "tt_coupon_activity";
 
 	/**
+	 * 优惠券活动类型 REGISTERED:新人赠券,SPECIFY：精确发券
+	 *
 	 * @see CouponActivityTypeEnum
 	 */
-	@Column(name = "coupon_activity_type", columnDefinition = "varchar(64) not null comment '优惠券活动类型 REGISTERED:新人赠券,SPECIFY：精确发券'")
+	@Column(name = "coupon_activity_type", columnDefinition = "varchar(255) not null comment '优惠券活动类型 REGISTERED:新人赠券,SPECIFY：精确发券'")
 	private String couponActivityType;
 
 	/**
+	 * 活动范围 ALL:全部会员,DESIGNATED：指定会员
+	 *
 	 * @see CouponActivitySendTypeEnum
 	 */
-	@Column(name = "activity_scope", columnDefinition = "varchar(64) not null comment '活动范围 ALL:全部会员,DESIGNATED：指定会员'")
+	@Column(name = "activity_scope", columnDefinition = "varchar(255) not null comment '活动范围 ALL:全部会员,DESIGNATED：指定会员'")
 	private String activityScope;
-
-	@Column(name = "activity_scope_info", columnDefinition = "varchar(64) not null comment '活动范围详情,只有精准发券使用'")
+	/**
+	 * 活动范围详情,只有精准发券使用
+	 */
+	@Column(name = "activity_scope_info", columnDefinition = "varchar(255) not null comment '活动范围详情,只有精准发券使用'")
 	private String activityScopeInfo;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		CouponActivity couponActivity = (CouponActivity) o;
+		return getId() != null && Objects.equals(getId(), couponActivity.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

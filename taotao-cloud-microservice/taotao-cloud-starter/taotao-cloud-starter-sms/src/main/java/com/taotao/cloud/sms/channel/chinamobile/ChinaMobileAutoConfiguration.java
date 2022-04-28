@@ -31,6 +31,8 @@ import org.springframework.web.client.RestTemplate;
  * 移动云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:35
  */
 @Configuration
 @ConditionalOnProperty(prefix = ChinaMobileProperties.PREFIX, name = "enabled", havingValue = "true")

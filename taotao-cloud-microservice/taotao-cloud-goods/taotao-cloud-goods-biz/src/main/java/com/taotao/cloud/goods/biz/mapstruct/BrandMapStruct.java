@@ -18,30 +18,55 @@ package com.taotao.cloud.goods.biz.mapstruct;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * BrandMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:57:55
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BrandMapStruct {
 
+	/**
+	 * 实例
+	 */
 	BrandMapStruct INSTANCE = Mappers.getMapper(BrandMapStruct.class);
 
+	/**
+	 * 品牌,品牌签证官
+	 *
+	 * @param brand 品牌
+	 * @return {@link BrandVO }
+	 * @since 2022-04-27 16:57:56
+	 */
 	BrandVO brandToBrandVO(Brand brand);
 
+	/**
+	 * 品牌品牌vos
+	 *
+	 * @param brands 品牌
+	 * @return {@link List }<{@link BrandVO }>
+	 * @since 2022-04-27 16:57:56
+	 */
 	List<BrandVO> brandsToBrandVOs(List<Brand> brands);
 
+	/**
+	 * 品牌dtoto品牌
+	 *
+	 * @param brandDTO 品牌dto
+	 * @return {@link Brand }
+	 * @since 2022-04-27 16:57:56
+	 */
 	Brand brandDTOToBrand(BrandDTO brandDTO);
 
 

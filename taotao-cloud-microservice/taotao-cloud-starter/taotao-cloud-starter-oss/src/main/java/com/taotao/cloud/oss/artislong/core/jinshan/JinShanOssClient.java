@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.jinshan;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
@@ -11,13 +10,17 @@ import cn.hutool.core.text.CharPool;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.ksyun.ks3.dto.*;
+import com.ksyun.ks3.dto.GetObjectResult;
+import com.ksyun.ks3.dto.InitiateMultipartUploadResult;
+import com.ksyun.ks3.dto.Ks3ObjectSummary;
+import com.ksyun.ks3.dto.ObjectListing;
+import com.ksyun.ks3.dto.ObjectMetadata;
+import com.ksyun.ks3.dto.PartETag;
 import com.ksyun.ks3.service.Ks3;
 import com.ksyun.ks3.service.request.CompleteMultipartUploadRequest;
 import com.ksyun.ks3.service.request.GetObjectRequest;
 import com.ksyun.ks3.service.request.InitiateMultipartUploadRequest;
 import com.ksyun.ks3.service.request.UploadPartRequest;
-
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
@@ -34,14 +37,23 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * https://docs.ksyun.com/documents/38731
+ * <a href="https://docs.ksyun.com/documents/38731">https://docs.ksyun.com/documents/38731</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:12
  */
 public class JinShanOssClient implements StandardOssClient {
 

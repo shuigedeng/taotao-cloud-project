@@ -23,6 +23,11 @@ import com.taotao.cloud.oss.artislong.model.FileOssInfo;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+import repkg.com.amazonaws.AmazonClientException;
+import repkg.com.amazonaws.services.s3.model.ObjectListing;
+import repkg.com.amazonaws.services.s3.model.ObjectMetadata;
+import repkg.com.amazonaws.services.s3.model.S3Object;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -31,14 +36,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import repkg.com.amazonaws.AmazonClientException;
-import repkg.com.amazonaws.services.s3.model.ObjectListing;
-import repkg.com.amazonaws.services.s3.model.ObjectMetadata;
-import repkg.com.amazonaws.services.s3.model.S3Object;
 
 /**
- * https://yun.pingan.com/ssr/help/storage/obs?menuItem=OBS_SDK_.Java_SDK_
+ * <a href="https://yun.pingan.com/ssr/help/storage/obs?menuItem=OBS_SDK_.Java_SDK_">https://yun.pingan.com/ssr/help/storage/obs?menuItem=OBS_SDK_.Java_SDK_</a>
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:04
  */
 public class PingAnOssClient implements StandardOssClient {
 

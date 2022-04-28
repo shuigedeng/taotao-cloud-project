@@ -1,24 +1,30 @@
 package com.taotao.cloud.promotion.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.v3.oas.annotations.media.Schema;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 拼团活动实体类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:24:42
  */
-@Setter
 @Getter
-@Builder
+@Setter
+@ToString(callSuper = true)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,24 +33,42 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = Pintuan.TABLE_NAME, comment = "拼团活动实体类")
 public class Pintuan extends BasePromotions<Pintuan, Long> {
 
-	public static final String TABLE_NAME = "li_pintuan";
-
-	@Min(message = "成团人数需大于等于2", value = 2)
-	@Max(message = "成团人数最多10人", value = 10)
-	@NotNull(message = "成团人数必填")
-	@Schema(description = "成团人数")
+	public static final String TABLE_NAME = "tt_pintuan";
+	/**
+	 * 成团人数
+	 */
+	@Column(name = "required_num", columnDefinition = "int not null  comment '成团人数'")
 	private Integer requiredNum;
-
-	@Min(message = "限购数量必须为数字", value = 0)
-	@NotNull(message = "限购数量必填")
-	@Schema(description = "限购数量")
+	/**
+	 * 限购数量
+	 */
+	@Column(name = "limit_num", columnDefinition = "int not null  comment '限购数量'")
 	private Integer limitNum;
-
-	@Schema(description = "虚拟成团", required = true)
-	@NotNull(message = "虚拟成团必填")
+	/**
+	 * 虚拟成团
+	 */
+	@Column(name = "fictitious", columnDefinition = "boolean not null  comment '虚拟成团'")
 	private Boolean fictitious;
-
-	@Schema(description = "拼团规则")
+	/**
+	 * 拼团规则
+	 */
+	@Column(name = "pintuan_rule", columnDefinition = "varchar(255) not null  comment '拼团规则'")
 	private String pintuanRule;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		Pintuan pintuan = (Pintuan) o;
+		return getId() != null && Objects.equals(getId(), pintuan.getId());
+	}
 
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

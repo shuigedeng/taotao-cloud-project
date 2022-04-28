@@ -2,11 +2,16 @@ package com.taotao.cloud.common.support.cache.impl;
 
 
 import com.taotao.cloud.common.utils.reflect.ClassUtil;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
 /**
  * 类字段列表缓存
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:07:41
  */
 public class ClassFieldListCache extends AbstractCache<Class, List<Field>> {
 

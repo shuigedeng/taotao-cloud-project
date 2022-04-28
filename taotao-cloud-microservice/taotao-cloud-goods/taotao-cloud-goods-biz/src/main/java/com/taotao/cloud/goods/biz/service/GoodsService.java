@@ -13,9 +13,10 @@ import java.util.List;
 
 /**
  * 商品业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:00:15
  */
 public interface GoodsService extends IService<Goods> {
 
@@ -23,6 +24,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 根据品牌获取商品
 	 *
 	 * @param brandIds 品牌ids
+	 * @return {@link List }<{@link Goods }>
+	 * @since 2022-04-27 17:00:15
 	 */
 	List<Goods> getByBrandIds(List<Long> brandIds);
 
@@ -30,6 +33,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 下架所有商家商品
 	 *
 	 * @param storeId 店铺ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:15
 	 */
 	Boolean underStoreGoods(Long storeId);
 
@@ -38,6 +43,8 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param goodsId 商品id
 	 * @param params  商品参数
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:15
 	 */
 	Boolean updateGoodsParams(Long goodsId, String params);
 
@@ -45,7 +52,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 获取某分类下的商品数量
 	 *
 	 * @param categoryId 分类ID
-	 * @return 商品数量
+	 * @return {@link Long }
+	 * @since 2022-04-27 17:00:15
 	 */
 	Long getGoodsCountByCategory(Long categoryId);
 
@@ -53,6 +61,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 添加商品
 	 *
 	 * @param goodsOperationDTO 商品查询条件
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:15
 	 */
 	Boolean addGoods(GoodsOperationDTO goodsOperationDTO);
 
@@ -61,6 +71,8 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param goodsOperationDTO 商品查询条件
 	 * @param goodsId           商品ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:15
 	 */
 	Boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId);
 
@@ -68,7 +80,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 查询商品VO
 	 *
 	 * @param goodsId 商品id
-	 * @return 商品VO
+	 * @return {@link GoodsVO }
+	 * @since 2022-04-27 17:00:16
 	 */
 	GoodsVO getGoodsVO(Long goodsId);
 
@@ -76,7 +89,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 商品查询
 	 *
 	 * @param goodsPageQuery 查询参数
-	 * @return 商品分页
+	 * @return {@link IPage }<{@link Goods }>
+	 * @since 2022-04-27 17:00:16
 	 */
 	IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery);
 
@@ -84,7 +98,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 商品查询
 	 *
 	 * @param goodsPageQuery 查询参数
-	 * @return 商品信息
+	 * @return {@link List }<{@link Goods }>
+	 * @since 2022-04-27 17:00:16
 	 */
 	List<Goods> queryListByParams(GoodsPageQuery goodsPageQuery);
 
@@ -93,7 +108,8 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param goodsIds      商品id列表
 	 * @param goodsAuthEnum 审核操作
-	 * @return 审核结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean auditGoods(List<Long> goodsIds, GoodsAuthEnum goodsAuthEnum);
 
@@ -103,7 +119,8 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsIds        商品ID集合
 	 * @param goodsStatusEnum 更新的商品状态
 	 * @param underReason     下架原因
-	 * @return 更新结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
 								  String underReason);
@@ -114,7 +131,8 @@ public interface GoodsService extends IService<Goods> {
 	 * @param goodsIds        商品ID集合
 	 * @param goodsStatusEnum 更新的商品状态
 	 * @param underReason     下架原因
-	 * @return 更新结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
 										 String underReason);
@@ -123,7 +141,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 删除商品
 	 *
 	 * @param goodsIds 商品ID
-	 * @return 操作结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean deleteGoods(List<Long> goodsIds);
 
@@ -132,7 +151,8 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param goodsIds   商品列表
 	 * @param templateId 运费模板ID
-	 * @return 操作结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean freight(List<Long> goodsIds, Long templateId);
 
@@ -141,6 +161,8 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param goodsId  商品ID
 	 * @param quantity 库存数量
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean updateStock(Long goodsId, Integer quantity);
 
@@ -148,6 +170,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 更新商品评价数量
 	 *
 	 * @param goodsId 商品ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean updateGoodsCommentNum(Long goodsId);
 
@@ -156,6 +180,8 @@ public interface GoodsService extends IService<Goods> {
 	 *
 	 * @param goodsId  商品ID
 	 * @param buyCount 购买数量
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Boolean updateGoodsBuyCount(Long goodsId, int buyCount);
 
@@ -170,7 +196,8 @@ public interface GoodsService extends IService<Goods> {
 	 * 统计店铺的商品数量
 	 *
 	 * @param storeId 店铺id
-	 * @return 商品数量
+	 * @return {@link Long }
+	 * @since 2022-04-27 17:00:16
 	 */
 	Long countStoreGoodsNum(Long storeId);
 

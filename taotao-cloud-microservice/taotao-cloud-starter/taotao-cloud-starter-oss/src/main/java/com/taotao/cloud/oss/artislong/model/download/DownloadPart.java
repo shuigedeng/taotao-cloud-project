@@ -1,10 +1,19 @@
 package com.taotao.cloud.oss.artislong.model.download;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * 下载部分
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:54
+ */
 public class DownloadPart implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -3655925846487976207L;
 
 	private int index;

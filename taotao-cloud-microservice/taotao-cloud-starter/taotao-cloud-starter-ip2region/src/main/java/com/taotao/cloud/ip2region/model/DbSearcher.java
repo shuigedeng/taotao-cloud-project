@@ -3,6 +3,7 @@ package com.taotao.cloud.ip2region.model;
 
 import com.taotao.cloud.ip2region.impl.RandomAccessFileDBReader;
 import com.taotao.cloud.ip2region.utils.Ip2regionUtil;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -10,34 +11,55 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * ip db searcher class (Not thread safe)
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:28:10
  */
 public class DbSearcher {
 
 	/**
+	 * 数据库配置
 	 * db config
 	 */
 	private final DbConfig dbConfig;
 
 	/**
+	 * 读者
 	 * db file access handler
 	 */
 	private final DBReader reader;
 
 	/**
+	 * 头喝
 	 * header blocks buffer
 	 */
 	private long[] HeaderSip = null;
+	/**
+	 * 头ptr
+	 */
 	private int[] HeaderPtr = null;
+	/**
+	 * 头长度
+	 */
 	private int headerLength;
 
 	/**
+	 * 第一个索引ptr
 	 * super blocks info
 	 */
 	private long firstIndexPtr = 0;
+	/**
+	 * 去年指数ptr
+	 */
 	private long lastIndexPtr = 0;
+	/**
+	 * 总索引块
+	 */
 	private int totalIndexBlocks = 0;
 
 	/**
+	 * db本str
 	 * for memory mode the original db binary string
 	 */
 	private byte[] dbBinStr = null;
@@ -48,12 +70,21 @@ public class DbSearcher {
 	 *
 	 * @param dbConfig dbConfig
 	 * @param dbFile   dbFile
-	 * @throws FileNotFoundException
+	 * @return
+	 * @since 2022-04-27 17:28:10
 	 */
 	public DbSearcher(DbConfig dbConfig, String dbFile) throws FileNotFoundException {
 		this(dbConfig, new RandomAccessFileDBReader(new RandomAccessFile(dbFile, "r")));
 	}
 
+	/**
+	 * 数据库搜索器
+	 *
+	 * @param dbConfig 数据库配置
+	 * @param reader   读者
+	 * @return
+	 * @since 2022-04-27 17:28:11
+	 */
 	public DbSearcher(DbConfig dbConfig, DBReader reader) {
 		this.dbConfig = dbConfig;
 		this.reader = reader;
@@ -63,7 +94,8 @@ public class DbSearcher {
 	 * get the region with a int ip address with memory binary search algorithm
 	 *
 	 * @param ip
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock memorySearch(long ip) throws IOException {
 		int blen = IndexBlock.getIndexBlockLength();
@@ -115,8 +147,8 @@ public class DbSearcher {
 	 * get the region throught the ip address with memory binary search algorithm
 	 *
 	 * @param ip
-	 * @return DataBlock
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock memorySearch(String ip) throws IOException {
 		return memorySearch(Ip2regionUtil.ip2long(ip));
@@ -126,7 +158,8 @@ public class DbSearcher {
 	 * get by index ptr
 	 *
 	 * @param ptr ptr
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock getByIndexPtr(long ptr) throws IOException {
 		//reader.seek(ptr);
@@ -153,7 +186,8 @@ public class DbSearcher {
 	 * get the region with a int ip address with b-tree algorithm
 	 *
 	 * @param ip
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock btreeSearch(long ip) throws IOException {
 		//check and load the header
@@ -291,8 +325,8 @@ public class DbSearcher {
 	 * get the region throught the ip address with b-tree search algorithm
 	 *
 	 * @param ip
-	 * @return DataBlock
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock btreeSearch(String ip) throws IOException {
 		return btreeSearch(Ip2regionUtil.ip2long(ip));
@@ -302,7 +336,8 @@ public class DbSearcher {
 	 * get the region with a int ip address with binary search algorithm
 	 *
 	 * @param ip
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock binarySearch(long ip) throws IOException {
 		int blen = IndexBlock.getIndexBlockLength();
@@ -361,8 +396,8 @@ public class DbSearcher {
 	 * get the region throught the ip address with binary search algorithm
 	 *
 	 * @param ip
-	 * @return DataBlock
-	 * @throws IOException
+	 * @return {@link DataBlock }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DataBlock binarySearch(String ip) throws IOException {
 		return binarySearch(Ip2regionUtil.ip2long(ip));
@@ -371,7 +406,8 @@ public class DbSearcher {
 	/**
 	 * get the db config
 	 *
-	 * @return DbConfig
+	 * @return {@link DbConfig }
+	 * @since 2022-04-27 17:28:11
 	 */
 	public DbConfig getDbConfig() {
 		return dbConfig;
@@ -380,7 +416,7 @@ public class DbSearcher {
 	/**
 	 * close the db
 	 *
-	 * @throws IOException
+	 * @since 2022-04-27 17:28:11
 	 */
 	public void close() throws IOException {
 		//let gc do its work

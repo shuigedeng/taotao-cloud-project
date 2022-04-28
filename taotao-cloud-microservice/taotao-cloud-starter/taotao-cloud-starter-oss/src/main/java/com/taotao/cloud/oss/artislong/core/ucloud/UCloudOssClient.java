@@ -38,6 +38,7 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -49,7 +50,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * https://docs.ucloud.cn/ufile/README
+ * <a href="https://docs.ucloud.cn/ufile/README">https://docs.ucloud.cn/ufile/README</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:23
  */
 public class UCloudOssClient implements StandardOssClient {
 

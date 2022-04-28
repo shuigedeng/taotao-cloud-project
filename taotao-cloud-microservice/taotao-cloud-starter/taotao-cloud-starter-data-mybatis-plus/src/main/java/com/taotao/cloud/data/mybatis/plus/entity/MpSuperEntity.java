@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
-import org.apache.poi.ss.formula.functions.T;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * SuperEntity 
@@ -20,6 +20,7 @@ import org.apache.poi.ss.formula.functions.T;
  */
 public class MpSuperEntity<I extends Serializable> implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4603650115461757622L;
 
 	public static final String FIELD_ID = "id";

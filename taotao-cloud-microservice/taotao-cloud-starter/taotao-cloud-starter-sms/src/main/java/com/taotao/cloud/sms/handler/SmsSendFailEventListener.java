@@ -19,5 +19,7 @@ import org.springframework.context.ApplicationListener;
  * 发送失败事件监听接口
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:35
  */
 public interface SmsSendFailEventListener extends ApplicationListener<SmsSendFailEvent> {}

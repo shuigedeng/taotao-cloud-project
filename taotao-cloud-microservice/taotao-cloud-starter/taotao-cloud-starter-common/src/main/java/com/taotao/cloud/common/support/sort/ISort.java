@@ -4,6 +4,10 @@ import java.util.List;
 
 /**
  * 排序接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:39
  */
 public interface ISort<T> {
 

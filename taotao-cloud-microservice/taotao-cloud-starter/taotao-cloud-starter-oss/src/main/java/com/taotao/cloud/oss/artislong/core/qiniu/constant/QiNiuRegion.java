@@ -5,6 +5,13 @@ import com.qiniu.storage.Region;
 
 import java.lang.reflect.Method;
 
+/**
+ * 气妞妞地区
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:28
+ */
 public enum QiNiuRegion {
     /**
      * 华东区域

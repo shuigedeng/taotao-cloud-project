@@ -2,15 +2,20 @@
 package com.taotao.cloud.redis.redisson;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import org.redisson.api.RBlockingDeque;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 /**
  * 封装 Redis 延迟队列工具
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:45:41
  */
 public class RedisDelayQueue {
 
@@ -24,6 +29,7 @@ public class RedisDelayQueue {
 	 * @param delay     延迟时间
 	 * @param timeUnit  时间单位
 	 * @param queueCode 队列键
+	 * @since 2022-04-27 17:45:48
 	 */
 	public <T> void addDelayQueue(T value, long delay, TimeUnit timeUnit, String queueCode) {
 		try {
@@ -42,7 +48,8 @@ public class RedisDelayQueue {
 	 * 获取延迟队列
 	 *
 	 * @param queueCode
-	 * @param <T>
+	 * @return {@link T }
+	 * @since 2022-04-27 17:45:48
 	 */
 	public <T> T getDelayQueue(String queueCode) throws InterruptedException {
 		RBlockingDeque<Map> blockingDeque = redissonClient.getBlockingDeque(queueCode);

@@ -1,24 +1,22 @@
 package com.taotao.cloud.common.execl.core.dataformat;
 
-import java.io.File;
-import java.util.List;
-import java.util.Locale;
-
-import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
-
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.io.File;
+import java.util.List;
+import java.util.Locale;
+
 /**
 
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Slf4j
+
 public class DateFormatTest {
 
     private static File file07;

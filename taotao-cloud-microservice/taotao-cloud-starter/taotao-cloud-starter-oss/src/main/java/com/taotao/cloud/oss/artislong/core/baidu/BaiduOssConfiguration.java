@@ -18,6 +18,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * 百度oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:51
+ */
 @Configuration
 @ConditionalOnClass(BosClient.class)
 @EnableConfigurationProperties({BaiduOssProperties.class})

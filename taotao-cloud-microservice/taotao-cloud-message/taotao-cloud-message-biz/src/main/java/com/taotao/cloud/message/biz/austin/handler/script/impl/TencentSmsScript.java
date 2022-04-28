@@ -18,7 +18,6 @@ import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20210111.models.SendStatus;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +32,7 @@ import java.util.List;
  * 3. 推荐使用API Explorer 生成代码
  */
 @Service
-@Slf4j
+
 public class TencentSmsScript implements SmsScript {
 
     private static final Integer PHONE_NUM = 11;

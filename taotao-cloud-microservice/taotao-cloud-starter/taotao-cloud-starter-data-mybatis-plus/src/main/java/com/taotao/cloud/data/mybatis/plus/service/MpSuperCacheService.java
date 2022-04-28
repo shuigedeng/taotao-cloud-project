@@ -17,11 +17,12 @@ package com.taotao.cloud.data.mybatis.plus.service;
 
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
 import com.taotao.cloud.redis.model.CacheKey;
+import org.springframework.lang.NonNull;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import org.springframework.lang.NonNull;
 
 /**
  * 基于MP的 IService 新增了3个方法： getByIdCache 其中： 1，getByIdCache 方法 会先从缓存查询，后从DB查询 （取决于实现类） 2、SuperService
@@ -38,7 +39,6 @@ public interface MpSuperCacheService<T extends MpSuperEntity<I>, I extends Seria
 	 *
 	 * @param id 主键
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:20
 	 */
 	T getByIdCache(I id);
@@ -49,7 +49,6 @@ public interface MpSuperCacheService<T extends MpSuperEntity<I>, I extends Seria
 	 * @param key    缓存key
 	 * @param loader 加载器
 	 * @return T
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:34
 	 */
 	T getByKey(CacheKey key, Function<CacheKey, Object> loader);
@@ -60,7 +59,6 @@ public interface MpSuperCacheService<T extends MpSuperEntity<I>, I extends Seria
 	 * @param ids    主键id
 	 * @param loader 回调
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:44
 	 */
 	List<T> findByIds(@NonNull Collection<I> ids, Function<Collection<I>, Collection<T>> loader);
@@ -68,7 +66,6 @@ public interface MpSuperCacheService<T extends MpSuperEntity<I>, I extends Seria
 	/**
 	 * 刷新缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:51
 	 */
 	void refreshCache();
@@ -76,7 +73,6 @@ public interface MpSuperCacheService<T extends MpSuperEntity<I>, I extends Seria
 	/**
 	 * 清理缓存
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:20:55
 	 */
 	void clearCache();

@@ -6,19 +6,25 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.goods.api.vo.CommodityVO;
 import com.taotao.cloud.goods.biz.entity.Commodity;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * 直播商品数据层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:55:41
  */
 public interface CommodityMapper extends BaseMapper<Commodity> {
 
 	/**
 	 * 获取直播商品ID列表
 	 *
-	 * @return 直播商品ID列表
+	 * @return {@link List }<{@link String }>
+	 * @since 2022-04-27 16:55:41
 	 */
 	@Select("""
 		SELECT live_goods_id
@@ -31,7 +37,8 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 	 * 获取直播间关联直播商品列表
 	 *
 	 * @param roomId 直播间ID
-	 * @return 直播商品列表
+	 * @return {@link List }<{@link Commodity }>
+	 * @since 2022-04-27 16:55:41
 	 */
 	@Select("""
 		SELECT *
@@ -44,7 +51,8 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 	 * 获取直播商品图片列表
 	 *
 	 * @param roomId 直播间ID
-	 * @return 直播商品图片列表
+	 * @return {@link List }<{@link String }>
+	 * @since 2022-04-27 16:55:41
 	 */
 	@Select("""
 		SELECT goods_image
@@ -58,7 +66,8 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 	 *
 	 * @param page         分页
 	 * @param queryWrapper 查询条件
-	 * @return 直播商品VO分页
+	 * @return {@link IPage }<{@link CommodityVO }>
+	 * @since 2022-04-27 16:55:41
 	 */
 	@Select("""
 		SELECT c.*,gs.quantity,s.store_name 

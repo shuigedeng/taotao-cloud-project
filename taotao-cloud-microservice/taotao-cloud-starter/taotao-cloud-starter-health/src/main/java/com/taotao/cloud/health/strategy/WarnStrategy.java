@@ -21,11 +21,25 @@ import com.taotao.cloud.health.model.Report;
  * WarnStrategy
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2021/12/02 20:48
+ * @version 2022.04
+ * @since 2022-04-27 17:25:31
  */
 public interface WarnStrategy {
+	/**
+	 * 分析
+	 *
+	 * @param report 报告
+	 * @return {@link Report }
+	 * @since 2022-04-27 17:25:32
+	 */
 	Report analyse(Report report);
 
+	/**
+	 * 分析文本
+	 *
+	 * @param report 报告
+	 * @return {@link String }
+	 * @since 2022-04-27 17:25:32
+	 */
 	String analyseText(Report report);
 }

@@ -4,6 +4,10 @@ package com.taotao.cloud.common.support.tuple.tuple;
  * 表示有4个元素的元组类型
  * 可迭代
  * 不可变，线程安全
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:42
  */
 public final class Tuple4<A, B, C, D> extends Tuple {
 

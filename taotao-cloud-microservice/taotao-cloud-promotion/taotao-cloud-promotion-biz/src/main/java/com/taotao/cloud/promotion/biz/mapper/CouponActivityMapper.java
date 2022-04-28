@@ -5,9 +5,10 @@ import com.taotao.cloud.promotion.biz.entity.CouponActivity;
 
 /**
  * 优惠券活动
- * 
- * @since 2021/5/20 6:11 下午
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:36:32
  */
 public interface CouponActivityMapper extends BaseMapper<CouponActivity> {
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.payment.biz.kit.core.http.AbstractHttpDelegate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * <p>Http 工具类</p>
  */
-@Slf4j
+
 public class HttpKit {
 
     private static AbstractHttpDelegate delegate = new DefaultHttpKit();

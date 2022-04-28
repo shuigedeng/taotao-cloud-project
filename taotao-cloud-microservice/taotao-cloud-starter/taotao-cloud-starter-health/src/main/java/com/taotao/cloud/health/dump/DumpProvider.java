@@ -20,6 +20,8 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.health.exception.HealthException;
 import com.taotao.cloud.health.utils.ProcessUtils;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,25 +31,26 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * DumpProvider
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-10 17:18:34
+ * @version 2022.04
+ * @since 2022-04-27 17:26:52
  */
 public class DumpProvider {
 
+	/**
+	 * 最后把时间
+	 */
 	private static Long lastDumpTime = 0L;
 
 	/**
 	 * getList
 	 *
-	 * @return java.io.File[]
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:18:42
+	 * @return {@link File[] }
+	 * @since 2022-04-27 17:26:52
 	 */
 	public File[] getList() {
 		File file = new File(".");
@@ -57,8 +60,7 @@ public class DumpProvider {
 	/**
 	 * list
 	 *
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:18:57
+	 * @since 2022-04-27 17:26:52
 	 */
 	public void list() {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -82,8 +84,7 @@ public class DumpProvider {
 	 * zip
 	 *
 	 * @param name name
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:19:02
+	 * @since 2022-04-27 17:26:52
 	 */
 	public void zip(String name) {
 		for (File f : getList()) {
@@ -103,8 +104,7 @@ public class DumpProvider {
 	/**
 	 * dump
 	 *
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:19:06
+	 * @since 2022-04-27 17:26:52
 	 */
 	public void dump() {
 		try {
@@ -128,8 +128,7 @@ public class DumpProvider {
 	 * download
 	 *
 	 * @param name name
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:19:10
+	 * @since 2022-04-27 17:26:52
 	 */
 	public void download(String name) {
 		for (File f : getList()) {
@@ -169,8 +168,7 @@ public class DumpProvider {
 	 * response
 	 *
 	 * @param html html
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:19:14
+	 * @since 2022-04-27 17:26:52
 	 */
 	private void response(String html) {
 		try {

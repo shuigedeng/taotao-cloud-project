@@ -4,7 +4,9 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.oss.artislong.exception.OssException;
+
 import java.io.File;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +14,14 @@ import java.util.List;
 
 /**
  * 断点对象
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:23
  */
 public class UpLoadCheckPoint implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 5424904565837227164L;
 
 	public static final String UPLOAD_MAGIC = "FE8BB4EA-B593-4FAC-AD7A-2459A36E2E62";

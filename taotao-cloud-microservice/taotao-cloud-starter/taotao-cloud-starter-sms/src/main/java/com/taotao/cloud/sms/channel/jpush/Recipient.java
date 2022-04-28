@@ -20,6 +20,8 @@ import java.util.Map;
  * 接收者
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:15
  */
 public class Recipient {
 

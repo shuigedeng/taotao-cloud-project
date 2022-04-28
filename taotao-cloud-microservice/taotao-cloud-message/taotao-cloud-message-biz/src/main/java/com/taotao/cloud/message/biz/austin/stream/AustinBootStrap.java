@@ -5,7 +5,6 @@ import com.taotao.cloud.message.biz.austin.stream.constants.AustinFlinkConstant;
 import com.taotao.cloud.message.biz.austin.stream.function.AustinFlatMapFunction;
 import com.taotao.cloud.message.biz.austin.stream.sink.AustinSink;
 import com.taotao.cloud.message.biz.austin.stream.utils.MessageQueueUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -17,7 +16,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  *
  * 
  */
-@Slf4j
+
 public class AustinBootStrap {
 
     public static void main(String[] args) throws Exception {

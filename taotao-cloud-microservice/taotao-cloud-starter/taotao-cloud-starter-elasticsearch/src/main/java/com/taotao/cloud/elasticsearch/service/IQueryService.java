@@ -18,6 +18,7 @@ package com.taotao.cloud.elasticsearch.service;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.LogicDelDto;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -25,8 +26,8 @@ import java.util.Map;
  * 查询服务
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/5/3 08:01
+ * @version 2022.04
+ * @since 2022-04-27 17:24:08
  */
 public interface IQueryService {
 
@@ -35,9 +36,8 @@ public interface IQueryService {
 	 *
 	 * @param indexName 索引名
 	 * @param searchDto 搜索Dto
-	 * @return com.taotao.cloud.core.model.PageResult<java.lang.String>
-	 * @author shuigedeng
-	 * @since 2021/2/26 08:59
+	 * @return {@link PageModel }<{@link String }>
+	 * @since 2022-04-27 17:24:08
 	 */
 	PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException;
 
@@ -47,9 +47,8 @@ public interface IQueryService {
 	 * @param indexName   索引名
 	 * @param searchDto   搜索Dto
 	 * @param logicDelDto 逻辑删除Dto
-	 * @return com.taotao.cloud.core.model.PageResult<java.lang.String>
-	 * @author shuigedeng
-	 * @since 2021/2/26 08:59
+	 * @return {@link PageModel }<{@link String }>
+	 * @since 2022-04-27 17:24:08
 	 */
 	PageModel<String> strQuery(String indexName, SearchDto searchDto, LogicDelDto logicDelDto)
 		throws IOException;
@@ -59,9 +58,8 @@ public interface IQueryService {
 	 *
 	 * @param indexName 索引名
 	 * @param routing   es的路由
-	 * @return java.util.Map<java.lang.String, java.lang.Object>
-	 * @author shuigedeng
-	 * @since 2021/2/26 08:59
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-04-27 17:24:08
 	 */
 	Map<String, Object> requestStatAgg(String indexName, String routing) throws IOException;
 }

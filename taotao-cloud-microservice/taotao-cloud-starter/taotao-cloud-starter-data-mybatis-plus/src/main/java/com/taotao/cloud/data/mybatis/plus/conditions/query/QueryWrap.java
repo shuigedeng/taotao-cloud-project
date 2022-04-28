@@ -1,8 +1,5 @@
 package com.taotao.cloud.data.mybatis.plus.conditions.query;
 
-import static com.taotao.cloud.data.mybatis.plus.conditions.Wraps.replace;
-
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.SharedString;
@@ -13,6 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -259,7 +257,7 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 			return StrUtil.isNotBlank((String) val);
 		}
 		if (val instanceof Collection && this.skipEmpty) {
-			return !((Collection) val).isEmpty();
+			return !((Collection<?>) val).isEmpty();
 		}
 		return val != null;
 	}

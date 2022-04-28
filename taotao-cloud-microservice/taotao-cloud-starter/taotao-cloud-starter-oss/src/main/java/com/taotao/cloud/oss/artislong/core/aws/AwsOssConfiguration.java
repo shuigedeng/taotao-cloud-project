@@ -20,6 +20,13 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 import java.util.Map;
 
+/**
+ * aws oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:35
+ */
 @Configuration
 @ConditionalOnClass(S3Client.class)
 @EnableConfigurationProperties({AwsOssProperties.class})

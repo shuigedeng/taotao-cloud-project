@@ -1,11 +1,20 @@
 package com.taotao.cloud.oss.artislong.model.download;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 下载对象属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:49
+ */
 public class DownloadObjectStat implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -2883494783412999919L;
 
 	private long size;

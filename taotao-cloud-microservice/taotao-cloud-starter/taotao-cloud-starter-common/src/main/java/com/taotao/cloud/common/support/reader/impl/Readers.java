@@ -1,10 +1,15 @@
 package com.taotao.cloud.common.support.reader.impl;
 
 import com.taotao.cloud.common.support.reader.IReader;
+
 import java.io.File;
 
 /**
  * 读取工具类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:29
  */
 public final class Readers {
 

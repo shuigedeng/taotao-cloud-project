@@ -3,6 +3,10 @@ package com.taotao.cloud.oss.artislong.model.upload;
 
 /**
  * 分块结果集
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:41
  */
 public class UpLoadPartResult {
 

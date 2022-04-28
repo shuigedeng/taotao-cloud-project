@@ -1,21 +1,19 @@
 package com.taotao.cloud.common.execl.demo.read;
 
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 直接用map接收数据
  *
 
  */
-@Slf4j
+
 public class NoModelDataListener extends AnalysisEventListener<Map<Integer, String>> {
     /**
      * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收

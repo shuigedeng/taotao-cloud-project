@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.biz.austin.support.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.stereotype.Component;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * 
  */
 @Component
-@Slf4j
+
 public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener<ContextClosedEvent> {
 
     private final List<ExecutorService> POOLS = Collections.synchronizedList(new ArrayList<>(12));

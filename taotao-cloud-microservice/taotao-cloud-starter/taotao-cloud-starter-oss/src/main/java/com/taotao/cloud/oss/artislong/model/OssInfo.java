@@ -3,6 +3,13 @@ package com.taotao.cloud.oss.artislong.model;
 
 import com.taotao.cloud.oss.model.UploadFileInfo;
 
+/**
+ * 操作系统信息
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:15
+ */
 public class OssInfo {
 
 	/**

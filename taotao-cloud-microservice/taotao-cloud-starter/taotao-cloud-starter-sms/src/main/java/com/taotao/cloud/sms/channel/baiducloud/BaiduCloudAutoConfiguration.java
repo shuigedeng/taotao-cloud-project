@@ -29,6 +29,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 百度云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:25
  */
 @Configuration
 @ConditionalOnProperty(prefix = BaiduCloudProperties.PREFIX, name = "enabled", havingValue = "true")

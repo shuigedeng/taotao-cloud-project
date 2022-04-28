@@ -20,10 +20,26 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsWordsTypeEnum;
 import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
-import com.taotao.cloud.goods.biz.elasticsearch.*;
-import com.taotao.cloud.goods.biz.entity.*;
+import com.taotao.cloud.goods.biz.elasticsearch.BaseElasticsearchService;
+import com.taotao.cloud.goods.biz.elasticsearch.ElasticsearchProperties;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsAttribute;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
+import com.taotao.cloud.goods.biz.elasticsearch.EsSuffix;
+import com.taotao.cloud.goods.biz.entity.Brand;
+import com.taotao.cloud.goods.biz.entity.Category;
+import com.taotao.cloud.goods.biz.entity.Goods;
+import com.taotao.cloud.goods.biz.entity.GoodsSku;
+import com.taotao.cloud.goods.biz.entity.GoodsWords;
+import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.repository.EsGoodsIndexRepository;
-import com.taotao.cloud.goods.biz.service.*;
+import com.taotao.cloud.goods.biz.service.BrandService;
+import com.taotao.cloud.goods.biz.service.CategoryService;
+import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.EsGoodsSearchService;
+import com.taotao.cloud.goods.biz.service.GoodsService;
+import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.GoodsWordsService;
+import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionService;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -61,11 +77,21 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * 商品索引业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:02:27
  */
 @Service
 public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements

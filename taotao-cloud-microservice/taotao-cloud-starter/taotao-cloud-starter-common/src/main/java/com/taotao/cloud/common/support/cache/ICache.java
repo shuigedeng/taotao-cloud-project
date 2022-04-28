@@ -2,6 +2,10 @@ package com.taotao.cloud.common.support.cache;
 
 /**
  * 缓存接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:07:29
  */
 public interface ICache<K, V> {
 

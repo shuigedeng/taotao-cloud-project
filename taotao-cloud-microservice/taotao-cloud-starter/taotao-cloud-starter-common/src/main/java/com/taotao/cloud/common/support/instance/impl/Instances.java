@@ -3,6 +3,10 @@ package com.taotao.cloud.common.support.instance.impl;
 
 /**
  * 实例化工具类 对于 {@link InstanceFactory} 的便于使用
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:10:31
  */
 public final class Instances {
 

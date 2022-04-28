@@ -18,6 +18,8 @@ import java.util.Locale;
  * 重试时间过短
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:31
  */
 public class RetryTimeShortException extends SmsException {
 

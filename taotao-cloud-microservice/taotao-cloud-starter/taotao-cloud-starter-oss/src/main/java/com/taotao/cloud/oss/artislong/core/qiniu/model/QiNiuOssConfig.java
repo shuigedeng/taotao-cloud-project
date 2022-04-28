@@ -4,6 +4,13 @@ import com.taotao.cloud.oss.artislong.core.qiniu.constant.QiNiuRegion;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * 气妞妞oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:35
+ */
 public class QiNiuOssConfig {
 
     private String basePath;

@@ -13,8 +13,9 @@ import java.util.List;
 /**
  * 优惠券活动关联优惠券业务层实现
  *
- * 
- * @since 2021/5/21 6:42 下午
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:01
  */
 @Service
 public class CouponActivityItemServiceImpl extends ServiceImpl<CouponActivityItemMapper, CouponActivityItem> implements

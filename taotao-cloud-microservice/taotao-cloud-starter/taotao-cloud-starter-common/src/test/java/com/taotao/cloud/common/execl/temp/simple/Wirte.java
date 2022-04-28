@@ -1,25 +1,23 @@
 package com.taotao.cloud.common.execl.temp.simple;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import com.taotao.cloud.common.execl.core.large.LargeData;
-import com.taotao.cloud.common.execl.demo.write.DemoData;
-import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.util.BeanMapUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
 import com.alibaba.fastjson.JSON;
-
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.execl.core.large.LargeData;
+import com.taotao.cloud.common.execl.demo.write.DemoData;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 测试poi
@@ -27,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
  */
 @Ignore
-@Slf4j
+
 public class Wirte {
     private static final Logger LOGGER = LoggerFactory.getLogger(Wirte.class);
 

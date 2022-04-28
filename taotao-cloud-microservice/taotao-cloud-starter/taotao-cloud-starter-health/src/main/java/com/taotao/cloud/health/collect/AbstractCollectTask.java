@@ -27,19 +27,24 @@ import com.taotao.cloud.health.warn.WarnProvider;
  * AbstractCollectTask
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-10 10:40:17
+ * @version 2022.04
+ * @since 2022-04-27 17:27:14
  */
 public abstract class AbstractCollectTask implements AutoCloseable {
 
+	/**
+	 * 字节,mb
+	 */
 	protected long byteToMb = 1024 * 1024L;
 
 	/**
+	 * 最后收集信息
 	 * 上次采集的信息
 	 */
 	private CollectInfo lastCollectInfo = null;
 
 	/**
+	 * 持续运行时间
 	 * 上次运行时间
 	 */
 	protected long lastRunTime = System.currentTimeMillis();
@@ -48,8 +53,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * 时间间隔:秒
 	 *
 	 * @return int
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:53:05
+	 * @since 2022-04-27 17:27:14
 	 */
 	public abstract int getTimeSpan();
 
@@ -57,35 +61,31 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * 开关
 	 *
 	 * @return boolean
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:52:59
+	 * @since 2022-04-27 17:27:14
 	 */
 	public abstract boolean getEnabled();
 
 	/**
 	 * 描述
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:52:56
+	 * @return {@link String }
+	 * @since 2022-04-27 17:27:14
 	 */
 	public abstract String getDesc();
 
 	/**
 	 * 唯一命名
 	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:52:52
+	 * @return {@link String }
+	 * @since 2022-04-27 17:27:14
 	 */
 	public abstract String getName();
 
 	/**
 	 * 报告
 	 *
-	 * @return {@link com.taotao.cloud.health.model.Report }
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:52:45
+	 * @return {@link Report }
+	 * @since 2022-04-27 17:27:14
 	 */
 	public Report getReport() {
 		long time = System.currentTimeMillis() - lastRunTime;
@@ -107,8 +107,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @param type    type
 	 * @param subject subject
 	 * @param content content
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:42:24
+	 * @since 2022-04-27 17:27:14
 	 */
 	public static void notifyMessage(WarnTypeEnum type, String subject, String content) {
 		LogUtil.warn("[warn]" + subject + "\r\n" + content);
@@ -130,8 +129,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * notifyMessage
 	 *
 	 * @param message message
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:41:04
+	 * @since 2022-04-27 17:27:14
 	 */
 	public static void notifyMessage(Message message) {
 		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
@@ -147,14 +145,18 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	/**
 	 * getData
 	 *
-	 * @return {@link java.lang.Object }
-	 * @author shuigedeng
-	 * @since 2021-09-10 10:41:38
+	 * @return {@link CollectInfo }
+	 * @since 2022-04-27 17:27:14
 	 */
 	protected CollectInfo getData() {
 		return null;
 	}
 
+	/**
+	 * 关闭
+	 *
+	 * @since 2022-04-27 17:27:14
+	 */
 	@Override
 	public void close() throws Exception {
 

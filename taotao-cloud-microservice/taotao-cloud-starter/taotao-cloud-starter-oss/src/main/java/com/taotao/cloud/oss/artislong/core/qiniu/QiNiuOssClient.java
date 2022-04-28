@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.qiniu;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.file.FileNameUtil;
@@ -30,6 +29,7 @@ import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.model.download.DownloadCheckPoint;
 import com.taotao.cloud.oss.artislong.model.download.DownloadObjectStat;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -40,8 +40,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * https://developer.qiniu.com/kodo
+ * <a href="https://developer.qiniu.com/kodo">https://developer.qiniu.com/kodo</a>
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:39
  */
 public class QiNiuOssClient implements StandardOssClient {
 

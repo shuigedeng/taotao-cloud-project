@@ -19,6 +19,9 @@ import com.taotao.cloud.oss.artislong.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.artislong.model.FileOssInfo;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,9 +33,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 
+/**
+ * ftp操作系统客户端
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:03
+ */
 public class FtpOssClient implements StandardOssClient {
 
 	public static final String FTP_OBJECT_NAME = "ftp";

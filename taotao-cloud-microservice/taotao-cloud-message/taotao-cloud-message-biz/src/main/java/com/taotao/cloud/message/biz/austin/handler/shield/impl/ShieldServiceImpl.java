@@ -9,7 +9,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
 import com.taotao.cloud.message.biz.austin.common.enums.ShieldType;
 import com.taotao.cloud.message.biz.austin.handler.shield.ShieldService;
 import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ import java.util.HashSet;
  * 
  */
 @Service
-@Slf4j
+
 public class ShieldServiceImpl implements ShieldService {
 
     private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";

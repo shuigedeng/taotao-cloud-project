@@ -17,6 +17,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * 华魏oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:24
+ */
 @Configuration
 @ConditionalOnClass(ObsClient.class)
 @EnableConfigurationProperties({HuaWeiOssProperties.class})

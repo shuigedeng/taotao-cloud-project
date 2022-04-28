@@ -16,31 +16,48 @@
 package com.taotao.cloud.goods.biz.mapstruct;
 
 import com.taotao.cloud.goods.api.dto.SpecificationDTO;
-import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.api.vo.SpecificationVO;
-import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Specification;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * ISpecificationMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:30
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ISpecificationMapStruct {
 
+	/**
+	 * 实例
+	 */
 	ISpecificationMapStruct INSTANCE = Mappers.getMapper(ISpecificationMapStruct.class);
 
+	/**
+	 * 规范来规范vos
+	 *
+	 * @param specifications 规范
+	 * @return {@link List }<{@link SpecificationVO }>
+	 * @since 2022-04-27 16:58:30
+	 */
 	List<SpecificationVO> specificationsToSpecificationVOs(List<Specification> specifications);
+
+	/**
+	 * 规范dtoto规范
+	 *
+	 * @param specificationDTO 规范dto
+	 * @return {@link Specification }
+	 * @since 2022-04-27 16:58:30
+	 */
 	Specification specificationDTOToSpecification(SpecificationDTO specificationDTO);
 
 

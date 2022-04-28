@@ -11,7 +11,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
 import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
-import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxMpErrorMsgEnum;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpMessageServiceImpl;
@@ -28,7 +27,7 @@ import org.springframework.stereotype.Component;
  * 企业微信推送处理
  */
 @Component
-@Slf4j
+
 public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
 
     /**

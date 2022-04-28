@@ -1,6 +1,13 @@
 package com.taotao.cloud.oss.artislong.model.download;
 
 
+/**
+ * 下载部分结果
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:59
+ */
 public class DownloadPartResult {
 
 	private int number;

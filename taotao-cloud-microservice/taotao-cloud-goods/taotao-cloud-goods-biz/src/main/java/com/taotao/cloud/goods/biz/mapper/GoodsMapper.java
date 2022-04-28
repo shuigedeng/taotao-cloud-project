@@ -6,13 +6,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 /**
  * 规格项数据处理层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:56:00
  */
 public interface GoodsMapper extends BaseMapper<Goods> {
 
@@ -20,7 +25,8 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 	 * 根据店铺ID获取商品ID列表
 	 *
 	 * @param storeId 店铺ID
-	 * @return 商品ID列表
+	 * @return {@link List }<{@link Long }>
+	 * @since 2022-04-27 16:56:00
 	 */
 	@Select("""
 		SELECT id
@@ -34,6 +40,7 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 	 *
 	 * @param commentNum 评价数量
 	 * @param goodsId    商品ID
+	 * @since 2022-04-27 16:56:00
 	 */
 	@Update("""
 		UPDATE li_goods
@@ -48,7 +55,8 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 	 *
 	 * @param page         分页
 	 * @param queryWrapper 查询条件
-	 * @return 商品VO分页
+	 * @return {@link IPage }<{@link GoodsVO }>
+	 * @since 2022-04-27 16:56:00
 	 */
 	@Select("""
 		select g.*

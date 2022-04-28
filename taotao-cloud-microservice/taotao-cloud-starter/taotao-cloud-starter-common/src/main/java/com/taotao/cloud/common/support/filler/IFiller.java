@@ -2,6 +2,10 @@ package com.taotao.cloud.common.support.filler;
 
 /**
  * 将 T 信息进行填充，并且返回填充后的对象
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:08:28
  */
 public interface IFiller<T> {
 

@@ -29,6 +29,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 腾讯云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:40
  */
 @Configuration
 @ConditionalOnProperty(prefix = QCloudProperties.PREFIX, name = "enabled", havingValue = "true")

@@ -1,18 +1,17 @@
-package com.taotao.cloud.sys.biz.timetask.xxljob.promotion;
+package com.taotao.cloud.promotion.biz.timetask;
 
 import com.google.gson.Gson;
 import com.taotao.cloud.promotion.biz.entity.Seckill;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * 促销活动每日定时器
  */
-@Slf4j
+
 @Component
 public class PromotionEverydayExecute implements EveryDayExecute {
 

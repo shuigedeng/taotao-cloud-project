@@ -4,8 +4,6 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.fastjson.JSON;
-
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 
 /**
@@ -13,7 +11,7 @@ import org.junit.Assert;
  *
 
  */
-@Slf4j
+
 public class DemoExtraListener implements ReadListener<DemoExtraData> {
 
     @Override

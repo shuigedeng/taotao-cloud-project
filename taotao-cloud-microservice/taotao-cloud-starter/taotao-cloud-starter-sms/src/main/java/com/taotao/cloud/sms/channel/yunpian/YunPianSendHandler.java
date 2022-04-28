@@ -13,24 +13,27 @@
 package com.taotao.cloud.sms.channel.yunpian;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.exception.SendFailedException;
-import com.taotao.cloud.sms.utils.StringUtils;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
+import com.taotao.cloud.sms.model.NoticeData;
+import com.taotao.cloud.sms.utils.StringUtils;
 import com.yunpian.sdk.YunpianClient;
 import com.yunpian.sdk.model.Result;
+import org.springframework.context.ApplicationEventPublisher;
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.springframework.context.ApplicationEventPublisher;
 
 /**
  * 云片网发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:33
  */
 public class YunPianSendHandler extends AbstractSendHandler<YunPianProperties> {
 

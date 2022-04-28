@@ -14,6 +14,10 @@ import java.util.Map;
 
 /**
  * 商品sku业务层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:00:44
  */
 public interface GoodsSkuService extends IService<GoodsSku> {
 
@@ -21,7 +25,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 获取商品SKU缓存ID
 	 *
 	 * @param id SkuId
-	 * @return 商品SKU缓存ID
+	 * @return {@link String }
+	 * @since 2022-04-27 17:00:44
 	 */
 	static String getCacheKeys(Long id) {
 		return CachePrefix.GOODS_SKU.getPrefix() + id;
@@ -31,7 +36,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 获取商品SKU库存缓存ID
 	 *
 	 * @param id SkuId
-	 * @return 商品SKU缓存ID
+	 * @return {@link String }
+	 * @since 2022-04-27 17:00:44
 	 */
 	static String getStockCacheKey(Long id) {
 		return CachePrefix.SKU_STOCK.getPrefix() + id;
@@ -42,6 +48,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param skuList sku列表
 	 * @param goods   商品信息
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean add(List<Map<String, Object>> skuList, Goods goods);
 
@@ -51,6 +59,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * @param skuList            sku列表
 	 * @param goods              商品信息
 	 * @param regeneratorSkuFlag 是否是否重新生成sku
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean update(List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag);
 
@@ -58,6 +68,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 更新商品sku
 	 *
 	 * @param goodsSku sku信息
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean update(GoodsSku goodsSku);
 
@@ -65,6 +77,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 清除sku缓存
 	 *
 	 * @param skuId skuid
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean clearCache(Long skuId);
 
@@ -72,7 +86,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 从redis缓存中获取商品SKU信息
 	 *
 	 * @param skuId SkuId
-	 * @return 商品SKU信息
+	 * @return {@link GoodsSku }
+	 * @since 2022-04-27 17:00:44
 	 */
 	GoodsSku getGoodsSkuByIdFromCache(Long skuId);
 
@@ -81,7 +96,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param goodsId 商品ID
 	 * @param skuId   skuID
-	 * @return 商品sku详情
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	Map<String, Object> getGoodsSkuDetail(Long goodsId, Long skuId);
 
@@ -89,7 +105,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 批量从redis中获取商品SKU信息
 	 *
 	 * @param ids SkuId集合
-	 * @return 商品SKU信息集合
+	 * @return {@link List }<{@link GoodsSku }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	List<GoodsSku> getGoodsSkuByIdFromCache(List<Long> ids);
 
@@ -97,7 +114,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 获取goodsId下所有的goodsSku
 	 *
 	 * @param goodsId 商品id
-	 * @return goodsSku列表
+	 * @return {@link List }<{@link GoodsSkuVO }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	List<GoodsSkuVO> getGoodsListByGoodsId(Long goodsId);
 
@@ -105,7 +123,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 获取goodsId下所有的goodsSku
 	 *
 	 * @param goodsId 商品id
-	 * @return goodsSku列表
+	 * @return {@link List }<{@link GoodsSku }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	List<GoodsSku> getGoodsSkuListByGoodsId(Long goodsId);
 
@@ -113,7 +132,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 根据goodsSku组装goodsSkuVO
 	 *
 	 * @param list 商品id
-	 * @return goodsSku列表
+	 * @return {@link List }<{@link GoodsSkuVO }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	List<GoodsSkuVO> getGoodsSkuVOList(List<GoodsSku> list);
 
@@ -121,7 +141,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 根据goodsSku组装goodsSkuVO
 	 *
 	 * @param goodsSku 商品规格
-	 * @return goodsSku列表
+	 * @return {@link GoodsSkuVO }
+	 * @since 2022-04-27 17:00:44
 	 */
 	GoodsSkuVO getGoodsSkuVO(GoodsSku goodsSku);
 
@@ -129,7 +150,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 分页查询商品sku信息
 	 *
 	 * @param searchParams 查询参数
-	 * @return 商品sku信息
+	 * @return {@link IPage }<{@link GoodsSku }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams);
 
@@ -137,7 +159,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 列表查询商品sku信息
 	 *
 	 * @param searchParams 查询参数
-	 * @return 商品sku信息
+	 * @return {@link List }<{@link GoodsSku }>
+	 * @since 2022-04-27 17:00:44
 	 */
 	List<GoodsSku> getGoodsSkuByList(GoodsPageQuery searchParams);
 
@@ -145,6 +168,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 更新商品sku状态
 	 *
 	 * @param goods 商品信息(Id,MarketEnable/AuthFlag)
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean updateGoodsSkuStatus(Goods goods);
 
@@ -152,6 +177,7 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 发送生成ES商品索引
 	 *
 	 * @param goods 商品信息
+	 * @since 2022-04-27 17:00:44
 	 */
 	void generateEs(Goods goods);
 
@@ -159,6 +185,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 更新SKU库存
 	 *
 	 * @param goodsSkuStockDTOS sku库存修改实体
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean updateStocks(List<GoodsSkuStockDTO> goodsSkuStockDTOS);
 
@@ -167,6 +195,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 *
 	 * @param skuId    SKUId
 	 * @param quantity 设置的库存数量
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Boolean updateStock(Long skuId, Integer quantity);
 
@@ -174,7 +204,8 @@ public interface GoodsSkuService extends IService<GoodsSku> {
 	 * 获取商品sku库存
 	 *
 	 * @param skuId 商品skuId
-	 * @return 库存数量
+	 * @return {@link Integer }
+	 * @since 2022-04-27 17:00:44
 	 */
 	Integer getStock(Long skuId);
 

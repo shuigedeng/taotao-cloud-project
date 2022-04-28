@@ -19,8 +19,8 @@ package com.taotao.cloud.sms.enums;
  * SmsType
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2021/11/23 16:43
+ * @version 2022.04
+ * @since 2022-04-27 17:47:11
  */
 public enum RepositoryType {
 	MEMORY,

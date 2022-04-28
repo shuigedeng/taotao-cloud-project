@@ -8,16 +8,18 @@ import com.taotao.cloud.goods.biz.entity.CustomWords;
 
 /**
  * 自定义分词业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:59:50
  */
 public interface CustomWordsService extends IService<CustomWords> {
 
 	/**
 	 * 自定义分词部署替换
 	 *
-	 * @return 替换的内容
+	 * @return {@link String }
+	 * @since 2022-04-27 16:59:50
 	 */
 	String deploy();
 
@@ -25,7 +27,8 @@ public interface CustomWordsService extends IService<CustomWords> {
 	 * 是否存在分词
 	 *
 	 * @param words 分词
-	 * @return 是否存在
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:50
 	 */
 	Boolean existWords(String words);
 
@@ -33,7 +36,8 @@ public interface CustomWordsService extends IService<CustomWords> {
 	 * 添加自定义分词
 	 *
 	 * @param customWordsVO 自定义分词信息
-	 * @return 是否添加成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:50
 	 */
 	Boolean addCustomWords(CustomWordsVO customWordsVO);
 
@@ -41,7 +45,8 @@ public interface CustomWordsService extends IService<CustomWords> {
 	 * 修改自定义分词
 	 *
 	 * @param customWordsVO 自定义分词信息
-	 * @return 是否修改成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:51
 	 */
 	Boolean updateCustomWords(CustomWordsVO customWordsVO);
 
@@ -49,7 +54,8 @@ public interface CustomWordsService extends IService<CustomWords> {
 	 * 删除自定义分词
 	 *
 	 * @param id 自定义分词id
-	 * @return 是否删除成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:51
 	 */
 	Boolean deleteCustomWords(Long id);
 
@@ -58,7 +64,8 @@ public interface CustomWordsService extends IService<CustomWords> {
 	 *
 	 * @param words     分词
 	 * @param pageParam 分页信息
-	 * @return 自定义分词分页信息
+	 * @return {@link IPage }<{@link CustomWords }>
+	 * @since 2022-04-27 16:59:51
 	 */
 	IPage<CustomWords> getCustomWordsByPage(String words, PageParam pageParam);
 

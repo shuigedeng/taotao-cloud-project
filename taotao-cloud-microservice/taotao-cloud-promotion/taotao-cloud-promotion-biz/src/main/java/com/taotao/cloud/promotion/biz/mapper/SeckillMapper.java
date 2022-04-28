@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Update;
 /**
  * 秒杀活动数据处理层
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:37:18
  */
 public interface SeckillMapper extends BaseMapper<Seckill> {
 

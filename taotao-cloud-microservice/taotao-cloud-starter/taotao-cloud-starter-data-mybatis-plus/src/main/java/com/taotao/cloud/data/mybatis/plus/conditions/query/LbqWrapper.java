@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.data.mybatis.plus.conditions.query;
 
-import static com.taotao.cloud.data.mybatis.plus.conditions.Wraps.replace;
-
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.AbstractLambdaWrapper;
@@ -28,6 +26,8 @@ import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
+
+import java.io.Serial;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -37,6 +37,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import static com.taotao.cloud.data.mybatis.plus.conditions.Wraps.replace;
 
 
 /**
@@ -55,6 +57,7 @@ import java.util.function.Predicate;
 public class LbqWrapper<T> extends AbstractLambdaWrapper<T, LbqWrapper<T>>
 	implements Query<LbqWrapper<T>, T, SFunction<T, ?>> {
 
+	@Serial
 	private static final long serialVersionUID = -6842140106034506889L;
 
 	/**

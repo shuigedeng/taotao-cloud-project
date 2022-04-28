@@ -8,7 +8,7 @@ import com.taotao.cloud.goods.biz.entity.StudioCommodity;
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:57:45
  */
 public interface StudioCommodityMapper extends BaseMapper<StudioCommodity> {
 }

@@ -14,24 +14,28 @@ import java.io.IOException;
  * <tr><td>snappy</td><td>35984</td><td>13602</td><td>424</td><td>88</td><td>11</td></tr>
  * </table>
  * <br>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:14:01
  */
 public interface Compress {
 
 	/**
 	 * The Data compress.
 	 *
-	 * @param data
-	 * @return 字节数组
-	 * @throws IOException
+	 * @param data 字节数据
+	 * @return {@link byte[] }
+	 * @since 2022-04-27 17:14:01
 	 */
 	byte[] compress(byte[] data) throws IOException;
 
 	/**
 	 * The Data uncompress.
 	 *
-	 * @param data
-	 * @return 字节数组
-	 * @throws IOException
+	 * @param data 字节数据
+	 * @return {@link byte[] }
+	 * @since 2022-04-27 17:14:01
 	 */
 	byte[] uncompress(byte[] data) throws IOException;
 

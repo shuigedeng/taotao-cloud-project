@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.biz.austin.handler.script.impl;
 
 import com.taotao.cloud.message.biz.austin.handler.script.OfficialAccountService;
-import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
@@ -16,7 +15,7 @@ import java.util.List;
  * @author zyg
  */
 @Service
-@Slf4j
+
 public class OfficialAccountServiceImpl implements OfficialAccountService {
 
     @Value("${wx.mp.account.appid}")

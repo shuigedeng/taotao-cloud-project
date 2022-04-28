@@ -1,10 +1,5 @@
 package com.taotao.cloud.common.execl.demo.read;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-
-import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.annotation.ExcelProperty;
@@ -18,10 +13,13 @@ import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
-
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 读的常见写法
@@ -29,7 +27,7 @@ import org.junit.Test;
 
  */
 @Ignore
-@Slf4j
+
 public class ReadTest {
 
     /**

@@ -7,17 +7,16 @@ import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationHo
 import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.limit.LimitService;
 import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.Set;
 
 /**
  * 
  * 去重服务
  */
-@Slf4j
+
 public abstract class AbstractDeduplicationService implements DeduplicationService {
 
     protected Integer deduplicationType;

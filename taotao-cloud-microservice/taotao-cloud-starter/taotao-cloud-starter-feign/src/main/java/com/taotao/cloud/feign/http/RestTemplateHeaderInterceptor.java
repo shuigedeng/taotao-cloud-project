@@ -1,7 +1,5 @@
 package com.taotao.cloud.feign.http;
 
-import static com.taotao.cloud.feign.configuration.FeignInterceptorConfiguration.HEADER_NAME_LIST;
-
 import cn.hutool.core.util.ObjectUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.http.HttpHeaders;
@@ -16,10 +14,15 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+import static com.taotao.cloud.feign.configuration.FeignInterceptorConfiguration.HEADER_NAME_LIST;
+
 
 /**
  * 通过 RestTemplate 调用时，传递请求头和线程变量
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:24:51
  */
 public class RestTemplateHeaderInterceptor implements ClientHttpRequestInterceptor {
 

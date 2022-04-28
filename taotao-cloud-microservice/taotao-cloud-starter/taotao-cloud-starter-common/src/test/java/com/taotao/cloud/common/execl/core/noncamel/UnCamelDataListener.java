@@ -1,20 +1,18 @@
 package com.taotao.cloud.common.execl.core.noncamel;
 
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.fastjson.JSON;
+import org.junit.Assert;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.fastjson.JSON;
-
-import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-
 /**
 
  */
-@Slf4j
+
 public class UnCamelDataListener extends AnalysisEventListener<UnCamelData> {
     List<UnCamelData> list = new ArrayList<>();
 

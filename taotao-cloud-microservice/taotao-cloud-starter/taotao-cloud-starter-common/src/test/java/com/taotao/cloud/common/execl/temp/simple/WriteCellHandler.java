@@ -5,8 +5,6 @@ import com.alibaba.excel.metadata.data.WriteCellData;
 import com.alibaba.excel.write.handler.CellWriteHandler;
 import com.alibaba.excel.write.metadata.holder.WriteSheetHolder;
 import com.alibaba.excel.write.metadata.holder.WriteTableHolder;
-
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -16,7 +14,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 /**
 
  */
-@Slf4j
+
 public class WriteCellHandler implements CellWriteHandler {
 
     @Override

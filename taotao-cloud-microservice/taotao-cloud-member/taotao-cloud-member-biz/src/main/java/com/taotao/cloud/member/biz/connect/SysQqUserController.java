@@ -17,7 +17,7 @@
 // /**
 //  * qq用户表
 //  */
-// @Slf4j
+// 
 // @RestController
 // @RequestMapping("/qq")
 // @Api(tags = "qq用户API")

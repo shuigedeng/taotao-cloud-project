@@ -3,6 +3,10 @@ package com.taotao.cloud.common.support.deepcopy;
 
 /**
  * 抽象深度拷贝实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:08:19
  */
 public abstract class AbstractDeepCopy implements IDeepCopy {
 

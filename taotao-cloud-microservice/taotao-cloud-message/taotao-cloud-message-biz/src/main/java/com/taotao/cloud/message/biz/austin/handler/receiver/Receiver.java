@@ -10,7 +10,6 @@ import com.taotao.cloud.message.biz.austin.handler.pending.Task;
 import com.taotao.cloud.message.biz.austin.handler.pending.TaskPendingHolder;
 import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
 import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -28,7 +27,7 @@ import java.util.Optional;
  *
  * 消费MQ的消息
  */
-@Slf4j
+
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Receiver {

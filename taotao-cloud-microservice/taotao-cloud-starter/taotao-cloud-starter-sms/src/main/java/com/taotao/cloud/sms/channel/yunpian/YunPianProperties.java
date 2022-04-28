@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 云片网短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:31
  */
 @ConfigurationProperties(prefix = YunPianProperties.PREFIX)
 public class YunPianProperties extends AbstractHandlerProperties<String> {

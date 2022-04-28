@@ -29,6 +29,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 七牛云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:05
  */
 @Configuration
 @ConditionalOnProperty(prefix = QiNiuProperties.PREFIX, name = "enabled", havingValue = "true")

@@ -16,10 +16,7 @@
 package com.taotao.cloud.goods.biz.mapstruct;
 
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
-import com.taotao.cloud.goods.api.vo.ParametersVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
-import com.taotao.cloud.goods.biz.entity.Parameters;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -29,16 +26,26 @@ import org.mapstruct.factory.Mappers;
  * IParametersMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:13
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IDraftGoodsMapStruct {
 
+	/**
+	 * 实例
+	 */
 	IDraftGoodsMapStruct INSTANCE = Mappers.getMapper(IDraftGoodsMapStruct.class);
 
+	/**
+	 * 商品dtoto草案起草产品
+	 *
+	 * @param draftGoodsDTO 商品dto草案
+	 * @return {@link DraftGoods }
+	 * @since 2022-04-27 16:58:13
+	 */
 	DraftGoods draftGoodsDTOToDraftGoods(DraftGoodsDTO draftGoodsDTO);
 
 

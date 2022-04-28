@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 极光短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:07
  */
 @ConfigurationProperties(prefix = JPushProperties.PREFIX)
 public class JPushProperties extends AbstractHandlerProperties<Integer> {

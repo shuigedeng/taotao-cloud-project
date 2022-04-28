@@ -18,9 +18,10 @@ package com.taotao.cloud.data.mybatis.plus.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
+import org.apache.ibatis.annotations.Param;
+
 import java.io.Serializable;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 基于MP的 BaseMapper 新增了2个方法： insertBatchSomeColumn、updateAllById
@@ -37,7 +38,6 @@ public interface MpSuperMapper<T extends MpSuperEntity<I>, I extends Serializabl
 	 *
 	 * @param entity 实体
 	 * @return 修改数量
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:17:23
 	 */
 	int updateAllById(@Param(Constants.ENTITY) T entity);
@@ -49,7 +49,6 @@ public interface MpSuperMapper<T extends MpSuperEntity<I>, I extends Serializabl
 	 *
 	 * @param entityList 实体集合
 	 * @return 插入数量
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:17:23
 	 */
 	int insertBatchSomeColumn(List<T> entityList);

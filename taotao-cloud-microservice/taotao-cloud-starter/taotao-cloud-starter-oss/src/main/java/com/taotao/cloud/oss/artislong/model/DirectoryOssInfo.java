@@ -6,6 +6,10 @@ import java.util.List;
 
 /**
  * 文件夹信息对象
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:20
  */
 public class DirectoryOssInfo extends OssInfo {
 

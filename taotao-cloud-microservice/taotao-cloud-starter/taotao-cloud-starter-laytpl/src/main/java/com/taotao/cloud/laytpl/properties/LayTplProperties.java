@@ -21,6 +21,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * LayTpl配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:30:16
  */
 @RefreshScope
 @ConfigurationProperties(prefix = LayTplProperties.PREFIX)

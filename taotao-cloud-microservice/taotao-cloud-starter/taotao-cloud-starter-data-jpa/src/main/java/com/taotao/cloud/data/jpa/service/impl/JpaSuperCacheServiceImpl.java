@@ -16,16 +16,9 @@
 package com.taotao.cloud.data.jpa.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ReflectUtil;
-import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
-import com.baomidou.mybatisplus.core.toolkit.Assert;
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
@@ -34,6 +27,10 @@ import com.taotao.cloud.data.jpa.service.JpaSuperCacheService;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.redis.model.CacheKeyBuilder;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -43,15 +40,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.apache.ibatis.binding.MapperMethod;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 基于 CacheOps 实现的 缓存实现 默认的key规则： #{CacheKeyBuilder#key()}:id
@@ -75,6 +65,12 @@ public abstract class JpaSuperCacheServiceImpl<M extends JpaSuperRepository<T, I
 
 	protected static final int MAX_BATCH_KEY_SIZE = 20;
 
+	/**
+	 * 缓存键生成器
+	 *
+	 * @return {@link CacheKeyBuilder }
+	 * @since 2022-04-27 17:17:42
+	 */
 	protected abstract CacheKeyBuilder cacheKeyBuilder();
 
 	@Override
@@ -133,7 +129,6 @@ public abstract class JpaSuperCacheServiceImpl<M extends JpaSuperRepository<T, I
 		I id = redisRepository.get(key, loader);
 		return id == null ? null : getByIdCache(id);
 	}
-
 
 	@Override
 	public void refreshCache() {

@@ -12,15 +12,18 @@
  */
 package com.taotao.cloud.sms.utils;
 
-import static java.util.concurrent.ThreadLocalRandom.current;
+import org.springframework.lang.Nullable;
 
 import java.util.concurrent.ThreadLocalRandom;
-import org.springframework.lang.Nullable;
+
+import static java.util.concurrent.ThreadLocalRandom.current;
 
 /**
  * 随机类
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:48
  */
 public final class RandomUtils {
 

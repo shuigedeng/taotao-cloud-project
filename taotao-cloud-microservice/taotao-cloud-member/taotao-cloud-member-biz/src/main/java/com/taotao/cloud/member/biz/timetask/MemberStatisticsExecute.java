@@ -1,16 +1,16 @@
 package com.taotao.cloud.member.biz.timetask;
 
 import com.taotao.cloud.web.timetask.EveryDayExecute;
-import java.util.Calendar;
-import java.util.Date;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 会员数据统计
  */
-@Slf4j
+
 @Component
 public class MemberStatisticsExecute implements EveryDayExecute {
 

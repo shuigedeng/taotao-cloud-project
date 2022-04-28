@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 七牛云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:08
  */
 @ConfigurationProperties(prefix = QiNiuProperties.PREFIX)
 public class QiNiuProperties extends AbstractHandlerProperties<String> {

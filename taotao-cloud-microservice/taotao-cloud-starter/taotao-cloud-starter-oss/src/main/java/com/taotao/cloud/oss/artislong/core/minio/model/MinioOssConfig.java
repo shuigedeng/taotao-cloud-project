@@ -4,6 +4,13 @@ package com.taotao.cloud.oss.artislong.core.minio.model;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * minio oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:46
+ */
 public class MinioOssConfig {
 
     private String basePath;

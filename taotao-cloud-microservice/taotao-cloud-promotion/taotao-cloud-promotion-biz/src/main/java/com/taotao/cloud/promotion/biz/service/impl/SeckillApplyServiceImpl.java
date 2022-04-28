@@ -9,12 +9,19 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
 import com.taotao.cloud.promotion.api.tools.PromotionCacheKeys;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
-import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
 import com.taotao.cloud.promotion.api.vo.SeckillTimelineVO;
+import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.entity.Seckill;
 import com.taotao.cloud.promotion.biz.entity.SeckillApply;
@@ -22,20 +29,28 @@ import com.taotao.cloud.promotion.biz.mapper.SeckillApplyMapper;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.SeckillApplyService;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
+import com.taotao.cloud.promotion.biz.tools.PromotionTools;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * 秒杀申请业务层实现
  *
- *
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:43
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

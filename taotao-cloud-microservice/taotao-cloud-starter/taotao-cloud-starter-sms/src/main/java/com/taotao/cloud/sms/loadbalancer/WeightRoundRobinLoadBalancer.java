@@ -10,9 +10,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * weight round robin Load Balancer
  *
- * @param <T> target class
- * @param <C> choose reference object
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:53:18
  */
 public class WeightRoundRobinLoadBalancer<T, C> extends AbstractLoadBalancer<T, C> {
 

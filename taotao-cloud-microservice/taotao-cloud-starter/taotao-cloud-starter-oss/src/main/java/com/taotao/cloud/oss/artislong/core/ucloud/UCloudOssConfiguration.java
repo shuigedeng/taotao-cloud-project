@@ -21,6 +21,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * ucloud oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:29
+ */
 @Configuration
 @ConditionalOnClass(UfileClient.class)
 @EnableConfigurationProperties({UCloudOssProperties.class})

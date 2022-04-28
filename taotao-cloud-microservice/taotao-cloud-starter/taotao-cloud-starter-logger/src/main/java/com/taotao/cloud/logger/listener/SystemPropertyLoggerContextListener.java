@@ -24,6 +24,11 @@ import ch.qos.logback.core.spi.ContextAwareBase;
 import ch.qos.logback.core.spi.LifeCycle;
 
 /**
+ * 系统属性记录器上下文侦听器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:32:17
  */
 public class SystemPropertyLoggerContextListener extends ContextAwareBase implements
 	LoggerContextListener, LifeCycle {

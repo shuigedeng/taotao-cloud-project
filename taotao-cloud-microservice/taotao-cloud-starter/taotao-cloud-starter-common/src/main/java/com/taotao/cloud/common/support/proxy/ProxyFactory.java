@@ -3,10 +3,15 @@ package com.taotao.cloud.common.support.proxy;
 
 import com.taotao.cloud.common.enums.ProxyTypeEnum;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
+
 import java.lang.reflect.Proxy;
 
 /**
  * 代理工厂
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:11
  */
 public class ProxyFactory {
 

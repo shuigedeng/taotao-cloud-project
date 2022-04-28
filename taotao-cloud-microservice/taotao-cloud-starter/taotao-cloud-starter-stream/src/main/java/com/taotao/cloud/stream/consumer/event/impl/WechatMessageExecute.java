@@ -8,7 +8,7 @@
 // * 微信消息执行器
 // *
 // */
-//@Slf4j
+//
 //@Service
 //public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent {
 //

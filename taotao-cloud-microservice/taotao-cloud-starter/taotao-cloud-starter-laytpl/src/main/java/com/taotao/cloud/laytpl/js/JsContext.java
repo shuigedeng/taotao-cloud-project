@@ -21,6 +21,9 @@ import org.springframework.context.ApplicationContext;
 /**
  * 传递spring 上下文到 laytpl 中
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:30:39
  */
 public class JsContext {
 

@@ -2,7 +2,6 @@ package com.taotao.cloud.payment.biz.kit;
 
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * 退款支持
  */
 @Component
-@Slf4j
+
 public class RefundSupport {
     /**
      * 店铺流水

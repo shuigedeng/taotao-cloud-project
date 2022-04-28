@@ -2,6 +2,13 @@ package com.taotao.cloud.oss.artislong.constant;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * oss常数
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:35:12
+ */
 public class OssConstant {
 
     public static final String OSS = "oss";

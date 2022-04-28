@@ -17,9 +17,7 @@ package com.taotao.cloud.goods.biz.mapstruct;
 
 import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
-import com.taotao.cloud.goods.api.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
-import com.taotao.cloud.goods.biz.entity.CustomWords;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -31,17 +29,35 @@ import java.util.List;
  * ICategoryMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:05
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ICategoryMapStruct {
 
+	/**
+	 * 实例
+	 */
 	ICategoryMapStruct INSTANCE = Mappers.getMapper(ICategoryMapStruct.class);
 
+	/**
+	 * 类别,类别签证官
+	 *
+	 * @param category 类别
+	 * @return {@link CategoryVO }
+	 * @since 2022-04-27 16:58:05
+	 */
 	CategoryVO categoryToCategoryVO(Category category);
+
+	/**
+	 * 类别基础vos思想史范畴
+	 *
+	 * @param categorys 思想史范畴
+	 * @return {@link List }<{@link CategoryBaseVO }>
+	 * @since 2022-04-27 16:58:05
+	 */
 	List<CategoryBaseVO> categorysToCategoryBaseVOs(List<Category> categorys);
 
 

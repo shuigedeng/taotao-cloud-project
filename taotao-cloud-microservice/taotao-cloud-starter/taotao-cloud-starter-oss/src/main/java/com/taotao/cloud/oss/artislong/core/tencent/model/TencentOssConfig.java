@@ -4,6 +4,13 @@ import com.qcloud.cos.ClientConfig;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * 腾讯oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:06
+ */
 public class TencentOssConfig {
 
     private String basePath;

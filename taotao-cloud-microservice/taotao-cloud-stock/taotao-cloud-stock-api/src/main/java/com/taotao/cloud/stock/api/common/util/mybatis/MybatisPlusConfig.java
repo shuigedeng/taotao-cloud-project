@@ -8,14 +8,14 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.xtoon.boot.common.util.CommonConstant;
 import com.xtoon.boot.common.util.TenantContext;
-import java.util.Arrays;
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.StringValue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * mybatis-plus配置
@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
  * @author shuigedeng
  * @date 2021-01-25
  */
-@Slf4j
+
 @Configuration
 public class MybatisPlusConfig {
 

@@ -16,10 +16,7 @@
 package com.taotao.cloud.goods.biz.mapstruct;
 
 import com.taotao.cloud.goods.api.vo.CustomWordsVO;
-import com.taotao.cloud.goods.api.vo.ParametersVO;
 import com.taotao.cloud.goods.biz.entity.CustomWords;
-import com.taotao.cloud.goods.biz.entity.Parameters;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -29,16 +26,26 @@ import org.mapstruct.factory.Mappers;
  * ICustomWordsMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:09
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ICustomWordsMapStruct {
 
+	/**
+	 * 实例
+	 */
 	ICustomWordsMapStruct INSTANCE = Mappers.getMapper(ICustomWordsMapStruct.class);
 
+	/**
+	 * 自定义单词voto自定义单词
+	 *
+	 * @param customWordsVO 自定义单词签证官
+	 * @return {@link CustomWords }
+	 * @since 2022-04-27 16:58:09
+	 */
 	CustomWords customWordsVOToCustomWords(CustomWordsVO customWordsVO);
 
 

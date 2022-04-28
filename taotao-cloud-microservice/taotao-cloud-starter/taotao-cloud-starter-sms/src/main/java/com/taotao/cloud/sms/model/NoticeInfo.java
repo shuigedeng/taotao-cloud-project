@@ -19,6 +19,8 @@ import java.util.Collection;
  * 通知信息
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:00
  */
 public class NoticeInfo {
 

@@ -16,11 +16,8 @@
 package com.taotao.cloud.goods.biz.mapstruct;
 
 import com.taotao.cloud.goods.api.dto.StoreGoodsLabelDTO;
-import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.api.vo.StoreGoodsLabelInfoVO;
-import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -30,17 +27,35 @@ import org.mapstruct.factory.Mappers;
  * IGoodsLabelStoreMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:16
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IGoodsLabelStoreMapStruct {
 
+	/**
+	 * 实例
+	 */
 	IGoodsLabelStoreMapStruct INSTANCE = Mappers.getMapper(IGoodsLabelStoreMapStruct.class);
 
+	/**
+	 * 商店商品标签存储货物标签信息签证官
+	 *
+	 * @param storeGoodsLabel 商店商品标签
+	 * @return {@link StoreGoodsLabelInfoVO }
+	 * @since 2022-04-27 16:58:17
+	 */
 	StoreGoodsLabelInfoVO storeGoodsLabelToStoreGoodsLabelInfoVO(StoreGoodsLabel storeGoodsLabel);
+
+	/**
+	 * 商店商品标签dtoto商店商品标签
+	 *
+	 * @param storeGoodsLabelDTO 商店商品标签dto
+	 * @return {@link StoreGoodsLabel }
+	 * @since 2022-04-27 16:58:17
+	 */
 	StoreGoodsLabel storeGoodsLabelDTOToStoreGoodsLabel(StoreGoodsLabelDTO storeGoodsLabelDTO);
 
 }

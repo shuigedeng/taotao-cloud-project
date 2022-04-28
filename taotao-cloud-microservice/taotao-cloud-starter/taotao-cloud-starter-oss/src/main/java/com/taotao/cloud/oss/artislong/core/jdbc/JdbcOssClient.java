@@ -29,9 +29,20 @@ import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * jdbc操作系统客户端
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:00
+ */
 public class JdbcOssClient implements StandardOssClient {
 
     public static final String JDBC_OBJECT_NAME = "jdbcTemplate";

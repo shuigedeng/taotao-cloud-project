@@ -19,6 +19,7 @@ package com.taotao.cloud.redis.ratelimiter;
 
 import com.taotao.cloud.common.support.function.CheckedSupplier;
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,7 +37,8 @@ public interface RateLimiterClient {
 	 * @param key 自定义的key，请保证唯一
 	 * @param max 支持的最大请求
 	 * @param ttl 时间,单位默认为秒（seconds）
-	 * @return 是否允许
+	 * @return boolean
+	 * @since 2022-04-27 17:45:23
 	 */
 	default boolean isAllowed(String key, long max, long ttl) {
 		return this.isAllowed(key, max, ttl, TimeUnit.SECONDS);
@@ -49,7 +51,8 @@ public interface RateLimiterClient {
 	 * @param max      支持的最大请求
 	 * @param ttl      时间
 	 * @param timeUnit 时间单位
-	 * @return 是否允许
+	 * @return boolean
+	 * @since 2022-04-27 17:45:23
 	 */
 	boolean isAllowed(String key, long max, long ttl, TimeUnit timeUnit);
 
@@ -60,8 +63,8 @@ public interface RateLimiterClient {
 	 * @param max      支持的最大请求
 	 * @param ttl      时间
 	 * @param supplier Supplier 函数式
-	 * @param <T>      泛型
-	 * @return 函数执行结果
+	 * @return {@link T }
+	 * @since 2022-04-27 17:45:23
 	 */
 	default <T> T allow(String key, long max, long ttl, CheckedSupplier<T> supplier) {
 		return allow(key, max, ttl, TimeUnit.SECONDS, supplier);
@@ -75,8 +78,8 @@ public interface RateLimiterClient {
 	 * @param ttl      时间
 	 * @param timeUnit 时间单位
 	 * @param supplier Supplier 函数式
-	 * @param <T>      泛型
-	 * @return 函数执行结果
+	 * @return {@link T }
+	 * @since 2022-04-27 17:45:23
 	 */
 	default <T> T allow(String key, long max, long ttl, TimeUnit timeUnit,
 		CheckedSupplier<T> supplier) {

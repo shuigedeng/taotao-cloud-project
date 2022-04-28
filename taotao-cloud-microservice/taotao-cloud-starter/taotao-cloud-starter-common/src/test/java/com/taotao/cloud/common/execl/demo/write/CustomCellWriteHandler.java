@@ -3,8 +3,6 @@ package com.taotao.cloud.common.execl.demo.write;
 import com.alibaba.excel.util.BooleanUtils;
 import com.alibaba.excel.write.handler.CellWriteHandler;
 import com.alibaba.excel.write.handler.context.CellWriteHandlerContext;
-
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -15,7 +13,7 @@ import org.apache.poi.ss.usermodel.Hyperlink;
  *
 
  */
-@Slf4j
+
 public class CustomCellWriteHandler implements CellWriteHandler {
 
     @Override

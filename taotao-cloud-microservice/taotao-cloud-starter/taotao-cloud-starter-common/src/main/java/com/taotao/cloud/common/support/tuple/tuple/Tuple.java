@@ -1,7 +1,12 @@
 package com.taotao.cloud.common.support.tuple.tuple;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Spliterator;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -17,7 +22,9 @@ import static java.util.Objects.requireNonNull;
  * 可迭代
  * 不可变，线程安全
  *
- * @see Tuple2
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:29
  */
 public abstract class Tuple implements Iterable<Object>, Serializable {
 

@@ -7,8 +7,8 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
-import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
@@ -20,16 +20,21 @@ import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.DraftGoodsService;
 import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 /**
  * 草稿商品业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:02:24
  */
 @AllArgsConstructor
 @Service

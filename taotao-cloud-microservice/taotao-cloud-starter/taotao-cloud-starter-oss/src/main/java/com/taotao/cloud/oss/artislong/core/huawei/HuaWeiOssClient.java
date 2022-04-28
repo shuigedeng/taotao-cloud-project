@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.huawei;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
@@ -10,8 +9,12 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.obs.services.ObsClient;
-import com.obs.services.model.*;
-
+import com.obs.services.model.DownloadFileRequest;
+import com.obs.services.model.ListObjectsRequest;
+import com.obs.services.model.ObjectListing;
+import com.obs.services.model.ObjectMetadata;
+import com.obs.services.model.ObsObject;
+import com.obs.services.model.UploadFileRequest;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
@@ -21,6 +24,7 @@ import com.taotao.cloud.oss.artislong.model.FileOssInfo;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,7 +34,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * https://support.huaweicloud.com/obs/index.html
+ * <a href="https://support.huaweicloud.com/obs/index.html">https://support.huaweicloud.com/obs/index.html</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:17
  */
 public class HuaWeiOssClient implements StandardOssClient {
 

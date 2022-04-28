@@ -17,7 +17,9 @@ import java.util.Locale;
 /**
  * 类型无效
  *
- * @author dcy
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:39
  */
 public class TypeIsNullException extends SmsException {
 

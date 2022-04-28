@@ -17,15 +17,17 @@ import com.taotao.cloud.sms.event.SmsSendFinallyEvent;
 import com.taotao.cloud.sms.event.SmsSendSuccessEvent;
 import com.taotao.cloud.sms.model.AbstractHandlerProperties;
 import com.taotao.cloud.sms.model.NoticeData;
-import java.util.Collection;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.Nullable;
+
+import java.util.Collection;
 
 /**
  * 抽象发送处理
  *
- * @param <P> 配置类类型
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:15
  */
 public abstract class AbstractSendHandler<P extends AbstractHandlerProperties<?>> implements
 	SendHandler {
@@ -47,7 +49,8 @@ public abstract class AbstractSendHandler<P extends AbstractHandlerProperties<?>
 	/**
 	 * 获取通道名称
 	 *
-	 * @return 通道名称
+	 * @return {@link String }
+	 * @since 2022-04-27 17:48:18
 	 */
 	public abstract String getChannelName();
 
@@ -56,6 +59,7 @@ public abstract class AbstractSendHandler<P extends AbstractHandlerProperties<?>
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
+	 * @since 2022-04-27 17:48:21
 	 */
 	protected final void publishSendSuccessEvent(NoticeData noticeData, Collection<String> phones) {
 		if (eventPublisher == null) {
@@ -77,6 +81,7 @@ public abstract class AbstractSendHandler<P extends AbstractHandlerProperties<?>
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
 	 * @param cause      源异常
+	 * @since 2022-04-27 17:48:23
 	 */
 	protected final void publishSendFailEvent(NoticeData noticeData, Collection<String> phones,
 		Throwable cause) {
@@ -100,6 +105,7 @@ public abstract class AbstractSendHandler<P extends AbstractHandlerProperties<?>
 	 *
 	 * @param noticeData 通知内容
 	 * @param phones     手机号列表
+	 * @since 2022-04-27 17:48:26
 	 */
 	private void publishSendFinallyEvent(NoticeData noticeData, Collection<String> phones) {
 		if (eventPublisher == null) {

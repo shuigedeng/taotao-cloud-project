@@ -2,8 +2,6 @@ package com.taotao.cloud.common.execl.demo.write;
 
 import com.alibaba.excel.write.handler.SheetWriteHandler;
 import com.alibaba.excel.write.handler.context.SheetWriteHandlerContext;
-
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
 import org.apache.poi.ss.usermodel.DataValidationHelper;
@@ -14,7 +12,7 @@ import org.apache.poi.ss.util.CellRangeAddressList;
  *
 
  */
-@Slf4j
+
 public class CustomSheetWriteHandler implements SheetWriteHandler {
 
     @Override

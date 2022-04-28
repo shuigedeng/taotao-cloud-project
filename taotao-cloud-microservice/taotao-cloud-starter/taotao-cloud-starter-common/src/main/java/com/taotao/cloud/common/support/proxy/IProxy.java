@@ -2,6 +2,10 @@ package com.taotao.cloud.common.support.proxy;
 
 /**
  * 代理接口
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:04
  */
 public interface IProxy {
 

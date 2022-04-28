@@ -3,7 +3,6 @@
  */
 package com.taotao.cloud.oss.artislong.core.wangyi;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
@@ -43,6 +42,7 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -54,7 +54,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * https://sf.163.com/help/documents/68792520222625792
+ * <a href="https://sf.163.com/help/documents/68792520222625792">https://sf.163.com/help/documents/68792520222625792</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:44:01
  */
 public class WangYiOssClient implements StandardOssClient {
 

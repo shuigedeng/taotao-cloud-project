@@ -7,6 +7,13 @@ import com.netease.cloud.ClientConfiguration;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * 王毅oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:58
+ */
 public class WangYiOssConfig {
 
     private String accessKey;

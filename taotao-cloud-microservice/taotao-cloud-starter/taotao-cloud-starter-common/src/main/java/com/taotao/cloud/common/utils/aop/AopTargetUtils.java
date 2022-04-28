@@ -25,13 +25,20 @@ import java.lang.reflect.Field;
 /**
  * 获取代理原始对象的工具
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:05:43
  */
 public class AopTargetUtils {
 
-    /**
-     * 获取代理对象的原始对象
-     */
-    public static Object getTarget(Object proxy) {
+	/**
+	 * 获取代理对象的原始对象
+	 *
+	 * @param proxy 代理
+	 * @return {@link Object }
+	 * @since 2022-04-27 17:05:43
+	 */
+	public static Object getTarget(Object proxy) {
         // 不是代理对象，直接返回参数对象
         if (!AopUtils.isAopProxy(proxy)) {
             return proxy;
@@ -49,10 +56,14 @@ public class AopTargetUtils {
         }
     }
 
-    /**
-     * 获取cglib代理的对象
-     */
-    private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
+	/**
+	 * 获取cglib代理的对象
+	 *
+	 * @param proxy 代理
+	 * @return {@link Object }
+	 * @since 2022-04-27 17:05:44
+	 */
+	private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
         h.setAccessible(true);
         Object dynamicAdvisedInterceptor = h.get(proxy);
@@ -61,10 +72,14 @@ public class AopTargetUtils {
         return ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
     }
 
-    /**
-     * 获取jdk代理的对象
-     */
-    private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
+	/**
+	 * 获取jdk代理的对象
+	 *
+	 * @param proxy 代理
+	 * @return {@link Object }
+	 * @since 2022-04-27 17:05:44
+	 */
+	private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
         h.setAccessible(true);
         AopProxy aopProxy = (AopProxy) h.get(proxy);
