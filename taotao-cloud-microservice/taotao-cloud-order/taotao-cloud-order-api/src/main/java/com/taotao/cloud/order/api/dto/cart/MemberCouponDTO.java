@@ -1,18 +1,20 @@
 package com.taotao.cloud.order.api.dto.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Map;
-import lombok.Builder;
-import lombok.Data;
 
 /**
  * 用于计算优惠券结算详情
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-21 16:59:38
+ * @since 2022-04-28 09:16:59
  */
 @Data
 @Builder

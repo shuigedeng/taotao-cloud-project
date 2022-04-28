@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.order;
 
 /**
  * 订单促销类型枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:22:21
  */
 public enum OrderPromotionTypeEnum {
 

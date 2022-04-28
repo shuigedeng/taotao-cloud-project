@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
@@ -105,10 +105,10 @@ public interface IOrderService extends IService<Order> {
 	 * 查询导出订单列表
 	 *
 	 * @param orderPageQuery 查询参数
-	 * @return {@link List }<{@link OrderExportDTO }>
+	 * @return {@link List }<{@link OrderExportVO }>
 	 * @since 2022-04-28 08:54:47
 	 */
-	List<OrderExportDTO> queryExportOrder(OrderPageQuery orderPageQuery);
+	List<OrderExportVO> queryExportOrder(OrderPageQuery orderPageQuery);
 
 
 	/**

@@ -18,6 +18,6 @@ public interface SeckillMapper extends BaseMapper<Seckill> {
      *
      * @param seckillId 秒杀活动ID
      */
-    @Update("UPDATE li_seckill SET goods_num =( SELECT count( id ) FROM li_seckill_apply WHERE seckill_id = #{seckillId} ) WHERE id = #{seckillId}")
+    @Update("UPDATE tt_seckill SET goods_num =( SELECT count( id ) FROM tt_seckill_apply WHERE seckill_id = #{seckillId} ) WHERE id = #{seckillId}")
     void updateSeckillGoodsNum(String seckillId);
 }

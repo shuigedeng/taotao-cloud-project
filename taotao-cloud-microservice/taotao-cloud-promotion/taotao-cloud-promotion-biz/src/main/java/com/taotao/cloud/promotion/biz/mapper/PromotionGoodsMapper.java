@@ -29,7 +29,7 @@ public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
      * @param endTime       结束时间
      * @return 共参加了几种活动
      */
-    @Select("select count(0) from li_promotion_goods where promotion_type = #{promotionType} and sku_id = #{skuId} and (" +
+    @Select("select count(0) from tt_promotion_goods where promotion_type = #{promotionType} and sku_id = #{skuId} and (" +
             "( start_time < #{startTime}  && end_time > #{startTime} ) || ( start_time < #{endTime}  && end_time > #{endTime} ) || " +
             "( start_time < #{startTime}  && end_time > #{endTime} ) || ( start_time > #{startTime}  && end_time < #{endTime} )" +
             ")")
@@ -48,7 +48,7 @@ public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
      * @param promotionId   促销活动ID
      * @return 共参加了几种活动
      */
-    @Select("select count(0) from li_promotion_goods where promotion_type = #{promotionType} and sku_id = #{skuId} and (" +
+    @Select("select count(0) from tt_promotion_goods where promotion_type = #{promotionType} and sku_id = #{skuId} and (" +
             "( start_time < #{startTime}  && end_time > #{startTime} ) || ( start_time < #{endTime}  && end_time > #{endTime} ) || " +
             "( start_time < #{startTime}  && end_time > #{endTime} ) || ( start_time > #{startTime}  && end_time < #{endTime} )" +
             ") and promotion_id != #{promotionId}")
@@ -64,6 +64,6 @@ public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
      * @param queryWrapper 查询条件
      * @return 共参加了几种活动
      */
-    @Select("select price from li_promotion_goods ${ew.customSqlSegment} ")
+    @Select("select price from tt_promotion_goods ${ew.customSqlSegment} ")
     BigDecimal selectPromotionsGoodsPrice(@Param(Constants.WRAPPER) Wrapper<PromotionGoods> queryWrapper);
 }

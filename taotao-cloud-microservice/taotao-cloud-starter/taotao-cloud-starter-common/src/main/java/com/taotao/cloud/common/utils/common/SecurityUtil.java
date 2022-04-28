@@ -21,17 +21,18 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.context.ContextUtil;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Objects;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * SecurityUtil
@@ -99,7 +100,7 @@ public class SecurityUtil {
 			return JsonUtil.toObject(JsonUtil.toJSONString(principal), SecurityUser.class);
 		}
 
-		throw new BusinessException("用户未登录");
+		throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 	}
 
 	/**
@@ -122,7 +123,7 @@ public class SecurityUtil {
 	public static String getUsername() {
 		SecurityUser user = getUser();
 		if (Objects.isNull(user)) {
-			throw new BusinessException("用户未登录");
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		return user.getUsername();
 	}

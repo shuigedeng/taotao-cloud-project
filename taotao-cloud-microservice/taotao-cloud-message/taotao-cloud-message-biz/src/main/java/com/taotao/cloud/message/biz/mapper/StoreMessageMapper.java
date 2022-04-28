@@ -22,7 +22,7 @@ public interface StoreMessageMapper extends BaseMapper<StoreMessage> {
 	 */
 	@Select("""
 		select me.title,me.content,me.create_time,sp.store_name,sp.store_id,sp.id,sp.status
-		from li_message me inner join li_store_message sp on me.id = sp.message_id
+		from tt_message me inner join tt_store_message sp on me.id = sp.message_id
 		${ew.customSqlSegment}
 		""")
 	IPage<StoreMessage> queryByParams(IPage<StoreMessage> page,

@@ -37,7 +37,7 @@ public interface StoreCollectionMapper extends BaseMapper<MemberStoreCollection>
 	 */
 	@Select("""
 		select s.id,s.store_name,s.store_logo,s.self_operated
-		from li_store s INNER JOIN li_store_collection sc
+		from tt_store s INNER JOIN tt_store_collection sc
 		ON s.id=sc.store_id ${ew.customSqlSegment}
 		""")
 	IPage<StoreCollectionVO> storeCollectionVOList(IPage<StoreCollectionVO> page,

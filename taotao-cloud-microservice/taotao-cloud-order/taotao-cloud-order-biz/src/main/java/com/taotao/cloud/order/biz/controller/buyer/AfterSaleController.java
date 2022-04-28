@@ -68,7 +68,7 @@ public class AfterSaleController {
 	private final IAfterSaleLogService afterSaleLogService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
-	@RequestLogger("查看售后服务详情")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> get(
@@ -78,7 +78,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
-	@RequestLogger("分页获取售后服务")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<AfterSaleVO>> page(@Validated AfterSalePageQuery afterSalePageQuery) {
@@ -87,7 +87,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息")
-	@RequestLogger("获取申请售后页面信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/applyAfterSaleInfo/{sn}")
 	public Result<AfterSaleApplyVO> applyAfterSaleInfo(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
@@ -95,7 +95,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "申请售后", description = "申请售后")
-	@RequestLogger("申请售后")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderItemSn}")
 	public Result<Boolean> save(
@@ -106,7 +106,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "买家 退回 物流信息", description = "买家 退回 物流信息")
-	@RequestLogger("买家 退回 物流信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/delivery/{afterSaleSn}")
 	public Result<AfterSale> delivery(
@@ -119,7 +119,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "售后，取消售后", description = "售后，取消售后")
-	@RequestLogger("售后，取消售后")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/cancel/{afterSaleSn}")
 	public Result<Boolean> cancel(
@@ -128,7 +128,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址")
-	@RequestLogger("获取商家售后收件地址")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
 	public Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddress(
@@ -137,7 +137,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取售后原因", description = "获取售后原因")
-	@RequestLogger("获取售后原因")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleReason/{serviceType}")
 	public Result<List<AfterSaleReasonVO>> getAfterSaleReason(
@@ -147,7 +147,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取售后日志", description = "获取售后日志")
-	@RequestLogger("获取售后日志")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleLog/{sn}")
 	public Result<List<AfterSaleLogVO>> getAfterSaleLog(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {

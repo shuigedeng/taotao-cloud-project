@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.order;
 
 /**
  * 前端订单页面TAB标签枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:22:26
  */
 public enum OrderTagEnum {
 

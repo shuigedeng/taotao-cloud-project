@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.order;
 
 /**
  * 订单可申请售后状态枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:22:06
  */
 public enum OrderItemAfterSaleStatusEnum {
 

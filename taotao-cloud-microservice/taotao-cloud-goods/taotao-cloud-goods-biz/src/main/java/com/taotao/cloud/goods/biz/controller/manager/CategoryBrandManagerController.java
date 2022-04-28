@@ -38,7 +38,7 @@ public class CategoryBrandManagerController {
 	private final ICategoryBrandService categoryBrandService;
 
 	@Operation(summary = "查询某分类下绑定的品牌信息", description = "查询某分类下绑定的品牌信息")
-	@RequestLogger("查询某分类下绑定的品牌信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<CategoryBrandVO>> getCategoryBrand(
@@ -47,7 +47,7 @@ public class CategoryBrandManagerController {
 	}
 
 	@Operation(summary = "保存某分类下绑定的品牌信息", description = "保存某分类下绑定的品牌信息")
-	@RequestLogger("保存某分类下绑定的品牌信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}/{categoryBrands}")
 	public Result<Boolean> saveCategoryBrand(

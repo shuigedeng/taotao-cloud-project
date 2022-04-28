@@ -31,7 +31,7 @@ public class RefundLogController {
 	private final RefundLogService refundLogService;
 
 	@Operation(summary = "查看退款日志详情", description = "查看退款日志详情")
-	@RequestLogger("查看退款日志详情")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
 	public Result<RefundLog> get(@PathVariable String id) {
@@ -39,7 +39,7 @@ public class RefundLogController {
 	}
 
 	@Operation(summary = "分页获取退款日志", description = "分页获取退款日志")
-	@RequestLogger("分页获取退款日志")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<RefundLog>> getByPage(RefundLog entity, SearchVO searchVo,

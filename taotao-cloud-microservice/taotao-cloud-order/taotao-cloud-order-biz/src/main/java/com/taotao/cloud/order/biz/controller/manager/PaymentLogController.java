@@ -32,7 +32,7 @@ public class PaymentLogController {
 	private final IOrderService orderService;
 
 	@Operation(summary = "分页获取支付日志", description = "分页获取支付日志")
-	@RequestLogger("分页获取支付日志")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<PaymentLogVO>> getByPage(Order order,

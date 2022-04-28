@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,7 @@ import java.util.Date;
  * @since 2021/1/28 09:21
  */
 @Data
-@TableName("li_refund_log")
+@TableName("tt_refund_log")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

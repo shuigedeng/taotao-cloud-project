@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.aftersale;
 
 /**
  * 交易投诉状态
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:21:33
  */
 public enum ComplaintStatusEnum {
 

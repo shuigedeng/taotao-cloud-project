@@ -21,7 +21,7 @@ public interface PageDataMapper extends BaseMapper<PageData> {
      * @param queryWrapper 查询条件
      * @return 页面数据VO
      */
-    @Select("SELECT page_data FROM li_page_data ${ew.customSqlSegment}")
+    @Select("SELECT page_data FROM tt_page_data ${ew.customSqlSegment}")
     PageDataVO getPageData(@Param(Constants.WRAPPER) Wrapper<PageDataVO> queryWrapper);
 
     /**
@@ -30,7 +30,7 @@ public interface PageDataMapper extends BaseMapper<PageData> {
      * @param queryWrapper 查询条件
      * @return 页面数量
      */
-    @Select("SELECT COUNT(id) FROM li_page_data ${ew.customSqlSegment}")
+    @Select("SELECT COUNT(id) FROM tt_page_data ${ew.customSqlSegment}")
     Integer getPageDataNum(@Param(Constants.WRAPPER) Wrapper<Integer> queryWrapper);
 
     /**
@@ -40,7 +40,7 @@ public interface PageDataMapper extends BaseMapper<PageData> {
      * @param queryWrapper 查询条件
      * @return 页面数据分页
      */
-    @Select("SELECT id,name,page_show FROM li_page_data ${ew.customSqlSegment}")
+    @Select("SELECT id,name,page_show FROM tt_page_data ${ew.customSqlSegment}")
     IPage<PageDataListVO> getPageDataList(IPage<PageDataListVO> page, @Param(Constants.WRAPPER) Wrapper<PageDataListVO> queryWrapper);
 
 }

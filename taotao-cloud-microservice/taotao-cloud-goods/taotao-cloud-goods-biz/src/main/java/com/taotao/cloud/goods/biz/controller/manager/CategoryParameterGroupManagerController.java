@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +46,7 @@ public class CategoryParameterGroupManagerController {
 	private final ICategoryParameterGroupService categoryParameterGroupService;
 
 	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
-	@RequestLogger("查询某分类下绑定的参数信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable Long categoryId) {
@@ -55,7 +54,7 @@ public class CategoryParameterGroupManagerController {
 	}
 
 	@Operation(summary = "保存数据", description = "保存数据")
-	@RequestLogger("保存数据")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveOrUpdate(
@@ -64,7 +63,7 @@ public class CategoryParameterGroupManagerController {
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据")
-	@RequestLogger("更新数据")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> update(
@@ -73,7 +72,7 @@ public class CategoryParameterGroupManagerController {
 	}
 
 	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组")
-	@RequestLogger("通过id删除参数组")
+	@RequestLogger(
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delAllByIds(@PathVariable Long id) {

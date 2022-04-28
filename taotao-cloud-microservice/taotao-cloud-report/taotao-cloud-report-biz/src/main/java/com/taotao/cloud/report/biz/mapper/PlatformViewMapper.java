@@ -17,6 +17,6 @@ public interface PlatformViewMapper extends BaseMapper<PlatformViewData> {
      * @param queryWrapper 查询条件
      * @return UV流量统计数量
      */
-    @Select("SELECT sum(uv_num) FROM li_s_platform_view_data ${ew.customSqlSegment}")
+    @Select("SELECT sum(uv_num) FROM tt_s_platform_view_data ${ew.customSqlSegment}")
     Integer count(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 }

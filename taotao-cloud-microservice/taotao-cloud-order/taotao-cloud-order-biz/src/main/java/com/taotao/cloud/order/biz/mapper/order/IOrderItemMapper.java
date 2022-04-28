@@ -23,7 +23,7 @@ public interface IOrderItemMapper extends BaseMapper<OrderItem> {
 	 */
 	@Select("""
 		SELECT *
-		FROM li_order_item AS oi INNER JOIN li_order AS o ON oi.order_sn=o.sn
+		FROM tt_order_item AS oi INNER JOIN tt_order AS o ON oi.order_sn=o.sn
 		${ew.customSqlSegment}
 		""")
 	List<OrderItem> waitOperationOrderItem(

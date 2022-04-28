@@ -8,10 +8,11 @@ import com.taotao.cloud.store.api.vo.StoreBasicInfoVO;
 import com.taotao.cloud.store.api.vo.StoreDetailVO;
 import com.taotao.cloud.store.api.vo.StoreOtherVO;
 import com.taotao.cloud.store.biz.entity.StoreDetail;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 /**
  * 店铺详细数据处理层
@@ -27,7 +28,7 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	@Select(
 		"select s.store_logo,s.member_name,s.store_name,s.store_disable,s.self_operated,s.store_address_detail,s.store_address_path,s.store_address_id_path,s.store_center,s.store_desc,s.yzf_sign,s.yzf_mp_sign,"
 			+
-			"d.* from li_store s inner join li_store_detail d on s.id=d.store_id where s.id=#{storeId}")
+			"d.* from tt_store s inner join tt_store_detail d on s.id=d.store_id where s.id=#{storeId}")
 	StoreDetailVO getStoreDetail(String storeId);
 
 	/**
@@ -39,7 +40,7 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	@Select(
 		"select s.member_name,s.store_name,s.store_disable,s.self_operated,s.store_center,s.store_logo,s.store_desc,s.store_address_detail,s.store_address_path,s.store_address_id_path,d.* "
 			+
-			"from li_store s inner join li_store_detail d on s.id=d.store_id where s.member_id=#{memberId}")
+			"from tt_store s inner join tt_store_detail d on s.id=d.store_id where s.member_id=#{memberId}")
 	StoreDetailVO getStoreDetailByMemberId(String memberId);
 
 	/**
@@ -48,7 +49,7 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	 * @param storeId 店铺ID
 	 * @return 店铺基础信息DTO
 	 */
-	@Select("SELECT s.id as storeId,s.* FROM li_store s WHERE s.id=#{storeId}")
+	@Select("SELECT s.id as storeId,s.* FROM tt_store s WHERE s.id=#{storeId}")
 	StoreBasicInfoVO getStoreBasicInfoDTO(String storeId);
 
 	/**
@@ -60,7 +61,7 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	@Select(
 		"select s.sales_consignee_name,s.sales_consignee_mobile,s.sales_consignee_address_id,s.sales_consignee_address_path,s.sales_consignee_detail "
 			+
-			"from li_store_detail s  where s.store_id=#{storeId}")
+			"from tt_store_detail s  where s.store_id=#{storeId}")
 	StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO(String storeId);
 
 	/**
@@ -69,7 +70,7 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	 * @param day 结算日
 	 * @return 待结算店铺列表
 	 */
-	@Select("SELECT store_id,settlement_day FROM li_store_detail " +
+	@Select("SELECT store_id,settlement_day FROM tt_store_detail " +
 		"WHERE settlement_cycle LIKE concat(#{day},',%')  " +
 		"OR settlement_cycle LIKE concat('%,',#{day},',%') " +
 		"OR settlement_cycle LIKE concat('%,',#{day})")
@@ -81,7 +82,7 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	 * @param storeId  店铺ID
 	 * @param dateTime 结算日
 	 */
-	@Update("UPDATE li_store_detail SET settlement_day=#{dateTime} WHERE store_id=#{storeId}")
+	@Update("UPDATE tt_store_detail SET settlement_day=#{dateTime} WHERE store_id=#{storeId}")
 	void updateSettlementDay(String storeId, DateTime dateTime);
 
 	/**
@@ -90,6 +91,6 @@ public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
 	 * @param storeId 店铺ID
 	 * @return 店铺营业执照
 	 */
-	@Select("SELECT * FROM li_store_detail WHERE store_id=#{storeId}")
+	@Select("SELECT * FROM tt_store_detail WHERE store_id=#{storeId}")
 	StoreOtherVO getLicencePhoto(@Param("storeId") String storeId);
 }

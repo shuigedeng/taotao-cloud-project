@@ -46,7 +46,7 @@ public class AfterSaleController {
 	private final IAfterSaleService afterSaleService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
-	@RequestLogger("查看售后服务详情")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> get(@PathVariable String sn) {
@@ -55,7 +55,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
-	@RequestLogger("分页获取售后服务")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<AfterSaleVO>> getByPage(AfterSalePageQuery searchParams) {
@@ -66,7 +66,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表")
-	@RequestLogger("获取导出售后服务列表列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
 	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
@@ -77,7 +77,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "审核售后申请", description = "审核售后申请")
-	@RequestLogger("审核售后申请")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/review/{afterSaleSn}")
 	public Result<Boolean> review(
@@ -91,7 +91,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "卖家确认收货", description = "卖家确认收货")
-	@RequestLogger("卖家确认收货")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	@PutMapping(value = "/confirm/{afterSaleSn}")
@@ -103,7 +103,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "查看买家退货物流踪迹", description = "查看买家退货物流踪迹")
-	@RequestLogger("查看买家退货物流踪迹")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getDeliveryTraces/{sn}")
 	public Result<TracesVO> getDeliveryTraces(@PathVariable String sn) {
@@ -111,7 +111,7 @@ public class AfterSaleController {
 	}
 
 	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址")
-	@RequestLogger("获取商家售后收件地址")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
 	public Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddress(

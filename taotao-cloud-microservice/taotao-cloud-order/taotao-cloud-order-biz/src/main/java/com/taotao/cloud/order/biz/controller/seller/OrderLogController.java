@@ -37,7 +37,7 @@ public class OrderLogController {
 	private final IOrderService orderService;
 	
 	@Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志")
-	@RequestLogger("通过订单编号获取订单日志")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<List<OrderLog>> get(@PathVariable String orderSn) {

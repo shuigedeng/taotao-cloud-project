@@ -45,7 +45,7 @@ import java.util.Objects;
 public class OrderController {
 	private final IOrderService orderService;
 	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表")
-	@RequestLogger("查询会员订单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
@@ -55,7 +55,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")
-	@RequestLogger("订单明细")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<OrderDetailVO> detail(
@@ -66,7 +66,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "确认收货", description = "确认收货")
-	@RequestLogger("确认收货")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/receiving")
 	public Result<Boolean> receiving(
@@ -84,7 +84,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单")
-	@RequestLogger("取消订单")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Boolean> cancel(@PathVariable String orderSn,
@@ -94,7 +94,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "删除订单", description = "删除订单")
-	@RequestLogger("删除订单")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{orderSn}")
 	public Result<Boolean> deleteOrder(@PathVariable String orderSn) {
@@ -104,7 +104,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
-	@RequestLogger("查询物流踪迹")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(
@@ -114,7 +114,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "开票", description = "开票")
-	@RequestLogger("开票")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/receipt/{orderSn}")
 	public Result<Object> invoice(

@@ -32,7 +32,7 @@ public class ReceiptController {
 	private final IReceiptService receiptService;
 
 	@Operation(summary = "获取发票分页信息", description = "获取发票分页信息")
-	@RequestLogger("获取发票分页信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<OrderReceiptDTO>> getPage(ReceiptPageQuery searchParams,

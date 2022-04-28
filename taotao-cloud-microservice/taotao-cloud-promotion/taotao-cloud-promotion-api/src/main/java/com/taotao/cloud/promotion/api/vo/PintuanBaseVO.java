@@ -2,14 +2,13 @@ package com.taotao.cloud.promotion.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 拼团活动实体类
@@ -20,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PintuanBaseVO {
 
-	public static final String TABLE_NAME = "li_pintuan";
+	public static final String TABLE_NAME = "tt_pintuan";
 
 	@Min(message = "成团人数需大于等于2", value = 2)
 	@Max(message = "成团人数最多10人", value = 10)

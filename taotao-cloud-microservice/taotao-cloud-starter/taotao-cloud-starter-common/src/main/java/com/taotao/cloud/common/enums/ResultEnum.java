@@ -603,7 +603,7 @@ public enum ResultEnum implements BaseEnum {
 	ALIPAY_PARAMS_EXCEPTION(70004, "支付宝参数异常"),
 	LOGISTICS_NOT_SETTING(70005, "您还未配置快递查询"),
 	ORDER_SETTING_ERROR(70006, "系统订单配置异常"),
-	ALI_SMS_SETTING_ERROR(70007, "您还未配置阿里云短信"),
+	Att_SMS_SETTING_ERROR(70007, "您还未配置阿里云短信"),
 	SMS_SIGN_EXIST_ERROR(70008, "短信签名已存在"),
 
 	/**

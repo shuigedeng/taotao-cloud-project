@@ -2,7 +2,6 @@ package com.taotao.cloud.report.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -13,7 +12,7 @@ import java.util.Date;
  *
  */
 @Data
-@TableName("li_s_platform_view_data")
+@TableName("tt_s_platform_view_data")
 @ApiModel(value = "平台pv统计")
 public class PlatformViewData extends BaseIdEntity {
 

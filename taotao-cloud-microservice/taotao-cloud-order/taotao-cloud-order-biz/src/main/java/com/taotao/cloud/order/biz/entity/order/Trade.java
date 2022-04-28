@@ -39,7 +39,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = Trade.TABLE_NAME, comment = "交易表")
 public class Trade extends BaseSuperEntity<Trade, Long> {
 
-	public static final String TABLE_NAME = "li_trade";
+	public static final String TABLE_NAME = "tt_trade";
 
 	@Serial
 	private static final long serialVersionUID = 5177608752643561827L;

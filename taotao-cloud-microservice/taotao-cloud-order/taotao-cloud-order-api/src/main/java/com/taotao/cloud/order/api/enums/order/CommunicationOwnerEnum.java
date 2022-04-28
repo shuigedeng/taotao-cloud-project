@@ -2,6 +2,10 @@ package com.taotao.cloud.order.api.enums.order;
 
 /**
  * 投诉角色枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:21:53
  */
 public enum CommunicationOwnerEnum {
 

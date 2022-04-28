@@ -24,9 +24,9 @@ public interface DistributionGoodsMapper extends BaseMapper<DistributionGoods> {
 	 */
 	@Select("""
 		SELECT dg.*
-		FROM li_distribution_goods dg
+		FROM tt_distribution_goods dg
 		WHERE dg.id NOT IN(SELECT distribution_goods_id
-		 					FROM li_distribution_selected_goods
+		 					FROM tt_distribution_selected_goods
 		  					WHERE distribution_id=${distributionId}
 		  				 )
 		${ew.customSqlSegment}
@@ -43,9 +43,9 @@ public interface DistributionGoodsMapper extends BaseMapper<DistributionGoods> {
 	 */
 	@Select("""
 		SELECT dg.* 
-		FROM li_distribution_goods dg 
+		FROM tt_distribution_goods dg 
 		WHERE dg.id IN (SELECT distribution_goods_id 
-						FROM li_distribution_selected_goods 
+						FROM tt_distribution_selected_goods 
 						WHERE distribution_id=${distributionId}
 					)
 		 ${ew.customSqlSegment}
@@ -61,7 +61,7 @@ public interface DistributionGoodsMapper extends BaseMapper<DistributionGoods> {
 	 */
 	@Select("""
 		SELECT dg.* 
-		FROM li_distribution_goods dg 
+		FROM tt_distribution_goods dg 
 		${ew.customSqlSegment}
 		""")
 	IPage<DistributionGoodsVO> getDistributionGoodsVO(IPage<DistributionGoodsVO> page, @Param(Constants.WRAPPER) Wrapper<DistributionGoodsVO> queryWrapper);

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
-import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -54,7 +54,7 @@ public class OrderController {
 	private final IOrderPriceService orderPriceService;
 
 	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页")
-	@RequestLogger("查询订单列表分页")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
@@ -62,16 +62,16 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
-	@RequestLogger("查询订单导出列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
-	public Result<List<OrderExportDTO>> queryExportOrder(
+	public Result<List<OrderExportVO>> queryExportOrder(
 		OrderPageQuery orderPageQuery) {
 		return Result.success(orderService.queryExportOrder(orderPageQuery));
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")
-	@RequestLogger("订单明细")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<OrderDetailVO> detail(@PathVariable String orderSn) {
@@ -79,7 +79,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "确认收款", description = "确认收款")
-	@RequestLogger("确认收款")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/pay")
 	public Result<Object> payOrder(@PathVariable String orderSn) {
@@ -88,7 +88,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "修改收货人信息", description = "修改收货人信息")
-	@RequestLogger("修改收货人信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/consignee")
 	public Result<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
@@ -97,7 +97,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "修改订单价格", description = "修改订单价格")
-	@RequestLogger("根据id查询物流公司信息")
+	@RequestLogger
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Order> updateOrderPrice(@PathVariable String orderSn,
 		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
@@ -105,7 +105,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "取消订单", description = "取消订单")
-	@RequestLogger("取消订单")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Order> cancel(@PathVariable String orderSn,
@@ -114,7 +114,7 @@ public class OrderController {
 	}
 
 	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
-	@RequestLogger("查询物流踪迹")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(

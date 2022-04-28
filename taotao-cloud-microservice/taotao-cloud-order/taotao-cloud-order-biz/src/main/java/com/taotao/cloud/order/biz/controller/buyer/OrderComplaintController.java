@@ -57,7 +57,7 @@ public class OrderComplaintController {
 	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger("通过id获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable Long id) {
@@ -68,7 +68,7 @@ public class OrderComplaintController {
 
 
 	@Operation(summary = "分页获取", description = "分页获取")
-	@RequestLogger("分页获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageModel<OrderComplaintBaseVO>> get(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
@@ -77,7 +77,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉", description = "添加交易投诉")
-	@RequestLogger("添加交易投诉")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<OrderComplaint> add(@Valid OrderComplaintDTO orderComplaintDTO) {
@@ -85,7 +85,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")
-	@RequestLogger("添加交易投诉对话")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
@@ -103,7 +103,7 @@ public class OrderComplaintController {
 	}
 
 	@Operation(summary = "取消售后", description = "取消售后")
-	@RequestLogger("取消售后")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status/{id}")
 	public Result<Boolean> cancel(@PathVariable Long id) {
