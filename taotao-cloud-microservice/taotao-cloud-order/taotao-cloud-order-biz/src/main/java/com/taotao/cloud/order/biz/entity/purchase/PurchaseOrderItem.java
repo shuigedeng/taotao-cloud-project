@@ -19,8 +19,9 @@ import java.util.Objects;
 /**
  * 采购单子内容
  *
- * 
- * @since 2020/11/26 19:32
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:26
  */
 @Getter
 @Setter

@@ -7,20 +7,24 @@ import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
  * 佣金计算
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:42
  */
 @AllArgsConstructor
 @Service
-public class CommissionRender implements CartRenderStep {
+public class CommissionRender implements ICartRenderStep {
 
 	/**
 	 * 商品分类

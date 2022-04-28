@@ -6,9 +6,9 @@ import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
-import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
@@ -16,16 +16,13 @@ import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.api.vo.StockWarningVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import com.taotao.cloud.store.api.vo.StoreDetailVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -38,6 +35,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 店铺端,商品接口
@@ -56,11 +56,11 @@ public class GoodsStoreController {
 	/**
 	 * 商品
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 	/**
 	 * 商品sku
 	 */
-	private final GoodsSkuService goodsSkuService;
+	private final IGoodsSkuService goodsSkuService;
 	/**
 	 * 店铺详情
 	 */

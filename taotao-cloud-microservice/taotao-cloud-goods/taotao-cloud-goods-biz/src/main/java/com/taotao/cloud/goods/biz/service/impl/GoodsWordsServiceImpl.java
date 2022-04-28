@@ -2,8 +2,8 @@ package com.taotao.cloud.goods.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.goods.biz.entity.GoodsWords;
-import com.taotao.cloud.goods.biz.mapper.GoodsWordsMapper;
-import com.taotao.cloud.goods.biz.service.GoodsWordsService;
+import com.taotao.cloud.goods.biz.mapper.IGoodsWordsMapper;
+import com.taotao.cloud.goods.biz.service.IGoodsWordsService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-04-27 17:02:50
  */
 @Service
-public class GoodsWordsServiceImpl extends ServiceImpl<GoodsWordsMapper, GoodsWords> implements
-	GoodsWordsService {
+public class GoodsWordsServiceImpl extends ServiceImpl<IGoodsWordsMapper, GoodsWords> implements
+	IGoodsWordsService {
 
 }

@@ -10,18 +10,10 @@ import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
-import com.taotao.cloud.order.biz.service.order.OrderPriceService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderPriceService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Objects;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.http.MediaType;
@@ -37,8 +29,20 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 店铺端,订单API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:38
  */
 @AllArgsConstructor
 @Validated
@@ -50,11 +54,11 @@ public class OrderController {
 	/**
 	 * 订单
 	 */
-	private final OrderService orderService;
+	private final IOrderService orderService;
 	/**
 	 * 订单价格
 	 */
-	private final OrderPriceService orderPriceService;
+	private final IOrderPriceService orderPriceService;
 	/**
 	 * 物流公司
 	 */

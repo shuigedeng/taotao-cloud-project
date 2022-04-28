@@ -6,14 +6,10 @@ import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.biz.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.service.GoodsUnitService;
+import com.taotao.cloud.goods.biz.service.IGoodsUnitService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +21,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 管理端,商品计量单位接口
@@ -43,7 +44,7 @@ public class GoodsUnitManagerController {
 	/**
 	 * 商品计量服务
 	 */
-	private final GoodsUnitService goodsUnitService;
+	private final IGoodsUnitService goodsUnitService;
 
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
 	@RequestLogger("分页获取商品计量单位")

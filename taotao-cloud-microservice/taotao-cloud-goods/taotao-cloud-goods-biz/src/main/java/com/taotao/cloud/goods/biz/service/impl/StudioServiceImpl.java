@@ -21,11 +21,11 @@ import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Studio;
 import com.taotao.cloud.goods.biz.entity.StudioCommodity;
-import com.taotao.cloud.goods.biz.mapper.CommodityMapper;
-import com.taotao.cloud.goods.biz.mapper.StudioMapper;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.StudioCommodityService;
-import com.taotao.cloud.goods.biz.service.StudioService;
+import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
+import com.taotao.cloud.goods.biz.mapper.IStudioMapper;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IStudioCommodityService;
+import com.taotao.cloud.goods.biz.service.IStudioService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
 import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
@@ -50,20 +50,20 @@ import java.util.Map;
  * @since 2022-04-27 17:03:04
  */
 @Service
-public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> implements StudioService {
+public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implements IStudioService {
 
 	@Autowired
 	private WechatLivePlayerUtil wechatLivePlayerUtil;
 	@Autowired
-	private StudioCommodityService studioCommodityService;
+	private IStudioCommodityService studioCommodityService;
 	@Resource
-	private CommodityMapper commodityMapper;
+	private ICommodityMapper commodityMapper;
 	@Autowired
 	private TimeTrigger timeTrigger;
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
 	@Autowired
-	private GoodsService goodsService;
+	private IGoodsService goodsService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)

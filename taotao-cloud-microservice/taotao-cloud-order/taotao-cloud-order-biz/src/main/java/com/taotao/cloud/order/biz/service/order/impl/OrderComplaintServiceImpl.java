@@ -10,24 +10,24 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
+import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.mapper.order.OrderComplaintMapper;
-import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
-import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.mapper.order.IOrderComplaintMapper;
+import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
+import com.taotao.cloud.order.biz.service.order.IOrderComplaintService;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
@@ -38,20 +38,24 @@ import java.util.Objects;
 
 /**
  * 交易投诉业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:04
  */
 @AllArgsConstructor
 @Service
-public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper, OrderComplaint> implements
-	OrderComplaintService {
+public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper, OrderComplaint> implements
+	IOrderComplaintService {
 
 	/**
 	 * 订单
 	 */
-	private final OrderService orderService;
+	private final IOrderService orderService;
 	/**
 	 * 订单货物
 	 */
-	private final OrderItemService orderItemService;
+	private final IOrderItemService orderItemService;
 	/**
 	 * 商品规格
 	 */
@@ -59,7 +63,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper,
 	/**
 	 * 交易投诉沟通
 	 */
-	private final OrderComplaintCommunicationService orderComplaintCommunicationService;
+	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	/**
 	 * 分页获取交易投诉信息

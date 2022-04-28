@@ -4,7 +4,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.dto.ParametersDTO;
 import com.taotao.cloud.goods.biz.entity.Parameters;
 import com.taotao.cloud.goods.biz.mapstruct.IParametersMapStruct;
-import com.taotao.cloud.goods.biz.service.ParametersService;
+import com.taotao.cloud.goods.biz.service.IParametersService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,7 +36,7 @@ public class ParameterManagerController {
 	/**
 	 * 参数服务
 	 */
-	private final ParametersService parametersService;
+	private final IParametersService parametersService;
 
 	@Operation(summary = "添加参数", description = "添加参数")
 	@RequestLogger("添加参数添加参数")

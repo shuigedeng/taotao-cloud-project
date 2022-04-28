@@ -5,6 +5,10 @@ import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 
 /**
  * 价格渲染 步骤声明
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:02
  */
 public class RenderStepStatement {
 

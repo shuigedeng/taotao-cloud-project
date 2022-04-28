@@ -5,12 +5,11 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.entity.Parameters;
-import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
-import com.taotao.cloud.goods.biz.service.ParametersService;
+import com.taotao.cloud.goods.biz.service.ICategoryParameterGroupService;
+import com.taotao.cloud.goods.biz.service.IParametersService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 管理端,分类绑定参数组接口
@@ -39,11 +40,11 @@ public class CategoryParameterGroupManagerController {
 	/**
 	 * 商品参数组服务
 	 */
-	private final ParametersService parametersService;
+	private final IParametersService parametersService;
 	/**
 	 * 分类绑定参数组服务
 	 */
-	private final CategoryParameterGroupService categoryParameterGroupService;
+	private final ICategoryParameterGroupService categoryParameterGroupService;
 
 	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
 	@RequestLogger("查询某分类下绑定的参数信息")

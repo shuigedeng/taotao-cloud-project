@@ -3,32 +3,35 @@ package com.taotao.cloud.order.biz.service.order.impl;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.mapper.order.TradeMapper;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderPriceService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.annotation.Resource;
-
+import com.taotao.cloud.order.biz.mapper.order.ITradeMapper;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderPriceService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 /**
  * 订单价格业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:10
  */
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderPriceServiceImpl implements OrderPriceService {
+public class OrderPriceServiceImpl implements IOrderPriceService {
 
 	/**
 	 * 线下收款
@@ -37,15 +40,15 @@ public class OrderPriceServiceImpl implements OrderPriceService {
 	/**
 	 * 订单货物
 	 */
-	private final OrderItemService orderItemService;
+	private final IOrderItemService orderItemService;
 	/**
 	 * 交易数据层
 	 */
-	private final TradeMapper tradeMapper;
+	private final ITradeMapper tradeMapper;
 	/**
 	 * 订单
 	 */
-	private final OrderService orderService;
+	private final IOrderService orderService;
 
 	@Override
 	@SystemLogPoint(description = "修改订单价格", customerLog = "'订单编号:'+#orderSn +'，价格修改为：'+#orderPrice")

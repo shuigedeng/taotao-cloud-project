@@ -6,8 +6,6 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.spel.SpelUtil;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
-import java.util.HashMap;
-import java.util.Map;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,8 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 订单操作日志
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:56:40
  */
 @Aspect
 @Component

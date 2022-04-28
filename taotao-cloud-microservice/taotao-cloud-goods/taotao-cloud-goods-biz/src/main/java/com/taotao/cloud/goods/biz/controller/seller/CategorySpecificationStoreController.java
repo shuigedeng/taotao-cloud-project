@@ -4,11 +4,10 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
-import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 店铺端,商品分类规格接口
@@ -34,7 +35,7 @@ public class CategorySpecificationStoreController {
 	/**
 	 * 商品规格服务
 	 */
-	private final CategorySpecificationService categorySpecificationService;
+	private final ICategorySpecificationService categorySpecificationService;
 
 	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息")
 	@RequestLogger("查询某分类下绑定的规格信息")

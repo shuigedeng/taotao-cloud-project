@@ -2,14 +2,12 @@ package com.taotao.cloud.order.biz.controller.manager;
 
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
-import com.taotao.cloud.order.biz.service.trade.OrderLogService;
+import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,订单日志管理API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:19
  */
 @AllArgsConstructor
 @Validated
@@ -27,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/manager/order/log")
 public class OrderLogController {
 
-	private final  OrderLogService orderLogService;
+	private final IOrderLogService orderLogService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")

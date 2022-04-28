@@ -20,9 +20,9 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.vo.CommodityVO;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.mapper.CommodityMapper;
-import com.taotao.cloud.goods.biz.service.CommodityService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
+import com.taotao.cloud.goods.biz.service.ICommodityService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,11 +39,11 @@ import java.util.List;
  */
 @AllArgsConstructor
 @Service
-public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity> implements
-	CommodityService {
+public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodity> implements
+	ICommodityService {
 
 	private final WechatLivePlayerUtil wechatLivePlayerUtil;
-	private final GoodsSkuService goodsSkuService;
+	private final IGoodsSkuService goodsSkuService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)

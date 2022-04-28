@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.timetask;
 
 import cn.hutool.core.convert.Convert;
-import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class GoodsExecute implements EveryDayExecute {
 	 * 商品
 	 */
 	@Resource
-	private GoodsMapper goodsMapper;
+	private IGoodsMapper goodsMapper;
 
 	/**
 	 * 查询已上架的商品的评价数量并赋值

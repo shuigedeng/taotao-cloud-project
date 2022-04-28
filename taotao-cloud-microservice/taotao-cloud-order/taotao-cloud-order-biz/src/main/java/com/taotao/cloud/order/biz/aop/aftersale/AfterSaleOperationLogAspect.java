@@ -1,15 +1,11 @@
 package com.taotao.cloud.order.biz.aop.aftersale;
 
-import com.dtp.common.util.ThreadPoolUtil;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.spel.SpelUtil;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleLogService;
-import java.util.HashMap;
-import java.util.Map;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,8 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 订单操作日志
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:56:31
  */
 @Aspect
 @Component

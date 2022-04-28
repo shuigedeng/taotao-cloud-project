@@ -15,13 +15,8 @@
  */
 package com.taotao.cloud.order.biz.aop.order;
 
-import com.taotao.cloud.logger.event.RequestLoggerEvent;
-import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
-import com.taotao.cloud.order.biz.service.trade.OrderLogService;
-import java.util.List;
-import java.util.Objects;
+import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -38,7 +33,7 @@ import org.springframework.stereotype.Component;
 public class OrderLogListener {
 
 	@Autowired
-	private OrderLogService orderLogService;
+	private IOrderLogService orderLogService;
 
 	@Async
 	@EventListener(OrderLogEvent.class)

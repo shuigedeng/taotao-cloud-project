@@ -17,9 +17,9 @@ import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleLogMapStruct;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleMapStruct;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleReasonMapStruct;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleLogService;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleLogService;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,7 +27,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -51,15 +57,15 @@ public class AfterSaleController {
 	/**
 	 * 售后
 	 */
-	private final AfterSaleService afterSaleService;
+	private final IAfterSaleService afterSaleService;
 	/**
 	 * 售后原因
 	 */
-	private final AfterSaleReasonService afterSaleReasonService;
+	private final IAfterSaleReasonService afterSaleReasonService;
 	/**
 	 * 售后日志
 	 */
-	private final AfterSaleLogService afterSaleLogService;
+	private final IAfterSaleLogService afterSaleLogService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
 	@RequestLogger("查看售后服务详情")

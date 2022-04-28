@@ -7,18 +7,24 @@ import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
+import com.taotao.cloud.promotion.api.vo.PromotionSkuVO;
+import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 购物促销信息渲染实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:54
  */
 @AllArgsConstructor
 @Service
-public class SkuPromotionRender implements CartRenderStep {
+public class SkuPromotionRender implements ICartRenderStep {
 
 	/**
 	 * 促销商品
@@ -43,7 +49,8 @@ public class SkuPromotionRender implements CartRenderStep {
 	/**
 	 * 基础价格渲染
 	 *
-	 * @param tradeDTO
+	 * @param tradeDTO tradeDTO
+	 * @since 2022-04-28 08:54:15
 	 */
 	private void renderBasePrice(TradeDTO tradeDTO) {
 		tradeDTO.getCartList().forEach(
@@ -60,6 +67,7 @@ public class SkuPromotionRender implements CartRenderStep {
 	 * 渲染单品优惠 积分/拼团/秒杀/砍价
 	 *
 	 * @param tradeDTO 购物车视图
+	 * @since 2022-04-28 08:54:17
 	 */
 	private void renderSkuPromotion(TradeDTO tradeDTO) {
 		switch (tradeDTO.getCartTypeEnum()) {

@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.FileUtil;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
-import com.taotao.cloud.goods.biz.mapper.GoodsGalleryMapper;
-import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
+import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
+import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
@@ -29,7 +29,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class GoodsGalleryServiceImpl extends
-	ServiceImpl<GoodsGalleryMapper, GoodsGallery> implements GoodsGalleryService {
+	ServiceImpl<IGoodsGalleryMapper, GoodsGallery> implements IGoodsGalleryService {
 
 	/**
 	 * 设置

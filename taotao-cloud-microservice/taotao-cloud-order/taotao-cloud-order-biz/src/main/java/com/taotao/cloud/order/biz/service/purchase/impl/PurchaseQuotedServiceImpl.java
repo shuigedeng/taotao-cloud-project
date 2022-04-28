@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuoted;
-import com.taotao.cloud.order.biz.mapper.purchase.PurchaseQuotedMapper;
-import com.taotao.cloud.order.biz.service.purchase.PurchaseQuotedItemService;
-import com.taotao.cloud.order.biz.service.purchase.PurchaseQuotedService;
+import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseQuotedMapper;
+import com.taotao.cloud.order.biz.service.purchase.IPurchaseQuotedItemService;
+import com.taotao.cloud.order.biz.service.purchase.IPurchaseQuotedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +18,15 @@ import java.util.List;
 /**
  * 采购单报价业务层实现
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:55:44
  */
 @Service
-public class PurchaseQuotedServiceImpl extends ServiceImpl<PurchaseQuotedMapper, PurchaseQuoted> implements
-	PurchaseQuotedService {
+public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper, PurchaseQuoted> implements
+	IPurchaseQuotedService {
     @Autowired
-    private PurchaseQuotedItemService purchaseQuotedItemService;
+    private IPurchaseQuotedItemService purchaseQuotedItemService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

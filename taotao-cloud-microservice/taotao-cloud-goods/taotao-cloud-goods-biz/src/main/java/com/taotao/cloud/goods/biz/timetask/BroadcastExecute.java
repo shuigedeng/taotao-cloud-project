@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.biz.timetask;
 
-import com.taotao.cloud.goods.biz.service.CommodityService;
+import com.taotao.cloud.goods.biz.service.ICommodityService;
 import com.taotao.cloud.web.timetask.EveryHourExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class BroadcastExecute implements EveryHourExecute {
 	 * 商品服务
 	 */
 	@Autowired
-	private CommodityService commodityService;
+	private ICommodityService commodityService;
 
 	/**
 	 * 执行

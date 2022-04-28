@@ -4,20 +4,27 @@ import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import com.taotao.cloud.store.api.dto.FreightTemplateChildDTO;
+import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
+import com.taotao.cloud.store.api.vo.FreightTemplateVO;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
  * sku 运费计算
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:51
  */
 @AllArgsConstructor
 @Service
-public class SkuFreightRender implements CartRenderStep {
+public class SkuFreightRender implements ICartRenderStep {
 
 	private final FreightTemplateService freightTemplateService;
 
@@ -100,7 +107,8 @@ public class SkuFreightRender implements CartRenderStep {
 	 *
 	 * @param count    重量/件
 	 * @param template 计算模版
-	 * @return 运费
+	 * @return {@link BigDecimal }
+	 * @since 2022-04-28 08:54:10
 	 */
 	private BigDecimal countFreight(BigDecimal count, FreightTemplateChildDTO template) {
 		try {

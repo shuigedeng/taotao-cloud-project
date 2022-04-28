@@ -10,24 +10,34 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintBaseVO;
 import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintBaseVO;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.service.order.OrderComplaintCommunicationService;
-import com.taotao.cloud.order.biz.service.order.OrderComplaintService;
+import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
+import com.taotao.cloud.order.biz.service.order.IOrderComplaintService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
-
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 买家端,交易投诉API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:56:57
  */
 @AllArgsConstructor
 @Validated
@@ -39,12 +49,12 @@ public class OrderComplaintController {
 	/**
 	 * 交易投诉
 	 */
-	private final OrderComplaintService orderComplaintService;
+	private final IOrderComplaintService orderComplaintService;
 
 	/**
 	 * 交易投诉沟通
 	 */
-	private final OrderComplaintCommunicationService orderComplaintCommunicationService;
+	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
 	@RequestLogger("通过id获取")

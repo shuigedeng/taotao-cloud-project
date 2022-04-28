@@ -5,14 +5,19 @@ import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.biz.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.cart.CartService;
-import com.taotao.cloud.order.biz.service.order.TradeService;
-import java.util.List;
+import com.taotao.cloud.order.biz.service.cart.ICartService;
+import com.taotao.cloud.order.biz.service.order.ITradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 交易构造&&创建
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:49:57
  */
 @Service
 public class TradeBuilder {
@@ -21,17 +26,17 @@ public class TradeBuilder {
 	 * 购物车渲染步骤
 	 */
 	@Autowired
-	private List<CartRenderStep> cartRenderSteps;
+	private List<ICartRenderStep> cartRenderSteps;
 	/**
 	 * 交易
 	 */
 	@Autowired
-	private TradeService tradeService;
+	private ITradeService tradeService;
 	/**
 	 * 购物车业务
 	 */
 	@Autowired
-	private CartService cartService;
+	private ICartService cartService;
 
 
 	/**
@@ -113,7 +118,7 @@ public class TradeBuilder {
 	 */
 	private void renderCartBySteps(TradeDTO tradeDTO, RenderStepEnums[] defaultRender) {
 		for (RenderStepEnums step : defaultRender) {
-			for (CartRenderStep render : cartRenderSteps) {
+			for (ICartRenderStep render : cartRenderSteps) {
 				try {
 					if (render.step().equals(step)) {
 						render.render(tradeDTO);

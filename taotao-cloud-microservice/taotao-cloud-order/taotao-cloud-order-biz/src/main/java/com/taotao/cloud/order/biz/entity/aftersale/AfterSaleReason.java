@@ -19,7 +19,9 @@ import java.util.Objects;
 /**
  * 售后原因
  *
- * @since 2021/7/9 1:39 上午
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:01:04
  */
 @Getter
 @Setter
@@ -51,7 +53,7 @@ public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

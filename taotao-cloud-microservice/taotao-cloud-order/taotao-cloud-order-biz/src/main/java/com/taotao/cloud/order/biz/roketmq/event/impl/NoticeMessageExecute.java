@@ -10,11 +10,12 @@ import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import java.util.HashMap;
-import java.util.Map;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -27,7 +28,7 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 	@Autowired
 	private NoticeMessageService noticeMessageService;
 	@Autowired
-	private OrderService orderService;
+	private IOrderService orderService;
 
 
 	@Override

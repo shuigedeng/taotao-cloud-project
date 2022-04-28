@@ -19,8 +19,9 @@ import java.util.Objects;
 /**
  * 供求单
  *
- * 
- * @since 2020-03-14 23:04:56
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:23
  */
 @Getter
 @Setter

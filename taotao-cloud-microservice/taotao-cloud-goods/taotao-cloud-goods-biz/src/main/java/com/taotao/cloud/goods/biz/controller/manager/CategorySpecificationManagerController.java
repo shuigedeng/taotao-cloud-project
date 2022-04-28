@@ -4,13 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.biz.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.entity.Specification;
-import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
-import com.taotao.cloud.goods.biz.service.SpecificationService;
+import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.ISpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 管理端,商品分类规格接口
@@ -38,11 +39,11 @@ public class CategorySpecificationManagerController {
 	/**
 	 * 分类规格服务
 	 */
-	private final CategorySpecificationService categorySpecificationService;
+	private final ICategorySpecificationService categorySpecificationService;
 	/**
 	 * 规格服务
 	 */
-	private final SpecificationService specificationService;
+	private final ISpecificationService specificationService;
 
 	@Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息")
 	@RequestLogger("查询某分类下绑定的规格信息")

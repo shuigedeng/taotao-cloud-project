@@ -11,9 +11,9 @@ import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsItemDTO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Parameters;
-import com.taotao.cloud.goods.biz.mapper.ParametersMapper;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.ParametersService;
+import com.taotao.cloud.goods.biz.mapper.IParametersMapper;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IParametersService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -36,13 +36,13 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 @Service
-public class ParametersServiceImpl extends ServiceImpl<ParametersMapper, Parameters> implements
-	ParametersService {
+public class ParametersServiceImpl extends ServiceImpl<IParametersMapper, Parameters> implements
+	IParametersService {
 
 	/**
 	 * 商品服务
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 
 	private final RocketmqCustomProperties rocketmqCustomProperties;
 	private final RocketMQTemplate rocketMQTemplate;

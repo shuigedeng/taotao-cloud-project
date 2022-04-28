@@ -22,7 +22,8 @@ import java.util.Objects;
  * 退款流水表
  *
  * @author shuigedeng
- * @since 2020/4/30 15:46
+ * @version 2022.04
+ * @since 2022-04-28 09:01:47
  */
 @Getter
 @Setter

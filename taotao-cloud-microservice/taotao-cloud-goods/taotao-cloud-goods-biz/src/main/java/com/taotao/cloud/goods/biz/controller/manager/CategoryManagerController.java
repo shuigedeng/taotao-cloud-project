@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.manager;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
@@ -8,15 +7,11 @@ import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * 管理端,商品分类接口
@@ -49,11 +48,11 @@ public class CategoryManagerController {
 	/**
 	 * 分类服务
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 	/**
 	 * 商品服务
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 
 	@Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表")
 	@RequestLogger("查询某分类下的全部子分类列表")

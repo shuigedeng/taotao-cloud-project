@@ -3,11 +3,12 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.google.gson.Gson;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.ExperienceSetting;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
      * 订单
      */
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
 
     /**
      * 完成订单赠送经验值

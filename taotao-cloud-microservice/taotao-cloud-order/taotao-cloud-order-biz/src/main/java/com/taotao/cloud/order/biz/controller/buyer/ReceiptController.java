@@ -6,11 +6,9 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
-import com.taotao.cloud.order.biz.service.order.ReceiptService;
+import com.taotao.cloud.order.biz.service.order.IReceiptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.Valid;
-
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,8 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * 买家端,发票API
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:57:02
  */
 @AllArgsConstructor
 @Validated
@@ -30,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/buyer/receipt")
 public class ReceiptController {
 
-	private final ReceiptService receiptService;
+	private final IReceiptService receiptService;
 
 	@Operation(summary = "获取发票详情", description = "获取发票详情")
 	@RequestLogger("获取发票详情")

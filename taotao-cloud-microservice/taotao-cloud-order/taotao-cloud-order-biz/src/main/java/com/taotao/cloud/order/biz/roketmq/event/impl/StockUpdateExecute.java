@@ -6,13 +6,17 @@ import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.order.OrderService;
-import java.util.ArrayList;
-import java.util.List;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsDTO;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 库存扣减，他表示了订单状态是否出库成功
@@ -35,7 +39,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
      * 订单
      */
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
     /**
      * 规格商品
      */

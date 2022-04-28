@@ -12,11 +12,11 @@ import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Parameters;
-import com.taotao.cloud.goods.biz.mapper.CategoryParameterGroupMapper;
+import com.taotao.cloud.goods.biz.mapper.ICategoryParameterGroupMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IParametersMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.ParametersService;
+import com.taotao.cloud.goods.biz.service.ICategoryParameterGroupService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IParametersService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,17 +36,17 @@ import java.util.Map;
 @AllArgsConstructor
 @Service
 public class CategoryParameterGroupServiceImpl extends
-	ServiceImpl<CategoryParameterGroupMapper, CategoryParameterGroup> implements
-	CategoryParameterGroupService {
+	ServiceImpl<ICategoryParameterGroupMapper, CategoryParameterGroup> implements
+	ICategoryParameterGroupService {
 
 	/**
 	 * 商品参数服务
 	 */
-	private final ParametersService parametersService;
+	private final IParametersService parametersService;
 	/**
 	 * 商品服务
 	 */
-	private final GoodsService goodsService;
+	private final IGoodsService goodsService;
 
 	@Override
 	public List<ParameterGroupVO> getCategoryParams(Long categoryId) {

@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.controller.seller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.StoreGoodsLabelDTO;
@@ -8,14 +7,11 @@ import com.taotao.cloud.goods.api.vo.StoreGoodsLabelInfoVO;
 import com.taotao.cloud.goods.api.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.mapstruct.IGoodsLabelStoreMapStruct;
-import com.taotao.cloud.goods.biz.service.StoreGoodsLabelService;
+import com.taotao.cloud.goods.biz.service.IStoreGoodsLabelService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.Objects;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +22,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 /**
@@ -45,7 +43,7 @@ public class GoodsLabelStoreController {
 	/**
 	 * 店铺分类服务
 	 */
-	private final StoreGoodsLabelService storeGoodsLabelService;
+	private final IStoreGoodsLabelService storeGoodsLabelService;
 
 	@Operation(summary = "获取当前店铺商品分类列表", description = "获取当前店铺商品分类列表")
 	@RequestLogger("获取当前店铺商品分类列表")

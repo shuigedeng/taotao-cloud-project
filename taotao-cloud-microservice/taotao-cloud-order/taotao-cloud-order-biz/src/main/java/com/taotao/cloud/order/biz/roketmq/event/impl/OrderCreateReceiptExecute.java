@@ -6,11 +6,12 @@ import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.entity.order.Receipt;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.order.ReceiptService;
-import java.util.ArrayList;
-import java.util.List;
+import com.taotao.cloud.order.biz.service.order.IReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 订单创建发票相关处理
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class OrderCreateReceiptExecute implements TradeEvent {
 
     @Autowired
-    private ReceiptService receiptService;
+    private IReceiptService receiptService;
 
     @Override
     public void orderCreate(TradeDTO tradeDTO) {

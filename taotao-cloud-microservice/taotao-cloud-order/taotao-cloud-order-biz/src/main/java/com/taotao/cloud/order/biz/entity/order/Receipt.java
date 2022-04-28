@@ -20,6 +20,10 @@ import java.util.Objects;
 
 /**
  * 发票表
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:01
  */
 @Getter
 @Setter

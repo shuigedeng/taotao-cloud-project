@@ -5,16 +5,21 @@ import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
 /**
  * 购物车渲染，将购物车中的各个商品，拆分到每个商家，形成购物车VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:50:24
  */
 @Service
-public class CartPriceRender implements CartRenderStep {
+public class CartPriceRender implements ICartRenderStep {
 
 	@Override
 	public RenderStepEnums step() {
@@ -34,7 +39,7 @@ public class CartPriceRender implements CartRenderStep {
 	/**
 	 * 特殊情况下对购物车金额进行护理
 	 *
-	 * @param tradeDTO
+	 * @param tradeDTO tradeDTO
 	 */
 	private void initPriceDTO(TradeDTO tradeDTO) {
 		tradeDTO.getCartList().forEach(cartVO -> cartVO.setPriceDetailDTO(new PriceDetailDTO()));
@@ -45,6 +50,7 @@ public class CartPriceRender implements CartRenderStep {
 	 * 购物车价格
 	 *
 	 * @param tradeDTO 购物车展示信息
+	 * @since 2022-04-28 08:51:55
 	 */
 	void buildCartPrice(TradeDTO tradeDTO) {
 		//购物车列表
@@ -69,6 +75,7 @@ public class CartPriceRender implements CartRenderStep {
 	 * 初始化购物车
 	 *
 	 * @param tradeDTO 购物车展示信息
+	 * @since 2022-04-28 08:51:52
 	 */
 	void buildTradePrice(TradeDTO tradeDTO) {
 		tradeDTO.getPriceDetailDTO().accumulationPriceDTO(

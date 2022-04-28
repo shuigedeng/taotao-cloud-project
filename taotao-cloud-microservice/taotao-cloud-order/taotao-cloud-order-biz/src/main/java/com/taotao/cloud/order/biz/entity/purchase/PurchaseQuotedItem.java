@@ -19,8 +19,9 @@ import java.util.Objects;
 /**
  * 报价单字内容
  *
- * 
- * @since 2020/11/26 20:43
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 09:02:33
  */
 @Getter
 @Setter

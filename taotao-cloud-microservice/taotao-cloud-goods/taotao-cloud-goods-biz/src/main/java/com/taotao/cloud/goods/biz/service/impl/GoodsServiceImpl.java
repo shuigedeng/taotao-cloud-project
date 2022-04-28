@@ -26,12 +26,12 @@ import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
-import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IGoodsMapStruct;
-import com.taotao.cloud.goods.biz.service.CategoryService;
-import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.GoodsService;
-import com.taotao.cloud.goods.biz.service.GoodsSkuService;
+import com.taotao.cloud.goods.biz.service.ICategoryService;
+import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -65,12 +65,12 @@ import java.util.Objects;
  */
 @AllArgsConstructor
 @Service
-public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
+public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implements IGoodsService {
 
 	/**
 	 * 分类
 	 */
-	private final CategoryService categoryService;
+	private final ICategoryService categoryService;
 	/**
 	 * 设置
 	 */
@@ -78,11 +78,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	/**
 	 * 商品相册
 	 */
-	private final GoodsGalleryService goodsGalleryService;
+	private final IGoodsGalleryService goodsGalleryService;
 	/**
 	 * 商品规格
 	 */
-	private final GoodsSkuService goodsSkuService;
+	private final IGoodsSkuService goodsSkuService;
 	/**
 	 * 店铺详情
 	 */

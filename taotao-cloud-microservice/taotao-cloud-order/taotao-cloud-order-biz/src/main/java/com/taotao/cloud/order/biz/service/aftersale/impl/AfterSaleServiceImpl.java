@@ -18,7 +18,6 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
@@ -26,20 +25,22 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
+import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleMapper;
-import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
-import com.taotao.cloud.order.biz.service.order.OrderItemService;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleMapper;
+import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
+import com.taotao.cloud.order.biz.service.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
@@ -54,20 +55,24 @@ import java.util.List;
 
 /**
  * 售后业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:49:30
  */
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale> implements
-	AfterSaleService {
+public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSale> implements
+	IAfterSaleService {
 	/**
 	 * 订单
 	 */
-	private final OrderService orderService;
+	private final IOrderService orderService;
 	/**
 	 * 订单货物
 	 */
-	private final OrderItemService orderItemService;
+	private final IOrderItemService orderItemService;
 	/**
 	 * 物流公司
 	 */

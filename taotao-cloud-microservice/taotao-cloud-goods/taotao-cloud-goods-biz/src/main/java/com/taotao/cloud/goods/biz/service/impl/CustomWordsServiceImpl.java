@@ -10,9 +10,9 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.goods.api.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.entity.CustomWords;
-import com.taotao.cloud.goods.biz.mapper.CustomWordsMapper;
+import com.taotao.cloud.goods.biz.mapper.ICustomWordsMapper;
 import com.taotao.cloud.goods.biz.mapstruct.ICustomWordsMapStruct;
-import com.taotao.cloud.goods.biz.service.CustomWordsService;
+import com.taotao.cloud.goods.biz.service.ICustomWordsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +28,8 @@ import java.util.List;
  * @since 2022-04-27 17:02:21
  */
 @Service
-public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, CustomWords> implements
-	CustomWordsService {
+public class CustomWordsServiceImpl extends ServiceImpl<ICustomWordsMapper, CustomWords> implements
+	ICustomWordsService {
 
 	@Override
 	public String deploy() {

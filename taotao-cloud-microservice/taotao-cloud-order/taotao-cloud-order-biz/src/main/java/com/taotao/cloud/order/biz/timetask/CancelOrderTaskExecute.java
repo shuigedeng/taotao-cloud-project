@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.entity.order.Order;
-import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.OrderSetting;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 
 /**
  * 订单自动取消（每分钟执行）
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 08:48:45
  */
 @Component
 public class CancelOrderTaskExecute implements EveryMinuteExecute {
@@ -27,7 +31,7 @@ public class CancelOrderTaskExecute implements EveryMinuteExecute {
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IOrderService orderService;
 	/**
 	 * 设置
 	 */
