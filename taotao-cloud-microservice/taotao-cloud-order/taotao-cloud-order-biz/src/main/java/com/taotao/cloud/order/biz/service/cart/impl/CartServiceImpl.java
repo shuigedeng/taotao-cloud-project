@@ -28,6 +28,7 @@ import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
 import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import lombok.AllArgsConstructor;
@@ -73,7 +74,7 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 促销商品
 	 */
-	private final PromotionGoodsService promotionGoodsService;
+	private final IFeignPromotionGoodsService promotionGoodsService;
 	/**
 	 * 促销商品
 	 */

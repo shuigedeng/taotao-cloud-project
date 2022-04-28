@@ -57,7 +57,6 @@ public class CartPriceRender implements ICartRenderStep {
 		List<CartVO> cartVOS = tradeDTO.getCartList();
 
 		cartVOS.forEach(cartVO -> {
-
 			cartVO.getPriceDetailDTO().accumulationPriceDTO(
 				cartVO.getCheckedSkuList().stream().filter(CartSkuVO::getChecked)
 					.map(CartSkuVO::getPriceDetailDTO).collect(Collectors.toList())

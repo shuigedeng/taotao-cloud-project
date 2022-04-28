@@ -35,6 +35,7 @@ public class RequestLogTopicMessageDelegate {
 
 	@Autowired
 	private ILogService logService;
+
 	public static final ObjectMapper MAPPER = new ObjectMapper();
 
 	static {

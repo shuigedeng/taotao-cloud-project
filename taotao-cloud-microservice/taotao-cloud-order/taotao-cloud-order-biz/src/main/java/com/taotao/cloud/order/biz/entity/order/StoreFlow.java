@@ -66,7 +66,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	 * 店铺id
 	 */
 	@Column(name = "store_id", columnDefinition = "varchar(64) not null comment '店铺id'")
-	private String storeId;
+	private Long storeId;
 	/**
 	 * 店铺名称
 	 */
@@ -76,7 +76,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	 * 会员id
 	 */
 	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员id'")
-	private String memberId;
+	private Long memberId;
 	/**
 	 * 会员名称
 	 */
@@ -86,7 +86,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	 * 商品ID
 	 */
 	@Column(name = "goods_id", columnDefinition = "varchar(64) not null comment '商品ID'")
-	private String goodsId;
+	private Long goodsId;
 	/**
 	 * 商品名称
 	 */
@@ -96,7 +96,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	 * 货品ID
 	 */
 	@Column(name = "sku_id", columnDefinition = "varchar(64) not null comment '货品ID'")
-	private String skuId;
+	private Long skuId;
 	/**
 	 * 图片
 	 */
@@ -106,7 +106,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 	 * 分类ID
 	 */
 	@Column(name = "category_id", columnDefinition = "varchar(64) not null comment '分类ID'")
-	private String categoryId;
+	private Long categoryId;
 	/**
 	 * 规格json
 	 */

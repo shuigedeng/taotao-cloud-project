@@ -15,28 +15,39 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
-import com.taotao.cloud.sys.biz.entity.system.Dept;
-import java.util.List;
+import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.biz.entity.region.Region;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
- * DeptMapStruct
+ * iregion地图结构
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-28 13:39:46
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface DeptMapStruct {
+public interface IRegionMapStruct {
 
-	DeptMapStruct INSTANCE = Mappers.getMapper(DeptMapStruct.class);
+	/**
+	 * 实例
+	 */
+	IRegionMapStruct INSTANCE = Mappers.getMapper(IRegionMapStruct.class);
 
-	List<DeptTreeVO> deptListToVoList(List<Dept> deptList);
+	/**
+	 * 区域列表给签证官
+	 *
+	 * @param regionList 区域列表
+	 * @return {@link List }<{@link RegionTreeVO }>
+	 * @since 2022-04-28 13:39:46
+	 */
+	List<RegionTreeVO> regionListToVoList(List<Region> regionList);
 
 }

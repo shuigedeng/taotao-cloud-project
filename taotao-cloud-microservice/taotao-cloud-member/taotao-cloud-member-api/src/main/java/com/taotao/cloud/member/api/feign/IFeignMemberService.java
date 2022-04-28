@@ -49,6 +49,6 @@ public interface IFeignMemberService {
 	 * @return {@link Result }<{@link Boolean }>
 	 * @since 2022-04-25 16:41:42
 	 */
-	Result<Boolean> updateMemberPoint(Long payPoint, String name, String memberId, String s);
+	Result<Boolean> updateMemberPoint(Long payPoint, String name, Long memberId, String s);
 }
 

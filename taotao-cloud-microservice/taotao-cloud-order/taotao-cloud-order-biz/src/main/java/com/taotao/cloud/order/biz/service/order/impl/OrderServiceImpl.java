@@ -191,7 +191,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public IPage<OrderSimpleVO> queryByParams(OrderPageQuery orderPageQuery) {
-		QueryWrapper queryWrapper = orderPageQuery.queryWrapper();
+		QueryWrapper<OrderSimpleVO> queryWrapper = orderPageQuery.queryWrapper();
 		queryWrapper.groupBy("o.id");
 		queryWrapper.orderByDesc("o.id");
 		return this.baseMapper.queryByParams(PageUtil.initPage(orderPageQuery), queryWrapper);

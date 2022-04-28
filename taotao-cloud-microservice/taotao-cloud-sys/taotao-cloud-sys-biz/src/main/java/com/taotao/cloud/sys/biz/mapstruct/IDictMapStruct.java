@@ -24,16 +24,21 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- 
- * @version 2022.03
- * @since 2020/11/11 14:42
+ * idict地图结构
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 13:39:24
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface DictMapStruct {
+public interface IDictMapStruct {
 
-	DictMapStruct INSTANCE = Mappers.getMapper(DictMapStruct.class);
+	/**
+	 * 实例
+	 */
+	IDictMapStruct INSTANCE = Mappers.getMapper(IDictMapStruct.class);
 
 	///**
 	// * DictDTO转SysDict
@@ -64,5 +69,12 @@ public interface DictMapStruct {
 	// */
 	//DictQueryVO sysDictToDictVO(Dict sysDict);
 
+	/**
+	 * 复制dict sys dictdto
+	 *
+	 * @param dictSaveDTO dict拯救dto
+	 * @param dict        dict
+	 * @since 2022-04-28 13:39:25
+	 */
 	void copyDictDtoToSysDict(DictSaveDTO dictSaveDTO, @MappingTarget Dict dict);
 }

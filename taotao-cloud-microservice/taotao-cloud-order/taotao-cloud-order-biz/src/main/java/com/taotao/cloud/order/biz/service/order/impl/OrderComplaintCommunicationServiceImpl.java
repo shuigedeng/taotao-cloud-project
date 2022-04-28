@@ -1,9 +1,10 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
-import cn.hutool.core.util.PageUtil;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderComplaintCommunicationPageQuery;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.mapper.order.IOrderComplainCommunicationMapper;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
@@ -28,8 +29,21 @@ public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<IOrderCo
 	}
 
 	@Override
-	public IPage<OrderComplaintCommunication> getCommunication(
-		OrderComplaintCommunicationSearchParams searchParams, PageVO pageVO) {
-		return this.page(PageUtil.initPage(pageVO), searchParams.lambdaQueryWrapper());
+	public IPage<OrderComplaintCommunication> getCommunication(OrderComplaintCommunicationPageQuery orderComplaintCommunicationPageQuery) {
+		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
+		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getComplainId())) {
+			queryWrapper.eq(OrderComplaintCommunication::getComplainId, orderComplaintCommunicationPageQuery.getComplainId());
+		}
+		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwner())) {
+			queryWrapper.eq(OrderComplaintCommunication::getOwner, orderComplaintCommunicationPageQuery.getOwner());
+		}
+		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwnerName())) {
+			queryWrapper.eq(OrderComplaintCommunication::getOwnerName, orderComplaintCommunicationPageQuery.getOwnerName());
+		}
+		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwnerId())) {
+			queryWrapper.eq(OrderComplaintCommunication::getOwnerId, orderComplaintCommunicationPageQuery.getOwnerId());
+		}
+
+		return this.page(orderComplaintCommunicationPageQuery.buildMpPage(), queryWrapper);
 	}
 }

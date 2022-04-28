@@ -2,19 +2,20 @@ package com.taotao.cloud.web.base.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
-import javax.validation.groups.Default;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+import javax.validation.groups.Default;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * SuperEntity
@@ -39,7 +40,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	@CreatedBy
 	@Column(name = "create_by", columnDefinition = "bigint null comment '创建人'")
 	@TableField(value = "create_by", fill = FieldFill.INSERT)
-	private Long createdBy;
+	private Long createBy;
 
 	@LastModifiedDate
 	@Column(name = "update_time", columnDefinition = "DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
@@ -84,12 +85,12 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 		this.createTime = createTime;
 	}
 
-	public Long getCreatedBy() {
-		return createdBy;
+	public Long getCreateBy() {
+		return createBy;
 	}
 
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
+	public void setCreateBy(Long createBy) {
+		this.createBy = createBy;
 	}
 
 	public LocalDateTime getUpdateTime() {

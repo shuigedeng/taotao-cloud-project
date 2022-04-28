@@ -22,18 +22,14 @@ import com.taotao.cloud.netty.annotation.PathVariable;
 import com.taotao.cloud.sys.api.bo.role.RoleBO;
 import com.taotao.cloud.sys.api.dto.role.RoleSaveDTO;
 import com.taotao.cloud.sys.api.dto.role.RoleUpdateDTO;
-import com.taotao.cloud.sys.biz.entity.system.Role;
 import com.taotao.cloud.sys.api.vo.role.RoleQueryVO;
-import com.taotao.cloud.sys.biz.mapstruct.RoleMapStruct;
+import com.taotao.cloud.sys.biz.entity.system.Role;
+import com.taotao.cloud.sys.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.sys.biz.service.IRoleService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.Set;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +38,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 平台管理端-角色管理API
@@ -65,7 +66,7 @@ public class ManagerRoleController extends
 		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
 		@PathVariable(name = "userId") Long userId) {
 		List<RoleBO> roles = service().findRoleByUserIds(Set.of(userId));
-		List<RoleQueryVO> result = RoleMapStruct.INSTANCE.bosToVos(roles);
+		List<RoleQueryVO> result = IRoleMapStruct.INSTANCE.bosToVos(roles);
 		return success(result);
 	}
 
@@ -77,7 +78,7 @@ public class ManagerRoleController extends
 		@Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空")
 		@RequestParam Set<Long> userIds) {
 		List<RoleBO> roles = service().findRoleByUserIds(userIds);
-		List<RoleQueryVO> result = RoleMapStruct.INSTANCE.bosToVos(roles);
+		List<RoleQueryVO> result = IRoleMapStruct.INSTANCE.bosToVos(roles);
 		return success(result);
 	}
 

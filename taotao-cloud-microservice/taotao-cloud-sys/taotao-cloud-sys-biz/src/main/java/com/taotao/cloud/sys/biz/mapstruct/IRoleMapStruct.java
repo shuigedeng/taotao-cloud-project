@@ -17,41 +17,93 @@ package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.bo.role.RoleBO;
 import com.taotao.cloud.sys.api.dto.role.RoleQueryDTO;
-import com.taotao.cloud.sys.biz.entity.system.Role;
 import com.taotao.cloud.sys.api.vo.role.RoleQueryVO;
-import com.taotao.cloud.sys.api.vo.user.UserQueryVO;
-import java.util.List;
+import com.taotao.cloud.sys.biz.entity.system.Role;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * UserMapper
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-15 17:46:37
+ * @version 2022.04
+ * @since 2022-04-28 13:39:49
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface RoleMapStruct {
+public interface IRoleMapStruct {
 
-	RoleMapStruct INSTANCE = Mappers.getMapper(RoleMapStruct.class);
+	/**
+	 * 实例
+	 */
+	IRoleMapStruct INSTANCE = Mappers.getMapper(IRoleMapStruct.class);
 
+	/**
+	 * bos, vos
+	 *
+	 * @param bos bos
+	 * @return {@link List }<{@link RoleQueryVO }>
+	 * @since 2022-04-28 13:39:50
+	 */
 	List<RoleQueryVO> bosToVos(List<RoleBO> bos);
 
+	/**
+	 * 博给签证官
+	 *
+	 * @param bo 薄
+	 * @return {@link RoleQueryVO }
+	 * @since 2022-04-28 13:39:50
+	 */
 	RoleQueryVO boToVo(RoleBO bo);
 
+	/**
+	 * 薄角色
+	 *
+	 * @param role 角色
+	 * @return {@link RoleBO }
+	 * @since 2022-04-28 13:39:50
+	 */
 	RoleBO roleToBo(Role role);
 
+	/**
+	 * 角色bos
+	 *
+	 * @param roles 角色
+	 * @return {@link List }<{@link RoleBO }>
+	 * @since 2022-04-28 13:39:50
+	 */
 	List<RoleBO> rolesToBos(List<Role> roles);
 
+	/**
+	 * 系统用户用户查询签证官
+	 *
+	 * @param sysRole 系统作用
+	 * @return {@link RoleQueryVO }
+	 * @since 2022-04-28 13:39:50
+	 */
 	RoleQueryVO sysUserToUserQueryVO(Role sysRole);
 
+	/**
+	 * 系统用户用户查询签证官
+	 *
+	 * @param roleList 角色列表
+	 * @return {@link List }<{@link RoleQueryVO }>
+	 * @since 2022-04-28 13:39:50
+	 */
 	List<RoleQueryVO> sysUserToUserQueryVO(List<Role> roleList);
 
+	/**
+	 * 用户dto复制到系统用户
+	 *
+	 * @param roleQueryDTO 角色查询dto
+	 * @param sysRole      系统作用
+	 * @since 2022-04-28 13:39:51
+	 */
 	void copyUserDtoToSysUser(RoleQueryDTO roleQueryDTO, @MappingTarget Role sysRole);
 }

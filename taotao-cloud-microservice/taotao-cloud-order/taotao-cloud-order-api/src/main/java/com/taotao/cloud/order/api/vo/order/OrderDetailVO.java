@@ -1,7 +1,5 @@
 package com.taotao.cloud.order.api.vo.order;
 
-
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
@@ -41,7 +39,7 @@ public class OrderDetailVO implements Serializable {
 	/**
 	 * 子订单信息
 	 */
-	private List<OrderItem> orderItems;
+	private List<OrderItemVO> orderItems;
 
 	/**
 	 * 订单状态

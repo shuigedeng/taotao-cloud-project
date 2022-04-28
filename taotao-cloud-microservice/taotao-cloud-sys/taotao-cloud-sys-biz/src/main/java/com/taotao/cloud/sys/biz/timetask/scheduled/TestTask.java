@@ -3,12 +3,20 @@ package com.taotao.cloud.sys.biz.timetask.scheduled;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+/**
+ * 测试任务
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 11:54:33
+ */
 @Component
 public class TestTask {
 

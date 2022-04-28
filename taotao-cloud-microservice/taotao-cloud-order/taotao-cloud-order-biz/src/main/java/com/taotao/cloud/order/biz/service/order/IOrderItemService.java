@@ -34,7 +34,7 @@ public interface IOrderItemService extends IService<OrderItem> {
 	 * @since 2022-04-28 08:54:41
 	 */
 	void updateAfterSaleStatus(String orderItemSn,
-		OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum);
+							   OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum);
 
 	/**
 	 * 更新订单可投诉状态
@@ -46,7 +46,7 @@ public interface IOrderItemService extends IService<OrderItem> {
 	 * @since 2022-04-28 08:54:41
 	 */
 	void updateOrderItemsComplainStatus(String orderSn, String skuId, String complainId,
-		OrderComplaintStatusEnum complainStatusEnum);
+										OrderComplaintStatusEnum complainStatusEnum);
 
 	/**
 	 * 根据子订单编号获取子订单信息

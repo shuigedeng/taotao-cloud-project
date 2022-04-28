@@ -12,6 +12,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
@@ -59,19 +60,12 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	/**
 	 * 商品规格
 	 */
-	private final GoodsSkuService goodsSkuService;
+	private final IFeignGoodsSkuService goodsSkuService;
 	/**
 	 * 交易投诉沟通
 	 */
 	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
-	/**
-	 * 分页获取交易投诉信息
-	 *
-	 * @param searchParams 查询参数
-	 * @param pageVO       分页参数
-	 * @return 交易投诉信息
-	 */
 	@Override
 	public IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery orderComplaintPageQuery) {
 		LambdaQueryWrapper<OrderComplaint> queryWrapper = new LambdaQueryWrapper<>();
@@ -99,12 +93,6 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 		return this.page(orderComplaintPageQuery.buildMpPage(), queryWrapper);
 	}
 
-	/**
-	 * 获取交易投诉详情
-	 *
-	 * @param id 交易投诉ID
-	 * @return 交易投诉详情
-	 */
 	@Override
 	public OrderComplaintVO getOrderComplainById(Long id) {
 		OrderComplaint orderComplaint = this.checkOrderComplainExist(id);
@@ -120,23 +108,11 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 		return orderComplainVO;
 	}
 
-	/**
-	 * 获取交易投诉详情
-	 *
-	 * @param storeId 店铺id
-	 * @return 交易投诉详情
-	 */
 	@Override
 	public OrderComplaint getOrderComplainByStoreId(Long storeId) {
 		return this.getOne(new LambdaQueryWrapper<OrderComplaint>().eq(OrderComplaint::getStoreId, storeId));
 	}
 
-	/**
-	 * 添加交易投诉
-	 *
-	 * @param orderComplaintDTO 交易投诉信息
-	 * @return 添加结果
-	 */
 	@Override
 	public OrderComplaint addOrderComplain(OrderComplaintDTO orderComplaintDTO) {
 		try {
@@ -221,7 +197,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	}
 
 	@Override
-	public Boolean cancel(String id) {
+	public Boolean cancel(Long id) {
 		OrderComplaint orderComplaint = OperationalJudgment.judgment(this.getById(id));
 		//如果以及仲裁，则不可以进行申诉取消
 		if (orderComplaint.getComplainStatus().equals(ComplaintStatusEnum.COMPLETE.name())) {

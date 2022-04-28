@@ -38,7 +38,6 @@ public class TradeBuilder {
 	@Autowired
 	private ICartService cartService;
 
-
 	/**
 	 * 构造购物车 购物车与结算信息不一致的地方主要是优惠券计算和运费计算，其他规则都是一致都
 	 *
@@ -123,8 +122,6 @@ public class TradeBuilder {
 					if (render.step().equals(step)) {
 						render.render(tradeDTO);
 					}
-				} catch (ServiceException e) {
-					throw e;
 				} catch (Exception e) {
 					LogUtil.error("购物车{}渲染异常：", render.getClass(), e);
 				}

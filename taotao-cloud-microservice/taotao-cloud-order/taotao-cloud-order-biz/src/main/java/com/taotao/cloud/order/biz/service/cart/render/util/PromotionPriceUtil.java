@@ -31,7 +31,7 @@ public class PromotionPriceUtil {
 	 * @param promotionTypeEnum  促销类型
 	 */
 	public void recountPrice(TradeDTO tradeDTO, Map<String, BigDecimal> skuPromotionDetail,
-		BigDecimal discountPrice, PromotionTypeEnum promotionTypeEnum) {
+							 BigDecimal discountPrice, PromotionTypeEnum promotionTypeEnum) {
 
 		// sku 促销信息非空判定
 		if (skuPromotionDetail == null || skuPromotionDetail.size() == 0) {
@@ -132,7 +132,7 @@ public class PromotionPriceUtil {
 	 * @return 是否有效
 	 */
 	private boolean checkPromotionValidTime(Date startTime, Date endTime, String promotionType,
-		String promotionId) {
+											String promotionId) {
 		long now = System.currentTimeMillis();
 		if (startTime.getTime() > now) {
 			LogUtil.error("商品ID为{}的{}活动开始时间小于当时时间，活动未开始！", promotionId, promotionType);

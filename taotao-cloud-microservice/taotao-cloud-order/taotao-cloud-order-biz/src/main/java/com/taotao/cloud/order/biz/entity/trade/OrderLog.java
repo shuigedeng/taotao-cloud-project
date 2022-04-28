@@ -2,7 +2,6 @@ package com.taotao.cloud.order.biz.entity.trade;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -70,16 +69,9 @@ public class OrderLog extends BaseSuperEntity<OrderLog, Long> {
 	@Column(name = "message", columnDefinition = "text not null comment '日志信息'")
 	private String message;
 
-	public String getCreateBy() {
-		if (StringUtil.isEmpty(createBy)) {
-			return "系统";
-		}
-		return createBy;
-	}
-
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

@@ -15,35 +15,46 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.vo.file.FileVO;
-import com.taotao.cloud.sys.biz.entity.file.File;
+import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
+import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
+ * ilogistics地图结构
+ *
  * @author shuigedeng
- * @since 2020/11/11 14:42
- * @version 2022.03
+ * @version 2022.04
+ * @since 2022-04-28 13:39:34
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface FileMapStruct {
+public interface ILogisticsMapStruct {
 
-	FileMapStruct INSTANCE = Mappers.getMapper(FileMapStruct.class);
+	/**
+	 * 实例
+	 */
+	ILogisticsMapStruct INSTANCE = Mappers.getMapper(ILogisticsMapStruct.class);
 
-	FileVO fileToFileVO(File file);
+
+	/**
+	 * 物流文件签证官
+	 *
+	 * @param logisticsConfig 物流配置
+	 * @return {@link LogisticsVO }
+	 * @since 2022-04-28 13:39:35
+	 */
+	LogisticsVO logisticsToFileVO(LogisticsConfig logisticsConfig);
 
 	// /**
 	//  * SysUser转AddUserVO
 	//  *
 	//  * @param sysUser sysUser
 	//  * @return com.taotao.cloud.sys.api.vo.user.AddUserVO
-	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 2022.03
 	//  */
 	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
 	//
@@ -52,9 +63,7 @@ public interface FileMapStruct {
 	//  *
 	//  * @param userList userList
 	//  * @return java.util.List<com.taotao.cloud.sys.api.vo.user.UserVO>
-	//  * @author shuigedeng
 	//  * @since 2020/11/11 15:00
-	//  * @version 2022.03
 	//  */
 	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
 	//
@@ -63,9 +72,7 @@ public interface FileMapStruct {
 	//  *
 	//  * @param userDTO userDTO
 	//  * @return com.taotao.cloud.sys.biz.entity.SysUser
-	//  * @author shuigedeng
 	//  * @since 2020/11/11 14:52
-	//  * @version 2022.03
 	//  */
 	// SysUser userDtoToSysUser(UserDTO userDTO);
 	//
@@ -75,9 +82,7 @@ public interface FileMapStruct {
 	//  * @param userDTO userDTO
 	//  * @param user    user
 	//  * @return void
-	//  * @author shuigedeng
 	//  * @since 2020/11/11 16:59
-	//  * @version 2022.03
 	//  */
 	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

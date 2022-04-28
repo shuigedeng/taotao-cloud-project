@@ -21,18 +21,19 @@ import com.taotao.cloud.sys.api.dubbo.IDubboRoleService;
 import com.taotao.cloud.sys.biz.entity.system.QRole;
 import com.taotao.cloud.sys.biz.entity.system.Role;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
-import com.taotao.cloud.sys.biz.mapstruct.RoleMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
 import com.taotao.cloud.sys.biz.service.IRoleMenuService;
 import com.taotao.cloud.sys.biz.service.IRoleService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * RoleServiceImpl
@@ -70,21 +71,21 @@ public class RoleServiceImpl extends
 	@Override
 	public List<RoleBO> findAllRoles() {
 		List<Role> roles = ir().findAll();
-		return RoleMapStruct.INSTANCE.rolesToBos(roles);
+		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByUserIds(Set<Long> userIds) {
 		//List<Role> roles = cr().findRoleByUserIds(userIds);
 		List<Role> roles = new ArrayList<>();
-		return RoleMapStruct.INSTANCE.rolesToBos(roles);
+		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByCodes(Set<String> codes) {
 		//List<Role> roles = cr().findRoleByCodes(codes);
 		List<Role> roles = new ArrayList<>();
-		return RoleMapStruct.INSTANCE.rolesToBos(roles);
+		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 }

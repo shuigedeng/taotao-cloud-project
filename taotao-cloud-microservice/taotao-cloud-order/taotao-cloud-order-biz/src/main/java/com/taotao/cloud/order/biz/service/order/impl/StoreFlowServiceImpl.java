@@ -1,11 +1,12 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
@@ -96,7 +97,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
             storeFlow.setDistributionRebate(item.getPriceDetailDTO().getDistributionCommission());
             storeFlow.setBillPrice(item.getPriceDetailDTO().getBillPrice());
             //兼容为空，以及普通订单操作
-            if (StringUtils.isNotEmpty(orderPromotionType)) {
+            if (StringUtil.isNotEmpty(orderPromotionType)) {
                 if (orderPromotionType.equals(OrderPromotionTypeEnum.NORMAL.name())) {
                     //普通订单操作
                 }
@@ -138,7 +139,6 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
         storeFlow.setImage(afterSale.getGoodsImage());
         storeFlow.setSpecs(afterSale.getSpecs());
 
-
         //获取付款信息
         StoreFlow payStoreFlow = this.getOne(new LambdaUpdateWrapper<StoreFlow>().eq(StoreFlow::getOrderItemSn, afterSale.getOrderItemSn())
                 .eq(StoreFlow::getFlowType, FlowTypeEnum.PAY));
@@ -161,9 +161,8 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     }
 
     @Override
-    public IPage<StoreFlow> getStoreFlow(StoreFlowPageQuery storeFlowQueryDTO) {
-
-        return this.page(PageUtil.initPage(storeFlowQueryDTO.getPageVO()), generatorQueryWrapper(storeFlowQueryDTO));
+    public IPage<StoreFlow> getStoreFlow(StoreFlowPageQuery storeFlowPageQuery) {
+        return this.page(storeFlowPageQuery.buildMpPage(), generatorQueryWrapper(storeFlowPageQuery));
     }
 
     @Override
@@ -180,7 +179,6 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     public List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(StoreFlowPageQuery storeFlowQueryDTO) {
         return baseMapper.getStoreFlowRefundDownloadVO(generatorQueryWrapper(storeFlowQueryDTO));
     }
-
 
     @Override
     public IPage<StoreFlow> getStoreFlow(String id, String type, PageVO pageVO) {
@@ -205,30 +203,28 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
      * @param storeFlowQueryDTO 搜索参数
      * @return 查询wrapper
      */
-    private LambdaQueryWrapper generatorQueryWrapper(StoreFlowPageQuery storeFlowQueryDTO) {
-
-
+    private LambdaQueryWrapper<StoreFlow> generatorQueryWrapper(StoreFlowPageQuery storeFlowPageQuery) {
         LambdaQueryWrapper<StoreFlow> lambdaQueryWrapper = Wrappers.lambdaQuery();
         //分销订单过滤是否判定
-        lambdaQueryWrapper.isNotNull(storeFlowQueryDTO.getJustDistribution() != null && storeFlowQueryDTO.getJustDistribution(),
+        lambdaQueryWrapper.isNotNull(storeFlowPageQuery.getJustDistribution() != null && storeFlowPageQuery.getJustDistribution(),
                 StoreFlow::getDistributionRebate);
 
         //流水类型判定
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(storeFlowQueryDTO.getType()),
-                StoreFlow::getFlowType, storeFlowQueryDTO.getType());
+        lambdaQueryWrapper.eq(StringUtil.isNotEmpty(storeFlowPageQuery.getType()),
+                StoreFlow::getFlowType, storeFlowPageQuery.getType());
 
         //售后编号判定
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(storeFlowQueryDTO.getRefundSn()),
-                StoreFlow::getRefundSn, storeFlowQueryDTO.getRefundSn());
+        lambdaQueryWrapper.eq(StringUtil.isNotEmpty(storeFlowPageQuery.getRefundSn()),
+                StoreFlow::getRefundSn, storeFlowPageQuery.getRefundSn());
 
         //售后编号判定
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(storeFlowQueryDTO.getOrderSn()),
-                StoreFlow::getOrderSn, storeFlowQueryDTO.getOrderSn());
+        lambdaQueryWrapper.eq(StringUtil.isNotEmpty(storeFlowPageQuery.getOrderSn()),
+                StoreFlow::getOrderSn, storeFlowPageQuery.getOrderSn());
 
         //结算单非空，则校对结算单参数
-        if (storeFlowQueryDTO.getBill() != null) {
-            Bill bill = storeFlowQueryDTO.getBill();
-            lambdaQueryWrapper.eq(StringUtils.isNotEmpty(bill.getStoreId()), StoreFlow::getStoreId, bill.getStoreId());
+        if (storeFlowPageQuery.getBill() != null) {
+            Bill bill = storeFlowPageQuery.getBill();
+            lambdaQueryWrapper.eq(StringUtil.isNotEmpty(bill.getStoreId()), StoreFlow::getStoreId, bill.getStoreId());
             lambdaQueryWrapper.between(bill.getStartTime() != null && bill.getEndTime() != null,
                     StoreFlow::getCreateTime, bill.getStartTime(), bill.getEndTime());
         }

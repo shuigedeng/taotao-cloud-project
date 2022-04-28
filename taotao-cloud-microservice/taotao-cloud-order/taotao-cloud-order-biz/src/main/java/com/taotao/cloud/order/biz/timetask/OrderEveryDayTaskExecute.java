@@ -2,7 +2,6 @@ package com.taotao.cloud.order.biz.timetask;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -10,10 +9,12 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
+import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
+import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
@@ -21,7 +22,8 @@ import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.biz.service.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.setting.OrderSetting;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,12 +58,12 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 * 设置
 	 */
 	@Autowired
-	private SettingService settingService;
+	private IFeignSettingService settingService;
 	/**
 	 * 会员评价
 	 */
 	@Autowired
-	private MemberEvaluationService memberEvaluationService;
+	private IFeignMemberEvaluationService memberEvaluationService;
 
 	@Autowired
 	private IAfterSaleService afterSaleService;
@@ -71,10 +73,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 */
 	@Override
 	public void execute() {
-
-		Setting setting = settingService.get(SettingEnum.ORDER_SETTING.name());
+		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingEnum.ORDER_SETTING.name()).data();
 		//订单设置
-		OrderSetting orderSetting = JSONUtil.toBean(setting.getSettingValue(), OrderSetting.class);
 		if (orderSetting == null) {
 			throw new BusinessException(ResultEnum.ORDER_SETTING_ERROR);
 		}
@@ -94,8 +94,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 *
 	 * @param orderSetting 订单设置
 	 */
-	private void completedOrder(OrderSetting orderSetting) {
-
+	private void completedOrder(OrderSettingVO orderSetting) {
 		//订单自动收货时间 = 当前时间 - 自动收货时间天数
 		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getAutoReceive());
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
@@ -107,8 +106,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 
 		//判断是否有符合条件的订单，进行订单完成处理
 		if (!list.isEmpty()) {
-			List<String> receiveSnList = list.stream().map(Order::getSn)
-				.collect(Collectors.toList());
+			List<String> receiveSnList = list.stream().map(Order::getSn).toList();
 			for (String orderSn : receiveSnList) {
 				orderService.systemComplete(orderSn);
 			}
@@ -120,13 +118,12 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 *
 	 * @param orderSetting 订单设置
 	 */
-	private void memberEvaluation(OrderSetting orderSetting) {
+	private void memberEvaluation(OrderSettingVO orderSetting) {
 		//订单自动收货时间 = 当前时间 - 自动收货时间天数
-		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(),
-			-orderSetting.getAutoEvaluation());
+		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getAutoEvaluation());
 
 		//订单完成时间 <= 订单自动好评时间
-		QueryWrapper queryWrapper = new QueryWrapper();
+		QueryWrapper<OrderSimpleVO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.le("o.complete_time", receiveTime);
 		queryWrapper.eq("oi.comment_status", CommentStatusEnum.UNFINISHED.name());
 		List<OrderItem> orderItems = orderItemMapper.waitOperationOrderItem(queryWrapper);
@@ -155,23 +152,20 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 *
 	 * @param orderSetting 订单设置
 	 */
-	private void closeAfterSale(OrderSetting orderSetting) {
-
+	private void closeAfterSale(OrderSettingVO orderSetting) {
 		//订单关闭售后申请时间 = 当前时间 - 自动关闭售后申请天数
-		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(),
-			-orderSetting.getAutoEvaluation());
+		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getAutoEvaluation());
 
 		//关闭售后订单=未售后订单+小于订单关闭售后申请时间
-		QueryWrapper queryWrapper = new QueryWrapper();
+		QueryWrapper<OrderSimpleVO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.le("o.complete_time", receiveTime);
 		queryWrapper.eq("oi.after_sale_status", OrderItemAfterSaleStatusEnum.NOT_APPLIED.name());
 		List<OrderItem> orderItems = orderItemMapper.waitOperationOrderItem(queryWrapper);
 
 		//判断是否有符合条件的订单，关闭允许售后申请处理
 		if (!orderItems.isEmpty()) {
-
 			//获取订单货物ID
-			List<String> orderItemIdList = orderItems.stream().map(OrderItem::getId)
+			List<Long> orderItemIdList = orderItems.stream().map(OrderItem::getId)
 				.collect(Collectors.toList());
 
 			//修改订单售后状态
@@ -188,23 +182,20 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 *
 	 * @param orderSetting 订单设置
 	 */
-	private void closeComplaint(OrderSetting orderSetting) {
-
+	private void closeComplaint(OrderSettingVO orderSetting) {
 		//订单关闭交易投诉申请时间 = 当前时间 - 自动关闭交易投诉申请天数
-		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(),
-			-orderSetting.getCloseComplaint());
+		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getCloseComplaint());
 
 		//关闭售后订单=未售后订单+小于订单关闭售后申请时间
-		QueryWrapper queryWrapper = new QueryWrapper();
+		QueryWrapper<OrderSimpleVO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.le("o.complete_time", receiveTime);
 		queryWrapper.eq("oi.complain_status", OrderComplaintStatusEnum.NO_APPLY.name());
 		List<OrderItem> orderItems = orderItemMapper.waitOperationOrderItem(queryWrapper);
 
 		//判断是否有符合条件的订单，关闭允许售后申请处理
 		if (!orderItems.isEmpty()) {
-
 			//获取订单货物ID
-			List<String> orderItemIdList = orderItems.stream().map(OrderItem::getId)
+			List<Long> orderItemIdList = orderItems.stream().map(OrderItem::getId)
 				.collect(Collectors.toList());
 
 			//修改订单投诉状态
