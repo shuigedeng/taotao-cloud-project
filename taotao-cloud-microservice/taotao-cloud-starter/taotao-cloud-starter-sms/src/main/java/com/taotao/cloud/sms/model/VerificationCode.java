@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
  * 验证码
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:02
  */
 public class VerificationCode {
 

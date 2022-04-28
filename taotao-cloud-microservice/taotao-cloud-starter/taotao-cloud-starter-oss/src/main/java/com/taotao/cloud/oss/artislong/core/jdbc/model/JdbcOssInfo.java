@@ -1,18 +1,24 @@
 package com.taotao.cloud.oss.artislong.core.jdbc.model;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-
 import com.taotao.cloud.oss.artislong.core.jdbc.constant.JdbcOssConstant;
 import com.taotao.cloud.oss.artislong.exception.NotSupportException;
 import com.taotao.cloud.oss.artislong.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.artislong.model.FileOssInfo;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.util.Date;
 
+/**
+ * jdbc操作系统信息
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:55
+ */
 public class JdbcOssInfo {
     private String id;
     private String name;

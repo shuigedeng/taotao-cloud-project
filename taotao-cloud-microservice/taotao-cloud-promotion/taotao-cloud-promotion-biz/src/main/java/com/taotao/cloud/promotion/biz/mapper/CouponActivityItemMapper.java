@@ -3,11 +3,16 @@ package com.taotao.cloud.promotion.biz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.promotion.api.vo.CouponActivityItemVO;
 import com.taotao.cloud.promotion.biz.entity.CouponActivityItem;
-import java.util.List;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * 优惠券活动
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:36:29
  */
 public interface CouponActivityItemMapper extends BaseMapper<CouponActivityItem> {
 

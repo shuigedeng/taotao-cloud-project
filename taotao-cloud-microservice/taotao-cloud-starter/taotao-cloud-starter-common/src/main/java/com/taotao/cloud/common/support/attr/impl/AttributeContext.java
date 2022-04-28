@@ -4,6 +4,7 @@ package com.taotao.cloud.common.support.attr.impl;
 import com.taotao.cloud.common.support.attr.IAttributeContext;
 import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -12,7 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 属性上下文上下文
  * <p>
- * [一定线程安全吗](https://segmentfault.com/a/1190000018954561?utm_source=tag-newest)
+ * [一定线程安全吗](<a href="https://segmentfault.com/a/1190000018954561?utm_source=tag-newest">https://segmentfault.com/a/1190000018954561?utm_source=tag-newest</a>)
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:06:56
  */
 public class AttributeContext implements IAttributeContext {
 

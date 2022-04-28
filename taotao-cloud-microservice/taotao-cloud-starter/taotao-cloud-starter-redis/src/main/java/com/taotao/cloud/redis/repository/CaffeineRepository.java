@@ -6,6 +6,8 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.redis.model.CacheHashKey;
 import com.taotao.cloud.redis.model.CacheKey;
+import org.springframework.lang.NonNull;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,11 +18,14 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.springframework.lang.NonNull;
 
 
 /**
  * 基于 Caffeine 实现的内存缓存， 主要用于开发、测试、演示环境
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:46:04
  */
 public class CaffeineRepository {
 

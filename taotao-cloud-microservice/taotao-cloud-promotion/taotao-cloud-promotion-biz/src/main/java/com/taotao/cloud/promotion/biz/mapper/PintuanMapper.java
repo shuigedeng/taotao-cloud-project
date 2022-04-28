@@ -6,8 +6,9 @@ import com.taotao.cloud.promotion.biz.entity.Pintuan;
 /**
  * 拼团数据处理层
  *
- *
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:37:03
  */
 public interface PintuanMapper extends BaseMapper<Pintuan> {
 

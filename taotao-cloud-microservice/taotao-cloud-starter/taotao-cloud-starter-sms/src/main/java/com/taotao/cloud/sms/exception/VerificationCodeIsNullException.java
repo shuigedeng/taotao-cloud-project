@@ -18,6 +18,8 @@ import java.util.Locale;
  * 手机验证码信息无效
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:44
  */
 public class VerificationCodeIsNullException extends SmsException {
 

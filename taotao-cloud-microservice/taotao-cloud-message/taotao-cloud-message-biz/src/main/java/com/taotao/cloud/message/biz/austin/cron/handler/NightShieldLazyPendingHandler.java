@@ -9,7 +9,6 @@ import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfi
 import com.taotao.cloud.message.biz.austin.support.utils.KafkaUtils;
 import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ import java.util.Arrays;
  * 
  */
 @Service
-@Slf4j
+
 public class NightShieldLazyPendingHandler {
 
 	private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";

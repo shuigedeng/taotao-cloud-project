@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 京东云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:58
  */
 @ConfigurationProperties(prefix = JdCloudProperties.PREFIX)
 public class JdCloudProperties extends AbstractHandlerProperties<String> {

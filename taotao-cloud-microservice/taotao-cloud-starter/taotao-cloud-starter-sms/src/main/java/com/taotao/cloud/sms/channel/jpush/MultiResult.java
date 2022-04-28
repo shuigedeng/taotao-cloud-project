@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 批量发送返回结果
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:14
  */
 public class MultiResult extends Result {
 

@@ -4,6 +4,7 @@ package com.taotao.cloud.common.support.tuple.impl;
 import com.taotao.cloud.common.support.tuple.ITuple;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.guava.Guavas;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,6 +14,10 @@ import java.util.ListIterator;
 
 /**
  * 元组抽象父类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:14
  */
 public abstract class AbstractTuple implements ITuple {
 

@@ -16,7 +16,6 @@ import com.taotao.cloud.message.biz.austin.handler.domain.dingding.DingDingRobot
 import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
 import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
  *
  * 
  */
-@Slf4j
+
 @Service
 public class DingDingRobotHandler extends BaseHandler implements Handler {
 

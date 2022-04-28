@@ -18,8 +18,9 @@ package com.taotao.cloud.oss.service;
 import com.taotao.cloud.oss.exception.UploadFileException;
 import com.taotao.cloud.oss.model.UploadFileInfo;
 import com.taotao.cloud.oss.util.FileUtil;
-import java.io.File;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 /**
  * 文件上传抽象类
@@ -73,9 +74,25 @@ public abstract class AbstractUploadFileService implements UploadFileService {
 		return uploadFile(file, uploadFileInfo);
 	}
 
+	/**
+	 * 上传文件
+	 *
+	 * @param file           文件
+	 * @param uploadFileInfo 上传文件信息
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:27
+	 */
 	protected abstract UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo)
 		throws UploadFileException;
 
+	/**
+	 * 上传文件
+	 *
+	 * @param file           文件
+	 * @param uploadFileInfo 上传文件信息
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:37
+	 */
 	protected abstract UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo)
 		throws UploadFileException;
 

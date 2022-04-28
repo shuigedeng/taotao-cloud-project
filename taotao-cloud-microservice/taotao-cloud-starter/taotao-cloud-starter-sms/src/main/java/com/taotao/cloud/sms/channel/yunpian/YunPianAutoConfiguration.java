@@ -29,6 +29,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 云片网发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:29
  */
 @Configuration
 @ConditionalOnProperty(prefix = YunPianProperties.PREFIX, name = "enabled", havingValue = "true")

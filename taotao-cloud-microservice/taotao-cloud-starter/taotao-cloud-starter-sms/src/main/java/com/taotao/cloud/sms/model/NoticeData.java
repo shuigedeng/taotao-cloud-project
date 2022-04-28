@@ -19,6 +19,8 @@ import java.util.Map;
  * 通知内容
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:57
  */
 public class NoticeData {
 

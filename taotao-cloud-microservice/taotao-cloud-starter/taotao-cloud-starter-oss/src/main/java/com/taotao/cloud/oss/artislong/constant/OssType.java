@@ -1,5 +1,12 @@
 package com.taotao.cloud.oss.artislong.constant;
 
+/**
+ * 操作系统类型
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:35:14
+ */
 public enum OssType {
 
     /**

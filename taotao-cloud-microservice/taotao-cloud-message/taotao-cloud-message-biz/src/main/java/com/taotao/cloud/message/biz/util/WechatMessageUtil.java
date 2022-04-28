@@ -13,16 +13,19 @@ import com.taotao.cloud.message.biz.entity.WechatMPMessage;
 import com.taotao.cloud.message.biz.entity.WechatMessage;
 import com.taotao.cloud.message.biz.service.WechatMPMessageService;
 import com.taotao.cloud.message.biz.service.WechatMessageService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 微信消息
  */
-@Slf4j
+
 @Component
 public class WechatMessageUtil {
 

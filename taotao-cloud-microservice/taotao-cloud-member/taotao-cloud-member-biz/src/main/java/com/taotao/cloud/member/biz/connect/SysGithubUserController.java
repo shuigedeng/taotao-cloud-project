@@ -17,7 +17,7 @@
 // /**
 //  * github用户表
 //  */
-// @Slf4j
+// 
 // @RestController
 // @RequestMapping("/github")
 // @Api(tags = "github用户API")

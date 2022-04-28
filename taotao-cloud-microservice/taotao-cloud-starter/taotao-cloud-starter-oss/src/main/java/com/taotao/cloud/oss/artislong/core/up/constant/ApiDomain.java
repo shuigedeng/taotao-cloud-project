@@ -2,6 +2,13 @@ package com.taotao.cloud.oss.artislong.core.up.constant;
 
 import com.upyun.RestManager;
 
+/**
+ * api域
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:36
+ */
 public enum ApiDomain {
     /**
      * 根据网络条件自动选择接入点:v0.api.upyun.com

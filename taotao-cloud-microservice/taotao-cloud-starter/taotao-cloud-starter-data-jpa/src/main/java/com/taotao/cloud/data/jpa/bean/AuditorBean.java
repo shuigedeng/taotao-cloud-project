@@ -16,9 +16,11 @@
 package com.taotao.cloud.data.jpa.bean;
 
 import com.taotao.cloud.common.model.SecurityUser;
-import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Optional;
 
 /**
  * 获取当前审计用户 主要用于CreatedBy LastModifiedBy 
@@ -29,6 +31,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class AuditorBean implements AuditorAware<Long> {
 
+	@NotNull
 	@Override
 	public Optional<Long> getCurrentAuditor() {
 		SecurityUser user;

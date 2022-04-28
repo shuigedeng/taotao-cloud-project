@@ -8,9 +8,10 @@ import java.util.List;
 
 /**
  * 分类绑定参数组业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:59:23
  */
 public interface CategoryParameterGroupService extends IService<CategoryParameterGroup> {
 
@@ -18,7 +19,8 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 * 查询分类绑定参数集合
 	 *
 	 * @param categoryId 分类Id
-	 * @return 分类参数
+	 * @return {@link List }<{@link ParameterGroupVO }>
+	 * @since 2022-04-27 16:59:23
 	 */
 	List<ParameterGroupVO> getCategoryParams(Long categoryId);
 
@@ -26,7 +28,8 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 * 查询分类绑定参数组信息
 	 *
 	 * @param categoryId 分类id
-	 * @return 参数组列表
+	 * @return {@link List }<{@link CategoryParameterGroup }>
+	 * @since 2022-04-27 16:59:23
 	 */
 	List<CategoryParameterGroup> getCategoryGroup(Long categoryId);
 
@@ -34,7 +37,8 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 * 更新分类参数组绑定信息
 	 *
 	 * @param categoryParameterGroup 分类参数组信息
-	 * @return 是否成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:23
 	 */
 	Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup);
 
@@ -42,6 +46,8 @@ public interface CategoryParameterGroupService extends IService<CategoryParamete
 	 * 通过分类ID删除关联品牌
 	 *
 	 * @param categoryId 品牌ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:23
 	 */
 	Boolean deleteByCategoryId(Long categoryId);
 

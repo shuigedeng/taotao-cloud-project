@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.redis.val;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -26,5 +27,6 @@ import java.io.Serializable;
  */
 public class NullVal implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 }

@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * 配置类
  */
-@Slf4j
+
 @Configuration
 public class XxlJobConfig {
 

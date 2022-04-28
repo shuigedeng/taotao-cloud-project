@@ -9,6 +9,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * oss属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:52
+ */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.UP)
 public class UpOssProperties extends UpOssConfig implements InitializingBean {
 

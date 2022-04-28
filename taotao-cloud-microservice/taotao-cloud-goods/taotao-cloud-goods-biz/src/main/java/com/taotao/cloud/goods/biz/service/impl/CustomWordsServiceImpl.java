@@ -13,17 +13,19 @@ import com.taotao.cloud.goods.biz.entity.CustomWords;
 import com.taotao.cloud.goods.biz.mapper.CustomWordsMapper;
 import com.taotao.cloud.goods.biz.mapstruct.ICustomWordsMapStruct;
 import com.taotao.cloud.goods.biz.service.CustomWordsService;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 /**
  * 自定义分词业务层实现
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:02:21
  */
 @Service
 public class CustomWordsServiceImpl extends ServiceImpl<CustomWordsMapper, CustomWords> implements

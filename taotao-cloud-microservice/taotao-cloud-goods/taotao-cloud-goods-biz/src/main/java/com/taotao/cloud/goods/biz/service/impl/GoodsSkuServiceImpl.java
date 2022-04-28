@@ -30,11 +30,15 @@ import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
 import com.taotao.cloud.goods.biz.mapstruct.IGoodsSkuMapStruct;
-import com.taotao.cloud.goods.biz.service.*;
+import com.taotao.cloud.goods.biz.service.CategoryService;
+import com.taotao.cloud.goods.biz.service.EsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.GoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.GoodsService;
+import com.taotao.cloud.goods.biz.service.GoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
-import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
@@ -50,12 +54,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * 商品sku业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:02:44
  */
 @AllArgsConstructor
 @Service

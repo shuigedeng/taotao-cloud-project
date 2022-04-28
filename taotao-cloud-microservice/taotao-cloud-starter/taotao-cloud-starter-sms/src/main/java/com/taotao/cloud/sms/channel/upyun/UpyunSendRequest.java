@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 发送请求
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:23
  */
 public class UpyunSendRequest {
 

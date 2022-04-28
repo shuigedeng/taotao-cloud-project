@@ -9,17 +9,17 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.vo.PintuanShareVO;
 import com.taotao.cloud.promotion.api.vo.PintuanVO;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.biz.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.mapper.PintuanMapper;
@@ -38,8 +38,9 @@ import java.util.stream.Collectors;
 /**
  * 拼团业务层实现
  *
- *
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:27
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

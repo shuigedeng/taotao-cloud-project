@@ -18,6 +18,8 @@ import java.util.Collection;
  * 响应结果
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:51
  */
 public class HuaWeiCloudResult {
 

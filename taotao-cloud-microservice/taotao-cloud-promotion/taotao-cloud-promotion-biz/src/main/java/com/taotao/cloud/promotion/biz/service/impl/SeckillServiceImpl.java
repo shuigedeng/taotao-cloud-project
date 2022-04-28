@@ -4,7 +4,6 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.setting.Setting;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -36,6 +35,9 @@ import java.util.List;
 /**
  * 秒杀活动业务层实现
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:46
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -198,15 +200,8 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
                 throw new BusinessException(ResultEnum.PROMOTION_SAME_ACTIVE_EXIST);
             }
         }
-
-
     }
 
-    /**
-     * 当前促销类型
-     *
-     * @return 当前促销类型
-     */
     @Override
     public PromotionTypeEnum getPromotionType() {
         return PromotionTypeEnum.SECKILL;

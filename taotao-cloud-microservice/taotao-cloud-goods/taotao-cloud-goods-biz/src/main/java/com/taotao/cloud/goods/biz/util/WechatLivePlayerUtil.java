@@ -3,18 +3,19 @@ package com.taotao.cloud.goods.biz.util;
 import cn.hutool.json.JSONObject;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.Studio;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 微信小程序直播工具类
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:03:35
  */
 @Component
 public class WechatLivePlayerUtil {
@@ -22,6 +23,9 @@ public class WechatLivePlayerUtil {
 	//@Autowired
 	//private WechatAccessTokenUtil wechatAccessTokenUtil;
 
+	/**
+	 * 微信媒体实效
+	 */
 	@Autowired
 	private WechatMediaUtil wechatMediaUtil;
 
@@ -29,7 +33,8 @@ public class WechatLivePlayerUtil {
 	 * 创建小程序直播间
 	 *
 	 * @param studio 小程序直播
-	 * @return 房间ID
+	 * @return {@link Map }<{@link String }, {@link String }>
+	 * @since 2022-04-27 17:03:35
 	 */
 	public Map<String, String> create(Studio studio) {
 		//发送url
@@ -47,7 +52,8 @@ public class WechatLivePlayerUtil {
 	 * 创建小程序直播间
 	 *
 	 * @param studio 小程序直播
-	 * @return 房间ID
+	 * @return boolean
+	 * @since 2022-04-27 17:03:35
 	 */
 	public boolean editRoom(Studio studio) {
 		//发送url
@@ -65,7 +71,8 @@ public class WechatLivePlayerUtil {
 	 * 获取直播间回放
 	 *
 	 * @param roomId 房间ID
-	 * @return 回放地址
+	 * @return {@link String }
+	 * @since 2022-04-27 17:03:35
 	 */
 	public String getLiveInfo(Integer roomId) {
 		//发送url
@@ -89,7 +96,8 @@ public class WechatLivePlayerUtil {
 	 *
 	 * @param roomId  房间ID
 	 * @param goodsId 商品ID
-	 * @return 操作结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:03:35
 	 */
 	public Boolean pushGoods(Integer roomId, Long goodsId) {
 		//发送url
@@ -109,7 +117,8 @@ public class WechatLivePlayerUtil {
 	 *
 	 * @param roomId  房间ID
 	 * @param goodsId 商品ID
-	 * @return 操作结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:03:35
 	 */
 	public Boolean goodsDeleteInRoom(Integer roomId, Long goodsId) {
 		//发送url
@@ -128,7 +137,8 @@ public class WechatLivePlayerUtil {
 	 * 添加直播商品
 	 *
 	 * @param commodity 直播商品
-	 * @return 添加结果
+	 * @return {@link JSONObject }
+	 * @since 2022-04-27 17:03:35
 	 */
 	public JSONObject addGoods(Commodity commodity) {
 		//发送url
@@ -154,7 +164,8 @@ public class WechatLivePlayerUtil {
 	 * 删除直播商品
 	 *
 	 * @param goodsId 商品ID
-	 * @return 删除结果
+	 * @return {@link JSONObject }
+	 * @since 2022-04-27 17:03:35
 	 */
 	public JSONObject deleteGoods(Long goodsId) {
 		//发送url
@@ -168,7 +179,8 @@ public class WechatLivePlayerUtil {
 	 * 查询直播商品状态
 	 *
 	 * @param goodsIdList 商品ID列表
-	 * @return 删除结果
+	 * @return {@link JSONObject }
+	 * @since 2022-04-27 17:03:36
 	 */
 	public JSONObject getGoodsWareHouse(List<String> goodsIdList) {
 		//发送url
@@ -183,7 +195,8 @@ public class WechatLivePlayerUtil {
 	 *
 	 * @param url 链接
 	 * @param map 参数
-	 * @return 返回内容
+	 * @return {@link JSONObject }
+	 * @since 2022-04-27 17:03:36
 	 */
 	private JSONObject doPostWithJson(String url, Map map) {
 		////获取token
@@ -212,7 +225,7 @@ public class WechatLivePlayerUtil {
 	 *
 	 * @param studio 工作室
 	 * @return {@link Map }<{@link String }, {@link String }>
-	 * @since 2022-04-25 16:30:40
+	 * @since 2022-04-27 17:03:36
 	 */
 	private Map<String, String> mockRoom(Studio studio) {
 		Map<String, String> map = new HashMap<>(16);

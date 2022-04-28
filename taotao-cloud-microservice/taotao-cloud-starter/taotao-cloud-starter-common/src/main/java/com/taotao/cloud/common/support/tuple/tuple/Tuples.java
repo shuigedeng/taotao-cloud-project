@@ -8,6 +8,10 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * 创建元组工具类，使用更加简便
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:56
  */
 public final class Tuples {
 

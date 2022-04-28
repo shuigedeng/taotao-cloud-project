@@ -3,15 +3,16 @@ package com.taotao.cloud.ip2region.utils;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.maxmind.geoip2.DatabaseReader;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import java.net.InetAddress;
+
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
 
 /**
  * 获取客户端IP地址
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 09:18:52
+ * @since 2022-04-27 17:29:10
  */
 public class IpGeoUtils {
 
@@ -20,6 +21,10 @@ public class IpGeoUtils {
 	 * <p>
 	 * 使用Nginx等反向代理软件， 则不能通过request.getRemoteAddr()获取IP地址
 	 * 如果使用了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP地址，X-Forwarded-For中第一个非unknown的有效IP字符串，则为真实IP地址
+	 *
+	 * @param request 请求
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:10
 	 */
 	public static String getIP(HttpServletRequest request) {
 		String ip = null;
@@ -47,22 +52,24 @@ public class IpGeoUtils {
 	}
 
 	/**
+	 * 获得国家
+	 *
 	 * @param reader
 	 * @param ip
-	 * @return
-	 * @throws Exception
-	 * @description: 获得国家
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:10
 	 */
 	public static String getCountry(DatabaseReader reader, String ip) throws Exception {
 		return reader.city(InetAddress.getByName(ip)).getCountry().getNames().get("zh-CN");
 	}
 
 	/**
+	 * 获得省
+	 *
 	 * @param reader
 	 * @param ip
-	 * @return
-	 * @throws Exception
-	 * @description: 获得省份
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:10
 	 */
 	public static String getProvince(DatabaseReader reader, String ip) throws Exception {
 		return reader.city(InetAddress.getByName(ip)).getMostSpecificSubdivision().getNames()
@@ -70,22 +77,24 @@ public class IpGeoUtils {
 	}
 
 	/**
+	 * 得到城市
+	 *
 	 * @param reader
 	 * @param ip
-	 * @return
-	 * @throws Exception
-	 * @description: 获得城市
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:10
 	 */
 	public static String getCity(DatabaseReader reader, String ip) throws Exception {
 		return reader.city(InetAddress.getByName(ip)).getCity().getNames().get("zh-CN");
 	}
 
 	/**
+	 * 获得经度
+	 *
 	 * @param reader
 	 * @param ip
-	 * @return
-	 * @throws Exception
-	 * @description: 获得经度
+	 * @return {@link Double }
+	 * @since 2022-04-27 17:29:11
 	 */
 	public static Double getLongitude(DatabaseReader reader, String ip) throws Exception {
 //        return reader.city(InetAddress.getByName(ip)).getLocation().getLongitude();
@@ -98,11 +107,12 @@ public class IpGeoUtils {
 	}
 
 	/**
+	 * 得到自由
+	 *
 	 * @param reader
 	 * @param ip
-	 * @return
-	 * @throws Exception
-	 * @description: 获得纬度
+	 * @return {@link Double }
+	 * @since 2022-04-27 17:29:11
 	 */
 	public static Double getLatitude(DatabaseReader reader, String ip) {
 		double data = 0;

@@ -21,18 +21,20 @@ import com.taotao.cloud.goods.biz.service.BrandService;
 import com.taotao.cloud.goods.biz.service.CategoryBrandService;
 import com.taotao.cloud.goods.biz.service.CategoryService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 
 /**
  * 商品品牌业务层实现
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:01:19
  */
 @AllArgsConstructor
 @Service

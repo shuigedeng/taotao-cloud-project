@@ -17,20 +17,21 @@ import com.taotao.cloud.goods.biz.mapstruct.IParametersMapStruct;
 import com.taotao.cloud.goods.biz.service.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.GoodsService;
 import com.taotao.cloud.goods.biz.service.ParametersService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 分类绑定参数组接口实现
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-08 22:37:47
+ * @since 2022-04-27 17:02:04
  */
 @AllArgsConstructor
 @Service

@@ -20,6 +20,8 @@ import java.util.Collection;
  * 接收者列表
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:12
  */
 public class MultiRecipient {
 

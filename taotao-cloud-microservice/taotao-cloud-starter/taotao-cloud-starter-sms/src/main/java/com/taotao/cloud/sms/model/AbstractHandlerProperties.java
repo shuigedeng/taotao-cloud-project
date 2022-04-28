@@ -12,15 +12,17 @@
  */
 package com.taotao.cloud.sms.model;
 
+import org.springframework.lang.Nullable;
+
 import java.util.List;
 import java.util.Map;
-import org.springframework.lang.Nullable;
 
 /**
  * 抽象处理实现配置
  *
- * @param <T> 模板ID类型
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:54
  */
 public abstract class AbstractHandlerProperties<T> {
 

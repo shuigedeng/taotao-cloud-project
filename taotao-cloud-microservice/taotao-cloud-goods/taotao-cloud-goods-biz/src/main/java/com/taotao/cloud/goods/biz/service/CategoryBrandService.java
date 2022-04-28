@@ -8,9 +8,10 @@ import java.util.List;
 
 /**
  * 商品分类品牌业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:59:19
  */
 public interface CategoryBrandService extends IService<CategoryBrand> {
 
@@ -18,7 +19,8 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * 根据分类id查询品牌信息
 	 *
 	 * @param categoryId 分类id
-	 * @return 分类品牌关联信息列表
+	 * @return {@link List }<{@link CategoryBrandVO }>
+	 * @since 2022-04-27 16:59:19
 	 */
 	List<CategoryBrandVO> getCategoryBrandList(Long categoryId);
 
@@ -26,7 +28,8 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * 通过分类ID删除关联品牌
 	 *
 	 * @param categoryId 品牌ID
-	 * @return 是否删除成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:19
 	 */
 	Boolean deleteByCategoryId(Long categoryId);
 
@@ -34,7 +37,8 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 * 根据品牌ID获取分类品牌关联信息
 	 *
 	 * @param brandId 品牌ID
-	 * @return 分类品牌关联信息
+	 * @return {@link List }<{@link CategoryBrand }>
+	 * @since 2022-04-27 16:59:19
 	 */
 	List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId);
 
@@ -43,6 +47,8 @@ public interface CategoryBrandService extends IService<CategoryBrand> {
 	 *
 	 * @param categoryId 分类id
 	 * @param brandIds   品牌ids
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:19
 	 */
 	Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds);
 }

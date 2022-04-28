@@ -31,6 +31,8 @@ import org.springframework.web.client.RestTemplate;
  * 华为云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:47
  */
 @Configuration
 @ConditionalOnProperty(prefix = HuaWeiCloudProperties.PREFIX, name = "enabled", havingValue = "true")

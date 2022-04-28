@@ -11,14 +11,13 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;
 import com.taotao.cloud.sys.api.setting.connect.dto.WechatConnectSettingItem;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * 微信API交互token
  */
-@Slf4j
+
 @Component
 public class WechatAccessTokenUtil {
     @Autowired

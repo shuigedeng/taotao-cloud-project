@@ -15,9 +15,12 @@
  */
 package com.taotao.cloud.data.jpa.entity;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -26,12 +29,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import javax.validation.groups.Default;
-import org.apache.poi.ss.formula.functions.T;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * JpaSuperEntity
@@ -44,6 +44,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class JpaSuperEntity<I extends Serializable> implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -3685249101751401211L;
 
 	/**

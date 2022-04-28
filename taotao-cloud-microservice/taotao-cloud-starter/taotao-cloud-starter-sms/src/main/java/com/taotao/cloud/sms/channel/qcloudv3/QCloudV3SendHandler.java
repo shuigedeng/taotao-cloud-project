@@ -13,25 +13,28 @@
 package com.taotao.cloud.sms.channel.qcloudv3;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
+import com.taotao.cloud.sms.model.NoticeData;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.sms.v20190711.SmsClient;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20190711.models.SendStatus;
+import org.springframework.context.ApplicationEventPublisher;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import org.springframework.context.ApplicationEventPublisher;
 
 /**
  * 腾讯云发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:00
  */
 public class QCloudV3SendHandler extends AbstractSendHandler<QCloudV3Properties> {
 

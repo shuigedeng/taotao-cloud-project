@@ -17,6 +17,8 @@ package com.taotao.cloud.sms.channel.netease;
  * 响应结果
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:34
  */
 public class NeteaseCloudResult {
 

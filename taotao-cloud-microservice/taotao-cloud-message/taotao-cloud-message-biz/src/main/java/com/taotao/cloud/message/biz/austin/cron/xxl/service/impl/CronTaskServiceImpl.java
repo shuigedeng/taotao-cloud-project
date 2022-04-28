@@ -9,9 +9,10 @@ import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.cron.xxl.constants.XxlJobConstant;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
 import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
 import com.xxl.job.core.biz.model.ReturnT;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ import java.util.Map;
 /**
  * 
  */
-@Slf4j
+
 @Service
 public class CronTaskServiceImpl implements CronTaskService {
 

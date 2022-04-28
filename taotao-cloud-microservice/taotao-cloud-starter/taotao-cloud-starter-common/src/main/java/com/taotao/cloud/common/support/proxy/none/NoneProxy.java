@@ -2,11 +2,16 @@ package com.taotao.cloud.common.support.proxy.none;
 
 
 import com.taotao.cloud.common.support.proxy.IProxy;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
  * 不执行任何代理的实现方式
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:15
  */
 public class NoneProxy implements InvocationHandler, IProxy {
 

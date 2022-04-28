@@ -44,9 +44,10 @@ import java.util.Map;
 
 /**
  * 小程序直播间业务层实现
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:03:04
  */
 @Service
 public class StudioServiceImpl extends ServiceImpl<StudioMapper, Studio> implements StudioService {

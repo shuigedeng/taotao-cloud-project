@@ -29,6 +29,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 京东云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:56
  */
 @Configuration
 @ConditionalOnProperty(prefix = JdCloudProperties.PREFIX, name = "enabled", havingValue = "true")

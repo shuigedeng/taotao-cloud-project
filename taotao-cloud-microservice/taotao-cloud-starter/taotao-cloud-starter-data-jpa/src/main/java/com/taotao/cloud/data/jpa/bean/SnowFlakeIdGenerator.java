@@ -1,15 +1,18 @@
 package com.taotao.cloud.data.jpa.bean;
 
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.util.IdUtil;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import java.io.Serializable;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
+import java.io.Serializable;
+
 /**
  * 雪花算法ID生成器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:16:48
  */
 public class SnowFlakeIdGenerator implements IdentifierGenerator {
 

@@ -12,7 +12,7 @@
 ///**
 // * 库存扣减，他表示了订单状态是否出库成功
 // */
-//@Slf4j
+//
 //@Service
 //public class StockUpdateExecute implements OrderStatusChangeEvent {
 //

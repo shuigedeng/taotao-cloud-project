@@ -19,6 +19,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * 腾讯oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:13
+ */
 @Configuration
 @ConditionalOnClass(COSClient.class)
 @EnableConfigurationProperties({TencentOssProperties.class})

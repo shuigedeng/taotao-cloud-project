@@ -20,7 +20,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FeignLoggerFactory;
 
 /**
- * @see org.springframework.cloud.openfeign.DefaultFeignLoggerFactory
+ * 信息假装记录器工厂
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:24:45
  */
 public class InfoFeignLoggerFactory implements FeignLoggerFactory {
     @Override

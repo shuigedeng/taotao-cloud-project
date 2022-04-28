@@ -1,10 +1,17 @@
 package com.taotao.cloud.dubbo.validator;
 
-import java.util.Arrays;
-import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Arrays;
+import java.util.Objects;
 
+/**
+ * 允许价值验证器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:22:16
+ */
 public class AllowedValueValidator implements ConstraintValidator<AllowedValue, Long> {
  
     private long[] allowedValues;

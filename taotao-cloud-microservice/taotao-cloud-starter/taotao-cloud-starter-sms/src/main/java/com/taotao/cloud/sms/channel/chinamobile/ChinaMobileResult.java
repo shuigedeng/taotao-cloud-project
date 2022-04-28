@@ -16,6 +16,8 @@ package com.taotao.cloud.sms.channel.chinamobile;
  * 响应结果
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:40
  */
 public class ChinaMobileResult {
 

@@ -22,20 +22,24 @@ import com.taotao.cloud.promotion.biz.service.CouponActivityItemService;
 import com.taotao.cloud.promotion.biz.service.CouponActivityService;
 import com.taotao.cloud.promotion.biz.service.CouponService;
 import com.taotao.cloud.promotion.biz.service.MemberCouponService;
-import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * 优惠券活动业务层实现
  *
- * 
- * @since 2021/5/20 6:10 下午
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:45:59
  */
-@Slf4j
+
 @Service
 public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity> implements
 	CouponActivityService {

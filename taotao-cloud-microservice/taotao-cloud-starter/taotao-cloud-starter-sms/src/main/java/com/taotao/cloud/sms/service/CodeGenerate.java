@@ -16,6 +16,8 @@ package com.taotao.cloud.sms.service;
  * 验证码生成
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:26
  */
 @FunctionalInterface
 public interface CodeGenerate {
@@ -23,7 +25,8 @@ public interface CodeGenerate {
 	/**
 	 * 生成验证码
 	 *
-	 * @return 验证码
+	 * @return {@link String }
+	 * @since 2022-04-27 17:49:26
 	 */
 	String generate();
 }

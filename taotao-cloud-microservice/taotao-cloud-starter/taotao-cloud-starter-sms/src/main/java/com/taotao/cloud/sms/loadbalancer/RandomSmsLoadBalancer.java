@@ -12,16 +12,19 @@
  */
 package com.taotao.cloud.sms.loadbalancer;
 
-import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.handler.SendHandler;
+import com.taotao.cloud.sms.model.NoticeData;
+import org.springframework.lang.Nullable;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.lang.Nullable;
 
 /**
  * random Load Balancer
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:53:01
  */
 public class RandomSmsLoadBalancer extends RandomLoadBalancer<SendHandler, NoticeData>
 	implements SmsSenderLoadBalancer {

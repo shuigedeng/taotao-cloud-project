@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import com.taotao.cloud.promotion.biz.entity.BasePromotions;
+
 import java.util.List;
 
 /**
  * 抽象通用促销服务 如需拓展原促销实体字段，新拓展类继承自促销实体即可
  *
- * @param <T> 促销类型，继承自促销基础类
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:42:25
  */
 public interface AbstractPromotionsService<T extends BasePromotions> extends IService<T> {
 
@@ -19,7 +22,8 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * updatePromotionGoods 更新促销商品信息 5。 updateEsGoodsIndex 更新商品索引促销信息
 	 *
 	 * @param promotions 促销信息
-	 * @return 是否保存成功
+	 * @return boolean
+	 * @since 2022-04-27 16:42:25
 	 */
 	boolean savePromotions(T promotions);
 
@@ -28,7 +32,8 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * updatePromotionGoods 更新促销商品信息 5. updateEsGoodsIndex 更新商品索引促销信息
 	 *
 	 * @param promotions 促销信息
-	 * @return 是否更新成功
+	 * @return boolean
+	 * @since 2022-04-27 16:42:25
 	 */
 	boolean updatePromotions(T promotions);
 
@@ -38,7 +43,8 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * @param ids       促销id集合
 	 * @param startTime 开始时间
 	 * @param endTime   结束时间
-	 * @return 是否更新成功
+	 * @return boolean
+	 * @since 2022-04-27 16:42:25
 	 */
 	boolean updateStatus(List<String> ids, Long startTime, Long endTime);
 
@@ -46,7 +52,8 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 移除促销活动
 	 *
 	 * @param ids 促销活动id集合
-	 * @return 是否移除成功
+	 * @return boolean
+	 * @since 2022-04-27 16:42:25
 	 */
 	boolean removePromotions(List<String> ids);
 
@@ -55,8 +62,8 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 *
 	 * @param searchParams 查询参数，继承自继承促销查询参数
 	 * @param page         分页参数
-	 * @param <S>          继承自基础促销查询参数的促销查询参数
-	 * @return 分页促销信息
+	 * @return {@link IPage }<{@link T }>
+	 * @since 2022-04-27 16:42:25
 	 */
 	<S extends BasePromotionsSearchParams> IPage<T> pageFindAll(S searchParams, PageVO page);
 
@@ -64,8 +71,8 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 列表查询促销信息
 	 *
 	 * @param searchParams 查询参数，继承自继承促销查询参数
-	 * @param <S>          继承自基础促销查询参数的促销查询参数
-	 * @return 列表促销信息
+	 * @return {@link List }<{@link T }>
+	 * @since 2022-04-27 16:42:25
 	 */
 	<S extends BasePromotionsSearchParams> List<T> listFindAll(S searchParams);
 
@@ -73,6 +80,7 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 初始化促销字段
 	 *
 	 * @param promotions 促销实体
+	 * @since 2022-04-27 16:42:25
 	 */
 	void initPromotion(T promotions);
 
@@ -80,6 +88,7 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 检查促销参数
 	 *
 	 * @param promotions 促销实体
+	 * @since 2022-04-27 16:42:25
 	 */
 	void checkPromotions(T promotions);
 
@@ -87,6 +96,7 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 检查促销状态
 	 *
 	 * @param promotions 促销实体
+	 * @since 2022-04-27 16:42:25
 	 */
 	void checkStatus(T promotions);
 
@@ -94,6 +104,7 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 更新促销商品信息
 	 *
 	 * @param promotions 促销实体
+	 * @since 2022-04-27 16:42:25
 	 */
 	void updatePromotionsGoods(T promotions);
 
@@ -101,13 +112,15 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * 更新促销信息到商品索引
 	 *
 	 * @param promotions 促销实体
+	 * @since 2022-04-27 16:42:25
 	 */
 	void updateEsGoodsIndex(T promotions);
 
 	/**
 	 * 当前促销类型
 	 *
-	 * @return 当前促销类型
+	 * @return {@link PromotionTypeEnum }
+	 * @since 2022-04-27 16:42:25
 	 */
 	PromotionTypeEnum getPromotionType();
 

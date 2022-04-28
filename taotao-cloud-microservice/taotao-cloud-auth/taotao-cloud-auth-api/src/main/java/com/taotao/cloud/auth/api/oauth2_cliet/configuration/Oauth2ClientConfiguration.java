@@ -74,7 +74,7 @@
 //import org.springframework.util.StreamUtils;
 //import org.springframework.web.client.RestTemplate;
 //
-//@Slf4j
+//
 //@EnableWebSecurity
 //@AutoConfigureAfter(SecurityAutoConfiguration.class)
 //@Configuration

@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 百度云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:28
  */
 @ConfigurationProperties(prefix = BaiduCloudProperties.PREFIX)
 public class BaiduCloudProperties extends AbstractHandlerProperties<String> {

@@ -12,7 +12,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
  * <p>
  * 后置参数检查
  */
-@Slf4j
+
 @Service
 public class AfterParamCheckAction implements BusinessProcess<SendTaskModel> {
 

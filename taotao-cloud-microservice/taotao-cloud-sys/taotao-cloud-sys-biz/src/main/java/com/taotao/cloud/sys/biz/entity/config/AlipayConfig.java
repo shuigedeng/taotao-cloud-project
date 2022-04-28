@@ -17,14 +17,15 @@ package com.taotao.cloud.sys.biz.entity.config;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 支付宝配置表
@@ -58,11 +59,10 @@ public class AlipayConfig extends BaseSuperEntity<AlipayConfig, Long> {
 	@Column(name = "charset", columnDefinition = "varchar(32) not null comment '编码'")
 	private String charset;
 
-
 	/**
 	 * 类型 固定格式json
 	 */
-	@Column(name = "format", columnDefinition = "varchar(256) not null comment '类型 固定格式json'")
+	@Column(name = "format", columnDefinition = "json not null comment '类型 固定格式json'")
 	private String format;
 
 	/**

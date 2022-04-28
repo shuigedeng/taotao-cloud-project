@@ -1,5 +1,12 @@
 package com.taotao.cloud.oss.artislong.exception;
 
+/**
+ * 重复例外
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:35:04
+ */
 public class DuplicateException extends OssException {
     public DuplicateException() {
         super();

@@ -23,17 +23,20 @@ import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
 import com.taotao.cloud.ip2region.model.IpInfo;
 import com.taotao.cloud.ip2region.properties.Ip2regionProperties;
 import com.taotao.cloud.ip2region.utils.IpInfoUtil;
-import java.io.IOException;
-import java.io.InputStream;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.StreamUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * ip2region 初始化
  *
-
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:28:36
  */
 public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearcher {
 

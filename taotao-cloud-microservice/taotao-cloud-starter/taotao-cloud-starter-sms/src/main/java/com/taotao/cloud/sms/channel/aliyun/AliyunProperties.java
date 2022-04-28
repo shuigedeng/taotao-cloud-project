@@ -20,6 +20,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * 阿里云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:16
  */
 @RefreshScope
 @ConfigurationProperties(prefix = AliyunProperties.PREFIX)

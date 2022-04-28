@@ -11,11 +11,10 @@ import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
 import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlParam;
 import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
+
 public class FlowControlServiceImpl implements FlowControlService {
 
     private static final String FLOW_CONTROL_KEY = "flowControl";

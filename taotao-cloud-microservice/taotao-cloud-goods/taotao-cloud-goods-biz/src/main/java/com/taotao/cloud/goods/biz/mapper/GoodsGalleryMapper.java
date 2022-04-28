@@ -6,9 +6,10 @@ import com.taotao.cloud.goods.biz.entity.GoodsGallery;
 
 /**
  * 商品相册数据处理层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:55:56
  */
 public interface GoodsGalleryMapper extends BaseMapper<GoodsGallery> {
 

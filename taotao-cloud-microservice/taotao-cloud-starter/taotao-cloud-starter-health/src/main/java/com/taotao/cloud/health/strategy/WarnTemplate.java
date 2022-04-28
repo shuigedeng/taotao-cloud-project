@@ -21,8 +21,8 @@ import java.util.HashMap;
  * 报警模板
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-10 16:52:31
+ * @version 2022.04
+ * @since 2022-04-27 17:25:37
  */
 public class WarnTemplate extends HashMap<String, String> {
 
@@ -31,9 +31,8 @@ public class WarnTemplate extends HashMap<String, String> {
 	 *
 	 * @param filed    filed
 	 * @param template template
-	 * @return {@link com.taotao.cloud.health.strategy.WarnTemplate }
-	 * @author shuigedeng
-	 * @since 2021-09-10 16:53:03
+	 * @return {@link WarnTemplate }
+	 * @since 2022-04-27 17:25:37
 	 */
 	public WarnTemplate register(String filed, String template) {
 		if (!containsKey(filed)) {
@@ -48,9 +47,8 @@ public class WarnTemplate extends HashMap<String, String> {
 	 * getTemplate
 	 *
 	 * @param filed filed
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-10 16:53:15
+	 * @return {@link String }
+	 * @since 2022-04-27 17:25:37
 	 */
 	public String getTemplate(String filed) {
 		if (!containsKey(filed)) {
@@ -67,9 +65,8 @@ public class WarnTemplate extends HashMap<String, String> {
 	 * @param filedDesc filedDesc
 	 * @param value     value
 	 * @param rule      rule
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-10 16:54:05
+	 * @return {@link String }
+	 * @since 2022-04-27 17:25:37
 	 */
 	public String getWarnContent(String filedName, String filedDesc, Object value,
 		Rule.RuleInfo rule) {

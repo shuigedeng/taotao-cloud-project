@@ -19,6 +19,8 @@ import java.util.Collection;
  * 字符串工具类
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:50
  */
 public final class StringUtils {
 

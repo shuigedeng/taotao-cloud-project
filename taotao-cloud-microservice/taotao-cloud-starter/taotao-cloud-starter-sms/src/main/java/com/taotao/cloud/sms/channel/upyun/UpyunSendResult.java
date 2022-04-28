@@ -13,12 +13,15 @@
 package com.taotao.cloud.sms.channel.upyun;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Collection;
 
 /**
  * 发送响应
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:25
  */
 public class UpyunSendResult {
 

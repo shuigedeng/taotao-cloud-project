@@ -18,11 +18,6 @@ import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.utils.StringUtils;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -31,10 +26,18 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * 又拍云发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:21
  */
 public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 

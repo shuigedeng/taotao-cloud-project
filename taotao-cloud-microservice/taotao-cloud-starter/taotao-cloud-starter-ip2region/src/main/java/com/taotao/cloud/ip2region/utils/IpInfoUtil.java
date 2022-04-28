@@ -19,27 +19,32 @@ package com.taotao.cloud.ip2region.utils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.taotao.cloud.ip2region.model.DataBlock;
 import com.taotao.cloud.ip2region.model.IpInfo;
+import org.springframework.lang.Nullable;
+
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.Pattern;
-import org.springframework.lang.Nullable;
 
 /**
  * ip 信息详情
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:01:42
+ * @version 2022.04
+ * @since 2022-04-27 17:29:18
  */
 public class IpInfoUtil {
 
+	/**
+	 * 分裂模式
+	 */
 	private static final Pattern SPLIT_PATTERN = Pattern.compile("\\|");
 
 	/**
 	 * 将 DataBlock 转化为 IpInfo
 	 *
 	 * @param dataBlock DataBlock
-	 * @return IpInfo
+	 * @return {@link IpInfo }
+	 * @since 2022-04-27 17:29:18
 	 */
 	@Nullable
 	public static IpInfo toIpInfo(@Nullable DataBlock dataBlock) {
@@ -68,7 +73,8 @@ public class IpInfoUtil {
 	 * 数据过滤，因为 ip2Region 采用 0 填充的没有数据的字段
 	 *
 	 * @param info info
-	 * @return info
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:18
 	 */
 	@Nullable
 	private static String filterZero(@Nullable String info) {
@@ -84,7 +90,8 @@ public class IpInfoUtil {
 	 *
 	 * @param ipInfo   IpInfo
 	 * @param function Function
-	 * @return info
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:19
 	 */
 	@Nullable
 	public static String readInfo(@Nullable IpInfo ipInfo, Function<IpInfo, String> function) {

@@ -1,20 +1,18 @@
 package com.taotao.cloud.common.execl.demo.read;
 
-import java.util.List;
-
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 /**
  * 模板的读取类
  *
 
  */
-@Slf4j
+
 public class ConverterDataListener implements ReadListener<ConverterData> {
 
     /**

@@ -9,7 +9,6 @@ import cn.hutool.core.io.file.PathUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
@@ -27,15 +26,32 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
-import java.io.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.nio.file.attribute.UserPrincipal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+/**
+ * 本地操作系统客户端
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:29
+ */
 public class LocalOssClient implements StandardOssClient {
 
     private LocalOssConfig localOssConfig;

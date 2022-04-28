@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 又拍云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:17
  */
 @ConfigurationProperties(prefix = UpyunProperties.PREFIX)
 public class UpyunProperties extends AbstractHandlerProperties<String> {

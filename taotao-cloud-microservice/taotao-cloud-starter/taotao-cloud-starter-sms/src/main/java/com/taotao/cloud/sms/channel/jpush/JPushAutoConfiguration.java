@@ -31,6 +31,8 @@ import org.springframework.web.client.RestTemplate;
  * 极光发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:06
  */
 @Configuration
 @ConditionalOnProperty(prefix = JPushProperties.PREFIX, name = "enabled", havingValue = "true")

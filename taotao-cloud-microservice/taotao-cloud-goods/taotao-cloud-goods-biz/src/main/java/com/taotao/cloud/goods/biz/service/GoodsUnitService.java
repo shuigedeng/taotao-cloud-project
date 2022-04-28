@@ -6,9 +6,10 @@ import com.taotao.cloud.goods.biz.entity.GoodsUnit;
 
 /**
  * 商品计量单位业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:00:52
  */
 public interface GoodsUnitService extends IService<GoodsUnit> {
 

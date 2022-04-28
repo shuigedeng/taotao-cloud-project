@@ -36,6 +36,10 @@ import java.util.stream.Collectors;
 
 /**
  * 商品分类业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:02:09
  */
 @AllArgsConstructor
 @Service

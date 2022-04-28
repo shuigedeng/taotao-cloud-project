@@ -12,8 +12,9 @@
  */
 package com.taotao.cloud.sms.service.impl;
 
-import com.taotao.cloud.sms.service.CodeGenerate;
 import com.taotao.cloud.sms.properties.VerificationCodeProperties;
+import com.taotao.cloud.sms.service.CodeGenerate;
+
 import java.text.NumberFormat;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -21,6 +22,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * 默认验证码生成
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:37
  */
 public class DefaultCodeGenerate implements CodeGenerate {
 

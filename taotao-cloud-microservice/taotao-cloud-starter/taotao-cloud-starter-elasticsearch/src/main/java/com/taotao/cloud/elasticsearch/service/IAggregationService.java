@@ -22,8 +22,8 @@ import java.util.Map;
  * 聚合服务
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/5/3 08:01
+ * @version 2022.04
+ * @since 2022-04-27 17:23:50
  */
 public interface IAggregationService {
 
@@ -32,9 +32,8 @@ public interface IAggregationService {
 	 *
 	 * @param indexName 索引名
 	 * @param routing   es的路由
-	 * @return java.util.Map<java.lang.String, java.lang.Object>
-	 * @author shuigedeng
-	 * @since 2021/2/26 08:56
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-04-27 17:23:50
 	 */
 	Map<String, Object> requestStatAgg(String indexName, String routing) throws IOException;
 }

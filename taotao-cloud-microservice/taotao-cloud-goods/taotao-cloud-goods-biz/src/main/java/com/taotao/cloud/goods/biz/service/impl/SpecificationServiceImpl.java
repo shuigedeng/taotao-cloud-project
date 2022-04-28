@@ -14,13 +14,18 @@ import com.taotao.cloud.goods.biz.entity.Specification;
 import com.taotao.cloud.goods.biz.mapper.SpecificationMapper;
 import com.taotao.cloud.goods.biz.service.CategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.SpecificationService;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 商品规格业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:02:55
  */
 @AllArgsConstructor
 @Service

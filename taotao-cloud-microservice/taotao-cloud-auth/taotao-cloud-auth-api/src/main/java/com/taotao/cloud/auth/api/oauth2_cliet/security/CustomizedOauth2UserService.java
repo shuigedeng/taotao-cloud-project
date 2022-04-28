@@ -36,7 +36,7 @@
 //import org.springframework.web.client.RestTemplate;
 //import org.springframework.web.util.UriComponentsBuilder;
 //
-//@Slf4j
+//
 //public class CustomizedOauth2UserService extends DefaultOAuth2UserService {
 //
 //	private static final String QQ = "qq";

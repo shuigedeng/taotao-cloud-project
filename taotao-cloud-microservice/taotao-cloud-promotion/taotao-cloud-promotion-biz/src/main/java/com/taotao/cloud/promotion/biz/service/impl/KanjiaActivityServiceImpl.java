@@ -14,10 +14,9 @@ import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityDTO;
-import com.taotao.cloud.promotion.api.dto.KanjiaActivityQuery;
-import com.taotao.cloud.promotion.api.query.KanjiaActivityQuery;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.query.KanjiaActivityQuery;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchParams;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
@@ -39,6 +38,10 @@ import java.util.Objects;
 
 /**
  * 砍价活动参与记录业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:18
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

@@ -13,14 +13,17 @@
 package com.taotao.cloud.sms.event;
 
 import com.taotao.cloud.sms.handler.SendHandler;
+import org.springframework.context.ApplicationEvent;
+
 import java.util.Collection;
 import java.util.Map;
-import org.springframework.context.ApplicationEvent;
 
 /**
  * 发送失败事件
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:16
  */
 public class SmsSendFailEvent extends ApplicationEvent {
 

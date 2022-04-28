@@ -34,6 +34,8 @@ import io.minio.Result;
 import io.minio.StatObjectArgs;
 import io.minio.StatObjectResponse;
 import io.minio.messages.Item;
+import okhttp3.Headers;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -42,10 +44,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import okhttp3.Headers;
 
 /**
- * http://docs.minio.org.cn/docs/master/minio-monitoring-guide https://docs.min.io/
+ * <a href="http://docs.minio.org.cn/docs/master/minio-monitoring-guide">http://docs.minio.org.cn/docs/master/minio-monitoring-guide</a> https://docs.min.io/
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:49
  */
 public class MinioOssClient implements StandardOssClient {
 

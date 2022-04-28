@@ -4,7 +4,6 @@ import com.taotao.cloud.payment.biz.kit.CashierSupport;
 import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.service.PaymentService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * 支付日志 业务实现
  */
-@Slf4j
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
 

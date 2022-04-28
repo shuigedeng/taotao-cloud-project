@@ -1,9 +1,5 @@
 package com.taotao.cloud.feign.formatter;
 
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_TIME_FORMAT;
-
 import org.springframework.cloud.openfeign.FeignFormatterRegistrar;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -15,6 +11,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_TIME_FORMAT;
+
 /**
  * 在feign调用方配置， 解决入参和出参是以下类型.
  * 1. @RequestParam("date") Date date
@@ -22,6 +22,9 @@ import java.util.Date;
  * 3. @RequestParam("date") LocalDate date
  * 4. @RequestParam("date") LocalTime date
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:24:35
  */
 public class DateFormatRegister implements FeignFormatterRegistrar {
 

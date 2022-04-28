@@ -2,8 +2,16 @@ package com.taotao.cloud.oss.artislong.core.jdbc.model;
 
 
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import javax.sql.DataSource;
 
+/**
+ * jdbc操作系统配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:53
+ */
 public class JdbcOssConfig {
 
     private String basePath;

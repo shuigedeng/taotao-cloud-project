@@ -2,13 +2,19 @@ package com.taotao.cloud.oss.artislong.model.upload;
 
 
 import java.io.File;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * 文件状态
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:34:27
  */
 public class UpLoadFileStat implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -1223810339796425415L;
 
 	/**

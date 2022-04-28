@@ -11,6 +11,10 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * 砍价活动商品数据处理层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:36:49
  */
 public interface KanJiaActivityGoodsMapper extends BaseMapper<KanjiaActivityGoods> {
 

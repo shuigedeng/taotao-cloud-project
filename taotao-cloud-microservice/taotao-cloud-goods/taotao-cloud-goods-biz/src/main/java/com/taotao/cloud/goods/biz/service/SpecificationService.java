@@ -10,9 +10,10 @@ import java.util.List;
 
 /**
  * 规格业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 17:01:01
  */
 public interface SpecificationService extends IService<Specification> {
 
@@ -20,7 +21,8 @@ public interface SpecificationService extends IService<Specification> {
 	 * 删除规格
 	 *
 	 * @param ids 规格ID
-	 * @return 是否删除成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:01:01
 	 */
 	Boolean deleteSpecification(List<Long> ids);
 
@@ -28,8 +30,8 @@ public interface SpecificationService extends IService<Specification> {
 	 * 分页查询
 	 *
 	 * @param specificationPageQuery 查询条件
-	 * @return 分页数据
-	 * @since 2022-04-06 16:10:19
+	 * @return {@link IPage }<{@link Specification }>
+	 * @since 2022-04-27 17:01:01
 	 */
 	IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery);
 }

@@ -3,6 +3,10 @@ package com.taotao.cloud.redis.redisson;
 
 /**
  * 延迟队列业务枚举
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:45:55
  */
 public enum RedisDelayQueueEnum {
 

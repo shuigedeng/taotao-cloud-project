@@ -8,6 +8,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * minio oss属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:41:57
+ */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.MINIO)
 public class MinioOssProperties extends MinioOssConfig implements InitializingBean {
 

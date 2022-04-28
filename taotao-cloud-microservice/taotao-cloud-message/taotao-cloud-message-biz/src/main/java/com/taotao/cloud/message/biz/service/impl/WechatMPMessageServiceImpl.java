@@ -6,6 +6,8 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
 import com.taotao.cloud.message.biz.entity.WechatMPMessage;
 import com.taotao.cloud.message.biz.mapper.WechatMPMessageMapper;
@@ -15,7 +17,6 @@ import com.taotao.cloud.message.biz.util.WechatMessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ import java.util.Map;
  * 微信小程序消息订阅 业务实现
  */
 @Service
-@Slf4j
+
 public class WechatMPMessageServiceImpl extends ServiceImpl<WechatMPMessageMapper, WechatMPMessage> implements
 	WechatMPMessageService {
     @Autowired

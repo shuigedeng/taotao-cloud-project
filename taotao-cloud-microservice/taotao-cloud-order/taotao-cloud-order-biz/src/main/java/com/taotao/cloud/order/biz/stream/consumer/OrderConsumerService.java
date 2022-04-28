@@ -1,17 +1,17 @@
 
 package com.taotao.cloud.order.biz.stream.consumer;
 
-import java.util.function.Consumer;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.stereotype.Service;
 
+import java.util.function.Consumer;
+
 /**
  * 消息订单消息
  */
-@Slf4j
+
 @Service
 public class OrderConsumerService {
 

@@ -11,7 +11,6 @@ import com.taotao.cloud.message.biz.austin.cron.vo.CrowdInfoVo;
 import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
 import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 import com.taotao.cloud.message.biz.austin.support.pending.AbstractLazyPending;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 
 @Service
-@Slf4j
+
 public class TaskHandlerImpl implements TaskHandler {
     @Autowired
     private MessageTemplateDao messageTemplateDao;

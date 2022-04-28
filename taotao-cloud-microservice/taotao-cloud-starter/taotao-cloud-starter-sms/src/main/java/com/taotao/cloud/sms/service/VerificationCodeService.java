@@ -18,25 +18,31 @@ import org.springframework.lang.Nullable;
  * 手机验证码服务
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:33
  */
 public interface VerificationCodeService {
 
 	/**
+	 * 味精关键代码
 	 * 验证码短信中验证码对应的key
 	 */
 	String MSG_KEY_CODE = "code";
 
 	/**
+	 * 味精主要识别代码
 	 * 验证码短信中识别码对应的key
 	 */
 	String MSG_KEY_IDENTIFICATION_CODE = "identificationCode";
 
 	/**
+	 * 味精关键过期时间秒
 	 * 验证码短信中有效期(秒)对应的key
 	 */
 	String MSG_KEY_EXPIRATION_TIME_OF_SECONDS = "expirationTimeOfSeconds";
 
 	/**
+	 * 味精关键过期时间分钟
 	 * 验证码短信中有效期(分)对应的key
 	 */
 	String MSG_KEY_EXPIRATION_TIME_OF_MINUTES = "expirationTimeOfMinutes";
@@ -46,7 +52,8 @@ public interface VerificationCodeService {
 	 *
 	 * @param phone              手机号
 	 * @param identificationCode 识别码
-	 * @return 手机验证码
+	 * @return {@link String }
+	 * @since 2022-04-27 17:49:33
 	 */
 	@Nullable
 	String find(String phone, String identificationCode);
@@ -55,6 +62,7 @@ public interface VerificationCodeService {
 	 * 发送验证码
 	 *
 	 * @param phone 手机号码
+	 * @since 2022-04-27 17:49:33
 	 */
 	default void send(String phone) {
 		send(phone, null);
@@ -65,6 +73,7 @@ public interface VerificationCodeService {
 	 *
 	 * @param phone 手机号码
 	 * @param type  类型
+	 * @since 2022-04-27 17:49:33
 	 */
 	void send(String phone, @Nullable String type);
 
@@ -74,7 +83,8 @@ public interface VerificationCodeService {
 	 * @param phone              手机号码
 	 * @param code               验证码
 	 * @param identificationCode 识别码
-	 * @return 验证通过
+	 * @return boolean
+	 * @since 2022-04-27 17:49:33
 	 */
 	boolean verify(String phone, String code, @Nullable String identificationCode);
 }

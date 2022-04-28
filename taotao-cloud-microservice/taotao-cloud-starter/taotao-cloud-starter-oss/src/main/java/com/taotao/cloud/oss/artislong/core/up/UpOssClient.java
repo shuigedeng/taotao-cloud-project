@@ -24,14 +24,22 @@ import com.upyun.UpException;
 import okhttp3.Headers;
 import okhttp3.Response;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * https://github.com/upyun/java-sdk
+ * <a href="https://github.com/upyun/java-sdk">https://github.com/upyun/java-sdk</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:44
  */
 public class UpOssClient implements StandardOssClient {
 

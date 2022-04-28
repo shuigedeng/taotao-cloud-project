@@ -6,13 +6,31 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
+import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
+import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
+import com.taotao.cloud.payment.biz.kit.core.enums.SignType;
+import com.taotao.cloud.payment.biz.kit.core.kit.HttpKit;
 import com.taotao.cloud.payment.biz.kit.core.kit.IpKit;
+import com.taotao.cloud.payment.biz.kit.core.kit.PayKit;
+import com.taotao.cloud.payment.biz.kit.core.kit.WxPayKit;
+import com.taotao.cloud.payment.biz.kit.core.utils.DateTimeZoneUtil;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
+import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatApiEnum;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatDomain;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.RefundModel;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.UnifiedOrderModel;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +45,7 @@ import java.util.Objects;
 /**
  * 微信支付
  */
-@Slf4j
+
 @Component
 public class WechatPlugin implements Payment {
 

@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.baidu;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
@@ -12,8 +11,17 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baidubce.services.bos.BosClient;
-import com.baidubce.services.bos.model.*;
-
+import com.baidubce.services.bos.model.BosObject;
+import com.baidubce.services.bos.model.BosObjectSummary;
+import com.baidubce.services.bos.model.CompleteMultipartUploadRequest;
+import com.baidubce.services.bos.model.GetObjectRequest;
+import com.baidubce.services.bos.model.InitiateMultipartUploadRequest;
+import com.baidubce.services.bos.model.InitiateMultipartUploadResponse;
+import com.baidubce.services.bos.model.ListObjectsResponse;
+import com.baidubce.services.bos.model.ObjectMetadata;
+import com.baidubce.services.bos.model.PartETag;
+import com.baidubce.services.bos.model.UploadPartRequest;
+import com.baidubce.services.bos.model.UploadPartResponse;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
@@ -30,14 +38,23 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * https://cloud.baidu.com/doc/BOS/index.html
+ * <a href="https://cloud.baidu.com/doc/BOS/index.html">https://cloud.baidu.com/doc/BOS/index.html</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:46
  */
 public class BaiduOssClient implements StandardOssClient {
 

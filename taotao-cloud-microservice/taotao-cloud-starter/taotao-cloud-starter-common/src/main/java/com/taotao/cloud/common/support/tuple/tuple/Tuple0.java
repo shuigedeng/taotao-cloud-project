@@ -2,6 +2,10 @@ package com.taotao.cloud.common.support.tuple.tuple;
 
 /**
  * 表示有0个元素的元组类型
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:32
  */
 public final class Tuple0 extends Tuple {
 

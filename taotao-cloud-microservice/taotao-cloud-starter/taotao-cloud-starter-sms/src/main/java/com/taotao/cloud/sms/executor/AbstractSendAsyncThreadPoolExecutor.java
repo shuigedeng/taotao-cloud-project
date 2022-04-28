@@ -14,16 +14,19 @@ package com.taotao.cloud.sms.executor;
 
 import com.taotao.cloud.sms.enums.RejectPolicy;
 import com.taotao.cloud.sms.properties.SmsAsyncProperties;
+import org.springframework.lang.Nullable;
+
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.springframework.lang.Nullable;
 
 /**
  * 抽象发送异步处理线程池
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:48
  */
 public abstract class AbstractSendAsyncThreadPoolExecutor implements SendAsyncThreadPoolExecutor {
 
@@ -60,6 +63,7 @@ public abstract class AbstractSendAsyncThreadPoolExecutor implements SendAsyncTh
 	 * 提交异步任务
 	 *
 	 * @param command 待执行任务
+	 * @since 2022-04-27 17:47:55
 	 */
 	@Override
 	public final void submit(Runnable command) {
@@ -70,6 +74,7 @@ public abstract class AbstractSendAsyncThreadPoolExecutor implements SendAsyncTh
 	 * 提交异步任务
 	 *
 	 * @param command 待执行任务
+	 * @since 2022-04-27 17:47:56
 	 */
 	protected abstract void submit0(Runnable command);
 

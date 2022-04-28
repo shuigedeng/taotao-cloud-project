@@ -19,6 +19,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * 清云操作系统配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:19
+ */
 @Configuration
 @ConditionalOnClass(OSSClient.class)
 @EnableConfigurationProperties({QingYunOssProperties.class})

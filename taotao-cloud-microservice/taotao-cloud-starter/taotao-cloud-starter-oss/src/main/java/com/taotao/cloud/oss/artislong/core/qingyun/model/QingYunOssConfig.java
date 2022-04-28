@@ -4,6 +4,14 @@ import com.qingstor.sdk.config.EnvContext;
 import com.qingstor.sdk.config.EnvContext.HttpConfig;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
+/**
+ * 清云操作系统配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:15
+ */
 public class QingYunOssConfig {
 
     private String endpoint;

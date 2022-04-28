@@ -11,7 +11,6 @@ import cn.hutool.extra.ssh.Sftp;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.SftpATTRS;
 import com.jcraft.jsch.SftpException;
-
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
 import com.taotao.cloud.oss.artislong.core.sftp.model.SftpOssConfig;
@@ -20,6 +19,7 @@ import com.taotao.cloud.oss.artislong.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.artislong.model.FileOssInfo;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -30,6 +30,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * sftp oss客户
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:57
+ */
 public class SftpOssClient implements StandardOssClient {
 
     public static final String SFTP_OBJECT_NAME = "sftp";

@@ -19,6 +19,8 @@ import com.taotao.cloud.sms.utils.StringUtils;
  * 手机号发送短信的结果
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:13
  */
 public class MessageId {
 

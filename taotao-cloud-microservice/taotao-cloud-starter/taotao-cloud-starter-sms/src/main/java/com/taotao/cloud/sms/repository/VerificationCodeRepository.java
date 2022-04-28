@@ -19,6 +19,8 @@ import org.springframework.lang.Nullable;
  * 验证码储存接口
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:20
  */
 public interface VerificationCodeRepository {
 
@@ -27,7 +29,8 @@ public interface VerificationCodeRepository {
 	 *
 	 * @param phone              手机号码
 	 * @param identificationCode 识别码
-	 * @return 验证码
+	 * @return {@link VerificationCode }
+	 * @since 2022-04-27 17:49:20
 	 */
 	@Nullable
 	VerificationCode findOne(String phone, @Nullable String identificationCode);
@@ -36,6 +39,7 @@ public interface VerificationCodeRepository {
 	 * 保存验证码
 	 *
 	 * @param verificationCode 验证码
+	 * @since 2022-04-27 17:49:20
 	 */
 	void save(VerificationCode verificationCode);
 
@@ -44,6 +48,7 @@ public interface VerificationCodeRepository {
 	 *
 	 * @param phone              手机号码
 	 * @param identificationCode 识别码
+	 * @since 2022-04-27 17:49:20
 	 */
 	void delete(String phone, @Nullable String identificationCode);
 

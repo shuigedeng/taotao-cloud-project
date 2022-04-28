@@ -5,6 +5,10 @@ import com.taotao.cloud.common.support.reader.IReader;
 
 /**
  * 字符串读取类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:33
  */
 public class StringReader implements IReader {
 

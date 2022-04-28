@@ -25,6 +25,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * jd oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:40
+ */
 @Configuration
 @ConditionalOnClass(AmazonS3.class)
 @EnableConfigurationProperties({JdOssProperties.class})

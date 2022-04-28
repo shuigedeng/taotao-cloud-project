@@ -12,6 +12,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * 默认sftp进度监控
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:54
+ */
 public class DefaultSftpProgressMonitor implements SftpProgressMonitor, Runnable {
 
     private long maxFileSize = 0L;

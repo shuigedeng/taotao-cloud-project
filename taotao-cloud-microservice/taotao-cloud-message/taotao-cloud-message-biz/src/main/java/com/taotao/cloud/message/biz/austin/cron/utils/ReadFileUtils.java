@@ -3,11 +3,15 @@ package com.taotao.cloud.message.biz.austin.cron.utils;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.text.csv.*;
+import cn.hutool.core.text.csv.CsvData;
+import cn.hutool.core.text.csv.CsvReadConfig;
+import cn.hutool.core.text.csv.CsvReader;
+import cn.hutool.core.text.csv.CsvRow;
+import cn.hutool.core.text.csv.CsvRowHandler;
+import cn.hutool.core.text.csv.CsvUtil;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.cron.csv.CountFileRowHandler;
 import com.taotao.cloud.message.biz.austin.cron.vo.CrowdInfoVo;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ import java.util.Map;
 /**
  * 读取人群文件 工具类
  */
-@Slf4j
+
 public class ReadFileUtils {
 
     /**

@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 腾讯云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:58
  */
 @ConfigurationProperties(prefix = QCloudV3Properties.PREFIX)
 public class QCloudV3Properties extends AbstractHandlerProperties<String> {

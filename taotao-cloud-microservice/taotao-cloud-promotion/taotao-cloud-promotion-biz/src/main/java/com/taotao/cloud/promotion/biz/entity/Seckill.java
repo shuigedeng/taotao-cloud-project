@@ -4,26 +4,33 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.promotion.api.vo.SeckillVO;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
 import org.springframework.beans.BeanUtils;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 秒杀活动实体类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:24:28
  */
-@Setter
 @Getter
-@Builder
+@Setter
+@ToString(callSuper = true)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -32,27 +39,32 @@ import org.springframework.beans.BeanUtils;
 @org.hibernate.annotations.Table(appliesTo = Seckill.TABLE_NAME, comment = "秒杀活动实体类")
 public class Seckill extends BasePromotions<Seckill, Long> {
 
-	public static final String TABLE_NAME = "li_seckill";
-
-	@NotNull(message = "请填写报名截止时间")
-	@Schema(description = "报名截至时间", required = true)
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date applyEndTime;
-
-	@Schema(description = "申请规则")
+	public static final String TABLE_NAME = "tt_seckill";
+	/**
+	 * 报名截至时间
+	 */
+	@Column(name = "apply_end_time", columnDefinition = "datetime not null  comment '报名截至时间'")
+	private LocalDateTime applyEndTime;
+	/**
+	 * 申请规则
+	 */
+	@Column(name = "seckill_rule", columnDefinition = "varchar(255) not null  comment '申请规则'")
 	private String seckillRule;
-
-	@Schema(description = "开启几点场 例如：6，8，12")
-	@NotNull(message = "活动时间段不能为空")
+	/**
+	 * 开启几点场 例如：6，8，12
+	 */
+	@Column(name = "hours", columnDefinition = "varchar(255) not null  comment '开启几点场 例如：6，8，12'")
 	private String hours;
 
 	/**
-	 * 已参与此活动的商家id集合
+	 * 已参与此活动的商家id集合 商家id集合以逗号分隔
 	 */
-	@Schema(description = "商家id集合以逗号分隔")
+	@Column(name = "store_ids", columnDefinition = "varchar(1024) not null  comment '已参与此活动的商家id集合 商家id集合以逗号分隔'")
 	private String storeIds;
-
-	@Schema(description = "商品数量")
+	/**
+	 * 商品数量
+	 */
+	@Column(name = "goods_num", columnDefinition = "int not null  comment '商品数量'")
 	private Integer goodsNum;
 
 	public Seckill(int day, String hours, String seckillRule) {
@@ -73,5 +85,23 @@ public class Seckill extends BasePromotions<Seckill, Long> {
 
 	public Seckill(SeckillVO seckillVO) {
 		BeanUtils.copyProperties(seckillVO, this);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		Seckill seckill = (Seckill) o;
+		return getId() != null && Objects.equals(getId(), seckill.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 }

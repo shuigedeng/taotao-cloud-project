@@ -8,7 +8,7 @@
 // * 支付
 // *
 // */
-//@Slf4j
+//
 //@Service
 //public class PaymentExecute implements OrderStatusChangeEvent {
 //

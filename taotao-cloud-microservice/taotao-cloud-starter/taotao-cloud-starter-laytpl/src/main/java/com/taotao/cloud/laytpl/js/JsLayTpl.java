@@ -22,7 +22,7 @@ package com.taotao.cloud.laytpl.js;
  * <p>
  * 之前朋友反馈直接读取js文件会出现各种异常问题，故采用 java 字符串源码
  * <p>
- * 震惊，java8 Nashorn和laytpl居然能擦出这样火花！：https://my.oschina.net/qq596392912/blog/872813
+ * 震惊，java8 Nashorn和laytpl居然能擦出这样火花！：<a href="https://my.oschina.net/qq596392912/blog/872813">https://my.oschina.net/qq596392912/blog/872813</a>
  * </p>
  *
  * @author shuigedeng

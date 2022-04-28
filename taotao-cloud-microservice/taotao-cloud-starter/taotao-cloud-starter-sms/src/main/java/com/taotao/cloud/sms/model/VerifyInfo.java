@@ -17,6 +17,8 @@ package com.taotao.cloud.sms.model;
  * 验证信息
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:49:07
  */
 public class VerifyInfo {
 

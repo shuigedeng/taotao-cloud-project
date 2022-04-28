@@ -15,12 +15,12 @@
   */
  package com.taotao.cloud.data.jpa.bean;
 
+ import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+
+ import javax.sql.DataSource;
+ import java.io.Serial;
  import java.sql.Connection;
  import java.sql.SQLException;
- import javax.sql.DataSource;
- import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.context.annotation.Lazy;
 
  /**
   * jpa 多租户连接提供者 
@@ -31,6 +31,7 @@
   */
  public class TenantConnectionProvider implements MultiTenantConnectionProvider {
 
+	 @Serial
 	 private static final long serialVersionUID = -1166976596388409766L;
 
 	 private final transient DataSource dataSource;

@@ -9,6 +9,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 清云操作系统属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:22
+ */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.QINGYUN)
 public class QingYunOssProperties extends QingYunOssConfig implements InitializingBean {
 

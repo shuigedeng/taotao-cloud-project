@@ -7,6 +7,10 @@ import com.taotao.cloud.common.utils.io.FileUtil;
 
 /**
  * 文件路径阅读者
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:11:22
  */
 public class FilePathReader implements IReader {
 

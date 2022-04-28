@@ -5,8 +5,9 @@ import java.util.Objects;
 /**
  * target wrapper
  *
- * @param <T> target class
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:53:12
  */
 public class TargetWrapper<T> {
 

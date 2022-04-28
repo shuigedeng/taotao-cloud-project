@@ -12,18 +12,21 @@ import java.util.Map;
 
 /**
  * 商品定时器
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:54:37
  */
 @Component
 public class GoodsExecute implements EveryDayExecute {
 	/**
+	 * 成员评价映射器
 	 * 会员评价
 	 */
 	@Resource
 	private IFeignMemberEvaluationService memberEvaluationMapper;
 	/**
+	 * 货物映射器
 	 * 商品
 	 */
 	@Resource
@@ -31,6 +34,8 @@ public class GoodsExecute implements EveryDayExecute {
 
 	/**
 	 * 查询已上架的商品的评价数量并赋值
+	 *
+	 * @since 2022-04-27 16:54:37
 	 */
 	@Override
 	public void execute() {

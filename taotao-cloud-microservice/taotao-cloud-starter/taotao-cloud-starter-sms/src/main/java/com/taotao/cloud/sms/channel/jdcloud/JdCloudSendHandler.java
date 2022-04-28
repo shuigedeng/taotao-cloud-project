@@ -23,17 +23,20 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.model.NoticeData;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.lang.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.lang.Nullable;
 
 /**
  * 京东云发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:00
  */
 public class JdCloudSendHandler extends AbstractSendHandler<JdCloudProperties> {
 

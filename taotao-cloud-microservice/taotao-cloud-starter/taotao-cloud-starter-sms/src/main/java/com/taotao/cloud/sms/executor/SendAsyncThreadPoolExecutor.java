@@ -16,6 +16,8 @@ package com.taotao.cloud.sms.executor;
  * 发送异步处理线程池接口
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:48:07
  */
 public interface SendAsyncThreadPoolExecutor {
 
@@ -23,6 +25,7 @@ public interface SendAsyncThreadPoolExecutor {
 	 * 提交异步任务
 	 *
 	 * @param command 待执行任务
+	 * @since 2022-04-27 17:48:07
 	 */
 	void submit(Runnable command);
 }

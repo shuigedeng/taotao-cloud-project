@@ -9,9 +9,10 @@ import com.taotao.cloud.goods.biz.entity.DraftGoods;
 
 /**
  * 草稿商品业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:59:56
  */
 public interface DraftGoodsService extends IService<DraftGoods> {
 
@@ -19,7 +20,8 @@ public interface DraftGoodsService extends IService<DraftGoods> {
 	 * 添加草稿商品
 	 *
 	 * @param draftGoods 草稿商品
-	 * @return 是否添加成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:56
 	 */
 	Boolean addGoodsDraft(DraftGoodsDTO draftGoods);
 
@@ -27,7 +29,8 @@ public interface DraftGoodsService extends IService<DraftGoods> {
 	 * 更新草稿商品
 	 *
 	 * @param draftGoods 草稿商品
-	 * @return 是否更新成功
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:56
 	 */
 	Boolean updateGoodsDraft(DraftGoodsDTO draftGoods);
 
@@ -35,6 +38,8 @@ public interface DraftGoodsService extends IService<DraftGoods> {
 	 * 保存草稿商品
 	 *
 	 * @param draftGoodsVO 草稿商品
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:56
 	 */
 	Boolean saveGoodsDraft(DraftGoodsDTO draftGoodsVO);
 
@@ -42,6 +47,8 @@ public interface DraftGoodsService extends IService<DraftGoods> {
 	 * 根据ID删除草稿商品
 	 *
 	 * @param id 草稿商品ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:56
 	 */
 	Boolean deleteGoodsDraft(Long id);
 
@@ -49,7 +56,8 @@ public interface DraftGoodsService extends IService<DraftGoods> {
 	 * 获取草稿商品详情
 	 *
 	 * @param id 草稿商品ID
-	 * @return 草稿商品详情
+	 * @return {@link DraftGoodsVO }
+	 * @since 2022-04-27 16:59:57
 	 */
 	DraftGoodsVO getDraftGoods(Long id);
 
@@ -57,7 +65,8 @@ public interface DraftGoodsService extends IService<DraftGoods> {
 	 * 分页获取草稿商品
 	 *
 	 * @param searchParams 查询参数
-	 * @return 草稿商品
+	 * @return {@link IPage }<{@link DraftGoods }>
+	 * @since 2022-04-27 16:59:57
 	 */
 	IPage<DraftGoods> getDraftGoods(DraftGoodsPageQuery searchParams);
 

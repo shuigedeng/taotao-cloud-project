@@ -8,7 +8,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
 import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
 import com.taotao.cloud.message.biz.austin.handler.script.OfficialAccountService;
-import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import java.util.Set;
  * 微信服务号推送处理
  */
 @Component
-@Slf4j
+
 public class OfficialAccountHandler extends BaseHandler implements Handler {
 
 	@Autowired

@@ -28,7 +28,6 @@ public class AggItemVo {
 	private String name;
 	private Long value;
 
-
 	public String getName() {
 		return name;
 	}

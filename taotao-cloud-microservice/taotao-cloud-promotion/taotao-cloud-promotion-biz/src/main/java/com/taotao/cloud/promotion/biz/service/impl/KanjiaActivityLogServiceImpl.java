@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityDTO;
-import com.taotao.cloud.promotion.api.query.KanJiaActivityLogQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.query.KanJiaActivityLogQuery;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
@@ -26,6 +26,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 砍价活动日志业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:15
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

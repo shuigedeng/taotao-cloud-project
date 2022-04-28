@@ -10,7 +10,6 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
 import com.taotao.cloud.oss.artislong.core.ali.model.AliOssConfig;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,6 +17,15 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
+/**
+ * 阿里oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:11
+ */
 @Configuration
 @ConditionalOnClass(OSSClient.class)
 @EnableConfigurationProperties({AliOssProperties.class})

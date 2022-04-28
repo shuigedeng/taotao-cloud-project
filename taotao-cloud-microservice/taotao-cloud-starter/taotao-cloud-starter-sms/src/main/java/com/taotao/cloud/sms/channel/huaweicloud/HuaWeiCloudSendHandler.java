@@ -19,16 +19,6 @@ import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.utils.StringUtils;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -39,10 +29,23 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * 华为云发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:53
  */
 public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudProperties> {
 

@@ -16,7 +16,7 @@
 ///**
 // * 统计 入库
 // */
-//@Slf4j
+//
 //@Component
 //public class PageViewStatisticsExecute implements EveryDayExecute {
 //    /**

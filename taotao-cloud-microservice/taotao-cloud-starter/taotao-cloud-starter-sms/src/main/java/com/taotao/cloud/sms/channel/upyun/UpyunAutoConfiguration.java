@@ -31,6 +31,8 @@ import org.springframework.web.client.RestTemplate;
  * 又拍云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:15
  */
 @Configuration
 @ConditionalOnProperty(prefix = UpyunProperties.PREFIX, name = "enabled", havingValue = "true")

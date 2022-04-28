@@ -15,34 +15,49 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.dto.ParametersDTO;
-import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.api.vo.ParametersVO;
-import com.taotao.cloud.goods.biz.entity.Brand;
 import com.taotao.cloud.goods.biz.entity.Parameters;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * IParametersMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-27 16:58:27
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IParametersMapStruct {
 
+	/**
+	 * 实例
+	 */
 	IParametersMapStruct INSTANCE = Mappers.getMapper(IParametersMapStruct.class);
 
+	/**
+	 * 参数参数vos
+	 *
+	 * @param parameters 参数
+	 * @return {@link List }<{@link ParametersVO }>
+	 * @since 2022-04-27 16:58:27
+	 */
 	List<ParametersVO> parametersToParametersVOs(List<Parameters> parameters);
 
+	/**
+	 * 参数dtoto参数
+	 *
+	 * @param parametersDTO 参数dto
+	 * @return {@link Parameters }
+	 * @since 2022-04-27 16:58:27
+	 */
 	Parameters parametersDTOToParameters(ParametersDTO parametersDTO);
 
 

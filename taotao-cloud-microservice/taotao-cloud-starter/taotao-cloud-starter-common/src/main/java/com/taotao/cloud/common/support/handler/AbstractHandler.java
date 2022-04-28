@@ -21,6 +21,10 @@ import com.taotao.cloud.common.utils.lang.ObjectUtil;
 
 /**
  * 抽象处理器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:10:11
  */
 public abstract class AbstractHandler<T, R> implements IHandler<T, R> {
 

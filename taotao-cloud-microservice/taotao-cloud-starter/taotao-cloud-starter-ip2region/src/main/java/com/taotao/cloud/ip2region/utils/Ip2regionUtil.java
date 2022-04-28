@@ -3,6 +3,9 @@ package com.taotao.cloud.ip2region.utils;
 /**
  * util class
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:29:25
  */
 public class Ip2regionUtil {
 
@@ -13,6 +16,7 @@ public class Ip2regionUtil {
 	 * @param offset offset
 	 * @param v      value
 	 * @param bytes  len
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static void write(byte[] b, int offset, long v, int bytes) {
 		for (int i = 0; i < bytes; i++) {
@@ -26,6 +30,7 @@ public class Ip2regionUtil {
 	 * @param b      byte array
 	 * @param offset offset
 	 * @param v      value
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static void writeIntLong(byte[] b, int offset, long v) {
 		b[offset++] = (byte) ((v) & 0xFF);
@@ -39,6 +44,8 @@ public class Ip2regionUtil {
 	 *
 	 * @param b      byte array
 	 * @param offset offset
+	 * @return long
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static long getIntLong(byte[] b, int offset) {
 		return (
@@ -54,6 +61,8 @@ public class Ip2regionUtil {
 	 *
 	 * @param b      byte array
 	 * @param offset offset
+	 * @return int
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static int getInt3(byte[] b, int offset) {
 		return (
@@ -63,6 +72,14 @@ public class Ip2regionUtil {
 		);
 	}
 
+	/**
+	 * 得到int2
+	 *
+	 * @param b      b
+	 * @param offset 抵消
+	 * @return int
+	 * @since 2022-04-27 17:29:25
+	 */
 	public static int getInt2(byte[] b, int offset) {
 		return (
 			(b[offset++] & 0x000000FF) |
@@ -70,6 +87,14 @@ public class Ip2regionUtil {
 		);
 	}
 
+	/**
+	 * 得到int1
+	 *
+	 * @param b      b
+	 * @param offset 抵消
+	 * @return int
+	 * @since 2022-04-27 17:29:25
+	 */
 	public static int getInt1(byte[] b, int offset) {
 		return (
 			(b[offset] & 0x000000FF)
@@ -81,6 +106,7 @@ public class Ip2regionUtil {
 	 *
 	 * @param ip ip
 	 * @return long
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static long ip2long(String ip) {
 		String[] p = ip.split("\\.");
@@ -100,7 +126,8 @@ public class Ip2regionUtil {
 	 * int to ip string
 	 *
 	 * @param ip
-	 * @return string
+	 * @return {@link String }
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static String long2ip(long ip) {
 		return String.valueOf((ip >> 24) & 0xFF) + '.' +
@@ -114,6 +141,7 @@ public class Ip2regionUtil {
 	 *
 	 * @param ip
 	 * @return boolean
+	 * @since 2022-04-27 17:29:25
 	 */
 	public static boolean isIpAddress(String ip) {
 		String[] p = ip.split("\\.");

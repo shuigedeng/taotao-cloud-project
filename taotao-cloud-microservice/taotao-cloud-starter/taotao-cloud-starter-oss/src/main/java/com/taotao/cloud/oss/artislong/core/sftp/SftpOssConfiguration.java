@@ -16,6 +16,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * sftp oss配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:42:59
+ */
 @Configuration
 @ConditionalOnClass(ChannelSftp.class)
 @EnableConfigurationProperties({SftpOssProperties.class})

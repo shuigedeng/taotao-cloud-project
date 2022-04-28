@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.ali;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
@@ -28,6 +27,7 @@ import com.taotao.cloud.oss.artislong.model.FileOssInfo;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -38,7 +38,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * https://help.aliyun.com/product/31815.html
+ * <a href="https://help.aliyun.com/product/31815.html">https://help.aliyun.com/product/31815.html</a>
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:04
  */
 public class AliOssClient implements StandardOssClient {
 

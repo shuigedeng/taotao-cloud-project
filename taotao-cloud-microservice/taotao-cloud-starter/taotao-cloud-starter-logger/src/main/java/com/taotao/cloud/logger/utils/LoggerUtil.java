@@ -16,11 +16,12 @@
 package com.taotao.cloud.logger.utils;
 
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 
+import java.lang.reflect.Method;
+
 /**
- * LogUtil
+ * LoggerUtil
  *
  * @author shuigedeng
  * @version v1.0
@@ -33,7 +34,6 @@ public class LoggerUtil {
 	 *
 	 * @param point point
 	 * @return java.lang.String
-	 * @author shuigedeng
 	 * @since 2020/4/30 10:21
 	 */
 	public static String getControllerMethodDescription(JoinPoint point) throws Exception {

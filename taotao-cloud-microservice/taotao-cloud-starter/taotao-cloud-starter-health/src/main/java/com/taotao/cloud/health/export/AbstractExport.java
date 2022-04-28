@@ -21,16 +21,15 @@ import com.taotao.cloud.health.model.Report;
  * AbstractExport
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-10 17:13:39
+ * @version 2022.04
+ * @since 2022-04-27 17:26:29
  */
 public class AbstractExport implements AutoCloseable {
 
 	/**
 	 * start
 	 *
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:43
+	 * @since 2022-04-27 17:26:29
 	 */
 	public void start() {
 
@@ -40,13 +39,17 @@ public class AbstractExport implements AutoCloseable {
 	 * run
 	 *
 	 * @param report report
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:46
+	 * @since 2022-04-27 17:26:29
 	 */
 	public void run(Report report) {
 
 	}
 
+	/**
+	 * 关闭
+	 *
+	 * @since 2022-04-27 17:26:29
+	 */
 	@Override
 	public void close() {
 

@@ -15,7 +15,11 @@ package com.taotao.cloud.sms.channel.netease;
 import java.security.MessageDigest;
 
 /**
+ * 校验和建设者
+ *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:51:24
  */
 public class CheckSumBuilder {
 

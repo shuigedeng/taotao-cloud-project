@@ -10,7 +10,6 @@ import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
 import com.taotao.cloud.message.biz.austin.support.utils.KafkaUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Service;
  * 
  * 将消息发送到MQ
  */
-@Slf4j
+
 @Service
 public class SendMqAction implements BusinessProcess<SendTaskModel> {
 

@@ -8,9 +8,9 @@ import com.taotao.cloud.common.support.tuple.IValueTwo;
 /**
  * 三元的
  *
- * @param <A> 第一个元素
- * @param <B> 第二个元素
- * @param <C> 第三个元素
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:12:21
  */
 public class Ternary<A, B, C> extends AbstractTuple
         implements IValueOne<A>, IValueTwo<B>, IValueThree<C> {

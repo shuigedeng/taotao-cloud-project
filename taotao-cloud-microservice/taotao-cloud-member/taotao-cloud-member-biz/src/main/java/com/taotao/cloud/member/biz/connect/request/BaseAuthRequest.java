@@ -14,13 +14,13 @@ import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.member.biz.connect.util.AuthChecker;
 import com.taotao.cloud.redis.repository.RedisRepository;
+
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 默认的request处理类
  */
-@Slf4j
+
 public abstract class BaseAuthRequest implements AuthRequest {
 
 

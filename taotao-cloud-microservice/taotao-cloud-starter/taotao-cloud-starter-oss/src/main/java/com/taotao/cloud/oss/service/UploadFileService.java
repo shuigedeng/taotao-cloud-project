@@ -17,15 +17,16 @@ package com.taotao.cloud.oss.service;
 
 import com.taotao.cloud.oss.exception.UploadFileException;
 import com.taotao.cloud.oss.model.UploadFileInfo;
-import java.io.File;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 /**
  * 文件上传接口
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/10/26 10:42
+ * @version 2022.04
+ * @since 2022-04-27 17:33:20
  */
 public interface UploadFileService {
 
@@ -33,9 +34,8 @@ public interface UploadFileService {
 	 * 文件上传接口
 	 *
 	 * @param file 文件对象
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
-	 * @since 2020/11/12 16:01
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:20
 	 */
 	UploadFileInfo upload(File file) throws UploadFileException;
 
@@ -44,9 +44,8 @@ public interface UploadFileService {
 	 *
 	 * @param file    file
 	 * @param fileKey fileKey
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
-	 * @since 2020/11/12 17:03
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:20
 	 */
 	UploadFileInfo upload(File file, String fileKey) throws UploadFileException;
 
@@ -54,9 +53,8 @@ public interface UploadFileService {
 	 * 文件上传接口
 	 *
 	 * @param file file
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
-	 * @since 2020/11/12 17:47
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:20
 	 */
 	UploadFileInfo upload(MultipartFile file) throws UploadFileException;
 
@@ -65,9 +63,8 @@ public interface UploadFileService {
 	 *
 	 * @param file    file
 	 * @param fileKey fileKey
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
-	 * @since 2020/11/12 17:47
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:20
 	 */
 	UploadFileInfo upload(MultipartFile file, String fileKey) throws UploadFileException;
 
@@ -75,9 +72,8 @@ public interface UploadFileService {
 	 * 删除文件
 	 *
 	 * @param uploadFileInfo fileInfo
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author shuigedeng
-	 * @since 2020/11/12 17:47
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-04-27 17:33:20
 	 */
 	UploadFileInfo delete(UploadFileInfo uploadFileInfo) throws UploadFileException;
 }

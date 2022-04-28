@@ -16,6 +16,8 @@ package com.taotao.cloud.sms.exception;
  * 短信异常
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:37
  */
 public class SmsException extends RuntimeException {
 

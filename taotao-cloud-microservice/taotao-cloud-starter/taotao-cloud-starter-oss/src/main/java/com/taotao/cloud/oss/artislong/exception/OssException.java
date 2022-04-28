@@ -1,5 +1,12 @@
 package com.taotao.cloud.oss.artislong.exception;
 
+/**
+ * oss例外
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:35:06
+ */
 public class OssException extends RuntimeException {
     public OssException() {
     }

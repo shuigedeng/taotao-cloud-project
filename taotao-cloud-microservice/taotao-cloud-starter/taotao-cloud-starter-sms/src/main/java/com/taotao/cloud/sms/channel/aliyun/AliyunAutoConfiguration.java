@@ -30,6 +30,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * 阿里云发送端点自动配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:10
  */
 @Configuration
 @ConditionalOnProperty(prefix = AliyunProperties.PREFIX, name = "enabled", havingValue = "true")

@@ -1,10 +1,6 @@
 package com.taotao.cloud.order.biz.stream.producer.service.impl;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -16,7 +12,11 @@ import vip.mate.core.rocketmq.constant.MessageConstant;
 import vip.mate.core.rocketmq.entity.Order;
 import vip.mate.message.service.ITransactionOrderService;
 
-@Slf4j
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+
 @Service
 @AllArgsConstructor
 public class TransactionOrderServiceImpl implements ITransactionOrderService {

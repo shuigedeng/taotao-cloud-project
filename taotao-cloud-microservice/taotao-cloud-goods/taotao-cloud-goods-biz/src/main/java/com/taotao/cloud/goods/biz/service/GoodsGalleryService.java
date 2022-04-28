@@ -7,6 +7,10 @@ import java.util.List;
 
 /**
  * 商品相册业务层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:00:12
  */
 public interface GoodsGalleryService extends IService<GoodsGallery> {
 
@@ -15,6 +19,8 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 	 *
 	 * @param goodsGalleryList 商品相册列表
 	 * @param goodsId          商品ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 17:00:12
 	 */
 	Boolean add(List<String> goodsGalleryList, Long goodsId);
 
@@ -22,7 +28,8 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 	 * 根据原图获取缩略图
 	 *
 	 * @param origin 原图地址
-	 * @return 商品相册
+	 * @return {@link GoodsGallery }
+	 * @since 2022-04-27 17:00:12
 	 */
 	GoodsGallery getGoodsGallery(String origin);
 
@@ -30,7 +37,8 @@ public interface GoodsGalleryService extends IService<GoodsGallery> {
 	 * 根据商品id查询商品相册原图
 	 *
 	 * @param goodsId 商品ID
-	 * @return 商品相册列表
+	 * @return {@link List }<{@link GoodsGallery }>
+	 * @since 2022-04-27 17:00:12
 	 */
 	List<GoodsGallery> goodsGalleryList(Long goodsId);
 

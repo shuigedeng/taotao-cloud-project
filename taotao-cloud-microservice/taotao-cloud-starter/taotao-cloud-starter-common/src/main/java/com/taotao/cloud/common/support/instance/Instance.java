@@ -2,6 +2,10 @@ package com.taotao.cloud.common.support.instance;
 
 /**
  * 实例化对象的接口 1. 使用此类的 class 必须有无参构造器 2. 当前类出于测试阶段。
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:10:24
  */
 public interface Instance {
 

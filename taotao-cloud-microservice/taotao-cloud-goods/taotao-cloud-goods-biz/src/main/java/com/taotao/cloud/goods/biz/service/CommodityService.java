@@ -10,9 +10,10 @@ import java.util.List;
 
 /**
  * 直播商品业务层
+ *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-20 16:59:38
+ * @since 2022-04-27 16:59:47
  */
 public interface CommodityService extends IService<Commodity> {
 
@@ -20,7 +21,8 @@ public interface CommodityService extends IService<Commodity> {
 	 * 添加直播商品
 	 *
 	 * @param commodity 直播商品列表
-	 * @return 添加结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:47
 	 */
 	Boolean addCommodity(List<Commodity> commodity);
 
@@ -28,12 +30,16 @@ public interface CommodityService extends IService<Commodity> {
 	 * 删除直播商品
 	 *
 	 * @param goodsId 直播商品ID
-	 * @return 删除结果
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:47
 	 */
 	Boolean deleteCommodity(Long goodsId);
 
 	/**
 	 * 查询微信小程序直播商品审核状态
+	 *
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:47
 	 */
 	Boolean getGoodsWareHouse();
 
@@ -43,7 +49,8 @@ public interface CommodityService extends IService<Commodity> {
 	 * @param pageParam   分页
 	 * @param name        商品名称
 	 * @param auditStatus 审核状态
-	 * @return 直播商品分页
+	 * @return {@link IPage }<{@link CommodityVO }>
+	 * @since 2022-04-27 16:59:47
 	 */
 	IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus);
 }

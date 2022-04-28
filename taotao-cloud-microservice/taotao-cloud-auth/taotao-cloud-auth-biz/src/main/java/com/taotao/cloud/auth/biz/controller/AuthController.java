@@ -34,7 +34,7 @@
 // * @version 2021.10
 // * @since 2022-02-24 11:21:38
 // */
-//@Slf4j
+//
 //@RestController
 //@RequestMapping("/auth")
 //@Api(tags = "系统：系统授权接口")

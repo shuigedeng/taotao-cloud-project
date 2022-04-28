@@ -1,5 +1,12 @@
 package com.taotao.cloud.oss.artislong.exception;
 
+/**
+ * 不支持例外
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:35:08
+ */
 public class NotSupportException extends OssException {
     public NotSupportException() {
         super();

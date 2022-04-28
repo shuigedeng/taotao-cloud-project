@@ -3,11 +3,19 @@ package com.taotao.cloud.oss.artislong.core.ali;
 import cn.hutool.core.text.CharPool;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.ali.model.AliOssConfig;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 阿里oss属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:15
+ */
 @ConfigurationProperties(OssConstant.OSS + CharPool.DOT + OssConstant.OssType.ALI)
 public class AliOssProperties extends AliOssConfig implements InitializingBean {
 

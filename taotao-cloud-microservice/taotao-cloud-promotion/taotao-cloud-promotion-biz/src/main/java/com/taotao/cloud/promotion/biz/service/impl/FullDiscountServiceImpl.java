@@ -2,8 +2,10 @@ package com.taotao.cloud.promotion.biz.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
@@ -14,6 +16,7 @@ import com.taotao.cloud.promotion.biz.mapper.FullDiscountMapper;
 import com.taotao.cloud.promotion.biz.service.CouponService;
 import com.taotao.cloud.promotion.biz.service.FullDiscountService;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.tools.PromotionTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +30,9 @@ import java.util.List;
 /**
  * 满优惠业务层实现
  *
- *
- * @since 2020/8/21
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:46:09
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

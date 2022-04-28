@@ -16,6 +16,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * ftp操作系统配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:06
+ */
 @Configuration
 @ConditionalOnClass(FTPClient.class)
 @EnableConfigurationProperties({FtpOssProperties.class})

@@ -1,6 +1,13 @@
 package com.taotao.cloud.oss.artislong.core.aws.model;
 
 
+/**
+ * aws oss客户端配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:39:24
+ */
 public class AwsOssClientConfig {
 
     private Boolean accelerateModeEnabled = false;

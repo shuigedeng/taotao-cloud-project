@@ -7,7 +7,6 @@ import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
 import com.taotao.cloud.message.biz.austin.stream.utils.LettuceRedisUtils;
 import io.lettuce.core.RedisFuture;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.List;
  *
  * 
  */
-@Slf4j
+
 public class AustinSink implements SinkFunction<AnchorInfo> {
 
     @Override

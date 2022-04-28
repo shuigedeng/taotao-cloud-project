@@ -3,11 +3,16 @@ package com.taotao.cloud.common.support.cache.impl;
 
 import com.taotao.cloud.common.support.cache.ICache;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 抽象 cache 实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:07:35
  */
 public abstract class AbstractCache<K, V> implements ICache<K, V> {
 

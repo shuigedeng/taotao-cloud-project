@@ -12,8 +12,8 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.AbstractPromotionsService;
@@ -25,46 +25,53 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 
- * @since 2021/11/30
+ * 摘要促销活动服务实现类
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:44:46
  */
 public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions<T, Long>> extends ServiceImpl<M, T> implements
 	AbstractPromotionsService<T> {
 
-    /**
-     * 促销商品
-     */
-    @Autowired
+	/**
+	 * 推广产品服务
+	 * 促销商品
+	 */
+	@Autowired
     private PromotionGoodsService promotionGoodsService;
 
-    /**
-     * rocketMq配置
-     */
-    @Autowired
+	/**
+	 * rocketmq自定义属性
+	 * rocketMq配置
+	 */
+	@Autowired
     private RocketmqCustomProperties rocketmqCustomProperties;
 
-    /**
-     * rocketMq
-     */
-    @Autowired
+	/**
+	 * 火箭mqtemplate
+	 * rocketMq
+	 */
+	@Autowired
     private RocketMQTemplate rocketMQTemplate;
 
-    /**
-     * 通用促销保存
-     * 调用顺序:
-     * 1. initPromotion 初始化促销信息
-     * 2. checkPromotions 检查促销参数
-     * 3. save 保存促销信息
-     * 4. updatePromotionGoods 更新促销商品信息
-     * 5。 updateEsGoodsIndex 更新商品索引促销信息
-     *
-     * @param promotions 促销信息
-     * @return 是否保存成功
-     */
-    @Override
+	/**
+	 * 通用促销保存
+	 * 调用顺序:
+	 * 1. initPromotion 初始化促销信息
+	 * 2. checkPromotions 检查促销参数
+	 * 3. save 保存促销信息
+	 * 4. updatePromotionGoods 更新促销商品信息
+	 * 5。 updateEsGoodsIndex 更新商品索引促销信息
+	 */
+	@Override
     @Transactional(rollbackFor = {Exception.class})
     public boolean savePromotions(T promotions) {
         this.initPromotion(promotions);
@@ -75,19 +82,16 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         return save;
     }
 
-    /**
-     * 通用促销更新
-     * 调用顺序:
-     * 1. checkStatus 检查促销状态
-     * 2. checkPromotions 检查促销参数
-     * 3. saveOrUpdate 保存促销信息
-     * 4. updatePromotionGoods 更新促销商品信息
-     * 5. updateEsGoodsIndex 更新商品索引促销信息
-     *
-     * @param promotions 促销信息
-     * @return 是否更新成功
-     */
-    @Override
+	/**
+	 * 通用促销更新
+	 * 调用顺序:
+	 * 1. checkStatus 检查促销状态
+	 * 2. checkPromotions 检查促销参数
+	 * 3. saveOrUpdate 保存促销信息
+	 * 4. updatePromotionGoods 更新促销商品信息
+	 * 5. updateEsGoodsIndex 更新商品索引促销信息
+	 */
+	@Override
     @Transactional(rollbackFor = {Exception.class})
     public boolean updatePromotions(T promotions) {
         this.checkStatus(promotions);
@@ -98,16 +102,11 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         return save;
     }
 
-    /**
-     * 更新促销状态
-     * 如果要更新促销状态为关闭，startTime和endTime置为空即可
-     *
-     * @param ids       促销id集合
-     * @param startTime 开始时间
-     * @param endTime   结束时间
-     * @return 是否更新成功
-     */
-    @Override
+	/**
+	 * 更新促销状态
+	 * 如果要更新促销状态为关闭，startTime和endTime置为空即可
+	 */
+	@Override
     @Transactional(rollbackFor = {Exception.class})
     public boolean updateStatus(List<String> ids, Long startTime, Long endTime) {
         List<T> promotionsList = this.list(new QueryWrapper<T>().in("id", ids));
@@ -130,13 +129,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         }
     }
 
-    /**
-     * 移除促销活动
-     *
-     * @param ids 促销活动id集合
-     * @return 是否移除成功
-     */
-    @Override
+	@Override
     @Transactional(rollbackFor = {Exception.class})
     public boolean removePromotions(List<String> ids) {
         for (String id : ids) {
@@ -149,58 +142,30 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         return this.removeByIds(ids);
     }
 
-    /**
-     * 分页查询促销信息
-     *
-     * @param searchParams 查询参数，继承自继承促销查询参数
-     * @param page         分页参数
-     * @return 分页促销信息
-     */
-    @Override
+	@Override
     public <S extends BasePromotionsSearchParams> IPage<T> pageFindAll(S searchParams, PageVO page) {
         page.setNotConvert(false);
         return this.page(PageUtil.initPage(page), searchParams.queryWrapper());
     }
 
-    /**
-     * 列表查询促销信息
-     *
-     * @param searchParams 查询参数，继承自继承促销查询参数
-     * @return 列表促销信息
-     */
-    @Override
+	@Override
     public <S extends BasePromotionsSearchParams> List<T> listFindAll(S searchParams) {
         return this.list(searchParams.queryWrapper());
     }
 
-    /**
-     * 初始化促销字段
-     *
-     * @param promotions 促销实体
-     */
-    @Override
+	@Override
     public void initPromotion(T promotions) {
         if (CharSequenceUtil.isEmpty(promotions.getScopeType())) {
             promotions.setScopeType(PromotionsScopeTypeEnum.PORTION_GOODS.name());
         }
     }
 
-    /**
-     * 检查促销参数
-     *
-     * @param promotions 促销实体
-     */
-    @Override
+	@Override
     public void checkPromotions(T promotions) {
         PromotionTools.checkPromotionTime(promotions.getStartTime(), promotions.getEndTime());
     }
 
-    /**
-     * 检查促销状态
-     *
-     * @param promotions 促销实体
-     */
-    @Override
+	@Override
     public void checkStatus(T promotions) {
         T byId = this.getById(promotions.getId());
         if (byId == null) {
@@ -208,12 +173,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         }
     }
 
-    /**
-     * 更新促销商品信息
-     *
-     * @param promotions 促销实体
-     */
-    @Override
+	@Override
     @Transactional(rollbackFor = {Exception.class})
     public void updatePromotionsGoods(T promotions) {
         if (promotions.getStartTime() == null && promotions.getEndTime() == null) {
@@ -235,12 +195,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         }
     }
 
-    /**
-     * 更新促销信息到商品索引
-     *
-     * @param promotions 促销实体
-     */
-    @Override
+	@Override
     public void updateEsGoodsIndex(T promotions) {
         if (promotions.getStartTime() == null && promotions.getEndTime() == null) {
             //删除商品促销消息
@@ -264,12 +219,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
         }
     }
 
-    /**
-     * 当前促销类型
-     *
-     * @return 当前促销类型
-     */
-    @Override
+	@Override
     public PromotionTypeEnum getPromotionType() {
         return null;
     }

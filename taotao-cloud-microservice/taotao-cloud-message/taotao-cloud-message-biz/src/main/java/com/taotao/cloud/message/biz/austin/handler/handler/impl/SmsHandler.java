@@ -13,7 +13,6 @@ import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
 import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
 import com.taotao.cloud.message.biz.austin.support.dao.SmsRecordDao;
 import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +22,7 @@ import java.util.List;
  * 短信发送处理
  */
 @Component
-@Slf4j
+
 public class SmsHandler extends BaseHandler implements Handler {
 
 	public SmsHandler() {

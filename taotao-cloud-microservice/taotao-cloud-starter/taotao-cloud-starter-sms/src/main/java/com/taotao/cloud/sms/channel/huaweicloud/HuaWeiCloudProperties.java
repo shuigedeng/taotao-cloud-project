@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 华为云短信配置
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:50:49
  */
 @ConfigurationProperties(prefix = HuaWeiCloudProperties.PREFIX)
 public class HuaWeiCloudProperties extends AbstractHandlerProperties<String> {

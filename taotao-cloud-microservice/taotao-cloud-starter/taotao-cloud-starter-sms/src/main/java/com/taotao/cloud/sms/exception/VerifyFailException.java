@@ -18,6 +18,8 @@ import java.util.Locale;
  * 验证失败
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:42
  */
 public class VerifyFailException extends SmsException {
 

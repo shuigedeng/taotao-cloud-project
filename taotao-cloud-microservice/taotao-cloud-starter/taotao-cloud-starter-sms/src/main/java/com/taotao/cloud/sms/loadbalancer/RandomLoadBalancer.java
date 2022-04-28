@@ -6,9 +6,9 @@ import java.util.Random;
 /**
  * random Load Balancer
  *
- * @param <T> target class
- * @param <C> choose reference object
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:59
  */
 public class RandomLoadBalancer<T, C> extends AbstractLoadBalancer<T, C> {
 

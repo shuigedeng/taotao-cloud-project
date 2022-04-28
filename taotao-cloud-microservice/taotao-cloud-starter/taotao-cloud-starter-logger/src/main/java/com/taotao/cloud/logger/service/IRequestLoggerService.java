@@ -21,8 +21,8 @@ import com.taotao.cloud.logger.model.RequestLogger;
  * 日志接口
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/5/2 11:18
+ * @version 2022.04
+ * @since 2022-04-27 17:31:26
  */
 public interface IRequestLoggerService {
 
@@ -30,8 +30,7 @@ public interface IRequestLoggerService {
 	 * 添加日志
 	 *
 	 * @param requestLogger sysLog
-	 * @author shuigedeng
-	 * @since 2020/4/27 16:52
+	 * @since 2022-04-27 17:31:26
 	 */
 	void save(RequestLogger requestLogger);
 }

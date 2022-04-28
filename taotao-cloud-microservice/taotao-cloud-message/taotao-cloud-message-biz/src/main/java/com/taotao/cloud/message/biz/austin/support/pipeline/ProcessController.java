@@ -7,7 +7,6 @@ import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.support.exception.ProcessException;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,7 @@ import java.util.Map;
  *
  *
  */
-@Slf4j
+
 @Data
 public class ProcessController {
 

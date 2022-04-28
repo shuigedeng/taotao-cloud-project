@@ -9,9 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * weight random Load Balancer
  *
- * @param <T> target class
- * @param <C> choose reference object
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:53:14
  */
 public class WeightRandomLoadBalancer<T, C> extends AbstractLoadBalancer<T, C> {
 

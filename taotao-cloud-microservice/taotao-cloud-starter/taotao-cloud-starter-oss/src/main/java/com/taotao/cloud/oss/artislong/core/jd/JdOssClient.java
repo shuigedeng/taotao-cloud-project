@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.artislong.core.jd;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
@@ -12,9 +11,16 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.*;
+import com.amazonaws.services.s3.model.CompleteMultipartUploadRequest;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PartETag;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.UploadPartRequest;
+import com.amazonaws.services.s3.model.UploadPartResult;
 import com.amazonaws.services.s3.transfer.TransferManager;
-
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
@@ -29,15 +35,23 @@ import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.artislong.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.artislong.model.upload.UploadPart;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * https://docs.jdcloud.com/cn/object-storage-service/product-overview
+ * <a href="https://docs.jdcloud.com/cn/object-storage-service/product-overview">https://docs.jdcloud.com/cn/object-storage-service/product-overview</a>
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:40:34
  */
 public class JdOssClient implements StandardOssClient {
 

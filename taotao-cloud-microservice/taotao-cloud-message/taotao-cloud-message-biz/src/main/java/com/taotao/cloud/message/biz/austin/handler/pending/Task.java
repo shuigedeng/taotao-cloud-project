@@ -9,7 +9,6 @@ import com.taotao.cloud.message.biz.austin.handler.handler.HandlerHolder;
 import com.taotao.cloud.message.biz.austin.handler.shield.ShieldService;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -26,7 +25,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Accessors(chain = true)
-@Slf4j
+
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Task implements Runnable {

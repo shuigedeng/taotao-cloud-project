@@ -12,7 +12,6 @@ import com.taotao.cloud.message.biz.austin.common.dto.account.DingDingWorkNotice
 import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-@Slf4j
+
 public class RefreshDingDingAccessTokenHandler {
 
 

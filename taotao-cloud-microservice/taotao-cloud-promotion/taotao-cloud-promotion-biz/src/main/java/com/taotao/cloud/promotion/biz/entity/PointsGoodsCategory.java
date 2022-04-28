@@ -2,26 +2,29 @@ package com.taotao.cloud.promotion.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotEmpty;
-import java.math.BigDecimal;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * 积分商品分类
  *
- * 
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:24:35
  */
-@Setter
 @Getter
+@Setter
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,19 +34,42 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = PointsGoodsCategory.TABLE_NAME, comment = "积分商品分类")
 public class PointsGoodsCategory extends BaseSuperEntity<PointsGoodsCategory, Long> {
 
-	public static final String TABLE_NAME = "li_points_goods_category";
-
-    @NotEmpty(message = "分类名称不能为空")
-    @Schema(description =  "分类名称")
+	public static final String TABLE_NAME = "tt_points_goods_category";
+	/**
+	 * 分类名称
+	 */
+	@Column(name = "name", columnDefinition = "varchar(255) not null  comment '分类名称'")
     private String name;
-
-    @Schema(description =  "父id, 根节点为0")
-    private String parentId;
-
-    @Schema(description =  "层级, 从0开始")
+	/**
+	 * 父id, 根节点为0
+	 */
+	@Column(name = "parent_id", columnDefinition = "bigint not null  comment '父id, 根节点为0'")
+    private Long parentId;
+	/**
+	 * 层级, 从0开始
+	 */
+	@Column(name = "level", columnDefinition = "int not null  comment '层级, 从0开始'")
     private Integer level;
+	/**
+	 * 排序值
+	 */
+	@Column(name = "sort_order", columnDefinition = "int not null  comment '排序值'")
+    private Integer sortOrder;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+			o)) {
+			return false;
+		}
+		PointsGoodsCategory pointsGoodsCategory = (PointsGoodsCategory) o;
+		return getId() != null && Objects.equals(getId(), pointsGoodsCategory.getId());
+	}
 
-    @Schema(description =  "排序值")
-    private BigDecimal sortOrder;
-
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

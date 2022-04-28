@@ -6,6 +6,7 @@ import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.collection.MapUtil;
 import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.reflect.PropertyDescriptorUtil;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -14,6 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 属性描述符列表缓存
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:07:50
  */
 public class PropertyDescriptorListCache implements ICache<Class, List<PropertyDescriptor>> {
 

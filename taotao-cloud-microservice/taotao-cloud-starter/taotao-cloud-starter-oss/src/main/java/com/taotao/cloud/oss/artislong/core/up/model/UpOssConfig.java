@@ -5,6 +5,13 @@ import com.taotao.cloud.oss.artislong.core.up.constant.ApiDomain;
 import com.taotao.cloud.oss.artislong.model.SliceConfig;
 import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
 
+/**
+ * 了开源软件配置
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:43:41
+ */
 public class UpOssConfig {
 
     private String basePath;

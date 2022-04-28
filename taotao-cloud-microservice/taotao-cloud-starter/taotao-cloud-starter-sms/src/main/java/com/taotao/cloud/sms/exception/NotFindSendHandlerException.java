@@ -18,6 +18,8 @@ import java.util.Locale;
  * 未找到有效的短信发送处理
  *
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:47:27
  */
 public class NotFindSendHandlerException extends SmsException {
 

@@ -2,8 +2,16 @@ package com.taotao.cloud.ip2region.impl;
 
 
 import com.taotao.cloud.ip2region.model.DBReader;
+
 import java.io.IOException;
 
+/**
+ * 字节数组dbreader
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:28:33
+ */
 public class ByteArrayDBReader implements DBReader {
 
 	protected byte[] buf;

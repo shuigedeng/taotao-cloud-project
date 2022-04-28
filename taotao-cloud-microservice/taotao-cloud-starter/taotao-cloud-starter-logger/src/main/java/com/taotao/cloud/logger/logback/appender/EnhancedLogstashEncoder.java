@@ -24,6 +24,9 @@ import java.util.ArrayList;
 /**
  * The type Enhanced logstash encoder
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:32:11
  */
 public class EnhancedLogstashEncoder extends LogstashEncoder {
 

@@ -1,13 +1,20 @@
 package com.taotao.cloud.payment.biz.kit.plugin.bank;
 
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.biz.entity.RefundLog;
+import com.taotao.cloud.payment.biz.kit.dto.PayParam;
+import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
+import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
+import com.taotao.cloud.payment.biz.service.PaymentService;
+import com.taotao.cloud.payment.biz.service.RefundLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * 线下收款
  */
-@Slf4j
+
 @Component
 public class BankTransferPlugin implements Payment {
     /**

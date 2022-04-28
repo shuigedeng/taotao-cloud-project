@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 /**
  * random Load Balancer
  *
- * @param <T> target class
- * @param <C> choose reference object
  * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 17:52:49
  */
 public abstract class AbstractLoadBalancer<T, C> implements ILoadBalancer<T, C> {
 
