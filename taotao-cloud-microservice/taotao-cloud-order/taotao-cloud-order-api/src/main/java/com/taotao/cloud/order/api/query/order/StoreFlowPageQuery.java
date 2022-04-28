@@ -1,9 +1,11 @@
 package com.taotao.cloud.order.api.query.order;
 
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -14,11 +16,12 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-28 09:19:50
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺流水查询DTO")
-public class StoreFlowPageQuery {
+public class StoreFlowPageQuery extends PageParam {
 
 	@Schema(description = "类型")
 	private String type;
@@ -34,8 +37,5 @@ public class StoreFlowPageQuery {
 
 	@Schema(description = "结算单")
 	private Bill bill;
-
-	@Schema(description = "分页")
-	private PageVO pageVO;
 
 }

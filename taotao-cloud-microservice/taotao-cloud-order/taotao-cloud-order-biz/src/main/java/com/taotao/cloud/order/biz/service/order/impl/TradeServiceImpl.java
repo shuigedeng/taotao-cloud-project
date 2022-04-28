@@ -118,16 +118,13 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 	 * @param tradeDTO
 	 */
 	private void createTradeCheck(TradeDTO tradeDTO) {
-
 		//创建订单如果没有收获地址，
 		MemberAddress memberAddress = tradeDTO.getMemberAddress();
 		if (memberAddress == null) {
 			throw new BusinessException(ResultEnum.MEMBER_ADDRESS_NOT_EXIST);
 		}
 
-		/**
-		 * 订单配送区域校验
-		 */
+		//订单配送区域校验
 		if (tradeDTO.getNotSupportFreight() != null && tradeDTO.getNotSupportFreight().size() > 0) {
 			StringBuilder stringBuilder = new StringBuilder("包含商品有-");
 			tradeDTO.getNotSupportFreight().forEach(sku -> {

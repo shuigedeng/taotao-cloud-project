@@ -9,14 +9,16 @@ package com.taotao.cloud.sys.biz.timetask.xxljob;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
+
 /**
  * UserJobHandler
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-23 08:49:13
+ * @version 2022.04
+ * @since 2022-04-28 11:54:43
  */
 @Component
 public class UserJobHandler {

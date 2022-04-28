@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 初始化站点统计
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 11:54:05
  */
 @Component
 public class VisitsInit implements ApplicationRunner {

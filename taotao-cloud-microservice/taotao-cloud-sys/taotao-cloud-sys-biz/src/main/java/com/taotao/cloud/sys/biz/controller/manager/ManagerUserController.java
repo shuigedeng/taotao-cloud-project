@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.sys.biz.controller.manager;
 
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
@@ -28,18 +28,12 @@ import com.taotao.cloud.sys.api.dto.user.UserSaveDTO;
 import com.taotao.cloud.sys.api.dto.user.UserUpdateDTO;
 import com.taotao.cloud.sys.api.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.biz.entity.system.User;
-import com.taotao.cloud.sys.biz.mapstruct.UserMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.IUserMapStruct;
 import com.taotao.cloud.sys.biz.service.IUserService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +43,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * 平台管理端-用户管理API
@@ -107,7 +108,7 @@ public class ManagerUserController extends
 		}
 		Long userId = securityUser.getUserId();
 		User sysUser = service().getById(userId);
-		return success(UserMapStruct.INSTANCE.sysUserToUserQueryVO(sysUser));
+		return success(IUserMapStruct.INSTANCE.sysUserToUserQueryVO(sysUser));
 	}
 
 

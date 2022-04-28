@@ -17,15 +17,16 @@ package com.taotao.cloud.sys.biz.timetask.xxljob;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import java.util.concurrent.CountDownLatch;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Cs1DbJobHandler
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2021/07/02 14:45
+ * @version 2022.04
+ * @since 2022-04-28 11:54:37
  */
 @Component
 public class Cs1DbJobHandler {

@@ -1,15 +1,15 @@
 package com.taotao.cloud.member.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
-import java.io.Serializable;
-import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 会员评价DTO
@@ -30,11 +30,11 @@ public class MemberEvaluationDTO implements Serializable {
 
 	@Schema(description = "商品ID")
 	@NotEmpty(message = "订单商品异常不能为空")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "规格ID")
 	@NotEmpty(message = "订单商品不能为空")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "好中差评价")
 	@NotEmpty(message = "请评价")

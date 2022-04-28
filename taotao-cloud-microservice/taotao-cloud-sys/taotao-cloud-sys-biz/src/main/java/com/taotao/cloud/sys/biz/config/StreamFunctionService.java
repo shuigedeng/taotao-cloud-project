@@ -1,12 +1,20 @@
 package com.taotao.cloud.sys.biz.config;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.function.Consumer;
+
+/**
+ * 流函数服务
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 11:54:07
+ */
 @Component
 public class StreamFunctionService {
 

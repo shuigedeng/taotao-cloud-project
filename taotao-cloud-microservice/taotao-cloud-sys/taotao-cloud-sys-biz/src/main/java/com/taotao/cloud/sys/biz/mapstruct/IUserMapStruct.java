@@ -16,35 +16,67 @@
 package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.dto.user.UserQueryDTO;
-import com.taotao.cloud.sys.biz.entity.system.User;
 import com.taotao.cloud.sys.api.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.api.vo.user.UserRegisterVO;
-import java.util.List;
+import com.taotao.cloud.sys.biz.entity.system.User;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * UserMapper
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-15 17:46:37
+ * @version 2022.04
+ * @since 2022-04-28 13:39:56
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UserMapStruct {
+public interface IUserMapStruct {
 
-	UserMapStruct INSTANCE = Mappers.getMapper(UserMapStruct.class);
+	/**
+	 * 实例
+	 */
+	IUserMapStruct INSTANCE = Mappers.getMapper(IUserMapStruct.class);
 
+	/**
+	 * 系统用户用户查询签证官
+	 *
+	 * @param sysUser 系统用户
+	 * @return {@link UserQueryVO }
+	 * @since 2022-04-28 13:39:56
+	 */
 	UserQueryVO sysUserToUserQueryVO(User sysUser);
 
+	/**
+	 * 系统用户添加用户签证官
+	 *
+	 * @param sysUser 系统用户
+	 * @return {@link UserRegisterVO }
+	 * @since 2022-04-28 13:39:57
+	 */
 	UserRegisterVO sysUserToAddUserVO(User sysUser);
 
+	/**
+	 * 系统用户用户查询签证官
+	 *
+	 * @param userList 用户列表
+	 * @return {@link List }<{@link UserQueryVO }>
+	 * @since 2022-04-28 13:39:57
+	 */
 	List<UserQueryVO> sysUserToUserQueryVO(List<User> userList);
 
+	/**
+	 * 用户dto复制到系统用户
+	 *
+	 * @param userQueryDTO 用户查询dto
+	 * @param user         用户
+	 * @since 2022-04-28 13:39:57
+	 */
 	void copyUserDtoToSysUser(UserQueryDTO userQueryDTO, @MappingTarget User user);
 }

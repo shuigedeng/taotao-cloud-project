@@ -3,7 +3,10 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
+import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,4 +41,13 @@ public interface IFeignSettingService {
 	 */
 	@GetMapping("/sys/tools/setting/goods")
 	Result<GoodsSettingVO> getGoodsSetting(String name);
+
+	@GetMapping("/sys/tools/setting/order")
+	Result<OrderSettingVO> getOrderSetting(String name);
+
+	@GetMapping("/sys/tools/setting/experience")
+	Result<ExperienceSettingVO> getExperienceSetting(String name);
+
+	@GetMapping("/sys/tools/setting/point")
+	Result<PointSettingVO> getPointSetting(String name);
 }

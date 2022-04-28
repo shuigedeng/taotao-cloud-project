@@ -22,8 +22,8 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:49:27
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleReasonServiceImpl extends
 	ServiceImpl<IAfterSaleReasonMapper, AfterSaleReason> implements IAfterSaleReasonService {

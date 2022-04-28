@@ -11,14 +11,14 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTagEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serial;
+import java.util.Date;
 
 /**
  * 订单查询参数
@@ -191,27 +191,17 @@ public class OrderPageQuery extends PageParam {
 			OrderTagEnum tagEnum = OrderTagEnum.valueOf(tag);
 			switch (tagEnum) {
 				//待付款
-				case WAIT_PAY:
-					wrapper.eq(orderStatusColumn, OrderStatusEnum.UNPAID.name());
-					break;
+				case WAIT_PAY -> wrapper.eq(orderStatusColumn, OrderStatusEnum.UNPAID.name());
 				//待发货
-				case WAIT_SHIP:
-					wrapper.eq(orderStatusColumn, OrderStatusEnum.UNDELIVERED.name());
-					break;
+				case WAIT_SHIP -> wrapper.eq(orderStatusColumn, OrderStatusEnum.UNDELIVERED.name());
 				//待收货
-				case WAIT_ROG:
-					wrapper.eq(orderStatusColumn, OrderStatusEnum.DELIVERED.name());
-					break;
+				case WAIT_ROG -> wrapper.eq(orderStatusColumn, OrderStatusEnum.DELIVERED.name());
 				//已取消
-				case CANCELLED:
-					wrapper.eq(orderStatusColumn, OrderStatusEnum.CANCELLED.name());
-					break;
+				case CANCELLED -> wrapper.eq(orderStatusColumn, OrderStatusEnum.CANCELLED.name());
 				//已完成
-				case COMPLETE:
-					wrapper.eq(orderStatusColumn, OrderStatusEnum.COMPLETED.name());
-					break;
-				default:
-					break;
+				case COMPLETE -> wrapper.eq(orderStatusColumn, OrderStatusEnum.COMPLETED.name());
+				default -> {
+				}
 			}
 		}
 

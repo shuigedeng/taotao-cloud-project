@@ -20,30 +20,64 @@ import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.system.Menu;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
+ * imenu地图结构
+ *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/11 16:58
+ * @version 2022.04
+ * @since 2022-04-28 13:39:41
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface MenuMapStruct {
+public interface IMenuMapStruct {
 
-	MenuMapStruct INSTANCE = Mappers.getMapper(MenuMapStruct.class);
+	/**
+	 * 实例
+	 */
+	IMenuMapStruct INSTANCE = Mappers.getMapper(IMenuMapStruct.class);
 
+	/**
+	 * 菜单列表树vo列表
+	 *
+	 * @param menuList 菜单列表
+	 * @return {@link List }<{@link MenuTreeVO }>
+	 * @since 2022-04-28 13:39:41
+	 */
 	List<MenuTreeVO> menuListToTreeVoList(List<Menu> menuList);
 
+	/**
+	 * 实体查询bos
+	 *
+	 * @param menus 菜单
+	 * @return {@link List }<{@link MenuQueryBO }>
+	 * @since 2022-04-28 13:39:41
+	 */
 	List<MenuQueryBO> entitysToQueryBOs(List<Menu> menus);
 
+	/**
+	 * 菜单bos
+	 *
+	 * @param menus 菜单
+	 * @return {@link List }<{@link MenuBO }>
+	 * @since 2022-04-28 13:39:41
+	 */
 	List<MenuBO> menusToBos(List<Menu> menus);
 
+	/**
+	 * 菜单bos vos
+	 *
+	 * @param bos bos
+	 * @return {@link List }<{@link MenuQueryVO }>
+	 * @since 2022-04-28 13:39:41
+	 */
 	List<MenuQueryVO> menuBosToVos(List<MenuBO> bos);
 
 }

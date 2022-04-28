@@ -60,8 +60,8 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:49:30
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSale> implements
 	IAfterSaleService {
@@ -323,11 +323,11 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
 	//@SystemLogPoint(description = "售后-买家确认解决", customerLog = "'售后-买家确认解决:单号['+#afterSaleSn+']'")
-	public Boolean complete(String afterSaleSn) {
+	public AfterSale complete(String afterSaleSn) {
 		AfterSale afterSale = this.getBySn(afterSaleSn);
 		afterSale.setServiceStatus(AfterSaleStatusEnum.COMPLETE.name());
 		this.updateAfterSale(afterSaleSn, afterSale);
-		return true;
+		return afterSale;
 	}
 
 	@Override
@@ -566,7 +566,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 功能描述: 获取售后商品数量及已完成售后商品数量修改orderItem订单
 	 *
-	 * @param orderItem,afterSaleList
+	 * @param orderItem,
+	 * @param afterSaleList
 	 */
 	private void updateOrderItemGoodsNumber(OrderItem orderItem, List<AfterSale> afterSaleList) {
 		//根据售后状态获取不是已结束的售后记录

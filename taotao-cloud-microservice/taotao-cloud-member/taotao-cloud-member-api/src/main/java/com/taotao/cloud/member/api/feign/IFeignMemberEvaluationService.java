@@ -2,8 +2,9 @@ package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
@@ -49,5 +50,7 @@ public interface IFeignMemberEvaluationService {
 	 * @since 2022-04-25 16:39:49
 	 */
 	Result<List<Map<String, Object>>> memberEvaluationNum();
+
+    void addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b);
 }
 

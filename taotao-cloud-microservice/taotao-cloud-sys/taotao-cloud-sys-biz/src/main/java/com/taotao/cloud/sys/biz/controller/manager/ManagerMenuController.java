@@ -30,20 +30,12 @@ import com.taotao.cloud.sys.api.dto.menu.MenuUpdateDTO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.system.Menu;
-import com.taotao.cloud.sys.biz.mapstruct.MenuMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
 import com.taotao.cloud.sys.biz.service.IMenuService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +43,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 平台管理端-菜单管理API
@@ -75,7 +76,7 @@ public class ManagerMenuController extends
 		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
 		@PathVariable(value = "roleId") Long roleId) {
 		List<MenuBO> bos = service().findMenuByRoleIds(Set.of(roleId));
-		List<MenuQueryVO> result = MenuMapStruct.INSTANCE.menuBosToVos(bos);
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(bos);
 		return success(result);
 	}
 
@@ -87,7 +88,7 @@ public class ManagerMenuController extends
 		@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
 		@RequestParam(value = "roleIds") Set<Long> roleIds) {
 		List<MenuBO> resources = service().findMenuByRoleIds(roleIds);
-		List<MenuQueryVO> result = MenuMapStruct.INSTANCE.menuBosToVos(resources);
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return Result.success(result);
 	}
 
@@ -99,7 +100,7 @@ public class ManagerMenuController extends
 		@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
 		@PathVariable(value = "code") String code) {
 		List<MenuBO> resources = service().findMenuByCodes(Set.of(code));
-		List<MenuQueryVO> result = MenuMapStruct.INSTANCE.menuBosToVos(resources);
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return Result.success(result);
 	}
 
@@ -111,7 +112,7 @@ public class ManagerMenuController extends
 		@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
 		@RequestParam(value = "codes") Set<String> codes) {
 		List<MenuBO> resources = service().findMenuByCodes(codes);
-		List<MenuQueryVO> result = MenuMapStruct.INSTANCE.menuBosToVos(resources);
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return success(result);
 	}
 

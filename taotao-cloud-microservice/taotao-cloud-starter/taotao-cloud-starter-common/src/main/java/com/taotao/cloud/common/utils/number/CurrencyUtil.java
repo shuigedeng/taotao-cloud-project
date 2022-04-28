@@ -25,13 +25,12 @@ public final class CurrencyUtil {
 	 *
 	 * @return 累加之和
 	 */
-	public static Double add(double... params) {
-		BigDecimal result = new BigDecimal("0");
-		for (double param : params) {
-			BigDecimal bigParam = BigDecimal.valueOf(param);
-			result = result.add(bigParam).setScale(2, RoundingMode.HALF_UP);
+	public static BigDecimal add(BigDecimal... params) {
+		BigDecimal result = BigDecimal.ZERO;
+		for (BigDecimal param : params) {
+			result = result.add(param).setScale(2, RoundingMode.HALF_UP);
 		}
-		return result.doubleValue();
+		return result;
 	}
 
 	/**
@@ -39,14 +38,13 @@ public final class CurrencyUtil {
 	 *
 	 * @return 第一个参数为被减数，其余数字为减数
 	 */
-	public static Double sub(double... params) {
-		BigDecimal result = BigDecimal.valueOf(params[0]);
-		params = Arrays.stream(params).skip(1).toArray();
-		for (double param : params) {
-			BigDecimal bigParam = BigDecimal.valueOf(param);
-			result = result.subtract(bigParam).setScale(2, RoundingMode.HALF_UP);
+	public static BigDecimal sub(BigDecimal... params) {
+		BigDecimal result = params[0];
+		params = (BigDecimal[]) Arrays.stream(params).skip(1).toArray();
+		for (BigDecimal param : params) {
+			result = result.subtract(param).setScale(2, RoundingMode.HALF_UP);
 		}
-		return result.doubleValue();
+		return result;
 	}
 
 	/**
@@ -56,13 +54,11 @@ public final class CurrencyUtil {
 	 * @param v2 乘数
 	 * @return 两个参数的积
 	 */
-	public static Double mul(double v1, double v2) {
-		BigDecimal b1 = BigDecimal.valueOf(v1);
-		BigDecimal b2 = BigDecimal.valueOf(v2);
-		return b1.multiply(b2).setScale(2, RoundingMode.HALF_UP).doubleValue();
+	public static BigDecimal mul(BigDecimal v1, BigDecimal v2) {
+		return v1.multiply(v2).setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public static  BigDecimal mul(Integer v1, BigDecimal v2) {
+	public static BigDecimal mul(Integer v1, BigDecimal v2) {
 		BigDecimal b1 = BigDecimal.valueOf(v1);
 		return b1.multiply(v2).setScale(2, RoundingMode.HALF_UP);
 	}
@@ -75,14 +71,12 @@ public final class CurrencyUtil {
 	 * @param scale 表示表示需要精确到小数点以后几位。
 	 * @return 两个参数的积
 	 */
-	public static Double mul(double v1, double v2, int scale) {
+	public static BigDecimal mul(BigDecimal v1, BigDecimal v2, int scale) {
 		if (scale < 0) {
 			throw new IllegalArgumentException(
 				"The scale must be a positive integer or zero");
 		}
-		BigDecimal b1 = BigDecimal.valueOf(v1);
-		BigDecimal b2 = BigDecimal.valueOf(v2);
-		return b1.multiply(b2).setScale(scale, RoundingMode.HALF_UP).doubleValue();
+		return v1.multiply(v2).setScale(scale, RoundingMode.HALF_UP);
 	}
 
 	/**
@@ -92,10 +86,9 @@ public final class CurrencyUtil {
 	 * @param v2 除数
 	 * @return 两个参数的商
 	 */
-	public static double div(double v1, double v2) {
-		return div(v1, v2, DEF_DIV_SCALE);
-	}
-
+	// public static BigDecimal div(BigDecimal v1, BigDecimal v2) {
+	// 	return div(v1, v2, DEF_DIV_SCALE);
+	// }
 	public static BigDecimal div(BigDecimal v1, BigDecimal v2) {
 		return v1.divide(v2, DEF_DIV_SCALE, RoundingMode.HALF_UP);
 	}
@@ -112,18 +105,16 @@ public final class CurrencyUtil {
 	 * @param scale 表示表示需要精确到小数点以后几位。
 	 * @return 两个参数的商
 	 */
-	public static double div(double v1, double v2, int scale) {
+	public static BigDecimal div(BigDecimal v1, BigDecimal v2, int scale) {
 		if (scale < 0) {
 			throw new IllegalArgumentException(
 				"The scale must be a positive integer or zero");
 		}
 		//如果被除数等于0，则返回0
-		if (v2 == 0) {
-			return 0;
+		if (v2.equals(BigDecimal.ZERO)) {
+			return BigDecimal.ZERO;
 		}
-		BigDecimal b1 = BigDecimal.valueOf(v1);
-		BigDecimal b2 = BigDecimal.valueOf(v2);
-		return b1.divide(b2, scale, RoundingMode.HALF_UP).doubleValue();
+		return v1.divide(v2, scale, RoundingMode.HALF_UP);
 	}
 
 	/**
@@ -132,9 +123,9 @@ public final class CurrencyUtil {
 	 * @param money 金额
 	 * @return 转换单位为分
 	 */
-	public static Integer fen(Double money) {
-		double price = mul(money, 100);
-		return (int) price;
+	public static Integer fen(BigDecimal money) {
+		BigDecimal price = mul(money, BigDecimal.valueOf(100));
+		return price.intValue();
 	}
 
 	/**
@@ -143,7 +134,7 @@ public final class CurrencyUtil {
 	 * @param money 金额
 	 * @return double类型分
 	 */
-	public static double reversalFen(Double money) {
-		return div(money, 100);
+	public static BigDecimal reversalFen(BigDecimal money) {
+		return div(money, BigDecimal.valueOf(100));
 	}
 }

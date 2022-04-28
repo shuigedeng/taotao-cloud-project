@@ -21,7 +21,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
@@ -36,11 +35,17 @@ import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.api.vo.region.RegionVO;
 import com.taotao.cloud.sys.biz.entity.region.Region;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
-import com.taotao.cloud.sys.biz.mapstruct.RegionMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.IRegionMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -48,11 +53,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * RegionServiceImpl
@@ -216,7 +216,7 @@ public class RegionServiceImpl extends
 		queryWrapper.orderByDesc(Region::getCreateTime);
 		List<Region> list = list(queryWrapper);
 
-		return RegionMapStruct.INSTANCE.regionListToVoList(list)
+		return IRegionMapStruct.INSTANCE.regionListToVoList(list)
 			.stream()
 			.filter(Objects::nonNull)
 			.peek(e -> {

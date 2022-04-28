@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 public class ScheduledJobTopicMessageDelegate {
 
 	@Autowired
-	private IScheduledJobService IScheduledJobService;
+	private IScheduledJobService scheduledJobService;
 
 	public void updateCronScheduled(String message) {
 		LogUtil.info(message);

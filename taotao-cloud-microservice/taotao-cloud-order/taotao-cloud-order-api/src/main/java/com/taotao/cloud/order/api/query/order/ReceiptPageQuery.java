@@ -2,10 +2,12 @@ package com.taotao.cloud.order.api.query.order;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -15,11 +17,12 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-21 16:59:38
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "发票搜索参数")
-public class ReceiptPageQuery {
+public class ReceiptPageQuery extends PageParam {
 
 	@Schema(description = "发票抬头")
 	private String receiptTitle;

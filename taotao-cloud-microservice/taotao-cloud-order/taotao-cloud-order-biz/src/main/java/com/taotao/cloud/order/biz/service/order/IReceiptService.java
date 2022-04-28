@@ -18,12 +18,11 @@ public interface IReceiptService extends IService<Receipt> {
 	/**
 	 * 根据条件获取发票信息列表
 	 *
-	 * @param searchParams 发票查询参数
-	 * @param pageVO       分页参数
+	 * @param receiptPageQuery 发票查询参数
 	 * @return {@link IPage }<{@link OrderReceiptDTO }>
 	 * @since 2022-04-28 08:54:50
 	 */
-	IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery searchParams, PageVO pageVO);
+	IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery receiptPageQuery);
 
 	/**
 	 * 根据订单编号获取发票信息

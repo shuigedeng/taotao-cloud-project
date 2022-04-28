@@ -2,11 +2,11 @@ package com.taotao.cloud.order.biz.timetask;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.setting.OrderSetting;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,13 +33,12 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 设置
 	 */
 	@Autowired
-	private SettingService settingService;
+	private IFeignSettingService settingService;
 
 
 	@Override
 	public void execute() {
-		Setting setting = settingService.get(SettingEnum.ORDER_SETTING.name());
-		OrderSetting orderSetting = JSONUtil.toBean(setting.getSettingValue(), OrderSetting.class);
+		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingEnum.ORDER_SETTING.name()).data();
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//充值订单自动取消时间 = 当前时间 - 自动取消时间分钟数
 			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(),

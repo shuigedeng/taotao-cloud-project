@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationSearchParams;
+import com.taotao.cloud.order.api.query.order.OrderComplaintCommunicationPageQuery;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 
 /**
@@ -26,13 +26,12 @@ public interface IOrderComplaintCommunicationService extends IService<OrderCompl
 	/**
 	 * 获取通信记录
 	 *
-	 * @param searchParams 参数
-	 * @param pageVO       分页
+	 * @param orderComplaintCommunicationPageQuery 参数
 	 * @return {@link IPage }<{@link OrderComplaintCommunication }>
 	 * @since 2022-04-28 08:54:33
 	 */
 	IPage<OrderComplaintCommunication> getCommunication(
-		OrderComplaintCommunicationSearchParams searchParams, PageVO pageVO);
+		OrderComplaintCommunicationPageQuery orderComplaintCommunicationPageQuery);
 
 
 }

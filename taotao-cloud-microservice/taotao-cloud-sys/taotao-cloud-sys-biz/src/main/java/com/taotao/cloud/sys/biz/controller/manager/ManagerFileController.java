@@ -1,21 +1,16 @@
 package com.taotao.cloud.sys.biz.controller.manager;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.file.FileVO;
 import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.entity.file.File;
-import com.taotao.cloud.sys.biz.mapstruct.FileMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.IFileMapStruct;
 import com.taotao.cloud.sys.biz.service.IFileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
@@ -27,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 文件管理API
@@ -88,7 +88,7 @@ public class ManagerFileController {
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
 		File file = fileService.findFileById(id);
-		FileVO vo = FileMapStruct.INSTANCE.fileToFileVO(file);
+		FileVO vo = IFileMapStruct.INSTANCE.fileToFileVO(file);
 		return Result.success(vo);
 	}
 

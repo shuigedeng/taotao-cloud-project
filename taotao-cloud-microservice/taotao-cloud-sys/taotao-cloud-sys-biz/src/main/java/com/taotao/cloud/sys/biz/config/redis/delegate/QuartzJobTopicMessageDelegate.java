@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 public class QuartzJobTopicMessageDelegate {
 
 	@Autowired
-	private IQuartzJobService IQuartzJobService;
+	private IQuartzJobService quartzJobService;
 
 	public void addJob(String message) {
 		System.out.println("addJob=====================" + message);

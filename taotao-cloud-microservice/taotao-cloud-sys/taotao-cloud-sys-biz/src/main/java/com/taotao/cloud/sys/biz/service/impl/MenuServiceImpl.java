@@ -18,35 +18,31 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-//import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
-//import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
-//import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import com.taotao.cloud.sys.api.bo.role.RoleBO;
 import com.taotao.cloud.sys.api.dubbo.IDubboMenuService;
-import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.system.Menu;
 import com.taotao.cloud.sys.biz.entity.system.QMenu;
 import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
-import com.taotao.cloud.sys.biz.mapstruct.MenuMapStruct;
+import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IMenuRepository;
 import com.taotao.cloud.sys.biz.service.IMenuService;
 import com.taotao.cloud.sys.biz.service.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * MenuServiceImpl
@@ -83,25 +79,25 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuBO> findMenuByIdList(List<Long> idList) {
 		List<Menu> menus = cr().findAllById(idList);
-		return MenuMapStruct.INSTANCE.menusToBos(menus);
+		return IMenuMapStruct.INSTANCE.menusToBos(menus);
 	}
 
 	@Override
 	public List<MenuBO> findAllMenus() {
 		List<Menu> menus = ir().findAll();
-		return MenuMapStruct.INSTANCE.menusToBos(menus);
+		return IMenuMapStruct.INSTANCE.menusToBos(menus);
 	}
 
 	@Override
 	public List<MenuQueryBO> findAllById(Long id) {
 		List<Menu> menus = ir().findAll();
-		return MenuMapStruct.INSTANCE.entitysToQueryBOs(menus);
+		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(menus);
 	}
 
 	@Override
 	public List<MenuBO> findMenuByRoleIds(Set<Long> roleIds) {
 		List<Menu> menus = im().findMenuByRoleIds(roleIds);
-		return MenuMapStruct.INSTANCE.menusToBos(menus)
+		return IMenuMapStruct.INSTANCE.menusToBos(menus)
 			.stream()
 			.sorted(Comparator.comparing(MenuBO::id))
 			.toList();
@@ -180,7 +176,7 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuQueryBO> queryAllById(Long id) {
 		List<Menu> all = ir().findAll();
-		return MenuMapStruct.INSTANCE.entitysToQueryBOs(all);
+		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(all);
 	}
 
 	//@Override

@@ -1,6 +1,8 @@
 package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -120,17 +122,17 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	@Column(name = "consignee_address_id_path", columnDefinition = "varchar(64) not null comment '地址id逗号分割'")
 	private String consigneeAddressIdPath;
 
-	//public Trade(TradeDTO tradeDTO) {
-	//    String originId = this.getId();
-	//    if (tradeDTO.getMemberAddress() != null) {
-	//        BeanUtil.copyProperties(tradeDTO.getMemberAddress(), this);
-	//        this.setConsigneeMobile(tradeDTO.getMemberAddress().getMobile());
-	//        this.setConsigneeName(tradeDTO.getMemberAddress().getName());
-	//    }
-	//    BeanUtil.copyProperties(tradeDTO, this);
-	//    BeanUtil.copyProperties(tradeDTO.getPriceDetailDTO(), this);
-	//    this.setId(originId);
-	//}
+	public Trade(TradeDTO tradeDTO) {
+	   Long originId = this.getId();
+	   if (tradeDTO.getMemberAddress() != null) {
+	       BeanUtil.copyProperties(tradeDTO.getMemberAddress(), this);
+	       this.setConsigneeMobile(tradeDTO.getMemberAddress().getMobile());
+	       this.setConsigneeName(tradeDTO.getMemberAddress().getName());
+	   }
+	   BeanUtil.copyProperties(tradeDTO, this);
+	   BeanUtil.copyProperties(tradeDTO.getPriceDetailDTO(), this);
+	   this.setId(originId);
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -22,6 +22,13 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * 石英工作初始化
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-28 11:53:55
+ */
 @Component
 public class QuartzJobInit implements ApplicationRunner {
 

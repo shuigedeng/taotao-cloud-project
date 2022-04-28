@@ -19,8 +19,8 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:49:24
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleLogServiceImpl extends
 	ServiceImpl<IAfterSaleLogMapper, AfterSaleLog> implements IAfterSaleLogService {
@@ -32,3 +32,7 @@ public class AfterSaleLogServiceImpl extends
 		return this.list(queryWrapper);
 	}
 }
+
+
+
+
