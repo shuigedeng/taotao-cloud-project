@@ -19,20 +19,20 @@ buildscript {
         taotaoCloudGroup = "io.github.shuigedeng"
 
         //https://search.maven.org/artifact/org.springframework/spring
-        springVersion = '5.3.17'
+        springVersion = '5.3.19'
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
-        springBootVersion = '2.6.6'
+        springBootVersion = '2.6.7'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
-        springCloudVersion = '2021.0.1'
+        springCloudVersion = '2021.0.2'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
-        springCloudAlibabaVersion = '2021.1'
+        springCloudAlibabaVersion = '2021.0.1.0'
 
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
-        springSecurityVersion = '5.6.2'
+        springSecurityVersion = '5.6.3'
         //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
-        springDataCommonsVersion = '2.6.3'
+        springDataCommonsVersion = '2.6.4'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
-        springKafkaVersion = '2.8.4'
+        springKafkaVersion = '2.8.5'
 
         //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
         fasterxmlVersion = '2.13.2'
