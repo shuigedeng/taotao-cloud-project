@@ -17,6 +17,7 @@ package com.taotao.cloud.order.biz.repository.inf;
 
 import com.taotao.cloud.order.biz.entity.order.OrderItemBack;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -25,5 +26,5 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public interface IOrderItemRepository extends JpaRepository<OrderItemBack, Long> {
+public interface IOrderItemRepository extends JpaRepository<OrderItemBack, Long>, JpaSpecificationExecutor<OrderItemBack> {
 }
