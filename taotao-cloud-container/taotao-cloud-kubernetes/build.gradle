@@ -1,4 +1,3 @@
-
 dependencies {
-    implementation 'io.fabric8:kubernetes-client:5.1.1'
+    implementation 'io.fabric8:kubernetes-client:5.12.2'
 }

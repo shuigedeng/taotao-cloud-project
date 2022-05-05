@@ -1,13 +1,13 @@
 dependencies {
-    implementation 'org.springframework:spring-context:5.3.18'
-    implementation 'org.springframework:spring-aspects:5.3.18'
-    implementation 'org.springframework:spring-jdbc:5.3.18'
+    implementation 'org.springframework:spring-context:5.3.19'
+    implementation 'org.springframework:spring-aspects:5.3.19'
+    implementation 'org.springframework:spring-jdbc:5.3.19'
     implementation 'junit:junit:4.13.2'
     implementation 'javax.inject:javax.inject:1'
     implementation 'c3p0:c3p0:0.9.1.2'
-    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'mysql:mysql-connector-java:8.0.29'
 
-    implementation 'org.springframework:spring-webmvc:5.3.18'
+    implementation 'org.springframework:spring-webmvc:5.3.19'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
