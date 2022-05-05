@@ -25,7 +25,7 @@ dependencies {
     implementation "org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1"
     implementation "org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.1"
 
-    implementation "org.apache.hudi:hudi-spark-bundle_2.12:0.10.1"
+    implementation "org.apache.hudi:hudi-spark3.1-bundle_2.12:0.11.0"
 
     implementation('net.heartsavior.spark:spark-sql-kafka-offset-committer_2.12:0.4.0-spark-3.0') {
         exclude group: 'org.scala-lang', module: 'scala-library'
