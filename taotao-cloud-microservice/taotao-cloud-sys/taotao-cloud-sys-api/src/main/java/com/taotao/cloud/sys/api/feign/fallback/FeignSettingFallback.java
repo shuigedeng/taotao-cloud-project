@@ -2,7 +2,10 @@ package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -25,6 +28,21 @@ public class FeignSettingFallback implements FallbackFactory<IFeignSettingServic
 			@Override
 			public Result<GoodsSettingVO> getGoodsSetting(
 				String name) {
+				return null;
+			}
+
+			@Override
+			public Result<OrderSettingVO> getOrderSetting(String name) {
+				return null;
+			}
+
+			@Override
+			public Result<ExperienceSettingVO> getExperienceSetting(String name) {
+				return null;
+			}
+
+			@Override
+			public Result<PointSettingVO> getPointSetting(String name) {
 				return null;
 			}
 		};
