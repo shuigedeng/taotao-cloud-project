@@ -1,0 +1,145 @@
+{
+    "default": {
+        "level": "LOG",
+        "autoIncEmergency": true,
+        "max": 30,
+        "min": 3,
+        "threshold": [
+            {
+                "level": "SMS",
+                "threshold": 20,
+                "users": [
+                    "345345345345",
+                    "123123123123"
+                ]
+            },
+            {
+                "level": "WEIXIN",
+                "threshold": 10,
+                "users": [
+                    "yihui",
+                    "erhui"
+                ]
+            },
+            {
+                "level": "LOG",
+                "threshold": 5,
+                "users": [
+                    "yihui",
+                    "erhui"
+                ]
+            }
+        ],
+        "users": [
+            "yihui"
+        ]
+    },
+    "NPE": {
+        "level": "WEIXIN",
+        "autoIncEmergency": false,
+        "max": 30,
+        "min": 0,
+        "threshold": [
+            {
+                "level": "SMS",
+                "threshold": 20,
+                "users": [
+                    "345345345345",
+                    "123123123123"
+                ]
+            },
+            {
+                "level": "WEIXIN",
+                "threshold": 10,
+                "users": [
+                    "3h    ui",
+                    "4hui"
+                ]
+            }
+        ],
+        "users": [
+            "yihui"
+        ]
+    },
+    "XXX,YYY": {
+        "level": "EMAIL",
+        "autoIncEmergency": true,
+        "max": 30,
+        "min": 3,
+        "threshold": [
+            {
+                "level": "SMS",
+                "threshold": 20,
+                "users": [
+                    "345345345345",
+                    "123123123123"
+                ]
+            },
+            {
+                "level": "WEIXIN",
+                "threshold": 10,
+                "users": [
+                    "yihui",
+                    "erhui"
+                ]
+            },
+            {
+                "level": "EMAIL",
+                "threshold": 5,
+                "users": [
+                    "yihui@xxx.com",
+                    "erhui@xxx.com"
+                ]
+            },
+            {
+                "level": "DINGDING",
+                "threshold": 10,
+                "max": 12,
+                "users": [
+                    "31962dfc984bba2b8ae1bb3099d0ef3d5bce6b07db84b89ff5ffa81a5cdaee49"
+                ]
+            }
+        ],
+        "users": [
+            "yihui@xxx.com"
+        ]
+    },
+    "ZZZ": {
+        "level": "LOG",
+        "autoIncEmergency": true,
+        "max": 30,
+        "min": 3,
+        "threshold": [
+            {
+                "level": "SMS",
+                "threshold": 20,
+                "max": 27,
+                "users": [
+                    "345345345345",
+                    "123123123123"
+                ]
+            },
+            {
+                "level": "WEIXIN",
+                "threshold": 10,
+                "users": [
+                    "yihui",
+                    "erhui"
+                ]
+            },
+            {
+                "level": "EMAIL",
+                "threshold": 9,
+                "max": 14,
+                "users": [
+                    "yihui@xxx.com",
+                    "erhui@xxx.com"
+                ]
+            }
+        ],
+        "users": [
+            "yihui@xxx.com"
+        ]
+    }
+
+}
