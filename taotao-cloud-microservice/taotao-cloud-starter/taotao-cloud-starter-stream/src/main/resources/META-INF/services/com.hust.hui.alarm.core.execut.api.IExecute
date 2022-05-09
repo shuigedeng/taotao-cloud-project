@@ -1,0 +1,2 @@
+com.hust.hui.alarm.core.execut.spi.LogExecute
+com.hust.hui.alarm.core.execut.spi.NoneExecute
