@@ -13,14 +13,21 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
+/**
+ * 属性跑龙套
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-09 15:13:03
+ */
 public class PropertiesUtil {
 
 	/**
 	 * 读取properties文件的内容
 	 *
 	 * @param fileName 文件名
-	 * @return
-	 * @throws IOException
+	 * @return {@link Properties }
+	 * @since 2022-05-09 15:13:03
 	 */
 	public static Properties read(String fileName) throws IOException {
 		try (InputStream inputStream = PropertiesUtil.class.getClassLoader()
@@ -36,7 +43,7 @@ public class PropertiesUtil {
 	 *
 	 * @param source
 	 * @param dest
-	 * @throws IllegalAccessException
+	 * @since 2022-05-09 15:13:03
 	 */
 	public static void copy(Properties source, Object dest) throws IllegalAccessException {
 		Field[] fields = dest.getClass().getDeclaredFields();
@@ -52,11 +59,25 @@ public class PropertiesUtil {
 	}
 
 
+	/**
+	 * 解析obj
+	 *
+	 * @param obj obj
+	 * @param clz clz
+	 * @return {@link T }
+	 * @since 2022-05-09 15:13:04
+	 */
 	private static <T> T parseObj(String obj, Class<T> clz) {
 		return ParseFuncEnum.getFunc(clz).apply(obj);
 	}
 
-
+	/**
+	 * 解析函数枚举
+	 *
+	 * @author shuigedeng
+	 * @version 2022.05
+	 * @since 2022-05-09 15:13:04
+	 */
 	public enum ParseFuncEnum {
 
 		INT_PARSE(Arrays.asList(int.class, Integer.class)) {
@@ -119,6 +140,12 @@ public class PropertiesUtil {
 		private List<Class> clzList;
 
 
+		/**
+		 * 获取函数
+		 *
+		 * @return {@link Function }<{@link String }, {@link T }>
+		 * @since 2022-05-09 15:13:04
+		 */
 		public abstract <T> Function<String, T> getFunc();
 
 
@@ -132,10 +159,24 @@ public class PropertiesUtil {
 			}
 		}
 
+		/**
+		 * 解析函数枚举
+		 *
+		 * @param clz clz
+		 * @return
+		 * @since 2022-05-09 15:13:04
+		 */
 		ParseFuncEnum(List<Class> clz) {
 			this.clzList = clz;
 		}
 
+		/**
+		 * 获取函数
+		 *
+		 * @param clz clz
+		 * @return {@link Function }<{@link String }, {@link T }>
+		 * @since 2022-05-09 15:13:04
+		 */
 		public static <T> Function<String, T> getFunc(Class<T> clz) {
 			return map.get(clz).getFunc();
 		}
