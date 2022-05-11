@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.biz.elasticsearch;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -111,13 +112,13 @@ public abstract class BaseElasticsearchService {
 			CreateIndexResponse createIndexResponse = client.indices()
 				.create(request, COMMON_OPTIONS);
 			createMapping(index);
-			log.info(" whether all of the nodes have acknowledged the request : {}",
+			LogUtil.info(" whether all of the nodes have acknowledged the request : {}",
 				createIndexResponse.isAcknowledged());
-			log.info(
+			LogUtil.info(
 				" Indicates whether the requisite number of shard copies were started for each shard in the index before timing out :{}",
 				createIndexResponse.isShardsAcknowledged());
 		} catch (Exception e) {
-			log.error("创建索引错误", e);
+			LogUtil.error("创建索引错误", e);
 			throw new ElasticsearchException("创建索引 {" + index + "} 失败：" + e.getMessage());
 		}
 	}
@@ -472,7 +473,7 @@ public abstract class BaseElasticsearchService {
 		try {
 			searchResponse = client.search(searchRequest, COMMON_OPTIONS);
 		} catch (IOException e) {
-			log.error("es 搜索错误", e);
+			LogUtil.error("es 搜索错误", e);
 		}
 		return searchResponse;
 	}

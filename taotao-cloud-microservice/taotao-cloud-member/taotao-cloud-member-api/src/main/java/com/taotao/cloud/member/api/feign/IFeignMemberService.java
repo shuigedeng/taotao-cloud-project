@@ -49,6 +49,7 @@ public interface IFeignMemberService {
 	 * @return {@link Result }<{@link Boolean }>
 	 * @since 2022-04-25 16:41:42
 	 */
+	@GetMapping(value = "/member/info/update")
 	Result<Boolean> updateMemberPoint(Long payPoint, String name, Long memberId, String s);
 }
 

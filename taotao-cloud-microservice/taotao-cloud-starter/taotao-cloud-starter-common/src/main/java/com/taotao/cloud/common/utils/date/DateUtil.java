@@ -40,6 +40,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -146,6 +147,10 @@ public class DateUtil {
 	 */
 	public static List<String> getBetweenWeek(Date start, Date end) {
 		return getBetweenWeek(date2LocalDate(start), date2LocalDate(end));
+	}
+
+	public static String toDateFormatter(TemporalAccessor date) {
+		return DATE_FORMATTER.format(date);
 	}
 
 	/**

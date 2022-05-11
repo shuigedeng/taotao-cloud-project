@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.sys.api.feign.fallback.FeignMenuFallback;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@FeignClient(contextId = "IFeignResourceService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignMenuFallback.class)
 public interface IFeignMenuService {
 
 	/**
@@ -27,7 +28,7 @@ public interface IFeignMenuService {
 	 * @return 角色列表
 	 * @since 2020/10/21 15:24
 	 */
-	@GetMapping("/resource/info/codes")
+	@GetMapping("/menu/info/codes")
 	Result<List<MenuQueryVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 
 }

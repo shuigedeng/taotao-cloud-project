@@ -3,6 +3,7 @@ package com.taotao.cloud.member.api.feign.fallback;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
@@ -37,6 +38,11 @@ public class FeignMemberEvaluationServiceFallback implements FallbackFactory<IFe
 			@Override
 			public Result<List<Map<String, Object>>> memberEvaluationNum() {
 				return null;
+			}
+
+			@Override
+			public void addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b) {
+
 			}
 		};
 	}

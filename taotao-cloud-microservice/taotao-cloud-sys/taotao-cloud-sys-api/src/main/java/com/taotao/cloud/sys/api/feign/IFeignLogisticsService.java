@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@FeignClient(contextId = "IFeignLogisticsService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignLogisticsFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignLogisticsFallback.class)
 public interface IFeignLogisticsService {
 
 	/**
@@ -30,17 +30,17 @@ public interface IFeignLogisticsService {
 	 * @return {@link Result }<{@link LogisticsVO }>
 	 * @since 2022-04-25 16:47:29
 	 */
-	@GetMapping("/resource/info/codes")
+	@GetMapping("/logistic/codes")
 	Result<LogisticsVO> getById(@RequestParam String logisticsId);
 
 	/**
 	 * 得到物流
 	 *
 	 * @param logisticsId 物流id
-	 * @param logisticsNo 物流不
+	 * @param logisticsNo 物流编码
 	 * @return {@link Result }<{@link TracesVO }>
 	 * @since 2022-04-25 16:47:32
 	 */
-	@GetMapping("/resource/info/codes")
+	@GetMapping("/logistic/info")
 	Result<TracesVO> getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
 }
