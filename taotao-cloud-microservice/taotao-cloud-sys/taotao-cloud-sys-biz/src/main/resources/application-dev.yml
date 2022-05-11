@@ -452,16 +452,16 @@ spring:
           password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
           hikari:
-            auto-commit: true
+            is-auto-commit: true
             connection-timeout: 30000
             idle-timeout: 25000
             login-timeout: 5
             validation-timeout: 3000
             max-lifetime: 50000
-            read-only: false
+            is-read-only: false
             connection-test-query: SELECT 1
-            maximum-pool-size: 15
-            minimum-idle: 10
+            max-pool-size: 15
+            min-idle: 10
             pool-name: DatebookHikariCP
             register-mbeans: true
             data-source-properties:
@@ -790,7 +790,7 @@ spring:
         tables:
           tt_sys_user:
             actual-data-nodes: ds-master-$->{0..1}.tt_sys_user_$->{0..2}
-            key-generator:
+            key-generate-strategy:
               column: id
               key-generator-name: snowflake
             database-strategy:
@@ -1081,12 +1081,12 @@ management:
 logging:
   level:
     root: INFO
-    com.taotao.cloud.sys.api.feign.IFeignMenuService: debug
+    com.taotao.cloud.sys.api.feign: debug
     org.springframework.web: off
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
-    org.springframework.cloud.openfeign: off
+    org.springframework.cloud.openfeign: debug
     org.elasticsearch.client: debug
 
 springdoc:

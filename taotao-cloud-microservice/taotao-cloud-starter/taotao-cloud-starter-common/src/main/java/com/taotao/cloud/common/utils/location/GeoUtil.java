@@ -1,4 +1,4 @@
-package com.taotao.cloud.common.utils.number;
+package com.taotao.cloud.common.utils.location;
 
 
 /**

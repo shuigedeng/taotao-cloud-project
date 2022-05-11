@@ -31,7 +31,8 @@ public class FeignMemberServiceFallback implements FallbackFactory<IFeignMemberS
 			}
 
 			@Override
-			public Result<Boolean> updateMemberPoint(Long payPoint, String name, String memberId, String s) {
+			public Result<Boolean> updateMemberPoint(Long payPoint, String name, Long memberId,
+				String s) {
 				return null;
 			}
 		};

@@ -153,7 +153,7 @@ buildscript {
         //https://search.maven.org/artifact/com.taobao.arthas/arthas-spring-boot-starter
         arthasVersion = "3.6.0"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        adminVersion = "2.6.5"
+        adminVersion = "2.6.7"
         //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos

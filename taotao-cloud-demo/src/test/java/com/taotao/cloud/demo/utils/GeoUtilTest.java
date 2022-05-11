@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.number.GeoUtil;
+import com.taotao.cloud.common.utils.location.GeoUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
