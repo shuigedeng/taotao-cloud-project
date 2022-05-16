@@ -8,6 +8,7 @@ dependencies {
     implementation 'org.noear:snack3:3.2.22'
     testImplementation 'org.noear:solon-test:1.7.5'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
