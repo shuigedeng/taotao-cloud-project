@@ -17,6 +17,7 @@ package com.taotao.cloud.elasticsearch.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.elasticsearch.esearchx.EsContext;
 import com.taotao.cloud.elasticsearch.properties.ElasticsearchProperties;
 import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
@@ -30,6 +31,7 @@ import com.taotao.cloud.elasticsearch.service.impl.SearchServiceImpl;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
@@ -71,7 +73,8 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean(RestHighLevelClient.class)
-	public ElasticsearchRestTemplate elasticsearchRestTemplate(RestHighLevelClient restHighLevelClient) {
+	public ElasticsearchRestTemplate elasticsearchRestTemplate(
+		RestHighLevelClient restHighLevelClient) {
 		return new ElasticsearchRestTemplate(restHighLevelClient);
 	}
 
@@ -96,6 +99,12 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 		return new IndexServiceImpl();
 	}
 
+	@Bean
+	public EsContext buildEsContext(
+		@Autowired org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties properties) {
+		return new EsContext(properties.getUris(), properties.getUsername(),
+			properties.getPassword());
+	}
 
 	/**
 	 * 异步httpclient连接延时配置

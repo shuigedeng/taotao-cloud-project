@@ -1,0 +1,87 @@
+{
+
+  "mappings": {
+    "_doc":{
+      "properties": {
+        "id": {
+          "type":"long",
+          "null_value": 0
+        },
+        "pid": {
+          "type":"long",
+          "null_value": 0
+        },
+        "rid": {
+          "type":"long",
+          "null_value": 0
+        },
+        "slug": {
+          "type":"text"
+        },
+        "user_id": {
+          "type":"long",
+          "null_value": 0
+        },
+        "author": {
+          "type":"text"
+        },
+        "content": {
+          "type": "text",
+          "analyzer": "ik",
+          "search_analyzer": "ik_smart"
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+        "edit_mode": {
+          "type": "keyword"
+        },
+        "summary": {
+          "type": "keyword"
+        },
+        "link_to": {
+          "type": "keyword"
+        },
+        "thumbnail": {
+          "type": "keyword"
+        },
+        "status": {
+          "type": "keyword"
+        },
+        "type": {
+          "type": "keyword"
+        },
+        "style": {
+          "type":"keyword"
+        },
+        "flag": {
+          "type": "text"
+        },
+        "created":{
+          "type":   "date",
+          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+        },
+        "modified":{
+          "type":   "date",
+          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+        }
+      }
+    }
+  },
+  "settings" : {
+    "number_of_shards":5,
+    "number_of_replicas":1,
+    "analysis": {
+      "analyzer": {
+        "ik": {
+          "char_filter": [
+            "html_strip"
+          ],
+          "tokenizer": "ik_smart"
+        }
+      }
+    }
+  }
+}

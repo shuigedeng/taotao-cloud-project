@@ -1,0 +1,48 @@
+{
+  "mappings": {
+    "properties": {
+      "log_id": {
+        "type":"long"
+      },
+      "logger": {
+        "type":"keyword"
+      },
+      "trace_id": {
+        "type":"keyword"
+      },
+      "level": {
+        "type":"long",
+        "null_value": 3
+      },
+      "tag": {
+        "type":"keyword"
+      },
+      "tag1": {
+        "type":"keyword"
+      },
+      "tag2": {
+        "type":"keyword"
+      },
+      "tag3": {
+        "type":"keyword"
+      },
+      "content": {
+        "type": "text"
+      },
+      "class_name": {
+        "type": "keyword"
+      },
+      "thread_name": {
+        "type": "keyword"
+      },
+      "log_fulltime":{
+        "type":   "date"
+      }
+    }
+  },
+  "settings" : {
+    "number_of_shards":5,
+    "number_of_replicas":1,
+    "refresh_interval": "2s"
+  }
+}
