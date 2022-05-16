@@ -32,7 +32,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @version 2021.9
  * @since 2021-09-02 16:16:04
  */
-public class RandomUtil {
+public final class RandomUtil {
 
 	private RandomUtil() {
 	}

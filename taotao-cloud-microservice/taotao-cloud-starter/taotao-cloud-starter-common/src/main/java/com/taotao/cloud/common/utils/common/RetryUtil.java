@@ -27,7 +27,7 @@ import java.util.function.Consumer;
  * @version 2021.9
  * @since 2021-09-02 14:58:57
  */
-public class RetryUtil {
+public final class RetryUtil {
 
 	private RetryUtil() {
 	}

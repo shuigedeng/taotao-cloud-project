@@ -22,7 +22,7 @@ package com.taotao.cloud.common.utils.common;
  * @version 2021.9
  * @since 2021-09-02 17:17:56
  */
-public class EnumUtil {
+public final class EnumUtil {
 
 	private EnumUtil() {
 	}

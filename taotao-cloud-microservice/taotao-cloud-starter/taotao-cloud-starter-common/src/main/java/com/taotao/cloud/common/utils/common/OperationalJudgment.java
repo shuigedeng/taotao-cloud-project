@@ -15,7 +15,7 @@ import java.util.Objects;
  * @version 2022.04
  * @since 2022-04-07 20:39:01
  */
-public class OperationalJudgment {
+public final class OperationalJudgment {
 
 	/**
 	 * 需要判定的对象必须包含属性 memberId，storeId 代表判定的角色

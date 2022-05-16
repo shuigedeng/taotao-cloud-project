@@ -30,7 +30,7 @@ import org.springframework.lang.Nullable;
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
-public class DesensitizationUtil {
+public final class DesensitizationUtil {
 
 	/**
 	 * [中文姓名] 只显示第一个汉字，其他隐藏为2个星号<例子：李**>

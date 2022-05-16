@@ -31,7 +31,7 @@ import java.util.Objects;
  * @version 2021.9
  * @since 2021-09-02 20:51:35
  */
-public class PropertyUtil {
+public final class PropertyUtil {
 
 	/**
 	 * NULL

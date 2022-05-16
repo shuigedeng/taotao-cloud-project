@@ -55,7 +55,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 2021.9
  * @since 2021-09-02 16:44:44
  */
-public class FileUtil extends org.springframework.util.FileCopyUtils {
+public final class FileUtil extends org.springframework.util.FileCopyUtils {
 
 	/**
 	 * 默认为true

@@ -32,7 +32,7 @@ import java.util.Random;
  * @version 2021.9
  * @since 2021-09-02 17:44:44
  */
-public class CaptchaUtil {
+public final class CaptchaUtil {
 
 	private CaptchaUtil() {
 	}

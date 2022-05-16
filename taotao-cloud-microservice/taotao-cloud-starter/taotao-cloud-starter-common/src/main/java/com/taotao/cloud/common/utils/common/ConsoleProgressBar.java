@@ -20,7 +20,7 @@ import java.text.DecimalFormat;
 /**
  * 控制台进度条
  */
-public class ConsoleProgressBar {
+public final class ConsoleProgressBar {
 
 	/**
 	 * 进度条起始值

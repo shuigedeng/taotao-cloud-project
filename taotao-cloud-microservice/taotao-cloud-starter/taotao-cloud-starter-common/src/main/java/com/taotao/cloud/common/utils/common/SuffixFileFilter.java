@@ -29,7 +29,7 @@ import java.io.Serializable;
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
-public class SuffixFileFilter implements FileFilter, Serializable {
+public final class SuffixFileFilter implements FileFilter, Serializable {
 
 	private static final long serialVersionUID = -3389157631240246157L;
 

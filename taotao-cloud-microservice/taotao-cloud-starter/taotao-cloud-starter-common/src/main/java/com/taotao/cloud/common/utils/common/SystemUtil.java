@@ -12,7 +12,7 @@ import org.springframework.lang.Nullable;
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
-public class SystemUtil {
+public final class SystemUtil {
 
 	/**
 	 * 代码部署于 linux 上，工作默认为 mac 和 Windows
