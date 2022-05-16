@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.egzosn.pay.paypal.bean.order.Payment;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -24,7 +25,6 @@ public class PaymentExecute implements OrderStatusChangeEvent {
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-
 		switch (orderMessage.getNewStatus()) {
 			case CANCELLED:
 				Order order = orderService.getBySn(orderMessage.getOrderSn());
@@ -62,7 +62,7 @@ public class PaymentExecute implements OrderStatusChangeEvent {
 					case BANK_TRANSFER:
 						break;
 					default:
-						log.error("订单支付执行异常,订单编号：{}", orderMessage.getOrderSn());
+						LogUtil.error("订单支付执行异常,订单编号：{}", orderMessage.getOrderSn());
 						break;
 				}
 				break;

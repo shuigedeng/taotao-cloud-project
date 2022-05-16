@@ -37,7 +37,7 @@ public interface ICartService {
 	/**
 	 * 获取可使用的优惠券数量
 	 *
-	 * @param checkedWay 购物车类型
+	 * @param checkedWay 购物车类型 购物车购买：CART/立即购买：BUY_NOW/拼团购买：PINTUAN / 积分购买：POINT
 	 * @return {@link Long }
 	 * @since 2022-04-28 08:49:41
 	 */
@@ -58,9 +58,10 @@ public interface ICartService {
 	 * @param num      要加入购物车的数量
 	 * @param cartType 购物车类型
 	 * @param cover    是否覆盖购物车的数量，如果为否则累加，否则直接覆盖
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:39:23
 	 */
-	void add(String skuId, Integer num, String cartType, Boolean cover);
+	Boolean add(String skuId, Integer num, String cartType, Boolean cover);
 
 
 	/**
@@ -68,9 +69,10 @@ public interface ICartService {
 	 *
 	 * @param skuId   要写入的skuId
 	 * @param checked 是否选中
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:40:36
 	 */
-	void checked(String skuId, boolean checked);
+	Boolean checked(String skuId, boolean checked);
 
 
 	/**
@@ -78,70 +80,76 @@ public interface ICartService {
 	 *
 	 * @param storeId 店铺Id
 	 * @param checked 是否选中
+	 * @return
 	 * @since 2022-04-28 08:49:41
 	 */
-	void checkedStore(String storeId, boolean checked);
+	Boolean checkedStore(String storeId, boolean checked);
 
 
 	/**
 	 * 更新全部的选中状态
 	 *
 	 * @param checked 是否选中
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:41:20
 	 */
-	void checkedAll(boolean checked);
+	Boolean checkedAll(boolean checked);
 
 
 	/**
 	 * 批量删除
 	 *
 	 * @param skuIds 要写入的skuIds
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:41:42
 	 */
-	void delete(String[] skuIds);
+	Boolean delete(String[] skuIds);
 
 	/**
 	 * 清空购物车
 	 *
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:42:00
 	 */
-	void clean();
+	Boolean clean();
 
 	/**
 	 * 清空购物车无效数据
 	 *
 	 * @param way 购物车类型
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:42:20
 	 */
-	void cleanChecked(CartTypeEnum way);
+	Boolean cleanChecked(CartTypeEnum way);
 
 	/**
 	 * 重新写入
 	 *
 	 * @param tradeDTO 购物车构建器最终要构建的成品
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:42:33
 	 */
-	void resetTradeDTO(TradeDTO tradeDTO);
-
+	Boolean resetTradeDTO(TradeDTO tradeDTO);
 
 	/**
 	 * 选择收货地址
 	 *
 	 * @param shippingAddressId 收货地址id
 	 * @param way               购物车类型
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:44:18
 	 */
-	void shippingAddress(String shippingAddressId, String way);
+	Boolean shippingAddress(String shippingAddressId, String way);
 
 	/**
 	 * 选择发票
 	 *
 	 * @param receiptVO 发票信息
 	 * @param way       购物车类型
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:44:02
 	 */
-	void shippingReceipt(ReceiptVO receiptVO, String way);
-
+	Boolean shippingReceipt(ReceiptVO receiptVO, String way);
 
 	/**
 	 * 选择配送方式
@@ -149,9 +157,10 @@ public interface ICartService {
 	 * @param storeId        店铺id
 	 * @param deliveryMethod 配送方式
 	 * @param way            购物车类型
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:43:50
 	 */
-	void shippingMethod(String storeId, String deliveryMethod, String way);
+	Boolean shippingMethod(String storeId, String deliveryMethod, String way);
 
 	/**
 	 * 获取购物车商品数量
@@ -168,9 +177,10 @@ public interface ICartService {
 	 * @param couponId 优惠券id
 	 * @param way      购物车类型
 	 * @param use      true使用 false 弃用
-	 * @since 2022-04-28 08:49:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:47:50
 	 */
-	void selectCoupon(String couponId, String way, boolean use);
+	Boolean selectCoupon(String couponId, String way, boolean use);
 
 	/**
 	 * 创建交易

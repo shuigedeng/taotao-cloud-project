@@ -138,7 +138,7 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	 * @return {@link Boolean }
 	 * @since 2022-04-28 08:49:11
 	 */
-	AfterSale cancel(String afterSaleSn);
+	Boolean cancel(String afterSaleSn);
 
 
 	/**

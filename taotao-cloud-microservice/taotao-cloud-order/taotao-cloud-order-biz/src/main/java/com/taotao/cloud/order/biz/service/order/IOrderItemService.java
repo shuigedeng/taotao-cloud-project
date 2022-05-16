@@ -22,19 +22,21 @@ public interface IOrderItemService extends IService<OrderItem> {
 	 *
 	 * @param orderItemSn       子订单编号
 	 * @param commentStatusEnum 评论状态枚举
-	 * @since 2022-04-28 08:54:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 17:23:40
 	 */
-	void updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum);
+	Boolean updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum);
 
 	/**
 	 * 更新可申请售后状态
 	 *
 	 * @param orderItemSn                  子订单编号
 	 * @param orderItemAfterSaleStatusEnum 售后状态枚举
-	 * @since 2022-04-28 08:54:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 17:23:39
 	 */
-	void updateAfterSaleStatus(String orderItemSn,
-							   OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum);
+	Boolean updateAfterSaleStatus(String orderItemSn,
+								  OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum);
 
 	/**
 	 * 更新订单可投诉状态
@@ -43,10 +45,11 @@ public interface IOrderItemService extends IService<OrderItem> {
 	 * @param skuId              商品skuId
 	 * @param complainId         订单交易投诉ID
 	 * @param complainStatusEnum 修改状态
-	 * @since 2022-04-28 08:54:41
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 17:23:36
 	 */
-	void updateOrderItemsComplainStatus(String orderSn, String skuId, String complainId,
-										OrderComplaintStatusEnum complainStatusEnum);
+	Boolean updateOrderItemsComplainStatus(String orderSn, Long skuId, Long complainId,
+										   OrderComplaintStatusEnum complainStatusEnum);
 
 	/**
 	 * 根据子订单编号获取子订单信息

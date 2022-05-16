@@ -8,12 +8,17 @@ import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * 分销订单入库
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-16 17:34:50
  */
 @Service
 public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDayExecute,
@@ -33,24 +38,22 @@ public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDa
 
     @Override
     public void orderChange(OrderMessage orderMessage) {
-
-        switch (orderMessage.getNewStatus()) {
-            //订单带校验/订单代发货，则记录分销信息
-            case TAKE:
-            case UNDELIVERED: {
-                //记录分销订单
-                distributionOrderService.calculationDistribution(orderMessage.getOrderSn());
-                break;
-            }
-            case CANCELLED: {
-                //修改分销订单状态
-                distributionOrderService.cancelOrder(orderMessage.getOrderSn());
-                break;
-            }
-            default: {
-                break;
-            }
-        }
+		switch (orderMessage.getNewStatus()) {
+			//订单带校验/订单代发货，则记录分销信息
+			case TAKE, UNDELIVERED -> {
+				//记录分销订单
+				distributionOrderService.calculationDistribution(orderMessage.getOrderSn());
+				break;
+			}
+			case CANCELLED -> {
+				//修改分销订单状态
+				distributionOrderService.cancelOrder(orderMessage.getOrderSn());
+				break;
+			}
+			default -> {
+				break;
+			}
+		}
     }
 
     @Override

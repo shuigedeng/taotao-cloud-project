@@ -20,6 +20,10 @@ import java.util.Map;
 
 /**
  * 通知类消息实现
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-16 17:36:07
  */
 @Service
 public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
@@ -29,7 +33,6 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 	private NoticeMessageService noticeMessageService;
 	@Autowired
 	private IOrderService orderService;
-
 
 	@Override
 	public void orderCreate(TradeDTO tradeDTO) {
@@ -89,6 +92,7 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 				default:
 					break;
 			}
+
 			noticeMessageDTO.setMemberId(orderDetailVO.getOrder().getMemberId());
 			//添加站内信参数
 			params.put(NoticeMessageParameterEnum.GOODS.getType(),

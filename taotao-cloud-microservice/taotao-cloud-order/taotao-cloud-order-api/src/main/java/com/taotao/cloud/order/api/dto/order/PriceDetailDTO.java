@@ -3,16 +3,15 @@ package com.taotao.cloud.order.api.dto.order;
 
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 商城流水，细节到orderItem
@@ -101,11 +100,11 @@ public class PriceDetailDTO implements Serializable {
 	private List<PromotionSkuVO> joinPromotion;
 
 	public BigDecimal getOriginalPrice() {
-		if (originalPrice == 0D) {
+		if (originalPrice.compareTo(BigDecimal.ZERO) == 0) {
 			return flowPrice;
 		}
-		if (originalPrice < 0) {
-			return 0d;
+		if (originalPrice.compareTo(BigDecimal.ZERO) < 0) {
+			return BigDecimal.ZERO;
 		}
 		return originalPrice;
 	}
@@ -129,19 +128,19 @@ public class PriceDetailDTO implements Serializable {
 		this.flowPrice = CurrencyUtil.sub(
 			CurrencyUtil.add(goodsPrice, freightPrice),
 			CurrencyUtil.add(discountPrice,
-				couponPrice != null ? couponPrice : 0));
-		if (updatePrice != 0) {
+				couponPrice != null ? couponPrice : BigDecimal.ZERO));
+		if (updatePrice.compareTo(BigDecimal.ZERO) != 0) {
 			flowPrice = CurrencyUtil.add(flowPrice, updatePrice);
 		}
 
 		//计算平台佣金  流水金额*平台佣金比例
-		if (platFormCommissionPoint != null && getPlatFormCommissionPoint() > 0) {
+		if (platFormCommissionPoint != null && getPlatFormCommissionPoint().compareTo(BigDecimal.ZERO) > 0) {
 			platFormCommission = CurrencyUtil.div(
 				CurrencyUtil.mul(flowPrice, platFormCommissionPoint), 100);
 		}
 
 		//如果结算信息包含结算金额，则最终结算金额直接等于该交易 平台与商户的结算金额
-		if (settlementPrice > 0) {
+		if (settlementPrice.compareTo(BigDecimal.ZERO) > 0) {
 			billPrice = settlementPrice;
 		} else {
 			//如果是普通订单最终结算金额 = flowPrice - platFormCommission - distributionCommission 流水金额-平台佣金-分销佣金
@@ -185,8 +184,7 @@ public class PriceDetailDTO implements Serializable {
 	/**
 	 * 批量累加
 	 *
-	 * @param priceDetailDTOS
-	 * @return
+	 * @param priceDetailDTOS priceDetailDTOS
 	 */
 	public void accumulationPriceDTO(List<PriceDetailDTO> priceDetailDTOS) {
 		for (PriceDetailDTO price : priceDetailDTOS) {
@@ -196,15 +194,15 @@ public class PriceDetailDTO implements Serializable {
 
 
 	public BigDecimal getGoodsPrice() {
-		if (goodsPrice == null || goodsPrice <= 0) {
-			return 0D;
+		if (goodsPrice == null || goodsPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return goodsPrice;
 	}
 
 	public BigDecimal getFreightPrice() {
-		if (freightPrice == null || freightPrice <= 0) {
-			return 0D;
+		if (freightPrice == null || freightPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return freightPrice;
 	}
@@ -217,79 +215,79 @@ public class PriceDetailDTO implements Serializable {
 	}
 
 	public BigDecimal getDiscountPrice() {
-		if (discountPrice == null || discountPrice <= 0) {
-			return 0D;
+		if (discountPrice == null || discountPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return discountPrice;
 	}
 
 	public BigDecimal getCouponPrice() {
-		if (couponPrice == null || couponPrice <= 0) {
-			return 0D;
+		if (couponPrice == null || couponPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return couponPrice;
 	}
 
 	public BigDecimal getDistributionCommission() {
-		if (distributionCommission == null || distributionCommission <= 0) {
-			return 0D;
+		if (distributionCommission == null || distributionCommission.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return distributionCommission;
 	}
 
 	public BigDecimal getPlatFormCommission() {
-		if (platFormCommission == null || platFormCommission <= 0) {
-			return 0D;
+		if (platFormCommission == null || platFormCommission.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return platFormCommission;
 	}
 
 	public BigDecimal getSiteCouponPrice() {
-		if (siteCouponPrice == null || siteCouponPrice <= 0) {
-			return 0D;
+		if (siteCouponPrice == null || siteCouponPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return siteCouponPrice;
 	}
 
 	public BigDecimal getSiteCouponPoint() {
-		if (siteCouponPoint == null || siteCouponPoint <= 0) {
-			return 0D;
+		if (siteCouponPoint == null || siteCouponPoint.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return siteCouponPoint;
 	}
 
 	public BigDecimal getSiteCouponCommission() {
-		if (siteCouponCommission == null || siteCouponCommission <= 0) {
-			return 0D;
+		if (siteCouponCommission == null || siteCouponCommission.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return siteCouponCommission;
 	}
 
 
 	public BigDecimal getFlowPrice() {
-		if (flowPrice == null || flowPrice <= 0) {
-			return 0D;
+		if (flowPrice == null || flowPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return flowPrice;
 	}
 
 	public BigDecimal getSettlementPrice() {
-		if (settlementPrice == null || settlementPrice <= 0) {
-			return 0D;
+		if (settlementPrice == null || settlementPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return settlementPrice;
 	}
 
 	public BigDecimal getBillPrice() {
-		if (billPrice == null || billPrice <= 0) {
-			return 0D;
+		if (billPrice == null || billPrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return billPrice;
 	}
 
 	public BigDecimal getUpdatePrice() {
-		if (updatePrice == null || updatePrice <= 0) {
-			return 0D;
+		if (updatePrice == null || updatePrice.compareTo(BigDecimal.ZERO) <= 0) {
+			return BigDecimal.ZERO;
 		}
 		return updatePrice;
 	}
@@ -298,7 +296,7 @@ public class PriceDetailDTO implements Serializable {
 	public void setSiteCouponPrice(BigDecimal siteCouponPrice) {
 		this.siteCouponPrice = siteCouponPrice;
 
-		if (siteCouponPoint != null && siteCouponPoint != 0) {
+		if (siteCouponPoint != null && siteCouponPoint.compareTo(BigDecimal.ZERO) != 0) {
 			this.siteCouponCommission = CurrencyUtil.mul(siteCouponPrice, siteCouponPoint);
 		}
 	}
@@ -306,7 +304,7 @@ public class PriceDetailDTO implements Serializable {
 	public void setSiteCouponPoint(BigDecimal siteCouponPoint) {
 		this.siteCouponPoint = siteCouponPoint;
 
-		if (siteCouponPoint != null && siteCouponPoint != 0) {
+		if (siteCouponPoint != null && siteCouponPoint.compareTo(BigDecimal.ZERO) != 0) {
 			this.siteCouponCommission = CurrencyUtil.div(
 				CurrencyUtil.mul(siteCouponPrice, siteCouponPoint), 100);
 		}

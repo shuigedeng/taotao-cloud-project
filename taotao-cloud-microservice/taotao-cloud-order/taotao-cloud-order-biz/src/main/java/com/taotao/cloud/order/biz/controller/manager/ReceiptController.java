@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
@@ -35,9 +36,9 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-	public Result<IPage<OrderReceiptDTO>> getPage(ReceiptPageQuery searchParams,
-												  PageVO pageVO) {
-		return Result.success(this.receiptService.getReceiptData(searchParams, pageVO));
+	public Result<PageModel<OrderReceiptDTO>> getPage(ReceiptPageQuery searchParams) {
+		IPage<OrderReceiptDTO> receiptData = this.receiptService.getReceiptData(searchParams);
+		return Result.success(PageModel.convertMybatisPage(receiptData, OrderReceiptDTO.class));
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
@@ -16,6 +17,9 @@ import java.util.List;
 /**
  * 订单创建发票相关处理
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-16 17:36:24
  */
 @Service
 public class OrderCreateReceiptExecute implements TradeEvent {

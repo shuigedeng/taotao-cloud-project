@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
@@ -15,7 +17,6 @@ import com.taotao.cloud.order.biz.service.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 /**
  * 买家端,订单API
@@ -43,14 +43,16 @@ import java.util.Objects;
 @Tag(name = "买家端-订单API", description = "买家端-订单API")
 @RequestMapping("/order/buyer/order")
 public class OrderController {
+
 	private final IOrderService orderService;
+
 	@Operation(summary = "查询会员订单列表", description = "查询会员订单列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
-		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-		orderPageQuery.setMemberId(currentUser.getId());
+		SecurityUser currentUser = SecurityUtil.getUser();
+		orderPageQuery.setMemberId(currentUser.getUserId());
 		return Result.success(orderService.queryByParams(orderPageQuery));
 	}
 

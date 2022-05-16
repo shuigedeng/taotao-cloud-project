@@ -333,7 +333,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	@Override
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-买家取消:单号['+#afterSaleSn+']'")
 	//@SystemLogPoint(description = "售后-取消售后", customerLog = "'售后-买家取消:单号['+#afterSaleSn+']'")
-	public AfterSale cancel(String afterSaleSn) {
+	public Boolean cancel(String afterSaleSn) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -348,7 +348,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			this.updateAfterSale(afterSaleSn, afterSale);
 			//根据售后状态。修改OrderItem订单中正在售后商品数量及状态
 			this.updateOrderItemAfterSaleStatus(afterSale);
-			return afterSale;
+			return true;
 		}
 		throw new BusinessException(ResultEnum.AFTER_SALES_CANCEL_ERROR);
 	}
