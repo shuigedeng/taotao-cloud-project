@@ -27,7 +27,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
  * @version 2021.9
  * @since 2021-09-02 20:57:49
  */
-public class TimeWatchUtil {
+public final class TimeWatchUtil {
 
 	/**
 	 * 打印时间表

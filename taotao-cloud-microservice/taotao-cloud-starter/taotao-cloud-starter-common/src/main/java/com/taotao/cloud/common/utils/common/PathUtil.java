@@ -31,7 +31,7 @@ import org.springframework.util.ResourceUtils;
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
-public class PathUtil {
+public final class PathUtil {
 
 	/**
 	 * 获取jar包运行时的当前目录

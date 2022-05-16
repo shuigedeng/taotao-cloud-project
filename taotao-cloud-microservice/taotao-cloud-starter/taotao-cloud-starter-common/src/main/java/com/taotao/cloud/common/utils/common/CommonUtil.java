@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
-public class CommonUtil {
+public final class CommonUtil {
 
 	/**
 	 * 正则表达式：验证用户名

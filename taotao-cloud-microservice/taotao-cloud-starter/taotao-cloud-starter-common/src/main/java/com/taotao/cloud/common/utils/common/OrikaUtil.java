@@ -26,7 +26,7 @@ import ma.glasnost.orika.metadata.TypeFactory;
 /**
  * 实体类转互相转换工具
  */
-public class OrikaUtil {
+public final class OrikaUtil {
 
 	/**
 	 * 获取默认字段工厂

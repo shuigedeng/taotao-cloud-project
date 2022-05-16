@@ -68,7 +68,7 @@ import javax.annotation.Nullable;
  * @version 2021.9
  * @since 2021-09-02 16:37:15
  */
-public class JsonUtil {
+public final class JsonUtil {
 
 	private JsonUtil() {
 	}

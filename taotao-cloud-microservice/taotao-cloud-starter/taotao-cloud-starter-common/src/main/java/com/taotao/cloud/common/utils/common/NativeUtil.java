@@ -13,7 +13,7 @@ import org.springframework.util.ClassUtils;
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
-public class NativeUtil {
+public final class NativeUtil {
 	public static final String GENERATED_CLASS = "org.springframework.aot.StaticSpringFactories";
 
 	public static final boolean GENERATED_CLASS_PRESENT = ClassUtils.isPresent(GENERATED_CLASS, null);

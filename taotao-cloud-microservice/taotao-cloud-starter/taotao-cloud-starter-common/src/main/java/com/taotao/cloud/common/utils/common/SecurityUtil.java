@@ -41,7 +41,7 @@ import java.util.Objects;
  * @version 2021.9
  * @since 2021-09-02 14:55:47
  */
-public class SecurityUtil {
+public final class SecurityUtil {
 
 	private SecurityUtil() {
 	}

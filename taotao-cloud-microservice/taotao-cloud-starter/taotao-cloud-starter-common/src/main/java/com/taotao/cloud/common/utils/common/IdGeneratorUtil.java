@@ -28,7 +28,7 @@ import java.util.Date;
  * @version 2021.9
  * @since 2021-09-02 16:42:02
  */
-public class IdGeneratorUtil {
+public final class IdGeneratorUtil {
 
 	private IdGeneratorUtil() {
 	}

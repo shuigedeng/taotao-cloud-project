@@ -39,7 +39,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @version 2021.9
  * @since 2021-09-02 14:53:15
  */
-public class SequenceUtil {
+public final class SequenceUtil {
 
 	/**
 	 * 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）

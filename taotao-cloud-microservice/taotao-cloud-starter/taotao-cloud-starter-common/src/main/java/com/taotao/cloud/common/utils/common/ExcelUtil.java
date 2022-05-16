@@ -40,7 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 2021.9
  * @since 2021-09-02 16:48:42
  */
-public class ExcelUtil {
+public final class ExcelUtil {
 
 	private ExcelUtil() {
 	}

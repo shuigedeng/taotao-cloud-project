@@ -28,7 +28,7 @@ import java.util.function.Consumer;
  * @version 2021.9
  * @since 2021-09-02 20:50:38
  */
-public class FailOverUtil {
+public final class FailOverUtil {
 
 	/**
 	 * name
