@@ -82,9 +82,8 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/pay")
-	public Result<Object> payOrder(@PathVariable String orderSn) {
-		orderPriceService.adminPayOrder(orderSn);
-		return Result.success();
+	public Result<Boolean> payOrder(@PathVariable String orderSn) {
+		return Result.success(orderPriceService.adminPayOrder(orderSn));
 	}
 
 	@Operation(summary = "修改收货人信息", description = "修改收货人信息")
@@ -99,7 +98,7 @@ public class OrderController {
 	@Operation(summary = "修改订单价格", description = "修改订单价格")
 	@RequestLogger
 	@PutMapping(value = "/{orderSn}/price")
-	public Result<Order> updateOrderPrice(@PathVariable String orderSn,
+	public Result<Boolean> updateOrderPrice(@PathVariable String orderSn,
 		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
 		return Result.success(orderPriceService.updatePrice(orderSn, price));
 	}

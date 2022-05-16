@@ -10,8 +10,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
@@ -35,7 +37,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 交易投诉业务层实现
@@ -116,11 +117,14 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	@Override
 	public OrderComplaint addOrderComplain(OrderComplaintDTO orderComplaintDTO) {
 		try {
-			AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+			SecurityUser currentUser = SecurityUtil.getUser();
 			//查询订单信息
 			OrderDetailVO orderDetailVO = orderService.queryDetail(orderComplaintDTO.getOrderSn());
 			List<OrderItem> orderItems = orderDetailVO.getOrderItems();
-			OrderItem orderItem = orderItems.stream().filter(i -> orderComplaintDTO.getSkuId().equals(i.getSkuId())).findFirst().orElse(null);
+			OrderItem orderItem = orderItems.stream()
+				.filter(i -> orderComplaintDTO.getSkuId().equals(i.getSkuId()))
+				.findFirst()
+				.orElse(null);
 
 			if (orderItem == null) {
 				throw new BusinessException(ResultEnum.COMPLAINT_ORDER_ITEM_EMPTY_ERROR);
@@ -156,7 +160,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			orderComplaint.setStoreId(orderDetailVO.getOrder().getStoreId());
 			orderComplaint.setStoreName(orderDetailVO.getOrder().getStoreName());
 
-			orderComplaint.setMemberId(currentUser.getId());
+			orderComplaint.setMemberId(currentUser.getUserId());
 			orderComplaint.setMemberName(currentUser.getUsername());
 			//保存订单投诉
 			this.save(orderComplaint);

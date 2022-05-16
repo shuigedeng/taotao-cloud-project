@@ -20,6 +20,9 @@ import java.math.BigDecimal;
 /**
  * 会员经验值
  *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-16 17:35:33
  */
 @Service
 public class MemberExperienceExecute implements OrderStatusChangeEvent {
@@ -59,12 +62,13 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
         }
     }
 
-    /**
-     * 获取经验值设置
-     *
-     * @return 经验值设置
-     */
-    private ExperienceSettingVO getExperienceSetting() {
+	/**
+	 * 获取经验值设置
+	 *
+	 * @return {@link ExperienceSettingVO }
+	 * @since 2022-05-16 17:35:40
+	 */
+	private ExperienceSettingVO getExperienceSetting() {
         return settingService.getExperienceSetting(SettingEnum.EXPERIENCE_SETTING.name()).data();
     }
 }

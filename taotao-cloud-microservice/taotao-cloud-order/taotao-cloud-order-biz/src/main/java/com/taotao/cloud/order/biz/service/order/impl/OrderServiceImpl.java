@@ -152,8 +152,9 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		checkTradeDTO(tradeDTO);
 		//存放购物车，即业务中的订单
 		List<Order> orders = new ArrayList<>(tradeDTO.getCartList().size());
-		//存放自订单/订单日志
+		//存放自订单
 		List<OrderItem> orderItems = new ArrayList<>();
+		//订单日志集合
 		List<OrderLog> orderLogs = new ArrayList<>();
 		//订单集合
 		List<OrderVO> orderVOS = new ArrayList<>();

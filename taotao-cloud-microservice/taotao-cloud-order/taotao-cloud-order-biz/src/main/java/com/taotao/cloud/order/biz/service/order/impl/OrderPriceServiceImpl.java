@@ -53,19 +53,18 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 	@Override
 	@SystemLogPoint(description = "修改订单价格", customerLog = "'订单编号:'+#orderSn +'，价格修改为：'+#orderPrice")
 	@OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn = "#orderSn")
-	public Order updatePrice(String orderSn, BigDecimal orderPrice) {
-
+	public Boolean updatePrice(String orderSn, BigDecimal orderPrice) {
 		//修改订单金额
 		Order order = updateOrderPrice(orderSn, orderPrice);
 
 		//修改交易金额
 		tradeMapper.updateTradePrice(order.getTradeSn());
-		return order;
+		return true;
 	}
 
 	@Override
 	@OrderLogPoint(description = "'管理员操作订单['+#orderSn+']付款'", orderSn = "#orderSn")
-	public void adminPayOrder(String orderSn) {
+	public Boolean adminPayOrder(String orderSn) {
 		Order order = OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		//如果订单已付款，则抛出异常
 		if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
@@ -73,6 +72,7 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 		}
 
 		bankTransferPlugin.callBack(order);
+		return true;
 	}
 
 
@@ -121,14 +121,13 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 		List<OrderItem> orderItems = orderItemService.getByOrderSn(order.getSn());
 
 		//获取总数，入欧最后一个则将其他orderitem的修改金额累加，然后进行扣减
-		Integer index = orderItems.size();
-		BigDecimal countUpdatePrice = 0D;
+		int index = orderItems.size();
+		BigDecimal countUpdatePrice = BigDecimal.ZERO;
 		for (OrderItem orderItem : orderItems) {
-
 			//获取订单货物价格信息
 			PriceDetailDTO priceDetailDTO = orderItem.getPriceDetailDTO();
-
 			index--;
+
 			//如果是最后一个
 			if (index == 0) {
 				//记录修改金额
@@ -139,9 +138,7 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 				orderItem.setUnitPrice(
 					CurrencyUtil.div(priceDetailDTO.getFlowPrice(), orderItem.getNum()));
 				orderItem.setPriceDetail(JSONUtil.toJsonStr(priceDetailDTO));
-
 			} else {
-
 				//SKU占总订单 金额的百分比
 				BigDecimal priceFluctuationRatio = CurrencyUtil.div(
 					priceDetailDTO.getOriginalPrice(), order.getPriceDetailDTO().getOriginalPrice(),
@@ -161,7 +158,5 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 			}
 		}
 		orderItemService.updateBatchById(orderItems);
-
 	}
-
 }

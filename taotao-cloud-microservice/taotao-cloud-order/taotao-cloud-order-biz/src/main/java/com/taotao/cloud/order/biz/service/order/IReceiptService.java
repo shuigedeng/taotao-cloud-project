@@ -46,10 +46,10 @@ public interface IReceiptService extends IService<Receipt> {
 	 * 保存发票
 	 *
 	 * @param receipt 发票信息
-	 * @return {@link Receipt }
+	 * @return {@link Boolean }
 	 * @since 2022-04-28 08:54:50
 	 */
-	Receipt saveReceipt(Receipt receipt);
+	Boolean saveReceipt(Receipt receipt);
 
 	/**
 	 * 开具发票

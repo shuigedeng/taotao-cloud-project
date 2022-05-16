@@ -45,11 +45,10 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<OrderReceiptDTO>> getByPage(PageVO page,
-		ReceiptPageQuery receiptPageQuery) {
+	public Result<IPage<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		receiptPageQuery.setStoreId(storeId);
-		return Result.success(receiptService.getReceiptData(receiptPageQuery, page));
+		return Result.success(receiptService.getReceiptData(receiptPageQuery));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

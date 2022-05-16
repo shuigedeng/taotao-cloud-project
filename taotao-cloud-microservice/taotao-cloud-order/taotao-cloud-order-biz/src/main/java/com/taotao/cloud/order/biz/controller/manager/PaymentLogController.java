@@ -2,8 +2,10 @@ package com.taotao.cloud.order.biz.controller.manager;
 
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.vo.order.PaymentLogVO;
+import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,8 +38,7 @@ public class PaymentLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<PaymentLogVO>> getByPage(Order order,
-                                                 SearchVO searchVo,
-                                                 PageVO page) {
+												 SearchVO searchVo) {
 		return Result.success(orderService.queryPaymentLogs(
 			PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
 	}

@@ -58,6 +58,11 @@ public final class CurrencyUtil {
 		return v1.multiply(v2).setScale(2, RoundingMode.HALF_UP);
 	}
 
+	public static BigDecimal mul(BigDecimal v1, Integer v2) {
+		return v1.multiply(BigDecimal.valueOf(v2))
+			.setScale(2, RoundingMode.HALF_UP);
+	}
+
 	public static BigDecimal mul(Integer v1, BigDecimal v2) {
 		BigDecimal b1 = BigDecimal.valueOf(v1);
 		return b1.multiply(v2).setScale(2, RoundingMode.HALF_UP);

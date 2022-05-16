@@ -24,6 +24,10 @@ import java.math.BigDecimal;
 
 /**
  * 会员积分
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-16 17:35:57
  */
 @Service
 public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStatusChangeEvent {

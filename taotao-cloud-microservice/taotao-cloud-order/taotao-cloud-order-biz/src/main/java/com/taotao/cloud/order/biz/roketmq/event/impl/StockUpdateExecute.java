@@ -2,14 +2,20 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.api.vo.order.OrderItemVO;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsDTO;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -44,17 +50,17 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
      * 规格商品
      */
     @Autowired
-    private GoodsSkuService goodsSkuService;
+    private IFeignGoodsSkuService goodsSkuService;
     /**
      * 促销商品
      */
     @Autowired
-    private PromotionGoodsService promotionGoodsService;
+    private IFeignPromotionGoodsService promotionGoodsService;
     /**
      * 缓存
      */
     @Autowired
-    private Cache cache;
+    private RedisRepository redisRepository;
 
     @Autowired
     private KanjiaActivityService kanjiaActivityService;
@@ -66,70 +72,69 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
     @Override
     public void orderChange(OrderMessage orderMessage) {
 
-        switch (orderMessage.getNewStatus()) {
-            case PAID: {
-                //获取订单详情
-                OrderDetailVO order = orderService.queryDetail(orderMessage.getOrderSn());
-                //库存key 和 扣减数量
-                List<String> keys = new ArrayList<>();
-                List<String> values = new ArrayList<>();
-                for (OrderItem orderItem : order.getOrderItems()) {
-                    keys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
-                    int i = -orderItem.getNum();
-                    values.add(Integer.toString(i));
-                    setPromotionStock(keys, values, orderItem);
-                }
+		switch (orderMessage.getNewStatus()) {
+			case PAID -> {
+				//获取订单详情
+				OrderDetailVO order = orderService.queryDetail(orderMessage.getOrderSn());
+				//库存key 和 扣减数量
+				List<String> keys = new ArrayList<>();
+				List<String> values = new ArrayList<>();
+				for (OrderItem orderItem : order.getOrderItems()) {
+					keys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
+					int i = -orderItem.getNum();
+					values.add(Integer.toString(i));
+					setPromotionStock(keys, values, orderItem);
+				}
 
-                List<Integer> stocks = cache.multiGet(keys);
-                //如果缓存中不存在存在等量的库存值，则重新写入缓存，防止缓存击穿导致无法下单
-                checkStocks(stocks, order);
+				List<Integer> stocks = cache.multiGet(keys);
+				//如果缓存中不存在存在等量的库存值，则重新写入缓存，防止缓存击穿导致无法下单
+				checkStocks(stocks, order);
 
-                //库存扣除结果
-                Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
-                //如果库存扣减都成功，则记录成交订单
-                if (Boolean.TRUE.equals(skuResult)) {
-                    log.info("库存扣减成功,参数为{};{}", keys, values);
-                    //库存确认之后对结构处理
-                    orderService.afterOrderConfirm(orderMessage.getOrderSn());
-                    //成功之后，同步库存
-                    synchroDB(order);
-                } else {
-                    log.info("库存扣件失败，变更缓存key{} 变更缓存value{}", keys, values);
-                    //失败之后取消订单
-                    this.errorOrder(orderMessage.getOrderSn());
-                }
-                break;
-            }
-            case CANCELLED: {
-                //获取订单详情
-                OrderDetailVO order = orderService.queryDetail(orderMessage.getOrderSn());
-                //判定是否已支付 并且 非库存不足导致库存回滚 则需要考虑订单库存返还业务
-                if (order.getOrder().getPayStatus().equals(PayStatusEnum.PAID.name())
-                        && !order.getOrder().getCancelReason().equals(outOfStockMessage)) {
-                    //库存key 和 还原数量
-                    List<String> keys = new ArrayList<>();
-                    List<String> values = new ArrayList<>();
+				//库存扣除结果
+				Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
+				//如果库存扣减都成功，则记录成交订单
+				if (Boolean.TRUE.equals(skuResult)) {
+					LogUtil.info("库存扣减成功,参数为{};{}", keys, values);
+					//库存确认之后对结构处理
+					orderService.afterOrderConfirm(orderMessage.getOrderSn());
+					//成功之后，同步库存
+					synchroDB(order);
+				} else {
+					LogUtil.info("库存扣件失败，变更缓存key{} 变更缓存value{}", keys, values);
+					//失败之后取消订单
+					this.errorOrder(orderMessage.getOrderSn());
+				}
+			}
+			case CANCELLED -> {
+				//获取订单详情
+				OrderDetailVO order = orderService.queryDetail(orderMessage.getOrderSn());
+				//判定是否已支付 并且 非库存不足导致库存回滚 则需要考虑订单库存返还业务
+				if (order.getOrder().getPayStatus().equals(PayStatusEnum.PAID.name())
+					&& !order.getOrder().getCancelReason().equals(outOfStockMessage)) {
+					//库存key 和 还原数量
+					List<String> keys = new ArrayList<>();
+					List<String> values = new ArrayList<>();
 
-                    //返还商品库存，促销库存不与返还，不然前台展示层有展示逻辑错误
-                    for (OrderItem orderItem : order.getOrderItems()) {
-                        keys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
-                        int i = orderItem.getNum();
-                        values.add(Integer.toString(i));
-                    }
-                    //批量脚本执行库存回退
-                    Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
+					//返还商品库存，促销库存不与返还，不然前台展示层有展示逻辑错误
+					for (OrderItemVO orderItem : order.getOrderItems()) {
+						keys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
+						int i = orderItem.getNum();
+						values.add(Integer.toString(i));
+					}
+					//批量脚本执行库存回退
+					Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
 
-                    //返还失败，则记录日志
-                    if (Boolean.FALSE.equals(skuResult)) {
-                        log.error("库存回退异常，keys：{},回复库存值为: {}", keys, values);
-                    }
-                    rollbackOrderStock(order);
-                }
-                break;
-            }
-            default:
-                break;
-        }
+					//返还失败，则记录日志
+					if (Boolean.FALSE.equals(skuResult)) {
+						LogUtil.error("库存回退异常，keys：{},回复库存值为: {}", keys, values);
+					}
+					rollbackOrderStock(order);
+				}
+				break;
+			}
+			default -> {
+			}
+		}
     }
 
 
@@ -164,10 +169,9 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
     /**
      * 初始化促销商品缓存
      *
-     * @param orderItems
+     * @param orderItems orderItems
      */
     private void initPromotionCache(List<OrderItem> orderItems) {
-
         //如果促销类型需要库存判定，则做对应处理
         orderItems.forEach(orderItem -> {
             if (orderItem.getPromotionType() != null) {
@@ -178,20 +182,19 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 
                     String cacheKey = PromotionGoodsService.getPromotionGoodsStockCacheKey(promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId());
 
-                    switch (promotionTypeEnum) {
-                        case KANJIA:
-                            cache.put(cacheKey, kanjiaActivityGoodsService.getKanjiaGoodsBySkuId(orderItem.getSkuId()).getStock());
-                            return;
-                        case POINTS_GOODS:
-                            cache.put(cacheKey, pointsGoodsService.getPointsGoodsDetailBySkuId(orderItem.getSkuId()).getActiveStock());
-                            return;
-                        case SECKILL:
-                        case PINTUAN:
-                            cache.put(cacheKey, promotionGoodsService.getPromotionGoodsStock(promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId()));
-                            return;
-                        default:
-                            break;
-                    }
+					switch (promotionTypeEnum) {
+						case KANJIA -> {
+							cache.put(cacheKey, kanjiaActivityGoodsService.getKanjiaGoodsBySkuId(orderItem.getSkuId()).getStock());
+						}
+						case POINTS_GOODS -> {
+							cache.put(cacheKey, pointsGoodsService.getPointsGoodsDetailBySkuId(orderItem.getSkuId()).getActiveStock());
+						}
+						case SECKILL, PINTUAN -> {
+							cache.put(cacheKey, promotionGoodsService.getPromotionGoodsStock(promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId()));
+						}
+						default -> {
+						}
+					}
                 }
             }
         });
@@ -241,7 +244,6 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
      * @param order 订单
      */
     private void synchroDB(OrderDetailVO order) {
-
         //sku商品
         List<GoodsSku> goodsSkus = new ArrayList<>();
         //促销商品
@@ -299,7 +301,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
         }
 
         //批量获取商品库存
-        List skuStocks = cache.multiGet(skuKeys);
+        List<GoodsSku> skuStocks = redisRepository.mGet(skuKeys);
         //循环写入商品库存
         for (int i = 0; i < skuStocks.size(); i++) {
             goodsSkus.get(i).setQuantity(Convert.toInt(skuStocks.get(i).toString()));
@@ -309,7 +311,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 
         //促销库存处理
         if (!promotionKey.isEmpty()) {
-            List promotionStocks = cache.multiGet(promotionKey);
+            List<PromotionGoods> promotionStocks = redisRepository.mGet(promotionKey);
             for (int i = 0; i < promotionKey.size(); i++) {
                 promotionGoods.get(i).setQuantity(Convert.toInt(promotionStocks.get(i).toString()));
                 Integer num = promotionGoods.get(i).getNum();
@@ -320,7 +322,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
         //商品库存，包含sku库存集合，批量更新商品库存相关
         goodsSkuService.updateGoodsStuck(goodsSkus);
 
-        log.info("订单确认，库存同步：商品信息--{}；促销信息---{}", goodsSkus, promotionGoods);
+        LogUtil.info("订单确认，库存同步：商品信息--{}；促销信息---{}", goodsSkus, promotionGoods);
 
     }
 
@@ -330,25 +332,24 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
      * @param order 订单
      */
     private void rollbackOrderStock(OrderDetailVO order) {
-
         //sku商品
         List<GoodsSku> goodsSkus = new ArrayList<>();
         //sku库存key 集合
         List<String> skuKeys = new ArrayList<>();
         //循环订单
-        for (OrderItem orderItem : order.getOrderItems()) {
+        for (OrderItemVO orderItem : order.getOrderItems()) {
             skuKeys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
             GoodsSku goodsSku = new GoodsSku();
             goodsSku.setId(orderItem.getSkuId());
             goodsSkus.add(goodsSku);
         }
         //批量获取商品库存
-        List skuStocks = cache.multiGet(skuKeys);
+        List<GoodsSku> skuStocks = redisRepository.mGet(skuKeys);
         //循环写入商品SKU库存
         for (int i = 0; i < skuStocks.size(); i++) {
             goodsSkus.get(i).setQuantity(Convert.toInt(skuStocks.get(i).toString()));
         }
-        log.info("订单取消，库存还原：{}", goodsSkus);
+        LogUtil.info("订单取消，库存还原：{}", goodsSkus);
         //批量修改商品库存
         goodsSkuService.updateBatchById(goodsSkus);
         goodsSkuService.updateGoodsStuck(goodsSkus);

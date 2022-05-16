@@ -1,8 +1,6 @@
 package com.taotao.cloud.order.biz.service.order;
 
 
-import com.taotao.cloud.order.biz.entity.order.Order;
-
 import java.math.BigDecimal;
 
 /**
@@ -20,16 +18,17 @@ public interface IOrderPriceService {
 	 *
 	 * @param orderSn    订单编号
 	 * @param orderPrice 订单价格
-	 * @return {@link Order }
+	 * @return {@link Boolean }
 	 * @since 2022-04-28 08:54:44
 	 */
-	Order updatePrice(String orderSn, BigDecimal orderPrice);
+	Boolean updatePrice(String orderSn, BigDecimal orderPrice);
 
 	/**
 	 * 管理员订单付款
 	 *
 	 * @param orderSn 订单编号
-	 * @since 2022-04-28 08:54:44
+	 * @return {@link Boolean }
+	 * @since 2022-05-16 16:58:31
 	 */
-	void adminPayOrder(String orderSn);
+	Boolean adminPayOrder(String orderSn);
 }

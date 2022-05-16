@@ -44,7 +44,7 @@ public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> imp
 	}
 
 	@Override
-	public Receipt saveReceipt(Receipt receipt) {
+	public Boolean saveReceipt(Receipt receipt) {
 		LambdaQueryWrapper<Receipt> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(Receipt::getReceiptTitle, receipt.getReceiptTitle());
 		queryWrapper.eq(Receipt::getMemberId, receipt.getMemberId());
@@ -53,9 +53,8 @@ public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> imp
 		}
 		if (this.getOne(queryWrapper) == null) {
 			this.save(receipt);
-			return receipt;
 		}
-		return null;
+		return true;
 	}
 
 	@Override

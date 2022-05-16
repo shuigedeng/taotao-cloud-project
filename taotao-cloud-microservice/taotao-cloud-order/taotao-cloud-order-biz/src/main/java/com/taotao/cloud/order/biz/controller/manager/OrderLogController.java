@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.controller.manager;
 
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
@@ -44,8 +45,7 @@ public class OrderLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<OrderLog>> getByPage(OrderLog entity,
-		SearchVO searchVo,
-		PageVO page) {
+		SearchVO searchVo, PageVO page) {
 		return Result.success(orderLogService.page(
 			PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
 	}

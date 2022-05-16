@@ -1,7 +1,9 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,13 @@ public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent 
 			try {
 				wechatMessageUtil.sendWechatMessage(orderVO.getSn());
 			} catch (Exception e) {
-				log.error("微信消息发送失败：" + orderVO.getSn(), e);
+				LogUtil.error("微信消息发送失败：" + orderVO.getSn(), e);
 			}
 		}
 	}
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-
 		switch (orderMessage.getNewStatus()) {
 			case PAID:
 			case UNDELIVERED:
@@ -38,7 +39,7 @@ public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent 
 				try {
 					wechatMessageUtil.sendWechatMessage(orderMessage.getOrderSn());
 				} catch (Exception e) {
-					log.error("微信消息发送失败", e);
+					LogUtil.error("微信消息发送失败", e);
 				}
 				break;
 			default:

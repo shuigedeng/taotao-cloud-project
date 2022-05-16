@@ -31,18 +31,14 @@ public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<IOrderCo
 	@Override
 	public IPage<OrderComplaintCommunication> getCommunication(OrderComplaintCommunicationPageQuery orderComplaintCommunicationPageQuery) {
 		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
-		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getComplainId())) {
-			queryWrapper.eq(OrderComplaintCommunication::getComplainId, orderComplaintCommunicationPageQuery.getComplainId());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwner())) {
-			queryWrapper.eq(OrderComplaintCommunication::getOwner, orderComplaintCommunicationPageQuery.getOwner());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwnerName())) {
-			queryWrapper.eq(OrderComplaintCommunication::getOwnerName, orderComplaintCommunicationPageQuery.getOwnerName());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwnerId())) {
-			queryWrapper.eq(OrderComplaintCommunication::getOwnerId, orderComplaintCommunicationPageQuery.getOwnerId());
-		}
+		queryWrapper.eq(StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getComplainId()),
+			OrderComplaintCommunication::getComplainId, orderComplaintCommunicationPageQuery.getComplainId());
+		queryWrapper.eq(StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwner()),
+			OrderComplaintCommunication::getOwner, orderComplaintCommunicationPageQuery.getOwner());
+		queryWrapper.eq(StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwnerName()),
+			OrderComplaintCommunication::getOwnerName, orderComplaintCommunicationPageQuery.getOwnerName());
+		queryWrapper.eq(StrUtil.isNotEmpty(orderComplaintCommunicationPageQuery.getOwnerId()),
+			OrderComplaintCommunication::getOwnerId, orderComplaintCommunicationPageQuery.getOwnerId());
 
 		return this.page(orderComplaintCommunicationPageQuery.buildMpPage(), queryWrapper);
 	}

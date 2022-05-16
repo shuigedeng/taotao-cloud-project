@@ -1,7 +1,5 @@
 package com.taotao.cloud.order.biz.controller.buyer;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -50,20 +48,11 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Object> add(@NotNull(message = "产品id不能为空") String skuId,
-		@NotNull(message = "购买数量不能为空") @Min(value = 1, message = "加入购物车数量必须大于0") Integer num,
-		String cartType) {
-		try {
-			//读取选中的列表
-			cartService.add(skuId, num, cartType, false);
-			return Result.success();
-		} catch (ServiceException se) {
-			log.info(se.getMsg(), se);
-			throw se;
-		} catch (Exception e) {
-			log.error(ResultEnum.CART_ERROR.message(), e);
-			throw new BusinessException(ResultEnum.CART_ERROR);
-		}
+	public Result<Boolean> add(@NotNull(message = "产品id不能为空") String skuId,
+							   @NotNull(message = "购买数量不能为空") @Min(value = 1, message = "加入购物车数量必须大于0") Integer num,
+							   String cartType) {
+		//读取选中的列表
+		return Result.success(cartService.add(skuId, num, cartType, false));
 	}
 
 	@Operation(summary = "获取购物车页面购物车详情", description = "获取购物车页面购物车详情")
@@ -94,60 +83,54 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/num/{skuId}")
-	public Result<Object> update(
+	public Result<Boolean> update(
 		@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
 		Integer num) {
-		cartService.add(skuId, num, CartTypeEnum.CART.name(), true);
-		return Result.success();
+		return Result.success(cartService.add(skuId, num, CartTypeEnum.CART.name(), true));
 	}
 
 	@Operation(summary = "更新购物车中单个产品 更新购物车中的多个产品的数量或选中状态", description = "更新购物车中的多个产品的数量或选中状态")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/checked/{skuId}")
-	public Result<Object> updateChecked(
+	public Result<Boolean> updateChecked(
 		@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
 		boolean checked) {
-		cartService.checked(skuId, checked);
-		return Result.success();
+		return Result.success(cartService.checked(skuId, checked));
 	}
 
 	@Operation(summary = "购物车选中设置", description = "购物车选中设置")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/checked", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Result<Object> updateAll(boolean checked) {
-		cartService.checkedAll(checked);
-		return Result.success();
+	public Result<Boolean> updateAll(boolean checked) {
+		return Result.success(cartService.checkedAll(checked));
 	}
 
 	@Operation(summary = "批量设置某商家的商品为选中或不选中", description = "批量设置某商家的商品为选中或不选中")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/store/{storeId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Result<Object> updateStoreAll(
+	public Result<Boolean> updateStoreAll(
 		@NotNull(message = "卖家id不能为空") @PathVariable(name = "storeId") String storeId,
 		boolean checked) {
-		cartService.checkedStore(storeId, checked);
-		return Result.success();
+		return Result.success(cartService.checkedStore(storeId, checked));
 	}
 
 	@Operation(summary = "清空购物车", description = "清空购物车")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping()
-	public Result<Object> clean() {
-		cartService.clean();
-		return Result.success();
+	public Result<Boolean> clean() {
+		return Result.success(cartService.clean());
 	}
 
 	@Operation(summary = "删除购物车中的一个或多个产品", description = "删除购物车中的一个或多个产品")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/sku/remove")
-	public Result<Object> delete(String[] skuIds) {
-		cartService.delete(skuIds);
-		return Result.success();
+	public Result<Boolean> delete(String[] skuIds) {
+		return Result.success(cartService.delete(skuIds));
 	}
 
 	@Operation(summary = "获取结算页面购物车详情", description = "获取结算页面购物车详情")
@@ -155,73 +138,45 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/checked")
 	public Result<TradeDTO> cartChecked(@NotNull(message = "读取选中列表") String way) {
-		try {
-			//读取选中的列表
-			return Result.success(this.cartService.getCheckedTradeDTO(CartTypeEnum.valueOf(way)));
-		} catch (ServiceException se) {
-			log.error(se.getMsg(), se);
-			throw se;
-		} catch (Exception e) {
-			log.error(ResultEnum.CART_ERROR.message(), e);
-			throw new BusinessException(ResultEnum.CART_ERROR);
-		}
+		//读取选中的列表
+		return Result.success(this.cartService.getCheckedTradeDTO(CartTypeEnum.valueOf(way)));
 	}
 
 	@Operation(summary = "选择收货地址", description = "选择收货地址")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/shippingAddress")
-	public Result<Object> shippingAddress(
+	public Result<Boolean> shippingAddress(
 		@NotNull(message = "收货地址ID不能为空") String shippingAddressId, String way) {
-		try {
-			cartService.shippingAddress(shippingAddressId, way);
-			return Result.success();
-		} catch (ServiceException se) {
-			log.error(ResultEnum.SHIPPING_NOT_APPLY.message(), se);
-			throw new BusinessException(ResultEnum.SHIPPING_NOT_APPLY);
-		} catch (Exception e) {
-			log.error(ResultEnum.CART_ERROR.message(), e);
-			throw new BusinessException(ResultEnum.CART_ERROR);
-		}
+		return Result.success(cartService.shippingAddress(shippingAddressId, way));
 	}
 
 	@Operation(summary = "选择配送方式", description = "选择配送方式")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/shippingMethod")
-	public Result<Object> shippingMethod(
+	public Result<Boolean> shippingMethod(
 		@NotNull(message = "配送方式不能为空") String shippingMethod,
 		String selleId,
 		String way) {
-		try {
-			cartService.shippingMethod(selleId, shippingMethod, way);
-			return Result.success();
-		} catch (ServiceException se) {
-			log.error(se.getMsg(), se);
-			throw se;
-		} catch (Exception e) {
-			log.error(ResultEnum.CART_ERROR.message(), e);
-			throw new BusinessException(ResultEnum.CART_ERROR);
-		}
+		return Result.success(cartService.shippingMethod(selleId, shippingMethod, way));
 	}
 
 	@Operation(summary = "选择发票", description = "选择发票")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/receipt")
-	public Result<Object> selectReceipt(String way, ReceiptVO receiptVO) {
-		this.cartService.shippingReceipt(receiptVO, way);
-		return Result.success();
+	public Result<Boolean> selectReceipt(String way, ReceiptVO receiptVO) {
+		return Result.success(this.cartService.shippingReceipt(receiptVO, way));
 	}
 
 	@Operation(summary = "选择优惠券", description = "选择优惠券")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon")
-	public Result<Object> selectCoupon(String way,
-		@NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
-		this.cartService.selectCoupon(memberCouponId, way, used);
-		return Result.success();
+	public Result<Boolean> selectCoupon(String way,
+									   @NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
+		return Result.success(this.cartService.selectCoupon(memberCouponId, way, used));
 	}
 
 	@Operation(summary = "创建交易", description = "创建交易")
@@ -229,15 +184,7 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/trade", consumes = "application/json", produces = "application/json")
 	public Result<Object> crateTrade(@RequestBody TradeParams tradeParams) {
-		try {
-			//读取选中的列表
-			return Result.success(this.cartService.createTrade(tradeParams));
-		} catch (ServiceException se) {
-			log.info(se.getMsg(), se);
-			throw se;
-		} catch (Exception e) {
-			log.error(ResultEnum.ORDER_ERROR.message(), e);
-			throw new BusinessException(ResultEnum.ORDER_ERROR);
-		}
+		//读取选中的列表
+		return Result.success(this.cartService.createTrade(tradeParams));
 	}
 }

@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -42,7 +45,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -107,7 +109,7 @@ public class CartServiceImpl implements ICartService {
 	private TradeBuilder tradeBuilder;
 
 	@Override
-	public void add(String skuId, Integer num, String cartType, Boolean cover) {
+	public Boolean add(String skuId, Integer num, String cartType, Boolean cover) {
 		if (num <= 0) {
 			throw new BusinessException(ResultEnum.CART_NUM_ERROR);
 		}
@@ -117,7 +119,6 @@ public class CartServiceImpl implements ICartService {
 			//购物车方式购买需要保存之前的选择，其他方式购买，则直接抹除掉之前的记录
 			TradeDTO tradeDTO;
 			if (cartTypeEnum.equals(CartTypeEnum.CART)) {
-
 				//如果存在，则变更数量不做新增，否则新增一个商品进入集合
 				tradeDTO = this.readDTO(cartTypeEnum);
 				List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
@@ -125,9 +126,7 @@ public class CartServiceImpl implements ICartService {
 					.filter(i -> i.getGoodsSku().getId().equals(skuId)).findFirst().orElse(null);
 
 				//购物车中已经存在，更新数量
-				if (cartSkuVO != null && dataSku.getUpdateTime()
-					.equals(cartSkuVO.getGoodsSku().getUpdateTime())) {
-
+				if (cartSkuVO != null && dataSku.getUpdateTime().equals(cartSkuVO.getGoodsSku().getUpdateTime())) {
 					//如果覆盖购物车中商品数量
 					if (Boolean.TRUE.equals(cover)) {
 						cartSkuVO.setNum(num);
@@ -139,10 +138,8 @@ public class CartServiceImpl implements ICartService {
 					}
 
 					//计算购物车小计
-					cartSkuVO.setSubTotal(
-						CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+					cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				} else {
-
 					//先清理一下 如果商品无效的话
 					cartSkuVOS.remove(cartSkuVO);
 					//购物车中不存在此商品，则新建立一个
@@ -153,8 +150,7 @@ public class CartServiceImpl implements ICartService {
 					//再设置加入购物车的数量
 					this.checkSetGoodsQuantity(cartSkuVO, skuId, num);
 					//计算购物车小计
-					cartSkuVO.setSubTotal(
-						CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+					cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 					cartSkuVOS.add(cartSkuVO);
 				}
 
@@ -162,8 +158,8 @@ public class CartServiceImpl implements ICartService {
 				cartSkuVO.setChecked(true);
 			} else {
 				tradeDTO = new TradeDTO(cartTypeEnum);
-				AuthUser currentUser = UserContext.getCurrentUser();
-				tradeDTO.setMemberId(currentUser.getId());
+				SecurityUser currentUser = SecurityUtil.getUser();
+				tradeDTO.setMemberId(currentUser.getUserId());
 				tradeDTO.setMemberName(currentUser.getUsername());
 				List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 
@@ -174,8 +170,7 @@ public class CartServiceImpl implements ICartService {
 				//检测购物车数据
 				checkCart(cartTypeEnum, cartSkuVO, skuId, num);
 				//计算购物车小计
-				cartSkuVO.setSubTotal(
-					CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+				cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				cartSkuVOS.add(cartSkuVO);
 			}
 
@@ -184,37 +179,38 @@ public class CartServiceImpl implements ICartService {
 			tradeDTO.setStoreCoupons(null);
 			tradeDTO.setPlatformCoupon(null);
 			this.resetTradeDTO(tradeDTO);
-		} catch (ServiceException serviceException) {
+		} catch (Exception serviceException) {
 			throw serviceException;
 		} catch (Exception e) {
-			log.error("购物车渲染异常", e);
+			LogUtil.error("购物车渲染异常", e);
 			throw new BusinessException(errorMessage);
 		}
+		return true;
 	}
 
 	/**
 	 * 读取当前会员购物原始数据key
 	 *
 	 * @param cartTypeEnum 获取方式
-	 * @return 当前会员购物原始数据key
+	 * @return 当前会员购物原始数据key {@link String }
+	 * @since 2022-05-16 16:51:16
 	 */
 	private String getOriginKey(CartTypeEnum cartTypeEnum) {
-
 		//缓存key，默认使用购物车
 		if (cartTypeEnum != null) {
-			AuthUser currentUser = UserContext.getCurrentUser();
-			return cartTypeEnum.getPrefix() + currentUser.getId();
+			SecurityUser currentUser = SecurityUtil.getUser();
+			return cartTypeEnum.getPrefix() + currentUser.getUserId();
 		}
 		throw new BusinessException(ResultEnum.ERROR);
 	}
 
 	@Override
 	public TradeDTO readDTO(CartTypeEnum checkedWay) {
-		TradeDTO tradeDTO = (TradeDTO) cache.get(this.getOriginKey(checkedWay));
+		TradeDTO tradeDTO = (TradeDTO) redisRepository.get(this.getOriginKey(checkedWay));
 		if (tradeDTO == null) {
 			tradeDTO = new TradeDTO(checkedWay);
-			AuthUser currentUser = UserContext.getCurrentUser();
-			tradeDTO.setMemberId(currentUser.getId());
+			SecurityUser currentUser = SecurityUtil.getUser();
+			tradeDTO.setMemberId(currentUser.getUserId());
 			tradeDTO.setMemberName(currentUser.getUsername());
 		}
 		if (tradeDTO.getMemberAddress() == null) {
@@ -224,7 +220,7 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public void checked(String skuId, boolean checked) {
+	public Boolean checked(String skuId, boolean checked) {
 		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -232,11 +228,12 @@ public class CartServiceImpl implements ICartService {
 				cartSkuVO.setChecked(checked);
 			}
 		}
-		cache.put(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		redisRepository.set(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		return true;
 	}
 
 	@Override
-	public void checkedStore(String storeId, boolean checked) {
+	public Boolean checkedStore(String storeId, boolean checked) {
 		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -244,21 +241,23 @@ public class CartServiceImpl implements ICartService {
 				cartSkuVO.setChecked(checked);
 			}
 		}
-		cache.put(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		redisRepository.set(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		return true;
 	}
 
 	@Override
-	public void checkedAll(boolean checked) {
+	public Boolean checkedAll(boolean checked) {
 		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
 			cartSkuVO.setChecked(checked);
 		}
-		cache.put(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		redisRepository.set(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		return true;
 	}
 
 	@Override
-	public void delete(String[] skuIds) {
+	public Boolean delete(String[] skuIds) {
 		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		List<CartSkuVO> deleteVos = new ArrayList<>();
@@ -270,14 +269,22 @@ public class CartServiceImpl implements ICartService {
 			}
 		}
 		cartSkuVOS.removeAll(deleteVos);
-		cache.put(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		redisRepository.set(this.getOriginKey(CartTypeEnum.CART), tradeDTO);
+		return true;
 	}
 
 	@Override
-	public void clean() {
-		cache.remove(this.getOriginKey(CartTypeEnum.CART));
+	public Boolean clean() {
+		redisRepository.del(this.getOriginKey(CartTypeEnum.CART));
+		return true;
 	}
 
+	/**
+	 * 清洁检查
+	 *
+	 * @param tradeDTO 贸易dto
+	 * @since 2022-05-16 16:53:53
+	 */
 	public void cleanChecked(TradeDTO tradeDTO) {
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		List<CartSkuVO> deleteVos = new ArrayList<>();
@@ -292,22 +299,24 @@ public class CartServiceImpl implements ICartService {
 		tradeDTO.setStoreCoupons(null);
 		//清除添加过的备注
 		tradeDTO.setStoreRemark(null);
-		cache.put(this.getOriginKey(tradeDTO.getCartTypeEnum()), tradeDTO);
+		redisRepository.set(this.getOriginKey(tradeDTO.getCartTypeEnum()), tradeDTO);
 	}
 
 	@Override
-	public void cleanChecked(CartTypeEnum way) {
+	public Boolean cleanChecked(CartTypeEnum way) {
 		if (way.equals(CartTypeEnum.CART)) {
 			TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 			this.cleanChecked(tradeDTO);
 		} else {
-			cache.remove(this.getOriginKey(way));
+			redisRepository.del(this.getOriginKey(way));
 		}
+		return true;
 	}
 
 	@Override
-	public void resetTradeDTO(TradeDTO tradeDTO) {
-		cache.put(this.getOriginKey(tradeDTO.getCartTypeEnum()), tradeDTO);
+	public Boolean resetTradeDTO(TradeDTO tradeDTO) {
+		redisRepository.set(this.getOriginKey(tradeDTO.getCartTypeEnum()), tradeDTO);
+		return true;
 	}
 
 	@Override
@@ -315,12 +324,6 @@ public class CartServiceImpl implements ICartService {
 		return tradeBuilder.buildChecked(way);
 	}
 
-	/**
-	 * 获取可使用的优惠券数量
-	 *
-	 * @param checkedWay 购物车购买：CART/立即购买：BUY_NOW/拼团购买：PINTUAN / 积分购买：POINT
-	 * @return 可使用的优惠券数量
-	 */
 	@Override
 	public Long getCanUseCoupon(CartTypeEnum checkedWay) {
 		TradeDTO tradeDTO = this.readDTO(checkedWay);
@@ -385,16 +388,19 @@ public class CartServiceImpl implements ICartService {
 		if (dataSku == null) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
+
 		if (!GoodsAuthEnum.PASS.name().equals(dataSku.getIsAuth()) || !GoodsStatusEnum.UPPER.name()
 			.equals(dataSku.getMarketEnable())) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
+
 		BigDecimal validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.SECKILL.name()));
 		if (validSeckillGoodsPrice != null) {
 			dataSku.setIsPromotion(true);
 			dataSku.setPromotionPrice(validSeckillGoodsPrice);
 		}
+
 		BigDecimal validPintuanGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.PINTUAN.name()));
 		if (validPintuanGoodsPrice != null && CartTypeEnum.PINTUAN.name().equals(cartType)) {
@@ -431,7 +437,7 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public void shippingAddress(String shippingAddressId, String way) {
+	public Boolean shippingAddress(String shippingAddressId, String way) {
 
 		//默认购物车
 		CartTypeEnum cartTypeEnum = CartTypeEnum.CART;
@@ -443,16 +449,11 @@ public class CartServiceImpl implements ICartService {
 		MemberAddress memberAddress = memberAddressService.getById(shippingAddressId);
 		tradeDTO.setMemberAddress(memberAddress);
 		this.resetTradeDTO(tradeDTO);
+		return true;
 	}
 
-	/**
-	 * 选择发票
-	 *
-	 * @param receiptVO 发票信息
-	 * @param way       购物车类型
-	 */
 	@Override
-	public void shippingReceipt(ReceiptVO receiptVO, String way) {
+	public Boolean shippingReceipt(ReceiptVO receiptVO, String way) {
 		CartTypeEnum cartTypeEnum = CartTypeEnum.CART;
 		if (CharSequenceUtil.isNotEmpty(way)) {
 			cartTypeEnum = CartTypeEnum.valueOf(way);
@@ -461,17 +462,11 @@ public class CartServiceImpl implements ICartService {
 		tradeDTO.setNeedReceipt(true);
 		tradeDTO.setReceiptVO(receiptVO);
 		this.resetTradeDTO(tradeDTO);
+		return true;
 	}
 
-	/**
-	 * 选择配送方式
-	 *
-	 * @param storeId        店铺id
-	 * @param deliveryMethod 配送方式
-	 * @param way            购物车类型
-	 */
 	@Override
-	public void shippingMethod(String storeId, String deliveryMethod, String way) {
+	public Boolean shippingMethod(String storeId, String deliveryMethod, String way) {
 		CartTypeEnum cartTypeEnum = CartTypeEnum.CART;
 		if (CharSequenceUtil.isNotEmpty(way)) {
 			cartTypeEnum = CartTypeEnum.valueOf(way);
@@ -483,21 +478,17 @@ public class CartServiceImpl implements ICartService {
 			}
 		}
 		this.resetTradeDTO(tradeDTO);
+		return true;
 	}
 
-	/**
-	 * 获取购物车商品数量
-	 *
-	 * @param checked 是否选择
-	 * @return 购物车商品数量
-	 */
 	@Override
 	public Long getCartNum(Boolean checked) {
 		//构建购物车
 		TradeDTO tradeDTO = this.getAllTradeDTO();
 		//过滤sku列表
 		List<CartSkuVO> collect = tradeDTO.getSkuList().stream()
-			.filter(i -> Boolean.FALSE.equals(i.getInvalid())).collect(Collectors.toList());
+			.filter(i -> Boolean.FALSE.equals(i.getInvalid()))
+			.toList();
 		long count = 0L;
 		if (!tradeDTO.getSkuList().isEmpty()) {
 			if (checked != null) {
@@ -510,8 +501,8 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public void selectCoupon(String couponId, String way, boolean use) {
-		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+	public Boolean selectCoupon(String couponId, String way, boolean use) {
+		SecurityUser currentUser = SecurityUtil.getUser();
 		//获取购物车，然后重新写入优惠券
 		CartTypeEnum cartTypeEnum = getCartType(way);
 		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
@@ -520,7 +511,7 @@ public class CartServiceImpl implements ICartService {
 			memberCouponService.getOne(
 				new LambdaQueryWrapper<MemberCoupon>()
 					.eq(MemberCoupon::getMemberCouponStatus, MemberCouponStatusEnum.NEW.name())
-					.eq(MemberCoupon::getMemberId, currentUser.getId())
+					.eq(MemberCoupon::getMemberId, currentUser.getUserId())
 					.eq(MemberCoupon::getId, couponId));
 		if (memberCoupon == null) {
 			throw new BusinessException(ResultEnum.COUPON_EXPIRED);
@@ -536,6 +527,7 @@ public class CartServiceImpl implements ICartService {
 			}
 		}
 		this.resetTradeDTO(tradeDTO);
+		return true;
 	}
 
 
@@ -564,8 +556,9 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 获取购物车类型
 	 *
-	 * @param way
-	 * @return
+	 * @param way 购物车类型
+	 * @return {@link CartTypeEnum }
+	 * @since 2022-05-16 16:49:56
 	 */
 	private CartTypeEnum getCartType(String way) {
 		//默认购物车
@@ -574,7 +567,7 @@ public class CartServiceImpl implements ICartService {
 			try {
 				cartTypeEnum = CartTypeEnum.valueOf(way);
 			} catch (IllegalArgumentException e) {
-				log.error("获取购物车类型出现错误：", e);
+				LogUtil.error("获取购物车类型出现错误：", e);
 			}
 		}
 		return cartTypeEnum;
@@ -597,7 +590,7 @@ public class CartServiceImpl implements ICartService {
 		Map<String, BigDecimal> skuPrice = new HashMap<>(1);
 
 		//购物车价格
-		BigDecimal cartPrice = 0d;
+		BigDecimal cartPrice = BigDecimal.ZERO;
 
 		//循环符合优惠券的商品
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -651,7 +644,7 @@ public class CartServiceImpl implements ICartService {
 		if (!memberCoupon.getIsPlatform()) {
 			cartSkuVOS = tradeDTO.getSkuList().stream()
 				.filter(i -> i.getStoreId().equals(memberCoupon.getStoreId()))
-				.collect(Collectors.toList());
+				.toList();
 		}
 		//否则为平台优惠券，筛选商品为全部商品
 		else {
@@ -661,20 +654,17 @@ public class CartServiceImpl implements ICartService {
 		//当初购物车商品中是否存在符合优惠券条件的商品sku
 		if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.ALL.name())) {
 			return cartSkuVOS;
-		} else if (memberCoupon.getScopeType()
-			.equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name())) {
+		} else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name())) {
 			//分类路径是否包含
 			return cartSkuVOS.stream().filter(i ->
 				i.getGoodsSku().getCategoryPath().indexOf("," + memberCoupon.getScopeId() + ",")
 					<= 0).collect(Collectors.toList());
-		} else if (memberCoupon.getScopeType()
-			.equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())) {
+		} else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())) {
 			//范围关联ID是否包含
 			return cartSkuVOS.stream().filter(
 					i -> memberCoupon.getScopeId().indexOf("," + i.getGoodsSku().getId() + ",") <= 0)
 				.collect(Collectors.toList());
-		} else if (memberCoupon.getScopeType()
-			.equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name())) {
+		} else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name())) {
 			//店铺分类路径是否包含
 			return cartSkuVOS.stream().filter(i -> i.getGoodsSku().getStoreCategoryPath()
 				.indexOf("," + memberCoupon.getScopeId() + ",") <= 0).collect(Collectors.toList());
@@ -716,9 +706,8 @@ public class CartServiceImpl implements ICartService {
 		//拼团活动，需要对限购数量进行判定
 		//获取拼团信息
 		List<PromotionGoods> currentPromotion = cartSkuVO.getPromotions().stream().filter(
-				promotionGoods -> (promotionGoods.getPromotionType()
-					.equals(PromotionTypeEnum.PINTUAN.name())))
-			.collect(Collectors.toList());
+			promotionGoods -> (promotionGoods.getPromotionType()
+				.equals(PromotionTypeEnum.PINTUAN.name()))).toList();
 		//拼团活动判定
 		if (!currentPromotion.isEmpty()) {
 			PromotionGoods promotionGoods = currentPromotion.get(0);
@@ -746,7 +735,6 @@ public class CartServiceImpl implements ICartService {
 	 * @param cartSkuVO 购物车信息
 	 */
 	private void checkKanjia(CartSkuVO cartSkuVO) {
-
 		//根据skuId获取砍价商品
 		KanjiaActivityGoods kanjiaActivityGoodsDTO = kanjiaActivityGoodsService.getKanjiaGoodsBySkuId(
 			cartSkuVO.getGoodsSku().getId());
@@ -766,7 +754,7 @@ public class CartServiceImpl implements ICartService {
 			//判断砍价活动是否已满足条件
 		} else if (!KanJiaStatusEnum.SUCCESS.name().equals(kanjiaActivity.getStatus())) {
 			cartSkuVO.setKanjiaId(kanjiaActivity.getId());
-			cartSkuVO.setPurchasePrice(0D);
+			cartSkuVO.setPurchasePrice(BigDecimal.ZERO);
 			throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_NOT_PASS_ERROR);
 		}
 		//砍价商品默认一件货物
@@ -780,7 +768,6 @@ public class CartServiceImpl implements ICartService {
 	 * @param cartSkuVO 购物车信息
 	 */
 	private void checkPoint(CartSkuVO cartSkuVO) {
-
 		PointsGoodsVO pointsGoodsVO = pointsGoodsService.getPointsGoodsDetailBySkuId(
 			cartSkuVO.getGoodsSku().getId());
 
