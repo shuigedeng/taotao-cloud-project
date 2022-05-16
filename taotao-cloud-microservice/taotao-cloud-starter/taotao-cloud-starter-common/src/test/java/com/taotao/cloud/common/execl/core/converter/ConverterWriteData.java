@@ -1,12 +1,12 @@
 package com.taotao.cloud.common.execl.core.converter;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.data.WriteCellData;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Date;
-
-import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.metadata.data.WriteCellData;
 
 public class ConverterWriteData {
     @ExcelProperty("日期")
@@ -35,4 +35,108 @@ public class ConverterWriteData {
     private String string;
     @ExcelProperty("自定义")
     private WriteCellData<?> cellData;
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
+	}
+
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
+	}
+
+	public Boolean getBooleanData() {
+		return booleanData;
+	}
+
+	public void setBooleanData(Boolean booleanData) {
+		this.booleanData = booleanData;
+	}
+
+	public BigDecimal getBigDecimal() {
+		return bigDecimal;
+	}
+
+	public void setBigDecimal(BigDecimal bigDecimal) {
+		this.bigDecimal = bigDecimal;
+	}
+
+	public BigInteger getBigInteger() {
+		return bigInteger;
+	}
+
+	public void setBigInteger(BigInteger bigInteger) {
+		this.bigInteger = bigInteger;
+	}
+
+	public long getLongData() {
+		return longData;
+	}
+
+	public void setLongData(long longData) {
+		this.longData = longData;
+	}
+
+	public Integer getIntegerData() {
+		return integerData;
+	}
+
+	public void setIntegerData(Integer integerData) {
+		this.integerData = integerData;
+	}
+
+	public Short getShortData() {
+		return shortData;
+	}
+
+	public void setShortData(Short shortData) {
+		this.shortData = shortData;
+	}
+
+	public Byte getByteData() {
+		return byteData;
+	}
+
+	public void setByteData(Byte byteData) {
+		this.byteData = byteData;
+	}
+
+	public double getDoubleData() {
+		return doubleData;
+	}
+
+	public void setDoubleData(double doubleData) {
+		this.doubleData = doubleData;
+	}
+
+	public Float getFloatData() {
+		return floatData;
+	}
+
+	public void setFloatData(Float floatData) {
+		this.floatData = floatData;
+	}
+
+	public String getString() {
+		return string;
+	}
+
+	public void setString(String string) {
+		this.string = string;
+	}
+
+	public WriteCellData<?> getCellData() {
+		return cellData;
+	}
+
+	public void setCellData(WriteCellData<?> cellData) {
+		this.cellData = cellData;
+	}
 }

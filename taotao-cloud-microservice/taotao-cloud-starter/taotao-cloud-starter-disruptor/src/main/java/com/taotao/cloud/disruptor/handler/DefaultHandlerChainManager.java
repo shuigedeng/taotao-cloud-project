@@ -18,11 +18,12 @@ package com.taotao.cloud.disruptor.handler;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.util.StringUtils;
+import org.springframework.util.CollectionUtils;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import org.springframework.util.CollectionUtils;
 
 /**
  * DefaultHandlerChainManager
@@ -111,10 +112,6 @@ public class DefaultHandlerChainManager implements HandlerChainManager<Disruptor
 			split[i] = StringUtils.trimToNull(split[i]);
 		}
 		return split;
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 	public void addToChain(String chainName, String handlerName) {

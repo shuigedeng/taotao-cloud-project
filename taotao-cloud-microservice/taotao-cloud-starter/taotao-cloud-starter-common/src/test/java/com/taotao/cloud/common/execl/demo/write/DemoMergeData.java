@@ -1,9 +1,9 @@
 package com.taotao.cloud.common.execl.demo.write;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ContentLoopMerge;
+
+import java.util.Date;
 
 
 
@@ -12,7 +12,6 @@ import com.alibaba.excel.annotation.write.style.ContentLoopMerge;
  *
 
  */
-com.taotao.cloud.common.execl
 // 将第6-7行的2-3列合并成一个单元格
 // @OnceAbsoluteMerge(firstRowIndex = 5, lastRowIndex = 6, firstColumnIndex = 1, lastColumnIndex = 2)
 public class DemoMergeData {

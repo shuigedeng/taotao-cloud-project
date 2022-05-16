@@ -6,6 +6,7 @@ import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.utils.log.LogUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -32,10 +33,10 @@ public class DemoHeadDataListener implements ReadListener<DemoData> {
      */
     @Override
     public void onException(Exception exception, AnalysisContext context) {
-        log.error("解析失败，但是继续解析下一行:{}", exception.getMessage());
+        LogUtil.error("解析失败，但是继续解析下一行:{}", exception.getMessage());
         if (exception instanceof ExcelDataConvertException) {
             ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException)exception;
-            log.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
+            LogUtil.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
                 excelDataConvertException.getColumnIndex(), excelDataConvertException.getCellData());
         }
     }
@@ -48,7 +49,7 @@ public class DemoHeadDataListener implements ReadListener<DemoData> {
      */
     @Override
     public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
-        log.info("解析到一条头数据:{}", JSON.toJSONString(headMap));
+        LogUtil.info("解析到一条头数据:{}", JSON.toJSONString(headMap));
         // 如果想转成成 Map<Integer,String>
         // 方案1： 不要implements ReadListener 而是 extends AnalysisEventListener
         // 方案2： 调用 ConverterUtils.convertToStringMap(headMap, context) 自动会转换
@@ -56,7 +57,7 @@ public class DemoHeadDataListener implements ReadListener<DemoData> {
 
     @Override
     public void invoke(DemoData data, AnalysisContext context) {
-        log.info("解析到一条数据:{}", JSON.toJSONString(data));
+        LogUtil.info("解析到一条数据:{}", JSON.toJSONString(data));
         if (cachedDataList.size() >= BATCH_COUNT) {
             saveData();
             cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
@@ -66,14 +67,14 @@ public class DemoHeadDataListener implements ReadListener<DemoData> {
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         saveData();
-        log.info("所有数据解析完成！");
+        LogUtil.info("所有数据解析完成！");
     }
 
     /**
      * 加上存储数据库
      */
     private void saveData() {
-        log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-        log.info("存储数据库成功！");
+        LogUtil.info("{}条数据，开始存储数据库！", cachedDataList.size());
+        LogUtil.info("存储数据库成功！");
     }
 }

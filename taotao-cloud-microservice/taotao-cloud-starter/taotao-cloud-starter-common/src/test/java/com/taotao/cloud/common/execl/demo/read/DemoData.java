@@ -9,7 +9,6 @@ import java.util.Date;
  *
 
  */
-com.taotao.cloud.common.execl
 public class DemoData {
     private String string;
     private Date date;

@@ -4,7 +4,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
 
 
 
-com.taotao.cloud.common.execl
 public class DataType {
     /**
      * 任务id
@@ -26,4 +25,52 @@ public class DataType {
 
     @ExcelProperty(value = "备注2")
     private String secRemark;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getFirstSurplus() {
+		return firstSurplus;
+	}
+
+	public void setFirstSurplus(String firstSurplus) {
+		this.firstSurplus = firstSurplus;
+	}
+
+	public String getSecSurplus() {
+		return secSurplus;
+	}
+
+	public void setSecSurplus(String secSurplus) {
+		this.secSurplus = secSurplus;
+	}
+
+	public String getThirdSurplus() {
+		return thirdSurplus;
+	}
+
+	public void setThirdSurplus(String thirdSurplus) {
+		this.thirdSurplus = thirdSurplus;
+	}
+
+	public String getFirstRemark() {
+		return firstRemark;
+	}
+
+	public void setFirstRemark(String firstRemark) {
+		this.firstRemark = firstRemark;
+	}
+
+	public String getSecRemark() {
+		return secRemark;
+	}
+
+	public void setSecRemark(String secRemark) {
+		this.secRemark = secRemark;
+	}
 }

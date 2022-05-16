@@ -17,6 +17,24 @@
  */
 package com.taotao.cloud.common.execl.temp.dataformat;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
+import org.apache.poi.ss.format.CellFormat;
+import org.apache.poi.ss.format.CellFormatResult;
+import org.apache.poi.ss.formula.ConditionalFormattingEvaluator;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.ExcelGeneralNumberFormat;
+import org.apache.poi.ss.usermodel.ExcelNumberFormat;
+import org.apache.poi.ss.usermodel.ExcelStyleDateFormatter;
+import org.apache.poi.ss.usermodel.FormulaError;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.FractionFormat;
+import org.apache.poi.ss.util.DateFormatConverter;
+import org.apache.poi.ss.util.NumberToTextConverter;
+import org.apache.poi.util.LocaleUtil;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -37,25 +55,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.poi.ss.format.CellFormat;
-import org.apache.poi.ss.format.CellFormatResult;
-import org.apache.poi.ss.formula.ConditionalFormattingEvaluator;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.ExcelGeneralNumberFormat;
-import org.apache.poi.ss.usermodel.ExcelNumberFormat;
-import org.apache.poi.ss.usermodel.ExcelStyleDateFormatter;
-import org.apache.poi.ss.usermodel.FormulaError;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.FractionFormat;
-import org.apache.poi.ss.util.DateFormatConverter;
-import org.apache.poi.ss.util.NumberToTextConverter;
-import org.apache.poi.util.LocaleUtil;
-import org.apache.poi.util.POILogFactory;
-import org.apache.poi.util.POILogger;
 
 /**
  * DataFormatter contains methods for formatting the value stored in an Cell. This can be useful for reports and GUI
@@ -227,7 +226,6 @@ public class DataFormatter1 implements Observer {
     private final LocaleChangeObservable localeChangedObservable = new LocaleChangeObservable();
 
     /** For logging any problems we find */
-    private static POILogger logger = POILogFactory.getLogger(DataFormatter.class);
 
     /**
      * Creates a formatter using the {@link Locale#getDefault() default locale}.
@@ -346,7 +344,7 @@ public class DataFormatter1 implements Observer {
                 // Wrap and return (non-cachable - CellFormat does that)
                 return new CellFormatResultWrapper(cfmt.apply(cellValueO));
             } catch (Exception e) {
-                logger.log(POILogger.WARN, "Formatting failed for format " + formatStr + ", falling back", e);
+                LogUtil.info( "Formatting failed for format " + formatStr + ", falling back", e);
             }
         }
 
@@ -589,7 +587,7 @@ public class DataFormatter1 implements Observer {
         try {
             return new ExcelStyleDateFormatter(formatStr, dateSymbols);
         } catch (IllegalArgumentException iae) {
-            logger.log(POILogger.DEBUG, "Formatting failed for format " + formatStr + ", falling back", iae);
+			LogUtil.info("Formatting failed for format " + formatStr + ", falling back", iae);
             // the pattern could not be parsed correctly,
             // so fall back to the default number format
             return getDefaultFormat(cellValue);
@@ -750,7 +748,7 @@ public class DataFormatter1 implements Observer {
         try {
             return new InternalDecimalFormatWithScale(format, symbols);
         } catch (IllegalArgumentException iae) {
-            logger.log(POILogger.DEBUG, "Formatting failed for format " + formatStr + ", falling back", iae);
+			LogUtil.info( "Formatting failed for format " + formatStr + ", falling back", iae);
             // the pattern could not be parsed correctly,
             // so fall back to the default number format
             return getDefaultFormat(cellValue);
@@ -832,7 +830,7 @@ public class DataFormatter1 implements Observer {
         if (numberFormat == null) {
             return String.valueOf(d);
         }
-        String formatted = numberFormat.format(new Double(d));
+        String formatted = numberFormat.format(d);
         return formatted.replaceFirst("E(\\d)", "E+$1"); // to match Excel's E-notation
     }
 
@@ -884,7 +882,7 @@ public class DataFormatter1 implements Observer {
         String result;
         final String textValue = NumberToTextConverter.toText(value);
         if (textValue.indexOf('E') > -1) {
-            result = numberFormat.format(new Double(value));
+            result = numberFormat.format(value);
         } else {
             result = numberFormat.format(new BigDecimal(textValue));
         }

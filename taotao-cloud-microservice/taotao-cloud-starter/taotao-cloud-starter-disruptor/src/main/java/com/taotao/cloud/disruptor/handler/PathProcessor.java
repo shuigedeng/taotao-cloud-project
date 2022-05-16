@@ -31,9 +31,8 @@ public interface PathProcessor<T extends DisruptorEvent> {
 	 * processPath
 	 *
 	 * @param path path
-	 * @return {@link com.taotao.cloud.disruptor.handler.DisruptorHandler }
-	 * @author shuigedeng
-	 * @since 2021-09-03 20:23:26
+	 * @return {@link DisruptorHandler }<{@link T }>
+	 * @since 2022-05-16 13:53:30
 	 */
 	DisruptorHandler<T> processPath(String path);
 

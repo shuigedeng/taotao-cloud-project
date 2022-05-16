@@ -27,6 +27,14 @@ import com.taotao.cloud.disruptor.event.DisruptorEvent;
  */
 public interface HandlerChainResolver<T extends DisruptorEvent> {
 
+	/**
+	 * 得到链
+	 *
+	 * @param event         事件
+	 * @param originalChain 原来链
+	 * @return {@link HandlerChain }<{@link T }>
+	 * @since 2022-05-16 13:53:16
+	 */
 	HandlerChain<T> getChain(T event, HandlerChain<T> originalChain);
 
 }

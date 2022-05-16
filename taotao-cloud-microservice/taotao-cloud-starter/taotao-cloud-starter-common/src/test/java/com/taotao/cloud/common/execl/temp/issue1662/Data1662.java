@@ -1,18 +1,9 @@
 package com.taotao.cloud.common.execl.temp.issue1662;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Date;
 
-com.taotao.cloud.common.execl
-@AllArgsConstructor
-@NoArgsConstructor
 public class Data1662 {
     @ExcelProperty(index = 0)
     private String str;
@@ -20,4 +11,28 @@ public class Data1662 {
     private Date date;
     @ExcelProperty(index = 2)
     private double r;
+
+	public String getStr() {
+		return str;
+	}
+
+	public void setStr(String str) {
+		this.str = str;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public double getR() {
+		return r;
+	}
+
+	public void setR(double r) {
+		this.r = r;
+	}
 }

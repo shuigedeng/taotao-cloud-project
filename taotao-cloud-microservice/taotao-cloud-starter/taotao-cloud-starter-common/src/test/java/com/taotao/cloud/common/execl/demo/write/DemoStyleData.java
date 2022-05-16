@@ -1,13 +1,13 @@
 package com.taotao.cloud.common.execl.demo.write;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ContentFontStyle;
 import com.alibaba.excel.annotation.write.style.ContentStyle;
 import com.alibaba.excel.annotation.write.style.HeadFontStyle;
 import com.alibaba.excel.annotation.write.style.HeadStyle;
 import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
+
+import java.util.Date;
 
 
 
@@ -16,7 +16,6 @@ import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
  *
 
  */
-com.taotao.cloud.common.execl
 // 头背景设置成红色 IndexedColors.RED.getIndex()
 @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 10)
 // 头字体设置成20

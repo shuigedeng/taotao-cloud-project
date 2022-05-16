@@ -1,9 +1,9 @@
 package com.taotao.cloud.common.execl.temp.csv;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
+
+import java.util.Date;
 
 
 
@@ -12,7 +12,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
  *
 
  */
-com.taotao.cloud.common.execl
 public class CsvData {
     @ExcelProperty("字符串标题")
     private String string;
@@ -25,4 +24,36 @@ public class CsvData {
      */
     @ExcelIgnore
     private String ignore;
+
+	public String getString() {
+		return string;
+	}
+
+	public void setString(String string) {
+		this.string = string;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Double getDoubleData() {
+		return doubleData;
+	}
+
+	public void setDoubleData(Double doubleData) {
+		this.doubleData = doubleData;
+	}
+
+	public String getIgnore() {
+		return ignore;
+	}
+
+	public void setIgnore(String ignore) {
+		this.ignore = ignore;
+	}
 }

@@ -1,8 +1,8 @@
 package com.taotao.cloud.common.execl.demo.web;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
+
+import java.util.Date;
 
 
 
@@ -11,7 +11,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
  *
 
  */
-com.taotao.cloud.common.execl
 public class DownloadData {
     @ExcelProperty("字符串标题")
     private String string;
@@ -19,4 +18,28 @@ public class DownloadData {
     private Date date;
     @ExcelProperty("数字标题")
     private Double doubleData;
+
+	public String getString() {
+		return string;
+	}
+
+	public void setString(String string) {
+		this.string = string;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Double getDoubleData() {
+		return doubleData;
+	}
+
+	public void setDoubleData(Double doubleData) {
+		this.doubleData = doubleData;
+	}
 }

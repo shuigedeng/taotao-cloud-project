@@ -1,15 +1,6 @@
 package com.taotao.cloud.common.execl.temp.poi;
 
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.util.regex.Pattern;
-
 import com.alibaba.fastjson.JSON;
-
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -18,6 +9,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.regex.Pattern;
 
 /**
  * 测试poi
@@ -110,7 +109,7 @@ public class PoiWriteTest {
     @Test
     public void part4() throws IOException {
         //URL url=new URL("http://120.55.161.4/group1/M00/00/00/i8QJ8WFfwMiAXKYrAAACqC1MFiY641.png");
-        URL url=new URL("https://img-blog.csdn.net/20160729002743309?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center");
+        URL url=new URL("https://img-bLogUtil.csdn.net/20160729002743309?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center");
 
         InputStream in = new BufferedInputStream(url.openStream());
 

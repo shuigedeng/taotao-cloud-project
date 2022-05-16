@@ -1,13 +1,7 @@
 package com.taotao.cloud.common.execl.temp;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.fastjson.JSON;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -27,8 +21,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.fastjson.JSON;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 临时测试
@@ -181,7 +179,7 @@ public class StyleTest {
     private void isDate(Cell cell) {
         System.out.println(
             DateUtil.isADateFormat(cell.getCellStyle().getDataFormat(), cell.getCellStyle().getDataFormatString()));
-        System.out.println(HSSFDateUtil.isCellDateFormatted(cell));
+        // System.out.println(HSSFDateUtil.isCellDateFormatted(cell));
         DataFormatter f = new DataFormatter();
         System.out.println(f.formatCellValue(cell));
 

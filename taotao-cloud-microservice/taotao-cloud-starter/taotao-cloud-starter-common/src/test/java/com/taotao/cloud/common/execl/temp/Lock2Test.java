@@ -1,26 +1,25 @@
 package com.taotao.cloud.common.execl.temp;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.taotao.cloud.common.execl.demo.write.DemoData;
-import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.util.PositionUtils;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.alibaba.fastjson.JSON;
-
+import com.taotao.cloud.common.execl.demo.write.DemoData;
+import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.util.CellReference;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 临时测试
