@@ -1,11 +1,15 @@
 package com.taotao.cloud.stream.consumer.trigger;
 
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.data.redis.core.DefaultTypedTuple;
 
 /**
  * 延时队列工厂
@@ -27,22 +31,23 @@ public abstract class AbstractDelayQueueListen implements ApplicationRunner {
 				//获取当前时间的时间戳
 				long now = System.currentTimeMillis() / 1000;
 				//获取当前时间前需要执行的任务列表
-				//Set<DefaultTypedTuple> tuples = redisRepository.zRangeByScore(setDelayQueueName(), 0, now);
-				//
-				////如果任务不为空
-				//if (!CollectionUtils.isEmpty(tuples)) {
-				//    LogUtil.info("执行任务:{}", JSONUtil.toJsonStr(tuples));
-				//
-				//    for (DefaultTypedTuple tuple : tuples) {
-				//        String jobId = (String) tuple.getValue();
-				//        //移除缓存，如果移除成功则表示当前线程处理了延时任务，则执行延时任务
-				//        Long num = cache.zRemove(setDelayQueueName(), jobId);
-				//        //如果移除成功, 则执行
-				//        if (num > 0) {
-				//            ThreadPoolUtil.execute(() -> invoke(jobId));
-				//        }
-				//    }
-				//}
+				Set<Object> tuples = redisRepository.zRangeByScore(setDelayQueueName(), 0, now);
+
+				//如果任务不为空
+				if (!CollectionUtil.isEmpty(tuples)) {
+				    LogUtil.info("执行任务:{}", JSONUtil.toJsonStr(tuples));
+
+				    for (Object t : tuples) {
+					    DefaultTypedTuple tuple = (DefaultTypedTuple)t;
+				        String jobId = (String) tuple.getValue();
+				        //移除缓存，如果移除成功则表示当前线程处理了延时任务，则执行延时任务
+				        Long num = redisRepository.zRem(setDelayQueueName(), jobId);
+				        //如果移除成功, 则执行
+				        if (num > 0) {
+				            ThreadUtil.execute(() -> invoke(jobId));
+				        }
+				    }
+				}
 			} catch (Exception e) {
 				LogUtil.error("处理延时任务发生异常,异常原因为{}", e.getMessage(), e);
 			} finally {
