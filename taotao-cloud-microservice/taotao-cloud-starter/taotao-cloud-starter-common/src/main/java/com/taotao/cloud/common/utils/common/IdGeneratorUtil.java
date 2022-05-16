@@ -16,6 +16,8 @@
 package com.taotao.cloud.common.utils.common;
 
 
+import com.taotao.cloud.common.utils.date.DateUtil;
+import java.util.Date;
 
 /**
  * 高效分布式ID生成算法(sequence),基于Snowflake算法优化实现64位自增ID算法。 其中解决时间回拨问题的优化方案如下： 1.
@@ -54,5 +56,16 @@ public class IdGeneratorUtil {
 	 */
 	public static String getIdStr() {
 		return String.valueOf(WORKER.nextId());
+	}
+
+	/**
+	 * 生成字符，带有前缀
+	 *
+	 * @param prefix 前缀
+	 * @return {@link String }
+	 * @since 2022-05-16 17:51:07
+	 */
+	public static String createStr(String prefix) {
+		return prefix + DateUtil.toString(new Date(), "yyyyMMdd") + getId();
 	}
 }
