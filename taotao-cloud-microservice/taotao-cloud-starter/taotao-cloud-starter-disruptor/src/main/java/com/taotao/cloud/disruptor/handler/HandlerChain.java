@@ -27,6 +27,12 @@ import com.taotao.cloud.disruptor.event.DisruptorEvent;
  */
 public interface HandlerChain<T extends DisruptorEvent> {
 
+	/**
+	 * 做处理程序
+	 *
+	 * @param event 事件
+	 * @since 2022-05-16 13:53:09
+	 */
 	void doHandler(T event) throws Exception;
 
 }

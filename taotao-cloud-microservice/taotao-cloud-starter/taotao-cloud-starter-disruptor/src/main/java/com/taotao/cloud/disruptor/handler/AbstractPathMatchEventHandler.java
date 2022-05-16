@@ -17,10 +17,11 @@ package com.taotao.cloud.disruptor.handler;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AbstractPathMatchEventHandler
@@ -35,7 +36,7 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	protected PathMatcher pathMatcher = new AntPathMatcher();
 
 	// 需要过滤的路径
-	protected List<String> appliedPaths = new ArrayList<String>();
+	protected List<String> appliedPaths = new ArrayList<>();
 
 	@Override
 	public DisruptorHandler<T> processPath(String path) {
@@ -48,7 +49,6 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 *
 	 * @param event event
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:17:56
 	 */
 	protected String getPathWithinEvent(T event) {
@@ -61,7 +61,6 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 * @param path  path
 	 * @param event event
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:18:02
 	 */
 	protected boolean pathsMatch(String path, T event) {
@@ -77,7 +76,6 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 * @param pattern pattern
 	 * @param path    path
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:17:59
 	 */
 	protected boolean pathsMatch(String pattern, String path) {
@@ -89,7 +87,6 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 *
 	 * @param event event
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:18:06
 	 */
 	protected boolean preHandle(T event) throws Exception {
@@ -117,9 +114,8 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	}
 
 	private boolean isHandlerChainContinued(T event, String path) throws Exception {
-
-		if (isEnabled(event, path)) { // isEnabled check
-
+		// isEnabled check
+		if (isEnabled(event, path)) {
 			LogUtil.info("Handler '{}' is enabled for the current event under path '{}'.  "
 					+ "Delegating to subclass implementation for 'onPreHandle' check.",
 				new Object[]{getName(), path});
@@ -145,7 +141,6 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 *
 	 * @param event event
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:17:40
 	 */
 	protected boolean onPreHandle(T event) throws Exception {
@@ -158,7 +153,6 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 * @param event event
 	 * @param path  path
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:17:42
 	 */
 	protected boolean isEnabled(T event, String path) throws Exception {

@@ -3,6 +3,7 @@ package com.taotao.cloud.common.execl.temp.csv;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
@@ -43,7 +44,7 @@ public class CsvReadTest {
         for (CSVRecord record : records) {
             String lastName = record.get(0);
             String firstName = record.get(1);
-            log.info("row:{},{}", lastName, firstName);
+            LogUtil.info("row:{},{}", lastName, firstName);
         }
 
     }
@@ -58,9 +59,9 @@ public class CsvReadTest {
 
         // 读
         List<Object> list = EasyExcel.read(fileName).sheet(0).headRowNumber(0).doReadSync();
-        log.info("数据：{}", list.size());
+        LogUtil.info("数据：{}", list.size());
         for (Object data : list) {
-            log.info("返回数据：{}", JSON.toJSONString(data));
+            LogUtil.info("返回数据：{}", JSON.toJSONString(data));
         }
     }
 
@@ -79,7 +80,7 @@ public class CsvReadTest {
     public void writeFile() throws Exception {
         FileInputStream fileInputStream = new FileInputStream(new File("/Users/zhuangjiaju/test/test1.csv"));
         FileMagic fileMagic = FileMagic.valueOf(fileInputStream);
-        log.info("{}", fileMagic);
+        LogUtil.info("{}", fileMagic);
     }
 
     private List<CsvData> data() {

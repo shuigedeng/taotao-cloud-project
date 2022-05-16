@@ -2,6 +2,7 @@ package com.taotao.cloud.common.execl.core.dataformat;
 
 import com.alibaba.excel.EasyExcel;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -45,10 +46,10 @@ public class DateFormatTest {
             EasyExcel.read(file, DateFormatData.class, null).locale(Locale.CHINA).sheet().doReadSync();
         for (DateFormatData data : list) {
             if (data.getDateStringCn() != null && !data.getDateStringCn().equals(data.getDate())) {
-                log.info("date:cn:{},{}", data.getDateStringCn(), data.getDate());
+                LogUtil.info("date:cn:{},{}", data.getDateStringCn(), data.getDate());
             }
             if (data.getNumberStringCn() != null && !data.getNumberStringCn().equals(data.getNumber())) {
-                log.info("number:cn{},{}", data.getNumberStringCn(), data.getNumber());
+                LogUtil.info("number:cn{},{}", data.getNumberStringCn(), data.getNumber());
             }
         }
         for (DateFormatData data : list) {
@@ -62,10 +63,10 @@ public class DateFormatTest {
             EasyExcel.read(file, DateFormatData.class, null).locale(Locale.US).sheet().doReadSync();
         for (DateFormatData data : list) {
             if (data.getDateStringUs() != null && !data.getDateStringUs().equals(data.getDate())) {
-                log.info("date:us:{},{}", data.getDateStringUs(), data.getDate());
+                LogUtil.info("date:us:{},{}", data.getDateStringUs(), data.getDate());
             }
             if (data.getNumberStringUs() != null && !data.getNumberStringUs().equals(data.getNumber())) {
-                log.info("number:us{},{}", data.getNumberStringUs(), data.getNumber());
+                LogUtil.info("number:us{},{}", data.getNumberStringUs(), data.getNumber());
             }
         }
         for (DateFormatData data : list) {

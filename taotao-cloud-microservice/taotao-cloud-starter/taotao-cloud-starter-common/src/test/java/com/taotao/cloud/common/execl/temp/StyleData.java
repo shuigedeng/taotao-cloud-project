@@ -8,7 +8,6 @@ import java.util.List;
  *
 
  */
-com.taotao.cloud.common.execl
 public class StyleData {
     private byte[] byteValue;
     private Byte[] byteValue2;

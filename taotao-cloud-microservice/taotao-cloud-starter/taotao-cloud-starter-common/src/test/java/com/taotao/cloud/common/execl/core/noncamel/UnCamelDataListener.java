@@ -3,6 +3,7 @@ package com.taotao.cloud.common.execl.core.noncamel;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.junit.Assert;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class UnCamelDataListener extends AnalysisEventListener<UnCamelData> {
 
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
-        log.debug("Head is:{}", JSON.toJSONString(headMap));
+        LogUtil.debug("Head is:{}", JSON.toJSONString(headMap));
         Assert.assertEquals(headMap.get(0), "string1");
         Assert.assertEquals(headMap.get(1), "string2");
         Assert.assertEquals(headMap.get(2), "STring3");
@@ -43,6 +44,6 @@ public class UnCamelDataListener extends AnalysisEventListener<UnCamelData> {
         Assert.assertEquals(unCamelData.getSTring4(), "string4");
         Assert.assertEquals(unCamelData.getSTRING5(), "string5");
         Assert.assertEquals(unCamelData.getSTRing6(), "string6");
-        log.debug("First row:{}", JSON.toJSONString(list.get(0)));
+        LogUtil.debug("First row:{}", JSON.toJSONString(list.get(0)));
     }
 }

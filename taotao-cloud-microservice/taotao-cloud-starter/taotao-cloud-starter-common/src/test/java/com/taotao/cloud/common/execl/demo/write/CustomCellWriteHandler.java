@@ -3,6 +3,7 @@ package com.taotao.cloud.common.execl.demo.write;
 import com.alibaba.excel.util.BooleanUtils;
 import com.alibaba.excel.write.handler.CellWriteHandler;
 import com.alibaba.excel.write.handler.context.CellWriteHandlerContext;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -20,7 +21,7 @@ public class CustomCellWriteHandler implements CellWriteHandler {
     public void afterCellDispose(CellWriteHandlerContext context) {
         Cell cell = context.getCell();
         // 这里可以对cell进行任何操作
-        log.info("第{}行，第{}列写入完成。", cell.getRowIndex(), cell.getColumnIndex());
+        LogUtil.info("第{}行，第{}列写入完成。", cell.getRowIndex(), cell.getColumnIndex());
         if (BooleanUtils.isTrue(context.getHead()) && cell.getColumnIndex() == 0) {
             CreationHelper createHelper = context.getWriteSheetHolder().getSheet().getWorkbook().getCreationHelper();
             Hyperlink hyperlink = createHelper.createHyperlink(HyperlinkType.URL);

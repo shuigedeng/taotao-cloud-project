@@ -11,4 +11,29 @@ public class FillData {
     @ExcelProperty(converter = DoubleStringConverter.class)
     private Double number;
     private String empty;
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getNumber() {
+		return number;
+	}
+
+	public void setNumber(Double number) {
+		this.number = number;
+	}
+
+	public String getEmpty() {
+		return empty;
+	}
+
+	public void setEmpty(String empty) {
+		this.empty = empty;
+	}
 }

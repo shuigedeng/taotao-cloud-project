@@ -33,7 +33,6 @@ public class AbstractAdviceEventHandler<T extends DisruptorEvent> extends
 	 *
 	 * @param event event
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:14:42
 	 */
 	protected boolean preHandle(T event) throws Exception {
@@ -44,7 +43,6 @@ public class AbstractAdviceEventHandler<T extends DisruptorEvent> extends
 	 * postHandle
 	 *
 	 * @param event event
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:14:45
 	 */
 	protected void postHandle(T event) throws Exception {
@@ -55,7 +53,6 @@ public class AbstractAdviceEventHandler<T extends DisruptorEvent> extends
 	 *
 	 * @param event     event
 	 * @param exception exception
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:14:47
 	 */
 	public void afterCompletion(T event, Exception exception) throws Exception {
@@ -66,7 +63,6 @@ public class AbstractAdviceEventHandler<T extends DisruptorEvent> extends
 	 *
 	 * @param event event
 	 * @param chain chain
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:14:50
 	 */
 	protected void executeChain(T event, HandlerChain<T> chain) throws Exception {
@@ -125,7 +121,6 @@ public class AbstractAdviceEventHandler<T extends DisruptorEvent> extends
 	 *
 	 * @param event event
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-03 20:16:17
 	 */
 	protected boolean isEnabled(T event)

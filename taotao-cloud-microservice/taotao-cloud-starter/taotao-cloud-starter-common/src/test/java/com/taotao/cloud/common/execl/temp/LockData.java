@@ -9,7 +9,6 @@ import com.alibaba.excel.annotation.format.NumberFormat;
  *
 
  */
-com.taotao.cloud.common.execl
 public class LockData {
     @NumberFormat("#.##%")
     private Double string0;

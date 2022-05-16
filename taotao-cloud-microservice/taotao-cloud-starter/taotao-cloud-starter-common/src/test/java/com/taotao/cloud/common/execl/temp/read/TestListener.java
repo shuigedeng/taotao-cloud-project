@@ -3,6 +3,7 @@ package com.taotao.cloud.common.execl.temp.read;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.utils.log.LogUtil;
 
 /**
  * TODO
@@ -15,7 +16,7 @@ public class TestListener extends AnalysisEventListener {
 
     @Override
     public void invoke(Object o, AnalysisContext analysisContext) {
-        log.info("解析一条:{}", JSON.toJSONString(o));
+        LogUtil.info("解析一条:{}", JSON.toJSONString(o));
     }
 
     @Override

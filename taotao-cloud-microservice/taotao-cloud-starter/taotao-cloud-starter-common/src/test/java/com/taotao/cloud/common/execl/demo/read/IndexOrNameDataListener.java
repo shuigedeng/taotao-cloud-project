@@ -4,6 +4,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.utils.log.LogUtil;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class IndexOrNameDataListener extends AnalysisEventListener<IndexOrNameDa
 
     @Override
     public void invoke(IndexOrNameData data, AnalysisContext context) {
-        log.info("解析到一条数据:{}", JSON.toJSONString(data));
+        LogUtil.info("解析到一条数据:{}", JSON.toJSONString(data));
         cachedDataList.add(data);
         if (cachedDataList.size() >= BATCH_COUNT) {
             saveData();
@@ -33,14 +34,14 @@ public class IndexOrNameDataListener extends AnalysisEventListener<IndexOrNameDa
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         saveData();
-        log.info("所有数据解析完成！");
+        LogUtil.info("所有数据解析完成！");
     }
 
     /**
      * 加上存储数据库
      */
     private void saveData() {
-        log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-        log.info("存储数据库成功！");
+        LogUtil.info("{}条数据，开始存储数据库！", cachedDataList.size());
+        LogUtil.info("存储数据库成功！");
     }
 }

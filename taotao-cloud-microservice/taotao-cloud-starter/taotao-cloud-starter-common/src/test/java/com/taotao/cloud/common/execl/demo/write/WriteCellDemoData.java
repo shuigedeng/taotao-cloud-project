@@ -9,7 +9,6 @@ import com.alibaba.excel.metadata.data.WriteCellData;
  *
 
  */
-com.taotao.cloud.common.execl
 public class WriteCellDemoData {
     /**
      * 超链接
@@ -40,4 +39,44 @@ public class WriteCellDemoData {
      *
      */
     private WriteCellData<String> richText;
+
+	public WriteCellData<String> getHyperlink() {
+		return hyperlink;
+	}
+
+	public void setHyperlink(WriteCellData<String> hyperlink) {
+		this.hyperlink = hyperlink;
+	}
+
+	public WriteCellData<String> getCommentData() {
+		return commentData;
+	}
+
+	public void setCommentData(WriteCellData<String> commentData) {
+		this.commentData = commentData;
+	}
+
+	public WriteCellData<String> getFormulaData() {
+		return formulaData;
+	}
+
+	public void setFormulaData(WriteCellData<String> formulaData) {
+		this.formulaData = formulaData;
+	}
+
+	public WriteCellData<String> getWriteCellStyle() {
+		return writeCellStyle;
+	}
+
+	public void setWriteCellStyle(WriteCellData<String> writeCellStyle) {
+		this.writeCellStyle = writeCellStyle;
+	}
+
+	public WriteCellData<String> getRichText() {
+		return richText;
+	}
+
+	public void setRichText(WriteCellData<String> richText) {
+		this.richText = richText;
+	}
 }

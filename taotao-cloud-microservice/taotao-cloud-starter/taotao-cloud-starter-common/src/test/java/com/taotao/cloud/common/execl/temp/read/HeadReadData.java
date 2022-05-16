@@ -9,7 +9,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
  *
 
  */
-com.taotao.cloud.common.execl
 public class HeadReadData {
     @ExcelProperty({"主标题","数据1"})
     private String h1;

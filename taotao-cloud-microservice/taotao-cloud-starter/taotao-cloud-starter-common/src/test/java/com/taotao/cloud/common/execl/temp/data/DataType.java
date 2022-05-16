@@ -4,7 +4,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
 
 
 
-com.taotao.cloud.common.execl
 public class DataType {
     /**
      * 任务id

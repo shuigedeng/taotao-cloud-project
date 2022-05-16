@@ -1,8 +1,8 @@
 package com.taotao.cloud.common.execl.demo.read;
 
-import java.util.Date;
-
 import com.alibaba.excel.metadata.data.CellData;
+
+import java.util.Date;
 
 
 
@@ -11,7 +11,6 @@ import com.alibaba.excel.metadata.data.CellData;
  *
 
  */
-com.taotao.cloud.common.execl
 public class CellDataReadDemoData {
     private CellData<String> string;
     // 这里注意 虽然是日期 但是 类型 存储的是number 因为excel 存储的就是number

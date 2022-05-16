@@ -1,11 +1,11 @@
 package com.taotao.cloud.common.execl.demo.write;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
+
+import java.util.Date;
 
 
 
@@ -14,7 +14,6 @@ import com.alibaba.excel.annotation.write.style.HeadRowHeight;
  *
 
  */
-com.taotao.cloud.common.execl
 @ContentRowHeight(10)
 @HeadRowHeight(20)
 @ColumnWidth(25)

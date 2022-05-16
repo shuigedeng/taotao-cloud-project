@@ -9,7 +9,6 @@ import java.util.Date;
  *
 
  */
-com.taotao.cloud.common.execl
 public class UploadData {
     private String string;
     private Date date;

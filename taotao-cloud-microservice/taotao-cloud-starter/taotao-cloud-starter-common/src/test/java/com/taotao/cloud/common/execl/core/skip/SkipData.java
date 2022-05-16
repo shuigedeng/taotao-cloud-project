@@ -7,9 +7,16 @@ import com.alibaba.excel.annotation.ExcelProperty;
 /**
 
  */
-com.taotao.cloud.common.execl
 public class SkipData {
 
     @ExcelProperty("姓名")
     private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

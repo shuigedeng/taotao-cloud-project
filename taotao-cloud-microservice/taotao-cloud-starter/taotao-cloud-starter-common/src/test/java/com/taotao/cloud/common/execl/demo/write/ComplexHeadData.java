@@ -1,8 +1,8 @@
 package com.taotao.cloud.common.execl.demo.write;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
+
+import java.util.Date;
 
 
 
@@ -11,7 +11,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
  *
 
  */
-com.taotao.cloud.common.execl
 public class ComplexHeadData {
     @ExcelProperty({"主标题", "字符串标题"})
     private String string;

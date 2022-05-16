@@ -1,13 +1,13 @@
 package com.taotao.cloud.common.execl.demo.write;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.converters.string.StringImageConverter;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 
 
 
@@ -15,7 +15,6 @@ import com.alibaba.excel.converters.string.StringImageConverter;
  * 图片导出类
  *
  */
-com.taotao.cloud.common.execl
 @ContentRowHeight(100)
 @ColumnWidth(100 / 8)
 public class ImageDataWithAnnotation {

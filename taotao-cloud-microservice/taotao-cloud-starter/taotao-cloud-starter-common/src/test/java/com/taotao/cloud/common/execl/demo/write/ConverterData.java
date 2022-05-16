@@ -1,10 +1,10 @@
 package com.taotao.cloud.common.execl.demo.write;
 
-import java.util.Date;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.format.NumberFormat;
+
+import java.util.Date;
 
 
 
@@ -13,7 +13,6 @@ import com.alibaba.excel.annotation.format.NumberFormat;
  *
 
  */
-com.taotao.cloud.common.execl
 public class ConverterData {
     /**
      * 我想所有的 字符串起前面加上"自定义："三个字
