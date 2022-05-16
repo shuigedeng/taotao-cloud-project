@@ -1,0 +1,78 @@
+{
+  "index_patterns": "test-demo20-*",
+  "template": {
+    "aliases": {
+      "test-demo20": {}
+    },
+    "settings": {
+      "number_of_shards": 5,
+      "number_of_replicas": 1,
+      "refresh_interval": "3s",
+      "index.lifecycle.name": "test-order-policy",
+      "index.lifecycle.rollover_alias": "test-order"
+    },
+    "mappings": {
+      "properties": {
+        "logger": {
+          "type": "keyword"
+        },
+        "log_id": {
+          "type": "long"
+        },
+        "trace_id": {
+          "type": "keyword"
+        },
+        "level": {
+          "type": "long",
+          "null_value": 3
+        },
+        "tag": {
+          "type": "keyword"
+        },
+        "tag1": {
+          "type": "keyword"
+        },
+        "tag2": {
+          "type": "keyword"
+        },
+        "tag3": {
+          "type": "keyword"
+        },
+        "tag4": {
+          "type": "keyword"
+        },
+        "weight": {
+          "type": "long"
+        },
+        "group": {
+          "type": "keyword"
+        },
+        "service": {
+          "type": "keyword"
+        },
+        "class_name": {
+          "type": "keyword"
+        },
+        "thread_name": {
+          "type": "keyword"
+        },
+        "content": {
+          "type": "text"
+        },
+        "metainfo": {
+          "type": "text"
+        },
+        "log_date": {
+          "type": "long"
+        },
+        "log_fulltime": {
+          "type": "long"
+        },
+        "@timestamp": {
+          "type": "date",
+          "format": "date_optional_time||epoch_millis"
+        }
+      }
+    }
+  }
+}
