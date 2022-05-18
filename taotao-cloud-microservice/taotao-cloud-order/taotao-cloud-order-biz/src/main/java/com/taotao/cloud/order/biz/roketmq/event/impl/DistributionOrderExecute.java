@@ -2,6 +2,8 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
+import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderService;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
@@ -10,8 +12,6 @@ import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * 分销订单入库
@@ -28,12 +28,13 @@ public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDa
      * 分销订单
      */
     @Autowired
-    private DistributionOrderService distributionOrderService;
-    /**
-     * 分销订单持久层
-     */
-    @Resource
-    private DistributionOrderMapper distributionOrderMapper;
+    private IFeignDistributionOrderService distributionOrderService;
+
+    // /**
+    //  * 分销订单持久层
+    //  */
+    // @Resource
+    // private DistributionOrderMapper distributionOrderMapper;
 
 
     @Override
@@ -43,15 +44,12 @@ public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDa
 			case TAKE, UNDELIVERED -> {
 				//记录分销订单
 				distributionOrderService.calculationDistribution(orderMessage.getOrderSn());
-				break;
 			}
 			case CANCELLED -> {
 				//修改分销订单状态
 				distributionOrderService.cancelOrder(orderMessage.getOrderSn());
-				break;
 			}
 			default -> {
-				break;
 			}
 		}
     }
