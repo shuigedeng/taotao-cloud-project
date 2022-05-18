@@ -85,6 +85,8 @@ dependencies {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 
+    api 'com.github.yitter:yitter-idgenerator:1.0.6'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation 'junit:junit:4.13.2'
