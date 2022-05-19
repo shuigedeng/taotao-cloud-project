@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils.common;
 
 
+import com.github.yitter.idgen.YitIdHelper;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import java.util.Date;
 
@@ -34,18 +35,13 @@ public final class IdGeneratorUtil {
 	}
 
 	/**
-	 * WORKER
-	 */
-	private static final SequenceUtil WORKER = new SequenceUtil();
-
-	/**
 	 * 获取id
 	 *
 	 * @return long
 	 * @since 2021-09-02 16:43:10
 	 */
 	public static long getId() {
-		return WORKER.nextId();
+		return YitIdHelper.nextId();
 	}
 
 	/**
@@ -55,7 +51,7 @@ public final class IdGeneratorUtil {
 	 * @since 2021-09-02 16:43:20
 	 */
 	public static String getIdStr() {
-		return String.valueOf(WORKER.nextId());
+		return String.valueOf(YitIdHelper.nextId());
 	}
 
 	/**

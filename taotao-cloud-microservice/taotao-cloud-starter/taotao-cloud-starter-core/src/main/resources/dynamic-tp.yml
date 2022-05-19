@@ -28,10 +28,12 @@ spring:
         min: 100
         max: 400
       undertowTp:                                  # undertow web server线程池配置
-        ioThreads: 100
-        workerThreads: 400
+        coreWorkerThreads: 100                   # 核心线程数
+        maxWorkerThreads: 400                    # 最大线程数
+        workerKeepAlive: 40
       executors:                                   # 动态线程池配置
-        - threadPoolName: dynamic-tp-test-1
+        - threadPoolName: dtpExecutor1
+          executorType: common                     # 线程池类型common、eager：适用于io密集型
           corePoolSize: 6
           maximumPoolSize: 8
           queueCapacity: 200
@@ -39,8 +41,14 @@ spring:
           rejectedHandlerType: CallerRunsPolicy    # 拒绝策略，查看RejectedTypeEnum枚举类
           keepAliveTime: 50
           allowCoreThreadTimeOut: false
-          threadNamePrefix: test           # 线程名前缀
-          notifyItems:                     # 报警项，不配置自动会配置（变更通知、容量报警、活性报警、拒绝报警）
+          threadNamePrefix: test                         # 线程名前缀
+          waitForTasksToCompleteOnShutdown: false        # 参考spring线程池设计
+          awaitTerminationSeconds: 5                     # 单位（s）
+          preStartAllCoreThreads: false                  # 是否预热核心线程，默认false
+          runTimeout: 200                                # 任务执行超时阈值，目前只做告警用，单位（ms）
+          queueTimeout: 100                              # 任务在队列等待超时阈值，目前只做告警用，单位（ms）
+          taskWrapperNames: ["ttl"]                          # 任务包装器名称，集成TaskWrapper接口
+          notifyItems:                     # 报警项，不配置自动会按默认值配置（变更通知、容量报警、活性报警、拒绝报警、任务超时报警）
             - type: capacity               # 报警项类型，查看源码 NotifyTypeEnum枚举类
               enabled: true
               threshold: 80                # 报警阈值
@@ -52,5 +60,11 @@ spring:
               enabled: true
               threshold: 80
             - type: reject
+              enabled: true
+              threshold: 1
+            - type: run_timeout
+              enabled: true
+              threshold: 1
+            - type: queue_timeout
               enabled: true
               threshold: 1

@@ -21,10 +21,13 @@ import com.github.yitter.idgen.YitIdHelper;
 import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.common.support.lock.ZLock;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.redis.properties.IdGeneratorProperties;
+import com.taotao.cloud.redis.properties.IdGeneratorProperties.IdGeneratorEnum;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -40,6 +43,9 @@ import org.springframework.data.redis.core.ValueOperations;
 public class IdGeneratorCommandLineRunner implements CommandLineRunner, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
+
+	@Autowired
+	private IdGeneratorProperties idGeneratorProperties;
 
 	/**
 	 * 分布式锁Key
@@ -58,9 +64,9 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 
 	@Override
 	public void run(String... args) {
-		//ContextUtil.registerBean("ttIdGenerator", IdGenerator.class);
-
-		//idGeneratorWithDistributedLock();
+		if (idGeneratorProperties.getType().equals(IdGeneratorEnum.REDIS_LOCK)) {
+			idGeneratorWithDistributedLock();
+		}
 	}
 
 	public void idGeneratorWithDistributedLock() {
@@ -71,7 +77,7 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 		//若已缓存在缓存中，直接跳过不设置
 		if (existWorkerId) {
 			Integer workerId = (Integer) redisRepository.opsForHash().get(CACHE_ID_IP, macAddress);
-			LogUtil.info("已配置分布式workerId {} - {}", macAddress, workerId);
+			LogUtil.info("配置分布式workerId {} - {}", macAddress, workerId);
 			initWorkerId(workerId);
 			return;
 		}
@@ -97,7 +103,7 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 			initWorkerId(workerId);
 			//设置mac地址 - workerId 到hash结构
 			redisRepository.opsForHash().put(CACHE_ID_IP, macAddress, workerId);
-			LogUtil.info("已配置分布式workerId {} - {}", macAddress, workerId);
+			LogUtil.info("配置分布式workerId {} - {}", macAddress, workerId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -122,6 +128,5 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 			YitIdHelper.setIdGenerator(options);
 		}
 	}
-
 
 }

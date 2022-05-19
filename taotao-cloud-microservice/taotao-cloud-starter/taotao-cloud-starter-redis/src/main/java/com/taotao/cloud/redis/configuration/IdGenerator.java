@@ -10,12 +10,15 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
-@Configuration
-@ConditionalOnBean({RedisRepository.class})
+/**
+ * id生成器
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-19 11:18:07
+ */
 public class IdGenerator implements DisposableBean, InitializingBean {
 
 	/**
@@ -68,6 +71,7 @@ public class IdGenerator implements DisposableBean, InitializingBean {
 				throw new RuntimeException(
 					String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MaxWorkerIdNumberByMode + 1));
 			}
+
 			LogUtil.info("当前ID生成器编号: " + workerId);
 			IdGeneratorOptions options = new IdGeneratorOptions(workerId);
 			options.WorkerIdBitLength = WorkerIdBitLength;
