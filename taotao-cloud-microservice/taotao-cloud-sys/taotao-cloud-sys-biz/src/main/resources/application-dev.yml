@@ -562,6 +562,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       acks: 0
+      compression-type: gzip
       properties:
         linger.ms: 100
     consumer:
