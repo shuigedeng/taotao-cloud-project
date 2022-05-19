@@ -21,6 +21,27 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.model.CacheHashKey;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.redis.val.NullVal;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.RedisClusterNode;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisServerCommands;
+import org.springframework.data.redis.core.DefaultTypedTuple;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.TimeoutUtils;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.SerializationUtils;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -39,25 +60,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.DataType;
-import org.springframework.data.redis.connection.RedisClusterNode;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.RedisServerCommands;
-import org.springframework.data.redis.core.DefaultTypedTuple;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.TimeoutUtils;
-import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.SerializationUtils;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
 /**
  * Redis Repository redis 基本操作 可扩展
@@ -2669,6 +2671,10 @@ public class RedisRepository {
 	 */
 	public HashOperations<String, String, Object> opsForHash() {
 		return redisTemplate.opsForHash();
+	}
+
+	public ValueOperations<String, Object> opsForValue() {
+		return redisTemplate.opsForValue();
 	}
 
 	/**
