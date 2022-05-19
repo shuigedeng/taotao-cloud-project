@@ -41,7 +41,7 @@
 总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink**等大数据处理实践。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
 ## 2. spring cloud 微服务架构图
-![mark](./snapshot/springcloud微服务架构图.jpeg)
+![mark](./snapshot/architecture.jpg)
 
 
 ## 3. spring cloud 微服务分层图
