@@ -1,8 +1,6 @@
 package com.taotao.cloud.redis.delay.listener;
 
-import com.taotao.cloud.redis.delay.support.ThreadFactoryCreator;
-import org.openjdk.nashorn.internal.objects.annotations.Getter;
-import org.openjdk.nashorn.internal.objects.annotations.Setter;
+import com.taotao.cloud.common.utils.common.ThreadFactoryCreator;
 import org.redisson.api.RedissonClient;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.util.Assert;
