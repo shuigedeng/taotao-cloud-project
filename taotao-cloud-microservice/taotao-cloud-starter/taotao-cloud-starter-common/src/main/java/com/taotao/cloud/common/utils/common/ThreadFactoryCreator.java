@@ -1,4 +1,4 @@
-package com.taotao.cloud.redis.delay.support;
+package com.taotao.cloud.common.utils.common;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,9 +22,9 @@ public final class ThreadFactoryCreator {
 
 	private static final class NamedWithIdThreadFactory implements ThreadFactory {
 
-		private AtomicInteger threadId = new AtomicInteger(1);
+		private final AtomicInteger threadId = new AtomicInteger(1);
 
-		private String namePrefix;
+		private final String namePrefix;
 
 		private NamedWithIdThreadFactory(String namePrefix) {
 			this.namePrefix = namePrefix;
