@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @ConditionalOnBean({RedisRepository.class})
-@Import(IdGeneratorCommandLineRunner.class)
+@Import({IdGeneratorCommandLineRunner.class, IdGenerator.class})
 public class IdGeneratorAutoConfiguration implements InitializingBean {
 
 	@Override

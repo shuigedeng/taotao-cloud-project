@@ -17,10 +17,10 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-extension'
 
     implementation 'org.springframework.kafka:spring-kafka'
-    implementation 'org.springframework.amqp:spring-amqp:2.4.3'
-    implementation 'org.springframework.amqp:spring-rabbit:2.4.3'
-    implementation 'org.apache.rocketmq:rocketmq-client:4.6.1'
-    implementation 'org.springframework.cloud:spring-cloud-stream'
+    //implementation 'org.springframework.amqp:spring-amqp:2.4.3'
+    //implementation 'org.springframework.amqp:spring-rabbit:2.4.3'
+    //implementation 'org.apache.rocketmq:rocketmq-client:4.9.3'
+    //implementation 'org.springframework.cloud:spring-cloud-stream'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

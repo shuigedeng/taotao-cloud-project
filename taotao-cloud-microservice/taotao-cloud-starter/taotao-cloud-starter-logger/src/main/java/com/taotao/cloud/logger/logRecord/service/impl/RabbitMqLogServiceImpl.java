@@ -21,7 +21,6 @@ import com.taotao.cloud.logger.logRecord.bean.LogDTO;
 import com.taotao.cloud.logger.logRecord.configuration.LogRecordProperties;
 import com.taotao.cloud.logger.logRecord.constants.LogConstants;
 import com.taotao.cloud.logger.logRecord.service.LogService;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,11 +38,11 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "log-record.data-pipeline", havingValue = LogConstants.DataPipeline.RABBIT_MQ)
 public class RabbitMqLogServiceImpl implements LogService {
 
-	/**
-	 * 土包子交换模板
-	 */
-	@Autowired
-    private RabbitTemplate rubeExchangeTemplate;
+	///**
+	// * 土包子交换模板
+	// */
+	//@Autowired
+    //private RabbitTemplate rubeExchangeTemplate;
 
 	/**
 	 * 属性
@@ -53,8 +52,9 @@ public class RabbitMqLogServiceImpl implements LogService {
 
 	@Override
     public boolean createLog(LogDTO logDTO) {
-        LogUtil.info("LogRecord RabbitMq ready to send routingKey [{}] LogDTO [{}]", properties.getRabbitMqProperties().getRoutingKey(), logDTO);
-        rubeExchangeTemplate.convertAndSend(properties.getRabbitMqProperties().getRoutingKey(), JSON.toJSONString(logDTO));
-        return true;
+        //LogUtil.info("LogRecord RabbitMq ready to send routingKey [{}] LogDTO [{}]", properties.getRabbitMqProperties().getRoutingKey(), logDTO);
+        //rubeExchangeTemplate.convertAndSend(properties.getRabbitMqProperties().getRoutingKey(), JSON.toJSONString(logDTO));
+        //return true;
+		return false;
     }
 }
