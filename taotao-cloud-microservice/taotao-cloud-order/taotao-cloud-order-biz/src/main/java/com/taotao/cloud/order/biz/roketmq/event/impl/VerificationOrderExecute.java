@@ -17,6 +17,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 虚拟商品
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-19 15:12:25
  */
 @Component
 public class VerificationOrderExecute implements OrderStatusChangeEvent {

@@ -4,11 +4,14 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Arrays;
 import java.util.List;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 促销商品查询通用类
@@ -21,13 +24,13 @@ import lombok.experimental.SuperBuilder;
 public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {
 
 	@Schema(description = "促销活动id")
-	private String promotionId;
+	private Long promotionId;
 
 	@Schema(description = "促销类型")
 	private String promotionType;
 
 	@Schema(description = "商品活动id")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
@@ -36,13 +39,13 @@ public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {
 	private String categoryPath;
 
 	@Schema(description = "商品SkuId")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "商品SkuIds")
-	private List<String> skuIds;
+	private List<Long> skuIds;
 
 	@Schema(description = "促销活动id")
-	private List<String> promotionIds;
+	private List<Long> promotionIds;
 
 
 	@Override

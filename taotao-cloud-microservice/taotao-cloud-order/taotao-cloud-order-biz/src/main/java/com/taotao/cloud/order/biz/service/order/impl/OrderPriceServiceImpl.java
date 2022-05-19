@@ -141,7 +141,8 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 			} else {
 				//SKU占总订单 金额的百分比
 				BigDecimal priceFluctuationRatio = CurrencyUtil.div(
-					priceDetailDTO.getOriginalPrice(), order.getPriceDetailDTO().getOriginalPrice(),
+					priceDetailDTO.getOriginalPrice(),
+					order.getPriceDetailDTO().getOriginalPrice(),
 					4);
 
 				//记录修改金额

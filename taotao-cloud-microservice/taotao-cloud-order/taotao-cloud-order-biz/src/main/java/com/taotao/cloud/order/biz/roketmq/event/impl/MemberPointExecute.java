@@ -95,7 +95,6 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 		}
 	}
 
-
 	/**
 	 * 提交售后后扣除积分
 	 *

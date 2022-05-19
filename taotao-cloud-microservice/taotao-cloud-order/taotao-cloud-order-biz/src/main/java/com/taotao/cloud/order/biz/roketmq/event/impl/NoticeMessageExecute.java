@@ -1,5 +1,9 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
+import com.taotao.cloud.message.api.dto.NoticeMessageDTO;
+import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
+import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
+import com.taotao.cloud.message.api.feign.IFeignNoticeMessageService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
@@ -30,7 +34,8 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 	AfterSaleStatusChangeEvent {
 
 	@Autowired
-	private NoticeMessageService noticeMessageService;
+	private IFeignNoticeMessageService noticeMessageService;
+
 	@Autowired
 	private IOrderService orderService;
 

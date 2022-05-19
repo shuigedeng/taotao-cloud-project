@@ -3,15 +3,13 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignLogisticsFallback;
-import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
-import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
-import java.util.List;
-import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * 远程调用物流公司模块
@@ -31,7 +29,7 @@ public interface IFeignLogisticsService {
 	 * @since 2022-04-25 16:47:29
 	 */
 	@GetMapping("/logistic/codes")
-	Result<LogisticsVO> getById(@RequestParam String logisticsId);
+	Result<LogisticsVO> getById(@RequestParam Long logisticsId);
 
 	/**
 	 * 得到物流
@@ -43,4 +41,7 @@ public interface IFeignLogisticsService {
 	 */
 	@GetMapping("/logistic/info")
 	Result<TracesVO> getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
+
+	List<LogisticsVO> list();
+
 }

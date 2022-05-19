@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 砍价活动参与实体类
@@ -13,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @Schema(description = "砍价活动VO")
-//public class KanjiaActivityVO extends KanjiaActivity {
-public class KanjiaActivityVO {
+public class KanjiaActivityVO extends KanjiaActivityBaseVO {
 
 	@Schema(description = "是否可以砍价")
 	private Boolean help;

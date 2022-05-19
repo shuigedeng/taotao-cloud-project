@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
  * 退款支持
  */
 @Component
-
 public class RefundSupport {
     /**
      * 店铺流水

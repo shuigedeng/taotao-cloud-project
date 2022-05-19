@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 /**
  * 微信消息执行器
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-19 15:12:33
  */
 @Service
 public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent {

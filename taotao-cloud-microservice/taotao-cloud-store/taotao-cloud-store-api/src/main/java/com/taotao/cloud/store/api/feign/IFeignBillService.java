@@ -1,13 +1,9 @@
 package com.taotao.cloud.store.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.store.api.dto.CollectionDTO;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreServiceFallbackImpl;
-import com.taotao.cloud.store.api.vo.StoreVO;
+import com.taotao.cloud.store.api.vo.BillVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用店铺模块
@@ -19,5 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IFeignBillService {
 
 
+    BillVO getById(String id);
 }
 

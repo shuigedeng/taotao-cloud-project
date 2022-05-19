@@ -16,12 +16,9 @@
 package com.taotao.cloud.message.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.message.api.feign.fallback.RemoteWithdrawFallbackImpl;
-import com.taotao.cloud.message.api.vo.WithdrawVO;
+import com.taotao.cloud.message.api.dto.NoticeMessageDTO;
+import com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 远程调用售后模块
@@ -29,19 +26,10 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteWithdrawFallbackImpl.class)
-public interface RemoteWithdrawService {
+@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignNoticeMessageServiceFallback.class)
+public interface IFeignNoticeMessageService {
 
-	/**
-	 * 根据id查询提现申请信息
-	 *
-	 * @param id id
-	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.aftersale.api.vo.WithdrawVO>
-	 * @author shuigedeng
-	 * @since 2020/11/20 上午9:50
-	 * @version 2022.03
-	 */
-	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
-	Result<WithdrawVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);
+	void noticeMessage(NoticeMessageDTO noticeMessageDTO);
+
 }
 

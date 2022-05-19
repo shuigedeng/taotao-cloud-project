@@ -22,6 +22,7 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -57,6 +58,7 @@ import com.taotao.cloud.order.biz.service.order.ITradeService;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import com.taotao.cloud.promotion.api.vo.PintuanVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
@@ -68,6 +70,7 @@ import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
+import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -385,12 +388,12 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		if (order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
 			&& order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 			//获取对应物流
-			Logistics logistics = logisticsService.getById(logisticsId);
+			LogisticsVO logistics = logisticsService.getById(logisticsId).data();
 			if (logistics == null) {
 				throw new BusinessException(ResultEnum.ORDER_LOGISTICS_ERROR);
 			}
 			//写入物流信息
-			order.setLogisticsCode(logistics.getId());
+			order.setLogisticsCode(logistics.getCode());
 			order.setLogisticsName(logistics.getName());
 			order.setLogisticsNo(logisticsNo);
 			order.setLogisticsTime(LocalDateTime.now());
@@ -418,7 +421,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		//获取订单信息
 		Order order = this.getBySn(orderSn);
 		//获取踪迹信息
-		return logisticsService.getLogistic(order.getLogisticsCode(), order.getLogisticsNo());
+		return logisticsService.getLogistic(order.getId(), order.getLogisticsNo());
 	}
 
 	@Override
@@ -517,14 +520,14 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		Order order = this.getBySn(sn);
 		if (order == null) {
 			log.error("订单号为" + sn + "的订单不存在！");
-			throw new BusinessException();
+			throw new BusinessException("订单号为" + sn + "的订单不存在！");
 		}
 		LambdaUpdateWrapper<Order> updateWrapper = new LambdaUpdateWrapper<>();
-		updateWrapper.eq(Order::getSn, sn).set(Order::getDeleteFlag, true);
+		updateWrapper.eq(Order::getSn, sn).set(Order::getDelFlag, true);
 		this.update(updateWrapper);
 		LambdaUpdateWrapper<OrderItem> orderItemLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
 		orderItemLambdaUpdateWrapper.eq(OrderItem::getOrderSn, sn)
-			.set(OrderItem::getDeleteFlag, true);
+			.set(OrderItem::getDelFlag, true);
 		this.orderItemService.update(orderItemLambdaUpdateWrapper);
 	}
 
@@ -543,7 +546,8 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	@Override
 	public void agglomeratePintuanOrder(Long pintuanId, String parentOrderSn) {
 		//获取拼团配置
-		Pintuan pintuan = pintuanService.getById(pintuanId);
+		PintuanVO pintuan = pintuanService.getById(pintuanId);
+
 		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
 		if (Boolean.TRUE.equals(pintuan.getFictitious())
 			&& pintuan.getRequiredNum() > list.size()) {
@@ -641,7 +645,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 * @param list 待发货订单列表
 	 */
 	private void checkBatchDeliver(List<OrderBatchDeliverDTO> list) {
-		List<Logistics> logistics = logisticsService.list();
+		List<LogisticsVO> logistics = logisticsService.list();
 		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
 			//查看订单号是否存在-是否是当前店铺的订单
 			Order order = this.getOne(new LambdaQueryWrapper<Order>()
@@ -696,13 +700,13 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 * @param pintuanId     拼团活动ID
 	 * @param parentOrderSn 拼团父订单编号
 	 */
-	private void checkPintuanOrder(String pintuanId, String parentOrderSn) {
+	private void checkPintuanOrder(Long pintuanId, String parentOrderSn) {
 		//拼团有效参数判定
 		if (CharSequenceUtil.isEmpty(parentOrderSn)) {
 			return;
 		}
 		//获取拼团配置
-		Pintuan pintuan = pintuanService.getById(pintuanId);
+		PintuanVO pintuan = pintuanService.getById(pintuanId);
 		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
 		int count = list.size();
 		if (count == 1) {
@@ -734,7 +738,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 * @param parentOrderSn 拼团订单sn
 	 * @return 所有当前与当前拼团订单sn相关的订单
 	 */
-	private List<Order> getPintuanOrder(String pintuanId, String parentOrderSn) {
+	private List<Order> getPintuanOrder(Long pintuanId, String parentOrderSn) {
 		//寻找拼团的所有订单
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(Order::getPromotionId, pintuanId)
@@ -802,7 +806,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	private void checkOrder(Order order) {
 		//订单类型为拼团订单，检测购买数量是否超过了限购数量
 		if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderType())) {
-			Pintuan pintuan = pintuanService.getById(order.getPromotionId());
+			PintuanVO pintuan = pintuanService.getById(order.getPromotionId());
 			Integer limitNum = pintuan.getLimitNum();
 			if (limitNum != 0 && order.getGoodsNum() > limitNum) {
 				throw new BusinessException(ResultEnum.PINTUAN_LIMIT_NUM_ERROR);

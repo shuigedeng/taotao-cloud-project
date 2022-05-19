@@ -15,6 +15,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
@@ -23,9 +24,9 @@ import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.api.vo.order.OrderItemVO;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.mapper.order.IOrderComplaintMapper;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintService;
@@ -120,8 +121,8 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			SecurityUser currentUser = SecurityUtil.getUser();
 			//查询订单信息
 			OrderDetailVO orderDetailVO = orderService.queryDetail(orderComplaintDTO.getOrderSn());
-			List<OrderItem> orderItems = orderDetailVO.getOrderItems();
-			OrderItem orderItem = orderItems.stream()
+			List<OrderItemVO> orderItems = orderDetailVO.getOrderItems();
+			OrderItemVO orderItem = orderItems.stream()
 				.filter(i -> orderComplaintDTO.getSkuId().equals(i.getSkuId()))
 				.findFirst()
 				.orElse(null);
@@ -135,7 +136,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			BeanUtil.copyProperties(orderComplaintDTO, orderComplaint);
 
 			//获取商品规格信息
-			GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());
+			GoodsSkuVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.COMPLAINT_SKU_EMPTY_ERROR);
 			}
@@ -147,7 +148,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			orderComplaint.setNum(orderItem.getNum());
 
 			//获取订单信息
-			orderComplaint.setOrderTime(orderDetailVO.getOrder().getCreateTime());
+			orderComplaint.setOrderTime(orderDetailVO.getOrder().getcre());
 			orderComplaint.setOrderPrice(orderDetailVO.getOrder().getPriceDetailDTO().getBillPrice());
 			orderComplaint.setNum(orderDetailVO.getOrder().getGoodsNum());
 			orderComplaint.setFreightPrice(orderDetailVO.getOrder().getPriceDetailDTO().getFreightPrice());
@@ -193,7 +194,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 
 	@Override
 	public long waitComplainNum() {
-		QueryWrapper queryWrapper = Wrappers.query();
+		QueryWrapper<OrderComplaint> queryWrapper = Wrappers.query();
 		queryWrapper.ne("complain_status", ComplaintStatusEnum.COMPLETE.name());
 		queryWrapper.eq(CharSequenceUtil.equals(UserContext.getCurrentUser().getRole().name(), UserEnums.STORE.name()),
 			"store_id", UserContext.getCurrentUser().getStoreId());

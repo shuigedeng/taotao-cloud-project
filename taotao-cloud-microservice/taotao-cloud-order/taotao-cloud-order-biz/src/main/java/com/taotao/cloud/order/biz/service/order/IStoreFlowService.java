@@ -2,7 +2,9 @@ package com.taotao.cloud.order.biz.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.api.query.distribution.DistributionPageQuery;
 import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
+import com.taotao.cloud.order.api.query.store.StorePageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.StoreFlow;
 import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
@@ -76,23 +78,20 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	/**
 	 * 根据结算单ID获取商家流水
 	 *
-	 * @param id     结算单ID
-	 * @param type   类型
-	 * @param pageVO 分页
+	 * @param storePageQuery 存储页面查询
 	 * @return {@link IPage }<{@link StoreFlow }>
-	 * @since 2022-04-28 08:54:53
+	 * @since 2022-05-19 15:47:59
 	 */
-	IPage<StoreFlow> getStoreFlow(String id, String type, PageVO pageVO);
+	IPage<StoreFlow> getStoreFlow(StorePageQuery storePageQuery);
 
 	/**
 	 * 根据结算单ID获取商家流水
 	 *
-	 * @param id     结算单ID
-	 * @param pageVO 分页
+	 * @param distributionPageQuery 分配页面查询
 	 * @return {@link IPage }<{@link StoreFlow }>
-	 * @since 2022-04-28 08:54:53
+	 * @since 2022-05-19 15:48:02
 	 */
-	IPage<StoreFlow> getDistributionFlow(String id, PageVO pageVO);
+	IPage<StoreFlow> getDistributionFlow(DistributionPageQuery distributionPageQuery);
 
 
 	/**

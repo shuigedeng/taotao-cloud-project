@@ -84,6 +84,14 @@ public final class CurrencyUtil {
 		return v1.multiply(v2).setScale(scale, RoundingMode.HALF_UP);
 	}
 
+	public static BigDecimal mul(int v1, BigDecimal v2, int scale) {
+		if (scale < 0) {
+			throw new IllegalArgumentException(
+				"The scale must be a positive integer or zero");
+		}
+		return BigDecimal.valueOf(v1).multiply(v2).setScale(scale, RoundingMode.HALF_UP);
+	}
+
 	/**
 	 * 提供（相对）精确的除法运算，当发生除不尽的情况时， 精确到小数点以后10位，以后的数字四舍五入。
 	 *
