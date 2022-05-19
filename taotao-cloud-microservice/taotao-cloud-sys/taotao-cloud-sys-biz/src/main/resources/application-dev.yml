@@ -38,9 +38,9 @@ easy-es:
   maxConnPerRoute: 100 # 最大连接路由数 单位:个
   global-config:
     db-config:
-      table-prefix: daily_ # 索引前缀,可用于区分环境  默认为空
-      id-type: auto # id生成策略 默认为auto
-      field-strategy: not_empty # 字段更新策略 默认为not_null
+      table-prefix: tt_ # 索引前缀,可用于区分环境  默认为空
+      id-type: none # id生成策略 默认为auto
+      field-strategy: IGNORED # 字段更新策略 默认为not_null
 
 redisson:
   single_server_config:

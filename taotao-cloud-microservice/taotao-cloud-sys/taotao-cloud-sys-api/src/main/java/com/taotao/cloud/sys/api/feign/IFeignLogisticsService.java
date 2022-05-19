@@ -42,6 +42,7 @@ public interface IFeignLogisticsService {
 	@GetMapping("/logistic/info")
 	Result<TracesVO> getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
 
+	@GetMapping("/logistic/list")
 	List<LogisticsVO> list();
 
 }

@@ -56,7 +56,9 @@ public class EsContext {
 	public EsContext(List<String> uris, String username, String paasword) {
 		this.username = username;
 		this.paasword = paasword;
-		this.urls = uris.toArray(new String[uris.size()]);
+
+		this.urls = uris.stream().map(e -> !e.contains("://") ? "http://" + e : e).toList()
+			.toArray(new String[uris.size()]);
 
 		this.initMeta();
 	}
@@ -104,15 +106,17 @@ public class EsContext {
 	}
 
 	private String getUrl() {
+		String url;
 		if (urls.length == 0) {
-			return urls[0];
+			url = urls[0];
 		} else {
 			if (urlIndex > 10000000) {
 				urlIndex = 0;
 			}
 
-			return urls[urlIndex % urls.length];
+			url = urls[urlIndex % urls.length];
 		}
+		return "http://" + url;
 	}
 
 	protected PriHttpUtils getHttp(String path) {
