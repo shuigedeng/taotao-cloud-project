@@ -45,10 +45,11 @@
 		<producerConfig>acks=0</producerConfig>
 		<producerConfig>linger.ms=100</producerConfig>
 		<producerConfig>retries=0</producerConfig>
-		<producerConfig>batch.size=50</producerConfig>
-		<producerConfig>buffer-memory=33554432</producerConfig>
+		<producerConfig>batch.size=16384</producerConfig>
+		<producerConfig>buffer.memory=33554432</producerConfig>
 		<producerConfig>max.request.size=1048576</producerConfig>
-		<producerConfig>max.block.ms=200</producerConfig>
+		<producerConfig>max.block.ms=60000</producerConfig>
+		<producerConfig>compression.type=gzip</producerConfig>
 	</appender>
 
 <!--	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
