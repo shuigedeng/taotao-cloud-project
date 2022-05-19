@@ -9,18 +9,18 @@ public class PintuanOrderMessage {
 	/**
 	 * 拼团活动id
 	 */
-	private String pintuanId;
+	private Long pintuanId;
 
 	/**
 	 * 父拼团订单sn
 	 */
 	private String orderSn;
 
-	public String getPintuanId() {
+	public Long getPintuanId() {
 		return pintuanId;
 	}
 
-	public void setPintuanId(String pintuanId) {
+	public void setPintuanId(Long pintuanId) {
 		this.pintuanId = pintuanId;
 	}
 

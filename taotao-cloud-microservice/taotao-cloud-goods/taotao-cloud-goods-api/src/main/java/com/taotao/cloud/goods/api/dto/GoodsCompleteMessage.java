@@ -20,13 +20,13 @@ import lombok.NoArgsConstructor;
 public class GoodsCompleteMessage {
 
 	@Schema(description = "商品id")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "商品skuId")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "购买会员sn")
-	private String memberId;
+	private Long memberId;
 
 	@Schema(description = "购买数量")
 	private Integer buyNum;

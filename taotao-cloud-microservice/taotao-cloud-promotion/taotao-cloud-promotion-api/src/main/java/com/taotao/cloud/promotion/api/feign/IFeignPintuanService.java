@@ -17,6 +17,7 @@ package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPintuanServiceFallback;
+import com.taotao.cloud.promotion.api.vo.PintuanVO;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -27,8 +28,9 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @FeignClient(contextId = "IFeignPintuanService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPintuanServiceFallback.class)
 public interface IFeignPintuanService {
+    PintuanVO getById(Long pintuanId);
 
-	///**
+    ///**
 	// * 根据id查询提现申请信息
 	// *
 	// * @param id id

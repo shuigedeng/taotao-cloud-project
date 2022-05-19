@@ -1,7 +1,6 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.core.date.DateTime;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
 import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderService;
 import com.taotao.cloud.order.api.dto.order.OrderMessage;
@@ -57,14 +56,9 @@ public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDa
     @Override
     public void execute() {
         //计算分销提佣
-        distributionOrderMapper.rebate(DistributionOrderStatusEnum.WAIT_BILL.name(), new DateTime());
-
+		distributionOrderService.rebate(DistributionOrderStatusEnum.WAIT_BILL.name(), new DateTime());
         //修改分销订单状态
-        distributionOrderService.update(new LambdaUpdateWrapper<DistributionOrder>()
-                .eq(DistributionOrder::getDistributionOrderStatus, DistributionOrderStatusEnum.WAIT_BILL.name())
-                .le(DistributionOrder::getSettleCycle, new DateTime())
-                .set(DistributionOrder::getDistributionOrderStatus, DistributionOrderStatusEnum.WAIT_CASH.name()));
-
+        distributionOrderService.updateStatus();
     }
 
     @Override

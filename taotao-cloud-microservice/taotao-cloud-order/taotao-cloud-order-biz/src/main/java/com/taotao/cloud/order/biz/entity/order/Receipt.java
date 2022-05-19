@@ -71,7 +71,7 @@ public class Receipt extends BaseSuperEntity<Receipt, Long> {
 	 * 会员ID
 	 */
 	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员ID'")
-    private String memberId;
+    private Long memberId;
 	/**
 	 * 会员名称
 	 */
@@ -81,7 +81,7 @@ public class Receipt extends BaseSuperEntity<Receipt, Long> {
 	 * 商家ID
 	 */
 	@Column(name = "store_id", columnDefinition = "varchar(64) not null comment '商家ID'")
-    private String storeId;
+    private Long storeId;
 	/**
 	 * 商家名称
 	 */

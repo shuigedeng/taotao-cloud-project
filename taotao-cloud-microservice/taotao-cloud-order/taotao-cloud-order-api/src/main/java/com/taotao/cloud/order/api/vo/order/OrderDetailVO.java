@@ -34,7 +34,7 @@ public class OrderDetailVO implements Serializable {
 	/**
 	 * 订单
 	 */
-	private OrderSimpleVO order;
+	private OrderBaseVO order;
 
 	/**
 	 * 子订单信息
@@ -79,13 +79,13 @@ public class OrderDetailVO implements Serializable {
 	@Schema(description = "价格详情")
 	private String priceDetail;
 
-//	public OrderDetailVO(Order order, List<OrderItem> orderItems, List<OrderLog> orderLogs,
-//						 Receipt receipt) {
-//		this.order = order;
-//		this.orderItems = orderItems;
-//		this.orderLogs = orderLogs;
-//		this.receipt = receipt;
-//	}
+	public OrderDetailVO(OrderBaseVO order, List<OrderItemVO> orderItems, List<OrderLogVO> orderLogs,
+						 ReceiptVO receipt) {
+		this.order = order;
+		this.orderItems = orderItems;
+		this.orderLogs = orderLogs;
+		this.receipt = receipt;
+	}
 
 	/**
 	 * 可操作类型

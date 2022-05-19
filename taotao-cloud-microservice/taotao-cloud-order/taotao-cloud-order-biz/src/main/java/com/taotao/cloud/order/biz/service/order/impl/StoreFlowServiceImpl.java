@@ -5,13 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.query.distribution.DistributionPageQuery;
 import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
+import com.taotao.cloud.order.api.query.store.StorePageQuery;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
@@ -21,7 +25,9 @@ import com.taotao.cloud.order.biz.service.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.order.biz.service.order.IStoreFlowService;
 import com.taotao.cloud.payment.api.feign.IFeignRefundLogService;
+import com.taotao.cloud.payment.api.vo.RefundLogVO;
 import com.taotao.cloud.store.api.feign.IFeignBillService;
+import com.taotao.cloud.store.api.vo.BillVO;
 import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.vo.StoreFlowRefundDownloadVO;
 import lombok.AllArgsConstructor;
@@ -67,7 +73,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 
         //如果查询到多条支付记录，打印日志
         if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-            log.error("订单[{}]检测到重复付款，请处理", orderSn);
+            LogUtil.error("订单[{}]检测到重复付款，请处理", orderSn);
         }
 
         //获取订单促销类型,如果为促销订单则获取促销商品并获取结算价
@@ -78,9 +84,9 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
             BeanUtil.copyProperties(item, storeFlow);
 
             //入账
-            storeFlow.setId(SnowFlake.getIdStr());
+            storeFlow.setId(IdGeneratorUtil.getId());
             storeFlow.setFlowType(FlowTypeEnum.PAY.name());
-            storeFlow.setSn(SnowFlake.createStr("SF"));
+            storeFlow.setSn(IdGeneratorUtil.createStr("SF"));
             storeFlow.setOrderSn(item.getOrderSn());
             storeFlow.setOrderItemSn(item.getSn());
             storeFlow.setStoreId(order.getStoreId());
@@ -125,7 +131,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
         StoreFlow storeFlow = new StoreFlow();
         //退款
         storeFlow.setFlowType(FlowTypeEnum.REFUND.name());
-        storeFlow.setSn(SnowFlake.createStr("SF"));
+        storeFlow.setSn(IdGeneratorUtil.createStr("SF"));
         storeFlow.setRefundSn(afterSale.getSn());
         storeFlow.setOrderSn(afterSale.getOrderSn());
         storeFlow.setOrderItemSn(afterSale.getOrderItemSn());
@@ -154,7 +160,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
         //最终结算金额
         storeFlow.setBillPrice(CurrencyUtil.add(CurrencyUtil.add(storeFlow.getFinalPrice(), storeFlow.getDistributionRebate()), storeFlow.getCommissionPrice()));
         //获取第三方支付流水号
-        RefundLog refundLog = refundLogService.queryByAfterSaleSn(afterSale.getSn());
+		RefundLogVO refundLog = refundLogService.queryByAfterSaleSn(afterSale.getSn());
         storeFlow.setTransactionId(refundLog.getReceivableNo());
         storeFlow.setPaymentName(refundLog.getPaymentName());
         this.save(storeFlow);
@@ -181,14 +187,14 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     }
 
     @Override
-    public IPage<StoreFlow> getStoreFlow(String id, String type, PageVO pageVO) {
-        Bill bill = billService.getById(id);
+    public IPage<StoreFlow> getStoreFlow(StorePageQuery storePageQuery) {
+        BillVO bill = billService.getById(storePageQuery.getId());
         return this.getStoreFlow(StoreFlowPageQuery.builder().type(type).pageVO(pageVO).bill(bill).build());
     }
 
     @Override
-    public IPage<StoreFlow> getDistributionFlow(String id, PageVO pageVO) {
-        Bill bill = billService.getById(id);
+    public IPage<StoreFlow> getDistributionFlow(DistributionPageQuery distributionPageQuery) {
+		BillVO bill = billService.getById(distributionPageQuery.getId());
         return this.getStoreFlow(StoreFlowPageQuery.builder().pageVO(pageVO).bill(bill).build());
     }
 

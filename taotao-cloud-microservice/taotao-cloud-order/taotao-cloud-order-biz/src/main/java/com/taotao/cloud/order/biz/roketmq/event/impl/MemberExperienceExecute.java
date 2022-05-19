@@ -27,40 +27,40 @@ import java.math.BigDecimal;
 @Service
 public class MemberExperienceExecute implements OrderStatusChangeEvent {
 
-    /**
-     * 配置
-     */
-    @Autowired
-    private IFeignSettingService settingService;
-    /**
-     * 会员
-     */
-    @Autowired
-    private IFeignMemberService memberService;
-    /**
-     * 订单
-     */
-    @Autowired
-    private IOrderService orderService;
+	/**
+	 * 配置
+	 */
+	@Autowired
+	private IFeignSettingService settingService;
+	/**
+	 * 会员
+	 */
+	@Autowired
+	private IFeignMemberService memberService;
+	/**
+	 * 订单
+	 */
+	@Autowired
+	private IOrderService orderService;
 
-    /**
-     * 完成订单赠送经验值
-     *
-     * @param orderMessage 订单消息
-     */
-    @Override
-    public void orderChange(OrderMessage orderMessage) {
-        if (orderMessage.getNewStatus().equals(OrderStatusEnum.COMPLETED)) {
-            //获取经验值设置
+	/**
+	 * 完成订单赠送经验值
+	 *
+	 * @param orderMessage 订单消息
+	 */
+	@Override
+	public void orderChange(OrderMessage orderMessage) {
+		if (orderMessage.getNewStatus().equals(OrderStatusEnum.COMPLETED)) {
+			//获取经验值设置
 			ExperienceSettingVO experienceSetting = getExperienceSetting();
-            //获取订单信息
-            Order order = orderService.getBySn(orderMessage.getOrderSn());
-            //计算赠送经验值数量
-            BigDecimal point = CurrencyUtil.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
-            //赠送会员经验值
-            memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(), order.getMemberId(), "会员下单，赠送经验值" + point + "分");
-        }
-    }
+			//获取订单信息
+			Order order = orderService.getBySn(orderMessage.getOrderSn());
+			//计算赠送经验值数量
+			BigDecimal point = CurrencyUtil.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
+			//赠送会员经验值
+			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(), order.getMemberId(), "会员下单，赠送经验值" + point + "分");
+		}
+	}
 
 	/**
 	 * 获取经验值设置
@@ -69,6 +69,6 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 * @since 2022-05-16 17:35:40
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-        return settingService.getExperienceSetting(SettingEnum.EXPERIENCE_SETTING.name()).data();
-    }
+		return settingService.getExperienceSetting(SettingEnum.EXPERIENCE_SETTING.name()).data();
+	}
 }

@@ -17,6 +17,7 @@ package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityServiceFallback;
+import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -29,4 +30,5 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(contextId = "IFeignKanjiaActivityService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignKanjiaActivityServiceFallback.class)
 public interface IFeignKanjiaActivityService {
 
+	KanjiaActivityVO getById(Long promotionId);
 }

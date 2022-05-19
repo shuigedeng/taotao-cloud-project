@@ -1,5 +1,6 @@
 package com.taotao.cloud.distribution.api.feign.fallback;
 
+import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -15,6 +16,21 @@ public class FeignDistributionOrderServiceFallback implements FallbackFactory<IF
 
 			@Override
 			public void cancelOrder(String orderSn) {
+
+			}
+
+			@Override
+			public void rebate(String name, DateTime dateTime) {
+
+			}
+
+			@Override
+			public void updateStatus() {
+
+			}
+
+			@Override
+			public void refundOrder(String sn) {
 
 			}
 		};

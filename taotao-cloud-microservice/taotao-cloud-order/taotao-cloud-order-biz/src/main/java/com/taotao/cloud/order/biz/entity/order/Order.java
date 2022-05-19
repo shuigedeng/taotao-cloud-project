@@ -284,8 +284,8 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	/**
 	 * 是否为某订单类型的订单，如果是则为订单类型的id，否则为空
 	 */
-	@Column(name = "promotion_id", columnDefinition = "varchar(64) not null comment '是否为某订单类型的订单，如果是则为订单类型的id，否则为空'")
-	private String promotionId;
+	@Column(name = "promotion_id", columnDefinition = "bigint  null comment '是否为某订单类型的订单，如果是则为订单类型的id，否则为空'")
+	private Long promotionId;
 
 	/**
 	 * 订单类型

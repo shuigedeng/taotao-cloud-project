@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 经验值设置
@@ -37,6 +38,6 @@ public class ExperienceSettingVO implements Serializable {
 	/**
 	 * 购物获取经验值,一元*经验值
 	 */
-	private Integer money;
+	private BigDecimal money;
 
 }

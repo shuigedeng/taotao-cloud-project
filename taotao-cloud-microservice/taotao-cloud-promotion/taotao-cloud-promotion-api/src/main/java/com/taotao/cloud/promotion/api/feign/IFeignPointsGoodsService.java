@@ -16,28 +16,21 @@
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsServiceFallback;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
-import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
+import com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityServiceFallback;
+import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 /**
- * 远程调用售后模块
+ * IFeignKanjiaActivityService
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2022.04
+ * @since 2022-04-07 22:09
  */
-@FeignClient(contextId = "IFeignPromotionGoodsService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPromotionGoodsServiceFallback.class)
-public interface IFeignPromotionGoodsService {
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignKanjiaActivityServiceFallback.class)
+public interface IFeignPointsGoodsService {
 
-	@GetMapping(value = "/withdraw/info")
-	Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsSearchParams searchParams);
+	void updateById(PointsGoodsVO pointsGoodsVO);
 
-    void updateBatchById(List<PromotionGoodsVO> promotionGoods);
-
+	PointsGoodsVO getPointsGoodsDetail(Long promotionId);
 }
-

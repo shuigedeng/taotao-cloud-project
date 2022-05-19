@@ -15,10 +15,8 @@
  */
 package com.taotao.cloud.message.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.message.api.feign.RemoteWithdrawService;
-import com.taotao.cloud.message.api.vo.WithdrawVO;
+import com.taotao.cloud.message.api.dto.NoticeMessageDTO;
+import com.taotao.cloud.message.api.feign.IFeignNoticeMessageService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -27,14 +25,14 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class RemoteWithdrawFallbackImpl implements FallbackFactory<RemoteWithdrawService> {
+public class FeignNoticeMessageServiceFallback implements FallbackFactory<IFeignNoticeMessageService> {
 	@Override
-	public RemoteWithdrawService create(Throwable throwable) {
-		return new RemoteWithdrawService() {
+	public IFeignNoticeMessageService create(Throwable throwable) {
+		return new IFeignNoticeMessageService() {
+
 			@Override
-			public Result<WithdrawVO> getMemberSecurityUser(Long id) {
-				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-				return Result.fail(null, 500);
+			public void noticeMessage(NoticeMessageDTO noticeMessageDTO) {
+
 			}
 		};
 	}
