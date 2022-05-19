@@ -3,6 +3,7 @@ package com.taotao.cloud.dubbo.filter;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TraceContextHolder;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
@@ -33,7 +34,7 @@ public class DubboTraceFilter implements Filter {
 		if (isProviderSide) {
 			//服务提供者逻辑
 			String traceId = invocation.getAttachment(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
-			if (StringUtils.isEmpty(traceId)) {
+			if (StringUtil.isEmpty(traceId)) {
 				traceId = IdGeneratorUtil.getIdStr();
 				TraceContextHolder.setTraceId(traceId);
 				TraceUtil.mdcTraceId(traceId);
@@ -44,7 +45,7 @@ public class DubboTraceFilter implements Filter {
 		} else {
 			//服务消费者逻辑
 			String traceId = TraceUtil.getTraceId();
-			if (!StringUtils.isEmpty(traceId)) {
+			if (!StringUtil.isEmpty(traceId)) {
 				invocation.setAttachment(CommonConstant.TAOTAO_CLOUD_TRACE_ID, traceId);
 			}
 		}
