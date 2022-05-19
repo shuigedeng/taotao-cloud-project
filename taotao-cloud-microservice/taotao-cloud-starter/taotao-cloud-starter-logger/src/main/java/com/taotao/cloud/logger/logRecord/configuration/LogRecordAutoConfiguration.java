@@ -26,7 +26,8 @@ import org.springframework.context.annotation.Import;
  * @since 2022-04-26 14:49:05
  */
 @ComponentScan("com.taotao.cloud.logger.logRecord")
-@Import({RabbitMqSenderConfiguration.class, RocketMqSenderConfiguration.class})
+//@Import({RabbitMqSenderConfiguration.class, RocketMqSenderConfiguration.class})
+//@Import({RabbitMqSenderConfiguration.class, RocketMqSenderConfiguration.class})
 public class LogRecordAutoConfiguration {
 
 }
