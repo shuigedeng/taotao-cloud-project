@@ -36,6 +36,7 @@ import java.util.concurrent.Executor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -53,7 +54,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * @since 1.2
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({DingerProperties.class})
 @AutoConfigureAfter({
 	BeanConfiguration.class,

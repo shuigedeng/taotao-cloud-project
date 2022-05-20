@@ -19,6 +19,7 @@ package com.taotao.cloud.ip2region.configuration;
 import com.taotao.cloud.ip2region.impl.Ip2regionSearcherImpl;
 import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
 import com.taotao.cloud.ip2region.properties.Ip2regionProperties;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,7 @@ import org.springframework.core.io.ResourceLoader;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({Ip2regionProperties.class})
 @ConditionalOnProperty(prefix = Ip2regionProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class Ip2regionAutoConfiguration {

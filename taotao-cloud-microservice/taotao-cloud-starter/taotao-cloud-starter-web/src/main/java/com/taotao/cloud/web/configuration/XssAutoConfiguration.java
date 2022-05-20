@@ -23,6 +23,8 @@ import com.taotao.cloud.web.xss.JacksonXssClean;
 import com.taotao.cloud.web.xss.XssCleanInterceptor;
 import com.taotao.cloud.web.xss.XssCleaner;
 import java.util.List;
+
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,7 +41,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({XssProperties.class})
 @ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true")
 public class XssAutoConfiguration implements WebMvcConfigurer {

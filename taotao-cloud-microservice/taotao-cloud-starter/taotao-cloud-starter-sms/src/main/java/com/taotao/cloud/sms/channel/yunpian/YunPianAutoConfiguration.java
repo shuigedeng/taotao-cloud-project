@@ -14,6 +14,7 @@ package com.taotao.cloud.sms.channel.yunpian;
 
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.loadbalancer.SmsSenderLoadBalancer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,10 +33,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @version 2022.04
  * @since 2022-04-27 17:52:29
  */
-@Configuration
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = YunPianProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(YunPianProperties.class)
-@AutoConfigureAfter(SmsAutoConfiguration.class)
 public class YunPianAutoConfiguration {
 
 	/**

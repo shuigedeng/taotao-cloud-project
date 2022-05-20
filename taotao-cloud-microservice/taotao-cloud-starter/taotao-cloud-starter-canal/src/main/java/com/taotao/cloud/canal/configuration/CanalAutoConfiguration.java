@@ -22,10 +22,10 @@ import com.taotao.cloud.canal.runner.CanalApplicationRunner;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * CanalClientConfiguration
@@ -34,10 +34,8 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-04 07:28:42
  */
-@Configuration
-@EnableConfigurationProperties({
-	CanalProperties.class
-})
+@AutoConfiguration
+@EnableConfigurationProperties({CanalProperties.class})
 @ConditionalOnProperty(prefix = CanalProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CanalAutoConfiguration implements InitializingBean {
 

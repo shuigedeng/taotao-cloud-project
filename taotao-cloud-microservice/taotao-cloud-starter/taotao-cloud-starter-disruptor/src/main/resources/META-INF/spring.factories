@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.disruptor.configuration.DisruptorAutoConfiguration,\
-com.taotao.cloud.disruptor.configuration.RingBufferAutoConfiguration

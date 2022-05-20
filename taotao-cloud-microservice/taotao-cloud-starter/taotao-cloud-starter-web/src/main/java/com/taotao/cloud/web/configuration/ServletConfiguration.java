@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
@@ -30,7 +31,7 @@ import org.springframework.web.WebApplicationInitializer;
  * @version 2021.9
  * @since 2021-09-02 22:13:50
  */
-@Configuration
+@AutoConfiguration
 public class ServletConfiguration implements WebApplicationInitializer, InitializingBean {
 
 	@Override

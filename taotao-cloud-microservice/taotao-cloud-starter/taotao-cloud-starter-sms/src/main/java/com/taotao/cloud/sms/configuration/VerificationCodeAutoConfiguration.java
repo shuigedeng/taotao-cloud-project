@@ -28,6 +28,7 @@ import com.taotao.cloud.sms.properties.SmsProperties;
 import com.taotao.cloud.sms.properties.VerificationCodeMemoryRepositoryProperties;
 import com.taotao.cloud.sms.properties.VerificationCodeProperties;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -41,8 +42,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author shuigedeng
  */
-@Configuration
-@AutoConfigureAfter(SmsAutoConfiguration.class)
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({VerificationCodeProperties.class,
 	VerificationCodeMemoryRepositoryProperties.class})

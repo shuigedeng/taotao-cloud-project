@@ -1,19 +1,11 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
-
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.taotao.cloud.common.enums.UserTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
@@ -27,15 +19,15 @@ import com.taotao.cloud.auth.biz.service.CaptchaService;
 import com.taotao.cloud.auth.biz.service.CloudJdbcOAuth2AuthorizationConsentService;
 import com.taotao.cloud.auth.biz.service.CloudOAuth2AuthorizationService;
 import com.taotao.cloud.auth.biz.service.SmsService;
+import com.taotao.cloud.common.enums.UserTypeEnum;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -70,6 +62,15 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
+
 
 /**
  * AuthorizationServerConfiguration
@@ -78,7 +79,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  * @version 2021.10
  * @since 2021-12-21 10:24:33
  */
-@Configuration
+@AutoConfiguration
 public class AuthorizationServerConfiguration {
 
 	@Value("${oauth2.token.issuer}")

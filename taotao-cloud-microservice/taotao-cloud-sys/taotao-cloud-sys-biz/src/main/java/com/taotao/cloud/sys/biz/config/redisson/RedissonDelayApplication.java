@@ -10,6 +10,7 @@ import com.taotao.cloud.redis.delay.message.QueueMessage;
 import com.taotao.cloud.redis.delay.message.QueueMessageBuilder;
 import com.taotao.cloud.redis.delay.message.RedissonHeaders;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.Header;
@@ -24,7 +25,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-28 11:53:44
  */
-@Configuration
+@AutoConfiguration
 public class RedissonDelayApplication {
 
 	@Bean

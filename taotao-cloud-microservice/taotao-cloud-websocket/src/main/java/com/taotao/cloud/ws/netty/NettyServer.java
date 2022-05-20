@@ -22,6 +22,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
@@ -32,8 +33,7 @@ import org.springframework.stereotype.Component;
  * @since 2020/12/30 下午4:35
  * @version 2022.03
  */
-@Component
-@Configuration
+@AutoConfiguration
 public class NettyServer {
 	private final Integer port = 8773;
 

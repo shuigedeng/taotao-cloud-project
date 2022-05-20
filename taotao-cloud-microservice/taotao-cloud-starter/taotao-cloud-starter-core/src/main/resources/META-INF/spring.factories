@@ -2,14 +2,3 @@ org.springframework.context.ApplicationContextInitializer=\
 com.taotao.cloud.core.initializer.TtlMDCAdapterInitializer, \
 com.taotao.cloud.core.initializer.CoreApplicationContextInitializer, \
 com.taotao.cloud.core.initializer.BannerInitializer
-
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.core.configuration.AsyncAutoConfiguration,\
-com.taotao.cloud.core.configuration.CoreAutoConfiguration,\
-com.taotao.cloud.core.configuration.EndPointAutoConfiguration, \
-com.taotao.cloud.core.configuration.GradleAutoConfiguration, \
-com.taotao.cloud.core.configuration.MonitorAutoConfiguration, \
-com.taotao.cloud.core.configuration.OkhttpAutoConfiguration,\
-com.taotao.cloud.core.configuration.DynamicTpAutoConfiguration,\
-com.taotao.cloud.core.configuration.NacosListenerAutoConfiguration,\
-com.taotao.cloud.core.configuration.RestTemplateAutoConfiguration

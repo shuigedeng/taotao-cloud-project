@@ -16,6 +16,8 @@
 package com.taotao.cloud.web.configuration;
 
 import javax.sql.DataSource;
+
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @version 2022.03
  * @since 2022/03/09 12:16
  */
-@Configuration
+@AutoConfiguration
 @EnableTransactionManagement
 public class TransactionAutoConfiguration {
 

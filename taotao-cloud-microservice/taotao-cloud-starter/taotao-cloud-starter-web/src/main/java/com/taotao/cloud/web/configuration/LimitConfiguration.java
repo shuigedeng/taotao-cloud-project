@@ -21,6 +21,7 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.limit.LimitAspect;
 import com.taotao.cloud.web.properties.LimitProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -34,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 21:28:08
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({LimitProperties.class})
 @ConditionalOnProperty(prefix = LimitProperties.PREFIX, name = "enabled", havingValue = "true")
 public class LimitConfiguration implements InitializingBean {

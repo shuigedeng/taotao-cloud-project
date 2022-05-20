@@ -19,6 +19,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.job.elastic.properties.ElasticJobProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2021/8/30 20:41
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({ElasticJobProperties.class})
 @ConditionalOnProperty(prefix = ElasticJobProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElasticJobConfiguration implements InitializingBean {

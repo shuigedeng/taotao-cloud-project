@@ -22,6 +22,7 @@ import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -37,9 +38,8 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-07 21:17:02
  */
-@Configuration
+@AutoConfiguration(after = RedisAutoConfiguration.class)
 @ConditionalOnBean(RedissonClient.class)
-@AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableConfigurationProperties({RedisLockProperties.class})
 @ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class RedisLockAutoConfiguration implements InitializingBean {

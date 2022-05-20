@@ -11,6 +11,7 @@ import com.xtoon.boot.common.util.TenantContext;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.StringValue;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +25,7 @@ import java.util.List;
  * @date 2021-01-25
  */
 
-@Configuration
+@AutoConfiguration
 public class MybatisPlusConfig {
 
     /**

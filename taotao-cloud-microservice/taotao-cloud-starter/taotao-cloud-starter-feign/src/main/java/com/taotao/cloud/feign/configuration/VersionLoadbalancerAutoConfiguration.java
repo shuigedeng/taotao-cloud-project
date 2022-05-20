@@ -30,6 +30,7 @@
  import org.apache.commons.logging.LogFactory;
  import org.springframework.beans.factory.InitializingBean;
  import org.springframework.beans.factory.ObjectProvider;
+ import org.springframework.boot.autoconfigure.AutoConfiguration;
  import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  import org.springframework.cloud.client.ServiceInstance;
  import org.springframework.cloud.client.loadbalancer.DefaultRequestContext;
@@ -58,7 +59,7 @@
   * @version 2022.03
   * @since 2020/6/15 11:31
   */
- @Configuration
+ @AutoConfiguration
  @ConditionalOnProperty(prefix = LbIsolationProperties.PREFIX, name = "enabled", havingValue = "true")
  public class VersionLoadbalancerAutoConfiguration implements InitializingBean {
 

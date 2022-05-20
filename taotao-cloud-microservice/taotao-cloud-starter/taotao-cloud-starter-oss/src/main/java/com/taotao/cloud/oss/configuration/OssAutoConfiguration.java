@@ -19,6 +19,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -29,6 +30,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 2022.03
  * @since 2020/10/26 10:49
  */
+@AutoConfiguration
 @EnableConfigurationProperties({OssProperties.class})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "enabled", havingValue = "true")
 public class OssAutoConfiguration implements InitializingBean {

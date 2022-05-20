@@ -23,6 +23,7 @@ import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2020/5/28 17:17
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(FastBuildRabbitMqProducer.class)
 @EnableConfigurationProperties(RabbitMQProperties.class)
 @ConditionalOnProperty(prefix = RabbitMQProperties.PREFIX, name = "enabled", havingValue = "true")

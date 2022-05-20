@@ -40,6 +40,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -56,7 +57,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-04 07:45:13
  */
-@Configuration
+@AutoConfiguration
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 @AutoConfigureBefore(name = "io.seata.spring.boot.autoconfigure.SeataAutoConfiguration")
 @EnableConfigurationProperties({DataSourceProperties.class,

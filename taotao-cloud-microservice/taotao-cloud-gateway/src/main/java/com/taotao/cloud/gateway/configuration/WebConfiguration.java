@@ -22,20 +22,19 @@ import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.properties.HttpsProperties;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.gateway.filter.factory.RequestRateLimiterGatewayFilterFactory;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
-import org.springframework.cloud.gateway.filter.ratelimit.RateLimiter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 /**
  * 全局配置
@@ -44,7 +43,7 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2020/4/29 22:13
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({
 	DynamicRouteProperties.class,
 	ApiProperties.class,

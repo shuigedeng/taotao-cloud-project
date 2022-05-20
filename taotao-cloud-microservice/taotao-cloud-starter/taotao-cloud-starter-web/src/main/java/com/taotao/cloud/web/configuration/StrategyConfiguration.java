@@ -6,6 +6,7 @@ import com.taotao.cloud.web.strategy.BusinessHandler;
 import com.taotao.cloud.web.strategy.BusinessHandlerChooser;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 22:13:57
  */
-@Configuration
+@AutoConfiguration
 public class StrategyConfiguration implements InitializingBean {
 
 	@Override

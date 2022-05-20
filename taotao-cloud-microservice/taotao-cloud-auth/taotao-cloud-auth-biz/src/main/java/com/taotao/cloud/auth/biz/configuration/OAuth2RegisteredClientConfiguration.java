@@ -1,13 +1,9 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,6 +16,11 @@ import org.springframework.security.oauth2.server.authorization.config.ClientSet
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.util.StringUtils;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * OAuth2RegisteredClientConfiguration
  *
@@ -27,7 +28,7 @@ import org.springframework.util.StringUtils;
  * @version 2021.10
  * @since 2021-12-21 10:23:29
  */
-@Configuration
+@AutoConfiguration
 @PropertySource("classpath:oauth2-registered-client.properties")
 public class OAuth2RegisteredClientConfiguration {
 

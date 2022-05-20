@@ -23,6 +23,7 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.redis.runner.IdGeneratorCommandLineRunner;
 import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -42,7 +43,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @version 2021.9
  * @since 2021-09-07 21:17:02
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnBean({RedisRepository.class})
 @ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({IdGeneratorProperties.class})

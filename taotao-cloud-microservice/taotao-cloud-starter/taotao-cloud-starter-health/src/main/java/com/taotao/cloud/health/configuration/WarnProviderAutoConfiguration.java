@@ -25,6 +25,7 @@ import com.taotao.cloud.health.strategy.WarnStrategy;
 import com.taotao.cloud.health.strategy.WarnTemplate;
 import com.taotao.cloud.health.warn.WarnProvider;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,7 +39,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-10 17:22:15
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(WarnProperties.class)
 @ConditionalOnProperty(prefix = WarnProperties.PREFIX, name = "enabled", havingValue = "true")
 public class WarnProviderAutoConfiguration implements InitializingBean {

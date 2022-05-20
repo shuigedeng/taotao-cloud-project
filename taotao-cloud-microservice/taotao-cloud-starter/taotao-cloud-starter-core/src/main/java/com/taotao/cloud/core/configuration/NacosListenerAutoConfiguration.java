@@ -17,9 +17,8 @@ package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.core.nacos.ConfigListener;
 import com.taotao.cloud.core.nacos.ServiceListener;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * NacosListenerAutoConfiguration
@@ -28,7 +27,7 @@ import org.springframework.context.annotation.PropertySource;
  * @version 2022.03
  * @since 2021/06/17 17:21
  */
-@Configuration
+@AutoConfiguration
 @Import({ConfigListener.class, ServiceListener.class})
 public class NacosListenerAutoConfiguration {
 

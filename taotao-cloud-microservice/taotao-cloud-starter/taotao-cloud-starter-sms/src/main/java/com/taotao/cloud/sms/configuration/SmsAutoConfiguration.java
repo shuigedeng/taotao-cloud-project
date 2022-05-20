@@ -30,6 +30,7 @@ import com.taotao.cloud.sms.properties.SmsAsyncProperties;
 import com.taotao.cloud.sms.properties.SmsProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -42,7 +43,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author shuigedeng
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({SmsProperties.class, SmsAsyncProperties.class})
 public class SmsAutoConfiguration implements InitializingBean {

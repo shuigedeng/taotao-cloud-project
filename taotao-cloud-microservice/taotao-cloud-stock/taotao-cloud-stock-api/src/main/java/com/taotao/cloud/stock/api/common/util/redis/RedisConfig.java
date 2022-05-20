@@ -1,6 +1,7 @@
 package com.taotao.cloud.stock.api.common.util.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -12,7 +13,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author shuigedeng
  * @date 2021-01-23
  */
-@Configuration
+@AutoConfiguration
 public class RedisConfig {
     @Autowired
     private RedisConnectionFactory factory;

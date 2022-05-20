@@ -16,7 +16,7 @@
 package com.taotao.cloud.admin.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -29,7 +29,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
  * @version 2022.03
  * @since 2021/12/01 10:00
  */
-@Configuration
+@AutoConfiguration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final String adminContextPath;

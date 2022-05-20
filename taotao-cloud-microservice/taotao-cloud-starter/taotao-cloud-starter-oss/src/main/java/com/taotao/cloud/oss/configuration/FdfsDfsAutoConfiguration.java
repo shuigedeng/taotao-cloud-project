@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.propeties.FastdfsProperties;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2020/10/26 10:28
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({FastdfsProperties.class})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "FASTDFS")
 public class FdfsDfsAutoConfiguration implements InitializingBean {

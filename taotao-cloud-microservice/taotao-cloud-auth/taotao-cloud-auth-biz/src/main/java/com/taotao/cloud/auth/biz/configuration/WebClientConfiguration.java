@@ -1,12 +1,7 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -24,6 +19,12 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 /**
  * WebClientConfiguration 
  *
@@ -31,7 +32,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  * @version 2022.03
  * @since 2022-03-28 11:28:48
  */
-@Configuration
+@AutoConfiguration
 public class WebClientConfiguration {
 
 	@Bean

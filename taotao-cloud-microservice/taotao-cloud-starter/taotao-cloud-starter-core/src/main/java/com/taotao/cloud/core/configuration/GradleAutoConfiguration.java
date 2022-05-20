@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -25,6 +25,7 @@ import org.springframework.context.annotation.PropertySource;
  * @version 2022.03
  * @since 2021/06/17 17:21
  */
+@AutoConfiguration
 @PropertySource(ignoreResourceNotFound = true, value = {"classpath:/gradle.properties"})
 public class GradleAutoConfiguration {
 

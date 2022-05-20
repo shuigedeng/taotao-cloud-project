@@ -3,6 +3,7 @@ package com.taotao.cloud.stock.biz.infrastructure.util;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +15,7 @@ import java.util.Properties;
  *
  * @author xtoon
  */
-@Configuration
+@AutoConfiguration
 public class KaptchaConfig {
 
     @Bean

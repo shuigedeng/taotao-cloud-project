@@ -14,6 +14,7 @@ package com.taotao.cloud.sms.channel.jdcloud;
 
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.loadbalancer.SmsSenderLoadBalancer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,10 +33,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @version 2022.04
  * @since 2022-04-27 17:50:56
  */
-@Configuration
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = JdCloudProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(JdCloudProperties.class)
-@AutoConfigureAfter(SmsAutoConfiguration.class)
 public class JdCloudAutoConfiguration {
 
 	/**

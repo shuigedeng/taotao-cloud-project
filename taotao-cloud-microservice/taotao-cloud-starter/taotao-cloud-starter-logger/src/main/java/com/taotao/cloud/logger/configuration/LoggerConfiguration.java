@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -44,7 +45,7 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @version 2022.03
  * @since 2020/4/30 10:21
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({RequestLoggerProperties.class, LoggerProperties.class})
 @ConditionalOnProperty(prefix = LoggerProperties.PREFIX, name = "enabled", havingValue = "true")
 public class LoggerConfiguration implements InitializingBean {
@@ -61,7 +62,7 @@ public class LoggerConfiguration implements InitializingBean {
 	 * @version 2022.03
 	 * @since 2020/4/30 10:21
 	 */
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnProperty(prefix = RequestLoggerProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class RequestLoggerConfiguration implements InitializingBean {
 

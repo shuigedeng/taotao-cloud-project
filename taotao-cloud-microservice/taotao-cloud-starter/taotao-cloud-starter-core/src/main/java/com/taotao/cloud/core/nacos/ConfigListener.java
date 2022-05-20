@@ -27,6 +27,7 @@ import java.util.concurrent.Executor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2021/04/06 11:20
  */
-@Configuration
+@AutoConfiguration
 public class ConfigListener implements InitializingBean {
 
 	@Override
@@ -50,7 +51,7 @@ public class ConfigListener implements InitializingBean {
 		LogUtil.info("taotao cloud on received from nacos properties data : {}", value);
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnProperty(prefix = "spring.cloud.nacos.config", value = "enabled", havingValue = "true", matchIfMissing = true)
 	public static class NacosConfigListenerHnadler implements InitializingBean {
 

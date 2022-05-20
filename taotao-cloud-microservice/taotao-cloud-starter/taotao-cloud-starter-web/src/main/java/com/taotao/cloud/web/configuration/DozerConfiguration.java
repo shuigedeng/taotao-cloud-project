@@ -28,6 +28,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -43,7 +44,7 @@ import org.springframework.context.annotation.Configuration;
  * @see <a href="http://dozer.sourceforge.net/documentation/usage.html">http://www.jianshu.com/p/bf8f0e8aee23</a>
  * @since 2021-09-02 21:24:03
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnMissingBean(Mapper.class)
 @EnableConfigurationProperties({DozerProperties.class})
 @ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})

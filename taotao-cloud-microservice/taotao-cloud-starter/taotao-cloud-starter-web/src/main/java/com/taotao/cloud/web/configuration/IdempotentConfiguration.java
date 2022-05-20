@@ -21,6 +21,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.idempotent.IdempotentAspect;
 import com.taotao.cloud.web.properties.IdempotentProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -34,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 22:13:17
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({IdempotentProperties.class})
 @ConditionalOnProperty(prefix = IdempotentProperties.PREFIX, name = "enabled", havingValue = "true")
 public class IdempotentConfiguration implements InitializingBean {

@@ -2,7 +2,6 @@ package com.taotao.cloud.sys.biz.service;
 
 import java.util.List;
 import java.util.Map;
-import org.elasticsearch.common.xcontent.XContentBuilder;
 
 
 public interface IndexService {

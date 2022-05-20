@@ -22,6 +22,7 @@ import com.taotao.cloud.web.annotation.IgnoreResponseBodyAdvice;
 import javax.servlet.Servlet;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +41,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @version 2021.9
  * @since 2021-09-02 21:28:49
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 //@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {

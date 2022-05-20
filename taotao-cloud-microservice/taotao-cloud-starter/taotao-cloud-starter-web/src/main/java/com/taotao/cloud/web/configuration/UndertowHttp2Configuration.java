@@ -25,6 +25,7 @@ import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
 import java.io.IOException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration;
@@ -45,8 +46,8 @@ import org.xnio.XnioWorker;
  * @version 2021.9
  * @since 2021-09-02 21:29:52
  */
+@AutoConfiguration
 @ConditionalOnClass(Undertow.class)
-@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
 public class UndertowHttp2Configuration implements InitializingBean {
 

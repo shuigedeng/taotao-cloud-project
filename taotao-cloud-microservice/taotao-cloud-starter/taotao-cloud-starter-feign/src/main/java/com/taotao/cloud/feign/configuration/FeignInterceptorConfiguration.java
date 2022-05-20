@@ -32,6 +32,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +49,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @version 2022.03
  * @since 2020/4/5 13:33
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = FeignInterceptorProperties.PREFIX, name = "enabled", havingValue = "true")
 public class FeignInterceptorConfiguration implements InitializingBean {
 

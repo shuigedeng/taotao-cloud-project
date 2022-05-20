@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.ws.config;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolver;
@@ -36,7 +37,7 @@ import java.util.List;
  * @since 2020/12/18 下午2:52
  * @version 2022.03
  */
-@Configuration
+@AutoConfiguration
 @EnableScheduling
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {

@@ -23,12 +23,13 @@ import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
 import com.taotao.cloud.core.endpoint.MBeanDemo;
 import com.taotao.cloud.core.endpoint.TaoTaoCloudEndPoint;
 import com.taotao.cloud.core.properties.EndpointProperties;
-import javax.management.MalformedObjectNameException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
+import javax.management.MalformedObjectNameException;
 
 /**
  * EndPointConfiguration
@@ -37,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2021/04/02 10:25
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({EndpointProperties.class})
 @ConditionalOnProperty(prefix = EndpointProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class EndPointAutoConfiguration implements InitializingBean {

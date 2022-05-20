@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  * @version 2021.10
  * @since 2022-02-25 09:41:50
  */
-@Configuration
+@AutoConfiguration
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:dynamic-tp.yml")
 public class DynamicTpAutoConfiguration {
 

@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
-
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.common.model.Pubsub;
@@ -28,14 +26,17 @@ import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
 import io.micrometer.core.instrument.MeterRegistry;
-import java.util.function.Function;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
+import java.util.function.Function;
+
+import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 /**
  * CoreConfiguration
@@ -44,7 +45,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 20:05:41
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({CoreProperties.class})
 @ConditionalOnProperty(prefix = CoreProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CoreAutoConfiguration implements InitializingBean {
@@ -88,7 +89,7 @@ public class CoreAutoConfiguration implements InitializingBean {
 		return new StartedEventListener();
 	}
 
-	@Configuration
+	@AutoConfiguration
 	public static class CoreFunction implements Function<String, String> {
 
 		@Override

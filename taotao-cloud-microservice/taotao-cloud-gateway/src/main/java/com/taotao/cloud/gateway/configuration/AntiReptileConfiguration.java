@@ -10,18 +10,19 @@ import com.taotao.cloud.gateway.anti_reptile.rule.IpRule;
 import com.taotao.cloud.gateway.anti_reptile.rule.RuleActuator;
 import com.taotao.cloud.gateway.anti_reptile.rule.UaRule;
 import com.taotao.cloud.gateway.anti_reptile.util.VerifyImageUtil;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * RedissonAutoConfiguration 的 AutoConfigureOrder 为默认值(0)，此处在它后面加载
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(AntiReptileProperties.class)
 @ConditionalOnProperty(prefix = "anti.reptile.manager", value = "enabled", havingValue = "true")
 public class AntiReptileConfiguration {

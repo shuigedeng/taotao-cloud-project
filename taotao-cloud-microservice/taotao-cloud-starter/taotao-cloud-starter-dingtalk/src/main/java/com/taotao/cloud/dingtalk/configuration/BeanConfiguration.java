@@ -33,6 +33,7 @@ import com.taotao.cloud.dingtalk.support.MarkDownMessage;
 import com.taotao.cloud.dingtalk.support.TextMessage;
 import com.taotao.cloud.dingtalk.support.DingTalkSignAlgorithm;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -42,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 实例化bean配置
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
 public class BeanConfiguration implements InitializingBean {
 

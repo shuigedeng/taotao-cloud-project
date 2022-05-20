@@ -5,13 +5,21 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.netty.properties.NettyWebsocketProperties;
 import com.taotao.cloud.netty.standard.ServerEndpointExporter;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+/**
+ * 网状汽车配置网络套接字
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-05-20 17:39:22
+ */
+@AutoConfiguration
 @EnableConfigurationProperties({NettyWebsocketProperties.class})
 @ConditionalOnMissingBean(ServerEndpointExporter.class)
 @ConditionalOnProperty(prefix = NettyWebsocketProperties.PREFIX, name = "enabled", havingValue = "true")

@@ -1,0 +1,2 @@
+com.taotao.cloud.feign.configuration.FeignInterceptorConfiguration
+com.taotao.cloud.feign.configuration.VersionLoadbalancerAutoConfiguration

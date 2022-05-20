@@ -14,6 +14,7 @@ package com.taotao.cloud.sms.channel.qcloudv3;
 
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.loadbalancer.SmsSenderLoadBalancer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,10 +33,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @version 2022.04
  * @since 2022-04-27 17:51:56
  */
-@Configuration
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = QCloudV3Properties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(QCloudV3Properties.class)
-@AutoConfigureAfter(SmsAutoConfiguration.class)
 public class QCloudV3AutoConfiguration {
 
 	/**

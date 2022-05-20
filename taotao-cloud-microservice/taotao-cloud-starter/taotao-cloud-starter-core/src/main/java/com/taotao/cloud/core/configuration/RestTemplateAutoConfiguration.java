@@ -22,11 +22,11 @@ import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,7 +37,7 @@ import org.springframework.web.client.RestTemplate;
  * @version 2022.03
  * @since 2021/8/24 23:48
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({HttpClientProperties.class})
 @ConditionalOnProperty(prefix = HttpClientProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RestTemplateAutoConfiguration implements InitializingBean {

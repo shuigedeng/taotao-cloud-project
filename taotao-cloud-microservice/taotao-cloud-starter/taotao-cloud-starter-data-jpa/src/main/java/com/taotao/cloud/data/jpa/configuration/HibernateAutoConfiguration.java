@@ -48,6 +48,7 @@ import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.EventType;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -66,10 +67,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  * @version 2021.9
  * @since 2021-09-04 07:31:41
  */
-@Configuration
+@AutoConfiguration
 @EnableJpaAuditing
-@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class,
-	JpaProperties.class})
+@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class, JpaProperties.class})
 @ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HibernateAutoConfiguration implements InitializingBean {
 
@@ -160,7 +160,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		return entityManagerFactoryBean;
 	}
 
-	@Configuration
+	@AutoConfiguration
 	public static class HibernateListener {
 
 		@PersistenceUnit

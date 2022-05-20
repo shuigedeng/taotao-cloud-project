@@ -56,6 +56,7 @@ import java.util.Map.Entry;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -76,7 +77,7 @@ import org.springframework.util.ObjectUtils;
  * @version 2021.9
  * @since 2021-09-03 19:58:30
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass({Disruptor.class})
 @EnableConfigurationProperties({DisruptorProperties.class})
 @ConditionalOnProperty(prefix = DisruptorProperties.PREFIX, value = "enabled", havingValue = "true")

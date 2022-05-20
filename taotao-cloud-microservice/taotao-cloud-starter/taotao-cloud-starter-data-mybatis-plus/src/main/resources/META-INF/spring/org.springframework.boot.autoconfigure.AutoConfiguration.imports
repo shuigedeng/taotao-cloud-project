@@ -1,0 +1,3 @@
+com.taotao.cloud.data.mybatis.plus.configuration.MybatisPlusAutoConfiguration
+com.taotao.cloud.data.mybatis.plus.configuration.DynamicDataSourceAutoConfiguration
+com.taotao.cloud.data.mybatis.plus.configuration.TenantAutoConfiguration

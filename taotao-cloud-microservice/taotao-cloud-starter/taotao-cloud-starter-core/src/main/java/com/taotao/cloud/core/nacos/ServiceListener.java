@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Properties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -38,7 +39,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2021/04/06 11:20
  */
-@Configuration
+@AutoConfiguration
 public class ServiceListener implements InitializingBean {
 
 	@Override
@@ -46,7 +47,7 @@ public class ServiceListener implements InitializingBean {
 		LogUtil.started(ServiceListener.class, StarterName.CORE_STARTER);
 	}
 
-	@Configuration
+	@AutoConfiguration
 	public static class NacosServiceListenerHnadler implements InitializingBean {
 
 		@Autowired

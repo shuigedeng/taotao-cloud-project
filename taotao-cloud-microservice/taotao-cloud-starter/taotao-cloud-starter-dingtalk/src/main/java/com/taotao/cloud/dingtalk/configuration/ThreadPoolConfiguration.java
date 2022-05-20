@@ -22,6 +22,7 @@ import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -32,7 +33,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 /**
  * DINGTALK线程池配置类
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({ThreadPoolProperties.class})
 @ConditionalOnMissingBean(name = DingerConstant.DINGER_EXECUTOR)
 @ConditionalOnProperty(prefix = ThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true")

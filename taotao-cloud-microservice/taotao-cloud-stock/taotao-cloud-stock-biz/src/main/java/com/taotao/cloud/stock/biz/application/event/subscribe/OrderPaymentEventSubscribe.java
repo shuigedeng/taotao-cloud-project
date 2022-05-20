@@ -21,12 +21,13 @@ import org.mallfoundry.finance.PaymentCapturedEvent;
 import org.mallfoundry.finance.PaymentEvent;
 import org.mallfoundry.finance.PaymentOrder;
 import org.mallfoundry.finance.PaymentStartedEvent;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 
 import java.util.stream.Collectors;
 
-@Configuration
+@AutoConfiguration
 public class OrderPaymentEventSubscribe {
 
     private final OrderService orderService;

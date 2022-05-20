@@ -19,6 +19,7 @@ import com.taotao.cloud.elk.interceptor.ElkWebInterceptor;
 import com.taotao.cloud.elk.aspect.WebControllerAspect;
 import com.taotao.cloud.elk.properties.ElkWebAspectProperties;
 import com.taotao.cloud.elk.properties.ElkWebProperties;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +34,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 2022.03
  * @since 2020/6/3 10:43
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = ElkWebProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElkWebInterceptorConfiguration implements WebMvcConfigurer {
 
