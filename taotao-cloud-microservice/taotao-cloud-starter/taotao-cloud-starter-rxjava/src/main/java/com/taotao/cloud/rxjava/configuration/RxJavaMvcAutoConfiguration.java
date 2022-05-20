@@ -72,7 +72,7 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 		return new SingleReturnValueHandler();
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnProperty(prefix = RxJavaProperties.PREFIX + ".mvc", name = "enabled", havingValue = "true")
 	public static class RxJavaWebConfiguration implements WebMvcConfigurer {
 

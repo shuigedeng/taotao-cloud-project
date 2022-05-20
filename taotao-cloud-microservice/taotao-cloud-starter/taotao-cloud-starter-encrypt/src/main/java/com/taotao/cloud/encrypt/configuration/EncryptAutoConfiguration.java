@@ -122,7 +122,7 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 		this.environment = environment;
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnExpression(value = "environment.getProperty('encrypt.signSecret')!=null && " +
 		"environment.getProperty('encrypt.signSecret').trim()!=''")
 	public class SignEncryptConfiguration {

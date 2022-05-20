@@ -53,6 +53,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -85,12 +86,11 @@ import org.springframework.web.client.RestTemplate;
  * @version 2022.03
  * @since 2020/6/15 11:31
  */
-@Configuration
+@AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
 @EnableConfigurationProperties({
 	LbIsolationProperties.class,
 	FeignProperties.class,
 	FeignInterceptorProperties.class})
-@AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 @EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CustomFeignConfiguration implements InitializingBean {

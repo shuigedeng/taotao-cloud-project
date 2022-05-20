@@ -11,10 +11,13 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.mongodb.helper.bean.Page;
 import java.io.BufferedReader;
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,7 +26,7 @@ import org.springframework.stereotype.Service;
 /**
  * 数据库导入导出工具
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class ImportExportUtil {
 
 	// 写链接(写到主库,可使用事务)
@@ -40,7 +43,7 @@ public class ImportExportUtil {
 		try {
 			// 找到主程序包
 			Set<Class<?>> set = ClassUtil.scanPackage(SystemTool.deduceMainApplicationClassName());
-			Page page = new Page();
+			Page<?> page = new Page<>();
 			page.setLimit(1000);
 
 			for (Class<?> clazz : set) {
@@ -100,8 +103,8 @@ public class ImportExportUtil {
 				if (file.exists()) {
 					mongoTemplate.dropCollection(clazz);
 
-					reader = FileUtil.getReader(file, "UTF-8");
-					List<Object> list = new ArrayList<Object>();
+					reader = FileUtil.getReader(file, StandardCharsets.UTF_8);
+					List<Object> list = new ArrayList<>();
 					while (true) {
 						String json = reader.readLine();
 						if (StrUtil.isEmpty(json)) {

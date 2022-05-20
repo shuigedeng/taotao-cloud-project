@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -66,7 +67,7 @@ import org.springframework.web.util.pattern.PathPattern;
  * @version 2022.03
  * @since 2021/8/25 09:57
  */
-@Configuration
+@AutoConfiguration
 public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
