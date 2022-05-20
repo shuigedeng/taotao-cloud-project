@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.service.trade.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.biz.entity.trade.OrderLog;
+import com.taotao.cloud.order.biz.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.mapper.trade.IOrderLogMapper;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import org.springframework.stereotype.Service;

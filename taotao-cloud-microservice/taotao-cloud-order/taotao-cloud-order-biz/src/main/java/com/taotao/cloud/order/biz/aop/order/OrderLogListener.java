@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.aop.order;
 
-import com.taotao.cloud.order.biz.entity.trade.OrderLog;
+import com.taotao.cloud.order.biz.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;

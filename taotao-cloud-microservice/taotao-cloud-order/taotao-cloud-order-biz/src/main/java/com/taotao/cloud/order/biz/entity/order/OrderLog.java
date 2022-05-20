@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.biz.entity.trade;
+package com.taotao.cloud.order.biz.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.UserEnum;
