@@ -6,7 +6,7 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
     implementation 'org.apache.pdfbox:pdfbox:2.0.24'
-    implementation 'io.soabase.record-builder:record-builder-core:29'
+    implementation 'io.soabase.record-builder:record-builder-core:33'
 
     implementation 'com.google.protobuf:protobuf-java:3.18.2'
     implementation 'com.google.protobuf:protobuf-java-util:3.11.0'
@@ -25,9 +25,9 @@ dependencies {
 
     implementation 'wiki.xsx:x-easypdf:2.8.1'
 
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'io.soabase.record-builder:record-builder-processor:29'
-    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
