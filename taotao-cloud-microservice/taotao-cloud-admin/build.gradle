@@ -96,9 +96,14 @@ bootBuildImage {
 	publish = true
 
 	docker {
+		//使用docker
 		//host = "tcp://127.0.0.1:2376"
 		//tlsVerify = true
 		//certPath = "/home/users/.minikube/certs"
+
+		//使用podman @since 2.7.0
+		//host = "unix:///run/user/1000/podman/podman.sock"
+		//bindHostToBuilder = true
 
 		builderRegistry {
 			username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
