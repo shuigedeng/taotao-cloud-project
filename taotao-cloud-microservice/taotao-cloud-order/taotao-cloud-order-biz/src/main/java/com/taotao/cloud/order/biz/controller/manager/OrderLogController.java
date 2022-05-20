@@ -4,7 +4,7 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.biz.entity.trade.OrderLog;
+import com.taotao.cloud.order.biz.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

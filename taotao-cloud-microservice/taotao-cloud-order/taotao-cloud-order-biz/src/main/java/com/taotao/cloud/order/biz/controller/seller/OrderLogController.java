@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.controller.seller;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.biz.entity.trade.OrderLog;
+import com.taotao.cloud.order.biz.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -24,7 +24,7 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.entity.trade.OrderLog;
+import com.taotao.cloud.order.biz.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import com.taotao.cloud.order.biz.service.order.IOrderItemService;
