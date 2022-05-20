@@ -33,6 +33,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +47,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 2021.9
  * @since 2021-09-07 20:54:47
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableAutoDataSourceProxy
 @EnableConfigurationProperties({SeataProperties.class})
 @ConditionalOnProperty(prefix = SeataProperties.PREFIX, name = "enabled", havingValue = "true")

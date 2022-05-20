@@ -40,6 +40,7 @@ import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +54,7 @@ import org.springframework.http.HttpHeaders;
  * @version 2022.03
  * @since 2020/4/30 10:10
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({OpenApiProperties.class})
 @ConditionalOnProperty(prefix = OpenApiProperties.PREFIX, name = "enabled", havingValue = "true")
 public class OpenapiAutoConfiguration implements InitializingBean{

@@ -21,15 +21,12 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
-import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -40,6 +37,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * ResourceServerConfig
  *
@@ -47,7 +47,7 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
  * @version 2022.03
  * @since 2021/06/18 14:41
  */
-@Configuration
+AutoConfiguration
 @EnableWebFluxSecurity
 @ConditionalOnProperty(prefix = SecurityProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class ResourceServerConfiguration {

@@ -62,6 +62,7 @@ import org.hibernate.validator.HibernateValidator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -104,7 +105,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @version 2021.9
  * @since 2021-09-02 21:30:20
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({
 	FilterProperties.class,
 	InterceptorProperties.class,

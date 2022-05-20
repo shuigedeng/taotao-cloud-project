@@ -11,6 +11,7 @@ import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
 import com.taotao.cloud.oss.artislong.core.ali.model.AliOssConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -26,7 +27,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 17:39:11
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(OSSClient.class)
 @EnableConfigurationProperties({AliOssProperties.class})
 @ConditionalOnProperty(prefix = OssConstant.OSS, name = OssConstant.OssType.ALI + CharPool.DOT

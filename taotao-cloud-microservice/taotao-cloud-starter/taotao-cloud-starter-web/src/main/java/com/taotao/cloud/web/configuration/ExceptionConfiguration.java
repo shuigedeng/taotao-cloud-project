@@ -42,6 +42,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -66,7 +67,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * @version 2021.9
  * @since 2021-09-02 21:26:19
  */
-@Configuration
+@AutoConfiguration
 //@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
 //		RestController.class, Controller.class})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")

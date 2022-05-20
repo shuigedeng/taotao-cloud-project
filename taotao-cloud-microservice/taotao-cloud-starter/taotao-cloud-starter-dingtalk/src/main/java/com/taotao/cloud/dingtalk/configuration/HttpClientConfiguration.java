@@ -24,6 +24,7 @@ import com.taotao.cloud.dingtalk.support.DingerHttpTemplate;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +36,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Dinger默认Http客户端配置
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({HttpClientProperties.class})
 @ConditionalOnProperty(prefix = HttpClientProperties.PREFIX, value = "enabled", havingValue = "true")
 public class HttpClientConfiguration implements InitializingBean {

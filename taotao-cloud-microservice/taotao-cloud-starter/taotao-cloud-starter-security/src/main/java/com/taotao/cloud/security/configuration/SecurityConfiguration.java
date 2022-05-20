@@ -56,7 +56,6 @@ public class SecurityConfiguration {
 		return new AuthenticationEntryPointComponent();
 	}
 
-
 //	/**
 //	 * OAuth2AccessDeniedHandler 用来解决认证过的用户访问无权限资源时的异常
 //	 *

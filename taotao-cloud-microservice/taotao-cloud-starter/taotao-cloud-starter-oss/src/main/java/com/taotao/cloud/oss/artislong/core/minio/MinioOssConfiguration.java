@@ -12,6 +12,7 @@ import io.minio.http.HttpUtils;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -26,7 +27,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 17:41:54
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(MinioClient.class)
 @EnableConfigurationProperties({MinioOssProperties.class})
 @ConditionalOnProperty(prefix = OssConstant.OSS, name = OssConstant.OssType.MINIO + CharPool.DOT + OssConstant.ENABLE,

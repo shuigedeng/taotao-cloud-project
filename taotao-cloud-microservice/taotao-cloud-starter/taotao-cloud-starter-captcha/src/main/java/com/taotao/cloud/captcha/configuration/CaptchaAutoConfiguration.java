@@ -24,20 +24,21 @@ import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
 import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.FileCopyUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * CaptchaServiceAutoConfiguration
@@ -46,7 +47,7 @@ import org.springframework.util.FileCopyUtils;
  * @version 2021.9
  * @since 2021-09-03 20:53:53
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({CaptchaProperties.class})
 @ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CaptchaAutoConfiguration implements InitializingBean {

@@ -24,6 +24,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,7 +39,7 @@ import org.springframework.core.env.Environment;
 /**
  * 加密配置
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({EncryptProperties.class, EncryptFilterProperties.class})
 @ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
 public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFactoryPostProcessor,

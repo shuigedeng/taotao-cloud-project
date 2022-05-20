@@ -33,6 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +45,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 21:28:17
  */
-@Configuration
+@AutoConfiguration
 @AutoConfigureAfter(HealthAutoConfiguration.class)
 public class PrometheusConfiguration implements InitializingBean {
 

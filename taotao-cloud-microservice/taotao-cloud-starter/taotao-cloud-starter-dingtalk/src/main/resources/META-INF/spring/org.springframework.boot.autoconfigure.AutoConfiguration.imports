@@ -1,0 +1,4 @@
+com.taotao.cloud.dingtalk.configuration.BeanConfiguration
+com.taotao.cloud.dingtalk.configuration.DingtalkConfiguration
+com.taotao.cloud.dingtalk.configuration.HttpClientConfiguration
+com.taotao.cloud.dingtalk.configuration.ThreadPoolConfiguration

@@ -22,11 +22,11 @@ import io.undertow.servlet.api.SecurityInfo;
 import io.undertow.servlet.api.TransportGuaranteeType;
 import io.undertow.servlet.api.WebResourceCollection;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * HttpsConfig
@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2021/2/1 下午1:53
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(value = "server.ssl.enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfig {
 

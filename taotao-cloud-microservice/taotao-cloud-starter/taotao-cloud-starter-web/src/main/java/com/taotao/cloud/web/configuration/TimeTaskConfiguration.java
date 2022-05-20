@@ -5,6 +5,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.timetask.TimedTaskJobHandler;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Import;
  * @version 2021.9
  * @since 2021-09-02 22:13:57
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnBean(XxlJobSpringExecutor.class)
 @Import(value = TimedTaskJobHandler.class)
 public class TimeTaskConfiguration implements InitializingBean {

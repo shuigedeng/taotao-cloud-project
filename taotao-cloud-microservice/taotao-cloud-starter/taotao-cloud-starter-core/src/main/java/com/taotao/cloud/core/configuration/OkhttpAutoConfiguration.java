@@ -19,19 +19,6 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.properties.OkHttpProperties;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -41,10 +28,24 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Config
@@ -53,7 +54,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2021/06/17 17:21
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({OkHttpProperties.class})
 @ConditionalOnProperty(prefix = OkHttpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class OkhttpAutoConfiguration implements InitializingBean {

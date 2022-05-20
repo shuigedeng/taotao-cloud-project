@@ -1,6 +1,7 @@
 package com.taotao.cloud.oss.artislong;
 
 import cn.hutool.extra.spring.EnableSpringUtil;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2022-04-27 17:33:58
  */
 @EnableSpringUtil
-@Configuration
+@AutoConfiguration
 @ComponentScan(basePackages = "com.taotao.cloud.oss.artislong")
 @EnableConfigurationProperties(OssProperties.class)
 public class OssAutoConfiguration {

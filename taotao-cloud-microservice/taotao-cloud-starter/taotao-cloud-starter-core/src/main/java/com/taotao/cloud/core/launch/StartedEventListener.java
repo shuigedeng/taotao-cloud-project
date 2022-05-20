@@ -16,6 +16,7 @@
 package com.taotao.cloud.core.launch;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,7 @@ import org.springframework.util.StringUtils;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class StartedEventListener {
 
 	@Async

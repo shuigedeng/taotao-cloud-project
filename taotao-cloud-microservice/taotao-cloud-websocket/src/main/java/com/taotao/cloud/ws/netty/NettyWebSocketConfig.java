@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.ws.netty;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
@@ -26,7 +27,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  * @since 2020/12/30 下午4:39
  * @version 2022.03
  */
-@Configuration
+@AutoConfiguration
 public class NettyWebSocketConfig {
 
 	@Bean

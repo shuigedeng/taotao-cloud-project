@@ -15,6 +15,7 @@ package com.taotao.cloud.sms.web;
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.service.NoticeService;
 import com.taotao.cloud.sms.service.VerificationCodeService;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -27,8 +28,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author shuigedeng
  */
-@Configuration
-@AutoConfigureAfter(SmsAutoConfiguration.class)
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @EnableConfigurationProperties(SmsWebmvcProperties.class)
 @ConditionalOnProperty(prefix = SmsWebmvcProperties.PREFIX, name = "enable", havingValue = "true")
 public class SmsWebmvcAutoConfiguration {

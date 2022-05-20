@@ -3,12 +3,12 @@ package com.taotao.cloud.order.biz.stream.pulsar;
 import io.github.majusko.pulsar.consumer.ConsumerAggregator;
 import io.github.majusko.pulsar.producer.ProducerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 
-@Configuration
+@AutoConfiguration
 public class PulsarConfiguration {
 
     @Bean
@@ -18,7 +18,7 @@ public class PulsarConfiguration {
             .addProducer("other-topic", String.class);
     }
 
-	@Configuration
+	@AutoConfiguration
 	public static class PulsarErrorHandler {
 
 		@Autowired

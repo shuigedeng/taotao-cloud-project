@@ -10,6 +10,7 @@ import com.taotao.cloud.oss.artislong.constant.OssConstant;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
 import com.taotao.cloud.oss.artislong.core.qiniu.model.QiNiuOssConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 17:42:44
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({QiNiuOssProperties.class})
 @ConditionalOnProperty(prefix = OssConstant.OSS, name = OssConstant.OssType.QINIU + CharPool.DOT + OssConstant.ENABLE,
         havingValue = OssConstant.DEFAULT_ENABLE_VALUE)

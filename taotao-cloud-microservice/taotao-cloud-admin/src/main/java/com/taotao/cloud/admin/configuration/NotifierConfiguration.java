@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.admin.configuration;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.model.DingerSender;
@@ -25,13 +25,14 @@ import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent;
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import reactor.core.publisher.Mono;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import reactor.core.publisher.Mono;
 
 /**
  * NotifierConfiguration
@@ -40,7 +41,7 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2021/12/01 10:01
  */
-@Configuration
+@AutoConfiguration
 public class NotifierConfiguration {
 
 	@Bean

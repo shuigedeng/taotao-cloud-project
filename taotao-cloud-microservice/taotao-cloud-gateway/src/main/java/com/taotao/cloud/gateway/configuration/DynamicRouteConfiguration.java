@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
-import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
-
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
@@ -27,10 +25,8 @@ import com.alibaba.nacos.api.exception.NacosException;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
@@ -41,10 +37,15 @@ import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+
+import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 /**
  * 基于nacos动态路由配置
@@ -53,11 +54,11 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2020/5/2 19:33
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicRouteConfiguration {
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "type", havingValue = "nacos", matchIfMissing = false)
 	public class NacosDynamicRoute {
 

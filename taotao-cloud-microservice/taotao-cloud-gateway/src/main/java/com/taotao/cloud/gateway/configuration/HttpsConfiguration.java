@@ -16,14 +16,15 @@
 package com.taotao.cloud.gateway.configuration;
 
 import com.taotao.cloud.gateway.properties.HttpsProperties;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.HttpHandler;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * 配置http服务，使其即支持http又支持https服务（https通过配置文件配置）
@@ -32,7 +33,7 @@ import org.springframework.http.server.reactive.HttpHandler;
  * @version 2022.03
  * @since 2020/4/29 22:11
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = HttpsProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfiguration {
 

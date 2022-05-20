@@ -26,6 +26,7 @@ import io.reactivex.Single;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -43,7 +44,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 2021.9
  * @since 2021-09-07 20:49:34
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({RxJavaProperties.class})
 @ConditionalOnProperty(prefix = RxJavaProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RxJavaMvcAutoConfiguration implements InitializingBean {

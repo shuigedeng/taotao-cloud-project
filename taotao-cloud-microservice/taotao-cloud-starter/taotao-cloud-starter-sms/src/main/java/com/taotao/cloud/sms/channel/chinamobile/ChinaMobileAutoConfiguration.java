@@ -15,6 +15,7 @@ package com.taotao.cloud.sms.channel.chinamobile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.loadbalancer.SmsSenderLoadBalancer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,10 +35,9 @@ import org.springframework.web.client.RestTemplate;
  * @version 2022.04
  * @since 2022-04-27 17:50:35
  */
-@Configuration
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = ChinaMobileProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(ChinaMobileProperties.class)
-@AutoConfigureAfter(SmsAutoConfiguration.class)
 public class ChinaMobileAutoConfiguration {
 
 	/**

@@ -9,6 +9,7 @@ import com.taotao.cloud.redis.delay.config.RedissonTemplate;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,7 +25,7 @@ import org.springframework.context.annotation.Scope;
  * @version 2021.10
  * @since 2022-02-18 10:36:41
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnBean({RedissonClient.class})
 public class RedissonDelayAutoConfiguration {
 

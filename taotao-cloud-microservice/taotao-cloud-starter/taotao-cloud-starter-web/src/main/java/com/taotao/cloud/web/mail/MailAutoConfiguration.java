@@ -18,6 +18,7 @@ package com.taotao.cloud.web.mail;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,7 +36,7 @@ import org.springframework.mail.javamail.JavaMailSender;
  * @version 2021.9
  * @since 2021-09-09 11:38:47
  */
-@Configuration
+@AutoConfiguration
 @AutoConfigureAfter(MailSenderAutoConfiguration.class)
 @EnableConfigurationProperties({com.taotao.cloud.web.mail.MailProperties.class})
 @ConditionalOnProperty(prefix = com.taotao.cloud.web.mail.MailProperties.PREFIX, name = "enabled", havingValue = "true")

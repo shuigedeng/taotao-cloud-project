@@ -19,8 +19,8 @@ import cn.hutool.http.HttpStatus;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.CaptchaUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.gateway.anti_reptile.constant.AntiReptileConsts;
 import com.taotao.cloud.gateway.anti_reptile.handler.RefreshFormHandler;
@@ -30,19 +30,12 @@ import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.cloud.gateway.support.TimeoutException;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -56,6 +49,14 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
  * 特殊路由配置信息
  *
@@ -63,7 +64,7 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2020/4/29 22:11
  */
-@Configuration
+@AutoConfiguration
 public class RouterFunctionConfiguration {
 
 	private static final String FALLBACK = "/fallback";

@@ -31,6 +31,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.Message;
@@ -49,7 +50,7 @@ import org.springframework.stereotype.Component;
  * @version 2022.03
  * @since 2022/01/17 16:12
  */
-@Configuration
+@AutoConfiguration
 public class RedisListenerConfig {
 
 	@Bean

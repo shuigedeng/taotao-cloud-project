@@ -7,6 +7,7 @@ import org.quartz.JobDetail;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2022-03-25 15:01:33
  */
-@Configuration
+@AutoConfiguration
 public class SensitiveQuartzConfiguration {
 
 	@Bean

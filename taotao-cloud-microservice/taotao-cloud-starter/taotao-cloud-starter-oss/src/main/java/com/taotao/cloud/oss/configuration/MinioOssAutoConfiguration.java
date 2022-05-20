@@ -23,6 +23,7 @@ import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.MinioUploadFileServiceImpl;
 import io.minio.MinioClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2020/10/26 10:49
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({MinioProperties.class,})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "MINIO")
 public class MinioOssAutoConfiguration implements InitializingBean {

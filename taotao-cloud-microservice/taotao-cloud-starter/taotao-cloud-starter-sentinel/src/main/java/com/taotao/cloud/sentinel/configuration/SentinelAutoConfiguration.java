@@ -31,6 +31,7 @@ import com.taotao.cloud.sentinel.properties.SentinelProperties;
 import feign.Feign;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -51,9 +52,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
  * @version 2021.9
  * @since 2021-09-07 20:54:47
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
 @EnableConfigurationProperties({SentinelProperties.class})
-@AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SentinelProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SentinelAutoConfiguration implements InitializingBean {
 

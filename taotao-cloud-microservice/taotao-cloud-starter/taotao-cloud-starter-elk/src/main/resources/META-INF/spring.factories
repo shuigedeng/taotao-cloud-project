@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.elk.configuration.ElkAutoConfiguration,\
-com.taotao.cloud.elk.configuration.ElkWebInterceptorConfiguration

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.ping.PingFilter;
 import com.taotao.cloud.health.properties.PingProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
@@ -36,7 +37,7 @@ import org.springframework.core.Ordered;
  * @version 2021.9
  * @since 2021-09-10 17:22:15
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(PingProperties.class)
 @ConditionalOnProperty(prefix = PingProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PingProviderAutoConfiguration implements InitializingBean {

@@ -18,6 +18,7 @@ import com.taotao.cloud.sms.model.VerifyInfo;
 import com.taotao.cloud.sms.utils.StringUtils;
 import java.lang.reflect.Method;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,8 +32,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  *
  * @author shuigedeng
  */
-@Configuration
-@AutoConfigureAfter(SmsWebmvcAutoConfiguration.class)
+@AutoConfiguration(after = SmsWebmvcAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SmsWebmvcProperties.PREFIX, name = "enable", havingValue = "true")
 public class SmsWebmvcPathAutoConfiguration {
 

@@ -10,6 +10,8 @@ import com.taotao.cloud.web.error.mapper.ErrorCodeMapper;
 import com.taotao.cloud.web.error.mapper.ErrorMessageMapper;
 import com.taotao.cloud.web.error.mapper.HttpStatusMapper;
 import java.util.List;
+
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -25,7 +27,7 @@ import org.springframework.context.annotation.PropertySource;
  * @version 2021.10
  * @since 2022-01-12 09:00:17
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @EnableConfigurationProperties(ErrorHandlingProperties.class)
 @ConditionalOnProperty(value = "taotao.cloud.web.error.handling.enabled", matchIfMissing = true)

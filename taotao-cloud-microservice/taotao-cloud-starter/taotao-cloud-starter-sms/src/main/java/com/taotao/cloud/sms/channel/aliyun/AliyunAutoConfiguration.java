@@ -15,6 +15,7 @@ package com.taotao.cloud.sms.channel.aliyun;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.loadbalancer.SmsSenderLoadBalancer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -33,10 +34,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @version 2022.04
  * @since 2022-04-27 17:50:10
  */
-@Configuration
+@AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = AliyunProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(AliyunProperties.class)
-@AutoConfigureAfter(SmsAutoConfiguration.class)
 public class AliyunAutoConfiguration {
 
 	/**

@@ -28,6 +28,7 @@ import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.QiniuUploadFileServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,7 +40,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.03
  * @since 2020/10/26 10:28
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({QiniuProperties.class})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "QINIU")
 public class QiniuAutoConfiguration implements InitializingBean {

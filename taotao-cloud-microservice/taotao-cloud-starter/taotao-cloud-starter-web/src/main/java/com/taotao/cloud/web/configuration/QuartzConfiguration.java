@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.AdaptableJobFactory;
@@ -38,7 +39,7 @@ import org.springframework.stereotype.Component;
  * @version 2022.03
  * @since 2022-03-25 15:01:01
  */
-@Configuration
+@AutoConfiguration
 public class QuartzConfiguration {
 
 	/**

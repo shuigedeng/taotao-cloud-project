@@ -32,6 +32,7 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
@@ -49,7 +50,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * @version 2022.03
  * @since 2020/5/3 06:47
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({
 	RestClientPoolProperties.class,
 	ElasticsearchProperties.class

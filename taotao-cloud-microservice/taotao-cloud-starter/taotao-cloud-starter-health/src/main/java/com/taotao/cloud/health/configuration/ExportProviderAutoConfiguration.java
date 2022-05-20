@@ -22,6 +22,7 @@ import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.export.ExportProvider;
 import com.taotao.cloud.health.properties.ExportProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-10 17:22:15
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(ExportProperties.class)
 @ConditionalOnProperty(prefix = ExportProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ExportProviderAutoConfiguration implements InitializingBean {

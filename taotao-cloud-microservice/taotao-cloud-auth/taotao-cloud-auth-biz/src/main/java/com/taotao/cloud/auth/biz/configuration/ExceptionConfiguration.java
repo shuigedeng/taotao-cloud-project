@@ -27,20 +27,9 @@ import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
@@ -58,6 +47,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 /**
  * 全局统一返回值 包装器
  *
@@ -65,7 +66,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * @version 2021.9
  * @since 2021-09-02 21:26:19
  */
-@Configuration
+@AutoConfiguration
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.oauth2.biz.controller"}, annotations = {
 		RestController.class})
 public class ExceptionConfiguration implements InitializingBean {

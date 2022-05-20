@@ -6,6 +6,7 @@ import com.taotao.cloud.encrypt.filter.EncryptFilter;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.properties.EncryptFilterProperties;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 /**
  * web配置
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = EncryptFilterProperties.PREFIX, name = "enabled", havingValue = "true")
 public class EncryptFilterAutoConfiguration implements InitializingBean {
 

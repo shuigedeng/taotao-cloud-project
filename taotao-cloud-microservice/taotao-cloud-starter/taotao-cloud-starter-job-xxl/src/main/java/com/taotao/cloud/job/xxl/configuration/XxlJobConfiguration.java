@@ -26,6 +26,7 @@ import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -41,7 +42,7 @@ import org.springframework.util.StringUtils;
  * @version 2022.03
  * @since 2021/8/30 20:29
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({XxlJobProperties.class})
 @ConditionalOnProperty(prefix = XxlJobProperties.PREFIX, name = "enabled", havingValue = "true")
 public class XxlJobConfiguration implements InitializingBean {

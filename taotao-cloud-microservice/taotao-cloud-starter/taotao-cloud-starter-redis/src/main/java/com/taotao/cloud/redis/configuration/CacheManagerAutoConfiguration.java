@@ -35,6 +35,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
@@ -67,9 +68,8 @@ import org.springframework.util.StringUtils;
  * @version 2021.9
  * @since 2021-09-07 21:17:09
  */
-@Configuration
+@AutoConfiguration(after = RedisAutoConfiguration.class)
 @EnableCaching
-@AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableConfigurationProperties({CacheProperties.class})
 @ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CacheManagerAutoConfiguration implements InitializingBean {
@@ -156,11 +156,14 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	/**
 	 * Caffeine auto cache configuration.
+	 *
+	 * @author shuigedeng
+	 * @version 2022.04
+	 * @since 2022-05-20 17:32:35
 	 */
-	@Configuration
+	@AutoConfiguration(beforeName = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
 	@EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 	@ConditionalOnMissingBean(CacheManager.class)
-	@AutoConfigureBefore(name = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
 	public static class CaffeineAutoCacheConfiguration {
 
 		@Bean

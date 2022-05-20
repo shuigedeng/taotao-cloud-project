@@ -33,6 +33,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -53,7 +54,7 @@ import org.springframework.util.StringUtils;
  * @version 2021.9
  * @since 2021-09-07 20:54:47
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({MetricsProperties.class,
 	DruidMetricsProperties.class,
 	SentinelMetricsProperties.class,
@@ -66,7 +67,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 		LogUtil.started(MetricsAutoConfiguration.class, StarterName.PULSAR_STARTER);
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnClass(DruidDataSource.class)
 	@ConditionalOnProperty(prefix = DruidMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class DruidMetricsConfiguration {
@@ -120,7 +121,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 		}
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnClass(Undertow.class)
 	@AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
 	@ConditionalOnProperty(prefix = UndertowMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
@@ -138,7 +139,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnProperty(prefix = SentinelMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class SentinelMetricsConfiguration {
 

@@ -21,6 +21,7 @@ import com.taotao.cloud.shardingsphere.algorithm.DataSourceShardingAlgorithm;
 import com.taotao.cloud.shardingsphere.properties.ShardingJdbcProperties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -35,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-07 20:54:47
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({ShardingJdbcProperties.class})
 @ConditionalOnProperty(prefix = ShardingJdbcProperties.PREIX, name = "enabled", havingValue = "true")
 public class ShardingJdbcConfiguration implements

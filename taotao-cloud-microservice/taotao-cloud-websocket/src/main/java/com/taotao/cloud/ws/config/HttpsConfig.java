@@ -18,6 +18,7 @@ package com.taotao.cloud.ws.config;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.websocket.server.WsSci;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -32,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021/2/1 下午1:53
  * @version 2022.03
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(name = "server.ssl.enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfig {
 

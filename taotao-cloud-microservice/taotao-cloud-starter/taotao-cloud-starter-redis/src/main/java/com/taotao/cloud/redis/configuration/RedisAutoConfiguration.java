@@ -26,6 +26,7 @@ import java.util.List;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -62,7 +63,7 @@ import org.springframework.scripting.support.ResourceScriptSource;
  * @version 2021.9
  * @since 2021-09-07 21:17:02
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnBean(RedissonClient.class)
 @EnableConfigurationProperties({RedisProperties.class})
 public class RedisAutoConfiguration extends CachingConfigurerSupport implements InitializingBean {
@@ -156,7 +157,7 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		return template;
 	}
 
-	@Configuration
+	@AutoConfiguration
 	@ConditionalOnProperty(value = "taotao.cloud.redis.key-expired-event.enable")
 	public static class RedisKeyExpiredEventConfiguration {
 
@@ -183,7 +184,7 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		}
 	}
 
-	@Configuration(proxyBeanMethods = false)
+	@AutoConfiguration
 	@ConditionalOnProperty(value = "taotao.cloud.redis.rate-limiter.enable")
 	public static class RateLimiterAutoConfiguration {
 
