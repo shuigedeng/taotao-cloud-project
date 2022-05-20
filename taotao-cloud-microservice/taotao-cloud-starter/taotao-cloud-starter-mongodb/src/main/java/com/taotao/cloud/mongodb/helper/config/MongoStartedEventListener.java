@@ -26,6 +26,7 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.annotation.Configuration;
@@ -52,7 +53,7 @@ import org.springframework.util.StringUtils;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class MongoStartedEventListener {
 
 	// 写链接(写到主库,可使用事务)

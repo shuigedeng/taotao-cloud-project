@@ -16,6 +16,7 @@
 package com.taotao.cloud.logger.logRecord.configuration;
 
 import com.taotao.cloud.logger.logRecord.function.CustomFunctionRegistrar;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2022.04
  * @since 2022-04-26 14:49:11
  */
-@Configuration
+@AutoConfiguration
 public class CustomFunctionConfiguration {
 
 	/**
