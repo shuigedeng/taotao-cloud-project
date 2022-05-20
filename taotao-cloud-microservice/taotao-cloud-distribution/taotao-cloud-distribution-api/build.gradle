@@ -2,9 +2,9 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     api project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
-    api 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    api 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    api 'io.soabase.record-builder:record-builder-core:29'
-    annotationProcessor 'io.soabase.record-builder:record-builder-processor:29'
+    api 'io.soabase.record-builder:record-builder-core:33'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
 }
