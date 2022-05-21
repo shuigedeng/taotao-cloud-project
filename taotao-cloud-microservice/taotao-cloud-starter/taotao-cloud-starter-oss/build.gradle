@@ -30,15 +30,15 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     //亚马逊
-    api 'software.amazon.awssdk:s3:2.17.165'
+    api 'software.amazon.awssdk:s3:2.17.191'
     //京东云存储
-    api 'com.amazonaws:aws-java-sdk-s3:1.12.196'
+    api 'com.amazonaws:aws-java-sdk-s3:1.12.220'
     //华为云存储
     api 'com.huaweicloud:esdk-obs-java-bundle:3.22.3'
     //腾讯云存储
-    api 'com.qcloud:cos_api:5.6.72'
+    api 'com.qcloud:cos_api:5.6.80'
     //百度云对象存储
-    api('com.baidubce:bce-java-sdk:0.10.202'){
+    api('com.baidubce:bce-java-sdk:0.10.209'){
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
         exclude group: 'commons-collections', module: 'commons-collections'
         exclude group: 'commons-httpclient', module: 'commons-httpclient'
@@ -54,18 +54,18 @@ dependencies {
         exclude group: 'org.mortbay.jetty', module: 'jetty-util'
     }
     //minio存储
-    api 'io.minio:minio:8.3.7'
+    api 'io.minio:minio:8.4.1'
     api 'com.squareup.okhttp3:okhttp:4.9.3'
     api 'com.squareup.okio:okio'
     api 'com.google.guava:guava'
     //七牛云依赖
-    api 'com.qiniu:qiniu-java-sdk:7.9.5'
+    api 'com.qiniu:qiniu-java-sdk:7.10.2'
     api 'com.qiniu:happy-dns-java:0.1.6'
     //jsch依赖
     api 'com.jcraft:jsch:0.1.55'
     api 'commons-net:commons-net:3.8.0'
     //阿里OSS对象存储依赖
-    api 'com.aliyun.oss:aliyun-sdk-oss:3.14.0'
+    api 'com.aliyun.oss:aliyun-sdk-oss:3.15.0'
 
     api 'org.springframework.boot:spring-boot-starter-jdbc'
 

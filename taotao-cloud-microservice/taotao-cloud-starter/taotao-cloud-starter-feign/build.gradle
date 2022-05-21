@@ -6,7 +6,7 @@ dependencies {
     }
 
     api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    api "com.alibaba.csp:sentinel-spring-webmvc-adapter:1.8.3"
+    api 'com.alibaba.csp:sentinel-spring-webmvc-adapter:1.8.4'
 
     api "io.github.openfeign:feign-okhttp"
 
@@ -18,5 +18,9 @@ dependencies {
     api "com.squareup.okhttp3:okhttp"
     
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+repositories {
+    mavenCentral()
 }
 

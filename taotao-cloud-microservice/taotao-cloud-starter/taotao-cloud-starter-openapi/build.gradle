@@ -1,9 +1,13 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api "org.springdoc:springdoc-openapi-webmvc-core:1.6.7"
-    api "org.springdoc:springdoc-openapi-common:1.6.7"
+    api 'org.springdoc:springdoc-openapi-webmvc-core:1.6.8'
+    api 'org.springdoc:springdoc-openapi-common:1.6.8'
     api 'com.google.guava:guava'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+repositories {
+    mavenCentral()
 }

@@ -21,7 +21,7 @@ dependencies {
     api "org.springframework:spring-messaging"
 
     api 'net.sf.ehcache:ehcache:2.10.9.2'
-    api('com.github.ben-manes.caffeine:caffeine:3.0.6') {
+    api('com.github.ben-manes.caffeine:caffeine:3.1.0') {
         exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
     }
 
