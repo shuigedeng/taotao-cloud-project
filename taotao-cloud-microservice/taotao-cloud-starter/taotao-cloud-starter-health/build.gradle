@@ -6,13 +6,17 @@ dependencies {
 
 //    api 'com.dianping.cat:cat-client:3.0.0'
     api 'net.logstash.logback:logstash-logback-encoder'
-    api 'org.hibernate:hibernate-core:5.6.5.Final'
+    api 'org.hibernate:hibernate-core:6.0.1.Final'
 
     api 'org.apache.httpcomponents:httpclient'
     api 'org.apache.httpcomponents:httpmime'
     implementation 'org.apache.commons:commons-email:1.5'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+repositories {
+    mavenCentral()
 }
 
 

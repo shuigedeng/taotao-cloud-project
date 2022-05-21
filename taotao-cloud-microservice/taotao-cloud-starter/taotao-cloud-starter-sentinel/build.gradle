@@ -8,9 +8,9 @@ dependencies {
         exclude group: 'com.alibaba.csp', module: 'sentinel-cluster-server-default'
 
     }
-    api 'com.alibaba.csp:sentinel-transport-common:1.8.3'
-    api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.3'
-    api 'com.alibaba.csp:sentinel-cluster-server-default:1.8.3'
+    api 'com.alibaba.csp:sentinel-transport-common:1.8.4'
+    api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.4'
+    api 'com.alibaba.csp:sentinel-cluster-server-default:1.8.4'
 
     api ("com.alibaba.csp:sentinel-datasource-nacos"){
         exclude group: 'com.alibaba.csp', module: 'sentinel-core'

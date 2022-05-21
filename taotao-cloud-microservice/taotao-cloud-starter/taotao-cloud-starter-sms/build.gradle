@@ -5,7 +5,7 @@ dependencies {
     api 'com.aliyun:aliyun-java-sdk-core:4.6.0'
     api 'com.aliyun:aliyun-java-sdk-dysmsapi:2.2.1'
 
-    api('com.baidubce:bce-java-sdk:0.10.202') {
+    api('com.baidubce:bce-java-sdk:0.10.209') {
         exclude group: 'org.apache.hbase', module: 'hbase-client'
         exclude group: 'commons-io', module: 'commons-io'
         exclude group: 'ch.qos.logback', module: 'logback-core'
@@ -25,7 +25,7 @@ dependencies {
     api 'com.github.qcloudsms:qcloudsms:1.0.6'
     api 'com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.464'
 
-    api('com.qiniu:qiniu-java-sdk:7.9.3') {
+    api('com.qiniu:qiniu-java-sdk:7.10.2') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 
