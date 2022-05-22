@@ -3,15 +3,11 @@ package com.taotao.cloud.xxljob.core.thread;
 import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
 import com.taotao.cloud.xxljob.core.trigger.TriggerTypeEnum;
 import com.taotao.cloud.xxljob.core.trigger.XxlJobTrigger;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * job trigger thread pool helper

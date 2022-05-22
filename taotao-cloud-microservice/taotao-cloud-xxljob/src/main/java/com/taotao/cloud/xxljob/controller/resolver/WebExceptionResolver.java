@@ -3,9 +3,6 @@ package com.taotao.cloud.xxljob.controller.resolver;
 import com.taotao.cloud.xxljob.core.exception.XxlJobException;
 import com.taotao.cloud.xxljob.core.util.JacksonUtil;
 import com.xxl.job.core.biz.model.ReturnT;
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,6 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * common exception resolver

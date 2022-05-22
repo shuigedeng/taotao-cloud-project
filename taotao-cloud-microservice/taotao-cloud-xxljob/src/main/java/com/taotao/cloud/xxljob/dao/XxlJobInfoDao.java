@@ -1,13 +1,15 @@
 package com.taotao.cloud.xxljob.dao;
 
 import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
  * job info
+ * @author xuxueli 2016-1-12 18:03:45
  */
 @Mapper
 public interface XxlJobInfoDao {

@@ -6,19 +6,15 @@ import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.core.scheduler.MisfireStrategyEnum;
 import com.taotao.cloud.xxljob.core.scheduler.ScheduleTypeEnum;
 import com.taotao.cloud.xxljob.core.trigger.TriggerTypeEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author xuxueli 2019-05-21

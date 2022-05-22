@@ -3,6 +3,7 @@ package com.taotao.cloud.xxljob.core.route.strategy;
 import com.taotao.cloud.xxljob.core.route.ExecutorRouter;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.biz.model.TriggerParam;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

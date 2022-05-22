@@ -123,7 +123,7 @@ buildscript {
         //https://search.maven.org/artifact/eu.bitwalker/UserAgentUtils
         userAgentUtilsVersion = '1.21'
         //https://search.maven.org/artifact/com.xuxueli/xxl-job-core
-        xxlJobVersion = '2.3.0'
+        xxlJobVersion = '2.3.1'
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.4.2.Final"
         //https://search.maven.org/artifact/com.alibaba/fastjson

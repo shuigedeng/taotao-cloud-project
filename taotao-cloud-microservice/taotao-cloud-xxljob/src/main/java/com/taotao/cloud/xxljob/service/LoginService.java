@@ -6,20 +6,18 @@ import com.taotao.cloud.xxljob.core.util.I18nUtil;
 import com.taotao.cloud.xxljob.core.util.JacksonUtil;
 import com.taotao.cloud.xxljob.dao.XxlJobUserDao;
 import com.xxl.job.core.biz.model.ReturnT;
-import java.math.BigInteger;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.util.DigestUtils;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.util.DigestUtils;
+import java.math.BigInteger;
 
 /**
  * @author xuxueli 2019-05-04 22:13:264
  */
-@Component
+@Configuration
 public class LoginService {
 
     public static final String LOGIN_IDENTITY_KEY = "XXL_JOB_LOGIN_IDENTITY";

@@ -7,18 +7,20 @@ import com.taotao.cloud.xxljob.dao.XxlJobInfoDao;
 import com.taotao.cloud.xxljob.dao.XxlJobLogDao;
 import com.taotao.cloud.xxljob.dao.XxlJobLogReportDao;
 import com.taotao.cloud.xxljob.dao.XxlJobRegistryDao;
-import java.util.Arrays;
-import javax.annotation.Resource;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.util.Arrays;
+
 /**
  * xxl-job config
  *
+ * @author xuxueli 2017-04-28
  */
 
 @Component

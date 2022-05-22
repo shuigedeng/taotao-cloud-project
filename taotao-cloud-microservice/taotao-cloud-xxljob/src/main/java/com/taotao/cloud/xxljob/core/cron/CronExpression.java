@@ -1,5 +1,5 @@
 /*
- * All content Copyright (c) Terracotta, Inc., unless otherwise indicated. All rights reserved.
+ * All content copyright Terracotta, Inc., unless otherwise indicated. All rights reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not 
  * use this file except in compliance with the License. You may obtain a copy 
@@ -192,6 +192,10 @@ import java.util.TreeSet;
  * </p>
  * 
  * 
+ * @author Sharada Jambula, James House
+ * @author Contributions from Mads Henderson
+ * @author Refactoring from CronTrigger to CronExpression by Aaron Craven
+ *
  * Borrowed from quartz v2.3.1
  *
  */
