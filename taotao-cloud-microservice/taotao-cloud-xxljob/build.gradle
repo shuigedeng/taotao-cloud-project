@@ -2,6 +2,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     testImplementation "org.springframework.boot:spring-boot-starter-test"

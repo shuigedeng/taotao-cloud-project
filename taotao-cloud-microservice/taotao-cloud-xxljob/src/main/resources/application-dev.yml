@@ -196,6 +196,7 @@ xxl:
         max: 100
     logretentiondays: 30
 
+
 taotao:
   cloud:
     p6spy:
@@ -207,26 +208,22 @@ taotao:
     core:
       enabled: true
       env: dev
-      logging:
-        file:
-          total-size: 10GB
-      context:
-        restart:
-          enabled: false
-          text:
-          timespan:
-      collect:
-        hook:
-          enabled: true
-      db:
-        printSql:
-          enabled: true
-        printSqlError:
-          enabled: true
-    log:
-      request-log:
+      collect-hook-enabled: true
+      context-restart-enabled: false
+    dinger:
+      enabled: true
+      httpclient:
+        enabled: true
+      threadpool:
+        enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:2f81a18fd235ffbecc00519d53bb8054a7ff3e50f3287e3e4c5fef6e5c8e1016}
+          secret: ${DINGDING_SECRET:SEC2ec149b6eaab26a16b3d6c78845848251d0667fb8aa288b0e79d8675e4608d80}
+    logger:
+      request:
         enabled: false
-
 
 management:
   server:
