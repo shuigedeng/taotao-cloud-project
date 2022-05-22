@@ -1,10 +1,11 @@
 package com.taotao.cloud.xxljob.dao;
 
 import com.taotao.cloud.xxljob.core.model.XxlJobRegistry;
-import java.util.Date;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by xuxueli on 16/9/30.

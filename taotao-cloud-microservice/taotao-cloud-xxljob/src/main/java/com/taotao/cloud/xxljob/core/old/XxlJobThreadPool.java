@@ -6,6 +6,7 @@ package com.taotao.cloud.xxljob.core.old;//package com.xxl.job.admin.core.quartz
 ///**
 // * single thread pool, for async trigger
 // *
+// * @author xuxueli 2019-03-06
 // */
 //public class XxlJobThreadPool implements ThreadPool {
 //

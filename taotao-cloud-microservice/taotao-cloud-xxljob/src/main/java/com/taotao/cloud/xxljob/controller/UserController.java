@@ -8,11 +8,6 @@ import com.taotao.cloud.xxljob.dao.XxlJobGroupDao;
 import com.taotao.cloud.xxljob.dao.XxlJobUserDao;
 import com.taotao.cloud.xxljob.service.LoginService;
 import com.xxl.job.core.biz.model.ReturnT;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -20,6 +15,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author xuxueli 2019-05-04 16:39:50

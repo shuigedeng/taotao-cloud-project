@@ -1,14 +1,16 @@
 package com.taotao.cloud.xxljob.dao;
 
 import com.taotao.cloud.xxljob.core.model.XxlJobLog;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 /**
  * job log
+ * @author xuxueli 2016-1-12 18:03:06
  */
 @Mapper
 public interface XxlJobLogDao {
