@@ -5,7 +5,7 @@ import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.support.handler.IHandler;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.guava.Guavas;
-import com.taotao.cloud.common.utils.io.StreamUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.pinyin.constant.PinyinConst;
@@ -103,9 +103,9 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(charMap)) {
-                List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
+                List<String> lines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
                 // 自定义词库
-                List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
+                List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
                 lines.addAll(defineLines);
                 charMap = Guavas.newHashMap(lines.size());
 
@@ -134,9 +134,9 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(phraseMap)) {
                 final long startTime = System.currentTimeMillis();
-                List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
+                List<String> lines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
                 // 处理自定义字典
-                List<String> defineLines = StreamUtil.readAllLines(PinyinConst.
+                List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.
 	                PINYIN_DICT_PHRASE_DEFINE);
                 lines.addAll(defineLines);
                 phraseMap = Guavas.newHashMap(lines.size());

@@ -1,7 +1,7 @@
 package com.taotao.cloud.common.utils.pinyin.util;
 
 
-import com.taotao.cloud.common.utils.io.StreamUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.pinyin.constant.PinyinConst;
@@ -23,7 +23,7 @@ public final class InnerToneHelper {
     static {
         TONE_ITEM_MAP = new HashMap<>(34);
 
-        List<String> allLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_TONE_SYSTEM);
+        List<String> allLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_TONE_SYSTEM);
         for(String line : allLines) {
             String[] strings = line.split(StringUtil.BLANK);
             ToneItem item = ToneItem.of(strings[0].charAt(0), Integer.parseInt(strings[1]));
