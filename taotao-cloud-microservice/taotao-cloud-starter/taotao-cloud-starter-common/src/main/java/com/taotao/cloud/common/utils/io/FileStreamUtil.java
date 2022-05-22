@@ -32,9 +32,9 @@ import java.util.Map;
 /**
  * 流工具类
  */
-public class StreamUtil {
+public class FileStreamUtil {
 
-	private StreamUtil() {
+	private FileStreamUtil() {
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class StreamUtil {
 			} catch (Exception localException2) {
 				ClassLoader localClassLoader = Thread.currentThread().getContextClassLoader();
 				if (localClassLoader == null) {
-					localClassLoader = StreamUtil.class.getClassLoader();
+					localClassLoader = FileStreamUtil.class.getClassLoader();
 				}
 				inputStream = localClassLoader.getResourceAsStream(filePath);
 				if (inputStream == null) {
@@ -168,7 +168,7 @@ public class StreamUtil {
 	 * @return 返回数据集合
 	 */
 	public static List<String> readAllLines(final String path) {
-		InputStream inputStream = StreamUtil.class.getResourceAsStream(path);
+		InputStream inputStream = FileStreamUtil.class.getResourceAsStream(path);
 		return readAllLines(inputStream, CommonConstant.UTF8, true);
 	}
 
@@ -239,7 +239,7 @@ public class StreamUtil {
 		final int startIndex,
 		final int endIndex,
 		final Charset charset) {
-		try (InputStream inputStream = StreamUtil.class.getResourceAsStream(path)) {
+		try (InputStream inputStream = FileStreamUtil.class.getResourceAsStream(path)) {
 			return FileUtil.getFileContent(inputStream, startIndex, endIndex, charset);
 		} catch (IOException e) {
 			throw new CommonRuntimeException(e);
@@ -272,7 +272,7 @@ public class StreamUtil {
 		} catch (IOException e) {
 			throw new CommonRuntimeException(e);
 		} finally {
-			StreamUtil.closeStream(inputStream);
+			FileStreamUtil.closeStream(inputStream);
 		}
 	}
 
@@ -343,7 +343,7 @@ public class StreamUtil {
 	public static <K, V> Map<K, V> readToMap(final String path,
 		final String charset,
 		final IMapHandler<K, V, String> mapHandler) {
-		InputStream inputStream = StreamUtil.class.getResourceAsStream(path);
+		InputStream inputStream = FileStreamUtil.class.getResourceAsStream(path);
 		return FileUtil.readToMap(inputStream, charset, mapHandler);
 	}
 

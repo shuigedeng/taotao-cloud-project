@@ -3,7 +3,7 @@ package com.taotao.cloud.common.utils.pinyin.support.tone;
 
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.utils.guava.Guavas;
-import com.taotao.cloud.common.utils.io.StreamUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.pinyin.constant.PinyinConst;
 import com.taotao.cloud.common.utils.pinyin.spi.IPinyinToneReverse;
@@ -33,9 +33,9 @@ public class PinyinToneReverse implements IPinyinToneReverse {
     private static final Map<String, List<String>> CHAR_MAP;
 
     static {
-        List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
+        List<String> lines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
         // 自定义词库
-        List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
+        List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
         lines.addAll(defineLines);
         CHAR_MAP = Guavas.newHashMap(lines.size());
 

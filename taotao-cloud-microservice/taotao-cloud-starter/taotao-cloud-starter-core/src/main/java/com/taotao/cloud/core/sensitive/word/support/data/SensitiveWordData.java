@@ -3,7 +3,7 @@ package com.taotao.cloud.core.sensitive.word.support.data;
 
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.guava.Guavas;
-import com.taotao.cloud.common.utils.io.StreamUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordData;
 import com.taotao.cloud.core.sensitive.word.constant.AppConst;
 import java.util.List;
@@ -25,15 +25,15 @@ public class SensitiveWordData implements IWordData {
         synchronized (SensitiveWordData.class) {
             long start = System.currentTimeMillis();
             defaultLines = Guavas.newArrayList(AppConst.DICT_SIZE+AppConst.DICT_EN_SIZE);
-            defaultLines = StreamUtil.readAllLines("/dict.txt");
-            defaultLines.addAll(StreamUtil.readAllLines("/dict_en.txt"));
+            defaultLines = FileStreamUtil.readAllLines("/dict.txt");
+            defaultLines.addAll(FileStreamUtil.readAllLines("/dict_en.txt"));
 
             // 用户自定义
-            List<String> denyList = StreamUtil.readAllLines("/sensitive_word_deny.txt");
+            List<String> denyList = FileStreamUtil.readAllLines("/sensitive_word_deny.txt");
             defaultLines.addAll(denyList);
 
             // 移除白名单词语
-            List<String> allowList = StreamUtil.readAllLines("/sensitive_word_allow.txt");
+            List<String> allowList = FileStreamUtil.readAllLines("/sensitive_word_allow.txt");
             defaultLines = CollectionUtil.difference(defaultLines, allowList);
 
             long end = System.currentTimeMillis();
