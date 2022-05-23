@@ -18,15 +18,18 @@ package com.taotao.cloud.mongodb.helper.config;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.mongodb.client.result.UpdateResult;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.mongodb.helper.bean.IgnoreDocument;
 import com.taotao.cloud.mongodb.helper.bean.InitValue;
 import com.taotao.cloud.mongodb.helper.utils.SystemTool;
 import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.annotation.Configuration;
@@ -69,6 +72,10 @@ public class MongoStartedEventListener {
 	public void afterStart(WebServerInitializedEvent event) {
 		WebServerApplicationContext context = event.getApplicationContext();
 		Environment environment = context.getEnvironment();
+
+		Map<String, Object> beansWithAnnotation = ContextUtil.getApplicationContext()
+			.getBeansWithAnnotation(SpringBootApplication.class);
+		LogUtil.info(beansWithAnnotation.toString());
 
 		if(Objects.nonNull(mongoMappingContext) && Objects.nonNull(mongoTemplate)){
 			// 找到主程序包

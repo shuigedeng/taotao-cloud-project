@@ -363,7 +363,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 				// 所有接口映射
 				RequestMappingHandlerMapping mapping = applicationContext
-					.getBean(RequestMappingHandlerMapping.class);
+					.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
 
 				// 获取url与类和方法的对应信息
 				Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();

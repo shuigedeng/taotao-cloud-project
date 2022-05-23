@@ -57,8 +57,7 @@ public class EsContext {
 		this.username = username;
 		this.paasword = paasword;
 
-		this.urls = uris.stream().map(e -> !e.contains("://") ? "http://" + e : e).toList()
-			.toArray(new String[uris.size()]);
+		this.urls = uris.toArray(new String[uris.size()]);
 
 		this.initMeta();
 	}
@@ -116,7 +115,7 @@ public class EsContext {
 
 			url = urls[urlIndex % urls.length];
 		}
-		return "http://" + url;
+		return url.startsWith("http") ? url : "http://" + url;
 	}
 
 	protected PriHttpUtils getHttp(String path) {

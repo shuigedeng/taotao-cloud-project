@@ -45,8 +45,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 21:28:17
  */
-@AutoConfiguration
-@AutoConfigureAfter(HealthAutoConfiguration.class)
+@AutoConfiguration(after = HealthAutoConfiguration.class)
 public class PrometheusConfiguration implements InitializingBean {
 
 	@Autowired(required = false)

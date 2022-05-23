@@ -592,7 +592,6 @@ public class ReflectionUtil extends ReflectionUtils {
 			}
 			return defaultValue;
 		} catch (Exception exp) {
-			LogUtil.error(exp);
 			return defaultValue;
 		}
 	}
