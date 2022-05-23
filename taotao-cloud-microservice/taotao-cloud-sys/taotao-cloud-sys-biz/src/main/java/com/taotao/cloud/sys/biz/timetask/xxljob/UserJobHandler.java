@@ -24,6 +24,24 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class UserJobHandler {
 
+	@XxlJob("TJobHandler")
+	public ReturnT<String> throwJobHandler(String param) throws Exception {
+		XxlJobHelper.log("XXL-JOB, throwwwwwwwwwwwwww");
+
+		LogUtil.info("=============xxljob throwwwwwwwwwwwwwwwwwwwwwwwwww");
+
+		throw new Exception("XXL-JOB, throwwwwwwwwwwwwww");
+	}
+
+	@XxlJob("TestJobHandler")
+	public ReturnT<String> testJobHandler(String param) throws Exception {
+		XxlJobHelper.log("XXL-JOB, successsssssssssss");
+
+		LogUtil.info("=============xxljob succcccccccccccccc");
+
+		return ReturnT.SUCCESS;
+	}
+
     @XxlJob("UserJobHandler")
     public ReturnT<String> userJobHandler(String param) throws Exception {
 	    XxlJobHelper.log("XXL-JOB, Hello World.");
@@ -32,7 +50,7 @@ public class UserJobHandler {
 	    XxlJobHelper.log("XXL-JOB, Hello World.3");
 	    XxlJobHelper.log("XXL-JOB, Hello World.4");
 
-	    LogUtil.info("=============xxljob");
+	    LogUtil.info("=============xxljob eeeeeeeeeeeeeeeeeeeee");
 
         //for (int i = 0; i < 5; i++) {
 	    //    XxlJobHelper.log("beat at:" + i);

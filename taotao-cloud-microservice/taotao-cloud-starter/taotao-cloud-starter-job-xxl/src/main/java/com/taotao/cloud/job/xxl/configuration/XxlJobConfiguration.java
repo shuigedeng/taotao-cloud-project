@@ -59,7 +59,6 @@ public class XxlJobConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = XxlJobProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 	public XxlJobSpringExecutor xxlJobSpringExecutor(XxlJobProperties xxlJobProperties,
 		Environment environment,
 		DiscoveryClient discoveryClient) {
@@ -76,10 +75,10 @@ public class XxlJobConfiguration implements InitializingBean {
 		xxlJobSpringExecutor.setAppname(appName);
 		xxlJobSpringExecutor.setAddress(executor.getAddress());
 
-		if (StrUtil.isEmpty(executor.getIp())) {
-			//executor.setIp(RequestUtil.getLocalAddr());
-			executor.setIp(NetUtil.getLocalhostStr());
-		}
+		//if (StrUtil.isEmpty(executor.getIp())) {
+		//	//executor.setIp(RequestUtil.getLocalAddr());
+		//	executor.setIp(NetUtil.getLocalhostStr());
+		//}
 
 		xxlJobSpringExecutor.setIp(executor.getIp());
 		xxlJobSpringExecutor.setPort(executor.getPort());
