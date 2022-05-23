@@ -19,6 +19,7 @@ import com.taotao.cloud.disruptor.context.EventHandlerDefinition;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * DisruptorProperties
@@ -27,6 +28,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 2021.9
  * @since 2021-09-03 20:24:34
  */
+@RefreshScope
 @ConfigurationProperties(prefix = DisruptorProperties.PREFIX)
 public class DisruptorProperties {
 

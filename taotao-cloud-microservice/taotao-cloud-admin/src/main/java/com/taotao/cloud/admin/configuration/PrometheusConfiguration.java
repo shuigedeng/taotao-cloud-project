@@ -79,7 +79,7 @@ import org.springframework.scheduling.annotation.Async;
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PrometheusConfiguration {
 
-	AutoConfiguration
+	@AutoConfiguration
 	@ConditionalOnBean(DiscoveryClient.class)
 	@ConditionalOnDiscoveryEnabled
 	//@ConditionalOnBlockingDiscoveryEnabled
@@ -101,7 +101,7 @@ public class PrometheusConfiguration {
 
 	}
 
-	AutoConfiguration
+	@AutoConfiguration
 	@ConditionalOnBean(ReactiveDiscoveryClient.class)
 	@ConditionalOnDiscoveryEnabled
 	@ConditionalOnReactiveDiscoveryEnabled

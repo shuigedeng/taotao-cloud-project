@@ -31,6 +31,9 @@ public class EndpointProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.endpoint";
 
+	/**
+	 * 是否开启endpoint
+	 */
 	private boolean enabled = true;
 
 	public boolean isEnabled() {

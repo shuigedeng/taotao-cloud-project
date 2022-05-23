@@ -24,7 +24,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * CanalProperties 
+ * CanalProperties
  *
  * @author shuigedeng
  * @version 2021.9
@@ -36,9 +36,14 @@ public class CanalProperties {
 
 	public static final String PREFIX = "taotao.cloud.canal";
 
+	/**
+	 * 是否开启canal
+	 */
 	private boolean enabled = false;
 
-	// 配置信息
+	/**
+	 * canal配置信息
+	 */
 	private Map<String, Instance> instances = new LinkedHashMap<>();
 
 	public boolean getEnabled() {

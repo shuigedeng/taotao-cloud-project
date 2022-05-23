@@ -30,6 +30,9 @@ public class CaptchaProperties {
 
 	public static final String PREFIX = "taotao.cloud.captcha";
 
+	/**
+	 * 是否开启captcha
+	 */
 	private boolean enabled = false;
 
 	/**
@@ -107,15 +110,20 @@ public class CaptchaProperties {
 	 */
 	private int reqGetLockLimit = 5;
 	/**
-	 *
+	 * 验证失败后，get接口锁定时间
 	 */
 	private int reqGetLockSeconds = 300;
-
 	/***
 	 * get接口一分钟内限制访问数
 	 */
 	private int reqGetMinuteLimit = 100;
+	/**
+	 * check接口 一分钟请求次数限制
+	 */
 	private int reqCheckMinuteLimit = 100;
+	/**
+	 * verify 接口 一分钟请求次数限制
+	 */
 	private int reqVerifyMinuteLimit = 100;
 
 
@@ -160,11 +168,23 @@ public class CaptchaProperties {
 	}
 
 	public int getReqCheckMinuteLimit() {
-		return reqGetMinuteLimit;
+		return reqCheckMinuteLimit;
 	}
 
 	public void setReqCheckMinuteLimit(int reqCheckMinuteLimit) {
 		this.reqCheckMinuteLimit = reqCheckMinuteLimit;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public boolean isHistoryDataClearEnable() {
+		return historyDataClearEnable;
+	}
+
+	public boolean isReqFrequencyLimitEnable() {
+		return reqFrequencyLimitEnable;
 	}
 
 	public int getReqVerifyMinuteLimit() {

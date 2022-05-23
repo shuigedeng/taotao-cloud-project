@@ -31,7 +31,9 @@ public class HttpClientProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.httpclient";
 
-
+	/**
+	 * 是否开启httpclient
+	 */
 	private boolean enabled = true;
 
 	/**
@@ -43,7 +45,6 @@ public class HttpClientProperties {
 	 * 总连接池大小
 	 */
 	private int maxTotal = 500;
-
 
 	/**
 	 * 单个host连接池大小

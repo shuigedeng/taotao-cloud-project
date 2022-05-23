@@ -869,6 +869,7 @@ spring:
               txCommitRecovered: true
 taotao:
   cloud:
+    .
     zookeeper:
       enabled: true
       connectString: 172.16.6.151:2181
@@ -1008,7 +1009,7 @@ taotao:
       env: dev
       enabled: true
     captcha:
-      enabled: true
+      enabled: false
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.*.biz.entity

@@ -16,6 +16,7 @@
 package com.taotao.cloud.data.mybatis.plus.log;
 
 import cn.hutool.db.sql.SqlFormatter;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.ibatis.logging.Log;
@@ -54,28 +55,28 @@ public class CustomStdOutImpl implements Log {
 
 	@Override
 	public void error(String s, Throwable e) {
-		System.err.println(SqlFormatter.format(s));
-		e.printStackTrace(System.err);
+		e.printStackTrace();
+		LogUtil.error(e,SqlFormatter.format(s));
 	}
 
 	@Override
 	public void error(String s) {
-		System.err.println(SqlFormatter.format(s));
+		LogUtil.error(SqlFormatter.format(s));
 	}
 
 	@Override
 	public void debug(String s) {
 		boolean b = DML.stream().anyMatch(item -> s.toLowerCase().contains(item));
-		System.out.println(b ? SqlFormatter.format(s) : s);
+		LogUtil.debug(b ? SqlFormatter.format(s) : s);
 	}
 
 	@Override
 	public void trace(String s) {
-		System.out.println(s);
+		LogUtil.info(s);
 	}
 
 	@Override
 	public void warn(String s) {
-		System.out.println(s);
+		LogUtil.info(s);
 	}
 }

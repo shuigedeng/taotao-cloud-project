@@ -31,6 +31,9 @@ public class MonitorProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.monitor";
 
+	/**
+	 * 是否开启监控
+	 */
 	private boolean enabled = true;
 
 	public boolean isEnabled() {
