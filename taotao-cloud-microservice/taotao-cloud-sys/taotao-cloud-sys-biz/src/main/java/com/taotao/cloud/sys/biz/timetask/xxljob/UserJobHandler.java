@@ -6,6 +6,7 @@
  */
 package com.taotao.cloud.sys.biz.timetask.xxljob;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -30,6 +31,8 @@ public class UserJobHandler {
 	    XxlJobHelper.log("XXL-JOB, Hello World.2");
 	    XxlJobHelper.log("XXL-JOB, Hello World.3");
 	    XxlJobHelper.log("XXL-JOB, Hello World.4");
+
+	    LogUtil.info("=============xxljob");
 
         //for (int i = 0; i < 5; i++) {
 	    //    XxlJobHelper.log("beat at:" + i);
