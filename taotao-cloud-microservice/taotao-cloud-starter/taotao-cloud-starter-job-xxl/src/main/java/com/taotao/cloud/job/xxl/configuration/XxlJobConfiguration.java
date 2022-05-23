@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.job.xxl.configuration;
 
+import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
@@ -74,12 +75,13 @@ public class XxlJobConfiguration implements InitializingBean {
 
 		xxlJobSpringExecutor.setAppname(appName);
 		xxlJobSpringExecutor.setAddress(executor.getAddress());
-		xxlJobSpringExecutor.setIp(executor.getIp());
 
 		if (StrUtil.isEmpty(executor.getIp())) {
-			executor.setIp(RequestUtil.getLocalAddr());
+			//executor.setIp(RequestUtil.getLocalAddr());
+			executor.setIp(NetUtil.getLocalhostStr());
 		}
 
+		xxlJobSpringExecutor.setIp(executor.getIp());
 		xxlJobSpringExecutor.setPort(executor.getPort());
 		xxlJobSpringExecutor.setAccessToken(executor.getAccessToken());
 		xxlJobSpringExecutor.setLogPath(executor.getLogPath());
