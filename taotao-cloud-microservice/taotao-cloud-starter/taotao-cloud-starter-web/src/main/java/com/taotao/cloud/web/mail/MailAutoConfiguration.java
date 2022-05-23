@@ -36,8 +36,7 @@ import org.springframework.mail.javamail.JavaMailSender;
  * @version 2021.9
  * @since 2021-09-09 11:38:47
  */
-@AutoConfiguration
-@AutoConfigureAfter(MailSenderAutoConfiguration.class)
+@AutoConfiguration(after = MailSenderAutoConfiguration.class)
 @EnableConfigurationProperties({com.taotao.cloud.web.mail.MailProperties.class})
 @ConditionalOnProperty(prefix = com.taotao.cloud.web.mail.MailProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MailAutoConfiguration implements InitializingBean {

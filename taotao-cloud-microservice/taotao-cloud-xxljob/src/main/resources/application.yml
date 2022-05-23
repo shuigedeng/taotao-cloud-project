@@ -1,3 +1,19 @@
 spring:
   profiles:
     active: dev
+  mail:
+    host: smtp.qq.com
+    port: 465
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+    username: 981376577@qq.com
+    from: 981376577@qq.com
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory

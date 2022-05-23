@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.common.enums;
 
+import okhttp3.internal.http2.ErrorCode;
+
 /**
  * 返回结果枚举 code规则 500 + 自增三位数
  *
@@ -213,6 +215,9 @@ public enum ResultEnum implements BaseEnum {
 	 * RequestBody类型参数数据类型转换异常  HttpMessageNotReadable
 	 */
 	HTTP_MESSAGE_NOT_READABLE(500038, "类型参数数据类型转换异常"),
+
+
+	SQL_INJECTION_REQUEST(500039, "疑似SQL注入请求"),
 
 	/**
 	 * 系统异常

@@ -26,12 +26,19 @@ public class UserJobHandler {
     @XxlJob("UserJobHandler")
     public ReturnT<String> userJobHandler(String param) throws Exception {
 	    XxlJobHelper.log("XXL-JOB, Hello World.");
+	    XxlJobHelper.log("XXL-JOB, Hello World.1");
+	    XxlJobHelper.log("XXL-JOB, Hello World.2");
+	    XxlJobHelper.log("XXL-JOB, Hello World.3");
+	    XxlJobHelper.log("XXL-JOB, Hello World.4");
 
-        for (int i = 0; i < 5; i++) {
-	        XxlJobHelper.log("beat at:" + i);
-            System.out.println("XXL-JOB测试-----" + i);
-            TimeUnit.SECONDS.sleep(2);
-        }
-        return ReturnT.SUCCESS;
+        //for (int i = 0; i < 5; i++) {
+	    //    XxlJobHelper.log("beat at:" + i);
+        //    System.out.println("XXL-JOB测试-----" + i);
+        //    TimeUnit.SECONDS.sleep(2);
+        //}
+
+		//throw new RuntimeException("XXL-JOB测试异常");
+
+        return ReturnT.FAIL;
     }
 }

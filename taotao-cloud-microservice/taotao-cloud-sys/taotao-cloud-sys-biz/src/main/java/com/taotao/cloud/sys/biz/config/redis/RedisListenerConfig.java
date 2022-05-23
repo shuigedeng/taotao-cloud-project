@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.Message;
@@ -192,7 +193,8 @@ public class RedisListenerConfig {
 		return container;
 	}
 
-	@Component
+	@AutoConfiguration
+	@ConditionalOnBean(RedisMessageListenerContainer.class)
 	public static class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
 
 		public RedisKeyExpireListener(RedisMessageListenerContainer listenerContainer) {

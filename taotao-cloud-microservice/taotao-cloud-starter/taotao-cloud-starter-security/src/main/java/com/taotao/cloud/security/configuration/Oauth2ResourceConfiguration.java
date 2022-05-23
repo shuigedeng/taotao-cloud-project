@@ -141,7 +141,7 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 			"/doc/**",
 			"/health/**"));
 
-		RequestMappingHandlerMapping mapping = ac.getBean(RequestMappingHandlerMapping.class);
+		RequestMappingHandlerMapping mapping = ac.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
 		Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 
 		map.keySet().forEach(info -> {
