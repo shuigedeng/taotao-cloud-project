@@ -31,6 +31,9 @@ public class AsyncProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.async";
 
+	/**
+	 * 是否开启异步
+	 */
 	private boolean enabled = true;
 
 	public boolean isEnabled() {

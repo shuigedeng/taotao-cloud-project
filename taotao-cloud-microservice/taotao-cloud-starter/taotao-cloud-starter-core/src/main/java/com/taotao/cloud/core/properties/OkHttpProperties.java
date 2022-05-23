@@ -31,6 +31,9 @@ public class OkHttpProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.okhttp";
 
+	/**
+	 * 是否开启okhttp
+	 */
 	private boolean enabled = true;
 	/**
 	 * 单位秒

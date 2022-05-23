@@ -39,23 +39,23 @@ public class CoreProperties {
 	public static String ContextRestartText = "taotao.cloud.core.context.restart.text";
 
 	/**
-	 * env
+	 * 核心环境变量
 	 */
 	private EnvironmentEnum env;
 	/**
-	 * enabled
+	 * 是否开启核心属性配置
 	 */
 	private boolean enabled = true;
 	/**
-	 * collectHookEnabled
+	 * 是否开启自定义收集器
 	 */
 	private boolean collectHookEnabled = true;
 	/**
-	 * contextRestartEnabled
+	 * 是否开启配置刷新上下文监听
 	 */
 	private boolean contextRestartEnabled = false;
 	/**
-	 * contextRestartTimespan
+	 * 刷新上下文监听等待时间
 	 */
 	private int contextRestartTimespan = 10;
 

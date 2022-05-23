@@ -31,7 +31,9 @@ public class ZookeeperProperties {
 
 	public static final String PREFIX = "taotao.cloud.zookeeper";
 
-
+	/**
+	 * 是否开启zk
+	 */
 	private boolean enabled = false;
 
 	/**
