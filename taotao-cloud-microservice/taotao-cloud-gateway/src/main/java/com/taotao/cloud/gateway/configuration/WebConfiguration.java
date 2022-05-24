@@ -28,6 +28,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.server.ServerWebExchange;
@@ -43,7 +44,7 @@ import java.util.Objects;
  * @version 2022.03
  * @since 2020/4/29 22:13
  */
-@AutoConfiguration
+@Configuration
 @EnableConfigurationProperties({
 	DynamicRouteProperties.class,
 	ApiProperties.class,

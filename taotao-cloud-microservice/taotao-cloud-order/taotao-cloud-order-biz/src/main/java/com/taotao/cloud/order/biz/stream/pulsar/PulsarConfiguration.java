@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 
-@AutoConfiguration
+@Configuration
 public class PulsarConfiguration {
 
     @Bean
@@ -18,7 +19,7 @@ public class PulsarConfiguration {
             .addProducer("other-topic", String.class);
     }
 
-	@AutoConfiguration
+	@Configuration
 	public static class PulsarErrorHandler {
 
 		@Autowired

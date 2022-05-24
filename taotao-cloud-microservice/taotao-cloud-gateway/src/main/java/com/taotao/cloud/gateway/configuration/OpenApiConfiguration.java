@@ -36,9 +36,11 @@ import org.springdoc.core.AbstractSwaggerUiConfigProperties.SwaggerUrl;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import springfox.documentation.oas.annotations.EnableOpenApi;
@@ -53,7 +55,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @Profile(value = {"dev"})
 @EnableKnife4j
 @EnableOpenApi
-@Component
+@Configuration
 public class OpenApiConfiguration {
 
 	@Value("${taotaoCloudVersion}")

@@ -139,9 +139,10 @@ cluster-node-timeout 15000
 
 部署集群需要先启动各个节点的服务，此时这些节点都没加到集群中，使用redis-cli --cluster create xxx命令创建集群：
 
-bin/redis-cli --cluster create 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6391 127.0.0.1:6392 127.0.0.1:6393 --cluster-replicas 1#这里的--cluster-replicas表示每个主节点有几个副本节点
+#这里的--cluster-replicas表示每个主节点有几个副本节点
+/opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli --cluster create 192.168.10.200:7100 192.168.10.200:7101 192.168.10.200:7102 192.168.10.200:7103 192.168.10.200:7104 192.168.10.200:7105 --cluster-replicas 1
 
-
+/opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli --cluster check 192.168.10.200:7100
 
 
 

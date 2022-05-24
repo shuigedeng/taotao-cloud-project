@@ -19,7 +19,7 @@ import java.util.*;
  * api层的pipeline配置类
  * 
  */
-@AutoConfiguration
+@Configuration
 public class PipelineConfig {
 
     @Autowired
