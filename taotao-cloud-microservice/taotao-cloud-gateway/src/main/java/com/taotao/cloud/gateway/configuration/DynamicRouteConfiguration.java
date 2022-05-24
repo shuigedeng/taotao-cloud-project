@@ -59,7 +59,7 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 @ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicRouteConfiguration {
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "type", havingValue = "nacos", matchIfMissing = false)
 	public class NacosDynamicRoute {
 

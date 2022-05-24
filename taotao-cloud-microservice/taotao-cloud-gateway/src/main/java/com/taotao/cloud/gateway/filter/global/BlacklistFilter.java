@@ -5,6 +5,7 @@ import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -18,8 +19,8 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+@Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@AutoConfiguration
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
 public class BlacklistFilter implements WebFilter {
 
