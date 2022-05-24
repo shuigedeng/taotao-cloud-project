@@ -49,6 +49,12 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+mainClassName="com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
+
 //ext {
 //    webjarsGroupId = "org.webjars"
 //}
