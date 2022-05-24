@@ -41,7 +41,7 @@
 // * @version 2022.04
 // * @since 2022-04-26 14:44:31
 // */
-//@Configuration
+//@AutoConfiguration
 //@ConditionalOnProperty(name = "log-record.data-pipeline", havingValue = LogConstants.DataPipeline.STREAM)
 //@EnableConfigurationProperties({LogRecordProperties.class})
 //@ConditionalOnClass(BindingServiceConfiguration.class)

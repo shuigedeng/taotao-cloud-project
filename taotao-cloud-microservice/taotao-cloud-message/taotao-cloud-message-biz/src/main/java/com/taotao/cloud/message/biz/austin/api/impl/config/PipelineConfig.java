@@ -9,6 +9,7 @@ import com.taotao.cloud.message.biz.austin.api.impl.action.SendMqAction;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessController;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +19,7 @@ import java.util.*;
  * api层的pipeline配置类
  * 
  */
-@Configuration
+@AutoConfiguration
 public class PipelineConfig {
 
     @Autowired

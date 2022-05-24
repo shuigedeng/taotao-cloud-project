@@ -35,7 +35,7 @@
 // * @version 2022.04
 // * @since 2022-04-26 14:44:40
 // */
-//@Configuration
+//@AutoConfiguration
 //@ConditionalOnProperty(name = "log-record.data-pipeline", havingValue = LogConstants.DataPipeline.ROCKET_MQ)
 //@EnableConfigurationProperties({LogRecordProperties.class})
 //public class RocketMqSenderConfiguration {

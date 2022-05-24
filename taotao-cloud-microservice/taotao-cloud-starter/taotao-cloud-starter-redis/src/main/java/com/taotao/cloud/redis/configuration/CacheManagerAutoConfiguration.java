@@ -220,7 +220,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	}
 
-//	@Configuration
+//	@AutoConfiguration
 //	@EnableMethodCache(basePackages = "com.taotao.cloud")
 //	@EnableCreateCacheAnnotation
 //	@PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:jetcache.yml")

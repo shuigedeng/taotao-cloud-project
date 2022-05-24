@@ -2,13 +2,14 @@ package com.taotao.cloud.core.dynamictp;
 
 import com.dtp.core.thread.DtpExecutor;
 import com.dtp.core.support.ThreadPoolCreator;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * DtpConfig related
  */
-@Configuration
+@AutoConfiguration
 public class DtpConfig {
 
     @Bean

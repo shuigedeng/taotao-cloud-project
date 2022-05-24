@@ -9,6 +9,7 @@ import com.taotao.cloud.oss.artislong.core.aws.constant.AwsRegion;
 import com.taotao.cloud.oss.artislong.core.aws.model.AwsOssClientConfig;
 import com.taotao.cloud.oss.artislong.core.aws.model.AwsOssConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -27,7 +28,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 17:39:35
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(S3Client.class)
 @EnableConfigurationProperties({AwsOssProperties.class})
 @ConditionalOnProperty(prefix = OssConstant.OSS, name = OssConstant.OssType.AWS + CharPool.DOT + OssConstant.ENABLE,
