@@ -30,6 +30,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
@@ -66,7 +67,7 @@ import java.util.Set;
  * @version 2021.9
  * @since 2021-09-02 21:26:19
  */
-@AutoConfiguration
+@Configuration
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.oauth2.biz.controller"}, annotations = {
 		RestController.class})
 public class ExceptionConfiguration implements InitializingBean {

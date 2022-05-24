@@ -31,6 +31,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 
@@ -74,12 +75,12 @@ import org.springframework.scheduling.annotation.Async;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@AutoConfiguration
+@Configuration
 @EnableConfigurationProperties({PrometheusProperties.class})
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PrometheusConfiguration {
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnBean(DiscoveryClient.class)
 	@ConditionalOnDiscoveryEnabled
 	//@ConditionalOnBlockingDiscoveryEnabled
@@ -101,7 +102,7 @@ public class PrometheusConfiguration {
 
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnBean(ReactiveDiscoveryClient.class)
 	@ConditionalOnDiscoveryEnabled
 	@ConditionalOnReactiveDiscoveryEnabled

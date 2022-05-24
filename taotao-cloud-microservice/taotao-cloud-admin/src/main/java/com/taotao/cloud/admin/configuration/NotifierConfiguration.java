@@ -28,6 +28,7 @@ import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -41,7 +42,7 @@ import java.util.Map;
  * @version 2022.03
  * @since 2021/12/01 10:01
  */
-@AutoConfiguration
+@Configuration
 public class NotifierConfiguration {
 
 	@Bean

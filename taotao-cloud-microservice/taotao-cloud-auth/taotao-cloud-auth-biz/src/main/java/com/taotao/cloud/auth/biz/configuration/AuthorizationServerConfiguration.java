@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -79,7 +80,7 @@ import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIF
  * @version 2021.10
  * @since 2021-12-21 10:24:33
  */
-@AutoConfiguration
+@Configuration
 public class AuthorizationServerConfiguration {
 
 	@Value("${oauth2.token.issuer}")

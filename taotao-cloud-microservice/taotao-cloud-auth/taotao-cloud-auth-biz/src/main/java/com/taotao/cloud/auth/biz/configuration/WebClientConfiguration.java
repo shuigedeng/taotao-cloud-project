@@ -2,6 +2,7 @@ package com.taotao.cloud.auth.biz.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -32,7 +33,7 @@ import java.util.function.Function;
  * @version 2022.03
  * @since 2022-03-28 11:28:48
  */
-@AutoConfiguration
+@Configuration
 public class WebClientConfiguration {
 
 	@Bean
