@@ -24,6 +24,7 @@ import com.taotao.cloud.gateway.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
@@ -47,7 +48,7 @@ import java.util.Objects;
  * @version 2022.03
  * @since 2021/06/18 14:41
  */
-AutoConfiguration
+@AutoConfiguration
 @EnableWebFluxSecurity
 @ConditionalOnProperty(prefix = SecurityProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class ResourceServerConfiguration {
