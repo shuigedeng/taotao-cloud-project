@@ -23,6 +23,7 @@ import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigB
 import org.springframework.context.annotation.Bean;
 
 import java.time.Duration;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * CustomizeCircuitBreakerConfiguration
@@ -31,7 +32,7 @@ import java.time.Duration;
  * @version 2022.03
  * @since 2021/11/23 14:28
  */
-@AutoConfiguration
+@Configuration
 public class CustomizeCircuitBreakerConfiguration {
 
 	@Bean

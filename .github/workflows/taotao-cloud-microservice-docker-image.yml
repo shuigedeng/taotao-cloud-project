@@ -106,7 +106,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar -x test
-        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth-biz
 
     - name: pulish docker image taotao-cloud-auth
       uses: elgohr/Publish-Docker-Github-Action@v4

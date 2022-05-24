@@ -20,7 +20,7 @@ import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
 
-@AutoConfiguration
+@Configuration
 public class OkHttpConfiguration {
 
     @Value("${ok.http.connect-timeout}")

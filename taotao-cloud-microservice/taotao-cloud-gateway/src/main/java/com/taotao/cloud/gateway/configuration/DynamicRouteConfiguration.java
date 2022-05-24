@@ -37,6 +37,7 @@ import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -54,7 +55,7 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
  * @version 2022.03
  * @since 2020/5/2 19:33
  */
-@AutoConfiguration
+@Configuration
 @ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicRouteConfiguration {
 

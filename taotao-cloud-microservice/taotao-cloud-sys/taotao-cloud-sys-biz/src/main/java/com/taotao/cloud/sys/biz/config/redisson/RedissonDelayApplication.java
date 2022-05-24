@@ -25,7 +25,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-28 11:53:44
  */
-@AutoConfiguration
+@Configuration
 public class RedissonDelayApplication {
 
 	@Bean

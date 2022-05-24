@@ -18,11 +18,12 @@ import org.springframework.context.annotation.Bean;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * RedissonAutoConfiguration 的 AutoConfigureOrder 为默认值(0)，此处在它后面加载
  */
-@AutoConfiguration
+@Configuration
 @EnableConfigurationProperties(AntiReptileProperties.class)
 @ConditionalOnProperty(prefix = "anti.reptile.manager", value = "enabled", havingValue = "true")
 public class AntiReptileConfiguration {

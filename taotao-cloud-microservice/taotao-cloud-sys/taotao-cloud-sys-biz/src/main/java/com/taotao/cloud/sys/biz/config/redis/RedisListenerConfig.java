@@ -51,7 +51,7 @@ import org.springframework.stereotype.Component;
  * @version 2022.03
  * @since 2022/01/17 16:12
  */
-@AutoConfiguration
+@Configuration
 public class RedisListenerConfig {
 
 	@Bean
@@ -193,7 +193,7 @@ public class RedisListenerConfig {
 		return container;
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnBean(RedisMessageListenerContainer.class)
 	public static class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
 

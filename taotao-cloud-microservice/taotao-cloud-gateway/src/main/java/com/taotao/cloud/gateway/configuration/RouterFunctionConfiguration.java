@@ -36,6 +36,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.cloud.gateway.support.TimeoutException;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -64,7 +65,7 @@ import java.util.Optional;
  * @version 2022.03
  * @since 2020/4/29 22:11
  */
-@AutoConfiguration
+@Configuration
 public class RouterFunctionConfiguration {
 
 	private static final String FALLBACK = "/fallback";

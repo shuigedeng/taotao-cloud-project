@@ -32,6 +32,7 @@ import org.springframework.cloud.loadbalancer.core.ReactorServiceInstanceLoadBal
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
@@ -55,7 +56,7 @@ import java.util.Set;
  * @version 2022.03
  * @since 2020/5/2 19:33
  */
-@AutoConfiguration
+@Configuration
 @EnableConfigurationProperties(GatewayLoadBalancerProperties.class)
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "gray", havingValue = "true", matchIfMissing = true)
 @AutoConfigureBefore(GatewayReactiveLoadBalancerClientAutoConfiguration.class)

@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.HttpHandler;
 
 import javax.annotation.PostConstruct;
@@ -33,7 +34,7 @@ import javax.annotation.Resource;
  * @version 2022.03
  * @since 2020/4/29 22:11
  */
-@AutoConfiguration
+@Configuration
 @ConditionalOnProperty(prefix = HttpsProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfiguration {
 

@@ -17,6 +17,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
@@ -34,7 +35,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  * @since 2020/4/29 22:11
  * @version 2022.03
  */
-@AutoConfiguration
+@Configuration
 public class CorsConfiguration {
 
     @Bean

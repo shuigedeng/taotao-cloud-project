@@ -869,7 +869,6 @@ spring:
               txCommitRecovered: true
 taotao:
   cloud:
-    .
     zookeeper:
       enabled: true
       connectString: 192.168.10.200:2181

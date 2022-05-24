@@ -18,6 +18,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
@@ -38,7 +39,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
  *
  * @author shuigedeng
  */
-@AutoConfiguration
+@Configuration
 public class SentinelConfiguration {
 
 	@Bean
