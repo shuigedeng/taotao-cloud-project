@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Configuration;
@@ -52,7 +53,7 @@ public class ObservableDeferredResultTest {
 
 	private TestRestTemplate restTemplate = new TestRestTemplate();
 
-	@Configuration
+	@AutoConfiguration
 	@EnableAutoConfiguration
 	@RestController
 	protected static class Application {

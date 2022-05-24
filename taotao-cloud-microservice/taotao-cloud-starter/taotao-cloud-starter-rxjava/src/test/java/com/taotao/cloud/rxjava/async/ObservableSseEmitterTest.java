@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +47,7 @@ public class ObservableSseEmitterTest {
 
 	private TestRestTemplate restTemplate = new TestRestTemplate();
 
-	@Configuration
+	@AutoConfiguration
 	@EnableAutoConfiguration
 	@RestController
 	protected static class Application {

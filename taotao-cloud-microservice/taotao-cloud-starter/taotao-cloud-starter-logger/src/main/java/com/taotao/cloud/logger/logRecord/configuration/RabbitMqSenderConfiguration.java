@@ -40,7 +40,7 @@
 // * @version 2022.04
 // * @since 2022-04-26 14:44:47
 // */
-//@Configuration
+//@AutoConfiguration
 //@ConditionalOnProperty(name = "log-record.data-pipeline", havingValue = LogConstants.DataPipeline.RABBIT_MQ)
 //@EnableConfigurationProperties({LogRecordProperties.class})
 //public class RabbitMqSenderConfiguration {

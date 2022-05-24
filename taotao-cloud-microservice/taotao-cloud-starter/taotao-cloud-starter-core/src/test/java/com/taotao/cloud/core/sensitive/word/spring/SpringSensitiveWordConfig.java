@@ -5,7 +5,7 @@
 //import com.taotao.cloud.core.sensitive.word.spring.database.MyDdWordAllow;
 //import com.taotao.cloud.core.sensitive.word.spring.database.MyDdWordDeny;
 //import com.taotao.cloud.core.sensitive.word.support.allow.WordAllows;
-//@Configuration
+//@AutoConfiguration
 //public class SpringSensitiveWordConfig {
 //
 //    @Autowired

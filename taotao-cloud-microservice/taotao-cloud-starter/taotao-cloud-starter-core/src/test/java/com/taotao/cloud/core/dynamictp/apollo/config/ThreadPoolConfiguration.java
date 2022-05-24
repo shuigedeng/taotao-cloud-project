@@ -5,6 +5,7 @@ import com.dtp.core.support.DynamicTp;
 import com.dtp.core.support.ThreadPoolBuilder;
 import com.dtp.core.support.ThreadPoolCreator;
 import com.dtp.core.thread.DtpExecutor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 
  */
-@Configuration
+@AutoConfiguration
 public class ThreadPoolConfiguration {
 
     /**

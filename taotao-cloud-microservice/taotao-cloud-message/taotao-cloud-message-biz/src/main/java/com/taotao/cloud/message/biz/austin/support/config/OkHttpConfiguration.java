@@ -4,6 +4,7 @@ package com.taotao.cloud.message.biz.austin.support.config;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +20,7 @@ import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
 
-@Configuration
+@AutoConfiguration
 public class OkHttpConfiguration {
 
     @Value("${ok.http.connect-timeout}")
