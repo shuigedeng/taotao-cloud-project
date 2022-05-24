@@ -38,7 +38,7 @@
 
 	<property>
 		<name>hive.server2.thrift.bind.host</name>
-		<value>172.16.6.151</value>
+		<value>192.168.10.200</value>
 	</property>
 
 	<property>
@@ -53,12 +53,12 @@
 
 	<property>
 		<name>hive.metastore.uris</name>
-		<value>thrift://172.16.6.151:9083</value>
+		<value>thrift://192.168.10.200:9083</value>
 	</property>
 
 	<property>
 		<name>hive.metastore.warehouse.dir</name>
-		<value>hdfs://172.16.6.151:9870/user/hive/warehouse</value>
+		<value>hdfs://192.168.10.200:9870/user/hive/warehouse</value>
 	</property>
 
 	<!--	<property>-->
@@ -73,12 +73,12 @@
 
 	<property>
 		<name>hive.exec.scratchdir</name>
-		<value>hdfs://172.16.6.151:9870/user/hive/scratchdir</value>
+		<value>hdfs://192.168.10.200:9870/user/hive/scratchdir</value>
 	</property>
 
 	<property>
 		<name>javax.jdo.option.ConnectionURL</name>
-		<value>jdbc:mysql://172.16.6.151:3306/taotao-cloud-hive?createDatabaseIfNotExist=TRUE</value>
+		<value>jdbc:mysql://192.168.10.200:3306/taotao-cloud-hive?createDatabaseIfNotExist=TRUE</value>
 	</property>
 
 	<property>

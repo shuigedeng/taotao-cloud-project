@@ -8,7 +8,7 @@ tar -zxvf  pushgateway-1.0.0.linux-amd64.tar.gz
 
 nohup ./pushgateway &
 
-http://172.16.6.151:9091
+http://192.168.10.200:9091
 
 - job_name: 'pushgateway'
     static_configs:

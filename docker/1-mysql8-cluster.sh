@@ -101,7 +101,7 @@ docker run --name cluster2-slave2  \
 
 show variables like 'server_id';
 
-mysql -uroot -p -h172.16.6.151 -P3316
+mysql -uroot -p -h192.168.10.200 -P3316
 create user 'slave'@'%' identified with mysql_native_password by '123456';
 grant replication slave on *.* to 'slave'@'%';
 flush privileges;
@@ -110,7 +110,7 @@ show master status;
 show master status\G
 
 stop slave;
-change master to master_host='172.16.6.151',master_port=3376,master_user='slave',master_password='123456',master_log_file='mysql-bin.000003',master_log_pos=1611;
+change master to master_host='192.168.10.200',master_port=3376,master_user='slave',master_password='123456',master_log_file='mysql-bin.000003',master_log_pos=1611;
 start slave;
 
 show slave status;

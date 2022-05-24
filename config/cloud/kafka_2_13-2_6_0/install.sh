@@ -32,10 +32,10 @@ bin/kafka-console-producer.sh --broker-list HOST:9092 --topic TOPIC
 /opt/cloud/kafka_2.12-2.8.0/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic taotao-cloud --from-beginning
 
 
-/opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh --zookeeper 172.16.6.151:2181 --list
+/opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh --zookeeper 192.168.10.200:2181 --list
 
 # 1. 通过命令行删除topic
-/opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh  --delete --zookeeper 172.16.6.151:2181 --topic request-log-taotao-cloud-sys
+/opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh  --delete --zookeeper 192.168.10.200:2181 --topic request-log-taotao-cloud-sys
 # 2. 删除kafka存储目录
 rm -rf /opt/cloud/kafka_2.12-2.8.0/logs/request-log-taotao-cloud-sys-0
 # 3.zookeeper客户端删除
@@ -45,7 +45,7 @@ delete /admin/delete_topics/request-log-taotao-cloud-order
 
 bin/kafka-topics.sh --zookeeper host:2181 --topic your_topic --describe
 
-bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server 172.16.6.151:9092 --list
+bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server 192.168.10.200:9092 --list
 bin/kafka-consumer-groups.sh --zookeeper host:2181 --list
 
 bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list host:9092 --topic topic

@@ -1,7 +1,7 @@
 #!/bin/bash
 
  function start_sentinel() {
-      nohup java -Dserver.port=8849 -Dcsp.sentinel.dashboard.server=172.16.6.151:8849  \
+      nohup java -Dserver.port=8849 -Dcsp.sentinel.dashboard.server=192.168.10.200:8849  \
        -jar /opt/cloud/sentinel/sentinel-dashboard-1.8.2.jar  \
        >/opt/cloud/sentinel/start.log 2>&1 &
       sleep 10

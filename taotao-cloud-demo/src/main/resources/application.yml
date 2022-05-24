@@ -136,8 +136,8 @@ taotao:
       instances:
         example:
           clusterEnabled: false
-          zookeeperAddress: 172.16.6.151:2181
-          host: 172.16.6.151
+          zookeeperAddress: 192.168.10.200:2181
+          host: 192.168.10.200
           port: 11111
           userName: canal
           password: 123456
@@ -147,7 +147,7 @@ taotao:
           acquireInterval: 3000
     zookeeper:
       enabled: false
-      connectString: 172.16.6.151:2181
+      connectString: 192.168.10.200:2181
       lock:
         enabled: true
 
@@ -157,7 +157,7 @@ app:
 #apollo:
 #  cacheDir: ${user.dir}/logs/apolloconfig/                       #配置本地配置缓存目录
 #  cluster: default                           #指定使用哪个集群的配置
-#  meta: http://172.16.6.151:8080            #DEV环境配置中心地址
+#  meta: http://192.168.10.200:8080            #DEV环境配置中心地址
 #  autoUpdateInjectedSpringProperties: true   #是否开启 Spring 参数自动更新
 #  bootstrap:
 #    enabled: true                            #是否开启 Apollo

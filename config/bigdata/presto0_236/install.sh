@@ -13,7 +13,7 @@ cd presto0.236/etc
 # 添加hudi支持
 cp hudi-presto-bundle-0.6.2-incubating.jar presto0.236/plugins/hive-hadoop2
 
-http://172.16.6.151:28081/ui
+http://192.168.10.200:28081/ui
 
 # 客户端安装
 mv presto-cli-0.236-executable.jar presto
@@ -46,4 +46,4 @@ case $1 in
 esac
 
 
-./presto --server 172.16.6.151:28081 --catalog hive  --schema taotao_cloud_log
+./presto --server 192.168.10.200:28081 --catalog hive  --schema taotao_cloud_log

@@ -13,7 +13,7 @@ vim server.properties
 # listeners=PLAINTEXT://:9092
 # advertised.listeners=PLAINTEXT://host:9092
 # log.dirs=/opt/taotao-bigdata/kafka2.13-2.6.0/logs
-# zookeeper.connect=172.16.6.151:2181/kafka
+# zookeeper.connect=192.168.10.200:2181/kafka
 # 这个是删除topic时才用得到的，如果不想删除topic，可以不加
 # delete.topic.enable=true
 
@@ -28,7 +28,7 @@ bin/kafka-topics.sh --create --zookeeper HOST:2181 --replication-factor 1 --part
 bin/kafka-console-producer.sh --broker-list HOST:9092 --topic TOPIC
 bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic taotao-cloud-sys-log --from-beginning
 
-bin/kafka-topics.sh --zookeeper 172.16.6.151:2181/kafka --list
+bin/kafka-topics.sh --zookeeper 192.168.10.200:2181/kafka --list
 bin/kafka-topics.sh --zookeeper host:2181 --topic your_topic --describe
 
 bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server host:9092 --list

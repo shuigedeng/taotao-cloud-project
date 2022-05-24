@@ -9,7 +9,7 @@ mv redis_exporter-v1.6.0.linux-amd64 redis_exporter
 
 ############## 监控redis单机版 ##############
 nohup /root/taotao-cloud/redis6_2_4/redis_exporter \
--redis.addr 172.16.6.151:6379 -redis.password 123456 \
+-redis.addr 192.168.10.200:6379 -redis.password 123456 \
 >/root/taotao-cloud/redis6_2_4/redis_exporter.out 2>&1 &
 
 ss -auntlp |grep 9121
@@ -17,7 +17,7 @@ ss -auntlp |grep 9121
   - job_name: 'redis_exporter'
     static_configs:
       - targets:
-        - 172.16.6.151:9121
+        - 192.168.10.200:9121
 
 ############## 监控redis集群版 ##############
 # 先启动redis_exporter
@@ -46,7 +46,7 @@ nohup /root/taotao-cloud/redis6_2_4/redis_exporter \
 ######################################################################
 
 #可以重启Prometheus的服务，也可以热加载
-sudo curl 'http://172.16.6.151:9090/-/reload' -X POST  #Prometheus的web访问地址
+sudo curl 'http://192.168.10.200:9090/-/reload' -X POST  #Prometheus的web访问地址
 
 # grafana导入模板模板编号763
 
