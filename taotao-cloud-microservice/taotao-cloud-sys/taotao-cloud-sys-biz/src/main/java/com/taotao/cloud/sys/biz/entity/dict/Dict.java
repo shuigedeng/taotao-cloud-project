@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.biz.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -46,6 +48,7 @@ import java.util.Objects;
 @Entity
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)
+@EntityListeners({AbstractListener.class})
 @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
 public class Dict extends BaseSuperEntity<Dict, Long> {
 
@@ -83,7 +86,7 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
@@ -98,3 +101,4 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 		return getClass().hashCode();
 	}
 }
+

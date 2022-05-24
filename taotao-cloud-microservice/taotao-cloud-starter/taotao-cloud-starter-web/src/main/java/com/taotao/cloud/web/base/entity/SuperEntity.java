@@ -5,11 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serial;
 import java.io.Serializable;
+import javax.annotation.PreDestroy;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostRemove;
+import javax.persistence.PostUpdate;
+import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
+import javax.persistence.PreUpdate;
+
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -41,4 +51,5 @@ public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
 	public void setId(I id) {
 		this.id = id;
 	}
+
 }
