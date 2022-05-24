@@ -106,7 +106,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar -x test
-        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth-biz
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
 
     - name: pulish docker image taotao-cloud-auth
       uses: elgohr/Publish-Docker-Github-Action@v4
@@ -118,7 +118,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
 
     - name: gradle bootJar taotao-cloud-xxljob
       uses: gradle/gradle-build-action@v2
