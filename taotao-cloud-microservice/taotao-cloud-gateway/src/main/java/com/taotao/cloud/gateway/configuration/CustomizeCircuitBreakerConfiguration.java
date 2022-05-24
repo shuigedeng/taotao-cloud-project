@@ -17,6 +17,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,7 @@ import java.time.Duration;
  * @version 2022.03
  * @since 2021/11/23 14:28
  */
-AutoConfiguration
+@AutoConfiguration
 public class CustomizeCircuitBreakerConfiguration {
 
 	@Bean
