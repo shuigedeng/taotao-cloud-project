@@ -16,7 +16,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.10.200}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
           version: ${taotaoCloudVersion}
           user.name: admin
@@ -27,12 +27,12 @@ spring:
         password: nacos
       config:
         enabled: false
-        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:192.168.10.200}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace:
         file-extension: yml
     sentinel:
       enabled: true
       eager: true
       transport:
-        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:192.168.10.200}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8712}

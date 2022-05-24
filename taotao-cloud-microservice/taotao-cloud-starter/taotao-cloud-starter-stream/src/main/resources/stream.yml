@@ -70,7 +70,7 @@ spring:
           name-server: 192.168.244.128:9876;192.168.244.129:9876;
       rabbit:
         binder:
-          admin-addresses: 172.16.6.151:5672,172.16.6.151:5672,
+          admin-addresses: 192.168.10.200:5672,192.168.10.200:5672,
         bindings:
           sms-output:
             producer:
@@ -84,7 +84,7 @@ spring:
               #republish-to-dlq: true  # 重投到死信队列并带有报错信息
       kafka:
         binder:
-          brokers: 172.16.6.151:9092
+          brokers: 192.168.10.200:9092
           auto-create-topics: true
           autoAddPartitions: true
         bindings:

@@ -30,14 +30,14 @@ java -jar /Users/gongninggang/source/rocketmq-externals/rocketmq-console/target/
 # mqadmin使用
 sh mqadmin
 sh mqadmin help topicList
-sh mqadmin topicList -n '172.16.6.151:9876'
+sh mqadmin topicList -n '192.168.10.200:9876'
 
 ##################### rocketmq.sh #############################
 #!/bin/bash
 
 function start_rocketmq() {
      nohup sh /opt/taotao-cloud/rocketmq4.9.0/bin/mqnamesrv >/opt/taotao-cloud/rocketmq4.9.0/mqnamesrv.log 2>&1 &
-     nohup sh /opt/taotao-cloud/rocketmq4.9.0/bin/mqbroker -n 172.16.6.151:9876 >/opt/taotao-cloud/rocketmq4.9.0/broker.log 2>&1 &
+     nohup sh /opt/taotao-cloud/rocketmq4.9.0/bin/mqbroker -n 192.168.10.200:9876 >/opt/taotao-cloud/rocketmq4.9.0/broker.log 2>&1 &
      sleep 10
      echo " rocketmq started"
 }
@@ -96,4 +96,4 @@ esac
 6:查看是否安装成功
          docker ps|grep rocketmq
 
-http://172.16.6.151:8180/
+http://192.168.10.200:8180/

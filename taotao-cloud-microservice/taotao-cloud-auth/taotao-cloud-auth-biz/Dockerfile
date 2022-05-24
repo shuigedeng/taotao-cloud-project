@@ -11,7 +11,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-auth-biz-2022.05.jar extract
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1-jre-font
 
 
-ARG BACKEND_SERVICE=172.16.6.151:11800
+ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-auth
 ARG APP_VERSION=2022.05

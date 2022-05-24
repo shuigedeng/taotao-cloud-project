@@ -28,7 +28,7 @@ springdoc:
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
   single-server-config:
-    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+    address: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -40,7 +40,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://172.16.6.151:7777/ws
+  tunnel-server: ws://192.168.10.200:7777/ws
 
 spring:
   main:
@@ -55,7 +55,7 @@ spring:
         jwt:
           #配置RSA的公钥访问地址
           #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
-          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
+          jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
   sleuth:
     enabled: true
     web:
@@ -65,7 +65,7 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
@@ -75,7 +75,7 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -86,7 +86,7 @@ spring:
         max-idle: 8
         min-idle: 0
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 0
       batch-size: 16384
@@ -110,7 +110,7 @@ spring:
       enabled: true
       eager: true
       transport:
-        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:192.168.10.200}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8710}
       #scg:
       #  fallback:

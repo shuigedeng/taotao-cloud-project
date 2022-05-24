@@ -13,12 +13,12 @@ function start_redis() {
 }
 
 function stop_redis() {
-  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7100 -h 172.16.6.151 shutdown 2>/dev/null
-  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7101 -h 172.16.6.151 shutdown 2>/dev/null
-  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7102 -h 172.16.6.151 shutdown 2>/dev/null
-  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7103 -h 172.16.6.151 shutdown 2>/dev/null
-  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7104 -h 172.16.6.151 shutdown 2>/dev/null
-  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7105 -h 172.16.6.151 shutdown 2>/dev/null
+  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7100 -h 192.168.10.200 shutdown 2>/dev/null
+  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7101 -h 192.168.10.200 shutdown 2>/dev/null
+  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7102 -h 192.168.10.200 shutdown 2>/dev/null
+  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7103 -h 192.168.10.200 shutdown 2>/dev/null
+  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7104 -h 192.168.10.200 shutdown 2>/dev/null
+  /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -p 7105 -h 192.168.10.200 shutdown 2>/dev/null
 
   #for port in $(seq 7100 7105)
   #do

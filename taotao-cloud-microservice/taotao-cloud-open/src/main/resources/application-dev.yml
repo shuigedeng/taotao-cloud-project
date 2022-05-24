@@ -25,7 +25,7 @@ jasypt:
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
   single-server-config:
-    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+    address: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -37,7 +37,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://172.16.6.151:7777/ws
+  tunnel-server: ws://192.168.10.200:7777/ws
 
 spring:
   cloud:
@@ -59,18 +59,18 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
   redis:
-    #host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
+    #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     #database: 1
     #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
     cluster:
-      nodes: 172.16.6.151:7100,172.16.6.151:7101,172.16.6.151:7102,172.16.6.151:7103,172.16.6.151:7104,172.16.6.151:7105
+      nodes: 192.168.10.200:7100,192.168.10.200:7101,192.168.10.200:7102,192.168.10.200:7103,192.168.10.200:7104,192.168.10.200:7105
       max-redirects: 3
     #sentinel:
     #  master:
@@ -105,12 +105,12 @@ spring:
           readMode: "SLAVE"
           subscriptionMode: "SLAVE"
           nodeAddresses:
-          - "redis://172.16.6.151:7100"
-          - "redis://172.16.6.151:7101"
-          - "redis://172.16.6.151:7102"
-          - "redis://172.16.6.151:7103"
-          - "redis://172.16.6.151:7104"
-          - "redis://172.16.6.151:7105"
+          - "redis://192.168.10.200:7100"
+          - "redis://192.168.10.200:7101"
+          - "redis://192.168.10.200:7102"
+          - "redis://192.168.10.200:7103"
+          - "redis://192.168.10.200:7104"
+          - "redis://192.168.10.200:7105"
           scanInterval: 1000
           pingConnectionInterval: 0
           keepAlive: false
@@ -120,7 +120,7 @@ spring:
         codec: !<org.redisson.codec.MarshallingCodec> {}
         transportMode: "NIO"
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 1
       batch-size: 16384

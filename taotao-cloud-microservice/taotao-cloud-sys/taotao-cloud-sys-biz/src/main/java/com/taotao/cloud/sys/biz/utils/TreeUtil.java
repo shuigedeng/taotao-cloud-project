@@ -203,7 +203,7 @@ public class TreeUtil {
 	//		DriverManager.registerDriver(driver);
 	//		//2、获取连接，告诉java我要连接哪台机器的mysql，并写入用户和密码
 	//		//127.0.0.1和localhost都是本地ip地址
-	//		String url = "jdbc:mysql://172.16.6.151:3306/taotao-cloud-sys?useSSL=false";
+	//		String url = "jdbc:mysql://192.168.10.200:3306/taotao-cloud-sys?useSSL=false";
 	//		String user = "root";
 	//		String password = "123456";
 	//		conn = DriverManager.getConnection(url, user, password);

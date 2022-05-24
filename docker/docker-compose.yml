@@ -12,7 +12,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-ip 192.168.10.200 \
       --cluster-announce-port 6381 \
       --cluster-announce-bus-port 16381"
     networks:
@@ -29,7 +29,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-ip 192.168.10.200 \
       --cluster-announce-port 6382 \
       --cluster-announce-bus-port 16382"
     networks:
@@ -46,7 +46,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-ip 192.168.10.200 \
       --cluster-announce-port 6383 \
       --cluster-announce-bus-port 16383"
     networks:
@@ -63,7 +63,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-ip 192.168.10.200 \
       --cluster-announce-port 6384 \
       --cluster-announce-bus-port 16384"
     networks:
@@ -80,7 +80,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-ip 192.168.10.200 \
       --cluster-announce-port 6385 \
       --cluster-announce-bus-port 16385"
     networks:
@@ -97,7 +97,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 172.16.6.151 \
+      --cluster-announce-ip 192.168.10.200 \
       --cluster-announce-port 6386 \
       --cluster-announce-bus-port 16386"
     networks:
@@ -119,7 +119,7 @@ services:
       NACOS_APPLICATION_PORT: 8848
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_HOST: 192.168.10.200
       MYSQL_SERVICE_PORT: 3316
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
@@ -143,7 +143,7 @@ services:
       PREFER_HOST_MODE: hostname
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_HOST: 192.168.10.200
       MYSQL_SERVICE_PORT: 3316
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
@@ -167,7 +167,7 @@ services:
       PREFER_HOST_MODE: hostname
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_HOST: 192.168.10.200
       MYSQL_SERVICE_PORT: 3316
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
@@ -201,7 +201,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8091
-      SEATA_IP: 172.16.6.151
+      SEATA_IP: 192.168.10.200
     networks:
       kafka-cluster-network:
         ipv4_address: 172.11.0.20
@@ -216,7 +216,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8092
-      SEATA_IP: 172.16.6.151
+      SEATA_IP: 192.168.10.200
     networks:
       kafka-cluster-network:
         ipv4_address: 172.11.0.21
@@ -231,7 +231,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8093
-      SEATA_IP: 172.16.6.151
+      SEATA_IP: 192.168.10.200
     networks:
       kafka-cluster-network:
         ipv4_address: 172.11.0.22
@@ -291,7 +291,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_LISTENERS: PLAINTEXT://kafka-broker1:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.10.200:9092
       KAFKA_ADVERTISED_HOST_NAME: kafka-broker1
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
@@ -310,7 +310,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_LISTENERS: PLAINTEXT://kafka-broker2:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.10.200:9093
       KAFKA_ADVERTISED_HOST_NAME: kafka-broker2
       KAFKA_ADVERTISED_PORT: 9093
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
@@ -328,7 +328,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_LISTENERS: PLAINTEXT://kafka-broker3:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.10.200:9094
       KAFKA_ADVERTISED_HOST_NAME: kafka-broker3
       KAFKA_ADVERTISED_PORT: 9094
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
@@ -359,7 +359,7 @@ services:
       - MYSQL_DB=taotao-cloud-zipkin
       - MYSQL_USER=root
       - MYSQL_PASS=123456
-      - MYSQL_HOST=172.16.6.151
+      - MYSQL_HOST=192.168.10.200
       - MYSQL_TCP_PORT=3316
     ports:
       - "9411:9411"

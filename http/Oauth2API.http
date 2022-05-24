@@ -20,7 +20,7 @@ Content-Type:  application/x-www-form-urlencoded
 grant_type=password&type=1&verification_code=123&client_id=password-messaging-client&client_secret=secret3&username=admin&password=123456
 
 ### 手机模式
-POST http://172.16.6.151:33336/oauth2/token
+POST http://192.168.10.200:33336/oauth2/token
 Content-Type:  application/x-www-form-urlencoded
 
 grant_type=mobile&type=2&mobile=15730445330&verification_code=123&client_id=password-messaging-client&client_secret=secret3
@@ -50,7 +50,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=client_credentials&client_id=client&client_secret=123456
 
 ### 自定义 password 认证示例
-POST http://172.16.6.151:8080/oauth2/token
+POST http://192.168.10.200:8080/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password&type=1&verification_code=123&client_id=client&client_secret=123456&username=admin&password=123456

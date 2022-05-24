@@ -77,7 +77,7 @@ Redis主节点下线的情况分为主观下线和客观下线：
 cp /opt/taotao-cloud/redis-6.2.4/sentinel.conf sentinel.conf_bak
 
 # sentinel.conf
-bind 127.0.0.1 172.16.6.151
+bind 127.0.0.1 192.168.10.200
 protected-mode yes
 port 26379
 daemonize yes
@@ -85,7 +85,7 @@ pidfile /opt/taotao-cloud/redis-6.2.4/pid/sentinel.pid
 logfile "/opt/taotao-cloud/redis-6.2.4/logs/sentinel.log"
 dir /tmp
 dir /opt/taotao-cloud/redis-6.2.4/data
-sentinel monitor mymaster 172.16.6.151 6380 2
+sentinel monitor mymaster 192.168.10.200 6380 2
 sentinel auth-pass mymaster taotao-cloud
 sentinel parallel-syncs mymaster 1
 sentinel failover-timeout mymaster 180000

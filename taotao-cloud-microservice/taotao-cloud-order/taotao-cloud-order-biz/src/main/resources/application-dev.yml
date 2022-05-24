@@ -25,7 +25,7 @@ jasypt:
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
   single-server-config:
-    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+    address: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 dubbo:
   application:
@@ -34,7 +34,7 @@ dubbo:
     qos-enable: false
     qos-accept-foreign-ip: false
   registry:
-    address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+    address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.10.200}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
   protocol:
     name: dubbo
@@ -59,14 +59,14 @@ seata:
   enable-auto-data-source-proxy: true
   service:
     grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_PORT:8091}
+      default: ${TAOTAO_CLOUD_SEATA_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_PORT:8091}
     vgroup-mapping:
       taotao_cloud_tx_group: default
   config:
     type: nacos
     nacos:
       namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
+      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
@@ -74,7 +74,7 @@ seata:
     type: nacos
     nacos:
       application: taotao-cloud-seata
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
+      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
       group: SEATA_GROUP
       namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
@@ -91,7 +91,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://172.16.6.151:7777/ws
+  tunnel-server: ws://192.168.10.200:7777/ws
 
 spring:
   application:
@@ -122,13 +122,13 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -153,7 +153,7 @@ spring:
       datasource:
         master:
           type: com.zaxxer.hikari.HikariDataSource
-          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
           password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -184,7 +184,7 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -198,7 +198,7 @@ spring:
   elasticsearch:
     rest:
       uris:
-        - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+        - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
       username:
       password:
   data:
@@ -208,18 +208,18 @@ spring:
       client:
         reactive:
           endpoints:
-            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
           connection-timeout: 5
           username:
           password:
     mongodb:
       database: yapi
-      host: 172.16.6.151
+      host: 192.168.10.200
       port: 27017
       #username:
       #password:
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 1
       batch-size: 16384
@@ -243,7 +243,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
+          jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
   mail:
     host: smtp.qq.com
     password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
@@ -400,7 +400,7 @@ spring:
           metadata:
             enabled: false
   rabbitmq:
-    host: 172.16.6.151
+    host: 192.168.10.200
     port: 5672
     username: guest
     password: guest
@@ -481,7 +481,7 @@ spring:
           name-server: 192.168.244.128:9876;192.168.244.129:9876;
       rabbit:
         binder:
-          admin-addresses: 172.16.6.151:5672,172.16.6.151:5672,
+          admin-addresses: 192.168.10.200:5672,192.168.10.200:5672,
         bindings:
           sms-output:
             producer:
@@ -495,7 +495,7 @@ spring:
               #republish-to-dlq: true  # 重投到死信队列并带有报错信息
       kafka:
         binder:
-          brokers: 172.16.6.151:9092
+          brokers: 192.168.10.200:9092
           auto-create-topics: true
           autoAddPartitions: true
         bindings:
@@ -542,8 +542,8 @@ taotao:
       instances:
         example:
           clusterEnabled: false
-          zookeeperAddress: 172.16.6.151:2181
-          host: 172.16.6.151
+          zookeeperAddress: 192.168.10.200:2181
+          host: 192.168.10.200
           port: 11111
           userName: canal
           password: 123456
@@ -558,7 +558,7 @@ taotao:
       enabled: true
     zookeeper:
       enabled: true
-      connectString: 172.16.6.151:2181
+      connectString: 192.168.10.200:2181
       lock:
         enabled: false
     web:
@@ -714,7 +714,7 @@ springdoc:
     - com.taotao.cloud.captcha.controller
 
 pulsar:
-  service-url: pulsar://172.16.6.151:6650
+  service-url: pulsar://192.168.10.200:6650
   io-threads: 10
   listener-threads: 10
   enable-tcp-no-delay: false

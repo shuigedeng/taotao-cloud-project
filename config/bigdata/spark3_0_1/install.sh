@@ -17,38 +17,38 @@ export SCALA_HOME="/opt/common/scala-2.12.14"
 export HADOOP_HOME="/opt/bigdata/hadoop-3.3.0"
 export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 export YARN_CONF_DIR="$HADOOP_HOME/etc/hadoop"
-export SPARK_MASTER_HOST=172.16.6.151
+export SPARK_MASTER_HOST=192.168.10.200
 export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
 export SPARK_LOG_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/logs"
 export SPARK_PID_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/pid"
 # 该目录需要事先在hdfs上创建好
-export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://172.16.6.151:8020/spark/historylog"
+export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://192.168.10.200:8020/spark/historylog"
 
 # history server 配置
 vim spark-default.conf
 spark.eventLog.enabled true
 spark.eventLog.compress true
 # 该目录需要事先在hdfs上创建好
-spark.eventLog.dir hdfs://172.16.6.151:8020/spark/historylog
+spark.eventLog.dir hdfs://192.168.10.200:8020/spark/historylog
 
-cp slaves.template slaves && vim slaves && 172.16.6.151
+cp slaves.template slaves && vim slaves && 192.168.10.200
 # 日志配置
 cp log4j.properties.template log4j.properties
 
 # 测试
-spark-shell --master spark://172.16.6.151:7077
+spark-shell --master spark://192.168.10.200:7077
 spark-shell \
   --jars /opt/github/hudi-release-0.8.0/packaging/hudi-spark-bundle/target/hudi-spark3-bundle_2.12-0.8.0.jar \
   --conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer'
 
-172.16.6.151.:8080
-172.16.6.151.:18080
-172.16.6.151.:8088
-172.16.6.151.:4040
+192.168.10.200.:8080
+192.168.10.200.:18080
+192.168.10.200.:8088
+192.168.10.200.:4040
 
 #########  测试
 -- master local[2]
--- master spark://172.16.6.151:7077
+-- master spark://192.168.10.200:7077
 -- master yarn
 
 --deploy-mode client
@@ -56,7 +56,7 @@ spark-shell \
 
 ./bin/spark-submit \
     --class org.apache.spark.examples.SparkPi \
-    --master spark://172.16.6.151:7077 \
+    --master spark://192.168.10.200:7077 \
     --deploy-mode client \
     --driver-memory 4g \
     --executor-memory 2g \

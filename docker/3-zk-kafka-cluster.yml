@@ -58,7 +58,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_LISTENERS: PLAINTEXT://broker1:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.10.200:9092
       KAFKA_ADVERTISED_HOST_NAME: broker1
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
@@ -77,7 +77,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_LISTENERS: PLAINTEXT://broker2:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.10.200:9093
       KAFKA_ADVERTISED_HOST_NAME: broker2
       KAFKA_ADVERTISED_PORT: 9093
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
@@ -95,7 +95,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_LISTENERS: PLAINTEXT://broker3:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.16.6.151:9094
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.10.200:9094
       KAFKA_ADVERTISED_HOST_NAME: broker3
       KAFKA_ADVERTISED_PORT: 9094
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
@@ -127,7 +127,7 @@ services:
       - MYSQL_DB=taotao-cloud-zipkin
       - MYSQL_USER=root
       - MYSQL_PASS=123456
-      - MYSQL_HOST=172.16.6.151
+      - MYSQL_HOST=192.168.10.200
       - MYSQL_TCP_PORT=3316
     ports:
       - "9411:9411"
@@ -157,7 +157,7 @@ services:
       NACOS_APPLICATION_PORT: 8848
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_HOST: 192.168.10.200
       MYSQL_SERVICE_PORT: 3316
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
@@ -181,7 +181,7 @@ services:
       PREFER_HOST_MODE: hostname
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_HOST: 192.168.10.200
       MYSQL_SERVICE_PORT: 3316
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
@@ -205,7 +205,7 @@ services:
       PREFER_HOST_MODE: hostname
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.16.6.151
+      MYSQL_SERVICE_HOST: 192.168.10.200
       MYSQL_SERVICE_PORT: 3316
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
@@ -239,7 +239,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8091
-      SEATA_IP: 172.16.6.151
+      SEATA_IP: 192.168.10.200
   seata2:
     container_name: seata2
     image: seataio/seata-server:1.4.2
@@ -251,7 +251,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8092
-      SEATA_IP: 172.16.6.151
+      SEATA_IP: 192.168.10.200
   seata3:
     container_name: seata3
     image: seataio/seata-server:1.4.2
@@ -263,7 +263,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8093
-      SEATA_IP: 172.16.6.151
+      SEATA_IP: 192.168.10.200
 
 
 networks:

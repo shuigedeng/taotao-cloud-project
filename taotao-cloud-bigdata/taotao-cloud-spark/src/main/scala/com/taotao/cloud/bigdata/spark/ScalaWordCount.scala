@@ -30,7 +30,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * <p>
 ./bin/spark-submit \
   --class com.taotao.cloud.bigdata.spark.ScalaWordCount \
-  --master spark://172.16.6.151:7077 \
+  --master spark://192.168.10.200:7077 \
   --deploy-mode client \
   --driver-memory 2g \
   --executor-memory 1g \
