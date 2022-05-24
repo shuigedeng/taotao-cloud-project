@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
  * @since 2021-09-04 07:40:46
  */
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class})
 public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable> extends
 	SuperEntity<T, I> implements Serializable {
 
