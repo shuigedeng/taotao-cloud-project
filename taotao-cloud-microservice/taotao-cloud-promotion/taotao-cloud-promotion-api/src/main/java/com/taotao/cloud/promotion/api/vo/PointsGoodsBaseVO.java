@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.experimental.SuperBuilder;
 
@@ -17,9 +19,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PointsGoodsBaseVO {
-	private Long id;
+public class PointsGoodsBaseVO implements Serializable {
 
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
+
+	private Long id;
 
 	@Schema(description = "商品编号")
 	private String goodsId;

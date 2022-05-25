@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.experimental.SuperBuilder;
 
@@ -17,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivityGoodsBaseDTO {
+public class KanjiaActivityGoodsBaseDTO implements Serializable {
 
 
 	@Schema(description = "结算价格")

@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +17,10 @@ import java.util.List;
 @Data
 @Builder
 @Schema(description = "交易投诉 参数")
-public class OrderComplaintOperationDTO {
+public class OrderComplaintOperationDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "要更改的状态状态")
 	private String complainStatus;

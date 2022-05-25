@@ -3,7 +3,7 @@ package com.taotao.cloud.distribution.biz.controller.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
-import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
@@ -43,9 +43,9 @@ public class DistributionBuyerController {
     @ApiOperation(value = "获取分销员分页订单列表")
     @GetMapping("/distributionOrder")
     public Result<IPage<DistributionOrder>> distributionOrderPage(
-	    DistributionOrderSearchParams distributionOrderSearchParams) {
-        distributionOrderSearchParams.setDistributionId(distributionService.getDistribution().getId());
-        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
+	    DistributionOrderPageQuery distributionOrderPageQuery) {
+        distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
     }
 
     @ApiOperation(value = "获取当前会员的分销员信息", notes = "可根据分销员信息查询待提现金额以及冻结金额等信息")

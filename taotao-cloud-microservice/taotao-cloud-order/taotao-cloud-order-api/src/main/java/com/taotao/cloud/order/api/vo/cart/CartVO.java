@@ -29,7 +29,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "购物车展示VO")
-public class CartVO extends CartBaseVO implements Serializable {
+public class CartVO extends CartBaseVO {
 
 	@Serial
 	private static final long serialVersionUID = -5651775413457562422L;

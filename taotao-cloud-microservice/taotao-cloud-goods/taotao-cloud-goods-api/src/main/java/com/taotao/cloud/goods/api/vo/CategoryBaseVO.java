@@ -1,12 +1,14 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 商品分类
@@ -20,7 +22,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "商品分类VO")
-public class CategoryBaseVO {
+public class CategoryBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
 	@Schema(description = "id")
 	private Long id;

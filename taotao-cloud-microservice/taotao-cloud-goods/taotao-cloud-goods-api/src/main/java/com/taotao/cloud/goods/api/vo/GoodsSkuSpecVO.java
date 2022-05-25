@@ -1,6 +1,9 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +21,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsSkuSpecVO {
+public class GoodsSkuSpecVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
 	@Schema(description = "商品skuId")
 	private Long skuId;

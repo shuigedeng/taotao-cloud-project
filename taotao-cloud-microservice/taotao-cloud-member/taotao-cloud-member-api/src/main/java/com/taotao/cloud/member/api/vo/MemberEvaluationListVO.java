@@ -2,6 +2,8 @@ package com.taotao.cloud.member.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -21,6 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "会员评价VO")
 public class MemberEvaluationListVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "评论ID")

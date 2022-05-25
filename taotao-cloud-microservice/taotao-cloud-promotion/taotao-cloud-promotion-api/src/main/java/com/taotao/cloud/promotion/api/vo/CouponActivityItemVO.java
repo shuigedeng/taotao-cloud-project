@@ -2,6 +2,9 @@ package com.taotao.cloud.promotion.api.vo;
 
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 //public class CouponActivityItemVO extends CouponActivityItem {
-public class CouponActivityItemVO {
+public class CouponActivityItemVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
 
 	@Schema(description = "优惠券名称")
 	private String couponName;

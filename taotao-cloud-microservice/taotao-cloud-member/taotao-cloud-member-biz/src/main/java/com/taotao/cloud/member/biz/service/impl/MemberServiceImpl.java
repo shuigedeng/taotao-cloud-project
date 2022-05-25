@@ -26,7 +26,7 @@ import com.taotao.cloud.member.api.query.ConnectQuery;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.dto.MemberEditDTO;
-import com.taotao.cloud.member.api.dto.MemberPointMessage;
+import com.taotao.cloud.member.api.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.api.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
@@ -408,13 +408,13 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 			boolean result = this.updateById(member);
 			if (result) {
 				//发送会员消息
-				MemberPointMessage memberPointMessage = new MemberPointMessage();
-				memberPointMessage.setPoint(point);
-				memberPointMessage.setType(type);
-				memberPointMessage.setMemberId(memberId);
+				MemberPointMessageDTO memberPointMessageDTO = new MemberPointMessageDTO();
+				memberPointMessageDTO.setPoint(point);
+				memberPointMessageDTO.setType(type);
+				memberPointMessageDTO.setMemberId(memberId);
 				String destination = rocketmqCustomProperties.getMemberTopic() + ":"
 					+ MemberTagsEnum.MEMBER_POINT_CHANGE.name();
-				rocketMQTemplate.asyncSend(destination, memberPointMessage,
+				rocketMQTemplate.asyncSend(destination, memberPointMessageDTO,
 					RocketmqSendCallbackBuilder.commonCallback());
 				return true;
 			}

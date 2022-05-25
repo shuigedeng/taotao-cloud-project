@@ -1,4 +1,4 @@
-package com.taotao.cloud.distribution.api.dto;
+package com.taotao.cloud.distribution.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销查询参数")
-public class DistributionSearchParams {
+public class DistributionPageQuery {
 
 	@Schema(description = "会员名称")
 	private String memberName;

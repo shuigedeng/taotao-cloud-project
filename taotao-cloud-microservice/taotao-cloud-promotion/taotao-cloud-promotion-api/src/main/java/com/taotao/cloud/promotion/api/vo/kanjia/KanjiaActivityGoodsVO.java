@@ -1,6 +1,8 @@
 package com.taotao.cloud.promotion.api.vo.kanjia;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivityGoodsVO {
+public class KanjiaActivityGoodsVO implements Serializable {
 
 	//@Schema(description =  "商品规格详细信息")
 	//private GoodsSku goodsSku;

@@ -28,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "评价查询条件")
-public class EvaluationPageQuery extends PageParam implements Serializable {
+public class EvaluationPageQuery extends PageParam {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

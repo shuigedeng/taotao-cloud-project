@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 订单批量发货DTO
  * @author shuigedeng
@@ -17,7 +20,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单批量发货DTO")
-public class OrderBatchDeliverDTO {
+public class OrderBatchDeliverDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "订单SN")
 	private String orderSn;

@@ -19,7 +19,7 @@ import com.taotao.cloud.store.api.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.dto.StoreEditDTO;
 import com.taotao.cloud.store.api.dto.StoreOtherInfoDTO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
-import com.taotao.cloud.store.api.vo.StoreSearchParams;
+import com.taotao.cloud.store.api.query.StorePageQuery;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import com.taotao.cloud.store.biz.entity.Store;
 import com.taotao.cloud.store.biz.entity.StoreDetail;
@@ -59,8 +59,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
     private StoreDetailService storeDetailService;
 
     @Override
-    public IPage<StoreVO> findByConditionPage(StoreSearchParams storeSearchParams, PageVO page) {
-        return this.baseMapper.getStoreList(PageUtil.initPage(page), storeSearchParams.queryWrapper());
+    public IPage<StoreVO> findByConditionPage(StorePageQuery storePageQuery, PageVO page) {
+        return this.baseMapper.getStoreList(PageUtil.initPage(page), storePageQuery.queryWrapper());
     }
 
     @Override

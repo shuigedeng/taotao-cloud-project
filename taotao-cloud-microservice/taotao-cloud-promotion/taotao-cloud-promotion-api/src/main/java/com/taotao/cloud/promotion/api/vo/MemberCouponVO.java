@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * MemberCouponVO
  */
@@ -14,7 +17,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 //public class MemberCouponVO extends MemberCoupon {
-public class MemberCouponVO  {
+public class MemberCouponVO  implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
 
     @Schema(description =  "无法使用原因")
     private String reason;

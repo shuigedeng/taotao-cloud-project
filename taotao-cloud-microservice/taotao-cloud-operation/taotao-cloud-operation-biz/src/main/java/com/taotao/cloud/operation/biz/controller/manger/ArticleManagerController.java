@@ -3,7 +3,7 @@ package com.taotao.cloud.operation.biz.controller.manger;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.operation.api.dto.ArticleSearchParams;
+import com.taotao.cloud.operation.api.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.cloud.operation.api.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.entity.Article;
@@ -46,8 +46,8 @@ public class ArticleManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "分页获取")
 	@GetMapping(value = "/getByPage")
-	public Result<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
-		return Result.success(articleService.managerArticlePage(articleSearchParams));
+	public Result<IPage<ArticleVO>> getByPage(ArticlePageQuery articlePageQuery) {
+		return Result.success(articleService.managerArticlePage(articlePageQuery));
 	}
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

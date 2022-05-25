@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 
 /**
  * 小程序直播间基础哦
@@ -16,7 +19,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudioBaseVO {
+public class StudioBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
 	/**
 	 * 直播间名字，最短3个汉字，最长17个汉字，1个汉字相当于2个字符

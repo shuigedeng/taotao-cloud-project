@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
+
 /**
  * 直播商品VO
  *
@@ -21,6 +23,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommodityVO extends CommodityBaseVO {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
 	@Schema(description = "SKU库存")
 	private Integer quantity;

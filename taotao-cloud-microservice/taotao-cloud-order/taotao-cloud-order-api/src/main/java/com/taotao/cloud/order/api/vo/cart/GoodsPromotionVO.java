@@ -1,6 +1,8 @@
 package com.taotao.cloud.order.api.vo.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -21,7 +23,9 @@ import lombok.NoArgsConstructor;
 @Schema(description = "商品促销VO 购物车中")
 public class GoodsPromotionVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1622051257060817414L;
+
 	@Schema(description = "活动开始时间")
 	private Date startTime;
 

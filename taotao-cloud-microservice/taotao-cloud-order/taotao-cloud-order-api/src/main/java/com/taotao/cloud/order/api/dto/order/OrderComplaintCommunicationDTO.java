@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 投诉通信VO
@@ -15,7 +16,7 @@ import java.io.Serial;
 @Data
 @Builder
 @Schema(description = "投诉通信VO")
-public class OrderComplaintCommunicationDTO {
+public class OrderComplaintCommunicationDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -8460949951683122695L;

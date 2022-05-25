@@ -1,6 +1,9 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +24,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "小程序直播商品VO")
-public class CommodityBaseVO {
+public class CommodityBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
 	/**
 	 * 图片

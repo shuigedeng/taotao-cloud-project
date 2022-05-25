@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
@@ -36,10 +36,10 @@ public class DistributionOrderBuyerController {
     @ApiOperation(value = "分销员订单")
     @GetMapping
     public Result<IPage<DistributionOrder>> casHistory(
-	    DistributionOrderSearchParams distributionOrderSearchParams) {
+	    DistributionOrderPageQuery distributionOrderPageQuery) {
         //获取当前登录的分销员
-        distributionOrderSearchParams.setDistributionId(distributionService.getDistribution().getId());
-        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
+        distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
     }
 
 

@@ -5,6 +5,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.payment.api.feign.IFeignPayFlowService;
 import com.taotao.cloud.payment.api.feign.IFeignRefundLogService;
 import com.taotao.cloud.payment.api.vo.PayFlowVO;
+import com.taotao.cloud.payment.api.vo.RefundLogVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -22,6 +23,11 @@ public class FeignRefundLogServiceFallback implements FallbackFactory<IFeignRefu
 			public Result<PayFlowVO> findPayFlowById(Long id) {
 				LogUtil.error("调用findPayFlowById异常：{}", throwable, id);
 				return Result.fail(null, 500);
+			}
+
+			@Override
+			public RefundLogVO queryByAfterSaleSn(String sn) {
+				return null;
 			}
 		};
 	}

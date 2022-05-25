@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 
 
@@ -13,11 +13,11 @@ public interface DistributionOrderService extends IService<DistributionOrder> {
 
     /**
      * 获取分销订单分页
-     * @param distributionOrderSearchParams 分销订单搜索参数
+     * @param distributionOrderPageQuery 分销订单搜索参数
      * @return 分销订单分页
      */
     IPage<DistributionOrder> getDistributionOrderPage(
-	    DistributionOrderSearchParams distributionOrderSearchParams);
+	    DistributionOrderPageQuery distributionOrderPageQuery);
 
     /**
      * 支付订单

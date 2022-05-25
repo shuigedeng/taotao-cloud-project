@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +17,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PintuanShareVO {
+public class PintuanShareVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
 
     private PromotionGoodsVO promotionGoods;
 

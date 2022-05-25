@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -21,9 +23,10 @@ import java.util.List;
 @NoArgsConstructor
 @Schema(description = "优惠券")
 //public class CouponVO extends Coupon {
-public class CouponVO  {
+public class CouponVO  implements Serializable {
 
-    private static final long serialVersionUID = 8372420376262437018L;
+    @Serial
+	private static final long serialVersionUID = 8372420376262437018L;
 
     /**
      * 促销关联的商品

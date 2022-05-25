@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 拼图会员视图对象
  *
@@ -14,7 +17,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PintuanMemberVO {
+public class PintuanMemberVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
 
     @Schema(description =  "会员编号")
     private String memberId;

@@ -2,7 +2,7 @@ package com.taotao.cloud.operation.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.operation.api.dto.ArticleSearchParams;
+import com.taotao.cloud.operation.api.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.entity.Article;
 import java.util.List;
@@ -20,18 +20,18 @@ public interface ArticleService extends IService<Article> {
 	/**
 	 * 管理端获取文章
 	 *
-	 * @param articleSearchParams
+	 * @param articlePageQuery
 	 * @return
 	 */
-	IPage<ArticleVO> managerArticlePage(ArticleSearchParams articleSearchParams);
+	IPage<ArticleVO> managerArticlePage(ArticlePageQuery articlePageQuery);
 
 	/**
 	 * 获取文章分页
 	 *
-	 * @param articleSearchParams 文章搜索条件
+	 * @param articlePageQuery 文章搜索条件
 	 * @return 文章分页
 	 */
-	IPage<ArticleVO> articlePage(ArticleSearchParams articleSearchParams);
+	IPage<ArticleVO> articlePage(ArticlePageQuery articlePageQuery);
 
 	/**
 	 * 获取文章分页

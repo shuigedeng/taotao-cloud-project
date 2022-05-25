@@ -61,7 +61,7 @@ public class GoodsBuyerController {
 	@Operation(summary = "通过id获取商品信息", description = "通过id获取商品信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
-	public Result<GoodsVO> get(
+	public Result<GoodsVO> getByGoodsId(
 		@Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable Long goodsId) {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
@@ -100,7 +100,6 @@ public class GoodsBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/es/related")
 	public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(@Validated EsGoodsSearchQuery esGoodsSearchQuery) {
-		//pageVO.setNotConvert(true);
 		EsGoodsRelatedInfo selector = goodsSearchService.getSelector(esGoodsSearchQuery);
 		return Result.success(selector);
 	}

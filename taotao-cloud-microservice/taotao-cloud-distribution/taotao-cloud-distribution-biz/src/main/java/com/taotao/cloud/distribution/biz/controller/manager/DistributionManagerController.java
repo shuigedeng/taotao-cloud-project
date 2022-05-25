@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import io.swagger.annotations.Api;
@@ -29,8 +29,8 @@ public class DistributionManagerController {
 
     @ApiOperation(value = "分页获取")
     @GetMapping(value = "/getByPage")
-    public Result<IPage<Distribution>> getByPage(DistributionSearchParams distributionSearchParams, PageVO page) {
-        return Result.success(distributionService.distributionPage(distributionSearchParams, page));
+    public Result<IPage<Distribution>> getByPage(DistributionPageQuery distributionPageQuery, PageVO page) {
+        return Result.success(distributionService.distributionPage(distributionPageQuery, page));
     }
 
 

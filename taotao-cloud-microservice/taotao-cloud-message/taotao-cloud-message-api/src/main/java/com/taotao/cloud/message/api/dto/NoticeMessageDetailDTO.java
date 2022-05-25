@@ -2,9 +2,10 @@ package com.taotao.cloud.message.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -16,10 +17,11 @@ import java.util.List;
  * @since 2022-05-19 14:59:21
  */
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoticeMessageDetailDTO extends NoticeMessage {
+public class NoticeMessageDetailDTO extends NoticeMessageDTO {
 
 	@Schema(description = "消息变量")
 	private List<String> variables;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.distribution.api.vo;
+package com.taotao.cloud.distribution.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销订单查询对象")
-public class DistributionOrderSearchParams extends PageParam {
+public class DistributionOrderPageQuery extends PageParam {
 
 	private static final long serialVersionUID = -8736018687663645064L;
 

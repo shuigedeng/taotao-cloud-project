@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 交易投诉DTO
@@ -12,7 +14,10 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Builder
 @Schema(description = "交易投诉DTO")
-public class OrderComplaintDTO {
+public class OrderComplaintDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@NotBlank
 	@Schema(description = "投诉主题")

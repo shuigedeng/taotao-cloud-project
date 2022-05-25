@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
-import com.taotao.cloud.member.api.dto.MemberPointMessage;
+import com.taotao.cloud.member.api.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.api.enums.MemberWithdrawalDestinationEnum;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;
@@ -38,19 +38,19 @@ public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithd
     private NoticeMessageService noticeMessageService;
 
     @Override
-    public void memberPointChange(MemberPointMessage memberPointMessage) {
-        if (memberPointMessage == null) {
+    public void memberPointChange(MemberPointMessageDTO memberPointMessageDTO) {
+        if (memberPointMessageDTO == null) {
             return;
         }
         //组织站内信参数
         NoticeMessageDTO noticeMessageDTO = new NoticeMessageDTO();
-        noticeMessageDTO.setMemberId(memberPointMessage.getMemberId());
+        noticeMessageDTO.setMemberId(memberPointMessageDTO.getMemberId());
         Map<String, String> params = new HashMap<>(2);
-        if (memberPointMessage.getType().equals(PointTypeEnum.INCREASE.name())) {
+        if (memberPointMessageDTO.getType().equals(PointTypeEnum.INCREASE.name())) {
             params.put("expenditure_points", "0");
-            params.put("income_points", memberPointMessage.getPoint().toString());
+            params.put("income_points", memberPointMessageDTO.getPoint().toString());
         } else {
-            params.put("expenditure_points", memberPointMessage.getPoint().toString());
+            params.put("expenditure_points", memberPointMessageDTO.getPoint().toString());
             params.put("income_points", "0");
         }
         noticeMessageDTO.setParameter(params);

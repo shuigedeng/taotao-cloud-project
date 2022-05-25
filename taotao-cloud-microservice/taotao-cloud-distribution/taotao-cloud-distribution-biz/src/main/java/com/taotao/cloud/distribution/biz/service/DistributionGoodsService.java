@@ -3,7 +3,7 @@ package com.taotao.cloud.distribution.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
 import java.util.List;
@@ -17,34 +17,34 @@ public interface DistributionGoodsService extends IService<DistributionGoods> {
     /**
      * 根据条件分页查询分销商品信息
      *
-     * @param distributionGoodsSearchParams 商品条件
+     * @param distributionGoodsPageQuery 商品条件
      * @return 分页分销商品信息
      */
-    IPage<DistributionGoodsVO> goodsPage(DistributionGoodsSearchParams distributionGoodsSearchParams);
+    IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery distributionGoodsPageQuery);
 
 
     /**
      * 根据条件查询分销商品信息列表
      *
-     * @param distributionGoodsSearchParams 条件
+     * @param distributionGoodsPageQuery 条件
      * @return 分销商品信息列表
      */
-    List<DistributionGoods> getDistributionGoodsList(DistributionGoodsSearchParams distributionGoodsSearchParams);
+    List<DistributionGoods> getDistributionGoodsList(DistributionGoodsPageQuery distributionGoodsPageQuery);
 
     /**
      * 根据条件查询分销商品信息
      *
-     * @param distributionGoodsSearchParams 条件
+     * @param distributionGoodsPageQuery 条件
      * @return 分销商品信息
      */
-    DistributionGoods getDistributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams);
+    DistributionGoods getDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery);
 
     /**
      * 根据条件删除分销商品
      *
-     * @param distributionGoodsSearchParams 条件
+     * @param distributionGoodsPageQuery 条件
      */
-    boolean deleteDistributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams);
+    boolean deleteDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery);
 
     /**
      * 获取分销商品

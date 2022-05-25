@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
@@ -44,8 +44,8 @@ public class DistributionGoodsBuyerController {
     @ApiOperation(value = "获取分销商商品列表")
     @GetMapping
     public Result<IPage<DistributionGoodsVO>> distributionGoods(
-	    DistributionGoodsSearchParams distributionGoodsSearchParams) {
-        return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
+	    DistributionGoodsPageQuery distributionGoodsPageQuery) {
+        return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
     }
 
     @PreventDuplicateSubmissions

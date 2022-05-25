@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.experimental.SuperBuilder;
 
@@ -17,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivityLogDTO {
+public class KanjiaActivityLogDTO implements Serializable {
 	private Long id;
 
 	@Schema(description = "砍价活动参与记录id")

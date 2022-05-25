@@ -10,6 +10,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 搜索热词
  *
@@ -21,7 +24,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HotWordsDTO {
+public class HotWordsDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@NotBlank(message = "搜索热词不能为空")
 	@Size(max = 20, min = 1, message = "搜索热词长度限制在1-20")

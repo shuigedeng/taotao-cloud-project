@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PointsGoodsBaseDTO {
+public class PointsGoodsBaseDTO implements Serializable {
 
 
 	@Schema(description = "商品编号")

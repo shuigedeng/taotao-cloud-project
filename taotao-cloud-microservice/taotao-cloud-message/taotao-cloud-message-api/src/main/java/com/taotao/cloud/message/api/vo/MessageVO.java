@@ -1,7 +1,5 @@
 package com.taotao.cloud.message.api.vo;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,15 +24,4 @@ public class MessageVO {
 	@Schema(description = "内容")
 	private String content;
 
-	public LambdaQueryWrapper<Message> lambdaQueryWrapper() {
-		LambdaQueryWrapper<Message> queryWrapper = new LambdaQueryWrapper<>();
-		if (StrUtil.isNotEmpty(title)) {
-			queryWrapper.like(Message::getTitle, title);
-		}
-		if (StrUtil.isNotEmpty(content)) {
-			queryWrapper.like(Message::getContent, content);
-		}
-		queryWrapper.orderByDesc(Message::getCreateTime);
-		return queryWrapper;
-	}
 }

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
-import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
@@ -61,8 +61,8 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 
     @Override
     public IPage<DistributionOrder> getDistributionOrderPage(
-	    DistributionOrderSearchParams distributionOrderSearchParams) {
-        return this.page(distributionOrderSearchParams.buildMpPage(), distributionOrderSearchParams.queryWrapper());
+	    DistributionOrderPageQuery distributionOrderPageQuery) {
+        return this.page(distributionOrderPageQuery.buildMpPage(), distributionOrderPageQuery.queryWrapper());
 
     }
 

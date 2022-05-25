@@ -23,7 +23,6 @@ import java.util.List;
 @Schema(description = "商城流水，细节到orderItem")
 public class PriceDetailDTO implements Serializable {
 
-
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;
 	/**

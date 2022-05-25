@@ -3,6 +3,8 @@ package com.taotao.cloud.member.api.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "MemberVO")
 public class MemberVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1810890757303309436L;
 
 	@Schema(description = "唯一标识", hidden = true)
