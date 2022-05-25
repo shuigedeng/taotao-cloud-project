@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.redis.properties;
+package com.taotao.cloud.web.idgenerator;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = IdGeneratorProperties.PREFIX)
 public class IdGeneratorProperties {
 
-	public static final String PREFIX = "taotao.cloud.redis.generator";
+	public static final String PREFIX = "taotao.cloud.web.idgenerator";
 
 	private boolean enabled = true;
 
@@ -63,6 +63,10 @@ public class IdGeneratorProperties {
 		/**
 		 * redis_lock
 		 */
-		REDIS_LOCK;
+		REDIS_LOCK,
+		/**
+		 * ZOOKEEPER
+		 */
+		ZOOKEEPER;
 	}
 }

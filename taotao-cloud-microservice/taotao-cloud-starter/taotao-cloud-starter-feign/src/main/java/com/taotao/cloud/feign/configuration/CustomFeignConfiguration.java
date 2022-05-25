@@ -25,6 +25,7 @@ import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.feign.endpoint.FeignClientEndpoint;
 import com.taotao.cloud.feign.execption.FeignDecodeException;
 import com.taotao.cloud.feign.formatter.DateFormatRegister;
 import com.taotao.cloud.feign.http.InfoFeignLoggerFactory;
@@ -53,8 +54,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -70,8 +71,8 @@ import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomize
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.cloud.openfeign.support.SpringEncoder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -134,7 +135,14 @@ public class CustomFeignConfiguration implements InitializingBean {
 	public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters,
 		ObjectProvider<HttpMessageConverterCustomizer> customizers) {
 		return new OptionalDecoder(
-			new BaseResultDecode(new SpringDecoder(messageConverters,customizers)));
+			new BaseResultDecode(new SpringDecoder(messageConverters, customizers)));
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnAvailableEndpoint
+	public FeignClientEndpoint feignClientEndpoint(ApplicationContext context) {
+		return new FeignClientEndpoint(context);
 	}
 
 	public static class BaseResultDecode extends ResponseEntityDecoder {
@@ -147,7 +155,7 @@ public class CustomFeignConfiguration implements InitializingBean {
 		public Object decode(Response response, Type type) throws IOException, FeignException {
 			if (type != null) {
 				if (((ParameterizedType) type).getRawType() != Result.class) {
-					type = new ParameterizedTypeImpl(new Type[]{type},null, Result.class);
+					type = new ParameterizedTypeImpl(new Type[]{type}, null, Result.class);
 					Object object = super.decode(response, type);
 					if (object instanceof Result<?> result) {
 						if (result.code() != 200) {

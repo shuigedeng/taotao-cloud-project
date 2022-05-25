@@ -13,29 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway;
+package com.taotao.cloud.demo.redis;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
- * TaoTaoCloudGatewayApplication
+ * SensitiveWordsTopicMessageDelegate
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2020/10/10 09:06
+ * @since 2022/02/09 20:46
  */
-@SpringBootApplication
-@EnableDiscoveryClient
-public class TaoTaoCloudGatewayApplication {
+@Component
+public class SensitiveWordsTopicMessageDelegate {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+	public void handleSensitiveWords(String message) {
+		LogUtil.info(message);
 	}
 }

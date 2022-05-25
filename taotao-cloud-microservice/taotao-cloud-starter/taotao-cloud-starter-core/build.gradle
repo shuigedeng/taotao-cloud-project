@@ -1,9 +1,6 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api 'org.springframework.boot:spring-boot-actuator'
-    api 'org.springframework.boot:spring-boot-actuator-autoconfigure'
-
     api('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery') {
         exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
     }

@@ -1,19 +1,4 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.taotao.cloud.redis.runner;
+package com.taotao.cloud.web.idgenerator;
 
 import cn.hutool.core.net.NetUtil;
 import com.github.yitter.contract.IdGeneratorOptions;
@@ -21,31 +6,25 @@ import com.github.yitter.idgen.YitIdHelper;
 import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.common.support.lock.ZLock;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.redis.properties.IdGeneratorProperties;
-import com.taotao.cloud.redis.properties.IdGeneratorProperties.IdGeneratorEnum;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.ValueOperations;
 
 /**
- * IdGeneratorCommandLineRunner
+ * id生成器
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 21:59:18
+ * @version 2022.05
+ * @since 2022-05-19 11:18:07
  */
-public class IdGeneratorCommandLineRunner implements CommandLineRunner, ApplicationContextAware {
+public class RedisLockIdGenerator implements CommandLineRunner, ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
-
-	@Autowired
-	private IdGeneratorProperties idGeneratorProperties;
 
 	/**
 	 * 分布式锁Key
@@ -62,15 +41,29 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 	 */
 	private static final String CACHE_ID_IP = "CACHE_ID_IP";
 
+	private RedisRepository redisRepository;
+	private DistributedLock distributedLock;
+
+	public RedisLockIdGenerator(RedisRepository redisRepository, DistributedLock distributedLock) {
+		this.redisRepository = redisRepository;
+		this.distributedLock = distributedLock;
+	}
+
 	@Override
 	public void run(String... args) {
-		if (idGeneratorProperties.getType().equals(IdGeneratorEnum.REDIS_LOCK)) {
-			idGeneratorWithDistributedLock();
-		}
+		idGeneratorWithDistributedLock();
 	}
 
 	public void idGeneratorWithDistributedLock() {
-		RedisRepository redisRepository = applicationContext.getBean(RedisRepository.class);
+		if (Objects.isNull(redisRepository)) {
+			RedisRepository redisRepository = applicationContext.getBean(RedisRepository.class);
+			this.redisRepository = redisRepository;
+		}
+		if (Objects.isNull(distributedLock)) {
+			DistributedLock distributedLock = applicationContext.getBean(DistributedLock.class);
+			this.distributedLock = distributedLock;
+		}
+
 		//获取mac地址
 		String macAddress = NetUtil.getLocalMacAddress();
 		boolean existWorkerId = redisRepository.opsForHash().hasKey(CACHE_ID_IP, macAddress);
@@ -82,7 +75,6 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 			return;
 		}
 
-		DistributedLock distributedLock = applicationContext.getBean(DistributedLock.class);
 		ZLock lock = null;
 		try {
 			//分布式锁等待120秒，执行时长最大120秒
@@ -128,5 +120,5 @@ public class IdGeneratorCommandLineRunner implements CommandLineRunner, Applicat
 			YitIdHelper.setIdGenerator(options);
 		}
 	}
-
 }
+

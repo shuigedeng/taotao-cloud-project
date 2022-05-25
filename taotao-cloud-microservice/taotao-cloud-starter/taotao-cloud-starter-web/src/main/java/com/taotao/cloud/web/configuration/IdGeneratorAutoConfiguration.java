@@ -13,51 +13,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.redis.configuration;
+package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.redis.properties.IdGeneratorProperties;
-import com.taotao.cloud.redis.properties.IdGeneratorProperties.IdGeneratorEnum;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.redis.runner.IdGeneratorCommandLineRunner;
-import java.util.Objects;
+import com.taotao.cloud.web.idgenerator.IdGeneratorProperties;
+import com.taotao.cloud.web.idgenerator.RedisIdGenerator;
+import com.taotao.cloud.web.idgenerator.RedisLockIdGenerator;
+import com.taotao.cloud.web.idgenerator.ZookeeperIdGenerator;
+import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Condition;
-import org.springframework.context.annotation.ConditionContext;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
- * TaoTaoCloudRedisAutoConfiguration
+ * IdGeneratorAutoConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-07 21:17:02
  */
 @AutoConfiguration
-@ConditionalOnBean({RedisRepository.class})
 @ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({IdGeneratorProperties.class})
-@Import({IdGeneratorCommandLineRunner.class})
 public class IdGeneratorAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(IdGeneratorAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtil.started(IdGeneratorAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean
+	@ConditionalOnBean({RedisRepository.class})
 	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "REDIS", matchIfMissing = true)
-	public IdGenerator idGenerator() {
-		return new IdGenerator();
+	public RedisIdGenerator idGenerator(RedisRepository redisRepository) {
+		return new RedisIdGenerator(redisRepository);
+	}
+
+	@Bean
+	@ConditionalOnBean({RedisRepository.class, DistributedLock.class})
+	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "REDIS_LOCK")
+	public RedisLockIdGenerator redisLockIdGenerator(RedisRepository redisRepository,
+		DistributedLock distributedLock) {
+		return new RedisLockIdGenerator(redisRepository, distributedLock);
+	}
+
+	@Bean
+	@ConditionalOnBean({CuratorFramework.class})
+	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "ZOOKEEPER")
+	public ZookeeperIdGenerator zookeeperIdGenerator(CuratorFramework curatorFramework) {
+		return new ZookeeperIdGenerator(curatorFramework);
 	}
 }

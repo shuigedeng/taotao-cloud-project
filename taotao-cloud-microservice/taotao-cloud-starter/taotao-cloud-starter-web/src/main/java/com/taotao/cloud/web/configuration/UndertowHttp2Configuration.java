@@ -26,14 +26,12 @@ import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
 import java.io.IOException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration;
 import org.springframework.boot.web.embedded.undertow.UndertowDeploymentInfoCustomizer;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.xnio.OptionMap;
 import org.xnio.Options;
 import org.xnio.Xnio;
@@ -46,9 +44,8 @@ import org.xnio.XnioWorker;
  * @version 2021.9
  * @since 2021-09-02 21:29:52
  */
-@AutoConfiguration
+@AutoConfiguration(before = ServletWebServerFactoryAutoConfiguration.class)
 @ConditionalOnClass(Undertow.class)
-@AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
 public class UndertowHttp2Configuration implements InitializingBean {
 
 	@Override

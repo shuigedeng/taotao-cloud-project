@@ -27,7 +27,6 @@ import com.taotao.cloud.health.properties.HealthProperties;
 import com.taotao.cloud.health.strategy.WarnStrategy;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -35,7 +34,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 
 /**
@@ -45,9 +43,8 @@ import org.springframework.core.Ordered;
  * @version 2021.9
  * @since 2021-09-10 17:22:15
  */
-@AutoConfiguration
+@AutoConfiguration(after = CoreAutoConfiguration.class)
 @EnableConfigurationProperties({HealthProperties.class, CollectTaskProperties.class})
-@AutoConfigureAfter({CoreAutoConfiguration.class})
 @ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HealthAutoConfiguration implements InitializingBean {
 

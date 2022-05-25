@@ -144,7 +144,7 @@ cluster-node-timeout 15000
 
 /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli --cluster check 192.168.10.200:7100
 
-
+/opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli --cluster fix 192.168.10.200:7100
 
 
 

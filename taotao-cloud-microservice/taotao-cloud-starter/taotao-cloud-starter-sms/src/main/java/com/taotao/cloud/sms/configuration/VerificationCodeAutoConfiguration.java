@@ -16,6 +16,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.model.VerificationCodeTypeGenerate;
+import com.taotao.cloud.sms.properties.SmsProperties;
+import com.taotao.cloud.sms.properties.VerificationCodeMemoryRepositoryProperties;
+import com.taotao.cloud.sms.properties.VerificationCodeProperties;
 import com.taotao.cloud.sms.repository.VerificationCodeMemoryRepository;
 import com.taotao.cloud.sms.repository.VerificationCodeRedisRepository;
 import com.taotao.cloud.sms.repository.VerificationCodeRepository;
@@ -24,18 +27,13 @@ import com.taotao.cloud.sms.service.NoticeService;
 import com.taotao.cloud.sms.service.VerificationCodeService;
 import com.taotao.cloud.sms.service.impl.DefaultCodeGenerate;
 import com.taotao.cloud.sms.service.impl.DefaultVerificationCodeService;
-import com.taotao.cloud.sms.properties.SmsProperties;
-import com.taotao.cloud.sms.properties.VerificationCodeMemoryRepositoryProperties;
-import com.taotao.cloud.sms.properties.VerificationCodeProperties;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 验证码服务配置

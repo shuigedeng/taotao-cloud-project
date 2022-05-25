@@ -10,7 +10,7 @@ import com.taotao.cloud.redis.delay.message.QueueMessage;
 import com.taotao.cloud.redis.delay.message.QueueMessageBuilder;
 import com.taotao.cloud.redis.delay.message.RedissonHeaders;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
+import lombok.Data;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.Header;
@@ -69,6 +69,7 @@ public class RedissonDelayApplication {
 		System.out.println("receive " + carLbsDto + ", delayed " + actualDelay + " millis");
 	}
 
+	@Data
 	public static class CarLbsDto {
 
 		private String cid;
@@ -77,53 +78,5 @@ public class RedissonDelayApplication {
 		private String cityId;
 		private String name;
 		private String carNum;
-
-		public String getCid() {
-			return cid;
-		}
-
-		public void setCid(String cid) {
-			this.cid = cid;
-		}
-
-		public String getBusinessType() {
-			return businessType;
-		}
-
-		public void setBusinessType(String businessType) {
-			this.businessType = businessType;
-		}
-
-		public String getCity() {
-			return city;
-		}
-
-		public void setCity(String city) {
-			this.city = city;
-		}
-
-		public String getCityId() {
-			return cityId;
-		}
-
-		public void setCityId(String cityId) {
-			this.cityId = cityId;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getCarNum() {
-			return carNum;
-		}
-
-		public void setCarNum(String carNum) {
-			this.carNum = carNum;
-		}
 	}
 }

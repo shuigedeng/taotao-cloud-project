@@ -16,7 +16,7 @@ dependencies {
     api "org.apache.httpcomponents:httpclient"
     api "org.apache.httpcomponents:httpmime"
     api "com.squareup.okhttp3:okhttp"
-    
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
