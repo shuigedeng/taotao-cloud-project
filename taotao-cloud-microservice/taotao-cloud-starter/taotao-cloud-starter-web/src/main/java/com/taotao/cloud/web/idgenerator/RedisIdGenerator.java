@@ -1,4 +1,4 @@
-package com.taotao.cloud.redis.configuration;
+package com.taotao.cloud.web.idgenerator;
 
 import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
 /**
@@ -20,7 +20,7 @@ import org.springframework.data.redis.support.atomic.RedisAtomicLong;
  * @version 2022.05
  * @since 2022-05-19 11:18:07
  */
-public class IdGenerator implements DisposableBean, InitializingBean {
+public class RedisIdGenerator implements DisposableBean, CommandLineRunner {
 
 	/**
 	 * ID生成器
@@ -45,51 +45,55 @@ public class IdGenerator implements DisposableBean, InitializingBean {
 	private String cacheKey;
 	private RedisRepository redisRepository;
 
+	public RedisIdGenerator(RedisRepository redisRepository) {
+		this.redisRepository = redisRepository;
+	}
+
 	/**
 	 * 初始化雪花生成器WorkerID， 通过Redis实现集群获取不同的编号， 如果相同会出现ID重复
 	 */
 	private void initIdWorker() {
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
-		if (Objects.nonNull(redisRepository)) {
+		if (Objects.isNull(redisRepository)) {
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
 			this.redisRepository = redisRepository;
-
-			RedisAtomicLong redisAtomicLong = new RedisAtomicLong(ID_IDX,
-				redisRepository.getConnectionFactory());
-			for (int i = 0; i <= MAX_WORKER_ID_NUMBER_BY_MODE; i++) {
-				long andInc = redisAtomicLong.getAndIncrement();
-				long result = andInc % (MAX_WORKER_ID_NUMBER_BY_MODE + 1);
-
-				//计数超出上限之后重新计数
-				if (andInc >= MAX_WORKER_ID_NUMBER_BY_MODE) {
-					redisAtomicLong.set(andInc % (MAX_WORKER_ID_NUMBER_BY_MODE));
-				}
-
-				cacheKey = ID_IDX + result;
-				boolean useSuccess = Boolean.TRUE.equals(redisRepository.opsForValue()
-					.setIfAbsent(cacheKey, System.currentTimeMillis(), CACHE_TIMEOUT,
-						TimeUnit.SECONDS));
-				if (useSuccess) {
-					workerId = (short) result;
-					break;
-				}
-			}
-			if (workerId == -1) {
-				throw new RuntimeException(
-					String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MAX_WORKER_ID_NUMBER_BY_MODE + 1));
-			}
-
-			LogUtil.info("当前ID生成器编号: " + workerId);
-			IdGeneratorOptions options = new IdGeneratorOptions(workerId);
-			options.WorkerIdBitLength = WORKER_ID_BIT_LENGTH;
-			YitIdHelper.setIdGenerator(options);
-
-			//提前一分钟续期
-			ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
-				1,
-				ThreadFactoryCreator.create("taotao-cloud-idgenerator-scheduled-task"));
-			scheduledThreadPoolExecutor.scheduleWithFixedDelay(resetExpire, SCHEDULE_TIMEOUT,
-				SCHEDULE_TIMEOUT, TimeUnit.SECONDS);
 		}
+
+		RedisAtomicLong redisAtomicLong = new RedisAtomicLong(ID_IDX,
+			redisRepository.getConnectionFactory());
+		for (int i = 0; i <= MAX_WORKER_ID_NUMBER_BY_MODE; i++) {
+			long andInc = redisAtomicLong.getAndIncrement();
+			long result = andInc % (MAX_WORKER_ID_NUMBER_BY_MODE + 1);
+
+			//计数超出上限之后重新计数
+			if (andInc >= MAX_WORKER_ID_NUMBER_BY_MODE) {
+				redisAtomicLong.set(andInc % (MAX_WORKER_ID_NUMBER_BY_MODE));
+			}
+
+			cacheKey = ID_IDX + result;
+			boolean useSuccess = Boolean.TRUE.equals(redisRepository.opsForValue()
+				.setIfAbsent(cacheKey, System.currentTimeMillis(), CACHE_TIMEOUT,
+					TimeUnit.SECONDS));
+			if (useSuccess) {
+				workerId = (short) result;
+				break;
+			}
+		}
+		if (workerId == -1) {
+			throw new RuntimeException(
+				String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MAX_WORKER_ID_NUMBER_BY_MODE + 1));
+		}
+
+		LogUtil.info("当前ID生成器编号: " + workerId);
+		IdGeneratorOptions options = new IdGeneratorOptions(workerId);
+		options.WorkerIdBitLength = WORKER_ID_BIT_LENGTH;
+		YitIdHelper.setIdGenerator(options);
+
+		//提前一分钟续期
+		ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
+			1,
+			ThreadFactoryCreator.create("taotao-cloud-idgenerator-scheduled-task"));
+		scheduledThreadPoolExecutor.scheduleWithFixedDelay(resetExpire, SCHEDULE_TIMEOUT,
+			SCHEDULE_TIMEOUT, TimeUnit.SECONDS);
 	}
 
 	private void onDestroy() {
@@ -113,7 +117,7 @@ public class IdGenerator implements DisposableBean, InitializingBean {
 	}
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void run(String... args) throws Exception {
 		initIdWorker();
 	}
 }

@@ -50,12 +50,10 @@ import org.apache.ibatis.type.EnumTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * MybatisPlusAutoConfiguration
@@ -64,8 +62,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-04 07:40:02
  */
-@AutoConfiguration
-@AutoConfigureAfter(TenantAutoConfiguration.class)
+@AutoConfiguration(after = TenantAutoConfiguration.class)
 @EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class, TenantProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MybatisPlusAutoConfiguration implements InitializingBean {

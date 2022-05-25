@@ -15,7 +15,6 @@ package com.taotao.cloud.sms.channel.qiniu;
 import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.loadbalancer.SmsSenderLoadBalancer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,7 +22,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
@@ -62,7 +60,7 @@ public class QiNiuAutoConfiguration {
 		@Override
 		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
 			Boolean enable = context.getEnvironment()
-				.getProperty(QiNiuProperties.PREFIX+".enable", Boolean.class);
+				.getProperty(QiNiuProperties.PREFIX + ".enable", Boolean.class);
 			return enable == null || enable;
 		}
 	}

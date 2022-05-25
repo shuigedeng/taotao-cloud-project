@@ -29,10 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
-
 import org.jetbrains.annotations.NotNull;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.Message;
@@ -42,7 +39,6 @@ import org.springframework.data.redis.listener.KeyExpirationEventMessageListener
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
-import org.springframework.stereotype.Component;
 
 /**
  * RedisListenerConfig
@@ -51,11 +47,11 @@ import org.springframework.stereotype.Component;
  * @version 2022.03
  * @since 2022/01/17 16:12
  */
-@Configuration
+//@Configuration
 public class RedisListenerConfig {
 
 	@Bean
-	public RedisMessageListenerContainer redisMessageListenerContainer(
+	public RedisMessageListenerContainer customRedisMessageListenerContainer(
 		RedisConnectionFactory redisConnectionFactory,
 		QuartzJobTopicMessageDelegate quartzJobTopicMessageDelegate,
 		ScheduledJobTopicMessageDelegate scheduledJobTopicMessageDelegate,
@@ -65,12 +61,11 @@ public class RedisListenerConfig {
 		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 		container.setConnectionFactory(redisConnectionFactory);
 
-		//Runtime.getRuntime().availableProcessors()
 		//Runtime.getRuntime().availableProcessors() * 2
 		MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
 			100,
 			1500,
-			60,
+			2000,
 			TimeUnit.SECONDS,
 			new SynchronousQueue<>(),
 			new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
@@ -193,18 +188,17 @@ public class RedisListenerConfig {
 		return container;
 	}
 
-	@Configuration
-	@ConditionalOnBean(RedisMessageListenerContainer.class)
-	public static class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
-
-		public RedisKeyExpireListener(RedisMessageListenerContainer listenerContainer) {
-			super(listenerContainer);
-		}
-
-		@Override
-		public void onMessage(@NotNull Message message, byte[] pattern) {
-			LogUtil.info("接受到消息: {}, {}", message, new String(pattern));
-		}
-	}
+	//@Configuration
+	//public static class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
+	//
+	//	public RedisKeyExpireListener(RedisMessageListenerContainer listenerContainer) {
+	//		super(listenerContainer);
+	//	}
+	//
+	//	@Override
+	//	public void onMessage(@NotNull Message message, byte[] pattern) {
+	//		LogUtil.info("接受到消息: {}, {}", message, new String(pattern));
+	//	}
+	//}
 
 }

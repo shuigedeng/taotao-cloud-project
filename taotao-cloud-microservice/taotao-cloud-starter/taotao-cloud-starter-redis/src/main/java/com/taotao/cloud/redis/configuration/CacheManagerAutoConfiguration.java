@@ -36,8 +36,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -49,7 +47,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -162,7 +159,8 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 	 * @since 2022-05-20 17:32:35
 	 */
 	@AutoConfiguration(beforeName = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
-	@EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
+	@EnableConfigurationProperties({
+		org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 	@ConditionalOnMissingBean(CacheManager.class)
 	public static class CaffeineAutoCacheConfiguration {
 

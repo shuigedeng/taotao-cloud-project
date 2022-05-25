@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class VisitsInit implements ApplicationRunner {
+
 	@Autowired
 	private IVisitsService visitsService;
 	@Autowired

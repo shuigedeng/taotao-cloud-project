@@ -47,6 +47,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 /**
@@ -78,8 +79,9 @@ public class MongoStartedEventListener {
 		LogUtil.info(beansWithAnnotation.toString());
 
 		if(Objects.nonNull(mongoMappingContext) && Objects.nonNull(mongoTemplate)){
+			Object cla = beansWithAnnotation.values().stream().findFirst().get();
 			// 找到主程序包
-			Set<Class<?>> set = ClassUtil.scanPackage(SystemTool.deduceMainApplicationClassName());
+			Set<Class<?>> set = ClassUtil.scanPackage(ClassUtils.getPackageName(cla.getClass()));
 			for (Class<?> clazz : set) {
 				IgnoreDocument ignoreDocument = clazz.getAnnotation(IgnoreDocument.class);
 				if (ignoreDocument != null) {

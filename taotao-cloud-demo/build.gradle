@@ -7,13 +7,16 @@ configurations {
 dependencies {
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal')
-//	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
+	api('org.springframework.boot:spring-boot-starter-data-redis'){
+		exclude group: 'org.yaml', module: 'snakeyaml'
+	}
+	//	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
 //	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket')
 
-	api 'com.ctrip.framework.apollo:apollo-client:1.9.1'
+//	api 'com.ctrip.framework.apollo:apollo-client:1.9.1'
 	api "mysql:mysql-connector-java"
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'

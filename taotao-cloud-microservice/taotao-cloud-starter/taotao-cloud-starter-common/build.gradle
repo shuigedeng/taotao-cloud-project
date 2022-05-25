@@ -68,6 +68,8 @@ dependencies {
     api 'org.springframework.boot:spring-boot-autoconfigure'
 
     api "org.springframework.cloud:spring-cloud-context"
+    api 'org.springframework.boot:spring-boot-actuator'
+    api 'org.springframework.boot:spring-boot-actuator-autoconfigure'
 
     // serializable
     api 'com.esotericsoftware:kryo'

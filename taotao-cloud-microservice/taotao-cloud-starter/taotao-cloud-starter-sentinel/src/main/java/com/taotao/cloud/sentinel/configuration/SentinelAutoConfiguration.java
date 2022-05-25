@@ -32,13 +32,11 @@ import feign.Feign;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -98,7 +96,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 	@ConditionalOnClass(ServerResponse.class)
 	public BlockRequestHandler blockRequestHandler() {
 		return (exchange, e) -> {
-			LogUtil.error("ServerResponse sentinel 降级 资源名称{}",e, e.getCause());
+			LogUtil.error("ServerResponse sentinel 降级 资源名称{}", e, e.getCause());
 			return ServerResponse.status(HttpStatus.TOO_MANY_REQUESTS)
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromValue(Result.fail(e.getMessage())));
