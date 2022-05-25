@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+
 /**
  * 发票搜索参数
  * @author shuigedeng
@@ -23,6 +25,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "发票搜索参数")
 public class ReceiptPageQuery extends PageParam {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "发票抬头")
 	private String receiptTitle;

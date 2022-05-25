@@ -1,6 +1,9 @@
 package com.taotao.cloud.member.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +22,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员收货地址DTO")
-public class MemberAddressVO {
+public class MemberAddressVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "会员ID")
 	private String memberId;

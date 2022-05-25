@@ -6,6 +6,8 @@ import java.io.Serial;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,8 +20,8 @@ import lombok.experimental.SuperBuilder;
  * @version 2022.04
  * @since 2022-04-25 16:34:20
  */
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor

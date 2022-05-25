@@ -3,9 +3,9 @@ package com.taotao.cloud.message.api.dto;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 2022-05-19 14:59:16
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class NoticeMessageDTO {

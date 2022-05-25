@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+
 /**
  * 店铺流水查询DTO
  *
@@ -22,6 +24,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "店铺流水查询DTO")
 public class StoreFlowPageQuery extends PageParam {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "类型")
 	private String type;

@@ -1,11 +1,15 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
 import java.util.Comparator;
 import java.util.List;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 分类VO
@@ -21,6 +25,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class CategoryVO extends CategoryBaseVO {
 
+	@Serial
 	private static final long serialVersionUID = 3775766246075838410L;
 
 	@Schema(description = "父节点名称")

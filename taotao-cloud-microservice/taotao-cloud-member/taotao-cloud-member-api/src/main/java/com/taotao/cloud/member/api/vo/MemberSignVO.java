@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 会员签到DTO
  *
@@ -18,7 +21,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员签到DTO")
-public class MemberSignVO {
+public class MemberSignVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "会员用户名")
 	private String memberName;

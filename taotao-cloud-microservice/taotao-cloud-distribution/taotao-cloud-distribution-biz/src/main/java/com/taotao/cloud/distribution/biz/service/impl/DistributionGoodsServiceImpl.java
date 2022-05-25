@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.mapper.DistributionGoodsMapper;
@@ -40,7 +40,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
     private IFeignGoodsSkuService goodsSkuService;
 
     @Override
-    public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsSearchParams searchParams) {
+    public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery searchParams) {
         //获取商家的分销商品列表
         if (Objects.requireNonNull(UserContext.getCurrentUser()).getRole().equals(UserEnums.STORE)) {
             return this.baseMapper.getDistributionGoodsVO(PageUtil.initPage(searchParams), searchParams.storeQueryWrapper());
@@ -64,33 +64,33 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
     /**
      * 根据条件查询分销商品信息列表
      *
-     * @param distributionGoodsSearchParams 商品条件
+     * @param distributionGoodsPageQuery 商品条件
      * @return 分销商品信息列表
      */
     @Override
-    public List<DistributionGoods> getDistributionGoodsList(DistributionGoodsSearchParams distributionGoodsSearchParams) {
-        return this.list(distributionGoodsSearchParams.queryWrapper());
+    public List<DistributionGoods> getDistributionGoodsList(DistributionGoodsPageQuery distributionGoodsPageQuery) {
+        return this.list(distributionGoodsPageQuery.queryWrapper());
     }
 
     /**
      * 根据条件查询分销商品信息
      *
-     * @param distributionGoodsSearchParams 条件
+     * @param distributionGoodsPageQuery 条件
      * @return 分销商品信息
      */
     @Override
-    public DistributionGoods getDistributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
-        return this.getOne(distributionGoodsSearchParams.queryWrapper(), false);
+    public DistributionGoods getDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
+        return this.getOne(distributionGoodsPageQuery.queryWrapper(), false);
     }
 
     /**
      * 根据条件删除分销商品
      *
-     * @param distributionGoodsSearchParams 条件
+     * @param distributionGoodsPageQuery 条件
      */
     @Override
-    public boolean deleteDistributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
-        return this.remove(distributionGoodsSearchParams.queryWrapper());
+    public boolean deleteDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
+        return this.remove(distributionGoodsPageQuery.queryWrapper());
     }
 
     @Override

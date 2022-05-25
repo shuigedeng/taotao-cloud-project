@@ -1,11 +1,10 @@
 package com.taotao.cloud.member.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.store.api.dto.BillSearchParams;
+import com.taotao.cloud.store.api.query.BillPageQuery;
 import com.taotao.cloud.store.api.vo.BillListVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,10 +40,10 @@ public class BillStoreController {
 	@RequestLogger("获取结算单分页")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<IPage<BillListVO>> getByPage(BillSearchParams billSearchParams) {
+	public Result<IPage<BillListVO>> getByPage(BillPageQuery billPageQuery) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		billSearchParams.setStoreId(storeId);
-		return Result.success(billService.billPage(billSearchParams));
+		billPageQuery.setStoreId(storeId);
+		return Result.success(billService.billPage(billPageQuery));
 	}
 
 	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单")

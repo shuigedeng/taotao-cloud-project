@@ -1,6 +1,9 @@
 package com.taotao.cloud.member.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +18,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员评价VO")
-public class MemberEvaluationVO {
+public class MemberEvaluationVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 6696978796248845481L;
 
 	@Schema(description = "会员ID")

@@ -25,7 +25,6 @@ public class StoreGoodsLabelVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
-
 	@Schema(description = "店铺商品分类ID")
 	private Long id;
 

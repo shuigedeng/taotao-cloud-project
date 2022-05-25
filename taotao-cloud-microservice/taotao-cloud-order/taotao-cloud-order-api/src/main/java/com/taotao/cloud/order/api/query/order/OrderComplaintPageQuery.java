@@ -7,6 +7,8 @@ import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.io.Serial;
+
 /**
  * 订单投诉查询参数
  * @author shuigedeng
@@ -20,6 +22,9 @@ import lombok.*;
 @NoArgsConstructor
 @Schema(description = "订单投诉查询参数")
 public class OrderComplaintPageQuery extends PageParam {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	/**
 	 * @see ComplaintStatusEnum

@@ -1,10 +1,13 @@
-package com.taotao.cloud.store.api.vo;
+package com.taotao.cloud.store.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,9 +25,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺搜索参数VO")
-//public class StoreSearchParams extends PageVO implements Serializable {
-public class StoreSearchParams implements Serializable {
+public class StorePageQuery extends PageParam {
 
+	@Serial
 	private static final long serialVersionUID = 6916054310764833369L;
 
 	@Schema(description = "会员名称")

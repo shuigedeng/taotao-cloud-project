@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsOperateAllowable implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
 	/**
 	 * 上下架状态

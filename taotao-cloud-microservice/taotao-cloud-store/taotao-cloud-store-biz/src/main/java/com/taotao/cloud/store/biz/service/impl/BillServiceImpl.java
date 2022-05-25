@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.store.api.dto.BillSearchParams;
+import com.taotao.cloud.store.api.query.BillPageQuery;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import com.taotao.cloud.store.api.vo.BillListVO;
 import com.taotao.cloud.store.api.vo.StoreDetailVO;
@@ -148,9 +148,9 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
     }
 
     @Override
-    public IPage<BillListVO> billPage(BillSearchParams billSearchParams) {
-        QueryWrapper<BillListVO> queryWrapper = billSearchParams.queryWrapper();
-        return this.baseMapper.queryBillPage(PageUtil.initPage(billSearchParams), queryWrapper);
+    public IPage<BillListVO> billPage(BillPageQuery billPageQuery) {
+        QueryWrapper<BillListVO> queryWrapper = billPageQuery.queryWrapper();
+        return this.baseMapper.queryBillPage(PageUtil.initPage(billPageQuery), queryWrapper);
     }
 
     @Override

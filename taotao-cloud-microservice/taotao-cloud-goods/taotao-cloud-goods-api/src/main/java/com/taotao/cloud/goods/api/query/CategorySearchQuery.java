@@ -1,6 +1,9 @@
 package com.taotao.cloud.goods.api.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -21,7 +24,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategorySearchQuery {
+public class CategorySearchQuery implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "分类名称")
 	private String name;

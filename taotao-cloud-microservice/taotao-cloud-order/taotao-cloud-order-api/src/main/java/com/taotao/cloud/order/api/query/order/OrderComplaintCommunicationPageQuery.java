@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+
 /**
  * 订单投诉搜索参数
  * @author shuigedeng
@@ -21,6 +23,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "订单投诉搜索参数")
 public class OrderComplaintCommunicationPageQuery extends PageParam {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "投诉id")
 	private String complainId;

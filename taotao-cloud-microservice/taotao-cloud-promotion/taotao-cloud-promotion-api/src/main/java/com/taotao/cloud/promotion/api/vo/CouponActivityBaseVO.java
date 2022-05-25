@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 优惠券活动实体类
  *
@@ -17,7 +20,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CouponActivityBaseVO {
+public class CouponActivityBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
 
 	private Long id;
 	/**

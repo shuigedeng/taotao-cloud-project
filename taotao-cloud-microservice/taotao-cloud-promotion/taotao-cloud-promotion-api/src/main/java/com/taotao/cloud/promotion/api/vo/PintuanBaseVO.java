@@ -9,6 +9,8 @@ import lombok.experimental.SuperBuilder;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 拼团活动实体类
@@ -17,7 +19,10 @@ import javax.validation.constraints.NotNull;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PintuanBaseVO {
+public class PintuanBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 7814832369110695758L;
 
 	public static final String TABLE_NAME = "tt_pintuan";
 

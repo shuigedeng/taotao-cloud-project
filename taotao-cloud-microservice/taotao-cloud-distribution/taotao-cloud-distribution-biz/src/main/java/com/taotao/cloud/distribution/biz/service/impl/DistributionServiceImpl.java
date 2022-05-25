@@ -12,7 +12,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
-import com.taotao.cloud.distribution.api.dto.DistributionSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.distribution.biz.entity.Distribution;
 import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,9 +54,9 @@ public class DistributionServiceImpl extends
 	private IFeignSettingService settingService;
 
 	@Override
-	public IPage<Distribution> distributionPage(DistributionSearchParams distributionSearchParams,
-		PageParam page) {
-		return this.page(page.buildMpPage(), distributionSearchParams.queryWrapper());
+	public IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery,
+												PageParam page) {
+		return this.page(page.buildMpPage(), distributionPageQuery.queryWrapper());
 	}
 
 	@Override

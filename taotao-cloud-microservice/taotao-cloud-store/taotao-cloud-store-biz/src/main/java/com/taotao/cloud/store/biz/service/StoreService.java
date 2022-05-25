@@ -8,7 +8,7 @@ import com.taotao.cloud.store.api.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.dto.StoreEditDTO;
 import com.taotao.cloud.store.api.dto.StoreOtherInfoDTO;
-import com.taotao.cloud.store.api.vo.StoreSearchParams;
+import com.taotao.cloud.store.api.query.StorePageQuery;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import com.taotao.cloud.store.biz.entity.Store;
 
@@ -24,7 +24,7 @@ public interface StoreService extends IService<Store> {
      * @param entity
      * @return
      */
-    IPage<StoreVO> findByConditionPage(StoreSearchParams entity, PageVO page);
+    IPage<StoreVO> findByConditionPage(StorePageQuery entity, PageVO page);
 
     /**
      * 获取当前登录店铺信息

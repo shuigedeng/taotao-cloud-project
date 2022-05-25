@@ -17,7 +17,7 @@ package com.taotao.cloud.member.biz.roketmq.listener;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.member.api.dto.MemberPointMessage;
+import com.taotao.cloud.member.api.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.entity.MemberSign;
 import com.taotao.cloud.member.biz.roketmq.event.MemberLoginEvent;
@@ -113,9 +113,9 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 			case MEMBER_POINT_CHANGE:
 				for (MemberPointChangeEvent memberPointChangeEvent : memberPointChangeEvents) {
 					try {
-						MemberPointMessage memberPointMessage = JSONUtil.toBean(
-							new String(messageExt.getBody()), MemberPointMessage.class);
-						memberPointChangeEvent.memberPointChange(memberPointMessage);
+						MemberPointMessageDTO memberPointMessageDTO = JSONUtil.toBean(
+							new String(messageExt.getBody()), MemberPointMessageDTO.class);
+						memberPointChangeEvent.memberPointChange(memberPointMessageDTO);
 					} catch (Exception e) {
 						LogUtil.error("会员{},在{}业务中，状态修改事件执行异常",
 							new String(messageExt.getBody()),

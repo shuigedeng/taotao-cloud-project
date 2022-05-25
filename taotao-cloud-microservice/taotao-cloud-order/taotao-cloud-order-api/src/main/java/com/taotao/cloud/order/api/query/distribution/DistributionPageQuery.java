@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+
 @Setter
 @Getter
 @Builder
@@ -15,6 +17,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Schema(description = "售后搜索参数")
 public class DistributionPageQuery extends PageParam {
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
+
 	//结算单ID
 	private String id;
 }

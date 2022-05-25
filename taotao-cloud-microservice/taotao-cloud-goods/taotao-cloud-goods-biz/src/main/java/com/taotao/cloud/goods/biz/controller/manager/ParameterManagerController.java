@@ -54,8 +54,7 @@ public class ParameterManagerController {
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
 		@PathVariable Long id) {
-		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
-			parametersDTO);
+		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(parametersDTO);
 		parameters.setId(id);
 		return Result.success(parametersService.updateParameter(parameters));
 	}

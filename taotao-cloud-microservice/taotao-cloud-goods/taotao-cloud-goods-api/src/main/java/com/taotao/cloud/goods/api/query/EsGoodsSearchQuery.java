@@ -2,11 +2,15 @@ package com.taotao.cloud.goods.api.query;
 
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Map;
-
-import lombok.*;
 
 /**
  * es商品搜索查询
@@ -21,6 +25,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EsGoodsSearchQuery extends PageParam {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "关键字")
 	private String keyword;

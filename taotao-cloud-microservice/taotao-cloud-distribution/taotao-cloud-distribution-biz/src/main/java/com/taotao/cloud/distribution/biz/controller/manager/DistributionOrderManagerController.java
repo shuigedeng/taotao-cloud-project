@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.vo.DistributionOrderSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import io.swagger.annotations.Api;
@@ -35,8 +35,8 @@ public class DistributionOrderManagerController {
     @ApiOperation(value = "分页获取分销订单")
     @GetMapping(value = "/getByPage")
     public Result<IPage<DistributionOrder>> getByPage(
-	    DistributionOrderSearchParams distributionOrderSearchParams) {
+	    DistributionOrderPageQuery distributionOrderPageQuery) {
 
-        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams));
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
     }
 }

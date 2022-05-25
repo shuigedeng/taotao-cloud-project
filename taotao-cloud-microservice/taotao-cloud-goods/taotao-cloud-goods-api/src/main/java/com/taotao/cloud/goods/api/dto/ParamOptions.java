@@ -1,5 +1,7 @@
 package com.taotao.cloud.goods.api.dto;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +19,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParamOptions {
+public class ParamOptions implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
 
 	private String key;
 

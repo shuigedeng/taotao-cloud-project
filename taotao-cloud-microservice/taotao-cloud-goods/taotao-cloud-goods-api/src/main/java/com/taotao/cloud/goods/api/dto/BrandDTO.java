@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 品牌VO
  *
@@ -18,8 +21,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "品牌VO")
-public class BrandDTO {
+public class BrandDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 3829199991161122317L;
 
 	@Schema(description = "id")

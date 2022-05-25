@@ -64,8 +64,7 @@ public class SpecificationManagerController {
 	public Result<PageModel<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
 		IPage<Specification> specificationPage = specificationService.getPage(
 			specificationPageQuery);
-		return Result.success(
-			PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
+		return Result.success(PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
 	@Operation(summary = "保存规格", description = "保存规格")
@@ -83,11 +82,9 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
-		@PathVariable Long id) {
-		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(
-			specificationDTO);
+								  @PathVariable Long id) {
+		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(specificationDTO);
 		specification.setId(id);
-
 		return Result.success(specificationService.saveOrUpdate(specification));
 	}
 

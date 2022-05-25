@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 售后可操作类型
  */
@@ -15,18 +18,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后可操作类型")
-public class AfterSaleAllowOperation {
+public class AfterSaleAllowOperation implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "可以确认售后")
+	@Builder.Default
 	private Boolean confirm = false;
 
 	@Schema(description = "可以回寄物流")
+	@Builder.Default
 	private Boolean returnGoods = false;
 
 	@Schema(description = "可以收货")
+	@Builder.Default
 	private Boolean rog = false;
 
 	@Schema(description = "可以退款")
+	@Builder.Default
 	private Boolean refund = false;
 
 	@Schema(description = "买家确认收货")

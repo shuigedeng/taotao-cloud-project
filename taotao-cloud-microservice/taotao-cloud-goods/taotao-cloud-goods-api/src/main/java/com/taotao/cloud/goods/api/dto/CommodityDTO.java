@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 直播商品DTO 用于获取直播商品状态时使用
  *
@@ -17,8 +20,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommodityDTO {
+public class CommodityDTO implements Serializable {
 
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
+	
 	@Schema(description = "商品ID")
 	private Long goodsId;
 

@@ -5,6 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * 售后原因dto
  *
@@ -15,7 +18,10 @@ import lombok.Data;
 @Data
 @Builder
 @Schema(description = "售后原因dto")
-public class AfterSaleReasonDTO {
+public class AfterSaleReasonDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "售后原因")
 	private String reason;

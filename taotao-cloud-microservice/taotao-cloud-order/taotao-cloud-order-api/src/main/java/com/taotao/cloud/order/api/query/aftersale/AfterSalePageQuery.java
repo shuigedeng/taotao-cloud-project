@@ -8,6 +8,8 @@ import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +30,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Schema(description = "售后搜索参数")
 public class AfterSalePageQuery extends PageParam {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "售后服务单号")
 	private String sn;

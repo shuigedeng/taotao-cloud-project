@@ -3,7 +3,7 @@ package com.taotao.cloud.store.biz.service;
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.store.api.dto.BillSearchParams;
+import com.taotao.cloud.store.api.query.BillPageQuery;
 import com.taotao.cloud.store.api.vo.BillListVO;
 import com.taotao.cloud.store.biz.entity.Bill;
 import java.util.Date;
@@ -40,10 +40,10 @@ public interface BillService extends IService<Bill> {
 	/**
 	 * 获取结算单分页
 	 *
-	 * @param billSearchParams 结算单搜索条件
+	 * @param billPageQuery 结算单搜索条件
 	 * @return 结算单分页
 	 */
-	IPage<BillListVO> billPage(BillSearchParams billSearchParams);
+	IPage<BillListVO> billPage(BillPageQuery billPageQuery);
 
 	/**
 	 * 商家核对结算单

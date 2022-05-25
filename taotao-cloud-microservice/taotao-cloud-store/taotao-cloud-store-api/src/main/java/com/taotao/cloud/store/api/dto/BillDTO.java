@@ -1,6 +1,8 @@
 package com.taotao.cloud.store.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "结算单传输对象")
 public class BillDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 4441580387361184989L;
 
 	@Schema(description = "结算周期内订单付款总金额")

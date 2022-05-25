@@ -43,7 +43,7 @@ public class GoodsUnitStoreController {
 	@GetMapping
 	public Result<PageModel<GoodsUnitVO>> getByPage(PageParam pageParam) {
 		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
-		return Result.success(PageModel.convertMybatisPage(page,GoodsUnitVO.class));
+		return Result.success(PageModel.convertMybatisPage(page, GoodsUnitVO.class));
 	}
 
 }

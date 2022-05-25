@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -22,7 +23,8 @@ import java.util.List;
 @Schema(description = "订单vo")
 public class OrderVO extends OrderBaseVO {
 
-	private static final long serialVersionUID = 5820637554656388777L;
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "订单商品项目")
 	private List<OrderItem> orderItems;

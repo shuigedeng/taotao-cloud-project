@@ -132,7 +132,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}")
 	public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO,
-		@PathVariable Long goodsId) {
+								  @PathVariable Long goodsId) {
 		return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
 	}
 
@@ -167,7 +167,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/freight")
 	public Result<Boolean> freight(@RequestParam List<Long> goodsId,
-		@RequestParam Long templateId) {
+								   @RequestParam Long templateId) {
 		return Result.success(goodsService.freight(goodsId, templateId));
 	}
 

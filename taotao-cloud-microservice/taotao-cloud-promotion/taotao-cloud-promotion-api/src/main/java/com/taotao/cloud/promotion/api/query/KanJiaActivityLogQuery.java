@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 /**
  * 砍价活动参与实体类
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "砍价活动参与记录查询对象")
-public class KanJiaActivityLogQuery {
+public class KanJiaActivityLogQuery implements Serializable {
 
     private static final long serialVersionUID = -1583030890805926292L;
 

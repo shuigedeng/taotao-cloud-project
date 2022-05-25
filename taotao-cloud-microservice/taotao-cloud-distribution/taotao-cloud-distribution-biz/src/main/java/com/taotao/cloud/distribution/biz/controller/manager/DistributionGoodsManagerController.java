@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import io.swagger.annotations.Api;
@@ -27,8 +27,8 @@ public class DistributionGoodsManagerController {
     @GetMapping(value = "/getByPage")
     @ApiOperation(value = "分页获取")
     public Result<IPage<DistributionGoodsVO>> getByPage(
-	    DistributionGoodsSearchParams distributionGoodsSearchParams) {
-        return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
+	    DistributionGoodsPageQuery distributionGoodsPageQuery) {
+        return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
     }
 
 

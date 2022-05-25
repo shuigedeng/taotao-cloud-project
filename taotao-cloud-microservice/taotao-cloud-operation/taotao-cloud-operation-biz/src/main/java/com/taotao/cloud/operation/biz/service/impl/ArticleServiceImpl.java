@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.operation.api.dto.ArticleSearchParams;
+import com.taotao.cloud.operation.api.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.cloud.operation.api.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.entity.Article;
@@ -27,17 +27,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 	ArticleService {
 
     @Override
-    public IPage<ArticleVO> managerArticlePage(ArticleSearchParams articleSearchParams) {
-        articleSearchParams.setSort("a.sort");
-        return this.baseMapper.getArticleList(PageUtil.initPage(articleSearchParams), articleSearchParams.queryWrapper());
+    public IPage<ArticleVO> managerArticlePage(ArticlePageQuery articlePageQuery) {
+        articlePageQuery.setSort("a.sort");
+        return this.baseMapper.getArticleList(PageUtil.initPage(articlePageQuery), articlePageQuery.queryWrapper());
     }
 
     @Override
-    public IPage<ArticleVO> articlePage(ArticleSearchParams articleSearchParams) {
-        articleSearchParams.setSort("a.sort");
-        QueryWrapper queryWrapper = articleSearchParams.queryWrapper();
+    public IPage<ArticleVO> articlePage(ArticlePageQuery articlePageQuery) {
+        articlePageQuery.setSort("a.sort");
+        QueryWrapper queryWrapper = articlePageQuery.queryWrapper();
         queryWrapper.eq("open_status", true);
-        return this.baseMapper.getArticleList(PageUtil.initPage(articleSearchParams), queryWrapper);
+        return this.baseMapper.getArticleList(PageUtil.initPage(articlePageQuery), queryWrapper);
     }
 
     @Override

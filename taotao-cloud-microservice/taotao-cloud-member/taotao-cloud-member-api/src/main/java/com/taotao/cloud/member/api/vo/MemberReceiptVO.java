@@ -9,6 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 
 /**
  * 会员发票查询VO
@@ -18,8 +21,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员发票查询VO")
-public class MemberReceiptVO {
+public class MemberReceiptVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -8210927982915677995L;
 
 	@Schema(description = "会员ID")

@@ -1,4 +1,4 @@
-package com.taotao.cloud.operation.api.dto;
+package com.taotao.cloud.operation.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -17,7 +17,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticleSearchParams extends PageParam {
+public class ArticlePageQuery extends PageParam {
 
 	@Schema(description = "文章分类ID")
 	private String categoryId;

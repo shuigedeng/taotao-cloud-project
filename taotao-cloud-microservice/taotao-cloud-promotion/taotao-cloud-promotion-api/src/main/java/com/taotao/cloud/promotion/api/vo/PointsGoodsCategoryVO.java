@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -16,12 +18,12 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PointsGoodsCategoryVO {
+public class PointsGoodsCategoryVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 5528833118735059182L;
 
 	private Long id;
-
 
 	@NotEmpty(message = "分类名称不能为空")
 	@Schema(description = "分类名称")

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -20,7 +21,8 @@ import java.util.List;
 @NoArgsConstructor
 public class PintuanVO extends PintuanBaseVO {
 
-    private static final long serialVersionUID = 218582640653676201L;
+    @Serial
+	private static final long serialVersionUID = 218582640653676201L;
 
     private List<PromotionGoodsVO> promotionGoodsList;
 }

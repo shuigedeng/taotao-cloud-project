@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.experimental.SuperBuilder;
 
@@ -19,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasePromotionsDTO {
+public class BasePromotionsDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 7814832369110695758L;

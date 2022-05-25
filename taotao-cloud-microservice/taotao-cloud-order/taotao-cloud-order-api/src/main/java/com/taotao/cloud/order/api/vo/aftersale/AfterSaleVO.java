@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -16,7 +18,10 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @Schema(description = "售后VO")
-public class AfterSaleVO {
+public class AfterSaleVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
 
 	@Schema(description = "id")
 	private Long id;

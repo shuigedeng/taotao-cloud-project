@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -19,7 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeckillGoodsVO implements Serializable {
 
-    private static final long serialVersionUID = 5170316685407828228L;
+    @Serial
+	private static final long serialVersionUID = 5170316685407828228L;
 
     @Schema(description =  "活动id")
     private String seckillId;

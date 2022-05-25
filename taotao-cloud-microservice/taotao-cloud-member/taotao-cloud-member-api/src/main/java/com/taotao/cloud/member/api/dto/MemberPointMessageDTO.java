@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "租户id")
-public class MemberPointMessage implements Serializable {
+public class MemberPointMessageDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

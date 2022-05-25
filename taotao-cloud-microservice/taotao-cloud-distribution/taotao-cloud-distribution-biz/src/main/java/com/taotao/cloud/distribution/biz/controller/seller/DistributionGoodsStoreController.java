@@ -3,7 +3,7 @@ package com.taotao.cloud.distribution.biz.controller.seller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.dto.DistributionGoodsSearchParams;
+import com.taotao.cloud.distribution.api.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
@@ -42,9 +42,9 @@ public class DistributionGoodsStoreController {
     @ApiOperation(value = "获取分销商商品列表")
     @GetMapping
     public Result<IPage<DistributionGoodsVO>> distributionGoods(
-	    DistributionGoodsSearchParams distributionGoodsSearchParams) {
+	    DistributionGoodsPageQuery distributionGoodsPageQuery) {
 
-        return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
+        return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
     }
 
     @ApiOperation(value = "选择商品参与分销")
