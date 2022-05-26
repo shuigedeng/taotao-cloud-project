@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,6 +14,7 @@ import java.util.Objects;
  * @version 2022.04
  * @since 2022-04-25 16:34:05
  */
+@RecordBuilder
 public record GoodsOperateAllowable(
 	/**
 	 * 上下架状态

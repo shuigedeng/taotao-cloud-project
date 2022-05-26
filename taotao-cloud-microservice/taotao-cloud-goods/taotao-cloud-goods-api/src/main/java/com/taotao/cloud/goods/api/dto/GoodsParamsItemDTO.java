@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-25 16:31:32
  */
+@RecordBuilder
 @Schema(description = "商品参数列表")
 public record GoodsParamsItemDTO(
 	@Schema(description = "参数ID")

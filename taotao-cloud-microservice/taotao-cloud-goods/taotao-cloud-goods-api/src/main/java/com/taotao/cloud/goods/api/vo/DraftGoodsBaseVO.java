@@ -3,6 +3,8 @@ package com.taotao.cloud.goods.api.vo;
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
  * @version 2022.04
  * @since 2022-04-25 16:33:53
  */
+@RecordBuilder
 public record DraftGoodsBaseVO(
 	Long id,
 

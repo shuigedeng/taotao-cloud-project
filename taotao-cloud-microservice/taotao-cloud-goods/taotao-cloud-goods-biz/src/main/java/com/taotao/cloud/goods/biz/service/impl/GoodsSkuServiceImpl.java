@@ -20,10 +20,14 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.event.GeneratorEsGoodsIndexEvent;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuSpecVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecVOBuilder;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVOBuilder;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.api.vo.SpecValueVO;
+import com.taotao.cloud.goods.api.vo.SpecValueVOBuilder;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsAttribute;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.entity.Goods;
@@ -55,6 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -154,8 +159,8 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 			List<Long> oldSkuIds = new ArrayList<>();
 			//删除旧索引
 			for (GoodsSkuVO goodsSkuVO : goodsListByGoodsId) {
-				oldSkuIds.add(goodsSkuVO.getId());
-				redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSkuVO.getId()));
+				oldSkuIds.add(goodsSkuVO.goodsSkuBase().id());
+				redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSkuVO.goodsSkuBase().id()));
 			}
 			goodsIndexService.deleteIndexByIds(oldSkuIds);
 			this.removeByIds(oldSkuIds);
@@ -242,7 +247,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 		GoodsVO goodsVO = goodsService.getGoodsVO(goodsId);
 		//如果skuid为空，则使用商品VO中sku信息获取
 		if (Objects.nonNull(skuId)) {
-			skuId = goodsVO.getSkuList().get(0).getId();
+			skuId = goodsVO.skuList().get(0).goodsSkuBase().id();
 		}
 
 		//从缓存拿商品Sku
@@ -253,9 +258,9 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 		}
 
 		//商品下架||商品未审核通过||商品删除，则提示：商品已下架
-		if (GoodsStatusEnum.DOWN.name().equals(goodsVO.getMarketEnable())
-			|| !GoodsAuthEnum.PASS.name().equals(goodsVO.getIsAuth())
-			|| Boolean.TRUE.equals(goodsVO.getDelFlag())) {
+		if (GoodsStatusEnum.DOWN.name().equals(goodsVO.goodsBase().marketEnable())
+			|| !GoodsAuthEnum.PASS.name().equals(goodsVO.goodsBase().isAuth())
+			|| Boolean.TRUE.equals(goodsVO.goodsBase().delFlag())) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
@@ -263,7 +268,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 		EsGoodsIndex goodsIndex = goodsIndexService.findById(skuId);
 		if (goodsIndex == null) {
 			goodsIndex = goodsIndexService.getResetEsGoodsIndex(goodsSku,
-				goodsVO.getGoodsParamsDTOList());
+				goodsVO.goodsParamsDTOList());
 		}
 
 		//商品规格
@@ -286,14 +291,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 			}).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
 			Optional<Entry<String, Object>> containsPromotion = promotionMap.entrySet().stream()
-				.filter(i ->
-					i.getKey().contains(PromotionTypeEnum.SECKILL.name()) || i.getKey()
-						.contains(PromotionTypeEnum.PINTUAN.name())).findFirst();
+				.filter(i -> i.getKey().contains(PromotionTypeEnum.SECKILL.name()) || i.getKey()
+						.contains(PromotionTypeEnum.PINTUAN.name()))
+				.findFirst();
 			if (containsPromotion.isPresent()) {
 				JSONObject jsonObject = JSONUtil.parseObj(containsPromotion.get().getValue());
 				PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
-				searchParams.setSkuId(String.valueOf(skuId));
-				searchParams.setPromotionId(jsonObject.get("id").toString());
+				searchParams.setSkuId(skuId);
+				searchParams.setPromotionId(Long.valueOf(jsonObject.get("id").toString()));
 				PromotionGoodsVO promotionsGoods = promotionGoodsService.getPromotionsGoods(
 					searchParams).data();
 				if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
@@ -308,16 +313,16 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 		map.put("data", goodsSkuDetail);
 
 		//获取分类
-		String[] split = goodsSkuDetail.getCategoryPath().split(",");
-		//map.put("categoryName", categoryService.getCategoryNameByIds(Arrays.asList(split)));
+		String[] split = goodsSkuDetail.goodsSkuBase().categoryPath().split(",");
+		map.put("categoryName", categoryService.getCategoryNameByIds(Arrays.asList(split)));
 
 		//获取规格信息
-		map.put("specs", this.groupBySkuAndSpec(goodsVO.getSkuList()));
+		map.put("specs", this.groupBySkuAndSpec(goodsVO.skuList()));
 		map.put("promotionMap", promotionMap);
 
 		//获取参数信息
-		if (goodsVO.getGoodsParamsDTOList() != null && !goodsVO.getGoodsParamsDTOList().isEmpty()) {
-			map.put("goodsParamsDTOList", goodsVO.getGoodsParamsDTOList());
+		if (goodsVO.goodsParamsDTOList() != null && !goodsVO.goodsParamsDTOList().isEmpty()) {
+			map.put("goodsParamsDTOList", goodsVO.goodsParamsDTOList());
 		}
 
 		//记录用户足迹
@@ -398,7 +403,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 	@Override
 	public GoodsSkuVO getGoodsSkuVO(GoodsSku goodsSku) {
 		//初始化商品
-		GoodsSkuVO goodsSkuVO = IGoodsSkuMapStruct.INSTANCE.goodsSkuToGoodsSkuVO(goodsSku);
+		GoodsSkuBaseVO goodsSkuBaseVO = IGoodsSkuMapStruct.INSTANCE.goodsSkuToGoodsSkuBaseVO(goodsSku);
 		//获取规格信息
 		JSONObject jsonObject = JSONUtil.parseObj(goodsSku.getSpecs());
 		//规格值信息
@@ -408,25 +413,30 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 
 		//循环提交的sku表单
 		for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-			SpecValueVO specValueVO = new SpecValueVO();
+			SpecValueVO specValueVO = SpecValueVOBuilder.builder().build();
 			if ("images".equals(entry.getKey())) {
-				specValueVO.setSpecName(entry.getKey());
+				specValueVO = SpecValueVOBuilder.builder(specValueVO).specName(entry.getKey()).build();
 				if (entry.getValue().toString().contains("url")) {
 					List<SpecValueVO.SpecImages> specImages = JSONUtil.toList(
 						JSONUtil.parseArray(entry.getValue()), SpecValueVO.SpecImages.class);
-					specValueVO.setSpecImage(specImages);
+					specValueVO = SpecValueVOBuilder.builder(specValueVO).specImage(specImages).build();
 					goodsGalleryList = specImages.stream()
 						.map(SpecValueVO.SpecImages::getUrl).toList();
 				}
 			} else {
-				specValueVO.setSpecName(entry.getKey());
-				specValueVO.setSpecValue(entry.getValue().toString());
+				specValueVO = SpecValueVOBuilder
+					.builder(specValueVO)
+					.specName(entry.getKey())
+					.specValue(entry.getValue().toString())
+					.build();
 			}
 			specValueVOS.add(specValueVO);
 		}
-		goodsSkuVO.setGoodsGalleryList(goodsGalleryList);
-		goodsSkuVO.setSpecList(specValueVOS);
-		return goodsSkuVO;
+		return GoodsSkuVOBuilder.builder()
+			.goodsGalleryList(goodsGalleryList)
+			.specList(specValueVOS)
+			.goodsSkuBase(goodsSkuBaseVO)
+			.build();
 	}
 
 	@Override
@@ -444,7 +454,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateStocks(List<GoodsSkuStockDTO> goodsSkuStockDTOS) {
 		for (GoodsSkuStockDTO goodsSkuStockDTO : goodsSkuStockDTOS) {
-			this.updateStock(goodsSkuStockDTO.getSkuId(), goodsSkuStockDTO.getQuantity());
+			this.updateStock(goodsSkuStockDTO.skuId(), goodsSkuStockDTO.quantity());
 		}
 		return true;
 	}
@@ -751,10 +761,12 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 	private List<GoodsSkuSpecVO> groupBySkuAndSpec(List<GoodsSkuVO> goodsSkuVOList) {
 		List<GoodsSkuSpecVO> skuSpecVOList = new ArrayList<>();
 		for (GoodsSkuVO goodsSkuVO : goodsSkuVOList) {
-			GoodsSkuSpecVO specVO = new GoodsSkuSpecVO();
-			specVO.setSkuId(goodsSkuVO.getId());
-			specVO.setSpecValues(goodsSkuVO.getSpecList());
-			specVO.setQuantity(goodsSkuVO.getQuantity());
+			GoodsSkuSpecVO specVO = GoodsSkuSpecVOBuilder
+				.builder()
+				.skuId(goodsSkuVO.goodsSkuBase().id())
+				.specValues(goodsSkuVO.specList())
+				.quantity(goodsSkuVO.goodsSkuBase().quantity())
+				.build();
 			skuSpecVOList.add(specVO);
 		}
 		return skuSpecVOList;

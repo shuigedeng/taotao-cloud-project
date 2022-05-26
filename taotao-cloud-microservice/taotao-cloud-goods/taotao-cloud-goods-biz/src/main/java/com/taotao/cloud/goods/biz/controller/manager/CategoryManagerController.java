@@ -94,7 +94,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryVO category) {
-		Category catTemp = categoryService.getById(category.getId());
+		Category catTemp = categoryService.getById(category.id());
 		if (catTemp == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}

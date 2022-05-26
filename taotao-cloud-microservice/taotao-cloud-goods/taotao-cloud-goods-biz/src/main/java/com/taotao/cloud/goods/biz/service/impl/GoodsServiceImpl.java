@@ -15,14 +15,18 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.func.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVOBuilder;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.api.vo.GoodsVOBuilder;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
@@ -51,6 +55,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -154,21 +159,21 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		//检查商品
 		this.checkGoods(goods);
 		//向goods加入图片
-		this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
+		this.setGoodsGalleryParam(goodsOperationDTO.goodsGalleryList().get(0), goods);
 		//添加商品参数
-		if (goodsOperationDTO.getGoodsParamsDTOList() != null
-			&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
+		if (goodsOperationDTO.goodsParamsDTOList() != null
+			&& !goodsOperationDTO.goodsParamsDTOList().isEmpty()) {
 			//给商品参数填充值
-			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
+			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.goodsParamsDTOList()));
 		}
 		//添加商品
 		this.save(goods);
 		//添加商品sku信息
-		this.goodsSkuService.add(goodsOperationDTO.getSkuList(), goods);
+		this.goodsSkuService.add(goodsOperationDTO.skuList(), goods);
 		//添加相册
-		if (goodsOperationDTO.getGoodsGalleryList() != null
-			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
-			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
+		if (goodsOperationDTO.goodsGalleryList() != null
+			&& !goodsOperationDTO.goodsGalleryList().isEmpty()) {
+			this.goodsGalleryService.add(goodsOperationDTO.goodsGalleryList(), goods.getId());
 		}
 		return true;
 	}
@@ -183,21 +188,21 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		//检查商品信息
 		this.checkGoods(goods);
 		//向goods加入图片
-		this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
+		this.setGoodsGalleryParam(goodsOperationDTO.goodsGalleryList().get(0), goods);
 		//添加商品参数
-		if (goodsOperationDTO.getGoodsParamsDTOList() != null
-			&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
-			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
+		if (goodsOperationDTO.goodsParamsDTOList() != null
+			&& !goodsOperationDTO.goodsParamsDTOList().isEmpty()) {
+			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.goodsParamsDTOList()));
 		}
 		//修改商品
 		this.updateById(goods);
 		//修改商品sku信息
-		this.goodsSkuService.update(goodsOperationDTO.getSkuList(), goods,
-			goodsOperationDTO.getRegeneratorSkuFlag());
+		this.goodsSkuService.update(goodsOperationDTO.skuList(), goods,
+			goodsOperationDTO.regeneratorSkuFlag());
 		//添加相册
-		if (goodsOperationDTO.getGoodsGalleryList() != null
-			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
-			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
+		if (goodsOperationDTO.goodsGalleryList() != null
+			&& !goodsOperationDTO.goodsGalleryList().isEmpty()) {
+			this.goodsGalleryService.add(goodsOperationDTO.goodsGalleryList(), goods.getId());
 		}
 		if (GoodsAuthEnum.TOBEAUDITED.name().equals(goods.getIsAuth())) {
 			this.deleteEsGoods(Collections.singletonList(goodsId));
@@ -220,34 +225,35 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 			LogUtil.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
-		//赋值
-		goodsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsVO(goods);
-		//商品id
-		goodsVO.setId(goods.getId());
-		//商品相册
+
 		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-		goodsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
-			.map(GoodsGallery::getOriginal).toList());
-		//商品sku赋值
 		List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
-		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
-			goodsVO.setSkuList(goodsListByGoodsId);
-		}
-		//商品分类名称赋值
+
 		String categoryPath = goods.getCategoryPath();
 		String[] strArray = categoryPath.split(",");
 		List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
-		goodsVO.setCategoryName(categories.stream().filter(Objects::nonNull)
-			.map(Category::getName).toList());
 
-		//参数非空则填写参数
-		if (StrUtil.isNotEmpty(goods.getParams())) {
-			goodsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
-		}
+		//赋值
+		GoodsBaseVO goodsBaseVO = IGoodsMapStruct.INSTANCE.goodsToGoodsBaseVO(goods);
+		goodsVO = GoodsVOBuilder
+			.builder()
+			//商品id
+			.goodsBase(GoodsBaseVOBuilder.builder(goodsBaseVO).id(goods.getId()).build())
+			//商品相册
+			.goodsGalleryList(galleryList.stream().filter(Objects::nonNull).map(GoodsGallery::getOriginal).toList())
+			//商品sku赋值
+			.skuList(FuncUtil.predicate(goodsListByGoodsId, t -> t != null && !t.isEmpty(), new ArrayList<>()))
+			//商品分类名称赋值
+			.categoryName(categories.stream().filter(Objects::nonNull).map(Category::getName).toList())
+			//商品参数
+			.goodsParamsDTOList(FuncUtil.predicate(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class),
+				() -> StrUtil.isNotEmpty(goods.getParams()), new ArrayList<>()))
+			.build();
 
 		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
 		return goodsVO;
 	}
+
 
 	@Override
 	public IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery) {
@@ -284,7 +290,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
-		String underReason) {
+										 String underReason) {
 		boolean result;
 
 		//如果商品为空，直接返回
@@ -315,7 +321,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds,
-		GoodsStatusEnum goodsStatusEnum, String underReason) {
+												GoodsStatusEnum goodsStatusEnum, String underReason) {
 		boolean result;
 
 		//如果商品为空，直接返回

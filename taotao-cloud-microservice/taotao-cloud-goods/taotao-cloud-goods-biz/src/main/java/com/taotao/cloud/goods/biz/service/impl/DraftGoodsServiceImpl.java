@@ -56,6 +56,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 
 	@Override
 	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
+
 		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
 		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
 		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));

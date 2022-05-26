@@ -67,7 +67,7 @@ public class ParametersServiceImpl extends ServiceImpl<IParametersMapper, Parame
 				List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params,
 					GoodsParamsDTO.class);
 				List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream().filter(
-						i -> i.getGroupId() != null && i.getGroupId().equals(parameters.getGroupId()))
+						i -> i.groupId() != null && i.groupId().equals(parameters.getGroupId()))
 					.collect(Collectors.toList());
 				this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
 				this.goodsService.updateGoodsParams(Convert.toLong(goods.get("id")),
@@ -93,10 +93,11 @@ public class ParametersServiceImpl extends ServiceImpl<IParametersMapper, Parame
 	private void setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList,
 									 Parameters parameters) {
 		for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
-			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList()
+			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.goodsParamsItemDTOList()
 				.stream()
-				.filter(i -> i.getParamId() != null && i.getParamId().equals(parameters.getId()))
-				.collect(Collectors.toList());
+				.filter(i -> i.paramId() != null && i.paramId().equals(parameters.getId()))
+				.toList();
+
 			for (GoodsParamsItemDTO goodsParamsItemDTO : goodsParamsItemDTOList) {
 				this.setGoodsItemDTO(goodsParamsItemDTO, parameters);
 			}

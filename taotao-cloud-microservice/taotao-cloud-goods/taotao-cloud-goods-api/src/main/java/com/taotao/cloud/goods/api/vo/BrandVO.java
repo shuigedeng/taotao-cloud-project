@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.vo;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:33:30
  */
+@RecordBuilder
 @Schema(description = "品牌VO")
 public record BrandVO(
 	@Schema(description = "id")

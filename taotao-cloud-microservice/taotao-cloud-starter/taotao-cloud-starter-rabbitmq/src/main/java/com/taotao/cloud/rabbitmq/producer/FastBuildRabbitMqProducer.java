@@ -92,15 +92,15 @@ public class FastBuildRabbitMqProducer {
 		});
 
 		rabbitTemplate
-			.setReturnCallback((message, replyCode, replyText, tmpExchange, tmpRoutingKey) -> {
+			.setReturnsCallback((message) -> {
 				try {
 					Thread.sleep(FastOcpRabbitMqConstants.ONE_SECOND);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				LogUtil.info("send message failed: " + replyCode + " " + replyText);
-				rabbitTemplate.send(message);
+				LogUtil.info("send message failed: " + message.getReplyCode() + " " + message.getReplyText());
+				rabbitTemplate.send(message.getMessage());
 			});
 
 		return new MessageSender() {
@@ -135,9 +135,9 @@ public class FastBuildRabbitMqProducer {
 		final String queue, Connection connection, String type) throws IOException {
 		Channel channel = connection.createChannel(false);
 
-		if (type.equals("direct")) {
+		if ("direct".equals(type)) {
 			channel.exchangeDeclare(exchange, "direct", true, false, null);
-		} else if (type.equals("topic")) {
+		} else if ("topic".equals(type)) {
 			channel.exchangeDeclare(exchange, "topic", true, false, null);
 		}
 

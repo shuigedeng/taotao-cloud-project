@@ -72,12 +72,13 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 			List<Long> collect = list.stream().map(CategoryBrand::getBrandId).toList();
 			return this.list(new LambdaQueryWrapper<Brand>().in(Brand::getId, collect));
 		}
+
 		return new ArrayList<>();
 	}
 
 	@Override
 	public Boolean addBrand(BrandDTO brandDTO) {
-		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName()))
+		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.name()))
 			!= null) {
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
@@ -86,10 +87,10 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 
 	@Override
 	public Boolean updateBrand(BrandDTO brandDTO) {
-		this.checkExist(brandDTO.getId());
+		this.checkExist(brandDTO.id());
 
-		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName())
-			.ne(Brand::getId, brandDTO.getId())) != null) {
+		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.name())
+			.ne(Brand::getId, brandDTO.id())) != null) {
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
 

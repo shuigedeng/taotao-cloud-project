@@ -3,6 +3,7 @@ package com.taotao.cloud.goods.api.vo;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
  * @version 2022.04
  * @since 2022-04-14 21:15:33
  */
+@RecordBuilder
 @Schema(description = "商品sku基础VO")
 public record GoodsSkuBaseVO(
 	Long id,

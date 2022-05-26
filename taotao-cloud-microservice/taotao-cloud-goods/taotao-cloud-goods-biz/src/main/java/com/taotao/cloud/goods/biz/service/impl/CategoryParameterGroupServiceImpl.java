@@ -9,6 +9,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
+import com.taotao.cloud.goods.api.vo.ParameterGroupVOBuilder;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Parameters;
@@ -81,8 +82,9 @@ public class CategoryParameterGroupServiceImpl extends
 			String params = (String) goods.get("params");
 			List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params, GoodsParamsDTO.class);
 			List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
-				.filter(i -> i.getGroupId() != null && i.getGroupId().equals(origin.getId()))
+				.filter(i -> i.groupId() != null && i.groupId().equals(origin.getId()))
 				.toList();
+
 			for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
 				goodsParamsDTO.setGroupName(categoryParameterGroup.getGroupName());
 			}
@@ -108,7 +110,7 @@ public class CategoryParameterGroupServiceImpl extends
 	 * @return 参数组和参数的返回值
 	 */
 	public List<ParameterGroupVO> convertParamList(List<CategoryParameterGroup> groupList,
-		List<Parameters> paramList) {
+												   List<Parameters> paramList) {
 		Map<Long, List<Parameters>> map = new HashMap<>(paramList.size());
 		for (Parameters param : paramList) {
 			List<Parameters> list = map.get(param.getGroupId());
@@ -121,13 +123,13 @@ public class CategoryParameterGroupServiceImpl extends
 
 		List<ParameterGroupVO> resList = new ArrayList<>();
 		for (CategoryParameterGroup group : groupList) {
-			ParameterGroupVO groupVo = new ParameterGroupVO();
-			groupVo.setGroupId(group.getId());
-			groupVo.setGroupName(group.getGroupName());
-			groupVo.setParams(
-				map.get(group.getId()) == null ? new ArrayList<>()
+			ParameterGroupVO groupVo = ParameterGroupVOBuilder.builder()
+				.groupId(group.getId())
+				.groupName(group.getGroupName())
+				.params(map.get(group.getId()) == null ? new ArrayList<>()
 					: IParametersMapStruct.INSTANCE.parametersToParametersVOs(
-						map.get(group.getId())));
+					map.get(group.getId())))
+				.build();
 			resList.add(groupVo);
 		}
 		return resList;

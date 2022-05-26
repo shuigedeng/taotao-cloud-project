@@ -189,8 +189,7 @@ public class GoodsStoreController {
 	public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
 		Long storeId = SecurityUtil.getUser().getStoreId();
 		// 获取商品skuId集合
-		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::getSkuId)
-			.collect(Collectors.toList());
+		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::skuId).toList();
 		// 根据skuId集合查询商品信息
 		List<GoodsSku> goodsSkuList = goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().in(GoodsSku::getId, goodsSkuIds)
@@ -198,7 +197,7 @@ public class GoodsStoreController {
 		// 过滤不符合当前店铺的商品
 		List<Long> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId).toList();
 		List<GoodsSkuStockDTO> collect = updateStockList.stream()
-			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).collect(Collectors.toList());
+			.filter(i -> filterGoodsSkuIds.contains(i.skuId())).collect(Collectors.toList());
 		return Result.success(goodsSkuService.updateStocks(collect));
 	}
 

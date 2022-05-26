@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.common.model.PageModel;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-14 21:52:39
  */
+@RecordBuilder
 public record StockWarningVO(
 
 	@Schema(description = "库存警告数量")

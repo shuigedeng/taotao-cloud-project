@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-20 15:59:38
  */
+@RecordBuilder
 public record DraftGoodsVO(
 	@Schema(description = "分类名称")
 	List<String> categoryName,

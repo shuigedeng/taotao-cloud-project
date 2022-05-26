@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
-import com.taotao.cloud.goods.biz.entity.GoodsSku;
+import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.api.vo.StudioBaseVO;
+import com.taotao.cloud.goods.biz.entity.Goods;
+import com.taotao.cloud.goods.biz.entity.Studio;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -28,26 +29,19 @@ import org.mapstruct.factory.Mappers;
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-27 16:58:24
+ * @since 2022-04-27 16:58:21
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IGoodsSkuMapStruct {
+public interface IStudioMapStruct {
 
 	/**
 	 * 实例
 	 */
-	IGoodsSkuMapStruct INSTANCE = Mappers.getMapper(IGoodsSkuMapStruct.class);
+	IStudioMapStruct INSTANCE = Mappers.getMapper(IStudioMapStruct.class);
 
-	/**
-	 * 产品sku产品sku签证官
-	 *
-	 * @param goodsSku 产品sku
-	 * @return {@link GoodsSkuVO }
-	 * @since 2022-04-27 16:58:24
-	 */
-	GoodsSkuBaseVO goodsSkuToGoodsSkuBaseVO(GoodsSku goodsSku);
+	StudioBaseVO studioToStudioBaseVO(Studio studio );
 
 
 }

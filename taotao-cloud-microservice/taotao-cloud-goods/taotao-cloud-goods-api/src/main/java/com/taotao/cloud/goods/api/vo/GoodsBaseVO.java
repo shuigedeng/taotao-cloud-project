@@ -1,6 +1,7 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * @version 2021.10
  * @since 2022-03-11 17:21:04
  */
+@RecordBuilder
 @Schema(description = "商品基础VO")
 public record GoodsBaseVO(
 

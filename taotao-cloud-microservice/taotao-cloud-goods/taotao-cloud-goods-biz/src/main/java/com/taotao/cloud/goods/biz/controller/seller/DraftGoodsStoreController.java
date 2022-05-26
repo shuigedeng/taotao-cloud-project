@@ -6,7 +6,10 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTOBuilder;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsDTOBuilder;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.DraftGoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
@@ -70,10 +73,10 @@ public class DraftGoodsStoreController {
 	@PostMapping
 	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsDTO draftGoodsDTO) {
 		Long storeId = SecurityUtil.getUser().getStoreId();
-		if (draftGoodsDTO.getStoreId() == null) {
-			draftGoodsDTO.setStoreId(storeId);
-		} else if (draftGoodsDTO.getStoreId() != null && !storeId.equals(
-			draftGoodsDTO.getStoreId())) {
+		if (draftGoodsDTO.draftGoodsBase().storeId() == null) {
+			DraftGoodsBaseDTO draftGoodsBaseDTO = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO.draftGoodsBase()).storeId(storeId).build();
+			draftGoodsDTO = DraftGoodsDTOBuilder.builder(draftGoodsDTO).draftGoodsBase(draftGoodsBaseDTO).build();
+		} else if (draftGoodsDTO.draftGoodsBase().storeId() != null && !storeId.equals(draftGoodsDTO.draftGoodsBase().storeId())) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 		return Result.success(draftGoodsService.saveGoodsDraft(draftGoodsDTO));
