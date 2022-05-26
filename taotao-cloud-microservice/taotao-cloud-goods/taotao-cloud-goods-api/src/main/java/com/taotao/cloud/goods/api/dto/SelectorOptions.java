@@ -15,22 +15,18 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-25 16:31:48
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class SelectorOptions implements Serializable {
+public record SelectorOptions(
+	String name,
+
+	String value,
+
+	String url,
+
+	List<SelectorOptions> otherOptions
+	) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
-
-	private String name;
-
-	private String value;
-
-	private String url;
-
-	private List<SelectorOptions> otherOptions;
 
 
 }

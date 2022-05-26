@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.api.bo.dict;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
  * @version 2022.03
  * @since 2022-03-23 08:49:51
  */
+@RecordBuilder
 public record DictBO(
 
 	/**

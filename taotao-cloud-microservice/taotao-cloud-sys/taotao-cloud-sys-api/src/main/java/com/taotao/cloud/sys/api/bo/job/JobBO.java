@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.api.bo.job;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ import java.io.Serializable;
  * @version 2022.03
  * @since 2022-03-23 08:49:58
  */
+@RecordBuilder
 public record JobBO(
 	/**
 	 * 岗位名称

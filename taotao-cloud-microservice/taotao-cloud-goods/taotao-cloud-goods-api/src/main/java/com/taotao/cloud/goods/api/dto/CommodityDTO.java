@@ -1,11 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -16,24 +11,23 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:31:07
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class CommodityDTO implements Serializable {
+@Schema(description = "直播商品")
+public record CommodityDTO(
+	@Schema(description = "商品ID")
+	Long goodsId,
+
+	@Schema(description = "商品名称")
+	String name,
+
+	@Schema(description = "url")
+	String url,
+
+	@Schema(description = "审核状态")
+	Integer auditStatus
+) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
-	
-	@Schema(description = "商品ID")
-	private Long goodsId;
 
-	@Schema(description = "商品名称")
-	private String name;
 
-	@Schema(description = "url")
-	private String url;
-
-	@Schema(description = "审核状态")
-	private Integer auditStatus;
 }

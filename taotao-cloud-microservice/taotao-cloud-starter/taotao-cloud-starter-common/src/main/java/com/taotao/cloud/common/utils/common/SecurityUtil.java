@@ -22,7 +22,9 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -78,6 +80,27 @@ public final class SecurityUtil {
 	}
 
 	/**
+	 * 当用户角色发生变化，或者用户角色对应的权限发生变化，那么就从数据库中重新查询用户相关信息
+	 *
+	 * @param newHerodotusUser 从数据库中重新查询并生成的用户信息
+	 */
+	public static void reloadAuthority(SecurityUser newHerodotusUser) {
+		// 重新new一个token，因为Authentication中的权限是不可变的.
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+			newHerodotusUser, newHerodotusUser.getPassword(),
+			newHerodotusUser.getAuthorities());
+		token.setDetails(getDetails());
+		getSecurityContext().setAuthentication(token);
+	}
+
+	public static Object getDetails() {
+		return getAuthentication().getDetails();
+	}
+	public static SecurityContext getSecurityContext() {
+		return SecurityContextHolder.getContext();
+	}
+
+	/**
 	 * 获取用户信息
 	 *
 	 * @param authentication 认证信息
@@ -86,12 +109,12 @@ public final class SecurityUtil {
 	 */
 	public static SecurityUser getUser(Authentication authentication) {
 		if (Objects.isNull(authentication)) {
-			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+			return null;
 		}
 
 		Object principal = authentication.getPrincipal();
 		if (Objects.isNull(principal)) {
-			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+			return null;
 		}
 
 		if (principal instanceof SecurityUser) {
@@ -100,7 +123,7 @@ public final class SecurityUtil {
 			return JsonUtil.toObject(JsonUtil.toJSONString(principal), SecurityUser.class);
 		}
 
-		throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+		return null;
 	}
 
 	/**
@@ -110,6 +133,20 @@ public final class SecurityUtil {
 	 * @since 2021-09-02 14:56:28
 	 */
 	public static SecurityUser getUser() {
+		SecurityUser securityUser = getUser(getAuthentication());
+		if(Objects.isNull(securityUser)){
+			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
+		}
+		return securityUser;
+	}
+
+	/**
+	 * 获取用户信息
+	 *
+	 * @return 用户信息
+	 * @since 2021-09-02 14:56:28
+	 */
+	public static SecurityUser getUserWithNull() {
 		Authentication authentication = getAuthentication();
 		return getUser(authentication);
 	}
@@ -121,11 +158,7 @@ public final class SecurityUtil {
 	 * @since 2021-09-02 14:56:33
 	 */
 	public static String getUsername() {
-		SecurityUser user = getUser();
-		if (Objects.isNull(user)) {
-			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
-		}
-		return user.getUsername();
+		return getUser().getUsername();
 	}
 
 	/**
@@ -135,11 +168,7 @@ public final class SecurityUtil {
 	 * @since 2021-09-02 14:56:38
 	 */
 	public static Long getUserId() {
-		SecurityUser user = getUser();
-		if (Objects.isNull(user)) {
-			throw new BusinessException("用户未登录");
-		}
-		return user.getUserId();
+		return getUser().getUserId();
 	}
 
 	///**

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.api.bo.region;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
@@ -25,6 +26,7 @@ import java.io.Serializable;
  * @version 2022.03
  * @since 2022-03-23 08:50:04
  */
+@RecordBuilder
 public record RegionBO(
 	/**
 	 * 地区编码

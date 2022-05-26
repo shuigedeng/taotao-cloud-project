@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.api.bo.user;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 15:19:37
  */
+@RecordBuilder
 public record UserBO(
 	/**
 	 * id

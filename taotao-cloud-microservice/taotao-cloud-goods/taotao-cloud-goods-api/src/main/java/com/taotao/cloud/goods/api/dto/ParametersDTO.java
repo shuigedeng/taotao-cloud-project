@@ -15,33 +15,32 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-25 16:31:42
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ParametersDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 724427321881170297L;
+@Schema(description = "商品参数")
+public record ParametersDTO(
 
 	@Schema(description = "参数名称")
-	private String paramName;
+	String paramName,
 
 	@Schema(description = "选择值")
-	private String options;
+	String options,
 
 	@Schema(description = "是否可索引，0 不显示 1 显示")
-	private Integer isIndex;
+	Integer isIndex,
 
 	@Schema(description = "是否必填 是1否0")
-	private Integer required;
+	Integer required,
 
 	@Schema(description = "参数分组id")
-	private Long groupId;
+	Long groupId,
 
 	@Schema(description = "分类id")
-	private Long categoryId;
+	Long categoryId,
 
 	@Schema(description = "排序")
-	private Integer sort;
+	Integer sort
+	) implements Serializable {
+
+	@Serial
+	private 	static final long serialVersionUID = 724427321881170297L;
+
 }
