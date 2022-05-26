@@ -11,132 +11,124 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单简略信息 用于订单列表查看
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "订单简略信息 用于订单列表查看")
-public class OrderSimpleVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -6293102172184734928L;
-
+public record OrderSimpleVO(
 	@Schema(description = "sn")
-	private String sn;
+	String sn,
 
 	@Schema(description = "总价格")
-	private BigDecimal flowPrice;
+	BigDecimal flowPrice,
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
+	LocalDateTime createTime,
 
 	/**
 	 * @see OrderStatusEnum
 	 */
 	@Schema(description = "订单状态")
-	private String orderStatus;
+	String orderStatus,
 
 	/**
 	 * @see PayStatusEnum
 	 */
 	@Schema(description = "付款状态")
-	private String payStatus;
+	String payStatus,
 
 	@Schema(description = "支付方式")
-	private String paymentMethod;
+	String paymentMethod,
 
 	@Schema(description = "支付时间")
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime paymentTime;
+	LocalDateTime paymentTime,
 
 	@Schema(description = "用户名")
-	private String memberName;
+	String memberName,
 
 	@Schema(description = "店铺名称")
-	private String storeName;
+	String storeName,
 
 	@Schema(description = "店铺ID")
-	private Long storeId;
+	Long storeId,
 
 	/**
 	 * @see ClientTypeEnum
 	 */
 	@Schema(description = "订单来源")
-	private String clientType;
+	String clientType,
 
 	/**
 	 * 子订单信息
 	 */
-	private List<OrderItemVO> orderItems;
+	List<OrderItemVO> orderItems,
 
 	@Schema(hidden = true, description = "item goods_id")
-	private String groupGoodsId;
+	String groupGoodsId,
 
 	@Schema(hidden = true, description = "item sku id")
-	private String groupSkuId;
+	String groupSkuId,
 
 	@Schema(hidden = true, description = "item 数量")
-	private String groupNum;
+	String groupNum,
 
 	@Schema(hidden = true, description = "item 图片")
-	private String groupImages;
+	String groupImages,
 
 	@Schema(hidden = true, description = "item 名字")
-	private String groupName;
+	String groupName,
 
 	@Schema(hidden = true, description = "item 编号")
-	private String groupOrderItemsSn;
+	String groupOrderItemsSn,
 
 	@Schema(hidden = true, description = "item 商品价格")
-	private String groupGoodsPrice;
+	String groupGoodsPrice,
 
 	/**
 	 * @see OrderItemAfterSaleStatusEnum
 	 */
 	@Schema(hidden = true, description = "item 售后状态", allowableValues = "NOT_APPLIED(未申请),ALREADY_APPLIED(已申请),EXPIRED(已失效不允许申请售后)")
-	private String groupAfterSaleStatus;
+	String groupAfterSaleStatus,
 
 	/**
 	 * @see OrderComplaintStatusEnum
 	 */
 	@Schema(hidden = true, description = "item 投诉状态")
-	private String groupComplainStatus;
+	String groupComplainStatus,
 
 	/**
 	 * @see CommentStatusEnum
 	 */
 	@Schema(hidden = true, description = "item 评价状态")
-	private String groupCommentStatus;
+	String groupCommentStatus,
 
 	/**
 	 * @see OrderTypeEnum
 	 */
 	@Schema(description = "订单类型")
-	private String orderType;
+	String orderType,
 
 	/**
 	 * @see DeliverStatusEnum
 	 */
 	@Schema(description = "货运状态")
-	private String deliverStatus;
+	String deliverStatus
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -6293102172184734928L;
+
 
 	public List<OrderItemVO> getOrderItems() {
 		if (StringUtil.isEmpty(groupGoodsId)) {

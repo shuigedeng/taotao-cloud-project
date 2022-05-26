@@ -1,11 +1,6 @@
 package com.taotao.cloud.order.api.dto.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,31 +13,29 @@ import java.math.BigDecimal;
  * @version 2022.04
  * @since 2022-04-28 09:19:44
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "发票子内容")
-public class ReceiptDTO implements Serializable {
+public record ReceiptDTO(
+	@Schema(description = "发票ID")
+	String receiptId,
+
+	@Schema(description = "商品名称")
+	String goodsName,
+
+	@Schema(description = "规格")
+	String specs,
+
+	@Schema(description = "数量")
+	Integer num,
+
+	@Schema(description = "单价")
+	BigDecimal goodPrice,
+
+	@Schema(description = "小计")
+	BigDecimal subtotal
+) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;
 
-	@Schema(description = "发票ID")
-	private String receiptId;
 
-	@Schema(description = "商品名称")
-	private String goodsName;
-
-	@Schema(description = "规格")
-	private String specs;
-
-	@Schema(description = "数量")
-	private Integer num;
-
-	@Schema(description = "单价")
-	private BigDecimal goodPrice;
-
-	@Schema(description = "小计")
-	private BigDecimal subtotal;
 }

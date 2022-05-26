@@ -3,7 +3,6 @@ package com.taotao.cloud.order.api.vo.cart;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,78 +11,76 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 /**
  * 购物车展示VO
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "购物车展示VO")
-public class CartVO extends CartBaseVO {
-
-	@Serial
-	private static final long serialVersionUID = -5651775413457562422L;
+public record CartVO(
 
 	@Schema(description = "购物车中的产品列表")
-	private List<CartSkuVO> skuList;
+	List<CartSkuVO> skuList,
 
 	@Schema(description = "sn")
-	private String sn;
+	String sn,
 
 	@Schema(description = "购物车页展示时，店铺内的商品是否全选状态.1为店铺商品全选状态,0位非全选")
-	private Boolean checked;
+	Boolean checked,
 
 	@Schema(description = "满优惠活动")
-	private FullDiscountVO fullDiscount;
+	FullDiscountVO fullDiscount,
 
 	@Schema(description = "满优惠促销的商品")
-	private List<String> fullDiscountSkuIds;
+	List<String> fullDiscountSkuIds,
 
 	@Schema(description = "是否满优惠")
-	private Boolean isFull;
+	Boolean isFull,
 
 	@Schema(description = "使用的优惠券列表")
-	private List<MemberCoupon> couponList;
+	List<MemberCoupon> couponList,
 
 	@Schema(description = "使用的优惠券列表")
-	private List<CouponVO> canReceiveCoupon;
+	List<CouponVO> canReceiveCoupon,
 
 	@Schema(description = "赠品列表")
-	private List<String> giftList;
+	List<String> giftList,
 
 	@Schema(description = "赠送优惠券列表")
-	private List<String> giftCouponList;
+	List<String> giftCouponList,
 
 	@Schema(description = "赠送积分")
-	private Integer giftPoint;
+	Integer giftPoint,
 
 	@Schema(description = "重量")
-	private BigDecimal weight;
+	BigDecimal weight,
 
 	@Schema(description = "购物车商品数量")
-	private Integer goodsNum;
+	Integer goodsNum,
 
 	@Schema(description = "购物车商品数量")
-	private String remark;
+	String remark,
 
 	/**
 	 * @see DeliveryMethodEnum
 	 */
 	@Schema(description = "配送方式")
-	private String deliveryMethod;
+	String deliveryMethod,
 
 	@Schema(description = "已参与的的促销活动提示，直接展示给客户")
-	private String promotionNotice;
+	String promotionNotice,
+
+	CartBaseVO cartBase
+) {
+
+	@Serial
+	private static final long serialVersionUID = -5651775413457562422L;
+
 
 	public CartVO(CartSkuVO cartSkuVO) {
 		this.setStoreId(cartSkuVO.getStoreId());

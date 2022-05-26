@@ -2,43 +2,37 @@ package com.taotao.cloud.order.api.vo.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 /**
  * 满额活动VO
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "满额活动VO")
-public class FullDiscountVO extends FullDiscount {
+public record FullDiscountVO(
+/**
+ * 促销关联的商品
+ */
+List<PromotionGoods> promotionGoodsList,
+
+/**
+ * 赠品信息
+ */
+GoodsSku giftSku,
+
+/**
+ * 参与商品，为-1则代表所有商品参加
+ */
+Integer number,
+
+FullDiscount fullDiscount
+
+) {
 
 	private static final long serialVersionUID = -2330552735874105354L;
-
-	/**
-	 * 促销关联的商品
-	 */
-	private List<PromotionGoods> promotionGoodsList;
-
-	/**
-	 * 赠品信息
-	 */
-	private GoodsSku giftSku;
-
-	/**
-	 * 参与商品，为-1则代表所有商品参加
-	 */
-	private Integer number;
 
 	public FullDiscountVO(FullDiscount fullDiscount) {
 		BeanUtils.copyProperties(fullDiscount, this);

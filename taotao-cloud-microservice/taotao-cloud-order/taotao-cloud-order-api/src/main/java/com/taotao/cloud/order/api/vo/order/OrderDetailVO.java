@@ -5,11 +5,6 @@ import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
@@ -21,66 +16,64 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "订单详情VO")
-public class OrderDetailVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -6293102172184734928L;
-
+public record OrderDetailVO(
 	/**
 	 * 订单
 	 */
-	private OrderBaseVO order;
+	OrderBaseVO order,
 
 	/**
 	 * 子订单信息
 	 */
-	private List<OrderItemVO> orderItems;
+	List<OrderItemVO> orderItems,
 
 	/**
 	 * 订单状态
 	 */
-	private String orderStatusValue;
+	String orderStatusValue,
 
 	/**
 	 * 付款状态
 	 */
-	private String payStatusValue;
+	String payStatusValue,
 
 	/**
 	 * 物流状态
 	 */
-	private String deliverStatusValue;
+	String deliverStatusValue,
 
 	/**
 	 * 物流类型
 	 */
-	private String deliveryMethodValue;
+	String deliveryMethodValue,
 
 	/**
 	 * 支付类型
 	 */
-	private String paymentMethodValue;
+	String paymentMethodValue,
 
 	/**
 	 * 发票
 	 */
-	private ReceiptVO receipt;
+	ReceiptVO receipt,
 
 	/**
 	 * 获取订单日志
 	 */
-	private List<OrderLogVO> orderLogs;
+	List<OrderLogVO> orderLogs,
 
 	@Schema(description = "价格详情")
-	private String priceDetail;
+	String priceDetail
+) implements Serializable {
 
-	public OrderDetailVO(OrderBaseVO order, List<OrderItemVO> orderItems, List<OrderLogVO> orderLogs,
-						 ReceiptVO receipt) {
+	@Serial
+	private static final long serialVersionUID = -6293102172184734928L;
+
+
+	public OrderDetailVO(OrderBaseVO order, List<OrderItemVO> orderItems,
+		List<OrderLogVO> orderLogs,
+		ReceiptVO receipt) {
 		this.order = order;
 		this.orderItems = orderItems;
 		this.orderLogs = orderLogs;

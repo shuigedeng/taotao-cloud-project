@@ -3,11 +3,6 @@ package com.taotao.cloud.order.api.dto.order;
 
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,87 +11,84 @@ import java.util.List;
 /**
  * 商城流水，细节到orderItem
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "商城流水，细节到orderItem")
-public class PriceDetailDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 8808470688518188146L;
+public record PriceDetailDTO(
 	/**
 	 * 订单原始总价格 用于订单价格修改金额计算使用
 	 */
 	@Schema(description = "订单原始总价格")
-	private BigDecimal originalPrice;
+	BigDecimal originalPrice,
 
 	@Schema(description = "商品总金额（商品原价）")
-	private BigDecimal goodsPrice;
+	BigDecimal goodsPrice,
 
 	@Schema(description = "配送费")
-	private BigDecimal freightPrice;
+	BigDecimal freightPrice,
 
 	//============discount price============
 
 	@Schema(description = "支付积分")
-	private Long payPoint;
+	Long payPoint,
 
 	@Schema(description = "优惠金额")
-	private BigDecimal discountPrice;
+	BigDecimal discountPrice,
 
 	@Schema(description = "优惠券金额")
-	private BigDecimal couponPrice;
+	BigDecimal couponPrice,
 
 	//===========end discount price =============
 
 	//=========distribution==========
 
 	@Schema(description = "单品分销返现支出")
-	private BigDecimal distributionCommission;
-
+	BigDecimal distributionCommission,
 
 	@Schema(description = "平台收取交易佣金比例")
-	private BigDecimal platFormCommissionPoint;
+	BigDecimal platFormCommissionPoint,
 
 	@Schema(description = "平台收取交易佣金")
-	private BigDecimal platFormCommission;
+	BigDecimal platFormCommission,
 
 	//=========end distribution==========
 
 	//========= platform coupon==========
 
 	@Schema(description = "平台优惠券 使用金额")
-	private BigDecimal siteCouponPrice;
+	BigDecimal siteCouponPrice,
 
 	@Schema(description = "站点优惠券佣金比例")
-	private BigDecimal siteCouponPoint;
+	BigDecimal siteCouponPoint,
 
 	@Schema(description = "站点优惠券佣金")
-	private BigDecimal siteCouponCommission;
+	BigDecimal siteCouponCommission,
 	//=========end platform coupon==========
 
 	//========= update price ==========
 
 	@Schema(description = "订单修改金额")
-	private BigDecimal updatePrice;
+	BigDecimal updatePrice,
 
 	//=========end update price==========
 
 	@Schema(description = "流水金额(入账 出帐金额) = goodsPrice + freight - discountPrice - couponPrice + updatePrice")
-	private BigDecimal flowPrice;
+	BigDecimal flowPrice,
 
 	@Schema(description = "结算价格 与 商家/供应商 结算价格（例如积分商品/砍价商品）")
-	private BigDecimal settlementPrice;
+	BigDecimal settlementPrice,
 
 	@Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission")
-	private BigDecimal billPrice;
+	BigDecimal billPrice,
 
 	/**
 	 * 参与的促销活动
 	 */
 	@Schema(description = "参与的促销活动")
-	private List<PromotionSkuVO> joinPromotion;
+	List<PromotionSkuVO> joinPromotion
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
+
 
 	public BigDecimal getOriginalPrice() {
 		if (originalPrice.compareTo(BigDecimal.ZERO) == 0) {
@@ -133,7 +125,8 @@ public class PriceDetailDTO implements Serializable {
 		}
 
 		//计算平台佣金  流水金额*平台佣金比例
-		if (platFormCommissionPoint != null && getPlatFormCommissionPoint().compareTo(BigDecimal.ZERO) > 0) {
+		if (platFormCommissionPoint != null
+			&& getPlatFormCommissionPoint().compareTo(BigDecimal.ZERO) > 0) {
 			platFormCommission = CurrencyUtil.div(
 				CurrencyUtil.mul(flowPrice, platFormCommissionPoint), 100);
 		}
@@ -228,7 +221,8 @@ public class PriceDetailDTO implements Serializable {
 	}
 
 	public BigDecimal getDistributionCommission() {
-		if (distributionCommission == null || distributionCommission.compareTo(BigDecimal.ZERO) <= 0) {
+		if (distributionCommission == null
+			|| distributionCommission.compareTo(BigDecimal.ZERO) <= 0) {
 			return BigDecimal.ZERO;
 		}
 		return distributionCommission;
