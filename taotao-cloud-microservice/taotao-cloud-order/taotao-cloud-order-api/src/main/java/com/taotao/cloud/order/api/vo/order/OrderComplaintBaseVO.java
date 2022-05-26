@@ -13,101 +13,100 @@ import lombok.NoArgsConstructor;
 
 /**
  * 订单交易投诉基础VO
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "订单交易投诉基础VO")
-public class OrderComplaintBaseVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7013465343480854816L;
+public record OrderComplaintBaseVO(
 
 	@Schema(description = "id")
-	private Long id;
+	Long id,
 
 	@Schema(description = "投诉主题")
-	private String complainTopic;
+	String complainTopic,
 
 	@Schema(description = "投诉内容")
-	private String content;
+	String content,
 
 	@Schema(description = "投诉凭证图片")
-	private String images;
+	String images,
 
 	/**
 	 * @see ComplaintStatusEnum
 	 */
 	@Schema(description = "交易投诉状态")
-	private String complainStatus;
+	String complainStatus,
 
 	@Schema(description = "申诉商家内容")
-	private String appealContent;
+	String appealContent,
 
 	@Schema(description = "申诉商家时间")
-	private LocalDateTime appealTime;
+	LocalDateTime appealTime,
 
 	@Schema(description = "申诉商家上传的图片")
-	private String appealImages;
+	String appealImages,
 
 	@Schema(description = "订单号")
-	private String orderSn;
+	String orderSn,
 
 	@Schema(description = "下单时间")
-	private LocalDateTime orderTime;
+	LocalDateTime orderTime,
 
 	@Schema(description = "商品名称")
-	private String goodsName;
+	String goodsName,
 
 	@Schema(description = "商品id")
-	private String goodsId;
+	String goodsId,
 
 	@Schema(description = "sku主键")
-	private String skuId;
+	String skuId,
 
 	@Schema(description = "商品价格")
-	private BigDecimal goodsPrice;
+	BigDecimal goodsPrice,
 
 	@Schema(description = "商品图片")
-	private String goodsImage;
+	String goodsImage,
 
 	@Schema(description = "购买的商品数量")
-	private Integer num;
+	Integer num,
 
 	@Schema(description = "运费")
-	private BigDecimal freightPrice;
+	BigDecimal freightPrice,
 
 	@Schema(description = "订单金额")
-	private BigDecimal orderPrice;
+	BigDecimal orderPrice,
 
 	@Schema(description = "物流单号")
-	private String logisticsNo;
+	String logisticsNo,
 
 	@Schema(description = "商家id")
-	private String storeId;
+	String storeId,
 
 	@Schema(description = "商家名称")
-	private String storeName;
+	String storeName,
 
 	@Schema(description = "会员id")
-	private String memberId;
+	String memberId,
 
 	@Schema(description = "会员名称")
-	private String memberName;
+	String memberName,
 
 	@Schema(description = "收货人")
-	private String consigneeName;
+	String consigneeName,
 
 	@Schema(description = "收货地址")
-	private String consigneeAddressPath;
+	String consigneeAddressPath,
 
 	@Schema(description = "收货人手机")
-	private String consigneeMobile;
+	String consigneeMobile,
 
 	@Schema(description = "仲裁结果")
-	private String arbitrationResult;
+	String arbitrationResult
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7013465343480854816L;
+
 }

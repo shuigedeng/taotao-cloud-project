@@ -11,24 +11,23 @@ import lombok.NoArgsConstructor;
 
 /**
  * 整比交易对象
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "整比交易对象")
-public class TradeVO implements Serializable {
+public record TradeVO(
+
+	@Schema(description = "购物车列表")
+	List<CartVO> cartList,
+
+	@Schema(description = "购物车车计算后的总价")
+	PriceDetailVO priceDetailVO
+) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4563542542090139404L;
 
-	@Schema(description = "购物车列表")
-	private List<CartVO> cartList;
-
-	@Schema(description = "购物车车计算后的总价")
-	private PriceDetailVO priceDetailVO;
 
 }

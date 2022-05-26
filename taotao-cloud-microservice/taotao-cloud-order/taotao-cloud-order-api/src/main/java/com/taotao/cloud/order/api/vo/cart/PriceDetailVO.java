@@ -13,30 +13,28 @@ import lombok.NoArgsConstructor;
 /**
  * 订单价格详情
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "订单价格详情")
-public class PriceDetailVO implements Serializable {
+public record PriceDetailVO(
+	@Schema(description = "商品原价")
+	BigDecimal originalPrice,
+
+	@Schema(description = "配送费")
+	BigDecimal freight,
+
+	@Schema(description = "优惠金额")
+	BigDecimal discountPrice,
+
+	@Schema(description = "支付积分")
+	Long payPoint,
+
+	@Schema(description = "最终成交金额")
+	BigDecimal finalePrice
+
+) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -960537582096338500L;
 
-	@Schema(description = "商品原价")
-	private BigDecimal originalPrice;
-
-	@Schema(description = "配送费")
-	private BigDecimal freight;
-
-	@Schema(description = "优惠金额")
-	private BigDecimal discountPrice;
-
-	@Schema(description = "支付积分")
-	private Long payPoint;
-
-	@Schema(description = "最终成交金额")
-	private BigDecimal finalePrice;
 
 	/**
 	 * 构造器，初始化默认值

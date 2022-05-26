@@ -8,91 +8,85 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 /**
  * 购物车中的产品
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "购物车中的产品")
-public class CartSkuVO extends CartBaseVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -894598033321906974L;
-
-	private String sn;
+public record CartSkuVO(
+	String sn,
 
 	/**
 	 * 对应的sku DO
 	 */
-	private GoodsSku goodsSku;
+	GoodsSku goodsSku,
 
 	/**
 	 * 分销描述
 	 */
-	private DistributionGoods distributionGoods;
+	DistributionGoods distributionGoods,
 
 	@Schema(description = "购买数量")
-	private Integer num;
+	Integer num,
 
 	@Schema(description = "购买时的成交价")
-	private BigDecimal purchasePrice;
+	BigDecimal purchasePrice,
 
 	@Schema(description = "小记")
-	private BigDecimal subTotal;
+	BigDecimal subTotal,
 
 	@Schema(description = "小记")
-	private BigDecimal utilPrice;
+	BigDecimal utilPrice,
 
 	@Schema(description = "是否选中，要去结算 0:未选中 1:已选中，默认")
-	private Boolean checked;
+	Boolean checked,
 
 	@Schema(description = "是否免运费")
-	private Boolean isFreeFreight;
+	Boolean isFreeFreight,
 
 	@Schema(description = "是否失效 ")
-	private Boolean invalid;
+	Boolean invalid,
 
 	@Schema(description = "购物车商品错误消息")
-	private String errorMessage;
+	String errorMessage,
 
 	@Schema(description = "是否可配送")
-	private Boolean isShip;
+	Boolean isShip,
 
 	@Schema(description = "拼团id 如果是拼团购买 此值为拼团活动id，" +
 		"当pintuanId为空，则表示普通购买（或者拼团商品，单独购买）")
-	private String pintuanId;
+	String pintuanId,
 
 	@Schema(description = "砍价ID")
-	private String kanjiaId;
+	String kanjiaId,
 
 	@Schema(description = "积分兑换ID")
-	private String pointsId;
+	String pointsId,
 
 	@Schema(description = "积分购买 积分数量")
-	private Long point;
+	Long point,
 
 	@Schema(description = "可参与的单品活动")
-	private List<PromotionGoods> promotions;
+	List<PromotionGoods> promotions,
 
 	@Schema(description = "参与促销活动更新时间(一天更新一次) 例如时间为：2020-01-01  00：00：01")
-	private Date updatePromotionTime;
+	Date updatePromotionTime,
 
 	/**
 	 * @see CartTypeEnum
 	 */
 	@Schema(description = "购物车类型")
-	private CartTypeEnum cartType;
+	CartTypeEnum cartType,
+
+	CartBaseVO CartBase
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -894598033321906974L;
 
 	/**
 	 * 在构造器里初始化促销列表，规格列表

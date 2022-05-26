@@ -2,9 +2,6 @@ package com.taotao.cloud.order.api.dto.aftersale;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,67 +14,66 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 09:16:50
  */
-@Data
-@Builder
 @Schema(description = "商城退款流水")
-public class AfterSalePriceDetailDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 8808470688518188146L;
+public record AfterSalePriceDetailDTO(
 
 	@Schema(description = "商品总金额（商品原价）")
-	private BigDecimal goodsPrice;
+	BigDecimal goodsPrice,
 
 	@Schema(description = "配送费")
-	private BigDecimal freightPrice;
+	BigDecimal freightPrice,
 
 	//============discount price============
 
 	@Schema(description = "支付积分")
-	private Integer payPoint;
+	Integer payPoint,
 
 	@Schema(description = "优惠金额")
-	private BigDecimal discountPrice;
+	BigDecimal discountPrice,
 
 	@Schema(description = "优惠券金额")
-	private BigDecimal couponPrice;
+	BigDecimal couponPrice,
 
 	//===========end discount price =============
 
 	//=========distribution==========
 
 	@Schema(description = "单品分销返现支出")
-	private BigDecimal distributionCommission;
-
+	BigDecimal distributionCommission,
 
 	@Schema(description = "平台收取交易佣金")
-	private BigDecimal platFormCommission;
+	BigDecimal platFormCommission,
 
 	//=========end distribution==========
 
 	//========= platform coupon==========
 
 	@Schema(description = "平台优惠券 使用金额")
-	private BigDecimal siteCouponPrice;
+	BigDecimal siteCouponPrice,
 
 	@Schema(description = "站点优惠券佣金比例")
-	private BigDecimal siteCouponPoint;
+	BigDecimal siteCouponPoint,
 
 	@Schema(description = "站点优惠券佣金")
-	private BigDecimal siteCouponCommission;
+	BigDecimal siteCouponCommission,
 	//=========end platform coupon==========
 
 	@Schema(description = "流水金额(入账 出帐金额) = goodsPrice - discountPrice - couponPrice")
-	private BigDecimal flowPrice;
+	BigDecimal flowPrice,
 
 	@Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission")
-	private BigDecimal billPrice;
+	BigDecimal billPrice,
 
 	/**
 	 * 参与的促销活动
 	 */
 	@Schema(description = "参与的促销活动")
-	//private List<BasePromotions> joinPromotion;
-	private List<String> joinPromotion;
+	// List<BasePromotions> joinPromotion,
+	List<String> joinPromotion
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 8808470688518188146L;
+
 
 }
