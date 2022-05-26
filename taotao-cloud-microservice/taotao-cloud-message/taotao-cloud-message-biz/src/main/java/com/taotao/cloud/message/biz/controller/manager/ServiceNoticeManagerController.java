@@ -33,7 +33,7 @@ public class ServiceNoticeManagerController {
 	private ServiceNoticeService serviceNoticeService;
 
 	@Operation(summary = "查看服务订阅消息详情", description = "查看服务订阅消息详情")
-	@RequestLogger("查看服务订阅消息详情")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<ServiceNotice> get(@PathVariable String id) {

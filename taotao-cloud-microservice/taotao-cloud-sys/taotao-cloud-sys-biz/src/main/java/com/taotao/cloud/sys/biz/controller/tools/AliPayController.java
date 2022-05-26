@@ -47,7 +47,7 @@ public class AliPayController {
 	private final IAlipayConfigService alipayService;
 
 	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息",method = CommonConstant.GET)
-	@RequestLogger("查询阿里支付配置信息")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<AlipayConfig> get() {
@@ -55,7 +55,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "配置支付宝", description = "配置支付宝")
-	@RequestLogger("配置支付宝")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<Boolean> payConfig(@Validated @RequestBody AlipayConfig alipayConfig) {
@@ -65,7 +65,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付宝PC网页支付", description = "支付宝PC网页支付")
-	@RequestLogger("支付宝PC网页支付")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsPC")
 	public Result<String> toPayAsPc(@Validated @RequestBody TradeVO trade)
@@ -79,7 +79,7 @@ public class AliPayController {
 	@Hidden
 	@NotAuth
 	@Operation(summary = "支付之后跳转的链接", description = "支付之后跳转的链接")
-	@RequestLogger("支付之后跳转的链接")
+	@RequestLogger
 	@GetMapping("/return")
 	public Result<Boolean> returnPage(HttpServletRequest request,
 		HttpServletResponse response) {
@@ -107,7 +107,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付宝手机网页支付", description = "支付宝手机网页支付")
-	@RequestLogger("支付宝手机网页支付")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping(value = "/toPayAsWeb")
 	public Result<String> toPayAsWeb(@Validated @RequestBody TradeVO trade)
@@ -119,7 +119,7 @@ public class AliPayController {
 	}
 
 	@Operation(summary = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理", description = "支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理")
-	@RequestLogger("支付异步通知(要公网访问)，接收异步通知，检查通知内容app_id、out_trade_no、total_amount是否与请求中的一致，根据trade_status进行后续业务处理")
+	@RequestLogger
 	@Hidden
 	@RequestMapping("/notify")
 	@NotAuth

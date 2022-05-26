@@ -67,7 +67,7 @@ public class GoodsStoreController {
 	private final IFeignStoreDetailService storeDetailService;
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
-	@RequestLogger("分页获取商品列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageModel<GoodsBaseVO>> getByPage(GoodsPageQuery goodsPageQuery) {
@@ -79,7 +79,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
-	@RequestLogger("分页获取商品Sku列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
 	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
@@ -91,7 +91,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
-	@RequestLogger("分页获取库存告警商品列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/stock/warning")
 	public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
@@ -111,7 +111,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger("通过id获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
 	public Result<GoodsVO> get(@PathVariable Long goodsId) {
@@ -119,7 +119,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "新增商品", description = "新增商品")
-	@RequestLogger("新增商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(
@@ -128,7 +128,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "修改商品", description = "修改商品")
-	@RequestLogger("修改商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}")
 	public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO,
@@ -137,7 +137,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "下架商品", description = "下架商品")
-	@RequestLogger("下架商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/under")
 	public Result<Boolean> underGoods(@RequestParam List<Long> goodsId) {
@@ -146,7 +146,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "上架商品", description = "上架商品")
-	@RequestLogger("上架商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/up")
 	public Result<Boolean> unpGoods(@RequestParam List<Long> goodsId) {
@@ -155,7 +155,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "删除商品", description = "删除商品")
-	@RequestLogger("删除商品")
+	@RequestLogger(
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping
 	public Result<Boolean> deleteGoods(@RequestParam List<Long> goodsId) {
@@ -163,7 +163,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "设置商品运费模板", description = "设置商品运费模板")
-	@RequestLogger("设置商品运费模板")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/freight")
 	public Result<Boolean> freight(@RequestParam List<Long> goodsId,
@@ -172,7 +172,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "根据goodsId分页获取商品规格列表", description = "根据goodsId分页获取商品规格列表")
-	@RequestLogger("根据goodsId分页获取商品规格列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
 	public Result<List<GoodsSkuVO>> getSkuByList(@PathVariable Long goodsId) {
@@ -183,7 +183,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "修改商品库存", description = "修改商品库存")
-	@RequestLogger("修改商品库存")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/stocks")
 	public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {

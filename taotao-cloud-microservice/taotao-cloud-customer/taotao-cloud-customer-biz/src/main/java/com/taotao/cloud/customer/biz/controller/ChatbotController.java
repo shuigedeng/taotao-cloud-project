@@ -51,7 +51,7 @@ public class ChatbotController {
 	}
 
 	@Operation(summary = "根据id查询机器人客服信息", description = "根据id查询机器人客服信息")
-	@RequestLogger("根据id查询机器人客服信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('chatbot:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<ChatbotVO> findChatbotById(@PathVariable(value = "id") Long id) {

@@ -29,7 +29,7 @@ public class QrCodeController {
 	private QrCodeService qrCodeService;
 
 	@Operation(summary = "获取二维码", description = "获取二维码")
-	@RequestLogger("获取二维码")
+	@RequestLogger
 	@GetMapping("/code")
 	public Result<String> qrcode() {
 		return Result.success(qrCodeService.qrcode());
