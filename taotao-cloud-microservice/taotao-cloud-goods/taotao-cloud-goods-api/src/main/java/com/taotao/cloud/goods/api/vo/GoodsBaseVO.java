@@ -2,11 +2,6 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,110 +13,108 @@ import java.math.BigDecimal;
  * @version 2021.10
  * @since 2022-03-11 17:21:04
  */
-@Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "商品基础VO")
-public class GoodsBaseVO implements Serializable {
+public record GoodsBaseVO(
 
-	@Serial
-	private static final long serialVersionUID = 1450550797436233753L;
-
-	private Long id;
+	Long id,
 
 	@Schema(description = "商品名称")
-	private String goodsName;
+	String goodsName,
 
 	@Schema(description = "商品价格")
-	private BigDecimal price;
+	BigDecimal price,
 
 	@Schema(description = "品牌id")
-	private String brandId;
+	String brandId,
 
 	@Schema(description = "分类path")
-	private String categoryPath;
+	String categoryPath,
 
 	@Schema(description = "计量单位")
-	private String goodsUnit;
+	String goodsUnit,
 
 	@Schema(description = "商品卖点太长")
-	private String sellingPoint;
+	String sellingPoint,
 
 	@Schema(description = "上架状态")
-	private String marketEnable;
+	String marketEnable,
 
 	@Schema(description = "详情")
-	private String intro;
+	String intro,
 
 	@Schema(description = "购买数量")
-	private Integer buyCount;
+	Integer buyCount,
 
 	@Schema(description = "库存")
-	private Integer quantity;
+	Integer quantity,
 
 	@Schema(description = "商品好评率")
-	private BigDecimal grade;
+	BigDecimal grade,
 
 	@Schema(description = "缩略图路径")
-	private String thumbnail;
+	String thumbnail,
 
 	@Schema(description = "小图路径")
-	private String small;
+	String small,
 
 	@Schema(description = "原图路径")
-	private String original;
+	String original,
 
 	@Schema(description = "店铺分类id")
-	private String storeCategoryPath;
+	String storeCategoryPath,
 
 	@Schema(description = "评论数量")
-	private Integer commentNum;
+	Integer commentNum,
 
 	@Schema(description = "卖家id")
-	private String storeId;
+	String storeId,
 
 	@Schema(description = "卖家名字")
-	private String storeName;
+	String storeName,
 
 	@Schema(description = "运费模板id")
-	private String templateId;
+	String templateId,
 
 	@Schema(description = "审核状态")
-	private String isAuth;
+	String isAuth,
 
 	@Schema(description = "审核信息")
-	private String authMessage;
+	String authMessage,
 
 	@Schema(description = "下架原因")
-	private String underMessage;
+	String underMessage,
 
 	@Schema(description = "是否自营")
-	private Boolean selfOperated;
+	Boolean selfOperated,
 
 	@Schema(description = "商品移动端详情")
-	private String mobileIntro;
+	String mobileIntro,
 
 	@Schema(description = "商品视频")
-	private String goodsVideo;
+	String goodsVideo,
 
 	@Schema(description = "是否为推荐商品")
-	private Boolean recommend;
+	Boolean recommend,
 
 	@Schema(description = "销售模式")
-	private String salesModel;
+	String salesModel,
 
 	@Schema(description = "商品海报id")
-	private Long posterPicId;
+	Long posterPicId,
 
 	/**
 	 * @see GoodsTypeEnum
 	 */
 	@Schema(description = "商品类型")
-	private String goodsType;
+	String goodsType,
 
 	@Schema(description = "商品参数json")
-	private String params;
+	String params,
 
-	private Boolean delFlag;
+	Boolean delFlag
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1450550797436233753L;
+
 }

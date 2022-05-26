@@ -1,14 +1,9 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 商品操作允许的范围
@@ -17,52 +12,48 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-25 16:34:05
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class GoodsOperateAllowable implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 3829199991161122317L;
-
+public record GoodsOperateAllowable(
 	/**
 	 * 上下架状态
 	 *
 	 * @see GoodsStatusEnum
 	 */
-	private String marketEnable;
+	String marketEnable,
 
 	/**
 	 * 删除状态 true 已删除 false 未删除
 	 */
-	private Boolean deleteFlag;
+	Boolean deleteFlag,
 
 	/**
 	 * 是否允许下架
 	 */
-	private Boolean allowDown;
+	Boolean allowDown,
 	/**
 	 * 是否允许放入回收站
 	 */
-	private Boolean allowDelete;
+	Boolean allowDelete,
 	/**
 	 * 是否允许回收站的商品还原
 	 */
-	private Boolean allowReduction;
+	Boolean allowReduction,
 	/**
 	 * 是否允许回收站的商品彻底删除
 	 */
-	private Boolean allowClear;
+	Boolean allowClear,
 	/**
 	 * 是否允许上架
 	 */
-	private Boolean allowUpper;
+	Boolean allowUpper
+) implements Serializable {
 
-	public GoodsOperateAllowable(String marketEnable, Boolean deleteFlag) {
-		this.marketEnable = marketEnable;
-		this.deleteFlag = deleteFlag;
-	}
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
+
+	//public GoodsOperateAllowable(String marketEnable, Boolean deleteFlag) {
+	//	this.marketEnable = marketEnable;
+	//	this.deleteFlag = deleteFlag;
+	//}
 
 
 	public Boolean getAllowDown() {
