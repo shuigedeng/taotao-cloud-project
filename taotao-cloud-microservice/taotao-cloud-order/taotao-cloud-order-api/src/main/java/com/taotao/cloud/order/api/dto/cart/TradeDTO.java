@@ -9,6 +9,10 @@ import com.taotao.cloud.order.api.vo.cart.PriceDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,44 +28,51 @@ import java.util.stream.Collectors;
  * @version 2022.04
  * @since 2022-04-28 09:17:07
  */
+@Data
+@Builder
+@AllArgsConstructor
 @Schema(description = "购物车视图")
-public record TradeDTO(
+public class TradeDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -3137165707807057810L;
+
 	@Schema(description = "sn")
-	String sn,
+	private String sn;
 
 	@Schema(description = "是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空")
-	String parentOrderSn,
+	private String parentOrderSn;
 
 	@Schema(description = "购物车列表")
-	List<CartVO> cartList,
+	private List<CartVO> cartList;
 
 	@Schema(description = "整笔交易中所有的规格商品")
-	List<CartSkuVO> skuList,
+	private List<CartSkuVO> skuList;
 
 	@Schema(description = "购物车车计算后的总价")
-	PriceDetailVO priceDetailVO,
+	private PriceDetailVO priceDetailVO;
 
 	@Schema(description = "购物车车计算后的总价")
-	PriceDetailDTO priceDetailDTO,
+	private PriceDetailDTO priceDetailDTO;
 
 	@Schema(description = "发票信息")
-	ReceiptVO receiptVO,
+	private ReceiptVO receiptVO;
 
 	@Schema(description = "是否需要发票")
-	Boolean needReceipt,
+	private Boolean needReceipt;
 
 	@Schema(description = "不支持配送方式")
-	List<CartSkuVO> notSupportFreight,
+	private List<CartSkuVO> notSupportFreight;
 
 	/**
 	 * 购物车类型
 	 */
-	CartTypeEnum cartTypeEnum,
+	private CartTypeEnum cartTypeEnum;
 
 	/**
 	 * 店铺备注
 	 */
-	List<StoreRemarkDTO> storeRemark,
+	private List<StoreRemarkDTO> storeRemark;
 
 	/**
 	 * sku促销连线 包含满优惠
@@ -70,62 +81,57 @@ public record TradeDTO(
 	 *
 	 * @see SuperpositionPromotionEnum
 	 */
-	Map<String, String> skuPromotionDetail,
+	private Map<String, String> skuPromotionDetail;
 
 	/**
 	 * 使用平台优惠券，一笔订单只能使用一个平台优惠券
 	 */
-	MemberCouponDTO platformCoupon,
+	private MemberCouponDTO platformCoupon;
 
 	/**
 	 * key 为商家id value 为商家优惠券 店铺优惠券
 	 */
-	Map<String, MemberCouponDTO> storeCoupons,
+	private Map<String, MemberCouponDTO> storeCoupons;
 
 	/**
 	 * 可用优惠券列表
 	 */
-	List<MemberCoupon> canUseCoupons,
+	private List<MemberCoupon> canUseCoupons;
 
 	/**
 	 * 无法使用优惠券无法使用的原因
 	 */
-	List<MemberCouponVO> cantUseCoupons,
+	private List<MemberCouponVO> cantUseCoupons;
 
 	/**
 	 * 收货地址
 	 */
-	MemberAddress memberAddress,
+	private MemberAddress memberAddress;
 
 	/**
 	 * 客户端类型
 	 */
-	String clientType,
+	private String clientType;
 
 	/**
 	 * 买家名称
 	 */
-	String memberName,
+	private String memberName;
 
 	/**
 	 * 买家id
 	 */
-	Long memberId,
+	private Long memberId;
 
 	/**
 	 * 分销商id
 	 */
-	Long distributionId,
+	private Long distributionId;
 
 	/**
 	 * 订单vo
 	 */
-	List<OrderVO> orderVO
-) implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -3137165707807057810L;
-
+	private List<OrderVO> orderVO;
 
 	public TradeDTO(CartTypeEnum cartTypeEnum) {
 		this.cartTypeEnum = cartTypeEnum;
