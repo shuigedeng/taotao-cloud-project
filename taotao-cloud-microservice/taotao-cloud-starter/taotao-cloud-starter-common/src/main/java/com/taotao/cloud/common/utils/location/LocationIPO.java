@@ -1,6 +1,7 @@
 package com.taotao.cloud.common.utils.location;
 
-import com.alibaba.fastjson.JSONObject;
+
+import com.alibaba.fastjson2.JSONObject;
 
 /**
  * 位置上市

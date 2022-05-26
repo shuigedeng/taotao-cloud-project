@@ -3,7 +3,6 @@ package com.taotao.cloud.common.execl.core.large;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.alibaba.fastjson.JSON;
 
 import org.junit.Assert;
 import org.slf4j.Logger;

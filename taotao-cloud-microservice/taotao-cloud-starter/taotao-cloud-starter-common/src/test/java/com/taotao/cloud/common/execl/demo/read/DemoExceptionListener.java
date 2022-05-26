@@ -5,7 +5,6 @@ import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
-import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.utils.log.LogUtil;
 
 import java.util.List;

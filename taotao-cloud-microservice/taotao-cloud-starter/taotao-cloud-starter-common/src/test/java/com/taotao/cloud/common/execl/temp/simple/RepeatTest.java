@@ -13,7 +13,6 @@ import com.taotao.cloud.common.execl.temp.LockData;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.read.metadata.ReadSheet;
-import com.alibaba.fastjson.JSON;
 
 /**
  * 测试poi

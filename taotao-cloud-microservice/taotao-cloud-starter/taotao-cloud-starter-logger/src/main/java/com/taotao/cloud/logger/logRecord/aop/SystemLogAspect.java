@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.logger.logRecord.aop;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.logRecord.annotation.OperationLog;
 import com.taotao.cloud.logger.logRecord.bean.LogDTO;
@@ -217,14 +217,14 @@ public class SystemLogAspect {
             if (StringUtils.isNotBlank(msgSpel)) {
                 Expression msgExpression = parser.parseExpression(msgSpel);
                 Object msgObj = msgExpression.getValue(context, Object.class);
-                msg = msgObj instanceof String ? (String) msgObj : JSON.toJSONString(msgObj, SerializerFeature.WriteMapNullValue);
+                msg = msgObj instanceof String ? (String) msgObj : JSON.toJSONString(msgObj, JSONWriter.Feature.WriteMapNullValue);
             }
 
             // extra 处理：SpEL解析 默认写入原字符串
             if (StringUtils.isNotBlank(extraSpel)) {
                 Expression extraExpression = parser.parseExpression(extraSpel);
                 Object extraObj = extraExpression.getValue(context, Object.class);
-                extra = extraObj instanceof String ? (String) extraObj : JSON.toJSONString(extraObj, SerializerFeature.WriteMapNullValue);
+                extra = extraObj instanceof String ? (String) extraObj : JSON.toJSONString(extraObj, JSONWriter.Feature.WriteMapNullValue);
             }
 
             // operatorId 处理：优先级 注解传入 > 自定义接口实现
@@ -234,7 +234,7 @@ public class SystemLogAspect {
             if (StringUtils.isNotBlank(operatorIdSpel)) {
                 Expression operatorIdExpression = parser.parseExpression(operatorIdSpel);
                 Object operatorIdObj = operatorIdExpression.getValue(context, Object.class);
-                operatorId = operatorIdObj instanceof String ? (String) operatorIdObj : JSON.toJSONString(operatorIdObj, SerializerFeature.WriteMapNullValue);
+                operatorId = operatorIdObj instanceof String ? (String) operatorIdObj : JSON.toJSONString(operatorIdObj, JSONWriter.Feature.WriteMapNullValue);
             }
 
         } catch (Exception e) {

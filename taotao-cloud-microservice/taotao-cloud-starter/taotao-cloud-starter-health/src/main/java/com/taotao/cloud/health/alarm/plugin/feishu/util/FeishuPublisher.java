@@ -1,6 +1,6 @@
 package com.taotao.cloud.health.alarm.plugin.feishu.util;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;

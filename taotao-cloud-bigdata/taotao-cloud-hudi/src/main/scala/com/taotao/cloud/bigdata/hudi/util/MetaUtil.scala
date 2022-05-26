@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.bigdata.hudi.util
 
-import com.alibaba.fastjson.JSONObject
+
+import com.alibaba.fastjson2.JSONObject
 
 import java.sql.{Connection, ResultSet, Statement}
 import java.util.UUID
