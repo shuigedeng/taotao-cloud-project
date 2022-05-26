@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import org.mapstruct.Builder;
@@ -46,7 +47,7 @@ public interface IGoodsMapStruct {
 	 * @return {@link GoodsVO }
 	 * @since 2022-04-27 16:58:21
 	 */
-	GoodsVO goodsToGoodsVO(Goods goods);
+	GoodsBaseVO goodsToGoodsBaseVO(Goods goods);
 
 
 }

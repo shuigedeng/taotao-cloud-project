@@ -10,19 +10,21 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.api.vo.CommodityBaseVO;
+import com.taotao.cloud.goods.api.vo.StudioBaseVO;
 import com.taotao.cloud.goods.api.vo.StudioVO;
+import com.taotao.cloud.goods.api.vo.StudioVOBuilder;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Studio;
 import com.taotao.cloud.goods.biz.entity.StudioCommodity;
 import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
 import com.taotao.cloud.goods.biz.mapper.IStudioMapper;
+import com.taotao.cloud.goods.biz.mapstruct.IStudioMapStruct;
 import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.goods.biz.service.IStudioCommodityService;
 import com.taotao.cloud.goods.biz.service.IStudioService;
@@ -142,14 +144,16 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 
 	@Override
 	public StudioVO getStudioVO(Long id) {
-		StudioVO studioVO = new StudioVO();
-		Studio studio = this.getById(id);
 		//获取直播间信息
-		BeanUtil.copyProperties(studio, studioVO);
+		Studio studio = this.getById(id);
+		StudioBaseVO studioBaseVO = IStudioMapStruct.INSTANCE.studioToStudioBaseVO(studio);
 		//获取直播间商品信息
-		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioVO.getRoomId());
-		studioVO.setCommodityList(OrikaUtil.converts(commodities, CommodityBaseVO.class));
-		return studioVO;
+		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioBaseVO.roomId());
+
+		return StudioVOBuilder.builder()
+			.studioBase(studioBaseVO)
+			.commodityList(OrikaUtil.converts(commodities, CommodityBaseVO.class))
+			.build();
 	}
 
 	@Override

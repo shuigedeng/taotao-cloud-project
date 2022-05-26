@@ -7,6 +7,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import io.soabase.recordbuilder.core.RecordBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-25 16:31:39
  */
+@RecordBuilder
 public record HotWordsDTO(
 
 	@NotBlank(message = "搜索热词不能为空")

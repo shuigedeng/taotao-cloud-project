@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.vo;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import java.io.Serializable;
 /**
  * 规格项表规格项
  */
+@RecordBuilder
 @Schema(description = "参数组关联的参数集合")
 public record SpecificationVO(
 	Long id,

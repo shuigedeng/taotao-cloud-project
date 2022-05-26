@@ -9,6 +9,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
 import com.taotao.cloud.goods.api.dto.ParamOptions;
 import com.taotao.cloud.goods.api.dto.SelectorOptions;
+import com.taotao.cloud.goods.api.dto.SelectorOptionsBuilder;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
@@ -124,7 +125,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		// redis 排序中，下标从0开始，所以这里需要 -1 处理 reverseRangeWithScores
 		count = count - 1;
 		Set<TypedTuple<Object>> set = redisRepository.zReverseRangeByScoreWithScores(
-			CachePrefix.HOT_WORD.getPrefix(),0, count);
+			CachePrefix.HOT_WORD.getPrefix(), 0, count);
 		if (set == null || set.isEmpty()) {
 			return new ArrayList<>();
 		}
@@ -136,8 +137,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 
 	@Override
 	public Boolean setHotWords(HotWordsDTO hotWords) {
-		redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
-			Double.valueOf(hotWords.getPoint()));
+		redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), hotWords.keywords(),
+			Double.valueOf(hotWords.point()));
 		return true;
 	}
 
@@ -292,11 +293,13 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 					continue;
 				}
 			}
-			SelectorOptions so = new SelectorOptions();
-			so.setName(brandName);
-			so.setValue(brandId);
-			so.setUrl(brandUrl);
-			brandOptions.add(so);
+
+			brandOptions.add(
+				SelectorOptionsBuilder.builder()
+					.name(brandName)
+					.value(brandId)
+					.url(brandUrl)
+					.build());
 		}
 		return brandOptions;
 	}

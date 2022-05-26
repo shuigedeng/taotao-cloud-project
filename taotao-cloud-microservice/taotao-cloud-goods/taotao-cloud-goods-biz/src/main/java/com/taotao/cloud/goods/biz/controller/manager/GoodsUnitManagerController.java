@@ -77,7 +77,7 @@ public class GoodsUnitManagerController {
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
 		@Valid @RequestBody GoodsUnit goodsUnit) {
-		goodsUnit.setId(Long.valueOf(id));
+		goodsUnit.setId(id);
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
 

@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.api.dto;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -11,6 +13,7 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:31:53
  */
+@RecordBuilder
 @Schema(description = "店铺信息DTO")
 public record StoreGoodsLabelDTO(
 	@Schema(description = "店铺商品分类名称")

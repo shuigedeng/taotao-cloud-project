@@ -1,5 +1,7 @@
 package com.taotao.cloud.goods.api.vo;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  *
  * @since 2021/5/17 9:47 上午
  */
+@RecordBuilder
 public record StudioBaseVO(
 	/**
 	 * 直播间名字，最短3个汉字，最长17个汉字，1个汉字相当于2个字符

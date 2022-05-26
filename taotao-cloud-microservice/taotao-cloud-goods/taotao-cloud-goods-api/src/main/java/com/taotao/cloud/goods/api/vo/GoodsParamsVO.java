@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.api.vo;
 
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:34:13
  */
+@RecordBuilder
 public record GoodsParamsVO(
 
 	@Schema(description = "1 输入项   2 选择项")

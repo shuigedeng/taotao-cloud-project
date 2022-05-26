@@ -116,8 +116,8 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 			for (CommodityDTO commodityDTO : commodityDTOList) {
 				//修改审核状态
 				this.update(new LambdaUpdateWrapper<Commodity>()
-					.eq(Commodity::getLiveGoodsId, commodityDTO.getGoodsId())
-					.set(Commodity::getAuditStatus, commodityDTO.getAuditStatus()));
+					.eq(Commodity::getLiveGoodsId, commodityDTO.goodsId())
+					.set(Commodity::getAuditStatus, commodityDTO.auditStatus()));
 			}
 		}
 		return true;

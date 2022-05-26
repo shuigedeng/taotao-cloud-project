@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.vo;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * @version 2022.04
  * @since 2022-04-25 16:33:43
  */
+@RecordBuilder
 @Schema(description = "小程序直播商品VO")
 public record CommodityBaseVO(
 

@@ -1,5 +1,7 @@
 package com.taotao.cloud.goods.api.vo;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:33:49
  */
+@RecordBuilder
 public record CustomWordsVO(
 
 	Long id,

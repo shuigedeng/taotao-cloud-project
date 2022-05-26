@@ -66,14 +66,14 @@ public class CategorySpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}")
 	public Result<Boolean> saveCategoryBrand(@PathVariable Long categoryId,
-		@RequestParam String[] categorySpecs) {
+											 @RequestParam Long[] categorySpecs) {
 		//删除分类规格绑定信息
 		this.categorySpecificationService.remove(
 			new QueryWrapper<CategorySpecification>().eq("category_id", categoryId));
 		//绑定规格信息
 		if (categorySpecs != null && categorySpecs.length > 0) {
 			List<CategorySpecification> categorySpecifications = new ArrayList<>();
-			for (String categorySpec : categorySpecs) {
+			for (Long categorySpec : categorySpecs) {
 				categorySpecifications.add(new CategorySpecification(categoryId, categorySpec));
 			}
 			categorySpecificationService.saveBatch(categorySpecifications);

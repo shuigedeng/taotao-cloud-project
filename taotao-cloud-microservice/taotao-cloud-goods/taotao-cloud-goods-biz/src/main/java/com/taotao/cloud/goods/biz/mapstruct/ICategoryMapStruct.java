@@ -42,14 +42,6 @@ public interface ICategoryMapStruct {
 	 */
 	ICategoryMapStruct INSTANCE = Mappers.getMapper(ICategoryMapStruct.class);
 
-	/**
-	 * 类别,类别签证官
-	 *
-	 * @param category 类别
-	 * @return {@link CategoryVO }
-	 * @since 2022-04-27 16:58:05
-	 */
-	CategoryVO categoryToCategoryVO(Category category);
 
 	/**
 	 * 类别基础vos思想史范畴
@@ -59,6 +51,11 @@ public interface ICategoryMapStruct {
 	 * @since 2022-04-27 16:58:05
 	 */
 	List<CategoryBaseVO> categorysToCategoryBaseVOs(List<Category> categorys);
+
+	CategoryBaseVO categoryToCategoryBaseVO(Category category);
+
+
+
 
 
 }

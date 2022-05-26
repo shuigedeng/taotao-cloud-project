@@ -3,13 +3,11 @@ package com.taotao.cloud.goods.api.dto;
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品
@@ -18,6 +16,7 @@ import lombok.experimental.SuperBuilder;
  * @version 2022.04
  * @since 2022-04-25 16:31:12
  */
+@RecordBuilder
 public record DraftGoodsBaseDTO(
 	/**
 	 * 商品名称

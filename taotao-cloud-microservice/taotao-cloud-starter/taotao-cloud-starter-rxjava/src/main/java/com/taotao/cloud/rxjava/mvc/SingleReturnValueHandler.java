@@ -17,6 +17,7 @@ package com.taotao.cloud.rxjava.mvc;
 
 import com.taotao.cloud.rxjava.async.SingleDeferredResult;
 import io.reactivex.Single;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.async.WebAsyncUtils;
@@ -33,7 +34,8 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class SingleReturnValueHandler implements AsyncHandlerMethodReturnValueHandler {
 
 	@Override
-	public boolean isAsyncReturnValue(Object returnValue, MethodParameter returnType) {
+	public boolean isAsyncReturnValue(Object returnValue,
+									  @NotNull MethodParameter returnType) {
 		return returnValue != null && supportsReturnType(returnType);
 	}
 
@@ -43,15 +45,17 @@ public class SingleReturnValueHandler implements AsyncHandlerMethodReturnValueHa
 	}
 
 	@Override
-	public void handleReturnValue(Object returnValue, MethodParameter returnType,
-		ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
+	public void handleReturnValue(Object returnValue,
+								  @NotNull MethodParameter returnType,
+								  @NotNull ModelAndViewContainer mavContainer,
+								  @NotNull NativeWebRequest webRequest) throws Exception {
 
 		if (returnValue == null) {
 			mavContainer.setRequestHandled(true);
 			return;
 		}
 
-		final Single<?> single = Single.class.cast(returnValue);
+		final Single<?> single = (Single) returnValue;
 		WebAsyncUtils.getAsyncManager(webRequest)
 			.startDeferredResultProcessing(new SingleDeferredResult(single), mavContainer);
 	}

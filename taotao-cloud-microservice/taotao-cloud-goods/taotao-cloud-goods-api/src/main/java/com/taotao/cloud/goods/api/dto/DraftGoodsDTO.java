@@ -1,11 +1,14 @@
 package com.taotao.cloud.goods.api.dto;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import javax.validation.Valid;
 
 /**
  * 草稿商品DTO
@@ -14,7 +17,9 @@ import javax.validation.Valid;
  * @version 2022.04
  * @since 2022-04-25 16:31:15
  */
+@RecordBuilder
 public record DraftGoodsDTO(
+
 	@Valid
 	@Schema(description = "商品参数")
 	List<GoodsParamsDTO> goodsParamsDTOList,
@@ -26,6 +31,9 @@ public record DraftGoodsDTO(
 	@Schema(description = "sku列表")
 	List<Map<String, Object>> skuList,
 
+	@Valid
+	@Schema(description = "草稿商品")
+	@NotNull(message = "草稿商品信息不能为空")
 	DraftGoodsBaseDTO draftGoodsBase
 ) implements Serializable {
 
