@@ -5,7 +5,7 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.util.BeanMapUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.execl.core.large.LargeData;
 import com.taotao.cloud.common.execl.demo.write.DemoData;
 import com.taotao.cloud.common.execl.util.TestFileUtil;

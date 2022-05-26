@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hudi.extract
 
-import com.alibaba.fastjson.{JSON, JSONObject}
+import com.alibaba.fastjson2.{JSON, JSONObject}
 import org.slf4j.{Logger, LoggerFactory}
 
 import java.math.BigInteger

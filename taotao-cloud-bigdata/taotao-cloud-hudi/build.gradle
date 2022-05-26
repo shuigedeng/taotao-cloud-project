@@ -2,7 +2,7 @@ apply plugin: 'scala'
 //import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 
 dependencies {
-    implementation "com.alibaba:fastjson:1.2.80"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.4"
 
     implementation("org.apache.spark:spark-core_2.12:3.2.1")
     implementation("org.apache.spark:spark-catalyst_2.12:3.2.1")

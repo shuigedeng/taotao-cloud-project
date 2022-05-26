@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.logger.logRecord.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.logRecord.bean.LogDTO;
 import com.taotao.cloud.logger.logRecord.configuration.LogRecordProperties;
 import com.taotao.cloud.logger.logRecord.constants.LogConstants;

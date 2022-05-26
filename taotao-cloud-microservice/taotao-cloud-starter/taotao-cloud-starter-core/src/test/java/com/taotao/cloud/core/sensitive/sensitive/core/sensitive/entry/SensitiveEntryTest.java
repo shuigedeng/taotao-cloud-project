@@ -1,6 +1,5 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.entry;
 
-import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.UserCollection;

@@ -13,7 +13,6 @@ import com.taotao.cloud.common.execl.core.dataformat.DateFormatData;
 import com.taotao.cloud.common.execl.temp.Lock2Test;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.fastjson.JSON;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;

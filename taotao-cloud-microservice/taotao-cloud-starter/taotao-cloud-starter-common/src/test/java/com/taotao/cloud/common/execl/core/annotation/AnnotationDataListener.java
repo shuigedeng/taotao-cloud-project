@@ -1,5 +1,6 @@
 package com.taotao.cloud.common.execl.core.annotation;
 
+import com.alibaba.fastjson2.JSON;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,6 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.exception.ExcelCommonException;
 import com.alibaba.excel.util.DateUtils;
-import com.alibaba.fastjson.JSON;
 
 public class AnnotationDataListener extends AnalysisEventListener<AnnotationData> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationDataListener.class);

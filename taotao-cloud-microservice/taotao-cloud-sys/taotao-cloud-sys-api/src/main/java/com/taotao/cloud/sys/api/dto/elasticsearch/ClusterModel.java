@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.api.dto.elasticsearch;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

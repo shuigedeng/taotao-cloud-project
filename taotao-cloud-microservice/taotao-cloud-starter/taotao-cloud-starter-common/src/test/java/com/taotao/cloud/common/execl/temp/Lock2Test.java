@@ -5,7 +5,6 @@ import com.alibaba.excel.util.PositionUtils;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
-import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.execl.demo.write.DemoData;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.apache.commons.collections4.CollectionUtils;

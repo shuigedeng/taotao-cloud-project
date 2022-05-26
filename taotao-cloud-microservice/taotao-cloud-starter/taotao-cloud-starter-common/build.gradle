@@ -75,7 +75,7 @@ dependencies {
     api 'com.esotericsoftware:kryo'
     api 'com.caucho:hessian'
     api 'commons-codec:commons-codec'
-    api 'com.alibaba:fastjson'
+    api 'com.alibaba.fastjson2:fastjson2'
 
     // execl
     api 'cn.afterturn:easypoi-base'

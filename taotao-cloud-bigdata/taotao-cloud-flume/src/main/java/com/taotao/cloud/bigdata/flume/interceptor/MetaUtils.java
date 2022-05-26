@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.bigdata.flume.interceptor;
 
-import com.alibaba.fastjson.JSONObject;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
