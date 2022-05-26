@@ -49,7 +49,7 @@ public class DraftGoodsStoreController {
 	private final IDraftGoodsService draftGoodsService;
 
 	@Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表")
-	@RequestLogger("分页获取草稿商品列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<DraftGoodsBaseVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
@@ -60,7 +60,7 @@ public class DraftGoodsStoreController {
 	}
 
 	@Operation(summary = "获取草稿商品", description = "获取草稿商品")
-	@RequestLogger("获取草稿商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<DraftGoodsVO> getDraftGoods(@PathVariable Long id) {
@@ -68,7 +68,7 @@ public class DraftGoodsStoreController {
 	}
 
 	@Operation(summary = "保存草稿商品", description = "保存草稿商品")
-	@RequestLogger("保存草稿商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsDTO draftGoodsDTO) {
@@ -83,7 +83,7 @@ public class DraftGoodsStoreController {
 	}
 
 	@Operation(summary = "删除草稿商品", description = "删除草稿商品")
-	@RequestLogger("删除草稿商品")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> deleteDraftGoods(@PathVariable Long id) {

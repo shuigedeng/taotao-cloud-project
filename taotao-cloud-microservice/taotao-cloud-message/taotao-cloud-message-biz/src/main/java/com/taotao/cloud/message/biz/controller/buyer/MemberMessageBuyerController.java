@@ -37,7 +37,7 @@ public class MemberMessageBuyerController {
 	private MemberMessageService memberMessageService;
 
 	@Operation(summary = "分页获取会员站内消息", description = "分页获取会员站内消息")
-	@RequestLogger("分页获取会员站内消息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<IPage<MemberMessage>> page(MemberMessageQueryVO memberMessageQueryVO,
@@ -47,7 +47,7 @@ public class MemberMessageBuyerController {
 	}
 
 	@Operation(summary = "消息已读", description = "消息已读")
-	@RequestLogger("消息已读")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{message_id}")
 	public Result<Boolean> read(@PathVariable("message_id") String messageId) {

@@ -33,7 +33,7 @@ public class MemberNoticeSenterManagerController {
 	private MemberNoticeSenterService memberNoticeSenterService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger("通过id获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberNoticeSenter> get(@PathVariable String id) {
@@ -42,7 +42,7 @@ public class MemberNoticeSenterManagerController {
 	}
 
 	@Operation(summary = "获取全部数据", description = "获取全部数据")
-	@RequestLogger("获取全部数据")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<MemberNoticeSenter>> getAll() {
@@ -51,7 +51,7 @@ public class MemberNoticeSenterManagerController {
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取")
-	@RequestLogger("分页获取")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<IPage<MemberNoticeSenter>> getByPage(MemberNoticeSenter entity,
@@ -71,7 +71,7 @@ public class MemberNoticeSenterManagerController {
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除")
-	@RequestLogger("批量删除")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
 	public Result<Object> delAllByIds(@PathVariable List ids) {

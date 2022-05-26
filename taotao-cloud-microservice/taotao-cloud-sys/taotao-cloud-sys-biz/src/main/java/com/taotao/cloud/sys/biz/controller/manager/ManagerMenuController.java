@@ -68,7 +68,7 @@ public class ManagerMenuController extends
 	SuperController<IMenuService, Menu, Long, BaseQuery, MenuSaveDTO, MenuUpdateDTO, MenuQueryVO> {
 
 	@Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
-	@RequestLogger("根据角色id获取菜单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
 	@GetMapping("/roleId/{roleId}")
@@ -81,7 +81,7 @@ public class ManagerMenuController extends
 	}
 
 	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表")
-	@RequestLogger("根据角色id列表获取角色列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/roleIds")
 	public Result<List<MenuQueryVO>> findResourceByRoleIds(
@@ -93,7 +93,7 @@ public class ManagerMenuController extends
 	}
 
 	@Operation(summary = "根据角色code获取菜单列表", description = "根据角色code获取菜单列表")
-	@RequestLogger("根据角色code获取菜单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/code/{code}")
 	public Result<List<MenuQueryVO>> findResourceByCode(
@@ -105,7 +105,7 @@ public class ManagerMenuController extends
 	}
 
 	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表")
-	@RequestLogger("根据角色cde列表获取角色列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/codes")
 	public Result<List<MenuQueryVO>> findResourceByCodes(
@@ -131,7 +131,7 @@ public class ManagerMenuController extends
 	//}
 
 	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表")
-	@RequestLogger("获取当前用户菜单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/current/user")
 	public Result<List<MenuQueryVO>> findCurrentUserResource() {
@@ -143,7 +143,7 @@ public class ManagerMenuController extends
 	}
 
 	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表")
-	@RequestLogger("获取当前用户树形菜单列表")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/current/user/tree")
 	public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
@@ -163,7 +163,7 @@ public class ManagerMenuController extends
 
 	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
 		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
-	@RequestLogger("获取树形菜单集合")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
 	@GetMapping("/tree")
 	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
@@ -176,14 +176,14 @@ public class ManagerMenuController extends
 
 	@NotAuth
 	@Operation(summary = "testNotAuth", description = "testNotAuth")
-	@RequestLogger("testNotAuth")
+	@RequestLogger
 	@GetMapping("/test/se")
 	public Result<Boolean> testNotAuth() {
 		return Result.success(true);
 	}
 
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	@RequestLogger("测试分布式事务")
+	@RequestLogger
 	@GetMapping("/test/pe")
 	@PreAuthorize("@permissionVerifier.hasPermission(#request, authentication, 'export')")
 	//@PreAuthorize("hasPermission(#request, 'batch')")

@@ -39,7 +39,7 @@ public class ParameterManagerController {
 	private final IParametersService parametersService;
 
 	@Operation(summary = "添加参数", description = "添加参数")
-	@RequestLogger("添加参数添加参数")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody ParametersDTO parametersDTO) {
@@ -49,7 +49,7 @@ public class ParameterManagerController {
 	}
 
 	@Operation(summary = "编辑参数", description = "编辑参数")
-	@RequestLogger("编辑参数")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
@@ -60,7 +60,7 @@ public class ParameterManagerController {
 	}
 
 	@Operation(summary = "根据id删除参数", description = "根据id删除参数")
-	@RequestLogger("根据id删除参数")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delById(@PathVariable Long id) {
