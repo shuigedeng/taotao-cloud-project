@@ -6,11 +6,6 @@ import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品基础VO
@@ -19,181 +14,178 @@ import lombok.experimental.SuperBuilder;
  * @version 2022.04
  * @since 2022-04-25 16:33:53
  */
-@Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
-public class DraftGoodsBaseVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 1450550797436233753L;
-
-	private Long id;
+public record DraftGoodsBaseVO(
+	Long id,
 
 	/**
 	 * 商品名称
 	 */
-	private String goodsName;
+	String goodsName,
 
 	/**
 	 * 商品价格
 	 */
-	private BigDecimal price;
+	BigDecimal price,
 
 	/**
 	 * 品牌id
 	 */
-	private Long brandId;
+	Long brandId,
 
 	/**
 	 * 分类path
 	 */
-	private String categoryPath;
+	String categoryPath,
 
 	/**
 	 * 计量单位
 	 */
-	private String goodsUnit;
+	String goodsUnit,
 
 	/**
 	 * 卖点
 	 */
-	private String sellingPoint;
+	String sellingPoint,
 
 	/**
 	 * 上架状态
 	 *
 	 * @see GoodsStatusEnum
 	 */
-	private String marketEnable;
+	String marketEnable,
 
 	/**
 	 * 详情
 	 */
-	private String intro;
+	String intro,
 
 	/**
 	 * 商品移动端详情
 	 */
-	private String mobileIntro;
+	String mobileIntro,
 
 	/**
 	 * 购买数量
 	 */
-	private Integer buyCount;
+	Integer buyCount,
 
 	/**
 	 * 库存
 	 */
-	private Integer quantity;
+	Integer quantity,
 
 	/**
 	 * 可用库存
 	 */
-	private Integer enableQuantity;
+	Integer enableQuantity,
 
 	/**
 	 * 商品好评率
 	 */
-	private BigDecimal grade;
+	BigDecimal grade,
 
 	/**
 	 * 缩略图路径
 	 */
-	private String thumbnail;
+	String thumbnail,
 
 	/**
 	 * 大图路径
 	 */
-	private String big;
+	String big,
 
 	/**
 	 * 小图路径
 	 */
-	private String small;
+	String small,
 
 	/**
 	 * 原图路径
 	 */
-	private String original;
+	String original,
 
 	/**
 	 * 店铺分类路径
 	 */
-	private String storeCategoryPath;
+	String storeCategoryPath,
 
 	/**
 	 * 评论数量
 	 */
-	private Integer commentNum;
+	Integer commentNum,
 
 	/**
 	 * 卖家id
 	 */
-	private Long storeId;
+	Long storeId,
 
 	/**
 	 * 卖家名字
 	 */
-	private String storeName;
+	String storeName,
 
 	/**
 	 * 运费模板id
 	 */
-	private Long templateId;
+	Long templateId,
 
 	/**
 	 * 是否自营
 	 */
-	private Boolean selfOperated;
+	Boolean selfOperated,
 
 	/**
 	 * 商品视频
 	 */
-	private String goodsVideo;
+	String goodsVideo,
 
 	/**
 	 * 是否为推荐商品
 	 */
-	private Boolean recommend;
+	Boolean recommend,
 
 	/**
 	 * 销售模式
 	 */
-	private String salesModel;
+	String salesModel,
 
 	/**
 	 * 草稿商品保存类型
 	 *
 	 * @see DraftGoodsSaveType
 	 */
-	private String saveType;
+	String saveType,
 
 	/**
 	 * 分类名称JSON
 	 */
-	private String categoryNameJson;
+	String categoryNameJson,
 
 	/**
 	 * 商品参数JSON
 	 */
-	private String goodsParamsListJson;
+	String goodsParamsListJson,
 
 	/**
 	 * 商品图片JSON
 	 */
-	private String goodsGalleryListJson;
+	String goodsGalleryListJson,
 
 	/**
 	 * sku列表JSON
 	 */
-	private String skuListJson;
+	String skuListJson,
 
 	/**
 	 * 商品类型
 	 *
 	 * @see GoodsTypeEnum
 	 */
-	private String goodsType;
+	String goodsType
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1450550797436233753L;
+
 
 }

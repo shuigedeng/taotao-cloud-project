@@ -2,13 +2,8 @@ package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,26 +13,24 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-14 21:32:40
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(description = "商品VO")
-public class GoodsVO extends GoodsBaseVO {
+public record GoodsVO(
+	@Schema(description = "分类名称")
+	List<String> categoryName,
+
+	@Schema(description = "商品参数")
+	List<GoodsParamsDTO> goodsParamsDTOList,
+
+	@Schema(description = "商品图片")
+	List<String> goodsGalleryList,
+
+	@Schema(description = "sku列表")
+	List<GoodsSkuVO> skuList,
+
+	GoodsBaseVO goodsBase
+) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 6377623919990713567L;
 
-	@Schema(description = "分类名称")
-	private List<String> categoryName;
-
-	@Schema(description = "商品参数")
-	private List<GoodsParamsDTO> goodsParamsDTOList;
-
-	@Schema(description = "商品图片")
-	private List<String> goodsGalleryList;
-
-	@Schema(description = "sku列表")
-	private List<GoodsSkuVO> skuList;
 }

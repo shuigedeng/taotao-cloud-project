@@ -1,10 +1,5 @@
 package com.taotao.cloud.goods.api.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -15,24 +10,22 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:33:49
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class CustomWordsVO implements Serializable {
+public record CustomWordsVO(
 
-	@Serial
-	private static final long serialVersionUID = 3829199991161122317L;
-
-	private Long id;
+	Long id,
 
 	/**
 	 * 分词名称
 	 */
-	private String name;
+	String name,
 
 	/**
 	 * 是否禁用
 	 */
-	private Integer disabled;
+	Integer disabled
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 3829199991161122317L;
+
 }
