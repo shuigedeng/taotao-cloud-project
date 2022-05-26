@@ -295,12 +295,17 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:21
 	 */
 	private String getErrors(BindingResult result) {
+		String errorMsg = "系统异常";
+
 		Map<String, String> map = new HashMap<>();
 		List<FieldError> list = result.getFieldErrors();
 		for (FieldError error : list) {
 			map.put(error.getField(), error.getDefaultMessage());
+
+			errorMsg = error.getDefaultMessage();
 		}
-		return JsonUtil.toJSONString(map);
+		//return JsonUtil.toJSONString(map);
+		return errorMsg;
 	}
 
 	/**
@@ -311,14 +316,18 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:27
 	 */
 	private String getErrors(ConstraintViolationException e) {
+		String errorMsg = "系统异常";
 		Map<String, String> map = new HashMap<>();
 		Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 		for (ConstraintViolation<?> constraintViolation : constraintViolations) {
 			String property = constraintViolation.getPropertyPath().toString();
 			String message = constraintViolation.getMessage();
 			map.put(property, message);
+
+			errorMsg = message;
 		}
-		return JsonUtil.toJSONString(map);
+		//return JsonUtil.toJSONString(map);
+		return errorMsg;
 	}
 
 	/**
@@ -332,7 +341,6 @@ public class ExceptionConfiguration implements InitializingBean {
 		LogUtil.error(e);
 		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
-//		LogUtil.error(e.getMessage(), e);
 	}
 }
 

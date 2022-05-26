@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.api.bo.role;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,6 +26,7 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:23:58
  */
+@RecordBuilder
 public record RoleBO(
 	/**
 	 * id

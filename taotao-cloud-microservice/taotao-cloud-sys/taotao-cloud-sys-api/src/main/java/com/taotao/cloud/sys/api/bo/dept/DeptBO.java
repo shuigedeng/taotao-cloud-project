@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.api.bo.dept;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @version 2022.03
  * @since 2022-03-23 08:49:43
  */
+@RecordBuilder
 public record DeptBO(
 	Integer deptId,
 

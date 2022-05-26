@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.api.bo.company;
 
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -28,6 +29,7 @@ import javax.validation.constraints.Pattern;
  * @version 2021.10
  * @since 2021-10-19 20:47:05
  */
+@RecordBuilder
 public record CompanyBO(
 	/**
 	 * 租户id

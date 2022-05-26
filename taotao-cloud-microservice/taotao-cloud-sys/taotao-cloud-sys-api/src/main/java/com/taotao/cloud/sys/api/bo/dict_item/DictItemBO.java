@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.api.bo.dict_item;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:32:25
  */
+@RecordBuilder
 public record DictItemBO(
 	/**
 	 * id

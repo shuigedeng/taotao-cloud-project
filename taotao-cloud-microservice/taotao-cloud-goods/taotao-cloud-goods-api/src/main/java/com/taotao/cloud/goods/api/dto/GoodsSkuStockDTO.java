@@ -1,13 +1,12 @@
 package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 商品库存DTO
@@ -16,20 +15,16 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:31:36
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class GoodsSkuStockDTO implements Serializable {
+public record GoodsSkuStockDTO(
+	@Schema(description = "商品skuId")
+	Long skuId,
+
+	@Schema(description = "库存")
+	Integer quantity
+	) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
-
-	@Schema(description = "商品skuId")
-	private Long skuId;
-
-	@Schema(description = "库存")
-	private Integer quantity;
 
 
 }

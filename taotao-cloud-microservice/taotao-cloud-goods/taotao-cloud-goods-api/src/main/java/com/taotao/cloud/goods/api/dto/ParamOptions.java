@@ -15,17 +15,14 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-25 16:31:45
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ParamOptions implements Serializable {
+public record ParamOptions(
+	String key,
+
+	List<String> values
+	) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
-	private String key;
-
-	private List<String> values;
 
 }
