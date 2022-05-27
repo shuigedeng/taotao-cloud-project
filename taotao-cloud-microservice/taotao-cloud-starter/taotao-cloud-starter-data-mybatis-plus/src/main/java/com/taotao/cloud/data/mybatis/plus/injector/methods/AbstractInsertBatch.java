@@ -43,6 +43,8 @@ public class AbstractInsertBatch extends AbstractMethod {
 	private final String sqlMethod;
 
 	public AbstractInsertBatch(String sqlTemp, String sqlMethod) {
+		super((sqlMethod));
+
 		this.sqlTemp = sqlTemp;
 		this.sqlMethod = sqlMethod;
 	}

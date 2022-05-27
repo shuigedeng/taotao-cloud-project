@@ -15,20 +15,19 @@
  */
 package com.taotao.cloud.oss.configuration;
 
-import com.UpYun;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.UpYunProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.UpYunUploadFileServiceImpl;
+import com.upyun.RestManager;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author shuigedeng
@@ -53,19 +52,19 @@ public class UpYunAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public UpYun upYun() {
+	public RestManager upYun() {
 		// 创建实例
-		UpYun upyun = new UpYun(properties.getBucketName(), properties.getUserName(),
+		RestManager upyun = new RestManager(properties.getBucketName(), properties.getUserName(),
 			properties.getPassword());
 		// 可选属性1，是否开启 debug 模式，默认不开启
-		upyun.setDebug(false);
+		//upyun.setDebug(false);
 		// 可选属性2，超时时间，默认 30s
 		upyun.setTimeout(30);
 		return upyun;
 	}
 
 	@Bean
-	public UploadFileService fileUpload(UpYun upyun) {
+	public UploadFileService fileUpload(RestManager upyun) {
 		return new UpYunUploadFileServiceImpl(upyun, properties);
 	}
 

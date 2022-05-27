@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.oss.configuration;
 
-import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
