@@ -17,6 +17,7 @@ package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import com.taotao.cloud.promotion.api.vo.PintuanVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -29,6 +30,10 @@ public class FeignPintuanServiceFallback implements FallbackFactory<IFeignPintua
 	@Override
 	public IFeignPintuanService create(Throwable throwable) {
 		return new IFeignPintuanService() {
+			@Override
+			public PintuanVO getById(Long pintuanId) {
+				return null;
+			}
 			//@Override
 			//public Result<CouponVO> getMemberSecurityUser(Long id) {
 			//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);

@@ -37,6 +37,11 @@ public class FeignMemberCouponServiceFallback implements FallbackFactory<IFeignM
 				//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
 				//	return Result.fail(null, 500);
 			}
+
+			@Override
+			public void receiveCoupon(String couponId, Long memberId, String memberName) {
+
+			}
 		};
 	}
 }

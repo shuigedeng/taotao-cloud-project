@@ -20,6 +20,7 @@ import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
 import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
+import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -36,6 +37,11 @@ public class FeignPromotionGoodsServiceFallback implements FallbackFactory<IFeig
 			@Override
 			public Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsSearchParams searchParams) {
 				return null;
+			}
+
+			@Override
+			public void updateBatchById(List<PromotionGoodsVO> promotionGoods) {
+
 			}
 		};
 	}
