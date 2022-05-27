@@ -14,8 +14,6 @@ import lombok.Data;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
-@Data
-@Builder
 @Schema(description = "交易投诉 参数")
 public record OrderComplaintOperationDTO(
 	@Schema(description = "要更改的状态状态")

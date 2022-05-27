@@ -41,6 +41,8 @@ public class AbstractInsertMethod extends AbstractMethod {
 	private final MateSqlMethod sqlMethod;
 
 	public AbstractInsertMethod(MateSqlMethod sqlMethod) {
+		super((sqlMethod.getMethod()));
+
 		this.sqlMethod = sqlMethod;
 	}
 

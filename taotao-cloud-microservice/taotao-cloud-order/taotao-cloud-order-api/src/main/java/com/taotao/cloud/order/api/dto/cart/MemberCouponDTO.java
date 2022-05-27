@@ -27,7 +27,7 @@ MemberCoupon memberCoupon
 ) implements Serializable {
 
 	@Serial
-	private static final long serialVersionUID = 8276369124551043085L,
+	private static final long serialVersionUID = 8276369124551043085L;
 
 
 	public MemberCouponDTO(Map<String, BigDecimal> skuDetail, MemberCoupon memberCoupon) {

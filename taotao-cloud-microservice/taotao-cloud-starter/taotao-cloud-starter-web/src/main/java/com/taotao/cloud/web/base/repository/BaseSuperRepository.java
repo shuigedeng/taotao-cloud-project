@@ -80,7 +80,7 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 		countQuery.where(predicate);
 		JPQLQuery<T> query = querydsl.applyPagination(pageable, countQuery);
 		query.orderBy(orders);
-		return PageableExecutionUtils.getPage(query.fetch(), pageable, countQuery::fetchCount);
+		return PageableExecutionUtils.getPage(query.fetch(), pageable, query::fetchCount);
 	}
 
 	/**
@@ -90,10 +90,11 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	 * @return 条数
 	 * @since 2021-10-09 20:30:31
 	 */
-	public Long count(Predicate predicate) {
+	public int count(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
-			.fetchCount();
+			.fetch()
+			.size();
 	}
 
 	/**
@@ -140,10 +141,11 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 	 * @return 数量
 	 * @since 2021-10-09 20:31:11
 	 */
-	public Long fetchCount(Predicate predicate) {
+	public int fetchCount(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
-			.fetchCount();
+			.fetch()
+			.size();
 	}
 
 	/**
