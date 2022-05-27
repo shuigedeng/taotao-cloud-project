@@ -22,28 +22,28 @@ import lombok.NoArgsConstructor;
  */
 @Schema(description = "订单可进行的操作")
 public record AllowOperation(
-	@Builder.Default
+	
 	@Schema(description = "可以取消")
 	Boolean cancel,
-	@Builder.Default
+	
 	@Schema(description = "可以支付")
 	Boolean pay,
-	@Builder.Default
+	
 	@Schema(description = "可以发货")
 	Boolean ship,
-	@Builder.Default
+	
 	@Schema(description = "可以收货")
 	Boolean rog,
-	@Builder.Default
+	
 	@Schema(description = "是否允许查看物流信息")
 	Boolean showLogistics,
-	@Builder.Default
+	
 	@Schema(description = "是否允许更改收货人信息")
 	Boolean editConsignee,
-	@Builder.Default
+	
 	@Schema(description = "是否允许更改价格")
 	Boolean editPrice,
-	@Builder.Default
+	
 	@Schema(description = "是否可以进行核销")
 	Boolean take
 

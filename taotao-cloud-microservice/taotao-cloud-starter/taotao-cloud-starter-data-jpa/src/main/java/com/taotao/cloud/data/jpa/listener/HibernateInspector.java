@@ -46,7 +46,6 @@ public class HibernateInspector implements StatementInspector {
 		@Override
 		public void onSaveOrUpdate(SaveOrUpdateEvent event) {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
-			String sql = SqlContextHolder.getSql();
 			if (Objects.nonNull(collector)) {
 				try {
 					String replace = StringUtil

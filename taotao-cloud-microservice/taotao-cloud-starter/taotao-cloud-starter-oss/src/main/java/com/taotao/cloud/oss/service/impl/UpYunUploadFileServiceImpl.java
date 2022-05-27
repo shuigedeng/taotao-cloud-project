@@ -26,6 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+
+import com.upyun.RestManager;
+import com.upyun.UpYunUtils;
+import okhttp3.Response;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -37,22 +41,22 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class UpYunUploadFileServiceImpl extends AbstractUploadFileService {
 
-	private final UpYun upyun;
+	private final RestManager upyun;
 	private final UpYunProperties properties;
 
-	public UpYunUploadFileServiceImpl(UpYun upyun, UpYunProperties properties) {
+	public UpYunUploadFileServiceImpl(RestManager upyun, UpYunProperties properties) {
 		this.upyun = upyun;
 		this.properties = properties;
 	}
 
 	@Override
 	protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
-		boolean bFlag;
+		Response response;
 		try {
 			InputStream inputStream = file.getInputStream();
 			String fileName = uploadFileInfo.getName();
 			String filePath =
-				properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
+				properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYunUtils
 					.md5(fileName);
 			byte[] buffer;
 
@@ -66,13 +70,13 @@ public class UpYunUploadFileServiceImpl extends AbstractUploadFileService {
 			bos.close();
 			buffer = bos.toByteArray();
 
-			bFlag = upyun.writeFile(filePath, buffer);
+			response = upyun.writeFile(filePath, buffer, new HashMap<>());
 			uploadFileInfo.setUrl(filePath);
 		} catch (Exception e) {
 			LogUtil.error("[UpYun]文件上传失败:", e);
 			throw new UploadFileException("[UpYun]文件上传失败");
 		}
-		if (!bFlag) {
+		if (!response.isSuccessful()) {
 			throw new UploadFileException("[UpYun]文件上传失败");
 		}
 		return uploadFileInfo;
@@ -80,12 +84,12 @@ public class UpYunUploadFileServiceImpl extends AbstractUploadFileService {
 
 	@Override
 	protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
-		boolean bFlag;
+		Response response;
 		try {
 			InputStream inputStream = new FileInputStream(file);
 			String fileName = uploadFileInfo.getName();
 			String filePath =
-				properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
+				properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYunUtils
 					.md5(fileName);
 			byte[] buffer;
 
@@ -99,14 +103,14 @@ public class UpYunUploadFileServiceImpl extends AbstractUploadFileService {
 			bos.close();
 			buffer = bos.toByteArray();
 
-			bFlag = upyun.writeFile(filePath, buffer);
+			response = upyun.writeFile(filePath, buffer, new HashMap<>());
 			uploadFileInfo.setUrl(filePath);
 		} catch (Exception e) {
 			LogUtil.error("[UpYun]文件上传失败:", e);
 			throw new UploadFileException("[UpYun]文件上传失败");
 		}
 
-		if (!bFlag) {
+		if (!response.isSuccessful()) {
 			throw new UploadFileException("[UpYun]文件上传失败");
 		}
 		return uploadFileInfo;
