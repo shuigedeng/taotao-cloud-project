@@ -57,7 +57,7 @@ buildscript {
         //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
         easyCaptchaVersion = '1.6.2'
         //https://search.maven.org/artifact/cn.hutool/hutool-all
-        hutoolVersion = '5.7.22'
+        hutoolVersion = '5.8.1'
         //https://search.maven.org/artifact/javax.validation/validation-api
         validationApiVersion = '2.0.1.Final'
         //https://search.maven.org/artifact/com.querydsl/querydsl-apt
@@ -105,7 +105,7 @@ buildscript {
         //https://search.maven.org/artifact/io.lettuce/lettuce-core
         lettuceVersion = '6.1.8.RELEASE'
         //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
-        redissonVersion = "3.17.0"
+        redissonVersion = "3.17.2"
         //https://search.maven.org/artifact/io.seata/seata-all
         seataVersion = "1.4.2"
         //https://search.maven.org/artifact/org.apache.shardingsphere/sharding-jdbc-spring-namespace
@@ -126,7 +126,7 @@ buildscript {
         xxlJobVersion = '2.3.1'
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.4.2.Final"
-        //https://search.maven.org/artifact/com.alibaba/fastjson
+        //https://search.maven.org/artifact/com.alibaba/fastjson2
         fastjsonVersion = "2.0.4"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.65"
@@ -173,7 +173,7 @@ buildscript {
         //https://search.maven.org/artifact/com.lmax/disruptor
         disruptorVersion = "3.4.4"
         //https://search.maven.org/artifact/io.github.xpc1024/easy-es-boot-starter
-        easyEsVersion = "0.9.15"
+        easyEsVersion = "0.9.16"
         //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
         elasticjobVersion = "3.0.1"
         //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
