@@ -29,19 +29,20 @@ import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
 import org.springframework.security.oauth2.core.OAuth2TokenType;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.jwt.JoseHeader;
+import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimNames;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
@@ -124,7 +125,7 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 			String issuer =
 				this.providerSettings != null ? this.providerSettings.getIssuer() : null;
 
-			JoseHeader.Builder headersBuilder = JwtUtils.headers();
+			JwsHeader.Builder headersBuilder = JwtUtils.headers();
 			JwtClaimsSet.Builder claimsBuilder = JwtUtils.accessTokenClaims(
 				registeredClient,
 				issuer,
@@ -142,9 +143,10 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 
 			jwtCustomizer.customize(context);
 
-			JoseHeader headers = context.getHeaders().build();
+			JwsHeader headers = context.getHeaders().build();
 			JwtClaimsSet claims = context.getClaims().build();
-			Jwt jwtAccessToken = this.jwtEncoder.encode(headers, claims);
+			JwtEncoderParameters parameters = JwtEncoderParameters.from(headers, claims);
+			Jwt jwtAccessToken = this.jwtEncoder.encode(parameters);
 
 			// Use the scopes after customizing the token
 			authorizedScopes = claims.getClaim(OAuth2ParameterNames.SCOPE);
