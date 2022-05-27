@@ -53,6 +53,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -68,7 +69,8 @@ import org.springframework.web.util.pattern.PathPattern;
  * @since 2021/8/25 09:57
  */
 @AutoConfiguration
-public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
+// public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
+public class Oauth2ResourceConfiguration {
 
 	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
 	private String jwkSetUri;
@@ -99,9 +101,9 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 		return jwtAuthenticationConverter;
 	}
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
+	@Bean
+	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http) throws Exception {
+		HttpSecurity httpSecurity = http.csrf().disable()
 			.authorizeRequests(registry -> {
 				permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
 				registry.anyRequest().authenticated();
@@ -118,7 +120,29 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 				.bearerTokenResolver(bearerTokenResolver())
 				.jwt(jwt -> jwt.decoder(jwtDecoder())
 					.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+		return httpSecurity.build();
 	}
+
+	// @Override
+	// protected void configure(HttpSecurity http) throws Exception {
+	// 	http.csrf().disable()
+	// 		.authorizeRequests(registry -> {
+	// 			permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
+	// 			registry.anyRequest().authenticated();
+	// 		})
+	// 		.oauth2ResourceServer(config -> config
+	// 			.accessDeniedHandler((request, response, accessDeniedException) -> {
+	// 				LogUtil.error("用户权限不足", accessDeniedException);
+	// 				ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
+	// 			})
+	// 			.authenticationEntryPoint((request, response, authException) -> {
+	// 				LogUtil.error("用户未登录认证失败", authException);
+	// 				ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
+	// 			})
+	// 			.bearerTokenResolver(bearerTokenResolver())
+	// 			.jwt(jwt -> jwt.decoder(jwtDecoder())
+	// 				.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+	// }
 
 	private void permitAllUrls(
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry,
@@ -269,3 +293,4 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 
 	}
 }
+

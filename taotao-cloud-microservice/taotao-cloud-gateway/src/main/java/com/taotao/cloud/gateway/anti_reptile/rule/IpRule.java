@@ -81,15 +81,14 @@ public class IpRule extends AbstractRule {
 	@Override
 	public void reset(ServerWebExchange exchange, String realRequestUri) {
 		String ipAddress = RequestUtil.getServerHttpRequestIpAddress(exchange.getRequest());
-		String requestUrl = realRequestUri;
 		/**
 		 * 重置计数器
 		 */
 		int expirationTime = properties.getIpRule().getExpirationTime();
 		RAtomicLong rRequestCount = redissonClient.getAtomicLong(
-			RATELIMITER_COUNT_PREFIX.concat(requestUrl).concat(ipAddress));
+			RATELIMITER_COUNT_PREFIX.concat(realRequestUri).concat(ipAddress));
 		RAtomicLong rExpirationTime = redissonClient.getAtomicLong(
-			RATELIMITER_EXPIRATIONTIME_PREFIX.concat(requestUrl).concat(ipAddress));
+			RATELIMITER_EXPIRATIONTIME_PREFIX.concat(realRequestUri).concat(ipAddress));
 		rRequestCount.set(0L);
 		rExpirationTime.set(0L);
 		rExpirationTime.expire(expirationTime, TimeUnit.MILLISECONDS);

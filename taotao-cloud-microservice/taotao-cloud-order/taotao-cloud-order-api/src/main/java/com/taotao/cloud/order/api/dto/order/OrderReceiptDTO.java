@@ -16,7 +16,7 @@ public record OrderReceiptDTO(
 ) {
 
 	@Serial
-	private static final long serialVersionUID = 8808470688518188146L,
+	private static final long serialVersionUID = 8808470688518188146L;
 
 
 }
