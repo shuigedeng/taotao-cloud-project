@@ -17,6 +17,7 @@ package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
+import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -29,6 +30,10 @@ public class FeignKanjiaActivityServiceFallback implements FallbackFactory<IFeig
 	@Override
 	public IFeignKanjiaActivityService create(Throwable throwable) {
 		return new IFeignKanjiaActivityService() {
+			@Override
+			public KanjiaActivityVO getById(Long promotionId) {
+				return null;
+			}
 			//@Override
 			//public Result<CouponVO> getMemberSecurityUser(Long id) {
 			//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);

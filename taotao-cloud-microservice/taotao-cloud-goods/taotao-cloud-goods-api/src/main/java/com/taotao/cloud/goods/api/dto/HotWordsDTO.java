@@ -29,8 +29,8 @@ public record HotWordsDTO(
 	String keywords,
 
 	@NotNull(message = "分数不能为空")
-	@Max(value = 9999999999L, message = "分数不能大于9999999999")
-	@Min(value = -9999999999L, message = "分数不能小于9999999999")
+	@Max(value = 999999L, message = "分数不能大于9999999999")
+	@Min(value = -99999L, message = "分数不能小于9999999999")
 	Integer point
 	) implements Serializable {
 
