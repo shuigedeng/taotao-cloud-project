@@ -15,11 +15,10 @@ public enum MemberReceiptEnum {
     ELECTRONIC_INVOICE("电子发票"),
     ORDINARY_INVOICE("普通发票");
 
-    private String description;
+    private final String description;
 
     MemberReceiptEnum(String str) {
         this.description = str;
-
     }
 
     public String description() {

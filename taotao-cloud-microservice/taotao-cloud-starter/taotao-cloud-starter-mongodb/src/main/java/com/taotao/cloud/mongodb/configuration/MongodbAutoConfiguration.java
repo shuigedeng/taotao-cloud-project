@@ -108,6 +108,7 @@ public class MongodbAutoConfiguration implements InitializingBean {
 			DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDatabaseFactory);
 			MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver,
 				mongoMappingContext);
+
 			// 此处是去除插入数据库的 _class 字段
 			converter.setTypeMapper(new DefaultMongoTypeMapper(null));
 			return converter;

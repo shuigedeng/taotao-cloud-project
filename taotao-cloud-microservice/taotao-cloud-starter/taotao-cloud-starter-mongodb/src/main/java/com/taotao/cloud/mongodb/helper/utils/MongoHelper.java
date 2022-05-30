@@ -40,6 +40,10 @@ import org.springframework.data.mongodb.core.query.Query;
 
 /**
  * mongodb操作器
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-27 21:55:12
  */
 public class MongoHelper {
 
@@ -55,16 +59,34 @@ public class MongoHelper {
 	@Autowired
 	protected MongoTemplate mongoTemplate;
 
+	/**
+	 * 得到mongo模板
+	 *
+	 * @return {@link MongoTemplate }
+	 * @since 2022-05-27 21:55:12
+	 */
 	public MongoTemplate getMongoTemplate() {
 		return mongoTemplate;
 	}
 
+	/**
+	 * 初始化
+	 *
+	 * @since 2022-05-27 21:55:12
+	 */
 	@PostConstruct
 	public void init() {
 		queryMapper = new QueryMapper(mongoConverter);
 		updateMapper = new UpdateMapper(mongoConverter);
 	}
 
+	/**
+	 * 插入慢查询
+	 *
+	 * @param log       日志
+	 * @param queryTime 查询时间
+	 * @since 2022-05-27 21:55:12
+	 */
 	private void insertSlowQuery(String log, Long queryTime) {
 		if (mongodbProperties.getSlowQuery()) {
 			SlowQuery slowQuery = new SlowQuery();
@@ -403,6 +425,8 @@ public class MongoHelper {
 	 * 设置创建时间
 	 *
 	 * @param object 对象
+	 * @param time   时间
+	 * @since 2022-05-27 21:55:04
 	 */
 	private void setCreateTime(Object object, LocalDateTime time) {
 		Field[] fields = ReflectUtil.getFields(object.getClass());

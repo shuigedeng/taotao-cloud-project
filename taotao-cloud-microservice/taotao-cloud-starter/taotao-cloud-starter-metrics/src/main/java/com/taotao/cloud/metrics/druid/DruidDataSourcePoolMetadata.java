@@ -22,6 +22,9 @@ import org.springframework.boot.jdbc.metadata.AbstractDataSourcePoolMetadata;
 /**
  * druid 连接池 pool meta data
  *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-27 21:56:15
  */
 public class DruidDataSourcePoolMetadata extends AbstractDataSourcePoolMetadata<DruidDataSource> {
 

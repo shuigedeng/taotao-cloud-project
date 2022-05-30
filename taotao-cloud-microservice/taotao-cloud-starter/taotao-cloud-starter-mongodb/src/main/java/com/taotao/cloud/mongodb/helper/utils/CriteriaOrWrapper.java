@@ -7,18 +7,41 @@ import org.springframework.data.mongodb.core.query.Criteria;
 
 /**
  * 查询语句生成器 OR连接
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-27 21:53:15
  */
 public class CriteriaOrWrapper extends CriteriaWrapper {
 
+	/**
+	 * 标准或包装
+	 *
+	 * @since 2022-05-27 21:53:16
+	 */
 	public CriteriaOrWrapper() {
 		andLink = false;
 	}
 
+	/**
+	 * 或
+	 *
+	 * @param criteria 标准
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
+	 */
 	public CriteriaOrWrapper or(Criteria criteria) {
 		list.add(criteria);
 		return this;
 	}
 
+	/**
+	 * 或
+	 *
+	 * @param criteriaWrapper 标准包装
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
+	 */
 	public CriteriaOrWrapper or(CriteriaWrapper criteriaWrapper) {
 		list.add(criteriaWrapper.build());
 		return this;
@@ -41,7 +64,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper eq(SerializableFunction<E, R> column, Object params) {
@@ -66,7 +90,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper ne(SerializableFunction<E, R> column, Object params) {
@@ -91,7 +116,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper lt(SerializableFunction<E, R> column, Object params) {
@@ -116,7 +142,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper lte(SerializableFunction<E, R> column, Object params) {
@@ -141,7 +168,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper gt(SerializableFunction<E, R> column, Object params) {
@@ -166,7 +194,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper gte(SerializableFunction<E, R> column, Object params) {
@@ -191,7 +220,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper contain(SerializableFunction<E, R> column, Object params) {
@@ -216,7 +246,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper containOr(SerializableFunction<E, R> column,
@@ -242,7 +273,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper containOr(SerializableFunction<E, R> column, Object[] params) {
@@ -267,7 +299,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper containAnd(SerializableFunction<E, R> column,
@@ -293,7 +326,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper containAnd(SerializableFunction<E, R> column, Object[] params) {
@@ -318,7 +352,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper like(SerializableFunction<E, R> column, String params) {
@@ -343,7 +378,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	public <E, R> CriteriaOrWrapper in(SerializableFunction<E, R> column, Collection<?> params) {
 		super.in(column, params);
@@ -367,7 +403,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper in(SerializableFunction<E, R> column, Object[] params) {
@@ -392,7 +429,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	public <E, R> CriteriaOrWrapper nin(SerializableFunction<E, R> column, Collection<?> params) {
 		super.nin(column, params);
@@ -416,7 +454,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 *
 	 * @param column 字段
 	 * @param params 参数
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper nin(SerializableFunction<E, R> column, Object[] params) {
@@ -440,7 +479,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 * 为空
 	 *
 	 * @param column 字段
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper isNull(SerializableFunction<E, R> column) {
@@ -464,7 +504,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 * 不为空
 	 *
 	 * @param column 字段
-	 * @return CriteriaOrWrapper
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	@Override
 	public <E, R> CriteriaOrWrapper isNotNull(SerializableFunction<E, R> column) {
@@ -491,7 +532,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 * @param arr    数组名
 	 * @param column 字段名
 	 * @param param  字段值
-	 * @return
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	public <E, R> CriteriaOrWrapper findArray(SerializableFunction<E, R> arr,
 		SerializableFunction<E, R> column, String param) {
@@ -518,7 +560,8 @@ public class CriteriaOrWrapper extends CriteriaWrapper {
 	 * @param arr    数组名
 	 * @param column 字段名
 	 * @param param  字段值
-	 * @return
+	 * @return {@link CriteriaOrWrapper }
+	 * @since 2022-05-27 21:53:16
 	 */
 	public <E, R> CriteriaOrWrapper findArrayLike(SerializableFunction<E, R> arr,
 		SerializableFunction<E, R> column, String param) {

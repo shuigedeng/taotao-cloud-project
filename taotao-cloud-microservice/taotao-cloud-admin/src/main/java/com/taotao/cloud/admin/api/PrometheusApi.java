@@ -47,8 +47,7 @@ public class PrometheusApi {
 	private final DiscoveryClient discoveryClient;
 	private final ApplicationEventPublisher eventPublisher;
 
-	public PrometheusApi(DiscoveryClient discoveryClient,
-		ApplicationEventPublisher eventPublisher) {
+	public PrometheusApi(DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
 		this.discoveryClient = discoveryClient;
 		this.eventPublisher = eventPublisher;
 	}
@@ -70,7 +69,7 @@ public class PrometheusApi {
 			}
 
 			Map<String, String> labels = new HashMap<>(2);
-			labels.put("__meta_prometheus_job", serviceId);
+			labels.put("__taotao_prometheus_job", serviceId);
 			targetGroupList.add(new TargetGroup(targets, labels));
 		}
 		return targetGroupList;

@@ -25,17 +25,32 @@ import org.springframework.stereotype.Service;
 
 /**
  * 数据库导入导出工具
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-27 21:54:09
  */
 @AutoConfiguration
 public class ImportExportUtil {
 
-	// 写链接(写到主库,可使用事务)
+	/**
+	 * mongoTemplate 写链接(写到主库,可使用事务)
+	 */
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
+	/**
+	 * mongoHelper
+	 */
 	@Autowired
 	private MongoHelper mongoHelper;
 
+	/**
+	 * 导出数据库
+	 *
+	 * @param path 路径
+	 * @since 2022-05-27 21:54:09
+	 */
 	public void exportDb(String path) {
 		path = path.replace(".zip", "");
 		FileUtil.del(path);
@@ -80,6 +95,12 @@ public class ImportExportUtil {
 		FileUtil.del(path);
 	}
 
+	/**
+	 * 导入数据库
+	 *
+	 * @param path 路径
+	 * @since 2022-05-27 21:54:09
+	 */
 	public void importDb(String path) {
 		if (!FileUtil.exist(path)) {
 			LogUtil.info(path + "文件不存在");

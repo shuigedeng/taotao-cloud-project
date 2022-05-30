@@ -303,6 +303,7 @@ public class UndertowMetrics implements ApplicationListener<ApplicationStartedEv
 	private static UndertowWebServer findUndertowWebServer(
 		ConfigurableApplicationContext applicationContext) {
 		WebServer webServer;
+
 		if (applicationContext instanceof ReactiveWebServerApplicationContext) {
 			webServer = ((ReactiveWebServerApplicationContext) applicationContext).getWebServer();
 		} else if (applicationContext instanceof ServletWebServerApplicationContext) {
@@ -310,9 +311,11 @@ public class UndertowMetrics implements ApplicationListener<ApplicationStartedEv
 		} else {
 			return null;
 		}
+
 		if (webServer instanceof UndertowWebServer) {
 			return (UndertowWebServer) webServer;
 		}
+
 		return null;
 	}
 

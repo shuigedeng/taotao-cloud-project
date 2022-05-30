@@ -15,7 +15,7 @@ public enum SendTypeEnum {
     ALL("全部"),
     SELECT("指定会员");
 
-    private String description;
+    private final String description;
 
     SendTypeEnum(String str) {
         this.description = str;

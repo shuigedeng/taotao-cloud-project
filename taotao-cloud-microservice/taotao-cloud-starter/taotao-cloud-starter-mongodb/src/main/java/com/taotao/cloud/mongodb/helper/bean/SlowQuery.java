@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "_slowQuery")
 public class SlowQuery {
+
 	@Id
 	String id;
 
