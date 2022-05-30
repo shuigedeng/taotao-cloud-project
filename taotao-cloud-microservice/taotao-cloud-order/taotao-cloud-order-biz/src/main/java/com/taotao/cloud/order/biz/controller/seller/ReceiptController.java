@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.controller.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
@@ -46,8 +47,7 @@ public class ReceiptController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		receiptPageQuery.setStoreId(storeId);
+		receiptPageQuery.setStoreId(SecurityUtil.getUser().getStoreId());
 		return Result.success(receiptService.getReceiptData(receiptPageQuery));
 	}
 

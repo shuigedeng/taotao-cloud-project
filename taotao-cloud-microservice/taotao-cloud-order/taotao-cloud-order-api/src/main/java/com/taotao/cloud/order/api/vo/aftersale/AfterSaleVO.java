@@ -3,6 +3,7 @@ package com.taotao.cloud.order.api.vo.aftersale;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 /**
  * 售后
  */
+@RecordBuilder
 @Schema(description = "售后VO")
 public record AfterSaleVO(
 	@Schema(description = "id")

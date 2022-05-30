@@ -41,8 +41,8 @@ public class FeignMemberEvaluationServiceFallback implements FallbackFactory<IFe
 			}
 
 			@Override
-			public void addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b) {
-
+			public Result<Boolean> addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b) {
+				return null;
 			}
 		};
 	}

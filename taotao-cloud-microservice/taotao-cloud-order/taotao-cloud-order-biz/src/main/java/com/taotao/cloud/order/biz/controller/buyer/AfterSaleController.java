@@ -6,6 +6,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTOBuilder;
 import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleLogVO;
@@ -101,7 +102,7 @@ public class AfterSaleController {
 	public Result<Boolean> save(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String orderItemSn,
 		@Validated @RequestBody AfterSaleDTO afterSaleDTO) {
-		afterSaleDTO.setOrderItemSn(orderItemSn);
+		afterSaleDTO = AfterSaleDTOBuilder.builder(afterSaleDTO).orderItemSn(orderItemSn).build();
 		return Result.success(afterSaleService.saveAfterSale(afterSaleDTO));
 	}
 

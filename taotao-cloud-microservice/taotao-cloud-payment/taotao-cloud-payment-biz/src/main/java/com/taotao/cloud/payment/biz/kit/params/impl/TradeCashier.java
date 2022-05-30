@@ -3,12 +3,20 @@ package com.taotao.cloud.payment.biz.kit.params.impl;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.feign.IFeignTradeService;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
+import com.taotao.cloud.order.api.vo.trade.TradeVO;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +26,6 @@ import java.util.stream.Collectors;
 /**
  * 整笔交易信息获取
  */
-
 @Component
 public class TradeCashier implements CashierExecute {
 
@@ -26,17 +33,17 @@ public class TradeCashier implements CashierExecute {
      * 交易
      */
     @Autowired
-    private TradeService tradeService;
+    private IFeignTradeService tradeService;
     /**
      * 订单
      */
     @Autowired
-    private OrderService orderService;
+    private IFeignOrderService orderService;
     /**
      * 设置
      */
     @Autowired
-    private SettingService settingService;
+    private IFeignSettingService settingService;
 
 
     @Override
@@ -50,15 +57,15 @@ public class TradeCashier implements CashierExecute {
             //准备返回的数据
             CashierParam cashierParam = new CashierParam();
             //订单信息获取
-            Trade trade = tradeService.getBySn(payParam.getSn());
+            TradeVO trade = tradeService.getBySn(payParam.getSn());
 
-            List<Order> orders = orderService.getByTradeSn(payParam.getSn());
+            List<OrderVO> orders = orderService.getByTradeSn(payParam.getSn());
 
 
-            String orderSns = orders.stream().map(Order::getSn).collect(Collectors.joining(", "));
+            String orderSns = orders.stream().map(OrderVO::getSn).collect(Collectors.joining(", "));
             cashierParam.setOrderSns(orderSns);
 
-            for (Order order : orders) {
+            for (OrderVO order : orders) {
                 //如果订单已支付，则不能发器支付
                 if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
                     throw new BusinessException(ResultEnum.PAY_PARTIAL_ERROR);
@@ -95,7 +102,7 @@ public class TradeCashier implements CashierExecute {
             tradeService.payTrade(paymentSuccessParams.getPayParam().getSn(),
                     paymentSuccessParams.getPaymentMethod(),
                     paymentSuccessParams.getReceivableNo());
-            log.info("交易{}支付成功,方式{},流水号{},", paymentSuccessParams.getPayParam().getSn(),
+            LogUtil.info("交易{}支付成功,方式{},流水号{},", paymentSuccessParams.getPayParam().getSn(),
                     paymentSuccessParams.getPaymentMethod(),
                     paymentSuccessParams.getReceivableNo());
         }
@@ -105,7 +112,7 @@ public class TradeCashier implements CashierExecute {
     public Boolean paymentResult(PayParam payParam) {
 
         if (payParam.getOrderType().equals(CashierEnum.TRADE.name())) {
-            Trade trade = tradeService.getBySn(payParam.getSn());
+            TradeVO trade = tradeService.getBySn(payParam.getSn());
             if (trade != null) {
                 return PayStatusEnum.PAID.name().equals(trade.getPayStatus());
             } else {

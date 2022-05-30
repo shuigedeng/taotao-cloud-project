@@ -1,7 +1,9 @@
 package com.taotao.cloud.order.api.dto.aftersale;
 
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 09:16:50
  */
+@RecordBuilder
 @Schema(description = "商城退款流水")
 public record AfterSalePriceDetailDTO(
 
@@ -64,16 +67,15 @@ public record AfterSalePriceDetailDTO(
 	@Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission")
 	BigDecimal billPrice,
 
-	/**
-	 * 参与的促销活动
-	 */
 	@Schema(description = "参与的促销活动")
-	// List<BasePromotions> joinPromotion,
-	List<String> joinPromotion
+	List<BasePromotionsDTO> joinPromotion
 ) implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;
 
+	public static class BasePromotionsDTO {
+
+	}
 
 }

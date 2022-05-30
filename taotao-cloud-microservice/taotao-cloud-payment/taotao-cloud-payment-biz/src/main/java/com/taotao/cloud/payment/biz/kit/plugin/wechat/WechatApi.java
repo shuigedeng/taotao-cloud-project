@@ -3,6 +3,11 @@ package com.taotao.cloud.payment.biz.kit.plugin.wechat;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.ContentType;
 
+import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
+import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
+import com.taotao.cloud.payment.biz.kit.core.kit.HttpKit;
+import com.taotao.cloud.payment.biz.kit.core.kit.PayKit;
+import com.taotao.cloud.payment.biz.kit.core.kit.WxPayKit;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatApiEnum;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatDomain;
 import java.io.File;
@@ -167,9 +172,9 @@ public class WechatApi {
      * @throws Exception 接口执行异常
      */
     public static PaymentHttpResponse v3(RequestMethodEnums method, String urlPrefix, String urlSuffix,
-                                         String mchId, String serialNo, String platSerialNo, String keyPath,
-                                         String body, String nonceStr, long timestamp, String authType,
-                                         File file) throws Exception {
+										 String mchId, String serialNo, String platSerialNo, String keyPath,
+										 String body, String nonceStr, long timestamp, String authType,
+										 File file) throws Exception {
         //构建 Authorization
         String authorization = WxPayKit.buildAuthorization(method, urlSuffix, mchId, serialNo,
                 keyPath, body, nonceStr, timestamp, authType);

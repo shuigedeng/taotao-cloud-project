@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
@@ -12,10 +14,10 @@ import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.service.order.IOrderPriceService;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.store.api.feign.IFeignStoreLogisticsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,13 +31,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 店铺端,订单API
@@ -62,7 +62,7 @@ public class OrderController {
 	/**
 	 * 物流公司
 	 */
-	private final StoreLogisticsService storeLogisticsService;
+	private final IFeignStoreLogisticsService storeLogisticsService;
 
 	@Operation(summary = "查询订单列表", description = "查询订单列表")
 	@RequestLogger
@@ -86,7 +86,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/update/{orderSn}/consignee")
 	public Result<Object> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
-		@Valid MemberAddressDTO memberAddressDTO) {
+									@Valid MemberAddressDTO memberAddressDTO) {
 		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
 	}
 
@@ -95,7 +95,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Object> updateOrderPrice(@PathVariable String orderSn,
-		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal orderPrice) {
+										   @NotNull(message = "订单价格不能为空") @RequestParam BigDecimal orderPrice) {
 		return Result.success(orderPriceService.updatePrice(orderSn, orderPrice));
 	}
 
@@ -104,8 +104,8 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/delivery")
 	public Result<Object> delivery(@NotNull(message = "参数非法") @PathVariable String orderSn,
-		@NotNull(message = "发货单号不能为空") String logisticsNo,
-		@NotNull(message = "请选择物流公司") String logisticsId) {
+								   @NotNull(message = "发货单号不能为空") String logisticsNo,
+								   @NotNull(message = "请选择物流公司") Long logisticsId) {
 		return Result.success(orderService.delivery(orderSn, logisticsNo, logisticsId));
 	}
 
@@ -130,7 +130,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/take/{orderSn}/{verificationCode}")
 	public Result<Object> take(@PathVariable String orderSn,
-		@PathVariable String verificationCode) {
+							   @PathVariable String verificationCode) {
 		return Result.success(orderService.take(orderSn, verificationCode));
 	}
 
@@ -149,12 +149,10 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/downLoadDeliverExcel")
 	public void downLoadDeliverExcel() {
-		HttpServletResponse response = ThreadContextHolder.getHttpResponse();
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		//获取店铺已经选择物流公司列表
-		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(storeId);
+		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(SecurityUtil.getUser().getStoreId()).data();
 		//下载订单批量发货Excel
-		this.orderService.getBatchDeliverList(response, logisticsName);
+		this.orderService.getBatchDeliverList(RequestUtil.getResponse(), logisticsName);
 	}
 
 	@Operation(summary = "上传文件进行订单批量发货", description = "上传文件进行订单批量发货")

@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.biz.controller;
+package com.taotao.cloud.payment.biz.controller;
 
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.dubbo.api.vo.PayFlowVO;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.dubbo.biz.mapper.PayFlowMapper;
-import com.taotao.cloud.dubbo.biz.service.IPayFlowService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.payment.api.vo.PayFlowVO;
+import com.taotao.cloud.payment.biz.service.IPayFlowService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,23 +35,20 @@ import org.springframework.web.bind.annotation.RestController;
  * 支付流水管理API
  *
  * @author shuigedeng
- * @since 2020/11/13 09:58
  * @version 2022.03
+ * @since 2020/11/13 09:58
  */
+@AllArgsConstructor
 @Validated
 @RestController
+@Tag(name = "支付流水管理API", description = "支付流水管理API")
 @RequestMapping("/pay/flow")
-@Api(value = "支付流水管理API", tags = {"支付流水管理API"})
 public class PayFlowController {
 
 	private final IPayFlowService payFlowService;
 
-	public PayFlowController(IPayFlowService payFlowService) {
-		this.payFlowService = payFlowService;
-	}
-
-	@ApiOperation("根据id查询支付信息")
-	@RequestLogger("根据id查询支付信息")
+	@Operation(summary = "根据id查询支付信息", description = "根据id查询支付信息")
+	@RequestLogger
 	@PreAuthorize("hasAuthority('pag:flow:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id) {

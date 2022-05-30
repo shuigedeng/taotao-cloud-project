@@ -63,7 +63,7 @@ public class OrderController {
 	public Result<OrderDetailVO> detail(
 		@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
 		OrderDetailVO orderDetailVO = orderService.queryDetail(orderSn);
-		OperationalJudgment.judgment(orderDetailVO.getOrder());
+		OperationalJudgment.judgment(orderDetailVO.order());
 		return Result.success(orderDetailVO);
 	}
 
@@ -90,7 +90,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Boolean> cancel(@PathVariable String orderSn,
-		@RequestParam String reason) {
+								  @RequestParam String reason) {
 		orderService.cancel(orderSn, reason);
 		return Result.success(true);
 	}

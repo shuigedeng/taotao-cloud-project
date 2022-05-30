@@ -2,7 +2,6 @@ package com.taotao.cloud.order.api.vo.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -10,18 +9,20 @@ import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单简略信息 用于订单列表查看
  */
+@RecordBuilder
 @Schema(description = "订单简略信息 用于订单列表查看")
 public record OrderSimpleVO(
 	@Schema(description = "sn")
@@ -129,40 +130,39 @@ public record OrderSimpleVO(
 	@Serial
 	private static final long serialVersionUID = -6293102172184734928L;
 
-
-	public List<OrderItemVO> getOrderItems() {
-		if (StringUtil.isEmpty(groupGoodsId)) {
-			return new ArrayList<>();
-		}
-		List<OrderItemVO> orderItemVOS = new ArrayList<>();
-		String[] orderItemsSn = groupOrderItemsSn.split(",");
-		String[] goodsId = groupGoodsId.split(",");
-		String[] skuId = groupSkuId.split(",");
-		String[] num = groupNum.split(",");
-		String[] image = groupImages.split(",");
-		String[] name = groupName.split(",");
-		String[] afterSaleStatus = groupAfterSaleStatus.split(",");
-		String[] complainStatus = groupComplainStatus.split(",");
-		String[] commentStatus = groupCommentStatus.split(",");
-		String[] goodsPrice = groupGoodsPrice.split(",");
-
-		for (int i = 0; i < goodsId.length; i++) {
-			orderItemVOS.add(
-				new OrderItemVO(orderItemsSn[i], goodsId[i], skuId[i], num[i], image[i], name[i],
-					afterSaleStatus[i], complainStatus[i], commentStatus[i],
-					BigDecimal.parseBigDecimal()));
-		}
-		return orderItemVOS;
-
-	}
-
-	/**
-	 * 初始化自身状态
-	 */
-	public AllowOperation getAllowOperationVO() {
-		//设置订单的可操作状态
-		return new AllowOperation(this);
-	}
+	// public List<OrderItemVO> getOrderItems() {
+	// 	if (StringUtil.isEmpty(groupGoodsId)) {
+	// 		return new ArrayList<>();
+	// 	}
+	// 	List<OrderItemVO> orderItemVOS = new ArrayList<>();
+	// 	String[] orderItemsSn = groupOrderItemsSn.split(",");
+	// 	String[] goodsId = groupGoodsId.split(",");
+	// 	String[] skuId = groupSkuId.split(",");
+	// 	String[] num = groupNum.split(",");
+	// 	String[] image = groupImages.split(",");
+	// 	String[] name = groupName.split(",");
+	// 	String[] afterSaleStatus = groupAfterSaleStatus.split(",");
+	// 	String[] complainStatus = groupComplainStatus.split(",");
+	// 	String[] commentStatus = groupCommentStatus.split(",");
+	// 	String[] goodsPrice = groupGoodsPrice.split(",");
+	//
+	// 	for (int i = 0; i < goodsId.length; i++) {
+	// 		orderItemVOS.add(
+	// 			new OrderItemVO(orderItemsSn[i], goodsId[i], skuId[i], num[i], image[i], name[i],
+	// 				afterSaleStatus[i], complainStatus[i], commentStatus[i],
+	// 				BigDecimal.parseBigDecimal()));
+	// 	}
+	// 	return orderItemVOS;
+	//
+	// }
+	//
+	// /**
+	//  * 初始化自身状态
+	//  */
+	// public AllowOperation getAllowOperationVO() {
+	// 	//设置订单的可操作状态
+	// 	return new AllowOperation(this);
+	// }
 
 
 }

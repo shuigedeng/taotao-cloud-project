@@ -1,13 +1,16 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * 售后可操作类型
  */
+@RecordBuilder
 @Schema(description = "售后可操作类型")
 public record AfterSaleAllowOperation(
 	@Schema(description = "可以确认售后")
@@ -34,37 +37,13 @@ public record AfterSaleAllowOperation(
 
 	/**
 	 * 根据各种状态构建对象
-	 *
-	 * @param afterSaleVO
 	 */
 	public AfterSaleAllowOperation(AfterSaleVO afterSaleVO) {
-		//售后单状态
-		String serviceStatus = afterSaleVO.getServiceStatus();
-
-		//新提交售后
-		if (serviceStatus.equals(AfterSaleStatusEnum.APPLY.name())) {
-			confirm = true;
-		}
-
-		//待确认收货
-		if (serviceStatus.equals(AfterSaleStatusEnum.BUYER_RETURN.name())) {
-			rog = true;
-		}
-
-		//待平台线下退款
-		if (serviceStatus.equals(AfterSaleStatusEnum.WAIT_REFUND.name())) {
-			refund = true;
-		}
-
-		//待平台线下退款
-		//if (serviceStatus.equals(AfterSaleStatusEnum.WAIT_REFUND.name())) {
-		//	refund = true;
-		//}
-
-		//待平台线下退款
-		if (serviceStatus.equals(AfterSaleStatusEnum.APPLY.name())
-			|| serviceStatus.equals(AfterSaleStatusEnum.PASS.name())) {
-			cancel = true;
-		}
+		this(afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.APPLY.name()),
+			false,
+			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.BUYER_RETURN.name()),
+			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.WAIT_REFUND.name()),
+			false,
+			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.APPLY.name());
 	}
 }

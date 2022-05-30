@@ -1,6 +1,5 @@
 package com.taotao.cloud.payment.biz.kit.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;

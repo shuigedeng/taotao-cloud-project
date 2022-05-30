@@ -1,34 +1,28 @@
 package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 购物车中的产品
  */
+@RecordBuilder
 @Schema(description = "购物车中的产品")
 public record CartSkuVO(
 	String sn,
 
-	/**
-	 * 对应的sku DO
-	 */
-	GoodsSku goodsSku,
+	@Schema(description = "对应的sku信息")
+	CartGoodsSkuVO goodsSku,
 
-	/**
-	 * 分销描述
-	 */
-	DistributionGoods distributionGoods,
+	@Schema(description = "分销商品信息")
+	DistributionGoodsVO distributionGoods,
 
 	@Schema(description = "购买数量")
 	Integer num,
@@ -71,7 +65,7 @@ public record CartSkuVO(
 	Long point,
 
 	@Schema(description = "可参与的单品活动")
-	List<PromotionGoods> promotions,
+	List<PromotionGoodsVO> promotions,
 
 	@Schema(description = "参与促销活动更新时间(一天更新一次) 例如时间为：2020-01-01  00：00：01")
 	Date updatePromotionTime,
@@ -88,22 +82,35 @@ public record CartSkuVO(
 	@Serial
 	private static final long serialVersionUID = -894598033321906974L;
 
-	/**
-	 * 在构造器里初始化促销列表，规格列表
-	 */
-	public CartSkuVO(GoodsSku goodsSku) {
-		this.goodsSku = goodsSku;
-		this.checked = true;
-		this.invalid = false;
-		//默认时间为0，让系统为此商品更新缓存
-		this.updatePromotionTime = new Date(0);
-		this.errorMessage = "";
-		this.isShip = true;
-		this.purchasePrice = goodsSku.getIsPromotion() != null && goodsSku.getIsPromotion()
-			? goodsSku.getPromotionPrice() : goodsSku.getPrice();
-		this.isFreeFreight = false;
-		this.utilPrice = 0D;
-		this.setStoreId(goodsSku.getStoreId());
-		this.setStoreName(goodsSku.getStoreName());
+	// /**
+	//  * 在构造器里初始化促销列表，规格列表
+	//  */
+	// public CartSkuVO(GoodsSku goodsSku) {
+	// 	this.goodsSku = goodsSku;
+	// 	this.checked = true;
+	// 	this.invalid = false;
+	// 	//默认时间为0，让系统为此商品更新缓存
+	// 	this.updatePromotionTime = new Date(0);
+	// 	this.errorMessage = "";
+	// 	this.isShip = true;
+	// 	this.purchasePrice = goodsSku.getIsPromotion() != null && goodsSku.getIsPromotion()
+	// 		? goodsSku.getPromotionPrice() : goodsSku.getPrice();
+	// 	this.isFreeFreight = false;
+	// 	this.utilPrice = 0D;
+	// 	this.setStoreId(goodsSku.getStoreId());
+	// 	this.setStoreName(goodsSku.getStoreName());
+	// }
+
+
+	public static class CartGoodsSkuVO {
+
+	}
+
+	public static class DistributionGoodsVO {
+
+	}
+
+	public static class PromotionGoodsVO{
+
 	}
 }

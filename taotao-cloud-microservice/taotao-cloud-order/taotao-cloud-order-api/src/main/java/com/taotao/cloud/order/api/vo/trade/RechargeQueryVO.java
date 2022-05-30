@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.api.vo.trade;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 /**
  * 预存款充值记录查询条件
  */
+@RecordBuilder
 @Schema(description = "预存款充值记录查询条件")
 public record RechargeQueryVO(
 

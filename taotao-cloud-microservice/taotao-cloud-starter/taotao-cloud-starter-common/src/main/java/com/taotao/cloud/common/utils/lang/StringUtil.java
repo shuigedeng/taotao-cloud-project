@@ -3930,5 +3930,19 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 		}
 		return str.concat(appendStr);
 	}
+
+	/**
+	 * 过滤特殊字符串
+	 *
+	 * @param str 字符串
+	 * @return {@link String }
+	 * @since 2022-05-30 16:40:31
+	 */
+	public static String filterSpecialChart(String str) {
+		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+		Pattern p = Pattern.compile(regEx);
+		Matcher m = p.matcher(str);
+		return m.replaceAll("").trim();
+	}
 }
 

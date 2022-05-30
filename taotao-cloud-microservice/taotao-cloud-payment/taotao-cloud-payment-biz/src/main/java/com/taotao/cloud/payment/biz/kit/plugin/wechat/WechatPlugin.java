@@ -9,10 +9,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
+import com.taotao.cloud.payment.biz.kit.Payment;
 import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
 import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
 import com.taotao.cloud.payment.biz.kit.core.enums.SignType;
@@ -26,16 +30,21 @@ import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatApiEnum;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatDomain;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.Amount;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.RefundModel;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.UnifiedOrderModel;
+import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.cert.X509Certificate;
@@ -45,7 +54,6 @@ import java.util.Objects;
 /**
  * 微信支付
  */
-
 @Component
 public class WechatPlugin implements Payment {
 
@@ -63,7 +71,7 @@ public class WechatPlugin implements Payment {
      * 缓存
      */
     @Autowired
-    private Cache<String> cache;
+    private RedisRepository cache;
     /**
      * 退款日志
      */
@@ -78,17 +86,17 @@ public class WechatPlugin implements Payment {
      * 配置
      */
     @Autowired
-    private SettingService settingService;
+    private IFeignSettingService settingService;
     /**
      * 联合登陆
      */
     @Autowired
-    private ConnectService connectService;
+    private IFeignConnectService connectService;
     /**
      * 联合登陆
      */
     @Autowired
-    private OrderService orderService;
+    private IFeignOrderService orderService;
 
 
     @Override
@@ -130,7 +138,7 @@ public class WechatPlugin implements Payment {
                     .setNotify_url(notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.WECHAT))
                     .setAmount(new Amount().setTotal(fen)).setScene_info(sceneInfo);
 
-            log.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
+            LogUtil.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
             PaymentHttpResponse response = WechatApi.v3(
                     RequestMethodEnums.POST,
                     WechatDomain.CHINA.toString(),

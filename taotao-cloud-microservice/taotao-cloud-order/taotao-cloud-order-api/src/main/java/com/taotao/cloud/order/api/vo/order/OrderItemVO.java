@@ -3,6 +3,7 @@ package com.taotao.cloud.order.api.vo.order;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 /**
  * 子订单VO
  */
+@RecordBuilder
 @Schema(description = "子订单VO")
 public record OrderItemVO(
 

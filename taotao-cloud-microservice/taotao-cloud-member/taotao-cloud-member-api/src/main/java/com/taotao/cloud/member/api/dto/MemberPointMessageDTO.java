@@ -11,6 +11,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * 会员积分
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-05-30 13:37:11
  */
 @Data
 @Builder
