@@ -21,6 +21,13 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.MDC;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
@@ -36,14 +43,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 异步任务配置
@@ -107,15 +106,15 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	}
 
 	/**
-	 * 对于异步任务时, 同样也能获取到 TraceId
-	 * spring 的异步任务 @Async
+	 * 对于异步任务时, 同样也能获取到 TraceId spring 的异步任务 @Async
 	 */
 	public static class AsyncTaskDecorator implements TaskDecorator {
+
 		@Override
 		public Runnable decorate(Runnable runnable) {
 			try {
 				RequestAttributes context = RequestContextHolder.currentRequestAttributes();
-				Map<String,String> previous = MDC.getCopyOfContextMap();
+				Map<String, String> previous = MDC.getCopyOfContextMap();
 				return () -> {
 					try {
 						RequestContextHolder.setRequestAttributes(context);

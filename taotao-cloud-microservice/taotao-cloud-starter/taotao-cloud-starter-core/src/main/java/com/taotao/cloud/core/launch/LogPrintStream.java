@@ -24,16 +24,36 @@ import org.apache.commons.io.Charsets;
 
 /**
  * 替换 系统 System.err 和 System.out 为log
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-30 13:28:49
  */
 public class LogPrintStream extends PrintStream {
 
+	/**
+	 * 错误
+	 */
 	private final boolean error;
 
+	/**
+	 * 日志打印流
+	 *
+	 * @param error 错误
+	 * @since 2022-05-30 13:29:07
+	 */
 	private LogPrintStream(boolean error) throws UnsupportedEncodingException {
 		super(error ? System.err : System.out, false, Charsets.UTF_8.name());
 		this.error = error;
 	}
 
+	/**
+	 * 日志
+	 *
+	 * @param isError 是错误
+	 * @return {@link LogPrintStream }
+	 * @since 2022-05-30 13:29:08
+	 */
 	public static LogPrintStream log(boolean isError) {
 		try {
 			return new LogPrintStream(isError);
@@ -42,6 +62,12 @@ public class LogPrintStream extends PrintStream {
 		}
 	}
 
+	/**
+	 * 打印
+	 *
+	 * @param s 年代
+	 * @since 2022-05-30 13:29:08
+	 */
 	@Override
 	public void print(String s) {
 		if (error) {
@@ -53,11 +79,19 @@ public class LogPrintStream extends PrintStream {
 
 	/**
 	 * 重写掉它，因为它会打印很多无用的新行
+	 *
+	 * @since 2022-05-30 13:29:08
 	 */
 	@Override
 	public void println() {
 	}
 
+	/**
+	 * println
+	 *
+	 * @param x x
+	 * @since 2022-05-30 13:29:09
+	 */
 	@Override
 	public void println(String x) {
 		if (error) {
@@ -67,6 +101,14 @@ public class LogPrintStream extends PrintStream {
 		}
 	}
 
+	/**
+	 * printf
+	 *
+	 * @param format 格式
+	 * @param args   arg游戏
+	 * @return {@link PrintStream }
+	 * @since 2022-05-30 13:29:09
+	 */
 	@Override
 	public PrintStream printf(String format, Object... args) {
 		if (error) {
@@ -77,6 +119,15 @@ public class LogPrintStream extends PrintStream {
 		return this;
 	}
 
+	/**
+	 * printf
+	 *
+	 * @param l      l
+	 * @param format 格式
+	 * @param args   arg游戏
+	 * @return {@link PrintStream }
+	 * @since 2022-05-30 13:29:09
+	 */
 	@Override
 	public PrintStream printf(Locale l, String format, Object... args) {
 		if (error) {

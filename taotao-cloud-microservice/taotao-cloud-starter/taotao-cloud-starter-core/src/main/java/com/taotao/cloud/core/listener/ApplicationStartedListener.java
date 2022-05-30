@@ -23,6 +23,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * application 启动后状态的监听器
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-30 13:29:36
  */
 public abstract class ApplicationStartedListener implements ApplicationListener<ApplicationStartedEvent> {
 
