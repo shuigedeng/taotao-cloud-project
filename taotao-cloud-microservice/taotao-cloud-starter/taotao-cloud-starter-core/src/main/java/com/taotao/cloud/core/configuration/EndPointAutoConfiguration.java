@@ -23,13 +23,12 @@ import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
 import com.taotao.cloud.core.endpoint.MBeanDemo;
 import com.taotao.cloud.core.endpoint.TaoTaoCloudEndPoint;
 import com.taotao.cloud.core.properties.EndpointProperties;
+import javax.management.MalformedObjectNameException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import javax.management.MalformedObjectNameException;
 
 /**
  * EndPointConfiguration

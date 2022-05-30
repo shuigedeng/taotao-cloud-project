@@ -23,6 +23,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * application ready状态的监听器
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-30 13:29:39
  */
 public abstract class ApplicationReadyListener implements ApplicationListener<ApplicationReadyEvent> {
 

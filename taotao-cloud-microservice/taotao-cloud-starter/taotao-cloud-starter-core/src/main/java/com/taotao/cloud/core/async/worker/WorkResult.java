@@ -2,6 +2,10 @@ package com.taotao.cloud.core.async.worker;
 
 /**
  * 执行结果
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-30 13:25:24
  */
 public class WorkResult<V> {
 

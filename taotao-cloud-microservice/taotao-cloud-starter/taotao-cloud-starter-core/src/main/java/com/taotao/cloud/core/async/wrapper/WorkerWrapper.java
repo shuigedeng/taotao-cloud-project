@@ -22,6 +22,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 对每个worker及callback进行包装，一对一
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-30 13:25:31
  */
 public class WorkerWrapper<T, V> {
 

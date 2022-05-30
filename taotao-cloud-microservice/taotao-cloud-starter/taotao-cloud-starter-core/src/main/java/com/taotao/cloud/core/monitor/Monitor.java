@@ -102,7 +102,8 @@ public class Monitor {
 			call(TAOTAO_CLOUD_COLLECTOR_ASYNC_EXECUTOR_CALL_KEY + ".core.poolSize")
 				.set(this.asyncThreadPoolExecutor::getCorePoolSize);
 			call(TAOTAO_CLOUD_COLLECTOR_ASYNC_EXECUTOR_CALL_KEY + ".poolSize.largest")
-				.set(() -> this.asyncThreadPoolExecutor.getThreadPoolExecutor().getLargestPoolSize());
+				.set(() -> this.asyncThreadPoolExecutor.getThreadPoolExecutor()
+					.getLargestPoolSize());
 			call(TAOTAO_CLOUD_COLLECTOR_ASYNC_EXECUTOR_CALL_KEY + ".poolSize.max").set(
 				() -> this.asyncThreadPoolExecutor.getThreadPoolExecutor().getMaximumPoolSize());
 			call(TAOTAO_CLOUD_COLLECTOR_ASYNC_EXECUTOR_CALL_KEY + ".poolSize.count")

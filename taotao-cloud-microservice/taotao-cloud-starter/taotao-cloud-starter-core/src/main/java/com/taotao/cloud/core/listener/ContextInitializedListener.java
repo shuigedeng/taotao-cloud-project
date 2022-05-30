@@ -23,6 +23,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * context初始化的监听器
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-30 13:29:42
  */
 public abstract class ContextInitializedListener implements ApplicationListener<ApplicationContextInitializedEvent> {
 
