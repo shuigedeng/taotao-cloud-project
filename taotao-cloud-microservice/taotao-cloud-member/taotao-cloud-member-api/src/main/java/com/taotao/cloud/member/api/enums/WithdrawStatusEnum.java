@@ -21,7 +21,7 @@ public enum WithdrawStatusEnum {
 	 */
 	FAIL_AUDITING("审核未通过");
 
-	private String description;
+	private final String description;
 
 	public String description() {
 		return description;

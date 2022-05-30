@@ -28,6 +28,7 @@ import javax.validation.constraints.NotBlank;
  */
 @RecordBuilder
 public record EmailDTO(
+
 	/**
 	 * 收件人
 	 */

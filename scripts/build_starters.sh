@@ -17,7 +17,7 @@ function build_starters() {
     do
       if [ -d $starter_dir"/"$starter ];then
         cd $starter_dir"/"$starter
-        gradle clean build -Dorg.gradle.java.home=$JAVA_HOME
+        gradle clean build clean build -x test -x bootJar -Dorg.gradle.java.home=$JAVA_HOME
       fi
     done
 }

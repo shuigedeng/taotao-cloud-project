@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -18,7 +17,7 @@ import org.springframework.util.ReflectionUtils;
  * @since 2022-04-10 22:35:53
  */
 public class ReflectionUtil {
-	
+
 	private static Map<SerializableFunction<?, ?>, Field> cache = new ConcurrentHashMap<>();
 
 	public static <E, R> String getFieldName(SerializableFunction<E, R> function) {
@@ -54,7 +53,8 @@ public class ReflectionUtil {
 
 			// 第3步 获取的Class是字符串，并且包名是“/”分割，需要替换成“.”，才能获取到对应的Class对象
 			String declaredClass = serializedLambda.getImplClass().replace("/", ".");
-			Class<?> aClass = Class.forName(declaredClass, false, ClassUtils.getDefaultClassLoader());
+			Class<?> aClass = Class.forName(declaredClass, false,
+				ClassUtils.getDefaultClassLoader());
 
 			// 第4步 Spring 中的反射工具类获取Class中定义的Field
 			field = ReflectionUtils.findField(aClass, fieldName);
@@ -68,6 +68,6 @@ public class ReflectionUtil {
 		}
 		throw new NoSuchFieldError(fieldName);
 	}
-	
-	
+
+
 }

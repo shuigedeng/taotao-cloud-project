@@ -5,6 +5,13 @@ import com.taotao.cloud.mongodb.helper.bean.Page;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 豆ext跑龙套
+ *
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-27 21:52:35
+ */
 public class BeanExtUtil {
 
 	/**
@@ -12,7 +19,8 @@ public class BeanExtUtil {
 	 *
 	 * @param list
 	 * @param clazz
-	 * @return
+	 * @return {@link List }<{@link T }>
+	 * @since 2022-05-27 21:52:35
 	 */
 	public static <T> List<T> copyListByProperties(List<?> list, Class<T> clazz) {
 		if (list == null) {
@@ -31,9 +39,10 @@ public class BeanExtUtil {
 	/**
 	 * 根据PageResp对象属性批量创建对应的Class PageResp对象
 	 *
-	 * @param pageResp
+	 * @param page  页面
 	 * @param clazz
-	 * @return
+	 * @return {@link Page }<{@link T }>
+	 * @since 2022-05-27 21:52:35
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> Page<T> copyPageByProperties(Page<?> page, Class<T> clazz) {
@@ -44,6 +53,11 @@ public class BeanExtUtil {
 
 	/**
 	 * 按照Bean对象属性创建对应的Class对象
+	 *
+	 * @param source 源
+	 * @param tClass t类
+	 * @return {@link T }
+	 * @since 2022-05-27 21:52:35
 	 */
 	public static <T> T copyBeanByProperties(Object source, Class<T> tClass) {
 		return BeanUtil.copyProperties(source, tClass);

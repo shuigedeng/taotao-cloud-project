@@ -15,7 +15,7 @@ public enum MemberWithdrawalDestinationEnum {
     WECHAT("微信账户"),
     WALLET("余额账户");
 
-    private String description;
+    private final String description;
 
     MemberWithdrawalDestinationEnum(String str) {
         this.description = str;

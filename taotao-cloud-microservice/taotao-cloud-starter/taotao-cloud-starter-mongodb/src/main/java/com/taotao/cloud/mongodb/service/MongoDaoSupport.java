@@ -7,9 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Set;
-import org.apache.poi.ss.formula.functions.T;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,8 +15,9 @@ import org.springframework.data.mongodb.core.query.Update;
 /**
  * MongoDB通用Dao抽象实现
  *
- * @param <T>
- * @date 2020-10-20
+ * @author shuigedeng
+ * @version 2022.05
+ * @since 2022-05-27 21:46:29
  */
 public class MongoDaoSupport implements BaseMongoDAO {
 
@@ -29,46 +27,26 @@ public class MongoDaoSupport implements BaseMongoDAO {
 		this.mongoTemplate = mongoTemplate;
 	}
 
-	/**
-	 * 保存一个对象到mongodb
-	 *
-	 * @param bean
-	 * @return
-	 */
 	@Override
 	public <T> T save(T bean) {
 		mongoTemplate.save(bean);
 		return bean;
 	}
 
-	/**
-	 * 根据id删除对象
-	 *
-	 * @param t
-	 */
+
 	@Override
 	public <T> void deleteById(T t) {
 		mongoTemplate.remove(t);
 	}
 
 
-	/**
-	 * 根据对象的属性删除
-	 *
-	 * @param t
-	 */
 	@Override
 	public <T> void deleteByCondition(T t) {
 		Query query = buildBaseQuery(t);
 		mongoTemplate.remove(query, getEntityClass());
 	}
 
-	/**
-	 * 根据id进行更新
-	 *
-	 * @param id
-	 * @param t
-	 */
+
 	@Override
 	public <T> void updateById(String id, T t) {
 		Query query = new Query();
@@ -77,70 +55,35 @@ public class MongoDaoSupport implements BaseMongoDAO {
 		update(query, update);
 	}
 
-	/**
-	 * 根据对象的属性查询
-	 *
-	 * @param t
-	 * @return
-	 */
+
 	@Override
 	public <T> List<T> findByCondition(T t) {
 		Query query = buildBaseQuery(t);
 		return mongoTemplate.find(query, getEntityClass());
 	}
 
-	/**
-	 * 通过条件查询实体(集合)
-	 *
-	 * @param query
-	 * @return
-	 */
 	@Override
 	public <T> List<T> find(Query query) {
 		return mongoTemplate.find(query, this.getEntityClass());
 	}
 
-	/**
-	 * 通过一定的条件查询一个实体
-	 *
-	 * @param query
-	 * @return
-	 */
 	@Override
 	public <T> T findOne(Query query) {
 		return mongoTemplate.findOne(query, this.getEntityClass());
 	}
 
-	/**
-	 * 通过条件查询更新数据
-	 *
-	 * @param query
-	 * @param update
-	 */
 	@Override
 	public void update(Query query, Update update) {
 		mongoTemplate.updateMulti(query, update, this.getEntityClass());
 	}
 
-	/**
-	 * 通过ID获取记录
-	 *
-	 * @param id
-	 * @return
-	 */
 	@Override
 	public <T> T findById(String id) {
 		return mongoTemplate.findById(id, this.getEntityClass());
 	}
 
-	/**
-	 * 通过ID获取记录,并且指定了集合名(表的意思)
-	 *
-	 * @param id
-	 * @param collectionName
-	 */
 	@Override
-	public T findById(String id, String collectionName) {
+	public <T> T findById(String id, String collectionName) {
 		Set<String> collectionNames = mongoTemplate.getCollectionNames();
 		return mongoTemplate.findById(id, this.getEntityClass(), collectionName);
 	}
@@ -152,12 +95,6 @@ public class MongoDaoSupport implements BaseMongoDAO {
 		return collectionNames;
 	}
 
-	/**
-	 * 通过条件查询,查询分页结果
-	 *
-	 * @param page
-	 * @param query
-	 */
 	@Override
 	public <T> PageModel<T> findPage(PageModel<T> page, Query query) {
 		//如果没有条件 则所有全部
@@ -174,11 +111,6 @@ public class MongoDaoSupport implements BaseMongoDAO {
 			page.currentPage(), page.pageSize(), rows);
 	}
 
-	/**
-	 * 求数据总和
-	 *
-	 * @param query
-	 */
 	@Override
 	public long count(Query query) {
 		return mongoTemplate.count(query, this.getEntityClass());

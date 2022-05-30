@@ -9,13 +9,20 @@ import java.util.regex.Pattern;
  * FormatUtils
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-10 22:35:53
+ * @version 2022.05
+ * @since 2022-05-27 21:53:43
  */
 public class FormatUtils {
 
 	public static Pattern regex = Pattern.compile("\\$\\{([^}]*)\\}");
 
+	/**
+	 * bson
+	 *
+	 * @param json json
+	 * @return {@link String }
+	 * @since 2022-05-27 21:53:43
+	 */
 	public static String bson(String json) {
 		json = transString(json);
 
@@ -50,9 +57,10 @@ public class FormatUtils {
 
 	/**
 	 * 转换$oid为ObjectId()
-	 * 
+	 *
 	 * @param str
-	 * @return
+	 * @return {@link String }
+	 * @since 2022-05-27 21:53:43
 	 */
 	private static String transString(String str) {
 		str = str.replace(", ", ",").replace("{\"$oid\":", "${");

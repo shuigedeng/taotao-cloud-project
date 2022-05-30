@@ -17,7 +17,7 @@ public enum PointTypeEnum {
 	 */
 	REDUCE("减少");
 
-	private String description;
+	private final String description;
 
 	public String description() {
 		return description;
