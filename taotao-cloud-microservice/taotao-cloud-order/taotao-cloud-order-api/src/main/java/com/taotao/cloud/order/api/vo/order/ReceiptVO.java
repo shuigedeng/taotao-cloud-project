@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.api.vo.order;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 /**
  * 发票
  */
+@RecordBuilder
 @Schema(description = "发票")
 public record ReceiptVO(
 	@Schema(description = "发票抬头")
@@ -25,6 +27,5 @@ public record ReceiptVO(
 
 	@Serial
 	private static final long serialVersionUID = -6293102172184734928L;
-
 
 }

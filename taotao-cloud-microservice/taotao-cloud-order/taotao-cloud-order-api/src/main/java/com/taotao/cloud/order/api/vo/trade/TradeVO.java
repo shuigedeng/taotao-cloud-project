@@ -1,5 +1,8 @@
-package com.taotao.cloud.order.api.vo.cart;
+package com.taotao.cloud.order.api.vo.trade;
 
+import com.taotao.cloud.order.api.vo.cart.CartVO;
+import com.taotao.cloud.order.api.vo.cart.PriceDetailVO;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
+@RecordBuilder
 @Schema(description = "整比交易对象")
 public record TradeVO(
 

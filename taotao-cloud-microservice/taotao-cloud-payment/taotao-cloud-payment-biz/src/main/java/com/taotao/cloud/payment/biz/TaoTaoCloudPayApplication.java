@@ -17,15 +17,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableTaoTaoCloudOpenapi
-@EnableTaoTaoCloudOauth2ResourceServer
-@EnableTaoTaoCloudJpa
-@EnableTaoTaoCloudP6spy
-@EnableTaoTaoCloudFeign
-@EnableTaoTaoCloudMVC
-@EnableTaoTaoCloudJobXxl
-@EnableTaoTaoCloudLogger
-@EnableTaoTaoCloudRedis
 @EnableTaoTaoCloudSeata
 @EnableTaoTaoCloudSentinel
 @EnableEncryptableProperties

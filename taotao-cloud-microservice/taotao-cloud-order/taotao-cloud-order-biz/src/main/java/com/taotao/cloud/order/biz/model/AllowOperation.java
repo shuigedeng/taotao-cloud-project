@@ -1,10 +1,11 @@
-package com.taotao.cloud.order.api.vo.order;
+package com.taotao.cloud.order.biz.model;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

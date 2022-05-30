@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 /**
  * 售后申请VO
  */
+@RecordBuilder
 @Schema(description = "售后申请VO")
 public record AfterSaleApplyVO(
 	@Schema(description = "申请退款金额单价")

@@ -11,6 +11,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import io.soabase.recordbuilder.core.RecordBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +27,7 @@ import lombok.ToString;
  * @version 2022.04
  * @since 2022-04-28 09:01:19
  */
+@RecordBuilder
 public record OrderBaseVO(
 	/**
 	 * 订单编号
@@ -268,6 +271,5 @@ public record OrderBaseVO(
 
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;
-
 
 }

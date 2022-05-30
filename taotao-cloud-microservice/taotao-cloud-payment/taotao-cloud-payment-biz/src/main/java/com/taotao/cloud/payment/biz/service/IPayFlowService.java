@@ -28,10 +28,8 @@ public interface IPayFlowService {
 	 * 根据id查询支付信息
 	 *
 	 * @param id id
-	 * @return com.taotao.cloud.log.biz.entity.MemberLogin
-	 * @author shuigedeng
-	 * @since 2020/11/20 下午1:08
-	 * @version 2022.03
+	 * @return {@link PayFlow }
+	 * @since 2022-05-30 16:46:32
 	 */
 	PayFlow findPayFlowById(Long id);
 }

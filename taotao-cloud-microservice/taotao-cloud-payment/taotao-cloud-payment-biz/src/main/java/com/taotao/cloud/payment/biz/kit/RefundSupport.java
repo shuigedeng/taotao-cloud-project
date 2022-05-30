@@ -1,7 +1,13 @@
 package com.taotao.cloud.payment.biz.kit;
 
+import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.api.vo.order.OrderItemVO;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
+import com.taotao.cloud.store.api.feign.IFeignStoreFlowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,25 +22,25 @@ public class RefundSupport {
      * 店铺流水
      */
     @Autowired
-    private StoreFlowService storeFlowService;
+    private IFeignStoreFlowService storeFlowService;
     /**
      * 订单
      */
     @Autowired
-    private OrderService orderService;
+    private IFeignOrderService orderService;
     /**
      * 子订单
      */
     @Autowired
-    private OrderItemService orderItemService;
+    private IFeignOrderItemService orderItemService;
 
     /**
      * 售后退款
      *
      * @param afterSale
      */
-    public void refund(AfterSale afterSale) {
-        Order order = orderService.getBySn(afterSale.getOrderSn());
+    public void refund(AfterSaleVO afterSale) {
+        OrderVO order = orderService.getBySn(afterSale.orderSn());
         RefundLog refundLog = RefundLog.builder()
                 .isRefund(false)
                 .totalAmount(afterSale.getActualRefundPrice())
@@ -60,9 +66,9 @@ public class RefundSupport {
     /**
      * 功能描述: 修改子订单中已售后退款商品数量
      */
-    private void updateReturnGoodsNumber(AfterSale afterSale) {
+    private void updateReturnGoodsNumber(AfterSaleVO afterSale) {
         //根据商品id及订单sn获取子订单
-        OrderItem orderItem = orderItemService.getByOrderSnAndSkuId(afterSale.getOrderSn(), afterSale.getSkuId());
+        OrderItemVO orderItem = orderItemService.getByOrderSnAndSkuId(afterSale.orderSn(), afterSale.skuId());
 
         orderItem.setReturnGoodsNumber(afterSale.getNum() + orderItem.getReturnGoodsNumber());
 
@@ -75,9 +81,9 @@ public class RefundSupport {
      *
      * @param afterSale
      */
-    public void cancel(AfterSale afterSale) {
+    public void cancel(AfterSaleVO afterSale) {
 
-        Order order = orderService.getBySn(afterSale.getOrderSn());
+        OrderVO order = orderService.getBySn(afterSale.orderSn());
         RefundLog refundLog = RefundLog.builder()
                 .isRefund(false)
                 .totalAmount(afterSale.getActualRefundPrice())

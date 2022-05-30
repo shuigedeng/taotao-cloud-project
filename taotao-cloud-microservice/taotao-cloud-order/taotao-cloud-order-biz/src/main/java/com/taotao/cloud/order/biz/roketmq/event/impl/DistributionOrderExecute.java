@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
 import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderService;
-import com.taotao.cloud.order.api.dto.order.OrderMessage;
+import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;

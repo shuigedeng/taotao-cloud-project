@@ -4,19 +4,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 订单支付日志：实际为订单部分字段提取过来的一个vo
  */
+@RecordBuilder
 @Schema(description = "订单支付日志：实际为订单部分字段提取过来的一个vo")
 public record PaymentLogVO(
 	@Schema(description = "订单编号")

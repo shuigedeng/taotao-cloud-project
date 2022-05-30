@@ -5,7 +5,7 @@ import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import com.taotao.cloud.order.api.dto.order.OrderMessage;
+import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;

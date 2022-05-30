@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.vo.aftersale;
 
 import com.taotao.cloud.common.enums.UserEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 /**
  * 售后日志
  */
+@RecordBuilder
 @Schema(description = "售后日志VO")
 public record AfterSaleLogVO(
 

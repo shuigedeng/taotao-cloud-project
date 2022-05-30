@@ -1,10 +1,12 @@
 package com.taotao.cloud.payment.biz.kit.params.dto;
 
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -42,9 +44,9 @@ public class CashierParam {
     private BigDecimal walletValue;
 
     public String getDetail() {
-        if (StringUtils.isEmpty(detail)) {
+        if (StringUtil.isEmpty(detail)) {
             return "清单详细";
         }
-        return StringUtils.filterSpecialChart(detail);
+        return StringUtil.filterSpecialChart(detail);
     }
 }

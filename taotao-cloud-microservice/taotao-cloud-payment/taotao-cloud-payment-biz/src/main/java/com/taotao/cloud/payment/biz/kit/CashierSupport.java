@@ -4,17 +4,24 @@ import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
 import com.taotao.cloud.payment.api.enums.PaymentClientEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -32,12 +39,12 @@ public class CashierSupport {
      * 预存款
      */
     @Autowired
-    private MemberWalletService memberWalletService;
+    private IFeignMemberWalletService memberWalletService;
     /**
      * 配置
      */
     @Autowired
-    private SettingService settingService;
+    private IFeignSettingService settingService;
 
     /**
      * 支付
@@ -47,14 +54,14 @@ public class CashierSupport {
      * @return 支付消息
      */
     public Result<Object> payment(PaymentMethodEnum paymentMethodEnum, PaymentClientEnum paymentClientEnum,
-                                         HttpServletRequest request, HttpServletResponse response,
-                                         PayParam payParam) {
+								  HttpServletRequest request, HttpServletResponse response,
+								  PayParam payParam) {
         if (paymentClientEnum == null || paymentMethodEnum == null) {
             throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
         }
         //获取支付插件
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
-        log.info("支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(), paymentMethodEnum.name(), payParam.toString());
+        LogUtil.info("支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(), paymentMethodEnum.name(), payParam.toString());
 
         //支付方式调用
         switch (paymentClientEnum) {
@@ -88,7 +95,7 @@ public class CashierSupport {
             throw new BusinessException(ResultEnum.PAY_CLIENT_TYPE_ERROR);
         }
         //支付方式 循环获取
-        Setting setting = settingService.get(SettingEnum.PAYMENT_SUPPORT.name());
+        SettingVO setting = settingService.get(SettingEnum.PAYMENT_SUPPORT.name()).data();
         PaymentSupportSetting paymentSupportSetting = JSONUtil.toBean(setting.getSettingValue(), PaymentSupportSetting.class);
         for (PaymentSupportItem paymentSupportItem : paymentSupportSetting.getPaymentSupportItems()) {
             if (paymentSupportItem.getClient().equals(clientTypeEnum.name())) {
@@ -107,7 +114,7 @@ public class CashierSupport {
     public void callback(PaymentMethodEnum paymentMethodEnum,
                          HttpServletRequest request) {
 
-        log.info("支付回调：支付类型：{}", paymentMethodEnum.name());
+        LogUtil.info("支付回调：支付类型：{}", paymentMethodEnum.name());
 
         //获取支付插件
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
@@ -122,7 +129,7 @@ public class CashierSupport {
     public void notify(PaymentMethodEnum paymentMethodEnum,
                        HttpServletRequest request) {
 
-        log.info("支付异步通知：支付类型：{}", paymentMethodEnum.name());
+		LogUtil.info("支付异步通知：支付类型：{}", paymentMethodEnum.name());
 
         //获取支付插件
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
@@ -143,17 +150,17 @@ public class CashierSupport {
                 continue;
             }
             //如果订单不需要付款，则抛出异常，直接返回
-            if (cashierParam.getPrice() <= 0) {
+            if (cashierParam.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
                 throw new BusinessException(ResultEnum.PAY_UN_WANTED);
             }
             cashierParam.setSupport(support(payParam.getClientType()));
             cashierParam.setWalletValue(memberWalletService.getMemberWallet(UserContext.getCurrentUser().getId()).getMemberWallet());
-            OrderSetting orderSetting = JSONUtil.toBean(settingService.get(SettingEnum.ORDER_SETTING.name()).getSettingValue(), OrderSetting.class);
+            OrderSettingVO orderSetting = JSONUtil.toBean(settingService.get(SettingEnum.ORDER_SETTING.name()).getSettingValue(), OrderSetting.class);
             Integer minute = orderSetting.getAutoCancel();
             cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);
             return cashierParam;
         }
-        log.error("错误的支付请求:{}", payParam.toString());
+		LogUtil.error("错误的支付请求:{}", payParam.toString());
         throw new BusinessException(ResultEnum.PAY_CASHIER_ERROR);
     }
 

@@ -4,6 +4,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderItemFallbackImpl;
+import com.taotao.cloud.order.api.vo.order.OrderItemVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,5 +20,9 @@ public interface IFeignOrderItemService {
 
 	@PostMapping(value = "/order/item/save")
 	Result<Boolean> saveOrderItem(@RequestBody OrderItemSaveDTO orderItemSaveDTO);
+
+    void updateById(OrderItemVO orderItem);
+
+	OrderItemVO getByOrderSnAndSkuId(String orderSn, String skuId);
 }
 

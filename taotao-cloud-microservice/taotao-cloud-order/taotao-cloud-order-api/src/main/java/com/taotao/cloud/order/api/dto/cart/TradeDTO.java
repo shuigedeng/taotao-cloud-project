@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.dto.cart;
 
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTOBuilder;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.SuperpositionPromotionEnum;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
@@ -96,17 +97,17 @@ public class TradeDTO implements Serializable {
 	/**
 	 * 可用优惠券列表
 	 */
-	private List<MemberCoupon> canUseCoupons;
+	private List<MemberCouponDTO> canUseCoupons;
 
 	/**
 	 * 无法使用优惠券无法使用的原因
 	 */
-	private List<MemberCouponVO> cantUseCoupons;
+	private List<MemberCouponDTO> cantUseCoupons;
 
 	/**
 	 * 收货地址
 	 */
-	private MemberAddress memberAddress;
+	private MemberAddressDTO memberAddress;
 
 	/**
 	 * 客户端类型
@@ -140,7 +141,7 @@ public class TradeDTO implements Serializable {
 		this.skuPromotionDetail = new HashMap<>();
 		this.storeCoupons = new HashMap<>();
 		this.storeCoupons = new HashMap<>();
-		this.priceDetailDTO = new PriceDetailDTO();
+		this.priceDetailDTO = PriceDetailDTOBuilder.builder().build();
 		this.cantUseCoupons = new ArrayList<>();
 		this.canUseCoupons = new ArrayList<>();
 		this.needReceipt = false;
@@ -155,8 +156,14 @@ public class TradeDTO implements Serializable {
 	 */
 	public List<CartSkuVO> getCheckedSkuList() {
 		if (skuList != null && !skuList.isEmpty()) {
-			return skuList.stream().filter(CartSkuVO::getChecked).collect(Collectors.toList());
+			return skuList.stream().filter(CartSkuVO::checked).collect(Collectors.toList());
 		}
 		return skuList;
 	}
+
+	public static class MemberAddressDTO {
+
+	}
+
+
 }

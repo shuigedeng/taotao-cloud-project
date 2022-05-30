@@ -4,6 +4,7 @@ import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
+@RecordBuilder
 @Schema(description = "订单详情VO")
 public record OrderDetailVO(
 	/**
@@ -70,61 +72,64 @@ public record OrderDetailVO(
 	@Serial
 	private static final long serialVersionUID = -6293102172184734928L;
 
+	//
+	// public OrderDetailVO(OrderBaseVO order, List<OrderItemVO> orderItems,
+	// 	List<OrderLogVO> orderLogs,
+	// 	ReceiptVO receipt) {
+	// 	this.order = order;
+	// 	this.orderItems = orderItems;
+	// 	this.orderLogs = orderLogs;
+	// 	this.receipt = receipt;
+	// }
+	//
+	// /**
+	//  * 可操作类型
+	//  */
+	// public AllowOperation getAllowOperationVO() {
+	// 	return new AllowOperation(this.order);
+	// }
+	//
+	// public String getOrderStatusValue() {
+	// 	try {
+	// 		return OrderStatusEnum.valueOf(order.getOrderStatus()).description();
+	// 	} catch (Exception e) {
+	// 		return "";
+	// 	}
+	// }
+	//
+	// public String getPayStatusValue() {
+	// 	try {
+	// 		return PayStatusEnum.valueOf(order.getPayStatus()).description();
+	// 	} catch (Exception e) {
+	// 		return "";
+	// 	}
+	//
+	// }
+	//
+	// public String getDeliverStatusValue() {
+	// 	try {
+	// 		return DeliverStatusEnum.valueOf(order.getDeliverStatus()).getDescription();
+	// 	} catch (Exception e) {
+	// 		return "";
+	// 	}
+	// }
+	//
+	// public String getDeliveryMethodValue() {
+	// 	try {
+	// 		return DeliveryMethodEnum.valueOf(order.getDeliveryMethod()).getDescription();
+	// 	} catch (Exception e) {
+	// 		return "";
+	// 	}
+	// }
+	//
+	// public String getPaymentMethodValue() {
+	// 	try {
+	// 		return PaymentMethodEnum.valueOf(order.getPaymentMethod()).paymentName();
+	// 	} catch (Exception e) {
+	// 		return "";
+	// 	}
+	// }
 
-	public OrderDetailVO(OrderBaseVO order, List<OrderItemVO> orderItems,
-		List<OrderLogVO> orderLogs,
-		ReceiptVO receipt) {
-		this.order = order;
-		this.orderItems = orderItems;
-		this.orderLogs = orderLogs;
-		this.receipt = receipt;
-	}
+	public static class OrderLogVO{}
 
-	/**
-	 * 可操作类型
-	 */
-	public AllowOperation getAllowOperationVO() {
-		return new AllowOperation(this.order);
-	}
-
-	public String getOrderStatusValue() {
-		try {
-			return OrderStatusEnum.valueOf(order.getOrderStatus()).description();
-		} catch (Exception e) {
-			return "";
-		}
-	}
-
-	public String getPayStatusValue() {
-		try {
-			return PayStatusEnum.valueOf(order.getPayStatus()).description();
-		} catch (Exception e) {
-			return "";
-		}
-
-	}
-
-	public String getDeliverStatusValue() {
-		try {
-			return DeliverStatusEnum.valueOf(order.getDeliverStatus()).getDescription();
-		} catch (Exception e) {
-			return "";
-		}
-	}
-
-	public String getDeliveryMethodValue() {
-		try {
-			return DeliveryMethodEnum.valueOf(order.getDeliveryMethod()).getDescription();
-		} catch (Exception e) {
-			return "";
-		}
-	}
-
-	public String getPaymentMethodValue() {
-		try {
-			return PaymentMethodEnum.valueOf(order.getPaymentMethod()).paymentName();
-		} catch (Exception e) {
-			return "";
-		}
-	}
 }

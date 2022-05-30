@@ -2,6 +2,7 @@ package com.taotao.cloud.order.api.dto.aftersale;
 
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import lombok.Data;
  * @version 2022.04
  * @since 2022-04-28 09:16:46
  */
+@RecordBuilder
 @Schema(description = "售后dto")
 public record AfterSaleDTO(
 	@Schema(description = "订单SN")

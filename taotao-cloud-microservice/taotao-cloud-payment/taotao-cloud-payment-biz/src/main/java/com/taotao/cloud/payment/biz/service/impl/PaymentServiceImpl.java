@@ -1,5 +1,6 @@
 package com.taotao.cloud.payment.biz.service.impl;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
 import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
@@ -26,11 +27,11 @@ public class PaymentServiceImpl implements PaymentService {
 
         boolean paymentResult = cashierSupport.paymentResult(paymentSuccessParams.getPayParam());
         if (paymentResult) {
-            log.warn("订单支付状态后，调用支付成功接口，流水号：{}", paymentSuccessParams.getReceivableNo());
+            LogUtil.info("订单支付状态后，调用支付成功接口，流水号：{}", paymentSuccessParams.getReceivableNo());
             return;
         }
 
-        log.debug("支付成功，第三方流水：{}", paymentSuccessParams.getReceivableNo());
+		LogUtil.info("支付成功，第三方流水：{}", paymentSuccessParams.getReceivableNo());
         //支付结果处理
         for (CashierExecute cashierExecute : cashierExecutes) {
             cashierExecute.paymentSuccess(paymentSuccessParams);
@@ -39,8 +40,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void adminPaySuccess(PaymentSuccessParams paymentSuccessParams) {
-
-        log.debug("支付状态修改成功->银行转账");
+		LogUtil.info("支付状态修改成功->银行转账");
         //支付结果处理
         for (CashierExecute cashierExecute : cashierExecutes) {
             cashierExecute.paymentSuccess(paymentSuccessParams);

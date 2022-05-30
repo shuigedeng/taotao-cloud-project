@@ -14,6 +14,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.taotao.cloud.common.utils.log.LogUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -54,7 +55,7 @@ public class QrCodeKit {
             bufImg = MatrixToImageWriter.toBufferedImage(bitMatrix, config);
             bool = writeToFile(bufImg, format, saveImgFilePath);
         } catch (Exception e) {
-            log.error("图形码生成工具生成错误",e);
+            LogUtil.error("图形码生成工具生成错误",e);
         }
         return bool;
     }
@@ -80,7 +81,7 @@ public class QrCodeKit {
                 throw new IllegalArgumentException("Could not decode image.");
             }
         } catch (Exception e) {
-            log.error("图片解码错误",e);
+			LogUtil.error("图片解码错误",e);
         }
         return result;
     }
@@ -98,7 +99,7 @@ public class QrCodeKit {
         try {
             bool = ImageIO.write(bufImg, format, new File(saveImgFilePath));
         } catch (Exception e) {
-            log.error("将BufferedImage对象写入文件错误",e);
+			LogUtil.error("将BufferedImage对象写入文件错误",e);
         }
         return bool;
     }

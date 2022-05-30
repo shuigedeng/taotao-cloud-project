@@ -19,10 +19,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 订单查询参数
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
@@ -53,10 +54,10 @@ public class OrderPageQuery extends PageParam {
 	private String tag;
 
 	@Schema(description = "商家ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "会员ID")
-	private String memberId;
+	private Long memberId;
 
 	@Schema(description = "收货人")
 	private String shipName;
@@ -89,17 +90,17 @@ public class OrderPageQuery extends PageParam {
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Schema(description = "支付时间")
-	private Date paymentTime;
+	private LocalDateTime paymentTime;
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Schema(description = "下单开始时间")
-	private Date startDate;
+	private LocalDateTime startDate;
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Schema(description = "下单结束时间")
-	private Date endDate;
+	private LocalDateTime endDate;
 
 	@Schema(description = "订单来源")
 	private String clientType;

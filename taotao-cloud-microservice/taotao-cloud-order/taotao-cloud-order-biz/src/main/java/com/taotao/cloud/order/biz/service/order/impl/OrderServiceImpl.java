@@ -27,7 +27,7 @@ import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
 import com.taotao.cloud.member.api.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.dto.order.OrderBatchDeliverDTO;
-import com.taotao.cloud.order.api.dto.order.OrderMessage;
+import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;

@@ -2,10 +2,14 @@ package com.taotao.cloud.payment.biz.kit.plugin.wallet;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
+import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
+import com.taotao.cloud.payment.biz.kit.Payment;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
@@ -41,7 +45,7 @@ public class WalletPlugin implements Payment {
      * 会员余额
      */
     @Autowired
-    private MemberWalletService memberWalletService;
+    private IFeignMemberWalletService memberWalletService;
     /**
      * 收银台
      */

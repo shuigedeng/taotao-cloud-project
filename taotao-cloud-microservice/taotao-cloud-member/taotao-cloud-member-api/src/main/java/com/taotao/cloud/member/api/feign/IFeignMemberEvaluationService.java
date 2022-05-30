@@ -51,6 +51,6 @@ public interface IFeignMemberEvaluationService {
 	 */
 	Result<List<Map<String, Object>>> memberEvaluationNum();
 
-    void addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b);
+	Result<Boolean> addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b);
 }
 

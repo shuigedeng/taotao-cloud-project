@@ -1,17 +1,14 @@
 package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 
 /**
@@ -21,6 +18,7 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
+@RecordBuilder
 @Schema(description = "购物车展示VO")
 public record CartVO(
 
@@ -43,10 +41,10 @@ public record CartVO(
 	Boolean isFull,
 
 	@Schema(description = "使用的优惠券列表")
-	List<MemberCoupon> couponList,
+	List<CartMemberCouponVO> couponList,
 
 	@Schema(description = "使用的优惠券列表")
-	List<CouponVO> canReceiveCoupon,
+	List<CartCouponVO> canReceiveCoupon,
 
 	@Schema(description = "赠品列表")
 	List<String> giftList,
@@ -82,39 +80,48 @@ public record CartVO(
 	private static final long serialVersionUID = -5651775413457562422L;
 
 
-	public CartVO(CartSkuVO cartSkuVO) {
-		this.setStoreId(cartSkuVO.getStoreId());
-		this.setStoreName(cartSkuVO.getStoreName());
-		this.setSkuList(new ArrayList<>());
-		this.setCouponList(new ArrayList<>());
-		this.setGiftList(new ArrayList<>());
-		this.setGiftCouponList(new ArrayList<>());
-		this.setChecked(false);
-		this.isFull = false;
-		this.weight = 0d;
-		this.giftPoint = 0;
-		this.remark = "";
+	// public CartVO(CartSkuVO cartSkuVO) {
+	// 	this.setStoreId(cartSkuVO.getStoreId());
+	// 	this.setStoreName(cartSkuVO.getStoreName());
+	// 	this.setSkuList(new ArrayList<>());
+	// 	this.setCouponList(new ArrayList<>());
+	// 	this.setGiftList(new ArrayList<>());
+	// 	this.setGiftCouponList(new ArrayList<>());
+	// 	this.setChecked(false);
+	// 	this.isFull = false;
+	// 	this.weight = 0d;
+	// 	this.giftPoint = 0;
+	// 	this.remark = "";
+	// }
+	//
+	// public void addGoodsNum(Integer goodsNum) {
+	// 	if (this.goodsNum == null) {
+	// 		this.goodsNum = goodsNum;
+	// 	} else {
+	// 		this.goodsNum += goodsNum;
+	// 	}
+	// }
+	//
+	//
+	// /**
+	//  * 过滤购物车中已选择的sku
+	//  *
+	//  * @return
+	//  */
+	// public List<CartSkuVO> getCheckedSkuList() {
+	// 	if (skuList != null && !skuList.isEmpty()) {
+	// 		return skuList.stream().filter(CartSkuVO::getChecked).collect(Collectors.toList());
+	// 	}
+	// 	return skuList;
+	// }
+
+	public static class CartMemberCouponVO {
+
 	}
 
-	public void addGoodsNum(Integer goodsNum) {
-		if (this.goodsNum == null) {
-			this.goodsNum = goodsNum;
-		} else {
-			this.goodsNum += goodsNum;
-		}
+	public static class CartCouponVO {
+
 	}
 
-
-	/**
-	 * 过滤购物车中已选择的sku
-	 *
-	 * @return
-	 */
-	public List<CartSkuVO> getCheckedSkuList() {
-		if (skuList != null && !skuList.isEmpty()) {
-			return skuList.stream().filter(CartSkuVO::getChecked).collect(Collectors.toList());
-		}
-		return skuList;
-	}
 
 }

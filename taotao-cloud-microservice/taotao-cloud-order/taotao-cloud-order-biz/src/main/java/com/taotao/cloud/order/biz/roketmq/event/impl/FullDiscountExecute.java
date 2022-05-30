@@ -12,7 +12,7 @@ import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.dto.order.OrderMessage;
+import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;

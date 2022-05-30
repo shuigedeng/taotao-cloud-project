@@ -5,7 +5,7 @@ import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
 import com.taotao.cloud.message.api.feign.IFeignNoticeMessageService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.dto.order.OrderMessage;
+import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;

@@ -92,7 +92,7 @@ public class OrderComplaintController {
 		SecurityUser user = SecurityUtil.getUser();
 		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
 			.complainId(complainId)
-			.content(orderComplaintCommunicationDTO.getContent())
+			.content(orderComplaintCommunicationDTO.content())
 			.owner(CommunicationOwnerEnum.PLATFORM.name())
 			.ownerName(user.getUsername())
 			.ownerId(user.getUserId())

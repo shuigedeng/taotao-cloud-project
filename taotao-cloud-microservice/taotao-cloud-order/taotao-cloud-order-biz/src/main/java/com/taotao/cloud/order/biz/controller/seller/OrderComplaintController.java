@@ -86,7 +86,7 @@ public class OrderComplaintController {
 		SecurityUser user = SecurityUtil.getUser();
 		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
 			.complainId(complainId)
-			.content(orderComplaintCommunicationDTO.getContent())
+			.content(orderComplaintCommunicationDTO.content())
 			.owner(CommunicationOwnerEnum.STORE.name())
 			.ownerName(user.getUsername())
 			.ownerId(user.getStoreId())
@@ -112,7 +112,7 @@ public class OrderComplaintController {
 	public Result<OrderComplaintVO> appeal( @Validated @RequestBody StoreAppealDTO storeAppealDTO) {
 		orderComplaintService.appeal(storeAppealDTO);
 		return Result.success(
-			orderComplaintService.getOrderComplainById(storeAppealDTO.getOrderComplaintId()));
+			orderComplaintService.getOrderComplainById(storeAppealDTO.orderComplaintId()));
 	}
 
 	@Operation(summary = "修改状态", description = "修改状态")

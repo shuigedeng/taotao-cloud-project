@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.vo.cart;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
+@RecordBuilder
 @Schema(description = "商品促销VO 购物车中")
 public record GoodsPromotionVO(
 
@@ -45,13 +47,12 @@ public record GoodsPromotionVO(
 	@Serial
 	private static final long serialVersionUID = 1622051257060817414L;
 
-
-	public GoodsPromotionVO(PromotionGoods promotionGoods) {
-		this.startTime = promotionGoods.getStartTime();
-		this.endTime = promotionGoods.getEndTime();
-		this.promotionId = promotionGoods.getPromotionId();
-		this.setPromotionType(promotionGoods.getPromotionType());
-		this.setLimitNum(promotionGoods.getLimitNum());
-	}
+	// public GoodsPromotionVO(PromotionGoods promotionGoods) {
+	// 	this.startTime = promotionGoods.getStartTime();
+	// 	this.endTime = promotionGoods.getEndTime();
+	// 	this.promotionId = promotionGoods.getPromotionId();
+	// 	this.setPromotionType(promotionGoods.getPromotionType());
+	// 	this.setLimitNum(promotionGoods.getLimitNum());
+	// }
 
 }

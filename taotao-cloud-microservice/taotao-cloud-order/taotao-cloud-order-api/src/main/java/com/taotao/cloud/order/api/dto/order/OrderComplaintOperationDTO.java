@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.api.dto.order;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import lombok.Data;
  * @version 2022.04
  * @since 2022-04-21 16:59:38
  */
+@RecordBuilder
 @Schema(description = "交易投诉 参数")
 public record OrderComplaintOperationDTO(
 	@Schema(description = "要更改的状态状态")

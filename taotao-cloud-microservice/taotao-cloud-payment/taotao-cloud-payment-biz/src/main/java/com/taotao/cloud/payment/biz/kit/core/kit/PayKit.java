@@ -6,6 +6,7 @@ import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.HmacAlgorithm;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.payment.biz.kit.core.XmlHelper;
 import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
 
@@ -177,7 +178,7 @@ public class PayKit {
         try {
             return URLEncoder.encode(src, CharsetUtil.UTF_8).replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
-            log.error("URL 编码错误",e);
+			LogUtil.error("URL 编码错误",e);
             return null;
         }
     }

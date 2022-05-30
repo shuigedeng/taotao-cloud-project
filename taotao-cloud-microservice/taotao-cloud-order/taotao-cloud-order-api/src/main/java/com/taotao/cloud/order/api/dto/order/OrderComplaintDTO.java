@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.api.dto.order;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,8 +9,10 @@ import javax.validation.constraints.NotBlank;
 /**
  * 交易投诉DTO
  */
+@RecordBuilder
 @Schema(description = "交易投诉DTO")
 public record OrderComplaintDTO(
+
 	@NotBlank
 	@Schema(description = "投诉主题")
 	String complainTopic,

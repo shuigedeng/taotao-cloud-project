@@ -2,9 +2,8 @@ package com.taotao.cloud.order.biz.controller.buyer;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.vo.cart.TradeParams;
+import com.taotao.cloud.order.api.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.service.cart.ICartService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,7 +58,7 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
-	public Result<TradeDTO> cartAll() {
+	public Result<com.taotao.cloud.order.api.dto.cart.TradeDTO> cartAll() {
 		return Result.success(this.cartService.getAllTradeDTO());
 	}
 
@@ -137,7 +136,7 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/checked")
-	public Result<TradeDTO> cartChecked(@NotNull(message = "读取选中列表") String way) {
+	public Result<com.taotao.cloud.order.api.dto.cart.TradeDTO> cartChecked(@NotNull(message = "读取选中列表") String way) {
 		//读取选中的列表
 		return Result.success(this.cartService.getCheckedTradeDTO(CartTypeEnum.valueOf(way)));
 	}
@@ -183,8 +182,8 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/trade", consumes = "application/json", produces = "application/json")
-	public Result<Object> crateTrade(@RequestBody TradeParams tradeParams) {
+	public Result<Object> crateTrade(@RequestBody TradeDTO tradeDTO) {
 		//读取选中的列表
-		return Result.success(this.cartService.createTrade(tradeParams));
+		return Result.success(this.cartService.createTrade(tradeDTO));
 	}
 }
