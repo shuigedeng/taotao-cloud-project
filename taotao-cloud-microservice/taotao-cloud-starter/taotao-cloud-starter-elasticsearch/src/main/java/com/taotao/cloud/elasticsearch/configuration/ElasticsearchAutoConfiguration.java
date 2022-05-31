@@ -41,6 +41,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.client.ClientConfiguration;
+import org.springframework.data.elasticsearch.client.ClientConfigurationBuilder;
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 /**
@@ -62,6 +65,19 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(ElasticsearchAutoConfiguration.class, StarterName.ELASTICSEARCH_STARTER);
 	}
+
+	// @Configuration
+	// public static class ElasticsearchConfig extends ElasticsearchConfiguration {
+	// 	@Autowired
+	// 	private org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties properties;
+	//
+	// 	@Override
+	// 	public ClientConfiguration clientConfiguration() {
+	// 		return ClientConfiguration.builder()
+	// 			.connectedTo(properties.getUris().toString())
+	// 			.build();
+	// 	}
+	// }
 
 	@Bean
 	public RestClientBuilderCustomizer restClientBuilderCustomizer(
