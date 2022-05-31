@@ -171,8 +171,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		//添加商品sku信息
 		this.goodsSkuService.add(goodsOperationDTO.skuList(), goods);
 		//添加相册
-		if (goodsOperationDTO.goodsGalleryList() != null
-			&& !goodsOperationDTO.goodsGalleryList().isEmpty()) {
+		if (!goodsOperationDTO.goodsGalleryList().isEmpty()) {
 			this.goodsGalleryService.add(goodsOperationDTO.goodsGalleryList(), goods.getId());
 		}
 		return true;
@@ -200,8 +199,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		this.goodsSkuService.update(goodsOperationDTO.skuList(), goods,
 			goodsOperationDTO.regeneratorSkuFlag());
 		//添加相册
-		if (goodsOperationDTO.goodsGalleryList() != null
-			&& !goodsOperationDTO.goodsGalleryList().isEmpty()) {
+		if (!goodsOperationDTO.goodsGalleryList().isEmpty()) {
 			this.goodsGalleryService.add(goodsOperationDTO.goodsGalleryList(), goods.getId());
 		}
 		if (GoodsAuthEnum.TOBEAUDITED.name().equals(goods.getIsAuth())) {

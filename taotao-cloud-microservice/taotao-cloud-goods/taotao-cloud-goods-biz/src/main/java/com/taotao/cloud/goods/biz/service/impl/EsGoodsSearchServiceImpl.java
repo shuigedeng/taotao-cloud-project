@@ -8,6 +8,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
 import com.taotao.cloud.goods.api.dto.ParamOptions;
+import com.taotao.cloud.goods.api.dto.ParamOptionsBuilder;
 import com.taotao.cloud.goods.api.dto.SelectorOptions;
 import com.taotao.cloud.goods.api.dto.SelectorOptionsBuilder;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
@@ -341,9 +342,10 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 			String[] nameSplit = categoryNamePath.split(",");
 			if (split.length == nameSplit.length) {
 				for (int i = 0; i < split.length; i++) {
-					SelectorOptions so = new SelectorOptions();
-					so.setName(nameSplit[i]);
-					so.setValue(split[i]);
+					SelectorOptions so = SelectorOptionsBuilder.builder()
+						.name(nameSplit[i])
+						.value(split[i])
+						.build();
 					if (!categoryOptions.contains(so)) {
 						categoryOptions.add(so);
 					}
@@ -388,23 +390,19 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 
 		for (Terms.Bucket bucket : nameBuckets) {
 			String name = bucket.getKey().toString();
-			ParamOptions paramOptions1 = new ParamOptions();
 			ParsedStringTerms valueAgg = bucket.getAggregations().get("valueAgg");
 			List<? extends Terms.Bucket> valueBuckets = valueAgg.getBuckets();
 			List<String> valueSelectorList = new ArrayList<>();
 
 			for (Terms.Bucket valueBucket : valueBuckets) {
 				String value = valueBucket.getKey().toString();
-
 				if (CharSequenceUtil.isNotEmpty(value)) {
 					valueSelectorList.add(value);
 				}
-
 			}
+
 			if (nameList == null || !nameList.contains(name)) {
-				paramOptions1.setKey(name);
-				paramOptions1.setValues(valueSelectorList);
-				paramOptions.add(paramOptions1);
+				paramOptions.add(ParamOptionsBuilder.builder().key(name).values(valueSelectorList).build());
 			}
 		}
 		return paramOptions;

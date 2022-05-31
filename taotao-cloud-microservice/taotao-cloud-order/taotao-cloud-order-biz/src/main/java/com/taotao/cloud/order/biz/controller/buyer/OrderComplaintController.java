@@ -61,8 +61,7 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable Long id) {
-		OrderComplaintVO orderComplaintVO = OperationalJudgment.judgment(
-			orderComplaintService.getOrderComplainById(id));
+		OrderComplaintVO orderComplaintVO = OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id));
 		return Result.success(orderComplaintVO);
 	}
 
@@ -89,7 +88,7 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
-																  @Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
+											@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
 		SecurityUser user = SecurityUtil.getCurrentUser();
 		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
 			.complainId(complainId)

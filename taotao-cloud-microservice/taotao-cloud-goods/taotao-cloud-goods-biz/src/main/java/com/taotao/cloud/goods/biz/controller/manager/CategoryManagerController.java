@@ -94,7 +94,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryVO category) {
-		Category catTemp = categoryService.getById(category.id());
+		Category catTemp = categoryService.getById(category.categoryBase().id());
 		if (catTemp == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
@@ -126,7 +126,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
 	public Result<Boolean> disable(@PathVariable Long id,
-		@RequestParam Boolean enableOperations) {
+								   @RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

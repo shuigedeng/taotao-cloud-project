@@ -48,7 +48,7 @@ import java.util.Objects;
 public class Goods extends BaseSuperEntity<Goods, Long> {
 
 	public static final String TABLE_NAME = "tt_goods";
-	
+
 	/**
 	 * 商品名称
 	 */
@@ -165,6 +165,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 
 	/**
 	 * 审核状态
+	 *
 	 * @see GoodsAuthEnum
 	 */
 	@Column(name = "is_auth", columnDefinition = "varchar(255) not null comment '审核状态'")
@@ -234,32 +235,32 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 
 	public Goods(GoodsOperationDTO goodsOperationDTO) {
 		this.goodsName = goodsOperationDTO.getGoodsName();
-		this.categoryPath = goodsOperationDTO.getCategoryPath();
-		this.storeCategoryPath = goodsOperationDTO.getStoreCategoryPath();
-		this.brandId = goodsOperationDTO.getBrandId();
-		this.templateId = goodsOperationDTO.getTemplateId();
-		this.recommend = goodsOperationDTO.getRecommend();
-		this.sellingPoint = goodsOperationDTO.getSellingPoint();
-		this.salesModel = goodsOperationDTO.getSalesModel();
-		this.goodsUnit = goodsOperationDTO.getGoodsUnit();
-		this.intro = goodsOperationDTO.getIntro();
-		this.mobileIntro = goodsOperationDTO.getMobileIntro();
-		this.goodsVideo = goodsOperationDTO.getGoodsVideo();
-		this.price = goodsOperationDTO.getPrice();
-		if (goodsOperationDTO.getGoodsParamsDTOList() != null
-			&& goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
-			this.params = JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList());
+		this.categoryPath = goodsOperationDTO.categoryPath();
+		this.storeCategoryPath = goodsOperationDTO.storeCategoryPath();
+		this.brandId = goodsOperationDTO.brandId();
+		this.templateId = goodsOperationDTO.templateId();
+		this.recommend = goodsOperationDTO.recommend();
+		this.sellingPoint = goodsOperationDTO.sellingPoint();
+		this.salesModel = goodsOperationDTO.salesModel();
+		this.goodsUnit = goodsOperationDTO.goodsUnit();
+		this.intro = goodsOperationDTO.intro();
+		this.mobileIntro = goodsOperationDTO.mobileIntro();
+		this.goodsVideo = goodsOperationDTO.goodsVideo();
+		this.price = goodsOperationDTO.price();
+		if (goodsOperationDTO.goodsParamsDTOList() != null
+			&& goodsOperationDTO.goodsParamsDTOList().isEmpty()) {
+			this.params = JSONUtil.toJsonStr(goodsOperationDTO.goodsParamsDTOList());
 		}
 
 		//如果立即上架则
 		this.marketEnable =
-			Boolean.TRUE.equals(goodsOperationDTO.getRelease()) ? GoodsStatusEnum.UPPER.name()
+			Boolean.TRUE.equals(goodsOperationDTO.release()) ? GoodsStatusEnum.UPPER.name()
 				: GoodsStatusEnum.DOWN.name();
-		this.goodsType = goodsOperationDTO.getGoodsType();
+		this.goodsType = goodsOperationDTO.goodsType();
 		this.grade = BigDecimal.valueOf(100);
 
 		//循环sku，判定sku是否有效
-		for (Map<String, Object> sku : goodsOperationDTO.getSkuList()) {
+		for (Map<String, Object> sku : goodsOperationDTO.skuList()) {
 			//判定参数不能为空
 			if (sku.get("sn") == null) {
 				throw new BusinessException(ResultEnum.GOODS_SKU_SN_ERROR);
@@ -303,7 +304,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

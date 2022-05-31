@@ -26,6 +26,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -154,7 +155,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "删除商品", description = "删除商品")
-	@RequestLogger(
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping
 	public Result<Boolean> deleteGoods(@RequestParam List<Long> goodsId) {

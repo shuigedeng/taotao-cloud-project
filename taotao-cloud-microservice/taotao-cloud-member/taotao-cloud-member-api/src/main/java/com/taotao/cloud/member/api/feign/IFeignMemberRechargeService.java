@@ -10,6 +10,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.math.BigDecimal;
+
 /**
  * 远程调用会员用户模块
  *
@@ -24,5 +26,7 @@ public interface IFeignMemberRechargeService {
 	void paySuccess(String sn, String receivableNo, String paymentMethod);
 
 	MemberRechargeVO getRecharge(String sn);
+
+	MemberRechargeVO recharge(BigDecimal price);
 }
 

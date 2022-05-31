@@ -146,7 +146,7 @@ public final class SecurityUtil {
 	 * @return 用户信息
 	 * @since 2021-09-02 14:56:28
 	 */
-	public static SecurityUser getUserWithNull() {
+	public static SecurityUser getCurrentUserWithNull() {
 		Authentication authentication = getAuthentication();
 		return getUser(authentication);
 	}

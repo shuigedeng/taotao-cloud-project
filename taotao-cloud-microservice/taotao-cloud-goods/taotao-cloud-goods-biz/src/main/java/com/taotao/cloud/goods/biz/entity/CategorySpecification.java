@@ -48,11 +48,6 @@ public class CategorySpecification extends SuperEntity<CategorySpecification, Lo
 	@Column(name = "specification_id", columnDefinition = "bigint not null comment '规格id'")
 	private Long specificationId;
 
-	public CategorySpecification(Long categoryId, Long specificationId) {
-		this.categoryId = categoryId;
-		this.specificationId = specificationId;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

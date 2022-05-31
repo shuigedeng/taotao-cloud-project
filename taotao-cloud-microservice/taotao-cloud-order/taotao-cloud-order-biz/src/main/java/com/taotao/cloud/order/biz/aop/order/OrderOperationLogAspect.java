@@ -34,7 +34,7 @@ public class OrderOperationLogAspect {
 	@After("@annotation(com.taotao.cloud.order.biz.aop.order.OrderLogPoint)")
 	public void doAfter(JoinPoint joinPoint) {
 		try {
-			SecurityUser securityUser = SecurityUtil.getUserWithNull();
+			SecurityUser securityUser = SecurityUtil.getCurrentUserWithNull();
 			//日志对象拼接
 			//默认操作人员，系统操作
 			String userName = "系统操作";

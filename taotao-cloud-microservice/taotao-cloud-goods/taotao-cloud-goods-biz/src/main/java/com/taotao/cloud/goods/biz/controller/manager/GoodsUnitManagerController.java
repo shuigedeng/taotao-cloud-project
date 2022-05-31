@@ -64,7 +64,7 @@ public class GoodsUnitManagerController {
 	}
 
 	@Operation(summary = "添加商品计量单位", description = "添加商品计量单位")
-	@RequestLogge
+	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Valid @RequestBody GoodsUnit goodsUnit) {

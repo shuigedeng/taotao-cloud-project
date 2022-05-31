@@ -1,6 +1,8 @@
 package com.taotao.cloud.order.biz.service.trade;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.api.query.order.OrderLogPageQuery;
 import com.taotao.cloud.order.biz.entity.order.OrderLog;
 
 import java.util.List;
@@ -22,4 +24,7 @@ public interface IOrderLogService extends IService<OrderLog> {
 	 * @since 2022-04-28 08:55:50
 	 */
 	List<OrderLog> getOrderLog(String orderSn);
+
+    IPage<OrderLog> getByPage(OrderLogPageQuery orderLogPageQuery);
+
 }

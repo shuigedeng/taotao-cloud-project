@@ -1,8 +1,10 @@
 package com.taotao.cloud.order.biz.service.trade.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.order.api.query.order.OrderLogPageQuery;
 import com.taotao.cloud.order.biz.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.mapper.trade.IOrderLogMapper;
 import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
@@ -21,10 +23,18 @@ import java.util.List;
 public class OrderLogServiceImpl extends ServiceImpl<IOrderLogMapper, OrderLog> implements
 	IOrderLogService {
 
-    @Override
-    public List<OrderLog> getOrderLog(String orderSn) {
-        LambdaQueryWrapper<OrderLog> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(OrderLog::getOrderSn, orderSn);
-        return this.list(lambdaQueryWrapper);
-    }
+	@Override
+	public List<OrderLog> getOrderLog(String orderSn) {
+		LambdaQueryWrapper<OrderLog> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		lambdaQueryWrapper.eq(OrderLog::getOrderSn, orderSn);
+		return this.list(lambdaQueryWrapper);
+	}
+
+	@Override
+	public IPage<OrderLog> getByPage(OrderLogPageQuery orderLogPageQuery) {
+		LambdaQueryWrapper<OrderLog> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		//todo 需要设置条件
+
+		return this.page(orderLogPageQuery.buildMpPage(), lambdaQueryWrapper);
+	}
 }

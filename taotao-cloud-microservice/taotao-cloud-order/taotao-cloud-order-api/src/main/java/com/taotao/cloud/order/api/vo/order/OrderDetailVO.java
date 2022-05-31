@@ -130,6 +130,5 @@ public record OrderDetailVO(
 	// 	}
 	// }
 
-	public static class OrderLogVO{}
 
 }

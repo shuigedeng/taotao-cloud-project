@@ -22,6 +22,7 @@ public record GoodsSkuVO(
 	@Schema(description = "商品图片")
 	List<String> goodsGalleryList,
 
+	@Schema(description = "基础商品信息")
 	GoodsSkuBaseVO goodsSkuBase
 ) implements Serializable {
 

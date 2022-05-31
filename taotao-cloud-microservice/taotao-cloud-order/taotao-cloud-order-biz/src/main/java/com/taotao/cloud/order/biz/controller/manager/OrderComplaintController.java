@@ -9,6 +9,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
+import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTOBuilder;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.query.order.OrderComplaintPageQuery;
@@ -112,15 +113,16 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/complete/{id}")
-	public Result<Object> complete(@PathVariable String id, String arbitrationResult) {
+	public Result<Boolean> complete(@PathVariable Long id, String arbitrationResult) {
 		//新建对象
-		OrderComplaintOperationParams orderComplaintOperationParams = new OrderComplaintOperationParams();
-		orderComplaintOperationParams.setComplainId(id);
-		orderComplaintOperationParams.setArbitrationResult(arbitrationResult);
-		orderComplaintOperationParams.setComplainStatus(OrderComplaintStatusEnum.COMPLETE.name());
+		OrderComplaintOperationDTO orderComplaintOperationDTO = OrderComplaintOperationDTOBuilder
+			.builder()
+			.complainId(id)
+			.arbitrationResult(arbitrationResult)
+			.complainStatus(OrderComplaintStatusEnum.COMPLETE.name())
+			.build();
 
 		//修改状态
-		orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationParams);
-		return Result.success();
+		return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
 	}
 }
