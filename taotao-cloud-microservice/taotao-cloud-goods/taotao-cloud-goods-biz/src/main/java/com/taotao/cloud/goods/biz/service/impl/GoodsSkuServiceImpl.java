@@ -15,12 +15,14 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.event.GeneratorEsGoodsIndexEvent;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
 import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVOBuilder;
 import com.taotao.cloud.goods.api.vo.GoodsSkuSpecVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuSpecVOBuilder;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
@@ -40,6 +42,7 @@ import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
+import com.taotao.cloud.member.api.dto.MemberBrowseDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
@@ -59,7 +62,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -70,6 +72,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 商品sku业务层实现
@@ -273,6 +276,8 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 
 		//商品规格
 		GoodsSkuVO goodsSkuDetail = this.getGoodsSkuVO(goodsSku);
+		GoodsSkuVOBuilder goodsSkuVOBuilder = GoodsSkuVOBuilder.builder(goodsSkuDetail);
+		GoodsSkuBaseVOBuilder goodsSkuBaseVOBuilder = GoodsSkuBaseVOBuilder.builder(goodsSkuDetail.goodsSkuBase());
 
 		Map<String, Object> promotionMap = goodsIndex.getPromotionMap();
 		//设置当前商品的促销价格
@@ -292,29 +297,31 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 
 			Optional<Entry<String, Object>> containsPromotion = promotionMap.entrySet().stream()
 				.filter(i -> i.getKey().contains(PromotionTypeEnum.SECKILL.name()) || i.getKey()
-						.contains(PromotionTypeEnum.PINTUAN.name()))
+					.contains(PromotionTypeEnum.PINTUAN.name()))
 				.findFirst();
 			if (containsPromotion.isPresent()) {
 				JSONObject jsonObject = JSONUtil.parseObj(containsPromotion.get().getValue());
 				PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
-				searchParams.setSkuId(skuId);
+				searchParams.setSkuId(String.valueOf(skuId));
 				searchParams.setPromotionId(Long.valueOf(jsonObject.get("id").toString()));
 				PromotionGoodsVO promotionsGoods = promotionGoodsService.getPromotionsGoods(
 					searchParams).data();
 				if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
-					goodsSkuDetail.setPromotionFlag(true);
-					goodsSkuDetail.setPromotionPrice(promotionsGoods.getPrice());
+					goodsSkuBaseVOBuilder.promotionFlag(true);
+					goodsSkuBaseVOBuilder.promotionPrice(promotionsGoods.getPrice());
 				}
 			} else {
-				goodsSkuDetail.setPromotionFlag(false);
-				goodsSkuDetail.setPromotionPrice(null);
+				goodsSkuBaseVOBuilder.promotionFlag(false);
+				goodsSkuBaseVOBuilder.promotionPrice(null);
 			}
 		}
+		goodsSkuDetail = goodsSkuVOBuilder.goodsSkuBase(goodsSkuBaseVOBuilder.build()).build();
 		map.put("data", goodsSkuDetail);
 
 		//获取分类
 		String[] split = goodsSkuDetail.goodsSkuBase().categoryPath().split(",");
-		map.put("categoryName", categoryService.getCategoryNameByIds(Arrays.asList(split)));
+
+		map.put("categoryName", categoryService.getCategoryNameByIds(Stream.of(split).map(Long::valueOf).toList()));
 
 		//获取规格信息
 		map.put("specs", this.groupBySkuAndSpec(goodsVO.skuList()));
@@ -326,14 +333,14 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 		}
 
 		//记录用户足迹
-		//if (UserContext.getCurrentUser() != null) {
-		//	FootPrint footPrint = new FootPrint(UserContext.getCurrentUser().getId(), goodsId,
-		//		skuId);
-		//	String destination =
-		//		rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.VIEW_GOODS.name();
-		//	rocketMQTemplate.asyncSend(destination, footPrint,
-		//		RocketmqSendCallbackBuilder.commonCallback());
-		//}
+		if (SecurityUtil.getCurrentUserWithNull() != null) {
+			MemberBrowseDTO footPrint = new MemberBrowseDTO(SecurityUtil.getUserId(), goodsId,
+				skuId);
+			String destination =
+				rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.VIEW_GOODS.name();
+			rocketMQTemplate.asyncSend(destination, footPrint,
+				RocketmqSendCallbackBuilder.commonCallback());
+		}
 		return map;
 	}
 

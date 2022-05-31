@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsBaseVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -42,11 +43,13 @@ public interface IDraftGoodsMapStruct {
 	/**
 	 * 商品dtoto草案起草产品
 	 *
-	 * @param draftGoodsDTO 商品dto草案
+	 * @param draftGoodsBaseDTO 商品dto草案
 	 * @return {@link DraftGoods }
 	 * @since 2022-04-27 16:58:13
 	 */
-	DraftGoods draftGoodsDTOToDraftGoods(DraftGoodsDTO draftGoodsDTO);
+	DraftGoods draftGoodsDTOToDraftGoods(DraftGoodsBaseDTO draftGoodsBaseDTO);
+
+	DraftGoodsBaseVO draftGoodsDTOToDraftGoods(DraftGoods draftGoods);
 
 
 }

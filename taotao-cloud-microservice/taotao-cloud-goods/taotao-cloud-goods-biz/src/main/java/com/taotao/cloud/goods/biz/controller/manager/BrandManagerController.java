@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
+import com.taotao.cloud.goods.api.dto.BrandDTOBuilder;
 import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
@@ -88,8 +89,8 @@ public class BrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable Long id, @Validated BrandDTO brand) {
-		brand.setId(id);
-		return Result.success(brandService.updateBrand(brand));
+		BrandDTO brandDTO = BrandDTOBuilder.builder(brand).id(id).build();
+		return Result.success(brandService.updateBrand(brandDTO));
 	}
 
 	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌")

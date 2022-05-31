@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.api.dto.GoodsParamsDTOBuilder;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.api.vo.ParameterGroupVOBuilder;
 import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
@@ -85,9 +86,7 @@ public class CategoryParameterGroupServiceImpl extends
 				.filter(i -> i.groupId() != null && i.groupId().equals(origin.getId()))
 				.toList();
 
-			for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
-				goodsParamsDTO.setGroupName(categoryParameterGroup.getGroupName());
-			}
+			goodsParamsDTOList = goodsParamsDTOList.stream().peek(goodsParamsDTO -> GoodsParamsDTOBuilder.builder(goodsParamsDTO).groupName(categoryParameterGroup.getGroupName()).build()).toList();
 
 			this.goodsService.updateGoodsParams(Long.valueOf(goods.get("id").toString()),
 				JSONUtil.toJsonStr(goodsParamsDTOS));

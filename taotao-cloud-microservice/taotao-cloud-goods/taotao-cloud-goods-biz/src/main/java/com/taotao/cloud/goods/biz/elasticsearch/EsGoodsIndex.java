@@ -299,17 +299,17 @@ public class EsGoodsIndex implements Serializable {
 			//循环参数分组
 			goodsParamDTOS.forEach(goodsParamGroup -> {
 				//如果参数有配置，则增加索引
-				if (goodsParamGroup.getGoodsParamsItemDTOList() != null
-					&& !goodsParamGroup.getGoodsParamsItemDTOList().isEmpty()) {
+				if (goodsParamGroup.goodsParamsItemDTOList() != null
+					&& !goodsParamGroup.goodsParamsItemDTOList().isEmpty()) {
 					//循环分组的内容
-					goodsParamGroup.getGoodsParamsItemDTOList().forEach(goodsParam -> {
+					goodsParamGroup.goodsParamsItemDTOList().forEach(goodsParam -> {
 							//如果字段需要索引，则增加索引字段
-							if (goodsParam.getIsIndex() != null && goodsParam.getIsIndex() == 1) {
+							if (goodsParam.isIndex() != null && goodsParam.isIndex() == 1) {
 								EsGoodsAttribute attribute = new EsGoodsAttribute();
 								attribute.setType(1);
-								attribute.setName(goodsParam.getParamName());
-								attribute.setValue(goodsParam.getParamValue());
-								attribute.setSort(goodsParam.getSort());
+								attribute.setName(goodsParam.paramName());
+								attribute.setValue(goodsParam.paramValue());
+								attribute.setSort(goodsParam.sort());
 								attributes.add(attribute);
 							}
 						}
