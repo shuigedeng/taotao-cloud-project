@@ -1,19 +1,22 @@
 package com.taotao.cloud.member.biz.entity;
 
+import com.alibaba.cloud.commons.lang.StringUtils;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.enums.SwitchEnum;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 会员商品评价表
@@ -167,28 +170,29 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	@Column(name = "description_score", columnDefinition = "int default 0 comment '描述评分'")
 	private Integer descriptionScore;
 
-	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuVO goodsSku, Member member, OrderVO order){
-	    //复制评价信息
-	    BeanUtils.copyProperties(memberEvaluationDTO, this);
-	    //设置会员
-	    this.memberId=member.getId();
-	    //会员名称
-	    this.memberName=member.getNickName();
-	    //设置会员头像
-	    this.memberProfile=member.getFace();
-	    //商品名称
-	    this.goodsName=goodsSku.getGoodsName();
-	    //商品图片
-	    this.goodsImage=goodsSku.getThumbnail();
-	    //设置店铺ID
-	    this.storeId=order.getStoreId();
-	    //设置店铺名称
-	    this.storeName=order.getStoreName();
-	    //设置订单编号
-	    this.orderNo=order.getSn();
-	    //是否包含图片
-	    this.haveImage=StringUtils.isNotEmpty(memberEvaluationDTO.getImages());
-	    //默认开启评价
-	    this.status=SwitchEnum.OPEN.name();
+	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuVO goodsSku, Member member, OrderVO order) {
+		//复制评价信息
+		BeanUtil.copyProperties(memberEvaluationDTO, this);
+
+		//设置会员
+		this.memberId = member.getId();
+		//会员名称
+		this.memberName = member.getNickname();
+		//设置会员头像
+		this.memberProfile = member.getFace();
+		//商品名称
+		this.goodsName = goodsSku.goodsSkuBase().goodsName();
+		//商品图片
+		this.goodsImage = goodsSku.goodsSkuBase().thumbnail();
+		//设置店铺ID
+		this.storeId = order.orderBase().storeId();
+		//设置店铺名称
+		this.storeName = order.orderBase().storeName();
+		//设置订单编号
+		this.orderNo = order.orderBase().sn();
+		//是否包含图片
+		this.haveImage = StringUtils.isNotEmpty(memberEvaluationDTO.getImages());
+		//默认开启评价
+		this.status = SwitchEnum.OPEN.name();
 	}
 }

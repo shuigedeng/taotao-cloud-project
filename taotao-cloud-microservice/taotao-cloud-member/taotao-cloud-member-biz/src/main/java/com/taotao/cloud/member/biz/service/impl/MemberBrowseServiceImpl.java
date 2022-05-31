@@ -1,11 +1,12 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
+import com.taotao.cloud.goods.api.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.entity.MemberBrowse;
 import com.taotao.cloud.member.biz.mapper.FootprintMapper;
 import com.taotao.cloud.member.biz.service.IMemberBrowseService;
@@ -32,7 +33,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	 * es商品业务层
 	 */
 	@Autowired
-	private IFeignEsGoodsSearchService esGoodsSearchService;
+	private IFeignEsGoodsIndexService esGoodsIndexService;
 
 	@Override
 	public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {
@@ -57,14 +58,14 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	}
 
 	@Override
-	public boolean clean() {
+	public Boolean clean() {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
 		return this.remove(lambdaQueryWrapper);
 	}
 
 	@Override
-	public boolean deleteByIds(List<Long> ids) {
+	public Boolean deleteByIds(List<Long> ids) {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
 		lambdaQueryWrapper.in(MemberBrowse::getGoodsId, ids);
@@ -73,15 +74,14 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	}
 
 	@Override
-	public List<EsGoodsIndex> footPrintPage(PageVO pageVO) {
-
+	public List<EsGoodsIndexVO> footPrintPage(PageParam pageParam) {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
 		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
 		lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
-		List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageUtil.initPage(pageVO), lambdaQueryWrapper);
+		List<String> skuIdList = this.baseMapper.footprintSkuIdList(pageParam.buildMpPage(), lambdaQueryWrapper);
 		if (!skuIdList.isEmpty()) {
-			List<EsGoodsIndex> list = esGoodsSearchService.getEsGoodsBySkuIds(skuIdList);
+			List<EsGoodsIndexVO> list = esGoodsIndexService.getEsGoodsBySkuIds(skuIdList);
 			//去除为空的商品数据
 			list.removeIf(Objects::isNull);
 			return list;
@@ -90,7 +90,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	}
 
 	@Override
-	public long getFootprintNum() {
+	public Long getFootprintNum() {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
 		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);

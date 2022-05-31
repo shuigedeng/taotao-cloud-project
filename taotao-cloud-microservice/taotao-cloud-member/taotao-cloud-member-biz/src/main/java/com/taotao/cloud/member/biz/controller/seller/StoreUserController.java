@@ -1,15 +1,15 @@
 package com.taotao.cloud.member.biz.controller.seller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.mapstruct.IMemberMapStruct;
 import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,13 +32,13 @@ public class StoreUserController {
 	private final MemberService memberService;
 
 	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API")
-	@RequestLogger("获取当前登录用户API")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/info")
-	public Result<Member> getUserInfo() {
+	public Result<MemberVO> getUserInfo() {
 		Member member = memberService.findByUsername(SecurityUtil.getUsername());
 		member.setPassword(null);
-		return Result.success(member);
+		return Result.success(IMemberMapStruct.INSTANCE.memberToMemberVO(member));
 	}
 
 

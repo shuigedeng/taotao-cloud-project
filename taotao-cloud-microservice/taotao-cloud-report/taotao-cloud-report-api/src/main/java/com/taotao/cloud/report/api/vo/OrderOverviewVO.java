@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 /**
  * 订单统计概述
  */
@@ -87,7 +89,7 @@ public class OrderOverviewVO {
 
     public BigDecimal getOrderAmount() {
         if (orderAmount == null) {
-            return 0D;
+            return BigDecimal.ZERO;
         }
         return orderAmount;
     }
@@ -108,7 +110,7 @@ public class OrderOverviewVO {
 
     public BigDecimal getPaymentAmount() {
         if (paymentAmount == null) {
-            return 0D;
+            return BigDecimal.ZERO;
         }
         return paymentAmount;
     }
@@ -122,7 +124,7 @@ public class OrderOverviewVO {
 
     public BigDecimal getRefundOrderPrice() {
         if (refundOrderPrice == null) {
-            return 0D;
+            return BigDecimal.ZERO;
         }
         return refundOrderPrice;
     }

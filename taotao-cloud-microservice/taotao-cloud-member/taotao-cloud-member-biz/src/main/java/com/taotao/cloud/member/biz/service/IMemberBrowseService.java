@@ -1,7 +1,10 @@
 package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.goods.api.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.entity.MemberBrowse;
+
 import java.util.List;
 
 /**
@@ -26,7 +29,7 @@ public interface IMemberBrowseService extends IService<MemberBrowse> {
 	 *
 	 * @return 处理结果
 	 */
-	boolean clean();
+	Boolean clean();
 
 	/**
 	 * 根据ID进行清除会员的历史足迹
@@ -34,20 +37,20 @@ public interface IMemberBrowseService extends IService<MemberBrowse> {
 	 * @param ids 商品ID列表
 	 * @return 处理结果
 	 */
-	boolean deleteByIds(List<Long> ids);
+	Boolean deleteByIds(List<Long> ids);
 
 	/**
 	 * 获取会员浏览历史分页
 	 *
-	 * @param pageVO 分页
+	 * @param pageParam 分页
 	 * @return 会员浏览历史列表
 	 */
-	List<EsGoodsIndex> footPrintPage(PageVO pageVO);
+	List<EsGoodsIndexVO> footPrintPage(PageParam pageParam);
 
 	/**
 	 * 获取当前会员的浏览记录数量
 	 *
 	 * @return 当前会员的浏览记录数量
 	 */
-	long getFootprintNum();
+	Long getFootprintNum();
 }

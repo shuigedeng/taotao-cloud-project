@@ -27,6 +27,8 @@ import com.taotao.cloud.member.biz.roketmq.event.MemberWithdrawalEvent;
 import com.taotao.cloud.member.biz.service.MemberSignService;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import java.util.List;
+
+import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;

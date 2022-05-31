@@ -129,4 +129,8 @@ public class PageParam implements Serializable {
 	public void setOrder(String order) {
 		this.order = order;
 	}
+
+	public PageParam getPageParm() {
+		return this;
+	}
 }

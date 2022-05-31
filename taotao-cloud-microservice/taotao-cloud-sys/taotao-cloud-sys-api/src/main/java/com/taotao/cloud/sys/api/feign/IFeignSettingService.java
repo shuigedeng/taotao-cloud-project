@@ -3,8 +3,6 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignSettingFallback;
-import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
-import com.taotao.cloud.sys.api.vo.setting.ExperienceSetting;
 import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
@@ -58,6 +56,7 @@ public interface IFeignSettingService {
 
 	@GetMapping("/sys/tools/setting/qq/connect")
 	Result<QQConnectSettingVO> getQQConnectSetting(String name);
+
 	@GetMapping("/sys/tools/setting/wechat/connect")
 	Result<WechatConnectSettingVO> getWechatConnectSetting(String name);
 

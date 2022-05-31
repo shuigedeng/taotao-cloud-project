@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
-import com.taotao.cloud.common.constant.CommonConstant;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
@@ -8,11 +8,11 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +32,16 @@ public class MemberPointsHistoryController {
 	private final MemberPointsHistoryService memberPointsHistoryService;
 
 	@Operation(summary = "分页获取当前会员积分历史", description = "分页获取当前会员积分历史")
-	@RequestLogger("分页获取当前会员积分历史")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<MemberPointsHistoryPageVO>> getByPage(PageParam page) {
-		PageModel<MemberPointsHistoryPageVO> result = memberPointsHistoryService.getByPage(page);
-		return Result.success(result);
+		IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.getByPage(page);
+		return Result.success(PageModel.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
 	}
 
 	@Operation(summary = "获取当前会员积分", description = "获取当前会员积分")
-	@RequestLogger("获取当前会员积分")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/points")
 	public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO() {

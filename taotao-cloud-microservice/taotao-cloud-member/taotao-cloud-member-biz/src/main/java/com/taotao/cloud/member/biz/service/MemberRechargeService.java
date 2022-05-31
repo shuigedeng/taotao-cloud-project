@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.member.biz.entity.MemberRecharge;
 import com.taotao.cloud.order.api.query.recharge.RechargePageQuery;
 
+import java.math.BigDecimal;
+
 /**
  * 预存款充值业务层
  *
@@ -21,7 +23,7 @@ public interface MemberRechargeService extends IService<MemberRecharge> {
 	 * @return {@link MemberRecharge }
 	 * @since 2022-05-31 13:21:47
 	 */
-	MemberRecharge recharge(Double price);
+	MemberRecharge recharge(BigDecimal price);
 
 	/**
 	 * 查询充值订单列表

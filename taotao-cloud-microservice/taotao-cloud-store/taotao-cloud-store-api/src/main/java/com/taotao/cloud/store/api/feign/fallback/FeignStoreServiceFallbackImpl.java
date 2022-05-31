@@ -34,6 +34,11 @@ public class FeignStoreServiceFallbackImpl implements FallbackFactory<IFeignStor
 			public Result<StoreVO> getStoreDetail() {
 				return null;
 			}
+
+			@Override
+			public Result<StoreVO> findSotreByMemberId(Long memberId) {
+				return null;
+			}
 		};
 	}
 }

@@ -1,16 +1,17 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.query.MemberPointHistoryPageQuery;
+import com.taotao.cloud.member.api.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,17 +33,16 @@ public class MemberPointsHistoryController {
 	private final MemberPointsHistoryService memberPointsHistoryService;
 
 	@Operation(summary = "分页获取", description = "分页获取")
-	@RequestLogger("分页获取")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<IPage<MemberPointsHistory>> getByPage(PageVO page, Long memberId,
-		String memberName) {
-		return Result.success(
-			memberPointsHistoryService.MemberPointsHistoryList(page, memberId, memberName));
+	public Result<PageModel<MemberPointsHistoryPageVO>> getByPage(MemberPointHistoryPageQuery pageQuery) {
+		IPage<MemberPointsHistory> memberPointsHistoryIPage = memberPointsHistoryService.memberPointsHistoryList(pageQuery.getPageParm(), pageQuery.getMemberId(), pageQuery.getMemberName());
+		return Result.success(PageModel.convertMybatisPage(memberPointsHistoryIPage, MemberPointsHistoryPageVO.class));
 	}
 
 	@Operation(summary = "获取会员积分", description = "获取会员积分")
-	@RequestLogger("获取会员积分")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "")
 	public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO(Long memberId) {

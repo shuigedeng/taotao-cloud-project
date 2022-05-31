@@ -8,7 +8,7 @@
 // import com.taotao.cloud.common.exception.BusinessException;
 // import com.taotao.cloud.common.model.PageParam;
 // import com.taotao.cloud.common.utils.common.SecurityUtil;
-// import com.taotao.cloud.member.api.vo.StoreCollectionVO;
+// import com.taotao.cloud.store.api.vo.StoreCollectionVO;
 // import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 // import com.taotao.cloud.member.biz.mapper.StoreCollectionMapper;
 // import com.taotao.cloud.store.api.dto.CollectionDTO;

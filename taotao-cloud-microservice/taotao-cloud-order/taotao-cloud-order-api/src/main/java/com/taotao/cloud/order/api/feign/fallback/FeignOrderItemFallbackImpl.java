@@ -4,7 +4,9 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
+import com.taotao.cloud.order.api.vo.order.OrderItemVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -21,6 +23,26 @@ public class FeignOrderItemFallbackImpl implements FallbackFactory<IFeignOrderIt
 			public Result<Boolean> saveOrderItem(OrderItemSaveDTO orderItemSaveDTO) {
 				LogUtil.error("调用saveOrderItem异常：{0}", throwable, orderItemSaveDTO);
 				return Result.fail(null, ResultEnum.ERROR.getCode());
+			}
+
+			@Override
+			public Result<Boolean> updateById(OrderItemVO orderItem) {
+				return null;
+			}
+
+			@Override
+			public OrderItemVO getByOrderSnAndSkuId(String orderSn, String skuId) {
+				return null;
+			}
+
+			@Override
+			public OrderItemVO getBySn(String orderItemSn) {
+				return null;
+			}
+
+			@Override
+			public Result<Boolean> updateCommentStatus(String sn, CommentStatusEnum finished) {
+				return null;
 			}
 		};
 	}

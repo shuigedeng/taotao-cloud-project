@@ -1,18 +1,20 @@
 package com.taotao.cloud.member.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.entity.MemberEvaluation;
+import com.taotao.cloud.member.biz.mapstruct.IMemberEvaluationMapStruct;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Objects;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,32 +39,32 @@ public class MemberEvaluationController {
 	private final MemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
-	@RequestLogger("分页获取会员评论列表")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<IPage<MemberEvaluationListVO>> getByPage(
+	public Result<PageModel<MemberEvaluationListVO>> getByPage(
 		EvaluationPageQuery evaluationPageQuery) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		evaluationPageQuery.setStoreId(storeId);
-		return Result.success(memberEvaluationService.queryPage(evaluationPageQuery));
+		evaluationPageQuery.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
+		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.queryPage(evaluationPageQuery);
+		return Result.success(PageModel.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger("通过id获取")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
-		return Result.success(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
+		MemberEvaluation memberEvaluation = OperationalJudgment.judgment(memberEvaluationService.queryById(id));
+		return Result.success(IMemberEvaluationMapStruct.INSTANCE.memberEvaluationToMemberEvaluationVO(memberEvaluation));
 	}
 
 	@Operation(summary = "回复评价", description = "回复评价")
-	@RequestLogger("回复评价")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping(value = "/reply/{id}")
-	public Result<MemberEvaluationVO> reply(@PathVariable Long id, @RequestParam String reply,
-		@RequestParam String replyImage) {
+	public Result<Boolean> reply(@PathVariable Long id, @RequestParam String reply,
+											@RequestParam String replyImage) {
 		OperationalJudgment.judgment(memberEvaluationService.queryById(id));
-		memberEvaluationService.reply(id, reply, replyImage);
-		return Result.success();
+		return Result.success(memberEvaluationService.reply(id, reply, replyImage));
 	}
 }

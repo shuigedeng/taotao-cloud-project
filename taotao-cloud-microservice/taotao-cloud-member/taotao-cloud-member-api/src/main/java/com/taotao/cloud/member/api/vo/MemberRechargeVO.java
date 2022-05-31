@@ -22,5 +22,6 @@ public class MemberRechargeVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	private String xxx;
 
 }

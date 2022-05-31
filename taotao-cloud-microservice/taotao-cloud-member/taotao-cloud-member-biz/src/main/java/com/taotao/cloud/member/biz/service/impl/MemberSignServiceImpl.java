@@ -101,8 +101,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 
 	@Override
 	public List<MemberSignVO> getMonthSignDay(String time) {
-		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(
-			SecurityUtil.getUserId(), time);
+		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(SecurityUtil.getUserId(), time);
 		return BeanUtil.copy(monthMemberSign, MemberSignVO.class);
 	}
 

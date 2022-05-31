@@ -48,7 +48,7 @@ public class Bill extends BaseSuperEntity<Bill, Long> {
 	private String billStatus;
 
 	@Column(name = "store_id", columnDefinition = "varchar(32) not null comment '店铺id'")
-	private String storeId;
+	private Long storeId;
 
 	@Column(name = "store_name", columnDefinition = "varchar(32) not null comment '店铺名称'")
 	private String storeName;

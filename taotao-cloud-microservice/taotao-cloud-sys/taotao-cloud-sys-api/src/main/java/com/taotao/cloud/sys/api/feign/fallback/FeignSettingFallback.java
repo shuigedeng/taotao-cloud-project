@@ -6,7 +6,9 @@ import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -43,6 +45,16 @@ public class FeignSettingFallback implements FallbackFactory<IFeignSettingServic
 
 			@Override
 			public Result<PointSettingVO> getPointSetting(String name) {
+				return null;
+			}
+
+			@Override
+			public Result<QQConnectSettingVO> getQQConnectSetting(String name) {
+				return null;
+			}
+
+			@Override
+			public Result<WechatConnectSettingVO> getWechatConnectSetting(String name) {
 				return null;
 			}
 		};

@@ -7,6 +7,7 @@ import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.handler.InitHandler;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -29,8 +30,8 @@ public class EncryptFilter implements Filter {
 
 	private EncryptHandler encryptHandler;
 
-	private static AtomicBoolean isEncryptAnnotation = new AtomicBoolean(false);
-	private final static Set<String> encryptCacheUri = new HashSet<>();
+	private static final AtomicBoolean isEncryptAnnotation = new AtomicBoolean(false);
+	private final static Set<String> ENCRYPT_CACHE_URI = new HashSet<>();
 
 	public EncryptFilter(EncryptHandler encryptHandler) {
 		this.encryptHandler = encryptHandler;
@@ -64,10 +65,10 @@ public class EncryptFilter implements Filter {
 			return;
 		}
 		LogUtil.info("接收的报文：" + new String(responseData));
-		byte[] encryptByte = encryptHandler.encode(URLEncoder.encode(new String(responseData), "UTF-8").getBytes());
+		byte[] encryptByte = encryptHandler.encode(URLEncoder.encode(new String(responseData), StandardCharsets.UTF_8).getBytes());
 		LogUtil.info("加密后的报文：" + new String(encryptByte));
 		servletResponse.setContentLength(-1);
-		servletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+		servletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		ServletOutputStream outputStream = servletResponse.getOutputStream();
 		LogUtil.info("outputStream: " + outputStream.toString());
 		outputStream.write(encryptByte);
@@ -80,7 +81,7 @@ public class EncryptFilter implements Filter {
 		if (uri.endsWith("/")) {
 			uri = uri.substring(0, uri.length() - 1);
 		}
-		if (encryptCacheUri.contains(uri)) {
+		if (ENCRYPT_CACHE_URI.contains(uri)) {
 			return true;
 		}
 		return false;
@@ -88,7 +89,7 @@ public class EncryptFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		InitHandler.handler(filterConfig, encryptCacheUri, isEncryptAnnotation);
+		InitHandler.handler(filterConfig, ENCRYPT_CACHE_URI, isEncryptAnnotation);
 	}
 
 

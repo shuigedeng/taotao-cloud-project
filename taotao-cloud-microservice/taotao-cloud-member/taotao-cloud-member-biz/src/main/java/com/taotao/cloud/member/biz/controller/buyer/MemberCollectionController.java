@@ -6,14 +6,12 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
-import com.taotao.cloud.member.api.vo.StoreCollectionVO;
 import com.taotao.cloud.member.biz.service.IMemberGoodsCollectionService;
-import com.taotao.cloud.member.biz.service.StoreCollectionService;
+import com.taotao.cloud.store.api.feign.IFeignStoreCollectionService;
+import com.taotao.cloud.store.api.vo.StoreCollectionVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 买家端,会员收藏API
@@ -41,14 +41,14 @@ public class MemberCollectionController {
 	/**
 	 * 会员店铺
 	 */
-	private final StoreCollectionService storeCollectionService;
+	private final IFeignStoreCollectionService storeCollectionService;
 	/**
 	 * 商品收藏关键字
 	 */
 	private static final String goods = "GOODS";
 
 	@Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表")
-	@RequestLogger("查询会员收藏列表")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{type}")
 	public Result<PageModel<StoreCollectionVO>> goodsListPage(
@@ -56,7 +56,7 @@ public class MemberCollectionController {
 		@Validated PageParam page) {
 		if (goods.equals(type)) {
 			IPage<GoodsCollectionVO> goodsCollectionPage = IMemberGoodsCollectionService.goodsCollection(page);
-			return Result.success(PageModel.convertMybatisPage(goodsCollectionPage, GoodsCollectionVO.class));
+			return Result.success(PageModel.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
 		}
 
 		IPage<StoreCollectionVO> storeCollectionVOPage = storeCollectionService.storeCollection(page);
@@ -64,7 +64,7 @@ public class MemberCollectionController {
 	}
 
 	@Operation(summary = "添加会员收藏", description = "添加会员收藏")
-	@RequestLogger("添加会员收藏")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/{type}/{id}")
 	public Result<Boolean> addGoodsCollection(
@@ -74,11 +74,10 @@ public class MemberCollectionController {
 			return Result.success(IMemberGoodsCollectionService.addGoodsCollection(id));
 		}
 		return Result.success(storeCollectionService.addStoreCollection(id));
-
 	}
 
 	@Operation(summary = "删除会员收藏", description = "删除会员收藏")
-	@RequestLogger("删除会员收藏")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{type}/{id}")
 	public Result<Object> deleteGoodsCollection(

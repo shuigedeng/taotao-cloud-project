@@ -35,7 +35,7 @@ public class MemberSignController {
 	private final MemberSignService memberSignService;
 
 	@Operation(summary = "会员签到", description = "会员签到")
-	@RequestLogger("会员签到")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
 	public Result<Boolean> memberSign() {
@@ -43,7 +43,7 @@ public class MemberSignController {
 	}
 
 	@Operation(summary = "根据时间查询会员签到表，类型是YYYYmm", description = "根据时间查询会员签到表，类型是YYYYmm")
-	@RequestLogger("根据时间查询会员签到表，类型是YYYYmm")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<List<MemberSignVO>> memberSign(@RequestParam String time) {
