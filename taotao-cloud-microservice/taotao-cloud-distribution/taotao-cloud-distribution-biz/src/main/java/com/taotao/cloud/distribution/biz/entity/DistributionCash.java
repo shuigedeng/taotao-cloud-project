@@ -70,7 +70,7 @@ public class DistributionCash extends BaseSuperEntity<DistributionCash, Long> {
 	@Column(name = "distribution_cash_status", columnDefinition = "varchar(255) not null  comment '状态'")
 	private String distributionCashStatus;
 
-	public DistributionCash(String sn, String distributionId, BigDecimal price, String memberName) {
+	public DistributionCash(String sn, Long distributionId, BigDecimal price, String memberName) {
 		this.sn = sn;
 		this.distributionId = distributionId;
 		this.price = price;

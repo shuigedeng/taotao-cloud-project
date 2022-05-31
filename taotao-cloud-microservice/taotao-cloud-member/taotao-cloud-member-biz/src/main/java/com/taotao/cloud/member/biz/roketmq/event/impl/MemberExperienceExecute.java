@@ -1,26 +1,28 @@
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
 
-import com.google.gson.Gson;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.setting.ExperienceSetting;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 会员经验值
  */
-//@Service
+@Service
 public class MemberExperienceExecute implements MemberRegisterEvent {
 
 	/**
 	 * 配置
 	 */
 	@Autowired
-	private SettingService settingService;
+	private IFeignSettingService settingService;
 	/**
 	 * 会员
 	 */
@@ -30,7 +32,7 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IFeignOrderService orderService;
 
 	/**
 	 * 会员注册赠送经验值
@@ -40,9 +42,9 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	@Override
 	public void memberRegister(Member member) {
 		//获取经验值设置
-		ExperienceSetting experienceSetting = getExperienceSetting();
+		ExperienceSettingVO experienceSetting = getExperienceSetting();
 		//赠送会员经验值
-		memberService.updateMemberPoint(Long.valueOf(experienceSetting.getRegister().longValue()),
+		memberService.updateMemberPoint(experienceSetting.getRegister().longValue(),
 			PointTypeEnum.INCREASE.name(), member.getId(),
 			"会员注册，赠送经验值" + experienceSetting.getRegister());
 	}
@@ -52,8 +54,8 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 *
 	 * @return 经验值设置
 	 */
-	private ExperienceSetting getExperienceSetting() {
-		Setting setting = settingService.get(SettingEnum.EXPERIENCE_SETTING.name());
-		return new Gson().fromJson(setting.getSettingValue(), ExperienceSetting.class);
+	private ExperienceSettingVO getExperienceSetting() {
+		ExperienceSettingVO setting = settingService.getExperienceSetting(SettingEnum.EXPERIENCE_SETTING.name()).data();
+		return setting;
 	}
 }

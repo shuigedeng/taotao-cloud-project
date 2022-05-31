@@ -25,6 +25,9 @@ public interface IFeignStoreService {
 
 	Result<StoreVO> getStoreDetail();
 
+	@GetMapping(value = "/sotre/info/id/{id:[0-9]*}")
+	Result<StoreVO> findSotreByMemberId(@RequestParam Long memberId);
+
 
 }
 

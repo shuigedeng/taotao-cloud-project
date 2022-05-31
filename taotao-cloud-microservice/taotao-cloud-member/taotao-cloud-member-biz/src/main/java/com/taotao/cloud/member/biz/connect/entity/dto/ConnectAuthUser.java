@@ -3,6 +3,8 @@ package com.taotao.cloud.member.biz.connect.entity.dto;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthUserGender;
+
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ConnectAuthUser implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -747696192479927491L;
 	/**
 	 * 用户第三方系统的唯一id

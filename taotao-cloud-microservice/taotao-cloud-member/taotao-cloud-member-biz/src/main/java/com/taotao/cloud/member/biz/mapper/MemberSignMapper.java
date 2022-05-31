@@ -41,7 +41,7 @@ public interface MemberSignMapper extends BaseMapper<MemberSign> {
 		FROM tt_member_sign
 		WHERE TO_DAYS( NOW( ) ) - TO_DAYS( create_time) = 1 and member_id = #{memberId}
 		""")
-	List<MemberSign> getBeforeMemberSign(String memberId);
+	List<MemberSign> getBeforeMemberSign(Long memberId);
 
 	/**
 	 * 获取会员签到
@@ -68,6 +68,6 @@ public interface MemberSignMapper extends BaseMapper<MemberSign> {
 		FROM tt_member_sign
 		WHERE DATE_FORMAT(create_time,'%Y%m') = #{time} and member_id = #{memberId}
 		""")
-	List<MemberSign> getMonthMemberSign(String memberId, String time);
+	List<MemberSign> getMonthMemberSign(Long memberId, String time);
 
 }

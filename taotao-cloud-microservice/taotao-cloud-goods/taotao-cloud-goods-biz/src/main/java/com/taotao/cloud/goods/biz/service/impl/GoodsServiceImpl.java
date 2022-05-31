@@ -524,7 +524,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 			Boolean.TRUE.equals(goodsSetting.getGoodsCheck()) ? GoodsAuthEnum.TOBEAUDITED.name()
 				: GoodsAuthEnum.PASS.name());
 		//判断当前用户是否为店铺
-		if (SecurityUtil.getUser().getType().equals(UserEnum.STORE.getCode())) {
+		if (SecurityUtil.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
 			StoreVO storeDetail = storeService.getStoreDetail().data();
 			if (storeDetail.getSelfOperated() != null) {
 				goods.setSelfOperated(storeDetail.getSelfOperated());
@@ -574,7 +574,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkStoreAuthority() {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.STORE.getCode())
 			&& currentUser.getStoreId() != null)) {
@@ -589,7 +589,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkManagerAuthority() {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.MANAGER.getCode()))) {
 			return currentUser;

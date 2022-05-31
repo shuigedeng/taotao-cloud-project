@@ -54,7 +54,7 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSente
                         memberNotice = new MemberNotice();
                         memberNotice.setRead(false);
                         memberNotice.setContent(memberNoticeSenter.getContent());
-                        memberNotice.setMemberId(id);
+                        memberNotice.setMemberId(Long.valueOf(id));
                         memberNotice.setTitle(memberNoticeSenter.getTitle());
                         memberNotices.add(memberNotice);
                     }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.dubbo.biz;
+package com.taotao.cloud.payment.biz;
 
 import com.taotao.cloud.core.annotation.EnableTaoTaoCloudMVC;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJpa;

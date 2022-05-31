@@ -15,12 +15,16 @@
  */
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
-import java.util.List;
+import com.taotao.cloud.promotion.api.dto.MemberDTO;
+import com.taotao.cloud.promotion.api.feign.IFeignCouponActivityService;
+import com.taotao.cloud.promotion.api.vo.CouponActivityVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 注册赠券活动
@@ -29,7 +33,7 @@ import org.springframework.stereotype.Component;
 public class RegisteredCouponActivityExecute implements MemberRegisterEvent {
 
 	@Autowired
-	private CouponActivityService couponActivityService;
+	private IFeignCouponActivityService couponActivityService;
 
 	/**
 	 * 获取进行中的注册赠券的优惠券活动 发送注册赠券
@@ -38,10 +42,12 @@ public class RegisteredCouponActivityExecute implements MemberRegisterEvent {
 	 */
 	@Override
 	public void memberRegister(Member member) {
-		List<CouponActivity> couponActivities = couponActivityService.list(
-			new QueryWrapper<CouponActivity>()
-				.eq("coupon_activity_type", CouponActivityTypeEnum.REGISTERED.name())
-				.and(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.START)));
-		couponActivityService.registered(couponActivities, member);
+		// List<CouponActivity> couponActivities = couponActivityService.list(
+		// 	new QueryWrapper<CouponActivity>()
+		// 		.eq("coupon_activity_type", CouponActivityTypeEnum.REGISTERED.name())
+		// 		.and(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.START)));
+		List<CouponActivityVO> couponActivityVOS = new ArrayList<>();
+		MemberDTO memberDTO = new MemberDTO();
+		couponActivityService.registered(couponActivityVOS, memberDTO);
 	}
 }

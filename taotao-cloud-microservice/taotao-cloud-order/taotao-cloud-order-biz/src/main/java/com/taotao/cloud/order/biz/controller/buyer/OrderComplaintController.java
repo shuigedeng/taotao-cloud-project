@@ -90,7 +90,7 @@ public class OrderComplaintController {
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
 																  @Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
-		SecurityUser user = SecurityUtil.getUser();
+		SecurityUser user = SecurityUtil.getCurrentUser();
 		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
 			.complainId(complainId)
 			.content(orderComplaintCommunicationDTO.content())

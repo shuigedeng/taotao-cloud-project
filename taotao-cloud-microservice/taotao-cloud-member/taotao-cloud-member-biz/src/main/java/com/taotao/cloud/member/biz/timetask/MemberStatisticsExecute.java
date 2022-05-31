@@ -1,5 +1,8 @@
 package com.taotao.cloud.member.biz.timetask;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.report.api.dto.MemberStatisticsDTO;
+import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +21,7 @@ public class MemberStatisticsExecute implements EveryDayExecute {
      * 会员统计
      */
     @Autowired
-    private MemberStatisticsService memberStatisticsService;
+    private IFeignMemberStatisticsService memberStatisticsService;
 
     @Override
     public void execute() {
@@ -35,14 +38,15 @@ public class MemberStatisticsExecute implements EveryDayExecute {
             //-1天，即为开始时间
             calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) - 1);
             startTime = calendar.getTime();
-            MemberStatisticsData memberStatisticsData = new MemberStatisticsData();
+
+			MemberStatisticsDTO memberStatisticsData = new MemberStatisticsDTO();
             memberStatisticsData.setMemberCount(memberStatisticsService.memberCount(endTime));
             memberStatisticsData.setCreateDate(startTime);
             memberStatisticsData.setActiveQuantity(memberStatisticsService.activeQuantity(startTime));
             memberStatisticsData.setNewlyAdded(memberStatisticsService.newlyAdded(startTime, endTime));
-            memberStatisticsService.save(memberStatisticsData);
+            memberStatisticsService.saveMemberStatistics(memberStatisticsData);
         } catch (Exception e) {
-            log.error("每日会员统计功能异常：", e);
+            LogUtil.error("每日会员统计功能异常：", e);
         }
     }
 }

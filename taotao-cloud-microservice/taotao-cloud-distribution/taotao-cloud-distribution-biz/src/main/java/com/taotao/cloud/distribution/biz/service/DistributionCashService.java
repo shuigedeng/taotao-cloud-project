@@ -7,6 +7,8 @@ import com.taotao.cloud.distribution.biz.entity.DistributionCash;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+
 /**
  * 分销佣金业务层
  */

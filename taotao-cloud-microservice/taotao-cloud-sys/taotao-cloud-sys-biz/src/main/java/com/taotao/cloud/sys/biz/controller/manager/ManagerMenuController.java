@@ -135,7 +135,7 @@ public class ManagerMenuController extends
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/current/user")
 	public Result<List<MenuQueryVO>> findCurrentUserResource() {
-		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
+		Set<String> roleCodes = SecurityUtil.getCurrentUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return success(new ArrayList<>());
 		}
@@ -148,7 +148,7 @@ public class ManagerMenuController extends
 	@GetMapping("/current/user/tree")
 	public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
 		@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
-		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
+		Set<String> roleCodes = SecurityUtil.getCurrentUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return Result.success(Collections.emptyList());
 		}

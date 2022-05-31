@@ -30,6 +30,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.PAID;
+
 /**
  * 库存扣减，他表示了订单状态是否出库成功
  *
@@ -81,14 +83,14 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-		switch (orderMessage.getNewStatus()) {
+		switch (orderMessage.newStatus()) {
 			case PAID -> {
 				//获取订单详情
-				OrderDetailVO order = orderService.queryDetail(orderMessage.getOrderSn());
+				OrderDetailVO order = orderService.queryDetail(orderMessage.orderSn());
 				//库存key 和 扣减数量
 				List<String> keys = new ArrayList<>();
 				List<String> values = new ArrayList<>();
-				for (OrderItem orderItem : order.getOrderItems()) {
+				for (OrderItemVO orderItem : order.orderItems()) {
 					keys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
 					int i = -orderItem.getNum();
 					values.add(Integer.toString(i));
@@ -105,27 +107,27 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 				if (Boolean.TRUE.equals(skuResult)) {
 					LogUtil.info("库存扣减成功,参数为{};{}", keys, values);
 					//库存确认之后对结构处理
-					orderService.afterOrderConfirm(orderMessage.getOrderSn());
+					orderService.afterOrderConfirm(orderMessage.orderSn());
 					//成功之后，同步库存
 					synchroDB(order);
 				} else {
 					LogUtil.info("库存扣件失败，变更缓存key{} 变更缓存value{}", keys, values);
 					//失败之后取消订单
-					this.errorOrder(orderMessage.getOrderSn());
+					this.errorOrder(orderMessage.orderSn());
 				}
 			}
 			case CANCELLED -> {
 				//获取订单详情
-				OrderDetailVO order = orderService.queryDetail(orderMessage.getOrderSn());
+				OrderDetailVO order = orderService.queryDetail(orderMessage.orderSn());
 				//判定是否已支付 并且 非库存不足导致库存回滚 则需要考虑订单库存返还业务
-				if (order.getOrder().getPayStatus().equals(PayStatusEnum.PAID.name())
-					&& !order.getOrder().getCancelReason().equals(outOfStockMessage)) {
+				if (order.order().payStatus().equals(PayStatusEnum.PAID.name())
+					&& !order.order().cancelReason().equals(outOfStockMessage)) {
 					//库存key 和 还原数量
 					List<String> keys = new ArrayList<>();
 					List<String> values = new ArrayList<>();
 
 					//返还商品库存，促销库存不与返还，不然前台展示层有展示逻辑错误
-					for (OrderItemVO orderItem : order.getOrderItems()) {
+					for (OrderItemVO orderItem : order.orderItems()) {
 						keys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
 						int i = orderItem.getNum();
 						values.add(Integer.toString(i));

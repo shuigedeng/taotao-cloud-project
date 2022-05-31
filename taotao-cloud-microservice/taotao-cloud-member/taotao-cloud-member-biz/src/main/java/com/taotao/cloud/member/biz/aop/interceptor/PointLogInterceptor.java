@@ -30,65 +30,68 @@ import org.springframework.stereotype.Component;
 /**
  * 积分操作切面
  *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-05-31 10:50:13
  */
 @Aspect
 @Component
 public class PointLogInterceptor {
 
-    @Autowired
-    private MemberPointsHistoryService memberPointsHistoryService;
+	@Autowired
+	private MemberPointsHistoryService memberPointsHistoryService;
 
-    @Autowired
-    private MemberService memberService;
+	@Autowired
+	private MemberService memberService;
 
-    @After("@annotation(com.taotao.cloud.member.biz.aop.annotation.PointLogPoint)")
-    public void doAfter(JoinPoint pjp) {
-        //参数
-        Object[] obj = pjp.getArgs();
-        try {
-            //变动积分
-            Long point = 0L;
-            if (obj[0] != null) {
-                point = Long.valueOf(obj[0].toString());
-            }
-            //变动类型
-            String type = PointTypeEnum.INCREASE.name();
-            if (obj[1] != null) {
-                type = obj[1].toString();
-            }
-            // 会员ID
-            String memberId = "";
-            if (obj[2] != null) {
-                memberId = obj[2].toString();
-            }
-            // 变动积分为0，则直接返回
-            if (point == 0) {
-                return;
-            }
+	@After("@annotation(com.taotao.cloud.member.biz.aop.annotation.PointLogPoint)")
+	public void doAfter(JoinPoint pjp) {
+		//参数
+		Object[] obj = pjp.getArgs();
+		try {
+			//变动积分
+			Long point = 0L;
+			if (obj[0] != null) {
+				point = Long.valueOf(obj[0].toString());
+			}
+			//变动类型
+			String type = PointTypeEnum.INCREASE.name();
+			if (obj[1] != null) {
+				type = obj[1].toString();
+			}
+			// 会员ID
+			String memberId = "";
+			if (obj[2] != null) {
+				memberId = obj[2].toString();
+			}
+			// 变动积分为0，则直接返回
+			if (point == 0) {
+				return;
+			}
 
-            //根据会员id查询会员信息
-            Member member = memberService.getById(memberId);
-            if (member != null) {
-                MemberPointsHistory memberPointsHistory = new MemberPointsHistory();
-                //memberPointsHistory.setMemberId(member.getId());
-                memberPointsHistory.setMemberName(member.getUsername());
-                memberPointsHistory.setPointType(type);
+			//根据会员id查询会员信息
+			Member member = memberService.getById(memberId);
+			if (member != null) {
+				MemberPointsHistory memberPointsHistory = new MemberPointsHistory();
+				memberPointsHistory.setMemberId(member.getId());
+				memberPointsHistory.setMemberName(member.getUsername());
+				memberPointsHistory.setPointType(type);
 
-                memberPointsHistory.setVariablePoint(point);
-                if (type.equals(PointTypeEnum.INCREASE.name())) {
-                    memberPointsHistory.setBeforePoint(member.getPoint() - point);
-                } else {
-                    memberPointsHistory.setBeforePoint(member.getPoint() + point);
-                }
+				memberPointsHistory.setVariablePoint(point);
+				if (type.equals(PointTypeEnum.INCREASE.name())) {
+					memberPointsHistory.setBeforePoint(member.getPoint() - point);
+				} else {
+					memberPointsHistory.setBeforePoint(member.getPoint() + point);
+				}
 
-                memberPointsHistory.setPoint(member.getPoint());
-                memberPointsHistory.setContent(obj[3] == null ? "" : obj[3].toString());
+				memberPointsHistory.setPoint(member.getPoint());
+				memberPointsHistory.setContent(obj[3] == null ? "" : obj[3].toString());
 				// 系统
-                memberPointsHistory.setCreatedBy(0L);
-                memberPointsHistoryService.save(memberPointsHistory);
-            }
-        } catch (Exception e) {
-            LogUtil.error("积分操作错误", e);
-        }
-    }
+				memberPointsHistory.setCreateBy(0L);
+				memberPointsHistoryService.save(memberPointsHistory);
+			}
+		} catch (Exception e) {
+			LogUtil.error("积分操作错误", e);
+		}
+	}
 }

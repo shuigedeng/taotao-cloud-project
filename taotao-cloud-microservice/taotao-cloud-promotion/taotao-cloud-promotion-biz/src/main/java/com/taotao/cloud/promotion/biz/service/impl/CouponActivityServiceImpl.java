@@ -6,6 +6,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.promotion.api.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
@@ -85,7 +86,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
     }
 
     @Override
-    public void registered(List<CouponActivity> couponActivityList, Member member) {
+    public void registered(List<CouponActivity> couponActivityList, MemberVO member) {
         for (CouponActivity couponActivity : couponActivityList) {
             //获取会员信息
             List<Map<String, Object>> memberList = new ArrayList<>();

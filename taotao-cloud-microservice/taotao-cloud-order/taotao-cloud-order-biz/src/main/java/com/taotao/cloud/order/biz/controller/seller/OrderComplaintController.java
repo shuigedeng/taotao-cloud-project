@@ -71,7 +71,7 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageModel<OrderComplaintBaseVO>> get(OrderComplaintPageQuery orderComplaintPageQuery) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		orderComplaintPageQuery.setStoreId(storeId);
 		IPage<OrderComplaint> orderComplainPage = orderComplaintService.getOrderComplainByPage(orderComplaintPageQuery);
 		return Result.success(PageModel.convertMybatisPage(orderComplainPage, OrderComplaintBaseVO.class));
@@ -83,7 +83,7 @@ public class OrderComplaintController {
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
 											@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
-		SecurityUser user = SecurityUtil.getUser();
+		SecurityUser user = SecurityUtil.getCurrentUser();
 		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
 			.complainId(complainId)
 			.content(orderComplaintCommunicationDTO.content())
@@ -99,7 +99,7 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
-		Long storeId =  SecurityUtil.getUser().getStoreId();
+		Long storeId =  SecurityUtil.getCurrentUser().getStoreId();
 		OrderComplaint orderComplaint = IOrderComplainMapStruct.INSTANCE.orderComplaintDTOToOrderComplaint(orderComplaintDTO);
 		orderComplaint.setStoreId(storeId);
 		return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));

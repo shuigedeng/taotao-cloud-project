@@ -59,7 +59,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<AfterSaleVO>> getByPage(AfterSalePageQuery searchParams) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
 		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(searchParams);
 		return Result.success(PageModel.convertMybatisPage(afterSalePages, AfterSaleVO.class));
@@ -70,7 +70,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
 	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
 		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
 		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSalesToAfterSaleVOs(afterSales));

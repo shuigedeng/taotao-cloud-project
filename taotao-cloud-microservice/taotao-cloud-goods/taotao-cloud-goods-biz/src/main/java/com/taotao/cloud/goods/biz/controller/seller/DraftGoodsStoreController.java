@@ -53,7 +53,7 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<DraftGoodsBaseVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		draftGoodsPageQuery.setStoreId(storeId);
 		IPage<DraftGoods> draftGoods = draftGoodsService.getDraftGoods(draftGoodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsBaseVO.class));
@@ -72,7 +72,7 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsDTO draftGoodsDTO) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		if (draftGoodsDTO.draftGoodsBase().storeId() == null) {
 			DraftGoodsBaseDTO draftGoodsBaseDTO = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO.draftGoodsBase()).storeId(storeId).build();
 			draftGoodsDTO = DraftGoodsDTOBuilder.builder(draftGoodsDTO).draftGoodsBase(draftGoodsBaseDTO).build();

@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.CANCELLED;
+
 
 /**
  * 通知类消息实现
@@ -46,7 +48,7 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 		noticeMessageDTO.setMemberId(tradeDTO.getMemberId());
 		noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.ORDER_CREATE_SUCCESS);
 		Map<String, String> params = new HashMap<>(2);
-		params.put("goods", tradeDTO.getSkuList().get(0).getGoodsSku().getGoodsName());
+		params.put("goods", tradeDTO.getSkuList().get(0).goodsSku().getGoodsName());
 		noticeMessageDTO.setParameter(params);
 		//保存站内信
 		noticeMessageService.noticeMessage(noticeMessageDTO);
@@ -55,16 +57,16 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
 		//查询订单信息
-		OrderDetailVO orderDetailVO = orderService.queryDetail(orderMessage.getOrderSn());
+		OrderDetailVO orderDetailVO = orderService.queryDetail(orderMessage.orderSn());
 		NoticeMessageDTO noticeMessageDTO = new NoticeMessageDTO();
 		//如果订单状态不为空
 		if (orderDetailVO != null) {
 			Map<String, String> params = new HashMap<>(2);
-			switch (orderMessage.getNewStatus()) {
+			switch (orderMessage.newStatus()) {
 				//如果订单新的状态为已取消 则发送取消订单站内信
 				case CANCELLED:
 					params.put(NoticeMessageParameterEnum.CANCEL_REASON.getType(),
-						orderDetailVO.getOrder().getCancelReason());
+						orderDetailVO.order().cancelReason());
 					noticeMessageDTO.setNoticeMessageNodeEnum(
 						NoticeMessageNodeEnum.ORDER_CANCEL_SUCCESS);
 					break;
@@ -88,7 +90,7 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 				//如果是拼团订单，发送拼团成功消息
 				case UNDELIVERED:
 					if (OrderPromotionTypeEnum.PINTUAN.name()
-						.equals(orderDetailVO.getOrder().getOrderPromotionType())) {
+						.equals(orderDetailVO.order().orderPromotionType())) {
 						//拼团成功消息
 						noticeMessageDTO.setNoticeMessageNodeEnum(
 							NoticeMessageNodeEnum.PINTUAN_SUCCESS);
@@ -98,10 +100,10 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 					break;
 			}
 
-			noticeMessageDTO.setMemberId(orderDetailVO.getOrder().getMemberId());
+			noticeMessageDTO.setMemberId(orderDetailVO.order().memberId());
 			//添加站内信参数
 			params.put(NoticeMessageParameterEnum.GOODS.getType(),
-				orderDetailVO.getOrderItems().get(0).getGoodsName());
+				orderDetailVO.orderItems().get(0).goodsName());
 			noticeMessageDTO.setParameter(params);
 
 			//如果有消息，则发送消息

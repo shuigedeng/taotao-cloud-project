@@ -46,7 +46,7 @@ public class DistributionCashBuyerController {
     private DistributionCashService distributorCashService;
 
 
-    @PreventDuplicateSubmissions
+    //@PreventDuplicateSubmissions
     @ApiOperation(value = "分销员提现")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "price", value = "申请金额", required = true, paramType = "query", dataType = "BigDecimal")

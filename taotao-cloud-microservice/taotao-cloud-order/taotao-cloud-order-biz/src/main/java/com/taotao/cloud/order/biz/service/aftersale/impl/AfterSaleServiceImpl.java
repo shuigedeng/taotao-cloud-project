@@ -367,7 +367,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	 */
 	private AfterSale addAfterSale(AfterSaleDTO afterSaleDTO) {
 		//写入其他属性
-		SecurityUser user = SecurityUtil.getUser();
+		SecurityUser user = SecurityUtil.getCurrentUser();
 
 		AfterSale afterSale = new AfterSale();
 		BeanUtil.copyProperties(afterSaleDTO, afterSale);

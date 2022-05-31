@@ -178,7 +178,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * @since 2021-09-02 21:05:12
 	 */
 	default String getNickname() {
-		return SecurityUtil.getUser().getNickname();
+		return SecurityUtil.getCurrentUser().getNickname();
 	}
 
 	/**

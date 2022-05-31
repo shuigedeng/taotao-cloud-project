@@ -1,8 +1,10 @@
 package com.taotao.cloud.member.biz.connect.request;
 
 
+import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.utils.common.UrlBuilder;
+import com.taotao.cloud.health.alarm.core.util.IpUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -13,7 +15,7 @@ import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthUserGender;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.redis.repository.RedisRepository;
-
+import com.xkcoding.http.support.HttpHeader;
 
 /**
  * 微博登录
@@ -47,7 +49,7 @@ public class BaseAuthWeiboRequest extends BaseAuthRequest {
 
         HttpHeader httpHeader = new HttpHeader();
         httpHeader.add("Authorization", "OAuth2 " + oauthParam);
-        httpHeader.add("API-RemoteIP", IpUtils.getLocalIp());
+        httpHeader.add("API-RemoteIP", IpUtil.getLocalIp());
         String userInfo = new HttpUtils(config.getHttpConfig()).get(userInfoUrl(authToken), null, httpHeader, false);
         JSONObject object = JSONObject.parseObject(userInfo);
         if (object.containsKey("error")) {

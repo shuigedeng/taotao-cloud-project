@@ -1,22 +1,20 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.api.vo.StoreCollectionVO;
-import com.taotao.cloud.member.biz.service.GoodsCollectionService;
+import com.taotao.cloud.member.biz.service.IMemberGoodsCollectionService;
 import com.taotao.cloud.member.biz.service.StoreCollectionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +37,7 @@ public class MemberCollectionController {
 	/**
 	 * 会员商品收藏
 	 */
-	private final GoodsCollectionService goodsCollectionService;
+	private final IMemberGoodsCollectionService IMemberGoodsCollectionService;
 	/**
 	 * 会员店铺
 	 */
@@ -57,7 +55,7 @@ public class MemberCollectionController {
 		@Parameter(description = "类型", required = true) @PathVariable String type,
 		@Validated PageParam page) {
 		if (goods.equals(type)) {
-			IPage<GoodsCollectionVO> goodsCollectionPage = goodsCollectionService.goodsCollection(page);
+			IPage<GoodsCollectionVO> goodsCollectionPage = IMemberGoodsCollectionService.goodsCollection(page);
 			return Result.success(PageModel.convertMybatisPage(goodsCollectionPage, GoodsCollectionVO.class));
 		}
 
@@ -73,7 +71,7 @@ public class MemberCollectionController {
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
 		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
 		if (goods.equals(type)) {
-			return Result.success(goodsCollectionService.addGoodsCollection(id));
+			return Result.success(IMemberGoodsCollectionService.addGoodsCollection(id));
 		}
 		return Result.success(storeCollectionService.addStoreCollection(id));
 
@@ -87,7 +85,7 @@ public class MemberCollectionController {
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
 		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
 		if (goods.equals(type)) {
-			return Result.success(goodsCollectionService.deleteGoodsCollection(id));
+			return Result.success(IMemberGoodsCollectionService.deleteGoodsCollection(id));
 		}
 		return Result.success(storeCollectionService.deleteStoreCollection(id));
 	}
@@ -100,7 +98,7 @@ public class MemberCollectionController {
 		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
 		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
 		if (goods.equals(type)) {
-			return Result.success(this.goodsCollectionService.isCollection(id));
+			return Result.success(this.IMemberGoodsCollectionService.isCollection(id));
 		}
 		return Result.success(this.storeCollectionService.isCollection(id));
 	}

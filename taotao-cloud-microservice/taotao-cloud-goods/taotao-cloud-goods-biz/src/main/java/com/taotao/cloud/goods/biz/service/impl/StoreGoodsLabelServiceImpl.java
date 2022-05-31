@@ -95,7 +95,7 @@ public class StoreGoodsLabelServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//获取当前登录商家账号
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
 		storeGoodsLabel.setStoreId(tokenUser.getStoreId());
 		//保存店铺分类
 		this.save(storeGoodsLabel);
@@ -108,7 +108,7 @@ public class StoreGoodsLabelServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//修改当前店铺的商品分类
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
 
 		LambdaUpdateWrapper<StoreGoodsLabel> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.eq(StoreGoodsLabel::getStoreId, tokenUser.getStoreId());
@@ -122,7 +122,7 @@ public class StoreGoodsLabelServiceImpl extends
 
 	@Override
 	public Boolean removeStoreGoodsLabel(Long storeLabelId) {
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
 		if (tokenUser == null || Objects.isNull(tokenUser.getStoreId())) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}

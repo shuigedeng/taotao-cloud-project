@@ -50,7 +50,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<List<StoreGoodsLabelVO>> list() {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		return Result.success(storeGoodsLabelService.listByStoreId(storeId));
 	}
 

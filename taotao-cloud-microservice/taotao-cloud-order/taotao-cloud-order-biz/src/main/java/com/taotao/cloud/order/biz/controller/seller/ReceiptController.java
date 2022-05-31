@@ -13,7 +13,6 @@ import com.taotao.cloud.order.biz.service.order.IReceiptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Objects;
 
 /**
  * 店铺端,发票API
@@ -47,7 +44,7 @@ public class ReceiptController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
-		receiptPageQuery.setStoreId(SecurityUtil.getUser().getStoreId());
+		receiptPageQuery.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
 		return Result.success(receiptService.getReceiptData(receiptPageQuery));
 	}
 

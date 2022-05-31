@@ -44,6 +44,6 @@ public record AfterSaleAllowOperation(
 			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.BUYER_RETURN.name()),
 			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.WAIT_REFUND.name()),
 			false,
-			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.APPLY.name());
+			afterSaleVO.serviceStatus().equals(AfterSaleStatusEnum.APPLY.name()));
 	}
 }

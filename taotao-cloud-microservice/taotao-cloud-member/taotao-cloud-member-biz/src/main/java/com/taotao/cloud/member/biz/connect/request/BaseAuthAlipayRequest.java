@@ -1,7 +1,15 @@
 package com.taotao.cloud.member.biz.connect.request;
 
 import cn.hutool.core.convert.Convert;
+import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipaySystemOauthTokenRequest;
+import com.alipay.api.request.AlipayUserInfoShareRequest;
+import com.alipay.api.response.AlipaySystemOauthTokenResponse;
+import com.alipay.api.response.AlipayUserInfoShareResponse;
 import com.taotao.cloud.common.utils.common.UrlBuilder;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
@@ -13,7 +21,6 @@ import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthUserGender;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.redis.repository.RedisRepository;
-
 
 /**
  * 支付宝登录

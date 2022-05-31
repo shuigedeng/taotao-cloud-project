@@ -9,13 +9,17 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.cookie.CookieUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.member.api.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;
 import com.taotao.cloud.member.biz.connect.entity.enums.ConnectEnum;
 import com.taotao.cloud.member.biz.connect.mapper.ConnectMapper;
+import com.taotao.cloud.member.biz.connect.request.HttpUtils;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.entity.Member;
@@ -23,8 +27,18 @@ import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;
-import com.taotao.cloud.sys.api.setting.connect.dto.WechatConnectSettingItem;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingItemVO;
+import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import javax.naming.NoPermissionException;
 import java.nio.charset.StandardCharsets;
 import java.security.AlgorithmParameters;
 import java.security.Security;
@@ -35,16 +49,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import javax.naming.NoPermissionException;
-
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 联合登陆接口实现
@@ -56,7 +60,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	static final boolean AUTO_REGION = true;
 
 	@Autowired
-	private SettingService settingService;
+	private IFeignSettingService settingService;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -105,11 +109,11 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 			} else {
 				//写入cookie
 				CookieUtil.addCookie(CONNECT_COOKIE, uuid, 1800,
-					ThreadContextHolder.getHttpResponse());
+					RequestUtil.getResponse());
 				CookieUtil.addCookie(CONNECT_TYPE, type, 1800,
-					ThreadContextHolder.getHttpResponse());
+					RequestUtil.getResponse());
 				//自动登录失败，则把信息缓存起来
-				cache.put(ConnectService.cacheKey(type, uuid), authUser, 30L, TimeUnit.MINUTES);
+				redisRepository.setExpire(ConnectService.cacheKey(type, uuid), authUser, 30L, TimeUnit.MINUTES);
 				throw new BusinessException(ResultEnum.USER_NOT_BINDING);
 			}
 		} catch (Exception e) {
@@ -121,8 +125,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 
 	@Override
 	public void bind(String unionId, String type) {
-		AuthUser authUser = UserContext.getCurrentUser();
-		Connect connect = new Connect(authUser.getId(), unionId, type);
+		Connect connect = new Connect(SecurityUtil.getUserId(), unionId, type);
 		this.save(connect);
 	}
 
@@ -130,7 +133,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	@Transactional(rollbackFor = Exception.class)
 	public void unbind(String type) {
 		LambdaQueryWrapper<Connect> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(Connect::getUserId, UserContext.getCurrentUser().getId());
+		queryWrapper.eq(Connect::getUserId, SecurityUtil.getUserId());
 		queryWrapper.eq(Connect::getUnionType, type);
 
 		this.remove(queryWrapper);
@@ -139,7 +142,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	@Override
 	public List<String> bindList() {
 		LambdaQueryWrapper<Connect> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(Connect::getUserId, UserContext.getCurrentUser().getId());
+		queryWrapper.eq(Connect::getUserId, SecurityUtil.getUserId());
 		List<Connect> connects = this.list(queryWrapper);
 		List<String> keys = new ArrayList<>();
 		connects.forEach(item -> keys.add(item.getUnionType()));
@@ -160,7 +163,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	@Override
 	public Token miniProgramAutoLogin(WechatMPLoginParams params) {
 
-		Object cacheData = cache.get(
+		Object cacheData = redisRepository.get(
 			CachePrefix.WECHAT_SESSION_PARAMS.getPrefix() + params.getUuid());
 		Map<String, String> map = new HashMap<>(3);
 		if (cacheData == null) {
@@ -173,7 +176,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 			map.put("sessionKey", sessionKey);
 			map.put("unionId", unionId);
 			map.put("openId", openId);
-			cache.put(CachePrefix.WECHAT_SESSION_PARAMS.getPrefix() + params.getUuid(), map, 900L);
+			redisRepository.setExpire(CachePrefix.WECHAT_SESSION_PARAMS.getPrefix() + params.getUuid(), map, 900L);
 		} else {
 			map = (Map<String, String>) cacheData;
 		}
@@ -190,7 +193,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	 * @return
 	 */
 	public JSONObject getConnect(String code) {
-		WechatConnectSettingItem setting = getWechatMPSetting();
+		WechatConnectSettingItemVO setting = getWechatMPSetting();
 		String url = "https://api.weixin.qq.com/sns/jscode2session?" +
 			"appid=" + setting.getAppId() + "&" +
 			"secret=" + setting.getAppSecret() + "&" +
@@ -212,10 +215,10 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	public Token phoneMpBindAndLogin(String sessionKey, WechatMPLoginParams params, String openId,
-		String unionId) {
+									 String unionId) {
 		String encryptedData = params.getEncryptedData(), iv = params.getIv();
 		JSONObject userInfo = this.getUserInfo(encryptedData, sessionKey, iv);
-		log.info("联合登陆返回：{}", userInfo.toString());
+		LogUtil.info("联合登陆返回：{}", userInfo.toString());
 		String phone = (String) userInfo.get("purePhoneNumber");
 
 		//手机号登录
@@ -297,19 +300,16 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	 *
 	 * @return 微信小程序配置
 	 */
-	private WechatConnectSettingItem getWechatMPSetting() {
-		Setting setting = settingService.get(SettingEnum.WECHAT_CONNECT.name());
-
-		WechatConnectSetting wechatConnectSetting = JSONUtil.toBean(setting.getSettingValue(),
-			WechatConnectSetting.class);
+	private WechatConnectSettingItemVO getWechatMPSetting() {
+		WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingEnum.WECHAT_CONNECT.name()).data();
 
 		if (wechatConnectSetting == null) {
 			throw new BusinessException(ResultEnum.WECHAT_CONNECT_NOT_EXIST);
 		}
 		//寻找对应对微信小程序登录配置
-		for (WechatConnectSettingItem wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItems()) {
-			if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.WECHAT_MP.name())) {
-				return wechatConnectSettingItem;
+		for (WechatConnectSettingItemVO wechatConnectSettingItemVO : wechatConnectSetting.getWechatConnectSettingItemVOS()) {
+			if (wechatConnectSettingItemVO.getClientType().equals(ClientTypeEnum.WECHAT_MP.name())) {
+				return wechatConnectSettingItemVO;
 			}
 		}
 
@@ -326,7 +326,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	 * @return 用户信息
 	 */
 	public JSONObject getUserInfo(String encryptedData, String sessionKey, String iv) {
-		log.info("encryptedData:{},sessionKey:{},iv:{}", encryptedData, sessionKey, iv);
+		LogUtil.info("encryptedData:{},sessionKey:{},iv:{}", encryptedData, sessionKey, iv);
 		//被加密的数据
 		byte[] dataByte = Base64.getDecoder().decode(encryptedData);
 		//加密秘钥

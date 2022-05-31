@@ -52,7 +52,7 @@ public class CategoryStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<CategoryVO>> getListAll() {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		//获取店铺经营范围
 		String goodsManagementCategory = storeDetailService.getStoreDetailVO(storeId).data()
 			.getGoodsManagementCategory();

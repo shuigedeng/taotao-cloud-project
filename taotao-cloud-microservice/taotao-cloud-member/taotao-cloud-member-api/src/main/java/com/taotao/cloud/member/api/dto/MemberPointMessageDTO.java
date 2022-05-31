@@ -33,5 +33,5 @@ public class MemberPointMessageDTO implements Serializable {
 	private String type;
 
 	@Schema(description = "会员id")
-	private String memberId;
+	private Long memberId;
 }

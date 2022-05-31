@@ -34,7 +34,7 @@ public class AfterSaleOperationLogAspect {
 	@AfterReturning(returning = "rvt", pointcut = "@annotation(com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint)")
 	public void afterReturning(JoinPoint joinPoint, Object rvt) {
 		try {
-			SecurityUser securityUser = SecurityUtil.getUser();
+			SecurityUser securityUser = SecurityUtil.getCurrentUser();
 			//日志对象拼接
 			//默认操作人员，系统操作
 			String userName = "系统操作";

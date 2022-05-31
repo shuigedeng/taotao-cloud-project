@@ -13,6 +13,8 @@ import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.CANCELLED;
+
 /**
  * 支付
  *
@@ -31,9 +33,9 @@ public class PaymentExecute implements OrderStatusChangeEvent {
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-		switch (orderMessage.getNewStatus()) {
+		switch (orderMessage.newStatus()) {
 			case CANCELLED:
-				Order order = orderService.getBySn(orderMessage.getOrderSn());
+				Order order = orderService.getBySn(orderMessage.orderSn());
 
 				//如果未付款，则不去要退回相关代码执行
 				if (order.getPayStatus().equals(PayStatusEnum.UNPAID.name())) {
@@ -68,7 +70,7 @@ public class PaymentExecute implements OrderStatusChangeEvent {
 					case BANK_TRANSFER:
 						break;
 					default:
-						LogUtil.error("订单支付执行异常,订单编号：{}", orderMessage.getOrderSn());
+						LogUtil.error("订单支付执行异常,订单编号：{}", orderMessage.orderSn());
 						break;
 				}
 				break;

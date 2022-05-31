@@ -40,7 +40,7 @@ public class DistributionGoodsPageQuery extends PageParam {
 
 	public <T> QueryWrapper<T> storeQueryWrapper() {
 		QueryWrapper<T> queryWrapper = this.distributionQueryWrapper();
-		queryWrapper.eq("dg.store_id", SecurityUtil.getUser().getStoreId());
+		queryWrapper.eq("dg.store_id", SecurityUtil.getCurrentUser().getStoreId());
 		return queryWrapper;
 	}
 

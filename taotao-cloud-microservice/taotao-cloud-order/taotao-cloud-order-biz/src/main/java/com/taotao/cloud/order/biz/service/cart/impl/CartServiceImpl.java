@@ -157,7 +157,7 @@ public class CartServiceImpl implements ICartService {
 				cartSkuVO.setChecked(true);
 			} else {
 				tradeDTO = new com.taotao.cloud.order.api.dto.cart.TradeDTO(cartTypeEnum);
-				SecurityUser currentUser = SecurityUtil.getUser();
+				SecurityUser currentUser = SecurityUtil.getCurrentUser();
 				tradeDTO.setMemberId(currentUser.getUserId());
 				tradeDTO.setMemberName(currentUser.getUsername());
 				List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
@@ -197,7 +197,7 @@ public class CartServiceImpl implements ICartService {
 	private String getOriginKey(CartTypeEnum cartTypeEnum) {
 		//缓存key，默认使用购物车
 		if (cartTypeEnum != null) {
-			SecurityUser currentUser = SecurityUtil.getUser();
+			SecurityUser currentUser = SecurityUtil.getCurrentUser();
 			return cartTypeEnum.getPrefix() + currentUser.getUserId();
 		}
 		throw new BusinessException(ResultEnum.ERROR);
@@ -208,7 +208,7 @@ public class CartServiceImpl implements ICartService {
 		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = (com.taotao.cloud.order.api.dto.cart.TradeDTO) redisRepository.get(this.getOriginKey(checkedWay));
 		if (tradeDTO == null) {
 			tradeDTO = new com.taotao.cloud.order.api.dto.cart.TradeDTO(checkedWay);
-			SecurityUser currentUser = SecurityUtil.getUser();
+			SecurityUser currentUser = SecurityUtil.getCurrentUser();
 			tradeDTO.setMemberId(currentUser.getUserId());
 			tradeDTO.setMemberName(currentUser.getUsername());
 		}
@@ -501,7 +501,7 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Boolean selectCoupon(String couponId, String way, boolean use) {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		//获取购物车，然后重新写入优惠券
 		CartTypeEnum cartTypeEnum = getCartType(way);
 		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(cartTypeEnum);

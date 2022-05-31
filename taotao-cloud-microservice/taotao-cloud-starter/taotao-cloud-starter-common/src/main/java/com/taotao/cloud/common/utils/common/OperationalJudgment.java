@@ -4,7 +4,6 @@ package com.taotao.cloud.common.utils.common;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import java.util.Objects;
 
@@ -38,20 +37,20 @@ public final class OperationalJudgment {
 	 * @return 返回判定本身，防止多次查询对象
 	 */
 	public static <T> T judgment(T object, String buyerIdField, String storeIdField) {
-		Integer type = SecurityUtil.getUser().getType();
+		Integer type = SecurityUtil.getCurrentUser().getType();
 		UserEnum userEnum = UserEnum.getEnumByCode(type);
 		switch (Objects.requireNonNull(userEnum)) {
 			case MANAGER:
 				return object;
 			case MEMBER:
-				if (SecurityUtil.getUser().getUserId()
+				if (SecurityUtil.getCurrentUser().getUserId()
 					.equals(ReflectionUtil.getFieldValue(object, buyerIdField))) {
 					return object;
 				} else {
 					throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 				}
 			case STORE:
-				if (SecurityUtil.getUser().getStoreId()
+				if (SecurityUtil.getCurrentUser().getStoreId()
 					.equals(ReflectionUtil.getFieldValue(object, storeIdField))) {
 					return object;
 				} else {

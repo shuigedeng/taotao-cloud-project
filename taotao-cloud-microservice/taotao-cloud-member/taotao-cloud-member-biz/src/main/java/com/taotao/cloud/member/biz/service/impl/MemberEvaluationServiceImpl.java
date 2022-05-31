@@ -9,10 +9,13 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
@@ -27,8 +30,11 @@ import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.vo.order.OrderItemVO;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
@@ -100,15 +106,15 @@ public class MemberEvaluationServiceImpl extends
 	@Override
 	public boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
 		//获取子订单信息
-		OrderItem orderItem = orderItemService.getBySn(memberEvaluationDTO.getOrderItemSn());
+		OrderItemVO orderItem = orderItemService.getBySn(memberEvaluationDTO.getOrderItemSn());
 		//获取订单信息
-		Order order = orderService.getBySn(orderItem.getOrderSn());
+		OrderVO order = orderService.getBySn(orderItem.orderSn());
 		//检测是否可以添加会员评价
 		checkMemberEvaluation(orderItem, order);
 		//获取用户信息
 		Member member = memberService.getUserInfo();
 		//获取商品信息
-		GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
+		GoodsSkuVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
 			memberEvaluationDTO.getSkuId());
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
@@ -119,7 +125,7 @@ public class MemberEvaluationServiceImpl extends
 		this.save(memberEvaluation);
 
 		//修改订单货物评价状态为已评价
-		orderItemService.updateCommentStatus(orderItem.getSn(), CommentStatusEnum.FINISHED);
+		orderItemService.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
 		//发送商品评价消息
 		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
 			+ GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();
@@ -198,14 +204,14 @@ public class MemberEvaluationServiceImpl extends
 	 * @param orderItem 子订单
 	 * @param order     订单
 	 */
-	public void checkMemberEvaluation(OrderItem orderItem, Order order) {
+	public void checkMemberEvaluation(OrderItemVO orderItem, OrderVO order) {
 		//根据子订单编号判断是否评价过
-		if (orderItem.getCommentStatus().equals(CommentStatusEnum.FINISHED.name())) {
+		if (orderItem.commentStatus().equals(CommentStatusEnum.FINISHED.name())) {
 			throw new BusinessException(ResultEnum.EVALUATION_BigDecimal_ERROR);
 		}
 
 		//判断是否是当前会员的订单
-		if (!order.getMemberId().equals(UserContext.getCurrentUser().getId())) {
+		if (!order.orderBase().memberId().equals(SecurityUtil.getUserId())) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_USER);
 		}
 	}

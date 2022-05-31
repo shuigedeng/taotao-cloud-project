@@ -118,7 +118,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	@Override
 	public OrderComplaint addOrderComplain(OrderComplaintDTO orderComplaintDTO) {
 		try {
-			SecurityUser currentUser = SecurityUtil.getUser();
+			SecurityUser currentUser = SecurityUtil.getCurrentUser();
 			//查询订单信息
 			OrderDetailVO orderDetailVO = orderService.queryDetail(orderComplaintDTO.getOrderSn());
 			List<OrderItemVO> orderItems = orderDetailVO.getOrderItems();
