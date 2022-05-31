@@ -16,6 +16,8 @@
 package com.taotao.cloud.member.biz.roketmq.event;
 
 
+import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
+
 /**
  * 会员提现消息
  */

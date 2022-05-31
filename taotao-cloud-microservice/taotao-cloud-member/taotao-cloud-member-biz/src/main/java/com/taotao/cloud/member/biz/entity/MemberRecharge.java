@@ -1,22 +1,20 @@
 package com.taotao.cloud.member.biz.entity;
 
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serial;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * 会员预存款充值记录
@@ -24,57 +22,66 @@ import java.util.Date;
  * @author pikachu
  * @since 2020-02-25 14:10:16
  */
-@Data
-@TableName("li_recharge")
-@ApiModel(value = "预存款充值记录")
+@Setter
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberRecharge extends BaseIdEntity {
+@Entity
+@Table(name = MemberReceipt.TABLE_NAME)
+@TableName(MemberReceipt.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = MemberReceipt.TABLE_NAME, comment = "预存款充值记录")
+public class MemberRecharge extends BaseSuperEntity<MemberRecharge, Long> {
 
+	public static final String TABLE_NAME = "tt_recharge";
+
+	@Serial
 	private static final long serialVersionUID = -1529240544327161096L;
-
-	@CreatedBy
-	@TableField(fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建者", hidden = true)
-	private String createBy;
-
-	@CreatedDate
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@TableField(fill = FieldFill.INSERT)
-	@ApiModelProperty(value = "创建时间", hidden = true)
-	private Date createTime;
-
-	@ApiModelProperty(value = "充值订单编号")
+	/**
+	 * 充值订单编号
+	 */
+	@Column(name = "recharge_sn", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String rechargeSn;
-
-	@ApiModelProperty(value = "会员id")
-	private String memberId;
-
-	@ApiModelProperty(value = "会员名称")
+	/**
+	 * 会员id
+	 */
+	@Column(name = "member_id", columnDefinition = "varchar(32) not null comment '发票抬头'")
+	private Long memberId;
+	/**
+	 * 会员名称
+	 */
+	@Column(name = "member_name", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String memberName;
-
-	@NotEmpty(message = "充值金额不能为空")
-	@ApiModelProperty(value = "充值金额")
-	private Double rechargeMoney;
-
-	@NotEmpty(message = "充值方式，如：支付宝，微信不能为空")
-	@ApiModelProperty(value = "充值方式，如：支付宝，微信")
+	/**
+	 * 充值金额
+	 */
+	@Column(name = "recharge_money", columnDefinition = "varchar(32) not null comment '发票抬头'")
+	private BigDecimal rechargeMoney;
+	/**
+	 * 充值方式，如：支付宝，微信不能为空
+	 */
+	@Column(name = "recharge_way", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String rechargeWay;
-
-	@ApiModelProperty(value = "支付状态")
+	/**
+	 * 支付状态
+	 */
+	@Column(name = "pay_status", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String payStatus;
-
-	@ApiModelProperty(value = "支付插件id")
+	/**
+	 * 支付插件id
+	 */
+	@Column(name = "payment_plugin_id", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String paymentPluginId;
-
-	@ApiModelProperty(value = "第三方流水")
+	/**
+	 * 第三方流水
+	 */
+	@Column(name = "receivable_no", columnDefinition = "varchar(32) not null comment '发票抬头'")
 	private String receivableNo;
-
-	@ApiModelProperty(value = "支付时间")
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date payTime;
+	/**
+	 * 支付时间
+	 */
+	@Column(name = "pay_time", columnDefinition = "varchar(32) not null comment '发票抬头'")
+	private LocalDateTime payTime;
 
 
 	/**
@@ -85,7 +92,7 @@ public class MemberRecharge extends BaseIdEntity {
 	 * @param memberName 会员名称
 	 * @param money      充值金额
 	 */
-	public MemberRecharge(String rechargeSn, String memberId, String memberName, Double money) {
+	public MemberRecharge(String rechargeSn, Long memberId, String memberName, BigDecimal money) {
 		this.rechargeSn = rechargeSn;
 		this.memberId = memberId;
 		this.memberName = memberName;

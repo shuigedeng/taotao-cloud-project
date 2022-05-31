@@ -4,11 +4,14 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignSettingFallback;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
+import com.taotao.cloud.sys.api.vo.setting.ExperienceSetting;
 import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,4 +54,11 @@ public interface IFeignSettingService {
 
 	@GetMapping("/sys/tools/setting/point")
 	Result<PointSettingVO> getPointSetting(String name);
+
+
+	@GetMapping("/sys/tools/setting/qq/connect")
+	Result<QQConnectSettingVO> getQQConnectSetting(String name);
+	@GetMapping("/sys/tools/setting/wechat/connect")
+	Result<WechatConnectSettingVO> getWechatConnectSetting(String name);
+
 }

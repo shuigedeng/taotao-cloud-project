@@ -1,8 +1,10 @@
 package com.taotao.cloud.order.api.feign;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderItemFallbackImpl;
 import com.taotao.cloud.order.api.vo.order.OrderItemVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,5 +26,9 @@ public interface IFeignOrderItemService {
     void updateById(OrderItemVO orderItem);
 
 	OrderItemVO getByOrderSnAndSkuId(String orderSn, String skuId);
+
+	OrderItemVO getBySn(String orderItemSn);
+
+	void updateCommentStatus(String sn, CommentStatusEnum finished);
 }
 

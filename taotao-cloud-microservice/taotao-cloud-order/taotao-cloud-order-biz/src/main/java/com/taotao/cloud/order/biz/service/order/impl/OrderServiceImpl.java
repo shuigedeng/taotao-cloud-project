@@ -173,7 +173,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			String message = "订单[" + item.getSn() + "]创建";
 			//记录日志
 			orderLogs.add(new OrderLog(item.getSn(), SecurityUtil.getUserId(),
-				SecurityUtil.getUser().getType(),
+				SecurityUtil.getCurrentUser().getType(),
 				SecurityUtil.getUsername(), message));
 			item.getCheckedSkuList().forEach(
 				sku -> orderItems.add(new OrderItem(sku, item, tradeDTO))
@@ -649,7 +649,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
 			//查看订单号是否存在-是否是当前店铺的订单
 			Order order = this.getOne(new LambdaQueryWrapper<Order>()
-				.eq(Order::getStoreId, SecurityUtil.getUser().getStoreId())
+				.eq(Order::getStoreId, SecurityUtil.getCurrentUser().getStoreId())
 				.eq(Order::getSn, orderBatchDeliverDTO.getOrderSn()));
 			if (order == null) {
 				throw new BusinessException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");

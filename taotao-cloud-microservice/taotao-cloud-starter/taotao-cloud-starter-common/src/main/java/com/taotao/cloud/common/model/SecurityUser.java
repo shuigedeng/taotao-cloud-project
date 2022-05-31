@@ -381,8 +381,13 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		}
 	}
 
+	//获取是否长期有效的token
+    public boolean getLongTerm() {
+		return false;
+    }
 
-	public static final class SecurityUserBuilder {
+
+    public static final class SecurityUserBuilder {
 
 		private Long userId;
 		private String account;

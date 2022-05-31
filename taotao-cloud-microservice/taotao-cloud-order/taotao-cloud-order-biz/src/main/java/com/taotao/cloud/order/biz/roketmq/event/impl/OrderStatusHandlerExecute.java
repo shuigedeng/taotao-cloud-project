@@ -25,7 +25,7 @@ public class OrderStatusHandlerExecute implements TradeEvent {
 	@Override
 	public void orderCreate(TradeDTO tradeDTO) {
 		//如果订单需要支付金额为0，则将订单步入到下一个流程
-		if (tradeDTO.getPriceDetailDTO().getFlowPrice().compareTo(BigDecimal.ZERO) <= 0) {
+		if (tradeDTO.getPriceDetailDTO().flowPrice().compareTo(BigDecimal.ZERO) <= 0) {
 			tradeService.payTrade(tradeDTO.getSn(), PaymentMethodEnum.BANK_TRANSFER.name(), "-1");
 		}
 	}

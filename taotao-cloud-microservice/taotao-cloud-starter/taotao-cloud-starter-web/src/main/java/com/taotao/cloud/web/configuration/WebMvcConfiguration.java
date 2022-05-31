@@ -71,7 +71,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
@@ -569,7 +568,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 			boolean value = user.value();
 			HttpServletRequest request = nativeWebRequest.getNativeRequest(
 				HttpServletRequest.class);
-			SecurityUser loginUser = SecurityUtil.getUser();
+			SecurityUser loginUser = SecurityUtil.getCurrentUser();
 
 			//根据value状态获取更多用户信息，待实现
 			return loginUser;

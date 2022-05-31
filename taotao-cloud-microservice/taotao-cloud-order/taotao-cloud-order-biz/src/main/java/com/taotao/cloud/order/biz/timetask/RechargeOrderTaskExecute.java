@@ -28,7 +28,7 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 充值
 	 */
 	@Autowired
-	private RechargeService rechargeService;
+	private IFeignRechargeService rechargeService;
 	/**
 	 * 设置
 	 */
@@ -41,8 +41,7 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingEnum.ORDER_SETTING.name()).data();
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//充值订单自动取消时间 = 当前时间 - 自动取消时间分钟数
-			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(),
-				-orderSetting.getAutoCancel());
+			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
 			LambdaQueryWrapper<Recharge> queryWrapper = new LambdaQueryWrapper<>();
 			queryWrapper.eq(Recharge::getPayStatus, PayStatusEnum.UNPAID.name());
 			//充值订单创建时间 <= 订单自动取消时间

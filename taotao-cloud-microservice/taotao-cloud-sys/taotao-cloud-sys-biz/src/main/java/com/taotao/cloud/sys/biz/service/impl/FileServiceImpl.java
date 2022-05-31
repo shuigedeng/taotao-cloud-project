@@ -84,8 +84,8 @@ public class FileServiceImpl extends
 				LocalDateTime.parse(ossInfo.getLastUpdateTime(),
 					DatePattern.NORM_DATETIME_FORMATTER));
 			file.setDataType(FileTypeUtil.getType(multipartFile.getInputStream()));
-			file.setCreateBy(SecurityUtil.getUser().getUserId());
-			file.setCreateName(SecurityUtil.getUser().getUsername());
+			file.setCreateBy(SecurityUtil.getCurrentUser().getUserId());
+			file.setCreateName(SecurityUtil.getCurrentUser().getUsername());
 		} catch (Exception ignored) {
 		}
 		file.setDelFlag(false);

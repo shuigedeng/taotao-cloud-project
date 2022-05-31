@@ -48,7 +48,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addCommodity(List<Commodity> commodityList) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		for (Commodity commodity : commodityList) {
 			//检测直播商品
 			checkCommodity(commodity);
@@ -87,7 +87,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 
 	@Override
 	public Boolean deleteCommodity(Long goodsId) {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		if (currentUser == null || (currentUser.getType().equals(UserEnum.STORE.getCode())
 			&& currentUser.getStoreId() == null)) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
@@ -97,7 +97,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 		if ("0".equals(json.getStr("errcode"))) {
 			return this.remove(
 				new LambdaQueryWrapper<Commodity>().eq(Commodity::getLiveGoodsId, goodsId)
-					.eq(Commodity::getStoreId, SecurityUtil.getUser().getStoreId()));
+					.eq(Commodity::getStoreId, SecurityUtil.getCurrentUser().getStoreId()));
 		}
 		return false;
 	}
@@ -125,7 +125,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 
 	@Override
 	public IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus) {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 
 		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
 			new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)

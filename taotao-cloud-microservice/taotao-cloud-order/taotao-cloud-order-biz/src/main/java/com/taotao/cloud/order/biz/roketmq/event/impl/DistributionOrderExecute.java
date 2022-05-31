@@ -12,6 +12,11 @@ import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.CANCELLED;
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.TAKE;
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.UNDELIVERED;
+
+
 /**
  * 分销订单入库
  *
@@ -29,24 +34,17 @@ public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDa
     @Autowired
     private IFeignDistributionOrderService distributionOrderService;
 
-    // /**
-    //  * 分销订单持久层
-    //  */
-    // @Resource
-    // private DistributionOrderMapper distributionOrderMapper;
-
-
     @Override
     public void orderChange(OrderMessage orderMessage) {
-		switch (orderMessage.getNewStatus()) {
+		switch (orderMessage.newStatus()) {
 			//订单带校验/订单代发货，则记录分销信息
 			case TAKE, UNDELIVERED -> {
 				//记录分销订单
-				distributionOrderService.calculationDistribution(orderMessage.getOrderSn());
+				distributionOrderService.calculationDistribution(orderMessage.orderSn());
 			}
 			case CANCELLED -> {
 				//修改分销订单状态
-				distributionOrderService.cancelOrder(orderMessage.getOrderSn());
+				distributionOrderService.cancelOrder(orderMessage.orderSn());
 			}
 			default -> {
 			}

@@ -16,13 +16,14 @@
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
 
-import com.google.gson.Gson;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.setting.PointSetting;
+import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * 配置
 	 */
 	@Autowired
-	private SettingService settingService;
+	private IFeignSettingService settingService;
 	/**
 	 * 会员
 	 */
@@ -46,7 +47,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * 订单
 	 */
 	@Autowired
-	private OrderService orderService;
+	private IFeignOrderService orderService;
 
 	/**
 	 * 会员注册赠送积分
@@ -56,7 +57,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	@Override
 	public void memberRegister(Member member) {
 		//获取积分设置
-		PointSetting pointSetting = getPointSetting();
+		PointSettingVO pointSetting = getPointSetting();
 		//赠送会员积分
 		memberService.updateMemberPoint(pointSetting.getRegister().longValue(),
 			PointTypeEnum.INCREASE.name(), member.getId(),
@@ -68,8 +69,8 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 *
 	 * @return 积分设置
 	 */
-	private PointSetting getPointSetting() {
-		Setting setting = settingService.get(SettingEnum.POINT_SETTING.name());
-		return new Gson().fromJson(setting.getSettingValue(), PointSetting.class);
+	private PointSettingVO getPointSetting() {
+		PointSettingVO setting = settingService.getPointSetting(SettingEnum.POINT_SETTING.name()).data();
+		return setting;
 	}
 }

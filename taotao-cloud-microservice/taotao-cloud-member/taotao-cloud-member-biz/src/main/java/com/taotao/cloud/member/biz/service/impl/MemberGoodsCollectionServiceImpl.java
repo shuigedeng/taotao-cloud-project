@@ -7,13 +7,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.biz.mapper.GoodsCollectionMapper;
-import com.taotao.cloud.member.biz.service.GoodsCollectionService;
+import com.taotao.cloud.member.biz.service.IMemberGoodsCollectionService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class GoodsCollectionServiceImpl extends
-	ServiceImpl<GoodsCollectionMapper, MemberGoodsCollection> implements GoodsCollectionService {
+public class MemberGoodsCollectionServiceImpl extends
+	ServiceImpl<GoodsCollectionMapper, MemberGoodsCollection> implements IMemberGoodsCollectionService {
 
 	@Override
 	public IPage<GoodsCollectionVO> goodsCollection(PageParam pageParam) {

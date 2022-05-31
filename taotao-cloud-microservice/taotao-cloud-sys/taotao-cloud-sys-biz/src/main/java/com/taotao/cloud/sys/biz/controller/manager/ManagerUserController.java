@@ -102,7 +102,7 @@ public class ManagerUserController extends
 	@PreAuthorize("hasAuthority('sys:user:info:current')")
 	@GetMapping("/current")
 	public Result<UserQueryVO> getCurrentUser() {
-		SecurityUser securityUser = SecurityUtil.getUser();
+		SecurityUser securityUser = SecurityUtil.getCurrentUser();
 		if (Objects.isNull(securityUser)) {
 			throw new BusinessException("用户未登录");
 		}

@@ -3,8 +3,11 @@ package com.taotao.cloud.member.biz.connect.config;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
 import com.taotao.cloud.member.biz.connect.request.BaseAuthRequest;
 import java.util.List;
+
+import com.xkcoding.http.config.HttpConfig;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,8 +15,7 @@ import lombok.Setter;
 /**
  * JustAuth配置类
  */
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -70,7 +72,7 @@ public class AuthConfig {
 	 * Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 10080)));
 	 * config.setTimeout(15000);
 	 */
-	//private HttpConfig httpConfig;
+	private HttpConfig httpConfig;
 
 	/**
 	 * 忽略校验 {@code state} 参数，默认不开启。当 {@code ignoreCheckState} 为 {@code true} 时， {@link

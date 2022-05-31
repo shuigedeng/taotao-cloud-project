@@ -26,8 +26,7 @@ import org.springframework.stereotype.Service;
  * 会员发票业务层实现
  */
 @Service
-public class MemberReceiptServiceImpl extends
-	ServiceImpl<MemberReceiptMapper, MemberReceipt> implements
+public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, MemberReceipt> implements
 	MemberReceiptService {
 
 	@Autowired
@@ -87,7 +86,7 @@ public class MemberReceiptServiceImpl extends
 					memberReceiptAddVO.setIsDefault(0);
 				}
 			}
-			return this.baseMapper.insert(memberReceipt) > 0 ? true : false;
+			return this.baseMapper.insert(memberReceipt) > 0;
 		}
 		throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
 	}
@@ -116,7 +115,7 @@ public class MemberReceiptServiceImpl extends
 			if (memberReceiptAddVO.getIsDefault().equals(1)) {
 				this.update(new UpdateWrapper<MemberReceipt>().eq("member_id", memberId));
 			}
-			return this.baseMapper.updateById(memberReceiptDb) > 0 ? true : false;
+			return this.baseMapper.updateById(memberReceiptDb) > 0;
 		}
 		throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
 	}

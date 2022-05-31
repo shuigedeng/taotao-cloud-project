@@ -26,7 +26,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +71,7 @@ public class GoodsStoreController {
 	@GetMapping("/page")
 	public Result<PageModel<GoodsBaseVO>> getByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
@@ -84,7 +83,7 @@ public class GoodsStoreController {
 	@GetMapping(value = "/sku/page")
 	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
@@ -96,7 +95,7 @@ public class GoodsStoreController {
 	@GetMapping(value = "/stock/warning")
 	public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
 		//库存预警数量
 		Integer stockWarnNum = storeDetail.getStockWarning();
@@ -176,7 +175,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
 	public Result<List<GoodsSkuVO>> getSkuByList(@PathVariable Long goodsId) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		return Result.success(goodsSkuService.getGoodsSkuVOList(goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId)
 				.eq(GoodsSku::getStoreId, storeId))));
@@ -187,7 +186,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/stocks")
 	public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
-		Long storeId = SecurityUtil.getUser().getStoreId();
+		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		// 获取商品skuId集合
 		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::skuId).toList();
 		// 根据skuId集合查询商品信息

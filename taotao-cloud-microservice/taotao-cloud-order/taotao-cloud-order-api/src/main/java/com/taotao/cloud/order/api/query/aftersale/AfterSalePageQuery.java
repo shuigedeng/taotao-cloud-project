@@ -86,16 +86,16 @@ public class AfterSalePageQuery extends PageParam {
 		}
 
 		//按买家查询
-		if (SecurityUtil.getUser().getType() == UserEnum.MEMBER.getCode()) {
-			queryWrapper.eq("member_id", SecurityUtil.getUser().getUserId());
+		if (SecurityUtil.getCurrentUser().getType() == UserEnum.MEMBER.getCode()) {
+			queryWrapper.eq("member_id", SecurityUtil.getCurrentUser().getUserId());
 		}
 
 		//按卖家查询
-		if (SecurityUtil.getUser().getType() == UserEnum.STORE.getCode()) {
-			queryWrapper.eq("store_id", SecurityUtil.getUser().getStoreId());
+		if (SecurityUtil.getCurrentUser().getType() == UserEnum.STORE.getCode()) {
+			queryWrapper.eq("store_id", SecurityUtil.getCurrentUser().getStoreId());
 		}
 
-		if (SecurityUtil.getUser().getType() == UserEnum.MANAGER.getCode() && StringUtil.isNotEmpty(
+		if (SecurityUtil.getCurrentUser().getType() == UserEnum.MANAGER.getCode() && StringUtil.isNotEmpty(
 			storeId)) {
 			queryWrapper.eq("store_id", storeId);
 		}

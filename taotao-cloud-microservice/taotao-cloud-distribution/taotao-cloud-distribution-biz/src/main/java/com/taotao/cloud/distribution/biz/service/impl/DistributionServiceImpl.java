@@ -150,7 +150,7 @@ public class DistributionServiceImpl extends
 	@Override
 	public void bindingDistribution(String distributionId) {
 		//判断用户是否登录，未登录不能进行绑定
-		if (SecurityUtil.getUser() == null) {
+		if (SecurityUtil.getCurrentUser() == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 

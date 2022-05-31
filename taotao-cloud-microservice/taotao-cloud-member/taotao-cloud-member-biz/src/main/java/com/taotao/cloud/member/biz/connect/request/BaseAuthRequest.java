@@ -4,6 +4,7 @@ import com.alibaba.nacos.common.utils.UuidUtils;
 import com.taotao.cloud.common.utils.common.UrlBuilder;
 import com.taotao.cloud.common.utils.common.UrlUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuth;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -73,7 +74,7 @@ public abstract class BaseAuthRequest implements AuthRequest {
 			return AuthResponse.builder().code(AuthResponseStatus.SUCCESS.getCode()).data(user)
 				.build();
 		} catch (Exception e) {
-			log.error("Failed to login with oauth authorization.", e);
+			LogUtil.error("Failed to login with oauth authorization.", e);
 			return this.responseError(e);
 		}
 	}

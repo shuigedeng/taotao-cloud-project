@@ -17,7 +17,9 @@ package com.taotao.cloud.member.biz.token;
 
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.member.biz.connect.token.Token;
+import com.taotao.cloud.member.biz.connect.token.TokenUtil;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -27,6 +29,7 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -45,7 +48,7 @@ public class MemberTokenGenerate extends AbstractTokenGenerate<Member> {
     @Override
     public Token createToken(Member member, Boolean longTerm) {
         //获取客户端类型
-        String clientType = ThreadContextHolder.getHttpRequest().getHeader("clientType");
+        String clientType = RequestUtil.getRequest().getHeader("clientType");
         ClientTypeEnum clientTypeEnum;
         try {
             //如果客户端为空，则缺省值为PC，pc第三方登录时不会传递此参数
@@ -58,8 +61,8 @@ public class MemberTokenGenerate extends AbstractTokenGenerate<Member> {
             clientTypeEnum = ClientTypeEnum.UNKNOWN;
         }
         //记录最后登录时间，客户端类型
-        member.setLastLoginDate(new Date());
-        member.setClientEnum(clientTypeEnum.name());
+        member.setLastLoginDate(LocalDateTime.now());
+        member.setClient(clientTypeEnum.name());
         String destination = rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_LOGIN.name();
         rocketMQTemplate.asyncSend(destination, member, RocketmqSendCallbackBuilder.commonCallback());
 

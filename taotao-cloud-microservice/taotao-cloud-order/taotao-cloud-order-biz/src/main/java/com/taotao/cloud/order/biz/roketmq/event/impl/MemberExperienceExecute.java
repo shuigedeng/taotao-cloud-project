@@ -50,11 +50,11 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 */
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-		if (orderMessage.getNewStatus().equals(OrderStatusEnum.COMPLETED)) {
+		if (orderMessage.newStatus().equals(OrderStatusEnum.COMPLETED)) {
 			//获取经验值设置
 			ExperienceSettingVO experienceSetting = getExperienceSetting();
 			//获取订单信息
-			Order order = orderService.getBySn(orderMessage.getOrderSn());
+			Order order = orderService.getBySn(orderMessage.orderSn());
 			//计算赠送经验值数量
 			BigDecimal point = CurrencyUtil.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
 			//赠送会员经验值

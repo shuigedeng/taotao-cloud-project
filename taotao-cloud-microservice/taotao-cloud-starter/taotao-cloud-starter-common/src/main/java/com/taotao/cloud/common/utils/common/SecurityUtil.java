@@ -132,7 +132,7 @@ public final class SecurityUtil {
 	 * @return 用户信息
 	 * @since 2021-09-02 14:56:28
 	 */
-	public static SecurityUser getUser() {
+	public static SecurityUser getCurrentUser() {
 		SecurityUser securityUser = getUser(getAuthentication());
 		if(Objects.isNull(securityUser)){
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
@@ -158,7 +158,7 @@ public final class SecurityUtil {
 	 * @since 2021-09-02 14:56:33
 	 */
 	public static String getUsername() {
-		return getUser().getUsername();
+		return getCurrentUser().getUsername();
 	}
 
 	/**
@@ -168,7 +168,7 @@ public final class SecurityUtil {
 	 * @since 2021-09-02 14:56:38
 	 */
 	public static Long getUserId() {
-		return getUser().getUserId();
+		return getCurrentUser().getUserId();
 	}
 
 	///**

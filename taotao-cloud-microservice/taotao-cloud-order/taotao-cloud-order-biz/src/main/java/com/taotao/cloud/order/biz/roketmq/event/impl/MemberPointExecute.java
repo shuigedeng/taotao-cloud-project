@@ -22,6 +22,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.CANCELLED;
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.COMPLETED;
+
 /**
  * 会员积分
  *
@@ -55,10 +58,10 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 */
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-		switch (orderMessage.getNewStatus()) {
+		switch (orderMessage.newStatus()) {
 			case CANCELLED -> {
-				Order order = orderService.getBySn(orderMessage.getOrderSn());
-				Long point = order.getPriceDetailDTO().getPayPoint();
+				Order order = orderService.getBySn(orderMessage.orderSn());
+				Long point = order.getPriceDetailDTO().payPoint();
 				if (point <= 0) {
 					return;
 				}
@@ -72,7 +75,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 					order.getMemberId(), content);
 			}
 			case COMPLETED -> {
-				Order order = orderService.getBySn(orderMessage.getOrderSn());
+				Order order = orderService.getBySn(orderMessage.orderSn());
 				//如果是积分订单 则直接返回
 				if (StringUtil.isNotEmpty(order.getOrderPromotionType())
 					&& order.getOrderPromotionType().equals(OrderPromotionTypeEnum.POINTS.name())) {

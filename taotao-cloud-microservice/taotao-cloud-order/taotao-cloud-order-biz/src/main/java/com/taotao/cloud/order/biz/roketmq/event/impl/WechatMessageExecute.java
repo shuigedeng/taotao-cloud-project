@@ -9,6 +9,11 @@ import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.COMPLETED;
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.DELIVERED;
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.PAID;
+import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.UNDELIVERED;
+
 /**
  * 微信消息执行器
  *
@@ -35,7 +40,7 @@ public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent 
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
-		switch (orderMessage.getNewStatus()) {
+		switch (orderMessage.newStatus()) {
 			case PAID:
 			case UNDELIVERED:
 			case DELIVERED:

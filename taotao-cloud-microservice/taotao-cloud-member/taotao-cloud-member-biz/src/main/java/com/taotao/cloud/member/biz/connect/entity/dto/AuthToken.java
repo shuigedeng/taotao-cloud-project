@@ -1,5 +1,6 @@
 package com.taotao.cloud.member.biz.connect.entity.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthToken implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -2701476618576443366L;
 
 	/**

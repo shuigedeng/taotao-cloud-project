@@ -41,6 +41,6 @@ public interface CouponActivityService extends AbstractPromotionsService<CouponA
 	 * @param member             会员
 	 * @since 2022-04-27 16:43:22
 	 */
-	void registered(List<CouponActivity> couponActivityList, Member member);
+	void registered(List<CouponActivity> couponActivityList, MemberVO member);
 
 }

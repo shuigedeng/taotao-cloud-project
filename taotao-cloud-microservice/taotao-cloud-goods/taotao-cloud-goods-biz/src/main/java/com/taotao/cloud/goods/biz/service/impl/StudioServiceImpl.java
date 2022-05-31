@@ -70,7 +70,7 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(SecurityUtil.getUser().getStoreId());
+		studio.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));

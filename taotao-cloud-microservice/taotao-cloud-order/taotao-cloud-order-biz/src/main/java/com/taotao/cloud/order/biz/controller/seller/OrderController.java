@@ -150,7 +150,7 @@ public class OrderController {
 	@GetMapping(value = "/downLoadDeliverExcel")
 	public void downLoadDeliverExcel() {
 		//获取店铺已经选择物流公司列表
-		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(SecurityUtil.getUser().getStoreId()).data();
+		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(SecurityUtil.getCurrentUser().getStoreId()).data();
 		//下载订单批量发货Excel
 		this.orderService.getBatchDeliverList(RequestUtil.getResponse(), logisticsName);
 	}

@@ -194,7 +194,7 @@ public interface MemberService extends IService<Member> {
 	 * @param content  变动日志
 	 * @return 操作结果
 	 */
-	Boolean updateMemberPoint(Long point, String type, String memberId, String content);
+	Boolean updateMemberPoint(Long point, String type, Long memberId, String content);
 
 
 	/**
@@ -229,4 +229,6 @@ public interface MemberService extends IService<Member> {
 	 * @param userEnum token角色类型
 	 */
 	void logout(UserEnum userEnum);
+
+	void updateMemberLoginTime(Long id);
 }

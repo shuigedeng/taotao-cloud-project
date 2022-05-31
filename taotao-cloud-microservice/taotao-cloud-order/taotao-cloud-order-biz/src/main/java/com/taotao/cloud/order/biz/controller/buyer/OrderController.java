@@ -51,7 +51,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		orderPageQuery.setMemberId(currentUser.getUserId());
 		return Result.success(orderService.queryByParams(orderPageQuery));
 	}

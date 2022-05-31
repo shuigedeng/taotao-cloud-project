@@ -39,13 +39,13 @@ public class OrderCreateReceiptExecute implements TradeEvent {
 			for (OrderVO orderVO : orderList) {
 				Receipt receipt = new Receipt();
 				BeanUtil.copyProperties(receiptVO, receipt);
-				receipt.setMemberId(orderVO.getMemberId());
-				receipt.setMemberName(orderVO.getMemberName());
-				receipt.setStoreId(orderVO.getStoreId());
-				receipt.setStoreName(orderVO.getStoreName());
-				receipt.setOrderSn(orderVO.getSn());
-				receipt.setReceiptDetail(JSONUtil.toJsonStr(orderVO.getOrderItems()));
-				receipt.setReceiptPrice(orderVO.getFlowPrice());
+				receipt.setMemberId(orderVO.orderBase().memberId());
+				receipt.setMemberName(orderVO.orderBase().memberName());
+				receipt.setStoreId(orderVO.orderBase().storeId());
+				receipt.setStoreName(orderVO.orderBase().storeName());
+				receipt.setOrderSn(orderVO.orderBase().sn());
+				receipt.setReceiptDetail(JSONUtil.toJsonStr(orderVO.orderItems()));
+				receipt.setReceiptPrice(orderVO.orderBase().flowPrice());
 				receipt.setReceiptStatus(0);
 				receipts.add(receipt);
 			}

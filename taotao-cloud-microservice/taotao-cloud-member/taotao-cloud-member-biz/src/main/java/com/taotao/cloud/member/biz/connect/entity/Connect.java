@@ -26,7 +26,7 @@ public class Connect extends BaseSuperEntity<Connect, Long> {
 	 * 用户id
 	 */
 	@Column(name = "user_id", columnDefinition = "varchar(32) not null comment '用户id'")
-	private String userId;
+	private Long userId;
 
 	/**
 	 * 联合登录id
@@ -43,9 +43,10 @@ public class Connect extends BaseSuperEntity<Connect, Long> {
 	private String unionType;
 
 
-	public Connect(String userId, String unionId, String unionType) {
+	public Connect(Long userId, String unionId, String unionType) {
 		this.userId = userId;
 		this.unionId = unionId;
 		this.unionType = unionType;
 	}
+
 }

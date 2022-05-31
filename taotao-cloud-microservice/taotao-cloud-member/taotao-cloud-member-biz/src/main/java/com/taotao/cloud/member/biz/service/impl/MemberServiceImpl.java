@@ -22,13 +22,13 @@ import com.taotao.cloud.common.utils.cookie.CookieUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.member.api.query.ConnectQuery;
 import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.dto.MemberEditDTO;
 import com.taotao.cloud.member.api.dto.MemberPointMessageDTO;
-import com.taotao.cloud.member.api.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
+import com.taotao.cloud.member.api.query.ConnectQuery;
+import com.taotao.cloud.member.api.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.vo.MemberSearchVO;
 import com.taotao.cloud.member.biz.aop.annotation.PointLogPoint;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
@@ -47,16 +47,17 @@ import com.taotao.cloud.store.api.feign.IFeignStoreService;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 会员接口业务层实现
@@ -110,7 +111,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 	@Override
 	public Member getUserInfo() {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		return this.findByUsername(currentUser.getUsername());
 	}
 
@@ -339,7 +340,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	@Override
 	public Boolean updateMember(ManagerMemberEditDTO managerMemberEditDTO) {
 		//判断是否用户登录并且会员ID为当前登录会员ID
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
 		if (tokenUser == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
@@ -385,7 +386,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 	@Override
 	@PointLogPoint
-	public Boolean updateMemberPoint(Long point, String type, String memberId, String content) {
+	public Boolean updateMemberPoint(Long point, String type, Long memberId, String content) {
 		//获取当前会员信息
 		Member member = this.getById(memberId);
 		if (member != null) {
@@ -473,7 +474,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 		);
 
 		if (connect == null) {
-			connect = new Connect(String.valueOf(member.getId()), unionId, type);
+			connect = new Connect(member.getId(), unionId, type);
 			connectService.save(connect);
 		}
 	}
@@ -503,7 +504,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 						.unionType(connectType).build()
 				);
 				if (connect == null) {
-					connect = new Connect(String.valueOf(member.getId()), connectAuthUser.getUuid(),
+					connect = new Connect(member.getId(), connectAuthUser.getUuid(),
 						connectType);
 					connectService.save(connect);
 				}
@@ -615,4 +616,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 			throw new BusinessException(ResultEnum.USER_PHONE_EXIST);
 		}
 	}
+
+
+	@Override
+	public void updateMemberLoginTime(Long id) {
+
+	}
+
 }

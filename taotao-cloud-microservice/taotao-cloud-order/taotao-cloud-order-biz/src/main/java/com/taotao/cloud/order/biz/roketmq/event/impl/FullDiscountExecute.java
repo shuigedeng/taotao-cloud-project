@@ -12,7 +12,6 @@ import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -21,6 +20,8 @@ import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.message.OrderMessage;
+import com.taotao.cloud.order.api.message.OrderMessageBuilder;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.entity.order.Order;
 import com.taotao.cloud.order.biz.entity.order.OrderItem;
@@ -84,10 +85,10 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		tradeDTO.getCartList().forEach(
 			cartVO -> {
 				//有满减优惠，则记录信息
-				if ((cartVO.getGiftList() != null && !cartVO.getGiftList().isEmpty())
-					|| (cartVO.getGiftPoint() != null && cartVO.getGiftPoint() > 0)
-					|| (cartVO.getGiftCouponList() != null && !cartVO.getGiftCouponList().isEmpty())) {
-					redisRepository.set(CachePrefix.ORDER.getPrefix() + cartVO.getSn(), JSONUtil.toJsonStr(cartVO));
+				if ((cartVO.giftList() != null && !cartVO.giftList().isEmpty())
+					|| (cartVO.giftPoint() != null && cartVO.giftPoint() > 0)
+					|| (cartVO.giftCouponList() != null && !cartVO.giftCouponList().isEmpty())) {
+					redisRepository.set(CachePrefix.ORDER.getPrefix() + cartVO.sn(), JSONUtil.toJsonStr(cartVO));
 				}
 			}
 		);
@@ -96,8 +97,8 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
 		//如果订单已支付
-		if (orderMessage.getNewStatus().equals(OrderStatusEnum.PAID)) {
-			LogUtil.info("满减活动，订单状态操作 {}", CachePrefix.ORDER.getPrefix() + orderMessage.getOrderSn());
+		if (orderMessage.newStatus().equals(OrderStatusEnum.PAID)) {
+			LogUtil.info("满减活动，订单状态操作 {}", CachePrefix.ORDER.getPrefix() + orderMessage.orderSn());
 			renderGift(JSONUtil.toBean(redisRepository.get(CachePrefix.ORDER.getPrefix() + orderMessage.getOrderSn()).toString(), CartVO.class), orderMessage);
 		}
 	}
@@ -115,12 +116,12 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 			return;
 		}
 
-		Order order = orderService.getBySn(orderMessage.getOrderSn());
+		Order order = orderService.getBySn(orderMessage.orderSn());
 		//赠送积分判定
 		try {
-			if (cartVO.getGiftPoint() != null && cartVO.getGiftPoint() > 0) {
-				memberService.updateMemberPoint(cartVO.getGiftPoint().longValue(), PointTypeEnum.INCREASE.name(),
-					order.getMemberId(), "订单满优惠赠送积分" + cartVO.getGiftPoint());
+			if (cartVO.giftPoint() != null && cartVO.giftPoint() > 0) {
+				memberService.updateMemberPoint(cartVO.giftPoint().longValue(), PointTypeEnum.INCREASE.name(),
+					order.getMemberId(), "订单满优惠赠送积分" + cartVO.giftPoint());
 			}
 		} catch (Exception e) {
 			LogUtil.error("订单赠送积分异常", e);
@@ -129,8 +130,8 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 
 		try {
 			//优惠券判定
-			if (cartVO.getGiftCouponList() != null && !cartVO.getGiftCouponList().isEmpty()) {
-				cartVO.getGiftCouponList().forEach(couponId -> memberCouponService.receiveCoupon(couponId, order.getMemberId(), order.getMemberName()));
+			if (cartVO.giftCouponList() != null && !cartVO.giftCouponList().isEmpty()) {
+				cartVO.giftCouponList().forEach(couponId -> memberCouponService.receiveCoupon(couponId, order.getMemberId(), order.getMemberName()));
 			}
 		} catch (Exception e) {
 			LogUtil.error("订单赠送优惠券异常", e);
@@ -138,8 +139,8 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 
 		try {
 			//赠品潘迪ing
-			if (cartVO.getGiftList() != null && !cartVO.getGiftList().isEmpty()) {
-				generatorGiftOrder(cartVO.getGiftList(), order);
+			if (cartVO.giftList() != null && !cartVO.giftList().isEmpty()) {
+				generatorGiftOrder(cartVO.giftList(), order);
 			}
 		} catch (Exception e) {
 			LogUtil.error("订单赠送赠品异常", e);
@@ -165,13 +166,13 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 
 		//赠品分类，分为实体商品/虚拟商品/电子卡券
 		List<GoodsSkuVO> physicalSkus = goodsSkus.stream()
-			.filter(goodsSku -> goodsSku.getGoodsType().equals(GoodsTypeEnum.PHYSICAL_GOODS.name()))
+			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.PHYSICAL_GOODS.name()))
 			.toList();
 		List<GoodsSkuVO> virtualSkus = goodsSkus.stream()
-			.filter(goodsSku -> goodsSku.getGoodsType().equals(GoodsTypeEnum.VIRTUAL_GOODS.name()))
+			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.VIRTUAL_GOODS.name()))
 			.toList();
 		List<GoodsSkuVO> eCouponSkus = goodsSkus.stream()
-			.filter(goodsSku -> goodsSku.getGoodsType().equals(GoodsTypeEnum.E_COUPON.name()))
+			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.E_COUPON.name()))
 			.toList();
 
 		//如果赠品不为空，则生成对应的赠品订单
@@ -227,13 +228,13 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 			orderItem.setComplainStatus(OrderComplaintStatusEnum.NEW.name());
 			orderItem.setNum(1);
 			orderItem.setOrderSn(order.getSn());
-			orderItem.setImage(goodsSku.getThumbnail());
-			orderItem.setGoodsName(goodsSku.getGoodsName());
-			orderItem.setSkuId(goodsSku.getId());
-			orderItem.setCategoryId(Long.valueOf(goodsSku.getCategoryPath().substring(
-				goodsSku.getCategoryPath().lastIndexOf(",") + 1
+			orderItem.setImage(goodsSku.goodsSkuBase().thumbnail());
+			orderItem.setGoodsName(goodsSku.goodsSkuBase().goodsName());
+			orderItem.setSkuId(goodsSku.goodsSkuBase().id());
+			orderItem.setCategoryId(Long.valueOf(goodsSku.goodsSkuBase().categoryPath().substring(
+				goodsSku.goodsSkuBase().categoryPath().lastIndexOf(",") + 1
 			)));
-			orderItem.setGoodsPrice(goodsSku.getPrice());
+			orderItem.setGoodsPrice(goodsSku.goodsSkuBase().price());
 			orderItem.setPriceDetailDTO(priceDetailDTO);
 			orderItems.add(orderItem);
 		}
@@ -244,10 +245,11 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		orderLogService.saveBatch(orderLogs);
 
 		//发送订单已付款消息（PS:不在这里处理逻辑是因为期望加交给消费者统一处理库存等等问题）
-		OrderMessage orderMessage = new OrderMessage();
-		orderMessage.setOrderSn(order.getSn());
-		orderMessage.setPaymentMethod(order.getPaymentMethod());
-		orderMessage.setNewStatus(OrderStatusEnum.PAID);
+		OrderMessage orderMessage = OrderMessageBuilder.builder()
+			.orderSn(order.getSn())
+			.paymentMethod(order.getPaymentMethod())
+			.newStatus(OrderStatusEnum.PAID)
+			.build();
 
 		String destination = rocketmqCustomProperties.getOrderTopic() + ":" + OrderTagsEnum.STATUS_CHANGE.name();
 		//发送订单变更mq消息
