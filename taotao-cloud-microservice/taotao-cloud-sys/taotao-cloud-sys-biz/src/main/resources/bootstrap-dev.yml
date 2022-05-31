@@ -15,6 +15,9 @@ spring:
   application:
     name: taotao-cloud-sys
   cloud:
+    circuitbreaker:
+      sentinel:
+        enabled: true
     loadbalancer:
       enabled: true
     nacos:
