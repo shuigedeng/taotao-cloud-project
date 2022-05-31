@@ -5,8 +5,11 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
-import com.taotao.cloud.order.api.vo.order_info.OrderVO;
+import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
+
+import java.util.List;
 
 /**
  * RemoteLogFallbackImpl
@@ -29,6 +32,26 @@ public class FeignOrderFallbackImpl implements FallbackFactory<IFeignOrderServic
 			public Result<OrderVO> saveOrder(OrderSaveDTO orderDTO) {
 				LogUtil.error("调用saveOrder异常：{}", throwable, orderDTO);
 				return Result.fail(null, ResultEnum.ERROR.getCode());
+			}
+
+			@Override
+			public Result<OrderDetailVO> queryDetail(String sn) {
+				return null;
+			}
+
+			@Override
+			public Result<Boolean> payOrder(String sn, String paymentMethod, String receivableNo) {
+				return null;
+			}
+
+			@Override
+			public Result<OrderVO> getBySn(String sn) {
+				return null;
+			}
+
+			@Override
+			public Result<List<OrderVO>> getByTradeSn(String sn) {
+				return null;
 			}
 		};
 	}

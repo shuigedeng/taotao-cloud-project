@@ -20,6 +20,7 @@ import com.taotao.cloud.order.api.query.recharge.RechargePageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -39,7 +40,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<MemberRechargeMapper,
 	private IFeignMemberWalletService memberWalletService;
 
 	@Override
-	public MemberRecharge recharge(Double price) {
+	public MemberRecharge recharge(BigDecimal price) {
 		//获取当前登录的会员
 		SecurityUser authUser = SecurityUtil.getCurrentUser();
 		//构建sn

@@ -2,11 +2,9 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
-import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
-import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 
 /**
@@ -30,7 +28,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	 * @param evaluationPageQuery 评价查询条件
 	 * @return 评价分页列表
 	 */
-	IPage<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery);
+	IPage<MemberEvaluation> queryPage(EvaluationPageQuery evaluationPageQuery);
 
 	/**
 	 * 添加会员评价 1.检测用户是否重复评价 2.获取评价相关信息添加评价 3.修改子订单为已评价状态 4.发送用户评价消息修改商品的评价数量以及好评率
@@ -38,7 +36,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	 * @param memberEvaluationDTO 评论
 	 * @return 操作状态
 	 */
-	boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO);
+	Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO);
 
 	/**
 	 * 根据ID查询会员评价
@@ -46,7 +44,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	 * @param id 评价ID
 	 * @return 会员评价
 	 */
-	MemberEvaluationVO queryById(Long id);
+	MemberEvaluation queryById(Long id);
 
 	/**
 	 * 更改评论状态
@@ -55,7 +53,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	 * @param status 状态
 	 * @return 会员评价
 	 */
-	boolean updateStatus(Long id, String status);
+	Boolean updateStatus(Long id, String status);
 
 	/**
 	 * 删除评论
@@ -63,7 +61,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	 * @param id 评论ID
 	 * @return 操作状态
 	 */
-	boolean delete(Long id);
+	Boolean delete(Long id);
 
 	/**
 	 * 商家回复评价
@@ -73,7 +71,7 @@ public interface MemberEvaluationService extends IService<MemberEvaluation> {
 	 * @param replyImage 回复图片
 	 * @return 操作状态
 	 */
-	boolean reply(Long id, String reply, String replyImage);
+	Boolean reply(Long id, String reply, String replyImage);
 
 	/**
 	 * 获取商品评价数量

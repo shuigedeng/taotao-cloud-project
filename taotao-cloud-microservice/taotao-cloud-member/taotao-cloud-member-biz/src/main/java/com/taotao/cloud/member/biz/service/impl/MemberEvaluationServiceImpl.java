@@ -98,17 +98,17 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public IPage<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery) {
+	public IPage<MemberEvaluation> queryPage(EvaluationPageQuery evaluationPageQuery) {
 		return memberEvaluationMapper.getMemberEvaluationList(
 			evaluationPageQuery.buildMpPage(), evaluationPageQuery.queryWrapper());
 	}
 
 	@Override
-	public boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
+	public Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
 		//获取子订单信息
 		OrderItemVO orderItem = orderItemService.getBySn(memberEvaluationDTO.getOrderItemSn());
 		//获取订单信息
-		OrderVO order = orderService.getBySn(orderItem.orderSn());
+		OrderVO order = orderService.getBySn(orderItem.orderSn()).data();
 		//检测是否可以添加会员评价
 		checkMemberEvaluation(orderItem, order);
 		//获取用户信息
@@ -135,14 +135,13 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public MemberEvaluationVO queryById(Long id) {
-		MemberEvaluation memberEvaluation = this.getById(id);
-		return BeanUtil.copy(memberEvaluation, MemberEvaluationVO.class);
+	public MemberEvaluation queryById(Long id) {
+		return this.getById(id);
 	}
 
 	@Override
-	public boolean updateStatus(Long id, String status) {
-		UpdateWrapper updateWrapper = Wrappers.update();
+	public Boolean updateStatus(Long id, String status) {
+		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
 		updateWrapper.eq("id", id);
 		updateWrapper.set("status", status.equals(SwitchEnum.OPEN.name()) ? SwitchEnum.OPEN.name()
 			: SwitchEnum.CLOSE.name());
@@ -150,7 +149,7 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public boolean delete(Long id) {
+	public Boolean delete(Long id) {
 		LambdaUpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.lambdaUpdate();
 		updateWrapper.set(MemberEvaluation::getDelFlag, true);
 		updateWrapper.eq(MemberEvaluation::getId, id);
@@ -158,7 +157,7 @@ public class MemberEvaluationServiceImpl extends
 	}
 
 	@Override
-	public boolean reply(Long id, String reply, String replyImage) {
+	public Boolean reply(Long id, String reply, String replyImage) {
 		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
 		updateWrapper.set("reply_status", true);
 		updateWrapper.set("reply", reply);
@@ -207,7 +206,7 @@ public class MemberEvaluationServiceImpl extends
 	public void checkMemberEvaluation(OrderItemVO orderItem, OrderVO order) {
 		//根据子订单编号判断是否评价过
 		if (orderItem.commentStatus().equals(CommentStatusEnum.FINISHED.name())) {
-			throw new BusinessException(ResultEnum.EVALUATION_BigDecimal_ERROR);
+			throw new BusinessException("已评价");
 		}
 
 		//判断是否是当前会员的订单

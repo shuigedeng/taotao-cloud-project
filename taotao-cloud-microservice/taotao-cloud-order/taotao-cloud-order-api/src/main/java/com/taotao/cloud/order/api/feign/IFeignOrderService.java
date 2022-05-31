@@ -20,21 +20,25 @@ import java.util.List;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "RemoteOrderService", value = ServiceName.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderFallbackImpl.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderFallbackImpl.class)
 public interface IFeignOrderService {
 
-    @GetMapping(value = "/order/info/{code}")
-    Result<OrderVO> findOrderInfoByCode(@PathVariable("code") String code);
+	@GetMapping(value = "/order/info/{code}")
+	Result<OrderVO> findOrderInfoByCode(@PathVariable("code") String code);
 
-    @PostMapping(value = "/order")
-    Result<OrderVO> saveOrder(@RequestBody OrderSaveDTO orderDTO);
+	@PostMapping(value = "/order")
+	Result<OrderVO> saveOrder(@RequestBody OrderSaveDTO orderDTO);
 
+	@PostMapping(value = "/order/item")
 	Result<OrderDetailVO> queryDetail(String sn);
 
-	void payOrder(String sn, String paymentMethod, String receivableNo);
+	@PostMapping(value = "/order/item")
+	Result<Boolean> payOrder(String sn, String paymentMethod, String receivableNo);
 
-	OrderVO getBySn(String sn);
+	@PostMapping(value = "/order/item")
+	Result<OrderVO> getBySn(String sn);
 
-	List<OrderVO> getByTradeSn(String sn);
+	@PostMapping(value = "/order/item")
+	Result<List<OrderVO>> getByTradeSn(String sn);
 }
 

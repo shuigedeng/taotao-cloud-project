@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.time.LocalDateTime;
 
 /**
  * 店铺流水查询DTO
@@ -41,6 +42,14 @@ public class StoreFlowPageQuery extends PageParam {
 	private Boolean justDistribution;
 
 	@Schema(description = "结算单")
-	private Bill bill;
+	private BillDTO bill;
 
+	@Data
+	public static class BillDTO{
+		private LocalDateTime startTime;
+
+		private LocalDateTime endTime;
+
+		private Long storeId;
+	}
 }

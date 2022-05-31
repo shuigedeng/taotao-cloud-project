@@ -1,18 +1,19 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.vo.MemberGradeVO;
 import com.taotao.cloud.member.biz.entity.MemberGrade;
+import com.taotao.cloud.member.biz.mapstruct.IMemberGradeMapStruct;
 import com.taotao.cloud.member.biz.service.MemberGradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,34 +39,33 @@ public class MemberGradeController {
 	private final MemberGradeService memberGradeService;
 
 	@Operation(summary = "通过id获取会员等级", description = "通过id获取会员等级")
-	@RequestLogger("通过id获取会员等级")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberGrade> get(@PathVariable Long id) {
-		return Result.success(memberGradeService.getById(id));
+	public Result<MemberGradeVO> get(@PathVariable Long id) {
+		MemberGrade memberGrade = memberGradeService.getById(id);
+		return Result.success(IMemberGradeMapStruct.INSTANCE.memberGradeToMemberGradeVO(memberGrade));
 	}
 
 	@Operation(summary = "获取会员等级分页", description = "获取会员等级分页")
-	@RequestLogger("获取会员等级分页")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<IPage<MemberGrade>> getByPage(PageVO page) {
-		return Result.success(memberGradeService.page(PageUtil.initPage(page)));
+	public Result<PageModel<MemberGradeVO>> getByPage(PageParam pageParam) {
+		IPage<MemberGrade> memberGradePage = memberGradeService.getByPage(pageParam);
+		return Result.success(PageModel.convertMybatisPage(memberGradePage, MemberGradeVO.class));
 	}
 
 	@Operation(summary = "添加会员等级", description = "添加会员等级")
-	@RequestLogger("添加会员等级")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
-	@PostMapping(value = "")
-	public Result<Object> daa(@Validated MemberGrade memberGrade) {
-		if (memberGradeService.save(memberGrade)) {
-			return Result.success(ResultEnum.SUCCESS);
-		}
-		throw new BusinessException(ResultEnum.ERROR);
+	@PostMapping
+	public Result<Boolean> daa(@Validated MemberGrade memberGrade) {
+		return Result.success(memberGradeService.save(memberGrade));
 	}
 
 	@Operation(summary = "修改会员等级", description = "修改会员等级")
-	@RequestLogger("修改会员等级")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	@PutMapping(value = "/{id}")
@@ -74,11 +74,11 @@ public class MemberGradeController {
 	}
 
 	@Operation(summary = "删除会员等级", description = "删除会员等级")
-	@RequestLogger("删除会员等级")
+	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
-	public Result<IPage<Object>> delete(@PathVariable Long id) {
-		if (memberGradeService.getById(id).getIsDefault()) {
+	public Result<Boolean> delete(@PathVariable Long id) {
+		if (memberGradeService.getById(id).getDefaulted()) {
 			throw new BusinessException(ResultEnum.USER_GRADE_IS_DEFAULT);
 		}
 		return Result.success(memberGradeService.removeById(id));

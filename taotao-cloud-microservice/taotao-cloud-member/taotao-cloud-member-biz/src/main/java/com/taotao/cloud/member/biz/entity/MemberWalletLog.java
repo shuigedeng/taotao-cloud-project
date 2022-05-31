@@ -16,6 +16,7 @@
 package com.taotao.cloud.member.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.member.api.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
@@ -35,7 +36,8 @@ import java.math.BigDecimal;
  * @author shuigedeng
  * @version 2021.10
  * @since 2022-03-11 15:43:36
- */@Setter
+ */
+@Setter
 @Getter
 @Builder
 @AllArgsConstructor
@@ -52,6 +54,12 @@ public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
 	 */
 	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
 	private Long memberId;
+
+	/**
+	 * 会员id
+	 */
+	@Column(name = "member_name", columnDefinition = "bigint not null comment '会员id'")
+	private String memberName;
 
 	/**
 	 * 金额
@@ -95,11 +103,11 @@ public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
 	 * @param isReduce              是否是消费
 	 */
 	public MemberWalletLog(String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO,
-		boolean isReduce) {
+						   boolean isReduce) {
 		this.setMemberId(memberWalletUpdateDTO.getMemberId());
 		this.setMemberName(memberName);
 		this.setMoney(
-			isReduce ? -memberWalletUpdateDTO.getMoney() : memberWalletUpdateDTO.getMoney());
+			isReduce ? memberWalletUpdateDTO.getMoney().negate() : memberWalletUpdateDTO.getMoney());
 		this.setDetail(memberWalletUpdateDTO.getDetail());
 		this.setServiceType(memberWalletUpdateDTO.getServiceType());
 	}

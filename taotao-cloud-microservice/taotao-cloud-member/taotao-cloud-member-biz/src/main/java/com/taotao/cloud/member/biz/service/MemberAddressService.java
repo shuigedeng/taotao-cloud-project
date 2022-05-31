@@ -1,9 +1,8 @@
 package com.taotao.cloud.member.biz.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
 
 /**
@@ -18,7 +17,7 @@ public interface MemberAddressService extends IService<MemberAddress> {
 	 * @param memberId 会员ID
 	 * @return 会员地址分页列表
 	 */
-	PageModel<MemberAddressVO> getAddressByMember(PageParam page, Long memberId);
+	IPage<MemberAddress> getAddressByMember(PageParam page, Long memberId);
 
 	/**
 	 * 根据地址ID获取当前会员地址信息

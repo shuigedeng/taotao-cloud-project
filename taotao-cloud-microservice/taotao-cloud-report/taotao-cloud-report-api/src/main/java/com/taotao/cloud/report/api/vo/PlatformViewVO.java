@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +21,7 @@ public class PlatformViewVO {
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     @Schema(description =  "展示时间")
-    private Date date;
+    private LocalDateTime date;
 
     @Schema(description =  "pv数量")
     private Long pvNum;
@@ -28,8 +29,9 @@ public class PlatformViewVO {
     @Schema(description =  "uv数量")
     private Long uvNum;
 
+	@Builder.Default
     @Schema(description =  "店铺id")
-    private String storeId = "-1";
+    private Long storeId = 1L;
 
     public Long getPvNum() {
         if(pvNum==null){
@@ -45,7 +47,7 @@ public class PlatformViewVO {
         return uvNum;
     }
 
-    public PlatformViewVO(Date date) {
+    public PlatformViewVO(LocalDateTime date) {
         //初始化参数
         pvNum = 0L;
         uvNum = 0L;

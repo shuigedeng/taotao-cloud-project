@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 促销商品查询通用类
@@ -30,7 +31,7 @@ public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {
 	private String promotionType;
 
 	@Schema(description = "商品活动id")
-	private Long storeId;
+	private String storeId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
@@ -39,7 +40,7 @@ public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {
 	private String categoryPath;
 
 	@Schema(description = "商品SkuId")
-	private Long skuId;
+	private String skuId;
 
 	@Schema(description = "商品SkuIds")
 	private List<Long> skuIds;
@@ -54,7 +55,7 @@ public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {
 			this.setScopeType(PromotionsScopeTypeEnum.PORTION_GOODS.name());
 		}
 		QueryWrapper<T> queryWrapper = super.queryWrapper();
-		if (CharSequenceUtil.isNotEmpty(promotionId)) {
+		if (Objects.nonNull(promotionId)) {
 			queryWrapper.eq("promotion_id", promotionId);
 		}
 		if (CharSequenceUtil.isNotEmpty(goodsName)) {

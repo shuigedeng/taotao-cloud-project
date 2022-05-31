@@ -8,6 +8,10 @@ import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
 
 /**
  * 会员积分历史业务层
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-05-31 14:16:21
  */
 public interface MemberPointsHistoryService extends IService<MemberPointsHistory> {
 
@@ -15,10 +19,18 @@ public interface MemberPointsHistoryService extends IService<MemberPointsHistory
 	 * 获取会员积分VO
 	 *
 	 * @param memberId 会员ID
-	 * @return 会员积分VO
+	 * @return {@link MemberPointsHistoryVO }
+	 * @since 2022-05-31 14:16:21
 	 */
 	MemberPointsHistoryVO getMemberPointsHistoryVO(Long memberId);
 
+	/**
+	 * 通过页面
+	 *
+	 * @param pageParam 页面参数
+	 * @return {@link IPage }<{@link MemberPointsHistory }>
+	 * @since 2022-05-31 14:16:22
+	 */
 	IPage<MemberPointsHistory> getByPage(PageParam pageParam);
 
 	/**
@@ -27,7 +39,8 @@ public interface MemberPointsHistoryService extends IService<MemberPointsHistory
 	 * @param pageParam  分页
 	 * @param memberId   会员ID
 	 * @param memberName 会员名称
-	 * @return 积分历史分页
+	 * @return {@link IPage }<{@link MemberPointsHistory }>
+	 * @since 2022-05-31 14:16:22
 	 */
 	IPage<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam, Long memberId,
 		String memberName);

@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.api.vo;
+package com.taotao.cloud.store.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

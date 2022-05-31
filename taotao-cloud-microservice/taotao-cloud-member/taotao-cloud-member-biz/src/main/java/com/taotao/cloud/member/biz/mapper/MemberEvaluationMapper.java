@@ -46,8 +46,8 @@ public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 		from tt_member_evaluation as me 
 		${ew.customSqlSegment}
 		""")
-	IPage<MemberEvaluationListVO> getMemberEvaluationList(IPage<MemberEvaluationListVO> page,
-		@Param(Constants.WRAPPER) Wrapper<MemberEvaluationListVO> queryWrapper);
+	IPage<MemberEvaluation> getMemberEvaluationList(IPage<MemberEvaluation> page,
+		@Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
 
 	/**
 	 * 评价数量

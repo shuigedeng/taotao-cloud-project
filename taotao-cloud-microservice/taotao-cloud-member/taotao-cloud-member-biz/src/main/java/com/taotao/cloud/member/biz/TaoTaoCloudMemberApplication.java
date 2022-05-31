@@ -16,13 +16,17 @@
 package com.taotao.cloud.member.biz;
 
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/11/20 下午3:47
  */
+@MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
+@EnableJpaRepositories(basePackages = "com.taotao.cloud.member.biz.repository.inf")
 @TaoTaoCloudApplication
 public class TaoTaoCloudMemberApplication {
 

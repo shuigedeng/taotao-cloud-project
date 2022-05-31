@@ -124,32 +124,32 @@ public class OrderPageQuery extends PageParam {
 	private String orderPromotionType;
 
 	public <T> QueryWrapper<T> queryWrapper() {
-		AuthUser currentUser = UserContext.getCurrentUser();
 		QueryWrapper<T> wrapper = new QueryWrapper<>();
-
-		//关键字查询
-		if (CharSequenceUtil.isNotEmpty(keywords)) {
-			wrapper.like("o.sn", keywords).or().like("oi.goods_name", keywords);
-		}
-		if (currentUser != null) {
-			//按卖家查询
-			wrapper.eq(
-				CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.STORE.name()),
-				"o.store_id", currentUser.getStoreId());
-
-			//店铺查询
-			wrapper.eq(
-				CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MANAGER.name())
-					&& CharSequenceUtil.isNotEmpty(storeId), "o.store_id", storeId);
-
-			//按买家查询
-			wrapper.eq(
-				CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MEMBER.name())
-					&& memberId == null, "o.member_id", currentUser.getId());
-
-		}
-		//按照买家查询
-		wrapper.like(CharSequenceUtil.isNotEmpty(memberId), "o.member_id", memberId);
+		// AuthUser currentUser = UserContext.getCurrentUser();
+		//
+		// //关键字查询
+		// if (CharSequenceUtil.isNotEmpty(keywords)) {
+		// 	wrapper.like("o.sn", keywords).or().like("oi.goods_name", keywords);
+		// }
+		// if (currentUser != null) {
+		// 	//按卖家查询
+		// 	wrapper.eq(
+		// 		CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.STORE.name()),
+		// 		"o.store_id", currentUser.getStoreId());
+		//
+		// 	//店铺查询
+		// 	wrapper.eq(
+		// 		CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MANAGER.name())
+		// 			&& CharSequenceUtil.isNotEmpty(storeId), "o.store_id", storeId);
+		//
+		// 	//按买家查询
+		// 	wrapper.eq(
+		// 		CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MEMBER.name())
+		// 			&& memberId == null, "o.member_id", currentUser.getId());
+		//
+		// }
+		// //按照买家查询
+		// wrapper.like(CharSequenceUtil.isNotEmpty(memberId), "o.member_id", memberId);
 
 		//按订单编号查询
 		wrapper.like(CharSequenceUtil.isNotEmpty(orderSn), "o.sn", orderSn);
@@ -157,7 +157,7 @@ public class OrderPageQuery extends PageParam {
 		//按时间查询
 		wrapper.ge(startDate != null, "o.create_time", startDate);
 
-		wrapper.le(endDate != null, "o.create_time", DateUtil.endOfDate(endDate));
+		wrapper.le(endDate != null, "o.create_time", endDate);
 		//按购买人用户名
 		wrapper.like(CharSequenceUtil.isNotEmpty(buyerName), "o.member_name", buyerName);
 
