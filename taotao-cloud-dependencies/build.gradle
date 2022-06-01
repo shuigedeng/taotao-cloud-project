@@ -67,7 +67,7 @@ dependencies {
         api "com.querydsl:querydsl-apt:${querydslVersion}"
         api "com.querydsl:querydsl-jpa:${querydslVersion}"
         api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusStarterVersion}"
-        api "com.baomidou:dynamic-datasource-spring-boot-starter:${mybatisPlusStarterVersion}"
+        api "com.baomidou:dynamic-datasource-spring-boot-starter:${mybatisPlusDynamicDatasourceStarterVersion}"
         api "com.baomidou:mybatis-plus-extension:${mybatisPlusStarterVersion}"
         api "com.github.pagehelper:pagehelper:${pagehelperVersion}"
 
