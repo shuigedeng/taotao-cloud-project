@@ -575,12 +575,11 @@ spring:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
-
-  #security:
-  #  oauth2:
-  #    resourceserver:
-  #      jwt:
-  #        jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
 
   #mail:
   #  host: smtp.qq.com
