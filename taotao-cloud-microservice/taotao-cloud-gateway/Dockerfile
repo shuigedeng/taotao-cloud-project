@@ -2,16 +2,16 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-gateway-2022.05.jar ./
+ADD ./build/libs/taotao-cloud-gateway-2022.06.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-gateway-2022.05.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-gateway-2022.06.jar extract
 
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
 
 ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-gateway
-ARG APP_VERSION=2022.05
+ARG APP_VERSION=2022.06
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
 ARG APP_PORT=33333
