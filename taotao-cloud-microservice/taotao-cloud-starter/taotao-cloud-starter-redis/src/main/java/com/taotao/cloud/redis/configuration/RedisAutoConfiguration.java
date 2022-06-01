@@ -157,7 +157,7 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		return template;
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnProperty(value = "taotao.cloud.redis.key-expired-event.enable")
 	public static class RedisKeyExpiredEventConfiguration {
 
@@ -184,7 +184,7 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		}
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnProperty(value = "taotao.cloud.redis.rate-limiter.enable")
 	public static class RateLimiterAutoConfiguration {
 

@@ -88,7 +88,7 @@ public class MongodbAutoConfiguration implements InitializingBean {
 		return new MongoDaoSupport(mongoTemplate);
 	}
 
-	@AutoConfiguration
+	@Configuration
 	public static class MongodbHelperAutoConfiguration {
 
 		// 开启事务(如使用单机mongodb,可不配置此@Bean)

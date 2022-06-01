@@ -34,6 +34,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -43,6 +44,7 @@ import org.springframework.boot.jdbc.DataSourceUnwrapper;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 /**
@@ -65,7 +67,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 		LogUtil.started(MetricsAutoConfiguration.class, StarterName.PULSAR_STARTER);
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnClass(DruidDataSource.class)
 	@ConditionalOnProperty(prefix = DruidMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class DruidMetricsConfiguration {
@@ -119,7 +121,8 @@ public class MetricsAutoConfiguration implements InitializingBean {
 		}
 	}
 
-	@AutoConfiguration(before = ServletWebServerFactoryAutoConfiguration.class)
+	@Configuration
+	@AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
 	@ConditionalOnClass(Undertow.class)
 	@ConditionalOnProperty(prefix = UndertowMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class UndertowMetricsConfiguration {
@@ -136,7 +139,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnProperty(prefix = SentinelMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class SentinelMetricsConfiguration {
 

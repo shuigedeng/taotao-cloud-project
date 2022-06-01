@@ -47,7 +47,7 @@ public class ServiceListener implements InitializingBean {
 		LogUtil.started(ServiceListener.class, StarterName.CORE_STARTER);
 	}
 
-	@AutoConfiguration
+	@Configuration
 	public static class NacosServiceListenerHnadler implements InitializingBean {
 
 		@Autowired

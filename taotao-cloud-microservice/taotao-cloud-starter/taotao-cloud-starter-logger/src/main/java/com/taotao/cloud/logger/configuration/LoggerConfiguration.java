@@ -62,7 +62,7 @@ public class LoggerConfiguration implements InitializingBean {
 	 * @version 2022.03
 	 * @since 2020/4/30 10:21
 	 */
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnProperty(prefix = RequestLoggerProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class RequestLoggerConfiguration implements InitializingBean {
 
