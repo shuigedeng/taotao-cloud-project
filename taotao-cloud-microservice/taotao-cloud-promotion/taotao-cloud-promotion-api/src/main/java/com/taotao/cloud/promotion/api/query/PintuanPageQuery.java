@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PintuanSearchParams extends BasePromotionsSearchParams {
+public class PintuanPageQuery extends BasePromotionsSearchQuery {
 
 	@Schema(description = "商家id")
 	private String storeId;

@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 
 import java.math.BigDecimal;
@@ -32,8 +33,8 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @since 2022-04-27 16:44:13
 	 */
 	static String getPromotionGoodsStockCacheKey(PromotionTypeEnum typeEnum, String promotionId, String skuId) {
-        return "{" + CachePrefix.PROMOTION_GOODS_STOCK.name() + "_" + typeEnum.name() + "}_" + promotionId + "_" + skuId;
-    }
+		return "{" + CachePrefix.PROMOTION_GOODS_STOCK.name() + "_" + typeEnum.name() + "}_" + promotionId + "_" + skuId;
+	}
 
 	/**
 	 * 更新促销活动
@@ -60,7 +61,7 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @return {@link IPage }<{@link PromotionGoods }>
 	 * @since 2022-04-27 16:44:13
 	 */
-	IPage<PromotionGoods> pageFindAll(PromotionGoodsSearchParams searchParams, PageVO pageVo);
+	IPage<PromotionGoods> pageFindAll(PromotionGoodsPageQuery searchParams, PageParam pageVo);
 
 	/**
 	 * 获取促销商品信息
@@ -69,7 +70,7 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @return {@link List }<{@link PromotionGoods }>
 	 * @since 2022-04-27 16:44:13
 	 */
-	List<PromotionGoods> listFindAll(PromotionGoodsSearchParams searchParams);
+	List<PromotionGoods> listFindAll(PromotionGoodsPageQuery searchParams);
 
 	/**
 	 * 获取促销商品信息
@@ -78,7 +79,7 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @return {@link PromotionGoods }
 	 * @since 2022-04-27 16:44:13
 	 */
-	PromotionGoods getPromotionsGoods(PromotionGoodsSearchParams searchParams);
+	PromotionGoods getPromotionsGoods(PromotionGoodsPageQuery searchParams);
 
 
 	/**
@@ -171,7 +172,7 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @param promotionIds 促销活动id
 	 * @since 2022-04-27 16:44:14
 	 */
-	void deletePromotionGoods(List<String> promotionIds);
+	void deletePromotionGoods(List<Long> promotionIds);
 
 	/**
 	 * 根据参数删除促销商品
@@ -179,6 +180,6 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @param searchParams 查询参数
 	 * @since 2022-04-27 16:44:14
 	 */
-	void deletePromotionGoods(PromotionGoodsSearchParams searchParams);
+	void deletePromotionGoods(PromotionGoodsPageQuery searchParams);
 
 }

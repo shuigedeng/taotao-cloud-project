@@ -29,37 +29,27 @@ public class SeckillApplyVO implements Serializable {
 	private Long id;
 
 	@Schema(description = "活动id", required = true)
-	@NotNull(message = "活动id参数不能为空")
-	@Min(value = 0, message = "活动id参数异常")
-	private String seckillId;
+	private Long seckillId;
 
 	@Schema(description = "时刻")
-	@NotNull(message = "时刻参数不能为空")
 	private Integer timeLine;
 
 	@Schema(description = "skuID")
-	@NotNull(message = "skuId参数不能为空")
-	@Min(value = 0, message = "skuID参数异常")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "商品名称")
-	@NotEmpty(message = "商品名称参数不能为空")
 	private String goodsName;
 
 	@Schema(description = "商家id")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "商家名称")
 	private String storeName;
 
 	@Schema(description = "价格")
-	@NotNull(message = "价格参数不能为空")
-	@Min(value = 0, message = "价格参数不能小于0")
 	private BigDecimal price;
 
 	@Schema(description = "促销数量")
-	@NotNull(message = "促销数量参数不能为空")
-	@Min(value = 0, message = "促销数量数不能小于0")
 	private Integer quantity;
 
 	/**

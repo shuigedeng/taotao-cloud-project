@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberCouponSearchParams extends BasePromotionsSearchParams implements Serializable {
+public class MemberCouponSearchQuery extends BasePromotionsSearchQuery implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 4566880169478260409L;

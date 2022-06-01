@@ -24,6 +24,6 @@ public interface IFeignGoodsSkuService {
 
 	GoodsSkuVO getGoodsSkuByIdFromCache(Long skuId);
 
-	void getStock(String skuId);
+	Integer getStock(String skuId);
 }
 

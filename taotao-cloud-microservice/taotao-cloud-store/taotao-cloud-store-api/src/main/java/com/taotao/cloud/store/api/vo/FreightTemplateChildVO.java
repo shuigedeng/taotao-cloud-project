@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "运费模板子配置vo")
-public class FreightTemplateChildBaseVO {
+public class FreightTemplateChildVO {
 
 	private Long freightTemplateId;
 

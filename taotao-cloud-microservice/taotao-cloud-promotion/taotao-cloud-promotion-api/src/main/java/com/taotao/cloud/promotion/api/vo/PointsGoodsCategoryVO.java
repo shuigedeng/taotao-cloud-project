@@ -25,12 +25,11 @@ public class PointsGoodsCategoryVO implements Serializable {
 
 	private Long id;
 
-	@NotEmpty(message = "分类名称不能为空")
 	@Schema(description = "分类名称")
 	private String name;
 
 	@Schema(description = "父id, 根节点为0")
-	private String parentId;
+	private Long parentId;
 
 	@Schema(description = "层级, 从0开始")
 	private Integer level;

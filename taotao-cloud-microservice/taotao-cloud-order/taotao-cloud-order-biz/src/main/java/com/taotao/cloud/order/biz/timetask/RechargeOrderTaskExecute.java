@@ -2,8 +2,8 @@ package com.taotao.cloud.order.biz.timetask;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
+import com.taotao.cloud.member.api.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 充值订单自动取消（每分钟执行）
@@ -28,7 +27,7 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 充值
 	 */
 	@Autowired
-	private IFeignRechargeService rechargeService;
+	private IFeignMemberRechargeService rechargeService;
 	/**
 	 * 设置
 	 */
@@ -42,13 +41,8 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//充值订单自动取消时间 = 当前时间 - 自动取消时间分钟数
 			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
-			LambdaQueryWrapper<Recharge> queryWrapper = new LambdaQueryWrapper<>();
-			queryWrapper.eq(Recharge::getPayStatus, PayStatusEnum.UNPAID.name());
-			//充值订单创建时间 <= 订单自动取消时间
-			queryWrapper.le(Recharge::getCreateTime, cancelTime);
-			List<Recharge> list = rechargeService.list(queryWrapper);
-			List<String> cancelSnList = list.stream().map(Recharge::getRechargeSn)
-				.collect(Collectors.toList());
+			List<MemberRechargeVO> list = rechargeService.list(cancelTime).data();
+			List<String> cancelSnList = list.stream().map(MemberRechargeVO::getRechargeSn).toList();
 			for (String sn : cancelSnList) {
 				rechargeService.rechargeOrderCancel(sn);
 			}

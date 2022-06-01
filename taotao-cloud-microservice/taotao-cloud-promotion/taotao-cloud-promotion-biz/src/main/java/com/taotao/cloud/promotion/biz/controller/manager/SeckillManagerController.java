@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.vo.SeckillVO;
 import com.taotao.cloud.promotion.biz.entity.Seckill;
 import com.taotao.cloud.promotion.biz.entity.SeckillApply;
@@ -70,7 +70,7 @@ public class SeckillManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "分页查询秒杀活动列表")
 	@GetMapping
-	public Result<IPage<Seckill>> getAll(SeckillSearchParams param, PageVO pageVo) {
+	public Result<IPage<Seckill>> getAll(SeckillPageQuery param, PageVO pageVo) {
 		return Result.success(seckillService.pageFindAll(param, pageVo));
 	}
 
@@ -98,7 +98,7 @@ public class SeckillManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "获取秒杀活动申请列表")
 	@GetMapping("/apply")
-	public Result<IPage<SeckillApply>> getSeckillApply(SeckillSearchParams param, PageVO pageVo) {
+	public Result<IPage<SeckillApply>> getSeckillApply(SeckillPageQuery param, PageVO pageVo) {
 		IPage<SeckillApply> seckillApply = seckillApplyService.getSeckillApply(param, pageVo);
 		return Result.success(seckillApply);
 	}

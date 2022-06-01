@@ -5,10 +5,11 @@ import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.service.MemberCouponService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
-import java.util.Calendar;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 优惠券状态监测
@@ -44,8 +45,5 @@ public class CouponExecute implements EveryDayExecute {
 			//如果结束时间小于 当前时间增加指定删除日期，则删除
 			.le(MemberCoupon::getEndTime, removeTime);
 		this.memberCouponService.remove(deleteWrapper);
-
-
 	}
-
 }

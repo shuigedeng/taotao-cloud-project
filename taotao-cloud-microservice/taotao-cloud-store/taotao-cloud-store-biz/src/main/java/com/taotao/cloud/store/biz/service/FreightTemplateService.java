@@ -2,67 +2,75 @@ package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import com.taotao.cloud.store.api.vo.FreightTemplateVO;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.store.api.vo.FreightTemplateInfoVO;
 import com.taotao.cloud.store.biz.entity.FreightTemplate;
+
 import java.util.List;
 
 /**
  * 店铺地址（自提点）详细业务层
  *
- * 
- * @since 2020-03-07 09:24:33
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-06-01 14:59:36
  */
 public interface FreightTemplateService extends IService<FreightTemplate> {
 
-    /**
-     * 获取当前商家的运费模板列表
-     *
-     * @param pageVO 分页
-     * @return 运费模板列表
-     */
-    IPage<FreightTemplate> getFreightTemplate(PageVO pageVO);
+	/**
+	 * 获取当前商家的运费模板列表
+	 *
+	 * @param pageParam 分页
+	 * @return {@link IPage }<{@link FreightTemplate }>
+	 * @since 2022-06-01 14:59:37
+	 */
+	IPage<FreightTemplate> getFreightTemplate(PageParam pageParam);
 
-    /**
-     * 获取商家的运费模板
-     *
-     * @param storeId
-     * @return 运费模板列表
-     */
-    List<FreightTemplateVO> getFreightTemplateList(String storeId);
+	/**
+	 * 获取商家的运费模板
+	 *
+	 * @param storeId
+	 * @return {@link List }<{@link FreightTemplateInfoVO }>
+	 * @since 2022-06-01 14:59:37
+	 */
+	List<FreightTemplateInfoVO> getFreightTemplateList(String storeId);
 
-    /**
-     * 获取运费模板详细信息
-     *
-     * @param id 运费模板ID
-     * @return 运费模板
-     */
-    FreightTemplateVO getFreightTemplate(String id);
+	/**
+	 * 获取运费模板详细信息
+	 *
+	 * @param id 运费模板ID
+	 * @return {@link FreightTemplateInfoVO }
+	 * @since 2022-06-01 14:59:37
+	 */
+	FreightTemplateInfoVO getFreightTemplate(Long id);
 
-    /**
-     * 添加商家运费模板
-     * 运费模板分为卖家包邮、运费计算两种类型
-     *
-     * @param freightTemplateVO 运费模板
-     * @return 运费模板
-     */
-    FreightTemplateVO addFreightTemplate(FreightTemplateVO freightTemplateVO);
+	/**
+	 * 添加商家运费模板
+	 * 运费模板分为卖家包邮、运费计算两种类型
+	 *
+	 * @param freightTemplateInfoVO 运费模板
+	 * @return {@link FreightTemplateInfoVO }
+	 * @since 2022-06-01 14:59:37
+	 */
+	FreightTemplateInfoVO addFreightTemplate(FreightTemplateInfoVO freightTemplateInfoVO);
 
-    /**
-     * 修改商家运费模板
-     *
-     * @param freightTemplateVO 运费模板
-     * @return 运费模板
-     */
-    FreightTemplateVO editFreightTemplate(FreightTemplateVO freightTemplateVO);
+	/**
+	 * 修改商家运费模板
+	 *
+	 * @param freightTemplateInfoVO 运费模板
+	 * @return {@link FreightTemplateInfoVO }
+	 * @since 2022-06-01 14:59:37
+	 */
+	FreightTemplateInfoVO editFreightTemplate(FreightTemplateInfoVO freightTemplateInfoVO);
 
-    /**
-     * 删除商家运费模板
-     * 删除模板并删除模板的配置内容
-     *
-     * @param id 运费模板ID
-     * @return 操作状态
-     */
-    boolean removeFreightTemplate(String id);
+	/**
+	 * 删除商家运费模板
+	 * 删除模板并删除模板的配置内容
+	 *
+	 * @param id 运费模板ID
+	 * @return boolean
+	 * @since 2022-06-01 14:59:37
+	 */
+	boolean removeFreightTemplate(Long id);
 
 }

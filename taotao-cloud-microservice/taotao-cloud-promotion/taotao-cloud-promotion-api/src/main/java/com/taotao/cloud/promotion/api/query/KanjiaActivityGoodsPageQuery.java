@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivityGoodsParams extends BasePromotionsSearchParams implements Serializable {
+public class KanjiaActivityGoodsPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 1344104067705714289L;

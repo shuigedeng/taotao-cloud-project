@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
-import com.taotao.cloud.promotion.api.query.FullDiscountSearchParams;
+import com.taotao.cloud.promotion.api.query.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.service.FullDiscountService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -38,8 +38,8 @@ public class FullDiscountManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "获取满优惠列表")
 	@GetMapping
-	public Result<IPage<FullDiscount>> getCouponList(FullDiscountSearchParams searchParams,
-		PageVO page) {
+	public Result<IPage<FullDiscount>> getCouponList(FullDiscountPageQuery searchParams,
+													 PageVO page) {
 		page.setNotConvert(true);
 		return Result.success(fullDiscountService.pageFindAll(searchParams, page));
 	}

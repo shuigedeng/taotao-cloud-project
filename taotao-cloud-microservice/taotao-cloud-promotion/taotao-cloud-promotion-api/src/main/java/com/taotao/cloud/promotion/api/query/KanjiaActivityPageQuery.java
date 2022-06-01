@@ -13,24 +13,31 @@ import java.io.Serializable;
 
 /**
  * 砍价活动参与实体类
+ *
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "砍价活动参与记录查询对象")
-public class KanJiaActivityLogQuery implements Serializable {
+public class KanjiaActivityPageQuery implements Serializable {
 
     private static final long serialVersionUID = -1583030890805926292L;
 
-    @Schema(description =  "砍价发起活动id")
-    private String kanJiaActivityId;
+    @Schema(description =  "货品名称")
+    private String goodsName;
+
+    @Schema(description =  "会员id", hidden = true)
+    private String memberId;
 
     public <T> QueryWrapper<T> wrapper() {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
 
-        if (CharSequenceUtil.isNotEmpty(kanJiaActivityId)) {
-            queryWrapper.like("kanjia_activity_id", kanJiaActivityId);
+        if (CharSequenceUtil.isNotEmpty(goodsName)) {
+            queryWrapper.like("goods_name", goodsName);
+        }
+        if (memberId != null) {
+            queryWrapper.eq("member_id", memberId);
         }
         queryWrapper.eq("delete_flag", false);
         queryWrapper.orderByDesc("create_time");

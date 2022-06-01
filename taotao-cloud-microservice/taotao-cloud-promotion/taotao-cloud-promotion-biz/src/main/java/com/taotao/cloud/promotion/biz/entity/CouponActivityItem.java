@@ -50,6 +50,7 @@ public class CouponActivityItem extends BaseSuperEntity<CouponActivityItem, Long
 	 */
 	@Column(name = "num", columnDefinition = "int not null default 0 comment '优惠券数量'")
 	private Integer num;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

@@ -24,19 +24,19 @@ public class SeckillGoodsVO implements Serializable {
 	private static final long serialVersionUID = 5170316685407828228L;
 
     @Schema(description =  "活动id")
-    private String seckillId;
+    private Long seckillId;
 
     @Schema(description =  "时刻")
     private Integer timeLine;
 
     @Schema(description =  "商品id")
-    private String goodsId;
+    private Long goodsId;
 
     @Schema(description =  "以积分渠道购买需要积分数量")
     private Integer point;
 
     @Schema(description =  "skuID")
-    private String skuId;
+    private Long skuId;
 
     @Schema(description =  "商品名称")
     private String goodsName;
@@ -45,7 +45,7 @@ public class SeckillGoodsVO implements Serializable {
     private String goodsImage;
 
     @Schema(description =  "商家id")
-    private String storeId;
+    private Long storeId;
 
     @Schema(description =  "价格")
     private BigDecimal price;

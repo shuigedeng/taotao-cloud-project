@@ -41,7 +41,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.feign.IFeignFreightTemplateService;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.vo.FreightTemplateVO;
+import com.taotao.cloud.store.api.vo.FreightTemplateInfoVO;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -376,7 +376,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	public Boolean freight(List<Long> goodsIds, Long templateId) {
 		SecurityUser authUser = this.checkStoreAuthority();
 
-		FreightTemplateVO freightTemplate = freightTemplateService.getById(templateId).data();
+		FreightTemplateInfoVO freightTemplate = freightTemplateService.getById(templateId).data();
 		if (freightTemplate == null) {
 			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
 		}

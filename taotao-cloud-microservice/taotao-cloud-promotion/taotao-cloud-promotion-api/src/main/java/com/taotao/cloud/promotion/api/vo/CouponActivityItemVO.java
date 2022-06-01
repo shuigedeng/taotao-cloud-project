@@ -18,11 +18,25 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//public class CouponActivityItemVO extends CouponActivityItem {
 public class CouponActivityItemVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 7814832369110695758L;
+
+	/**
+	 * 优惠券活动ID
+	 */
+	private Long activityId;
+	/**
+	 * 优惠券ID
+	 */
+	private Long couponId;
+	/**
+	 * 优惠券数量
+	 */
+	private Integer num;
+
+	// *************************************************************************************
 
 	@Schema(description = "优惠券名称")
 	private String couponName;

@@ -8,7 +8,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
@@ -59,7 +59,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
         List<FullDiscount> list = this.list(queryWrapper);
         if (list != null) {
             for (FullDiscount fullDiscount : list) {
-                PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+                PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
                 searchParams.setPromotionId(fullDiscount.getId());
                 FullDiscountVO fullDiscountVO = new FullDiscountVO(fullDiscount);
                 fullDiscountVO.setPromotionGoodsList(promotionGoodsService.listFindAll(searchParams));
@@ -69,27 +69,16 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
         return result;
     }
 
-    /**
-     * 获取满优惠活动详情
-     *
-     * @param id 满优惠KID
-     * @return 满优惠活动详情
-     */
     @Override
     public FullDiscountVO getFullDiscount(String id) {
         FullDiscount fullDiscount = this.checkFullDiscountExist(id);
         FullDiscountVO fullDiscountVO = new FullDiscountVO(fullDiscount);
-        PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+        PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
         searchParams.setPromotionId(fullDiscount.getId());
         fullDiscountVO.setPromotionGoodsList(promotionGoodsService.listFindAll(searchParams));
         return fullDiscountVO;
     }
 
-    /**
-     * 检查促销参数
-     *
-     * @param promotions 促销实体
-     */
     @Override
     public void checkPromotions(FullDiscount promotions) {
         super.checkPromotions(promotions);
@@ -106,11 +95,6 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
 
     }
 
-    /**
-     * 更新促销商品信息
-     *
-     * @param promotions 促销实体
-     */
     @Override
     public void updatePromotionsGoods(FullDiscount promotions) {
         super.updatePromotionsGoods(promotions);
@@ -126,22 +110,12 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
 
     }
 
-    /**
-     * 更新促销信息到商品索引
-     *
-     * @param promotions 促销实体
-     */
     @Override
     public void updateEsGoodsIndex(FullDiscount promotions) {
         FullDiscount fullDiscount = JSONUtil.parse(promotions).toBean(FullDiscount.class);
         super.updateEsGoodsIndex(fullDiscount);
     }
 
-    /**
-     * 当前促销类型
-     *
-     * @return 当前促销类型
-     */
     @Override
     public PromotionTypeEnum getPromotionType() {
         return PromotionTypeEnum.FULL_DISCOUNT;
@@ -222,7 +196,7 @@ public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullD
      *
      * @param couponId 优惠券编号
      */
-    private void checkCoupon(String couponId) {
+    private void checkCoupon(Long couponId) {
         //是否没有选择优惠券
         boolean noCouponSelected = couponId == null;
         if (noCouponSelected) {

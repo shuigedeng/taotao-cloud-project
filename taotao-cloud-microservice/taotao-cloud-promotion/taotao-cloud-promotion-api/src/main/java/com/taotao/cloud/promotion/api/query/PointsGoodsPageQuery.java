@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PointsGoodsSearchParams extends BasePromotionsSearchParams {
+public class PointsGoodsPageQuery extends BasePromotionsSearchQuery {
 
 	@Schema(description = "商品名称")
 	private String goodsName;

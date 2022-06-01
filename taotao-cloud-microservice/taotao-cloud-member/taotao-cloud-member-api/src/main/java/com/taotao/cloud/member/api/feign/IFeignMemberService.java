@@ -9,6 +9,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 远程调用会员用户模块
  *
@@ -51,5 +54,21 @@ public interface IFeignMemberService {
 	 */
 	@GetMapping(value = "/member/info/update")
 	Result<Boolean> updateMemberPoint(Long payPoint, String name, Long memberId, String s);
+
+	MemberVO findByUsername(String username);
+
+	MemberVO getById(Long memberId);
+
+	/**
+	 * new LambdaUpdateWrapper<Member>()
+	 *                 .eq(Member::getId, member.getId())
+	 *                 .set(Member::getHaveStore, true)
+	 *                 .set(Member::getStoreId, store.getId())
+	 */
+	void update(Long memberId, Long sotreId);
+
+	void updateById(MemberVO member);
+
+	List<Map<String, Object>> listFieldsByMemberIds(String s, List<String> ids);
 }
 

@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
+
 
 /**
  * 促销商品数据传输对象
@@ -15,10 +17,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PromotionGoodsDTO extends PromotionGoodsBaseDTO {
 
+	@Serial
 	private static final long serialVersionUID = 9206970681612883421L;
 
 	@Schema(description = "商品id")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;

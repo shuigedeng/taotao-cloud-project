@@ -4,7 +4,6 @@ package com.taotao.cloud.store.api.enums;
  * 模版枚举
  *
  *
- * @since 2020/12/23 15:59
  */
 
 public enum FreightTemplateEnum {

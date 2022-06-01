@@ -22,7 +22,7 @@ public interface CouponActivityItemService extends IService<CouponActivityItem> 
 	 * @return {@link List }<{@link CouponActivityItem }>
 	 * @since 2022-04-27 16:43:14
 	 */
-	List<CouponActivityItem> getCouponActivityList(String activityId);
+	List<CouponActivityItem> getCouponActivityList(Long activityId);
 
 	/**
 	 * 获取优惠券活动关联优惠券列表VO

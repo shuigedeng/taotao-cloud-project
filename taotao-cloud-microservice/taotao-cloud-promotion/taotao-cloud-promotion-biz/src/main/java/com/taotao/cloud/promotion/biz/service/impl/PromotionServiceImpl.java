@@ -4,11 +4,11 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.CouponSearchParams;
-import com.taotao.cloud.promotion.api.query.FullDiscountSearchParams;
-import com.taotao.cloud.promotion.api.query.PintuanSearchParams;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
-import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponPageQuery;
+import com.taotao.cloud.promotion.api.query.FullDiscountPageQuery;
+import com.taotao.cloud.promotion.api.query.PintuanPageQuery;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.entity.Pintuan;
@@ -92,7 +92,7 @@ public class PromotionServiceImpl implements PromotionService {
     public Map<String, Object> getCurrentPromotion() {
         Map<String, Object> resultMap = new HashMap<>(16);
 
-        SeckillSearchParams seckillSearchParams = new SeckillSearchParams();
+        SeckillPageQuery seckillSearchParams = new SeckillPageQuery();
         seckillSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         //获取当前进行的秒杀活动活动
         List<Seckill> seckillList = seckillService.listFindAll(seckillSearchParams);
@@ -101,7 +101,7 @@ public class PromotionServiceImpl implements PromotionService {
                 resultMap.put(PromotionTypeEnum.SECKILL.name(), seckill);
             }
         }
-        FullDiscountSearchParams fullDiscountSearchParams = new FullDiscountSearchParams();
+        FullDiscountPageQuery fullDiscountSearchParams = new FullDiscountPageQuery();
         fullDiscountSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         //获取当前进行的满优惠活动
         List<FullDiscount> fullDiscountList = fullDiscountService.listFindAll(fullDiscountSearchParams);
@@ -110,7 +110,7 @@ public class PromotionServiceImpl implements PromotionService {
                 resultMap.put(PromotionTypeEnum.FULL_DISCOUNT.name(), fullDiscount);
             }
         }
-        PintuanSearchParams pintuanSearchParams = new PintuanSearchParams();
+        PintuanPageQuery pintuanSearchParams = new PintuanPageQuery();
         pintuanSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         //获取当前进行的拼团活动
         List<Pintuan> pintuanList = pintuanService.listFindAll(pintuanSearchParams);
@@ -131,7 +131,7 @@ public class PromotionServiceImpl implements PromotionService {
     @Override
     public Map<String, Object> getGoodsCurrentPromotionMap(EsGoodsIndex index) {
         Map<String, Object> promotionMap = new HashMap<>();
-        FullDiscountSearchParams fullDiscountSearchParams = new FullDiscountSearchParams();
+        FullDiscountPageQuery fullDiscountSearchParams = new FullDiscountPageQuery();
         fullDiscountSearchParams.setScopeType(PromotionsScopeTypeEnum.ALL.name());
         fullDiscountSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         List<FullDiscount> fullDiscountVOS = this.fullDiscountService.listFindAll(fullDiscountSearchParams);
@@ -141,7 +141,7 @@ public class PromotionServiceImpl implements PromotionService {
                 promotionMap.put(fullDiscountKey, fullDiscount);
             }
         }
-        CouponSearchParams couponSearchParams = new CouponSearchParams();
+        CouponPageQuery couponSearchParams = new CouponPageQuery();
         couponSearchParams.setScopeType(PromotionsScopeTypeEnum.ALL.name());
         couponSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         List<Coupon> couponVOS = this.couponService.listFindAll(couponSearchParams);
@@ -151,7 +151,7 @@ public class PromotionServiceImpl implements PromotionService {
                 promotionMap.put(couponKey, coupon);
             }
         }
-        PromotionGoodsSearchParams promotionGoodsSearchParams = new PromotionGoodsSearchParams();
+        PromotionGoodsPageQuery promotionGoodsSearchParams = new PromotionGoodsPageQuery();
         promotionGoodsSearchParams.setSkuId(index.getId());
         promotionGoodsSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         List<PromotionGoods> promotionGoodsList = promotionGoodsService.listFindAll(promotionGoodsSearchParams);
@@ -188,7 +188,7 @@ public class PromotionServiceImpl implements PromotionService {
 
     private void getGoodsCurrentSeckill(PromotionGoods promotionGoods, Map<String, Object> promotionMap, EsGoodsIndex index) {
         Seckill seckill = seckillService.getById(promotionGoods.getPromotionId());
-        SeckillSearchParams searchParams = new SeckillSearchParams();
+        SeckillPageQuery searchParams = new SeckillPageQuery();
         searchParams.setSeckillId(promotionGoods.getPromotionId());
         searchParams.setSkuId(promotionGoods.getSkuId());
         List<SeckillApply> seckillApplyList = seckillApplyService.getSeckillApply(searchParams);

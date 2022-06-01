@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
-import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.biz.entity.Seckill;
 import com.taotao.cloud.promotion.biz.entity.SeckillApply;
 import com.taotao.cloud.promotion.biz.service.SeckillApplyService;
@@ -40,7 +40,7 @@ public class SeckillStoreController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "获取秒杀活动列表")
-    public Result<IPage<Seckill>> getSeckillPage(SeckillSearchParams queryParam, PageVO pageVo) {
+    public Result<IPage<Seckill>> getSeckillPage(SeckillPageQuery queryParam, PageVO pageVo) {
         IPage<Seckill> seckillPage = seckillService.pageFindAll(queryParam, pageVo);
         return Result.success(seckillPage);
     }
@@ -48,7 +48,7 @@ public class SeckillStoreController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/apply")
     @Operation(summary = "获取秒杀活动申请列表")
-    public Result<IPage<SeckillApply>> getSeckillApplyPage(SeckillSearchParams queryParam, PageVO pageVo) {
+    public Result<IPage<SeckillApply>> getSeckillApplyPage(SeckillPageQuery queryParam, PageVO pageVo) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         queryParam.setStoreId(storeId);
         IPage<SeckillApply> seckillPage = seckillApplyService.getSeckillApply(queryParam, pageVo);

@@ -27,10 +27,10 @@ public class PointsGoodsBaseVO implements Serializable {
 	private Long id;
 
 	@Schema(description = "商品编号")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "商品sku编号")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;

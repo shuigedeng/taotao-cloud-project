@@ -13,7 +13,7 @@ import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponPageQuery;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.mapper.MemberCouponMapper;
@@ -95,7 +95,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
     }
 
     @Override
-    public IPage<MemberCoupon> getMemberCoupons(CouponSearchParams param, PageVO pageVo) {
+    public IPage<MemberCoupon> getMemberCoupons(CouponPageQuery param, PageVO pageVo) {
         QueryWrapper<MemberCoupon> queryWrapper = param.queryWrapper();
         return this.page(PageUtil.initPage(pageVo), queryWrapper);
     }
@@ -119,7 +119,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
      * @return 会员优惠券列表
      */
     @Override
-    public IPage<MemberCoupon> getMemberCouponsByCanUse(CouponSearchParams param, BigDecimal totalPrice, PageVO pageVo) {
+    public IPage<MemberCoupon> getMemberCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageVO pageVo) {
         LambdaQueryWrapper<MemberCoupon> queryWrapper = new LambdaQueryWrapper<>();
         List<String> storeIds = new ArrayList<>(Arrays.asList(param.getStoreId().split(",")));
         storeIds.add("platform");

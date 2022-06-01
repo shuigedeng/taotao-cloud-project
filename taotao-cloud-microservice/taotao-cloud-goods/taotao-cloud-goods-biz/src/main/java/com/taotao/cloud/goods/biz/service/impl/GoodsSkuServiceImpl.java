@@ -48,7 +48,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -301,7 +301,7 @@ public class GoodsSkuServiceImpl extends ServiceImpl<IGoodsSkuMapper, GoodsSku> 
 				.findFirst();
 			if (containsPromotion.isPresent()) {
 				JSONObject jsonObject = JSONUtil.parseObj(containsPromotion.get().getValue());
-				PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+				PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 				searchParams.setSkuId(String.valueOf(skuId));
 				searchParams.setPromotionId(Long.valueOf(jsonObject.get("id").toString()));
 				PromotionGoodsVO promotionsGoods = promotionGoodsService.getPromotionsGoods(

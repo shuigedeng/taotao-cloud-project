@@ -4,13 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.query.KanJiaActivityLogQuery;
-import com.taotao.cloud.promotion.api.query.KanjiaActivityQuery;
+import com.taotao.cloud.promotion.api.query.KanJiaActivityLogPageQuery;
+import com.taotao.cloud.promotion.api.query.KanjiaActivityPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsListVO;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsParams;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsVO;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchParams;
+import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchQuery;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
@@ -81,8 +81,8 @@ public class KanjiaGoodsActivityBuyerController {
 	@GetMapping("/getKanjiaActivity/logs")
 	@Operation(summary = "分页获取砍价活动-帮砍记录")
 	public Result<IPage<KanjiaActivityLog>> getKanjiaActivityLog(
-		KanJiaActivityLogQuery kanJiaActivityLogQuery, PageVO page) {
-		return Result.success(kanJiaActivityLogService.getForPage(kanJiaActivityLogQuery, page));
+		KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO page) {
+		return Result.success(kanJiaActivityLogService.getForPage(kanJiaActivityLogPageQuery, page));
 	}
 
 	@RequestLogger
@@ -90,7 +90,7 @@ public class KanjiaGoodsActivityBuyerController {
 	@PostMapping("/getKanjiaActivity")
 	@Operation(summary = "获取砍价活动")
 	public Result<KanjiaActivityVO> getKanJiaActivity(
-		KanjiaActivitySearchParams kanjiaActivitySearchParams) {
+		KanjiaActivitySearchQuery kanjiaActivitySearchParams) {
 		//如果是非被邀请关系则填写会员ID
 		if (StrUtil.isEmpty(kanjiaActivitySearchParams.getKanjiaActivityId())) {
 			kanjiaActivitySearchParams.setMemberId(UserContext.getCurrentUser().getId());
@@ -123,10 +123,10 @@ public class KanjiaGoodsActivityBuyerController {
 	@GetMapping("/kanjiaActivity/mine/")
 	@Operation(summary = "分页获取已参与的砍价活动")
 	public Result<IPage<KanjiaActivity>> getPointsGoodsPage(
-		KanjiaActivityQuery kanjiaActivityQuery, PageVO page) {
+		KanjiaActivityPageQuery kanjiaActivityPageQuery, PageVO page) {
 		// 会员端查询到的肯定是已经开始的活动商品
-		kanjiaActivityQuery.setMemberId(UserContext.getCurrentUser().getId());
-		IPage<KanjiaActivity> kanjiaActivity = kanJiaActivityService.getForPage(kanjiaActivityQuery,
+		kanjiaActivityPageQuery.setMemberId(UserContext.getCurrentUser().getId());
+		IPage<KanjiaActivity> kanjiaActivity = kanJiaActivityService.getForPage(kanjiaActivityPageQuery,
 			page);
 		return Result.success(kanjiaActivity);
 	}

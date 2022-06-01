@@ -10,7 +10,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityDTO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.KanJiaActivityLogQuery;
+import com.taotao.cloud.promotion.api.query.KanJiaActivityLogPageQuery;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
@@ -43,8 +43,8 @@ public class KanjiaActivityLogServiceImpl extends ServiceImpl<KanJiaActivityLogM
     private KanjiaActivityService kanJiaActivityService;
 
     @Override
-    public IPage<KanjiaActivityLog> getForPage(KanJiaActivityLogQuery kanJiaActivityLogQuery, PageVO pageVO) {
-        QueryWrapper<KanjiaActivityLog> queryWrapper = kanJiaActivityLogQuery.wrapper();
+    public IPage<KanjiaActivityLog> getForPage(KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO pageVO) {
+        QueryWrapper<KanjiaActivityLog> queryWrapper = kanJiaActivityLogPageQuery.wrapper();
         return this.page(PageUtil.initPage(pageVO), queryWrapper);
     }
 

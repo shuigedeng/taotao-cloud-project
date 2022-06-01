@@ -13,7 +13,12 @@ import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -117,7 +122,7 @@ public class PromotionTools {
 			//本次促销商品入库
 			for (PromotionGoods promotionGoods : originList) {
 				promotionGoods.setPromotionId((Long) promotion.getId());
-				if (CharSequenceUtil.isEmpty(promotionGoods.getStoreId())) {
+				if (Objects.isNull(promotionGoods.getStoreId())) {
 					promotionGoods.setStoreId(promotion.getStoreId());
 				}
 				if (CharSequenceUtil.isEmpty(promotionGoods.getStoreName())) {
@@ -156,6 +161,7 @@ public class PromotionTools {
 		if (map == null) {
 			return new HashMap<>();
 		}
+
 		//移除无效促销活动
 		return map.entrySet().stream().filter(i -> {
 			JSONObject promotionsObj = JSONUtil.parseObj(i.getValue());

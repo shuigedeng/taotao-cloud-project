@@ -2,10 +2,8 @@ package com.taotao.cloud.promotion.api.query;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -23,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FullDiscountSearchParams extends BasePromotionsSearchParams implements Serializable {
+public class FullDiscountPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
     @Serial
 	private static final long serialVersionUID = -4052716630253333681L;

@@ -22,10 +22,10 @@ public class KanjiaActivityLogDTO implements Serializable {
 	private Long id;
 
 	@Schema(description = "砍价活动参与记录id")
-	private String kanjiaActivityId;
+	private Long kanjiaActivityId;
 
 	@Schema(description = "砍价会员id")
-	private String kanjiaMemberId;
+	private Long kanjiaMemberId;
 
 	@Schema(description = "砍价会员名称")
 	private String kanjiaMemberName;

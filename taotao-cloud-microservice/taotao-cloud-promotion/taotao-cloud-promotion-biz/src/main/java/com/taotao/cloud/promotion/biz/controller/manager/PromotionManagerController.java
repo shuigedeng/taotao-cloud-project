@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.PromotionService;
@@ -48,7 +48,7 @@ public class PromotionManagerController {
 	@Operation(summary = "获取当前进行中的促销活动商品")
 	public Result<IPage<PromotionGoods>> getPromotionGoods(@PathVariable String promotionId,
 		String promotionType, PageVO pageVO) {
-		PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+		PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 		searchParams.setPromotionId(promotionId);
 		searchParams.setPromotionType(promotionType);
 		searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());

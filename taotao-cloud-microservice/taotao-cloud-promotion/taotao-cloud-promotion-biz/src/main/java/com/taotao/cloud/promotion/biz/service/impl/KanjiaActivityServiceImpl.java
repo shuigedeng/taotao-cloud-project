@@ -16,8 +16,8 @@ import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityDTO;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.KanjiaActivityQuery;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchParams;
+import com.taotao.cloud.promotion.api.query.KanjiaActivityPageQuery;
+import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchQuery;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityGoods;
@@ -58,12 +58,12 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
     private IFeignGoodsSkuService goodsSkuService;
 
     @Override
-    public KanjiaActivity getKanjiaActivity(KanjiaActivitySearchParams kanJiaActivitySearchParams) {
+    public KanjiaActivity getKanjiaActivity(KanjiaActivitySearchQuery kanJiaActivitySearchParams) {
         return this.getOne(kanJiaActivitySearchParams.wrapper());
     }
 
     @Override
-    public KanjiaActivityVO getKanjiaActivityVO(KanjiaActivitySearchParams kanJiaActivitySearchParams) {
+    public KanjiaActivityVO getKanjiaActivityVO(KanjiaActivitySearchQuery kanJiaActivitySearchParams) {
         AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
         KanjiaActivity kanjiaActivity = this.getKanjiaActivity(kanJiaActivitySearchParams);
         KanjiaActivityVO kanjiaActivityVO = new KanjiaActivityVO();
@@ -214,8 +214,8 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 
 
     @Override
-    public IPage<KanjiaActivity> getForPage(KanjiaActivityQuery kanjiaActivityQuery, PageVO page) {
-        QueryWrapper<KanjiaActivity> queryWrapper = kanjiaActivityQuery.wrapper();
+    public IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanjiaActivityPageQuery, PageVO page) {
+        QueryWrapper<KanjiaActivity> queryWrapper = kanjiaActivityPageQuery.wrapper();
         return this.page(PageUtil.initPage(page), queryWrapper);
     }
 

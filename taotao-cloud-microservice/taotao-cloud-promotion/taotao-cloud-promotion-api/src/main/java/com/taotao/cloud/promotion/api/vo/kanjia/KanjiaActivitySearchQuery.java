@@ -1,7 +1,8 @@
-package com.taotao.cloud.promotion.api.query;
+package com.taotao.cloud.promotion.api.vo.kanjia;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -9,12 +10,12 @@ import lombok.experimental.SuperBuilder;
 /**
  * 砍价活动搜索参数
  */
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {
+public class KanjiaActivitySearchQuery extends BasePromotionsSearchQuery {
 
 	@Schema(description = "砍价活动ID")
 	private String id;
@@ -39,7 +40,8 @@ public class KanjiaActivitySearchParams extends BasePromotionsSearchParams {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
 
 		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityId), "id", kanjiaActivityId);
-		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityGoodsId), "kanjia_activity_goods_id", kanjiaActivityGoodsId);
+		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityGoodsId), "kanjia_activity_goods_id",
+			kanjiaActivityGoodsId);
 		queryWrapper.eq(StrUtil.isNotEmpty(goodsSkuId), "sku_id", goodsSkuId);
 		queryWrapper.eq(StrUtil.isNotEmpty(memberId), "member_id", memberId);
 		queryWrapper.eq(StrUtil.isNotEmpty(status), "status", status);

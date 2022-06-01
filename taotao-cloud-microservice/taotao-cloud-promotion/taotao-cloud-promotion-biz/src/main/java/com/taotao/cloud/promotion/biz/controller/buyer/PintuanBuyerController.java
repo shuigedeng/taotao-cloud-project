@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.vo.PintuanShareVO;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.PintuanService;
 import com.taotao.cloud.promotion.biz.service.PromotionGoodsService;
@@ -42,7 +42,7 @@ public class PintuanBuyerController {
 	@GetMapping
 	public Result<IPage<PromotionGoods>> getPintuanCategory(String goodsName, String categoryPath,
 		PageVO pageVo) {
-		PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+		PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 		searchParams.setGoodsName(goodsName);
 		searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());
 		searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());

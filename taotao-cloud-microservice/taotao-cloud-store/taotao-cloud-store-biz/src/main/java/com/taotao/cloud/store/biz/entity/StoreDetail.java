@@ -1,37 +1,44 @@
 package com.taotao.cloud.store.biz.entity;
 
 
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
+import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * 店铺详细
- *
  */
-@Setter
 @Getter
-@Builder
-@AllArgsConstructor
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = StoreDetail.TABLE_NAME)
 @TableName(StoreDetail.TABLE_NAME)
+@EntityListeners({AbstractListener.class})
 @org.hibernate.annotations.Table(appliesTo = StoreDetail.TABLE_NAME, comment = "店铺详细表")
 public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 
@@ -39,7 +46,7 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 
 	@NotBlank(message = "店铺不能为空")
 	@Column(name = "store_id", columnDefinition = "varchar(64) not null comment '店铺id'")
-	private String storeId;
+	private Long storeId;
 
 	@Size(min = 2, max = 200, message = "店铺名称长度为2-200位")
 	@NotBlank(message = "店铺名称不能为空")
@@ -148,11 +155,28 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 	@Column(name = "sales_consignee_detail", columnDefinition = "varchar(64) not null comment '详细地址'")
 	private String salesConsigneeDetail;
 
-	//public StoreDetail(Store store, AdminStoreApplyDTO adminStoreApplyDTO) {
-	//    this.storeId = store.getId();
-	//    //设置店铺公司信息、设置店铺银行信息、设置店铺其他信息
-	//    BeanUtil.copyProperties(adminStoreApplyDTO, this);
-	//    this.settlementDay = DateUtil.date();
-	//    this.stockWarning = 10;
-	//}
+	public StoreDetail(Store store, AdminStoreApplyDTO adminStoreApplyDTO) {
+		this.storeId = store.getId();
+		//设置店铺公司信息、设置店铺银行信息、设置店铺其他信息
+		BeanUtil.copyProperties(adminStoreApplyDTO, this);
+		this.settlementDay = LocalDateTime.now();
+		this.stockWarning = 10;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
+		StoreDetail dict = (StoreDetail) o;
+		return getId() != null && Objects.equals(getId(), dict.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

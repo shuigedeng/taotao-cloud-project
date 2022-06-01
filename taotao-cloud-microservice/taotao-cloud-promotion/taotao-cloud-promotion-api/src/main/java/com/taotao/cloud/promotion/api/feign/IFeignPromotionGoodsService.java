@@ -18,11 +18,12 @@ package com.taotao.cloud.promotion.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsServiceFallback;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,9 +36,10 @@ import java.util.List;
 public interface IFeignPromotionGoodsService {
 
 	@GetMapping(value = "/withdraw/info")
-	Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsSearchParams searchParams);
+	Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsPageQuery searchParams);
 
     void updateBatchById(List<PromotionGoodsVO> promotionGoods);
 
+    BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
 }
 

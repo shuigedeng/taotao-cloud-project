@@ -20,7 +20,7 @@ import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
-import com.taotao.cloud.store.api.vo.StoreDetailVO;
+import com.taotao.cloud.store.api.vo.StoreDetailInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -97,7 +97,7 @@ public class GoodsStoreController {
 	public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
-		StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
+		StoreDetailInfoVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
 		//库存预警数量
 		Integer stockWarnNum = storeDetail.getStockWarning();
 		goodsPageQuery.setStoreId(storeId);

@@ -2,8 +2,9 @@ package com.taotao.cloud.promotion.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
-import com.taotao.cloud.promotion.api.query.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponPageQuery;
 import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 
 import java.math.BigDecimal;
@@ -55,7 +56,7 @@ public interface MemberCouponService extends IService<MemberCoupon> {
 	 * @return {@link IPage }<{@link MemberCoupon }>
 	 * @since 2022-04-27 16:43:53
 	 */
-	IPage<MemberCoupon> getMemberCoupons(CouponSearchParams param, PageVO pageVo);
+	IPage<MemberCoupon> getMemberCoupons(CouponPageQuery param, PageParam pageVo);
 
 	/**
 	 * 获取会员所有优惠券
@@ -74,7 +75,7 @@ public interface MemberCouponService extends IService<MemberCoupon> {
 	 * @return {@link IPage }<{@link MemberCoupon }>
 	 * @since 2022-04-27 16:43:53
 	 */
-	IPage<MemberCoupon> getMemberCouponsByCanUse(CouponSearchParams param, BigDecimal totalPrice, PageVO pageVo);
+	IPage<MemberCoupon> getMemberCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageParam pageVo);
 
 	/**
 	 * 获取当前会员当前商品可用的会员优惠券

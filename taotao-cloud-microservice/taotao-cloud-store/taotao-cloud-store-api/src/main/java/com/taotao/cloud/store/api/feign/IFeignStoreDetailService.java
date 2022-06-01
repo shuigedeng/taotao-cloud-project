@@ -2,11 +2,9 @@ package com.taotao.cloud.store.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.store.api.dto.CollectionDTO;
-import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreServiceFallbackImpl;
 import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.store.api.vo.StoreDetailVO;
+import com.taotao.cloud.store.api.vo.StoreDetailInfoVO;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +27,6 @@ public interface IFeignStoreDetailService {
 	Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddressDTO(@RequestParam Long storeId);
 
 	@GetMapping(value = "/get/detail/{storeId}")
-	Result<StoreDetailVO> getStoreDetailVO(@PathVariable Long storeId);
+	Result<StoreDetailInfoVO> getStoreDetailVO(@PathVariable Long storeId);
 }
 

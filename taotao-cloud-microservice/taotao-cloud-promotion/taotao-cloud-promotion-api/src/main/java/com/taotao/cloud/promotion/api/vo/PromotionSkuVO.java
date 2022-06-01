@@ -27,6 +27,6 @@ public class PromotionSkuVO implements Serializable {
 	/**
 	 * 促销活动
 	 */
-	private String activityId;
+	private Long activityId;
 
 }

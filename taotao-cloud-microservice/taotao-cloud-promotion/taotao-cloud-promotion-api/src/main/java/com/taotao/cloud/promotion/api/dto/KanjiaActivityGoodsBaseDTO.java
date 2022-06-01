@@ -34,11 +34,11 @@ public class KanjiaActivityGoodsBaseDTO implements Serializable {
 
 	@Schema(description = "货品id")
 	@NotEmpty(message = "货品id不能为空")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "货品SkuId")
 	@NotEmpty(message = "货品SkuId不能为空")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "货品名称")
 	private String goodsName;

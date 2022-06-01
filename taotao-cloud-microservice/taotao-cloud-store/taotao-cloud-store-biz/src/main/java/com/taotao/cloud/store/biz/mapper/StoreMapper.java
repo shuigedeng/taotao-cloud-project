@@ -22,7 +22,7 @@ public interface StoreMapper extends BaseMapper<Store> {
 	 * @return 店铺VO
 	 */
 	@Select("select s.*,d.* from tt_store s inner join tt_store_detail d on s.id=d.store_id where s.id=#{id} ")
-	StoreVO getStoreDetail(String id);
+	StoreVO getStoreDetail(Long id);
 
 	/**
 	 * 获取店铺分页列表
@@ -33,7 +33,7 @@ public interface StoreMapper extends BaseMapper<Store> {
 	 */
 	@Select("select s.* from tt_store as s ${ew.customSqlSegment}")
 	IPage<StoreVO> getStoreList(IPage<StoreVO> page,
-		@Param(Constants.WRAPPER) Wrapper<StoreVO> queryWrapper);
+								@Param(Constants.WRAPPER) Wrapper<StoreVO> queryWrapper);
 
 
 	/**

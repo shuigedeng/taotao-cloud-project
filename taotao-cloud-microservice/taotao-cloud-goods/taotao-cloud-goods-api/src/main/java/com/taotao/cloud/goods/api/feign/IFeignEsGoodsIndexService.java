@@ -23,5 +23,8 @@ public interface IFeignEsGoodsIndexService {
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
 	List<EsGoodsIndexVO> getEsGoodsBySkuIds(List<String> skuIdList);
 
+    void cleanInvalidPromotion();
+
+
 }
 

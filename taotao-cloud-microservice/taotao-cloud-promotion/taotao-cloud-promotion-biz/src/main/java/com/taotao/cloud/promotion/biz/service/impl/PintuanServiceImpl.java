@@ -15,7 +15,7 @@ import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.order.api.query.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.vo.PintuanShareVO;
@@ -115,7 +115,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
             throw new BusinessException(ResultEnum.PINTUAN_NOT_EXIST_ERROR);
         }
         PintuanVO pintuanVO = new PintuanVO(pintuan);
-        PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+        PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
         searchParams.setPromotionId(pintuan.getId());
         pintuanVO.setPromotionGoodsList(promotionGoodsService.listFindAll(searchParams));
         return pintuanVO;
@@ -242,7 +242,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
             PintuanMemberVO memberVO = new PintuanMemberVO(member);
             if (CharSequenceUtil.isEmpty(order.getParentOrderSn())) {
                 memberVO.setOrderSn("");
-                PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+                PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
                 searchParams.setPromotionStatus(PromotionTypeEnum.PINTUAN.name());
                 searchParams.setPromotionId(order.getPromotionId());
                 searchParams.setSkuId(skuId);
@@ -356,7 +356,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
                     throw new BusinessException("商品[" + promotionGood.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
                 }
             }
-            PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+            PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
             searchParams.setPromotionId(pintuan.getId());
             searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());
             promotionGoodsService.deletePromotionGoods(searchParams);

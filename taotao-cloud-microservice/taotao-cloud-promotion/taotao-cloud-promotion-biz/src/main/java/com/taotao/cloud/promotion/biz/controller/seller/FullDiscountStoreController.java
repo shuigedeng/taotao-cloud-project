@@ -6,7 +6,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
-import com.taotao.cloud.promotion.api.query.FullDiscountSearchParams;
+import com.taotao.cloud.promotion.api.query.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.service.FullDiscountService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -68,7 +68,7 @@ public class FullDiscountStoreController {
 	@Operation(summary = "根据条件分页查询满优惠活动")
 	@GetMapping
 	public Result<IPage<FullDiscount>> getFullDiscountByPage(
-		FullDiscountSearchParams searchParams, PageVO page) {
+		FullDiscountPageQuery searchParams, PageVO page) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		searchParams.setStoreId(storeId);
 		IPage<FullDiscount> fullDiscountByPage = fullDiscountService.pageFindAll(searchParams,

@@ -3,8 +3,9 @@ package com.taotao.cloud.promotion.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.promotion.api.query.KanjiaActivityQuery;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchParams;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.promotion.api.query.KanjiaActivityPageQuery;
+import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivitySearchQuery;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
@@ -26,7 +27,7 @@ public interface KanjiaActivityService extends IService<KanjiaActivity> {
 	 * @return {@link KanjiaActivity }
 	 * @since 2022-04-27 16:43:44
 	 */
-	KanjiaActivity getKanjiaActivity(KanjiaActivitySearchParams kanJiaActivitySearchParams);
+	KanjiaActivity getKanjiaActivity(KanjiaActivitySearchQuery kanJiaActivitySearchParams);
 
 	/**
 	 * 获取砍价活动
@@ -38,7 +39,7 @@ public interface KanjiaActivityService extends IService<KanjiaActivity> {
 	 * @return {@link KanjiaActivityVO }
 	 * @since 2022-04-27 16:43:44
 	 */
-	KanjiaActivityVO getKanjiaActivityVO(KanjiaActivitySearchParams kanJiaActivitySearchParams);
+	KanjiaActivityVO getKanjiaActivityVO(KanjiaActivitySearchQuery kanJiaActivitySearchParams);
 
 	/**
 	 * 发起人发起砍价活动
@@ -61,12 +62,12 @@ public interface KanjiaActivityService extends IService<KanjiaActivity> {
 	/**
 	 * 根据条件查询我参与的砍价活动
 	 *
-	 * @param kanJiaActivityQuery 砍价活动查询条件
+	 * @param kanJiaActivityPageQuery 砍价活动查询条件
 	 * @param page                分页对象
 	 * @return {@link IPage }<{@link KanjiaActivity }>
 	 * @since 2022-04-27 16:43:45
 	 */
-	IPage<KanjiaActivity> getForPage(KanjiaActivityQuery kanJiaActivityQuery, PageVO page);
+	IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanJiaActivityPageQuery, PageParam page);
 
 
 }
