@@ -58,34 +58,6 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 		LogUtil.started(SeataDataSourceConfiguration.class, StarterName.SEATA_STARTER);
 	}
 
-	//@Primary
-	//@Bean
-	//@ConditionalOnClass(HikariDataSource.class)
-	//@ConditionalOnProperty(name = "spring.datasource.type", havingValue = "com.zaxxer.hikari.HikariDataSource",
-	//	matchIfMissing = true)
-	//@ConfigurationProperties(prefix = "spring.datasource.hikari")
-	//public DataSource dataSource(DataSourceProperties properties) {
-	//	LogUtil.started(HikariDataSource.class, StarterName.SEATA_STARTER);
-	//
-	//	HikariDataSource dataSource = properties
-	//		.initializeDataSourceBuilder()
-	//		.type(HikariDataSource.class)
-	//		.build();
-	//
-	//	if (StringUtils.hasText(properties.getName())) {
-	//		dataSource.setPoolName(properties.getName());
-	//	}
-	//
-	//	return dataSource;
-	//}
-
-	//@Primary
-	//@Bean
-	//public DataSourceProxy dataSourceProxy(DataSource dataSource) {
-	//	LogUtil.started(DataSourceProxy.class, StarterName.SEATA_STARTER);
-	//	return new DataSourceProxy(dataSource);
-	//}
-
 	@Bean
 	public SeataXidFilter seataXidFilter() {
 		return new SeataXidFilter();
