@@ -17,19 +17,30 @@ package com.taotao.cloud.seata.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.aop.AspectUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.seata.properties.SeataProperties;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import io.seata.core.context.RootContext;
+import io.seata.core.exception.TransactionException;
+import io.seata.spring.annotation.SeataInterceptor;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
+import io.seata.tm.api.GlobalTransaction;
+import io.seata.tm.api.GlobalTransactionContext;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -37,7 +48,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -75,19 +85,20 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 
 	public static class DetectTable implements ApplicationRunner {
 
-		public static final String undoLogSql = "CREATE TABLE IF NOT EXISTS undo_log(" +
-			"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
-			"`branch_id` bigint(20) NOT NULL," +
-			"`xid` varchar(100) NOT NULL," +
-			"`context` varchar(128) NOT NULL," +
-			"`rollback_info` longblob NOT NULL," +
-			"`log_status` int(11) NOT NULL," +
-			"`log_created` datetime NOT NULL," +
-			"`log_modified` datetime NOT NULL," +
-			"`ext` varchar(100) DEFAULT NULL," +
-			"PRIMARY KEY (`id`)," +
-			"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
-			")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+		public static final String undoLogSql = """
+			CREATE TABLE IF NOT EXISTS `undo_log` (
+						                             `id` bigint(20) NOT NULL AUTO_INCREMENT,
+						                             `branch_id` bigint(20) NOT NULL,
+						                             `xid` varchar(100) NOT NULL,
+						                             `context` varchar(128) NOT NULL,
+						                             `rollback_info` longblob NOT NULL,
+						                             `log_status` int(11) NOT NULL,
+						                             `log_created` datetime NOT NULL,
+						                             `log_modified` datetime NOT NULL,
+						                             PRIMARY KEY (`id`),
+						                             UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
+						                           ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+			""";
 
 		private final DataSource dataSource;
 
@@ -154,7 +165,7 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 	//}
 	//
 	//@Aspect
-	//public static class SeataAspect extends BaseAspect {
+	//public static class SeataAspect extends AspectUtil {
 	//
 	//	@Before("execution(* com.taotao.cloud.*.biz.service.*.*(..))")
 	//	public void before(JoinPoint joinPoint) throws TransactionException {
@@ -166,11 +177,12 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 	//	}
 	//
 	//	@AfterThrowing(throwing = "e", pointcut = "execution(* com.taotao.cloud.*.biz.service.*.*(..))")
-	//	public void doRecoveryActions(Throwable e) throws Exception {
+	//	public void doRecoveryActions(Throwable e) throws Throwable {
 	//		LogUtil.info("方法执行异常:{0}", e.getMessage());
 	//		if (!StrUtil.isBlank(RootContext.getXID())) {
 	//			GlobalTransactionContext.reload(RootContext.getXID()).rollback();
 	//		}
+	//		throw e;
 	//	}
 	//
 	//}
