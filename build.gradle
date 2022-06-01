@@ -68,6 +68,7 @@ buildscript {
         mysqlVersion = '8.0.28'
         //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
         mybatisPlusStarterVersion = '3.5.2'
+        mybatisPlusDynamicDatasourceStarterVersion = '3.5.1'
         //https://search.maven.org/artifact/com.upyun/java-sdk
         upyunJavaSdkVersion = '4.2.3'
         //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
