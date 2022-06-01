@@ -119,60 +119,60 @@ elasticjob:
   reg-center:
     server-lists: 192.168.10.200:2181
     namespace: taotao-cloud-elasticjob
-  #jobs:
-  #  taotao-cloud-simple-job:
-  #    elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoSimpleJob
-  #    jobBootstrapBeanName: taoTaoSimpleBootstrapJob
-  #    cron: 0 0/30 * * * ?
-  #    timeZone: GMT+08:00
-  #    shardingTotalCount: 3
-  #    shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
-  #    description: MySimpleJob
-  #    overwrite: false
-  #    job-parameter: hello javaboy!
-  #    jobExecutorServiceHandlerType: myJobExecutorServiceHandler
-  #    jobListenerTypes:
-  #      - myJobListener
-  #    jobErrorHandlerType: EMAIL
-  #    props:
-  #      dingtalk:
-  #        webhook: you_webhook
-  #        keyword: taotao-cloud
-  #        secret: you_secret
-  #        connectTimeout: 3000
-  #        readTimeout: 5000
-  #      email:
-  #        host: smtp.qq.com
-  #        port: 465
-  #        username: 981376577@qq.com
-  #        password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
-  #        useSsl: true
-  #        subject:
-  #        from: 981376577@qq.com
-  #        to: 981376577@qq.com
-  #        cc:
-  #        bcc:
-  #        debug: false
-  #  taotao-cloud-data-flow-job:
-  #    elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoDataflowJob
-  #    jobBootstrapBeanName: taoTaoDataflowBootstrapJob
-  #    cron: 0 0/30 * * * ?
-  #    timeZone: GMT+08:00
-  #    shardingTotalCount: 3
-  #    shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
-  #  taotao-cloud-script-job:
-  #    elasticJobType: SCRIPT
-  #    jobBootstrapBeanName: taoTaoScriptBootstrapJob
-  #    cron: 0 0/30 * * * ?
-  #    shardingTotalCount: 3
-  #    props:
-  #      script.command.line: "echo SCRIPT Job: "
-  #  taotao-cloud-manual-script-job:
-  #    elasticJobType: SCRIPT
-  #    jobBootstrapBeanName: taoTaoManualScriptBootstrapJob
-  #    shardingTotalCount: 9
-  #    props:
-  #      script.command.line: "echo Manual SCRIPT Job: "
+  jobs:
+    taotao-cloud-simple-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoSimpleJob
+      jobBootstrapBeanName: taoTaoSimpleBootstrapJob
+      cron: 0 0/30 * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+      description: MySimpleJob
+      overwrite: false
+      job-parameter: hello javaboy!
+      jobExecutorServiceHandlerType: myJobExecutorServiceHandler
+      jobListenerTypes:
+        - myJobListener
+      jobErrorHandlerType: EMAIL
+      props:
+        dingtalk:
+          webhook: you_webhook
+          keyword: taotao-cloud
+          secret: you_secret
+          connectTimeout: 3000
+          readTimeout: 5000
+        email:
+          host: smtp.qq.com
+          port: 465
+          username: 981376577@qq.com
+          password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+          useSsl: true
+          subject:
+          from: 981376577@qq.com
+          to: 981376577@qq.com
+          cc:
+          bcc:
+          debug: false
+    taotao-cloud-data-flow-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoDataflowJob
+      jobBootstrapBeanName: taoTaoDataflowBootstrapJob
+      cron: 0 0/30 * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+    taotao-cloud-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoScriptBootstrapJob
+      cron: 0 0/30 * * * ?
+      shardingTotalCount: 3
+      props:
+        script.command.line: "echo SCRIPT Job: "
+    taotao-cloud-manual-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoManualScriptBootstrapJob
+      shardingTotalCount: 9
+      props:
+        script.command.line: "echo Manual SCRIPT Job: "
 
 forest:
   bean-id: config0 # 在spring上下文中bean的id（默认为 forestConfiguration）
