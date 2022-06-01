@@ -67,7 +67,7 @@ buildscript {
         //https://search.maven.org/artifact/mysql/mysql-connector-java
         mysqlVersion = '8.0.28'
         //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
-        mybatisPlusStarterVersion = '3.5.1'
+        mybatisPlusStarterVersion = '3.5.2'
         //https://search.maven.org/artifact/com.upyun/java-sdk
         upyunJavaSdkVersion = '4.2.3'
         //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
@@ -145,7 +145,7 @@ buildscript {
         //https://search.maven.org/artifact/com.squareup.okhttp3/logging-interceptor
         okhttpLoggingInterceptorVersion = "4.9.3"
         //https://search.maven.org/artifact/com.baomidou/mybatis-plus-core
-        mybatisPlusVersion = "3.5.1"
+        mybatisPlusVersion = "3.5.2"
         //https://search.maven.org/artifact/com.github.xkzhangsan/xk-time
         xkTimeVersion = "3.2.3"
         //https://search.maven.org/artifact/cn.afterturn/easypoi-base
