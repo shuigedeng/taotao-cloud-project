@@ -42,7 +42,6 @@ import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
-import org.springframework.data.elasticsearch.client.ClientConfigurationBuilder;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
@@ -66,18 +65,18 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 		LogUtil.started(ElasticsearchAutoConfiguration.class, StarterName.ELASTICSEARCH_STARTER);
 	}
 
-	// @Configuration
-	// public static class ElasticsearchConfig extends ElasticsearchConfiguration {
-	// 	@Autowired
-	// 	private org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties properties;
-	//
-	// 	@Override
-	// 	public ClientConfiguration clientConfiguration() {
-	// 		return ClientConfiguration.builder()
-	// 			.connectedTo(properties.getUris().toString())
-	// 			.build();
-	// 	}
-	// }
+	@Configuration
+	public static class ElasticsearchConfig extends ElasticsearchConfiguration {
+		@Autowired
+		private org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties properties;
+
+		@Override
+		public ClientConfiguration clientConfiguration() {
+			return ClientConfiguration.builder()
+				.connectedTo(properties.getUris().toString())
+				.build();
+		}
+	}
 
 	@Bean
 	public RestClientBuilderCustomizer restClientBuilderCustomizer(
@@ -132,7 +131,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	 * @since 2021/2/26 08:53
 	 */
 	private void setRequestConfig(RestClientBuilder builder,
-		RestClientPoolProperties poolProperties) {
+								  RestClientPoolProperties poolProperties) {
 		builder.setRequestConfigCallback(requestConfigBuilder -> {
 			requestConfigBuilder
 				.setConnectTimeout(poolProperties.getConnectTimeOut())
@@ -151,8 +150,8 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	 * @since 2021/2/26 08:53
 	 */
 	private void setHttpClientConfig(RestClientBuilder builder,
-		RestClientPoolProperties poolProperties,
-		ElasticsearchRestClientProperties restProperties) {
+									 RestClientPoolProperties poolProperties,
+									 ElasticsearchRestClientProperties restProperties) {
 		builder.setHttpClientConfigCallback(httpClientBuilder -> {
 			httpClientBuilder
 				.setMaxConnTotal(poolProperties.getMaxConnectNum())
