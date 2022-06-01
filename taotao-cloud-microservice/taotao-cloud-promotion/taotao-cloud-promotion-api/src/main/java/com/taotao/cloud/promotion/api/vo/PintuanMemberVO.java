@@ -23,7 +23,7 @@ public class PintuanMemberVO implements Serializable {
 	private static final long serialVersionUID = 7814832369110695758L;
 
     @Schema(description =  "会员编号")
-    private String memberId;
+    private Long memberId;
 
     @Schema(description =  "会员用户名")
     private String memberName;
@@ -38,13 +38,13 @@ public class PintuanMemberVO implements Serializable {
     private String orderSn;
 
     @Schema(description =  "已参团人数")
-    private long groupedNum;
+    private Long groupedNum;
 
     @Schema(description =  "待参团人数")
-    private long toBeGroupedNum;
+    private Long toBeGroupedNum;
 
     @Schema(description =  "成团人数")
-    private long groupNum;
+    private Long groupNum;
 
     //public PintuanMemberVO(Member member) {
     //    this.memberId = member.getId();

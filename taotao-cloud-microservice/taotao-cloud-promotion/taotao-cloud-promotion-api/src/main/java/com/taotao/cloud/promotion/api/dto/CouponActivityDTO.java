@@ -20,5 +20,5 @@ public class CouponActivityDTO extends CouponActivityBaseDTO {
 	private List<CouponActivityItemDTO> couponActivityItems;
 
 	@Schema(description = "会员列表")
-	private List<MemberDTO> memberDTOS;
+	private List<MemberDTO> members;
 }

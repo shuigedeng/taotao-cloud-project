@@ -15,8 +15,8 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
-import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionCacheKeys;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
@@ -108,7 +108,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
     }
 
     @Override
-    public IPage<SeckillApply> getSeckillApply(SeckillSearchParams queryParam, PageVO pageVo) {
+    public IPage<SeckillApply> getSeckillApply(SeckillPageQuery queryParam, PageVO pageVo) {
         IPage<SeckillApply> seckillApplyPage = this.page(PageUtil.initPage(pageVo), queryParam.queryWrapper());
         if (seckillApplyPage != null && !seckillApplyPage.getRecords().isEmpty()) {
 
@@ -134,7 +134,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
      * @return 限时请购申请列表
      */
     @Override
-    public List<SeckillApply> getSeckillApply(SeckillSearchParams queryParam) {
+    public List<SeckillApply> getSeckillApply(SeckillPageQuery queryParam) {
         return this.list(queryParam.queryWrapper());
     }
 
@@ -177,7 +177,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
         this.seckillService.updateEsGoodsSeckill(seckill, originList);
         //保存促销活动商品信息
         if (!promotionGoodsList.isEmpty()) {
-            PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+            PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
             searchParams.setStoreId(storeId);
             searchParams.setSkuIds(promotionGoodsList.stream().map(PromotionGoods::getSkuId).collect(Collectors.toList()));
             promotionGoodsService.deletePromotionGoods(searchParams);

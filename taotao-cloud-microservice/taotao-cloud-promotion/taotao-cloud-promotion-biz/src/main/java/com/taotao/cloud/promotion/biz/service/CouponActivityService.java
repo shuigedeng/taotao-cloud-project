@@ -1,6 +1,7 @@
 package com.taotao.cloud.promotion.biz.service;
 
 
+import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.promotion.api.vo.CouponActivityVO;
 import com.taotao.cloud.promotion.biz.entity.CouponActivity;
 
@@ -32,7 +33,7 @@ public interface CouponActivityService extends AbstractPromotionsService<CouponA
 	 * @param couponActivityId 优惠券活动ID
 	 * @since 2022-04-27 16:43:22
 	 */
-	void specify(String couponActivityId);
+	void specify(Long couponActivityId);
 
 	/**
 	 * 注册赠券

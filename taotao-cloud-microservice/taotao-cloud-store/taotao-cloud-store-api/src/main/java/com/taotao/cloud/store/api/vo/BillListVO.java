@@ -1,20 +1,19 @@
 package com.taotao.cloud.store.api.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
  * 结算单VO
  *
- * 
- * @since 2020年3月07日 上午11:04:25
  */
 @Data
 @Builder

@@ -17,7 +17,7 @@ import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
 import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsService;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
 import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
@@ -29,8 +29,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.PAID;
 
 /**
  * 库存扣减，他表示了订单状态是否出库成功
@@ -290,7 +288,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 					pointsGoodsVO.setActiveStock(stock);
 					pointsGoodsService.updateById(pointsGoodsVO);
 				} else {
-					PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+					PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 					searchParams.setPromotionType(promotionTypeEnum.name());
 					searchParams.setPromotionId(orderItem.getPromotionId());
 					searchParams.setSkuId(orderItem.getSkuId());

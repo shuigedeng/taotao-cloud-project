@@ -8,7 +8,6 @@ import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -17,7 +16,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +29,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CouponSearchParams extends BasePromotionsSearchParams implements Serializable {
+public class CouponPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 4566880169478260409L;

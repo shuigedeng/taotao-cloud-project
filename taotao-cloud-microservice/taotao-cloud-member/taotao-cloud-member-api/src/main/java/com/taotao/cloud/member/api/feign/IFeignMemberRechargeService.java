@@ -1,16 +1,14 @@
 package com.taotao.cloud.member.api.feign;
 
+import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
 import com.taotao.cloud.member.api.vo.MemberRechargeVO;
-import com.taotao.cloud.member.api.vo.MemberVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 远程调用会员用户模块
@@ -23,10 +21,22 @@ import java.math.BigDecimal;
 public interface IFeignMemberRechargeService {
 
 
-	void paySuccess(String sn, String receivableNo, String paymentMethod);
+	Result<Boolean> paySuccess(String sn, String receivableNo, String paymentMethod);
 
-	MemberRechargeVO getRecharge(String sn);
+	Result<MemberRechargeVO> getRecharge(String sn);
 
-	MemberRechargeVO recharge(BigDecimal price);
+	Result<MemberRechargeVO> recharge(BigDecimal price);
+
+	/**
+	 * 	LambdaQueryWrapper<Recharge> queryWrapper = new LambdaQueryWrapper<>();
+	 * 			queryWrapper.eq(Recharge::getPayStatus, PayStatusEnum.UNPAID.name());
+	 * 			//充值订单创建时间 <= 订单自动取消时间
+	 * 			queryWrapper.le(Recharge::getCreateTime, cancelTime);
+	 * @return
+	 */
+	Result<List<MemberRechargeVO>> list(DateTime dateTime);
+
+
+	Result<Boolean> rechargeOrderCancel(String sn);
 }
 

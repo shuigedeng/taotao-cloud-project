@@ -14,12 +14,19 @@ import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.order.api.dto.cart.MemberCouponDTO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVOBuilder;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVOBuilder;
+import com.taotao.cloud.member.api.feign.IFeignMemberAddressService;
+import com.taotao.cloud.member.api.vo.MemberAddressVO;
+import MemberCouponDTO;
+import com.taotao.cloud.order.api.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVOBuilder;
 import com.taotao.cloud.order.api.vo.cart.CartVO;
-import com.taotao.cloud.order.api.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.cart.ICartService;
@@ -27,9 +34,11 @@ import com.taotao.cloud.order.biz.service.cart.render.TradeBuilder;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
 import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
+import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsService;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -79,11 +88,11 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 促销商品
 	 */
-	private final PointsGoodsService pointsGoodsService;
+	private final IFeignPointsGoodsService pointsGoodsService;
 	/**
 	 * 会员地址
 	 */
-	private final MemberAddressService memberAddressService;
+	private final IFeignMemberAddressService memberAddressService;
 	/**
 	 * ES商品
 	 */
@@ -97,10 +106,13 @@ public class CartServiceImpl implements ICartService {
 	 */
 	private final IFeignPintuanService pintuanService;
 	/**
-	 * 砍价
+	 * 砍价活动
 	 */
 	private final IFeignKanjiaActivityService kanjiaActivityService;
-	private final KanjiaActivityGoodsService kanjiaActivityGoodsService;
+	/**
+	 * 砍价商品
+	 */
+	private final IFeignKanjiaActivityGoodsService kanjiaActivityGoodsService;
 	/**
 	 * 交易
 	 */
@@ -116,7 +128,7 @@ public class CartServiceImpl implements ICartService {
 		GoodsSku dataSku = checkGoods(skuId, cartType);
 		try {
 			//购物车方式购买需要保存之前的选择，其他方式购买，则直接抹除掉之前的记录
-			com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO;
+			TradeDTO tradeDTO;
 			if (cartTypeEnum.equals(CartTypeEnum.CART)) {
 				//如果存在，则变更数量不做新增，否则新增一个商品进入集合
 				tradeDTO = this.readDTO(cartTypeEnum);
@@ -156,7 +168,7 @@ public class CartServiceImpl implements ICartService {
 				//新加入的商品都是选中的
 				cartSkuVO.setChecked(true);
 			} else {
-				tradeDTO = new com.taotao.cloud.order.api.dto.cart.TradeDTO(cartTypeEnum);
+				tradeDTO = new TradeDTO(cartTypeEnum);
 				SecurityUser currentUser = SecurityUtil.getCurrentUser();
 				tradeDTO.setMemberId(currentUser.getUserId());
 				tradeDTO.setMemberName(currentUser.getUsername());
@@ -204,10 +216,10 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public com.taotao.cloud.order.api.dto.cart.TradeDTO readDTO(CartTypeEnum checkedWay) {
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = (com.taotao.cloud.order.api.dto.cart.TradeDTO) redisRepository.get(this.getOriginKey(checkedWay));
+	public TradeDTO readDTO(CartTypeEnum checkedWay) {
+		TradeDTO tradeDTO = (TradeDTO) redisRepository.get(this.getOriginKey(checkedWay));
 		if (tradeDTO == null) {
-			tradeDTO = new com.taotao.cloud.order.api.dto.cart.TradeDTO(checkedWay);
+			tradeDTO = new TradeDTO(checkedWay);
 			SecurityUser currentUser = SecurityUtil.getCurrentUser();
 			tradeDTO.setMemberId(currentUser.getUserId());
 			tradeDTO.setMemberName(currentUser.getUsername());
@@ -220,7 +232,7 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Boolean checked(String skuId, boolean checked) {
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
+		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
 			if (cartSkuVO.getGoodsSku().getId().equals(skuId)) {
@@ -233,7 +245,7 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Boolean checkedStore(String storeId, boolean checked) {
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
+		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
 			if (cartSkuVO.getStoreId().equals(storeId)) {
@@ -246,7 +258,7 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Boolean checkedAll(boolean checked) {
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
+		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
 			cartSkuVO.setChecked(checked);
@@ -257,7 +269,7 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Boolean delete(String[] skuIds) {
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
+		TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		List<CartSkuVO> deleteVos = new ArrayList<>();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -284,7 +296,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param tradeDTO 贸易dto
 	 * @since 2022-05-16 16:53:53
 	 */
-	public void cleanChecked(com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO) {
+	public void cleanChecked(TradeDTO tradeDTO) {
 		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
 		List<CartSkuVO> deleteVos = new ArrayList<>();
 		for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -304,7 +316,7 @@ public class CartServiceImpl implements ICartService {
 	@Override
 	public Boolean cleanChecked(CartTypeEnum way) {
 		if (way.equals(CartTypeEnum.CART)) {
-			com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
+			TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
 			this.cleanChecked(tradeDTO);
 		} else {
 			redisRepository.del(this.getOriginKey(way));
@@ -313,19 +325,19 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public Boolean resetTradeDTO(com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO) {
+	public Boolean resetTradeDTO(TradeDTO tradeDTO) {
 		redisRepository.set(this.getOriginKey(tradeDTO.getCartTypeEnum()), tradeDTO);
 		return true;
 	}
 
 	@Override
-	public com.taotao.cloud.order.api.dto.cart.TradeDTO getCheckedTradeDTO(CartTypeEnum way) {
+	public TradeDTO getCheckedTradeDTO(CartTypeEnum way) {
 		return tradeBuilder.buildChecked(way);
 	}
 
 	@Override
 	public Long getCanUseCoupon(CartTypeEnum checkedWay) {
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(checkedWay);
+		TradeDTO tradeDTO = this.readDTO(checkedWay);
 		long count = 0L;
 		BigDecimal totalPrice = tradeDTO.getSkuList().stream()
 			.mapToBigDecimal(i -> i.getPurchasePrice() * i.getNum()).sum();
@@ -372,7 +384,7 @@ public class CartServiceImpl implements ICartService {
 	}
 
 	@Override
-	public com.taotao.cloud.order.api.dto.cart.TradeDTO getAllTradeDTO() {
+	public TradeDTO getAllTradeDTO() {
 		return tradeBuilder.buildCart(CartTypeEnum.CART);
 	}
 
@@ -382,31 +394,35 @@ public class CartServiceImpl implements ICartService {
 	 * @param skuId    商品skuId
 	 * @param cartType 购物车类型
 	 */
-	private GoodsSku checkGoods(String skuId, String cartType) {
-		GoodsSku dataSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+	private GoodsSkuVO checkGoods(Long skuId, String cartType) {
+		GoodsSkuVO dataSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
 		if (dataSku == null) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
-		if (!GoodsAuthEnum.PASS.name().equals(dataSku.getIsAuth()) || !GoodsStatusEnum.UPPER.name()
-			.equals(dataSku.getMarketEnable())) {
+		GoodsSkuVOBuilder goodsSkuVOBuilder = GoodsSkuVOBuilder.builder(dataSku);
+		GoodsSkuBaseVOBuilder goodsSkuBaseVOBuilder = GoodsSkuBaseVOBuilder.builder(dataSku.goodsSkuBase());
+		
+		
+		if (!GoodsAuthEnum.PASS.name().equals(dataSku.goodsSkuBase().isAuth()) || !GoodsStatusEnum.UPPER.name()
+			.equals(dataSku.goodsSkuBase().marketEnable())) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
 		BigDecimal validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.SECKILL.name()));
 		if (validSeckillGoodsPrice != null) {
-			dataSku.setIsPromotion(true);
-			dataSku.setPromotionPrice(validSeckillGoodsPrice);
+			goodsSkuBaseVOBuilder.promotionFlag(true);
+			goodsSkuBaseVOBuilder.promotionPrice(validSeckillGoodsPrice);
 		}
 
 		BigDecimal validPintuanGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
 			Collections.singletonList(PromotionTypeEnum.PINTUAN.name()));
 		if (validPintuanGoodsPrice != null && CartTypeEnum.PINTUAN.name().equals(cartType)) {
-			dataSku.setIsPromotion(true);
-			dataSku.setPromotionPrice(validPintuanGoodsPrice);
+			goodsSkuBaseVOBuilder.promotionFlag(true);
+			goodsSkuBaseVOBuilder.promotionPrice(validPintuanGoodsPrice);
 		}
-		return dataSku;
+		return goodsSkuVOBuilder.goodsSkuBase(goodsSkuBaseVOBuilder.build()).build();
 	}
 
 	/**
@@ -416,23 +432,25 @@ public class CartServiceImpl implements ICartService {
 	 * @param skuId     商品id
 	 * @param num       购买数量
 	 */
-	private void checkSetGoodsQuantity(CartSkuVO cartSkuVO, String skuId, Integer num) {
+	private CartSkuVO checkSetGoodsQuantity(CartSkuVO cartSkuVO, String skuId, Integer num) {
 		Integer enableStock = goodsSkuService.getStock(skuId);
 
 		//如果sku的可用库存小于等于0或者小于用户购买的数量，则不允许购买
 		if (enableStock <= 0 || enableStock < num) {
 			throw new BusinessException(ResultEnum.GOODS_SKU_QUANTITY_NOT_ENOUGH);
 		}
-
+		
+		CartSkuVOBuilder cartSkuVOBuilder = CartSkuVOBuilder.builder(cartSkuVO);
 		if (enableStock <= num) {
-			cartSkuVO.setNum(enableStock);
+			cartSkuVOBuilder.num(enableStock);
 		} else {
-			cartSkuVO.setNum(num);
+			cartSkuVOBuilder.num(num);
 		}
 
-		if (cartSkuVO.getNum() > 99) {
-			cartSkuVO.setNum(99);
+		if (cartSkuVO.num() > 99) {
+			cartSkuVOBuilder.num(99);
 		}
+		return cartSkuVOBuilder.build();
 	}
 
 	@Override
@@ -444,8 +462,8 @@ public class CartServiceImpl implements ICartService {
 			cartTypeEnum = CartTypeEnum.valueOf(way);
 		}
 
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
-		MemberAddress memberAddress = memberAddressService.getById(shippingAddressId);
+		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
+		MemberAddressVO memberAddress = memberAddressService.getById(shippingAddressId);
 		tradeDTO.setMemberAddress(memberAddress);
 		this.resetTradeDTO(tradeDTO);
 		return true;
@@ -457,7 +475,7 @@ public class CartServiceImpl implements ICartService {
 		if (CharSequenceUtil.isNotEmpty(way)) {
 			cartTypeEnum = CartTypeEnum.valueOf(way);
 		}
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
+		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
 		tradeDTO.setNeedReceipt(true);
 		tradeDTO.setReceiptVO(receiptVO);
 		this.resetTradeDTO(tradeDTO);
@@ -470,9 +488,10 @@ public class CartServiceImpl implements ICartService {
 		if (CharSequenceUtil.isNotEmpty(way)) {
 			cartTypeEnum = CartTypeEnum.valueOf(way);
 		}
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
+		
+		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
 		for (CartVO cartVO : tradeDTO.getCartList()) {
-			if (cartVO.getStoreId().equals(storeId)) {
+			if (cartVO.cartBase().storeId().equals(storeId)) {
 				cartVO.setDeliveryMethod(DeliveryMethodEnum.valueOf(deliveryMethod).name());
 			}
 		}
@@ -483,7 +502,7 @@ public class CartServiceImpl implements ICartService {
 	@Override
 	public Long getCartNum(Boolean checked) {
 		//构建购物车
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.getAllTradeDTO();
+		TradeDTO tradeDTO = this.getAllTradeDTO();
 		//过滤sku列表
 		List<CartSkuVO> collect = tradeDTO.getSkuList().stream()
 			.filter(i -> Boolean.FALSE.equals(i.getInvalid()))
@@ -504,7 +523,7 @@ public class CartServiceImpl implements ICartService {
 		SecurityUser currentUser = SecurityUtil.getCurrentUser();
 		//获取购物车，然后重新写入优惠券
 		CartTypeEnum cartTypeEnum = getCartType(way);
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
+		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
 
 		MemberCoupon memberCoupon =
 			memberCouponService.getOne(
@@ -534,7 +553,7 @@ public class CartServiceImpl implements ICartService {
 	public Trade createTrade(TradeDTO tradeParams) {
 		//获取购物车
 		CartTypeEnum cartTypeEnum = getCartType(tradeParams.getWay());
-		com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
+		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
 		//设置基础属性
 		tradeDTO.setClientType(tradeParams.getClient());
 		tradeDTO.setStoreRemark(tradeParams.getRemark());
@@ -579,8 +598,8 @@ public class CartServiceImpl implements ICartService {
 	 * @param memberCoupon 会员优惠券
 	 * @param cartTypeEnum 购物车
 	 */
-	private void useCoupon(com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO, MemberCoupon memberCoupon,
-                           CartTypeEnum cartTypeEnum) {
+	private void useCoupon(TradeDTO tradeDTO, MemberCoupon memberCoupon,
+						   CartTypeEnum cartTypeEnum) {
 
 		//截取符合优惠券的商品
 		List<CartSkuVO> cartSkuVOS = checkCoupon(memberCoupon, tradeDTO);
@@ -637,7 +656,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param tradeDTO     购物车信息
 	 * @return 是否可以使用优惠券
 	 */
-	private List<CartSkuVO> checkCoupon(MemberCoupon memberCoupon, com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO) {
+	private List<CartSkuVO> checkCoupon(MemberCoupon memberCoupon, TradeDTO tradeDTO) {
 		List<CartSkuVO> cartSkuVOS;
 		//如果是店铺优惠券，判定的内容
 		if (!memberCoupon.getIsPlatform()) {

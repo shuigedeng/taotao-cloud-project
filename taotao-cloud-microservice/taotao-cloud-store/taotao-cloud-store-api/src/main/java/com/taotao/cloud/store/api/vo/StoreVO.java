@@ -20,6 +20,8 @@ import lombok.NoArgsConstructor;
 public class StoreVO {
 	private Long id;
 
+	private String nickname;
+
 	private Long memberId;
 
 	private String memberName;

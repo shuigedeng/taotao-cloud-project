@@ -1,5 +1,6 @@
 package com.taotao.cloud.store.api.vo;
 
+import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,6 @@ import lombok.NoArgsConstructor;
  * 店铺基本信息DTO
  *
  * 
- * @since 2020/12/7 14:43
  */
 @Data
 @Builder

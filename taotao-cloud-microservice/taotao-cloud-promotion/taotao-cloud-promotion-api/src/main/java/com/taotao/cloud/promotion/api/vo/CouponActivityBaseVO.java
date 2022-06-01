@@ -26,6 +26,7 @@ public class CouponActivityBaseVO implements Serializable {
 	private static final long serialVersionUID = 7814832369110695758L;
 
 	private Long id;
+
 	/**
 	 * @see CouponActivityTypeEnum
 	 */

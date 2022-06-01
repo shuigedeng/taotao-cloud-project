@@ -1,37 +1,48 @@
 package com.taotao.cloud.store.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.member.api.vo.MemberVO;
+import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
+import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
- * 店铺
+ * 店铺表
  */
-@Data
-@Builder
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = Store.TABLE_NAME)
 @TableName(Store.TABLE_NAME)
+@EntityListeners({AbstractListener.class})
 @org.hibernate.annotations.Table(appliesTo = Store.TABLE_NAME, comment = "店铺表")
 public class Store extends BaseSuperEntity<Store, Long> {
 
 	public static final String TABLE_NAME = "tt_store";
 
 	@Column(name = "member_id", columnDefinition = "varchar(64) not null comment '会员Id'")
-	private String memberId;
+	private Long memberId;
 
 	@Column(name = "member_name", columnDefinition = "varchar(64) not null comment '会员名称'")
 	private String memberName;
@@ -93,29 +104,48 @@ public class Store extends BaseSuperEntity<Store, Long> {
 	@Column(name = "merchant_euid", columnDefinition = "varchar(64) not null comment 'udesk IM标识'")
 	private String merchantEuid;
 
-	//public Store(Member member) {
-	//    this.memberId = member.getId();
-	//    this.memberName = member.getUsername();
-	//    storeDisable = StoreStatusEnum.APPLY.value();
-	//    selfOperated = false;
-	//    deliveryScore = 5.0;
-	//    serviceScore = 5.0;
-	//    descriptionScore = 5.0;
-	//    goodsNum = 0;
-	//    collectionNum = 0;
-	//}
-	//
-	//public Store(Member member, AdminStoreApplyDTO adminStoreApplyDTO) {
-	//    BeanUtil.copyProperties(adminStoreApplyDTO, this);
-	//
-	//    this.memberId = member.getId();
-	//    this.memberName = member.getUsername();
-	//    storeDisable = StoreStatusEnum.APPLYING.value();
-	//    selfOperated = false;
-	//    deliveryScore = 5.0;
-	//    serviceScore = 5.0;
-	//    descriptionScore = 5.0;
-	//    goodsNum = 0;
-	//    collectionNum = 0;
+	public Store(MemberVO member) {
+		this.memberId = member.getId();
+		this.memberName = member.getUsername();
+		storeDisable = StoreStatusEnum.APPLY.value();
+		selfOperated = false;
+		deliveryScore = BigDecimal.valueOf(5.0);
+		serviceScore = BigDecimal.valueOf(5.0);
+		descriptionScore = BigDecimal.valueOf(5.0);
+		goodsNum = 0;
+		collectionNum = 0;
+	}
+
+
+	public Store(MemberVO member, AdminStoreApplyDTO adminStoreApplyDTO) {
+		BeanUtil.copyProperties(adminStoreApplyDTO, this);
+
+		this.memberId = member.getId();
+		this.memberName = member.getUsername();
+		storeDisable = StoreStatusEnum.APPLYING.value();
+		selfOperated = false;
+		deliveryScore = BigDecimal.valueOf(5.0);
+		serviceScore = BigDecimal.valueOf(5.0);
+		descriptionScore = BigDecimal.valueOf(5.0);
+		goodsNum = 0;
+		collectionNum = 0;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
+		Store dict = (Store) o;
+		return getId() != null && Objects.equals(getId(), dict.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }
 

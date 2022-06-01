@@ -34,5 +34,4 @@ public interface FullDiscountService extends AbstractPromotionsService<FullDisco
 	FullDiscountVO getFullDiscount(String id);
 
 
-
 }

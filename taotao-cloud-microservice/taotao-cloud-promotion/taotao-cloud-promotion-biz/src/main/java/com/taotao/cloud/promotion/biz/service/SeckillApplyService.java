@@ -2,7 +2,8 @@ package com.taotao.cloud.promotion.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.promotion.api.query.SeckillSearchParams;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.promotion.api.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.vo.SeckillTimelineVO;
@@ -45,7 +46,7 @@ public interface SeckillApplyService extends IService<SeckillApply> {
 	 * @return {@link IPage }<{@link SeckillApply }>
 	 * @since 2022-04-27 16:44:22
 	 */
-	IPage<SeckillApply> getSeckillApply(SeckillSearchParams queryParam, PageVO pageVo);
+	IPage<SeckillApply> getSeckillApply(SeckillPageQuery queryParam, PageParam pageVo);
 
 	/**
 	 * 分页查询限时请购申请列表
@@ -54,7 +55,7 @@ public interface SeckillApplyService extends IService<SeckillApply> {
 	 * @return {@link List }<{@link SeckillApply }>
 	 * @since 2022-04-27 16:44:22
 	 */
-	List<SeckillApply> getSeckillApply(SeckillSearchParams queryParam);
+	List<SeckillApply> getSeckillApply(SeckillPageQuery queryParam);
 
 	/**
 	 * 添加秒杀活动申请

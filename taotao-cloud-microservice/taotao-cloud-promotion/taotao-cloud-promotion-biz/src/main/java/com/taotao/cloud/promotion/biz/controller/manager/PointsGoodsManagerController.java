@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.query.PointsGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.PointsGoodsPageQuery;
 import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.service.PointsGoodsService;
@@ -87,8 +87,8 @@ public class PointsGoodsManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@GetMapping
 	@Operation(summary = "分页获取积分商品")
-	public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsSearchParams searchParams,
-		PageVO page) {
+	public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams,
+														 PageVO page) {
 		IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, page);
 		return Result.success(pointsGoodsByPage);
 	}

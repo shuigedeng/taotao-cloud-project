@@ -1,14 +1,15 @@
-package com.taotao.cloud.sys.biz.timetask.xxljob.bill;
+package com.taotao.cloud.store.biz.timetask;
 
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.taotao.cloud.store.api.dto.StoreSettlementDay;
 import com.taotao.cloud.store.biz.service.BillService;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 店铺结算执行
@@ -40,13 +41,13 @@ public class BillExecute implements EveryDayExecute {
 		List<StoreSettlementDay> storeList = storeDetailService.getSettlementStore(day);
 
 		//获取当前时间
-		DateTime endTime = DateUtil.date();
+		LocalDateTime endTime = LocalDateTime.now();
 		//批量商家结算
 		for (StoreSettlementDay storeSettlementDay : storeList) {
 
 			//生成结算单
 			billService.createBill(storeSettlementDay.getStoreId(),
-				storeSettlementDay.getSettlementDay(), endTime);
+				storeSettlementDay.getSettlementDay(), LocalDateTime.now());
 
 			//修改店铺结算时间
 			storeDetailService.updateSettlementDay(storeSettlementDay.getStoreId(), endTime);

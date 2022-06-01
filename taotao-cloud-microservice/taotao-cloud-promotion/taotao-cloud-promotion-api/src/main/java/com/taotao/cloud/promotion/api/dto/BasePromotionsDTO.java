@@ -29,7 +29,7 @@ public class BasePromotionsDTO implements Serializable {
 
 	private String storeName;
 
-	private String storeId;
+	private Long storeId;
 
 	private String promotionName;
 
@@ -42,6 +42,6 @@ public class BasePromotionsDTO implements Serializable {
 	 */
 	private String scopeType ;
 
-	private String scopeId;
+	private Long scopeId;
 	
 }

@@ -10,6 +10,7 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import lombok.NoArgsConstructor;
@@ -29,12 +30,12 @@ public class KanjiaActivityGoodsOperationDTO implements Serializable {
     @Min(message = "活动开始时间不能为空", value = 0)
     @Schema(description =  "活动开始时间", required = true)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Min(message = "活动结束时间不能为空", value = 0)
     @Schema(description =  "活动结束时间", required = true)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endTime;
+    private LocalDateTime endTime;
 
     @Schema(description =  "砍价活动商品列表")
     List<KanjiaActivityGoodsDTO> promotionGoodsList;

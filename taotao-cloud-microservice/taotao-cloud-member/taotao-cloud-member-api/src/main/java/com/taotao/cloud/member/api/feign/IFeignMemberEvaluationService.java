@@ -1,10 +1,14 @@
 package com.taotao.cloud.member.api.feign;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.api.vo.StoreRatingVO;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
@@ -52,5 +56,21 @@ public interface IFeignMemberEvaluationService {
 	Result<List<Map<String, Object>>> memberEvaluationNum();
 
 	Result<Boolean> addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b);
+
+	/**
+	 * LambdaQueryWrapper<MemberEvaluation> lambdaQueryWrapper = Wrappers.lambdaQuery();
+	 * 			lambdaQueryWrapper.eq(MemberEvaluation::getStoreId, store.getId());
+	 * 			lambdaQueryWrapper.eq(MemberEvaluation::getStatus, SwitchEnum.OPEN.name());
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	StoreRatingVO getStoreRatingVO(Long id, String name);
+
+	MemberEvaluationVO queryById(Long id);
+
+	void reply(Long id, String reply, String replyImage);
+
+	IPage<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery);
 }
 

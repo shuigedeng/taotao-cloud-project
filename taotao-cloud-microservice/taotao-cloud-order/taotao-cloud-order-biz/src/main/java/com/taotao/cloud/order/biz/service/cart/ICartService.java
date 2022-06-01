@@ -1,8 +1,8 @@
 package com.taotao.cloud.order.biz.service.cart;
 
 
-import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.dto.trade.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.entity.order.Trade;
 
@@ -19,19 +19,19 @@ public interface ICartService {
 	 * 获取整笔交易
 	 *
 	 * @param checkedWay 购物车类型
-	 * @return {@link com.taotao.cloud.order.api.dto.cart.TradeDTO }
+	 * @return {@link TradeDTO }
 	 * @since 2022-04-28 08:49:41
 	 */
-	com.taotao.cloud.order.api.dto.cart.TradeDTO readDTO(CartTypeEnum checkedWay);
+	TradeDTO readDTO(CartTypeEnum checkedWay);
 
 	/**
 	 * 获取整个交易中勾选的购物车和商品
 	 *
 	 * @param way 获取方式
-	 * @return {@link com.taotao.cloud.order.api.dto.cart.TradeDTO }
+	 * @return {@link TradeDTO }
 	 * @since 2022-04-28 08:49:41
 	 */
-	com.taotao.cloud.order.api.dto.cart.TradeDTO getCheckedTradeDTO(CartTypeEnum way);
+	TradeDTO getCheckedTradeDTO(CartTypeEnum way);
 
 	/**
 	 * 获取可使用的优惠券数量
@@ -45,10 +45,10 @@ public interface ICartService {
 	/**
 	 * 获取整个交易中勾选的购物车和商品
 	 *
-	 * @return {@link com.taotao.cloud.order.api.dto.cart.TradeDTO }
+	 * @return {@link TradeDTO }
 	 * @since 2022-04-28 08:49:41
 	 */
-	com.taotao.cloud.order.api.dto.cart.TradeDTO getAllTradeDTO();
+	TradeDTO getAllTradeDTO();
 
 	/**
 	 * 购物车加入一个商品
@@ -128,7 +128,7 @@ public interface ICartService {
 	 * @return {@link Boolean }
 	 * @since 2022-05-16 16:42:33
 	 */
-	Boolean resetTradeDTO(com.taotao.cloud.order.api.dto.cart.TradeDTO tradeDTO);
+	Boolean resetTradeDTO(TradeDTO tradeDTO);
 
 	/**
 	 * 选择收货地址

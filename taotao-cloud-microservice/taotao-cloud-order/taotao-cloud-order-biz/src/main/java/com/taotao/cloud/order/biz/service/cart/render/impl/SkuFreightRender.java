@@ -7,7 +7,7 @@ import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
 import com.taotao.cloud.store.api.dto.FreightTemplateChildDTO;
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
-import com.taotao.cloud.store.api.vo.FreightTemplateVO;
+import com.taotao.cloud.store.api.vo.FreightTemplateInfoVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +52,7 @@ public class SkuFreightRender implements ICartRenderStep {
 				continue;
 			}
 			//寻找对应对商品运费计算模版
-			FreightTemplateVO freightTemplate = freightTemplateService.getFreightTemplate(
+			FreightTemplateInfoVO freightTemplate = freightTemplateService.getFreightTemplate(
 				freightTemplateId);
 			if (freightTemplate != null
 				&& freightTemplate.getFreightTemplateChildList() != null

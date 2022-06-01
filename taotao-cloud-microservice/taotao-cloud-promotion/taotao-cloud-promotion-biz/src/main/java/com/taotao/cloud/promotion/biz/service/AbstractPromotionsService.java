@@ -3,7 +3,8 @@ package com.taotao.cloud.promotion.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.biz.entity.BasePromotions;
 
 import java.util.List;
@@ -15,11 +16,15 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:42:25
  */
-public interface AbstractPromotionsService<T extends BasePromotions> extends IService<T> {
+public interface AbstractPromotionsService<T extends BasePromotions<T, Long>> extends IService<T> {
 
 	/**
-	 * 通用促销保存 调用顺序: 1. initPromotion 初始化促销信息 2. checkPromotions 检查促销参数 3. save 保存促销信息 4.
-	 * updatePromotionGoods 更新促销商品信息 5。 updateEsGoodsIndex 更新商品索引促销信息
+	 * 通用促销保存 调用顺序:
+	 * 1. initPromotion 初始化促销信息
+	 * 2. checkPromotions 检查促销参数
+	 * 3. save 保存促销信息
+	 * 4. updatePromotionGoods 更新促销商品信息
+	 * 5。updateEsGoodsIndex 更新商品索引促销信息
 	 *
 	 * @param promotions 促销信息
 	 * @return boolean
@@ -28,8 +33,12 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	boolean savePromotions(T promotions);
 
 	/**
-	 * 通用促销更新 调用顺序: 1. checkStatus 检查促销状态 2. checkPromotions 检查促销参数 3. saveOrUpdate 保存促销信息 4.
-	 * updatePromotionGoods 更新促销商品信息 5. updateEsGoodsIndex 更新商品索引促销信息
+	 * 通用促销更新 调用顺序:
+	 * 1. checkStatus 检查促销状态
+	 * 2. checkPromotions 检查促销参数
+	 * 3. saveOrUpdate 保存促销信息
+	 * 4. updatePromotionGoods 更新促销商品信息
+	 * 5. updateEsGoodsIndex 更新商品索引促销信息
 	 *
 	 * @param promotions 促销信息
 	 * @return boolean
@@ -65,7 +74,7 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * @return {@link IPage }<{@link T }>
 	 * @since 2022-04-27 16:42:25
 	 */
-	<S extends BasePromotionsSearchParams> IPage<T> pageFindAll(S searchParams, PageVO page);
+	<S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageParam page);
 
 	/**
 	 * 列表查询促销信息
@@ -74,7 +83,7 @@ public interface AbstractPromotionsService<T extends BasePromotions> extends ISe
 	 * @return {@link List }<{@link T }>
 	 * @since 2022-04-27 16:42:25
 	 */
-	<S extends BasePromotionsSearchParams> List<T> listFindAll(S searchParams);
+	<S extends BasePromotionsSearchQuery> List<T> listFindAll(S searchParams);
 
 	/**
 	 * 初始化促销字段

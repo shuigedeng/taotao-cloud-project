@@ -2,6 +2,7 @@ package com.taotao.cloud.store.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +23,8 @@ import lombok.NoArgsConstructor;
 public class StoreSettlementDay {
 
 	@Schema(description = "店铺ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "结算日")
-	private LocalDate settlementDay;
+	private LocalDateTime settlementDay;
 }

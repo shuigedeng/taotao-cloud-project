@@ -24,6 +24,6 @@ public class PintuanShareVO implements Serializable {
 
     private PromotionGoodsVO promotionGoods;
 
-    private List<PintuanMemberVO> pintuanMemberVOS;
+    private List<PintuanMemberVO> pintuanMembers;
 
 }

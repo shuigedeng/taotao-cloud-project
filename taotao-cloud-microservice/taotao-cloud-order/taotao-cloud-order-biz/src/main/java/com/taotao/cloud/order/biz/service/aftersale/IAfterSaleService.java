@@ -90,7 +90,7 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	 * @return {@link AfterSale }
 	 * @since 2022-04-28 08:49:10
 	 */
-	AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, String logisticsId, LocalDateTime mDeliverTime);
+	AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId, LocalDateTime mDeliverTime);
 
 	/**
 	 * 获取买家退货物流踪迹

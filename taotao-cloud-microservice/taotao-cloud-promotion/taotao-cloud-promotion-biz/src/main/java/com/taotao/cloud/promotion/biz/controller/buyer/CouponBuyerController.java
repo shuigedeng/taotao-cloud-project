@@ -6,7 +6,7 @@ import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.service.CouponService;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,买家优惠券接口
  *
- * @since 2020/11/17 3:35 下午
  */
 @RestController
 @Tag(name = "买家端,买家优惠券接口")
@@ -50,7 +49,7 @@ public class CouponBuyerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@GetMapping
 	@Operation(summary = "获取可领取优惠券列表")
-	public Result<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
+	public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
 		queryParam.setPromotionStatus(PromotionsStatusEnum.START.name());
 		queryParam.setGetType(CouponGetEnum.FREE.name());
 		IPage<CouponVO> canUseCoupons = couponService.pageVOFindAll(queryParam, page);
@@ -61,7 +60,7 @@ public class CouponBuyerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "获取当前会员的优惠券列表")
 	@GetMapping("/getCoupons")
-	public Result<IPage<MemberCoupon>> getCoupons(CouponSearchParams param, PageVO pageVo) {
+	public Result<IPage<MemberCoupon>> getCoupons(CouponPageQuery param, PageVO pageVo) {
 		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
 		param.setMemberId(currentUser.getId());
 		return Result.success(memberCouponService.getMemberCoupons(param, pageVo));
@@ -71,8 +70,8 @@ public class CouponBuyerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "获取当前会员的对于当前商品可使用的优惠券列表")
 	@GetMapping("/canUse")
-	public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponSearchParams param,
-		BigDecimal totalPrice, PageVO pageVo) {
+	public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponPageQuery param,
+														  BigDecimal totalPrice, PageVO pageVo) {
 		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
 		param.setMemberId(currentUser.getId());
 		return Result.success(

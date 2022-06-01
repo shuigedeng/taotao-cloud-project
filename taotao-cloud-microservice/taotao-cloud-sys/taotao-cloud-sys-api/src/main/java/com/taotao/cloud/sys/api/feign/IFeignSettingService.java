@@ -8,6 +8,7 @@ import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.SeckillSetting;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -59,5 +60,8 @@ public interface IFeignSettingService {
 
 	@GetMapping("/sys/tools/setting/wechat/connect")
 	Result<WechatConnectSettingVO> getWechatConnectSetting(String name);
+
+	@GetMapping("/sys/tools/setting/seckill")
+	Result<SeckillSetting> getSeckillSetting(String name);
 
 }

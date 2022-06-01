@@ -14,8 +14,9 @@ import java.util.List;
 /**
  * 配送子模板业务层实现
  *
- * 
- * @since 2020-03-07 09:24:33
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-06-01 15:05:08
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -23,7 +24,7 @@ public class FreightTemplateServiceChildImpl extends ServiceImpl<FreightTemplate
 	FreightTemplateChildService {
 
     @Override
-    public List<FreightTemplateChild> getFreightTemplateChild(String freightTemplateId) {
+    public List<FreightTemplateChild> getFreightTemplateChild(Long freightTemplateId) {
         LambdaQueryWrapper<FreightTemplateChild> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.eq(FreightTemplateChild::getFreightTemplateId, freightTemplateId);
         return this.baseMapper.selectList(lambdaQueryWrapper);
@@ -37,7 +38,7 @@ public class FreightTemplateServiceChildImpl extends ServiceImpl<FreightTemplate
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean removeFreightTemplate(String freightTemplateId) {
+    public boolean removeFreightTemplate(Long freightTemplateId) {
         LambdaQueryWrapper<FreightTemplateChild> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.eq(FreightTemplateChild::getFreightTemplateId, freightTemplateId);
         return this.remove(lambdaQueryWrapper);

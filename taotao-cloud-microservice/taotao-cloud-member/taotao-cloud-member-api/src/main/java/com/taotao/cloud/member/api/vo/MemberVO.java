@@ -27,7 +27,7 @@ public class MemberVO implements Serializable {
 	private static final long serialVersionUID = 1810890757303309436L;
 
 	@Schema(description = "唯一标识", hidden = true)
-	private String id;
+	private Long id;
 
 	@Schema(description = "会员用户名")
 	private String username;

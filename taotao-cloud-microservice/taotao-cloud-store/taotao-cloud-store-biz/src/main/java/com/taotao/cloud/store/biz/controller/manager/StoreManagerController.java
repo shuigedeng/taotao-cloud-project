@@ -2,14 +2,30 @@ package com.taotao.cloud.store.biz.controller.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
+import com.taotao.cloud.store.api.dto.StoreEditDTO;
+import com.taotao.cloud.store.api.query.StorePageQuery;
+import com.taotao.cloud.store.api.vo.StoreDetailVO;
+import com.taotao.cloud.store.api.vo.StoreManagementCategoryVO;
+import com.taotao.cloud.store.api.vo.StoreVO;
+import com.taotao.cloud.store.biz.entity.Store;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,102 +33,109 @@ import java.util.List;
 /**
  * 管理端,店铺管理接口
  *
- * 
  * @since 2020/12/6 16:09
  */
-@Api(tags = "管理端,店铺管理接口")
+@Validated
 @RestController
+@Tag(name = "管理端-店铺管理接口", description = "管理端-店铺管理接口")
 @RequestMapping("/manager/store")
 public class StoreManagerController {
 
-    /**
-     * 店铺
-     */
-    @Autowired
-    private StoreService storeService;
-    /**
-     * 店铺详情
-     */
-    @Autowired
-    private StoreDetailService storeDetailService;
+	/**
+	 * 店铺
+	 */
+	@Autowired
+	private StoreService storeService;
+	/**
+	 * 店铺详情
+	 */
+	@Autowired
+	private StoreDetailService storeDetailService;
 
-    @ApiOperation(value = "获取店铺分页列表")
-    @GetMapping("/all")
-    public Result<List<Store>> getAll() {
-        return Result.success(storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
-    }
+	@Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/all")
+	public Result<List<Store>> getAll() {
+		return Result.success(storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
+	}
 
-    @ApiOperation(value = "获取店铺分页列表")
-    @GetMapping
-    public Result<IPage<StoreVO>> getByPage(StoreSearchParams entity, PageVO page) {
-        return Result.success(storeService.findByConditionPage(entity, page));
-    }
+	@Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping
+	public Result<PageModel<StoreVO>> getByPage(StorePageQuery storePageQuery) {
+		IPage<StoreVO> storeVOIPage = storeService.findByConditionPage(storePageQuery);
+		return Result.success(PageModel.convertMybatisPage(storeVOIPage, StoreVO.class));
+	}
 
-    @ApiOperation(value = "获取店铺详情")
-    @ApiImplicitParam(name = "storeId", value = "店铺ID", required = true, paramType = "path", dataType = "String")
-    @GetMapping(value = "/get/detail/{storeId}")
-    public Result<StoreDetailVO> detail(@PathVariable String storeId) {
-        return Result.success(storeDetailService.getStoreDetailVO(storeId));
-    }
+	@Operation(summary = "获取店铺详情", description = "获取店铺详情")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/get/detail/{storeId}")
+	public Result<StoreDetailVO> detail(@PathVariable String storeId) {
+		return Result.success(storeDetailService.getStoreDetailVO(storeId));
+	}
 
-    @ApiOperation(value = "添加店铺")
-    @PostMapping(value = "/add")
-    public Result<Store> add(@Valid AdminStoreApplyDTO adminStoreApplyDTO) {
-        return Result.success(storeService.add(adminStoreApplyDTO));
-    }
+	@Operation(summary = "添加店铺", description = "添加店铺")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PostMapping(value = "/add")
+	public Result<Store> add(@Valid AdminStoreApplyDTO adminStoreApplyDTO) {
+		return Result.success(storeService.add(adminStoreApplyDTO));
+	}
 
-    @ApiOperation(value = "编辑店铺")
-    @ApiImplicitParam(name = "storeId", value = "店铺ID", required = true, paramType = "path", dataType = "String")
-    @PutMapping(value = "/edit/{id}")
-    public Result<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
-        storeEditDTO.setStoreId(id);
-        return Result.success(storeService.edit(storeEditDTO));
-    }
+	@Operation(summary = "编辑店铺", description = "编辑店铺")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping(value = "/edit/{id}")
+	public Result<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
+		storeEditDTO.setStoreId(id);
+		return Result.success(storeService.edit(storeEditDTO));
+	}
 
-    @ApiOperation(value = "审核店铺申请")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "passed", value = "是否通过审核 0 通过 1 拒绝 编辑操作则不需传递", paramType = "query", dataType = "int"),
-            @ApiImplicitParam(name = "id", value = "店铺id", required = true, paramType = "path", dataType = "String")
-    })
-    @PutMapping(value = "/audit/{id}/{passed}")
-    public Result<Object> audit(@PathVariable String id, @PathVariable Integer passed) {
-        storeService.audit(id, passed);
-        return Result.success();
-    }
+	@Operation(summary = "审核店铺申请", description = "审核店铺申请")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping(value = "/audit/{id}/{passed}")
+	public Result<Boolean> audit(@Parameter(description = "是否通过审核 0 通过 1 拒绝 编辑操作则不需传递") @PathVariable String id,
+								 @Parameter(description = "店铺id") @PathVariable Integer passed) {
+		return Result.success(storeService.audit(id, passed));
+	}
 
+	@Operation(summary = "关闭店铺", description = "关闭店铺")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping(value = "/disable/{id}")
+	public Result<Boolean> disable(@PathVariable String id) {
+		return Result.success(storeService.disable(id));
+	}
 
-    @DemoSite
-    @ApiOperation(value = "关闭店铺")
-    @ApiImplicitParam(name = "id", value = "店铺id", required = true, dataType = "String", paramType = "path")
-    @PutMapping(value = "/disable/{id}")
-    public Result<Store> disable(@PathVariable String id) {
-        storeService.disable(id);
-        return Result.success();
-    }
+	@Operation(summary = "开启店铺", description = "开启店铺")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping(value = "/enable/{id}")
+	public Result<Boolean> enable(@PathVariable String id) {
+		return Result.success(storeService.enable(id));
+	}
 
-    @ApiOperation(value = "开启店铺")
-    @ApiImplicitParam(name = "id", value = "店铺id", required = true, dataType = "String", paramType = "path")
-    @PutMapping(value = "/enable/{id}")
-    public Result<Store> enable(@PathVariable String id) {
-        storeService.enable(id);
-        return Result.success();
-    }
+	@Operation(summary = "查询一级分类列表", description = "查询一级分类列表")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/managementCategory/{storeId}")
+	public Result<List<StoreManagementCategoryVO>> firstCategory(@PathVariable String storeId) {
+		return Result.success(this.storeDetailService.goodsManagementCategory(storeId));
+	}
 
-    @ApiOperation(value = "查询一级分类列表")
-    @ApiImplicitParam(name = "storeId", value = "店铺id", required = true, dataType = "String", paramType = "path")
-    @GetMapping(value = "/managementCategory/{storeId}")
-    public Result<List<StoreManagementCategoryVO>> firstCategory(@PathVariable String storeId) {
-        return Result.success(this.storeDetailService.goodsManagementCategory(storeId));
-    }
-
-
-    @ApiOperation(value = "根据会员id查询店铺信息")
-    @GetMapping("/{memberId}/member")
-    public Result<Store> getByMemberId(@Valid @PathVariable String memberId) {
-        List<Store> list = storeService.list(new QueryWrapper<Store>().eq("member_id", memberId));
-        if (list.size() > 0) {
-            return Result.success(list.get(0));
-        }
-        return Result.success(null);
-    }
+	@Operation(summary = "根据会员id查询店铺信息", description = "根据会员id查询店铺信息")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/{memberId}/member")
+	public Result<Store> getByMemberId(@Valid @PathVariable String memberId) {
+		List<Store> list = storeService.list(new QueryWrapper<Store>().eq("member_id", memberId));
+		if (list.size() > 0) {
+			return Result.success(list.get(0));
+		}
+		return Result.success(null);
+	}
 }

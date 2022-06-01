@@ -1,59 +1,67 @@
 package com.taotao.cloud.store.biz.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Objects;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 店铺端,商品评价管理接口
- *
- * 
- * @since 2020-02-25 14:10:16
  */
+@Validated
 @RestController
-@Api(tags = "店铺端,商品评价管理接口")
+@Tag(name = "店铺端-商品评价管理接口", description = "店铺端-商品评价管理接口")
 @RequestMapping("/store/memberEvaluation")
 public class MemberEvaluationStoreController {
 
-    @Autowired
-    private MemberEvaluationService memberEvaluationService;
+	@Autowired
+	private IFeignMemberEvaluationService memberEvaluationService;
 
-    @ApiOperation(value = "分页获取会员评论列表")
-    @GetMapping
-    public Result<IPage<MemberEvaluationListVO>> getByPage(
-	    EvaluationPageQuery evaluationPageQuery) {
-        String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-        evaluationPageQuery.setStoreId(storeId);
-        return Result.success(memberEvaluationService.queryPage(evaluationPageQuery));
-    }
+	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping
+	public Result<PageModel<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
+		evaluationPageQuery.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
+		IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationService.queryPage(evaluationPageQuery);
+		return Result.success(PageModel.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
+	}
 
-    @ApiOperation(value = "通过id获取")
-    @ApiImplicitParam(name = "id", value = "评价ID", required = true, dataType = "String", paramType = "path")
-    @GetMapping(value = "/get/{id}")
-    public Result<MemberEvaluationVO> get(@PathVariable String id) {
-        return Result.success(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
-    }
+	@Operation(summary = "通过id获取", description = "通过id获取")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/get/{id}")
+	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
+		return Result.success(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
+	}
 
-    @ApiOperation(value = "回复评价")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "评价ID", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "reply", value = "回复内容", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "replyImage", value = "回复图片", dataType = "String", paramType = "query")
-    })
-    @PutMapping(value = "/reply/{id}")
-    public Result<MemberEvaluationVO> reply(@PathVariable String id, @RequestParam String reply, @RequestParam String replyImage) {
-        OperationalJudgment.judgment(memberEvaluationService.queryById(id));
-        memberEvaluationService.reply(id, reply, replyImage);
-        return Result.success();
-    }
+	@Operation(summary = "回复评价", description = "回复评价")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PutMapping(value = "/reply/{id}")
+	public Result<MemberEvaluationVO> reply(@Parameter(description = "评价ID") @PathVariable Long id,
+											@Parameter(description = "回复内容") @RequestParam String reply,
+											@Parameter(description = "回复图片") @RequestParam String replyImage) {
+		MemberEvaluationVO memberEvaluationVO = OperationalJudgment.judgment(memberEvaluationService.queryById(id));
+		memberEvaluationService.reply(id, reply, replyImage);
+		return Result.success(memberEvaluationVO);
+	}
 }

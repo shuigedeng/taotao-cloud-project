@@ -8,34 +8,38 @@ import java.util.List;
 /**
  * 配送子模板业务层
  *
- * 
- * @since 2020-03-07 09:24:33
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-06-01 14:59:03
  */
 public interface FreightTemplateChildService extends IService<FreightTemplateChild> {
 
-    /**
-     * 获取当前商家的运费模板子内容列表
-     *
-     * @param freightTemplateId 运费模板ID
-     * @return 运费模板子内容列表
-     */
-    List<FreightTemplateChild> getFreightTemplateChild(String freightTemplateId);
+	/**
+	 * 获取当前商家的运费模板子内容列表
+	 *
+	 * @param freightTemplateId 运费模板ID
+	 * @return {@link List }<{@link FreightTemplateChild }>
+	 * @since 2022-06-01 14:59:03
+	 */
+	List<FreightTemplateChild> getFreightTemplateChild(Long freightTemplateId);
 
-    /**
-     * 添加商家运费模板
-     *
-     * @param freightTemplateChildren 子模板信息
-     * @return 运费模板
-     */
-    boolean addFreightTemplateChild(List<FreightTemplateChild> freightTemplateChildren);
+	/**
+	 * 添加商家运费模板
+	 *
+	 * @param freightTemplateChildren 子模板信息
+	 * @return boolean
+	 * @since 2022-06-01 14:59:03
+	 */
+	boolean addFreightTemplateChild(List<FreightTemplateChild> freightTemplateChildren);
 
 
-    /**
-     * 删除商家运费模板
-     *
-     * @param freightTemplateId 运费模板ID
-     * @return 操作状态
-     */
-    boolean removeFreightTemplate(String freightTemplateId);
+	/**
+	 * 删除商家运费模板
+	 *
+	 * @param freightTemplateId 运费模板ID
+	 * @return boolean
+	 * @since 2022-06-01 14:59:03
+	 */
+	boolean removeFreightTemplate(Long freightTemplateId);
 
 }

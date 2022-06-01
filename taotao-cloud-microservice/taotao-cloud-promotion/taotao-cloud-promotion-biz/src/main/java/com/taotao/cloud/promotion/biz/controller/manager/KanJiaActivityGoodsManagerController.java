@@ -60,7 +60,7 @@ public class KanJiaActivityGoodsManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@GetMapping("/{id}")
 	@Operation(summary = "获取积分商品详情")
-	public Result<Object> getPointsGoodsDetail(@PathVariable("id") String goodsId) {
+	public Result<KanjiaActivityGoodsDTO> getPointsGoodsDetail(@PathVariable("id") String goodsId) {
 		KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO = kanJiaActivityGoodsService.getKanjiaGoodsDetail(
 			goodsId);
 		return Result.success(kanJiaActivityGoodsDTO);
@@ -70,7 +70,7 @@ public class KanJiaActivityGoodsManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@PutMapping
 	@Operation(summary = "修改砍价商品")
-	public Result<Object> updatePointsGoods(
+	public Result<Boolean> updatePointsGoods(
 		@RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
 		kanJiaActivityGoodsService.updateKanjiaActivityGoods(kanJiaActivityGoodsDTO);
 		return Result.success();
@@ -80,9 +80,9 @@ public class KanJiaActivityGoodsManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@DeleteMapping("/{ids}")
 	@Operation(summary = "删除砍价商品")
-	public Result<Object> delete(@PathVariable String ids) {
+	public Result<Boolean> delete(@PathVariable String ids) {
 		if (kanJiaActivityGoodsService.deleteKanJiaGoods(Arrays.asList(ids.split(",")))) {
-			return Result.success();
+			return Result.success(true);
 		}
 		throw new BusinessException(ResultEnum.KANJIA_GOODS_DELETE_ERROR);
 	}

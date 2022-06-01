@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 /**
  * 店铺其他信息
  * 
- * @date: 2021/8/11 3:42 下午
  *
  */
 @Data

@@ -1,5 +1,7 @@
 package com.taotao.cloud.store.api.query;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -44,26 +46,26 @@ public class BillPageQuery extends PageParam {
 	private String storeName;
 
 	@Schema(description = "店铺ID", hidden = true)
-	private String storeId;
+	private Long storeId;
 
-	//public <T> QueryWrapper<T> queryWrapper() {
-	//	QueryWrapper<T> wrapper = new QueryWrapper<>();
-	//
-	//	//创建时间
-	//	if (StringUtils.isNotEmpty(startDate) && StringUtils.isNotEmpty(endDate)) {
-	//		wrapper.between("create_time", startDate, endDate);
-	//	}
-	//	//账单号
-	//	wrapper.eq(StringUtils.isNotEmpty(sn), "sn", sn);
-	//	//结算状态
-	//	wrapper.eq(StringUtils.isNotEmpty(billStatus), "bill_status", billStatus);
-	//	//店铺名称
-	//	wrapper.eq(StringUtils.isNotEmpty(storeName), "store_name", storeName);
-	//	//按卖家查询
-	//	wrapper.eq(StringUtils.equals(UserContext.getCurrentUser().getRole().name(),
-	//			UserEnums.STORE.name()),
-	//		"store_id", UserContext.getCurrentUser().getStoreId());
-	//	return wrapper;
-	//}
+	public <T> QueryWrapper<T> queryWrapper() {
+		QueryWrapper<T> wrapper = new QueryWrapper<>();
+
+		//创建时间
+		if (StringUtils.isNotEmpty(startDate) && StringUtils.isNotEmpty(endDate)) {
+			wrapper.between("create_time", startDate, endDate);
+		}
+		//账单号
+		wrapper.eq(StringUtils.isNotEmpty(sn), "sn", sn);
+		//结算状态
+		wrapper.eq(StringUtils.isNotEmpty(billStatus), "bill_status", billStatus);
+		//店铺名称
+		wrapper.eq(StringUtils.isNotEmpty(storeName), "store_name", storeName);
+		//按卖家查询
+		// wrapper.eq(StringUtils.equals(UserContext.getCurrentUser().getRole().name(),
+		// 		UserEnums.STORE.name()),
+		// 	"store_id", UserContext.getCurrentUser().getStoreId());
+		return wrapper;
+	}
 
 }

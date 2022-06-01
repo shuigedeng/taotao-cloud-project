@@ -1,6 +1,7 @@
 
 package com.taotao.cloud.order.biz.stream.consumer;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.ErrorMessage;
@@ -22,7 +23,7 @@ public class OrderConsumerService {
 	@Bean
 	public Consumer<String> order() {
 		return order -> {
-			log.info("接收的普通消息为：{}", order);
+			LogUtil.info("接收的普通消息为：{}", order);
 		};
 	}
 
@@ -33,7 +34,7 @@ public class OrderConsumerService {
 	 */
 	public void error(Message<?> message) {
 		ErrorMessage errorMessage = (ErrorMessage) message;
-		log.error("Handling ERROR, errorMessage = {} ", errorMessage);
+		LogUtil.error("Handling ERROR, errorMessage = {} ", errorMessage);
 	}
 
 }

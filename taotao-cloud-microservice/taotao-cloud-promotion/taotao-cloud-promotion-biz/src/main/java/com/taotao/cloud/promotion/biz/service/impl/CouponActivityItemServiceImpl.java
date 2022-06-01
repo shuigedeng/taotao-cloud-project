@@ -21,26 +21,26 @@ import java.util.List;
 public class CouponActivityItemServiceImpl extends ServiceImpl<CouponActivityItemMapper, CouponActivityItem> implements
 	CouponActivityItemService {
 
-    @Override
-    public List<CouponActivityItem> getCouponActivityList(String activityId) {
-        LambdaQueryWrapper<CouponActivityItem> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(CouponActivityItem::getActivityId, activityId);
-        return this.list(lambdaQueryWrapper);
-    }
+	@Override
+	public List<CouponActivityItem> getCouponActivityList(Long activityId) {
+		LambdaQueryWrapper<CouponActivityItem> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(CouponActivityItem::getActivityId, activityId);
+		return this.list(lambdaQueryWrapper);
+	}
 
-    @Override
-    public List<CouponActivityItemVO> getCouponActivityItemListVO(String activityId) {
-        return this.baseMapper.getCouponActivityItemListVO(activityId);
-    }
+	@Override
+	public List<CouponActivityItemVO> getCouponActivityItemListVO(String activityId) {
+		return this.baseMapper.getCouponActivityItemListVO(activityId);
+	}
 
-    /**
-     * 根据优惠券id删除优惠活动关联信息项
-     *
-     * @param couponIds 优惠券id集合
-     */
-    @Override
-    public void removeByCouponId(List<String> couponIds) {
-        this.remove(new LambdaQueryWrapper<CouponActivityItem>()
-                .in(CouponActivityItem::getCouponId, couponIds));
-    }
+	/**
+	 * 根据优惠券id删除优惠活动关联信息项
+	 *
+	 * @param couponIds 优惠券id集合
+	 */
+	@Override
+	public void removeByCouponId(List<String> couponIds) {
+		this.remove(new LambdaQueryWrapper<CouponActivityItem>()
+			.in(CouponActivityItem::getCouponId, couponIds));
+	}
 }

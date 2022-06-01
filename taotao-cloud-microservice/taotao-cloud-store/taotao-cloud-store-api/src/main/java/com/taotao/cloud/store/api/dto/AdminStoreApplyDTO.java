@@ -29,7 +29,7 @@ public class AdminStoreApplyDTO {
 
 	/****店铺基本信息***/
 	@Schema(description = "会员ID")
-	public String memberId;
+	public Long memberId;
 
 	@Size(min = 2, max = 200, message = "店铺名称长度为2-200位")
 	@NotBlank(message = "店铺名称不能为空")
@@ -84,7 +84,7 @@ public class AdminStoreApplyDTO {
 	private String companyAddressPath;
 
 	@Schema(description = "员工总数")
-	private String employeeNum;
+	private Integer employeeNum;
 
 	@Min(value = 1, message = "注册资金,至少一位")
 	@Schema(description = "注册资金")

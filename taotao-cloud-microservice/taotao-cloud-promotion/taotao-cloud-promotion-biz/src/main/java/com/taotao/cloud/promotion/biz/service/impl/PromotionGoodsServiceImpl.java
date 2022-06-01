@@ -16,8 +16,8 @@ import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.query.BasePromotionsSearchParams;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsSearchParams;
+import com.taotao.cloud.promotion.api.query.BasePromotionsSearchQuery;
+import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.entity.FullDiscount;
@@ -87,7 +87,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
         List<PromotionGoods> promotionGoods = this.list(queryWrapper);
 
 
-        BasePromotionsSearchParams searchParams = new BasePromotionsSearchParams();
+        BasePromotionsSearchQuery searchParams = new BasePromotionsSearchQuery();
         searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         searchParams.setScopeType(PromotionsScopeTypeEnum.ALL.name());
         //单独检查，添加适用于全品类的满优惠活动
@@ -126,7 +126,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
     }
 
     @Override
-    public IPage<PromotionGoods> pageFindAll(PromotionGoodsSearchParams searchParams, PageVO pageVo) {
+    public IPage<PromotionGoods> pageFindAll(PromotionGoodsPageQuery searchParams, PageVO pageVo) {
         return this.page(PageUtil.initPage(pageVo), searchParams.queryWrapper());
     }
 
@@ -137,7 +137,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      * @return 促销商品列表
      */
     @Override
-    public List<PromotionGoods> listFindAll(PromotionGoodsSearchParams searchParams) {
+    public List<PromotionGoods> listFindAll(PromotionGoodsPageQuery searchParams) {
         return this.list(searchParams.queryWrapper());
     }
 
@@ -148,7 +148,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      * @return 促销商品信息
      */
     @Override
-    public PromotionGoods getPromotionsGoods(PromotionGoodsSearchParams searchParams) {
+    public PromotionGoods getPromotionsGoods(PromotionGoodsPageQuery searchParams) {
         return this.getOne(searchParams.queryWrapper(), false);
     }
 
@@ -213,7 +213,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
         //如果为空
         else {
             //获取促销商品，如果不存在促销商品，则返回0
-            PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+            PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
             searchParams.setPromotionType(typeEnum.name());
             searchParams.setPromotionId(promotionId);
             searchParams.setSkuId(skuId);
@@ -229,7 +229,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 
     @Override
     public List<Integer> getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, List<String> skuId) {
-        PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
+        PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
         searchParams.setPromotionType(typeEnum.name());
         searchParams.setPromotionId(promotionId);
         searchParams.setSkuIds(skuId);
@@ -317,7 +317,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      * @param promotionIds 促销活动id
      */
     @Override
-    public void deletePromotionGoods(List<String> promotionIds) {
+    public void deletePromotionGoods(List<Long> promotionIds) {
         LambdaQueryWrapper<PromotionGoods> queryWrapper = new LambdaQueryWrapper<PromotionGoods>()
                 .in(PromotionGoods::getPromotionId, promotionIds);
         this.remove(queryWrapper);
@@ -329,7 +329,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      * @param searchParams 查询参数
      */
     @Override
-    public void deletePromotionGoods(PromotionGoodsSearchParams searchParams) {
+    public void deletePromotionGoods(PromotionGoodsPageQuery searchParams) {
         this.remove(searchParams.queryWrapper());
     }
 

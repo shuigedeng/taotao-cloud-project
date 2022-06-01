@@ -10,6 +10,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.vo.BasePromotionsVO;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,25 +37,25 @@ public class PromotionTools {
 	 * @param startTime 活动开始时间
 	 * @param endTime   活动结束时间
 	 */
-	public static void checkPromotionTime(Date startTime, Date endTime) {
+	public static void checkPromotionTime(LocalDateTime startTime, LocalDateTime endTime) {
 
 		if (startTime == null) {
 			throw new BusinessException(ResultEnum.PROMOTION_TIME_NOT_EXIST);
 		}
 
-		DateTime now = DateUtil.date();
+		LocalDateTime now = LocalDateTime.now();
 
 		//如果活动起始时间小于现在时间
-		if (now.after(startTime)) {
+		if (now.isAfter(startTime)) {
 			throw new BusinessException(ResultEnum.PROMOTION_START_TIME_ERROR);
 		}
 		//如果活动结束时间小于现在时间
-		if (endTime != null && now.after(endTime)) {
+		if (endTime != null && now.isAfter(endTime)) {
 			throw new BusinessException(ResultEnum.PROMOTION_END_TIME_ERROR);
 		}
 
 		//开始时间不能大于结束时间
-		if (endTime != null && startTime.after(endTime)) {
+		if (endTime != null && startTime.isAfter(endTime)) {
 			throw new BusinessException(ResultEnum.PROMOTION_TIME_ERROR);
 		}
 	}

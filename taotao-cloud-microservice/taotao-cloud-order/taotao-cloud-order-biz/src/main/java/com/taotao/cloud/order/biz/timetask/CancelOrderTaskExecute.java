@@ -45,8 +45,7 @@ public class CancelOrderTaskExecute implements EveryMinuteExecute {
 		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingEnum.ORDER_SETTING.name()).data();
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//订单自动取消时间 = 当前时间 - 自动取消时间分钟数
-			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(),
-				-orderSetting.getAutoCancel());
+			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
 			LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 			queryWrapper.eq(Order::getOrderStatus, OrderStatusEnum.UNPAID.name());
 			//订单创建时间 <= 订单自动取消时间

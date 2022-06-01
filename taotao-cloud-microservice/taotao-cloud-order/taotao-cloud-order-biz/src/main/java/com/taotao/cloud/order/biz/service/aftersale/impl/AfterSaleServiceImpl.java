@@ -13,6 +13,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
@@ -27,6 +28,7 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVOBuilder;
 import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.entity.order.Order;
@@ -36,6 +38,7 @@ import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.biz.service.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
+import com.taotao.cloud.payment.api.feign.IFeignRefundSupportService;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -84,7 +87,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 售后支持，这里用于退款操作
 	 */
-	private final RefundSupport refundSupport;
+	private final IFeignRefundSupportService refundSupport;
 	/**
 	 * RocketMQ配置
 	 */
@@ -114,7 +117,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 
 	@Override
 	public AfterSaleApplyVO getAfterSaleVO(String sn) {
-		AfterSaleApplyVO afterSaleApplyVO = new AfterSaleApplyVO();
+		AfterSaleApplyVOBuilder afterSaleApplyVOBuilder = AfterSaleApplyVOBuilder.builder();
 
 		//获取订单货物判断是否可申请售后
 		OrderItem orderItem = orderItemService.getBySn(sn);
@@ -134,30 +137,30 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		}
 		//判断支付方式是否为线上支付
 		if (order.getPaymentMethod().equals(PaymentMethodEnum.BANK_TRANSFER.name())) {
-			afterSaleApplyVO.setRefundWay(AfterSaleRefundWayEnum.OFFLINE.name());
+			afterSaleApplyVOBuilder.refundWay(AfterSaleRefundWayEnum.OFFLINE.name());
 		} else {
-			afterSaleApplyVO.setRefundWay(AfterSaleRefundWayEnum.ORIGINAL.name());
+			afterSaleApplyVOBuilder.refundWay(AfterSaleRefundWayEnum.ORIGINAL.name());
 		}
 		//判断订单类型，虚拟订单只支持退款
 		if (order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())) {
-			afterSaleApplyVO.setReturnMoney(true);
-			afterSaleApplyVO.setReturnGoods(false);
+			afterSaleApplyVOBuilder.returnMoney(true);
+			afterSaleApplyVOBuilder.returnGoods(false);
 		} else {
-			afterSaleApplyVO.setReturnMoney(true);
-			afterSaleApplyVO.setReturnGoods(true);
+			afterSaleApplyVOBuilder.returnMoney(true);
+			afterSaleApplyVOBuilder.returnGoods(true);
 		}
 
-		afterSaleApplyVO.setAccountType(order.getPaymentMethod());
-		afterSaleApplyVO.setApplyRefundPrice(
+		afterSaleApplyVOBuilder.accountType(order.getPaymentMethod());
+		afterSaleApplyVOBuilder.applyRefundPrice(
 			CurrencyUtil.div(orderItem.getFlowPrice(), orderItem.getNum()));
-		afterSaleApplyVO.setNum(orderItem.getNum());
-		afterSaleApplyVO.setGoodsId(orderItem.getGoodsId());
-		afterSaleApplyVO.setGoodsName(orderItem.getGoodsName());
-		afterSaleApplyVO.setImage(orderItem.getImage());
-		afterSaleApplyVO.setGoodsPrice(orderItem.getGoodsPrice());
-		afterSaleApplyVO.setSkuId(orderItem.getSkuId());
-		afterSaleApplyVO.setMemberId(order.getMemberId());
-		return afterSaleApplyVO;
+		afterSaleApplyVOBuilder.num(orderItem.getNum());
+		afterSaleApplyVOBuilder.goodsId(orderItem.getGoodsId());
+		afterSaleApplyVOBuilder.goodsName(orderItem.getGoodsName());
+		afterSaleApplyVOBuilder.image(orderItem.getImage());
+		afterSaleApplyVOBuilder.goodsPrice(orderItem.getGoodsPrice());
+		afterSaleApplyVOBuilder.skuId(orderItem.getSkuId());
+		afterSaleApplyVOBuilder.memberId(order.getMemberId());
+		return afterSaleApplyVOBuilder.build();
 	}
 
 	@Override
@@ -196,7 +199,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			if (afterSale.getServiceType().equals(AfterSaleTypeEnum.RETURN_MONEY.name())) {
 				if (afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
 					//如果为退款操作 && 在线支付 则直接进行退款
-					refundSupport.refund(afterSale);
+					refundSupport.refund(afterSale.getSn());
 					afterSale.setRefundTime(LocalDateTime.now());
 					afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
 				} else {
@@ -224,7 +227,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	@AfterSaleLogPoint(sn = "#afterSaleSn", description = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
 	//@SystemLogPoint(description = "售后-买家退货,物流填写", customerLog = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
 	@Override
-	public AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, String logisticsId,
+	public AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId,
 								   LocalDateTime mDeliverTime) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
@@ -284,7 +287,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//在线支付 则直接进行退款
 		if (pass.equals(serviceStatus) &&
 			afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
-			refundSupport.refund(afterSale);
+			refundSupport.refund(afterSale.getSn());
 			afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
 		} else if (pass.equals(serviceStatus)) {
 			afterSaleStatusEnum = AfterSaleStatusEnum.WAIT_REFUND;
@@ -314,7 +317,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//根据售后编号修改售后单
 		this.updateAfterSale(afterSaleSn, afterSale);
 		//退款
-		refundSupport.refund(afterSale);
+		refundSupport.refund(afterSale.getSn());
 		//发送退款消息
 		this.sendAfterSaleMessage(afterSale);
 		return true;
@@ -377,7 +380,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		afterSale.setMemberName(user.getNickname());
 
 		//写入商家信息
-		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.getOrderItemSn());
+		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.orderItemSn());
 		Order order = OperationalJudgment.judgment(orderService.getBySn(orderItem.getOrderSn()));
 		afterSale.setStoreId(order.getStoreId());
 		afterSale.setStoreName(order.getStoreName());
@@ -400,11 +403,11 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//TODO 退还积分
 
 		//创建售后单号
-		afterSale.setSn(SnowFlake.createStr("A"));
+		afterSale.setSn(IdGeneratorUtil.createStr("A"));
 
 		//是否包含图片
-		if (afterSaleDTO.getImages() != null) {
-			afterSale.setAfterSaleImage(afterSaleDTO.getImages());
+		if (afterSaleDTO.images() != null) {
+			afterSale.setAfterSaleImage(afterSaleDTO.images());
 		}
 
 		if (afterSale.getNum().equals(orderItem.getNum())) {
@@ -412,7 +415,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			afterSale.setApplyRefundPrice(orderItem.getFlowPrice());
 		} else {
 			//单价计算
-			BigDecimal utilPrice = CurrencyUtil.div(orderItem.getPriceDetailDTO().getFlowPrice(),
+			BigDecimal utilPrice = CurrencyUtil.div(orderItem.getPriceDetailDTO().flowPrice(),
 				orderItem.getNum());
 			afterSale.setApplyRefundPrice(CurrencyUtil.mul(afterSale.getNum(), utilPrice));
 		}
@@ -461,12 +464,12 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	 */
 	private void checkAfterSaleType(AfterSaleDTO afterSaleDTO) {
 		//判断数据是否为空
-		if (null == afterSaleDTO || CharSequenceUtil.isEmpty(afterSaleDTO.getOrderItemSn())) {
+		if (null == afterSaleDTO || CharSequenceUtil.isEmpty(afterSaleDTO.orderItemSn())) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
 		}
 
 		//获取订单货物判断是否可申请售后
-		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.getOrderItemSn());
+		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.orderItemSn());
 
 		//未申请售后或部分售后订单货物才能进行申请
 		if (!orderItem.getAfterSaleStatus().equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())
@@ -476,14 +479,13 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		}
 
 		//申请商品数量不能超过商品总数量-售后商品数量
-		if (afterSaleDTO.getNum() > (orderItem.getNum() - orderItem.getReturnGoodsNumber())) {
+		if (afterSaleDTO.num() > (orderItem.getNum() - orderItem.getReturnGoodsNumber())) {
 			throw new BusinessException(ResultEnum.AFTER_GOODS_NUMBER_ERROR);
 		}
 
 		//获取售后类型
 		Order order = orderService.getBySn(orderItem.getOrderSn());
-		AfterSaleTypeEnum afterSaleTypeEnum = AfterSaleTypeEnum.valueOf(
-			afterSaleDTO.getServiceType());
+		AfterSaleTypeEnum afterSaleTypeEnum = AfterSaleTypeEnum.valueOf(afterSaleDTO.serviceType());
 		switch (afterSaleTypeEnum) {
 			case RETURN_MONEY -> {
 				//只处理已付款的售后
@@ -513,14 +515,13 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	 */
 	private void checkAfterSaleReturnMoneyParam(AfterSaleDTO afterSaleDTO) {
 		//如果为线下支付银行信息不能为空
-		if (AfterSaleRefundWayEnum.OFFLINE.name().equals(afterSaleDTO.getRefundWay())) {
-			boolean emptyBankParam = CharSequenceUtil.isEmpty(afterSaleDTO.getBankDepositName())
-				|| CharSequenceUtil.isEmpty(afterSaleDTO.getBankAccountName())
-				|| CharSequenceUtil.isEmpty(afterSaleDTO.getBankAccountNumber());
+		if (AfterSaleRefundWayEnum.OFFLINE.name().equals(afterSaleDTO.refundWay())) {
+			boolean emptyBankParam = CharSequenceUtil.isEmpty(afterSaleDTO.bankDepositName())
+				|| CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountName())
+				|| CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountNumber());
 			if (emptyBankParam) {
 				throw new BusinessException(ResultEnum.RETURN_MONEY_OFFLINE_BANK_ERROR);
 			}
-
 		}
 	}
 

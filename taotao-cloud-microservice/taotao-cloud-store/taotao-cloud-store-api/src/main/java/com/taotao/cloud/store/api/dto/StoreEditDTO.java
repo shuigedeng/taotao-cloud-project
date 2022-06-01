@@ -31,7 +31,7 @@ public class StoreEditDTO {
 
 	@NotBlank(message = "店铺不能为空")
 	@Schema(description = "店铺id")
-	private String storeId;
+	private Long storeId;
 
 	@Size(min = 2, max = 200, message = "店铺名称长度为2-200位")
 	@NotBlank(message = "店铺名称不能为空")

@@ -59,9 +59,6 @@ public class PromotionGoodsVO implements Serializable {
 	@Schema(description = "促销工具类型")
 	private String promotionType;
 
-	/**
-	 * @see GoodsTypeEnum
-	 */
 	@Schema(description = "商品类型")
 	private String goodsType;
 

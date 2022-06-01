@@ -22,7 +22,7 @@ import java.util.Objects;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PromotionGoodsSearchParams extends BasePromotionsSearchParams {
+public class PromotionGoodsPageQuery extends BasePromotionsSearchQuery {
 
 	@Schema(description = "促销活动id")
 	private Long promotionId;

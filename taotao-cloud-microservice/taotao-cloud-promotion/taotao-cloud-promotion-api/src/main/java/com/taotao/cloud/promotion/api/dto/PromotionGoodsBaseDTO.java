@@ -24,16 +24,16 @@ public class PromotionGoodsBaseDTO implements Serializable {
 
 
 	@Schema(description = "商家ID")
-	private String storeId;
+	private Long storeId;
 
 	@Schema(description = "商家名称")
 	private String storeName;
 
 	@Schema(description = "商品id")
-	private String goodsId;
+	private Long goodsId;
 
 	@Schema(description = "商品SkuId")
-	private String skuId;
+	private Long skuId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;

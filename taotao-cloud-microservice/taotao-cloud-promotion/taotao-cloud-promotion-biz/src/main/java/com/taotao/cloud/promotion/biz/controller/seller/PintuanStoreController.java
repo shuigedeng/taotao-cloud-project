@@ -7,7 +7,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.query.PintuanSearchParams;
+import com.taotao.cloud.promotion.api.query.PintuanPageQuery;
 import com.taotao.cloud.promotion.api.vo.PintuanVO;
 import com.taotao.cloud.promotion.biz.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
@@ -49,7 +49,7 @@ public class PintuanStoreController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@GetMapping
 	@Operation(summary = "根据条件分页查询拼团活动列表")
-	public Result<IPage<Pintuan>> getPintuanByPage(PintuanSearchParams queryParam, PageVO pageVo) {
+	public Result<IPage<Pintuan>> getPintuanByPage(PintuanPageQuery queryParam, PageVO pageVo) {
 		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
 		queryParam.setStoreId(currentUser.getStoreId());
 		return Result.success(pintuanService.pageFindAll(queryParam, pageVo));

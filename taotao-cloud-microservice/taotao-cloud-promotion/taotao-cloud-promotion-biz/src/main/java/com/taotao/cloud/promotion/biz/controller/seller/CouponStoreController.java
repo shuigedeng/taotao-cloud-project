@@ -7,7 +7,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.promotion.api.query.CouponSearchParams;
+import com.taotao.cloud.promotion.api.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.entity.Coupon;
 import com.taotao.cloud.promotion.biz.service.CouponService;
@@ -46,7 +46,7 @@ public class CouponStoreController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@GetMapping
 	@Operation(summary = "获取优惠券列表")
-	public Result<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
+	public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
 		page.setNotConvert(true);
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		queryParam.setStoreId(storeId);

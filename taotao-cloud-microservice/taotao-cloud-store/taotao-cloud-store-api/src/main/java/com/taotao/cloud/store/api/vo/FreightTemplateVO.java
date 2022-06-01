@@ -1,30 +1,30 @@
 package com.taotao.cloud.store.api.vo;
 
+import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 店铺运费模板
- *
- * @since 2020/11/24 14:29
+ * 运费模板vo
  */
-@Setter
-@Getter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺运费模板")
-public class FreightTemplateVO extends FreightTemplateBaseVO {
+public class FreightTemplateVO {
 
-	private static final long serialVersionUID = 2422138942308945537L;
+	private Long id;
 
-	@Schema(description = "运费详细规则")
-	private List<FreightTemplateChildBaseVO> freightTemplateChildList;
+	private Long storeId;
 
+	private String name;
+
+	/**
+	 * @see FreightTemplateEnum
+	 */
+	private String pricingMethod;
 }
