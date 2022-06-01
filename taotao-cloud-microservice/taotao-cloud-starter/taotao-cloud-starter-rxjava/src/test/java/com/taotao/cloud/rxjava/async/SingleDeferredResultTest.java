@@ -46,7 +46,7 @@ public class SingleDeferredResultTest {
 
 	private TestRestTemplate restTemplate = new TestRestTemplate();
 
-	@AutoConfiguration
+	@Configuration
 	@EnableAutoConfiguration
 	@RestController
 	protected static class Application {

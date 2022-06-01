@@ -160,7 +160,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		return entityManagerFactoryBean;
 	}
 
-	@AutoConfiguration
+	@Configuration
 	public static class HibernateListener {
 
 		@PersistenceUnit

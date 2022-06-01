@@ -52,10 +52,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * @since 1.2
  */
-@AutoConfiguration(after = {
-	BeanConfiguration.class,
-	HttpClientConfiguration.class,
-	ThreadPoolConfiguration.class})
+@AutoConfiguration(after = {BeanConfiguration.class, HttpClientConfiguration.class, ThreadPoolConfiguration.class})
 @EnableConfigurationProperties({DingerProperties.class})
 @ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
 public class DingtalkConfiguration implements InitializingBean {

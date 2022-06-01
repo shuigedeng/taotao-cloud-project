@@ -51,7 +51,7 @@ public class ConfigListener implements InitializingBean {
 		LogUtil.info("taotao cloud on received from nacos properties data : {}", value);
 	}
 
-	@AutoConfiguration
+	@Configuration
 	@ConditionalOnProperty(prefix = "spring.cloud.nacos.config", value = "enabled", havingValue = "true", matchIfMissing = true)
 	public static class NacosConfigListenerHnadler implements InitializingBean {
 

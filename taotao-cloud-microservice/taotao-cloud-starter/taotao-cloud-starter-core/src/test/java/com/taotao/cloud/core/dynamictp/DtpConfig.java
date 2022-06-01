@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * DtpConfig related
  */
-@AutoConfiguration
+@Configuration
 public class DtpConfig {
 
     @Bean

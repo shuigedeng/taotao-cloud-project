@@ -35,6 +35,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 import java.util.function.Function;
+import org.springframework.context.annotation.Configuration;
 
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
@@ -89,7 +90,7 @@ public class CoreAutoConfiguration implements InitializingBean {
 		return new StartedEventListener();
 	}
 
-	@AutoConfiguration
+	@Configuration
 	public static class CoreFunction implements Function<String, String> {
 
 		@Override

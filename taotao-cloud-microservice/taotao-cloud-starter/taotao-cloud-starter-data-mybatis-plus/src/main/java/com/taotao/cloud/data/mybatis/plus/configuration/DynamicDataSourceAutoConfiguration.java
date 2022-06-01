@@ -55,8 +55,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2021-09-04 07:45:13
  */
 @AutoConfiguration(after = DataSourceAutoConfiguration.class, beforeName = "io.seata.spring.boot.autoconfigure.SeataAutoConfiguration")
-@EnableConfigurationProperties({DataSourceProperties.class,
-	MybatisPlusDynamicDataSourceProperties.class})
+@EnableConfigurationProperties({DataSourceProperties.class, MybatisPlusDynamicDataSourceProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusDynamicDataSourceProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 

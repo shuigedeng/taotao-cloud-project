@@ -53,10 +53,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * @since 2020/5/3 06:47
  */
 @AutoConfiguration
-@EnableConfigurationProperties({
-	RestClientPoolProperties.class,
-	ElasticsearchProperties.class
-})
+@EnableConfigurationProperties({RestClientPoolProperties.class, ElasticsearchProperties.class})
 @ConditionalOnProperty(prefix = ElasticsearchProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElasticsearchAutoConfiguration implements InitializingBean {
 

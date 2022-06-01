@@ -68,8 +68,8 @@ import org.springframework.web.util.pattern.PathPattern;
  * @version 2022.03
  * @since 2021/8/25 09:57
  */
-@AutoConfiguration
 // public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
+@AutoConfiguration
 public class Oauth2ResourceConfiguration {
 
 	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 
  */
-@AutoConfiguration
+@Configuration
 public class ThreadPoolConfiguration {
 
     /**
