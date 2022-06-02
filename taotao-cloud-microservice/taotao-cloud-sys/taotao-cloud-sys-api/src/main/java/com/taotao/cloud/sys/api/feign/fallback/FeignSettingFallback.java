@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.BaseSetting;
 import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
@@ -10,6 +11,8 @@ import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SeckillSetting;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.payment.AlipayPaymentSetting;
+import com.taotao.cloud.sys.api.vo.setting.payment.WechatPaymentSetting;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -25,6 +28,11 @@ public class FeignSettingFallback implements FallbackFactory<IFeignSettingServic
 		return new IFeignSettingService() {
 			@Override
 			public Result<SettingVO> get(String key) {
+				return null;
+			}
+
+			@Override
+			public Result<BaseSetting> getBaseSetting(String name) {
 				return null;
 			}
 
@@ -61,6 +69,16 @@ public class FeignSettingFallback implements FallbackFactory<IFeignSettingServic
 
 			@Override
 			public Result<SeckillSetting> getSeckillSetting(String name) {
+				return null;
+			}
+
+			@Override
+			public Result<AlipayPaymentSetting> getAlipayPaymentSetting(String name) {
+				return null;
+			}
+
+			@Override
+			public Result<WechatPaymentSetting> getWechatPaymentSetting(String name) {
 				return null;
 			}
 		};

@@ -25,6 +25,7 @@ public class PaymentSupportSetting {
     }
 
     public PaymentSupportSetting(PaymentSupportForm paymentSupportForm) {
+
         List<PaymentSupportItem> paymentSupportItems = new ArrayList<>();
 
         for (ClientTypeEnum client : paymentSupportForm.getClients()) {
