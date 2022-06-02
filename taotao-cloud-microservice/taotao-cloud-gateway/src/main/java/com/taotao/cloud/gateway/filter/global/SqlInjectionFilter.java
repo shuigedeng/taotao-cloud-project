@@ -22,7 +22,9 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlInjectionUtils;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SqlInjectionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
@@ -33,6 +35,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpStatus;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -65,7 +68,8 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		LogUtil.debug("Global SQL Injection Filter in use!");
+
+		LogUtil.debug("[Herodotus] |- Global SQL Injection Filter in use!");
 
 		ServerHttpRequest serverHttpRequest = exchange.getRequest();
 		HttpMethod method = serverHttpRequest.getMethod();
@@ -79,10 +83,12 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 				return chain.filter(exchange);
 			}
 
-			LogUtil.debug("The original request parameter is [{}]", rawQuery);
+			LogUtil.debug("[Herodotus] |- The original request parameter is [{}]", rawQuery);
+			// 执行XSS清理
+			boolean isSQLInjection = SqlInjectionUtil.checkForGet(rawQuery);
 
-			// 执行XSS清理 如果存在sql注入,直接拦截请求
-			if (SqlInjectionUtil.checkForGet(rawQuery)) {
+			// 如果存在sql注入,直接拦截请求
+			if (isSQLInjection) {
 				return sqlInjectionResponse(exchange, uri);
 			}
 			// 不对参数做任何处理
@@ -95,7 +101,9 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
 			//从请求里获取Post请求体
 			String bodyString = resolveBodyFromRequest(serverHttpRequest);
+
 			if (StringUtils.isNotBlank(bodyString)) {
+
 				boolean isSQLInjection;
 				if (WebFluxUtil.isJsonMediaType(contentType)) {
 					//如果MediaType是json才执行json方式验证
@@ -118,6 +126,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
 				HttpHeaders headers = new HttpHeaders();
 				headers.putAll(exchange.getRequest().getHeaders());
+
 
 				// 由于修改了传递参数，需要重新设置CONTENT_LENGTH，长度是字节长度，不是字符串长度
 				int length = bodyString.getBytes().length;
@@ -152,7 +161,6 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
 	/**
 	 * 从Flux<DataBuffer>中获取字符串的方法
-	 *
 	 * @return 请求体
 	 */
 	private String resolveBodyFromRequest(ServerHttpRequest serverHttpRequest) {
@@ -175,17 +183,15 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 	 * @return DataBuffer
 	 */
 	private DataBuffer toDataBuffer(byte[] bytes) {
-		NettyDataBufferFactory nettyDataBufferFactory = new NettyDataBufferFactory(
-			ByteBufAllocator.DEFAULT);
+		NettyDataBufferFactory nettyDataBufferFactory = new NettyDataBufferFactory(ByteBufAllocator.DEFAULT);
 		DataBuffer buffer = nettyDataBufferFactory.allocateBuffer(bytes.length);
 		buffer.write(bytes);
 		return buffer;
 	}
 
 	private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
-		LogUtil.error("Paramters of Request [" + uri.getRawPath() + uri.getRawQuery()
-			+ "] contain illegal SQL keyword!");
-		return ResponseUtil.fail(exchange, ResultEnum.SQL_INJECTION_REQUEST);
+		LogUtil.error("[Herodotus] |- Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
+		return WebFluxUtil.writeJsonResponse(exchange.getResponse(), Result.fail(ResultEnum.SQL_INJECTION_REQUEST));
 	}
 
 	private boolean isGetRequest(HttpMethod method) {
@@ -193,9 +199,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 	}
 
 	private Boolean isPostRequest(HttpMethod method, String contentType) {
-		return (method == HttpMethod.POST || method == HttpMethod.PUT) && (
-			MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType)
-				|| MediaType.APPLICATION_JSON_VALUE.equals(contentType));
+		return (method == HttpMethod.POST || method == HttpMethod.PUT) && (MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType) || MediaType.APPLICATION_JSON_VALUE.equals(contentType));
 	}
 
 	/**

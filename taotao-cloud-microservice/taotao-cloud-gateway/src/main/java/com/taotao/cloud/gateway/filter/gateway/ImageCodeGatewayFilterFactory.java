@@ -46,8 +46,7 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
 
 	private final RedisRepository redisRepository;
 
-	public ImageCodeGatewayFilterFactory(
-		RedisRepository redisRepository) {
+	public ImageCodeGatewayFilterFactory(RedisRepository redisRepository) {
 		this.redisRepository = redisRepository;
 	}
 
