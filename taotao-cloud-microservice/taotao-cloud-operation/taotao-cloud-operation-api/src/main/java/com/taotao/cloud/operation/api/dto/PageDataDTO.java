@@ -35,8 +35,4 @@ public class PageDataDTO {
 	 */
 	@Schema(description = "客户端类型", allowableValues = "PC,H5,WECHAT_MP,APP")
 	private String pageClientType;
-
-	public PageDataDTO(String pageType) {
-		this.pageType = pageType;
-	}
 }

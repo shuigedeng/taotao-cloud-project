@@ -1,6 +1,7 @@
 package com.taotao.cloud.distribution.api.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销查询参数")
-public class DistributionPageQuery {
+public class DistributionPageQuery extends PageParam {
 
 	@Schema(description = "会员名称")
 	private String memberName;

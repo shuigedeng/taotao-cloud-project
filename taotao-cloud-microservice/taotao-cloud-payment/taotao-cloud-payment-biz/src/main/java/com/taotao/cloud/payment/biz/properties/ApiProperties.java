@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * API地址配置
- * @author Chopper
  */
 @Data
 @Configuration

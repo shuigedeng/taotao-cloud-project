@@ -40,7 +40,6 @@ public class DistributionGoods extends BaseSuperEntity<DistributionGoods, Long> 
 
 	public static final String TABLE_NAME = "tt_distribution_goods";
 
-
 	/**
 	 * 商品ID
 	 */

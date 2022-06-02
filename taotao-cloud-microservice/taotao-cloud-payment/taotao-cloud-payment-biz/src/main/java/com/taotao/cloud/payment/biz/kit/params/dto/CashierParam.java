@@ -1,12 +1,12 @@
 package com.taotao.cloud.payment.biz.kit.params.dto;
 
 import com.taotao.cloud.common.utils.lang.StringUtil;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +15,6 @@ import java.util.List;
  *
  */
 @Data
-@ToString
 public class CashierParam {
 
     @Schema(description =  "价格")
@@ -33,9 +32,8 @@ public class CashierParam {
     @Schema(description =  "支持支付方式")
     private List<String> support;
 
-
     @Schema(description =  "订单创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @Schema(description =  "支付自动结束时间")
     private Long autoCancel;

@@ -53,8 +53,8 @@ public class CashierController {
 	public Result<Object> payment(
 		HttpServletRequest request,
 		HttpServletResponse response,
-		@Parameter("支付方式 WECHAT,ALIPAY") @PathVariable String paymentMethod,
-		@Parameter("调起方式 APP,NATIVE,JSAPI,H5,MP") @PathVariable String paymentClient,
+		@Parameter(description = "支付方式 WECHAT,ALIPAY") @PathVariable String paymentMethod,
+		@Parameter(description = "调起方式 APP,NATIVE,JSAPI,H5,MP") @PathVariable String paymentClient,
 		@Validated PayParam payParam) {
 		PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.valueOf(paymentMethod);
 		PaymentClientEnum paymentClientEnum = PaymentClientEnum.valueOf(paymentClient);

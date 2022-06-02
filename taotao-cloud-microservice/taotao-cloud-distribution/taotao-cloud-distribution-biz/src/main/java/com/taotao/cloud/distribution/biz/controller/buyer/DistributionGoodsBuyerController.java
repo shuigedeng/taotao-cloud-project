@@ -8,11 +8,17 @@ import com.taotao.cloud.distribution.api.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +30,9 @@ import javax.validation.constraints.NotNull;
  * 买家端,分销商品接口
  *
  */
+@Validated
 @RestController
-@Api(tags = "买家端,分销商品接口")
+@Tag(name = "买家端-分销商品接口", description = "买家端-分销商品接口")
 @RequestMapping("/buyer/distribution/goods")
 public class DistributionGoodsBuyerController {
 
@@ -40,23 +47,23 @@ public class DistributionGoodsBuyerController {
     @Autowired
     private DistributionSelectedGoodsService distributionSelectedGoodsService;
 
-
-    @ApiOperation(value = "获取分销商商品列表")
+	@Operation(summary = "获取分销商商品列表", description = "获取分销商商品列表")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
     public Result<IPage<DistributionGoodsVO>> distributionGoods(
 	    DistributionGoodsPageQuery distributionGoodsPageQuery) {
         return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
     }
 
+	@Operation(summary = "选择分销商品", description = "选择分销商品")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
     @PreventDuplicateSubmissions
-    @ApiOperation(value = "选择分销商品")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "distributionGoodsId", value = "分销ID", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "checked", value = "是否选择", required = true, dataType = "boolean", paramType = "query")
-    })
     @GetMapping(value = "/checked/{distributionGoodsId}")
     public Result<Object> distributionCheckGoods(
-            @NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId,Boolean checked) {
+            @NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId, @Parameter(description = "是否选择") Boolean checked) {
         boolean result=false;
         if(checked){
             result=distributionSelectedGoodsService.add(distributionGoodsId);

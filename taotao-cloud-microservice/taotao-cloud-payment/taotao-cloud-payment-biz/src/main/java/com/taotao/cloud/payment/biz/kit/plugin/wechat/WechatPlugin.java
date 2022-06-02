@@ -6,10 +6,12 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
@@ -20,6 +22,7 @@ import com.taotao.cloud.payment.biz.kit.Payment;
 import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
 import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
 import com.taotao.cloud.payment.biz.kit.core.enums.SignType;
+import com.taotao.cloud.payment.biz.kit.core.kit.AesUtil;
 import com.taotao.cloud.payment.biz.kit.core.kit.HttpKit;
 import com.taotao.cloud.payment.biz.kit.core.kit.IpKit;
 import com.taotao.cloud.payment.biz.kit.core.kit.PayKit;
@@ -31,7 +34,10 @@ import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatApiEnum;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.enums.WechatDomain;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.Amount;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.H5Info;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.Payer;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.RefundModel;
+import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.SceneInfo;
 import com.taotao.cloud.payment.biz.kit.plugin.wechat.model.UnifiedOrderModel;
 import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
@@ -39,6 +45,7 @@ import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.payment.WechatPaymentSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -71,7 +78,7 @@ public class WechatPlugin implements Payment {
      * 缓存
      */
     @Autowired
-    private RedisRepository cache;
+    private RedisRepository redisRepository;
     /**
      * 退款日志
      */
@@ -115,7 +122,7 @@ public class WechatPlugin implements Payment {
             //支付金额
             Integer fen = CurrencyUtil.fen(cashierParam.getPrice());
             //第三方付款订单
-            String outOrderNo = SnowFlake.getIdStr();
+            String outOrderNo = IdGeneratorUtil.getIdStr();
             //过期时间
             String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
 
@@ -152,7 +159,7 @@ public class WechatPlugin implements Payment {
 
             return Result.success(JSONUtil.toJsonStr(response.getBody()));
         } catch (Exception e) {
-            log.error("微信H5支付错误", e);
+			LogUtil.error("微信H5支付错误", e);
             throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
@@ -176,7 +183,7 @@ public class WechatPlugin implements Payment {
             //支付金额
             Integer fen = CurrencyUtil.fen(cashierParam.getPrice());
             //第三方付款订单
-            String outOrderNo = SnowFlake.getIdStr();
+            String outOrderNo = IdGeneratorUtil.getIdStr();
             //过期时间
             String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
 
@@ -198,7 +205,7 @@ public class WechatPlugin implements Payment {
                     .setAmount(new Amount().setTotal(fen))
                     .setPayer(payer);
 
-            log.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
+			LogUtil.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
             PaymentHttpResponse response = WechatApi.v3(
                     RequestMethodEnums.POST,
                     WechatDomain.CHINA.toString(),
@@ -211,22 +218,22 @@ public class WechatPlugin implements Payment {
             );
             //根据证书序列号查询对应的证书来验证签名结果
             boolean verifySignature = WxPayKit.verifySignature(response, getPlatformCert());
-            log.info("verifySignature: {}", verifySignature);
-            log.info("统一下单响应 {}", response);
+			LogUtil.info("verifySignature: {}", verifySignature);
+			LogUtil.info("统一下单响应 {}", response);
 
             if (verifySignature) {
                 String body = response.getBody();
                 JSONObject jsonObject = JSONUtil.parseObj(body);
                 String prepayId = jsonObject.getStr("prepay_id");
                 Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId, setting.getApiclient_key());
-                log.info("唤起支付参数:{}", map);
+				LogUtil.info("唤起支付参数:{}", map);
 
                 return Result.success(map);
             }
-            log.error("微信支付参数验证错误，请及时处理");
+			LogUtil.error("微信支付参数验证错误，请及时处理");
             throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
             throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
@@ -241,7 +248,7 @@ public class WechatPlugin implements Payment {
             //支付金额
             Integer fen = CurrencyUtil.fen(cashierParam.getPrice());
             //第三方付款订单
-            String outOrderNo = SnowFlake.getIdStr();
+            String outOrderNo = IdGeneratorUtil.getIdStr();
             //过期时间
             String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
 
@@ -263,7 +270,7 @@ public class WechatPlugin implements Payment {
                     .setAmount(new Amount().setTotal(fen));
 
 
-            log.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
+			LogUtil.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
             PaymentHttpResponse response = WechatApi.v3(
                     RequestMethodEnums.POST,
                     WechatDomain.CHINA.toString(),
@@ -276,8 +283,8 @@ public class WechatPlugin implements Payment {
             );
             //根据证书序列号查询对应的证书来验证签名结果
             boolean verifySignature = WxPayKit.verifySignature(response, getPlatformCert());
-            log.info("verifySignature: {}", verifySignature);
-            log.info("统一下单响应 {}", response);
+			LogUtil.info("verifySignature: {}", verifySignature);
+			LogUtil.info("统一下单响应 {}", response);
 
             if (verifySignature) {
                 JSONObject jsonObject = JSONUtil.parseObj(response.getBody());
@@ -286,14 +293,14 @@ public class WechatPlugin implements Payment {
                         setting.getMchId(),
                         prepayId,
                         setting.getApiclient_key(), SignType.HMACSHA256);
-                log.info("唤起支付参数:{}", map);
+				LogUtil.info("唤起支付参数:{}", map);
 
                 return Result.success(map);
             }
-            log.error("微信支付参数验证错误，请及时处理");
+			LogUtil.error("微信支付参数验证错误，请及时处理");
             throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
             throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
@@ -308,7 +315,7 @@ public class WechatPlugin implements Payment {
             //支付金额
             Integer fen = CurrencyUtil.fen(cashierParam.getPrice());
             //第三方付款订单
-            String outOrderNo = SnowFlake.getIdStr();
+            String outOrderNo = IdGeneratorUtil.getIdStr();
             //过期时间
             String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
 
@@ -331,7 +338,7 @@ public class WechatPlugin implements Payment {
                     .setNotify_url(notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.WECHAT))
                     .setAmount(new Amount().setTotal(fen));
 
-            log.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
+			LogUtil.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
             PaymentHttpResponse response = WechatApi.v3(
                     RequestMethodEnums.POST,
                     WechatDomain.CHINA.toString(),
@@ -342,22 +349,22 @@ public class WechatPlugin implements Payment {
                     setting.getApiclient_key(),
                     JSONUtil.toJsonStr(unifiedOrderModel)
             );
-            log.info("统一下单响应 {}", response);
+			LogUtil.info("统一下单响应 {}", response);
             //根据证书序列号查询对应的证书来验证签名结果
             boolean verifySignature = WxPayKit.verifySignature(response, getPlatformCert());
-            log.info("verifySignature: {}", verifySignature);
+			LogUtil.info("verifySignature: {}", verifySignature);
 
             if (verifySignature) {
                 return Result.success(new JSONObject(response.getBody()).getStr("code_url"));
             } else {
-                log.error("微信支付参数验证错误，请及时处理");
+				LogUtil.error("微信支付参数验证错误，请及时处理");
                 throw new BusinessException(ResultEnum.PAY_ERROR);
             }
         } catch (ServiceException e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
             throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
             throw new BusinessException(ResultEnum.PAY_ERROR);
         }
     }
@@ -381,7 +388,7 @@ public class WechatPlugin implements Payment {
             //支付金额
             Integer fen = CurrencyUtil.fen(cashierParam.getPrice());
             //第三方付款订单
-            String outOrderNo = SnowFlake.getIdStr();
+            String outOrderNo = IdGeneratorUtil.getIdStr();
             //过期时间
             String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
 
@@ -405,7 +412,7 @@ public class WechatPlugin implements Payment {
                     .setAmount(new Amount().setTotal(fen))
                     .setPayer(payer);
 
-            log.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
+			LogUtil.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
             PaymentHttpResponse response = WechatApi.v3(
                     RequestMethodEnums.POST,
                     WechatDomain.CHINA.toString(),
@@ -418,22 +425,22 @@ public class WechatPlugin implements Payment {
             );
             //根据证书序列号查询对应的证书来验证签名结果
             boolean verifySignature = WxPayKit.verifySignature(response, getPlatformCert());
-            log.info("verifySignature: {}", verifySignature);
-            log.info("统一下单响应 {}", response);
+			LogUtil.info("verifySignature: {}", verifySignature);
+			LogUtil.info("统一下单响应 {}", response);
 
             if (verifySignature) {
                 String body = response.getBody();
                 JSONObject jsonObject = JSONUtil.parseObj(body);
                 String prepayId = jsonObject.getStr("prepay_id");
                 Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId, setting.getApiclient_key());
-                log.info("唤起支付参数:{}", map);
+                LogUtil.info("唤起支付参数:{}", map);
 
                 return Result.success(map);
             }
-            log.error("微信支付参数验证错误，请及时处理");
+			LogUtil.error("微信支付参数验证错误，请及时处理");
             throw new BusinessException(ResultEnum.PAY_ERROR);
         } catch (Exception e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
             throw new BusinessException(ResultEnum.PAY_ERROR);
         }
 
@@ -444,7 +451,7 @@ public class WechatPlugin implements Payment {
         try {
             verifyNotify(request);
         } catch (Exception e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
         }
     }
 
@@ -453,7 +460,7 @@ public class WechatPlugin implements Payment {
         try {
             verifyNotify(request);
         } catch (Exception e) {
-            log.error("支付异常", e);
+			LogUtil.error("支付异常", e);
         }
     }
 
@@ -470,16 +477,16 @@ public class WechatPlugin implements Payment {
         String serialNo = request.getHeader("Wechatpay-Serial");
         String signature = request.getHeader("Wechatpay-Signature");
 
-        log.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo, signature);
+		LogUtil.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo, signature);
         String result = HttpKit.readData(request);
-        log.info("微信支付通知密文 {}", result);
+		LogUtil.info("微信支付通知密文 {}", result);
 
         WechatPaymentSetting setting = wechatPaymentSetting();
         //校验服务器端响应¬
         String plainText = WxPayKit.verifyNotify(serialNo, result, signature, nonce, timestamp,
                 setting.getApiKey3(), Objects.requireNonNull(getPlatformCert()));
 
-        log.info("微信支付通知明文 {}", plainText);
+		LogUtil.info("微信支付通知明文 {}", plainText);
 
         JSONObject jsonObject = JSONUtil.parseObj(plainText);
 
@@ -499,7 +506,7 @@ public class WechatPlugin implements Payment {
         );
 
         paymentService.success(paymentSuccessParams);
-        log.info("微信支付回调：支付成功{}", plainText);
+		LogUtil.info("微信支付回调：支付成功{}", plainText);
     }
 
     @Override
@@ -520,7 +527,7 @@ public class WechatPlugin implements Payment {
 
             WechatPaymentSetting setting = wechatPaymentSetting();
 
-            log.info("微信退款参数 {}", JSONUtil.toJsonStr(refundModel));
+			LogUtil.info("微信退款参数 {}", JSONUtil.toJsonStr(refundModel));
             PaymentHttpResponse response = WechatApi.v3(
                     RequestMethodEnums.POST,
                     WechatDomain.CHINA.toString(),
@@ -531,7 +538,7 @@ public class WechatPlugin implements Payment {
                     setting.getApiclient_key(),
                     JSONUtil.toJsonStr(refundModel)
             );
-            log.info("微信退款响应 {}", response);
+			LogUtil.info("微信退款响应 {}", response);
             //退款申请成功
             if (response.getStatus() == 200) {
                 refundLogService.save(refundLog);
@@ -541,7 +548,7 @@ public class WechatPlugin implements Payment {
                 refundLogService.save(refundLog);
             }
         } catch (Exception e) {
-            log.error("微信退款申请失败", e);
+			LogUtil.error("微信退款申请失败", e);
         }
 
     }
@@ -559,18 +566,18 @@ public class WechatPlugin implements Payment {
         String serialNo = request.getHeader("Wechatpay-Serial");
         String signature = request.getHeader("Wechatpay-Signature");
 
-        log.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo, signature);
+		LogUtil.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo, signature);
         String result = HttpKit.readData(request);
-        log.info("微信退款通知密文 {}", result);
+		LogUtil.info("微信退款通知密文 {}", result);
         JSONObject ciphertext = JSONUtil.parseObj(result);
 
         try { //校验服务器端响应¬
             String plainText = WxPayKit.verifyNotify(serialNo, result, signature, nonce, timestamp,
                     wechatPaymentSetting().getApiKey3(), Objects.requireNonNull(getPlatformCert()));
-            log.info("微信退款通知明文 {}", plainText);
+			LogUtil.info("微信退款通知明文 {}", plainText);
 
             if (("REFUND.SUCCESS").equals(ciphertext.getStr("event_type"))) {
-                log.info("退款成功 {}", plainText);
+				LogUtil.info("退款成功 {}", plainText);
                 //校验服务器端响应
                 JSONObject jsonObject = JSONUtil.parseObj(plainText);
                 String transactionId = jsonObject.getStr("transaction_id");
@@ -584,7 +591,7 @@ public class WechatPlugin implements Payment {
                 }
 
             } else {
-                log.info("退款失败 {}", plainText);
+				LogUtil.info("退款失败 {}", plainText);
                 JSONObject jsonObject = JSONUtil.parseObj(plainText);
                 String transactionId = jsonObject.getStr("transaction_id");
                 String refundId = jsonObject.getStr("refund_id");
@@ -597,7 +604,7 @@ public class WechatPlugin implements Payment {
                 }
             }
         } catch (Exception e) {
-            log.error("微信退款失败", e);
+			LogUtil.error("微信退款失败", e);
         }
     }
 
@@ -608,11 +615,10 @@ public class WechatPlugin implements Payment {
      */
     private WechatPaymentSetting wechatPaymentSetting() {
         try {
-            Setting systemSetting = settingService.get(SettingEnum.WECHAT_PAYMENT.name());
-            WechatPaymentSetting wechatPaymentSetting = JSONUtil.toBean(systemSetting.getSettingValue(), WechatPaymentSetting.class);
+			WechatPaymentSetting wechatPaymentSetting = settingService.getWechatPaymentSetting(SettingEnum.WECHAT_PAYMENT.name()).data();
             return wechatPaymentSetting;
         } catch (Exception e) {
-            log.error("微信支付暂不支持", e);
+			LogUtil.error("微信支付暂不支持", e);
             throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
         }
     }
@@ -624,7 +630,7 @@ public class WechatPlugin implements Payment {
      */
     private X509Certificate getPlatformCert() {
         //获取缓存中的平台公钥，如果有则直接返回，否则去微信请求
-        String publicCert = cache.getString(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix());
+        String publicCert = (String) redisRepository.get(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix());
         if (!StringUtils.isEmpty(publicCert)) {
             return PayKit.getCertificate(publicCert);
         }
@@ -644,7 +650,7 @@ public class WechatPlugin implements Payment {
                     ""
             );
             String body = response.getBody();
-            log.info("获取微信平台证书body: {}", body);
+			LogUtil.info("获取微信平台证书body: {}", body);
             if (response.getStatus() == 200) {
                 JSONObject jsonObject = JSONUtil.parseObj(body);
                 JSONArray dataArray = jsonObject.getJSONArray("data");
@@ -656,14 +662,14 @@ public class WechatPlugin implements Payment {
                 String nonce = encryptCertificate.getStr("nonce");
                 publicCert = getPlatformCertStr(associatedData, nonce, cipherText);
                 long second = (PayKit.getCertificate(publicCert).getNotAfter().getTime() - System.currentTimeMillis()) / 1000;
-                cache.put(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix(), publicCert, second);
+                redisRepository.set(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix(), publicCert, second);
             } else {
-                log.error("证书获取失败：{}" + body);
+				LogUtil.error("证书获取失败：{}" + body);
                 throw new BusinessException(ResultEnum.WECHAT_CERT_ERROR);
             }
             return PayKit.getCertificate(publicCert);
         } catch (Exception e) {
-            log.error("证书获取失败", e);
+			LogUtil.error("证书获取失败", e);
         }
         return null;
     }

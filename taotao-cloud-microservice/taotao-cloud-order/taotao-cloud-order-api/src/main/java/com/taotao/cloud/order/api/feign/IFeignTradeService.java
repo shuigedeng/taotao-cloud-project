@@ -18,5 +18,8 @@ public interface IFeignTradeService {
 
 	@GetMapping(value = "/trade")
 	TradeVO getBySn(String sn);
+
+    void payTrade(String sn, String paymentMethod, String receivableNo);
+
 }
 

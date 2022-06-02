@@ -28,10 +28,4 @@ public class ArticlePageQuery extends PageParam {
 	@Schema(description = "分类类型")
 	private String type;
 
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		queryWrapper.eq(StringUtils.isNotBlank(categoryId), "category_id", categoryId);
-		queryWrapper.like(StringUtils.isNotBlank(title), "title", title);
-		return queryWrapper;
-	}
 }

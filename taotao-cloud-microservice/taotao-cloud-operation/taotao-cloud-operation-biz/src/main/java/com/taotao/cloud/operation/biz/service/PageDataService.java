@@ -9,6 +9,10 @@ import com.taotao.cloud.operation.biz.entity.PageData;
 
 /**
  * 页面业务层
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-06-02 15:06:05
  */
 public interface PageDataService extends IService<PageData> {
 
@@ -16,7 +20,7 @@ public interface PageDataService extends IService<PageData> {
 	 * 添加店铺页面 用于初次开店，生成店铺首页
 	 *
 	 * @param storeId 店铺ID
-	 * @return 页面
+	 * @since 2022-06-02 15:06:05
 	 */
 	void addStorePageData(String storeId);
 
@@ -24,7 +28,8 @@ public interface PageDataService extends IService<PageData> {
 	 * 添加页面
 	 *
 	 * @param pageData 页面
-	 * @return 页面
+	 * @return {@link PageData }
+	 * @since 2022-06-02 15:06:05
 	 */
 	PageData addPageData(PageData pageData);
 
@@ -32,7 +37,8 @@ public interface PageDataService extends IService<PageData> {
 	 * 修改页面
 	 *
 	 * @param pageData 页面
-	 * @return 页面
+	 * @return {@link PageData }
+	 * @since 2022-06-02 15:06:05
 	 */
 	PageData updatePageData(PageData pageData);
 
@@ -40,7 +46,8 @@ public interface PageDataService extends IService<PageData> {
 	 * 发布页面
 	 *
 	 * @param id 页面ID
-	 * @return 页面
+	 * @return {@link PageData }
+	 * @since 2022-06-02 15:06:05
 	 */
 	PageData releasePageData(String id);
 
@@ -48,7 +55,8 @@ public interface PageDataService extends IService<PageData> {
 	 * 删除页面
 	 *
 	 * @param id 页面ID
-	 * @return 操作状态
+	 * @return boolean
+	 * @since 2022-06-02 15:06:05
 	 */
 	boolean removePageData(String id);
 
@@ -56,7 +64,8 @@ public interface PageDataService extends IService<PageData> {
 	 * 获取页面 用户前台页面展示
 	 *
 	 * @param pageDataDTO 页面数据DTO
-	 * @return
+	 * @return {@link PageDataVO }
+	 * @since 2022-06-02 15:06:05
 	 */
 	PageDataVO getPageData(PageDataDTO pageDataDTO);
 
@@ -65,7 +74,8 @@ public interface PageDataService extends IService<PageData> {
 	 *
 	 * @param pageVO      分页
 	 * @param pageDataDTO 查询数据
-	 * @return
+	 * @return {@link IPage }<{@link PageDataListVO }>
+	 * @since 2022-06-02 15:06:05
 	 */
 	IPage<PageDataListVO> getPageDataList(PageVO pageVO, PageDataDTO pageDataDTO);
 }

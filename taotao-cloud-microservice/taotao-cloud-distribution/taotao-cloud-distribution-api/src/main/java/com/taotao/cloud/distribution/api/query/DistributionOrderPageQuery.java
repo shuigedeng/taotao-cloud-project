@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Schema(description = "分销订单查询对象")
 public class DistributionOrderPageQuery extends PageParam {
 
+	@Serial
 	private static final long serialVersionUID = -8736018687663645064L;
 
 	@Schema(description = "分销员名称")

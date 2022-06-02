@@ -15,14 +15,16 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface ArticleMapper extends BaseMapper<Article> {
 
-    /**
-     * 获取文章VO分页
-     *
-     * @param page         分页
-     * @param queryWrapper 查询条件
-     * @return 文章VO分页
-     */
-    @Select("select a.id,a.title,a.sort,ac.article_category_name,a.open_status from " +
-            "tt_article as a inner join tt_article_category ac on a.category_id=ac.id ${ew.customSqlSegment}")
-    IPage<ArticleVO> getArticleList(IPage<ArticleVO> page, @Param(Constants.WRAPPER) Wrapper<ArticleVO> queryWrapper);
+	/**
+	 * 获取文章VO分页
+	 *
+	 * @param page         分页
+	 * @param queryWrapper 查询条件
+	 * @return 文章VO分页
+	 */
+	@Select("""
+		select a.id,a.title,a.sort,ac.article_category_name,a.open_status 
+		from tt_article as a inner join tt_article_category ac on a.category_id=ac.id ${ew.customSqlSegment}
+		""")
+	IPage<ArticleVO> getArticleList(IPage<ArticleVO> page, @Param(Constants.WRAPPER) Wrapper<ArticleVO> queryWrapper);
 }
