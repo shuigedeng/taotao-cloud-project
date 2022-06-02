@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 支持的支付方式属性
+ *
  */
 @Data
 public class PaymentSupportItem {

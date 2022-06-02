@@ -11,9 +11,15 @@ import java.io.Serializable;
 @Data
 public class SeckillSetting implements Serializable {
 
-	@NotNull(message = "活动时间段不能为空 例如：6,8,12")
+	/**
+	 * 开启几点场 例如：6,8,12
+	 */
+	@NotNull(message = "活动时间段不能为空")
 	private String hours;
 
+	/**
+	 * 秒杀规则
+	 */
 	@NotNull(message = "秒杀规则不能为空")
 	private String seckillRule;
 }
