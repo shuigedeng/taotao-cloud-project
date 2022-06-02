@@ -2,7 +2,6 @@ package com.taotao.cloud.operation.api.vo;
 
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

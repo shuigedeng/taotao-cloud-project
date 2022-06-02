@@ -1,6 +1,8 @@
 package com.taotao.cloud.distribution.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.distribution.api.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
@@ -38,13 +40,13 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 
 	public static final String TABLE_NAME = "tt_distribution";
 
-	//public Distribution(String memberId, String memberName, DistributionApplyDTO distributionApplyDTO) {
-	//    this.memberId = memberId;
-	//    this.memberName = memberName;
-	//    distributionOrderCount=0;
-	//    this.distributionStatus = DistributionStatusEnum.APPLY.name();
-	//    BeanUtil.copyProperties(distributionApplyDTO, this);
-	//}
+	public Distribution(Long memberId, String memberName, DistributionApplyDTO distributionApplyDTO) {
+	   this.memberId = memberId;
+	   this.memberName = memberName;
+	   distributionOrderCount=0;
+	   this.distributionStatus = DistributionStatusEnum.APPLY.name();
+	   BeanUtil.copyProperties(distributionApplyDTO, this);
+	}
 
 	/**
 	 * 会员id

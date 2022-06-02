@@ -21,8 +21,10 @@ public class PageDataListVO {
 
 	@Schema(description = "页面ID")
 	private String id;
+
 	@Schema(description = "页面名称")
 	private String name;
+
 	/**
 	 * @see SwitchEnum
 	 */

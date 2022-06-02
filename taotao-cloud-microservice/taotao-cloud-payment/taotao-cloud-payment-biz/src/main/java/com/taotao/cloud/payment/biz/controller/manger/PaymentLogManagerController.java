@@ -4,6 +4,8 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.vo.order.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,15 +31,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class PaymentLogManagerController {
 
     @Autowired
-    private OrderService orderService;
+    private IFeignOrderService orderService;
 
 	@Operation(summary = "分页获取支付日志", description = "分页获取支付日志")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping
-    public Result<IPage<PaymentLog>> getByPage(Order order,
-                                                      SearchVO searchVo,
-                                                      PageVO page) {
+    public Result<IPage<PaymentLog>> getByPage(OrderVO order,
+											   SearchVO searchVo,
+											   PageVO page) {
         return Result.success(orderService.queryPaymentLogs(
 	        PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
     }

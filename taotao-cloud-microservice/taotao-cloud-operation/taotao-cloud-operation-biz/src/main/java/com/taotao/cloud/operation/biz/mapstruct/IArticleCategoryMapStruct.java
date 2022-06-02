@@ -13,35 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.biz.mapper;
+package com.taotao.cloud.operation.biz.mapstruct;
 
-import com.taotao.cloud.dubbo.biz.entity.PayFlow;
-import com.taotao.cloud.payment.api.vo.PayFlowVO;
+import com.taotao.cloud.operation.api.vo.ArticleCategoryVO;
+import com.taotao.cloud.operation.biz.entity.ArticleCategory;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
+ * DeptMapStruct
+ *
  * @author shuigedeng
- * @since 2020/11/11 14:42
- * @version 2022.03
+ * @version 2022.04
+ * @since 2022-04-28 13:39:18
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface PayFlowMapper {
-
-	PayFlowMapper INSTANCE = Mappers.getMapper(PayFlowMapper.class);
+public interface IArticleCategoryMapStruct {
 
 	/**
-	 * payFlow转PayFlowVO
-	 *
-	 * @param payFlow payFlow
-	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
-	 * @author shuigedeng
-	 * @since 2020/11/11 14:47
-	 * @version 2022.03
+	 * 实例
 	 */
-	PayFlowVO payFlowToPayFlowVO(PayFlow payFlow);
+	IArticleCategoryMapStruct INSTANCE = Mappers.getMapper(IArticleCategoryMapStruct.class);
+
+	ArticleCategoryVO articleCategoryToArticleCategoryVO(ArticleCategory articleCategory);
+
 }

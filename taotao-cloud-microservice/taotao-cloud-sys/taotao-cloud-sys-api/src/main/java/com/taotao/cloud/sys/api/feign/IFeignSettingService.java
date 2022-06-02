@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignSettingFallback;
+import com.taotao.cloud.sys.api.vo.setting.BaseSetting;
 import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
@@ -11,6 +12,8 @@ import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SeckillSetting;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
+import com.taotao.cloud.sys.api.vo.setting.payment.AlipayPaymentSetting;
+import com.taotao.cloud.sys.api.vo.setting.payment.WechatPaymentSetting;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +37,9 @@ public interface IFeignSettingService {
 	 */
 	@GetMapping("/sys/tools/setting")
 	Result<SettingVO> get(@RequestParam(value = "key") String key);
+
+	@GetMapping("/sys/tools/setting/base")
+	Result<BaseSetting> getBaseSetting(String name);
 
 	/**
 	 * 获得商品设置
@@ -63,5 +69,10 @@ public interface IFeignSettingService {
 
 	@GetMapping("/sys/tools/setting/seckill")
 	Result<SeckillSetting> getSeckillSetting(String name);
+
+	@GetMapping("/sys/tools/setting/ali")
+	Result<AlipayPaymentSetting> getAlipayPaymentSetting(String name);
+	@GetMapping("/sys/tools/setting/wechat")
+	Result<WechatPaymentSetting> getWechatPaymentSetting(String name);
 
 }

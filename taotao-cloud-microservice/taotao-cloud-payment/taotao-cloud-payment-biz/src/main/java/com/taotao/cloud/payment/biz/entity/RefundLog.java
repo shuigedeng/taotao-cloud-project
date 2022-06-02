@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -30,7 +31,7 @@ import java.util.Date;
 public class RefundLog extends BaseIdEntity {
 
     @Schema(description =  "会员ID")
-    private String memberId;
+    private Long memberId;
 
     @Schema(description =  "退单编号")
     private String afterSaleNo;

@@ -9,8 +9,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.operation.api.query.ArticlePageQuery;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
+import com.taotao.cloud.operation.api.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.entity.Article;
 import com.taotao.cloud.operation.biz.mapper.ArticleMapper;
@@ -26,64 +29,72 @@ import java.util.List;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements
 	ArticleService {
 
-    @Override
-    public IPage<ArticleVO> managerArticlePage(ArticlePageQuery articlePageQuery) {
-        articlePageQuery.setSort("a.sort");
-        return this.baseMapper.getArticleList(PageUtil.initPage(articlePageQuery), articlePageQuery.queryWrapper());
-    }
+	@Override
+	public IPage<ArticleVO> managerArticlePage(ArticlePageQuery articlePageQuery) {
+		articlePageQuery.setSort("a.sort");
 
-    @Override
-    public IPage<ArticleVO> articlePage(ArticlePageQuery articlePageQuery) {
-        articlePageQuery.setSort("a.sort");
-        QueryWrapper queryWrapper = articlePageQuery.queryWrapper();
-        queryWrapper.eq("open_status", true);
-        return this.baseMapper.getArticleList(PageUtil.initPage(articlePageQuery), queryWrapper);
-    }
+		QueryWrapper<ArticleVO> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq(StringUtils.isNotBlank(articlePageQuery.getCategoryId()), "category_id", articlePageQuery.getCategoryId());
+		queryWrapper.like(StringUtils.isNotBlank(articlePageQuery.getTitle()), "title", articlePageQuery.getTitle());
 
-    @Override
-    public List<Article> list(String categoryId) {
+		return this.baseMapper.getArticleList(articlePageQuery.buildMpPage(), queryWrapper);
+	}
 
-        QueryWrapper<Article> queryWrapper = Wrappers.query();
-        queryWrapper.eq(StringUtils.isNotBlank(categoryId), "category_id", categoryId);
-        return this.list(queryWrapper);
-    }
+	@Override
+	public IPage<ArticleVO> articlePage(ArticlePageQuery articlePageQuery) {
+		articlePageQuery.setSort("a.sort");
+		QueryWrapper<ArticleVO> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq(StringUtils.isNotBlank(articlePageQuery.getCategoryId()), "category_id", articlePageQuery.getCategoryId());
+		queryWrapper.like(StringUtils.isNotBlank(articlePageQuery.getTitle()), "title", articlePageQuery.getTitle());
+		queryWrapper.eq("open_status", true);
+
+		return this.baseMapper.getArticleList(articlePageQuery.buildMpPage(), queryWrapper);
+	}
+
+	@Override
+	public List<Article> list(String categoryId) {
+
+		QueryWrapper<Article> queryWrapper = Wrappers.query();
+		queryWrapper.eq(StringUtils.isNotBlank(categoryId), "category_id", categoryId);
+		return this.list(queryWrapper);
+	}
 
 
-    @Override
-    public Article updateArticle(Article article) {
-        Article oldArticle = this.getById(article.getId());
-        BeanUtil.copyProperties(article, oldArticle);
-        this.updateById(oldArticle);
-        return oldArticle;
-    }
+	@Override
+	public Article updateArticle(Article article) {
+		Article oldArticle = this.getById(article.getId());
+		BeanUtil.copyProperties(article, oldArticle);
+		this.updateById(oldArticle);
+		return oldArticle;
+	}
 
-    @Override
-    public void customRemove(String id) {
-        //判断是否为默认文章
-        if (this.getById(id).getType().equals(ArticleEnum.OTHER.name())) {
-            this.removeById(id);
-        } else {
-            throw new BusinessException(ResultEnum.ARTICLE_NO_DELETION);
-        }
-    }
+	@Override
+	public void customRemove(String id) {
+		//判断是否为默认文章
+		if (this.getById(id).getType().equals(ArticleEnum.OTHER.name())) {
+			this.removeById(id);
+		} else {
+			throw new BusinessException(ResultEnum.ARTICLE_NO_DELETION);
+		}
+	}
 
-    @Override
-    public Article customGet(String id) {
-        return this.getById(id);
-    }
+	@Override
+	public Article customGet(String id) {
+		return this.getById(id);
+	}
 
-    @Override
-    public Article customGetByType(String type) {
-        if (!CharSequenceUtil.equals(type, ArticleEnum.OTHER.name())) {
-            return this.getOne(new LambdaUpdateWrapper<Article>().eq(Article::getType, type));
-        }
-        return null;
-    }
+	@Override
+	public Article customGetByType(String type) {
+		if (!CharSequenceUtil.equals(type, ArticleEnum.OTHER.name())) {
+			return this.getOne(new LambdaUpdateWrapper<Article>().eq(Article::getType, type));
+		}
+		return null;
+	}
 
-    @Override
-    public Boolean updateArticleStatus(String id, boolean status) {
-        Article article = this.getById(id);
-        article.setOpenStatus(status);
-        return this.updateById(article);
-    }
+	@Override
+	public Boolean updateArticleStatus(String id, boolean status) {
+		Article article = this.getById(id);
+		article.setOpenStatus(status);
+		return this.updateById(article);
+	}
 }

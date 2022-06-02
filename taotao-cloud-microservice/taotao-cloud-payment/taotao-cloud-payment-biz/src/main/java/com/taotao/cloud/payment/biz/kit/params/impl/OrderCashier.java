@@ -1,6 +1,5 @@
 package com.taotao.cloud.payment.biz.kit.params.impl;
 
-import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -17,6 +16,7 @@ import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.vo.setting.BaseSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,16 +53,16 @@ public class OrderCashier implements CashierExecute {
 
 			//如果订单已支付，则不能发器支付
 			if (order.order().payStatus().equals(PayStatusEnum.PAID.name())) {
-				throw new BusinessException(ResultEnum.PAY_BigDecimal_ERROR);
+				throw new BusinessException(ResultEnum.PAY_CASHIER_ERROR);
 			}
 			//如果订单状态不是待付款，则抛出异常
 			if (!order.order().orderStatus().equals(OrderStatusEnum.UNPAID.name())) {
 				throw new BusinessException(ResultEnum.PAY_BAN);
 			}
-			cashierParam.setPrice(order.getOrder().getFlowPrice());
+			cashierParam.setPrice(order.order().flowPrice());
 
 			try {
-				BaseSetting baseSetting = JSONUtil.toBean(settingService.get(SettingEnum.BASE_SETTING.name()).getSettingValue(), BaseSetting.class);
+				BaseSetting baseSetting = settingService.getBaseSetting(SettingEnum.BASE_SETTING.name()).data();
 				cashierParam.setTitle(baseSetting.getSiteName());
 			} catch (Exception e) {
 				cashierParam.setTitle("多用户商城，在线支付");

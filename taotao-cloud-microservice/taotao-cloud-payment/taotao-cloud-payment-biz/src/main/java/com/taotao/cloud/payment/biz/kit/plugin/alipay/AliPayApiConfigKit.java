@@ -5,6 +5,10 @@ import cn.hutool.json.JSONUtil;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.vo.setting.payment.AlipayPaymentSetting;
 
 import java.util.Date;
 
@@ -53,6 +57,7 @@ public class AliPayApiConfigKit {
         } catch (Exception e) {
             throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
         }
+
         CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
         certAlipayRequest.setServerUrl("https://openapi.alipay.com/gateway.do");
         certAlipayRequest.setFormat("json");

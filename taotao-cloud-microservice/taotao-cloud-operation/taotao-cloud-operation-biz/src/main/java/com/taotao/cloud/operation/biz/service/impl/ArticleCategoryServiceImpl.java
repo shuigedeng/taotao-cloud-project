@@ -2,9 +2,17 @@ package com.taotao.cloud.operation.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
+import com.taotao.cloud.operation.api.enums.ArticleEnum;
+import com.taotao.cloud.operation.api.vo.ArticleCategoryVO;
+import com.taotao.cloud.operation.biz.entity.Article;
 import com.taotao.cloud.operation.biz.entity.ArticleCategory;
 import com.taotao.cloud.operation.biz.mapper.ArticleCategoryMapper;
+import com.taotao.cloud.operation.biz.mapstruct.IArticleCategoryMapStruct;
 import com.taotao.cloud.operation.biz.service.ArticleCategoryService;
 import com.taotao.cloud.operation.biz.service.ArticleService;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -18,6 +26,10 @@ import java.util.List;
 
 /**
  * 文章分类业务层实现
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-06-02 15:06:23
  */
 @Service
 public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMapper, ArticleCategory> implements
@@ -36,11 +48,11 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
     /**
      * 顶级父分类ID
      */
-    private String parentId = "0";
+    private static final String parentId = "0";
     /**
      * 最大分类等级
      */
-    private int maxLevel = 2;
+    private static final int maxLevel = 2;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -121,7 +133,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
     @Override
     public List<ArticleCategoryVO> allChildren() {
         //从缓存取所有的分类
-        Object all = cache.get(CachePrefix.ARTICLE_CATEGORY.getPrefix());
+        Object all = redisRepository.get(CachePrefix.ARTICLE_CATEGORY.getPrefix());
         List<ArticleCategoryVO> articleCategories;
         if (all == null) {
             //调用初始化分类缓存方法
@@ -142,19 +154,20 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
         List<ArticleCategoryVO> tree = new ArrayList<>();
         articleCategories.forEach(item -> {
             if (item.getLevel() == 0) {
-                ArticleCategoryVO articleCategoryVO = new ArticleCategoryVO(item);
+				ArticleCategoryVO articleCategoryVO = IArticleCategoryMapStruct.INSTANCE.articleCategoryToArticleCategoryVO(item);
                 initChild(articleCategoryVO, articleCategories);
                 tree.add(articleCategoryVO);
             }
         });
+
         //对一级菜单排序
         tree.sort(new Comparator<ArticleCategoryVO>() {
             @Override
             public int compare(ArticleCategoryVO o1, ArticleCategoryVO o2) {
-                return o1.getSort().compareTo(o2.getSort());
+                return o1.getSortNum().compareTo(o2.getSortNum());
             }
         });
-        cache.put(CachePrefix.ARTICLE_CATEGORY.getPrefix(), tree);
+        redisRepository.set(CachePrefix.ARTICLE_CATEGORY.getPrefix(), tree);
 
         return tree;
     }
@@ -172,7 +185,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
         articleCategories.stream()
                 .filter(item -> (item.getParentId().equals(tree.getId())))
                 .forEach(child -> {
-                    ArticleCategoryVO childTree = new ArticleCategoryVO(child);
+					ArticleCategoryVO childTree = IArticleCategoryMapStruct.INSTANCE.articleCategoryToArticleCategoryVO(child);
                     initChild(childTree, articleCategories);
                     tree.getChildren().add(childTree);
                 });
@@ -182,7 +195,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
      * 清除缓存中的文章分类
      */
     private void clearCache() {
-        cache.remove(CachePrefix.ARTICLE_CATEGORY.getPrefix());
+        redisRepository.del(CachePrefix.ARTICLE_CATEGORY.getPrefix());
     }
 
 

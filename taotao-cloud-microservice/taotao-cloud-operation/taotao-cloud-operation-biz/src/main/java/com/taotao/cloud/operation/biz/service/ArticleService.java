@@ -13,6 +13,10 @@ import org.springframework.cache.annotation.Cacheable;
 
 /**
  * 文章业务层
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-06-02 15:05:50
  */
 @CacheConfig(cacheNames = "{article}")
 public interface ArticleService extends IService<Article> {
@@ -21,7 +25,8 @@ public interface ArticleService extends IService<Article> {
 	 * 管理端获取文章
 	 *
 	 * @param articlePageQuery
-	 * @return
+	 * @return {@link IPage }<{@link ArticleVO }>
+	 * @since 2022-06-02 15:05:50
 	 */
 	IPage<ArticleVO> managerArticlePage(ArticlePageQuery articlePageQuery);
 
@@ -29,7 +34,8 @@ public interface ArticleService extends IService<Article> {
 	 * 获取文章分页
 	 *
 	 * @param articlePageQuery 文章搜索条件
-	 * @return 文章分页
+	 * @return {@link IPage }<{@link ArticleVO }>
+	 * @since 2022-06-02 15:05:50
 	 */
 	IPage<ArticleVO> articlePage(ArticlePageQuery articlePageQuery);
 
@@ -37,7 +43,8 @@ public interface ArticleService extends IService<Article> {
 	 * 获取文章分页
 	 *
 	 * @param categoryId 文章分类ID
-	 * @return 文章分页
+	 * @return {@link List }<{@link Article }>
+	 * @since 2022-06-02 15:05:50
 	 */
 	List<Article> list(String categoryId);
 
@@ -45,7 +52,8 @@ public interface ArticleService extends IService<Article> {
 	 * 修改文章内容
 	 *
 	 * @param article 文章
-	 * @return 修改后的文章
+	 * @return {@link Article }
+	 * @since 2022-06-02 15:05:50
 	 */
 	@CacheEvict(key = "#article.id")
 	Article updateArticle(Article article);
