@@ -217,7 +217,7 @@ public enum ResultEnum implements BaseEnum {
 	HTTP_MESSAGE_NOT_READABLE(500038, "类型参数数据类型转换异常"),
 
 
-	SQL_INJECTION_REQUEST(500039, "疑似SQL注入请求"),
+	SQL_INJECTION_REQUEST(403, "疑似SQL注入请求"),
 
 	/**
 	 * 系统异常
