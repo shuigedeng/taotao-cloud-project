@@ -1,6 +1,6 @@
-package com.taotao.cloud.mongodb.service;
+package com.taotao.cloud.mongodb.mongodb.service;
 
-import com.taotao.cloud.mongodb.helper.bean.Page;
+import com.taotao.cloud.mongodb.mongodb.vo.Page;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
