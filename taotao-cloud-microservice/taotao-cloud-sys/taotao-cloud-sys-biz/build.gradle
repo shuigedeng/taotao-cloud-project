@@ -25,6 +25,8 @@ dependencies {
 
     implementation 'wiki.xsx:x-easypdf:2.8.1'
 
+    implementation 'io.github.memorydoc:gobrs-async-starter:1.1.7-RELEASE'
+
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
