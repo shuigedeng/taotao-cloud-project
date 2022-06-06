@@ -1,7 +1,12 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    api 'com.alibaba.cloud:spring-cloud-starter-dubbo'
+    api('com.alibaba.cloud:spring-cloud-starter-dubbo'){
+        exclude group: 'org.apache.dubbo', module: 'dubbo'
+        exclude group: 'org.apache.dubbo', module: 'dubbo-spring-boot-starter'
+    }
+    api 'org.apache.dubbo:dubbo-spring-boot-starter:3.0.8'
+
     //api 'com.esotericsoftware.kryo:kryo:5.1.1'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

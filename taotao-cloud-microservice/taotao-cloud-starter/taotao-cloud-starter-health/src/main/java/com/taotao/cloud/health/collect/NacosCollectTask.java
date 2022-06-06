@@ -7,9 +7,6 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.api.naming.pojo.ListView;
 import com.alibaba.nacos.api.naming.pojo.ServiceInfo;
 import com.alibaba.nacos.client.naming.NacosNamingService;
-import com.alibaba.nacos.client.naming.beat.BeatReactor;
-import com.alibaba.nacos.client.naming.core.HostReactor;
-import com.alibaba.nacos.client.naming.net.NamingProxy;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
@@ -23,10 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * eureka 客户端性能采集
- *
- * @author: chejiangyi
- * @version: 2019-07-31 16:32
+ * nacos 客户端性能采集
  */
 public class NacosCollectTask extends AbstractCollectTask {
 
@@ -77,13 +71,13 @@ public class NacosCollectTask extends AbstractCollectTask {
 				info.cacheDir = ReflectionUtil.getFieldValue(nacosNamingService, "cacheDir");
 				info.logName = ReflectionUtil.getFieldValue(nacosNamingService, "logName");
 
-				HostReactor hostReactor = ReflectionUtil.getFieldValue(nacosNamingService,
-					"hostReactor");
-				NamingProxy serverProxy = ReflectionUtil.getFieldValue(nacosNamingService,
-					"serverProxy");
-				BeatReactor beatReactor = nacosNamingService.getBeatReactor();
-
-				info.serviceInfoMap = hostReactor.getServiceInfoMap();
+				//HostReactor hostReactor = ReflectionUtil.getFieldValue(nacosNamingService,
+				//	"hostReactor");
+				//NamingProxy serverProxy = ReflectionUtil.getFieldValue(nacosNamingService,
+				//	"serverProxy");
+				//BeatReactor beatReactor = nacosNamingService.getBeatReactor();
+				//
+				//info.serviceInfoMap = hostReactor.getServiceInfoMap();
 
 				info.instances = nacosNamingService.getAllInstances(
 					PropertyUtil.getProperty(CoreProperties.SpringApplicationName),
@@ -101,7 +95,7 @@ public class NacosCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class NacosClientInfo implements CollectInfo{
+	private static class NacosClientInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".namespace", desc = "nacos namespace")
 		private String namespace = "";

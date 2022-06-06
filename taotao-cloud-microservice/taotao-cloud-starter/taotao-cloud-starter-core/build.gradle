@@ -3,8 +3,12 @@ dependencies {
 
     api('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery') {
         exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+        exclude group: 'com.alibaba.nacos', module: 'nacos-client'
     }
-    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    api('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'){
+        exclude group: 'com.alibaba.nacos', module: 'nacos-client'
+    }
+    api 'com.alibaba.nacos:nacos-client:2.1.0'
 
     api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'

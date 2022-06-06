@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 /**
- * 属性跑龙套
+ * 属性util
  *
  * @author shuigedeng
  * @version 2022.05
@@ -33,7 +34,7 @@ public class PropertiesUtil {
 		try (InputStream inputStream = PropertiesUtil.class.getClassLoader()
 			.getResourceAsStream(fileName)) {
 			Properties pro = new Properties();
-			pro.load(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+			pro.load(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 			return pro;
 		}
 	}
