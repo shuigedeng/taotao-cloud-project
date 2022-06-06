@@ -15,16 +15,32 @@
  */
 package com.taotao.cloud.gateway.authentication;
 
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
+import com.alibaba.cloud.nacos.NacosServiceManager;
+import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClient;
+import com.alibaba.nacos.api.naming.listener.Event;
+import com.alibaba.nacos.api.naming.listener.EventListener;
+import com.alibaba.nacos.api.naming.listener.NamingEvent;
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.func.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.function.Supplier;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
@@ -32,15 +48,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.security.oauth2.server.resource.web.server.ServerBearerTokenAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
-
-import java.util.List;
-import java.util.Objects;
 
 /**
  * ResourceServerConfig
@@ -128,11 +146,11 @@ public class ResourceServerConfiguration {
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
 
-	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:null}")
 	private String jwkSetUri;
 
 	@Bean
-	public NimbusReactiveJwtDecoder jwtDecoder() {
+	public ReactiveJwtDecoder jwtDecoder() {
 		if (Objects.nonNull(discoveryClient)) {
 			jwkSetUri = discoveryClient.getServices().stream()
 				.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
@@ -142,7 +160,65 @@ public class ResourceServerConfiguration {
 				.findFirst()
 				.orElse(jwkSetUri);
 		}
-		return NimbusReactiveJwtDecoder.withJwkSetUri("http://127.0.0.1:33336/oauth2/jwks").build();
+
+		NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
+			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
+				"http://127.0.0.1:33336/oauth2/jwks"))
+			.jwsAlgorithm(SignatureAlgorithm.RS256)
+			.build();
+
+		//String issuerUri = null;
+		//Supplier<OAuth2TokenValidator<Jwt>> defaultValidator = (issuerUri != null)
+		//	? () -> JwtValidators.createDefaultWithIssuer(issuerUri) : JwtValidators::createDefault;
+		//nimbusReactiveJwtDecoder.setJwtValidator(defaultValidator.get());
+		nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
+		return nimbusReactiveJwtDecoder;
+
+		//return NimbusReactiveJwtDecoder
+		//	.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
+		//		"http://127.0.0.1:33336/oauth2/jwks"))
+		//	.build();
 	}
 
+	@Configuration
+	public static class NacosServiceListenerWithAuth implements InitializingBean {
+
+		@Autowired
+		private NacosServiceManager nacosServiceManager;
+		@Autowired
+		private NacosDiscoveryProperties properties;
+		@Autowired
+		private NacosDiscoveryClient discoveryClient;
+
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			List<String> services = discoveryClient.getServices();
+			if (!services.isEmpty()) {
+				for (String service : services) {
+					if (service.contains(ServiceName.TAOTAO_CLOUD_AUTH)) {
+						nacosServiceManager.getNamingService(new Properties())
+							.subscribe(service,
+								this.properties.getGroup(),
+								List.of(this.properties.getClusterName()),
+								event -> {
+									if (event instanceof NamingEvent) {
+										List<Instance> instances = ((NamingEvent) event).getInstances();
+										Instance instance = instances.get(0);
+										String jwkSetUri = String.format(
+											"http://%s:%s" + "/oauth2/jwks", instance.getIp(),
+											instance.getPort());
+
+										NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
+											.withJwkSetUri(jwkSetUri)
+											.jwsAlgorithm(SignatureAlgorithm.RS256)
+											.build();
+										nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
+										ContextUtil.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+									}
+								});
+					}
+				}
+			}
+		}
+	}
 }

@@ -24,9 +24,11 @@ import java.util.Map;
 import java.util.Objects;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -239,7 +241,7 @@ public class ContextUtil {
 	 * @param args  args
 	 * @since 2021-09-02 17:38:27
 	 */
-	public static void registerBean(String name, Class clazz, Object... args) {
+	public static void registerBean(String name, Class<?> clazz, Object... args) {
 		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		checkRegisterBean(applicationContext, name, clazz);
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
@@ -269,6 +271,12 @@ public class ContextUtil {
 		BeanDefinitionRegistry beanFactory = (BeanDefinitionRegistry) applicationContext
 			.getBeanFactory();
 		beanFactory.registerBeanDefinition(name, beanDefinition);
+	}
+
+	public static void registerSingletonBean(String name, Object obj) {
+		ConfigurableApplicationContext applicationContext = getApplicationContext();
+		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory)applicationContext.getAutowireCapableBeanFactory();
+		defaultListableBeanFactory.registerSingleton(name, obj);
 	}
 
 	/**

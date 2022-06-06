@@ -21,13 +21,13 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-gateway
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          #配置RSA的公钥访问地址
-          #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
-          jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
+  #security:
+  #  oauth2:
+  #    resourceserver:
+  #      jwt:
+  #        #配置RSA的公钥访问地址
+  #        #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
+  #        jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
   sleuth:
     enabled: true
     web:
