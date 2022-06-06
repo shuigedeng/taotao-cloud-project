@@ -27,24 +27,18 @@ import com.taotao.cloud.mongodb.helper.config.MongoStartedEventListener;
 import com.taotao.cloud.mongodb.helper.utils.ImportExportUtil;
 import com.taotao.cloud.mongodb.helper.utils.MongoHelper;
 import com.taotao.cloud.mongodb.properties.MongodbProperties;
-import com.taotao.cloud.mongodb.service.BaseMongoDAO;
-import com.taotao.cloud.mongodb.service.MongoDaoSupport;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.data.mongodb.MongoTransactionManager;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.DbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
@@ -82,11 +76,11 @@ public class MongodbAutoConfiguration implements InitializingBean {
 		return new MongoCustomConversions(converters);
 	}
 
-	@Bean
-	@ConditionalOnBean(MongoTemplate.class)
-	public BaseMongoDAO baseMongoDAO(MongoTemplate mongoTemplate) {
-		return new MongoDaoSupport(mongoTemplate);
-	}
+	//@Bean
+	//@ConditionalOnBean(MongoTemplate.class)
+	//public BaseMongoDAO baseMongoDAO(MongoTemplate mongoTemplate) {
+	//	return new MongoDaoSupport(mongoTemplate);
+	//}
 
 	@Configuration
 	public static class MongodbHelperAutoConfiguration {
