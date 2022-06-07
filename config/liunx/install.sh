@@ -1,3 +1,7 @@
+cd /etc/yum.repos.d/
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
 systemctl status firewalld
 systemctl stop firewalld
 systemctl disable firewalld
@@ -54,4 +58,4 @@ EOF
 echo "0" > /proc/sys/vm/swappiness
 
 # 安装系统性能分析工具及其他
-dnf install gcc make autoconf vim sysstat net-tools iostat if langpacks-en glibc-all-langpacks -y git yum-utils -y
+dnf install gcc make autoconf vim sysstat net-tools

@@ -91,12 +91,14 @@ kubeadm version
 kubectl version --client
 kubelet --version
 
+kubeadm reset
 kubeadm init  \
---apiserver-advertise-address=0.0.0.0  \
+--apiserver-advertise-address=192.168.10.200  \
 --apiserver-cert-extra-sans=127.0.0.1  \
 --image-repository=registry.aliyuncs.com/google_containers  \
 --ignore-preflight-errors=all \
---kubernetes-version=v1.22.1  \
+--kubernetes-version=v1.24.1  \
+--control-plane-endpoint "k8s.cnblogs.com:6443" --upload-certs \
 --service-cidr=10.1.0.0/16  \
 --pod-network-cidr=10.222.0.0/16
 
