@@ -4,6 +4,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TraceContextHolder;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
@@ -30,7 +31,9 @@ public class DubboTraceFilter implements Filter {
 	 */
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-		boolean isProviderSide = RpcContext.getContext().isProviderSide();
+		LogUtil.info("DubboTraceFilter activate ------------------------------");
+
+		boolean isProviderSide = RpcContext.getServerContext().isProviderSide();
 		if (isProviderSide) {
 			//服务提供者逻辑
 			String traceId = invocation.getAttachment(CommonConstant.TAOTAO_CLOUD_TRACE_ID);

@@ -208,15 +208,16 @@ dubbo:
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}
-    #version: ${taotaoCloudVersion}
-    #owner: taotao-cloud
-    #organization: taotao-cloud
-    #metadata-type: local
-    #environment: dev
-    #qos-enable: false
-    #qos-accept-foreign-ip: false
+    version: ${taotaoCloudVersion}
+    owner: 981376577
+    architecture: china
+    organization: taotao-cloud
+    metadata-type: local
+    environment: dev
+    qos-enable: false
+    qos-accept-foreign-ip: false
   cloud:
-    subscribed-services: '*'
+    subscribed-services: 'taotao-cloud-order,taotao-cloud-goods'
     registry-type: dubbo-cloud
   registry:
     address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.10.200}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
@@ -237,6 +238,7 @@ dubbo:
   scan:
     base-packages: com.taotao.cloud.sys.biz.service.impl
   provider:
+    id: dubbo
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
   consumer:
