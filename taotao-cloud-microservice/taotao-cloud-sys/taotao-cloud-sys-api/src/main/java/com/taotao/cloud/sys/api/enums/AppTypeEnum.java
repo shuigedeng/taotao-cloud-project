@@ -8,7 +8,7 @@ package com.taotao.cloud.sys.api.enums;
  * @version 2022.04
  * @since 2022-04-25 16:47:12
  */
-public enum AppType {
+public enum AppTypeEnum {
 
 	/**
 	 * IOS
@@ -21,7 +21,7 @@ public enum AppType {
 
 	private final String description;
 
-	AppType(String description) {
+	AppTypeEnum(String description) {
 		this.description = description;
 
 	}
