@@ -9,6 +9,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.ConfigUtils;
@@ -39,6 +41,8 @@ public class DubboValidationFilter implements Filter {
 
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+		LogUtil.info("DubboValidationFilter activate ------------------------------");
+
 		if (validation != null && !invocation.getMethodName().startsWith("$")
 			&& ConfigUtils.isNotEmpty(
 			invoker.getUrl().getMethodParameter(invocation.getMethodName(), VALIDATION_KEY))) {

@@ -1,2 +1,0 @@
-dubboTraceFilter=com.taotao.cloud.dubbo.filter.DubboTraceFilter
-dubboValidationFilter=com.taotao.cloud.dubbo.filter.DubboValidationFilter
