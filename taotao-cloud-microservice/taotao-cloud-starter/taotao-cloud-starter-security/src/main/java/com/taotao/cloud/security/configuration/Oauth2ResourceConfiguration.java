@@ -42,9 +42,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.log.LogMessage;
+import org.springframework.security.access.expression.AbstractSecurityExpressionHandler;
+import org.springframework.security.access.expression.SecurityExpressionOperations;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -53,6 +56,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
+import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -170,7 +174,6 @@ public class Oauth2ResourceConfiguration {
 
 		map.keySet().forEach(info -> {
 			HandlerMethod handlerMethod = map.get(info);
-
 			Set<NotAuth> set = new HashSet<>();
 			set.add(AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), NotAuth.class));
 			set.add(AnnotationUtils.findAnnotation(handlerMethod.getMethod(), NotAuth.class));

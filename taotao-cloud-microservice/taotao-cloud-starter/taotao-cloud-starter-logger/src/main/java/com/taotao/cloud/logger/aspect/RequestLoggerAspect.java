@@ -99,7 +99,7 @@ public class RequestLoggerAspect {
 	/**
 	 * 用于SpEL表达式解析.
 	 */
-	private final SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+	private final static SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
 
 	/**
 	 * 用于获取方法参数定义名字.

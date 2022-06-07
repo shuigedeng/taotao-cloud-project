@@ -17,16 +17,22 @@ package com.taotao.cloud.security.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.expression.Expression;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.Authentication;
@@ -88,12 +94,15 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 	}
 
 	public static class CustomPermissionEvaluator implements PermissionEvaluator {
+		/**
+		 * 用于SpEL表达式解析.
+		 */
+		private final static SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
 
 		//普通的targetDomainObject判断 @PreAuthorize("hasPermission(#batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Object targetDomainObject,
 			Object permission) {
-
 			if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
 				return false;
 			}
@@ -120,7 +129,11 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 			}
 			return false;
 		}
+
+		public boolean checkInner(){
+			HttpServletRequest request = RequestUtil.getRequest();
+
+			return true;
+		}
 	}
-
-
 }
