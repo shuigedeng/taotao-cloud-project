@@ -75,7 +75,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	@Operation(summary = "通用导出Excel", description = "通用导出Excel")
 	@PostMapping(value = "/excel/export", produces = "application/octet-stream")
 	@RequestLogger("'导出Excel:'.concat([" + NormalExcelConstants.FILE_NAME + "]?:'')")
-	//@PreAuthorize("@permissionVerifier.hasPermission('export')")
+	//@PreAuthorize("@pms.hasPermission('export')")
 	default void export(
 		@Parameter(description = "查询DTO", required = true)
 		@RequestBody @Validated QueryDTO params,
@@ -107,7 +107,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	@Operation(summary = "通用预览Excel", description = "通用预览Excel")
 	@PostMapping(value = "/excel/preview")
 	@RequestLogger("'通用预览Excel:' + ([" + NormalExcelConstants.FILE_NAME + "]?:'')")
-	//@PreAuthorize("@permissionVerifier.hasPermission('preview')")
+	//@PreAuthorize("@pms.hasPermission('preview')")
 	default Result<String> preview(
 		@Parameter(description = "查询DTO", required = true)
 		@RequestBody @Validated QueryDTO params) {
@@ -129,7 +129,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	@Operation(summary = "通用导入Excel", description = "通用导入Excel")
 	@PostMapping(value = "/excel/import", headers = "content-type=multipart/form-data")
 	@RequestLogger("通用导入Excel")
-	//@PreAuthorize("@permissionVerifier.hasPermission('import')")
+	//@PreAuthorize("@pms.hasPermission('import')")
 	default Result<Boolean> importExcel(
 		@Parameter(description = "文件", required = true) @NotNull(message = "文件不能为空")
 		@RequestPart("file") MultipartFile file,

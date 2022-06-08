@@ -162,6 +162,7 @@ public final class CommonConstant {
 
 	public static final String TAOTAO_CLOUD_TRACE_ID = "taotao-cloud-trace-id";
 	public static final String TAOTAO_CLOUD_TRACE_HEADER = "taotao-cloud-trace-header";
+	public static final String TAOTAO_CLOUD_FROM_INNER = "taotao-cloud-from-inner";
 
 	public static final String TAOTAO_CLOUD_REQUEST_VERSION = "taotao-cloud-request-version";
 	public static final String TAOTAO_CLOUD_REQUEST_VERSION_HEADER = "taotao-cloud-request-version-header";

@@ -16,6 +16,7 @@
 package com.taotao.cloud.gateway.authentication;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.cloud.nacos.NacosServiceManager;
 import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClient;
@@ -45,6 +46,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -146,7 +148,7 @@ public class ResourceServerConfiguration {
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
 
-	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:null}")
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:''}")
 	private String jwkSetUri;
 
 	@Bean
@@ -181,6 +183,7 @@ public class ResourceServerConfiguration {
 	}
 
 	@Configuration
+	@ConditionalOnNacosDiscoveryEnabled
 	public static class NacosServiceListenerWithAuth implements InitializingBean {
 
 		@Autowired
@@ -188,14 +191,14 @@ public class ResourceServerConfiguration {
 		@Autowired
 		private NacosDiscoveryProperties properties;
 		@Autowired
-		private NacosDiscoveryClient discoveryClient;
+		private DiscoveryClient discoveryClient;
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			List<String> services = discoveryClient.getServices();
 			if (!services.isEmpty()) {
 				for (String service : services) {
-					if (service.contains(ServiceName.TAOTAO_CLOUD_AUTH)) {
+					if (service.equals(ServiceName.TAOTAO_CLOUD_AUTH)) {
 						nacosServiceManager.getNamingService(new Properties())
 							.subscribe(service,
 								this.properties.getGroup(),

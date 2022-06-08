@@ -59,7 +59,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 	@Operation(summary = "通用单体查询", description = "通用单体查询")
 	@GetMapping("/{id:[0-9]*}")
 	@RequestLogger("通用单体查询")
-	//@PreAuthorize("@permissionVerifier.hasPermission('get')")
+	//@PreAuthorize("@pms.hasPermission('get')")
 	default Result<QueryVO> get(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id) {
@@ -81,7 +81,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 	@Operation(summary = "通用批量查询", description = "通用批量查询")
 	@PostMapping("/query")
 	@RequestLogger("通用批量查询")
-	//@PreAuthorize("@permissionVerifier.hasPermission('query')")
+	//@PreAuthorize("@pms.hasPermission('query')")
 	default Result<List<QueryVO>> query(
 		@Parameter(description = "查询对象", required = true)
 		@RequestBody @Validated QueryDTO queryDTO) {

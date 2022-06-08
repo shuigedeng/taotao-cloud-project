@@ -15,8 +15,16 @@
  */
 package com.taotao.cloud.security.configuration;
 
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
+import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
+import com.alibaba.cloud.nacos.NacosServiceManager;
+import com.alibaba.nacos.api.naming.listener.NamingEvent;
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.func.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.security.annotation.NotAuth;
@@ -29,12 +37,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.cache.Cache;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -42,21 +53,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.log.LogMessage;
-import org.springframework.security.access.expression.AbstractSecurityExpressionHandler;
-import org.springframework.security.access.expression.SecurityExpressionOperations;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
-import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -72,15 +81,16 @@ import org.springframework.web.util.pattern.PathPattern;
  * @version 2022.03
  * @since 2021/8/25 09:57
  */
-// public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 @AutoConfiguration
 public class Oauth2ResourceConfiguration {
 
-	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
-	private String jwkSetUri;
-
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
+	@Autowired
+	private RedisCacheManager redisCacheManager;
+
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:''}")
+	private String jwkSetUri;
 
 	@Bean
 	public JwtDecoder jwtDecoder() {
@@ -93,7 +103,15 @@ public class Oauth2ResourceConfiguration {
 				.findFirst()
 				.orElse(jwkSetUri);
 		}
-		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+		Cache cache = redisCacheManager.getCache("jwt");
+
+		NimbusJwtDecoder nimbusJwtDecoder = NimbusJwtDecoder.withJwkSetUri(
+				FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
+					"http://127.0.0.1:33336/oauth2/jwks")).cache(cache)
+			.jwsAlgorithm(SignatureAlgorithm.RS256)
+			.build();
+		nimbusJwtDecoder.setJwtValidator(JwtValidators.createDefault());
+		return nimbusJwtDecoder;
 	}
 
 	JwtAuthenticationConverter jwtAuthenticationConverter() {
@@ -106,7 +124,8 @@ public class Oauth2ResourceConfiguration {
 	}
 
 	@Bean
-	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http)
+		throws Exception {
 		HttpSecurity httpSecurity = http.csrf().disable()
 			.authorizeRequests(registry -> {
 				permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
@@ -169,7 +188,8 @@ public class Oauth2ResourceConfiguration {
 			"/doc/**",
 			"/health/**"));
 
-		RequestMappingHandlerMapping mapping = ac.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
+		RequestMappingHandlerMapping mapping = ac.getBean("requestMappingHandlerMapping",
+			RequestMappingHandlerMapping.class);
 		Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 
 		map.keySet().forEach(info -> {
@@ -245,7 +265,8 @@ public class Oauth2ResourceConfiguration {
 
 		/**
 		 * Sets the name of token claim to use for mapping {@link GrantedAuthority authorities} by
-		 * this converter. Defaults to {@link JwtGrantedAuthoritiesConverter#WELL_KNOWN_AUTHORITIES_CLAIM_NAMES}.
+		 * this converter. Defaults to
+		 * {@link JwtGrantedAuthoritiesConverter#WELL_KNOWN_AUTHORITIES_CLAIM_NAMES}.
 		 *
 		 * @param authoritiesClaimName The token claim name to map authorities
 		 * @since 5.2
@@ -294,6 +315,57 @@ public class Oauth2ResourceConfiguration {
 			return (Collection<String>) authorities;
 		}
 
+	}
+
+	@Configuration
+	@ConditionalOnNacosDiscoveryEnabled
+	public static class NacosServiceListenerWithAuth implements InitializingBean {
+
+		@Autowired
+		private NacosServiceManager nacosServiceManager;
+		@Autowired
+		private NacosDiscoveryProperties properties;
+		@Autowired
+		private DiscoveryClient discoveryClient;
+
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			List<String> services = discoveryClient.getServices();
+			if (!services.isEmpty()) {
+				for (String service : services) {
+					if (service.equals(ServiceName.TAOTAO_CLOUD_AUTH)) {
+						nacosServiceManager.getNamingService(new Properties())
+							.subscribe(service,
+								this.properties.getGroup(),
+								List.of(this.properties.getClusterName()),
+								event -> {
+									if (event instanceof NamingEvent) {
+										List<Instance> instances = ((NamingEvent) event).getInstances();
+										Instance instance = instances.get(0);
+										String jwkSetUri = String.format(
+											"http://%s:%s" + "/oauth2/jwks", instance.getIp(),
+											instance.getPort());
+
+										RedisCacheManager redisCacheManager = ContextUtil.getBean(
+											RedisCacheManager.class, false);
+										Cache cache = redisCacheManager.getCache("jwt");
+
+										NimbusJwtDecoder nimbusJwtDecoder = NimbusJwtDecoder
+											.withJwkSetUri(jwkSetUri)
+											.cache(cache)
+											.jwsAlgorithm(SignatureAlgorithm.RS256)
+											.build();
+										nimbusJwtDecoder.setJwtValidator(
+											JwtValidators.createDefault());
+
+										ContextUtil.registerSingletonBean("jwtDecoder",
+											nimbusJwtDecoder);
+									}
+								});
+					}
+				}
+			}
+		}
 	}
 }
 

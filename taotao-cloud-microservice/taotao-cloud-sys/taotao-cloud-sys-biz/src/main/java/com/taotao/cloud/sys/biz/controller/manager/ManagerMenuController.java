@@ -185,7 +185,7 @@ public class ManagerMenuController extends
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
 	@RequestLogger
 	@GetMapping("/test/pe")
-	@PreAuthorize("@permissionVerifier.hasPermission(#request, authentication, 'export')")
+	@PreAuthorize("@pms.hasPermission(#request, authentication, 'export')")
 	//@PreAuthorize("hasPermission(#request, 'batch')")
 	public Result<Boolean> testPermissionVerifier(HttpServletRequest request) {
 		return Result.success(true);

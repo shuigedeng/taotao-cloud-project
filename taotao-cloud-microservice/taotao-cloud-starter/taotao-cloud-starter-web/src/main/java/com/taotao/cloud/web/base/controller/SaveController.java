@@ -52,7 +52,7 @@ public interface SaveController<T extends SuperEntity<T, I>, I extends Serializa
 	@Operation(summary = "通用单体新增", description = "通用单体新增")
 	@PostMapping
 	@RequestLogger("通用单体新增")
-	//@PreAuthorize("@permissionVerifier.hasPermission('save')")
+	//@PreAuthorize("@pms.hasPermission('save')")
 	default Result<Boolean> save(
 		@Parameter(description = "新增DTO", required = true)
 		@RequestBody @Validated SaveDTO saveDTO) {

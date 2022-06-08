@@ -16,23 +16,20 @@
 package com.taotao.cloud.security.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.Authentication;
@@ -45,14 +42,14 @@ import org.springframework.security.core.GrantedAuthority;
  * @version 2022.03
  * @since 2021/10/13 15:40
  */
-@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class MethodSecurityConfiguration extends GlobalMethodSecurityConfiguration implements
 	ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 
 	@Override
-	protected MethodSecurityExpressionHandler createExpressionHandler(){
+	protected MethodSecurityExpressionHandler createExpressionHandler() {
 		DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
 		expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
 		expressionHandler.setApplicationContext(this.applicationContext);
@@ -64,28 +61,43 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 		this.applicationContext = applicationContext;
 	}
 
-	@Bean(name = "permissionVerifier")
-	public PermissionVerifier permissionVerifier(){
+	@Bean(name = "pms")
+	public PermissionVerifier permissionVerifier() {
 		return new PermissionVerifier();
 	}
 
-	public static class PermissionVerifier{
-		//@PreAuthorize("@permissionVerifier.hasPermission(#request, authentication, 'export')")
-		public boolean hasPermission( HttpServletRequest req, Authentication authentication, String permission){
+	/**
+	 * 权限验证器
+	 *
+	 * @author shuigedeng
+	 * @version 2022.06
+	 * @since 2022-06-08 11:28:55
+	 */
+	public static class PermissionVerifier {
+
+		//@PreAuthorize("@pms.hasPermission(#request, authentication, 'export')")
+		public boolean hasPermission(HttpServletRequest req, Authentication authentication,
+			String permission) {
 			return false;
 		}
 
-		//@PreAuthorize("@permissionVerifier.hasPermission('export')")
-		public boolean hasPermission(String permission){
+		//@PreAuthorize("@pms.hasPermission('export')")
+		public boolean hasPermission(String permission) {
+			// 内部调用直接跳过
+			String header = RequestUtil.getHeader(CommonConstant.TAOTAO_CLOUD_FROM_INNER);
+			if (Boolean.TRUE.equals(Boolean.valueOf(header))) {
+				return true;
+			}
+
 			Collection<? extends GrantedAuthority> authorities = SecurityUtil.getAuthentication()
 				.getAuthorities();
-			if(CollectionUtil.isEmpty(authorities)){
+			if (CollectionUtil.isEmpty(authorities)) {
 				return false;
 			}
 
 			for (GrantedAuthority grantedAuthority : authorities) {
 				String authority = grantedAuthority.getAuthority();
-				if(authority.contains(permission)){
+				if (authority.contains(permission)) {
 					return true;
 				}
 			}
@@ -94,6 +106,7 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 	}
 
 	public static class CustomPermissionEvaluator implements PermissionEvaluator {
+
 		/**
 		 * 用于SpEL表达式解析.
 		 */
@@ -118,10 +131,17 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 			if ((auth == null) || (targetType == null) || !(permission instanceof String)) {
 				return false;
 			}
-			return hasPrivilege(auth, targetType.toUpperCase(), permission.toString().toUpperCase());
+			return hasPrivilege(auth, targetType.toUpperCase(),
+				permission.toString().toUpperCase());
 		}
 
 		private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
+			//内部微服务调用直接返回true
+			String header = RequestUtil.getHeader(CommonConstant.TAOTAO_CLOUD_FROM_INNER);
+			if (Boolean.TRUE.equals(Boolean.valueOf(header))) {
+				return true;
+			}
+
 			for (GrantedAuthority grantedAuth : auth.getAuthorities()) {
 				if (grantedAuth.getAuthority().contains(permission)) {
 					return true;
@@ -130,7 +150,7 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 			return false;
 		}
 
-		public boolean checkInner(){
+		public boolean checkInner() {
 			HttpServletRequest request = RequestUtil.getRequest();
 
 			return true;

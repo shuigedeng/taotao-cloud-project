@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.feign.configuration;
 
+import static com.taotao.cloud.common.constant.CommonConstant.BLANK;
+import static com.taotao.cloud.common.utils.lang.StringUtil.NEW_LINE;
+
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.ContextConstant;
 import com.taotao.cloud.common.constant.StarterName;
@@ -30,14 +34,13 @@ import java.util.Enumeration;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -50,7 +53,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @since 2020/4/5 13:33
  */
 @AutoConfiguration
-@ConditionalOnProperty(prefix = FeignInterceptorProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = FeignInterceptorProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class FeignInterceptorConfiguration implements InitializingBean {
 
 	@Override
@@ -96,15 +99,22 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 				HttpServletRequest request = attributes.getRequest();
 				Enumeration<String> headerNames = request.getHeaderNames();
 				if (headerNames != null) {
-					String headerName;
-					String headerValue;
-
 					while (headerNames.hasMoreElements()) {
-						headerName = headerNames.nextElement();
-						if (requestHeaders.contains(headerName)) {
-							headerValue = request.getHeader(headerName);
-							template.header(headerName, headerValue);
+						String headerName = headerNames.nextElement();
+						String values = request.getHeader(headerName);
+
+						// 跳过content-length值的复制。因为服务之间调用需要携带一些用户信息之类的 所以实现了Feign的RequestInterceptor拦截器复制请求头，复制的时候是所有头都复制的,可能导致Content-length长度跟body不一致
+						// @see https://blog.csdn.net/qq_39986681/article/details/107138740
+						if (StringUtil.equalsIgnoreCase(headerName, HttpHeaders.CONTENT_LENGTH)) {
+							continue;
 						}
+
+						// 解决 UserAgent 信息被修改后，AppleWebKit/537.36 (KHTML,like Gecko)部分存在非法字符的问题
+						if (StringUtil.equalsIgnoreCase(headerName, HttpHeaders.USER_AGENT)) {
+							values = StringUtils.replace(values, NEW_LINE, String.valueOf(BLANK));
+						}
+
+						template.header(headerName, values);
 					}
 				}
 
@@ -118,8 +128,7 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 				}
 			}
 
-			//传递client
-			//传递access_token，无网络隔离时需要传递
+			//传递client 传递access_token，无网络隔离时需要传递
 			String tenant = TenantContextHolder.getTenant();
 			if (StrUtil.isNotEmpty(tenant)) {
 				template.header(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, tenant);
@@ -130,7 +139,8 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 			template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER,
 				StrUtil.isNotEmpty(traceId) ? traceId : IdGeneratorUtil.getIdStr());
 
-			template.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+			//服务内部inner
+			template.header(CommonConstant.TAOTAO_CLOUD_FROM_INNER, "true");
 		};
 	}
 

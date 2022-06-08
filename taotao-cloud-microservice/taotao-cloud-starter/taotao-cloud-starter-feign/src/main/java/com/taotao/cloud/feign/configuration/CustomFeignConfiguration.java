@@ -32,7 +32,7 @@ import com.taotao.cloud.feign.http.InfoFeignLoggerFactory;
 import com.taotao.cloud.feign.http.RestTemplateHeaderInterceptor;
 import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import com.taotao.cloud.feign.properties.FeignProperties;
-import com.taotao.cloud.feign.properties.LbIsolationProperties;
+import com.taotao.cloud.feign.properties.LoadbalancerProperties;
 import feign.FeignException;
 import feign.Logger;
 import feign.Response;
@@ -73,6 +73,7 @@ import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -89,7 +90,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
 @EnableConfigurationProperties({
-	LbIsolationProperties.class,
+	LoadbalancerProperties.class,
 	FeignProperties.class,
 	FeignInterceptorProperties.class})
 @EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
@@ -224,15 +225,12 @@ public class CustomFeignConfiguration implements InitializingBean {
 	/**
 	 * RestTemplate 相关的配置
 	 */
+	@Configuration
 	@ConditionalOnClass(okhttp3.OkHttpClient.class)
 	public static class RestTemplateConfiguration {
 
 		private static final Charset UTF_8 = StandardCharsets.UTF_8;
-		private final ObjectMapper objectMapper;
-
-		public RestTemplateConfiguration(ObjectMapper objectMapper) {
-			this.objectMapper = objectMapper;
-		}
+		private final ObjectMapper objectMapper = JsonUtil.MAPPER;
 
 		@Bean
 		@ConditionalOnMissingBean(FeignLoggerFactory.class)
@@ -289,7 +287,6 @@ public class CustomFeignConfiguration implements InitializingBean {
 			return connectionPoolFactory.create(hcp.getMaxConnections(), hcp.getTimeToLive(),
 				hcp.getTimeToLiveUnit());
 		}
-
 
 		/**
 		 * 解决 RestTemplate 传递Request header

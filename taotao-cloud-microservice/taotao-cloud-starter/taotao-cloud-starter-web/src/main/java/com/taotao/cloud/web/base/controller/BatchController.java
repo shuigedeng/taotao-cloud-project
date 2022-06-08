@@ -60,7 +60,7 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	@PostMapping("/batch")
 	@RequestLogger("通用批量操作")
 	//@PreAuthorize("hasPermission(#batchDTO, 'batch')")
-	@PreAuthorize("@permissionVerifier.hasPermission('batch')")
+	@PreAuthorize("@pms.hasPermission('batch')")
 	default Result<Boolean> batch(
 		@Parameter(description = "通用批量操作", required = true)
 		@RequestBody @Validated BatchDTO<SaveDTO, UpdateDTO, I> batchDTO) {
