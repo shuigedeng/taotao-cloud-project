@@ -215,6 +215,19 @@ public class RequestUtil {
 		return res;
 	}
 
+
+	/**
+	 * 得到头
+	 *
+	 * @param headerName 标题名称
+	 * @return {@link String }
+	 * @since 2022-06-08 11:32:38
+	 */
+	public static String getHeader(String headerName) {
+		HttpServletRequest request = getRequest();
+		return request.getHeader(headerName);
+	}
+
 	/**
 	 * getConfigurableWebServerApplicationContext
 	 *

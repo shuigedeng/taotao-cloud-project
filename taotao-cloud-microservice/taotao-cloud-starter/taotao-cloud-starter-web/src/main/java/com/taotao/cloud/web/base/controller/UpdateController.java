@@ -54,7 +54,7 @@ public interface UpdateController<T extends SuperEntity<T, I>, I extends Seriali
 	@Operation(summary = "通用单体更新", description = "通用单体更新")
 	@PutMapping("/{id:[0-9]*}")
 	@RequestLogger("通用单体更新")
-	//@PreAuthorize("@permissionVerifier.hasPermission('update')")
+	//@PreAuthorize("@pms.hasPermission('update')")
 	default Result<Boolean> update(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id,
