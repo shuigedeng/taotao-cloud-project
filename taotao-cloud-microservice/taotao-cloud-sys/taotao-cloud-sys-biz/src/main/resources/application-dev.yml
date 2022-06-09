@@ -240,6 +240,7 @@ dubbo:
     environment: dev
     qos-enable: false
     qos-accept-foreign-ip: false
+    logger: slf4j
   cloud:
     subscribed-services: 'taotao-cloud-order,taotao-cloud-goods'
     registry-type: dubbo-cloud
@@ -1079,7 +1080,7 @@ taotao:
       enabled: false
 
 mybatis-plus:
-  typeAliasesPackage: com.taotao.cloud.*.biz.entity
+  typeAliasesPackage: com.taotao.cloud.sys.biz.entity
   global-config:
     db-config:
       id-type: auto

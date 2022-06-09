@@ -1,8 +1,10 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
+
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
     implementation 'org.apache.pdfbox:pdfbox:2.0.24'
@@ -67,8 +69,8 @@ configurations {
         exclude group: 'log4j', module: 'log4j'
         exclude group: 'log4j', module: 'slf4j-simple'
         exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+//        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
+//        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
 }
