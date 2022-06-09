@@ -89,12 +89,9 @@ import org.springframework.web.client.RestTemplate;
  * @since 2020/6/15 11:31
  */
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
-@EnableConfigurationProperties({
-	LoadbalancerProperties.class,
-	FeignProperties.class,
-	FeignInterceptorProperties.class})
+@EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class, FeignInterceptorProperties.class})
 @EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
-@ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CustomFeignConfiguration implements InitializingBean {
 
 	@Override

@@ -261,9 +261,9 @@ seata:
   enable-auto-data-source-proxy: true
   service:
     grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_PORT:8091}
+      SC: ${TAOTAO_CLOUD_SEATA_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_PORT:8091}
     vgroup-mapping:
-      taotao_cloud_tx_group: default
+      taotao_cloud_tx_group: SC
   config:
     type: nacos
     nacos:
@@ -281,7 +281,7 @@ seata:
       namespace: 7c67c02a-747b-40fd-ba79-57d6e92de1cd
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
-      cluster: taotao-cloud-seata-cluster
+      cluster: SC
   client:
     rm:
       # 异步提交缓存队列长度（默认10000）
@@ -335,22 +335,52 @@ spring:
   quartz:
     scheduler-name: taotao-cloud-quartz-scheduler
     # 将任务等保存化到数据库
-    job-store-type: memory
+    job-store-type: jdbc
+    # 关闭时等待任务完成
     wait-for-jobs-to-complete-on-shutdown: true
+    # 可以覆盖已有的任务
     overwrite-existing-jobs: true
+    jdbc:
+      # 是否自动使用 SQL 初始化 Quartz 表结构
+      initialize-schema: never
+    # quartz原生配置
     properties:
-      org.quartz.scheduler.instanceName : quartzScheduler
-      org.quartz.scheduler.instanceId : AUTO
-      org.quartz.scheduler.rmi.export: false
-      org.quartz.scheduler.rmi.proxy: false
-      org.quartz.scheduler.wrapJobExecutionInUserTransaction: false
-      org.quartz.jobStore.class : org.quartz.simpl.RAMJobStore
-      org.quartz.jobStore.misfireThreshold: 60000
-      org.quartz.threadPool.class : org.quartz.simpl.SimpleThreadPool
-      org.quartz.threadPool.threadCount : 10
-      org.quartz.threadPool.threadNamePrefix : taotao-cloud-quartz-thread
-      org.quartz.threadPool.threadPriority : 5
-      org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread : true
+      org:
+        quartz:
+          scheduler:
+            instanceName: quartzScheduler # 调度器实例名称
+            instanceId: AUTO # 调度器实例ID自动生成
+            wrapJobExecutionInUserTransaction: false
+            rmi:
+              export: false
+              proxy: false
+          # JobStore sql: https://github.com/quartz-scheduler/quartz/tree/master/quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX # JobStore 实现类
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate # 使用完全兼容JDBC的驱动
+            tablePrefix: qrtz_ # Quartz 表前缀
+            useProperties: false # 是否将JobDataMap中的属性转为字符串存储
+            misfireThreshold: 60000
+          # 线程池相关配置
+          threadPool:
+            threadCount: 25 # 线程池大小。默认为 10 。
+            threadPriority: 5 # 线程优先级
+            threadNamePrefix: taotao-cloud-quartz-executor
+            class: org.quartz.simpl.SimpleThreadPool # 指定线程池实现类，对调度器提供固定大小的线程池
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #properties:
+    #  org.quartz.scheduler.instanceName : quartzScheduler
+    #  org.quartz.scheduler.instanceId : AUTO
+    #  org.quartz.scheduler.rmi.export: false
+    #  org.quartz.scheduler.rmi.proxy: false
+    #  org.quartz.scheduler.wrapJobExecutionInUserTransaction: false
+    #  org.quartz.jobStore.class : org.quartz.simpl.RAMJobStore
+    #  org.quartz.jobStore.misfireThreshold: 60000
+    #  org.quartz.threadPool.class : org.quartz.simpl.SimpleThreadPool
+    #  org.quartz.threadPool.threadCount : 10
+    #  org.quartz.threadPool.threadNamePrefix : taotao-cloud-quartz-thread
+    #  org.quartz.threadPool.threadPriority : 5
+    #  org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread : true
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:

@@ -1,17 +1,18 @@
   mysql –uroot –p
-    create database `taotao-cloud-nacos`;
-    use `taotao-cloud-nacos`;
-    source /opt/cloud/nacos/conf/nacos-mysql.sql
     
+  create database `taotao-cloud-nacos-2.1.0`;
+  use `taotao-cloud-nacos-2.1.0`;
+  source /opt/cloud/nacos/conf/nacos-mysql.sql
     
-    [defaul.conf]
-    upstream nacos-cluster {
+  #nacos.conf
+    
+ upstream nacos-cluster {
     server 192.168.10.200:8846 weight=1 max_fails=2 fail_timeout=10s;
     server 192.168.10.200:8847 weight=1 max_fails=2 fail_timeout=10s;
     server 192.168.10.200:8848 weight=1 max_fails=2 fail_timeout=10s;
   }
     
-    server {
+ server {
     listen       80;
     server_name  192.168.10.200;
     #新增，配置nginx的日志级别debug

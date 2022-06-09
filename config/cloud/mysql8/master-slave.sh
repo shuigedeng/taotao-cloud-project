@@ -1,3 +1,4 @@
+############################## master ##################################
 [mysqld]
 character-set-server=utf8mb4
 lower-case-table-names=1
@@ -30,13 +31,16 @@ expire_logs_days = 7
 #将函数复制到slave
 log_bin_trust_function_creators = 1
 
-docker run --name cluster2-master  \
+docker run --name mysql-cluster1-master  \
 --privileged=true \
 -e MYSQL_ROOT_PASSWORD=123456 \
--p 3376:3306 \
--v /root/mysql/cluster2/master/data/:/var/lib/mysql \
--v /root/mysql/cluster2/master/conf/my.cnf:/etc/mysql/my.cnf \
+-p 3307:3306 \
+-v /root/cloud/mysql8/cluster1/master/data/:/var/lib/mysql \
+-v /root/cloud/mysql8/cluster1/master/conf/my.cnf:/etc/mysql/my.cnf \
 -d mysql
+
+docker exec -it mysql-cluster1-master /bin/bash
+mysql -h localhost -uroot -p
 
 use mysql;
 update user set host='%' where user='root';
@@ -44,7 +48,7 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 alter user 'root'@'%' identified by '123456' password expire never;
 flush privileges; // 刷新权限
 
-################################################################
+################################  slave  ################################
 [mysqld]
 character-set-server=utf8mb4
 lower-case-table-names=1
@@ -56,7 +60,7 @@ sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_
 server-id=2
 # 启用二进制日志
 log-bin=mysql-bin
-relay-log = mysql-relay
+relay-log=mysql-relay
 # 设置不要复制的数据库(可设置多个)
 #binlog-ignore-db=mysql
 #binlog-ignore-db=information_schema
@@ -79,26 +83,37 @@ expire_logs_days = 7
 log_bin_trust_function_creators = 1
 
 # slave1
-docker run --name cluster2-slave1  \
+docker run --name mysql-cluster1-slave1  \
 --privileged=true \
 -e MYSQL_ROOT_PASSWORD=123456 \
--p 3386:3306 \
--v /root/mysql/cluster2/slave1/data/:/var/lib/mysql \
--v /root/mysql/cluster2/slave1/conf/my.cnf:/etc/mysql/my.cnf \
+-p 3308:3306 \
+-v /root/cloud/mysql8/cluster1/slave1/data/:/var/lib/mysql \
+-v /root/cloud/mysql8/cluster1/slave1/conf/my.cnf:/etc/mysql/my.cnf \
 -d mysql
+docker exec -it mysql-cluster1-slave1 /bin/bash
+mysql -h localhost -uroot -p
 
 # slave2
-docker run --name cluster2-slave2  \
+docker run --name mysql-cluster1-slave2  \
 --privileged=true \
 -e MYSQL_ROOT_PASSWORD=123456 \
--p 3396:3306 \
--v /root/mysql/cluster2/slave2/data/:/var/lib/mysql \
--v /root/mysql/cluster2/slave2/conf/my.cnf:/etc/mysql/my.cnf \
+-p 3309:3306 \
+-v /root/cloud/mysql8/cluster1/slave2/data/:/var/lib/mysql \
+-v /root/cloud/mysql8/cluster1/slave2/conf/my.cnf:/etc/mysql/my.cnf \
 -d mysql
+docker exec -it mysql-cluster1-slave2 /bin/bash
+mysql -h localhost -uroot -p
 
+use mysql;
+update user set host='%' where user='root';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+alter user 'root'@'%' identified by '123456' password expire never;
+flush privileges; // 刷新权限
+
+#### master
 show variables like 'server_id';
 
-mysql -uroot -p -h192.168.10.200 -P3316
+mysql -uroot -p -h192.168.10.200 -P3307
 create user 'slave'@'%' identified with mysql_native_password by '123456';
 grant replication slave on *.* to 'slave'@'%';
 flush privileges;
@@ -107,7 +122,7 @@ show master status;
 show master status\G
 
 stop slave;
-change master to master_host='192.168.10.200',master_port=3376,master_user='slave',master_password='123456',master_log_file='mysql-bin.000003',master_log_pos=1611;
+change master to master_host='192.168.10.200',master_port=3307,master_user='slave',master_password='123456',master_log_file='mysql-bin.000003',master_log_pos=1596;
 start slave;
 
 show slave status;
