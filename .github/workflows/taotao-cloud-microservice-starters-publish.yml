@@ -38,6 +38,13 @@ jobs:
         distribution: 'adopt'
         server-id: github
 
+    - name: cache gradle packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
+
     #  base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
     - name: decode signing secret key ring file
       run: |
@@ -52,6 +59,7 @@ jobs:
         echo `pwd`
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
+        gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: build and publish starter
       run: |
@@ -65,6 +73,7 @@ jobs:
                echo `pwd` 
                gradle --continue clean build -x test -x bootJar
                gradle publishAllPublicationsToSonatypeRepository
+               gradle publishMavenJavaPublicationToGitHubRepository
             else
               for two_starter in `ls $starter_inner_dir`
               do
@@ -73,6 +82,7 @@ jobs:
                   echo `pwd`
                   gradle --continue clean build -x test -x bootJar
                   gradle publishAllPublicationsToSonatypeRepository
+                  gradle publishMavenJavaPublicationToGitHubRepository
                 fi
               done
             fi
