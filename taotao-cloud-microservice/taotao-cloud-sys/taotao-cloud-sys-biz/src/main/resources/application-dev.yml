@@ -23,24 +23,35 @@ jasypt:
       suffix: "]"
 
 easy-es:
-  enable: true # 是否开启EE自动配置
-  address: 192.168.10.200:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
-  schema: http # 默认为http
+  enable: true
+  # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
+  address: 192.168.10.200:9200
+  # 默认为http
+  schema: http
   #如果无账号密码则可不配置此行
   username:
   #如果无账号密码则可不配置此行
   password:
-  connectTimeout: 5000 # 连接超时时间 单位:ms
-  socketTimeout: 5000 # 通信超时时间 单位:ms
-  requestTimeout: 5000 # 请求超时时间 单位:ms
-  connectionRequestTimeout: 5000 # 连接请求超时时间 单位:ms
-  maxConnTotal: 100 # 最大连接数 单位:个
-  maxConnPerRoute: 100 # 最大连接路由数 单位:个
+  # 连接超时时间 单位:ms
+  connectTimeout: 5000
+  # 通信超时时间 单位:ms
+  socketTimeout: 5000
+  # 请求超时时间 单位:ms
+  requestTimeout: 5000
+  # 连接请求超时时间 单位:ms
+  connectionRequestTimeout: 5000
+  # 最大连接数 单位:个
+  maxConnTotal: 100
+  # 最大连接路由数 单位:个
+  maxConnPerRoute: 100
   global-config:
     db-config:
-      table-prefix: tt_ # 索引前缀,可用于区分环境  默认为空
-      id-type: none # id生成策略 默认为auto
-      field-strategy: IGNORED # 字段更新策略 默认为not_null
+      # 索引前缀,可用于区分环境  默认为空
+      table-prefix: tt_
+      # id生成策略 默认为auto
+      id-type: none
+      # 字段更新策略 默认为not_null
+      field-strategy: IGNORED
 
 redisson:
   single_server_config:
@@ -175,19 +186,32 @@ elasticjob:
         script.command.line: "echo Manual SCRIPT Job: "
 
 forest:
-  bean-id: config0 # 在spring上下文中bean的id（默认为 forestConfiguration）
-  backend: okhttp3 # 后端HTTP框架（默认为 okhttp3）
-  max-connections: 1000 # 连接池最大连接数（默认为 500）
-  max-route-connections: 500 # 每个路由的最大连接数（默认为 500）
-  timeout: 3000 # 请求超时时间，单位为毫秒（默认为 3000）
-  connect-timeout: 3000 # 连接超时时间，单位为毫秒（默认为 timeout）
-  read-timeout: 3000 # 数据读取超时时间，单位为毫秒（默认为 timeout）
-  max-retry-count: 0 # 请求失败后重试次数（默认为 0 次不重试）
-  ssl-protocol: SSLv3 # 单向验证的HTTPS的默认SSL协议（默认为 SSLv3）
-  logEnabled: true # 打开或关闭日志（默认为 true）
-  log-request: true # 打开/关闭Forest请求日志（默认为 true）
-  log-response-status: true # 打开/关闭Forest响应状态日志（默认为 true）
-  log-response-content: true # 打开/关闭Forest响应内容日志（默认为 false）
+  # 在spring上下文中bean的id（默认为 forestConfiguration）
+  bean-id: config0
+  # 后端HTTP框架（默认为 okhttp3）
+  backend: okhttp3
+  # 连接池最大连接数（默认为 500）
+  max-connections: 1000
+  # 每个路由的最大连接数（默认为 500）
+  max-route-connections: 500
+  # 请求超时时间，单位为毫秒（默认为 3000）
+  timeout: 3000
+  # 连接超时时间，单位为毫秒（默认为 timeout）
+  connect-timeout: 3000
+  # 数据读取超时时间，单位为毫秒（默认为 timeout）
+  read-timeout: 3000
+  # 请求失败后重试次数（默认为 0 次不重试）
+  max-retry-count: 0
+  # 单向验证的HTTPS的默认SSL协议（默认为 SSLv3）
+  ssl-protocol: SSLv3
+  # 打开或关闭日志（默认为 true）
+  logEnabled: true
+  # 打开/关闭Forest请求日志（默认为 true）
+  log-request: true
+  # 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-status: true
+  # 打开/关闭Forest响应内容日志（默认为 false）
+  log-response-content: true
   variables:
     username: foo
     userpwd: bar
@@ -259,11 +283,14 @@ seata:
   application-id: ${spring.application.name}
   tx-service-group: taotao_cloud_tx_group
   enable-auto-data-source-proxy: true
+  use-jdk-proxy: false
   service:
     grouplist:
-      SC: ${TAOTAO_CLOUD_SEATA_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_PORT:8091}
-    vgroup-mapping:
+      SC: 192.168.10.200:8091,192.168.10.200:8092,192.168.10.200:8093
+    vgroupMapping:
       taotao_cloud_tx_group: SC
+    enable-degrade: false
+    disable-global-transaction: false
   config:
     type: nacos
     nacos:
@@ -272,6 +299,7 @@ seata:
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
+      data-id: client.properties
   registry:
     type: nacos
     nacos:
@@ -291,6 +319,7 @@ seata:
       # 自动刷新缓存中的表结构（默认false）
       table-meta-check-enable: false
       report-success-enable: true
+      saga-branch-register-enable: false
       lock:
         # 校验或占用全局锁重试间隔（默认10ms）
         retry-interval: 10
@@ -303,11 +332,15 @@ seata:
       commit-retry-count: 5
       # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
       rollback-retry-count: 5
+      degrade-check: false
+      degrade-check-period: 2000
+      degrade-check-allow-times: 10
     undo:
       # 二阶段回滚镜像校验（默认true开启）
       data-validation: true
       # undo序列化方式（默认jackson 不支持 LocalDateTime）
-      log-serialization: kryo
+      log-serialization: jackson
+      only-care-update-columns: true
       # 自定义undo表名（默认undo_log）
       log-table: undo_log
   log:
@@ -329,7 +362,8 @@ seata:
     heartbeat: true
     serialization: seata
     compressor: none
-    enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
+    # 客户端事务消息请求是否批量合并发送（默认true）
+    enable-client-batch-send-request: true
 
 spring:
   quartz:
@@ -343,44 +377,39 @@ spring:
     jdbc:
       # 是否自动使用 SQL 初始化 Quartz 表结构
       initialize-schema: never
-    # quartz原生配置
     properties:
       org:
         quartz:
           scheduler:
-            instanceName: quartzScheduler # 调度器实例名称
-            instanceId: AUTO # 调度器实例ID自动生成
+            # 调度器实例名称
+            instanceName: quartzScheduler
+            # 调度器实例ID自动生成
+            instanceId: AUTO
             wrapJobExecutionInUserTransaction: false
             rmi:
               export: false
               proxy: false
           # JobStore sql: https://github.com/quartz-scheduler/quartz/tree/master/quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore
           jobStore:
-            class: org.quartz.impl.jdbcjobstore.JobStoreTX # JobStore 实现类
-            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate # 使用完全兼容JDBC的驱动
-            tablePrefix: qrtz_ # Quartz 表前缀
-            useProperties: false # 是否将JobDataMap中的属性转为字符串存储
+            # JobStore 实现类
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            # 使用完全兼容JDBC的驱动
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            # Quartz 表前缀
+            tablePrefix: QRTZ_
+            # 是否将JobDataMap中的属性转为字符串存储
+            useProperties: false
             misfireThreshold: 60000
           # 线程池相关配置
           threadPool:
-            threadCount: 25 # 线程池大小。默认为 10 。
-            threadPriority: 5 # 线程优先级
+            # 线程池大小。默认为 10
+            threadCount: 25
+            # 线程优先级
+            threadPriority: 5
             threadNamePrefix: taotao-cloud-quartz-executor
-            class: org.quartz.simpl.SimpleThreadPool # 指定线程池实现类，对调度器提供固定大小的线程池
+            # 指定线程池实现类，对调度器提供固定大小的线程池
+            class: org.quartz.simpl.SimpleThreadPool
             threadsInheritContextClassLoaderOfInitializingThread: true
-    #properties:
-    #  org.quartz.scheduler.instanceName : quartzScheduler
-    #  org.quartz.scheduler.instanceId : AUTO
-    #  org.quartz.scheduler.rmi.export: false
-    #  org.quartz.scheduler.rmi.proxy: false
-    #  org.quartz.scheduler.wrapJobExecutionInUserTransaction: false
-    #  org.quartz.jobStore.class : org.quartz.simpl.RAMJobStore
-    #  org.quartz.jobStore.misfireThreshold: 60000
-    #  org.quartz.threadPool.class : org.quartz.simpl.SimpleThreadPool
-    #  org.quartz.threadPool.threadCount : 10
-    #  org.quartz.threadPool.threadNamePrefix : taotao-cloud-quartz-thread
-    #  org.quartz.threadPool.threadPriority : 5
-    #  org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread : true
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
@@ -581,10 +610,12 @@ spring:
       database: yapi
       host: 192.168.10.200
       port: 27017
-      #username:
-      #password:
-      slowQuery: true  #是否记录慢查询到数据库中
-      slowTime: 2000 #慢查询最短时间,默认为1000毫秒
+      username:
+      password:
+      #是否记录慢查询到数据库中
+      slowQuery: true
+      #慢查询最短时间,默认为1000毫秒
+      slowTime: 2000
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
@@ -878,14 +909,20 @@ spring:
         bindings:
           sms-output:
             producer:
-              #routing-key-expression: headers.routingKey   # 发送端路由key
-              delayed-exchange: false    # 开启延时队列
+              # 发送端路由key
+              #routing-key-expression: headers.routingKey
+              # 开启延时队列
+              delayed-exchange: false
           sms-input:
             consumer:
-              #binding-routing-key: login.user.succeed   # 生产监听路由表达式
-              delayed-exchange: false    # 开启延时队列
-              #auto-bind-dlq: true   # 绑定死信队列
-              #republish-to-dlq: true  # 重投到死信队列并带有报错信息
+              # 生产监听路由表达式
+              #binding-routing-key: login.user.succeed
+              # 开启延时队列
+              delayed-exchange: false
+              # 绑定死信队列
+              #auto-bind-dlq: true
+              # 重投到死信队列并带有报错信息
+              #republish-to-dlq: true
         binder:
           admin-addresses: 192.168.10.200:5672
       kafka:
@@ -1053,7 +1090,7 @@ mybatis-plus:
       logic-not-delete-value: 0
       insert-strategy: ignored
       update-strategy: ignored
-      select-strategy: ignored
+      where-strategy: ignored
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
