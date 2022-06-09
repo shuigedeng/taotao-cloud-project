@@ -58,7 +58,6 @@ jobs:
         cd ${{ github.workspace }}/taotao-cloud-dependencies
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
-        gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: build and publish starter
       run: |
