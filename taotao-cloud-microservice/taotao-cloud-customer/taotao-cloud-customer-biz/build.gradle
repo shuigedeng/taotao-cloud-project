@@ -6,6 +6,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

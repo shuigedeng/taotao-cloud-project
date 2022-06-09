@@ -125,7 +125,11 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 	@Configuration
 	@ConditionalOnExpression(value = "environment.getProperty('encrypt.signSecret')!=null && " +
 		"environment.getProperty('encrypt.signSecret').trim()!=''")
-	public class SignEncryptConfiguration {
+	public static class SignEncryptConfiguration implements InitializingBean {
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			LogUtil.started(SignEncryptConfiguration.class, StarterName.ENCRYPT_STARTER);
+		}
 
 		@Bean
 		@ConditionalOnMissingBean(SignEncryptHandler.class)

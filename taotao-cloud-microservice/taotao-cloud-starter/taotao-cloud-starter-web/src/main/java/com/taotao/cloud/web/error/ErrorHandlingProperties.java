@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.taotao.cloud.web.sensitive.desensitize.DesensitizeProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +18,11 @@ import org.springframework.stereotype.Component;
  * @version 2021.10
  * @since 2022-01-12 08:54:32
  */
-@ConfigurationProperties("taotao.cloud.web.error.handling")
+@RefreshScope
+@ConfigurationProperties(prefix = ErrorHandlingProperties.PREFIX)
 public class ErrorHandlingProperties {
+
+	public static final String PREFIX = "taotao.cloud.web.error.handling";
 
 	private boolean enabled = true;
 

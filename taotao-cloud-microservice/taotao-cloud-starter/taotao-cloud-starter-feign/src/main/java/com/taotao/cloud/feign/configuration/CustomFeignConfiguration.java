@@ -39,8 +39,6 @@ import feign.Response;
 import feign.Retryer;
 import feign.Util;
 import feign.codec.Decoder;
-import feign.codec.Encoder;
-import feign.form.spring.SpringFormEncoder;
 import feign.optionals.OptionalDecoder;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -70,7 +68,6 @@ import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
 import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomizer;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
-import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -122,18 +119,23 @@ public class CustomFeignConfiguration implements InitializingBean {
 	/**
 	 * feign 支持MultipartFile上传文件
 	 */
-	@Bean
-	public Encoder feignFormEncoder() {
-		List<HttpMessageConverter<?>> converters = new RestTemplate().getMessageConverters();
-		ObjectFactory<HttpMessageConverters> factory = () -> new HttpMessageConverters(converters);
-		return new SpringFormEncoder(new SpringEncoder(factory));
-	}
+	// @Bean
+	// public Encoder feignFormEncoder() {
+	// 	List<HttpMessageConverter<?>> converters = new RestTemplate().getMessageConverters();
+	// 	ObjectFactory<HttpMessageConverters> factory = () -> new HttpMessageConverters(converters);
+	// 	return new SpringFormEncoder(new SpringEncoder(factory));
+	// }
 
 	@Bean
 	public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters,
 		ObjectProvider<HttpMessageConverterCustomizer> customizers) {
 		return new OptionalDecoder(
-			new BaseResultDecode(new SpringDecoder(messageConverters, customizers)));
+			new ResultDecode(new SpringDecoder(messageConverters, customizers)));
+	}
+
+	@Bean
+	public FeignClientErrorDecoder feignClientErrorDecoder() {
+		return new FeignClientErrorDecoder();
 	}
 
 	@Bean
@@ -143,9 +145,16 @@ public class CustomFeignConfiguration implements InitializingBean {
 		return new FeignClientEndpoint(context);
 	}
 
-	public static class BaseResultDecode extends ResponseEntityDecoder {
+	/**
+	 * 结果解码
+	 *
+	 * @author shuigedeng
+	 * @version 2022.06
+	 * @since 2022-06-09 10:29:26
+	 */
+	public static class ResultDecode extends ResponseEntityDecoder {
 
-		public BaseResultDecode(Decoder decoder) {
+		public ResultDecode(Decoder decoder) {
 			super(decoder);
 		}
 
@@ -168,11 +177,6 @@ public class CustomFeignConfiguration implements InitializingBean {
 
 			return super.decode(response, type);
 		}
-	}
-
-	@Bean
-	public FeignClientErrorDecoder feignClientErrorDecoder() {
-		return new FeignClientErrorDecoder();
 	}
 
 	public static class FeignClientErrorDecoder implements feign.codec.ErrorDecoder {
@@ -224,7 +228,11 @@ public class CustomFeignConfiguration implements InitializingBean {
 	 */
 	@Configuration
 	@ConditionalOnClass(okhttp3.OkHttpClient.class)
-	public static class RestTemplateConfiguration {
+	public static class RestTemplateConfiguration implements InitializingBean {
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			LogUtil.started(RestTemplateConfiguration.class, StarterName.FEIGN_STARTER);
+		}
 
 		private static final Charset UTF_8 = StandardCharsets.UTF_8;
 		private final ObjectMapper objectMapper = JsonUtil.MAPPER;
