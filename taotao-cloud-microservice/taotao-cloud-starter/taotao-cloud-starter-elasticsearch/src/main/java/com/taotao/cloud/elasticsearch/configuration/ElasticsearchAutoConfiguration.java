@@ -63,7 +63,12 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	}
 
 	@Configuration
-	public static class ElasticsearchConfig extends ElasticsearchConfiguration {
+	public static class ElasticsearchConfig extends ElasticsearchConfiguration implements InitializingBean {
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			LogUtil.started(ElasticsearchConfig.class, StarterName.ELASTICSEARCH_STARTER);
+		}
+
 		@Autowired
 		private org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchProperties properties;
 

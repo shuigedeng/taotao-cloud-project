@@ -1,5 +1,6 @@
 package com.taotao.cloud.feign.formatter;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.cloud.openfeign.FeignFormatterRegistrar;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -41,7 +42,7 @@ public class DateFormatRegister implements FeignFormatterRegistrar {
 
     private static class Date2StringConverter implements Converter<Date, String> {
         @Override
-        public String convert(Date source) {
+        public String convert(@NotNull Date source) {
             return new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT).format(source);
         }
     }
@@ -49,30 +50,21 @@ public class DateFormatRegister implements FeignFormatterRegistrar {
     private static class LocalDateTime2StringConverter implements Converter<LocalDateTime, String> {
         @Override
         public String convert(LocalDateTime source) {
-            if (source == null) {
-                return null;
-            }
-            return source.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT));
+			return source.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT));
         }
     }
 
     private static class LocalDate2StringConverter implements Converter<LocalDate, String> {
         @Override
         public String convert(LocalDate source) {
-            if (source == null) {
-                return null;
-            }
-            return source.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
+			return source.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
         }
     }
 
     private static class LocalTime2StringConverter implements Converter<LocalTime, String> {
         @Override
         public String convert(LocalTime source) {
-            if (source == null) {
-                return null;
-            }
-            return source.format(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT));
+			return source.format(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT));
         }
     }
 }

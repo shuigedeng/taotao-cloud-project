@@ -7,10 +7,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * 脱敏设置
  */
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.web.sensitive")
+@ConfigurationProperties(prefix = DesensitizeProperties.PREFIX)
 public class DesensitizeProperties {
 
-
+	public static final String PREFIX = "taotao.cloud.web.sensitive";
 	/**
 	 * 是否是演示站点
 	 */

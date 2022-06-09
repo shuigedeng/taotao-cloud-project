@@ -161,7 +161,11 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	@Configuration
-	public static class HibernateListener {
+	public static class HibernateListener implements InitializingBean {
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			LogUtil.started(HibernateListener.class, StarterName.JPA_STARTER);
+		}
 
 		@PersistenceUnit
 		private EntityManagerFactory entityManagerFactory;
