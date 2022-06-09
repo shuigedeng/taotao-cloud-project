@@ -35,7 +35,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms")
+    //api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
 
     api("org.springframework.boot:spring-boot-starter-web") {

@@ -966,8 +966,6 @@ taotao:
         enabled: true
       xss:
         enabled: true
-    sms:
-      enabled: false
     shardingsphere:
       enabled: false
     sentinel:

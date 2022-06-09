@@ -1,0 +1,4 @@
+com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration
+com.taotao.cloud.sms.common.configuration.VerificationCodeAutoConfiguration
+com.taotao.cloud.sms.common.web.SmsWebmvcAutoConfiguration
+com.taotao.cloud.sms.common.web.SmsWebmvcPathAutoConfiguration

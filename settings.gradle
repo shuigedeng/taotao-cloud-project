@@ -53,9 +53,15 @@ for (project in threeLayerProjects) {
     file("${rootDir}/${dir}").eachDir { directory ->
         if (directory.name != "build" && directory.name != "out" && directory.name != "src") {
             include "${dir}:${directory.name}"
-            directory.eachDir {
+            directory.eachDir {it->
                 if (it.name != "build" && it.name != "src" && it.name != "out") {
                     include "${dir}:${directory.name}:${it.name}"
+
+                    it.eachDir {four->
+                        if (four.name != "build" && four.name != "src" && four.name != "out") {
+                            include "${dir}:${directory.name}:${it.name}:${four.name}"
+                        }
+                    }
                 }
             }
         }
