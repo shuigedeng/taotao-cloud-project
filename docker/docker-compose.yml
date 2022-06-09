@@ -1,6 +1,5 @@
 version: '3.8'
 services:
-  # redis cluster
   redis10:
     image: redis
     restart: always
@@ -16,7 +15,7 @@ services:
       --cluster-announce-port 6381 \
       --cluster-announce-bus-port 16381"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.10
   redis11:
     image: redis
@@ -33,7 +32,7 @@ services:
       --cluster-announce-port 6382 \
       --cluster-announce-bus-port 16382"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.11
   redis12:
     image: redis
@@ -50,7 +49,7 @@ services:
       --cluster-announce-port 6383 \
       --cluster-announce-bus-port 16383"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.12
   redis13:
     image: redis
@@ -67,7 +66,7 @@ services:
       --cluster-announce-port 6384 \
       --cluster-announce-bus-port 16384"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.13
   redis14:
     image: redis
@@ -84,7 +83,7 @@ services:
       --cluster-announce-port 6385 \
       --cluster-announce-bus-port 16385"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.14
   redis15:
     image: redis
@@ -101,18 +100,21 @@ services:
       --cluster-announce-port 6386 \
       --cluster-announce-bus-port 16386"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.15
 
   # nacos cluster
   nacos1:
-    image: nacos/nacos-server
+    image: nacos/nacos-server:v2.1.0
     restart: always
     hostname: nacos1
     container_name: nacos1
     privileged: true
     ports:
-      - "8846:8848"
+      - "8840:8848"
+      - "7840:7848"
+      - "9840:9848"
+      - "9841:9849"
     environment:
       MODE: cluster
       PREFER_HOST_MODE: hostname
@@ -120,23 +122,26 @@ services:
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
       MYSQL_SERVICE_HOST: 192.168.10.200
-      MYSQL_SERVICE_PORT: 3316
+      MYSQL_SERVICE_PORT: 3307
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.0
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.16
   nacos2:
-    image: nacos/nacos-server
+    image: nacos/nacos-server:v2.1.0
     restart: always
     hostname: nacos2
     container_name: nacos2
     privileged: true
     ports:
-      - "8847:8848"
+      - "8841:8848"
+      - "7841:7848"
+      - "9842:9848"
+      - "9843:9849"
     environment:
       MODE: cluster
       NACOS_APPLICATION_PORT: 8848
@@ -144,23 +149,26 @@ services:
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
       MYSQL_SERVICE_HOST: 192.168.10.200
-      MYSQL_SERVICE_PORT: 3316
+      MYSQL_SERVICE_PORT: 3307
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.0
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.17
   nacos3:
-    image: nacos/nacos-server
+    image: nacos/nacos-server:v2.1.0
     restart: always
     hostname: nacos3
     container_name: nacos3
     privileged: true
     ports:
-      - "8848:8848"
+      - "8843:8848"
+      - "7843:7848"
+      - "9844:9848"
+      - "9845:9849"
     environment:
       MODE: cluster
       NACOS_APPLICATION_PORT: 8848
@@ -168,72 +176,72 @@ services:
       NACOS_SERVERS: nacos1:8848,nacos2:8848,nacos3:8848
       SPRING_DATASOURCE_PLATFORM: mysql
       MYSQL_SERVICE_HOST: 192.168.10.200
-      MYSQL_SERVICE_PORT: 3316
+      MYSQL_SERVICE_PORT: 3307
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.0
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.18
-  nacos-nginx:
+  nacosnginx:
     image: nginx
     restart: always
     container_name: nacos-nginx
     ports:
       - "8000:80"
     volumes:
-      - /root/config.d:/etc/nginx/conf.d
+      - /root/cloud/nacos-nginx/config.d:/etc/nginx/conf.d
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.19
 
   # seata cluster
   seata1:
     container_name: seata1
-    image: seataio/seata-server:1.4.2
+    image: seataio/seata-server:1.5.1
     restart: always
     ports:
       - "8091:8091"
     volumes:
       - /etc/localtime:/etc/localtime
-      - /root/seata/registry.conf:/seata-server/resources/registry.conf
+      - /root/cloud/seata/application.yml:/seata-server/resources/application.yml
     environment:
       SEATA_PORT: 8091
       SEATA_IP: 192.168.10.200
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.20
   seata2:
     container_name: seata2
-    image: seataio/seata-server:1.4.2
+    image: seataio/seata-server:1.5.1
     restart: always
     ports:
       - "8092:8092"
     volumes:
       - /etc/localtime:/etc/localtime
-      - /root/seata/registry.conf:/seata-server/resources/registry.conf
+      - /root/cloud/seata/application.yml:/seata-server/resources/application.yml
     environment:
       SEATA_PORT: 8092
       SEATA_IP: 192.168.10.200
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.21
   seata3:
     container_name: seata3
-    image: seataio/seata-server:1.4.2
+    image: seataio/seata-server:1.5.1
     restart: always
     ports:
       - "8093:8093"
     volumes:
       - /etc/localtime:/etc/localtime
-      - /root/seata/registry.conf:/seata-server/resources/registry.conf
+      - /root/cloud/seata/application.yml:/seata-server/resources/application.yml
     environment:
       SEATA_PORT: 8093
       SEATA_IP: 192.168.10.200
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.22
 
   # zookeeper cluster
@@ -249,7 +257,7 @@ services:
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.23
   zoo2:
     image: zookeeper:3.4.10
@@ -263,7 +271,7 @@ services:
       ZOO_MY_ID: 2
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.24
   zoo3:
     image: zookeeper:3.4.10
@@ -277,9 +285,10 @@ services:
       ZOO_MY_ID: 3
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.25
 
+  # kafka cluster
   kafka-broker1:
     image: wurstmeister/kafka
     restart: always
@@ -297,7 +306,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_HEAP_OPTS: "-Xmx512M -Xms16M"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.26
   kafka-broker2:
     image: wurstmeister/kafka
@@ -315,7 +324,7 @@ services:
       KAFKA_ADVERTISED_PORT: 9093
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.27
   kafka-broker3:
     image: wurstmeister/kafka
@@ -333,7 +342,7 @@ services:
       KAFKA_ADVERTISED_PORT: 9094
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.28
   kafka-manager:
     image: sheepkiller/kafka-manager:latest
@@ -348,7 +357,7 @@ services:
       APPLICATION_SECRET: 123456
       KM_ARGS: -Djava.net.preferIPv4Stack=true
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.29
 
   zipkin:
@@ -356,24 +365,24 @@ services:
     container_name: zipkin
     environment:
       - STORAGE_TYPE=mysql
-      - MYSQL_DB=taotao-cloud-zipkin
+      - MYSQL_DB=taotao-cloud-zipkin-0.3.0
       - MYSQL_USER=root
       - MYSQL_PASS=123456
       - MYSQL_HOST=192.168.10.200
-      - MYSQL_TCP_PORT=3316
+      - MYSQL_TCP_PORT=3307
     ports:
       - "9411:9411"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.30
 
   sentinel-dashboard:
-    image: fxbin/sentinel-dashboard:1.8.2
+    image: leixuewen/sentinel-dashboard:1.8.4
     container_name: sentinel-dashboard
     ports:
-      - "8858:8858"
+      - "8858:8080"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.31
 
   es1:
@@ -395,12 +404,12 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - /root/es/es1/data:/usr/share/elasticsearch/data
-      - /root/es/es1/plugins:/usr/share/elasticsearch/plugins
+      - /root/cloud/es/es1/data:/usr/share/elasticsearch/data
+      - /root/cloud/es/es1/plugins:/usr/share/elasticsearch/plugins
     ports:
       - "9200:9200"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.32
   es2:
     image: elasticsearch:8.1.0
@@ -421,13 +430,13 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - /root/es/es2/data:/usr/share/elasticsearch/data
-      - /root/es/es3/plugins:/usr/share/elasticsearch/plugins
+      - /root/cloud/es/es2/data:/usr/share/elasticsearch/data
+      - /root/cloud/es/es3/plugins:/usr/share/elasticsearch/plugins
     ports:
       - "9201:9200"
       - "9301:9300"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.33
   es3:
     image: elasticsearch:8.1.0
@@ -448,18 +457,18 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - /root/es/es3/data:/usr/share/elasticsearch/data
-      - /root/es/es3/plugins:/usr/share/elasticsearch/plugins
+      - /root/cloud/es/es3/data:/usr/share/elasticsearch/data
+      - /root/cloud/es/es3/plugins:/usr/share/elasticsearch/plugins
     ports:
       - "9202:9200"
       - "9302:9300"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.34
 
   #https://github.com/medcl/elasticsearch-analysis-ik/releases
   kibana:
-    image: kibana:7.16.2
+    image: kibana:8.2.2
     container_name: kibana
     links:
       - es1
@@ -474,7 +483,7 @@ services:
     ports:
       - "5601:5601"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.35
 
   cerebro:
@@ -487,11 +496,11 @@ services:
     command:
       - -Dhosts.0.host=http://es1:9200
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.36
 
   skywalking-oap:
-    image: apache/skywalking-oap-server:8.9.0
+    image: apache/skywalking-oap-server:9.0.0
     container_name: skywalking-oap
     restart: always
     depends_on:
@@ -504,10 +513,10 @@ services:
       - SW_STORAGE=elasticsearch7
       - SW_STORAGE_ES_CLUSTER_NODES=es1:9200
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.37
   skywalking-ui:
-    image: apache/skywalking-ui:8.9.0
+    image: apache/skywalking-ui:9.0.0
     container_name: skywalking-ui
     restart: always
     depends_on:
@@ -518,7 +527,7 @@ services:
       - TZ=Asia/Shanghai
       - SW_OAP_ADDRESS=skywalking-oap:12800
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.38
 
   prometheus:
@@ -527,12 +536,12 @@ services:
     hostname: prometheus
     restart: always
     volumes:
-      - /root/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /root/prometheus/node_down.yml:/etc/prometheus/node_down.yml
+      - /root/cloud/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /root/cloud/prometheus/node_down.yml:/etc/prometheus/node_down.yml
     ports:
       - "9090:9090"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.39
 
   alertmanager:
@@ -543,18 +552,18 @@ services:
     environment:
       - cluster.advertise-address=0.0.0.0:9093
     volumes:
-      - /root/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - /root/cloud/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml
     ports:
       - "9091:9093"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.40
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
     hostname: grafana
-    #restart: always
+    restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     depends_on:
@@ -562,76 +571,93 @@ services:
     ports:
       - "3000:3000"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.41
 
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
     hostname: node-exporter
-    #restart: always
+    restart: always
     ports:
       - "9101:9100"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.42
 
   # rocketmq cluster
   rocketmq-namesrv:
-    image: foxiswho/rocketmq:4.8.0
+    image: apache/rocketmq:4.9.3
     container_name: rocketmq-namesrv
     restart: always
     ports:
       - "9876:9876"
     volumes:
-      - /root/rocketmq/namesrv/logs:/home/rocketmq/logs
-      - /root/rocketmq/namesrv/store:/home/rocketmq/store
+      - /root/cloud/rocketmq/namesrv/logs:/home/rocketmq/rocketmq-4.9.3/logs
+      - /root/cloud/rocketmq/namesrv/store:/home/rocketmq/rocketmq-4.9.3/store
     command: sh mqnamesrv
     environment:
       - "JAVA_OPT_EXT=-Xms512M -Xmx512M -Xmn128m"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.43
   rocketmq-broker1:
-    image: foxiswho/rocketmq:4.8.0
+    image: apache/rocketmq:4.9.3
     container_name: rocketmq-broker1
     restart: always
     links:
       - rocketmq-namesrv
     ports:
-      - "10909:10909"
+      - "10919:10909"
       - "10911:10911"
       - "10912:10912"
     environment:
       - NAMESRV_ADDR=rocketmq-namesrv:9876
     volumes:
-      - /root/rocketmq/broker1/logs:/home/rocketmq/logs
-      - /root/rocketmq/broker1/store:/home/rocketmq/store
-      - /root/rocketmq/broker1/conf/broker.conf:/opt/rocketmq-4.8.0/conf/broker.conf
-    command: sh mqbroker -c /opt/rocketmq-4.8.0/conf/broker.conf
+      - /root/cloud/rocketmq/broker1/logs:/home/rocketmq/rocketmq-4.9.3/logs
+      - /root/cloud/rocketmq/broker1/store:/home/rocketmq/rocketmq-4.9.3/store
+    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.3/conf/broker.conf
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.44
   rocketmq-broker2:
-    image: foxiswho/rocketmq:4.8.0
+    image: apache/rocketmq:4.9.3
     container_name: rocketmq-broker2
     restart: always
     links:
       - rocketmq-namesrv
     ports:
       - "10929:10909"
+      - "10921:10911"
+      - "10922:10912"
+    environment:
+      - NAMESRV_ADDR=rocketmq-namesrv:9876
+    volumes:
+      - /root/cloud/rocketmq/broker2/logs:/home/rocketmq/rocketmq-4.9.3/logs
+      - /root/cloud/rocketmq/broker2/store:/home/rocketmq/rocketmq-4.9.3/store
+    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.3/conf/broker.conf
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.45
+  rocketmq-broker3:
+    image: apache/rocketmq:4.9.3
+    container_name: rocketmq-broker3
+    restart: always
+    links:
+      - rocketmq-namesrv
+    ports:
+      - "10939:10909"
       - "10931:10911"
       - "10932:10912"
     environment:
       - NAMESRV_ADDR=rocketmq-namesrv:9876
     volumes:
-      - /root/rocketmq/broker2/logs:/home/rocketmq/logs
-      - /root/rocketmq/broker2/store:/home/rocketmq/store
-      - /root/rocketmq/broker2/conf/broker.conf:/opt/rocketmq-4.8.0/conf/broker.conf
-    command: sh mqbroker -c /opt/rocketmq-4.8.0/conf/broker.conf
+      - /root/cloud/rocketmq/broker3/logs:/home/rocketmq/rocketmq-4.9.3/logs
+      - /root/cloud/rocketmq/broker3/store:/home/rocketmq/rocketmq-4.9.3/store
+    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.3/conf/broker.conf
     networks:
-      kafka-cluster-network:
-        ipv4_address: 172.11.0.45
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.52
   console:
     image: styletang/rocketmq-console-ng
     container_name: rocketmq-console-ng
@@ -645,7 +671,7 @@ services:
       - Drocketmq.namesrv.addr=rocketmq-namesrv:9876
       - Dcom.rocketmq.sendMessageWithVIPChannel=false
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.46
 
   rabbitmq1:
@@ -657,14 +683,14 @@ services:
       - "5672:5672"
       - "15672:15672"
     volumes:
-      - /root/rabbitmq/rabbitmq1/data:/var/lib/rabbitmq
+      - /root/cloud/rabbitmq/rabbitmq1/data:/var/lib/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=root
       - RABBITMQ_ERLANG_COOKIE=CURIOAPPLICATION
       - RABBITMQ_NODENAME:rabbitmq1
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.47
   rabbitmq2:
     image: rabbitmq:3.9.13-management
@@ -674,7 +700,7 @@ services:
     ports:
       - "5673:5672"
     volumes:
-      - /root/rabbitmq/rabbitmq2/data:/var/lib/rabbitmq
+      - /root/cloud/rabbitmq/rabbitmq2/data:/var/lib/rabbitmq
     environment:
       - RABBITMQ_ERLANG_COOKIE=CURIOAPPLICATION
       - RABBITMQ_NODENAME:rabbitmq2
@@ -682,7 +708,7 @@ services:
       - RABBITMQ_CLUSTER_WITH=rabbit@rabbitmq1
       - RABBITMQ_RAM_NODE=true
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.48
   rabbitmq3:
     image: rabbitmq:3.9.13-management
@@ -692,7 +718,7 @@ services:
     ports:
       - "5674:5672"
     volumes:
-      - /root/rabbitmq/rabbitmq3/data:/var/lib/rabbitmq
+      - /root/cloud/rabbitmq/rabbitmq3/data:/var/lib/rabbitmq
     environment:
       - RABBITMQ_ERLANG_COOKIE=CURIOAPPLICATION
       - RABBITMQ_NODENAME:rabbitmq3
@@ -700,7 +726,7 @@ services:
       - RABBITMQ_CLUSTER_WITH=rabbit@rabbitmq1
       - RABBITMQ_RAM_NODE=true
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.49
 
   yapi:
@@ -719,12 +745,12 @@ services:
     ports:
       - "3001:3000"
     volumes:
-      - /root/yapi/log/yapi.log:/home/vendors/log
+      - /root/cloud/yapi/log/yapi.log:/home/vendors/log
     depends_on:
       - mongo
     entrypoint: "bash /wait-for-it.sh mongo:27017 -- entrypoint.sh"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.50
   mongo:
     image: mongo
@@ -733,12 +759,12 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /root/yapi/mongodb:/data/db
+      - /root/cloud/yapi/mongodb:/data/db
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.51
 
 networks:
-  kafka-cluster-network:
+  taotao-cluster-network:
     external:
-      name: kafka-cluster-network
+      name: taotao-cluster-network

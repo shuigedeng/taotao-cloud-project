@@ -1,6 +1,6 @@
 # 新建网络 docker-compose -f  3-zk-kafka-cluster.yml up -d
 # docker network ls #查看当前网络
-# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 kafka-cluster-network
+# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 taotao-cluster-network
 
 version: '3.7'
 services:
@@ -16,7 +16,7 @@ services:
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.4
   zoo2:
     image: zookeeper:3.4.10
@@ -30,7 +30,7 @@ services:
       ZOO_MY_ID: 2
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.5
   zoo3:
     image: zookeeper:3.4.10
@@ -44,7 +44,7 @@ services:
       ZOO_MY_ID: 3
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.6
 
   broker1:
@@ -64,7 +64,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
       KAFKA_HEAP_OPTS: "-Xmx512M -Xms16M"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.7
   broker2:
     image: wurstmeister/kafka
@@ -82,7 +82,7 @@ services:
       KAFKA_ADVERTISED_PORT: 9093
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.8
   broker3:
     image: wurstmeister/kafka
@@ -100,7 +100,7 @@ services:
       KAFKA_ADVERTISED_PORT: 9094
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.9
 
   kafka-manager:
@@ -116,7 +116,7 @@ services:
       APPLICATION_SECRET: 123456
       KM_ARGS: -Djava.net.preferIPv4Stack=true
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.10
 
   zipkin:
@@ -132,7 +132,7 @@ services:
     ports:
       - "9411:9411"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.20
 
   sentinel-dashboard:
@@ -141,7 +141,7 @@ services:
     ports:
       - "8858:8858"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.21
   nacos1:
     image: nacos/nacos-server
@@ -165,7 +165,7 @@ services:
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.100
   nacos2:
     image: nacos/nacos-server
@@ -189,7 +189,7 @@ services:
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.101
   nacos3:
     image: nacos/nacos-server
@@ -213,7 +213,7 @@ services:
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.102
 
   nacos-nginx:
@@ -225,7 +225,7 @@ services:
     volumes:
       - /root/config.d:/etc/nginx/conf.d
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.103
 
   seata1:
@@ -267,6 +267,6 @@ services:
 
 
 networks:
-  kafka-cluster-network:
+  taotao-cluster-network:
     external:
-      name: kafka-cluster-network
+      name: taotao-cluster-network
