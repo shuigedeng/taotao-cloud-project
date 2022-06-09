@@ -12,6 +12,7 @@
  */
 package com.taotao.cloud.sms.common.repository;
 
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.common.model.VerificationCode;
 import com.taotao.cloud.sms.common.properties.VerificationCodeMemoryRepositoryProperties;
@@ -90,7 +91,7 @@ public class VerificationCodeMemoryRepository implements VerificationCodeReposit
 	}
 
 	private String key(String phone, @Nullable String identificationCode) {
-		if (StringUtils.isBlank(identificationCode)) {
+		if (StringUtil.isBlank(identificationCode)) {
 			return phone;
 		}
 

@@ -14,6 +14,7 @@ package com.taotao.cloud.sms.common.handler;
 
 
 
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.sms.common.model.NoticeData;
 
 import java.util.Arrays;
@@ -57,7 +58,7 @@ public interface SendHandler {
 	 * @since 2022-04-27 17:48:31
 	 */
 	default boolean send(NoticeData noticeData, String phone) {
-		if (StringUtils.isBlank(phone)) {
+		if (StringUtil.isBlank(phone)) {
 			return false;
 		}
 

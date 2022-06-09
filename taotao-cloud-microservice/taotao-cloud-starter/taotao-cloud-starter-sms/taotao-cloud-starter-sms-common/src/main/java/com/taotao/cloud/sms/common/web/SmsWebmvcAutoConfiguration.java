@@ -12,9 +12,9 @@
  */
 package com.taotao.cloud.sms.common.web;
 
-import com.taotao.cloud.sms.configuration.SmsAutoConfiguration;
-import com.taotao.cloud.sms.service.NoticeService;
-import com.taotao.cloud.sms.service.VerificationCodeService;
+import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
+import com.taotao.cloud.sms.common.service.NoticeService;
+import com.taotao.cloud.sms.common.service.VerificationCodeService;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
