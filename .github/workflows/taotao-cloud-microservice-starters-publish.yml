@@ -65,11 +65,22 @@ jobs:
         starter_dir=${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-starter
         for starter in `ls $starter_dir`
         do
-          if [ -d $starter_dir"/"$starter ];then
-            cd $starter_dir"/"$starter
-            gradle --continue clean build -x test -x bootJar
-            gradle publishAllPublicationsToSonatypeRepository
-            gradle publishMavenJavaPublicationToGitHubRepository
+          starter_inner_dir="$starter_dir/$starter"
+          if [ -d $starter_inner_dir ];then
+            if [ -d "$starter_inner_dir/src" ];then
+               cd $starter_inner_dir
+               gradle --continue clean build -x test -x bootJar
+               gradle publishAllPublicationsToSonatypeRepository
+            else
+              for two_starter in `ls $starter_inner_dir`
+              do
+                if [ -d "$starter_inner_dir/two_starter" ];then
+                  cd "$starter_inner_dir/two_starter"
+                  gradle --continue clean build -x test -x bootJar
+                  gradle publishAllPublicationsToSonatypeRepository
+                fi
+              done
+            fi
           fi
         done
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)

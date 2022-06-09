@@ -1,0 +1,9 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common')
+
+    api('com.qiniu:qiniu-java-sdk:7.10.2') {
+        exclude group: 'org.projectlombok', module: 'lombok'
+    }
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
