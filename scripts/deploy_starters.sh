@@ -14,9 +14,22 @@ function deploy_starters() {
     starter_dir=$current_dir/taotao-cloud-microservice/taotao-cloud-starter
     for starter in `ls $starter_dir`
     do
-      if [ -d $starter_dir"/"$starter ];then
-        cd $starter_dir"/"$starter
-        gradle $1 -Dorg.gradle.java.home=$JAVA_HOME
+      starter_inner_dir="$starter_dir/$starter"
+      if [ -d $starter_inner_dir ];then
+        if [ -d "$starter_inner_dir/src" ]; then
+          cd $starter_inner_dir
+          echo `pwd`
+          gradle $1 -Dorg.gradle.java.home=$JAVA_HOME
+        else
+          for two_starter in `ls $starter_inner_dir`
+          do
+            if [ -d "$starter_inner_dir/$two_starter" ]; then
+              cd "$starter_inner_dir/$two_starter"
+              echo `pwd`
+              gradle $1 -Dorg.gradle.java.home=$JAVA_HOME
+            fi
+          done
+        fi
       fi
     done
 }
