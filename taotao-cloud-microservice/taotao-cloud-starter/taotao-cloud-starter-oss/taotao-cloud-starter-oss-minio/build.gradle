@@ -1,0 +1,14 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
+
+    //minio存储
+    api 'io.minio:minio:8.4.1'
+    api 'com.squareup.okhttp3:okhttp:4.9.3'
+    api 'com.squareup.okio:okio'
+    api 'com.google.guava:guava'
+    testImplementation  'org.springframework:spring-test'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+

@@ -1,0 +1,13 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
+
+    //又拍云
+    api('com.upyun:java-sdk:4.2.3'){
+        exclude group: 'org.json', module: 'json'
+    }
+    testImplementation  'org.springframework:spring-test'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+

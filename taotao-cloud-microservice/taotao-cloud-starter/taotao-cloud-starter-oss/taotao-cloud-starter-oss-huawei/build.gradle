@@ -1,0 +1,11 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
+
+    //华为云存储
+    api 'com.huaweicloud:esdk-obs-java-bundle:3.22.3'
+    testImplementation  'org.springframework:spring-test'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+

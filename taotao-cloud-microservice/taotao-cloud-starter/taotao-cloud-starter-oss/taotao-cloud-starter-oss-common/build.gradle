@@ -1,0 +1,14 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    api 'commons-fileupload:commons-fileupload:1.4'
+    api  'org.springframework:spring-test'
+
+    //jsch依赖
+    api 'com.jcraft:jsch:0.1.55'
+    api 'commons-net:commons-net:3.8.0'
+    implementation 'javax.activation:activation:1.1.1'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
