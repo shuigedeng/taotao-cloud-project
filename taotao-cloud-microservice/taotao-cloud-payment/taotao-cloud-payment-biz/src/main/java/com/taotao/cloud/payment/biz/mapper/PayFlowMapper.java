@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.biz.mapper;
+package com.taotao.cloud.payment.biz.mapper;
 
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.payment.api.vo.PayFlowVO;

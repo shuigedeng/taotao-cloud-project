@@ -40,6 +40,7 @@ sudo yum-config-manager     --add-repo     https://download.docker.com/linux/cen
 sudo yum install docker-ce docker-ce-cli containerd.io
 
 systemctl status docker
+systemctl enable docker
 systemctl start docker
 
 sudo mkdir -p /etc/docker
@@ -93,12 +94,11 @@ kubelet --version
 
 kubeadm reset
 kubeadm init  \
---apiserver-advertise-address=192.168.10.200  \
+--apiserver-advertise-address=0.0.0.0  \
 --apiserver-cert-extra-sans=127.0.0.1  \
 --image-repository=registry.aliyuncs.com/google_containers  \
 --ignore-preflight-errors=all \
 --kubernetes-version=v1.24.1  \
---control-plane-endpoint "k8s.cnblogs.com:6443" --upload-certs \
 --service-cidr=10.1.0.0/16  \
 --pod-network-cidr=10.222.0.0/16
 

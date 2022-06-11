@@ -1,12 +1,10 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
 
     api ('com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'){
         exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'
         exclude group: 'com.alibaba.csp', module: 'sentinel-transport-common'
         exclude group: 'com.alibaba.csp', module: 'sentinel-cluster-server-default'
-
     }
     api 'com.alibaba.csp:sentinel-transport-common:1.8.4'
     api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.4'

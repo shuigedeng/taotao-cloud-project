@@ -1,12 +1,13 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
 
     api('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery') {
         exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
     }
 
-    api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    api 'com.alibaba.csp:sentinel-spring-webmvc-adapter:1.8.4'
+    //api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+    //api 'com.alibaba.csp:sentinel-spring-webmvc-adapter:1.8.4'
 
     api "io.github.openfeign:feign-okhttp"
 
