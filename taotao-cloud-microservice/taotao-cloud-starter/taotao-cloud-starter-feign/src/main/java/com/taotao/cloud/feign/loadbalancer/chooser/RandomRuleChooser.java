@@ -1,6 +1,6 @@
 package com.taotao.cloud.feign.loadbalancer.chooser;
 
-import com.alibaba.nacos.common.utils.CollectionUtils;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,7 +17,7 @@ public class RandomRuleChooser implements IRuleChooser {
 
 	@Override
 	public ServiceInstance choose(List<ServiceInstance> instances) {
-		if (CollectionUtils.isNotEmpty(instances)) {
+		if (CollectionUtil.isNotEmpty(instances)) {
 			int randomValue = ThreadLocalRandom.current().nextInt(instances.size());
 			ServiceInstance serviceInstance = instances.get(randomValue);
 			LogUtil.info("选择了ip为{}, 端口为：{}的服务", serviceInstance.getHost(),

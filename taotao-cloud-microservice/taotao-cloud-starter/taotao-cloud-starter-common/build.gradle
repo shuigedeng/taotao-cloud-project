@@ -1,6 +1,7 @@
 dependencies {
-    //api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2'
-    //api 'org.yaml:snakeyaml:1.30'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3'
+    api 'org.yaml:snakeyaml:1.30'
+
     //jackson
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
@@ -56,7 +57,6 @@ dependencies {
 
     api "io.github.openfeign:feign-okhttp"
     api "com.squareup.okhttp3:okhttp"
-    api "org.springframework.cloud:spring-cloud-openfeign-core"
 
     api 'org.springframework.data:spring-data-commons'
     api('org.springframework.security:spring-security-core') {
@@ -66,10 +66,10 @@ dependencies {
 
     api "org.springframework.boot:spring-boot-starter-validation"
     api 'org.springframework.boot:spring-boot-autoconfigure'
-
-    api "org.springframework.cloud:spring-cloud-context"
     api 'org.springframework.boot:spring-boot-actuator'
     api 'org.springframework.boot:spring-boot-actuator-autoconfigure'
+
+    api "org.springframework.cloud:spring-cloud-context"
 
     // serializable
     api 'com.esotericsoftware:kryo'

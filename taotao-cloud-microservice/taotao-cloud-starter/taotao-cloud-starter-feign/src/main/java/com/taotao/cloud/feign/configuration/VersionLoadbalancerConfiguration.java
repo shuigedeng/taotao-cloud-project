@@ -1,8 +1,8 @@
 package com.taotao.cloud.feign.configuration;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
-import com.alibaba.nacos.common.utils.StringUtils;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.configuration.VersionLoadbalancerConfiguration.VersionLoadBalancerClients;
 import com.taotao.cloud.feign.configuration.VersionLoadbalancerConfiguration.VersionLoadbalancerRegisterBeanPostProcessor;
@@ -51,7 +51,7 @@ public class VersionLoadbalancerConfiguration {
 		@Override
 		public Object postProcessBeforeInitialization(Object bean, String beanName)
 			throws BeansException {
-			if (bean instanceof NacosDiscoveryProperties && StringUtils.isNotBlank(
+			if (bean instanceof NacosDiscoveryProperties && StringUtil.isNotBlank(
 				properties.getVersion())) {
 				NacosDiscoveryProperties nacosDiscoveryProperties = (NacosDiscoveryProperties) bean;
 				nacosDiscoveryProperties.getMetadata()
@@ -95,7 +95,7 @@ public class VersionLoadbalancerConfiguration {
 		}
 
 		@Bean
-		@ConditionalOnMissingBean(value = IRuleChooser.class)
+		@ConditionalOnMissingBean
 		public IRuleChooser defaultRuleChooser() {
 			return new RoundRuleChooser();
 		}

@@ -2,6 +2,8 @@ cd /etc/yum.repos.d/
 sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
+dnf update
+
 systemctl status firewalld
 systemctl stop firewalld
 systemctl disable firewalld
@@ -27,11 +29,8 @@ GATEWAY=172.16.6.254
 DNS1=172.16.60.200
 DNS2=61.128.128.68
 
-dnf install vim
-
-dnf install langpacks-en glibc-all-langpacks -y
-
-dnf install git
+# 安装系统性能分析工具及其他
+dnf install gcc make autoconf vim sysstat net-tools git wget vim langpacks-en glibc-all-langpacks -y
 
 # 禁用selinux
 sed -i '/SELINUX/{s/permissive/disabled/}' /etc/selinux/config
@@ -57,5 +56,3 @@ EOF
 # 减少SWAP使用
 echo "0" > /proc/sys/vm/swappiness
 
-# 安装系统性能分析工具及其他
-dnf install gcc make autoconf vim sysstat net-tools

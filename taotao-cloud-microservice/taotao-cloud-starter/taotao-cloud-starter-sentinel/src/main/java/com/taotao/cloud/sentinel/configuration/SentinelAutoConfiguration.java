@@ -26,9 +26,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
-import com.taotao.cloud.sentinel.model.SentinelFeign;
 import com.taotao.cloud.sentinel.properties.SentinelProperties;
-import feign.Feign;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -37,7 +35,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -52,20 +49,12 @@ import org.springframework.web.reactive.function.server.ServerResponse;
  */
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
 @EnableConfigurationProperties({SentinelProperties.class})
-@ConditionalOnProperty(prefix = SentinelProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = SentinelProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class SentinelAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(SentinelAutoConfiguration.class, StarterName.SENTINEL_STARTER);
-	}
-
-	@Bean
-	@Scope("prototype")
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(name = "feign.sentinel.enabled")
-	public Feign.Builder feignSentinelBuilder() {
-		return SentinelFeign.builder();
 	}
 
 	@Bean
