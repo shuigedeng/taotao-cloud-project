@@ -18,6 +18,7 @@ import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.vo.setting.payment.PaymentSupportSetting;
 import com.taotao.cloud.sys.api.vo.setting.payment.dto.PaymentSupportItem;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -60,25 +61,20 @@ public class CashierSupport {
 		if (paymentClientEnum == null || paymentMethodEnum == null) {
 			throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
 		}
+
 		//获取支付插件
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
 		LogUtil.info("支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(), paymentMethodEnum.name(), payParam.toString());
 
 		//支付方式调用
-		switch (paymentClientEnum) {
-			case H5:
-				return payment.h5pay(request, response, payParam);
-			case APP:
-				return payment.appPay(request, payParam);
-			case JSAPI:
-				return payment.jsApiPay(request, payParam);
-			case NATIVE:
-				return payment.nativePay(request, payParam);
-			case MP:
-				return payment.mpPay(request, payParam);
-			default:
-				return null;
-		}
+		return switch (paymentClientEnum) {
+			case H5 -> payment.h5pay(request, response, payParam);
+			case APP -> payment.appPay(request, payParam);
+			case JSAPI -> payment.jsApiPay(request, payParam);
+			case NATIVE -> payment.nativePay(request, payParam);
+			case MP -> payment.mpPay(request, payParam);
+			default -> null;
+		};
 	}
 
 	/**
@@ -155,7 +151,8 @@ public class CashierSupport {
 				throw new BusinessException(ResultEnum.PAY_UN_WANTED);
 			}
 			cashierParam.setSupport(support(payParam.getClientType()));
-			cashierParam.setWalletValue(memberWalletService.getMemberWallet(UserContext.getCurrentUser().getId()).getMemberWallet());
+			cashierParam.setWalletValue(memberWalletService.getMemberWallet(
+				UserContext.getCurrentUser().getId()).getMemberWallet());
 			OrderSettingVO orderSetting = JSONUtil.toBean(settingService.get(SettingEnum.ORDER_SETTING.name()).getSettingValue(), OrderSetting.class);
 			Integer minute = orderSetting.getAutoCancel();
 			cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);

@@ -40,6 +40,8 @@ import feign.Response;
 import feign.Retryer;
 import feign.Util;
 import feign.codec.Decoder;
+import feign.codec.Encoder;
+import feign.form.spring.SpringFormEncoder;
 import feign.optionals.OptionalDecoder;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -69,9 +71,11 @@ import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
 import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomizer;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
+import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
@@ -98,11 +102,15 @@ public class CustomFeignConfiguration implements InitializingBean {
 		LogUtil.started(CustomFeignConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
-	@Bean
-	public RequestOriginParser requestOriginParser() {
-		return new HeaderRequestOriginParser();
-	}
 
+	/**
+	 * Feign 客户端的日志记录，默认级别为NONE
+	 * Logger.Level 的具体级别如下：
+	 * NONE：不记录任何信息
+	 * BASIC：仅记录请求方法、URL以及响应状态码和执行时间
+	 * HEADERS：除了记录 BASIC级别的信息外，还会记录请求和响应的头信息
+	 * FULL：记录所有请求与响应的明细，包括头信息、请求体、元数据
+	 */
 	@Bean
 	public Logger.Level feignLoggerLevel() {
 		return Logger.Level.FULL;
@@ -127,6 +135,16 @@ public class CustomFeignConfiguration implements InitializingBean {
 	// 	ObjectFactory<HttpMessageConverters> factory = () -> new HttpMessageConverters(converters);
 	// 	return new SpringFormEncoder(new SpringEncoder(factory));
 	// }
+
+	/**
+	 * Feign支持文件上传
+	 */
+	@Bean
+	@Primary
+	@Scope("prototype")
+	public Encoder multipartFormEncoder(ObjectFactory<HttpMessageConverters> messageConverters) {
+		return new SpringFormEncoder(new SpringEncoder(messageConverters));
+	}
 
 	@Bean
 	public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters,
@@ -197,33 +215,6 @@ public class CustomFeignConfiguration implements InitializingBean {
 		}
 	}
 
-
-	/**
-	 * sentinel 请求头解析判断
-	 *
-	 * @author shuigedeng
-	 * @version 2022.03
-	 * @since 2020/6/15 11:31
-	 */
-	public static class HeaderRequestOriginParser implements RequestOriginParser {
-
-		/**
-		 * 请求头获取allow
-		 */
-		private static final String ALLOW = "Allow";
-
-		/**
-		 * Parse the origin from given HTTP request.
-		 *
-		 * @param request HTTP request
-		 * @return parsed origin
-		 */
-		@Override
-		public String parseOrigin(HttpServletRequest request) {
-			return request.getHeader(ALLOW);
-		}
-
-	}
 
 	/**
 	 * RestTemplate 相关的配置

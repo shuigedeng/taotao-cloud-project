@@ -75,7 +75,7 @@ public class RegionServiceImpl extends
 	/**
 	 * 同步请求地址
 	 */
-	private String syncUrl = "https://restapi.amap.com/v3/config/district?subdistrict=4&key=d282a686c819dea5712c7261f71925c5";
+	private String syncUrl = "https://restapi.amap.com/v3/config/district?subdistrict=4&key=xxxxx";
 
 	@Override
 	public List<RegionParentVO> queryRegionByParentId(Long parentId) {
