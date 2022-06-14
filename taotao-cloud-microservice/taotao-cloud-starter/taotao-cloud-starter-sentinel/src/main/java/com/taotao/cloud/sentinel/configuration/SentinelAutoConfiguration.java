@@ -18,6 +18,7 @@ package com.taotao.cloud.sentinel.configuration;
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.spring.webflux.callback.BlockRequestHandler;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
+import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
 import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
@@ -57,6 +58,14 @@ public class SentinelAutoConfiguration implements InitializingBean {
 		LogUtil.started(SentinelAutoConfiguration.class, StarterName.SENTINEL_STARTER);
 	}
 
+	/**
+	 * 授权规则拦截器
+	 */
+	@Bean
+	public RequestOriginParser requestOriginParser() {
+		return new HeaderRequestOriginParser();
+	}
+
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(HttpServletRequest.class)
@@ -90,5 +99,39 @@ public class SentinelAutoConfiguration implements InitializingBean {
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromValue(Result.fail(e.getMessage())));
 		};
+	}
+
+
+	/**
+	 * sentinel 请求头解析判断
+	 *
+	 * @author shuigedeng
+	 * @version 2022.03
+	 * @since 2020/6/15 11:31
+	 */
+	public static class HeaderRequestOriginParser implements RequestOriginParser {
+
+		/**
+		 * 请求头获取allow
+		 */
+		private static final String ALLOW = "Allow";
+
+		/**
+		 * Parse the origin from given HTTP request.
+		 *
+		 * @param request HTTP request
+		 * @return parsed origin
+		 */
+		@Override
+		public String parseOrigin(HttpServletRequest request) {
+			////基于请求参数,origin对应授权规则中的流控应用名称,也可通过getHeader传参
+			//String origin = request.getParameter("origin");
+			//
+			////TODO 此处做个通过IP做白名单的例子
+			//return origin;
+
+			return request.getHeader(ALLOW);
+		}
+
 	}
 }

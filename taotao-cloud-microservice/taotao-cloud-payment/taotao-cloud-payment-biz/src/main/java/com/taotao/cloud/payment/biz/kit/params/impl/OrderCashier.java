@@ -87,7 +87,6 @@ public class OrderCashier implements CashierExecute {
 
 	@Override
 	public void paymentSuccess(PaymentSuccessParams paymentSuccessParams) {
-
 		PayParam payParam = paymentSuccessParams.getPayParam();
 		if (payParam.getOrderType().equals(CashierEnum.ORDER.name())) {
 			orderService.payOrder(payParam.getSn(),

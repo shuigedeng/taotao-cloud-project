@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeequan.jeepay.service.mapper.PayOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jeequan.jeepay.core.entity.PayOrder">
+        <id column="pay_order_id" property="payOrderId" />
+        <result column="mch_no" property="mchNo" />
+        <result column="isv_no" property="isvNo" />
+        <result column="app_id" property="appId" />
+        <result column="mch_name" property="mchName" />
+        <result column="mch_type" property="mchType" />
+        <result column="mch_order_no" property="mchOrderNo" />
+        <result column="if_code" property="ifCode" />
+        <result column="way_code" property="wayCode" />
+        <result column="amount" property="amount" />
+        <result column="mch_fee_rate" property="mchFeeRate" />
+        <result column="mch_fee_amount" property="mchFeeAmount" />
+        <result column="currency" property="currency" />
+        <result column="state" property="state" />
+        <result column="notify_state" property="notifyState" />
+        <result column="client_ip" property="clientIp" />
+        <result column="subject" property="subject" />
+        <result column="body" property="body" />
+        <result column="channel_extra" property="channelExtra" />
+        <result column="channel_user" property="channelUser" />
+        <result column="channel_order_no" property="channelOrderNo" />
+        <result column="refund_state" property="refundState" />
+        <result column="refund_times" property="refundTimes" />
+        <result column="refund_amount" property="refundAmount" />
+        <result column="division_mode" property="divisionMode" />
+        <result column="division_state" property="divisionState" />
+        <result column="division_last_time" property="divisionLastTime" />
+        <result column="err_code" property="errCode" />
+        <result column="err_msg" property="errMsg" />
+        <result column="ext_param" property="extParam" />
+        <result column="notify_url" property="notifyUrl" />
+        <result column="return_url" property="returnUrl" />
+        <result column="expired_time" property="expiredTime" />
+        <result column="success_time" property="successTime" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!--交易统计-->
+    <select id="payCount" resultType="java.util.Map" parameterType="java.util.Map" >
+        SELECT ROUND(IFNULL(SUM(amount) - SUM(refund_amount), 0)/100, 2) AS payAmount, IFNULL(COUNT(1), 0) AS payCount
+        FROM t_pay_order
+        WHERE 1=1
+        <if test="state != null"> AND state = #{state} </if>
+        <if test="refundState != null"> AND refund_state = #{refundState} </if>
+        <if test="mchNo != null"> AND mch_no = #{mchNo} </if>
+        <if test="createTimeStart != null"> AND created_at &gt;= #{createTimeStart} </if>
+        <if test="createTimeEnd != null"> AND created_at &lt;= #{createTimeEnd} </if>
+        ;
+    </select>
+
+    <!--支付方式统计-->
+    <select id="payTypeCount" resultType="java.util.Map" parameterType="java.util.Map" >
+        SELECT COUNT(1) AS typeCount, ROUND(IFNULL(SUM(amount) - SUM(refund_amount), 0)/100, 2) AS typeAmount, way_code as wayCode
+        FROM t_pay_order
+        WHERE 1=1
+        <if test="state != null"> AND state = #{state} </if>
+        <if test="refundState != null"> AND refund_state = #{refundState} </if>
+        <if test="mchNo != null"> AND mch_no = #{mchNo} </if>
+        <if test="createTimeStart != null"> AND created_at &gt;= #{createTimeStart} </if>
+        <if test="createTimeEnd != null"> AND created_at &lt;= #{createTimeEnd} </if>
+        GROUP BY way_code
+    </select>
+
+    <!--成功、退款订单统计-->
+    <select id="selectOrderCount" resultType="java.util.Map" parameterType="java.util.Map" >
+        SELECT DATE_FORMAT(FLOOR(created_at),'%m-%d') groupDate, ROUND(IFNULL(SUM(amount) - SUM(refund_amount), 0)/100, 2) AS payAmount,
+        ROUND(IFNULL(SUM(refund_amount), 0)/100, 2) AS refundAmount
+        FROM t_pay_order
+        WHERE  1=1
+        AND state in (2,5)
+        <if test="mchNo != null"> AND mch_no = #{mchNo} </if>
+        <if test="createTimeStart != null"> AND created_at &gt;= #{createTimeStart} </if>
+        <if test="createTimeEnd != null"> AND created_at &lt;= #{createTimeEnd} </if>
+        GROUP BY groupDate
+        ORDER BY groupDate desc
+    </select>
+
+    <!-- 更新订单退款金额和次数 -->
+    <update id="updateRefundAmountAndCount">
+
+        update t_pay_order
+            set refund_times = refund_times + 1, <!-- 退款次数 +1 -->
+            refund_state = CASE WHEN refund_amount + #{currentRefundAmount} >= amount THEN 2 ELSE 1 END,  <!-- 更新是否已全额退款。 此更新需在refund_amount更新之前，否则需要去掉累加逻辑 -->
+            `state` = CASE WHEN refund_state = 2 THEN 5 ELSE 2 END,  <!-- 更新支付状态是否已退款。 此更新需在refund_state更新之后，如果全额退款则修改支付状态为已退款 -->
+            refund_amount = refund_amount + #{currentRefundAmount}   <!-- 退款金额累加 -->
+        where
+            pay_order_id = #{payOrderId} and `state` = 2 <!-- 订单号 & 成功状态的可退款 -->
+            and refund_amount + #{currentRefundAmount} &lt;= amount  <!-- 已退款金额 + 本次退款金额 小于等于订单金额 -->
+            and refund_state in (0, 1) <!-- 只有未发生退款和部分退款可退 -->
+
+    </update>
+
+</mapper>
