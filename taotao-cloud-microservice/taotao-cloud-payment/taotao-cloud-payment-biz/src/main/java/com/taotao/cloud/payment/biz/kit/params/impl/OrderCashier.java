@@ -68,7 +68,6 @@ public class OrderCashier implements CashierExecute {
 				cashierParam.setTitle("多用户商城，在线支付");
 			}
 
-
 			List<OrderItemVO> orderItemList = order.orderItems();
 			StringBuilder subject = new StringBuilder();
 			for (OrderItemVO orderItem : orderItemList) {
@@ -101,7 +100,7 @@ public class OrderCashier implements CashierExecute {
 	@Override
 	public Boolean paymentResult(PayParam payParam) {
 		if (payParam.getOrderType().equals(CashierEnum.ORDER.name())) {
-			OrderVO order = orderService.getBySn(payParam.getSn());
+			OrderVO order = orderService.getBySn(payParam.getSn()).data();
 			if (order != null) {
 				return PayStatusEnum.PAID.name().equals(order.orderBase().payStatus());
 			} else {

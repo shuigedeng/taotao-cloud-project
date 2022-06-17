@@ -20,7 +20,17 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.payment.biz.jeepay.core.constants.ApiCodeEnum;
+import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.IsvInfo;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.MchApp;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.MchInfo;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.MchPayPassage;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.PayInterfaceConfig;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrder;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.SysUser;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.SysUserAuth;
+import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
 import com.taotao.cloud.payment.biz.jeepay.service.mapper.MchInfoMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,7 +133,7 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
             }
 
             // 1.查看当前商户是否存在交易数据
-            int payCount = payOrderService.count(PayOrder.gw().eq(PayOrder::getMchNo, mchNo));
+            long payCount = payOrderService.count(PayOrder.gw().eq(PayOrder::getMchNo, mchNo));
             if (payCount > 0) {
                 throw new BizException("该商户已存在交易数据，不可删除");
             }

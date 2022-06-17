@@ -16,6 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.pay.util;
 
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.payment.biz.jeepay.core.utils.SpringBeansUtil;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.IPaymentService;
 
 /*

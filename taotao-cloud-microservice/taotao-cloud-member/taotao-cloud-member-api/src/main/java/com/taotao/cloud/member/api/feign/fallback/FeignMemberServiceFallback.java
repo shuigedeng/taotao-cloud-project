@@ -5,6 +5,8 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.vo.MemberVO;
+import java.util.List;
+import java.util.Map;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -33,6 +35,31 @@ public class FeignMemberServiceFallback implements FallbackFactory<IFeignMemberS
 			@Override
 			public Result<Boolean> updateMemberPoint(Long payPoint, String name, Long memberId,
 				String s) {
+				return null;
+			}
+
+			@Override
+			public MemberVO findByUsername(String username) {
+				return null;
+			}
+
+			@Override
+			public MemberVO getById(Long memberId) {
+				return null;
+			}
+
+			@Override
+			public void update(Long memberId, Long sotreId) {
+
+			}
+
+			@Override
+			public void updateById(MemberVO member) {
+
+			}
+
+			@Override
+			public List<Map<String, Object>> listFieldsByMemberIds(String s, List<String> ids) {
 				return null;
 			}
 		};

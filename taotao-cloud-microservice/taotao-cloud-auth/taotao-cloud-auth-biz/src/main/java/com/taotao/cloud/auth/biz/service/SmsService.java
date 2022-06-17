@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.service;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sms.service.NoticeService;
-import com.taotao.cloud.sms.service.VerificationCodeService;
+import com.taotao.cloud.sms.common.service.NoticeService;
+import com.taotao.cloud.sms.common.service.VerificationCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "RemotePayFlowService", value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = FeignPayFlowServiceFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = FeignPayFlowServiceFallback.class)
 public interface IFeignPayFlowService {
 
 	/**

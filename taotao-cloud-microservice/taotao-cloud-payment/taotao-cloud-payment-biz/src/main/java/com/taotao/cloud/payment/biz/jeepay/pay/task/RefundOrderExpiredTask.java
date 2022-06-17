@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.pay.task;
 
-import com.jeequan.jeepay.service.impl.PayOrderService;
-import com.jeequan.jeepay.service.impl.RefundOrderService;
+import com.taotao.cloud.payment.biz.jeepay.service.impl.RefundOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

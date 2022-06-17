@@ -61,7 +61,6 @@ public class TradeCashier implements CashierExecute {
 
 			List<OrderVO> orders = orderService.getByTradeSn(payParam.getSn()).data();
 
-
 			String orderSns = orders.stream().map(OrderVO::getSn).collect(Collectors.joining(", "));
 			cashierParam.setOrderSns(orderSns);
 
@@ -75,7 +74,6 @@ public class TradeCashier implements CashierExecute {
 					throw new BusinessException(ResultEnum.PAY_BAN);
 				}
 			}
-
 
 			cashierParam.setPrice(trade.getFlowPrice());
 

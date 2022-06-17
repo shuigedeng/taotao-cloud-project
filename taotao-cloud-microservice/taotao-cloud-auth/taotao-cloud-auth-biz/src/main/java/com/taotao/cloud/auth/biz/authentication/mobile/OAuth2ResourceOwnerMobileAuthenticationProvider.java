@@ -2,8 +2,8 @@ package com.taotao.cloud.auth.biz.authentication.mobile;
 
 import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
 
-import com.taotao.cloud.auth.biz.authentication.JwtUtils;
-import com.taotao.cloud.auth.biz.authentication.OAuth2EndpointUtils;
+import com.taotao.cloud.auth.biz.utils.JwtUtils;
+import com.taotao.cloud.auth.biz.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.auth.biz.jwt.JwtCustomizerServiceImpl;
 import java.security.Principal;
 import java.util.Base64;

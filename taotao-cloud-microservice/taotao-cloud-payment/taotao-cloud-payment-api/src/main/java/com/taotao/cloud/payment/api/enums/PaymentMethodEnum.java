@@ -8,7 +8,6 @@ package com.taotao.cloud.payment.api.enums;
  * @since 2022-04-21 16:59:38
  */
 public enum PaymentMethodEnum {
-
     /**
      * 微信
      */
