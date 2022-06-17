@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('用户列表')"/>
+    <link rel="stylesheet" th:href="@{/admin/css/other/user.css}"/>
+</head>
+<body class="pear-container">
+    <div sec:authorize="hasPermission('user','list')" class="layui-card">
+        <div class="layui-card-body">
+            <table id="user-table" lay-filter="user-table"></table>
+        </div>
+    </div>
+    <div sec:authorize="not hasPermission('user','list')" class="layui-card">
+        <div class="layui-card-body">
+            <b>您无权查看该列表</b>
+        </div>
+    </div>
+</body>
+
+<script id="user-toolbar" type="text/html">
+    <button sec:authorize="hasPermission('user','add')" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+        <i class="pear-icon pear-icon-add"></i>
+        新增
+    </button>
+</script>
+
+<script id="user-bar" type="text/html">
+    <button sec:authorize="hasPermission('user','role')"
+            class="pear-btn pear-btn-warming pear-btn-sm" lay-event="role"><i
+            class="layui-icon layui-icon-vercode"></i>
+    </button>
+    <button sec:authorize="hasPermission('user','update')" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit"><i class="pear-icon pear-icon-edit"></i>
+    </button>
+    <button sec:authorize="hasPermission('user','remove')" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="pear-icon pear-icon-ashbin"></i>
+    </button>
+    <button sec:authorize="hasPermission('user','password')" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="editpasswordadmin"><i
+            class="layui-icon layui-icon-key"></i>
+    </button>
+</script>
+
+<script id="user-enable" type="text/html">
+    <input sec:authorize="hasPermission('user','enable')" type="checkbox" name="enabled" value="{{d.userId}}" lay-skin="switch" lay-text="启用|禁用"
+           lay-filter="user-enable" {{ d.enabled== true ? 'checked' : '' }} />
+    <div sec:authorize="not hasPermission('user','enable')">
+        {{#if (d.enabled) { }}
+        <span>启用</span>
+        {{# }else { }}
+        <span>禁用</span>
+        {{# } }}
+    </div>
+</script>
+
+<script id="user-gender" type="text/html">
+    {{#if (d.gender == 1) { }}
+    <span>男</span>
+    {{# }else if(d.gender == 0){ }}
+    <span>女</span>
+    {{# }else { }}
+    <span>未知</span>
+    {{# } }}
+</script>
+
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['table', 'dtree', 'form', 'jquery', 'popup', 'common'], function () {
+        let table = layui.table;
+        let form = layui.form;
+        let $ = layui.jquery;
+        let dtree = layui.dtree;
+        let popup = layui.popup;
+        let common = layui.common;
+
+
+        let cols = [
+            [
+                {title: '账号', field: 'username', align: 'center'},
+                {title: '姓名', field: 'realName', align: 'center', width: 110},
+                {title: '昵称', field: 'nickName', align: 'center', width: 110},
+                {title: '性别', field: 'gender', align: 'center', templet: '#user-gender', width: 60},
+                {title: '电话', field: 'phoneNumber', align: 'center'},
+                {title: '邮箱', field: 'email', align: 'center'},
+                {title: '启用', field: 'enabled', align: 'center', templet: '#user-enable', width: 120},
+                {title: '注册时间', field: 'createTime', align: 'center'},
+                {title: '操作', toolbar: '#user-bar', align: 'center', width: 180}
+            ]
+        ]
+
+        table.render({
+            elem: '#user-table',
+            url: '/system/user/data',
+            page: true,
+            cols: cols,
+            skin: 'line',
+            height: 'full-148',
+            toolbar: '#user-toolbar',
+            text: {none: '暂无人员信息'},
+            parseData: function (response) {
+
+                return {
+                    "code": response.code, //返回状态码
+                    "msg": response.msg, //解析提示信息
+                    "count": response.data.totalElements, //后台返回的数据总条数，用于自定义分页使用
+                    "data": response.data.content //解析数据列表
+                };
+            },
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+                title: "刷新"
+            }, 'filter', 'print', 'exports']
+        });
+
+        $(".user-group").click(function () {
+            let group = $(this).attr("user-group");
+            let field = form.val("user-query-form");
+            if (group === "-1") {
+                field.deptId = group;
+                $(this).removeClass("button-default");
+                $(this).prev().removeClass("button-primary");
+                $(this).prev().addClass("button-default");
+                $(this).addClass("button-primary");
+            } else {
+                field.deptId = group;
+                $(this).removeClass("button-default");
+                $(this).next().removeClass("button-primary");
+                $(this).next().addClass("button-default");
+                $(this).addClass("button-primary");
+            }
+            window.refresh(field);
+        })
+
+        table.on('tool(user-table)', function (obj) {
+            if (obj.event === 'remove') {
+                window.remove(obj);
+            } else if (obj.event === 'edit') {
+                window.edit(obj);
+            } else if (obj.event === 'editpasswordadmin') {
+                window.editpasswordadmin(obj);
+            } else if (obj.event === 'role') {
+                window.role(obj);
+            }
+        });
+
+        table.on('toolbar(user-table)', function (obj) {
+            if (obj.event === 'add') {
+                window.add();
+            } else if (obj.event === 'refresh') {
+                window.refresh();
+            } else if (obj.event === 'collasped') {
+                $(".user-left").toggleClass("user-collasped");
+                $(".user-main").toggleClass("user-collasped");
+                table.resize();
+            }
+        });
+
+        form.on('submit(user-query)', function (data) {
+            window.refresh(data.field);
+            return false;
+        });
+
+        form.on('switch(user-enable)', function () {
+            let loading = layer.load();
+            $.ajax({
+                url: '/system/user/enable/' + this.value,
+                dataType: 'json',
+                contentType: 'application/json',
+                type: 'post',
+                success: function (result) {
+                    layer.close(loading);
+                    if (result.code === 200) {
+                        popup.success(result.msg);
+                    } else {
+                        popup.failure(result.msg);
+                    }
+                }
+            })
+        });
+
+        window.add = function () {
+            layer.open({
+                type: 2,
+                title: '新增',
+                shade: 0.1,
+                area: ['500px', '500px'],
+                content: '/system/user/add'
+            });
+        }
+        window.role = function (obj) {
+            layer.open({
+                type: 2,
+                title: '授权',
+                shade: 0.1,
+                area: ['320px', '400px'],
+                content: '/system/user/role/' + obj.data["userId"]
+            });
+        }
+        window.edit = function (obj) {
+            layer.open({
+                type: 2,
+                title: '修改',
+                shade: 0.1,
+                area: ['550px', '500px'],
+                content: '/system/user/edit/' + obj.data['userId']
+            });
+        }
+
+        window.editpasswordadmin = function (obj) {
+            layer.open({
+                type: 2,
+                title: '修改用户密码',
+                shade: 0.1,
+                area: ['550px', '300px'],
+                content: '/system/user/password/' + obj.data['userId']
+            });
+        }
+
+        window.remove = function (obj) {
+            layer.confirm('确定要删除该用户', {icon: 3, title: '提示'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: '/system/user/remove/' + obj.data['userId'],
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code === 200) {
+                            popup.success(result.msg, function () {
+                                obj.del();
+                            });
+                        } else {
+                            popup.failure(result.msg);
+                        }
+                    }
+                })
+            });
+        }
+
+        window.refresh = function (param) {
+            table.reload('user-table', {where: param});
+        }
+    })
+</script>
+</html>

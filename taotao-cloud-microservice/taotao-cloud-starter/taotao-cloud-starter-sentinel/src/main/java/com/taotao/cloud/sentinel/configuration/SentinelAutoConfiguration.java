@@ -22,6 +22,7 @@ import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginPars
 import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
@@ -78,6 +79,9 @@ public class SentinelAutoConfiguration implements InitializingBean {
 			}
 			if (e instanceof DegradeException) {
 				errMsg = "服务降级了";
+			}
+			if (e instanceof ParamFlowException) {
+				errMsg = "服务热点降级了";
 			}
 			if (e instanceof SystemBlockException) {
 				errMsg = "系统过载保护";

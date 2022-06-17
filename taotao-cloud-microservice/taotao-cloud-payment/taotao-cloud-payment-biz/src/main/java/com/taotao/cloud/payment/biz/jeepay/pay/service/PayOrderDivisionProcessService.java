@@ -17,7 +17,15 @@ package com.taotao.cloud.payment.biz.jeepay.pay.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.egzosn.pay.common.bean.PayOrder;
+import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.MchDivisionReceiver;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.MchDivisionReceiverGroup;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrder;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrderDivisionRecord;
+import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
+import com.taotao.cloud.payment.biz.jeepay.core.utils.AmountUtil;
+import com.taotao.cloud.payment.biz.jeepay.core.utils.SeqKit;
+import com.taotao.cloud.payment.biz.jeepay.core.utils.SpringBeansUtil;
 import com.taotao.cloud.payment.biz.jeepay.mq.model.PayOrderDivisionMQ;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.IDivisionService;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.msg.ChannelRetMsg;

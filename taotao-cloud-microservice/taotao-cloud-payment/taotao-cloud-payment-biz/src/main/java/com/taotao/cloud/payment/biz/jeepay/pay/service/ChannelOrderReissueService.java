@@ -15,8 +15,9 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.pay.service;
 
-import com.egzosn.pay.common.bean.PayOrder;
-import com.egzosn.pay.common.bean.RefundOrder;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrder;
+import com.taotao.cloud.payment.biz.jeepay.core.entity.RefundOrder;
+import com.taotao.cloud.payment.biz.jeepay.core.utils.SpringBeansUtil;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.IPayOrderQueryService;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.IRefundService;
 import com.taotao.cloud.payment.biz.jeepay.pay.model.MchAppConfigContext;

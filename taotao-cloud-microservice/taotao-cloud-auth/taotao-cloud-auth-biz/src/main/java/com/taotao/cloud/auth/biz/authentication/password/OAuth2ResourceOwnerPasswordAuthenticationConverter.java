@@ -3,7 +3,7 @@ package com.taotao.cloud.auth.biz.authentication.password;
 import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
 import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
 
-import com.taotao.cloud.auth.biz.authentication.OAuth2EndpointUtils;
+import com.taotao.cloud.auth.biz.utils.OAuth2EndpointUtils;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;

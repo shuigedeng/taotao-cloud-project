@@ -31,7 +31,7 @@ public class SentinelProperties {
 
 	public static final String PREFIX = "taotao.cloud.sentinel";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean getEnabled() {
 		return enabled;

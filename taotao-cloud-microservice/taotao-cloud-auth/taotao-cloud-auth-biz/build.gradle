@@ -6,7 +6,7 @@ dependencies {
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign'))
-    //implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi'))
 
     implementation(project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api'))
@@ -44,9 +44,17 @@ dependencies {
     implementation 'org.springframework:spring-webflux'
     implementation 'io.projectreactor.netty:reactor-netty'
 
+    implementation "org.mapstruct:mapstruct:1.5.1.Final"
+    implementation 'org.projectlombok:lombok:1.18.24'
+    implementation 'io.soabase.record-builder:record-builder-core:33'
+
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
 }
 
 tasks.named('test') {

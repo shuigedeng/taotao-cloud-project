@@ -1,5 +1,10 @@
 package com.taotao.cloud.auth.biz.configuration;
 
+import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
+
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -23,10 +28,12 @@ import com.taotao.cloud.common.enums.UserTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -65,15 +72,6 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
 
 
 /**
@@ -116,9 +114,9 @@ public class AuthorizationServerConfiguration {
 
 		OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
 
-		http.apply(
-			authorizationServerConfigurer
-				.tokenEndpoint((tokenEndpoint) -> tokenEndpoint
+		http.apply(authorizationServerConfigurer
+			.tokenEndpoint(tokenEndpointCustomizer ->
+				tokenEndpointCustomizer
 					.accessTokenRequestConverter(
 						new DelegatingAuthenticationConverter(Arrays.asList(
 							new OAuth2AuthorizationCodeAuthenticationConverter(),
@@ -131,51 +129,40 @@ public class AuthorizationServerConfiguration {
 						LogUtil.error("用户认证失败", authException);
 						ResponseUtil.fail(response, authException.getMessage());
 					})
-				)
-				.authorizationEndpoint(
-					authorizationEndpoint -> authorizationEndpoint.consentPage("/oauth2/consent")
-				)
-				.oidc(oidc -> oidc
-					.userInfoEndpoint(userInfo -> userInfo
-						.userInfoMapper(context -> {
-							OidcUserInfoAuthenticationToken authentication = context.getAuthentication();
-							JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
-							return new OidcUserInfo(principal.getToken().getClaims());
-						})))
+			)
+			.authorizationEndpoint(authorizationEndpointCustomizer ->
+				authorizationEndpointCustomizer.consentPage("/oauth2/consent")
+			)
+			.oidc(oidcCustomizer ->
+				oidcCustomizer
+					.userInfoEndpoint(userInfoEndpointCustomizer ->
+						userInfoEndpointCustomizer
+							.userInfoMapper(userInfoMapper -> {
+								OidcUserInfoAuthenticationToken authentication = userInfoMapper.getAuthentication();
+								JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
+								return new OidcUserInfo(principal.getToken().getClaims());
+							})
+					)
+			)
 		);
 
-		RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
+		RequestMatcher authorizationServerConfigurerEndpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
 		http
-			.requestMatcher(endpointsMatcher)
+			.requestMatcher(authorizationServerConfigurerEndpointsMatcher)
 			.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-			.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+			.csrf(csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
+			.formLogin()
+			.and()
 			.apply(authorizationServerConfigurer);
 
 		SecurityFilterChain securityFilterChain = http.formLogin(Customizer.withDefaults()).build();
 
-		/**
-		 *
-		 * Custom configuration for Resource Owner Password grant type. Current implementation has no support for Resource Owner 
-		 * Password grant type
-		 */
 		addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(http);
 
 		addCustomOAuth2ResourceOwnerMobileAuthenticationProvider(http);
 
 		return securityFilterChain;
-	}
-
-	@Bean
-	public JWKSource<SecurityContext> jwkSource() {
-		RSAKey rsaKey = Jwks.generateRsa();
-		JWKSet jwkSet = new JWKSet(rsaKey);
-		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-	}
-
-	@Bean
-	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
 	}
 
 	@Bean
@@ -223,11 +210,6 @@ public class AuthorizationServerConfiguration {
 		return ProviderSettings.builder().issuer(tokenIssuer).build();
 	}
 
-	@Bean
-	public OAuth2TokenCustomizer<JwtEncodingContext> buildCustomizer() {
-		JwtCustomizer jwtCustomizer = new JwtCustomizerServiceImpl();
-		return jwtCustomizer::customizeToken;
-	}
 
 	private void addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(HttpSecurity http) {
 		ProviderSettings providerSettings = http.getSharedObject(ProviderSettings.class);
@@ -235,7 +217,8 @@ public class AuthorizationServerConfiguration {
 			OAuth2AuthorizationService.class);
 		JwtEncoder jwtEncoder = http.getSharedObject(JwtEncoder.class);
 
-		OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
+		OAuth2TokenCustomizer jwtCustomizer = http.getSharedObject(OAuth2TokenCustomizer.class);
+		//OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
 
 		OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
 			new OAuth2ResourceOwnerPasswordAuthenticationProvider(
@@ -305,7 +288,8 @@ public class AuthorizationServerConfiguration {
 			OAuth2AuthorizationService.class);
 		JwtEncoder jwtEncoder = http.getSharedObject(JwtEncoder.class);
 
-		OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
+		OAuth2TokenCustomizer jwtCustomizer = http.getSharedObject(OAuth2TokenCustomizer.class);
+		//OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
 
 		OAuth2ResourceOwnerMobileAuthenticationProvider resourceOwnerMobileAuthenticationProvider =
 			new OAuth2ResourceOwnerMobileAuthenticationProvider(

@@ -1,9 +1,5 @@
 package com.taotao.cloud.payment.biz.jeepay.pay.util;
 
-import com.jeequan.jeepay.components.oss.config.OssYmlConfig;
-import com.jeequan.jeepay.components.oss.constant.OssSavePlaceEnum;
-import com.jeequan.jeepay.components.oss.constant.OssServiceTypeEnum;
-import com.jeequan.jeepay.components.oss.service.IOssService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

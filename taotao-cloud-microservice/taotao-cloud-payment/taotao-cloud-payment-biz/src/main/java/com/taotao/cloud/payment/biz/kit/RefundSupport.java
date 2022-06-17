@@ -57,6 +57,7 @@ public class RefundSupport {
 			.orderSn(afterSale.getOrderSn())
 			.refundReason(afterSale.getReason())
 			.build();
+
 		PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
 		payment.refund(refundLog);
