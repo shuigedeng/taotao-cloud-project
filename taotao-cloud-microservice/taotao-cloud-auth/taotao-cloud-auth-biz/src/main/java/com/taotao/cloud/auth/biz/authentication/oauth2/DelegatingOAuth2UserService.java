@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * @author n1
- */
 public class DelegatingOAuth2UserService<R extends OAuth2UserRequest, U extends OAuth2User>
         implements OAuth2UserService<R, U> {
     private final OAuth2UserService<OAuth2UserRequest, OAuth2User> defaultOAuth2UserService = new DefaultOAuth2UserService();
@@ -44,19 +41,18 @@ public class DelegatingOAuth2UserService<R extends OAuth2UserRequest, U extends 
         this.userServiceMap = Collections.unmodifiableMap(userServiceMap);
         this.userServices = Collections.emptyList();
     }
+
     @SuppressWarnings("unchecked")
     @Override
     public U loadUser(R userRequest) throws OAuth2AuthenticationException {
         Assert.notNull(userRequest, "userRequest cannot be null");
 
         if (CollectionUtils.isEmpty(userServiceMap)) {
-            // @formatter:off
             return this.userServices.stream()
                     .map((userService) -> userService.loadUser(userRequest))
                     .filter(Objects::nonNull)
                     .findFirst()
                     .orElse(null);
-            // @formatter:on
         } else {
             String registrationId = userRequest.getClientRegistration().getRegistrationId();
             OAuth2UserService<R, U> oAuth2UserService = userServiceMap.get(registrationId);
@@ -64,6 +60,7 @@ public class DelegatingOAuth2UserService<R extends OAuth2UserRequest, U extends 
             if (oAuth2UserService == null) {
                 oAuth2UserService = (OAuth2UserService<R, U>) defaultOAuth2UserService;
             }
+
             return oAuth2UserService.loadUser(userRequest);
         }
     }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.portal.controller;
+package com.taotao.cloud.front.controller;
 
 import com.taotao.cloud.portal.util.CaptchaUtil;
 import com.taotao.cloud.portal.util.Constants;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.portal.config;
+package com.taotao.cloud.front.config;
 
 import io.undertow.Undertow;
 import io.undertow.UndertowOptions;

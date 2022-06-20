@@ -16,14 +16,13 @@
 
 package com.taotao.cloud.auth.biz.authentication.oauth2;
 
+import java.util.Arrays;
+import java.util.Objects;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequestEntityConverter;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * 授权请求参数的请求参数封装工具类,扩展了{@link OAuth2AuthorizationCodeGrantRequestEntityConverter}
@@ -36,26 +35,29 @@ import java.util.Objects;
  * @since 5.1
  */
 public class OAuth2ProviderAuthorizationCodeGrantRequestEntityConverter
-        implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
-    private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter = new OAuth2AuthorizationCodeGrantRequestEntityConverter();
+	implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
 
-    /**
-     * Returns the {@link RequestEntity} used for the Access Token Request.
-     *
-     * @param authorizationCodeGrantRequest the authorization code grant request
-     * @return the {@link RequestEntity} used for the Access Token Request
-     */
-    @Override
-    public RequestEntity<?> convert(OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
+	private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter = new OAuth2AuthorizationCodeGrantRequestEntityConverter();
 
-        ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();
-        String registrationId = clientRegistration.getRegistrationId();
-        return Arrays.stream(ClientProviders.values())
-                .filter(clientProvider ->
-                        Objects.equals(clientProvider.registrationId(), registrationId))
-                .findAny()
-                .map(ClientProviders::converter)
-                .orElse(defaultConverter)
-                .convert(authorizationCodeGrantRequest);
-    }
+	/**
+	 * Returns the {@link RequestEntity} used for the Access Token Request.
+	 *
+	 * @param authorizationCodeGrantRequest the authorization code grant request
+	 * @return the {@link RequestEntity} used for the Access Token Request
+	 */
+	@Override
+	public RequestEntity<?> convert(
+		OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
+
+		ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();
+		String registrationId = clientRegistration.getRegistrationId();
+
+		return Arrays.stream(ClientProviders.values())
+			.filter(clientProvider ->
+				Objects.equals(clientProvider.registrationId(), registrationId))
+			.findAny()
+			.map(ClientProviders::converter)
+			.orElse(defaultConverter)
+			.convert(authorizationCodeGrantRequest);
+	}
 }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.portal.util;
+package com.taotao.cloud.front.util;
 
 /**
  * 常量类
