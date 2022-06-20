@@ -1,6 +1,5 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI;
 import static org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.DEFAULT_FILTER_PROCESSES_URI;
 
@@ -17,7 +16,6 @@ import com.taotao.cloud.auth.biz.service.CloudOauth2UserService;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
-import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
@@ -33,18 +31,15 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientPropertiesRegistrationAdapter;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
@@ -154,8 +149,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 	@Autowired
 	private OAuth2ClientProperties oAuth2ClientProperties;
 
-	@Value("${jwk.set.uri}")
-	private String jwkSetUri;
+	private Environment environment;
 
 	@Primary
 	@Bean(name = "memberUserDetailsService")
@@ -182,26 +176,11 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.eraseCredentials(true);
 	}
 
-	@Autowired(required = false)
-	private DiscoveryClient discoveryClient;
-
-	private Environment environment;
+	@Value("${jwk.set.uri}")
+	private String jwkSetUri;
 
 	@Bean
 	public JwtDecoder jwtDecoder() {
-		if (Stream.of(environment.getActiveProfiles()).toList().contains("dev")) {
-			if (Objects.nonNull(discoveryClient)) {
-				jwkSetUri = discoveryClient.getServices().stream()
-					.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
-					.flatMap(s -> discoveryClient.getInstances(s).stream())
-					.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks",
-						instance.getHost(),
-						instance.getPort()))
-					.findFirst()
-					.orElse(jwkSetUri);
-			}
-		}
-
 		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
 	}
 
@@ -229,6 +208,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 
 	@Autowired
 	private JwtTokenGenerator jwtTokenGenerator;
+
 	AuthenticationEntryPoint authenticationEntryPoint = (request, response, authException) -> {
 		LogUtil.error("用户认证失败", authException);
 		authException.printStackTrace();
@@ -246,7 +226,6 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		ResponseUtil.success(response,
 			jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
 	};
-
 
 	@Bean
 	DelegateClientRegistrationRepository delegateClientRegistrationRepository(
@@ -307,39 +286,6 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 							.jwtAuthenticationConverter(jwtAuthenticationConverter())
 					)
 			)
-			.oauth2Login(oauth2LoginConfigurer ->
-				oauth2LoginConfigurer
-					//.loginPage("/user/login").failureUrl("/login-error").permitAll()
-					//.loginPage("/login.html").permitAll()
-					//.loginProcessingUrl("/login").permitAll()
-					//.loginProcessingUrl("/form/login/process").permitAll()
-					// 认证成功后的处理器
-					// 登录请求url
-					.loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
-					.successHandler((request, response, authentication) -> {
-						LogUtil.info("用户认证成功");
-					})
-					// 认证失败后的处理器
-					.failureHandler((request, response, exception) -> {
-						LogUtil.info("用户认证失败");
-					})
-					// 配置授权服务器端点信息
-					.authorizationEndpoint(authorizationEndpointCustomizer ->
-						authorizationEndpointCustomizer
-							// 授权端点的前缀基础url
-							.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
-					)
-					// 配置获取access_token的端点信息
-					.tokenEndpoint(tokenEndpointCustomizer ->
-						tokenEndpointCustomizer
-							.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
-					)
-					//配置获取userInfo的端点信息
-					.userInfoEndpoint(userInfoEndpointCustomizer ->
-						userInfoEndpointCustomizer
-							.userService(new CloudOauth2UserService())
-					)
-			)
 			.apply(new LoginFilterSecurityConfigurer<>())
 			// 手机号验证码登录模拟
 			.captchaLogin(captchaLoginConfigurer ->
@@ -387,7 +333,39 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8",
 				"1000005")
 			// 微信扫码登录 下面的参数是假的
-			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd");
+			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd")
+			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer ->
+				oauth2LoginConfigurer
+					//.loginPage("/user/login").failureUrl("/login-error").permitAll()
+					//.loginPage("/login.html").permitAll()
+					//.loginProcessingUrl("/login").permitAll()
+					//.loginProcessingUrl("/form/login/process").permitAll()
+					// 认证成功后的处理器
+					// 登录请求url
+					.loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
+					.successHandler((request, response, authentication) -> {
+						LogUtil.info("用户认证成功");
+					})
+					// 认证失败后的处理器
+					.failureHandler((request, response, exception) -> {
+						LogUtil.info("用户认证失败");
+					})
+					// 配置授权服务器端点信息
+					.authorizationEndpoint(authorizationEndpointCustomizer ->
+						authorizationEndpointCustomizer
+							// 授权端点的前缀基础url
+							.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
+					)
+					// 配置获取access_token的端点信息
+					.tokenEndpoint(tokenEndpointCustomizer ->
+						tokenEndpointCustomizer
+							.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
+					)
+					//配置获取userInfo的端点信息
+					.userInfoEndpoint(userInfoEndpointCustomizer ->
+						userInfoEndpointCustomizer
+							.userService(new CloudOauth2UserService())
+					));
 
 		return http.build();
 	}

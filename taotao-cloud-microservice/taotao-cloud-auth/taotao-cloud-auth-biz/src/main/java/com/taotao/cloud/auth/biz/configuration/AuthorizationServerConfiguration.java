@@ -94,12 +94,6 @@ public class AuthorizationServerConfiguration {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private SmsService smsService;
-
-	@Autowired
-	private CaptchaService captchaService;
-
-	@Autowired
 	@Qualifier("memberUserDetailsService")
 	private UserDetailsService memberUserDetailsService;
 

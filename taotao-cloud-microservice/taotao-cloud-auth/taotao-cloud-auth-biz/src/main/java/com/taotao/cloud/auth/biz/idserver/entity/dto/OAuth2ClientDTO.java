@@ -50,18 +50,21 @@ public class OAuth2ClientDTO {
         oAuth2Client.setClientId(clientId);
         oAuth2Client.setClientSecret(Optional.ofNullable(clientSecret).map(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode).orElse(""));
         oAuth2Client.setClientName(clientName);
+
         oAuth2Client.setClientAuthenticationMethods(clientAuthenticationMethods.stream().map(method -> {
             ClientAuthMethod clientAuthMethod = new ClientAuthMethod();
             clientAuthMethod.setClientId(clientId);
             clientAuthMethod.setClientAuthenticationMethod(method);
             return clientAuthMethod;
         }).collect(Collectors.toSet()));
+
         oAuth2Client.setAuthorizationGrantTypes(authorizationGrantTypes.stream().map(grantType -> {
             OAuth2GrantType oAuth2GrantType = new OAuth2GrantType();
             oAuth2GrantType.setClientId(clientId);
             oAuth2GrantType.setGrantTypeName(grantType);
             return oAuth2GrantType;
         }).collect(Collectors.toSet()));
+
         // openid 忽略
         oAuth2Client.setScopes(scopes.stream().filter(scope -> !OidcScopes.OPENID.equals(scope))
                 .map(scope -> {
@@ -70,19 +73,23 @@ public class OAuth2ClientDTO {
                     oAuth2Scope.setScope(scope);
                     return oAuth2Scope;
                 }).collect(Collectors.toSet()));
+
         oAuth2Client.setRedirectUris(redirectUris.stream().map(redirectUri -> {
             RedirectUri oAuth2RedirectUri = new RedirectUri();
             oAuth2RedirectUri.setClientId(clientId);
             oAuth2RedirectUri.setRedirectUri(redirectUri);
             return oAuth2RedirectUri;
         }).collect(Collectors.toSet()));
+
         if (clientSettings == null) {
             clientSettings = OAuth2ClientSettings.fromClientSettings(new OAuth2ClientSettings().toClientSettings());
         }
+
         clientSettings.setClientId(clientId);
         if (tokenSettings == null) {
             tokenSettings = OAuth2TokenSettings.fromTokenSettings(new OAuth2TokenSettings().toTokenSettings());
         }
+
         tokenSettings.setClientId(clientId);
         oAuth2Client.setClientSettings(clientSettings);
         oAuth2Client.setTokenSettings(tokenSettings);

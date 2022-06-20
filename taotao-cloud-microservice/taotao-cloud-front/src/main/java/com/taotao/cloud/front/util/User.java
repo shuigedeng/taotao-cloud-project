@@ -1,4 +1,4 @@
-package com.taotao.cloud.portal.util;
+package com.taotao.cloud.front.util;
 
 import java.io.Serializable;
 import java.util.Date;
