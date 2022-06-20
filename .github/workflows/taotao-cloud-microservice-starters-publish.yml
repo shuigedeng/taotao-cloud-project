@@ -1,7 +1,7 @@
 # This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
 
-name: microservice starters publish xxxxx
+name: microservice starters publish
 
 on:
   push:
@@ -38,19 +38,12 @@ jobs:
         distribution: 'adopt'
         server-id: github
 
-    #- name: cache gradle packages
-    #  uses: actions/cache@v2
-    #  with:
-    #    path: ~/.gradle/caches
-    #    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-    #    restore-keys: ${{ runner.os }}-gradle
-
-    - name: show github
-      run: echo "$GITHUB_CONTEXT"
-      env:
-        GITHUB_CONTEXT: ${{ toJSON(github) }}
-        MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
-        MESSAGES: ${{ github.event.head_commit.message }}
+    - name: cache gradle packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
 
     #  base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
     - name: decode signing secret key ring file
@@ -60,10 +53,9 @@ jobs:
         echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
         echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
-    - name: build and publish dependencies xxxx
+    - name: build and publish dependencies
       run: |
         cd ${{ github.workspace }}/taotao-cloud-dependencies
-        echo `pwd`
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
 
@@ -76,15 +68,13 @@ jobs:
           if [ -d $starter_inner_dir ];then
             if [ -d "$starter_inner_dir/src" ];then
                cd $starter_inner_dir
-               echo `pwd` 
                gradle --continue clean build -x test -x bootJar
                gradle publishAllPublicationsToSonatypeRepository
             else
               for two_starter in `ls $starter_inner_dir`
               do
-                if [ -d "$starter_inner_dir/two_starter" ];then
-                  cd "$starter_inner_dir/two_starter"
-                  echo `pwd`
+                if [ -d "$starter_inner_dir/$two_starter" ];then
+                  cd "$starter_inner_dir/$two_starter"
                   gradle --continue clean build -x test -x bootJar
                   gradle publishAllPublicationsToSonatypeRepository
                 fi
