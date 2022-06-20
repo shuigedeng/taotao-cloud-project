@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @AutoConfiguration
 @EnableConfigurationProperties({EncryptProperties.class})
-@ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class EncryptConfiguration implements InitializingBean {
 
 	@Override
