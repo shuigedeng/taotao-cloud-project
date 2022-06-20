@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.mail;
+package com.taotao.cloud.mail.template;
 
 import java.io.File;
 import javax.mail.MessagingException;

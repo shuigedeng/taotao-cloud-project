@@ -28,7 +28,6 @@ import com.taotao.cloud.oss.common.model.download.DownloadCheckPoint;
 import com.taotao.cloud.oss.common.model.download.DownloadObjectStat;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.qiniu.qiniu.model.QiNiuOssConfig;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

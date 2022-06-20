@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.mail;
+package com.taotao.cloud.mail.configuration;
 
+import cn.hutool.extra.mail.MailAccount;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.mail.template.JavaMailTemplate;
+import com.taotao.cloud.mail.template.MailTemplate;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -35,8 +38,8 @@ import org.springframework.mail.javamail.JavaMailSender;
  * @since 2021-09-09 11:38:47
  */
 @AutoConfiguration(after = MailSenderAutoConfiguration.class)
-@EnableConfigurationProperties({com.taotao.cloud.web.mail.MailProperties.class})
-@ConditionalOnProperty(prefix = com.taotao.cloud.web.mail.MailProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableConfigurationProperties({com.taotao.cloud.mail.properties.MailProperties.class})
+@ConditionalOnProperty(prefix = com.taotao.cloud.mail.properties.MailProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MailAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -50,5 +53,22 @@ public class MailAutoConfiguration implements InitializingBean {
 		LogUtil.started(MailTemplate.class, StarterName.MAIL_STARTER);
 
 		return new JavaMailTemplate(mailSender, mailProperties);
+	}
+
+	@Bean
+	public MailAccount mailAccount(com.taotao.cloud.mail.properties.MailProperties mailProperties) {
+		MailAccount account = new MailAccount();
+		account.setHost(mailProperties.getHost());
+		account.setPort(mailProperties.getPort());
+		account.setAuth(mailProperties.getAuth());
+		account.setFrom(mailProperties.getFrom());
+		account.setUser(mailProperties.getUser());
+		account.setPass(mailProperties.getPass());
+		account.setSocketFactoryPort(mailProperties.getPort());
+		account.setStarttlsEnable(mailProperties.getStarttlsEnable());
+		account.setSslEnable(mailProperties.getSslEnable());
+		account.setTimeout(mailProperties.getTimeout());
+		account.setConnectionTimeout(mailProperties.getConnectionTimeout());
+		return account;
 	}
 }

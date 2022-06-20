@@ -1,7 +1,8 @@
 package com.taotao.cloud.oss.qiniu;
 
-import com.taotao.cloud.oss.artislong.model.SliceConfig;
-import com.taotao.cloud.oss.artislong.utils.OssPathUtil;
+
+import com.taotao.cloud.oss.common.model.SliceConfig;
+import com.taotao.cloud.oss.common.util.OssPathUtil;
 
 /**
  * 气妞妞oss配置
