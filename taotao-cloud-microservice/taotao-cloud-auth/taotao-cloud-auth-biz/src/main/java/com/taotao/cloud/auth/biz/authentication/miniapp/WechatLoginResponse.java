@@ -3,56 +3,53 @@ package com.taotao.cloud.auth.biz.authentication.miniapp;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * @author n1
- * @since 2021/6/23 15:40
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WechatLoginResponse {
-    private Integer errcode;
-    private String errmsg;
-    @JsonAlias({"session_key"})
-    private String sessionKey;
-    private String openid;
-    private String unionid;
 
-    public Integer getErrcode() {
-        return errcode;
-    }
+	private Integer errcode;
+	private String errmsg;
+	@JsonAlias({"session_key"})
+	private String sessionKey;
+	private String openid;
+	private String unionid;
 
-    public void setErrcode(Integer errcode) {
-        this.errcode = errcode;
-    }
+	public Integer getErrcode() {
+		return errcode;
+	}
 
-    public String getErrmsg() {
-        return errmsg;
-    }
+	public void setErrcode(Integer errcode) {
+		this.errcode = errcode;
+	}
 
-    public void setErrmsg(String errmsg) {
-        this.errmsg = errmsg;
-    }
+	public String getErrmsg() {
+		return errmsg;
+	}
 
-    public String getSessionKey() {
-        return sessionKey;
-    }
+	public void setErrmsg(String errmsg) {
+		this.errmsg = errmsg;
+	}
 
-    public void setSessionKey(String sessionKey) {
-        this.sessionKey = sessionKey;
-    }
+	public String getSessionKey() {
+		return sessionKey;
+	}
 
-    public String getOpenid() {
-        return openid;
-    }
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
+	public String getOpenid() {
+		return openid;
+	}
 
-    public String getUnionid() {
-        return unionid;
-    }
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
 
-    public void setUnionid(String unionid) {
-        this.unionid = unionid;
-    }
+	public String getUnionid() {
+		return unionid;
+	}
+
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
 }

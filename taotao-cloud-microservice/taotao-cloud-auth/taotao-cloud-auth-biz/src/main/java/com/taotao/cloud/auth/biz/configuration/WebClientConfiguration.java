@@ -1,6 +1,5 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -114,7 +113,6 @@ public class WebClientConfiguration {
 				// `PasswordOAuth2AuthorizedClientProvider` requires both attributes
 				contextAttributes.put(OAuth2AuthorizationContext.USERNAME_ATTRIBUTE_NAME, username);
 				contextAttributes.put(OAuth2AuthorizationContext.PASSWORD_ATTRIBUTE_NAME, password);
-
 			}
 
 			return contextAttributes;

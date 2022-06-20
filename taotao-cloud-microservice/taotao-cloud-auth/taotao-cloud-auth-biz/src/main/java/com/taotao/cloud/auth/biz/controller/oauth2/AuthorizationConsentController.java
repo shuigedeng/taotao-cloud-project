@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.idserver.endpoint.oauth2;
+package com.taotao.cloud.auth.biz.controller.oauth2;
 
 import com.taotao.cloud.auth.biz.idserver.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.idserver.service.OAuth2ScopeService;

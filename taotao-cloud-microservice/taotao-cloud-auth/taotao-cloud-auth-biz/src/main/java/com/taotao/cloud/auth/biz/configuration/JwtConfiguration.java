@@ -33,6 +33,7 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
  */
 @Configuration(proxyBeanMethods = false)
 public class JwtConfiguration {
+
 	@Bean
 	public OAuth2TokenCustomizer<JwtEncodingContext> buildCustomizer() {
 		JwtCustomizer jwtCustomizer = new JwtCustomizerServiceImpl();

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.auth.biz;
 
-import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +24,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * TaoTaoCloudAuthBizApplication
+ *
  * 抑制java9 module 报错
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
@@ -33,6 +33,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * --add-opens java.base/java.math=ALL-UNNAMED
  * --add-opens java.desktop/sun.awt=ALL-UNNAMED
  * --add-exports java.desktop/sun.awt=ALL-UNNAMED
+ *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/4/29 15:13

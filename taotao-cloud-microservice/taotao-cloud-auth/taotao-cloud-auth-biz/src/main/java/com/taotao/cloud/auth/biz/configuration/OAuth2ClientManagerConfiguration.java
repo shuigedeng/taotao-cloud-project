@@ -23,42 +23,50 @@ import org.springframework.web.client.RestTemplate;
 @Configuration(proxyBeanMethods = false)
 public class OAuth2ClientManagerConfiguration {
 
-    /**
-     * O auth 2 authorized client manager o auth 2 authorized client manager.
-     *
-     * @param clientRegistrationRepository the client registration repository
-     * @param authorizedClientRepository   the authorized client repository
-     * @return the o auth 2 authorized client manager
-     */
-    @Bean
-    OAuth2AuthorizedClientManager oAuth2AuthorizedClientManager(ClientRegistrationRepository clientRegistrationRepository,
-                                                                OAuth2AuthorizedClientRepository authorizedClientRepository) {
-        DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientRepository);
-        DefaultRefreshTokenTokenResponseClient defaultRefreshTokenTokenResponseClient = new DefaultRefreshTokenTokenResponseClient();
+	/**
+	 * O auth 2 authorized client manager o auth 2 authorized client manager.
+	 *
+	 * @param clientRegistrationRepository the client registration repository
+	 * @param authorizedClientRepository   the authorized client repository
+	 * @return the o auth 2 authorized client manager
+	 */
+	@Bean
+	OAuth2AuthorizedClientManager oAuth2AuthorizedClientManager(
+		ClientRegistrationRepository clientRegistrationRepository,
+		OAuth2AuthorizedClientRepository authorizedClientRepository) {
+		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
+			clientRegistrationRepository, authorizedClientRepository);
+		DefaultRefreshTokenTokenResponseClient defaultRefreshTokenTokenResponseClient = new DefaultRefreshTokenTokenResponseClient();
 
-        defaultRefreshTokenTokenResponseClient.setRequestEntityConverter(new DelegateOAuth2RefreshTokenRequestEntityConverter());
-        OAuth2AccessTokenResponseHttpMessageConverter messageConverter = new OAuth2AccessTokenResponseHttpMessageConverter();
-        // 微信返回的content-type 是 text-plain
-        messageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON,
-                MediaType.TEXT_PLAIN,
-                new MediaType("application", "*+json")));
-        // 兼容微信解析
-        messageConverter.setAccessTokenResponseConverter(new DelegateMapOAuth2AccessTokenResponseConverter());
+		defaultRefreshTokenTokenResponseClient.setRequestEntityConverter(
+			new DelegateOAuth2RefreshTokenRequestEntityConverter());
+		OAuth2AccessTokenResponseHttpMessageConverter messageConverter = new OAuth2AccessTokenResponseHttpMessageConverter();
+		// 微信返回的content-type 是 text-plain
+		messageConverter.setSupportedMediaTypes(
+			Arrays.asList(MediaType.APPLICATION_JSON,
+				MediaType.TEXT_PLAIN,
+				new MediaType("application", "*+json")));
+		// 兼容微信解析
+		messageConverter.setAccessTokenResponseConverter(
+			new DelegateMapOAuth2AccessTokenResponseConverter());
 
-        RestTemplate restTemplate = new RestTemplate(
-                Arrays.asList(new FormHttpMessageConverter(),
-                        messageConverter
-                ));
+		RestTemplate restTemplate = new RestTemplate(
+			Arrays.asList(
+				new FormHttpMessageConverter(),
+				messageConverter
+			));
 
-        restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
-        defaultRefreshTokenTokenResponseClient.setRestOperations(restTemplate);
+		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
+		defaultRefreshTokenTokenResponseClient.setRestOperations(restTemplate);
 
-        authorizedClientManager.setAuthorizedClientProvider(OAuth2AuthorizedClientProviderBuilder.builder()
-                .authorizationCode()
-                .refreshToken((configurer) -> configurer.accessTokenResponseClient(defaultRefreshTokenTokenResponseClient))
-                .clientCredentials()
-                .password()
-                .build());
-        return authorizedClientManager;
-    }
+		authorizedClientManager.setAuthorizedClientProvider(
+			OAuth2AuthorizedClientProviderBuilder.builder()
+				.authorizationCode()
+				.refreshToken((configurer) -> configurer.accessTokenResponseClient(
+					defaultRefreshTokenTokenResponseClient))
+				.clientCredentials()
+				.password()
+				.build());
+		return authorizedClientManager;
+	}
 }

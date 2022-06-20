@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.idserver.endpoint.system;
+package com.taotao.cloud.auth.biz.controller.system;
 
 import com.taotao.cloud.auth.biz.idserver.advice.BaseController;
 import com.taotao.cloud.auth.biz.idserver.advice.Rest;

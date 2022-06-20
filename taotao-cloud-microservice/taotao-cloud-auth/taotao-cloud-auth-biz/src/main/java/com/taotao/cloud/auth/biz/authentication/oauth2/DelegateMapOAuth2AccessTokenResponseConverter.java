@@ -11,8 +11,6 @@ import java.util.Map;
 /**
  * 兼容微信token接口返回转换的工具，扩展了{@link DefaultMapOAuth2AccessTokenResponseConverter}
  *
- * @author felord.cn
- * @since 2021/8/13 16:43
  */
 public class DelegateMapOAuth2AccessTokenResponseConverter implements Converter<Map<String, Object>, OAuth2AccessTokenResponse> {
 
@@ -22,6 +20,7 @@ public class DelegateMapOAuth2AccessTokenResponseConverter implements Converter<
     public OAuth2AccessTokenResponse convert(Map<String, Object> tokenResponseParameters) {
         // 避免 token_type 空校验异常
         tokenResponseParameters.put(OAuth2ParameterNames.TOKEN_TYPE, OAuth2AccessToken.TokenType.BEARER.getValue());
+
         return this.delegate.convert(tokenResponseParameters);
     }
 
