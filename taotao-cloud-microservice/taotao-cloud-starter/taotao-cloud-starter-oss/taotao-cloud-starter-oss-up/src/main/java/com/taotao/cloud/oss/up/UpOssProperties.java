@@ -1,6 +1,5 @@
 package com.taotao.cloud.oss.up;
 
-import com.taotao.cloud.oss.up.up.model.UpOssConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

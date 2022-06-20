@@ -24,15 +24,19 @@ import cn.ucloud.ufile.util.StorageType;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
+import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
+import com.taotao.cloud.oss.common.model.FileOssInfo;
 import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.model.SliceConfig;
+import com.taotao.cloud.oss.common.model.download.DownloadCheckPoint;
+import com.taotao.cloud.oss.common.model.download.DownloadObjectStat;
 import com.taotao.cloud.oss.common.model.upload.UpLoadCheckPoint;
 import com.taotao.cloud.oss.common.model.upload.UpLoadFileStat;
 import com.taotao.cloud.oss.common.model.upload.UpLoadPartEntityTag;
 import com.taotao.cloud.oss.common.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.common.model.upload.UploadPart;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
-import com.taotao.cloud.oss.ucloud.UCloudOssConfig;
+import com.taotao.cloud.oss.common.util.OssPathUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -213,7 +217,7 @@ public class UCloudOssClient implements StandardOssClient {
 
 	@Override
 	public void prepareDownload(DownloadCheckPoint downloadCheckPoint, File localFile,
-		String targetName, String checkpointFile) {
+								String targetName, String checkpointFile) {
 		downloadCheckPoint.setMagic(DownloadCheckPoint.DOWNLOAD_MAGIC);
 		downloadCheckPoint.setDownloadFile(localFile.getPath());
 		downloadCheckPoint.setBucketName(getBucket());
