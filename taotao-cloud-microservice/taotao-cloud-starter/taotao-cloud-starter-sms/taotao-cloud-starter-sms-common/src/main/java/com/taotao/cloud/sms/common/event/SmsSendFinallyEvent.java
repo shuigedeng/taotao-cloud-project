@@ -66,4 +66,8 @@ public class SmsSendFinallyEvent extends ApplicationEvent {
 	public Map<String, String> getParams() {
 		return params;
 	}
+
+	public String getSendChannel() {
+		return sendChannel;
+	}
 }

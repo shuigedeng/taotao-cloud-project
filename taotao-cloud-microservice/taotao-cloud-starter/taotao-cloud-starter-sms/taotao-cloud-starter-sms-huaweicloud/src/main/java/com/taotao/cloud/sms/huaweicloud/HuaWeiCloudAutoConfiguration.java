@@ -13,8 +13,10 @@
 package com.taotao.cloud.sms.huaweicloud;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
+import com.taotao.cloud.sms.common.properties.SmsProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,7 +36,8 @@ import org.springframework.web.client.RestTemplate;
  * @since 2022-04-27 17:50:47
  */
 @AutoConfiguration(after = SmsAutoConfiguration.class)
-@ConditionalOnProperty(prefix = HuaWeiCloudProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnSmsEnabled
+@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "HUAWEICLOUD")
 @EnableConfigurationProperties(HuaWeiCloudProperties.class)
 public class HuaWeiCloudAutoConfiguration {
 

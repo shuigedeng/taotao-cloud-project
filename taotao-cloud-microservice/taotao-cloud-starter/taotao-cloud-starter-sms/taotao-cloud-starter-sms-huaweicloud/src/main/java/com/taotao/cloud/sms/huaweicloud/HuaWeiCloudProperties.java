@@ -28,7 +28,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class HuaWeiCloudProperties extends AbstractHandlerProperties<String> {
 
 	public static final String PREFIX = "taotao.cloud.sms.huawei";
-	private boolean enabled = false;
+
 	/**
 	 * 请求地址
 	 */
@@ -53,14 +53,6 @@ public class HuaWeiCloudProperties extends AbstractHandlerProperties<String> {
 	 * 签名名称
 	 */
 	private String signature;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getUri() {
 		return uri;

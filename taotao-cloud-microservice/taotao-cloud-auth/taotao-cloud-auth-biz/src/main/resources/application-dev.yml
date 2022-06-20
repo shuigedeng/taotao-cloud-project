@@ -154,6 +154,13 @@ spring:
     oauth2:
       client:
         registration:
+          weibo:
+            provider: weibo
+            client-id: xxxxx
+            client-secret: xxxxx
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/weibo"
+            scope: follow_app_official_microblog
           github:
             client-id: xxxx
             client-secret: xxxx
@@ -170,6 +177,10 @@ spring:
             scope: get_user_info
             client-authentication-method: post
         provider:
+          weibo:
+            authorization-uri: https://api.weibo.com/oauth2/authorize
+            token-uri: https://api.weibo.com/oauth2/access_token
+            user-info-uri: https://api.weibo.com/2/users/show.json
           gitee:
             authorization-uri: https://gitee.com/oauth/authorize
             token-uri: https://gitee.com/oauth/token

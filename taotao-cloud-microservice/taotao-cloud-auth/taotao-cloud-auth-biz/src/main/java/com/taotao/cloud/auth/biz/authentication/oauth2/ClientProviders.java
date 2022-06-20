@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.function.Consumer;
+
+import com.taotao.cloud.auth.biz.authentication.oauth2.wechat.WechatParameterNames;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

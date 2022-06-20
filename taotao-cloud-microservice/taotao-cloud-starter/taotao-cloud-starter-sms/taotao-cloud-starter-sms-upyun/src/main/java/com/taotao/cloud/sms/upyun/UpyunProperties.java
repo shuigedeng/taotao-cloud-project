@@ -27,19 +27,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = UpyunProperties.PREFIX)
 public class UpyunProperties extends AbstractHandlerProperties<String> {
 	public static final String PREFIX = "taotao.cloud.sms.upyun";
-	private boolean enabled = false;
 	/**
 	 * token
 	 */
 	private String token;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getToken() {
 		return token;

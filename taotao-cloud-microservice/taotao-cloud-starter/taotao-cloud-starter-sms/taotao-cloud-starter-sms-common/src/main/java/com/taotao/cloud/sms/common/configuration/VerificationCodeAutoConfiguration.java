@@ -42,8 +42,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")
-@EnableConfigurationProperties({VerificationCodeProperties.class,
-	VerificationCodeMemoryRepositoryProperties.class})
+@EnableConfigurationProperties({VerificationCodeProperties.class, VerificationCodeMemoryRepositoryProperties.class})
 public class VerificationCodeAutoConfiguration {
 
 	/**

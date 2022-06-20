@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.oauth2;
+package com.taotao.cloud.auth.biz.authentication.oauth2.wechat;
 
 import java.util.Collection;
 import java.util.Collections;

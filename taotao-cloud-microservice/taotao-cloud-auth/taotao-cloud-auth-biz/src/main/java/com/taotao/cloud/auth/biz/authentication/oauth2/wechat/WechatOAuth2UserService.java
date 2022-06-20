@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.oauth2;
+package com.taotao.cloud.auth.biz.authentication.oauth2.wechat;
 
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -95,7 +95,7 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 	/**
 	 * 获取微信用户信息借鉴{@link OAuth2AccessTokenResponseClient}
-	 * https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+	 * <a href="https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN">...</a>
 	 *
 	 * @param userRequest the user request
 	 * @return response
@@ -119,7 +119,6 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 			return this.restOperations.exchange(userInfoEndpoint, HttpMethod.GET, null,
 				OAUTH2_USER_OBJECT);
-
 		} catch (OAuth2AuthorizationException ex) {
 			OAuth2Error oauth2Error = ex.getError();
 			StringBuilder errorDetails = new StringBuilder();
