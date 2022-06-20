@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.idserver.endpoint.oauth2;
+package com.taotao.cloud.auth.biz.controller.oauth2;
 
 import com.taotao.cloud.auth.biz.idserver.entity.SystemSettings;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,13 +34,14 @@ public class OAuth2LoginController {
                               @CurrentSecurityContext(expression = "authentication") Authentication authentication,
                               @Value("${spring.security.oauth2.server.login.captcha.enabled:true}") boolean enableCaptchaLogin,
                               @RequestAttribute(name = "org.springframework.security.web.csrf.CsrfToken", required = false) CsrfToken csrfToken) {
-
         if (!(authentication instanceof AnonymousAuthenticationToken)){
             return "redirect:/";
         }
+
         if (csrfToken != null) {
             model.addAttribute("_csrfToken", csrfToken);
         }
+
         SystemSettings systemSettings = new SystemSettings();
         model.addAttribute("enableCaptchaLogin",enableCaptchaLogin);
         model.addAttribute("systemSettings", systemSettings);

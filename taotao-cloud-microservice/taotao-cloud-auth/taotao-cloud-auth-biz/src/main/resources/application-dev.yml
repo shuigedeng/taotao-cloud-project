@@ -154,6 +154,13 @@ spring:
     oauth2:
       client:
         registration:
+          google:
+            client-id: xxxxx
+            client-secret: xxxxx
+            client-authentication-method: ClientAuthenticationMethod.BASIC
+            authorization-grant-type: AuthorizationGrantType.AUTHORIZATION_CODE
+            redirect-uri: {baseUrl}/login/oauth2/code/{registrationId}
+            scope: openid,profile,email,address,phone
           weibo:
             provider: weibo
             client-id: xxxxx
@@ -177,6 +184,12 @@ spring:
             scope: get_user_info
             client-authentication-method: post
         provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: IdTokenClaimNames.SUB
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
           weibo:
             authorization-uri: https://api.weibo.com/oauth2/authorize
             token-uri: https://api.weibo.com/oauth2/access_token
@@ -286,11 +299,16 @@ taotao:
       enabled: true
       type: aliyun
       aliyun:
-        access-key: asf23r
-        secret-key: sldflasdf
         sign-name: ""
-        template-id: slfsdf
-        product: sdfa
+        access-key-id: asf23r
+        access-key-secret: sldflasdf
+        templates:
+          other: "niaho${{asdf}}$sdfasdfl"
+        params-orders:
+          other:
+            - asdf
+            - asdf23
+            - asdf233
     openapi:
       enabled: true
       group: ${spring.application.name}

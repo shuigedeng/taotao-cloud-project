@@ -1,8 +1,5 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import static org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI;
-import static org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.DEFAULT_FILTER_PROCESSES_URI;
-
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClient;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppRequest;
@@ -12,29 +9,21 @@ import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistratio
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.models.CustomJwtGrantedAuthoritiesConverter;
-import com.taotao.cloud.auth.biz.authentication.oauth2.qq.QQOauth2UserService;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -45,14 +34,8 @@ import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpInputMessage;
-import org.springframework.http.HttpOutputMessage;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationManagerResolver;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -68,20 +51,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
-import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.OAuth2Error;
-import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
-import org.springframework.security.oauth2.core.OAuth2TokenValidator;
-import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -89,25 +61,14 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
-import org.springframework.security.oauth2.jwt.JwtIssuerValidator;
-import org.springframework.security.oauth2.jwt.JwtTimestampValidator;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
-import org.springframework.security.oauth2.server.resource.authentication.JwtBearerTokenAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider;
-import org.springframework.security.oauth2.server.resource.introspection.NimbusOpaqueTokenIntrospector;
-import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.util.Assert;
-import org.springframework.util.StreamUtils;
-import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -253,7 +214,8 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			//.userDetailsService(oAuth2UserDetailsService::loadOAuth2UserByUsername)
 			.anonymous()
 			.and()
-			.csrf().disable()
+			.csrf()
+			.disable()
 			.logout()
 			.and()
 			.sessionManagement()
@@ -340,6 +302,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 					// 认证成功后的处理器
 					// 登录请求url
 					// .loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
+					.loginPage("/login")
 					.successHandler((request, response, authentication) -> {
 						LogUtil.info("用户认证成功");
 					})
@@ -347,22 +310,22 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 					.failureHandler((request, response, exception) -> {
 						LogUtil.info("用户认证失败");
 					}));
-					// // 配置授权服务器端点信息
-					// .authorizationEndpoint(authorizationEndpointCustomizer ->
-					// 	authorizationEndpointCustomizer
-					// 		// 授权端点的前缀基础url
-					// 		.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
-					// )
-					// // 配置获取access_token的端点信息
-					// .tokenEndpoint(tokenEndpointCustomizer ->
-					// 	tokenEndpointCustomizer
-					// 		.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
-					// )
-					// //配置获取userInfo的端点信息
-					// .userInfoEndpoint(userInfoEndpointCustomizer ->
-					// 	userInfoEndpointCustomizer
-					// 		.userService(new QQOauth2UserService())
-					// ));
+		// // 配置授权服务器端点信息
+		// .authorizationEndpoint(authorizationEndpointCustomizer ->
+		// 	authorizationEndpointCustomizer
+		// 		// 授权端点的前缀基础url
+		// 		.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
+		// )
+		// // 配置获取access_token的端点信息
+		// .tokenEndpoint(tokenEndpointCustomizer ->
+		// 	tokenEndpointCustomizer
+		// 		.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
+		// )
+		// //配置获取userInfo的端点信息
+		// .userInfoEndpoint(userInfoEndpointCustomizer ->
+		// 	userInfoEndpointCustomizer
+		// 		.userService(new QQOauth2UserService())
+		// ));
 
 		return http.build();
 	}

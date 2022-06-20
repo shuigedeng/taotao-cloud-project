@@ -191,25 +191,30 @@ public abstract class AbstractLoginFilterConfigurer<H extends HttpSecurityBuilde
         if (portMapper != null && this.authenticationEntryPoint instanceof LoginUrlAuthenticationEntryPoint) {
             ((LoginUrlAuthenticationEntryPoint) this.authenticationEntryPoint).setPortMapper(portMapper);
         }
+
         RequestCache requestCache = http.getSharedObject(RequestCache.class);
         if (requestCache != null && this.successHandler instanceof SavedRequestAwareAuthenticationSuccessHandler) {
             ((SavedRequestAwareAuthenticationSuccessHandler) this.successHandler).setRequestCache(requestCache);
         }
+
         this.authFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
         this.authFilter.setAuthenticationSuccessHandler(this.successHandler);
         this.authFilter.setAuthenticationFailureHandler(this.failureHandler);
         if (this.authenticationDetailsSource != null) {
             this.authFilter.setAuthenticationDetailsSource(this.authenticationDetailsSource);
         }
+
         SessionAuthenticationStrategy sessionAuthenticationStrategy = http
                 .getSharedObject(SessionAuthenticationStrategy.class);
         if (sessionAuthenticationStrategy != null) {
             this.authFilter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy);
         }
+
         RememberMeServices rememberMeServices = http.getSharedObject(RememberMeServices.class);
         if (rememberMeServices != null) {
             this.authFilter.setRememberMeServices(rememberMeServices);
         }
+
         F filter = postProcess(this.authFilter);
         http.addFilterBefore(filter, LogoutFilter.class);
     }

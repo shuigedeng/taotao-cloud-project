@@ -7,23 +7,12 @@ import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIF
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
 import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
-import com.taotao.cloud.auth.biz.jwt.Jwks;
-import com.taotao.cloud.auth.biz.jwt.JwtCustomizer;
-import com.taotao.cloud.auth.biz.jwt.JwtCustomizerServiceImpl;
-import com.taotao.cloud.auth.biz.service.CaptchaService;
-import com.taotao.cloud.auth.biz.service.CloudJdbcOAuth2AuthorizationConsentService;
-import com.taotao.cloud.auth.biz.service.CloudOAuth2AuthorizationService;
-import com.taotao.cloud.auth.biz.service.SmsService;
 import com.taotao.cloud.common.enums.UserTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
@@ -43,7 +32,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
@@ -63,7 +51,6 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2AuthorizationServerJackson2Module;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
-import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
@@ -145,7 +132,8 @@ public class AuthorizationServerConfiguration {
 		http
 			.requestMatcher(authorizationServerConfigurerEndpointsMatcher)
 			.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-			.csrf(csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
+			.csrf(
+				csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
 			.formLogin()
 			.and()
 			.apply(authorizationServerConfigurer);
@@ -159,45 +147,45 @@ public class AuthorizationServerConfiguration {
 		return securityFilterChain;
 	}
 
-	@Bean
-	public OAuth2AuthorizationService authorizationService(
-		JdbcTemplate jdbcTemplate,
-		RegisteredClientRepository registeredClientRepository,
-		RedisRepository redisRepository,
-		JwtDecoder jwtDecoder) {
+	//@Bean
+	//public OAuth2AuthorizationService authorizationService(
+	//	JdbcTemplate jdbcTemplate,
+	//	RegisteredClientRepository registeredClientRepository,
+	//	RedisRepository redisRepository,
+	//	JwtDecoder jwtDecoder) {
+	//
+	//	JdbcOAuth2AuthorizationService service = new CloudOAuth2AuthorizationService(jdbcTemplate,
+	//		registeredClientRepository, redisRepository, jwtDecoder);
+	//
+	//	JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper rowMapper = new JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper(
+	//		registeredClientRepository);
+	//
+	//	ObjectMapper objectMapper = new ObjectMapper();
+	//	ClassLoader classLoader = JdbcOAuth2AuthorizationService.class.getClassLoader();
+	//	List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
+	//	objectMapper.registerModules(securityModules);
+	//	objectMapper.registerModule(new OAuth2AuthorizationServerJackson2Module());
+	//
+	//	//// You will need to write the Mixin for your class so Jackson can marshall it.
+	//	//objectMapper.addMixIn(UserAuthority.class, UserAuthorityMixin.class);
+	//	//objectMapper.addMixIn(CloudUserDetails.class, CloudUserDetailsMixin.class);
+	//	//objectMapper.addMixIn(AuditDeletedDate.class, AuditDeletedDateMixin.class);
+	//	//objectMapper.addMixIn(Long.class, LongMixin.class);
+	//
+	//	rowMapper.setObjectMapper(objectMapper);
+	//	service.setAuthorizationRowMapper(rowMapper);
+	//
+	//	return service;
+	//}
 
-		JdbcOAuth2AuthorizationService service = new CloudOAuth2AuthorizationService(jdbcTemplate,
-			registeredClientRepository, redisRepository, jwtDecoder);
-
-		JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper rowMapper = new JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper(
-			registeredClientRepository);
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		ClassLoader classLoader = JdbcOAuth2AuthorizationService.class.getClassLoader();
-		List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
-		objectMapper.registerModules(securityModules);
-		objectMapper.registerModule(new OAuth2AuthorizationServerJackson2Module());
-
-		//// You will need to write the Mixin for your class so Jackson can marshall it.
-		//objectMapper.addMixIn(UserAuthority.class, UserAuthorityMixin.class);
-		//objectMapper.addMixIn(CloudUserDetails.class, CloudUserDetailsMixin.class);
-		//objectMapper.addMixIn(AuditDeletedDate.class, AuditDeletedDateMixin.class);
-		//objectMapper.addMixIn(Long.class, LongMixin.class);
-
-		rowMapper.setObjectMapper(objectMapper);
-		service.setAuthorizationRowMapper(rowMapper);
-
-		return service;
-	}
-
-	@Bean
-	public OAuth2AuthorizationConsentService authorizationConsentService(
-		JdbcTemplate jdbcTemplate,
-		RegisteredClientRepository registeredClientRepository) {
-
-		return new CloudJdbcOAuth2AuthorizationConsentService(jdbcTemplate,
-			registeredClientRepository);
-	}
+	//@Bean
+	//public OAuth2AuthorizationConsentService authorizationConsentService(
+	//	JdbcTemplate jdbcTemplate,
+	//	RegisteredClientRepository registeredClientRepository) {
+	//
+	//	return new CloudJdbcOAuth2AuthorizationConsentService(jdbcTemplate,
+	//		registeredClientRepository);
+	//}
 
 	@Bean
 	public ProviderSettings providerSettings() {

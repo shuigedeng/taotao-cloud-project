@@ -1,53 +1,50 @@
 package com.taotao.cloud.auth.biz.authentication.miniapp;
 
-/**
- * @author n1
- * @since 2021/6/25 11:19
- */
 public class MiniAppRequest {
-    private String clientId;
-    private String openId;
-    private String unionId;
-    private String iv;
-    private String encryptedData;
 
-    public String getClientId() {
-        return clientId;
-    }
+	private String clientId;
+	private String openId;
+	private String unionId;
+	private String iv;
+	private String encryptedData;
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
+	public String getClientId() {
+		return clientId;
+	}
 
-    public String getOpenId() {
-        return openId;
-    }
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
+	public String getOpenId() {
+		return openId;
+	}
 
-    public String getUnionId() {
-        return unionId;
-    }
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 
-    public void setUnionId(String unionId) {
-        this.unionId = unionId;
-    }
+	public String getUnionId() {
+		return unionId;
+	}
 
-    public String getIv() {
-        return iv;
-    }
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
+	}
 
-    public void setIv(String iv) {
-        this.iv = iv;
-    }
+	public String getIv() {
+		return iv;
+	}
 
-    public String getEncryptedData() {
-        return encryptedData;
-    }
+	public void setIv(String iv) {
+		this.iv = iv;
+	}
 
-    public void setEncryptedData(String encryptedData) {
-        this.encryptedData = encryptedData;
-    }
+	public String getEncryptedData() {
+		return encryptedData;
+	}
+
+	public void setEncryptedData(String encryptedData) {
+		this.encryptedData = encryptedData;
+	}
 }

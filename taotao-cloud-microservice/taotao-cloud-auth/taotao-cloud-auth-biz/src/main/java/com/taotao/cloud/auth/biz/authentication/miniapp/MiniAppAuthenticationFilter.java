@@ -1,6 +1,11 @@
 package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,63 +17,64 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-
 public class MiniAppAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/login/miniapp",
-            "POST");
-    private final ObjectMapper om = new ObjectMapper();
-    private Converter<HttpServletRequest, MiniAppAuthenticationToken> miniAppAuthenticationTokenConverter;
-    private boolean postOnly = true;
 
-    public MiniAppAuthenticationFilter() {
-        super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
-        this.miniAppAuthenticationTokenConverter = defaultConverter();
-    }
+	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
+		"/login/miniapp",
+		"POST");
+	private final ObjectMapper om = new ObjectMapper();
+	private Converter<HttpServletRequest, MiniAppAuthenticationToken> miniAppAuthenticationTokenConverter;
+	private boolean postOnly = true;
 
-    public MiniAppAuthenticationFilter(AuthenticationManager authenticationManager) {
-        super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
-        this.miniAppAuthenticationTokenConverter = defaultConverter();
-    }
+	public MiniAppAuthenticationFilter() {
+		super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
+		this.miniAppAuthenticationTokenConverter = defaultConverter();
+	}
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-        if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
-        }
-        MiniAppAuthenticationToken authRequest = miniAppAuthenticationTokenConverter.convert(request);
-        if (authRequest == null) {
-            throw new BadCredentialsException("fail to extract miniapp authentication request params");
-        }
-        setDetails(request, authRequest);
-        return this.getAuthenticationManager().authenticate(authRequest);
-    }
+	public MiniAppAuthenticationFilter(AuthenticationManager authenticationManager) {
+		super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
+		this.miniAppAuthenticationTokenConverter = defaultConverter();
+	}
 
-    protected void setDetails(HttpServletRequest request, MiniAppAuthenticationToken authRequest) {
-        authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
-    }
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request,
+		HttpServletResponse response)
+		throws AuthenticationException, IOException, ServletException {
+		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
+			throw new AuthenticationServiceException(
+				"Authentication method not supported: " + request.getMethod());
+		}
+		MiniAppAuthenticationToken authRequest = miniAppAuthenticationTokenConverter.convert(
+			request);
+		if (authRequest == null) {
+			throw new BadCredentialsException(
+				"fail to extract miniapp authentication request params");
+		}
+		setDetails(request, authRequest);
+		return this.getAuthenticationManager().authenticate(authRequest);
+	}
 
-    public void setConverter(Converter<HttpServletRequest, MiniAppAuthenticationToken> converter) {
-        Assert.notNull(converter, "Converter must not be null");
-        this.miniAppAuthenticationTokenConverter = converter;
-    }
+	protected void setDetails(HttpServletRequest request, MiniAppAuthenticationToken authRequest) {
+		authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
+	}
 
-    public void setPostOnly(boolean postOnly) {
-        this.postOnly = postOnly;
-    }
+	public void setConverter(Converter<HttpServletRequest, MiniAppAuthenticationToken> converter) {
+		Assert.notNull(converter, "Converter must not be null");
+		this.miniAppAuthenticationTokenConverter = converter;
+	}
 
-    private Converter<HttpServletRequest, MiniAppAuthenticationToken> defaultConverter() {
-        return request -> {
-            try (BufferedReader reader = request.getReader()) {
-                MiniAppRequest miniAppRequest = this.om.readValue(reader, MiniAppRequest.class);
-                return new MiniAppAuthenticationToken(miniAppRequest);
-            } catch (IOException e) {
-                return null;
-            }
-        };
-    }
+	public void setPostOnly(boolean postOnly) {
+		this.postOnly = postOnly;
+	}
+
+	private Converter<HttpServletRequest, MiniAppAuthenticationToken> defaultConverter() {
+		return request -> {
+			try (BufferedReader reader = request.getReader()) {
+				MiniAppRequest miniAppRequest = this.om.readValue(reader, MiniAppRequest.class);
+				return new MiniAppAuthenticationToken(miniAppRequest);
+			} catch (IOException e) {
+				return null;
+			}
+		};
+	}
 }
