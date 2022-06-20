@@ -53,7 +53,7 @@ jobs:
         echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
         echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
-    - name: build and publish dependencies
+    - name: build and publish dependencies xxxx
       run: |
         cd ${{ github.workspace }}/taotao-cloud-dependencies
         echo `pwd`
