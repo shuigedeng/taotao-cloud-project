@@ -17,6 +17,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
