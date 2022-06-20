@@ -5,7 +5,7 @@ name: assemble taro rn android debug
 on:
   push:
     paths:
-      - 'taotao-cloud-web/taro/taotao-cloud-mall/**'
+      - 'taotao-cloud-ui/taro/taotao-cloud-mall/**'
     branches: [ v1 ]
     tags: [ v* ]
   pull_request:
@@ -42,7 +42,7 @@ env:
 
 defaults:
   run:
-    working-directory: ${{ github.workspace }}/taotao-cloud-web/taro/taotao-cloud-mall
+    working-directory: ${{ github.workspace }}/taotao-cloud-ui/taro/taotao-cloud-mall
 
 # 工作流作业
 jobs:
