@@ -3,7 +3,7 @@ name: assemble taro mall h5
 on:
   push:
     paths:
-      - 'taotao-cloud-web/taro/taotao-cloud-mall/**'
+      - 'taotao-cloud-ui/taro/taotao-cloud-mall/**'
     branches: [ v1 ]
     tags: [ v* ]
   pull_request:
@@ -13,7 +13,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-web/taro/taotao-cloud-mall
+    working-directory: ./taotao-cloud-ui/taro/taotao-cloud-mall
 
 jobs:
   assemble:
@@ -59,7 +59,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "/taotao-cloud-web/taro/taotao-cloud-mall/dist/"
+          SOURCE: "/taotao-cloud-ui/taro/taotao-cloud-mall/dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_MALL_TARGET }}

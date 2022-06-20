@@ -3,7 +3,7 @@ name: assemble manager
 on:
   push:
     paths:
-      - 'taotao-cloud-web/vue3/taotao-cloud-manager/**'
+      - 'taotao-cloud-ui/vue3/taotao-cloud-manager/**'
     branches: [ master ]
   pull_request:
     branches: [ master ]
@@ -12,7 +12,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-web/vue3/taotao-cloud-manager
+    working-directory: ./taotao-cloud-ui/vue3/taotao-cloud-manager
 
 jobs:
   assemble:
@@ -58,7 +58,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "/taotao-cloud-web/vue3/taotao-cloud-manager/dist/"
+          SOURCE: "/taotao-cloud-ui/vue3/taotao-cloud-manager/dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_MANAGER_TARGET }}

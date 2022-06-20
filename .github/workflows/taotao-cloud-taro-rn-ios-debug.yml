@@ -5,7 +5,7 @@ name: assemble rn ios debug
 on:
   push:
     paths:
-      - 'taotao-cloud-web/taro/taotao-cloud-mall/**'
+      - 'taotao-cloud-ui/taro/taotao-cloud-mall/**'
     branches: [ v1 ]
     tags: [ v* ]
   pull_request:
@@ -29,7 +29,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-web/taro/taotao-cloud-mall
+    working-directory: ./taotao-cloud-ui/taro/taotao-cloud-mall
 
 jobs:
   assemble:

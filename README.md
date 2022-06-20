@@ -115,10 +115,10 @@ Guava | 29.0-jre
 ## 6. 滔滔商城演示地址
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top) 源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top) 源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
-* 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-datav)
-* 平台管理地址(开发进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-manager)
+* 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-datav)
+* 平台管理地址(开发进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
 * 商户管理地址(开发进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-merchant)
-* 开放平台地址(开发进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-open)
+* 开放平台地址(开发进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-open)
 * 移动端在线预览(开发进度5%) 源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
 
 | <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                                       |
@@ -204,7 +204,7 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-spring-native -- spring native模块
 │  ├─taotao-cloud-spring-source -- spring 源码模块
 │  ├─taotao-cloud-spring-standlone -- 单项目模块
-│  ├─taotao-cloud-web -- 前端模块
+│  ├─taotao-cloud-ui -- 前端模块
 │  │  ├─taotao-cloud-datav -- 大屏展示模块
 │  │  ├─taotao-cloud-front -- 商城PC端模块
 │  │  ├─taotao-cloud-mall  -- 商城移动端模块
