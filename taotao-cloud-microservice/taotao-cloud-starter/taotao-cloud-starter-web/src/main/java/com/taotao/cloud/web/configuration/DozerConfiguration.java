@@ -48,7 +48,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnMissingBean(Mapper.class)
 @EnableConfigurationProperties({DozerProperties.class})
 @ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})
-@ConditionalOnProperty(prefix = DozerProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = DozerProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class DozerConfiguration implements InitializingBean {
 
 	@Override

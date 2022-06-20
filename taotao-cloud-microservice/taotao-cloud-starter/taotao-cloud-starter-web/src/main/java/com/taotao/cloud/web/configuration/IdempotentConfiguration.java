@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @AutoConfiguration
 @EnableConfigurationProperties({IdempotentProperties.class})
-@ConditionalOnProperty(prefix = IdempotentProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = IdempotentProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class IdempotentConfiguration implements InitializingBean {
 
 	@Override
