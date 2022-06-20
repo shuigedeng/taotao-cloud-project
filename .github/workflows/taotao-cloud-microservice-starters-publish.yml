@@ -59,7 +59,6 @@ jobs:
         echo `pwd`
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
-        gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: build and publish starter
       run: |
@@ -73,7 +72,6 @@ jobs:
                echo `pwd` 
                gradle --continue clean build -x test -x bootJar
                gradle publishAllPublicationsToSonatypeRepository
-               gradle publishMavenJavaPublicationToGitHubRepository
             else
               for two_starter in `ls $starter_inner_dir`
               do
@@ -82,7 +80,6 @@ jobs:
                   echo `pwd`
                   gradle --continue clean build -x test -x bootJar
                   gradle publishAllPublicationsToSonatypeRepository
-                  gradle publishMavenJavaPublicationToGitHubRepository
                 fi
               done
             fi
