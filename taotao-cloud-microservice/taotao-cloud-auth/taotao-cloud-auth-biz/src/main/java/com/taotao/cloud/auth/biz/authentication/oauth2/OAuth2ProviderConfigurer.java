@@ -1,9 +1,10 @@
 package com.taotao.cloud.auth.biz.authentication.oauth2;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
+import com.taotao.cloud.auth.biz.authentication.oauth2.qq.QQOauth2UserService;
+import com.taotao.cloud.auth.biz.authentication.oauth2.qq.QqOAuth2AccessTokenResponseHttpMessageConverter;
+import com.taotao.cloud.auth.biz.authentication.oauth2.wechat.WechatOAuth2UserService;
+import com.taotao.cloud.auth.biz.authentication.oauth2.weibo.WeiboOAuth2UserService;
+import com.taotao.cloud.auth.biz.authentication.oauth2.workwechat.WorkWechatOAuth2UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,6 +25,11 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
 public class OAuth2ProviderConfigurer extends
 	AbstractHttpConfigurer<OAuth2ProviderConfigurer, HttpSecurity> {
 
@@ -38,8 +44,7 @@ public class OAuth2ProviderConfigurer extends
 	 *
 	 * @param delegateClientRegistrationRepository the delegate client registration repository
 	 */
-	public OAuth2ProviderConfigurer(
-		DelegateClientRegistrationRepository delegateClientRegistrationRepository) {
+	public OAuth2ProviderConfigurer(DelegateClientRegistrationRepository delegateClientRegistrationRepository) {
 		this.delegateClientRegistrationRepository = delegateClientRegistrationRepository;
 	}
 
@@ -97,7 +102,7 @@ public class OAuth2ProviderConfigurer extends
 	 * @return the o auth 2 provider configurer
 	 */
 	public OAuth2ProviderConfigurer workWechatWebLoginclient(String corpId, String secret,
-		String agentId) {
+															 String agentId) {
 		ClientRegistration clientRegistration = getBuilder(
 			ClientProviders.WORK_WECHAT_SCAN_CLIENT.registrationId(),
 			ClientAuthenticationMethod.NONE)
@@ -126,7 +131,7 @@ public class OAuth2ProviderConfigurer extends
 	}
 
 	protected final ClientRegistration.Builder getBuilder(String registrationId,
-		ClientAuthenticationMethod method) {
+														  ClientAuthenticationMethod method) {
 		ClientRegistration.Builder builder = ClientRegistration.withRegistrationId(registrationId);
 		builder.clientAuthenticationMethod(method);
 		builder.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE);
@@ -136,38 +141,37 @@ public class OAuth2ProviderConfigurer extends
 
 	@Override
 	public void init(HttpSecurity httpSecurity) throws Exception {
-
 		OAuth2AccessTokenResponseHttpMessageConverter tokenResponseHttpMessageConverter = new OAuth2AccessTokenResponseHttpMessageConverter();
 		// 微信返回的content-type 是 text-plain
 		tokenResponseHttpMessageConverter.setSupportedMediaTypes(
-			Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN,
-				new MediaType("application", "*+json")));
+			Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, new MediaType("application", "*+json")));
 		// 兼容微信解析
-		tokenResponseHttpMessageConverter.setAccessTokenResponseConverter(
-			new DelegateMapOAuth2AccessTokenResponseConverter());
+		tokenResponseHttpMessageConverter.setAccessTokenResponseConverter(new DelegateMapOAuth2AccessTokenResponseConverter());
 
-		RestTemplate restTemplate = new RestTemplate(
-			Arrays.asList(new FormHttpMessageConverter(), tokenResponseHttpMessageConverter));
+		RestTemplate restTemplate = new RestTemplate(Arrays.asList(
+			new FormHttpMessageConverter(),
+			// 解析标准的AccessToken响应信息转换器
+			tokenResponseHttpMessageConverter,
+			// 解析qq的AccessToken响应信息转换器
+			new QqOAuth2AccessTokenResponseHttpMessageConverter()));
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 
 		DefaultAuthorizationCodeTokenResponseClient tokenResponseClient = new DefaultAuthorizationCodeTokenResponseClient();
-		tokenResponseClient.setRequestEntityConverter(
-			new OAuth2ProviderAuthorizationCodeGrantRequestEntityConverter());
+		tokenResponseClient.setRequestEntityConverter(new OAuth2ProviderAuthorizationCodeGrantRequestEntityConverter());
 		tokenResponseClient.setRestOperations(restTemplate);
 
 		WechatOAuth2UserService wechatOAuth2UserService = new WechatOAuth2UserService();
 		Map<String, OAuth2UserService<OAuth2UserRequest, OAuth2User>> oAuth2UserServiceMap = new HashMap<>();
 		oAuth2UserServiceMap.put(ClientProviders.WECHAT_WEB_CLIENT.registrationId(), wechatOAuth2UserService);
 		oAuth2UserServiceMap.put(ClientProviders.WECHAT_WEB_LOGIN_CLIENT.registrationId(), wechatOAuth2UserService);
-		oAuth2UserServiceMap.put(ClientProviders.WORK_WECHAT_SCAN_CLIENT.registrationId(),
-			new WorkWechatOAuth2UserService());
+		oAuth2UserServiceMap.put(ClientProviders.WORK_WECHAT_SCAN_CLIENT.registrationId(), new WorkWechatOAuth2UserService());
+		oAuth2UserServiceMap.put("web", new WeiboOAuth2UserService());
+		oAuth2UserServiceMap.put("qq", new QQOauth2UserService());
 
-		httpSecurity.setSharedObject(ClientRegistrationRepository.class,
-			delegateClientRegistrationRepository);
+		httpSecurity.setSharedObject(ClientRegistrationRepository.class, delegateClientRegistrationRepository);
 
 		DefaultOAuth2AuthorizationRequestResolver resolver = new DefaultOAuth2AuthorizationRequestResolver(
-			delegateClientRegistrationRepository,
-			OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI);
+			delegateClientRegistrationRepository, OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI);
 		resolver.setAuthorizationRequestCustomizer(OAuth2AuthorizationRequestCustomizer::customize);
 
 		OAuth2LoginConfigurer<HttpSecurity> httpSecurityOAuth2LoginConfigurer = httpSecurity.oauth2Login();
@@ -180,11 +184,12 @@ public class OAuth2ProviderConfigurer extends
 			// 获取token端点配置  比如根据code 获取 token
 			.tokenEndpoint(tokenEndpointCustomizer -> {
 				tokenEndpointCustomizer.accessTokenResponseClient(
-					new DelegateOAuth2AccessTokenResponseClient(tokenResponseClient));
+					new DelegateOAuth2AccessTokenResponseClient(tokenResponseClient, restTemplate));
 			})
 			// 获取用户信息端点配置  根据accessToken获取用户基本信息
-			.userInfoEndpoint()
-			.userService(new DelegatingOAuth2UserService<>(oAuth2UserServiceMap));
+			.userInfoEndpoint(userInfoEndpointCustomizer -> {
+				userInfoEndpointCustomizer.userService(new DelegatingOAuth2UserService<>(oAuth2UserServiceMap));
+			});
 		this.oAuth2LoginConfigurerConsumer.accept(httpSecurityOAuth2LoginConfigurer);
 	}
 

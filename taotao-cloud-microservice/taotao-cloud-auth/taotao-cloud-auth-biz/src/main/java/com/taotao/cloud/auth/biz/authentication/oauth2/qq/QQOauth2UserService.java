@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.service;
+package com.taotao.cloud.auth.biz.authentication.oauth2.qq;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class CloudOauth2UserService extends DefaultOAuth2UserService {
+public class QQOauth2UserService extends DefaultOAuth2UserService {
 
 	private static final String QQ = "qq";
 	private static final String QQ_OPEN_ID_URL = "https://graph.qq.com/oauth2.0/me";

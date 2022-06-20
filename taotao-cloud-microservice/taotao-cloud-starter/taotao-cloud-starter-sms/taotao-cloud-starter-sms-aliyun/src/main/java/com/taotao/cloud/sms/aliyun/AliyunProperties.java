@@ -29,8 +29,6 @@ public class AliyunProperties extends AbstractHandlerProperties<String> {
 
 	public static final String PREFIX = "taotao.cloud.sms.aliyun";
 
-	private boolean enabled = false;
-
 	/**
 	 * Endpoint
 	 */
@@ -50,14 +48,6 @@ public class AliyunProperties extends AbstractHandlerProperties<String> {
 	 * 短信签名
 	 */
 	private String signName;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getEndpoint() {
 		return endpoint;

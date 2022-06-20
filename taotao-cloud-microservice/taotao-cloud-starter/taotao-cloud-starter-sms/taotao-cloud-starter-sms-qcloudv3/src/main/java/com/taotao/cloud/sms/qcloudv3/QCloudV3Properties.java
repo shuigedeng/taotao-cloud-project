@@ -27,7 +27,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = QCloudV3Properties.PREFIX)
 public class QCloudV3Properties extends AbstractHandlerProperties<String> {
 	public static final String PREFIX = "taotao.cloud.sms.qcloud-v3";
-	private boolean enabled = false;
 	/**
 	 * 腾讯云 SecretID
 	 */
@@ -52,14 +51,6 @@ public class QCloudV3Properties extends AbstractHandlerProperties<String> {
 	 * 短信签名
 	 */
 	private String smsSign;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getSecretId() {
 		return secretId;

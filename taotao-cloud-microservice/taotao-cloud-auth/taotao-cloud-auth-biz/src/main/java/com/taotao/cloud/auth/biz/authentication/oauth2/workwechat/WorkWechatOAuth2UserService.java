@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.oauth2;
+package com.taotao.cloud.auth.biz.authentication.oauth2.workwechat;
 
 import java.net.URI;
 import java.nio.charset.Charset;

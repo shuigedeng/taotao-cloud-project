@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sms.common.properties;
 
+import com.taotao.cloud.sms.common.enums.SmsType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -37,6 +38,11 @@ public class SmsProperties {
 	 * 手机号码正则规则
 	 */
 	private String reg;
+
+	/**
+	 * 类型
+	 */
+	private SmsType type;
 
 	/**
 	 * 负载均衡类型
@@ -69,4 +75,15 @@ public class SmsProperties {
 		this.enabled = enabled;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public SmsType getType() {
+		return type;
+	}
+
+	public void setType(SmsType type) {
+		this.type = type;
+	}
 }

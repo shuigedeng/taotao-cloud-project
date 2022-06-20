@@ -28,7 +28,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class JPushProperties extends AbstractHandlerProperties<Integer> {
 
 	public static final String PREFIX = "taotao.cloud.sms.jpush";
-	private boolean enabled = false;
 
 	/**
 	 * appKey
@@ -44,14 +43,6 @@ public class JPushProperties extends AbstractHandlerProperties<Integer> {
 	 * 签名ID
 	 */
 	private Integer signId;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getAppKey() {
 		return appKey;

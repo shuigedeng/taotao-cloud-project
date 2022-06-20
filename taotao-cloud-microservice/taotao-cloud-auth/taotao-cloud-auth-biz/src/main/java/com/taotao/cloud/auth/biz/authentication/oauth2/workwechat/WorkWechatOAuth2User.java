@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.oauth2;
+package com.taotao.cloud.auth.biz.authentication.oauth2.workwechat;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import java.util.Collection;

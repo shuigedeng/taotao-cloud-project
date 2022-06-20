@@ -2,6 +2,8 @@ package com.taotao.cloud.auth.biz.authentication.oauth2;
 
 import com.nimbusds.oauth2.sdk.GrantType;
 import java.net.URI;
+
+import com.taotao.cloud.auth.biz.authentication.oauth2.wechat.WechatParameterNames;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.oauth2.client.endpoint.OAuth2RefreshTokenGrantRequest;

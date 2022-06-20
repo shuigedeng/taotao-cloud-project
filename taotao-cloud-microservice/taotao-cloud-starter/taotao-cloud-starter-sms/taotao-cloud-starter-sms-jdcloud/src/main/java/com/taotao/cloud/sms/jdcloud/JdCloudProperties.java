@@ -27,7 +27,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = JdCloudProperties.PREFIX)
 public class JdCloudProperties extends AbstractHandlerProperties<String> {
 	public static final String PREFIX = "taotao.cloud.sms.jdcloud";
-	private boolean enabled = false;
 	/**
 	 * AccessKey ID
 	 */
@@ -48,14 +47,6 @@ public class JdCloudProperties extends AbstractHandlerProperties<String> {
 	 */
 	private String signId;
 
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getAccessKeyId() {
 		return accessKeyId;

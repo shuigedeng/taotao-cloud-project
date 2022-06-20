@@ -28,7 +28,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class ChinaMobileProperties extends AbstractHandlerProperties<String> {
 
 	public static final String PREFIX = "taotao.cloud.sms.chinamobile";
-	private boolean enabled = false;
 	/**
 	 * 请求地址
 	 */
@@ -53,14 +52,6 @@ public class ChinaMobileProperties extends AbstractHandlerProperties<String> {
 	 * 签名编码。在模板短信控制台概览页获取。
 	 */
 	private String sign;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getUri() {
 		return uri;

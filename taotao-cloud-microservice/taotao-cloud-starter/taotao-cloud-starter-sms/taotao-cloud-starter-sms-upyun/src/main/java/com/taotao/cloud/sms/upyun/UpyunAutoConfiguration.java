@@ -13,8 +13,10 @@
 package com.taotao.cloud.sms.upyun;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
+import com.taotao.cloud.sms.common.properties.SmsProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,7 +36,8 @@ import org.springframework.web.client.RestTemplate;
  * @since 2022-04-27 17:52:15
  */
 @AutoConfiguration(after = SmsAutoConfiguration.class)
-@ConditionalOnProperty(prefix = UpyunProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnSmsEnabled
+@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "UPYUN")
 @EnableConfigurationProperties(UpyunProperties.class)
 public class UpyunAutoConfiguration {
 

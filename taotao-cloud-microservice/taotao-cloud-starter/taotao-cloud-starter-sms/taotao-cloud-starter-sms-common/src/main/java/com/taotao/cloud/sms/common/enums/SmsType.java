@@ -23,6 +23,52 @@ package com.taotao.cloud.sms.common.enums;
  * @since 2021/11/23 16:43
  */
 public enum SmsType {
+	/**
+	 * 阿里
+	 */
 	ALIYUN,
+	/**
+	 * 百度
+	 */
+	BAIDUCLOUD,
+	/**
+	 * 移动
+	 */
+	CHINAMOBILE,
+	/**
+	 * 华为
+	 */
+	HUAWEICLOUD,
+	/**
+	 * 京东
+	 */
+	JDCLOUD,
+	/**
+	 * 极光
+	 */
+	JPUSH,
+	/**
+	 * 网易
+	 */
+	NETEASE,
+	/**
+	 * 腾讯
+	 */
 	QCLOUD,
+	/**
+	 * 腾讯v3
+	 */
+	QCLOUDV3,
+	/**
+	 * 七牛
+	 */
+	QINIU,
+	/**
+	 * 七牛
+	 */
+	UPYUN,
+	/**
+	 * 云片
+	 */
+	YUNPIAN;
 }

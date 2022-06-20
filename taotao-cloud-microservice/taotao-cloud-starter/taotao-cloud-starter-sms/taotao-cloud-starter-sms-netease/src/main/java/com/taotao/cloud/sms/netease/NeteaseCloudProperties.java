@@ -28,7 +28,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class NeteaseCloudProperties extends AbstractHandlerProperties<String> {
 
 	public static final String PREFIX = "taotao.cloud.sms.netease";
-	private boolean enabled = false;
 	/**
 	 * appkey
 	 */
@@ -38,14 +37,6 @@ public class NeteaseCloudProperties extends AbstractHandlerProperties<String> {
 	 * appSecret
 	 */
 	private String appSecret;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getAppKey() {
 		return appKey;

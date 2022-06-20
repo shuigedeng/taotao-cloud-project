@@ -28,20 +28,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class YunPianProperties extends AbstractHandlerProperties<String> {
 	public static final String PREFIX = "taotao.cloud.sms.yunpian";
 
-	private boolean enabled = false;
-
 	/**
 	 * apikey
 	 */
 	private String apikey;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getApikey() {
 		return apikey;

@@ -28,7 +28,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class BaiduCloudProperties extends AbstractHandlerProperties<String> {
 
 	public static final String PREFIX = "taotao.cloud.sms.baiducloud";
-	private boolean enabled = false;
 	/**
 	 * ACCESS_KEY_ID
 	 */
@@ -49,13 +48,6 @@ public class BaiduCloudProperties extends AbstractHandlerProperties<String> {
 	 */
 	private String signatureId;
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getAccessKeyId() {
 		return accessKeyId;
