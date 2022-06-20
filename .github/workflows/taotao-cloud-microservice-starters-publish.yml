@@ -45,6 +45,13 @@ jobs:
     #    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
     #    restore-keys: ${{ runner.os }}-gradle
 
+    - name: show github
+      run: echo "$GITHUB_CONTEXT"
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+        MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
+        MESSAGES: ${{ github.event.head_commit.message }}
+
     #  base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
     - name: decode signing secret key ring file
       run: |
