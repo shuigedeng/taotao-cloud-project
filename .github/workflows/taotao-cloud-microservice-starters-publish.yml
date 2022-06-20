@@ -7,9 +7,9 @@ on:
   push:
     #paths:
     #  - 'taotao-cloud-microservice/taotao-cloud-starter/**'
-    #branches: [ master ]
-  release:
-    types: [created]
+    branches: [ master ]
+  #release:
+  #  types: [created]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}

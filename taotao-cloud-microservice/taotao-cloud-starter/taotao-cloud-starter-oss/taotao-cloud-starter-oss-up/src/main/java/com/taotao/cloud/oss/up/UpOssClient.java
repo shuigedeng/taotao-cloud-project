@@ -17,7 +17,6 @@ import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
 import com.taotao.cloud.oss.up.UpConstant;
-import com.taotao.cloud.oss.up.up.model.UpOssConfig;
 import com.upyun.ParallelUploader;
 import com.upyun.RestManager;
 import com.upyun.UpException;
