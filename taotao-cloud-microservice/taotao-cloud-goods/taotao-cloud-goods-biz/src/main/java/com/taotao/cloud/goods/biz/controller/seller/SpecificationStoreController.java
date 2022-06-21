@@ -40,7 +40,7 @@ public class SpecificationStoreController {
 	private final ICategorySpecificationService categorySpecificationService;
 
 	@Operation(summary = "获取分类规格", description = "获取分类规格")
-	@RequestLogger
+	@RequestLogger("获取分类规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<SpecificationVO>> getSpecifications(@PathVariable Long categoryId) {

@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.goods.api.vo.StudioCommodityVO;
+import com.taotao.cloud.goods.api.vo.StudioVO;
 import com.taotao.cloud.goods.biz.entity.Studio;
 import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
 
@@ -38,10 +38,10 @@ public interface IStudioService extends IService<Studio> {
 	 * 获取直播间信息
 	 *
 	 * @param id 直播间ID
-	 * @return {@link StudioCommodityVO }
+	 * @return {@link StudioVO }
 	 * @since 2022-04-27 17:01:11
 	 */
-	StudioCommodityVO getStudioVO(Long id);
+	StudioVO getStudioVO(Long id);
 
 	/**
 	 * 获取直播间回放

@@ -1,18 +1,15 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
-import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTOBuilder;
-import com.taotao.cloud.goods.api.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.DraftGoodsSkuParamsVO;
-import com.taotao.cloud.goods.api.vo.DraftGoodsSkuVO;
-import com.taotao.cloud.goods.api.vo.DraftGoodsVOBuilder;
+import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
@@ -58,29 +55,22 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	private final IGoodsSkuService goodsSkuService;
 
 	@Override
-	public Boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
-		DraftGoodsDTO draftGoodsDTO = draftGoods.draftGoodsBase();
-		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO);
+	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
+		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
+		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
+		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
 
-		builder.goodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.goodsGalleryList()));
-		builder.skuListJson(JSONUtil.toJsonStr(draftGoods.skuList()));
-		builder.goodsParamsListJson(JSONUtil.toJsonStr(draftGoods.goodsParamsDTOList()));
-
-		return this.save(IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(builder.build()));
+		return this.save(IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(draftGoods));
 	}
 
 	@Override
-	public Boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
-		DraftGoodsDTO draftGoodsDTO = draftGoods.draftGoodsBase();
-		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO);
-
-		builder.goodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.goodsGalleryList()));
-		builder.skuListJson(JSONUtil.toJsonStr(draftGoods.skuList()));
-		builder.goodsParamsListJson(JSONUtil.toJsonStr(draftGoods.goodsParamsDTOList()));
+	public Boolean updateGoodsDraft(DraftGoodsDTO draftGoods) {
+		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
+		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
+		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
 
 		DraftGoods draftGoods1 = IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(
-			builder.build());
-
+			draftGoods);
 		// todo 此处需要修改
 		draftGoods1.setId(0L);
 
@@ -88,25 +78,21 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
-		DraftGoodsDTO draftGoodsDTO = draftGoods.draftGoodsBase();
-		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO);
-
-		if (draftGoods.goodsGalleryList() != null && !draftGoods.goodsGalleryList()
+	public Boolean saveGoodsDraft(DraftGoodsDTO draftGoods) {
+		if (draftGoods.getGoodsGalleryList() != null && !draftGoods.getGoodsGalleryList()
 			.isEmpty()) {
 			GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(
-				draftGoods.goodsGalleryList().get(0));
-			builder.original(goodsGallery.getOriginal());
-			builder.small(goodsGallery.getSmall());
-			builder.thumbnail(goodsGallery.getThumbnail());
+				draftGoods.getGoodsGalleryList().get(0));
+			draftGoods.setOriginal(goodsGallery.getOriginal());
+			draftGoods.setSmall(goodsGallery.getSmall());
+			draftGoods.setThumbnail(goodsGallery.getThumbnail());
 		}
+		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
+		draftGoods.setSkuListJson(
+			JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.getSkuList())));
+		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
 
-		builder.goodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.goodsGalleryList()));
-		builder.skuListJson(
-			JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.skuList())));
-		builder.goodsParamsListJson(JSONUtil.toJsonStr(draftGoods.goodsParamsDTOList()));
-
-		return this.saveOrUpdate(IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(builder.build()));
+		return this.saveOrUpdate(IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(draftGoods));
 	}
 
 	@Override
@@ -115,11 +101,10 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public DraftGoodsSkuVO getDraftGoods(Long id) {
+	public DraftGoodsVO getDraftGoods(Long id) {
 		DraftGoods draftGoods = this.getById(id);
-		DraftGoodsSkuParamsVO draftGoodsVO = IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(draftGoods);
-		DraftGoodsVOBuilder draftGoodsVOBuilder = DraftGoodsVOBuilder.builder().draftGoodsBase(
-			draftGoodsVO);
+		DraftGoodsVO draftGoodsVO = new DraftGoodsVO();
+		BeanUtil.copyProperties(draftGoods, draftGoodsVO);
 
 		//商品分类名称赋值
 		List<String> categoryName = new ArrayList<>();
@@ -128,17 +113,17 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 		for (Category category : categories) {
 			categoryName.add(category.getName());
 		}
-		draftGoodsVOBuilder.categoryName(categoryName);
-		draftGoodsVOBuilder.goodsParamsDTOList(
+		draftGoodsVO.setCategoryName(categoryName);
+		draftGoodsVO.setGoodsParamsDTOList(
 			JSONUtil.toList(JSONUtil.parseArray(draftGoods.getGoodsParamsListJson()),
 				GoodsParamsDTO.class));
-		draftGoodsVOBuilder.goodsGalleryList(
+		draftGoodsVO.setGoodsGalleryList(
 			JSONUtil.toList(JSONUtil.parseArray(draftGoods.getGoodsGalleryListJson()),
 				String.class));
 		JSONArray jsonArray = JSONUtil.parseArray(draftGoods.getSkuListJson());
 		List<GoodsSku> list = JSONUtil.toList(jsonArray, GoodsSku.class);
-		draftGoodsVOBuilder.skuList(goodsSkuService.getGoodsSkuVOList(list));
-		return draftGoodsVOBuilder.build();
+		draftGoodsVO.setSkuList(goodsSkuService.getGoodsSkuVOList(list));
+		return draftGoodsVO;
 	}
 
 	@Override

@@ -1,126 +1,43 @@
 package com.taotao.cloud.goods.api.vo;
 
-import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 商品基础VO
+ * 商品VO
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2022-03-11 17:21:04
+ * @version 2022.04
+ * @since 2022-04-14 21:32:40
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "商品基础VO")
-public class GoodsVO implements Serializable {
+@Schema(description = "商品VO")
+public class GoodsVO extends GoodsBaseVO {
 
 	@Serial
-	private static final long serialVersionUID = 1450550797436233753L;
+	private static final long serialVersionUID = 6377623919990713567L;
 
-	private Long id;
+	@Schema(description = "分类名称")
+	private List<String> categoryName;
 
-	@Schema(description = "商品名称")
-	private String goodsName;
+	@Schema(description = "商品参数")
+	private List<GoodsParamsDTO> goodsParamsDTOList;
 
-	@Schema(description = "商品价格")
-	private BigDecimal price;
+	@Schema(description = "商品图片")
+	private List<String> goodsGalleryList;
 
-	@Schema(description = "品牌id")
-	private String brandId;
-
-	@Schema(description = "分类path")
-	private String categoryPath;
-
-	@Schema(description = "计量单位")
-	private String goodsUnit;
-
-	@Schema(description = "商品卖点太长")
-	private String sellingPoint;
-
-	@Schema(description = "上架状态")
-	private String marketEnable;
-
-	@Schema(description = "详情")
-	private String intro;
-
-	@Schema(description = "购买数量")
-	private Integer buyCount;
-
-	@Schema(description = "库存")
-	private Integer quantity;
-
-	@Schema(description = "商品好评率")
-	private BigDecimal grade;
-
-	@Schema(description = "缩略图路径")
-	private String thumbnail;
-
-	@Schema(description = "小图路径")
-	private String small;
-
-	@Schema(description = "原图路径")
-	private String original;
-
-	@Schema(description = "店铺分类id")
-	private String storeCategoryPath;
-
-	@Schema(description = "评论数量")
-	private Integer commentNum;
-
-	@Schema(description = "卖家id")
-	private String storeId;
-
-	@Schema(description = "卖家名字")
-	private String storeName;
-
-	@Schema(description = "运费模板id")
-	private String templateId;
-
-	@Schema(description = "审核状态")
-	private String isAuth;
-
-	@Schema(description = "审核信息")
-	private String authMessage;
-
-	@Schema(description = "下架原因")
-	private String underMessage;
-
-	@Schema(description = "是否自营")
-	private Boolean selfOperated;
-
-	@Schema(description = "商品移动端详情")
-	private String mobileIntro;
-
-	@Schema(description = "商品视频")
-	private String goodsVideo;
-
-	@Schema(description = "是否为推荐商品")
-	private Boolean recommend;
-
-	@Schema(description = "销售模式")
-	private String salesModel;
-
-	@Schema(description = "商品海报id")
-	private Long posterPicId;
-
-	/**
-	 * @see GoodsTypeEnum
-	 */
-	@Schema(description = "商品类型")
-	private String goodsType;
-
-	@Schema(description = "商品参数json")
-	private String params;
-
-	private Boolean delFlag;
+	@Schema(description = "sku列表")
+	private List<GoodsSkuVO> skuList;
 }

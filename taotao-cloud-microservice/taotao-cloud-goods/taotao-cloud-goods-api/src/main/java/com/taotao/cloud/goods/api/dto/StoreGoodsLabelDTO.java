@@ -1,8 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -15,9 +13,8 @@ import lombok.NoArgsConstructor;
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-25 16:31:53
+ * @since 2022-04-14 21:52:23
  */
-@RecordBuilder
 @Data
 @Builder
 @AllArgsConstructor

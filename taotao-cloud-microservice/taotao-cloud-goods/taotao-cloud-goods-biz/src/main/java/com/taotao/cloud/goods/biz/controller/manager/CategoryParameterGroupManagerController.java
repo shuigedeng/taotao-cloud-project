@@ -58,7 +58,8 @@ public class CategoryParameterGroupManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> saveOrUpdate(@Validated CategoryParameterGroup categoryParameterGroup) {
+	public Result<Boolean> saveOrUpdate(
+		@Validated CategoryParameterGroup categoryParameterGroup) {
 		return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
 	}
 
@@ -66,7 +67,8 @@ public class CategoryParameterGroupManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<Boolean> update(@Validated CategoryParameterGroup categoryParameterGroup) {
+	public Result<Boolean> update(
+		@Validated CategoryParameterGroup categoryParameterGroup) {
 		return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
 	}
 

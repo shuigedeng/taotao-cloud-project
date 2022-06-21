@@ -38,12 +38,12 @@ public class GoodsUnitStoreController {
 	private final IGoodsUnitService goodsUnitService;
 
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
-	@RequestLogger
+	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<PageModel<GoodsUnitVO>> getByPage(PageParam pageParam) {
 		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
-		return Result.success(PageModel.convertMybatisPage(page, GoodsUnitVO.class));
+		return Result.success(PageModel.convertMybatisPage(page,GoodsUnitVO.class));
 	}
 
 }

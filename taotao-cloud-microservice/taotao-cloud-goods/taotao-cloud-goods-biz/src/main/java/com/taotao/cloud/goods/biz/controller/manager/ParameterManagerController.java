@@ -39,7 +39,7 @@ public class ParameterManagerController {
 	private final IParametersService parametersService;
 
 	@Operation(summary = "添加参数", description = "添加参数")
-	@RequestLogger
+	@RequestLogger("添加参数添加参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody ParametersDTO parametersDTO) {
@@ -49,18 +49,19 @@ public class ParameterManagerController {
 	}
 
 	@Operation(summary = "编辑参数", description = "编辑参数")
-	@RequestLogger
+	@RequestLogger("编辑参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
 		@PathVariable Long id) {
-		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(parametersDTO);
+		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
+			parametersDTO);
 		parameters.setId(id);
 		return Result.success(parametersService.updateParameter(parameters));
 	}
 
 	@Operation(summary = "根据id删除参数", description = "根据id删除参数")
-	@RequestLogger
+	@RequestLogger("根据id删除参数")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delById(@PathVariable Long id) {

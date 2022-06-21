@@ -31,16 +31,15 @@ public class CategoryBrandServiceImpl extends ServiceImpl<ICategoryBrandMapper, 
 
 	@Override
 	public Boolean deleteByCategoryId(Long categoryId) {
-		LambdaUpdateWrapper<CategoryBrand> queryWrapper = new LambdaUpdateWrapper<>();
-		queryWrapper.eq(CategoryBrand::getCategoryId, categoryId);
-		return this.baseMapper.delete(queryWrapper) > 0;
+		return this.baseMapper.delete(
+			new LambdaUpdateWrapper<CategoryBrand>().eq(CategoryBrand::getCategoryId, categoryId))
+			> 0;
 	}
 
 	@Override
 	public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
-		LambdaQueryWrapper<CategoryBrand> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.in(CategoryBrand::getBrandId, brandId);
-		return this.list(queryWrapper);
+		return this.list(
+			new LambdaQueryWrapper<CategoryBrand>().in(CategoryBrand::getBrandId, brandId));
 	}
 
 	@Override

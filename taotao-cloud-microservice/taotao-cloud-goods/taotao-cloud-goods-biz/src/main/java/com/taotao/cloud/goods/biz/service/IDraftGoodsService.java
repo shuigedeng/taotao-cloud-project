@@ -2,9 +2,9 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.dto.DraftGoodsSkuParamsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.DraftGoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 
 /**
@@ -23,7 +23,7 @@ public interface IDraftGoodsService extends IService<DraftGoods> {
 	 * @return {@link Boolean }
 	 * @since 2022-04-27 16:59:56
 	 */
-	Boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
+	Boolean addGoodsDraft(DraftGoodsDTO draftGoods);
 
 	/**
 	 * 更新草稿商品
@@ -32,7 +32,7 @@ public interface IDraftGoodsService extends IService<DraftGoods> {
 	 * @return {@link Boolean }
 	 * @since 2022-04-27 16:59:56
 	 */
-	Boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
+	Boolean updateGoodsDraft(DraftGoodsDTO draftGoods);
 
 	/**
 	 * 保存草稿商品
@@ -41,7 +41,7 @@ public interface IDraftGoodsService extends IService<DraftGoods> {
 	 * @return {@link Boolean }
 	 * @since 2022-04-27 16:59:56
 	 */
-	Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoodsVO);
+	Boolean saveGoodsDraft(DraftGoodsDTO draftGoodsVO);
 
 	/**
 	 * 根据ID删除草稿商品
@@ -56,10 +56,10 @@ public interface IDraftGoodsService extends IService<DraftGoods> {
 	 * 获取草稿商品详情
 	 *
 	 * @param id 草稿商品ID
-	 * @return {@link DraftGoodsSkuVO }
+	 * @return {@link DraftGoodsVO }
 	 * @since 2022-04-27 16:59:57
 	 */
-	DraftGoodsSkuVO getDraftGoods(Long id);
+	DraftGoodsVO getDraftGoods(Long id);
 
 	/**
 	 * 分页获取草稿商品

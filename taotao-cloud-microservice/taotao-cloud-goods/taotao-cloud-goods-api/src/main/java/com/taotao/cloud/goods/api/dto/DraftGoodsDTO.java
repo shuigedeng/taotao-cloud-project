@@ -1,31 +1,26 @@
 package com.taotao.cloud.goods.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品DTO
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-25 16:31:15
- */
+ **/
 @Setter
 @Getter
-@ToString(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DraftGoodsDTO extends DraftGoodsBaseDTO {
 
-	@Serial
 	private static final long serialVersionUID = 5255666163196674178L;
 
 	@Valid

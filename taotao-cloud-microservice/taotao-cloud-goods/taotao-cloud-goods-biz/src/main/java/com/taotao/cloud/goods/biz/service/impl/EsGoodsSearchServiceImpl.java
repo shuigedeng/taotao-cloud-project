@@ -8,9 +8,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
 import com.taotao.cloud.goods.api.dto.ParamOptions;
-import com.taotao.cloud.goods.api.dto.ParamOptionsBuilder;
 import com.taotao.cloud.goods.api.dto.SelectorOptions;
-import com.taotao.cloud.goods.api.dto.SelectorOptionsBuilder;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
@@ -126,11 +124,11 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		// redis 排序中，下标从0开始，所以这里需要 -1 处理 reverseRangeWithScores
 		count = count - 1;
 		Set<TypedTuple<Object>> set = redisRepository.zReverseRangeByScoreWithScores(
-			CachePrefix.HOT_WORD.getPrefix(), 0, count);
+			CachePrefix.HOT_WORD.getPrefix(),0, count);
 		if (set == null || set.isEmpty()) {
 			return new ArrayList<>();
 		}
-		for (ZSetOperations.TypedTuple<Object> defaultTypedTuple : set) {
+		for (TypedTuple<Object> defaultTypedTuple : set) {
 			hotWords.add(Objects.requireNonNull(defaultTypedTuple.getValue()).toString());
 		}
 		return hotWords;
@@ -138,8 +136,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 
 	@Override
 	public Boolean setHotWords(HotWordsDTO hotWords) {
-		redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), hotWords.keywords(),
-			Double.valueOf(hotWords.point()));
+		redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(),
+			Double.valueOf(hotWords.getPoint()));
 		return true;
 	}
 
@@ -294,13 +292,11 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 					continue;
 				}
 			}
-
-			brandOptions.add(
-				SelectorOptionsBuilder.builder()
-					.name(brandName)
-					.value(brandId)
-					.url(brandUrl)
-					.build());
+			SelectorOptions so = new SelectorOptions();
+			so.setName(brandName);
+			so.setValue(brandId);
+			so.setUrl(brandUrl);
+			brandOptions.add(so);
 		}
 		return brandOptions;
 	}
@@ -342,10 +338,9 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 			String[] nameSplit = categoryNamePath.split(",");
 			if (split.length == nameSplit.length) {
 				for (int i = 0; i < split.length; i++) {
-					SelectorOptions so = SelectorOptionsBuilder.builder()
-						.name(nameSplit[i])
-						.value(split[i])
-						.build();
+					SelectorOptions so = new SelectorOptions();
+					so.setName(nameSplit[i]);
+					so.setValue(split[i]);
 					if (!categoryOptions.contains(so)) {
 						categoryOptions.add(so);
 					}
@@ -390,19 +385,23 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 
 		for (Terms.Bucket bucket : nameBuckets) {
 			String name = bucket.getKey().toString();
+			ParamOptions paramOptions1 = new ParamOptions();
 			ParsedStringTerms valueAgg = bucket.getAggregations().get("valueAgg");
 			List<? extends Terms.Bucket> valueBuckets = valueAgg.getBuckets();
 			List<String> valueSelectorList = new ArrayList<>();
 
 			for (Terms.Bucket valueBucket : valueBuckets) {
 				String value = valueBucket.getKey().toString();
+
 				if (CharSequenceUtil.isNotEmpty(value)) {
 					valueSelectorList.add(value);
 				}
-			}
 
+			}
 			if (nameList == null || !nameList.contains(name)) {
-				paramOptions.add(ParamOptionsBuilder.builder().key(name).values(valueSelectorList).build());
+				paramOptions1.setKey(name);
+				paramOptions1.setValues(valueSelectorList);
+				paramOptions.add(paramOptions1);
 			}
 		}
 		return paramOptions;

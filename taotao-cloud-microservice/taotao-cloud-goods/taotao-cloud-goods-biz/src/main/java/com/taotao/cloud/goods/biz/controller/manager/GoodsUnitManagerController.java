@@ -47,7 +47,7 @@ public class GoodsUnitManagerController {
 	private final IGoodsUnitService goodsUnitService;
 
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
-	@RequestLogger
+	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<GoodsUnit>> getByPage(PageParam pageParam) {
@@ -56,7 +56,7 @@ public class GoodsUnitManagerController {
 	}
 
 	@Operation(summary = "获取商品计量单位", description = "获取商品计量单位")
-	@RequestLogger
+	@RequestLogger("获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
 	public Result<GoodsUnit> getById(@NotNull @PathVariable Long id) {
@@ -64,7 +64,7 @@ public class GoodsUnitManagerController {
 	}
 
 	@Operation(summary = "添加商品计量单位", description = "添加商品计量单位")
-	@RequestLogger
+	@RequestLogger("添加商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Valid @RequestBody GoodsUnit goodsUnit) {
@@ -72,17 +72,17 @@ public class GoodsUnitManagerController {
 	}
 
 	@Operation(summary = "编辑商品计量单位", description = "编辑商品计量单位")
-	@RequestLogger
+	@RequestLogger("编辑商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
 		@Valid @RequestBody GoodsUnit goodsUnit) {
-		goodsUnit.setId(id);
+		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
 
 	@Operation(summary = "删除商品计量单位", description = "删除商品计量单位")
-	@RequestLogger
+	@RequestLogger("删除商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{ids}")
 	public Result<Boolean> delete(@NotEmpty(message = "id不能为空") @PathVariable List<Long> ids) {

@@ -1,10 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,20 +9,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * 微信小程序直播商品DTO
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-25 16:31:24
  */
-@RecordBuilder
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsInfo implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
+public class GoodsInfo {
 
 	@Schema(description = "图片mediaID")
 	private String coverImgUrl;

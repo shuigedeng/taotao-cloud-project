@@ -36,7 +36,7 @@ public class CategoryParameterGroupStoreController {
 	private final ICategoryParameterGroupService categoryParameterGroupService;
 
 	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
-	@RequestLogger
+	@RequestLogger("查询某分类下绑定的参数信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<ParameterGroupVO>> getCategoryParam(

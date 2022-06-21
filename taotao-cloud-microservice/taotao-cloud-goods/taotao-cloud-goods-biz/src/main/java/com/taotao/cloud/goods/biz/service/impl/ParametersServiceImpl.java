@@ -8,9 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.api.dto.GoodsParamsDTOBuilder;
 import com.taotao.cloud.goods.api.dto.GoodsParamsItemDTO;
-import com.taotao.cloud.goods.api.dto.GoodsParamsItemDTOBuilder;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Parameters;
 import com.taotao.cloud.goods.biz.mapper.IParametersMapper;
@@ -27,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 商品参数业务层实现
@@ -67,11 +66,10 @@ public class ParametersServiceImpl extends ServiceImpl<IParametersMapper, Parame
 				String params = (String) goods.get("params");
 				List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params,
 					GoodsParamsDTO.class);
-				List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
-					.filter(i -> i.groupId() != null && i.groupId().equals(parameters.getGroupId()))
-					.toList();
-				goodsParamsDTOList = this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
-
+				List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream().filter(
+						i -> i.getGroupId() != null && i.getGroupId().equals(parameters.getGroupId()))
+					.collect(Collectors.toList());
+				this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
 				this.goodsService.updateGoodsParams(Convert.toLong(goods.get("id")),
 					JSONUtil.toJsonStr(goodsParamsDTOS));
 				goodsIds.add(goods.get("id").toString());
@@ -92,23 +90,17 @@ public class ParametersServiceImpl extends ServiceImpl<IParametersMapper, Parame
 	 * @param goodsParamsDTOList 商品参数项列表
 	 * @param parameters         参数信息
 	 */
-	private List<GoodsParamsDTO> setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList,
-													 Parameters parameters) {
-		List<GoodsParamsDTO> newGoodsParamsDTOList = new ArrayList<>();
-
+	private void setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList,
+									 Parameters parameters) {
 		for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
-			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.goodsParamsItemDTOList()
+			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList()
 				.stream()
-				.filter(i -> i.paramId() != null && i.paramId().equals(parameters.getId()))
-				.toList();
-
-			List<GoodsParamsItemDTO> newGoodsParamsItemDTOList = new ArrayList<>();
+				.filter(i -> i.getParamId() != null && i.getParamId().equals(parameters.getId()))
+				.collect(Collectors.toList());
 			for (GoodsParamsItemDTO goodsParamsItemDTO : goodsParamsItemDTOList) {
-				newGoodsParamsItemDTOList.add(this.setGoodsItemDTO(goodsParamsItemDTO, parameters));
+				this.setGoodsItemDTO(goodsParamsItemDTO, parameters);
 			}
-			newGoodsParamsDTOList.add(GoodsParamsDTOBuilder.builder(goodsParamsDTO).goodsParamsItemDTOList(newGoodsParamsItemDTOList).build());
 		}
-		return newGoodsParamsDTOList;
 	}
 
 	/**
@@ -117,26 +109,24 @@ public class ParametersServiceImpl extends ServiceImpl<IParametersMapper, Parame
 	 * @param goodsParamsItemDTO 商品参数项信息
 	 * @param parameters         参数信息
 	 */
-	private GoodsParamsItemDTO setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, Parameters parameters) {
-		if (goodsParamsItemDTO.paramId().equals(parameters.getId())) {
-
-			GoodsParamsItemDTOBuilder builder = GoodsParamsItemDTOBuilder.builder()
-				.paramId(parameters.getId())
-				.paramName(parameters.getParamName())
-				.required(parameters.getRequired())
-				.isIndex(parameters.getIsIndex())
-				.sort(parameters.getSort());
-
-			if (CharSequenceUtil.isNotEmpty(parameters.getOptions()) && CharSequenceUtil.isNotEmpty(goodsParamsItemDTO.paramValue()) && !parameters.getOptions().contains(goodsParamsItemDTO.paramValue())) {
+	private void setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, Parameters parameters) {
+		if (goodsParamsItemDTO.getParamId().equals(parameters.getId())) {
+			goodsParamsItemDTO.setParamId(parameters.getId());
+			goodsParamsItemDTO.setParamName(parameters.getParamName());
+			goodsParamsItemDTO.setRequired(parameters.getRequired());
+			goodsParamsItemDTO.setIsIndex(parameters.getIsIndex());
+			goodsParamsItemDTO.setSort(parameters.getSort());
+			if (CharSequenceUtil.isNotEmpty(parameters.getOptions()) && CharSequenceUtil.isNotEmpty(
+				goodsParamsItemDTO.getParamValue()) && !parameters.getOptions()
+				.contains(goodsParamsItemDTO.getParamValue())) {
 				if (parameters.getOptions().contains(",")) {
-					builder.paramValue(parameters.getOptions().substring(0, parameters.getOptions().indexOf(",")));
+					goodsParamsItemDTO.setParamValue(
+						parameters.getOptions().substring(0, parameters.getOptions().indexOf(",")));
 				} else {
-					builder.paramValue(parameters.getOptions());
+					goodsParamsItemDTO.setParamValue(parameters.getOptions());
 				}
 			}
-			goodsParamsItemDTO = builder.build();
 		}
-		return goodsParamsItemDTO;
 	}
 
 }

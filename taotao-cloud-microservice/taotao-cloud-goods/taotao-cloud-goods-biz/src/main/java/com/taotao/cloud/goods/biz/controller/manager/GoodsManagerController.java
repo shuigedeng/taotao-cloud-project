@@ -6,8 +6,9 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.IGoodsService;
@@ -52,37 +53,37 @@ public class GoodsManagerController {
 	private final IGoodsSkuService goodsSkuService;
 
 	@Operation(summary = "分页获取", description = "分页获取")
-	@RequestLogger
+	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<GoodsSkuParamsVO>> getByPage(
+	public Result<PageModel<GoodsBaseVO>> getByPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsSkuParamsVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
-	@RequestLogger
+	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<PageModel<GoodsSkuVO>> getSkuByPage(
+	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
 	}
 
 	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品")
-	@RequestLogger
+	@RequestLogger("分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
-	public Result<PageModel<GoodsSkuParamsVO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsBaseVO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
 		goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsSkuParamsVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
 	@Operation(summary = "管理员下架商品", description = "管理员下架商品")
-	@RequestLogger
+	@RequestLogger("管理员下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
 	public Result<Boolean> underGoods(@PathVariable Long goodsId,
@@ -93,7 +94,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "管理员审核商品", description = "管理员审核商品")
-	@RequestLogger
+	@RequestLogger("管理员审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
 	public Result<Boolean> auth(@PathVariable List<Long> goodsIds,
@@ -103,7 +104,7 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "管理员上架商品", description = "管理员上架商品")
-	@RequestLogger
+	@RequestLogger("管理员上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/up")
 	public Result<Boolean> unpGoods(@PathVariable List<Long> goodsId) {
@@ -112,10 +113,10 @@ public class GoodsManagerController {
 	}
 
 	@Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情")
-	@RequestLogger
+	@RequestLogger("通过id获取商品详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<GoodsSkuParamsVO> get(@PathVariable Long id) {
+	public Result<GoodsVO> get(@PathVariable Long id) {
 		return Result.success(goodsService.getGoodsVO(id));
 	}
 
