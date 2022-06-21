@@ -15,17 +15,14 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.func.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
-import com.taotao.cloud.goods.api.vo.GoodsBaseVOBuilder;
-import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.goods.api.vo.GoodsVOBuilder;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
@@ -40,7 +37,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.feign.IFeignFreightTemplateService;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.vo.FreightTemplateInfoVO;
+import com.taotao.cloud.store.api.vo.FreightTemplateVO;
 import com.taotao.cloud.store.api.vo.StoreVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -54,7 +51,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -158,20 +154,21 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		//检查商品
 		this.checkGoods(goods);
 		//向goods加入图片
-		this.setGoodsGalleryParam(goodsOperationDTO.goodsGalleryList().get(0), goods);
+		this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
 		//添加商品参数
-		if (goodsOperationDTO.goodsParamsDTOList() != null
-			&& !goodsOperationDTO.goodsParamsDTOList().isEmpty()) {
+		if (goodsOperationDTO.getGoodsParamsDTOList() != null
+			&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
 			//给商品参数填充值
-			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.goodsParamsDTOList()));
+			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
 		}
 		//添加商品
 		this.save(goods);
 		//添加商品sku信息
-		this.goodsSkuService.add(goodsOperationDTO.skuList(), goods);
+		this.goodsSkuService.add(goodsOperationDTO.getSkuList(), goods);
 		//添加相册
-		if (!goodsOperationDTO.goodsGalleryList().isEmpty()) {
-			this.goodsGalleryService.add(goodsOperationDTO.goodsGalleryList(), goods.getId());
+		if (goodsOperationDTO.getGoodsGalleryList() != null
+			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
+			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
 		}
 		return true;
 	}
@@ -186,20 +183,21 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		//检查商品信息
 		this.checkGoods(goods);
 		//向goods加入图片
-		this.setGoodsGalleryParam(goodsOperationDTO.goodsGalleryList().get(0), goods);
+		this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
 		//添加商品参数
-		if (goodsOperationDTO.goodsParamsDTOList() != null
-			&& !goodsOperationDTO.goodsParamsDTOList().isEmpty()) {
-			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.goodsParamsDTOList()));
+		if (goodsOperationDTO.getGoodsParamsDTOList() != null
+			&& !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
+			goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
 		}
 		//修改商品
 		this.updateById(goods);
 		//修改商品sku信息
-		this.goodsSkuService.update(goodsOperationDTO.skuList(), goods,
-			goodsOperationDTO.regeneratorSkuFlag());
+		this.goodsSkuService.update(goodsOperationDTO.getSkuList(), goods,
+			goodsOperationDTO.getRegeneratorSkuFlag());
 		//添加相册
-		if (!goodsOperationDTO.goodsGalleryList().isEmpty()) {
-			this.goodsGalleryService.add(goodsOperationDTO.goodsGalleryList(), goods.getId());
+		if (goodsOperationDTO.getGoodsGalleryList() != null
+			&& !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
+			this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
 		}
 		if (GoodsAuthEnum.TOBEAUDITED.name().equals(goods.getIsAuth())) {
 			this.deleteEsGoods(Collections.singletonList(goodsId));
@@ -209,11 +207,11 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	}
 
 	@Override
-	public GoodsSkuParamsVO getGoodsVO(Long goodsId) {
+	public GoodsVO getGoodsVO(Long goodsId) {
 		//缓存获取，如果没有则读取缓存
-		GoodsSkuParamsVO goodsSkuParamsVO = (GoodsSkuParamsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
-		if (goodsSkuParamsVO != null) {
-			return goodsSkuParamsVO;
+		GoodsVO goodsVO = (GoodsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
+		if (goodsVO != null) {
+			return goodsVO;
 		}
 
 		//查询商品信息
@@ -222,35 +220,34 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 			LogUtil.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
-
+		//赋值
+		goodsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsVO(goods);
+		//商品id
+		goodsVO.setId(goods.getId());
+		//商品相册
 		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-		List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
-
+		goodsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
+			.map(GoodsGallery::getOriginal).toList());
+		//商品sku赋值
+		List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
+		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
+			goodsVO.setSkuList(goodsListByGoodsId);
+		}
+		//商品分类名称赋值
 		String categoryPath = goods.getCategoryPath();
 		String[] strArray = categoryPath.split(",");
 		List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
+		goodsVO.setCategoryName(categories.stream().filter(Objects::nonNull)
+			.map(Category::getName).toList());
 
-		//赋值
-		GoodsSkuParamsVO goodsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsBaseVO(goods);
-		goodsSkuParamsVO = GoodsVOBuilder
-			.builder()
-			//商品id
-			.goodsBase(GoodsBaseVOBuilder.builder(goodsVO).id(goods.getId()).build())
-			//商品相册
-			.goodsGalleryList(galleryList.stream().filter(Objects::nonNull).map(GoodsGallery::getOriginal).toList())
-			//商品sku赋值
-			.skuList(FuncUtil.predicate(goodsListByGoodsId, t -> t != null && !t.isEmpty(), new ArrayList<>()))
-			//商品分类名称赋值
-			.categoryName(categories.stream().filter(Objects::nonNull).map(Category::getName).toList())
-			//商品参数
-			.goodsParamsDTOList(FuncUtil.predicate(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class),
-				() -> StrUtil.isNotEmpty(goods.getParams()), new ArrayList<>()))
-			.build();
+		//参数非空则填写参数
+		if (StrUtil.isNotEmpty(goods.getParams())) {
+			goodsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
+		}
 
-		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsVO);
-		return goodsSkuParamsVO;
+		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
+		return goodsVO;
 	}
-
 
 	@Override
 	public IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery) {
@@ -287,7 +284,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
-										 String underReason) {
+		String underReason) {
 		boolean result;
 
 		//如果商品为空，直接返回
@@ -318,7 +315,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds,
-												GoodsStatusEnum goodsStatusEnum, String underReason) {
+		GoodsStatusEnum goodsStatusEnum, String underReason) {
 		boolean result;
 
 		//如果商品为空，直接返回
@@ -375,7 +372,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	public Boolean freight(List<Long> goodsIds, Long templateId) {
 		SecurityUser authUser = this.checkStoreAuthority();
 
-		FreightTemplateInfoVO freightTemplate = freightTemplateService.getById(templateId).data();
+		FreightTemplateVO freightTemplate = freightTemplateService.getById(templateId).data();
 		if (freightTemplate == null) {
 			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
 		}
@@ -521,7 +518,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 			Boolean.TRUE.equals(goodsSetting.getGoodsCheck()) ? GoodsAuthEnum.TOBEAUDITED.name()
 				: GoodsAuthEnum.PASS.name());
 		//判断当前用户是否为店铺
-		if (SecurityUtil.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
+		if (SecurityUtil.getUser().getType().equals(UserEnum.STORE.getCode())) {
 			StoreVO storeDetail = storeService.getStoreDetail().data();
 			if (storeDetail.getSelfOperated() != null) {
 				goods.setSelfOperated(storeDetail.getSelfOperated());
@@ -571,7 +568,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkStoreAuthority() {
-		SecurityUser currentUser = SecurityUtil.getCurrentUser();
+		SecurityUser currentUser = SecurityUtil.getUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.STORE.getCode())
 			&& currentUser.getStoreId() != null)) {
@@ -586,7 +583,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkManagerAuthority() {
-		SecurityUser currentUser = SecurityUtil.getCurrentUser();
+		SecurityUser currentUser = SecurityUtil.getUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.MANAGER.getCode()))) {
 			return currentUser;

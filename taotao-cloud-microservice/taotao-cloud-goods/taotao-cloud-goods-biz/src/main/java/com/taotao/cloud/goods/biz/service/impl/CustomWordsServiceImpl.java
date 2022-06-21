@@ -9,7 +9,6 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.goods.api.vo.CustomWordsVO;
-import com.taotao.cloud.goods.api.vo.CustomWordsVOBuilder;
 import com.taotao.cloud.goods.biz.entity.CustomWords;
 import com.taotao.cloud.goods.biz.mapper.ICustomWordsMapper;
 import com.taotao.cloud.goods.biz.mapstruct.ICustomWordsMapStruct;
@@ -66,16 +65,14 @@ public class CustomWordsServiceImpl extends ServiceImpl<ICustomWordsMapper, Cust
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addCustomWords(CustomWordsVO customWordsVO) {
 		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().eq(
-			CustomWords::getName, customWordsVO.name());
+			CustomWords::getName, customWordsVO.getName());
 		CustomWords one = this.getOne(queryWrapper, false);
-
 		if (one != null && one.getDisabled().equals(1)) {
 			throw new BusinessException(ResultEnum.CUSTOM_WORDS_EXIST_ERROR);
 		} else if (one != null && !one.getDisabled().equals(1)) {
 			this.remove(queryWrapper);
 		}
-
-		customWordsVO = CustomWordsVOBuilder.builder(customWordsVO).disabled(1).build();
+		customWordsVO.setDisabled(1);
 		return this.save(ICustomWordsMapStruct.INSTANCE.customWordsVOToCustomWords(customWordsVO));
 	}
 
@@ -90,7 +87,7 @@ public class CustomWordsServiceImpl extends ServiceImpl<ICustomWordsMapper, Cust
 
 	@Override
 	public Boolean updateCustomWords(CustomWordsVO customWordsVO) {
-		if (this.getById(customWordsVO.id()) == null) {
+		if (this.getById(customWordsVO.getId()) == null) {
 			throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
 		}
 

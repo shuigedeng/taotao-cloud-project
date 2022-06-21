@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 
@@ -114,10 +114,10 @@ public interface IGoodsSkuService extends IService<GoodsSku> {
 	 * 获取goodsId下所有的goodsSku
 	 *
 	 * @param goodsId 商品id
-	 * @return {@link List }<{@link GoodsSkuSpecGalleryVO }>
+	 * @return {@link List }<{@link GoodsSkuVO }>
 	 * @since 2022-04-27 17:00:44
 	 */
-	List<GoodsSkuSpecGalleryVO> getGoodsListByGoodsId(Long goodsId);
+	List<GoodsSkuVO> getGoodsListByGoodsId(Long goodsId);
 
 	/**
 	 * 获取goodsId下所有的goodsSku
@@ -132,19 +132,19 @@ public interface IGoodsSkuService extends IService<GoodsSku> {
 	 * 根据goodsSku组装goodsSkuVO
 	 *
 	 * @param list 商品id
-	 * @return {@link List }<{@link GoodsSkuSpecGalleryVO }>
+	 * @return {@link List }<{@link GoodsSkuVO }>
 	 * @since 2022-04-27 17:00:44
 	 */
-	List<GoodsSkuSpecGalleryVO> getGoodsSkuVOList(List<GoodsSku> list);
+	List<GoodsSkuVO> getGoodsSkuVOList(List<GoodsSku> list);
 
 	/**
 	 * 根据goodsSku组装goodsSkuVO
 	 *
 	 * @param goodsSku 商品规格
-	 * @return {@link GoodsSkuSpecGalleryVO }
+	 * @return {@link GoodsSkuVO }
 	 * @since 2022-04-27 17:00:44
 	 */
-	GoodsSkuSpecGalleryVO getGoodsSkuVO(GoodsSku goodsSku);
+	GoodsSkuVO getGoodsSkuVO(GoodsSku goodsSku);
 
 	/**
 	 * 分页查询商品sku信息

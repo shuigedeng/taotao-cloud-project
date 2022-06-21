@@ -48,7 +48,7 @@ public class SpecificationManagerController {
 	private final ISpecificationService specificationService;
 
 	@Operation(summary = "获取所有可用规格", description = "获取所有可用规格")
-	@RequestLogger
+	@RequestLogger("获取所有可用规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
 	public Result<List<SpecificationVO>> getAll() {
@@ -58,17 +58,18 @@ public class SpecificationManagerController {
 	}
 
 	@Operation(summary = "搜索规格", description = "搜索规格")
-	@RequestLogger
+	@RequestLogger("搜索规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<PageModel<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
 		IPage<Specification> specificationPage = specificationService.getPage(
 			specificationPageQuery);
-		return Result.success(PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
+		return Result.success(
+			PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
 	@Operation(summary = "保存规格", description = "保存规格")
-	@RequestLogger
+	@RequestLogger("保存规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Valid @RequestBody SpecificationDTO specificationDTO) {
@@ -78,18 +79,20 @@ public class SpecificationManagerController {
 	}
 
 	@Operation(summary = "更改规格", description = "更改规格")
-	@RequestLogger
+	@RequestLogger("更改规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
-								  @PathVariable Long id) {
-		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(specificationDTO);
+		@PathVariable Long id) {
+		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(
+			specificationDTO);
 		specification.setId(id);
+
 		return Result.success(specificationService.saveOrUpdate(specification));
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除")
-	@RequestLogger
+	@RequestLogger("批量删除")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{ids}")
 	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {

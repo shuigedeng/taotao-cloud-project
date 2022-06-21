@@ -11,7 +11,6 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
@@ -21,16 +20,19 @@ import com.taotao.cloud.goods.biz.service.ICategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 商品分类业务层实现
@@ -81,9 +83,9 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	}
 
 	@Override
-	public List<CategoryTreeVO> categoryTree() {
+	public List<CategoryVO> categoryTree() {
 		// 获取缓存数据
-		List<CategoryTreeVO> categoryVOList = (List<CategoryTreeVO>) redisRepository.get(
+		List<CategoryVO> categoryVOList = (List<CategoryVO>) redisRepository.get(
 			CachePrefix.CATEGORY.getPrefix());
 		if (categoryVOList != null) {
 			return categoryVOList;
@@ -98,8 +100,7 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 		categoryVOList = new ArrayList<>();
 		for (Category category : list) {
 			if (Long.valueOf(0).equals(category.getParentId())) {
-				CategoryTreeVO categoryVO = ICategoryMapStruct.INSTANCE.categoryToCategoryTreeVO(
-					category);
+				CategoryVO categoryVO = ICategoryMapStruct.INSTANCE.categoryToCategoryVO(category);
 				categoryVO.setChildren(findChildren(list, categoryVO));
 				categoryVOList.add(categoryVO);
 			}
@@ -115,10 +116,10 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	}
 
 	@Override
-	public List<CategoryTreeVO> getStoreCategory(List<Long> categories) {
+	public List<CategoryVO> getStoreCategory(String[] categories) {
+		List<String> arr = Arrays.asList(categories.clone());
 		return categoryTree().stream()
-			.filter(item -> categories.contains(item.getId()))
-			.toList();
+			.filter(item -> arr.contains(item.getId())).collect(Collectors.toList());
 	}
 
 	@Override
@@ -129,14 +130,14 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	}
 
 	@Override
-	public List<CategoryTreeVO> listAllChildren(Long parentId) {
+	public List<CategoryVO> listAllChildren(Long parentId) {
 		if (Long.valueOf(0).equals(parentId)) {
 			return categoryTree();
 		}
 
 		//循环代码，找到对象，把他的子分类返回
-		List<CategoryTreeVO> topCatList = categoryTree();
-		for (CategoryTreeVO item : topCatList) {
+		List<CategoryVO> topCatList = categoryTree();
+		for (CategoryVO item : topCatList) {
 			if (item.getId().equals(parentId)) {
 				return item.getChildren();
 			} else {
@@ -147,19 +148,19 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	}
 
 	@Override
-	public List<CategoryTreeVO> listAllChildren() {
+	public List<CategoryVO> listAllChildren() {
 
 		//获取全部分类
 		List<Category> list = this.list();
 
 		//构造分类树
-		List<CategoryTreeVO> categoryVOList = new ArrayList<>();
+		List<CategoryVO> categoryVOList = new ArrayList<>();
 		for (Category category : list) {
 			if (Long.valueOf(0).equals(category.getParentId())) {
-				CategoryTreeVO categoryTreeVO = ICategoryMapStruct.INSTANCE.categoryToCategoryTreeVO(
-					category);
-				categoryTreeVO.setChildren(findChildren(list, categoryTreeVO));
-				categoryVOList.add(categoryTreeVO);
+				//CategoryVO categoryVO = new CategoryVO(category);
+				CategoryVO categoryVO = new CategoryVO();
+				categoryVO.setChildren(findChildren(list, categoryVO));
+				categoryVOList.add(categoryVO);
 			}
 		}
 		categoryVOList.sort(Comparator.comparing(CategoryVO::getSortOrder));
@@ -274,12 +275,14 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	public Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations) {
 		//禁用子分类
 		Category category = this.getById(categoryId);
-		CategoryTreeVO categoryTreeVO = BeanUtil.copy(category, CategoryTreeVO.class);
+		CategoryVO categoryVO = BeanUtil.copy(category, CategoryVO.class);
 		List<Long> ids = new ArrayList<>();
 
-		ids.add(categoryTreeVO.getId());
-		this.findAllChild(categoryTreeVO);
-		this.findAllChildIds(categoryTreeVO, ids);
+		assert categoryVO != null;
+
+		ids.add(categoryVO.getId());
+		this.findAllChild(categoryVO);
+		this.findAllChildIds(categoryVO, ids);
 		LambdaUpdateWrapper<Category> updateWrapper = new LambdaUpdateWrapper<>();
 		updateWrapper.in(Category::getId, ids);
 		updateWrapper.set(Category::getDelFlag, enableOperations);
@@ -292,17 +295,15 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	/**
 	 * 递归树形VO
 	 *
-	 * @param categories     分类列表
-	 * @param categoryTreeVO 分类VO
+	 * @param categories 分类列表
+	 * @param categoryVO 分类VO
 	 * @return 分类VO列表
 	 */
-	private List<CategoryTreeVO> findChildren(List<Category> categories,
-		CategoryTreeVO categoryTreeVO) {
-		List<CategoryTreeVO> children = new ArrayList<>();
-
+	private List<CategoryVO> findChildren(List<Category> categories, CategoryVO categoryVO) {
+		List<CategoryVO> children = new ArrayList<>();
 		categories.forEach(item -> {
-			if (item.getParentId().equals(categoryTreeVO.getId())) {
-				CategoryTreeVO temp = ICategoryMapStruct.INSTANCE.categoryToCategoryTreeVO(item);
+			if (item.getParentId().equals(categoryVO.getId())) {
+				CategoryVO temp = ICategoryMapStruct.INSTANCE.categoryToCategoryVO(item);
 				temp.setChildren(findChildren(categories, temp));
 				children.add(temp);
 			}
@@ -314,17 +315,17 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	/**
 	 * 条件查询分类
 	 *
-	 * @param categoryTreeVO 分类VO
+	 * @param category 分类VO
 	 */
-	private void findAllChild(CategoryTreeVO categoryTreeVO) {
+	private void findAllChild(CategoryVO category) {
 		LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(Category::getParentId, categoryTreeVO.getId());
+		queryWrapper.eq(Category::getParentId, category.getId());
 		List<Category> categories = this.list(queryWrapper);
-
-		List<CategoryTreeVO> categoryVOList = ICategoryMapStruct.INSTANCE.categorysToCategoryTreeVO(
-			categories);
-
-		categoryTreeVO.setChildren(categoryVOList);
+		List<CategoryVO> categoryVOList = new ArrayList<>();
+		for (Category category1 : categories) {
+			categoryVOList.add(BeanUtil.copy(category1, CategoryVO.class));
+		}
+		category.setChildren(categoryVOList);
 		if (!categoryVOList.isEmpty()) {
 			categoryVOList.forEach(this::findAllChild);
 		}
@@ -336,9 +337,9 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	 * @param category 分类
 	 * @param ids      ID列表
 	 */
-	private void findAllChildIds(CategoryTreeVO category, List<Long> ids) {
+	private void findAllChildIds(CategoryVO category, List<Long> ids) {
 		if (category.getChildren() != null && !category.getChildren().isEmpty()) {
-			for (CategoryTreeVO child : category.getChildren()) {
+			for (CategoryVO child : category.getChildren()) {
 				ids.add(child.getId());
 				this.findAllChildIds(child, ids);
 			}
@@ -352,8 +353,8 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	 * @param categoryVOList 分类VO
 	 * @return 子分类列表VO
 	 */
-	private List<CategoryTreeVO> getChildren(Long parentId, List<CategoryTreeVO> categoryVOList) {
-		for (CategoryTreeVO item : categoryVOList) {
+	private List<CategoryVO> getChildren(Long parentId, List<CategoryVO> categoryVOList) {
+		for (CategoryVO item : categoryVOList) {
 			if (item.getId().equals(parentId)) {
 				return item.getChildren();
 			}

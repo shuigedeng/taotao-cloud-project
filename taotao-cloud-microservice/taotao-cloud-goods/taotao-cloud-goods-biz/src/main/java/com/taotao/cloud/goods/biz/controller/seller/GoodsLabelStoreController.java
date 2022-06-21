@@ -46,7 +46,7 @@ public class GoodsLabelStoreController {
 	private final IStoreGoodsLabelService storeGoodsLabelService;
 
 	@Operation(summary = "获取当前店铺商品分类列表", description = "获取当前店铺商品分类列表")
-	@RequestLogger
+	@RequestLogger("获取当前店铺商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<List<StoreGoodsLabelVO>> list() {
@@ -55,7 +55,7 @@ public class GoodsLabelStoreController {
 	}
 
 	@Operation(summary = "获取店铺商品分类详情", description = "获取店铺商品分类详情")
-	@RequestLogger
+	@RequestLogger("获取店铺商品分类详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/{id}")
 	public Result<StoreGoodsLabelInfoVO> getStoreGoodsLabel(@PathVariable Long id) {
@@ -67,7 +67,7 @@ public class GoodsLabelStoreController {
 	}
 
 	@Operation(summary = "添加店铺商品分类", description = "添加店铺商品分类")
-	@RequestLogger
+	@RequestLogger("添加店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> add(@Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
@@ -77,7 +77,7 @@ public class GoodsLabelStoreController {
 	}
 
 	@Operation(summary = "修改店铺商品分类", description = "修改店铺商品分类")
-	@RequestLogger
+	@RequestLogger("修改店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> edit(@PathVariable Long id, @Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
@@ -88,7 +88,7 @@ public class GoodsLabelStoreController {
 	}
 
 	@Operation(summary = "删除店铺商品分类", description = "删除店铺商品分类")
-	@RequestLogger
+	@RequestLogger("删除店铺商品分类")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping("/{id}")
 	public Result<Boolean> delete(@PathVariable Long id) {

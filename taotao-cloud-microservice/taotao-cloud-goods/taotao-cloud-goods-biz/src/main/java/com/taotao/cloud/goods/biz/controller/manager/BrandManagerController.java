@@ -4,7 +4,6 @@ package com.taotao.cloud.goods.biz.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.ValidationGroups;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.api.vo.BrandVO;
@@ -13,12 +12,7 @@ import com.taotao.cloud.goods.biz.mapstruct.IBrandMapStruct;
 import com.taotao.cloud.goods.biz.service.IBrandService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,7 +23,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * 管理端,品牌接口
@@ -88,28 +86,25 @@ public class BrandManagerController {
 	@Operation(summary = "更新品牌", description = "更新品牌")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping
-	public Result<Boolean> update(
-		@Validated(value = ValidationGroups.Update.class) BrandDTO brandDTO) {
-		return Result.success(brandService.updateBrand(brandDTO));
+	@PutMapping("/{id}")
+	public Result<Boolean> update(@PathVariable Long id, @Validated BrandDTO brand) {
+		brand.setId(id);
+		return Result.success(brandService.updateBrand(brand));
 	}
 
 	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping(value = "/{brandId}/{disable}")
-	public Result<Boolean> disable(
-		@Parameter(description = "品牌id") @NotNull(message = "品牌id不能为空") @PathVariable Long brandId,
-		@Parameter(description = "disable字段") @NotNull(message = "disable字段不能为空") @PathVariable Boolean disable) {
-		return Result.success(brandService.brandDisable(brandId, disable));
+	@PutMapping(value = "/disable/{brandId}")
+	public Result<Boolean> disable(@PathVariable Long brandId, @RequestParam Boolean disable) {
+			return Result.success(brandService.brandDisable(brandId, disable));
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{ids}")
-	public Result<Boolean> delAllByIds(
-		@Parameter(description = "品牌id列表") @NotEmpty(message = "品牌id不能为空") @PathVariable List<Long> ids) {
+	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
 		return Result.success(brandService.deleteBrands(ids));
 	}
 

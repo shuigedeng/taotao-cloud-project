@@ -1,7 +1,6 @@
 package com.taotao.cloud.goods.api.dto;
 
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -22,12 +21,7 @@ import org.hibernate.validator.constraints.Length;
 
 /**
  * 商品编辑DTO
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-25 16:31:26
  */
-@RecordBuilder
 @Data
 @Builder
 @AllArgsConstructor

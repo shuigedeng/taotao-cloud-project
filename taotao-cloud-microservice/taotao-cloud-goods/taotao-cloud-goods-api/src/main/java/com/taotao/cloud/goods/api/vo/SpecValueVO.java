@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.api.vo;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,11 +11,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 规格值
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-20 16:59:38
  */
-@RecordBuilder
 @Data
 @Builder
 @AllArgsConstructor
@@ -41,7 +36,6 @@ public class SpecValueVO implements Serializable {
 	@Data
 	public static class SpecImages implements Serializable {
 
-		@Serial
 		private static final long serialVersionUID = 1816357809660916086L;
 
 		private String url;

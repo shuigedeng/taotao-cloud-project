@@ -9,9 +9,10 @@ import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
-import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.api.vo.StockWarningVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
@@ -19,7 +20,7 @@ import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
-import com.taotao.cloud.store.api.vo.StoreDetailInfoVO;
+import com.taotao.cloud.store.api.vo.StoreDetailVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -66,37 +67,37 @@ public class GoodsStoreController {
 	private final IFeignStoreDetailService storeDetailService;
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
-	@RequestLogger
+	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<GoodsSkuParamsVO>> getByPage(GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsBaseVO>> getByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsSkuParamsVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
 	}
 
 	@Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
-	@RequestLogger
+	@RequestLogger("分页获取商品Sku列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<PageModel<GoodsSkuVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
 	}
 
 	@Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
-	@RequestLogger
+	@RequestLogger("分页获取库存告警商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/stock/warning")
 	public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
-		StoreDetailInfoVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
+		StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
 		//库存预警数量
 		Integer stockWarnNum = storeDetail.getStockWarning();
 		goodsPageQuery.setStoreId(storeId);
@@ -105,20 +106,20 @@ public class GoodsStoreController {
 		//商品SKU列表
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
 		StockWarningVO stockWarning = new StockWarningVO(stockWarnNum,
-			PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+			PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
 		return Result.success(stockWarning);
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger
+	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
-	public Result<GoodsSkuParamsVO> get(@PathVariable Long goodsId) {
+	public Result<GoodsVO> get(@PathVariable Long goodsId) {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
 	@Operation(summary = "新增商品", description = "新增商品")
-	@RequestLogger
+	@RequestLogger("新增商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(
@@ -127,16 +128,16 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "修改商品", description = "修改商品")
-	@RequestLogger
+	@RequestLogger("修改商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}")
 	public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO,
-								  @PathVariable Long goodsId) {
+		@PathVariable Long goodsId) {
 		return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
 	}
 
 	@Operation(summary = "下架商品", description = "下架商品")
-	@RequestLogger
+	@RequestLogger("下架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/under")
 	public Result<Boolean> underGoods(@RequestParam List<Long> goodsId) {
@@ -145,7 +146,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "上架商品", description = "上架商品")
-	@RequestLogger
+	@RequestLogger("上架商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/up")
 	public Result<Boolean> unpGoods(@RequestParam List<Long> goodsId) {
@@ -154,7 +155,7 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "删除商品", description = "删除商品")
-	@RequestLogger
+	@RequestLogger("删除商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping
 	public Result<Boolean> deleteGoods(@RequestParam List<Long> goodsId) {
@@ -162,19 +163,19 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "设置商品运费模板", description = "设置商品运费模板")
-	@RequestLogger
+	@RequestLogger("设置商品运费模板")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/freight")
 	public Result<Boolean> freight(@RequestParam List<Long> goodsId,
-								   @RequestParam Long templateId) {
+		@RequestParam Long templateId) {
 		return Result.success(goodsService.freight(goodsId, templateId));
 	}
 
 	@Operation(summary = "根据goodsId分页获取商品规格列表", description = "根据goodsId分页获取商品规格列表")
-	@RequestLogger
+	@RequestLogger("根据goodsId分页获取商品规格列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
-	public Result<List<GoodsSkuSpecGalleryVO>> getSkuByList(@PathVariable Long goodsId) {
+	public Result<List<GoodsSkuVO>> getSkuByList(@PathVariable Long goodsId) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		return Result.success(goodsSkuService.getGoodsSkuVOList(goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId)
@@ -182,13 +183,14 @@ public class GoodsStoreController {
 	}
 
 	@Operation(summary = "修改商品库存", description = "修改商品库存")
-	@RequestLogger
+	@RequestLogger("修改商品库存")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/stocks")
 	public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		// 获取商品skuId集合
-		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::skuId).toList();
+		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::getSkuId)
+			.collect(Collectors.toList());
 		// 根据skuId集合查询商品信息
 		List<GoodsSku> goodsSkuList = goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().in(GoodsSku::getId, goodsSkuIds)
@@ -196,7 +198,7 @@ public class GoodsStoreController {
 		// 过滤不符合当前店铺的商品
 		List<Long> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId).toList();
 		List<GoodsSkuStockDTO> collect = updateStockList.stream()
-			.filter(i -> filterGoodsSkuIds.contains(i.skuId())).collect(Collectors.toList());
+			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).collect(Collectors.toList());
 		return Result.success(goodsSkuService.updateStocks(collect));
 	}
 

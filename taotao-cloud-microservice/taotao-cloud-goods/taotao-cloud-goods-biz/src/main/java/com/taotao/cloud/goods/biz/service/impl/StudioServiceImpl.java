@@ -10,21 +10,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
-import com.taotao.cloud.goods.api.vo.CommoditySkuVO;
+import com.taotao.cloud.goods.api.vo.CommodityBaseVO;
 import com.taotao.cloud.goods.api.vo.StudioVO;
-import com.taotao.cloud.goods.api.vo.StudioCommodityVO;
-import com.taotao.cloud.goods.api.vo.StudioVOBuilder;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Studio;
 import com.taotao.cloud.goods.biz.entity.StudioCommodity;
 import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
 import com.taotao.cloud.goods.biz.mapper.IStudioMapper;
-import com.taotao.cloud.goods.biz.mapstruct.IStudioMapStruct;
 import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.goods.biz.service.IStudioCommodityService;
 import com.taotao.cloud.goods.biz.service.IStudioService;
@@ -70,7 +68,7 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
+		studio.setStoreId(SecurityUtil.getUser().getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));
@@ -143,17 +141,15 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 	}
 
 	@Override
-	public StudioCommodityVO getStudioVO(Long id) {
-		//获取直播间信息
+	public StudioVO getStudioVO(Long id) {
+		StudioVO studioVO = new StudioVO();
 		Studio studio = this.getById(id);
-		StudioVO studioVO = IStudioMapStruct.INSTANCE.studioToStudioBaseVO(studio);
+		//获取直播间信息
+		BeanUtil.copyProperties(studio, studioVO);
 		//获取直播间商品信息
-		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioVO.roomId());
-
-		return StudioVOBuilder.builder()
-			.studioBase(studioVO)
-			.commodityList(OrikaUtil.converts(commodities, CommoditySkuVO.class))
-			.build();
+		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioVO.getRoomId());
+		studioVO.setCommodityList(OrikaUtil.converts(commodities, CommodityBaseVO.class));
+		return studioVO;
 	}
 
 	@Override

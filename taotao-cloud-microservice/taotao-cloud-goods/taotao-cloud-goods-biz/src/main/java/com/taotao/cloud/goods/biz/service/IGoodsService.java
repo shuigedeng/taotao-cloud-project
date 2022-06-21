@@ -6,7 +6,7 @@ import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 
 import java.util.List;
@@ -80,10 +80,10 @@ public interface IGoodsService extends IService<Goods> {
 	 * 查询商品VO
 	 *
 	 * @param goodsId 商品id
-	 * @return {@link GoodsSkuParamsVO }
+	 * @return {@link GoodsVO }
 	 * @since 2022-04-27 17:00:16
 	 */
-	GoodsSkuParamsVO getGoodsVO(Long goodsId);
+	GoodsVO getGoodsVO(Long goodsId);
 
 	/**
 	 * 商品查询

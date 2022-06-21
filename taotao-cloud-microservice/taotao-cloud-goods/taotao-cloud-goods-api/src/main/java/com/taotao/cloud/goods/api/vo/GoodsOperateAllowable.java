@@ -1,8 +1,6 @@
 package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -12,19 +10,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * 商品操作允许的范围
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-25 16:34:05
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsOperateAllowable implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 3829199991161122317L;
 
 	/**
 	 * 上下架状态
@@ -59,6 +50,12 @@ public class GoodsOperateAllowable implements Serializable {
 	 */
 	private Boolean allowUpper;
 
+	/**
+	 * 构造函数
+	 *
+	 * @param marketEnable
+	 * @param deleteFlag
+	 */
 	public GoodsOperateAllowable(String marketEnable, Boolean deleteFlag) {
 		this.marketEnable = marketEnable;
 		this.deleteFlag = deleteFlag;

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.biz.entity.Brand;
+
 import java.util.List;
 
 /**

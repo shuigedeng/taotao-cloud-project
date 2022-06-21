@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.query.BrandPageQuery;
 import com.taotao.cloud.goods.biz.entity.Brand;
@@ -19,13 +21,12 @@ import com.taotao.cloud.goods.biz.service.IBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.goods.biz.service.IGoodsService;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.swing.text.html.Option;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -55,63 +56,67 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	@Override
 	public IPage<Brand> getBrandsByPage(BrandPageQuery page) {
 		LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.like(StringUtil.isNotBlank(page.getName()), Brand::getName, page.getName());
+		if (StringUtil.isNotBlank(page.getName())) {
+			queryWrapper.like(Brand::getName, page.getName());
+		}
+
 		return this.page(page.buildMpPage(), queryWrapper);
 	}
 
 	@Override
 	public List<Brand> getBrandsByCategory(Long categoryId) {
-		LambdaQueryWrapper<CategoryBrand> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(CategoryBrand::getCategoryId, categoryId);
-		List<CategoryBrand> categoryBrands = categoryBrandService.list(queryWrapper);
-
-		if (categoryBrands != null && !categoryBrands.isEmpty()) {
-			List<Long> collect = categoryBrands.stream().map(CategoryBrand::getBrandId).toList();
+		QueryWrapper<CategoryBrand> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("category_id", categoryId);
+		List<CategoryBrand> list = categoryBrandService.list(queryWrapper);
+		if (list != null && !list.isEmpty()) {
+			List<Long> collect = list.stream().map(CategoryBrand::getBrandId).toList();
 			return this.list(new LambdaQueryWrapper<Brand>().in(Brand::getId, collect));
 		}
-
 		return new ArrayList<>();
 	}
 
 	@Override
 	public Boolean addBrand(BrandDTO brandDTO) {
-		this.checkNameRepeat(null, brandDTO.name());
-
+		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName()))
+			!= null) {
+			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
+		}
 		return this.save(IBrandMapStruct.INSTANCE.brandDTOToBrand(brandDTO));
 	}
 
 	@Override
 	public Boolean updateBrand(BrandDTO brandDTO) {
-		this.checkExist(brandDTO.id());
-		Brand brand = this.checkNameRepeat(brandDTO.id(), brandDTO.name());
-		IBrandMapStruct.INSTANCE.copyBrandDTOToBrand(brandDTO, brand);
-		return this.updateById(brand);
+		this.checkExist(brandDTO.getId());
+
+		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName())
+			.ne(Brand::getId, brandDTO.getId())) != null) {
+			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
+		}
+
+		return this.updateById(BeanUtil.copy(brandDTO, Brand.class));
 	}
 
 	@Override
 	public Boolean brandDisable(Long brandId, boolean disable) {
 		Brand brand = this.checkExist(brandId);
-
-		//禁用，判定绑定关系
-		if (disable) {
-			checkBind(List.of(brandId));
+		//如果是要禁用，则需要先判定绑定关系
+		if (Boolean.TRUE.equals(disable)) {
+			List<Long> ids = new ArrayList<>();
+			ids.add(brandId);
+			checkBind(ids);
 		}
-
 		brand.setDelFlag(disable);
 		return updateById(brand);
 	}
 
 	@Override
 	public List<Brand> getAllAvailable() {
-		LambdaQueryWrapper<Brand> eq = new LambdaQueryWrapper<>();
-		eq.eq(Brand::getDelFlag, false);
-		return this.list(eq);
+		return this.list(new LambdaQueryWrapper<Brand>().eq(Brand::getDelFlag, 0));
 	}
 
 	@Override
 	public Boolean deleteBrands(List<Long> ids) {
 		checkBind(ids);
-
 		return this.removeByIds(ids);
 	}
 
@@ -121,27 +126,24 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	 * @param brandIds 品牌Ids
 	 */
 	private void checkBind(List<Long> brandIds) {
-		//绑定分类品牌关系查询
+		//分了绑定关系查询
 		List<CategoryBrand> categoryBrands = categoryBrandService.getCategoryBrandListByBrandId(
 			brandIds);
 
 		if (!categoryBrands.isEmpty()) {
-			List<Long> categoryIds = categoryBrands.stream()
-				.map(CategoryBrand::getCategoryId)
+			List<Long> categoryIds = categoryBrands.stream().map(CategoryBrand::getCategoryId)
 				.toList();
 			throw new BusinessException(ResultEnum.BRAND_USE_DISABLE_ERROR.getCode(),
-				ResultEnum.BRAND_USE_DISABLE_ERROR.getDesc() + ":" + JSONUtil.toJsonStr(
-					categoryService.getCategoryNameByIds(categoryIds)));
+				JSONUtil.toJsonStr(categoryService.getCategoryNameByIds(categoryIds)));
 		}
 
-		//商品绑定关系查询
+		//分了商品绑定关系查询
 		List<Goods> goods = goodsService.getByBrandIds(brandIds);
 		if (!goods.isEmpty()) {
-			List<String> goodsNames = goods.stream()
-				.map(Goods::getGoodsName)
-				.toList();
+			List<String> goodsNames = goods.stream().map(Goods::getGoodsName)
+				.collect(Collectors.toList());
 			throw new BusinessException(ResultEnum.BRAND_BIND_GOODS_ERROR.getCode(),
-				ResultEnum.BRAND_BIND_GOODS_ERROR.getDesc() + ":" + JSONUtil.toJsonStr(goodsNames));
+				JSONUtil.toJsonStr(goodsNames));
 		}
 	}
 
@@ -149,29 +151,15 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	 * 校验是否存在
 	 *
 	 * @param brandId 品牌ID
+	 * @return 品牌
 	 */
 	private Brand checkExist(Long brandId) {
 		Brand brand = getById(brandId);
 		if (brand == null) {
+			LogUtil.error("品牌ID为" + brandId + "的品牌不存在");
 			throw new BusinessException(ResultEnum.BRAND_NOT_EXIST);
 		}
 		return brand;
 	}
 
-	/**
-	 * 校验名称重复
-	 *
-	 * @param name 品牌名称
-	 */
-	private Brand checkNameRepeat(Long brandId, String name) {
-		LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(Brand::getName, name);
-		wrapper.ne(Objects.nonNull(brandId), Brand::getId, brandId);
-
-		Brand brand = getOne(wrapper);
-		if (brand != null) {
-			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
-		}
-		return brand;
-	}
 }

@@ -1,8 +1,10 @@
-package com.taotao.cloud.goods.api.dto;
+package com.taotao.cloud.goods.api.vo;
 
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +13,22 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 草稿商品
+ * 草稿商品基础VO
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-14 22:10:24
  */
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DraftGoodsBaseDTO {
+public class DraftGoodsBaseVO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1450550797436233753L;
+
+	private Long id;
 
 	/**
 	 * 商品名称
@@ -184,4 +195,5 @@ public class DraftGoodsBaseDTO {
 	 * @see GoodsTypeEnum
 	 */
 	private String goodsType;
+
 }
