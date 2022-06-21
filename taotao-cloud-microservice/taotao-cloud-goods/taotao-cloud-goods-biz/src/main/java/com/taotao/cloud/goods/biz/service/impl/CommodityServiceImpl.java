@@ -17,7 +17,7 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.dto.CommodityDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
-import com.taotao.cloud.goods.api.vo.CommodityVO;
+import com.taotao.cloud.goods.api.vo.CommodityGoodsVO;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
@@ -124,11 +124,10 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 	}
 
 	@Override
-	public IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus) {
+	public IPage<CommodityGoodsVO> commodityList(PageParam pageParam, String name, String auditStatus) {
 		SecurityUser currentUser = SecurityUtil.getCurrentUser();
-
 		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
-			new QueryWrapper<CommodityVO>().like(name != null, "c.name", name)
+			new QueryWrapper<CommodityGoodsVO>().like(name != null, "c.name", name)
 				.eq(auditStatus != null, "c.audit_status", auditStatus)
 				.eq(currentUser.getType().equals(UserEnum.STORE.getCode()), "c.store_id",
 					currentUser.getStoreId())

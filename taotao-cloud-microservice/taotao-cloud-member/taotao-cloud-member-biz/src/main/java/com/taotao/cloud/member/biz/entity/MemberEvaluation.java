@@ -4,7 +4,7 @@ import com.alibaba.cloud.commons.lang.StringUtils;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.utils.lang.BeanUtil;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.vo.order.OrderVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -170,7 +170,7 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	@Column(name = "description_score", columnDefinition = "int default 0 comment '描述评分'")
 	private Integer descriptionScore;
 
-	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuVO goodsSku, Member member, OrderVO order) {
+	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuSpecGalleryVO goodsSku, Member member, OrderVO order) {
 		//复制评价信息
 		BeanUtil.copyProperties(memberEvaluationDTO, this);
 

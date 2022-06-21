@@ -1,9 +1,12 @@
 package com.taotao.cloud.goods.api.vo;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 分类品牌VO
@@ -12,18 +15,19 @@ import java.io.Serializable;
  * @version 2022.04
  * @since 2022-04-25 16:33:36
  */
-@RecordBuilder
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "分类品牌VO")
-public record CategoryBrandVO(
-	@Schema(description = "品牌id")
-	String id,
-
-	@Schema(description = "品牌名称")
-	String name
-) implements Serializable {
+public class CategoryBrandVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 3775766246075838410L;
 
+	@Schema(description = "品牌id")
+	private String id;
 
+	@Schema(description = "品牌名称")
+	private String name;
 }

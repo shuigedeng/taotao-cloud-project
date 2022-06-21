@@ -15,15 +15,17 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
+import cn.hutool.core.lang.Dict;
 import com.taotao.cloud.goods.api.dto.BrandDTO;
 import com.taotao.cloud.goods.api.vo.BrandVO;
 import com.taotao.cloud.goods.biz.entity.Brand;
+import com.taotao.cloud.sys.api.dto.dict.DictSaveDTO;
+import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * BrandMapStruct
@@ -69,5 +71,6 @@ public interface IBrandMapStruct {
 	 */
 	Brand brandDTOToBrand(BrandDTO brandDTO);
 
+	void copyBrandDTOToBrand(BrandDTO brandDTO, @MappingTarget Brand brand);
 
 }

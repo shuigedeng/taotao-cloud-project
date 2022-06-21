@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.validation;
+package com.taotao.cloud.common.model;
 
 import javax.validation.groups.Default;
 
@@ -20,7 +20,7 @@ public class ValidationGroups {
 
     }
 
-    public interface Get extends Default {
+    public interface Query extends Default {
 
     }
 

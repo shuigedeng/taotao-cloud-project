@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.vo.GoodsVO;
-import com.taotao.cloud.goods.api.vo.StudioBaseVO;
-import com.taotao.cloud.goods.biz.entity.Goods;
+import com.taotao.cloud.goods.api.vo.StudioVO;
 import com.taotao.cloud.goods.biz.entity.Studio;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -41,7 +39,7 @@ public interface IStudioMapStruct {
 	 */
 	IStudioMapStruct INSTANCE = Mappers.getMapper(IStudioMapStruct.class);
 
-	StudioBaseVO studioToStudioBaseVO(Studio studio );
+	StudioVO studioToStudioBaseVO(Studio studio );
 
 
 }

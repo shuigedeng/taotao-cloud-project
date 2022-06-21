@@ -15,7 +15,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.dto.order.StoreAppealDTO;
@@ -136,7 +136,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			BeanUtil.copyProperties(orderComplaintDTO, orderComplaint);
 
 			//获取商品规格信息
-			GoodsSkuVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());
+			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.COMPLAINT_SKU_EMPTY_ERROR);
 			}

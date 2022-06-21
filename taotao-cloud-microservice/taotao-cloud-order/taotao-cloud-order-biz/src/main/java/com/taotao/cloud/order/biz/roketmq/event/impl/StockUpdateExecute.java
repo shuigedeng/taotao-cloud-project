@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
@@ -252,7 +252,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 	 */
 	private void synchroDB(OrderDetailVO order) {
 		//sku商品
-		List<GoodsSkuVO> goodsSkus = new ArrayList<>();
+		List<GoodsSkuSpecGalleryVO> goodsSkus = new ArrayList<>();
 		//促销商品
 		List<PromotionGoodsVO> promotionGoods = new ArrayList<>();
 		//sku库存key 集合
@@ -264,7 +264,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 		for (OrderItemVO orderItem : order.getOrderItems()) {
 			skuKeys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
 
-			GoodsSkuVO goodsSku = new GoodsSkuVO();
+			GoodsSkuSpecGalleryVO goodsSku = new GoodsSkuSpecGalleryVO();
 			goodsSku.setId(orderItem.getSkuId());
 			goodsSku.setGoodsId(orderItem.getGoodsId());
 			//如果有促销信息
@@ -309,7 +309,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 		}
 
 		//批量获取商品库存
-		List<GoodsSkuVO> skuStocks = redisRepository.mGet(skuKeys);
+		List<GoodsSkuSpecGalleryVO> skuStocks = redisRepository.mGet(skuKeys);
 		//循环写入商品库存
 		for (int i = 0; i < skuStocks.size(); i++) {
 			goodsSkus.get(i).setQuantity(Convert.toInt(skuStocks.get(i).toString()));
@@ -341,18 +341,18 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 	 */
 	private void rollbackOrderStock(OrderDetailVO order) {
 		//sku商品
-		List<GoodsSkuVO> goodsSkus = new ArrayList<>();
+		List<GoodsSkuSpecGalleryVO> goodsSkus = new ArrayList<>();
 		//sku库存key 集合
 		List<String> skuKeys = new ArrayList<>();
 		//循环订单
 		for (OrderItemVO orderItem : order.getOrderItems()) {
 			skuKeys.add(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()));
-			GoodsSkuVO goodsSku = new GoodsSkuVO();
+			GoodsSkuSpecGalleryVO goodsSku = new GoodsSkuSpecGalleryVO();
 			goodsSku.setId(orderItem.getSkuId());
 			goodsSkus.add(goodsSku);
 		}
 		//批量获取商品库存
-		List<GoodsSkuVO> skuStocks = redisRepository.mGet(skuKeys);
+		List<GoodsSkuSpecGalleryVO> skuStocks = redisRepository.mGet(skuKeys);
 		//循环写入商品SKU库存
 		for (int i = 0; i < skuStocks.size(); i++) {
 			goodsSkus.get(i).setQuantity(Convert.toInt(skuStocks.get(i).toString()));

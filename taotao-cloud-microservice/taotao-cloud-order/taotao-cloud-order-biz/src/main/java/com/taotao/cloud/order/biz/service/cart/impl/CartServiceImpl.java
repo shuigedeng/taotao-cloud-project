@@ -14,9 +14,8 @@ import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVOBuilder;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVOBuilder;
 import com.taotao.cloud.member.api.feign.IFeignMemberAddressService;
 import com.taotao.cloud.member.api.vo.MemberAddressVO;
@@ -394,8 +393,8 @@ public class CartServiceImpl implements ICartService {
 	 * @param skuId    商品skuId
 	 * @param cartType 购物车类型
 	 */
-	private GoodsSkuVO checkGoods(Long skuId, String cartType) {
-		GoodsSkuVO dataSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+	private GoodsSkuSpecGalleryVO checkGoods(Long skuId, String cartType) {
+		GoodsSkuSpecGalleryVO dataSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
 		if (dataSku == null) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}

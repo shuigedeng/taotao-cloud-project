@@ -1,8 +1,11 @@
 package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.fallback.FeignCategoryServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 远程调用订单模块
@@ -13,10 +16,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(contextId = "IFeignGoodsService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryServiceFallback.class)
 public interface IFeignGoodsService {
 
-	void updateStoreDetail(Long id);
+	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	Result<Boolean> updateStoreDetail(Long id);
 
-	void underStoreGoods(String id);
+	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	Result<Boolean> underStoreGoods(String id);
 
-	long countStoreGoodsNum(Long storeId);
+	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
+	Result<Long> countStoreGoodsNum(Long storeId);
 }
 

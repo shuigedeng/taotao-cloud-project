@@ -1,10 +1,12 @@
 package com.taotao.cloud.goods.api.dto;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 选择器选择
@@ -13,19 +15,22 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-25 16:31:48
  */
-@RecordBuilder
-public record SelectorOptions(
-	String name,
-
-	String value,
-
-	String url,
-
-	List<SelectorOptions> otherOptions
-) implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class SelectorOptions implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
+
+	private String name;
+
+	private String value;
+
+	private String url;
+
+	private List<SelectorOptions> otherOptions;
 
 
 }

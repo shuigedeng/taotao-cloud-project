@@ -11,7 +11,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
@@ -106,8 +106,8 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
      * @param skuId skuId
      * @return 商品sku
      */
-    private GoodsSkuVO checkSkuExist(Long skuId) {
-        GoodsSkuVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+    private GoodsSkuSpecGalleryVO checkSkuExist(Long skuId) {
+        GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
         if (goodsSku == null) {
             log.error("商品ID为" + skuId + "的商品不存在！");
             throw new BusinessException("商品ID为" + skuId + "的商品不存在！");
@@ -121,7 +121,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
      * @param kanJiaActivityGoodsDTO 砍价商品信息
      * @param goodsSku               商品sku信息
      */
-    private void checkParam(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO, GoodsSkuVO goodsSku) {
+    private void checkParam(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO, GoodsSkuSpecGalleryVO goodsSku) {
         //校验商品是否存在
         if (goodsSku == null) {
             throw new BusinessException(ResultEnum.PROMOTION_GOODS_NOT_EXIT);
@@ -194,7 +194,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         }
         KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO = new KanjiaActivityGoodsDTO();
         BeanUtils.copyProperties(kanjiaActivityGoods, kanjiaActivityGoodsDTO);
-        GoodsSkuVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(kanjiaActivityGoods.getSkuId());
+        GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(kanjiaActivityGoods.getSkuId());
         if (goodsSku != null) {
             kanjiaActivityGoodsDTO.setGoodsSku(goodsSku);
         }
@@ -216,7 +216,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         //获取砍价商品
         KanjiaActivityGoods kanJiaActivityGoods = this.getById(id);
         //获取商品SKU
-        GoodsSkuVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
+        GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
         //填写活动商品价格、剩余数量
         kanJiaActivityGoodsVO.setGoodsSku(goodsSku);
         kanJiaActivityGoodsVO.setStock(kanJiaActivityGoods.getStock());
@@ -235,7 +235,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
             throw new BusinessException(ResultEnum.PROMOTION_UPDATE_ERROR);
         }
         //获取当前sku信息
-        GoodsSkuVO goodsSku = this.checkSkuExist(kanJiaActivityGoodsDTO.getSkuId());
+        GoodsSkuSpecGalleryVO goodsSku = this.checkSkuExist(kanJiaActivityGoodsDTO.getSkuId());
         //校验商品状态
         if (goodsSku.getMarketEnable().equals(GoodsStatusEnum.DOWN.name())) {
             throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);

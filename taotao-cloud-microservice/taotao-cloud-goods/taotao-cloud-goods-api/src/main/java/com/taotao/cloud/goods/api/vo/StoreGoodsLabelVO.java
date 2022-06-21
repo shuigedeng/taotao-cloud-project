@@ -1,15 +1,13 @@
 package com.taotao.cloud.goods.api.vo;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * StoreGoodsLabelVO
@@ -23,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StoreGoodsLabelVO implements Serializable {
+
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 

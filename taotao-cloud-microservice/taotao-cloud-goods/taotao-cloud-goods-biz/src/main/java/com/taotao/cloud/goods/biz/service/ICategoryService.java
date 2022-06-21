@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 
 import java.util.List;
@@ -46,27 +46,27 @@ public interface ICategoryService extends IService<Category> {
 	/**
 	 * 获取分类树
 	 *
-	 * @return {@link List }<{@link CategoryVO }>
+	 * @return {@link List }<{@link CategoryTreeVO }>
 	 * @since 2022-04-27 16:59:28
 	 */
-	List<CategoryVO> categoryTree();
+	List<CategoryTreeVO> categoryTree();
 
 	/**
 	 * 查询所有的分类，父子关系
 	 *
 	 * @param parentId 分类父ID
-	 * @return {@link List }<{@link CategoryVO }>
+	 * @return {@link List }<{@link CategoryTreeVO }>
 	 * @since 2022-04-27 16:59:28
 	 */
-	List<CategoryVO> listAllChildren(Long parentId);
+	List<CategoryTreeVO> listAllChildren(Long parentId);
 
 	/**
 	 * 查询所有的分类，父子关系 数据库获取
 	 *
-	 * @return {@link List }<{@link CategoryVO }>
+	 * @return {@link List }<{@link CategoryTreeVO }>
 	 * @since 2022-04-27 16:59:28
 	 */
-	List<CategoryVO> listAllChildren();
+	List<CategoryTreeVO> listAllChildren();
 
 	/**
 	 * 获取指定分类的分类名称
@@ -127,10 +127,10 @@ public interface ICategoryService extends IService<Category> {
 	 * 获取商家经营类目
 	 *
 	 * @param categories 经营范围
-	 * @return {@link List }<{@link CategoryVO }>
+	 * @return {@link List }<{@link CategoryTreeVO }>
 	 * @since 2022-04-27 16:59:28
 	 */
-	List<CategoryVO> getStoreCategory(String[] categories);
+	List<CategoryTreeVO> getStoreCategory(List<Long> categories);
 
 	/**
 	 * 获取一级分类列表 用于商家入驻选择

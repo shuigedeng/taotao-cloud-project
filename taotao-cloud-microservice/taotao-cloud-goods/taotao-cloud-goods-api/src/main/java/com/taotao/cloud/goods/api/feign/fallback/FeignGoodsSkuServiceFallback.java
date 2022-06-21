@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.api.feign.fallback;
 
-import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.List;
@@ -18,40 +18,29 @@ public class FeignGoodsSkuServiceFallback implements FallbackFactory<IFeignGoods
 	public IFeignGoodsSkuService create(Throwable throwable) {
 		return new IFeignGoodsSkuService() {
 			@Override
-			public void updateGoodsStuck(List<GoodsSkuVO> goodsSkus) {
-
-			}
-
-			@Override
-			public void updateBatchById(List<GoodsSkuVO> goodsSkus) {
-
-			}
-
-			@Override
-			public List<GoodsSkuVO> getGoodsSkuByIdFromCache(List<Long> skuIds) {
+			public Result<Boolean> updateGoodsStuck(List<GoodsSkuSpecGalleryVO> goodsSkus) {
 				return null;
 			}
 
 			@Override
-			public GoodsSkuVO getGoodsSkuByIdFromCache(Long skuId) {
+			public Result<Boolean> updateBatchById(List<GoodsSkuSpecGalleryVO> goodsSkus) {
 				return null;
 			}
 
 			@Override
-			public void getStock(String skuId) {
-
+			public Result<List<GoodsSkuSpecGalleryVO>> getGoodsSkuByIdFromCache(List<Long> skuIds) {
+				return null;
 			}
-			//@Override
-			//public Result<ProductVO> findProductInfoById(Long id) {
-			//	LogUtil.error("调用findProductInfoById异常：{}", id, throwable);
-			//	return Result.fail(null, 500);
-			//}
-			//
-			//@Override
-			//public Result<ProductVO> saveProduct(ProductDTO productDTO) {
-			//	LogUtil.error("调用saveProduct异常：{}", productDTO, throwable);
-			//	return Result.fail(null, 500);
-			//}
+
+			@Override
+			public Result<GoodsSkuSpecGalleryVO> getGoodsSkuByIdFromCache(Long skuId) {
+				return null;
+			}
+
+			@Override
+			public Result<Integer> getStock(String skuId) {
+				return null;
+			}
 		};
 	}
 }

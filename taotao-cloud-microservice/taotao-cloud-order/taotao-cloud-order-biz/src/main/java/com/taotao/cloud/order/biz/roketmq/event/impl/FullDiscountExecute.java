@@ -8,7 +8,7 @@ import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.order.api.dto.cart.TradeDTO;
@@ -156,7 +156,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	 */
 	private void generatorGiftOrder(List<String> skuIds, Order originOrder) {
 		//获取赠品列表
-		List<GoodsSkuVO> goodsSkus = goodsSkuService.getGoodsSkuByIdFromCache(skuIds);
+		List<GoodsSkuSpecGalleryVO> goodsSkus = goodsSkuService.getGoodsSkuByIdFromCache(skuIds);
 
 		//赠品判定
 		if (goodsSkus == null || goodsSkus.isEmpty()) {
@@ -165,13 +165,13 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		}
 
 		//赠品分类，分为实体商品/虚拟商品/电子卡券
-		List<GoodsSkuVO> physicalSkus = goodsSkus.stream()
+		List<GoodsSkuSpecGalleryVO> physicalSkus = goodsSkus.stream()
 			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.PHYSICAL_GOODS.name()))
 			.toList();
-		List<GoodsSkuVO> virtualSkus = goodsSkus.stream()
+		List<GoodsSkuSpecGalleryVO> virtualSkus = goodsSkus.stream()
 			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.VIRTUAL_GOODS.name()))
 			.toList();
-		List<GoodsSkuVO> eCouponSkus = goodsSkus.stream()
+		List<GoodsSkuSpecGalleryVO> eCouponSkus = goodsSkus.stream()
 			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.E_COUPON.name()))
 			.toList();
 
@@ -195,7 +195,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	 * @param orderTypeEnum 订单类型
 	 * @since 2022-05-16 17:35:18
 	 */
-	private void giftOrderHandler(List<GoodsSkuVO> skuList, Order originOrder, OrderTypeEnum orderTypeEnum) {
+	private void giftOrderHandler(List<GoodsSkuSpecGalleryVO> skuList, Order originOrder, OrderTypeEnum orderTypeEnum) {
 		//初始化订单对象/订单日志/自订单
 		Order order = new Order();
 		List<OrderItem> orderItems = new ArrayList<>();
@@ -219,7 +219,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		orderLogs.add(new OrderLog(order.getSn(), originOrder.getMemberId(), UserEnum.MEMBER.name(), originOrder.getMemberName(), message));
 
 		//生成子订单
-		for (GoodsSkuVO goodsSku : skuList) {
+		for (GoodsSkuSpecGalleryVO goodsSku : skuList) {
 			OrderItem orderItem = new OrderItem();
 			BeanUtil.copyProperties(goodsSku, orderItem, "id");
 			BeanUtil.copyProperties(priceDetailDTO, orderItem, "id");

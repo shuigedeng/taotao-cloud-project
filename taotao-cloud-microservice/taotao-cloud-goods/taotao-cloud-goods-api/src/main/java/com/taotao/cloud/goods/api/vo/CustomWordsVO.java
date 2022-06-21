@@ -2,6 +2,11 @@ package com.taotao.cloud.goods.api.vo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -13,22 +18,24 @@ import java.io.Serializable;
  * @since 2022-04-25 16:33:49
  */
 @RecordBuilder
-public record CustomWordsVO(
-
-	Long id,
-
-	/**
-	 * 分词名称
-	 */
-	String name,
-
-	/**
-	 * 是否禁用
-	 */
-	Integer disabled
-) implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CustomWordsVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 3829199991161122317L;
 
+	private Long id;
+
+	/**
+	 * 分词名称
+	 */
+	private String name;
+
+	/**
+	 * 是否禁用
+	 */
+	private Integer disabled;
 }

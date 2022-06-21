@@ -25,7 +25,7 @@ public interface ICategoryBrandMapper extends BaseMapper<CategoryBrand> {
 	 * @since 2022-04-27 16:55:23
 	 */
 	@Select("""
-		SELECT b.id,b.name
+		SELECT b.id,b.name,b.logo
 		FROM tt_brand b INNER join tt_category_brand cb on b.id = cb.brand_id and cb.category_id = #{categoryId}
 		where b.delete_flag = 0
 		""")

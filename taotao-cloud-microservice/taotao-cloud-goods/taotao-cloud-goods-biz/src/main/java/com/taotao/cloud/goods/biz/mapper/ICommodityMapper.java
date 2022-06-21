@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.goods.api.vo.CommodityVO;
+import com.taotao.cloud.goods.api.vo.CommodityGoodsVO;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -66,7 +66,7 @@ public interface ICommodityMapper extends BaseMapper<Commodity> {
 	 *
 	 * @param page         分页
 	 * @param queryWrapper 查询条件
-	 * @return {@link IPage }<{@link CommodityVO }>
+	 * @return {@link IPage }<{@link CommodityGoodsVO }>
 	 * @since 2022-04-27 16:55:41
 	 */
 	@Select("""
@@ -74,7 +74,7 @@ public interface ICommodityMapper extends BaseMapper<Commodity> {
 		FROM tt_commodity c INNER JOIN tt_goods_sku gs ON c.sku_id = gs.id INNER JOIN tt_store s ON s.id=c.store_id 
 		${ew.customSqlSegment}
 		""")
-	IPage<CommodityVO> commodityVOList(IPage<CommodityVO> page,
-		@Param(Constants.WRAPPER) Wrapper<CommodityVO> queryWrapper);
+	IPage<CommodityGoodsVO> commodityVOList(IPage<CommodityGoodsVO> page,
+		@Param(Constants.WRAPPER) Wrapper<CommodityGoodsVO> queryWrapper);
 
 }

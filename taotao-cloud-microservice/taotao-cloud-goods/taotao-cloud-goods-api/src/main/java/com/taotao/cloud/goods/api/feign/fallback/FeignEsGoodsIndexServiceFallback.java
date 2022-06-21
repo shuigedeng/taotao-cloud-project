@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
 import com.taotao.cloud.goods.api.vo.EsGoodsIndexVO;
@@ -19,6 +20,11 @@ public class FeignEsGoodsIndexServiceFallback implements FallbackFactory<IFeignE
 		return new IFeignEsGoodsIndexService() {
 			@Override
 			public List<EsGoodsIndexVO> getEsGoodsBySkuIds(List<String> skuIdList) {
+				return null;
+			}
+
+			@Override
+			public Result<Boolean> cleanInvalidPromotion() {
 				return null;
 			}
 		};

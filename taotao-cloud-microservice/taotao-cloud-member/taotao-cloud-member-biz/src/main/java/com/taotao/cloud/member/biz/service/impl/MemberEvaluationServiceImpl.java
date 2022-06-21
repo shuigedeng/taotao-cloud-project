@@ -5,23 +5,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
-import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
-import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.mapper.MemberEvaluationMapper;
@@ -40,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -114,7 +109,7 @@ public class MemberEvaluationServiceImpl extends
 		//获取用户信息
 		Member member = memberService.getUserInfo();
 		//获取商品信息
-		GoodsSkuVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
+		GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
 			memberEvaluationDTO.getSkuId());
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,

@@ -22,10 +22,9 @@ import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.vo.GoodsBaseVOBuilder;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
-import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.api.vo.GoodsVOBuilder;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
@@ -210,11 +209,11 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	}
 
 	@Override
-	public GoodsVO getGoodsVO(Long goodsId) {
+	public GoodsSkuParamsVO getGoodsVO(Long goodsId) {
 		//缓存获取，如果没有则读取缓存
-		GoodsVO goodsVO = (GoodsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
-		if (goodsVO != null) {
-			return goodsVO;
+		GoodsSkuParamsVO goodsSkuParamsVO = (GoodsSkuParamsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
+		if (goodsSkuParamsVO != null) {
+			return goodsSkuParamsVO;
 		}
 
 		//查询商品信息
@@ -225,18 +224,18 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		}
 
 		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-		List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
+		List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
 
 		String categoryPath = goods.getCategoryPath();
 		String[] strArray = categoryPath.split(",");
 		List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
 
 		//赋值
-		GoodsBaseVO goodsBaseVO = IGoodsMapStruct.INSTANCE.goodsToGoodsBaseVO(goods);
-		goodsVO = GoodsVOBuilder
+		GoodsSkuParamsVO goodsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsBaseVO(goods);
+		goodsSkuParamsVO = GoodsVOBuilder
 			.builder()
 			//商品id
-			.goodsBase(GoodsBaseVOBuilder.builder(goodsBaseVO).id(goods.getId()).build())
+			.goodsBase(GoodsBaseVOBuilder.builder(goodsVO).id(goods.getId()).build())
 			//商品相册
 			.goodsGalleryList(galleryList.stream().filter(Objects::nonNull).map(GoodsGallery::getOriginal).toList())
 			//商品sku赋值
@@ -248,8 +247,8 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 				() -> StrUtil.isNotEmpty(goods.getParams()), new ArrayList<>()))
 			.build();
 
-		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
-		return goodsVO;
+		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsVO);
+		return goodsSkuParamsVO;
 	}
 
 

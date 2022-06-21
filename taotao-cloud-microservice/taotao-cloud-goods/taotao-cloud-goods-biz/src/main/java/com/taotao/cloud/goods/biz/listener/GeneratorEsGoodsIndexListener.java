@@ -36,6 +36,7 @@ public class GeneratorEsGoodsIndexListener {
 	public void generatorEsGoodsIndex(GeneratorEsGoodsIndexEvent esGoodsIndexEvent) {
 		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
 			+ GoodsTagsEnum.GENERATOR_GOODS_INDEX.name();
+
 		//发送mq消息
 		rocketMQTemplate.asyncSend(destination, esGoodsIndexEvent.getGoodsId(),
 			RocketmqSendCallbackBuilder.commonCallback());
