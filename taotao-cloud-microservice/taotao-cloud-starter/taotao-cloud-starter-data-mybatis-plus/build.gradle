@@ -9,6 +9,7 @@ dependencies {
     api 'com.baomidou:dynamic-datasource-spring-boot-starter'
     api 'com.baomidou:mybatis-plus-extension'
     api 'com.github.pagehelper:pagehelper'
+    api 'com.baomidou:mybatis-mate-starter:1.2.4'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

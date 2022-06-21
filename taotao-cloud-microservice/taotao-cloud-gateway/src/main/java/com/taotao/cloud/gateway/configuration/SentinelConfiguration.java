@@ -12,6 +12,8 @@ import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.beans.factory.ObjectProvider;
@@ -162,4 +164,115 @@ public class SentinelConfiguration {
 			"[Sentinel SpringCloudGateway] using AnonymousBlockRequestHandler");
 	}
 
+	//DegradeRule.json （降级规则） 熔断降级规则 (DegradeRule)
+	//[
+	//	{
+	//		资源名，即规则的作用对象
+	//		"resource": "abc0",
+	//		慢调用比例模式下为慢调用临界 RT（超出该值计为慢调用）；异常比例/异常数模式下为对应的阈值
+	//		"count": 20.0,
+	//		熔断策略，支持慢调用比例/异常比例/异常数策略
+	//		"grade": 0,
+	//		"passCount": 0,
+	//		熔断时长，单位为 s
+	//		"timeWindow": 10
+	//      slowRatioThreshold	慢调用比例阈值，仅慢调用比例模式有效（1.8.0 引入）
+	//      statIntervalMs	统计时长（单位为 ms），如 60*1000 代表分钟级（1.8.0 引入）
+	//      minRequestAmount	熔断触发的最小请求数，请求数小于该值时即使异常比率超出阈值也不会熔断（1.7.0 引入）
+	//	},
+	//	{
+	//		"resource": "abc1",
+	//		"count": 15.0,
+	//		"grade": 0,
+	//		"passCount": 0,
+	//		"timeWindow": 10
+	//	}
+	//]
+
+	//FlowRule.json 流量控制规则 (FlowRule)
+	//[
+	//  {
+	//    资源名，资源名是限流规则的作用对象
+	//    "resource": "abc",
+	//    限流阈值
+	//    "count": 20.0,
+	//    限流阈值类型，QPS 模式（1）或并发线程数模式（0）
+	//    "grade": 1,
+	//    流控效果（直接拒绝/WarmUp/匀速+排队等待），不支持按调用关系限流
+	//    "controlBehavior": 0,
+	//    流控针对的调用来源
+	//    "limitApp": "default",
+	//    调用关系限流策略：直接、链路、关联
+	//    "strategy": 0
+	//    是否集群限流
+	//    "clusterMode": false
+	//  },
+	//  {
+	//    "resource": "abc1",
+	//    "controlBehavior": 0,
+	//    "count": 20.0,
+	//    "grade": 1,
+	//    "limitApp": "default",
+	//    "strategy": 0
+	//  }
+	//]
+
+	// SystemRule.json （系统规则） 系统保护规则 (SystemRule)
+	//
+	//   highestSystemLoad	load1 触发值，用于触发自适应控制阶段	-1 (不生效)
+	//   avgRt	所有入口流量的平均响应时间	-1 (不生效)
+	//   maxThread	入口流量的最大并发数	-1 (不生效)
+	//   qps	所有入口资源的 QPS	-1 (不生效)
+	//   highestCpuUsage	当前系统的 CPU 使用率（0.0-1.0）	-1 (不生效)
+
+	//[
+	//  {
+	//    "avgRt": 10,
+	//    "highestSystemLoad": 5.0,
+	//    "maxThread": 10,
+	//    "qps": 20.0
+	//  }
+	//]
+	//
+
+	//来源访问控制规则（AuthorityRule）非常简单，主要有以下配置项：
+	//
+	//resource：资源名，即限流规则的作用对象。
+	//limitApp：对应的黑名单/白名单，不同 origin 用 , 分隔，如 appA,appB。
+	//strategy：限制模式，AUTHORITY_WHITE 为白名单模式，AUTHORITY_BLACK 为黑名单模式，默认为白名单模式。
+	//
+	//比如我们希望控制对资源 test 的访问设置白名单，只有来源为 appA 和 appB 的请求才可通过，则可以配置如下白名单规则：
+	//
+	//AuthorityRule rule = new AuthorityRule();
+	//rule.setResource("test");
+	//rule.setStrategy(RuleConstant.AUTHORITY_WHITE);
+	//rule.setLimitApp("appA,appB");
+	//AuthorityRuleManager.loadRules(Collections.singletonList(rule));
+
+	//热点参数规则（ParamFlowRule）类似于流量控制规则（FlowRule）：
+	//
+	//属性	说明	默认值
+	//resource	资源名，必填
+	//count	限流阈值，必填
+	//grade	限流模式	QPS 模式
+	//durationInSec	统计窗口时间长度（单位为秒），1.6.0 版本开始支持	1s
+	//controlBehavior	流控效果（支持快速失败和匀速排队模式），1.6.0 版本开始支持	快速失败
+	//maxQueueingTimeMs	最大排队等待时长（仅在匀速排队模式生效），1.6.0 版本开始支持	0ms
+	//paramIdx	热点参数的索引，必填，对应 SphU.entry(xxx, args) 中的参数索引位置
+	//paramFlowItemList	参数例外项，可以针对指定的参数值单独设置限流阈值，不受前面 count 阈值的限制。仅支持基本类型和字符串类型
+	//clusterMode	是否是集群参数流控规则	false
+	//clusterConfig	集群流控相关配置
+
+	//我们可以通过 ParamFlowRuleManager 的 loadRules 方法更新热点参数规则，下面是一个示例：
+	//
+	//ParamFlowRule rule = new ParamFlowRule(resourceName)
+	//    .setParamIdx(0)
+	//    .setCount(5);
+	//// 针对 int 类型的参数 PARAM_B，单独设置限流 QPS 阈值为 10，而不是全局的阈值 5.
+	//ParamFlowItem item = new ParamFlowItem().setObject(String.valueOf(PARAM_B))
+	//    .setClassType(int.class.getName())
+	//    .setCount(10);
+	//rule.setParamFlowItemList(Collections.singletonList(item));
+	//
+	//ParamFlowRuleManager.loadRules(Collections.singletonList(rule));
 }
