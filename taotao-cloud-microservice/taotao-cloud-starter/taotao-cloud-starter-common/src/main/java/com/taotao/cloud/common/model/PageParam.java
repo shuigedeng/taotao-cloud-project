@@ -4,18 +4,17 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 
 /**
  * 查询参数
@@ -69,12 +68,15 @@ public class PageParam implements Serializable {
 		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(
 			currentPage, pageSize);
 
+		List<OrderItem> orders = new ArrayList<>();
+		orders.add(OrderItem.desc("create_time"));
+
 		if (StringUtil.isNotBlank(sort) && StringUtil.isNotBlank(order)) {
-			List<OrderItem> orders = new ArrayList<>();
 			OrderItem orderItem = "asc".equals(order) ? OrderItem.asc(sort) : OrderItem.desc(sort);
 			orders.add(orderItem);
-			page.setOrders(orders);
 		}
+
+		page.setOrders(orders);
 
 		return page;
 	}
@@ -86,16 +88,15 @@ public class PageParam implements Serializable {
 	 * @since 2022/3/14 13:53
 	 */
 	public Pageable buildJpaPage() {
-		PageRequest page = PageRequest.of(currentPage, pageSize);
+		List<Order> orders = new ArrayList<>();
+		orders.add(Order.desc("create_time"));
 
 		if (StringUtil.isNotBlank(sort) && StringUtil.isNotBlank(order)) {
-			List<Order> orders = new ArrayList<>();
 			Order orderItem = "asc".equals(order) ? Order.asc(sort) : Order.desc(sort);
 			orders.add(orderItem);
-			page = PageRequest.of(currentPage, pageSize, Sort.by(orders));
 		}
 
-		return page;
+		return PageRequest.of(currentPage, pageSize, Sort.by(orders));
 	}
 
 	public Integer getCurrentPage() {

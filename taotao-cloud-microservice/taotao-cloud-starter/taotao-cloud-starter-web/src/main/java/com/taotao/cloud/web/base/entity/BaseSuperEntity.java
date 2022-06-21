@@ -60,19 +60,6 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	@Column(name = "del_flag", columnDefinition = "boolean null DEFAULT false comment '是否删除 0-正常 1-删除'")
 	private Boolean delFlag = false;
 
-	/**
-	 * 保存和缺省验证组
-	 */
-	public interface Save extends Default {
-
-	}
-
-	/**
-	 * 更新和缺省验证组
-	 */
-	public interface Update extends Default {
-
-	}
 
 	public BaseSuperEntity() {
 	}

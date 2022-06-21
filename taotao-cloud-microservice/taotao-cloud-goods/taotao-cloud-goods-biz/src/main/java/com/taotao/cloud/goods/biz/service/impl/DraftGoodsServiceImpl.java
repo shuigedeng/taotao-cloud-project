@@ -5,13 +5,13 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTO;
-import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTOBuilder;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTOBuilder;
+import com.taotao.cloud.goods.api.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.DraftGoodsBaseVO;
-import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVOBuilder;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
@@ -58,9 +58,9 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	private final IGoodsSkuService goodsSkuService;
 
 	@Override
-	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
-		DraftGoodsBaseDTO draftGoodsBaseDTO = draftGoods.draftGoodsBase();
-		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsBaseDTO);
+	public Boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+		DraftGoodsDTO draftGoodsDTO = draftGoods.draftGoodsBase();
+		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO);
 
 		builder.goodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.goodsGalleryList()));
 		builder.skuListJson(JSONUtil.toJsonStr(draftGoods.skuList()));
@@ -70,9 +70,9 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public Boolean updateGoodsDraft(DraftGoodsDTO draftGoods) {
-		DraftGoodsBaseDTO draftGoodsBaseDTO = draftGoods.draftGoodsBase();
-		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsBaseDTO);
+	public Boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+		DraftGoodsDTO draftGoodsDTO = draftGoods.draftGoodsBase();
+		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO);
 
 		builder.goodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.goodsGalleryList()));
 		builder.skuListJson(JSONUtil.toJsonStr(draftGoods.skuList()));
@@ -88,9 +88,9 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public Boolean saveGoodsDraft(DraftGoodsDTO draftGoods) {
-		DraftGoodsBaseDTO draftGoodsBaseDTO = draftGoods.draftGoodsBase();
-		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsBaseDTO);
+	public Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+		DraftGoodsDTO draftGoodsDTO = draftGoods.draftGoodsBase();
+		DraftGoodsBaseDTOBuilder builder = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO);
 
 		if (draftGoods.goodsGalleryList() != null && !draftGoods.goodsGalleryList()
 			.isEmpty()) {
@@ -115,10 +115,11 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public DraftGoodsVO getDraftGoods(Long id) {
+	public DraftGoodsSkuVO getDraftGoods(Long id) {
 		DraftGoods draftGoods = this.getById(id);
-		DraftGoodsBaseVO draftGoodsBaseVO = IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(draftGoods);
-		DraftGoodsVOBuilder draftGoodsVOBuilder = DraftGoodsVOBuilder.builder().draftGoodsBase(draftGoodsBaseVO);
+		DraftGoodsSkuParamsVO draftGoodsVO = IDraftGoodsMapStruct.INSTANCE.draftGoodsDTOToDraftGoods(draftGoods);
+		DraftGoodsVOBuilder draftGoodsVOBuilder = DraftGoodsVOBuilder.builder().draftGoodsBase(
+			draftGoodsVO);
 
 		//商品分类名称赋值
 		List<String> categoryName = new ArrayList<>();

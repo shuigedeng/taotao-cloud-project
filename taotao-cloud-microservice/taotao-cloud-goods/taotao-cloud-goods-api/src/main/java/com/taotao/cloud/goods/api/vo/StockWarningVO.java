@@ -5,6 +5,10 @@ import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 库存警告封装类
@@ -14,16 +18,18 @@ import java.io.Serializable;
  * @since 2022-04-14 21:52:39
  */
 @RecordBuilder
-public record StockWarningVO(
-
-	@Schema(description = "库存警告数量")
-	Integer stockWarningNum,
-
-	@Schema(description = "商品SKU列表")
-	PageModel<GoodsSkuBaseVO> goodsSkuPage
-) implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class StockWarningVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	@Schema(description = "库存警告数量")
+	private Integer stockWarningNum;
+
+	@Schema(description = "商品SKU列表")
+	private PageModel<GoodsSkuVO> goodsSkuPage;
 }

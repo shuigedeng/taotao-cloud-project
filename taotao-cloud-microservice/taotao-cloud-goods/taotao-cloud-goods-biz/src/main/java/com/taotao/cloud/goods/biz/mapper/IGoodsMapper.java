@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -55,13 +55,13 @@ public interface IGoodsMapper extends BaseMapper<Goods> {
 	 *
 	 * @param page         分页
 	 * @param queryWrapper 查询条件
-	 * @return {@link IPage }<{@link GoodsVO }>
+	 * @return {@link IPage }<{@link GoodsSkuParamsVO }>
 	 * @since 2022-04-27 16:56:00
 	 */
 	@Select("""
 		select g.*
 		from tt_goods as g
 		""")
-	IPage<GoodsVO> queryByParams(IPage<GoodsVO> page,
-		@Param(Constants.WRAPPER) Wrapper<GoodsVO> queryWrapper);
+	IPage<GoodsSkuParamsVO> queryByParams(IPage<GoodsSkuParamsVO> page,
+		@Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
 }

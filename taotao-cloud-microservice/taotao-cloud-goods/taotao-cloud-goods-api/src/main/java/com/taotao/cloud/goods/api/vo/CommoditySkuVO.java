@@ -2,39 +2,35 @@ package com.taotao.cloud.goods.api.vo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
-import java.io.Serializable;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
- * 商品规格VO
+ * 直播商品VO
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-25 16:34:17
+ * @since 2022-04-25 16:33:46
  */
 @RecordBuilder
-@Data
-@Builder
+@Setter
+@Getter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsSkuSpecVO implements Serializable {
+public class CommoditySkuVO extends CommodityVO {
 
 	@Serial
 	private static final long serialVersionUID = 3829199991161122317L;
 
-	@Schema(description = "商品skuId")
-	private Long skuId;
-
-	@Schema(description = "商品sku所包含规格")
-	private List<SpecValueVO> specValues;
-
-	@Schema(description = "库存")
+	@Schema(description = "SKU库存")
 	private Integer quantity;
 
+	@Schema(description = "店铺名称")
+	private String storeName;
 }

@@ -3,13 +3,14 @@ package com.taotao.cloud.goods.biz.controller.seller;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
-import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -51,13 +52,14 @@ public class CategoryStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
-	public Result<List<CategoryVO>> getListAll() {
+	public Result<List<CategoryTreeVO>> getListAll() {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		//获取店铺经营范围
 		String goodsManagementCategory = storeDetailService.getStoreDetailVO(storeId).data()
 			.getGoodsManagementCategory();
-		return Result.success(
-			this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
+		String[] categoryIdArray = goodsManagementCategory.split(",");
+		List<Long> categoryIdList = Arrays.stream(categoryIdArray).map(Long::valueOf).toList();
+		return Result.success(this.categoryService.getStoreCategory(categoryIdList));
 	}
 
 	@Operation(summary = "获取所选分类关联的品牌信息", description = "获取所选分类关联的品牌信息")

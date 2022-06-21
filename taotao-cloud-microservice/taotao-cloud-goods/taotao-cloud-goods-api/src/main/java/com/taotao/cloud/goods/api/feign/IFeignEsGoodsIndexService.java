@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 远程调用订单模块
@@ -23,8 +24,8 @@ public interface IFeignEsGoodsIndexService {
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
 	List<EsGoodsIndexVO> getEsGoodsBySkuIds(List<String> skuIdList);
 
-    void cleanInvalidPromotion();
-
+	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	Result<Boolean> cleanInvalidPromotion();
 
 }
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.controller.manager;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
@@ -12,6 +12,9 @@ import com.taotao.cloud.goods.biz.service.IGoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,10 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 /**
  * 管理端,商品分类接口
@@ -57,17 +56,17 @@ public class CategoryManagerController {
 	@Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{parentId}/children/all")
-	public Result<List<CategoryBaseVO>> list(@PathVariable Long parentId) {
+	@GetMapping(value = "/{parentId}/children")
+	public Result<List<CategoryVO>> list(@PathVariable Long parentId) {
 		List<Category> categories = this.categoryService.dbList(parentId);
-		return Result.success(ICategoryMapStruct.INSTANCE.categorysToCategoryBaseVOs(categories));
+		return Result.success(ICategoryMapStruct.INSTANCE.categorysToCategoryVO(categories));
 	}
 
 	@Operation(summary = "查询全部分类列表", description = "查询全部分类列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/children/all")
-	public Result<List<CategoryVO>> list() {
+	@GetMapping(value = "/all")
+	public Result<List<CategoryTreeVO>> list() {
 		return Result.success(this.categoryService.listAllChildren());
 	}
 
@@ -94,7 +93,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
 	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryVO category) {
-		Category catTemp = categoryService.getById(category.categoryBase().id());
+		Category catTemp = categoryService.getById(category.getId());
 		if (catTemp == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
@@ -126,7 +125,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
 	public Result<Boolean> disable(@PathVariable Long id,
-								   @RequestParam Boolean enableOperations) {
+		@RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

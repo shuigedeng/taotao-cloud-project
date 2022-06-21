@@ -12,7 +12,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
@@ -250,7 +250,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_ERROR);
 		}
 		for (String id : split) {
-			GoodsSkuVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id));
+			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id));
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 			}

@@ -3,11 +3,15 @@ package com.taotao.cloud.goods.api.dto;
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import io.soabase.recordbuilder.core.RecordBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 草稿商品
@@ -16,177 +20,178 @@ import java.math.BigDecimal;
  * @version 2022.04
  * @since 2022-04-25 16:31:12
  */
-@RecordBuilder
-public record DraftGoodsBaseDTO(
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+public class DraftGoodsBaseDTO implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -7605952923416404638L;
+
 	/**
 	 * 商品名称
 	 */
-	String goodsName,
+	private String goodsName;
 
 	/**
 	 * 商品价格
 	 */
-	BigDecimal price,
+	private BigDecimal price;
 
 	/**
 	 * 品牌id
 	 */
-	Long brandId,
+	private Long brandId;
 
 	/**
 	 * 分类path
 	 */
-	String categoryPath,
+	private String categoryPath;
 
 	/**
 	 * 计量单位
 	 */
-	String goodsUnit,
+	private String goodsUnit;
 
 	/**
 	 * 卖点
 	 */
-	String sellingPoint,
+	private String sellingPoint;
 
 	/**
 	 * 上架状态
 	 *
 	 * @see GoodsStatusEnum
 	 */
-	String marketEnable,
+	private String marketEnable;
 
 	/**
 	 * 详情
 	 */
-	String intro,
+	private String intro;
 
 	/**
 	 * 商品移动端详情
 	 */
-	String mobileIntro,
+	private String mobileIntro;
 
 	/**
 	 * 购买数量
 	 */
-	Integer buyCount,
+	private Integer buyCount;
 
 	/**
 	 * 库存
 	 */
-	Integer quantity,
+	private Integer quantity;
 
 	/**
 	 * 可用库存
 	 */
-	Integer enableQuantity,
+	private Integer enableQuantity;
 
 	/**
 	 * 商品好评率
 	 */
-	BigDecimal grade,
+	private BigDecimal grade;
 
 	/**
 	 * 缩略图路径
 	 */
-	String thumbnail,
+	private String thumbnail;
 
 	/**
 	 * 大图路径
 	 */
-	String big,
+	private String big;
 
 	/**
 	 * 小图路径
 	 */
-	String small,
+	private String small;
 
 	/**
 	 * 原图路径
 	 */
-	String original,
+	private String original;
 
 	/**
 	 * 店铺分类路径
 	 */
-	String storeCategoryPath,
+	private String storeCategoryPath;
 
 	/**
 	 * 评论数量
 	 */
-	Integer commentNum,
+	private Integer commentNum;
 
 	/**
 	 * 卖家id
 	 */
-	Long storeId,
+	private Long storeId;
 
 	/**
 	 * 卖家名字
 	 */
-	String storeName,
+	private String storeName;
 
 	/**
 	 * 运费模板id
 	 */
-	Long templateId,
+	private Long templateId;
 
 	/**
 	 * 是否自营
 	 */
-	Boolean selfOperated,
+	private Boolean selfOperated;
 
 	/**
 	 * 商品视频
 	 */
-	String goodsVideo,
+	private String goodsVideo;
 
 	/**
 	 * 是否为推荐商品
 	 */
-	Boolean recommend,
+	private Boolean recommend;
 
 	/**
 	 * 销售模式
 	 */
-	String salesModel,
+	private String salesModel;
 
 	/**
 	 * 草稿商品保存类型
 	 *
 	 * @see DraftGoodsSaveType
 	 */
-	String saveType,
+	private String saveType;
 
 	/**
 	 * 分类名称JSON
 	 */
-	String categoryNameJson,
+	private String categoryNameJson;
 
 	/**
 	 * 商品参数JSON
 	 */
-	String goodsParamsListJson,
+	private String goodsParamsListJson;
 
 	/**
 	 * 商品图片JSON
 	 */
-	String goodsGalleryListJson,
+	private String goodsGalleryListJson;
 
 	/**
 	 * sku列表JSON
 	 */
-	String skuListJson,
+	private String skuListJson;
 
 	/**
 	 * 商品类型
 	 *
 	 * @see GoodsTypeEnum
 	 */
-	String goodsType
-) implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
-
-
+	private String goodsType;
 }

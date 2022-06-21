@@ -1,10 +1,12 @@
 package com.taotao.cloud.goods.api.dto;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 参数属性选择器
@@ -13,15 +15,17 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-25 16:31:45
  */
-@RecordBuilder
-public record ParamOptions(
-	String key,
-
-	List<String> values
-) implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ParamOptions implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	private String key;
+
+	private List<String> values;
 
 }

@@ -6,13 +6,13 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTO;
-import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTOBuilder;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsBaseDTOBuilder;
+import com.taotao.cloud.goods.api.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.dto.DraftGoodsDTOBuilder;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.DraftGoodsBaseVO;
-import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsSkuVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.service.IDraftGoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -52,18 +52,18 @@ public class DraftGoodsStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<DraftGoodsBaseVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
+	public Result<PageModel<DraftGoodsSkuParamsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		draftGoodsPageQuery.setStoreId(storeId);
 		IPage<DraftGoods> draftGoods = draftGoodsService.getDraftGoods(draftGoodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsBaseVO.class));
+		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsSkuParamsVO.class));
 	}
 
 	@Operation(summary = "获取草稿商品", description = "获取草稿商品")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<DraftGoodsVO> getDraftGoods(@PathVariable Long id) {
+	public Result<DraftGoodsSkuVO> getDraftGoods(@PathVariable Long id) {
 		return Result.success(draftGoodsService.getDraftGoods(id));
 	}
 
@@ -71,15 +71,18 @@ public class DraftGoodsStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsDTO draftGoodsDTO) {
+	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
-		if (draftGoodsDTO.draftGoodsBase().storeId() == null) {
-			DraftGoodsBaseDTO draftGoodsBaseDTO = DraftGoodsBaseDTOBuilder.builder(draftGoodsDTO.draftGoodsBase()).storeId(storeId).build();
-			draftGoodsDTO = DraftGoodsDTOBuilder.builder(draftGoodsDTO).draftGoodsBase(draftGoodsBaseDTO).build();
-		} else if (draftGoodsDTO.draftGoodsBase().storeId() != null && !storeId.equals(draftGoodsDTO.draftGoodsBase().storeId())) {
+		if (draftGoodsSkuParamsDTO.draftGoodsBase().storeId() == null) {
+			DraftGoodsDTO draftGoodsDTO = DraftGoodsBaseDTOBuilder.builder(
+				draftGoodsSkuParamsDTO.draftGoodsBase()).storeId(storeId).build();
+			draftGoodsSkuParamsDTO = DraftGoodsDTOBuilder.builder(draftGoodsSkuParamsDTO).draftGoodsBase(
+				draftGoodsDTO).build();
+		} else if (draftGoodsSkuParamsDTO.draftGoodsBase().storeId() != null && !storeId.equals(
+			draftGoodsSkuParamsDTO.draftGoodsBase().storeId())) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
-		return Result.success(draftGoodsService.saveGoodsDraft(draftGoodsDTO));
+		return Result.success(draftGoodsService.saveGoodsDraft(draftGoodsSkuParamsDTO));
 	}
 
 	@Operation(summary = "删除草稿商品", description = "删除草稿商品")

@@ -10,7 +10,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
-import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.dto.StoreSettingDTO;
 import com.taotao.cloud.store.api.dto.StoreSettlementDay;
@@ -172,13 +172,13 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	public List<StoreManagementCategoryVO> goodsManagementCategory(String storeId) {
 
 		//获取顶部分类列表
-		List<CategoryVO> categoryList = categoryService.firstCategory();
+		List<CategoryTreeVO> categoryList = categoryService.firstCategory();
 		//获取店铺信息
 		StoreDetail storeDetail = this.getOne(new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
 		//获取店铺分类
 		String[] storeCategoryList = storeDetail.getGoodsManagementCategory().split(",");
 		List<StoreManagementCategoryVO> list = new ArrayList<>();
-		for (CategoryVO category : categoryList) {
+		for (CategoryTreeVO category : categoryList) {
 			StoreManagementCategoryVO storeManagementCategoryVO = new StoreManagementCategoryVO();
 			BeanUtil.copyProperties(category.categoryBase(), storeManagementCategoryVO);
 

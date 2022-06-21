@@ -1,5 +1,6 @@
 package com.taotao.cloud.goods.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -14,17 +15,20 @@ public class FeignGoodsServiceFallback implements FallbackFactory<IFeignGoodsSer
 	@Override
 	public IFeignGoodsService create(Throwable throwable) {
 		return new IFeignGoodsService() {
-			//@Override
-			//public Result<ProductVO> findProductInfoById(Long id) {
-			//	LogUtil.error("调用findProductInfoById异常：{}", id, throwable);
-			//	return Result.fail(null, 500);
-			//}
-			//
-			//@Override
-			//public Result<ProductVO> saveProduct(ProductDTO productDTO) {
-			//	LogUtil.error("调用saveProduct异常：{}", productDTO, throwable);
-			//	return Result.fail(null, 500);
-			//}
+			@Override
+			public Result<Boolean> updateStoreDetail(Long id) {
+				return null;
+			}
+
+			@Override
+			public Result<Boolean> underStoreGoods(String id) {
+				return null;
+			}
+
+			@Override
+			public Result<Long> countStoreGoodsNum(Long storeId) {
+				return null;
+			}
 		};
 	}
 }

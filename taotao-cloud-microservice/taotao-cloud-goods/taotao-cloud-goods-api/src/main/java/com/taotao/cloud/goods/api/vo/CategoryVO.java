@@ -1,44 +1,52 @@
 package com.taotao.cloud.goods.api.vo;
 
-import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.List;
+import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
- * 分类VO
+ * 商品分类
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-25 16:33:40
+ * @since 2022-04-25 16:33:33
  */
-@RecordBuilder
-public record CategoryVO(
-
-	@Schema(description = "父节点名称")
-	String parentTitle,
-
-	@Schema(description = "子分类列表")
-	List<CategoryVO> children,
-
-	@Schema(description = "分类关联的品牌列表")
-	List<BrandVO> brandList,
-
-	@Schema(description = "商品分类VO")
-	CategoryBaseVO categoryBase
-
-) implements Serializable {
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@Schema(description = "商品分类VO")
+public class CategoryVO implements Serializable {
 
 	@Serial
-	private static final long serialVersionUID = 3775766246075838410L;
+	private static final long serialVersionUID = 3829199991161122317L;
 
-	public List<CategoryVO> getChildren() {
-		if (children != null) {
-			children.sort(Comparator.comparing((t) -> t.categoryBase.sortOrder()));
-			return children;
-		}
-		return null;
-	}
+	@Schema(description = "id")
+	private Long id;
+
+	@Schema(description = "分类名称")
+	private String name;
+
+	@Schema(description = " 父id, 根节点为0")
+	private Long parentId;
+
+	@Schema(description = "层级, 从0开始")
+	private Integer level;
+
+	@Schema(description = "排序值")
+	private Integer sortOrder;
+
+	@Schema(description = "佣金比例")
+	private BigDecimal commissionRate;
+
+	@Schema(description = "分类图标")
+	private String image;
+
+	@Schema(description = "是否支持频道")
+	private Boolean supportChannel;
 }
