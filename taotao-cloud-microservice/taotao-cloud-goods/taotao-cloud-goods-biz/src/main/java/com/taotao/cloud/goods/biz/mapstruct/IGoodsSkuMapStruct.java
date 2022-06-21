@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -43,10 +43,10 @@ public interface IGoodsSkuMapStruct {
 	 * 产品sku产品sku签证官
 	 *
 	 * @param goodsSku 产品sku
-	 * @return {@link GoodsSkuVO }
+	 * @return {@link GoodsSkuSpecGalleryVO }
 	 * @since 2022-04-27 16:58:24
 	 */
-	GoodsSkuVO goodsSkuToGoodsSkuVO(GoodsSku goodsSku);
+	GoodsSkuSpecGalleryVO goodsSkuToGoodsSkuVO(GoodsSku goodsSku);
 
 
 }

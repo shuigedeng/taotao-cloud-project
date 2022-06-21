@@ -9,10 +9,10 @@ import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsBaseVO;
-import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVO;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.vo.StockWarningVO;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsSku;
@@ -70,24 +70,24 @@ public class GoodsStoreController {
 	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<GoodsBaseVO>> getByPage(GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsVO>> getByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsBaseVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
 	@Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
 	@RequestLogger("分页获取商品Sku列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<PageModel<GoodsSkuBaseVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
+	public Result<PageModel<GoodsSkuVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
+		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 	}
 
 	@Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
@@ -106,7 +106,7 @@ public class GoodsStoreController {
 		//商品SKU列表
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
 		StockWarningVO stockWarning = new StockWarningVO(stockWarnNum,
-			PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuBaseVO.class));
+			PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 		return Result.success(stockWarning);
 	}
 
@@ -114,7 +114,7 @@ public class GoodsStoreController {
 	@RequestLogger("通过id获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{goodsId}")
-	public Result<GoodsVO> get(@PathVariable Long goodsId) {
+	public Result<GoodsSkuParamsVO> get(@PathVariable Long goodsId) {
 		return Result.success(goodsService.getGoodsVO(goodsId));
 	}
 
@@ -175,7 +175,7 @@ public class GoodsStoreController {
 	@RequestLogger("根据goodsId分页获取商品规格列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
-	public Result<List<GoodsSkuVO>> getSkuByList(@PathVariable Long goodsId) {
+	public Result<List<GoodsSkuSpecGalleryVO>> getSkuByList(@PathVariable Long goodsId) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		return Result.success(goodsSkuService.getGoodsSkuVOList(goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId)

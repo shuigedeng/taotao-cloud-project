@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.controller.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +42,7 @@ public class CategoryBuyerController {
 	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}")
-	public Result<List<CategoryVO>> list(
+	public Result<List<CategoryTreeVO>> list(
 		@Parameter(description = "分类父ID") @NotNull(message = "分类ID不能为空") @PathVariable Long parentId) {
 		return Result.success(categoryService.listAllChildren(parentId));
 	}

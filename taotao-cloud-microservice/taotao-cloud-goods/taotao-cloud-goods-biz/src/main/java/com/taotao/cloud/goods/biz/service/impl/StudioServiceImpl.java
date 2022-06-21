@@ -15,8 +15,8 @@ import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
-import com.taotao.cloud.goods.api.vo.CommodityBaseVO;
-import com.taotao.cloud.goods.api.vo.StudioVO;
+import com.taotao.cloud.goods.api.vo.CommodityVO;
+import com.taotao.cloud.goods.api.vo.StudioCommodityVO;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.Studio;
@@ -141,15 +141,15 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 	}
 
 	@Override
-	public StudioVO getStudioVO(Long id) {
-		StudioVO studioVO = new StudioVO();
+	public StudioCommodityVO getStudioVO(Long id) {
+		StudioCommodityVO studioCommodityVO = new StudioCommodityVO();
 		Studio studio = this.getById(id);
 		//获取直播间信息
-		BeanUtil.copyProperties(studio, studioVO);
+		BeanUtil.copyProperties(studio, studioCommodityVO);
 		//获取直播间商品信息
-		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioVO.getRoomId());
-		studioVO.setCommodityList(OrikaUtil.converts(commodities, CommodityBaseVO.class));
-		return studioVO;
+		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioCommodityVO.getRoomId());
+		studioCommodityVO.setCommodityList(OrikaUtil.converts(commodities, CommodityVO.class));
+		return studioCommodityVO;
 	}
 
 	@Override

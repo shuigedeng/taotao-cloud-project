@@ -29,5 +29,5 @@ public class StockWarningVO implements Serializable {
 	private Integer stockWarningNum;
 
 	@Schema(description = "商品SKU列表")
-	private PageModel<GoodsSkuBaseVO> goodsSkuPage;
+	private PageModel<GoodsSkuVO> goodsSkuPage;
 }

@@ -6,10 +6,10 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
@@ -55,7 +55,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	private final IGoodsSkuService goodsSkuService;
 
 	@Override
-	public Boolean addGoodsDraft(DraftGoodsDTO draftGoods) {
+	public Boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
 		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
 		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
 		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -64,7 +64,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public Boolean updateGoodsDraft(DraftGoodsDTO draftGoods) {
+	public Boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
 		draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
 		draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
 		draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -78,7 +78,7 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public Boolean saveGoodsDraft(DraftGoodsDTO draftGoods) {
+	public Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
 		if (draftGoods.getGoodsGalleryList() != null && !draftGoods.getGoodsGalleryList()
 			.isEmpty()) {
 			GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(
@@ -101,10 +101,10 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 	}
 
 	@Override
-	public DraftGoodsVO getDraftGoods(Long id) {
+	public DraftGoodsSkuParamsVO getDraftGoods(Long id) {
 		DraftGoods draftGoods = this.getById(id);
-		DraftGoodsVO draftGoodsVO = new DraftGoodsVO();
-		BeanUtil.copyProperties(draftGoods, draftGoodsVO);
+		DraftGoodsSkuParamsVO draftGoodsSkuParamsVO = new DraftGoodsSkuParamsVO();
+		BeanUtil.copyProperties(draftGoods, draftGoodsSkuParamsVO);
 
 		//商品分类名称赋值
 		List<String> categoryName = new ArrayList<>();
@@ -113,17 +113,17 @@ public class DraftGoodsServiceImpl extends ServiceImpl<IDraftGoodsMapper, DraftG
 		for (Category category : categories) {
 			categoryName.add(category.getName());
 		}
-		draftGoodsVO.setCategoryName(categoryName);
-		draftGoodsVO.setGoodsParamsDTOList(
+		draftGoodsSkuParamsVO.setCategoryName(categoryName);
+		draftGoodsSkuParamsVO.setGoodsParamsDTOList(
 			JSONUtil.toList(JSONUtil.parseArray(draftGoods.getGoodsParamsListJson()),
 				GoodsParamsDTO.class));
-		draftGoodsVO.setGoodsGalleryList(
+		draftGoodsSkuParamsVO.setGoodsGalleryList(
 			JSONUtil.toList(JSONUtil.parseArray(draftGoods.getGoodsGalleryListJson()),
 				String.class));
 		JSONArray jsonArray = JSONUtil.parseArray(draftGoods.getSkuListJson());
 		List<GoodsSku> list = JSONUtil.toList(jsonArray, GoodsSku.class);
-		draftGoodsVO.setSkuList(goodsSkuService.getGoodsSkuVOList(list));
-		return draftGoodsVO;
+		draftGoodsSkuParamsVO.setSkuList(goodsSkuService.getGoodsSkuVOList(list));
+		return draftGoodsSkuParamsVO;
 	}
 
 	@Override

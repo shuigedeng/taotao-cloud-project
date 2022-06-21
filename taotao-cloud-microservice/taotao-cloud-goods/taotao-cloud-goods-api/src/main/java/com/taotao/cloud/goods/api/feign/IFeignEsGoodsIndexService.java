@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(contextId = "IFeignEsGoodsIndexService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryServiceFallback.class)
 public interface IFeignEsGoodsIndexService {
 
-
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
 	List<EsGoodsIndexVO> getEsGoodsBySkuIds(List<String> skuIdList);
 
