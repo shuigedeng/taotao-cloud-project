@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.goods.api.vo.CommodityVO;
+import com.taotao.cloud.goods.api.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.entity.Commodity;
 
 import java.util.List;
@@ -49,8 +49,8 @@ public interface ICommodityService extends IService<Commodity> {
 	 * @param pageParam   分页
 	 * @param name        商品名称
 	 * @param auditStatus 审核状态
-	 * @return {@link IPage }<{@link CommodityVO }>
+	 * @return {@link IPage }<{@link CommoditySkuVO }>
 	 * @since 2022-04-27 16:59:47
 	 */
-	IPage<CommodityVO> commodityList(PageParam pageParam, String name, String auditStatus);
+	IPage<CommoditySkuVO> commodityList(PageParam pageParam, String name, String auditStatus);
 }

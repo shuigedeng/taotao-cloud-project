@@ -21,8 +21,8 @@ import com.taotao.cloud.goods.api.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuVO;
-import com.taotao.cloud.goods.api.vo.GoodsVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.entity.Goods;
 import com.taotao.cloud.goods.biz.entity.GoodsGallery;
@@ -207,11 +207,11 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	}
 
 	@Override
-	public GoodsVO getGoodsVO(Long goodsId) {
+	public GoodsSkuParamsVO getGoodsVO(Long goodsId) {
 		//缓存获取，如果没有则读取缓存
-		GoodsVO goodsVO = (GoodsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
-		if (goodsVO != null) {
-			return goodsVO;
+		GoodsSkuParamsVO goodsSkuParamsVO = (GoodsSkuParamsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
+		if (goodsSkuParamsVO != null) {
+			return goodsSkuParamsVO;
 		}
 
 		//查询商品信息
@@ -221,32 +221,32 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		//赋值
-		goodsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsVO(goods);
+		goodsSkuParamsVO = IGoodsMapStruct.INSTANCE.goodsToGoodsVO(goods);
 		//商品id
-		goodsVO.setId(goods.getId());
+		goodsSkuParamsVO.setId(goods.getId());
 		//商品相册
 		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-		goodsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
+		goodsSkuParamsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
 			.map(GoodsGallery::getOriginal).toList());
 		//商品sku赋值
-		List<GoodsSkuVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
+		List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
 		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
-			goodsVO.setSkuList(goodsListByGoodsId);
+			goodsSkuParamsVO.setSkuList(goodsListByGoodsId);
 		}
 		//商品分类名称赋值
 		String categoryPath = goods.getCategoryPath();
 		String[] strArray = categoryPath.split(",");
 		List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
-		goodsVO.setCategoryName(categories.stream().filter(Objects::nonNull)
+		goodsSkuParamsVO.setCategoryName(categories.stream().filter(Objects::nonNull)
 			.map(Category::getName).toList());
 
 		//参数非空则填写参数
 		if (StrUtil.isNotEmpty(goods.getParams())) {
-			goodsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
+			goodsSkuParamsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
 		}
 
-		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsVO);
-		return goodsVO;
+		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsVO);
+		return goodsSkuParamsVO;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.api.event;
+package com.taotao.cloud.goods.biz.listener;
 
 import org.springframework.context.ApplicationEvent;
 

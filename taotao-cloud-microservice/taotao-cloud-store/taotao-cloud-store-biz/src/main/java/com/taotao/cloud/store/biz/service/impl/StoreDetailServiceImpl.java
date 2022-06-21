@@ -172,7 +172,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	public List<StoreManagementCategoryVO> goodsManagementCategory(String storeId) {
 
 		//获取顶部分类列表
-		List<CategoryTreeVO> categoryList = categoryService.firstCategory();
+		List<CategoryTreeVO> categoryList = categoryService.firstCategory().data();
 		//获取店铺信息
 		StoreDetail storeDetail = this.getOne(new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
 		//获取店铺分类
@@ -180,10 +180,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 		List<StoreManagementCategoryVO> list = new ArrayList<>();
 		for (CategoryTreeVO category : categoryList) {
 			StoreManagementCategoryVO storeManagementCategoryVO = new StoreManagementCategoryVO();
-			BeanUtil.copyProperties(category.categoryBase(), storeManagementCategoryVO);
+			BeanUtil.copyProperties(category, storeManagementCategoryVO);
 
 			for (String storeCategory : storeCategoryList) {
-				if (Long.valueOf(storeCategory).equals(category.categoryBase().id())) {
+				if (Long.valueOf(storeCategory).equals(category.getId())) {
 					storeManagementCategoryVO.setSelected(true);
 				}
 			}

@@ -1,6 +1,5 @@
 package com.taotao.cloud.goods.biz.listener;
 
-import com.taotao.cloud.goods.api.event.GeneratorEsGoodsIndexEvent;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;

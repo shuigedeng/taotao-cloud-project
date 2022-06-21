@@ -107,7 +107,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
      * @return 商品sku
      */
     private GoodsSkuSpecGalleryVO checkSkuExist(Long skuId) {
-        GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+        GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId).data();
         if (goodsSku == null) {
             log.error("商品ID为" + skuId + "的商品不存在！");
             throw new BusinessException("商品ID为" + skuId + "的商品不存在！");

@@ -1,38 +1,43 @@
 package com.taotao.cloud.goods.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
-import java.util.Comparator;
-import java.util.List;
+import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 分类VO
- **/
+ * 商品分类
+ */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryVO extends CategoryBaseVO {
+@Schema(description = "商品分类VO")
+public class CategoryVO {
 
-	private static final long serialVersionUID = 3775766246075838410L;
+	@Schema(description = "id")
+	private Long id;
 
-	@Schema(description = "父节点名称")
-	private String parentTitle;
+	@Schema(description = "分类名称")
+	private String name;
 
-	@Schema(description = "子分类列表")
-	private List<CategoryVO> children;
+	@Schema(description = " 父id, 根节点为0")
+	private Long parentId;
 
-	@Schema(description = "分类关联的品牌列表")
-	private List<BrandVO> brandList;
+	@Schema(description = "层级, 从0开始")
+	private Integer level;
 
-	public List<CategoryVO> getChildren() {
-		if (children != null) {
-			children.sort(Comparator.comparing(CategoryBaseVO::getSortOrder));
-			return children;
-		}
-		return null;
-	}
+	@Schema(description = "排序值")
+	private Integer sortOrder;
+
+	@Schema(description = "佣金比例")
+	private BigDecimal commissionRate;
+
+	@Schema(description = "分类图标")
+	private String image;
+
+	@Schema(description = "是否支持频道")
+	private Boolean supportChannel;
 }

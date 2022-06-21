@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -46,19 +46,19 @@ public interface ICategoryMapStruct {
 	 * 类别,类别签证官
 	 *
 	 * @param category 类别
-	 * @return {@link CategoryVO }
+	 * @return {@link CategoryTreeVO }
 	 * @since 2022-04-27 16:58:05
 	 */
-	CategoryVO categoryToCategoryVO(Category category);
+	CategoryTreeVO categoryToCategoryVO(Category category);
 
 	/**
 	 * 类别基础vos思想史范畴
 	 *
 	 * @param categorys 思想史范畴
-	 * @return {@link List }<{@link CategoryBaseVO }>
+	 * @return {@link List }<{@link CategoryVO }>
 	 * @since 2022-04-27 16:58:05
 	 */
-	List<CategoryBaseVO> categorysToCategoryBaseVOs(List<Category> categorys);
+	List<CategoryVO> categorysToCategoryBaseVOs(List<Category> categorys);
 
 
 }

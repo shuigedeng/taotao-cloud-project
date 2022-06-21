@@ -6,10 +6,10 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.goods.api.dto.DraftGoodsDTO;
+import com.taotao.cloud.goods.api.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.DraftGoodsBaseVO;
 import com.taotao.cloud.goods.api.vo.DraftGoodsVO;
+import com.taotao.cloud.goods.api.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.service.IDraftGoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -49,18 +49,18 @@ public class DraftGoodsStoreController {
 	@RequestLogger("分页获取草稿商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<DraftGoodsBaseVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
+	public Result<PageModel<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
 		draftGoodsPageQuery.setStoreId(storeId);
 		IPage<DraftGoods> draftGoods = draftGoodsService.getDraftGoods(draftGoodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsBaseVO.class));
+		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsVO.class));
 	}
 
 	@Operation(summary = "获取草稿商品", description = "获取草稿商品")
 	@RequestLogger("获取草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<DraftGoodsVO> getDraftGoods(@PathVariable Long id) {
+	public Result<DraftGoodsSkuParamsVO> getDraftGoods(@PathVariable Long id) {
 		return Result.success(draftGoodsService.getDraftGoods(id));
 	}
 
@@ -68,15 +68,15 @@ public class DraftGoodsStoreController {
 	@RequestLogger("保存草稿商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsDTO draftGoodsDTO) {
+	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO) {
 		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
-		if (draftGoodsDTO.getStoreId() == null) {
-			draftGoodsDTO.setStoreId(storeId);
-		} else if (draftGoodsDTO.getStoreId() != null && !storeId.equals(
-			draftGoodsDTO.getStoreId())) {
+		if (draftGoodsSkuParamsDTO.getStoreId() == null) {
+			draftGoodsSkuParamsDTO.setStoreId(storeId);
+		} else if (draftGoodsSkuParamsDTO.getStoreId() != null && !storeId.equals(
+			draftGoodsSkuParamsDTO.getStoreId())) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
-		return Result.success(draftGoodsService.saveGoodsDraft(draftGoodsDTO));
+		return Result.success(draftGoodsService.saveGoodsDraft(draftGoodsSkuParamsDTO));
 	}
 
 	@Operation(summary = "删除草稿商品", description = "删除草稿商品")

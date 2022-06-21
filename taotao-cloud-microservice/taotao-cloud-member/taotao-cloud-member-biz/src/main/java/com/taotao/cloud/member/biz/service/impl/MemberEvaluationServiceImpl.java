@@ -110,7 +110,7 @@ public class MemberEvaluationServiceImpl extends
 		Member member = memberService.getUserInfo();
 		//获取商品信息
 		GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
-			memberEvaluationDTO.getSkuId());
+			memberEvaluationDTO.getSkuId()).data();
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
 			member, order);

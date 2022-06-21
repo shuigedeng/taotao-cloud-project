@@ -3,8 +3,8 @@ package com.taotao.cloud.goods.biz.controller.manager;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.vo.CategoryBaseVO;
 import com.taotao.cloud.goods.api.vo.CategoryVO;
+import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
@@ -58,7 +58,7 @@ public class CategoryManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}/children/all")
-	public Result<List<CategoryBaseVO>> list(@PathVariable Long parentId) {
+	public Result<List<CategoryVO>> list(@PathVariable Long parentId) {
 		List<Category> categories = this.categoryService.dbList(parentId);
 		return Result.success(ICategoryMapStruct.INSTANCE.categorysToCategoryBaseVOs(categories));
 	}
@@ -67,7 +67,7 @@ public class CategoryManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/children/all")
-	public Result<List<CategoryVO>> list() {
+	public Result<List<CategoryTreeVO>> list() {
 		return Result.success(this.categoryService.listAllChildren());
 	}
 
@@ -93,7 +93,7 @@ public class CategoryManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping
-	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryVO category) {
+	public Result<Boolean> updateCategory(@Valid @RequestBody CategoryTreeVO category) {
 		Category catTemp = categoryService.getById(category.getId());
 		if (catTemp == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
