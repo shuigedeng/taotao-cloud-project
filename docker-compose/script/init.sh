@@ -42,20 +42,20 @@ mkdir -p /root/cloud/yapi/mongodb
 # mysql8 单机版初始化安装
 mkdir -p /root/mysql/data
 mkdir -p /root/mysql/conf
-touch -p /root/mysql/conf/my.cnf
+touch  /root/mysql/conf/my.cnf
 
 docker run --name mysql  \
 --restart=always \
 --privileged=true \
 -e MYSQL_ROOT_PASSWORD=123456 \
--p 3376:3306 \
--v /root/mysql/data/:/var/lib/mysql \
+-p 3306:3306 \
+-v /root/mysql/data:/var/lib/mysql \
 -v /root/mysql/conf/my.cnf:/etc/mysql/my.cnf \
 -d mysql
 
-sleep 60
+sleep 2m
 
-mysql -h 192.168.10.200 -uroot -p123456 -e "
+mysql -h 127.0.0.1 -uroot -p123456 -e "
 use mysql;
 update user set host='%' where user='root';
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
@@ -64,15 +64,15 @@ flush privileges;
 
 create database `taotao-cloud-nacos-2.1.0`;
 use `taotao-cloud-nacos-2.1.0`;
-source nacos.sql
+source nacos.sql;
 
 create database `taotao-cloud-seata-1.5.1`;
 use `taotao-cloud-seata-1.5.1`;
-source seata.sql
+source seata.sql;
 
 create database `taotao-cloud-zipkin-0.3.0`;
 use `taotao-cloud-zipkin-0.3.0`;
-source zipkin.sql
+source zipkin.sql;
 "
 
 
