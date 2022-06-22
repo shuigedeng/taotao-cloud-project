@@ -1,7 +1,5 @@
 package com.taotao.cloud.goods.biz.elasticsearch;
 
-import com.taotao.cloud.goods.api.dto.ParamOptions;
-import com.taotao.cloud.goods.api.dto.SelectorOptions;
 import java.util.List;
 import lombok.Data;
 
