@@ -34,7 +34,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-07 20:55:46
  */
-@Mapper(builder = @Builder(disableBuilder = true),
+@Mapper(
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IAfterSaleReasonMapStruct {

@@ -17,7 +17,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.sys.biz.entity.system.QRoleMenu;
+import com.taotao.cloud.sys.biz.model.entity.system.QRoleMenu;
 import com.taotao.cloud.sys.biz.model.entity.system.RoleMenu;
 import com.taotao.cloud.sys.biz.mapper.IRoleMenuMapper;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleMenuRepository;

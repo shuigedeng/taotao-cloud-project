@@ -30,7 +30,7 @@ import org.mapstruct.factory.Mappers;
  * @version 2022.04
  * @since 2022-04-27 16:58:16
  */
-@Mapper(builder = @Builder(disableBuilder = true),
+@Mapper(
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IGoodsLabelStoreMapStruct {

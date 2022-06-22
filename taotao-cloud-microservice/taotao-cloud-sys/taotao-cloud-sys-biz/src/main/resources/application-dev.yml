@@ -1070,7 +1070,7 @@ taotao:
           enabled: false
       jpa:
         enabled: true
-        packages: com.taotao.cloud.sys.biz.entity
+        packages: com.taotao.cloud.sys.biz.model.entity
         tenant:
           enabled: false
     core:
@@ -1080,7 +1080,7 @@ taotao:
       enabled: false
 
 mybatis-plus:
-  typeAliasesPackage: com.taotao.cloud.sys.biz.entity
+  typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity
   global-config:
     db-config:
       id-type: auto
