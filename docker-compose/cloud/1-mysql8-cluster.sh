@@ -43,7 +43,8 @@ use mysql;
 update user set host='%' where user='root';
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 alter user 'root'@'%' identified by '123456' password expire never;
-flush privileges; // 刷新权限
+flush privileges;
+// 刷新权限
 
 ################################################################
 [mysqld]
