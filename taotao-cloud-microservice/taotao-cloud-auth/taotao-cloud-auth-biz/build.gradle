@@ -31,17 +31,17 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.3.0'
+    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.3.1'
 
     implementation 'com.nimbusds:nimbus-jose-jwt:9.7'
     implementation 'com.nimbusds:oauth2-oidc-sdk:9.3'
 
     implementation 'org.apache.commons:commons-collections4'
 
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'io.projectreactor.netty:reactor-netty-http'
     implementation 'org.springframework:spring-webflux'
+    implementation 'io.projectreactor.netty:reactor-netty-http'
     implementation 'io.projectreactor.netty:reactor-netty'
 
     implementation "org.mapstruct:mapstruct:1.5.1.Final"
@@ -54,7 +54,6 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
 }
 
 tasks.named('test') {
@@ -62,37 +61,3 @@ tasks.named('test') {
 }
 
 mainClassName="com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
-
-//ext {
-//    webjarsGroupId = "org.webjars"
-//}
-//
-//dependencies {
-//    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis'))
-//
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-//    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.2.0'
-//    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-//
-//    implementation group: webjarsGroupId, name: 'webjars-locator', version: '0.42'
-//    implementation group: webjarsGroupId, name: 'bootstrap', version: '5.1.3'
-//    implementation group: webjarsGroupId, name: 'jquery', version: '3.6.0'
-//
-//    implementation 'com.querydsl:querydsl-apt'
-//    implementation 'com.querydsl:querydsl-jpa'
-//    implementation "mysql:mysql-connector-java"
-//
-//    annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
-//    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-//    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-//
-//    implementation 'org.springframework.boot:spring-boot-devtools'
-//    implementation 'org.springframework.boot:spring-boot-starter-tomcat'
-//    implementation 'org.springframework.boot:spring-boot-starter-test'
-//    implementation 'org.springframework.security:spring-security-test'
-//}

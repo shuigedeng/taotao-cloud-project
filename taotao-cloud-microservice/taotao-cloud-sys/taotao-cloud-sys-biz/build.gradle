@@ -19,8 +19,8 @@ dependencies {
 
     implementation "com.belerweb:pinyin4j:2.5.0"
 
-    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.19'
-    implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.2.21'
+    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.23'
+    implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.5'
 
     implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
     implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
