@@ -1,3 +1,7 @@
+# 新建网络 docker-compose -f  3-zk-kafka-cluster.yml up -d
+# docker network ls #查看当前网络
+# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 taotao-cluster-network
+
 version: '3.8'
 services:
   redis10:
