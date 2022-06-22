@@ -15,6 +15,7 @@ import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.entity.Category;
 import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
+import com.taotao.cloud.goods.biz.service.IBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
@@ -52,6 +53,7 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	 * 缓存服务
 	 */
 	private final RedisRepository redisRepository;
+	private final IBrandService brandService;
 	/**
 	 * 分类品牌服务
 	 */
@@ -85,8 +87,7 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	@Override
 	public List<CategoryTreeVO> categoryTree() {
 		// 获取缓存数据
-		List<CategoryTreeVO> categoryTreeVOList = (List<CategoryTreeVO>) redisRepository.get(
-			CachePrefix.CATEGORY.getPrefix());
+		List<CategoryTreeVO> categoryTreeVOList = redisRepository.lGet(CachePrefix.CATEGORY.getPrefix(), 0L, redisRepository.lGetListSize(CachePrefix.CATEGORY.getPrefix()));
 		if (categoryTreeVOList != null) {
 			return categoryTreeVOList;
 		}
@@ -96,11 +97,14 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 		queryWrapper.eq(Category::getDelFlag, false);
 		List<Category> list = this.list(queryWrapper);
 
+		brandService.getBrandsByCategory()
+
 		//构造分类树
 		categoryTreeVOList = new ArrayList<>();
 		for (Category category : list) {
 			if (Long.valueOf(0).equals(category.getParentId())) {
 				CategoryTreeVO categoryTreeVO = ICategoryMapStruct.INSTANCE.categoryToCategoryVO(category);
+				categoryTreeVO.setParentTitle(category.getName());
 				categoryTreeVO.setChildren(findChildren(list, categoryTreeVO));
 				categoryTreeVOList.add(categoryTreeVO);
 			}
@@ -109,8 +113,8 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 		categoryTreeVOList.sort(Comparator.comparing(CategoryTreeVO::getSortOrder));
 
 		if (!categoryTreeVOList.isEmpty()) {
-			redisRepository.set(CachePrefix.CATEGORY.getPrefix(), categoryTreeVOList);
-			redisRepository.set(CachePrefix.CATEGORY_ARRAY.getPrefix(), list);
+			redisRepository.lSet(CachePrefix.CATEGORY.getPrefix(), categoryTreeVOList);
+			redisRepository.lSet(CachePrefix.CATEGORY_ARRAY.getPrefix(), list);
 		}
 		return categoryTreeVOList;
 	}
@@ -304,7 +308,9 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 		categories.forEach(item -> {
 			if (item.getParentId().equals(categoryTreeVO.getId())) {
 				CategoryTreeVO temp = ICategoryMapStruct.INSTANCE.categoryToCategoryVO(item);
+				temp.setParentTitle(item.getName());
 				temp.setChildren(findChildren(categories, temp));
+
 				children.add(temp);
 			}
 		});

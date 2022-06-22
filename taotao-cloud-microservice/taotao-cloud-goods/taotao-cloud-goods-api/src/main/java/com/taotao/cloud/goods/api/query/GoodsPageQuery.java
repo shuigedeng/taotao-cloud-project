@@ -35,8 +35,8 @@ public class GoodsPageQuery extends PageParam {
 	@Serial
 	private static final long serialVersionUID = 2544015852728566887L;
 
-	//@Schema(description = "商品编号")
-	//private Long goodsId;
+	@Schema(description = "商品编号")
+	private Long goodsId;
 
 	@Schema(description = "商品名称")
 	private String goodsName;
@@ -91,9 +91,9 @@ public class GoodsPageQuery extends PageParam {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		//if (Objects.nonNull(goodsId)) {
-		//	queryWrapper.eq("goods_id", goodsId);
-		//}
+		if (Objects.nonNull(goodsId)) {
+			queryWrapper.eq("goods_id", goodsId);
+		}
 		if (CharSequenceUtil.isNotEmpty(goodsName)) {
 			queryWrapper.like("goods_name", goodsName);
 		}

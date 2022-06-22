@@ -122,8 +122,7 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 					token = request.getParameter(CommonConstant.TAOTAO_CLOUD_ACCESS_TOKEN);
 				}
 				if (StrUtil.isNotEmpty(token)) {
-					template.header(CommonConstant.TAOTAO_CLOUD_TOKEN_HEADER,
-						CommonConstant.BEARER_TYPE + " " + token);
+					template.header(CommonConstant.TAOTAO_CLOUD_TOKEN_HEADER, CommonConstant.BEARER_TYPE + " " + token);
 				}
 			}
 
@@ -135,8 +134,7 @@ public class FeignInterceptorConfiguration implements InitializingBean {
 
 			//传递日志traceId
 			String traceId = MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
-			template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER,
-				StrUtil.isNotEmpty(traceId) ? traceId : IdGeneratorUtil.getIdStr());
+			template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, StrUtil.isNotEmpty(traceId) ? traceId : IdGeneratorUtil.getIdStr());
 
 			//服务内部inner
 			template.header(CommonConstant.TAOTAO_CLOUD_FROM_INNER, "true");

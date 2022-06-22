@@ -7,8 +7,8 @@ import com.alibaba.druid.util.StringUtils;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.goods.api.dto.HotWordsDTO;
-import com.taotao.cloud.goods.api.dto.ParamOptions;
-import com.taotao.cloud.goods.api.dto.SelectorOptions;
+import com.taotao.cloud.goods.biz.elasticsearch.ParamOptions;
+import com.taotao.cloud.goods.biz.elasticsearch.SelectorOptions;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
@@ -48,7 +48,6 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
 

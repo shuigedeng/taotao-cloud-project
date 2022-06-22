@@ -3408,9 +3408,9 @@ public class RedisRepository {
 	 * @return List
 	 * @since 2021-09-07 21:04:53
 	 */
-	public List<Object> lGet(String key, Long start, Long end) {
+	public <T> List<T> lGet(String key, Long start, Long end) {
 		try {
-			return redisTemplate.opsForList().range(key, start, end);
+			return (List<T>)redisTemplate.opsForList().range(key, start, end);
 		} catch (Exception e) {
 			LogUtil.error("Exception: {}", e.getMessage());
 			return null;
@@ -3441,9 +3441,9 @@ public class RedisRepository {
 	 * @return Object
 	 * @since 2021-09-07 21:04:53
 	 */
-	public Object lGetIndex(String key, Long index) {
+	public <V> V  lGetIndex(String key, Long index) {
 		try {
-			return redisTemplate.opsForList().index(key, index);
+			return (V)redisTemplate.opsForList().index(key, index);
 		} catch (Exception e) {
 			LogUtil.error("Exception: {}", e.getMessage());
 			return null;
@@ -3481,7 +3481,7 @@ public class RedisRepository {
 	 * @return Boolean
 	 * @since 2021-09-07 21:04:53
 	 */
-	public Boolean lSet(String key, List<Object> value) {
+	public Boolean lSet(String key, List<?> value) {
 		try {
 			redisTemplate.opsForList().rightPushAll(key, value);
 			return true;
@@ -3500,7 +3500,7 @@ public class RedisRepository {
 	 * @return Boolean
 	 * @since 2021-09-07 21:04:53
 	 */
-	public Boolean lSet(String key, List<Object> value, Long time) {
+	public Boolean lSet(String key, List<?> value, Long time) {
 		try {
 			redisTemplate.opsForList().rightPushAll(key, value);
 			if (time > 0) {

@@ -46,6 +46,15 @@ public interface IBrandService extends IService<Brand> {
 	List<Brand> getBrandsByCategory(Long categoryId);
 
 	/**
+	 * 根据分类ID获取品牌列表
+	 *
+	 * @param categoryIds 分类ID
+	 * @return {@link List }<{@link Brand }>
+	 * @since 2022-04-27 16:59:15
+	 */
+	List<Brand> getBrandsByCategorys(Long categoryIds);
+
+	/**
 	 * 添加品牌
 	 *
 	 * @param brandDTO 品牌信息

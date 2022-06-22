@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -67,6 +68,20 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	public List<Brand> getBrandsByCategory(Long categoryId) {
 		QueryWrapper<CategoryBrand> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("category_id", categoryId);
+		List<CategoryBrand> list = categoryBrandService.list(queryWrapper);
+		if (list != null && !list.isEmpty()) {
+			List<Long> collect = list.stream().map(CategoryBrand::getBrandId).toList();
+			return this.list(new LambdaQueryWrapper<Brand>().in(Brand::getId, collect));
+		}
+		return new ArrayList<>();
+	}
+
+	@Override
+	public List<Brand> getBrandsByCategorys(Long categoryIds){
+		Map<String,  List<Brand>> map = this.baseMapper.selectBrandsByCategorysAsMap(categoryIds)
+
+		QueryWrapper<CategoryBrand> queryWrapper = new QueryWrapper<>();
+		queryWrapper.in("category_id", categoryIds);
 		List<CategoryBrand> list = categoryBrandService.list(queryWrapper);
 		if (list != null && !list.isEmpty()) {
 			List<Long> collect = list.stream().map(CategoryBrand::getBrandId).toList();

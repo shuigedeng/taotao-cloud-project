@@ -26,6 +26,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.util.ClassUtils;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * 版本隔离配置
  *
@@ -35,8 +37,7 @@ import org.springframework.util.ClassUtils;
  */
 @AutoConfiguration
 @LoadBalancerClients(defaultConfiguration = VersionLoadBalancerClients.class)
-@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX
-	+ ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX + ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
 @Import({VersionLoadbalancerRegisterBeanPostProcessor.class})
 public class VersionLoadbalancerConfiguration {
 
@@ -51,11 +52,9 @@ public class VersionLoadbalancerConfiguration {
 		@Override
 		public Object postProcessBeforeInitialization(Object bean, String beanName)
 			throws BeansException {
-			if (bean instanceof NacosDiscoveryProperties && StringUtil.isNotBlank(
-				properties.getVersion())) {
+			if (bean instanceof NacosDiscoveryProperties && StringUtil.isNotBlank(properties.getVersion())) {
 				NacosDiscoveryProperties nacosDiscoveryProperties = (NacosDiscoveryProperties) bean;
-				nacosDiscoveryProperties.getMetadata()
-					.putIfAbsent(CommonConstant.METADATA_VERSION, properties.getVersion());
+				nacosDiscoveryProperties.getMetadata().putIfAbsent(CommonConstant.METADATA_VERSION, properties.getVersion());
 			}
 			return bean;
 		}
@@ -75,19 +74,18 @@ public class VersionLoadbalancerConfiguration {
 
 		@Bean
 		@ConditionalOnMissingBean(IRuleChooser.class)
-		@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX
-			+ ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
+		@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX + ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
 		public IRuleChooser customRuleChooser(ApplicationContext context) {
 			IRuleChooser chooser = new RoundRuleChooser();
 
 			if (org.apache.commons.lang3.StringUtils.isNotBlank(properties.getChooser())) {
 				try {
-					Class<?> ruleClass = ClassUtils.forName(properties.getChooser(),
-						context.getClassLoader());
-					chooser = (IRuleChooser) ruleClass.newInstance();
+					Class<?> ruleClass = ClassUtils.forName(properties.getChooser(), context.getClassLoader());
+					chooser = (IRuleChooser) ruleClass.getDeclaredConstructor().newInstance();
 				} catch (ClassNotFoundException e) {
 					LogUtil.error("没有找到定义的选择器，将使用内置的选择器", e);
-				} catch (InstantiationException | IllegalAccessException e) {
+				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+						 InvocationTargetException e) {
 					LogUtil.error("没法创建定义的选择器，将使用内置的选择器", e);
 				}
 			}

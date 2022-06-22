@@ -20,6 +20,4 @@ public class GoodsSkuStockDTO {
 
 	@Schema(description = "库存")
 	private Integer quantity;
-
-
 }

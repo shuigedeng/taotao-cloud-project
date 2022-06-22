@@ -28,17 +28,6 @@ import com.taotao.cloud.common.utils.func.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.security.annotation.NotAuth;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Properties;
-import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -74,6 +63,18 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.pattern.PathPattern;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.Set;
+
 /**
  * Oauth2ResourceSecurityConfigurer
  *
@@ -86,6 +87,7 @@ public class Oauth2ResourceConfiguration {
 
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
+
 	@Autowired
 	private RedisCacheManager redisCacheManager;
 
