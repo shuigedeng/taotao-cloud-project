@@ -6,7 +6,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVO;
-import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.service.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;
 import io.swagger.v3.oas.annotations.Hidden;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.biz.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 /**

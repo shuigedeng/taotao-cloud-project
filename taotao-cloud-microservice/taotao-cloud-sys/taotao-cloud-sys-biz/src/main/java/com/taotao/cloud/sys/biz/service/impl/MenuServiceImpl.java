@@ -18,13 +18,13 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.sys.api.bo.menu.MenuBO;
-import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
-import com.taotao.cloud.sys.api.bo.role.RoleBO;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
+import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.api.dubbo.IDubboMenuService;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.entity.system.Menu;
+import com.taotao.cloud.sys.biz.model.entity.system.Menu;
 import com.taotao.cloud.sys.biz.entity.system.QMenu;
 import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
@@ -89,7 +89,7 @@ public class MenuServiceImpl extends
 	}
 
 	@Override
-	public List<MenuQueryBO> findAllById(Long id) {
+	public List<MenuQueryRequest> findAllById(Long id) {
 		List<Menu> menus = ir().findAll();
 		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(menus);
 	}
@@ -174,7 +174,7 @@ public class MenuServiceImpl extends
 	}
 
 	@Override
-	public List<MenuQueryBO> queryAllById(Long id) {
+	public List<MenuQueryRequest> queryAllById(Long id) {
 		List<Menu> all = ir().findAll();
 		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(all);
 	}

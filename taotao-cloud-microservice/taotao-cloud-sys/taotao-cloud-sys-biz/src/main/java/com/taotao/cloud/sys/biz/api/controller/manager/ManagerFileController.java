@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.file.FileVO;
 import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
-import com.taotao.cloud.sys.biz.entity.file.File;
+import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.sys.biz.mapstruct.IFileMapStruct;
 import com.taotao.cloud.sys.biz.service.IFileService;
 import io.swagger.v3.oas.annotations.Operation;

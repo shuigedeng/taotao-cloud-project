@@ -23,7 +23,7 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.log.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.entity.system.Log;
+import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.service.ILogService;
 import java.io.IOException;

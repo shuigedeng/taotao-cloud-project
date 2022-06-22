@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.api.bo.menu.MenuBO;
-import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.entity.system.Menu;
+import com.taotao.cloud.sys.biz.model.entity.system.Menu;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Set;
@@ -48,7 +48,7 @@ public interface IMenuService extends BaseSuperService<Menu, Long> {
 	 * @return 菜单列表
 	 * @since 2022-03-23 08:55:48
 	 */
-	List<MenuQueryBO> findAllById(Long id);
+	List<MenuQueryRequest> findAllById(Long id);
 
 	/**
 	 * 根据角色id列表获取角色列表

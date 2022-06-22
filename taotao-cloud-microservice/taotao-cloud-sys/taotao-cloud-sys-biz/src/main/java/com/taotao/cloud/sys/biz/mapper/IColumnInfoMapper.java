@@ -19,7 +19,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.sys.api.vo.generator.TableInfo;
-import com.taotao.cloud.sys.biz.entity.config.ColumnConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.ColumnConfig;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;

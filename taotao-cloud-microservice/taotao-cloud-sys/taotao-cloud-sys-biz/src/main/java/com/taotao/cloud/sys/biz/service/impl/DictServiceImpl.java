@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
-import com.taotao.cloud.sys.biz.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.utils;
 
-import com.taotao.cloud.sys.biz.entity.config.AlipayConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;

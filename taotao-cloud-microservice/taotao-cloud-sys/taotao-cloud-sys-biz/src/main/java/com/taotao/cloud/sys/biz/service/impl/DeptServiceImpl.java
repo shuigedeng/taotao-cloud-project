@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
-import com.taotao.cloud.sys.biz.entity.system.Dept;
+import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.mapper.IDeptMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IDeptMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.DeptRepository;

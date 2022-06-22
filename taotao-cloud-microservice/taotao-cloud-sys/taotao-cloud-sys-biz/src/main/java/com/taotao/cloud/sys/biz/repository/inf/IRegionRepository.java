@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.entity.region.Region;
+import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

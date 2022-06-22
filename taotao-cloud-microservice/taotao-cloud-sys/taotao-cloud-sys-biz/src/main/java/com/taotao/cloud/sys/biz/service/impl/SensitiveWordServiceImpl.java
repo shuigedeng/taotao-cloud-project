@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.biz.entity.sensitive.SensitiveWord;
+import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 import com.taotao.cloud.sys.biz.mapper.ISensitiveWordMapper;
 import com.taotao.cloud.sys.biz.repository.cls.SensitiveWordRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISensitiveWordRepository;

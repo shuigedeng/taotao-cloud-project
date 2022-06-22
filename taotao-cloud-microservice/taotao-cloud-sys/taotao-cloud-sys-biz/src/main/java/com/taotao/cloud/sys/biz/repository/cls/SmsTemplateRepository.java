@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.entity.sms.SmsTemplate;
+import com.taotao.cloud.sys.biz.model.entity.sms.SmsTemplate;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
