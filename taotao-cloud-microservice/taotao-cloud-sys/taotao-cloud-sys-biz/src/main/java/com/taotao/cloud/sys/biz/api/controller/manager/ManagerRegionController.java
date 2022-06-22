@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.api.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.vo.region.RegionQueryVO;
 import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
-import com.taotao.cloud.sys.biz.entity.region.Region;
+import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;

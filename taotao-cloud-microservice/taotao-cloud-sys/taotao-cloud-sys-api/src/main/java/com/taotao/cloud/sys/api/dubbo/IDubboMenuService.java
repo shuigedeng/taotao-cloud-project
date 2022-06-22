@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 
-import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
 import java.util.List;
 
 /**
@@ -20,5 +20,5 @@ public interface IDubboMenuService {
 	 * @return 菜单信息
 	 * @since 2022-03-25 14:13:34
 	 */
-	List<MenuQueryBO> queryAllById(Long id);
+	List<MenuQueryRequest> queryAllById(Long id);
 }

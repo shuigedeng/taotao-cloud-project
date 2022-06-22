@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.entity.scheduled.ScheduledJob;
+import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledJob;
 import org.springframework.stereotype.Repository;
 
 /**

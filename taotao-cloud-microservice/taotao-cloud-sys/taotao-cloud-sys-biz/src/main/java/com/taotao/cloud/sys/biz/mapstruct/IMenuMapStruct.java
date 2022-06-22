@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.bo.menu.MenuBO;
-import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.entity.system.Menu;
+import com.taotao.cloud.sys.biz.model.entity.system.Menu;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -57,10 +57,10 @@ public interface IMenuMapStruct {
 	 * 实体查询bos
 	 *
 	 * @param menus 菜单
-	 * @return {@link List }<{@link MenuQueryBO }>
+	 * @return {@link List }<{@link MenuQueryRequest }>
 	 * @since 2022-04-28 13:39:41
 	 */
-	List<MenuQueryBO> entitysToQueryBOs(List<Menu> menus);
+	List<MenuQueryRequest> entitysToQueryBOs(List<Menu> menus);
 
 	/**
 	 * 菜单bos

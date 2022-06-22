@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.biz.entity.scheduled.ScheduledLog;
+import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledLog;
 
 public interface IScheduledLogService extends IService<ScheduledLog> {
 

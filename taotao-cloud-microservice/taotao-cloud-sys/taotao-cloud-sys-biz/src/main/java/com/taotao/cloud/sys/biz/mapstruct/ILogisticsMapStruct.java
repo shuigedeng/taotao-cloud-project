@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
-import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.entity.system.Menu;
+import com.taotao.cloud.sys.biz.model.entity.system.Menu;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import java.util.Set;

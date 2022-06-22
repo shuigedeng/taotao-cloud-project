@@ -16,8 +16,8 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.biz.entity.config.ColumnConfig;
-import com.taotao.cloud.sys.biz.entity.config.GenConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.ColumnConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.GenConfig;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;

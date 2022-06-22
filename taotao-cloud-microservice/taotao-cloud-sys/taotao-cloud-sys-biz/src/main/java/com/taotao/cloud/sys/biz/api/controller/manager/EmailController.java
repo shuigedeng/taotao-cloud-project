@@ -8,7 +8,7 @@ import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.dto.EmailDTO;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVO;
-import com.taotao.cloud.sys.biz.entity.config.EmailConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.mapstruct.IEmailMapStruct;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
 import com.taotao.cloud.web.quartz.QuartzManager;

@@ -6,7 +6,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.netty.annotation.RequestParam;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.setting.SettingVO;
-import com.taotao.cloud.sys.biz.entity.config.Setting;
+import com.taotao.cloud.sys.biz.model.entity.config.Setting;
 import com.taotao.cloud.sys.biz.service.ISettingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;

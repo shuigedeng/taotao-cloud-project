@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.api.controller.manager;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
-import com.taotao.cloud.sys.biz.entity.config.LogisticsConfig;
+import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import com.taotao.cloud.sys.biz.mapstruct.ILogisticsMapStruct;
 import com.taotao.cloud.sys.biz.service.ILogisticsService;
 import io.swagger.v3.oas.annotations.Operation;

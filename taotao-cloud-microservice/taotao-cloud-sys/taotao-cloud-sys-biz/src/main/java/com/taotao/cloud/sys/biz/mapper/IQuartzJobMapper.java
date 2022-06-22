@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.entity.quartz.QuartzJob;
+import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
-import com.taotao.cloud.sys.biz.entity.system.Job;
+import com.taotao.cloud.sys.biz.model.entity.system.Job;
 import com.taotao.cloud.sys.biz.mapper.IJobMapper;
 import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
 import com.taotao.cloud.sys.biz.repository.cls.JobRepository;

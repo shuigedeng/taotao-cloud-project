@@ -16,10 +16,10 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.sys.api.bo.role.RoleBO;
+import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.api.dubbo.IDubboRoleService;
 import com.taotao.cloud.sys.biz.entity.system.QRole;
-import com.taotao.cloud.sys.biz.entity.system.Role;
+import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;

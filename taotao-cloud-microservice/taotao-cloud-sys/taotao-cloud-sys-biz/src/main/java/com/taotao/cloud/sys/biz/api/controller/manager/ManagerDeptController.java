@@ -23,7 +23,7 @@ import com.taotao.cloud.sys.api.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.sys.api.dto.dept.DeptUpdateDTO;
 import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.api.vo.dept.DeptQueryVO;
-import com.taotao.cloud.sys.biz.entity.system.Dept;
+import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.service.IDeptService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;

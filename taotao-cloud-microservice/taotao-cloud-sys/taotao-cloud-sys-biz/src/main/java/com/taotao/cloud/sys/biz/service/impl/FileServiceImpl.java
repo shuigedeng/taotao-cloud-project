@@ -12,7 +12,7 @@ import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.service.UploadFileService;
 import com.taotao.cloud.oss.common.util.FileUtil;
 import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
-import com.taotao.cloud.sys.biz.entity.file.File;
+import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.sys.biz.mapper.IFileMapper;
 import com.taotao.cloud.sys.biz.repository.cls.FileRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IFileRepository;

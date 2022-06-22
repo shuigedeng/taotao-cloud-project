@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.biz.entity.system.Visits;
+import com.taotao.cloud.sys.biz.model.entity.system.Visits;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.scheduling.annotation.Async;
 

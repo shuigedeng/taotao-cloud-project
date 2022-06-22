@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.entity.file.File;
+import com.taotao.cloud.sys.biz.model.entity.file.File;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
