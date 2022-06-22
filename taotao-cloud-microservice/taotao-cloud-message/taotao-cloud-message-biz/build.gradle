@@ -6,9 +6,11 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     //阿里云 钉钉 SDK
@@ -38,31 +40,3 @@ dependencies {
     //腾讯sdk(目前用在短信上)
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.390'
 }
-
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    classifier = null
-//    version = 1.0
-//    manifest {
-//        attributes(
-//                'Main-Class': "com.taotao.cloud.aftersale.biz.TaoTaoCloudAfterSaleApplication"
-//        )
-//    }
-//
-//    dependencies {
-//        // exclude(dependency('xml-apis:xml-apis:.*'))
-//        // exclude(dependency('xerces:xercesImpl:.*'))
-//        // exclude(dependency { it.moduleGroup == 'xml-apis' })
-//        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
-//        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
-//    }
-//
-//    //append 'META-INF/spring.handlers'
-//    //append 'META-INF/spring.schemas'
-//    //append 'META-INF/spring.tooling'
-//    //transform(PropertiesFileTransformer) {
-//    //    paths = ['META-INF/spring.factories' ]
-//    //    mergeStrategy = "append"
-//    //}
-//}
