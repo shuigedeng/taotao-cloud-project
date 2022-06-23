@@ -51,7 +51,21 @@ public class OpenApiProperties {
 	/**
 	 * pathsToMatch default /**
 	 */
-	private String[] pathsToMatch = new String[]{"/**"};
+	private String[] pathsToMatch;
+	/**
+	 * The Paths to exclude.
+	 */
+	private  String[] pathsToExclude;
+
+	/**
+	 * The Packages to scan.
+	 */
+	private  String[] packagesToScan = new String[]{"com.taotao.cloud.*.biz.api.controller"};
+
+	/**
+	 * The Packages to exclude.
+	 */
+	private  String[] packagesToExclude;
 
 	/**
 	 * version default taotaoCloudVersion
@@ -222,5 +236,29 @@ public class OpenApiProperties {
 
 	public void setOpenapi(String openapi) {
 		this.openapi = openapi;
+	}
+
+	public String[] getPathsToExclude() {
+		return pathsToExclude;
+	}
+
+	public void setPathsToExclude(String[] pathsToExclude) {
+		this.pathsToExclude = pathsToExclude;
+	}
+
+	public String[] getPackagesToScan() {
+		return packagesToScan;
+	}
+
+	public void setPackagesToScan(String[] packagesToScan) {
+		this.packagesToScan = packagesToScan;
+	}
+
+	public String[] getPackagesToExclude() {
+		return packagesToExclude;
+	}
+
+	public void setPackagesToExclude(String[] packagesToExclude) {
+		this.packagesToExclude = packagesToExclude;
 	}
 }
