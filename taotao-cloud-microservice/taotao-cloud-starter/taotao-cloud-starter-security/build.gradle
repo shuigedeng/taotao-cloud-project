@@ -4,7 +4,7 @@ dependencies {
 
 	api 'javax.servlet:javax.servlet-api'
 
-	api  'org.springframework.security:spring-security-core:5.6.3'
+	api  'org.springframework.security:spring-security-core:5.7.1'
 //	api  'org.springframework.security:spring-security-web'
 	api  'org.springframework.security:spring-security-config'
 	api  'org.springframework.security:spring-security-oauth2-core'

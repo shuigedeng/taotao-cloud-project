@@ -3,7 +3,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //七牛云依赖
-    api 'com.qiniu:qiniu-java-sdk:7.10.2'
+    api 'com.qiniu:qiniu-java-sdk:7.11.0'
     api 'com.qiniu:happy-dns-java:0.1.6'
     testImplementation  'org.springframework:spring-test'
 

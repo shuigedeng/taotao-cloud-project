@@ -1,7 +1,7 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api("org.redisson:redisson-spring-boot-starter:3.17.0") {
+    api("org.redisson:redisson-spring-boot-starter:3.17.3") {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
@@ -10,7 +10,7 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
-    api('org.redisson:redisson-spring-data-24:3.17.0'){
+    api('org.redisson:redisson-spring-data-24:3.17.3'){
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
     api('org.springframework.boot:spring-boot-starter-data-redis'){
@@ -21,7 +21,7 @@ dependencies {
     api "org.springframework:spring-messaging"
 
     api 'net.sf.ehcache:ehcache:2.10.9.2'
-    api('com.github.ben-manes.caffeine:caffeine:3.1.0') {
+    api('com.github.ben-manes.caffeine:caffeine:3.1.1') {
         exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
     }
 
