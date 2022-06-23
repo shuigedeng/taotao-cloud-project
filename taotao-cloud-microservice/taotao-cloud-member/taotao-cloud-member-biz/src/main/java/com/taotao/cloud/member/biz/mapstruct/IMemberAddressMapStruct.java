@@ -17,13 +17,9 @@ package com.taotao.cloud.member.biz.mapstruct;
 
 import com.taotao.cloud.member.api.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
-import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * DeptMapStruct

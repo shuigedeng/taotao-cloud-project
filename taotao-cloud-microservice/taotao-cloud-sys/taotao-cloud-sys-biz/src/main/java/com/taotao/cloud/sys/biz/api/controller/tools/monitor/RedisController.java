@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.api.controller.tools.monitor;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.api.vo.redis.RedisVO;
+import com.taotao.cloud.sys.api.web.vo.redis.RedisVO;
 import com.taotao.cloud.sys.biz.service.IRedisService;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import io.swagger.v3.oas.annotations.Operation;

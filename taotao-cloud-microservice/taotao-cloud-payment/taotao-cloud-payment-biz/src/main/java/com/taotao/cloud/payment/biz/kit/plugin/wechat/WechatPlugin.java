@@ -45,7 +45,7 @@ import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.payment.WechatPaymentSetting;
+import com.taotao.cloud.sys.api.web.vo.setting.payment.WechatPaymentSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

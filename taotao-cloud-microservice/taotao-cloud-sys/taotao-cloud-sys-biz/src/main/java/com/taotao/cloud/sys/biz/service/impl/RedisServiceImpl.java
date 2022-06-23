@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.vo.redis.RedisVO;
+import com.taotao.cloud.sys.api.web.vo.redis.RedisVO;
 import com.taotao.cloud.sys.biz.service.IRedisService;
 import java.util.ArrayList;
 import java.util.List;

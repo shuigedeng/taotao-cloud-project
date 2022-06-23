@@ -11,7 +11,7 @@ import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.GoodsSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.GoodsSettingVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

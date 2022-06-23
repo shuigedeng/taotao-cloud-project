@@ -21,7 +21,7 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 

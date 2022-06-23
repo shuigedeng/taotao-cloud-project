@@ -16,10 +16,9 @@
 package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
-import com.taotao.cloud.sys.api.dto.role.RoleQueryDTO;
-import com.taotao.cloud.sys.api.vo.role.RoleQueryVO;
+import com.taotao.cloud.sys.api.web.dto.role.RoleQueryDTO;
+import com.taotao.cloud.sys.api.web.vo.role.RoleQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;

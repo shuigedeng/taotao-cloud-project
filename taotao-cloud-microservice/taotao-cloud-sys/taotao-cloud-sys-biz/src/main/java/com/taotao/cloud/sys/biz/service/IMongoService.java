@@ -17,8 +17,8 @@ package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.sys.api.dto.mongo.CollectionDto;
-import com.taotao.cloud.sys.api.dto.mongo.MongoQueryParam;
+import com.taotao.cloud.sys.api.web.dto.mongo.CollectionDto;
+import com.taotao.cloud.sys.api.web.dto.mongo.MongoQueryParam;
 import java.util.List;
 
 /**

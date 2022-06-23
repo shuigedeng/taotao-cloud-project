@@ -8,7 +8,7 @@ import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.sys.api.vo.logistics.TracesVO;
+import com.taotao.cloud.sys.api.web.vo.logistics.TracesVO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

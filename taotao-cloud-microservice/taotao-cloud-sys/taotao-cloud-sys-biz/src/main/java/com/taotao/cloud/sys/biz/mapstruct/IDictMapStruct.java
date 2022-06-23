@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.dto.dict.DictSaveDTO;
+import com.taotao.cloud.sys.api.web.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;

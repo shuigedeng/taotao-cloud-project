@@ -16,8 +16,8 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.dto.quartz.QuartzLogDto;
-import com.taotao.cloud.sys.api.dto.quartz.QuartzLogQueryCriteria;
+import com.taotao.cloud.sys.api.web.dto.quartz.QuartzLogDto;
+import com.taotao.cloud.sys.api.web.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
 import java.io.IOException;
 import java.util.List;

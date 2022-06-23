@@ -23,10 +23,10 @@ import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingItemVO;
-import com.taotao.cloud.sys.api.vo.setting.QQConnectSettingVO;
-import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingItemVO;
-import com.taotao.cloud.sys.api.vo.setting.WechatConnectSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.QQConnectSettingItemVO;
+import com.taotao.cloud.sys.api.web.vo.setting.QQConnectSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.WechatConnectSettingItemVO;
+import com.taotao.cloud.sys.api.web.vo.setting.WechatConnectSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -8,7 +8,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.vo.setting.payment.AlipayPaymentSetting;
+import com.taotao.cloud.sys.api.web.vo.setting.payment.AlipayPaymentSetting;
 
 import java.util.Date;
 

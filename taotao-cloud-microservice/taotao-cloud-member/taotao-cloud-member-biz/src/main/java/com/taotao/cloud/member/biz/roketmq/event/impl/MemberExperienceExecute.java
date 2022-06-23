@@ -8,7 +8,7 @@ import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.ExperienceSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.ExperienceSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

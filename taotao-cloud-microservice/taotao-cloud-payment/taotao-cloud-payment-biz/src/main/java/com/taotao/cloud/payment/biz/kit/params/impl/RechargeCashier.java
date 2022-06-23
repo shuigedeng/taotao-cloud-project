@@ -13,7 +13,7 @@ import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.BaseSetting;
+import com.taotao.cloud.sys.api.web.vo.setting.BaseSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
