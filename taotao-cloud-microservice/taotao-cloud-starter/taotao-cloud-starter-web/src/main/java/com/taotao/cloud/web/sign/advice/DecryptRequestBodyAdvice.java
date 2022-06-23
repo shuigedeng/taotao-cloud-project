@@ -29,13 +29,13 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 
 /**
  * 请求数据解密处理 本类只对控制器参数中含有<strong>{@link org.springframework.web.bind.annotation.RequestBody}</strong>
- * 以及package为<strong><code>com.dtguai.encrypt.annotation.decrypt</code></strong>下的注解有效
+ * 以及package为<strong><code>.decrypt</code></strong>下的注解有效
  *
  * @see RequestBodyAdvice
  * @since 2019年6月17日09:29:37
  */
 @Order(1)
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
+@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
 public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 
 	private final EncryptBodyProperties config;

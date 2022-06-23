@@ -31,7 +31,7 @@ public class SignAspect {
 		this.signProperties = signProperties;
 	}
 
-	@Pointcut("@annotation(com.dtguai.encrypt.annotation.Sign)")
+	@Pointcut("@annotation(com.taotao.cloud.web.sign.annotation.Sign)")
 	public void signPointCut() {
 		//自定义切入点
 	}
