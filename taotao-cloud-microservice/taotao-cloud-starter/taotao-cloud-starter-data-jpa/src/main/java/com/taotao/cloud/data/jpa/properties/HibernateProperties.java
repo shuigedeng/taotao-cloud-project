@@ -64,7 +64,7 @@ public class HibernateProperties {
 	/**
 	 * basePackages
 	 */
-	private String packages = "com.taotao.cloud.*.biz.entity";
+	private String packages = "com.taotao.cloud.*.biz.model.entity";
 
 	public Boolean getEnabled() {
 		return enabled;

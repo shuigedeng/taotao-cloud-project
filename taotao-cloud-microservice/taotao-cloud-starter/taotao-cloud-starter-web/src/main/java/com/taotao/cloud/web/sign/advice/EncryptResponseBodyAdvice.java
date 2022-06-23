@@ -31,12 +31,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 响应数据的加密处理<br> 本类只对控制器参数中含有<strong>{@link org.springframework.web.bind.annotation.ResponseBody}</strong>
  * 或者控制类上含有<strong>{@link org.springframework.web.bind.annotation.RestController}</strong>
- * 以及package为com.dtguai.app.annotation.encrypt.*下的注解有效
+ * 以及package为encrypt.*下的注解有效
  *
  * @since 2019年6月17日09:29:45
  */
 @Order(1)
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
+@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
 public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
 	private final ObjectMapper objectMapper;

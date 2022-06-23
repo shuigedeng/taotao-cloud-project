@@ -118,7 +118,7 @@ public class RequestLoggerAspect {
 	 * 定义controller切入点拦截规则：拦截标记SysLog注解和指定包下的方法
 	 * 2个表达式加起来才能拦截所有Controller 或者继承了BaseController的方法
 	 *
-	 * execution(public * com.taotao.cloud.*.biz.controller.*(..)) 解释：
+	 * execution(public * com.taotao.cloud.*.biz.api.controller.*(..)) 解释：
 	 *
 	 * 第一个* 任意返回类型
 	 * 第二个* com.taotao.cloud.*.biz.controller包下的所有类

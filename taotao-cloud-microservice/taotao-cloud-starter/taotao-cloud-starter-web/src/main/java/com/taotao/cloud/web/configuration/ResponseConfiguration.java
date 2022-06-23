@@ -44,9 +44,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 @AutoConfiguration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"}, annotations = {
 //	RestController.class, Controller.class})
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
+@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
 public class ResponseConfiguration implements ResponseBodyAdvice<Object>, InitializingBean {
 
 	@Override
