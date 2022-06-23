@@ -32,7 +32,7 @@ public class DubboProperties {
 
 	public static final String PREFIX = "taotao.cloud.dubbo";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean getEnabled() {
 		return enabled;

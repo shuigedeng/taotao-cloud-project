@@ -435,7 +435,7 @@ services:
         hard: -1
     volumes:
       - /root/cloud/es/es2/data:/usr/share/elasticsearch/data
-      - /root/cloud/es/es3/plugins:/usr/share/elasticsearch/plugins
+      - /root/cloud/es/es2/plugins:/usr/share/elasticsearch/plugins
     ports:
       - "9201:9200"
       - "9301:9300"

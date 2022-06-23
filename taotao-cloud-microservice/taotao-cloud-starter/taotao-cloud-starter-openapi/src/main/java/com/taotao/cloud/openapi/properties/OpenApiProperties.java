@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * SpringdocProperties
@@ -34,6 +35,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 2022.03
  * @since 2020/4/30 10:11
  */
+@RefreshScope
 @ConfigurationProperties(OpenApiProperties.PREFIX)
 public class OpenApiProperties {
 

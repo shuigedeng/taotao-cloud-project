@@ -5,6 +5,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dubbo.properties.DubboProperties;
 import feign.Feign;
 import org.apache.dubbo.config.AbstractConfig;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -30,7 +31,6 @@ import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
  * @since 2022-04-27 17:21:27
  */
 @AutoConfiguration
-@ConditionalOnClass(AbstractConfig.class)
 @EnableConfigurationProperties({DubboProperties.class})
 @ConditionalOnProperty(prefix = DubboProperties.PREFIX, name = "enabled", matchIfMissing = true)
 public class DubboFeignAutoConfiguration implements InitializingBean {

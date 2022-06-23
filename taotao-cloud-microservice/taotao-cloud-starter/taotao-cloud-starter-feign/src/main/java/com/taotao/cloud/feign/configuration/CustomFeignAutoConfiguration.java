@@ -18,7 +18,6 @@ package com.taotao.cloud.feign.configuration;
 import cn.hutool.core.lang.ParameterizedTypeImpl;
 import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
-import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
@@ -33,7 +32,6 @@ import com.taotao.cloud.feign.http.RestTemplateHeaderInterceptor;
 import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import com.taotao.cloud.feign.properties.FeignProperties;
 import com.taotao.cloud.feign.properties.LoadbalancerProperties;
-import feign.Feign;
 import feign.FeignException;
 import feign.Logger;
 import feign.Response;
@@ -51,7 +49,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -93,13 +90,12 @@ import org.springframework.web.client.RestTemplate;
  */
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
 @EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class, FeignInterceptorProperties.class})
-@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class CustomFeignConfiguration implements InitializingBean {
+public class CustomFeignAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CustomFeignConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(CustomFeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
 

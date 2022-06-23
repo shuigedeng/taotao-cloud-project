@@ -7,9 +7,9 @@
   #nacos.conf
     
  upstream nacos-cluster {
-    server 192.168.10.200:8846 weight=1 max_fails=2 fail_timeout=10s;
-    server 192.168.10.200:8847 weight=1 max_fails=2 fail_timeout=10s;
-    server 192.168.10.200:8848 weight=1 max_fails=2 fail_timeout=10s;
+    server 192.168.10.200:8840 weight=1 max_fails=2 fail_timeout=10s;
+    server 192.168.10.200:8841 weight=1 max_fails=2 fail_timeout=10s;
+    server 192.168.10.200:8843 weight=1 max_fails=2 fail_timeout=10s;
   }
     
  server {

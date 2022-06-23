@@ -31,7 +31,7 @@ seata:
     type: nacos
     nacos:
       server-addr: 192.168.10.200:8000
-      namespace: fbf7bf71-2841-4c46-9d57-13b5f5cf8148
+      namespace: 2f271160-9db6-4a58-b076-d521bb7535a5
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -68,7 +68,7 @@ seata:
       application: taotao-cloud-seata-server
       server-addr: 192.168.10.200:8000
       group: SEATA_GROUP
-      namespace: fbf7bf71-2841-4c46-9d57-13b5f5cf8148
+      namespace: 2f271160-9db6-4a58-b076-d521bb7535a5
       cluster: SC
       username: nacos
       password: nacos
@@ -142,7 +142,7 @@ seata:
       datasource: druid
       db-type: mysql
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.10.200:3307/taotao-cloud-seata-1.5.1?rewriteBatchedStatements=true
+      url: jdbc:mysql://192.168.10.200:3306/taotao-cloud-seata-1.5.1?rewriteBatchedStatements=true
       user: mysql
       password: mysql
       min-conn: 5
