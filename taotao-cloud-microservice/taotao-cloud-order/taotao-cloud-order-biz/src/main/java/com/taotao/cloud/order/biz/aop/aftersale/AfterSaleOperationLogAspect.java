@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.spel.SpelUtil;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

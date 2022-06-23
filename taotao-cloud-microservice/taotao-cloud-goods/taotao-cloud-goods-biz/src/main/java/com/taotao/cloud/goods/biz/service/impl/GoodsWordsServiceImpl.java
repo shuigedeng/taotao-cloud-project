@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.goods.biz.entity.GoodsWords;
+import com.taotao.cloud.goods.biz.model.entity.GoodsWords;
 import com.taotao.cloud.goods.biz.mapper.IGoodsWordsMapper;
 import com.taotao.cloud.goods.biz.service.IGoodsWordsService;
 import org.springframework.stereotype.Service;

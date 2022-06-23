@@ -2,12 +2,12 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.dto.GoodsOperationDTO;
+import com.taotao.cloud.goods.api.web.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
-import com.taotao.cloud.goods.biz.entity.Goods;
+import com.taotao.cloud.goods.api.web.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.web.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.biz.model.entity.Goods;
 
 import java.util.List;
 

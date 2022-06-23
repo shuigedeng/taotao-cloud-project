@@ -2,7 +2,7 @@ package com.taotao.cloud.store.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreServiceFallbackImpl;
-import com.taotao.cloud.store.api.vo.BillVO;
+import com.taotao.cloud.store.api.web.vo.BillVO;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**

@@ -2,12 +2,12 @@ package com.taotao.cloud.store.biz.mapper;
 
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
-import com.taotao.cloud.store.api.dto.StoreSettlementDay;
-import com.taotao.cloud.store.api.vo.StoreBasicInfoVO;
-import com.taotao.cloud.store.api.vo.StoreDetailInfoVO;
-import com.taotao.cloud.store.api.vo.StoreOtherVO;
-import com.taotao.cloud.store.biz.entity.StoreDetail;
+import com.taotao.cloud.store.api.web.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.store.api.web.dto.StoreSettlementDay;
+import com.taotao.cloud.store.api.web.vo.StoreBasicInfoVO;
+import com.taotao.cloud.store.api.web.vo.StoreDetailInfoVO;
+import com.taotao.cloud.store.api.web.vo.StoreOtherVO;
+import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

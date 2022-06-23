@@ -3,8 +3,8 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.goods.api.vo.StudioCommodityVO;
-import com.taotao.cloud.goods.biz.entity.Studio;
+import com.taotao.cloud.goods.api.web.vo.StudioCommodityVO;
+import com.taotao.cloud.goods.biz.model.entity.Studio;
 import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
 
 /**

@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.List;

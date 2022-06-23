@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.vo.GoodsSkuParamsVO;
-import com.taotao.cloud.goods.biz.entity.Goods;
-import org.mapstruct.Builder;
+import com.taotao.cloud.goods.api.web.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.biz.model.entity.Goods;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

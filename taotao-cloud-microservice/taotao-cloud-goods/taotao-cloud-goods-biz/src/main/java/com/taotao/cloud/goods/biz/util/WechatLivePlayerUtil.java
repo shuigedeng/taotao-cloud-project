@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.util;
 
 import cn.hutool.json.JSONObject;
-import com.taotao.cloud.goods.biz.entity.Commodity;
-import com.taotao.cloud.goods.biz.entity.Studio;
+import com.taotao.cloud.goods.biz.model.entity.Commodity;
+import com.taotao.cloud.goods.biz.model.entity.Studio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

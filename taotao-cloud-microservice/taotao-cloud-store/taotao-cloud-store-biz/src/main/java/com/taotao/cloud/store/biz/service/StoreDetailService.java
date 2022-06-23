@@ -1,15 +1,15 @@
 package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.store.api.dto.StoreAfterSaleAddressDTO;
-import com.taotao.cloud.store.api.dto.StoreSettingDTO;
-import com.taotao.cloud.store.api.dto.StoreSettlementDay;
-import com.taotao.cloud.store.api.vo.StoreBasicInfoVO;
-import com.taotao.cloud.store.api.vo.StoreDetailInfoVO;
-import com.taotao.cloud.store.api.vo.StoreManagementCategoryVO;
-import com.taotao.cloud.store.api.vo.StoreOtherVO;
-import com.taotao.cloud.store.biz.entity.Store;
-import com.taotao.cloud.store.biz.entity.StoreDetail;
+import com.taotao.cloud.store.api.web.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.store.api.web.dto.StoreSettingDTO;
+import com.taotao.cloud.store.api.web.dto.StoreSettlementDay;
+import com.taotao.cloud.store.api.web.vo.StoreBasicInfoVO;
+import com.taotao.cloud.store.api.web.vo.StoreDetailInfoVO;
+import com.taotao.cloud.store.api.web.vo.StoreManagementCategoryVO;
+import com.taotao.cloud.store.api.web.vo.StoreOtherVO;
+import com.taotao.cloud.store.biz.model.entity.Store;
+import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 
 import java.time.LocalDateTime;
 import java.util.List;

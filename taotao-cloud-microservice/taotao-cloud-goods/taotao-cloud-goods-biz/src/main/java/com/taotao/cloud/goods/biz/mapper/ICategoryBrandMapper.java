@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.goods.api.vo.CategoryBrandVO;
-import com.taotao.cloud.goods.biz.entity.CategoryBrand;
+import com.taotao.cloud.goods.api.web.vo.CategoryBrandVO;
+import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

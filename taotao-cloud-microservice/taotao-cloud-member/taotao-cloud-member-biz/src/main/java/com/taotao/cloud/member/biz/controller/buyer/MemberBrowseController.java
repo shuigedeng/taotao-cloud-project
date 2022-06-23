@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.vo.EsGoodsIndexVO;
+import com.taotao.cloud.goods.api.web.vo.EsGoodsIndexVO;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.service.IMemberBrowseService;
 import io.swagger.v3.oas.annotations.Operation;

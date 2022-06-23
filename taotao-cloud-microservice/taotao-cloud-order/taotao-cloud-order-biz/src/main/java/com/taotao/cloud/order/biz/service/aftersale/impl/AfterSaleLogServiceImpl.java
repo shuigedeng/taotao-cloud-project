@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.service.aftersale.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleLogMapper;
 import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleLogService;
 import lombok.AllArgsConstructor;

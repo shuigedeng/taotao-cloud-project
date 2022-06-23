@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.mapper.order;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.order.biz.entity.order.Trade;
+import com.taotao.cloud.order.biz.model.entity.order.Trade;
 import org.apache.ibatis.annotations.Update;
 
 /**

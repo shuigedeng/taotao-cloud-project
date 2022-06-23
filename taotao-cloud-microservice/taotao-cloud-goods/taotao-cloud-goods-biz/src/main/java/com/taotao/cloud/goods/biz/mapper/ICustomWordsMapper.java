@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.goods.biz.entity.CustomWords;
+import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 
 /**
  * 自定义分词数据处理层

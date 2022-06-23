@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import com.taotao.cloud.store.biz.entity.FreightTemplateChild;
+import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 import java.util.List;
 
 /**

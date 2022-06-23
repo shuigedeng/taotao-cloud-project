@@ -3,8 +3,8 @@ package com.taotao.cloud.store.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.store.api.vo.FreightTemplateInfoVO;
-import com.taotao.cloud.store.biz.entity.FreightTemplate;
+import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
+import com.taotao.cloud.store.biz.model.entity.FreightTemplate;
 
 import java.util.List;
 

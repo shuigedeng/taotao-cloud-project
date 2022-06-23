@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.goods.biz.entity.DraftGoods;
+import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 
 /**
  * 草稿商品数据处理层

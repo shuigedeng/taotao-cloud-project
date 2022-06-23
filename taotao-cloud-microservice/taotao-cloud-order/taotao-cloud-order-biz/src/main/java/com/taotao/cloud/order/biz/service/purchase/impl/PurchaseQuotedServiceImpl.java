@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuoted;
 import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseQuotedMapper;
 import com.taotao.cloud.order.biz.service.purchase.IPurchaseQuotedItemService;
 import com.taotao.cloud.order.biz.service.purchase.IPurchaseQuotedService;

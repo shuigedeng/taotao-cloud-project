@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
-import com.taotao.cloud.order.biz.entity.order.OrderItem;
+import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 
 import java.util.List;
 

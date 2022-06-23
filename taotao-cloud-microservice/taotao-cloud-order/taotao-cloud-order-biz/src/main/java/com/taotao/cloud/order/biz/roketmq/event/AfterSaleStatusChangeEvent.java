@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.event;
 
 
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 
 /**
  * 售后单改变状态

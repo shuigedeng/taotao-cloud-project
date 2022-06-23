@@ -16,7 +16,7 @@ import com.taotao.cloud.member.biz.entity.MemberRecharge;
 import com.taotao.cloud.member.biz.mapper.MemberRechargeMapper;
 import com.taotao.cloud.member.biz.service.MemberRechargeService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.query.recharge.RechargePageQuery;
+import com.taotao.cloud.order.api.web.query.recharge.RechargePageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

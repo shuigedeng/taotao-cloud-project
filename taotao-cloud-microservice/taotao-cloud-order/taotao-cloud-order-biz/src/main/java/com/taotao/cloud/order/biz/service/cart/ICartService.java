@@ -1,10 +1,10 @@
 package com.taotao.cloud.order.biz.service.cart;
 
 
-import com.taotao.cloud.order.api.dto.trade.TradeDTO;
+import com.taotao.cloud.order.api.web.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.vo.order.ReceiptVO;
-import com.taotao.cloud.order.biz.entity.order.Trade;
+import com.taotao.cloud.order.api.web.vo.order.ReceiptVO;
+import com.taotao.cloud.order.biz.model.entity.order.Trade;
 
 /**
  * 购物车业务层

@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.biz.entity.Parameters;
+import com.taotao.cloud.goods.biz.model.entity.Parameters;
 
 /**
  * 商品参数业务层

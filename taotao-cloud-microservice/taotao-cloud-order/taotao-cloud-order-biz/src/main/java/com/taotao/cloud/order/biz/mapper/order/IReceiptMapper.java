@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.query.order.ReceiptPageQuery;
-import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
-import com.taotao.cloud.order.biz.entity.order.Receipt;
+import com.taotao.cloud.order.api.web.dto.order.OrderReceiptDTO;
+import com.taotao.cloud.order.api.web.query.order.ReceiptPageQuery;
+import com.taotao.cloud.order.api.web.vo.order.OrderSimpleVO;
+import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

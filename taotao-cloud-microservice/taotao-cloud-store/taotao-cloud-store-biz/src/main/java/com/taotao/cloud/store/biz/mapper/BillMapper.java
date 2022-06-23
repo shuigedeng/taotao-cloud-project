@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.store.api.vo.BillListVO;
-import com.taotao.cloud.store.biz.entity.Bill;
+import com.taotao.cloud.store.api.web.vo.BillListVO;
+import com.taotao.cloud.store.biz.model.entity.Bill;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

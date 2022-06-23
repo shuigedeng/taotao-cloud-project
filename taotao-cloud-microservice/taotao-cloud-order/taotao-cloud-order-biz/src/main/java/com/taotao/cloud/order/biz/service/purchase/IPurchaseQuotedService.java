@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service.purchase;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuoted;
 
 import java.util.List;
 

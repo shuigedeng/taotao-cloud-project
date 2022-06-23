@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.store.biz.entity.StoreLogistics;
+import com.taotao.cloud.store.biz.model.entity.StoreLogistics;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

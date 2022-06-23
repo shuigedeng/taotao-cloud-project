@@ -8,7 +8,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.service.IMemberGoodsCollectionService;
 import com.taotao.cloud.store.api.feign.IFeignStoreCollectionService;
-import com.taotao.cloud.store.api.vo.StoreCollectionVO;
+import com.taotao.cloud.store.api.web.vo.StoreCollectionVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

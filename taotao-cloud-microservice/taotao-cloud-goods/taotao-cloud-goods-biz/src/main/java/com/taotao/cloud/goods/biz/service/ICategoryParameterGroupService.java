@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.vo.ParameterGroupVO;
-import com.taotao.cloud.goods.biz.entity.CategoryParameterGroup;
+import com.taotao.cloud.goods.api.web.vo.ParameterGroupVO;
+import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 
 import java.util.List;
 
