@@ -54,6 +54,30 @@ easy-es:
       field-strategy: IGNORED
 
 redisson:
+  model: cluster
+  codec: "com.zengtengpeng.codec.MyJsonJacksonCodec"
+  threads: 16
+  netty_threads: 32
+  transport_mode: nio
+  idleConnectionTimeout: 1000
+  connectTimeout: 1000
+  timeout: 3000
+  retryAttempts: 3000
+  retryInterval: 1500
+  subscriptionsPerConnection: 5
+  sslEnableEndpointIdentification: true
+  sslProvider: jdk
+  pingConnectionInterval: 30000
+  keepAlive: false
+  tcpNoDelay: false
+  referenceEnabled: true
+  lockWatchdogTimeout: 30000
+  keepPubSubOrder: true
+  useScriptCache: false
+  minCleanUpDelay: 5
+  maxCleanUpDelay: 1800
+  attemptTimeout: 10000
+  dataValidTime: 1800000
   single_server_config:
     address: "redis://192.168.10.200:6379"
     subscription_connection_minimum_idle_size: 1
@@ -62,65 +86,29 @@ redisson:
     connection_pool_size: 64
     database: 3
     dns_monitoring_interval: 5000
-  # 集群模式
-  #cluster_servers_config:
-  #  idleConnectionTimeout: 10000
-  #  pingTimeout: 1000
-  #  connectTimeout: 10000
-  #  timeout: 3000
-  #  retryAttempts: 3
-  #  retryInterval: 1500
-  #  failedSlaveReconnectionInterval: 3000
-  #  failedSlaveCheckInterval: 3
-  #  password: 'password'
-  #  subscriptionsPerConnection: 5
-  #  clientName: "redisson-demo"
-  #  loadBalancer:
-  #    class: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
-  #  slaveSubscriptionConnectionMinimumIdleSize: 1
-  #  slaveSubscriptionConnectionPoolSize: 50
-  #  slaveConnectionMinimumIdleSize: 32
-  #  slaveConnectionPoolSize: 64
-  #  masterConnectionMinimumIdleSize: 32
-  #  masterConnectionPoolSize: 64
-  #  readMode: "SLAVE"
-  #  nodeAddresses:
-  #    - "redis://127.0.0.1:7110"
-  #    - "redis://127.0.0.1:7111"
-  #    - "redis://127.0.0.1:7112"
-  #    - "redis://127.0.0.1:7113"
-  #  scanInterval: 1000
-  #集群(哨兵)
-  #sentinel_servers_config:
-  #  idle_connection_timeout: 10000
-  #  connect_timeout: 10000
-  #  timeout: 3000
-  #  retry_attempts: 3
-  #  retry_interval: 1500
-  #  failed_slave_reconnection_interval: 3000
-  #  failed_slave_check_interval: 60000
-  #  password: null
-  #  subscriptions_per_connection: 5
-  #  client_name: null
-  #  subscription_connection_minimum_idle_size: 1
-  #  subscription_connection_pool_size: 50
-  #  slave_connection_minimum_idle_size: 24
-  #  slave_connection_pool_size: 64
-  #  master_connection_minimum_idle_size: 24
-  #  master_connection_pool_size: 64
-  #  read_mode: "SLAVE"
-  #  subscription_mode: "SLAVE"
-  #  sentinel_addresses:
-  #    - "redis://192.168.2.170:26377"
-  #    - "redis://192.168.2.170:26378"
-  #    - "redis://192.168.2.170:26379"
-  #  master_name: "mymaster"
-  #  database: 0
-  threads: 16
-  netty_threads: 32
-  transport_mode: "NIO"
-  codec:
-    class: "org.redisson.codec.JsonJacksonCodec"
+  multiple-server-config:
+    loadBalancer: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
+    slaveConnectionMinimumIdleSize: 32
+    slaveConnectionPoolSize: 64
+    failedSlaveReconnectionInterval: 3000
+    failedSlaveCheckInterval: 180000
+    masterConnectionMinimumIdleSize: 32
+    masterConnectionPoolSize: 64
+    readMode: slave
+    subscriptionMode: slave
+    subscriptionConnectionMinimumIdleSize: 1
+    subscriptionConnectionPoolSize: 50
+    dnsMonitoringInterval: 5000
+    nodeAddresses:
+      - "redis://127.0.0.1:7110"
+      - "redis://127.0.0.1:7111"
+      - "redis://127.0.0.1:7112"
+      - "redis://127.0.0.1:7113"
+      - "redis://127.0.0.1:7113"
+      - "redis://127.0.0.1:7113"
+    database: 1
+    masterName:
+    scanInterval: 1000
 
 elasticjob:
   #dump:
@@ -546,7 +534,7 @@ spring:
   redis:
     #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    #database: 1
+    database: 1
     #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     #sentinel:
     #  master:
@@ -644,7 +632,6 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
-
   #mail:
   #  host: smtp.qq.com
   #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
@@ -1010,8 +997,6 @@ taotao:
         enabled: false
       undertow:
         enabled: false
-    mail:
-      enabled: false
     logger:
       enabled: true
       request:
@@ -1078,6 +1063,21 @@ taotao:
       enabled: true
     captcha:
       enabled: false
+    mail:
+      enabled: false
+    sms:
+      enabled: true
+      type: aliyun
+      aliyun:
+        access-key-id: xxxx
+        access-key-secret: lsdflsdf
+        sign-name: sdfaslfd
+        templates:
+          ch: xlsldf
+        params-orders:
+          ch:
+            - lsdkfjl
+            - sdflksf
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity

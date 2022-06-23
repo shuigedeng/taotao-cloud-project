@@ -3,7 +3,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //百度云对象存储
-    api('com.baidubce:bce-java-sdk:0.10.209'){
+    api('com.baidubce:bce-java-sdk:0.10.212'){
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
         exclude group: 'commons-collections', module: 'commons-collections'
         exclude group: 'commons-httpclient', module: 'commons-httpclient'

@@ -12,7 +12,6 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
-    //api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic")
@@ -35,7 +34,6 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere")
-    //api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
 
     api("org.springframework.boot:spring-boot-starter-web") {
@@ -74,7 +72,7 @@ dependencies {
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation "junit:junit:4.13.2"

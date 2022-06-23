@@ -3,7 +3,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //亚马逊
-    api 'software.amazon.awssdk:s3:2.17.191'
+    api 'software.amazon.awssdk:s3:2.17.209'
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
