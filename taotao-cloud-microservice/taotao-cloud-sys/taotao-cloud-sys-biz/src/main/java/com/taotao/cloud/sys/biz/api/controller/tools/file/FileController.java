@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.file;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
+import com.taotao.cloud.sys.api.web.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.service.IFileService;
 
 import javax.validation.constraints.NotNull;

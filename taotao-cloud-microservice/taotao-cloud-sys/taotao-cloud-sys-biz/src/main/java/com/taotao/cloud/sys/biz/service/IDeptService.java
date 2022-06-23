@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
+import com.taotao.cloud.sys.api.web.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;

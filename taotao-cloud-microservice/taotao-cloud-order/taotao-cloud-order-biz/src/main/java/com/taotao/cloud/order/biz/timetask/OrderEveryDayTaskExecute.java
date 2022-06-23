@@ -23,7 +23,7 @@ import com.taotao.cloud.order.biz.service.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.OrderSettingVO;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

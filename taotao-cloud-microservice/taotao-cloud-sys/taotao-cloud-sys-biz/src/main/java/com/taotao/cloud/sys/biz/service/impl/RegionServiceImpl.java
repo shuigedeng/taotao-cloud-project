@@ -30,9 +30,9 @@ import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService
 import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.dubbo.IDubboRegionService;
-import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
-import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
-import com.taotao.cloud.sys.api.vo.region.RegionVO;
+import com.taotao.cloud.sys.api.web.vo.region.RegionParentVO;
+import com.taotao.cloud.sys.api.web.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.api.web.vo.region.RegionVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IRegionMapStruct;

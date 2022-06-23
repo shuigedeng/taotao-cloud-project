@@ -70,7 +70,7 @@ import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
-import com.taotao.cloud.sys.api.vo.logistics.LogisticsVO;
+import com.taotao.cloud.sys.api.web.vo.logistics.LogisticsVO;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;

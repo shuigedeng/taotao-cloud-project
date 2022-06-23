@@ -6,7 +6,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
 import com.taotao.cloud.member.api.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.OrderSettingVO;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

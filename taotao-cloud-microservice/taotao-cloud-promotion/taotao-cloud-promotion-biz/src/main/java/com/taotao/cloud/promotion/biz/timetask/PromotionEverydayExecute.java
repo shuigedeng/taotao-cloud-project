@@ -5,7 +5,7 @@ import com.taotao.cloud.promotion.biz.entity.Seckill;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.SeckillSetting;
+import com.taotao.cloud.sys.api.web.vo.setting.SeckillSetting;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

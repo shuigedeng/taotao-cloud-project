@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.api.dto.log.LogQueryCriteria;
+import com.taotao.cloud.sys.api.web.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.service.ILogService;

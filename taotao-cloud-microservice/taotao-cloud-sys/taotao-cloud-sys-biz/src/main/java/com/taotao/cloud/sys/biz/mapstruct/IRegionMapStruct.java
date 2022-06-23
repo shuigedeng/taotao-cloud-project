@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.api.web.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

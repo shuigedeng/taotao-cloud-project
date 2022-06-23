@@ -17,10 +17,9 @@ package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
 import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
-import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
-import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.api.web.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.api.web.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Menu;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

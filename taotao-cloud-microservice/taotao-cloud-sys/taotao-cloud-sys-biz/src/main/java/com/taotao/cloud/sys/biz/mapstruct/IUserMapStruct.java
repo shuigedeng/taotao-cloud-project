@@ -15,11 +15,10 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.dto.user.UserQueryDTO;
-import com.taotao.cloud.sys.api.vo.user.UserQueryVO;
-import com.taotao.cloud.sys.api.vo.user.UserRegisterVO;
+import com.taotao.cloud.sys.api.web.dto.user.UserQueryDTO;
+import com.taotao.cloud.sys.api.web.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.api.web.vo.user.UserRegisterVO;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;

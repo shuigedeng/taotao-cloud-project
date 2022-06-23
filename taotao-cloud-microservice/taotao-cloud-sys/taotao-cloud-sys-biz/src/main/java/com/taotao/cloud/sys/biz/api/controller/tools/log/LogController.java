@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.api.controller.tools.log;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.api.dto.log.LogQueryCriteria;
+import com.taotao.cloud.sys.api.web.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.service.ILogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

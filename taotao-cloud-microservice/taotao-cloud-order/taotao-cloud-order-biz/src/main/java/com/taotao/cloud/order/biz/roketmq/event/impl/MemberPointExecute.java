@@ -16,14 +16,11 @@ import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.vo.setting.PointSettingVO;
+import com.taotao.cloud.sys.api.web.vo.setting.PointSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.CANCELLED;
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.COMPLETED;
 
 /**
  * 会员积分
