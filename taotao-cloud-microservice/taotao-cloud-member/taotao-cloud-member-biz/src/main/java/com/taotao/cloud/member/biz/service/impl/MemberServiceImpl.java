@@ -44,7 +44,7 @@ import com.taotao.cloud.member.biz.token.StoreTokenGenerate;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.vo.StoreVO;
+import com.taotao.cloud.store.api.web.vo.StoreVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;

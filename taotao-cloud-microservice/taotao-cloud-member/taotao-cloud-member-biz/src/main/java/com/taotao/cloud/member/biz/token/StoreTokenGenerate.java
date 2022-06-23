@@ -23,7 +23,7 @@ import com.taotao.cloud.member.biz.connect.token.TokenUtil;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.vo.StoreVO;
+import com.taotao.cloud.store.api.web.vo.StoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

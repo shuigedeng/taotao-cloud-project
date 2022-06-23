@@ -16,11 +16,9 @@
 package com.taotao.cloud.order.biz.mapstruct;
 
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
-import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
+import com.taotao.cloud.order.api.web.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
-import com.taotao.cloud.order.biz.entity.order.OrderInfo;
-import org.mapstruct.Builder;
+import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.mapper.aftersale;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

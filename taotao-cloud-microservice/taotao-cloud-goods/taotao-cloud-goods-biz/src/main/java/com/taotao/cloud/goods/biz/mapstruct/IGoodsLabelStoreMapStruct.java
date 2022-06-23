@@ -15,10 +15,9 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.dto.StoreGoodsLabelDTO;
-import com.taotao.cloud.goods.api.vo.StoreGoodsLabelInfoVO;
-import com.taotao.cloud.goods.biz.entity.StoreGoodsLabel;
-import org.mapstruct.Builder;
+import com.taotao.cloud.goods.api.web.dto.StoreGoodsLabelDTO;
+import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelInfoVO;
+import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

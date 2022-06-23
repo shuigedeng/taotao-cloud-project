@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.aop.order;
 
-import com.taotao.cloud.order.biz.entity.order.OrderLog;
+import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import org.springframework.context.ApplicationEvent;
 
 /**

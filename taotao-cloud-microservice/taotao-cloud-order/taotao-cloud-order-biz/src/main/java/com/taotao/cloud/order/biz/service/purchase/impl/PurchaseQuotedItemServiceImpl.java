@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service.purchase.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuotedItem;
+import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuotedItem;
 import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseQuotedItemMapper;
 import com.taotao.cloud.order.biz.service.purchase.IPurchaseQuotedItemService;
 import org.springframework.stereotype.Service;

@@ -4,13 +4,13 @@ import com.taotao.cloud.message.api.dto.NoticeMessageDTO;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
 import com.taotao.cloud.message.api.feign.IFeignNoticeMessageService;
-import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
-import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.api.web.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
@@ -20,8 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.CANCELLED;
 
 
 /**

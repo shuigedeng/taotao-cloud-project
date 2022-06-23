@@ -3,11 +3,11 @@ package com.taotao.cloud.order.biz.service.aftersale;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.query.aftersale.AfterSalePageQuery;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
-import com.taotao.cloud.store.api.vo.StoreAfterSaleAddressVO;
+import com.taotao.cloud.order.api.web.dto.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.api.web.query.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.api.web.vo.aftersale.AfterSaleApplyVO;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
+import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.web.vo.logistics.TracesVO;
 
 import java.math.BigDecimal;

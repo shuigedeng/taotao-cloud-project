@@ -3,7 +3,7 @@ package com.taotao.cloud.store.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.store.biz.entity.StoreAddress;
+import com.taotao.cloud.store.biz.model.entity.StoreAddress;
 
 /**
  * 店铺地址（自提点）详细业务层

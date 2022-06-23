@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.member.biz.entity.MemberRecharge;
-import com.taotao.cloud.order.api.query.recharge.RechargePageQuery;
+import com.taotao.cloud.order.api.web.query.recharge.RechargePageQuery;
 
 import java.math.BigDecimal;
 

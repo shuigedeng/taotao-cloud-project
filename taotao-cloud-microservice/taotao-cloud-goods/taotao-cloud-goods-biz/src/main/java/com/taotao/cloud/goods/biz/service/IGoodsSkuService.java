@@ -3,11 +3,11 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
-import com.taotao.cloud.goods.api.dto.GoodsSkuStockDTO;
-import com.taotao.cloud.goods.api.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.goods.biz.entity.Goods;
-import com.taotao.cloud.goods.biz.entity.GoodsSku;
+import com.taotao.cloud.goods.api.web.dto.GoodsSkuStockDTO;
+import com.taotao.cloud.goods.api.web.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.biz.model.entity.Goods;
+import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 
 import java.util.List;
 import java.util.Map;

@@ -3,7 +3,7 @@ package com.taotao.cloud.store.biz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.store.biz.entity.FreightTemplateChild;
+import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 import com.taotao.cloud.store.biz.mapper.FreightTemplateChildMapper;
 import com.taotao.cloud.store.biz.service.FreightTemplateChildService;
 import org.springframework.stereotype.Service;

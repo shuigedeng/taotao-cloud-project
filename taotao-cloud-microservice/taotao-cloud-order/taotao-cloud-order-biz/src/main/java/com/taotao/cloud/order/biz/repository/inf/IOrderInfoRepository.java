@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.repository.inf;
 
-import com.taotao.cloud.order.biz.entity.order.OrderInfo;
+import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.order.biz.aop.aftersale;
 
-import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import org.springframework.context.ApplicationEvent;
 
 /**

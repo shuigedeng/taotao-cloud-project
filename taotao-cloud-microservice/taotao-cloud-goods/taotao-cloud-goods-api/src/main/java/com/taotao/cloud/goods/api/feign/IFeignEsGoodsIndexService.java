@@ -3,10 +3,9 @@ package com.taotao.cloud.goods.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.fallback.FeignCategoryServiceFallback;
-import com.taotao.cloud.goods.api.vo.EsGoodsIndexVO;
+import com.taotao.cloud.goods.api.web.vo.EsGoodsIndexVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;

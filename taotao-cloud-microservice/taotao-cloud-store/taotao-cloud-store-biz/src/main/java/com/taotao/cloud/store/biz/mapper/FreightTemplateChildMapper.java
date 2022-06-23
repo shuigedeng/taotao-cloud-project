@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.store.biz.entity.FreightTemplateChild;
+import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 
 /**
  * 店铺配送子模板数据处理层

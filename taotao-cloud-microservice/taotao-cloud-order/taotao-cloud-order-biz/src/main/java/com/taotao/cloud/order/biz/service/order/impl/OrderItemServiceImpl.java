@@ -9,7 +9,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
-import com.taotao.cloud.order.biz.entity.order.OrderItem;
+import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
 import com.taotao.cloud.order.biz.service.order.IOrderItemService;
 import lombok.AllArgsConstructor;

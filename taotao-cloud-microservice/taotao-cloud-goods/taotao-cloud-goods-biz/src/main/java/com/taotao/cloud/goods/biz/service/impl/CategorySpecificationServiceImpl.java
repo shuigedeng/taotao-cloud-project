@@ -2,8 +2,8 @@ package com.taotao.cloud.goods.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.goods.biz.entity.CategorySpecification;
-import com.taotao.cloud.goods.biz.entity.Specification;
+import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
+import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.mapper.ICategorySpecificationMapper;
 import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
 import org.springframework.stereotype.Service;

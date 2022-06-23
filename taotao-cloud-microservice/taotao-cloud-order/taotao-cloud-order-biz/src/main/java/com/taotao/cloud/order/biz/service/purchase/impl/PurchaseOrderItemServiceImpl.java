@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.service.purchase.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.biz.entity.purchase.PurchaseOrderItem;
+import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrderItem;
 import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseOrderItemMapper;
 import com.taotao.cloud.order.biz.service.purchase.IPurchaseOrderItemService;
 import org.springframework.stereotype.Service;

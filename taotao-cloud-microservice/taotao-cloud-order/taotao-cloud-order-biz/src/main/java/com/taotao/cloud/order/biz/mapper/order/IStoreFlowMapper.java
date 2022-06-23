@@ -3,9 +3,9 @@ package com.taotao.cloud.order.biz.mapper.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.order.biz.entity.order.StoreFlow;
-import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
-import com.taotao.cloud.store.api.vo.StoreFlowRefundDownloadVO;
+import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
+import com.taotao.cloud.store.api.web.vo.StoreFlowPayDownloadVO;
+import com.taotao.cloud.store.api.web.vo.StoreFlowRefundDownloadVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

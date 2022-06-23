@@ -1,18 +1,13 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.message.OrderMessage;
-import com.taotao.cloud.order.api.vo.order.OrderVO;
+import com.taotao.cloud.order.api.web.vo.order.OrderVO;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.COMPLETED;
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.DELIVERED;
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.PAID;
-import static com.taotao.cloud.order.api.enums.order.OrderStatusEnum.UNDELIVERED;
 
 /**
  * 微信消息执行器

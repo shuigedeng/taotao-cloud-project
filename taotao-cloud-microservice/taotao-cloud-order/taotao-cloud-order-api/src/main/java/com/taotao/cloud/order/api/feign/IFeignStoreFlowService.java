@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.order.api.feign.fallback.FeignTradeFallbackImpl;
-import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
-import com.taotao.cloud.order.api.vo.order.StoreFlowVO;
-import com.taotao.cloud.order.api.vo.trade.TradeVO;
+import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
+import com.taotao.cloud.order.api.web.vo.trade.TradeVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

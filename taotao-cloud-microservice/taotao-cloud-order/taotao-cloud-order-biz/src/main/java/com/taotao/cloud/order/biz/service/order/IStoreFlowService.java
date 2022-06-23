@@ -2,13 +2,13 @@ package com.taotao.cloud.order.biz.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.query.distribution.DistributionPageQuery;
-import com.taotao.cloud.order.api.query.order.StoreFlowPageQuery;
-import com.taotao.cloud.order.api.query.store.StorePageQuery;
-import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.entity.order.StoreFlow;
-import com.taotao.cloud.store.api.vo.StoreFlowPayDownloadVO;
-import com.taotao.cloud.store.api.vo.StoreFlowRefundDownloadVO;
+import com.taotao.cloud.order.api.web.query.distribution.DistributionPageQuery;
+import com.taotao.cloud.order.api.web.query.order.StoreFlowPageQuery;
+import com.taotao.cloud.order.api.web.query.store.StorePageQuery;
+import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
+import com.taotao.cloud.store.api.web.vo.StoreFlowPayDownloadVO;
+import com.taotao.cloud.store.api.web.vo.StoreFlowRefundDownloadVO;
 
 import java.util.List;
 

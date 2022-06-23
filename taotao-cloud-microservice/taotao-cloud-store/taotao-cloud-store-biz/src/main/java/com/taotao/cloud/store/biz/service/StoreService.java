@@ -2,15 +2,15 @@ package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.store.api.dto.AdminStoreApplyDTO;
-import com.taotao.cloud.store.api.dto.CollectionDTO;
-import com.taotao.cloud.store.api.dto.StoreBankDTO;
-import com.taotao.cloud.store.api.dto.StoreCompanyDTO;
-import com.taotao.cloud.store.api.dto.StoreEditDTO;
-import com.taotao.cloud.store.api.dto.StoreOtherInfoDTO;
-import com.taotao.cloud.store.api.query.StorePageQuery;
-import com.taotao.cloud.store.api.vo.StoreVO;
-import com.taotao.cloud.store.biz.entity.Store;
+import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
+import com.taotao.cloud.store.api.web.dto.CollectionDTO;
+import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
+import com.taotao.cloud.store.api.web.dto.StoreCompanyDTO;
+import com.taotao.cloud.store.api.web.dto.StoreEditDTO;
+import com.taotao.cloud.store.api.web.dto.StoreOtherInfoDTO;
+import com.taotao.cloud.store.api.web.query.StorePageQuery;
+import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.biz.model.entity.Store;
 
 /**
  * 店铺业务层

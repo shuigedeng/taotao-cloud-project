@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
-import com.taotao.cloud.goods.api.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;
 import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.FileUtil;
-import com.taotao.cloud.goods.biz.entity.GoodsGallery;
+import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
 import com.taotao.cloud.sys.api.enums.SettingEnum;

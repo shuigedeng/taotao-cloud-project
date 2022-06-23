@@ -2,10 +2,10 @@ package com.taotao.cloud.order.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
+import com.taotao.cloud.order.api.web.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderFallbackImpl;
-import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
-import com.taotao.cloud.order.api.vo.order.OrderVO;
+import com.taotao.cloud.order.api.web.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.api.web.vo.order.OrderVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

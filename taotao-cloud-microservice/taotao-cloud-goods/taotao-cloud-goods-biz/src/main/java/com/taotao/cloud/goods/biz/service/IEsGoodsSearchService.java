@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service;
 
-import com.taotao.cloud.goods.api.dto.HotWordsDTO;
-import com.taotao.cloud.goods.api.query.EsGoodsSearchQuery;
+import com.taotao.cloud.goods.api.web.dto.HotWordsDTO;
+import com.taotao.cloud.goods.api.web.query.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import org.springframework.data.elasticsearch.core.SearchPage;

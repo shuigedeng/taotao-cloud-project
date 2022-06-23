@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.repository.cls;
 
-import com.taotao.cloud.order.biz.entity.order.OrderInfo;
+import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
