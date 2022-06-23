@@ -128,7 +128,7 @@ elasticjob:
   #tracing:
   #  type: RDB
   reg-center:
-    server-lists: 192.168.10.200:2181
+    server-lists: 192.168.10.200:2181,192.168.10.200:2182,192.168.10.200:2183
     namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
@@ -245,7 +245,7 @@ dubbo:
     subscribed-services: 'taotao-cloud-order,taotao-cloud-goods'
     registry-type: dubbo-cloud
   registry:
-    address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.10.200}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+    address: nacos://192.168.10.200:8000
     timeout: 15000
     #username:
     #password:
@@ -295,8 +295,8 @@ seata:
   config:
     type: nacos
     nacos:
-      namespace: 7c67c02a-747b-40fd-ba79-57d6e92de1cd
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
+      namespace: 2f271160-9db6-4a58-b076-d521bb7535a5
+      server-addr: 192.168.10.200:8000
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
@@ -304,10 +304,10 @@ seata:
   registry:
     type: nacos
     nacos:
-      application: taotao-cloud-seata
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
+      application: taotao-cloud-seata-server
+      server-addr: 192.168.10.200:8000
       group: SEATA_GROUP
-      namespace: 7c67c02a-747b-40fd-ba79-57d6e92de1cd
+      namespace: 2f271160-9db6-4a58-b076-d521bb7535a5
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
       cluster: SC
@@ -553,7 +553,7 @@ spring:
     #  nodes:
     connect-timeout: 60000
     cluster:
-      nodes: 192.168.10.200:7100,192.168.10.200:7101,192.168.10.200:7102,192.168.10.200:7103,192.168.10.200:7104,192.168.10.200:7105
+      nodes: 192.168.10.200:6381,192.168.10.200:6382,192.168.10.200:6383,192.168.10.200:6384,192.168.10.200:6385,192.168.10.200:6386
       max-redirects: 3
     client-type: lettuce
     lettuce:
@@ -585,12 +585,12 @@ spring:
           readMode: "SLAVE"
           subscriptionMode: "SLAVE"
           nodeAddresses:
-          - "redis://192.168.10.200:7100"
-          - "redis://192.168.10.200:7101"
-          - "redis://192.168.10.200:7102"
-          - "redis://192.168.10.200:7103"
-          - "redis://192.168.10.200:7104"
-          - "redis://192.168.10.200:7105"
+          - "redis://192.168.10.200:6381"
+          - "redis://192.168.10.200:6382"
+          - "redis://192.168.10.200:6383"
+          - "redis://192.168.10.200:6384"
+          - "redis://192.168.10.200:6385"
+          - "redis://192.168.10.200:6386"
           scanInterval: 1000
           pingConnectionInterval: 0
           keepAlive: false
@@ -618,7 +618,7 @@ spring:
       #慢查询最短时间,默认为1000毫秒
       slowTime: 2000
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094
     producer:
       retries: 1
       batch-size: 16384

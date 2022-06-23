@@ -26,10 +26,10 @@ transport.compressor=none
   
   #Transaction routing rules configuration, only for the client
   # 这里的配置 springcloud代码客户端配置要一致
-service.vgroupMapping.taotao_cloud_tx_group=default
+service.vgroupMapping.taotao_cloud_tx_group=SC
   #If you use a registry, you can ignore it
   # 这里仅注册中心为file时使用 此时无用 我们注册中心是nacos
-service.default.grouplist=192.168.10.200:8000
+service.SC.grouplist=192.168.10.200:8000
 service.enableDegrade=false
 service.disableGlobalTransaction=false
   
@@ -90,7 +90,7 @@ store.file.sessionReloadReadSize=100
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://192.168.10.200:3316/taotao-cloud-seata?useUnicode=true&rewriteBatchedStatements=true
+store.db.url=jdbc:mysql://192.168.10.200:3306/taotao-cloud-seata-1.5.1?useUnicode=true&rewriteBatchedStatements=true
 store.db.user=root
 store.db.password=123456
 store.db.minConn=5

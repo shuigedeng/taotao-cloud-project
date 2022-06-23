@@ -53,11 +53,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = FeignInterceptorProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class FeignInterceptorConfiguration implements InitializingBean {
+public class FeignInterceptorAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FeignInterceptorConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(FeignInterceptorAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
 	protected List<String> requestHeaders = new ArrayList<>();
