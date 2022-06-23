@@ -16,15 +16,8 @@
 package com.taotao.cloud.member.biz.mapper;
 
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.biz.entity.MemberRecharge;
-import com.taotao.cloud.member.biz.entity.MemberSign;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
+import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 
 /**
  * 会员签到数据处理层

@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.biz.entity.KanjiaActivityLog;
+import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 
 /**
  * 砍价活动日志数据处理层

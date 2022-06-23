@@ -3,9 +3,9 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.api.query.MemberReceiptPageQuery;
-import com.taotao.cloud.member.api.vo.MemberReceiptAddVO;
-import com.taotao.cloud.member.biz.entity.MemberReceipt;
+import com.taotao.cloud.member.api.web.query.MemberReceiptPageQuery;
+import com.taotao.cloud.member.api.web.vo.MemberReceiptAddVO;
+import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 
 
 /**

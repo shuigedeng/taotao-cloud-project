@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.customer.biz.service;
 
-import com.taotao.cloud.customer.biz.entity.Chatbot;
+import com.taotao.cloud.customer.biz.model.entity.Chatbot;
 
 /**
  * @author shuigedeng

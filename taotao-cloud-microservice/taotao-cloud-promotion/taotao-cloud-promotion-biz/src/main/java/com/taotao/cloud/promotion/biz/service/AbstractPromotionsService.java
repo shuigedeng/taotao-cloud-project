@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.promotion.api.query.BasePromotionsSearchQuery;
-import com.taotao.cloud.promotion.biz.entity.BasePromotions;
+import com.taotao.cloud.promotion.api.web.query.BasePromotionsSearchQuery;
+import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 
 import java.util.List;
 

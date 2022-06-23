@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.api.controller.buyer;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
-import com.taotao.cloud.member.api.vo.MemberRechargeVO;
+import com.taotao.cloud.member.api.web.vo.MemberRechargeVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

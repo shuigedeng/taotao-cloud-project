@@ -2,9 +2,9 @@ package com.taotao.cloud.report.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.report.api.dto.MemberStatisticsDTO;
+import com.taotao.cloud.report.api.web.dto.MemberStatisticsDTO;
 import com.taotao.cloud.report.api.feign.fallback.FeignMemberStatisticsFallbackImpl;
-import com.taotao.cloud.report.api.vo.MemberStatisticsVO;
+import com.taotao.cloud.report.api.web.vo.MemberStatisticsVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 

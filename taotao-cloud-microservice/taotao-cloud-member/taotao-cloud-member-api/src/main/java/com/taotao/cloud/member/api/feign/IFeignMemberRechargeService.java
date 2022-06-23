@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
-import com.taotao.cloud.member.api.vo.MemberRechargeVO;
+import com.taotao.cloud.member.api.web.vo.MemberRechargeVO;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import java.math.BigDecimal;

@@ -18,7 +18,7 @@ package com.taotao.cloud.operation.api.feign.fallback;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.operation.api.feign.IFeignArticleService;
-import com.taotao.cloud.operation.api.vo.ArticleVO;
+import com.taotao.cloud.operation.api.web.vo.ArticleVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

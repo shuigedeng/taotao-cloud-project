@@ -2,8 +2,8 @@ package com.taotao.cloud.promotion.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.promotion.api.vo.CouponActivityItemVO;
-import com.taotao.cloud.promotion.biz.entity.CouponActivityItem;
+import com.taotao.cloud.promotion.api.web.vo.CouponActivityItemVO;
+import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 import com.taotao.cloud.promotion.biz.mapper.CouponActivityItemMapper;
 import com.taotao.cloud.promotion.biz.service.CouponActivityItemService;
 import org.springframework.stereotype.Service;

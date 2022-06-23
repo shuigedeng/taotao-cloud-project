@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.biz.entity.SeckillApply;
+import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 
 /**
  * 秒杀活动申请数据处理层

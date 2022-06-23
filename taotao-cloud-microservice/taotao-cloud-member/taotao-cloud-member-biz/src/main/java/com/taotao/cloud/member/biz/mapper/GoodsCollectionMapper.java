@@ -19,8 +19,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
-import com.taotao.cloud.member.biz.entity.MemberGoodsCollection;
+import com.taotao.cloud.member.api.web.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

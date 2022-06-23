@@ -10,8 +10,8 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.biz.entity.BasePromotions;
-import com.taotao.cloud.promotion.biz.entity.PromotionGoods;
+import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
+import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 
 import java.util.Arrays;
 import java.util.Date;

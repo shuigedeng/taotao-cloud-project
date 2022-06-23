@@ -1,10 +1,10 @@
 package com.taotao.cloud.promotion.biz.service;
 
 
-import com.taotao.cloud.promotion.api.vo.PintuanMemberVO;
-import com.taotao.cloud.promotion.api.vo.PintuanShareVO;
-import com.taotao.cloud.promotion.api.vo.PintuanVO;
-import com.taotao.cloud.promotion.biz.entity.Pintuan;
+import com.taotao.cloud.promotion.api.web.vo.PintuanMemberVO;
+import com.taotao.cloud.promotion.api.web.vo.PintuanShareVO;
+import com.taotao.cloud.promotion.api.web.vo.PintuanVO;
+import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 
 import java.util.List;
 

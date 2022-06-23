@@ -1,9 +1,9 @@
 package com.taotao.cloud.report.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.report.api.dto.MemberStatisticsDTO;
+import com.taotao.cloud.report.api.web.dto.MemberStatisticsDTO;
 import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsService;
-import com.taotao.cloud.report.api.vo.MemberStatisticsVO;
+import com.taotao.cloud.report.api.web.vo.MemberStatisticsVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.Date;

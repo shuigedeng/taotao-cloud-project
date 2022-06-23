@@ -18,8 +18,8 @@ package com.taotao.cloud.promotion.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsServiceFallback;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
+import com.taotao.cloud.promotion.api.web.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.web.vo.PromotionGoodsVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

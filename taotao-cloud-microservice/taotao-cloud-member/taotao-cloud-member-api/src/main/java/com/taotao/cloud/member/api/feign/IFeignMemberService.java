@@ -4,7 +4,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
-import com.taotao.cloud.member.api.vo.MemberVO;
+import com.taotao.cloud.member.api.web.vo.MemberVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

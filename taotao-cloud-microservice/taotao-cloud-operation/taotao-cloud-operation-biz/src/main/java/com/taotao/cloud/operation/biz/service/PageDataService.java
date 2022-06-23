@@ -2,10 +2,10 @@ package com.taotao.cloud.operation.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.operation.api.dto.PageDataDTO;
-import com.taotao.cloud.operation.api.vo.PageDataListVO;
-import com.taotao.cloud.operation.api.vo.PageDataVO;
-import com.taotao.cloud.operation.biz.entity.PageData;
+import com.taotao.cloud.operation.api.web.dto.PageDataDTO;
+import com.taotao.cloud.operation.api.web.vo.PageDataListVO;
+import com.taotao.cloud.operation.api.web.vo.PageDataVO;
+import com.taotao.cloud.operation.biz.model.entity.PageData;
 
 /**
  * 页面业务层

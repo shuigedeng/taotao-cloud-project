@@ -1,9 +1,9 @@
 package com.taotao.cloud.promotion.biz.service;
 
 
-import com.taotao.cloud.promotion.api.vo.SeckillVO;
-import com.taotao.cloud.promotion.biz.entity.Seckill;
-import com.taotao.cloud.promotion.biz.entity.SeckillApply;
+import com.taotao.cloud.promotion.api.web.vo.SeckillVO;
+import com.taotao.cloud.promotion.biz.model.entity.Seckill;
+import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 
 import java.util.List;
 

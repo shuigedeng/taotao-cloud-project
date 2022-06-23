@@ -17,9 +17,9 @@ package com.taotao.cloud.member.biz.roketmq.listener;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.member.api.dto.MemberPointMessageDTO;
-import com.taotao.cloud.member.biz.entity.Member;
-import com.taotao.cloud.member.biz.entity.MemberSign;
+import com.taotao.cloud.member.api.web.dto.MemberPointMessageDTO;
+import com.taotao.cloud.member.biz.model.entity.Member;
+import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.roketmq.event.MemberLoginEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberPointChangeEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;

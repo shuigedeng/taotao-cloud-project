@@ -18,7 +18,7 @@ package com.taotao.cloud.operation.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.operation.api.feign.fallback.FeignArticleServiceFallback;
-import com.taotao.cloud.operation.api.vo.ArticleVO;
+import com.taotao.cloud.operation.api.web.vo.ArticleVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

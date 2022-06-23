@@ -3,7 +3,7 @@ package com.taotao.cloud.report.biz.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.report.biz.entity.PlatformViewData;
+import com.taotao.cloud.report.biz.model.entity.PlatformViewData;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

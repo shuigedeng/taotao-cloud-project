@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.biz.entity.Seckill;
+import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import org.apache.ibatis.annotations.Update;
 
 /**

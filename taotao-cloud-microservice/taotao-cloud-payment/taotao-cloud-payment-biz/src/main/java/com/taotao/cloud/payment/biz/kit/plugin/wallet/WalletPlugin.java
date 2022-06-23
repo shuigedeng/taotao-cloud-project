@@ -4,7 +4,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.member.api.dto.MemberWalletUpdateDTO;
+import com.taotao.cloud.member.api.web.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
 import com.taotao.cloud.payment.api.enums.CashierEnum;

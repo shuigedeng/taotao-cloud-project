@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.operation.api.vo.ArticleVO;
-import com.taotao.cloud.operation.biz.entity.Article;
+import com.taotao.cloud.operation.api.web.vo.ArticleVO;
+import com.taotao.cloud.operation.biz.model.entity.Article;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

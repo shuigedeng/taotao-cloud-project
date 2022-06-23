@@ -2,8 +2,8 @@ package com.taotao.cloud.distribution.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.distribution.api.vo.DistributionCashSearchVO;
-import com.taotao.cloud.distribution.biz.entity.DistributionCash;
+import com.taotao.cloud.distribution.api.web.vo.DistributionCashSearchVO;
+import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 

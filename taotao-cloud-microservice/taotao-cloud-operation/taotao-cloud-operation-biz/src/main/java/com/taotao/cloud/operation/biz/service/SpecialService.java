@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.operation.biz.entity.Special;
+import com.taotao.cloud.operation.biz.model.entity.Special;
 
 /**
  * 专题活动业务层

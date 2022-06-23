@@ -7,7 +7,7 @@ import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.member.api.dto.MemberAddressDTO;
+import com.taotao.cloud.member.api.web.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.web.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.web.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.web.vo.order.OrderDetailVO;

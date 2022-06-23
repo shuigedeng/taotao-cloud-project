@@ -1,14 +1,12 @@
 package com.taotao.cloud.promotion.api.tools;
 
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.vo.BasePromotionsVO;
+import com.taotao.cloud.promotion.api.web.vo.BasePromotionsVO;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

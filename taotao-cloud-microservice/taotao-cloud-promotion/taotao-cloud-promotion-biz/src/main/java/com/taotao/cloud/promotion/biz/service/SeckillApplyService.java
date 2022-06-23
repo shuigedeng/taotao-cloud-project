@@ -3,11 +3,11 @@ package com.taotao.cloud.promotion.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.promotion.api.query.SeckillPageQuery;
-import com.taotao.cloud.promotion.api.vo.SeckillApplyVO;
-import com.taotao.cloud.promotion.api.vo.SeckillGoodsVO;
-import com.taotao.cloud.promotion.api.vo.SeckillTimelineVO;
-import com.taotao.cloud.promotion.biz.entity.SeckillApply;
+import com.taotao.cloud.promotion.api.web.query.SeckillPageQuery;
+import com.taotao.cloud.promotion.api.web.vo.SeckillApplyVO;
+import com.taotao.cloud.promotion.api.web.vo.SeckillGoodsVO;
+import com.taotao.cloud.promotion.api.web.vo.SeckillTimelineVO;
+import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 
 import java.util.List;
 

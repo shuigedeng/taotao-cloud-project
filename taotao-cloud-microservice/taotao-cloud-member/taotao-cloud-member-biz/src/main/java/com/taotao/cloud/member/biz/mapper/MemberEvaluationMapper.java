@@ -19,9 +19,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
-import com.taotao.cloud.member.api.vo.StoreRatingVO;
-import com.taotao.cloud.member.biz.entity.MemberEvaluation;
+import com.taotao.cloud.member.api.web.vo.StoreRatingVO;
+import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

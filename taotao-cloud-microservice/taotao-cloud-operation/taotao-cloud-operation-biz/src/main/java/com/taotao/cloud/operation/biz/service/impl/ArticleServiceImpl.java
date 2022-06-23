@@ -2,7 +2,6 @@ package com.taotao.cloud.operation.biz.service.impl;
 
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -13,9 +12,9 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.lang.BeanUtil;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
-import com.taotao.cloud.operation.api.query.ArticlePageQuery;
-import com.taotao.cloud.operation.api.vo.ArticleVO;
-import com.taotao.cloud.operation.biz.entity.Article;
+import com.taotao.cloud.operation.api.web.query.ArticlePageQuery;
+import com.taotao.cloud.operation.api.web.vo.ArticleVO;
+import com.taotao.cloud.operation.biz.model.entity.Article;
 import com.taotao.cloud.operation.biz.mapper.ArticleMapper;
 import com.taotao.cloud.operation.biz.service.ArticleService;
 import org.springframework.stereotype.Service;

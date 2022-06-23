@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.member.biz.entity.MemberAddress;
+import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.mapper.MemberAddressMapper;
 import com.taotao.cloud.member.biz.service.MemberAddressService;
 import org.springframework.stereotype.Service;
