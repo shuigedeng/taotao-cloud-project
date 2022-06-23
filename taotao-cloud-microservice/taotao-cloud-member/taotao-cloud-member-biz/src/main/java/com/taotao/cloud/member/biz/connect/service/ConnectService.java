@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.connect.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
-import com.taotao.cloud.member.api.query.ConnectQuery;
+import com.taotao.cloud.member.api.web.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;

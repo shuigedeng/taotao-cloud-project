@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsListVO;
-import com.taotao.cloud.promotion.biz.entity.KanjiaActivityGoods;
+import com.taotao.cloud.promotion.api.web.vo.kanjia.KanjiaActivityGoodsListVO;
+import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.member.biz.entity.MemberReceipt;
+import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 
 
 /**

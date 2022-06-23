@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.distribution.api.vo.DistributionGoodsVO;
-import com.taotao.cloud.distribution.biz.entity.DistributionGoods;
+import com.taotao.cloud.distribution.api.web.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

@@ -4,12 +4,12 @@ package com.taotao.cloud.promotion.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsDTO;
-import com.taotao.cloud.promotion.api.dto.KanjiaActivityGoodsOperationDTO;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsListVO;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsParams;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityGoodsVO;
-import com.taotao.cloud.promotion.biz.entity.KanjiaActivityGoods;
+import com.taotao.cloud.promotion.api.web.dto.KanjiaActivityGoodsDTO;
+import com.taotao.cloud.promotion.api.web.dto.KanjiaActivityGoodsOperationDTO;
+import com.taotao.cloud.promotion.api.web.vo.kanjia.KanjiaActivityGoodsListVO;
+import com.taotao.cloud.promotion.api.web.vo.kanjia.KanjiaActivityGoodsParams;
+import com.taotao.cloud.promotion.api.web.vo.kanjia.KanjiaActivityGoodsVO;
+import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 
 import java.util.List;
 

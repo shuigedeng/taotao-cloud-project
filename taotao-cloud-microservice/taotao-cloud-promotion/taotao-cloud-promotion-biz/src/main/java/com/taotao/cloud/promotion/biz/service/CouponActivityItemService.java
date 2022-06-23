@@ -1,8 +1,8 @@
 package com.taotao.cloud.promotion.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.promotion.api.vo.CouponActivityItemVO;
-import com.taotao.cloud.promotion.biz.entity.CouponActivityItem;
+import com.taotao.cloud.promotion.api.web.vo.CouponActivityItemVO;
+import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 
 import java.util.List;
 

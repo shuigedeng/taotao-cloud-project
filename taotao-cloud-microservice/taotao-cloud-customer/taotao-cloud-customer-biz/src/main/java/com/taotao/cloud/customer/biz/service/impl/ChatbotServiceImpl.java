@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.customer.biz.service.impl;
 
-import com.taotao.cloud.customer.biz.entity.Chatbot;
+import com.taotao.cloud.customer.biz.model.entity.Chatbot;
 import com.taotao.cloud.customer.biz.repository.ChatbotSuperRepository;
 import com.taotao.cloud.customer.biz.service.IChatbotService;
 import org.springframework.stereotype.Service;

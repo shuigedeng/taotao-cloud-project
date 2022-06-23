@@ -1,8 +1,5 @@
 package com.taotao.cloud.member.biz.service;
 
-import com.taotao.cloud.member.api.dto.MemberDTO;
-import com.taotao.cloud.member.api.query.MemberQuery;
-
 /**
  * 会员(c端用户)表服务接口
  *

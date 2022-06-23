@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.operation.biz.entity.Feedback;
+import com.taotao.cloud.operation.biz.model.entity.Feedback;
 
 
 /**

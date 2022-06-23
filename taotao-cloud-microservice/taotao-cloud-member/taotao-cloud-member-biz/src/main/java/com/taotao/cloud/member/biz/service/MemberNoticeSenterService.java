@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.biz.entity.MemberNoticeSenter;
+import com.taotao.cloud.member.biz.model.entity.MemberNoticeSenter;
 
 /**
  * 会员消息业务层

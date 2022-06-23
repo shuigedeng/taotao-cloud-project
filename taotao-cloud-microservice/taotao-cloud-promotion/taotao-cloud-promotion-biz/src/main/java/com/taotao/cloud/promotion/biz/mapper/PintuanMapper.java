@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.biz.entity.Pintuan;
+import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 
 /**
  * 拼团数据处理层

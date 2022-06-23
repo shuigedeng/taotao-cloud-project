@@ -11,7 +11,7 @@ import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.web.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.web.vo.cart.CartVO;
-import com.taotao.cloud.promotion.api.vo.PromotionSkuVO;
+import com.taotao.cloud.promotion.api.web.vo.PromotionSkuVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.service.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.api.dto.MemberAddressDTO;
+import com.taotao.cloud.member.api.web.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.web.query.order.OrderPageQuery;

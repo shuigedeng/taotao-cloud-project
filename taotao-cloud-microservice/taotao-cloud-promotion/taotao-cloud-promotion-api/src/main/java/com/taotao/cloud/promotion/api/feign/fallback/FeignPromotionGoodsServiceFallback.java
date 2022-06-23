@@ -17,8 +17,8 @@ package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
-import com.taotao.cloud.promotion.api.query.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.vo.PromotionGoodsVO;
+import com.taotao.cloud.promotion.api.web.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.web.vo.PromotionGoodsVO;
 import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.store.api.web.vo.StoreCollectionVO;
-import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
+import com.taotao.cloud.member.biz.model.entity.MemberStoreCollection;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

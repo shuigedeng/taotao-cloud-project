@@ -18,7 +18,7 @@ import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
-import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
+import com.taotao.cloud.promotion.api.web.vo.PointsGoodsVO;
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;

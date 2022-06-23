@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.biz.entity.MemberCoupon;
+import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
 
 /**
  * 会员优惠券数据处理层

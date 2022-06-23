@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.roketmq.event;
 
 
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.model.entity.Member;
 
 /**
  * 会员登录消息

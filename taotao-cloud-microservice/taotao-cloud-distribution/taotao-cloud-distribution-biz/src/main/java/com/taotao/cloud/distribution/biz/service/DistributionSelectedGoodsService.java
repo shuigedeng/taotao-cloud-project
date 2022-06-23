@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.distribution.biz.entity.DistributionSelectedGoods;
+import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
 
 /**
  * 分销选择商品业务层

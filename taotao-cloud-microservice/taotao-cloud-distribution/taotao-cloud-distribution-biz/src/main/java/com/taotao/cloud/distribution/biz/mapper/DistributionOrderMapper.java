@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.mapper;
 
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.distribution.biz.entity.DistributionOrder;
+import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
 import org.apache.ibatis.annotations.Update;
 
 /**

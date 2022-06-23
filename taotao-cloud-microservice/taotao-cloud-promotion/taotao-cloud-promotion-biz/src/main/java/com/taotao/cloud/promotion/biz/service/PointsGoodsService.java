@@ -1,8 +1,8 @@
 package com.taotao.cloud.promotion.biz.service;
 
 
-import com.taotao.cloud.promotion.api.vo.PointsGoodsVO;
-import com.taotao.cloud.promotion.biz.entity.PointsGoods;
+import com.taotao.cloud.promotion.api.web.vo.PointsGoodsVO;
+import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 
 import java.util.List;
 

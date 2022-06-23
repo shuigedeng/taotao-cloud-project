@@ -7,7 +7,7 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
 import com.taotao.cloud.goods.api.web.vo.EsGoodsIndexVO;
-import com.taotao.cloud.member.biz.entity.MemberBrowse;
+import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 import com.taotao.cloud.member.biz.mapper.FootprintMapper;
 import com.taotao.cloud.member.biz.service.IMemberBrowseService;
 import org.springframework.beans.factory.annotation.Autowired;

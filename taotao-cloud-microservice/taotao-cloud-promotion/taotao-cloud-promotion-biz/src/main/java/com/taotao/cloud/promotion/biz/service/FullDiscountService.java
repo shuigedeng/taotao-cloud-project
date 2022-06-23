@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.biz.service;
 
 
 import com.taotao.cloud.order.api.web.vo.cart.FullDiscountVO;
-import com.taotao.cloud.promotion.biz.entity.FullDiscount;
+import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.taotao.cloud.operation.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.operation.biz.entity.PageData;
-import com.taotao.cloud.operation.biz.entity.Special;
+import com.taotao.cloud.operation.biz.model.entity.PageData;
+import com.taotao.cloud.operation.biz.model.entity.Special;
 import com.taotao.cloud.operation.biz.mapper.SpecialMapper;
 import com.taotao.cloud.operation.biz.service.PageDataService;
 import com.taotao.cloud.operation.biz.service.SpecialService;

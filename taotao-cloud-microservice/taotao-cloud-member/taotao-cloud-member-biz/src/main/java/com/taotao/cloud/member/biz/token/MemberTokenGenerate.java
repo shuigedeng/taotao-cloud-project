@@ -21,7 +21,7 @@ import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.token.TokenUtil;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory;
+import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 
 /**
  * 积分商品分类数据处理层

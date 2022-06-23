@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
-import com.taotao.cloud.promotion.api.dto.MemberDTO;
+import com.taotao.cloud.promotion.api.web.dto.MemberDTO;
 import com.taotao.cloud.promotion.api.feign.IFeignCouponActivityService;
-import com.taotao.cloud.promotion.api.vo.CouponActivityVO;
+import com.taotao.cloud.promotion.api.web.vo.CouponActivityVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

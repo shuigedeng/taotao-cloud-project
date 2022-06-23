@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.customer.biz.mapper;
 
-import com.taotao.cloud.customer.api.vo.ChatbotVO;
-import com.taotao.cloud.customer.biz.entity.Chatbot;
-import org.mapstruct.Builder;
+import com.taotao.cloud.customer.api.web.vo.ChatbotVO;
+import com.taotao.cloud.customer.biz.model.entity.Chatbot;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.member.biz.entity.MemberNotice;
+import com.taotao.cloud.member.biz.model.entity.MemberNotice;
 import com.taotao.cloud.member.biz.mapper.MemberNoticeMapper;
 import com.taotao.cloud.member.biz.service.MemberNoticeService;
 import org.springframework.stereotype.Service;

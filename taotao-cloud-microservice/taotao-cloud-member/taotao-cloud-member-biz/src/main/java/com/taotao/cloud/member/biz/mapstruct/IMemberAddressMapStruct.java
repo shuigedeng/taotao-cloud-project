@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.member.biz.mapstruct;
 
-import com.taotao.cloud.member.api.vo.MemberAddressVO;
-import com.taotao.cloud.member.biz.entity.MemberAddress;
+import com.taotao.cloud.member.api.web.vo.MemberAddressVO;
+import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

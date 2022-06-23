@@ -2,9 +2,9 @@ package com.taotao.cloud.operation.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.operation.api.query.ArticlePageQuery;
-import com.taotao.cloud.operation.api.vo.ArticleVO;
-import com.taotao.cloud.operation.biz.entity.Article;
+import com.taotao.cloud.operation.api.web.query.ArticlePageQuery;
+import com.taotao.cloud.operation.api.web.vo.ArticleVO;
+import com.taotao.cloud.operation.biz.model.entity.Article;
 import java.util.List;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;

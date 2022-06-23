@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.distribution.biz.entity.Distribution;
+import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import org.apache.ibatis.annotations.Update;
 
 import java.math.BigDecimal;

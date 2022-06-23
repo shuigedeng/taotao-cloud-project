@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
-import com.taotao.cloud.member.api.dto.MemberPointMessageDTO;
+import com.taotao.cloud.member.api.web.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.api.enums.MemberWithdrawalDestinationEnum;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;

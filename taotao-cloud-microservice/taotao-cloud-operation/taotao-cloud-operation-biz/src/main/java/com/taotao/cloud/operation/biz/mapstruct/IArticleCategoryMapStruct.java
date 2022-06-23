@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.operation.biz.mapstruct;
 
-import com.taotao.cloud.operation.api.vo.ArticleCategoryVO;
-import com.taotao.cloud.operation.biz.entity.ArticleCategory;
-import org.mapstruct.Builder;
+import com.taotao.cloud.operation.api.web.vo.ArticleCategoryVO;
+import com.taotao.cloud.operation.biz.model.entity.ArticleCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

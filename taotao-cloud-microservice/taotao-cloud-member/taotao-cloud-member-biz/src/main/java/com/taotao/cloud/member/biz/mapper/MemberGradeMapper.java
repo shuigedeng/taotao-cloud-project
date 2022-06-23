@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.member.biz.entity.MemberGrade;
+import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 
 /**
  * 会员等级数据层

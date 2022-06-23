@@ -17,8 +17,8 @@ package com.taotao.cloud.member.biz.aop.interceptor;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.biz.entity.Member;
-import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
+import com.taotao.cloud.member.biz.model.entity.Member;
+import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
 import com.taotao.cloud.member.biz.service.MemberService;
 import org.aspectj.lang.JoinPoint;

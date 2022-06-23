@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory;
+import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 
 /**
  * 积分商品分类业务层

@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.goods.api.web.vo.EsGoodsIndexVO;
-import com.taotao.cloud.member.biz.entity.MemberBrowse;
+import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 
 import java.util.List;
 

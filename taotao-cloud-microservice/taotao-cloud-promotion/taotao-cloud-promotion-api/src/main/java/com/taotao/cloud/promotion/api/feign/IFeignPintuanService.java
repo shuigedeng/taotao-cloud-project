@@ -17,7 +17,7 @@ package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPintuanServiceFallback;
-import com.taotao.cloud.promotion.api.vo.PintuanVO;
+import com.taotao.cloud.promotion.api.web.vo.PintuanVO;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**

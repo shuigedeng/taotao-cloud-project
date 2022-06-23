@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
-import com.taotao.cloud.member.api.vo.StoreRatingVO;
+import com.taotao.cloud.member.api.web.vo.StoreRatingVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.service.StoreService;

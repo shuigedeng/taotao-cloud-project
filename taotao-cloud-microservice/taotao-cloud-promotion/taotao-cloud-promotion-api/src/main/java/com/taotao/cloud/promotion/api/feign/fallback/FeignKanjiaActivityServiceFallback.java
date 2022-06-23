@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.promotion.api.feign.fallback;
 
-import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
-import com.taotao.cloud.promotion.api.vo.kanjia.KanjiaActivityVO;
+import com.taotao.cloud.promotion.api.web.vo.kanjia.KanjiaActivityVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
