@@ -60,21 +60,21 @@ redisson:
   #等待获取锁超时时间,-1则是一直等待
   attemptTimeout: 10000
   dataValidTime: 1800000
-  single_server_config:
-    #服务器地址,必填ip:port
-    address: "192.168.10.200:6379"
-    #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
-    subscription_connection_minimum_idle_size: 1
-    #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
-    subscription_connection_pool_size: 50
-    #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
-    connection_minimum_idle_size: 24
-    #连接池最大容量。连接池的连接数量自动弹性伸缩。
-    connection_pool_size: 64
-    #尝试连接的数据库编号。
-    database: 3
-    #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
-    dns_monitoring_interval: 5000
+  #single_server_config:
+  #  #服务器地址,必填ip:port
+  #  address: "192.168.10.200:6379"
+  #  #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
+  #  subscription_connection_minimum_idle_size: 1
+  #  #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
+  #  subscription_connection_pool_size: 50
+  #  #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+  #  connection_minimum_idle_size: 24
+  #  #连接池最大容量。连接池的连接数量自动弹性伸缩。
+  #  connection_pool_size: 64
+  #  #尝试连接的数据库编号。
+  #  database: 3
+  #  #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
+  #  dns_monitoring_interval: 5000
   multiple-server-config:
     #在多Redis服务节点的环境里，可以选用以下几种负载均衡方式选择一个节点：
     #org.redisson.connection.balancer.WeightedRoundRobinBalancer - 权重轮询调度算法
