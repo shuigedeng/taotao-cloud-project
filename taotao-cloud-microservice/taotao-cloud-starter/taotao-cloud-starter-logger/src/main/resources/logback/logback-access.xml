@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="--"/>
+	<appender name="LOGBACK_ACCESS_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>common</pattern>
+			<!--<pattern>%h %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}"</pattern>-->
+			<!--<pattern>%h %l %u %user %date "%r" %s %b</pattern>-->
+			<!--<pattern>common</pattern>-->
+			<!--<pattern>clf</pattern>-->
+		</encoder>
+	</appender>
+
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+	<appender name="LOGBACK_ACCESS_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>access.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${user.home}/logs/access/${APP_NAME}/access.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>combined</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="LOGBACK_ACCESS_CONSOLE"/>
+		<appender-ref ref="LOGBACK_ACCESS_FILE"/>
+	</root>
+
+	<springProfile name="dev">
+		<root level="INFO">
+			<appender-ref ref="LOGBACK_ACCESS_CONSOLE"/>
+			<appender-ref ref="LOGBACK_ACCESS_FILE"/>
+		</root>
+	</springProfile>
+
+	<springProfile name="test">
+		<root level="INFO">
+			<appender-ref ref="LOGBACK_ACCESS_CONSOLE"/>
+			<appender-ref ref="LOGBACK_ACCESS_FILE"/>
+		</root>
+	</springProfile>
+
+	<springProfile name="pre">
+		<root level="INFO">
+			<appender-ref ref="LOGBACK_ACCESS_CONSOLE"/>
+			<appender-ref ref="LOGBACK_ACCESS_FILE"/>
+		</root>
+	</springProfile>
+
+	<springProfile name="pro">
+		<root level="INFO">
+			<appender-ref ref="LOGBACK_ACCESS_CONSOLE"/>
+			<appender-ref ref="LOGBACK_ACCESS_FILE"/>
+		</root>
+	</springProfile>
+</configuration>

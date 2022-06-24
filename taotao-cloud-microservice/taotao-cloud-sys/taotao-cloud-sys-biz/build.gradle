@@ -30,6 +30,8 @@ dependencies {
 
     implementation 'io.github.memorydoc:gobrs-async-starter:1.1.7-RELEASE'
 
+
+
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
@@ -72,8 +74,8 @@ configurations {
         exclude group: 'log4j', module: 'log4j'
         exclude group: 'log4j', module: 'slf4j-simple'
         exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+        //exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
+        //exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
         //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
