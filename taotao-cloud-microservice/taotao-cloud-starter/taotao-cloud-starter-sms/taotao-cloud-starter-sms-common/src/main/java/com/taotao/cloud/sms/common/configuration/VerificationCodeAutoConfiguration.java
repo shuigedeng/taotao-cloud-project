@@ -52,7 +52,7 @@ public class VerificationCodeAutoConfiguration {
 	 * @return 默认验证码生成
 	 */
 	@Bean
-	@ConditionalOnMissingBean(CodeGenerate.class)
+	@ConditionalOnMissingBean
 	public CodeGenerate defaultCodeGenerate(VerificationCodeProperties properties) {
 		return new DefaultCodeGenerate(properties);
 	}
@@ -68,7 +68,7 @@ public class VerificationCodeAutoConfiguration {
 	 * @return 手机验证码服务
 	 */
 	@Bean
-	@ConditionalOnMissingBean(VerificationCodeService.class)
+	@ConditionalOnMissingBean
 	public VerificationCodeService verificationCodeService(
 		VerificationCodeRepository repository,
 		VerificationCodeProperties properties,
@@ -87,8 +87,8 @@ public class VerificationCodeAutoConfiguration {
 	 * 验证码内存储存配置实现
 	 */
 	@Bean
-	@ConditionalOnMissingBean(VerificationCodeRepository.class)
-	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "MEMORY")
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "memory")
 	public VerificationCodeRepository verificationCodeMemoryRepository(
 		VerificationCodeMemoryRepositoryProperties config) {
 		VerificationCodeRepository repository = new VerificationCodeMemoryRepository(config);
@@ -101,8 +101,8 @@ public class VerificationCodeAutoConfiguration {
 	 */
 	@Bean
 	@ConditionalOnBean(RedisRepository.class)
-	@ConditionalOnMissingBean(VerificationCodeRepository.class)
-	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "REDIS")
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "redis", matchIfMissing = true)
 	public VerificationCodeRepository verificationCodeRedisRepository(
 		RedisRepository redisRepository,
 		ObjectMapper objectMapper) {

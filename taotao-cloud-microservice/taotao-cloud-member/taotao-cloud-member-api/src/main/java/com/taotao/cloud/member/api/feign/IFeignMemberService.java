@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用会员用户模块
@@ -19,7 +21,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(contextId = "IFeignMemberService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberServiceFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberServiceFallback.class)
 public interface IFeignMemberService {
 
 	/**
@@ -52,12 +54,14 @@ public interface IFeignMemberService {
 	 * @return {@link Result }<{@link Boolean }>
 	 * @since 2022-04-25 16:41:42
 	 */
-	@GetMapping(value = "/member/info/update")
-	Result<Boolean> updateMemberPoint(Long payPoint, String name, Long memberId, String s);
+	@GetMapping(value = "/member/updateMemberPoint")
+	Result<Boolean> updateMemberPoint(@RequestParam Long payPoint, @RequestParam String name, @RequestParam Long memberId, @RequestParam String s);
 
-	MemberVO findByUsername(String username);
+	@GetMapping(value = "/member/username")
+	MemberVO findByUsername(@RequestParam String username);
 
-	MemberVO getById(Long memberId);
+	@GetMapping(value = "/member/memberId")
+	MemberVO getById(@RequestParam Long memberId);
 
 	/**
 	 * new LambdaUpdateWrapper<Member>()
@@ -65,10 +69,13 @@ public interface IFeignMemberService {
 	 *                 .set(Member::getHaveStore, true)
 	 *                 .set(Member::getStoreId, store.getId())
 	 */
-	void update(Long memberId, Long sotreId);
+	@GetMapping(value = "/member/memberId/storeId")
+	Boolean update(@RequestParam Long memberId, @RequestParam Long storeId);
 
-	void updateById(MemberVO member);
+	@GetMapping(value = "/member")
+	Boolean updateById(@RequestParam MemberVO member);
 
-	List<Map<String, Object>> listFieldsByMemberIds(String s, List<String> ids);
+	@GetMapping(value = "/member/listFieldsByMemberIds")
+	List<Map<String, Object>> listFieldsByMemberIds(@RequestParam String s, @RequestParam List<String> ids);
 }
 

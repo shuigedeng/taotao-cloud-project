@@ -78,7 +78,7 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 			.pathsToMatch(properties.getPathsToMatch())
 			.pathsToExclude(properties.getPathsToExclude())
 			.packagesToScan(properties.getPackagesToScan())
-			.packagesToExclude(properties.getPackagesToExclude())
+			//.packagesToExclude(properties.getPackagesToExclude())
 			.build();
 	}
 

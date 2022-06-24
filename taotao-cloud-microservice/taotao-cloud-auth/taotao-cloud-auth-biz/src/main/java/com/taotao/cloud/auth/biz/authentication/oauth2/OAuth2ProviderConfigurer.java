@@ -153,7 +153,7 @@ public class OAuth2ProviderConfigurer extends
 			// 解析标准的AccessToken响应信息转换器
 			tokenResponseHttpMessageConverter,
 			// 解析qq的AccessToken响应信息转换器
-			new QqOAuth2AccessTokenResponseHttpMessageConverter()));
+			new QqOAuth2AccessTokenResponseHttpMessageConverter(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, new MediaType("application", "*+json"))));
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 
 		DefaultAuthorizationCodeTokenResponseClient tokenResponseClient = new DefaultAuthorizationCodeTokenResponseClient();

@@ -53,7 +53,7 @@ public class SmsAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean(NoticeService.class)
+	@ConditionalOnMissingBean
 	public NoticeService noticeService(SmsProperties properties,
 									   SmsAsyncProperties asyncProperties,
 									   ILoadBalancer<SendHandler, NoticeData> smsSenderLoadbalancer,
@@ -82,7 +82,7 @@ public class SmsAutoConfiguration implements InitializingBean {
 	 * @return 发送者负载均衡器
 	 */
 	@Bean
-	@ConditionalOnMissingBean(SmsSenderLoadBalancer.class)
+	@ConditionalOnMissingBean
 	public SmsSenderLoadBalancer smsSenderLoadBalancer(SmsProperties properties) {
 		String type = properties.getLoadBalancerType();
 		if (type == null) {

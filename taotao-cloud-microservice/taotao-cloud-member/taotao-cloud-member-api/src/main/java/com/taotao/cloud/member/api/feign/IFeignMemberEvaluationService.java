@@ -13,6 +13,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用会员用户模块
@@ -35,7 +37,8 @@ public interface IFeignMemberEvaluationService {
 	 * @return {@link Result }<{@link Long }>
 	 * @since 2022-04-25 16:39:41
 	 */
-	Result<Long> count(Long goodsId, String name);
+	@GetMapping(value = "/member/evaluation")
+	Result<Long> count(@RequestParam Long goodsId, @RequestParam String name);
 
 	/**
 	 * 得到评价数
@@ -44,7 +47,8 @@ public interface IFeignMemberEvaluationService {
 	 * @return {@link Result }<{@link Long }>
 	 * @since 2022-04-25 16:39:46
 	 */
-	Result<Long> getEvaluationCount(EvaluationPageQuery queryParams);
+	@GetMapping(value = "/member/evaluationPageQuery")
+	Result<Long> getEvaluationCount(@RequestParam EvaluationPageQuery queryParams);
 
 	/**
 	 * new QueryWrapper<MemberEvaluation>()
@@ -53,9 +57,11 @@ public interface IFeignMemberEvaluationService {
 	 * @return {@link Result }<{@link List }<{@link Map }<{@link String }, {@link Object }>>>
 	 * @since 2022-04-25 16:39:49
 	 */
+	@GetMapping(value = "/member/memberEvaluationNum")
 	Result<List<Map<String, Object>>> memberEvaluationNum();
 
-	Result<Boolean> addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b);
+	@GetMapping(value = "/member/memberEvaluationDTO")
+	Result<Boolean> addMemberEvaluation(@RequestParam MemberEvaluationDTO memberEvaluationDTO, @RequestParam boolean b);
 
 	/**
 	 * LambdaQueryWrapper<MemberEvaluation> lambdaQueryWrapper = Wrappers.lambdaQuery();
@@ -65,12 +71,16 @@ public interface IFeignMemberEvaluationService {
 	 * @param name
 	 * @return
 	 */
-	StoreRatingVO getStoreRatingVO(Long id, String name);
+	@GetMapping(value = "/member/evaluation/getStoreRatingVO")
+	StoreRatingVO getStoreRatingVO(@RequestParam Long id, @RequestParam String name);
 
-	MemberEvaluationVO queryById(Long id);
+	@GetMapping(value = "/member/evaluation/queryById")
+	MemberEvaluationVO queryById(@RequestParam Long id);
 
-	void reply(Long id, String reply, String replyImage);
+	@GetMapping(value = "/member/evaluation/reply")
+	void reply(@RequestParam Long id, @RequestParam String reply, @RequestParam String replyImage);
 
-	IPage<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery);
+	@GetMapping(value = "/member/evaluation/queryPage")
+	IPage<MemberEvaluationListVO> queryPage(@RequestParam EvaluationPageQuery evaluationPageQuery);
 }
 
