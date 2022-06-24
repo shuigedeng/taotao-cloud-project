@@ -35,6 +35,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
@@ -67,10 +68,10 @@ import org.springframework.util.StringUtils;
  * @version 2021.9
  * @since 2021-09-07 21:17:09
  */
-@AutoConfiguration(after = RedisAutoConfiguration.class)
 @EnableCaching
+@AutoConfiguration(after = RedisAutoConfiguration.class)
 @EnableConfigurationProperties({CacheProperties.class})
-@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -78,11 +79,8 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		LogUtil.started(CacheManagerAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
-	private final CacheProperties cacheProperties;
-
-	public CacheManagerAutoConfiguration(CacheProperties cacheProperties) {
-		this.cacheProperties = cacheProperties;
-	}
+	@Autowired
+	private CacheProperties cacheProperties;
 
 	@Bean
 	public KeyGenerator keyGenerator() {
@@ -103,7 +101,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Primary
 	@Bean(name = "redisCacheManager")
-	@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "REDIS")
+	@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "redis", matchIfMissing = true)
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
 		RedisCacheConfiguration defConfig = getDefConf();
 		defConfig.entryTtl(cacheProperties.getDef().getTimeToLive());
@@ -162,8 +160,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 	 */
 	@Configuration
 	@AutoConfigureBefore(name = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
-	@EnableConfigurationProperties({
-		org.springframework.boot.autoconfigure.cache.CacheProperties.class})
+	@EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 	@ConditionalOnMissingBean(CacheManager.class)
 	public static class CaffeineAutoCacheConfiguration {
 
@@ -339,7 +336,6 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 				return cacheBuilder.expireAfterAccess(duration).build(cacheLoader);
 			}
 		}
-
 	}
 
 	private RedisCacheConfiguration getDefConf() {

@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway;
+package com.taotao.cloud.sys.biz.retrofit;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import com.github.lianjiatech.retrofit.spring.boot.core.RetrofitClient;
+import java.util.List;
+import retrofit2.http.GET;
 
 /**
- * TaoTaoCloudGatewayApplication
+ * UserApi
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/10/10 09:06
+ * @version 2022.06
+ * @since 2022-06-24 15:40
  */
-@SpringBootApplication
-@EnableDiscoveryClient
-public class TaoTaoCloudGatewayApplication {
+@RetrofitClient(baseUrl = "http://www.baidu.com")
+public interface UserApi {
 
-	public static void main(String[] args) {
+	@GET("/user")
+	List<String> testGetUser();
 
-		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
-	}
 }

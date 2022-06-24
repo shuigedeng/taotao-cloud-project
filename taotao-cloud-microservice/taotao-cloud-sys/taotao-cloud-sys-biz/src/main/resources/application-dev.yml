@@ -270,17 +270,16 @@ arthas:
 
 dubbo:
   application:
-    id: ${spring.application.name}
     name: ${spring.application.name}
     version: ${taotaoCloudVersion}
-    owner: 981376577
-    architecture: china
-    organization: taotao-cloud
-    metadata-type: local
-    environment: dev
-    qos-enable: false
-    qos-accept-foreign-ip: false
-    logger: slf4j
+    #owner: 981376577
+    #architecture: china
+    #organization: taotao-cloud
+    #metadata-type: local
+    #environment: dev
+    #qos-enable: false
+    #qos-accept-foreign-ip: false
+    #logger: slf4j
   cloud:
     subscribed-services: 'taotao-cloud-order,taotao-cloud-goods'
     registry-type: dubbo-cloud
@@ -407,14 +406,20 @@ seata:
     enable-client-batch-send-request: true
 
 spring:
+  gobrs:
+    async:
+      rules: '[{name: "test", content: "AService->BService"}]'
+      task-interrupt: false #局部异常是否打断主流程
+
   quartz:
-    scheduler-name: taotao-cloud-quartz-scheduler
+    scheduler-name: quartzScheduler
     # 将任务等保存化到数据库
     job-store-type: jdbc
     # 关闭时等待任务完成
     wait-for-jobs-to-complete-on-shutdown: true
     # 可以覆盖已有的任务
     overwrite-existing-jobs: true
+    auto-startup: true
     jdbc:
       # 是否自动使用 SQL 初始化 Quartz 表结构
       initialize-schema: never
@@ -432,15 +437,29 @@ spring:
               proxy: false
           # JobStore sql: https://github.com/quartz-scheduler/quartz/tree/master/quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore
           jobStore:
+            dataSource: DS
             # JobStore 实现类
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
             # 使用完全兼容JDBC的驱动
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
             # Quartz 表前缀
             tablePrefix: QRTZ_
+            dontSetAutoCommitFalse: false
             # 是否将JobDataMap中的属性转为字符串存储
             useProperties: false
             misfireThreshold: 60000
+            isClustered: true
+            clusterCheckinInterval: 5000
+            maxMisfiresToHandleAtATime: 1
+          dataSource:
+            DS:
+              driver: com.mysql.cj.jdbc.Driver
+              URL: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+              username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+              password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+              maxConnections: 5
+              validationQuery: select 0
+              provider: hikaricp
           # 线程池相关配置
           threadPool:
             # 线程池大小。默认为 10
@@ -586,11 +605,11 @@ spring:
   redis:
     #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    database: 1
-    #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     #sentinel:
     #  master:
     #  nodes:
+    database: 1
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
     cluster:
       nodes: 192.168.10.200:6381,192.168.10.200:6382,192.168.10.200:6383,192.168.10.200:6384,192.168.10.200:6385,192.168.10.200:6386
@@ -612,7 +631,7 @@ spring:
           retryInterval: 1500
           failedSlaveReconnectionInterval: 3000
           failedSlaveCheckInterval: 60000
-          password: null
+          password: taotao-cloud
           subscriptionsPerConnection: 5
           clientName: null
           loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
@@ -713,7 +732,7 @@ spring:
         type: ZooKeeper
         props:
           namespace: taotao-cloud-shardingsphere
-          server-lists: 192.168.10.200:2181
+          server-lists: 192.168.10.200:2181,192.168.10.200:2182,192.168.10.200:2183
           retryIntervalMilliseconds: 500
           maxRetries: 3
           timeToLiveSeconds: 60
@@ -981,7 +1000,7 @@ taotao:
   cloud:
     zookeeper:
       enabled: true
-      connectString: 192.168.10.200:2181
+      connectString: 192.168.10.200:2181,192.168.10.200:2182,192.168.10.200:2183
       lock:
         enabled: false
     web:
