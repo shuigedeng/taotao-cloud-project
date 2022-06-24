@@ -279,6 +279,12 @@ public class ContextUtil {
 		defaultListableBeanFactory.registerSingleton(name, obj);
 	}
 
+	public static void destroySingletonBean(String name) {
+		ConfigurableApplicationContext applicationContext = getApplicationContext();
+		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory)applicationContext.getAutowireCapableBeanFactory();
+		defaultListableBeanFactory.destroySingleton(name);
+	}
+
 	/**
 	 * 取消注册bean
 	 *

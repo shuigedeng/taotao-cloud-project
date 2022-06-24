@@ -43,6 +43,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.Cache;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -148,7 +149,7 @@ public class ResourceServerConfiguration {
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
 
-	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:''}")
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:#{null}}")
 	private String jwkSetUri;
 
 	@Bean
@@ -157,15 +158,13 @@ public class ResourceServerConfiguration {
 			jwkSetUri = discoveryClient.getServices().stream()
 				.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
 				.flatMap(s -> discoveryClient.getInstances(s).stream())
-				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(),
-					instance.getPort()))
+				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(), instance.getPort()))
 				.findFirst()
 				.orElse(jwkSetUri);
 		}
 
 		NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
-			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
-				"http://127.0.0.1:33336/oauth2/jwks"))
+			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank, "http://127.0.0.1:33336/oauth2/jwks"))
 			.jwsAlgorithm(SignatureAlgorithm.RS256)
 			.build();
 
@@ -173,6 +172,7 @@ public class ResourceServerConfiguration {
 		//Supplier<OAuth2TokenValidator<Jwt>> defaultValidator = (issuerUri != null)
 		//	? () -> JwtValidators.createDefaultWithIssuer(issuerUri) : JwtValidators::createDefault;
 		//nimbusReactiveJwtDecoder.setJwtValidator(defaultValidator.get());
+
 		nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
 		return nimbusReactiveJwtDecoder;
 
@@ -190,38 +190,31 @@ public class ResourceServerConfiguration {
 		private NacosServiceManager nacosServiceManager;
 		@Autowired
 		private NacosDiscoveryProperties properties;
-		@Autowired
-		private DiscoveryClient discoveryClient;
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			List<String> services = discoveryClient.getServices();
-			if (!services.isEmpty()) {
-				for (String service : services) {
-					if (service.equals(ServiceName.TAOTAO_CLOUD_AUTH)) {
-						nacosServiceManager.getNamingService(new Properties())
-							.subscribe(service,
-								this.properties.getGroup(),
-								List.of(this.properties.getClusterName()),
-								event -> {
-									if (event instanceof NamingEvent) {
-										List<Instance> instances = ((NamingEvent) event).getInstances();
-										Instance instance = instances.get(0);
-										String jwkSetUri = String.format(
-											"http://%s:%s" + "/oauth2/jwks", instance.getIp(),
-											instance.getPort());
+			nacosServiceManager.getNamingService(properties.getNacosProperties())
+				.subscribe(ServiceName.TAOTAO_CLOUD_AUTH,
+					this.properties.getGroup(),
+					List.of(this.properties.getClusterName()),
+					event -> {
+						if (event instanceof NamingEvent) {
+							List<Instance> instances = ((NamingEvent) event).getInstances();
+							if(instances.isEmpty()){
+								return;
+							}
+							Instance instance = instances.get(0);
+							String jwkSetUri = String.format("http://%s:%s" + "/oauth2/jwks", instance.getIp(), instance.getPort());
 
-										NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
-											.withJwkSetUri(jwkSetUri)
-											.jwsAlgorithm(SignatureAlgorithm.RS256)
-											.build();
-										nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-										ContextUtil.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
-									}
-								});
-					}
-				}
-			}
+							NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
+								.withJwkSetUri(jwkSetUri)
+								.jwsAlgorithm(SignatureAlgorithm.RS256)
+								.build();
+							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
+							ContextUtil.destroySingletonBean("reactiveJwtDecoder");
+							ContextUtil.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+						}
+					});
 		}
 	}
 }

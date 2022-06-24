@@ -22,7 +22,7 @@ public class FuncUtil {
 	 * @since 2022-05-26 14:39:29
 	 */
 	public static <T> T predicate(T t, Predicate<T> predicate, T defaultValue) {
-		return predicate.test(t) ? t : defaultValue;
+		return predicate.test(t) ? defaultValue : t;
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class FuncUtil {
 	 * @since 2022-05-26 15:06:52
 	 */
 	public static <T> T predicate(T t, Supplier<Boolean> supplier, T defaultValue) {
-		return supplier.get() ? t : defaultValue;
+		return supplier.get() ? defaultValue: t;
 	}
 
 }

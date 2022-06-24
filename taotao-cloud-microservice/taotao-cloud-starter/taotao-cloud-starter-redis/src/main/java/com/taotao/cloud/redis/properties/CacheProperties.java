@@ -35,7 +35,7 @@ public class CacheProperties {
 
 	public static final String PREFIX = "taotao.cloud.redis.cache";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
 	 * 目前只支持 REDIS 和 CAFFEINE ！ CAFFEINE 只用于项目的开发环境或者演示环境使用，  生产环境请用redis！！！
