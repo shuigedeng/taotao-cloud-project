@@ -49,13 +49,13 @@ public class FeignMemberServiceFallback implements FallbackFactory<IFeignMemberS
 			}
 
 			@Override
-			public void update(Long memberId, Long sotreId) {
-
+			public Boolean update(Long memberId, Long sotreId) {
+			return false;
 			}
 
 			@Override
-			public void updateById(MemberVO member) {
-
+			public Boolean updateById(MemberVO member) {
+				return false;
 			}
 
 			@Override

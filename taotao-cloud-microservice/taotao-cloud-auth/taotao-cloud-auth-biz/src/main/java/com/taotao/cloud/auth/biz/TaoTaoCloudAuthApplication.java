@@ -38,7 +38,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.03
  * @since 2020/4/29 15:13
  */
-@EnableJpaRepositories(basePackages = "com.taotao.cloud.auth.biz.repository")
+@EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.repository", "com.taotao.cloud.auth.biz.idserver.repository"})
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
 @EnableDiscoveryClient

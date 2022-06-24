@@ -9,6 +9,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用会员用户模块
@@ -20,12 +22,14 @@ import java.util.List;
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberServiceFallback.class)
 public interface IFeignMemberRechargeService {
 
+	@GetMapping(value = "/member/recharge/paySuccess")
+	Result<Boolean> paySuccess(@RequestParam String sn, @RequestParam String receivableNo, @RequestParam String paymentMethod);
 
-	Result<Boolean> paySuccess(String sn, String receivableNo, String paymentMethod);
+	@GetMapping(value = "/member/recharge/getRecharge")
+	Result<MemberRechargeVO> getRecharge(@RequestParam String sn);
 
-	Result<MemberRechargeVO> getRecharge(String sn);
-
-	Result<MemberRechargeVO> recharge(BigDecimal price);
+	@GetMapping(value = "/member/recharge/recharge")
+	Result<MemberRechargeVO> recharge(@RequestParam BigDecimal price);
 
 	/**
 	 * 	LambdaQueryWrapper<Recharge> queryWrapper = new LambdaQueryWrapper<>();
@@ -34,9 +38,10 @@ public interface IFeignMemberRechargeService {
 	 * 			queryWrapper.le(Recharge::getCreateTime, cancelTime);
 	 * @return
 	 */
-	Result<List<MemberRechargeVO>> list(DateTime dateTime);
+	@GetMapping(value = "/member/recharge/list")
+	Result<List<MemberRechargeVO>> list(@RequestParam DateTime dateTime);
 
-
-	Result<Boolean> rechargeOrderCancel(String sn);
+	@GetMapping(value = "/member/recharge/rechargeOrderCancel")
+	Result<Boolean> rechargeOrderCancel(@RequestParam String sn);
 }
 

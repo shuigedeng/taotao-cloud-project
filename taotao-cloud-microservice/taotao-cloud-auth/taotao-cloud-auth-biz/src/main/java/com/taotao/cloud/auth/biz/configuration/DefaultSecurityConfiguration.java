@@ -1,5 +1,7 @@
 package com.taotao.cloud.auth.biz.configuration;
 
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClient;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppRequest;
@@ -13,6 +15,7 @@ import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import java.time.Clock;
@@ -62,6 +65,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -142,12 +146,12 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
 	}
 
-	@Bean
-	WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring()
-			.antMatchers(permitAllUrls)
-			.antMatchers("/webjars/**", "/user/login", "/login-error", "/index");
-	}
+	//@Bean
+	//WebSecurityCustomizer webSecurityCustomizer() {
+	//	return (web) -> web.ignoring()
+	//		.antMatchers(permitAllUrls)
+	//		.antMatchers("/webjars/**", "/user/login", "/login-error", "/index");
+	//}
 
 	private String exceptionMessage(AuthenticationException exception) {
 		String msg = "访问未授权";
@@ -164,8 +168,8 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		return msg;
 	}
 
-	@Autowired
-	private JwtTokenGenerator jwtTokenGenerator;
+	//@Autowired
+	//private JwtTokenGenerator jwtTokenGenerator;
 
 	AuthenticationEntryPoint authenticationEntryPoint = (request, response, authException) -> {
 		LogUtil.error("用户认证失败", authException);
@@ -182,7 +186,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 	AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> {
 		LogUtil.error("用户认证成功", authentication);
 		ResponseUtil.success(response,
-			jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
+			tokenResponseMock((UserDetails) authentication.getPrincipal()));
 	};
 
 	@Bean
@@ -225,7 +229,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 				authorizeRequests
 					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
 					.antMatchers(permitAllUrls).permitAll()
-					.mvcMatchers("/user/login", "/login-error", "/index").permitAll()
+					.antMatchers("/webjars/**", "/user/login", "/login-error", "/index").permitAll()
 					.mvcMatchers("/messages/**").access("hasAuthority('ADMIN')")
 					.anyRequest().authenticated()
 			)
@@ -345,9 +349,6 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		this.environment = environment;
 	}
 
-	@Autowired
-	private JwtEncoder jwtEncoder;
-
 	public OAuth2AccessTokenResponse tokenResponseMock(UserDetails userDetails) {
 		JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256)
 			.type("JWT")
@@ -369,7 +370,8 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.claim("scope", scopes)
 			.build();
 
-		Jwt jwt = jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
+		JWKSource jwkSource = ContextUtil.getBean(JWKSource.class, false);
+		Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
 		return OAuth2AccessTokenResponse.withToken(jwt.getTokenValue())
 			.tokenType(OAuth2AccessToken.TokenType.BEARER)
 			.expiresIn(expiresAt.getEpochSecond())

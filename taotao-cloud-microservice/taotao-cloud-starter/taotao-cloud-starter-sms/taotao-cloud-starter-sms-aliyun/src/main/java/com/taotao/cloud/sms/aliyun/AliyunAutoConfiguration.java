@@ -36,7 +36,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  */
 @AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnSmsEnabled
-@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "ALIYUN")
+@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "aliyun")
 @EnableConfigurationProperties(AliyunProperties.class)
 public class AliyunAutoConfiguration {
 
@@ -55,7 +55,6 @@ public class AliyunAutoConfiguration {
                                                ObjectMapper objectMapper,
                                                SmsSenderLoadBalancer loadbalancer,
                                                ApplicationEventPublisher eventPublisher) {
-
 		AliyunSendHandler handler = new AliyunSendHandler(properties, eventPublisher, objectMapper);
 		loadbalancer.addTarget(handler, true);
 		loadbalancer.setWeight(handler, properties.getWeight());

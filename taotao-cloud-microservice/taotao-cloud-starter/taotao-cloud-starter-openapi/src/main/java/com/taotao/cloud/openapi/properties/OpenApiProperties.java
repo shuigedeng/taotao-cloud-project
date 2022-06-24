@@ -53,11 +53,12 @@ public class OpenApiProperties {
 	/**
 	 * pathsToMatch default /**
 	 */
-	private String[] pathsToMatch;
+	private String[] pathsToMatch = new String[]{"/**"};
+
 	/**
 	 * The Paths to exclude.
 	 */
-	private  String[] pathsToExclude;
+	private  String[] pathsToExclude = new String[]{"/actuator/**"};
 
 	/**
 	 * The Packages to scan.
