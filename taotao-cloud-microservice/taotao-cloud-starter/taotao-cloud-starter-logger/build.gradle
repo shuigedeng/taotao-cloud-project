@@ -14,7 +14,14 @@ dependencies {
     api 'org.apache.skywalking:apm-toolkit-logback-1.x'
     api 'org.apache.skywalking:apm-toolkit-trace'
 
+    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.0"
+
     implementation 'com.baomidou:mybatis-plus-extension'
+
+    implementation 'de.danielbechler:java-object-diff:0.95'
+    implementation 'com.github.colincatsu:fast-object-diff:1.2'
+    implementation 'de.danielbechler:java-object-diff:0.95'
+    implementation 'uk.co.jemos.podam:podam:7.2.9.RELEASE'
 
     implementation 'org.springframework.kafka:spring-kafka'
     //implementation 'org.springframework.amqp:spring-amqp:2.4.3'
