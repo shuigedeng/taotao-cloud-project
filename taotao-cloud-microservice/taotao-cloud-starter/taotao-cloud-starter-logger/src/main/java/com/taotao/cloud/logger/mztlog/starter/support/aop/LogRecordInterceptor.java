@@ -29,11 +29,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * DATE 5:39 PM
- *
- * @author mzt.
- */
 public class LogRecordInterceptor extends LogRecordValueParser implements InitializingBean, MethodInterceptor, Serializable {
 
     private LogRecordOperationSource logRecordOperationSource;

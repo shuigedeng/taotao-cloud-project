@@ -3,10 +3,6 @@ package com.taotao.cloud.logger.mztlog.service;
 
 import com.taotao.cloud.logger.mztlog.beans.Operator;
 
-/**
- * @author muzhantong
- * create on 2020/4/29 5:39 下午
- */
 public interface IOperatorGetService {
 
     /**

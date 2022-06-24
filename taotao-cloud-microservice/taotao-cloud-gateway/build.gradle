@@ -4,12 +4,12 @@ dependencies {
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
 
-    implementation "org.springframework.security:spring-security-core:5.6.3"
+    implementation "org.springframework.security:spring-security-core:5.7.1"
     implementation "org.springframework.security:spring-security-config"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-jose"
-    implementation "com.nimbusds:nimbus-jose-jwt:9.22"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.23"
 
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
@@ -27,13 +27,15 @@ dependencies {
 
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
 
-    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.8'
-    implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.8'
+    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.9'
+    implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.9'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.3'
     implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.3'
 
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"
+    implementation 'commons-fileupload:commons-fileupload:1.4'
+    implementation 'commons-io:commons-io:2.11.0'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

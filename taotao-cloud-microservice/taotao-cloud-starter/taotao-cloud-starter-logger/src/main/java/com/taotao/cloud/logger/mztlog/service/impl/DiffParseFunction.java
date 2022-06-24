@@ -10,10 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * @author muzhantong
- * create on 2022/2/8 3:44 下午
- */
 public class DiffParseFunction {
     public static final String diffFunctionName = "_DIFF";
     public static final String OLD_OBJECT = "_oldObj";
