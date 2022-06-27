@@ -1,5 +1,6 @@
 package com.taotao.cloud.web.idgenerator;
 
+import cn.hutool.core.util.StrUtil;
 import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
 import com.taotao.cloud.common.utils.common.ThreadFactoryCreator;
@@ -98,7 +99,7 @@ public class RedisIdGenerator implements DisposableBean, CommandLineRunner {
 
 	private void onDestroy() {
 		//正常关闭时删除当前生成器编号
-		if (Objects.nonNull(redisRepository)) {
+		if (Objects.nonNull(redisRepository) && StrUtil.isBlank(cacheKey)) {
 			redisRepository.del(cacheKey);
 		}
 	}

@@ -321,14 +321,14 @@ dubbo:
 seata:
   enabled: true
   application-id: ${spring.application.name}
-  tx-service-group: taotao_cloud_tx_group
+  tx-service-group: taotao-cloud-tx-group
   enable-auto-data-source-proxy: true
   use-jdk-proxy: false
   service:
     grouplist:
       SC: 192.168.10.200:8091,192.168.10.200:8092,192.168.10.200:8093
     vgroupMapping:
-      taotao_cloud_tx_group: SC
+      taotao-cloud-tx-group: SC
     enable-degrade: false
     disable-global-transaction: false
   config:
@@ -412,7 +412,7 @@ spring:
       task-interrupt: false #局部异常是否打断主流程
 
   quartz:
-    scheduler-name: quartzScheduler
+    scheduler-name: taotaoCloudQuartzScheduler
     # 将任务等保存化到数据库
     job-store-type: jdbc
     # 关闭时等待任务完成
@@ -428,7 +428,7 @@ spring:
         quartz:
           scheduler:
             # 调度器实例名称
-            instanceName: quartzScheduler
+            instanceName: taotaoCloudQuartzScheduler
             # 调度器实例ID自动生成
             instanceId: AUTO
             wrapJobExecutionInUserTransaction: false
@@ -926,8 +926,7 @@ spring:
                 sharding-column: id
                 sharding-algorithm-name: tt-sys-user-inline
   rabbitmq:
-    host: 192.168.10.200
-    port: 5672
+    addresses: 192.168.10.200:5672,192.168.10.200:5673,192.168.10.200:5674
     username: guest
     password: guest
     virtual-host: /
@@ -1234,7 +1233,9 @@ springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller
-    -
+  api-docs:
+    path: /v3/api-docs
+
 logback:
   access:
     # Whether to enable autoconfiguration.
