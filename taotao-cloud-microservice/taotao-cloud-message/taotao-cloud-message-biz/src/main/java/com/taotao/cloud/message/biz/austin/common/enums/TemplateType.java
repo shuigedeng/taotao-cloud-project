@@ -6,7 +6,7 @@ import lombok.ToString;
 
 /**
  * 模板枚举信息
- * 
+ * @author 3y
  */
 @Getter
 @ToString

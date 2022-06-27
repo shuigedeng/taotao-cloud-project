@@ -2,13 +2,14 @@ package com.taotao.cloud.message.biz.austin.handler.pending;
 
 
 import cn.hutool.core.collection.CollUtil;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationRuleService;
-import com.taotao.cloud.message.biz.austin.handler.discard.DiscardMessageService;
-import com.taotao.cloud.message.biz.austin.handler.handler.HandlerHolder;
-import com.taotao.cloud.message.biz.austin.handler.shield.ShieldService;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.handler.deduplication.DeduplicationRuleService;
+import com.java3y.austin.handler.discard.DiscardMessageService;
+import com.java3y.austin.handler.handler.HandlerHolder;
+import com.java3y.austin.handler.shield.ShieldService;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -21,11 +22,11 @@ import org.springframework.stereotype.Component;
  * 2.通用去重功能
  * 3.发送消息
  *
- * 
+ * @author 3y
  */
 @Data
 @Accessors(chain = true)
-
+@Slf4j
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Task implements Runnable {

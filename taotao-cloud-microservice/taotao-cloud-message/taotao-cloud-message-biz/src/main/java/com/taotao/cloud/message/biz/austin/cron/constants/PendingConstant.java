@@ -1,6 +1,8 @@
 package com.taotao.cloud.message.biz.austin.cron.constants;
 
 /**
+ * @author 3y
+ * @date 2022/2/13
  * 延迟缓冲 pending 常量信息
  */
 public class PendingConstant {

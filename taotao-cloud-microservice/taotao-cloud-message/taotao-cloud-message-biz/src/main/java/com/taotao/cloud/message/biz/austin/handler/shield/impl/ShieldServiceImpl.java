@@ -3,12 +3,14 @@ package com.taotao.cloud.message.biz.austin.handler.shield.impl;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
-import com.taotao.cloud.message.biz.austin.common.enums.ShieldType;
-import com.taotao.cloud.message.biz.austin.handler.shield.ShieldService;
-import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
+import com.java3y.austin.common.domain.AnchorInfo;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.AnchorState;
+import com.java3y.austin.common.enums.ShieldType;
+import com.java3y.austin.handler.shield.ShieldService;
+import com.java3y.austin.support.utils.LogUtils;
+import com.java3y.austin.support.utils.RedisUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,10 @@ import java.util.HashSet;
 
 /**
  * 屏蔽服务
- * 
+ * @author 3y
  */
 @Service
-
+@Slf4j
 public class ShieldServiceImpl implements ShieldService {
 
     private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";

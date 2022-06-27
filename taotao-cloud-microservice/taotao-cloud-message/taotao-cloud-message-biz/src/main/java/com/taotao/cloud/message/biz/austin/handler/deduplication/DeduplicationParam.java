@@ -1,14 +1,16 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.AnchorState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * @author 3y
+ * @date 2021/12/11
  * 去重服务所需要的参数
  */
 @Builder

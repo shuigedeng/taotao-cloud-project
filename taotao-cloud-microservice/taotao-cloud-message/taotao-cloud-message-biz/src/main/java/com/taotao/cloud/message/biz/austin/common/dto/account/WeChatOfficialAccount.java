@@ -12,24 +12,14 @@ import java.util.Map;
  * 模板消息参数
  * <p>
  * 参数示例：
- * <a href="https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html">https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html</a>
+ * https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
  * * @author zyg
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WechatOfficialAccount {
-
-    /**
-     * 服务号关注者的openId
-     */
-    private String openId;
-
-    /**
-     * 需要使用的模板信息Id
-     */
-    private String templateId;
+public class WeChatOfficialAccount {
 
     /**
      * 模板消息跳转的url
@@ -47,7 +37,9 @@ public class WechatOfficialAccount {
     private String path;
 
     /**
-     * 模板消息的信息载体
+     * 账号相关
      */
-    private Map<String, String> map;
+    private String appId;
+    private String secret;
+    private String templateId;
 }

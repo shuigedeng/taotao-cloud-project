@@ -4,7 +4,7 @@ package com.taotao.cloud.message.biz.austin.common.constant;
 /**
  * 基础的常量信息
  *
- * 
+ * @author 3y
  */
 public class AustinConstant {
 
@@ -38,7 +38,7 @@ public class AustinConstant {
      * 消息发送给全部人的标识
      * (企业微信 应用消息)
      * (钉钉自定义机器人)
-     *
+     * (钉钉工作消息)
      */
     public static final String SEND_ALL = "@all";
 

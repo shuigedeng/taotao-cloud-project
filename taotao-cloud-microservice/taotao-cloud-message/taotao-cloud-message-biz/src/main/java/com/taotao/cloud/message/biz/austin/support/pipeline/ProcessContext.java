@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.support.pipeline;
 
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.java3y.austin.common.vo.BasicResultVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 /**
  * 责任链上下文
  *
- * 
+ * @author 3y
  */
 @Data
 @AllArgsConstructor

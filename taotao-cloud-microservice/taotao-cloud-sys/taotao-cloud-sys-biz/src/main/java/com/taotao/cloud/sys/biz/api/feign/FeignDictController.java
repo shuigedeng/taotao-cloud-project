@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.api.remote;
+package com.taotao.cloud.sys.biz.api.feign;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/remote/mall/dict")
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class RemoteDictController extends SimpleController<IDictService, Dict, Long> {
+public class FeignDictController extends SimpleController<IDictService, Dict, Long> {
 
 }
 

@@ -4,14 +4,14 @@ import com.dtp.common.em.QueueTypeEnum;
 import com.dtp.common.em.RejectedTypeEnum;
 import com.dtp.core.thread.DtpExecutor;
 import com.dtp.core.thread.ThreadPoolBuilder;
+import com.java3y.austin.common.constant.ThreadPoolConstant;
 
-import com.taotao.cloud.message.biz.austin.common.constant.ThreadPoolConstant;
 import java.util.concurrent.TimeUnit;
 
 /**
  * handler模块 线程池的配置
  *
- *
+ * @author 3y
  */
 public class HandlerThreadPoolConfig {
 

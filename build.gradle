@@ -21,7 +21,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework/spring
         springVersion = '5.3.21'
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
-        springBootVersion = '2.7.0'
+        springBootVersion = '2.7.1'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
         springCloudVersion = '2021.0.3'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
@@ -73,9 +73,9 @@ buildscript {
         //https://search.maven.org/artifact/com.upyun/java-sdk
         upyunJavaSdkVersion = '4.2.3'
         //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
-        aliyunSdkOssVersion = '3.15.0'
+        aliyunSdkOssVersion = '3.15.1'
         //https://search.maven.org/artifact/com.qiniu/qiniu-java-sdk
-        qiniuJavaSdkVersion = '7.10.4'
+        qiniuJavaSdkVersion = '7.11.0'
         //https://search.maven.org/artifact/com.google.code.gson/gson
         gsonVersion = '2.9.0'
         //https://search.maven.org/artifact/com.google.guava/guava
@@ -129,7 +129,7 @@ buildscript {
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.5.2.Final"
         //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
-        fastjsonVersion = "2.0.7"
+        fastjsonVersion = "2.0.8"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.66"
         //https://search.maven.org/artifact/com.esotericsoftware/kryo
@@ -155,7 +155,7 @@ buildscript {
         //https://search.maven.org/artifact/com.taobao.arthas/arthas-spring-boot-starter
         arthasVersion = "3.6.3"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        adminVersion = "2.7.0"
+        adminVersion = "2.7.1"
         //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos

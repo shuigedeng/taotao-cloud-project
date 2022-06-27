@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutorService;
 
 
 /**
- * 
+ * @author 3y
  * pending初始化参数类
  */
 @Data

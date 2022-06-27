@@ -2,15 +2,16 @@ package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.DeduplicationType;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.limit.LimitService;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.DeduplicationType;
+import com.java3y.austin.handler.deduplication.limit.LimitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * @author 3y
+ * @date 2021/12/11
  * 内容去重服务（默认5分钟相同的文案发给相同的用户去重）
  */
 @Service

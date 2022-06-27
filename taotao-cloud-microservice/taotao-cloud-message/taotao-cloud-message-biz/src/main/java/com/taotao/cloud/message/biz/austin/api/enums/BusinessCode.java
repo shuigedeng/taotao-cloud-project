@@ -3,6 +3,11 @@ package com.taotao.cloud.message.biz.austin.api.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+
+/**
+ * @author 3y
+ * @date 2021/11/22
+ */
 @Getter
 @ToString
 @AllArgsConstructor

@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
  * <p>
  * AppKey和AppSecret以及agentId都可在钉钉开发者后台的应用详情页面获取。
  * <p>
- * <a href="https://open-dev.dingtalk.com/?spm=ding_open_doc.document.0.0.13b6722fd9ojfy">https://open-dev.dingtalk.com/?spm=ding_open_doc.document.0.0.13b6722fd9ojfy</a>
+ * https://open-dev.dingtalk.com/?spm=ding_open_doc.document.0.0.13b6722fd9ojfy
  *
- * 
+ * @author 3y
  */
 @Data
 @Builder

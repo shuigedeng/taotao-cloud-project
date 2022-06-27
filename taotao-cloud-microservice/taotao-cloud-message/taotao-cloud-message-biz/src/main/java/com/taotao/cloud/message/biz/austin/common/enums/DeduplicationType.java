@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 去重类型枚举
- *
+ * @author 3y
  */
 @Getter
 @ToString

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 参数示例：
  * [{"sms_10":{"url":"sms.tencentcloudapi.com","region":"ap-guangzhou","secretId":"AKIDhDUUDfffffMEqBF1WljQq","secretKey":"B4h39yWnfffff7D2btue7JErDJ8gxyi","smsSdkAppId":"140025","templateId":"11897","signName":"Java3y公众号","supplierId":10,"supplierName":"腾讯云"}}]
  *
- * 
+ * @author 3y
  */
 @Data
 @Builder

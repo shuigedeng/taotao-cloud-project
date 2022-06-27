@@ -1,28 +1,25 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.web.service.DataService;
-import com.taotao.cloud.message.biz.austin.web.vo.DataParam;
-import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
-import com.taotao.cloud.message.biz.austin.web.vo.amis.UserTimeLineVo;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.web.service.DataService;
+import com.java3y.austin.web.vo.DataParam;
+import com.java3y.austin.web.vo.amis.EchartsVo;
+import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
+import com.java3y.austin.web.vo.amis.UserTimeLineVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 获取数据接口（全链路追踪)
  *
- * 
+ * @author 3y
  */
-
+@Slf4j
 @RestController
 @RequestMapping("/trace")
 @Api("获取数据接口（全链路追踪)")
@@ -49,10 +46,16 @@ public class DataController {
         return new BasicResultVO<>(RespStatusEnum.SUCCESS, echartsVo);
     }
 
-    public static void main(String[] args) {
-        EchartsVo.TitleVO titleVO = EchartsVo.TitleVO.builder().text("销售情况").build();
-        EchartsVo echartsVo = EchartsVo.builder().title(titleVO).build();
+    @PostMapping("/sms")
+    @ApiOperation("/获取短信下发数据")
+    public BasicResultVO getSmsData(@RequestBody DataParam dataParam) {
+        if (dataParam == null || dataParam.getDateTime() == null || dataParam.getReceiver() == null) {
+            return new BasicResultVO<>(RespStatusEnum.SUCCESS, new SmsTimeLineVo());
+        }
 
-        System.out.println(JSON.toJSONString(echartsVo));
+        SmsTimeLineVo smsTimeLineVo = dataService.getTraceSmsInfo(dataParam);
+
+        return new BasicResultVO<>(RespStatusEnum.SUCCESS, smsTimeLineVo);
     }
+
 }

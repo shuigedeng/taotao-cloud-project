@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * 钉钉自定义机器人 入参
  *
- * <a href="https://open.dingtalk.com/document/group/custom-robot-access">https://open.dingtalk.com/document/group/custom-robot-access</a>
+ * https://open.dingtalk.com/document/group/custom-robot-access
  *
- *
+ * @author 3y
  */
 @Data
 @Builder
@@ -90,6 +90,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class LinkVO {
         /**
          * text
@@ -115,6 +116,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class MarkdownVO {
         /**
          * title
@@ -132,6 +134,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class ActionCardVO {
         /**
          * title
@@ -156,6 +159,7 @@ public class DingDingRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
+        @Builder
         public static class BtnsVO {
             /**
              * title
@@ -174,6 +178,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class FeedCardVO {
         /**
          * links
@@ -186,6 +191,7 @@ public class DingDingRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
+        @Builder
         public static class LinksVO {
             /**
              * title

@@ -2,27 +2,31 @@ package com.taotao.cloud.message.biz.austin.handler.flowcontrol.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.google.common.util.concurrent.RateLimiter;
-import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
-import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
-import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlParam;
-import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlService;
+import com.java3y.austin.common.constant.AustinConstant;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.handler.enums.RateLimitStrategy;
+import com.java3y.austin.handler.flowcontrol.FlowControlParam;
+import com.java3y.austin.handler.flowcontrol.FlowControlService;
+import com.java3y.austin.support.service.ConfigService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author 3y
+ * @date 2022/4/18
+ */
 @Service
-
+@Slf4j
 public class FlowControlServiceImpl implements FlowControlService {
 
-    private static final String FLOW_CONTROL_KEY = "flowControl";
-
+    private static final String FLOW_CONTROL_KEY = "flowControlRule";
     private static final String FLOW_CONTROL_PREFIX = "flow_control_";
 
-    @ApolloConfig("boss.austin")
-    private Config config;
+    @Autowired
+    private ConfigService config;
 
 
     @Override
