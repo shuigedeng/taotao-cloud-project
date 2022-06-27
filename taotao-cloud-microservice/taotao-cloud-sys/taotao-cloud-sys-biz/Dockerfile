@@ -48,7 +48,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:-UseBiasedLocking \
                   -XX:+UseCountedLoopSafepoints \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
-                  -XX:FlightRecorderOptions=defaultrecording=true,disk=true,maxchunksize=128m \
                   -XX:-OmitStackTraceInFastThrow \
                   -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UnlockExperimentalVMOptions \
