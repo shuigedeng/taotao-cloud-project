@@ -1093,7 +1093,7 @@ taotao:
       elastic:
         enabled: false
     ip2region:
-      enabled: false
+      enabled: true
     health:
       enabled: true
       export: true
