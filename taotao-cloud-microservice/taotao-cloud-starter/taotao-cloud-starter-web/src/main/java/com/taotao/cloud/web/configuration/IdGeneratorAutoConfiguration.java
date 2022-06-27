@@ -50,14 +50,14 @@ public class IdGeneratorAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean({RedisRepository.class})
-	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "REDIS", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "redis", matchIfMissing = true)
 	public RedisIdGenerator idGenerator(RedisRepository redisRepository) {
 		return new RedisIdGenerator(redisRepository);
 	}
 
 	@Bean
 	@ConditionalOnBean({RedisRepository.class, DistributedLock.class})
-	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "REDIS_LOCK")
+	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "redis_lock")
 	public RedisLockIdGenerator redisLockIdGenerator(RedisRepository redisRepository,
 		DistributedLock distributedLock) {
 		return new RedisLockIdGenerator(redisRepository, distributedLock);
@@ -65,7 +65,7 @@ public class IdGeneratorAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean({CuratorFramework.class})
-	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "ZOOKEEPER")
+	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "zookeeper")
 	public ZookeeperIdGenerator zookeeperIdGenerator(CuratorFramework curatorFramework) {
 		return new ZookeeperIdGenerator(curatorFramework);
 	}

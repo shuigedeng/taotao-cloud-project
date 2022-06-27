@@ -19,11 +19,15 @@ package com.taotao.cloud.ip2region.configuration;
 import com.taotao.cloud.ip2region.impl.Ip2regionSearcherImpl;
 import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
 import com.taotao.cloud.ip2region.properties.Ip2regionProperties;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import org.lionsoul.ip2region.xdb.Searcher;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 /**
@@ -35,13 +39,88 @@ import org.springframework.core.io.ResourceLoader;
  */
 @AutoConfiguration
 @EnableConfigurationProperties({Ip2regionProperties.class})
-@ConditionalOnProperty(prefix = Ip2regionProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = Ip2regionProperties.PREFIX, name = "enabled", havingValue = "true")
 public class Ip2regionAutoConfiguration {
 
 	@Bean
 	public Ip2regionSearcher ip2regionSearcher(ResourceLoader resourceLoader,
 		Ip2regionProperties properties) {
 		return new Ip2regionSearcherImpl(resourceLoader, properties);
+	}
+
+	@Bean
+	public  Searcher searcher(ResourceLoader resourceLoader){
+		String dbPath = "";
+
+		try {
+			Resource resource = resourceLoader.getResource("classpath:lionsoul/ip2region.xdb");
+			dbPath = resource.getFile().getAbsolutePath();
+		} catch (IOException e) {
+			System.out.printf("failed to create searcher with `%s`: %s\n", dbPath, e);
+			throw new RuntimeException(e);
+		}
+
+		Searcher searcher;
+
+		//// 完全基于文件的查询
+		//try {
+		//	searcher = Searcher.newWithFileOnly(dbPath);
+		//} catch (IOException e) {
+		//	System.out.printf("failed to create searcher with `%s`: %s\n", dbPath, e);
+		//	throw new RuntimeException(e);
+		//}
+		//
+		////缓存 VectorIndex 索引
+		////我们可以提前从 xdb 文件中加载出来 VectorIndex 数据，然后全局缓存，每次创建 Searcher 对象的时候使用全局的 VectorIndex 缓存可以减少一次固定的 IO 操作，从而加速查询，减少 IO 压力。
+		//// 1、从 dbPath 中预先加载 VectorIndex 缓存，并且把这个得到的数据作为全局变量，后续反复使用。
+		//byte[] vIndex;
+		//try {
+		//	vIndex = Searcher.loadVectorIndexFromFile(dbPath);
+		//} catch (Exception e) {
+		//	System.out.printf("failed to load vector index from `%s`: %s\n", dbPath, e);
+		//	throw new RuntimeException(e);
+		//}
+		//
+		//// 2、使用全局的 vIndex 创建带 VectorIndex 缓存的查询对象。
+		//try {
+		//	searcher = Searcher.newWithVectorIndex(dbPath, vIndex);
+		//} catch (Exception e) {
+		//	System.out.printf("failed to create vectorIndex cached searcher with `%s`: %s\n", dbPath, e);
+		//	throw new RuntimeException(e);
+		//}
+
+		//缓存整个 xdb 数据
+		//预先加载整个 ip2region.xdb 的数据到内存，然后基于这个数据创建查询对象来实现完全基于文件的查询，类似之前的 memory search。
+		// 1、从 dbPath 加载整个 xdb 到内存。
+		byte[] cBuff;
+		try {
+			cBuff = Searcher.loadContentFromFile(dbPath);
+		} catch (Exception e) {
+			System.out.printf("failed to load content from `%s`: %s\n", dbPath, e);
+			throw new RuntimeException(e);
+		}
+
+		// 2、使用上述的 cBuff 创建一个完全基于内存的查询对象。
+		try {
+			searcher = Searcher.newWithBuffer(cBuff);
+		} catch (Exception e) {
+			System.out.printf("failed to create content cached searcher: %s\n", e);
+			throw new RuntimeException(e);
+		}
+
+		//查询
+		//try {
+		//	String ip = "1.2.3.4";
+		//	long sTime = System.nanoTime();
+		//	String region = searcher.searchByStr(ip);
+		//	long cost = TimeUnit.NANOSECONDS.toMicros((long) (System.nanoTime() - sTime));
+		//	System.out.printf("{region: %s, ioCount: %d, took: %d μs}\n", region, searcher.getIOCount(), cost);
+		//} catch (Exception e) {
+		//	System.out.printf("failed to search(%s): %s\n", ip, e);
+		//	return;
+		//}
+
+		return searcher;
 	}
 
 }
