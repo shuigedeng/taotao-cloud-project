@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.web.constants;
 
 /**
  * amis常量信息
- * 
+ * @author 3y
  */
 public class AmisVoConstant {
 

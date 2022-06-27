@@ -1,20 +1,19 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.entity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 /**
  * 执行器组信息
  *
- * 
+ * @author 3y
  */
 @Data
 @Accessors(chain = true)

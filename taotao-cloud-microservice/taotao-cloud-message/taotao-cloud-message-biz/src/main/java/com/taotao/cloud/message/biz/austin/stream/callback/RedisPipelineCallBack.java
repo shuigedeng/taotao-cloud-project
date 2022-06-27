@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * redis pipeline接口定义
  *
- * 
+ * @author 3y
  */
 public interface RedisPipelineCallBack {
 

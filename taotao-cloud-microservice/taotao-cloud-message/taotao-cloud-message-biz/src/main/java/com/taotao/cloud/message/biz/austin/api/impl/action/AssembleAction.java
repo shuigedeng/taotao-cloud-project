@@ -2,38 +2,39 @@ package com.taotao.cloud.message.biz.austin.api.impl.action;
 
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
-import com.taotao.cloud.message.biz.austin.api.impl.domain.SendTaskModel;
-import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
-import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
-import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
-import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
-import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
-import com.taotao.cloud.message.biz.austin.support.utils.ContentHolderUtil;
-import com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils;
+import com.java3y.austin.common.constant.AustinConstant;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.dto.model.ContentModel;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.service.api.domain.MessageParam;
+import com.java3y.austin.service.api.enums.BusinessCode;
+import com.java3y.austin.service.api.impl.domain.SendTaskModel;
+import com.java3y.austin.support.dao.MessageTemplateDao;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.support.pipeline.BusinessProcess;
+import com.java3y.austin.support.pipeline.ProcessContext;
+import com.java3y.austin.support.utils.ContentHolderUtil;
+import com.java3y.austin.support.utils.TaskInfoUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
+ * @author 3y
+ * @date 2021/11/22
  * @description 拼装参数
  */
-
+@Slf4j
 @Service
 public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
@@ -47,14 +48,16 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
         try {
             Optional<MessageTemplate> messageTemplate = messageTemplateDao.findById(messageTemplateId);
-            if (!messageTemplate.isPresent() || messageTemplate.get().getIsDeleted().equals(
-	            AustinConstant.TRUE)) {
+            if (!messageTemplate.isPresent() || messageTemplate.get().getIsDeleted().equals(AustinConstant.TRUE)) {
                 context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TEMPLATE_NOT_FOUND));
                 return;
             }
-
-            List<TaskInfo> taskInfos = assembleTaskInfo(sendTaskModel, messageTemplate.get());
-            sendTaskModel.setTaskInfo(taskInfos);
+            if (BusinessCode.COMMON_SEND.getCode().equals(context.getCode())) {
+                List<TaskInfo> taskInfos = assembleTaskInfo(sendTaskModel, messageTemplate.get());
+                sendTaskModel.setTaskInfo(taskInfos);
+            } else if (BusinessCode.RECALL.getCode().equals(context.getCode())) {
+                sendTaskModel.setMessageTemplate(messageTemplate.get());
+            }
         } catch (Exception e) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));
             log.error("assemble task fail! templateId:{}, e:{}", messageTemplateId, Throwables.getStackTraceAsString(e));
@@ -76,8 +79,7 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
             TaskInfo taskInfo = TaskInfo.builder()
                     .messageTemplateId(messageTemplate.getId())
-                    .businessId(
-	                    TaskInfoUtils.generateBusinessId(messageTemplate.getId(), messageTemplate.getTemplateType()))
+                    .businessId(TaskInfoUtils.generateBusinessId(messageTemplate.getId(), messageTemplate.getTemplateType()))
                     .receiver(new HashSet<>(Arrays.asList(messageParam.getReceiver().split(String.valueOf(StrUtil.C_COMMA)))))
                     .idType(messageTemplate.getIdType())
                     .sendChannel(messageTemplate.getSendChannel())
@@ -118,7 +120,8 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
             if (StrUtil.isNotBlank(originValue)) {
                 String resultValue = ContentHolderUtil.replacePlaceHolder(originValue, variables);
-                ReflectUtil.setFieldValue(contentModel, field, resultValue);
+                Object resultObj = JSONUtil.isJsonObj(resultValue) ? JSONUtil.toBean(resultValue, field.getType()) : resultValue;
+                ReflectUtil.setFieldValue(contentModel, field, resultObj);
             }
         }
 

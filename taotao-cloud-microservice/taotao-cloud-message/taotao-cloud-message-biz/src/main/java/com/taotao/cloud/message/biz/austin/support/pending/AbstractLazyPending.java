@@ -3,8 +3,9 @@ package com.taotao.cloud.message.biz.austin.support.pending;
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
-import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
+import com.java3y.austin.support.config.SupportThreadPoolConfig;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * 延迟消费 阻塞队列-消费者和生产者实现
  *
- * 
+ * @author 3y
  */
-
+@Slf4j
 @Data
 public abstract class AbstractLazyPending<T> {
 
@@ -67,6 +68,7 @@ public abstract class AbstractLazyPending<T> {
 
                     // 判断是否停止当前线程
                     if (stop && CollUtil.isEmpty(tasks)) {
+                        executorService.shutdown();
                         break;
                     }
                 } catch (Exception e) {
@@ -74,7 +76,7 @@ public abstract class AbstractLazyPending<T> {
                 }
             }
         });
-        executorService.shutdown();
+
     }
 
     /**

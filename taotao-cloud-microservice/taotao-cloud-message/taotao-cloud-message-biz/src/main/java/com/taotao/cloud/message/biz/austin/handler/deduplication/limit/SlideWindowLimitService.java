@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
-import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
-import com.taotao.cloud.message.biz.austin.support.utils.SnowFlakeIdUtils;
+import cn.hutool.core.util.IdUtil;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.handler.deduplication.DeduplicationParam;
+import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.java3y.austin.support.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -18,6 +18,8 @@ import java.util.Set;
 
 /**
  * 滑动窗口去重器（目前承载着 一天内N次相同渠道去重）
+ * @author cao
+ * @date 2022-04-20 11:34
  */
 @Service(value = "SlideWindowLimitService")
 public class SlideWindowLimitService extends AbstractLimitService {
@@ -27,7 +29,6 @@ public class SlideWindowLimitService extends AbstractLimitService {
     @Autowired
     private RedisUtils redisUtils;
 
-    private SnowFlakeIdUtils snowFlakeIdUtils = new SnowFlakeIdUtils(1, 1);
 
     private DefaultRedisScript<Long> redisScript;
 
@@ -53,7 +54,7 @@ public class SlideWindowLimitService extends AbstractLimitService {
         long nowTime = System.currentTimeMillis();
         for (String receiver : taskInfo.getReceiver()) {
             String key = LIMIT_TAG + deduplicationSingleKey(service, taskInfo, receiver);
-            String scoreValue = String.valueOf(snowFlakeIdUtils.nextId());
+            String scoreValue = String.valueOf(IdUtil.getSnowflake().nextId());
             String score = String.valueOf(nowTime);
             if (redisUtils.execLimitLua(redisScript, Arrays.asList(key), String.valueOf(param.getDeduplicationTime() * 1000), score, String.valueOf(param.getCountNum()), scoreValue)) {
                 filterReceiver.add(receiver);

@@ -2,25 +2,25 @@ package com.taotao.cloud.message.biz.austin.handler.discard;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
-import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
+import com.java3y.austin.common.constant.AustinConstant;
+import com.java3y.austin.common.domain.AnchorInfo;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.AnchorState;
+import com.java3y.austin.support.service.ConfigService;
+import com.java3y.austin.support.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 丢弃模板消息
+ * @author 3y.
  */
 @Service
 public class DiscardMessageService {
-    private static final String DISCARD_MESSAGE_KEY = "discard";
+    private static final String DISCARD_MESSAGE_KEY = "discardMsgIds";
 
-    @ApolloConfig("boss.austin")
-    private Config config;
+    @Autowired
+    private ConfigService config;
 
     @Autowired
     private LogUtils logUtils;
@@ -37,8 +37,7 @@ public class DiscardMessageService {
                 AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
 
         if (array.contains(String.valueOf(taskInfo.getMessageTemplateId()))) {
-            logUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(
-	            AnchorState.DISCARD.getCode()).build());
+            logUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(AnchorState.DISCARD.getCode()).build());
             return true;
         }
         return false;

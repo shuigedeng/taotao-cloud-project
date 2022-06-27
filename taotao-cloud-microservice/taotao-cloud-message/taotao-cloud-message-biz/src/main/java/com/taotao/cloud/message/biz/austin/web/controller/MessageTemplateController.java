@@ -5,31 +5,25 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
-import com.taotao.cloud.message.biz.austin.api.domain.SendRequest;
-import com.taotao.cloud.message.biz.austin.api.domain.SendResponse;
-import com.taotao.cloud.message.biz.austin.api.enums.BusinessCode;
-import com.taotao.cloud.message.biz.austin.api.service.SendService;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
-import com.taotao.cloud.message.biz.austin.web.service.MessageTemplateService;
-import com.taotao.cloud.message.biz.austin.web.utils.ConvertMap;
-import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateParam;
-import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateVo;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.service.api.domain.MessageParam;
+import com.java3y.austin.service.api.domain.SendRequest;
+import com.java3y.austin.service.api.domain.SendResponse;
+import com.java3y.austin.service.api.enums.BusinessCode;
+import com.java3y.austin.service.api.service.RecallService;
+import com.java3y.austin.service.api.service.SendService;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.web.service.MessageTemplateService;
+import com.java3y.austin.web.utils.ConvertMap;
+import com.java3y.austin.web.vo.MessageTemplateParam;
+import com.java3y.austin.web.vo.MessageTemplateVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -42,15 +36,14 @@ import java.util.stream.Collectors;
 /**
  * 消息模板管理Controller
  *
- * 
+ * @author 3y
  */
-
+@Slf4j
 @RestController
 @RequestMapping("/messageTemplate")
 @Api("发送消息")
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = "*")
 public class MessageTemplateController {
-    private static final List<String> FLAT_FIELD_NAME = Arrays.asList("msgContent");
 
     @Autowired
     private MessageTemplateService messageTemplateService;
@@ -58,9 +51,11 @@ public class MessageTemplateController {
     @Autowired
     private SendService sendService;
 
+    @Autowired
+    private RecallService recallService;
+
     @Value("${austin.business.upload.crowd.path}")
     private String dataPath;
-
 
     /**
      * 如果Id存在，则修改
@@ -69,9 +64,7 @@ public class MessageTemplateController {
     @PostMapping("/save")
     @ApiOperation("/保存数据")
     public BasicResultVO saveOrUpdate(@RequestBody MessageTemplate messageTemplate) {
-
         MessageTemplate info = messageTemplateService.saveOrUpdate(messageTemplate);
-
         return BasicResultVO.success(info);
     }
 
@@ -81,7 +74,7 @@ public class MessageTemplateController {
     @GetMapping("/list")
     @ApiOperation("/列表页")
     public BasicResultVO queryList(MessageTemplateParam messageTemplateParam) {
-        List<Map<String, Object>> result = ConvertMap.flatList(messageTemplateService.queryList(messageTemplateParam), FLAT_FIELD_NAME);
+        List<Map<String, Object>> result = ConvertMap.flatList(messageTemplateService.queryList(messageTemplateParam));
 
         long count = messageTemplateService.count();
         MessageTemplateVo messageTemplateVo = MessageTemplateVo.builder().count(count).rows(result).build();
@@ -94,7 +87,7 @@ public class MessageTemplateController {
     @GetMapping("query/{id}")
     @ApiOperation("/根据Id查找")
     public BasicResultVO queryById(@PathVariable("id") Long id) {
-        Map<String, Object> result = ConvertMap.flatSingle(messageTemplateService.queryById(id), FLAT_FIELD_NAME);
+        Map<String, Object> result = ConvertMap.flatSingle(messageTemplateService.queryById(id));
         return BasicResultVO.success(result);
     }
 
@@ -136,6 +129,22 @@ public class MessageTemplateController {
         MessageParam messageParam = MessageParam.builder().receiver(messageTemplateParam.getReceiver()).variables(variables).build();
         SendRequest sendRequest = SendRequest.builder().code(BusinessCode.COMMON_SEND.getCode()).messageTemplateId(messageTemplateParam.getId()).messageParam(messageParam).build();
         SendResponse response = sendService.send(sendRequest);
+        if (response.getCode() != RespStatusEnum.SUCCESS.getCode()) {
+            return BasicResultVO.fail(response.getMsg());
+        }
+        return BasicResultVO.success(response);
+    }
+
+    /**
+     * 测试发送接口
+     */
+    @PostMapping("recall/{id}")
+    @ApiOperation("/撤回消息接口")
+    public BasicResultVO recall(@PathVariable("id") String id) {
+
+        SendRequest sendRequest = SendRequest.builder().code(BusinessCode.RECALL.getCode()).
+                messageTemplateId(Long.valueOf(id)).build();
+        SendResponse response = recallService.recall(sendRequest);
         if (response.getCode() != RespStatusEnum.SUCCESS.getCode()) {
             return BasicResultVO.fail(response.getMsg());
         }

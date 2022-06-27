@@ -1,14 +1,16 @@
 package com.taotao.cloud.message.biz.austin.common.dto.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
 /**
- * 
+ * @author 3y
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,16 +1,16 @@
 package com.taotao.cloud.message.biz.austin.web.service;
 
 
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.web.vo.MessageTemplateParam;
 
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
-import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateParam;
 import java.util.List;
 
 /**
  * 消息模板管理 接口
  *
- *
+ * @author 3y
  */
 public interface MessageTemplateService {
 

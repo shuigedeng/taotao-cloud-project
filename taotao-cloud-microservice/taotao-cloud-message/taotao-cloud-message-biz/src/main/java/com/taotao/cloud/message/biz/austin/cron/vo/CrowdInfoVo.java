@@ -1,16 +1,17 @@
 package com.taotao.cloud.message.biz.austin.cron.vo;
 
+import java.io.Serializable;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.util.Map;
-
 /**
  * 每一行csv的记录
+ * @author 3y
+ * @date 2022/2/9
  */
 @Data
 @Accessors(chain = true)

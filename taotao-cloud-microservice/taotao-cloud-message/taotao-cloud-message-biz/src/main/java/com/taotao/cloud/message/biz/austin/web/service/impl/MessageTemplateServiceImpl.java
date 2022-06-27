@@ -3,19 +3,19 @@ package com.taotao.cloud.message.biz.austin.web.service.impl;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import com.taotao.cloud.message.biz.austin.common.enums.AuditStatus;
-import com.taotao.cloud.message.biz.austin.common.enums.MessageStatus;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.enums.TemplateType;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
-import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
-import com.taotao.cloud.message.biz.austin.cron.xxl.utils.XxlJobUtils;
-import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
-import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
-import com.taotao.cloud.message.biz.austin.web.service.MessageTemplateService;
-import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateParam;
+import com.java3y.austin.common.constant.AustinConstant;
+import com.java3y.austin.common.enums.AuditStatus;
+import com.java3y.austin.common.enums.MessageStatus;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.enums.TemplateType;
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.cron.xxl.entity.XxlJobInfo;
+import com.java3y.austin.cron.xxl.service.CronTaskService;
+import com.java3y.austin.cron.xxl.utils.XxlJobUtils;
+import com.java3y.austin.support.dao.MessageTemplateDao;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.web.service.MessageTemplateService;
+import com.java3y.austin.web.vo.MessageTemplateParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,8 @@ import java.util.List;
 /**
  * 消息模板管理 Service
  *
- * 
+ * @author 3y
+ * @date 2022/1/22
  */
 @Service
 public class MessageTemplateServiceImpl implements MessageTemplateService {

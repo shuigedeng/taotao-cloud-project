@@ -1,17 +1,19 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
+ * @author 3y
  * 配置类
  */
-
+@Slf4j
 @Configuration
+@ConditionalOnProperty(name = "xxl-job.enabled",havingValue = "true")
 public class XxlJobConfig {
 
     @Value("${xxl.job.admin.addresses}")

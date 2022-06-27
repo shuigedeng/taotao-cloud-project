@@ -6,12 +6,13 @@ import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiGettokenRequest;
 import com.dingtalk.api.response.OapiGettokenResponse;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
-import com.taotao.cloud.message.biz.austin.common.dto.account.DingDingWorkNoticeAccount;
-import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
-import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
+import com.java3y.austin.common.constant.AustinConstant;
+import com.java3y.austin.common.constant.SendAccountConstant;
+import com.java3y.austin.common.dto.account.DingDingWorkNoticeAccount;
+import com.java3y.austin.support.config.SupportThreadPoolConfig;
+import com.java3y.austin.support.utils.AccountUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ import org.springframework.stereotype.Service;
 /**
  * 刷新钉钉的access_token
  * <p>
- * <a href="https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token">https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token</a>
+ * https://open.dingtalk.com/document/orgapp-server/obtain-orgapp-token
  *
- * 
+ * @author 3y
  */
 @Service
-
+@Slf4j
 public class RefreshDingDingAccessTokenHandler {
 
 
@@ -45,7 +46,7 @@ public class RefreshDingDingAccessTokenHandler {
         log.info("refreshAccessTokenJob#execute!");
         SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
             for (int index = SendAccountConstant.START; true; index = index + SendAccountConstant.STEP) {
-                DingDingWorkNoticeAccount account = accountUtils.getAccount(index, SendAccountConstant.DING_DING_WORK_NOTICE_ACCOUNT_KEY, SendAccountConstant.DING_DING_WORK_NOTICE_PREFIX, new DingDingWorkNoticeAccount());
+                DingDingWorkNoticeAccount account = accountUtils.getAccount(index, SendAccountConstant.DING_DING_WORK_NOTICE_ACCOUNT_KEY, SendAccountConstant.DING_DING_WORK_NOTICE_PREFIX, DingDingWorkNoticeAccount.class);
                 if (account == null) {
                     break;
                 }

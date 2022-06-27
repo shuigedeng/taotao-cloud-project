@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver;
 
-import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.java3y.austin.handler.utils.GroupIdMappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +13,9 @@ import java.util.List;
 
 /**
  * 启动消费者
+ *
+ * @author 3y
+ * @date 2021/12/4
  */
 @Service
 public class ReceiverStart {

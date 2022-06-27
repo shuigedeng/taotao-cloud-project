@@ -3,10 +3,11 @@ package com.taotao.cloud.message.biz.austin.stream.sink;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
-import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
-import com.taotao.cloud.message.biz.austin.stream.utils.LettuceRedisUtils;
+import com.java3y.austin.common.domain.AnchorInfo;
+import com.java3y.austin.common.domain.SimpleAnchorInfo;
+import com.java3y.austin.stream.utils.LettuceRedisUtils;
 import io.lettuce.core.RedisFuture;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ import java.util.List;
 /**
  * 消息进 redis/hive
  *
- * 
+ * @author 3y
  */
-
+@Slf4j
 public class AustinSink implements SinkFunction<AnchorInfo> {
 
     @Override

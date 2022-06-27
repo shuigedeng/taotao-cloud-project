@@ -1,11 +1,15 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.handler.deduplication.DeduplicationParam;
+import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
 
 import java.util.Set;
 
+/**
+ * @author cao
+ * @date 2022-04-20 11:58
+ */
 public interface LimitService {
 
 

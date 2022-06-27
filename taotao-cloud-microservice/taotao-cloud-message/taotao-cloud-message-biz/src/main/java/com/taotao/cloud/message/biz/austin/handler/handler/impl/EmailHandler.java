@@ -5,26 +5,28 @@ import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.RateLimiter;
+import com.java3y.austin.common.constant.SendAccountConstant;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.dto.model.EmailContentModel;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.handler.enums.RateLimitStrategy;
+import com.java3y.austin.handler.flowcontrol.FlowControlParam;
+import com.java3y.austin.handler.handler.BaseHandler;
+import com.java3y.austin.handler.handler.Handler;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.support.utils.AccountUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
-import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.dto.model.EmailContentModel;
-import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
-import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
-import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlParam;
-import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
-import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
-import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * 邮件发送处理
  *
- *
+ * @author 3y
  */
 @Component
-
+@Slf4j
 public class EmailHandler extends BaseHandler implements Handler {
 
     @Autowired
@@ -61,16 +63,19 @@ public class EmailHandler extends BaseHandler implements Handler {
      * @return
      */
     private MailAccount getAccountConfig(Integer sendAccount) {
-        MailAccount account = accountUtils.getAccount(sendAccount, SendAccountConstant.EMAIL_ACCOUNT_KEY, SendAccountConstant.EMAIL_ACCOUNT_PREFIX, new MailAccount());
+        MailAccount account = accountUtils.getAccount(sendAccount, SendAccountConstant.EMAIL_ACCOUNT_KEY, SendAccountConstant.EMAIL_ACCOUNT_PREFIX, MailAccount.class);
         try {
             MailSSLSocketFactory sf = new MailSSLSocketFactory();
             sf.setTrustAllHosts(true);
-            account.setAuth(true).setStarttlsEnable(true).setSslEnable(true).setCustomProperty("mail.smtp.ssl.socketFactory", sf);
+            account.setAuth(account.isAuth()).setStarttlsEnable(account.isStarttlsEnable()).setSslEnable(account.isSslEnable()).setCustomProperty("mail.smtp.ssl.socketFactory", sf);
             account.setTimeout(25000).setConnectionTimeout(25000);
         } catch (Exception e) {
             log.error("EmailHandler#getAccount fail!{}", Throwables.getStackTraceAsString(e));
         }
         return account;
     }
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
 
+    }
 }

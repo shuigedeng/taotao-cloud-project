@@ -1,8 +1,9 @@
 package com.taotao.cloud.message.biz.austin.api.impl.domain;
 
-import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessModel;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.service.api.domain.MessageParam;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.support.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 
+ * @author 3y
+ * @date 2021/11/22
  * @description 发送消息任务模型
  */
 @Data
@@ -35,5 +37,9 @@ public class SendTaskModel implements ProcessModel {
      */
     private List<TaskInfo> taskInfo;
 
+    /**
+     * 撤回任务的信息
+     */
+    private MessageTemplate messageTemplate;
 
 }

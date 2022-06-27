@@ -7,7 +7,7 @@ import lombok.ToString;
 /**
  * 限流枚举
  *
- * 
+ * @author 3y
  */
 @Getter
 @ToString
