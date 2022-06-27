@@ -19,16 +19,17 @@ package com.taotao.cloud.ip2region.configuration;
 import com.taotao.cloud.ip2region.impl.Ip2regionSearcherImpl;
 import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
 import com.taotao.cloud.ip2region.properties.Ip2regionProperties;
+import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.io.RandomAccessFile;
 import org.lionsoul.ip2region.xdb.Searcher;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.util.ResourceUtils;
 
 /**
  * ip2region 自动化配置
@@ -49,12 +50,15 @@ public class Ip2regionAutoConfiguration {
 	}
 
 	@Bean
-	public  Searcher searcher(ResourceLoader resourceLoader){
+	public Searcher searcher() {
 		String dbPath = "";
+		File file;
 
 		try {
-			Resource resource = resourceLoader.getResource("classpath:lionsoul/ip2region.xdb");
-			dbPath = resource.getFile().getAbsolutePath();
+			file = ResourceUtils.getFile("classpath:lionsoul/ip2region.db");
+
+			//Resource resource = resourceLoader.getResource("classpath:lionsoul/ip2region.xdb");
+			//File file1 = resource.getFile();
 		} catch (IOException e) {
 			System.out.printf("failed to create searcher with `%s`: %s\n", dbPath, e);
 			throw new RuntimeException(e);
@@ -94,7 +98,8 @@ public class Ip2regionAutoConfiguration {
 		// 1、从 dbPath 加载整个 xdb 到内存。
 		byte[] cBuff;
 		try {
-			cBuff = Searcher.loadContentFromFile(dbPath);
+			RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+			cBuff = Searcher.loadContent(randomAccessFile);
 		} catch (Exception e) {
 			System.out.printf("failed to load content from `%s`: %s\n", dbPath, e);
 			throw new RuntimeException(e);
