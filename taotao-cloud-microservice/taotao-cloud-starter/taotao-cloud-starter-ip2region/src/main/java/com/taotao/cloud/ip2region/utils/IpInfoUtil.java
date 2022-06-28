@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright (c) 2019-2029, Dreamlu 卢春梦 (596392912@qq.com & www.dreamlu.net).
+ * <p>
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,45 +17,35 @@
 package com.taotao.cloud.ip2region.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.taotao.cloud.ip2region.model.DataBlock;
 import com.taotao.cloud.ip2region.model.IpInfo;
-import org.springframework.lang.Nullable;
-
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+import org.springframework.lang.Nullable;
 
 /**
  * ip 信息详情
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-27 17:29:18
+ * @version 2022.06
+ * @since 2022-06-28 17:43:39
  */
 public class IpInfoUtil {
 
-	/**
-	 * 分裂模式
-	 */
 	private static final Pattern SPLIT_PATTERN = Pattern.compile("\\|");
 
 	/**
 	 * 将 DataBlock 转化为 IpInfo
 	 *
-	 * @param dataBlock DataBlock
-	 * @return {@link IpInfo }
-	 * @since 2022-04-27 17:29:18
+	 * @param region region
+	 * @return IpInfo
 	 */
 	@Nullable
-	public static IpInfo toIpInfo(@Nullable DataBlock dataBlock) {
-		if (dataBlock == null) {
+	public static IpInfo toIpInfo(@Nullable String region) {
+		if (region == null) {
 			return null;
 		}
 		IpInfo ipInfo = new IpInfo();
-		int cityId = dataBlock.getCityId();
-		ipInfo.setCityId(cityId == 0 ? null : cityId);
-		ipInfo.setDataPtr(dataBlock.getDataPtr());
-		String region = dataBlock.getRegion();
 		String[] splitInfos = SPLIT_PATTERN.split(region);
 		// 补齐5位
 		if (splitInfos.length < 5) {
@@ -73,8 +63,7 @@ public class IpInfoUtil {
 	 * 数据过滤，因为 ip2Region 采用 0 填充的没有数据的字段
 	 *
 	 * @param info info
-	 * @return {@link String }
-	 * @since 2022-04-27 17:29:18
+	 * @return info
 	 */
 	@Nullable
 	private static String filterZero(@Nullable String info) {
@@ -90,8 +79,7 @@ public class IpInfoUtil {
 	 *
 	 * @param ipInfo   IpInfo
 	 * @param function Function
-	 * @return {@link String }
-	 * @since 2022-04-27 17:29:19
+	 * @return info
 	 */
 	@Nullable
 	public static String readInfo(@Nullable IpInfo ipInfo, Function<IpInfo, String> function) {
