@@ -44,7 +44,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
 /**
@@ -57,10 +56,14 @@ import org.springframework.http.HttpHeaders;
 @AutoConfiguration
 @EnableConfigurationProperties({OpenApiProperties.class})
 @ConditionalOnProperty(prefix = OpenApiProperties.PREFIX, name = "enabled", havingValue = "true")
-public class OpenapiAutoConfiguration implements InitializingBean{
+public class OpenapiAutoConfiguration implements InitializingBean {
 
 	@Value("${spring.cloud.client.ip-address}")
 	private String ip;
+	@Value("${server.port:8080}")
+	private int port;
+	@Value("${spring.mvc.servlet.path:/}")
+	private String servletPath;
 
 	@Autowired
 	private OpenApiProperties properties;
@@ -81,24 +84,6 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 			//.packagesToExclude(properties.getPackagesToExclude())
 			.build();
 	}
-
-	//@Bean
-	//public GroupedOpenApi groupedOpenApi1() {
-	//	return GroupedOpenApi
-	//		.builder()
-	//		.group("buyer")
-	//		.packagesToScan("com.taotao.cloud.sys.biz.controller.buyer")
-	//		.build();
-	//}
-	//
-	//@Bean
-	//public GroupedOpenApi groupedOpenApi2() {
-	//	return GroupedOpenApi
-	//		.builder()
-	//		.group("seller")
-	//		.packagesToScan("com.taotao.cloud.sys.biz.controller.buyer")
-	//		.build();
-	//}
 
 	@Bean
 	public OpenApiCustomiser openApiCustomiser() {
@@ -127,9 +112,9 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 			// 添加auth认证header
 			components.addSecuritySchemes("token",
 				new SecurityScheme()
+					.name("token")
 					.description("token")
 					.type(SecurityScheme.Type.HTTP)
-					.name("token")
 					.in(In.HEADER)
 					.scheme("basic")
 			);
@@ -165,7 +150,7 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 		List<Server> servers = properties.getServers();
 		if (CollectionUtil.isEmpty(servers)) {
 			Server s1 = new Server();
-			s1.setUrl("http://" + ip + ":9999/");
+			s1.setUrl("http://" + ip + ":" + port + "" + servletPath);
 			s1.setDescription("本地地址");
 			servers.add(s1);
 			Server s2 = new Server();
@@ -173,11 +158,11 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 			s2.setDescription("测试环境地址");
 			servers.add(s2);
 			Server s3 = new Server();
-			s3.setUrl("http://pre.taotaocloud.com/");
+			s3.setUrl("https://pre.taotaocloud.com/");
 			s3.setDescription("预上线环境地址");
 			servers.add(s3);
 			Server s4 = new Server();
-			s4.setUrl("http://pro.taotaocloud.com/");
+			s4.setUrl("https://pro.taotaocloud.com/");
 			s4.setDescription("生产环境地址");
 			servers.add(s4);
 		}

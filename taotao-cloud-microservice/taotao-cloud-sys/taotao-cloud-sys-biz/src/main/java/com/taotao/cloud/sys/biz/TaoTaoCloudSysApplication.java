@@ -15,12 +15,10 @@
  */
 package com.taotao.cloud.sys.biz;
 
-
+import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.dtflys.forest.springboot.annotation.ForestScan;
-import com.github.lianjiatech.retrofit.spring.boot.core.RetrofitClient;
-import com.gobrs.async.exception.NotTaskRuleException;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
+import java.io.File;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -52,7 +50,21 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
+		setNacosProperty();
+
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+	}
+
+	public static void setNacosProperty(){
+		/**
+		 * 设置nacos客户端日志和快照目录
+		 *
+		 * @see LocalConfigInfoProcessor
+		 */
+		String userHome = System.getProperty("user.home");
+		System.setProperty("JM.LOG.PATH", userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
+		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
+		System.setProperty("nacos.logging.default.config.enabled", "false");
 	}
 
 }

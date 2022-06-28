@@ -55,7 +55,7 @@ public class Ip2regionAutoConfiguration {
 		File file;
 
 		try {
-			file = ResourceUtils.getFile("classpath:lionsoul/ip2region.db");
+			file = ResourceUtils.getFile("classpath:lionsoul/ip2region.xdb");
 
 			//Resource resource = resourceLoader.getResource("classpath:lionsoul/ip2region.xdb");
 			//File file1 = resource.getFile();

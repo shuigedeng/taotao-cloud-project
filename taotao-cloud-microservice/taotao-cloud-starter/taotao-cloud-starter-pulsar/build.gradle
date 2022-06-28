@@ -1,7 +1,9 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
+    //https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin
     api 'org.apache.pulsar:pulsar-client-admin:2.10.0'
+    //https://search.maven.org/artifact/com.github.ben-manes.caffeine/caffeine
     api 'com.github.ben-manes.caffeine:caffeine:3.1.1'
     api 'io.netty:netty-common:4.1.77.Final'
 

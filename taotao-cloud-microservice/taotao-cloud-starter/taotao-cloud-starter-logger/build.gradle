@@ -1,7 +1,6 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    //api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region')
 
     api 'com.fasterxml.jackson.core:jackson-databind'
@@ -14,13 +13,18 @@ dependencies {
     api 'org.apache.skywalking:apm-toolkit-logback-1.x'
     api 'org.apache.skywalking:apm-toolkit-trace'
 
-    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.0"
-
     implementation 'com.baomidou:mybatis-plus-extension'
 
+    //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
+    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.0"
+
+    //https://search.maven.org/artifact/de.danielbechler/java-object-diff
     implementation 'de.danielbechler:java-object-diff:0.95'
+    //https://search.maven.org/artifact/com.github.colincatsu/fast-object-diff
     implementation 'com.github.colincatsu:fast-object-diff:1.2'
+    //https://search.maven.org/artifact/de.danielbechler/java-object-diff
     implementation 'de.danielbechler:java-object-diff:0.95'
+    //https://search.maven.org/artifact/uk.co.jemos.podam/podam
     implementation 'uk.co.jemos.podam:podam:7.2.9.RELEASE'
 
     implementation 'org.springframework.kafka:spring-kafka'

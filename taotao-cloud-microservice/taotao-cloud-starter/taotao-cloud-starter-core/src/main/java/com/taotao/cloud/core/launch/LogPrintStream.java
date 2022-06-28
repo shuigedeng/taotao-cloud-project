@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import org.apache.commons.io.Charsets;
 
@@ -43,7 +44,7 @@ public class LogPrintStream extends PrintStream {
 	 * @since 2022-05-30 13:29:07
 	 */
 	private LogPrintStream(boolean error) throws UnsupportedEncodingException {
-		super(error ? System.err : System.out, false, Charsets.UTF_8.name());
+		super(error ? System.err : System.out, false, StandardCharsets.UTF_8);
 		this.error = error;
 	}
 

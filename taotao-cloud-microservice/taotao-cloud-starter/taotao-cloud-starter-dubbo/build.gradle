@@ -7,7 +7,8 @@ dependencies {
     //    exclude group: 'org.apache.dubbo', module: 'dubbo'
     //    exclude group: 'org.apache.dubbo', module: 'dubbo-spring-boot-starter'
     //}
-    //api 'org.apache.dubbo:dubbo-spring-boot-starter:3.0.8'
+    //https://search.maven.org/artifact/org.apache.dubbo/dubbo-spring-boot-starter
+    //api 'org.apache.dubbo:dubbo-spring-boot-starter:3.0.9'
 
     //api 'com.esotericsoftware.kryo:kryo:5.1.1'
 

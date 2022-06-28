@@ -109,7 +109,7 @@ spring:
       flow:
         cold-factor: 3
       log:
-        dir: ${user.home}/sentinel/log
+        dir: ${user.home}/logs/${spring.application.name}/sentinel
         switch-pid: false
       scg:
         fallback:
