@@ -37,7 +37,7 @@ public class Ip2regionProperties {
 	/**
 	 * ip2region.db 文件路径
 	 */
-	private String dbFileLocation = "classpath:ip2region/ip2region.db";
+	private String dbFileLocation = "classpath:ip2region/ip2region.xdb";
 
 	public String getDbFileLocation() {
 		return dbFileLocation;
