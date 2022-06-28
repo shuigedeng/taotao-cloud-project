@@ -9,7 +9,7 @@ server:
       io: 16
       worker: 256
     accesslog:
-      dir: ${user.home}/logs/undertow
+      dir: ${user.home}/logs/${spring.application.name}/undertow
       enabled: true
   servlet:
     application-display-name: ${spring.application.name}
@@ -284,7 +284,8 @@ dubbo:
     subscribed-services: 'taotao-cloud-order,taotao-cloud-goods'
     registry-type: dubbo-cloud
   registry:
-    address: nacos://192.168.10.200:8000
+    #address: nacos://192.168.10.200:8000
+    address: nacos://192.168.10.200:8000?group=DUBBO_REGISTRY_GROUP&namespace=343852d5-6e0d-4e27-8719-7866452e5ab0
     timeout: 15000
     #username:
     #password:
@@ -321,15 +322,19 @@ dubbo:
 seata:
   enabled: true
   application-id: ${spring.application.name}
+  # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
   tx-service-group: taotao-cloud-tx-group
   enable-auto-data-source-proxy: true
   use-jdk-proxy: false
   service:
     grouplist:
       SC: 192.168.10.200:8091,192.168.10.200:8092,192.168.10.200:8093
+    # TC 集群（必须与seata-server保持一致）
     vgroupMapping:
       taotao-cloud-tx-group: SC
+    # 降级开关
     enable-degrade: false
+    # 禁用全局事务（默认false）
     disable-global-transaction: false
   config:
     type: nacos
@@ -658,14 +663,14 @@ spring:
         nettyThreads: 32
         codec: !<org.redisson.codec.MarshallingCodec> {}
         transportMode: "NIO"
-  elasticsearch:
-    uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:http://192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
-    password:
-    username:
+  #elasticsearch:
+  #  uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:http://192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+  #  password:
+  #  username:
   data:
     elasticsearch:
       repositories:
-        enabled: true
+        enabled: fasle
     mongodb:
       database: yapi
       host: 192.168.10.200
@@ -703,20 +708,6 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
-  #mail:
-  #  host: smtp.qq.com
-  #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
-  #  username: 981376577@qq.com
-  #  port: 465
-  #  protocol: smtps
-  #  properties:
-  #    smtp:
-  #      auth: true
-  #      timeout: 2500
-  #    mail:
-  #      smtp:
-  #        ssl:
-  #          enable: true
   shardingsphere:
     enabled: false
     schema:
@@ -1050,6 +1041,7 @@ taotao:
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+      logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
     openapi:
@@ -1089,7 +1081,7 @@ taotao:
           ip:
           port: 1113
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${user.home}/logs/xxl-job
+          log-path: ${user.home}/logs/${spring.application.name}/xxl-job
       elastic:
         enabled: false
     ip2region:
@@ -1110,7 +1102,7 @@ taotao:
     elk:
       enabled: false
     elasticsearch:
-      enabled: true
+      enabled: false
     dubbo:
       enabled: true
     data:
@@ -1214,7 +1206,7 @@ management:
       application: ${spring.application.name}
   health:
     elasticsearch:
-      enabled: true
+      enabled: false
     rabbit:
       enabled: false
 
@@ -1233,52 +1225,3 @@ springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller
-  api-docs:
-    path: /v3/api-docs
-
-logback:
-  access:
-    # Whether to enable autoconfiguration.
-    # Defaults to true.
-    enabled: true
-    # The location of the configuration file.
-    # Specify a URL that starts with "classpath:" or "file:".
-    # Auto-detected by default:
-    #   1. "classpath:logback-access-test.xml"
-    #   2. "classpath:logback-access.xml"
-    #   3. "classpath:logback-access-test-spring.xml"
-    #   4. "classpath:logback-access-spring.xml"
-    #   5. "classpath:dev/akkinoc/spring/boot/logback/access/logback-access-spring.xml"
-    config: classpath:logback/logback-access.xml
-    # The strategy to change the behavior of IAccessEvent.getLocalPort.
-    # Defaults to "server".
-    #   "local":
-    #     Returns the port number of the interface on which the request was received.
-    #     Equivalent to ServletRequest.getLocalPort when using a servlet web server.
-    #   "server":
-    #     Returns the port number to which the request was sent.
-    #     Equivalent to ServletRequest.getServerPort when using a servlet web server.
-    #     Helps to identify the destination port number used by the client when forward headers are enabled.
-    local-port-strategy: server
-    # The properties for the Tomcat web server.
-    tomcat:
-      # Whether to enable the request attributes to work with RemoteIpValve.
-      # Defaults to the presence of RemoteIpValve enabled by the property "server.forward-headers-strategy=native".
-      request-attributes-enabled: true
-    # The properties for the Undertow web server.
-    undertow:
-      # Whether to enable UndertowOptions.RECORD_REQUEST_START_TIME.
-      # Used to measure IAccessEvent.getElapsedTime and IAccessEvent.getElapsedSeconds.
-      # Defaults to true.
-      record-request-start-time: true
-    # The properties for the tee filter.
-    tee-filter:
-      # Whether to enable the tee filter.
-      # Defaults to false.
-      enabled: true
-      # The host names to activate.
-      # By default, all hosts are activated.
-      includes:
-      # The host names to deactivate.
-      # By default, all hosts are activated.
-      excludes:

@@ -67,34 +67,20 @@ public class CoreApplicationContextInitializer implements
 			ContextUtil.setApplicationContext(context);
 			ConfigurableEnvironment environment = context.getEnvironment();
 
-			/**
-			 * 设置nacos客户端日志和快照目录
-			 *
-			 * @see LocalConfigInfoProcessor
-			 */
-			String userHome = environment.getProperty("user.home");
-			setProperty("JM.LOG.PATH", userHome + File.separator + "logs",
-				"[taotao cloud 环境变量]");
-			setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs",
-				"[taotao cloud 环境变量]");
-			setProperty("nacos.logging.default.config.enabled", "false",
-				"[taotao cloud 环境变量]");
+			String applicationName = environment.getProperty(CoreProperties.SpringApplicationName);
 
-			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled",
-				Boolean.class);
+			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled", Boolean.class);
 			if (Boolean.FALSE.equals(isEnabled)) {
 				return;
 			}
 
 			//环境变量初始化
-			String applicationName = environment.getProperty(CoreProperties.SpringApplicationName);
 			String env = environment.getProperty(CoreProperties.PREFIX + ".env", String.class);
 
 			if (!StringUtil.isEmpty(applicationName) && !StringUtil.isEmpty(env)) {
 				optimize(environment);
 
-				setProperty(CoreProperties.SpringApplicationName, applicationName,
-					"[taotao cloud 环境变量]");
+				setProperty(CoreProperties.SpringApplicationName, applicationName, "[taotao cloud 环境变量]");
 
 				for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
 					if (e2.toString().equalsIgnoreCase(env)) {

@@ -2,7 +2,9 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     //https://github.com/maxmind/GeoIP2-java
+    //https://search.maven.org/artifact/com.maxmind.geoip2/geoip2
     api 'com.maxmind.geoip2:geoip2:3.0.1'
+    //https://search.maven.org/artifact/org.lionsoul/ip2region
     api 'org.lionsoul:ip2region:2.6.1'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

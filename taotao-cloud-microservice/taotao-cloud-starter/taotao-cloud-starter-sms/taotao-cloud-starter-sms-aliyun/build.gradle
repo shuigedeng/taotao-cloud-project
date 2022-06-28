@@ -1,7 +1,9 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common')
 
+    //https://search.maven.org/artifact/com.aliyun/aliyun-java-sdk-core
     api 'com.aliyun:aliyun-java-sdk-core:4.6.0'
+    //https://search.maven.org/artifact/com.aliyun/aliyun-java-sdk-dysmsapi
     api 'com.aliyun:aliyun-java-sdk-dysmsapi:2.2.1'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

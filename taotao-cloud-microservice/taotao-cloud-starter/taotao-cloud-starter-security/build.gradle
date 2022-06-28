@@ -4,8 +4,9 @@ dependencies {
 
 	api 'javax.servlet:javax.servlet-api'
 
+	//https://search.maven.org/artifact/org.springframework.security/spring-security-core
 	api  'org.springframework.security:spring-security-core:5.7.1'
-//	api  'org.springframework.security:spring-security-web'
+	//api  'org.springframework.security:spring-security-web'
 	api  'org.springframework.security:spring-security-config'
 	api  'org.springframework.security:spring-security-oauth2-core'
 	api  'org.springframework.security:spring-security-oauth2-client'

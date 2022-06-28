@@ -51,14 +51,17 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     api "org.mapstruct:mapstruct"
+    //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
     api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
+    //https://search.maven.org/artifact/com.github.dozermapper/dozer-spring-boot-starter
     api "com.github.dozermapper:dozer-spring-boot-starter:6.5.2"
 
+    //https://search.maven.org/artifact/org.owasp.antisamy/antisamy
     api('org.owasp.antisamy:antisamy:1.6.8') {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
     }
-
+    //https://search.maven.org/artifact/org.apache.poi/poi-ooxml
     api("org.apache.poi:poi-ooxml:5.2.2") {
         exclude group: "org.slf4j", module: "*"
         exclude group: "commons-codec", module: "commons-codec"
@@ -66,8 +69,11 @@ dependencies {
         exclude group: "com.github.virtuald", module: "curvesapi"
         exclude group: "org.apache.xmlgraphics", module: "batik-all"
     }
+    //https://search.maven.org/artifact/org.glassfish/javax.el/
     api "org.glassfish:javax.el:3.0.1-b08"
+    //https://search.maven.org/artifact/com.itextpdf/itextpdf
     api "com.itextpdf:itextpdf:5.5.13.3"
+    //https://search.maven.org/artifact/com.itextpdf/itext-asian
     api "com.itextpdf:itext-asian:5.2.0"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"

@@ -5,6 +5,7 @@ dependencies {
         exclude group: 'io.seata', module: 'seata-spring-boot-starter'
         exclude group: 'cglib', module: 'cglib'
     }
+    //https://search.maven.org/artifact/io.seata/seata-spring-boot-starter
     api 'io.seata:seata-spring-boot-starter:1.5.1'
     api 'cglib:cglib:3.3.0'
 

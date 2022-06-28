@@ -5,6 +5,7 @@ dependencies {
     implementation('io.github.xpc1024:easy-es-boot-starter') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
+    //https://search.maven.org/artifact/org.noear/snack3
     implementation 'org.noear:snack3:3.2.29'
     testImplementation 'org.noear:solon-test:1.8.2'
     testImplementation 'junit:junit:4.13.2'
