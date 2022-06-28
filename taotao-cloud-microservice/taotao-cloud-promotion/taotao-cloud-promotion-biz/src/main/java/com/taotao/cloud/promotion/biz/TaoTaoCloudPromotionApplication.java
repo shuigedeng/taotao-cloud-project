@@ -16,7 +16,9 @@
 package com.taotao.cloud.promotion.biz;
 
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * TaoTaoCloudPromotionApplication
@@ -25,6 +27,8 @@ import org.springframework.boot.SpringApplication;
  * @version 2022.03
  * @since 2020/11/26 下午7:55
  */
+@MapperScan(basePackages = "com.taotao.cloud.store.biz.mapper")
+@EnableJpaRepositories(basePackages = "com.taotao.cloud.promotion.biz.repository.inf")
 @TaoTaoCloudApplication
 public class TaoTaoCloudPromotionApplication {
 
