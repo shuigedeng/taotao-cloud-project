@@ -53,7 +53,7 @@ Requires:
 ```
 JAVA_VERSION >= 17
 GRALE_VERSION >= 7.4.1
-IDEA_VERSION >= 2022.1.1
+IDEA_VERSION >= 2022.1.3
 ```
 
 Gradle:
@@ -94,12 +94,12 @@ Maven:
 ## 5. 核心依赖 
 依赖 | 版本
 ---|---
-Spring |  5.3.19 
-Spring Boot |  2.7.0
-Spring Cloud | 2021.0.2
-Spring Cloud alibaba | 2021.0.2
+Spring |  5.3.21 
+Spring Boot |  2.7.1
+Spring Cloud | 2021.0.3
+Spring Cloud alibaba | 2021.0.1.0
 Spring Security | 5.6.3
-Mybatis Plus | 3.5.1
+Mybatis Plus | 3.5.2
 Hutool | 5.5.9
 Mysql | 8.0.20
 Querydsl | 4.4.0
@@ -114,6 +114,7 @@ Guava | 29.0-jre
 
 ## 6. 滔滔商城演示地址
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top) 源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
+* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top) 源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-datav)
 * 平台管理地址(开发进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
