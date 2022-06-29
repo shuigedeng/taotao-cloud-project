@@ -131,21 +131,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve symbol 'ChannelInitializer'",
+  "comment": "Cannot resolve symbol 'EventLoopGroup'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
-      "type": "class",
+      "type": "method",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 59,
-      "offset": 17,
-      "length": 18,
+      "line": 52,
+      "offset": 2,
+      "length": 14,
       "code": {
-        "startLine": 57,
-        "length": 18,
-        "offset": 72,
-        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+        "startLine": 50,
+        "length": 14,
+        "offset": 70,
+        "surroundingCode": "\t */\n\tpublic RpcReponse send(RpcRequest request) throws Exception {\n\t\tEventLoopGroup group = new NioEventLoopGroup();\n\n\t\ttry {"
       }
     }
   ],
@@ -153,7 +153,7 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "6224721916219188318"
+  "hash": "87346302980808399"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -163,21 +163,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve symbol 'SocketChannel'",
+  "comment": "Incompatible types. Found: 'NioEventLoopGroup', required: 'EventLoopGroup'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
-      "type": "class",
+      "type": "method",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 59,
-      "offset": 36,
-      "length": 13,
+      "line": 52,
+      "offset": 2,
+      "length": 14,
       "code": {
-        "startLine": 57,
-        "length": 13,
-        "offset": 91,
-        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+        "startLine": 50,
+        "length": 14,
+        "offset": 70,
+        "surroundingCode": "\t */\n\tpublic RpcReponse send(RpcRequest request) throws Exception {\n\t\tEventLoopGroup group = new NioEventLoopGroup();\n\n\t\ttry {"
       }
     }
   ],
@@ -185,7 +185,7 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "3687441680723006877"
+  "hash": "5843200860018846870"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -195,21 +195,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unknown class: 'SocketChannel'",
+  "comment": "Unknown class: 'EventLoopGroup'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
-      "type": "class",
+      "type": "method",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 59,
-      "offset": 36,
-      "length": 13,
+      "line": 52,
+      "offset": 2,
+      "length": 14,
       "code": {
-        "startLine": 57,
-        "length": 13,
-        "offset": 91,
-        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+        "startLine": 50,
+        "length": 14,
+        "offset": 70,
+        "surroundingCode": "\t */\n\tpublic RpcReponse send(RpcRequest request) throws Exception {\n\t\tEventLoopGroup group = new NioEventLoopGroup();\n\n\t\ttry {"
       }
     }
   ],
@@ -217,7 +217,7 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-5081938515516376122"
+  "hash": "-7035415514088016249"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -227,21 +227,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve symbol 'Bootstrap'",
+  "comment": "Cannot resolve symbol 'NioEventLoopGroup'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
-      "type": "file",
+      "type": "method",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 13,
-      "offset": 26,
-      "length": 9,
+      "line": 52,
+      "offset": 29,
+      "length": 17,
       "code": {
-        "startLine": 11,
-        "length": 9,
-        "offset": 120,
-        "surroundingCode": "import com.taotao.cloud.rpc.common.RpcReponse;\nimport com.taotao.cloud.rpc.common.RpcRequest;\nimport io.netty.bootstrap.Bootstrap;\nimport io.netty.channel.ChannelFuture;\nimport io.netty.channel.ChannelHandlerContext;"
+        "startLine": 50,
+        "length": 17,
+        "offset": 97,
+        "surroundingCode": "\t */\n\tpublic RpcReponse send(RpcRequest request) throws Exception {\n\t\tEventLoopGroup group = new NioEventLoopGroup();\n\n\t\ttry {"
       }
     }
   ],
@@ -249,5 +249,5 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "2993553416657730914"
+  "hash": "3962569051309055862"
 }]}
