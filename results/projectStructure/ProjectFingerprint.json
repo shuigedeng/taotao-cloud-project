@@ -6,11 +6,11 @@
     "Properties",
     "Lombok.Config",
     "JSON",
+    "HTML",
     "Java",
     "Groovy",
     "EditorConfig",
     "DTD",
-    "HTML",
     "SPI"
   ]
 }
