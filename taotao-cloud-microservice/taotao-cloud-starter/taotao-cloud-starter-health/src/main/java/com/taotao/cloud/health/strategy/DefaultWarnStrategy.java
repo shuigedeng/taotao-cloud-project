@@ -33,8 +33,7 @@ import java.util.List;
 public class DefaultWarnStrategy implements WarnStrategy{
 
 	protected static int maxCacheSize = 3;
-	protected static List<Report> cacheReports = Collections.synchronizedList(
-		new ArrayList<>(maxCacheSize + 2));
+	protected static List<Report> cacheReports = Collections.synchronizedList(new ArrayList<>(maxCacheSize + 2));
 	protected Rule.RulesAnalyzer rulesAnalyzer;
 	protected WarnTemplate warnTemplate;
 
