@@ -18,17 +18,17 @@ jobs:
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v5.1.0
         with:
-          results-dir: ${{GITHUB_WORKSPACE}}/qodana/results
+          results-dir: ${{ github.workspace }}/qodana/results
 
       - uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: ${{GITHUB_WORKSPACE}}/qodana/results/qodana.sarif.json
+          sarif_file: ${{ github.workspace }}/qodana/results/qodana.sarif.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
-          publish_dir: ${{GITHUB_WORKSPACE}}/qodana/results/report
+          publish_dir: ${{ github.workspace }}/qodana/results/report
           destination_dir: ./
 
       - name: deploy to server
