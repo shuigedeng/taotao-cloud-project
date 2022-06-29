@@ -39,10 +39,10 @@ jobs:
     runs-on: macos-11
     steps:
       - name: checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: cache node_modules folder
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules
@@ -53,7 +53,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: cache yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: yarn-cache
         with:
@@ -63,7 +63,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: cache pods
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ios/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
