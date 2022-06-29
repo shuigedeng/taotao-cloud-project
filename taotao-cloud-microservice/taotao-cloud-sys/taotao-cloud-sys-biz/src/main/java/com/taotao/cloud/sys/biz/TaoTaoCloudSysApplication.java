@@ -44,8 +44,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @since 2020/11/30 下午3:33
  */
 @ForestScan(basePackages = "com.taotao.cloud.sys.biz.forest")
-@MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
-@EnableJpaRepositories(basePackages = "com.taotao.cloud.sys.biz.repository.inf")
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 

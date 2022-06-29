@@ -4,7 +4,7 @@
 name: microservice starters publish
 
 on:
-  #push:
+  push:
   #  paths:
   #    - 'taotao-cloud-microservice/taotao-cloud-starter/**'
   #  branches: [ master ]
@@ -58,7 +58,6 @@ jobs:
         cd ${{ github.workspace }}/taotao-cloud-dependencies
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
-        gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: build and publish starter
       run: |
@@ -71,7 +70,6 @@ jobs:
                cd $starter_inner_dir
                gradle --continue clean build -x test -x bootJar
                gradle publishAllPublicationsToSonatypeRepository
-               gradle publishMavenJavaPublicationToGitHubRepository
             else
               for two_starter in `ls $starter_inner_dir`
               do
@@ -79,7 +77,6 @@ jobs:
                   cd "$starter_inner_dir/$two_starter"
                   gradle --continue clean build -x test -x bootJar
                   gradle publishAllPublicationsToSonatypeRepository
-                  gradle publishMavenJavaPublicationToGitHubRepository
                 fi
               done
             fi

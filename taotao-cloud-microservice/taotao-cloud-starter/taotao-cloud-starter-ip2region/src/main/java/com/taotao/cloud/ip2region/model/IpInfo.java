@@ -17,6 +17,8 @@
 package com.taotao.cloud.ip2region.model;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Objects;
