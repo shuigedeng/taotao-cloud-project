@@ -117,10 +117,10 @@ Guava | 29.0-jre
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top) 源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-datav)
-* 平台管理地址(开发进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
-* 商户管理地址(开发进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-merchant)
-* 开放平台地址(开发进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-open)
-* 移动端在线预览(开发进度5%) 源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
+* 平台管理地址(进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
+* 商户管理地址(进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-merchant)
+* 开放平台地址(进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-open)
+* 移动端在线预览(进度5%) 源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
 
 | <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                                       |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|-----------------------------------------------------------|
