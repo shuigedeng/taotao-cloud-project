@@ -15,13 +15,19 @@
  */
 package com.taotao.cloud.sys.biz.service.impl;
 
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
+import com.taotao.cloud.sys.api.dubbo.response.DictDubboResponse;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import java.util.List;
+import java.util.Optional;
+import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +38,15 @@ import org.springframework.stereotype.Service;
  * @version 2021.10
  * @since 2021-10-09 20:26:36
  */
+@AllArgsConstructor
 @Service
 @DubboService(interfaceClass = IDubboDictService.class)
 public class DictServiceImpl extends
 	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
 	implements IDubboDictService, IDictService {
 
-	//private final DictRepository sysDictRepository;
+	private final DictRepository sysDictRepository;
+
 	//private final IDictItemService sysDictItemService;
 	//
 	//public DictServiceImpl(DictRepository sysDictRepository,
@@ -107,14 +115,23 @@ public class DictServiceImpl extends
 	//	return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
 	//}
 	//
-	//@Override
-	//public Dict findByCode(String code) {
-	//	Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
-	//	return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
-	//}
-	//
+
 	//@Override
 	//public Dict update(Dict dict) {
 	//	return sysDictRepository.saveAndFlush(dict);
 	//}
+
+	@Override
+	public Dict findByCode(String code) {
+		Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
+		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
+	}
+
+	//**************************************DUBBO**************************************
+
+	@Override
+	public DictDubboResponse findByCode(Integer code) {
+		Optional<Dict> optionalDict = sysDictRepository.findByCode(String.valueOf(code));
+		return null;
+	}
 }

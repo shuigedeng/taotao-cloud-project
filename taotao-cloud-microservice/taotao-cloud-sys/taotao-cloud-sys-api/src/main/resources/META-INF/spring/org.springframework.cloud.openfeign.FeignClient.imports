@@ -3,3 +3,4 @@ com.taotao.cloud.sys.api.feign.IFeignMenuService
 com.taotao.cloud.sys.api.feign.IFeignRoleService
 com.taotao.cloud.sys.api.feign.IFeignSettingService
 com.taotao.cloud.sys.api.feign.IFeignUserService
+com.taotao.cloud.sys.api.feign.IFeignDictService

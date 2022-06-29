@@ -7,7 +7,6 @@ on:
       - master
       - 'releases/*'
 
-
 jobs:
   qodana:
     runs-on: ubuntu-latest
@@ -20,6 +19,7 @@ jobs:
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v5.1.0
         with:
+          #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results
 
       - uses: github/codeql-action/upload-sarif@v2
