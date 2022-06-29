@@ -21,15 +21,15 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-merchant') }}
     steps:
       - name: checkout project
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: use node.js 16
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
       - name: cache node_modules folder
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules
@@ -40,7 +40,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: cache yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: yarn-cache
         with:

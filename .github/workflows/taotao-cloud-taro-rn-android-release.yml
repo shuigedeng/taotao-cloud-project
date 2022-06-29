@@ -50,10 +50,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: cache node_modules folder
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules
@@ -64,7 +64,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: cache yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: yarn-cache
         with:
@@ -88,7 +88,7 @@ jobs:
           path: ./android/app/src/main/assets/index.android.bundle
 
       - name: cache gradle
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: gradle-cache
         with:
