@@ -21,8 +21,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @EnableBinding({TaoTaoCloudSink.class, TaoTaoCloudSource.class})
 @TaoTaoCloudApplication
-@MapperScan(basePackages = "com.taotao.cloud.order.biz.mapper")
-@EnableJpaRepositories(basePackages = "com.taotao.cloud.order.biz.repository.inf")
 public class TaoTaoCloudOrderApplication {
 
 	public static void main(String[] args) {
