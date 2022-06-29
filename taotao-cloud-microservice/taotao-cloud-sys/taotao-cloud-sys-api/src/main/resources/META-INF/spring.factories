@@ -3,4 +3,5 @@ com.taotao.cloud.sys.api.feign.fallback.FeignLogisticsFallback, \
 com.taotao.cloud.sys.api.feign.fallback.FeignMenuFallback, \
 com.taotao.cloud.sys.api.feign.fallback.FeignRoleFallback, \
 com.taotao.cloud.sys.api.feign.fallback.FeignSettingFallback, \
-com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback
+com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback, \
+com.taotao.cloud.sys.api.feign.fallback.FeignDictFallback

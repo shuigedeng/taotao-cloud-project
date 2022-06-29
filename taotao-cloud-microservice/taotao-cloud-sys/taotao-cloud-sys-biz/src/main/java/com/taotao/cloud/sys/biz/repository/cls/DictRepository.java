@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
@@ -34,4 +35,9 @@ public class DictRepository  extends BaseSuperRepository<Dict, Long> {
 		super(Dict.class, em);
 	}
 
+	public Optional<Dict> findByCode(String code) {
+		//this.fetchOne();
+		//Optional<Dict> optional = this.findOne(spec->spec.eq("code", code));
+		return null;
+	}
 }
