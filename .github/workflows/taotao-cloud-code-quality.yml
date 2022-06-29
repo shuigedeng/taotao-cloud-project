@@ -1,4 +1,4 @@
-name: Qodana
+name: Qodana Code Quality
 on:
   workflow_dispatch:
   pull_request:
@@ -10,6 +10,7 @@ on:
 jobs:
   qodana:
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-qodana') }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -36,7 +37,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "qodana/results/report"
+          SOURCE: "qodana/results/report/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_QODANA_TARGET }}
