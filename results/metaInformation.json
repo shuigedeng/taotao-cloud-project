@@ -1,0 +1,16 @@
+{
+  "total": 3185,
+  "tools inspection": {
+    "Code Inspection": 3185
+  },
+  "attributes": {
+    "vcs": {
+      "sarifIdea": {
+        "repositoryUri": "https://github.com/shuigedeng/taotao-cloud-project",
+        "revisionId": "ef3e835469c61157b37cc86ede10d9daf9d5252d",
+        "branch": "master"
+      }
+    },
+    "deviceId": "200820300000000-3b7b-41c9-8d96-d667af713b97"
+  }
+}

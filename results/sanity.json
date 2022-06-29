@@ -1,0 +1,253 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: : (U+003A)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 3,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 18,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "956263340833268162"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: U (U+0055)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 5,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 20,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-1302206339529374142"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: s (U+0073)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 6,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 21,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-507037935019767001"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: e (U+0065)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 7,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 22,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-6147444599718594288"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'ChannelInitializer'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "class",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 59,
+      "offset": 17,
+      "length": 18,
+      "code": {
+        "startLine": 57,
+        "length": 18,
+        "offset": 72,
+        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "6224721916219188318"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'SocketChannel'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "class",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 59,
+      "offset": 36,
+      "length": 13,
+      "code": {
+        "startLine": 57,
+        "length": 13,
+        "offset": 91,
+        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "3687441680723006877"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unknown class: 'SocketChannel'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "class",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 59,
+      "offset": 36,
+      "length": 13,
+      "code": {
+        "startLine": 57,
+        "length": 13,
+        "offset": 91,
+        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-5081938515516376122"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'EventLoopGroup'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 52,
+      "offset": 2,
+      "length": 14,
+      "code": {
+        "startLine": 50,
+        "length": 14,
+        "offset": 70,
+        "surroundingCode": "\t */\n\tpublic RpcReponse send(RpcRequest request) throws Exception {\n\t\tEventLoopGroup group = new NioEventLoopGroup();\n\n\t\ttry {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "87346302980808399"
+}]}
