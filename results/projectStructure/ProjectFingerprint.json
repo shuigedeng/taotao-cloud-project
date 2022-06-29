@@ -1,13 +1,13 @@
 {
   "languages": [
     "Plain text",
-    "Properties",
     "XML",
+    ".gitignore (GitIgnore)",
+    "Properties",
     "Lombok.Config",
     "JSON",
     "Java",
     "Groovy",
-    ".gitignore (GitIgnore)",
     "EditorConfig",
     "DTD",
     "HTML",

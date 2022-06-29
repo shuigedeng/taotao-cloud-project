@@ -131,21 +131,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve symbol 'ChannelInitializer'",
+  "comment": "Cannot resolve symbol 'SimpleChannelInboundHandler'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
       "type": "class",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 59,
-      "offset": 17,
-      "length": 18,
+      "line": 31,
+      "offset": 31,
+      "length": 27,
       "code": {
-        "startLine": 57,
-        "length": 18,
-        "offset": 72,
-        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+        "startLine": 29,
+        "length": 27,
+        "offset": 62,
+        "surroundingCode": " * @create 2020/2/27 15:14\n */\npublic class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {\n\n\tprivate RpcReponse response;"
       }
     }
   ],
@@ -153,7 +153,7 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "6224721916219188318"
+  "hash": "2505485525688555565"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -163,21 +163,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve symbol 'SocketChannel'",
+  "comment": "Class name expected",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
       "type": "class",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 59,
-      "offset": 36,
-      "length": 13,
+      "line": 31,
+      "offset": 31,
+      "length": 27,
       "code": {
-        "startLine": 57,
-        "length": 13,
-        "offset": 91,
-        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
+        "startLine": 29,
+        "length": 27,
+        "offset": 62,
+        "surroundingCode": " * @create 2020/2/27 15:14\n */\npublic class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {\n\n\tprivate RpcReponse response;"
       }
     }
   ],
@@ -185,7 +185,7 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "3687441680723006877"
+  "hash": "-1532333116584006124"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -195,53 +195,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Unknown class: 'SocketChannel'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "class",
-      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
-      "language": "JAVA",
-      "line": 59,
-      "offset": 36,
-      "length": 13,
-      "code": {
-        "startLine": 57,
-        "length": 13,
-        "offset": 91,
-        "surroundingCode": "\t\t\t\t.group(group)\n\t\t\t\t.channel(NioSocketChannel.class)\n\t\t\t\t.handler(new ChannelInitializer<SocketChannel>() {\n\t\t\t\t\t@Override\n\t\t\t\t\tprotected void initChannel(SocketChannel ch) throws Exception {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "-5081938515516376122"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Cannot resolve symbol 'EventLoopGroup'",
+  "comment": "Method does not override method from its superclass",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
       "type": "method",
       "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
       "language": "JAVA",
-      "line": 52,
-      "offset": 2,
-      "length": 14,
+      "line": 89,
+      "offset": 1,
+      "length": 1,
       "code": {
-        "startLine": 50,
-        "length": 14,
-        "offset": 70,
-        "surroundingCode": "\t */\n\tpublic RpcReponse send(RpcRequest request) throws Exception {\n\t\tEventLoopGroup group = new NioEventLoopGroup();\n\n\t\ttry {"
+        "startLine": 87,
+        "length": 1,
+        "offset": 5,
+        "surroundingCode": "\t}\n\n\t@Override\n\tprotected void channelRead0(ChannelHandlerContext ctx, RpcReponse response) throws Exception {\n\t\tthis.response = response;"
       }
     }
   ],
@@ -249,5 +217,37 @@
     "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "87346302980808399"
+  "hash": "-3299064371468864804"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'ChannelHandlerContext'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 90,
+      "offset": 29,
+      "length": 21,
+      "code": {
+        "startLine": 88,
+        "length": 21,
+        "offset": 41,
+        "surroundingCode": "\n\t@Override\n\tprotected void channelRead0(ChannelHandlerContext ctx, RpcReponse response) throws Exception {\n\t\tthis.response = response;\n\t\t// 当数据获取完毕 通知主线程释放"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "181769810773023962"
 }]}
