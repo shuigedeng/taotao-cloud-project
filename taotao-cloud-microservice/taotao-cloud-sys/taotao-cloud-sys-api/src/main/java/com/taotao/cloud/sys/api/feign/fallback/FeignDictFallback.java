@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
-import com.taotao.cloud.sys.api.feign.response.DictResponse;
+import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -16,7 +16,7 @@ public class FeignDictFallback implements FallbackFactory<IFeignDictService> {
 		return new IFeignDictService() {
 
 			@Override
-			public DictResponse findByCode(String code) {
+			public FeignDictRes findByCode(String code) {
 				return null;
 			}
 		};

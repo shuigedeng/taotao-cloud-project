@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.feign.response.DictResponse;
+import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import com.taotao.cloud.sys.api.web.dto.dict.DictSaveDTO;
-import com.taotao.cloud.sys.api.web.vo.dict.DictQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -41,7 +40,7 @@ public interface IDictMapStruct {
 	 */
 	IDictMapStruct INSTANCE = Mappers.getMapper(IDictMapStruct.class);
 
-	DictResponse dictToDictResponse(Dict dict);
+	FeignDictRes dictToFeignDictRes(Dict dict);
 
 
 	///**
