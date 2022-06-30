@@ -623,8 +623,8 @@ public class RedisRepository {
 	/**
 	 * 根据参数 count 的值，移除列表中与参数 value 相等的元素。
 	 * <p>
-	 * count 的值可以是以下几种： count > 0 : 从表头开始向表尾搜索，移除与 value 相等的元素，数量为 count 。 count < 0 :
-	 * 从表尾开始向表头搜索，移除与 value 相等的元素，数量为 count 的绝对值。 count = 0 : 移除表中所有与 value 相等的值。
+	 * count 的值可以是以下几种： count 大于 0 : 从表头开始向表尾搜索，移除与 value 相等的元素，数量为 count 。 count 小于 0 :
+	 * 从表尾开始向表头搜索，移除与 value 相等的元素，数量为 count 的绝对值。 count 等于 0 : 移除表中所有与 value 相等的值。
 	 *
 	 * @param key   一定不能为 {@literal null}.
 	 * @param count 数量
@@ -3437,7 +3437,7 @@ public class RedisRepository {
 	 * 通过索引 获取list中的值
 	 *
 	 * @param key   键
-	 * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推； index<0时，-1，表尾，-2倒数第二个元素，依次类推
+	 * @param index 索引 index大于等于0时， 0 表头，1 第二个元素，依次类推； index小于0时，-1，表尾，-2倒数第二个元素，依次类推
 	 * @return Object
 	 * @since 2021-09-07 21:04:53
 	 */
