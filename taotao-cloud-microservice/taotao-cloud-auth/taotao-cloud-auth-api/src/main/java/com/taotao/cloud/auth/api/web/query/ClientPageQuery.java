@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.auth.api.query;
+package com.taotao.cloud.auth.api.web.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
- * 客户端查询query
+ * 客户端分页查询Query
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/5/14 17:05
  */
-@Schema(name = "ClientQuery", description = "客户端查询query")
-public class ClientQuery implements Serializable {
+@Schema(description = "客户端分页查询Query")
+public class ClientPageQuery {
 
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
-
+	private static final long serialVersionUID = 5953949488238258726L;
 	@Schema(description = "应用标识")
 	private String clientId;
 	@Schema(description = "应用名称")

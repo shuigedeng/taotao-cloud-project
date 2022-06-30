@@ -123,6 +123,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		"/admin/fonts/**",
 		"/admin/js/**",
 		"/admin/images/**",
+		"/api/test/**",
 		"/health/**"};
 
 	private Environment environment;

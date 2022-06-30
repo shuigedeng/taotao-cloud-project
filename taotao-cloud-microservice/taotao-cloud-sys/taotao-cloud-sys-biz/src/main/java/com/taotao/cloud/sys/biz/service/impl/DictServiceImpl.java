@@ -122,15 +122,15 @@ public class DictServiceImpl extends
 
 	@Override
 	public Dict findByCode(String code) {
-		Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
-		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
+		//Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
+		//return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
+		return new Dict();
 	}
 
 	//**************************************DUBBO**************************************
 
 	@Override
 	public DubboDictRes findByCode(Integer code) {
-		Optional<Dict> optionalDict = sysDictRepository.findByCode(String.valueOf(code));
-		return null;
+		return new DubboDictRes();
 	}
 }

@@ -31,6 +31,7 @@ import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
  * @since 2022-04-27 17:21:27
  */
 @AutoConfiguration
+@EnableDubboConfig
 @EnableConfigurationProperties({DubboProperties.class})
 @ConditionalOnProperty(prefix = DubboProperties.PREFIX, name = "enabled", matchIfMissing = true)
 public class DubboFeignAutoConfiguration implements InitializingBean {
