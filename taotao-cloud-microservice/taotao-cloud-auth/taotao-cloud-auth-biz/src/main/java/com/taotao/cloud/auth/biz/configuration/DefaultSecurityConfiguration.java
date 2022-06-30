@@ -100,7 +100,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		"/actuator/**",
 		"/index",
 		"/index.html",
-		"/auth/captcha/code",
+		// "/auth/captcha/code",
 		"/auth/qrcode/code",
 		"/auth/sms/phone",
 		"/doc.html",
@@ -109,6 +109,20 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		"/*.json",
 		"/*.min.js",
 		"/*.min.css",
+		"/**.js",
+		"/**.css",
+		"/**.json",
+		"/**.min.js",
+		"/**.min.css",
+		"/component/**",
+		"/actuator/health",
+		"/h2-console/**",
+		"/pear.config.json",
+		"/pear.config.yml",
+		"/admin/css/**",
+		"/admin/fonts/**",
+		"/admin/js/**",
+		"/admin/images/**",
 		"/health/**"};
 
 	private Environment environment;
@@ -146,13 +160,6 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
 	}
 
-	//@Bean
-	//WebSecurityCustomizer webSecurityCustomizer() {
-	//	return (web) -> web.ignoring()
-	//		.antMatchers(permitAllUrls)
-	//		.antMatchers("/webjars/**", "/user/login", "/login-error", "/index");
-	//}
-
 	private String exceptionMessage(AuthenticationException exception) {
 		String msg = "访问未授权";
 		if (exception instanceof AccountExpiredException) {
@@ -181,7 +188,8 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 		ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
 	};
 	AuthenticationFailureHandler authenticationFailureHandler = (request, response, accessDeniedException) -> {
-		LogUtil.error("用户权限不足", accessDeniedException);
+		LogUtil.error("账号或者密码错误", accessDeniedException);
+		ResponseUtil.fail(response, "账号或者密码错误");
 	};
 	AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> {
 		LogUtil.error("用户认证成功", authentication);
@@ -210,12 +218,13 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.formLogin(formLoginConfigurer -> {
 				formLoginConfigurer
 					.loginPage("/login")
+					.loginProcessingUrl("/login")
 					.successHandler(new RedirectLoginAuthenticationSuccessHandler())
 					.failureHandler(authenticationFailureHandler).permitAll()
 					.usernameParameter("username")
 					.passwordParameter("password");
 			})
-			//.userDetailsService(oAuth2UserDetailsService::loadOAuth2UserByUsername)
+			.userDetailsService(new MemberUserDetailsService())
 			.anonymous()
 			.and()
 			.csrf()
@@ -223,7 +232,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.logout()
 			.and()
 			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.NEVER)
+			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 			.and()
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
@@ -293,8 +302,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			// 微信网页授权  下面的参数是假的
 			.wechatWebclient("wxdf90xxx8e7f", "bf1306baaaxxxxx15eb02d68df5")
 			// 企业微信登录 下面的参数是假的
-			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8",
-				"1000005")
+			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
 			// 微信扫码登录 下面的参数是假的
 			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd")
 			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer ->
@@ -306,31 +314,32 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 					// 认证成功后的处理器
 					// 登录请求url
 					// .loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
-					.loginPage("/login")
+					//.loginPage("/login")
 					.successHandler((request, response, authentication) -> {
-						LogUtil.info("用户认证成功");
+						LogUtil.info("oAuth2Login用户认证成功");
 					})
 					// 认证失败后的处理器
 					.failureHandler((request, response, exception) -> {
-						LogUtil.info("用户认证失败");
-					}));
-		// // 配置授权服务器端点信息
-		// .authorizationEndpoint(authorizationEndpointCustomizer ->
-		// 	authorizationEndpointCustomizer
-		// 		// 授权端点的前缀基础url
-		// 		.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
-		// )
-		// // 配置获取access_token的端点信息
-		// .tokenEndpoint(tokenEndpointCustomizer ->
-		// 	tokenEndpointCustomizer
-		// 		.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
-		// )
-		// //配置获取userInfo的端点信息
-		// .userInfoEndpoint(userInfoEndpointCustomizer ->
-		// 	userInfoEndpointCustomizer
-		// 		.userService(new QQOauth2UserService())
-		// ));
+						LogUtil.info("oAuth2Login用户认证失败");
+					})
+					// // 配置授权服务器端点信息
+					// .authorizationEndpoint(authorizationEndpointCustomizer ->
+					// 	authorizationEndpointCustomizer
+					// 		// 授权端点的前缀基础url
+					// 		.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
+					// )
+					// // 配置获取access_token的端点信息
+					// .tokenEndpoint(tokenEndpointCustomizer ->
+					// 	tokenEndpointCustomizer
+					// 		.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
+					// )
+					// //配置获取userInfo的端点信息
+					// .userInfoEndpoint(userInfoEndpointCustomizer ->
+					// 	userInfoEndpointCustomizer
+					// 		.userService(new QQOauth2UserService())
+					// ));
 
+			);
 		return http.build();
 	}
 

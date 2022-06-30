@@ -42,7 +42,7 @@ import java.lang.annotation.Target;
 @Documented
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @MapperScan(basePackages = {"com.taotao.cloud.*.biz.mapper"})
-@EnableJpaRepositories(basePackages = {"com.taotao.cloud.customer.*.repository.inf"})
+@EnableJpaRepositories(basePackages = {"com.taotao.cloud.*.biz.repository.inf"})
 @ServletComponentScan
 @EnableTaoTaoCloudOauth2Resource
 @EnableEncryptableProperties

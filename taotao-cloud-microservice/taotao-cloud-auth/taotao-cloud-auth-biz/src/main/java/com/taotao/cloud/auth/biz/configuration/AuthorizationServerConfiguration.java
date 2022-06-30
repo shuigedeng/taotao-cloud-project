@@ -132,8 +132,7 @@ public class AuthorizationServerConfiguration {
 		http
 			.requestMatcher(authorizationServerConfigurerEndpointsMatcher)
 			.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-			.csrf(
-				csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
+			.csrf(csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
 			.formLogin()
 			.and()
 			.apply(authorizationServerConfigurer);
