@@ -12,7 +12,7 @@ dependencies {
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
     //https://search.maven.org/artifact/org.redisson/redisson-spring-data
-    api('org.redisson:redisson-spring-data:3.17.4'){
+    api('org.redisson:redisson-spring-data-27:3.17.4'){
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
     api('org.springframework.boot:spring-boot-starter-data-redis'){
@@ -21,6 +21,7 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-starter-cache'
     api "org.springframework:spring-messaging"
+
     //https://search.maven.org/artifact/net.sf.ehcache/ehcache
     api 'net.sf.ehcache:ehcache:2.10.9.2'
     //https://search.maven.org/artifact/com.github.ben-manes.caffeine/caffeine
