@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.api.feign;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.netty.annotation.PathVariable;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
-import com.taotao.cloud.sys.api.feign.response.DictResponse;
+import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import com.taotao.cloud.sys.biz.mapstruct.IDictMapStruct;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
@@ -49,9 +49,9 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@Operation(summary = "字典列表code查询", description = "字典列表请求异常")
 	@RequestLogger
 	@GetMapping("/code/{code}")
-	public DictResponse findByCode(@PathVariable String code) {
+	public FeignDictRes findByCode(@PathVariable String code) {
 		Dict dict = service().findByCode(code);
-		return IDictMapStruct.INSTANCE.dictToDictResponse(dict);
+		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 
 }

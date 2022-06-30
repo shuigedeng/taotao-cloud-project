@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
-import com.taotao.cloud.sys.api.feign.response.DictResponse;
+import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,11 +20,11 @@ public interface IFeignDictService {
 	 * 字典列表code查询
 	 *
 	 * @param code 代码
-	 * @return {@link DictResponse }
+	 * @return {@link FeignDictRes }
 	 * @since 2022-06-29 21:40:21
 	 */
 	@GetMapping("/sys/remote/dict/code/{code}")
-	DictResponse findByCode(@PathVariable String code);
+	FeignDictRes findByCode(@PathVariable String code);
 
 }
 

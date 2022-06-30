@@ -18,14 +18,13 @@ package com.taotao.cloud.sys.biz.service.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
-import com.taotao.cloud.sys.api.dubbo.response.DictDubboResponse;
+import com.taotao.cloud.sys.api.dubbo.response.DubboDictRes;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -130,7 +129,7 @@ public class DictServiceImpl extends
 	//**************************************DUBBO**************************************
 
 	@Override
-	public DictDubboResponse findByCode(Integer code) {
+	public DubboDictRes findByCode(Integer code) {
 		Optional<Dict> optionalDict = sysDictRepository.findByCode(String.valueOf(code));
 		return null;
 	}
