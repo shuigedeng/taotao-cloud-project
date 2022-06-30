@@ -30,11 +30,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * 抑制java9 module 报错
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+ * --add-opens java.base/java.lang.invoke=ALL-UNNAMED
  * --add-opens java.base/java.util=ALL-UNNAMED
  * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
  * --add-opens java.base/java.math=ALL-UNNAMED
- * --add-opens java.desktop/sun.awt=ALL-UNNAMED
+ * --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED
  * --add-exports java.desktop/sun.awt=ALL-UNNAMED
+ * --add-exports java.desktop/sun.font=ALL-UNNAMED
+ * --add-opens java.desktop/sun.awt=ALL-UNNAMED
+ * --add-opens java.desktop/sun.font=ALL-UNNAMED
  *
  * @author shuigedeng
  * @version 2022.03

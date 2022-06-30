@@ -270,6 +270,7 @@ arthas:
 
 dubbo:
   application:
+    #id: ${spring.application.name}
     name: ${spring.application.name}
     version: ${taotaoCloudVersion}
     #owner: 981376577
@@ -277,14 +278,15 @@ dubbo:
     #organization: taotao-cloud
     #metadata-type: local
     #environment: dev
-    #qos-enable: false
+    # qos服务 通过一些命令返回响应结果、达到动态控制目的
+    #qos-port: 20880
+    #qos-enable: true
     #qos-accept-foreign-ip: false
-    #logger: slf4j
+    #logger: logback
   cloud:
     subscribed-services: 'taotao-cloud-order,taotao-cloud-goods'
     registry-type: dubbo-cloud
   registry:
-    #address: nacos://192.168.10.200:8000
     address: nacos://192.168.10.200:8000?group=DUBBO_REGISTRY_GROUP&namespace=343852d5-6e0d-4e27-8719-7866452e5ab0
     timeout: 15000
     #username:
@@ -296,18 +298,23 @@ dubbo:
     #register: true
     #weight: 10
   protocol:
+    id: dubbo
     name: dubbo
     port: -1
     ssl-enabled: false
     #serialization: kryo
+    #status: server
+    payload: 83886080
   scan:
-    base-packages: com.taotao.cloud.sys.biz.service.impl
+    base-packages: com.taotao.cloud.sys.biz.impl
   provider:
     id: dubbo
+    timeout: 300000
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
   consumer:
     check: false
+    timeout: 300000
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
   #module:

@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.api.feign;
 
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.netty.annotation.PathVariable;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import com.taotao.cloud.sys.biz.mapstruct.IDictMapStruct;
@@ -46,8 +47,8 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	/**
 	 * @see IFeignDictService#findByCode(String)
 	 */
+	@NotAuth
 	@Operation(summary = "字典列表code查询", description = "字典列表请求异常")
-	@RequestLogger
 	@GetMapping("/code/{code}")
 	public FeignDictRes findByCode(@PathVariable String code) {
 		Dict dict = service().findByCode(code);

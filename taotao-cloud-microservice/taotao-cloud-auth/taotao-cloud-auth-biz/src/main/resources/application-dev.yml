@@ -115,6 +115,64 @@ redisson:
     #(集群,哨兵,云托管模特特有) 对Redis集群节点状态扫描的时间间隔。单位是毫秒。
     scanInterval: 1000
 
+dubbo:
+  application:
+    #id: ${spring.application.name}
+    name: ${spring.application.name}
+    version: ${taotaoCloudVersion}
+    #owner: 981376577
+    #architecture: china
+    #organization: taotao-cloud
+    #metadata-type: local
+    #environment: dev
+    # qos服务 通过一些命令返回响应结果、达到动态控制目的
+    #qos-port: 20880
+    #qos-enable: true
+    #qos-accept-foreign-ip: false
+    #logger: slf4j
+  cloud:
+    subscribed-services: 'taotao-cloud-sys'
+    registry-type: dubbo-cloud
+  registry:
+    address: nacos://192.168.10.200:8000?group=DUBBO_REGISTRY_GROUP&namespace=343852d5-6e0d-4e27-8719-7866452e5ab0
+    timeout: 15000
+    #username:
+    #password:
+    #port:
+    #protocol:
+    #version: ${taotaoCloudVersion}
+    #check: true
+    #register: true
+    #weight: 10
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: -1
+    ssl-enabled: false
+    #serialization: kryo
+    #status: server
+    #payload: 83886080
+  scan:
+    base-packages: com.taotao.cloud.auth.biz.service
+  provider:
+    id: dubbo
+    timeout: 300000
+    loadbalance: roundrobin
+    version: ${taotaoCloudVersion}
+  consumer:
+    check: false
+    timeout: 300000
+    loadbalance: roundrobin
+    version: ${taotaoCloudVersion}
+  #module:
+  #  name: ${spring.application.name}
+  #monitor:
+  #  id: ${spring.application.name}
+  #metadata-report:
+  #  id: ${spring.application.name}
+  config-center:
+    check: false
+
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
   # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
@@ -403,6 +461,8 @@ taotao:
       enabled: true
     core:
       env: dev
+    dubbo:
+      enabled: true
     sms:
       enabled: true
       type: aliyun
