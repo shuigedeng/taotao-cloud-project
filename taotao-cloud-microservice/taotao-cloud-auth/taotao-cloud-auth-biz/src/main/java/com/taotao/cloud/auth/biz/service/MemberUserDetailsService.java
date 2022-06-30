@@ -44,7 +44,8 @@ public class MemberUserDetailsService implements UserDetailsService {
 			.userId(1L)
 			.username("taotao")
 			.nickname("taotao")
-			.password("$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
+			// 123456
+			.password("$2a$10$FefUzIWJ4ukySUBNtSiw1ezdAutiHihXm4/xgrkhogr1.P0rJ18v2")
 			.phone("15730445331")
 			.mobile("15730445331")
 			.deptId("1")

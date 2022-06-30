@@ -2,6 +2,8 @@ package com.taotao.cloud.auth.biz.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.MediaType;
@@ -25,9 +27,6 @@ import java.util.Collections;
  * @since 1.0.0
  */
 public class RedirectLoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-    protected final Log logger = LogFactory.getLog(this.getClass());
-    private final ObjectMapper objectMapper = new ObjectMapper()
-            .registerModule(new JavaTimeModule());
     private RequestCache requestCache;
     private static final String defaultTargetUrl = "/";
     private final String redirect;
@@ -49,7 +48,8 @@ public class RedirectLoginAuthenticationSuccessHandler implements Authentication
 
         String targetUrl = savedRequest == null ? this.redirect : savedRequest.getRedirectUrl();
         clearAuthenticationAttributes(request);
-        //this.write(RestBody.okData(Collections.singletonMap("targetUrl", targetUrl), "登录成功！"), response);
+
+	    ResponseUtil.success(response, targetUrl);
     }
 
     public void setRequestCache(RequestCache requestCache) {
@@ -62,20 +62,4 @@ public class RedirectLoginAuthenticationSuccessHandler implements Authentication
             session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         }
     }
-
-    //private void write(Rest<?> body, HttpServletResponse response) throws IOException {
-    //    if (response.isCommitted()) {
-    //        logger.debug("Response has already been committed");
-    //        return;
-    //    }
-    //    response.setStatus(HttpServletResponse.SC_OK);
-    //    response.setCharacterEncoding("utf-8");
-    //    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-	//
-    //    String resBody = objectMapper.writeValueAsString(body);
-    //    PrintWriter printWriter = response.getWriter();
-    //    printWriter.print(resBody);
-    //    printWriter.flush();
-    //    printWriter.close();
-    //}
 }

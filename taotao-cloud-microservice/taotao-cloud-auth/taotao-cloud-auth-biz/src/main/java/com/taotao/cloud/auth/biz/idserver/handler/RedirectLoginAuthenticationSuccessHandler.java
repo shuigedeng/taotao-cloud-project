@@ -28,8 +28,7 @@ import java.util.Collections;
  */
 public class RedirectLoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     protected final Log logger = LogFactory.getLog(this.getClass());
-    private final ObjectMapper objectMapper = new ObjectMapper()
-            .registerModule(new JavaTimeModule());
+    private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
     private RequestCache requestCache;
     private static final String defaultTargetUrl = "/";
     private final String redirect;

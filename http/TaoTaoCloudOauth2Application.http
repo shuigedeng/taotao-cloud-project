@@ -64,3 +64,8 @@ grant_type=refresh_token&client_id=client&client_secret=123456&refresh_token=H-M
 GET http://localhost:33336/messages
 
 
+
+
+###
+GET http://localhost:33336/oauth2/authorize?client_id=e4da4a32-592b-46f0-ae1d-784310e88423&client_secret=secret&response_type=code&redirect_uri=http://127.0.0.1:8080/login/oauth2/code/gatewayclient
+

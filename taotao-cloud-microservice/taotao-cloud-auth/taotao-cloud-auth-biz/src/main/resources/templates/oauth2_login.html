@@ -171,10 +171,10 @@
                     btn.stop(function () {
                         if (result.code === 200) {
                             popup.success(result.msg, function () {
-                                location.href = result.data.targetUrl;
+                                location.href = result.data;
                             })
-                        } else if (result.code === 401) {
-                            popup.failure(result.msg);
+                        } else if (result.code === 500) {
+                            popup.failure(result.errorMsg);
                         }
                     })
                 }
@@ -196,10 +196,10 @@
                         btn.stop(function () {
                             if (result.code === 200) {
                                 popup.success(result.msg, function () {
-                                    location.href = result.data.targetUrl;
+                                    location.href = result.data;
                                 })
-                            } else if (result.code === 401) {
-                                popup.failure(result.msg);
+                            } else if (result.code === 500) {
+                                popup.failure(result.errorMsg);
                             }
                         })
                     }

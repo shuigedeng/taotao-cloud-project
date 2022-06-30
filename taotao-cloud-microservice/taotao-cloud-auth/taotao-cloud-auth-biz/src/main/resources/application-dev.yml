@@ -275,10 +275,14 @@ spring:
             client-id: xxxx
             client-secret: xxxx
           gitee:
+            provider: gitee
+            client-name: gitee
             client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
             client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
             authorization-grant-type: authorization_code
-            redirect-uri: http://cf4b-183-67-94-181.ngrok.io/login/oauth2/code/gitee
+            redirect-uri: http://1fe9ccce.cpolar.cn/login/oauth2/code/gitee
+            scope:
+              - user_info
           qq:
             client-id: xxx
             client-secret: xxxx
@@ -300,6 +304,7 @@ spring:
           gitee:
             authorization-uri: https://gitee.com/oauth/authorize
             token-uri: https://gitee.com/oauth/token
+            user-name-attribute: id
             user-info-uri: https://gitee.com/api/v5/user
           qq:
             authorization-uri: https://graph.qq.com/oauth2.0/authorize
@@ -487,50 +492,3 @@ oauth2:
 jwk:
   set:
     uri: http://127.0.0.1:33336/oauth2/jwks
-
-logback:
-  access:
-    # Whether to enable autoconfiguration.
-    # Defaults to true.
-    enabled: true
-    # The location of the configuration file.
-    # Specify a URL that starts with "classpath:" or "file:".
-    # Auto-detected by default:
-    #   1. "classpath:logback-access-test.xml"
-    #   2. "classpath:logback-access.xml"
-    #   3. "classpath:logback-access-test-spring.xml"
-    #   4. "classpath:logback-access-spring.xml"
-    #   5. "classpath:dev/akkinoc/spring/boot/logback/access/logback-access-spring.xml"
-    config: classpath:logback/logback-access.xml
-    # The strategy to change the behavior of IAccessEvent.getLocalPort.
-    # Defaults to "server".
-    #   "local":
-    #     Returns the port number of the interface on which the request was received.
-    #     Equivalent to ServletRequest.getLocalPort when using a servlet web server.
-    #   "server":
-    #     Returns the port number to which the request was sent.
-    #     Equivalent to ServletRequest.getServerPort when using a servlet web server.
-    #     Helps to identify the destination port number used by the client when forward headers are enabled.
-    local-port-strategy: server
-    # The properties for the Tomcat web server.
-    tomcat:
-      # Whether to enable the request attributes to work with RemoteIpValve.
-      # Defaults to the presence of RemoteIpValve enabled by the property "server.forward-headers-strategy=native".
-      request-attributes-enabled: true
-    # The properties for the Undertow web server.
-    undertow:
-      # Whether to enable UndertowOptions.RECORD_REQUEST_START_TIME.
-      # Used to measure IAccessEvent.getElapsedTime and IAccessEvent.getElapsedSeconds.
-      # Defaults to true.
-      record-request-start-time: true
-    # The properties for the tee filter.
-    tee-filter:
-      # Whether to enable the tee filter.
-      # Defaults to false.
-      enabled: true
-      # The host names to activate.
-      # By default, all hosts are activated.
-      includes:
-      # The host names to deactivate.
-      # By default, all hosts are activated.
-      excludes:

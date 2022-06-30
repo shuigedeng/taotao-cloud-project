@@ -25,16 +25,17 @@ spring:
         namespace: 343852d5-6e0d-4e27-8719-7866452e5ab0
         username: nacos
         password: nacos
-        cluster-name: SC
+        cluster-name: CQ
+        naming-load-cache-at-start: false
       config:
         enabled: true
         server-addr: 192.168.10.200:8000
         namespace: 343852d5-6e0d-4e27-8719-7866452e5ab0
-        file-extension: yml
-        cluster-name: SC
-        group: TAOTAO_CLOUD_GROUP
         username: nacos
         password: nacos
+        group: TAOTAO_CLOUD_GROUP
+        file-extension: yml
+        cluster-name: CQ
     sentinel:
       enabled: true
       eager: true
@@ -104,11 +105,5 @@ spring:
       flow:
         cold-factor: 3
       log:
-        dir: ${user.home}/sentinel/log
+        dir: ${user.home}/logs/${spring.application.name}/sentinel
         switch-pid: false
-      scg:
-        fallback:
-          mode: response
-          response-status: 200
-          response-body: "{'data': null, 'code': 500,'message': '访问频繁,进入系统熔断'}"
-
