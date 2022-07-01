@@ -46,7 +46,7 @@ public class MessagesController {
 	@Autowired
 	private IFeignDictService feignDictService;
 
-	@DubboReference
+	@DubboReference(check=false)
 	private IDubboDictService dubboDictService;
 
 	@Operation(summary = "测试消息", description = "测试消息")
