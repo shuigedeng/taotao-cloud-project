@@ -19,9 +19,7 @@ import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.dtflys.forest.springboot.annotation.ForestScan;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * TaoTaoCloudSysApplication
