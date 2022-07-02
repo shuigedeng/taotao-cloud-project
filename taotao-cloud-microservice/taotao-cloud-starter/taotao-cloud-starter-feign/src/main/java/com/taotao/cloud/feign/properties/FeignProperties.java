@@ -35,6 +35,10 @@ public class FeignProperties {
 
 	private boolean enabled = false;
 
+	private boolean http = false;
+
+	private boolean okhttp = true;
+
 	public boolean getEnabled() {
 		return enabled;
 	}
@@ -42,4 +46,22 @@ public class FeignProperties {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public boolean getHttp() {
+		return http;
+	}
+
+	public void setHttp(boolean http) {
+		this.http = http;
+	}
+
+	public boolean getOkhttp() {
+		return okhttp;
+	}
+
+	public void setOkhttp(boolean okhttp) {
+		this.okhttp = okhttp;
+	}
+
+
 }

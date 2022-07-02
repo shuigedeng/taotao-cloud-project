@@ -30,11 +30,11 @@ public class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
 	private final static String KEY_DEFAULT = "default";
 
-	private ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSuppliers;
+	private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSuppliers;
 
-	private String serviceId;
+	private final String serviceId;
 
-	private IRuleChooser ruleChooser;
+	private final IRuleChooser ruleChooser;
 
 	public VersionLoadBalancer(
 		ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSuppliers, String serviceId,
@@ -106,6 +106,7 @@ public class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 				return new DefaultResponse(serviceInstance);
 			}
 		}
+
 		// 返回空的返回体
 		return new EmptyResponse();
 	}

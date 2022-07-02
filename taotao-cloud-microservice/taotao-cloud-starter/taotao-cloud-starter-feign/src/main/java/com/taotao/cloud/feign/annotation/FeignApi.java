@@ -1,5 +1,6 @@
+
 /*
- * Copyright (c) 2016-2020 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +15,24 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.feign.http;
+package com.taotao.cloud.feign.annotation;
 
-import org.slf4j.LoggerFactory;
-import org.springframework.cloud.openfeign.FeignLoggerFactory;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * 信息记录器工厂
+ * <p>Description: 仅仅作为标识Feign api接口 </p>
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-27 17:24:45
+ * @version 2022.07
+ * @since 2022-07-02 09:30:27
  */
-public class InfoFeignLoggerFactory implements FeignLoggerFactory {
-    @Override
-    public feign.Logger create(Class<?> type) {
-        return new InfoSlf4jFeignLogger(LoggerFactory.getLogger(type));
-    }
+@Target({ElementType.METHOD,ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface FeignApi {
+
 }

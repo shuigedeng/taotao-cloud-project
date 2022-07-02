@@ -13,45 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.exception;
-
-import com.taotao.cloud.common.enums.ResultEnum;
+package com.taotao.cloud.feign.model;
 
 import java.io.Serial;
+import java.io.Serializable;
 
 /**
- * FeignException 
+ * FeignExceptionResult
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:09:24
+ * @version 2022.07
+ * @since 2022-07-02 10:07
  */
-public class FeignException extends BaseException {
+public class FeignExceptionResult implements Serializable {
 
 	@Serial
-	private static final long serialVersionUID = 6610083281801529147L;
+	private static final long serialVersionUID = -3685249101751401211L;
 
-	public FeignException(String message) {
-		super(message);
+	private String msg;
+
+
+	public FeignExceptionResult(String msg) {
+		this.msg = msg;
 	}
 
-	public FeignException(Integer code, String message) {
-		super(code, message);
+	public String getMsg() {
+
+		return msg;
 	}
 
-	public FeignException(String message, Throwable e) {
-		super(message, e);
-	}
-
-	public FeignException(Integer code, String message, Throwable e) {
-		super(code, message, e);
-	}
-
-	public FeignException(ResultEnum result) {
-		super(result);
-	}
-
-	public FeignException(ResultEnum result, Throwable e) {
-		super(result, e);
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 }

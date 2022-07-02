@@ -270,7 +270,7 @@ arthas:
 
 dubbo:
   scan:
-    base-packages: com.taotao.cloud.sys.biz.service.impl
+    base-packages: com.taotao.cloud.sys.biz.service.impl.dubbo
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}

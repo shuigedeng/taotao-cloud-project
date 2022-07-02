@@ -39,10 +39,9 @@ import org.springframework.stereotype.Service;
  */
 @AllArgsConstructor
 @Service
-@DubboService(interfaceClass = IDubboDictService.class)
 public class DictServiceImpl extends
 	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
-	implements IDubboDictService, IDictService {
+	implements IDictService {
 
 	private final DictRepository sysDictRepository;
 
@@ -125,12 +124,5 @@ public class DictServiceImpl extends
 		//Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
 		//return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
 		return new Dict();
-	}
-
-	//**************************************DUBBO**************************************
-
-	@Override
-	public DubboDictRes findByCode(Integer code) {
-		return new DubboDictRes();
 	}
 }

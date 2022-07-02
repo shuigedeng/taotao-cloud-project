@@ -49,10 +49,9 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2021-10-09 20:50:41
  */
 @Service
-@DubboService(interfaceClass = IDubboUserService.class, validation = "true")
 public class UserServiceImpl extends
 	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
-	implements IDubboUserService, IUserService {
+	implements IUserService {
 
 	private final static QUser USER = QUser.user;
 

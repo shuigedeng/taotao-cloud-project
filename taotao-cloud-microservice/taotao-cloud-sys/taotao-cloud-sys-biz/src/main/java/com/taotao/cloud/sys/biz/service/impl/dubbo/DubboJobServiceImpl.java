@@ -1,10 +1,10 @@
-package com.taotao.cloud.sys.biz.service.impl;
+package com.taotao.cloud.sys.biz.service.impl.dubbo;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Job;
-import com.taotao.cloud.sys.biz.mapper.IJobMapper;
-import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
-import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
 import com.taotao.cloud.sys.api.dubbo.IDubboJobService;
+import com.taotao.cloud.sys.biz.mapper.IJobMapper;
+import com.taotao.cloud.sys.biz.model.entity.system.Job;
+import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
+import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
 import com.taotao.cloud.sys.biz.service.IJobService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -18,9 +18,10 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class JobServiceImpl extends
+@DubboService(interfaceClass =IDubboJobService.class , validation = "true")
+public class DubboJobServiceImpl extends
 	BaseSuperServiceImpl<IJobMapper, Job,JobRepository, IJobRepository, Long>
-	implements IJobService {
+	implements IDubboJobService {
 
 
 }

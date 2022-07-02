@@ -20,14 +20,12 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.exception.FeignException;
+import com.taotao.cloud.common.exception.FeignErrorException;
 import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.feign.execption.FeignDecodeException;
 import feign.codec.DecodeException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -43,12 +41,10 @@ import javax.validation.ValidationException;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -57,7 +53,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -70,10 +65,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * @since 2021-09-02 21:26:19
  */
 @AutoConfiguration
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"}, annotations = {
-		RestController.class, Controller.class})
+@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
-// @RestControllerAdvice
+//@RestControllerAdvice
 public class ExceptionConfiguration implements InitializingBean {
 
 	@Override
@@ -87,10 +81,10 @@ public class ExceptionConfiguration implements InitializingBean {
 		return Result.fail(e.getMessage(), e.getCode());
 	}
 
-	@ExceptionHandler({FeignException.class})
-	public Result<String> feignException(NativeWebRequest req, FeignException e) {
+	@ExceptionHandler({FeignErrorException.class})
+	public Result<String> feignException(NativeWebRequest req, FeignErrorException e) {
 		printLog(req, e);
-		return Result.fail(ResultEnum.ERROR);
+		return Result.fail(ResultEnum.INNER_ERROR);
 	}
 
 	@ExceptionHandler({LockException.class})
@@ -173,13 +167,6 @@ public class ExceptionConfiguration implements InitializingBean {
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
 		DataIntegrityViolationException e) {
-		printLog(req, e);
-		return Result.fail(ResultEnum.ERROR);
-	}
-
-	@ExceptionHandler({FeignDecodeException.class})
-	public Result<String> handleFeignDecodeException(NativeWebRequest req,
-		FeignDecodeException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
