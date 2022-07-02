@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.support.image.enums;
+package com.taotao.cloud.sys.biz.support.image_combiner.enums;
 
 /**
  * ZoomMode 

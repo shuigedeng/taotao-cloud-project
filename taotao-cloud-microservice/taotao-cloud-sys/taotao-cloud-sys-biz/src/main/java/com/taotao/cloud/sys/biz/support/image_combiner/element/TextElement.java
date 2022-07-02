@@ -1,6 +1,6 @@
-package com.taotao.cloud.sys.biz.support.image.element;
+package com.taotao.cloud.sys.biz.support.image_combiner.element;
 
-import com.taotao.cloud.sys.biz.support.image.enums.LineAlign;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.LineAlign;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;

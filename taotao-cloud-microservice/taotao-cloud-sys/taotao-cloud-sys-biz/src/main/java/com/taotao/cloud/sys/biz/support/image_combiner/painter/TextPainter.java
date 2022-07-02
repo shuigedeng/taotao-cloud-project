@@ -1,9 +1,9 @@
-package com.taotao.cloud.sys.biz.support.image.painter;
+package com.taotao.cloud.sys.biz.support.image_combiner.painter;
 
 
-import com.taotao.cloud.sys.biz.support.image.element.CombineElement;
-import com.taotao.cloud.sys.biz.support.image.element.TextElement;
-import com.taotao.cloud.sys.biz.support.image.enums.Direction;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.CombineElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.TextElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.Direction;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.font.TextAttribute;

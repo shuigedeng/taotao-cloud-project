@@ -11,20 +11,18 @@ dependencies {
 	implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
 	implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
 
-	implementation "org.apache.pdfbox:pdfbox:2.0.24"
+	implementation "org.apache.pdfbox:pdfbox:2.0.26"
 	implementation "io.soabase.record-builder:record-builder-core:33"
 
-	implementation "com.google.protobuf:protobuf-java:3.18.2"
-	implementation 'com.google.protobuf:protobuf-java-util:3.11.0'
-	implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.2'
+	implementation "com.google.protobuf:protobuf-java:3.21.2"
+	implementation 'com.google.protobuf:protobuf-java-util:3.21.2'
+	implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.4'
 
-	implementation 'io.protostuff:protostuff-core:1.4.0'
+	implementation 'io.protostuff:protostuff-core:1.8.0'
 	implementation 'io.protostuff:protostuff-runtime:1.4.0'
 
-	implementation "com.belerweb:pinyin4j:2.5.0"
-
-	implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.19'
-	implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.2.22'
+	implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.24'
+	implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.5'
 
 	implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
 	implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'

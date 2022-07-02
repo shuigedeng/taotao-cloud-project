@@ -9,27 +9,41 @@ dependencies {
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
-    implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+    //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
+    implementation 'org.apache.pdfbox:pdfbox:2.0.26'
+    //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
     implementation 'io.soabase.record-builder:record-builder-core:33'
 
-    implementation 'com.google.protobuf:protobuf-java:3.18.2'
-    implementation 'com.google.protobuf:protobuf-java-util:3.11.0'
-    implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.2'
+    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
+    implementation 'com.google.protobuf:protobuf-java:3.21.2'
+    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
+    implementation 'com.google.protobuf:protobuf-java-util:3.21.2'
+    //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
+    implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.4'
 
-    implementation 'io.protostuff:protostuff-core:1.4.0'
-    implementation 'io.protostuff:protostuff-runtime:1.4.0'
+    //https://search.maven.org/artifact/io.protostuff/protostuff-core
+    implementation 'io.protostuff:protostuff-core:1.8.0'
+    //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
+    implementation 'io.protostuff:protostuff-runtime:1.8.0'
 
-    implementation "com.belerweb:pinyin4j:2.5.0"
+    //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
+    implementation 'io.github.tokenjan:pinyin4j:2.6.1'
 
-    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.23'
+    //https://search.maven.org/artifact/com.dtflys.forest/forest-spring-boot-starter
+    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.24'
+    //https://search.maven.org/artifact/com.github.lianjiatech/retrofit-spring-boot-starter
     implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.5'
 
+    //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-retrofit
     implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
+    //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-okhttp
     implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
 
-    implementation 'wiki.xsx:x-easypdf:2.8.1'
+    //https://search.maven.org/artifact/wiki.xsx/x-easypdf
+    implementation 'wiki.xsx:x-easypdf:2.9.1'
 
-    implementation 'io.github.memorydoc:gobrs-async-starter:1.1.7-RELEASE'
+    //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
+    implementation 'io.github.memorydoc:gobrs-async-starter:1.2.0-RELEASE'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'

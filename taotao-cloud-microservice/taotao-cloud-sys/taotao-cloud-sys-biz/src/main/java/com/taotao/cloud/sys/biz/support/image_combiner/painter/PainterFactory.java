@@ -1,10 +1,10 @@
-package com.taotao.cloud.sys.biz.support.image.painter;
+package com.taotao.cloud.sys.biz.support.image_combiner.painter;
 
 
-import com.taotao.cloud.sys.biz.support.image.element.CombineElement;
-import com.taotao.cloud.sys.biz.support.image.element.ImageElement;
-import com.taotao.cloud.sys.biz.support.image.element.RectangleElement;
-import com.taotao.cloud.sys.biz.support.image.element.TextElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.CombineElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.ImageElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.RectangleElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.TextElement;
 
 /**
  * PainterFactory
