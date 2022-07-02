@@ -1,0 +1,17 @@
+package com.taotao.cloud.sys.biz.support.image.painter;
+
+
+import com.taotao.cloud.sys.biz.support.image.element.CombineElement;
+import java.awt.Graphics2D;
+import java.io.IOException;
+
+/**
+ * IPainter 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-24 09:48:03
+ */
+public interface IPainter {
+    void draw(Graphics2D g, CombineElement element, int canvasWidth) throws IOException, Exception;
+}

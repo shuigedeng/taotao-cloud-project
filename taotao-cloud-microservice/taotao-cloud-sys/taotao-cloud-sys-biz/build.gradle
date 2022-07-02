@@ -41,6 +41,11 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter:1.16.2'
+
+    testImplementation 'org.assertj:assertj-guava:3.4.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.testng:testng:7.5'
+    testImplementation 'com.google.inject:guice:5.1.0'
 }
 
 tasks.named('test') {

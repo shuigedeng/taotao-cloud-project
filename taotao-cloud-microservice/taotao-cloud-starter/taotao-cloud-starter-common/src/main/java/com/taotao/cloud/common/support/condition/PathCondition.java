@@ -11,3 +11,4 @@ import java.nio.file.Path;
  */
 public interface PathCondition extends ICondition<Path> {
 }
+
