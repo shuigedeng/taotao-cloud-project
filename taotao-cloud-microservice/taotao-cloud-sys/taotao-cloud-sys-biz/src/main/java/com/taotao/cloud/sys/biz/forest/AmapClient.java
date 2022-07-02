@@ -5,6 +5,7 @@ import com.dtflys.forest.annotation.DataVariable;
 import com.dtflys.forest.annotation.Get;
 import com.dtflys.forest.annotation.JSONBody;
 import com.dtflys.forest.annotation.Post;
+import com.dtflys.forest.annotation.Var;
 import com.dtflys.forest.annotation.XMLBody;
 import com.dtflys.forest.callback.OnProgress;
 import com.dtflys.forest.extensions.BasicAuth;
@@ -107,7 +108,7 @@ public interface AmapClient {
 
 	@Post("/hello/user?username={username}")
 	@BasicAuth(username = "{username}", password = "bar")
-	String send(@DataVariable("username") String username);
+	String send(@Var("username") String username);
 
 	@OAuth2(
 		tokenUri = "/auth/oauth/token",

@@ -1,7 +1,7 @@
-package com.taotao.cloud.sys.biz.support.image.element;
+package com.taotao.cloud.sys.biz.support.image_combiner.element;
 
 
-import com.taotao.cloud.sys.biz.support.image.enums.GradientDirection;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.GradientDirection;
 import java.awt.Color;
 
 /**

@@ -1,14 +1,14 @@
-package com.taotao.cloud.sys.biz.support.image;
+package com.taotao.cloud.sys.biz.support.image_combiner;
 
 
-import com.taotao.cloud.sys.biz.support.image.element.CombineElement;
-import com.taotao.cloud.sys.biz.support.image.element.ImageElement;
-import com.taotao.cloud.sys.biz.support.image.element.RectangleElement;
-import com.taotao.cloud.sys.biz.support.image.element.TextElement;
-import com.taotao.cloud.sys.biz.support.image.enums.OutputFormat;
-import com.taotao.cloud.sys.biz.support.image.enums.ZoomMode;
-import com.taotao.cloud.sys.biz.support.image.painter.IPainter;
-import com.taotao.cloud.sys.biz.support.image.painter.PainterFactory;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.CombineElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.ImageElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.RectangleElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.TextElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.OutputFormat;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.ZoomMode;
+import com.taotao.cloud.sys.biz.support.image_combiner.painter.IPainter;
+import com.taotao.cloud.sys.biz.support.image_combiner.painter.PainterFactory;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -117,24 +117,26 @@ public class ImageCombiner {
         int canvasWidth = 0;
         int canvasHeight = 0;
 
-        switch (zoomMode) {
-            case Origin:
-                canvasWidth = bgImage.getWidth();
-                canvasHeight = bgImage.getHeight();
-                break;
-            case Width:
-                canvasWidth = width;
-                canvasHeight = bgImage.getHeight() * canvasWidth / bgImage.getWidth();
-                break;
-            case Height:
-                canvasHeight = height;
-                canvasWidth = bgImage.getWidth() * canvasHeight / bgImage.getHeight();
-                break;
-            case WidthHeight:
-                canvasHeight = width;
-                canvasWidth = height;
-                break;
-        }
+	    switch (zoomMode) {
+		    case Origin -> {
+			    canvasWidth = bgImage.getWidth();
+			    canvasHeight = bgImage.getHeight();
+		    }
+		    case Width -> {
+			    canvasWidth = width;
+			    canvasHeight = bgImage.getHeight() * canvasWidth / bgImage.getWidth();
+		    }
+		    case Height -> {
+			    canvasHeight = height;
+			    canvasWidth = bgImage.getWidth() * canvasHeight / bgImage.getHeight();
+		    }
+		    case WidthHeight -> {
+			    canvasHeight = width;
+			    canvasWidth = height;
+		    }
+		    default -> {
+		    }
+	    }
 
         this.combineElements.add(bgImageElement);
         this.canvasWidth = canvasWidth;

@@ -14,9 +14,12 @@ dependencies {
     implementation(project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api'))
 
-    implementation 'org.webjars:jquery:3.4.1'
-    implementation 'org.webjars:bootstrap:3.4.1'
-    implementation 'org.webjars:webjars-locator-core'
+    //https://search.maven.org/artifact/org.webjars/jquery
+    implementation 'org.webjars:jquery:3.6.0'
+    //https://search.maven.org/artifact/org.webjars/bootstrap
+    implementation 'org.webjars:bootstrap:5.1.3'
+    //https://search.maven.org/artifact/org.webjars/webjars-locator-core
+    implementation 'org.webjars:webjars-locator-core:0.5.2'
 
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -34,10 +37,13 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
     implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.3.1'
 
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.7'
-    implementation 'com.nimbusds:oauth2-oidc-sdk:9.3'
+    //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.23'
+    //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
+    implementation 'com.nimbusds:oauth2-oidc-sdk:9.37.2'
 
     implementation 'org.apache.commons:commons-collections4'
 

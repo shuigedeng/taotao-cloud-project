@@ -1,12 +1,12 @@
-package com.taotao.cloud.common.image_combiner;
+package com.taotao.cloud.sys.biz.image_combiner;
 
-import com.taotao.cloud.common.image.combiner.ImageCombiner;
-import com.taotao.cloud.common.image.combiner.element.TextElement;
-import com.taotao.cloud.common.image.combiner.enums.Direction;
-import com.taotao.cloud.common.image.combiner.enums.GradientDirection;
-import com.taotao.cloud.common.image.combiner.enums.LineAlign;
-import com.taotao.cloud.common.image.combiner.enums.OutputFormat;
-import com.taotao.cloud.common.image.combiner.enums.ZoomMode;
+import com.taotao.cloud.sys.biz.support.image_combiner.ImageCombiner;
+import com.taotao.cloud.sys.biz.support.image_combiner.element.TextElement;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.Direction;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.GradientDirection;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.LineAlign;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.OutputFormat;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.ZoomMode;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;

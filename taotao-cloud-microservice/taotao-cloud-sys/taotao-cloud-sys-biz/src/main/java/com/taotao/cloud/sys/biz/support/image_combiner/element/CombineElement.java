@@ -1,7 +1,7 @@
-package com.taotao.cloud.sys.biz.support.image.element;
+package com.taotao.cloud.sys.biz.support.image_combiner.element;
 
 
-import com.taotao.cloud.sys.biz.support.image.enums.Direction;
+import com.taotao.cloud.sys.biz.support.image_combiner.enums.Direction;
 
 /**
  * CombineElement
