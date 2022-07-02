@@ -52,10 +52,9 @@ import java.util.Set;
  * @since 2021-10-09 20:41:23
  */
 @Service
-@DubboService(interfaceClass = IDubboMenuService.class)
 public class MenuServiceImpl extends
 	BaseSuperServiceImpl<IMenuMapper, Menu, MenuRepository, IMenuRepository, Long>
-	implements IDubboMenuService, IMenuService {
+	implements IMenuService {
 
 	@Autowired
 	private IRoleService sysRoleService;
@@ -173,11 +172,6 @@ public class MenuServiceImpl extends
 		//return ForestNodeMerger.merge(TreeUtil.buildTree(menus));
 	}
 
-	@Override
-	public List<MenuQueryRequest> queryAllById(Long id) {
-		List<Menu> all = ir().findAll();
-		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(all);
-	}
 
 	//@Override
 	//@Transactional(rollbackFor = Exception.class)

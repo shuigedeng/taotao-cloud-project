@@ -62,10 +62,9 @@ import java.util.stream.Collectors;
  * @since 2021-10-09 20:37:52
  */
 @Service
-@DubboService(interfaceClass = IDubboRegionService.class)
 public class RegionServiceImpl extends
 	BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
-	implements IDubboRegionService, IRegionService {
+	implements IRegionService {
 
 	@Autowired
 	private OkHttpService okHttpService;

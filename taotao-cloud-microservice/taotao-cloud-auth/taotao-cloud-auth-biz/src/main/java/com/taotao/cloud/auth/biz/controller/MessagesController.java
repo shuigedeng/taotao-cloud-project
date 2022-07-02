@@ -53,7 +53,13 @@ public class MessagesController {
 	@GetMapping("/messages")
 	public String[] getMessages() {
 		LogUtil.info("slfdlaskdf;lasjdf;lj");
-		//FeignDictRes feignDictRes = feignDictService.findByCode("sd");
+
+		try {
+			FeignDictRes feignDictRes = feignDictService.findByCode("sd");
+		} catch (Exception e) {
+			LogUtil.error(e);
+			throw new RuntimeException(e);
+		}
 
 		DubboDictRes dubboDictRes = dubboDictService.findByCode(1);
 

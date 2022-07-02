@@ -484,6 +484,12 @@ taotao:
         - com.taotao.cloud.auth.biz.controller
 
 feign:
+  circuitbreaker:
+    enabled: true
+    #alphanumeric-ids:
+    #  enabled: true
+    #group:
+    #  enabled: true
   sentinel:
     enabled: true
   okhttp:
@@ -494,9 +500,9 @@ feign:
     max-connections-per-route: 1000
   client:
     config:
-      feign-name:
-        connectTimeout: 300000
-        readTimeout: 300000
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
   compression:
     request:
       enabled: true

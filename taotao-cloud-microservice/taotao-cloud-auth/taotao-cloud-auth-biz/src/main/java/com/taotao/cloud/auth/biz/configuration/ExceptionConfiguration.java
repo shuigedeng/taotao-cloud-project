@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.exception.FeignException;
+import com.taotao.cloud.common.exception.FeignErrorException;
 import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
@@ -29,7 +29,6 @@ import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -83,8 +82,8 @@ public class ExceptionConfiguration implements InitializingBean {
 		return Result.fail(e.getMessage(), e.getCode());
 	}
 
-	@ExceptionHandler({FeignException.class})
-	public Result<String> feignException(NativeWebRequest req, FeignException e) {
+	@ExceptionHandler({FeignErrorException.class})
+	public Result<String> feignException(NativeWebRequest req, FeignErrorException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}

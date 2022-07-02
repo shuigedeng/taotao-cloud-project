@@ -13,47 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.feign.execption;
+package com.taotao.cloud.common.exception;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BaseException;
+
+import java.io.Serial;
 
 /**
- * FeignDecodeException
+ * FeignException 
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 20:09:13
+ * @since 2021-09-02 20:09:24
  */
-public class FeignDecodeException extends BaseException {
+public class FeignErrorException extends BaseException  {
 
+	@Serial
 	private static final long serialVersionUID = 6610083281801529147L;
 
-	public FeignDecodeException(String message) {
+	public FeignErrorException(String message) {
 		super(message);
 	}
 
-	public FeignDecodeException(Integer code, String message) {
+	public FeignErrorException(Integer code, String message) {
 		super(code, message);
 	}
 
-	public FeignDecodeException(String message, Throwable e) {
+	public FeignErrorException(String message, Throwable e) {
 		super(message, e);
 	}
 
-	public FeignDecodeException(Throwable e) {
-		super(e);
-	}
-
-	public FeignDecodeException(Integer code, String message, Throwable e) {
+	public FeignErrorException(Integer code, String message, Throwable e) {
 		super(code, message, e);
 	}
 
-	public FeignDecodeException(ResultEnum result) {
+	public FeignErrorException(ResultEnum result) {
 		super(result);
 	}
 
-	public FeignDecodeException(ResultEnum result, Throwable e) {
+	public FeignErrorException(ResultEnum result, Throwable e) {
 		super(result, e);
 	}
 }

@@ -33,6 +33,7 @@ public enum ResultEnum implements BaseEnum {
 	 * 系统错误
 	 */
 	ERROR(500, "服务器繁忙，请稍后重试"),
+	INNER_ERROR(500, "内部系统调用错误"),
 	/**
 	 * 登录成功
 	 */

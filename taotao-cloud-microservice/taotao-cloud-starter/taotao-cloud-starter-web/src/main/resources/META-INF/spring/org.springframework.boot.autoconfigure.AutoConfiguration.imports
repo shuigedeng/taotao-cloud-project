@@ -1,5 +1,6 @@
 com.taotao.cloud.web.configuration.DozerConfiguration
 com.taotao.cloud.web.configuration.ExceptionConfiguration
+com.taotao.cloud.web.configuration.FeignExceptionConfiguration
 com.taotao.cloud.web.configuration.IdempotentConfiguration
 com.taotao.cloud.web.configuration.JacksonConfiguration
 com.taotao.cloud.web.configuration.EncryptConfiguration
