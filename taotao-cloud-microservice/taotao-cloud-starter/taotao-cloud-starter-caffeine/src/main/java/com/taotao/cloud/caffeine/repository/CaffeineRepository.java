@@ -1,13 +1,11 @@
-package com.taotao.cloud.redis.repository;
+package com.taotao.cloud.caffeine.repository;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.taotao.cloud.caffeine.model.CacheHashKey;
+import com.taotao.cloud.caffeine.model.CacheKey;
 import com.taotao.cloud.common.constant.StrPool;
-import com.taotao.cloud.redis.model.CacheHashKey;
-import com.taotao.cloud.redis.model.CacheKey;
-import org.springframework.lang.NonNull;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +16,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.springframework.lang.NonNull;
 
 
 /**
