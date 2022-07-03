@@ -1,25 +1,25 @@
 package com.taotao.cloud.redis.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.delay.config.RedissonAnnotationBeanPostProcessor;
 import com.taotao.cloud.redis.delay.config.RedissonConfigUtils;
 import com.taotao.cloud.redis.delay.config.RedissonListenerRegistry;
 import com.taotao.cloud.redis.delay.config.RedissonQueueBeanPostProcessor;
 import com.taotao.cloud.redis.delay.config.RedissonQueueRegistry;
 import com.taotao.cloud.redis.delay.config.RedissonTemplate;
-import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
 import org.springframework.context.annotation.Scope;
 
 /**
- * RedissonAutoConfiguration 
+ * RedissonAutoConfiguration
  *
  * @author shuigedeng
  * @version 2021.10
@@ -27,7 +27,13 @@ import org.springframework.context.annotation.Scope;
  */
 @AutoConfiguration
 @ConditionalOnBean({RedissonClient.class})
-public class RedissonDelayAutoConfiguration {
+public class RedissonDelayAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(RedissonDelayAutoConfiguration.class, StarterName.REDIS_STARTER);
+	}
+
 
 	@Scope(BeanDefinition.SCOPE_SINGLETON)
 	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)

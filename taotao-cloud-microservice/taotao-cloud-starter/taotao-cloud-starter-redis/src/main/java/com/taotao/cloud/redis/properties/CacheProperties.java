@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * CustomCacheProperties 
+ * CustomCacheProperties
  *
  * @author shuigedeng
  * @version 2021.9
@@ -60,6 +60,76 @@ public class CacheProperties {
 	 * 改属性只对 redis 有效！！！ configs的key需要配置成@Cacheable注解的value
 	 */
 	private Map<String, Cache> configs;
+
+	/**
+	 * stream
+	 */
+	private Stream stream = new Stream();
+
+	public static class Stream {
+
+		public static final String PREFIX = CacheProperties.PREFIX + ".stream";
+		/**
+		 * 是否开启 stream
+		 */
+		boolean enable = false;
+		/**
+		 * consumer group，默认：服务名 + 环境
+		 */
+		String consumerGroup;
+		/**
+		 * 消费者名称，默认：ip + 端口
+		 */
+		String consumerName;
+		/**
+		 * poll 批量大小
+		 */
+		Integer pollBatchSize;
+		/**
+		 * poll 超时时间
+		 */
+		Duration pollTimeout;
+
+		public boolean isEnable() {
+			return enable;
+		}
+
+		public void setEnable(boolean enable) {
+			this.enable = enable;
+		}
+
+		public String getConsumerGroup() {
+			return consumerGroup;
+		}
+
+		public void setConsumerGroup(String consumerGroup) {
+			this.consumerGroup = consumerGroup;
+		}
+
+		public String getConsumerName() {
+			return consumerName;
+		}
+
+		public void setConsumerName(String consumerName) {
+			this.consumerName = consumerName;
+		}
+
+		public Integer getPollBatchSize() {
+			return pollBatchSize;
+		}
+
+		public void setPollBatchSize(Integer pollBatchSize) {
+			this.pollBatchSize = pollBatchSize;
+		}
+
+		public Duration getPollTimeout() {
+			return pollTimeout;
+		}
+
+		public void setPollTimeout(Duration pollTimeout) {
+			this.pollTimeout = pollTimeout;
+		}
+	}
 
 	public static class Cache {
 
@@ -178,5 +248,13 @@ public class CacheProperties {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Stream getStream() {
+		return stream;
+	}
+
+	public void setStream(Stream stream) {
+		this.stream = stream;
 	}
 }

@@ -1,0 +1,11 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    api("com.alicp.jetcache:jetcache-autoconfigure:2.6.5") {
+        exclude group: "com.alibaba", module: "fastjson"
+    }
+    implementation "io.micrometer:micrometer-core"
+    compileOnly "org.springframework.cloud:spring-cloud-context"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
