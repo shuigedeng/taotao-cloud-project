@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.BeansException;
@@ -86,7 +87,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
 	/**
 	 * 线程池的定时任务----> 称为(调度线程池)。此线程池支持 定时以及周期性执行任务的需求。
 	 */
-	final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
+	final ScheduledExecutorService scheduler =  new ScheduledThreadPoolExecutor(5) ;
 
 	/**
 	 * 检查(调度线程池)，每秒执行一次，查看订单的缓冲队列是否有 订单记录，则重新加入到线程池

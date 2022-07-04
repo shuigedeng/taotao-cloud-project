@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.timetask;
+package com.taotao.cloud.job.xxl.timetask;
 
 /**
  * 每日任务 每日凌晨1点执行

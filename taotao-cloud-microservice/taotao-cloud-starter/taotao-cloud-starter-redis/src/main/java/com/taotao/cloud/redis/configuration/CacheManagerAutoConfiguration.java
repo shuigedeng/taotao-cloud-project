@@ -32,6 +32,8 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.convert.DurationStyle;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -56,6 +58,7 @@ import org.springframework.lang.Nullable;
  */
 @EnableCaching
 @AutoConfiguration(after = RedisAutoConfiguration.class)
+@EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 @ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CacheManagerAutoConfiguration implements InitializingBean {
 
@@ -113,11 +116,11 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		List<String> cacheNames = this.cacheProperties.getCacheNames();
 		Map<String, RedisCacheConfiguration> initialCaches = new LinkedHashMap<>();
 		if (!cacheNames.isEmpty()) {
-			Map<String, RedisCacheConfiguration> cacheConfigMap = new LinkedHashMap<>(
-				cacheNames.size());
+			Map<String, RedisCacheConfiguration> cacheConfigMap = new LinkedHashMap<>(cacheNames.size());
 			cacheNames.forEach(it -> cacheConfigMap.put(it, cacheConfiguration));
 			initialCaches.putAll(cacheConfigMap);
 		}
+
 		boolean allowInFlightCacheCreation = true;
 		boolean enableTransactions = false;
 		RedisAutoCacheManager cacheManager = new RedisAutoCacheManager(redisCacheWriter,

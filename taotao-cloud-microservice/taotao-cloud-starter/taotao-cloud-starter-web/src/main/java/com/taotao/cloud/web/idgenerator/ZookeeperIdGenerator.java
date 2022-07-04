@@ -7,10 +7,11 @@ import com.github.yitter.idgen.YitIdHelper;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.xxl.job.core.util.IpUtil;
+import com.taotao.cloud.health.alarm.core.util.IpUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -88,7 +89,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 		private final CuratorFramework curator;
 
 		public SnowflakeZookeeper(CuratorFramework curator) {
-			this.ip = IpUtil.getIp();
+			this.ip = IpUtil.getLocalIp();
 			this.curator = curator;
 		}
 
@@ -249,7 +250,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 			LogUtil.info("file exists status is {}", exists);
 			if (exists) {
 				try {
-					FileUtils.writeStringToFile(leafConfFile, "workerID=" + workerID, false);
+					FileUtils.writeStringToFile(leafConfFile, "workerID=" + workerID, StandardCharsets.UTF_8);
 					LogUtil.info("update file cache workerID is {}", workerID);
 				} catch (IOException e) {
 					LogUtil.error("update file cache error ", e);
@@ -264,7 +265,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 					if (mkdirs) {
 						if (leafConfFile.createNewFile()) {
 							FileUtils.writeStringToFile(leafConfFile, "workerID=" + workerID,
-								false);
+								StandardCharsets.UTF_8);
 							LogUtil.info("local file cache workerID is {}", workerID);
 						}
 					} else {

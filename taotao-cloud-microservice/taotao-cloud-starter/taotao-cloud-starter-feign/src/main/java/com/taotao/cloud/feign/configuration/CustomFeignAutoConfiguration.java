@@ -85,8 +85,7 @@ import org.springframework.http.MediaType;
  * @since 2020/6/15 11:31
  */
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
-@EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class,
-	FeignInterceptorProperties.class})
+@EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class, FeignInterceptorProperties.class})
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CustomFeignAutoConfiguration implements InitializingBean {
 

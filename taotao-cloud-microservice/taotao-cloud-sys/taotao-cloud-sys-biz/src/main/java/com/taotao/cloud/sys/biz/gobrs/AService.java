@@ -21,7 +21,6 @@ public class AService extends AsyncTask<Object, Object> {
     @Override
     public void prepare(Object o) {
 
-
     }
 
     @Override

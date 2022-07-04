@@ -112,9 +112,9 @@ Xxl-job | 2.2.0
 EasyCaptcha | 1.6.2
 Guava | 29.0-jre
 
-## 6. 滔滔商城演示地址
+## 6. 演示地址
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top) 源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
-* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top)
+* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限, 需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top) 源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-datav)
 * 平台管理地址(进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
