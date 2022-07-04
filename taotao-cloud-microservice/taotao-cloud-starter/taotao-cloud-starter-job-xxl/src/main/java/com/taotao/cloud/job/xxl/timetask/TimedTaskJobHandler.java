@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.timetask;
+package com.taotao.cloud.job.xxl.timetask;
 
 import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.common.support.lock.ZLock;
@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 定时器任务
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-04 09:15:24
  */
 public class TimedTaskJobHandler {
 

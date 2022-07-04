@@ -20,6 +20,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.annotation.ConditionalOnFeignUseOkHttp;
 import com.taotao.cloud.feign.okhttp.OkHttpResponseInterceptor;
+import java.util.Objects;
 import okhttp3.ConnectionPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,8 +77,11 @@ public class OkHttpAutoConfiguration {
     @Bean
     public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory, ConnectionPool connectionPool, FeignClientProperties feignClientProperties, FeignHttpClientProperties feignHttpClientProperties) {
         FeignClientProperties.FeignClientConfiguration defaultConfig = feignClientProperties.getConfig().get("default");
+		int readTimeout = 5000;
+		if(Objects.nonNull(defaultConfig)){
+			 readTimeout = defaultConfig.getReadTimeout();
+		}
         int connectTimeout = feignHttpClientProperties.getConnectionTimeout();
-        int readTimeout = defaultConfig.getReadTimeout();
         boolean disableSslValidation = feignHttpClientProperties.isDisableSslValidation();
         boolean followRedirects = feignHttpClientProperties.isFollowRedirects();
         this.okHttpClient = okHttpClientFactory.createBuilder(disableSslValidation)
@@ -87,6 +91,7 @@ public class OkHttpAutoConfiguration {
                 .connectionPool(connectionPool)
                 .addInterceptor(new OkHttpResponseInterceptor())
                 .build();
+
         return this.okHttpClient;
     }
 

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.properties.XssProperties.Mode;
 import com.taotao.cloud.web.utils.XssUtil;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.Charsets;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -52,7 +53,7 @@ public class DefaultXssCleaner implements XssCleaner {
 		Mode mode = properties.getMode();
 		if (Mode.escape == mode) {
 			// html 转义
-			return HtmlUtils.htmlEscape(bodyHtml, Charsets.UTF_8.name());
+			return HtmlUtils.htmlEscape(bodyHtml, StandardCharsets.UTF_8.name());
 		} else {
 			// jsoup html 清理
 			Document.OutputSettings outputSettings = new Document.OutputSettings()

@@ -105,10 +105,10 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		return new RedissonConnectionFactory(redissonClient);
 	}
 
-	@Bean
-	public RedisSerializer<String> redisKeySerializer() {
-		return RedisSerializer.string();
-	}
+	//@Bean
+	//public RedisSerializer<String> redisKeySerializer() {
+	//	return RedisSerializer.string();
+	//}
 
 	/**
 	 * value 值 序列化

@@ -17,10 +17,11 @@ package com.taotao.cloud.web.limit;
 
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.ImmutableList;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.lang.reflect.Method;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -83,7 +84,7 @@ public class LimitAspect {
 		};
 
 		ImmutableList<String> keys = ImmutableList.of(
-			StringUtils.join(limitAnnotation.prefix(), key));
+			StringUtil.join(limitAnnotation.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
