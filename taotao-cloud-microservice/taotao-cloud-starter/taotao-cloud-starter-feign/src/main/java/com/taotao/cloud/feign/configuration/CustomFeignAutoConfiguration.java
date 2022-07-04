@@ -194,9 +194,7 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 						Object object = super.decode(response, type);
 						if (object instanceof Result<?> result) {
 							if (result.code() != 200) {
-								LogUtil.error("调用Feign接口出现异常，接口:{}, 异常: {}",
-									response.request().url(),
-									result.errorMsg());
+								LogUtil.error("调用Feign接口出现异常，接口:{}, 异常: {}", response.request().url(), result.errorMsg());
 								throw new FeignErrorException(result.code(), result.errorMsg());
 							}
 							return result;
@@ -236,13 +234,11 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 	public static class FeignInnerContract extends SpringMvcContract {
 
 		@Override
-		protected void processAnnotationOnMethod(MethodMetadata data, Annotation methodAnnotation,
-			Method method) {
+		protected void processAnnotationOnMethod(MethodMetadata data, Annotation methodAnnotation, Method method) {
 			if (Inner.class.isInstance(methodAnnotation)) {
 				Inner inner = findMergedAnnotation(method, Inner.class);
 				if (ObjectUtils.isNotEmpty(inner)) {
-					LogUtil.debug(
-						"[Herodotus] |- Found inner annotation on Feign interface, add header!");
+					LogUtil.debug("Found inner annotation on Feign interface, add header!");
 					data.template().header(CommonConstant.TAOTAO_CLOUD_FROM_INNER, "true");
 				}
 			}
@@ -255,8 +251,7 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 	 * 设置解码器为fastjson
 	 */
 	private ObjectFactory<HttpMessageConverters> feignHttpMessageConverter() {
-		final HttpMessageConverters httpMessageConverters = new HttpMessageConverters(
-			this.getFastJsonConverter());
+		final HttpMessageConverters httpMessageConverters = new HttpMessageConverters(this.getFastJsonConverter());
 		return () -> httpMessageConverters;
 	}
 

@@ -18,6 +18,7 @@ package com.taotao.cloud.web.configuration;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.annotation.FeignApi;
 import com.taotao.cloud.feign.model.FeignExceptionResult;
@@ -61,23 +62,23 @@ public class FeignExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler(BusinessException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public FeignExceptionResult handleBusinessException(NativeWebRequest req, BusinessException e) {
+	public String handleBusinessException(NativeWebRequest req, BusinessException e) {
 		printLog(req, e);
-		return new FeignExceptionResult(e.getMessage());
+		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
 	}
 
 	@ExceptionHandler(NestedServletException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public FeignExceptionResult handleNestedServletException(NativeWebRequest req, NestedServletException e) {
+	public String handleNestedServletException(NativeWebRequest req, NestedServletException e) {
 		printLog(req, e);
-		return new FeignExceptionResult(e.getMessage());
+		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
 	}
 
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public FeignExceptionResult handleException(NativeWebRequest req, Exception e) {
+	public String handleException(NativeWebRequest req, Exception e) {
 		printLog(req, e);
-		return new FeignExceptionResult(e.getMessage());
+		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
 	}
 
 	/**

@@ -65,8 +65,9 @@ dependencies {
 
 }
 
+mainClassName="com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
+
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-mainClassName="com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"

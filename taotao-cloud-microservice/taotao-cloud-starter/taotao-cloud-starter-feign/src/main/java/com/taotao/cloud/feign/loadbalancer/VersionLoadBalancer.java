@@ -57,12 +57,11 @@ public class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
 	private String getVersionFromRequestData(RequestData requestData) {
 		Map<String, String> queryMap = QueryUtils.getQueryMap(requestData.getUrl());
-		if (MapUtils.isNotEmpty(queryMap) && queryMap.containsKey(
-			CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION)
+		if (MapUtils.isNotEmpty(queryMap)
+			&& queryMap.containsKey(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION)
 			&& StringUtils.isNotBlank(queryMap.get(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION))) {
 			return queryMap.get(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION);
-		} else if (requestData.getHeaders()
-			.containsKey(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION)) {
+		} else if (requestData.getHeaders().containsKey(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION)) {
 			return requestData.getHeaders().get(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION).get(0);
 		}
 		return null;

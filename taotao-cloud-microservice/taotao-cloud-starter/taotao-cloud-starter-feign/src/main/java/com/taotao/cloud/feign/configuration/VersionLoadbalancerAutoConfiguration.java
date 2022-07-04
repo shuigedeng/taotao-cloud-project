@@ -84,8 +84,7 @@ public class VersionLoadbalancerAutoConfiguration {
 					chooser = (IRuleChooser) ruleClass.getDeclaredConstructor().newInstance();
 				} catch (ClassNotFoundException e) {
 					LogUtil.error("没有找到定义的选择器，将使用内置的选择器", e);
-				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
-						 InvocationTargetException e) {
+				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 					LogUtil.error("没法创建定义的选择器，将使用内置的选择器", e);
 				}
 			}

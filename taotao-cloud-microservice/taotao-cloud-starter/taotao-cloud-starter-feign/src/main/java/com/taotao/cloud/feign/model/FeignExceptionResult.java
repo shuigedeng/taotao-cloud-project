@@ -32,7 +32,6 @@ public class FeignExceptionResult implements Serializable {
 
 	private String msg;
 
-
 	public FeignExceptionResult(String msg) {
 		this.msg = msg;
 	}
