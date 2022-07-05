@@ -16,6 +16,8 @@ dependencies {
     api ("com.alibaba.csp:sentinel-datasource-nacos"){
         exclude group: 'com.alibaba.csp', module: 'sentinel-core'
     }
+
+    compileOnly "org.springframework.cloud:spring-cloud-starter-openfeign"
     
     api 'org.springframework.boot:spring-boot-starter'
     api 'org.springframework:spring-web'

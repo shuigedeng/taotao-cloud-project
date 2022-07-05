@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.model.entity.sensitive;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +26,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = SensitiveWord.TABLE_NAME)
 @TableName(SensitiveWord.TABLE_NAME)
@@ -39,6 +39,13 @@ public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
 	 */
 	@Column(name = "sensitive_word", columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
 	private String sensitiveWord;
+	@Builder
+	public SensitiveWord(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String sensitiveWord) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.sensitiveWord = sensitiveWord;
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.model.entity.quartz;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +42,6 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = QuartzLog.TABLE_NAME)
 @TableName(QuartzLog.TABLE_NAME)
@@ -98,6 +98,21 @@ public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> {
 	 */
 	@Column(name = "time", columnDefinition = "bigint not null default 1 comment '耗时（毫秒）'")
 	private Long time;
+	@Builder
+	public QuartzLog(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String beanName, String cronExpression, String exceptionDetail, Boolean isSuccess,
+		String jobName, String methodName, String params, Long time) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.beanName = beanName;
+		this.cronExpression = cronExpression;
+		this.exceptionDetail = exceptionDetail;
+		this.isSuccess = isSuccess;
+		this.jobName = jobName;
+		this.methodName = methodName;
+		this.params = params;
+		this.time = time;
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -16,6 +16,12 @@
 package com.taotao.cloud.web.configuration;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
+import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
@@ -26,7 +32,9 @@ import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import feign.codec.DecodeException;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
@@ -240,6 +248,81 @@ public class ExceptionConfiguration implements InitializingBean {
 	public Result<String> handleException(NativeWebRequest req, Exception e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
+	}
+
+	@ExceptionHandler(UndeclaredThrowableException.class)
+	public Result<String> handleUndeclaredThrowableException(NativeWebRequest req, UndeclaredThrowableException ex) {
+		printLog(req, ex);
+		Throwable e = ex.getCause();
+
+		LogUtil.error("WebmvcHandler sentinel 降级 资源名称");
+		String errMsg = e.getMessage();
+		if (e instanceof FlowException) {
+			errMsg = "被限流了";
+		}
+		if (e instanceof DegradeException) {
+			errMsg = "服务降级了";
+		}
+		if (e instanceof ParamFlowException) {
+			errMsg = "服务热点降级了";
+		}
+		if (e instanceof SystemBlockException) {
+			errMsg = "系统过载保护";
+		}
+		if (e instanceof AuthorityException) {
+			errMsg = "限流权限控制异常";
+		}
+
+		return Result.fail( errMsg,429);
+	}
+
+	@ExceptionHandler(BlockException.class)
+	public Result<String> handleBlockException(NativeWebRequest req, BlockException e) {
+		printLog(req, e);
+		LogUtil.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
+		String errMsg = e.getMessage();
+		if (e instanceof FlowException) {
+			errMsg = "被限流了";
+		}
+		if (e instanceof DegradeException) {
+			errMsg = "服务降级了";
+		}
+		if (e instanceof ParamFlowException) {
+			errMsg = "服务热点降级了";
+		}
+		if (e instanceof SystemBlockException) {
+			errMsg = "系统过载保护";
+		}
+		if (e instanceof AuthorityException) {
+			errMsg = "限流权限控制异常";
+		}
+		return Result.fail( errMsg,429);
+	}
+
+	@ExceptionHandler(FlowException.class)
+	public Result<String> handleFlowException(NativeWebRequest req, FlowException e) {
+		printLog(req, e);
+		return Result.fail( "被限流了",429);
+	}
+	@ExceptionHandler(DegradeException.class)
+	public Result<String> handleDegradeException(NativeWebRequest req, DegradeException e) {
+		printLog(req, e);
+		return Result.fail( "服务降级了",429);
+	}
+	@ExceptionHandler(ParamFlowException.class)
+	public Result<String> handleParamFlowException(NativeWebRequest req, ParamFlowException e) {
+		printLog(req, e);
+		return Result.fail( "服务热点降级了",429);
+	}
+	@ExceptionHandler(SystemBlockException.class)
+	public Result<String> handleSystemBlockException(NativeWebRequest req, SystemBlockException e) {
+		printLog(req, e);
+		return Result.fail( "系统过载保护",429);
+	}
+	@ExceptionHandler(AuthorityException.class)
+	public Result<String> handleAuthorityException(NativeWebRequest req, AuthorityException e) {
+		printLog(req, e);
+		return Result.fail( "限流权限控制异常",429);
 	}
 
 	/**

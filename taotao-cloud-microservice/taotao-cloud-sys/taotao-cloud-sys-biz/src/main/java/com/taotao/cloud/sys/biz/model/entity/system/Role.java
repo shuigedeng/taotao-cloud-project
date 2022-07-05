@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,7 +43,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = Role.TABLE_NAME)
 @TableName(Role.TABLE_NAME)
@@ -74,6 +74,16 @@ public class Role extends BaseSuperEntity<Role,Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+	@Builder
+	public Role(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String name, String code, String remark, String tenantId) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.name = name;
+		this.code = code;
+		this.remark = remark;
+		this.tenantId = tenantId;
+	}
 
 	@Override
 	public boolean equals(Object o) {

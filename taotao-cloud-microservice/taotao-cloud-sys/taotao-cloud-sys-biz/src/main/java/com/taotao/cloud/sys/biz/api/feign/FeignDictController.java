@@ -15,15 +15,16 @@
  */
 package com.taotao.cloud.sys.biz.api.feign;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.feign.annotation.FeignApi;
 import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.sys.api.feign.IFeignDictService;
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import com.taotao.cloud.sys.biz.mapstruct.IDictMapStruct;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
-import io.seata.core.context.RootContext;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,9 +49,11 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	 *
 	 * @param code 代码
 	 * @return {@link FeignDictRes }
+	 * @see IFeignDictService#findByCode(String)
 	 * @since 2022-07-02 10:17:59
 	 */
 	@NotAuth
+	@SentinelResource("findByCode")
 	@GetMapping("/code")
 	public FeignDictRes findByCode(@RequestParam(value = "code") String code) {
 		if ("sd".equals(code)) {
@@ -65,5 +68,11 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 
+	@NotAuth
+	@GetMapping("/test")
+	public FeignDictRes test(@RequestParam(value = "code") String code) {
+		Dict dict = service().findByCode(code);
+		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
+	}
 }
 

@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +25,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = ServiceNotice.TABLE_NAME)
 @TableName(ServiceNotice.TABLE_NAME)
@@ -50,6 +50,19 @@ public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
 
 	@Column(name = "content", columnDefinition = "varchar(255) not null default '' comment '站内信内容(富文本框编辑，可以上传图片的html)'")
 	private String content;
+	@Builder
+	public ServiceNotice(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String storeId, String bannerImage, String title, String subTitle, String toUrl,
+		String content) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.storeId = storeId;
+		this.bannerImage = bannerImage;
+		this.title = title;
+		this.subTitle = subTitle;
+		this.toUrl = toUrl;
+		this.content = content;
+	}
 
 	@Override
 	public boolean equals(Object o) {

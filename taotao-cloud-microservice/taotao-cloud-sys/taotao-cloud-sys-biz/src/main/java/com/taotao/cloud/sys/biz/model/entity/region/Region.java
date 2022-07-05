@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.model.entity.region;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,7 +43,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = Region.TABLE_NAME)
 @TableName(Region.TABLE_NAME)
@@ -100,6 +100,22 @@ public class Region extends BaseSuperEntity<Region, Long> {
 
 	@Column(name = "order_num", columnDefinition = "int not null default 0 comment '排序'")
 	private Integer orderNum;
+	@Builder
+	public Region(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		Long parentId, String code, String name, String level, String cityCode, String lng,
+		String lat, String path, Integer orderNum) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.parentId = parentId;
+		this.code = code;
+		this.name = name;
+		this.level = level;
+		this.cityCode = cityCode;
+		this.lng = lng;
+		this.lat = lat;
+		this.path = path;
+		this.orderNum = orderNum;
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -43,7 +43,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = ScheduledLog.TABLE_NAME)
 @TableName(ScheduledLog.TABLE_NAME)
@@ -93,6 +92,20 @@ public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 	 */
 	@Column(name = "scheduled_Job", columnDefinition = "varchar(4096) not null comment 'scheduledJob JSON对象'")
 	private String scheduledJob;
+	@Builder
+	public ScheduledLog(Long id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
+		Long updateBy, Integer version, Boolean delFlag, String scheduledName,
+		LocalDateTime startTime, LocalDateTime endTime, String exception, Long executionTime,
+		Boolean isSuccess, String scheduledJob) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.scheduledName = scheduledName;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.exception = exception;
+		this.executionTime = executionTime;
+		this.isSuccess = isSuccess;
+		this.scheduledJob = scheduledJob;
+	}
 
 	@Override
 	public boolean equals(Object o) {

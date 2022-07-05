@@ -16,12 +16,20 @@
 package com.taotao.cloud.web.configuration;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
+import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.annotation.FeignApi;
 import com.taotao.cloud.feign.model.FeignExceptionResult;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +87,87 @@ public class FeignExceptionConfiguration implements InitializingBean {
 	public String handleException(NativeWebRequest req, Exception e) {
 		printLog(req, e);
 		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
+	}
+
+	@ExceptionHandler(UndeclaredThrowableException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleUndeclaredThrowableException(NativeWebRequest req, UndeclaredThrowableException ex) {
+		printLog(req, ex);
+		Throwable e = ex.getCause();
+
+		LogUtil.error("WebmvcHandler sentinel 降级 资源名称");
+		String errMsg = e.getMessage();
+		if (e instanceof FlowException) {
+			errMsg = "被限流了";
+		}
+		if (e instanceof DegradeException) {
+			errMsg = "服务降级了";
+		}
+		if (e instanceof ParamFlowException) {
+			errMsg = "服务热点降级了";
+		}
+		if (e instanceof SystemBlockException) {
+			errMsg = "系统过载保护";
+		}
+		if (e instanceof AuthorityException) {
+			errMsg = "限流权限控制异常";
+		}
+
+		return JsonUtil.toJSONString(new FeignExceptionResult(errMsg));
+	}
+
+	@ExceptionHandler(BlockException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleBlockException(NativeWebRequest req, BlockException e) {
+		printLog(req, e);LogUtil.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
+		String errMsg = e.getMessage();
+		if (e instanceof FlowException) {
+			errMsg = "被限流了";
+		}
+		if (e instanceof DegradeException) {
+			errMsg = "服务降级了";
+		}
+		if (e instanceof ParamFlowException) {
+			errMsg = "服务热点降级了";
+		}
+		if (e instanceof SystemBlockException) {
+			errMsg = "系统过载保护";
+		}
+		if (e instanceof AuthorityException) {
+			errMsg = "限流权限控制异常";
+		}
+		return JsonUtil.toJSONString(new FeignExceptionResult(errMsg));
+	}
+
+	@ExceptionHandler(FlowException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleFlowException(NativeWebRequest req, FlowException e) {
+		printLog(req, e);
+		return JsonUtil.toJSONString(new FeignExceptionResult("被限流了"));
+	}
+	@ExceptionHandler(DegradeException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleDegradeException(NativeWebRequest req, DegradeException e) {
+		printLog(req, e);
+		return JsonUtil.toJSONString(new FeignExceptionResult("服务降级了"));
+	}
+	@ExceptionHandler(ParamFlowException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleParamFlowException(NativeWebRequest req, ParamFlowException e) {
+		printLog(req, e);
+		return JsonUtil.toJSONString(new FeignExceptionResult("服务热点降级了"));
+	}
+	@ExceptionHandler(SystemBlockException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleSystemBlockException(NativeWebRequest req, SystemBlockException e) {
+		printLog(req, e);
+		return JsonUtil.toJSONString(new FeignExceptionResult("系统过载保护"));
+	}
+	@ExceptionHandler(AuthorityException.class)
+	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+	public String handleAuthorityException(NativeWebRequest req, AuthorityException e) {
+		printLog(req, e);
+		return JsonUtil.toJSONString(new FeignExceptionResult("限流权限控制异常"));
 	}
 
 	/**

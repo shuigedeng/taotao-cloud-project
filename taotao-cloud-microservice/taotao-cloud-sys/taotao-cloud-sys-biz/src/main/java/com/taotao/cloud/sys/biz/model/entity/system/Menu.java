@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,7 +44,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = Menu.TABLE_NAME)
 @TableName(Menu.TABLE_NAME)
@@ -131,6 +131,27 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+	@Builder
+	public Menu(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String name, String permission, String path, String component, Long parentId, String icon,
+		Integer sortNum, Boolean keepAlive, Integer type, Boolean hidden, String redirect,
+		String target, String tenantId) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.name = name;
+		this.permission = permission;
+		this.path = path;
+		this.component = component;
+		this.parentId = parentId;
+		this.icon = icon;
+		this.sortNum = sortNum;
+		this.keepAlive = keepAlive;
+		this.type = type;
+		this.hidden = hidden;
+		this.redirect = redirect;
+		this.target = target;
+		this.tenantId = tenantId;
+	}
 
 	@Override
 	public boolean equals(Object o) {
