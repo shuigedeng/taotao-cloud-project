@@ -1,6 +1,4 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa")
@@ -8,7 +6,6 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-metrics")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi")
@@ -38,7 +35,9 @@ dependencies {
     //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
     api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
     //https://search.maven.org/artifact/com.github.dozermapper/dozer-spring-boot-starter
-    api "com.github.dozermapper:dozer-spring-boot-starter:6.5.2"
+    api("com.github.dozermapper:dozer-spring-boot-starter:6.5.2"){
+        exclude group: "commons-collections", module: "commons-collections"
+    }
 
     //https://search.maven.org/artifact/org.owasp.antisamy/antisamy
     api('org.owasp.antisamy:antisamy:1.6.8') {
@@ -54,7 +53,7 @@ dependencies {
         exclude group: "org.apache.xmlgraphics", module: "batik-all"
     }
     //https://search.maven.org/artifact/org.glassfish/javax.el/
-    api "org.glassfish:javax.el:3.0.1-b08"
+    //api "org.glassfish:javax.el:3.0.1-b12"
     //https://search.maven.org/artifact/com.itextpdf/itextpdf
     api "com.itextpdf:itextpdf:5.5.13.3"
     //https://search.maven.org/artifact/com.itextpdf/itext-asian
