@@ -50,7 +50,7 @@ spring:
         flow:
           nacos:
             server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-flow-rules
+            dataId: ${spring.application.name}-flow-rules.json
             namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
             username: nacos
             password: nacos
@@ -62,7 +62,7 @@ spring:
         degrade:
           nacos:
             server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-degrade-rules
+            dataId: ${spring.application.name}-degrade-rules.json
             namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
             username: nacos
             password: nacos
@@ -73,7 +73,7 @@ spring:
         system:
           nacos:
             server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-system-rules
+            dataId: ${spring.application.name}-system-rules.json
             namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
             username: nacos
             password: nacos
@@ -84,7 +84,7 @@ spring:
         authority:
           nacos:
             server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-authority-rules
+            dataId: ${spring.application.name}-authority-rules.json
             namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
             username: nacos
             password: nacos
@@ -95,7 +95,7 @@ spring:
         param-flow:
           nacos:
             server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-param-flow-rules
+            dataId: ${spring.application.name}-param-flow-rules.json
             namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
             username: nacos
             password: nacos

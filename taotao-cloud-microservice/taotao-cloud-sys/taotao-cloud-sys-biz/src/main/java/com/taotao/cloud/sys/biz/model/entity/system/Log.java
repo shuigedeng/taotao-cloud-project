@@ -43,7 +43,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = Log.TABLE_NAME)
 @TableName(Log.TABLE_NAME)

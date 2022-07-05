@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,7 +45,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = DictItem.TABLE_NAME)
 @TableName(DictItem.TABLE_NAME)
@@ -90,6 +90,20 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	 */
 	@Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
 	private Integer sortNum ;
+
+	@Builder
+	public DictItem(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		Long dictId, String itemText, String itemValue, String description, Integer status,
+		Integer sortNum) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.dictId = dictId;
+		this.itemText = itemText;
+		this.itemValue = itemValue;
+		this.description = description;
+		this.status = status;
+		this.sortNum = sortNum;
+	}
 
 	@Override
 	public boolean equals(Object o) {

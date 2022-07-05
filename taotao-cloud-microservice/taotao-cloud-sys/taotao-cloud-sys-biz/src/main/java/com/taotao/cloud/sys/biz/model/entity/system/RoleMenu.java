@@ -42,7 +42,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = RoleMenu.TABLE_NAME)
 @TableName(RoleMenu.TABLE_NAME)
@@ -62,6 +61,12 @@ public class RoleMenu extends SuperEntity<RoleMenu, Long> {
 	 */
 	@Column(name = "menu_id", columnDefinition = "bigint not null comment '菜单ID'")
 	private Long menuId;
+	@Builder
+	public RoleMenu(Long id, Long roleId, Long menuId) {
+		super(id);
+		this.roleId = roleId;
+		this.menuId = menuId;
+	}
 
 	@Override
 	public boolean equals(Object o) {

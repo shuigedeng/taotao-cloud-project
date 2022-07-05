@@ -25,6 +25,7 @@ import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -123,6 +124,9 @@ public class DictServiceImpl extends
 	public Dict findByCode(String code) {
 		//Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
 		//return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
-		return new Dict();
+		return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now()).dictCode("123123123").dictName("lsdfjaslf")
+			.remark("sdfasfd")
+			.description("sdflasjdfl")
+			.build();
 	}
 }

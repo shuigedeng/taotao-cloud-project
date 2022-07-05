@@ -52,4 +52,9 @@ public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
 		this.id = id;
 	}
 
+	public SuperEntity() {}
+
+	public SuperEntity(I id) {
+		this.id = id;
+	}
 }

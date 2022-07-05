@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SexTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,7 +44,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = User.TABLE_NAME)
 @TableName(User.TABLE_NAME)
@@ -137,6 +137,28 @@ public class User extends BaseSuperEntity<User,Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+	@Builder
+	public User(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String account, String nickname, String username, String password, String mobile,
+		String phone, Integer sex, String email, String birthday, Long deptId, Long jobId,
+		String avatar, Integer status, String tenantId) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.account = account;
+		this.nickname = nickname;
+		this.username = username;
+		this.password = password;
+		this.mobile = mobile;
+		this.phone = phone;
+		this.sex = sex;
+		this.email = email;
+		this.birthday = birthday;
+		this.deptId = deptId;
+		this.jobId = jobId;
+		this.avatar = avatar;
+		this.status = status;
+		this.tenantId = tenantId;
+	}
 
 	@Override
 	public boolean equals(Object o) {

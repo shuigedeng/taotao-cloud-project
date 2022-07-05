@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.model.entity.file;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,6 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = File.TABLE_NAME)
 @TableName(File.TABLE_NAME)
@@ -101,6 +101,24 @@ public class File extends BaseSuperEntity<File, Long> {
 	 */
 	@Column(name = "length", columnDefinition = "bigint null comment '大小'")
 	private Long length;
+	@Builder
+	public File(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String createName, String bizType, String dataType, String original, String url, String md5,
+		String type, String contextType, String name, String ext, Long length) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.createName = createName;
+		this.bizType = bizType;
+		this.dataType = dataType;
+		this.original = original;
+		this.url = url;
+		this.md5 = md5;
+		this.type = type;
+		this.contextType = contextType;
+		this.name = name;
+		this.ext = ext;
+		this.length = length;
+	}
 
 	@Override
 	public boolean equals(Object o) {

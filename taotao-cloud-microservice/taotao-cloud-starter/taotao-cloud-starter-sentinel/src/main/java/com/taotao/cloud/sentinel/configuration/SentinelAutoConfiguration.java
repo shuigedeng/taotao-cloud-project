@@ -28,7 +28,9 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.sentinel.enhance.HerodotusSentinelFeign;
 import com.taotao.cloud.sentinel.properties.SentinelProperties;
+import feign.Feign;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -37,6 +39,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -67,8 +70,18 @@ public class SentinelAutoConfiguration implements InitializingBean {
 		return new HeaderRequestOriginParser();
 	}
 
+	/**
+	 * feignSentinel 适配器 (源码已经配置) 此处可以配置也可不配置
+	 */
+	//@Bean
+	//@Scope("prototype")
+	//@ConditionalOnMissingBean
+	//@ConditionalOnProperty(name = "feign.sentinel.enabled")
+	//public Feign.Builder feignSentinelBuilder() {
+	//	return HerodotusSentinelFeign.builder();
+	//}
+
 	@Bean
-	@ConditionalOnMissingBean
 	@ConditionalOnClass(HttpServletRequest.class)
 	public BlockExceptionHandler blockExceptionHandler() {
 		return (request, response, e) -> {
@@ -94,7 +107,6 @@ public class SentinelAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	@ConditionalOnClass(ServerResponse.class)
 	public BlockRequestHandler blockRequestHandler() {
 		return (exchange, e) -> {
@@ -130,7 +142,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 		public String parseOrigin(HttpServletRequest request) {
 			////基于请求参数,origin对应授权规则中的流控应用名称,也可通过getHeader传参
 			//String origin = request.getParameter("origin");
-			//
+
 			////TODO 此处做个通过IP做白名单的例子
 			//return origin;
 

@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +42,6 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = Dept.TABLE_NAME)
 @TableName(Dept.TABLE_NAME)
@@ -79,6 +79,17 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+	@Builder
+	public Dept(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String name, Long parentId, String remark, Integer sortNum, String tenantId) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.name = name;
+		this.parentId = parentId;
+		this.remark = remark;
+		this.sortNum = sortNum;
+		this.tenantId = tenantId;
+	}
 
 	@Override
 	public boolean equals(Object o) {

@@ -42,7 +42,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = UserRole.TABLE_NAME)
 @TableName(UserRole.TABLE_NAME)
@@ -62,6 +61,12 @@ public class UserRole extends SuperEntity<UserRole,Long> {
 	 */
 	@Column(name = "role_id", columnDefinition = "bigint not null comment '角色ID'")
 	private Long roleId;
+	@Builder
+	public UserRole(Long id, Long userId, Long roleId) {
+		super(id);
+		this.userId = userId;
+		this.roleId = roleId;
+	}
 
 	@Override
 	public boolean equals(Object o) {

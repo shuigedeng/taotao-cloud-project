@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.model.entity.scheduled;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.schedule.enums.ScheduledType;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,7 +44,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = ScheduledJob.TABLE_NAME)
 @TableName(ScheduledJob.TABLE_NAME)
@@ -131,6 +131,27 @@ public class ScheduledJob extends BaseSuperEntity<ScheduledJob, Long> {
 	 */
 	@Column(name = "type", columnDefinition = "varchar(64) not null comment '类型'")
 	private String type;
+	@Builder
+	public ScheduledJob(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String cron, String zone, Long fixedDelay, String fixedDelayString, Long fixedRate,
+		String fixedRateString, Long initialDelay, String initialDelayString, boolean cancel,
+		int num, String methodName, String beanName, String type) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.cron = cron;
+		this.zone = zone;
+		this.fixedDelay = fixedDelay;
+		this.fixedDelayString = fixedDelayString;
+		this.fixedRate = fixedRate;
+		this.fixedRateString = fixedRateString;
+		this.initialDelay = initialDelay;
+		this.initialDelayString = initialDelayString;
+		this.cancel = cancel;
+		this.num = num;
+		this.methodName = methodName;
+		this.beanName = beanName;
+		this.type = type;
+	}
 
 	@Override
 	public boolean equals(Object o) {

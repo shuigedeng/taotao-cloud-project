@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.model.entity.sms;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +25,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = SmsReach.TABLE_NAME)
 @TableName(SmsReach.TABLE_NAME)
@@ -50,6 +50,19 @@ public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
 
 	@Column(name = "num", columnDefinition = "varchar(2000) not null comment '预计发送条数'")
 	private String num;
+	@Builder
+	public SmsReach(Long id, LocalDateTime createTime, Long createBy,
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String signName, String smsName, String messageCode, String context, String smsRange,
+		String num) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.signName = signName;
+		this.smsName = smsName;
+		this.messageCode = messageCode;
+		this.context = context;
+		this.smsRange = smsRange;
+		this.num = num;
+	}
 
 	@Override
 	public boolean equals(Object o) {

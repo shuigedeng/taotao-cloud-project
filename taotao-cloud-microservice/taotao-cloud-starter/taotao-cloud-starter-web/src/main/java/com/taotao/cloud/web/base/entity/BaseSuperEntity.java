@@ -64,6 +64,27 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	public BaseSuperEntity() {
 	}
 
+	public BaseSuperEntity(I id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
+		Long updateBy, Integer version, Boolean delFlag) {
+		super(id);
+		this.createTime = createTime;
+		this.createBy = createBy;
+		this.updateTime = updateTime;
+		this.updateBy = updateBy;
+		this.version = version;
+		this.delFlag = delFlag;
+	}
+
+	public BaseSuperEntity(LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
+		Long updateBy, Integer version, Boolean delFlag) {
+		this.createTime = createTime;
+		this.createBy = createBy;
+		this.updateTime = updateTime;
+		this.updateBy = updateBy;
+		this.version = version;
+		this.delFlag = delFlag;
+	}
+
 	public LocalDateTime getCreateTime() {
 		return createTime;
 	}
@@ -111,4 +132,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	public void setDelFlag(boolean delFlag) {
 		this.delFlag = delFlag;
 	}
+
+
+
 }

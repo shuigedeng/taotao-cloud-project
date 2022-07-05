@@ -18,12 +18,14 @@ package com.taotao.cloud.sys.biz.model.entity.dict;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -44,7 +46,6 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)
@@ -84,6 +85,18 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注信息'")
 	private String remark;
 
+	@Builder
+	public Dict(Long id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
+		Long updateBy, Integer version, Boolean delFlag, String dictName, String dictCode,
+		String description, Integer sortNum, String remark) {
+		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+		this.dictName = dictName;
+		this.dictCode = dictCode;
+		this.description = description;
+		this.sortNum = sortNum;
+		this.remark = remark;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -100,5 +113,7 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 	public int hashCode() {
 		return getClass().hashCode();
 	}
+
+	public void aa(){}
 }
 
