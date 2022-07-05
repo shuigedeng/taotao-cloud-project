@@ -550,12 +550,20 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
                     }
                 })
             }
+
+            gradle dependencies
         }
     }
 
     classes {
         dependsOn createProperties
     }
+
+//    configurations {
+//        all {
+//            exclude group: 'log4j', module: 'log4j'
+//        }
+//    }
 }
 
 

@@ -21,6 +21,9 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rabbitmq")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rocketmq")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka")
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 

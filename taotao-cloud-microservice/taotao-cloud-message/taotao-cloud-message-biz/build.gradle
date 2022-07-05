@@ -14,7 +14,9 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     //阿里云 钉钉 SDK
-    implementation 'com.aliyun:alibaba-dingtalk-service-sdk:2.0.0'
+    implementation('com.aliyun:alibaba-dingtalk-service-sdk:2.0.0'){
+        exclude group: 'log4j', module: 'log4j'
+    }
     //企业微信第三方SDK
     implementation 'com.github.binarywang:weixin-java-cp:4.1.0'
     //动态线程池引入

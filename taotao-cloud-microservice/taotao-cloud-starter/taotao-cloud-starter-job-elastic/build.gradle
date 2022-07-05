@@ -3,6 +3,7 @@ dependencies {
 
     api('org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter'){
         exclude group: 'org.projectlombok', module: 'lombok'
+        exclude group: 'log4j', module: 'log4j'
     }
 
     api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-dingtalk"
