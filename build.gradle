@@ -550,8 +550,6 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
                     }
                 })
             }
-
-            gradle dependencies
         }
     }
 
