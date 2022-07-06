@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * 内容类型枚举
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:01
  */
 public enum MediaTypeEnum {
 	/**

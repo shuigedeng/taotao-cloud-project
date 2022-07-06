@@ -20,8 +20,9 @@ import java.lang.reflect.InvocationHandler;
 /**
  * Dinger Invocation Handler
  *
-
- * @since 1.2
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:59
  */
 public abstract class DingerInvocationHandler extends DingerMessageHandler implements
 	InvocationHandler {

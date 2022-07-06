@@ -24,6 +24,9 @@ import java.lang.annotation.Target;
 /**
  * DingerClose
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:17:11
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})

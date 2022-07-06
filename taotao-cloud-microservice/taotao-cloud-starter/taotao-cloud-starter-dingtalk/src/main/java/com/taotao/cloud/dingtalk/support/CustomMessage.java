@@ -21,8 +21,9 @@ import com.taotao.cloud.dingtalk.entity.DingerRequest;
 /**
  * 自定义消息接口
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:25:37
  */
 public interface CustomMessage {
 

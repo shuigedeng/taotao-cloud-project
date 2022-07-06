@@ -11,6 +11,9 @@ import java.io.IOException;
 /**
  * 请求缓存包装器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:11:48
  */
 public class CacheRequestWrapper extends HttpServletRequestWrapper {
 
@@ -28,7 +31,7 @@ public class CacheRequestWrapper extends HttpServletRequestWrapper {
 		if (header == null) {
 			return;
 		}
-		int contentLength = Integer.valueOf(header);
+		int contentLength = Integer.parseInt(header);
 		byte[] bytes = new byte[contentLength];
 		int readCount = 0;
 		while (readCount < contentLength) {

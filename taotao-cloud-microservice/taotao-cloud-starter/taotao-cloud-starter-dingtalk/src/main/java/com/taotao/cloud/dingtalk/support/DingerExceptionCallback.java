@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.entity.DingerCallback;
 /**
  * 发送异常回调接口
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:25:52
  */
 public interface DingerExceptionCallback {
 

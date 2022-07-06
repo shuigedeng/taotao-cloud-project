@@ -37,7 +37,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 注解执行器 处理重复请求 和串行指定条件的请求
  * <p>
- * 两种模式的拦截 1.rid 是针对每一次请求的 2.key+val 是针对相同参数请求
+ * 两种模式的拦截
+ * <p>
+ * 1.rid 是针对每一次请求的
+ * </p>
+ * 2.key+val 是针对相同参数请求
  * </p>
  *
  * @author shuigedeng
@@ -51,6 +55,8 @@ public class IdempotentAspect {
 	 * PER_FIX_KEY
 	 */
 	private final ThreadLocal<String> PER_FIX_KEY = new ThreadLocal<>();
+
+	private final ThreadLocal<ZLock> ZLOCK_CONTEXT = new ThreadLocal<>();
 
 	/**
 	 * 配置注解后 默认开启
@@ -88,16 +94,14 @@ public class IdempotentAspect {
 		Idempotent idempotent = AspectUtil.getAnnotation(joinPoint, Idempotent.class);
 
 		if (enable && null != idempotent) {
-			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-				.getRequestAttributes();
+			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 			if (null == attributes) {
 				throw new IdempotentException("请求数据为空");
 			}
 			HttpServletRequest request = attributes.getRequest();
 
 			//1.判断模式
-			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-				|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
+			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 				//2.1.通过rid模式判断是否属于重复提交
 				String rid = request.getHeader(HEADER_RID_KEY);
 
@@ -111,10 +115,9 @@ public class IdempotentAspect {
 							throw new IdempotentException("命中RID重复请求");
 						}
 						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
+						ZLOCK_CONTEXT.set(result);
 					} else {
-						LogUtil.warn(
-							"msg1=header没有rid,防重复提交功能失效,,remoteHost={}"
-								+ request.getRemoteHost());
+						LogUtil.warn("msg1=header没有rid,防重复提交功能失效,,remoteHost={}" + request.getRemoteHost());
 					}
 				} catch (Exception e) {
 					LogUtil.error("获取redis锁发生异常", e);
@@ -122,15 +125,13 @@ public class IdempotentAspect {
 				}
 			}
 
-			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-				|| idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
+			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
 				//2.2.通过自定义key模式判断是否属于重复提交
 				String key = idempotent.key();
 				if (StringUtils.isNotBlank(key)) {
 					String val = "";
 					Object[] paramValues = joinPoint.getArgs();
-					String[] paramNames = ((CodeSignature) joinPoint.getSignature())
-						.getParameterNames();
+					String[] paramNames = ((CodeSignature) joinPoint.getSignature()).getParameterNames();
 					//获取自定义key的value
 					for (int i = 0; i < paramNames.length; i++) {
 						String params = JSON.toJSONString(paramValues[i]);
@@ -159,13 +160,12 @@ public class IdempotentAspect {
 							if (!Objects.nonNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
-								LogUtil.error(
-									"不允许重复执行,,key={},,targetName={},,methodName={}",
-									perFix, targetName, methodName);
+								LogUtil.error("不允许重复执行,,key={},,targetName={},,methodName={}", perFix, targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
 							//存储在当前线程
 							PER_FIX_KEY.set(perFix);
+							ZLOCK_CONTEXT.set(result);
 							LogUtil.info("msg1=当前请求已成功锁定:{}", perFix);
 						} catch (Exception e) {
 							LogUtil.error("获取redis锁发生异常", e);
@@ -184,22 +184,22 @@ public class IdempotentAspect {
 		try {
 			Idempotent idempotent = AspectUtil.getAnnotation(joinPoint, Idempotent.class);
 			if (enable && null != idempotent) {
-
-				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
-					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-						.getRequestAttributes();
+				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
+					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 					HttpServletRequest request = attributes.getRequest();
 					String rid = request.getHeader(HEADER_RID_KEY);
 					if (StringUtils.isNotBlank(rid)) {
 						try {
-							//redisService.unLock(REDIS_KEY_PREFIX + rid);
+							distributedLock.unlock(ZLOCK_CONTEXT.get());
+							// redisService.unLock(REDIS_KEY_PREFIX + rid);
 							LogUtil.info("msg1=当前请求已成功处理,,rid={}", rid);
+
+							PER_FIX_KEY.remove();
+							ZLOCK_CONTEXT.remove();
 						} catch (Exception e) {
 							LogUtil.error("释放redis锁异常", e);
 						}
 					}
-					PER_FIX_KEY.remove();
 				}
 
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
@@ -208,10 +208,12 @@ public class IdempotentAspect {
 					String key = idempotent.key();
 					if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(PER_FIX_KEY.get())) {
 						try {
+							distributedLock.unlock(ZLOCK_CONTEXT.get());
 							//redisService.unLock(PER_FIX_KEY.get());
 							LogUtil.info("msg1=当前请求已成功释放,,key={}", PER_FIX_KEY.get());
-							PER_FIX_KEY.set(null);
+
 							PER_FIX_KEY.remove();
+							ZLOCK_CONTEXT.remove();
 						} catch (Exception e) {
 							LogUtil.error("释放redis锁异常", e);
 						}

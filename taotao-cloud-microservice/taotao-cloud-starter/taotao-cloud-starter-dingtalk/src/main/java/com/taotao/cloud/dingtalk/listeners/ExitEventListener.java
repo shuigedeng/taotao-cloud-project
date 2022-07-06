@@ -24,8 +24,9 @@ import org.springframework.context.event.ContextClosedEvent;
 /**
  * Exit Listener
  *
- * @author Jaemon
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:47
  */
 public class ExitEventListener
 	extends MultiDingerRefresh

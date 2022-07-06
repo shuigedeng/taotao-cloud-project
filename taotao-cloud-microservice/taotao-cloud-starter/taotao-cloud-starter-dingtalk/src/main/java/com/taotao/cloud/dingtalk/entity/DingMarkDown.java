@@ -23,6 +23,9 @@ import java.util.Map;
 /**
  * Markdown 消息格式实体
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:44
  */
 public class DingMarkDown extends Message {
 

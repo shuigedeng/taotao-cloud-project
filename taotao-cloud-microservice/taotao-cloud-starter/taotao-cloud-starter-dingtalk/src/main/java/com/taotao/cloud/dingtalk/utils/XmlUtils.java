@@ -27,6 +27,9 @@ import java.util.List;
 /**
  * XML字符串JavaBean对象互转工具类
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:43
  */
 public class XmlUtils {
 

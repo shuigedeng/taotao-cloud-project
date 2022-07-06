@@ -1,1 +1,1 @@
-com.taotao.cloud.job.elastic.configuration.ElasticJobConfiguration
+com.taotao.cloud.job.elastic.configuration.ElasticJobAutoConfiguration

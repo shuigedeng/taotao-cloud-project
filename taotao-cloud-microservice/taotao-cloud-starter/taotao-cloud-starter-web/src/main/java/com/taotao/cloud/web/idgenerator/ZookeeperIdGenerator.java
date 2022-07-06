@@ -137,14 +137,12 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 						zkAddressNode = PATH_FOREVER + "/" + realNode.get(listenAddress);
 						this.workerId = workerId;//启动worder时使用会使用
 						if (!checkInitTimeStamp(curator, zkAddressNode)) {
-							throw new RuntimeException(
-								"init timestamp check error,forever node timestamp gt this node time");
+							throw new RuntimeException("init timestamp check error,forever node timestamp gt this node time");
 						}
 						//准备创建临时节点
 						doService(curator);
 						updateLocalWorkerID(this.workerId);
-						LogUtil.info(
-							"[Old NODE]find forever node have this endpoint ip-{} port-{} workid-{} childnode and start SUCCESS",
+						LogUtil.info("[Old NODE]find forever node have this endpoint ip-{} port-{} workid-{} childnode and start SUCCESS",
 							ip, port, this.workerId);
 					} else {
 						//表示新启动的节点,创建持久节点 ,不用check时间
@@ -154,8 +152,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 						this.workerId = Integer.parseInt(nodeKey[1]);
 						doService(curator);
 						updateLocalWorkerID(this.workerId);
-						LogUtil.info(
-							"[New NODE]can not find node on forever node that endpoint ip-{} port-{} workid-{},create own node on forever node and start SUCCESS ",
+						LogUtil.info("[New NODE]can not find node on forever node that endpoint ip-{} port-{} workid-{},create own node on forever node and start SUCCESS ",
 							ip, port, this.workerId);
 					}
 				}
@@ -163,11 +160,9 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 				LogUtil.error("Start node ERROR {}", e);
 				try {
 					Properties properties = new Properties();
-					properties.load(
-						new FileInputStream(new File(PROP_PATH.replace("{port}", port + ""))));
+					properties.load(new FileInputStream(new File(PROP_PATH.replace("{port}", port + ""))));
 					workerId = Integer.parseInt(properties.getProperty("workerID"));
-					LogUtil.warn("START FAILED ,use local node file properties workerID-{}",
-						workerId);
+					LogUtil.warn("START FAILED ,use local node file properties workerID-{}", workerId);
 				} catch (Exception e1) {
 					LogUtil.error("Read file error ", e1);
 					return false;

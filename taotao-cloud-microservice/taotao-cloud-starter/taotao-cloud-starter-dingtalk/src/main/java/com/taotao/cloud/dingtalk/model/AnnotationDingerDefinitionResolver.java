@@ -37,11 +37,11 @@ import java.util.List;
 /**
  * dinger定义-注解方式
  *
-
- * @since 1.2
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:09
  */
-public class AnnotationDingerDefinitionResolver extends
-	AbstractDingerDefinitionResolver<List<Class<?>>> {
+public class AnnotationDingerDefinitionResolver extends AbstractDingerDefinitionResolver<List<Class<?>>> {
 
 	@Override
 	public void resolver(List<Class<?>> dingerClasses) {

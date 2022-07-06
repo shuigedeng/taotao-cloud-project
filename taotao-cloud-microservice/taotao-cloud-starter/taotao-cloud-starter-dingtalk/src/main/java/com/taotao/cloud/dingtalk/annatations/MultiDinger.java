@@ -27,8 +27,9 @@ import java.lang.annotation.Target;
 /**
  * MultiDinger
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:25
  */
 @Target(ElementType.ANNOTATION_TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -38,14 +39,16 @@ public @interface MultiDinger {
 	/**
 	 * 指定Dinger类型
 	 *
-	 * @return dinger {@link DingerType}
+	 * @return {@link DingerType }
+	 * @since 2022-07-06 15:18:25
 	 */
 	DingerType dinger();
 
 	/**
 	 * global dingerHandler
 	 *
-	 * @return {@link DingerConfigHandler}
+	 * @return {@link Class }<{@link ? } {@link extends } {@link DingerConfigHandler }>
+	 * @since 2022-07-06 15:18:25
 	 */
 	Class<? extends DingerConfigHandler> handler();
 }

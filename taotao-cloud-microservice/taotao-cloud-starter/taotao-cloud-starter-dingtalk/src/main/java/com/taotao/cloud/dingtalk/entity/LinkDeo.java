@@ -18,6 +18,9 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * Dinger图文类型实体对象
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:00
  */
 public class LinkDeo {
 

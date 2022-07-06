@@ -27,12 +27,13 @@ import java.lang.annotation.Target;
  * DingerText
  *
  * <pre>
- *     &#064;DingerText(value = "send to dingtalk at ${date}", tokenId = @DingerTokenId("20200906"), phones = {"13520200906"})
- *     void method(@Keyword String keyword, String date) {...}
+ * &#064;DingerText(value = "send to dingtalk at ${date}", tokenId = @DingerTokenId("20200906"), phones = {"13520200906"})
+ * void method(@Keyword String keyword, String date) {...}
  * </pre>
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:11
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
@@ -42,35 +43,40 @@ public @interface DingerText {
 	/**
 	 * text
 	 *
-	 * @return send text
+	 * @return {@link String }
+	 * @since 2022-07-06 15:18:11
 	 */
 	String value();
 
 	/**
 	 * atAll. either atAll or phones
 	 *
-	 * @return whether &#064;all members
+	 * @return boolean
+	 * @since 2022-07-06 15:18:11
 	 */
 	boolean atAll() default false;
 
 	/**
 	 * phones. either atAll or phones
 	 *
-	 * @return &#064; designated members
+	 * @return {@link String[] }
+	 * @since 2022-07-06 15:18:11
 	 */
 	String[] phones() default {};
 
 	/**
 	 * tokenId
 	 *
-	 * @return token info
+	 * @return {@link DingerTokenId }
+	 * @since 2022-07-06 15:18:11
 	 */
 	DingerTokenId tokenId() default @DingerTokenId("");
 
 	/**
 	 * asyncExecute
 	 *
-	 * @return async execute send
+	 * @return {@link AsyncExecuteType }
+	 * @since 2022-07-06 15:18:11
 	 */
 	AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
 }

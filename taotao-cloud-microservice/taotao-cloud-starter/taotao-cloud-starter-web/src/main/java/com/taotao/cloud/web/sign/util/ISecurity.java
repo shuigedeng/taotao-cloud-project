@@ -6,7 +6,9 @@ import com.taotao.cloud.web.sign.properties.EncryptBodyProperties;
 /**
  * 加密解密接口
  *
- * @since 2021年4月27日21:40:21
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:43:41
  */
 public interface ISecurity {
 

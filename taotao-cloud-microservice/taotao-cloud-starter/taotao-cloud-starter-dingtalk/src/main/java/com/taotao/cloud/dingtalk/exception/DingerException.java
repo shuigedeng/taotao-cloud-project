@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.entity.ExceptionPairs;
 /**
  * 异常类
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:24
  */
 public class DingerException extends RuntimeException {
     private ExceptionPairs pairs;

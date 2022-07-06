@@ -80,8 +80,7 @@ public class CoreAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean(PropertyCache.class)
-	public CoreCommandLineRunner coreCommandLineRunner(PropertyCache propertyCache,
-		CoreProperties coreProperties) {
+	public CoreCommandLineRunner coreCommandLineRunner(PropertyCache propertyCache, CoreProperties coreProperties) {
 		return new CoreCommandLineRunner(propertyCache, coreProperties);
 	}
 

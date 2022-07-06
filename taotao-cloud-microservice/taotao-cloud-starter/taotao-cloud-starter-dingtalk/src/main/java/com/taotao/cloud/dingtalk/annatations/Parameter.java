@@ -24,13 +24,20 @@ import java.lang.annotation.Target;
 /**
  * Parameter
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:31
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 public @interface Parameter {
 
+	/**
+	 * 价值
+	 *
+	 * @return {@link String }
+	 * @since 2022-07-06 15:18:31
+	 */
 	String value();
 }

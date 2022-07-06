@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 /**
  * 类型异常
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:30
  */
 public class MsgTypeException extends DingerException {
     public MsgTypeException(String msg) {

@@ -26,6 +26,9 @@ import java.lang.annotation.Target;
 /**
  * 指定当前 <code>***Dinger</code> 使用的 Dinger 类型
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:17:08
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -35,7 +38,8 @@ public @interface Dinger {
 	/**
 	 * 指定使用的Dinger
 	 *
-	 * @return 返回Dinger {@link DingerType}
+	 * @return {@link DingerType }
+	 * @since 2022-07-06 15:17:08
 	 */
 	DingerType value();
 }

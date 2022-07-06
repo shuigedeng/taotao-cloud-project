@@ -30,11 +30,11 @@ import java.util.Map;
 /**
  * Dinger Handle Proxy
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:51
  */
 public class DingerHandleProxy extends DingerInvocationHandler {
-
 
 	public DingerHandleProxy(SessionConfiguration sessionConfiguration) {
 		this.dingerRobot = sessionConfiguration.getDingerRobot();

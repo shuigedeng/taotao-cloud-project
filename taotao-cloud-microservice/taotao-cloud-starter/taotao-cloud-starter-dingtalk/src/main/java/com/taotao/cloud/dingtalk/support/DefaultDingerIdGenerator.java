@@ -22,6 +22,9 @@ import java.util.UUID;
 /**
  * dkid 生成默认算法
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:25:45
  */
 public class DefaultDingerIdGenerator implements DingerIdGenerator {
 

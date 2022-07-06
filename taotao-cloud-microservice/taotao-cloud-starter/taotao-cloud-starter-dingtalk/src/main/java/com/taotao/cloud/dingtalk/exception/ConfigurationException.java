@@ -21,8 +21,9 @@ import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 /**
  * 配置异常
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:19
  */
 public class ConfigurationException extends DingerException {
     public ConfigurationException(String msg) {

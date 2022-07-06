@@ -23,6 +23,9 @@ import java.util.List;
 /**
  * 随机选择算法
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:22
  */
 public class RandomHandler implements AlgorithmHandler {
 

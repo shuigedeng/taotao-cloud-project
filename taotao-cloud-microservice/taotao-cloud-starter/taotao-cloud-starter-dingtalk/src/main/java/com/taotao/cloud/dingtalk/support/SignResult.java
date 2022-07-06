@@ -19,8 +19,9 @@ package com.taotao.cloud.dingtalk.support;
 /**
  * 签名返回体
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:14
  */
 public class SignResult extends SignBase {
 

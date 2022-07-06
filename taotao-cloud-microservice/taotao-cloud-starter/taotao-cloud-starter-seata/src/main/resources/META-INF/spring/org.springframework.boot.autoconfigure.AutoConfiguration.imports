@@ -1,1 +1,1 @@
-com.taotao.cloud.seata.configuration.SeataDataSourceConfiguration
+com.taotao.cloud.seata.configuration.SeataAutoConfiguration

@@ -16,7 +16,9 @@ import org.springframework.util.StringUtils;
 /**
  * <p>SHA加密工具类</p>
  *
- * @since 2019年4月16日14:11:20
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:44:22
  */
 public class ShaUtil implements ISecurity {
 

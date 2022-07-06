@@ -11,7 +11,9 @@ import java.lang.annotation.Target;
 /**
  * <p>解密含有{@link org.springframework.web.bind.annotation.RequestBody}注解的参数请求数据，可用于整个控制类或者某个控制器上</p>
  *
- * @since 2021年3月10日11:31:03
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:41:36
  */
 @Target(value = {ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

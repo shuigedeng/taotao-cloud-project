@@ -25,6 +25,8 @@ import com.taotao.cloud.sys.biz.mapstruct.IDictMapStruct;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
+import com.taotao.cloud.web.idempotent.Idempotent;
+import com.taotao.cloud.web.limit.Limit;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +55,8 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	 * @since 2022-07-02 10:17:59
 	 */
 	@NotAuth
+	@Idempotent(perFix = "findByCode")
+	@Limit(key = "limitTest", period = 10, count = 3)
 	@SentinelResource("findByCode")
 	@GetMapping("/code")
 	public FeignDictRes findByCode(@RequestParam(value = "code") String code) {

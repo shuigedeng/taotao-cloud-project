@@ -9,13 +9,16 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * 数字证书配置
  *
- * @since 2021/3/12 16:55
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:43:19
  */
 @RefreshScope
 @ConfigurationProperties(prefix = SignProperties.PREFIX)
 public class SignProperties {
 
 	public static final String PREFIX = "taotao.cloud.web.sign";
+
 	private boolean enabled = false;
 
 	/**

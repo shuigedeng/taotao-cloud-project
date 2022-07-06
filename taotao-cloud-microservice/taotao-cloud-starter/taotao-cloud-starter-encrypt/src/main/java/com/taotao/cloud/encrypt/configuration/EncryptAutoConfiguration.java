@@ -38,6 +38,10 @@ import org.springframework.core.env.Environment;
 
 /**
  * 加密配置
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:09:09
  */
 @AutoConfiguration
 @EnableConfigurationProperties({EncryptProperties.class, EncryptFilterProperties.class})
@@ -72,6 +76,7 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 		if (type == null) {
 			throw new EncryptException("没有定义加密类型(No encryption type is defined)");
 		}
+
 		switch (type) {
 			case BASE64:
 				bean.setBeanClass(Base64EncryptHandler.class);
@@ -143,10 +148,8 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 		@Bean
 		public DefaultPointcutAdvisor sortSignEncryptAdvisor(
 			@Value("${encrypt.signSecret}") String sortSignSecret) {
-			SignEncryptInterceptor interceptor = new SignEncryptInterceptor(sortSignSecret,
-				signEncryptHandler);
-			AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null,
-				SignEncrypt.class);
+			SignEncryptInterceptor interceptor = new SignEncryptInterceptor(sortSignSecret, signEncryptHandler);
+			AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null, SignEncrypt.class);
 			DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
 			advisor.setPointcut(pointcut);
 			advisor.setAdvice(interceptor);

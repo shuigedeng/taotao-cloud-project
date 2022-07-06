@@ -1,10 +1,12 @@
 package com.taotao.cloud.encrypt.enums;
 
 
-
 /**
  * 加密类型枚举类
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:09:41
  */
 public enum EncryptType {
 

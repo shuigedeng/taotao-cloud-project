@@ -24,8 +24,9 @@ import java.util.List;
 /**
  * BeanTag
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:49
  */
 @XmlRootElement(name = "dinger")
 public class BeanTag {

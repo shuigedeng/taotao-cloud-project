@@ -16,6 +16,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 签名加密拦截器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:11:23
  */
 public class SignEncryptInterceptor implements MethodInterceptor {
 

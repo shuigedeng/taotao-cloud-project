@@ -4,7 +4,9 @@ package com.taotao.cloud.web.sign.exception;
 /**
  * 数字签名异常
  *
- * @since 2021年3月4日17:33:55
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:42:27
  */
 public class SignDtguaiException extends RuntimeException {
 

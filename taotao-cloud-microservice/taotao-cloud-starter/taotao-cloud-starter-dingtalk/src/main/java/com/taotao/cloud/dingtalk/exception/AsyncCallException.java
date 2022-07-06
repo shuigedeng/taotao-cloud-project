@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 /**
  * 异步调用异常
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:15
  */
 public class AsyncCallException extends DingerException {
     public AsyncCallException(String msg) {

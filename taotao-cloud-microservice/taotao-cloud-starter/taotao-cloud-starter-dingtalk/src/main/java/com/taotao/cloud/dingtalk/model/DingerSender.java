@@ -24,8 +24,9 @@ import com.taotao.cloud.dingtalk.properties.DingerProperties;
 /**
  * DingTalk Sender
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:22
  */
 public interface DingerSender {
 

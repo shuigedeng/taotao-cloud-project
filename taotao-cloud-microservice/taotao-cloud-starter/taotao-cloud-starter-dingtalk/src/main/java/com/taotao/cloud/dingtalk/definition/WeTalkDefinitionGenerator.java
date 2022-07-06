@@ -30,13 +30,27 @@ import com.taotao.cloud.dingtalk.xml.MessageTag;
 /**
  * 企业微信消息体定义生成类
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:00
  */
 public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成生成注解文本消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:19:00
 	 */
 	public static class AnnotationText extends DingerDefinitionGenerator<DingerText> {
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:19:00
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerText> context) {
 			return dingerTextHandler(DingerType.WETALK, context);
@@ -46,9 +60,20 @@ public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成注解Markdown消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:19:00
 	 */
 	public static class AnnotationMarkDown extends DingerDefinitionGenerator<DingerMarkdown> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:19:01
+		 */
 		@Override
 		public DingerDefinition generator(
 			DingerDefinitionGeneratorContext<DingerMarkdown> context) {
@@ -59,9 +84,20 @@ public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML文本消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:19:01
 	 */
 	public static class XmlText extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:19:01
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.WETALK_XML_TEXT, context);
@@ -71,9 +107,20 @@ public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML Markdown消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:19:01
 	 */
 	public static class XmlMarkdown extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:19:01
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.WETALK_XML_MARKDOWN, context);
@@ -83,9 +130,20 @@ public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML ImageText消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:19:01
 	 */
 	public static class AnnotationImageText extends DingerDefinitionGenerator<DingerImageText> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:19:01
+		 */
 		@Override
 		public DingerDefinition generator(
 			DingerDefinitionGeneratorContext<DingerImageText> context) {
@@ -96,9 +154,20 @@ public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML ImageText消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:19:01
 	 */
 	public static class XmlImageText extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:19:01
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.WETALK_XML_IMAGETEXT, context);

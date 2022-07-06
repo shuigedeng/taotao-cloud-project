@@ -13,7 +13,7 @@ dependencies {
     api 'org.apache.skywalking:apm-toolkit-logback-1.x'
     api 'org.apache.skywalking:apm-toolkit-trace'
 
-    implementation 'com.baomidou:mybatis-plus-extension'
+    compileOnly 'com.baomidou:mybatis-plus-extension'
 
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
     api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.0"

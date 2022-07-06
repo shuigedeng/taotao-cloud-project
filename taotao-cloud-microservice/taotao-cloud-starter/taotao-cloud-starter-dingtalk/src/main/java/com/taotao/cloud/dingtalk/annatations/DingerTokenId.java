@@ -24,8 +24,9 @@ import java.lang.annotation.Target;
 /**
  * DingerTokenId
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:15
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.ANNOTATION_TYPE})
@@ -33,17 +34,26 @@ import java.lang.annotation.Target;
 public @interface DingerTokenId {
 
 	/**
-	 * @return tokenId
+	 * 价值
+	 *
+	 * @return {@link String }
+	 * @since 2022-07-06 15:18:15
 	 */
 	String value();
 
 	/**
-	 * @return dinger sign key
+	 * 秘密
+	 *
+	 * @return {@link String }
+	 * @since 2022-07-06 15:18:15
 	 */
 	String secret() default "";
 
 	/**
-	 * @return inner decrypt key
+	 * 解密密钥
+	 *
+	 * @return {@link String }
+	 * @since 2022-07-06 15:18:16
 	 */
 	String decryptKey() default "";
 }

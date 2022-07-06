@@ -25,7 +25,9 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * <p>AES加密处理工具类</p>
  *
- * @since 2021年3月15日18:28:42
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:44:10
  */
 public class AesUtil implements ISecurity {
 

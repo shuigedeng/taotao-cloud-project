@@ -26,8 +26,9 @@ import java.util.Map;
 /**
  * Dinger Definition工厂类
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:43
  */
 public class DingerDefinitionGeneratorFactory {
 

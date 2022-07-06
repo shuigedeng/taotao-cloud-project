@@ -34,8 +34,9 @@ import org.springframework.util.ClassUtils;
 /**
  * ClassPathScanForResources
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:20
  */
 public final class ClassPathScanForResources {
 

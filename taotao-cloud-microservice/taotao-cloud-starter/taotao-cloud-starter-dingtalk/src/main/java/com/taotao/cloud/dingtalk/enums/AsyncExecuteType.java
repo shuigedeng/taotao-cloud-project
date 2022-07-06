@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * AsyncExecuteType
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:38
  */
 public enum AsyncExecuteType {
 	TRUE(true),
@@ -28,6 +29,13 @@ public enum AsyncExecuteType {
 
 	private boolean type;
 
+	/**
+	 * 异步执行类型
+	 *
+	 * @param type 类型
+	 * @return
+	 * @since 2022-07-06 15:20:38
+	 */
 	AsyncExecuteType(boolean type) {
 		this.type = type;
 	}

@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 /**
  * 发送消息异常
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:35
  */
 public class SendMsgException extends DingerException {
 

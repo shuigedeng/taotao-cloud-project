@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.support;
 /**
  * dkid 生成接口
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:00
  */
 public interface DingerIdGenerator {
 

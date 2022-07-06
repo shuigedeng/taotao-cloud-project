@@ -46,18 +46,19 @@ import org.springframework.context.ApplicationContextAware;
  * <p>-------</p>
  * <h3>Application InitializingBean</h3>
  * <pre>
- *     {@code @Component}
- *     {@code @DependsOn(AlgorithmHandler.MULTI_DINGER_PRIORITY_EXECUTE)}
- *     <span style="color:green"> public class ServiceInit implements InitializingBean {</span>
- *         {@code @Override}
- *          public void afterPropertiesSet() throws Exception {
- *              // ...
- *          }
- *     <span style="color:green"> }</span>
+ * {@code @Component}
+ * {@code @DependsOn(AlgorithmHandler.MULTI_DINGER_PRIORITY_EXECUTE)}
+ * <span style="color:green"> public class ServiceInit implements InitializingBean {</span>
+ * {@code @Override}
+ * public void afterPropertiesSet() throws Exception {
+ * // ...
+ * }
+ * <span style="color:green"> }</span>
  * </pre>
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:00
  */
 public class MultiDingerAlgorithmInjectRegister implements ApplicationContextAware,
 	InitializingBean {

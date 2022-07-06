@@ -21,8 +21,9 @@ import com.taotao.cloud.dingtalk.exception.DingerException;
 /**
  * 异常回调信息实体
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:24
  */
 public class DingerCallback<T> {
 

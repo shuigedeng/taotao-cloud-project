@@ -21,6 +21,10 @@ import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;
 
 /**
  * MultiDingerRefresh
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:17
  */
 public class MultiDingerRefresh extends DingerRefresh {
 

@@ -3,7 +3,9 @@ package com.taotao.cloud.web.sign.enums;
 /**
  * <p>SHA加密类型</p>
  *
- * @since 2019年4月16日14:10:18
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:42:11
  */
 public enum SHAEncryptType {
 
@@ -24,8 +26,7 @@ public enum SHAEncryptType {
 	 */
 	SHA512("sha-512");
 
-	String value;
-
+	final String value;
 
 	SHAEncryptType(String value) {
 		this.value = value;

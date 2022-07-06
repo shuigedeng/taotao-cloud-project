@@ -23,6 +23,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * DingTalk签名接口
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:03
  */
 public interface DingerSignAlgorithm<T extends SignBase> {
 

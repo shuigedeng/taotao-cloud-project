@@ -28,6 +28,9 @@ import java.util.stream.Collectors;
 /**
  * ApplicationEventTimeTable
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:40
  */
 public class DingerListenersProperty {
 

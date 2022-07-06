@@ -13,6 +13,9 @@ import java.io.IOException;
 /**
  * 主体请求加密包装器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:12:00
  */
 public class EncryptBodyRequestWrapper extends HttpServletRequestWrapper {
 
@@ -27,7 +30,7 @@ public class EncryptBodyRequestWrapper extends HttpServletRequestWrapper {
 		if (header == null) {
 			return;
 		}
-		int contentLength = Integer.valueOf(header);
+		int contentLength = Integer.parseInt(header);
 		byte[] bytes = new byte[contentLength];
 		int readCount = 0;
 		while (readCount < contentLength) {

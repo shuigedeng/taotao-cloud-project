@@ -6,7 +6,9 @@ import com.taotao.cloud.web.sign.enums.DecryptBodyMethod;
 /**
  * <p>解密注解信息</p>
  *
- * @since 2019年4月16日14:10:18
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:41:48
  */
 public class DecryptAnnotationInfoBean {
 

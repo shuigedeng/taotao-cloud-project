@@ -12,7 +12,7 @@ public enum SensitiveStrategy {
 	 */
 	USERNAME(s -> s.replaceAll("(\\S)\\S(\\S*)", "$1*$2")),
 	/**
-	 * Id card sensitive type.
+	 * I'd card sensitive type.
 	 */
 	ID_CARD(s -> s.replaceAll("(\\d{4})\\d{10}(\\w{4})", "$1****$2")),
 	/**

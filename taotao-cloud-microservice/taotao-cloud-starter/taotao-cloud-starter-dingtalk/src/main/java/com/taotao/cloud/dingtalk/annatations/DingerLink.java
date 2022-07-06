@@ -27,6 +27,9 @@ import java.lang.annotation.Target;
 /**
  * DingerLink(仅限DingTalk {@link DingerType#DINGTALK})
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:17:22
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
@@ -36,16 +39,21 @@ public @interface DingerLink {
 	/**
 	 * tokenId
 	 *
-	 * @return token info
+	 * @return {@link DingerTokenId }
+	 * @since 2022-07-06 15:17:22
 	 */
 	DingerTokenId tokenId() default @DingerTokenId("");
 
 	/**
 	 * asyncExecute
 	 *
-	 * @return async execute send
+	 * @return {@link AsyncExecuteType }
+	 * @since 2022-07-06 15:17:22
 	 */
 	AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
 
+	/**
+	 * clazz
+	 */
 	Class<?> clazz = LinkDeo.class;
 }

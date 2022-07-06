@@ -18,6 +18,9 @@ package com.taotao.cloud.dingtalk.support;
 /**
  * 异步执行回调接口
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:25:49
  */
 public interface DingerAsyncCallback {
 

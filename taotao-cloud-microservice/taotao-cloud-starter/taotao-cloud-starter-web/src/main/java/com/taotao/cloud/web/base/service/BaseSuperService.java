@@ -23,12 +23,13 @@ import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNull;
 
 /**
  * BaseSuperService
@@ -119,8 +120,8 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
-		Wrapper<T> countWrapper,
-		String msg);
+							Wrapper<T> countWrapper,
+							String msg);
 
 	/**
 	 * 幂等性新增记录
@@ -134,7 +135,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
-		Wrapper<T> countWrapper);
+							Wrapper<T> countWrapper);
 
 	/**
 	 * 幂等性新增或更新记录
@@ -149,7 +150,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper, String msg);
+									Predicate predicate, Wrapper<T> countWrapper, String msg);
 
 	/**
 	 * 幂等性新增或更新记录
@@ -163,6 +164,6 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper);
+									Predicate predicate, Wrapper<T> countWrapper);
 
 }

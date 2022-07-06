@@ -35,8 +35,9 @@ import org.springframework.util.ClassUtils;
 /**
  * Dinger扫描器
  *
-
- * @since 1.2
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:18
  */
 public class ClassPathDingerScanner extends ClassPathBeanDefinitionScanner {
 

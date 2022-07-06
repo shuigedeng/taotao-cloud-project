@@ -18,6 +18,9 @@ package com.taotao.cloud.dingtalk.session;
 /**
  * DingerSessionFactory
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:50
  */
 public interface DingerSessionFactory {
 

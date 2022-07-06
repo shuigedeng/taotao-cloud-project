@@ -23,6 +23,9 @@ import java.util.Map;
 /**
  * Text 消息格式实体
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:51
  */
 public class DingText extends Message {
 

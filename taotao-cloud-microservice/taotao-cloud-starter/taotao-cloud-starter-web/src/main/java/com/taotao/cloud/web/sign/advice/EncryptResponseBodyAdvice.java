@@ -33,7 +33,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * 或者控制类上含有<strong>{@link org.springframework.web.bind.annotation.RestController}</strong>
  * 以及package为encrypt.*下的注解有效
  *
- * @since 2019年6月17日09:29:45
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:46:59
  */
 @Order(1)
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
@@ -158,8 +160,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 				.encryptBodyMethod(encryptBody.value())
 				.key(encryptBody.otherKey())
 				.shaEncryptType(encryptBody.shaType())
-				.encryptMsgName(
-					CheckUtils.checkAndGetKey(encryptProperties.getResultName(),
+				.encryptMsgName(CheckUtils.checkAndGetKey(encryptProperties.getResultName(),
 						encryptBody.resultName(), "返回值名称"))
 				.build();
 

@@ -277,8 +277,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			}
 
 			// 反射得到 主键的值
-			Field idField = ReflectUtil.getField(metaObject.getOriginalObject().getClass(),
-				keyProperty);
+			Field idField = ReflectUtil.getField(metaObject.getOriginalObject().getClass(), keyProperty);
 			Object fieldValue = ReflectUtil.getFieldValue(metaObject.getOriginalObject(), idField);
 			// 判断ID 是否有值，有值就不
 			if (ObjectUtil.isNotEmpty(fieldValue)) {
@@ -286,9 +285,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			}
 
 			Object idVal =
-				keyType.getName().equalsIgnoreCase(StrPool.STRING_TYPE_NAME)
-					? String.valueOf(id)
-					: id;
+				keyType.getName().equalsIgnoreCase(StrPool.STRING_TYPE_NAME) ? String.valueOf(id) : id;
 			this.setFieldValByName(keyProperty, idVal, metaObject);
 		}
 

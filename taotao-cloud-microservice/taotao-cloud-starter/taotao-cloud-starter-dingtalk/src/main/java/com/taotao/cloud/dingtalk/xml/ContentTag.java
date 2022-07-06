@@ -25,6 +25,9 @@ import jakarta.xml.bind.annotation.XmlValue;
 /**
  * ContentTag
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:58
  */
 @XmlRootElement(name = "content")
 public class ContentTag {

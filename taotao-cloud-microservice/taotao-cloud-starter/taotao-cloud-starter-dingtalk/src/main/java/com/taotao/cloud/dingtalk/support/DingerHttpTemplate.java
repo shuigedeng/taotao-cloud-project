@@ -24,8 +24,9 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Dinger默认Http客户端
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:25:57
  */
 public class DingerHttpTemplate extends AbstractDingerHttpClient {
 

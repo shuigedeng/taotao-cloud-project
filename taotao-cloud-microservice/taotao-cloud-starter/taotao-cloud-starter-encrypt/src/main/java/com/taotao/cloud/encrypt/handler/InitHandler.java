@@ -18,9 +18,20 @@ import java.util.stream.Collectors;
 /**
  * 初始化处理器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:10:07
  */
 public class InitHandler {
 
+	/**
+	 * 处理程序
+	 *
+	 * @param filterConfig        过滤器配置
+	 * @param encryptCacheUri     加密缓存uri
+	 * @param isEncryptAnnotation 是加密注释
+	 * @since 2022-07-06 15:10:08
+	 */
 	public static void handler(FilterConfig filterConfig, Set<String> encryptCacheUri, AtomicBoolean isEncryptAnnotation) {
 		WebApplicationContext servletContext = WebApplicationContextUtils.getWebApplicationContext(filterConfig.getServletContext());
 		Map<String, Object> restControllers = new HashMap<>();
@@ -54,6 +65,13 @@ public class InitHandler {
 		}
 	}
 
+	/**
+	 * 控制器不类型处理程序
+	 *
+	 * @param types    类型
+	 * @param cacheUrl url缓存
+	 * @since 2022-07-06 15:10:08
+	 */
 	private static void controllerNotTypesHandler(List<Object> types, Set<String> cacheUrl) {
 		if (types.size() > 0) {
 			types.stream().forEach(t -> {
@@ -69,6 +87,13 @@ public class InitHandler {
 		}
 	}
 
+	/**
+	 * 控制器类型处理程序
+	 *
+	 * @param types    类型
+	 * @param cacheUrl url缓存
+	 * @since 2022-07-06 15:10:08
+	 */
 	private static void controllerTypesHandler(List<Object> types, Set<String> cacheUrl) {
 		if (types.size() > 0) {
 			types.stream().forEach(t -> {
@@ -85,6 +110,13 @@ public class InitHandler {
 	}
 
 
+	/**
+	 * restcontroller不类型处理程序
+	 *
+	 * @param types    类型
+	 * @param cacheUrl url缓存
+	 * @since 2022-07-06 15:10:08
+	 */
 	private static void restcontrollerNotTypesHandler(List<Object> types, Set<String> cacheUrl) {
 		if (types.size() > 0) {
 			types.stream().forEach(t -> {
@@ -100,6 +132,13 @@ public class InitHandler {
 		}
 	}
 
+	/**
+	 * restcontroller类型处理程序
+	 *
+	 * @param types    类型
+	 * @param cacheUrl url缓存
+	 * @since 2022-07-06 15:10:08
+	 */
 	private static void restcontrollerTypesHandler(List<Object> types, Set<String> cacheUrl) {
 		if (types.size() > 0) {
 			types.stream().forEach(t -> {
@@ -115,6 +154,13 @@ public class InitHandler {
 		}
 	}
 
+	/**
+	 * 类型url
+	 *
+	 * @param aClass 一个类
+	 * @return {@link String[] }
+	 * @since 2022-07-06 15:10:08
+	 */
 	private static String[] typeUrl(Class<?> aClass) {
 		String[] typeUrl = null;
 		if (AnnotationUtils.findAnnotation(aClass, RequestMapping.class) != null) {
@@ -123,6 +169,14 @@ public class InitHandler {
 		return typeUrl;
 	}
 
+	/**
+	 * 其他方法处理程序
+	 *
+	 * @param methods      方法
+	 * @param finalTypeUrl 最后输入url
+	 * @param cacheUrl     url缓存
+	 * @since 2022-07-06 15:10:08
+	 */
 	private static void restMethodHandler(List<Method> methods, String[] finalTypeUrl, Set<String> cacheUrl) {
 		methods.forEach(m -> {
 			if (AnnotationUtils.findAnnotation(m, PostMapping.class) != null || (AnnotationUtils.findAnnotation(m, RequestMapping.class) != null
@@ -132,6 +186,14 @@ public class InitHandler {
 		});
 	}
 
+	/**
+	 * 方法处理程序
+	 *
+	 * @param methods      方法
+	 * @param finalTypeUrl 最后输入url
+	 * @param cacheUrl     url缓存
+	 * @since 2022-07-06 15:10:09
+	 */
 	private static void MethodHandler(List<Method> methods, String[] finalTypeUrl, Set<String> cacheUrl) {
 		methods.forEach(m -> {
 			if ((AnnotationUtils.findAnnotation(m, PostMapping.class) != null && AnnotationUtils.findAnnotation(m, ResponseBody.class) != null) || (AnnotationUtils.findAnnotation(m, RequestMapping.class) != null
@@ -141,6 +203,14 @@ public class InitHandler {
 		});
 	}
 
+	/**
+	 * url处理程序
+	 *
+	 * @param m            米
+	 * @param finalTypeUrl 最后输入url
+	 * @param cacheUrl     url缓存
+	 * @since 2022-07-06 15:10:09
+	 */
 	private static void urlHandler(Method m, String[] finalTypeUrl, Set<String> cacheUrl) {
 		String[] urls = null;
 		if (AnnotationUtils.findAnnotation(m, PostMapping.class) != null) {

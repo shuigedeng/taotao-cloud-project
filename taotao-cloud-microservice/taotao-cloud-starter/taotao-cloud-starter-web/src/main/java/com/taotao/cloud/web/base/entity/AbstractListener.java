@@ -22,7 +22,7 @@ public class AbstractListener {
 
 	@PrePersist
 	public void prePersist(Object object) {
-		LogUtil.info("prePersis: {}", object);
+		LogUtil.info(" AbstractListener prePersis: {}", object);
 
 		// System.out.println("进行insert之前");
 		// if(entity instanceof TestEntity) {
@@ -42,37 +42,37 @@ public class AbstractListener {
 
 	@PreUpdate
 	public void preUpdate(Object object) {
-		LogUtil.info("preUpdate: {}", object);
+		LogUtil.info("AbstractListener preUpdate: {}", object);
 	}
 
 	@PreRemove
 	public void preRemove(Object object) {
-		LogUtil.info("preRemove: {}", object);
+		LogUtil.info("AbstractListener preRemove: {}", object);
 	}
 
 	@PreDestroy
 	public void preDestroy(Object object) {
-		LogUtil.info("preDestroy: {}", object);
+		LogUtil.info("AbstractListener preDestroy: {}", object);
 	}
 
 	@PostPersist
 	public void postPersist(Object object) {
-		LogUtil.info("postPersist: {}", object);
+		LogUtil.info("AbstractListener postPersist: {}", object);
 	}
 
 	@PostUpdate
 	public void postUpdate(Object object) {
-		LogUtil.info("postUpdate: {}", object);
+		LogUtil.info("AbstractListener postUpdate: {}", object);
 	}
 
 	@PostRemove
 	public void postRemove(Object object) {
-		LogUtil.info("postRemove: {}", object);
+		LogUtil.info("AbstractListener postRemove: {}", object);
 	}
 
 	@PostLoad
 	public void postLoad(Object object) {
-		LogUtil.info("postLoad: {}", object);
+		LogUtil.info("AbstractListener postLoad: {}", object);
 	}
 
 }

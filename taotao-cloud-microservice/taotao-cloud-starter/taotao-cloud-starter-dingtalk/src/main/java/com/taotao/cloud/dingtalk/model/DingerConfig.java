@@ -23,6 +23,9 @@ import com.taotao.cloud.dingtalk.utils.DingerUtils;
 /**
  * DingerConfig
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:30
  */
 public class DingerConfig {
 

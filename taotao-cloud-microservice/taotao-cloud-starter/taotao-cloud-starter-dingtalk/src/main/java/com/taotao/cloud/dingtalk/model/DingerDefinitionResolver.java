@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.model;
 /**
  * DingerDefinition Resolver
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:48
  */
 public interface DingerDefinitionResolver<T> {
 

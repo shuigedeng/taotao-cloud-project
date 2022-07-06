@@ -55,8 +55,7 @@ public class RedisIdGenerator implements DisposableBean, CommandLineRunner {
 	 */
 	private void initIdWorker() {
 		if (Objects.isNull(redisRepository)) {
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
-			this.redisRepository = redisRepository;
+			this.redisRepository = ContextUtil.getBean(RedisRepository.class, true);
 		}
 
 		RedisAtomicLong redisAtomicLong = new RedisAtomicLong(ID_IDX,
@@ -72,16 +71,14 @@ public class RedisIdGenerator implements DisposableBean, CommandLineRunner {
 
 			cacheKey = ID_IDX + result;
 			boolean useSuccess = Boolean.TRUE.equals(redisRepository.opsForValue()
-				.setIfAbsent(cacheKey, System.currentTimeMillis(), CACHE_TIMEOUT,
-					TimeUnit.SECONDS));
+				.setIfAbsent(cacheKey, System.currentTimeMillis(), CACHE_TIMEOUT, TimeUnit.SECONDS));
 			if (useSuccess) {
 				workerId = (short) result;
 				break;
 			}
 		}
 		if (workerId == -1) {
-			throw new RuntimeException(
-				String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MAX_WORKER_ID_NUMBER_BY_MODE + 1));
+			throw new RuntimeException(String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MAX_WORKER_ID_NUMBER_BY_MODE + 1));
 		}
 
 		LogUtil.info("当前ID生成器编号: " + workerId);

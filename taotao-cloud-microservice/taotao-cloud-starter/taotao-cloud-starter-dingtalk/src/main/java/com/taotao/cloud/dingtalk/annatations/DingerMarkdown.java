@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 /**
  * DingerMarkdown
  *
- * <pre>
+ * <pre class="code">
  *     &#064;DingerMarkdown(
  *             value = "#### 下单失败啦 @13520200906\n - 订单号： ${orderNo}\n - 标识： ${flag}\n - 数量： ${num}",
  *             title = "下单结果反馈",

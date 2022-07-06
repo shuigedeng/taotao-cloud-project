@@ -23,6 +23,9 @@ import java.util.Map;
 /**
  * MultiDingerProperty
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:03
  */
 public class MultiDingerProperty {
 

@@ -26,8 +26,9 @@ import org.springframework.context.annotation.Import;
 /**
  * EnableMultiDinger
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:19
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -35,6 +36,12 @@ import org.springframework.context.annotation.Import;
 @Import(MultiDingerScannerRegistrar.class)
 public @interface EnableMultiDinger {
 
+	/**
+	 * 价值
+	 *
+	 * @return {@link MultiDinger[] }
+	 * @since 2022-07-06 15:18:19
+	 */
 	MultiDinger[] value() default {};
 
 }

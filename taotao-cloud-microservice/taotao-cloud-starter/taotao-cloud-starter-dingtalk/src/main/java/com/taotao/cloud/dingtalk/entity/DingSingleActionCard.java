@@ -22,8 +22,9 @@ import java.io.Serializable;
 /**
  * 整体跳转ActionCard类型
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:46
  */
 public class DingSingleActionCard extends DingTalkMessage {
 

@@ -22,7 +22,9 @@ import com.taotao.cloud.dingtalk.enums.DingerResponseCodeEnum;
 /**
  * Dinger响应体
  *
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:34
  */
 public class DingerResponse {
 

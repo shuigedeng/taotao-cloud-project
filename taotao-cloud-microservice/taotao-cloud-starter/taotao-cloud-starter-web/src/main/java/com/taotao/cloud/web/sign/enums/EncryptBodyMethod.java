@@ -14,7 +14,9 @@ import com.taotao.cloud.web.sign.util.security.sm.Sm4Util;
 /**
  * <p>加密方式</p>
  *
- * @since 2021年4月21日16:08:32
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:42:06
  */
 public enum EncryptBodyMethod {
 	/**

@@ -24,6 +24,9 @@ import java.lang.annotation.Target;
 /**
  * Keyword(quick locate to servive log)
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:22
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -31,5 +34,11 @@ import java.lang.annotation.Target;
 @Deprecated
 public @interface Keyword {
 
+	/**
+	 * 关键字
+	 *
+	 * @return boolean
+	 * @since 2022-07-06 15:18:22
+	 */
 	boolean keyword() default true;
 }

@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * DingTalk支持的消息类型
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:53
  */
 public enum DingTalkMsgType {
 	/**

@@ -28,6 +28,9 @@ import org.springframework.context.annotation.Import;
 /**
  * DingerScan
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:07
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -38,9 +41,10 @@ public @interface DingerScan {
 	/**
 	 * Alias for the {@link #basePackages()} attribute. Allows for more concise annotation
 	 * declarations e.g.: {@code @DingerScan("org.my.pkg")} instead of {@code
-	 * @DingerScan(basePackages = "org.my.pkg"})}.
 	 *
-	 * @return base package names
+	 * @return {@link String[] }
+	 * @DingerScan(basePackages = "org.my.pkg"})}.
+	 * @since 2022-07-06 15:18:07
 	 */
 	String[] value() default {};
 
@@ -48,7 +52,8 @@ public @interface DingerScan {
 	 * Base packages to scan for Dinger interfaces. Note that only interfaces with at least one
 	 * method will be registered; concrete classes will be ignored.
 	 *
-	 * @return base package names for scanning dinger interface
+	 * @return {@link String[] }
+	 * @since 2022-07-06 15:18:07
 	 */
 	String[] basePackages() default {};
 
@@ -56,7 +61,8 @@ public @interface DingerScan {
 	 * The {@link BeanNameGenerator} class to be used for naming detected components within the
 	 * Spring container.
 	 *
-	 * @return the class of {@link BeanNameGenerator}
+	 * @return {@link Class }<{@link ? } {@link extends } {@link BeanNameGenerator }>
+	 * @since 2022-07-06 15:18:07
 	 */
 	Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
 
@@ -68,7 +74,8 @@ public @interface DingerScan {
 	 * <p>
 	 * Note this can be combined with markerInterface.
 	 *
-	 * @return the annotation that the scanner will search for
+	 * @return {@link Class }<{@link ? } {@link extends } {@link Annotation }>
+	 * @since 2022-07-06 15:18:07
 	 */
 	Class<? extends Annotation> annotationClass() default Annotation.class;
 
@@ -80,7 +87,8 @@ public @interface DingerScan {
 	 * <p>
 	 * Note this can be combined with annotationClass.
 	 *
-	 * @return the parent that the scanner will search for
+	 * @return {@link Class }<{@link ? }>
+	 * @since 2022-07-06 15:18:08
 	 */
 	Class<?> markerInterface() default Class.class;
 }

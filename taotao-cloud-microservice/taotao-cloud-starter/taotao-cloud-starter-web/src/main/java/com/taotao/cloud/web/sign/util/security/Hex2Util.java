@@ -4,7 +4,9 @@ package com.taotao.cloud.web.sign.util.security;
 /**
  * <p>二进制转换工具类</p>
  *
- * @since 2019年4月10日10:53:09
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:44:16
  */
 public class Hex2Util {
 

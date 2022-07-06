@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 加密请求包装器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:12:08
  */
 public class EncryptRequestWrapper extends HttpServletRequestWrapper {
 
@@ -25,7 +29,7 @@ public class EncryptRequestWrapper extends HttpServletRequestWrapper {
 	public EncryptRequestWrapper(HttpServletRequest request, EncryptHandler encryptHandler) throws IOException, ServletException {
 		super(request);
 		this.encryptHandler = encryptHandler;
-		if (!request.getContentType().toLowerCase().equals(MediaType.APPLICATION_JSON_VALUE) && !request.getContentType().toLowerCase().equals(MediaType.APPLICATION_JSON_UTF8_VALUE.toLowerCase())) {
+		if (!request.getContentType().equalsIgnoreCase(MediaType.APPLICATION_JSON_VALUE) && !request.getContentType().equalsIgnoreCase(MediaType.APPLICATION_JSON_UTF8_VALUE)) {
 			throw new ServletException("contentType error");
 		}
 		ServletInputStream inputStream = request.getInputStream();
@@ -42,7 +46,7 @@ public class EncryptRequestWrapper extends HttpServletRequestWrapper {
 	public ServletInputStream getInputStream() throws IOException {
 		LogUtil.info("接收到的请求密文：" + new String(body));
 		byte[] decode = encryptHandler.decode(body);
-		String urlDecodeStr = URLDecoder.decode(new String(decode), "UTF-8");
+		String urlDecodeStr = URLDecoder.decode(new String(decode), StandardCharsets.UTF_8);
 		LogUtil.info("解密后的报文：" + urlDecodeStr);
 		final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(urlDecodeStr.getBytes());
 		return new ServletInputStream() {

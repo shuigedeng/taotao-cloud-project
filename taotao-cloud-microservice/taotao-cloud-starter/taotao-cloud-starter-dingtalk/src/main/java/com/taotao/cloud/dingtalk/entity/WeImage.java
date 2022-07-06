@@ -22,6 +22,9 @@ import java.io.Serializable;
 /**
  * 企业微信-消息类型-图片类型
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:20
  */
 public class WeImage extends WeTalkMessage {
 

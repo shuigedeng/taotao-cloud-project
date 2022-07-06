@@ -1,2 +1,2 @@
-com.taotao.cloud.logger.configuration.LoggerConfiguration
-com.taotao.cloud.logger.configuration.LogbackAccessConfiguration
+com.taotao.cloud.logger.configuration.LoggerAutoConfiguration
+com.taotao.cloud.logger.configuration.LogbackAccessAutoConfiguration

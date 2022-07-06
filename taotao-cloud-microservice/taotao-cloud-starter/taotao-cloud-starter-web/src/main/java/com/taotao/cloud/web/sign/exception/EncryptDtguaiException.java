@@ -4,7 +4,9 @@ package com.taotao.cloud.web.sign.exception;
 /**
  * 加密数据失败
  *
- * @since 2021年3月3日16:11:03
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:42:25
  */
 public class EncryptDtguaiException extends RuntimeException {
 
