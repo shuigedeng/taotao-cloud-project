@@ -66,14 +66,17 @@ public class RStreamListenerDetector implements BeanPostProcessor, InitializingB
 				String streamKey = listener.name();
 				Assert.hasText(streamKey, "@RStreamListener name must not be empty.");
 				LogUtil.info("Found @RStreamListener on bean:{} method:{}", beanName, method);
+
 				// 校验 method，method 入参数大于等于1
 				int paramCount = method.getParameterCount();
 				if (paramCount > 1) {
 					throw new IllegalArgumentException("@RStreamListener on method " + method + " parameter count must less or equal to 1.");
 				}
+
 				// streamOffset
 				ReadOffset readOffset = listener.offsetModel().getReadOffset();
 				StreamOffset<String> streamOffset = StreamOffset.create(streamKey, readOffset);
+
 				// 消费模式
 				MessageModel messageModel = listener.messageModel();
 				if (MessageModel.BROADCASTING == messageModel) {
@@ -104,6 +107,7 @@ public class RStreamListenerDetector implements BeanPostProcessor, InitializingB
 		streamMessageListenerContainer.register(readRequest, (message) -> {
 			// MapBackedRecord
 			invokeMethod(bean, method, message, listener.readRawBytes());
+
 			// ack
 			if (!autoAcknowledge) {
 				opsForStream.acknowledge(consumer.getGroup(), message);

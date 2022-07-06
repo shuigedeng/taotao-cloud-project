@@ -105,6 +105,7 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 		CacheProperties properties,
 		Environment environment) {
 		CacheProperties.Stream streamProperties = properties.getStream();
+
 		// 消费组名称
 		String consumerGroup = streamProperties.getConsumerGroup();
 		if (StringUtil.isBlank(consumerGroup)) {
@@ -113,6 +114,7 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 			consumerGroup =
 				StringUtil.isBlank(profile) ? appName : appName + CharPool.COLON + profile;
 		}
+
 		// 消费者名称
 		String consumerName = streamProperties.getConsumerName();
 		if (StringUtil.isBlank(consumerName)) {

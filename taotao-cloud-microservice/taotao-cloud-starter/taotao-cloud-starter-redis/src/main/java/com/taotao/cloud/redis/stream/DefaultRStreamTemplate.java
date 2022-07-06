@@ -57,11 +57,14 @@ public class DefaultRStreamTemplate implements RStreamTemplate {
 		}
 		String stream = Objects.requireNonNull(record.getStream(), "RStreamTemplate send stream name is null.");
 		Object recordValue = Objects.requireNonNull(record.getValue(), "RStreamTemplate send stream: " + stream + " value is null.");
+
 		Class<?> valueClass = recordValue.getClass();
+
 		// 2. 普通类型的 ObjectRecord
 		if (CUSTOM_CONVERSIONS.isSimpleType(valueClass)) {
 			return streamOperations.add(record);
 		}
+
 		// 3. 自定义类型处理
 		Map<String, Object> payload = new HashMap<>();
 		payload.put(RStreamTemplate.OBJECT_PAYLOAD_KEY, recordValue);
@@ -95,5 +98,21 @@ public class DefaultRStreamTemplate implements RStreamTemplate {
 	public Long trim(String name, long count, boolean approximateTrimming) {
 		return streamOperations.trim(name, count, approximateTrimming);
 	}
+
+	@Override
+	public Long acknowledge(String name, String group, String... recordIds) {
+		return streamOperations.acknowledge(name, group, recordIds);
+	}
+
+	@Override
+	public Long acknowledge(String name, String group, RecordId... recordIds) {
+		return streamOperations.acknowledge(name, group, recordIds);
+	}
+
+	@Override
+	public Long acknowledge(String group, Record<String, ?> record) {
+		return streamOperations.acknowledge(group, record);
+	}
+
 
 }
