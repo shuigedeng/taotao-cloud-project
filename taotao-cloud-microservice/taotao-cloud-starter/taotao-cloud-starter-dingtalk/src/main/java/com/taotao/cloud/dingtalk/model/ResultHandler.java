@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.model;
 /**
  * ResultHandler
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:34
  */
 public interface ResultHandler<T> {
 

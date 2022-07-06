@@ -13,7 +13,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  *       des-key: xiaoFuLoveXiaoQiu # DES加密秘钥
  * </pre>
  *
- * @since 2021年3月9日11:31:57
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:42:59
  */
 @RefreshScope
 @ConfigurationProperties(prefix = EncryptBodyProperties.PREFIX)

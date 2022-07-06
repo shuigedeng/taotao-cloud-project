@@ -3,9 +3,11 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //金山云
+    //https://search.maven.org/artifact/com.ksyun/ks3-kss-java-sdk
     api('com.ksyun:ks3-kss-java-sdk:1.0.2') {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
+
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

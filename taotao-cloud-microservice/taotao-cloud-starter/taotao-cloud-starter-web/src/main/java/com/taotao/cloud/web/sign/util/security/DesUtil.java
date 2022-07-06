@@ -16,7 +16,9 @@ import javax.crypto.spec.DESKeySpec;
 /**
  * <p>DES加密处理工具类</p>
  *
- * @since 2021年4月28日11:19:07
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:44:13
  */
 public class DesUtil implements ISecurity {
 

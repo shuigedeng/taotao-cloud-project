@@ -22,7 +22,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 是否启用自动获取用户信息注解 样例：public Object getUser(@EnableUser LoginUser user) 
+ * 是否启用自动获取用户信息注解
+ * <p></p>
+ * <pre class="code">
+ * public Object getUser(@EnableUser LoginUser user)
+ * </pre>
  *
  * @author shuigedeng
  * @version 2021.9
@@ -35,6 +39,9 @@ public @interface EnableUser {
 
 	/**
 	 * 是否查询LoginUser对象所有信息，true则通过rpc接口查询
+	 *
+	 * @return boolean
+	 * @since 2022-07-06 14:51:24
 	 */
 	boolean value() default false;
 }

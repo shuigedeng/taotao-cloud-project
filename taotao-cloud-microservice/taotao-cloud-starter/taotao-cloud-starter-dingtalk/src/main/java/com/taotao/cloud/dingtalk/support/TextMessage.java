@@ -22,6 +22,9 @@ import java.text.MessageFormat;
 /**
  * 默认Text消息格式
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:17
  */
 public class TextMessage implements CustomMessage {
 

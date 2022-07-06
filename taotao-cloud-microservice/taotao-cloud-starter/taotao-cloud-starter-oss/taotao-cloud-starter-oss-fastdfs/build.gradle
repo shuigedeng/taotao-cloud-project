@@ -2,6 +2,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
+    //https://search.maven.org/artifact/com.github.tobato/fastdfs-client
     api('com.github.tobato:fastdfs-client:1.27.2'){
         exclude group: 'commons-beanutils', module: 'commons-beanutils'
     }

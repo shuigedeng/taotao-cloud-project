@@ -56,12 +56,10 @@ public class RedisLockIdGenerator implements CommandLineRunner, ApplicationConte
 
 	public void idGeneratorWithDistributedLock() {
 		if (Objects.isNull(redisRepository)) {
-			RedisRepository redisRepository = applicationContext.getBean(RedisRepository.class);
-			this.redisRepository = redisRepository;
+			this.redisRepository = applicationContext.getBean(RedisRepository.class);
 		}
 		if (Objects.isNull(distributedLock)) {
-			DistributedLock distributedLock = applicationContext.getBean(DistributedLock.class);
-			this.distributedLock = distributedLock;
+			this.distributedLock = applicationContext.getBean(DistributedLock.class);
 		}
 
 		//获取mac地址

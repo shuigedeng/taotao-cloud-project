@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * Dinger响应码
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:48
  */
 public enum DingerResponseCodeEnum {
 	SUCCESS("D000", "success"),

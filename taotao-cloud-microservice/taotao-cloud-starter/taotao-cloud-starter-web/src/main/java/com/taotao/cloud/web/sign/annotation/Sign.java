@@ -9,7 +9,9 @@ import java.lang.annotation.Target;
 /**
  * 数字证书
  *
- * @since 2019年2月14日15:28:28
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:41:42
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

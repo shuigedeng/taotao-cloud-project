@@ -8,7 +8,9 @@ import com.taotao.cloud.web.sign.util.ISecurity;
 /**
  * sm4 加密解密工具类
  *
- * @since 2021年3月15日18:28:42
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:44:07
  */
 public class Sm4Util implements ISecurity {
 

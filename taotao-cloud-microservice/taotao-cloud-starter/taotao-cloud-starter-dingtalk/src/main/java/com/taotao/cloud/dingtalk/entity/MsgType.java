@@ -23,7 +23,9 @@ import java.util.Map;
 /**
  * 消息类型实体
  *
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:06
  */
 public class MsgType implements Serializable {
 

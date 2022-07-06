@@ -23,6 +23,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 /**
  * MessageTag
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:27:00
  */
 @XmlRootElement(name = "message")
 public class MessageTag {

@@ -19,6 +19,10 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
  * web配置
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:09:24
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = EncryptFilterProperties.PREFIX, name = "enabled", havingValue = "true")
@@ -33,8 +37,7 @@ public class EncryptFilterAutoConfiguration implements InitializingBean {
 
 	private final Environment environment;
 
-	public EncryptFilterAutoConfiguration(EncryptHandler encryptHandler,
-		Environment environment) {
+	public EncryptFilterAutoConfiguration(EncryptHandler encryptHandler, Environment environment) {
 		this.encryptHandler = encryptHandler;
 		this.environment = environment;
 	}

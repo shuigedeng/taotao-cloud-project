@@ -18,6 +18,9 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * Dinger类型
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:51
  */
 public enum DingerType {
 	DINGTALK("钉钉", "https://oapi.dingtalk.com/robot/send?access_token", true),

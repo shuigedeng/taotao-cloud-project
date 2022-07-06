@@ -1,1 +1,1 @@
-com.taotao.cloud.rocketmq.configuration.RocketMQConfiguration
+com.taotao.cloud.rocketmq.configuration.RocketMQAutoConfiguration

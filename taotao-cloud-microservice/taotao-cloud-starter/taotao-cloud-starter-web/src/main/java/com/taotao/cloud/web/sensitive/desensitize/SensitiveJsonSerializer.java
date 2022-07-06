@@ -17,6 +17,10 @@ import org.springframework.context.ApplicationContextAware;
 
 /**
  * 敏感信息序列化时 过滤
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-07-06 14:37:50
  */
 public class SensitiveJsonSerializer extends JsonSerializer<String>
 	implements ContextualSerializer, ApplicationContextAware {

@@ -22,6 +22,9 @@ import java.util.Map;
 /**
  * DingerHttpClient
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:25:54
  */
 public interface DingerHttpClient {
 

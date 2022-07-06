@@ -46,11 +46,11 @@ import org.springframework.util.FileCopyUtils;
 /**
  * dinger定义-xml方式
  *
-
- * @since 1.2
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:37
  */
 public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolver<Resource[]> {
-
 
 	@Override
 	public void resolver(Resource[] resources) {

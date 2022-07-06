@@ -18,7 +18,9 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * <p>RSA加密处理工具类</p>
  *
- * @since 2019年6月18日10:26:01
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:43:54
  */
 public class RsaUtil implements ISecurity {
 

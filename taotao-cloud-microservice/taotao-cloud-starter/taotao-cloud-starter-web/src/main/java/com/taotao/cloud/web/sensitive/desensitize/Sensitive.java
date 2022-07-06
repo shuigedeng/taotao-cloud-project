@@ -11,6 +11,10 @@ import java.lang.annotation.Target;
 
 /**
  * 敏感注解
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-07-06 14:37:57
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
@@ -18,5 +22,11 @@ import java.lang.annotation.Target;
 @JsonSerialize(using = SensitiveJsonSerializer.class)
 public @interface Sensitive {
 
+	/**
+	 * 策略
+	 *
+	 * @return {@link SensitiveStrategy }
+	 * @since 2022-07-06 14:37:59
+	 */
 	SensitiveStrategy strategy();
 }

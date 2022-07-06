@@ -24,6 +24,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * DINGTALK线程池参数配置-用于异步处理
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:32
  */
 @RefreshScope
 @ConfigurationProperties(prefix = HttpClientProperties.PREFIX)

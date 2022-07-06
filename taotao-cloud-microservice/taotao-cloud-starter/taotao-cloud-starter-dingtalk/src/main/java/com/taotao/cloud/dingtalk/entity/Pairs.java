@@ -18,6 +18,9 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * K-V对
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:17
  */
 public interface Pairs<K, V> {
 

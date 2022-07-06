@@ -27,6 +27,9 @@ import java.util.UUID;
 /**
  * DingTalk Utils
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:26
  */
 public class DingerUtils {
 

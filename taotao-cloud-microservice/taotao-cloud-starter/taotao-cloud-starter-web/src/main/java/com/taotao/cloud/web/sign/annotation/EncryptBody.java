@@ -12,7 +12,9 @@ import java.lang.annotation.Target;
 /**
  * <p>加密{@link org.springframework.web.bind.annotation.ResponseBody}响应数据，可用于整个控制类或者某个控制器上</p>
  *
- * @since 2019年4月16日14:09:02
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:41:29
  */
 @Target(value = {ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

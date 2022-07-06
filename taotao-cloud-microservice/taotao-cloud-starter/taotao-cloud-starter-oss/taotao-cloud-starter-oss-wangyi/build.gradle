@@ -3,10 +3,12 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //网易数帆
+    //https://search.maven.org/artifact/com.netease.cloud/nos-sdk-java-publiccloud
     api('com.netease.cloud:nos-sdk-java-publiccloud:1.3.1'){
         exclude group: 'log4j', module: 'log4j'
         exclude group: 'org.codehaus.jackson', module: 'jackson-core-asl'
     }
+
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

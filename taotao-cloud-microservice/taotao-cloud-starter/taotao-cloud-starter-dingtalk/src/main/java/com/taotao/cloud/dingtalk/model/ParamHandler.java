@@ -21,6 +21,9 @@ import java.util.Map;
 /**
  * ParamHandler
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:29
  */
 public interface ParamHandler {
 

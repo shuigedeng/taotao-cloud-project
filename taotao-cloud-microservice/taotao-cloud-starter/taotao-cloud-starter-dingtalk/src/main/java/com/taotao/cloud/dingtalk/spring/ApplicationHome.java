@@ -32,6 +32,9 @@ import org.springframework.util.StringUtils;
 /**
  * ApplicationHome
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:24:58
  */
 public class ApplicationHome {
 

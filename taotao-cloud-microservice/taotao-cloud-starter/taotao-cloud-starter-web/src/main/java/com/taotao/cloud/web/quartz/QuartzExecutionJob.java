@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.quartz;
 
-import static com.taotao.cloud.web.configuration.QuartzConfiguration.EXECUTOR;
+import static com.taotao.cloud.web.configuration.QuartzAutoConfiguration.EXECUTOR;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Objects;

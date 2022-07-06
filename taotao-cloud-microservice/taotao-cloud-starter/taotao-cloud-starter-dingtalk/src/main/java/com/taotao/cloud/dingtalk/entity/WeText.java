@@ -24,6 +24,9 @@ import java.util.Map;
 /**
  * 企业微信-消息类型-文本类型
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:31
  */
 public class WeText extends WeTalkMessage {
 

@@ -23,8 +23,6 @@ public class DesensitizeProperties {
 
 	/**
 	 * 脱敏级别： 0：不做脱敏处理 1：管理端用户手机号等信息脱敏 2：商家端信息脱敏（为2时，表示管理端，商家端同时脱敏）
-	 * <p>
-	 * PS:
 	 */
 	private Integer sensitiveLevel = 0;
 

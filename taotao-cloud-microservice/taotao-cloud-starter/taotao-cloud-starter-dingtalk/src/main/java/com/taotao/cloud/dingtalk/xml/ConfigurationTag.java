@@ -24,8 +24,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 /**
  * ConfigurationTag
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:55
  */
 @XmlRootElement(name = "configuration")
 public class ConfigurationTag {

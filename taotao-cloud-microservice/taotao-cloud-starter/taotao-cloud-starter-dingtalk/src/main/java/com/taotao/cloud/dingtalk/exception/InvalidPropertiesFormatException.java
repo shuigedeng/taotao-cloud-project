@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 /**
  * Invalid Properties Format Exception
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:27
  */
 public class InvalidPropertiesFormatException extends DingerException {
     public InvalidPropertiesFormatException(String msg) {

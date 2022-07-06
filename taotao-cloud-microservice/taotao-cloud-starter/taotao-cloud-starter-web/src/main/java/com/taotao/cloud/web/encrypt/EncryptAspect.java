@@ -15,40 +15,49 @@
  */
 package com.taotao.cloud.web.encrypt;
 
-import static com.taotao.cloud.web.encrypt.EncryptConstant.DECRYPT;
-import static com.taotao.cloud.web.encrypt.EncryptConstant.ENCRYPT;
-
-import java.lang.reflect.Field;
-import java.util.Objects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.jasypt.encryption.StringEncryptor;
 
+import java.lang.reflect.Field;
+import java.util.Objects;
+
+import static com.taotao.cloud.web.encrypt.EncryptConstant.DECRYPT;
+import static com.taotao.cloud.web.encrypt.EncryptConstant.ENCRYPT;
+
 /**
  * EncryptAspect
- * <p>
- * {@code
+ *
+ * <pre class="code">
+ * &#064;EncryptMethod
+ * &#064;PostMapping(value  = "test")
+ * &#064;ResponseBody
+ * public Object testEncrypt(@RequestBody UserVo user, @EncryptField String name) {
+ *     return insertUser(user, name);
+ * }
+ * private UserVo insertUser(UserVo user, String name) {
+ *     System.out.println("加密后的数据：user" + JSON.toJSONString(user));
+ *     return user;
+ * }
+ *
+ * &#064;Data
+ * public class UserVo implements Serializable {
+ *     private Long userId;
+ *
+ *     &#064;EncryptField
+ *     private String mobile;
+ *
+ *     &#064;EncryptField
+ *     private String address;
+ *     private String age;
+ * }
+ * </pre>
  *
  * @author shuigedeng
- * @version 2021.9
- * @EncryptMethod
- * @PostMapping(value = "test")
- * @ResponseBody public Object testEncrypt(@RequestBody UserVo user, @EncryptField String name) {
- * <p>
- * return insertUser(user, name); }
- * <p>
- * private UserVo insertUser(UserVo user, String name) { System.out.println("加密后的数据：user" +
- * JSON.toJSONString(user)); return user; }
- * @Data public class UserVo implements Serializable {
- * <p>
- * private Long userId;
- * @EncryptField private String mobile;
- * @EncryptField private String address;
- * <p>
- * private String age; } }
- * @since 2021-09-02 22:01:53
+ * @version 2022.06
+ * @since 2022-07-06 14:24:50
  */
 @Aspect
 public class EncryptAspect {
@@ -134,6 +143,7 @@ public class EncryptAspect {
 		if (Objects.isNull(obj)) {
 			return null;
 		}
+
 		Field[] fields = obj.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			boolean hasSecureField = field.isAnnotationPresent(EncryptField.class);

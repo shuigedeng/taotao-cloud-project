@@ -24,13 +24,20 @@ import java.lang.annotation.Target;
 /**
  * MultiHandler, 作用于 XXXDinger层，标识当前Dinger为多Dinger接口
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:28
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MultiHandler {
 
+	/**
+	 * 价值
+	 *
+	 * @return {@link MultiDinger }
+	 * @since 2022-07-06 15:18:28
+	 */
 	MultiDinger value();
 }

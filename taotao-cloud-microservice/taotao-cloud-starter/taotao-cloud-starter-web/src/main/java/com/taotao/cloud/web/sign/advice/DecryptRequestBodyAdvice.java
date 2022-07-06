@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpInputMessage;
@@ -31,8 +32,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
  * 请求数据解密处理 本类只对控制器参数中含有<strong>{@link org.springframework.web.bind.annotation.RequestBody}</strong>
  * 以及package为<strong><code>.decrypt</code></strong>下的注解有效
  *
- * @see RequestBodyAdvice
- * @since 2019年6月17日09:29:37
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:46:56
  */
 @Order(1)
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
@@ -45,8 +47,8 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 	}
 
 	@Override
-	public boolean supports(MethodParameter methodParameter, Type targetType,
-		Class<? extends HttpMessageConverter<?>> converterType) {
+	public boolean supports(MethodParameter methodParameter, @NotNull Type targetType,
+							@NotNull Class<? extends HttpMessageConverter<?>> converterType) {
 
 		Annotation[] annotations = methodParameter.getDeclaringClass().getAnnotations();
 
@@ -62,15 +64,16 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 	}
 
 	@Override
-	public Object handleEmptyBody(Object body, HttpInputMessage inputMessage,
-		MethodParameter parameter, Type targetType,
-		Class<? extends HttpMessageConverter<?>> converterType) {
+	public Object handleEmptyBody(Object body, @NotNull HttpInputMessage inputMessage,
+								  @NotNull MethodParameter parameter, @NotNull Type targetType,
+								  @NotNull Class<? extends HttpMessageConverter<?>> converterType) {
 		return body;
 	}
 
+	@NotNull
 	@Override
-	public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter,
-		Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+	public HttpInputMessage beforeBodyRead(@NotNull HttpInputMessage inputMessage, @NotNull MethodParameter parameter,
+										   @NotNull Type targetType, @NotNull Class<? extends HttpMessageConverter<?>> converterType) {
 
 		if (Optional.of(inputMessage).map(x -> {
 			try {
@@ -90,11 +93,9 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 			body = IOUtils.toString((inputMessage.getBody()), config.getEncoding());
 			req = JSON.<LinkedHashMap<String, Object>>parseObject(body, LinkedHashMap.class);
 
-			body = (String) Optional.ofNullable(req.get("dataSecret"))
-				.orElse(null);
+			body = (String) req.get("dataSecret");
 
-			sign = (String) Optional.ofNullable(req.get("sign"))
-				.orElse(null);
+			sign = (String) req.get("sign");
 
 		} catch (Exception e) {
 			LogUtil.error("无法获取请求正文数据，请检查发送数据体或请求方法是否符合规范", e);
@@ -104,6 +105,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 			LogUtil.error("请求参数dataSecret为null或为空字符串，因此解密失败body:{}", body);
 			throw new DecryptDtguaiException("请求正文为NULL或为空字符串，因此解密失败");
 		}
+
 		String decryptBody = null;
 		DecryptAnnotationInfoBean methodAnnotation = this.getMethodAnnotation(parameter);
 		if (methodAnnotation != null) {
@@ -117,8 +119,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 		}
 
 		decryptBody = Optional.ofNullable(decryptBody).orElseThrow(() -> {
-				LogUtil.error("decryptBody是null" +
-					"当前类:{}", this.getClass().getName());
+				LogUtil.error("decryptBody是null" + "当前类:{}", this.getClass().getName());
 				return new DecryptDtguaiException("解密错误，请检查选择的源数据的加密方式是否正确");
 			}
 		);

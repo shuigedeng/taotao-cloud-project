@@ -24,17 +24,36 @@ import java.lang.annotation.Target;
 /**
  * PriorityColumn
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:35
  */
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
 public @interface PriorityColumn {
 
+	/**
+	 * clazz
+	 *
+	 * @return {@link Class }<{@link ? }>
+	 * @since 2022-07-06 15:18:35
+	 */
 	Class<?> clazz() default Void.class;
 
+	/**
+	 * 列
+	 *
+	 * @return {@link String }
+	 * @since 2022-07-06 15:18:35
+	 */
 	String column();
 
+	/**
+	 * 优先级
+	 *
+	 * @return boolean
+	 * @since 2022-07-06 15:18:35
+	 */
 	boolean priority() default false;
 }

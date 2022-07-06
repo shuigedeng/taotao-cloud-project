@@ -18,8 +18,9 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * 消息体定义主类型(消息体xml定义和注解定义)
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:03
  */
 public enum MessageMainType {
 	/**

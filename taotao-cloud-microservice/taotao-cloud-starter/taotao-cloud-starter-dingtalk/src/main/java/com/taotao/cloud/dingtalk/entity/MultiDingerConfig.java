@@ -23,6 +23,9 @@ import java.util.List;
 /**
  * MultiDingerConfig
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:15
  */
 public class MultiDingerConfig {
 

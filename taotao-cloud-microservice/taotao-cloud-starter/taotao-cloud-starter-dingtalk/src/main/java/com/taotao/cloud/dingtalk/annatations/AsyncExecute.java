@@ -24,6 +24,9 @@ import java.lang.annotation.Target;
 /**
  * AsyncExecute(xml and annotation)
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:17:03
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

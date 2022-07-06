@@ -22,8 +22,9 @@ import com.taotao.cloud.dingtalk.definition.WeTalkDefinitionGenerator;
 /**
  * Dinger消息体定义类型
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:44
  */
 public enum DingerDefinitionType {
 

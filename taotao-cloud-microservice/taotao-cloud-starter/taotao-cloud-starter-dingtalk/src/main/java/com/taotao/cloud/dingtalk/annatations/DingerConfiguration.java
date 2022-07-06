@@ -24,8 +24,9 @@ import java.lang.annotation.Target;
 /**
  * DingerConfiguration(xml and annotation)
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:17:15
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -35,21 +36,24 @@ public @interface DingerConfiguration {
 	/**
 	 * dinger tokenId
 	 *
-	 * @return tokenId
+	 * @return {@link String }
+	 * @since 2022-07-06 15:17:15
 	 */
 	String tokenId();
 
 	/**
 	 * internal decryptKey for tokenId
 	 *
-	 * @return decryptKey
+	 * @return {@link String }
+	 * @since 2022-07-06 15:17:15
 	 */
 	String decryptKey() default "";
 
 	/**
 	 * dinger secret
 	 *
-	 * @return secret
+	 * @return {@link String }
+	 * @since 2022-07-06 15:17:15
 	 */
 	String secret() default "";
 

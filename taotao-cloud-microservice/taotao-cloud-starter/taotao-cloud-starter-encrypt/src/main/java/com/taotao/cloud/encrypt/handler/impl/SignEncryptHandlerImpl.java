@@ -12,6 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 签名实现处理类
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:10:33
  */
 public class SignEncryptHandlerImpl implements SignEncryptHandler {
 	@Override
@@ -46,9 +50,7 @@ public class SignEncryptHandlerImpl implements SignEncryptHandler {
 		map.entrySet().stream().
 				filter(entry -> entry != null && !"sign".equals(entry.getKey())).
 				sorted(Comparator.comparing(entry -> entry.getKey().toString())).
-				forEach(entry -> {
-					sb.append(entry.getKey().toString()).append("=").append(entry.getValue().toString()).append("&");
-				});
+				forEach(entry -> sb.append(entry.getKey().toString()).append("=").append(entry.getValue().toString()).append("&"));
 		sb.append("secret").append("=").append(sortSignSecret);
 		return md5Encode(sb.toString());
 	}
@@ -60,8 +62,8 @@ public class SignEncryptHandlerImpl implements SignEncryptHandler {
 			byte[] b = md.digest();
 			int i;
 			StringBuilder buf = new StringBuilder("");
-			for (int offset = 0; offset < b.length; offset++) {
-				i = b[offset];
+			for (byte value : b) {
+				i = value;
 				if (i < 0) {
 					i += 256;
 				}

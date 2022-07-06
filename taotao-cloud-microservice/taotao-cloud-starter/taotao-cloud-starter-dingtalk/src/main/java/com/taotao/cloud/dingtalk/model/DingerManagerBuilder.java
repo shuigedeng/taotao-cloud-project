@@ -28,8 +28,9 @@ import org.springframework.web.client.RestTemplate;
 /**
  * DingTalk Manager Builder
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:06
  */
 public class DingerManagerBuilder {
 

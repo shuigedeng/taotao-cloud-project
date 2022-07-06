@@ -12,6 +12,9 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * AES加密处理器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:10:24
  */
 public class AesEncryptHandler implements EncryptHandler {
 

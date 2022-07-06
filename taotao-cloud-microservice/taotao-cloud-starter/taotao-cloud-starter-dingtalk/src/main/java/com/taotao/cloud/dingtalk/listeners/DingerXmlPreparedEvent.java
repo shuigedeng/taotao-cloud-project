@@ -27,10 +27,12 @@ import org.springframework.context.ApplicationListener;
 /**
  * DingerXmlPreparedEvent
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:43
  */
 @Deprecated
-public class DingerXmlPreparedEvent
-	implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
+public class DingerXmlPreparedEvent implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
 	@Override
 	public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {

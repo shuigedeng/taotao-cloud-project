@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.multi.DingerConfigHandler;
 /**
  * MultiDinger
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:09
  */
 public class MultiDinger {
 

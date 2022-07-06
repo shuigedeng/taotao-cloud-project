@@ -18,38 +18,59 @@ package com.taotao.cloud.dingtalk.constant;
 /**
  * 常量类
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:42
  */
 public interface DingerConstant {
 
+	/**
+	 * 全垒打前缀
+	 */
 	String DINGER_PREFIX = "D";
 	/**
+	 * 默认线程名称前缀
 	 * 默认线程池中线程名称前缀
 	 */
 	String DEFAULT_THREAD_NAME_PREFIX = "dinger-";
 
 
 	/**
+	 * 短信
 	 * bean name
 	 */
 	String TEXT_MESSAGE = "textMessage";
 	/**
+	 * 减价消息
 	 * bean name
 	 */
 	String MARKDOWN_MESSAGE = "markDownMessage";
 	/**
+	 * 全垒打执行人
 	 * bean name
 	 */
 	String DINGER_EXECUTOR = "dingerExecutor";
 	/**
+	 * 全垒打其他模板
 	 * 自定义restTemplate名称
 	 */
 	String DINGER_REST_TEMPLATE = "dingerRestTemplate";
 
+	/**
+	 * 新行
+	 */
 	String NEW_LINE = "\r\n";
+	/**
+	 * 现货分离器
+	 */
 	String SPOT_SEPERATOR = ".";
 
+	/**
+	 * 全垒打道具前缀
+	 */
 	String DINGER_PROP_PREFIX = "spring.dinger";
+	/**
+	 * 全垒打属性前缀
+	 */
 	String DINGER_PROPERTIES_PREFIX = DINGER_PROP_PREFIX + SPOT_SEPERATOR;
 }

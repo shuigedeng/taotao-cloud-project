@@ -3,7 +3,9 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //京东云存储
-    api 'com.amazonaws:aws-java-sdk-s3:1.12.239'
+    //https://search.maven.org/artifact/com.amazonaws/aws-java-sdk-s3
+    api 'com.amazonaws:aws-java-sdk-s3:1.12.254'
+
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

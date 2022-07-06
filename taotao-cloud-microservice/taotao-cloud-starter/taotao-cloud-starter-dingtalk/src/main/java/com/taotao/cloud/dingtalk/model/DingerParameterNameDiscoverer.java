@@ -32,11 +32,9 @@ import org.springframework.core.StandardReflectionParameterNameDiscoverer;
  *
  * <p>Further discoverers may be added through {@link #addDiscoverer(ParameterNameDiscoverer)}.
  *
-
- * @see StandardReflectionParameterNameDiscoverer
- * @see LocalVariableTableParameterNameDiscoverer
- * @see KotlinReflectionParameterNameDiscoverer
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:11
  */
 public class DingerParameterNameDiscoverer extends PrioritizedParameterNameDiscoverer {
 

@@ -3,7 +3,9 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //腾讯云存储
-    api 'com.qcloud:cos_api:5.6.89'
+    //https://search.maven.org/artifact/com.qcloud/cos_api
+    api 'com.qcloud:cos_api:5.6.95'
+
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

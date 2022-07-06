@@ -41,8 +41,9 @@ import java.util.Optional;
 /**
  * DingerMessageHandler
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:02
  */
 public class DingerMessageHandler extends MultiDingerProperty
 	implements ParamHandler, MessageTransfer, ResultHandler<DingerResponse> {

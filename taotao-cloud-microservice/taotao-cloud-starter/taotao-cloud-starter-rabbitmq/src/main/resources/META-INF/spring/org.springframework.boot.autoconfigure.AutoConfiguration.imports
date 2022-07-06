@@ -1,1 +1,1 @@
-com.taotao.cloud.rabbitmq.configuration.RabbitMqConfiguration
+com.taotao.cloud.rabbitmq.configuration.RabbitMQAutoConfiguration

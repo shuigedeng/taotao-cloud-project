@@ -17,6 +17,8 @@ package com.taotao.cloud.web.base.dto;
 
 import com.taotao.cloud.web.validation.constraints.StringEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
@@ -56,6 +58,7 @@ public record BatchDTO<SaveDTO, UpdateDTO, I extends Serializable>(
 	@Schema(description = "批量删除数据DTO")
 	List<I> batchDelete) implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4194344880194881367L;
 
 	/**

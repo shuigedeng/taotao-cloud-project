@@ -17,9 +17,11 @@ import org.springframework.core.annotation.Order;
 
 
 /**
- * 系统日志，切面处理类
+ * 切面处理类
  *
- * @since 2021年3月12日13:41:04
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:47:02
  */
 @Aspect
 @Order(1)
@@ -33,7 +35,6 @@ public class SignAspect {
 
 	@Pointcut("@annotation(com.taotao.cloud.web.sign.annotation.Sign)")
 	public void signPointCut() {
-		//自定义切入点
 	}
 
 	public static final String TOKEN_HEADER = "token";
@@ -42,7 +43,6 @@ public class SignAspect {
 
 	@Around("signPointCut()")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
-
 		//请求的参数
 		Object[] args = point.getArgs();
 
@@ -55,11 +55,10 @@ public class SignAspect {
 			.map(Object::toString)
 			.orElseThrow(() -> new SignDtguaiException("数字证书timestamp不能为空"));
 
-		LogUtil.info("sign的TreeMap默认key升序排序timestamp:{} ---- json:{}", timestamp,
-			JSON.toJSONString(reqm));
+		LogUtil.info("sign的TreeMap默认key升序排序timestamp:{} ---- json:{}", timestamp, JSON.toJSONString(reqm));
 
-		Optional.of(reqm)
-			.ifPresent(this::validSign);
+		Optional.of(reqm).ifPresent(this::validSign);
+
 		//执行方法
 		return point.proceed();
 	}
@@ -88,8 +87,8 @@ public class SignAspect {
 					paramBuilder.append(k).append("=").append(v).append("&");
 				}
 			});
-			String dataSing = paramBuilder.append("signKey=").append(signProperties.getKey())
-				.toString();
+
+			String dataSing = paramBuilder.append("signKey=").append(signProperties.getKey()).toString();
 			LogUtil.info("sing之前的拼装数据:{}", dataSing);
 			md5Sign = DigestUtils.md5Hex(dataSing);
 		} catch (Exception e) {
@@ -100,8 +99,5 @@ public class SignAspect {
 			LogUtil.error("验证失败:{}  传入的sign:{}  当前生成的md5Sign:{}", paramBuilder, sign, md5Sign);
 			throw new SignDtguaiException("数字证书校验失败");
 		}
-
 	}
-
-
 }

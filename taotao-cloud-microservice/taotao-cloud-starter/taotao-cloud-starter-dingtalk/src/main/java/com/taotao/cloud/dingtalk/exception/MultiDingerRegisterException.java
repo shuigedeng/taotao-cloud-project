@@ -21,6 +21,9 @@ import com.taotao.cloud.dingtalk.entity.ExceptionPairs;
 /**
  * 多Dinger配置注册异常
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:21:33
  */
 public class MultiDingerRegisterException extends DingerException {
     public MultiDingerRegisterException(ExceptionPairs pairs) {

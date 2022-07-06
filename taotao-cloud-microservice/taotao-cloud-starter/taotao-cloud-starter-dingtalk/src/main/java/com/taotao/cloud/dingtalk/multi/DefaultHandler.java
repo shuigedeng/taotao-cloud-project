@@ -26,6 +26,9 @@ import java.util.List;
  * {@link DingerConfigHandler}
  * </blockquote>
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:49
  */
 public class DefaultHandler implements AlgorithmHandler {
 

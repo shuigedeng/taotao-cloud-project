@@ -24,8 +24,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 /**
  * BodyTag
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:53
  */
 @XmlRootElement(name = "body")
 public class BodyTag {

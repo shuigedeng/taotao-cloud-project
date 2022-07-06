@@ -40,6 +40,9 @@ import javax.crypto.Cipher;
 /**
  * Config Tools
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:21
  */
 public class ConfigTools {
 

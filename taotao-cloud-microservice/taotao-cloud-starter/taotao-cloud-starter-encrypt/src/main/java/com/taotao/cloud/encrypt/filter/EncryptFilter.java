@@ -25,6 +25,9 @@ import org.springframework.http.MediaType;
 /**
  * 加密过滤器
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:09:48
  */
 public class EncryptFilter implements Filter {
 
@@ -74,7 +77,6 @@ public class EncryptFilter implements Filter {
 		outputStream.write(encryptByte);
 		outputStream.flush();
 	}
-
 
 	private boolean checkUri(String uri) {
 		uri = uri.replaceAll("//+", "/");

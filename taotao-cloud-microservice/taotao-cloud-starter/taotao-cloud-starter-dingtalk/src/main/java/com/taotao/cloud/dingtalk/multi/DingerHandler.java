@@ -33,10 +33,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <blockquote>
  * 机器人发送消息频率限制
  * <pre>
- *         https://ding-doc.dingtalk.com/doc#/serverapi3/pghqkk
- *     </pre>
+ * https://ding-doc.dingtalk.com/doc#/serverapi3/pghqkk
+ * </pre>
  * </blockquote>
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:56
  */
 public class DingerHandler implements AlgorithmHandler {
 

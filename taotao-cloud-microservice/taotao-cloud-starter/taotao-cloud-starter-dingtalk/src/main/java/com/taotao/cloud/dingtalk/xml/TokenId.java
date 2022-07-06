@@ -25,6 +25,9 @@ import jakarta.xml.bind.annotation.XmlValue;
 /**
  * TokenId
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:27:09
  */
 @XmlRootElement(name = "token-id")
 public class TokenId {

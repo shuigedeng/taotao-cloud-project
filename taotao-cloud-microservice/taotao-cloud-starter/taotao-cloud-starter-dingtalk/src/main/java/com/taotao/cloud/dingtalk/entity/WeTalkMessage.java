@@ -22,8 +22,9 @@ import com.taotao.cloud.dingtalk.enums.DingerType;
 /**
  * WeTalk请求体
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:20:28
  */
 public class WeTalkMessage extends MsgType {
 

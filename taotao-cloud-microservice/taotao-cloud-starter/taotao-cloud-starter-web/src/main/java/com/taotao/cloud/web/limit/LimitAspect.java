@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableList;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import java.lang.reflect.Method;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,21 +28,34 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 
+import java.lang.reflect.Method;
+
 /**
  * LimitAspect
- * <p>
- * {@code { private static final AtomicInteger ATOMIC_INTEGER_1 = new AtomicInteger(); private
- * static final AtomicInteger ATOMIC_INTEGER_2 = new AtomicInteger(); private static final
- * AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
- * <p>
- * Limit(key = "limitTest", period = 10, count = 3) GetMapping("/limitTest1") public int
- * testLimiter1() { return ATOMIC_INTEGER_1.incrementAndGet(); }
- * <p>
- * GetMapping("/limitTest2") public int testLimiter2() { return ATOMIC_INTEGER_2.incrementAndGet();
- * }
- * <p>
- * GetMapping("/limitTest3") public int testLimiter3() { return ATOMIC_INTEGER_3.incrementAndGet();
- * } }
+ *
+ * <pre class="code">
+ * &#064;RestController
+ * public class LimiterController {
+ *   private static final AtomicInteger ATOMIC_INTEGER_1 = new AtomicInteger();
+ *   private static final AtomicInteger ATOMIC_INTEGER_2 = new AtomicInteger();
+ *   private static final AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
+ *
+ * &#064;Limit(key = "limitTest", period = 10, count = 3)
+ * GetMapping("/limitTest1")
+ * public int testLimiter1() {
+ * 	return ATOMIC_INTEGER_1.incrementAndGet();
+ *    }
+ *
+ * GetMapping("/limitTest2")
+ * public int testLimiter2() {
+ * 	return ATOMIC_INTEGER_2.incrementAndGet();
+ *    }
+ *
+ * GetMapping("/limitTest3")
+ * public int testLimiter3() {
+ * 	return ATOMIC_INTEGER_3.incrementAndGet();
+ *    }
+ * </pre>
  *
  * @author shuigedeng
  * @version 2021.9
@@ -79,18 +91,16 @@ public class LimitAspect {
 		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
 		String key = switch (limitType) {
 			case IP -> RequestUtil.getHttpServletRequestIpAddress();
-			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key()) ? StringUtils.upperCase(
-				method.getName()) : limitAnnotation.key();
+			case CUSTOMER ->
+				StrUtil.isBlank(limitAnnotation.key()) ? StringUtils.upperCase(method.getName()) : limitAnnotation.key();
 		};
 
-		ImmutableList<String> keys = ImmutableList.of(
-			StringUtil.join(limitAnnotation.prefix(), key));
+		ImmutableList<String> keys = ImmutableList.of(StringUtil.join(limitAnnotation.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
 			RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
-			Number count = redisRepository.getRedisTemplate()
-				.execute(redisScript, keys, limitCount, limitPeriod);
+			Number count = redisRepository.getRedisTemplate().execute(redisScript, keys, limitCount, limitPeriod);
 			if (count != null && count.intValue() <= limitCount) {
 				return pjp.proceed();
 			} else {

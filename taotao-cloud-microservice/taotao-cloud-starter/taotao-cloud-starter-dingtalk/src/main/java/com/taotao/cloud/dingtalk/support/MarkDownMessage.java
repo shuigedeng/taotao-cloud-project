@@ -23,6 +23,9 @@ import java.util.List;
 /**
  * 默认markdown消息格式
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:26:09
  */
 public class MarkDownMessage implements CustomMessage {
 

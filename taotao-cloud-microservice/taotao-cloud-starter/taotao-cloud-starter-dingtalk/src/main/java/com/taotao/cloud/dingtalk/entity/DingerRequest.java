@@ -21,6 +21,9 @@ import java.util.List;
 /**
  * Dinger请求体
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:19:31
  */
 public class DingerRequest {
 

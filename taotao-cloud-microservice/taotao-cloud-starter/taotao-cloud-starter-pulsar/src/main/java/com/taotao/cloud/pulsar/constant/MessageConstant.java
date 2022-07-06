@@ -29,12 +29,12 @@ public class MessageConstant {
 	/**
 	 * 生产者服务名称
 	 */
-	public static final String MESSAGE_PRODUCER_SERVICE = "mate-message-producer";
+	public static final String MESSAGE_PRODUCER_SERVICE = "taotao-message-producer";
 
 	/**
 	 * 消费者服务名称
 	 */
-	public static final String MESSAGE_CONSUMER_SERVICE = "mate-message-consumer";
+	public static final String MESSAGE_CONSUMER_SERVICE = "taotao-message-consumer";
 
 
 	/**

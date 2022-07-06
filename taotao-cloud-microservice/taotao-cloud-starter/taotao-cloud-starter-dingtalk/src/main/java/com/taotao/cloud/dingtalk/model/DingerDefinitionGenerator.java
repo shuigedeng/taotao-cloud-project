@@ -19,8 +19,9 @@ package com.taotao.cloud.dingtalk.model;
 /**
  * Diner消息体定义生成
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:22:38
  */
 public abstract class DingerDefinitionGenerator<T> {
 

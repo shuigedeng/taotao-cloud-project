@@ -3,10 +3,13 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
 
     //minio存储
+    //https://search.maven.org/artifact/io.minio/minio
     api 'io.minio:minio:8.4.2'
+    //https://search.maven.org/artifact/com.squareup.okhttp3/okhttp
     api 'com.squareup.okhttp3:okhttp:4.10.0'
     api 'com.squareup.okio:okio'
     api 'com.google.guava:guava'
+
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

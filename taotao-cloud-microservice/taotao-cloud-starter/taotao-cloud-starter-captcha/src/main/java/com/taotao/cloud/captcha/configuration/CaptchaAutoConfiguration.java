@@ -77,8 +77,7 @@ public class CaptchaAutoConfiguration implements InitializingBean {
 
 		config.put(CaptchaConst.HISTORY_DATA_CLEAR_ENABLE, prop.getHistoryDataClearEnable() ? "1" : "0");
 
-		config.put(
-			CaptchaConst.REQ_FREQUENCY_LIMIT_ENABLE, prop.getReqFrequencyLimitEnable() ? "1" : "0");
+		config.put(CaptchaConst.REQ_FREQUENCY_LIMIT_ENABLE, prop.getReqFrequencyLimitEnable() ? "1" : "0");
 		config.put(CaptchaConst.REQ_GET_LOCK_LIMIT, prop.getReqGetLockLimit() + "");
 		config.put(CaptchaConst.REQ_GET_LOCK_SECONDS, prop.getReqGetLockSeconds() + "");
 		config.put(CaptchaConst.REQ_GET_MINUTE_LIMIT, prop.getReqGetMinuteLimit() + "");

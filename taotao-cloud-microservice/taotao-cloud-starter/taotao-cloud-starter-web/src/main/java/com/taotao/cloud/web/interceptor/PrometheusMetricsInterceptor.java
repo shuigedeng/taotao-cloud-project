@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.interceptor;
 
-import com.taotao.cloud.web.configuration.PrometheusConfiguration;
+import com.taotao.cloud.web.configuration.PrometheusAutoConfiguration;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
@@ -58,10 +58,10 @@ public class PrometheusMetricsInterceptor implements HandlerInterceptor {
 
 		inprogressRequests.labels(requestURI, method).inc();
 
-		PrometheusConfiguration.histogramRequestTimer = requestLatencyHistogram
+		PrometheusAutoConfiguration.histogramRequestTimer = requestLatencyHistogram
 			.labels(requestURI, method, String.valueOf(status)).startTimer();
 
-		PrometheusConfiguration.requestTimer = requestLatency
+		PrometheusAutoConfiguration.requestTimer = requestLatency
 			.labels(requestURI, method, String.valueOf(status)).startTimer();
 		return true;
 	}
@@ -77,12 +77,12 @@ public class PrometheusMetricsInterceptor implements HandlerInterceptor {
 
 		inprogressRequests.labels(requestURI, method).dec();
 
-		if (Objects.nonNull(PrometheusConfiguration.histogramRequestTimer)) {
-			PrometheusConfiguration.histogramRequestTimer.observeDuration();
+		if (Objects.nonNull(PrometheusAutoConfiguration.histogramRequestTimer)) {
+			PrometheusAutoConfiguration.histogramRequestTimer.observeDuration();
 		}
 
-		if (Objects.nonNull(PrometheusConfiguration.requestTimer)) {
-			PrometheusConfiguration.requestTimer.observeDuration();
+		if (Objects.nonNull(PrometheusAutoConfiguration.requestTimer)) {
+			PrometheusAutoConfiguration.requestTimer.observeDuration();
 		}
 	}
 }

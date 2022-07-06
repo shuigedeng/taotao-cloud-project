@@ -9,7 +9,9 @@ import com.taotao.cloud.web.sign.util.ISecurity;
 /**
  * <p>MD5加密工具类</p>
  *
- * @since 2019年4月16日14:11:20
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 14:44:19
  */
 public class Md5Util implements ISecurity {
 

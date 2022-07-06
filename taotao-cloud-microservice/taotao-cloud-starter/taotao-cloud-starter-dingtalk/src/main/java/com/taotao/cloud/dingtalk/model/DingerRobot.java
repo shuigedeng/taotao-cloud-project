@@ -37,8 +37,9 @@ import org.springframework.beans.BeanUtils;
 /**
  * DingTalk Robot
  *
-
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:23:19
  */
 public class DingerRobot extends AbstractDingerSender {
 

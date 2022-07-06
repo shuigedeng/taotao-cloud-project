@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.sensitive.word;
 
-import static com.taotao.cloud.web.configuration.QuartzConfiguration.EXECUTOR;
+import static com.taotao.cloud.web.configuration.QuartzAutoConfiguration.EXECUTOR;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.log.LogUtil;

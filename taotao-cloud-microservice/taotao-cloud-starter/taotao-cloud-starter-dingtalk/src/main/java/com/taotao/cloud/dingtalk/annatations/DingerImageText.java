@@ -27,6 +27,9 @@ import java.lang.annotation.Target;
 /**
  * DingerImageText
  *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:17:19
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
@@ -36,16 +39,21 @@ public @interface DingerImageText {
 	/**
 	 * tokenId
 	 *
-	 * @return token info
+	 * @return {@link DingerTokenId }
+	 * @since 2022-07-06 15:17:19
 	 */
 	DingerTokenId tokenId() default @DingerTokenId("");
 
 	/**
 	 * asyncExecute
 	 *
-	 * @return async execute send
+	 * @return {@link AsyncExecuteType }
+	 * @since 2022-07-06 15:17:19
 	 */
 	AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
 
+	/**
+	 * clazz
+	 */
 	Class<?> clazz = ImageTextDeo.class;
 }

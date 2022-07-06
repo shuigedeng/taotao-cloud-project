@@ -4,6 +4,7 @@ dependencies {
 
     //平安云
     api fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
+
     //api 'com.pingan.obs:fincloud-pingan-obs-java-sdk:3.9.0.1'
     testImplementation  'org.springframework:spring-test'
 

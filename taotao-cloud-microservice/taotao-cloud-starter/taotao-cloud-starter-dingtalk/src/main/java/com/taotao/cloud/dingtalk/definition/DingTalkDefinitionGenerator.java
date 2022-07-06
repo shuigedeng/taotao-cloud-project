@@ -30,15 +30,28 @@ import com.taotao.cloud.dingtalk.xml.MessageTag;
 /**
  * 钉钉消息体定义生成类
  *
- * @since 1.0
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-06 15:18:54
  */
 public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成生成注解文本消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:54
 	 */
 	public static class AnotationText extends DingerDefinitionGenerator<DingerText> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:54
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerText> context) {
 			return dingerTextHandler(DingerType.DINGTALK, context);
@@ -48,9 +61,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成注解Markdown消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:54
 	 */
 	public static class AnnotationMarkdown extends DingerDefinitionGenerator<DingerMarkdown> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:54
+		 */
 		@Override
 		public DingerDefinition generator(
 			DingerDefinitionGeneratorContext<DingerMarkdown> context) {
@@ -61,9 +85,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML文本消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:54
 	 */
 	public static class XmlText extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:54
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.DINGTALK_XML_TEXT, context);
@@ -73,9 +108,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML Markdown消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:54
 	 */
 	public static class XmlMarkdown extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:54
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.DINGTALK_XML_MARKDOWN, context);
@@ -85,9 +131,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成注解 ImageText消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:54
 	 */
 	public static class AnnotationImageText extends DingerDefinitionGenerator<DingerImageText> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:55
+		 */
 		@Override
 		public DingerDefinition generator(
 			DingerDefinitionGeneratorContext<DingerImageText> context) {
@@ -98,9 +155,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML ImageText消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:55
 	 */
 	public static class XmlImageText extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:55
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.DINGTALK_XML_IMAGETEXT, context);
@@ -110,9 +178,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成注解 Link消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:55
 	 */
 	public static class AnnotationLink extends DingerDefinitionGenerator<DingerLink> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:55
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerLink> context) {
 			return dingerLinkHandler(DingerType.DINGTALK, context);
@@ -122,9 +201,20 @@ public class DingTalkDefinitionGenerator extends DingerDefinitionHandler {
 
 	/**
 	 * 生成XML Link消息体定义
+	 *
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-06 15:18:55
 	 */
 	public static class XmlLink extends DingerDefinitionGenerator<MessageTag> {
 
+		/**
+		 * 发电机
+		 *
+		 * @param context 上下文
+		 * @return {@link DingerDefinition }
+		 * @since 2022-07-06 15:18:55
+		 */
 		@Override
 		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
 			return xmlHandler(DingerDefinitionType.DINGTALK_XML_LINK, context);
