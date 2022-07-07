@@ -16,10 +16,10 @@ import com.dtflys.forest.extensions.BasicAuth;
 import com.dtflys.forest.extensions.DownloadFile;
 import com.dtflys.forest.extensions.OAuth2;
 import com.dtflys.forest.http.ForestRequest;
-import com.taotao.cloud.sys.biz.forest.model.MyRetryCondition;
-import com.taotao.cloud.sys.biz.forest.model.MyRetryer;
-import com.taotao.cloud.sys.biz.forest.model.MySuccessCondition;
-import com.taotao.cloud.sys.biz.forest.model.MyLogHandler;
+import com.taotao.cloud.sys.biz.forest.config.MyRetryCondition;
+import com.taotao.cloud.sys.biz.forest.config.MyRetryer;
+import com.taotao.cloud.sys.biz.forest.config.MySuccessCondition;
+import com.taotao.cloud.sys.biz.forest.config.MyLogHandler;
 
 import java.io.File;
 import java.util.List;
