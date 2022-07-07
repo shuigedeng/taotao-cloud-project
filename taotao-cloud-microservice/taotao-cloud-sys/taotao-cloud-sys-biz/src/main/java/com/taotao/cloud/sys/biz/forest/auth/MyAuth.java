@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.forest;
+package com.taotao.cloud.sys.biz.forest.auth;
 
 import com.dtflys.forest.annotation.MethodLifeCycle;
 import com.dtflys.forest.annotation.RequestAttributes;

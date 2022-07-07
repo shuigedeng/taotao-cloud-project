@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.forest;
 import com.dtflys.forest.annotation.DataVariable;
 import com.dtflys.forest.annotation.Get;
 import com.dtflys.forest.annotation.Request;
+import com.taotao.cloud.sys.biz.forest.auth.MyAuth;
 
 public interface MyClient {
 

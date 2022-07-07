@@ -1,6 +1,5 @@
-package com.taotao.cloud.sys.biz.forest;
+package com.taotao.cloud.sys.biz.forest.auth;
 
-import com.dtflys.forest.extensions.BasicAuth;
 import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.lifecycles.MethodAnnotationLifeCycle;
 import com.dtflys.forest.reflection.ForestMethod;
