@@ -86,7 +86,7 @@ redisson:
   #开启SSL终端识别能力。
   sslEnableEndpointIdentification: true
   #确定采用哪种方式（JDK或OPENSSL）来实现SSL连接。
-  sslProvider: jdk
+  ssl-provider: jdk
   ssl-truststore:
   ssl-truststore-password:
   ssl-keystore:
@@ -150,12 +150,12 @@ redisson:
     #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
     #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
     nodeAddresses:
-      - "127.0.0.1:6381"
-      - "127.0.0.1:6382"
-      - "127.0.0.1:6383"
-      - "127.0.0.1:6384"
-      - "127.0.0.1:6385"
-      - "127.0.0.1:6386"
+      - "192.168.10.200:6381"
+      - "192.168.10.200:6382"
+      - "192.168.10.200:6383"
+      - "192.168.10.200:6384"
+      - "192.168.10.200:6385"
+      - "192.168.10.200:6386"
     #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
     database: 1
     #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
@@ -1306,3 +1306,6 @@ springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller
+
+test:
+  baseUrl: https://www.baidu.com

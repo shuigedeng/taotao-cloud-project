@@ -29,18 +29,15 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2022/01/06 16:42
  */
-//@Component("customRateLimiter")
+@Component
 public class CustomRateLimiter extends AbstractRateLimiter<CustomRateLimiter.Config> {
 
-	private final RateLimiter rateLimiter = RateLimiter.create(1);
+	private final RateLimiter rateLimiter = RateLimiter.create(2.0);
 
-	public static final String CONFIG_PROPERTY_NAME="custom-rate-limiter";
+	public static final String CONFIG_PROPERTY_NAME="taotao-cloud-gateway-rate-limiter";
 
-	protected CustomRateLimiter(
-		ConfigurationService configurationService) {
-		super(CustomRateLimiter.Config.class
-			, CONFIG_PROPERTY_NAME,
-			configurationService);
+	protected CustomRateLimiter(ConfigurationService configurationService) {
+		super(CustomRateLimiter.Config.class, CONFIG_PROPERTY_NAME, configurationService);
 	}
 
 	@Override
