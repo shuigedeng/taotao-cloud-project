@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.forest;
 
+import com.dtflys.forest.annotation.BaseRequest;
 import com.dtflys.forest.annotation.DataFile;
 import com.dtflys.forest.annotation.DataVariable;
 import com.dtflys.forest.annotation.Get;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+@BaseRequest(baseURL = "http://localhost:8080/hello")
 public interface AmapClient {
 
 	/**
