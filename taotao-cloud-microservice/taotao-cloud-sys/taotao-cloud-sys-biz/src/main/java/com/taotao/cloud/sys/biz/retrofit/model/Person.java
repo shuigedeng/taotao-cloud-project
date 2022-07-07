@@ -13,23 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.retrofit;
-
-import com.github.lianjiatech.retrofit.spring.boot.core.RetrofitClient;
-import java.util.List;
-import retrofit2.http.GET;
+package com.taotao.cloud.sys.biz.retrofit.model;
 
 /**
- * UserApi
+ * Person
  *
  * @author shuigedeng
- * @version 2022.06
- * @since 2022-06-24 15:40
+ * @version 2022.07
+ * @since 2022-07-07 10:23
  */
-@RetrofitClient(baseUrl = "http://www.baidu.com")
-public interface UserApi {
-
-	@GET("/user")
-	List<String> testGetUser();
+public class Person {
 
 }

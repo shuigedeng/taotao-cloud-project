@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.forest.model;
+package com.taotao.cloud.sys.biz.forest.config;
 
 import com.dtflys.forest.callback.RetryWhen;
 import com.dtflys.forest.http.ForestRequest;
