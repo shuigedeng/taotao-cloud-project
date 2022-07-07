@@ -2,10 +2,13 @@ package com.taotao.cloud.sys.biz.forest;
 
 import com.dtflys.forest.annotation.BaseRequest;
 import com.dtflys.forest.annotation.DataFile;
-import com.dtflys.forest.annotation.DataVariable;
 import com.dtflys.forest.annotation.Get;
 import com.dtflys.forest.annotation.JSONBody;
+import com.dtflys.forest.annotation.LogHandler;
 import com.dtflys.forest.annotation.Post;
+import com.dtflys.forest.annotation.Retry;
+import com.dtflys.forest.annotation.Retryer;
+import com.dtflys.forest.annotation.Success;
 import com.dtflys.forest.annotation.Var;
 import com.dtflys.forest.annotation.XMLBody;
 import com.dtflys.forest.callback.OnProgress;
@@ -13,18 +16,27 @@ import com.dtflys.forest.extensions.BasicAuth;
 import com.dtflys.forest.extensions.DownloadFile;
 import com.dtflys.forest.extensions.OAuth2;
 import com.dtflys.forest.http.ForestRequest;
+import com.taotao.cloud.sys.biz.forest.model.MyRetryCondition;
+import com.taotao.cloud.sys.biz.forest.model.MyRetryer;
+import com.taotao.cloud.sys.biz.forest.model.MySuccessCondition;
+import com.taotao.cloud.sys.biz.forest.model.MyLogHandler;
+
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 @BaseRequest(baseURL = "http://localhost:8080/hello")
 public interface AmapClient {
-
 	/**
 	 * 聪明的你一定看出来了@Get注解代表该方法专做GET请求 在url中的{0}代表引用第一个参数，{1}引用第二个参数
 	 */
 	@Get("http://ditu.amap.com/service/regeo?longitude={0}&latitude={1}")
+	@Retry(maxRetryCount = "3", maxRetryInterval = "10", condition = MyRetryCondition.class)
+	@Retryer(MyRetryer.class)
+	@LogHandler(MyLogHandler.class)
+	@Success(condition = MySuccessCondition.class)
 	Map getLocation(String longitude, String latitude);
+
 
 	/**
 	 * 将对象参数解析为JSON字符串，并放在请求的Body进行传输
