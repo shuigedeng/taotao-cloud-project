@@ -1,5 +1,6 @@
 server:
   port: 33337
+  shutdown: graceful
   http2:
     enabled: true
   undertow:
