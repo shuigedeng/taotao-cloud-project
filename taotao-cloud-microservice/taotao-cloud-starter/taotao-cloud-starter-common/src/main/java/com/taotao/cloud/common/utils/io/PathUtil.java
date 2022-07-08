@@ -187,7 +187,7 @@ public final class PathUtil {
 
 		try {
 			if (Files.isDirectory(rootPath)) {
-				Files.walkFileTree(rootPath, new SimpleFileVisitor<Path>() {
+				Files.walkFileTree(rootPath, new SimpleFileVisitor<>() {
 					@Override
 					public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 						throws IOException {

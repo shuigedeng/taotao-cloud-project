@@ -56,7 +56,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param type 类
 	 * @return PropertyDescriptor数组
 	 */
-	public static PropertyDescriptor[] getBeanGetters(Class type) {
+	public static PropertyDescriptor[] getBeanGetters(Class<?> type) {
 		return getPropertyDescriptors(type, true, false);
 	}
 
@@ -66,7 +66,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param type 类
 	 * @return PropertyDescriptor数组
 	 */
-	public static PropertyDescriptor[] getBeanSetters(Class type) {
+	public static PropertyDescriptor[] getBeanSetters(Class<?> type) {
 		return getPropertyDescriptors(type, false, true);
 	}
 
@@ -78,7 +78,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @param write 写方法
 	 * @return PropertyDescriptor数组
 	 */
-	public static PropertyDescriptor[] getPropertyDescriptors(Class type, boolean read,
+	public static PropertyDescriptor[] getPropertyDescriptors(Class<?> type, boolean read,
 		boolean write) {
 		try {
 			PropertyDescriptor[] all = BeanUtil.getPropertyDescriptors(type);
@@ -675,7 +675,7 @@ public class ReflectionUtil extends ReflectionUtils {
 		if (dto.getClass().isRecord()) {
 			Field[] fields = dto.getClass().getDeclaredFields();
 			for (Field field : fields) {
-				if (!field.getName().equals("serialVersionUID")) {
+				if (!"serialVersionUID".equals(field.getName())) {
 					Object value = ReflectionUtil.tryGetValue(dto, field.getName());
 					Field field1 = ReflectionUtil.findField(t.getClass(), field.getName());
 					if (Objects.nonNull(field1) && Objects.nonNull(value)) {
@@ -705,7 +705,7 @@ public class ReflectionUtil extends ReflectionUtils {
 			List<Field> fieldList = new ArrayList<>();
 
 			for (Field field : fields) {
-				if (!field.getName().equals("serialVersionUID")) {
+				if (!"serialVersionUID".equals(field.getName())) {
 					Object value = ReflectionUtil.tryGetValue(t, field.getName());
 					params.add(value);
 					fieldList.add(field);
@@ -791,7 +791,7 @@ public class ReflectionUtil extends ReflectionUtils {
 			for (Field declaredField : declaredFields) {
 				String filedName = declaredField.getName();
 
-				if (!filedName.equals("serialVersionUID")) {
+				if (!"serialVersionUID".equals(filedName)) {
 					Field field = ReflectionUtil.findField(entityClass, filedName);
 					if (Objects.isNull(field)) {
 						throw new BusinessException(filedName + "字段值错误");
@@ -803,7 +803,7 @@ public class ReflectionUtil extends ReflectionUtils {
 		if (Objects.nonNull(recordComponents) && recordComponents.length != 0) {
 			for (RecordComponent recordComponent : recordComponents) {
 				String filedName = recordComponent.getName();
-				if (!filedName.equals("serialVersionUID")) {
+				if (!"serialVersionUID".equals(filedName)) {
 					Field field = ReflectionUtil.findField(entityClass, filedName);
 					if (Objects.isNull(field)) {
 						throw new BusinessException(filedName + "字段值错误");
@@ -825,7 +825,7 @@ public class ReflectionUtil extends ReflectionUtils {
 	 * @since 2021-10-13 17:36:08
 	 */
 	public static Boolean checkField(String filedName, Class<?> entityClass) {
-		if (!filedName.equals("serialVersionUID")) {
+		if (!"serialVersionUID".equals(filedName)) {
 			Field field = ReflectionUtil.findField(entityClass, filedName);
 			if (Objects.isNull(field)) {
 				throw new BusinessException(filedName + "字段值错误");

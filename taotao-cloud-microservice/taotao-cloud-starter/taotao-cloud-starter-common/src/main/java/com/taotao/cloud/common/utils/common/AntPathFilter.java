@@ -18,6 +18,7 @@ package com.taotao.cloud.common.utils.common;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.Serial;
 import java.io.Serializable;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -31,7 +32,9 @@ import org.springframework.util.PathMatcher;
  */
 public class AntPathFilter implements FileFilter, Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 812598009067554612L;
+
 	private static final PathMatcher PATH_MATCHER = new AntPathMatcher();
 
 	private final String pattern;

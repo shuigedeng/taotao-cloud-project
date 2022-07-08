@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -66,6 +67,7 @@ public final class FileUtil extends org.springframework.util.FileCopyUtils {
 	 */
 	public static class TrueFilter implements FileFilter, Serializable {
 
+		@Serial
 		private static final long serialVersionUID = -6420452043795072619L;
 
 		public final static TrueFilter TRUE = new TrueFilter();

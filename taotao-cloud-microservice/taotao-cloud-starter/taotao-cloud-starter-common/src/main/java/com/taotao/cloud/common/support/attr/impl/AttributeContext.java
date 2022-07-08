@@ -16,8 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * [一定线程安全吗](<a href="https://segmentfault.com/a/1190000018954561?utm_source=tag-newest">https://segmentfault.com/a/1190000018954561?utm_source=tag-newest</a>)
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-27 17:06:56
+ * @version 2022.07
+ * @since 2022-07-08 08:46:29
  */
 public class AttributeContext implements IAttributeContext {
 
@@ -100,18 +100,21 @@ public class AttributeContext implements IAttributeContext {
 	@Override
 	public Character getAttrCharacter(String key) {
 		Optional<Object> objectOptional = getAttrOptional(key);
+		assert objectOptional.orElse("") instanceof Character;
 		return (Character) objectOptional.orElse("");
 	}
 
 	@Override
 	public Byte getAttrByte(String key) {
 		Optional<Object> objectOptional = getAttrOptional(key);
+		assert objectOptional.orElse(0) instanceof Byte;
 		return (Byte) objectOptional.orElse(0);
 	}
 
 	@Override
 	public Short getAttrShort(String key) {
 		Optional<Object> objectOptional = getAttrOptional(key);
+		assert objectOptional.orElse(0) instanceof Short;
 		return (Short) objectOptional.orElse(0);
 	}
 
@@ -124,12 +127,14 @@ public class AttributeContext implements IAttributeContext {
 	@Override
 	public Float getAttrFloat(String key) {
 		Optional<Object> objectOptional = getAttrOptional(key);
+		assert objectOptional.orElse(0) instanceof Float;
 		return (Float) objectOptional.orElse(0);
 	}
 
 	@Override
 	public Double getAttrDouble(String key) {
 		Optional<Object> objectOptional = getAttrOptional(key);
+		assert objectOptional.orElse(0) instanceof Double;
 		return (Double) objectOptional.orElse(0);
 	}
 

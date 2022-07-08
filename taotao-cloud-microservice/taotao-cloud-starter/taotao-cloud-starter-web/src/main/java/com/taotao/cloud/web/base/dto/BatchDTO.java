@@ -46,7 +46,7 @@ public record BatchDTO<SaveDTO, UpdateDTO, I extends Serializable>(
 	@Schema(description = "批量添加数据DTO")
 	List<SaveDTO> batchCreate,
 
-	/**¬
+	/**
 	 * 批量更新数据DTO
 	 */
 	@Schema(description = "批量更新数据DTO")

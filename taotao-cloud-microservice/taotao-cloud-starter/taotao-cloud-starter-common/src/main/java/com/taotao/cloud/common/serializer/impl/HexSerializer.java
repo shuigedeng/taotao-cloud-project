@@ -18,9 +18,8 @@ public class HexSerializer implements Serializer {
             return new byte[0];
         }
         //只能转换字符串
-        if(o instanceof String){
-            String source = (String) o;
-            char[] chars = source.toCharArray();
+        if(o instanceof String source){
+			char[] chars = source.toCharArray();
             try {
                 return Hex.decodeHex(chars);
             } catch (DecoderException e) {

@@ -112,23 +112,16 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.filter(Objects::nonNull)
 				.filter(eqDTO -> StrUtil.isNotBlank(eqDTO.filed()))
 				.filter(eqDTO -> ReflectionUtil.checkField(eqDTO.filed(), getEntityClass()))
-				.forEach(eqDTO -> {
-					wrapper.eq(StrUtil.toUnderlineCase(eqDTO.filed()), eqDTO.value());
-				});
+				.forEach(eqDTO -> wrapper.eq(StrUtil.toUnderlineCase(eqDTO.filed()), eqDTO.value()));
 
 			Optional.ofNullable(baseQuery.dateTimeBetweenQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.filed()))
-				.filter(
-					dateTimeBetweenDTO -> ReflectionUtil.checkField(dateTimeBetweenDTO.getClass(),
-						getEntityClass()))
-				.forEach(dateTimeBetweenDTO -> {
-					wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
-						dateTimeBetweenDTO.startTime(),
-						dateTimeBetweenDTO.endTime());
-				});
+				.filter(dateTimeBetweenDTO -> ReflectionUtil.checkField(dateTimeBetweenDTO.getClass(), getEntityClass()))
+				.forEach(dateTimeBetweenDTO -> wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
+					dateTimeBetweenDTO.startTime(), dateTimeBetweenDTO.endTime()));
 
 			Optional.ofNullable(baseQuery.likeQuery())
 				.orElse(new ArrayList<>())
@@ -136,9 +129,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.filter(Objects::nonNull)
 				.filter(likeDTO -> StrUtil.isNotBlank(likeDTO.filed()))
 				.filter(likeDTO -> ReflectionUtil.checkField(likeDTO.getClass(), getEntityClass()))
-				.forEach(likeDTO -> {
-					wrapper.like(StrUtil.toUnderlineCase(likeDTO.filed()), likeDTO.value());
-				});
+				.forEach(likeDTO -> wrapper.like(StrUtil.toUnderlineCase(likeDTO.filed()), likeDTO.value()));
 
 			Optional.ofNullable(baseQuery.inQuery())
 				.orElse(new ArrayList<>())
@@ -146,21 +137,16 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.filter(Objects::nonNull)
 				.filter(inDTO -> StrUtil.isNotBlank(inDTO.filed()))
 				.filter(inDTO -> ReflectionUtil.checkField(inDTO.getClass(), getEntityClass()))
-				.forEach(inDTO -> {
-					wrapper.in(StrUtil.toUnderlineCase(inDTO.filed()), inDTO.values());
-				});
+				.forEach(inDTO -> wrapper.in(StrUtil.toUnderlineCase(inDTO.filed()), inDTO.values()));
 
 			Optional.ofNullable(baseQuery.notInQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.filed()))
-				.filter(
-					notInDTO -> ReflectionUtil.checkField(notInDTO.getClass(), getEntityClass()))
-				.forEach(notInDTO -> {
-					wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.filed()),
-						notInDTO.values());
-				});
+				.filter(notInDTO -> ReflectionUtil.checkField(notInDTO.getClass(), getEntityClass()))
+				.forEach(notInDTO -> wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.filed()),
+					notInDTO.values()));
 		}
 		wrapper.isNotNull("id");
 		return wrapper;

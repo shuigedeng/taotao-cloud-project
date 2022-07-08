@@ -145,8 +145,7 @@ public final class PropertyUtil {
 	 * @param propertyValue propertyValue
 	 * @since 2021-09-02 20:52:16
 	 */
-	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
-		String propertyValue) {
+	public static void setDefaultInitProperty(Class<?> cls, String module, String key, String propertyValue) {
 		setDefaultInitProperty(cls, module, key, propertyValue, "");
 	}
 
@@ -170,21 +169,18 @@ public final class PropertyUtil {
 					propertyCache.tryUpdateCache(key, propertyValue);
 				}
 
-				LogUtil.info(" set default init property key: {}, value: {}, message: {}",
-					key, propertyValue, message);
+				LogUtil.info(" set default init property key: {}, value: {}, message: {}", key, propertyValue, message);
 			}
 		} else {
 			if (StringUtil.isEmpty(getSystemProperty(key, ""))) {
-				System.setProperty(key,
-					Objects.requireNonNull(PropertyUtil.getPropertyCache(key, "")));
+				System.setProperty(key, Objects.requireNonNull(PropertyUtil.getPropertyCache(key, "")));
 			}
 		}
 	}
 
 	public static void setProperty(String key, String propertyValue, String message) {
 		System.setProperty(key, propertyValue);
-		LogUtil.info(" set default init property key: {}, value: {}, message: {}",
-			key, propertyValue, message);
+		LogUtil.info(" set default init property key: {}, value: {}, message: {}", key, propertyValue, message);
 	}
 
 	/**

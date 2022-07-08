@@ -35,9 +35,8 @@ import java.util.*;
 
 /**
  * 文件工具类
- * 1. 用于获取文件的内容
+ * 用于获取文件的内容
  *
- * @author bbhou
  */
 public final class FileUtil {
 

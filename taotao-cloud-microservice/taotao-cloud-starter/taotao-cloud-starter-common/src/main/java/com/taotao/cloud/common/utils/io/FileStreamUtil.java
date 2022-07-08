@@ -47,14 +47,13 @@ public class FileStreamUtil {
 	@Deprecated
 	public static String toString(InputStream is, String charset) {
 		try (ByteArrayOutputStream boa = new ByteArrayOutputStream()) {
-			int len = 0;
+			int len;
 			byte[] buffer = new byte[1024];
 
 			while ((len = is.read(buffer)) != -1) {
 				boa.write(buffer, 0, len);
 			}
-			byte[] result = boa.toByteArray();
-			return new String(result, charset);
+			return boa.toString(charset);
 		} catch (Exception e) {
 			throw new CommonRuntimeException(e);
 		}
@@ -98,8 +97,7 @@ public class FileStreamUtil {
 			while ((len = inputStream.read(buffer)) != -1) {
 				boa.write(buffer, 0, len);
 			}
-			byte[] result = boa.toByteArray();
-			return new String(result, charset);
+			return boa.toString(charset);
 		} catch (Exception e) {
 			throw new CommonRuntimeException(e);
 		}
@@ -240,6 +238,7 @@ public class FileStreamUtil {
 		final int endIndex,
 		final Charset charset) {
 		try (InputStream inputStream = FileStreamUtil.class.getResourceAsStream(path)) {
+			assert inputStream != null;
 			return FileUtil.getFileContent(inputStream, startIndex, endIndex, charset);
 		} catch (IOException e) {
 			throw new CommonRuntimeException(e);
@@ -390,9 +389,8 @@ public class FileStreamUtil {
 	 * @param charset 文件编码
 	 */
 	public static void write(Collection<String> lines, OutputStream output,
-		final String charset) {
-		try (BufferedWriter writer = new BufferedWriter(
-			new OutputStreamWriter(output, Charset.forName(charset)))) {
+		final Charset charset) {
+		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output, charset))) {
 			for (String service : lines) {
 				writer.write(service);
 				writer.newLine();
@@ -416,7 +414,7 @@ public class FileStreamUtil {
 	 * @param lines  a not {@code null Collection} of service class names.
 	 */
 	public static void write(Collection<String> lines, OutputStream output) {
-		write(lines, output, CommonConstant.UTF8);
+		write(lines, output, StandardCharsets.UTF_8);
 	}
 
 }
