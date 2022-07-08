@@ -71,8 +71,7 @@ public class ElkAutoConfiguration implements InitializingBean {
 	public LogstashTcpSocketAppender logstashTcpSocketAppender() {
 		LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
 		String[] destinations = elkProperties.getDestinations();
-		if (elkProperties.getDestinations() == null
-			|| elkProperties.getDestinations().length == 0) {
+		if (elkProperties.getDestinations() == null || elkProperties.getDestinations().length == 0) {
 			throw new BaseException("未设置elk地址");
 		}
 
@@ -82,8 +81,7 @@ public class ElkAutoConfiguration implements InitializingBean {
 		appender.setEncoder(createEncoder());
 
 		ILoggerFactory factory = LoggerFactory.getILoggerFactory();
-		if (factory instanceof LoggerContext) {
-			LoggerContext context = ((LoggerContext) factory);
+		if (factory instanceof LoggerContext context) {
 			appender.setContext(context);
 			context.getLogger("ROOT").addAppender(appender);
 		}

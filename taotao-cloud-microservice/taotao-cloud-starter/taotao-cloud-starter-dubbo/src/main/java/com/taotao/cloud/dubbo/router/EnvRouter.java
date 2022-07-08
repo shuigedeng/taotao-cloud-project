@@ -13,30 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.enums;
+package com.taotao.cloud.dubbo.router;
+
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.rpc.Invocation;
+import org.apache.dubbo.rpc.Invoker;
+import org.apache.dubbo.rpc.RpcException;
+import org.apache.dubbo.rpc.cluster.router.AbstractRouter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
- * 代理类型枚举
+ * env路由器
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-22 10:47:37
+ * @version 2022.07
+ * @since 2022-07-08 10:46:05
  */
-public enum ProxyTypeEnum {
+public class EnvRouter extends AbstractRouter {
 
-    /**
-     * 不执行任何代理
-     */
-    NONE,
+	public EnvRouter() {
+		this.priority = Integer.MAX_VALUE;
+	}
 
-    /**
-     * jdk 动态代理
-     */
-    JDK,
-
-    /**
-     * cglib 动态代理
-     */
-    CGLIB;
-
+	@Override
+	public <T> List<Invoker<T>> route(List<Invoker<T>> invokers, URL url, Invocation invocation) throws RpcException {
+		//TODO 逻辑处理
+		return invokers;
+	}
 }

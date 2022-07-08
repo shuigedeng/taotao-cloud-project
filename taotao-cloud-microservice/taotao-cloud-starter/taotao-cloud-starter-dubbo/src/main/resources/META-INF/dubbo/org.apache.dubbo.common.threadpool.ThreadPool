@@ -1,1 +1,2 @@
-custom=com.taotao.cloud.dubbo.treadpool.CustomThreadPool
+customThreadPool=com.taotao.cloud.dubbo.treadpool.CustomThreadPool
+watchingPool=com.taotao.cloud.dubbo.treadpool.WatchingPool

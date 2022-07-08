@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ import java.util.Objects;
  */
 public class SearchDto implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -2084416068307485742L;
 	/**
 	 * 搜索关键字

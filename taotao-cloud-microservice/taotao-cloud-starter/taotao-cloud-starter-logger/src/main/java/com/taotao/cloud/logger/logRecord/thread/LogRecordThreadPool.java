@@ -71,12 +71,4 @@ public class LogRecordThreadPool {
 	public ExecutorService getLogRecordPoolExecutor() {
         return LOG_RECORD_POOL_EXECUTOR;
     }
-
-	public static void main(String[] args) {
-		List<String> aa = new ArrayList<>();
-		aa.add("sldfasldfjk");
-		aa.add("sldfasldfjk");
-		aa.add("sldfasldfjk");
-		System.out.println(aa.toString());
-	}
 }

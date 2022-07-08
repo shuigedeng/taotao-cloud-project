@@ -228,8 +228,9 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 	/**
 	 * <p>Description: 自定义 Inner 处理器 </p>
 	 *
-	 * @author : gengwei.zheng
-	 * @date : 2022/5/31 11:28
+	 * @author shuigedeng
+	 * @version 2022.07
+	 * @since 2022-07-08 10:48:16
 	 */
 	public static class FeignInnerContract extends SpringMvcContract {
 

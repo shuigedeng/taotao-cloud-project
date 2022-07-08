@@ -373,20 +373,24 @@ dubbo:
     name: dubbo
     port: 20883
     ssl-enabled: false
-    threads: 200
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
     serialization: kryo
     status: server
     payload: 83886080
+    threadpool: fixed
+    threadname: taotao-cloud-dubbo-executor
+    threads: 200
   provider:
     timeout: 300000
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
+    threads: 500
   consumer:
     check: false
     timeout: 300000
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
+    threads: 100
   #module:
   #  name: ${spring.application.name}
   #monitor:

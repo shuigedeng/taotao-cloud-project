@@ -11,8 +11,6 @@ public class LogRecordOps {
     private String condition;
     private boolean isBatch;
 
-
-
 	public String getSuccessLogTemplate() {
 		return successLogTemplate;
 	}
