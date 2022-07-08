@@ -19,7 +19,7 @@ public class DelegateOAuth2AccessTokenResponseClient implements
 	OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> {
 
 	private final OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> delegate;
-	private RestOperations restOperations;
+	private final RestOperations restOperations;
 
 	public DelegateOAuth2AccessTokenResponseClient(
 		OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> delegate,

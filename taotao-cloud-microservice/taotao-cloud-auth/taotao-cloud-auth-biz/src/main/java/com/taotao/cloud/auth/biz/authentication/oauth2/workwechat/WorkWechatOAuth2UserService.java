@@ -44,8 +44,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author felord.cn
  * @since 2021 /8/12 17:45
  */
-public class WorkWechatOAuth2UserService implements
-	OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
 	private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
 	private static final String MISSING_CODE_ERROR = "missing_code_attribute";
@@ -58,8 +57,7 @@ public class WorkWechatOAuth2UserService implements
 	 * Instantiates a new Wechat o auth 2 user service.
 	 */
 	public WorkWechatOAuth2UserService() {
-		RestTemplate restTemplate = new RestTemplate(
-			Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
+		RestTemplate restTemplate = new RestTemplate(Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 		this.restOperations = restTemplate;
 	}
@@ -159,9 +157,7 @@ public class WorkWechatOAuth2UserService implements
 
 		private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
-
 		private final GenericHttpMessageConverter<Object> jsonMessageConverter = HttpMessageConverters.getJsonMessageConverter();
-
 
 		public WechatOAuth2UserHttpMessageConverter() {
 			super(DEFAULT_CHARSET, MediaType.TEXT_PLAIN,

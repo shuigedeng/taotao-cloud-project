@@ -106,8 +106,7 @@ public interface FrequencyLimitHandler {
 			cacheService.increment(getKey, 1);
 
 			// 1分钟内请求次数过多
-			if (Long.parseLong(getCnts) > Long.parseLong(
-				config.getProperty(CaptchaConst.REQ_GET_MINUTE_LIMIT, "120"))) {
+			if (Long.parseLong(getCnts) > Long.parseLong(config.getProperty(CaptchaConst.REQ_GET_MINUTE_LIMIT, "120"))) {
 				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_GET_ERROR);
 			}
 
