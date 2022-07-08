@@ -19,7 +19,7 @@ public enum SerializerFactory {
 	/**
 	 * 序列化map
 	 */
-	Map<String, Serializer> serializerMap = new HashMap<>();
+	final Map<String, Serializer> serializerMap = new HashMap<>();
 
 	SerializerFactory() {
 		ServiceLoader<Serializer> serializers = ServiceLoader.load(Serializer.class);

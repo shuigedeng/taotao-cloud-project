@@ -58,7 +58,7 @@ class BeanMapEmitter extends ClassEmitter {
 	private static final Signature GET_PROPERTY_TYPE = TypeUtils.parseSignature(
 		"Class getPropertyType(String)");
 
-	public BeanMapEmitter(ClassVisitor v, String className, Class type, int require) {
+	public BeanMapEmitter(ClassVisitor v, String className, Class<?> type, int require) {
 		super(v);
 
 		begin_class(Constants.V1_2, Constants.ACC_PUBLIC, className, BEAN_MAP, null,
@@ -76,7 +76,7 @@ class BeanMapEmitter extends ClassEmitter {
 		allProps.putAll(setters);
 
 		if (require != 0) {
-			for (Iterator it = allProps.keySet().iterator(); it.hasNext(); ) {
+			for (Iterator<String> it = allProps.keySet().iterator(); it.hasNext(); ) {
 				String name = (String) it.next();
 				if ((((require & BeanMap.REQUIRE_GETTER) != 0) && !getters.containsKey(name)) ||
 					(((require & BeanMap.REQUIRE_SETTER) != 0) && !setters.containsKey(name))) {

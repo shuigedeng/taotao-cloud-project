@@ -451,7 +451,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @return 返回类表
 	 */
 	public static <E> List<E> fillList(final List<E> values, IFiller<E> filler) {
-		if (com.taotao.cloud.common.utils.lang.ObjectUtil.isNull(values)) {
+		if (ObjectUtil.isNull(values)) {
 			return values;
 		}
 

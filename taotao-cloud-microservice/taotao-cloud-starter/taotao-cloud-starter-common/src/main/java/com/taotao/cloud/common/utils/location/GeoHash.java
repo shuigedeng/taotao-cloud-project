@@ -23,7 +23,7 @@ public class GeoHash {
 	public static final double MAXLNG = 180;
 
 	//base32编码的所有字符
-	private static final char BASE32CHARS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+	private static final char[] BASE32CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 		'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v',
 		'w', 'x', 'y', 'z'};
 

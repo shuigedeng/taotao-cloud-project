@@ -53,8 +53,7 @@ public interface SaveController<T extends SuperEntity<T, I>, I extends Serializa
 	@PostMapping
 	@RequestLogger("通用单体新增")
 	//@PreAuthorize("@pms.hasPermission('save')")
-	default Result<Boolean> save(
-		@Parameter(description = "新增DTO", required = true)
+	default Result<Boolean> save(@Parameter(description = "新增DTO", required = true)
 		@RequestBody @Validated SaveDTO saveDTO) {
 		if (handlerSave(saveDTO)) {
 			if (ReflectionUtil.checkField(saveDTO.getClass(), getEntityClass())) {

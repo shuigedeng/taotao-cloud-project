@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 
 public class CustomObjectInputStream extends ObjectInputStream {
-    private ClassLoader classLoader;
+    private final ClassLoader classLoader;
 
     public CustomObjectInputStream(InputStream in,ClassLoader classLoader) throws IOException {
         super(in);

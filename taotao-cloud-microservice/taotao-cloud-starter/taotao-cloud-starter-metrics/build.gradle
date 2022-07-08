@@ -2,13 +2,10 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api "io.micrometer:micrometer-core"
+    //https://search.maven.org/artifact/com.alibaba/druid
     api 'com.alibaba:druid:1.2.11'
     api 'com.alibaba.csp:sentinel-core:1.8.4'
     api "org.springframework.boot:spring-boot-starter-undertow"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-}
-
-repositories {
-    mavenCentral()
 }

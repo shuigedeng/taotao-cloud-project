@@ -29,9 +29,8 @@ import org.springframework.lang.Nullable;
  * ##不完整模式 Version.of("v0.1").incomplete().eq("v0.1.2");   // true
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 19:41:13 email: 596392912@qq.com site:http://www.dreamlu.net date
- * 2015年7月9日下午10:48:39
+ * @version 2022.07
+ * @since 2022-07-08 08:41:45
  */
 public class Version {
 

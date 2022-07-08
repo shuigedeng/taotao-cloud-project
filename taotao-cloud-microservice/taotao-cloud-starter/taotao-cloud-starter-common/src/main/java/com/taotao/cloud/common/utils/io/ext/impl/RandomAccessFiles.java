@@ -85,10 +85,7 @@ public class RandomAccessFiles implements IFiles {
      * @return 最小的结果
      */
     private long getMin(final long paramOne, final long paramTwo) {
-        if(paramOne <= paramTwo) {
-            return paramOne;
-        }
-        return paramTwo;
-    }
+		return Math.min(paramOne, paramTwo);
+	}
 
 }

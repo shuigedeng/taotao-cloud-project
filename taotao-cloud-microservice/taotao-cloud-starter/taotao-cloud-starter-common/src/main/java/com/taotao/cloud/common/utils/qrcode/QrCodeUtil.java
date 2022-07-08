@@ -178,26 +178,26 @@ public final class QrCodeUtil {
 	 */
 	public QrCodeUtil errorCorrectionLevel(ErrorCorrectionLevel errorCorrectionLevel) {
 		switch (errorCorrectionLevel) {
-			case L:
+			case L -> {
 				this.errorCorrectionLevel = errorCorrectionLevel;
 				this.errorCorrectionLevelValue = 0.07;
-				break;
-			case M:
+			}
+			case M -> {
 				this.errorCorrectionLevel = errorCorrectionLevel;
 				this.errorCorrectionLevelValue = 0.15;
-				break;
-			case Q:
+			}
+			case Q -> {
 				this.errorCorrectionLevel = errorCorrectionLevel;
 				this.errorCorrectionLevelValue = 0.25;
-				break;
-			case H:
+			}
+			case H -> {
 				this.errorCorrectionLevel = errorCorrectionLevel;
 				this.errorCorrectionLevelValue = 0.3;
-				break;
-			default:
+			}
+			default -> {
 				this.errorCorrectionLevel = ErrorCorrectionLevel.M;
 				this.errorCorrectionLevelValue = 0.15;
-				break;
+			}
 		}
 		return this;
 	}
