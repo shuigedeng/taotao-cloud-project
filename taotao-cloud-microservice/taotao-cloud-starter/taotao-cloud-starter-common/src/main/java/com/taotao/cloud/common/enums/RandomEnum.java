@@ -13,30 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.common.enums;
 
 /**
- * 代理类型枚举
+ * 生成的随机数类型
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-22 10:47:37
+ * @version 2021.9
+ * @since 2021-09-02 19:41:13
  */
-public enum ProxyTypeEnum {
+public enum RandomEnum {
+	/**
+	 * INT STRING ALL
+	 */
+	INT(RandomEnum.INT_STR),
+	STRING(RandomEnum.STR_STR),
+	ALL(RandomEnum.ALL_STR);
 
-    /**
-     * 不执行任何代理
-     */
-    NONE,
+	private final String factor;
 
-    /**
-     * jdk 动态代理
-     */
-    JDK,
+	RandomEnum(String factor) {
+		this.factor = factor;
+	}
 
-    /**
-     * cglib 动态代理
-     */
-    CGLIB;
+	/**
+	 * 随机字符串因子
+	 */
+	private static final String INT_STR = "0123456789";
+	private static final String STR_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	private static final String ALL_STR = INT_STR + STR_STR;
 
+	public String getFactor() {
+		return factor;
+	}
 }

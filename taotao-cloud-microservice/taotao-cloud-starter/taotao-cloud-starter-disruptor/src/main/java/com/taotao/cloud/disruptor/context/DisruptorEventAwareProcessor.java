@@ -41,6 +41,7 @@ public class DisruptorEventAwareProcessor implements ApplicationContextAware, Be
 	 * applicationContext
 	 */
 	private ApplicationContext applicationContext;
+
 	// /**
 	//  * Security context used when running with a SecurityManager
 	//  */

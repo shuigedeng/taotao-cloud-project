@@ -32,7 +32,7 @@ import org.springframework.scheduling.annotation.Async;
  */
 public class RequestLoggerListener {
 
-	private List<IRequestLoggerService> requestLoggerService;
+	private final List<IRequestLoggerService> requestLoggerService;
 
 	public RequestLoggerListener(List<IRequestLoggerService> requestLoggerServices) {
 		this.requestLoggerService = requestLoggerServices;
@@ -43,10 +43,8 @@ public class RequestLoggerListener {
 	public void saveRequestLog(RequestLoggerEvent event) {
 		RequestLogger requestLogger = (RequestLogger) event.getSource();
 
-		if (Objects.nonNull(requestLoggerService) && requestLoggerService.size() > 0) {
-			requestLoggerService.forEach(service -> {
-				service.save(requestLogger);
-			});
+		if (Objects.nonNull(requestLoggerService) && !requestLoggerService.isEmpty()) {
+			requestLoggerService.forEach(service -> service.save(requestLogger));
 		}
 	}
 }

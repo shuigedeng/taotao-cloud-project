@@ -48,7 +48,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	@Override
 	public void save(RequestLogger requestLogger) {
-		if (Objects.isNull(kafkaTemplate)) {
+		if (Objects.nonNull(kafkaTemplate)) {
 			String request = JsonUtil.toJSONString(requestLogger);
 
 			ListenableFuture<SendResult<String, String>> future = kafkaTemplate

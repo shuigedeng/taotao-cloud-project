@@ -108,41 +108,6 @@ public class LoggerAutoConfiguration implements InitializingBean {
 
 			return requestLoggerServices;
 		}
-
-		//@Bean
-		//public LoggerRequestLoggerServiceImpl loggerRequestLogService() {
-		//	if (determineLogType(RequestLoggerTypeEnum.LOGGER)) {
-		//		return new LoggerRequestLoggerServiceImpl();
-		//	}
-		//	return null;
-		//}
-
-		//@Bean
-		//@ConditionalOnBean
-		//public RedisRequestLoggerServiceImpl redisRequestLogService(
-		//	RedisRepository redisRepository) {
-		//	if (determineLogType(RequestLoggerTypeEnum.REDIS)) {
-		//		return new RedisRequestLoggerServiceImpl(redisRepository);
-		//	}
-		//	return null;
-		//}
-		//
-		//@Bean
-		//@ConditionalOnBean
-		//public KafkaRequestLoggerServiceImpl kafkaRequestLogService(
-		//	KafkaTemplate<String, String> kafkaTemplate) {
-		//	if (determineLogType(RequestLoggerTypeEnum.KAFKA)) {
-		//		return new KafkaRequestLoggerServiceImpl(kafkaTemplate);
-		//	}
-		//	return null;
-		//}
-		//
-		//private boolean determineLogType(RequestLoggerTypeEnum requestLoggerTypeEnum) {
-		//	RequestLoggerTypeEnum[] types = properties.getTypes();
-		//	assert types != null;
-		//	return Arrays.stream(types)
-		//		.anyMatch(type -> type.getCode() == requestLoggerTypeEnum.getCode());
-		//}
 	}
 }
 

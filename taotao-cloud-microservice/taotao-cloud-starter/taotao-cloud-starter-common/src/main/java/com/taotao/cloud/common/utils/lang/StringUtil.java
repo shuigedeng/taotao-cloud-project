@@ -21,7 +21,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.PunctuationConst;
-import com.taotao.cloud.common.enums.RandomType;
+import com.taotao.cloud.common.enums.RandomEnum;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.model.CharPool;
 import com.taotao.cloud.common.model.Holder;
@@ -3333,17 +3333,17 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @return 随机数
 	 */
 	public static String random(int count) {
-		return StringUtil.random(count, RandomType.ALL);
+		return StringUtil.random(count, RandomEnum.ALL);
 	}
 
 	/**
 	 * 随机数生成
 	 *
 	 * @param count      字符长度
-	 * @param randomType 随机数类别
+	 * @param randomEnum 随机数类别
 	 * @return 随机数
 	 */
-	public static String random(int count, RandomType randomType) {
+	public static String random(int count, RandomEnum randomEnum) {
 		if (count == 0) {
 			return StringPool.EMPTY;
 		}
@@ -3351,7 +3351,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 		final Random random = Holder.SECURE_RANDOM;
 		char[] buffer = new char[count];
 		for (int i = 0; i < count; i++) {
-			String factor = randomType.getFactor();
+			String factor = randomEnum.getFactor();
 			buffer[i] = factor.charAt(random.nextInt(factor.length()));
 		}
 		return new String(buffer);

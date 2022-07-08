@@ -13,38 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.taotao.cloud.dubbo.router;
 
-package com.taotao.cloud.common.enums;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.common.extension.Activate;
+import org.apache.dubbo.rpc.cluster.Router;
+import org.apache.dubbo.rpc.cluster.RouterFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * 生成的随机数类型
+ * env路由器工厂
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 19:41:13
+ * @version 2022.07
+ * @since 2022-07-08 10:46:08
  */
-public enum RandomType {
-	/**
-	 * INT STRING ALL
-	 */
-	INT(RandomType.INT_STR),
-	STRING(RandomType.STR_STR),
-	ALL(RandomType.ALL_STR);
-
-	private final String factor;
-
-	RandomType(String factor) {
-		this.factor = factor;
-	}
-
-	/**
-	 * 随机字符串因子
-	 */
-	private static final String INT_STR = "0123456789";
-	private static final String STR_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	private static final String ALL_STR = INT_STR + STR_STR;
-
-	public String getFactor() {
-		return factor;
-	}
+@Activate(order = 1)
+public class EnvRouterFactory implements RouterFactory {
+ 
+    @Override
+    public Router getRouter(URL url) {
+        LogUtil.info("启动dubbo特性环境路由");
+        return new EnvRouter();
+    }
 }
