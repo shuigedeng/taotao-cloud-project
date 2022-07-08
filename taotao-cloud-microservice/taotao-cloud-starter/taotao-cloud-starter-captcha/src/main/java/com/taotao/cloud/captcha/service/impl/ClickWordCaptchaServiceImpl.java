@@ -73,15 +73,13 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	public void init(Properties config) {
 		super.init(config);
 
-		clickWordFontStr = config.getProperty(CaptchaConst.CAPTCHA_FONT_TYPE,
-			"SourceHanSansCN-Normal.otf");
+		clickWordFontStr = config.getProperty(CaptchaConst.CAPTCHA_FONT_TYPE, "SourceHanSansCN-Normal.otf");
 
 		try {
 			if (clickWordFontStr.toLowerCase().endsWith(".ttf")
 				|| clickWordFontStr.toLowerCase().endsWith(".ttc")
 				|| clickWordFontStr.toLowerCase().endsWith(".otf")) {
-				this.clickWordFont = Font.createFont(Font.TRUETYPE_FONT,
-						getClass().getResourceAsStream("/fonts/" + clickWordFontStr))
+				this.clickWordFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/" + clickWordFontStr))
 					.deriveFont(Font.BOLD, HAN_ZI_SIZE);
 			} else {
 				this.clickWordFont = new Font(clickWordFontStr, Font.BOLD, HAN_ZI_SIZE);

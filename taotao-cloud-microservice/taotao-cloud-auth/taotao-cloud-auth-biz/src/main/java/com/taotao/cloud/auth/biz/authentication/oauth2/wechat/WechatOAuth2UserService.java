@@ -52,7 +52,7 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 	private static final String OPENID_KEY = "openid";
 	private static final String LANG_KEY = "lang";
 	private static final String DEFAULT_LANG = "zh_CN";
-	private static final ParameterizedTypeReference<WechatOAuth2User> OAUTH2_USER_OBJECT = new ParameterizedTypeReference<WechatOAuth2User>() {
+	private static final ParameterizedTypeReference<WechatOAuth2User> OAUTH2_USER_OBJECT = new ParameterizedTypeReference<>() {
 	};
 	private final RestOperations restOperations;
 
@@ -60,15 +60,13 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 	 * Instantiates a new Wechat o auth 2 user service.
 	 */
 	public WechatOAuth2UserService() {
-		RestTemplate restTemplate = new RestTemplate(
-			Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
+		RestTemplate restTemplate = new RestTemplate(Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 		this.restOperations = restTemplate;
 	}
 
 	@Override
-	public WechatOAuth2User loadUser(OAuth2UserRequest userRequest)
-		throws OAuth2AuthenticationException {
+	public WechatOAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		ClientRegistration clientRegistration = userRequest.getClientRegistration();
 		String registrationId = clientRegistration.getRegistrationId();
 		Assert.notNull(userRequest, "userRequest cannot be null");
@@ -109,16 +107,12 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 		try {
 			LinkedMultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
 
-			queryParams.add(OAuth2ParameterNames.ACCESS_TOKEN,
-				userRequest.getAccessToken().getTokenValue());
-			queryParams.add(OPENID_KEY,
-				String.valueOf(userRequest.getAdditionalParameters().get(OPENID_KEY)));
+			queryParams.add(OAuth2ParameterNames.ACCESS_TOKEN, userRequest.getAccessToken().getTokenValue());
+			queryParams.add(OPENID_KEY, String.valueOf(userRequest.getAdditionalParameters().get(OPENID_KEY)));
 			queryParams.add(LANG_KEY, DEFAULT_LANG);
-			URI userInfoEndpoint = UriComponentsBuilder.fromUriString(userInfoUri)
-				.queryParams(queryParams).build().toUri();
+			URI userInfoEndpoint = UriComponentsBuilder.fromUriString(userInfoUri).queryParams(queryParams).build().toUri();
 
-			return this.restOperations.exchange(userInfoEndpoint, HttpMethod.GET, null,
-				OAUTH2_USER_OBJECT);
+			return this.restOperations.exchange(userInfoEndpoint, HttpMethod.GET, null, OAUTH2_USER_OBJECT);
 		} catch (OAuth2AuthorizationException ex) {
 			OAuth2Error oauth2Error = ex.getError();
 			StringBuilder errorDetails = new StringBuilder();
@@ -163,14 +157,10 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 		private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
-
 		private final GenericHttpMessageConverter<Object> jsonMessageConverter = HttpMessageConverters.getJsonMessageConverter();
 
-
 		public WechatOAuth2UserHttpMessageConverter() {
-			super(DEFAULT_CHARSET, MediaType.TEXT_PLAIN,
-				MediaType.APPLICATION_JSON,
-				new MediaType("application", "*+json"));
+			super(DEFAULT_CHARSET, MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, new MediaType("application", "*+json"));
 		}
 
 		@Override

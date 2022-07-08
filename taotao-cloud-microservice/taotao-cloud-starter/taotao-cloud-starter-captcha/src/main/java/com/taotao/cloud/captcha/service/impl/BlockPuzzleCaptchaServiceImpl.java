@@ -122,6 +122,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		try {
 			point = JsonUtil.toObject(s, Point.class);
 			//aes解密
+			assert point != null;
 			pointJson = decrypt(captcha.getPointJson(), point.getSecretKey());
 			point1 = JsonUtil.toObject(pointJson, Point.class);
 		} catch (Exception e) {
@@ -130,6 +131,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			throw new CaptchaException(e.getMessage());
 		}
 
+		assert point1 != null;
 		if (point.x - Integer.parseInt(slipOffset) > point1.x
 			|| point1.x > point.x + Integer.parseInt(slipOffset)
 			|| point.y != point1.y) {
@@ -203,22 +205,19 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			int y = point.getY();
 
 			//生成新的拼图图像
-			BufferedImage newJigsawImage = new BufferedImage(jigsawWidth, jigsawHeight,
-				jigsawImage.getType());
+			BufferedImage newJigsawImage = new BufferedImage(jigsawWidth, jigsawHeight, jigsawImage.getType());
 			Graphics2D graphics = newJigsawImage.createGraphics();
 
 			int bold = 5;
 			//如果需要生成RGB格式，需要做如下配置,Transparency 设置透明
-			newJigsawImage = graphics.getDeviceConfiguration()
-				.createCompatibleImage(jigsawWidth, jigsawHeight, Transparency.TRANSLUCENT);
+			newJigsawImage = graphics.getDeviceConfiguration().createCompatibleImage(jigsawWidth, jigsawHeight, Transparency.TRANSLUCENT);
 			// 新建的图像根据模板颜色赋值,源图生成遮罩
 			cutByTemplate(originalImage, jigsawImage, newJigsawImage, x, 0);
 			if (captchaInterferenceOptions > 0) {
 				int position = 0;
 				if (originalWidth - x - 5 > jigsawWidth * 2) {
 					//在原扣图右边插入干扰图
-					position = RandomUtil.randomInt(x + jigsawWidth + 5,
-						originalWidth - jigsawWidth);
+					position = RandomUtil.randomInt(x + jigsawWidth + 5, originalWidth - jigsawWidth);
 				} else {
 					//在原扣图左边插入干扰图
 					position = RandomUtil.randomInt(100, x - jigsawWidth - 5);
@@ -237,8 +236,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				while (true) {
 					String s = ImageUtils.getslidingBlock();
 					if (!jigsawImageBase64.equals(s)) {
-						Integer randomInt = RandomUtil.randomInt(jigsawWidth,
-							100 - jigsawWidth);
+						int randomInt = RandomUtil.randomInt(jigsawWidth, 100 - jigsawWidth);
 						interferenceByTemplate(originalImage,
 							Objects.requireNonNull(ImageUtils.getBase64StrToImage(s)),
 							randomInt, 0);
@@ -248,15 +246,13 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			}
 
 			// 设置“抗锯齿”的属性
-			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			graphics.setStroke(new BasicStroke(bold, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
 			graphics.drawImage(newJigsawImage, 0, 0, null);
 			graphics.dispose();
 
 			ByteArrayOutputStream os = new ByteArrayOutputStream();//新建流。
-			ImageIO.write(newJigsawImage, IMAGE_TYPE_PNG,
-				os);//利用ImageIO类提供的write方法，将bi以png图片的数据模式写入流。
+			ImageIO.write(newJigsawImage, IMAGE_TYPE_PNG, os);//利用ImageIO类提供的write方法，将bi以png图片的数据模式写入流。
 			byte[] jigsawImages = os.toByteArray();
 
 			ByteArrayOutputStream oriImagesOs = new ByteArrayOutputStream();//新建流。
@@ -264,13 +260,11 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				oriImagesOs);//利用ImageIO类提供的write方法，将bi以jpg图片的数据模式写入流。
 			byte[] oriCopyImages = oriImagesOs.toByteArray();
 			Base64.Encoder encoder = Base64.getEncoder();
-			dataVO.setOriginalImageBase64(
-				encoder.encodeToString(oriCopyImages).replaceAll("\r|\n", ""));
+			dataVO.setOriginalImageBase64(encoder.encodeToString(oriCopyImages).replaceAll("\r|\n", ""));
 
 			//point信息不传到前端，只做后端check校验
 			//dataVO.setPoint(point);
-			dataVO.setJigsawImageBase64(
-				encoder.encodeToString(jigsawImages).replaceAll("\r|\n", ""));
+			dataVO.setJigsawImageBase64(encoder.encodeToString(jigsawImages).replaceAll("\r|\n", ""));
 			dataVO.setToken(RandomUtil.randomString(16));
 			dataVO.setSecretKey(point.getSecretKey());
 			//base64StrToImage(encoder.encodeToString(oriCopyImages), "D:\\原图.png");
@@ -278,8 +272,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
 			//将坐标信息存入redis中
 			String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
-			CaptchaServiceFactory.getCache(cacheType)
-				.set(codeKey, JsonUtil.toJSONString(point), EXPIRESIN_SECONDS);
+			CaptchaServiceFactory.getCache(cacheType).set(codeKey, JsonUtil.toJSONString(point), EXPIRESIN_SECONDS);
 			LogUtil.info("token：{},point:{}", dataVO.getToken(), JsonUtil.toJSONString(point));
 			return dataVO;
 		} catch (Exception e) {
@@ -480,8 +473,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		int r = 0;
 		int g = 0;
 		int b = 0;
-		for (int i = 0; i < matrix.length; i++) {
-			int[] x = matrix[i];
+		for (int[] x : matrix) {
 			for (int j = 0; j < x.length; j++) {
 				if (j == 1) {
 					continue;

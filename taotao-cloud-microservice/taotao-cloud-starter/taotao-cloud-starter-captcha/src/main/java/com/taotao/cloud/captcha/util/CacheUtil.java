@@ -52,27 +52,9 @@ public final class CacheUtil {
 	 */
 	public static void init(int cacheMaxNumber, long second) {
 		CACHE_MAX_NUMBER = cacheMaxNumber;
-		if (second > 0L) {
-            /*Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    refresh();
-                }
-            }, 0, second * 1000);*/
-			scheduledExecutor = new ScheduledThreadPoolExecutor(1, new ThreadFactory() {
-				@Override
-				public Thread newThread(Runnable r) {
-					return new Thread(r, "thd-captcha-cache-clean");
-				}
-			}, new ThreadPoolExecutor.CallerRunsPolicy());
-
-			scheduledExecutor.scheduleAtFixedRate(new Runnable() {
-				@Override
-				public void run() {
-					refresh();
-				}
-			}, 10, second, TimeUnit.SECONDS);
+		if (second > 0) {
+			scheduledExecutor = new ScheduledThreadPoolExecutor(1, r -> new Thread(r, "taotao-cloud-captcha-cache-clean-executor"), new ThreadPoolExecutor.CallerRunsPolicy());
+			scheduledExecutor.scheduleAtFixedRate(CacheUtil::refresh, 10, second, TimeUnit.SECONDS);
 		}
 	}
 

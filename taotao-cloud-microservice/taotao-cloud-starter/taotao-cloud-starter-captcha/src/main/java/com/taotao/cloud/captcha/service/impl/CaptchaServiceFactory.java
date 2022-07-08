@@ -42,8 +42,7 @@ public class CaptchaServiceFactory {
 	public volatile static Map<String, CaptchaCacheService> cacheService = new HashMap<>();
 
 	static {
-		ServiceLoader<CaptchaCacheService> cacheServices = ServiceLoader.load(
-			CaptchaCacheService.class);
+		ServiceLoader<CaptchaCacheService> cacheServices = ServiceLoader.load(CaptchaCacheService.class);
 		for (CaptchaCacheService item : cacheServices) {
 			cacheService.put(item.type(), item);
 		}

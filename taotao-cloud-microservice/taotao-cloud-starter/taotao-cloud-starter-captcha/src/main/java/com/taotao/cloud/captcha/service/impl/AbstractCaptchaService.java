@@ -33,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -50,10 +51,14 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	protected static int HAN_ZI_SIZE_HALF = HAN_ZI_SIZE / 2;
 
-	//check校验坐标
+	/**
+	 * check校验坐标
+	 */
 	protected static String REDIS_CAPTCHA_KEY = "RUNNING:CAPTCHA:%s";
 
-	//后台二次校验坐标
+	/**
+	 * 后台二次校验坐标
+	 */
 	protected static String REDIS_SECOND_CAPTCHA_KEY = "RUNNING:CAPTCHA:second-%s";
 
 	protected static Long EXPIRESIN_SECONDS = 2 * 60L;
@@ -94,40 +99,31 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		waterMark = config.getProperty(CaptchaConst.CAPTCHA_WATER_MARK, "我的水印");
 		slipOffset = config.getProperty(CaptchaConst.CAPTCHA_SLIP_OFFSET, "5");
 		waterMarkFontStr = config.getProperty(CaptchaConst.CAPTCHA_WATER_FONT, "WenQuanZhengHei.ttf");
-		captchaAesStatus = Boolean.parseBoolean(
-			config.getProperty(CaptchaConst.CAPTCHA_AES_STATUS, "true"));
+		captchaAesStatus = Boolean.parseBoolean(config.getProperty(CaptchaConst.CAPTCHA_AES_STATUS, "true"));
 		clickWordFontStr = config.getProperty(CaptchaConst.CAPTCHA_FONT_TYPE, "WenQuanZhengHei.ttf");
 		//clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "SourceHanSansCN-Normal.otf");
 		cacheType = config.getProperty(CaptchaConst.CAPTCHA_CACHETYPE, "local");
-		captchaInterferenceOptions = Integer.parseInt(
-			config.getProperty(CaptchaConst.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
+		captchaInterferenceOptions = Integer.parseInt(config.getProperty(CaptchaConst.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
 
 		// 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示，
 		// 通过加载resources下的font字体解决，无需在linux中安装字体
 		loadWaterMarkFont();
 
-		if (cacheType.equals("local")) {
+		if ("local".equals(cacheType)) {
 			LogUtil.info("初始化local缓存...");
-			CacheUtil.init(
-				Integer.parseInt(config.getProperty(CaptchaConst.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
+			CacheUtil.init(Integer.parseInt(config.getProperty(CaptchaConst.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
 				Long.parseLong(config.getProperty(CaptchaConst.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
 		}
 
-		if (config.getProperty(CaptchaConst.HISTORY_DATA_CLEAR_ENABLE, "0").equals("1")) {
+		if ("1".equals(config.getProperty(CaptchaConst.HISTORY_DATA_CLEAR_ENABLE, "0"))) {
 			LogUtil.info("历史资源清除开关...开启..." + captchaType());
-			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-				@Override
-				public void run() {
-					destroy(config);
-				}
-			}));
+			Runtime.getRuntime().addShutdownHook(new Thread(() -> destroy(config)));
 		}
 
-		if (config.getProperty(CaptchaConst.REQ_FREQUENCY_LIMIT_ENABLE, "0").equals("1")) {
+		if ("1".equals(config.getProperty(CaptchaConst.REQ_FREQUENCY_LIMIT_ENABLE, "0"))) {
 			if (limitHandler == null) {
 				LogUtil.info("接口分钟内限流开关...开启...");
-				limitHandler = new FrequencyLimitHandler.DefaultLimitHandler(config,
-					getCacheService(cacheType));
+				limitHandler = new FrequencyLimitHandler.DefaultLimitHandler(config, getCacheService(cacheType));
 			}
 		}
 	}
@@ -238,7 +234,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 				.endsWith(".ttc")
 				|| waterMarkFontStr.toLowerCase().endsWith(".otf")) {
 				this.waterMarkFont = Font.createFont(Font.TRUETYPE_FONT,
-						getClass().getResourceAsStream("/fonts/" + waterMarkFontStr))
+						Objects.requireNonNull(getClass().getResourceAsStream("/fonts/" + waterMarkFontStr)))
 					.deriveFont(Font.BOLD, HAN_ZI_SIZE / 2);
 			} else {
 				this.waterMarkFont = new Font(waterMarkFontStr, Font.BOLD, HAN_ZI_SIZE / 2);
