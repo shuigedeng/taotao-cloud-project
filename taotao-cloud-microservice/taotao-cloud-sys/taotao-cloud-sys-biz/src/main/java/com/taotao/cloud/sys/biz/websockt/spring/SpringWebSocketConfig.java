@@ -15,18 +15,18 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  */
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+public class SpringWebSocketConfig implements WebSocketConfigurer {
 
 	@Autowired
-	private HttpAuthHandler httpAuthHandler;
+	private AuthTextWebSocketHandler authTextWebSocketHandler;
 	@Autowired
-	private MyInterceptor myInterceptor;
+	private WebsocketInterceptor websocketInterceptor;
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry
-			.addHandler(httpAuthHandler, "/spring/websocket")
-			.addInterceptors(myInterceptor)
+			.addHandler(authTextWebSocketHandler, "/spring/websocket")
+			.addInterceptors(websocketInterceptor)
 			.setAllowedOrigins("*");
 	}
 }

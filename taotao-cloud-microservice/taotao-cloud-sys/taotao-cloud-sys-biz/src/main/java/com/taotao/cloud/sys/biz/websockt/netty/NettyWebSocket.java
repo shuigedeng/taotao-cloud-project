@@ -41,7 +41,7 @@ import java.util.Map;
  * @since 2021/09/06 11:51
  */
 @ServerEndpoint(path = "/netty/websocket", port = "8989", host = "0.0.0.0")
-public class MyWebSocket {
+public class NettyWebSocket {
 
 	@BeforeHandshake
 	public void handshake(Session session, HttpHeaders headers, @RequestParam String req,
