@@ -9,7 +9,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.time.LocalDateTime;
 
 @Component
-public class HttpAuthHandler extends TextWebSocketHandler {
+public class AuthTextWebSocketHandler extends TextWebSocketHandler {
 
     /**
      * socket 建立成功事件
@@ -59,6 +59,4 @@ public class HttpAuthHandler extends TextWebSocketHandler {
             WsSessionManager.remove(token.toString());
         }
     }
-
-
 }

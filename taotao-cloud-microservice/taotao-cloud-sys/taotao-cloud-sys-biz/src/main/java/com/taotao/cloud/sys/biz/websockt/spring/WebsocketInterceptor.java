@@ -9,11 +9,10 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class MyInterceptor implements HandshakeInterceptor {
+public class WebsocketInterceptor implements HandshakeInterceptor {
 
     /**
      * 握手前

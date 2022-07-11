@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@ServerEndpoint("/original/websocket")
 @Component
+@ServerEndpoint("/original/websocket")
 public class WsServerEndpoint {
 
     /**
