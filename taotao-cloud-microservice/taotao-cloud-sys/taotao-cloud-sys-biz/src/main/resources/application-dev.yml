@@ -1225,6 +1225,9 @@ taotao:
           ch:
             - lsdkfjl
             - sdflksf
+    netty:
+      socket:
+        enabled: true
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity
