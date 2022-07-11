@@ -65,6 +65,10 @@ dependencies {
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
     implementation 'io.github.memorydoc:gobrs-async-starter:1.2.0-RELEASE'
 
+    // http://www.likaixuan.top/excelUtil/doc/v3
+    //https://mvnrepository.com/artifact/net.oschina.likaixuan/excelutil
+    implementation 'net.oschina.likaixuan:excelutil:3.1.8'
+
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
