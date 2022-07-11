@@ -1,5 +1,7 @@
 package com.taotao.cloud.sys.biz.websockt.original;
 
+import java.util.Optional;
+import javax.websocket.OnError;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -44,4 +46,9 @@ public class WsServerEndpoint {
     public String onMsg(String text) throws IOException {
         return "servet 发送：" + text;
     }
+
+	@OnError
+	public void onError(Session session, Throwable error) {
+		System.out.println("发生错误");
+	}
 }

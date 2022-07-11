@@ -20,7 +20,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// 配置客户端尝试连接地址
-		registry.addEndpoint("/stomp/websocket")
+		registry
+			.addEndpoint("/stomp/websocket")
 			.setAllowedOrigins("*")
 			.withSockJS();
 	}
