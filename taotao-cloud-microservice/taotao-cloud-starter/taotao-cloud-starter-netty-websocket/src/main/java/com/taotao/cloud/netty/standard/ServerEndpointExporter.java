@@ -54,9 +54,7 @@ public class ServerEndpointExporter extends ApplicationObjectSupport implements
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		if (!(beanFactory instanceof AbstractBeanFactory)) {
-			throw new IllegalArgumentException(
-				"AutowiredAnnotationBeanPostProcessor requires a AbstractBeanFactory: "
-					+ beanFactory);
+			throw new IllegalArgumentException("AutowiredAnnotationBeanPostProcessor requires a AbstractBeanFactory: " + beanFactory);
 		}
 		this.beanFactory = (AbstractBeanFactory) beanFactory;
 	}

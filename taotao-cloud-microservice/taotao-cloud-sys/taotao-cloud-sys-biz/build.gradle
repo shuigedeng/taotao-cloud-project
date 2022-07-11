@@ -27,6 +27,8 @@ dependencies {
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
     //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
     implementation 'org.apache.pdfbox:pdfbox:2.0.26'
     //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
