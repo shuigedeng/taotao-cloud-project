@@ -1,1 +1,249 @@
-{"version":"3","listProblem":[]}
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: : (U+003A)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 4,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 18,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "1625c61f7e800a3da14305cfa355a8e8ea2bf3a982986990fbb970a5b2afe4fc"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: U (U+0055)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 6,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 20,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "47e8c9706da6d07896096d8f888fa1f07205b0c4067ff35f3e038cd7921324be"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: s (U+0073)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 7,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 21,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "8c166f3e2ea648ca8659e15b88e2dd183188ec53837b00871c0836e6e9b95265"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Illegal character: e (U+0065)",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "config/bigdata/presto0_236/jvm.config",
+      "language": "",
+      "line": 3,
+      "offset": 8,
+      "length": 1,
+      "code": {
+        "startLine": 1,
+        "length": 1,
+        "offset": 22,
+        "surroundingCode": "-server\n-Xmx3G\n-XX:+UseG1GC\n-XX:G1HeapRegionSize=32M\n-XX:+UseGCOverheadLimit"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "bbda15169b58d03bbf7b2cd6830dbfa419def3d4f55044ce7fc1425844f99588"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Method does not override method from its superclass",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 98,
+      "offset": 2,
+      "length": 1,
+      "code": {
+        "startLine": 96,
+        "length": 1,
+        "offset": 5,
+        "surroundingCode": "\t}\n\n\t@Override\n\tpublic void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {\n\t\tctx.close();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "0cef6b4aea838008723a406a0b9577c50b9da5f0d140dcabcaa3a2ff90eb9b3f"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve symbol 'ChannelHandlerContext'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 30,
+      "length": 21,
+      "code": {
+        "startLine": 97,
+        "length": 21,
+        "offset": 41,
+        "surroundingCode": "\n\t@Override\n\tpublic void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {\n\t\tctx.close();\n\t}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "7c25c2980e74c40ac2560744349dce820f542e3f4b1e9d2948eae6859708ba23"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Unknown class: 'ChannelHandlerContext'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 99,
+      "offset": 30,
+      "length": 21,
+      "code": {
+        "startLine": 97,
+        "length": 21,
+        "offset": 41,
+        "surroundingCode": "\n\t@Override\n\tpublic void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {\n\t\tctx.close();\n\t}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "e76778bf606167bee72bcad3ea066c7760c1f5e5f4e204caa4896f5c6c9659d8"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve method 'close()'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "taotao-cloud-rpc/taotao-cloud-rpc-client/src/main/java/com/taotao/cloud/rpc/client/RpcClient.java",
+      "language": "JAVA",
+      "line": 100,
+      "offset": 7,
+      "length": 5,
+      "code": {
+        "startLine": 98,
+        "length": 5,
+        "offset": 109,
+        "surroundingCode": "\t@Override\n\tpublic void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {\n\t\tctx.close();\n\t}\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "taotao-cloud-project.taotao-cloud-rpc.taotao-cloud-rpc-client.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "79b3e25f6b1489dbfcbd2a8aa320a6c34cc3fb0021e69825365480effc5c4449"
+}]}

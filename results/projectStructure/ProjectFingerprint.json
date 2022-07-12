@@ -1,22 +1,16 @@
 {
   "languages": [
     "Plain text",
-    "YAML",
     "XML",
+    ".gitignore (GitIgnore)",
+    "Properties",
+    "Lombok.Config",
     "JSON",
     "HTML",
-    "Markdown",
-    ".gitignore (GitIgnore)",
+    "Java",
+    "Groovy",
     "EditorConfig",
     "DTD",
-    "TypeScript",
-    "TypeScript JSX",
-    "Less",
-    "SVG",
-    "CSS",
-    "ECMAScript 6",
-    "Vue template",
-    "SCSS",
-    "EJS"
+    "SPI"
   ]
 }
