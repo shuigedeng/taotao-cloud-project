@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.mp.error;
+package com.taotao.cloud.wechat.biz.module.mp.error;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

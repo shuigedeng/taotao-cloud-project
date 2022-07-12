@@ -1,6 +1,6 @@
-package com.taotao.cloud.wechat.biz.mp.config;
+package com.taotao.cloud.wechat.biz.module.mp.config;
 
-import com.github.binarywang.demo.wx.mp.utils.JsonUtils;
+import com.taotao.cloud.wechat.biz.module.mp.utils.JsonUtils;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

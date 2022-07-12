@@ -17,7 +17,7 @@ package com.taotao.cloud.websocket.interceptor;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.websocket.domain.WebSocketPrincipal;
-import com.taotao.cloud.websocket.properties.WebSocketProperties;
+import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import javax.servlet.http.HttpSession;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
@@ -37,10 +37,10 @@ import org.springframework.messaging.support.MessageHeaderAccessor;
  */
 public class WebSocketChannelInterceptor implements ChannelInterceptor {
 
-	private WebSocketProperties webSocketProperties;
+	private CustomWebSocketProperties customWebSocketProperties;
 
-	public void setWebSocketProperties(WebSocketProperties webSocketProperties) {
-		this.webSocketProperties = webSocketProperties;
+	public void setWebSocketProperties(CustomWebSocketProperties customWebSocketProperties) {
+		this.customWebSocketProperties = customWebSocketProperties;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class WebSocketChannelInterceptor implements ChannelInterceptor {
 			 * 3. header参数的key可以一样，取出来就是list
 			 * 4. 样例代码header中只有一个token，所以直接取0位
 			 */
-			String token = accessor.getNativeHeader(webSocketProperties.getPrincipalAttribute())
+			String token = accessor.getNativeHeader(customWebSocketProperties.getPrincipalAttribute())
 				.get(0);
 
 			/*

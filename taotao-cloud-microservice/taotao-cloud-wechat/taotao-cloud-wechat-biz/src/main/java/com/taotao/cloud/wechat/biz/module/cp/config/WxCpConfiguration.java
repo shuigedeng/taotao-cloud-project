@@ -1,5 +1,14 @@
-package com.taotao.cloud.wechat.biz.cp.config;
+package com.taotao.cloud.wechat.biz.module.cp.config;
 
+import com.taotao.cloud.wechat.biz.module.cp.handler.ContactChangeHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.EnterAgentHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.LocationHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.LogHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.MenuHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.MsgHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.NullHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.SubscribeHandler;
+import com.taotao.cloud.wechat.biz.module.cp.handler.UnsubscribeHandler;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
@@ -10,15 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.binarywang.demo.wx.cp.handler.ContactChangeHandler;
-import com.github.binarywang.demo.wx.cp.handler.EnterAgentHandler;
-import com.github.binarywang.demo.wx.cp.handler.LocationHandler;
-import com.github.binarywang.demo.wx.cp.handler.LogHandler;
-import com.github.binarywang.demo.wx.cp.handler.MenuHandler;
-import com.github.binarywang.demo.wx.cp.handler.MsgHandler;
-import com.github.binarywang.demo.wx.cp.handler.NullHandler;
-import com.github.binarywang.demo.wx.cp.handler.SubscribeHandler;
-import com.github.binarywang.demo.wx.cp.handler.UnsubscribeHandler;
 import com.google.common.collect.Maps;
 import lombok.val;
 import me.chanjar.weixin.common.api.WxConsts;

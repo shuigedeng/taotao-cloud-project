@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.cp.handler;
+package com.taotao.cloud.wechat.biz.module.cp.handler;
 
 import java.util.Map;
 

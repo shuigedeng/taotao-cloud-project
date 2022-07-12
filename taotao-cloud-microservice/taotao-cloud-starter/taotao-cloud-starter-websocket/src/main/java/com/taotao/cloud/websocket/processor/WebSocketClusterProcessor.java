@@ -19,7 +19,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.websocket.domain.WebSocketMessage;
 import com.taotao.cloud.websocket.exception.IllegalChannelException;
 import com.taotao.cloud.websocket.exception.PrincipalNotFoundException;
-import com.taotao.cloud.websocket.properties.WebSocketProperties;
+import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.listener.MessageListener;
@@ -36,15 +36,15 @@ import org.springframework.beans.factory.InitializingBean;
 public class WebSocketClusterProcessor implements InitializingBean {
 
 	private RedissonClient redissonClient;
-	private WebSocketProperties webSocketProperties;
+	private CustomWebSocketProperties customWebSocketProperties;
 	private WebSocketMessageSender webSocketMessageSender;
 
 	public void setRedissonClient(RedissonClient redissonClient) {
 		this.redissonClient = redissonClient;
 	}
 
-	public void setWebSocketProperties(WebSocketProperties webSocketProperties) {
-		this.webSocketProperties = webSocketProperties;
+	public void setWebSocketProperties(CustomWebSocketProperties customWebSocketProperties) {
+		this.customWebSocketProperties = customWebSocketProperties;
 	}
 
 	public void setWebSocketMessageSender(WebSocketMessageSender webSocketMessageSender) {
@@ -60,7 +60,7 @@ public class WebSocketClusterProcessor implements InitializingBean {
 		try {
 			webSocketMessageSender.toUser(webSocketMessage);
 		} catch (PrincipalNotFoundException e) {
-			RTopic rTopic = redissonClient.getTopic(webSocketProperties.getTopic(),
+			RTopic rTopic = redissonClient.getTopic(customWebSocketProperties.getTopic(),
 				new JsonJacksonCodec());
 			rTopic.publish(webSocketMessage);
 			LogUtil.debug(
@@ -73,7 +73,7 @@ public class WebSocketClusterProcessor implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		RTopic topic = redissonClient.getTopic(webSocketProperties.getTopic());
+		RTopic topic = redissonClient.getTopic(customWebSocketProperties.getTopic());
 		topic.addListener(WebSocketMessage.class,
 			(MessageListener<WebSocketMessage<String>>) (charSequence, webSocketMessage) -> {
 				LogUtil.debug("Redisson received web socket sync message [{}]",

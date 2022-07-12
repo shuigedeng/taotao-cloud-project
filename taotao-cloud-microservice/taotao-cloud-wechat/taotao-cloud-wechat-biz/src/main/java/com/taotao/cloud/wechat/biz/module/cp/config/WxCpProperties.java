@@ -1,10 +1,10 @@
-package com.taotao.cloud.wechat.biz.cp.config;
+package com.taotao.cloud.wechat.biz.module.cp.config;
 
+import com.taotao.cloud.wechat.biz.module.cp.utils.JsonUtils;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.github.binarywang.demo.wx.cp.utils.JsonUtils;
 import lombok.Getter;
 import lombok.Setter;
 

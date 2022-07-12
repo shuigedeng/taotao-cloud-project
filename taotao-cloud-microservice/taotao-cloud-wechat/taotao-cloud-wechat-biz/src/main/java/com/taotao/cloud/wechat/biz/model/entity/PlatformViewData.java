@@ -1,7 +1,6 @@
 package com.taotao.cloud.wechat.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -13,8 +12,7 @@ import java.util.Date;
  */
 @Data
 @TableName("tt_s_platform_view_data")
-@ApiModel(value = "平台pv统计")
-public class PlatformViewData extends BaseIdEntity {
+public class PlatformViewData {
 
 
     @Schema(description =  "pv数量")

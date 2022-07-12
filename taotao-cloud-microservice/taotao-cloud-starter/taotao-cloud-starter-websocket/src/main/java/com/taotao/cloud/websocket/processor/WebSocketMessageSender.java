@@ -20,7 +20,7 @@ import com.taotao.cloud.websocket.domain.WebSocketChannel;
 import com.taotao.cloud.websocket.domain.WebSocketMessage;
 import com.taotao.cloud.websocket.exception.IllegalChannelException;
 import com.taotao.cloud.websocket.exception.PrincipalNotFoundException;
-import com.taotao.cloud.websocket.properties.WebSocketProperties;
+import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.user.SimpUser;
@@ -37,7 +37,7 @@ public class WebSocketMessageSender {
 
 	private SimpMessagingTemplate simpMessagingTemplate;
 	private SimpUserRegistry simpUserRegistry;
-	private WebSocketProperties webSocketProperties;
+	private CustomWebSocketProperties customWebSocketProperties;
 
 	public void setSimpMessagingTemplate(SimpMessagingTemplate simpMessagingTemplate) {
 		this.simpMessagingTemplate = simpMessagingTemplate;
@@ -47,8 +47,8 @@ public class WebSocketMessageSender {
 		this.simpUserRegistry = simpUserRegistry;
 	}
 
-	public void setWebSocketProperties(WebSocketProperties webSocketProperties) {
-		this.webSocketProperties = webSocketProperties;
+	public void setWebSocketProperties(CustomWebSocketProperties customWebSocketProperties) {
+		this.customWebSocketProperties = customWebSocketProperties;
 	}
 
 	/**
@@ -84,6 +84,6 @@ public class WebSocketMessageSender {
 	 * @param <T>     payload 类型
 	 */
 	public <T> void toAll(T payload) {
-		simpMessagingTemplate.convertAndSend(webSocketProperties.getBroadcast(), payload);
+		simpMessagingTemplate.convertAndSend(customWebSocketProperties.getBroadcast(), payload);
 	}
 }

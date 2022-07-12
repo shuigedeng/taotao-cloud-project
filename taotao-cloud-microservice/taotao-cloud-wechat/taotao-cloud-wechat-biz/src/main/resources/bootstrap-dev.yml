@@ -457,11 +457,11 @@ wx:
       http-proxy-password:
   # 小程序
   miniapp:
-    appid: appId
-    secret: appId
-    token: @token
-    aesKey: @aesKey
-    msgDataFormat: @msgDataFormat
+    appid: 2222
+    secret: 2222
+    token: 222
+    aesKey: 22222
+    msgDataFormat: 2222
     config-storage:
       type: redistemplate
       key-prefix: wa
@@ -473,9 +473,10 @@ wx:
       http-proxy-port:
       http-proxy-username:
       http-proxy-password:
+  #微信企业号
   cp:
     corpId: 111
-    appConfigs:
+    app-configs:
       - agentId: 1000001
         secret: 1111
         token: 111
@@ -484,8 +485,9 @@ wx:
         secret: 1111
         token: 111
         aesKey: 111
+  #微信开放平台
   open:
-    componentAppId: ""
+    secret: ""
     componentSecret: ""
     componentToken: ""
     componentAesKey: ""

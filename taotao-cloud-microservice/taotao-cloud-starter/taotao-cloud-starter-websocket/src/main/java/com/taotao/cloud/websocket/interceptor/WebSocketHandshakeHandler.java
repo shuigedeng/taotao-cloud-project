@@ -17,7 +17,7 @@ package com.taotao.cloud.websocket.interceptor;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.websocket.domain.WebSocketPrincipal;
-import com.taotao.cloud.websocket.properties.WebSocketProperties;
+import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import java.security.Principal;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -37,10 +37,10 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
  */
 public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 
-	private WebSocketProperties webSocketProperties;
+	private CustomWebSocketProperties customWebSocketProperties;
 
-	public void setWebSocketProperties(WebSocketProperties webSocketProperties) {
-		this.webSocketProperties = webSocketProperties;
+	public void setWebSocketProperties(CustomWebSocketProperties customWebSocketProperties) {
+		this.customWebSocketProperties = customWebSocketProperties;
 	}
 
 	@Override
@@ -57,33 +57,33 @@ public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 		Object user = null;
 		HttpServletRequest httpServletRequest = getHttpServletRequest(request);
 		if (ObjectUtils.isNotEmpty(httpServletRequest)) {
-			user = httpServletRequest.getAttribute(webSocketProperties.getPrincipalAttribute());
+			user = httpServletRequest.getAttribute(customWebSocketProperties.getPrincipalAttribute());
 			if (ObjectUtils.isEmpty(user)) {
-				user = httpServletRequest.getParameter(webSocketProperties.getPrincipalAttribute());
+				user = httpServletRequest.getParameter(customWebSocketProperties.getPrincipalAttribute());
 				if (ObjectUtils.isEmpty(user)) {
 					user = httpServletRequest.getHeader("X-taotao-Session");
 				} else {
 					LogUtil.info(
 						"Get user principal [{}] from request parameter, use parameter  [{}]..",
-						user, webSocketProperties.getPrincipalAttribute());
+						user, customWebSocketProperties.getPrincipalAttribute());
 				}
 			} else {
 				LogUtil.info(
 					"Get user principal [{}] from request attribute, use attribute  [{}]..",
-					user, webSocketProperties.getPrincipalAttribute());
+					user, customWebSocketProperties.getPrincipalAttribute());
 			}
 		}
 
 		if (ObjectUtils.isEmpty(user)) {
 			HttpSession httpSession = getSession(request);
 			if (ObjectUtils.isNotEmpty(httpSession)) {
-				user = httpSession.getAttribute(webSocketProperties.getPrincipalAttribute());
+				user = httpSession.getAttribute(customWebSocketProperties.getPrincipalAttribute());
 				if (ObjectUtils.isEmpty(user)) {
 					user = httpSession.getId();
 				} else {
 					LogUtil.info(
 						"Get user principal [{}] from httpsession, use attribute  [{}].",
-						user, webSocketProperties.getPrincipalAttribute());
+						user, customWebSocketProperties.getPrincipalAttribute());
 				}
 			} else {
 				LogUtil.error("Cannot find session from websocket request.");

@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.mp.handler;
+package com.taotao.cloud.wechat.biz.module.mp.handler;
 
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

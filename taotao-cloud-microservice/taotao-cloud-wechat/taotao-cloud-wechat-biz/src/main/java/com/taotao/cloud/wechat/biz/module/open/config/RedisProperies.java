@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.open.config;
+package com.taotao.cloud.wechat.biz.module.open.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import redis.clients.jedis.JedisPoolConfig;
