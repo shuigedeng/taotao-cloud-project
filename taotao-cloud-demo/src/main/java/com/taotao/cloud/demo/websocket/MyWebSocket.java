@@ -15,17 +15,17 @@
  */
 package com.taotao.cloud.demo.websocket;
 
-import com.taotao.cloud.netty.annotation.BeforeHandshake;
-import com.taotao.cloud.netty.annotation.OnBinary;
-import com.taotao.cloud.netty.annotation.OnClose;
-import com.taotao.cloud.netty.annotation.OnError;
-import com.taotao.cloud.netty.annotation.OnEvent;
-import com.taotao.cloud.netty.annotation.OnMessage;
-import com.taotao.cloud.netty.annotation.OnOpen;
-import com.taotao.cloud.netty.annotation.PathVariable;
-import com.taotao.cloud.netty.annotation.RequestParam;
-import com.taotao.cloud.netty.annotation.ServerEndpoint;
-import com.taotao.cloud.netty.pojo.Session;
+import com.taotao.cloud.websocket.netty.annotation.BeforeHandshake;
+import com.taotao.cloud.websocket.netty.annotation.OnBinary;
+import com.taotao.cloud.websocket.netty.annotation.OnClose;
+import com.taotao.cloud.websocket.netty.annotation.OnError;
+import com.taotao.cloud.websocket.netty.annotation.OnEvent;
+import com.taotao.cloud.websocket.netty.annotation.OnMessage;
+import com.taotao.cloud.websocket.netty.annotation.OnOpen;
+import com.taotao.cloud.websocket.netty.annotation.PathVariable;
+import com.taotao.cloud.websocket.netty.annotation.RequestParam;
+import com.taotao.cloud.websocket.netty.annotation.ServerEndpoint;
+import com.taotao.cloud.websocket.netty.pojo.Session;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.timeout.IdleStateEvent;
 import java.io.IOException;

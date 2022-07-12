@@ -69,7 +69,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-		LogUtil.debug("[Herodotus] |- Global SQL Injection Filter in use!");
+		LogUtil.debug("Global SQL Injection Filter in use!");
 
 		ServerHttpRequest serverHttpRequest = exchange.getRequest();
 		HttpMethod method = serverHttpRequest.getMethod();
@@ -83,7 +83,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 				return chain.filter(exchange);
 			}
 
-			LogUtil.debug("[Herodotus] |- The original request parameter is [{}]", rawQuery);
+			LogUtil.debug("The original request parameter is [{}]", rawQuery);
 			// 执行XSS清理
 			boolean isSQLInjection = SqlInjectionUtil.checkForGet(rawQuery);
 
@@ -190,7 +190,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 	}
 
 	private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
-		LogUtil.error("[Herodotus] |- Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
+		LogUtil.error("Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
 		return WebFluxUtil.writeJsonResponse(exchange.getResponse(), Result.fail(ResultEnum.SQL_INJECTION_REQUEST));
 	}
 

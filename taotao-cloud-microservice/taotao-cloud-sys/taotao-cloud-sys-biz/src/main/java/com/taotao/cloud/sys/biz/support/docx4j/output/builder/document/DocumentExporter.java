@@ -38,8 +38,8 @@ public class DocumentExporter extends RichableDocument<DocumentExporter> {
         // 添加默认样式
         try {
             StylesDocument stylesDocument =
-                StylesDocument.Factory.parse(new File(
-	                FileUtil.brotherPath(DocumentExporter.class, "styles.xml")));
+	            (StylesDocument) StylesDocument.Factory.parse(new File(
+		            FileUtil.brotherPath(DocumentExporter.class, "styles.xml")));
             this.document.getStyles().setStyles(stylesDocument.getStyles());
         } catch (XmlException | IOException e) {
             throw new DocumentExportException(e);

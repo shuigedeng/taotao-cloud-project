@@ -22,6 +22,7 @@ import com.taotao.cloud.web.xss.FormXssClean;
 import com.taotao.cloud.web.xss.JacksonXssClean;
 import com.taotao.cloud.web.xss.XssCleanInterceptor;
 import com.taotao.cloud.web.xss.XssCleaner;
+import com.taotao.cloud.web.xss.filter.XssHttpServletFilter;
 import java.util.List;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -29,7 +30,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -67,6 +67,11 @@ public class XssAutoConfiguration implements WebMvcConfigurer {
 		XssCleaner xssCleaner) {
 		JacksonXssClean xssClean = new JacksonXssClean(properties, xssCleaner);
 		return builder -> builder.deserializerByType(String.class, xssClean);
+	}
+
+	@Bean
+	public XssHttpServletFilter xssHttpServletFilter(){
+		return new XssHttpServletFilter();
 	}
 
 	@Override
