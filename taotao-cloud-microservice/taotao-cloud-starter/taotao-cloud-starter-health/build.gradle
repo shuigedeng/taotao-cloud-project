@@ -2,10 +2,10 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 //    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
 //    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
-//    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')
 
 //    api 'com.dianping.cat:cat-client:3.0.0'
     api 'net.logstash.logback:logstash-logback-encoder'
+
     //https://search.maven.org/artifact/org.hibernate/hibernate-core
     api 'org.hibernate:hibernate-core:5.6.5.Final'
 
