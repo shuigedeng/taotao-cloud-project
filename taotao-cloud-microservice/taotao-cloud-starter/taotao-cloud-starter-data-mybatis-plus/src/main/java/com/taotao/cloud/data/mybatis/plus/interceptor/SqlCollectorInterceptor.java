@@ -45,11 +45,11 @@ import org.apache.ibatis.session.RowBounds;
 		RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
 	@Signature(method = "update", type = Executor.class, args = {MappedStatement.class,
 		Object.class})})
-public class SqlMybatisInterceptor implements Interceptor {
+public class SqlCollectorInterceptor implements Interceptor {
 
 	private final Collector collector;
 
-	public SqlMybatisInterceptor(Collector collector) {
+	public SqlCollectorInterceptor(Collector collector) {
 		this.collector = collector;
 	}
 

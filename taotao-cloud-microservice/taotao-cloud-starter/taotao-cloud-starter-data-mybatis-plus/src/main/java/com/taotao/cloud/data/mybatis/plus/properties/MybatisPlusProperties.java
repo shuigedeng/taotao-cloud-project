@@ -33,11 +33,41 @@ public class MybatisPlusProperties {
 
 	private Boolean enabled = false;
 
+	private Boolean sqlLogEnable = true;
+
+	private Boolean sqlCollectorEnable = true;
+
+	private Boolean cipherEnable = true;
+
 	public Boolean getEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Boolean getSqlLogEnable() {
+		return sqlLogEnable;
+	}
+
+	public void setSqlLogEnable(Boolean sqlLogEnable) {
+		this.sqlLogEnable = sqlLogEnable;
+	}
+
+	public Boolean getSqlCollectorEnable() {
+		return sqlCollectorEnable;
+	}
+
+	public void setSqlCollectorEnable(Boolean sqlCollectorEnable) {
+		this.sqlCollectorEnable = sqlCollectorEnable;
+	}
+
+	public Boolean getCipherEnable() {
+		return cipherEnable;
+	}
+
+	public void setCipherEnable(Boolean cipherEnable) {
+		this.cipherEnable = cipherEnable;
 	}
 }
