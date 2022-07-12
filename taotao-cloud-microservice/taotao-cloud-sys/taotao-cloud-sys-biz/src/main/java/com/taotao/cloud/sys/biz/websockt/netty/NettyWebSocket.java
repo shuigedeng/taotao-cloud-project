@@ -86,20 +86,13 @@ public class NettyWebSocket {
 
 	@OnEvent
 	public void onEvent(Session session, Object evt) {
-		if (evt instanceof IdleStateEvent) {
-			IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
+		if (evt instanceof IdleStateEvent idleStateEvent) {
 			switch (idleStateEvent.state()) {
-				case READER_IDLE:
-					System.out.println("read idle");
-					break;
-				case WRITER_IDLE:
-					System.out.println("write idle");
-					break;
-				case ALL_IDLE:
-					System.out.println("all idle");
-					break;
-				default:
-					break;
+				case READER_IDLE -> System.out.println("read idle");
+				case WRITER_IDLE -> System.out.println("write idle");
+				case ALL_IDLE -> System.out.println("all idle");
+				default -> {
+				}
 			}
 		}
 	}
