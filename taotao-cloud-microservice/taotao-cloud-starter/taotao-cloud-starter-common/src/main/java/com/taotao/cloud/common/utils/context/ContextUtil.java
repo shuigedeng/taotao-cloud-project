@@ -32,6 +32,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
 
 /**
  * 上下文工具类
@@ -315,6 +317,16 @@ public class ContextUtil {
 				throw new BaseException("BeanName 重复注册" + name);
 			}
 		}
+	}
+
+	/**
+	 * 得到类型转换器
+	 *
+	 * @return {@link ConversionService }
+	 * @since 2022-07-12 13:30:54
+	 */
+	public static ConversionService getTypeConverter() {
+		return DefaultConversionService.getSharedInstance();
 	}
 
 }

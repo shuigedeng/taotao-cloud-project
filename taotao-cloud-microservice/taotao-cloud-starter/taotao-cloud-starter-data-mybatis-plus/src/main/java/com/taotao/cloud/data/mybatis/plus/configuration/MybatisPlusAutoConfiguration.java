@@ -38,7 +38,7 @@ import com.taotao.cloud.data.mybatis.plus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatis.plus.injector.MateSqlInjector;
 import com.taotao.cloud.data.mybatis.plus.interceptor.SqlLogInterceptor;
-import com.taotao.cloud.data.mybatis.plus.interceptor.SqlMybatisInterceptor;
+import com.taotao.cloud.data.mybatis.plus.interceptor.SqlCollectorInterceptor;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
@@ -54,6 +54,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * MybatisPlusAutoConfiguration
@@ -62,6 +63,7 @@ import org.springframework.context.annotation.Bean;
  * @version 2021.9
  * @since 2021-09-04 07:40:02
  */
+@EnableTransactionManagement
 @AutoConfiguration(after = TenantAutoConfiguration.class)
 @EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class, TenantProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true")
@@ -99,15 +101,16 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnProperty(value = "mybatis-plus.sql-log.enable", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "sqlLogEnable", havingValue = "true", matchIfMissing = true)
 	public SqlLogInterceptor sqlLogInterceptor() {
 		return new SqlLogInterceptor();
 	}
 
 	@Bean
 	@ConditionalOnClass(name = "org.apache.ibatis.plugin.Interceptor")
-	public SqlMybatisInterceptor sqlMybatisInterceptor(Collector collector) {
-		return new SqlMybatisInterceptor(collector);
+	@ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "sqlCollectorEnable", havingValue = "true")
+	public SqlCollectorInterceptor sqlMybatisInterceptor(Collector collector) {
+		return new SqlCollectorInterceptor(collector);
 	}
 
 	/**
