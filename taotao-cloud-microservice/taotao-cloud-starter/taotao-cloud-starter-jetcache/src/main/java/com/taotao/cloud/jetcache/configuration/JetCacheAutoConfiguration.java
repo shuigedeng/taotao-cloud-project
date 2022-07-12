@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2019-2029, Dreamlu 卢春梦 (596392912@qq.com & www.dreamlu.net).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,18 +16,22 @@
 
 package com.taotao.cloud.jetcache.configuration;
 
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.support.ConfigMap;
 import com.alicp.jetcache.anno.support.DefaultSpringEncoderParser;
 import com.alicp.jetcache.anno.support.DefaultSpringKeyConvertorParser;
 import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.jetcache.enhance.JetCacheBuilder;
 import com.taotao.cloud.jetcache.jackson.JacksonKeyConvertor;
 import com.taotao.cloud.jetcache.jackson.JacksonValueDecoder;
 import com.taotao.cloud.jetcache.jackson.JacksonValueEncoder;
 import com.taotao.cloud.jetcache.properties.JetCacheProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -41,7 +45,8 @@ import org.springframework.context.annotation.Bean;
  * @version 2022.07
  * @since 2022-07-03 09:50:26
  */
-@AutoConfiguration(before = com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration.class)
+@EnableCreateCacheAnnotation
+@AutoConfiguration(after = com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration.class)
 @EnableConfigurationProperties(JetCacheProperties.class)
 @ConditionalOnProperty(prefix = JetCacheProperties.PREFIX, name = "enabled", havingValue = "true")
 public class JetCacheAutoConfiguration implements InitializingBean {
@@ -87,6 +92,13 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 		ObjectMapper mapper = JsonUtil.getInstance().copy();
 		mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator());
 		this.cacheMapper = mapper;
+	}
+
+	@Bean
+	public JetCacheBuilder jetCacheBuilder(SpringConfigProvider springConfigProvider) {
+		JetCacheBuilder jetCacheBuilder = new JetCacheBuilder(springConfigProvider);
+		LogUtil.info("Bean [Jet Cache Builder] Auto Configure.");
+		return jetCacheBuilder;
 	}
 
 }

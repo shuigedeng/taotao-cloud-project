@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.api.controller.manager;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.netty.annotation.PathVariable;
+import com.taotao.cloud.websocket.netty.annotation.PathVariable;
 import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.api.web.dto.role.RoleSaveDTO;
 import com.taotao.cloud.sys.api.web.dto.role.RoleUpdateDTO;

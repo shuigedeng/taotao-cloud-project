@@ -23,6 +23,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.STBorderStyle;
  * 单元格样式工具
  */
 interface CellStyleUtil {
+
     /**
      * 设置单元格边框样式
      * @param cellStyle 单元格样式
@@ -128,10 +129,10 @@ interface CellStyleUtil {
             XSSFCellBorder cellBorder = stylesTable.getBorderAt((int) borderId);
             ctBorder = (CTBorder) cellBorder.getCTBorder().copy();
         } else {
-            ctBorder = CTBorder.Factory.newInstance();
+            ctBorder = (CTBorder) CTBorder.Factory.newInstance();
         }
         CTBorderPr ctBorderPr = ctBorder.isSetDiagonal() ? ctBorder.getDiagonal() : ctBorder.addNewDiagonal();
-        CTColor ctColor = CTColor.Factory.newInstance();
+        CTColor ctColor = (CTColor) CTColor.Factory.newInstance();
         ctColor.setIndexed(IndexedColors.BLACK.index);
         ctBorderPr.setColor(ctColor);
         ctBorderPr.setStyle(STBorderStyle.THIN);

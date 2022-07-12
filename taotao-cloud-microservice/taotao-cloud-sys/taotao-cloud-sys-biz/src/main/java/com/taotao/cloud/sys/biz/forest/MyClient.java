@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.forest;
 import com.dtflys.forest.annotation.DataVariable;
 import com.dtflys.forest.annotation.Get;
 import com.dtflys.forest.annotation.Request;
+import com.dtflys.forest.annotation.Var;
 import com.taotao.cloud.sys.biz.forest.auth.MyAuth;
 
 public interface MyClient {
@@ -17,5 +18,5 @@ public interface MyClient {
 	 */
 	@Get("/hello/user?username={username}")
 	@MyAuth(username = "{username}", password = "bar")
-	String send(@DataVariable("username") String username);
+	String send(@Var("username") String username);
 }

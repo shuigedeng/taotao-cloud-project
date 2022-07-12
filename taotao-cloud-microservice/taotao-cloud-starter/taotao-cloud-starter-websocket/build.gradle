@@ -1,0 +1,11 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    api 'org.springframework.boot:spring-boot-starter-websocket'
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+
+

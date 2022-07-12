@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.biz.api.controller.manager;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.netty.annotation.RequestParam;
+import com.taotao.cloud.websocket.netty.annotation.RequestParam;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.model.entity.config.Setting;

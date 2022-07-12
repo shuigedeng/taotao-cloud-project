@@ -14,7 +14,7 @@ dependencies {
 //	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss')
-	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket')
+	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket-netty')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region')
 
 //	api 'com.ctrip.framework.apollo:apollo-client:1.9.1'
