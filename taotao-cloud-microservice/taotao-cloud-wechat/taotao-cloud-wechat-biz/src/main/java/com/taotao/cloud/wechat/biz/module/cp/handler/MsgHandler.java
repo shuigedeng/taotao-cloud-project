@@ -1,7 +1,7 @@
-package com.taotao.cloud.wechat.biz.cp.handler;
+package com.taotao.cloud.wechat.biz.module.cp.handler;
 
-import com.github.binarywang.demo.wx.cp.builder.TextBuilder;
-import com.github.binarywang.demo.wx.cp.utils.JsonUtils;
+import com.taotao.cloud.wechat.biz.module.cp.builder.TextBuilder;
+import com.taotao.cloud.wechat.biz.module.cp.utils.JsonUtils;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.cp.api.WxCpService;

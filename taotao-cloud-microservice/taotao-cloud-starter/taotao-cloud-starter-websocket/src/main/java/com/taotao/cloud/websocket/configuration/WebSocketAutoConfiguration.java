@@ -20,7 +20,7 @@ import com.taotao.cloud.websocket.interceptor.WebSocketChannelInterceptor;
 import com.taotao.cloud.websocket.interceptor.WebSocketHandshakeHandler;
 import com.taotao.cloud.websocket.processor.WebSocketClusterProcessor;
 import com.taotao.cloud.websocket.processor.WebSocketMessageSender;
-import com.taotao.cloud.websocket.properties.WebSocketProperties;
+import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
@@ -53,12 +53,12 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 @AutoConfiguration
 @EnableWebSocketMessageBroker
 @ConditionalOnBean({RedissonClient.class})
-@EnableConfigurationProperties({WebSocketProperties.class})
-@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableConfigurationProperties({CustomWebSocketProperties.class})
+@ConditionalOnProperty(prefix = CustomWebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
 public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigurer {
 
 	@Autowired
-	private WebSocketProperties webSocketProperties;
+	private CustomWebSocketProperties customWebSocketProperties;
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
 	@Autowired
@@ -74,7 +74,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	@Bean
 	public WebSocketChannelInterceptor webSocketChannelInterceptor() {
 		WebSocketChannelInterceptor webSocketChannelInterceptor = new WebSocketChannelInterceptor();
-		webSocketChannelInterceptor.setWebSocketProperties(webSocketProperties);
+		webSocketChannelInterceptor.setWebSocketProperties(customWebSocketProperties);
 		LogUtil.info("Bean [Web Socket Inbound Channel Interceptor] Auto Configure.");
 		return webSocketChannelInterceptor;
 	}
@@ -82,7 +82,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	@Bean
 	public WebSocketHandshakeHandler webSocketHandshakeHandler() {
 		WebSocketHandshakeHandler webSocketHandshakeHandler = new WebSocketHandshakeHandler();
-		webSocketHandshakeHandler.setWebSocketProperties(webSocketProperties);
+		webSocketHandshakeHandler.setWebSocketProperties(customWebSocketProperties);
 		LogUtil.info("Bean [Web Socket Handshake Handler] Auto Configure.");
 		return webSocketHandshakeHandler;
 	}
@@ -92,7 +92,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		WebSocketMessageSender webSocketMessageSender = new WebSocketMessageSender();
 		webSocketMessageSender.setSimpMessagingTemplate(simpMessagingTemplate);
 		webSocketMessageSender.setSimpUserRegistry(simpUserRegistry);
-		webSocketMessageSender.setWebSocketProperties(webSocketProperties);
+		webSocketMessageSender.setWebSocketProperties(customWebSocketProperties);
 		LogUtil.info("Bean [Web Socket Message Sender] Auto Configure.");
 		return webSocketMessageSender;
 	}
@@ -101,7 +101,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	public WebSocketClusterProcessor webSocketClusterProcessor(
 		WebSocketMessageSender webSocketMessageSender) {
 		WebSocketClusterProcessor webSocketClusterProcessor = new WebSocketClusterProcessor();
-		webSocketClusterProcessor.setWebSocketProperties(webSocketProperties);
+		webSocketClusterProcessor.setWebSocketProperties(customWebSocketProperties);
 		webSocketClusterProcessor.setWebSocketMessageSender(webSocketMessageSender);
 		webSocketClusterProcessor.setRedissonClient(redissonClient);
 		LogUtil.info("Bean [Web Socket Cluster Processor] Auto Configure.");
@@ -122,7 +122,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		 * 3. withSockJS()表示支持socktJS访问
 		 * 4. 添加自定义拦截器，这个拦截器是上一个demo自己定义的获取httpsession的拦截器
 		 */
-		registry.addEndpoint(webSocketProperties.getEndpoint())
+		registry.addEndpoint(customWebSocketProperties.getEndpoint())
 			.setAllowedOriginPatterns("*")
 			.setHandshakeHandler(webSocketHandshakeHandler())
 			.withSockJS();
@@ -170,15 +170,15 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 //        registry.enableSimpleBroker(webSocketProperties.getBroadcast(), webSocketProperties.getPeerToPeer())
 //                .setHeartbeatValue(new long[]{10000, 10000})
 //                .setTaskScheduler(taskScheduler);
-		registry.enableSimpleBroker(webSocketProperties.getBroadcast(),
-			webSocketProperties.getPeerToPeer());
+		registry.enableSimpleBroker(customWebSocketProperties.getBroadcast(),
+			customWebSocketProperties.getPeerToPeer());
 
 		/*
 		 * 全局使用的消息前缀（客户端订阅路径上会体现出来）
 		 * "/app" 为配置应用服务器的地址前缀，表示所有以/app 开头的客户端消息或请求
 		 *  都会路由到带有@MessageMapping 注解的方法中
 		 */
-		String[] applicationDestinationPrefixes = webSocketProperties.getApplicationPrefixes();
+		String[] applicationDestinationPrefixes = customWebSocketProperties.getApplicationPrefixes();
 		if (ArrayUtils.isNotEmpty(applicationDestinationPrefixes)) {
 			registry.setApplicationDestinationPrefixes(applicationDestinationPrefixes);
 		}
@@ -191,8 +191,8 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		 *    而不是 AnnotationMethodMessageHandler 或  SimpleBrokerMessageHandler
 		 *    or StompBrokerRelayMessageHandler，是在@SendToUser的URL前加“user+sessionId"组成
 		 */
-		if (StringUtils.isNotBlank(webSocketProperties.getUserDestinationPrefix())) {
-			registry.setUserDestinationPrefix(webSocketProperties.getUserDestinationPrefix());
+		if (StringUtils.isNotBlank(customWebSocketProperties.getUserDestinationPrefix())) {
+			registry.setUserDestinationPrefix(customWebSocketProperties.getUserDestinationPrefix());
 		}
 
 		/*

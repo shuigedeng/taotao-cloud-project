@@ -1,6 +1,15 @@
-package com.taotao.cloud.wechat.biz.mp.config;
+package com.taotao.cloud.wechat.biz.module.mp.config;
 
-import com.github.binarywang.demo.wx.mp.handler.*;
+import com.taotao.cloud.wechat.biz.module.mp.handler.KfSessionHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.LocationHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.LogHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.MenuHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.MsgHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.NullHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.ScanHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.StoreCheckNotifyHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.SubscribeHandler;
+import com.taotao.cloud.wechat.biz.module.mp.handler.UnsubscribeHandler;
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.redis.JedisWxRedisOps;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;

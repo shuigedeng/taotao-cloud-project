@@ -1,10 +1,10 @@
-package com.taotao.cloud.wechat.biz.cp.handler;
+package com.taotao.cloud.wechat.biz.module.cp.handler;
 
+import com.taotao.cloud.wechat.biz.module.cp.builder.TextBuilder;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.github.binarywang.demo.wx.cp.builder.TextBuilder;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.cp.api.WxCpService;

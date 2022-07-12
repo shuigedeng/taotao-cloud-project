@@ -1,6 +1,6 @@
-package com.taotao.cloud.wechat.biz.open.controller;
+package com.taotao.cloud.wechat.biz.module.open.controller;
 
-import com.github.binarywang.demo.wx.open.service.WxOpenServiceDemo;
+import com.taotao.cloud.wechat.biz.module.open.service.WxOpenServiceDemo;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;

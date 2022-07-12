@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.open.config;
+package com.taotao.cloud.wechat.biz.module.open.config;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.mp.controller;
+package com.taotao.cloud.wechat.biz.module.mp.controller;
 
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;

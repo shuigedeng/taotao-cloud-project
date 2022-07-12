@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.cp.builder;
+package com.taotao.cloud.wechat.biz.module.cp.builder;
 
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;

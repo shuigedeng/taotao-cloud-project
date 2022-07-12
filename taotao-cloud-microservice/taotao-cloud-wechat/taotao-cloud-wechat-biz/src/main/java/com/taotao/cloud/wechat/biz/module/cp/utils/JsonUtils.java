@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.cp.utils;
+package com.taotao.cloud.wechat.biz.module.cp.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -2,7 +2,6 @@ package com.taotao.cloud.wechat.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -14,8 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("tt_member_statistics_data")
-@ApiModel(value = "会员统计")
-public class MemberStatisticsData extends BaseIdEntity {
+public class MemberStatisticsData {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-wechat:taotao-cloud-wechat-api')
 
     // 小程序开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-miniapp-spring-boot-starter

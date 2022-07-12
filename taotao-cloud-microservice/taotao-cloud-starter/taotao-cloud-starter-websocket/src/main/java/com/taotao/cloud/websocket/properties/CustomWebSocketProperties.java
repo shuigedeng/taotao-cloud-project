@@ -17,7 +17,6 @@ package com.taotao.cloud.websocket.properties;
 
 import com.taotao.cloud.common.constant.SymbolConstants;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -31,8 +30,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2022-07-12 10:56:40
  */
 @RefreshScope
-@ConfigurationProperties(prefix = WebSocketProperties.PREFIX)
-public class WebSocketProperties {
+@ConfigurationProperties(prefix = CustomWebSocketProperties.PREFIX)
+public class CustomWebSocketProperties {
 
 	public static final String PREFIX = "taotao.cloud.websocket";
 

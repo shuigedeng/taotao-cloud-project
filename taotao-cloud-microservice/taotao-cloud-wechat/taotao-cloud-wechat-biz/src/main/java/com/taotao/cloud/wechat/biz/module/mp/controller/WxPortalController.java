@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.mp.controller;
+package com.taotao.cloud.wechat.biz.module.mp.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;

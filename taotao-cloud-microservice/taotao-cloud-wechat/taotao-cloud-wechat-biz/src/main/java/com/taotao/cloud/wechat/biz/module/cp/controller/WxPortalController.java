@@ -1,5 +1,7 @@
-package com.taotao.cloud.wechat.biz.cp.controller;
+package com.taotao.cloud.wechat.biz.module.cp.controller;
 
+import com.taotao.cloud.wechat.biz.module.cp.config.WxCpConfiguration;
+import com.taotao.cloud.wechat.biz.module.cp.utils.JsonUtils;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
 import org.apache.commons.lang3.StringUtils;
@@ -13,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.binarywang.demo.wx.cp.config.WxCpConfiguration;
-import com.github.binarywang.demo.wx.cp.utils.JsonUtils;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 

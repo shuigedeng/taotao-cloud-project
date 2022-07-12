@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.miniapp;
+package com.taotao.cloud.wechat.biz.module.miniapp;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -14,11 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/")
-@SpringBootApplication
-public class WxMiniappDemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(WxMiniappDemoApplication.class, args);
-    }
+public class WxMiniappController {
 
     @Autowired
     private WxMaService maService;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.mp.handler;
+package com.taotao.cloud.wechat.biz.module.mp.handler;
 
 import me.chanjar.weixin.mp.api.WxMpMessageHandler;
 import org.slf4j.Logger;

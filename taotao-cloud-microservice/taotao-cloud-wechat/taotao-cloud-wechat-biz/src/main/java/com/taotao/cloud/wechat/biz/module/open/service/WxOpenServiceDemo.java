@@ -1,7 +1,7 @@
-package com.taotao.cloud.wechat.biz.open.service;
+package com.taotao.cloud.wechat.biz.module.open.service;
 
-import com.github.binarywang.demo.wx.open.config.RedisProperies;
-import com.github.binarywang.demo.wx.open.config.WechatOpenProperties;
+import com.taotao.cloud.wechat.biz.module.open.config.RedisProperies;
+import com.taotao.cloud.wechat.biz.module.open.config.WechatOpenProperties;
 import me.chanjar.weixin.open.api.impl.WxOpenInRedisConfigStorage;
 import me.chanjar.weixin.open.api.impl.WxOpenMessageRouter;
 import me.chanjar.weixin.open.api.impl.WxOpenServiceImpl;

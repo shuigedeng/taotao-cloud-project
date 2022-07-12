@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.cp.handler;
+package com.taotao.cloud.wechat.biz.module.cp.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

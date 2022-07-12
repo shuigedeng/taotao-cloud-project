@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.cp.error;
+package com.taotao.cloud.wechat.biz.module.cp.error;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;

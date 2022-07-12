@@ -1,7 +1,7 @@
-package com.taotao.cloud.wechat.biz.mp.handler;
+package com.taotao.cloud.wechat.biz.module.mp.handler;
 
-import com.github.binarywang.demo.wx.mp.builder.TextBuilder;
-import com.github.binarywang.demo.wx.mp.utils.JsonUtils;
+import com.taotao.cloud.wechat.biz.module.mp.builder.TextBuilder;
+import com.taotao.cloud.wechat.biz.module.mp.utils.JsonUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.wechat.biz.mp.utils;
+package com.taotao.cloud.wechat.biz.module.mp.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
