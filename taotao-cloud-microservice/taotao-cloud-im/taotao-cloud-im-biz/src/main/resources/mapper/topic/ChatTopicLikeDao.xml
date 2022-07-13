@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.topic.dao.ChatTopicLikeDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select id, topic_id, user_id, has_like from chat_topic_like
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.topic.domain.ChatTopicLike">
+        <include refid="baseSql"/>
+        <where>
+
+        </where>
+    </select>
+
+    <select id="queryTopicLike" resultType="com.platform.modules.topic.vo.TopicVo05">
+        SELECT
+        cu.`user_id`, cu.`portrait`, IFNULL(cf.remark, cu.`nick_name`) AS nick_name
+        FROM `chat_topic_like` ctl
+        INNER JOIN `chat_user` cu ON cu.`user_id` = ctl.`user_id`
+        LEFT JOIN chat_friend cf ON (cf.`to_id` = ctl.`user_id` AND cf.`from_id` = #{userId})
+        WHERE ctl.topic_id = #{topicId}
+        AND ctl.has_like = 'Y'
+        AND cu.`deleted` = 0
+    </select>
+
+</mapper>

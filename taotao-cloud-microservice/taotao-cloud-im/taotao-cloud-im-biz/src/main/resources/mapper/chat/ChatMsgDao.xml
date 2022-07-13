@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.chat.dao.ChatMsgDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select id, from_id, to_id, msg_type, content, create_time from chat_msg
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.chat.domain.ChatMsg">
+        <include refid="baseSql"/>
+        <where>
+            <!--
+            <if test="fromId != null">
+                and from_id = #{fromId}
+            </if>
+            -->
+            <!--
+            <if test="toId != null">
+                and to_id = #{toId}
+            </if>
+            -->
+            <!--
+            <if test="msgType != null">
+                and msg_type = #{msgType.code}
+            </if>
+            -->
+        </where>
+    </select>
+
+</mapper>

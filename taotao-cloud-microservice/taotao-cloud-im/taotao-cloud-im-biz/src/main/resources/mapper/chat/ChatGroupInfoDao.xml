@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.chat.dao.ChatGroupInfoDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select info_id, user_id, group_id, top, disturb, keep_group, kicked, create_time from chat_group_info
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.chat.domain.ChatGroupInfo">
+        <include refid="baseSql"/>
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="groupId != null">
+                and group_id = #{groupId}
+            </if>
+            <if test="kicked != null">
+                and kicked = #{kicked.code}
+            </if>
+        </where>
+    </select>
+
+</mapper>

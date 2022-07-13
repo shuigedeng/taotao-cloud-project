@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.niefy.modules.sys.dao.SysRoleMenuDao">
+    <cache-ref namespace="com.github.niefy.modules.sys.dao.SysRoleMenuDao"/>
+    <select id="queryMenuIdList" resultType="long">
+        select menu_id from sys_role_menu where role_id = #{value}
+    </select>
+
+    <delete id="deleteBatch">
+        delete from sys_role_menu where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
+
+    <!-- 查询用户的所有菜单ID -->
+    <select id="queryAllMenuId" resultType="long">
+        select distinct rm.menu_id from sys_user_role ur
+        LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+        where ur.user_id = #{userId}
+    </select>
+
+</mapper>

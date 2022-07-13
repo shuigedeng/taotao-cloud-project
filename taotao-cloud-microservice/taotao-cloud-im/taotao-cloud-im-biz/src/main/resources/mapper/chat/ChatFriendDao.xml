@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.chat.dao.ChatFriendDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select id, from_id, to_id, remark, black, source, create_time, top from chat_friend
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.chat.domain.ChatFriend">
+        <include refid="baseSql"/>
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="friendList" resultType="com.platform.modules.chat.vo.FriendVo06">
+        SELECT cu.user_id AS user_id, cf.remark AS nick_name, cu.portrait, cu.chat_no
+        FROM chat_friend cf
+        INNER JOIN chat_user cu ON cf.`to_id` = cu.user_id AND cu.deleted = 0
+        WHERE cf.from_id = #{userId}
+    </select>
+
+    <select id="queryFriendId" resultType="java.lang.Long">
+        SELECT DISTINCT cf1.`to_id` FROM `chat_friend` cf1
+        INNER JOIN chat_friend cf2 ON cf1.`from_id` = cf2.`to_id` AND cf1.`to_id` = cf2.`from_id` AND cf1.`black` = 'N' AND cf2.`black` = 'N'
+        WHERE cf1.from_id = #{userId}
+    </select>
+
+</mapper>
