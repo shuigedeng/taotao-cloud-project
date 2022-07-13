@@ -431,10 +431,13 @@ logging:
 wx:
   # 公众号
   mp:
-    useRedis: false
+    # 多公众号配置
+    useRedis: true
     redisConfig:
       host: 127.0.0.1
       port: 6379
+      password: 123123
+      timeout: 3000
     configs:
       - appId: 1111 # 第一个公众号的appid
         secret: 1111 # 公众号的appsecret
@@ -444,12 +447,20 @@ wx:
         secret: 1111
         token: 111
         aesKey: 111
+    # 单公众号配置
+    aes-key: asfasf
+    app-id: asdfasf
+    secret: lljl
+    token: lljl
     config-storage:
-      type: redistemplate
+      type: redisson
       key-prefix: wa
       redis:
         host: 127.0.0.1
         port: 6379
+        password: asdfas
+        timeout: 3000
+        database: 0
       http-client-type: okhttp
       http-proxy-host:
       http-proxy-port:
@@ -463,7 +474,7 @@ wx:
     aesKey: 22222
     msgDataFormat: 2222
     config-storage:
-      type: redistemplate
+      type: redisson
       key-prefix: wa
       redis:
         host: 127.0.0.1
