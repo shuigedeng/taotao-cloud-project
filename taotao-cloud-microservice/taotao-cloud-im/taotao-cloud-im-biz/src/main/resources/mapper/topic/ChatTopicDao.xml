@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.topic.dao.ChatTopicDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select id, user_id, topic_type, content, location, create_time from chat_topic
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.topic.domain.ChatTopic">
+        <include refid="baseSql"/>
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="topicType != null">
+                and topic_type = #{topicType.code}
+            </if>
+        </where>
+    </select>
+
+    <select id="topicList" resultType="com.platform.modules.topic.vo.TopicVo04">
+        SELECT topic_id, user_id, topic_type, content, location, create_time, nick_name, portrait FROM (
+        SELECT
+        ct.id AS topic_id, ct.user_id, ct.topic_type, ct.content, ct.location, ct.create_time,
+        cu.nick_name, cu.portrait
+        FROM chat_topic ct
+        INNER JOIN chat_user cu ON ct.user_id = cu.user_id AND cu.user_id = #{userId}
+
+        UNION ALL
+
+        SELECT
+        ct.id AS topic_id, ct.user_id, ct.topic_type, ct.content, ct.location, ct.create_time,
+        cf1.remark AS nick_name, cu.portrait
+        FROM chat_topic ct
+        INNER JOIN chat_friend cf1 ON (cf1.to_id = ct.user_id AND cf1.from_id = #{userId})
+        INNER JOIN chat_friend cf2 ON (cf2.to_id = #{userId} AND cf2.from_id = ct.user_id)
+        LEFT JOIN chat_user cu ON ct.user_id = cu.user_id AND cu.deleted = 0
+        ) t
+    </select>
+
+</mapper>

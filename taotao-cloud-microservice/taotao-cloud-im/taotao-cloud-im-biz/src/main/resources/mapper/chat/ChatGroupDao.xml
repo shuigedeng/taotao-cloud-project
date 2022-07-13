@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.chat.dao.ChatGroupDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select id, name, notice, portrait, master, create_time from chat_group
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.chat.domain.ChatGroup">
+        <include refid="baseSql"/>
+        <where>
+
+        </where>
+    </select>
+
+    <select id="queryFriendPushFrom" resultType="com.platform.modules.push.vo.PushParamVo">
+        SELECT
+        DISTINCT cgi.user_id as to_id, cf.remark as nick_name, cgi.disturb, cgi.top
+        FROM chat_group_info cgi
+        LEFT JOIN chat_friend cf ON cf.from_id = cgi.user_id AND cf.to_id = #{userId}
+        WHERE cgi.group_id = #{groupId}
+        AND cgi.kicked = 'N'
+        AND cgi.user_id != #{userId}
+    </select>
+
+</mapper>

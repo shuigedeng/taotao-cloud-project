@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.chat.dao.ChatUserDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select user_id, nick_name, intro, chat_no, gender, portrait, cover, provinces, city, phone, password, salt, status, cid, token, version, create_time from chat_user
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.chat.domain.ChatUser">
+        <include refid="baseSql"/>
+        <where>
+            <if test="gender != null">
+                and gender = #{gender.code}
+            </if>
+            <if test="phone != null and phone != ''">
+                and name phone concat('%', #{phone}, '%')
+            </if>
+            <if test="status != null">
+                and status = #{status.code}
+            </if>
+            AND deleted = 0
+        </where>
+    </select>
+
+</mapper>

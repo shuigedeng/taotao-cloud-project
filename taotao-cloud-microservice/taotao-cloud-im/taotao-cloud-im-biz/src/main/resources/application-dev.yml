@@ -1,0 +1,158 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8080
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 8
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 256
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 512
+    # 是否分配的直接内存
+    direct-buffers: true
+
+# 项目相关配置
+platform:
+  # 系统版本
+  version: 1.0.0
+  # 日志地址
+  logPath: ./logs
+  # token超时时间（分钟）默认7天
+  timeout: 10080
+  # 短信开关（N关Y开）
+  sms: N
+  # 文件路径 示例（ Windows配置D:/platform/uploadPath，Linux配置 /home/platform/uploadPath）
+  uploadPath: E:/platform/uploadPath
+
+# oss配置
+oss:
+  serverUrl:
+  accessKey:
+  secretKey:
+  bucketName:
+  region:
+
+# 实时语音/视频
+trtc:
+  # appId
+  appId:
+  # 签名过期时间，单位秒
+  expire:
+  # 签名秘钥
+  secret:
+
+# 推送配置
+push:
+  appId:
+  appKey:
+  appSecret:
+  masterSecret:
+
+# 高德地图配置
+amap:
+  key:
+
+# 腾讯nlp配置
+tencent:
+  appId:
+  appKey:
+  appSecret:
+
+# Spring配置
+spring:
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
+
+  # ShardingSphere 配置项
+  shardingsphere:
+    # 数据源配置
+    datasource:
+      # 所有数据源的名字
+      names: master
+      # 主库的数据源配置
+      master:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/boot-im?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&verifyServerCertificate=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+        username: root
+        password: root
+    # 拓展属性配置
+    props:
+      sql:
+        show: true # 打印 SQL
+    sharding:
+      default-data-source-name: master
+
+  # redis 配置
+  redis:
+    # 地址
+    host: 127.0.0.1
+    # 端口，默认为6379
+    port: 6379
+    # 数据库
+    database: 0
+    # 密码
+    password:
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+
+# MyBatis配置
+mybatis-plus:
+  mapperLocations: classpath*:mapper/**/*Dao.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.platform
+  typeEnumsPackage: com.platform
+  configuration:
+    defaultEnumTypeHandler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+    mapUnderscoreToCamelCase: true
+    #日志打印
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cacheEnabled: true
+  global-config:
+    banner: false
+    dbConfig:
+      #逻辑删除
+      logicDeleteValue: "null" # 逻辑已删除值(默认为 1)
+      logicNotDeleteValue: 0 # 逻辑未删除值(默认为 0)
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  # 合理化分页
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 日志配置
+logging:
+  level:
+    com.platform: debug
+    org.springframework: warn

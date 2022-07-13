@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.modules.topic.dao.ChatTopicReplyDao">
+
+    <!-- 字段集 -->
+    <sql id="baseSql">
+        select reply_id, reply_type, reply_status, content, topic_id, user_id, target_id, create_time from chat_topic_reply
+    </sql>
+
+    <!-- 查询列表字段 -->
+    <select id="queryList" resultType="com.platform.modules.topic.domain.ChatTopicReply">
+        <include refid="baseSql"/>
+        <where>
+            <if test="replyType != null">
+                and reply_type = #{replyType.code}
+            </if>
+            <if test="replyStatus != null">
+                and reply_status = #{replyStatus.code}
+            </if>
+            <if test="topicId != null">
+                and topic_id = #{topicId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryReplyList" resultType="com.platform.modules.topic.vo.TopicVo06">
+        SELECT ctr.reply_id, ctr.reply_type, ctr.content, ctr.create_time
+        ,ctr.user_id, ifnull(cf.remark, cu.nick_name) AS nick_name, cu.portrait as portrait
+        ,if(ctr.reply_type = '2', ctr.target_id, null) as to_user_id, IFNULL(cff.remark, cuu.nick_name) AS to_nick_name, cuu.portrait as to_portrait
+        FROM chat_topic_reply ctr
+        LEFT JOIN chat_friend cf ON cf.to_id = ctr.user_id AND cf.from_id = #{userId}
+        LEFT JOIN chat_user cu ON cu.user_id = ctr.user_id AND cu.deleted = 0
+        LEFT JOIN chat_friend cff ON cff.to_id = ctr.target_id AND cff.from_id = #{userId} and ctr.reply_type = '2'
+        LEFT JOIN chat_user cuu ON cuu.user_id = ctr.target_id AND cuu.deleted = 0 and ctr.reply_type = '2'
+        WHERE ctr.topic_id = #{topicId}
+        AND ctr.reply_status = 'Y'
+    </select>
+
+</mapper>
