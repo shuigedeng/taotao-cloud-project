@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.report.api.feign.fallback.FeignMemberStatisticsFallbackImpl

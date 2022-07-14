@@ -99,9 +99,9 @@ mysql -uroot -p
 
 -- update user set host='%' where user='root';
 
--- ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-
 -- alter user 'root'@'%' identified by '123456' password expire never;
+
+-- ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 
 -- flush privileges; // 刷新权限
 
