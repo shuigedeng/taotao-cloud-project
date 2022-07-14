@@ -45,7 +45,7 @@ public class ApplyDeliverGoodsController {
      */
     @Operation("获取发货申请单信息")
     @GetMapping("/{id}")
-    public ActionResult<ApplyDeliverGoodsInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ApplyDeliverGoodsInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ApplyDeliverGoodsInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -63,7 +63,7 @@ public class ApplyDeliverGoodsController {
             vo = JsonUtil.getJsonToBean(entity, ApplyDeliverGoodsInfoVO.class);
             vo.setEntryList(JsonUtil.getJsonToList(entityList, ApplyDeliverGoodsEntryInfoModel.class));
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -75,15 +75,15 @@ public class ApplyDeliverGoodsController {
      */
     @Operation("新建发货申请单")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm) throws WorkFlowException {
         ApplyDeliverGoodsEntity deliver = JsonUtil.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
         List<ApplyDeliverGoodsEntryEntity> deliverEntryList = JsonUtil.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
             applyDeliverGoodsService.save(deliver.getId(), deliver, deliverEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         applyDeliverGoodsService.submit(deliver.getId(), deliver, deliverEntryList, applyDeliverGoodsForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -96,14 +96,14 @@ public class ApplyDeliverGoodsController {
      */
     @Operation("修改发货申请单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm, @PathVariable("id") String id) throws WorkFlowException {
         ApplyDeliverGoodsEntity deliver = JsonUtil.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
         List<ApplyDeliverGoodsEntryEntity> deliverEntryList = JsonUtil.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
             applyDeliverGoodsService.save(id, deliver, deliverEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         applyDeliverGoodsService.submit(id, deliver, deliverEntryList, applyDeliverGoodsForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

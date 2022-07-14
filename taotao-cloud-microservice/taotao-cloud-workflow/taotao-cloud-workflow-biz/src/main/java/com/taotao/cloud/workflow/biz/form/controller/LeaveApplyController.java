@@ -43,7 +43,7 @@ public class LeaveApplyController {
      */
     @Operation("获取请假申请信息")
     @GetMapping("/{id}")
-    public ActionResult<LeaveApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<LeaveApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         LeaveApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -59,7 +59,7 @@ public class LeaveApplyController {
             LeaveApplyEntity entity = leaveApplyService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, LeaveApplyInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -70,23 +70,23 @@ public class LeaveApplyController {
      */
     @Operation("新建请假申请")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid LeaveApplyForm leaveApplyForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid LeaveApplyForm leaveApplyForm) throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {
-            return ActionResult.fail("结束时间不能小于起始时间");
+            return Result.fail("结束时间不能小于起始时间");
         }
         if (!RegexUtils.checkLeave(leaveApplyForm.getLeaveDayCount())) {
-            return ActionResult.fail("请假天数只能是0.5的倍数");
+            return Result.fail("请假天数只能是0.5的倍数");
         }
         if (!RegexUtils.checkLeave(leaveApplyForm.getLeaveHour())) {
-            return ActionResult.fail("请假小时只能是0.5的倍数");
+            return Result.fail("请假小时只能是0.5的倍数");
         }
         LeaveApplyEntity entity = JsonUtil.getJsonToBean(leaveApplyForm, LeaveApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(leaveApplyForm.getStatus())) {
             leaveApplyService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         leaveApplyService.submit(entity.getId(), entity, leaveApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -98,22 +98,22 @@ public class LeaveApplyController {
      */
     @Operation("修改请假申请")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid LeaveApplyForm leaveApplyForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid LeaveApplyForm leaveApplyForm, @PathVariable("id") String id) throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {
-            return ActionResult.fail("结束时间不能小于起始时间");
+            return Result.fail("结束时间不能小于起始时间");
         }
         if (!RegexUtils.checkLeave(leaveApplyForm.getLeaveDayCount())) {
-            return ActionResult.fail("请假天数只能是0.5的倍数");
+            return Result.fail("请假天数只能是0.5的倍数");
         }
         if (!RegexUtils.checkLeave(leaveApplyForm.getLeaveHour())) {
-            return ActionResult.fail("请假小时只能是0.5的倍数");
+            return Result.fail("请假小时只能是0.5的倍数");
         }
         LeaveApplyEntity entity = JsonUtil.getJsonToBean(leaveApplyForm, LeaveApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(leaveApplyForm.getStatus())) {
             leaveApplyService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         leaveApplyService.submit(id, entity, leaveApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

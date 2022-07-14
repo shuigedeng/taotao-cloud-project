@@ -41,7 +41,7 @@ public class OfficeSuppliesController {
      */
     @Operation("获取领用办公用品申请表信息")
     @GetMapping("/{id}")
-    public ActionResult<OfficeSuppliesInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<OfficeSuppliesInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         OfficeSuppliesInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -57,7 +57,7 @@ public class OfficeSuppliesController {
             OfficeSuppliesEntity entity = officeSuppliesService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, OfficeSuppliesInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -68,14 +68,14 @@ public class OfficeSuppliesController {
      */
     @Operation("新建领用办公用品申请表")
     @PostMapping
-    public ActionResult create(@RequestBody OfficeSuppliesForm officeSuppliesForm) throws WorkFlowException {
+    public Result create(@RequestBody OfficeSuppliesForm officeSuppliesForm) throws WorkFlowException {
         OfficeSuppliesEntity entity = JsonUtil.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(officeSuppliesForm.getStatus())) {
             officeSuppliesService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         officeSuppliesService.submit(entity.getId(), entity,officeSuppliesForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -87,13 +87,13 @@ public class OfficeSuppliesController {
      */
     @Operation("修改领用办公用品申请表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody OfficeSuppliesForm officeSuppliesForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody OfficeSuppliesForm officeSuppliesForm, @PathVariable("id") String id) throws WorkFlowException {
         OfficeSuppliesEntity entity = JsonUtil.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(officeSuppliesForm.getStatus())) {
             officeSuppliesService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         officeSuppliesService.submit(id, entity,officeSuppliesForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

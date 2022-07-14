@@ -43,7 +43,7 @@ public class BatchTableController {
      */
     @Operation("获取行文呈批表信息")
     @GetMapping("/{id}")
-    public ActionResult<BatchTableInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<BatchTableInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         BatchTableInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -59,7 +59,7 @@ public class BatchTableController {
             BatchTableEntity entity = batchTableService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, BatchTableInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -70,17 +70,17 @@ public class BatchTableController {
      */
     @Operation("新建行文呈批表")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid BatchTableForm batchTableForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid BatchTableForm batchTableForm) throws WorkFlowException {
         if (batchTableForm.getShareNum() != null && StringUtil.isNotEmpty(batchTableForm.getShareNum()) && !RegexUtils.checkDigit2(batchTableForm.getShareNum())) {
-            return ActionResult.fail("份数只能输入正整数");
+            return Result.fail("份数只能输入正整数");
         }
         BatchTableEntity entity = JsonUtil.getJsonToBean(batchTableForm, BatchTableEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchTableForm.getStatus())) {
             batchTableService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         batchTableService.submit(entity.getId(), entity, batchTableForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -92,16 +92,16 @@ public class BatchTableController {
      */
     @Operation("修改行文呈批表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid BatchTableForm batchTableForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid BatchTableForm batchTableForm, @PathVariable("id") String id) throws WorkFlowException {
         if (batchTableForm.getShareNum() != null && StringUtil.isNotEmpty(batchTableForm.getShareNum()) && !RegexUtils.checkDigit2(batchTableForm.getShareNum())) {
-            return ActionResult.fail("份数只能输入正整数");
+            return Result.fail("份数只能输入正整数");
         }
         BatchTableEntity entity = JsonUtil.getJsonToBean(batchTableForm, BatchTableEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchTableForm.getStatus())) {
             batchTableService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         batchTableService.submit(id, entity, batchTableForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

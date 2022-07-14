@@ -41,7 +41,7 @@ public class ArticlesWarehousController {
      */
     @Operation("获取用品入库申请表信息")
     @GetMapping("/{id}")
-    public ActionResult<ArticlesWarehousInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ArticlesWarehousInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ArticlesWarehousInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -57,7 +57,7 @@ public class ArticlesWarehousController {
             ArticlesWarehousEntity entity = articlesWarehousService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ArticlesWarehousInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -68,17 +68,17 @@ public class ArticlesWarehousController {
      */
     @Operation("新建用品入库申请表")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm) throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null && StringUtil.isNotEmpty(articlesWarehousForm.getEstimatePeople()) && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
-            return ActionResult.fail("数量只能输入正整数");
+            return Result.fail("数量只能输入正整数");
         }
         ArticlesWarehousEntity entity = JsonUtil.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(articlesWarehousForm.getStatus())) {
             articlesWarehousService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         articlesWarehousService.submit(entity.getId(), entity, articlesWarehousForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -90,16 +90,16 @@ public class ArticlesWarehousController {
      */
     @Operation("修改用品入库申请表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm, @PathVariable("id") String id) throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null && StringUtil.isNotEmpty(articlesWarehousForm.getEstimatePeople()) && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
-            return ActionResult.fail("数量只能输入正整数");
+            return Result.fail("数量只能输入正整数");
         }
         ArticlesWarehousEntity entity = JsonUtil.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(articlesWarehousForm.getStatus())) {
             articlesWarehousService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         articlesWarehousService.submit(id, entity, articlesWarehousForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

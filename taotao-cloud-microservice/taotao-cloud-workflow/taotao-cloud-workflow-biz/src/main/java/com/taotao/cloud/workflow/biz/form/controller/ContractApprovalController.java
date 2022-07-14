@@ -32,7 +32,7 @@ public class ContractApprovalController {
      */
     @Operation("获取合同审批信息")
     @GetMapping("/{id}")
-    public ActionResult<ContractApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ContractApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ContractApprovalInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -48,7 +48,7 @@ public class ContractApprovalController {
             ContractApprovalEntity entity = contractApprovalService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ContractApprovalInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -59,14 +59,14 @@ public class ContractApprovalController {
      */
     @Operation("新建合同审批")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid ContractApprovalForm contractApprovalForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid ContractApprovalForm contractApprovalForm) throws WorkFlowException {
         ContractApprovalEntity entity = JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalForm.getStatus())) {
             contractApprovalService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         contractApprovalService.submit(entity.getId(), entity, contractApprovalForm.getFreeApproverUserId(), contractApprovalForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -78,13 +78,13 @@ public class ContractApprovalController {
      */
     @Operation("修改合同审批")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid ContractApprovalForm contractApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid ContractApprovalForm contractApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
         ContractApprovalEntity entity = JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalForm.getStatus())) {
             contractApprovalService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         contractApprovalService.submit(id, entity, contractApprovalForm.getFreeApproverUserId(), contractApprovalForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

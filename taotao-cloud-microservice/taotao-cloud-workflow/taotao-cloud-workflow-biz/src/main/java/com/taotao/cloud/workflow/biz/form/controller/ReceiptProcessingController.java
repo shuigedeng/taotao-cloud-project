@@ -40,7 +40,7 @@ public class ReceiptProcessingController {
      */
     @Operation("获取收文处理表信息")
     @GetMapping("/{id}")
-    public ActionResult<ReceiptProcessingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ReceiptProcessingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ReceiptProcessingInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class ReceiptProcessingController {
             ReceiptProcessingEntity entity = receiptProcessingService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ReceiptProcessingInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -67,14 +67,14 @@ public class ReceiptProcessingController {
      */
     @Operation("新建收文处理表")
     @PostMapping
-    public ActionResult create(@RequestBody ReceiptProcessingForm receiptProcessingForm) throws WorkFlowException {
+    public Result create(@RequestBody ReceiptProcessingForm receiptProcessingForm) throws WorkFlowException {
         ReceiptProcessingEntity entity = JsonUtil.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptProcessingForm.getStatus())) {
             receiptProcessingService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         receiptProcessingService.submit(entity.getId(), entity,receiptProcessingForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -86,13 +86,13 @@ public class ReceiptProcessingController {
      */
     @Operation("修改收文处理表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody ReceiptProcessingForm receiptProcessingForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody ReceiptProcessingForm receiptProcessingForm, @PathVariable("id") String id) throws WorkFlowException {
         ReceiptProcessingEntity entity = JsonUtil.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptProcessingForm.getStatus())) {
             receiptProcessingService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         receiptProcessingService.submit(id, entity,receiptProcessingForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

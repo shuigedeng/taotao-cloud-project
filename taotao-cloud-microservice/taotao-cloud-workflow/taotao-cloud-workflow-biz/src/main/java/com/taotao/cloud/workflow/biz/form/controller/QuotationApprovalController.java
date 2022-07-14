@@ -42,7 +42,7 @@ public class QuotationApprovalController {
      */
     @Operation("获取报价审批表信息")
     @GetMapping("/{id}")
-    public ActionResult<QuotationApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<QuotationApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         QuotationApprovalInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -58,7 +58,7 @@ public class QuotationApprovalController {
             QuotationApprovalEntity entity = quotationApprovalService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, QuotationApprovalInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -69,14 +69,14 @@ public class QuotationApprovalController {
      */
     @Operation("新建报价审批表")
     @PostMapping
-    public ActionResult create(@RequestBody QuotationApprovalForm quotationApprovalForm) throws WorkFlowException {
+    public Result create(@RequestBody QuotationApprovalForm quotationApprovalForm) throws WorkFlowException {
         QuotationApprovalEntity entity = JsonUtil.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(quotationApprovalForm.getStatus())) {
             quotationApprovalService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         quotationApprovalService.submit(entity.getId(), entity,quotationApprovalForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -88,13 +88,13 @@ public class QuotationApprovalController {
      */
     @Operation("修改报价审批表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody QuotationApprovalForm quotationApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody QuotationApprovalForm quotationApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
         QuotationApprovalEntity entity = JsonUtil.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(quotationApprovalForm.getStatus())) {
             quotationApprovalService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         quotationApprovalService.submit(id, entity,quotationApprovalForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

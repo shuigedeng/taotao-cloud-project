@@ -43,7 +43,7 @@ public class DocumentSigningController {
      */
     @Operation("获取文件签阅表信息")
     @GetMapping("/{id}")
-    public ActionResult<DocumentSigningInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<DocumentSigningInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DocumentSigningInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -59,7 +59,7 @@ public class DocumentSigningController {
             DocumentSigningEntity entity = documentSigningService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, DocumentSigningInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -70,14 +70,14 @@ public class DocumentSigningController {
      */
     @Operation("新建文件签阅表")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid DocumentSigningForm documentSigningForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid DocumentSigningForm documentSigningForm) throws WorkFlowException {
         DocumentSigningEntity entity = JsonUtil.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentSigningForm.getStatus())) {
             documentSigningService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         documentSigningService.submit(entity.getId(), entity, documentSigningForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -89,13 +89,13 @@ public class DocumentSigningController {
      */
     @Operation("修改文件签阅表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid DocumentSigningForm documentSigningForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid DocumentSigningForm documentSigningForm, @PathVariable("id") String id) throws WorkFlowException {
         DocumentSigningEntity entity = JsonUtil.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentSigningForm.getStatus())) {
             documentSigningService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         documentSigningService.submit(id, entity, documentSigningForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

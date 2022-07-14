@@ -42,7 +42,7 @@ public class LetterServiceController {
      */
     @Operation("获取发文单信息")
     @GetMapping("/{id}")
-    public ActionResult<LetterServiceInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<LetterServiceInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         LetterServiceInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -58,7 +58,7 @@ public class LetterServiceController {
             LetterServiceEntity entity = letterServiceService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, LetterServiceInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -69,17 +69,17 @@ public class LetterServiceController {
      */
     @Operation("新建发文单")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid LetterServiceForm letterServiceForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid LetterServiceForm letterServiceForm) throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null && StringUtil.isNotEmpty(letterServiceForm.getShareNum()) && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
-            return ActionResult.fail("份数只能输入正整数");
+            return Result.fail("份数只能输入正整数");
         }
         LetterServiceEntity entity = JsonUtil.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(letterServiceForm.getStatus())) {
             letterServiceService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         letterServiceService.submit(entity.getId(), entity,letterServiceForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -91,16 +91,16 @@ public class LetterServiceController {
      */
     @Operation("修改发文单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid LetterServiceForm letterServiceForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid LetterServiceForm letterServiceForm, @PathVariable("id") String id) throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null && StringUtil.isNotEmpty(letterServiceForm.getShareNum()) && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
-            return ActionResult.fail("份数只能输入正整数");
+            return Result.fail("份数只能输入正整数");
         }
         LetterServiceEntity entity = JsonUtil.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(letterServiceForm.getStatus())) {
             letterServiceService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         letterServiceService.submit(id, entity,letterServiceForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

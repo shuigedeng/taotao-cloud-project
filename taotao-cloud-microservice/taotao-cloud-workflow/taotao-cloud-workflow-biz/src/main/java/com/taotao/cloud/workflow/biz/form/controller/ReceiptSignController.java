@@ -40,7 +40,7 @@ public class ReceiptSignController {
      */
     @Operation("获取收文签呈单信息")
     @GetMapping("/{id}")
-    public ActionResult<ReceiptSignInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ReceiptSignInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ReceiptSignInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class ReceiptSignController {
             ReceiptSignEntity entity = receiptSignService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ReceiptSignInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -67,14 +67,14 @@ public class ReceiptSignController {
      */
     @Operation("新建收文签呈单")
     @PostMapping
-    public ActionResult create(@RequestBody ReceiptSignForm receiptSignForm) throws WorkFlowException {
+    public Result create(@RequestBody ReceiptSignForm receiptSignForm) throws WorkFlowException {
         ReceiptSignEntity entity = JsonUtil.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptSignForm.getStatus())) {
             receiptSignService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         receiptSignService.submit(entity.getId(), entity,receiptSignForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -86,13 +86,13 @@ public class ReceiptSignController {
      */
     @Operation("修改收文签呈单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id) throws WorkFlowException {
         ReceiptSignEntity entity = JsonUtil.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptSignForm.getStatus())) {
             receiptSignService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         receiptSignService.submit(id, entity,receiptSignForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

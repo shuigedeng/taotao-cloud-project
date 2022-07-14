@@ -42,7 +42,7 @@ public class MonthlyReportController {
      */
     @Operation("获取月工作总结信息")
     @GetMapping("/{id}")
-    public ActionResult<MonthlyReportInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<MonthlyReportInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         MonthlyReportInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -58,7 +58,7 @@ public class MonthlyReportController {
             MonthlyReportEntity entity = monthlyReportService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, MonthlyReportInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -69,14 +69,14 @@ public class MonthlyReportController {
      */
     @Operation("新建月工作总结")
     @PostMapping
-    public ActionResult create(@RequestBody MonthlyReportForm monthlyReportForm) throws WorkFlowException {
+    public Result create(@RequestBody MonthlyReportForm monthlyReportForm) throws WorkFlowException {
         MonthlyReportEntity entity = JsonUtil.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(monthlyReportForm.getStatus())) {
             monthlyReportService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         monthlyReportService.submit(entity.getId(), entity,monthlyReportForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -88,13 +88,13 @@ public class MonthlyReportController {
      */
     @Operation("修改月工作总结")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody MonthlyReportForm monthlyReportForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody MonthlyReportForm monthlyReportForm, @PathVariable("id") String id) throws WorkFlowException {
         MonthlyReportEntity entity = JsonUtil.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(monthlyReportForm.getStatus())) {
             monthlyReportService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         monthlyReportService.submit(id, entity,monthlyReportForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

@@ -42,7 +42,7 @@ public class ApplyBanquetController {
      */
     @Operation("获取宴请申请信息")
     @GetMapping("/{id}")
-    public ActionResult<ApplyBanquetInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ApplyBanquetInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ApplyBanquetInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -58,7 +58,7 @@ public class ApplyBanquetController {
             ApplyBanquetEntity entity = applyBanquetService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ApplyBanquetInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -69,23 +69,23 @@ public class ApplyBanquetController {
      */
     @Operation("新建宴请申请")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid ApplyBanquetForm applyBanquetForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid ApplyBanquetForm applyBanquetForm) throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null && StringUtil.isNotEmpty(applyBanquetForm.getBanquetNum()) && !RegexUtils.checkDigit2(applyBanquetForm.getBanquetNum())) {
-            return ActionResult.fail("宴请人数必须大于0");
+            return Result.fail("宴请人数必须大于0");
         }
         if (applyBanquetForm.getTotal() != null && StringUtil.isNotEmpty(applyBanquetForm.getTotal()) && !RegexUtils.checkDigit2(applyBanquetForm.getTotal())) {
-            return ActionResult.fail("人员总数必须大于0");
+            return Result.fail("人员总数必须大于0");
         }
         if (applyBanquetForm.getExpectedCost() != null && !RegexUtils.checkDecimals2(String.valueOf(applyBanquetForm.getExpectedCost()))) {
-            return ActionResult.fail("预计费用必须大于0，最多只能有两位小数");
+            return Result.fail("预计费用必须大于0，最多只能有两位小数");
         }
         ApplyBanquetEntity entity = JsonUtil.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyBanquetForm.getStatus())) {
             applyBanquetService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         applyBanquetService.submit(entity.getId(), entity, applyBanquetForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -97,22 +97,22 @@ public class ApplyBanquetController {
      */
     @Operation("修改宴请申请")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid ApplyBanquetForm applyBanquetForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid ApplyBanquetForm applyBanquetForm, @PathVariable("id") String id) throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null && StringUtil.isNotEmpty(applyBanquetForm.getBanquetNum()) && !RegexUtils.checkDigit2(applyBanquetForm.getBanquetNum())) {
-            return ActionResult.fail("宴请人数必须大于0");
+            return Result.fail("宴请人数必须大于0");
         }
         if (applyBanquetForm.getTotal() != null && StringUtil.isNotEmpty(applyBanquetForm.getTotal()) && !RegexUtils.checkDigit2(applyBanquetForm.getTotal())) {
-            return ActionResult.fail("人员总数必须大于0");
+            return Result.fail("人员总数必须大于0");
         }
         if (applyBanquetForm.getExpectedCost() != null && !RegexUtils.checkDecimals2(String.valueOf(applyBanquetForm.getExpectedCost()))) {
-            return ActionResult.fail("预计费用必须大于0，最多只能有两位小数");
+            return Result.fail("预计费用必须大于0，最多只能有两位小数");
         }
         ApplyBanquetEntity entity = JsonUtil.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyBanquetForm.getStatus())) {
             applyBanquetService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         applyBanquetService.submit(id, entity, applyBanquetForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

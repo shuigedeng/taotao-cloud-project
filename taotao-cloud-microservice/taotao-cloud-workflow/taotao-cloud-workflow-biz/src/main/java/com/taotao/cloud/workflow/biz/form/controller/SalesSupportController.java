@@ -41,7 +41,7 @@ public class SalesSupportController {
      */
     @Operation("获取销售支持表信息")
     @GetMapping("/{id}")
-    public ActionResult<SalesSupportInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<SalesSupportInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         SalesSupportInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -57,7 +57,7 @@ public class SalesSupportController {
             SalesSupportEntity entity = salesSupportService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, SalesSupportInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -68,14 +68,14 @@ public class SalesSupportController {
      */
     @Operation("新建保存销售支持表")
     @PostMapping
-    public ActionResult create(@RequestBody SalesSupportForm salesSupportForm) throws WorkFlowException {
+    public Result create(@RequestBody SalesSupportForm salesSupportForm) throws WorkFlowException {
         SalesSupportEntity entity = JsonUtil.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesSupportForm.getStatus())) {
             salesSupportService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         salesSupportService.submit(entity.getId(), entity,salesSupportForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -87,13 +87,13 @@ public class SalesSupportController {
      */
     @Operation("修改销售支持表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody SalesSupportForm salesSupportForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody SalesSupportForm salesSupportForm, @PathVariable("id") String id) throws WorkFlowException {
         SalesSupportEntity entity = JsonUtil.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesSupportForm.getStatus())) {
             salesSupportService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         salesSupportService.submit(id, entity,salesSupportForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

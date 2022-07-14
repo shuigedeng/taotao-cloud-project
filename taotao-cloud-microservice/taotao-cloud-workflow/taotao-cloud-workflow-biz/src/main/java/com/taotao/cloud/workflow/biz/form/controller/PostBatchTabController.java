@@ -40,7 +40,7 @@ public class PostBatchTabController {
      */
     @Operation("获取发文呈批表信息")
     @GetMapping("/{id}")
-    public ActionResult<PostBatchTabInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<PostBatchTabInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PostBatchTabInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class PostBatchTabController {
             PostBatchTabEntity entity = postBatchTabService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, PostBatchTabInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -67,14 +67,14 @@ public class PostBatchTabController {
      */
     @Operation("新建发文呈批表")
     @PostMapping
-    public ActionResult create(@RequestBody PostBatchTabForm postBatchTabForm) throws WorkFlowException {
+    public Result create(@RequestBody PostBatchTabForm postBatchTabForm) throws WorkFlowException {
         PostBatchTabEntity entity = JsonUtil.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(postBatchTabForm.getStatus())) {
             postBatchTabService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         postBatchTabService.submit(entity.getId(), entity,postBatchTabForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -86,13 +86,13 @@ public class PostBatchTabController {
      */
     @Operation("修改发文呈批表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody PostBatchTabForm postBatchTabForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody PostBatchTabForm postBatchTabForm, @PathVariable("id") String id) throws WorkFlowException {
         PostBatchTabEntity entity = JsonUtil.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(postBatchTabForm.getStatus())) {
             postBatchTabService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         postBatchTabService.submit(id, entity,postBatchTabForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

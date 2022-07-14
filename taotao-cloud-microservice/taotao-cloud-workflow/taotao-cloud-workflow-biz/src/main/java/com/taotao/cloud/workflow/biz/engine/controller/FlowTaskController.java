@@ -1,5 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskForm;
@@ -8,6 +9,8 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowDynamicService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 
 import java.util.Map;
+
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +41,10 @@ public class FlowTaskController {
      */
     @Operation("动态表单信息")
     @GetMapping("/{id}")
-    public ActionResult<FlowTaskInfoVO> dataInfo(@PathVariable("id") String id, String taskOperatorId) throws WorkFlowException {
+    public Result<FlowTaskInfoVO> dataInfo(@PathVariable("id") String id, String taskOperatorId) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         FlowTaskInfoVO vo = flowDynamicService.info(entity,taskOperatorId);
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -52,13 +55,13 @@ public class FlowTaskController {
      */
     @Operation("保存")
     @PostMapping
-    public ActionResult save(@RequestBody FlowTaskForm flowTaskForm) throws WorkFlowException {
+    public Result save(@RequestBody FlowTaskForm flowTaskForm) throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
             flowDynamicService.save(null, flowTaskForm);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         flowDynamicService.submit(null, flowTaskForm);
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -69,13 +72,13 @@ public class FlowTaskController {
      */
     @Operation("提交")
     @PutMapping("/{id}")
-    public ActionResult submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id) throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
             flowDynamicService.save(id, flowTaskForm);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         flowDynamicService.submit(id, flowTaskForm);
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -87,9 +90,9 @@ public class FlowTaskController {
      */
     @Operation("动态表单信息")
     @GetMapping("/{flowId}/{id}")
-    public ActionResult<Map<String, Object>> info(@PathVariable("flowId") String flowId, @PathVariable("id") String id) throws WorkFlowException {
+    public Result<Map<String, Object>> info(@PathVariable("flowId") String flowId, @PathVariable("id") String id) throws WorkFlowException {
         Map<String, Object> data = flowDynamicService.getData(flowId, id);
-        return ActionResult.success(data);
+        return Result.success(data);
     }
 
 }

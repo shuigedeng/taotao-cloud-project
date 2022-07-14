@@ -46,7 +46,7 @@ public class FinishedProductController {
      */
     @Operation("获取成品入库单信息")
     @GetMapping("/{id}")
-    public ActionResult<FinishedProductInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<FinishedProductInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         FinishedProductInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -64,7 +64,7 @@ public class FinishedProductController {
             vo = JsonUtil.getJsonToBean(entity, FinishedProductInfoVO.class);
             vo.setEntryList(JsonUtil.getJsonToList(entityList, FinishedProductEntryEntityInfoModel.class));
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -76,15 +76,15 @@ public class FinishedProductController {
      */
     @Operation("新建成品入库单")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid FinishedProductForm finishedProductForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid FinishedProductForm finishedProductForm) throws WorkFlowException {
         FinishedProductEntity finished = JsonUtil.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntity> finishedEntryList = JsonUtil.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(finishedProductForm.getStatus())) {
             finishedProductService.save(finished.getId(), finished, finishedEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         finishedProductService.submit(finished.getId(), finished, finishedEntryList, finishedProductForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -97,14 +97,14 @@ public class FinishedProductController {
      */
     @Operation("修改成品入库单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid FinishedProductForm finishedProductForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid FinishedProductForm finishedProductForm, @PathVariable("id") String id) throws WorkFlowException {
         FinishedProductEntity finished = JsonUtil.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntity> finishedEntryList = JsonUtil.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(finishedProductForm.getStatus())) {
             finishedProductService.save(id, finished, finishedEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         finishedProductService.submit(id, finished, finishedEntryList, finishedProductForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

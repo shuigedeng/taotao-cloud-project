@@ -32,7 +32,7 @@ public class ExpenseExpenditureController {
      */
     @Operation("获取费用支出单信息")
     @GetMapping("/{id}")
-    public ActionResult<ExpenseExpenditureInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ExpenseExpenditureInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ExpenseExpenditureInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -48,7 +48,7 @@ public class ExpenseExpenditureController {
             ExpenseExpenditureEntity entity = expenseExpenditureService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ExpenseExpenditureInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -59,14 +59,14 @@ public class ExpenseExpenditureController {
      */
     @Operation("新建费用支出单")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm) throws WorkFlowException {
         ExpenseExpenditureEntity entity = JsonUtil.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(expenseExpenditureForm.getStatus())) {
             expenseExpenditureService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         expenseExpenditureService.submit(entity.getId(), entity, expenseExpenditureForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -78,13 +78,13 @@ public class ExpenseExpenditureController {
      */
     @Operation("修改费用支出单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm, @PathVariable("id") String id) throws WorkFlowException {
         ExpenseExpenditureEntity entity = JsonUtil.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(expenseExpenditureForm.getStatus())) {
             expenseExpenditureService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         expenseExpenditureService.submit(id, entity, expenseExpenditureForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }
