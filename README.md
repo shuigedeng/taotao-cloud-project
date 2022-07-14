@@ -113,6 +113,10 @@ EasyCaptcha | 1.6.2
 Guava | 29.0-jre
 
 ## 6. 演示地址
+* Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/shuigedeng/taotao-cloud-project)
+* Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project) 
+
+
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top) 源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限, 需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top) 源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
