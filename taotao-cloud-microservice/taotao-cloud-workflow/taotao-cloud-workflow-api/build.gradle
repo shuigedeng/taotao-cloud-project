@@ -1,0 +1,10 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
+
+    api 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    api 'io.soabase.record-builder:record-builder-core:33'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
+}
