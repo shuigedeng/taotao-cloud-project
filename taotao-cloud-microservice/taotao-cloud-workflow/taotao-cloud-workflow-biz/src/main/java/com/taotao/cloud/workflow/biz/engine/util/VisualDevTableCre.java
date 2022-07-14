@@ -8,27 +8,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import jnpf.base.model.dbtable.DbTableCreate;
-import jnpf.database.model.DbTableFieldModel;
-import jnpf.exception.WorkFlowException;
-import jnpf.model.FormAllModel;
-import jnpf.model.FormColumnTableModel;
-import jnpf.model.FormEnum;
-import jnpf.model.visiual.JnpfKeyConsts;
-import jnpf.model.visiual.TableFields;
-import jnpf.model.visiual.TableModel;
-import jnpf.model.visiual.fields.FieLdsModel;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
-import jnpf.util.StringUtil;
+
+import com.taotao.cloud.workflow.biz.model.FormEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.table.TableModel;
+
 /**
- * @author ：JNPF开发平台组
- * @version: V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date ：2022/3/25 9:30
+ *
  */
 @Component
 public class VisualDevTableCre {

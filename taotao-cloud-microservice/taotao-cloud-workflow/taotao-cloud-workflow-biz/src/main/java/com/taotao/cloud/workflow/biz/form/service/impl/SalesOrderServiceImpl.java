@@ -6,31 +6,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.base.util.FileManageUtil;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.SalesOrderEntity;
-import jnpf.form.entity.SalesOrderEntryEntity;
-import jnpf.form.mapper.SalesOrderMapper;
-import jnpf.form.model.salesorder.SalesOrderEntryEntityInfoModel;
-import jnpf.form.model.salesorder.SalesOrderForm;
-import jnpf.form.service.SalesOrderEntryService;
-import jnpf.form.service.SalesOrderService;
-import jnpf.model.FileModel;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.SalesOrderEntity;
+import com.taotao.cloud.workflow.biz.form.entity.SalesOrderEntryEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.SalesOrderMapper;
+import com.taotao.cloud.workflow.biz.form.service.SalesOrderEntryService;
+import com.taotao.cloud.workflow.biz.form.service.SalesOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 销售订单
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class SalesOrderServiceImpl extends ServiceImpl<SalesOrderMapper, SalesOrderEntity> implements SalesOrderService {

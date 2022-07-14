@@ -6,31 +6,18 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.base.util.FileManageUtil;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.PurchaseListEntity;
-import jnpf.form.entity.PurchaseListEntryEntity;
-import jnpf.form.mapper.PurchaseListMapper;
-import jnpf.form.model.purchaselist.PurchaseListEntryEntityInfoModel;
-import jnpf.form.model.purchaselist.PurchaseListForm;
-import jnpf.form.service.PurchaseListEntryService;
-import jnpf.form.service.PurchaseListService;
-import jnpf.model.FileModel;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.PurchaseListEntity;
+import com.taotao.cloud.workflow.biz.form.entity.PurchaseListEntryEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.PurchaseListMapper;
+import com.taotao.cloud.workflow.biz.form.service.PurchaseListEntryService;
+import com.taotao.cloud.workflow.biz.form.service.PurchaseListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 日常物品采购清单
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class PurchaseListServiceImpl extends ServiceImpl<PurchaseListMapper, PurchaseListEntity> implements PurchaseListService {

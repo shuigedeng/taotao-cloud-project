@@ -15,6 +15,11 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowTaskStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskMapper;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.PaginationFlowTask;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskCirculateService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNodeService;
@@ -32,18 +37,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
-import jnpf.constant.MsgCode;
-import jnpf.database.util.DataSourceUtil;
-import jnpf.database.util.DbTypeUtil;
-import jnpf.engine.enums.FlowTaskStatusEnum;
-import jnpf.engine.mapper.FlowTaskMapper;
-import jnpf.engine.model.flowbefore.FlowBatchModel;
-import jnpf.engine.model.flowtask.FlowTaskListModel;
-import jnpf.engine.model.flowtask.PaginationFlowTask;
-import jnpf.engine.util.FlowNature;
-import jnpf.engine.util.ServiceAllUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.permission.entity.UserRelationEntity;
+
+import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
+import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +48,6 @@ import org.springframework.stereotype.Service;
 /**
  * 流程任务
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Slf4j
 @Service

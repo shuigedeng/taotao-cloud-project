@@ -1,16 +1,14 @@
 package com.taotao.cloud.workflow.biz.engine.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentPagination;
+
 import java.util.List;
-import jnpf.engine.entity.FlowCommentEntity;
-import jnpf.engine.model.flowcomment.FlowCommentPagination;
 
 /**
  * 流程评论
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
  */
 public interface FlowCommentService extends IService<FlowCommentEntity> {
 

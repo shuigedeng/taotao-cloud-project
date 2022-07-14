@@ -1,20 +1,15 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.TravelReimbursementEntity;
-import jnpf.form.model.travelreimbursement.TravelReimbursementForm;
-import jnpf.form.model.travelreimbursement.TravelReimbursementInfoVO;
-import jnpf.form.service.TravelReimbursementService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.TravelReimbursementEntity;
+import com.taotao.cloud.workflow.biz.form.model.travelreimbursement.TravelReimbursementForm;
+import com.taotao.cloud.workflow.biz.form.model.travelreimbursement.TravelReimbursementInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.TravelReimbursementService;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 差旅报销申请表
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
-@Api(tags = "差旅报销申请表", value = "TravelReimbursement")
+@Tag(tags = "差旅报销申请表", value = "TravelReimbursement")
 @RestController
 @RequestMapping("/api/workflow/Form/TravelReimbursement")
 public class TravelReimbursementController {
@@ -48,7 +39,7 @@ public class TravelReimbursementController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取差旅报销申请表信息")
+    @Operation("获取差旅报销申请表信息")
     @GetMapping("/{id}")
     public ActionResult<TravelReimbursementInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         TravelReimbursementInfoVO vo = null;
@@ -75,7 +66,7 @@ public class TravelReimbursementController {
      * @param travelReimbursementForm 表单对象
      * @return
      */
-    @ApiOperation("新建差旅报销申请表")
+    @Operation("新建差旅报销申请表")
     @PostMapping
     public ActionResult create(@RequestBody TravelReimbursementForm travelReimbursementForm) throws WorkFlowException {
         if (travelReimbursementForm.getSetOutDate() > travelReimbursementForm.getReturnDate()) {
@@ -97,7 +88,7 @@ public class TravelReimbursementController {
      * @param id                      主键
      * @return
      */
-    @ApiOperation("修改差旅报销申请表")
+    @Operation("修改差旅报销申请表")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody TravelReimbursementForm travelReimbursementForm, @PathVariable("id") String id) throws WorkFlowException {
         if (travelReimbursementForm.getSetOutDate() > travelReimbursementForm.getReturnDate()) {

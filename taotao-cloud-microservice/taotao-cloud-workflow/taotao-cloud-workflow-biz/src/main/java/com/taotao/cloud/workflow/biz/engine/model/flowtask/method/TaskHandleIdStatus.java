@@ -1,10 +1,10 @@
 package com.taotao.cloud.workflow.biz.engine.model.flowtask.method;
 
 import java.util.List;
-import jnpf.base.UserInfo;
-import jnpf.engine.entity.FlowTaskNodeEntity;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
 import lombok.Data;
 
 @Data

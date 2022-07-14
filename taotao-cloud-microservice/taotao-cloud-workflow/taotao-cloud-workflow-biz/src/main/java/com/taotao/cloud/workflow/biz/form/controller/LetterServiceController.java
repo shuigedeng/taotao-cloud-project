@@ -1,22 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.LetterServiceEntity;
+import com.taotao.cloud.workflow.biz.form.model.letterservice.LetterServiceForm;
+import com.taotao.cloud.workflow.biz.form.model.letterservice.LetterServiceInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.LetterServiceService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.util.RegexUtils;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.LetterServiceEntity;
-import jnpf.form.model.letterservice.LetterServiceForm;
-import jnpf.form.model.letterservice.LetterServiceInfoVO;
-import jnpf.form.service.LetterServiceService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 发文单
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "发文单", value = "LetterService")
+@Tag(tags = "发文单", value = "LetterService")
 @RestController
 @RequestMapping("/api/workflow/Form/LetterService")
 public class LetterServiceController {
@@ -50,7 +40,7 @@ public class LetterServiceController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取发文单信息")
+    @Operation("获取发文单信息")
     @GetMapping("/{id}")
     public ActionResult<LetterServiceInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         LetterServiceInfoVO vo = null;
@@ -77,7 +67,7 @@ public class LetterServiceController {
      * @param letterServiceForm 表单对象
      * @return
      */
-    @ApiOperation("新建发文单")
+    @Operation("新建发文单")
     @PostMapping
     public ActionResult create(@RequestBody @Valid LetterServiceForm letterServiceForm) throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null && StringUtil.isNotEmpty(letterServiceForm.getShareNum()) && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
@@ -99,7 +89,7 @@ public class LetterServiceController {
      * @param id                主键
      * @return
      */
-    @ApiOperation("修改发文单")
+    @Operation("修改发文单")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid LetterServiceForm letterServiceForm, @PathVariable("id") String id) throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null && StringUtil.isNotEmpty(letterServiceForm.getShareNum()) && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {

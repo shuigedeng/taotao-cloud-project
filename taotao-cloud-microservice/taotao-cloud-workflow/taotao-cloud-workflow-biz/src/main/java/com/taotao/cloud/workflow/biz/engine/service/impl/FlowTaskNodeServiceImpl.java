@@ -6,26 +6,18 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import jnpf.engine.entity.FlowTaskNodeEntity;
-import jnpf.engine.enums.FlowNodeEnum;
-import jnpf.engine.mapper.FlowTaskNodeMapper;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
-import jnpf.engine.service.FlowTaskNodeService;
-import jnpf.engine.util.FlowNature;
-import jnpf.util.JsonUtil;
-import jnpf.util.JsonUtilEx;
-import jnpf.util.RandomUtil;
-import jnpf.util.StringUtil;
+
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskNodeMapper;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNodeService;
+import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
 import org.springframework.stereotype.Service;
 
 /**
  * 流程节点
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Service
 public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, FlowTaskNodeEntity> implements FlowTaskNodeService {

@@ -1,22 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.DebitBillEntity;
+import com.taotao.cloud.workflow.biz.form.model.debitbill.DebitBillForm;
+import com.taotao.cloud.workflow.biz.form.model.debitbill.DebitBillInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.DebitBillService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.util.RegexUtils;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.DebitBillEntity;
-import jnpf.form.model.debitbill.DebitBillForm;
-import jnpf.form.model.debitbill.DebitBillInfoVO;
-import jnpf.form.service.DebitBillService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 借支单
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "借支单", value = "DebitBill")
+@Tag(tags = "借支单", value = "DebitBill")
 @RestController
 @RequestMapping("/api/workflow/Form/DebitBill")
 public class DebitBillController {
@@ -50,7 +41,7 @@ public class DebitBillController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取借支单信息")
+    @Operation("获取借支单信息")
     @GetMapping("/{id}")
     public ActionResult<DebitBillInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DebitBillInfoVO vo = null;
@@ -77,7 +68,7 @@ public class DebitBillController {
      * @param debitBillForm 表单对象
      * @return
      */
-    @ApiOperation("新建借支单")
+    @Operation("新建借支单")
     @PostMapping
     public ActionResult create(@RequestBody @Valid DebitBillForm debitBillForm) throws WorkFlowException {
         if (debitBillForm.getAmountDebit() != null && !"".equals(String.valueOf(debitBillForm.getAmountDebit())) && !RegexUtils.checkDecimals2(String.valueOf(debitBillForm.getAmountDebit()))) {
@@ -99,7 +90,7 @@ public class DebitBillController {
      * @param id            主键
      * @return
      */
-    @ApiOperation("修改借支单")
+    @Operation("修改借支单")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid DebitBillForm debitBillForm, @PathVariable("id") String id) throws WorkFlowException {
         if (debitBillForm.getAmountDebit() != null && !"".equals(String.valueOf(debitBillForm.getAmountDebit())) && !RegexUtils.checkDecimals2(String.valueOf(debitBillForm.getAmountDebit()))) {

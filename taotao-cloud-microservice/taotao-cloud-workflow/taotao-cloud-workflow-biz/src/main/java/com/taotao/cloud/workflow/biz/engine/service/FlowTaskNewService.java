@@ -1,24 +1,20 @@
 package com.taotao.cloud.workflow.biz.engine.service;
 
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
+import com.taotao.cloud.workflow.biz.engine.model.FlowHandleModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBeforeInfoVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowSummary;
+import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateUserModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+
 import java.util.List;
-import jnpf.engine.entity.FlowTaskEntity;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.entity.FlowTaskOperatorRecordEntity;
-import jnpf.engine.model.FlowHandleModel;
-import jnpf.engine.model.flowbefore.FlowBeforeInfoVO;
-import jnpf.engine.model.flowbefore.FlowSummary;
-import jnpf.engine.model.flowcandidate.FlowCandidateUserModel;
-import jnpf.engine.model.flowcandidate.FlowCandidateVO;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.exception.WorkFlowException;
 
 /**
  * 流程引擎
  *
- * @author JNPF开发平台组
- * @version V3.2.0
- * @copyright 引迈信息技术有限公司
- * @date 2021年4月27日 上午9:18
  */
 public interface FlowTaskNewService {
 

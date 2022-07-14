@@ -1,50 +1,41 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
+import com.taotao.cloud.workflow.biz.engine.model.FlowHandleModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBeforeInfoVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBeforeListVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowSummary;
+import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateUserModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ConditionList;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.PaginationFlowTask;
 import com.taotao.cloud.workflow.biz.engine.service.FlowEngineService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNodeService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorRecordService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.workflow.biz.engine.util.FlowJsonUtil;
+import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
+import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import jnpf.base.ActionResult;
-import jnpf.base.UserInfo;
-import jnpf.base.vo.PaginationVO;
-import jnpf.constant.MsgCode;
-import jnpf.engine.enums.FlowNodeEnum;
-import jnpf.engine.model.FlowHandleModel;
-import jnpf.engine.model.flowbefore.FlowBatchModel;
-import jnpf.engine.model.flowbefore.FlowBeforeInfoVO;
-import jnpf.engine.model.flowbefore.FlowBeforeListVO;
-import jnpf.engine.model.flowbefore.FlowSummary;
-import jnpf.engine.model.flowcandidate.FlowCandidateUserModel;
-import jnpf.engine.model.flowcandidate.FlowCandidateVO;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.engine.model.flowengine.shuntjson.childnode.ChildNode;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ConditionList;
-import jnpf.engine.model.flowtask.FlowTaskListModel;
-import jnpf.engine.model.flowtask.PaginationFlowTask;
-import jnpf.engine.util.FlowJsonUtil;
-import jnpf.engine.util.FlowNature;
-import jnpf.engine.util.ServiceAllUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.permission.entity.UserEntity;
-import jnpf.util.JsonUtil;
-import jnpf.util.RedisUtil;
-import jnpf.util.StringUtil;
-import jnpf.util.UserProvider;
+
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,12 +47,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 待我审核
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "待我审核", value = "FlowBefore")
+@Tag(tags = "待我审核", value = "FlowBefore")
 @RestController
 @RequestMapping("/api/workflow/Engine/FlowBefore")
 public class FlowBeforeController {
@@ -93,7 +80,7 @@ public class FlowBeforeController {
      * @param paginationFlowTask
      * @return
      */
-    @ApiOperation("获取待我审核列表(有带分页)，1-待办事宜，2-已办事宜，3-抄送事宜,4-批量审批")
+    @Operation("获取待我审核列表(有带分页)，1-待办事宜，2-已办事宜，3-抄送事宜,4-批量审批")
     @GetMapping("/List/{category}")
     public ActionResult list(@PathVariable("category") String category, PaginationFlowTask paginationFlowTask) {
         List<FlowTaskListModel> data = new ArrayList<>();
@@ -138,7 +125,7 @@ public class FlowBeforeController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取待我审批信息")
+    @Operation("获取待我审批信息")
     @GetMapping("/{id}")
     public ActionResult info(@PathVariable("id") String id, String taskNodeId, String taskOperatorId) throws WorkFlowException {
         FlowBeforeInfoVO vo = flowTaskNewService.getBeforeInfo(id, taskNodeId, taskOperatorId);
@@ -152,7 +139,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 流程经办
      * @return
      */
-    @ApiOperation("待我审核审核")
+    @Operation("待我审核审核")
     @PostMapping("/Audit/{id}")
     public ActionResult audit(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
@@ -184,7 +171,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 流程经办
      * @return
      */
-    @ApiOperation("保存草稿")
+    @Operation("保存草稿")
     @PostMapping("/SaveAudit/{id}")
     public ActionResult saveAudit(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskOperatorEntity flowTaskOperatorEntity = flowTaskOperatorService.getInfo(id);
@@ -212,7 +199,7 @@ public class FlowBeforeController {
      * @param category 类型
      * @return
      */
-    @ApiOperation("审批汇总")
+    @Operation("审批汇总")
     @GetMapping("/RecordList/{id}")
     public ActionResult recordList(@PathVariable("id") String id, String category, String type) {
         List<FlowSummary> flowSummaries = flowTaskNewService.recordList(id, category, type);
@@ -226,7 +213,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 经办信息
      * @return
      */
-    @ApiOperation("待我审核驳回")
+    @Operation("待我审核驳回")
     @PostMapping("/Reject/{id}")
     public ActionResult reject(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
@@ -258,7 +245,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 经办信息
      * @return
      */
-    @ApiOperation("待我审核转办")
+    @Operation("待我审核转办")
     @PostMapping("/Transfer/{id}")
     public ActionResult transfer(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
@@ -281,7 +268,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 实体对象
      * @return
      */
-    @ApiOperation("待我审核撤回审核")
+    @Operation("待我审核撤回审核")
     @PostMapping("/Recall/{id}")
     public ActionResult recall(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskOperatorRecordEntity operatorRecord = flowTaskOperatorRecordService.getInfo(id);
@@ -302,7 +289,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 流程经办
      * @return
      */
-    @ApiOperation("待我审核终止审核")
+    @Operation("待我审核终止审核")
     @PostMapping("/Cancel/{id}")
     public ActionResult cancel(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) {
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);
@@ -321,7 +308,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 流程经办
      * @return
      */
-    @ApiOperation("指派人")
+    @Operation("指派人")
     @PostMapping("/Assign/{id}")
     public ActionResult assign(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
@@ -335,7 +322,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 数据
      * @return
      */
-    @ApiOperation("获取候选人节点")
+    @Operation("获取候选人节点")
     @PostMapping("/Candidates/{id}")
     public ActionResult candidates(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         List<FlowCandidateVO> candidate = flowTaskNewService.candidates(id, flowHandleModel);
@@ -348,7 +335,7 @@ public class FlowBeforeController {
      * @param flowHandleModel 数据
      * @return
      */
-    @ApiOperation("获取候选人")
+    @Operation("获取候选人")
     @PostMapping("/CandidateUser/{id}")
     public ActionResult candidateUser(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         List<FlowCandidateUserModel> candidate = flowTaskNewService.candidateUser(id, flowHandleModel);
@@ -361,7 +348,7 @@ public class FlowBeforeController {
      *
      * @return
      */
-    @ApiOperation("批量审批引擎")
+    @Operation("批量审批引擎")
     @GetMapping("/BatchFlowSelector")
     public ActionResult batchFlowSelector() {
         List<FlowBatchModel> batchFlowList = flowTaskService.batchFlowSelector();
@@ -375,7 +362,7 @@ public class FlowBeforeController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("引擎节点")
+    @Operation("引擎节点")
     @GetMapping("/NodeSelector/{id}")
     public ActionResult nodeSelector(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity engine = flowEngineService.getInfo(id);
@@ -402,7 +389,7 @@ public class FlowBeforeController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("批量审批")
+    @Operation("批量审批")
     @PostMapping("/BatchOperation")
     public ActionResult batchOperation(@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         flowTaskNewService.batch(flowHandleModel);
@@ -416,7 +403,7 @@ public class FlowBeforeController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("批量获取候选人")
+    @Operation("批量获取候选人")
     @GetMapping("/BatchCandidate")
     public ActionResult batchCandidate(String flowId, String taskOperatorId) throws WorkFlowException {
         List<FlowCandidateVO> candidate = flowTaskNewService.batchCandidates(flowId, taskOperatorId);
@@ -430,7 +417,7 @@ public class FlowBeforeController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("消息跳转工作流")
+    @Operation("消息跳转工作流")
     @GetMapping("/{id}/Info")
     public ActionResult taskOperatorId(@PathVariable("id") String id) throws WorkFlowException {
         FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);

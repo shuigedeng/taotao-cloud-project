@@ -1,25 +1,18 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowmonitor.FlowMonitorListVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowDeleteModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.PaginationFlowTask;
+import com.taotao.cloud.workflow.biz.engine.service.FlowEngineService;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import jnpf.base.ActionResult;
-import jnpf.base.vo.PageListVO;
-import jnpf.base.vo.PaginationVO;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowEngineEntity;
-import jnpf.engine.entity.FlowTaskEntity;
-import jnpf.engine.model.flowmonitor.FlowMonitorListVO;
-import jnpf.engine.model.flowtask.FlowDeleteModel;
-import jnpf.engine.model.flowtask.PaginationFlowTask;
-import jnpf.engine.service.FlowEngineService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ServiceAllUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.permission.entity.UserEntity;
-import jnpf.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 流程监控
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "流程监控", value = "FlowMonitor")
+@Tag(tags = "流程监控", value = "FlowMonitor")
 @RestController
 @RequestMapping("/api/workflow/Engine/FlowMonitor")
 public class FlowMonitorController {
@@ -53,7 +41,7 @@ public class FlowMonitorController {
      * @param paginationFlowTask
      * @return
      */
-    @ApiOperation("获取流程监控列表")
+    @Operation("获取流程监控列表")
     @GetMapping
     public ActionResult<PageListVO<FlowMonitorListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> list = flowTaskService.getMonitorList(paginationFlowTask);
@@ -82,7 +70,7 @@ public class FlowMonitorController {
      * @param deleteModel 主键
      * @return
      */
-    @ApiOperation("批量删除流程监控")
+    @Operation("批量删除流程监控")
     @DeleteMapping
     public ActionResult delete(@RequestBody FlowDeleteModel deleteModel) throws WorkFlowException {
         String[] taskId = deleteModel.getIds().split(",");

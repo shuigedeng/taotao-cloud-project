@@ -1,21 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.DocumentSigningEntity;
+import com.taotao.cloud.workflow.biz.form.model.documentsigning.DocumentSigningForm;
+import com.taotao.cloud.workflow.biz.form.model.documentsigning.DocumentSigningInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.DocumentSigningService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.DocumentSigningEntity;
-import jnpf.form.model.documentsigning.DocumentSigningForm;
-import jnpf.form.model.documentsigning.DocumentSigningInfoVO;
-import jnpf.form.service.DocumentSigningService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,12 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 文件签阅表
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "文件签阅表", value = "DocumentSigning")
+@Tag(tags = "文件签阅表", value = "DocumentSigning")
 @RestController
 @RequestMapping("/api/workflow/Form/DocumentSigning")
 public class DocumentSigningController {
@@ -49,7 +41,7 @@ public class DocumentSigningController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取文件签阅表信息")
+    @Operation("获取文件签阅表信息")
     @GetMapping("/{id}")
     public ActionResult<DocumentSigningInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DocumentSigningInfoVO vo = null;
@@ -76,7 +68,7 @@ public class DocumentSigningController {
      * @param documentSigningForm 表单对象
      * @return
      */
-    @ApiOperation("新建文件签阅表")
+    @Operation("新建文件签阅表")
     @PostMapping
     public ActionResult create(@RequestBody @Valid DocumentSigningForm documentSigningForm) throws WorkFlowException {
         DocumentSigningEntity entity = JsonUtil.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
@@ -95,7 +87,7 @@ public class DocumentSigningController {
      * @param id                  主键
      * @return
      */
-    @ApiOperation("修改文件签阅表")
+    @Operation("修改文件签阅表")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid DocumentSigningForm documentSigningForm, @PathVariable("id") String id) throws WorkFlowException {
         DocumentSigningEntity entity = JsonUtil.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);

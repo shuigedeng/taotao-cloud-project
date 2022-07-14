@@ -5,21 +5,17 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import jnpf.engine.entity.FlowEngineVisibleEntity;
-import jnpf.engine.mapper.FlowEngineVisibleMapper;
-import jnpf.engine.service.FlowEngineVisibleService;
-import jnpf.engine.util.ServiceAllUtil;
-import jnpf.permission.entity.UserRelationEntity;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineVisibleEntity;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowEngineVisibleMapper;
+import com.taotao.cloud.workflow.biz.engine.service.FlowEngineVisibleService;
+import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 流程可见
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Service
 public class FlowEngineVisibleServiceImpl extends ServiceImpl<FlowEngineVisibleMapper, FlowEngineVisibleEntity> implements FlowEngineVisibleService {

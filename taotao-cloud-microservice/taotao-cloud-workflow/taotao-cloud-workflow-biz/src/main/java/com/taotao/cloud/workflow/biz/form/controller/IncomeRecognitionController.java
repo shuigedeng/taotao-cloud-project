@@ -1,21 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.IncomeRecognitionEntity;
+import com.taotao.cloud.workflow.biz.form.model.incomerecognition.IncomeRecognitionForm;
+import com.taotao.cloud.workflow.biz.form.model.incomerecognition.IncomeRecognitionInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.IncomeRecognitionService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.IncomeRecognitionEntity;
-import jnpf.form.model.incomerecognition.IncomeRecognitionForm;
-import jnpf.form.model.incomerecognition.IncomeRecognitionInfoVO;
-import jnpf.form.service.IncomeRecognitionService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 收入确认分析表
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "收入确认分析表", value = "IncomeRecognition")
+@Tag(tags = "收入确认分析表", value = "IncomeRecognition")
 @RestController
 @RequestMapping("/api/workflow/Form/IncomeRecognition")
 public class IncomeRecognitionController {
@@ -49,7 +40,7 @@ public class IncomeRecognitionController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取收入确认分析表信息")
+    @Operation("获取收入确认分析表信息")
     @GetMapping("/{id}")
     public ActionResult<IncomeRecognitionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         IncomeRecognitionInfoVO vo = null;
@@ -76,7 +67,7 @@ public class IncomeRecognitionController {
      * @param incomeRecognitionForm 表单对象
      * @return
      */
-    @ApiOperation("新建收入确认分析表")
+    @Operation("新建收入确认分析表")
     @PostMapping
     public ActionResult create(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm) throws WorkFlowException {
         IncomeRecognitionEntity entity = JsonUtil.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
@@ -95,7 +86,7 @@ public class IncomeRecognitionController {
      * @param id                    主键
      * @return
      */
-    @ApiOperation("修改收入确认分析表")
+    @Operation("修改收入确认分析表")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm, @PathVariable("id") String id) throws WorkFlowException {
         IncomeRecognitionEntity entity = JsonUtil.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);

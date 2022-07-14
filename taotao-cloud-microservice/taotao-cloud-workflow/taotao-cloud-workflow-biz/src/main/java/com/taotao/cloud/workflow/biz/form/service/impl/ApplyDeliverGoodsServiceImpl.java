@@ -6,29 +6,18 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ApplyDeliverGoodsEntity;
-import jnpf.form.entity.ApplyDeliverGoodsEntryEntity;
-import jnpf.form.mapper.ApplyDeliverGoodsMapper;
-import jnpf.form.model.applydelivergoods.ApplyDeliverGoodsEntryInfoModel;
-import jnpf.form.model.applydelivergoods.ApplyDeliverGoodsForm;
-import jnpf.form.service.ApplyDeliverGoodsEntryService;
-import jnpf.form.service.ApplyDeliverGoodsService;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.ApplyDeliverGoodsEntity;
+import com.taotao.cloud.workflow.biz.form.entity.ApplyDeliverGoodsEntryEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.ApplyDeliverGoodsMapper;
+import com.taotao.cloud.workflow.biz.form.service.ApplyDeliverGoodsEntryService;
+import com.taotao.cloud.workflow.biz.form.service.ApplyDeliverGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 发货申请单
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class ApplyDeliverGoodsServiceImpl extends ServiceImpl<ApplyDeliverGoodsMapper, ApplyDeliverGoodsEntity> implements ApplyDeliverGoodsService {

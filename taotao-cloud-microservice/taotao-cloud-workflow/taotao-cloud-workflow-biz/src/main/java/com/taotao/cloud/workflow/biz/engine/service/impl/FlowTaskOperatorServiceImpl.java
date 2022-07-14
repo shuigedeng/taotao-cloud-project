@@ -6,25 +6,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import jnpf.base.UserInfo;
-import jnpf.engine.entity.FlowDelegateEntity;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowNodeEnum;
-import jnpf.engine.mapper.FlowTaskOperatorMapper;
-import jnpf.engine.service.FlowDelegateService;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.engine.util.FlowNature;
-import jnpf.util.UserProvider;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskOperatorMapper;
+import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 流程经办记录
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Service
 public class FlowTaskOperatorServiceImpl extends ServiceImpl<FlowTaskOperatorMapper, FlowTaskOperatorEntity> implements FlowTaskOperatorService {

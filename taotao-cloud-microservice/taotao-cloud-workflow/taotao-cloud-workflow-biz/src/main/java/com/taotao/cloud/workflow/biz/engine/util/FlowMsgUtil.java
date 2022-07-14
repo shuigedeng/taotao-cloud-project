@@ -1,5 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskCirculateEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
@@ -11,34 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import jnpf.engine.enums.FlowMessageEnum;
-import jnpf.engine.enums.FlowTaskStatusEnum;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.engine.model.flowengine.shuntjson.childnode.FuncConfig;
-import jnpf.engine.model.flowengine.shuntjson.childnode.MsgConfig;
-import jnpf.engine.model.flowengine.shuntjson.childnode.Properties;
-import jnpf.engine.model.flowengine.shuntjson.childnode.TemplateJsonModel;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
-import jnpf.engine.model.flowmessage.FlowEventModel;
-import jnpf.engine.model.flowmessage.FlowMessageModel;
-import jnpf.engine.model.flowmessage.FlowMsgModel;
-import jnpf.engine.model.flowtask.FlowContModel;
-import jnpf.engine.service.FlowDelegateService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.message.model.message.SentMessageForm;
-import jnpf.message.util.SentMessageUtil;
-import jnpf.permission.entity.UserEntity;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
-import jnpf.util.UserProvider;
+
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.engine.model.flowmessage.FlowMsgModel;
+import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ：JNPF开发平台组
- * @version: V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date ：2022/3/30 11:45
  */
 @Component
 public class FlowMsgUtil {

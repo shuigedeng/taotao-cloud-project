@@ -1,17 +1,12 @@
 package com.taotao.cloud.workflow.biz.engine.model.flowengine;
 
-import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
  *
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2021/3/15 9:16
  */
 @Data
 public class FlowEngineCrForm {
@@ -35,13 +30,13 @@ public class FlowEngineCrForm {
     private String flowTemplateJson;
     private String description;
     private Integer enabledMark;
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Long sortCode;
-    @ApiModelProperty(value = "关联表")
+    @Schema(description = "关联表")
     private String tables;
     private String dbLinkId;
-    @ApiModelProperty(value = "app表单路径")
+    @Schema(description = "app表单路径")
     private String appFormUrl;
-    @ApiModelProperty(value = "pc表单路径")
+    @Schema(description = "pc表单路径")
     private String formUrl;
 }

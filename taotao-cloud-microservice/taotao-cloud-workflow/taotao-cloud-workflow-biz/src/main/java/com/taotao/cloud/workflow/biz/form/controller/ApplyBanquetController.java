@@ -1,22 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.ApplyBanquetEntity;
+import com.taotao.cloud.workflow.biz.form.model.applybanquet.ApplyBanquetForm;
+import com.taotao.cloud.workflow.biz.form.model.applybanquet.ApplyBanquetInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.ApplyBanquetService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.util.RegexUtils;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ApplyBanquetEntity;
-import jnpf.form.model.applybanquet.ApplyBanquetForm;
-import jnpf.form.model.applybanquet.ApplyBanquetInfoVO;
-import jnpf.form.service.ApplyBanquetService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 宴请申请
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "宴请申请", value = "ApplyBanquet")
+@Tag(tags = "宴请申请", value = "ApplyBanquet")
 @RestController
 @RequestMapping("/api/workflow/Form/ApplyBanquet")
 public class ApplyBanquetController {
@@ -50,7 +40,7 @@ public class ApplyBanquetController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取宴请申请信息")
+    @Operation("获取宴请申请信息")
     @GetMapping("/{id}")
     public ActionResult<ApplyBanquetInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ApplyBanquetInfoVO vo = null;
@@ -77,7 +67,7 @@ public class ApplyBanquetController {
      * @param applyBanquetForm 表单对象
      * @return
      */
-    @ApiOperation("新建宴请申请")
+    @Operation("新建宴请申请")
     @PostMapping
     public ActionResult create(@RequestBody @Valid ApplyBanquetForm applyBanquetForm) throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null && StringUtil.isNotEmpty(applyBanquetForm.getBanquetNum()) && !RegexUtils.checkDigit2(applyBanquetForm.getBanquetNum())) {
@@ -105,7 +95,7 @@ public class ApplyBanquetController {
      * @param id               主键
      * @return
      */
-    @ApiOperation("修改宴请申请")
+    @Operation("修改宴请申请")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid ApplyBanquetForm applyBanquetForm, @PathVariable("id") String id) throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null && StringUtil.isNotEmpty(applyBanquetForm.getBanquetNum()) && !RegexUtils.checkDigit2(applyBanquetForm.getBanquetNum())) {

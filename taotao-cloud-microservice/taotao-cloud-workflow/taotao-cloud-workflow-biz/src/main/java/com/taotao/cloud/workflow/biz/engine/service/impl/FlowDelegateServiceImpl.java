@@ -6,14 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.Date;
 import java.util.List;
-import jnpf.base.Pagination;
-import jnpf.engine.entity.FlowDelegateEntity;
-import jnpf.engine.mapper.FlowDelegateMapper;
-import jnpf.engine.service.FlowDelegateService;
-import jnpf.util.DateUtil;
-import jnpf.util.RandomUtil;
-import jnpf.util.StringUtil;
-import jnpf.util.UserProvider;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowDelegateMapper;
+import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +17,6 @@ import org.springframework.stereotype.Service;
 /**
  * 流程委托
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Service
 public class FlowDelegateServiceImpl extends ServiceImpl<FlowDelegateMapper, FlowDelegateEntity> implements FlowDelegateService {

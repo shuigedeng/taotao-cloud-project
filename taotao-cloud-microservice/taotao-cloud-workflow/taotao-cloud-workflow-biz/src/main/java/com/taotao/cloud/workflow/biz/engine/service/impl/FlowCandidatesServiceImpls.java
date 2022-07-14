@@ -3,18 +3,14 @@ package com.taotao.cloud.workflow.biz.engine.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
-import jnpf.engine.entity.FlowCandidatesEntity;
-import jnpf.engine.mapper.FlowCandidatesMapper;
-import jnpf.engine.service.FlowCandidatesService;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowCandidatesEntity;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowCandidatesMapper;
+import com.taotao.cloud.workflow.biz.engine.service.FlowCandidatesService;
 import org.springframework.stereotype.Service;
 
 /**
  * 流程候选人
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
  */
 @Service
 public class FlowCandidatesServiceImpls extends ServiceImpl<FlowCandidatesMapper, FlowCandidatesEntity> implements FlowCandidatesService {

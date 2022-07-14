@@ -5,21 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Set;
-import jnpf.engine.entity.FlowTaskOperatorRecordEntity;
-import jnpf.engine.enums.FlowNodeEnum;
-import jnpf.engine.enums.FlowRecordEnum;
-import jnpf.engine.mapper.FlowTaskOperatorRecordMapper;
-import jnpf.engine.service.FlowTaskOperatorRecordService;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowRecordEnum;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskOperatorRecordMapper;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorRecordService;
 import org.springframework.stereotype.Service;
 
 /**
  * 流程经办
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Service
 public class FlowTaskOperatorRecordServiceImpl extends ServiceImpl<FlowTaskOperatorRecordMapper, FlowTaskOperatorRecordEntity> implements FlowTaskOperatorRecordService {

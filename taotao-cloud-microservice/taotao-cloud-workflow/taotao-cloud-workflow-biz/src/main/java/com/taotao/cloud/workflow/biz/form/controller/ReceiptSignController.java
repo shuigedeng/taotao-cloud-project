@@ -1,20 +1,15 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ReceiptSignEntity;
-import jnpf.form.model.receiptsign.ReceiptSignForm;
-import jnpf.form.model.receiptsign.ReceiptSignInfoVO;
-import jnpf.form.service.ReceiptSignService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.ReceiptSignEntity;
+import com.taotao.cloud.workflow.biz.form.model.receiptsign.ReceiptSignForm;
+import com.taotao.cloud.workflow.biz.form.model.receiptsign.ReceiptSignInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.ReceiptSignService;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,13 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 收文签呈单
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
-@Api(tags = "收文签呈单", value = "ReceiptSign")
+@Tag(tags = "收文签呈单", value = "ReceiptSign")
 @RestController
 @RequestMapping("/api/workflow/Form/ReceiptSign")
 public class ReceiptSignController {
@@ -48,7 +38,7 @@ public class ReceiptSignController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取收文签呈单信息")
+    @Operation("获取收文签呈单信息")
     @GetMapping("/{id}")
     public ActionResult<ReceiptSignInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ReceiptSignInfoVO vo = null;
@@ -75,7 +65,7 @@ public class ReceiptSignController {
      * @param receiptSignForm 表单对象
      * @return
      */
-    @ApiOperation("新建收文签呈单")
+    @Operation("新建收文签呈单")
     @PostMapping
     public ActionResult create(@RequestBody ReceiptSignForm receiptSignForm) throws WorkFlowException {
         ReceiptSignEntity entity = JsonUtil.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
@@ -94,7 +84,7 @@ public class ReceiptSignController {
      * @param id              主键
      * @return
      */
-    @ApiOperation("修改收文签呈单")
+    @Operation("修改收文签呈单")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id) throws WorkFlowException {
         ReceiptSignEntity entity = JsonUtil.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);

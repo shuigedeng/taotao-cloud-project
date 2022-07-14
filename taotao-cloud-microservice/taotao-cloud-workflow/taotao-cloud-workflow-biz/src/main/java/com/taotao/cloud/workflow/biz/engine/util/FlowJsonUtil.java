@@ -10,24 +10,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import jnpf.engine.entity.FlowTaskNodeEntity;
-import jnpf.engine.model.flowengine.shuntjson.childnode.ChildNode;
-import jnpf.engine.model.flowengine.shuntjson.childnode.ProperCond;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.ConditionList;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.Custom;
-import jnpf.engine.model.flowengine.shuntjson.nodejson.DateProperties;
-import jnpf.util.JsonUtil;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.childnode.ProperCond;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ConditionList;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * 在线工作流开发
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 @Data
 public class FlowJsonUtil {

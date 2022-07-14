@@ -2,10 +2,6 @@ package com.taotao.cloud.workflow.biz.engine.enums;
 
 /**
  * 工作流开发
- *
- * @author JNPF开发平台组
- * @version V3.0.0
- * @copyright 引迈信息技术有限公司
  */
 public enum FlowRecordListEnum {
 

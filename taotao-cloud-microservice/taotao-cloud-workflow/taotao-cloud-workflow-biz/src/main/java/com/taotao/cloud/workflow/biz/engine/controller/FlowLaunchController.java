@@ -1,27 +1,16 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowlaunch.FlowLaunchListVO;
 import com.taotao.cloud.workflow.biz.engine.service.FlowEngineService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import jnpf.base.ActionResult;
-import jnpf.base.vo.PageListVO;
-import jnpf.base.vo.PaginationVO;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowEngineEntity;
-import jnpf.engine.entity.FlowTaskEntity;
-import jnpf.engine.model.FlowHandleModel;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.engine.model.flowlaunch.FlowLaunchListVO;
-import jnpf.engine.model.flowtask.PaginationFlowTask;
-import jnpf.engine.util.FlowNature;
-import jnpf.exception.WorkFlowException;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,12 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 流程发起
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "流程发起", value = "FlowLaunch")
+@Tag(tags = "流程发起", value = "FlowLaunch")
 @RestController
 @RequestMapping("/api/workflow/Engine/FlowLaunch")
 public class FlowLaunchController {
@@ -58,7 +43,7 @@ public class FlowLaunchController {
      * @param paginationFlowTask
      * @return
      */
-    @ApiOperation("获取流程发起列表(带分页)")
+    @Operation("获取流程发起列表(带分页)")
     @GetMapping
     public ActionResult<PageListVO<FlowLaunchListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> data = flowTaskService.getLaunchList(paginationFlowTask);
@@ -84,7 +69,7 @@ public class FlowLaunchController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("删除流程发起")
+    @Operation("删除流程发起")
     @DeleteMapping("/{id}")
     public ActionResult delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
@@ -107,7 +92,7 @@ public class FlowLaunchController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("发起催办")
+    @Operation("发起催办")
     @PostMapping("/Press/{id}")
     public ActionResult press(@PathVariable("id") String id) throws WorkFlowException {
         boolean flag = flowTaskNewService.press(id);
@@ -125,7 +110,7 @@ public class FlowLaunchController {
      * @param flowHandleModel 经办记录
      * @return
      */
-    @ApiOperation("撤回流程发起")
+    @Operation("撤回流程发起")
     @PutMapping("/{id}/Actions/Withdraw")
     public ActionResult revoke(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);

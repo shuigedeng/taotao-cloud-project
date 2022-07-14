@@ -1,21 +1,16 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.DocumentApprovalEntity;
+import com.taotao.cloud.workflow.biz.form.model.documentapproval.DocumentApprovalForm;
+import com.taotao.cloud.workflow.biz.form.model.documentapproval.DocumentApprovalInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.DocumentApprovalService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.DocumentApprovalEntity;
-import jnpf.form.model.documentapproval.DocumentApprovalForm;
-import jnpf.form.model.documentapproval.DocumentApprovalInfoVO;
-import jnpf.form.service.DocumentApprovalService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,12 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 文件签批意见表
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "文件签批意见表", value = "DocumentApproval")
+@Tag(tags = "文件签批意见表", value = "DocumentApproval")
 @RestController
 @RequestMapping("/api/workflow/Form/DocumentApproval")
 public class DocumentApprovalController {
@@ -49,7 +40,7 @@ public class DocumentApprovalController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取文件签批意见表信息")
+    @Operation("获取文件签批意见表信息")
     @GetMapping("/{id}")
     public ActionResult<DocumentApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DocumentApprovalInfoVO vo = null;
@@ -76,7 +67,7 @@ public class DocumentApprovalController {
      * @param documentApprovalForm 表单对象
      * @return
      */
-    @ApiOperation("新建文件签批意见表")
+    @Operation("新建文件签批意见表")
     @PostMapping
     public ActionResult create(@RequestBody @Valid DocumentApprovalForm documentApprovalForm) throws WorkFlowException {
         DocumentApprovalEntity entity = JsonUtil.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
@@ -95,7 +86,7 @@ public class DocumentApprovalController {
      * @param id                   主键
      * @return
      */
-    @ApiOperation("修改文件签批意见表")
+    @Operation("修改文件签批意见表")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid DocumentApprovalForm documentApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
         DocumentApprovalEntity entity = JsonUtil.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
