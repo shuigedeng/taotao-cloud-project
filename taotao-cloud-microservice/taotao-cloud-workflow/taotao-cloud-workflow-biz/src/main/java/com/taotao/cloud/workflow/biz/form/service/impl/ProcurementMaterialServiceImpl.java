@@ -6,31 +6,18 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.base.util.FileManageUtil;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ProcurementEntryEntity;
-import jnpf.form.entity.ProcurementMaterialEntity;
-import jnpf.form.mapper.ProcurementMaterialMapper;
-import jnpf.form.model.procurementmaterial.ProcurementEntryEntityInfoModel;
-import jnpf.form.model.procurementmaterial.ProcurementMaterialForm;
-import jnpf.form.service.ProcurementEntryService;
-import jnpf.form.service.ProcurementMaterialService;
-import jnpf.model.FileModel;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.ProcurementEntryEntity;
+import com.taotao.cloud.workflow.biz.form.entity.ProcurementMaterialEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.ProcurementMaterialMapper;
+import com.taotao.cloud.workflow.biz.form.service.ProcurementEntryService;
+import com.taotao.cloud.workflow.biz.form.service.ProcurementMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 采购原材料
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class ProcurementMaterialServiceImpl extends ServiceImpl<ProcurementMaterialMapper, ProcurementMaterialEntity> implements ProcurementMaterialService {

@@ -1,23 +1,13 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.model.salesorder.SalesOrderInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.SalesOrderService;
+
 import java.util.List;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.SalesOrderEntity;
-import jnpf.form.entity.SalesOrderEntryEntity;
-import jnpf.form.model.salesorder.SalesOrderEntryEntityInfoModel;
-import jnpf.form.model.salesorder.SalesOrderForm;
-import jnpf.form.model.salesorder.SalesOrderInfoVO;
-import jnpf.form.service.SalesOrderService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,13 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 销售订单
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
-@Api(tags = "销售订单", value = "SalesOrder")
+@Tag(tags = "销售订单", value = "SalesOrder")
 @RestController
 @RequestMapping("/api/workflow/Form/SalesOrder")
 public class SalesOrderController {
@@ -51,7 +36,7 @@ public class SalesOrderController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取销售订单信息")
+    @Operation("获取销售订单信息")
     @GetMapping("/{id}")
     public ActionResult<SalesOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         SalesOrderInfoVO vo = null;
@@ -81,7 +66,7 @@ public class SalesOrderController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("新建销售订单")
+    @Operation("新建销售订单")
     @PostMapping
     public ActionResult create(@RequestBody SalesOrderForm salesOrderForm) throws WorkFlowException {
         SalesOrderEntity sales = JsonUtil.getJsonToBean(salesOrderForm, SalesOrderEntity.class);
@@ -102,7 +87,7 @@ public class SalesOrderController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("修改销售订单")
+    @Operation("修改销售订单")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody SalesOrderForm salesOrderForm, @PathVariable("id") String id) throws WorkFlowException {
         SalesOrderEntity sales = JsonUtil.getJsonToBean(salesOrderForm, SalesOrderEntity.class);

@@ -1,21 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.ArchivalBorrowEntity;
+import com.taotao.cloud.workflow.biz.form.model.archivalborrow.ArchivalBorrowForm;
+import com.taotao.cloud.workflow.biz.form.model.archivalborrow.ArchivalBorrowInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.ArchivalBorrowService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ArchivalBorrowEntity;
-import jnpf.form.model.archivalborrow.ArchivalBorrowForm;
-import jnpf.form.model.archivalborrow.ArchivalBorrowInfoVO;
-import jnpf.form.service.ArchivalBorrowService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 档案借阅申请
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "档案借阅申请", value = "ArchivalBorrow")
+@Tag(tags = "档案借阅申请", value = "ArchivalBorrow")
 @RestController
 @RequestMapping("/api/workflow/Form/ArchivalBorrow")
 public class ArchivalBorrowController {
@@ -49,7 +40,7 @@ public class ArchivalBorrowController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取档案借阅申请信息")
+    @Operation("获取档案借阅申请信息")
     @GetMapping("/{id}")
     public ActionResult<ArchivalBorrowInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ArchivalBorrowInfoVO vo = null;
@@ -76,7 +67,7 @@ public class ArchivalBorrowController {
      * @param archivalBorrowForm 表单对象
      * @return
      */
-    @ApiOperation("新建档案借阅申请")
+    @Operation("新建档案借阅申请")
     @PostMapping
     public ActionResult create(@RequestBody @Valid ArchivalBorrowForm archivalBorrowForm) throws WorkFlowException {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {
@@ -98,7 +89,7 @@ public class ArchivalBorrowController {
      * @param id                 主键
      * @return
      */
-    @ApiOperation("修改档案借阅申请")
+    @Operation("修改档案借阅申请")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid ArchivalBorrowForm archivalBorrowForm, @PathVariable("id") String id) throws WorkFlowException {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {

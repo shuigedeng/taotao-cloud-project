@@ -5,28 +5,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.base.util.FileManageUtil;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.QuotationApprovalEntity;
-import jnpf.form.mapper.QuotationApprovalMapper;
-import jnpf.form.model.quotationapproval.QuotationApprovalForm;
-import jnpf.form.service.QuotationApprovalService;
-import jnpf.model.FileModel;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
+import com.taotao.cloud.workflow.biz.form.entity.QuotationApprovalEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.QuotationApprovalMapper;
+import com.taotao.cloud.workflow.biz.form.model.quotationapproval.QuotationApprovalForm;
+import com.taotao.cloud.workflow.biz.form.service.QuotationApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 报价审批表
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class QuotationApprovalServiceImpl extends ServiceImpl<QuotationApprovalMapper, QuotationApprovalEntity> implements QuotationApprovalService {

@@ -7,21 +7,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.Date;
 import java.util.List;
-import jnpf.engine.entity.FlowCommentEntity;
-import jnpf.engine.mapper.FlowCommentMapper;
-import jnpf.engine.model.flowcomment.FlowCommentPagination;
-import jnpf.engine.service.FlowCommentService;
-import jnpf.util.RandomUtil;
-import jnpf.util.UserProvider;
+
+import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
+import com.taotao.cloud.workflow.biz.engine.mapper.FlowCommentMapper;
+import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentPagination;
+import com.taotao.cloud.workflow.biz.engine.service.FlowCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 流程评论
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
  */
 @Service
 public class FlowCommentServiceImpl extends ServiceImpl<FlowCommentMapper, FlowCommentEntity> implements FlowCommentService {

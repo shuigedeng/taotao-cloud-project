@@ -1,21 +1,16 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.engine.service.FlowTaskNewService;
-import jnpf.exception.WorkFlowException;
-import jnpf.util.JsonUtil;
-import jnpf.util.context.SpringContext;
 
 /**
  * 工作流
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2021/5/24 9:19
  */
 public class ModelUtil {
 

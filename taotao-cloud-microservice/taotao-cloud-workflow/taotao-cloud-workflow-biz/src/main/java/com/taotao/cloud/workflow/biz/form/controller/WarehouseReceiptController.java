@@ -1,23 +1,19 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.WarehouseEntryEntity;
+import com.taotao.cloud.workflow.biz.form.entity.WarehouseReceiptEntity;
+import com.taotao.cloud.workflow.biz.form.model.warehousereceipt.WarehouseReceiptEntityInfoModel;
+import com.taotao.cloud.workflow.biz.form.model.warehousereceipt.WarehouseReceiptForm;
+import com.taotao.cloud.workflow.biz.form.model.warehousereceipt.WarehouseReceiptInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.WarehouseReceiptService;
+
 import java.util.List;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.WarehouseEntryEntity;
-import jnpf.form.entity.WarehouseReceiptEntity;
-import jnpf.form.model.warehousereceipt.WarehouseReceiptEntityInfoModel;
-import jnpf.form.model.warehousereceipt.WarehouseReceiptForm;
-import jnpf.form.model.warehousereceipt.WarehouseReceiptInfoVO;
-import jnpf.form.service.WarehouseReceiptService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,12 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 入库申请单
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
-@Api(tags = "入库申请单", value = "WarehouseReceipt")
+@Tag(tags = "入库申请单", value = "WarehouseReceipt")
 @RestController
 @RequestMapping("/api/workflow/Form/WarehouseReceipt")
 public class WarehouseReceiptController {
@@ -51,7 +43,7 @@ public class WarehouseReceiptController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取入库申请单信息")
+    @Operation("获取入库申请单信息")
     @GetMapping("/{id}")
     public ActionResult<WarehouseReceiptInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         WarehouseReceiptInfoVO vo = null;
@@ -81,7 +73,7 @@ public class WarehouseReceiptController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("新建入库申请单")
+    @Operation("新建入库申请单")
     @PostMapping
     public ActionResult create(@RequestBody WarehouseReceiptForm warehouseReceiptForm) throws WorkFlowException {
         WarehouseReceiptEntity warehouse = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
@@ -102,7 +94,7 @@ public class WarehouseReceiptController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("修改入库申请单")
+    @Operation("修改入库申请单")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody WarehouseReceiptForm warehouseReceiptForm, @PathVariable("id") String id) throws WorkFlowException {
         WarehouseReceiptEntity warehouse = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);

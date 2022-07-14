@@ -5,16 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ArticlesWarehousEntity;
-import jnpf.form.mapper.ArticlesWarehousMapper;
-import jnpf.form.model.articleswarehous.ArticlesWarehousForm;
-import jnpf.form.service.ArticlesWarehousService;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.ArticlesWarehousEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.ArticlesWarehousMapper;
+import com.taotao.cloud.workflow.biz.form.service.ArticlesWarehousService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +17,6 @@ import org.springframework.stereotype.Service;
 /**
  * 用品入库申请表
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class ArticlesWarehousServiceImpl extends ServiceImpl<ArticlesWarehousMapper, ArticlesWarehousEntity> implements ArticlesWarehousService {

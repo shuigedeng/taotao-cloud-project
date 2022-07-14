@@ -1,23 +1,18 @@
 package com.taotao.cloud.workflow.biz.engine.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineVisibleEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowEngineListVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowExportModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.PaginationFlowEngine;
+
 import java.util.List;
-import jnpf.base.ActionResult;
-import jnpf.engine.entity.FlowEngineEntity;
-import jnpf.engine.entity.FlowEngineVisibleEntity;
-import jnpf.engine.model.flowengine.FlowEngineListVO;
-import jnpf.engine.model.flowengine.FlowExportModel;
-import jnpf.engine.model.flowengine.FlowPagination;
-import jnpf.engine.model.flowengine.PaginationFlowEngine;
-import jnpf.exception.WorkFlowException;
 
 /**
  * 流程引擎
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 public interface FlowEngineService extends IService<FlowEngineEntity> {
 

@@ -1,20 +1,15 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.WorkContactSheetEntity;
-import jnpf.form.model.workcontactsheet.WorkContactSheetForm;
-import jnpf.form.model.workcontactsheet.WorkContactSheetInfoVO;
-import jnpf.form.service.WorkContactSheetService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.WorkContactSheetEntity;
+import com.taotao.cloud.workflow.biz.form.model.workcontactsheet.WorkContactSheetForm;
+import com.taotao.cloud.workflow.biz.form.model.workcontactsheet.WorkContactSheetInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.WorkContactSheetService;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 工作联系单
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
-@Api(tags = "工作联系单", value = "WorkContactSheet")
+@Tag(tags = "工作联系单", value = "WorkContactSheet")
 @RestController
 @RequestMapping("/api/workflow/Form/WorkContactSheet")
 public class WorkContactSheetController {
@@ -48,7 +39,7 @@ public class WorkContactSheetController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取工作联系单信息")
+    @Operation("获取工作联系单信息")
     @GetMapping("/{id}")
     public ActionResult<WorkContactSheetInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         WorkContactSheetInfoVO vo = null;
@@ -75,7 +66,7 @@ public class WorkContactSheetController {
      * @param workContactSheetForm 表单对象
      * @return
      */
-    @ApiOperation("新建工作联系单")
+    @Operation("新建工作联系单")
     @PostMapping
     public ActionResult create(@RequestBody WorkContactSheetForm workContactSheetForm) throws WorkFlowException {
         WorkContactSheetEntity entity = JsonUtil.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
@@ -94,7 +85,7 @@ public class WorkContactSheetController {
      * @param id                   主键
      * @return
      */
-    @ApiOperation("修改工作联系单")
+    @Operation("修改工作联系单")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody WorkContactSheetForm workContactSheetForm, @PathVariable("id") String id) throws WorkFlowException {
         WorkContactSheetEntity entity = JsonUtil.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);

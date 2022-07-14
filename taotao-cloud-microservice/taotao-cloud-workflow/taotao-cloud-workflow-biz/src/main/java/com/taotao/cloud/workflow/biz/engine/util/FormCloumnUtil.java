@@ -7,30 +7,17 @@ import com.taotao.cloud.workflow.biz.model.FormEnum;
 import com.taotao.cloud.workflow.biz.model.FormMastTableModel;
 import com.taotao.cloud.workflow.biz.model.FormModel;
 import com.taotao.cloud.workflow.biz.model.RecursionForm;
+
+import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import jnpf.model.visiual.JnpfKeyConsts;
-import jnpf.model.visiual.TableFields;
-import jnpf.model.visiual.TableModel;
-import jnpf.model.visiual.fields.FieLdsModel;
-import jnpf.model.visiual.fields.config.ConfigModel;
-import jnpf.model.visiual.fields.props.PropsBeanModel;
-import jnpf.model.visiual.fields.props.PropsModel;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
-import jnpf.util.StringUtil;
 
 /**
  * 在线工作流开发
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 public class FormCloumnUtil {
 

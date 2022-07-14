@@ -1,20 +1,13 @@
 package com.taotao.cloud.workflow.biz.job;
 
-import jnpf.database.data.DataSourceContextHolder;
-import jnpf.engine.model.flowengine.FlowModel;
-import jnpf.engine.service.FlowTaskNewService;
-import jnpf.util.StringUtil;
-import jnpf.util.context.SpringContext;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 
 /**
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2021/3/12 15:31
  */
 @Slf4j
 public class WorkJob implements Job {

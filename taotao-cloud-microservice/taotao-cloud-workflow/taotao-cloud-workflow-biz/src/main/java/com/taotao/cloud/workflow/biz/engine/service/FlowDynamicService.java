@@ -1,18 +1,14 @@
 package com.taotao.cloud.workflow.biz.engine.service;
 
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskForm;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskInfoVO;
+
 import java.util.Map;
-import jnpf.engine.entity.FlowTaskEntity;
-import jnpf.engine.model.flowtask.FlowTaskForm;
-import jnpf.engine.model.flowtask.FlowTaskInfoVO;
-import jnpf.exception.WorkFlowException;
 
 /**
  * 在线开发工作流
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2021/3/15 9:19
  */
 public interface FlowDynamicService {
 
@@ -23,7 +19,7 @@ public interface FlowDynamicService {
      * @return
      * @throws WorkFlowException 异常
      */
-    FlowTaskInfoVO info(FlowTaskEntity entity,String taskOperatorId) throws WorkFlowException;
+    FlowTaskInfoVO info(FlowTaskEntity entity, String taskOperatorId) throws WorkFlowException;
 
     /**
      * 保存
@@ -31,7 +27,7 @@ public interface FlowDynamicService {
      * @param flowTaskForm 对象
      * @throws WorkFlowException 异常
      */
-    void save(String id,FlowTaskForm flowTaskForm) throws WorkFlowException;
+    void save(String id, FlowTaskForm flowTaskForm) throws WorkFlowException;
 
     /**
      * 提交

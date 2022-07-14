@@ -3,21 +3,12 @@ package com.taotao.cloud.workflow.biz.engine.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.Pagination;
-import jnpf.base.entity.DictionaryDataEntity;
-import jnpf.base.model.dbtable.DbTableCreate;
-import jnpf.database.model.entity.DbLinkEntity;
-import jnpf.exception.DataException;
-import jnpf.util.StringUtil;
-import jnpf.util.enums.DictionaryDataEnum;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ：JNPF开发平台组
- * @version: V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date ：2022/4/9 13:28
  */
 @Component
 public class ServiceAllUtil {

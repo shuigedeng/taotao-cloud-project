@@ -6,29 +6,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.FinishedProductEntity;
-import jnpf.form.entity.FinishedProductEntryEntity;
-import jnpf.form.mapper.FinishedProductMapper;
-import jnpf.form.model.finishedproduct.FinishedProductEntryEntityInfoModel;
-import jnpf.form.model.finishedproduct.FinishedProductForm;
-import jnpf.form.service.FinishedProductEntryService;
-import jnpf.form.service.FinishedProductService;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.FinishedProductEntity;
+import com.taotao.cloud.workflow.biz.form.entity.FinishedProductEntryEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.FinishedProductMapper;
+import com.taotao.cloud.workflow.biz.form.service.FinishedProductEntryService;
+import com.taotao.cloud.workflow.biz.form.service.FinishedProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 成品入库单
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class FinishedProductServiceImpl extends ServiceImpl<FinishedProductMapper, FinishedProductEntity> implements FinishedProductService {

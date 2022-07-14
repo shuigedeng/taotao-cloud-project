@@ -1,5 +1,9 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowTaskStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowEngineCrForm;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowEngineInfoVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowEngineListVO;
@@ -10,44 +14,22 @@ import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowExportModel;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowPageListVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.PaginationFlowEngine;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.workflow.biz.engine.service.FlowEngineService;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.engine.util.FormCloumnUtil;
+import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
+import com.taotao.cloud.workflow.biz.engine.util.VisualDevTableCre;
+import com.taotao.cloud.workflow.biz.model.FormAllModel;
+import com.taotao.cloud.workflow.biz.model.FormEnum;
+import com.taotao.cloud.workflow.biz.model.RecursionForm;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import javax.swing.table.TableModel;
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.entity.DictionaryDataEntity;
-import jnpf.base.vo.DownloadVO;
-import jnpf.base.vo.ListVO;
-import jnpf.base.vo.PageListVO;
-import jnpf.base.vo.PaginationVO;
-import jnpf.config.ConfigValueUtil;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowEngineEntity;
-import jnpf.engine.entity.FlowTaskEntity;
-import jnpf.engine.enums.FlowTaskStatusEnum;
-import jnpf.engine.service.FlowEngineService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.FormCloumnUtil;
-import jnpf.engine.util.ServiceAllUtil;
-import jnpf.engine.util.VisualDevTableCre;
-import jnpf.exception.WorkFlowException;
-import jnpf.model.FormAllModel;
-import jnpf.model.FormEnum;
-import jnpf.model.RecursionForm;
-import jnpf.model.visiual.FormDataField;
-import jnpf.model.visiual.FormDataModel;
-import jnpf.model.visiual.JnpfKeyConsts;
-import jnpf.model.visiual.TableModel;
-import jnpf.model.visiual.fields.FieLdsModel;
-import jnpf.util.FileUtil;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
-import jnpf.util.enums.ModuleTypeEnum;
-import jnpf.util.file.fileinfo.DataFileExport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,13 +45,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 流程设计
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "流程引擎", value = "FlowEngine")
+@Tag(tags = "流程引擎", value = "FlowEngine")
 @RestController
 @RequestMapping("/api/workflow/Engine/FlowEngine")
 public class FlowEngineController {
@@ -92,7 +69,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("获取流程引擎列表")
+    @Operation("获取流程引擎列表")
     @GetMapping
     public ActionResult list(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getPageList(pagination);
@@ -111,7 +88,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("流程引擎下拉框")
+    @Operation("流程引擎下拉框")
     @GetMapping("/Selector")
     public ActionResult<ListVO<FlowEngineListVO>> listSelect(Integer type) {
         PaginationFlowEngine pagination = new PaginationFlowEngine();
@@ -129,7 +106,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("表单主表属性")
+    @Operation("表单主表属性")
     @GetMapping("/{id}/FormDataFields")
     public ActionResult<ListVO<FormDataField>> getFormDataField(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
@@ -174,7 +151,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("表单列表")
+    @Operation("表单列表")
     @GetMapping("/{id}/FieldDataSelect")
     public ActionResult<ListVO<FlowEngineSelectVO>> getFormData(@PathVariable("id") String id) {
         List<FlowTaskEntity> flowTaskList = flowTaskService.getTaskList(id).stream().filter(t -> FlowTaskStatusEnum.Adopt.getCode().equals(t.getStatus())).collect(Collectors.toList());
@@ -194,7 +171,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("可见引擎下拉框")
+    @Operation("可见引擎下拉框")
     @GetMapping("/ListAll")
     public ActionResult<ListVO<FlowEngineListVO>> listAll() {
         PaginationFlowEngine pagination = new PaginationFlowEngine();
@@ -209,7 +186,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("可见的流程引擎列表")
+    @Operation("可见的流程引擎列表")
     @GetMapping("/PageListAll")
     public ActionResult<PageListVO<FlowPageListVO>> listAll(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getListAll(pagination, true);
@@ -224,7 +201,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取流程引擎信息")
+    @Operation("获取流程引擎信息")
     @GetMapping("/{id}")
     public ActionResult<FlowEngineInfoVO> info(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity flowEntity = flowEngineService.getInfo(id);
@@ -237,7 +214,7 @@ public class FlowEngineController {
      *
      * @return
      */
-    @ApiOperation("新建流程引擎")
+    @Operation("新建流程引擎")
     @PostMapping
     public ActionResult create(@RequestBody @Valid FlowEngineCrForm flowEngineCrForm) throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineCrForm, FlowEngineEntity.class);
@@ -267,7 +244,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("更新流程引擎")
+    @Operation("更新流程引擎")
     @PutMapping("/{id}")
     public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm) throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineUpForm, FlowEngineEntity.class);
@@ -300,7 +277,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("删除流程引擎")
+    @Operation("删除流程引擎")
     @DeleteMapping("/{id}")
     public ActionResult<String> delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
@@ -318,7 +295,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("复制流程表单")
+    @Operation("复制流程表单")
     @PostMapping("/{id}/Actions/Copy")
     public ActionResult copy(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = flowEngineService.getInfo(id);
@@ -340,7 +317,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("更新流程表单状态")
+    @Operation("更新流程表单状态")
     @PutMapping("/{id}/Actions/State")
     public ActionResult state(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
@@ -358,7 +335,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("发布流程设计")
+    @Operation("发布流程设计")
     @PostMapping("/Release/{id}")
     public ActionResult release(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
@@ -376,7 +353,7 @@ public class FlowEngineController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("停止流程设计")
+    @Operation("停止流程设计")
     @PostMapping("/Stop/{id}")
     public ActionResult stop(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
@@ -395,7 +372,7 @@ public class FlowEngineController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("工作流导出")
+    @Operation("工作流导出")
     @GetMapping("/{id}/Actions/ExportData")
     public ActionResult exportData(@PathVariable("id") String id) throws WorkFlowException {
         FlowExportModel model = flowEngineService.exportData(id);
@@ -410,7 +387,7 @@ public class FlowEngineController {
      * @return
      * @throws WorkFlowException
      */
-    @ApiOperation("工作流导入")
+    @Operation("工作流导入")
     @PostMapping(value = "/Actions/ImportData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ActionResult ImportData(@RequestPart("file") MultipartFile multipartFile) throws WorkFlowException {
         //判断是否为.json结尾

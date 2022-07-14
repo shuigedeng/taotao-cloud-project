@@ -1,20 +1,13 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import jnpf.base.ActionResult;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.PayDistributionEntity;
-import jnpf.form.model.paydistribution.PayDistributionForm;
-import jnpf.form.model.paydistribution.PayDistributionInfoVO;
-import jnpf.form.service.PayDistributionService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.PayDistributionEntity;
+import com.taotao.cloud.workflow.biz.form.model.paydistribution.PayDistributionInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.PayDistributionService;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,13 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 薪酬发放
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
-@Api(tags = "薪酬发放", value = "PayDistribution")
+@Tag(tags = "薪酬发放", value = "PayDistribution")
 @RestController
 @RequestMapping("/api/workflow/Form/PayDistribution")
 public class PayDistributionController {
@@ -48,7 +36,7 @@ public class PayDistributionController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取薪酬发放信息")
+    @Operation("获取薪酬发放信息")
     @GetMapping("/{id}")
     public ActionResult<PayDistributionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PayDistributionInfoVO vo = null;
@@ -75,7 +63,7 @@ public class PayDistributionController {
      * @param payDistributionForm 表单对象
      * @return
      */
-    @ApiOperation("新建薪酬发放")
+    @Operation("新建薪酬发放")
     @PostMapping
     public ActionResult create(@RequestBody PayDistributionForm payDistributionForm) throws WorkFlowException {
         PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
@@ -94,7 +82,7 @@ public class PayDistributionController {
      * @param id                  主键
      * @return
      */
-    @ApiOperation("修改薪酬发放")
+    @Operation("修改薪酬发放")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id) throws WorkFlowException {
         PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);

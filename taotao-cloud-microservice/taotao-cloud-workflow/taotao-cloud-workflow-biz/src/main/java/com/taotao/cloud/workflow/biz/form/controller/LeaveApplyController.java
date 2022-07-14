@@ -1,22 +1,17 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.LeaveApplyEntity;
+import com.taotao.cloud.workflow.biz.form.model.leaveapply.LeaveApplyForm;
+import com.taotao.cloud.workflow.biz.form.model.leaveapply.LeaveApplyInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.LeaveApplyService;
+
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.util.RegexUtils;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.LeaveApplyEntity;
-import jnpf.form.model.leaveapply.LeaveApplyForm;
-import jnpf.form.model.leaveapply.LeaveApplyInfoVO;
-import jnpf.form.service.LeaveApplyService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 请假申请
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "请假申请", value = "LeaveApply")
+@Tag(tags = "请假申请", value = "LeaveApply")
 @RestController
 @RequestMapping("/api/workflow/Form/LeaveApply")
 public class LeaveApplyController {
@@ -50,7 +41,7 @@ public class LeaveApplyController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取请假申请信息")
+    @Operation("获取请假申请信息")
     @GetMapping("/{id}")
     public ActionResult<LeaveApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         LeaveApplyInfoVO vo = null;
@@ -77,7 +68,7 @@ public class LeaveApplyController {
      * @param leaveApplyForm 表单对象
      * @return
      */
-    @ApiOperation("新建请假申请")
+    @Operation("新建请假申请")
     @PostMapping
     public ActionResult create(@RequestBody @Valid LeaveApplyForm leaveApplyForm) throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {
@@ -105,7 +96,7 @@ public class LeaveApplyController {
      * @param id             主键
      * @return
      */
-    @ApiOperation("修改请假申请")
+    @Operation("修改请假申请")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid LeaveApplyForm leaveApplyForm, @PathVariable("id") String id) throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {

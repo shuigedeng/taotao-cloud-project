@@ -1,25 +1,17 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowdelegate.FlowDelegatListVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowdelegate.FlowDelegateCrForm;
+import com.taotao.cloud.workflow.biz.engine.model.flowdelegate.FlowDelegateInfoVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowdelegate.FlowDelegateUpForm;
+import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
+
 import java.util.List;
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.Pagination;
-import jnpf.base.UserInfo;
-import jnpf.base.vo.PageListVO;
-import jnpf.base.vo.PaginationVO;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowDelegateEntity;
-import jnpf.engine.model.flowdelegate.FlowDelegatListVO;
-import jnpf.engine.model.flowdelegate.FlowDelegateCrForm;
-import jnpf.engine.model.flowdelegate.FlowDelegateInfoVO;
-import jnpf.engine.model.flowdelegate.FlowDelegateUpForm;
-import jnpf.engine.service.FlowDelegateService;
-import jnpf.exception.DataException;
-import jnpf.util.JsonUtil;
-import jnpf.util.JsonUtilEx;
-import jnpf.util.UserProvider;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 流程委托
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "流程委托", value = "FlowDelegate")
+@Tag(tags = "流程委托", value = "FlowDelegate")
 @RestController
 @RequestMapping("/api/workflow/Engine/FlowDelegate")
 public class FlowDelegateController {
@@ -54,7 +42,7 @@ public class FlowDelegateController {
      * @param pagination
      * @return
      */
-    @ApiOperation("获取流程委托列表")
+    @Operation("获取流程委托列表")
     @GetMapping
     public ActionResult<PageListVO<FlowDelegatListVO>> list(Pagination pagination) {
         List<FlowDelegateEntity> list = flowDelegateService.getList(pagination);
@@ -69,7 +57,7 @@ public class FlowDelegateController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取流程委托信息")
+    @Operation("获取流程委托信息")
     @GetMapping("/{id}")
     public ActionResult<FlowDelegateInfoVO> info(@PathVariable("id") String id) throws DataException {
         FlowDelegateEntity entity = flowDelegateService.getInfo(id);
@@ -83,7 +71,7 @@ public class FlowDelegateController {
      * @param flowDelegateCrForm 实体对象
      * @return
      */
-    @ApiOperation("新建流程委托")
+    @Operation("新建流程委托")
     @PostMapping
     public ActionResult create(@RequestBody @Valid FlowDelegateCrForm flowDelegateCrForm) {
         FlowDelegateEntity entity = JsonUtil.getJsonToBean(flowDelegateCrForm, FlowDelegateEntity.class);
@@ -101,7 +89,7 @@ public class FlowDelegateController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("更新流程委托")
+    @Operation("更新流程委托")
     @PutMapping("/{id}")
     public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
         FlowDelegateEntity entity = JsonUtil.getJsonToBean(flowDelegateUpForm, FlowDelegateEntity.class);
@@ -122,7 +110,7 @@ public class FlowDelegateController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("删除流程委托")
+    @Operation("删除流程委托")
     @DeleteMapping("/{id}")
     public ActionResult delete(@PathVariable("id") String id) {
         FlowDelegateEntity entity = flowDelegateService.getInfo(id);

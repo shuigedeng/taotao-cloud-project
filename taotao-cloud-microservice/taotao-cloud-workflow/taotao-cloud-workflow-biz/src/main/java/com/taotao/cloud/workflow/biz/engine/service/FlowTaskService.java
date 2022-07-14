@@ -2,20 +2,15 @@ package com.taotao.cloud.workflow.biz.engine.service;
 
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowtask.PaginationFlowTask;
+
 import java.util.List;
-import jnpf.engine.entity.FlowTaskEntity;
-import jnpf.engine.model.flowbefore.FlowBatchModel;
-import jnpf.engine.model.flowtask.FlowTaskListModel;
-import jnpf.engine.model.flowtask.PaginationFlowTask;
-import jnpf.exception.WorkFlowException;
 
 /**
  * 流程任务
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
 public interface FlowTaskService extends IService<FlowTaskEntity> {
 

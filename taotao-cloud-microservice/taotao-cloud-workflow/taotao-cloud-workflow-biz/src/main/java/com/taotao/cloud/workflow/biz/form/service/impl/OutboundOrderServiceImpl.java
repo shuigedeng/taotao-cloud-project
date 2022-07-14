@@ -6,29 +6,18 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jnpf.base.service.BillRuleService;
-import jnpf.engine.service.FlowTaskService;
-import jnpf.engine.util.ModelUtil;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.OutboundEntryEntity;
-import jnpf.form.entity.OutboundOrderEntity;
-import jnpf.form.mapper.OutboundOrderMapper;
-import jnpf.form.model.outboundorder.OutboundEntryEntityInfoModel;
-import jnpf.form.model.outboundorder.OutboundOrderForm;
-import jnpf.form.service.OutboundEntryService;
-import jnpf.form.service.OutboundOrderService;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
+
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
+import com.taotao.cloud.workflow.biz.form.entity.OutboundEntryEntity;
+import com.taotao.cloud.workflow.biz.form.entity.OutboundOrderEntity;
+import com.taotao.cloud.workflow.biz.form.mapper.OutboundOrderMapper;
+import com.taotao.cloud.workflow.biz.form.service.OutboundEntryService;
+import com.taotao.cloud.workflow.biz.form.service.OutboundOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 出库单
- *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月29日 上午9:18
  */
 @Service
 public class OutboundOrderServiceImpl extends ServiceImpl<OutboundOrderMapper, OutboundOrderEntity> implements OutboundOrderService {

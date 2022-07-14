@@ -1,22 +1,15 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.util.RegexUtils;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowTaskOperatorEntity;
-import jnpf.engine.enums.FlowStatusEnum;
-import jnpf.engine.service.FlowTaskOperatorService;
-import jnpf.exception.DataException;
-import jnpf.exception.WorkFlowException;
-import jnpf.form.entity.ArticlesWarehousEntity;
-import jnpf.form.model.articleswarehous.ArticlesWarehousForm;
-import jnpf.form.model.articleswarehous.ArticlesWarehousInfoVO;
-import jnpf.form.service.ArticlesWarehousService;
-import jnpf.util.JsonUtil;
-import jnpf.util.StringUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
+import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
+import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
+import com.taotao.cloud.workflow.biz.form.entity.ArticlesWarehousEntity;
+import com.taotao.cloud.workflow.biz.form.model.articleswarehous.ArticlesWarehousForm;
+import com.taotao.cloud.workflow.biz.form.model.articleswarehous.ArticlesWarehousInfoVO;
+import com.taotao.cloud.workflow.biz.form.service.ArticlesWarehousService;
+
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 用品入库申请表
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
- * @date 2019年9月27日 上午9:18
  */
-@Api(tags = "用品入库申请表", value = "ArticlesWarehous")
+@Tag(tags = "用品入库申请表", value = "ArticlesWarehous")
 @RestController
 @RequestMapping("/api/workflow/Form/ArticlesWarehous")
 public class ArticlesWarehousController {
@@ -50,7 +39,7 @@ public class ArticlesWarehousController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取用品入库申请表信息")
+    @Operation("获取用品入库申请表信息")
     @GetMapping("/{id}")
     public ActionResult<ArticlesWarehousInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ArticlesWarehousInfoVO vo = null;
@@ -77,7 +66,7 @@ public class ArticlesWarehousController {
      * @param articlesWarehousForm 表单对象
      * @return
      */
-    @ApiOperation("新建用品入库申请表")
+    @Operation("新建用品入库申请表")
     @PostMapping
     public ActionResult create(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm) throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null && StringUtil.isNotEmpty(articlesWarehousForm.getEstimatePeople()) && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
@@ -99,7 +88,7 @@ public class ArticlesWarehousController {
      * @param id                   主键
      * @return
      */
-    @ApiOperation("修改用品入库申请表")
+    @Operation("修改用品入库申请表")
     @PutMapping("/{id}")
     public ActionResult update(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm, @PathVariable("id") String id) throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null && StringUtil.isNotEmpty(articlesWarehousForm.getEstimatePeople()) && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {

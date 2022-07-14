@@ -1,26 +1,14 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentListVO;
+import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentPagination;
+import com.taotao.cloud.workflow.biz.engine.service.FlowCommentService;
+import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import jnpf.base.ActionResult;
-import jnpf.base.UserInfo;
-import jnpf.base.vo.PaginationVO;
-import jnpf.constant.MsgCode;
-import jnpf.engine.entity.FlowCommentEntity;
-import jnpf.engine.model.flowcomment.FlowCommentForm;
-import jnpf.engine.model.flowcomment.FlowCommentInfoVO;
-import jnpf.engine.model.flowcomment.FlowCommentListVO;
-import jnpf.engine.model.flowcomment.FlowCommentPagination;
-import jnpf.engine.service.FlowCommentService;
-import jnpf.engine.util.ServiceAllUtil;
-import jnpf.exception.DataException;
-import jnpf.permission.entity.UserEntity;
-import jnpf.util.JsonUtil;
-import jnpf.util.UploaderUtil;
-import jnpf.util.UserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,11 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 流程评论
  *
- * @author JNPF开发平台组
- * @version V3.1.0
- * @copyright 引迈信息技术有限公司
  */
-@Api(tags = "流程评论", value = "Comment")
+@Tag(tags = "流程评论", value = "Comment")
 @RestController
 @RequestMapping("/api/workflow/Engine/FlowComment")
 public class FlowCommentController {
@@ -57,7 +42,7 @@ public class FlowCommentController {
      * @param pagination
      * @return
      */
-    @ApiOperation("获取流程评论列表")
+    @Operation("获取流程评论列表")
     @GetMapping
     public ActionResult list(FlowCommentPagination pagination) {
         List<FlowCommentEntity> list = flowCommentService.getlist(pagination);
@@ -84,7 +69,7 @@ public class FlowCommentController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("获取流程评论信息")
+    @Operation("获取流程评论信息")
     @GetMapping("/{id}")
     public ActionResult info(@PathVariable("id") String id) {
         FlowCommentEntity entity = flowCommentService.getInfo(id);
@@ -98,7 +83,7 @@ public class FlowCommentController {
      * @param commentForm 实体对象
      * @return
      */
-    @ApiOperation("新建流程评论")
+    @Operation("新建流程评论")
     @PostMapping
     public ActionResult create(@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
         FlowCommentEntity entity = JsonUtil.getJsonToBean(commentForm, FlowCommentEntity.class);
@@ -112,7 +97,7 @@ public class FlowCommentController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("更新流程评论")
+    @Operation("更新流程评论")
     @PutMapping("/{id}")
     public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm) throws DataException {
         FlowCommentEntity info = flowCommentService.getInfo(id);
@@ -130,7 +115,7 @@ public class FlowCommentController {
      * @param id 主键值
      * @return
      */
-    @ApiOperation("删除流程评论")
+    @Operation("删除流程评论")
     @DeleteMapping("/{id}")
     public ActionResult delete(@PathVariable("id") String id) {
         FlowCommentEntity entity = flowCommentService.getInfo(id);
