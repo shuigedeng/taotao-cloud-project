@@ -45,7 +45,7 @@ public class FlowLaunchController {
      */
     @Operation("获取流程发起列表(带分页)")
     @GetMapping
-    public ActionResult<PageListVO<FlowLaunchListVO>> list(PaginationFlowTask paginationFlowTask) {
+    public Result<PageListVO<FlowLaunchListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> data = flowTaskService.getLaunchList(paginationFlowTask);
         List<FlowEngineEntity> engineList = flowEngineService.getFlowList(data.stream().map(t -> t.getFlowId()).collect(Collectors.toList()));
         List<FlowLaunchListVO> listVO = new LinkedList<>();
@@ -60,7 +60,7 @@ public class FlowLaunchController {
             listVO.add(vo);
         }
         PaginationVO paginationVO = JsonUtil.getJsonToBean(paginationFlowTask, PaginationVO.class);
-        return ActionResult.page(listVO, paginationVO);
+        return Result.page(listVO, paginationVO);
     }
 
     /**
@@ -71,19 +71,19 @@ public class FlowLaunchController {
      */
     @Operation("删除流程发起")
     @DeleteMapping("/{id}")
-    public ActionResult delete(@PathVariable("id") String id) throws WorkFlowException {
+    public Result delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         if (entity != null) {
             if (entity.getFlowType() == 1) {
-                return ActionResult.fail("功能流程不能删除");
+                return Result.fail("功能流程不能删除");
             }
             if (!FlowNature.ParentId.equals(entity.getParentId()) && StringUtil.isNotEmpty(entity.getParentId())) {
-                return ActionResult.fail("子表数据不能删除");
+                return Result.fail("子表数据不能删除");
             }
             flowTaskService.delete(entity);
-            return ActionResult.success(MsgCode.SU003.get());
+            return Result.success(MsgCode.SU003.get());
         }
-        return ActionResult.fail(MsgCode.FA003.get());
+        return Result.fail(MsgCode.FA003.get());
     }
 
     /**
@@ -94,12 +94,12 @@ public class FlowLaunchController {
      */
     @Operation("发起催办")
     @PostMapping("/Press/{id}")
-    public ActionResult press(@PathVariable("id") String id) throws WorkFlowException {
+    public Result press(@PathVariable("id") String id) throws WorkFlowException {
         boolean flag = flowTaskNewService.press(id);
         if (flag) {
-            return ActionResult.success("催办成功");
+            return Result.success("催办成功");
         }
-        return ActionResult.fail("未找到催办人");
+        return Result.fail("未找到催办人");
     }
 
     /**
@@ -112,10 +112,10 @@ public class FlowLaunchController {
      */
     @Operation("撤回流程发起")
     @PutMapping("/{id}/Actions/Withdraw")
-    public ActionResult revoke(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+    public Result revoke(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);
         FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
         flowTaskNewService.revoke(flowTaskEntity, flowModel);
-        return ActionResult.success("撤回成功");
+        return Result.success("撤回成功");
     }
 }

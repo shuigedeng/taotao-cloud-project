@@ -43,7 +43,7 @@ public class DebitBillController {
      */
     @Operation("获取借支单信息")
     @GetMapping("/{id}")
-    public ActionResult<DebitBillInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<DebitBillInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DebitBillInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -59,7 +59,7 @@ public class DebitBillController {
             DebitBillEntity entity = debitBillService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, DebitBillInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -70,17 +70,17 @@ public class DebitBillController {
      */
     @Operation("新建借支单")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid DebitBillForm debitBillForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid DebitBillForm debitBillForm) throws WorkFlowException {
         if (debitBillForm.getAmountDebit() != null && !"".equals(String.valueOf(debitBillForm.getAmountDebit())) && !RegexUtils.checkDecimals2(String.valueOf(debitBillForm.getAmountDebit()))) {
-            return ActionResult.fail("借支金额必须大于0，最多可以输入两位小数点");
+            return Result.fail("借支金额必须大于0，最多可以输入两位小数点");
         }
         DebitBillEntity entity = JsonUtil.getJsonToBean(debitBillForm, DebitBillEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(debitBillForm.getStatus())) {
             debitBillService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         debitBillService.submit(entity.getId(), entity, debitBillForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -92,16 +92,16 @@ public class DebitBillController {
      */
     @Operation("修改借支单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid DebitBillForm debitBillForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid DebitBillForm debitBillForm, @PathVariable("id") String id) throws WorkFlowException {
         if (debitBillForm.getAmountDebit() != null && !"".equals(String.valueOf(debitBillForm.getAmountDebit())) && !RegexUtils.checkDecimals2(String.valueOf(debitBillForm.getAmountDebit()))) {
-            return ActionResult.fail("借支金额必须大于0，最多可以输入两位小数点");
+            return Result.fail("借支金额必须大于0，最多可以输入两位小数点");
         }
         DebitBillEntity entity = JsonUtil.getJsonToBean(debitBillForm, DebitBillEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(debitBillForm.getStatus())) {
             debitBillService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         debitBillService.submit(id, entity, debitBillForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

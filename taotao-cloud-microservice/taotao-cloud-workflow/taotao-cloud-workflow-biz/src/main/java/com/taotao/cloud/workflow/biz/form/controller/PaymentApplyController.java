@@ -40,7 +40,7 @@ public class PaymentApplyController {
      */
     @Operation("获取付款申请单信息")
     @GetMapping("/{id}")
-    public ActionResult<PaymentApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<PaymentApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PaymentApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class PaymentApplyController {
             PaymentApplyEntity entity = paymentApplyService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, PaymentApplyInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -67,14 +67,14 @@ public class PaymentApplyController {
      */
     @Operation("新建付款申请单")
     @PostMapping
-    public ActionResult create(@RequestBody PaymentApplyForm paymentApplyForm) throws WorkFlowException {
+    public Result create(@RequestBody PaymentApplyForm paymentApplyForm) throws WorkFlowException {
         PaymentApplyEntity entity = JsonUtil.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(paymentApplyForm.getStatus())) {
             paymentApplyService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         paymentApplyService.submit(entity.getId(), entity,paymentApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -86,13 +86,13 @@ public class PaymentApplyController {
      */
     @Operation("修改付款申请单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody PaymentApplyForm paymentApplyForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody PaymentApplyForm paymentApplyForm, @PathVariable("id") String id) throws WorkFlowException {
         PaymentApplyEntity entity = JsonUtil.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(paymentApplyForm.getStatus())) {
             paymentApplyService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         paymentApplyService.submit(id, entity,paymentApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

@@ -71,7 +71,7 @@ public class FlowEngineController {
      */
     @Operation("获取流程引擎列表")
     @GetMapping
-    public ActionResult list(FlowPagination pagination) {
+    public Result list(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getPageList(pagination);
         List<DictionaryDataEntity> dictionList = serviceUtil.getDictionName(list.stream().map(t -> t.getCategory()).collect(Collectors.toList()));
         for (FlowEngineEntity entity : list) {
@@ -80,7 +80,7 @@ public class FlowEngineController {
         }
         PaginationVO paginationVO = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
         List<FlowPageListVO> listVO = JsonUtil.getJsonToList(list, FlowPageListVO.class);
-        return ActionResult.page(listVO, paginationVO);
+        return Result.page(listVO, paginationVO);
     }
 
     /**
@@ -90,7 +90,7 @@ public class FlowEngineController {
      */
     @Operation("流程引擎下拉框")
     @GetMapping("/Selector")
-    public ActionResult<ListVO<FlowEngineListVO>> listSelect(Integer type) {
+    public Result<ListVO<FlowEngineListVO>> listSelect(Integer type) {
         PaginationFlowEngine pagination = new PaginationFlowEngine();
         pagination.setFormType(type);
         pagination.setEnabledMark(1);
@@ -98,7 +98,7 @@ public class FlowEngineController {
         List<FlowEngineListVO> treeList = flowEngineService.getTreeList(pagination, true);
         ListVO vo = new ListVO();
         vo.setList(treeList);
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -108,7 +108,7 @@ public class FlowEngineController {
      */
     @Operation("表单主表属性")
     @GetMapping("/{id}/FormDataFields")
-    public ActionResult<ListVO<FormDataField>> getFormDataField(@PathVariable("id") String id) throws WorkFlowException {
+    public Result<ListVO<FormDataField>> getFormDataField(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         List<FormDataField> formDataFieldList = new ArrayList<>();
         if (entity.getFormType() == 1) {
@@ -143,7 +143,7 @@ public class FlowEngineController {
         }
         ListVO<FormDataField> listVO = new ListVO();
         listVO.setList(formDataFieldList);
-        return ActionResult.success(listVO);
+        return Result.success(listVO);
     }
 
     /**
@@ -153,7 +153,7 @@ public class FlowEngineController {
      */
     @Operation("表单列表")
     @GetMapping("/{id}/FieldDataSelect")
-    public ActionResult<ListVO<FlowEngineSelectVO>> getFormData(@PathVariable("id") String id) {
+    public Result<ListVO<FlowEngineSelectVO>> getFormData(@PathVariable("id") String id) {
         List<FlowTaskEntity> flowTaskList = flowTaskService.getTaskList(id).stream().filter(t -> FlowTaskStatusEnum.Adopt.getCode().equals(t.getStatus())).collect(Collectors.toList());
         List<FlowEngineSelectVO> vo = new ArrayList<>();
         for (FlowTaskEntity taskEntity : flowTaskList) {
@@ -163,7 +163,7 @@ public class FlowEngineController {
         }
         ListVO listVO = new ListVO();
         listVO.setList(vo);
-        return ActionResult.success(listVO);
+        return Result.success(listVO);
     }
 
     /**
@@ -173,12 +173,12 @@ public class FlowEngineController {
      */
     @Operation("可见引擎下拉框")
     @GetMapping("/ListAll")
-    public ActionResult<ListVO<FlowEngineListVO>> listAll() {
+    public Result<ListVO<FlowEngineListVO>> listAll() {
         PaginationFlowEngine pagination = new PaginationFlowEngine();
         List<FlowEngineListVO> treeList = flowEngineService.getTreeList(pagination, false);
         ListVO vo = new ListVO();
         vo.setList(treeList);
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -188,11 +188,11 @@ public class FlowEngineController {
      */
     @Operation("可见的流程引擎列表")
     @GetMapping("/PageListAll")
-    public ActionResult<PageListVO<FlowPageListVO>> listAll(FlowPagination pagination) {
+    public Result<PageListVO<FlowPageListVO>> listAll(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getListAll(pagination, true);
         PaginationVO paginationVO = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
         List<FlowPageListVO> listVO = JsonUtil.getJsonToList(list, FlowPageListVO.class);
-        return ActionResult.page(listVO, paginationVO);
+        return Result.page(listVO, paginationVO);
     }
 
     /**
@@ -203,10 +203,10 @@ public class FlowEngineController {
      */
     @Operation("获取流程引擎信息")
     @GetMapping("/{id}")
-    public ActionResult<FlowEngineInfoVO> info(@PathVariable("id") String id) throws WorkFlowException {
+    public Result<FlowEngineInfoVO> info(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity flowEntity = flowEngineService.getInfo(id);
         FlowEngineInfoVO vo = JsonUtil.getJsonToBean(flowEntity, FlowEngineInfoVO.class);
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -216,13 +216,13 @@ public class FlowEngineController {
      */
     @Operation("新建流程引擎")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid FlowEngineCrForm flowEngineCrForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid FlowEngineCrForm flowEngineCrForm) throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineCrForm, FlowEngineEntity.class);
         if (flowEngineService.isExistByFullName(flowEngineEntity.getFullName(), flowEngineEntity.getId())) {
-            return ActionResult.fail("流程名称不能重复");
+            return Result.fail("流程名称不能重复");
         }
         if (flowEngineService.isExistByEnCode(flowEngineEntity.getEnCode(), flowEngineEntity.getId())) {
-            return ActionResult.fail("流程编码不能重复");
+            return Result.fail("流程编码不能重复");
         }
         if (flowEngineEntity.getFormType() != 1) {
             FormDataModel formData = JsonUtil.getJsonToBean(flowEngineEntity.getFormData(), FormDataModel.class);
@@ -231,11 +231,11 @@ public class FlowEngineController {
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             List<FormAllModel> formAllModel = new ArrayList<>();
             if (FormCloumnUtil.repetition(recursionForm, formAllModel)) {
-                return ActionResult.fail("子表重复");
+                return Result.fail("子表重复");
             }
         }
         flowEngineService.create(flowEngineEntity);
-        return ActionResult.success(MsgCode.SU001.get());
+        return Result.success(MsgCode.SU001.get());
     }
 
     /**
@@ -246,13 +246,13 @@ public class FlowEngineController {
      */
     @Operation("更新流程引擎")
     @PutMapping("/{id}")
-    public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm) throws WorkFlowException {
+    public Result update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm) throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineUpForm, FlowEngineEntity.class);
         if (flowEngineService.isExistByFullName(flowEngineUpForm.getFullName(), id)) {
-            return ActionResult.fail("流程名称不能重复");
+            return Result.fail("流程名称不能重复");
         }
         if (flowEngineService.isExistByEnCode(flowEngineUpForm.getEnCode(), id)) {
-            return ActionResult.fail("流程编码不能重复");
+            return Result.fail("流程编码不能重复");
         }
         if (flowEngineEntity.getFormType() != 1) {
             FormDataModel formData = JsonUtil.getJsonToBean(flowEngineEntity.getFormData(), FormDataModel.class);
@@ -261,14 +261,14 @@ public class FlowEngineController {
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             List<FormAllModel> formAllModel = new ArrayList<>();
             if (FormCloumnUtil.repetition(recursionForm, formAllModel)) {
-                return ActionResult.fail("子表重复");
+                return Result.fail("子表重复");
             }
         }
         boolean flag = flowEngineService.updateVisible(id, flowEngineEntity);
         if (flag == false) {
-            return ActionResult.success(MsgCode.FA002.get());
+            return Result.success(MsgCode.FA002.get());
         }
-        return ActionResult.success(MsgCode.SU004.get());
+        return Result.success(MsgCode.SU004.get());
     }
 
     /**
@@ -279,14 +279,14 @@ public class FlowEngineController {
      */
     @Operation("删除流程引擎")
     @DeleteMapping("/{id}")
-    public ActionResult<String> delete(@PathVariable("id") String id) throws WorkFlowException {
+    public Result<String> delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         List<FlowTaskEntity> taskNodeList = flowTaskService.getTaskList(entity.getId());
         if (taskNodeList.size() > 0) {
-            return ActionResult.fail("引擎在使用，不可删除");
+            return Result.fail("引擎在使用，不可删除");
         }
         flowEngineService.delete(entity);
-        return ActionResult.success(MsgCode.SU003.get());
+        return Result.success(MsgCode.SU003.get());
     }
 
     /**
@@ -297,7 +297,7 @@ public class FlowEngineController {
      */
     @Operation("复制流程表单")
     @PostMapping("/{id}/Actions/Copy")
-    public ActionResult copy(@PathVariable("id") String id) throws WorkFlowException {
+    public Result copy(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = flowEngineService.getInfo(id);
         if (flowEngineEntity != null) {
             String copyNum = UUID.randomUUID().toString().substring(0, 5);
@@ -306,9 +306,9 @@ public class FlowEngineController {
             flowEngineEntity.setCreatorTime(new Date());
             flowEngineEntity.setId(null);
             flowEngineService.copy(flowEngineEntity);
-            return ActionResult.success(MsgCode.SU007.get());
+            return Result.success(MsgCode.SU007.get());
         }
-        return ActionResult.fail(MsgCode.FA004.get());
+        return Result.fail(MsgCode.FA004.get());
     }
 
     /**
@@ -319,14 +319,14 @@ public class FlowEngineController {
      */
     @Operation("更新流程表单状态")
     @PutMapping("/{id}/Actions/State")
-    public ActionResult state(@PathVariable("id") String id) throws WorkFlowException {
+    public Result state(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         if (entity != null) {
             entity.setEnabledMark("1".equals(String.valueOf(entity.getEnabledMark())) ? 0 : 1);
             flowEngineService.update(id, entity);
-            return ActionResult.success("更新表单成功");
+            return Result.success("更新表单成功");
         }
-        return ActionResult.fail(MsgCode.FA002.get());
+        return Result.fail(MsgCode.FA002.get());
     }
 
     /**
@@ -337,14 +337,14 @@ public class FlowEngineController {
      */
     @Operation("发布流程设计")
     @PostMapping("/Release/{id}")
-    public ActionResult release(@PathVariable("id") String id) throws WorkFlowException {
+    public Result release(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         if (entity != null) {
             entity.setEnabledMark(1);
             flowEngineService.update(id, entity);
-            return ActionResult.success(MsgCode.SU011.get());
+            return Result.success(MsgCode.SU011.get());
         }
-        return ActionResult.fail(MsgCode.FA011.get());
+        return Result.fail(MsgCode.FA011.get());
     }
 
     /**
@@ -355,14 +355,14 @@ public class FlowEngineController {
      */
     @Operation("停止流程设计")
     @PostMapping("/Stop/{id}")
-    public ActionResult stop(@PathVariable("id") String id) throws WorkFlowException {
+    public Result stop(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         if (entity != null) {
             entity.setEnabledMark(0);
             flowEngineService.update(id, entity);
-            return ActionResult.success(MsgCode.SU008.get());
+            return Result.success(MsgCode.SU008.get());
         }
-        return ActionResult.fail(MsgCode.FA008.get());
+        return Result.fail(MsgCode.FA008.get());
     }
 
     /**
@@ -374,10 +374,10 @@ public class FlowEngineController {
      */
     @Operation("工作流导出")
     @GetMapping("/{id}/Actions/ExportData")
-    public ActionResult exportData(@PathVariable("id") String id) throws WorkFlowException {
+    public Result exportData(@PathVariable("id") String id) throws WorkFlowException {
         FlowExportModel model = flowEngineService.exportData(id);
         DownloadVO downloadVO = fileExport.exportFile(model, configValueUtil.getTemporaryFilePath(), model.getFlowEngine().getFullName(), ModuleTypeEnum.FLOW_FLOWENGINE.getTableName());
-        return ActionResult.success(downloadVO);
+        return Result.success(downloadVO);
     }
 
     /**
@@ -389,10 +389,10 @@ public class FlowEngineController {
      */
     @Operation("工作流导入")
     @PostMapping(value = "/Actions/ImportData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ActionResult ImportData(@RequestPart("file") MultipartFile multipartFile) throws WorkFlowException {
+    public Result ImportData(@RequestPart("file") MultipartFile multipartFile) throws WorkFlowException {
         //判断是否为.json结尾
         if (FileUtil.existsSuffix(multipartFile, ModuleTypeEnum.FLOW_FLOWENGINE.getTableName())) {
-            return ActionResult.fail(MsgCode.IMP002.get());
+            return Result.fail(MsgCode.IMP002.get());
         }
         //获取文件内容
         String fileContent = FileUtil.getFileContent(multipartFile, configValueUtil.getTemporaryFilePath());

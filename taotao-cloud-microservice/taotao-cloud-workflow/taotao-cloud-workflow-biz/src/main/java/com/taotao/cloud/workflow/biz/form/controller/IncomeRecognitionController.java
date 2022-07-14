@@ -42,7 +42,7 @@ public class IncomeRecognitionController {
      */
     @Operation("获取收入确认分析表信息")
     @GetMapping("/{id}")
-    public ActionResult<IncomeRecognitionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<IncomeRecognitionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         IncomeRecognitionInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -58,7 +58,7 @@ public class IncomeRecognitionController {
             IncomeRecognitionEntity entity = incomeRecognitionService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, IncomeRecognitionInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -69,14 +69,14 @@ public class IncomeRecognitionController {
      */
     @Operation("新建收入确认分析表")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm) throws WorkFlowException {
         IncomeRecognitionEntity entity = JsonUtil.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(incomeRecognitionForm.getStatus())) {
             incomeRecognitionService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         incomeRecognitionService.submit(entity.getId(), entity, incomeRecognitionForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -88,13 +88,13 @@ public class IncomeRecognitionController {
      */
     @Operation("修改收入确认分析表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm, @PathVariable("id") String id) throws WorkFlowException {
         IncomeRecognitionEntity entity = JsonUtil.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(incomeRecognitionForm.getStatus())) {
             incomeRecognitionService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         incomeRecognitionService.submit(id, entity, incomeRecognitionForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

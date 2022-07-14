@@ -45,7 +45,7 @@ public class WarehouseReceiptController {
      */
     @Operation("获取入库申请单信息")
     @GetMapping("/{id}")
-    public ActionResult<WarehouseReceiptInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<WarehouseReceiptInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         WarehouseReceiptInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -63,7 +63,7 @@ public class WarehouseReceiptController {
             vo = JsonUtil.getJsonToBean(entity, WarehouseReceiptInfoVO.class);
             vo.setEntryList(JsonUtil.getJsonToList(entityList, WarehouseReceiptEntityInfoModel.class));
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -75,15 +75,15 @@ public class WarehouseReceiptController {
      */
     @Operation("新建入库申请单")
     @PostMapping
-    public ActionResult create(@RequestBody WarehouseReceiptForm warehouseReceiptForm) throws WorkFlowException {
+    public Result create(@RequestBody WarehouseReceiptForm warehouseReceiptForm) throws WorkFlowException {
         WarehouseReceiptEntity warehouse = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
         List<WarehouseEntryEntity> warehouseEntryList = JsonUtil.getJsonToList(warehouseReceiptForm.getEntryList(), WarehouseEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(warehouseReceiptForm.getStatus())) {
             warehouseReceiptService.save(warehouse.getId(), warehouse, warehouseEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         warehouseReceiptService.submit(warehouse.getId(), warehouse, warehouseEntryList,warehouseReceiptForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -96,14 +96,14 @@ public class WarehouseReceiptController {
      */
     @Operation("修改入库申请单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody WarehouseReceiptForm warehouseReceiptForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody WarehouseReceiptForm warehouseReceiptForm, @PathVariable("id") String id) throws WorkFlowException {
         WarehouseReceiptEntity warehouse = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
         List<WarehouseEntryEntity> warehouseEntryList = JsonUtil.getJsonToList(warehouseReceiptForm.getEntryList(), WarehouseEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(warehouseReceiptForm.getStatus())) {
             warehouseReceiptService.save(id, warehouse, warehouseEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         warehouseReceiptService.submit(id, warehouse, warehouseEntryList,warehouseReceiptForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

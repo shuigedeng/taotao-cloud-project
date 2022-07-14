@@ -38,7 +38,7 @@ public class SalesOrderController {
      */
     @Operation("获取销售订单信息")
     @GetMapping("/{id}")
-    public ActionResult<SalesOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<SalesOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         SalesOrderInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class SalesOrderController {
             vo = JsonUtil.getJsonToBean(entity, SalesOrderInfoVO.class);
             vo.setEntryList(JsonUtil.getJsonToList(entityList, SalesOrderEntryEntityInfoModel.class));
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -68,15 +68,15 @@ public class SalesOrderController {
      */
     @Operation("新建销售订单")
     @PostMapping
-    public ActionResult create(@RequestBody SalesOrderForm salesOrderForm) throws WorkFlowException {
+    public Result create(@RequestBody SalesOrderForm salesOrderForm) throws WorkFlowException {
         SalesOrderEntity sales = JsonUtil.getJsonToBean(salesOrderForm, SalesOrderEntity.class);
         List<SalesOrderEntryEntity> salesEntryList = JsonUtil.getJsonToList(salesOrderForm.getEntryList(), SalesOrderEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesOrderForm.getStatus())) {
             salesOrderService.save(sales.getId(), sales, salesEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         salesOrderService.submit(sales.getId(), sales, salesEntryList,salesOrderForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -89,14 +89,14 @@ public class SalesOrderController {
      */
     @Operation("修改销售订单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody SalesOrderForm salesOrderForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody SalesOrderForm salesOrderForm, @PathVariable("id") String id) throws WorkFlowException {
         SalesOrderEntity sales = JsonUtil.getJsonToBean(salesOrderForm, SalesOrderEntity.class);
         List<SalesOrderEntryEntity> salesEntryList = JsonUtil.getJsonToList(salesOrderForm.getEntryList(), SalesOrderEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesOrderForm.getStatus())) {
             salesOrderService.save(id, sales, salesEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         salesOrderService.submit(id, sales, salesEntryList,salesOrderForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

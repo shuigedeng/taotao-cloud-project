@@ -42,7 +42,7 @@ public class DocumentApprovalController {
      */
     @Operation("获取文件签批意见表信息")
     @GetMapping("/{id}")
-    public ActionResult<DocumentApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<DocumentApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DocumentApprovalInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -58,7 +58,7 @@ public class DocumentApprovalController {
             DocumentApprovalEntity entity = documentApprovalService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, DocumentApprovalInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -69,14 +69,14 @@ public class DocumentApprovalController {
      */
     @Operation("新建文件签批意见表")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid DocumentApprovalForm documentApprovalForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid DocumentApprovalForm documentApprovalForm) throws WorkFlowException {
         DocumentApprovalEntity entity = JsonUtil.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentApprovalForm.getStatus())) {
             documentApprovalService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         documentApprovalService.submit(entity.getId(), entity, documentApprovalForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -88,13 +88,13 @@ public class DocumentApprovalController {
      */
     @Operation("修改文件签批意见表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid DocumentApprovalForm documentApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid DocumentApprovalForm documentApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
         DocumentApprovalEntity entity = JsonUtil.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentApprovalForm.getStatus())) {
             documentApprovalService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         documentApprovalService.submit(id, entity, documentApprovalForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

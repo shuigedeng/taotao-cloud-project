@@ -440,13 +440,13 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
 
     @Override
     @DSTransactional
-    public ActionResult ImportData(FlowEngineEntity entity, List<FlowEngineVisibleEntity> visibleList) throws WorkFlowException {
+    public Result ImportData(FlowEngineEntity entity, List<FlowEngineVisibleEntity> visibleList) throws WorkFlowException {
         if (entity != null) {
             if (isExistByFullName(entity.getFullName(), null)) {
-                return ActionResult.fail("流程名称不能重复");
+                return Result.fail("流程名称不能重复");
             }
             if (isExistByEnCode(entity.getEnCode(), null)) {
-                return ActionResult.fail("流程编码不能重复");
+                return Result.fail("流程编码不能重复");
             }
             try {
                 this.save(entity);
@@ -458,8 +458,8 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             } catch (Exception e) {
                 throw new WorkFlowException(MsgCode.IMP003.get());
             }
-            return ActionResult.success(MsgCode.IMP001.get());
+            return Result.success(MsgCode.IMP001.get());
         }
-        return ActionResult.fail("导入数据格式不正确");
+        return Result.fail("导入数据格式不正确");
     }
 }

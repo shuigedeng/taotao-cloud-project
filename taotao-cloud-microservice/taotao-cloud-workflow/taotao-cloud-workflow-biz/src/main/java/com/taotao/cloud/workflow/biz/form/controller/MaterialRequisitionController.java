@@ -45,7 +45,7 @@ public class MaterialRequisitionController {
      */
     @Operation("获取领料单信息")
     @GetMapping("/{id}")
-    public ActionResult<MaterialRequisitionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<MaterialRequisitionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         MaterialRequisitionInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -63,7 +63,7 @@ public class MaterialRequisitionController {
             vo = JsonUtil.getJsonToBean(entity, MaterialRequisitionInfoVO.class);
             vo.setEntryList(JsonUtil.getJsonToList(entityList, MaterialEntryEntityInfoModel.class));
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -75,15 +75,15 @@ public class MaterialRequisitionController {
      */
     @Operation("新建领料单")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid MaterialRequisitionForm materialRequisitionForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid MaterialRequisitionForm materialRequisitionForm) throws WorkFlowException {
         MaterialRequisitionEntity material = JsonUtil.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
         List<MaterialEntryEntity> materialEntryList = JsonUtil.getJsonToList(materialRequisitionForm.getEntryList(), MaterialEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(materialRequisitionForm.getStatus())) {
             materialRequisitionService.save(material.getId(), material, materialEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         materialRequisitionService.submit(material.getId(), material, materialEntryList,materialRequisitionForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -96,14 +96,14 @@ public class MaterialRequisitionController {
      */
     @Operation("修改领料单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid MaterialRequisitionForm materialRequisitionForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid MaterialRequisitionForm materialRequisitionForm, @PathVariable("id") String id) throws WorkFlowException {
         MaterialRequisitionEntity material = JsonUtil.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
         List<MaterialEntryEntity> materialEntryList = JsonUtil.getJsonToList(materialRequisitionForm.getEntryList(), MaterialEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(materialRequisitionForm.getStatus())) {
             materialRequisitionService.save(id, material, materialEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         materialRequisitionService.submit(id, material, materialEntryList,materialRequisitionForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

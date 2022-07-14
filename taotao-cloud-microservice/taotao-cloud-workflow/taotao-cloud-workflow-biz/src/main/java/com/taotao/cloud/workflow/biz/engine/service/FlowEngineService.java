@@ -183,5 +183,5 @@ public interface FlowEngineService extends IService<FlowEngineEntity> {
      * @return
      * @throws WorkFlowException
      */
-    ActionResult ImportData(FlowEngineEntity entity, List<FlowEngineVisibleEntity> visibleList) throws WorkFlowException;
+    Result ImportData(FlowEngineEntity entity, List<FlowEngineVisibleEntity> visibleList) throws WorkFlowException;
 }

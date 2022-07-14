@@ -44,7 +44,7 @@ public class FlowCommentController {
      */
     @Operation("获取流程评论列表")
     @GetMapping
-    public ActionResult list(FlowCommentPagination pagination) {
+    public Result list(FlowCommentPagination pagination) {
         List<FlowCommentEntity> list = flowCommentService.getlist(pagination);
         List<FlowCommentListVO> listVO = JsonUtil.getJsonToList(list, FlowCommentListVO.class);
         List<String> userId = list.stream().map(t -> t.getCreatorUserId()).collect(Collectors.toList());
@@ -60,7 +60,7 @@ public class FlowCommentController {
             }
         }
         PaginationVO vo = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
-        return ActionResult.page(listVO, vo);
+        return Result.page(listVO, vo);
     }
 
     /**
@@ -71,10 +71,10 @@ public class FlowCommentController {
      */
     @Operation("获取流程评论信息")
     @GetMapping("/{id}")
-    public ActionResult info(@PathVariable("id") String id) {
+    public Result info(@PathVariable("id") String id) {
         FlowCommentEntity entity = flowCommentService.getInfo(id);
         FlowCommentInfoVO vo = JsonUtil.getJsonToBean(entity, FlowCommentInfoVO.class);
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -85,10 +85,10 @@ public class FlowCommentController {
      */
     @Operation("新建流程评论")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
+    public Result create(@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
         FlowCommentEntity entity = JsonUtil.getJsonToBean(commentForm, FlowCommentEntity.class);
         flowCommentService.create(entity);
-        return ActionResult.success(MsgCode.SU002.get());
+        return Result.success(MsgCode.SU002.get());
     }
 
     /**
@@ -99,14 +99,14 @@ public class FlowCommentController {
      */
     @Operation("更新流程评论")
     @PutMapping("/{id}")
-    public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm) throws DataException {
+    public Result update(@PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm) throws DataException {
         FlowCommentEntity info = flowCommentService.getInfo(id);
         if (info != null) {
             FlowCommentEntity entity = JsonUtil.getJsonToBean(commentForm, FlowCommentEntity.class);
             flowCommentService.update(id, entity);
-            return ActionResult.success(MsgCode.SU004.get());
+            return Result.success(MsgCode.SU004.get());
         }
-        return ActionResult.fail(MsgCode.FA002.get());
+        return Result.fail(MsgCode.FA002.get());
     }
 
     /**
@@ -117,13 +117,13 @@ public class FlowCommentController {
      */
     @Operation("删除流程评论")
     @DeleteMapping("/{id}")
-    public ActionResult delete(@PathVariable("id") String id) {
+    public Result delete(@PathVariable("id") String id) {
         FlowCommentEntity entity = flowCommentService.getInfo(id);
         if (entity.getCreatorUserId().equals(userProvider.get().getUserId())) {
             flowCommentService.delete(entity);
-            return ActionResult.success(MsgCode.SU003.get());
+            return Result.success(MsgCode.SU003.get());
         }
-        return ActionResult.success(MsgCode.FA003.get());
+        return Result.success(MsgCode.FA003.get());
     }
 
 }

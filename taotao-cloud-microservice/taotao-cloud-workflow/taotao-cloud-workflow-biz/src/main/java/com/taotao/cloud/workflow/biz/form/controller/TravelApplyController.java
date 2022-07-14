@@ -40,7 +40,7 @@ public class TravelApplyController {
      */
     @Operation("获取出差预支申请单信息")
     @GetMapping("/{id}")
-    public ActionResult<TravelApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<TravelApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         TravelApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class TravelApplyController {
             TravelApplyEntity entity = travelApplyService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, TravelApplyInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -67,14 +67,14 @@ public class TravelApplyController {
      */
     @Operation("新建出差预支申请单")
     @PostMapping
-    public ActionResult create(@RequestBody TravelApplyForm travelApplyForm) throws WorkFlowException {
+    public Result create(@RequestBody TravelApplyForm travelApplyForm) throws WorkFlowException {
         TravelApplyEntity entity = JsonUtil.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         travelApplyService.submit(entity.getId(), entity,travelApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -86,13 +86,13 @@ public class TravelApplyController {
      */
     @Operation("修改出差预支申请单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id) throws WorkFlowException {
         TravelApplyEntity entity = JsonUtil.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         travelApplyService.submit(id, entity,travelApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

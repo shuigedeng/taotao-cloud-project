@@ -41,7 +41,7 @@ public class StaffOvertimeController {
      */
     @Operation("获取员工加班申请表信息")
     @GetMapping("/{id}")
-    public ActionResult<StaffOvertimeInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<StaffOvertimeInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         StaffOvertimeInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -57,7 +57,7 @@ public class StaffOvertimeController {
             StaffOvertimeEntity entity = staffOvertimeService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, StaffOvertimeInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -68,17 +68,17 @@ public class StaffOvertimeController {
      */
     @Operation("新建员工加班申请表")
     @PostMapping
-    public ActionResult create(@RequestBody StaffOvertimeForm staffOvertimeForm) throws WorkFlowException {
+    public Result create(@RequestBody StaffOvertimeForm staffOvertimeForm) throws WorkFlowException {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {
-            return ActionResult.fail("结束时间不能小于起始时间");
+            return Result.fail("结束时间不能小于起始时间");
         }
         StaffOvertimeEntity entity = JsonUtil.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(staffOvertimeForm.getStatus())) {
             staffOvertimeService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         staffOvertimeService.submit(entity.getId(), entity,staffOvertimeForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -90,16 +90,16 @@ public class StaffOvertimeController {
      */
     @Operation("修改员工加班申请表")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody StaffOvertimeForm staffOvertimeForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody StaffOvertimeForm staffOvertimeForm, @PathVariable("id") String id) throws WorkFlowException {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {
-            return ActionResult.fail("结束时间不能小于起始时间");
+            return Result.fail("结束时间不能小于起始时间");
         }
         StaffOvertimeEntity entity = JsonUtil.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(staffOvertimeForm.getStatus())) {
             staffOvertimeService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         staffOvertimeService.submit(id, entity,staffOvertimeForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

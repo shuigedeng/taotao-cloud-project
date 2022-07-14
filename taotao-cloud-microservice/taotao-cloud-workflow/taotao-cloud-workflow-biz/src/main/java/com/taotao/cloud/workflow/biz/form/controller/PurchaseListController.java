@@ -45,7 +45,7 @@ public class PurchaseListController {
      */
     @Operation("获取日常物品采购清单信息")
     @GetMapping("/{id}")
-    public ActionResult<PurchaseListInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<PurchaseListInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PurchaseListInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -63,7 +63,7 @@ public class PurchaseListController {
             vo = JsonUtil.getJsonToBean(entity, PurchaseListInfoVO.class);
             vo.setEntryList(JsonUtil.getJsonToList(entityList, PurchaseListEntryEntityInfoModel.class));
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -75,15 +75,15 @@ public class PurchaseListController {
      */
     @Operation("新建日常物品采购清单")
     @PostMapping
-    public ActionResult create(@RequestBody PurchaseListForm purchaseListForm) throws WorkFlowException {
+    public Result create(@RequestBody PurchaseListForm purchaseListForm) throws WorkFlowException {
         PurchaseListEntity procurement = JsonUtil.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
         List<PurchaseListEntryEntity> procurementEntryList = JsonUtil.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(purchaseListForm.getStatus())) {
             purchaseListService.save(procurement.getId(), procurement, procurementEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         purchaseListService.submit(procurement.getId(), procurement, procurementEntryList,purchaseListForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -96,14 +96,14 @@ public class PurchaseListController {
      */
     @Operation("修改日常物品采购清单")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody PurchaseListForm purchaseListForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody PurchaseListForm purchaseListForm, @PathVariable("id") String id) throws WorkFlowException {
         PurchaseListEntity procurement = JsonUtil.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
         List<PurchaseListEntryEntity> procurementEntryList = JsonUtil.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(purchaseListForm.getStatus())) {
             purchaseListService.save(id, procurement, procurementEntryList);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         purchaseListService.submit(id, procurement, procurementEntryList,purchaseListForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

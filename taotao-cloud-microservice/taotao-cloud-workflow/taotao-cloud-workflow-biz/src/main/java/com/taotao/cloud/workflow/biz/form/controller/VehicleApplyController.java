@@ -43,7 +43,7 @@ public class VehicleApplyController {
      */
     @Operation("获取车辆申请信息")
     @GetMapping("/{id}")
-    public ActionResult<VehicleApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<VehicleApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         VehicleApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -59,7 +59,7 @@ public class VehicleApplyController {
             VehicleApplyEntity entity = vehicleApplyService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, VehicleApplyInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -70,14 +70,14 @@ public class VehicleApplyController {
      */
     @Operation("新建车辆申请")
     @PostMapping
-    public ActionResult create(@RequestBody VehicleApplyForm vehicleApplyForm) throws WorkFlowException {
+    public Result create(@RequestBody VehicleApplyForm vehicleApplyForm) throws WorkFlowException {
         VehicleApplyEntity entity = JsonUtil.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(vehicleApplyForm.getStatus())) {
             vehicleApplyService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         vehicleApplyService.submit(entity.getId(), entity,vehicleApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -89,13 +89,13 @@ public class VehicleApplyController {
      */
     @Operation("修改车辆申请")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody VehicleApplyForm vehicleApplyForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody VehicleApplyForm vehicleApplyForm, @PathVariable("id") String id) throws WorkFlowException {
         VehicleApplyEntity entity = JsonUtil.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(vehicleApplyForm.getStatus())) {
             vehicleApplyService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         vehicleApplyService.submit(id, entity,vehicleApplyForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

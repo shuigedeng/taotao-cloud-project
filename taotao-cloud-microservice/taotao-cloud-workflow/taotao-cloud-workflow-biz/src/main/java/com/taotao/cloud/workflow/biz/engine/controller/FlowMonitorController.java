@@ -43,7 +43,7 @@ public class FlowMonitorController {
      */
     @Operation("获取流程监控列表")
     @GetMapping
-    public ActionResult<PageListVO<FlowMonitorListVO>> list(PaginationFlowTask paginationFlowTask) {
+    public Result<PageListVO<FlowMonitorListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> list = flowTaskService.getMonitorList(paginationFlowTask);
         List<FlowEngineEntity> engineList = flowEngineService.getFlowList(list.stream().map(t -> t.getFlowId()).collect(Collectors.toList()));
         List<UserEntity> userList = serviceUtil.getUserName(list.stream().map(t -> t.getCreatorUserId()).collect(Collectors.toList()));
@@ -61,7 +61,7 @@ public class FlowMonitorController {
             }
         }
         PaginationVO paginationVO = JsonUtil.getJsonToBean(paginationFlowTask, PaginationVO.class);
-        return ActionResult.page(listVO, paginationVO);
+        return Result.page(listVO, paginationVO);
     }
 
     /**
@@ -72,10 +72,10 @@ public class FlowMonitorController {
      */
     @Operation("批量删除流程监控")
     @DeleteMapping
-    public ActionResult delete(@RequestBody FlowDeleteModel deleteModel) throws WorkFlowException {
+    public Result delete(@RequestBody FlowDeleteModel deleteModel) throws WorkFlowException {
         String[] taskId = deleteModel.getIds().split(",");
         flowTaskService.delete(taskId);
-        return ActionResult.success(MsgCode.SU003.get());
+        return Result.success(MsgCode.SU003.get());
     }
 
 }

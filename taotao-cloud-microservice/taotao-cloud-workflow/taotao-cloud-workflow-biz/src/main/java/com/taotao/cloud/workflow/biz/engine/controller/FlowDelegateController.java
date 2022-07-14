@@ -11,6 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
 import java.util.List;
 import javax.validation.Valid;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,11 +45,11 @@ public class FlowDelegateController {
      */
     @Operation("获取流程委托列表")
     @GetMapping
-    public ActionResult<PageListVO<FlowDelegatListVO>> list(Pagination pagination) {
+    public Result<PageListVO<FlowDelegatListVO>> list(Pagination pagination) {
         List<FlowDelegateEntity> list = flowDelegateService.getList(pagination);
         PaginationVO paginationVO = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
         List<FlowDelegatListVO> listVO = JsonUtil.getJsonToList(list, FlowDelegatListVO.class);
-        return ActionResult.page(listVO, paginationVO);
+        return Result.page(listVO, paginationVO);
     }
 
     /**
@@ -59,10 +60,10 @@ public class FlowDelegateController {
      */
     @Operation("获取流程委托信息")
     @GetMapping("/{id}")
-    public ActionResult<FlowDelegateInfoVO> info(@PathVariable("id") String id) throws DataException {
+    public Result<FlowDelegateInfoVO> info(@PathVariable("id") String id) throws DataException {
         FlowDelegateEntity entity = flowDelegateService.getInfo(id);
         FlowDelegateInfoVO vo = JsonUtilEx.getJsonToBeanEx(entity, FlowDelegateInfoVO.class);
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -73,14 +74,14 @@ public class FlowDelegateController {
      */
     @Operation("新建流程委托")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid FlowDelegateCrForm flowDelegateCrForm) {
+    public Result create(@RequestBody @Valid FlowDelegateCrForm flowDelegateCrForm) {
         FlowDelegateEntity entity = JsonUtil.getJsonToBean(flowDelegateCrForm, FlowDelegateEntity.class);
         UserInfo userInfo = userProvider.get();
         if(userInfo.getUserId().equals(entity.getFTouserid())){
-            return ActionResult.fail("委托人为自己，委托失败");
+            return Result.fail("委托人为自己，委托失败");
         }
         flowDelegateService.create(entity);
-        return ActionResult.success(MsgCode.SU001.get());
+        return Result.success(MsgCode.SU001.get());
     }
 
     /**
@@ -91,17 +92,17 @@ public class FlowDelegateController {
      */
     @Operation("更新流程委托")
     @PutMapping("/{id}")
-    public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
+    public Result update(@PathVariable("id") String id, @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
         FlowDelegateEntity entity = JsonUtil.getJsonToBean(flowDelegateUpForm, FlowDelegateEntity.class);
         UserInfo userInfo = userProvider.get();
         if(userInfo.getUserId().equals(entity.getFTouserid())){
-            return ActionResult.fail("委托人为自己，委托失败");
+            return Result.fail("委托人为自己，委托失败");
         }
         boolean flag = flowDelegateService.update(id, entity);
         if (flag == false) {
-            return ActionResult.success(MsgCode.FA002.get());
+            return Result.success(MsgCode.FA002.get());
         }
-        return ActionResult.success(MsgCode.SU004.get());
+        return Result.success(MsgCode.SU004.get());
     }
 
     /**
@@ -112,12 +113,12 @@ public class FlowDelegateController {
      */
     @Operation("删除流程委托")
     @DeleteMapping("/{id}")
-    public ActionResult delete(@PathVariable("id") String id) {
+    public Result delete(@PathVariable("id") String id) {
         FlowDelegateEntity entity = flowDelegateService.getInfo(id);
         if (entity != null) {
             flowDelegateService.delete(entity);
-            return ActionResult.success(MsgCode.SU003.get());
+            return Result.success(MsgCode.SU003.get());
         }
-        return ActionResult.fail(MsgCode.FA003.get());
+        return Result.fail(MsgCode.FA003.get());
     }
 }

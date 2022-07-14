@@ -43,7 +43,7 @@ public class ApplyMeetingController {
      */
     @Operation("获取会议申请信息")
     @GetMapping("/{id}")
-    public ActionResult<ApplyMeetingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ApplyMeetingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ApplyMeetingInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -59,7 +59,7 @@ public class ApplyMeetingController {
             ApplyMeetingEntity entity = applyMeetingService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, ApplyMeetingInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -70,23 +70,23 @@ public class ApplyMeetingController {
      */
     @Operation("新建会议申请")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid ApplyMeetingForm applyMeetingForm) throws WorkFlowException {
+    public Result create(@RequestBody @Valid ApplyMeetingForm applyMeetingForm) throws WorkFlowException {
         if (applyMeetingForm.getStartDate() > applyMeetingForm.getEndDate()) {
-            return ActionResult.fail("结束时间不能小于开始时间");
+            return Result.fail("结束时间不能小于开始时间");
         }
         if (applyMeetingForm.getEstimatePeople() != null && StringUtil.isNotEmpty(applyMeetingForm.getEstimatePeople()) && !RegexUtils.checkDigit2(applyMeetingForm.getEstimatePeople())) {
-            return ActionResult.fail("预计人数只能输入正整数");
+            return Result.fail("预计人数只能输入正整数");
         }
         if (applyMeetingForm.getEstimatedAmount() != null && !RegexUtils.checkDecimals2(String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
-            return ActionResult.fail("预计金额必须大于0，最多精确小数点后两位");
+            return Result.fail("预计金额必须大于0，最多精确小数点后两位");
         }
         ApplyMeetingEntity entity = JsonUtil.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyMeetingForm.getStatus())) {
             applyMeetingService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         applyMeetingService.submit(entity.getId(), entity, applyMeetingForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -98,22 +98,22 @@ public class ApplyMeetingController {
      */
     @Operation("修改会议申请")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody @Valid ApplyMeetingForm applyMeetingForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody @Valid ApplyMeetingForm applyMeetingForm, @PathVariable("id") String id) throws WorkFlowException {
         if (applyMeetingForm.getStartDate() > applyMeetingForm.getEndDate()) {
-            return ActionResult.fail("结束时间不能小于开始时间");
+            return Result.fail("结束时间不能小于开始时间");
         }
         if (applyMeetingForm.getEstimatePeople() != null && StringUtil.isNotEmpty(applyMeetingForm.getEstimatePeople()) && !RegexUtils.checkDigit2(applyMeetingForm.getEstimatePeople())) {
-            return ActionResult.fail("预计人数只能输入正整数");
+            return Result.fail("预计人数只能输入正整数");
         }
         if (applyMeetingForm.getEstimatedAmount() != null && !RegexUtils.checkDecimals2(String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
-            return ActionResult.fail("预计金额必须大于0，最多精确小数点后两位");
+            return Result.fail("预计金额必须大于0，最多精确小数点后两位");
         }
         ApplyMeetingEntity entity = JsonUtil.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyMeetingForm.getStatus())) {
             applyMeetingService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         applyMeetingService.submit(id, entity, applyMeetingForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

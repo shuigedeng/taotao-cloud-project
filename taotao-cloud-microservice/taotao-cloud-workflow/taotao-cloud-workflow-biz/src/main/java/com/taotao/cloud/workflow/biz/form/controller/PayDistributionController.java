@@ -38,7 +38,7 @@ public class PayDistributionController {
      */
     @Operation("获取薪酬发放信息")
     @GetMapping("/{id}")
-    public ActionResult<PayDistributionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<PayDistributionInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PayDistributionInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -54,7 +54,7 @@ public class PayDistributionController {
             PayDistributionEntity entity = payDistributionService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, PayDistributionInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -65,14 +65,14 @@ public class PayDistributionController {
      */
     @Operation("新建薪酬发放")
     @PostMapping
-    public ActionResult create(@RequestBody PayDistributionForm payDistributionForm) throws WorkFlowException {
+    public Result create(@RequestBody PayDistributionForm payDistributionForm) throws WorkFlowException {
         PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(payDistributionForm.getStatus())) {
             payDistributionService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         payDistributionService.submit(entity.getId(), entity,payDistributionForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -84,13 +84,13 @@ public class PayDistributionController {
      */
     @Operation("修改薪酬发放")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id) throws WorkFlowException {
         PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(payDistributionForm.getStatus())) {
             payDistributionService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         payDistributionService.submit(id, entity,payDistributionForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }

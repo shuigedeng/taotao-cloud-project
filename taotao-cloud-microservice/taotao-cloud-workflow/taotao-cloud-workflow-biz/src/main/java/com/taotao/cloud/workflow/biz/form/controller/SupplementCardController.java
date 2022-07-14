@@ -40,7 +40,7 @@ public class SupplementCardController {
      */
     @Operation("补卡申请信息")
     @GetMapping("/{id}")
-    public ActionResult<SupplementCardInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<SupplementCardInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         SupplementCardInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -56,7 +56,7 @@ public class SupplementCardController {
             SupplementCardEntity entity = supplementCardService.getInfo(id);
             vo = JsonUtil.getJsonToBean(entity, SupplementCardInfoVO.class);
         }
-        return ActionResult.success(vo);
+        return Result.success(vo);
     }
 
     /**
@@ -67,17 +67,17 @@ public class SupplementCardController {
      */
     @Operation("新建补卡申请")
     @PostMapping
-    public ActionResult create(@RequestBody SupplementCardForm supplementCardForm) throws WorkFlowException {
+    public Result create(@RequestBody SupplementCardForm supplementCardForm) throws WorkFlowException {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {
-            return ActionResult.fail("结束时间不能小于起始时间");
+            return Result.fail("结束时间不能小于起始时间");
         }
         SupplementCardEntity entity = JsonUtil.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(supplementCardForm.getStatus())) {
             supplementCardService.save(entity.getId(), entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         supplementCardService.submit(entity.getId(), entity,supplementCardForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 
     /**
@@ -89,16 +89,16 @@ public class SupplementCardController {
      */
     @Operation("修改补卡申请")
     @PutMapping("/{id}")
-    public ActionResult update(@RequestBody SupplementCardForm supplementCardForm, @PathVariable("id") String id) throws WorkFlowException {
+    public Result update(@RequestBody SupplementCardForm supplementCardForm, @PathVariable("id") String id) throws WorkFlowException {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {
-            return ActionResult.fail("结束时间不能小于起始时间");
+            return Result.fail("结束时间不能小于起始时间");
         }
         SupplementCardEntity entity = JsonUtil.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(supplementCardForm.getStatus())) {
             supplementCardService.save(id, entity);
-            return ActionResult.success(MsgCode.SU002.get());
+            return Result.success(MsgCode.SU002.get());
         }
         supplementCardService.submit(id, entity,supplementCardForm.getCandidateList());
-        return ActionResult.success(MsgCode.SU006.get());
+        return Result.success(MsgCode.SU006.get());
     }
 }
