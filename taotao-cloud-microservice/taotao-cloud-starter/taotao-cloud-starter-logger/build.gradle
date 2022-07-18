@@ -14,24 +14,18 @@ dependencies {
     api 'org.apache.skywalking:apm-toolkit-trace'
 
     compileOnly 'com.baomidou:mybatis-plus-extension'
+    compileOnly 'org.springframework.kafka:spring-kafka'
 
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
-    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.0"
+    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.1"
 
-    //https://search.maven.org/artifact/de.danielbechler/java-object-diff
-    implementation 'de.danielbechler:java-object-diff:0.95'
-    //https://search.maven.org/artifact/com.github.colincatsu/fast-object-diff
-    implementation 'com.github.colincatsu:fast-object-diff:1.2'
-    //https://search.maven.org/artifact/de.danielbechler/java-object-diff
-    implementation 'de.danielbechler:java-object-diff:0.95'
-    //https://search.maven.org/artifact/uk.co.jemos.podam/podam
-    implementation 'uk.co.jemos.podam:podam:7.2.9.RELEASE'
+    // https://github.com/qqxx6661/logRecord
+    //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
+    api 'cn.monitor4all:log-record-starter:1.2.0'
 
-    implementation 'org.springframework.kafka:spring-kafka'
-    //implementation 'org.springframework.amqp:spring-amqp:2.4.3'
-    //implementation 'org.springframework.amqp:spring-rabbit:2.4.3'
-    //implementation 'org.apache.rocketmq:rocketmq-client:4.9.3'
-    //implementation 'org.springframework.cloud:spring-cloud-stream'
+    //https://search.maven.org/artifact/io.github.mouzt/bizlog-sdk
+    //https://github.com/mouzt/mzt-biz-log
+    api 'io.github.mouzt:bizlog-sdk:2.0.3'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
