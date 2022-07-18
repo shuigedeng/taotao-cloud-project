@@ -1,5 +1,8 @@
 package com.taotao.cloud.sys.biz.api.controller.manager;
 
+import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
+import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
+
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -8,11 +11,13 @@ import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.web.dto.EmailDTO;
 import com.taotao.cloud.sys.api.web.vo.alipay.EmailVO;
-import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.mapstruct.IEmailMapStruct;
+import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
 import com.taotao.cloud.web.quartz.QuartzManager;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
+import com.taotao.cloud.web.version.ApiVersion;
+import com.taotao.cloud.web.version.ApiVersion.UpdateInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -46,6 +51,12 @@ public class EmailController {
 	private final ScheduledManager scheduledManager;
 	private final IEmailConfigService emailService;
 
+	@ApiVersion(createVersion = V2022_07, createDate = "2022-07-01 17:11:55",
+		updateInfo = {
+			@UpdateInfo(updateVersion = V2022_07, updateContent = "主要修改了配置信息的接口查询", updator = "shuigedeng", updateDate = "2022-07-01 17:11:55"),
+			@UpdateInfo(updateVersion = V2022_08, updateContent = "主要修改了配置信息的接口查询08", updator = "shuigedeng", updateDate = "2022-07-01 17:11:55")
+		}
+	)
 	@Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息")
 	@RequestLogger("查询邮件配置信息")
 	@PreAuthorize("@el.check('admin','timing:list')")
@@ -54,6 +65,7 @@ public class EmailController {
 		return Result.success(emailService.find());
 	}
 
+	@ApiVersion(createVersion = V2022_07, createDate = "2022-07-01 17:11:55")
 	@Operation(summary = "配置邮件", description = "配置邮件")
 	@RequestLogger("配置邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
