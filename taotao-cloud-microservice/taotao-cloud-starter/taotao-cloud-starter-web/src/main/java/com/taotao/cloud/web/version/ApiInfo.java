@@ -16,53 +16,68 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ApiVersion {
+public @interface ApiInfo {
 
 	/**
 	 * 创建版本号
 	 */
-	VersionEnum createVersion();
-
-	/**
-	 * 创建时间
-	 */
-	String createDate();
-
-	/**
-	 * 创建者
-	 */
-	String createor() default "shuigedeng";
+	Create create();
 
 	/**
 	 * 更新信息
 	 */
-	UpdateInfo[] updateInfo() default {};
-
+	Update[] update() default {};
 
 	@Target({ElementType.METHOD, ElementType.TYPE})
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
-	public @interface UpdateInfo {
+	public @interface Create {
+
+		/**
+		 * 创建版本号
+		 */
+		VersionEnum version();
+
+		/**
+		 * 创建时间
+		 */
+		String date();
+
+		/**
+		 * 创建内容
+		 */
+		String content() default "";
+
+		/**
+		 * 创建者
+		 */
+		String createor() default "shuigedeng";
+	}
+
+	@Target({ElementType.METHOD, ElementType.TYPE})
+	@Retention(RetentionPolicy.RUNTIME)
+	@Documented
+	public @interface Update {
 
 		/**
 		 * 更新版本号
 		 */
-		VersionEnum updateVersion();
+		VersionEnum version();
 
 		/**
 		 * 更新时间
 		 */
-		String updateDate();
+		String date();
 
 		/**
 		 * 更新内容
 		 */
-		String updateContent();
+		String content();
 
 		/**
 		 * 更新者
 		 */
-		String updator();
+		String updator() default "shuigedeng";
 	}
 
 }

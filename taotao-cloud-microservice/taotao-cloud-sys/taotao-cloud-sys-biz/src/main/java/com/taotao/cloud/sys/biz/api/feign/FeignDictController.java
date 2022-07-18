@@ -30,8 +30,7 @@ import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import com.taotao.cloud.web.limit.Limit;
-import com.taotao.cloud.web.version.ApiVersion;
-import com.taotao.cloud.web.version.ApiVersion.UpdateInfo;
+import com.taotao.cloud.web.version.ApiInfo;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,10 +58,9 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	 * @see IFeignDictService#findByCode(String)
 	 * @since 2022-07-02 10:17:59
 	 */
-	@ApiVersion(createVersion = V2022_07, createDate = "2022-07-01 17:11:55",
-		updateInfo = {
-			@UpdateInfo(updateVersion = V2022_07, updateContent = "主要修改了配置信息的接口查询", updator = "shuigedeng", updateDate = "2022-07-01 17:11:55"),
-			@UpdateInfo(updateVersion = V2022_08, updateContent = "主要修改了配置信息的接口查询08", updator = "shuigedeng", updateDate = "2022-07-01 17:11:55")
+	@ApiInfo(create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
+		update = {@ApiInfo.Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+			@ApiInfo.Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		}
 	)
 	@NotAuth
