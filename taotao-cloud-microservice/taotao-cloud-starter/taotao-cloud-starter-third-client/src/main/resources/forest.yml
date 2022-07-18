@@ -1,0 +1,54 @@
+forest:
+  ## 全局日志处理器类
+  #log-handler: com.your.site.logging.TestLogHandler
+  # 在spring上下文中bean的id（默认为 forestConfiguration）
+  bean-id: config0
+  # 后端HTTP框架（默认为 okhttp3）
+  backend: okhttp3
+  # 连接池最大连接数（默认为 500）
+  max-connections: 1000
+  # 每个路由的最大连接数（默认为 500）
+  max-route-connections: 500
+  # 请求超时时间，单位为毫秒（默认为 3000）
+  timeout: 3000
+  # 连接超时时间，单位为毫秒（默认为 timeout）
+  connect-timeout: 3000
+  # 数据读取超时时间，单位为毫秒（默认为 timeout）
+  read-timeout: 3000
+  # 请求失败后重试次数（默认为 0 次不重试）
+  max-retry-count: 0
+  # 单向验证的HTTPS的默认SSL协议（默认为 SSLv3）
+  ssl-protocol: SSLv3
+  # 打开或关闭日志（默认为 true）
+  logEnabled: true
+  # 打开/关闭Forest请求日志（默认为 true）
+  log-request: true
+  # 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-status: true
+  # 打开/关闭Forest响应内容日志（默认为 false）
+  log-response-content: true
+  #全局变量
+  variables:
+    username: foo
+    userpwd: bar
+  # 转换器配置，支持 json, xml, text, binary 四种数据类型的配置
+  converters:
+    json:
+      # JSON转换器设置为Jackson转换器
+      type: com.dtflys.forest.converter.json.ForestJacksonConverter
+      # JSON转换器设置为GSON转换器
+      # type: com.dtflys.forest.converter.json.ForestGsonConverter
+      # JSON转换器设置为Fastjson转换器
+      # type: com.dtflys.forest.converter.json.ForestFastjsonConverter
+      # 转换器的参数设置
+      parameters:
+        # JSON数据转换器的全局日期格式化配置
+        dateFormat: yyyy/MM/dd hh:mm:ss
+    # XML转换器
+    xml:
+      # 配置为JAXB转换器
+      type: com.dtflys.forest.converter.xml.ForestJaxbConverter
+    # 二进制转换器
+    binary:
+      # 配置为Forest默认二进制转换器
+      type: com.dtflys.forest.converter.binary.DefaultBinaryConverter

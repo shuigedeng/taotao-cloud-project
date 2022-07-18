@@ -25,6 +25,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket-netty")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-third-client")
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
@@ -50,18 +51,13 @@ dependencies {
     //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
     implementation 'io.github.tokenjan:pinyin4j:2.6.1'
 
-    //https://search.maven.org/artifact/com.dtflys.forest/forest-spring-boot-starter
-    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.24'
-    //https://search.maven.org/artifact/com.github.lianjiatech/retrofit-spring-boot-starter
-    implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.5'
-
     //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-retrofit
     implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
     //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-okhttp
     implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
 
     //https://search.maven.org/artifact/wiki.xsx/x-easypdf
-    implementation 'wiki.xsx:x-easypdf:2.9.3'
+    implementation 'wiki.xsx:x-easypdf:2.9.6'
 
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
     implementation 'io.github.memorydoc:gobrs-async-starter:1.2.0-RELEASE'
