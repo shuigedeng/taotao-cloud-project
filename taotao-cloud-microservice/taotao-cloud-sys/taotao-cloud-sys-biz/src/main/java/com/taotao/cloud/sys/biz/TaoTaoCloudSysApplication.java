@@ -16,7 +16,6 @@
 package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
-import com.dtflys.forest.springboot.annotation.ForestScan;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
@@ -42,7 +41,6 @@ import org.springframework.boot.SpringApplication;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
-@ForestScan(basePackages = "com.taotao.cloud.sys.biz.forest")
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 
