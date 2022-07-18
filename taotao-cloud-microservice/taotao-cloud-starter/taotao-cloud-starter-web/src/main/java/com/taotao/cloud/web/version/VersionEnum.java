@@ -9,7 +9,6 @@ package com.taotao.cloud.web.version;
  * @since 2022-07-18 10:21:22
  */
 public enum VersionEnum {
-	NO_UPDATE("no_update", "无更新"),
 	V2021_01("2021.01", "初始化版本"),
 	V2021_02("2021.02", "初始化版本"),
 	V2021_03("2021.03", "初始化版本"),
