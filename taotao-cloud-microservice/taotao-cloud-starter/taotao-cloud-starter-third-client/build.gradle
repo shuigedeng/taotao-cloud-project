@@ -6,6 +6,7 @@ dependencies {
 
     //https://search.maven.org/artifact/com.dtflys.forest/forest-spring-boot-starter
     api 'com.dtflys.forest:forest-spring-boot-starter:1.5.24'
+
     //https://search.maven.org/artifact/com.github.lianjiatech/retrofit-spring-boot-starter
     api 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.6'
 

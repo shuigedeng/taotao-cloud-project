@@ -11,7 +11,6 @@ dependencies {
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
 }
 
 //shadowJar {
