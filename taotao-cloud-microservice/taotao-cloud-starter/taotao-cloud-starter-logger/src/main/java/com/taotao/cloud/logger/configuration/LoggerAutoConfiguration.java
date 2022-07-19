@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.logger.configuration;
 
+import com.lzhpo.tracer.TracerContextCustomizer;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
@@ -29,6 +30,8 @@ import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -37,6 +40,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置

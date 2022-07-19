@@ -1,8 +1,0 @@
-type Article {
-    id: String!
-    author: User!
-    title: String!
-    content: String!
-    createBy: String
-    thumbUp: Int
-}

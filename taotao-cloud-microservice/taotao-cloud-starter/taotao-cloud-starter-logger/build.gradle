@@ -27,5 +27,12 @@ dependencies {
     //https://github.com/mouzt/mzt-biz-log
     api 'io.github.mouzt:bizlog-sdk:2.0.3'
 
+    //https://gitee.com/lzhpo/logging-tracer
+    //https://search.maven.org/artifact/com.lzhpo/logging-tracer-spring-boot-starter
+    implementation ('com.lzhpo:logging-tracer-spring-boot-starter:1.0.2') {
+        exclude group: "com.hutool", module: "hutool-all"
+        exclude group: "org.projectlombok", module: "lombok"
+    }
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
