@@ -4,7 +4,7 @@
 name: microservice starters publish
 
 on:
-  push:
+  #push:
   #  paths:
   #    - 'taotao-cloud-microservice/taotao-cloud-starter/**'
   #  branches: [ master ]
@@ -20,6 +20,8 @@ env:
   TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
   TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
   TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
+
+# gradle publishMavenJavaPublicationToGitHubRepository
 
 jobs:
   publish:
