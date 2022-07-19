@@ -19,7 +19,7 @@ metadata:
   namespace: taotao-cloud-dev
   labels:
     app: taotao-cloud
-    version: 2022.04
+    version: 2022.07
     kubernetes.io/cluster-service: "true"
 spec:
   replicas: 1
@@ -29,7 +29,7 @@ spec:
   selector:
     matchLabels:
       app: taotao-cloud
-      version: 2022.04
+      version: 2022.07
       kubernetes.io/cluster-service: "true"
   strategy:
     type: RollingUpdate
@@ -42,13 +42,13 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: taotao-cloud
-        version: 2022.04
+        version: 2022.07
         kubernetes.io/cluster-service: "true"
     spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: taotao-cloud-gateway
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2022.07
           imagePullPolicy: IfNotPresent
           stdin: true
           terminationMessagePath: /dev/termination-log
@@ -62,10 +62,10 @@ spec:
               value: taotao-cloud-gateway
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -100,21 +100,21 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-admin
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2022.04
+        - name: taotao-cloud-monitor
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2022.07
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-admin-port
+            - name: taotao-cloud-monitor-port
               containerPort: 33334
           env:
             - name: applicationName
-              value: taotao-cloud-admin
+              value: taotao-cloud-monitor
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -149,7 +149,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-xxljob
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-xxljob-port
@@ -159,10 +159,10 @@ spec:
               value: taotao-cloud-xxljob
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -197,7 +197,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-auth
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-auth-port
@@ -207,10 +207,10 @@ spec:
               value: taotao-cloud-auth
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -245,7 +245,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-sys
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-sys-port
@@ -255,10 +255,10 @@ spec:
               value: taotao-cloud-sys
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -293,7 +293,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-order
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-order-port
@@ -303,10 +303,10 @@ spec:
               value: taotao-cloud-order
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -350,7 +350,7 @@ metadata:
   namespace: taotao-cloud-dev
   labels:
     app: taotao-cloud
-    version: 2022.04
+    version: 2022.07
     kubernetes.io/cluster-service: "true"
 spec:
   replicas: 1
@@ -360,7 +360,7 @@ spec:
   selector:
     matchLabels:
       app: taotao-cloud
-      version: 2022.04
+      version: 2022.07
       kubernetes.io/cluster-service: "true"
   strategy:
     type: RollingUpdate
@@ -373,7 +373,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: taotao-cloud
-        version: 2022.04
+        version: 2022.07
         kubernetes.io/cluster-service: "true"
     spec:
       terminationGracePeriodSeconds: 30
@@ -385,7 +385,7 @@ spec:
       #args: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != '200' ]]; do echo Waiting for springboot;sleep 5; done; echo springboot available
       containers:
         - name: taotao-cloud-gateway
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-gateway-port
@@ -395,10 +395,10 @@ spec:
               value: taotao-cloud-gateway
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -433,21 +433,21 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-admin
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2022.04
+        - name: taotao-cloud-monitor
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2022.07
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-admin-port
+            - name: taotao-cloud-monitor-port
               containerPort: 33334
           env:
             - name: applicationName
-              value: taotao-cloud-admin
+              value: taotao-cloud-monitor
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -482,7 +482,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-xxljob
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-xxljob-port
@@ -492,10 +492,10 @@ spec:
               value: taotao-cloud-xxljob
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -530,7 +530,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-auth
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-auth-port
@@ -540,10 +540,10 @@ spec:
               value: taotao-cloud-auth
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -578,7 +578,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-sys
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-sys-port
@@ -588,10 +588,10 @@ spec:
               value: taotao-cloud-sys
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -626,7 +626,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-order
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2022.04
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2022.07
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-order-port
@@ -636,10 +636,10 @@ spec:
               value: taotao-cloud-order
           resources:
             requests:
-              cpu: 1
+              cpu: "1"
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: "2"
               memory: 2048Mi
           livenessProbe:
             httpGet:
@@ -683,19 +683,19 @@ metadata:
   namespace: taotao-cloud-dev
   labels:
     app: taotao-cloud
-    version: 2022.04
+    version: 2022.07
 spec:
   type: NodePort
   selector:
     app: taotao-cloud
-    version: 2022.04
+    version: 2022.07
   ports:
     - name: taotao-cloud-gateway-port
       protocol: TCP
       port: 33333
       targetPort: 33333
       nodePort: 33333
-    - name: taotao-cloud-admin-port
+    - name: taotao-cloud-monitor-port
       protocol: TCP
       port: 33334
       targetPort: 33334
