@@ -1,0 +1,26 @@
+需求描述：按照时间维度，比如，统计一天内各小时产生最多pvs的来源topN
+
+需要用到row_number函数
+以下语句对每个小时内的来访host次数倒序排序标号，
+select ref_host,ref_host_cnts,concat(month,hour,day),
+row_number() over (partition by concat(month,hour,day) order by ref_host_cnts desc) as od
+from dw_ref_host_visit_cnts_h
+
+
+根据上述row_number的功能，可编写Hql取各小时的ref_host访问次数topn
+drop table dw_pvs_refhost_topn_h;
+create table dw_pvs_refhost_topn_h(
+hour string,
+toporder string,
+ref_host string,
+ref_host_cnts string
+) partitioned by(datestr string);
+
+insert into table zs.dw_pvs_refhost_topn_h partition(datestr='2016-03-18')
+select t.hour,t.od,t.ref_host,t.ref_host_cnts from
+ (select ref_host,ref_host_cnts,concat(month,day,hour) as hour,
+row_number() over (partition by concat(month,day,hour) order by ref_host_cnts desc) as od
+from zs.dw_ref_host_visit_cnts_h) t where od<=3;
+
+
+注：还可以按来源地域维度、访客终端维度等计算

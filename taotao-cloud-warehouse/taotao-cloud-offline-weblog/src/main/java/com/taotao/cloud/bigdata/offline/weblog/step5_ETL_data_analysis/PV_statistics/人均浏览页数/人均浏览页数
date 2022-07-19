@@ -1,0 +1,12 @@
+需求描述：比如，今日所有来访者，平均请求的页面数
+
+--总页面请求数/去重总人数
+
+drop table dw_avgpv_user_d;
+create table dw_avgpv_user_d(
+day string,
+avgpv string);
+
+insert into table dw_avgpv_user_d
+select '2013-09-18',sum(b.pvs)/count(b.remote_addr) from
+(select remote_addr,count(1) as pvs from ods_weblog_detail where datestr='2013-09-18' group by remote_addr) b;

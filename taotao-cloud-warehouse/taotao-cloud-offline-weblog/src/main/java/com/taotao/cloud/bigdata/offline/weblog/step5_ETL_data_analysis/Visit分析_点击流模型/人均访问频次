@@ -1,0 +1,4 @@
+需求：统计出每天所有用户访问网站的平均次数（visit）
+总visit数/去重总用户数
+
+select sum(pagevisits)/count(distinct remote_addr) from click_stream_visit partition(datestr='2013-09-18');

@@ -1,0 +1,49 @@
+需求描述：将每天的新访客统计出来
+实现思路：创建一个去重访客累积表，然后将每日访客对比累积表
+
+时间维度：日
+--历日去重访客累积表
+drop table dw_user_dsct_history;
+create table dw_user_dsct_history(
+day string,
+ip string
+)
+partitioned by(datestr string);
+
+--每日新用户追加到累计表
+drop table dw_user_dsct_history;
+create table dw_user_dsct_history(
+day string,
+ip string
+)
+partitioned by(datestr string);
+
+--每日新用户追加到累计表
+insert into table dw_user_dsct_history partition(datestr='2013-09-19')
+select tmp.day as day,tmp.today_addr as new_ip from
+(
+select today.day as day,today.remote_addr as today_addr,old.ip as old_addr
+from
+(select distinct remote_addr as remote_addr,"2013-09-19" as day from ods_weblog_detail where datestr="2013-09-19") today
+left outer join
+dw_user_dsct_history old
+on today.remote_addr=old.ip
+) tmp
+where tmp.old_addr is null;
+
+验证：
+select count(distinct remote_addr) from ods_weblog_detail;
+-- 1005
+
+select count(1) from dw_user_dsct_history where prtflag_day='18/Sep/2013';
+--845
+
+select count(1) from dw_user_dsct_history where prtflag_day='19/Sep/2013';
+--160
+
+
+时间维度：月
+类似日粒度算法
+
+
+注：还可以按来源地域维度、访客终端维度等计算

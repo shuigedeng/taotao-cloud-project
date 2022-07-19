@@ -1,0 +1,19 @@
+# 源数据表
+
+drop table if exists shizhan.ods_weblog_origin;
+create table shizhan.ods_weblog_origin(
+valid string,
+remote_addr string,
+remote_user string,
+remote_time_local string,
+request_method_url string,
+status string,
+reponse_body_bytes string,
+http_referer string,
+http_user_agent string)
+partitioned by (datestr string)
+row format delimited fields terminated by ',';
+
+
+# 导入清洗结果数据到贴源数据表ods_weblog_origin
+load data inpath '/weblog/preprocessed/16-02-24-16/' overwrite into table ods_weblog_origin partition(datestr='2013-09-18');

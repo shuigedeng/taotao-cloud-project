@@ -1,0 +1,17 @@
+需求描述：查询今日所有回头访客及其访问次数
+
+实现思路：上表中出现次数>1的访客，即回头访客；反之，则为单次访客
+
+drop table dw_user_returning;
+create table dw_user_returning(
+day string,
+remote_addr string,
+acc_cnt string)
+partitioned by (datestr string);
+
+insert overwrite table dw_user_returning partition(datestr='2013-09-18')
+
+select tmp.day,tmp.remote_addr,tmp.acc_cnt
+from
+(select '2013-09-18' as day,remote_addr,count(session) as acc_cnt from click_stream_visit group by remote_addr) tmp
+where tmp.acc_cnt>1;

@@ -218,6 +218,7 @@ buildscript {
         google()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/release' }
         gradlePluginPortal()
     }
 
@@ -290,6 +291,7 @@ allprojects {
         }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/release' }
     }
 }
 

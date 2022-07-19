@@ -1,0 +1,61 @@
+分步骤开发：
+
+1.查询每一个步骤的总访问人数
+create table dw_oute_numbs as
+select 'step1' as step,count(distinct remote_addr)  as numbs from ods_click_pageviews where request like '/item%'
+union
+select 'step2' as step,count(distinct remote_addr) as numbs from ods_click_pageviews where request like '/category%'
+union
+select 'step3' as step,count(distinct remote_addr) as numbs from ods_click_pageviews where request like '/order%'
+union
+select 'step4' as step,count(distinct remote_addr)  as numbs from ods_click_pageviews where request like '/index%';
+
+
+2.查询每一步骤相对于路径起点人数的比例
+select rn.step as rnstep,rn.numbs as rnnumbs,rr.step as rrstep,rr.numbs as rrnumbs  from route_num rn
+inner join
+route_num rr
+
+
+select tmp.rnstep,tmp.rnnumbs/tmp.rrnumbs as ratio
+from
+(
+select rn.step as rnstep,rn.numbs as rnnumbs,rr.step as rrstep,rr.numbs as rrnumbs  from dw_oute_numbs rn
+inner join
+dw_oute_numbs rr) tmp
+where tmp.rrstep='step1';
+
+
+3.查询每一步骤相对于上一步骤的漏出率
+select tmp.rrstep as rrstep,tmp.rrnumbs/tmp.rnnumbs as ration
+from
+(
+select rn.step as rnstep,rn.numbs as rnnumbs,rr.step as rrstep,rr.numbs as rrnumbs  from route_num rn
+inner join
+route_num rr) tmp
+where cast(substr(tmp.rnstep,5,1) as int)=cast(substr(tmp.rrstep,5,1) as int)-1
+
+
+4.汇总以上两种指标
+select abs.step,abs.numbs,abs.ratio as abs_ratio,rel.ratio as rel_ratio
+from
+(
+select tmp.rnstep as step,tmp.rnnumbs as numbs,tmp.rnnumbs/tmp.rrnumbs as ratio
+from
+(
+select rn.step as rnstep,rn.numbs as rnnumbs,rr.step as rrstep,rr.numbs as rrnumbs  from route_num rn
+inner join
+route_num rr) tmp
+where tmp.rrstep='step1'
+) abs
+left outer join
+(
+select tmp.rrstep as step,tmp.rrnumbs/tmp.rnnumbs as ratio
+from
+(
+select rn.step as rnstep,rn.numbs as rnnumbs,rr.step as rrstep,rr.numbs as rrnumbs  from route_num rn
+inner join
+route_num rr) tmp
+where cast(substr(tmp.rnstep,5,1) as int)=cast(substr(tmp.rrstep,5,1) as int)-1
+) rel
+on abs.step=rel.step

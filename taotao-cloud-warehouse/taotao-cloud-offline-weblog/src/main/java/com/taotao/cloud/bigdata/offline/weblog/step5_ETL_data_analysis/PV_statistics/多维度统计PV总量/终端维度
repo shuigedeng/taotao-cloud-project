@@ -1,0 +1,15 @@
+探索数据中的终端类型
+select distinct(http_user_agent) from ods_weblog_detail where http_user_agent like '%Mozilla%' limit 200;
+
+终端维度：uc
+drop table t_display_pv_terminal_uc;
+create table t_display_pv_ terminal_uc (pvs bigint,mm string,dd string,hh string);
+
+终端维度：chrome
+drop table t_display_pv_terminal_chrome;
+create table t_display_pv_ terminal_ chrome (pvs bigint,mm string,dd string,hh string);
+
+终端维度：safari
+drop table t_display_pv_terminal_safari;
+create table t_display_pv_ terminal_ safari (pvs bigint,mm string,dd string,hh string);
+

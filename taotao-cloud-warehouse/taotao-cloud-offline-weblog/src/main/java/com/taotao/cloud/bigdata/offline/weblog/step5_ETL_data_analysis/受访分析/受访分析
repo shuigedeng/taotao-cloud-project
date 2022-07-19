@@ -1,0 +1,11 @@
+统计每日最热门的页面top10
+
+drop table dw_pvs_d;
+create table dw_pvs_d(day string,url string,pvs string);
+
+insert into table dw_pvs_d
+select '2013-09-18',a.request,a.request_counts from
+(select request as request,count(request) as request_counts from ods_weblog_detail where datestr='2013-09-18' group by request having request is not null) a
+order by a.request_counts desc limit 10;
+
+注：还可继续得出各维度交叉结果
