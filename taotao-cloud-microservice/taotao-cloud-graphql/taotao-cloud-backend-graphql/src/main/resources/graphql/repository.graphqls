@@ -1,6 +1,0 @@
-type ArtifactRepository {
-    id: ID!
-    name: String!
-    url: String!
-    snapshotsEnabled: Boolean
-}
