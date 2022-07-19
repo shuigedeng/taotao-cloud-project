@@ -11,12 +11,12 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-jose"
     implementation "com.nimbusds:nimbus-jose-jwt:9.23"
 
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
     }
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
 
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'

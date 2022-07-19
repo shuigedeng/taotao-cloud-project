@@ -16,6 +16,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
 
+    api "org.springframework.boot:spring-boot-starter-webflux"
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
