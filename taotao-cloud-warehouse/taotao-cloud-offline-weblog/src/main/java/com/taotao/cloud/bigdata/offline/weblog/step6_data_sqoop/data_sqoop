@@ -1,0 +1,9 @@
+
+报表统计结果，由sqoop从hive表中导出，示例如下，详见工程代码
+
+sqoop export \
+--connect jdbc:mysql://hdp-node-01:3306/webdb --username root --password root  \
+--table click_stream_visit  \
+
+--export-dir /user/hive/warehouse/dw_click.db/click_stream_visit/datestr=2013-09-18 \
+--input-fields-terminated-by '\001'

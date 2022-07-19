@@ -18,6 +18,7 @@ pluginManagement {
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
+        maven { url 'https://repo.spring.io/release' }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://jetbrains.bintray.com/intellij-plugin-service' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
@@ -35,7 +36,7 @@ for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'reactive', 'spring']
+def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'reactive', 'spring']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
@@ -47,7 +48,7 @@ for (project in twoLayerProjects) {
     }
 }
 
-def threeLayerProjects = ['microservice', 'realtime']
+def threeLayerProjects = ['microservice', 'warehouse']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->

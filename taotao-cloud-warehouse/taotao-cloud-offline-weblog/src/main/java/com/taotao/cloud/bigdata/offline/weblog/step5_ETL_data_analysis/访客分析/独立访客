@@ -1,0 +1,43 @@
+需求描述：按照时间维度比如小时来统计独立访客及其产生的pvCnts
+对于独立访客的识别，如果在原始日志中有用户标识，则根据用户标识即很好实现;
+此处，由于原始日志中并没有用户标识，以访客IP来模拟，技术上是一样的，只是精确度相对较低
+
+时间维度：时
+drop table dw_user_dstc_ip_h;
+create table dw_user_dstc_ip_h(
+remote_addr string,
+pvs      bigint,
+hour     string);
+
+insert into table dw_user_dstc_ip_h
+select remote_addr,count(1) as pvs,concat(month,day,hour) as hour
+from ods_weblog_detail
+Where datestr='2013-09-18'
+group by concat(month,day,hour),remote_addr;
+
+在此结果表之上，可以进一步统计出，每小时独立访客总数，每小时请求次数topn访客等
+如每小时独立访客总数：
+select count(1) as dstc_ip_cnts,hour from dw_user_dstc_ip_h group by hour;
+
+
+练习：
+统计每小时请求次数topn的独立访客
+
+
+
+
+时间维度：月
+select remote_addr,count(1) as counts,month
+from ods_weblog_detail
+group by month,remote_addr;
+
+
+时间维度：日
+select remote_addr,count(1) as counts,concat(month,day) as day
+from ods_weblog_detail
+Where dd='18/Sep/2013'
+group by concat(month,day),remote_addr;
+
+
+
+注：还可以按来源地域维度、访客终端维度等计算

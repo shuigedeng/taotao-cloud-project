@@ -1,0 +1,54 @@
+# filename:ods_flow
+
+# 创建ods层数据仓库作业
+
+config:
+  param.script_path_prefix: /root/taotao/script
+  # such as: exec_date 20200818
+  param.exec_date: ${exec_date}
+
+nodes:
+  - name: START
+    type: noop
+
+  - name: SQOOP_BIZ_COLLECT
+    type: command
+    dependsOn:
+      - START
+    config:
+      command: sh "${param.script_path_prefix}"/biz2hdfs.sh "${param.exec_date}"
+
+  - name: BIZ_ADD_PARTITION
+    type: command
+    dependsOn:
+      - SQOOP_BIZ_COLLECT
+    config:
+      command: sh "${param.script_path_prefix}"/biz_add_partition.sh "${param.exec_date}"
+
+  - name: NEWS_ADD_PARTITION
+    type: command
+    dependsOn:
+      - START
+    config:
+      command: sh "${param.script_path_prefix}"/news_add_partition.sh "${param.exec_date}"
+
+  - name: NEWS_PARQUET
+    type: command
+    dependsOn:
+      - NEWS_ADD_PARTITION
+    config:
+      command: sh "${param.script_path_prefix}"/news_parquet.sh "${param.exec_date}"
+
+  - name: NEWS_ARTICLE_ADD_PARTITION
+    type: command
+    dependsOn:
+      - START
+    config:
+      command: sh "${param.script_path_prefix}"/news_article_add_partition.sh "${param.exec_date}"
+
+  - name: END
+    type: noop
+    dependsOn:
+      - BIZ_ADD_PARTITION
+      - NEWS_PARQUET
+      - NEWS_ARTICLE_ADD_PARTITION

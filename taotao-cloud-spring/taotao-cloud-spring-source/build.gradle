@@ -10,7 +10,3 @@ dependencies {
     implementation 'org.springframework:spring-webmvc:5.3.19'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
 }
-
-repositories {
-    mavenCentral()
-}

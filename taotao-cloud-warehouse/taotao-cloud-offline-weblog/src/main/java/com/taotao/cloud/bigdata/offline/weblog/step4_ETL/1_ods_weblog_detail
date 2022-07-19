@@ -1,0 +1,25 @@
+# 明细表ods_weblog_detail    (源：ods_weblog_origin)   （目标：ods_weblog_detail）
+
+drop table ods_weblog_detail;
+create table ods_weblog_detail(
+valid           string, --有效标识
+remote_addr     string, --来源IP
+remote_user     string, --用户标识
+time_local      string, --访问完整时间
+daystr          string, --访问日期
+timestr         string, --访问时间
+month           string, --访问月
+day             string, --访问日
+hour            string, --访问时
+request         string, --请求的url
+status          string, --响应码
+body_bytes_sent string, --传输字节数
+http_referer    string, --来源url
+ref_host        string, --来源的host
+ref_path        string, --来源的路径
+ref_query       string, --来源参数query
+ref_query_id    string, --来源参数query的值
+http_user_agent string  --客户终端标识
+)
+partitioned by(datestr string);
+row format delimited fields terminated by ',';

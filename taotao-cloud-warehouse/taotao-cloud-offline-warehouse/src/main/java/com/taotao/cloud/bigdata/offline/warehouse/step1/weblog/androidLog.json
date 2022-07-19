@@ -1,0 +1,32 @@
+{
+  "distinct_id": "0bc73521-6410-46e0-a752-b24798e60dff",
+  "login_id": "0bc73521-6410-46e0-a752-b24798e60dff",
+  "anonymous_id": "17621008c2e785-0f5316dc2a9df6-62112c72-1296000-17621008c302a4",
+  "type": "track",
+  "event": "$AppStart",
+  "_track_id": 500615373,
+  "lib": {
+    "$lib": "android",
+    "$lib_method": "autoTrack",
+    "$lib_version": "1.16.3",
+    "$app_version": "2.13"
+  },
+  "properties": {
+    "$device_id": "17621008c2e785-0f5316dc2a9df6-62112c72-1296000-17621008c302a4",
+    "$os": "android",
+    "$os_version": "11.2",
+    "$screen_height": 900,
+    "$screen_width": 1440,
+    "$is_first_day": false,
+    "$is_first_time": false,
+    "$lib": "android",
+    "$lib_version": "1.16.3",
+    "$model": "x86_64",
+    "$network_type": "wifi",
+    "app_name": "ios_app",
+    "$manufacturer": "Apple",
+    "$app_version": "2.13",
+    "$wifi": true,
+    "$resume_from_background": true
+  }
+}

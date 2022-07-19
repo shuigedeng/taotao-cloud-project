@@ -1,0 +1,12 @@
+在企业的数据分析系统中，前端展现工具有很多，
+    • 独立部署专门系统的方式：以Business Objects(BO,Crystal Report),Heperion(Brio),Cognos等国外产品为代表的，它们的服务器是单独部署的，与应用程序之间通过某种协议沟通信息
+
+    • 有WEB程序展现方式：通过独立的或者嵌入式的java web系统来读取报表统计结果，以网页的形式对结果进行展现，如，100%纯Java的润乾报表
+
+本日志分析项目采用自己开发web程序展现的方式
+    • Web展现程序采用的技术框架：
+Jquery + Echarts + springmvc + spring + mybatis + mysql
+    • 展现的流程：
+    1. 使用ssh从mysql中读取要展现的数据
+    2. 使用json格式将读取到的数据返回给页面
+    3. 在页面上用echarts对json解析并形成图标

@@ -1,0 +1,11 @@
+# 时间维表创建
+
+drop table dim_time if exists ods_click_pageviews;
+create table dim_time(
+year string,
+month string,
+day string,
+hour string)
+row format delimited fields terminated by ',';
+
+load data local inpath '/home/hadoop/v_time.txt' into table v_time;

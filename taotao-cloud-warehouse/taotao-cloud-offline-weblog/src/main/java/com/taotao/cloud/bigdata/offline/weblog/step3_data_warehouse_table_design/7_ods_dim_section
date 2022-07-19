@@ -1,0 +1,16 @@
+# 网站栏目维度表
+
+drop table dim_section if exists ods_click_pageviews;
+create table dim_section(
+code string,
+name string)
+row format delimited fields terminated by ',';
+
+load data local inpath '/home/hadoop/v_section.txt' into table v_time;
+
+# 跳蚤市场
+# 房租信息
+# 休闲娱乐
+# 建材装修
+# 本地服务
+# 人才市场
