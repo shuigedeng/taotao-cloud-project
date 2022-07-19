@@ -1,56 +1,35 @@
 dependencies {
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
 
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
+	implementation "de.codecentric:spring-boot-admin-starter-server"
 
-	implementation "org.apache.pdfbox:pdfbox:2.0.26"
-	implementation "io.soabase.record-builder:record-builder-core:33"
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	//implementation "org.springframework.boot:spring-boot-starter-mail"
 
-	implementation "com.google.protobuf:protobuf-java:3.21.2"
-	implementation 'com.google.protobuf:protobuf-java-util:3.21.2'
-	implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.4'
+	implementation("org.springframework.boot:spring-boot-starter-web") {
+		exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+	}
+	implementation "org.springframework.boot:spring-boot-starter-actuator"
+	implementation "org.springframework.boot:spring-boot-starter-undertow"
+	implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-	implementation 'io.protostuff:protostuff-core:1.8.0'
-	implementation 'io.protostuff:protostuff-runtime:1.4.0'
+	implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+	implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
-	implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.24'
-	implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.5'
-
-	implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
-	implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
-
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-	annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
-	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
-	annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
-	annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-	api 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
-
-	api 'io.soabase.record-builder:record-builder-core:33'
-	annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
 }
 
 bootBuildImage {
 	builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
 	runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"
-	imageName = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open:${project.version}"
+	imageName = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:${project.version}"
 	pullPolicy = "IF_NOT_PRESENT"
 	environment = [
-				   'BPL_SPRING_CLOUD_BINDINGS_ENABLED': 'true',
+				   "BPL_SPRING_CLOUD_BINDINGS_ENABLED": "true",
 
-				   'BP_IMAGE_LABELS': 'application_name=taotao-cloud-open application_version=2022.07',
+				   "BP_IMAGE_LABELS": "application_name=taotao-cloud-monitor application_version=2022.07",
 				   'BP_OCI_AUTHORS': '981376577@qq.com',
 				   //'BP_OCI_CREATED': ' ',
 				   //'BP_OCI_DESCRIPTION': ' ',
@@ -64,7 +43,7 @@ bootBuildImage {
 				   //'BP_OCI_VENDOR': ' ',
 				   //'BP_OCI_VERSION': ' ',
 
-				   'BPE_APPLICATION_NAME': 'taotao-cloud-open',
+				   'BPE_APPLICATION_NAME': 'taotao-cloud-monitor',
 				   'BPE_APPLICATION_VERSION': '2022.07',
 				   'BPE_JMX_ENABLED': "true",
 				   'BPE_LANG': "zh_CN.UTF-8",
@@ -90,11 +69,11 @@ bootBuildImage {
 						   "-Djava.security.egd=file:/dev/./urandom " +
 						   "-Dfile.encoding=utf-8 " +
 						   "-javaagent:/skywalking/agent/skywalking-agent.jar " +
-						   "-Dskywalking.agent.service_name=taotao-cloud-open " +
+						   "-Dskywalking.agent.service_name=taotao-cloud-monitor " +
 						   "-Dskywalking.agent.authentication=taotao-cloud " +
-						   "-Dskywalking.logging.file_name=taotao-cloud-open.skywalking.log " +
+						   "-Dskywalking.logging.file_name=taotao-cloud-monitor.skywalking.log " +
 						   "-Dskywalking.logging.level=INFO " +
-						   "-Dskywalking.logging.dir=/root/logs/taotao-cloud-open " +
+						   "-Dskywalking.logging.dir=/root/logs/taotao-cloud-monitor " +
 						   "-Dskywalking.collector.backend_service=192.168.10.200:11800 " +
 						   "-Dspring.profiles.active=dev ",
 
@@ -111,15 +90,20 @@ bootBuildImage {
 				   //'HTTP_PROXY': 'http://proxy.example.com',
 				   //'HTTPS_PROXY': 'http://proxy.example.com',
 	 			  ]
-	bindings = ["/tmp/logs/taotao-cloud-open:/root/logs", "/opt/cloud/apache-skywalking-apm-bin/agent/:/skywalking/agent"]
+	bindings = ["/tmp/logs/taotao-cloud-monitor:/root/logs", "/opt/cloud/apache-skywalking-apm-bin/agent/:/skywalking/agent"]
 	cleanCache = false
 	verboseLogging = true
 	publish = true
 
 	docker {
+		//使用docker
 		//host = "tcp://127.0.0.1:2376"
 		//tlsVerify = true
 		//certPath = "/home/users/.minikube/certs"
+
+		//使用podman @since 2.7.0
+		//host = "unix:///run/user/1000/podman/podman.sock"
+		//bindHostToBuilder = true
 
 		builderRegistry {
 			username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
@@ -146,7 +130,7 @@ jib {
 		}
 	}
 	to {
-		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open'
+		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor'
 		tags = ["${project.name}-${project.version}"]
 		auth {
 			username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""

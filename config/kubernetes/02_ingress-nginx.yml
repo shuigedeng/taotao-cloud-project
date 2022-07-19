@@ -720,14 +720,14 @@ metadata:
 spec:
   ingressClassName: nginx-default
   rules:
-    - host: admin.taotaocloud.com
+    - host: monitor.taotaocloud.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: taotao-cloud-admin
+                name: taotao-cloud-monitor
                 port:
                   number: 33334
 ---

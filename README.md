@@ -165,7 +165,7 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-dependencies -- 全局公共依赖模块
 │  ├─taotao-cloud-java -- java模块
 │  ├─taotao-cloud-microservice -- 微服务业务模块
-│  │  ├─taotao-cloud-admin  -- admin server模块
+│  │  ├─taotao-cloud-monitor  -- admin server模块
 │  │  ├─taotao-cloud-auth  -- oauth2认证模块
 │  │  ├─taotao-cloud-customer  -- 客服模块
 │  │  ├─taotao-cloud-distribution  -- 营销/分销模块
