@@ -1,13 +1,13 @@
-package com.taotao.cloud.reactive.uc;
+package com.taotao.cloud.reactive.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UcApplication {
+public class ReactiveOrderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UcApplication.class, args);
+		SpringApplication.run(ReactiveOrderApplication.class, args);
 	}
 
 }
