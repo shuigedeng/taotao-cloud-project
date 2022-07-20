@@ -1,5 +1,7 @@
 dependencies {
+    //https://search.maven.org/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
     api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3'
+    //https://search.maven.org/artifact/org.yaml/snakeyaml
     api 'org.yaml:snakeyaml:1.30'
 
     //jackson
@@ -82,16 +84,6 @@ dependencies {
     // execl
     api 'cn.afterturn:easypoi-base'
     api 'cn.afterturn:easypoi-annotation'
-
-    //https://search.maven.org/artifact/com.github.liaochong/myexcel
-    api ('com.github.liaochong:myexcel:4.2.0'){
-        exclude group: 'org.projectlombok', module: 'lombok'
-    }
-
-    //https://search.maven.org/artifact/com.alibaba/easyexcel
-    api ('com.alibaba:easyexcel:3.1.0'){
-        exclude group: 'org.projectlombok', module: 'lombok'
-    }
 
     //https://search.maven.org/artifact/com.github.yitter/yitter-idgenerator
     api 'com.github.yitter:yitter-idgenerator:1.0.6'
