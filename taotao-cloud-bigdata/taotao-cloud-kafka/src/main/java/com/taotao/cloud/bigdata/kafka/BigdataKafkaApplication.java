@@ -13,25 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.trino;
+package com.taotao.cloud.bigdata.kafka;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.annotation.KafkaListener;
 
-/**
- * 目前先作为一个单独的springboot项目
- * <p>
- * 之后如果有需要可以添加到toatoa cloud中 作为一个资源服务器( 添加依赖 添加注解 添加配置)
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2020/10/30 16:06
- */
 @SpringBootApplication
-public class TaoTaoCloudTrinoApplication {
+@EnableKafka
+@Slf4j
+public class BigdataKafkaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudTrinoApplication.class, args);
+		SpringApplication.run(TaoTaoCloudKafkaApplication.class, args);
 	}
 
+	@KafkaListener(topics = "access")
+	public void onMessage(ConsumerRecord<String, String> record) {
+		String value = record.value();
+		log.info(value);
+		if (value.length() % 2 == 0) {
+			throw new RuntimeException("模拟业务出错");
+		}
+	}
 }
