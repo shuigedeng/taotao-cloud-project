@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 系统入口
  */
 @SpringBootApplication
-public class PreSystemApplication {
+public class StandaloneSystemApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PreSystemApplication.class, args);
+        SpringApplication.run(StandaloneSystemApplication.class, args);
     }
 
 }

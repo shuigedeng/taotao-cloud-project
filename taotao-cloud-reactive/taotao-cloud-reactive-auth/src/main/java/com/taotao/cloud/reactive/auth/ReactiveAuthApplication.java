@@ -1,13 +1,13 @@
-package com.taotao.cloud.reactive.gateway;
+package com.taotao.cloud.reactive.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GatewayApplication {
+public class ReactiveAuthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GatewayApplication.class, args);
+		SpringApplication.run(ReactiveAuthApplication.class, args);
 	}
 
 }
