@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hive;
+package com.taotao.cloud.bigdata.hbase;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,10 +28,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2020/10/30 16:06
  */
 @SpringBootApplication
-public class TaoTaoCloudHiveApplication {
+public class BigdataHbaseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudHiveApplication.class, args);
+		SpringApplication.run(BigdataHbaseApplication.class, args);
 	}
 
 }
