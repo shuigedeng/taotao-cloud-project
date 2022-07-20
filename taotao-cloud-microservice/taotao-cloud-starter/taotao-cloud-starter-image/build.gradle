@@ -1,0 +1,13 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    //https://gitee.com/dromara/image-combiner.git
+    //https://search.maven.org/artifact/com.freewayso/image-combiner
+    implementation 'com.freewayso:image-combiner:2.3.5'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    testImplementation 'junit:junit:4.13.2'
+}
+
+
