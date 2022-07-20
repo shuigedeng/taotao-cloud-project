@@ -25,9 +25,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ServiceDiscovery {
     private static final Logger logger = LoggerFactory.getLogger(ServiceDiscovery.class);
-    private CountDownLatch countDownLatch = new CountDownLatch(1);
+    private final CountDownLatch countDownLatch = new CountDownLatch(1);
     private volatile List<String> dataList = new ArrayList<>();
-    private String registryAddress;
+    private final String registryAddress;
 
     public ServiceDiscovery(String registryAddress) {
         this.registryAddress = registryAddress;

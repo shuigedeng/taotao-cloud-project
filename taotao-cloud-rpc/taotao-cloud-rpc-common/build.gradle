@@ -1,10 +1,11 @@
 dependencies {
-    implementation 'com.dyuproject.protostuff:protostuff-core:1.2.2'
-    implementation 'com.dyuproject.protostuff:protostuff-runtime:1.2.2'
-    implementation 'org.objenesis:objenesis:3.2'
+    api 'com.dyuproject.protostuff:protostuff-core:1.2.2'
+    api 'com.dyuproject.protostuff:protostuff-runtime:1.2.2'
+    api 'org.objenesis:objenesis:3.2'
 
-    implementation group: 'junit', name: 'junit', version: '4.13.1'
-    implementation 'org.slf4j:slf4j-log4j12:1.7.36'
-    implementation 'io.netty:netty-all:4.1.77.Final'
+    api 'org.slf4j:slf4j-log4j12:1.7.36'
+    api 'io.netty:netty-all:4.1.77.Final'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.13.1'
 }
 
