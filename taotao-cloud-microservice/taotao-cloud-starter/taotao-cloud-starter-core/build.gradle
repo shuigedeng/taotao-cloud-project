@@ -23,9 +23,6 @@ dependencies {
     api "de.codecentric:spring-boot-admin-starter-client"
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter'
 
-    api('io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos') {
-        exclude group: 'org.projectlombok', module: 'lombok'
-    }
     api 'joda-time:joda-time'
 
     api 'org.anarres.lzo:lzo-core'

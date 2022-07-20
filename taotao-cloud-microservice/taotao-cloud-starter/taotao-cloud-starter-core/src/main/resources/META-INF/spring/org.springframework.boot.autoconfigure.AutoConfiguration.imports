@@ -1,6 +1,5 @@
 com.taotao.cloud.core.configuration.AsyncAutoConfiguration
 com.taotao.cloud.core.configuration.CoreAutoConfiguration
-com.taotao.cloud.core.configuration.DynamicTpAutoConfiguration
 com.taotao.cloud.core.configuration.EndPointAutoConfiguration
 com.taotao.cloud.core.configuration.GradleAutoConfiguration
 com.taotao.cloud.core.configuration.MonitorAutoConfiguration
