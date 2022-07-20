@@ -11,4 +11,6 @@ dependencies {
     api 'com.github.lianjiatech:retrofit-spring-boot-starter:2.3.6'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    testImplementation 'junit:junit:4.13.2'
 }

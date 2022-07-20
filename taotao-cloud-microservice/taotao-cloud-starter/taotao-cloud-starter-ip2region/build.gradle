@@ -10,4 +10,6 @@ dependencies {
     api 'org.lionsoul:ip2region:2.6.4'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    testImplementation 'junit:junit:4.13.2'
 }

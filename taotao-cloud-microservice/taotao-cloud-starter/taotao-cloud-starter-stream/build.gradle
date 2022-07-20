@@ -10,4 +10,6 @@ dependencies {
     api 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.2'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    testImplementation 'junit:junit:4.13.2'
 }

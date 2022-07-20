@@ -36,6 +36,7 @@ public final class StarterName {
 	public static final String JPA_STARTER = "taotao-cloud-starter-data-jpa";
 	public static final String EXCEL_STARTER = "taotao-cloud-starter-excel";
 	public static final String THREADPOOL_STARTER = "taotao-cloud-starter-threadpoll";
+	public static final String IMAGE_STARTER = "taotao-cloud-starter-image";
 	public static final String MYBATIS_PLUS_STARTER = "taotao-cloud-starter-data-mybatis-plus";
 	public static final String DINGTALK_STARTER = "taotao-cloud-starter-dingtalk";
 	public static final String DISRUPTOR_STARTER = "taotao-cloud-starter-disruptor";

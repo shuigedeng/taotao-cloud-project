@@ -11,4 +11,6 @@ dependencies {
     compileOnly "org.springframework.cloud:spring-cloud-context"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    testImplementation 'junit:junit:4.13.2'
 }
