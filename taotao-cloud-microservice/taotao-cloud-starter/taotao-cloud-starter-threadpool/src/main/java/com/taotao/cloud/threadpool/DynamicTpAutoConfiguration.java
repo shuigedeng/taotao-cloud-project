@@ -1,6 +1,9 @@
 package com.taotao.cloud.threadpool;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -13,7 +16,12 @@ import org.springframework.context.annotation.PropertySource;
  */
 @AutoConfiguration
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:dynamic-tp.yml")
-public class DynamicTpAutoConfiguration {
+public class DynamicTpAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(DynamicTpAutoConfiguration.class, StarterName.THREADPOOL_STARTER);
+	}
 
 	//@Bean
 	//public DtpExecutor demo1Executor() {
