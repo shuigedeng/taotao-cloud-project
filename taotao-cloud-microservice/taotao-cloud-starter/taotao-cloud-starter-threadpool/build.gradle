@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     //https://gitee.com/dromara/dynamic-tp.git
     api('io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos:1.0.7') {
