@@ -24,8 +24,8 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ServiceRegistry {
     private static final Logger logger = LoggerFactory.getLogger(ServiceRegistry.class);
-    private String registryAddress;
-    private CountDownLatch countDownLatch = new CountDownLatch(1);
+    private final String registryAddress;
+    private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     public ServiceRegistry(String registryAddress) {
         this.registryAddress = registryAddress;
