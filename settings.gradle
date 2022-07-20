@@ -41,7 +41,7 @@ for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
         directory.eachDir {
-            if (it.name != "build" && it.name != "out") {
+            if (it.name != "build" && it.name != "out" && it.name != "bin") {
                 include "${dir}:${directory.name}"
             }
         }
@@ -59,7 +59,7 @@ for (project in threeLayerProjects) {
                     include "${dir}:${directory.name}:${it.name}"
 
                     it.eachDir {four->
-                        if (four.name != "build" && four.name != "src" && four.name != "out") {
+                        if (four.name != "build" && four.name != "src" && four.name != "out" && it.name != "bin") {
                             include "${dir}:${directory.name}:${it.name}:${four.name}"
                         }
                     }
