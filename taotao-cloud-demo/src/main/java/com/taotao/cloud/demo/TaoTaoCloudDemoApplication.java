@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableMultiDinger
 //@DingerScan(basePackages = "com.taotao.cloud.sys.biz.dingtalk")
 @SpringBootApplication
-public class DemoApplication {
+public class TaoTaoCloudDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(TaoTaoCloudDemoApplication.class, args);
 	}
 
 }
