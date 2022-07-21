@@ -20,6 +20,7 @@ import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.annotation.FeignApi;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
@@ -84,7 +85,10 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@NotAuth
 	@GetMapping("/test")
 	public FeignDictRes test(@RequestParam(value = "code") String code) {
+		LogUtil.info("sldfkslfdjalsdfkjalsfdjl");
 		Dict dict = service().findByCode(code);
+
+		LogUtil.info(dict.toString());
 		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 }

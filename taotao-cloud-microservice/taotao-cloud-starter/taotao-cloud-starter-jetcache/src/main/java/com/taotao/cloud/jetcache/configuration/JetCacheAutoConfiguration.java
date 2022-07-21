@@ -48,7 +48,7 @@ import org.springframework.context.annotation.Bean;
 @EnableCreateCacheAnnotation
 @AutoConfiguration(after = com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration.class)
 @EnableConfigurationProperties(JetCacheProperties.class)
-@ConditionalOnProperty(prefix = JetCacheProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = JetCacheProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class JetCacheAutoConfiguration implements InitializingBean {
 
 	private ObjectMapper cacheMapper;

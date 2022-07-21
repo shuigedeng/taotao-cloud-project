@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2022-07-03 09:50:38
  */
 @AutoConfiguration
-@ConditionalOnProperty(prefix = JetCacheMetricsProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = JetCacheMetricsProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(JetCacheMetricsProperties.class)
 public class JetCacheMetricsAutoConfiguration {
 
