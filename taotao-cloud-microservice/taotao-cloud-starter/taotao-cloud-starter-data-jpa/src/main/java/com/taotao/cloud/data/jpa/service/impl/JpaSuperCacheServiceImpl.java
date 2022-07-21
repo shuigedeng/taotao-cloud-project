@@ -17,8 +17,6 @@ package com.taotao.cloud.data.jpa.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReflectUtil;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
@@ -170,24 +168,26 @@ public abstract class JpaSuperCacheServiceImpl<M extends JpaSuperRepository<T, I
 		if (model instanceof JpaSuperEntity) {
 			return ((JpaSuperEntity) model).getId();
 		} else {
-			// 实体没有继承 Entity 和 SuperEntity
-			TableInfo tableInfo = TableInfoHelper.getTableInfo((Class) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1]);
-			if (tableInfo == null) {
-				return null;
-			}
-			// 主键类型
-			Class<?> keyType = tableInfo.getKeyType();
-			if (keyType == null) {
-				return null;
-			}
-			// id 字段名
-			String keyProperty = tableInfo.getKeyProperty();
-
-			// 反射得到 主键的值
-			Field idField = ReflectUtil.getField((Class) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1], keyProperty);
-			return ReflectUtil.getFieldValue(model, idField);
+			// todo 此处需要修改
+			// // 实体没有继承 Entity 和 SuperEntity
+			// TableInfo tableInfo = TableInfoHelper.getTableInfo((Class) ((ParameterizedType) this.getClass()
+			// 	.getGenericSuperclass()).getActualTypeArguments()[1]);
+			// if (tableInfo == null) {
+			// 	return null;
+			// }
+			// // 主键类型
+			// Class<?> keyType = tableInfo.getKeyType();
+			// if (keyType == null) {
+			// 	return null;
+			// }
+			// // id 字段名
+			// String keyProperty = tableInfo.getKeyProperty();
+			//
+			// // 反射得到 主键的值
+			// Field idField = ReflectUtil.getField((Class) ((ParameterizedType) this.getClass()
+			// 	.getGenericSuperclass()).getActualTypeArguments()[1], keyProperty);
+			// return ReflectUtil.getFieldValue(model, idField);
+			return null;
 		}
 	}
 

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.redis.configuration;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -27,6 +26,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import jodd.util.StringPool;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

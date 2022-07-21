@@ -37,6 +37,8 @@ dependencies {
         api "com.github.whvcse:easy-captcha:${easyCaptchaVersion}"
         api "cn.hutool:hutool-all:${hutoolVersion}"
         api "cn.afterturn:easypoi-base:${easypoiVersion}"
+        api "cn.afterturn:easypoi-annotation:${easypoiVersion}"
+        api "cn.afterturn:easypoi-web:${easypoiVersion}"
         api "com.nepxion:banner:${bannerVersion}"
         api "eu.bitwalker:UserAgentUtils:${userAgentUtilsVersion}"
 
@@ -118,7 +120,6 @@ dependencies {
         api "org.glassfish.jaxb:jaxb-xjc:${jaxbVersion}"
 
         api "com.lmax:disruptor:${disruptorVersion}"
-        api "io.github.xpc1024:easy-es-boot-starter:${easyEsVersion}"
         api "org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter:${elasticjobVersion}"
         api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-dingtalk:${elasticjobVersion}"
         api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-wechat:${elasticjobVersion}"

@@ -2,8 +2,6 @@ dependencies {
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
-	api 'javax.servlet:javax.servlet-api'
-
 	//https://search.maven.org/artifact/org.springframework.security/spring-security-core
 	api  'org.springframework.security:spring-security-core:5.7.1'
 	//api  'org.springframework.security:spring-security-web'
@@ -14,10 +12,7 @@ dependencies {
 	api 'org.springframework.boot:spring-boot-starter-security'
 	api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
-	api 'org.apache.commons:commons-collections4'
-	api 'org.apache.commons:commons-lang3'
 	api 'io.jsonwebtoken:jjwt:0.9.1'
 
-	
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

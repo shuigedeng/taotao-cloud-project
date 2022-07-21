@@ -1,12 +1,12 @@
 package com.taotao.cloud.image.image_combiner;
 
-import com.taotao.cloud.sys.biz.support.image_combiner.ImageCombiner;
-import com.taotao.cloud.sys.biz.support.image_combiner.element.TextElement;
-import com.taotao.cloud.sys.biz.support.image_combiner.enums.Direction;
-import com.taotao.cloud.sys.biz.support.image_combiner.enums.GradientDirection;
-import com.taotao.cloud.sys.biz.support.image_combiner.enums.LineAlign;
-import com.taotao.cloud.sys.biz.support.image_combiner.enums.OutputFormat;
-import com.taotao.cloud.sys.biz.support.image_combiner.enums.ZoomMode;
+import com.freewayso.image.combiner.ImageCombiner;
+import com.freewayso.image.combiner.element.TextElement;
+import com.freewayso.image.combiner.enums.Direction;
+import com.freewayso.image.combiner.enums.GradientDirection;
+import com.freewayso.image.combiner.enums.LineAlign;
+import com.freewayso.image.combiner.enums.OutputFormat;
+import com.freewayso.image.combiner.enums.ZoomMode;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;

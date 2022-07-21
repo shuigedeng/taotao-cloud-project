@@ -1,9 +1,4 @@
 dependencies {
-    //https://search.maven.org/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
-    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3'
-    //https://search.maven.org/artifact/org.yaml/snakeyaml
-    api 'org.yaml:snakeyaml:1.30'
-
     //jackson
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
@@ -12,41 +7,24 @@ dependencies {
     api 'com.fasterxml.jackson.core:jackson-core'
     api 'com.fasterxml.jackson.core:jackson-annotations'
     api 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3'
 
-    //https://search.maven.org/artifact/ma.glasnost.orika/orika-core
-    api 'ma.glasnost.orika:orika-core:1.5.4'
-
-    api 'org.slf4j:slf4j-api'
-    api 'javax.servlet:javax.servlet-api'
-    api 'cn.hutool:hutool-all'
-    api 'com.alibaba:transmittable-thread-local'
-    api 'org.aspectj:aspectjweaver'
-    api 'org.javassist:javassist'
-    api 'com.github.whvcse:easy-captcha'
-    api 'javax.validation:validation-api'
-    api 'io.projectreactor:reactor-core'
-    api 'com.nepxion:banner'
-    api 'com.github.xkzhangsan:xk-time'
-    api 'com.baomidou:mybatis-plus-core'
-    api 'com.baomidou:mybatis-plus-extension'
-    api 'com.squareup.okhttp3:okhttp'
-    api "com.squareup.okhttp3:logging-interceptor"
-    api "eu.bitwalker:UserAgentUtils"
-
+    //apache
     api('org.apache.httpcomponents:httpclient') {
         exclude group: 'junit', module: 'junit'
     }
     api 'org.apache.httpcomponents:httpmime'
+    api "org.apache.commons:commons-pool2"
+    api "org.apache.commons:commons-lang3"
+    api 'org.apache.commons:commons-collections4'
+    api 'org.apache.commons:commons-compress:1.21'
+    api 'commons-fileupload:commons-fileupload:1.4'
+    api 'commons-io:commons-io:2.11.0'
+    api 'commons-codec:commons-codec'
     api 'commons-configuration:commons-configuration'
+    api 'com.google.guava:guava'
 
-    api "io.swagger.core.v3:swagger-models"
-    api 'io.swagger.core.v3:swagger-annotations'
-
-    api 'com.thoughtworks.xstream:xstream'
-
-    api "org.jsoup:jsoup"
-    api "com.google.zxing:javase"
-
+    //spring
     api 'org.springframework:spring-core'
     api 'org.springframework:spring-tx'
     api 'org.springframework:spring-context'
@@ -56,41 +34,72 @@ dependencies {
     api 'org.springframework:spring-aop'
     api 'org.springframework:spring-aspects'
 
-    // jdk11删除了NashornScriptEngineFactory 引入此依赖支持其他框架以及jdk11以上版本
-    api "org.openjdk.nashorn:nashorn-core"
-
-    api "io.github.openfeign:feign-okhttp"
-    api "com.squareup.okhttp3:okhttp"
-
-    api 'org.springframework.data:spring-data-commons'
-    api('org.springframework.security:spring-security-core') {
+    api "org.springframework.cloud:spring-cloud-context"
+    compileOnly 'org.springframework.data:spring-data-commons'
+    compileOnly('org.springframework.security:spring-security-core') {
         exclude group: 'junit', module: 'junit'
     }
-    api 'org.springframework.security:spring-security-oauth2-core'
-
+    compileOnly 'org.springframework.security:spring-security-oauth2-core'
     api "org.springframework.boot:spring-boot-starter-validation"
     api 'org.springframework.boot:spring-boot-autoconfigure'
     api 'org.springframework.boot:spring-boot-actuator'
     api 'org.springframework.boot:spring-boot-actuator-autoconfigure'
 
-    api "org.springframework.cloud:spring-cloud-context"
+    //swagger
+    api "io.swagger.core.v3:swagger-models"
+    api 'io.swagger.core.v3:swagger-annotations'
 
     // serializable
     api 'com.esotericsoftware:kryo'
     api 'com.caucho:hessian'
-    api 'commons-codec:commons-codec'
     api 'com.alibaba.fastjson2:fastjson2'
 
-    // execl
-    api 'cn.afterturn:easypoi-base'
-    api 'cn.afterturn:easypoi-annotation'
+    // mybatis
+    compileOnly 'com.baomidou:mybatis-plus-core'
+    compileOnly 'com.baomidou:mybatis-plus-extension'
 
+    //okhttp3
+    api "com.squareup.okhttp3:okhttp"
+    api "com.squareup.okhttp3:logging-interceptor"
+
+    // javax
+    api 'javax.servlet:javax.servlet-api'
+    api 'javax.validation:validation-api'
+
+    // other
+    api 'org.slf4j:slf4j-api'
+    api 'cn.hutool:hutool-all'
+    api 'com.alibaba:transmittable-thread-local'
+    api 'org.aspectj:aspectjweaver'
+    api 'org.javassist:javassist'
+    api 'com.github.whvcse:easy-captcha'
+    api 'io.projectreactor:reactor-core'
+    api 'com.nepxion:banner'
+    api 'com.github.xkzhangsan:xk-time'
+    api "eu.bitwalker:UserAgentUtils"
+    api 'com.thoughtworks.xstream:xstream'
+    api "org.jsoup:jsoup"
+    api 'joda-time:joda-time'
+    api "com.google.zxing:javase"
+    // jdk11删除了NashornScriptEngineFactory 引入此依赖支持其他框架以及jdk11以上版本
+    api "org.openjdk.nashorn:nashorn-core"
+    //https://search.maven.org/artifact/org.yaml/snakeyaml
+    api 'org.yaml:snakeyaml:1.30'
+    //https://search.maven.org/artifact/ma.glasnost.orika/orika-core
+    api 'ma.glasnost.orika:orika-core:1.5.4'
     //https://search.maven.org/artifact/com.github.yitter/yitter-idgenerator
     api 'com.github.yitter:yitter-idgenerator:1.0.6'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.2'
+
+    testImplementation 'org.assertj:assertj-guava:3.5.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.testng:testng:7.6.0'
+    testImplementation 'com.google.inject:guice:5.1.0'
 }
 
 

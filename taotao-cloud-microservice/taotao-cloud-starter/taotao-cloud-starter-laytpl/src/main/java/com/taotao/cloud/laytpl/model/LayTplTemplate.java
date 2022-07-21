@@ -17,7 +17,7 @@
 package com.taotao.cloud.laytpl.model;
 
 import cn.hutool.script.JavaScriptEngine;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.support.function.Unchecked;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.io.IoUtil;
@@ -96,7 +96,7 @@ public class LayTplTemplate implements ApplicationContextAware, InitializingBean
 	 * @return 渲染后的html
 	 */
 	public String renderTpl(String tplName, Object data) {
-		if (tplName.startsWith(StringPool.SLASH)) {
+		if (tplName.startsWith(StrPool.SLASH)) {
 			tplName = tplName.substring(1);
 		}
 		final String tplPath = tplProperties.getPrefix() + tplName;

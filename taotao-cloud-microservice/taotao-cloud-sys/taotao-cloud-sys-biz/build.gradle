@@ -26,15 +26,9 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket-netty")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-third-client")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-doc")
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
-
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-
-    //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
-    implementation 'org.apache.pdfbox:pdfbox:2.0.26'
-    //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
-    implementation 'io.soabase.record-builder:record-builder-core:33'
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
     implementation 'com.google.protobuf:protobuf-java:3.21.2'
@@ -48,16 +42,11 @@ dependencies {
     //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
     implementation 'io.protostuff:protostuff-runtime:1.8.0'
 
-    //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
-    implementation 'io.github.tokenjan:pinyin4j:2.6.1'
-
-    //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-retrofit
-    implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
-    //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-okhttp
-    implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
-
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
     implementation 'io.github.memorydoc:gobrs-async-starter:1.2.0-RELEASE'
+
+    //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
+    implementation 'io.soabase.record-builder:record-builder-core:33'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'

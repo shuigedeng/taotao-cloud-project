@@ -6,9 +6,8 @@ dependencies {
         exclude group: "com.alibaba", module: "fastjson"
     }
 
-    implementation "io.micrometer:micrometer-core"
-
-    compileOnly "org.springframework.cloud:spring-cloud-context"
+    api "io.micrometer:micrometer-core"
+    api "org.springframework.cloud:spring-cloud-context"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
