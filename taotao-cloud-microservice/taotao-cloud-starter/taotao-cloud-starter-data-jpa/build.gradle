@@ -10,6 +10,8 @@ dependencies {
     api 'com.querydsl:querydsl-jpa'
     api "mysql:mysql-connector-java"
 
+    compileOnly 'org.springframework.security:spring-security-oauth2-core'
+
     annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

@@ -174,8 +174,6 @@ buildscript {
         jaxbVersion = "4.0.0"
         //https://search.maven.org/artifact/com.lmax/disruptor
         disruptorVersion = "3.4.4"
-        //https://search.maven.org/artifact/io.github.xpc1024/easy-es-boot-starter
-        easyEsVersion = "0.9.20"
         //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
         elasticjobVersion = "3.0.1"
         //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace

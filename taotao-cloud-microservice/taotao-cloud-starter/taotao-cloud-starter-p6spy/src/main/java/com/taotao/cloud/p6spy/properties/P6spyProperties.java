@@ -17,7 +17,6 @@ package com.taotao.cloud.p6spy.properties;
 
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import java.io.File;
-import org.apache.poi.ooxml.POIXMLProperties.CoreProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 

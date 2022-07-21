@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.ip2region.model;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 
 import java.io.Serializable;
@@ -66,7 +66,7 @@ public class IpInfo implements Serializable {
 		regionSet.add(province);
 		regionSet.add(city);
 		regionSet.removeIf(Objects::isNull);
-		return StringUtil.join(regionSet, StringPool.EMPTY);
+		return StringUtil.join(regionSet, StrPool.EMPTY);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class IpInfo implements Serializable {
 		regionSet.add(city);
 		regionSet.add(isp);
 		regionSet.removeIf(Objects::isNull);
-		return StringUtil.join(regionSet, StringPool.SPACE);
+		return StringUtil.join(regionSet, StrPool.SPACE);
 	}
 
 	public String getCountry() {

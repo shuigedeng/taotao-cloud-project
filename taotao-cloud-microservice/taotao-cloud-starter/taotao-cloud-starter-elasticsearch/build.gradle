@@ -3,7 +3,9 @@ dependencies {
 
     api "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 
-    implementation('io.github.xpc1024:easy-es-boot-starter') {
+    //https://gitee.com/dromara/easy-es.git
+    //https://search.maven.org/artifact/cn.easy-es/easy-es-boot-starter
+    implementation('cn.easy-es:easy-es-boot-starter:0.9.60') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 

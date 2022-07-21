@@ -11,9 +11,5 @@ dependencies {
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-    api "org.apache.httpcomponents:httpclient"
-    api "org.apache.httpcomponents:httpmime"
-    api "com.squareup.okhttp3:okhttp"
-
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

@@ -5,7 +5,6 @@ dependencies {
     api 'org.springdoc:springdoc-openapi-webmvc-core:1.6.9'
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-common
     api 'org.springdoc:springdoc-openapi-common:1.6.9'
-    api 'com.google.guava:guava'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

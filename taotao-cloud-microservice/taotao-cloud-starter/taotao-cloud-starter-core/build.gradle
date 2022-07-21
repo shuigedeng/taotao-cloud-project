@@ -23,8 +23,6 @@ dependencies {
     api "de.codecentric:spring-boot-admin-starter-client"
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter'
 
-    api 'joda-time:joda-time'
-
     api 'org.anarres.lzo:lzo-core'
     api 'net.jpountz.lz4:lz4'
     api 'org.xerial.snappy:snappy-java'

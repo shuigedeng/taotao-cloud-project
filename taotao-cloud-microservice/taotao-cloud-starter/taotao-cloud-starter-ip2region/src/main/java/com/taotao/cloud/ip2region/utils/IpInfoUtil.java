@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.ip2region.utils;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.ip2region.model.IpInfo;
 import java.util.Arrays;
 import java.util.function.Function;
@@ -68,7 +68,7 @@ public class IpInfoUtil {
 	@Nullable
 	private static String filterZero(@Nullable String info) {
 		// null 或 0 返回 null
-		if (info == null || StringPool.ZERO.equals(info)) {
+		if (info == null || StrPool.ZERO.equals(info)) {
 			return null;
 		}
 		return info;
