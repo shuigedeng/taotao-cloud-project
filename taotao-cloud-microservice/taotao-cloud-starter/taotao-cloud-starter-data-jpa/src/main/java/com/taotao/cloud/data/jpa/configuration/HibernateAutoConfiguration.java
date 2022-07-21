@@ -56,6 +56,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -69,8 +70,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  */
 @AutoConfiguration
 @EnableJpaAuditing
+@EnableJpaRepositories(basePackages = {"com.taotao.cloud.*.biz.repository.inf"})
 @EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class, JpaProperties.class})
-@ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Override

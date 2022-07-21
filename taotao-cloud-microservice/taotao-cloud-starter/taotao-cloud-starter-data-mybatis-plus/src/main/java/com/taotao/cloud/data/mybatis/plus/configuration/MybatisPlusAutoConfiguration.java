@@ -47,6 +47,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.type.EnumTypeHandler;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -63,10 +64,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @version 2021.9
  * @since 2021-09-04 07:40:02
  */
+@MapperScan(basePackages = {"com.taotao.cloud.*.biz.mapper"})
 @EnableTransactionManagement
 @AutoConfiguration(after = TenantAutoConfiguration.class)
 @EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class, TenantProperties.class})
-@ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
