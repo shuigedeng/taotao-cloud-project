@@ -19,12 +19,14 @@ import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
+
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 审计日志实现类-Kafka
@@ -36,6 +38,11 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	public static final String REQUEST_LOG_TOPIC = "request-log-";
+
+	private static long currentTime = System.currentTimeMillis();
+
+	private final AtomicLong sendSuccessNum = new AtomicLong(0L);
+	private static final int ERROR_THRESHOLD = 1000;
 
 	@Value("${spring.application.name}")
 	private String appName;
@@ -57,15 +64,29 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 			future.addCallback(new ListenableFutureCallback<>() {
 				@Override
 				public void onFailure(Throwable throwable) {
-					LogUtil.error("远程日志记录失败：{}", throwable);
+					LogUtil.error("请求日志发送远程记录失败：{}", throwable);
 				}
 
 				@Override
 				public void onSuccess(SendResult<String, String> stringObjectSendResult) {
-					//log.info("远程日志记录成功：{}", requestLog);
+					long andIncrement = sendSuccessNum.getAndIncrement();
+					if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+						successLog(andIncrement, "请求日志消息发送成功");
+					}
 				}
 			});
 		}
+	}
+
+	protected void successLog(long num, String msg) {
+		long milliseconds = System.currentTimeMillis();
+		long seconds = (milliseconds - currentTime) / 1000;
+		long minute = seconds / 60;
+		long hour = minute / 24;
+
+		LogUtil.info("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时]", msg, num, seconds, minute,
+			hour);
+		currentTime = System.currentTimeMillis();
 	}
 }
 

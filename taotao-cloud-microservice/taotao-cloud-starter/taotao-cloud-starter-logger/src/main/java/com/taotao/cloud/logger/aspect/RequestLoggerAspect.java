@@ -20,6 +20,7 @@ import cn.hutool.core.convert.ConvertException;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
+import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.taotao.cloud.common.constant.CommonConstant;
@@ -41,7 +42,11 @@ import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;
 import io.swagger.v3.oas.annotations.Operation;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,15 +66,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+
+import static com.taotao.cloud.common.model.DatePattern.NORM_DATETIME_PATTERN;
 
 
 /**
@@ -175,11 +179,10 @@ public class RequestLoggerAspect {
 				}
 			}
 			requestLogger.setTenantId(TenantContextHolder.getTenant());
-			requestLogger.setEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
-			long endTime = Instant.now().toEpochMilli();
+			long endTime = System.currentTimeMillis();
+			requestLogger.setEndTime(endTime);
 			requestLogger.setConsumingTime(endTime - requestLogger.getStartTime());
-			requestLogger.setResult(
-				getText(String.valueOf(ret == null ? StrPool.EMPTY : ret)));
+			requestLogger.setResult(getText(String.valueOf(ret == null ? StrPool.EMPTY : ret)));
 
 			publisher.publishEvent(new RequestLoggerEvent(requestLogger));
 			REQUEST_LOG_THREAD_LOCAL.remove();
@@ -250,7 +253,7 @@ public class RequestLoggerAspect {
 		requestLogger.setClientId(SecurityUtil.getClientId());
 		String ip = RequestUtil.getRemoteAddr(request);
 		requestLogger.setIp(ip);
-		requestLogger.setStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
+		requestLogger.setStartTime(System.currentTimeMillis());
 		requestLogger.setUrl(URLUtil.getPath(request.getRequestURI()));
 		requestLogger.setMethod(request.getMethod());
 		Object[] args = joinPoint.getArgs();
@@ -274,8 +277,7 @@ public class RequestLoggerAspect {
 		requestLogger.setHeaders(JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
 		requestLogger.setRequestType(LogUtil.getRequestType(name));
 		requestLogger.setSource(DEFAULT_SOURCE);
-		requestLogger.setCtime(
-			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
+		requestLogger.setCtime(DateUtil.format(LocalDateTime.now(), NORM_DATETIME_PATTERN));
 		requestLogger.setLogday(DateUtil.getCurrentDate());
 
 		Ip2regionSearcher ip2regionSearcher = ContextUtil.getBean(Ip2regionSearcher.class, true);
@@ -286,7 +288,8 @@ public class RequestLoggerAspect {
 		}
 
 		String uaStr = request.getHeader("user-agent");
-		requestLogger.setOs(UserAgentUtil.parse(uaStr).getOs().toString());
+		UserAgent userAgent = UserAgentUtil.parse(uaStr);
+		requestLogger.setOs(JsonUtil.toJSONString(userAgent));
 
 		setDescription(joinPoint, requestLoggerAnnotation, requestLogger);
 		return requestLogger;
