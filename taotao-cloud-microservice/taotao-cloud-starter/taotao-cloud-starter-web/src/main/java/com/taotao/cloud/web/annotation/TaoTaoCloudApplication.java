@@ -45,7 +45,7 @@ import java.lang.annotation.Target;
 @MapperScan(basePackages = {"com.taotao.cloud.*.biz.mapper"})
 @EnableJpaRepositories(basePackages = {"com.taotao.cloud.*.biz.repository.inf"})
 @ServletComponentScan
-@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableTaoTaoCloudOauth2Resource
 @EnableEncryptableProperties
 @EnableDiscoveryClient
