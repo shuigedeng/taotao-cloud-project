@@ -21,18 +21,21 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.slf4j.{Logger, LoggerFactory}
 
 /**
- * TaoTaoCloudLogConsole
- *
- * -e dev -b host:9092 -t taotao-cloud-sys-log -m 0
- *
- * spark-submit --master spark://192.168.10.200:7077 --class com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole  taotao-cloud-hudi-1.8.0.jar
- *
- * java -cp taotao-cloud-hudi-1.8.0.jar  com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole
- *
- * @author shuigedeng
- * @since 2020/11/27 下午3:06
- * @version 2022.04
- */
+*
+TaoTaoCloudLogConsole
+*
+*   -e dev -b host:9092 -t taotao-cloud-sys-log -m 0
+*
+*   spark-submit --master spark://192.168.10.200:7077 --class com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole  taotao-cloud-hudi-1.8.0.jar
+*
+*   java -cp taotao-cloud-hudi-1.8.0.jar  com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole
+*
+*
+*
+* @author shuigedeng
+* @version 2022.07
+* @since 2022 -07-21 10:45:33
+*/
 object TaoTaoCloudLogConsole {
   val logger: Logger = LoggerFactory.getLogger(TaoTaoCloudLogConsole.getClass)
 
