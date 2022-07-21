@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.caffeine.manager;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
@@ -23,6 +22,8 @@ import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+
+import com.taotao.cloud.common.constant.StrPool;
 import org.springframework.boot.convert.DurationStyle;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.lang.Nullable;
@@ -87,7 +88,7 @@ public class CaffeineAutoCacheManager extends CaffeineCacheManager {
 	 */
 	@Override
 	protected com.github.benmanes.caffeine.cache.Cache<Object, Object> createNativeCaffeineCache(String name) {
-		String[] cacheArray = name.split(StringPool.HASH);
+		String[] cacheArray = name.split(StrPool.HASH);
 		if (cacheArray.length < 2) {
 			return super.createNativeCaffeineCache(name);
 		}
