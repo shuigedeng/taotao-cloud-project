@@ -18,14 +18,17 @@ package com.taotao.cloud.bigdata.flink
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, createTypeInformation}
 
 /**
- * JBatchWordCount
- *
- * nc -lk 8888
- *
- * @author shuigedeng
- * @since 2020/11/3 09:05
- * @version 2022.04
- */
+*
+JBatchWordCount
+*
+*   nc -lk 8888
+*
+*
+*
+* @author shuigedeng
+* @version 2022.07
+* @since 2022 -07-21 10:44:31
+*/
 object SStreamWordCount {
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
