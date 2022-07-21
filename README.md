@@ -51,9 +51,9 @@
 ## 4. dependencies
 Requires:
 ```
-JAVA_VERSION >= 17
+JAVA_VERSION >= 17 (推荐使用amazon-corretto-17)
 GRALE_VERSION >= 7.4.1
-IDEA_VERSION >= 2022.1.3
+IDEA_VERSION >= 2022.1.4
 ```
 
 Gradle:
@@ -134,7 +134,7 @@ Guava | 29.0-jre
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求** 
-* **主体框架**：采用最新的Spring Boot 2.7.0、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0版本进行设计
+* **主体框架**：采用最新的Spring Boot 2.7.1、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
@@ -163,10 +163,11 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
 │  ├─taotao-cloud-container -- 容器模块
 │  ├─taotao-cloud-dependencies -- 全局公共依赖模块
+│  ├─taotao-cloud-go -- go模块
 │  ├─taotao-cloud-java -- java模块
 │  ├─taotao-cloud-microservice -- 微服务业务模块
-│  │  ├─taotao-cloud-monitor  -- admin server模块
-│  │  ├─taotao-cloud-auth  -- oauth2认证模块
+│  │  ├─taotao-cloud-monitor  -- 监控模块
+│  │  ├─taotao-cloud-auth  -- oauth2认证中心模块
 │  │  ├─taotao-cloud-customer  -- 客服模块
 │  │  ├─taotao-cloud-distribution  -- 营销/分销模块
 │  │  ├─taotao-cloud-front  -- 前端pc模块
@@ -186,36 +187,30 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-stock  -- 库存模块
 │  │  ├─taotao-cloud-store  -- 店铺模块
 │  │  ├─taotao-cloud-sys  -- 系统模块
-│  │  ├─taotao-cloud-websocket  -- websocket模块
 │  │  ├─taotao-cloud-xxljob  -- xxl-job模块
 │  ├─taotao-cloud-netty -- netty模块
-│  ├─taotao-cloud-offline -- 离线数据分析模块
-│  │  ├─taotao-cloud-offline-warehouse  -- 数据仓库模块
-│  │  ├─taotao-cloud-offline-weblog -- web日志分析模块
-│  ├─taotao-cloud-opencv -- opencv模块
+│  ├─taotao-cloud-nod -- node模块
 │  ├─taotao-cloud-plugin -- 插件模块
-│  │  ├─taotao-cloud-gradle-plugin  -- gradle-plugin模块
-│  │  ├─taotao-cloud-idea-plugin -- idea-plugin模块
-│  ├─taotao-cloud-processor -- java processor模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-reactive -- spring web响应式模块
-│  ├─taotao-cloud-realtime -- 实时数据分析模块
-│  │  ├─taotao-cloud-realtime-datalake  -- 数据湖模块
+│  ├─taotao-cloud-rpc -- rpc模块
+│  ├─taotao-cloud-scala -- scala模块
+│  ├─taotao-cloud-spring-native -- spring模块
+│  ├─taotao-cloud-standlone -- 单项目模块
+│  ├─taotao-cloud-warehouse -- 数仓模块
+│  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
+│  │  ├─taotao-cloud-offline-weblog -- 离线日志分析模块
+│  │  ├─taotao-cloud-realtime-datalake  -- 准实时数据湖模块
 │  │  ├─taotao-cloud-realtime-mall -- 商城日志分析模块
 │  │  ├─taotao-cloud-realtime-recommend -- 实时推荐模块
 │  │  ├─taotao-cloud-realtime-travel -- 实时旅游模块
-│  ├─taotao-cloud-rpc -- rpc模块
-│  ├─taotao-cloud-scala -- scala模块
-│  ├─taotao-cloud-spring-native -- spring native模块
-│  ├─taotao-cloud-spring-source -- spring 源码模块
-│  ├─taotao-cloud-spring-standlone -- 单项目模块
 │  ├─taotao-cloud-ui -- 前端模块
-│  │  ├─taotao-cloud-datav -- 大屏展示模块
+│  │  ├─taotao-cloud-datav -- 大屏PC端展示模块
 │  │  ├─taotao-cloud-front -- 商城PC端模块
 │  │  ├─taotao-cloud-mall  -- 商城移动端模块
 │  │  ├─taotao-cloud-manager  -- 平台管理端模块
 │  │  ├─taotao-cloud-merchant  -- 商户管理端模块
-│  │  ├─taotao-cloud-open -- 开放平台模块
+│  │  ├─taotao-cloud-open -- 开放平台PC端模块
 ```
 
 ## 9.开源共建
