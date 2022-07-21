@@ -23,6 +23,26 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
+jetcache:
+  statIntervalMinutes: 1
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: jacksonKeyConvertor
+  remote:
+    default:
+      type: redis
+      keyConvertor: jacksonKeyConvertor
+      valueEncoder: jacksonValueEncoder
+      valueDecoder: jacksonValueDecoder
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: 127.0.0.1
+      port: 6379
+
 easy-es:
   enable: true
   # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
