@@ -17,6 +17,7 @@
 package com.taotao.cloud.jetcache.configuration;
 
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.config.EnableMethodCache;
 import com.alicp.jetcache.anno.support.ConfigMap;
 import com.alicp.jetcache.anno.support.DefaultSpringEncoderParser;
 import com.alicp.jetcache.anno.support.DefaultSpringKeyConvertorParser;
@@ -48,6 +49,7 @@ import org.springframework.context.annotation.Bean;
 @EnableCreateCacheAnnotation
 @AutoConfiguration(after = com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration.class)
 @EnableConfigurationProperties(JetCacheProperties.class)
+@EnableMethodCache(basePackages = {"com.taotao.cloud.*.biz.service.impl", "com.taotao.cloud.captcha.support"})
 @ConditionalOnProperty(prefix = JetCacheProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class JetCacheAutoConfiguration implements InitializingBean {
 
@@ -89,7 +91,7 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		ObjectMapper mapper = JsonUtil.getInstance().copy();
+		ObjectMapper mapper = JsonUtil.MAPPER.copy();
 		mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator());
 		this.cacheMapper = mapper;
 	}

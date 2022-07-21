@@ -25,10 +25,9 @@ import org.apache.commons.lang3.ObjectUtils;
 /**
  * <p>Description: 抽象Stamp管理 </p>
  *
- * @param <K> 签章缓存对应Key值的类型。
- * @param <V> 签章缓存存储数据，对应的具体存储值的类型，
- * @author : gengwei.zheng
- * @date : 2021/8/23 11:51
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-21 15:57:34
  */
 public abstract class AbstractStampManager<K, V> implements StampManager<K, V> {
 

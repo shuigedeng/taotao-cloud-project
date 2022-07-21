@@ -66,10 +66,9 @@ public class JetCacheMonitorManager implements CacheMonitorManager, Initializing
 	}
 
 	@Override
-	public void addMonitors(String area, String cacheName, Cache cache) {
+	public void addMonitors(String area, String cacheName, Cache cache, boolean syncLocal) {
 		cache = CacheUtil.getAbstractCache(cache);
-		if (cache instanceof MultiLevelCache) {
-			MultiLevelCache mc = (MultiLevelCache) cache;
+		if (cache instanceof MultiLevelCache mc) {
 			if (mc.caches().length == 2) {
 				// local cache
 				Cache local = mc.caches()[0];
@@ -77,6 +76,7 @@ public class JetCacheMonitorManager implements CacheMonitorManager, Initializing
 				DefaultCacheMonitor localMonitor = new DefaultCacheMonitor(localCacheName);
 				local.config().getMonitors().add(localMonitor);
 				registerMeters(meterRegistry, localCacheName, localMonitor);
+
 				// remote cache
 				Cache remote = mc.caches()[1];
 				String remoteCacheName = cacheName + "_remote";
@@ -148,5 +148,4 @@ public class JetCacheMonitorManager implements CacheMonitorManager, Initializing
 			.tag("name", cacheName)
 			.register(meterRegistry);
 	}
-
 }
