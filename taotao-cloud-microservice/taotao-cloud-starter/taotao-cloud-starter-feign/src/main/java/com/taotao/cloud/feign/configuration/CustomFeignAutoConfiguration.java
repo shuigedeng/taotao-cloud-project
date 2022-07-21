@@ -66,6 +66,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomizer;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
@@ -84,6 +85,7 @@ import org.springframework.http.MediaType;
  * @version 2022.03
  * @since 2020/6/15 11:31
  */
+@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
 @EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class, FeignInterceptorProperties.class})
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

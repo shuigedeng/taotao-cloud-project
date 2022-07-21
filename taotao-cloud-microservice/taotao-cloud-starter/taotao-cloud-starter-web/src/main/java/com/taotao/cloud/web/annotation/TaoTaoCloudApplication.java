@@ -41,9 +41,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
-@MapperScan(basePackages = {"com.taotao.cloud.*.biz.mapper"})
-@EnableJpaRepositories(basePackages = {"com.taotao.cloud.*.biz.repository.inf"})
 @ServletComponentScan
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableTaoTaoCloudOauth2Resource
