@@ -16,6 +16,7 @@ dependencies {
     compileOnly 'com.baomidou:mybatis-plus-extension'
     compileOnly 'org.springframework.kafka:spring-kafka'
 
+    //https://github.com/akkinoc/logback-access-spring-boot-starter
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
     api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.1"
 
