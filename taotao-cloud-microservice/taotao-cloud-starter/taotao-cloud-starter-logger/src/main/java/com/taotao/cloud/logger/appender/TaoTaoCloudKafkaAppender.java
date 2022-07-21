@@ -65,7 +65,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 		long andIncrement = sendErrorNum.getAndIncrement();
 		if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
-			errorLog(andIncrement, "消息发送失败");
+			errorLog(andIncrement, "系统日志消息发送失败");
 		}
 	};
 
@@ -167,7 +167,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		} catch (Exception exception) {
 			long andIncrement = msgErrorNum.getAndIncrement();
 			if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
-				errorLog(andIncrement, "消息处理失败");
+				errorLog(andIncrement, "系统日志消息处理失败");
 			}
 
 			return;
@@ -189,12 +189,12 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 				long andIncrement = sendSuccessNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
-					successLog(andIncrement, "消息发送成功");
+					successLog(andIncrement, "系统日志消息发送成功");
 				}
 			} catch (Exception ex) {
 				long andIncrement = sendErrorNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
-					errorLog(andIncrement, "消息发送失败");
+					errorLog(andIncrement, "系统日志消息发送失败");
 				}
 			}
 		} else {
