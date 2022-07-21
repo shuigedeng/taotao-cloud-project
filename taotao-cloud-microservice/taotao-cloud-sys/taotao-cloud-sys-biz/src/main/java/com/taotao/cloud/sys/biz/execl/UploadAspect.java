@@ -36,7 +36,7 @@ public class UploadAspect {
 		new ThreadPoolExecutor.AbortPolicy());
 
 
-	@Pointcut("@annotation(com.aaa.bbb.Upload)")
+	@Pointcut("@annotation(com.taotao.cloud.sys.biz.execl.Upload)")
 	public void uploadPoint() {
 	}
 
