@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 /**
  * 售后日志注解
  *
- *
  * @AfterSaleLogPoint(sn = "#rvt.sn", description = "'售后申请:售后编号['+#rvt.sn+']'")
  *
  * @author shuigedeng
