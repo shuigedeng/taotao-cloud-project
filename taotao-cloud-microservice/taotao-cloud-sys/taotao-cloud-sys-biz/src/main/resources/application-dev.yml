@@ -30,18 +30,18 @@ jetcache:
     default:
       type: linkedhashmap
       keyConvertor: jacksonKeyConvertor
-  remote:
-    default:
-      type: redis
-      keyConvertor: jacksonKeyConvertor
-      valueEncoder: jacksonValueEncoder
-      valueDecoder: jacksonValueDecoder
-      poolConfig:
-        minIdle: 5
-        maxIdle: 20
-        maxTotal: 50
-      host: 127.0.0.1
-      port: 6379
+  #remote:
+  #  default:
+  #    type: redis
+  #    keyConvertor: jacksonKeyConvertor
+  #    valueEncoder: jacksonValueEncoder
+  #    valueDecoder: jacksonValueDecoder
+  #    poolConfig:
+  #      minIdle: 5
+  #      maxIdle: 20
+  #      maxTotal: 50
+  #    host: 127.0.0.1
+  #    port: 6379
 
 easy-es:
   enable: true
