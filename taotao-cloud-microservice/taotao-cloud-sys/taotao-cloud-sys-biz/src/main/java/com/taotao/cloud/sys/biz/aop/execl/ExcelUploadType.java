@@ -1,25 +1,25 @@
-package com.taotao.cloud.sys.biz.execl;
+package com.taotao.cloud.sys.biz.aop.execl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum UploadType {
+public enum ExcelUploadType {
    未知(1,"未知"),
    类型2(2,"类型2"),
    类型1(3,"类型1");
 
    private int code;
    private String desc;
-   private static Map<Integer, UploadType> map = new HashMap<>();
+   private static Map<Integer, ExcelUploadType> map = new HashMap<>();
 
 
    static {
-      for (UploadType value : UploadType.values()) {
+      for (ExcelUploadType value : ExcelUploadType.values()) {
          map.put(value.code, value);
       }
    }
 
-   UploadType(int code, String desc) {
+   ExcelUploadType(int code, String desc) {
       this.code = code;
       this.desc = desc;
    }
@@ -32,7 +32,7 @@ public enum UploadType {
       return desc;
    }
 
-   public static UploadType getByCode(Integer code) {
+   public static ExcelUploadType getByCode(Integer code) {
       return map.get(code);
    }
 }

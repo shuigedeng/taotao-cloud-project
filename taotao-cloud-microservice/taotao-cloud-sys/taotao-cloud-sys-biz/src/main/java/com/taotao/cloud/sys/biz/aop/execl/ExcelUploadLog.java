@@ -1,10 +1,10 @@
-package com.taotao.cloud.sys.biz.execl;
+package com.taotao.cloud.sys.biz.aop.execl;
 
 import java.util.Date;
 import lombok.Data;
 
 @Data
-public class FileUploadLog {
+public class ExcelUploadLog {
    private Integer id;
     // 唯一编码
     private String batchNo;
