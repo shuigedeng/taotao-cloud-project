@@ -17,6 +17,8 @@
 package com.taotao.cloud.common.model;
 
 
+import com.taotao.cloud.common.constant.StrPool;
+
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +38,7 @@ public interface DatePattern {
 	 * 标准日期格式：yyyy-MM-dd
 	 */
 	String NORM_DATE_PATTERN = "yyyy-MM-dd";
+	String COLON_DATE_PATTERN = "yyyy:MM:dd";
 	/**
 	 * 标准日期格式 {@link DateTimeFormatter}：yyyy-MM-dd
 	 */
