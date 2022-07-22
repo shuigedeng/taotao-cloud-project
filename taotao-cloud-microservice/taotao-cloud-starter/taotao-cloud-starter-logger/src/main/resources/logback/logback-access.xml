@@ -7,7 +7,7 @@
 
 	<appender name="LOGBACK_ACCESS_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>common</pattern>
+			<pattern>combined</pattern>
 			<!--<pattern>%h %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}"</pattern>-->
 			<!--<pattern>%h %l %u %user %date "%r" %s %b</pattern>-->
 			<!--<pattern>common</pattern>-->
@@ -23,7 +23,11 @@
 		</rollingPolicy>
 
 		<encoder>
-			<pattern>combined</pattern>
+			<!--https://logback.qos.ch/manual/layouts.html  最下面-->
+			<!--https://logback.qos.ch/access.html#configuration-->
+
+			<!--<pattern>combined</pattern>-->
+			<pattern>%t{yyyy-MM-dd HH:mm:ss.SSS} %a %A %b %h %H %m %D %l %u "%r" %s %q %U %v %I %b "%i{origin}" "%i{Referer}" "%i{User-Agent}"</pattern>
 		</encoder>
 	</appender>
 
