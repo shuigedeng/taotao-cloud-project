@@ -45,9 +45,9 @@ public interface IColumnInfoMapper extends BaseMapper<ColumnConfig> {
 			   table_comment as remark
 		from information_schema.tables
 		where table_schema = (select database())
-			  <if test="name!=null">
-			  	and table_name like CONCAT('%',#{name},'%')
-			  </if>
+		<if test="name!=null">
+		  and table_name like CONCAT('%',#{name},'%')
+		</if>
 		order by create_time desc
 		</script>
 		""")

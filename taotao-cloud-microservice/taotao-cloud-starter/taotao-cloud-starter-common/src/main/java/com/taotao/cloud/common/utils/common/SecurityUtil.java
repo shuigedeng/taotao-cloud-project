@@ -21,20 +21,19 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.context.ContextUtil;
-import org.springframework.http.MediaType;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Objects;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * SecurityUtil
@@ -96,6 +95,7 @@ public final class SecurityUtil {
 	public static Object getDetails() {
 		return getAuthentication().getDetails();
 	}
+
 	public static SecurityContext getSecurityContext() {
 		return SecurityContextHolder.getContext();
 	}
@@ -134,7 +134,7 @@ public final class SecurityUtil {
 	 */
 	public static SecurityUser getCurrentUser() {
 		SecurityUser securityUser = getUser(getAuthentication());
-		if(Objects.isNull(securityUser)){
+		if (Objects.isNull(securityUser)) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		return securityUser;
@@ -159,6 +159,15 @@ public final class SecurityUtil {
 	 */
 	public static String getUsername() {
 		return getCurrentUser().getUsername();
+	}
+
+	public static String getUsernameWithAnonymous() {
+		return getCurrentUserWithNull() == null ? "anonymous"
+			: getCurrentUserWithNull().getUsername();
+	}
+
+	public static Long getUserIdWithAnonymous() {
+		return getCurrentUserWithNull() == null ? -1L : getCurrentUserWithNull().getUserId();
 	}
 
 	/**

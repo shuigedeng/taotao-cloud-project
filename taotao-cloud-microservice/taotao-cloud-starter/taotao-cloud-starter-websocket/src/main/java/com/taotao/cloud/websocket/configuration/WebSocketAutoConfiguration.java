@@ -38,6 +38,7 @@ import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -50,7 +51,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
  * @version 2022.07
  * @since 2022-07-12 11:01:33
  */
-@AutoConfiguration
+@AutoConfiguration(after = DelegatingWebSocketMessageBrokerConfiguration.class)
 @EnableWebSocketMessageBroker
 @ConditionalOnBean({RedissonClient.class})
 @EnableConfigurationProperties({CustomWebSocketProperties.class})
@@ -59,8 +60,6 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 
 	@Autowired
 	private CustomWebSocketProperties customWebSocketProperties;
-	@Autowired
-	private SimpMessagingTemplate simpMessagingTemplate;
 	@Autowired
 	private SimpUserRegistry simpUserRegistry;
 	@Autowired
@@ -88,7 +87,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	}
 
 	@Bean
-	public WebSocketMessageSender webSocketMessageSender() {
+	public WebSocketMessageSender webSocketMessageSender(SimpMessagingTemplate simpMessagingTemplate) {
 		WebSocketMessageSender webSocketMessageSender = new WebSocketMessageSender();
 		webSocketMessageSender.setSimpMessagingTemplate(simpMessagingTemplate);
 		webSocketMessageSender.setSimpUserRegistry(simpUserRegistry);

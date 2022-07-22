@@ -26,18 +26,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import jodd.util.StringPool;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.convert.DurationStyle;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -61,7 +63,8 @@ import org.springframework.lang.Nullable;
 @AutoConfiguration(after = RedisAutoConfiguration.class)
 @EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 @ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class CacheManagerAutoConfiguration implements InitializingBean {
+public class CacheManagerAutoConfiguration extends CachingConfigurerSupport implements
+	InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -73,18 +76,22 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 	 * 序列化方式
 	 */
 	private final RedisSerializer<Object> redisSerializer;
-	private final CacheManagerCustomizers customizerInvoker;
+
 	@Nullable
 	private final RedisCacheConfiguration redisCacheConfiguration;
 
 	CacheManagerAutoConfiguration(RedisSerializer<Object> redisSerializer,
 		org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties,
-		CacheManagerCustomizers customizerInvoker,
 		ObjectProvider<RedisCacheConfiguration> redisCacheConfiguration) {
 		this.redisSerializer = redisSerializer;
 		this.cacheProperties = cacheProperties;
-		this.customizerInvoker = customizerInvoker;
 		this.redisCacheConfiguration = redisCacheConfiguration.getIfAvailable();
+	}
+
+	@Bean
+	public CacheManagerCustomizers cacheManagerCustomizers(
+		ObjectProvider<List<CacheManagerCustomizer<?>>> customizers) {
+		return new CacheManagerCustomizers(customizers.getIfAvailable());
 	}
 
 	@Bean
@@ -104,15 +111,46 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		};
 	}
 
+
+
+	/**
+	 * 自定义缓存异常处理 当缓存读写异常时，忽略异常
+	 */
+	@Override
+	public CacheErrorHandler errorHandler() {
+		return new CacheErrorHandler() {
+			@Override
+			public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
+				LogUtil.error(e.getMessage(), e);
+			}
+
+			@Override
+			public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
+				LogUtil.error(e.getMessage(), e);
+			}
+
+			@Override
+			public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
+				LogUtil.error(e.getMessage(), e);
+			}
+
+			@Override
+			public void handleCacheClearError(RuntimeException e, Cache cache) {
+				LogUtil.error(e.getMessage(), e);
+			}
+		};
+	}
+
+
 	@Primary
 	@Bean(name = "redisCacheManager")
 	@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "redis", matchIfMissing = true)
 	public CacheManager cacheManager(
+		CacheManagerCustomizers cacheManagerCustomizers,
 		ObjectProvider<RedisConnectionFactory> connectionFactoryObjectProvider) {
 		RedisConnectionFactory connectionFactory = connectionFactoryObjectProvider.getIfAvailable();
 		Objects.requireNonNull(connectionFactory, "Bean RedisConnectionFactory is null.");
-		RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(
-			connectionFactory);
+		RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
 		RedisCacheConfiguration cacheConfiguration = this.determineConfiguration();
 		List<String> cacheNames = this.cacheProperties.getCacheNames();
 		Map<String, RedisCacheConfiguration> initialCaches = new LinkedHashMap<>();
@@ -127,7 +165,8 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		RedisAutoCacheManager cacheManager = new RedisAutoCacheManager(redisCacheWriter,
 			cacheConfiguration, initialCaches, allowInFlightCacheCreation);
 		cacheManager.setTransactionAware(enableTransactions);
-		return this.customizerInvoker.customize(cacheManager);
+
+		return cacheManagerCustomizers.customize(cacheManager);
 
 		//RedisCacheConfiguration defConfig = getDefConf();
 		//defConfig.entryTtl(cacheProperties.getDef().getTimeToLive());

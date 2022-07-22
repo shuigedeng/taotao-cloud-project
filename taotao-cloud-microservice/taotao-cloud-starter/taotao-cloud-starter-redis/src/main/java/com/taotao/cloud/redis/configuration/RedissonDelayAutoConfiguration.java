@@ -34,7 +34,6 @@ public class RedissonDelayAutoConfiguration implements InitializingBean {
 		LogUtil.started(RedissonDelayAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
-
 	@Scope(BeanDefinition.SCOPE_SINGLETON)
 	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 	@Bean(name = RedissonConfigUtils.REDISSON_LISTENER_ANNOTATION_PROCESSOR_BEAN_NAME)

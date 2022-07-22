@@ -22,6 +22,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.annotation.FeignApi;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
@@ -32,6 +33,7 @@ import com.taotao.cloud.web.base.controller.SimpleController;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import com.taotao.cloud.web.limit.Limit;
 import com.taotao.cloud.web.version.ApiInfo;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +61,8 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	 * @see IFeignDictService#findByCode(String)
 	 * @since 2022-07-02 10:17:59
 	 */
-	@ApiInfo(create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
+	@ApiInfo(
+		create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
 		update = {@ApiInfo.Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@ApiInfo.Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		}
@@ -82,6 +85,8 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 
+	@Operation(summary = "test", description = "test")
+	@RequestLogger
 	@NotAuth
 	@GetMapping("/test")
 	public FeignDictRes test(@RequestParam(value = "code") String code) {

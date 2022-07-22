@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.enums.SerializerType;
 import com.taotao.cloud.redis.properties.CacheProperties;
@@ -59,50 +60,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @AutoConfiguration
 @EnableConfigurationProperties({RedisProperties.class, CacheProperties.class})
-public class RedisAutoConfiguration extends CachingConfigurerSupport implements InitializingBean {
+public class RedisAutoConfiguration  implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
-	}
-
-	@Bean
-	public CacheManagerCustomizers cacheManagerCustomizers(
-		ObjectProvider<List<CacheManagerCustomizer<?>>> customizers) {
-		return new CacheManagerCustomizers(customizers.getIfAvailable());
-	}
-
-	/**
-	 * 自定义缓存异常处理 当缓存读写异常时，忽略异常
-	 */
-	@Override
-	public CacheErrorHandler errorHandler() {
-		return new CacheErrorHandler() {
-			@Override
-			public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
-				LogUtil.error(e.getMessage(), e);
-			}
-
-			@Override
-			public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
-				LogUtil.error(e.getMessage(), e);
-			}
-
-			@Override
-			public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
-				LogUtil.error(e.getMessage(), e);
-			}
-
-			@Override
-			public void handleCacheClearError(RuntimeException e, Cache cache) {
-				LogUtil.error(e.getMessage(), e);
-			}
-		};
-	}
-
-	@Bean
-	public RedisConnectionFactory redissonConnectionFactory(RedissonClient redissonClient) {
-		return new RedissonConnectionFactory(redissonClient);
 	}
 
 	//@Bean
@@ -110,32 +72,34 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 	//	return RedisSerializer.string();
 	//}
 
-	/**
-	 * value 值 序列化
-	 *
-	 * @return RedisSerializer
-	 */
 	@Bean
 	@ConditionalOnMissingBean(RedisSerializer.class)
 	public RedisSerializer<Object> redisSerializer(CacheProperties properties,
 		ObjectProvider<ObjectMapper> objectProvider) {
 		SerializerType serializerType = properties.getSerializerType();
+
 		if (SerializerType.JDK == serializerType) {
 			ClassLoader classLoader = this.getClass().getClassLoader();
 			return new JdkSerializationRedisSerializer(classLoader);
 		}
-		// jackson findAndRegisterModules，use copy
-		ObjectMapper objectMapper = objectProvider.getIfAvailable(ObjectMapper::new).copy();
-		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-		// findAndRegisterModules
-		objectMapper.findAndRegisterModules();
-		// class type info to json
-		GenericJackson2JsonRedisSerializer.registerNullValueSerializer(objectMapper, null);
-		objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(),
-			DefaultTyping.NON_FINAL, As.PROPERTY);
-		return new GenericJackson2JsonRedisSerializer(objectMapper);
+
+		//// jackson findAndRegisterModules，use copy
+		//ObjectMapper objectMapper = objectProvider.getIfAvailable(ObjectMapper::new).copy();
+		//objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		//// findAndRegisterModules
+		//objectMapper.findAndRegisterModules();
+		//// class type info to json
+		//GenericJackson2JsonRedisSerializer.registerNullValueSerializer(objectMapper, null);
+		//objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(),
+		//	DefaultTyping.NON_FINAL, As.PROPERTY);
+
+		return new GenericJackson2JsonRedisSerializer(JsonUtil.MAPPER);
 	}
 
+	@Bean
+	public RedisConnectionFactory redissonConnectionFactory(RedissonClient redissonClient) {
+		return new RedissonConnectionFactory(redissonClient);
+	}
 
 	@Bean
 	@ConditionalOnClass(RedisOperations.class)
@@ -159,6 +123,7 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		// hash的value序列化方式采用jackson
 		template.setHashValueSerializer(redisSerializer);
 		template.afterPropertiesSet();
+
 		return template;
 	}
 
@@ -173,7 +138,6 @@ public class RedisAutoConfiguration extends CachingConfigurerSupport implements 
 		RedisTemplate<String, Object> micaRedisTemplate) {
 		return micaRedisTemplate.opsForValue();
 	}
-
 
 	@Bean("stringRedisTemplate")
 	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {

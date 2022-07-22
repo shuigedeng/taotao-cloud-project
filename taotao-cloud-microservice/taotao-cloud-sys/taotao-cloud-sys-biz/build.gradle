@@ -1,7 +1,5 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
@@ -27,6 +25,8 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-third-client")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-doc")
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun')
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
