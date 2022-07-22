@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.execl;
+package com.taotao.cloud.sys.biz.aop.execl;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  *
  * 在service
  *
- * @Upload(type = UploadType.类型1)
+ * @ExcelUpload(type = UploadType.类型1)
  * public String upload(List<ClassOne> items)  {
  *    if (items == null || items.size() == 0) {
  *       return;
@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface Upload {
+public @interface ExcelUpload {
    // 记录上传类型
-   UploadType type() default UploadType.未知;
+   ExcelUploadType type() default ExcelUploadType.未知;
 }

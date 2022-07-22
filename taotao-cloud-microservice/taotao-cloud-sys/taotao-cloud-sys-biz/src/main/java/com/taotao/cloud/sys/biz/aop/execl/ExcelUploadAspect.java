@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.execl;
+package com.taotao.cloud.sys.biz.aop.execl;
 
 import com.alibaba.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.taotao.cloud.common.utils.date.DateUtil;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 @Slf4j
-public class UploadAspect {
+public class ExcelUploadAspect {
 
 	public static ThreadFactory commonThreadFactory = new ThreadFactoryBuilder().setNameFormat(
 			"upload-pool-%d")
@@ -36,7 +36,7 @@ public class UploadAspect {
 		new ThreadPoolExecutor.AbortPolicy());
 
 
-	@Pointcut("@annotation(com.taotao.cloud.sys.biz.execl.Upload)")
+	@Pointcut("@annotation(com.taotao.cloud.sys.biz.aop.execl.ExcelUpload)")
 	public void uploadPoint() {
 	}
 
@@ -44,8 +44,8 @@ public class UploadAspect {
 	public Object uploadControl(ProceedingJoinPoint pjp) {
 		// 获取方法上的注解，进而获取uploadType
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
-		Upload annotation = signature.getMethod().getAnnotation(Upload.class);
-		UploadType type = annotation == null ? UploadType.未知 : annotation.type();
+		ExcelUpload annotation = signature.getMethod().getAnnotation(ExcelUpload.class);
+		ExcelUploadType type = annotation == null ? ExcelUploadType.未知 : annotation.type();
 		// 获取batchNo
 		String batchNo = UUID.randomUUID().toString().replace("-", "");
 		// 初始化一条上传的日志，记录开始时间
