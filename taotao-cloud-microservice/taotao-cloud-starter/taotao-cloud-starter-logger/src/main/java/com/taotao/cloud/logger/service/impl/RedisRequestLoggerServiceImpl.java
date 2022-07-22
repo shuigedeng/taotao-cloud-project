@@ -16,15 +16,20 @@
 package com.taotao.cloud.logger.service.impl;
 
 import com.taotao.cloud.common.constant.RedisConstant;
+import com.taotao.cloud.common.model.DatePattern;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
 import com.taotao.cloud.redis.repository.RedisRepository;
+
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 审计日志实现类-redis
@@ -36,6 +41,10 @@ import java.util.Objects;
 public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	private final RedisRepository redisRepository;
+	private static final int THRESHOLD = 1000;
+
+	private final AtomicLong sendSuccessNum = new AtomicLong(0L);
+	private final AtomicLong sendErrorsNum = new AtomicLong(0L);
 
 	public RedisRequestLoggerServiceImpl(RedisRepository redisRepository) {
 		this.redisRepository = redisRepository;
@@ -43,18 +52,22 @@ public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	@Override
 	public void save(RequestLogger requestLogger) {
-		String date = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
-			.format(Instant.now());
+		String date = DateUtil.format(LocalDate.now(), DatePattern.COLON_DATE_PATTERN);
 
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, requestLogger);
 
-			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date,
-				JsonUtil.toJSONString(requestLogger));
+			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date, JsonUtil.toJSONString(requestLogger));
 			if (index > 0) {
-				//LogUtil.info("redis远程日志记录成功：{}", requestLog);
+				long andIncrement = sendSuccessNum.getAndIncrement();
+				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
+					LogUtil.info("RedisRequestLogger 远程日志记录成功：成功条数：{}", andIncrement);
+				}
 			} else {
-				LogUtil.error("redis远程日志记录失败：{}", requestLogger);
+				long andIncrement = sendErrorsNum.getAndIncrement();
+				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
+					LogUtil.error("RedisRequestLogger 远程日志记录失败：失败条数：{}", andIncrement);
+				}
 			}
 		}
 	}

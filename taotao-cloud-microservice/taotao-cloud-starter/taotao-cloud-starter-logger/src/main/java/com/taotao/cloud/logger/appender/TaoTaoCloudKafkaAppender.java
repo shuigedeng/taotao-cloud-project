@@ -50,8 +50,11 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	 * Kafka logs since it could cause harmful infinite recursion/self feeding effects.
 	 */
 	private static final String KAFKA_LOGGER_PREFIX = "org.apache.kafka.clients";
+	private static final int THRESHOLD = 1000;
+
 	private static final long currentTime = System.currentTimeMillis();
-	private static final int ERROR_THRESHOLD = 1000;
+	private static long lastSuccessTime = currentTime;
+	private static long lastErrorTime = currentTime;
 
 	private final AtomicLong sendErrorNum = new AtomicLong(0L);
 	private final AtomicLong msgErrorNum = new AtomicLong(0L);
@@ -64,7 +67,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		aai.appendLoopOnAppenders(evt);
 
 		long andIncrement = sendErrorNum.getAndIncrement();
-		if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+		if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
 			errorLog(andIncrement, "系统日志消息发送失败");
 		}
 	};
@@ -166,7 +169,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 			);
 		} catch (Exception exception) {
 			long andIncrement = msgErrorNum.getAndIncrement();
-			if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+			if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
 				errorLog(andIncrement, "系统日志消息处理失败");
 			}
 
@@ -188,12 +191,12 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 				deliveryStrategy.send(producer, record, e, failedDeliveryCallback);
 
 				long andIncrement = sendSuccessNum.getAndIncrement();
-				if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
 					successLog(andIncrement, "系统日志消息发送成功");
 				}
 			} catch (Exception ex) {
 				long andIncrement = sendErrorNum.getAndIncrement();
-				if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
 					errorLog(andIncrement, "系统日志消息发送失败");
 				}
 			}
@@ -206,22 +209,32 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 	protected void errorLog(long num, String msg) {
 		long milliseconds = System.currentTimeMillis();
+
 		long seconds = (milliseconds - currentTime) / 1000;
 		long minute = seconds / 60;
 		long hour = minute / 24;
 
-		LogUtil.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时]", msg, num, seconds, minute,
-			hour);
+		long lastSeconds = (milliseconds - lastErrorTime) / 1000;
+		long lastMinute = seconds / 60;
+		long lastHour = minute / 24;
+
+		LogUtil.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		lastErrorTime = milliseconds;
 	}
 
 	protected void successLog(long num, String msg) {
 		long milliseconds = System.currentTimeMillis();
+
 		long seconds = (milliseconds - currentTime) / 1000;
 		long minute = seconds / 60;
 		long hour = minute / 24;
 
-		LogUtil.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时]", msg, num, seconds, minute,
-			hour);
+		long lastSeconds = (milliseconds - lastSuccessTime) / 1000;
+		long lastMinute = seconds / 60;
+		long lastHour = minute / 24;
+
+		LogUtil.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		lastSuccessTime = milliseconds;
 	}
 
 	protected Long getTimestamp(E e) {
