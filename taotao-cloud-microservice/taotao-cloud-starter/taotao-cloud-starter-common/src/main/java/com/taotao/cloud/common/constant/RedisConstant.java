@@ -25,35 +25,33 @@ package com.taotao.cloud.common.constant;
 public final class RedisConstant {
 
 	/**
+	 * 分布式ID生成器
+	 */
+	public static final String ID_GENERATOR_INDEX_PREFIX = "ID:GENERATOR:INDEX:";
+	/**
 	 * 用户退出时JWT标识KEY
 	 */
 	public static final String LOGOUT_JWT_KEY_PREFIX = "LOGOUT:JWT:KEY:";
-
 	/**
 	 * 图形验证码KEY
 	 */
 	public static final String CAPTCHA_KEY_PREFIX = "CAPTCHA:KEY:";
-
 	/**
 	 * 短信验证码KEY
 	 */
 	public static final String SMS_KEY_PREFIX = "SMS:KEY:";
-
 	/**
 	 * 短信校验码KEY
 	 */
 	public static final String SMS_VERIFICATION_CODE_KEY_PREFIX = "SMS:VERIFICATION:CODE:KEY:";
-
 	/**
 	 * 分布式锁key
 	 */
 	public static final String LOCK_KEY_PREFIX = "LOCK:KEY:";
-
 	/**
 	 * 敏感词key
 	 */
 	public static final String SENSITIVE_WORDS_KEY = "SENSITIVE:WORDS:KEY";
-
 	/**
 	 * regions patten key
 	 */
@@ -70,8 +68,12 @@ public final class RedisConstant {
 	 * region parent id key
 	 */
 	public static final String REGIONS_PARENT_ID_KEY = "REGIONS:PARENT:ID:KEY:";
+	/**
+	 * 请求日志
+	 */
+	public static final String REQUEST_LOG = "REQUEST:LOG:";
 
-	// ============================ topic =======================================
+	// ============================ sub-pub topic =======================================
 
 	/**
 	 * QUARTZ_JOB_ADD_TOPIC
@@ -153,9 +155,5 @@ public final class RedisConstant {
 	 * REQUEST_LOG_TOPIC
 	 */
 	public static final String REQUEST_LOG_TOPIC = "REQUEST:LOG:TOPIC";
-	/**
-	 * REQUEST_LOG
-	 */
-	public static final String REQUEST_LOG = "REQUEST:LOG:";
 
 }

@@ -57,7 +57,7 @@ public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, requestLogger);
 
-			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date, JsonUtil.toJSONString(requestLogger));
+			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date, requestLogger);
 			if (index > 0) {
 				long andIncrement = sendSuccessNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {

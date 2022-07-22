@@ -212,21 +212,22 @@ public class Log extends BaseSuperEntity<Log, Long> {
 	 */
 	@Column(name = "location", columnDefinition = "varchar(1024) null comment '操作地点'")
 	private String location;
+
 	/**
 	 * 操作系统
 	 */
-	@Column(name = "os", columnDefinition = "varchar(128) null comment '操作系统'")
+	@Column(name = "os", columnDefinition = "text null comment '操作系统'")
 	private String os;
 	
 	/**
 	 * 浏览器
 	 */
-	@Column(name = "browser", columnDefinition = "varchar(1024) null comment '浏览器'")
+	@Column(name = "browser", columnDefinition = "text null comment '浏览器'")
 	private String browser;
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

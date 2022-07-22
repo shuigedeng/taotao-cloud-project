@@ -304,7 +304,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			if (metaObject.hasGetter(autoFillProperties.getCreateByField())) {
 				Object oldVal = metaObject.getValue(autoFillProperties.getCreateByField());
 				if (oldVal == null) {
-					this.setFieldValByName(autoFillProperties.getCreateByField(), SecurityUtil.getUserId(),
+					this.setFieldValByName(autoFillProperties.getCreateByField(), SecurityUtil.getUserIdWithAnonymous(),
 						metaObject);
 				}
 			}
@@ -326,7 +326,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			}
 
 			if (entity.getCreatedBy() == null || entity.getCreatedBy().equals(0)) {
-				Object userIdVal = SecurityUtil.getUserId();
+				Object userIdVal = SecurityUtil.getUserIdWithAnonymous();
 				this.setFieldValByName(MpSuperEntity.CREATED_BY, userIdVal, metaObject);
 			}
 		}
@@ -341,7 +341,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			if (metaObject.hasGetter(autoFillProperties.getUpdateByField())) {
 				Object oldVal = metaObject.getValue(autoFillProperties.getUpdateByField());
 				if (oldVal == null) {
-					this.setFieldValByName(autoFillProperties.getUpdateByField(), SecurityUtil.getUserId(),
+					this.setFieldValByName(autoFillProperties.getUpdateByField(), SecurityUtil.getUserIdWithAnonymous(),
 						metaObject);
 				}
 			}
@@ -358,7 +358,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		private void update(MetaObject metaObject) {
 			MpSuperEntity entity = (MpSuperEntity) metaObject.getOriginalObject();
 			if (entity.getUpdatedBy() == null || entity.getUpdatedBy().equals(0)) {
-				Object userIdVal = SecurityUtil.getUserId();
+				Object userIdVal = SecurityUtil.getUserIdWithAnonymous();
 				this.setFieldValByName(MpSuperEntity.UPDATED_BY, userIdVal, metaObject);
 			}
 

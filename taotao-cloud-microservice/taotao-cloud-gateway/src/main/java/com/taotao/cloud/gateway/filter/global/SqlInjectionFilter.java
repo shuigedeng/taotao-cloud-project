@@ -22,12 +22,10 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.baomidou.mybatisplus.core.toolkit.sql.SqlInjectionUtils;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SqlInjectionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.gateway.utils.WebFluxUtil;
 import io.netty.buffer.ByteBufAllocator;
 import java.net.URI;

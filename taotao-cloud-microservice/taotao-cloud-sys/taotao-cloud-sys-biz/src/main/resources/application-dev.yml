@@ -1144,7 +1144,7 @@ taotao:
             - lsdkfjl
             - sdflksf
     websocket:
-      enabled: false
+      enabled: true
       netty:
         enabled: true
 
