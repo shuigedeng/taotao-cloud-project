@@ -4,7 +4,7 @@ dependencies {
 
     //京东云存储
     //https://search.maven.org/artifact/com.amazonaws/aws-java-sdk-s3
-    api 'com.amazonaws:aws-java-sdk-s3:1.12.254'
+    api 'com.amazonaws:aws-java-sdk-s3:1.12.267'
 
     testImplementation  'org.springframework:spring-test'
 

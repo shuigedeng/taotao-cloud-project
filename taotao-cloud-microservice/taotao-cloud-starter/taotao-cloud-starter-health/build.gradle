@@ -6,7 +6,7 @@ dependencies {
     compileOnly 'net.logstash.logback:logstash-logback-encoder'
 
     //https://search.maven.org/artifact/org.hibernate/hibernate-core
-    compileOnly 'org.hibernate:hibernate-core:5.6.5.Final'
+    compileOnly 'org.hibernate:hibernate-core:5.6.10.Final'
 
     implementation 'org.apache.commons:commons-email:1.5'
 
