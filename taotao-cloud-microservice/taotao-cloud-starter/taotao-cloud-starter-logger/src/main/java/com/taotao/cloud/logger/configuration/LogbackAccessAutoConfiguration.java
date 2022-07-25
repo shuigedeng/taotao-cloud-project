@@ -31,6 +31,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @AutoConfiguration
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:logback-access.yml")
+@PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:tlog.yml")
 public class LogbackAccessAutoConfiguration implements InitializingBean {
 
 	@Override

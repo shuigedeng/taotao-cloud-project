@@ -13,21 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.jetcache.stamp;
 
 import com.alicp.jetcache.AutoReleaseLock;
 import com.alicp.jetcache.Cache;
+import com.taotao.cloud.jetcache.exception.StampDeleteFailedException;
+import com.taotao.cloud.jetcache.exception.StampHasExpiredException;
+import com.taotao.cloud.jetcache.exception.StampMismatchException;
+import com.taotao.cloud.jetcache.exception.StampParameterIllegalException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * <p>Description: 抽象Stamp管理 </p>
+ * 抽象Stamp管理
  *
  * @author shuigedeng
  * @version 2022.07
- * @since 2022-07-21 15:57:34
+ * @since 2022-07-25 08:53:08
  */
 public abstract class AbstractStampManager<K, V> implements StampManager<K, V> {
 
@@ -58,16 +61,16 @@ public abstract class AbstractStampManager<K, V> implements StampManager<K, V> {
 	@Override
 	public boolean check(K key, V value) {
 		if (ObjectUtils.isEmpty(value)) {
-			throw new RuntimeException("Parameter Stamp value is null");
+			throw new StampParameterIllegalException("Parameter Stamp value is null");
 		}
 
 		V storedStamp = this.get(key);
 		if (ObjectUtils.isEmpty(storedStamp)) {
-			throw new RuntimeException("Stamp is invalid!");
+			throw new StampHasExpiredException("Stamp is invalid!");
 		}
 
 		if (ObjectUtils.notEqual(storedStamp, value)) {
-			throw new RuntimeException("Stamp is mismathch!");
+			throw new StampMismatchException("Stamp is mismathch!");
 		}
 
 		return true;
@@ -79,10 +82,10 @@ public abstract class AbstractStampManager<K, V> implements StampManager<K, V> {
 	}
 
 	@Override
-	public void delete(K key) {
+	public void delete(K key) throws StampDeleteFailedException {
 		boolean result = this.getCache().remove(key);
 		if (!result) {
-			throw new RuntimeException("Delete Stamp From Storage Failed");
+			throw new StampDeleteFailedException("Delete Stamp From Storage Failed");
 		}
 	}
 

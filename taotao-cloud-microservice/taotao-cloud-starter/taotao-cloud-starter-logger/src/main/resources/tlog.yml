@@ -1,0 +1,5 @@
+tlog:
+  pattern: [$preApp:$preIp:$spanId:$traceId]
+  enableInvokeTimePrint: true
+  idGenerator: com.taotao.cloud.logger.tlog.TlogIdGenerator
+  mdcEnable: true

@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author shuigedeng
  * @version 2022.07
- * @since 2022-07-12 09:13:01
+ * @since 2022-07-25 08:55:27
  */
 public class AtomicIntegerSerializer extends Serializer<AtomicInteger> {
 

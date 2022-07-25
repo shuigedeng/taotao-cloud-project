@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.logger.configuration;
 
-import com.lzhpo.tracer.TracerContextCustomizer;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;

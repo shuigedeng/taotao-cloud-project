@@ -3,6 +3,9 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
 
+    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-jetcache')
+    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-caffeine')
+
     api "mysql:mysql-connector-java"
 
     api 'com.baomidou:mybatis-plus-boot-starter'
