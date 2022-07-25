@@ -19,27 +19,27 @@ buildscript {
         taotaoCloudGroup = "io.github.shuigedeng"
 
         //https://search.maven.org/artifact/org.springframework/spring
-        springVersion = '5.3.21'
+        springVersion = '5.3.22'
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
-        springBootVersion = '2.7.1'
+        springBootVersion = '2.7.2'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
         springCloudVersion = '2021.0.3'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
         springCloudAlibabaVersion = '2021.0.1.0'
 
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
-        springSecurityVersion = '5.6.5'
+        springSecurityVersion = '5.6.6'
         //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
-        springDataCommonsVersion = '2.7.1'
+        springDataCommonsVersion = '2.7.2'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
-        springKafkaVersion = '2.8.6'
+        springKafkaVersion = '2.8.8'
 
         //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
         fasterxmlVersion = '2.13.3'
         //https://search.maven.org/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
         jacksonDatatypeJsr310Version = '2.13.3'
         //https://search.maven.org/artifact/com.alibaba/transmittable-thread-local
-        transmittableVersion = '2.13.0'
+        transmittableVersion = '2.13.2'
         //https://search.maven.org/artifact/org.slf4j/slf4j-api
         slf4jVersion = '1.7.36'
         //https://search.maven.org/artifact/cn.afterturn/easypoi-base
@@ -47,7 +47,7 @@ buildscript {
         //https://search.maven.org/artifact/org.aspectj/aspectjweaver
         aspectjweaverVersion = '1.9.9.1'
         //https://search.maven.org/artifact/io.projectreactor/reactor-core
-        reactorVersion = '3.4.19'
+        reactorVersion = '3.4.21'
         //https://search.maven.org/artifact/javax.servlet/javax.servlet-api
         servletApiVersion = '4.0.1'
         //https://search.maven.org/artifact/com.nepxion/banner
@@ -57,7 +57,7 @@ buildscript {
         //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
         easyCaptchaVersion = '1.6.2'
         //https://search.maven.org/artifact/cn.hutool/hutool-all
-        hutoolVersion = '5.8.3'
+        hutoolVersion = '5.8.4'
         //https://search.maven.org/artifact/javax.validation/validation-api
         validationApiVersion = '2.0.1.Final'
         //https://search.maven.org/artifact/com.querydsl/querydsl-apt
@@ -81,15 +81,15 @@ buildscript {
         //https://search.maven.org/artifact/com.google.guava/guava
         guavaVersion = '31.1-jre'
         //https://search.maven.org/artifact/com.squareup.okhttp3/okhttp
-        okhttpVersion = '4.9.3'
+        okhttpVersion = '4.10.0'
         //https://search.maven.org/artifact/com.squareup.okio/okio
-        okioVersion = '3.1.0'
+        okioVersion = '3.2.0'
         //https://search.maven.org/artifact/com.github.tobato/fastdfs-client
         fastdfsClientVersion = '1.27.2'
         //https://search.maven.org/artifact/commons-net/commons-net
         commonsNetVersion = '3.8.0'
         //https://search.maven.org/artifact/io.github.openfeign/feign-okhttp
-        feignOkhttpVersion = '11.8'
+        feignOkhttpVersion = '11.9.1'
         //https://search.maven.org/artifact/org.apache.httpcomponents/httpclient
         httpcomponentsVersion = '4.5.13'
         //https://search.maven.org/artifact/com.github.danielwegener/logback-kafka-appender
@@ -105,18 +105,18 @@ buildscript {
         //https://search.maven.org/artifact/org.apache.commons/commons-collections4
         commonsCollections4Version = '4.4'
         //https://search.maven.org/artifact/io.lettuce/lettuce-core
-        lettuceVersion = '6.1.8.RELEASE'
+        lettuceVersion = '6.2.0.RELEASE'
         //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
-        redissonVersion = "3.17.4"
+        redissonVersion = "3.17.5"
         //https://search.maven.org/artifact/io.seata/seata-all
-        seataVersion = "1.5.1"
+        seataVersion = "1.5.2"
         //https://search.maven.org/artifact/org.apache.shardingsphere/sharding-jdbc-spring-namespace
         shardingsphereVersion = "4.1.1"
 
         //https://search.maven.org/artifact/io.springfox/springfox-swagger2
         swaggerVersion = '3.0.0'
         //https://search.maven.org/artifact/io.swagger.core.v3/swagger-models
-        swaggerModelsVersion = '2.2.1'
+        swaggerModelsVersion = '2.2.2'
         //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-spring-ui
         knife4jVersion = '3.0.3'
 
@@ -129,7 +129,7 @@ buildscript {
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.5.2.Final"
         //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
-        fastjsonVersion = "2.0.9"
+        fastjsonVersion = "2.0.10"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.66"
         //https://search.maven.org/artifact/com.esotericsoftware/kryo
@@ -139,13 +139,13 @@ buildscript {
         //https://search.maven.org/artifact/com.google.zxing/javase
         zxingJavaseVersion = "3.5.0"
         //https://search.maven.org/artifact/org.jsoup/jsoup
-        jsoupVersion = "1.15.1"
+        jsoupVersion = "1.15.2"
         //https://search.maven.org/artifact/com.thoughtworks.xstream/xstream
         xstreamVersion = "1.4.19"
         //https://search.maven.org/artifact/commons-configuration/commons-configuration
         commonsConfigurationVersion = "1.10"
         //https://search.maven.org/artifact/com.squareup.okhttp3/logging-interceptor
-        okhttpLoggingInterceptorVersion = "4.9.3"
+        okhttpLoggingInterceptorVersion = "4.10.0"
         //https://search.maven.org/artifact/com.baomidou/mybatis-plus-core
         mybatisPlusVersion = "3.5.2"
         //https://search.maven.org/artifact/com.github.xkzhangsan/xk-time
@@ -155,7 +155,7 @@ buildscript {
         //https://search.maven.org/artifact/com.taobao.arthas/arthas-spring-boot-starter
         arthasVersion = "3.6.3"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        adminVersion = "2.7.2"
+        adminVersion = "2.7.3"
         //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos

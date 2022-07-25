@@ -22,12 +22,14 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
+import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -52,9 +54,9 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	private static final String KAFKA_LOGGER_PREFIX = "org.apache.kafka.clients";
 	private static final int THRESHOLD = 1000;
 
-	private static final long currentTime = System.currentTimeMillis();
-	private static long lastSuccessTime = currentTime;
-	private static long lastErrorTime = currentTime;
+	private final Stopwatch  currentStopwatch = Stopwatch.createStarted();
+	private final Stopwatch  lastSuccessStopwatch = Stopwatch.createStarted();
+	private final Stopwatch  lastErrorStopwatch = Stopwatch.createStarted();
 
 	private final AtomicLong sendErrorNum = new AtomicLong(0L);
 	private final AtomicLong msgErrorNum = new AtomicLong(0L);
@@ -192,7 +194,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 				long andIncrement = sendSuccessNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
-					successLog(andIncrement, "系统日志消息发送成功");
+					successLog(andIncrement);
 				}
 			} catch (Exception ex) {
 				long andIncrement = sendErrorNum.getAndIncrement();
@@ -208,33 +210,29 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	}
 
 	protected void errorLog(long num, String msg) {
-		long milliseconds = System.currentTimeMillis();
+		long hour = currentStopwatch.elapsed(TimeUnit.HOURS);
+		long minute = currentStopwatch.elapsed(TimeUnit.MINUTES);
+		long seconds = currentStopwatch.elapsed(TimeUnit.SECONDS);
 
-		long seconds = (milliseconds - currentTime) / 1000;
-		long minute = seconds / 60;
-		long hour = minute / 24;
-
-		long lastSeconds = (milliseconds - lastErrorTime) / 1000;
-		long lastMinute = seconds / 60;
-		long lastHour = minute / 24;
+		long lastSeconds = lastErrorStopwatch.elapsed(TimeUnit.SECONDS);
+		long lastMinute =lastErrorStopwatch.elapsed(TimeUnit.MINUTES);
+		long lastHour = lastErrorStopwatch.elapsed(TimeUnit.HOURS);
 
 		LogUtil.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
-		lastErrorTime = milliseconds;
+		lastErrorStopwatch.reset().start();
 	}
 
-	protected void successLog(long num, String msg) {
-		long milliseconds = System.currentTimeMillis();
+	protected void successLog(long num) {
+		long hour = currentStopwatch.elapsed(TimeUnit.HOURS);
+		long minute = currentStopwatch.elapsed(TimeUnit.MINUTES);
+		long seconds = currentStopwatch.elapsed(TimeUnit.SECONDS);
 
-		long seconds = (milliseconds - currentTime) / 1000;
-		long minute = seconds / 60;
-		long hour = minute / 24;
+		long lastSeconds = lastSuccessStopwatch.elapsed(TimeUnit.SECONDS);
+		long lastMinute =lastSuccessStopwatch.elapsed(TimeUnit.MINUTES);
+		long lastHour = lastSuccessStopwatch.elapsed(TimeUnit.HOURS);
 
-		long lastSeconds = (milliseconds - lastSuccessTime) / 1000;
-		long lastMinute = seconds / 60;
-		long lastHour = minute / 24;
-
-		LogUtil.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
-		lastSuccessTime = milliseconds;
+		LogUtil.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "系统日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		lastSuccessStopwatch.reset().start();
 	}
 
 	protected Long getTimestamp(E e) {

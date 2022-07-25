@@ -2,7 +2,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common')
 
     //https://search.maven.org/artifact/com.baidubce/bce-java-sdk
-    api('com.baidubce:bce-java-sdk:0.10.215') {
+    api('com.baidubce:bce-java-sdk:0.10.217') {
         exclude group: 'org.apache.hbase', module: 'hbase-client'
         exclude group: 'commons-io', module: 'commons-io'
         exclude group: 'ch.qos.logback', module: 'logback-core'

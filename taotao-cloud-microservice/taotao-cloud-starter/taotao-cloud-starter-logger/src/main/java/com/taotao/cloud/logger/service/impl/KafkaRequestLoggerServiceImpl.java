@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.logger.service.impl;
 
+import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.model.RequestLogger;
@@ -26,6 +27,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -39,9 +41,9 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	public static final String REQUEST_LOG_TOPIC = "request-log-";
 
-	private static final long currentTime = System.currentTimeMillis();
-	private static long lastSuccessTime = currentTime;
-	private static long lastErrorTime = currentTime;
+	private final Stopwatch currentStopwatch = Stopwatch.createStarted();
+	private final Stopwatch lastSuccessStopwatch = Stopwatch.createStarted();
+	private final Stopwatch lastErrorStopwatch = Stopwatch.createStarted();
 
 	private final AtomicLong sendSuccessNum = new AtomicLong(0L);
 	private final AtomicLong sendErrorsNum = new AtomicLong(0L);
@@ -70,7 +72,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 				public void onFailure(Throwable throwable) {
 					long errorNum = sendErrorsNum.getAndIncrement();
 					if (errorNum > 0 && errorNum % THRESHOLD == 0) {
-						errorLog(errorNum, "请求日志发送远程记录失败");
+						errorLog(errorNum);
 					}
 				}
 
@@ -78,41 +80,37 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 				public void onSuccess(SendResult<String, String> stringObjectSendResult) {
 					long andIncrement = sendSuccessNum.getAndIncrement();
 					if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
-						successLog(andIncrement, "请求日志消息发送成功");
+						successLog(andIncrement);
 					}
 				}
 			});
 		}
 	}
 
-	protected void successLog(long num, String msg) {
-		long milliseconds = System.currentTimeMillis();
+	protected void successLog(long num) {
+		long hour = currentStopwatch.elapsed(TimeUnit.HOURS);
+		long minute = currentStopwatch.elapsed(TimeUnit.MINUTES);
+		long seconds = currentStopwatch.elapsed(TimeUnit.SECONDS);
 
-		long seconds = (milliseconds - currentTime) / 1000;
-		long minute = seconds / 60;
-		long hour = minute / 24;
+		long lastSeconds = lastSuccessStopwatch.elapsed(TimeUnit.SECONDS);
+		long lastMinute = lastSuccessStopwatch.elapsed(TimeUnit.MINUTES);
+		long lastHour = lastSuccessStopwatch.elapsed(TimeUnit.HOURS);
 
-		long lastSeconds = (milliseconds - lastSuccessTime) / 1000;
-		long lastMinute = seconds / 60;
-		long lastHour = minute / 24;
-
-		LogUtil.info("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
-		lastSuccessTime = milliseconds;
+		LogUtil.info("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "请求日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		lastSuccessStopwatch.reset().start();
 	}
 
-	protected void errorLog(long num, String msg) {
-		long milliseconds = System.currentTimeMillis();
+	protected void errorLog(long num) {
+		long hour = currentStopwatch.elapsed(TimeUnit.HOURS);
+		long minute = currentStopwatch.elapsed(TimeUnit.MINUTES);
+		long seconds = currentStopwatch.elapsed(TimeUnit.SECONDS);
 
-		long seconds = (milliseconds - currentTime) / 1000;
-		long minute = seconds / 60;
-		long hour = minute / 24;
+		long lastSeconds = lastErrorStopwatch.elapsed(TimeUnit.SECONDS);
+		long lastMinute = lastErrorStopwatch.elapsed(TimeUnit.MINUTES);
+		long lastHour = lastErrorStopwatch.elapsed(TimeUnit.HOURS);
 
-		long lastSeconds = (milliseconds - lastErrorTime) / 1000;
-		long lastMinute = seconds / 60;
-		long lastHour = minute / 24;
-
-		LogUtil.error("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
-		lastErrorTime = milliseconds;
+		LogUtil.error("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "请求日志发送远程记录失败", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		lastErrorStopwatch.reset().start();
 	}
 }
 
