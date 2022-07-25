@@ -53,8 +53,7 @@ public class XssCleanInterceptor implements AsyncHandlerInterceptor {
 		}
 
 		// 3. 处理 XssIgnore 注解
-		XssCleanIgnore xssCleanIgnore = ClassUtil.getAnnotation(handlerMethod,
-			XssCleanIgnore.class);
+		XssCleanIgnore xssCleanIgnore = ClassUtil.getAnnotation(handlerMethod, XssCleanIgnore.class);
 		if (xssCleanIgnore == null) {
 			XssHolder.setEnable();
 		}

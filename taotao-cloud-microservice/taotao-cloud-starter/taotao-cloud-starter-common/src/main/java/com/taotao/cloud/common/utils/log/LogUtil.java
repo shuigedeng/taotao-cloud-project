@@ -125,6 +125,20 @@ public class LogUtil {
 	}
 
 	/**
+	 * Warn级别日志
+	 *
+	 * @param msg       msg
+	 * @param arguments 参数
+	 * @since 2021-09-02 16:35:37
+	 */
+	public static void trace(String msg, Object... arguments) {
+		if (isTraceEnabled()) {
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.TRACE_INT, msg, arguments, null);
+		}
+	}
+
+	/**
 	 * error
 	 *
 	 * @param error     error
@@ -254,6 +268,16 @@ public class LogUtil {
 	 */
 	public static boolean isInfoEnabled() {
 		return getLocationAwareLogger().isInfoEnabled();
+	}
+
+	/**
+	 * isInfoEnabled
+	 *
+	 * @return boolean
+	 * @since 2021-09-02 17:11:53
+	 */
+	public static boolean isTraceEnabled() {
+		return getLocationAwareLogger().isTraceEnabled();
 	}
 
 	/**
