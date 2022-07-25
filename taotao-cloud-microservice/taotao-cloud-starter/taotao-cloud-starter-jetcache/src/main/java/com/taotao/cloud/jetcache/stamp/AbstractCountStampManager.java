@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-
 package com.taotao.cloud.jetcache.stamp;
 
 import cn.hutool.crypto.SecureUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.jetcache.exception.MaximumLimitExceededException;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 计数类型的缓存 </p>
+ * 计数类型的缓存
  * <p>
  * 这里的泛型使用了 Long 主要是为了兼顾存储 System.currentTimeMillis()。否则类型不一致，还要建两个 Stamp
  *
  * @author shuigedeng
  * @version 2022.07
- * @since 2022-07-12 09:22:35
+ * @since 2022-07-25 08:53:14
  */
 public abstract class AbstractCountStampManager extends AbstractStampManager<String, Long> {
+
+	private static final Logger log = LoggerFactory.getLogger(AbstractCountStampManager.class);
 
 	/**
 	 * 在缓存有效期内进行计数
@@ -40,8 +43,9 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 	 * @param identity 缓存 Key 的区分标识
 	 * @param maxTimes 允许的最大限制次数
 	 * @return 当前错误次数
+	 * @throws MaximumLimitExceededException 超出最大限制次数错误
 	 */
-	public int counting(String identity, int maxTimes) {
+	public int counting(String identity, int maxTimes) throws MaximumLimitExceededException {
 		return counting(identity, maxTimes, null);
 	}
 
@@ -52,8 +56,10 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 	 * @param maxTimes 允许的最大限制次数
 	 * @param expire   过期时间
 	 * @return 当前错误次数
+	 * @throws MaximumLimitExceededException 超出最大限制次数错误
 	 */
-	public int counting(String identity, int maxTimes, Duration expire) {
+	public int counting(String identity, int maxTimes, Duration expire)
+		throws MaximumLimitExceededException {
 		return counting(identity, maxTimes, expire, false);
 	}
 
@@ -65,8 +71,10 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 	 * @param expire   过期时间
 	 * @param function 用于在日志中区分是哪个功能在调用。
 	 * @return 当前错误次数
+	 * @throws MaximumLimitExceededException 超出最大限制次数错误
 	 */
-	public int counting(String identity, int maxTimes, Duration expire, String function) {
+	public int counting(String identity, int maxTimes, Duration expire, String function)
+		throws MaximumLimitExceededException {
 		return counting(identity, maxTimes, expire, false, function);
 	}
 
@@ -78,8 +86,10 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 	 * @param expire   过期时间
 	 * @param useMd5   是否用 MD5 对区分标识进行混淆加密
 	 * @return 当前错误次数
+	 * @throws MaximumLimitExceededException 超出最大限制次数错误
 	 */
-	public int counting(String identity, int maxTimes, Duration expire, boolean useMd5) {
+	public int counting(String identity, int maxTimes, Duration expire, boolean useMd5)
+		throws MaximumLimitExceededException {
 		return counting(identity, maxTimes, expire, useMd5, "AbstractCountStampManager");
 	}
 
@@ -92,9 +102,10 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 	 * @param useMd5   是否用 MD5 对区分标识进行混淆加密
 	 * @param function 用于在日志中区分是哪个功能在调用。
 	 * @return 当前错误次数
+	 * @throws MaximumLimitExceededException 超出最大限制次数错误
 	 */
 	public int counting(String identity, int maxTimes, Duration expire, boolean useMd5,
-		String function) {
+		String function) throws MaximumLimitExceededException {
 		Assert.notNull(identity, "identity cannot be null");
 
 		String key = useMd5 ? SecureUtil.md5(identity) : identity;
@@ -126,12 +137,13 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 
 			// times 计数相当于数组的索引是 从0~n，所以需要
 			if (index == maxTimes - 1) {
-				throw new RuntimeException("Requests are too frequent. Please try again later!");
+				throw new MaximumLimitExceededException(
+					"Requests are too frequent. Please try again later!");
 			}
 		}
 
-		int times = new Long(index + 1L).intValue();
-		LogUtil.debug("{} has been recorded [{}] times.", function, times);
+		int times = Long.valueOf(index + 1L).intValue();
+		log.debug("{} has been recorded [{}] times.", function, times);
 		return times;
 	}
 
@@ -151,7 +163,7 @@ public abstract class AbstractCountStampManager extends AbstractStampManager<Str
 		Long current = System.currentTimeMillis();
 		long interval = current - begin;
 
-		LogUtil.debug("{} operation interval [{}] millis.", function, interval);
+		log.debug("{} operation interval [{}] millis.", function, interval);
 
 		Duration duration;
 		if (!configuredDuration.isZero()) {

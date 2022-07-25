@@ -318,4 +318,5 @@ public final class CommonConstant {
 	// IP归属地查询
 	public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true";
 
+	public static final String LOWERCASE_DEFAULT = "default";
 }

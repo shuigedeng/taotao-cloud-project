@@ -666,7 +666,6 @@ public class RedisRepository {
 		return (T) redisTemplate.opsForList().index(key, index);
 	}
 
-
 	/**
 	 * 将值 value 插入到列表 key 当中，位于值 pivot 之前。 当 pivot 不存在于列表 key 时，不执行任何操作。 当 key 不存在时， key
 	 * 被视为空列表，不执行任何操作。 如果 key 不是列表类型，返回一个错误。
@@ -3606,4 +3605,7 @@ public class RedisRepository {
 		return mGetByCacheKey(ks);
 	}
 
+	public Long hsize(String id) {
+		return this.redisTemplate.opsForHash().size(id);
+	}
 }

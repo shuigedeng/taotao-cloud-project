@@ -16,8 +16,10 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.data.mybatis.plus.l2cache.RedisMybatisCache;
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import java.util.List;
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -31,8 +33,8 @@ import org.springframework.stereotype.Repository;
  * @version 2021.10
  * @since 2022-02-11 16:33:34
  */
-@Repository
 @Mapper
+@Repository
 public interface ILogMapper extends BaseMapper<Log> {
 
 	@Delete("delete from log where log_type = #{logType}")

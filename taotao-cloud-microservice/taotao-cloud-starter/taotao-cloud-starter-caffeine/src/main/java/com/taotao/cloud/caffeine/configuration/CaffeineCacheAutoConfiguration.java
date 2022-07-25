@@ -71,8 +71,8 @@ public class CaffeineCacheAutoConfiguration {
 	}
 
 	@ConditionalOnMissingBean
-	@Bean("cacheResolver")
-	public CacheManager cacheManager(CacheProperties cacheProperties,
+	@Bean("caffeineCacheManager")
+	public CacheManager caffeineCacheManager(CacheProperties cacheProperties,
 		CacheManagerCustomizers customizers,
 		ObjectProvider<Caffeine<Object, Object>> caffeine,
 		ObjectProvider<CaffeineSpec> caffeineSpec,
@@ -84,6 +84,7 @@ public class CaffeineCacheAutoConfiguration {
 			cacheManager.setCacheNames(cacheNames);
 		}
 		return customizers.customize(cacheManager);
+
 	}
 
 	//@Bean("caffeineCacheManager")
