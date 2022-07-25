@@ -4,16 +4,18 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apac****he%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/Spring-5.3.19-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Boot-2.7.0-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Cloud-2021.0.2-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring-5.3.22-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Boot-2.7.2-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Cloud-2021.0.3-yellowgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Spring%20Cloud%20alibaba-2021.0.1.0-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Netty-4.1.79.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Security-5.7.2-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Elasticsearch-7.13.7-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Mybatis%20Plus-3.4.2-yellow" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Knife4j-3.0.2-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Mybatis%20Plus-3.5.2-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Knife4j-3.0.3-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Redisson-3.15.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Hutool-5.5.9-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Redisson-3.17.5-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Hutool-5.8.4-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -94,15 +96,15 @@ Maven:
 ## 5. 核心依赖 
 依赖 | 版本
 ---|---
-Spring |  5.3.21 
-Spring Boot |  2.7.1
+Spring |  5.3.22
+Spring Boot |  2.7.2
 Spring Cloud | 2021.0.3
 Spring Cloud alibaba | 2021.0.1.0
-Spring Security | 5.6.3
+Spring Security | 5.7.2
 Mybatis Plus | 3.5.2
 Hutool | 5.5.9
-Mysql | 8.0.20
-Querydsl | 4.4.0
+Mysql | 8.0.29
+Querydsl | 5.0.0
 Swagger | 3.3.0
 Knife4j | 3.0.2
 Redisson | 3.15.0
