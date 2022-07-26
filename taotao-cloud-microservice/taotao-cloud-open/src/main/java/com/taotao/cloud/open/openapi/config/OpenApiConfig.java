@@ -8,7 +8,9 @@ import com.taotao.cloud.open.openapi.common.enums.SymmetricCryEnum;
 /**
  * 开放api服务端配置类接口，由引入者去实现
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:57
  */
 public interface OpenApiConfig {
 

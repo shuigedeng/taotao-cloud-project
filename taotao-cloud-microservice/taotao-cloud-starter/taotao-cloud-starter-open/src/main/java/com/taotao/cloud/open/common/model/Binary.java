@@ -19,8 +19,9 @@ import com.taotao.cloud.open.common.util.TruncateUtil;
  * ......
  * </pre>
  *
- * @author wanghuidong
- * 时间： 2022/7/11 19:08
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:06:51
  */
 public class Binary {
 

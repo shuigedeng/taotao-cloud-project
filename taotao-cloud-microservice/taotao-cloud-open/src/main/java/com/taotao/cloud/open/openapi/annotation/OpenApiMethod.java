@@ -15,7 +15,9 @@ import java.lang.annotation.Target;
  * 注：目前支持的参数类型有基本类型、字符串、数组、普通javabean、List等
  * </p>
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:08:54
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD})

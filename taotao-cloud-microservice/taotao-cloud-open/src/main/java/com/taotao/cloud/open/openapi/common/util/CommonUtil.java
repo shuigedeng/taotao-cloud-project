@@ -10,8 +10,9 @@ import com.taotao.cloud.open.openapi.common.model.InParams;
 /**
  * 通用工具类
  *
- * @author wanghuidong
- * 时间： 2022/5/29 10:16
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:29
  */
 public class CommonUtil {
 

@@ -10,7 +10,9 @@ import java.lang.reflect.Type;
 /**
  * 字符串对象转换工具类
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:07:40
  */
 public class StrObjectConvert {
 

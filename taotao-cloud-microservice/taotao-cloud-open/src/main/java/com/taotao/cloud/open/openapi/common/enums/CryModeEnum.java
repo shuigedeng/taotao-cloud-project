@@ -3,8 +3,9 @@ package com.taotao.cloud.open.openapi.common.enums;
 /**
  * 加密模式
  *
- * @author wanghuidong
- * 时间： 2022/7/10 19:17
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:20
  */
 public enum CryModeEnum {
 

@@ -3,8 +3,9 @@ package com.taotao.cloud.open.openapi.common.constant;
 /**
  * HTTP头名称常量
  *
- * @author wanghuidong
- * 时间： 2022/7/9 11:48
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:10
  */
 public interface Header {
 

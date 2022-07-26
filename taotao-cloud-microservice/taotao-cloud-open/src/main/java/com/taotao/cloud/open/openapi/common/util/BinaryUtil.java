@@ -11,8 +11,9 @@ import java.util.List;
 /**
  * 二进制对象工具类
  *
- * @author wanghuidong
- * 时间： 2022/7/12 10:42
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:26
  */
 public class BinaryUtil {
 

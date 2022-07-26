@@ -7,8 +7,9 @@ import java.util.List;
 /**
  * 对象属性信息
  *
- * @author wanghuidong
- * 时间： 2022/6/22 10:58
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:24
  */
 @Data
 public class Property {

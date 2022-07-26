@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * <p>
  * yml配置文件中添加openapi配置示例：
  * </p>
- * <blockquote><pre>
+ * <pre class="code">
  * openapi:
  *   client:
  *     config:
@@ -31,9 +31,10 @@ import org.springframework.stereotype.Component;
  *       enableCompress: true
  *       httpProxyHost: 127.0.0.1
  *       httpProxyPort: 8888
- * </pre></blockquote>
- *
- * @author wanghuidong
+ * </pre>
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:04:30
  */
 @Component
 @ConfigurationProperties(prefix = "openapi.client.config")
@@ -42,6 +43,7 @@ public class OpenApiClientConfig {
      * 接口所在路径(包名)
      */
     private String openApiRefPath;
+
     /**
      * openapi基础路径,例如(http://localhost)
      */

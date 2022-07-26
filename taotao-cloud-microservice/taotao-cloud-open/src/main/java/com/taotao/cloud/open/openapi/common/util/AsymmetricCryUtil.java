@@ -7,7 +7,9 @@ import com.taotao.cloud.open.openapi.common.model.KeyPair;
 /**
  * 非对称加密工具类
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:21
  */
 public class AsymmetricCryUtil {
 

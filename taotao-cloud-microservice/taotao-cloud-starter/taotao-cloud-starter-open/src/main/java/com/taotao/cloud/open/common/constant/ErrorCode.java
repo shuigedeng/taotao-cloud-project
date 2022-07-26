@@ -3,8 +3,9 @@ package com.taotao.cloud.open.common.constant;
 /**
  * 错误代码
  *
- * @author wanghuidong
- * 时间： 2022/6/7 23:07
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:05:58
  */
 public class ErrorCode {
 

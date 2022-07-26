@@ -15,16 +15,19 @@ import java.lang.annotation.Target;
  * 注：服务引用若要生效，需要进行配置，请参考{@link OpenApiClientConfig}进行配置
  * </p>
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:03:01
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.TYPE})
 public @interface OpenApiRef {
 
-    /**
-     * 开放api名称
-     *
-     * @return 开放api名称
-     */
-    String value() default "";
+	/**
+	 * 开放api名称
+	 *
+	 * @return {@link String }
+	 * @since 2022-07-26 10:03:01
+	 */
+	String value() default "";
 }

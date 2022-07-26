@@ -6,8 +6,9 @@ import com.taotao.cloud.open.common.handler.SymmetricCryHandler;
 /**
  * SM4对称加密处理器
  *
- * @author wanghuidong
- * 时间： 2022/6/4 13:57
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:06:46
  */
 public class SM4SymmetricCryHandler implements SymmetricCryHandler {
     @Override

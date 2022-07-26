@@ -8,8 +8,9 @@ import java.lang.annotation.Target;
 /**
  * 开放api文档注解，注释在类、方法、方法参数以及对象属性中
  *
- * @author wanghuidong
- * 时间： 2022/6/23 9:53
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:10
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})

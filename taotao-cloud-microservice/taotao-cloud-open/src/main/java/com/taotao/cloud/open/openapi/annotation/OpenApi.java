@@ -11,12 +11,13 @@ import java.lang.annotation.Target;
 /**
  * 开放api注解，标识一个开放api
  * <p>
- * 注：
- * 1.若要OpenApi生效，必须先配置一些参数，请写一个类实现{@link OpenApiConfig}然后标注@Component确保被注入spring容器中
+ * 注： 1.若要OpenApi生效，必须先配置一些参数，请写一个类实现{@link OpenApiConfig}然后标注@Component确保被注入spring容器中
  * 2.该注解已经集成@Component注解，直接将此注解标识在一个bean类上，然后确保项目能够扫描到这些bean的包即可
  * </p>
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:08:50
  */
 @Component
 @Retention(RetentionPolicy.RUNTIME)

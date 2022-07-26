@@ -3,8 +3,9 @@ package com.taotao.cloud.open.openapi.common.exception;
 /**
  * OpenApi服务端异常
  *
- * @author wanghuidong
- * 时间： 2022/6/17 21:11
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:37
  */
 public class OpenApiServerException extends OpenApiException {
     public OpenApiServerException(String errorMsg) {

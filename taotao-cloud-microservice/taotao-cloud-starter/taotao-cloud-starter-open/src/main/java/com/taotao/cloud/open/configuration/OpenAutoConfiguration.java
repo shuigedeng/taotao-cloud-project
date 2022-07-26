@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * SwaggerAutoConfiguration
+ * OpenAutoConfiguration
  *
  * @author shuigedeng
  * @version 2022.03

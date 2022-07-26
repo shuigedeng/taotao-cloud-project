@@ -11,7 +11,9 @@ import java.util.Arrays;
 /**
  * openapi处理器（具体的处理方法）
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:57
  */
 @Data
 public class ApiHandler {

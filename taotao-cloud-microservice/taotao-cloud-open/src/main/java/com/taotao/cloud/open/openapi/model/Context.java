@@ -8,8 +8,9 @@ import java.util.Collection;
 /**
  * 上下文对象，保存程序运行所需数据
  *
- * @author wanghuidong
- * 时间： 2022/6/21 20:11
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:12:00
  */
 @Data
 @Component

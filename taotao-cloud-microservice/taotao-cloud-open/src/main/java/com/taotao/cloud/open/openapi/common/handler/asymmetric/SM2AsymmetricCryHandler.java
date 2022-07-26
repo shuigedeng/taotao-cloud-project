@@ -12,8 +12,9 @@ import java.nio.charset.StandardCharsets;
 /**
  * SM2非对称加密处理器
  *
- * @author wanghuidong
- * 时间： 2022/6/4 13:31
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:53
  */
 public class SM2AsymmetricCryHandler implements AsymmetricCryHandler {
     @Override

@@ -8,8 +8,9 @@ import java.util.List;
 /**
  * API接口信息
  *
- * @author wanghuidong
- * 时间： 2022/6/21 21:31
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:15
  */
 @Data
 public class Api {

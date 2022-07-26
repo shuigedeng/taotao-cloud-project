@@ -3,7 +3,9 @@ package com.taotao.cloud.open.client.constant;
 /**
  * 常量
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:04:59
  */
 public class ClientConstant {
 

@@ -3,8 +3,9 @@ package com.taotao.cloud.open.common.enums;
 /**
  * 数据类型
  *
- * @author wanghuidong
- * 时间： 2022/7/11 22:14
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:06:12
  */
 public enum DataType {
 

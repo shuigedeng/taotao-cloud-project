@@ -7,8 +7,9 @@ import java.util.Collection;
 /**
  * 类型工具类
  *
- * @author wanghuidong
- * 时间： 2022/7/11 13:34
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:07:53
  */
 public class TypeUtil extends cn.hutool.core.util.TypeUtil {
 

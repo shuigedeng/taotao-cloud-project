@@ -8,7 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 /**
- * @author wanghuidong
+ * 豆扫描配置
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:54
  */
 @ComponentScans(value = {@ComponentScan(value = "openapi.server.sdk")})
 @EntityScan(basePackages = {"openapi.server.sdk"})

@@ -7,8 +7,9 @@ import java.util.List;
 /**
  * API方法参数信息
  *
- * @author wanghuidong
- * 时间： 2022/6/21 21:42
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:21
  */
 @Data
 public class Param {
