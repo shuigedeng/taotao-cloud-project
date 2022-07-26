@@ -5,6 +5,7 @@ dependencies {
     api('org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:5.1.2'){
         exclude group: 'org.apache.groovy', module: 'groovy'
         exclude group: 'org.projectlombok', module: 'lombok'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

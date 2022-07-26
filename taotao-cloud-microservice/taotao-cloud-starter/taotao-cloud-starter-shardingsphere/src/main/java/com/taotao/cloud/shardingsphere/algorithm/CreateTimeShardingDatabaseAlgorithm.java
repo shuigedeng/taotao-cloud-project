@@ -4,6 +4,8 @@ import com.google.common.collect.Range;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
+
 import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
@@ -39,14 +41,24 @@ public class CreateTimeShardingDatabaseAlgorithm implements StandardShardingAlgo
 		return collect;
 	}
 
-	@Override
-	public void init() {
-
-	}
+	// @Override
+	// public void init() {
+	//
+	// }
 
 	@Override
 	public String getType() {
 		return null;
+	}
+
+	@Override
+	public Properties getProps() {
+		return null;
+	}
+
+	@Override
+	public void init(Properties props) {
+
 	}
 }
 
