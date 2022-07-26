@@ -9,6 +9,7 @@ import org.apache.shardingsphere.sharding.api.sharding.standard.StandardSharding
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
 
 /**
  * 按创建时间月份分表
@@ -82,14 +83,24 @@ public class CreateTimeShardingTableAlgorithm implements StandardShardingAlgorit
 		return collect;
 	}
 
-	@Override
-	public void init() {
-
-	}
+	// @Override
+	// public void init() {
+	//
+	// }
 
 	@Override
 	public String getType() {
 		return null;
+	}
+
+	@Override
+	public Properties getProps() {
+		return null;
+	}
+
+	@Override
+	public void init(Properties props) {
+
 	}
 }
 
