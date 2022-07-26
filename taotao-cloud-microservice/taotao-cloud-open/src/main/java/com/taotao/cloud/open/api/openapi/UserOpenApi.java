@@ -1,7 +1,7 @@
 package com.taotao.cloud.open.api.openapi;
 
-import com.taotao.cloud.open.openapi.annotation.OpenApi;
-import com.taotao.cloud.open.openapi.annotation.OpenApiMethod;
+import com.taotao.cloud.open.annotation.OpenApi;
+import com.taotao.cloud.open.annotation.OpenApiMethod;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
