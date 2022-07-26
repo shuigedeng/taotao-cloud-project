@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
  *
  * @author shuigedeng
  * @version 2022.07
- * @since 2022-07-26 09:44:51
+ * @since 2022-07-26 10:02:27
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD})
@@ -27,42 +27,48 @@ public @interface OpenApiMethod {
 	/**
 	 * 开放api方法名称，可以与方法名不同
 	 *
-	 * @return 开放api方法名称
+	 * @return {@link String }
+	 * @since 2022-07-26 10:02:28
 	 */
 	String value() default "";
 
 	/**
 	 * 返回值是否需要解密(true:需要，false:不需要，默认由{@link OpenApiClientConfig}决定)
 	 *
-	 * @return 返回值是否需要解密
+	 * @return {@link String }
+	 * @since 2022-07-26 10:02:28
 	 */
 	String retDecrypt() default "";
 
 	/**
 	 * 加密模式(默认由{@link OpenApiClientConfig}决定)
 	 *
-	 * @return 加密模式
+	 * @return {@link CryModeEnum }
+	 * @since 2022-07-26 10:02:28
 	 */
 	CryModeEnum cryModeEnum() default CryModeEnum.UNKNOWN;
 
 	/**
 	 * 设置HTTP建立连接超时时间（单位秒），默认由{@link OpenApiClientConfig}决定
 	 *
-	 * @return 建立连接超时时间
+	 * @return int
+	 * @since 2022-07-26 10:02:28
 	 */
 	int httpConnectionTimeout() default -1;
 
 	/**
 	 * 设置HTTP数据传输超时时间（单位秒），默认由{@link OpenApiClientConfig}决定
 	 *
-	 * @return 数据传输超时时间
+	 * @return int
+	 * @since 2022-07-26 10:02:28
 	 */
 	int httpReadTimeout() default -1;
 
 	/**
 	 * 数据是否启用压缩(true:压缩，false:不压缩，默认由{@link OpenApiClientConfig}决定)
 	 *
-	 * @return 是否启用压缩
+	 * @return {@link String }
+	 * @since 2022-07-26 10:02:28
 	 */
 	String enableCompress() default "";
 }

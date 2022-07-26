@@ -4,7 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * @author wanghuidong
+ * base64跑龙套
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:24
  */
 public class Base64Util {
 

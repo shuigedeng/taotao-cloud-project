@@ -3,7 +3,9 @@ package com.taotao.cloud.open.openapi.common.constant;
 /**
  * 常量
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:03
  */
 public class Constant {
 

@@ -6,6 +6,13 @@ import com.taotao.cloud.open.openapi.common.enums.SymmetricCryEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * 开放api配置实现类
+ *
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:01
+ */
 @Component
 public class OpenApiConfigImpl implements OpenApiConfig {
 

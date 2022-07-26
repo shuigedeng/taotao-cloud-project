@@ -12,8 +12,9 @@ import java.util.Map;
 /**
  * 对称加密处理器
  *
- * @author wanghuidong
- * 时间： 2022/6/4 13:17
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:43
  */
 public interface SymmetricCryHandler {
 

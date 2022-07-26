@@ -8,7 +8,9 @@ import com.taotao.cloud.open.openapi.common.util.TruncateUtil;
 /**
  * openapi入参
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:11
  */
 public class InParams {
 

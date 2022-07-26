@@ -6,8 +6,9 @@ import java.util.List;
 /**
  * 二进制类型参数，可以为Binary、Binary[]、Binary集合
  *
- * @author wanghuidong
- * 时间： 2022/7/24 19:42
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:05
  */
 public class BinaryParam {
 

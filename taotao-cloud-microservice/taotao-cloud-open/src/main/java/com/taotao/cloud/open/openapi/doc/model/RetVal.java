@@ -7,8 +7,9 @@ import java.util.List;
 /**
  * API方法返回值
  *
- * @author wanghuidong
- * 时间： 2022/6/22 11:14
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:11:27
  */
 @Data
 public class RetVal {

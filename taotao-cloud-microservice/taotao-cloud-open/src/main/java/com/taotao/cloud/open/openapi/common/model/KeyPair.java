@@ -4,8 +4,9 @@ package com.taotao.cloud.open.openapi.common.model;
 /**
  * 密钥对
  *
- * @author wanghuidong
- * 时间： 2022/5/29 10:17
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:13
  */
 public class KeyPair {
 

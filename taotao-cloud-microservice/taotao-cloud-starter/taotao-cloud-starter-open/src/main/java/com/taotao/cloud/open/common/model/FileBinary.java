@@ -10,8 +10,9 @@ import com.taotao.cloud.open.common.util.TruncateUtil;
  * 用于文件传输，用在方法参数上或方法返回值当中，可以提升文件传输效率
  * </p>
  *
- * @author wanghuidong
- * 时间： 2022/7/11 19:10
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:06:57
  */
 public class FileBinary extends Binary {
 

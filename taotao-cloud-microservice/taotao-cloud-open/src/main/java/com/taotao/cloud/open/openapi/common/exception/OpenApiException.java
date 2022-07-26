@@ -3,7 +3,9 @@ package com.taotao.cloud.open.openapi.common.exception;
 /**
  * OpenApi异常
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:09:34
  */
 public class OpenApiException extends RuntimeException {
 

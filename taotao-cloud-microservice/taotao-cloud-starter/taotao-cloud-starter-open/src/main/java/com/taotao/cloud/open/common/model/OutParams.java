@@ -9,7 +9,9 @@ import com.taotao.cloud.open.common.util.TruncateUtil;
 /**
  * openapi出参
  *
- * @author wanghuidong
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:07:05
  */
 public class OutParams {
 

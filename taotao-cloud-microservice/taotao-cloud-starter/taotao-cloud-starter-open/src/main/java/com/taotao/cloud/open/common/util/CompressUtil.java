@@ -7,8 +7,9 @@ import java.nio.charset.StandardCharsets;
 /**
  * 压缩工具类
  *
- * @author wanghuidong
- * 时间： 2022/7/8 22:47
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:07:35
  */
 public class CompressUtil {
 

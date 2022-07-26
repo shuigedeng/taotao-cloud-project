@@ -13,8 +13,9 @@ import java.util.List;
 /**
  * 截短工具类，针对大对象日志打印前提供截短功能
  *
- * @author wanghuidong
- * 时间： 2022/7/8 21:31
+ * @author shuigedeng
+ * @version 2022.07
+ * @since 2022-07-26 10:10:42
  */
 public class TruncateUtil {
 
