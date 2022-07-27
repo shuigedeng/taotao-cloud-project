@@ -1,10 +1,12 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     //https://search.maven.org/artifact/org.apache.shardingsphere/shardingsphere-jdbc-core-spring-boot-starter
     api('org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:5.1.2'){
         exclude group: 'org.apache.groovy', module: 'groovy'
         exclude group: 'org.projectlombok', module: 'lombok'
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
 

@@ -92,11 +92,13 @@ buildscript {
         //https://search.maven.org/artifact/commons-net/commons-net
         commonsNetVersion = '3.8.0'
         //https://search.maven.org/artifact/io.github.openfeign/feign-okhttp
-        feignOkhttpVersion = '11.9.1'
+        feignOkhttpVersion = '11.8'
         //https://search.maven.org/artifact/org.apache.httpcomponents/httpclient
         httpcomponentsVersion = '4.5.13'
         //https://search.maven.org/artifact/com.github.danielwegener/logback-kafka-appender
         logbackKafkaAppenderVersion = '0.2.0-RC2'
+        //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-logback-1.x
+        skywalkingVersion = "8.11.0"
         //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
         logstashLogbackEncoderVersion = '7.2'
         //https://search.maven.org/artifact/org.apache.commons/commons-lang3
@@ -177,10 +179,7 @@ buildscript {
         disruptorVersion = "3.4.4"
         //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
         elasticjobVersion = "3.0.1"
-        //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
-        skywalkingVersion = "8.11.0"
-        //https://search.maven.org/artifact/com.github.danielwegener/logback-kafka-appender
-        logbackKafkaAppenderVersion = "0.2.0-RC2"
+
 
         //如果url不指定的话
         //Mac默认：url = https://index.docker.io/v1/

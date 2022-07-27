@@ -33,6 +33,7 @@ import com.taotao.cloud.web.base.controller.SimpleController;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import com.taotao.cloud.web.limit.Limit;
 import com.taotao.cloud.web.version.ApiInfo;
+import com.yomahub.tlog.core.annotation.TLogAspect;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,6 +89,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@Operation(summary = "test", description = "test")
 	@RequestLogger
 	@NotAuth
+	@TLogAspect(value = {"code"}, pattern = "{{}}", joint = "," , str = "nihao")
 	@GetMapping("/test")
 	public FeignDictRes test(@RequestParam(value = "code") String code) {
 		LogUtil.info("sldfkslfdjalsdfkjalsfdjl");

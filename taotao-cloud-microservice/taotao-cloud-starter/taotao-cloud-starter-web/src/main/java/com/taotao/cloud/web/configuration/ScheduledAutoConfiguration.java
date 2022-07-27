@@ -40,8 +40,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 @AutoConfiguration
 @EnableScheduling
 @ConditionalOnProperty(prefix = ScheduledProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties(value = {ThreadPoolTaskSchedulerProperties.class,
-	ScheduledPluginProperties.class, ScheduledProperties.class})
+@EnableConfigurationProperties(value = {ThreadPoolTaskSchedulerProperties.class, ScheduledPluginProperties.class, ScheduledProperties.class})
 public class ScheduledAutoConfiguration implements SchedulingConfigurer {
 
 	public static String ROOT_PATH = "/taotao-cloud-scheduled";

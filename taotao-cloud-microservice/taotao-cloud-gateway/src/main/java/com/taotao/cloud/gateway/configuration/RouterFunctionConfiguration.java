@@ -147,7 +147,7 @@ public class RouterFunctionConfiguration {
 			return ServerResponse
 				.status(HttpStatus.HTTP_OK)
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(Result.fail("访问频繁,请稍后重试")));
+				.body(BodyInserters.fromValue(Result.fail("funciton访问频繁,请稍后重试")));
 		}
 
 		private String buildMessage(ServerRequest request) {
