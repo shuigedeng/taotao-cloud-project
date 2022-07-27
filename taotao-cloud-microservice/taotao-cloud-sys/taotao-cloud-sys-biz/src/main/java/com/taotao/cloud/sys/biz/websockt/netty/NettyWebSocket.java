@@ -15,20 +15,20 @@
  */
 package com.taotao.cloud.sys.biz.websockt.netty;
 
-import com.taotao.cloud.websocket.netty.annotation.BeforeHandshake;
-import com.taotao.cloud.websocket.netty.annotation.OnBinary;
-import com.taotao.cloud.websocket.netty.annotation.OnClose;
-import com.taotao.cloud.websocket.netty.annotation.OnError;
-import com.taotao.cloud.websocket.netty.annotation.OnEvent;
-import com.taotao.cloud.websocket.netty.annotation.OnMessage;
-import com.taotao.cloud.websocket.netty.annotation.OnOpen;
-import com.taotao.cloud.websocket.netty.annotation.PathVariable;
-import com.taotao.cloud.websocket.netty.annotation.RequestParam;
-import com.taotao.cloud.websocket.netty.annotation.ServerEndpoint;
-import com.taotao.cloud.websocket.netty.pojo.Session;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.springframework.util.MultiValueMap;
+import org.yeauty.annotation.BeforeHandshake;
+import org.yeauty.annotation.OnBinary;
+import org.yeauty.annotation.OnClose;
+import org.yeauty.annotation.OnError;
+import org.yeauty.annotation.OnEvent;
+import org.yeauty.annotation.OnMessage;
+import org.yeauty.annotation.OnOpen;
+import org.yeauty.annotation.PathVariable;
+import org.yeauty.annotation.RequestParam;
+import org.yeauty.annotation.ServerEndpoint;
+import org.yeauty.pojo.Session;
 
 import java.io.IOException;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class NettyWebSocket {
 
 	@BeforeHandshake
 	public void handshake(Session session, HttpHeaders headers, @RequestParam String req,
-		@RequestParam MultiValueMap reqMap, @PathVariable String arg, @PathVariable Map pathMap) {
+						  @RequestParam MultiValueMap reqMap, @PathVariable String arg, @PathVariable Map pathMap) {
 		session.setSubprotocols("stomp");
 		if (!"ok".equals(req)) {
 			System.out.println("Authentication failed!");

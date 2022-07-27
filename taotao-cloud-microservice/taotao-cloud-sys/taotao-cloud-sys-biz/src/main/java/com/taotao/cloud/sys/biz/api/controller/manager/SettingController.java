@@ -3,7 +3,6 @@ package com.taotao.cloud.sys.biz.api.controller.manager;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.websocket.netty.annotation.RequestParam;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.model.entity.config.Setting;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
