@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api('org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter'){
         exclude group: 'org.projectlombok', module: 'lombok'

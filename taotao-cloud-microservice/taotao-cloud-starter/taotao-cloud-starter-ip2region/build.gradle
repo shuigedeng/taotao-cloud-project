@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     //https://github.com/maxmind/GeoIP2-java
     //https://search.maven.org/artifact/com.maxmind.geoip2/geoip2

@@ -72,6 +72,14 @@ public final class RedisConstant {
 	 * 请求日志
 	 */
 	public static final String REQUEST_LOG = "REQUEST:LOG:";
+	/**
+	 * 分布式锁key
+	 */
+	public static final String API_RESOURCE = "API:RESOURCE";
+	/**
+	 * 分布式锁key
+	 */
+	public static final String SERVICE_RESOURCE = "SERVICE:RESOURCE";
 
 	// ============================ sub-pub topic =======================================
 

@@ -18,13 +18,13 @@ package com.taotao.cloud.job.xxl.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.job.xxl.properties.XxlExecutorProperties;
 import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -41,7 +41,7 @@ import org.springframework.util.StringUtils;
  */
 @AutoConfiguration
 @EnableConfigurationProperties({XxlJobProperties.class})
-@ConditionalOnProperty(prefix = XxlJobProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = XxlJobProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class XxlJobAutoConfiguration implements InitializingBean {
 
 	/**
@@ -55,10 +55,8 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = XxlJobProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 	public XxlJobSpringExecutor xxlJobSpringExecutor(XxlJobProperties xxlJobProperties,
-		Environment environment,
-		DiscoveryClient discoveryClient) {
+		Environment environment, DiscoveryClient discoveryClient) {
 
 		XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
 		XxlExecutorProperties executor = xxlJobProperties.getExecutor();
@@ -66,7 +64,7 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 		// 应用名默认为服务名
 		String appName = executor.getAppname();
 		if (!StringUtils.hasText(appName)) {
-			appName = PropertyUtil.getProperty(CoreProperties.SpringApplicationName);
+			appName = PropertyUtil.getProperty("spring.application.name");
 		}
 
 		xxlJobSpringExecutor.setAppname(appName);
@@ -87,8 +85,7 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 			String serverList = discoveryClient.getServices().stream()
 				.filter(s -> s.contains(TAO_TAO_CLOUD_XXL_JOB_ADMIN))
 				.flatMap(s -> discoveryClient.getInstances(s).stream())
-				.map(instance -> String.format("http://%s:%s", instance.getHost(),
-					instance.getPort()))
+				.map(instance -> String.format("http://%s:%s", instance.getHost(), instance.getPort()))
 				.collect(Collectors.joining(","));
 			xxlJobSpringExecutor.setAdminAddresses(serverList);
 		} else {

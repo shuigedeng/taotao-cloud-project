@@ -50,7 +50,6 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
 	public JetCacheCreateCacheFactory jetCacheCreateCacheFactory(
 		SpringConfigProvider springConfigProvider) {
 		JetCacheCreateCacheFactory factory = new JetCacheCreateCacheFactory(springConfigProvider);

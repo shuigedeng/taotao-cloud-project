@@ -35,8 +35,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		String requestUrl = exchange.getRequest().getURI().getRawPath();
-		String traceId = exchange.getRequest().getHeaders()
-			.getFirst(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
+		String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
 		if (StrUtil.isBlank(traceId)) {
 			traceId = TraceUtil.getTraceId();
 		}

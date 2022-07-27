@@ -1258,3 +1258,9 @@ springdoc:
 
 test:
   baseUrl: https://www.baidu.com
+
+tlog:
+  pattern: "$preApp:$preIp:$spanId:$traceId"
+  enableInvokeTimePrint: false
+  idGenerator: com.taotao.cloud.logger.tlog.TlogIdGenerator
+  mdcEnable: true

@@ -21,12 +21,15 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
 import org.apache.curator.framework.recipes.cache.CuratorCacheListener;
+import org.apache.curator.framework.recipes.cache.CuratorCacheListener.Type;
 import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
@@ -142,13 +145,12 @@ public class ZookeeperTemplate {
 		if (null == client) {
 			throw new RuntimeException("there is not connect to zkServer...");
 		}
-		TreeCache treeCache = new TreeCache(client, path);
-		TreeCacheListener listener = (client, event) -> {
+		CuratorCache treeCache = CuratorCache.build(client, path);
+		CuratorCacheListener listener = (type, oldData,  data) -> {
 			LogUtil.info("节点路径 --{} ,节点事件类型: {} , 节点值为: {}",
-				Objects.nonNull(event.getData()) ? event.getData().getPath() : "无数据",
-				event.getType());
+				Objects.nonNull(data.getData()) ? Arrays.toString(data.getData()) : "无数据", type);
 		};
-		treeCache.getListenable().addListener(listener);
+		treeCache.listenable().addListener(listener);
 		try {
 			treeCache.start();
 		} catch (Exception e) {
@@ -167,15 +169,15 @@ public class ZookeeperTemplate {
 			throw new RuntimeException("there is not connect to zkServer...");
 		}
 		//cacheData if true, node contents are cached in addition to the stat
-		PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, false);
-		PathChildrenCacheListener listener = (client, event) -> {
-			LogUtil.info("event path is --{} ,event type is {}", event.getData().getPath(),
-				event.getType());
+		CuratorCache pathChildrenCache =CuratorCache.build(client, path);
+		CuratorCacheListener listener = (type,  oldData,  data) -> {
+			LogUtil.info("event path is --{} ,event type is {}", data.getData(), type);
 		};
-		pathChildrenCache.getListenable().addListener(listener);
+		pathChildrenCache.listenable().addListener(listener);
 		// StartMode : NORMAL  BUILD_INITIAL_CACHE  POST_INITIALIZED_EVENT
 		try {
-			pathChildrenCache.start(PathChildrenCache.StartMode.NORMAL);
+			//pathChildrenCache.start(PathChildrenCache.StartMode.NORMAL);
+			pathChildrenCache.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -189,13 +191,14 @@ public class ZookeeperTemplate {
 			throw new RuntimeException("there is not connect to zkServer...");
 		}
 		// dataIsCompressed if true, data in the path is compressed
-		NodeCache nodeCache = new NodeCache(client, path, false);
-		NodeCacheListener listener = () -> {
-			ChildData currentData = nodeCache.getCurrentData();
-			LogUtil.info("{} Znode data is chagnge,new data is ---  {}", currentData.getPath(),
-				new String(currentData.getData()));
+		CuratorCache nodeCache = CuratorCache.build(client, path);
+		CuratorCacheListener listener = (type,  oldData,  data) -> {
+			Optional<ChildData> currentData = nodeCache.get(path);
+			LogUtil.info("{} Znode data is chagnge,new data is ---  {}",
+				currentData.get().getPath(),
+				new String(currentData.get().getData()));
 		};
-		nodeCache.getListenable().addListener(listener);
+		nodeCache.listenable().addListener(listener);
 		try {
 			nodeCache.start();
 		} catch (Exception e) {
@@ -440,7 +443,7 @@ public class ZookeeperTemplate {
 	 */
 	private String buildPath(String path, String node) {
 		Assert.isTrue(StrUtil.isNotEmpty(path) && StrUtil.isNotEmpty(node)
-			, "zookeeper路径或者节点名称不能为空！");
+			,"zookeeper路径或者节点名称不能为空！");
 
 		if (!path.startsWith(CommonConstant.PATH_SPLIT)) {
 			path = CommonConstant.PATH_SPLIT + path;

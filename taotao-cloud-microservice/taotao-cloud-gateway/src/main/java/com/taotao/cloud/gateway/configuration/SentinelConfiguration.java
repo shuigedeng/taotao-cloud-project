@@ -159,7 +159,7 @@ public class SentinelConfiguration {
 		GatewayCallbackManager.setBlockHandler((exchange, t) -> ServerResponse
 			.status(200)
 			.contentType(MediaType.valueOf(MediaType.APPLICATION_JSON.toString()))
-			.body(fromValue(Result.fail("访问频繁,请稍后重试"))));
+			.body(fromValue(Result.fail("sentinel访问频繁,请稍后重试"))));
 		LogUtil.info(
 			"[Sentinel SpringCloudGateway] using AnonymousBlockRequestHandler");
 	}
