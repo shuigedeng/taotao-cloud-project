@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.core.endpoint;
 
+import com.taotao.cloud.core.endpoint.mbean.SystemInfo;
 import java.lang.management.ManagementFactory;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
@@ -33,7 +34,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @version 2021.9
  * @since 2021-09-02 20:08:05
  */
-public class TaoTaoCloudMbeanRegistrar implements ApplicationContextAware, InitializingBean, DisposableBean {
+public class CustomMbeanRegistrar implements ApplicationContextAware, InitializingBean, DisposableBean {
 
 	/**
 	 * applicationContext
@@ -45,7 +46,7 @@ public class TaoTaoCloudMbeanRegistrar implements ApplicationContextAware, Initi
 	private final ObjectName objectName = new ObjectName(
 		"com.taotao.cloud.core.endpoint:type=CustomAdmin,name=SystemInfoMBean");
 
-	public TaoTaoCloudMbeanRegistrar() throws MalformedObjectNameException {
+	public CustomMbeanRegistrar() throws MalformedObjectNameException {
 	}
 
 	@Override

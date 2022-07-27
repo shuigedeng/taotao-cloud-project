@@ -31,7 +31,7 @@ import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
  * @since 2021-09-02 20:08:52
  */
 @Endpoint(id = "taotaocloud")
-public class TaoTaoCloudEndPoint {
+public class CustomEndPoint {
 
 	private String STATUS = "up";
 	private String DETAIL = "一切正常";

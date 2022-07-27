@@ -1,7 +1,7 @@
-package com.taotao.cloud.core.cron.util;
+package com.taotao.cloud.common.support.cron.util;
 
 
-import com.taotao.cloud.core.cron.pojo.CronPosition;
+import com.taotao.cloud.common.support.cron.pojo.CronPosition;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

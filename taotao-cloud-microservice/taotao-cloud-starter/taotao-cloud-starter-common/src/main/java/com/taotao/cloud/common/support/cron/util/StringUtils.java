@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.cron.util;
+package com.taotao.cloud.common.support.cron.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

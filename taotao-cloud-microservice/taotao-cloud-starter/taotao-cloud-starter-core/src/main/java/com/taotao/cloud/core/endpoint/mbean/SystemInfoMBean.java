@@ -13,29 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.endpoint;
-
-import org.springframework.jmx.export.annotation.ManagedAttribute;
-import org.springframework.jmx.export.annotation.ManagedOperation;
-import org.springframework.jmx.export.annotation.ManagedResource;
+package com.taotao.cloud.core.endpoint.mbean;
 
 /**
- * MBeanDemo 
+ * 注册一个 JMX MBean
+ * <p>
+ * 名字必须要用 MBean 结尾
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 21:05:36
+ * @since 2021-09-02 20:08:43
  */
-@ManagedResource(objectName = "com.taotao.cloud.core.endpoint:name=MBeanDemo")
-public class MBeanDemo {
+public interface SystemInfoMBean {
 
-	@ManagedAttribute
-	public String getName() {
-		return "MBean";
-	}
+	int getCpuCore();
 
-	@ManagedOperation
-	public void shutdown() {
-		System.exit(0);
-	}
+	long getTotalMemory();
+
+	void shutdown();
+
 }

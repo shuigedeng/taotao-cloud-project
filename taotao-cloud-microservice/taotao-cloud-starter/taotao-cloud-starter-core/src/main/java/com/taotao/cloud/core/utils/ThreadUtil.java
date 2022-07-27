@@ -45,8 +45,7 @@ public class ThreadUtil {
 				action.invoke(t);
 			}
 		} else {
-			Monitor monitorThreadPool = ContextUtil.getBean(Monitor.class,
-				false);
+			Monitor monitorThreadPool = ContextUtil.getBean(Monitor.class, false);
 			monitorThreadPool.monitorParallelFor2(taskName, parallelCount, taskList, action);
 		}
 	}

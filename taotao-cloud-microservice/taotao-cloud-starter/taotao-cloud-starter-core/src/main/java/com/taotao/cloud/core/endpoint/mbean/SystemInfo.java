@@ -13,28 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.endpoint;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
-import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
-import org.springframework.boot.actuate.health.Health;
+package com.taotao.cloud.core.endpoint.mbean;
 
 /**
- * CustomEndPoint
+ * SystemInfo 
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 20:13:40
+ * @since 2021-09-02 21:06:46
  */
-@WebEndpoint(id = "taotao-cloud-health")
-public class TaoTaoCloudHealthEndPoint {
+public class SystemInfo implements SystemInfoMBean {
 
-	@Autowired
-	private TaoTaoCloudHealthIndicator taoTaoCloudHealthIndicator;
+	@Override
+	public int getCpuCore() {
+		return Runtime.getRuntime().availableProcessors();
+	}
 
-	@ReadOperation
-	public Health health() {
-		return taoTaoCloudHealthIndicator.getHealth(true);
+	@Override
+	public long getTotalMemory() {
+		return Runtime.getRuntime().totalMemory();
+	}
+
+	@Override
+	public void shutdown() {
+		System.exit(0);
 	}
 }

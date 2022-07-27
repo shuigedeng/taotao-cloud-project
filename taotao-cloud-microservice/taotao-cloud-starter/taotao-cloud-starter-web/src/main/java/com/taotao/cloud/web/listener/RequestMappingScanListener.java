@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.core.endpoint.RequestMappingEndPoint;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.ArrayList;
@@ -152,6 +153,8 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 			redisService.hset(RedisConstant.API_RESOURCE, microService, res, RESOURCE_EXPIRE);
 			redisService.sSetAndTime(RedisConstant.SERVICE_RESOURCE, RESOURCE_EXPIRE, microService);
 			LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]", microService, list.size(), RedisConstant.API_RESOURCE);
+
+			RequestMappingEndPoint.requestMappingHandlerMapping = res;
 		} catch (Exception e) {
 			LogUtil.error("error: {}", e.getMessage());
 		}

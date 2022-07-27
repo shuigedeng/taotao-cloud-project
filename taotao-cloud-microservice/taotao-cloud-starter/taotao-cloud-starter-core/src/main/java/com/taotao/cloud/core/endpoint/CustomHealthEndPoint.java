@@ -15,29 +15,27 @@
  */
 package com.taotao.cloud.core.endpoint;
 
-import org.springframework.boot.actuate.endpoint.jmx.annotation.JmxEndpoint;
+import com.taotao.cloud.core.endpoint.indicator.CustomHealthIndicator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
+import org.springframework.boot.actuate.health.Health;
 
 /**
- * SystemInfo 
+ * CustomEndPoint
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 21:06:46
+ * @since 2021-09-02 20:13:40
  */
-public class SystemInfo implements SystemInfoMBean {
+@WebEndpoint(id = "taotao-cloud-health")
+public class CustomHealthEndPoint {
 
-	@Override
-	public int getCpuCore() {
-		return Runtime.getRuntime().availableProcessors();
-	}
+	@Autowired
+	private CustomHealthIndicator customHealthIndicator;
 
-	@Override
-	public long getTotalMemory() {
-		return Runtime.getRuntime().totalMemory();
-	}
-
-	@Override
-	public void shutdown() {
-		System.exit(0);
+	@ReadOperation
+	public Health health() {
+		return customHealthIndicator.getHealth(true);
 	}
 }

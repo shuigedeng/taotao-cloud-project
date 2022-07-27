@@ -1,16 +1,14 @@
-package com.taotao.cloud.core.cron;
+package com.taotao.cloud.common.cron;
 
-import com.taotao.cloud.core.cron.parser.DayBasedCronParser;
-import com.taotao.cloud.core.cron.util.CronSequenceGenerator;
-import com.taotao.cloud.core.cron.util.CronUtil;
-import com.taotao.cloud.core.cron.util.DateUtil;
+import com.taotao.cloud.common.support.cron.util.CronSequenceGenerator;
+import com.taotao.cloud.common.support.cron.util.CronUtil;
+import com.taotao.cloud.common.support.cron.util.DateUtil;
+import java.util.Date;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Date;
-
-public class CronParserTest {
+public class CronNextTest {
     @Test
     public void testNext0(){
         Date date = DateUtil.toDate("2018-11-23 18:50:00");
@@ -18,7 +16,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2018-11-28 02:30:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2018-11-28 02:30:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -28,7 +26,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2018-11-18 12:15:02" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2018-11-18 12:15:02" , DateUtil.toStr(next1));
     }
     @Test
@@ -38,7 +36,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2011-03-26 08:00:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2011-03-26 08:00:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -48,7 +46,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2016-12-25 18:01:46" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         //18:01:46??? // 需要每个域大于当前的???
         Assert.assertEquals("2016-12-25 18:01:00" , DateUtil.toStr(next1));
     }
@@ -59,7 +57,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2016-01-29 14:00:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2016-01-29 14:00:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -69,7 +67,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2022-09-01 10:15:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2022-09-01 10:15:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -79,7 +77,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2013-09-12 03:26:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2013-09-12 03:26:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -89,7 +87,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2000-03-01 10:10:10" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2000-03-01 10:10:10" , DateUtil.toStr(next1));
 
         date = DateUtil.toDate("2018-11-20 12:00:00");
@@ -97,14 +95,14 @@ public class CronParserTest {
         next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2018-11-20 12:10:10" , DateUtil.toStr(next));
 
-        next1 = new DayBasedCronParser(cron).next(date);
+        next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2018-11-20 12:10:10" , DateUtil.toStr(next1));
 
         cron = "10 10 12 ? * 0";
         next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2018-11-25 12:10:10" , DateUtil.toStr(next));
 
-        next1 = new DayBasedCronParser(cron).next(date);
+        next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2018-11-25 12:10:10" , DateUtil.toStr(next1));
     }
     @Test
@@ -114,7 +112,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2009-03-01 00:00:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2009-03-01 00:00:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -124,7 +122,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2003-02-12 00:10:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2003-02-12 00:10:00" , DateUtil.toStr(next1));
     }
     @Test
@@ -134,7 +132,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2017-03-01 14:10:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2017-03-01 14:10:00" , DateUtil.toStr(next1));
     }
 
@@ -145,7 +143,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2018-11-19 12:00:00" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2018-11-19 12:00:00" , DateUtil.toStr(next1));
     }
 
@@ -159,7 +157,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2019-03-03 23:15:02" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2019-03-03 23:15:02" , DateUtil.toStr(next1));
     }
     @Test(expected = IllegalArgumentException.class)
@@ -171,7 +169,7 @@ public class CronParserTest {
         /*Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2029-03-03 23:15:02" , DateUtil.toStr(next));*/
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2029-03-03 23:15:02" , DateUtil.toStr(next1));
     }
     @Test
@@ -194,7 +192,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2022-03-03 23:15:02" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2022-03-03 23:15:02" , DateUtil.toStr(next1));
     }
     @Test
@@ -205,7 +203,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2021-03-03 23:15:02" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2021-03-03 23:15:02" , DateUtil.toStr(next1));
     }
     @Test
@@ -216,7 +214,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2020-03-03 23:15:02" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2020-03-03 23:15:02" , DateUtil.toStr(next1));
     }
     @Test(expected = IllegalArgumentException.class)
@@ -228,7 +226,7 @@ public class CronParserTest {
         Date next = new CronSequenceGenerator(cron).next(date);
         Assert.assertEquals("2019-03-03 23:15:02" , DateUtil.toStr(next));
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2025-03-03 23:15:02" , DateUtil.toStr(next1));
     }
 
@@ -240,7 +238,7 @@ public class CronParserTest {
         Date date = DateUtil.toDate("2018-11-18 12:00:12");
         String cron = "2 15 23 3 3 1 2019,2025";
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2025-03-03 23:15:02" , DateUtil.toStr(next1));
     }
 
@@ -252,7 +250,7 @@ public class CronParserTest {
         Date date = DateUtil.toDate("2018-11-18 12:00:12");
         String cron = "2 15 23 3 3 1 2018,2019,2024";
 
-        Date next1 = new DayBasedCronParser(cron).next(date);
+        Date next1 = CronUtil.next(cron, date);
         Assert.assertEquals("2025-03-03 23:15:02" , DateUtil.toStr(next1));
     }
     /**
@@ -268,17 +266,15 @@ public class CronParserTest {
         Date date = DateUtil.toDate("1999-10-18 12:00:00");
         String cron = "10-20/4 10,44,30/2 10 ? 3 WED";
         int max = 10000;
-        CronSequenceGenerator generator = new CronSequenceGenerator(cron);
         long beginSpring = System.currentTimeMillis();
         for (int i = 0; i < max; i++) {
-            generator.next(date);
+            new CronSequenceGenerator(cron).next(date);
         }
         System.out.println("Spring 执行 " + max + " 次耗时: " + (System.currentTimeMillis() - beginSpring));
 
-        DayBasedCronParser cronParser = new DayBasedCronParser(cron);
         long beginHms = System.currentTimeMillis();
         for (int i = 0; i < max; i++) {
-            cronParser.next(date);
+            CronUtil.next(cron, date);
         }
         System.out.println("HMS 执行 " + max + " 次耗时: " + (System.currentTimeMillis() - beginHms));
     }
@@ -288,17 +284,15 @@ public class CronParserTest {
         Date date = DateUtil.toDate("2016-01-29 04:01:12");
         String cron = "0 0/5 14,18 * * ?";
         int max = 10000;
-        CronSequenceGenerator generator = new CronSequenceGenerator(cron);
         long beginSpring = System.currentTimeMillis();
         for (int i = 0; i < max; i++) {
-            generator.next(date);
+            new CronSequenceGenerator(cron).next(date);
         }
         System.out.println("Spring 执行 " + max + " 次耗时: " + (System.currentTimeMillis() - beginSpring));
 
-        DayBasedCronParser cronParser = new DayBasedCronParser(cron);
         long beginHms = System.currentTimeMillis();
         for (int i = 0; i < max; i++) {
-            cronParser.next(date);
+            CronUtil.next(cron, date);
         }
         System.out.println("HMS 执行 " + max + " 次耗时: " + (System.currentTimeMillis() - beginHms));
     }
@@ -308,17 +302,15 @@ public class CronParserTest {
         Date date = DateUtil.toDate("2003-02-09 06:17:19");
         String cron = "0 10-20/3,57-59 * * * WED-FRI";
         int max = 10000;
-        CronSequenceGenerator generator = new CronSequenceGenerator(cron);
         long beginSpring = System.currentTimeMillis();
         for (int i = 0; i < max; i++) {
-            generator.next(date);
+            new CronSequenceGenerator(cron).next(date);
         }
         System.out.println("Spring 执行 " + max + " 次耗时: " + (System.currentTimeMillis() - beginSpring));
 
-        DayBasedCronParser cronParser = new DayBasedCronParser(cron);
         long beginHms = System.currentTimeMillis();
         for (int i = 0; i < max; i++) {
-            cronParser.next(date);
+            CronUtil.next(cron, date);
         }
         System.out.println("HMS 执行 " + max + " 次耗时: " + (System.currentTimeMillis() - beginHms));
     }
