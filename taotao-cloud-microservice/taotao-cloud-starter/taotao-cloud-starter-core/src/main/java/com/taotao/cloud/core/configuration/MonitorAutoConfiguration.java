@@ -22,7 +22,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.monitor.Monitor;
-import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.core.properties.MonitorProperties;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -88,12 +88,12 @@ public class MonitorAutoConfiguration implements InitializingBean {
 		Collector collector,
 		MonitorThreadPoolProperties monitorThreadPoolProperties,
 		MonitorThreadPoolExecutor monitorThreadPoolExecutor,
-		AsyncThreadPoolProperties asyncThreadPoolProperties,
+		AsyncProperties asyncProperties,
 		AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor) {
 
 		return new Monitor(
 			collector,
-			asyncThreadPoolProperties,
+			asyncProperties,
 			asyncThreadPoolTaskExecutor,
 			monitorThreadPoolProperties,
 			monitorThreadPoolExecutor

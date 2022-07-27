@@ -73,6 +73,10 @@ public class TraceUtil {
 		}
 	}
 
+	public static void mdcRemoveTraceId() {
+		MDC.remove(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
+	}
+
 	/**
 	 * 传递tenantId至MDC
 	 *
@@ -85,6 +89,10 @@ public class TraceUtil {
 		}
 	}
 
+	public static void mdcRemoveTenantId() {
+		MDC.remove(CommonConstant.TAOTAO_CLOUD_TENANT_ID);
+	}
+
 	/**
 	 * 传递version至MDC
 	 *
@@ -95,6 +103,10 @@ public class TraceUtil {
 		if (StrUtil.isNotBlank(version)) {
 			MDC.put(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION, version);
 		}
+	}
+
+	public static void mdcRemoveVersion() {
+		MDC.remove(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION);
 	}
 
 	/**
@@ -148,6 +160,10 @@ public class TraceUtil {
 		}
 	}
 
+	public static void mdcRemoveZipkinTraceId() {
+		MDC.remove(CommonConstant.ZIPKIN_TRACE_ID);
+	}
+
 	/**
 	 * 传递zipkinSpanId至MDC
 	 *
@@ -159,5 +175,9 @@ public class TraceUtil {
 		if (StrUtil.isNotBlank(zipkinSpanId)) {
 			MDC.put(CommonConstant.ZIPKIN_SPANE_ID, zipkinSpanId);
 		}
+	}
+
+	public static void mdcRemoveZipkinSpanId() {
+		MDC.remove(CommonConstant.ZIPKIN_SPANE_ID);
 	}
 }

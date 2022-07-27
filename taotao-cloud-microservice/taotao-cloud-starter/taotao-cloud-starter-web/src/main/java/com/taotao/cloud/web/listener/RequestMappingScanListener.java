@@ -60,14 +60,13 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 
 			// 获取微服务模块名称
 			String microService = env.getProperty("spring.application.name", "application");
-			if (redisService == null || applicationContext.containsBean(
-				"resourceServerConfiguration")) {
+			if (redisService == null || applicationContext.containsBean("resourceServerConfiguration")) {
 				LogUtil.warn("[{}]忽略接口资源扫描", microService);
 				return;
 			}
 
 			// 所有接口映射
-			RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
+			RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
 			// 获取url与类和方法的对应信息
 			Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 			List<Map<String, String>> list = new ArrayList<>();
@@ -152,8 +151,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 
 			redisService.hset(RedisConstant.API_RESOURCE, microService, res, RESOURCE_EXPIRE);
 			redisService.sSetAndTime(RedisConstant.SERVICE_RESOURCE, RESOURCE_EXPIRE, microService);
-			LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]", microService,
-				list.size(), RedisConstant.API_RESOURCE);
+			LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]", microService, list.size(), RedisConstant.API_RESOURCE);
 		} catch (Exception e) {
 			LogUtil.error("error: {}", e.getMessage());
 		}

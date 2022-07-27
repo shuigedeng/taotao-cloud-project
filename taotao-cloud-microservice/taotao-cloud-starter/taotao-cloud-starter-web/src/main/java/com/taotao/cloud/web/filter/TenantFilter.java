@@ -61,7 +61,7 @@ public class TenantFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 		} finally {
 			TenantContextHolder.clear();
-			MDC.clear();
+			TraceUtil.mdcRemoveTenantId();
 		}
 	}
 }

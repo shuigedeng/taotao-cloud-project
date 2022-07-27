@@ -42,19 +42,18 @@ public class VersionFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {
 		try {
-			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
-				.requireNonNull(RequestContextHolder.getRequestAttributes());
+			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
 			RequestContextHolder.setRequestAttributes(attributes, true);
+
 			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION_HEADER);
 			if (StrUtil.isNotEmpty(version)) {
 				VersionContextHolder.setVersion(version);
 				TraceUtil.mdcVersion(version);
 			}
-
 			filterChain.doFilter(request, response);
 		} finally {
 			VersionContextHolder.clear();
-			MDC.clear();
+			TraceUtil.mdcRemoveVersion();
 		}
 	}
 }

@@ -20,7 +20,7 @@ import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
-import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
@@ -67,12 +67,12 @@ public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			Collector collector = Collector.getCollector();
-			AsyncThreadPoolProperties asyncThreadPoolProperties = ContextUtil.getBean(
-				AsyncThreadPoolProperties.class, true);
+			AsyncProperties asyncProperties = ContextUtil.getBean(
+				AsyncProperties.class, true);
 
-			if (Objects.nonNull(collector) && Objects.nonNull(asyncThreadPoolProperties)) {
+			if (Objects.nonNull(collector) && Objects.nonNull(asyncProperties)) {
 
-				String asyncThreadName = asyncThreadPoolProperties.
+				String asyncThreadName = asyncProperties.
 					getThreadNamePrefix().replace("-", ".");
 
 				AsyncExecutorCollectInfo info = new AsyncExecutorCollectInfo();

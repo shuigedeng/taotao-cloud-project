@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.api.feign;
 import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
 import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
 
+import cn.hutool.core.thread.AsyncUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -35,11 +36,15 @@ import com.taotao.cloud.web.limit.Limit;
 import com.taotao.cloud.web.version.ApiInfo;
 import com.yomahub.tlog.core.annotation.TLogAspect;
 import io.swagger.v3.oas.annotations.Operation;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.context.request.async.WebAsyncUtils;
 
 /**
  * 内部服务端-字典API
@@ -64,7 +69,8 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	 */
 	@ApiInfo(
 		create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
-		update = {@ApiInfo.Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+		update = {
+			@ApiInfo.Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@ApiInfo.Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		}
 	)
@@ -91,12 +97,22 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@NotAuth
 	@TLogAspect(value = {"code"}, pattern = "{{}}", joint = "," , str = "nihao")
 	@GetMapping("/test")
-	public FeignDictRes test(@RequestParam(value = "code") String code) {
+	public DeferredResult<Dict> test(@RequestParam(value = "code") String code)
+		throws ExecutionException, InterruptedException {
 		LogUtil.info("sldfkslfdjalsdfkjalsfdjl");
 		Dict dict = service().findByCode(code);
 
 		LogUtil.info(dict.toString());
-		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
+
+		Future<Dict> asyncByCode = service().findAsyncByCode(code);
+		Dict dict1 = asyncByCode.get();
+
+		LogUtil.info("我在等待你");
+
+		DeferredResult<Dict> objectDeferredResult = new DeferredResult<>();
+		objectDeferredResult.setResult(dict1);
+		return objectDeferredResult;
+		//return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 }
 
