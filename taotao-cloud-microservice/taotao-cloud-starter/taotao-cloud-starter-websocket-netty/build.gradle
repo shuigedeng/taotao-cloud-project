@@ -3,6 +3,8 @@ dependencies {
 
     api "io.netty:netty-all"
 
+    api 'org.yeauty:netty-websocket-spring-boot-starter:0.12.0'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation 'junit:junit:4.13.2'
