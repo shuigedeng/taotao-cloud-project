@@ -4,7 +4,7 @@
 name: microservice starters publish
 
 on:
-  push:
+  #push:
   #  paths:
   #    - 'taotao-cloud-microservice/taotao-cloud-starter/**'
   #  branches: [ master ]
