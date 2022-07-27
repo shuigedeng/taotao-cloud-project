@@ -18,6 +18,7 @@ package com.taotao.cloud.core.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.endpoint.CustomHealthEndPoint;
+import com.taotao.cloud.core.endpoint.RequestMappingEndPoint;
 import com.taotao.cloud.core.endpoint.indicator.CustomHealthIndicator;
 import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
 import com.taotao.cloud.core.endpoint.mbean.MBeanDemo;
@@ -60,6 +61,11 @@ public class EndPointAutoConfiguration implements InitializingBean {
 	@Bean
 	public CustomEndPoint taoTaoCloudEndPoint() {
 		return new CustomEndPoint();
+	}
+
+	@Bean
+	public RequestMappingEndPoint requestMappingEndPoint(){
+		return new RequestMappingEndPoint();
 	}
 
 	@Bean
