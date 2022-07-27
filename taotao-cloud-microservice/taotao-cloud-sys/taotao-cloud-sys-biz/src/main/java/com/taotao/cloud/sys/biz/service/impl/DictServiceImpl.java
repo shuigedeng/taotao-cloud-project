@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
 import com.taotao.cloud.sys.api.dubbo.response.DubboDictRes;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -26,9 +27,14 @@ import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.slf4j.MDC;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 /**
@@ -128,5 +134,28 @@ public class DictServiceImpl extends
 			.remark("sdfasfd")
 			.description("sdflasjdfl")
 			.build();
+	}
+
+	@Override
+	@Async
+	public Future<Dict> findAsyncByCode(String code) {
+		LogUtil.info("异步查询字典, 当前线程名称：{}", Thread.currentThread().getName());
+
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		}
+
+		Dict result = Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
+			.dictCode("async123123123").dictName("asynclsdfjaslf")
+			.remark("asyncsdfasfd")
+			.description("asyncsdflasjdfl")
+			.build();
+
+		Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
+
+		LogUtil.info("findAsyncByCode: {}", result);
+
+		return new AsyncResult<>(result);
 	}
 }

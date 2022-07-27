@@ -56,14 +56,17 @@ public class TraceFilter extends OncePerRequestFilter {
 		try {
 			String traceId = TraceUtil.getTraceId(request);
 			TraceContextHolder.setTraceId(traceId);
-			TraceUtil.mdcTraceId(traceId);
 
+			TraceUtil.mdcTraceId(traceId);
 			TraceUtil.mdcZipkinTraceId(request);
 			TraceUtil.mdcZipkinSpanId(request);
+
 			filterChain.doFilter(request, response);
 		} finally {
-			TraceContextHolder.clear();;
-			MDC.clear();
+			TraceContextHolder.clear();
+			TraceUtil.mdcRemoveTraceId();
+			TraceUtil.mdcRemoveZipkinTraceId();
+			TraceUtil.mdcRemoveZipkinSpanId();
 		}
 	}
 }

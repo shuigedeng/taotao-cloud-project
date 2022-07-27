@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+import java.util.concurrent.Future;
 
 /**
  * ISysDictService
@@ -89,6 +90,8 @@ public interface IDictService extends BaseSuperService<Dict,Long> {
 	 * @since 2021-10-09 20:25:30
 	 */
 	Dict findByCode(String code);
+
+	Future<Dict> findAsyncByCode(String code);
 
 	//
 	///**

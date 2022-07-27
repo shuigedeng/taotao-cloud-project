@@ -24,7 +24,7 @@ import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThrea
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.ProcessExitEvent;
 import com.taotao.cloud.core.model.Ref;
-import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,13 +57,13 @@ public class Monitor {
 	private ThreadPoolTaskExecutor asyncThreadPoolExecutor;
 
 	private MonitorThreadPoolProperties monitorThreadPoolProperties;
-	private AsyncThreadPoolProperties asyncThreadPoolProperties;
+	private AsyncProperties asyncProperties;
 
 	private Collector collector;
 
 	public Monitor(
 		Collector collector,
-		AsyncThreadPoolProperties asyncThreadPoolProperties,
+		AsyncProperties asyncProperties,
 		AsyncThreadPoolTaskExecutor asyncThreadPoolExecutor,
 		MonitorThreadPoolProperties monitorThreadPoolProperties,
 		MonitorThreadPoolExecutor monitorThreadPoolExecutor) {
@@ -72,7 +72,7 @@ public class Monitor {
 
 		// 核心线程池
 		this.asyncThreadPoolExecutor = asyncThreadPoolExecutor;
-		this.asyncThreadPoolProperties = asyncThreadPoolProperties;
+		this.asyncProperties = asyncProperties;
 		// 监控线程池
 		this.monitorThreadPoolExecutor = monitorThreadPoolExecutor;
 		this.monitorThreadPoolProperties = monitorThreadPoolProperties;
@@ -151,7 +151,7 @@ public class Monitor {
 	}
 
 	private void coreThreadPoolCheckHealth() {
-		if (asyncThreadPoolProperties.isCheckHealth()
+		if (asyncProperties.isCheckHealth()
 			&& asyncThreadPoolExecutor.getMaxPoolSize() <= asyncThreadPoolExecutor.getPoolSize()
 			&& asyncThreadPoolExecutor.getThreadPoolExecutor().getQueue().size() > 0) {
 			LogUtil.warn(
@@ -370,13 +370,13 @@ public class Monitor {
 		this.monitorThreadPoolProperties = monitorThreadPoolProperties;
 	}
 
-	public AsyncThreadPoolProperties getAsyncThreadPoolProperties() {
-		return asyncThreadPoolProperties;
+	public AsyncProperties getAsyncThreadPoolProperties() {
+		return asyncProperties;
 	}
 
 	public void setAsyncThreadPoolProperties(
-		AsyncThreadPoolProperties asyncThreadPoolProperties) {
-		this.asyncThreadPoolProperties = asyncThreadPoolProperties;
+		AsyncProperties asyncProperties) {
+		this.asyncProperties = asyncProperties;
 	}
 
 	public Collector getCollector() {

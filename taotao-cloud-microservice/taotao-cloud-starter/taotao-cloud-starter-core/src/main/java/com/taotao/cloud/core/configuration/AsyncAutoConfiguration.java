@@ -19,8 +19,8 @@ import com.alibaba.ttl.TtlCallable;
 import com.alibaba.ttl.TtlRunnable;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.core.decorator.ContextDecorator;
 import com.taotao.cloud.core.properties.AsyncProperties;
-import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -53,12 +53,12 @@ import org.springframework.web.context.request.RequestContextHolder;
  */
 @AutoConfiguration
 @EnableAsync(proxyTargetClass = true)
-@EnableConfigurationProperties({AsyncProperties.class, AsyncThreadPoolProperties.class})
+@EnableConfigurationProperties({AsyncProperties.class})
 @ConditionalOnProperty(prefix = AsyncProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean {
 
 	@Autowired
-	private AsyncThreadPoolProperties asyncThreadPoolProperties;
+	private AsyncProperties asyncProperties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -69,7 +69,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
 		return (ex, method, params) -> LogUtil
 			.error(ex, "AsyncUncaughtExceptionHandler {} class: {} method: {} params: {}",
-				asyncThreadPoolProperties.getThreadNamePrefix(),
+				asyncProperties.getThreadNamePrefix(),
 				method.getDeclaringClass().getName(),
 				method.getName(),
 				params);
@@ -77,29 +77,35 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 
 	@Override
 	public AsyncThreadPoolTaskExecutor getAsyncExecutor() {
-		//AsyncThreadPoolTaskExecutor taskExecutor = ContextUtil.getBean(
-		//	AsyncThreadPoolTaskExecutor.class, true);
-		//if (Objects.nonNull(taskExecutor)) {
-		//	return taskExecutor;
-		//}
-		//
-		//return null;
-
 		AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
-		executor.setCorePoolSize(asyncThreadPoolProperties.getCorePoolSize());
-		executor.setMaxPoolSize(asyncThreadPoolProperties.getMaxPoolSiz());
-		executor.setQueueCapacity(asyncThreadPoolProperties.getQueueCapacity());
-		executor.setKeepAliveSeconds(asyncThreadPoolProperties.getKeepAliveSeconds());
-		executor.setThreadNamePrefix(asyncThreadPoolProperties.getThreadNamePrefix());
 
-		executor.setThreadFactory(new AsyncThreadPoolFactory(asyncThreadPoolProperties, executor));
-		executor.setTaskDecorator(new AsyncTaskDecorator());
-
+		// 线程池名的前缀
+		executor.setThreadNamePrefix(asyncProperties.getThreadNamePrefix());
+		// 核心线程数
+		executor.setCorePoolSize(asyncProperties.getCorePoolSize());
+		// 最大线程数
+		executor.setMaxPoolSize(asyncProperties.getMaxPoolSiz());
+		// 允许线程的空闲时间
+		executor.setKeepAliveSeconds(asyncProperties.getKeepAliveSeconds());
+		// 任务队列容量（阻塞队列）
+		executor.setQueueCapacity(asyncProperties.getQueueCapacity());
+		// 是否允许核心线程超时
+		executor.setAllowCoreThreadTimeOut(asyncProperties.isAllowCoreThreadTimeOut());
+		// 应用关闭时-是否等待未完成任务继续执行，再继续销毁其他的Bean
+		executor.setWaitForTasksToCompleteOnShutdown(asyncProperties.isWaitForTasksToCompleteOnShutdown());
+		// 应用关闭时-继续等待时间（单位：秒）
+		executor.setAwaitTerminationSeconds(asyncProperties.getAwaitTerminationSeconds());
+		// ThreadFactory
+		executor.setThreadFactory(new AsyncThreadPoolFactory(asyncProperties, executor));
+		// 异步线程上下文装饰器
+		executor.setTaskDecorator(new ContextDecorator(asyncProperties));
 		/*
+		 线程池拒绝策略
 		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
 		 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
 		 */
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+
 		executor.initialize();
 
 		return executor;
@@ -138,14 +144,14 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		private final AtomicInteger poolNumber = new AtomicInteger(1);
 		private final AtomicInteger threadNumber = new AtomicInteger(1);
 		private final String namePrefix;
-		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
+		private final AsyncProperties asyncProperties;
 		private final ThreadPoolTaskExecutor executor;
 
-		public AsyncThreadPoolFactory(AsyncThreadPoolProperties asyncThreadPoolProperties,
+		public AsyncThreadPoolFactory(AsyncProperties asyncProperties,
 			ThreadPoolTaskExecutor executor) {
-			this.asyncThreadPoolProperties = asyncThreadPoolProperties;
+			this.asyncProperties = asyncProperties;
 			this.executor = executor;
-			this.namePrefix = asyncThreadPoolProperties.getThreadNamePrefix() + "-pool-"
+			this.namePrefix = asyncProperties.getThreadNamePrefix() + "-pool-"
 				+ poolNumber.getAndIncrement();
 		}
 
@@ -159,7 +165,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 			if (!(handler instanceof AsyncThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
 					new AsyncThreadPoolUncaughtExceptionHandler(handler,
-						asyncThreadPoolProperties));
+						asyncProperties));
 			}
 
 			t.setPriority(executor.getThreadPriority());
@@ -173,19 +179,19 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		Thread.UncaughtExceptionHandler {
 
 		private final Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
-		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
+		private final AsyncProperties asyncProperties;
 
 		public AsyncThreadPoolUncaughtExceptionHandler(
 			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler,
-			AsyncThreadPoolProperties asyncThreadPoolProperties) {
+			AsyncProperties asyncProperties) {
 			this.lastUncaughtExceptionHandler = lastUncaughtExceptionHandler;
-			this.asyncThreadPoolProperties = asyncThreadPoolProperties;
+			this.asyncProperties = asyncProperties;
 		}
 
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(e, "[警告] [{}] 捕获错误", asyncThreadPoolProperties.getThreadNamePrefix());
+				LogUtil.error(e, "[警告] [{}] 捕获错误", asyncProperties.getThreadNamePrefix());
 			}
 
 			if (lastUncaughtExceptionHandler != null) {
@@ -200,41 +206,39 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		public void execute(@NotNull Runnable runnable) {
 			Runnable ttlRunnable = TtlRunnable.get(runnable);
 			showThreadPoolInfo("execute(Runnable task)");
-			super.execute(ttlRunnable);
+			super.execute(wrap(ttlRunnable));
 		}
 
-		//@Override
-		//public void execute(@NotNull Runnable task, long startTimeout) {
-		//	showThreadPoolInfo("execute(Runnable task, long startTimeout)");
-		//	super.execute(task, startTimeout);
-		//}
-
+		@NotNull
 		@Override
 		public <T> Future<T> submit(@NotNull Callable<T> task) {
 			Callable<T> ttlCallable = TtlCallable.get(task);
 			showThreadPoolInfo("submit(Callable<T> task)");
-			return super.submit(ttlCallable);
+			return super.submit(wrap(ttlCallable));
 		}
 
+		@NotNull
 		@Override
 		public Future<?> submit(@NotNull Runnable task) {
 			Runnable ttlRunnable = TtlRunnable.get(task);
 			showThreadPoolInfo("submit(Runnable task)");
-			return super.submit(ttlRunnable);
+			return super.submit(wrap(ttlRunnable));
 		}
 
+		@NotNull
 		@Override
 		public ListenableFuture<?> submitListenable(@NotNull Runnable task) {
 			Runnable ttlRunnable = TtlRunnable.get(task);
 			showThreadPoolInfo("submitListenable(Runnable task)");
-			return super.submitListenable(ttlRunnable);
+			return super.submitListenable(wrap(ttlRunnable));
 		}
 
+		@NotNull
 		@Override
 		public <T> ListenableFuture<T> submitListenable(@NotNull Callable<T> task) {
 			Callable<T> ttlCallable = TtlCallable.get(task);
 			showThreadPoolInfo("submitListenable(Callable<T> task)");
-			return super.submitListenable(ttlCallable);
+			return super.submitListenable(wrap(ttlCallable));
 		}
 
 		/**
@@ -259,6 +263,42 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 				threadPoolExecutor.getCompletedTaskCount(),
 				threadPoolExecutor.getActiveCount(),
 				threadPoolExecutor.getQueue().size());
+		}
+
+		private static <T> Callable<T> wrap(final Callable<T> task) {
+			Map<String, String> context = MDC.getCopyOfContextMap();
+
+			return () -> {
+				if (!context.isEmpty()) {
+					MDC.setContextMap(context);
+				}
+
+				try {
+					return task.call();
+				} finally {
+					if (!context.isEmpty()) {
+						MDC.clear();
+					}
+				}
+			};
+		}
+
+		private static Runnable wrap(final Runnable task) {
+			Map<String, String> context = MDC.getCopyOfContextMap();
+
+			return () -> {
+				if (!context.isEmpty()) {
+					MDC.setContextMap(context);
+				}
+
+				try {
+					task.run();
+				} finally {
+					if (!context.isEmpty()) {
+						MDC.clear();
+					}
+				}
+			};
 		}
 	}
 }
