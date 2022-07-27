@@ -662,6 +662,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:46
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T lIndex(@NonNull String key, long index) {
 		return (T) redisTemplate.opsForList().index(key, index);
 	}
@@ -762,6 +763,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/sadd">Redis Documentation: SADD</a>
 	 * @since 2021-09-07 21:01:58
 	 */
+	@SuppressWarnings("unchecked")
 	public <V> Long sAdd(@NonNull CacheKey key, V... members) {
 		Long count = redisTemplate.opsForSet().add(key.getKey(), members);
 		setExpire(key);
@@ -806,6 +808,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T sPop(@NonNull CacheKey key) {
 		return (T) redisTemplate.opsForSet().pop(key.getKey());
 	}
@@ -819,6 +822,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T sRandMember(@NonNull CacheKey key) {
 		return (T) redisTemplate.opsForSet().randomMember(key.getKey());
 	}
@@ -836,6 +840,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sRandMember(@NonNull CacheKey key, long count) {
 		return (Set<V>) redisTemplate.opsForSet().distinctRandomMembers(key.getKey(), count);
 	}
@@ -854,6 +859,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> List<V> sRandMembers(@NonNull CacheKey key, long count) {
 		return (List<V>) redisTemplate.opsForSet().randomMembers(key.getKey(), count);
 	}
@@ -910,6 +916,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sMembers(@NonNull CacheKey key) {
 		return (Set<V>) redisTemplate.opsForSet().members(key.getKey());
 	}
@@ -929,6 +936,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sInter(@NonNull CacheKey key, @NonNull CacheKey otherKey) {
 		return (Set<V>) redisTemplate.opsForSet().intersect(key.getKey(), otherKey.getKey());
 	}
@@ -965,6 +973,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sInter(Collection<CacheKey> otherKeys) {
 		return (Set<V>) redisTemplate.opsForSet()
 			.intersect(otherKeys.stream().map(CacheKey::getKey).collect(Collectors.toList()));
@@ -1036,6 +1045,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sUnion(@NonNull CacheKey key, @NonNull CacheKey otherKey) {
 		return (Set<V>) redisTemplate.opsForSet().union(key.getKey(), otherKey.getKey());
 	}
@@ -1050,6 +1060,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sUnion(@NonNull CacheKey key, Collection<CacheKey> otherKeys) {
 		return (Set<V>) redisTemplate.opsForSet().union(key.getKey(),
 			otherKeys.stream().map(CacheKey::getKey).collect(Collectors.toList()));
@@ -1064,6 +1075,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sUnion(Collection<CacheKey> otherKeys) {
 		return (Set<V>) redisTemplate.opsForSet()
 			.union(otherKeys.stream().map(CacheKey::getKey).collect(Collectors.toList()));
@@ -1112,6 +1124,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:01:58
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sDiff(@NonNull CacheKey key, @NonNull CacheKey otherKey) {
 		return (Set<V>) redisTemplate.opsForSet().difference(key.getKey(), otherKey.getKey());
 	}
@@ -1124,6 +1137,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/sdiff">Redis Documentation: SDIFF</a>
 	 * @since 2021-09-07 21:01:58
 	 */
+	@SuppressWarnings("unchecked")
 	public <V> Set<V> sDiff(Collection<CacheKey> otherKeys) {
 		return (Set<V>) redisTemplate.opsForSet()
 			.difference(otherKeys.stream().map(CacheKey::getKey).collect(Collectors.toList()));
@@ -1607,6 +1621,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T hGet(@NonNull String key, @NonNull Object field, boolean... cacheNullValues) {
 		boolean cacheNullVal =
 			cacheNullValues.length > 0 ? cacheNullValues[0] : defaultCacheNullVal;
@@ -1629,6 +1644,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T hGet(@NonNull String key, @NonNull Object field,
 		BiFunction<String, Object, T> loader, boolean... cacheNullValues) {
 		boolean cacheNullVal =
@@ -1665,6 +1681,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T hGet(@NonNull CacheHashKey key, boolean... cacheNullValues) {
 		boolean cacheNullVal =
 			cacheNullValues.length > 0 ? cacheNullValues[0] : defaultCacheNullVal;
@@ -1688,6 +1705,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T hGet(@NonNull CacheHashKey key, Function<CacheHashKey, T> loader,
 		boolean... cacheNullValues) {
 		boolean cacheNullVal =
@@ -1890,6 +1908,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/hkeys">Redis Documentation: hkeys</a>
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <HK> Set<HK> hKeys(@NonNull String key) {
 		return (Set<HK>) redisTemplate.opsForHash().keys(key);
 	}
@@ -1903,6 +1922,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/hvals">Redis Documentation: hvals</a>
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <HV> List<HV> hVals(@NonNull String key) {
 		return (List<HV>) redisTemplate.opsForHash().values(key);
 	}
@@ -1916,6 +1936,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/hgetall">Redis Documentation: hgetall</a>
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <K, V> Map<K, V> hGetAll(@NonNull String key) {
 		Map<K, V> map = (Map<K, V>) redisTemplate.opsForHash().entries(key);
 		return returnMapVal(map);
@@ -1928,6 +1949,7 @@ public class RedisRepository {
 	 * @return {@link java.util.Map }
 	 * @since 2021-09-07 21:09:47
 	 */
+	@SuppressWarnings("unchecked")
 	public <K, V> Map<K, V> hGetAll(@NonNull CacheHashKey key) {
 		Map<K, V> map = (Map<K, V>) redisTemplate.opsForHash().entries(key.getKey());
 		return returnMapVal(map);
@@ -1963,6 +1985,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <K, V> Map<K, V> hGetAll(@NonNull CacheHashKey key,
 		Function<CacheHashKey, Map<K, V>> loader, boolean... cacheNullValues) {
 		boolean cacheNullVal =
@@ -2138,6 +2161,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull String key, boolean... cacheNullValues) {
 		boolean cacheNullVal =
 			cacheNullValues.length > 0 ? cacheNullValues[0] : defaultCacheNullVal;
@@ -2162,6 +2186,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull String key, Function<String, T> loader, boolean... cacheNullValues) {
 		boolean cacheNullVal =
 			cacheNullValues.length > 0 ? cacheNullValues[0] : defaultCacheNullVal;
@@ -2200,6 +2225,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/getset">Redis Documentation: GETSET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T getSet(@NonNull String key, Object value) {
 		T val = (T) redisTemplate.opsForValue()
 			.getAndSet(key, value == null ? newNullVal() : value);
@@ -2218,6 +2244,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull CacheKey key, boolean... cacheNullValues) {
 		boolean cacheNullVal =
 			cacheNullValues.length > 0 ? cacheNullValues[0] : defaultCacheNullVal;
@@ -2242,6 +2269,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	@Nullable
+	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull CacheKey key, Function<CacheKey, T> loader,
 		boolean... cacheNullValues) {
 		boolean cacheNullVal =
@@ -2441,6 +2469,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/mget">Redis Documentation: MGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> List<T> mGet(@NonNull Collection<String> keys) {
 		List<T> list = (List<T>) redisTemplate.opsForValue().multiGet(keys);
 		return list == null ? Collections.emptyList()
@@ -2455,6 +2484,7 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/mget">Redis Documentation: MGET</a>
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> List<T> mGetByCacheKey(@NonNull Collection<CacheKey> cacheKeys) {
 		List<String> keys = cacheKeys.stream().map(CacheKey::getKey).collect(Collectors.toList());
 		List<T> list = (List<T>) redisTemplate.opsForValue().multiGet(keys);
@@ -3407,6 +3437,7 @@ public class RedisRepository {
 	 * @return List
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> List<T> lGet(String key, Long start, Long end) {
 		try {
 			return (List<T>)redisTemplate.opsForList().range(key, start, end);
@@ -3440,6 +3471,7 @@ public class RedisRepository {
 	 * @return Object
 	 * @since 2021-09-07 21:04:53
 	 */
+	@SuppressWarnings("unchecked")
 	public <V> V  lGetIndex(String key, Long index) {
 		try {
 			return (V)redisTemplate.opsForList().index(key, index);
@@ -3559,6 +3591,7 @@ public class RedisRepository {
 	 * @return the list
 	 * @since 2021-09-07 21:04:53l
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Object> getList(String key, int start, int end,
 		RedisSerializer<Object> valueSerializer) {
 		byte[] rawKey = rawKey(key);
@@ -3567,6 +3600,7 @@ public class RedisRepository {
 			true);
 	}
 
+	@SuppressWarnings("unchecked")
 	private byte[] rawKey(Object key) {
 		Assert.notNull(key, "non null key required");
 
@@ -3578,6 +3612,7 @@ public class RedisRepository {
 		return redisSerializer.serialize(key);
 	}
 
+	@SuppressWarnings("unchecked")
 	private byte[] rawValue(Object value, RedisSerializer valueSerializer) {
 		if (value instanceof byte[]) {
 			return (byte[]) value;

@@ -111,7 +111,6 @@ public interface IAnnotationTypeMeta {
      * and the defined attribute value as Map value. This return value will be
      * {@code null} if no matching annotation is defined.
      */
-    @Deprecated
     Map<String, Object> getAnnotationOrRefAttributes(String annotationName);
 
     /**
@@ -128,7 +127,6 @@ public interface IAnnotationTypeMeta {
      * and the defined attribute value as Map value. This return value will be
      * {@code null} if no matching annotation is defined.
      */
-    @Deprecated
     Object getAnnotationOrRefAttribute(String annotationName, final String attrMethodName);
 
     /**

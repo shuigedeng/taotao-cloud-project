@@ -72,10 +72,11 @@ public abstract class JpaSuperCacheServiceImpl<M extends JpaSuperRepository<T, I
 	protected abstract CacheKeyBuilder cacheKeyBuilder();
 
 	@Override
+
 	@Transactional(readOnly = true)
 	public T getByIdCache(I id) {
 		CacheKey cacheKey = cacheKeyBuilder().key(id);
-		return redisRepository.get(cacheKey, k -> jpaRepository.getById(id));
+		return redisRepository.get(cacheKey, k -> jpaRepository.getReferenceById(id));
 	}
 
 	@Override

@@ -71,7 +71,7 @@ public class MyInterceptor<T> implements Interceptor<T> {
 		String content = res.getContent(); // 获取请求的响应内容
 		String result = (String) data;  // data参数是方法返回类型对应的返回数据结果,注意需要视情况修改对应的类型否则有可能出现类转型异常
 		result = (String) res.getResult(); // getResult()也可以获取返回的数据结果
-		res.setResult("修改后的结果: " + result);  // 可以修改请求响应的返回数据结果
+		// res.setResult("修改后的结果: " + result);  // 可以修改请求响应的返回数据结果
 
 		// 使用getAttributeAsString取出属性，这里只能取到与该Forest请求对象，以及该拦截器绑定的属性
 		String attrValue1 = getAttributeAsString(req, "A1");

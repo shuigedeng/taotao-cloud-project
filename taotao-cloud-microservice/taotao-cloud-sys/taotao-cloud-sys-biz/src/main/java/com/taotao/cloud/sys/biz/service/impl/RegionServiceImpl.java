@@ -95,6 +95,7 @@ public class RegionServiceImpl extends
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Region> getItem(Long parentId) {
 		Object o = redisRepository.get(RedisConstant.REGIONS_PARENT_ID_KEY + parentId);
 		if (Objects.nonNull(o)) {
@@ -149,6 +150,7 @@ public class RegionServiceImpl extends
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<RegionVO> getAllCity() {
 		Object o = redisRepository.get(RedisConstant.REGIONS_ALL_CITY_KEY);
 		if (Objects.nonNull(o)) {
@@ -249,6 +251,7 @@ public class RegionServiceImpl extends
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
+	@SuppressWarnings("unchecked")
 	public void synchronizationData(String url) {
 		try {
 			//读取数据

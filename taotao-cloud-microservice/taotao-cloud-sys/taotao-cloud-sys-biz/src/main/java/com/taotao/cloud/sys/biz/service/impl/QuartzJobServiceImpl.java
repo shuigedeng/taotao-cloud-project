@@ -18,17 +18,24 @@ package com.taotao.cloud.sys.biz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.github.pagehelper.PageInfo;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.sys.api.web.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.web.dto.quartz.QuartzJobQueryCriteria;
-import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
 import com.taotao.cloud.sys.biz.mapper.IQuartzJobMapper;
+import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
 import com.taotao.cloud.sys.biz.service.IQuartzJobService;
 import com.taotao.cloud.web.quartz.QuartzJobModel;
 import com.taotao.cloud.web.quartz.QuartzManager;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -36,11 +43,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 // 默认不使用缓存
 //import org.springframework.cache.annotation.CacheConfig;
@@ -150,7 +152,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		BeanUtil.copyProperties(quartzJob, jobModel);
 
 		quartzManager.addJob(jobModel);
-		return retBool(baseMapper.insert(quartzJob));
+		return SqlHelper.retBool(baseMapper.insert(quartzJob));
 	}
 
 	@Override
@@ -159,7 +161,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		BeanUtil.copyProperties(quartzJob, jobModel);
 
 		quartzManager.updateJobCron(jobModel);
-		return retBool(baseMapper.updateById(quartzJob));
+		return SqlHelper.retBool(baseMapper.updateById(quartzJob));
 	}
 
 	/**

@@ -67,7 +67,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
 		MAX_POOL_SIZE,
 		KEEP_ALIVE_TIME,
 		TimeUnit.SECONDS,
-		new ArrayBlockingQueue(WORK_QUEUE_SIZE),
+		new ArrayBlockingQueue<>(WORK_QUEUE_SIZE),
 		this.handler);
 
 
