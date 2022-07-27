@@ -1243,13 +1243,14 @@ management:
 logging:
   level:
     root: INFO
-    com.taotao.cloud.sys.api.feign: debug
-    org.springframework.web: off
-    org.springframework.security: off
-    org.springframework.security.oauth2: off
-    org.springframework.boot.autoconfigure: off
-    org.springframework.cloud.openfeign: debug
-    org.elasticsearch.client: debug
+    #com.taotao.cloud.sys.api.feign: debug
+    #org.springframework.cloud.openfeign: debug
+    #org.springframework.web: off
+    #org.springframework.security: off
+    #org.springframework.security.oauth2: off
+    #org.springframework.boot.autoconfigure: off
+    #org.elasticsearch.client: debug
+    #org.apache.kafka: off
 
 springdoc:
   packages-to-exclude:

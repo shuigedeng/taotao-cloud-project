@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.initializer;
+package com.taotao.cloud.logger.initializer;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -31,8 +31,7 @@ import org.springframework.core.annotation.Order;
  * @since 2021-09-02 20:24:54
  */
 @Order(1)
-public class TtlMDCAdapterInitializer implements
-	ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class TtlMDCAdapterInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {

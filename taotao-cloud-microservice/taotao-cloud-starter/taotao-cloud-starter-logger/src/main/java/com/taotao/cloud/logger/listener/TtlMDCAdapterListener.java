@@ -22,6 +22,9 @@ import ch.qos.logback.classic.spi.LoggerContextListener;
 import ch.qos.logback.core.Context;
 import ch.qos.logback.core.spi.ContextAwareBase;
 import ch.qos.logback.core.spi.LifeCycle;
+import com.yomahub.tlog.context.TLogContext;
+import java.util.Objects;
+import org.slf4j.TtlMDCAdapter;
 
 /**
  * 系统属性记录器上下文侦听器
@@ -30,21 +33,17 @@ import ch.qos.logback.core.spi.LifeCycle;
  * @version 2022.04
  * @since 2022-04-27 17:32:17
  */
-public class SystemPropertyLoggerContextListener extends ContextAwareBase implements
-	LoggerContextListener, LifeCycle {
-
-	private boolean started = false;
+public class TtlMDCAdapterListener extends ContextAwareBase implements LoggerContextListener, LifeCycle {
 
 	@Override
 	public void start() {
-		if (started) {
-			return;
-		}
+		TLogContext.setHasTLogMDC(true);
+		TtlMDCAdapter.getInstance();
 
 		Context context = getContext();
-		context.putProperty("RPC_PORT", System.getProperty("rpc_port", "10000"));
-
-		started = true;
+		if (Objects.nonNull(context)) {
+			context.putProperty("RPC_PORT", System.getProperty("rpc_port", "10000"));
+		}
 	}
 
 	@Override
@@ -53,12 +52,12 @@ public class SystemPropertyLoggerContextListener extends ContextAwareBase implem
 
 	@Override
 	public boolean isStarted() {
-		return started;
+		return false;
 	}
 
 	@Override
 	public boolean isResetResistant() {
-		return true;
+		return false;
 	}
 
 	@Override
