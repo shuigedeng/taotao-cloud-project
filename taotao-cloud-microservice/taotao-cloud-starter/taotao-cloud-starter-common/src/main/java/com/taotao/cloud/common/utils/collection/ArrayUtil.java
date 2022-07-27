@@ -17,8 +17,9 @@
 package com.taotao.cloud.common.utils.collection;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.reflect.ClassGenericUtil;
 import java.lang.reflect.Array;
@@ -78,7 +79,7 @@ public final class ArrayUtil {
         }
 
         List<T> objectList = new ArrayList<>(objects.length);
-        objectList.addAll(Guavas.newArrayList(objects));
+        objectList.addAll(Lists.newArrayList(objects));
         return objectList;
     }
 
@@ -238,9 +239,9 @@ public final class ArrayUtil {
     @SafeVarargs
     public static <E> List<E> arrayToList(final E... array) {
         if(ArrayUtil.isEmpty(array)) {
-            return Guavas.newArrayList();
+            return Lists.newArrayList();
         }
-        return Guavas.newArrayList(array);
+        return Lists.newArrayList(array);
     }
 
     /**
@@ -330,7 +331,7 @@ public final class ArrayUtil {
             return Collections.emptyList();
         }
 
-        List<K> list = Guavas.newArrayList(values.length);
+        List<K> list = Lists.newArrayList();
         for(V value : values) {
             final K key = keyFunction.handle(value);
             list.add(key);

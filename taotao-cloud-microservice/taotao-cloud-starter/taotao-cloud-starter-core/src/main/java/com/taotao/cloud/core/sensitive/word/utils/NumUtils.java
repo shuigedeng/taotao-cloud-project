@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.word.utils;
 
 
-import com.taotao.cloud.common.utils.guava.Guavas;
+import com.google.common.collect.Maps;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
@@ -50,9 +50,8 @@ public final class NumUtils {
 
     /**
      * 英文字母 map
-     * @since 0.0.4
      */
-    private static final Map<Character, Character> NUMBER_MAP = Guavas.newHashMap(NUM_ONE.length());
+    private static final Map<Character, Character> NUMBER_MAP = Maps.newHashMap();
 
     static {
         final int size = NUM_ONE.length();

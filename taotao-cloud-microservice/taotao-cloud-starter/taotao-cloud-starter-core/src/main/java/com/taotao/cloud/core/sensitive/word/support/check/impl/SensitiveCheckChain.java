@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
@@ -24,7 +24,7 @@ public class SensitiveCheckChain implements ISensitiveCheck {
     @Override
     public SensitiveCheckResult sensitiveCheck(String txt, int beginIndex, ValidModeEnum validModeEnum, IWordContext context) {
         // 初始化责任链
-        List<ISensitiveCheck> sensitiveChecks = Guavas.newArrayList();
+        List<ISensitiveCheck> sensitiveChecks = Lists.newArrayList();
         // 默认添加敏感词校验
         sensitiveChecks.add(Instances.singleton(SensitiveCheckWord.class));
         if(context.sensitiveCheckNum()) {

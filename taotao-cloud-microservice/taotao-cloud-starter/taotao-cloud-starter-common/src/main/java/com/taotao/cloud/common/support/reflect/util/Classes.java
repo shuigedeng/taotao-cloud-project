@@ -1,13 +1,13 @@
 package com.taotao.cloud.common.support.reflect.util;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.cache.impl.ClassFieldListCache;
 import com.taotao.cloud.common.support.reflect.api.IField;
 import com.taotao.cloud.common.support.reflect.exception.ReflectRuntimeException;
 import com.taotao.cloud.common.support.reflect.handler.SimpleFieldHandler;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public final class Classes {
         ArgUtil.notNull(clazz, "clazz");
 
         List<Field> fieldList = ClassFieldListCache.getInstance().get(clazz);
-        List<IField> resultList = Guavas.newArrayList(fieldList.size());
+        List<IField> resultList = Lists.newArrayList();
 
         final SimpleFieldHandler handler = new SimpleFieldHandler();
         for(Field field : fieldList) {

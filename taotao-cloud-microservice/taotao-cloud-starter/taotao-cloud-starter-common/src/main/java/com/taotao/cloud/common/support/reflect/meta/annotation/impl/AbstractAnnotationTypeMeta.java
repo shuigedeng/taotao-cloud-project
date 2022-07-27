@@ -1,12 +1,13 @@
 package com.taotao.cloud.common.support.reflect.meta.annotation.impl;
 
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.taotao.cloud.common.support.reflect.meta.annotation.IAnnotationTypeMeta;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.collection.MapUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectAnnotationUtil;
 import java.lang.annotation.Annotation;
@@ -87,7 +88,7 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
 
     @Override
     public List<Annotation> getAnnotationOrRefs(String annotationName) {
-        Set<Annotation> annotationSet = Guavas.newHashSet();
+        Set<Annotation> annotationSet = Sets.newHashSet();
 
         // 直接注解
         Annotation annotation = getAnnotation(annotationName);
@@ -100,7 +101,7 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
         annotationSet.addAll(annotationRefList);
 
         // 构建结果
-        return Guavas.newArrayList(annotationSet);
+        return Lists.newArrayList(annotationSet);
     }
 
     /**
@@ -135,7 +136,7 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
 
     @Override
     public List<Annotation> getAnnotationRefs(String annotationName) {
-        Set<Annotation> annotationSet = Guavas.newHashSet();
+        Set<Annotation> annotationSet = Sets.newHashSet();
 
         if(ArrayUtil.isNotEmpty(getAnnotations())) {
             for(Annotation annotation : getAnnotations()) {
@@ -151,7 +152,7 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
             }
         }
 
-        return Guavas.newArrayList(annotationSet);
+        return Lists.newArrayList(annotationSet);
     }
 
     @Override

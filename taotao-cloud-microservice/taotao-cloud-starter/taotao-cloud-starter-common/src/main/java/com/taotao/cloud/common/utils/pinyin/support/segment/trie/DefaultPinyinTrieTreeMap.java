@@ -1,7 +1,5 @@
 package com.taotao.cloud.common.utils.pinyin.support.segment.trie;//package com.taotao.cloud.core.pinyin.support.segment.trie;
 //
-//import com.github.houbb.heaven.annotation.ThreadSafe;
-//import com.github.houbb.heaven.util.guava.Guavas;
 //
 //import com.taotao.cloud.core.pinyin.support.tone.PinyinTones;
 //import java.util.Collection;

@@ -16,6 +16,8 @@
 package com.taotao.cloud.common.utils.reflect;
 
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.taotao.cloud.common.constant.FieldConst;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.support.filter.IFilter;
@@ -24,7 +26,7 @@ import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.collection.MapUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -73,11 +75,11 @@ public final class ClassUtil {
 		List<Field> allFieldList = new ArrayList<>();
 		Class<?> tempClass = clazz;
 		while (tempClass != null) {
-			allFieldList.addAll(Guavas.newArrayList(tempClass.getDeclaredFields()));
+			allFieldList.addAll(Lists.newArrayList(tempClass.getDeclaredFields()));
 			tempClass = tempClass.getSuperclass();
 		}
 
-		List<Field> resultList = Guavas.newArrayList(allFieldList.size());
+		List<Field> resultList = Lists.newArrayList();
 		for (Field field : allFieldList) {
 			String fieldName = field.getName();
 
@@ -126,7 +128,6 @@ public final class ClassUtil {
 	 *
 	 * @param bean 原始对象
 	 * @return 结果
-	 * @see com.github.houbb.heaven.util.lang.BeanUtil#beanToMap(Object)
 	 * @deprecated 已废弃
 	 */
 	@Deprecated
@@ -312,7 +313,7 @@ public final class ClassUtil {
 	public static List<Class> getAllSuperClass(final Class clazz) {
 		ArgUtil.notNull(clazz, "clazz");
 
-		Set<Class> classSet = Guavas.newHashSet();
+		Set<Class> classSet = Sets.newHashSet();
 
 		// 添加所有父类
 		Class tempClass = clazz.getSuperclass();
@@ -321,7 +322,7 @@ public final class ClassUtil {
 			tempClass = tempClass.getSuperclass();
 		}
 
-		return Guavas.newArrayList(classSet);
+		return Lists.newArrayList(classSet);
 	}
 
 	/**
@@ -333,7 +334,7 @@ public final class ClassUtil {
 	public static List<Class> getAllInterfaces(final Class clazz) {
 		ArgUtil.notNull(clazz, "clazz");
 
-		Set<Class> classSet = Guavas.newHashSet();
+		Set<Class> classSet = Sets.newHashSet();
 
 		// 添加所有父类
 		Class[] interfaces = clazz.getInterfaces();
@@ -348,7 +349,7 @@ public final class ClassUtil {
 			}
 		}
 
-		return Guavas.newArrayList(classSet);
+		return Lists.newArrayList(classSet);
 	}
 
 	/**
@@ -360,11 +361,11 @@ public final class ClassUtil {
 	public static List<Class> getAllInterfacesAndSuperClass(final Class clazz) {
 		ArgUtil.notNull(clazz, "clazz");
 
-		Set<Class> classSet = Guavas.newHashSet();
+		Set<Class> classSet = Sets.newHashSet();
 		classSet.addAll(getAllInterfaces(clazz));
 		classSet.addAll(getAllSuperClass(clazz));
 
-		return Guavas.newArrayList(classSet);
+		return Lists.newArrayList(classSet);
 	}
 
 	/**

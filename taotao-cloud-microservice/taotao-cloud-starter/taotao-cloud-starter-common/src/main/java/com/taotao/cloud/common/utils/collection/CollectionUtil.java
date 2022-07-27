@@ -17,13 +17,14 @@
 package com.taotao.cloud.common.utils.collection;
 
 
+import com.beust.jcommander.internal.Sets;
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.support.condition.ICondition;
 import com.taotao.cloud.common.support.filler.IFiller;
 import com.taotao.cloud.common.support.filter.IFilter;
 import com.taotao.cloud.common.support.handler.IHandler;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.lang.reflect.Array;
@@ -303,9 +304,9 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 */
 	public static List<String> arrayToList(String[] array) {
 		if (ArrayUtil.isEmpty(array)) {
-			return Guavas.newArrayList();
+			return Lists.newArrayList();
 		}
-		return Guavas.newArrayList(array);
+		return Lists.newArrayList(array);
 	}
 
 
@@ -332,7 +333,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 			return Collections.emptyList();
 		}
 
-		List<String> resultList = Guavas.newArrayList(stringList.size());
+		List<String> resultList = Lists.newArrayList();
 		for (String original : stringList) {
 			resultList.add(original.trim());
 		}
@@ -400,7 +401,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 			return;
 		}
 
-		collection.addAll(Guavas.newArrayList(array));
+		collection.addAll(Lists.newArrayList(array));
 	}
 
 	/**
@@ -475,7 +476,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 		} else {
 			String pattern = "\\s+";
 			String[] strings = string.split(pattern);
-			return Guavas.newArrayList(strings);
+			return Lists.newArrayList(strings);
 		}
 	}
 
@@ -633,7 +634,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 */
 	public static <E> List<E> fill(final int size,
 		final E elem) {
-		List<E> list = Guavas.newArrayList(size);
+		List<E> list = Lists.newArrayList();
 
 		for (int i = 0; i < size; i++) {
 			list.add(elem);
@@ -649,7 +650,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 	 * @return 列表
 	 */
 	public static List<Integer> fill(final int size, final int initValue) {
-		List<Integer> list = Guavas.newArrayList(size);
+		List<Integer> list = Lists.newArrayList();
 
 		for (int i = 0; i < size; i++) {
 			list.add(i + initValue);
@@ -721,8 +722,8 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 			return Collections.emptyList();
 		}
 
-		List<T> resultList = Guavas.newArrayList();
-		Set<T> set = Guavas.newHashSet();
+		List<T> resultList = Lists.newArrayList();
+		Set<T> set = Sets.newHashSet();
 		for(T elem : collection) {
 			// 重复数据
 			if(set.contains(elem)) {
@@ -917,7 +918,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 		}
 
 		int actualSize = Math.min(collection.size(), size);
-		List<T> resultList = Guavas.newArrayList();
+		List<T> resultList = Lists.newArrayList();
 
 		for(T t : collection) {
 			resultList.add(t);
@@ -941,7 +942,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 			return Collections.emptyList();
 		}
 
-		List<String> resultList = Guavas.newArrayList(collection.size());
+		List<String> resultList = Lists.newArrayList();
 		for(String s : collection) {
 			String result = s.replaceAll(regex, target);
 			resultList.add(result);
@@ -977,7 +978,7 @@ public class CollectionUtil extends org.springframework.util.CollectionUtils {
 		final int actualLimit = Math.min(limit, size-actualOffset);
 
 		// 处理
-		List<E> resultList = Guavas.newArrayList(actualLimit);
+		List<E> resultList = Lists.newArrayList();
 		for(int i = actualOffset; i < actualOffset+actualLimit; i++) {
 			resultList.add(list.get(i));
 		}

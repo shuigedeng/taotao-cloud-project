@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.exception.BaseException;
@@ -43,7 +44,7 @@ import com.taotao.cloud.common.support.json.JacksonModule;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.io.FileUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -1051,9 +1052,9 @@ public final class JsonUtil {
 			return Collections.emptyList();
 		}
 
-		List<String> results = Guavas.newArrayList(indexPrefixList.size());
+		List<String> results = Lists.newArrayList();
 		Stack<Integer> stack = new Stack<>();
-		List<String> indexList = Guavas.newArrayList(indexPrefixList.size());
+		List<String> indexList = Lists.newArrayList();
 
 		for (int i = 0; i < json.length(); i++) {
 			final char ch = json.charAt(i);

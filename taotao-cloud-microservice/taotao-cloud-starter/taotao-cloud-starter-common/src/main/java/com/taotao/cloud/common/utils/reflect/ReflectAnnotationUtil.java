@@ -16,9 +16,11 @@
 package com.taotao.cloud.common.utils.reflect;
 
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -163,10 +165,10 @@ public final class ReflectAnnotationUtil {
         ArgUtil.notNull(annotationClass, "annotationClass");
 
 
-        Set<Annotation> annotationSet = Guavas.newHashSet();
+        Set<Annotation> annotationSet = Sets.newHashSet();
         Annotation[] annotations = clazz.getAnnotations();
         if(ArrayUtil.isEmpty(annotations)) {
-            return Guavas.newArrayList();
+            return Lists.newArrayList();
         }
 
         for(Annotation annotation : annotations) {
@@ -179,7 +181,7 @@ public final class ReflectAnnotationUtil {
             }
         }
 
-        return Guavas.newArrayList(annotationSet);
+        return Lists.newArrayList(annotationSet);
     }
 
 }

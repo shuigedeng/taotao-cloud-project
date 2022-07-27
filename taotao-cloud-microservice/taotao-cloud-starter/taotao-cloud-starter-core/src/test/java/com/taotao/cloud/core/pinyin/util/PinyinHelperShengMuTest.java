@@ -1,6 +1,5 @@
-package com.taotao.cloud.core.pinyin.util;//package com.github.houbb.pinyin.test.util;
+package com.taotao.cloud.core.pinyin.util;
 //
-//import com.github.houbb.pinyin.util.PinyinHelper;
 //import org.junit.Assert;
 //import org.junit.Test;
 //

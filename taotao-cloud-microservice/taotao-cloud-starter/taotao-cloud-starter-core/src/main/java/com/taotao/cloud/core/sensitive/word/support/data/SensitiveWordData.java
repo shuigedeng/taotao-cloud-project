@@ -1,11 +1,10 @@
 package com.taotao.cloud.core.sensitive.word.support.data;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.io.FileStreamUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordData;
-import com.taotao.cloud.core.sensitive.word.constant.AppConst;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ public class SensitiveWordData implements IWordData {
     static {
         synchronized (SensitiveWordData.class) {
             long start = System.currentTimeMillis();
-            defaultLines = Guavas.newArrayList(AppConst.DICT_SIZE+AppConst.DICT_EN_SIZE);
+            defaultLines = Lists.newArrayList();
             defaultLines = FileStreamUtil.readAllLines("/dict.txt");
             defaultLines.addAll(FileStreamUtil.readAllLines("/dict_en.txt"));
 

@@ -16,9 +16,9 @@
 package com.taotao.cloud.common.utils.collection;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -455,7 +455,7 @@ public final class ArrayPrimitiveUtil {
             return Collections.emptyList();
         }
 
-        List<Integer> indexList = Guavas.newArrayList();
+        List<Integer> indexList = Lists.newArrayList();
         for(int i = 0; i < chars.length; i++) {
             char cs = chars[i];
             if(cs == c) {

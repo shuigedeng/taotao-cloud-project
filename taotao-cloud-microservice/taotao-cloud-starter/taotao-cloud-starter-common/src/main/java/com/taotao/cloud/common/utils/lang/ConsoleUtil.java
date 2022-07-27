@@ -1,11 +1,12 @@
 package com.taotao.cloud.common.utils.lang;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import java.util.List;
 
 /**
@@ -117,7 +118,7 @@ public final class ConsoleUtil {
 		}
 
 		// 类名超过一个
-		List<String> classFirstChars = Guavas.newArrayList(length);
+		List<String> classFirstChars = Lists.newArrayList();
 		for (int i = 0; i < length - 1; i++) {
 			String name = classNames[i];
 			classFirstChars.add(String.valueOf(name.charAt(0)));

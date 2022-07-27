@@ -1,7 +1,5 @@
 package com.taotao.cloud.common.utils.pinyin.support.segment;
 
-//import com.github.houbb.nlp.common.segment.ICommonSegment;
-//import com.github.houbb.nlp.common.segment.impl.CommonSegments;
 
 import com.taotao.cloud.common.utils.pinyin.spi.IPinyinSegment;
 import java.util.List;

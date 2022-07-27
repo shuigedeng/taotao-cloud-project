@@ -7,7 +7,7 @@ import com.taotao.cloud.common.constant.PackageConst;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.io.File;
 import java.io.IOException;
@@ -94,7 +94,7 @@ public final class PackageUtil {
 	public static Set<String> scanPackageClassNameSet(final String packageName) {
 		ArgUtil.notEmpty(packageName, "packageNames");
 
-		Set<String> classNameSet = Guavas.newHashSet();
+		Set<String> classNameSet = Sets.newHashSet();
 		String packageDirName = packageName.replace('.', '/');
 
 		try {
@@ -176,10 +176,4 @@ public final class PackageUtil {
 			}
 		}
 	}
-
-	//public static void main(String[] args) {
-	//	System.out.println(getSlimPackageName("com.github.houbb.StringUtil"));
-	//	System.out.println(getSlimPackageName("StringUtil"));
-	//}
-
 }

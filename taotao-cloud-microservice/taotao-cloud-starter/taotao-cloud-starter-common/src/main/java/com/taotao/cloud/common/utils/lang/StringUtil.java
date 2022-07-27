@@ -19,6 +19,7 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.enums.RandomEnum;
@@ -33,7 +34,7 @@ import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.collection.MapUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.common.utils.reflect.ClassTypeUtil;
 import com.taotao.cloud.common.utils.reflect.ClassUtil;
@@ -93,6 +94,22 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	//public static boolean isNotNull(@Nullable Object object) {
 	//	return Objects.nonNull(object);
 	//}
+
+
+	/**
+	 * 替换字符串-根据索引
+	 * @param str 原始字符串
+	 * @param replacedStr 替换字符串
+	 * @param start 开始索引，包括此索引
+	 * @param end 结束索引，不包括此索引（结束索引==开始索引：将在开始索引处插入替换字符串）
+	 * @return 替换后的字符串
+	 */
+	public static String replace(String str, String replacedStr, int start, int end) {
+		StringBuilder stringBuffer = new StringBuilder();
+		stringBuffer.append(str);
+		stringBuffer.replace(start, end, replacedStr);
+		return stringBuffer.toString();
+	}
 
 	/**
 	 * 判断对象为true
@@ -1653,9 +1670,8 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 * @return 结果列表
 	 */
 	private static List<Integer> getSerialFilterList(final List<Integer> allList,
-		final List<Integer> filterList,
-		final int step) {
-		List<Integer> resultList = Guavas.newArrayList();
+		final List<Integer> filterList, final int step) {
+		List<Integer> resultList = Lists.newArrayList();
 
 		resultList.addAll(filterList);
 		// 根据 index+times 为步长进行连续判断。不存在则跳过
@@ -1701,7 +1717,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 			return Collections.singletonList(string);
 		}
 
-		List<String> resultList = Guavas.newArrayList(indexCollection.size());
+		List<String> resultList = Lists.newArrayList();
 		int startIndex = 0;
 		for (Integer index : indexCollection) {
 			// 最后的位置添加空字符串
@@ -1740,7 +1756,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 			return Collections.emptyList();
 		}
 
-		List<Integer> indexList = Guavas.newArrayList();
+		List<Integer> indexList = Lists.newArrayList();
 		int startIndex = 0;
 		while (startIndex < string.length()) {
 			startIndex = string.indexOf(split, startIndex);
@@ -1769,7 +1785,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 			return Collections.emptyList();
 		}
 
-		List<Integer> resultList = Guavas.newArrayList();
+		List<Integer> resultList = Lists.newArrayList();
 		char[] chars = string.toCharArray();
 
 		boolean doubleQuotesStart = false;
@@ -1833,7 +1849,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 			return Collections.singletonList(string);
 		}
 
-		List<String> resultList = Guavas.newArrayList(indexList.size() + 1);
+		List<String> resultList = Lists.newArrayList();
 
 		int preIndex = 0;
 		for (Integer anIndexList : indexList) {
@@ -2107,11 +2123,11 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 		ArgUtil.notEmpty(splitter, "splitter");
 
 		if (StringUtil.isEmpty(string)) {
-			return Guavas.newArrayList();
+			return Lists.newArrayList();
 		}
 
 		String[] strings = string.split(splitter);
-		return ArrayUtil.toList(strings);
+		return Lists.toList(strings);
 	}
 
 	/**
@@ -2167,7 +2183,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 	 */
 	public static List<String> toCharStringList(final String string) {
 		if (StringUtil.isEmpty(string)) {
-			return Guavas.newArrayList();
+			return Lists.newArrayList();
 		}
 
 		char[] chars = string.toCharArray();

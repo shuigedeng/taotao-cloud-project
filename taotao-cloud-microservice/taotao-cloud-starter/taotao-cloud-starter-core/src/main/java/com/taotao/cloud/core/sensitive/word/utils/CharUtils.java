@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.word.utils;
 
 
-import com.taotao.cloud.common.utils.guava.Guavas;
+import com.google.common.collect.Maps;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.util.Map;
 
@@ -31,9 +31,8 @@ public final class CharUtils {
 
     /**
      * 英文字母 map
-     * @since 0.0.4
      */
-    private static final Map<Character, Character> LETTER_MAP = Guavas.newHashMap(LETTERS_ONE.length());
+    private static final Map<Character, Character> LETTER_MAP = Maps.newHashMap();
 
     static {
         final int size = LETTERS_ONE.length();

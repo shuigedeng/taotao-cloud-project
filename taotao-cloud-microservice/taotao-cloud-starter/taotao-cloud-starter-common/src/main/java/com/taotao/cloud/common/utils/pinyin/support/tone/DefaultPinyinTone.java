@@ -1,10 +1,12 @@
 package com.taotao.cloud.common.utils.pinyin.support.tone;
 
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.support.handler.IHandler;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.io.FileStreamUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -82,7 +84,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         }
 
         String[] strings = phrasePinyin.split(StringUtil.BLANK);
-        List<String> resultList = Guavas.newArrayList(strings.length);
+        List<String> resultList = Lists.newArrayList();
 
         for(String string : strings) {
             final String style = toneStyle.style(string);
@@ -107,7 +109,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                 // 自定义词库
                 List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
                 lines.addAll(defineLines);
-                charMap = Guavas.newHashMap(lines.size());
+                charMap = Maps.newHashMap();
 
                 for(String line : lines) {
                     String[] strings = line.split(PunctuationConst.COLON);
@@ -139,7 +141,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                 List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.
 	                PINYIN_DICT_PHRASE_DEFINE);
                 lines.addAll(defineLines);
-                phraseMap = Guavas.newHashMap(lines.size());
+                phraseMap = Maps.newHashMap();
 
                 for(String line : lines) {
                     String[] strings = line.split(PunctuationConst.COLON);

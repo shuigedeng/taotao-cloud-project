@@ -1,13 +1,13 @@
 package com.taotao.cloud.common.utils.io;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.FileTypeConst;
 import com.taotao.cloud.common.constant.PathConst;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.io.File;
@@ -430,7 +430,7 @@ public final class PathUtil {
 	 */
 	public static void writeLines(final String pathStr,
 		final String... lines) {
-		List<String> stringList = Guavas.newArrayList(lines);
+		List<String> stringList = Lists.newArrayList(lines);
 		writeLines(pathStr, stringList, CommonConstant.UTF8);
 	}
 
@@ -453,7 +453,7 @@ public final class PathUtil {
 	 */
 	public static void appendLines(final String pathStr,
 		final String... lines) {
-		List<String> stringList = Guavas.newArrayList(lines);
+		List<String> stringList = Lists.newArrayList(lines);
 		writeLines(pathStr, stringList, CommonConstant.UTF8, StandardOpenOption.APPEND);
 	}
 
