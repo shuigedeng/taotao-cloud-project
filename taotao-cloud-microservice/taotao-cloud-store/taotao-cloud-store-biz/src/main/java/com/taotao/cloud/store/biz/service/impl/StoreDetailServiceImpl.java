@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;

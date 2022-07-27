@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;

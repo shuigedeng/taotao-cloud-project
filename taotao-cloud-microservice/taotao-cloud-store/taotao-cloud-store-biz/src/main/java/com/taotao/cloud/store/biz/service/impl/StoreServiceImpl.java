@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.web.vo.MemberVO;

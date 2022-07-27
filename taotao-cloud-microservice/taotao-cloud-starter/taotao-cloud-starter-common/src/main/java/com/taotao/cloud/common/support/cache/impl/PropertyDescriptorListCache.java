@@ -1,6 +1,7 @@
 package com.taotao.cloud.common.support.cache.impl;
 
 
+import com.google.common.collect.Maps;
 import com.taotao.cloud.common.support.cache.ICache;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.collection.MapUtil;
@@ -78,7 +79,7 @@ public class PropertyDescriptorListCache implements ICache<Class, List<PropertyD
 
 		// 构建
 		List<PropertyDescriptor> propertyDescriptors = PropertyDescriptorListCache.getInstance().get(beanClass);
-		readMethodMap = Maps.newHashMap(propertyDescriptors.size());
+		readMethodMap = Maps.newHashMap();
 		for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
 			readMethodMap.put(propertyDescriptor.getName(),
 				propertyDescriptor.getReadMethod());

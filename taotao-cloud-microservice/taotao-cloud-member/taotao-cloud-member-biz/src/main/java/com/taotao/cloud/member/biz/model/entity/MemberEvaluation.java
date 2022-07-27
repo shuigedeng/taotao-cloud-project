@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.model.entity;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.web.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.web.vo.order.OrderVO;
