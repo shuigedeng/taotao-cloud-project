@@ -1,5 +1,6 @@
 package com.taotao.cloud.websocket.netty.pojo;
 
+import com.taotao.cloud.common.utils.common.RandomUtil;
 import com.taotao.cloud.websocket.netty.annotation.BeforeHandshake;
 import com.taotao.cloud.websocket.netty.annotation.OnBinary;
 import com.taotao.cloud.websocket.netty.annotation.OnClose;
@@ -30,6 +31,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -260,13 +262,13 @@ public class PojoMethodMapping {
 		}
 		return false;
 	}
+
 	@SuppressWarnings("unchecked")
 	Object getEndpointInstance()
 		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 		Object implement = pojoClazz.getDeclaredConstructor().newInstance();
-		AutowiredAnnotationBeanPostProcessor postProcessor = applicationContext.getBean(
-			AutowiredAnnotationBeanPostProcessor.class);
-		postProcessor.postProcessPropertyValues(null, null, implement, null);
+		AutowiredAnnotationBeanPostProcessor postProcessor = applicationContext.getBean(AutowiredAnnotationBeanPostProcessor.class);
+		postProcessor.postProcessProperties(new MutablePropertyValues(), implement, implement.getClass().getSimpleName()+ RandomUtil.randomString(5));
 		return implement;
 	}
 
