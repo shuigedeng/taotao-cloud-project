@@ -1,7 +1,7 @@
-package com.taotao.cloud.core.cron.pojo;
+package com.taotao.cloud.common.support.cron.pojo;
 
 
-import com.taotao.cloud.core.cron.util.CompareUtil;
+import com.taotao.cloud.common.support.cron.util.CompareUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

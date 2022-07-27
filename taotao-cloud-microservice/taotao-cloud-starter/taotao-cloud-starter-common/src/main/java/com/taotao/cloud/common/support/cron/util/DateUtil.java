@@ -1,7 +1,7 @@
-package com.taotao.cloud.core.cron.util;
+package com.taotao.cloud.common.support.cron.util;
 
 
-import com.taotao.cloud.core.cron.pojo.TimeOfDay;
+import com.taotao.cloud.common.support.cron.pojo.TimeOfDay;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.cron.pojo;
+package com.taotao.cloud.common.support.cron.pojo;
 
 import java.util.Calendar;
 

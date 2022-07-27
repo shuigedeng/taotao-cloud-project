@@ -15,21 +15,28 @@
  */
 package com.taotao.cloud.core.endpoint;
 
+import cn.hutool.json.JSONObject;
+import java.util.Map;
+import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+
 /**
- * 注册一个 JMX MBean
- * <p>
- * 名字必须要用 MBean 结尾
+ * TaoTaoCloudEndPoint
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 20:08:43
+ * @since 2021-09-02 20:08:52
  */
-public interface SystemInfoMBean {
+@Endpoint(id = "request-mapping")
+public class RequestMappingEndPoint {
 
-	int getCpuCore();
+	public static Map<String, Object> requestMappingHandlerMapping;
 
-	long getTotalMemory();
-
-	void shutdown();
+	@ReadOperation
+	public JSONObject requestMapping() {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.set("data", requestMappingHandlerMapping);
+		return jsonObject;
+	}
 
 }

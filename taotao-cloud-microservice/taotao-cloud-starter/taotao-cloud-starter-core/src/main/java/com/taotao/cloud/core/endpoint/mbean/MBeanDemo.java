@@ -13,26 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.endpoint;
+package com.taotao.cloud.core.endpoint.mbean;
 
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
- * CustomHealthIndicator 
+ * MBeanDemo 
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 21:02:46
+ * @since 2021-09-02 21:05:36
  */
-public class TaoTaoCloudHealthIndicator implements HealthIndicator {
+@ManagedResource(objectName = "com.taotao.cloud.core.endpoint:name=MBeanDemo")
+public class MBeanDemo {
 
-	@Override
-	public Health health() {
-		Health.Builder builder = new Health.Builder();
-		builder.status("health");
-		builder.withDetail("health", "up");
-		return builder.build();
+	@ManagedAttribute
+	public String getName() {
+		return "MBean";
 	}
 
+	@ManagedOperation
+	public void shutdown() {
+		System.exit(0);
+	}
 }

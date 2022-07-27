@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.cron.pojo;
+package com.taotao.cloud.common.support.cron.pojo;
 
 /**
  * cron表达式某个位置上的一些常量，跟cron表达式的域一一对应

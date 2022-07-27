@@ -17,11 +17,11 @@ package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.core.endpoint.TaoTaoCloudHealthEndPoint;
-import com.taotao.cloud.core.endpoint.TaoTaoCloudHealthIndicator;
-import com.taotao.cloud.core.endpoint.TaoTaoCloudMbeanRegistrar;
-import com.taotao.cloud.core.endpoint.MBeanDemo;
-import com.taotao.cloud.core.endpoint.TaoTaoCloudEndPoint;
+import com.taotao.cloud.core.endpoint.CustomHealthEndPoint;
+import com.taotao.cloud.core.endpoint.indicator.CustomHealthIndicator;
+import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
+import com.taotao.cloud.core.endpoint.mbean.MBeanDemo;
+import com.taotao.cloud.core.endpoint.CustomEndPoint;
 import com.taotao.cloud.core.properties.EndpointProperties;
 import javax.management.MalformedObjectNameException;
 import org.springframework.beans.factory.InitializingBean;
@@ -48,18 +48,18 @@ public class EndPointAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public TaoTaoCloudHealthIndicator customHealthIndicator() {
-		return new TaoTaoCloudHealthIndicator();
+	public CustomHealthIndicator customHealthIndicator() {
+		return new CustomHealthIndicator();
 	}
 
 	@Bean
-	public TaoTaoCloudHealthEndPoint myEndPoint() {
-		return new TaoTaoCloudHealthEndPoint();
+	public CustomHealthEndPoint myEndPoint() {
+		return new CustomHealthEndPoint();
 	}
 
 	@Bean
-	public TaoTaoCloudEndPoint taoTaoCloudEndPoint() {
-		return new TaoTaoCloudEndPoint();
+	public CustomEndPoint taoTaoCloudEndPoint() {
+		return new CustomEndPoint();
 	}
 
 	@Bean
@@ -68,7 +68,7 @@ public class EndPointAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public TaoTaoCloudMbeanRegistrar customMbeanRegistrar() throws MalformedObjectNameException {
-		return new TaoTaoCloudMbeanRegistrar();
+	public CustomMbeanRegistrar customMbeanRegistrar() throws MalformedObjectNameException {
+		return new CustomMbeanRegistrar();
 	}
 }
