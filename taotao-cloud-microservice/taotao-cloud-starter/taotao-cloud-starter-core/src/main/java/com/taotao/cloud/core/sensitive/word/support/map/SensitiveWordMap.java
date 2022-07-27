@@ -1,9 +1,9 @@
 package com.taotao.cloud.core.sensitive.word.support.map;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.instance.impl.Instances;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.io.FileUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -173,10 +173,10 @@ public class SensitiveWordMap implements IWordMap {
                                            final IWordContext context) {
         //1. 是否存在敏感词，如果比存在，直接返回空列表
         if (StringUtil.isEmpty(text)) {
-            return Guavas.newArrayList();
+            return Lists.newArrayList();
         }
 
-        List<IWordResult> resultList = Guavas.newArrayList();
+        List<IWordResult> resultList = Lists.newArrayList();
         for (int i = 0; i < text.length(); i++) {
             SensitiveCheckResult checkResult = sensitiveCheck(text, i, ValidModeEnum.FAIL_OVER, context);
             // 命中

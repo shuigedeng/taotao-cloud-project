@@ -1,9 +1,10 @@
 package com.taotao.cloud.common.support.tuple.impl;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.tuple.ITuple;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,7 +33,7 @@ public abstract class AbstractTuple implements ITuple {
 	 * @param objects 元素数组
 	 */
 	protected AbstractTuple(Object... objects) {
-		this.valueList = Guavas.newArrayList(objects);
+		this.valueList = Lists.newArrayList(objects);
 	}
 
 	@Override

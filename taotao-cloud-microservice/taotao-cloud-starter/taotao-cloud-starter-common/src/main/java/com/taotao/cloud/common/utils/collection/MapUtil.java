@@ -17,10 +17,11 @@
 package com.taotao.cloud.common.utils.collection;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.handler.IHandler;
 import com.taotao.cloud.common.support.handler.IMapEntryHandler;
 import com.taotao.cloud.common.support.handler.IMapHandler;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.io.UnsupportedEncodingException;
@@ -126,7 +127,7 @@ public final class MapUtil {
 			return Collections.emptyList();
 		}
 
-		List<T> resultList = Guavas.newArrayList(map.size());
+		List<T> resultList = Lists.newArrayList();
 		for (Map.Entry<K, V> entry : map.entrySet()) {
 			final T result = entryHandler.handler(entry);
 			resultList.add(result);

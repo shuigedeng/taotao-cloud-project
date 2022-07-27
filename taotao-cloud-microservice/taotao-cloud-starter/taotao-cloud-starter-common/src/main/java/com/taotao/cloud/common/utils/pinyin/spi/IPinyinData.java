@@ -10,7 +10,7 @@ public interface IPinyinData {
      * @param pinyinNormal 拼音
      * @return 声母
      *
-     * @see #isZeroShengMu(String) 如果是零声母，那么这里返回 {@link com.github.houbb.heaven.util.lang.StringUtil#EMPTY}
+     * @see #isZeroShengMu(String)
      */
     String shengMu(final String pinyinNormal);
 

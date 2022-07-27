@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.format;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.core.sensitive.word.api.ICharFormat;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import java.util.List;
@@ -16,7 +16,7 @@ public class CharFormatChain implements ICharFormat {
     public char format(char original, IWordContext context) {
         char result = original;
 
-        List<ICharFormat> charFormats = Guavas.newArrayList();
+        List<ICharFormat> charFormats = Lists.newArrayList();
         if(context.ignoreEnglishStyle()) {
             charFormats.add(Instances.singleton(IgnoreEnglishStyleFormat.class));
         }

@@ -16,9 +16,10 @@
 package com.taotao.cloud.common.utils.reflect;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -42,7 +43,7 @@ public final class ClassGenericUtil {
         // 添加当前类的泛型接口信息
         Type[] types = clazz.getGenericInterfaces();
         if(ArrayUtil.isNotEmpty(types)) {
-            typeSet.addAll(Guavas.newArrayList(types));
+            typeSet.addAll(Lists.newArrayList(types));
         }
 
         // 当前类的泛型父类信息
@@ -52,7 +53,7 @@ public final class ClassGenericUtil {
             typeSet.add(superType);
         }
 
-        return Guavas.newArrayList(typeSet);
+        return Lists.newArrayList(typeSet);
     }
 
 

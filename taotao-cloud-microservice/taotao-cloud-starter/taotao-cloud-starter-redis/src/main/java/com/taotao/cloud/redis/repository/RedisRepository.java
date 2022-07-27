@@ -21,9 +21,13 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.model.CacheHashKey;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.redis.val.NullVal;
+import java.util.Objects;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Range;
+import org.springframework.data.redis.connection.BitFieldSubCommands;
 import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.RedisClusterNode;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -3642,5 +3646,161 @@ public class RedisRepository {
 
 	public Long hsize(String id) {
 		return this.redisTemplate.opsForHash().size(id);
+	}
+
+
+	/**
+	 * 位图统计个数
+	 *
+	 * @param key key
+	 * @return 位图统计个数
+	 */
+	@Nullable
+	public Long bitCount(String key) {
+		return redisTemplate.execute((RedisCallback<Long>) redis -> redis.bitCount(keySerialize(key)));
+	}
+
+	/**
+	 * 位图统计个数，start，end可以使用负数：比如 -1 表示最后一个位，而 -2 表示倒数第二个位等。
+	 *
+	 * @param key   key
+	 * @param start start
+	 * @param end   end
+	 * @return 位图统计个数
+	 */
+	@Nullable
+	public Long bitCount(String key, long start, long end) {
+		return redisTemplate.execute((RedisCallback<Long>) redis -> redis.bitCount(keySerialize(key), start, end));
+	}
+	/**
+	 * redis publish
+	 *
+	 * @param channel channel
+	 * @param message message
+	 * @param mapper  mapper
+	 * @param <T>     泛型标记
+	 * @return Long
+	 */
+	@Nullable
+	public <T> Long publish(String channel, T message, Function<T, byte[]> mapper) {
+		return redisTemplate.execute((RedisCallback<Long>) redis -> {
+			byte[] channelBytes = keySerialize(channel);
+			return redis.publish(channelBytes, mapper.apply(message));
+		});
+	}
+
+	/**
+	 * redis subscribe
+	 *
+	 * @param channel  channel
+	 * @param listener MessageListener
+	 */
+	@Nullable
+	public void subscribe(String channel, MessageListener listener) {
+		redisTemplate.execute((RedisCallback<Void>) redis -> {
+			byte[] channelBytes = keySerialize(channel);
+			redis.subscribe(listener, channelBytes);
+			return null;
+		});
+	}
+
+	/**
+	 * 位图统计个数
+	 * 注意：<a href="https://redis.io/commands/bitcount/#History">model 需要 redis 版本 7.0以上</a>
+	 *
+	 * @param key   key
+	 * @param start start
+	 * @param end   end
+	 * @param model model
+	 * @return 位图统计个数
+	 */
+	@Nullable
+	public Long bitCount(String key, long start, long end, RedisCommand.BitMapModel model) {
+		return redisTemplate.execute((RedisCallback<Long>) redis ->
+			(Long) redis.execute(RedisCommand.BITCOUNT, keySerialize(key),
+				keySerialize(Long.toString(start)), keySerialize(Long.toString(end)),
+				keySerialize(model.name()))
+		);
+	}
+
+	/**
+	 * 获取/操作存储在给定键处的不同位宽和任意非（必要）对齐偏移量的特定整数字段。
+	 *
+	 * @param key      key
+	 * @param commands commands
+	 * @return 子命令的相应结果
+	 */
+	@Nullable
+	public List<Long> bitField(String key, BitFieldSubCommands commands) {
+		return redisTemplate.execute((RedisCallback<List<Long>>) redis -> redis.bitField(keySerialize(key), commands));
+	}
+
+	/**
+	 * 计算第一位为 1 或者 0 的 offset 位置
+	 *
+	 * @param key key
+	 * @param bit bit
+	 * @return offset 位置
+	 */
+	@Nullable
+	public Long bitPos(String key, boolean bit) {
+		return redisTemplate.execute((RedisCallback<Long>) redis -> redis.bitPos(keySerialize(key), bit));
+	}
+
+	/**
+	 * 计算range范围内为 1 或者 0 的 offset 位置
+	 *
+	 * @param key key
+	 * @param bit bit
+	 * @return offset 位置
+	 */
+	@Nullable
+	public Long bitPos(String key, boolean bit, Range<Long> range) {
+		return redisTemplate.execute((RedisCallback<Long>) redis -> redis.bitPos(keySerialize(key), bit, range));
+	}
+
+	/**
+	 * 获取第 offset 位的值（offset 从 0 开始算）
+	 *
+	 * @param key    key
+	 * @param offset offset
+	 * @return 第 offset 位的值
+	 */
+	@Nullable
+	public Boolean getBit(String key, long offset) {
+		return redisTemplate.execute((RedisCallback<Boolean>) redis -> redis.getBit(keySerialize(key), offset));
+	}
+
+	/**
+	 * 设置第 offset 位的值（offset 从 0 开始算）
+	 *
+	 * @param key    key
+	 * @param offset offset
+	 * @param value  value
+	 * @return 第 offset 位的值
+	 */
+	@Nullable
+	public Boolean setBit(String key, long offset, boolean value) {
+		return redisTemplate.execute((RedisCallback<Boolean>) redis -> redis.setBit(keySerialize(key), offset, value));
+	}
+
+	/**
+	 * redisKey 序列化
+	 *
+	 * @param redisKey redisKey
+	 * @return byte array
+	 */
+	public static byte[] keySerialize(String redisKey) {
+		return Objects.requireNonNull(RedisSerializer.string().serialize(redisKey), "Redis key is null.");
+	}
+
+	/**
+	 * redisKey 序列化
+	 *
+	 * @param redisKey redisKey
+	 * @return byte array
+	 */
+	public static String keyDeserialize(byte[] redisKey) {
+		return Objects.requireNonNull(RedisSerializer.string().deserialize(redisKey), "Redis key is null.");
 	}
 }

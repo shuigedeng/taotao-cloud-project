@@ -67,14 +67,14 @@
 //    @Test
 //    public void pinyinWithSegmentTest() {
 //        // 预热
-//        String result = com.github.houbb.pinyin.util.PinyinHelper.toPinyin("重庆火锅");
+//        String result = PinyinHelper.toPinyin("重庆火锅");
 //        System.out.println(result);
 //
 //        // 验证
 //        final String text = getText();
 //        long startTime = System.currentTimeMillis();
 //        for(int i = 0; i < TIMES; i++) {
-//            com.github.houbb.pinyin.util.PinyinHelper.toPinyin(text);
+//            PinyinHelper.toPinyin(text);
 //        }
 //        long endTime = System.currentTimeMillis();
 //
@@ -93,7 +93,7 @@
 //    @Test
 //    public void pinyinWithCharSegmentTest() {
 //        // 预热
-//        String result = com.github.houbb.pinyin.util.PinyinHelper.toPinyin("重庆火锅");
+//        String result =PinyinHelper.toPinyin("重庆火锅");
 //        System.out.println(result);
 //
 //        // 验证
@@ -149,7 +149,7 @@
 //     */
 //    @Test
 //    public void pinyinCharTest() {
-//        List<String> result = com.github.houbb.pinyin.util.PinyinHelper.toPinyinList('重');
+//        List<String> result = PinyinHelper.toPinyinList('重');
 //        System.out.println(result);
 //
 //        // 验证
@@ -160,7 +160,7 @@
 //        for(int i = 0; i < SINGLE_TIMES; i++) {
 //            int index = ThreadLocalRandom.current().nextInt(text.length()-1);
 //
-//            com.github.houbb.pinyin.util.PinyinHelper.toPinyinList(text.charAt(index));
+//           PinyinHelper.toPinyinList(text.charAt(index));
 //        }
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("Pinyin cost: " + (endTime-startTime));

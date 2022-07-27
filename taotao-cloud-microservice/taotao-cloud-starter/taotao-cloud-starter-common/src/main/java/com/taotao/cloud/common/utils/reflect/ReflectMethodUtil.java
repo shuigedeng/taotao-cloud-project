@@ -16,12 +16,13 @@
 package com.taotao.cloud.common.utils.reflect;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.MethodConst;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.support.handler.IHandler;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.lang.annotation.Annotation;
@@ -121,7 +122,7 @@ public final class ReflectMethodUtil {
         }
 
         final int paramSize = parameterAnnotations.length;
-        List<String> resultList = Guavas.newArrayList(paramSize);
+        List<String> resultList = Lists.newArrayList();
         for(int i = 0; i < paramSize; i++) {
             Annotation[] annotations = parameterAnnotations[i];
             String paramName = getParamName(i, annotations);

@@ -1,9 +1,10 @@
 package com.taotao.cloud.common.utils.pinyin.api.impl;
 
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.handler.IHandler;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
+
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.pinyin.api.IPinyin;
 import com.taotao.cloud.common.utils.pinyin.api.IPinyinContext;
@@ -137,7 +138,7 @@ public class Pinyin implements IPinyin {
         final IPinyinTone pinyinTone = context.tone();
 
         List<String> entryList = pinyinSegment.segment(string);
-        List<String> resultList = Guavas.newArrayList(entryList.size());
+        List<String> resultList = Lists.newArrayList();
 
         // 映射处理与连接
         for(String entry : entryList) {
@@ -169,7 +170,7 @@ public class Pinyin implements IPinyin {
      * @return  结果
      */
     private List<Integer> buildToneNumList(List<String> pinyinList, final IPinyinTone pinyinTone) {
-        List<Integer> resultList = Guavas.newArrayList(pinyinList.size());
+        List<Integer> resultList = Lists.newArrayList();
 
         for(String pinyin : pinyinList) {
             Integer toneNum = pinyinTone.toneNum(pinyin);
@@ -189,7 +190,7 @@ public class Pinyin implements IPinyin {
                                              final IHandler<String, String> handler) {
         // 获取拼音结果
         List<String> pinyinList = this.toPinyinList(chinese, context);
-        List<String> resultList = Guavas.newArrayList(pinyinList.size());
+        List<String> resultList = Lists.newArrayList();
 
         for (String pinyin : pinyinList) {
             String result = handler.handle(pinyin);

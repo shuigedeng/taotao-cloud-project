@@ -4,7 +4,6 @@ package com.taotao.cloud.common.support.cache.impl;
 import com.taotao.cloud.common.support.cache.ICache;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.collection.MapUtil;
-import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.common.utils.reflect.PropertyDescriptorUtil;
 
 import java.beans.PropertyDescriptor;
@@ -78,9 +77,8 @@ public class PropertyDescriptorListCache implements ICache<Class, List<PropertyD
 		}
 
 		// 构建
-		List<PropertyDescriptor> propertyDescriptors = PropertyDescriptorListCache.getInstance()
-			.get(beanClass);
-		readMethodMap = Guavas.newHashMap(propertyDescriptors.size());
+		List<PropertyDescriptor> propertyDescriptors = PropertyDescriptorListCache.getInstance().get(beanClass);
+		readMethodMap = Maps.newHashMap(propertyDescriptors.size());
 		for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
 			readMethodMap.put(propertyDescriptor.getName(),
 				propertyDescriptor.getReadMethod());
