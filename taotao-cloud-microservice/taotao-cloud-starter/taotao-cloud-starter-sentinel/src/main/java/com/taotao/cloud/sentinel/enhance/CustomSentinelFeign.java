@@ -43,9 +43,9 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2022/5/30 16:06
  */
-public class HerodotusSentinelFeign {
+public class CustomSentinelFeign {
 
-    private HerodotusSentinelFeign() {
+    private CustomSentinelFeign() {
 
     }
 
@@ -74,6 +74,7 @@ public class HerodotusSentinelFeign {
         }
 
         @Override
+		@SuppressWarnings("unchecked")
         public Feign build() {
 			super.invocationHandlerFactory(new InvocationHandlerFactory() {
                 @Override
@@ -102,19 +103,19 @@ public class HerodotusSentinelFeign {
                     if (void.class != fallback) {
                         fallbackInstance = getFromContext(beanName, "fallback", fallback,
                                 target.type());
-                        return new HerodotusSentinelInvocationHandler(target, dispatch,
+                        return new CustomSentinelInvocationHandler(target, dispatch,
                                 new FallbackFactory.Default(fallbackInstance));
                     }
                     if (void.class != fallbackFactory) {
                         fallbackFactoryInstance = (FallbackFactory) getFromContext(
                                 beanName, "fallbackFactory", fallbackFactory,
                                 FallbackFactory.class);
-                        return new HerodotusSentinelInvocationHandler(target, dispatch,
+                        return new CustomSentinelInvocationHandler(target, dispatch,
                                 fallbackFactoryInstance);
                     }
 
-                    HerodotusFallbackFactory herodotusFallbackFactory = new HerodotusFallbackFactory(target);
-                    return new HerodotusSentinelInvocationHandler(target, dispatch, herodotusFallbackFactory);
+                    CustomFallbackFactory customFallbackFactory = new CustomFallbackFactory(target);
+                    return new CustomSentinelInvocationHandler(target, dispatch, customFallbackFactory);
                 }
 
                 private Object getFromContext(String name, String type, Class fallbackType, Class targetType) {

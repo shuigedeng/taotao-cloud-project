@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * 数据词接口
  */
-@Deprecated
 public interface IWordData {
 
     /**

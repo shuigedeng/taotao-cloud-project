@@ -45,10 +45,10 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author : gengwei.zheng
  * @date : 2022/5/30 15:03
  */
-public class HerodotusSentinelInvocationHandler implements InvocationHandler {
+public class CustomSentinelInvocationHandler implements InvocationHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(
-		HerodotusSentinelInvocationHandler.class);
+		CustomSentinelInvocationHandler.class);
 
 	private final Target<?> target;
 
@@ -58,15 +58,15 @@ public class HerodotusSentinelInvocationHandler implements InvocationHandler {
 
 	private Map<Method, Method> fallbackMethodMap;
 
-	HerodotusSentinelInvocationHandler(Target<?> target, Map<Method, MethodHandler> dispatch,
-		FallbackFactory fallbackFactory) {
+	CustomSentinelInvocationHandler(Target<?> target, Map<Method, MethodHandler> dispatch,
+									FallbackFactory fallbackFactory) {
 		this.target = Util.checkNotNull(target, "target");
 		this.dispatch = Util.checkNotNull(dispatch, "dispatch");
 		this.fallbackFactory = fallbackFactory;
 		this.fallbackMethodMap = toFallbackMethod(dispatch);
 	}
 
-	HerodotusSentinelInvocationHandler(Target<?> target, Map<Method, MethodHandler> dispatch) {
+	CustomSentinelInvocationHandler(Target<?> target, Map<Method, MethodHandler> dispatch) {
 		this.target = Util.checkNotNull(target, "target");
 		this.dispatch = Util.checkNotNull(dispatch, "dispatch");
 	}
@@ -151,8 +151,8 @@ public class HerodotusSentinelInvocationHandler implements InvocationHandler {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof HerodotusSentinelInvocationHandler) {
-			HerodotusSentinelInvocationHandler other = (HerodotusSentinelInvocationHandler) obj;
+		if (obj instanceof CustomSentinelInvocationHandler) {
+			CustomSentinelInvocationHandler other = (CustomSentinelInvocationHandler) obj;
 			return target.equals(other.target);
 		}
 		return false;

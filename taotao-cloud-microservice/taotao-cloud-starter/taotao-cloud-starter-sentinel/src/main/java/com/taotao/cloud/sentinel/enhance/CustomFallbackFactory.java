@@ -26,22 +26,23 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author : gengwei.zheng
  * @date : 2022/5/30 15:09
  */
-public class HerodotusFallbackFactory<T> implements FallbackFactory {
+public class CustomFallbackFactory<T> implements FallbackFactory {
 
     private final Target<T> target;
 
-    public HerodotusFallbackFactory(Target<T> target) {
+    public CustomFallbackFactory(Target<T> target) {
         this.target = target;
     }
 
     @Override
+	@SuppressWarnings("unchecked")
     public Object create(Throwable cause) {
         final Class<T> targetType = target.type();
         final String targetName = target.name();
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(targetType);
         enhancer.setUseCache(true);
-        enhancer.setCallback(new HerodotusFallback<>(targetType, targetName, cause));
+        enhancer.setCallback(new CustomFallback<>(targetType, targetName, cause));
         return (T) enhancer.create();
     }
 }

@@ -33,6 +33,7 @@ public class MongoServiceImpl implements IMongoService {
 	private MongoClient mongoClient;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<String> databaseNames() {
 		MongoIterable<String> mongoIterable = mongoClient.listDatabaseNames();
 		MongoCursor<String> mongoCursor = mongoIterable.iterator();

@@ -21,6 +21,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.exception.UploadFileTypeException;
@@ -260,7 +261,7 @@ public class FileUtil {
 	 */
 	public static String getExtension(MultipartFile file) {
 		String extension = cn.hutool.core.io.FileUtil.extName(file.getOriginalFilename());
-		if (StringUtils.isEmpty(extension)) {
+		if (StringUtil.isEmpty(extension)) {
 			extension = MimeTypeUtil.getExtension(Objects.requireNonNull(file.getContentType()));
 		}
 		return extension;

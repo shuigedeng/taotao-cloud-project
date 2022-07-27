@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 import javax.net.ssl.SSLException;
+
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.TypeConverter;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.BeanFactory;
@@ -72,7 +74,7 @@ public class ServerEndpointExporter extends ApplicationObjectSupport implements
 		}
 
 		for (Class<?> endpointClass : endpointClasses) {
-			if (ClassUtils.isCglibProxyClass(endpointClass)) {
+			if (AopUtils.isCglibProxy(endpointClass)) {
 				registerEndpoint(endpointClass.getSuperclass());
 			} else {
 				registerEndpoint(endpointClass);

@@ -43,7 +43,7 @@ public class RequestParamMapMethodArgumentResolver implements MethodArgumentReso
         }
 
         Map<String, List<String>> requestParams = channel.attr(REQUEST_PARAM).get();
-        MultiValueMap<String, List<String>> multiValueMap = new LinkedMultiValueMap(requestParams);
+        MultiValueMap<String, List<String>> multiValueMap = new LinkedMultiValueMap<>(requestParams.size());
         if (MultiValueMap.class.isAssignableFrom(parameter.getParameterType())) {
             return multiValueMap;
         } else {
