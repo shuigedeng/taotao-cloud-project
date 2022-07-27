@@ -16,6 +16,8 @@
 					"thread": "%thread",
 					"pid": "${PID:-}",
 					"logger": "%logger{360}",
+					"tlog": "%X{tl}",
+					"class": "%class{360}",
 					"level": "%p",
 					"file": "%F",
 					"method": "%M",
