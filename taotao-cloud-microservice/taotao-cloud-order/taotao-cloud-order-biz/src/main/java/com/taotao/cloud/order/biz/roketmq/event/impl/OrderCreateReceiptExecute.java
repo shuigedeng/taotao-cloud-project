@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.vo.order.OrderVO;
 import com.taotao.cloud.order.api.web.vo.order.ReceiptVO;

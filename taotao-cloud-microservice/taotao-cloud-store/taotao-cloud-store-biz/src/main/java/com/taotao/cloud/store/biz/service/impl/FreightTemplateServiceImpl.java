@@ -10,7 +10,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateChildVO;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;

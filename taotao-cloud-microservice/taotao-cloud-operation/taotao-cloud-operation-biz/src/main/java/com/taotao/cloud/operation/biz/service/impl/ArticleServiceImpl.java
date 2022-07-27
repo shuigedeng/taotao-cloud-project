@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.cloud.operation.api.web.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.web.vo.ArticleVO;

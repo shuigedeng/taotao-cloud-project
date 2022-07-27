@@ -2127,7 +2127,7 @@ public final class StringUtil extends org.springframework.util.StringUtils {
 		}
 
 		String[] strings = string.split(splitter);
-		return Lists.toList(strings);
+		return Lists.newArrayList(strings);
 	}
 
 	/**

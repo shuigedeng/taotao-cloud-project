@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;

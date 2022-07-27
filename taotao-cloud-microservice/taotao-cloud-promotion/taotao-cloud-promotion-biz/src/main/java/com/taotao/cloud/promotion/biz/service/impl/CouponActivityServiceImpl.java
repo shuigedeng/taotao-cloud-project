@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.web.vo.MemberVO;
 import com.taotao.cloud.promotion.api.web.dto.CouponActivityDTO;

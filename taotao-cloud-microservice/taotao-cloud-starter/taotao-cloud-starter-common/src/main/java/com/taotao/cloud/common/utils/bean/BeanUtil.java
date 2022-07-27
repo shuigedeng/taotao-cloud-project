@@ -17,16 +17,24 @@ package com.taotao.cloud.common.utils.bean;
 
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.lang.Assert;
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.taotao.cloud.common.exception.CommonRuntimeException;
+import com.taotao.cloud.common.support.cache.impl.ClassFieldListCache;
+import com.taotao.cloud.common.utils.collection.MapUtil;
+import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.convert.Converter;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.clazz.ClassUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -35,7 +43,9 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.boot.convert.ApplicationConversionService;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.cglib.beans.BeanGenerator;
+import org.springframework.cglib.beans.BeanMap;
 import org.springframework.util.FastByteArrayOutputStream;
 
 /**
@@ -282,7 +292,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 			return;
 		}
 		BeanCopier copier = BeanCopier
-			.create(source.getClass(), targetBean.getClass(), false, true);
+			.create(source.getClass(), targetBean.getClass(), false);
 
 		copier.copy(source, targetBean, null);
 	}
@@ -484,7 +494,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		generator.setUseCache(true);
 		generator.setContextClass(superclass);
 		for (BeanProperty prop : props) {
-			generator.addProperty(prop.getName(), prop.getType());
+			generator.addProperty(prop.getName(), prop.getClass());
 		}
 		return generator.create();
 	}
@@ -581,6 +591,68 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	/**
+	 * bean 转换为 map
+	 *
+	 * @param bean 原始对象
+	 * @return 结果
+	 */
+	public static Map<String, Object> beanToMap(Object bean) {
+		ArgUtil.notNull(bean, "bean");
+
+		try {
+			Map<String, Object> map = new LinkedHashMap<>();
+			List<Field> fieldList = ClassFieldListCache.getInstance().get(bean.getClass());
+
+			for (Field field : fieldList) {
+				final String fieldName = field.getName();
+				final Object fieldValue = field.get(bean);
+				map.put(fieldName, fieldValue);
+			}
+			return map;
+		} catch (IllegalAccessException e) {
+			throw new CommonRuntimeException(e);
+		}
+	}
+
+	/**
+	 * map 中的值设置到 bean 中 （1）map 为空，则直接返回 （2）map 中有对应的 key 且 value 不为空，则进行值的设置。
+	 *
+	 * @param map  map 信息
+	 * @param bean 原始对象
+	 */
+	public static void mapToBean(final Map<String, Object> map, final Object bean) {
+		ArgUtil.notNull(bean, "bean");
+		if (MapUtil.isEmpty(map)) {
+			return;
+		}
+
+		try {
+			List<Field> fieldList = ClassFieldListCache.getInstance().get(bean.getClass());
+
+			for (Field field : fieldList) {
+				final String fieldName = field.getName();
+				final Object fieldValue = map.get(fieldName);
+
+				if (ObjectUtil.isNotNull(fieldValue)) {
+					field.set(bean, fieldValue);
+				}
+			}
+		} catch (IllegalAccessException e) {
+			throw new CommonRuntimeException(e);
+		}
+	}
+
+	/**
+	 * 属性拷贝
+	 *
+	 * @param source 源头
+	 * @param target 目标
+	 */
+	public static void copyProperties(final Object source, final Object target) {
+		ObjectUtil.copyProperties(source, target);
 	}
 
 	///**

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.lang.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.number.CurrencyUtil;
