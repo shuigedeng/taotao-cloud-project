@@ -91,7 +91,7 @@ public class FileStreamUtil {
 		final String charset) {
 		try (InputStream inputStream = getInputStream(path);
 			ByteArrayOutputStream boa = new ByteArrayOutputStream()) {
-			int len = 0;
+			int len;
 			byte[] buffer = new byte[1024];
 
 			while ((len = inputStream.read(buffer)) != -1) {

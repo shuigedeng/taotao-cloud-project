@@ -42,7 +42,6 @@ public class HealthCheckProvider implements AutoCloseable {
 	private boolean close;
 
 	private Monitor monitor;
-	private HttpClient httpClient;
 	private WarnStrategy strategy;
 	private HealthProperties healthProperties;
 	private CollectTaskProperties collectTaskProperties;
@@ -55,14 +54,12 @@ public class HealthCheckProvider implements AutoCloseable {
 		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
 		WarnStrategy strategy,
-		HttpClient httpClient,
 		Monitor monitor) {
 		this.strategy = strategy;
 		this.close = false;
 		this.collectTaskProperties = collectTaskProperties;
 		this.healthProperties = healthProperties;
 		this.monitor = monitor;
-		this.httpClient = httpClient;
 
 		registerCollectTask(new CpuCollectTask(collectTaskProperties));
 		//registerCollectTask(new IOCollectTask(collectTaskProperties));
@@ -130,8 +127,7 @@ public class HealthCheckProvider implements AutoCloseable {
 				try {
 					Report report2 = task.getReport();
 					if (report2 != null) {
-						report.put(task.getName(),
-							report2.setDesc(task.getDesc()).setName(task.getName()));
+						report.put(task.getName(), report2.setDesc(task.getDesc()).setName(task.getName()));
 					}
 				} catch (Exception e) {
 					LogUtil.error(e,
@@ -199,14 +195,6 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	public void setMonitor(Monitor monitor) {
 		this.monitor = monitor;
-	}
-
-	public HttpClient getHttpClient() {
-		return httpClient;
-	}
-
-	public void setHttpClient(HttpClient httpClient) {
-		this.httpClient = httpClient;
 	}
 
 	public void setStrategy(WarnStrategy strategy) {

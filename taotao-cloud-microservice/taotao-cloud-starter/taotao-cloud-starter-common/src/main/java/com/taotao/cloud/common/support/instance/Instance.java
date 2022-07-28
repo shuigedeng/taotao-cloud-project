@@ -17,8 +17,7 @@ public interface Instance {
 	 * @param <T>       泛型
 	 * @return 实例化对象
 	 */
-	<T> T singleton(final Class<T> tClass,
-		final String groupName);
+	<T> T singleton(final Class<T> tClass, final String groupName);
 
 	/**
 	 * 获取对象的单例对象 1. 需要保证对象的线程安全性。

@@ -68,8 +68,7 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
-			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class,
-				true);
+			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class, true);
 			if(Objects.isNull(httpClientManager)){
 				return null;
 			}

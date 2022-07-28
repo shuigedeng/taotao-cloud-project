@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.connect.request;
 
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.common.utils.common.UrlBuilder;
+import com.taotao.cloud.common.utils.io.UrlBuilder;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;

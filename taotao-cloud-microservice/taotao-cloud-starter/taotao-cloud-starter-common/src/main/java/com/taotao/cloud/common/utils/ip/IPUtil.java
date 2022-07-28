@@ -17,8 +17,8 @@ package com.taotao.cloud.common.utils.ip;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.io.net.HttpUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.http.HttpUtil;
 import java.util.Objects;
 
 /**

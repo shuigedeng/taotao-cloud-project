@@ -17,6 +17,7 @@ package com.taotao.cloud.web.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
@@ -46,14 +47,12 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration(after = HealthAutoConfiguration.class)
 public class PrometheusAutoConfiguration implements InitializingBean {
 
-	@Autowired(required = false)
-	private HealthCheckProvider healthCheckProvider;
-
 	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(PrometheusAutoConfiguration.class, StarterName.PROMETHEUS_STARTER);
+		HealthCheckProvider healthCheckProvider = ContextUtil.getBean(HealthCheckProvider.class, true);
 		if (Objects.nonNull(healthCheckProvider)) {
 			Monitor monitorThreadPool = healthCheckProvider.getMonitor();
 			ThreadPoolExecutor monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
@@ -84,8 +83,7 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 							return null;
 						});
 					} catch (Exception e) {
-						LogUtil.warn(StarterName.HEALTH_STARTER, "HealthCheck Prometheus error ",
-							e);
+						LogUtil.warn(StarterName.HEALTH_STARTER, "HealthCheck Prometheus error ", e);
 					}
 
 					try {

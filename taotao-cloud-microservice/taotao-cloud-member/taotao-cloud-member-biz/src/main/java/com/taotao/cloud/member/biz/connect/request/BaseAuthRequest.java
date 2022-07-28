@@ -1,8 +1,8 @@
 package com.taotao.cloud.member.biz.connect.request;
 
 import com.alibaba.nacos.common.utils.UuidUtils;
-import com.taotao.cloud.common.utils.common.UrlBuilder;
-import com.taotao.cloud.common.utils.common.UrlUtil;
+import com.taotao.cloud.common.utils.io.UrlBuilder;
+import com.taotao.cloud.common.utils.io.UrlUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;

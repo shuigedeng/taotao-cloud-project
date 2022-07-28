@@ -319,8 +319,7 @@ public class Rule {
 								try {
 									ruleInfo.hitCallBack.run(item.getValue());
 								} catch (Exception exp) {
-									LogUtil.error("health",
-										"analyse分析时执行报警回调规则出错", exp);
+									LogUtil.error("health", "analyse分析时执行报警回调规则出错", exp);
 								}
 							}
 						}

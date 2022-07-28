@@ -71,12 +71,9 @@ public class ExportProvider {
 		this.isClose = false;
 
 		if (this.exportProperties.getElkEnabled()) {
-			LogstashTcpSocketAppender logstashTcpSocketAppender = ContextUtil.getBean(
-				LogstashTcpSocketAppender.class,
-				false);
+			LogstashTcpSocketAppender logstashTcpSocketAppender = ContextUtil.getBean(LogstashTcpSocketAppender.class, false);
 			if (Objects.nonNull(logstashTcpSocketAppender)) {
-				registerCollectTask(
-					new ElkExport(this.exportProperties, logstashTcpSocketAppender));
+				registerCollectTask(new ElkExport(this.exportProperties, logstashTcpSocketAppender));
 			}
 		}
 
@@ -100,8 +97,7 @@ public class ExportProvider {
 			try {
 				e.start();
 			} catch (Exception ex) {
-				LogUtil.error(StarterName.HEALTH_STARTER,
-					e.getClass().getName() + "启动出错", ex);
+				LogUtil.error(StarterName.HEALTH_STARTER, e.getClass().getName() + "启动出错", ex);
 			}
 		}
 	}
@@ -133,8 +129,7 @@ public class ExportProvider {
 			try {
 				e.close();
 			} catch (Exception ex) {
-				LogUtil.error(ex, StarterName.HEALTH_STARTER,
-					e.getClass().getName() + "关闭出错");
+				LogUtil.error(ex, StarterName.HEALTH_STARTER, e.getClass().getName() + "关闭出错");
 			}
 		}
 	}

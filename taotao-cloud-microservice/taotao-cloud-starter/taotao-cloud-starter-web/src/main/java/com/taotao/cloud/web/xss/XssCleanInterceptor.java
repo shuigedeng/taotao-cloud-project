@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.web.xss;
 
-import com.taotao.cloud.common.utils.clazz.ClassUtil;
+import com.taotao.cloud.common.utils.reflect.ClassUtil;
 import com.taotao.cloud.web.properties.XssProperties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

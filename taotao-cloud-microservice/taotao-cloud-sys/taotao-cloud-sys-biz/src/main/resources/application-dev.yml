@@ -1091,9 +1091,14 @@ taotao:
       enabled: true
     health:
       enabled: true
-      export: true
-      warn: true
-      check: true
+      dump:
+        enabled: true
+      export:
+        enabled: true
+      ping:
+        enabled: true
+      warn:
+        enabled: true
     feign:
       enabled: true
       loadbalancer:

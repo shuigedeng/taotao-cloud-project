@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
 import com.taotao.cloud.common.utils.lang.CharUtil;
-import com.taotao.cloud.common.utils.regex.RegexUtil;
+import com.taotao.cloud.common.utils.common.RegexUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
