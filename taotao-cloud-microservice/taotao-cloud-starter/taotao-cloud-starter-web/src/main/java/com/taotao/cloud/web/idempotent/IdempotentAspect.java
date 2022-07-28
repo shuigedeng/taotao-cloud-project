@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.common.support.lock.ZLock;
-import com.taotao.cloud.common.utils.aop.AspectUtil;
+import com.taotao.cloud.common.utils.aop.AopUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -91,7 +91,7 @@ public class IdempotentAspect {
 
 	@Before("watchIde()")
 	public void doBefore(JoinPoint joinPoint) throws Exception {
-		Idempotent idempotent = AspectUtil.getAnnotation(joinPoint, Idempotent.class);
+		Idempotent idempotent = AopUtil.getAnnotation(joinPoint, Idempotent.class);
 
 		if (enable && null != idempotent) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -182,7 +182,7 @@ public class IdempotentAspect {
 	@After("watchIde()")
 	public void doAfter(JoinPoint joinPoint) throws Throwable {
 		try {
-			Idempotent idempotent = AspectUtil.getAnnotation(joinPoint, Idempotent.class);
+			Idempotent idempotent = AopUtil.getAnnotation(joinPoint, Idempotent.class);
 			if (enable && null != idempotent) {
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

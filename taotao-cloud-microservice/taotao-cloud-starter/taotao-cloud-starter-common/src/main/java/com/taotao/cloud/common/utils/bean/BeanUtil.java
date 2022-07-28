@@ -17,15 +17,15 @@ package com.taotao.cloud.common.utils.bean;
 
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.lang.Assert;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.BeanProperty;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
-import com.taotao.cloud.common.support.cache.impl.ClassFieldListCache;
 import com.taotao.cloud.common.utils.collection.MapUtil;
 import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.convert.Converter;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.clazz.ClassUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.reflect.ClassUtil;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -34,10 +34,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeansException;
@@ -135,7 +137,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (source == null) {
 			return null;
 		}
-		return (T) BeanUtil.copy(source, source.getClass());
+		return (T) copy(source, source.getClass());
 	}
 
 	/**
@@ -182,7 +184,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (source == null) {
 			return null;
 		}
-		return BeanUtil.copy(source, source.getClass(), clazz);
+		return copy(source, source.getClass(), clazz);
 	}
 
 	/**
@@ -251,7 +253,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 			if (sourceClazz == null) {
 				sourceClazz = source.getClass();
 			}
-			T bean = BeanUtil.copy(source, sourceClazz, targetClazz);
+			T bean = copy(source, sourceClazz, targetClazz);
 			targetList.add(bean);
 		}
 		return targetList;
@@ -313,7 +315,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (source == null) {
 			return null;
 		}
-		return BeanUtil.copyWithConvert(source, source.getClass(), targetClazz);
+		return copyWithConvert(source, source.getClass(), targetClazz);
 	}
 
 	/**
@@ -365,7 +367,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 			if (sourceClazz == null) {
 				sourceClazz = source.getClass();
 			}
-			T bean = BeanUtil.copyWithConvert(source, sourceClazz, targetClazz);
+			T bean = copyWithConvert(source, sourceClazz, targetClazz);
 			outList.add(bean);
 		}
 		return outList;
@@ -390,7 +392,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 			return null;
 		}
 		T to = newInstance(targetClazz);
-		BeanUtil.copyProperties(source, to);
+		copyProperties(source, to);
 		return to;
 	}
 
@@ -416,7 +418,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 			if (source == null) {
 				continue;
 			}
-			T bean = BeanUtil.copyProperties(source, targetClazz);
+			T bean = copyProperties(source, targetClazz);
 			outList.add(bean);
 		}
 		return outList;
@@ -459,7 +461,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		if (beanMap.isEmpty()) {
 			return to;
 		}
-		BeanUtil.copy(beanMap, to);
+		copy(beanMap, to);
 		return to;
 	}
 
@@ -477,7 +479,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		}
 		Class<?> superclass = superBean.getClass();
 		Object genBean = generator(superclass, props);
-		BeanUtil.copy(superBean, genBean);
+		copy(superBean, genBean);
 		return genBean;
 	}
 
@@ -509,7 +511,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	public static BeanDiff diff(final Object src, final Object dist) {
 		Assert.notNull(src, "diff Object src is null.");
 		Assert.notNull(src, "diff Object dist is null.");
-		return diff(BeanUtil.toMap(src), BeanUtil.toMap(dist));
+		return diff(toMap(src), toMap(dist));
 	}
 
 	/**
@@ -604,7 +606,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 
 		try {
 			Map<String, Object> map = new LinkedHashMap<>();
-			List<Field> fieldList = ClassFieldListCache.getInstance().get(bean.getClass());
+			Field[] fieldList = bean.getClass().getFields();
 
 			for (Field field : fieldList) {
 				final String fieldName = field.getName();
@@ -630,7 +632,7 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 		}
 
 		try {
-			List<Field> fieldList = ClassFieldListCache.getInstance().get(bean.getClass());
+			Field[] fieldList = bean.getClass().getFields();
 
 			for (Field field : fieldList) {
 				final String fieldName = field.getName();
@@ -679,4 +681,54 @@ public class BeanUtil extends org.springframework.beans.BeanUtils {
 	//		throw new BaseException(e.getMessage());
 	//	}
 	//}
+
+	/**
+	 * 跟踪类变动比较
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 19:41:13
+	 */
+	public static class BeanDiff {
+
+		/**
+		 * 变更字段
+		 */
+		@JsonIgnore
+		private transient Set<String> fields = new HashSet<>();
+		/**
+		 * 旧值
+		 */
+		@JsonIgnore
+		private transient Map<String, Object> oldValues = new HashMap<>();
+		/**
+		 * 新值
+		 */
+		@JsonIgnore
+		private transient Map<String, Object> newValues = new HashMap<>();
+
+		public Set<String> getFields() {
+			return fields;
+		}
+
+		public Map<String, Object> getOldValues() {
+			return oldValues;
+		}
+
+		public Map<String, Object> getNewValues() {
+			return newValues;
+		}
+
+		public void setFields(Set<String> fields) {
+			this.fields = fields;
+		}
+
+		public void setOldValues(Map<String, Object> oldValues) {
+			this.oldValues = oldValues;
+		}
+
+		public void setNewValues(Map<String, Object> newValues) {
+			this.newValues = newValues;
+		}
+	}
 }

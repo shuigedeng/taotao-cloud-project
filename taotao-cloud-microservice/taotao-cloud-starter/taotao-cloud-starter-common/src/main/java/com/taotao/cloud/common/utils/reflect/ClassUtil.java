@@ -30,6 +30,7 @@ import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -41,11 +42,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.springframework.core.BridgeMethodResolver;
+import org.springframework.core.DefaultParameterNameDiscoverer;
+import org.springframework.core.MethodParameter;
+import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.annotation.SynthesizingMethodParameter;
+import org.springframework.lang.Nullable;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.method.HandlerMethod;
 
 /**
  * Class 工具类
  */
-public final class ClassUtil {
+public final class ClassUtil extends ClassUtils {
 
 	private ClassUtil() {
 	}
@@ -395,7 +405,168 @@ public final class ClassUtil {
 			resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
 			return resolvedPrimitive != null && sourceType.isAssignableFrom(resolvedPrimitive);
 		}
-
 	}
+
+	/**
+	 * 获取Annotation
+	 *
+	 * @param method         Method
+	 * @param annotationType 注解类
+	 * @return 注解类型
+	 * @since 2021-09-02 17:40:12
+	 */
+	@Nullable
+	public static <A extends Annotation> A getAnnotation(Method method, Class<A> annotationType) {
+		Class<?> targetClass = method.getDeclaringClass();
+		// The method may be on an interface, but we need attributes from the target class.
+		// If the target class is null, the method will be unchanged.
+		Method specificMethod = ClassUtil.getMostSpecificMethod(method, targetClass);
+		// If we are dealing with method with generic parameters, find the original method.
+		specificMethod = BridgeMethodResolver.findBridgedMethod(specificMethod);
+		// 先找方法，再找方法上的类
+		A annotation = AnnotatedElementUtils.findMergedAnnotation(specificMethod, annotationType);
+		if (null != annotation) {
+			return annotation;
+		}
+		// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+		return AnnotatedElementUtils.findMergedAnnotation(specificMethod.getDeclaringClass(),
+			annotationType);
+	}
+
+	/**
+	 * 判断是否有注解 Annotation
+	 *
+	 * @param method         Method
+	 * @param annotationType 注解类
+	 * @return 结果
+	 * @since 2021-09-02 17:40:50
+	 */
+	public static <A extends Annotation> boolean isAnnotated(Method method,
+		Class<A> annotationType) {
+		// 先找方法，再找方法上的类
+		boolean isMethodAnnotated = AnnotatedElementUtils.isAnnotated(method, annotationType);
+		if (isMethodAnnotated) {
+			return true;
+		}
+		// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+		Class<?> targetClass = method.getDeclaringClass();
+		return AnnotatedElementUtils.isAnnotated(targetClass, annotationType);
+	}
+
+	private static final ParameterNameDiscoverer PARAMETER_NAME_DISCOVERER = new DefaultParameterNameDiscoverer();
+
+	/**
+	 * 获取方法参数信息
+	 *
+	 * @param constructor    构造器
+	 * @param parameterIndex 参数序号
+	 * @return 方法参数
+	 */
+	public static MethodParameter getMethodParameter(Constructor<?> constructor,
+		int parameterIndex) {
+		MethodParameter methodParameter = new SynthesizingMethodParameter(constructor,
+			parameterIndex);
+		methodParameter.initParameterNameDiscovery(PARAMETER_NAME_DISCOVERER);
+		return methodParameter;
+	}
+
+	/**
+	 * 获取方法参数信息
+	 *
+	 * @param method         方法
+	 * @param parameterIndex 参数序号
+	 * @return 方法参数
+	 */
+	public static MethodParameter getMethodParameter(Method method, int parameterIndex) {
+		MethodParameter methodParameter = new SynthesizingMethodParameter(method, parameterIndex);
+		methodParameter.initParameterNameDiscovery(PARAMETER_NAME_DISCOVERER);
+		return methodParameter;
+	}
+
+	/**
+	 * 获取Annotation
+	 *
+	 * @param handlerMethod  HandlerMethod
+	 * @param annotationType 注解类
+	 * @return 注解类型
+	 */
+	@Nullable
+	public static <A extends Annotation> A getAnnotation(HandlerMethod handlerMethod, Class<A> annotationType) {
+		// 先找方法，再找方法上的类
+		A annotation = handlerMethod.getMethodAnnotation(annotationType);
+		if (null != annotation) {
+			return annotation;
+		}
+		// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+		Class<?> beanType = handlerMethod.getBeanType();
+		return AnnotatedElementUtils.findMergedAnnotation(beanType, annotationType);
+	}
+
+	///**
+	// * 获取Annotation
+	// *
+	// * @param method         Method
+	// * @param annotationType 注解类
+	// * @param <A>            泛型标记
+	// * @return {Annotation}
+	// */
+	//@Nullable
+	//public static <A extends Annotation> A getAnnotation(Method method, Class<A> annotationType) {
+	//	Class<?> targetClass = method.getDeclaringClass();
+	//	// The method may be on an interface, but we need attributes from the target class.
+	//	// If the target class is null, the method will be unchanged.
+	//	Method specificMethod = ClassUtil.getMostSpecificMethod(method, targetClass);
+	//	// If we are dealing with method with generic parameters, find the original method.
+	//	specificMethod = BridgeMethodResolver.findBridgedMethod(specificMethod);
+	//	// 先找方法，再找方法上的类
+	//	A annotation = AnnotatedElementUtils.findMergedAnnotation(specificMethod, annotationType);
+	//	if (null != annotation) {
+	//		return annotation;
+	//	}
+	//	// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+	//	return AnnotatedElementUtils.findMergedAnnotation(specificMethod.getDeclaringClass(),
+	//		annotationType);
+	//}
+
+	///**
+	// * 获取Annotation
+	// *
+	// * @param handlerMethod  HandlerMethod
+	// * @param annotationType 注解类
+	// * @param <A>            泛型标记
+	// * @return {Annotation}
+	// */
+	//@Nullable
+	//public static <A extends Annotation> A getAnnotation(HandlerMethod handlerMethod,
+	//	Class<A> annotationType) {
+	//	// 先找方法，再找方法上的类
+	//	A annotation = handlerMethod.getMethodAnnotation(annotationType);
+	//	if (null != annotation) {
+	//		return annotation;
+	//	}
+	//	// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+	//	Class<?> beanType = handlerMethod.getBeanType();
+	//	return AnnotatedElementUtils.findMergedAnnotation(beanType, annotationType);
+	//}
+	//
+	///**
+	// * 判断是否有注解 Annotation
+	// *
+	// * @param method         Method
+	// * @param annotationType 注解类
+	// * @param <A>            泛型标记
+	// * @return {boolean}
+	// */
+	//public static <A extends Annotation> boolean isAnnotated(Method method,
+	//	Class<A> annotationType) {
+	//	// 先找方法，再找方法上的类
+	//	boolean isMethodAnnotated = AnnotatedElementUtils.isAnnotated(method, annotationType);
+	//	if (isMethodAnnotated) {
+	//		return true;
+	//	}
+	//	// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+	//	Class<?> targetClass = method.getDeclaringClass();
+	//	return AnnotatedElementUtils.isAnnotated(targetClass, annotationType);
+	//}
 
 }

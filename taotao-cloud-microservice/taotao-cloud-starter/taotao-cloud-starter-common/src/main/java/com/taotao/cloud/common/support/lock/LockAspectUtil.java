@@ -16,8 +16,8 @@
 package com.taotao.cloud.common.support.lock;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.aop.AspectUtil;
 import com.taotao.cloud.common.exception.LockException;
+import com.taotao.cloud.common.utils.aop.AopUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Objects;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -39,7 +39,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  * @since 2021-09-02 20:27:36
  */
 @Aspect
-public class LockAspectUtil extends AspectUtil {
+public class LockAspectUtil extends AopUtil {
 
 	@Autowired(required = false)
 	private DistributedLock distributedLock;

@@ -24,7 +24,7 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.func.FuncUtil;
+import com.taotao.cloud.common.support.function.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.security.annotation.NotAuth;

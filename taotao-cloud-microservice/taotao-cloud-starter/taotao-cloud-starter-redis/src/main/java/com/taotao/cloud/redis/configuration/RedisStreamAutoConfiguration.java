@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.CharPool;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.net.INetUtil;
+import com.taotao.cloud.common.utils.io.net.INetUtil;
 import com.taotao.cloud.redis.properties.CacheProperties;
 import com.taotao.cloud.redis.stream.DefaultRStreamTemplate;
 import com.taotao.cloud.redis.stream.RStreamListenerDetector;

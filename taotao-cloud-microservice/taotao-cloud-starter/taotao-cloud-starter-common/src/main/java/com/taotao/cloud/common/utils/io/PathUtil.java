@@ -1,6 +1,7 @@
 package com.taotao.cloud.common.utils.io;
 
 
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.FileTypeConst;
@@ -12,7 +13,9 @@ import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -27,6 +30,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.lang.Nullable;
+import org.springframework.util.ResourceUtils;
 
 /**
  * 路径工具类
@@ -490,5 +495,44 @@ public final class PathUtil {
 		} catch (IOException e) {
 			throw new CommonRuntimeException(e);
 		}
+	}
+
+	/**
+	 * 获取jar包运行时的当前目录
+	 *
+	 * @return {String}
+	 */
+	@Nullable
+	public static String getJarPath() {
+		try {
+			URL url = PathUtil.class.getResource(StringPool.SLASH).toURI().toURL();
+			return PathUtil.toFilePath(url);
+		} catch (Exception e) {
+			String path = PathUtil.class.getResource(StringPool.EMPTY).getPath();
+			return new File(path).getParentFile().getParentFile().getAbsolutePath();
+		}
+	}
+
+	@Nullable
+	private static String toFilePath(@Nullable URL url) {
+		if (url == null) {
+			return null;
+		}
+		String protocol = url.getProtocol();
+		String file = UrlUtil.decode(url.getPath(), StandardCharsets.UTF_8);
+		if (ResourceUtils.URL_PROTOCOL_FILE.equals(protocol)) {
+			return new File(file).getParentFile().getParentFile().getAbsolutePath();
+		} else if (ResourceUtils.URL_PROTOCOL_JAR.equals(protocol)
+			|| ResourceUtils.URL_PROTOCOL_ZIP.equals(protocol)) {
+			int ipos = file.indexOf(ResourceUtils.JAR_URL_SEPARATOR);
+			if (ipos > 0) {
+				file = file.substring(0, ipos);
+			}
+			if (file.startsWith(ResourceUtils.FILE_URL_PREFIX)) {
+				file = file.substring(ResourceUtils.FILE_URL_PREFIX.length());
+			}
+			return new File(file).getParentFile().getAbsolutePath();
+		}
+		return file;
 	}
 }

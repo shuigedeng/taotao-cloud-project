@@ -53,7 +53,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @version 2021.9
  * @since 2021-09-02 20:05:41
  */
-@AutoConfiguration
+@AutoConfiguration(after = CoreAutoConfiguration.class)
 @EnableConfigurationProperties({MonitorThreadPoolProperties.class, MonitorProperties.class})
 @ConditionalOnProperty(prefix = MonitorProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class MonitorAutoConfiguration implements InitializingBean {
@@ -64,7 +64,6 @@ public class MonitorAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	public MonitorThreadPoolExecutor monitorThreadPoolExecutor(
 		MonitorThreadPoolProperties monitorThreadPoolProperties) {
 		String monitorThreadName = monitorThreadPoolProperties.getThreadNamePrefix();
@@ -83,12 +82,11 @@ public class MonitorAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
 	public Monitor monitor(
-		Collector collector,
 		MonitorThreadPoolProperties monitorThreadPoolProperties,
 		MonitorThreadPoolExecutor monitorThreadPoolExecutor,
 		AsyncProperties asyncProperties,
+		Collector collector,
 		AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor) {
 
 		return new Monitor(

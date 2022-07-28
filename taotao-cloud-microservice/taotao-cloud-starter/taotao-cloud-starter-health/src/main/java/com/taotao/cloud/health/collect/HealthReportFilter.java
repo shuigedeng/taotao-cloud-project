@@ -51,22 +51,20 @@ public class HealthReportFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-		String contextPath = org.springframework.util.StringUtils.trimTrailingCharacter(
-			request.getContextPath(), '/');
+		String contextPath = org.springframework.util.StringUtils.trimTrailingCharacter(request.getContextPath(), '/');
 		String uri = request.getRequestURI();
 
 		HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class, true);
 		DumpProperties dumpProperties = ContextUtil.getBean(DumpProperties.class, true);
-		if (Objects.nonNull(healthProvider) && Objects.nonNull(dumpProperties) && uri.startsWith(
-			contextPath + "/health/report")) {
+		if (Objects.nonNull(healthProvider)
+			&& Objects.nonNull(dumpProperties) && uri.startsWith(contextPath + "/health/report")) {
 			try {
 				String html;
 
 				boolean isAnalyse = !"false".equalsIgnoreCase(request.getParameter("isAnalyse"));
 
 				Report report = healthProvider.getReport(isAnalyse);
-				if (request.getContentType() != null && request.getContentType()
-					.contains("json")) {
+				if (request.getContentType() != null && request.getContentType().contains("json")) {
 					response.setHeader("Content-type", "application/json;charset=UTF-8");
 					html = report.toJson();
 					ResponseUtil.success(response, html);

@@ -106,8 +106,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 
 		for (Map.Entry<String, Object> item : this.entrySet()) {
 			Object value = item.getValue();
-			if (value instanceof ReportItem) {
-				ReportItem reportItem = (ReportItem) value;
+			if (value instanceof ReportItem reportItem) {
 				Object itemValue = reportItem.getValue();
 
 				if (Objects.nonNull(itemValue)) {
@@ -153,26 +152,16 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		for (int i = 0; i < source.length(); i++) {
 			char c = source.charAt(i);
 			switch (c) {
-				case '<':
-					buffer.append("&lt;");
-					break;
-				case '>':
-					buffer.append("&gt;");
-					break;
-				case '&':
-					buffer.append("&amp;");
-					break;
-				case '"':
-					buffer.append("&quot;");
-					break;
-				case '\'':
-					buffer.append("&apos;");
-					break;
+				case '<' -> buffer.append("&lt;");
+				case '>' -> buffer.append("&gt;");
+				case '&' -> buffer.append("&amp;");
+				case '"' -> buffer.append("&quot;");
+				case '\'' -> buffer.append("&apos;");
+
 				//case 10:
 				//case 13:
 				//    break;
-				default:
-					buffer.append(c);
+				default -> buffer.append(c);
 			}
 		}
 		return buffer.toString();

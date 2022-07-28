@@ -2,7 +2,6 @@ package com.taotao.cloud.core.sensitive.sensitive.core.api;
 
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.common.support.cache.impl.ClassFieldListCache;
 import com.taotao.cloud.common.support.deepcopy.IDeepCopy;
 import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
@@ -77,8 +76,8 @@ public class SensitiveService<T> implements ISensitive<T> {
 		final Object copyObject,
 		final Class clazz) {
 		// 每一个实体对应的字段，只对当前 clazz 生效。
-		List<Field> fieldList = ClassFieldListCache.getInstance().get(clazz);
-		context.setAllFieldList(fieldList);
+		Field[] fieldList = clazz.getFields();
+		context.setAllFieldList(List.of(fieldList));
 		context.setCurrentObject(copyObject);
 
 		try {

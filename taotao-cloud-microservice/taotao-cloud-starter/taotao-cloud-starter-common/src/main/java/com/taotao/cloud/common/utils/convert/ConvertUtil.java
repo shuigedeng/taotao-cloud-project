@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.utils.convert;
 
 import com.taotao.cloud.common.utils.convert.ConversionService;
-import com.taotao.cloud.common.utils.clazz.ClassUtil;
+import com.taotao.cloud.common.utils.reflect.ClassUtil;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.lang.Nullable;

@@ -28,7 +28,7 @@ import org.springframework.boot.actuate.health.Health;
  * @version 2021.9
  * @since 2021-09-02 20:13:40
  */
-@WebEndpoint(id = "taotao-cloud-health")
+@WebEndpoint(id = "custom-health")
 public class CustomHealthEndPoint {
 
 	@Autowired

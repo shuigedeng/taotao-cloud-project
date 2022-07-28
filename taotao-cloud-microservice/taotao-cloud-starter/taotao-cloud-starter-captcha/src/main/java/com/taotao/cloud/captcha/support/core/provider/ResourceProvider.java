@@ -25,7 +25,7 @@ import cn.hutool.system.SystemUtil;
 import com.taotao.cloud.captcha.support.core.definition.enums.CaptchaResource;
 import com.taotao.cloud.captcha.support.core.definition.enums.FontStyle;
 import com.taotao.cloud.captcha.support.core.properties.CaptchaProperties;
-import com.taotao.cloud.common.utils.common.ResourceUtil;
+import com.taotao.cloud.common.utils.io.ResourceUtil;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;

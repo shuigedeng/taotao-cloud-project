@@ -1,6 +1,8 @@
 package com.taotao.cloud.common.support.instance.impl;
 
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * 实例化工具类 对于 {@link InstanceFactory} 的便于使用
  *

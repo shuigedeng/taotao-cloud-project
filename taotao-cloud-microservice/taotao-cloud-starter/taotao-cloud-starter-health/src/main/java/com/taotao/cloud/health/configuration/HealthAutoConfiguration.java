@@ -18,10 +18,12 @@ package com.taotao.cloud.health.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
+import com.taotao.cloud.core.configuration.MonitorAutoConfiguration;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.collect.HealthReportFilter;
+import com.taotao.cloud.health.endpoint.SystemHealthEndPoint;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.properties.HealthProperties;
 import com.taotao.cloud.health.strategy.WarnStrategy;
@@ -43,7 +45,7 @@ import org.springframework.core.Ordered;
  * @version 2021.9
  * @since 2021-09-10 17:22:15
  */
-@AutoConfiguration(after = CoreAutoConfiguration.class)
+@AutoConfiguration(after = {CoreAutoConfiguration.class, WarnProviderAutoConfiguration.class, MonitorAutoConfiguration.class})
 @EnableConfigurationProperties({HealthProperties.class, CollectTaskProperties.class})
 @ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HealthAutoConfiguration implements InitializingBean {
@@ -54,20 +56,21 @@ public class HealthAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean(destroyMethod = "close")
-	@ConditionalOnBean
-	public HealthCheckProvider getHealthCheckProvider(
+	public HealthCheckProvider healthCheckProvider(
 		WarnStrategy strategy,
-		HttpClient httpClient,
 		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
 		Monitor monitor) {
-
 		return new HealthCheckProvider(
 			collectTaskProperties,
 			healthProperties,
 			strategy,
-			httpClient,
 			monitor);
+	}
+
+	@Bean
+	public SystemHealthEndPoint systemHealthEndPoint(HealthCheckProvider healthCheckProvider) {
+		return new SystemHealthEndPoint(healthCheckProvider);
 	}
 
 	@Bean
