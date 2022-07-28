@@ -1,9 +1,13 @@
+import org.springframework.aot.gradle.dsl.AotMode
+
 plugins {
     id 'org.springframework.experimental.aot' version '0.12.1'
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -15,3 +19,20 @@ tasks.named('bootBuildImage') {
     builder = 'paketobuildpacks/builder:tiny'
     environment = ['BP_NATIVE_IMAGE': 'true']
 }
+
+//bootRun {
+//    systemProperty 'springAot', 'true'
+//}
+//
+//springAot {
+//    mode = AotMode.NATIVE
+//    debugVerify = false
+//    removeXmlSupport = true
+//    removeSpelSupport = false
+//    removeYamlSupport = false
+//    removeJmxSupport = true
+//    verify = true
+//
+////    mainClass = "com.taotao.cloud.springnative.TaoTaoCloudSpringNativeApplication"
+//    applicationClass = "com.taotao.cloud.springnative.TaoTaoCloudSpringNativeApplication"
+//}

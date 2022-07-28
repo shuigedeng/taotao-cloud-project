@@ -1,3 +1,9 @@
+import org.springframework.aot.gradle.dsl.AotMode
+
+plugins {
+    id 'org.springframework.experimental.aot' version '0.12.1'
+}
+
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream')
@@ -100,4 +106,18 @@ configurations {
         //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
+}
+
+bootRun {
+    systemProperty 'springAot', 'true'
+}
+
+springAot {
+    mode = AotMode.NATIVE
+    debugVerify = false
+    removeXmlSupport = true
+    removeSpelSupport = false
+    removeYamlSupport = false
+    removeJmxSupport = true
+    verify = true
 }
