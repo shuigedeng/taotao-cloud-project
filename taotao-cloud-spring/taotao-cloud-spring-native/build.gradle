@@ -2,6 +2,7 @@ import org.springframework.aot.gradle.dsl.AotMode
 
 plugins {
     id 'org.springframework.experimental.aot' version '0.12.1'
+    id "com.bmuschko.docker-spring-boot-application" version "7.4.0"
 }
 
 dependencies {
@@ -20,19 +21,25 @@ tasks.named('bootBuildImage') {
     environment = ['BP_NATIVE_IMAGE': 'true']
 }
 
-//bootRun {
-//    systemProperty 'springAot', 'true'
-//}
-//
-//springAot {
-//    mode = AotMode.NATIVE
-//    debugVerify = false
-//    removeXmlSupport = true
-//    removeSpelSupport = false
-//    removeYamlSupport = false
-//    removeJmxSupport = true
-//    verify = true
-//
-////    mainClass = "com.taotao.cloud.springnative.TaoTaoCloudSpringNativeApplication"
-//    applicationClass = "com.taotao.cloud.springnative.TaoTaoCloudSpringNativeApplication"
-//}
+bootRun {
+    systemProperty 'springAot', 'true'
+}
+
+springAot {
+    mode = AotMode.NATIVE
+    debugVerify = false
+    removeXmlSupport = true
+    removeSpelSupport = false
+    removeYamlSupport = false
+    removeJmxSupport = true
+    verify = true
+}
+
+docker {
+    springBootApplication {
+        baseImage = 'openjdk:8-alpine'
+        ports = [9090, 8080]
+        images = ['awesome-spring-boot:1.115', 'awesome-spring-boot:latest']
+        jvmArgs = ['-Dspring.profiles.active=production', '-Xmx2048m']
+    }
+}

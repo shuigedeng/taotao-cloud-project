@@ -1,40 +1,45 @@
-plugins{
+plugins {
+    id 'java'
     id 'org.jetbrains.intellij' version '1.6.0'
 }
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-    implementation  group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
-    implementation  group: 'com.google.zxing', name: 'core', version: '3.1.0'
-    implementation  group: 'com.google.zxing', name: 'javase', version: '3.1.0'
+    implementation group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
+    implementation group: 'com.google.zxing', name: 'core', version: '3.5.0'
+    implementation group: 'com.google.zxing', name: 'javase', version: '3.5.0'
 }
 
 // https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     // 插件名称
-    pluginName 'toolkit'
+    pluginName = 'toolkit'
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
-    //sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
+    sandboxDir = "${rootProject.rootDir}/idea-sandbox"
     // 开发环境运行时使用的版本
-    version '2021.3'
-    type 'IC'
+    version = '2021.3'
+    type = 'IC'
+
     // 各种版本去这里找
     // https://www.jetbrains.com/intellij-repository/releases
     //Disables updating since-build attribute in plugin.xml
-    //updateSinceUntilBuild false
-    //downloadSources = true
-
-    //intellij.updateSinceUntilBuild false
+    updateSinceUntilBuild = false
+    downloadSources = true
 }
 
 patchPluginXml {
-    changeNotes """
-      TaoTaoCloudIdeaPlugin-1.0.1"""
+    changeNotes = """
+                  TaoTaoCloudIdeaPlugin-1.0.1
+                  """
+    sinceBuild.set("213")
+    untilBuild.set("223.*")
 }
 
-publishPlugin {
-    token 'ssdfhasdfASDaq23jhnasdkjh'
-    channels 'nightly'
+signPlugin {
+    certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+    privateKey.set(System.getenv("PRIVATE_KEY"))
+    password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
 }
 
+publishPlugin { token.set(System.getenv("PUBLISH_TOKEN")) }

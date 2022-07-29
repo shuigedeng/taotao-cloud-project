@@ -1,74 +1,78 @@
-apply plugin: 'groovy'
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-
-repositories {
-    google()
+plugins {
+    id "groovy"
+    id "java"
+    id "maven-publish"
+    id "java-gradle-plugin"
 }
 
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    version = '1.0.1'
-//}
+shadowJar {
+    zip64 true
+    mergeServiceFiles()
+}
 
 dependencies {
-    //添加gradle版本
-    implementation 'com.android.tools.build:gradle:3.3.2'
-    implementation 'org.codehaus.groovy:groovy-all:2.5.8'
-//    implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21'
-
     //添加gradle对应api
     implementation gradleApi()
     implementation localGroovy()
 }
 
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'first-plugin'
+            implementationClass = 'com.huangyuanlove.plugin.FirstPlugin'
+        }
+    }
+}
+
+
+//publications {
+//    mavenJava(MavenPublication) {
+//        //artifact bootJar
+//        groupId project.group
+//        artifactId project.name
+//        version '1.0.2'
 //
-//publishing {
-//    repositories {
-//        maven {
-//            // 本地 repo 地址，这里写上你们电脑上自己的地址
-//            url = '/Users/shuigedeng/software/mvn_repo'
-//        }
-//    }
+//        //打包类型 war: components.web jar: components.java
+//        //from components.java
 //
-//    publications {
-//        mavenJava(MavenPublication) {
-//            //artifact bootJar
-//            groupId project.group
-//            artifactId project.name
-//            version '1.0.2'
-//
-//            //打包类型 war: components.web jar: components.java
-//            //from components.java
-//
-//            pom {
-//                name = 'TaoTaoCloudGradlePlugin'
-//                description = 'TaoTaoCloudGradlePlugin'
-//                url = 'https://taotaocloud.top'
-////                properties = [
-////                        myProp: "value",
-////                        "prop.with.dots": "anotherValue"
-////                ]
-//                licenses {
-//                    license {
-//                        name = 'The Apache License, Version 2.0'
-//                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
-//                developers {
-//                    developer {
-//                        id = 'taotao'
-//                        name = 'taotao'
-//                        email = '981376577@qq.com'
-//                    }
-//                }
-//                scm {
-//                    connection = 'scm:git:git://example.com/my-library.git'
-//                    developerConnection = 'scm:git:ssh://example.com/my-library.git'
-//                    url = 'http://example.com/my-library/'
+//        pom {
+//            name = 'TaoTaoCloudGradlePlugin'
+//            description = 'TaoTaoCloudGradlePlugin'
+//            url = 'https://taotaocloud.top'
+//            properties = [
+//                    myProp: "value",
+//                    "prop.with.dots": "anotherValue"
+//            ]
+//            licenses {
+//                license {
+//                    name = 'The Apache License, Version 2.0'
+//                    url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
 //                }
 //            }
+//            developers {
+//                developer {
+//                    id = 'taotao'
+//                    name = 'taotao'
+//                    email = '981376577@qq.com'
+//                }
+//            }
+//            scm {
+//                connection = 'scm:git:git://example.com/my-library.git'
+//                developerConnection = 'scm:git:ssh://example.com/my-library.git'
+//                url = 'http://example.com/my-library/'
+//            }
+//        }
+//    }
+//}
+
+//uploadArchives{ //当前项目可以发布到本地文件夹中
+//    repositories {
+//        mavenDeployer {
+//            repository(url: uri('/Users/huangyuan/maven_repo')) //定义本地maven仓库的地址
+//            pom.groupId = 'com.example.mygradleplugin'   //groupId
+//            pom.artifactId = 'myplugin'  //artifactId
+//            pom.version = '1.0.2' //版本号
 //        }
 //    }
 //}
