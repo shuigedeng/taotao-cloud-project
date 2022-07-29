@@ -47,12 +47,14 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration(after = HealthAutoConfiguration.class)
 public class PrometheusAutoConfiguration implements InitializingBean {
 
+	@Autowired(required = false)
+	private HealthCheckProvider healthCheckProvider;
+
 	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(PrometheusAutoConfiguration.class, StarterName.PROMETHEUS_STARTER);
-		HealthCheckProvider healthCheckProvider = ContextUtil.getBean(HealthCheckProvider.class, true);
 		if (Objects.nonNull(healthCheckProvider)) {
 			Monitor monitorThreadPool = healthCheckProvider.getMonitor();
 			ThreadPoolExecutor monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
