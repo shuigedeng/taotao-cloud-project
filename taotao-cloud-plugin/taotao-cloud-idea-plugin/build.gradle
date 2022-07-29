@@ -1,18 +1,10 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.2.1"
-    }
+plugins{
+    id 'org.jetbrains.intellij' version '1.6.0'
 }
 
-apply plugin: "org.jetbrains.intellij"
-
 dependencies {
-    implementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
     implementation  group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
     implementation  group: 'com.google.zxing', name: 'core', version: '3.1.0'
     implementation  group: 'com.google.zxing', name: 'javase', version: '3.1.0'
@@ -22,18 +14,18 @@ dependencies {
 intellij {
     // 插件名称
     pluginName 'toolkit'
-    // 沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
-    sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
+    //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
+    //sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
     // 开发环境运行时使用的版本
-    version '183.4588.48'
-    type 'IU'
+    version '2021.3'
+    type 'IC'
     // 各种版本去这里找
     // https://www.jetbrains.com/intellij-repository/releases
     //Disables updating since-build attribute in plugin.xml
-    updateSinceUntilBuild false
-    downloadSources = true
+    //updateSinceUntilBuild false
+    //downloadSources = true
 
-    intellij.updateSinceUntilBuild false
+    //intellij.updateSinceUntilBuild false
 }
 
 patchPluginXml {
