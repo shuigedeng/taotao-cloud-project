@@ -388,12 +388,13 @@ public class ReflectionUtil extends ReflectionUtils {
 		T defaultValue) {
 		try {
 			if (obj != null) {
-				Method find = findMethod(obj.getClass(), methodName);
-				if (find != null) {
-					if (!find.canAccess(null)) {
-						find.setAccessible(true);
+				Method method = findMethod(obj.getClass(), methodName);
+				if (method != null) {
+					// 对于静态成员和构造函数，则obj必须为null
+					if (!method.canAccess(obj)) {
+						method.setAccessible(true);
 					}
-					return (T) find.invoke(obj, param);
+					return (T) method.invoke(obj, param);
 				}
 			}
 			return defaultValue;
@@ -557,7 +558,7 @@ public class ReflectionUtil extends ReflectionUtils {
 		try {
 			Field find = findField(obj.getClass(), name);
 			if (find != null) {
-				if (!find.canAccess(null)) {
+				if (!find.canAccess(obj)) {
 					find.setAccessible(true);
 				}
 				return (T) find.get(obj);
@@ -584,7 +585,7 @@ public class ReflectionUtil extends ReflectionUtils {
 			if (obj != null) {
 				Field find = findField(obj.getClass(), name);
 				if (find != null) {
-					if (!find.canAccess(null)) {
+					if (!find.canAccess(obj)) {
 						find.setAccessible(true);
 					}
 					return (T) find.get(obj);
@@ -653,13 +654,11 @@ public class ReflectionUtil extends ReflectionUtils {
 	@SuppressWarnings("unchecked")
 	public static void setFieldValue(Field field, Object obj, Object value) {
 		try {
-			if (!field.canAccess(null)) {
+			if (!field.canAccess(obj)) {
 				field.setAccessible(true);
 			}
 			field.set(obj, value);
-		} catch (Exception exp) {
-			LogUtil.error(exp);
-			throw new BaseException(exp.getMessage());
+		} catch (Exception ignored) {
 		}
 	}
 

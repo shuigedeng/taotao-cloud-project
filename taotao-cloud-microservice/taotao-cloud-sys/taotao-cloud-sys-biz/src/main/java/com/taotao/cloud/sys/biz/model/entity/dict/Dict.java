@@ -16,9 +16,13 @@
 package com.taotao.cloud.sys.biz.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.constant.SystemConst;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -113,7 +117,5 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 	public int hashCode() {
 		return getClass().hashCode();
 	}
-
-	public void aa(){}
 }
 

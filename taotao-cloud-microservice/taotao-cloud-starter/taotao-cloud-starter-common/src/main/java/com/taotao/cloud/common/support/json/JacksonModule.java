@@ -29,8 +29,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.taotao.cloud.common.enums.BaseEnum;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import java.io.Serial;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -59,17 +57,15 @@ public class JacksonModule extends SimpleModule {
 		this.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
 		this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
 
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT);
-		this.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter));
+		this.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
 		this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_TIME_FORMAT)));
 
 		this.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)));
 		this.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)));
 
-		this.addSerializer(Long.class, ToStringSerializer.instance);
-		this.addSerializer(Long.TYPE, ToStringSerializer.instance);
-		this.addSerializer(BigInteger.class, ToStringSerializer.instance);
-		this.addSerializer(BigDecimal.class, ToStringSerializer.instance);
-		this.addSerializer(BaseEnum.class, EnumSerializer.INSTANCE);
+		this.addSerializer(BaseEnum.class, EnumJsonSerializer.INSTANCE);
+		//this.addSerializer(Long.TYPE, ToStringSerializer.instance);
+		//this.addSerializer(BigInteger.class, ToStringSerializer.instance);
+		//this.addSerializer(BigDecimal.class, ToStringSerializer.instance);
 	}
 }

@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils.common;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -26,7 +25,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -41,10 +39,9 @@ import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.support.function.CheckedConsumer;
 import com.taotao.cloud.common.support.json.JacksonModule;
+import com.taotao.cloud.common.support.json.MyBeanSerializerModifier;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-
 import com.taotao.cloud.common.utils.io.FileUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -87,7 +84,7 @@ public final class JsonUtil {
 		//去掉默认的时间戳格式
 		MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 		// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况
-		//忽略未知字段
+		//忽略未知字段 忽略json字符串中不识别的属性
 		MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		// 忽略空Bean转json的错误
 		//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
@@ -95,13 +92,13 @@ public final class JsonUtil {
 		// 允许不带引号的字段名称
 		MAPPER.configure(JsonReadFeature.ALLOW_UNQUOTED_FIELD_NAMES.mappedFeature(), true);
 		// 允许单引号
-		MAPPER.configure(JsonReadFeature.ALLOW_SINGLE_QUOTES.mappedFeature(), true);
+		MAPPER.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 		// allow int startWith 0
 		MAPPER.configure(JsonReadFeature.ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature(), true);
 		// 允许字符串存在转义字符：\r \n \t
 		//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
 		MAPPER.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
-		// 忽略不能转义的字符
+		// 忽略不能转义的字符 可解析反斜杠引用的所有字符
 		MAPPER.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
 			true);
 		// 包含null
@@ -112,11 +109,15 @@ public final class JsonUtil {
 		//MAPPER.enable(MapperFeature.USE_STD_BEAN_NAMING);
 		// 所有日期格式都统一为固定格式
 		MAPPER.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
-		MAPPER.registerModule(new Jdk8Module());
+
+		MAPPER.setSerializerFactory(
+			MAPPER.getSerializerFactory().withSerializerModifier(new MyBeanSerializerModifier()));
 
 		// 注册自定义模块
+		MAPPER.registerModule(new Jdk8Module());
 		MAPPER.registerModule(new JacksonModule());
 	}
+
 
 	/**
 	 * 对象转换为json字符串
@@ -292,6 +293,7 @@ public final class JsonUtil {
 			throw new BaseException(e.getMessage());
 		}
 	}
+
 	/**
 	 * 将对象序列化成json字符串
 	 *
@@ -304,7 +306,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().writeValueAsString(object);
+			return MAPPER.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -321,7 +323,7 @@ public final class JsonUtil {
 			return new byte[0];
 		}
 		try {
-			return getInstance().writeValueAsBytes(object);
+			return MAPPER.writeValueAsBytes(object);
 		} catch (JsonProcessingException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -336,7 +338,7 @@ public final class JsonUtil {
 	public static JsonNode readTree(String jsonString) {
 		Objects.requireNonNull(jsonString, "jsonString is null");
 		try {
-			return getInstance().readTree(jsonString);
+			return MAPPER.readTree(jsonString);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -351,7 +353,7 @@ public final class JsonUtil {
 	public static JsonNode readTree(InputStream in) {
 		Objects.requireNonNull(in, "InputStream in is null");
 		try {
-			return getInstance().readTree(in);
+			return MAPPER.readTree(in);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -366,7 +368,7 @@ public final class JsonUtil {
 	public static JsonNode readTree(byte[] content) {
 		Objects.requireNonNull(content, "byte[] content is null");
 		try {
-			return getInstance().readTree(content);
+			return MAPPER.readTree(content);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -381,7 +383,7 @@ public final class JsonUtil {
 	public static JsonNode readTree(JsonParser jsonParser) {
 		Objects.requireNonNull(jsonParser, "jsonParser is null");
 		try {
-			return getInstance().readTree(jsonParser);
+			return MAPPER.readTree(jsonParser);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -401,7 +403,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(content, valueType);
+			return MAPPER.readValue(content, valueType);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -421,7 +423,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(jsonString, valueType);
+			return MAPPER.readValue(jsonString, valueType);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -441,7 +443,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(in, valueType);
+			return MAPPER.readValue(in, valueType);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -461,7 +463,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(content, typeReference);
+			return MAPPER.readValue(content, typeReference);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -481,7 +483,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(jsonString, typeReference);
+			return MAPPER.readValue(jsonString, typeReference);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -501,7 +503,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(in, typeReference);
+			return MAPPER.readValue(in, typeReference);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -521,7 +523,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(content, javaType);
+			return MAPPER.readValue(content, javaType);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -541,7 +543,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(jsonString, javaType);
+			return MAPPER.readValue(jsonString, javaType);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -561,7 +563,7 @@ public final class JsonUtil {
 			return null;
 		}
 		try {
-			return getInstance().readValue(in, javaType);
+			return MAPPER.readValue(in, javaType);
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -585,7 +587,7 @@ public final class JsonUtil {
 	 * @return MapType
 	 */
 	public static MapType getMapType(Class<?> keyClass, Class<?> valueClass) {
-		return getInstance().getTypeFactory().constructMapType(Map.class, keyClass, valueClass);
+		return MAPPER.getTypeFactory().constructMapType(Map.class, keyClass, valueClass);
 	}
 
 	/**
@@ -595,7 +597,7 @@ public final class JsonUtil {
 	 * @return CollectionLikeType
 	 */
 	public static CollectionLikeType getListType(Class<?> elementClass) {
-		return getInstance().getTypeFactory().constructCollectionLikeType(List.class, elementClass);
+		return MAPPER.getTypeFactory().constructCollectionLikeType(List.class, elementClass);
 	}
 
 	/**
@@ -610,7 +612,7 @@ public final class JsonUtil {
 	 * @return JavaType
 	 */
 	public static JavaType getParametricType(Class<?> parametrized, Class<?>... parameterClasses) {
-		return getInstance().getTypeFactory().constructParametricType(parametrized, parameterClasses);
+		return MAPPER.getTypeFactory().constructParametricType(parametrized, parameterClasses);
 	}
 
 	/**
@@ -626,7 +628,7 @@ public final class JsonUtil {
 			return Collections.emptyList();
 		}
 		try {
-			return getInstance().readValue(content, getListType(elementClass));
+			return MAPPER.readValue(content, getListType(elementClass));
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -645,7 +647,7 @@ public final class JsonUtil {
 			return Collections.emptyList();
 		}
 		try {
-			return getInstance().readValue(content, getListType(elementClass));
+			return MAPPER.readValue(content, getListType(elementClass));
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -664,7 +666,7 @@ public final class JsonUtil {
 			return Collections.emptyList();
 		}
 		try {
-			return getInstance().readValue(content, getListType(elementClass));
+			return MAPPER.readValue(content, getListType(elementClass));
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -746,12 +748,13 @@ public final class JsonUtil {
 	 * @param <V>        泛型
 	 * @return 集合
 	 */
-	public static <K, V> Map<K, V> readMap(@Nullable byte[] content, Class<?> keyClass, Class<?> valueClass) {
+	public static <K, V> Map<K, V> readMap(@Nullable byte[] content, Class<?> keyClass,
+		Class<?> valueClass) {
 		if (ObjectUtil.isEmpty(content)) {
 			return Collections.emptyMap();
 		}
 		try {
-			return getInstance().readValue(content, getMapType(keyClass, valueClass));
+			return MAPPER.readValue(content, getMapType(keyClass, valueClass));
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -767,12 +770,13 @@ public final class JsonUtil {
 	 * @param <V>        泛型
 	 * @return 集合
 	 */
-	public static <K, V> Map<K, V> readMap(@Nullable InputStream content, Class<?> keyClass, Class<?> valueClass) {
+	public static <K, V> Map<K, V> readMap(@Nullable InputStream content, Class<?> keyClass,
+		Class<?> valueClass) {
 		if (ObjectUtil.isEmpty(content)) {
 			return Collections.emptyMap();
 		}
 		try {
-			return getInstance().readValue(content, getMapType(keyClass, valueClass));
+			return MAPPER.readValue(content, getMapType(keyClass, valueClass));
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -788,12 +792,13 @@ public final class JsonUtil {
 	 * @param <V>        泛型
 	 * @return 集合
 	 */
-	public static <K, V> Map<K, V> readMap(@Nullable String content, Class<?> keyClass, Class<?> valueClass) {
+	public static <K, V> Map<K, V> readMap(@Nullable String content, Class<?> keyClass,
+		Class<?> valueClass) {
 		if (ObjectUtil.isEmpty(content)) {
 			return Collections.emptyMap();
 		}
 		try {
-			return getInstance().readValue(content, getMapType(keyClass, valueClass));
+			return MAPPER.readValue(content, getMapType(keyClass, valueClass));
 		} catch (IOException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -808,7 +813,7 @@ public final class JsonUtil {
 	 * @return 转换结果
 	 */
 	public static <T> T convertValue(Object fromValue, Class<T> toValueType) {
-		return getInstance().convertValue(fromValue, toValueType);
+		return MAPPER.convertValue(fromValue, toValueType);
 	}
 
 	/**
@@ -820,7 +825,7 @@ public final class JsonUtil {
 	 * @return 转换结果
 	 */
 	public static <T> T convertValue(Object fromValue, JavaType toValueType) {
-		return getInstance().convertValue(fromValue, toValueType);
+		return MAPPER.convertValue(fromValue, toValueType);
 	}
 
 	/**
@@ -832,7 +837,7 @@ public final class JsonUtil {
 	 * @return 转换结果
 	 */
 	public static <T> T convertValue(Object fromValue, TypeReference<T> toValueTypeRef) {
-		return getInstance().convertValue(fromValue, toValueTypeRef);
+		return MAPPER.convertValue(fromValue, toValueTypeRef);
 	}
 
 	/**
@@ -845,7 +850,7 @@ public final class JsonUtil {
 	 */
 	public static <T> T treeToValue(TreeNode treeNode, Class<T> valueType) {
 		try {
-			return getInstance().treeToValue(treeNode, valueType);
+			return MAPPER.treeToValue(treeNode, valueType);
 		} catch (JsonProcessingException e) {
 			throw ExceptionUtil.unchecked(e);
 		}
@@ -859,7 +864,7 @@ public final class JsonUtil {
 	 * @return 转换结果
 	 */
 	public static <T extends JsonNode> T valueToTree(@Nullable Object fromValue) {
-		return getInstance().valueToTree(fromValue);
+		return MAPPER.valueToTree(fromValue);
 	}
 
 	/**
@@ -872,7 +877,7 @@ public final class JsonUtil {
 		if (value == null) {
 			return true;
 		}
-		return getInstance().canSerialize(value.getClass());
+		return MAPPER.canSerialize(value.getClass());
 	}
 
 	/**
@@ -882,7 +887,7 @@ public final class JsonUtil {
 	 * @return 是否可以反序列化
 	 */
 	public static boolean canDeserialize(JavaType type) {
-		return getInstance().canDeserialize(type);
+		return MAPPER.canDeserialize(type);
 	}
 
 	/**
@@ -932,7 +937,7 @@ public final class JsonUtil {
 	 * @return 是否成功
 	 */
 	public static boolean isValidJson(CheckedConsumer<ObjectMapper> consumer) {
-		ObjectMapper mapper = getInstance().copy();
+		ObjectMapper mapper = MAPPER.copy();
 		mapper.enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
 		mapper.enable(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY);
 		try {
@@ -949,7 +954,7 @@ public final class JsonUtil {
 	 * @return ObjectNode
 	 */
 	public static ObjectNode createObjectNode() {
-		return getInstance().createObjectNode();
+		return MAPPER.createObjectNode();
 	}
 
 	/**
@@ -958,80 +963,20 @@ public final class JsonUtil {
 	 * @return ArrayNode
 	 */
 	public static ArrayNode createArrayNode() {
-		return getInstance().createArrayNode();
+		return MAPPER.createArrayNode();
 	}
-
-	/**
-	 * 获取 ObjectMapper 实例
-	 *
-	 * @return ObjectMapper
-	 */
-	public static ObjectMapper getInstance() {
-		return JacksonHolder.INSTANCE;
-	}
-
-	private static class JacksonHolder {
-		private static final ObjectMapper INSTANCE = new JacksonObjectMapper();
-	}
-
-	private static class JacksonObjectMapper extends ObjectMapper {
-		private static final long serialVersionUID = 4288193147502386170L;
-
-		private static final Locale CHINA = Locale.CHINA;
-
-		JacksonObjectMapper() {
-			super(jsonFactory());
-			super.setLocale(CHINA);
-			super.setDateFormat(new SimpleDateFormat(DateUtil.PATTERN_DATETIME, CHINA));
-			// 单引号
-			super.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-			// 忽略json字符串中不识别的属性
-			super.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			// 忽略无法转换的对象
-			super.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-			super.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
-			super.findAndRegisterModules();
-		}
-
-		JacksonObjectMapper(ObjectMapper src) {
-			super(src);
-		}
-
-		private static JsonFactory jsonFactory() {
-			return JsonFactory.builder()
-				// 可解析反斜杠引用的所有字符
-				.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true)
-				// 允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）
-				.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS, true)
-				.build();
-		}
-
-		@Override
-		public ObjectMapper copy() {
-			return new JacksonObjectMapper(this);
-		}
-	}
-
-	//public static void main(String[] args) throws IOException {
-	//	String message = "{\"payload\":{\"cid\":\"1\",\"businessType\":\"0\",\"city\":\"北京市\",\"cityId\":\"265\",\"name\":\"fsfds\",\"carNum\":\"156156\"},\"headers\":{\"delivery_queue_name\":\"riven\",\"message_id\":\"de6b5e53-0442-40ba-b66f-ae0c13c09801\",\"expected_delay_millis\":8000,\"send_timestamp\":1645168609854}}";
-	//	JsonNode jsonNode = JsonUtil.parse(message);
-	//	String payload = jsonNode.get("payload").toString();
-	//
-	//	Map<String, Object> headers = JsonUtil.readMap(jsonNode.get("headers").toString());
-	//	System.out.println("sdfasdf");
-	//
-	//}
 
 	/**
 	 * 获取索引列表
 	 *
 	 * @param compressJsonPath 压缩的 json 路径
-	 * @param size 大下
+	 * @param size             大下
 	 * @return 结果列表
 	 */
 	public static List<String> getIndexList(final String compressJsonPath, final int size) {
-		final String json = com.taotao.cloud.common.utils.io.FileUtil.getFileContent(compressJsonPath);
-		if (com.taotao.cloud.common.utils.lang.StringUtil.isEmptyTrim(json) || size <= 0) {
+		final String json = com.taotao.cloud.common.utils.io.FileUtil.getFileContent(
+			compressJsonPath);
+		if (StringUtil.isEmptyTrim(json) || size <= 0) {
 			return Collections.emptyList();
 		}
 
@@ -1046,9 +991,10 @@ public final class JsonUtil {
 	 * @param indexPrefixList  索引前缀列表
 	 * @return 结果列表
 	 */
-	public static List<String> getIndexList(final String compressJsonPath, final List<?> indexPrefixList) {
+	public static List<String> getIndexList(final String compressJsonPath,
+		final List<?> indexPrefixList) {
 		final String json = FileUtil.getFileContent(compressJsonPath);
-		if (com.taotao.cloud.common.utils.lang.StringUtil.isEmptyTrim(json) || CollectionUtil.isEmpty(indexPrefixList)) {
+		if (StringUtil.isEmptyTrim(json) || CollectionUtil.isEmpty(indexPrefixList)) {
 			return Collections.emptyList();
 		}
 
@@ -1086,18 +1032,19 @@ public final class JsonUtil {
 
 	/**
 	 * 获取前缀
+	 *
 	 * @param object 对象
 	 * @return 结果
 	 */
 	private static String getPrefix(Object object) {
-		if(com.taotao.cloud.common.utils.lang.ObjectUtil.isNull(object)) {
-			return com.taotao.cloud.common.utils.lang.StringUtil.EMPTY;
+		if (ObjectUtil.isNull(object)) {
+			return StringUtil.EMPTY;
 		}
 		String string = object.toString();
-		if(com.taotao.cloud.common.utils.lang.StringUtil.isEmptyTrim(string)) {
-			return com.taotao.cloud.common.utils.lang.StringUtil.EMPTY;
+		if (StringUtil.isEmptyTrim(string)) {
+			return StringUtil.EMPTY;
 		}
 
-		return string+ com.taotao.cloud.common.utils.lang.StringUtil.BLANK;
+		return string + StringUtil.BLANK;
 	}
 }

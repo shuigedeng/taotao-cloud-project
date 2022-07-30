@@ -117,11 +117,11 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 		this.updateBy = updateBy;
 	}
 
-	public int getVersion() {
+	public Integer getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(Integer version) {
 		this.version = version;
 	}
 
