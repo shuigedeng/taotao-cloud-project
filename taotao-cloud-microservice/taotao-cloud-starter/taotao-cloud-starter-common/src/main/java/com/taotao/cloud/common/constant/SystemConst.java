@@ -15,6 +15,11 @@
  */
 package com.taotao.cloud.common.constant;
 
+import cn.hutool.core.lang.Dict;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 系统常量
  * <p>
@@ -171,5 +176,53 @@ public final class SystemConst {
 	 * 户的当前工作目录
 	 */
 	public static final String USER_DIR = "user.dir";
+
+	public static void main(String[] args) {
+		Dict dict = new Dict();
+
+		dict.setVersion(null);
+		String s = JsonUtil.toJSONString(dict);
+		System.out.println(s);
+	}
+
+
+	public static class Dict{
+		private Integer version;
+		private Boolean boo;
+		private List<Integer> it;
+		private Map<String, Integer> st;
+
+		public Integer getVersion() {
+			return version;
+		}
+
+		public void setVersion(Integer version) {
+			this.version = version;
+		}
+
+		public Boolean getBoo() {
+			return boo;
+		}
+
+		public void setBoo(Boolean boo) {
+			this.boo = boo;
+		}
+
+		public List<Integer> getIt() {
+			return it;
+		}
+
+		public void setIt(List<Integer> it) {
+			this.it = it;
+		}
+
+		public Map<String, Integer> getSt() {
+			return st;
+		}
+
+		public void setSt(Map<String, Integer> st) {
+			this.st = st;
+		}
+	}
 
 }

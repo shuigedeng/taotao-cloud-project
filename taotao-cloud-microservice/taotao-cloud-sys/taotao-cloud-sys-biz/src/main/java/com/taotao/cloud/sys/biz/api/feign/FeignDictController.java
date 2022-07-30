@@ -97,21 +97,22 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@NotAuth
 	@TLogAspect(value = {"code"}, pattern = "{{}}", joint = "," , str = "nihao")
 	@GetMapping("/test")
-	public DeferredResult<Dict> test(@RequestParam(value = "code") String code)
-		throws ExecutionException, InterruptedException {
+	public Dict test(@RequestParam(value = "code") String code) {
 		LogUtil.info("sldfkslfdjalsdfkjalsfdjl");
 		Dict dict = service().findByCode(code);
 
-		LogUtil.info(dict.toString());
-
 		Future<Dict> asyncByCode = service().findAsyncByCode(code);
-		Dict dict1 = asyncByCode.get();
+
+		Dict dict1;
+		try {
+			dict1 = asyncByCode.get();
+		} catch (InterruptedException | ExecutionException e) {
+			throw new RuntimeException(e);
+		}
 
 		LogUtil.info("我在等待你");
 
-		DeferredResult<Dict> objectDeferredResult = new DeferredResult<>();
-		objectDeferredResult.setResult(dict1);
-		return objectDeferredResult;
+		return dict1;
 		//return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 }

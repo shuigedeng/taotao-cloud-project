@@ -118,12 +118,10 @@ public class LocalDateTimeDeserializer extends JSR310DateTimeDeserializerBase<Lo
 	 */
 	private LocalDateTime convert(String source) {
 		if (source.matches(DEFAULT_DATE_FORMAT_MATCHES)) {
-			return LocalDateTime
-				.of(LocalDate.parse(source, DEFAULT_DATE_FORMAT_DTF), LocalTime.MIN);
+			return LocalDateTime.of(LocalDate.parse(source, DEFAULT_DATE_FORMAT_DTF), LocalTime.MIN);
 		}
 		if (source.matches(DEFAULT_DATE_FORMAT_EN_MATCHES)) {
-			return LocalDateTime
-				.of(LocalDate.parse(source, DEFAULT_DATE_FORMAT_EN_DTF), LocalTime.MIN);
+			return LocalDateTime.of(LocalDate.parse(source, DEFAULT_DATE_FORMAT_EN_DTF), LocalTime.MIN);
 		}
 		if (source.matches(SLASH_DATE_FORMAT_MATCHES)) {
 			return LocalDateTime.of(LocalDate.parse(source, SLASH_DATE_FORMAT_DTF), LocalTime.MIN);

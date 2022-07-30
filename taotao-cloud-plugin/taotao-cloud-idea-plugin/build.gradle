@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.1'
 
-    implementation group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
+    implementation group: 'cn.hutool', name: 'hutool-http', version: '5.8.4'
     implementation group: 'com.google.zxing', name: 'core', version: '3.5.0'
     implementation group: 'com.google.zxing', name: 'javase', version: '3.5.0'
 }

@@ -34,6 +34,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.json.JacksonModule;
 import com.taotao.cloud.common.support.json.LocalDateTimeDeserializer;
+import com.taotao.cloud.common.support.json.MyBeanSerializerModifier;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.properties.XssProperties;
@@ -108,9 +109,11 @@ public class JacksonAutoConfiguration implements InitializingBean {
 			// 所有日期格式都统一为固定格式
 			mapper.setDateFormat(
 				new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
-			mapper.registerModule(new Jdk8Module());
+			mapper.setSerializerFactory(
+				mapper.getSerializerFactory().withSerializerModifier(new MyBeanSerializerModifier()));
 
 			// 注册自定义模块
+			mapper.registerModule(new Jdk8Module());
 			mapper.registerModule(new JacksonModule());
 
 			customizer.configure(mapper);

@@ -1,3 +1,4 @@
+com.taotao.cloud.core.configuration.AsyncThreadPoolAutoConfiguration
 com.taotao.cloud.core.configuration.AsyncAutoConfiguration
 com.taotao.cloud.core.configuration.CoreAutoConfiguration
 com.taotao.cloud.core.configuration.EndPointAutoConfiguration

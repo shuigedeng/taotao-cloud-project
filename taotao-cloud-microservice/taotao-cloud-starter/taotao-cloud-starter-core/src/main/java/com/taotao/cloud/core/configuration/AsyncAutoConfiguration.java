@@ -52,7 +52,7 @@ import org.springframework.web.context.request.RequestContextHolder;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@AutoConfiguration
+@AutoConfiguration(after = AsyncThreadPoolAutoConfiguration.class)
 @EnableAsync(proxyTargetClass = true)
 @EnableConfigurationProperties({AsyncProperties.class})
 @ConditionalOnProperty(prefix = AsyncProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -60,6 +60,8 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 
 	@Autowired
 	private AsyncProperties asyncProperties;
+	@Autowired
+	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -77,40 +79,8 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	}
 
 	@Override
-	@Bean(name = "asyncThreadPoolTaskExecutor")
 	public AsyncThreadPoolTaskExecutor getAsyncExecutor() {
-		AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
-
-		// 线程池名的前缀
-		executor.setThreadNamePrefix(asyncProperties.getThreadNamePrefix());
-		// 核心线程数
-		executor.setCorePoolSize(asyncProperties.getCorePoolSize());
-		// 最大线程数
-		executor.setMaxPoolSize(asyncProperties.getMaxPoolSiz());
-		// 允许线程的空闲时间
-		executor.setKeepAliveSeconds(asyncProperties.getKeepAliveSeconds());
-		// 任务队列容量（阻塞队列）
-		executor.setQueueCapacity(asyncProperties.getQueueCapacity());
-		// 是否允许核心线程超时
-		executor.setAllowCoreThreadTimeOut(asyncProperties.isAllowCoreThreadTimeOut());
-		// 应用关闭时-是否等待未完成任务继续执行，再继续销毁其他的Bean
-		executor.setWaitForTasksToCompleteOnShutdown(asyncProperties.isWaitForTasksToCompleteOnShutdown());
-		// 应用关闭时-继续等待时间（单位：秒）
-		executor.setAwaitTerminationSeconds(asyncProperties.getAwaitTerminationSeconds());
-		// ThreadFactory
-		executor.setThreadFactory(new AsyncThreadPoolFactory(asyncProperties, executor));
-		// 异步线程上下文装饰器
-		executor.setTaskDecorator(new ContextDecorator(asyncProperties));
-		/*
-		 线程池拒绝策略
-		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
-		 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
-		 */
-		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-
-		executor.initialize();
-
-		return executor;
+		return asyncThreadPoolTaskExecutor;
 	}
 
 	/**
@@ -202,6 +172,13 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		}
 	}
 
+	/**
+	 * 异步线程池任务执行人
+	 *
+	 * @author shuigedeng
+	 * @version 2022.06
+	 * @since 2022-07-29 21:59:40
+	 */
 	public static class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
 		@Override
