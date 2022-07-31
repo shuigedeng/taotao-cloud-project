@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.core.runner;
 
-import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
-
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
@@ -56,7 +55,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 		registerContextRefreshEvent();
 
 		String strArgs = String.join("|", args);
-		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName)
+		LogUtil.info(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 			+ " -- started with arguments length: {}, args: {}", args.length, strArgs);
 	}
 
@@ -74,7 +73,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 						return;
 					}
 
-					if (e.getKey().equalsIgnoreCase(CoreProperties.ContextRestartText)) {
+					if (e.getKey().equalsIgnoreCase(CommonConstant.CONTEXT_RESTART_TEXT)) {
 						refreshContext();
 						return;
 					}
@@ -91,7 +90,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 	private void refreshContext() {
 		if (ContextUtil.getApplicationContext() != null) {
 			if (ContextUtil.mainClass == null) {
-				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName)
+				LogUtil.error(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 					+ " 检测到重启上下文事件,因无法找到启动类，重启失败!!!");
 				return;
 			}
@@ -110,7 +109,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
 						.invoke(null, new Object[]{args.getSourceArgs()});
 				} catch (Exception exp) {
-					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "根据启动类"
+					LogUtil.error(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY) + "根据启动类"
 						+ ContextUtil.mainClass.getName() + "动态启动main失败");
 				}
 			});

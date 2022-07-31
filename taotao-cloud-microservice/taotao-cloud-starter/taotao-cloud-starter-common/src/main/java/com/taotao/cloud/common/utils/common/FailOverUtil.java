@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils.common;
 
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.concurrent.Callable;
@@ -69,7 +70,7 @@ public final class FailOverUtil {
 			}
 			if (result.success && times > 0) {
 				LogUtil.info(
-					PropertyUtil.getProperty("spring.application.name") + " {} 补偿成功, 补偿次数：{}",
+					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY) + " {} 补偿成功, 补偿次数：{}",
 					NAME,
 					times);
 			}

@@ -13,26 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.runner;
-
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+package com.taotao.cloud.logger.logging.appender;
 
 /**
- * CoreApplicationRunner
+ * Appender 枚举
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:45:34
+ * @version 2022.06
+ * @since 2022-07-31 15:42:56
  */
-public class CoreApplicationRunner implements ApplicationRunner {
+public enum Appender {
 
-	@Override
-	public void run(ApplicationArguments var1) throws Exception {
-		LogUtil.info("------- 应用[{}]已正常启动 -------",
-			PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
-	}
+	/**
+	 * 控制台
+	 */
+	CONSOLE,
+	/**
+	 * 文件
+	 */
+	FILE,
+	/**
+	 * json 文件
+	 */
+	FILE_JSON,
+	/**
+	 * logstash
+	 */
+	LOG_STASH,
+	/**
+	 * loki
+	 */
+	LOKI;
+
 }

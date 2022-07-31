@@ -696,6 +696,7 @@ spring:
       compression-type: gzip
       properties:
         linger.ms: 100
+        partitioner.class: org.apache.kafka.clients.producer.RoundRobinPartitioner
     consumer:
       auto-commit-interval: 1S
       auto-offset-reset: earliest

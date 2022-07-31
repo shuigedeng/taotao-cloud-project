@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.job.xxl.configuration;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -64,7 +65,7 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 		// 应用名默认为服务名
 		String appName = executor.getAppname();
 		if (!StringUtils.hasText(appName)) {
-			appName = PropertyUtil.getProperty("spring.application.name");
+			appName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 		}
 
 		xxlJobSpringExecutor.setAppname(appName);

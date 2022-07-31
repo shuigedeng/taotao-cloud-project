@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.core.launch;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.context.WebServerApplicationContext;
@@ -43,7 +44,7 @@ public class StartedEventListener {
 	public void afterStart(WebServerInitializedEvent event) {
 		WebServerApplicationContext context = event.getApplicationContext();
 		Environment environment = context.getEnvironment();
-		String appName = environment.getRequiredProperty("spring.application.name");
+		String appName = environment.getRequiredProperty(CommonConstant.SPRING_APP_NAME_KEY);
 		int localPort = event.getWebServer().getPort();
 		String profile = StringUtils.arrayToCommaDelimitedString(environment.getActiveProfiles());
 

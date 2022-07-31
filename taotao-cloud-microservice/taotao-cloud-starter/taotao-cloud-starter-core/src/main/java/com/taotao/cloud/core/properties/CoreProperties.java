@@ -32,12 +32,6 @@ public class CoreProperties {
 
 	public static final String PREFIX = "taotao.cloud.core";
 
-	public static String SpringApplicationName = "spring.application.name";
-	public static String SpringProfilesActive = "spring.profiles.active";
-
-	public static String LoggingFileTotalSize = "logging.file.total-size";
-	public static String ContextRestartText = "taotao.cloud.core.context.restart.text";
-
 	/**
 	 * 核心环境变量
 	 */

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.health.warn;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -252,8 +253,8 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 				message.setTitle(String.format("[%s][%s][%s][%s]%s",
 					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 					RequestUtil.getIpAddress(),
-					PropertyUtil.getProperty(CoreProperties.SpringApplicationName),
-					PropertyUtil.getProperty(CoreProperties.SpringProfilesActive),
+					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
 					StringUtil.nullToEmpty(message.getTitle())));
 				warn.notify(message);
 			}

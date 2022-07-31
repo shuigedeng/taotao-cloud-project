@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.openapi.properties;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import io.swagger.v3.oas.models.headers.Header;
 import io.swagger.v3.oas.models.info.Contact;
@@ -48,7 +49,7 @@ public class OpenApiProperties {
 	/**
 	 * group default applicationName
 	 */
-	private String group = PropertyUtil.getProperty("spring.application.name");
+	private String group = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
 	/**
 	 * pathsToMatch default /**
@@ -90,7 +91,7 @@ public class OpenApiProperties {
 	 * title
 	 */
 	private String title =
-		PropertyUtil.getProperty("spring.application.name").toUpperCase() + " API";
+		PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY).toUpperCase() + " API";
 	/**
 	 * description
 	 */

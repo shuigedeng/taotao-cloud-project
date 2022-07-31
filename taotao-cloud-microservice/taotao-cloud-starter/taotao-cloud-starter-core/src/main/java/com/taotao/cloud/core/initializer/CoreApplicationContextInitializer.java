@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.core.initializer;
 
-import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
-
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -25,7 +23,7 @@ import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
-import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
@@ -33,7 +31,6 @@ import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.enums.EnvironmentEnum;
 import com.taotao.cloud.core.properties.CoreProperties;
-import java.io.File;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContextInitializer;
@@ -67,9 +64,10 @@ public class CoreApplicationContextInitializer implements
 			ContextUtil.setApplicationContext(context);
 			ConfigurableEnvironment environment = context.getEnvironment();
 
-			String applicationName = environment.getProperty(CoreProperties.SpringApplicationName);
+			String applicationName = environment.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
-			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled", Boolean.class);
+			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled",
+				Boolean.class);
 			if (Boolean.FALSE.equals(isEnabled)) {
 				return;
 			}
@@ -80,7 +78,8 @@ public class CoreApplicationContextInitializer implements
 			if (!StringUtil.isEmpty(applicationName) && !StringUtil.isEmpty(env)) {
 				optimize(environment);
 
-				setProperty(CoreProperties.SpringApplicationName, applicationName, "[taotao cloud 环境变量]");
+				setProperty(CommonConstant.SPRING_APP_NAME_KEY, applicationName,
+					"[taotao cloud 环境变量]");
 
 				for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
 					if (e2.toString().equalsIgnoreCase(env)) {
@@ -136,11 +135,11 @@ public class CoreApplicationContextInitializer implements
 				if (file instanceof RollingFileAppender) {
 					RollingPolicy rollingPolicy = ((RollingFileAppender) file).getRollingPolicy();
 					if (rollingPolicy instanceof SizeAndTimeBasedRollingPolicy) {
-						setProperty(CoreProperties.LoggingFileTotalSize, "1GB",
+						setProperty(CommonConstant.LOGGING_FILE_TOTAL_SIZE, "1GB",
 							message);
 
 						((SizeAndTimeBasedRollingPolicy) rollingPolicy).setTotalSizeCap(FileSize
-							.valueOf(environment.getProperty(CoreProperties.LoggingFileTotalSize,
+							.valueOf(environment.getProperty(CommonConstant.LOGGING_FILE_TOTAL_SIZE,
 								"1GB")));
 					}
 				}
@@ -184,7 +183,7 @@ public class CoreApplicationContextInitializer implements
 	 */
 	private void setDefaultProperty(String key, String defaultPropertyValue, String message) {
 		PropertyUtil.setDefaultInitProperty(CoreApplicationContextInitializer.class,
-			PropertyUtil.getProperty(SpringApplicationName),
+			PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
 			key, defaultPropertyValue, message);
 	}
 

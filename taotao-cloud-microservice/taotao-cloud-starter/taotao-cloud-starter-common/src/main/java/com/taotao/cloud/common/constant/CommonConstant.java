@@ -29,6 +29,12 @@ public final class CommonConstant {
 	private CommonConstant() {
 	}
 
+	public static String SPRING_APP_NAME_KEY = "spring.application.name";
+	public static String ACTIVE_PROFILES_PROPERTY = "spring.profiles.active";
+	public static String LOGGING_FILE_TOTAL_SIZE = "logging.file.total-size";
+	public static String CONTEXT_RESTART_TEXT = "taotao.cloud.core.context.restart.text";
+
+
 	/**
 	 * utf-8
 	 */
@@ -111,7 +117,7 @@ public final class CommonConstant {
 
 	public static final String SPRING_BOOT_VERSION = "springBootVersion";
 	public static final String TAOTAO_CLOUD_SPRING_BOOT_VERSION =
-		 SPRING.toUpperCase() + UNDER
+		SPRING.toUpperCase() + UNDER
 			+ BOOT.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
 
 	public static final String SPRING_CLOUD_VERSION = "springCloudVersion";
@@ -122,7 +128,8 @@ public final class CommonConstant {
 	public static final String SPRING_CLOUD_DEPENDENCIES_VERSION = "springCloudDependenciesVersion";
 	public static final String TAOTAO_CLOUD_SPRING_CLOUD_DEPENDENCIES_VERSION =
 		SPRING.toUpperCase() + UNDER
-			+ CLOUD.toUpperCase() + UNDER + DEPENDENCIES.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
+			+ CLOUD.toUpperCase() + UNDER + DEPENDENCIES.toUpperCase() + UNDER
+			+ VERSION.toUpperCase() + COLON;
 
 	public static final String SPRING_CLOUD_ALIBABA_VERSION = "springCloudAlibabaVersion";
 	public static final String TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION =

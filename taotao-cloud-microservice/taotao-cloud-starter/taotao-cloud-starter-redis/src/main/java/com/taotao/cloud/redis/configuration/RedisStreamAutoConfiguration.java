@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.redis.configuration;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.CharPool;
 import com.taotao.cloud.common.utils.lang.StringUtil;
@@ -109,8 +110,8 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 		// 消费组名称
 		String consumerGroup = streamProperties.getConsumerGroup();
 		if (StringUtil.isBlank(consumerGroup)) {
-			String appName = environment.getRequiredProperty("spring.application.name");
-			String profile = environment.getProperty("spring.profiles.active");
+			String appName = environment.getRequiredProperty(CommonConstant.SPRING_APP_NAME_KEY);
+			String profile = environment.getProperty(CommonConstant.ACTIVE_PROFILES_PROPERTY);
 			consumerGroup =
 				StringUtil.isBlank(profile) ? appName : appName + CharPool.COLON + profile;
 		}

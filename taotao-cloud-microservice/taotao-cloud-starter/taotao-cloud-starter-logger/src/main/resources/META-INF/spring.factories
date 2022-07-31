@@ -1,2 +1,6 @@
 org.springframework.context.ApplicationContextInitializer=\
 com.taotao.cloud.logger.initializer.TtlMDCAdapterInitializer
+
+
+#org.springframework.boot.env.EnvironmentPostProcessor = \
+#com.taotao.cloud.logger.logging.config.LoggingInitializer

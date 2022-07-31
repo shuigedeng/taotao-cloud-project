@@ -16,6 +16,7 @@
 package com.taotao.cloud.core.model;
 
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -81,11 +82,11 @@ public class ProcessExitEvent {
 					}
 				}
 				LogUtil.info(
-						PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
+						PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 								+ " 应用已正常退出！");
 			} catch (Exception e) {
 				LogUtil.error(
-						PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
+						PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 								+ " 进程关闭事件回调处理出错", e);
 			}
 		}));

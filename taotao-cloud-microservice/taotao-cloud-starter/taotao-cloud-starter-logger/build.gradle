@@ -5,15 +5,20 @@ dependencies {
 
     api "org.springframework.boot:spring-boot-starter"
     api "org.springframework.boot:spring-boot-starter-aop"
-
-    api "com.github.danielwegener:logback-kafka-appender"
-    api "net.logstash.logback:logstash-logback-encoder"
-
-    api 'org.apache.skywalking:apm-toolkit-logback-1.x'
-    api 'org.apache.skywalking:apm-toolkit-trace'
-
     compileOnly 'com.baomidou:mybatis-plus-extension'
     compileOnly 'org.springframework.kafka:spring-kafka'
+
+    //api "com.github.danielwegener:logback-kafka-appender"
+    //https://search.maven.org/artifact/com.github.rahulsinghai/logback-kafka-appender
+    api 'com.github.rahulsinghai:logback-kafka-appender:0.2.2'
+    //https://search.maven.org/artifact/com.github.loki4j/loki-logback-appender
+    api 'com.github.loki4j:loki-logback-appender:1.4.0-m1'
+    //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
+    api "net.logstash.logback:logstash-logback-encoder:7.2"
+    //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-logback-1.x
+    api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.11.0'
+    //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
+    api 'org.apache.skywalking:apm-toolkit-trace:8.11.0'
 
     //https://github.com/akkinoc/logback-access-spring-boot-starter
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
