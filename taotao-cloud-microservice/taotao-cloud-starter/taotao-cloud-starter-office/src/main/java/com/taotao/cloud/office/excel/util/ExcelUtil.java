@@ -23,7 +23,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @describe：excel文档的导入导出，使用的网络上的demo，封装不是很合理。需要该造。用到实体是：BaseExcelByteOutVo，ETemplateVo。 由于网上demo的可用性较高，该造暂未实现。word导入导出的该造主要是byte[]的该造。由于excel的导入导出没有保存到mongo库，所以暂未该造
+ * excel跑龙套
+ *
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-07-31 20:58:06
  */
 public class ExcelUtil {
     private static final Logger logger = LoggerFactory.getLogger(ExcelUtil.class);

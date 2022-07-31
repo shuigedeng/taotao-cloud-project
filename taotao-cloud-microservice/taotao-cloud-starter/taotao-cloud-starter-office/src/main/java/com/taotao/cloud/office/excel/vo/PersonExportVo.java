@@ -3,10 +3,7 @@ package com.taotao.cloud.office.excel.vo;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import java.io.Serializable;
-//@Data
-//@EqualsAndHashCode(callSuper = false)
-//@AllArgsConstructor
-//@NoArgsConstructor
+
 public class PersonExportVo implements Serializable {
 
     private static final long serialVersionUID = 279232352518402126L;
@@ -30,4 +27,36 @@ public class PersonExportVo implements Serializable {
      */
     @Excel(name = "人脸图片", orderNum = "3", width = 15, type = 2)
     private String imageUrl;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }
