@@ -16,7 +16,9 @@
 package com.taotao.cloud.logger.service.impl;
 
 import com.google.common.base.Stopwatch;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
@@ -50,9 +52,6 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	private static final int THRESHOLD = 1000;
 
-	@Value("${spring.application.name}")
-	private String appName;
-
 	private final KafkaTemplate<String, String> kafkaTemplate;
 
 	public KafkaRequestLoggerServiceImpl(KafkaTemplate<String, String> kafkaTemplate) {
@@ -65,7 +64,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 			String request = JsonUtil.toJSONString(requestLogger);
 
 			ListenableFuture<SendResult<String, String>> future = kafkaTemplate
-				.send(REQUEST_LOG_TOPIC + appName, request);
+				.send(REQUEST_LOG_TOPIC + PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY), request);
 
 			future.addCallback(new ListenableFutureCallback<>() {
 				@Override

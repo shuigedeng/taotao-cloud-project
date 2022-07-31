@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.redis.ratelimiter;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.CharPool;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -85,7 +86,7 @@ public class RedisRateLimiterClient implements RateLimiterClient {
 	}
 
 	private static String getApplicationName(Environment environment) {
-		return environment.getProperty("spring.application.name", "");
+		return environment.getProperty(CommonConstant.SPRING_APP_NAME_KEY, "");
 	}
 
 }

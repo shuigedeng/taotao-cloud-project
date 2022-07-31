@@ -7,6 +7,7 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.api.naming.pojo.ListView;
 import com.alibaba.nacos.api.naming.pojo.ServiceInfo;
 import com.alibaba.nacos.client.naming.NacosNamingService;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
@@ -80,8 +81,8 @@ public class NacosCollectTask extends AbstractCollectTask {
 				//info.serviceInfoMap = hostReactor.getServiceInfoMap();
 
 				info.instances = nacosNamingService.getAllInstances(
-					PropertyUtil.getProperty(CoreProperties.SpringApplicationName),
-					CoreProperties.SpringApplicationName);
+					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+					CommonConstant.SPRING_APP_NAME_KEY);
 				info.servicesOfServer = nacosNamingService.getServicesOfServer(0,
 					Integer.MAX_VALUE);
 				info.subscribeServices = nacosNamingService.getSubscribeServices();

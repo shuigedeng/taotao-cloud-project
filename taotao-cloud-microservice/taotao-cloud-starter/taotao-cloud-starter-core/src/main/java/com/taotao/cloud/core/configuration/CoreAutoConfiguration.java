@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.core.configuration;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.common.model.Pubsub;
@@ -37,7 +38,6 @@ import org.springframework.context.annotation.Bean;
 import java.util.function.Function;
 import org.springframework.context.annotation.Configuration;
 
-import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 /**
  * CoreConfiguration
@@ -60,7 +60,7 @@ public class CoreAutoConfiguration implements InitializingBean {
 	public MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
 		return meterRegistry -> meterRegistry
 			.config()
-			.commonTags("application", PropertyUtil.getProperty(SpringApplicationName));
+			.commonTags("application", PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
 	}
 
 	@Bean

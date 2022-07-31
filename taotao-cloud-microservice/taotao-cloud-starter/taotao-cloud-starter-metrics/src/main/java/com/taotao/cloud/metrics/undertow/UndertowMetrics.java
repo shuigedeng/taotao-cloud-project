@@ -127,6 +127,7 @@ public class UndertowMetrics implements ApplicationListener<ApplicationStartedEv
 		if (undertowWebServer == null) {
 			return;
 		}
+
 		Undertow undertow = getUndertow(undertowWebServer);
 		XnioWorkerMXBean xWorker = undertow.getWorker().getMXBean();
 		MeterRegistry registry = applicationContext.getBean(MeterRegistry.class);
@@ -134,8 +135,7 @@ public class UndertowMetrics implements ApplicationListener<ApplicationStartedEv
 		registerXWorker(registry, xWorker);
 		// 连接信息指标
 		List<Undertow.ListenerInfo> listenerInfoList = undertow.getListenerInfo();
-		listenerInfoList.forEach(
-			listenerInfo -> registerConnectorStatistics(registry, listenerInfo));
+		listenerInfoList.forEach(listenerInfo -> registerConnectorStatistics(registry, listenerInfo));
 		// 如果是 web 监控，添加 session 指标
 		if (undertowWebServer instanceof UndertowServletWebServer) {
 			SessionManagerStatistics statistics = ((UndertowServletWebServer) undertowWebServer).getDeploymentManager()
@@ -300,8 +300,7 @@ public class UndertowMetrics implements ApplicationListener<ApplicationStartedEv
 		return (Undertow) ReflectionUtils.getField(UNDERTOW_FIELD, undertowWebServer);
 	}
 
-	private static UndertowWebServer findUndertowWebServer(
-		ConfigurableApplicationContext applicationContext) {
+	private static UndertowWebServer findUndertowWebServer(ConfigurableApplicationContext applicationContext) {
 		WebServer webServer;
 
 		if (applicationContext instanceof ReactiveWebServerApplicationContext) {

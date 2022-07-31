@@ -3,6 +3,7 @@ package com.taotao.cloud.web.listener;
 import static com.taotao.cloud.common.constant.CommonConstant.RESOURCE_EXPIRE;
 
 import com.google.common.collect.Maps;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -60,7 +61,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 			Environment env = applicationContext.getEnvironment();
 
 			// 获取微服务模块名称
-			String microService = env.getProperty("spring.application.name", "application");
+			String microService = env.getProperty(CommonConstant.SPRING_APP_NAME_KEY, "application");
 			if (redisService == null || applicationContext.containsBean("resourceServerConfiguration")) {
 				LogUtil.warn("[{}]忽略接口资源扫描", microService);
 				return;

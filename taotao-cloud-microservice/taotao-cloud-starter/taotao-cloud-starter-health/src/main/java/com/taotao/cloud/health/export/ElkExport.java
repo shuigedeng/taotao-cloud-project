@@ -19,6 +19,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.Context;
 import cn.hutool.core.date.DateUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.health.model.Report;
@@ -59,8 +60,7 @@ public class ElkExport extends AbstractExport {
 
 			LogstashEncoder encoder = new LogstashEncoder();
 			String appName =
-				"Report-" + PropertyUtil.getPropertyCache(CoreProperties.SpringApplicationName,
-					"");
+				"Report-" + PropertyUtil.getPropertyCache(CommonConstant.SPRING_APP_NAME_KEY, "");
 			encoder.setCustomFields("{\"appname\":\"" + appName + "\",\"appindex\":\"Report\"}");
 			encoder.setEncoding("UTF-8");
 			appender.setEncoder(encoder);

@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils.common;
 
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.utils.log.LogUtil;
 
@@ -59,7 +60,7 @@ public final class TimeWatchUtil {
 			long b = System.currentTimeMillis();
 			T t = action0.invoke();
 			long e = System.currentTimeMillis();
-			LogUtil.info(PropertyUtil.getProperty("spring.application.name") + "--" + msg
+			LogUtil.info(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY) + "--" + msg
 					+ " 耗时: {}, ",
 				(e - b) + "毫秒");
 			return t;

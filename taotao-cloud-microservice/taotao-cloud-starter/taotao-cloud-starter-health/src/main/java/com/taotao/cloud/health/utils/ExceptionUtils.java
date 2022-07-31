@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.health.utils;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.core.enums.ExceptionTypeEnum;
@@ -74,15 +75,15 @@ public class ExceptionUtils {
 
 					param.put("exceptionContent", String.format("[%s][%s][%s]%s",
 						RequestUtil.getIpAddress(),
-						PropertyUtil.getProperty(CoreProperties.SpringApplicationName),
-						PropertyUtil.getProperty(CoreProperties.SpringProfilesActive),
+						PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+						PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
 						message.getContent()));
 
 					if (StringUtils.isNotBlank(applicationName)) {
 						param.put("applicationName", applicationName);
 					} else {
 						param.put("applicationName",
-							PropertyUtil.getProperty(CoreProperties.SpringApplicationName));
+							PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
 					}
 
 					HttpClient.Params params = HttpClient

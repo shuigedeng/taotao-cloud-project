@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
 import com.google.common.collect.Maps;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.alarm.core.util.IpUtil;
@@ -69,7 +70,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 
 		private String port;
 
-		private String projectName = PropertyUtil.getProperty("spring.application.name");
+		private String projectName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
 		private final String PREFIX_ZK_PATH = "/snowflake/" + projectName;
 

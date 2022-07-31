@@ -13,26 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.runner;
+package com.taotao.cloud.logger.logging.loki;
 
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import com.github.loki4j.client.http.HttpConfig;
+import com.github.loki4j.client.http.Loki4jHttpClient;
+import com.github.loki4j.logback.AbstractHttpSender;
+
+import java.util.function.Function;
 
 /**
- * CoreApplicationRunner
+ * Loki sender that is backed by OkHttp
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:45:34
+ * @version 2022.06
+ * @since 2022-07-31 15:42:13
  */
-public class CoreApplicationRunner implements ApplicationRunner {
+public class Loki4jOkHttpSender extends AbstractHttpSender {
 
 	@Override
-	public void run(ApplicationArguments var1) throws Exception {
-		LogUtil.info("------- 应用[{}]已正常启动 -------",
-			PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
+	public Function<HttpConfig, Loki4jHttpClient> getHttpClientFactory() {
+		return Loki4jOkHttpClient::new;
+	}
+
+	@Override
+	public HttpConfig.Builder getConfig() {
+		HttpConfig.Builder builder = HttpConfig.builder();
+		super.fillHttpConfig(builder);
+		return builder;
 	}
 }
