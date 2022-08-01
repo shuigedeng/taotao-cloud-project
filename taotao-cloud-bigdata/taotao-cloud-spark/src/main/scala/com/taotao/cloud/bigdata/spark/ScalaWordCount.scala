@@ -37,14 +37,14 @@ import org.apache.spark.{SparkConf, SparkContext}
 --executor-memory 1g \
 --executor-cores 2 \
 --queue default \
-/opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2022.07.jar \
+/opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2022.08.jar \
 /opt/spark/input /opt/spark/output
 *   <p>
 *
 *
 *
 * @author shuigedeng
-* @version 2022.07
+* @version 2022.08
 * @since 2022 -07-21 10:45:19
 */
 object ScalaWordCount {
