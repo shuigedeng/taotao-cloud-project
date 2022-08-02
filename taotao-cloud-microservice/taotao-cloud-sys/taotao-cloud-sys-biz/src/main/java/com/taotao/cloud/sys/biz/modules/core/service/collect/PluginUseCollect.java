@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.modules.core.service.collect;
 
 import com.alibaba.fastjson.JSON;
-import com.sanri.tools.modules.core.service.plugin.PluginManager;
-import com.sanri.tools.modules.core.utils.NetUtil;
+import com.taotao.cloud.sys.biz.modules.core.service.plugin.PluginManager;
+import com.taotao.cloud.sys.biz.modules.core.utils.NetUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

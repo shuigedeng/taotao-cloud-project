@@ -6,10 +6,9 @@ import java.util.Collection;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChanges;
-
-import com.sanri.tools.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
 import lombok.Data;
 import org.eclipse.jgit.diff.DiffEntry;
 

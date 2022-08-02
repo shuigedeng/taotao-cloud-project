@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.project.compile;
 
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.dtos.CompileFiles;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChanges;
-import com.sanri.tools.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.CompileFiles;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class ResourcesRootCompileResolve implements CompileResolve {
     public static final OnlyPath RESOURCES_ROOT = new OnlyPath("src/main/resources");
 
     @Override
-    public CompileFiles.DiffCompileFile resolve(DiffChanges.DiffFile diffFile, RelativeFile modulePath,OnlyPath projectPath) {
+    public CompileFiles.DiffCompileFile resolve(DiffChanges.DiffFile diffFile, RelativeFile modulePath, OnlyPath projectPath) {
         final File compilePath = resolveCompilePath(modulePath);
 
         final OnlyPath onlyPath = new OnlyPath(diffFile.path());

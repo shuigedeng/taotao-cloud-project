@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.core.service.storage;
 
-import com.sanri.tools.modules.core.service.file.FileManagerProperties;
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManagerProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

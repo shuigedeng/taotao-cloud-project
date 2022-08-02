@@ -6,12 +6,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.net.HostAndPort;
+import com.taotao.cloud.sys.biz.modules.tcp.service.ClientService;
+import com.taotao.cloud.sys.biz.modules.tcp.service.ServerService;
 import org.apache.commons.codec.DecoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.sanri.tools.modules.tcp.service.ClientService;
-import com.sanri.tools.modules.tcp.service.ServerService;
 
 @RestController
 @RequestMapping("/tcp/server")
@@ -21,7 +21,7 @@ public class TcpServerController {
     private ServerService serverService;
 
     @GetMapping("/open")
-    public ServerService.ServerConnectState open(int port,String reciveModel) throws SocketException, InterruptedException {
+    public ServerService.ServerConnectState open(int port, String reciveModel) throws SocketException, InterruptedException {
         serverService.open(port);
 
         return serverService.state(reciveModel);

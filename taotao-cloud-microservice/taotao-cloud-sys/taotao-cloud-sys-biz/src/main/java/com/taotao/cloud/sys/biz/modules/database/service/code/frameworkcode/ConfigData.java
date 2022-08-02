@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.database.service.code.frameworkcode;
 
-import com.sanri.tools.modules.database.service.code.dtos.ProjectGenerateConfig;
-import com.sanri.tools.modules.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.modules.database.service.code.dtos.ProjectGenerateConfig;
+import com.taotao.cloud.sys.biz.modules.database.service.dtos.meta.TableMeta;
 import lombok.Data;
 
 import java.io.File;

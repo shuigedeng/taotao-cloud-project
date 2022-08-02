@@ -9,8 +9,19 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.sanri.tools.modules.core.dtos.RelativeFile;
-import com.sanri.tools.modules.versioncontrol.project.dtos.*;
+import com.taotao.cloud.sys.biz.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPaths;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.CompileFiles;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.ProjectLocation;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.GitDiffService;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.GitRepositoryService;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.compile.CompileResolve;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.MavenGoalsParam;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.PomFile;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.ProjectMeta;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
@@ -236,7 +247,7 @@ public class MavenProjectService implements InitializingBean {
      * @param diffChanges
      * @return
      */
-    public List<Module> guessCompileModules(File projectDir,DiffChanges diffChanges){
+    public List<Module> guessCompileModules(File projectDir, DiffChanges diffChanges){
         Set<PomFile> pomFiles = new HashSet<>();
         for (DiffChanges.DiffFile diffFile : diffChanges.getChangeFiles()) {
             final String relativePath = diffFile.path();
@@ -262,7 +273,7 @@ public class MavenProjectService implements InitializingBean {
      * @param projectDir 项目目录
      * @param diffChanges 修改项
      */
-    public CompileFiles resolveDiffCompileFiles(RelativeFile projectRelativeFile,DiffChanges diffChanges){
+    public CompileFiles resolveDiffCompileFiles(RelativeFile projectRelativeFile, DiffChanges diffChanges){
         final File projectDir = projectRelativeFile.relativeFile();
         CompileFiles compileFiles = new CompileFiles(diffChanges);
         A:for (DiffChanges.DiffFile modifyFile : diffChanges.getChangeFiles()) {

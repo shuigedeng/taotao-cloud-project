@@ -3,8 +3,8 @@ package com.taotao.cloud.sys.biz.modules.database.service.code.dtos;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import com.sanri.tools.modules.database.service.meta.dtos.ActualTableName;
 
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.ActualTableName;
 import lombok.Data;
 
 @Data

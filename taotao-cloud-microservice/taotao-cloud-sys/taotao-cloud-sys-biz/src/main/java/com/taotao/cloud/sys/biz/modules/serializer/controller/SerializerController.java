@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.serializer.controller;
 
-import com.sanri.tools.modules.serializer.service.SerializerChoseService;
+import com.taotao.cloud.sys.biz.modules.serializer.service.SerializerChoseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -7,13 +7,28 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.PreDestroy;
 
-import com.sanri.tools.modules.core.service.connect.ConnectService;
 import com.taotao.cloud.sys.biz.modules.classloader.ClassloaderService;
 import com.taotao.cloud.sys.biz.modules.core.dtos.UpdateConnectEvent;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.RedisConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.ConnectService;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.HashKeyScanResult;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.KeyScanResult;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.SetScanResult;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.ZSetScanResult;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.ZSetTuple;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.BaseKeyScanParam;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ConnParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.DelFieldsParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.HashKeyScanParam;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.in.KeyScanParam;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.in.SerializerParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ValueParam;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisConnection;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisNode;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisRunMode;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisType;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import com.taotao.cloud.sys.biz.modules.serializer.service.SerializerChoseService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -26,11 +41,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.ScanParams;
-import redis.clients.jedis.ScanResult;
-import redis.clients.jedis.Tuple;
 import redis.clients.jedis.exceptions.JedisConnectionException;
-import redis.clients.util.JedisClusterCRC16;
+import redis.clients.jedis.params.ScanParams;
+import redis.clients.jedis.resps.ScanResult;
+import redis.clients.jedis.resps.Tuple;
+import redis.clients.jedis.util.JedisClusterCRC16;
 
 @Service
 @Slf4j
@@ -129,7 +144,7 @@ public class RedisService implements ApplicationListener<UpdateConnectEvent> {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public HashKeyScanResult hscan(ConnParam connParam,HashKeyScanParam hashKeyScanParam,SerializerParam serializerParam) throws IOException, ClassNotFoundException {
+    public HashKeyScanResult hscan(ConnParam connParam, HashKeyScanParam hashKeyScanParam, SerializerParam serializerParam) throws IOException, ClassNotFoundException {
         final RedisConnection redisConnection = redisConnection(connParam);
         ClassLoader classloader = classloaderService.getClassloader(serializerParam.getClassloaderName());
         Serializer keySerializer = serializerChoseService.choseSerializer(serializerParam.getKeySerializer());
@@ -192,7 +207,7 @@ public class RedisService implements ApplicationListener<UpdateConnectEvent> {
                 keys.add(hashKey);
             }
 
-            cursor = hscan.getStringCursor();
+            cursor = hscan.getCursor();
             scanParams.count(limit - hscanResult.size());
         } while (keys.size() < limit && NumberUtils.toLong(cursor) != 0L);
 
@@ -285,7 +300,7 @@ public class RedisService implements ApplicationListener<UpdateConnectEvent> {
                         smembers.add(setValue);
                     }
 
-                    setCursor = scan.getStringCursor();
+                    setCursor = scan.getCursor();
                     setScanParams.count(setLimit - subScan.size());
                 } while (smembers.size() < setLimit && NumberUtils.toLong(setCursor) != 0L);
 
@@ -321,7 +336,7 @@ public class RedisService implements ApplicationListener<UpdateConnectEvent> {
                     List<Tuple> subScan = zscan.getResult();
                     tuples.addAll(subScan);
 
-                    cursor = zscan.getStringCursor();
+                    cursor = zscan.getCursor();
                     scanParams.count(limit - subScan.size());
                 }while (tuples.size() < limit && NumberUtils.toLong(cursor) != 0L);
 
@@ -387,7 +402,7 @@ public class RedisService implements ApplicationListener<UpdateConnectEvent> {
                 for (byte[] bytes : result) {
                     keys.add(bytes);
                 }
-                cursor = scanResult.getStringCursor();
+                cursor = scanResult.getCursor();
                 scanParams.count(limit - keys.size());
 
                 if (redisScanParam.getTimeout() != -1 ){
@@ -546,18 +561,13 @@ public class RedisService implements ApplicationListener<UpdateConnectEvent> {
         }
 
         Set<byte[]> result = new HashSet<>();
-        switch (command){
-            case "inter":
-                result = redisConnection.sinter(keyBytes);
-                break;
-            case "diff":
-                result = redisConnection.sdiff(keyBytes);
-                break;
-            case "union":
-                result = redisConnection.sunion(keyBytes);
-                break;
-            default:
-        }
+		switch (command) {
+			case "inter" -> result = redisConnection.sinter(keyBytes);
+			case "diff" -> result = redisConnection.sdiff(keyBytes);
+			case "union" -> result = redisConnection.sunion(keyBytes);
+			default -> {
+			}
+		}
 
         Set<Object> collect = new HashSet<>();
         for (byte[] bytes : result) {

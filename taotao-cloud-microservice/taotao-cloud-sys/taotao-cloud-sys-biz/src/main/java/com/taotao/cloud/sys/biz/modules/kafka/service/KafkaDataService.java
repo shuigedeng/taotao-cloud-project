@@ -2,9 +2,17 @@ package com.taotao.cloud.sys.biz.modules.kafka.service;
 
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.sys.biz.modules.classloader.ClassloaderService;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.KafkaConnectParam;
 import com.taotao.cloud.sys.biz.modules.core.service.connect.ConnectService;
 import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
 import com.taotao.cloud.sys.biz.modules.core.utils.NetUtil;
+import com.taotao.cloud.sys.biz.modules.kafka.dtos.DataConsumerParam;
+import com.taotao.cloud.sys.biz.modules.kafka.dtos.KafkaData;
+import com.taotao.cloud.sys.biz.modules.kafka.dtos.NearbyDataConsumerParam;
+import com.taotao.cloud.sys.biz.modules.kafka.dtos.PartitionKafkaData;
+import com.taotao.cloud.sys.biz.modules.kafka.dtos.SendJsonDataParam;
+import com.taotao.cloud.sys.biz.modules.kafka.dtos.SendObjectDataParam;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import com.taotao.cloud.sys.biz.modules.serializer.service.SerializerChoseService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -91,18 +99,14 @@ public class KafkaDataService {
                 continue;
             }
             Object data = null;
-            switch (dataConvert){
-                case 1:
-                    data = dataStringValue;
-                    break;
-                case 2:
-                    data = JSON.parse(dataStringValue);
-                    break;
-                case 3:
-                    data = serializer.deserialize(Hex.decodeHex(dataStringValue),ClassLoader.getSystemClassLoader());
-                    break;
-                default:
-            }
+			switch (dataConvert) {
+				case 1 -> data = dataStringValue;
+				case 2 -> data = JSON.parse(dataStringValue);
+				case 3 ->
+					data = serializer.deserialize(Hex.decodeHex(dataStringValue), ClassLoader.getSystemClassLoader());
+				default -> {
+				}
+			}
             datas.add(new PartitionKafkaData(offset,data,timestamp,partition));
         }
 
@@ -144,7 +148,7 @@ public class KafkaDataService {
         stopWatch.stop();
         log.debug("clusterName:[{}],topic:[{}],查询到数据量[{}],用时[{} ms],开始在目录[{}]建立索引",clusterName,topic,kafkaData.size(),stopWatch.getTime(),dir);
         Directory directory = new SimpleFSDirectory(dir);
-        Analyzer analyzer = new SimpleAnalyzer(Version.LUCENE_42);
+        Analyzer analyzer = new SimpleAnalyzer(Version.LUCENE_8_11_1);
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, analyzer);
         IndexWriter writer = new IndexWriter(directory, config);
 

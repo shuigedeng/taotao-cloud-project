@@ -1,9 +1,14 @@
 package com.taotao.cloud.sys.biz.modules.redis.service;
 
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.KeyScanResult;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.TreeKey;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ConnParam;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.in.SerializerParam;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisConnection;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisNode;
 import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisType;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import com.taotao.cloud.sys.biz.modules.serializer.service.SerializerChoseService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -12,8 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.ScanParams;
-import redis.clients.jedis.ScanResult;
+import redis.clients.jedis.params.ScanParams;
+import redis.clients.jedis.resps.ScanResult;
 
 import java.io.IOException;
 import java.util.*;
@@ -77,7 +82,7 @@ public class RedisTreeKeyService {
                         count += result.size();
                     }finally {
                         if (scan == null){cursor = "0";}else{
-                            cursor = scan.getStringCursor();
+                            cursor = scan.getCursor();
                         }
                     }
 

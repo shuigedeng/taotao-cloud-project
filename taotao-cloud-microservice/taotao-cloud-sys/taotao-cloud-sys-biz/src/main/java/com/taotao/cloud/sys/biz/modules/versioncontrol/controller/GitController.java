@@ -17,6 +17,7 @@ import com.taotao.cloud.sys.biz.modules.versioncontrol.git.GitDiffService;
 import com.taotao.cloud.sys.biz.modules.versioncontrol.git.GitRepositoryService;
 import com.taotao.cloud.sys.biz.modules.versioncontrol.git.RepositoryMetaService;
 import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.Branches;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.Commit;
 import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
 import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChangesTree;
 import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.TarFileParam;

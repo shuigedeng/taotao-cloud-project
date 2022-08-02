@@ -33,7 +33,6 @@ public class ZookeeperExtendService implements ApplicationListener<DeleteSecurit
 
     /**
      * 添加收藏 ,前端需要把所有的收藏全拿过来,后端直接覆盖
-     * @param pathFavoriteParam
      */
     public void addFavorite(String connName, PathFavorite pathFavorite){
         Set<PathFavorite> pathFavorites = ZookeeperExtendService.pathFavorites.computeIfAbsent(connName, k -> new LinkedHashSet<>());

@@ -2,8 +2,8 @@ package com.taotao.cloud.sys.biz.modules.serializer.impl;
 
 import com.caucho.hessian.io.HessianInput;
 import com.caucho.hessian.io.HessianOutput;
-import com.sanri.tools.modules.serializer.service.Serializer;
-import com.sanri.tools.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 

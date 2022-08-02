@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.modules.database.service.code.frameworkcode;
 
-import com.sanri.tools.modules.database.service.code.CodeMybatisGenerateService;
-import com.sanri.tools.modules.database.service.code.dtos.MapperBuildConfig;
-import com.sanri.tools.modules.database.service.code.dtos.ProjectGenerateConfig;
+import com.taotao.cloud.sys.biz.modules.database.service.code.CodeMybatisGenerateService;
+import com.taotao.cloud.sys.biz.modules.database.service.code.dtos.MapperBuildConfig;
+import com.taotao.cloud.sys.biz.modules.database.service.code.dtos.ProjectGenerateConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;

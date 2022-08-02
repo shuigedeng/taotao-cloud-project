@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.database.service.code.dtos;
 
-import com.sanri.tools.modules.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.Namespace;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

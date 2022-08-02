@@ -1,10 +1,10 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.git;
 
 import com.alibaba.fastjson.JSON;
-import com.sanri.tools.modules.core.exception.ToolException;
-import com.sanri.tools.modules.core.security.UserService;
-import com.sanri.tools.modules.core.utils.NetUtil;
-import com.sanri.tools.modules.versioncontrol.project.dtos.ProjectMeta;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.core.security.UserService;
+import com.taotao.cloud.sys.biz.modules.core.utils.NetUtil;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.ProjectMeta;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -254,7 +254,7 @@ public class RepositoryMetaService {
         /**
          * 项目元数据信息
          */
-        private Map<String,ProjectMeta> projectMetaMap = new HashMap<>();
+        private Map<String, ProjectMeta> projectMetaMap = new HashMap<>();
 
         public RepositoryMeta() {
         }

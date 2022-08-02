@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.database.service.code.dtos;
 
-import com.sanri.tools.modules.database.service.meta.dtos.ActualTableName;
-import com.sanri.tools.modules.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.Namespace;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;

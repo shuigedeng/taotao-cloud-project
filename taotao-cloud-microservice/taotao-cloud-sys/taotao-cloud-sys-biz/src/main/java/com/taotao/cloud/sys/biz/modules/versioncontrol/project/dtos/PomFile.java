@@ -3,11 +3,11 @@ package com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos;
 import java.io.File;
 import java.util.Date;
 
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanri.tools.modules.core.utils.OnlyPath;
 
 import lombok.Data;
 

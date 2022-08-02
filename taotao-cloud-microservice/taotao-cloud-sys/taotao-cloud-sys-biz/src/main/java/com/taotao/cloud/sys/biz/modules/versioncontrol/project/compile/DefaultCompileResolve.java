@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.project.compile;
 
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.dtos.CompileFiles;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChanges;
-import com.sanri.tools.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.CompileFiles;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;

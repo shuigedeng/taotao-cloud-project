@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.modules.mybtis.dto;
 
+import com.taotao.cloud.common.utils.reflect.ParameterizedTypeImpl;
 import lombok.Data;
 import org.apache.ibatis.mapping.ParameterMapping;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

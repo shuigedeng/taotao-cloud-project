@@ -1,11 +1,11 @@
 package com.taotao.cloud.sys.biz.modules.mybtis.controller;
 
-import com.sanri.tools.modules.mybatis.dtos.BoundSqlParam;
-import com.sanri.tools.modules.mybatis.dtos.StatementIdInfo;
-import com.sanri.tools.modules.mybatis.dtos.StatementInfo;
-import com.sanri.tools.modules.mybatis.service.MybatisDynamicCallService;
-import com.sanri.tools.modules.mybatis.service.MybatisService;
-import com.sanri.tools.modules.mybatis.service.MybatisXmlFileManager;
+import com.taotao.cloud.sys.biz.modules.mybtis.dto.BoundSqlParam;
+import com.taotao.cloud.sys.biz.modules.mybtis.dto.StatementIdInfo;
+import com.taotao.cloud.sys.biz.modules.mybtis.dto.StatementInfo;
+import com.taotao.cloud.sys.biz.modules.mybtis.service.MybatisDynamicCallService;
+import com.taotao.cloud.sys.biz.modules.mybtis.service.MybatisService;
+import com.taotao.cloud.sys.biz.modules.mybtis.service.MybatisXmlFileManager;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

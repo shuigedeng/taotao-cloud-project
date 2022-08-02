@@ -1,6 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.serializer.impl;
 
-import com.sanri.tools.modules.serializer.service.Serializer;
+import com.taotao.cloud.sys.biz.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;

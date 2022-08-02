@@ -16,6 +16,7 @@ import com.taotao.cloud.sys.biz.modules.core.dtos.param.SimpleConnectParam;
 import com.taotao.cloud.sys.biz.modules.core.service.connect.ConnectService;
 import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectOutput;
 import com.taotao.cloud.sys.biz.modules.core.service.connect.events.DeleteSecurityConnectEvent;
+import com.taotao.cloud.sys.biz.modules.serializer.SerializerConstants;
 import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import com.taotao.cloud.sys.biz.modules.serializer.service.SerializerChoseService;
 import com.taotao.cloud.sys.biz.modules.zookeeper.dtos.ZooNodeACL;
@@ -42,7 +43,7 @@ public class ZookeeperService implements ApplicationListener {
      * zookeeper 客户端列表
      * connName ==> ZkClient
      */
-    private Map<String, ZkClient> zkClientMap = new ConcurrentHashMap<String, ZkClient>();
+    private Map<String, ZkClient> zkClientMap = new ConcurrentHashMap<>();
 
     @Autowired
     private ConnectService connectService;

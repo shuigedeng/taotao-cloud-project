@@ -68,14 +68,41 @@ dependencies {
     testImplementation 'org.assertj:assertj-guava:3.4.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.testng:testng:7.5'
-    testImplementation 'com.google.inject:guice:5.1.0'
+    //testImplementation 'com.google.inject:guice:5.1.0'
+
+    implementation 'com.101tec:zkclient:0.11'
+    implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r'
+    implementation 'org.benf:cfr:0.151'
+    implementation "org.ow2.asm:asm-util:8.0.1"
+    implementation "org.ow2.asm:asm-commons:8.0.1"
+    implementation "com.github.javaparser:javaparser-symbol-solver-core:3.15.21"
+    implementation 'com.esotericsoftware:kryo:4.0.0'
+    implementation 'com.caucho:hessian:4.0.38'
+    implementation 'redis.clients:jedis:4.2.3'
+    implementation 'com.jianggujin:IKAnalyzer-lucene:8.0.0'
+    implementation 'org.lionsoul:jcseg-core:1.9.9'
+    implementation 'org.apache.lucene:lucene-analyzers-common:4.2.0'
+    implementation 'org.mongodb:mongo-java-driver:3.12.11'
+    implementation 'org.apache.maven:maven-core:3.8.6'
+    implementation "org.eclipse.aether:aether-connector-basic:1.1.0"
+    implementation "org.eclipse.aether:aether-transport-file:1.1.0"
+    implementation "org.eclipse.aether:aether-transport-http:1.1.0"
+    implementation 'org.apache.maven.shared:maven-invoker:3.0.1'
+    implementation 'org.apache.lucene:lucene-core:4.2.0'
+    implementation 'org.apache.lucene:lucene-analyzers-common:4.2.0'
+    implementation 'commons-dbutils:commons-dbutils:1.5'
+    implementation 'com.github.jsqlparser:jsqlparser:0.9.5'
+    implementation 'com.alibaba:druid:1.2.11'
+    implementation('org.springframework.boot:spring-boot-starter-freemarker') {
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+    }
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-mainClassName="com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
+mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
 
 smartdoc {
     configFile = file("src/main/resources/smart-doc.json")

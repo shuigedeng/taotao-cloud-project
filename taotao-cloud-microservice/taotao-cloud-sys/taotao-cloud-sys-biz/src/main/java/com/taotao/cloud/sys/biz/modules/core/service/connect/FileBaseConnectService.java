@@ -8,7 +8,16 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.sanri.tools.modules.core.exception.SystemMessage;
+import com.taotao.cloud.sys.biz.modules.core.aspect.SerializerToFile;
+import com.taotao.cloud.sys.biz.modules.core.exception.SystemMessage;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.core.security.UserService;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectInput;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectOutput;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectTemplate;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.events.DeleteSecurityConnectEvent;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.events.UpdateSecurityConnectEvent;
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,15 +28,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import com.sanri.tools.modules.core.aspect.SerializerToFile;
-import com.sanri.tools.modules.core.exception.ToolException;
-import com.sanri.tools.modules.core.security.UserService;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectInput;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectOutput;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectTemplate;
-import com.sanri.tools.modules.core.service.connect.events.DeleteSecurityConnectEvent;
-import com.sanri.tools.modules.core.service.connect.events.UpdateSecurityConnectEvent;
-import com.sanri.tools.modules.core.service.file.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,7 +44,7 @@ public class FileBaseConnectService extends ConnectService implements Initializi
     /**
      * 保存的连接信息 module => baseName => ConnectOutput
      */
-    private static final Map<String, Map<String,ConnectOutput>> connectInfoMap = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, ConnectOutput>> connectInfoMap = new ConcurrentHashMap<>();
 
     /**
      * 保存的连接模板信息 module => ConnectTemplate
