@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.classloader;
 
-import com.sanri.tools.modules.classloader.dtos.LoadClassResponse;
+import com.taotao.cloud.sys.biz.modules.classloader.dtos.LoadClassResponse;
 
 import java.io.File;
 import java.util.Collection;

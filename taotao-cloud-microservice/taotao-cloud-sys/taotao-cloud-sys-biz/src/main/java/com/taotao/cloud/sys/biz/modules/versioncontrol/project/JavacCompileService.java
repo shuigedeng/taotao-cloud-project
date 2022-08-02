@@ -5,21 +5,19 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.sanri.tools.modules.versioncontrol.dtos.ProjectLocation;
-import com.sanri.tools.modules.versioncontrol.project.MavenProjectService;
-import com.sanri.tools.modules.versioncontrol.project.ProjectMetaService;
-import com.sanri.tools.modules.versioncontrol.project.dtos.ProjectMeta;
+import com.taotao.cloud.sys.biz.modules.compiler.JavaCompilerService;
+import com.taotao.cloud.sys.biz.modules.compiler.dtos.CompileResult;
+import com.taotao.cloud.sys.biz.modules.compiler.dtos.ModuleCompileConfig;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.ProjectLocation;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.PomFile;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.ProjectMeta;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.sanri.tools.modules.compiler.JavaCompilerService;
-import com.sanri.tools.modules.compiler.dtos.CompileResult;
-import com.sanri.tools.modules.compiler.dtos.ModuleCompileConfig;
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.project.dtos.PomFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +38,7 @@ public class JavacCompileService {
      * @param modifyFiles 修改的文件列表
      * @return
      */
-    public Map<String,CompileResult> compileLittleFiles(ProjectLocation projectLocation, File projectDir, List<File> modifyFiles) throws IOException {
+    public Map<String, CompileResult> compileLittleFiles(ProjectLocation projectLocation, File projectDir, List<File> modifyFiles) throws IOException {
         Map<String,CompileResult> compileResultMap = new HashMap<>();
         // 找到变更的模块的 pom 文件信息, 相同模块进行合并 模块 pom 文件 => 变更文件列表
         MultiValueMap<File,File> pomFileFileMultiValueMap = new LinkedMultiValueMap<>();

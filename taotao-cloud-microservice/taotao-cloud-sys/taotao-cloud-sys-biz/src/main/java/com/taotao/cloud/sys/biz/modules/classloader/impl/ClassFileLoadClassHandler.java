@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.modules.classloader.impl;
 
-import com.sanri.tools.modules.classloader.FileLoadClassHandler;
-import com.sanri.tools.modules.classloader.dtos.LoadClassResponse;
-import com.sanri.tools.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.classloader.FileLoadClassHandler;
+import com.taotao.cloud.sys.biz.modules.classloader.dtos.LoadClassResponse;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import lombok.Data;

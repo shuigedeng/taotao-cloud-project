@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.quartz.service;
 
-import com.sanri.tools.modules.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.Namespace;
 import lombok.Data;
 import org.quartz.JobKey;
 

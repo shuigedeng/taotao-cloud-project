@@ -2,11 +2,10 @@ package com.taotao.cloud.sys.biz.modules.zookeeper.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectOutput;
-import com.sanri.tools.modules.core.service.connect.events.DeleteSecurityConnectEvent;
-import com.sanri.tools.modules.core.service.file.FileManager;
-import com.sanri.tools.modules.zookeeper.dtos.PathFavorite;
-import com.sanri.tools.modules.zookeeper.dtos.PathFavoriteParam;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectOutput;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.events.DeleteSecurityConnectEvent;
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
+import com.taotao.cloud.sys.biz.modules.zookeeper.dtos.PathFavorite;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;

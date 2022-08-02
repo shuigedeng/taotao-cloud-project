@@ -1,10 +1,9 @@
 package com.taotao.cloud.sys.biz.modules.dubbo.controller;
 
 import com.alibaba.dubbo.remoting.RemotingException;
-import com.sanri.tools.modules.dubbo.DubboProviderDto;
-import com.sanri.tools.modules.dubbo.dtos.DubboInvokeParam;
-import com.sanri.tools.modules.dubbo.dtos.DubboLoadMethodParam;
-import com.sanri.tools.modules.dubbo.service.MainDubboService;
+import com.taotao.cloud.sys.biz.modules.dubbo.DubboProviderDto;
+import com.taotao.cloud.sys.biz.modules.dubbo.dtos.DubboInvokeParam;
+import com.taotao.cloud.sys.biz.modules.dubbo.service.MainDubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

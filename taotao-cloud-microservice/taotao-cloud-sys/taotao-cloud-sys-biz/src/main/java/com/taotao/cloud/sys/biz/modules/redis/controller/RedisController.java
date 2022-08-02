@@ -1,11 +1,17 @@
 package com.taotao.cloud.sys.biz.modules.redis.controller;
 
-import com.sanri.tools.modules.redis.dtos.HashKeyScanResult;
-import com.sanri.tools.modules.redis.dtos.KeyScanResult;
-import com.sanri.tools.modules.redis.dtos.TreeKey;
-import com.sanri.tools.modules.redis.dtos.in.*;
-import com.sanri.tools.modules.redis.service.RedisService;
-import com.sanri.tools.modules.redis.service.RedisTreeKeyService;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.HashKeyScanResult;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.KeyScanResult;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.TreeKey;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ConnParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.DelFieldsParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.DelKeysParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.HashKeyScanParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.KeyScanParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.SerializerParam;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ValueParam;
+import com.taotao.cloud.sys.biz.modules.redis.service.RedisService;
+import com.taotao.cloud.sys.biz.modules.redis.service.RedisTreeKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -67,7 +73,7 @@ public class RedisController {
      * @return
      */
     @GetMapping("/key/info")
-    public KeyScanResult.KeyResult keyInfo(@Validated ConnParam connParam, String key,SerializerParam serializerParam) throws IOException {
+    public KeyScanResult.KeyResult keyInfo(@Validated ConnParam connParam, String key, SerializerParam serializerParam) throws IOException {
         return redisTreeKeyService.keyInfo(connParam,key,serializerParam);
     }
 

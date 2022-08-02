@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.controller;
 
-import com.sanri.tools.modules.versioncontrol.project.dtos.PatchEntity;
-import com.sanri.tools.modules.versioncontrol.project.PatchManager;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.PatchManager;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.PatchEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

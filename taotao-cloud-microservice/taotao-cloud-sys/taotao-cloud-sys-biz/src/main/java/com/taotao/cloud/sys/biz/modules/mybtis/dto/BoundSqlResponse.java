@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.mybtis.dto;
 
-import com.sanri.tools.modules.database.service.dtos.data.DynamicQueryDto;
+import com.taotao.cloud.sys.biz.modules.database.service.dtos.data.DynamicQueryDto;
 import lombok.Data;
 import org.apache.ibatis.mapping.SqlCommandType;
 

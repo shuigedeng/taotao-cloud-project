@@ -1,10 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.quartz.controller;
 
-import com.sanri.tools.modules.database.service.meta.dtos.Namespace;
-import com.sanri.tools.modules.quartz.dtos.TriggerTask;
-import com.sanri.tools.modules.quartz.service.EditJobParam;
-import com.sanri.tools.modules.quartz.service.QuartzService;
-import com.sanri.tools.modules.quartz.service.QuartzServiceNew;
+import com.taotao.cloud.sys.biz.modules.quartz.service.EditJobParam;
+import com.taotao.cloud.sys.biz.modules.quartz.service.QuartzServiceNew;
 import lombok.Data;
 import org.quartz.JobKey;
 import org.quartz.SchedulerException;

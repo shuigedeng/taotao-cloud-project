@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.zookeeper.service;
 
-import com.sanri.tools.modules.serializer.service.Serializer;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import lombok.extern.slf4j.Slf4j;
 import org.I0Itec.zkclient.exception.ZkMarshallingError;
 import org.I0Itec.zkclient.serialize.ZkSerializer;

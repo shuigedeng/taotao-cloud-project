@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.sanri.tools.maven.service.dtos.JarCollect;
+import com.taotao.cloud.sys.biz.modules.classloader.FileLoadClassHandler;
+import com.taotao.cloud.sys.biz.modules.classloader.dtos.LoadClassResponse;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.eclipse.aether.artifact.Artifact;
@@ -13,10 +14,6 @@ import org.eclipse.aether.artifact.DefaultArtifact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sanri.tools.maven.service.MavenDependencyResolve;
-import com.sanri.tools.maven.service.MavenJarResolve;
-import com.sanri.tools.modules.classloader.FileLoadClassHandler;
-import com.sanri.tools.modules.classloader.dtos.LoadClassResponse;
 
 import lombok.extern.slf4j.Slf4j;
 

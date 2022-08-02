@@ -7,13 +7,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sanri.tools.modules.core.service.file.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
 

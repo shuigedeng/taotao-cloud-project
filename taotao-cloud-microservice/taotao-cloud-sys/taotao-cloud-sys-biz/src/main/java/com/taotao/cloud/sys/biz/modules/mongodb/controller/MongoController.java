@@ -1,10 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.mongodb.controller;
 
-import com.sanri.tools.modules.core.dtos.PageResponseDto;
-import com.sanri.tools.modules.core.dtos.param.PageParam;
-import com.sanri.tools.modules.mongodb.dtos.CollectionDto;
-import com.sanri.tools.modules.mongodb.service.MongoQueryParam;
-import com.sanri.tools.modules.mongodb.service.MongoService;
+import com.taotao.cloud.sys.biz.modules.core.dtos.PageResponseDto;
+import com.taotao.cloud.sys.biz.modules.mongodb.service.MongoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +53,7 @@ public class MongoController {
      * @throws ClassNotFoundException
      */
     @GetMapping("/queryPage")
-    public PageResponseDto<List<String>> queryPage(@Valid MongoQueryParam mongoQueryParam,PageParam pageParam) throws IOException, ClassNotFoundException {
+    public PageResponseDto<List<String>> queryPage(@Valid MongoQueryParam mongoQueryParam, PageParam pageParam) throws IOException, ClassNotFoundException {
         return mongoService.queryDataPage(mongoQueryParam,pageParam);
     }
 }

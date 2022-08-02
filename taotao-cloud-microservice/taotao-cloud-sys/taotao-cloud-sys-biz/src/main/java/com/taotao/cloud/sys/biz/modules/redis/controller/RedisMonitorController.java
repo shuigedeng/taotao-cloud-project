@@ -3,17 +3,15 @@ package com.taotao.cloud.sys.biz.modules.redis.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.sanri.tools.modules.redis.controller.dtos.ConnectionInfo;
-import com.sanri.tools.modules.redis.service.dtos.ConnectClient;
+import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ConnParam;
+import com.taotao.cloud.sys.biz.modules.redis.service.RedisService;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.ConnectClient;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisNode;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisRunMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.sanri.tools.modules.redis.dtos.in.ConnParam;
-import com.sanri.tools.modules.redis.service.RedisService;
-import com.sanri.tools.modules.redis.service.dtos.RedisConnection;
-import com.sanri.tools.modules.redis.service.dtos.RedisNode;
-import com.sanri.tools.modules.redis.service.dtos.RedisRunMode;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.util.Slowlog;
@@ -114,7 +112,7 @@ public class RedisMonitorController {
      * @throws IOException
      */
     @GetMapping("/clientList")
-    public List<ConnectClient> clientList(@Validated ConnParam connParam,String nodeId) throws IOException {
+    public List<ConnectClient> clientList(@Validated ConnParam connParam, String nodeId) throws IOException {
         final RedisConnection redisConnection = redisService.redisConnection(connParam);
         final RedisNode redisNodeById = redisConnection.findRedisNodeById(nodeId);
         if (redisNodeById != null) {
