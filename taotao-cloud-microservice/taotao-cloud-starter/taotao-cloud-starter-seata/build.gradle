@@ -9,7 +9,7 @@ dependencies {
     api 'io.seata:seata-spring-boot-starter:1.5.2'
 
     compileOnly 'cglib:cglib:3.3.0'
-    compileOnly "com.zaxxer:HikariCP"
+    compileOnly "com.zaxxer:HikariCP:5.0.1"
 
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
 

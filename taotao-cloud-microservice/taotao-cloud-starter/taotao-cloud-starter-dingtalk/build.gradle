@@ -5,12 +5,12 @@ dependencies {
     //implementation 'com.sun.xml.bind:jaxb-core:3.0.2'
     //implementation 'com.sun.xml.bind:jaxb-impl:3.0.2'
 
-    // https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
-    api "org.glassfish.jaxb:jaxb-runtime"
-    // https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-core
-    api "org.glassfish.jaxb:jaxb-core"
-    // https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-xjc
-    api "org.glassfish.jaxb:jaxb-xjc"
+    // https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-runtime
+    api "org.glassfish.jaxb:jaxb-runtime:4.0.0"
+    // https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-core
+    api "org.glassfish.jaxb:jaxb-core:4.0.0"
+    // https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-xjc
+    api "org.glassfish.jaxb:jaxb-xjc:4.0.0"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

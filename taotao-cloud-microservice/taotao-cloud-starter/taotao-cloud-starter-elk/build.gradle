@@ -1,8 +1,10 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    api "net.logstash.logback:logstash-logback-encoder"
-    api 'org.aspectj:aspectjweaver'
+    //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
+    api "net.logstash.logback:logstash-logback-encoder:7.2"
+    //https://search.maven.org/artifact/org.aspectj/aspectjweaver
+    api 'org.aspectj:aspectjweaver:1.9.9.1'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

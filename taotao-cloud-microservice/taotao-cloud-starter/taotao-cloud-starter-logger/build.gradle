@@ -22,11 +22,11 @@ dependencies {
 
     //https://github.com/akkinoc/logback-access-spring-boot-starter
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
-    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.1"
+    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.3.2"
 
     // https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
-    api ('cn.monitor4all:log-record-starter:1.2.0'){
+    api ('cn.monitor4all:log-record-starter:1.2.1'){
         exclude group: "org.projectlombok", module: "lombok"
     }
 
