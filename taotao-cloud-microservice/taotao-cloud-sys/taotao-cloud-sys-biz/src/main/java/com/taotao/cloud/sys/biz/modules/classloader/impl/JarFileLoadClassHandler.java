@@ -8,18 +8,19 @@ import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.List;
 
-import com.sanri.tools.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.classloader.FileLoadClassHandler;
+import com.taotao.cloud.sys.biz.modules.classloader.dtos.LoadClassResponse;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.springframework.stereotype.Component;
 
-import com.sanri.tools.modules.classloader.FileLoadClassHandler;
-import com.sanri.tools.modules.classloader.dtos.LoadClassResponse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ReflectionUtils;
 
-import static com.sanri.tools.modules.classloader.ClassloaderService.addURLMethod;
+import static com.taotao.cloud.sys.biz.modules.classloader.ClassloaderService.addURLMethod;
+
 
 /**
  * jar 文件处理

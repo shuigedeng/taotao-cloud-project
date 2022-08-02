@@ -11,8 +11,8 @@ import javax.tools.DiagnosticCollector;
 import javax.tools.JavaFileObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanri.tools.modules.core.utils.OnlyPath;
 
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
 

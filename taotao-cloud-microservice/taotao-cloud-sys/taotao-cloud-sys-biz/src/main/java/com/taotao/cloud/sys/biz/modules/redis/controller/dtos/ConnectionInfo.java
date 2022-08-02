@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.redis.controller.dtos;
 
-import com.sanri.tools.modules.redis.service.dtos.RedisNode;
-import com.sanri.tools.modules.redis.service.dtos.RedisRunMode;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisNode;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisRunMode;
 import lombok.Data;
 
 import java.util.ArrayList;

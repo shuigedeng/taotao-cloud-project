@@ -2,12 +2,12 @@ package com.taotao.cloud.sys.biz.modules.quartz.service;
 
 import java.util.*;
 
-import com.sanri.tools.modules.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.modules.classloader.ClassloaderService;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.Namespace;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sanri.tools.modules.classloader.ClassloaderService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +23,7 @@ public class QuartzService {
      * 编辑或者添加一个 job
      * @param editJobParam
      */
-    public void editJob(String connName,Namespace namespace,EditJobParam editJobParam) throws Exception {
+    public void editJob(String connName, Namespace namespace, EditJobParam editJobParam) throws Exception {
         Scheduler scheduler = quartzServiceNew.loadScheduler(connName,namespace);
         JobDetail jobDetail = scheduler.getJobDetail(editJobParam.getJobKey());
         // 创建 job

@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.project;
 
-import com.sanri.tools.modules.core.security.UserService;
-import com.sanri.tools.modules.core.service.file.FileManager;
-import com.sanri.tools.modules.versioncontrol.project.dtos.PatchEntity;
+import com.taotao.cloud.sys.biz.modules.core.security.UserService;
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.PatchEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;

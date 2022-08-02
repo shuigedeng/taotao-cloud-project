@@ -11,7 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sanri.tools.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.classloader.ClassloaderService;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.mybtis.dto.BoundSqlParam;
+import com.taotao.cloud.sys.biz.modules.mybtis.dto.StatementIdInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
@@ -27,9 +30,6 @@ import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.stereotype.Service;
 
-import com.sanri.tools.modules.classloader.ClassloaderService;
-import com.sanri.tools.modules.mybatis.dtos.BoundSqlParam;
-import com.sanri.tools.modules.mybatis.dtos.StatementIdInfo;
 
 import lombok.extern.slf4j.Slf4j;
 

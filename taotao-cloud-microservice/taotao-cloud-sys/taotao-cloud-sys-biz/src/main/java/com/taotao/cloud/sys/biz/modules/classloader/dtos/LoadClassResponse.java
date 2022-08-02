@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.classloader.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanri.tools.modules.classloader.ExtendClassloader;
+import com.taotao.cloud.sys.biz.modules.classloader.ExtendClassloader;
 import lombok.Data;
 
 import java.util.ArrayList;
