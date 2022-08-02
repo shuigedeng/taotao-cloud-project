@@ -1,10 +1,10 @@
 package com.taotao.cloud.sys.biz.modules.redis.service.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanri.tools.modules.core.dtos.param.ConnectParam;
-import com.sanri.tools.modules.core.dtos.param.RedisConnectParam;
-import com.sanri.tools.modules.redis.service.ColonCommandReply;
-import com.sanri.tools.modules.redis.service.CommandReply;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.ConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.RedisConnectParam;
+import com.taotao.cloud.sys.biz.modules.redis.service.ColonCommandReply;
+import com.taotao.cloud.sys.biz.modules.redis.service.CommandReply;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -106,10 +106,8 @@ public class RedisNode {
 
     /**
      * 使用 jedisPool 刷新节点数据
-     * @param jedisPool
-     * @param jedisPoolConfig
      */
-    public void refresh(HostAndPort hostAndPort,RedisConnectParam redisConnectParam){
+    public void refresh(HostAndPort hostAndPort, RedisConnectParam redisConnectParam){
         refreshSelf(hostAndPort,redisConnectParam);
         refreshMaster(redisConnectParam);
         refreshSlaves(redisConnectParam);

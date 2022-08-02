@@ -1,11 +1,11 @@
 package com.taotao.cloud.sys.biz.modules.serializer.impl;
 
-import com.sanri.tools.modules.serializer.service.Serializer;
-import com.sanri.tools.modules.serializer.SerializerConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Component;
+import com.taotao.cloud.sys.biz.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 
 @Slf4j
 @Component

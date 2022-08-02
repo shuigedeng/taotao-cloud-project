@@ -5,17 +5,19 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.sanri.tools.modules.core.security.UserService;
-import com.sanri.tools.modules.core.service.file.FileManager;
-import com.sanri.tools.modules.versioncontrol.dtos.CompileFiles;
-import com.sanri.tools.modules.versioncontrol.dtos.ProjectLocation;
-import com.sanri.tools.modules.versioncontrol.git.dtos.Commit;
-import com.sanri.tools.modules.versioncontrol.git.dtos.TarFileParam;
-import com.sanri.tools.modules.versioncontrol.project.MavenProjectService;
-import com.sanri.tools.modules.core.dtos.RelativeFile;
-import com.sanri.tools.modules.versioncontrol.project.PatchManager;
-import com.sanri.tools.modules.versioncontrol.project.dtos.PatchEntity;
-import com.sanri.tools.modules.versioncontrol.project.dtos.TarBinFileResult;
+import com.taotao.cloud.sys.biz.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.security.UserService;
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.CompileFiles;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.ProjectLocation;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChangesTree;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.TarFileParam;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.MavenProjectService;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.PatchManager;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.PatchEntity;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos.TarBinFileResult;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -29,9 +31,6 @@ import org.eclipse.jgit.treewalk.TreeWalk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChanges;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChangesTree;
 
 import lombok.extern.slf4j.Slf4j;
 

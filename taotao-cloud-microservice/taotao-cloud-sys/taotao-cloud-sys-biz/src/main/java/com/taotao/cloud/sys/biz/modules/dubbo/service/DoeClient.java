@@ -11,7 +11,7 @@ package com.taotao.cloud.sys.biz.modules.dubbo.service;
 
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.remoting.RemotingException;
-import com.alibaba.dubbo.remoting.exchange.Request;
+import org.apache.dubbo.remoting.exchange.Request;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;
 

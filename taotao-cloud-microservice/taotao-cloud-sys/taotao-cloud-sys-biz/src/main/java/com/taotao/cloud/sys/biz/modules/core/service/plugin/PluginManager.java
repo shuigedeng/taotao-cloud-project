@@ -10,7 +10,9 @@ import java.util.*;
 
 import javax.annotation.PreDestroy;
 
-import com.sanri.tools.modules.core.utils.Version;
+import com.taotao.cloud.sys.biz.modules.core.dtos.PluginRegister;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.core.service.file.FileManager;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,9 +27,6 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.sanri.tools.modules.core.dtos.PluginRegister;
-import com.sanri.tools.modules.core.exception.ToolException;
-import com.sanri.tools.modules.core.service.file.FileManager;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

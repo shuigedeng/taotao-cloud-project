@@ -3,8 +3,8 @@ package com.taotao.cloud.sys.biz.modules.serializer.impl;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.sanri.tools.modules.serializer.service.Serializer;
-import com.sanri.tools.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 import org.springframework.stereotype.Component;
 

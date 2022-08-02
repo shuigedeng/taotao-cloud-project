@@ -1,6 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.serializer.impl;
 
-import com.sanri.tools.modules.serializer.service.Serializer;
+import com.taotao.cloud.sys.biz.modules.serializer.SerializerConstants;
+import com.taotao.cloud.sys.biz.modules.serializer.service.Serializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ConfigurableObjectInputStream;
 import org.springframework.stereotype.Component;

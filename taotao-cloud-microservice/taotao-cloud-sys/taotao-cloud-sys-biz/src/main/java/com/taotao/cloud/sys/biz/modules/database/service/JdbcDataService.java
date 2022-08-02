@@ -1,12 +1,10 @@
 package com.taotao.cloud.sys.biz.modules.database.service;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.sanri.tools.modules.database.service.connect.ConnDatasourceAdapter;
-import com.sanri.tools.modules.database.service.dtos.data.DynamicQueryDto;
-import com.sanri.tools.modules.database.service.meta.aspect.JdbcConnection;
-import com.sanri.tools.modules.database.service.meta.aspect.JdbcConnectionManagerAspect;
-import com.sanri.tools.modules.database.service.meta.dtos.Namespace;
-import com.sanri.tools.modules.database.service.meta.processor.CloseableResultSetHandler;
+import com.taotao.cloud.sys.biz.modules.database.service.connect.ConnDatasourceAdapter;
+import com.taotao.cloud.sys.biz.modules.database.service.dtos.data.DynamicQueryDto;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.processor.CloseableResultSetHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;

@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.project.compile;
 
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.dtos.CompileFiles;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChanges;
-import com.sanri.tools.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.dtos.RelativeFile;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.CompileFiles;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.git.dtos.DiffChanges;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -31,7 +31,7 @@ public class JavaCompileResolve implements CompileResolve{
     public static final OnlyPath SOURCES_CODE = new OnlyPath("src/main/java");
 
     @Override
-    public CompileFiles.DiffCompileFile resolve(DiffChanges.DiffFile diffFile, RelativeFile modulePath,OnlyPath projectPath) {
+    public CompileFiles.DiffCompileFile resolve(DiffChanges.DiffFile diffFile, RelativeFile modulePath, OnlyPath projectPath) {
         // 编译文件路径
         final File compileDir = resolveCompilePath(modulePath);
 

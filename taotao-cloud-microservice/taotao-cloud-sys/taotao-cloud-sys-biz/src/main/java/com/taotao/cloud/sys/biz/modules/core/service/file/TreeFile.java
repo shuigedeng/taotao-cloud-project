@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.modules.core.service.file;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sanri.tools.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
 import lombok.Data;
 
 import java.io.File;

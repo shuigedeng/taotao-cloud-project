@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.database.service.code.dtos;
 
-import com.sanri.tools.modules.database.service.meta.dtos.Column;
+import com.taotao.cloud.sys.biz.modules.database.service.meta.dtos.Column;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

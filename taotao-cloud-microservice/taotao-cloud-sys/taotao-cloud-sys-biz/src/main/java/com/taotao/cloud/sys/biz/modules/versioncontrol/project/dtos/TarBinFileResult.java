@@ -1,8 +1,7 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos;
 
-import com.sanri.tools.modules.core.utils.OnlyPath;
-import com.sanri.tools.modules.versioncontrol.dtos.CompileFiles;
-import com.sanri.tools.modules.versioncontrol.git.dtos.DiffChanges;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.CompileFiles;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;

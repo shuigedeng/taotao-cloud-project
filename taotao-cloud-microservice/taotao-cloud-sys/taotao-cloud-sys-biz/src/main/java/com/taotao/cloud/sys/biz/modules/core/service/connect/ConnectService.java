@@ -1,11 +1,17 @@
 package com.taotao.cloud.sys.biz.modules.core.service.connect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sanri.tools.modules.core.dtos.param.*;
-import com.sanri.tools.modules.core.exception.ToolException;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectInput;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectOutput;
-import com.sanri.tools.modules.core.service.connect.dtos.ConnectTemplate;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.AbstractConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.DatabaseConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.GitParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.KafkaConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.MongoConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.RedisConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.SimpleConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectInput;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectOutput;
+import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

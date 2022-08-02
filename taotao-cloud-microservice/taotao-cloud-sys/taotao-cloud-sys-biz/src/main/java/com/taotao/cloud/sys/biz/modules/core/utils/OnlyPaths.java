@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.core.utils;
 
+import com.taotao.cloud.sys.biz.modules.core.service.file.TreeFile;
 import lombok.extern.slf4j.Slf4j;
 import sun.reflect.generics.tree.Tree;
 
@@ -19,7 +20,7 @@ public class OnlyPaths {
      * @param root 根路径
      * @return
      */
-    public static TreeFile treeFiles(List<OnlyPath> paths,OnlyPath root){
+    public static TreeFile treeFiles(List<OnlyPath> paths, OnlyPath root){
         // paths 映射 TreeFile
         final List<TreeFile> treeFiles = paths.stream().filter(OnlyPath::isFile).map(path -> new TreeFile(path, root)).collect(Collectors.toList());
 

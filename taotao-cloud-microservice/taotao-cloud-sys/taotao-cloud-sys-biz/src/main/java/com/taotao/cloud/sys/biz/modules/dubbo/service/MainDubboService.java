@@ -17,6 +17,7 @@ import com.taotao.cloud.sys.biz.modules.core.service.connect.dtos.ConnectOutput;
 import com.taotao.cloud.sys.biz.modules.dubbo.DubboProviderDto;
 import com.taotao.cloud.sys.biz.modules.dubbo.dtos.DubboInvokeParam;
 import com.taotao.cloud.sys.biz.modules.zookeeper.service.ZookeeperService;
+import org.apache.dubbo.remoting.exchange.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,6 @@ import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.RemotingException;
 import com.alibaba.dubbo.remoting.exchange.Request;
 import com.alibaba.dubbo.rpc.RpcInvocation;
-import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.versioncontrol.project.dtos;
 
-import com.sanri.tools.modules.versioncontrol.dtos.ProjectLocation;
+import com.taotao.cloud.sys.biz.modules.versioncontrol.dtos.ProjectLocation;
 import lombok.Data;
 
 import javax.validation.Valid;

@@ -1,6 +1,9 @@
 package com.taotao.cloud.sys.biz.modules.mongodb.controller;
 
 import com.taotao.cloud.sys.biz.modules.core.dtos.PageResponseDto;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.PageParam;
+import com.taotao.cloud.sys.biz.modules.mongodb.dtos.CollectionDto;
+import com.taotao.cloud.sys.biz.modules.mongodb.service.MongoQueryParam;
 import com.taotao.cloud.sys.biz.modules.mongodb.service.MongoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

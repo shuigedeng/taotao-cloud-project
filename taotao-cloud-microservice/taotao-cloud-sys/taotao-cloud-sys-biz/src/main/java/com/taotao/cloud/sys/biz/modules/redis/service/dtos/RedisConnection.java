@@ -3,18 +3,22 @@ package com.taotao.cloud.sys.biz.modules.redis.service.dtos;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.ConnectParam;
+import com.taotao.cloud.sys.biz.modules.core.dtos.param.RedisConnectParam;
+import com.taotao.cloud.sys.biz.modules.redis.service.CommandReply;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.sanri.tools.modules.core.dtos.param.ConnectParam;
-import com.sanri.tools.modules.core.dtos.param.RedisConnectParam;
-import com.sanri.tools.modules.redis.service.CommandReply;
 
 import lombok.Data;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import redis.clients.jedis.*;
+import redis.clients.jedis.params.ScanParams;
+import redis.clients.jedis.resps.ScanResult;
+import redis.clients.jedis.resps.Slowlog;
+import redis.clients.jedis.resps.Tuple;
 import redis.clients.util.Slowlog;
 
 @Data
@@ -166,12 +170,9 @@ public class RedisConnection {
         if (runMode == RedisRunMode.cluster){
             return clusterNode.getJedisCluster().hdel(key,fields);
         }
-        final Jedis jedis = masterNode.browerJedis();
-        try{
-            return jedis.hdel(key,fields);
-        }finally {
-            jedis.close();
-        }
+		try (Jedis jedis = masterNode.browerJedis()) {
+			return jedis.hdel(key, fields);
+		}
     }
 
 

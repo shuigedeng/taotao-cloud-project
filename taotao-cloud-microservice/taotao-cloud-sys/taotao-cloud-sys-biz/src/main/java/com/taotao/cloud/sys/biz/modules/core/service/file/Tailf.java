@@ -1,8 +1,6 @@
 package com.taotao.cloud.sys.biz.modules.core.service.file;
 
-import com.sanri.tools.modules.core.exception.ToolException;
-import com.sanri.tools.modules.core.service.NamedThreadFactory;
-import com.sanri.tools.modules.core.utils.OnlyPath;
+import com.taotao.cloud.sys.biz.modules.core.utils.OnlyPath;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

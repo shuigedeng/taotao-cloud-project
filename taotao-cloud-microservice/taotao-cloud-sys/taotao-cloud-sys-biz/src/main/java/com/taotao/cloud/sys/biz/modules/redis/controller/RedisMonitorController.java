@@ -3,9 +3,11 @@ package com.taotao.cloud.sys.biz.modules.redis.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.taotao.cloud.sys.biz.modules.redis.controller.dtos.ConnectionInfo;
 import com.taotao.cloud.sys.biz.modules.redis.dtos.in.ConnParam;
 import com.taotao.cloud.sys.biz.modules.redis.service.RedisService;
 import com.taotao.cloud.sys.biz.modules.redis.service.dtos.ConnectClient;
+import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisConnection;
 import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisNode;
 import com.taotao.cloud.sys.biz.modules.redis.service.dtos.RedisRunMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
-import redis.clients.util.Slowlog;
+import redis.clients.jedis.resps.Slowlog;
 
 @RequestMapping("/redis/monitor")
 @RestController
