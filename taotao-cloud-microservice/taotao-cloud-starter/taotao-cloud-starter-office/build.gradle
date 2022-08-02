@@ -11,12 +11,12 @@ dependencies {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 
-    // http://www.likaixuan.top/excelUtil/doc/v3
-    //https://mvnrepository.com/artifact/net.oschina.likaixuan/excelutil
+    //http://www.likaixuan.top/excelUtil/doc/v3
+    //https://search.maven.org/artifact/net.oschina.likaixuan/excelutil
     implementation 'net.oschina.likaixuan:excelutil:3.1.8'
 
     //https://search.maven.org/artifact/wiki.xsx/x-easypdf
-    implementation 'wiki.xsx:x-easypdf:2.9.8'
+    implementation 'wiki.xsx:x-easypdf:2.9.9'
 
     //https://gitee.com/PasseRR/docx4j-wisewe
     //https://search.maven.org/artifact/cn.wisewe/docx4j-wisewe

@@ -4,6 +4,7 @@ dependencies {
     //https://search.maven.org/artifact/com.alibaba.otter/canal.client
     api("com.alibaba.otter:canal.client:1.1.6"){
         exclude group: 'log4j', module: 'log4j'
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
     }
     //https://search.maven.org/artifact/com.alibaba.otter/canal.protocol
     api "com.alibaba.otter:canal.protocol:1.1.6"

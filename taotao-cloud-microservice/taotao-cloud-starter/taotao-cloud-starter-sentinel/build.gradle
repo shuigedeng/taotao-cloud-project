@@ -13,7 +13,7 @@ dependencies {
     api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.4'
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-cluster-server-default
     api 'com.alibaba.csp:sentinel-cluster-server-default:1.8.4'
-
+    //https://search.maven.org/artifact/com.alibaba.csp/sentinel-datasource-nacos
     api ("com.alibaba.csp:sentinel-datasource-nacos"){
         exclude group: 'com.alibaba.csp', module: 'sentinel-core'
     }

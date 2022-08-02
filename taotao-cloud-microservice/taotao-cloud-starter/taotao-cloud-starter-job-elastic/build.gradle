@@ -1,14 +1,17 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api('org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter'){
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
+    api('org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter:3.0.1'){
         exclude group: 'org.projectlombok', module: 'lombok'
         exclude group: 'log4j', module: 'log4j'
     }
-
-    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-dingtalk"
-    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-wechat"
-    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-email"
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-error-handler-dingtalk
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-dingtalk:3.0.1"
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-error-handler-wechat
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-wechat:3.0.1"
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-error-handler-email
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-email:3.0.1"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
