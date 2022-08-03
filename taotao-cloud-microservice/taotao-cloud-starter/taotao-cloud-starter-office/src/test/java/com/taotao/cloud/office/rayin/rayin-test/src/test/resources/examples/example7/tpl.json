@@ -1,0 +1,10 @@
+{
+  "templateName":"template7",
+  "title":"template7",
+  "subject": "tag test",
+  "author":"rayin",
+  "keywords":"templateTest,binddata",
+  "elements":[
+    {"elementPath":"examples/example7/element1.html"}
+  ]
+}

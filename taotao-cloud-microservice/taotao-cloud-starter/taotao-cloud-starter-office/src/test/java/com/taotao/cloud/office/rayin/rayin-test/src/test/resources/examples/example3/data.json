@@ -1,0 +1,5 @@
+{"student": [
+  {"name": "小明","Grade":"三年级", "age":9, "gender": "男"},
+  {"name": "小红", "Grade":"一年级", "age":7, "gender": "女"}
+]
+}

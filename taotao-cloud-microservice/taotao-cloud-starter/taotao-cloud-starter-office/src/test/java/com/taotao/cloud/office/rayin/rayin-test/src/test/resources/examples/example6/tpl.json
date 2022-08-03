@@ -1,0 +1,24 @@
+{
+  "templateName":"template6",
+  "title":"template6",
+  "subject": "test",
+  "author":"rayin",
+  "keywords":"templateTest,binddata",
+  "elements":[
+    {"elementPath":"examples/example6/element1.html",
+      "addBlankPage":true,
+      "blankElementPath":"examples/example6/blank.html"},
+    {"elementPath":"examples/example6/element2.html",
+      "addBlankPage":true,
+      "pageNumIsFirstPage":true,
+      "pageNumIsCalculate":true,
+      "pageNumIsDisplay":true,
+      "pageNumDisplayPoss":[
+          {
+            "x":280.33,
+            "y":830.33
+          }
+        ]
+      }
+  ]
+}

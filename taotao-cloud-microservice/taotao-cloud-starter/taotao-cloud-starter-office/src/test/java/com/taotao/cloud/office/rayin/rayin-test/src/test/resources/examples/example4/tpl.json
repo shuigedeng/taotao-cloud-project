@@ -1,0 +1,25 @@
+{
+  "templateName":"template4",
+  "elements":[
+    {"elementPath":"examples/example4/element1.html",
+      "pageNumIsFirstPage":true,
+      "pageNumIsCalculate":true,
+      "pageNumIsDisplay":true,
+      "pageNumDisplayPoss":[
+        {
+          "content":"example4-${pageNum}/${pageNumTotal}"
+        }
+      ]
+    },
+    {"elementPath":"examples/example4/element2.html",
+      "pageNumIsFirstPage":false,
+      "pageNumIsCalculate":true,
+      "pageNumIsDisplay":true,
+      "pageNumDisplayPoss":[
+        {
+          "content":"example4-${pageNum}，${pageNumTotal}"
+        }
+      ]
+    }
+  ]
+}

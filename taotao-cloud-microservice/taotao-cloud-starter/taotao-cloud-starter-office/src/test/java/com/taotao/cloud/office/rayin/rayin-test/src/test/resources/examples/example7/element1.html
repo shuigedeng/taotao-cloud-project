@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+
+        body {
+            font-family: FangSong,HanaMinB;
+            line-height: 1.2;
+            /*设置背景色*/
+            /*background: #00FF00 ;*/
+            /*设置背景图片*/
+            /*background-image:url(data:image/gif;base64,AAAA) no-repeat fixed top;*/
+        }
+        /** 指定pdf纸张大小 **/
+        @page {
+            size: A4 ;
+            margin: 0cm;
+            /*margin-bottom: 1cm;*/
+            /*border: thin solid black;*/
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center;">
+    <span style="font-size: 14px;">特殊标签</span>
+ </div>
+
+<!-- 默认二维码 -->
+<h1>默认二维码</h1>
+<object type="image/barcode" style="width:60px;height:60px;" value="hello world"></object>
+<h1>条码</h1>
+<h2>条码 CODE_39</h2>
+<!-- 条形码控件，format编码类型包括：CODE_39、CODE_128、CODE_93 -->
+<object type="image/barcode" style="width:50px;height:20px;" value="123" format="CODE_39"></object>
+<h2>条码 CODE_128</h2>
+<object type="image/barcode" style="width:50px;height:20px;" value="123" format="CODE_128"></object>
+<h2>条码 CODE_93</h2>
+<object type="image/barcode" style="width:50px;height:20px;" value="123" format="CODE_93">
+</object>
+<div style="text-align: center;">
+    <span style="font-size: 14px;">隐藏标签</span>
+    <span style="font-size: 14px;">具体信息在pdf元数据中</span>
+</div>
+<!-- 隐藏式关键字标签 -->
+<object type="mark" style="width:50px;height:20px;" value="signxxx"/>
+<object type="mark" style="width:50px;height:20px;position: absolute;left:15pt;top:200pt" value="signyyy"/>
+<div style="text-align: center;">
+    <span style="font-size: 14px;">单文件PDF载入</span>
+</div>
+<object type="file/pdf" value="examples/example7/fapiao.pdf"/>
+<div style="text-align: center;">
+    <span style="font-size: 14px;">指定PDF页载入</span>
+</div>
+<object type="file/pdf" value="examples/example7/example04.pdf" page="1,3"/>
+<!--<img src="file://Users/eric/Documents/dev_code/rayin/rayin-parent/rayin-test/src/test/resources/007_jg_1610168673379.pdf"/>-->
+</body>
+</html>

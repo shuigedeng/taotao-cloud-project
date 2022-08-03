@@ -1,0 +1,522 @@
+{
+  "grpInsurAppl":
+  {
+    "accessChannel": "",
+    "accessSource": "",
+    "agreementNo": "",
+    "applBusiType": "",
+    "applDate": "",
+    "applNo": "",
+    "approNo": "火星组织",
+    "arbitration": "",
+    "argueType": "",
+    "billClass": "012",
+    "branchPostCode": "",
+    "cgNo": "2100wwxb3fg123#44$3123%%",
+    "claimsGrpList":
+    [],
+    "cntrCreateDate": "2100-08-12 15:02:00.000",
+    "cntrEstablishDate": "2100-07-28 00:00:00.000",
+    "cntrExpiryDate": "2101-05-31 00:00:00.000",
+    "cntrPrintType": "1",
+    "cntrSendType": "",
+    "cntrType": "L",
+    "constructInsurInfo": null,
+    "entChannelFlag": "",
+    "firPolCode": "",
+    "fundInsurInfo": null,
+    "giftFlag": "",
+    "healthInsurInfo": null,
+    "inForceDate": "2100-06-01 00:00:00.000",
+    "insurProperty": "",
+    "ipsnPayGrpList":
+    [],
+    "ipsnStateGrpList":
+    [],
+    "isFreObsePeriod": "",
+    "listPrintType": "1",
+    "listType": "",
+    "lstProcType": "",
+    "managebranchPath": "xx^7&3",
+    "notificaStat": "",
+    "orgTreeList":
+    [],
+    "policyflg": "3",
+    "polsum": 0,
+    "premConfirmDate": "2100-08-12 14:56:00.000",
+    "psnListHolderInfo": null,
+    "renewTimes": 0,
+    "renewedCgNo": "",
+    "salesDevelopFlag": "",
+    "salesNoAdd": "",
+    "sgName": "",
+    "sgNo": "374199&d@3343((8!",
+    "signDate": "",
+    "speciBusinessLogo": "",
+    "taxpayerId": "",
+    "udwType": "",
+    "voucherPrintType": "3",
+    "applState":
+    {
+      "convention": "",
+      "conversionList":
+      [
+        {
+          "inputConv": "",
+          "minorConv": "",
+          "orSetConv": "",
+          "polConv": "未成年人净风险保额按保险法律法规执行",
+          "udwConv": ""
+        }
+      ],
+      "designForceDate": "",
+      "forceFre": 0,
+      "inforceDateType": "",
+      "insurDur": "1年",
+      "insurDurUnit": "",
+      "ipsnNum": 3077,
+      "isFreForce": "",
+      "isPrePrint": "",
+      "policyInfoList":
+      [],
+      "policyList":
+      [
+        {
+          "cntrNo": "",
+          "faceAmnt": 44965000,
+          "insurDur": 0,
+          "insurDurUnit": "",
+          "moneyinItrvlMon": 0,
+          "mrCode": "",
+          "polCode": "009",
+          "polIpsnNum": 3077,
+          "polName": "火星移民意外伤害保险（2100版）",
+          "premDiscount": 0,
+          "premium": 30000,
+          "stdPremium": 0,
+          "subPolicyList":
+          [],
+          "toPolResult": null
+        }
+      ],
+      "policySumList":
+      [],
+      "sumFaceAmnt": 44965000,
+      "sumPremium": 30000
+    },
+    "grpHolderInfo":
+    {
+      "address": null,
+      "contactBirthDate": "",
+      "contactEmail": "",
+      "contactIdNo": "",
+      "contactIdType": "",
+      "contactMobile": "",
+      "contactName": "",
+      "contactSex": "",
+      "contactTelephone": "",
+      "corpReg": "",
+      "fax": "",
+      "formerGrpName": "",
+      "grpCountryCode": "",
+      "grpCustNO": "",
+      "grpIdNo": "",
+      "grpIdType": "",
+      "grpName": "火星组织",
+      "grpPsnDeptType": "",
+      "ipsnNum": 0,
+      "legalCode": "",
+      "natureCode": "",
+      "numOfEmp": 0,
+      "occClassCode": "",
+      "ojEmpNum": 0
+    },
+    "operTrace":
+    {
+      "acceptBranchNo": "",
+      "acceptClerkName": "",
+      "acceptClerkNo": "",
+      "applChkBranchNo": "",
+      "applChkClerkName": "万菊",
+      "applChkClerkNo": "",
+      "applChkDate": "",
+      "applEntBranchNo": "",
+      "applEntClerkName": "",
+      "applEntClerkNo": "",
+      "applEntDate": "",
+      "bizAcceptDate": "",
+      "mgrBranchName": "火星公司",
+      "mgrBranchNo": "xx^7&3",
+      "newApplState": "",
+      "pclkBranchNo": "",
+      "pclkClerkNo": "",
+      "pclkName": "",
+      "signAddr": "火星第一号火星坑",
+      "sysAcceptEntDate": "",
+      "udwFinishDate": ""
+    },
+    "paymentInfo":
+    {
+      "bankCode": "",
+      "bankaccName": "",
+      "bankaccNo": "",
+      "currencyCode": "狗狗币",
+      "foreExpDate": "2100-07-28 00:00:00.000",
+      "isMultiPartyOffer": "",
+      "isMutiPay": "",
+      "isRenew": "",
+      "lumpPpFlag": "",
+      "moneyinDur": 0,
+      "moneyinDurUnit": "",
+      "moneyinItrvl": "",
+      "moneyinType": "",
+      "multiPartyMoney": 0,
+      "multiPartyScale": 0,
+      "mutipayTime": 0,
+      "premSource": "",
+      "renewExpDate": "",
+      "stlAmnt": 0,
+      "stlDate":
+      [],
+      "stlRate": 0,
+      "stlType": ""
+    },
+    "salesInfoList":
+    [
+      {
+        "centerCode": "",
+        "commnrPsnName": "",
+        "commnrPsnNo": "",
+        "deptName": "",
+        "deptNo": "",
+        "develMainFlag": "",
+        "developRate": 0,
+        "salesBranchName": "火星公司",
+        "salesBranchNo": "xx^7&3",
+        "salesChannel": "",
+        "salesName": "小芭比",
+        "salesNo": "xx^7&370409071"
+      }
+    ]
+  },
+  "grpInsuredHome":
+  {
+    "bnfrs":
+    [],
+    "grpInsuredList":
+    [
+      {
+        "accInfoList":
+        [],
+        "applNo": "374199&d@3343((8!",
+        "batNo": "0",
+        "bnfrInfoList":
+        [],
+        "cgNo": "2100wwxb3fg123#44$3123%%",
+        "feeGrpNo": 0,
+        "grpPayAmount": 10,
+        "hldrInfo":
+        {
+          "hldrBirthDate": "",
+          "hldrCustNo": "",
+          "hldrIdNo": "7feufds&**^^fdfs@fds",
+          "hldrIdType": "O",
+          "hldrMobilePhone": "",
+          "hldrName": "火星组织",
+          "hldrPartyId": "",
+          "hldrSex": ""
+        },
+        "inServiceFlag": "",
+        "ipsnAge": 52,
+        "ipsnBirthDate": "2090-10-13 00:00:00.000",
+        "ipsnCompanyLoc": "",
+        "ipsnCustNo": "sxrr(8@##@7f",
+        "ipsnEmail": "",
+        "ipsnIdNo": "xxeru33892fd(8@##@7f",
+        "ipsnIdType": "I",
+        "ipsnMobilePhone": "",
+        "ipsnName": "小白菜",
+        "ipsnNo": 1,
+        "ipsnOccClassLevel": "1",
+        "ipsnOccCode": "000103",
+        "ipsnPartyId": "sxrr(8@##@7f",
+        "ipsnPayAmount": 0,
+        "ipsnRefNo": "",
+        "ipsnRtMstIpsn": "M",
+        "ipsnSex": "M",
+        "ipsnSsc": "",
+        "ipsnSsn": "",
+        "ipsnSss": "1",
+        "ipsnStateList":
+        [
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 15000,
+            "insurDur": 1,
+            "insurDurUnit": "Y",
+            "polCode": "009",
+            "polNameChn": "火星移民意外伤害保险（2100版）",
+            "premium": 10,
+            "subStateList":
+            [
+              {
+                "claimIpsnGrpNo": 1,
+                "faceAmnt": 5000,
+                "polCode": "009-2",
+                "polNameChn": "火星移民意外伤害医疗",
+                "premium": 2.14,
+                "sumPremium": 2.14
+              },
+              {
+                "claimIpsnGrpNo": 1,
+                "faceAmnt": 10000,
+                "polCode": "009-1",
+                "polNameChn": "火星移民意外伤害",
+                "premium": 7.86,
+                "sumPremium": 7.86
+              }
+            ],
+            "sumPremium": 10
+          }
+        ],
+        "ipsnType": "I",
+        "levelCode": "",
+        "masterIpsnNo": 1,
+        "notificaStat": "N",
+        "procFlag": "C",
+        "procStat": "E",
+        "relToHldr": "",
+        "remark": "",
+        "subStateList":
+        [
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 5000,
+            "polCode": "009-2",
+            "polNameChn": "火星移民意外伤害医疗",
+            "premium": 2.14,
+            "sumPremium": 2.14
+          },
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 10000,
+            "polCode": "009-1",
+            "polNameChn": "火星移民意外伤害",
+            "premium": 7.86,
+            "sumPremium": 7.86
+          }
+        ],
+        "tyNetPayAmnt": 0
+      },
+      {
+        "accInfoList":
+        [],
+        "applNo": "374199&d@3343((8!",
+        "batNo": "0",
+        "bnfrInfoList":
+        [],
+        "cgNo": "2100wwxb3fg123#44$3123%%",
+        "feeGrpNo": 0,
+        "grpPayAmount": 10,
+        "hldrInfo":
+        {
+          "hldrBirthDate": "",
+          "hldrCustNo": "",
+          "hldrIdNo": "7feufds&**^^fdfs@fds",
+          "hldrIdType": "O",
+          "hldrMobilePhone": "",
+          "hldrName": "火星组织",
+          "hldrPartyId": "",
+          "hldrSex": ""
+        },
+        "inServiceFlag": "",
+        "ipsnAge": 27,
+        "ipsnBirthDate": "2081-02-21 00:00:00.000",
+        "ipsnCompanyLoc": "",
+        "ipsnCustNo": "1861094979",
+        "ipsnEmail": "",
+        "ipsnIdNo": "321355*7f((8fd&&^%",
+        "ipsnIdType": "I",
+        "ipsnMobilePhone": "",
+        "ipsnName": "大白兔",
+        "ipsnNo": 3,
+        "ipsnOccClassLevel": "1",
+        "ipsnOccCode": "000103",
+        "ipsnPartyId": "1861094979",
+        "ipsnPayAmount": 0,
+        "ipsnRefNo": "",
+        "ipsnRtMstIpsn": "R",
+        "ipsnSex": "F",
+        "ipsnSsc": "",
+        "ipsnSsn": "",
+        "ipsnSss": "1",
+        "ipsnStateList":
+        [
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 15000,
+            "insurDur": 1,
+            "insurDurUnit": "Y",
+            "polCode": "009",
+            "polNameChn": "火星移民意外伤害保险",
+            "premium": 10,
+            "subStateList":
+            [
+              {
+                "claimIpsnGrpNo": 1,
+                "faceAmnt": 5000,
+                "polCode": "009-2",
+                "polNameChn": "火星移民意外伤害医疗",
+                "premium": 2.14,
+                "sumPremium": 2.14
+              },
+              {
+                "claimIpsnGrpNo": 1,
+                "faceAmnt": 10000,
+                "polCode": "009-1",
+                "polNameChn": "火星移民意外伤害",
+                "premium": 7.86,
+                "sumPremium": 7.86
+              }
+            ],
+            "sumPremium": 10
+          }
+        ],
+        "ipsnType": "A",
+        "levelCode": "",
+        "masterIpsnNo": 1,
+        "notificaStat": "N",
+        "procFlag": "C",
+        "procStat": "E",
+        "relToHldr": "",
+        "remark": "",
+        "subStateList":
+        [
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 5000,
+            "polCode": "009-2",
+            "polNameChn": "火星移民意外伤害医疗",
+            "premium": 2.14,
+            "sumPremium": 2.14
+          },
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 10000,
+            "polCode": "009-1",
+            "polNameChn": "火星移民意外伤害",
+            "premium": 7.86,
+            "sumPremium": 7.86
+          }
+        ],
+        "tyNetPayAmnt": 0
+      },
+      {
+        "accInfoList":
+        [],
+        "applNo": "374199&d@3343((8!",
+        "batNo": "0",
+        "bnfrInfoList":
+        [],
+        "cgNo": "2100wwxb3fg123#44$3123%%",
+        "feeGrpNo": 0,
+        "grpPayAmount": 10,
+        "hldrInfo":
+        {
+          "hldrBirthDate": "",
+          "hldrCustNo": "",
+          "hldrIdNo": "7feufds&**^^fdfs@fds",
+          "hldrIdType": "O",
+          "hldrMobilePhone": "",
+          "hldrName": "火星组织",
+          "hldrPartyId": "",
+          "hldrSex": ""
+        },
+        "inServiceFlag": "",
+        "ipsnAge": 54,
+        "ipsnBirthDate": "2090-05-05 00:00:00.000",
+        "ipsnCompanyLoc": "",
+        "ipsnCustNo": "fds3123ffff",
+        "ipsnEmail": "",
+        "ipsnIdNo": "fd3321ffFgfdsf@@!!",
+        "ipsnIdType": "I",
+        "ipsnMobilePhone": "",
+        "ipsnName": "蓝蓝",
+        "ipsnNo": 2,
+        "ipsnOccClassLevel": "1",
+        "ipsnOccCode": "000103",
+        "ipsnPartyId": "fds3123ffff",
+        "ipsnPayAmount": 0,
+        "ipsnRefNo": "",
+        "ipsnRtMstIpsn": "R",
+        "ipsnSex": "F",
+        "ipsnSsc": "",
+        "ipsnSsn": "",
+        "ipsnSss": "1",
+        "ipsnStateList":
+        [
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 15000,
+            "insurDur": 1,
+            "insurDurUnit": "Y",
+            "polCode": "009",
+            "polNameChn": "火星移民意外伤害保险（2100版）",
+            "premium": 10,
+            "subStateList":
+            [
+              {
+                "claimIpsnGrpNo": 1,
+                "faceAmnt": 5000,
+                "polCode": "009-2",
+                "polNameChn": "火星移民意外伤害医疗",
+                "premium": 2.14,
+                "sumPremium": 2.14
+              },
+              {
+                "claimIpsnGrpNo": 1,
+                "faceAmnt": 10000,
+                "polCode": "009-1",
+                "polNameChn": "火星移民意外伤害",
+                "premium": 7.86,
+                "sumPremium": 7.86
+              }
+            ],
+            "sumPremium": 10
+          }
+        ],
+        "ipsnType": "A",
+        "levelCode": "",
+        "masterIpsnNo": 1,
+        "notificaStat": "N",
+        "procFlag": "C",
+        "procStat": "E",
+        "relToHldr": "",
+        "remark": "",
+        "subStateList":
+        [
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 5000,
+            "polCode": "009-2",
+            "polNameChn": "火星移民意外伤害医疗",
+            "premium": 2.14,
+            "sumPremium": 2.14
+          },
+          {
+            "claimIpsnGrpNo": 1,
+            "faceAmnt": 10000,
+            "polCode": "009-1",
+            "polNameChn": "火星移民意外伤害",
+            "premium": 7.86,
+            "sumPremium": 7.86
+          }
+        ],
+        "tyNetPayAmnt": 0
+      }
+    ],
+    "masterIpsnNo": 1,
+    "policyInfoList":
+    []
+  }
+}
