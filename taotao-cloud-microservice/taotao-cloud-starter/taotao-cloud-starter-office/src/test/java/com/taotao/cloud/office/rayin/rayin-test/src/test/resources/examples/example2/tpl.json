@@ -1,0 +1,7 @@
+{
+  "templateName":"template2",
+  "elements":[
+    {"elementPath":"examples/example2/element1.html"},
+    {"elementPath":"examples/example2/element2.html"}
+  ]
+}

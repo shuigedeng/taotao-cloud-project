@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>
+        body {
+            font-family: FangSong;
+            font-size: 15px;
+        }
+        @page {
+            size: A4 ;
+            margin: 0.5cm;
+            -fs-flow-top: "header";
+            -fs-flow-bottom: "footer";
+            -fs-flow-left: "left";
+            -fs-flow-right: "right";
+            /*border: thin solid black;*/
+            padding: 1em;
+        }
+        #child {
+            line-height: 400px;
+            text-align: center;
+            width: 100%;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="parent">
+        <div id="child" style="color:blue">空白一块</div>
+    </div>
+</body>
+</html>

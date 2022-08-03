@@ -1,0 +1,10 @@
+{
+  "templateName":"医院处方笺",
+  "title":"医院处方笺",
+  "subject": "",
+  "author":"rayin",
+  "keywords":"",
+  "elements":[
+    {"elementPath":"samples/receipt/hospital/element1.html"}
+  ]
+}

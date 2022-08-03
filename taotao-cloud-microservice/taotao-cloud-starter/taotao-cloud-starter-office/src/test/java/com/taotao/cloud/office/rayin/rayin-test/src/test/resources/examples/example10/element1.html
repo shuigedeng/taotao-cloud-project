@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+
+        body {
+            font-family: FangSong,HanaMinB;
+
+            /*设置背景色*/
+            /*background: #00FF00 ;*/
+            /*设置背景图片*/
+            /*background-image:url(data:image/gif;base64,AAAA) no-repeat fixed top;*/
+        }
+        table{
+            border-collapse:collapse;
+            /*width:100%;*/
+            /* 分页设置 */
+            -fs-table-paginate:paginate;
+            /* 表格内容换页设置 */
+            page-break-inside:auto;
+        }
+        .td{
+            border: 1px solid #000000;
+            /*padding:2px;*/
+        }
+
+        /** 指定pdf纸张大小 **/
+        @page {
+            size: A5 landscape ;
+            margin-top: 1cm;
+            margin-bottom: 1cm;
+            margin-left: 0cm;
+            margin-right: 0cm;
+            /*margin-bottom: 1cm;*/
+            /*border: thin solid black;*/
+        }
+    </style>
+</head>
+<body>
+<div style="width:49%;float: left;border-right: 1px dashed DarkGray ;height:11cm">
+    <br>
+    <div style="width:90%;font-size: 15pt;text-align: center;margin-bottom: 10pt;font-weight: bold">假期要求</div>
+    <br>
+    <div style="width:90%;margin:auto;font-size: 10pt">
+        1、自觉遵守交通规则和公共秩序，维护社会治安。<br>
+        2、努力复习攻克，按时完成假期作业。<br>
+        3、假期合理安排作息时间，养成好的生活习惯。<br>
+        4、讲究卫生，注意用户、防火安全，户外活动注意个人安全。<br><br>
+        附：<br>
+        1、开学时间：<span data-th-text="${开学时间}"></span><br>
+        2、开学必须见成绩单和假期作业报到。<br>
+
+        尊敬的学生家长：
+        本学期的学习结束了，现将贵子女在我校的日常表现和学业成绩附表奉告，请家长阅读并将我校的工作提出宝贵意见，以便今后更好的全面贯彻党的教育方针，更好地改进学校工作。<br>
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此致
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;敬礼！
+    </div>
+    <div style="width:90%;margin:auto;text-align: right">
+        <span data-th-text="${学校名称}">xxx小学</span>
+        <br><span data-th-text="${生成日期}">年月日</span>
+    </div>
+    <div style="width:90%;margin:auto;font-weight: bold">
+        家长意见：
+    </div>
+</div>
+<div style="width:50%;float: left;">
+    <div style="text-align: center;width:90%;margin-top:20pt">
+        <span style="font-size: 30pt;font-weight: bold" data-th-text="${学校名称}">xxx</span>
+        <div style="width:20pt;margin:auto;font-size: 20pt;font-weight: bold">学校学生成绩报告单</div>
+        <br>
+        <table style="width:90%;font-size: 15pt;">
+            <tr>
+                <td style="width:50%;text-align: right">班级：</td>
+                <td style="text-align: left" data-th-text="${班级}">三年三班</td>
+            </tr>
+            <tr>
+                <td style="width:50%;text-align: right">姓名：</td>
+                <td style="text-align: left" data-th-text="${姓名}">小白</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

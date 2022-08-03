@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+
+        body {
+            /* 整体字体 与加载的字体名称一致 可涵盖大部分汉字，包括生僻字*/
+            font-family: Kaiti,HanaMinB;
+            font-size: 9pt;
+            /*设置背景色*/
+            /*background: #00FF00 ;*/
+            /*设置背景图片 base64*/
+            /*background-image:url(data:image/gif;base64,AAAA) no-repeat fixed top;*/
+        }
+        /* 表格样式 */
+        table{
+            border-collapse:collapse;
+            /*width:100%;*/
+            /* 分页设置 */
+            -fs-table-paginate:paginate;
+            /* 表格内容换页设置 */
+            page-break-inside:auto;
+        }
+        tr {
+            /* 表格行避免分页被切断 */
+            page-break-inside:avoid;
+            page-break-after:auto;
+        }
+        td{
+            border: 0.5px solid #7D0000;
+            /*padding:2px;*/
+        }
+        th{
+            border: 0.5px solid #7D0000;
+            /*padding:2px;*/
+            /*text-align: center;*/
+        }
+
+        .title_font{
+            color: #9C5000;
+            font-family: Kaiti,HanaMinB;
+        }
+        .content_font{
+            font-family: SimSun;
+        }
+
+        /*强制分页样式，可在块中追加分页样式，
+        例如<div class="page_break"></div>
+        或 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="mce-pagebreak" data-mce-resize="false" data-mce-placeholder />
+        */
+        .page_break { page-break-after:always;}
+
+        /** 指定pdf纸张大小 **/
+        @page {
+            /* A4 大小 */
+            /*size: A4 ;*/
+
+            /* 宽 高 */
+            size: 21.6cm 14cm;
+
+            /* 四边留白 1cm */
+            margin: 0.5cm;
+            margin-top: 0cm;
+            margin-bottom: 0cm;
+
+            /* 底部留白 1cm */
+            /*margin-bottom: 1cm;*/
+
+            /* page四周黑框 */
+            /*border: thin solid black;*/
+        }
+        .no_border th td{
+            border: 0px;
+        }
+    </style>
+</head>
+<body>
+<div style="position: absolute;left:450pt;top:296pt"><img style="width:100pt" src="data:image/gif;base64,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"/></div>
+
+<div style="text-align: center; width: 570pt;">
+    <table style="width: 100%; height: 78px;" class="no_border content_font">
+        <tbody>
+        <tr>
+            <td rowspan="3" style="width: 25%; border: 0px;">
+                <div style="margin-left:15pt"><object  type="image/barcode" value="二维码编码值" style="width:55pt;height:55pt"></object></div>
+            </td>
+            <td rowspan="4" style="border: 0px; text-align: center;padding-bottom:20pt">
+                <span class="title_font" style="font-size: 20pt; border-width:2pt;border-top: 0px; border-left: 0px; border-right: 0px; border-style: double; padding: 8pt;">xx增值税电子普通发票 </span>
+            </td>
+            <td style="width: 30%; text-align: left; border: 0px; height: 18pt;"><span class="title_font">发票代码：</span><span data-th-text="${machineNum}">011002200111</span></td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="text-align: left; border: 0px; height: 18pt;"><span class="title_font">发票号码：</span> <span data-th-text="${fapiaoNum}">02038914</span></td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="text-align: left; border: 0px; height: 18pt;">
+                <span class="title_font">开票日期：</span>
+                <span data-th-text="${openDateYear}">2022</span>
+                <span class="title_font" >年</span><span data-th-text="${openDateMonth}">03</span>
+                <span class="title_font">月</span> <span data-th-text="${openDataDay}">13</span>
+                <span class="title_font">日</span></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td style="text-align: left; border: 0px; height: 18pt;">
+                <span class="title_font">机器编号：</span>
+                <span data-th-text="${machineNum}">123344333222</span>
+            </td>
+            <td style="text-align: left; border: 0px; height: 18pt;">
+                <span class="title_font">校&nbsp;验&nbsp;码：</span>
+                <span data-th-text="${checkCode}">86427 33777 22332 22223</span></td>
+        </tr>
+        </tbody>
+    </table>
+    <table style="width: 100%;">
+        <tbody>
+        <tr>
+            <td style="width: 3%;"><span class="title_font">购<br /><br />买<br /><br />方</span></td>
+            <td style="width: 54%;">
+                <table style="width: 100%; text-align: left; margin-left: 10pt;">
+                    <tbody>
+                    <tr>
+                        <td style="border: 0px; height: 16pt;">
+                            <span class="title_font">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+                            <span class="content_font" data-th-text="${buyerName}">北京邑猿科技发展有限公司</span></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0px; height: 16pt;">
+                            <span class="title_font">纳税人识别号：</span>
+                            <span class="content_font" data-th-text="${buyerTaxpayerIdentificationNumber}">33882819283829183N</span></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0px; height: 16pt;">
+                            <span class="title_font">地&nbsp;址、电&nbsp;话：</span>
+                            <span class="content_font" data-th-text="${buyerAddressTel}">北京市丰台区码头四提阿宁寺前街南巷20号</span></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0px; height: 16pt;">
+                            <span class="title_font">开户行及账号：</span>
+                            <span class="content_font" data-th-text="${buyerBankNameAndAccount}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td style="width: 3%;"><span class="title_font">密<br /><br />码<br /><br />区</span></td>
+            <td style="width: 40%; font-size: 12pt;">
+                <div style="width: 170pt; margin: auto;" class="content_font" data-th-text="${password}">28979&lt;&lt;&lt;0567+3163/&lt;8*9-0-79 376+&lt;45-2&lt;/3530&lt;-79&lt;4+*1-+2 /4-53*398&lt;02&lt;36++31&lt;2/&lt;*8-8 1-716548&lt;4/+2&lt;/&lt;010&lt;3789/49</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table style="width: 100%;">
+        <tbody>
+        <tr style="border-top: 0;">
+            <td style="width: 28%; border-top: 0; border-bottom: 0;"><span class="title_font">货物或应税劳务、服务名称</span></td>
+            <td style="width: 8%; border-top: 0; border-bottom: 0;"><span class="title_font">规格型号</span></td>
+            <td style="width: 6%; border-top: 0; border-bottom: 0;"><span class="title_font">单&nbsp;&nbsp;位</span></td>
+            <td style="width: 10%; border-top: 0; border-bottom: 0;"><span class="title_font">数&nbsp;&nbsp;量</span></td>
+            <td style="width: 10%; border-top: 0; border-bottom: 0;"><span class="title_font">单&nbsp;&nbsp;价</span></td>
+            <td style="width: 12%; border-top: 0; border-bottom: 0;"><span class="title_font">金&nbsp;&nbsp;额</span></td>
+            <td style="width: 6%; border-top: 0; border-bottom: 0;"><span class="title_font">税&nbsp;&nbsp;率</span></td>
+            <td style="border-top: 0; border-bottom: 0;"><span class="title_font">税&nbsp;&nbsp;额</span></td>
+        </tr>
+        <tr class="content_font">
+            <td style="text-align: left; border-top: 0; border-bottom: 0; height: 10pt;"
+                data-th-text="${goodsOrLaborerOrServiceName}">
+                预付卡销售*加油IC卡充值款
+            </td>
+            <td style="border-top: 0; border-bottom: 0;" data-th-text="${specifications}"></td>
+            <td style="border-top: 0; border-bottom: 0;" data-th-text="${Measuring}">笔</td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;" data-th-text="${count}">1</td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;" data-th-text="${price}">2000.00</td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;" data-th-text="${amount}">2000.00</td>
+            <td style="font-size: 7pt; border-top: 0; border-bottom: 0;" data-th-text="${taxRate}">不征税</td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;" data-th-text="${taxValue}">***</td>
+        </tr>
+        <tr>
+            <td style="text-align: left; border-top: 0; border-bottom: 0; height: 100pt;"></td>
+            <td style="border-top: 0; border-bottom: 0;"></td>
+            <td style="border-top: 0; border-bottom: 0;"></td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;"></td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;"></td>
+            <td style="text-align: right; border-top: 0; border-bottom: 0;"></td>
+            <td style="font-size: 7pt; border-top: 0; border-bottom: 0;"></td>
+            <td style="border-top: 0; border-bottom: 0;"></td>
+        </tr>
+        <tr class="content_font">
+            <td style="border-top: 0;"><span class="title_font">合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计</span></td>
+            <td style="border-top: 0;"></td>
+            <td style="border-top: 0;"></td>
+            <td style="border-top: 0;"></td>
+            <td style="border-top: 0;"></td>
+            <td style="text-align: right; border-top: 0;" data-th-text="${amountCombined}">2000.00</td>
+            <td style="border-top: 0;"></td>
+            <td style="text-align: right; border-top: 0;">***</td>
+        </tr>
+        <tr class="content_font">
+            <td style="border-bottom: 0; height: 20pt;"><span class="title_font">价税合计(大写)</span></td>
+            <td style="border-bottom: 0;" colspan="7">
+                <div style="margin-left: 5pt; float: left;" data-th-text="${collectCapitalizedNum}">贰仟圆整</div>
+                <div style="margin-right: 5pt;"><span class="title_font">（小写）</span>
+                    <span data-th-text="${collectNum}">2000.00</span></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table style="width: 100%;">
+        <tbody>
+        <tr>
+            <td style="width: 3%;"><span class="title_font">销<br />售<br />方</span></td>
+            <td style="width: 56%;">
+                <table style="width: 100%; text-align: left;" class="content_font">
+                    <tbody>
+                    <tr>
+                        <td style="border: 0px;"><span class="title_font">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+                            <span data-th-text="${sellerName}">中国分化销售股份有限公司北京分油分公司</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0px;">
+                            <span class="title_font">纳税人识别号：</span>
+                            <span data-th-text="${sellerTaxpayerIdentificationNumber}">911100008011253056</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0px;">
+                            <span class="title_font">地&nbsp;址、电&nbsp;话：</span>
+                            <span data-th-text="${sellerAddressTel}">北京市东城区xx家园6号楼33446731</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0px;">
+                            <span class="title_font">开户行及账号：</span>
+                            <span data-th-text="${sellerBankNameAndAccount}">中行使馆区支行 33442309857</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td style="width: 3%;"><span class="title_font">备<br /><br /><br />注</span></td>
+            <td data-th-text="${note}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table style="width: 100%;height: 30pt" class="content_font">
+        <tbody>
+        <tr>
+            <td style="width: 25%; text-align: left; border: 0;">
+                <span class="title_font">收款人：</span>
+                <span data-th-text="${payee}">王憨憨</span>
+            </td>
+            <td style="width: 25%; text-align: left; border: 0;">
+                <span class="title_font">复核：</span>
+                <span data-th-text="${review}">董米</span>
+            </td>
+            <td style="width: 25%; text-align: left; border: 0;">
+                <span class="title_font">开票人：</span>
+                <span data-th-text="${drawer}">王憨憨</span>
+            </td>
+            <td style="width: 25%; text-align: left; border: 0;"><span class="title_font">销售方:(章)</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "templateName":"template10",
+  "title":"template10",
+  "subject": "成绩单",
+  "author":"rayin",
+  "keywords":"templateTest,key",
+  "elements":[
+    {"elementPath":"examples/example10/element1.html"},
+    {"elementPath":"examples/example10/element2.html"}
+  ]
+}
