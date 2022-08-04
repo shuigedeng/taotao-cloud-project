@@ -1,6 +1,7 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.processors;
 
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.data.transfer.TransferDataRow;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
 import lombok.Data;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
 

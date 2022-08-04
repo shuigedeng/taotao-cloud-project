@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.processor;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Schema;
 import org.apache.commons.dbutils.ResultSetHandler;
 
 import java.sql.ResultSet;

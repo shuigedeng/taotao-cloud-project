@@ -22,7 +22,7 @@ import java.util.Collection;
 @Component("class_FileLoadClassHandler")
 @Slf4j
 public class ClassFileLoadClassHandler implements FileLoadClassHandler {
-    private OnlyPath classPath = new OnlyPath("classes");
+    private final OnlyPath classPath = new OnlyPath("classes");
 
     @Override
     public void handle(Collection<File> files, File targetClassloaderDir, LoadClassResponse loadClassResponse) {

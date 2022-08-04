@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.compare;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Index;
 import lombok.Data;
 
 /**

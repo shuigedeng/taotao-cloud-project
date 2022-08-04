@@ -1,6 +1,7 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.data;
 
 import com.taotao.cloud.sys.biz.api.controller.tools.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Namespace;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
 

@@ -1,5 +1,10 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Table;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

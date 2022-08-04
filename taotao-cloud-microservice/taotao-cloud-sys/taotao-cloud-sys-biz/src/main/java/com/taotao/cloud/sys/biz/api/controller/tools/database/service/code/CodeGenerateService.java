@@ -1,6 +1,9 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.code;
 
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.JavaBeanInfo;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
