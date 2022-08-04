@@ -8,15 +8,19 @@ import javax.validation.constraints.NotNull;
 import com.taotao.cloud.sys.biz.api.controller.tools.core.dtos.param.SimpleConnectParam;
 import com.taotao.cloud.sys.biz.api.controller.tools.core.service.connect.ConnectService;
 import com.taotao.cloud.sys.biz.api.controller.tools.elasticsearch.remote.apis.ClusterApis;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSONObject;
 
-@RestController
-@RequestMapping("/elasticsearch")
+@AllArgsConstructor
 @Validated
+@RestController
+@Tag(name = "工具管理端-dubbo管理API", description = "工具管理端-dubbo管理API")
+@RequestMapping("/sys/tools/es")
 public class EsController {
 
     @Autowired
