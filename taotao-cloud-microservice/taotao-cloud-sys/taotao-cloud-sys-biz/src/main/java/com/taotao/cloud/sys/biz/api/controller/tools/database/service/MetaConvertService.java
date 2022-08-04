@@ -1,6 +1,8 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service;
 
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.ProjectGenerateConfig;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.aspect.JdbcConnection;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

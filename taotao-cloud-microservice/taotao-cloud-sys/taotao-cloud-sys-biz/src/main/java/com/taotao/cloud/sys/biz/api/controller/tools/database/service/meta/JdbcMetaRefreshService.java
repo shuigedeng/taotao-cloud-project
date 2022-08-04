@@ -2,7 +2,15 @@ package com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.connect.ConnDatasourceAdapter;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.aspect.JdbcConnection;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Index;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Namespace;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.PrimaryKey;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +33,7 @@ public class JdbcMetaRefreshService {
      * @return
      */
     @JdbcConnection
-    public TableMeta refreshTable(String connName,ActualTableName actualTableName) throws IOException, SQLException {
+    public TableMeta refreshTable(String connName, ActualTableName actualTableName) throws IOException, SQLException {
         // 设置不取缓存值
         MetaDataLoadManager.metaCache.set(false);
 

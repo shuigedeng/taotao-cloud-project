@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.taotao.cloud.sys.biz.api.controller.tools.core.service.file.FileManager;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMark;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.search.SearchParam;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +76,6 @@ public class TableMarkMetaData {
     /**
      * 获取某个表的标签
      * @param connName
-     * @param schemaName
-     * @param tableName
      * @return
      */
     public TableMark getTableMark(String connName,ActualTableName actualTableName){
@@ -109,9 +109,6 @@ public class TableMarkMetaData {
     /**
      * 查找有某个标签的表
      * @param connName
-     * @param catalog
-     * @param schemas
-     * @param tag
      * @return
      * @throws SQLException
      * @throws IOException

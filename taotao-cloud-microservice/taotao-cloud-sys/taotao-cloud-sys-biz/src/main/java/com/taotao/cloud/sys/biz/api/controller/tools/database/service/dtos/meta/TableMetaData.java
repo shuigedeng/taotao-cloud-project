@@ -1,5 +1,10 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Index;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.PrimaryKey;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Table;
 import lombok.Getter;
 import lombok.Setter;
 

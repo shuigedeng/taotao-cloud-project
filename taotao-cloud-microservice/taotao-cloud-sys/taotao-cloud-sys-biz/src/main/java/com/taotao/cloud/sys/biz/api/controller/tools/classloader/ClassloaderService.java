@@ -51,7 +51,6 @@ public class ClassloaderService implements InitializingBean {
 
     @Autowired
     private FileManager fileManager;
-
     @Autowired(required = false)
     private Map<String,FileLoadClassHandler> fileLoadClassHandlerMap = new HashMap<>();
     @Autowired
@@ -93,8 +92,7 @@ public class ClassloaderService implements InitializingBean {
         // 将 treeFile 映射成 LoadedTreeFile
         final List<LoadedClass> loadedClasses = listLoadedClasses(classloaderName);
         final Map<String, LoadedClass> loadedClassMap = loadedClasses.stream().collect(Collectors.toMap(LoadedClass::getClassName, Function.identity()));
-        LoadedTreeFile loadedTreeFile = wrapperToLoadedTreeFile(treeFile,loadedClassMap);
-        return loadedTreeFile;
+	    return wrapperToLoadedTreeFile(treeFile,loadedClassMap);
     }
 
     /**
@@ -243,11 +241,9 @@ public class ClassloaderService implements InitializingBean {
 
                 fields = declaredFields.length;
                 methods = declaredMethods.length;
-            } catch (Exception e) {
+            } catch (Exception | Error e) {
                 log.error("获取指定类[{}] 方法数和字段数出错:{}",loadClass.getName(),e.getMessage());
-            } catch (Error e){
-                log.error("获取指定类[{}] 方法数和字段数出错:{}",loadClass.getName(),e.getMessage());
-            }finally {
+            } finally {
                 loadedClasses.add(new LoadedClass(loadClass.getName(),fields,methods));
             }
         }
@@ -338,6 +334,7 @@ public class ClassloaderService implements InitializingBean {
 
     private static final Field classesField;
     public static final Method addURLMethod;
+
     static {
         classesField = FieldUtils.getField(ClassLoader.class, "classes", true);
         addURLMethod = MethodUtils.getMatchingMethod(URLClassLoader.class,"addURL",URL.class);

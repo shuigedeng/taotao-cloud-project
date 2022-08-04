@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.ProjectGenerateConfig.DataSourceConfig;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ public class MybatisPlusBuildConfig {
     @NotNull
     private String projectName;
     private GlobalConfig globalConfig;
-    private ProjectGenerateConfig.DataSourceConfig dataSourceConfig;
+    private DataSourceConfig dataSourceConfig;
     private PackageConfig packageConfig;
     private StrategyConfig strategyConfig;
 }

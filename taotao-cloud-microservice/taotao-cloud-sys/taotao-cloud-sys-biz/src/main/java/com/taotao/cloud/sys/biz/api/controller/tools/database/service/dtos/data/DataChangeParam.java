@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.data
 
 import com.taotao.cloud.sys.biz.api.controller.tools.core.exception.ToolException;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.compare.DiffType;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
 import lombok.Data;
 
 import javax.validation.Valid;

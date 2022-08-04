@@ -3,6 +3,9 @@ package com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.rena
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.JavaBeanInfo;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.PrimaryKey;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

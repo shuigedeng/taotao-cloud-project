@@ -1,5 +1,7 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.data.transfer;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Namespace;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -33,7 +35,7 @@ public class DataTransferContext {
     /**
      * 数据表映射配置 tableName => TableMeta
      */
-    private Map<String,TableMeta> tableMirrorConfig = new HashMap<>();
+    private Map<String, TableMeta> tableMirrorConfig = new HashMap<>();
 
     @Data
     public static final class TransferConfig{

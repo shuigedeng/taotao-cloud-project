@@ -28,7 +28,6 @@ public class ExtendClassloader extends URLClassLoader {
         this.name = name;
     }
 
-
     /**
      * 获取当前类加载器加载的类
      * @return

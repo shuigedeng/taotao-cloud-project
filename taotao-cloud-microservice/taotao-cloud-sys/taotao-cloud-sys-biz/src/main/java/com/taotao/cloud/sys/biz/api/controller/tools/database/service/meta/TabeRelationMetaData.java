@@ -7,6 +7,9 @@ import com.taotao.cloud.sys.biz.api.controller.tools.core.service.file.FileManag
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.RelationSql;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableRelation;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableRelationTree;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Namespace;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.Expression;
@@ -58,7 +61,6 @@ public class TabeRelationMetaData {
     /**
      * 新增关系
      * @param connName
-     * @param catalog
      * @param TableRelationDtos
      */
     public void configRelation(String connName, Namespace namespace, Set<TableRelation> TableRelationDtos){
@@ -118,7 +120,6 @@ public class TabeRelationMetaData {
     /**
      * 删除关系
      * @param connName
-     * @param catalog
      * @param TableRelationDtos
      */
     public void drop(String connName,Namespace namespace,Set<TableRelation> TableRelationDtos){
@@ -131,8 +132,6 @@ public class TabeRelationMetaData {
     /**
      * 查询某个表使用其它表的表关系
      * @param connName
-     * @param catalog
-     * @param tableName
      * @return
      */
     public List<TableRelation> childs(String connName, ActualTableName actualTableName){
@@ -143,8 +142,6 @@ public class TabeRelationMetaData {
     /**
      * 查询使用某个表的表关系
      * @param connName
-     * @param catalog
-     * @param tableName
      * @return
      */
     

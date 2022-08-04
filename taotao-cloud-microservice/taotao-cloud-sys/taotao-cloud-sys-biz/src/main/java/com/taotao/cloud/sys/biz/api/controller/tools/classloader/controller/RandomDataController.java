@@ -34,7 +34,6 @@ public class RandomDataController {
     private RegexRandomDataService regexRandomDataService;
     @Autowired
     private JsoupSpiderDataService jsoupSpiderDataService;
-
     @Autowired
     private ClassloaderService classloaderService;
 
@@ -112,7 +111,7 @@ public class RandomDataController {
     /**
      * sepl 表达式解析器
      */
-    private ExpressionParser expressionParser = new SpelExpressionParser();
+    private static final ExpressionParser expressionParser = new SpelExpressionParser();
 
     /**
      * spel 表达式数据

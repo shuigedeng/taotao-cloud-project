@@ -1,5 +1,7 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.data.transfer;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
 import lombok.Data;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.database.service.sqlparser;
 
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
 import lombok.Data;
 
 /**

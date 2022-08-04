@@ -21,7 +21,7 @@ public class DeCompileService {
      * @return
      */
     public String deCompile(File classFile){
-        HashMap<String, String> options = new HashMap<String, String>();
+        HashMap<String, String> options = new HashMap<>();
         /**
          * @see com.reader.util.MiscConstants.Version.getVersion() Currently,
          *      the cfr version is wrong. so disable show cfr version.
@@ -40,7 +40,7 @@ public class DeCompileService {
     }
 
     public static final class CustomOutputSinkFactory implements OutputSinkFactory{
-        private StringBuilder result;
+        private final StringBuilder result;
 
         public CustomOutputSinkFactory(StringBuilder result) {
             this.result = result;
@@ -48,21 +48,21 @@ public class DeCompileService {
 
         @Override
         public List<SinkClass> getSupportedSinks(SinkType sinkType, Collection<SinkClass> collection) {
-            return Arrays.asList(SinkClass.STRING, SinkClass.DECOMPILED, SinkClass.DECOMPILED_MULTIVER,
-                    SinkClass.EXCEPTION_MESSAGE);
+            return Arrays.asList(
+				SinkClass.STRING,
+	            SinkClass.DECOMPILED,
+	            SinkClass.DECOMPILED_MULTIVER,
+	            SinkClass.EXCEPTION_MESSAGE);
         }
 
         @Override
         public <T> Sink<T> getSink(final SinkType sinkType, SinkClass sinkClass) {
-            return new Sink<T>() {
-                @Override
-                public void write(T sinkable) {
-                    // skip message like: Analysing type demo.MathGame
-                    if (sinkType == SinkType.PROGRESS) {
-                        return;
-                    }
-                    result.append(sinkable);
+            return sinkable -> {
+                // skip message like: Analysing type demo.MathGame
+                if (sinkType == SinkType.PROGRESS) {
+                    return;
                 }
+                result.append(sinkable);
             };
         }
     }
