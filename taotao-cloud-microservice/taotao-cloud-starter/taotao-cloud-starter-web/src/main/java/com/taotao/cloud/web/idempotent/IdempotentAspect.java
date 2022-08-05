@@ -96,7 +96,7 @@ public class IdempotentAspect {
 		if (enable && null != idempotent) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 			if (null == attributes) {
-				throw new IdempotentException("请求数据为空");
+				throw new IdempotentException("数据为空");
 			}
 			HttpServletRequest request = attributes.getRequest();
 
@@ -112,7 +112,8 @@ public class IdempotentAspect {
 							LOCK_WAIT_TIME,
 							TimeUnit.MILLISECONDS);
 						if (Objects.isNull(result)) {
-							throw new IdempotentException("命中RID重复请求");
+							LogUtil.error("命中RID重复请求");
+							throw new IdempotentException("重复请求");
 						}
 						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
 						ZLOCK_CONTEXT.set(result);
@@ -155,14 +156,14 @@ public class IdempotentAspect {
 						perFix = perFix + ":" + val;
 
 						try {
-							ZLock result = distributedLock.tryLock(perFix, LOCK_WAIT_TIME,
-								TimeUnit.MILLISECONDS);
+							ZLock result = distributedLock.tryLock(perFix, LOCK_WAIT_TIME, TimeUnit.MILLISECONDS);
 							if (!Objects.nonNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
 								LogUtil.error("不允许重复执行,,key={},,targetName={},,methodName={}", perFix, targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
+
 							//存储在当前线程
 							PER_FIX_KEY.set(perFix);
 							ZLOCK_CONTEXT.set(result);

@@ -25,13 +25,11 @@ import java.nio.charset.StandardCharsets;
 /**
  * <p>Description: 验证码通用基础类 </p>
  *
- * @param <K> 验证码缓存对应Key值的类型。
- * @param <V> 验证码缓存存储数据的值的类型
  * @author shuigedeng
  * @version 2022.07
  * @since 2022-07-12 12:53:22
  */
-public abstract class AbstractBehaviorRenderer<K, V> extends AbstractRenderer<K, V> {
+public abstract class AbstractBehaviorRenderer extends AbstractRenderer {
 
 	protected int getEnOrZhLength(String s) {
 		int enCount = 0;

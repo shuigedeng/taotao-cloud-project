@@ -17,7 +17,9 @@ package com.taotao.cloud.web.limit;
 
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.ImmutableList;
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.apache.commons.lang.StringUtils;
@@ -83,6 +85,7 @@ public class LimitAspect {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
 		Method method = signature.getMethod();
 		Limit limitAnnotation = method.getAnnotation(Limit.class);
+
 		LimitType limitType = limitAnnotation.limitType();
 		String name = limitAnnotation.name();
 		int limitPeriod = limitAnnotation.period();
@@ -91,8 +94,7 @@ public class LimitAspect {
 		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
 		String key = switch (limitType) {
 			case IP -> RequestUtil.getHttpServletRequestIpAddress();
-			case CUSTOMER ->
-				StrUtil.isBlank(limitAnnotation.key()) ? StringUtils.upperCase(method.getName()) : limitAnnotation.key();
+			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key()) ? StringUtils.upperCase(method.getName()) : limitAnnotation.key();
 		};
 
 		ImmutableList<String> keys = ImmutableList.of(StringUtil.join(limitAnnotation.prefix(), key));
@@ -104,13 +106,11 @@ public class LimitAspect {
 			if (count != null && count.intValue() <= limitCount) {
 				return pjp.proceed();
 			} else {
-				throw new RuntimeException("You have been dragged into the blacklist");
+				throw new LimitException(ResultEnum.BLACKLIST);
 			}
 		} catch (Throwable e) {
-			if (e instanceof RuntimeException) {
-				throw new RuntimeException(e.getLocalizedMessage());
-			}
-			throw new RuntimeException("server exception");
+			LogUtil.error(e);
+			throw new LimitException(ResultEnum.ERROR);
 		}
 	}
 

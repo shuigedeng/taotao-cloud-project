@@ -17,6 +17,9 @@ package com.taotao.cloud.web.filter;
 
 
 import com.taotao.cloud.common.context.TraceContextHolder;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
@@ -42,12 +45,17 @@ public class TraceFilter extends OncePerRequestFilter {
 		this.filterProperties = filterProperties;
 	}
 
+	//@Override
+	//protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+	//	if (request.getRequestURI().startsWith("/actuator")) {
+	//		return true;
+	//	}
+	//	return !filterProperties.getTrace();
+	//}
+
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		if (request.getRequestURI().startsWith("/actuator")) {
-			return true;
-		}
-		return !filterProperties.getTrace();
+		return RequestUtil.excludeActuator(request);
 	}
 
 	@Override
@@ -55,6 +63,9 @@ public class TraceFilter extends OncePerRequestFilter {
 		FilterChain filterChain) throws ServletException, IOException {
 		try {
 			String traceId = TraceUtil.getTraceId(request);
+			if(StringUtil.isBlank(traceId)){
+				traceId = IdGeneratorUtil.getIdStr();
+			}
 			TraceContextHolder.setTraceId(traceId);
 
 			TraceUtil.mdcTraceId(traceId);

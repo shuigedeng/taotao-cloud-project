@@ -74,7 +74,6 @@ public class PrometheusMetricsInterceptor implements HandlerInterceptor {
 		int status = response.getStatus();
 
 		requestCounter.labels(requestURI, method, String.valueOf(status)).inc();
-
 		inprogressRequests.labels(requestURI, method).dec();
 
 		if (Objects.nonNull(PrometheusAutoConfiguration.histogramRequestTimer)) {

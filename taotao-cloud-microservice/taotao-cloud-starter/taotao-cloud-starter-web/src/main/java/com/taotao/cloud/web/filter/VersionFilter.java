@@ -18,6 +18,7 @@ package com.taotao.cloud.web.filter;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.VersionContextHolder;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import java.io.IOException;
 import java.util.Objects;
@@ -37,13 +38,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @since 2021-09-02 22:16:36
  */
 public class VersionFilter extends OncePerRequestFilter {
-
+	@Override
+	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		return RequestUtil.excludeActuator(request);
+	}
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {
 		try {
-			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-			RequestContextHolder.setRequestAttributes(attributes, true);
+			//ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+			//RequestContextHolder.setRequestAttributes(attributes, true);
 
 			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION_HEADER);
 			if (StrUtil.isNotEmpty(version)) {

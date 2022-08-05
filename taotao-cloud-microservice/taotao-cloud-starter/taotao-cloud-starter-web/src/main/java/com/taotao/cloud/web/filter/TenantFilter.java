@@ -19,6 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -36,6 +37,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @since 2021-09-02 22:15:01
  */
 public class TenantFilter extends OncePerRequestFilter {
+	@Override
+	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		return RequestUtil.excludeActuator(request);
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

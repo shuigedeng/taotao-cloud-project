@@ -18,13 +18,9 @@ package com.taotao.cloud.captcha.support.behavior.renderer;
 
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.util.IdUtil;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
 import com.taotao.cloud.captcha.support.behavior.definition.AbstractBehaviorRenderer;
 import com.taotao.cloud.captcha.support.behavior.dto.JigsawCaptcha;
 import com.taotao.cloud.captcha.support.core.algorithm.GaussianBlur;
-import com.taotao.cloud.captcha.support.core.constants.CaptchaConstants;
 import com.taotao.cloud.captcha.support.core.definition.domain.Coordinate;
 import com.taotao.cloud.captcha.support.core.definition.domain.Metadata;
 import com.taotao.cloud.captcha.support.core.definition.enums.CaptchaCategory;
@@ -34,6 +30,7 @@ import com.taotao.cloud.captcha.support.core.exception.CaptchaHasExpiredExceptio
 import com.taotao.cloud.captcha.support.core.exception.CaptchaMismatchException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaParameterIllegalException;
 import com.taotao.cloud.captcha.support.core.provider.RandomProvider;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -41,13 +38,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -58,7 +58,7 @@ import org.springframework.stereotype.Component;
  * @since 2022-07-12 12:53:37
  */
 @Component
-public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer<String, Coordinate> {
+public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer {
 
 	private static final Logger log = LoggerFactory.getLogger(JigsawCaptchaRenderer.class);
 
@@ -69,14 +69,10 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer<String, Coor
 
 	private final Map<String, String> jigsawOriginalImages = new ConcurrentHashMap<>();
 	private final Map<String, String> jigsawTemplateImages = new ConcurrentHashMap<>();
+	private static final Duration DEFAULT_EXPIRE = Duration.ofMinutes(1);
 
-	@CreateCache(name = CaptchaConstants.CACHE_NAME_CAPTCHA_JIGSAW, cacheType = CacheType.BOTH)
-	protected Cache<String, Coordinate> cache;
-
-	@Override
-	protected Cache<String, Coordinate> getCache() {
-		return this.cache;
-	}
+	@Autowired
+	private RedisRepository redisRepository;
 
 	@Override
 	public String getCategory() {
@@ -92,23 +88,19 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer<String, Coor
 			identity = IdUtil.fastUUID();
 		}
 
-		this.create(identity);
-		return this.jigsawCaptcha;
-	}
-
-	@Override
-	public Coordinate nextStamp(String key) {
-
 		Metadata metadata = draw();
 
 		JigsawCaptcha jigsawCaptcha = new JigsawCaptcha();
-		jigsawCaptcha.setIdentity(key);
+		jigsawCaptcha.setIdentity(identity);
 		jigsawCaptcha.setOriginalImageBase64(metadata.getOriginalImageBase64());
 		jigsawCaptcha.setSliderImageBase64(metadata.getSliderImageBase64());
 
+		redisRepository.setExpire(identity, jigsawCaptcha, DEFAULT_EXPIRE.toMillis(),
+			TimeUnit.MILLISECONDS);
+
 		this.jigsawCaptcha = jigsawCaptcha;
 
-		return metadata.getCoordinate();
+		return this.jigsawCaptcha;
 	}
 
 	@Override
@@ -118,13 +110,12 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer<String, Coor
 			verification.getCoordinate())) {
 			throw new CaptchaParameterIllegalException("Parameter Stamp value is null");
 		}
-
-		Coordinate store = this.get(verification.getIdentity());
+		Coordinate store = (Coordinate) redisRepository.get(verification.getIdentity());
 		if (ObjectUtils.isEmpty(store)) {
 			throw new CaptchaHasExpiredException("Stamp is invalid!");
 		}
 
-		this.delete(verification.getIdentity());
+		redisRepository.del(verification.getIdentity());
 
 		Coordinate real = verification.getCoordinate();
 

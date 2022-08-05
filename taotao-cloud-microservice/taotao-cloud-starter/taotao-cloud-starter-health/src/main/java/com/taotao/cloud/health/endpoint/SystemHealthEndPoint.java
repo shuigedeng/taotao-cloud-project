@@ -29,7 +29,7 @@ import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
  * @version 2021.9
  * @since 2021-09-02 20:08:52
  */
-@Endpoint(id = "system-health")
+@Endpoint(id = "systemHealth")
 public class SystemHealthEndPoint {
 
 	private HealthCheckProvider healthCheckProvider;

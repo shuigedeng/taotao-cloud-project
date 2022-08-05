@@ -38,15 +38,16 @@ import java.time.LocalDateTime;
 public enum ResultEnum implements BaseEnum {
 	//********************************************* 公共枚举参数 *******************************************************
 	SUCCESS(200, "请求成功"),
-	ERROR(500, "系统错误，请稍后重试"),
 	LOGIN_SUCCESS(200, "登录成功"),
 	LOGOUT_SUCCESS(200, "退出成功"),
 	BAD_REQUEST(400, "请求错误"),
 	UNAUTHORIZED(401, "用户未登录认证失败"),
 	FORBIDDEN(403, "用户权限不足"),
 	REQUEST_NOT_FOUND(404, "请求不存在"),
+	ERROR(500, "系统错误，请稍后重试"),
 	INNER_ERROR(500, "内部系统调用错误"),
 	SQL_INJECTION_REQUEST(405, "疑似SQL注入请求"),
+	BLACKLIST(406, "您已被拉入黑名单"),
 
 	//********************************************* 其他异常 *******************************************************
 	CUSTOM_WORDS_EXIST_ERROR(599001, "当前自定义分词已存在！"),

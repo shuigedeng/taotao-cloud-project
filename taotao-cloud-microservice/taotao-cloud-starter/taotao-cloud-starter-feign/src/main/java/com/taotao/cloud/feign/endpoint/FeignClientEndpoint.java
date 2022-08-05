@@ -46,7 +46,7 @@ import java.util.Set;
 /**
  * Feign client 端点
  */
-@Endpoint(id = "feign")
+@Endpoint(id = "feignClients")
 public class FeignClientEndpoint implements SmartInitializingSingleton {
 
 	private final ApplicationContext context;

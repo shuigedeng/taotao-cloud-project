@@ -642,8 +642,7 @@ public class RequestUtil {
 			}
 		} else if (ip.length() > 15) {
 			String[] ips = ip.split(",");
-			for (int index = 0; index < ips.length; index++) {
-				String strIp = ips[index];
+			for (String strIp : ips) {
 				if (!isEmptyIp(ip)) {
 					ip = strIp;
 					break;
@@ -651,5 +650,9 @@ public class RequestUtil {
 			}
 		}
 		return ip;
+	}
+
+	public static boolean excludeActuator(HttpServletRequest request){
+		return request.getRequestURI().startsWith("/actuator");
 	}
 }

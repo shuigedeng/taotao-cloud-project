@@ -32,6 +32,8 @@ import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.web.idempotent.IdempotentException;
+import com.taotao.cloud.web.limit.LimitException;
 import feign.codec.DecodeException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.SQLException;
@@ -231,6 +233,18 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	public Result<String> handleException(NativeWebRequest req, ValidationException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.VERIFY_ARGUMENT_ERROR);
+	}
+
+	@ExceptionHandler({LimitException.class})
+	public Result<String> limitException(NativeWebRequest req, LimitException e) {
+		printLog(req, e);
+		return Result.fail(e.getMessage(), e.getCode());
+	}
+
+	@ExceptionHandler({IdempotentException.class})
+	public Result<String> idempotentException(NativeWebRequest req, IdempotentException e) {
+		printLog(req, e);
+		return Result.fail(e.getMessage(), e.getCode());
 	}
 
 	/**
