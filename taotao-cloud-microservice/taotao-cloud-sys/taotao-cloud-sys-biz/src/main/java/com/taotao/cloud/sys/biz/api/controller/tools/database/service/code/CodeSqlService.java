@@ -9,7 +9,10 @@ import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.rename.DefaultRenameStragtegy;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.rename.MetaClassAdapter;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.rename.RenameStrategy;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.aspect.JdbcConnection;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.Column;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.sqlparser.ExtendFindTable;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.sqlparser.FindTable;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.sqlparser.TablesFinder;
@@ -37,6 +40,8 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.rename.DefaultRenameStragtegy.multiValueMap;
 
 
 /**
