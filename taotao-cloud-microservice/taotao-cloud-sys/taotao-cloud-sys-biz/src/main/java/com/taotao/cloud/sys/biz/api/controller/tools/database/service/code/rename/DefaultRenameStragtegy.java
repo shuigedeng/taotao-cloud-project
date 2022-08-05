@@ -41,8 +41,7 @@ public class DefaultRenameStragtegy implements RenameStrategy {
 		List<Column> columns = tableMetaData.getColumns();
 		List<PrimaryKey> primaryKeys = tableMetaData.getPrimaryKeys();
 		//        Map<String, List<String>> pkColumnNameMap = primaryKeys.stream().collect(Collectors.groupingBy(PrimaryKey::getPkName, Collectors.mapping(PrimaryKey::getColumnName, Collectors.toList())));
-		List<String> primaryKeyColumns = primaryKeys.stream().map(PrimaryKey::getColumnName)
-				.collect(Collectors.toList());
+		List<String> primaryKeyColumns = primaryKeys.stream().map(PrimaryKey::getColumnName).toList();
 
 		for (Column column : columns) {
 			String columnName = column.getColumnName();

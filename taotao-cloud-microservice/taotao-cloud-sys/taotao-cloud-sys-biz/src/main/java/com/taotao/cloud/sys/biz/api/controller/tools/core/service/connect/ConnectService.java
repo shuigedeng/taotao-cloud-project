@@ -79,19 +79,16 @@ public abstract class ConnectService {
 
     private void sortConnects(List<ConnectOutput> connectOutputs) {
         // 连接信息排序, 先按模块排序,再按最近访问时间排序
-        Collections.sort(connectOutputs, new Comparator<ConnectOutput>() {
-            @Override
-            public int compare(ConnectOutput o1, ConnectOutput o2) {
-                final ConnectInput connectInput1 = o1.getConnectInput();
-                final ConnectInput connectInput2 = o2.getConnectInput();
-                final int firstCompare = connectInput1.getModule().compareTo(connectInput2.getModule());
-                if (firstCompare != 0){
-                    return firstCompare;
-                }
+        Collections.sort(connectOutputs, (o1, o2) -> {
+			final ConnectInput connectInput1 = o1.getConnectInput();
+			final ConnectInput connectInput2 = o2.getConnectInput();
+			final int firstCompare = connectInput1.getModule().compareTo(connectInput2.getModule());
+			if (firstCompare != 0){
+				return firstCompare;
+			}
 
-                return o1.getLastAccessTime().compareTo(o2.getLastAccessTime());
-            }
-        });
+			return o1.getLastAccessTime().compareTo(o2.getLastAccessTime());
+		});
     }
 
     /**

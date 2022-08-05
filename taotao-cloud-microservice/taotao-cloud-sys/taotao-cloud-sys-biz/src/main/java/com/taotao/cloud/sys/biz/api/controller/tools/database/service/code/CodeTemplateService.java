@@ -6,10 +6,13 @@ import com.taotao.cloud.sys.biz.api.controller.tools.core.service.file.FileManag
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.JdbcMetaService;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.TableSearchService;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.CodeGeneratorParam;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.JavaBeanInfo;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.PreviewCodeParam;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.dtos.ProjectGenerateConfig;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.code.rename.RenameStrategy;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.connect.ConnDatasourceAdapter;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMeta;
+import com.taotao.cloud.sys.biz.api.controller.tools.database.service.dtos.meta.TableMetaData;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.aspect.JdbcConnection;
 import com.taotao.cloud.sys.biz.api.controller.tools.database.service.meta.dtos.ActualTableName;
 import freemarker.template.Configuration;
