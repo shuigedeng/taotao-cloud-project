@@ -36,6 +36,11 @@ dependencies {
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
+    //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
+    // https://code.google.com/p/aviator/
+    //http://code.google.com/p/aviator/wiki/User_Guide_zh
+    implementation 'com.googlecode.aviator:aviator:5.3.1'
+
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
     implementation 'com.google.protobuf:protobuf-java:3.21.3'
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
@@ -49,16 +54,16 @@ dependencies {
     implementation 'io.protostuff:protostuff-runtime:1.8.0'
 
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    implementation 'io.github.memorydoc:gobrs-async-starter:1.2.0-RELEASE'
+    implementation 'io.github.memorydoc:gobrs-async-starter:1.2.1-RELEASE'
 
     //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
-    implementation 'io.soabase.record-builder:record-builder-core:33'
+    implementation 'io.soabase.record-builder:record-builder-core:34'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
-    annotationProcessor 'io.soabase.record-builder:record-builder-processor:33'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
