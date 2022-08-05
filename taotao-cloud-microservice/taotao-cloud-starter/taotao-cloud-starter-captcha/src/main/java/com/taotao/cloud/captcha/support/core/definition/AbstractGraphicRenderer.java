@@ -17,10 +17,6 @@
 package com.taotao.cloud.captcha.support.core.definition;
 
 import cn.hutool.core.util.IdUtil;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import com.taotao.cloud.captcha.support.core.constants.CaptchaConstants;
 import com.taotao.cloud.captcha.support.core.definition.domain.Metadata;
 import com.taotao.cloud.captcha.support.core.dto.Captcha;
 import com.taotao.cloud.captcha.support.core.dto.GraphicCaptcha;
@@ -29,10 +25,13 @@ import com.taotao.cloud.captcha.support.core.exception.CaptchaHasExpiredExceptio
 import com.taotao.cloud.captcha.support.core.exception.CaptchaIsEmptyException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaMismatchException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaParameterIllegalException;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import java.awt.Font;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import java.awt.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>Description: 抽象的图形验证码 </p>
@@ -41,89 +40,84 @@ import java.awt.*;
  * @version 2022.07
  * @since 2022-07-12 12:57:36
  */
-public abstract class AbstractGraphicRenderer extends AbstractRenderer<String, String> {
+public abstract class AbstractGraphicRenderer extends AbstractRenderer {
 
-    @CreateCache(name = CaptchaConstants.CACHE_NAME_CAPTCHA_GRAPHIC, cacheType = CacheType.BOTH)
-    protected Cache<String, String> cache;
+	private static final Duration DEFAULT_EXPIRE = Duration.ofMinutes(1);
 
-    @Override
-    protected Cache<String, String> getCache() {
-        return this.cache;
-    }
+	@Autowired
+	private RedisRepository redisRepository;
 
-    private GraphicCaptcha graphicCaptcha;
+	private GraphicCaptcha graphicCaptcha;
 
-    protected Font getFont() {
-        return this.getResourceProvider().getGraphicFont();
-    }
+	protected Font getFont() {
+		return this.getResourceProvider().getGraphicFont();
+	}
 
-    protected int getWidth() {
-        return this.getCaptchaProperties().getGraphics().getWidth();
-    }
+	protected int getWidth() {
+		return this.getCaptchaProperties().getGraphics().getWidth();
+	}
 
-    protected int getHeight() {
-        return this.getCaptchaProperties().getGraphics().getHeight();
-    }
+	protected int getHeight() {
+		return this.getCaptchaProperties().getGraphics().getHeight();
+	}
 
-    protected int getLength() {
-        return this.getCaptchaProperties().getGraphics().getLength();
-    }
+	protected int getLength() {
+		return this.getCaptchaProperties().getGraphics().getLength();
+	}
 
-    @Override
-    public Captcha getCapcha(String key) {
-        String identity = key;
-        if (StringUtils.isBlank(identity)) {
-            identity = IdUtil.fastUUID();
-        }
+	@Override
+	public Captcha getCapcha(String key) {
+		String identity = key;
+		if (StringUtils.isBlank(identity)) {
+			identity = IdUtil.fastUUID();
+		}
 
-        this.create(identity);
-        return getGraphicCaptcha();
-    }
+		Metadata metadata = draw();
 
-    @Override
-    public boolean verify(Verification verification) {
-        if (ObjectUtils.isEmpty(verification) || StringUtils.isEmpty(verification.getIdentity())) {
-            throw new CaptchaParameterIllegalException("Parameter value is illegal");
-        }
+		GraphicCaptcha graphicCaptcha = new GraphicCaptcha();
+		graphicCaptcha.setIdentity(identity);
+		graphicCaptcha.setGraphicImageBase64(metadata.getGraphicImageBase64());
+		graphicCaptcha.setCategory(getCategory());
+		this.setGraphicCaptcha(graphicCaptcha);
 
-        if (StringUtils.isEmpty(verification.getCharacters())) {
-            throw new CaptchaIsEmptyException("Captcha is empty");
-        }
+		redisRepository.setExpire(identity, metadata.getCharacters(), DEFAULT_EXPIRE.toMillis(),
+			TimeUnit.MILLISECONDS);
 
-        String store = this.get(verification.getIdentity());
-        if (StringUtils.isEmpty(store)) {
-            throw new CaptchaHasExpiredException("Stamp is invalid!");
-        }
+		return getGraphicCaptcha();
+	}
 
-        this.delete(verification.getIdentity());
+	@Override
+	public boolean verify(Verification verification) {
+		if (ObjectUtils.isEmpty(verification) || StringUtils.isEmpty(verification.getIdentity())) {
+			throw new CaptchaParameterIllegalException("Parameter value is illegal");
+		}
 
-        String real = verification.getCharacters();
+		if (StringUtils.isEmpty(verification.getCharacters())) {
+			throw new CaptchaIsEmptyException("Captcha is empty");
+		}
 
-        if (!StringUtils.equalsIgnoreCase(store, real)) {
-            throw new CaptchaMismatchException("");
-        }
+		String store = (String) redisRepository.get(verification.getIdentity());
+		if (StringUtils.isEmpty(store)) {
+			throw new CaptchaHasExpiredException("Stamp is invalid!");
+		}
 
-        return true;
-    }
+		redisRepository.del(verification.getIdentity());
 
-    private GraphicCaptcha getGraphicCaptcha() {
-        return graphicCaptcha;
-    }
+		String real = verification.getCharacters();
 
-    protected void setGraphicCaptcha(GraphicCaptcha graphicCaptcha) {
-        this.graphicCaptcha = graphicCaptcha;
-    }
+		if (!StringUtils.equalsIgnoreCase(store, real)) {
+			throw new CaptchaMismatchException("");
+		}
 
-    @Override
-    public String nextStamp(String key) {
-        Metadata metadata = draw();
+		return true;
+	}
 
-        GraphicCaptcha graphicCaptcha = new GraphicCaptcha();
-        graphicCaptcha.setIdentity(key);
-        graphicCaptcha.setGraphicImageBase64(metadata.getGraphicImageBase64());
-        graphicCaptcha.setCategory(getCategory());
-        this.setGraphicCaptcha(graphicCaptcha);
+	private GraphicCaptcha getGraphicCaptcha() {
+		return graphicCaptcha;
+	}
 
-        return metadata.getCharacters();
-    }
+	protected void setGraphicCaptcha(GraphicCaptcha graphicCaptcha) {
+		this.graphicCaptcha = graphicCaptcha;
+	}
+
 }

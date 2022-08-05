@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.idempotent;
+package com.taotao.cloud.web.limit;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
@@ -25,33 +25,34 @@ import com.taotao.cloud.common.exception.BaseException;
  * @version 2021.9
  * @since 2021-09-02 22:19:03
  */
-public class IdempotentException extends BaseException {
+public class LimitException extends BaseException {
 
-	public IdempotentException(String message) {
+
+	public LimitException(String message) {
 		super(message);
 	}
 
-	public IdempotentException(Integer code, String message) {
+	public LimitException(Integer code, String message) {
 		super(code, message);
 	}
 
-	public IdempotentException(Throwable e) {
+	public LimitException(Throwable e) {
 		super(e);
 	}
 
-	public IdempotentException(String message, Throwable e) {
+	public LimitException(String message, Throwable e) {
 		super(message, e);
 	}
 
-	public IdempotentException(Integer code, String message, Throwable e) {
+	public LimitException(Integer code, String message, Throwable e) {
 		super(code, message, e);
 	}
 
-	public IdempotentException(ResultEnum result) {
+	public LimitException(ResultEnum result) {
 		super(result);
 	}
 
-	public IdempotentException(ResultEnum result, Throwable e) {
+	public LimitException(ResultEnum result, Throwable e) {
 		super(result, e);
 	}
 }

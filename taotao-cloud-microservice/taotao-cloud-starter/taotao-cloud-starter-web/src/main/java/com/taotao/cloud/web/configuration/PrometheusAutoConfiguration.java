@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
@@ -49,6 +50,9 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 
 	@Autowired(required = false)
 	private HealthCheckProvider healthCheckProvider;
+
+	@Value("${spring.application.name}")
+	private String applicationName;
 
 	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
 
@@ -78,9 +82,8 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 										.register(prometheusMeterRegistry.getPrometheusRegistry());
 									gaugeMap.put(field, gauge);
 								}
-								if (Objects.nonNull(number)) {
-									gauge.labels(labelNames).set(number.doubleValue());
-								}
+
+								gauge.labels(labelNames).set(number.doubleValue());
 							}
 							return null;
 						});
@@ -113,8 +116,8 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 		LogUtil.started(Counter.class, StarterName.WEB_STARTER);
 
 		return Counter.build()
-			.name("order_requests_total")
-			.help("请求总数")
+			.name(getName() + "_requests_total")
+			.help("请求总数数据")
 			.labelNames("service", "method", "code")
 			.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
@@ -128,9 +131,9 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 		LogUtil.started(Gauge.class, StarterName.WEB_STARTER);
 
 		return Gauge.build()
-			.name("io_namespace_http_inprogress_requests")
+			.name(getName() + "http_inprogress_requests")
 			.labelNames("path", "method")
-			.help("Inprogress requests.")
+			.help("进行中的请求状态数据")
 			.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
@@ -142,9 +145,9 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 		LogUtil.started(Histogram.class, StarterName.WEB_STARTER);
 
 		return Histogram.build()
-			.name("io_namespace_http_requests_latency_seconds_histogram")
+			.name(getName() + "_http_requests_latency_seconds_histogram")
 			.labelNames("path", "method", "code")
-			.help("Request latency in seconds.")
+			.help("以秒为单位的请求延迟直方图数据")
 			.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
@@ -159,13 +162,17 @@ public class PrometheusAutoConfiguration implements InitializingBean {
 		LogUtil.started(Summary.class, StarterName.WEB_STARTER);
 
 		return Summary.build()
-			.name("requestLatency")
+			.name(getName() + "_request_latency")
 			.quantile(0.5, 0.05)
 			.quantile(0.9, 0.01)
 			.labelNames("path", "method", "code")
-			.help("Request latency in seconds.")
+			.help("以秒为单位的请求延迟分数数据")
 			.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
 	public static Summary.Timer requestTimer;
+
+	private String getName(){
+		return applicationName.replaceAll("-", "_");
+	}
 }

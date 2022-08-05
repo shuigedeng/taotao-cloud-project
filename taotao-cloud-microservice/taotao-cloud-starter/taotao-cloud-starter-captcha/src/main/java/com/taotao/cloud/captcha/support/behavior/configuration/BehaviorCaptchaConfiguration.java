@@ -30,8 +30,9 @@ import javax.annotation.PostConstruct;
 /**
  * <p>Description: 行为验证码配置 </p>
  *
- * @author : gengwei.zheng
- * @date : 2022/1/18 20:57
+ * @author shuigedeng
+ * @version 2022.06
+ * @since 2022-08-05 16:33:21
  */
 @Configuration(proxyBeanMethods = false)
 public class BehaviorCaptchaConfiguration {

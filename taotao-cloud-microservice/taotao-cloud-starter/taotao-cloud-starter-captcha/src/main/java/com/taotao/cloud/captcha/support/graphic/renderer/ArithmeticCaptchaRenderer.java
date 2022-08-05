@@ -22,6 +22,7 @@ import com.taotao.cloud.captcha.support.core.provider.RandomProvider;
 import com.taotao.cloud.captcha.support.graphic.definition.AbstractBaseGraphicRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import javax.script.ScriptEngine;
@@ -37,7 +38,8 @@ import java.awt.image.BufferedImage;
  * @since 2022-07-12 12:54:40
  */
 @Component
-public class ArithmeticCaptchaRenderer extends AbstractBaseGraphicRenderer {
+public class ArithmeticCaptchaRenderer extends AbstractBaseGraphicRenderer implements
+	InitializingBean {
 
     private static final Logger log = LoggerFactory.getLogger(ArithmeticCaptchaRenderer.class);
 

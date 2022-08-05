@@ -116,7 +116,7 @@ public class MicaLoggingConfiguration {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	@Conditional(LoggingCondition.class)
-	private @interface ConditionalOnAppender {
+	public @interface ConditionalOnAppender {
 
 		/**
 		 * Appender
@@ -139,9 +139,11 @@ public class MicaLoggingConfiguration {
 			Appender appender = Appender.valueOf(value.toString());
 			Environment environment = context.getEnvironment();
 			ClassLoader classLoader = context.getClassLoader();
+
 			Boolean fileEnabled = environment.getProperty(MicaLoggingProperties.Files.PREFIX + ".enabled", Boolean.class, Boolean.TRUE);
 			Boolean logStashEnabled = environment.getProperty(MicaLoggingProperties.Logstash.PREFIX + ".enabled", Boolean.class, Boolean.FALSE);
 			Boolean lokiEnabled = environment.getProperty(MicaLoggingProperties.Loki.PREFIX + ".enabled", Boolean.class, Boolean.FALSE);
+
 			if (Appender.LOKI == appender) {
 				if (ObjectUtil.isFalse(lokiEnabled)) {
 					return ConditionOutcome.noMatch("Logging loki is not enabled.");

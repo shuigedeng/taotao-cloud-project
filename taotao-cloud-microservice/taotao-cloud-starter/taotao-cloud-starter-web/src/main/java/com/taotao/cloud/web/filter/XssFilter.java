@@ -19,6 +19,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.web.xss.XssRequestWrapper;
 import java.io.IOException;
 import java.util.List;
@@ -72,11 +73,12 @@ public class XssFilter implements Filter {
 			throws IOException, ServletException {
 		// 判断uri是否包含项目名称
 		String uriPath = ((HttpServletRequest) request).getRequestURI();
-		if (isIgnorePath(uriPath)) {
+		if(isIgnorePath(uriPath)){
 			LogUtil.debug("忽略过滤路径=[{}]", uriPath);
 			chain.doFilter(request, response);
 			return;
 		}
+
 		LogUtil.debug("过滤器包装请求路径=[{}]", uriPath);
 		chain.doFilter(new XssRequestWrapper((HttpServletRequest) request, ignoreParamValueList),
 				response);
@@ -91,6 +93,9 @@ public class XssFilter implements Filter {
 	 */
 	private boolean isIgnorePath(String uriPath) {
 		if (StrUtil.isBlank(uriPath)) {
+			return true;
+		}
+		if(uriPath.startsWith("/actuator")){
 			return true;
 		}
 		if (CollUtil.isEmpty(ignorePathList)) {

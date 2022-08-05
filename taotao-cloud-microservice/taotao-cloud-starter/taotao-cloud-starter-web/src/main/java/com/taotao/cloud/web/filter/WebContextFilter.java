@@ -30,12 +30,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @since 2021-09-02 22:15:38
  */
 public class WebContextFilter extends OncePerRequestFilter {
-
 	@Override
-	protected void initFilterBean() throws ServletException {
-		super.initFilterBean();
+	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		return RequestUtil.excludeActuator(request);
 	}
-
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {

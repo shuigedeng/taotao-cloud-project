@@ -57,8 +57,10 @@ public class LoggingFileAppender implements ILoggingAppender {
 		System.setProperty(LoggingSystemProperties.FILE_LOG_PATTERN, fileLogPattern);
 		// 3. 生成日志文件的文件
 		String logDir = environment.getProperty("logging.file.path", LoggingUtil.DEFAULT_LOG_DIR);
+
 		this.logAllFile = logDir + CharPool.SLASH + appName + CharPool.SLASH + LoggingUtil.LOG_FILE_ALL;
 		this.logErrorFile = logDir + CharPool.SLASH + appName + CharPool.SLASH + LoggingUtil.LOG_FILE_ERROR;
+
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 		this.start(context);
 	}
@@ -97,6 +99,7 @@ public class LoggingFileAppender implements ILoggingAppender {
 		allFileAppender.setFile(logFile);
 		allFileAppender.setRollingPolicy(LoggingUtil.rollingPolicy(context, allFileAppender, logFile));
 		allFileAppender.start();
+
 		context.getLogger(Logger.ROOT_LOGGER_NAME).detachAppender(LoggingUtil.FILE_APPENDER_NAME);
 		context.getLogger(Logger.ROOT_LOGGER_NAME).addAppender(allFileAppender);
 	}
@@ -117,6 +120,7 @@ public class LoggingFileAppender implements ILoggingAppender {
 		errorFileAppender.setFile(logErrorFile);
 		errorFileAppender.setRollingPolicy(LoggingUtil.rollingPolicy(context, errorFileAppender, logErrorFile));
 		errorFileAppender.start();
+
 		context.getLogger(Logger.ROOT_LOGGER_NAME).detachAppender(LoggingUtil.FILE_ERROR_APPENDER_NAME);
 		context.getLogger(Logger.ROOT_LOGGER_NAME).addAppender(errorFileAppender);
 	}

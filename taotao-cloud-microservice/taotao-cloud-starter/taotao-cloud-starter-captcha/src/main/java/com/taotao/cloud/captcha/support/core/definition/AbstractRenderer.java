@@ -18,7 +18,6 @@ package com.taotao.cloud.captcha.support.core.definition;
 import cn.hutool.core.img.ImgUtil;
 import com.taotao.cloud.captcha.support.core.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.support.core.provider.ResourceProvider;
-import com.taotao.cloud.jetcache.stamp.AbstractStampManager;
 import java.awt.image.BufferedImage;
 
 /**
@@ -28,8 +27,7 @@ import java.awt.image.BufferedImage;
  * @version 2022.07
  * @since 2022-07-12 12:57:39
  */
-public abstract class AbstractRenderer<K, V> extends AbstractStampManager<K, V> implements
-	Renderer {
+public abstract class AbstractRenderer implements Renderer {
 
 	protected static final String BASE64_PNG_IMAGE_PREFIX = "data:image/png;base64,";
 	protected static final String BASE64_GIF_IMAGE_PREFIX = "data:image/gif;base64,";
@@ -55,10 +53,5 @@ public abstract class AbstractRenderer<K, V> extends AbstractStampManager<K, V> 
 	protected String toBase64(BufferedImage bufferedImage) {
 		String image = ImgUtil.toBase64(bufferedImage, ImgUtil.IMAGE_TYPE_PNG);
 		return getBase64ImagePrefix() + image;
-	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-
 	}
 }

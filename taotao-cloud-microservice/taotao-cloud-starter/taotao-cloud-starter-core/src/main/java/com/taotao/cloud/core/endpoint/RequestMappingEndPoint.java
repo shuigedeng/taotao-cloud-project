@@ -27,7 +27,7 @@ import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
  * @version 2021.9
  * @since 2021-09-02 20:08:52
  */
-@Endpoint(id = "request-mapping")
+@Endpoint(id = "requestMapping")
 public class RequestMappingEndPoint {
 
 	public static Map<String, Object> requestMappingHandlerMapping;

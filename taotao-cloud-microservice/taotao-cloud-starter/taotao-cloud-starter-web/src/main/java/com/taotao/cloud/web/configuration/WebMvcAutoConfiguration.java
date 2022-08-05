@@ -233,16 +233,19 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 	public void addInterceptors(InterceptorRegistry registry) {
 		if (interceptorProperties.getHeader()) {
 			registry.addInterceptor(new HeaderThreadLocalInterceptor())
-				.addPathPatterns("/**");
+				.addPathPatterns("/**")
+				.excludePathPatterns("/actuator/**");
 		}
 
 		if (interceptorProperties.getPrometheus()) {
-			registry.addInterceptor(new PrometheusMetricsInterceptor(
+			registry.addInterceptor(new
+					PrometheusMetricsInterceptor(
 					requestCounter,
 					requestLatency,
 					inprogressRequests,
 					requestLatencyHistogram))
-				.addPathPatterns("/**");
+				.addPathPatterns("/**")
+				.excludePathPatterns("/actuator/**");
 		}
 
 		if (interceptorProperties.getDoubtApi()) {
@@ -411,8 +414,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 
 		Map<String, String> initParameters = new HashMap<>(4);
 		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
-		initParameters.put(IGNORE_PARAM_VALUE,
-			CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
+		initParameters.put(IGNORE_PARAM_VALUE, CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
 		filterRegistration.setInitParameters(initParameters);
 		return filterRegistration;
 	}
@@ -436,8 +438,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 		@Override
 		public boolean supportsParameter(MethodParameter parameter) {
 			boolean isHasEnableUserAnn = parameter.hasParameterAnnotation(EnableUser.class);
-			boolean isHasLoginUserParameter = parameter.getParameterType()
-				.isAssignableFrom(SecurityUser.class);
+			boolean isHasLoginUserParameter = parameter.getParameterType().isAssignableFrom(SecurityUser.class);
 			return isHasEnableUserAnn && isHasLoginUserParameter;
 		}
 
@@ -447,8 +448,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 			WebDataBinderFactory webDataBinderFactory) throws Exception {
 			EnableUser user = methodParameter.getParameterAnnotation(EnableUser.class);
 			boolean value = user.value();
-			HttpServletRequest request = nativeWebRequest.getNativeRequest(
-				HttpServletRequest.class);
+			HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
 			SecurityUser loginUser = SecurityUtil.getCurrentUser();
 
 			//根据value状态获取更多用户信息，待实现
