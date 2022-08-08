@@ -26,6 +26,22 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.apache.dubbo.common.serialize.kryo.utils.KryoUtils;
 /**
  * TaoTaoCloudAuthBizApplication
+ * 默认url
+ * 作用
+ *
+ * /oauth/authorize
+ * 授权端点
+ * /oauth/token
+ * 令牌端点
+ * /oauth/confirm_access
+ * 用户批准授权的端点
+ * /oauth/error
+ * 用于渲染授权服务器的错误
+ * /oauth/check_token
+ * 资源服务器解码access token
+ * /oauth/check_token
+ *
+ * 当使用JWT的时候，暴露公钥的端点
  *
  * 抑制java9 module 报错
  * --add-opens java.base/java.lang=ALL-UNNAMED
