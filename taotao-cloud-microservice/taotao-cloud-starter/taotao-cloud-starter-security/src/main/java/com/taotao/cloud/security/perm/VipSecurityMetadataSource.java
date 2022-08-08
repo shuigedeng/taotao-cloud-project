@@ -32,13 +32,15 @@ public class VipSecurityMetadataSource implements FilterInvocationSecurityMetada
 	public Collection<ConfigAttribute> getAttributes(Object object)
 		throws IllegalArgumentException {
 		loadPerms();
+
 		FilterInvocation fi = (FilterInvocation) object;
-		String access_uri = fi.getRequestUrl();
+		String accessUri = fi.getRequestUrl();
 		for (PermRoleEntity permRoleEntity : permRoleEntitySet) {
-			if (ANT_PATH_MATCHER.match(permRoleEntity.getAccessUri(), access_uri)) {
+			if (ANT_PATH_MATCHER.match(permRoleEntity.getAccessUri(), accessUri)) {
 				return permRoleEntity.getConfigAttributeList();
 			}
 		}
+
 		return superMetadataSource.getAttributes(object);
 	}
 
