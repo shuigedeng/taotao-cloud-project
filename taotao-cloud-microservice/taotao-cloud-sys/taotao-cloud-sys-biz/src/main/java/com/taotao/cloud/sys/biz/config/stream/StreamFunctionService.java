@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.config;
+package com.taotao.cloud.sys.biz.config.stream;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
