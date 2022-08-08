@@ -28,6 +28,9 @@ import com.taotao.cloud.common.support.function.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.security.perm.VipAccessDecisionManager;
+import com.taotao.cloud.security.perm.VipSecurityMetadataSource;
+import com.taotao.cloud.security.perm.VipSecurityOauthService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,8 +46,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.log.LogMessage;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
@@ -57,6 +62,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -126,12 +132,38 @@ public class Oauth2ResourceAutoConfiguration {
 	}
 
 	@Bean
-	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http)
+	public VipSecurityOauthService vipSecurityOauthService(){
+		return new VipSecurityOauthService();
+	}
+	@Bean
+	public VipAccessDecisionManager vipAccessDecisionManager(){
+		return new VipAccessDecisionManager();
+	}
+
+	@Bean
+	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http,
+		VipSecurityOauthService vipSecurityOauthService,
+		VipAccessDecisionManager vipAccessDecisionManager)
 		throws Exception {
-		HttpSecurity httpSecurity = http.csrf().disable()
+		HttpSecurity httpSecurity = http
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.NEVER)
+			.and()
+			.csrf().disable()
 			.authorizeRequests(registry -> {
 				permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
-				registry.anyRequest().authenticated();
+				registry
+					.anyRequest()
+					.authenticated()
+					// 动态权限
+					.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+						@Override
+						public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
+							fi.setSecurityMetadataSource(new VipSecurityMetadataSource(fi.getSecurityMetadataSource(), vipSecurityOauthService));
+							fi.setAccessDecisionManager(vipAccessDecisionManager);
+							return fi;
+						}
+					});
 			})
 			.oauth2ResourceServer(config -> config
 				.accessDeniedHandler((request, response, accessDeniedException) -> {
