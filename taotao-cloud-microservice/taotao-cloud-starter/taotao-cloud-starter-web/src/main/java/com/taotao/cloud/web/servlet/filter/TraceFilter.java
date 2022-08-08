@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.filter;
+package com.taotao.cloud.web.servlet.filter;
 
 
 import com.taotao.cloud.common.context.TraceContextHolder;
@@ -25,6 +25,7 @@ import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
@@ -37,6 +38,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 2021.9
  * @since 2021-09-02 22:16:19
  */
+@WebFilter(filterName = "TraceFilter", urlPatterns = "/*", asyncSupported = true)
 public class TraceFilter extends OncePerRequestFilter {
 
 	private final FilterProperties filterProperties;

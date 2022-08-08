@@ -13,51 +13,62 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.filter;
+package com.taotao.cloud.web.servlet.filter;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.context.VersionContextHolder;
+import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import java.io.IOException;
-import java.util.Objects;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 /**
- * 负载均衡隔离规则过滤器
+ * 租户过滤器
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 22:16:36
+ * @since 2021-09-02 22:15:01
  */
-public class VersionFilter extends OncePerRequestFilter {
+@WebFilter(filterName = "TenantFilter", urlPatterns = "/*", asyncSupported = true)
+public class TenantFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 		return RequestUtil.excludeActuator(request);
 	}
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {
 		try {
-			//ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-			//RequestContextHolder.setRequestAttributes(attributes, true);
-
-			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION_HEADER);
-			if (StrUtil.isNotEmpty(version)) {
-				VersionContextHolder.setVersion(version);
-				TraceUtil.mdcVersion(version);
+			//优先获取请求参数中的tenantId值
+			String tenantId = request.getParameter(CommonConstant.TAOTAO_CLOUD_TENANT_ID);
+			if (StrUtil.isEmpty(tenantId)) {
+				tenantId = request.getHeader(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER);
 			}
+
+			//保存租户id
+			if (StringUtil.isNotBlank(tenantId)) {
+				TenantContextHolder.setTenant(tenantId);
+				TraceUtil.mdcTenantId(tenantId);
+			} else {
+				if (StringUtil.isBlank(TenantContextHolder.getTenant())) {
+					TenantContextHolder.setTenant(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
+					TraceUtil.mdcTenantId(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
+				}
+			}
+
 			filterChain.doFilter(request, response);
 		} finally {
-			VersionContextHolder.clear();
-			TraceUtil.mdcRemoveVersion();
+			TenantContextHolder.clear();
+			TraceUtil.mdcRemoveTenantId();
 		}
 	}
 }

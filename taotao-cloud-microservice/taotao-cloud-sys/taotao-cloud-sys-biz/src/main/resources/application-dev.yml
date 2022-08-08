@@ -1271,3 +1271,9 @@ tlog:
   enableInvokeTimePrint: false
   idGenerator: com.taotao.cloud.logger.tlog.TlogIdGenerator
   mdcEnable: true
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

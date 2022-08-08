@@ -158,4 +158,9 @@ public class DictServiceImpl extends
 
 		return new AsyncResult<>(result);
 	}
+
+	@Override
+	public String async() {
+		return "sdfasf";
+	}
 }

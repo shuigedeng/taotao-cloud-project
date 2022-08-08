@@ -54,8 +54,8 @@
 Requires:
 ```
 JAVA_VERSION >= 17 (推荐使用amazon-corretto-17)
-GRALE_VERSION >= 7.4.1
-IDEA_VERSION >= 2022.1.4
+GRALE_VERSION >= 7.5.1
+IDEA_VERSION >= 2022.2
 ```
 
 Gradle:

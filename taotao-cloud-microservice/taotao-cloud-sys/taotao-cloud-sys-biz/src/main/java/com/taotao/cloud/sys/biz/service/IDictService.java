@@ -93,13 +93,8 @@ public interface IDictService extends BaseSuperService<Dict,Long> {
 
 	Future<Dict> findAsyncByCode(String code);
 
-	//
-	///**
-	// * 更新字典
-	// *
-	// * @param dict dict
-	// * @return {@link SysDict }
-	// * @since 2021-10-09 20:25:37
-	// */
-	//SysDict update(SysDict dict);
+
+	String async();
+
+
 }
