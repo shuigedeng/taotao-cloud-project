@@ -14,6 +14,7 @@ dependencies {
     api ('cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.3.1'){
         exclude group: 'cn.hippo4j', module: "hippo4j-spring-boot-starter-adapter-hystrix"
         exclude group: 'commons-collections', module: "commons-collections"
+        exclude group: 'com.alibaba', module: "fastjson"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

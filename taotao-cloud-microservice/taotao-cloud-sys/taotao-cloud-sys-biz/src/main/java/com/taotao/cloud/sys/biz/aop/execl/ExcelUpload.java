@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 /**
  *
  * 在service
- *
- * @ExcelUpload(type = UploadType.类型1)
+ * <pre class="code">
+ * &#064;ExcelUpload(type  = UploadType.类型1)
  * public String upload(List<ClassOne> items)  {
  *    if (items == null || items.size() == 0) {
  *       return;
@@ -24,6 +24,7 @@ import java.lang.annotation.Target;
  *    //插入新的
  *    batchInsert(items);
  * }
+ * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

@@ -32,6 +32,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import com.taotao.cloud.web.idempotent.Idempotent;
+import com.taotao.cloud.web.limit.GuavaLimit;
 import com.taotao.cloud.web.limit.Limit;
 import com.taotao.cloud.web.version.ApiInfo;
 import com.yomahub.tlog.core.annotation.TLogAspect;
@@ -72,12 +73,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
 	/**
-	 * 字典列表code查询
-	 *
-	 * @param code 代码
-	 * @return {@link FeignDictRes }
-	 * @see IFeignDictService#findByCode(String)
-	 * @since 2022-07-02 10:17:59
+	 * 字典列表code查询 {@link IFeignDictService#findByCode(String)}
 	 */
 	@ApiInfo(
 		create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
@@ -107,7 +103,11 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@Operation(summary = "test", description = "test")
 	@RequestLogger
 	@NotAuth
+	@Idempotent(perFix = "test")
 	@TLogAspect(value = {"code"}, pattern = "{{}}", joint = ",", str = "nihao")
+	@Limit(key = "limitTest", period = 10, count = 3)
+	@GuavaLimit
+	@SentinelResource("test")
 	@GetMapping("/test")
 	public Dict test(@RequestParam(value = "code") String code) {
 		LogUtil.info("sldfkslfdjalsdfkjalsfdjl");
