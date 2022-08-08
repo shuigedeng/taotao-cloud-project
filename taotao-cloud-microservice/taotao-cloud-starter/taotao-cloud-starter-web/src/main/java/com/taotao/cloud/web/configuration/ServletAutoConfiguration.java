@@ -105,6 +105,7 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 		servletRegistrationBean.setLoadOnStartup(1);
 		servletRegistrationBean.setAsyncSupported(true);
 		servletRegistrationBean.setUrlMappings(List.of("/myServlet"));
+		LogUtil.info("注册servlet成功，名称: {}", MyServlet.class.getName());
 		return servletRegistrationBean;
 	}
 	@Bean
@@ -114,6 +115,7 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 		servletRegistrationBean.setLoadOnStartup(1);
 		servletRegistrationBean.setAsyncSupported(true);
 		servletRegistrationBean.setUrlMappings(List.of("/my/asyncServlet"));
+		LogUtil.info("注册servlet成功，名称: {}", MyAsyncServlet.class.getName());
 		return servletRegistrationBean;
 	}
 

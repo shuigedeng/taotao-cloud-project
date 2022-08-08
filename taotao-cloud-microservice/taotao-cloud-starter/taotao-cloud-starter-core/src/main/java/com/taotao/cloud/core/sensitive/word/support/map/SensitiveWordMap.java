@@ -7,6 +7,7 @@ import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.io.FileUtil;
 import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplaceContext;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
@@ -99,7 +100,7 @@ public class SensitiveWordMap implements IWordMap {
         this.innerWordMap = newInnerWordMap;
 
         long endTime = System.currentTimeMillis();
-        System.out.println("Init sensitive word map end! Cost time: " + (endTime - startTime) + "ms");
+        LogUtil.info("Init sensitive word map end! Cost time: " + (endTime - startTime) + "ms");
     }
 
     /**

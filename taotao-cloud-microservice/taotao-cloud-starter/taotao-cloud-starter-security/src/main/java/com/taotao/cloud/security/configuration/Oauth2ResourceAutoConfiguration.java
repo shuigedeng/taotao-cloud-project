@@ -173,32 +173,32 @@ public class Oauth2ResourceAutoConfiguration {
 				permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
 				registry
 					.anyRequest()
-					.authenticated()
+					.authenticated();
 					// 动态权限
-					.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-						@Override
-						public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
-							fi.setSecurityMetadataSource(new VipSecurityMetadataSource(fi.getSecurityMetadataSource(), vipSecurityOauthService));
-							fi.setAccessDecisionManager(vipAccessDecisionManager);
-
-							return fi;
-						}
-					})
-					.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-						@Override
-						public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
-							fi.setSecurityMetadataSource(new CustomFilterInvocationSecurityMetadataSource(urlSecurityPermsLoad, fi.getSecurityMetadataSource()));
-							List<AccessDecisionVoter<? extends Object>> decisionVoters
-								= Arrays.asList(
-								new WebExpressionVoter(),
-								roleBasedVoter,
-								new AuthenticatedVoter());
-							UnanimousBased based = new UnanimousBased(decisionVoters);
-							fi.setAccessDecisionManager(based);
-
-							return fi;
-						}
-					});
+					//.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+					//	@Override
+					//	public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
+					//		fi.setSecurityMetadataSource(new VipSecurityMetadataSource(fi.getSecurityMetadataSource(), vipSecurityOauthService));
+					//		fi.setAccessDecisionManager(vipAccessDecisionManager);
+					//
+					//		return fi;
+					//	}
+					//})
+					//.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+					//	@Override
+					//	public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
+					//		fi.setSecurityMetadataSource(new CustomFilterInvocationSecurityMetadataSource(urlSecurityPermsLoad, fi.getSecurityMetadataSource()));
+					//		List<AccessDecisionVoter<? extends Object>> decisionVoters
+					//			= Arrays.asList(
+					//			new WebExpressionVoter(),
+					//			roleBasedVoter,
+					//			new AuthenticatedVoter());
+					//		UnanimousBased based = new UnanimousBased(decisionVoters);
+					//		fi.setAccessDecisionManager(based);
+					//
+					//		return fi;
+					//	}
+					//});
 			})
 			.oauth2ResourceServer(config -> config
 				.accessDeniedHandler((request, response, accessDeniedException) -> {
