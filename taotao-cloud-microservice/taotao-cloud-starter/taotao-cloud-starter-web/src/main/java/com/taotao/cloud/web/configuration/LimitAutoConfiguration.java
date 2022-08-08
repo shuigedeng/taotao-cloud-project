@@ -18,11 +18,13 @@ package com.taotao.cloud.web.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.web.limit.GuavaLimitAspect;
 import com.taotao.cloud.web.limit.LimitAspect;
 import com.taotao.cloud.web.properties.LimitProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -48,5 +50,11 @@ public class LimitAutoConfiguration implements InitializingBean {
 	@ConditionalOnBean({RedisRepository.class})
 	public LimitAspect limitAspect(RedisRepository redisRepository) {
 		return new LimitAspect(redisRepository);
+	}
+
+	@Bean
+	@ConditionalOnClass({com.google.common.util.concurrent.RateLimiter.class})
+	public GuavaLimitAspect guavaLimitAspect(){
+		return new GuavaLimitAspect();
 	}
 }

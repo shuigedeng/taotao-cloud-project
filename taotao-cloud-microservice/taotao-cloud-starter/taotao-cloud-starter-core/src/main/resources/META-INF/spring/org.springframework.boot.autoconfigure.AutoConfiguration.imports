@@ -7,4 +7,4 @@ com.taotao.cloud.core.configuration.MonitorAutoConfiguration
 com.taotao.cloud.core.configuration.NacosListenerAutoConfiguration
 com.taotao.cloud.core.configuration.OkhttpAutoConfiguration
 com.taotao.cloud.core.configuration.RestTemplateAutoConfiguration
-com.taotao.cloud.core.configuration.RretryAutoConfiguration
+com.taotao.cloud.core.configuration.RetryAutoConfiguration
