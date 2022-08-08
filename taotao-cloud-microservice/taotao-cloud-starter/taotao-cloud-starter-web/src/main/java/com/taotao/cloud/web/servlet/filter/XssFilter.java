@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.filter;
+package com.taotao.cloud.web.servlet.filter;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.CharUtil;
@@ -29,6 +29,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.util.AntPathMatcher;
 
@@ -39,6 +40,7 @@ import org.springframework.util.AntPathMatcher;
  * @version 2021.9
  * @since 2021-09-02 21:59:41
  */
+@WebFilter(filterName = "XssFilter", urlPatterns = "/*", asyncSupported = true)
 public class XssFilter implements Filter {
 
 	/**

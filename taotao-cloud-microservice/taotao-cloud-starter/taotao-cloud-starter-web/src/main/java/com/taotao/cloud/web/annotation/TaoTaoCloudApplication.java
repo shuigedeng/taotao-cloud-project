@@ -41,7 +41,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@ServletComponentScan
+@ServletComponentScan(basePackages = {"com.taotao.cloud.web.servlet"})
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableTaoTaoCloudOauth2Resource
 @EnableEncryptableProperties

@@ -15,12 +15,36 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import static com.taotao.cloud.web.servlet.filter.XssFilter.IGNORE_PARAM_VALUE;
+import static com.taotao.cloud.web.servlet.filter.XssFilter.IGNORE_PATH;
+
+import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.web.servlet.filter.TenantFilter;
+import com.taotao.cloud.web.servlet.filter.TraceFilter;
+import com.taotao.cloud.web.servlet.filter.VersionFilter;
+import com.taotao.cloud.web.servlet.filter.WebContextFilter;
+import com.taotao.cloud.web.servlet.filter.XssFilter;
+import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.web.properties.XssProperties;
+import com.taotao.cloud.web.servlet.listener.MyListener;
+import com.taotao.cloud.web.servlet.servlet.MyAsyncServlet;
+import com.taotao.cloud.web.servlet.servlet.MyServlet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
 import org.springframework.web.WebApplicationInitializer;
 
 /**
@@ -32,6 +56,16 @@ import org.springframework.web.WebApplicationInitializer;
  */
 @AutoConfiguration
 public class ServletAutoConfiguration implements WebApplicationInitializer, InitializingBean {
+	/**
+	 * xssProperties
+	 */
+	@Autowired
+	private XssProperties xssProperties;
+	/**
+	 * filterProperties
+	 */
+	@Autowired
+	private FilterProperties filterProperties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -62,4 +96,96 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 //		traceFilter.addMappingForUrlPatterns(
 //			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
 	}
+
+	//注册 Servlet 到容器中
+	@Bean
+	public ServletRegistrationBean<MyServlet> myServlet(){
+		ServletRegistrationBean<MyServlet> servletRegistrationBean = new ServletRegistrationBean<>();
+		servletRegistrationBean.setServlet(new MyServlet());
+		servletRegistrationBean.setLoadOnStartup(1);
+		servletRegistrationBean.setAsyncSupported(true);
+		servletRegistrationBean.setUrlMappings(List.of("/myServlet"));
+		return servletRegistrationBean;
+	}
+	@Bean
+	public ServletRegistrationBean<MyAsyncServlet> myAsyncServlet(){
+		ServletRegistrationBean<MyAsyncServlet> servletRegistrationBean = new ServletRegistrationBean<>();
+		servletRegistrationBean.setServlet(new MyAsyncServlet());
+		servletRegistrationBean.setLoadOnStartup(1);
+		servletRegistrationBean.setAsyncSupported(true);
+		servletRegistrationBean.setUrlMappings(List.of("/my/asyncServlet"));
+		return servletRegistrationBean;
+	}
+
+	@Bean
+	public ServletListenerRegistrationBean<MyListener> listenerServletListenerRegistrationBean() {
+		ServletListenerRegistrationBean<MyListener> bean = new ServletListenerRegistrationBean<>();
+		bean.setListener(new MyListener());
+		return bean;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "version", havingValue = "true")
+	public FilterRegistrationBean<VersionFilter> lbIsolationFilter() {
+		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new VersionFilter());
+		registrationBean.addUrlPatterns("/*");
+		registrationBean.setName(VersionFilter.class.getName());
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 6);
+		return registrationBean;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "tenant", havingValue = "true")
+	public FilterRegistrationBean<TenantFilter> tenantFilter() {
+		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new TenantFilter());
+		registrationBean.addUrlPatterns("/*");
+		registrationBean.setName(TenantFilter.class.getName());
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 5);
+		return registrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean<TraceFilter> traceFilter() {
+		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new TraceFilter(filterProperties));
+		registrationBean.addUrlPatterns("/*");
+		registrationBean.setName(TraceFilter.class.getName());
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 4);
+		return registrationBean;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "webContext", havingValue = "true")
+	public FilterRegistrationBean<WebContextFilter> webContextFilter() {
+		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new WebContextFilter());
+		registrationBean.addUrlPatterns("/*");
+		registrationBean.setName(WebContextFilter.class.getName());
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 3);
+		return registrationBean;
+	}
+
+	/**
+	 * 配置跨站攻击过滤器
+	 */
+	@Bean
+	@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+	public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
+		FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
+		filterRegistration.setFilter(new XssFilter());
+		filterRegistration.setEnabled(xssProperties.getEnabled());
+		filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
+		filterRegistration.setOrder(xssProperties.getOrder());
+
+		Map<String, String> initParameters = new HashMap<>(4);
+		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
+		initParameters.put(IGNORE_PARAM_VALUE, CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
+		filterRegistration.setInitParameters(initParameters);
+		return filterRegistration;
+	}
+
+
+
 }
