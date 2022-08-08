@@ -27,6 +27,9 @@ import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.support.function.FuncUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.security.access.CustomFilterInvocationSecurityMetadataSource;
+import com.taotao.cloud.security.access.RoleBasedVoter;
+import com.taotao.cloud.security.access.UrlSecurityPermsLoad;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.security.perm.VipAccessDecisionManager;
 import com.taotao.cloud.security.perm.VipSecurityMetadataSource;
@@ -46,6 +49,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.log.LogMessage;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AuthenticatedVoter;
+import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -62,6 +69,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -141,9 +149,20 @@ public class Oauth2ResourceAutoConfiguration {
 	}
 
 	@Bean
+	public RoleBasedVoter roleBasedVoter(){
+		return new RoleBasedVoter();
+	}
+	@Bean
+	public UrlSecurityPermsLoad urlSecurityPermsLoad(){
+		return new UrlSecurityPermsLoad();
+	}
+
+	@Bean
 	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http,
 		VipSecurityOauthService vipSecurityOauthService,
-		VipAccessDecisionManager vipAccessDecisionManager)
+		VipAccessDecisionManager vipAccessDecisionManager,
+		RoleBasedVoter roleBasedVoter,
+		UrlSecurityPermsLoad urlSecurityPermsLoad)
 		throws Exception {
 		HttpSecurity httpSecurity = http
 			.sessionManagement()
@@ -161,6 +180,22 @@ public class Oauth2ResourceAutoConfiguration {
 						public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
 							fi.setSecurityMetadataSource(new VipSecurityMetadataSource(fi.getSecurityMetadataSource(), vipSecurityOauthService));
 							fi.setAccessDecisionManager(vipAccessDecisionManager);
+
+							return fi;
+						}
+					})
+					.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+						@Override
+						public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
+							fi.setSecurityMetadataSource(new CustomFilterInvocationSecurityMetadataSource(urlSecurityPermsLoad, fi.getSecurityMetadataSource()));
+							List<AccessDecisionVoter<? extends Object>> decisionVoters
+								= Arrays.asList(
+								new WebExpressionVoter(),
+								roleBasedVoter,
+								new AuthenticatedVoter());
+							UnanimousBased based = new UnanimousBased(decisionVoters);
+							fi.setAccessDecisionManager(based);
+
 							return fi;
 						}
 					});
@@ -287,7 +322,7 @@ public class Oauth2ResourceAutoConfiguration {
 
 		/**
 		 * Sets the prefix to use for {@link GrantedAuthority authorities} mapped by this converter.
-		 * Defaults to {@link JwtGrantedAuthoritiesConverter#DEFAULT_AUTHORITY_PREFIX}.
+		 * Defaults to .
 		 *
 		 * @param authorityPrefix The authority prefix
 		 * @since 5.2
@@ -300,7 +335,7 @@ public class Oauth2ResourceAutoConfiguration {
 		/**
 		 * Sets the name of token claim to use for mapping {@link GrantedAuthority authorities} by
 		 * this converter. Defaults to
-		 * {@link JwtGrantedAuthoritiesConverter#WELL_KNOWN_AUTHORITIES_CLAIM_NAMES}.
+		 * .
 		 *
 		 * @param authoritiesClaimName The token claim name to map authorities
 		 * @since 5.2
