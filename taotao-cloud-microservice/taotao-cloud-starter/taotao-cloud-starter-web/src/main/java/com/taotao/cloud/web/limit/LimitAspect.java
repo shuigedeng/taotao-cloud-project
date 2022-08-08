@@ -81,7 +81,7 @@ public class LimitAspect {
 	}
 
 	@Around("execution(public * *(..)) && @annotation(com.taotao.cloud.web.limit.Limit)")
-	public Object interceptor(ProceedingJoinPoint pjp) {
+	public Object around(ProceedingJoinPoint pjp) {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
 		Method method = signature.getMethod();
 		Limit limitAnnotation = method.getAnnotation(Limit.class);

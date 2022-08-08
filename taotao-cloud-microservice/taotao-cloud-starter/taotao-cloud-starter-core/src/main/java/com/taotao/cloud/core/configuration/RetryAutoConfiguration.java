@@ -15,9 +15,14 @@
  */
 package com.taotao.cloud.core.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.core.retry.GuavaRetryingAspect;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.retry.annotation.Recover;
 
 /**
  * Config
@@ -58,13 +63,13 @@ import org.springframework.retry.annotation.EnableRetry;
  *     return 400;
  * }
  * </pre>
- *
+ * <p>
  * 可以看到传参里面写的是 Exception e，这个是作为回调的接头暗号（重试次数用完了，还是失败，我们抛出这个Exception e通知触发这个回调方法）。对于@Recover注解的方法，需要特别注意的是：
  * 方法的返回值必须与@Retryable方法一致
  * 方法的第一个参数，必须是Throwable类型的，建议是与@Retryable配置的异常一致，其他的参数，需要哪个参数，写进去就可以了（@Recover方法中有的）
  * 该回调方法与重试方法写在同一个实现类里面
  * 5. 注意事项
- *
+ * <p>
  * 由于是基于AOP实现，所以不支持类里自调用方法
  * 如果重试失败需要给@Recover注解的方法做后续处理，那这个重试的方法不能有返回值，只能是void
  * 方法内不能使用try catch，只能往外抛异常
@@ -76,6 +81,17 @@ import org.springframework.retry.annotation.EnableRetry;
  */
 @EnableRetry
 @AutoConfiguration
-public class RretryAutoConfiguration {
+public class RetryAutoConfiguration implements InitializingBean {
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(RetryAutoConfiguration.class, StarterName.CORE_STARTER);
+	}
+
+	// ***********************************Guava 重试机制的实现*******************************************
+
+	@Bean
+	public GuavaRetryingAspect guavaRetryingAspect() {
+		return new GuavaRetryingAspect();
+	}
 }
