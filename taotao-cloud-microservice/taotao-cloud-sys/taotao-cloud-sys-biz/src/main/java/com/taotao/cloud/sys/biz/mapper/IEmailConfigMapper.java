@@ -28,7 +28,7 @@ import org.springframework.stereotype.Repository;
  * @since 2022-03-29 09:01:48
  */
 @Repository
-@Mapper
+
 public interface IEmailConfigMapper extends BaseMapper<EmailConfig> {
 
 }

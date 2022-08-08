@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-@Mapper
+
 public interface IMenuMapper extends BaseSuperMapper<Menu, Long> {
 
 	List<Menu> findMenuByRoleIds(Set<Long> roleIds);

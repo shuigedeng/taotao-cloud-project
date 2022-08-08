@@ -237,7 +237,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				LogUtil.error(e);
 			}
 
-			System.out.println(listFiles);
+			LogUtil.info(listFiles.toString());
 			List<OssInfo> fileOssInfos = new ArrayList<>();
 			List<OssInfo> directoryInfos = new ArrayList<>();
 			if (ObjectUtil.isNotEmpty(listFiles.items)) {

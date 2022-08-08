@@ -33,7 +33,7 @@ import org.springframework.stereotype.Repository;
  * @version 2021.10
  * @since 2022-02-11 16:33:34
  */
-@Mapper
+
 @Repository
 public interface ILogMapper extends BaseMapper<Log> {
 

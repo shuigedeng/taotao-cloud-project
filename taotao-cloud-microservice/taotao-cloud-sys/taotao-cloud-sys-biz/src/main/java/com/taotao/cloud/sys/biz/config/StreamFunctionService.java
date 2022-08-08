@@ -23,7 +23,6 @@ public class StreamFunctionService {
 
 	public void sendKafka(String content) {
 		boolean send = bridge.send("outputKafka-out-0", content);
-
 		LogUtil.info(String.valueOf(send));
 	}
 

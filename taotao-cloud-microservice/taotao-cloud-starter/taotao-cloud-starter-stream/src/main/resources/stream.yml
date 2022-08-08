@@ -84,7 +84,7 @@ spring:
               #republish-to-dlq: true  # 重投到死信队列并带有报错信息
       kafka:
         binder:
-          brokers: 192.168.10.200:9092
+          brokers: 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094
           auto-create-topics: true
           autoAddPartitions: true
         bindings:

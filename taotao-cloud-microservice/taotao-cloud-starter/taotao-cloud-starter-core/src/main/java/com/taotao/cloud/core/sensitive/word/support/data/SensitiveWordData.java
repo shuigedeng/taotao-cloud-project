@@ -4,6 +4,7 @@ package com.taotao.cloud.core.sensitive.word.support.data;
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import com.taotao.cloud.common.utils.io.FileStreamUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordData;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class SensitiveWordData implements IWordData {
             defaultLines = CollectionUtil.difference(defaultLines, allowList);
 
             long end = System.currentTimeMillis();
-            System.out.println("Sensitive data loaded!, cost time: " + (end - start) + "ms");
+            LogUtil.info("Sensitive data loaded!, cost time: " + (end - start) + "ms");
         }
     }
 
