@@ -27,15 +27,11 @@ public @interface GuavaLimit {
 	/**
 	 * 每秒访问的次数
 	 * 默认可以访问20次
-	 *
-	 * @return
 	 */
 	double token() default 20;
 
 	/**
 	 * 被限流拦截返回客户端的消息
-	 *
-	 * @return
 	 */
 	String message() default "无法访问！";
 }
