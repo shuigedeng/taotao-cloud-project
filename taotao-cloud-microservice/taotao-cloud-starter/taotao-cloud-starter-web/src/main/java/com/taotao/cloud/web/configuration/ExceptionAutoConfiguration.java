@@ -34,6 +34,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.idempotent.IdempotentException;
 import com.taotao.cloud.web.limit.LimitException;
+import com.taotao.cloud.web.limit.ratelimiter.RateLimitException;
 import feign.codec.DecodeException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.SQLException;
@@ -335,6 +336,11 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	@ExceptionHandler(AuthorityException.class)
 	public Result<String> handleAuthorityException(NativeWebRequest req, AuthorityException e) {
 		printLog(req, e);
+		return Result.fail( "限流权限控制异常",429);
+	}
+
+	@ExceptionHandler(value = RateLimitException.class)
+	public Result<String> rateLimitException(RateLimitException e) {
 		return Result.fail( "限流权限控制异常",429);
 	}
 
