@@ -23,6 +23,7 @@ import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.configuration.HealthAutoConfiguration;
 import com.taotao.cloud.health.model.Report;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
