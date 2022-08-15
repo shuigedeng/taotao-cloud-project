@@ -18,7 +18,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/wiki.xsx/x-easypdf
-    api 'wiki.xsx:x-easypdf:2.9.10'
+    api 'wiki.xsx:x-easypdf:2.10.0'
 
     //https://gitee.com/PasseRR/docx4j-wisewe
     //https://search.maven.org/artifact/cn.wisewe/docx4j-wisewe

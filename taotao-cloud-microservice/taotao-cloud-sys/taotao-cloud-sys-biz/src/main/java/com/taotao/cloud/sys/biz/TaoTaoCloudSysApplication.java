@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.apt.version.Version;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
@@ -42,8 +43,6 @@ import org.springframework.retry.annotation.EnableRetry;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
-
-
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 

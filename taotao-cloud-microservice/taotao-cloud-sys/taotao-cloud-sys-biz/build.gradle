@@ -53,6 +53,8 @@ dependencies {
     //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
     implementation 'io.soabase.record-builder:record-builder-core:34'
 
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
+
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
@@ -60,6 +62,10 @@ dependencies {
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
+
+
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:junit-jupiter:1.16.2'
