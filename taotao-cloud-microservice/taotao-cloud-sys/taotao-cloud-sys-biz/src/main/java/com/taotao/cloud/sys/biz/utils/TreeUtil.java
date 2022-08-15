@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.utils;
 
+import com.taotao.cloud.apt.version.Version;
 import com.taotao.cloud.common.tree.TreeNode;
 import com.taotao.cloud.common.utils.common.OrikaUtil;
 import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
  * @version 2022.03
  * @since 2020/10/21 11:20
  */
+@Version
 public class TreeUtil {
 
 	/**

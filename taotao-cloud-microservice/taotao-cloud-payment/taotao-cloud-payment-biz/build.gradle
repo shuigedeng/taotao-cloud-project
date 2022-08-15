@@ -26,6 +26,8 @@ dependencies {
     implementation 'com.github.binarywang:weixin-java-pay:4.1.0'
     implementation 'com.github.binarywang:weixin-java-mp:4.1.0'
     implementation 'com.paypal.sdk:checkout-sdk:1.0.5'
+
+    implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.26'
 }
 
 //shadowJar {

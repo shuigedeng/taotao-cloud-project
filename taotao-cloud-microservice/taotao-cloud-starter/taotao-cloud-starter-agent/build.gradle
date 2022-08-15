@@ -1,0 +1,22 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    implementation 'org.ow2.asm:asm:9.3'
+
+    implementation "net.bytebuddy:byte-buddy:1.12.12"
+    implementation "net.bytebuddy:byte-buddy-agent:1.12.12"
+
+    implementation 'cglib:cglib:3.3.0'
+
+    implementation 'org.javassist:javassist:3.29.0-GA'
+
+    compileOnly "org.apache.tomcat.embed:tomcat-embed-core:9.0.64"
+
+    implementation 'io.opentelemetry:opentelemetry-api:1.17.0'
+    implementation 'io.opentelemetry:opentelemetry-sdk:1.17.0'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+
+
