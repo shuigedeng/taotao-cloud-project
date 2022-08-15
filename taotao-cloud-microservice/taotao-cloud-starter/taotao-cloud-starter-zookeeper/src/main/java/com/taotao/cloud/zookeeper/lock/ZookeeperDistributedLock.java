@@ -67,8 +67,7 @@ public class ZookeeperDistributedLock implements DistributedLock {
 	@Override
 	public void unlock(Object lock) throws Exception {
 		if (lock != null) {
-			if (lock instanceof InterProcessMutex) {
-				InterProcessMutex ipm = (InterProcessMutex) lock;
+			if (lock instanceof InterProcessMutex ipm) {
 				if (ipm.isAcquiredInThisProcess()) {
 					ipm.release();
 				}

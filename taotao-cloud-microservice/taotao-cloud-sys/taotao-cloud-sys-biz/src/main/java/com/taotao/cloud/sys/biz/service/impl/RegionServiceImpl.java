@@ -29,19 +29,17 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.sys.api.web.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.web.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.api.web.vo.region.RegionVO;
-import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IRegionMapStruct;
+import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -188,9 +186,9 @@ public class RegionServiceImpl extends
 	}
 
 	@Override
-	public List<RegionParentVO> tree() {
+	public List<RegionParentVO> tree(Long parentId, Integer depth) {
 		LambdaQueryWrapper<Region> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(Region::getParentId, 1);
+		wrapper.eq(Region::getParentId, parentId);
 
 		// 得到一级节点菜单列表
 		List<Region> sysRegions = getBaseMapper().selectList(wrapper);
@@ -206,7 +204,7 @@ public class RegionServiceImpl extends
 		}
 
 		if (vos.size() > 0) {
-			vos.forEach(this::findAllChild);
+			vos.forEach(e -> findAllChild(e, 1, depth));
 		}
 		return vos;
 	}
@@ -228,7 +226,10 @@ public class RegionServiceImpl extends
 			.collect(Collectors.toList());
 	}
 
-	public void findAllChild(RegionParentVO vo) {
+	public void findAllChild(RegionParentVO vo, int depth, int maxDepth) {
+		if (depth >= maxDepth) {
+			return;
+		}
 		LambdaQueryWrapper<Region> wrapper = new LambdaQueryWrapper<>();
 		wrapper.eq(Region::getParentId, vo.getId());
 		List<Region> sysRegions = getBaseMapper().selectList(wrapper);
@@ -245,7 +246,7 @@ public class RegionServiceImpl extends
 
 		vo.setChildren(regions);
 		if (regions.size() > 0) {
-			regions.forEach(this::findAllChild);
+			regions.forEach(e -> findAllChild(e, depth + 1, maxDepth));
 		}
 	}
 
@@ -281,7 +282,7 @@ public class RegionServiceImpl extends
 				// 构造存储数据库的对象集合
 				List<Region> regions = this.initData(jsonString);
 				for (int i = 0; i < (regions.size() / 100 + (regions.size() % 100 == 0 ? 0 : 1));
-					i++) {
+					 i++) {
 					int endPoint = Math.min((100 + (i * 100)), regions.size());
 					this.saveOrUpdateBatch(regions.subList(i * 100, endPoint));
 				}
@@ -383,7 +384,7 @@ public class RegionServiceImpl extends
 	 * @param ids      地区id集合
 	 */
 	public Long insert(List<Region> regions, Long parentId, String cityCode, String code,
-		String name, String center, String level, Integer order, Long... ids) {
+					   String name, String center, String level, Integer order, Long... ids) {
 		//  \"citycode\": [],\n" +
 		//         "        \"adcode\": \"100000\",\n" +
 		//         "        \"name\": \"中华人民共和国\",\n" +
