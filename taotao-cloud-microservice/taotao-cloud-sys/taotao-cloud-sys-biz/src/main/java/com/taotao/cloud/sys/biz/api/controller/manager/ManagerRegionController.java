@@ -31,13 +31,15 @@ import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 平台管理端-地区管理API
@@ -69,8 +71,9 @@ public class ManagerRegionController extends
 	@GetMapping(value = "/tree")
 	@NotAuth
 	//@PreAuthorize("hasAuthority('sys:region:info:true')")
-	public Result<List<RegionParentVO>> tree() {
-		List<RegionParentVO> result = service().tree();
+	public Result<List<RegionParentVO>> tree(@RequestParam(required = false, defaultValue = "1") Long parentId,
+											 @RequestParam(required = false, defaultValue = "1024") Integer depth) {
+		List<RegionParentVO> result = service().tree(parentId, depth);
 		return Result.success(result);
 	}
 

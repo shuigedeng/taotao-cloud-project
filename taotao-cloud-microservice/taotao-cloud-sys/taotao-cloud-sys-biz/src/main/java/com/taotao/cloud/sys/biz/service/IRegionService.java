@@ -27,8 +27,8 @@ import java.util.Map;
  * SysRegionService
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-09 20:37:26
+ * @version 2022.08
+ * @since 2022-08-10 10:24:46
  */
 public interface IRegionService extends BaseSuperService<Region, Long> {
 
@@ -36,26 +36,48 @@ public interface IRegionService extends BaseSuperService<Region, Long> {
 	 * queryRegionByParentId
 	 *
 	 * @param parentId parentId
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.QueryRegionByParentIdVO&gt; }
-	 * @since 2021-10-09 20:37:32
+	 * @return {@link List }<{@link RegionParentVO }>
+	 * @since 2022-08-10 10:29:30
 	 */
 	List<RegionParentVO> queryRegionByParentId(Long parentId);
 
 	/**
 	 * tree
 	 *
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.QueryRegionByParentIdVO&gt; }
-	 * @since 2021-10-09 20:37:36
+	 * @param parentId 父id
+	 * @param depth    深度
+	 * @return {@link List }<{@link RegionParentVO }>
+	 * @since 2022-08-10 10:25:48
 	 */
-	List<RegionParentVO> tree();
+	List<RegionParentVO> tree(Long parentId, Integer depth);
 
+	/**
+	 * 得到所有城市
+	 *
+	 * @return {@link List }<{@link RegionVO }>
+	 * @since 2022-08-10 10:24:59
+	 */
 	List<RegionVO> getAllCity();
 
+	/**
+	 * 同步数据
+	 *
+	 * @param url url
+	 * @since 2022-08-10 10:26:03
+	 */
 	void synchronizationData(String url);
 
 	List<RegionTreeVO> treeOther();
 
 	List<Region> getItem(Long parentId);
 
+	/**
+	 * 得到区域
+	 *
+	 * @param cityCode 城市代码
+	 * @param townName 小镇名字
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2022-08-10 10:26:07
+	 */
 	Map<String, Object> getRegion(String cityCode, String townName);
 }
