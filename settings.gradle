@@ -31,16 +31,16 @@ pluginManagement {
 
 rootProject.name = 'taotao-cloud-project'
 
-def oneLayerProjects = ['dependencies', 'scala', 'netty', 'node', 'python', 'ui', 'go','demo']
+def oneLayerProjects = ['dependencies', 'scala', 'netty', 'python','demo']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'reactive', 'spring', 'plugin']
+def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'reactive', 'spring', 'plugin', 'node', 'ui', 'go']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
-        directory.eachDir {
+        directory.eachDir {it->
             if (it.name != "build" && it.name != "out" && it.name != "bin") {
                 include "${dir}:${directory.name}"
             }
@@ -54,6 +54,7 @@ for (project in threeLayerProjects) {
     file("${rootDir}/${dir}").eachDir { directory ->
         if (directory.name != "build" && directory.name != "out" && directory.name != "src" && directory.name != "bin") {
             include "${dir}:${directory.name}"
+
             directory.eachDir {it->
                 if (it.name != "build" && it.name != "src" && it.name != "out" && it.name != "bin") {
                     include "${dir}:${directory.name}:${it.name}"

@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath "com.github.node-gradle:gradle-node-plugin:3.4.0"
+    }
+}
+
+apply plugin: 'com.github.node-gradle.node'
+
+task cnpmInstall(type: NpmTask) {
+    group = 'node'
+    args = ['install', '--registry=http://registry.cnpmjs.org']
+}
+task yarnInstall(type: YarnTask) {
+    group = 'node'
+    args = ['add']
+}
+
+//调用npm run build命令的Gradle任务
+task yarnBuild(type: YarnTask, dependsOn: yarnInstall) {
+    group = 'node'
+    args = ['run', 'build']
+}
+
+//Gradle的java插件的jar任务，依赖npmBuild,即web子模块打jar包前必须运行npm run build
+jar.dependsOn yarnBuild
+
+//调用npm run dev
+task yarnDev(type: YarnTask, dependsOn: yarnInstall) {
+    group = 'node'
+    args = ['run', 'dev']
+}
+

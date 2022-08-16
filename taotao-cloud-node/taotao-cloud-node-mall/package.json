@@ -1,0 +1,13 @@
+{
+  "name": "taotao-cloud-node",
+  "version": "1.0.0",
+  "main": "index/index.js",
+  "author": "taotao",
+  "license": "MIT",
+  "scripts": {
+      "dev": "node index/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
