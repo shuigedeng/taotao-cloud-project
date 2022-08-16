@@ -98,11 +98,11 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.2'
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
 
     testImplementation 'org.assertj:assertj-guava:3.5.0'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.testng:testng:7.6.0'
+    testImplementation 'org.testng:testng:7.6.1'
     testImplementation 'com.google.inject:guice:5.1.0'
 
     api 'org.apache.shenyu:shenyu-common:2.4.3'

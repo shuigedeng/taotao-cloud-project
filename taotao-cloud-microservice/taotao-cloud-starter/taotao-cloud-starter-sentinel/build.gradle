@@ -8,13 +8,13 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-transport-common
-    api 'com.alibaba.csp:sentinel-transport-common:1.8.4'
+    api 'com.alibaba.csp:sentinel-transport-common:1.8.5'
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-transport-simple-http
-    api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.4'
+    api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.5'
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-cluster-server-default
-    api 'com.alibaba.csp:sentinel-cluster-server-default:1.8.4'
+    api 'com.alibaba.csp:sentinel-cluster-server-default:1.8.5'
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-datasource-nacos
-    api ("com.alibaba.csp:sentinel-datasource-nacos"){
+    api ("com.alibaba.csp:sentinel-datasource-nacos:1.8.5"){
         exclude group: 'com.alibaba.csp', module: 'sentinel-core'
     }
 
