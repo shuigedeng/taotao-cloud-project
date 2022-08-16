@@ -26,13 +26,13 @@ dependencies {
 
     // https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
-    api ('cn.monitor4all:log-record-starter:1.2.1'){
+    api ('cn.monitor4all:log-record-starter:1.2.2'){
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/io.github.mouzt/bizlog-sdk
     //https://github.com/mouzt/mzt-biz-log
-    api ('io.github.mouzt:bizlog-sdk:2.0.3'){
+    api ('io.github.mouzt:bizlog-sdk:3.0.0'){
         exclude group: "org.projectlombok", module: "lombok"
     }
 

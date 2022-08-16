@@ -12,28 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-qodana') }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Project
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: 'Qodana Scan'
+      - name: Qodana Scan
         uses: JetBrains/qodana-action@v5.1.0
         with:
           #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results
 
-      - uses: github/codeql-action/upload-sarif@v2
+      - name: Upload Sarif
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ${{ github.workspace }}/qodana/results/qodana.sarif.json
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy To GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           publish_dir: ${{ github.workspace }}/qodana/results/report
           destination_dir: ./
 
-      - name: deploy to server
+      - name: Deploy To Server
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}

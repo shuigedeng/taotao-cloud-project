@@ -8,7 +8,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.zengtengpeng/redisson-spring-boot-starter
-    api ('com.zengtengpeng:redisson-spring-boot-starter:1.0.16') {
+    api ('com.zengtengpeng:redisson-spring-boot-starter:1.0.17') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
         exclude group: 'org.yaml', module: 'snakeyaml'
     }

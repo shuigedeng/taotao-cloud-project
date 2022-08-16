@@ -20,9 +20,9 @@ dependencies {
     //api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 
     //https://search.maven.org/artifact/io.micrometer/micrometer-registry-prometheus
-    api "io.micrometer:micrometer-registry-prometheus:1.9.2"
+    api "io.micrometer:micrometer-registry-prometheus:1.9.3"
     //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-client
-    api "de.codecentric:spring-boot-admin-starter-client:2.7.3"
+    api "de.codecentric:spring-boot-admin-starter-client:2.7.4"
     //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
@@ -37,7 +37,7 @@ dependencies {
 
     testImplementation 'org.assertj:assertj-guava:3.5.0'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.testng:testng:7.6.0'
+    testImplementation 'org.testng:testng:7.6.1'
     testImplementation 'com.google.inject:guice:5.1.0'
 }
 
