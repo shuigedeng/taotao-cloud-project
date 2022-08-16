@@ -5,33 +5,59 @@ buildscript {
     }
 
     dependencies {
+        //https://plugins.gradle.org/plugin/com.github.node-gradle.node
         classpath "com.github.node-gradle:gradle-node-plugin:3.4.0"
     }
 }
 
+//https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/usage.md
 apply plugin: 'com.github.node-gradle.node'
 
-task cnpmInstall(type: NpmTask) {
-    group = 'node'
-    args = ['install', '--registry=http://registry.cnpmjs.org']
-}
-task yarnInstall(type: YarnTask) {
-    group = 'node'
-    args = ['add']
-}
 
+// *********************************npm*******************************
 //调用npm run build命令的Gradle任务
-task yarnBuild(type: YarnTask, dependsOn: yarnInstall) {
-    group = 'node'
+task npmBuild(type: NpmTask, dependsOn: npmInstall) {
+    group = 'npm'
     args = ['run', 'build']
 }
 
 //Gradle的java插件的jar任务，依赖npmBuild,即web子模块打jar包前必须运行npm run build
-jar.dependsOn yarnBuild
+jar.dependsOn npmBuild
 
 //调用npm run dev
-task yarnDev(type: YarnTask, dependsOn: yarnInstall) {
-    group = 'node'
+task npmDev(type: NpmTask, dependsOn: npmInstall) {
+    group = 'npm'
     args = ['run', 'dev']
+}
+
+// *********************************cnpm*******************************
+task cnpmInstall(type: NpmTask) {
+    group = 'npm'
+    args = ['install', '--registry=http://registry.cnpmjs.org']
+}
+
+task cnpmBuild(type: NpmTask, dependsOn: cnpmInstall) {
+    group = 'npm'
+    args = ['run', 'build']
+}
+
+jar.dependsOn cnpmBuild
+
+task cnpmDev(type: NpmTask, dependsOn: cnpmInstall) {
+    group = 'npm'
+    args = ['run', 'dev']
+}
+
+// *********************************yarn*******************************
+task yarnBuild(type: YarnTask, dependsOn: yarn) {
+    group = 'yarn'
+    args = ['build']
+}
+
+jar.dependsOn yarnBuild
+
+task yarnDev(type: YarnTask, dependsOn: yarn) {
+    group = 'yarn'
+    args = ['dev']
 }
 

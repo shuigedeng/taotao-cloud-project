@@ -1,8 +1,6 @@
 package com.taotao.cloud.office.util.constant;
 
-import lombok.Data;
 
-@Data
 public class CommonConstant {
 
     public static final String CONTENT_TYPE = "application/octet-stream";
