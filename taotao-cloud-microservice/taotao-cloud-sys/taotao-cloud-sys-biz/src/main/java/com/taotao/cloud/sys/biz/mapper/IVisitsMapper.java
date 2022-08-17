@@ -16,8 +16,6 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2022-03-29 08:57:49
  */
-@Repository
-
 public interface IVisitsMapper extends BaseMapper<Visits> {
 
 	@Select("select * FROM visits where create_time between #{time1} and #{time2}")

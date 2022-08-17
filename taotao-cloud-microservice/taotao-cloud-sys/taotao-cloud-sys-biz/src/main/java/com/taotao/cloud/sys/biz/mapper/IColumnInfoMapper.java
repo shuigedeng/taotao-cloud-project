@@ -33,7 +33,6 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.03
  * @since 2022-03-29 08:56:04
  */
-
 public interface IColumnInfoMapper extends BaseMapper<ColumnConfig> {
 
 	@Select("""
@@ -56,12 +55,12 @@ public interface IColumnInfoMapper extends BaseMapper<ColumnConfig> {
 	@Select("""
 		<script>
 		select table_name,
-				create_time, 
-				engine, 
-				table_collation, 
-				table_comment 
+				create_time,
+				engine,
+				table_collation,
+				table_comment
 		from information_schema.tables
-		where table_schema = (select database()) 
+		where table_schema = (select database())
 		order by create_time desc
 		</script>
 		""")
@@ -71,11 +70,11 @@ public interface IColumnInfoMapper extends BaseMapper<ColumnConfig> {
 		SELECT COLUMN_NAME,
 			   IS_NULLABLE,
 			   DATA_TYPE,
-			   COLUMN_COMMENT, 
-			   COLUMN_KEY, 
-			   EXTRA 
+			   COLUMN_COMMENT,
+			   COLUMN_KEY,
+			   EXTRA
 		FROM INFORMATION_SCHEMA.COLUMNS
-		WHERE TABLE_NAME = #{name} AND TABLE_SCHEMA = (SELECT DATABASE()) 
+		WHERE TABLE_NAME = #{name} AND TABLE_SCHEMA = (SELECT DATABASE())
 		ORDER BY ORDINAL_POSITION
 		""")
 	List<Map<String, Object>> queryByTableName(@Param("name") String name);

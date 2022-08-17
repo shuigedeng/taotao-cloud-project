@@ -26,7 +26,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-
 public interface IAlipayConfigMapper extends BaseMapper<AlipayConfig> {
 
 }
