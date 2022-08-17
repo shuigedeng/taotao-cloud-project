@@ -37,7 +37,7 @@ import org.springframework.context.annotation.PropertySource;
 @AutoConfiguration
 @EnableConfigurationProperties({RetrofitProperties.class})
 @ConditionalOnProperty(prefix = RetrofitProperties.PREFIX, name = "enabled", havingValue = "true")
-@RetrofitScan(basePackages = "com.taotao.cloud.third.client.retrofit")
+@RetrofitScan(basePackages = "com.taotao.cloud.third.client")
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:retrofit.yml")
 public class RetrofitAutoConfiguration implements InitializingBean {
 

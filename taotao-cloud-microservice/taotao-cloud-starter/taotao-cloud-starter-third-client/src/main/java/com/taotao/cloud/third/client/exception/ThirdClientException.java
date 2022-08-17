@@ -26,34 +26,33 @@ import com.taotao.cloud.common.exception.BaseException;
  * @version 2022.04
  * @since 2022-04-27 17:30:53
  */
-public class ThridClientException extends BaseException {
+public class ThirdClientException extends BaseException {
 
-
-	public ThridClientException(String message) {
+	public ThirdClientException(String message) {
 		super(message);
 	}
 
-	public ThridClientException(Integer code, String message) {
+	public ThirdClientException(Integer code, String message) {
 		super(code, message);
 	}
 
-	public ThridClientException(Throwable e) {
+	public ThirdClientException(Throwable e) {
 		super(e);
 	}
 
-	public ThridClientException(String message, Throwable e) {
+	public ThirdClientException(String message, Throwable e) {
 		super(message, e);
 	}
 
-	public ThridClientException(Integer code, String message, Throwable e) {
+	public ThirdClientException(Integer code, String message, Throwable e) {
 		super(code, message, e);
 	}
 
-	public ThridClientException(ResultEnum result) {
+	public ThirdClientException(ResultEnum result) {
 		super(result);
 	}
 
-	public ThridClientException(ResultEnum result, Throwable e) {
+	public ThirdClientException(ResultEnum result, Throwable e) {
 		super(result, e);
 	}
 }

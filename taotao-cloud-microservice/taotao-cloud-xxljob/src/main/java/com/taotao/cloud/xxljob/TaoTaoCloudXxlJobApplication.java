@@ -31,7 +31,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudXxlJobApplication {
 
 	public static void main(String[] args) {
-		//https://apis.map.qq.com/ws/geocoder/v1/?location=29.57,106.55&key=ZE6BZ-HH33P-IU4DI-VL2H3-VEEIS-35FFH
 		SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
 	}
 
