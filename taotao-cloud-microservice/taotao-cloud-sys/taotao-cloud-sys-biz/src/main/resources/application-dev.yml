@@ -1039,13 +1039,13 @@ taotao:
       enabled: false
     pay:
       enabled: false
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-      logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
+    #p6spy:
+    #  enabled: true
+    #  dateformat: yyyy-MM-dd HH:mm:ss
+    #  driverlist: com.mysql.cj.jdbc.Driver
+    #  database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+    #  appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+    #  logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
     openapi:

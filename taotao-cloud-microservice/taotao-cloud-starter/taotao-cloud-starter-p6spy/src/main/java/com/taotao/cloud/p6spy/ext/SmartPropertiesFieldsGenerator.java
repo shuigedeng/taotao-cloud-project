@@ -1,4 +1,4 @@
-package com.taotao.cloud.p6spy.properties.p6spy;
+package com.taotao.cloud.p6spy.ext;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
