@@ -9,7 +9,7 @@ public class Agent {
 
     public static void premain(String args, Instrumentation inst) {
         System.out.println("loading agent..");
-        inst.addTransformer(new com.pphh.demo.Transformer(), false);
+        inst.addTransformer(new Transformer(), false);
         System.out.println("agent has been loaded.");
     }
 

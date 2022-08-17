@@ -30,8 +30,10 @@ import java.util.Map;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -51,7 +53,8 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 public class RedisListenerConfig {
 
 	@Bean
-	public RedisMessageListenerContainer customRedisMessageListenerContainer(
+	@Primary
+	public RedisMessageListenerContainer redisMessageListenerContainer(
 		RedisConnectionFactory redisConnectionFactory,
 		QuartzJobTopicMessageDelegate quartzJobTopicMessageDelegate,
 		ScheduledJobTopicMessageDelegate scheduledJobTopicMessageDelegate,
@@ -188,10 +191,16 @@ public class RedisListenerConfig {
 		return container;
 	}
 
-	@Configuration
-	public static class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
+	@Bean
+	@Primary
+	public KeyExpirationEventMessageListener keyExpirationEventMessageListener(
+		RedisMessageListenerContainer listenerContainer) {
+		return new RedisKeyExpirationEventMessageListener(listenerContainer);
+	}
 
-		public RedisKeyExpireListener(RedisMessageListenerContainer listenerContainer) {
+	public static class RedisKeyExpirationEventMessageListener extends KeyExpirationEventMessageListener {
+
+		public RedisKeyExpirationEventMessageListener(RedisMessageListenerContainer listenerContainer) {
 			super(listenerContainer);
 		}
 

@@ -87,7 +87,6 @@ public class GeneratorServiceImpl extends ServiceImpl<IColumnInfoMapper, ColumnC
 		List<ColumnConfig> columnInfos = new ArrayList<>();
 		List<Map<String, Object>> result = baseMapper.queryByTableName(tableName);
 		for (Map<String, Object> map : result) {
-
 			columnInfos.add(
 				new ColumnConfig(
 					tableName,
