@@ -1,1 +1,2 @@
-com.taotao.cloud.p6spy.configuration.P6spyAutoConfiguration
+#com.taotao.cloud.p6spy.configuration.P6spyAutoConfiguration
+com.taotao.cloud.p6spy.properties.p6spy.P6spyAutoConfiguration
