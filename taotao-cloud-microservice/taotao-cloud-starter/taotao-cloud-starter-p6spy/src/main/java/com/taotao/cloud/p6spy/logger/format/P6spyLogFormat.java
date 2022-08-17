@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.p6spy.logger;
+package com.taotao.cloud.p6spy.logger.format;
 
 import cn.hutool.db.sql.SqlFormatter;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
@@ -27,6 +27,14 @@ import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
  */
 public class P6spyLogFormat implements MessageFormattingStrategy {
 
+	/**
+	 * @param connectionId 连接id
+	 * @param now 当前时间
+	 * @param elapsed 执行时长，包括执行 SQL 和处理结果集的时间(可以参考来调优)
+	 * @param category 语句分类，statement、resultset 等
+	 * @param prepared 查询语句。可能是 prepared statement，表现为 select * from table1 where c1=?，问号参数形式
+	 * @param sql 含参数值的查询语句，如 select * from from table1 where c1=7
+	 */
 	@Override
 	public String formatMessage(final int connectionId, final String now, final long elapsed,
 		final String category, final String prepared, final String sql, final String url) {

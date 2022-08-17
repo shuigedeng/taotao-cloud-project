@@ -17,7 +17,6 @@ package com.taotao.cloud.p6spy.logger;
 
 
 import com.p6spy.engine.spy.P6SpyOptions;
-import com.p6spy.engine.spy.appender.FileLogger;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,10 +31,10 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @version 2022.03
  * @since 2021/10/28 09:33
  */
-public class CustomFileLogger extends FileLogger {
+public class FileLogger extends com.p6spy.engine.spy.appender.BatchFileLogger {
 
 	private String fileName = null;
-	private PrintStream printStream = null;
+	private volatile PrintStream printStream = null;
 
 	private void init() {
 		if (fileName == null) {
