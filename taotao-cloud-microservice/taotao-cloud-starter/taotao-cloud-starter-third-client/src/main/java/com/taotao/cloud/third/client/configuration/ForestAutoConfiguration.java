@@ -37,7 +37,7 @@ import org.springframework.context.annotation.PropertySource;
 @AutoConfiguration
 @EnableConfigurationProperties({ForestProperties.class})
 @ConditionalOnProperty(prefix = ForestProperties.PREFIX, name = "enabled", havingValue = "true")
-@ForestScan(basePackages = "com.taotao.cloud.third.client.forest")
+@ForestScan(basePackages = "com.taotao.cloud.third.client")
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:forest.yml")
 public class ForestAutoConfiguration implements InitializingBean {
 
