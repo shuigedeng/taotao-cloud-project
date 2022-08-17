@@ -1,6 +1,7 @@
-package com.taotao.cloud.p6spy.properties.p6spy;
+package com.taotao.cloud.p6spy.ext;
 
 import com.p6spy.engine.spy.P6ModuleManager;
+import com.taotao.cloud.p6spy.properties.P6spyProperties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +16,7 @@ import java.lang.reflect.Field;
  * Before the DataSource is initialized, set the P6spy configuration
  *
  */
-public class CusP6spyConfigLoaderBeanPostProcessor implements BeanPostProcessor, Ordered, ApplicationContextAware {
+public class P6spyConfigLoaderBeanPostProcessor implements BeanPostProcessor, Ordered, ApplicationContextAware {
 
 	boolean isLoad = false;
 
