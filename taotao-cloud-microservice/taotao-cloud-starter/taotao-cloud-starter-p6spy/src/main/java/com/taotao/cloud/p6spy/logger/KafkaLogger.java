@@ -17,8 +17,11 @@ package com.taotao.cloud.p6spy.logger;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.FormattedLogger;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import java.util.Objects;
+import org.springframework.kafka.core.KafkaTemplate;
 
 /**
  * P6spy日志实现
@@ -29,8 +32,22 @@ import com.taotao.cloud.common.utils.log.LogUtil;
  */
 public class KafkaLogger extends FormattedLogger {
 
+	private KafkaTemplate kafkaTemplate;
+	private String applicationName;
+
+	public KafkaLogger() {
+		KafkaTemplate kafkaTemplate = ContextUtil.getBean(KafkaTemplate.class, true);
+		String applicationName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
+
+		this.kafkaTemplate = kafkaTemplate;
+		this.applicationName = applicationName;
+	}
+
 	@Override
 	public void logException(Exception e) {
+		if (Objects.nonNull(kafkaTemplate)) {
+			kafkaTemplate.send("sys-sql-" + applicationName, e.getMessage());
+		}
 	}
 
 	@Override
@@ -40,6 +57,12 @@ public class KafkaLogger extends FormattedLogger {
 	@Override
 	public void logSQL(int connectionId, String now, long elapsed, Category category,
 		String prepared, String sql, String url) {
+		final String msg = strategy.formatMessage(connectionId, now, elapsed,
+			category.toString(), prepared, sql, url);
+
+		if (Objects.nonNull(kafkaTemplate)) {
+			kafkaTemplate.send("sys-sql-" + applicationName, msg);
+		}
 	}
 
 	@Override
