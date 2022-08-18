@@ -10,8 +10,6 @@ import java.util.regex.Pattern;
 
 /**
  * 根据p6spy官方配置文件，快速生成字段
- *
- * @author rxf113
  */
 public class SmartPropertiesFieldsGenerator {
 

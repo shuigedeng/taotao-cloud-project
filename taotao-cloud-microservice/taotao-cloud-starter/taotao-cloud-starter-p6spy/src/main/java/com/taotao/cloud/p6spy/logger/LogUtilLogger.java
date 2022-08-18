@@ -29,17 +29,13 @@ import com.taotao.cloud.common.utils.log.LogUtil;
  */
 public class LogUtilLogger extends FormattedLogger {
 
-	private Exception e;
-
 	@Override
 	public void logException(Exception e) {
-		this.e = e;
-		LogUtil.error("数据库日志错误", e);
+		LogUtil.error(e,"数据库日志错误");
 	}
 
 	@Override
 	public void logText(String text) {
-		LogUtil.info(text);
 	}
 
 	/**
@@ -60,9 +56,8 @@ public class LogUtilLogger extends FormattedLogger {
 		if (StringUtil.isEmpty(msg)) {
 			return;
 		}
-		if (Category.ERROR.equals(category)) {
-			LogUtil.error(msg, e);
-		} else if (Category.WARN.equals(category)) {
+
+		if (Category.WARN.equals(category)) {
 			LogUtil.warn(msg);
 		} else if (Category.DEBUG.equals(category)) {
 			LogUtil.debug(msg);
@@ -73,14 +68,6 @@ public class LogUtilLogger extends FormattedLogger {
 
 	@Override
 	public boolean isCategoryEnabled(Category category) {
-		if (Category.ERROR.equals(category)) {
-			return LogUtil.isErrorEnabled();
-		} else if (Category.WARN.equals(category)) {
-			return LogUtil.isWarnEnabled();
-		} else if (Category.DEBUG.equals(category)) {
-			return LogUtil.isDebugEnabled();
-		} else {
-			return LogUtil.isInfoEnabled();
-		}
+		return true;
 	}
 }
