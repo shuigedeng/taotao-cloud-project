@@ -21,7 +21,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework/spring
         springVersion = '5.3.22'
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
-        springBootVersion = '2.7.2'
+        springBootVersion = '2.7.3'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
         springCloudVersion = '2021.0.3'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies

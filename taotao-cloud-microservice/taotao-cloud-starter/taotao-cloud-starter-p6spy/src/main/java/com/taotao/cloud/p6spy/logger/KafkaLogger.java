@@ -35,12 +35,16 @@ public class KafkaLogger extends FormattedLogger {
 	private KafkaTemplate kafkaTemplate;
 	private String applicationName;
 
-	public KafkaLogger() {
-		KafkaTemplate kafkaTemplate = ContextUtil.getBean(KafkaTemplate.class, true);
-		String applicationName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
+	public KafkaLogger() throws ClassNotFoundException {
+		try {
+			KafkaTemplate kafkaTemplate = ContextUtil.getBean(KafkaTemplate.class, true);
+			String applicationName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
-		this.kafkaTemplate = kafkaTemplate;
-		this.applicationName = applicationName;
+			this.kafkaTemplate = kafkaTemplate;
+			this.applicationName = applicationName;
+		} catch (Exception e) {
+			throw new ClassNotFoundException("KafkaTemplate不存在，请添加org.springframework.kafka:spring-kafka", e);
+		}
 	}
 
 	@Override
