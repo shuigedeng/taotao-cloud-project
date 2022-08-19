@@ -12,6 +12,8 @@ import net.bytebuddy.implementation.bind.annotation.Morph;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.utility.JavaModule;
 
+import java.security.ProtectionDomain;
+
 import static net.bytebuddy.matcher.ElementMatchers.isStatic;
 
 import static net.bytebuddy.matcher.ElementMatchers.not;
@@ -28,29 +30,29 @@ public class TransformerV2 implements AgentBuilder.Transformer {
         this.enhanceClass = enhanceClass;
     }
 
-    @Override
-    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader loader, JavaModule javaModule) {
-        Logger.info("transformV2 %s...", typeDescription.getTypeName());
+	@Override
+	public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, ProtectionDomain protectionDomain) {
+		Logger.info("transformV2 %s...", typeDescription.getTypeName());
 
-        EnhancerProxy proxy = new EnhancerProxy();
-        ElementMatcher<MethodDescription> methodsMatcher = null;
-        try {
-            AbstractEnhancer enhancer = (AbstractEnhancer) Class.forName(this.enhanceClass, true, loader).newInstance();
-            methodsMatcher = enhancer.getMethodsMatcher();
-            proxy.setEnhancer(enhancer);
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            Logger.error("failed to initialized the proxy %s", e.toString());
-        }
+		EnhancerProxy proxy = new EnhancerProxy();
+		ElementMatcher<MethodDescription> methodsMatcher = null;
+		try {
+			AbstractEnhancer enhancer = (AbstractEnhancer) Class.forName(this.enhanceClass, true, classLoader).newInstance();
+			methodsMatcher = enhancer.getMethodsMatcher();
+			proxy.setEnhancer(enhancer);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			Logger.error("failed to initialized the proxy %s", e.toString());
+		}
 
-        if (methodsMatcher == null) {
-            Logger.error("methodsMatcher is null");
-            return null;
-        }
+		if (methodsMatcher == null) {
+			Logger.error("methodsMatcher is null");
+			return null;
+		}
 
-        ElementMatcher.Junction<MethodDescription> junction = not(isStatic()).and(methodsMatcher);
-        return builder.method(junction)
-                .intercept(MethodDelegation.withDefaultConfiguration()
-                        .withBinders(Morph.Binder.install(OverrideCallable.class))
-                        .to(proxy));
-    }
+		ElementMatcher.Junction<MethodDescription> junction = not(isStatic()).and(methodsMatcher);
+		return builder.method(junction)
+			.intercept(MethodDelegation.withDefaultConfiguration()
+				.withBinders(Morph.Binder.install(OverrideCallable.class))
+				.to(proxy));
+	}
 }

@@ -3,6 +3,7 @@ package com.taotao.cloud.agent.bytebuddyother.agent.trace;
 import com.taotao.cloud.agent.bytebuddyother.core.log.Logger;
 import io.opentelemetry.sdk.common.CompletableResultCode;
 import io.opentelemetry.sdk.common.InstrumentationLibraryInfo;
+import io.opentelemetry.sdk.common.InstrumentationScopeInfo;
 import io.opentelemetry.sdk.trace.data.SpanData;
 import io.opentelemetry.sdk.trace.export.SpanExporter;
 
@@ -16,7 +17,7 @@ public class LoggingSpanExporter implements SpanExporter {
     @Override
     public CompletableResultCode export(Collection<SpanData> spans) {
         for (SpanData span : spans) {
-            InstrumentationLibraryInfo instruInfo = span.getInstrumentationLibraryInfo();
+			InstrumentationScopeInfo instruInfo = span.getInstrumentationScopeInfo();
             Logger.info("%s %s - %s",
                     instruInfo.getName(),
                     instruInfo.getVersion(),
