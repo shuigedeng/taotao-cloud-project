@@ -14,6 +14,8 @@ import net.bytebuddy.implementation.bind.annotation.Morph;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.utility.JavaModule;
 
+import java.security.ProtectionDomain;
+
 import static net.bytebuddy.matcher.ElementMatchers.isStatic;
 import static net.bytebuddy.matcher.ElementMatchers.not;
 
@@ -30,33 +32,32 @@ public class TransformerV3 implements AgentBuilder.Transformer {
         this.aspectClz = aspectClz;
     }
 
-    @Override
-    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader loader, JavaModule javaModule) {
-        Logger.info("transformV3 %s...", typeDescription.getTypeName());
+	@Override
+	public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, ProtectionDomain protectionDomain) {
+		Logger.info("transformV3 %s...", typeDescription.getTypeName());
 
-        EnhancerProxy proxy = new EnhancerProxy();
-        ElementMatcher<MethodDescription> methodsMatcher = null;
-        try {
-            IAspectDefinition aspectDefinition = EnhancerInstanceLoader.load(this.aspectClz, loader);
-            methodsMatcher = aspectDefinition.getMethodsMatcher();
+		EnhancerProxy proxy = new EnhancerProxy();
+		ElementMatcher<MethodDescription> methodsMatcher = null;
+		try {
+			IAspectDefinition aspectDefinition = EnhancerInstanceLoader.load(this.aspectClz, classLoader);
+			methodsMatcher = aspectDefinition.getMethodsMatcher();
 
-            String enhancerClz = aspectDefinition.getMethodsEnhancer();
-            IAspectEnhancer enhancer = EnhancerInstanceLoader.load(enhancerClz, loader);
-            proxy.setEnhancer(enhancer);
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            Logger.error("failed to initialized the proxy %s", e.toString());
-        }
+			String enhancerClz = aspectDefinition.getMethodsEnhancer();
+			IAspectEnhancer enhancer = EnhancerInstanceLoader.load(enhancerClz, classLoader);
+			proxy.setEnhancer(enhancer);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			Logger.error("failed to initialized the proxy %s", e.toString());
+		}
 
-        if (methodsMatcher == null) {
-            Logger.error("methodsMatcher is null");
-            return null;
-        }
+		if (methodsMatcher == null) {
+			Logger.error("methodsMatcher is null");
+			return null;
+		}
 
-        ElementMatcher.Junction<MethodDescription> junction = not(isStatic()).and(methodsMatcher);
-        return builder.method(junction)
-                .intercept(MethodDelegation.withDefaultConfiguration()
-                        .withBinders(Morph.Binder.install(OverrideCallable.class))
-                        .to(proxy));
-    }
-
+		ElementMatcher.Junction<MethodDescription> junction = not(isStatic()).and(methodsMatcher);
+		return builder.method(junction)
+			.intercept(MethodDelegation.withDefaultConfiguration()
+				.withBinders(Morph.Binder.install(OverrideCallable.class))
+				.to(proxy));
+	}
 }

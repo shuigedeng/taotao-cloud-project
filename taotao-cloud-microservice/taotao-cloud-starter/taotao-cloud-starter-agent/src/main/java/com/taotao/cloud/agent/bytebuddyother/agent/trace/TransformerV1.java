@@ -12,6 +12,8 @@ import net.bytebuddy.implementation.bind.annotation.Morph;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.utility.JavaModule;
 
+import java.security.ProtectionDomain;
+
 import static net.bytebuddy.matcher.ElementMatchers.isStatic;
 import static net.bytebuddy.matcher.ElementMatchers.not;
 
@@ -27,17 +29,16 @@ public class TransformerV1 implements AgentBuilder.Transformer {
         this.enhancer = iAspect;
     }
 
-    @Override
-    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
-        Logger.info("transformV1 %s...", typeDescription.getTypeName());
-        EnhancerProxy proxy = new EnhancerProxy();
-        proxy.setEnhancer(enhancer);
+	@Override
+	public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, ProtectionDomain protectionDomain) {
+		Logger.info("transformV1 %s...", typeDescription.getTypeName());
+		EnhancerProxy proxy = new EnhancerProxy();
+		proxy.setEnhancer(enhancer);
 
-        ElementMatcher.Junction<MethodDescription> junction = not(isStatic()).and(enhancer.getMethodsMatcher());
-        return builder.method(junction)
-                .intercept(MethodDelegation.withDefaultConfiguration()
-                        .withBinders(Morph.Binder.install(OverrideCallable.class))
-                        .to(proxy));
-
-    }
+		ElementMatcher.Junction<MethodDescription> junction = not(isStatic()).and(enhancer.getMethodsMatcher());
+		return builder.method(junction)
+			.intercept(MethodDelegation.withDefaultConfiguration()
+				.withBinders(Morph.Binder.install(OverrideCallable.class))
+				.to(proxy));
+	}
 }
