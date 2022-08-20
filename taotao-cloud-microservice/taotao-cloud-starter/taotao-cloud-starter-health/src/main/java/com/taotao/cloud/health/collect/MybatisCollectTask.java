@@ -20,7 +20,6 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.health.annotation.FieldReport;
-import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Objects;
 

@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.collect.CollectInfo;
 import com.taotao.cloud.health.strategy.Rule;
 import java.io.Serializable;
 import java.lang.reflect.Field;

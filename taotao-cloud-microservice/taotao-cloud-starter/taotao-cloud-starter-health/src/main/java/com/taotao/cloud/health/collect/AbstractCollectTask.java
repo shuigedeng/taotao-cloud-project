@@ -18,7 +18,6 @@ package com.taotao.cloud.health.collect;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
-import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.warn.WarnProvider;

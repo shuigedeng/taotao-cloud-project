@@ -25,7 +25,6 @@ import java.io.IOException;
 /**
  * 简单的 retry 重试
  *
- * @author L.cm
  */
 public final class SimpleRetry implements IRetry {
 	/**

@@ -4,9 +4,6 @@ import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.Producer;
 
-/**
- * @author hezhangjian
- */
 public class PulsarProducerSyncStrictlyOrdered {
 
     Producer<byte[]> producer;

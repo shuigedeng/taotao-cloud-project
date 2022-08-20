@@ -8,7 +8,6 @@
 //import com.taotao.cloud.health.base.FieldReport;
 //
 ///**
-// * @author Huang Zhaoping
 // */
 //public class FileCollectTask extends AbstractCollectTask {
 //

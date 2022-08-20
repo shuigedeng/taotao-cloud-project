@@ -9,7 +9,6 @@
 //import java.util.Map;
 //
 ///**
-// * @author Huang Zhaoping
 // */
 //public class CatCollectTask extends AbstractCollectTask {
 //

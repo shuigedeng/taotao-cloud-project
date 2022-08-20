@@ -18,7 +18,6 @@ import org.springframework.util.ClassUtils;
 /**
  * bean对象序列化规则
  *
- * @author dry
  * @since 2022-04-30 16:21:28
  */
 public class MyBeanSerializerModifier extends BeanSerializerModifier {

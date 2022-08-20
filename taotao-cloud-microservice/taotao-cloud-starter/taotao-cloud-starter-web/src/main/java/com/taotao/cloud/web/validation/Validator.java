@@ -23,7 +23,6 @@ import javax.validation.ConstraintViolation;
  * <b>参数校验器</b>
  * <p>全面简单的校验框架，更适合国内校验场景，支持多种校验方式，配合全局异常处理，只为更好的RESTful
  *
- * @author ylyue
  * @since 2019年6月25日
  */
 public class Validator {

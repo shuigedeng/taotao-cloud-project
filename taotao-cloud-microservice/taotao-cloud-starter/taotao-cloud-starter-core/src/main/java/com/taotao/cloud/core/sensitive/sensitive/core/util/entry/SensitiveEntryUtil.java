@@ -20,7 +20,6 @@ public final class SensitiveEntryUtil {
      *
      * @param field 字段上的注解
      * @return 是否
-     * @author dev-sxl
      */
     public static boolean hasSensitiveEntry(Field field) {
         SensitiveEntry sensitiveEntry = field.getAnnotation(SensitiveEntry.class);

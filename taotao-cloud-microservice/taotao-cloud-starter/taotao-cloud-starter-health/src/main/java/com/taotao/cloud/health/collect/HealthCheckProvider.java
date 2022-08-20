@@ -68,7 +68,6 @@ public class HealthCheckProvider implements AutoCloseable {
 		registerCollectTask(new UnCatchExceptionCollectTask(collectTaskProperties));
 		registerCollectTask(new MonitorThreadPoolCollectTask(collectTaskProperties));
 		registerCollectTask(new AsyncThreadPoolCollectTask(collectTaskProperties));
-		//registerCollectTask(new BsfEurekaCollectTask());
 		registerCollectTask(new MybatisCollectTask(collectTaskProperties));
 		registerCollectTask(new DataSourceCollectTask(collectTaskProperties));
 		registerCollectTask(new WebServerCollectTask(collectTaskProperties));
