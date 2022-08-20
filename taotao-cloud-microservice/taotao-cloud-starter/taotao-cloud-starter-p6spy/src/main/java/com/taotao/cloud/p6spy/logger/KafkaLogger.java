@@ -20,6 +20,7 @@ import com.p6spy.engine.spy.appender.FormattedLogger;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Objects;
 import org.springframework.kafka.core.KafkaTemplate;
 
@@ -56,18 +57,19 @@ public class KafkaLogger extends FormattedLogger {
 
 	@Override
 	public void logText(String text) {
-	}
-
-	@Override
-	public void logSQL(int connectionId, String now, long elapsed, Category category,
-		String prepared, String sql, String url) {
-		final String msg = strategy.formatMessage(connectionId, now, elapsed,
-			category.toString(), prepared, sql, url);
-
 		if (Objects.nonNull(kafkaTemplate)) {
-			kafkaTemplate.send("sys-sql-" + applicationName, msg);
+			LogUtil.info("************************");
+			LogUtil.info(text);
+
+			kafkaTemplate.send("sys-sql-" + applicationName, text);
 		}
 	}
+
+	//@Override
+	//public void logSQL(int connectionId, String now, long elapsed, Category category,
+	//	String prepared, String sql, String url) {
+	//	super.logSQL(connectionId, );
+	//}
 
 	@Override
 	public boolean isCategoryEnabled(Category category) {

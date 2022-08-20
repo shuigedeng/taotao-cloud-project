@@ -1,9 +1,9 @@
 package com.taotao.cloud.elasticsearch.easyes.test.compare;
 
+import cn.easyes.core.conditions.LambdaEsQueryWrapper;
 import com.taotao.cloud.elasticsearch.easyes.sample.entity.Document;
 import com.taotao.cloud.elasticsearch.easyes.sample.mapper.DocumentMapper;
 import com.taotao.cloud.elasticsearch.easyes.test.TestEasyEsApplication;
-import com.xpc.easyes.core.conditions.LambdaEsQueryWrapper;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;

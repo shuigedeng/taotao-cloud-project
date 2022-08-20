@@ -15,6 +15,5 @@ com.taotao.cloud.web.configuration.StrategyAutoConfiguration
 com.taotao.cloud.web.configuration.UndertowHttp2AutoConfiguration
 com.taotao.cloud.web.configuration.WebMvcAutoConfiguration
 com.taotao.cloud.web.configuration.SignAutoConfiguration
-com.taotao.cloud.web.configuration.TransactionAutoConfiguration
 com.taotao.cloud.web.configuration.XssAutoConfiguration
 com.taotao.cloud.web.configuration.IdGeneratorAutoConfiguration

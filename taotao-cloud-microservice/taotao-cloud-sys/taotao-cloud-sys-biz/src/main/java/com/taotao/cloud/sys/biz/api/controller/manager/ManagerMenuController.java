@@ -24,6 +24,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
 import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.web.dto.menu.MenuSaveDTO;
 import com.taotao.cloud.sys.api.web.dto.menu.MenuUpdateDTO;
@@ -179,6 +180,8 @@ public class ManagerMenuController extends
 	@RequestLogger
 	@GetMapping("/test/se")
 	public Result<Boolean> testNotAuth() {
+
+		List<MenuQueryRequest> allById = service().findAllById(1L);
 		return Result.success(true);
 	}
 

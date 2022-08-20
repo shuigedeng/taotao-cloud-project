@@ -437,7 +437,7 @@ taotao:
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-      log-message-format: com.taotao.cloud.p6spy.logger.P6spyLogFormat
+      log-message-format: com.taotao.cloud.p6spy.logger.format.P6spyLogFormat
     data:
       jpa:
         enabled: true

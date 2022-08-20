@@ -44,7 +44,7 @@ jetcache:
   #    port: 6379
 
 easy-es:
-  enable: true
+  enable: false
   # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   address: 192.168.10.200:9200
   # 默认为http
@@ -544,10 +544,10 @@ spring:
     encoder: proto3
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+#    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
     hikari:
@@ -1039,13 +1039,13 @@ taotao:
       enabled: false
     pay:
       enabled: false
-    #p6spy:
-    #  enabled: true
-    #  dateformat: yyyy-MM-dd HH:mm:ss
-    #  driverlist: com.mysql.cj.jdbc.Driver
-    #  database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-    #  appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-    #  logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
+    p6spy:
+      enabled: true
+      dateformat: yyyy-MM-dd HH:mm:ss
+      driverlist: com.mysql.cj.jdbc.Driver
+      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+      appender: com.taotao.cloud.p6spy.logger.KafkaLogger
+      logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
     openapi:
