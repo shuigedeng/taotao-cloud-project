@@ -27,7 +27,7 @@ import com.taotao.cloud.common.utils.log.LogUtil;
  * @version 2022.03
  * @since 2020/10/14 09:38
  */
-public class LogUtilLogger extends FormattedLogger {
+public class P6spyLogger extends FormattedLogger {
 
 	@Override
 	public void logException(Exception e) {

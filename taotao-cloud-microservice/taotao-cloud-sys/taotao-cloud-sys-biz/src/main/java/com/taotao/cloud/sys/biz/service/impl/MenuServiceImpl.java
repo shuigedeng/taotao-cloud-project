@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
@@ -89,7 +90,10 @@ public class MenuServiceImpl extends
 
 	@Override
 	public List<MenuQueryRequest> findAllById(Long id) {
-		List<Menu> menus = ir().findAll();
+		//List<Menu> menus = ir().findAll();
+		//List<Menu> menus =im().selectList(new QueryWrapper<>());
+
+		List<Menu> menus = cr().findAll();
 		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(menus);
 	}
 

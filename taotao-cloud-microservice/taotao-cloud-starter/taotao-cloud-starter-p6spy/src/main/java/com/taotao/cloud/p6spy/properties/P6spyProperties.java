@@ -19,7 +19,7 @@ public class P6spyProperties {
 	private String dateformat = "yyyy-MM-dd HH:mm:ss";
 	private String jmxPrefix;
 	private String driverlist = "com.mysql.cj.jdbc.Driver";
-	private String appender = "com.taotao.cloud.p6spy.logger.LogUtilLogger";
+	private String appender = "com.taotao.cloud.p6spy.logger.P6spyLogger";
 	private String excludecategories;
 	private String sqlexpression;
 	private String modulelist = "com.p6spy.engine.spy.P6SpyFactory,com.p6spy.engine.logging.P6LogFactory,com.p6spy.engine.outage.P6OutageFactory";
