@@ -39,8 +39,6 @@ import java.lang.annotation.Target;
  * <li>have a publicly accessible no-arg constructor
  * <li>implement the interface type returned by {@code value()}
  * </ul>
- *
- * @author google
  */
 @Documented
 @Retention(RetentionPolicy.SOURCE)

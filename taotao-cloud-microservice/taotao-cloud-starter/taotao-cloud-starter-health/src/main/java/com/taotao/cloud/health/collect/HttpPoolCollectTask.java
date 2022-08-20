@@ -21,7 +21,6 @@ import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.health.annotation.FieldReport;
-import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

@@ -8,7 +8,6 @@ import java.io.IOException;
  
 /**
  * 针对map的处理
- * @author dry
  * @since 2022-04-30 16:01:00
  */
 public class NullMapJsonSerializer extends JsonSerializer {

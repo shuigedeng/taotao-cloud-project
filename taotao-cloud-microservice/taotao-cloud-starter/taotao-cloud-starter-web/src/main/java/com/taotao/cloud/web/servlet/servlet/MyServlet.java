@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * TODO 自定义Servlet
  *
- * @author liuzebiao
  * @Date 2020-4-2 10:50
  */
 //指定vlaue属性 和 urlPattern属性均可以

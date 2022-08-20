@@ -221,8 +221,6 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 
 	/**
 	 * redis cache 扩展cache name自动化配置
-	 *
-	 * @author L.cm
 	 */
 	public static class RedisAutoCacheManager extends RedisCacheManager {
 

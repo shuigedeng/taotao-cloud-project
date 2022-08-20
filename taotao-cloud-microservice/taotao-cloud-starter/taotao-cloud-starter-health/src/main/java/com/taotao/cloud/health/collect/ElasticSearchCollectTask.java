@@ -12,7 +12,6 @@
 //import java.util.concurrent.ScheduledThreadPoolExecutor;
 //
 ///**
-// * @author Huang Zhaoping
 // */
 //public class ElasticSearchCollectTask extends AbstractCollectTask {
 //

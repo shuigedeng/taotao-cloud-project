@@ -21,7 +21,6 @@ import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
-import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.utils.ProcessUtils;
 import java.io.File;

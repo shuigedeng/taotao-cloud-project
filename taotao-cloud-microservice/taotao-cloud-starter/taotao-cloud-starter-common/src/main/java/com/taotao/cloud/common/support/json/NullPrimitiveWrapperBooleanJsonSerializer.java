@@ -7,7 +7,6 @@ import java.io.IOException;
 
 /**
  * 针对数组的处理
- * @author dry
  * @since 2022-04-30 16:01:00
  */
 public class NullPrimitiveWrapperBooleanJsonSerializer extends JsonSerializer {

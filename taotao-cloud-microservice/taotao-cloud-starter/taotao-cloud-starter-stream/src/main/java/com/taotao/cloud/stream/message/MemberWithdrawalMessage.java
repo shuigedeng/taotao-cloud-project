@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 /**
  * 会员提现消息
  *
- * @author Bulbasaur
  * @since 2020/12/14 16:31
  */
 public class MemberWithdrawalMessage {

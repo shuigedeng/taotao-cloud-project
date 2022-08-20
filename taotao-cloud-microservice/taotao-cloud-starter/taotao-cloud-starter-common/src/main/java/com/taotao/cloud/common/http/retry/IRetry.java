@@ -19,7 +19,6 @@ package com.taotao.cloud.common.http.retry;
 /**
  * 重试接口
  *
- * @author L.cm
  */
 public interface IRetry {
 

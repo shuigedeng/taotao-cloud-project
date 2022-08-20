@@ -617,11 +617,6 @@ public final class CommonUtil {
 
 	/**
 	 * 拼接sql where in 需要的字符串数据
-	 *
-	 * @param str
-	 * @param regex java.lang.String
-	 * @author liubolin
-	 * @date 2020/9/18 11:19
 	 */
 	public static String getSqlWhereIn(String str, String regex) {
 		String[] arr = str.split(regex);
