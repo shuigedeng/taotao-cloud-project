@@ -134,7 +134,7 @@ buildscript {
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.5.2.Final"
         //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
-        fastjsonVersion = "2.0.11"
+        fastjson2Version = "2.0.12"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.66"
         //https://search.maven.org/artifact/com.esotericsoftware/kryo

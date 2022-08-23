@@ -91,7 +91,7 @@ dependencies {
         api "io.springfox:springfox-bean-validators:${swaggerVersion}"
         api "com.github.xiaoymin:knife4j-spring-ui:${knife4jVersion}"
 
-        api "com.alibaba.fastjson2:fastjson2:${fastjsonVersion}"
+        api "com.alibaba.fastjson2:fastjson2:${fastjson2Version}"
         api "com.caucho:hessian:${hessianVersion}"
         api "com.esotericsoftware:kryo:${kryoVersion}"
         api "org.openjdk.nashorn:nashorn-core:${nashornVersion}"
@@ -291,6 +291,6 @@ publishing {
     }
 }
 
-//signing {
-//    sign publishing.publications.mavenJava
-//}
+signing {
+    sign publishing.publications.mavenJava
+}
