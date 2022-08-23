@@ -37,6 +37,14 @@ ENV AGENT_AUTHENTICATION=${AGENT_AUTHENTICATION}
 ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
 ENV PRROFILES=${PRROFILES}
 
+# pyroscope
+ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
+ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.10.200:4040
+#ENV PYROSCOPE_PROFILING_INTERVAL=10ms
+#ENV PYROSCOPE_PROFILER_EVENT=cpu
+#ENV PYROSCOPE_UPLOAD_INTERVAL=10s
+#ENV PYROSCOPE_LOG_LEVEL=debug
+
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
                   -XX:MaxDirectMemorySize=1024m \
@@ -86,6 +94,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${PRROFILES} \
+                  -javaagent:/skywalking/agent/pyroscope.jar \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
