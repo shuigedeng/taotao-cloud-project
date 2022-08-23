@@ -5,7 +5,7 @@ dependencies {
 
     //https://gitee.com/dromara/easy-es.git
     //https://search.maven.org/artifact/cn.easy-es/easy-es-boot-starter
-    implementation('cn.easy-es:easy-es-boot-starter:0.9.90') {
+    implementation('cn.easy-es:easy-es-boot-starter:1.0.0') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 
