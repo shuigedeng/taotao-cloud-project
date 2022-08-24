@@ -15,8 +15,13 @@
  */
 package com.taotao.cloud.common.utils.common;
 
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 
 /**
  * 校验器：利用正则表达式校验邮箱、手机号等
@@ -106,6 +111,15 @@ public final class ValidatorUtil {
 
 		Matcher m = PATTERN.matcher(phone);
 		return m.matches();
+	}
+
+	private static final Validator VALID = ContextUtil.getBean(Validator.class, true);
+
+	public static <T> void validate(T object, Class<?>... groups) {
+		Set<ConstraintViolation<T>> validate = VALID.validate(object, groups);
+		if (!validate.isEmpty()) {
+			throw new ConstraintViolationException("参数校验异常", validate);
+		}
 	}
 
 }

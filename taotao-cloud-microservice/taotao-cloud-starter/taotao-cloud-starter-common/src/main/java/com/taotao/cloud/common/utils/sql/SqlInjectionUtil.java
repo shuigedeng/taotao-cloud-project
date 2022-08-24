@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.common.utils.common;
+package com.taotao.cloud.common.utils.sql;
 
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.crypto.SecureUtil;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.common.utils.common;
+package com.taotao.cloud.common.utils.sql;
 
 import cn.hutool.core.util.ObjectUtil;
 
