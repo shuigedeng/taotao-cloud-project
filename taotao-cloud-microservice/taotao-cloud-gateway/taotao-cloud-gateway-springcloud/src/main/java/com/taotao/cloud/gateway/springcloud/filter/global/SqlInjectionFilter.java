@@ -24,7 +24,7 @@ package com.taotao.cloud.gateway.springcloud.filter.global;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SqlInjectionUtil;
+import com.taotao.cloud.common.utils.sql.SqlInjectionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.gateway.springcloud.utils.WebFluxUtil;
 import io.netty.buffer.ByteBufAllocator;
