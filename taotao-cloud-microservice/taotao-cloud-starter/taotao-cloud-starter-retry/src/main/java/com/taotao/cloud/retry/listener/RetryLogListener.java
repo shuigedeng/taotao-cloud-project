@@ -1,8 +1,8 @@
 package com.taotao.cloud.retry.listener;
 
-import com.github.rholder.retry.Attempt;
-import com.github.rholder.retry.RetryListener;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import io.github.itning.retry.Attempt;
+import io.github.itning.retry.listener.RetryListener;
 
 public class RetryLogListener implements RetryListener {
 

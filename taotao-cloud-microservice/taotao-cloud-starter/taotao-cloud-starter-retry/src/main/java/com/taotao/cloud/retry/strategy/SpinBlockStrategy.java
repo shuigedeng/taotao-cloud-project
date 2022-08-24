@@ -1,7 +1,7 @@
 package com.taotao.cloud.retry.strategy;
 
-import com.github.rholder.retry.BlockStrategy;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import io.github.itning.retry.strategy.block.BlockStrategy;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
