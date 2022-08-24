@@ -3,5 +3,9 @@ dependencies {
 
     api 'org.springframework.retry:spring-retry:1.3.3'
 
+    api("io.github.itning:guava-retrying3:3.0.1") {
+        exclude group: "com.google.guava", module: "guava"
+    }
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
