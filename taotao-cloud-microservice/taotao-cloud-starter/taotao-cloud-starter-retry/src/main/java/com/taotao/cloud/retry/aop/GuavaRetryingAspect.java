@@ -1,17 +1,21 @@
 package com.taotao.cloud.retry.aop;
 
-import com.github.rholder.retry.RetryerBuilder;
-import com.github.rholder.retry.StopStrategies;
-import com.github.rholder.retry.WaitStrategies;
 import com.taotao.cloud.retry.annotation.GuavaRetrying;
 import com.taotao.cloud.retry.listener.RetryLogListener;
 import com.taotao.cloud.retry.strategy.SpinBlockStrategy;
+import io.github.itning.retry.Attempt;
+import io.github.itning.retry.Retryer;
+import io.github.itning.retry.RetryerBuilder;
+import io.github.itning.retry.listener.RetryListener;
+import io.github.itning.retry.strategy.stop.StopStrategies;
+import io.github.itning.retry.strategy.wait.WaitStrategies;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
@@ -81,5 +85,34 @@ public class GuavaRetryingAspect {
 					throw new Exception(throwable);
 				}
 			});
+	}
+
+
+	public void guavaRetry(){
+		Retryer<Boolean> retryer = RetryerBuilder.<Boolean>newBuilder()
+			// 异常重试
+			.retryIfExceptionOfType(IOException.class)
+			// 根据结果重试
+			.retryIfResult(res-> !res)
+			// 设置等待间隔时间
+			.withWaitStrategy(WaitStrategies.exponentialWait(100, 5, TimeUnit.MINUTES))
+			// 设置最大重试次数
+			.withStopStrategy(StopStrategies.stopAfterAttempt(3))
+			.withRetryListener(new RetryListener() {
+				@Override
+				public <V> void onRetry(Attempt<V> attempt) {
+					System.out.println(attempt.getAttemptNumber());
+				}
+			})
+			.build();
+
+		try {
+			retryer.call(() -> {
+				System.out.println("sdlf");
+				return false;
+			});
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 }

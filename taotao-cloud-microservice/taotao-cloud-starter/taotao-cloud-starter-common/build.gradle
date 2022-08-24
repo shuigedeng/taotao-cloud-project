@@ -22,9 +22,6 @@ dependencies {
     api 'commons-io:commons-io:2.11.0'
     api 'commons-codec:commons-codec'
     api 'commons-configuration:commons-configuration'
-    api ('com.github.rholder:guava-retrying:2.0.0'){
-        exclude group: 'com.google.guava', module: 'guava'
-    }
     api 'com.google.guava:guava'
 
     //spring
