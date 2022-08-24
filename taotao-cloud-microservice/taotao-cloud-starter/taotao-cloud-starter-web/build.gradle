@@ -16,6 +16,15 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
 
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-xss")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sign")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-retry")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-limit")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-idgenerator")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-idempotent")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-crypto")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock")
+
     api "org.springframework.boot:spring-boot-starter-webflux"
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
@@ -43,17 +52,8 @@ dependencies {
         exclude group: "commons-collections", module: "commons-collections"
     }
 
-    //https://search.maven.org/artifact/org.owasp.antisamy/antisamy
-    api('org.owasp.antisamy:antisamy:1.7.0') {
-        exclude group: "commons-logging", module: "commons-logging"
-        exclude group: "org.slf4j", module: "slf4j-simple"
-    }
-
     //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
     api 'io.github.tokenjan:pinyin4j:2.6.1'
-
-    // springboot 限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-web
-    //api 'com.eeeffff.limiter:ip-limiter-core-web:1.1.3'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"

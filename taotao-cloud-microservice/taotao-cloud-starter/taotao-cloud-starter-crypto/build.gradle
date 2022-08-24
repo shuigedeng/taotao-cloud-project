@@ -1,0 +1,11 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+
+    //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
+    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
+    api 'org.bouncycastle:bcprov-jdk15to18:1.71'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

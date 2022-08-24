@@ -37,8 +37,6 @@ import com.taotao.cloud.common.support.json.LocalDateTimeDeserializer;
 import com.taotao.cloud.common.support.json.MyBeanSerializerModifier;
 import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.web.properties.XssProperties;
-import com.taotao.cloud.web.xss.XssStringJsonDeserializer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,7 +48,6 @@ import java.util.TimeZone;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -61,7 +58,6 @@ import org.springframework.context.annotation.Bean;
  * @since 2021-09-02 21:28:08
  */
 @AutoConfiguration
-@EnableConfigurationProperties({XssProperties.class})
 public class JacksonAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -70,8 +66,7 @@ public class JacksonAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer(
-		XssProperties xssProperties) {
+	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
 
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();
@@ -135,11 +130,6 @@ public class JacksonAutoConfiguration implements InitializingBean {
 
 			customizer.failOnEmptyBeans(false);
 			customizer.failOnUnknownProperties(false);
-
-			// 配置跨站攻击 反序列化处理器
-			if (xssProperties.getRequestBodyEnabled()) {
-				customizer.deserializerByType(String.class, new XssStringJsonDeserializer());
-			}
 		};
 	}
 }

@@ -1,0 +1,2 @@
+com.taotao.cloud.elk.configuration.ElkAutoConfiguration
+com.taotao.cloud.elk.configuration.ElkWebInterceptorAutoConfiguration

@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.xxl.timetask;
 
-import com.taotao.cloud.common.support.lock.DistributedLock;
-import com.taotao.cloud.common.support.lock.ZLock;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.lock.support.DistributedLock;
+import com.taotao.cloud.lock.support.ZLock;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.util.List;

@@ -1,10 +1,7 @@
 com.taotao.cloud.web.configuration.DozerAutoConfiguration
 com.taotao.cloud.web.configuration.ExceptionAutoConfiguration
 com.taotao.cloud.web.configuration.FeignExceptionAutoConfiguration
-com.taotao.cloud.web.configuration.IdempotentAutoConfiguration
 com.taotao.cloud.web.configuration.JacksonAutoConfiguration
-com.taotao.cloud.web.configuration.EncryptAutoConfiguration
-com.taotao.cloud.web.configuration.LimitAutoConfiguration
 com.taotao.cloud.web.configuration.PrometheusAutoConfiguration
 com.taotao.cloud.web.configuration.ResponseAutoConfiguration
 com.taotao.cloud.web.configuration.QuartzAutoConfiguration
@@ -14,6 +11,3 @@ com.taotao.cloud.web.configuration.ServletAutoConfiguration
 com.taotao.cloud.web.configuration.StrategyAutoConfiguration
 com.taotao.cloud.web.configuration.UndertowHttp2AutoConfiguration
 com.taotao.cloud.web.configuration.WebMvcAutoConfiguration
-com.taotao.cloud.web.configuration.SignAutoConfiguration
-com.taotao.cloud.web.configuration.XssAutoConfiguration
-com.taotao.cloud.web.configuration.IdGeneratorAutoConfiguration

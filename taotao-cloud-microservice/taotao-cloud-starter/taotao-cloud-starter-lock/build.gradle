@@ -1,0 +1,8 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper')
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

@@ -9,7 +9,6 @@ import com.taotao.cloud.web.sensitive.desensitize.DesensitizeProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 /**
  * ErrorHandlingProperties
