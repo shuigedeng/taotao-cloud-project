@@ -1,10 +1,12 @@
-package com.taotao.cloud.web.sensitive.word;
+package com.taotao.cloud.sensitive.word;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.List;
 import java.util.Objects;
+
+import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

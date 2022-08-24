@@ -17,7 +17,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = SignProperties.PREFIX)
 public class SignProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.sign";
+	public static final String PREFIX = "taotao.cloud.sign";
 
 	private boolean enabled = false;
 

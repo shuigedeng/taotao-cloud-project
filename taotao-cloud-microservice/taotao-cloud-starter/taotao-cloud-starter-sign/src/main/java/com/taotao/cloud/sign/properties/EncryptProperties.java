@@ -14,7 +14,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = EncryptProperties.PREFIX)
 public class EncryptProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.sign.encrypt";
+	public static final String PREFIX = "taotao.cloud.sign.encrypt";
 
 	/**
 	 * 返回对象中需要加密字段的name

@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.sensitive.desensitize;
+package com.taotao.cloud.sensitive.desensitize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
@@ -8,9 +8,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.web.enums.SensitiveStrategy;
 import java.io.IOException;
 import java.util.Objects;
+
+import com.taotao.cloud.sensitive.enums.SensitiveStrategy;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.sensitive.sensitive;
+package com.taotao.cloud.sensitive.sensitive;
 
 
 /**

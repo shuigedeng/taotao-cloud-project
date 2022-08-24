@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = LimitProperties.PREFIX)
 public class LimitProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.limit";
+	public static final String PREFIX = "taotao.cloud.limit";
 
 	private Boolean enabled = false;
 

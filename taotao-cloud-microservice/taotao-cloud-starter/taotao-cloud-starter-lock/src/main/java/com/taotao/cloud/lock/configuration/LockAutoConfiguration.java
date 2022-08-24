@@ -17,12 +17,11 @@ package com.taotao.cloud.lock.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.lock.aop.LockAop;
+import com.taotao.cloud.lock.properties.LockProperties;
 import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.lock.support.redis.RedissonDistributedLock;
-import com.taotao.cloud.redis.configuration.RedisAutoConfiguration;
-import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.lock.support.zookeeper.ZookeeperDistributedLock;
-import com.taotao.cloud.zookeeper.properties.ZookeeperLockProperties;
 import org.apache.curator.framework.CuratorFramework;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.InitializingBean;
@@ -32,6 +31,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * RedisLockAutoConfiguration
@@ -40,10 +40,9 @@ import org.springframework.context.annotation.Bean;
  * @version 2021.9
  * @since 2021-09-07 21:17:02
  */
-@ConditionalOnBean(RedissonClient.class)
-@AutoConfiguration(after = RedisAutoConfiguration.class)
-@EnableConfigurationProperties({RedisLockProperties.class})
-@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@AutoConfiguration
+@EnableConfigurationProperties({LockProperties.class})
+@ConditionalOnProperty(prefix = LockProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class LockAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -51,17 +50,44 @@ public class LockAutoConfiguration implements InitializingBean {
 		LogUtil.started(LockAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
-	@Bean
-	@ConditionalOnMissingBean
-	public DistributedLock redissonDistributedLock(RedissonClient redissonClient) {
-		return new RedissonDistributedLock(redissonClient);
+	@Configuration
+	@ConditionalOnBean(RedissonClient.class)
+	@ConditionalOnProperty(prefix = LockProperties.PREFIX, name = "type", havingValue = "redis")
+	public static class RedisLockAutoConfiguration implements InitializingBean {
+
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			LogUtil.started(RedisLockAutoConfiguration.class, StarterName.REDIS_STARTER);
+		}
+
+		@Bean
+		@ConditionalOnMissingBean
+		public DistributedLock redissonDistributedLock(RedissonClient redissonClient) {
+			return new RedissonDistributedLock(redissonClient);
+		}
+
+	}
+
+	@Configuration
+	@ConditionalOnBean(CuratorFramework.class)
+	@ConditionalOnProperty(prefix = LockProperties.PREFIX, name = "type", havingValue = "zookeeper")
+	public static class ZookeeperLockAutoConfiguration implements InitializingBean {
+
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			LogUtil.started(ZookeeperLockAutoConfiguration.class, StarterName.REDIS_STARTER);
+		}
+
+		@Bean
+		@ConditionalOnMissingBean
+		public DistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
+			return new ZookeeperDistributedLock(curatorFramework);
+		}
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = ZookeeperLockProperties.PREFIX, name = "enabled", havingValue = "true")
-	public DistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
-		return new ZookeeperDistributedLock(curatorFramework);
+	public LockAop lockAop(){
+		return new LockAop();
 	}
 
 }

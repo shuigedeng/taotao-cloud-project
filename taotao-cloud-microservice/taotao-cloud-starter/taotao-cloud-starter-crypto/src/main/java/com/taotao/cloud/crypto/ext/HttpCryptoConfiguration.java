@@ -42,9 +42,7 @@ import javax.annotation.PostConstruct;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(CryptoProperties.class)
-@Import({
-        CryptoStrategyConfiguration.class,
-})
+@Import({CryptoStrategyConfiguration.class,})
 public class HttpCryptoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(HttpCryptoConfiguration.class);

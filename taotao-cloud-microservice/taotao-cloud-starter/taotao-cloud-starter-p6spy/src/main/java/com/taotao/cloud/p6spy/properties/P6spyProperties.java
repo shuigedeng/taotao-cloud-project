@@ -9,6 +9,8 @@ public class P6spyProperties {
 
 	public static final String PREFIX = "taotao.cloud.p6spy";
 
+	private boolean enabled = true;
+
 	private String realdatasourceproperties;
 	private String exclude;
 	private String jndicontextfactory;
@@ -314,5 +316,13 @@ public class P6spyProperties {
 
 	public void setRealdatasourceclass(String realdatasourceclass) {
 		this.realdatasourceclass = realdatasourceclass;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

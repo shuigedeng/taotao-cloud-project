@@ -1,11 +1,9 @@
-com.taotao.cloud.web.configuration.DozerAutoConfiguration
 com.taotao.cloud.web.configuration.ExceptionAutoConfiguration
 com.taotao.cloud.web.configuration.FeignExceptionAutoConfiguration
 com.taotao.cloud.web.configuration.JacksonAutoConfiguration
 com.taotao.cloud.web.configuration.PrometheusAutoConfiguration
 com.taotao.cloud.web.configuration.ResponseAutoConfiguration
 com.taotao.cloud.web.configuration.QuartzAutoConfiguration
-com.taotao.cloud.web.configuration.SensitiveQuartzAutoConfiguration
 com.taotao.cloud.web.configuration.ScheduledAutoConfiguration
 com.taotao.cloud.web.configuration.ServletAutoConfiguration
 com.taotao.cloud.web.configuration.StrategyAutoConfiguration
