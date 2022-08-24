@@ -17,8 +17,6 @@ package com.taotao.cloud.idempotent.aop;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.taotao.cloud.common.support.lock.DistributedLock;
-import com.taotao.cloud.common.support.lock.ZLock;
 import com.taotao.cloud.common.utils.aop.AopUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Objects;
@@ -28,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.taotao.cloud.idempotent.exception.IdempotentException;
 import com.taotao.cloud.idempotent.enums.IdempotentTypeEnum;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
+import com.taotao.cloud.lock.support.DistributedLock;
+import com.taotao.cloud.lock.support.ZLock;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
