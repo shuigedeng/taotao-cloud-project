@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = IdempotentProperties.PREFIX)
 public class IdempotentProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.idempotent";
+	public static final String PREFIX = "taotao.cloud.idempotent";
 
 	private Boolean enabled = true;
 

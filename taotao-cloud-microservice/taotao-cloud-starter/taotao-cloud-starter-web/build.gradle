@@ -24,6 +24,8 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-idempotent")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-crypto")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sensitive")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dozer")
 
     api "org.springframework.boot:spring-boot-starter-webflux"
     api("org.springframework.boot:spring-boot-starter-web") {
@@ -47,16 +49,11 @@ dependencies {
     api 'cn.afterturn:easypoi-web:4.4.0'
     api 'cn.afterturn:easypoi-annotation:4.4.0'
 
-    //https://search.maven.org/artifact/com.github.dozermapper/dozer-spring-boot-starter
-    api("com.github.dozermapper:dozer-spring-boot-starter:6.5.2"){
-        exclude group: "commons-collections", module: "commons-collections"
-    }
-
     //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
     api 'io.github.tokenjan:pinyin4j:2.6.1'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.1.Final"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

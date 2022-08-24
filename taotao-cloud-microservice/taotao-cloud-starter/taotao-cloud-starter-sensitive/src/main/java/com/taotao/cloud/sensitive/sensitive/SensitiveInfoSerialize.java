@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.sensitive.sensitive;
+package com.taotao.cloud.sensitive.sensitive;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;

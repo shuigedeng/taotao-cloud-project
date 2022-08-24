@@ -1,8 +1,9 @@
-package com.taotao.cloud.web.sensitive.desensitize;
+package com.taotao.cloud.sensitive.desensitize;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.taotao.cloud.web.enums.SensitiveStrategy;
+import com.taotao.cloud.sensitive.enums.SensitiveStrategy;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

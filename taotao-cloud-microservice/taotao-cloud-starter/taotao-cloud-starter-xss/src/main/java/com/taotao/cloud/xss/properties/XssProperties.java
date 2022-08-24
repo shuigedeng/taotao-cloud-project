@@ -33,7 +33,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = XssProperties.PREFIX)
 public class XssProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.xss";
+	public static final String PREFIX = "taotao.cloud.xss";
 
 	private Boolean enabled = true;
 

@@ -21,7 +21,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = EncryptBodyProperties.PREFIX)
 public class EncryptBodyProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.sign.encrypt.body";
+	public static final String PREFIX = "taotao.cloud.sign.encrypt.body";
 
 	private String aesKey;
 

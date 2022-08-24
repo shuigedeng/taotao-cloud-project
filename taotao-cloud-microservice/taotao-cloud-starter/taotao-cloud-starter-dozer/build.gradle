@@ -1,0 +1,13 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
+    //https://search.maven.org/artifact/com.github.dozermapper/dozer-spring-boot-starter
+    api("com.github.dozermapper:dozer-spring-boot-starter:6.5.2"){
+        exclude group: "commons-collections", module: "commons-collections"
+    }
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+
+

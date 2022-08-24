@@ -18,7 +18,6 @@ package com.taotao.cloud.zookeeper.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.zookeeper.model.ZkIdGenerator;
-import com.taotao.cloud.zookeeper.properties.ZookeeperLockProperties;
 import com.taotao.cloud.zookeeper.properties.ZookeeperProperties;
 import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
 import org.apache.curator.RetryPolicy;
@@ -40,7 +39,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2021-09-07 20:37:49
  */
 @AutoConfiguration
-@EnableConfigurationProperties({ZookeeperProperties.class, ZookeeperLockProperties.class})
+@EnableConfigurationProperties({ZookeeperProperties.class})
 @ConditionalOnProperty(prefix = ZookeeperProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ZookeeperAutoConfiguration implements InitializingBean {
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.sensitive.word;
+package com.taotao.cloud.sensitive.word;
 
 import java.io.Serializable;
 import java.util.TreeSet;

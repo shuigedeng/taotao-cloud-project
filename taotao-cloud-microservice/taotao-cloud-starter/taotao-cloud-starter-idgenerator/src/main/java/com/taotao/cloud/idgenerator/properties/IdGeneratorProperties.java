@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = IdGeneratorProperties.PREFIX)
 public class IdGeneratorProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.idgenerator";
+	public static final String PREFIX = "taotao.cloud.idgenerator";
 
 	private boolean enabled = true;
 

@@ -995,13 +995,27 @@ taotao:
     zookeeper:
       enabled: true
       connectString: 192.168.10.200:2181,192.168.10.200:2182,192.168.10.200:2183
-      lock:
-        enabled: false
+    dozer:
+      enabled: true
+    sensitive:
+      enabled: true
+    lock:
+      enabled: true
+      type: redis
+    limit:
+      enabled: true
+    idgenerator:
+      enabled: true
+      type: redis
+    idempotent:
+      enabled: true
+    retry:
+      enabled: true
+    xss:
+      enabled: true
+    sign:
+      enabled: true
     web:
-      dozer:
-        enabled: true
-      encrypt:
-        enabled: false
       interceptor:
         doubt-api: true
         header: true
@@ -1013,12 +1027,6 @@ taotao:
         web-context: true
         report: true
         ping: true
-      limit:
-        enabled: true
-      idempotent:
-        enabled: true
-      xss:
-        enabled: true
     shardingsphere:
       enabled: false
     sentinel:
@@ -1028,8 +1036,6 @@ taotao:
     rocketmq:
       enabled: false
     redis:
-      lock:
-        enabled: true
       cache:
         enabled: true
         type: redis

@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = EncryptProperties.PREFIX)
 public class EncryptProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.encrypt";
+	public static final String PREFIX = "taotao.cloud.encrypt";
 
 	private Boolean enabled = true;
 

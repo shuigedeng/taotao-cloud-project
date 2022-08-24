@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.sensitive.desensitize;
+package com.taotao.cloud.sensitive.desensitize;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -10,7 +10,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = DesensitizeProperties.PREFIX)
 public class DesensitizeProperties {
 
-	public static final String PREFIX = "taotao.cloud.web.sensitive";
+	public static final String PREFIX = "taotao.cloud.sensitive";
+
+	private Boolean enabled  = true;
+
 	/**
 	 * 是否是演示站点
 	 */
@@ -41,6 +44,14 @@ public class DesensitizeProperties {
 		return isTestModel;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public Integer getSensitiveLevel() {
 		if (sensitiveLevel == null) {
 			return 0;
@@ -59,4 +70,5 @@ public class DesensitizeProperties {
 	public void setSensitiveLevel(Integer sensitiveLevel) {
 		this.sensitiveLevel = sensitiveLevel;
 	}
+
 }

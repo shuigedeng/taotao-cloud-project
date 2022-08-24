@@ -1,6 +1,10 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
+    compileOnly('org.springframework.security:spring-security-core') {
+        exclude group: 'junit', module: 'junit'
+    }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.sensitive.word;
+package com.taotao.cloud.sensitive.word;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.Serializable;
