@@ -16,10 +16,10 @@
 package com.taotao.cloud.idempotent.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.idempotent.aop.IdempotentAspect;
 import com.taotao.cloud.idempotent.properties.IdempotentProperties;
+import com.taotao.cloud.lock.support.DistributedLock;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
