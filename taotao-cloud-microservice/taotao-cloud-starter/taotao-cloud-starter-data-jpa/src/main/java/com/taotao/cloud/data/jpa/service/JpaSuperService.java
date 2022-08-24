@@ -16,8 +16,9 @@
 package com.taotao.cloud.data.jpa.service;
 
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.lock.support.DistributedLock;
+
 import java.io.Serializable;
 
 /**
@@ -41,7 +42,7 @@ public interface JpaSuperService<T extends JpaSuperEntity<I>, I extends Serializ
 	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
-		String msg);
+							String msg);
 
 	/**
 	 * 幂等性新增记录

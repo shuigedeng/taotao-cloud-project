@@ -36,7 +36,6 @@ dependencies {
     api 'org.springframework:spring-webmvc'
     api 'org.springframework:spring-aop'
     api 'org.springframework:spring-aspects'
-    api 'org.springframework.retry:spring-retry:1.3.3'
 
     api "org.springframework.cloud:spring-cloud-context"
     compileOnly 'org.springframework.data:spring-data-commons'

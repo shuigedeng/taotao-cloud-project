@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import static com.taotao.cloud.web.servlet.filter.XssFilter.IGNORE_PARAM_VALUE;
-import static com.taotao.cloud.web.servlet.filter.XssFilter.IGNORE_PATH;
 
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.StarterName;
@@ -25,9 +23,7 @@ import com.taotao.cloud.web.servlet.filter.TenantFilter;
 import com.taotao.cloud.web.servlet.filter.TraceFilter;
 import com.taotao.cloud.web.servlet.filter.VersionFilter;
 import com.taotao.cloud.web.servlet.filter.WebContextFilter;
-import com.taotao.cloud.web.servlet.filter.XssFilter;
 import com.taotao.cloud.web.properties.FilterProperties;
-import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.servlet.listener.MyListener;
 import com.taotao.cloud.web.servlet.servlet.MyAsyncServlet;
 import com.taotao.cloud.web.servlet.servlet.MyServlet;
@@ -56,11 +52,6 @@ import org.springframework.web.WebApplicationInitializer;
  */
 @AutoConfiguration
 public class ServletAutoConfiguration implements WebApplicationInitializer, InitializingBean {
-	/**
-	 * xssProperties
-	 */
-	@Autowired
-	private XssProperties xssProperties;
 	/**
 	 * filterProperties
 	 */
@@ -169,24 +160,7 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 		return registrationBean;
 	}
 
-	/**
-	 * 配置跨站攻击过滤器
-	 */
-	@Bean
-	@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-	public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
-		FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
-		filterRegistration.setFilter(new XssFilter());
-		filterRegistration.setEnabled(xssProperties.getEnabled());
-		filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
-		filterRegistration.setOrder(xssProperties.getOrder());
 
-		Map<String, String> initParameters = new HashMap<>(4);
-		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
-		initParameters.put(IGNORE_PARAM_VALUE, CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
-		filterRegistration.setInitParameters(initParameters);
-		return filterRegistration;
-	}
 
 
 

@@ -18,11 +18,12 @@ package com.taotao.cloud.data.jpa.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
 import com.taotao.cloud.data.jpa.service.JpaSuperService;
 import java.io.Serializable;
+
+import com.taotao.cloud.lock.support.DistributedLock;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -54,7 +55,7 @@ public class JpaSuperServiceImpl<M extends JpaSuperRepository<T, I>, T extends J
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, String msg) {
+								   Predicate predicate, String msg) {
 		if (lock == null) {
 			throw new LockException("分布式锁为空");
 		}

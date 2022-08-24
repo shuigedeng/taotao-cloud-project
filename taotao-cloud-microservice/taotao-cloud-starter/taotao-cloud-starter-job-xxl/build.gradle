@@ -1,5 +1,6 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock')
 
     //https://gitee.com/xuxueli0323/xxl-job.git
     //https://search.maven.org/artifact/com.xuxueli/xxl-job-core

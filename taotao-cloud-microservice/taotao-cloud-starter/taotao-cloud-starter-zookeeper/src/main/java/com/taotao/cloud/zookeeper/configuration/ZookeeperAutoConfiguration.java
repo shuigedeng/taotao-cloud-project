@@ -17,8 +17,6 @@ package com.taotao.cloud.zookeeper.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.support.lock.DistributedLock;
-import com.taotao.cloud.zookeeper.lock.ZookeeperDistributedLock;
 import com.taotao.cloud.zookeeper.model.ZkIdGenerator;
 import com.taotao.cloud.zookeeper.properties.ZookeeperLockProperties;
 import com.taotao.cloud.zookeeper.properties.ZookeeperProperties;
@@ -33,7 +31,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * ZookeeperAutoConfiguration
@@ -75,12 +72,4 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	public ZkIdGenerator zkIdGenerator(CuratorFramework curatorFramework) {
 		return new ZkIdGenerator(curatorFramework);
 	}
-
-	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = ZookeeperLockProperties.PREFIX, name = "enabled", havingValue = "true")
-	public DistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
-		return new ZookeeperDistributedLock(curatorFramework);
-	}
-
 }
