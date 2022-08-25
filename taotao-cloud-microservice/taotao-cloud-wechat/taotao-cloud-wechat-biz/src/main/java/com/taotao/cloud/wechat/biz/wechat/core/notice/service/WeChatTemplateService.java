@@ -1,7 +1,21 @@
 package com.taotao.cloud.wechat.biz.wechat.core.notice.service;
 
+import cn.bootx.common.core.exception.DataNotExistException;
+import cn.bootx.common.core.rest.PageResult;
+import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.util.ResultConvertUtil;
+import cn.bootx.common.mybatisplus.base.MpIdEntity;
+import cn.bootx.common.mybatisplus.util.MpUtil;
+import cn.bootx.common.websocket.entity.WsRes;
+import cn.bootx.common.websocket.service.UserWsNoticeService;
+import cn.bootx.starter.auth.util.SecurityUtil;
 import cn.bootx.starter.wechat.core.notice.dao.WeChatTemplateManager;
 import cn.bootx.starter.wechat.core.notice.entity.WeChatTemplate;
+import cn.bootx.starter.wechat.dto.notice.WeChatTemplateDto;
+import cn.bootx.starter.wechat.param.notice.WeChatTemplateParam;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +39,44 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WeChatTemplateService {
     private final WxMpService wxMpService;
-    private final WeChatTemplateManager templateManager;
+    private final WeChatTemplateManager weChatTemplateManager;
+    private final UserWsNoticeService userWsNoticeService;
 
     /**
-     * 获取模板列表
+     * 修改
      */
-    @SneakyThrows
-    public List<WxMpTemplate> findAll(){
-        WxMpTemplateMsgService templateMsgService = wxMpService.getTemplateMsgService();
+    public void update(WeChatTemplateParam param){
+        WeChatTemplate weChatTemplate = weChatTemplateManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
+        BeanUtil.copyProperties(param,weChatTemplate, CopyOptions.create().ignoreNullValue());
+        weChatTemplateManager.updateById(weChatTemplate);
+    }
 
-        List<WxMpTemplate> templates = templateMsgService.getAllPrivateTemplate();
-        return templates;
+    /**
+     * 分页
+     */
+    public PageResult<WeChatTemplateDto> page(PageParam pageParam, WeChatTemplateParam weChatTemplateParam){
+        return MpUtil.convert2DtoPageResult(weChatTemplateManager.page(pageParam,weChatTemplateParam));
+    }
+
+    /**
+     * 获取单条
+     */
+    public WeChatTemplateDto findById(Long id){
+        return weChatTemplateManager.findById(id).map(WeChatTemplate::toDto).orElseThrow(DataNotExistException::new);
+    }
+
+    /**
+     * 获取全部
+     */
+    public List<WeChatTemplateDto> findAll(){
+        return ResultConvertUtil.dtoListConvert(weChatTemplateManager.findAll());
+    }
+
+    /**
+     * 编码是否已经存在(不包含自身)
+     */
+    public boolean existsByCode(String code,Long id){
+        return weChatTemplateManager.existsByCode(code,id);
     }
 
     /**
@@ -46,31 +87,29 @@ public class WeChatTemplateService {
     @Transactional(rollbackFor = Exception.class)
     public void sync(){
         WxMpTemplateMsgService templateMsgService = wxMpService.getTemplateMsgService();
-        List<WxMpTemplate> wxTemplates = templateMsgService.getAllPrivateTemplate();
-        List<WeChatTemplate> weChatTemplates = templateManager.findAll();
-
+        // 微信公众号订阅模板
+        List<WxMpTemplate> wxTemplates = templateMsgService.getAllPrivateTemplate().stream()
+                .filter(o-> StrUtil.isNotBlank(o.getPrimaryIndustry()))
+                .collect(Collectors.toList());
         List<String> wxTemplateIds = wxTemplates.stream().map(WxMpTemplate::getTemplateId).collect(Collectors.toList());
+
+        // 系统中模板
+        List<WeChatTemplate> weChatTemplates = weChatTemplateManager.findAll();
         List<String> weChatTemplatesIds = weChatTemplates.stream().map(WeChatTemplate::getTemplateId).collect(Collectors.toList());
 
-        // 停用 本地有且启用,服务端没有
-        List<String> disableIds =  weChatTemplates.stream()
-                .filter(WeChatTemplate::isEnable)
-                .map(WeChatTemplate::getTemplateId)
-                .filter(o->!wxTemplateIds.contains(o))
-                .collect(Collectors.toList());
-        // 启用 本地有且停用, 服务端有
-        List<String> enableIds = weChatTemplates.stream()
-                .filter(o->!o.isEnable())
-                .map(WeChatTemplate::getTemplateId)
-                .filter(wxTemplateIds::contains)
+        // 删除 本地有有,服务端没有
+        List<Long> deleteIds =  weChatTemplates.stream()
+                .filter(o->!wxTemplateIds.contains(o.getTemplateId()))
+                .map(MpIdEntity::getId)
                 .collect(Collectors.toList());
         // 新增 服务端有且本地没有
         List<WeChatTemplate> saveTemplate = wxTemplates.stream()
                 .filter(o -> !weChatTemplatesIds.contains(o.getTemplateId()))
                 .map(WeChatTemplate::init)
                 .collect(Collectors.toList());
-        templateManager.saveAll(saveTemplate);
-        templateManager.disableByTemplateIds(disableIds);
-        templateManager.enableByTemplateIds(enableIds);
+        weChatTemplateManager.saveAll(saveTemplate);
+        weChatTemplateManager.deleteByIds(deleteIds);
+        SecurityUtil.getCurrentUser().ifPresent(userDetail ->
+                userWsNoticeService.sendMessageByUser(WsRes.notificationInfo("微信消息模板同步成功"), userDetail.getId()));
     }
 }

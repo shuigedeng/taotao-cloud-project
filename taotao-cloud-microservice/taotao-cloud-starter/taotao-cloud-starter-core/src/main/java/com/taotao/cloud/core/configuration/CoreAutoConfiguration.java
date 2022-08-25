@@ -56,12 +56,6 @@ public class CoreAutoConfiguration implements InitializingBean {
 		LogUtil.started(CoreAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
-	@Bean(value = "meterRegistryCustomizer")
-	public MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
-		return meterRegistry -> meterRegistry
-			.config()
-			.commonTags("application", PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
-	}
 
 	@Bean
 	public Collector collector(CoreProperties coreProperties) {

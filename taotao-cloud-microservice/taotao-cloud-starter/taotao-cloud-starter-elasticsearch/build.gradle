@@ -12,7 +12,7 @@ dependencies {
     //https://search.maven.org/artifact/org.noear/snack3
     implementation 'org.noear:snack3:3.2.33'
 
-    testImplementation 'org.noear:solon-test:1.9.4'
+    testImplementation 'org.noear:solon-test:1.10.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

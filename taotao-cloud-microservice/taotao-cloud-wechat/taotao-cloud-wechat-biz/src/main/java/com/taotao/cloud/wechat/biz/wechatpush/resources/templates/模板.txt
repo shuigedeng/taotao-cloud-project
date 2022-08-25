@@ -1,0 +1,11 @@
+{{riqi.DATA}}
+{{beizhu.DATA}}
+天气：{{tianqi.DATA}}
+最低温度：{{low.DATA}} 度
+最高温度：{{high.DATA}} 度
+今天是我们恋爱的第 {{lianai.DATA}} 天
+我们已经成为合法夫妻 {{linzhen.DATA}} 天了
+距离你的生日还有 {{shengri.DATA}} 天
+
+{{caihongpi.DATA}}
+{{jinju.DATA}}

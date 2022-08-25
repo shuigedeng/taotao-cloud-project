@@ -28,6 +28,7 @@ public class WeChatMessageRouterConfiguration {
         WxMpMessageRouter router = new WxMpMessageRouter(wxMpService);
         // 记录日志
 
+        // 消息路由绑定
         for (WeChatMpMessageHandler weChatMpMessageHandler : weChatMpMessageHandlers) {
             router.rule()
                     .async(false)
@@ -36,7 +37,7 @@ public class WeChatMessageRouterConfiguration {
                     .handler(weChatMpMessageHandler)
                     .end();
         }
-        // 默认的
+        // 默认的 文本消息处理
         router.rule().async(false).handler(weChatMsgHandler).end();
         return router;
     }
