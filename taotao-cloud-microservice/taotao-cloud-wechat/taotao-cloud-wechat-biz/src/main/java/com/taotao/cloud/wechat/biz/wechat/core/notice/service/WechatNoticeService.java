@@ -1,5 +1,9 @@
 package com.taotao.cloud.wechat.biz.wechat.core.notice.service;
 
+import cn.bootx.common.core.exception.DataNotExistException;
+import cn.bootx.common.core.rest.dto.KeyValue;
+import cn.bootx.starter.wechat.core.notice.dao.WeChatTemplateManager;
+import cn.bootx.starter.wechat.core.notice.entity.WeChatTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +13,8 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * 微信消息通知功能
@@ -22,23 +26,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WechatNoticeService {
     private final WxMpService wxMpService;
+    private final WeChatTemplateManager weChatTemplateManager;
 
     /**
-     * 发送模板信息
+     * 发送模板信息 根据模板编号
      */
     @SneakyThrows
-    public String sentNotice(){
+    public String sentNotice(String code, String wxOpenId, List<KeyValue> keyValues){
+        WeChatTemplate weChatTemplate = weChatTemplateManager.findTemplateIdByCode(code).orElseThrow(() -> new DataNotExistException("微信消息模板不存在"));
+        return this.sentNoticeByTemplateId(weChatTemplate.getTemplateId(),wxOpenId,keyValues);
+    }
+
+    /**
+     * 发送模板信息 根据微信消息模板ID
+     */
+    @SneakyThrows
+    public String sentNoticeByTemplateId(String templateId, String wxOpenId, List<KeyValue> keyValues){
         WxMpTemplateMsgService templateMsgService = wxMpService.getTemplateMsgService();
         WxMpTemplateMessage message = new WxMpTemplateMessage();
-        message.setToUser("o2RW45oGxo1Z8Fhcf6Oy9rMM7aT8");
-        message.setTemplateId("2rFyFpTBtDcs8ua6etMA6lR_ullvSXcXw5hWbB9v2ZE");
-        List<WxMpTemplateData> data = Arrays.asList(
-                new WxMpTemplateData("first", "hello 测试"),
-                new WxMpTemplateData("keyword1", "小小明'"),
-                new WxMpTemplateData("keyword2", "捆绑吧"),
-                new WxMpTemplateData("remark", "说明一下")
-        );
-        message.setData(data);
+        message.setToUser(wxOpenId);
+        message.setTemplateId(templateId);
+
+        List<WxMpTemplateData> wxMpTemplateData = keyValues.stream()
+                .map(keyValue -> new WxMpTemplateData(keyValue.getKey(), keyValue.getValue()))
+                .collect(Collectors.toList());
+        message.setData(wxMpTemplateData);
         return templateMsgService.sendTemplateMsg(message);
     }
 }

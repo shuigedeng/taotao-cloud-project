@@ -55,7 +55,7 @@ public final class StarterName {
 	public static final String LAYTPL_STARTER = "taotao-cloud-starter-laytpl";
 	public static final String MONGODB_STARTER = "taotao-cloud-starter-mongodb";
 	public static final String NETTY_WEBSOCKET_STARTER = "taotao-cloud-starter-netty-websocket";
-	public static final String OPENAPI_STARTER = "taotao-cloud-starter-openapi";
+	public static final String SPRINGDOC_STARTER = "taotao-cloud-starter-springdoc";
 	public static final String P6SPY_STARTER = "taotao-cloud-starter-p6spy";
 	public static final String PULSAR_STARTER = "taotao-cloud-starter-pulsar";
 	public static final String PAY_STARTER = "taotao-cloud-starter-pay";

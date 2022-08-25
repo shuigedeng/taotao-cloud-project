@@ -5,47 +5,55 @@ import cn.bootx.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.starter.wechat.core.notice.entity.WeChatTemplate;
+import cn.bootx.starter.wechat.param.notice.WeChatTemplateParam;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
-*
-* @author xxm
-* @date 2022/7/17
-*/
+ *
+ * @author xxm
+ * @date 2022/7/17
+ */
 @Slf4j
 @Repository
 @RequiredArgsConstructor
 public class WeChatTemplateManager extends BaseManager<WeChatTemplateMapper, WeChatTemplate> {
 
-    public Page<WeChatTemplate> page(PageParam pageParam) {
+    public Page<WeChatTemplate> page(PageParam pageParam, WeChatTemplateParam param) {
         Page<WeChatTemplate> mpPage = MpUtil.getMpPage(pageParam, WeChatTemplate.class);
         return this.lambdaQuery()
                 .select(WeChatTemplate.class, MpUtil::excludeBigField)
+                .like(StrUtil.isNotBlank(param.getTemplateId()), WeChatTemplate::getTemplateId,param.getTemplateId())
+                .like(StrUtil.isNotBlank(param.getName()), WeChatTemplate::getName,param.getName())
+                .like(StrUtil.isNotBlank(param.getCode()), WeChatTemplate::getCode,param.getCode())
                 .orderByDesc(MpIdEntity::getId)
                 .page(mpPage);
     }
 
-    /**
-     * 根据id停用
-     */
-    public void disableByTemplateIds(List<String> templateIds) {
-        this.lambdaUpdate()
-                .set(WeChatTemplate::isEnable,false)
-                .in(WeChatTemplate::getTemplateId,templateIds)
-                .update();
+    public boolean existsByCode(String code,Long id){
+        return existedByField(WeChatTemplate::getCode,code,id);
     }
+
+
     /**
-     * 根据id启用
+     * 根据code查询
      */
-    public void enableByTemplateIds(List<String> templateIds) {
-        this.lambdaUpdate()
-                .set(WeChatTemplate::isEnable,true)
-                .in(WeChatTemplate::getTemplateId,templateIds)
-                .update();
+    public Optional<WeChatTemplate> findByCode(String code){
+        return this.findByField(WeChatTemplate::getCode,code);
+    }
+
+    /**
+     * 根据code查询
+     */
+    public Optional<WeChatTemplate> findTemplateIdByCode(String code){
+        return lambdaQuery()
+                .select(WeChatTemplate::getTemplateId)
+                .eq(WeChatTemplate::getCode,code)
+                .oneOpt();
     }
 }

@@ -8,7 +8,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-metrics")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata")

@@ -1054,7 +1054,7 @@ taotao:
       logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
-    openapi:
+    springdoc:
       enabled: true
       group: ${spring.applicaion.name}
       version: ${taotaoCloudVersion}

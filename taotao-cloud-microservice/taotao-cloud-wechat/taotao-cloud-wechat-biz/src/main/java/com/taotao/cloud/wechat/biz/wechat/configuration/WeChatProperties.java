@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**   
-* 微信配置
+* 微信公众平台配置
 * @author xxm  
 * @date 2022/7/15 
 */

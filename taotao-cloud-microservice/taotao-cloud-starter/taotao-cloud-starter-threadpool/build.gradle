@@ -2,16 +2,16 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     //https://gitee.com/dromara/dynamic-tp.git
-    //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
-    api('io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos:1.0.7') {
+    //https://search.maven.org/artifact/cn.dynamictp/dynamic-tp-spring-cloud-starter-nacos/1.0.8/jar
+    api('cn.dynamictp:dynamic-tp-spring-cloud-starter-nacos:1.0.8') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
 
     //https://gitee.com/mabaiwancn/hippo4j
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter
-    api 'cn.hippo4j:hippo4j-spring-boot-starter:1.3.1'
+    api 'cn.hippo4j:hippo4j-spring-boot-starter:1.4.0'
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter-all
-    api ('cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.3.1'){
+    api ('cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.0'){
         exclude group: 'cn.hippo4j', module: "hippo4j-spring-boot-starter-adapter-hystrix"
         exclude group: 'commons-collections', module: "commons-collections"
         exclude group: 'com.alibaba', module: "fastjson"
