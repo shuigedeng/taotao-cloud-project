@@ -1,5 +1,8 @@
 package com.taotao.cloud.monitor.kuding;
 
+/**
+ * 此目录下的文件需要修改
+ */
 public class ExceptionNoticeException extends RuntimeException {
 
 	public ExceptionNoticeException(String message) {

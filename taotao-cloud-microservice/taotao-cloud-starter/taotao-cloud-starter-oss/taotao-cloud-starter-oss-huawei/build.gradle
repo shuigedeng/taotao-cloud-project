@@ -5,6 +5,7 @@ dependencies {
     //华为云存储
     //https://search.maven.org/artifact/com.huaweicloud/esdk-obs-java-bundle
     api 'com.huaweicloud:esdk-obs-java-bundle:3.22.3'
+
     testImplementation  'org.springframework:spring-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
