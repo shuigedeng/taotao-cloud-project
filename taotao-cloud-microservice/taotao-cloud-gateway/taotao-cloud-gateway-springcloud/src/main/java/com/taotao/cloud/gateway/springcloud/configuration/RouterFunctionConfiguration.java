@@ -26,8 +26,8 @@ import com.taotao.cloud.gateway.springcloud.anti_reptile.constant.AntiReptileCon
 import com.taotao.cloud.gateway.springcloud.anti_reptile.handler.RefreshFormHandler;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.handler.ValidateFormHandler;
 import com.taotao.cloud.gateway.springcloud.properties.ApiProperties;
-import com.taotao.cloud.health.collect.HealthCheckProvider;
-import com.taotao.cloud.health.model.Report;
+import com.taotao.cloud.monitor.collect.HealthCheckProvider;
+import com.taotao.cloud.monitor.model.Report;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
 import org.apache.commons.io.IOUtils;

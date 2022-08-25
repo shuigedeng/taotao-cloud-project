@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.task.scheduled;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;
-import com.taotao.cloud.web.schedule.core.ScheduledManager;
+import com.taotao.cloud.schedule.common.annotation.ScheduledBean;
+import com.taotao.cloud.schedule.core.ScheduledManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

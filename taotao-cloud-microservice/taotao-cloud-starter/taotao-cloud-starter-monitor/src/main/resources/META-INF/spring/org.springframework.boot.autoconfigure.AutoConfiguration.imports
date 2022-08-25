@@ -1,0 +1,5 @@
+com.taotao.cloud.monitor.configuration.DumpProviderAutoConfiguration
+com.taotao.cloud.monitor.configuration.ExportProviderAutoConfiguration
+com.taotao.cloud.monitor.configuration.HealthAutoConfiguration
+com.taotao.cloud.monitor.configuration.PingProviderAutoConfiguration
+com.taotao.cloud.monitor.configuration.WarnProviderAutoConfiguration

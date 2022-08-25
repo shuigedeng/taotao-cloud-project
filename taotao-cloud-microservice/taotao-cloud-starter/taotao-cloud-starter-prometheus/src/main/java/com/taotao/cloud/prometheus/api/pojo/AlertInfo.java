@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.prometheus.api.pojo;
 
-import lombok.Data;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -27,7 +26,6 @@ import java.util.Map;
  *
  * @author L.cm
  */
-@Data
 public class AlertInfo implements Serializable {
 
 	/**
@@ -59,4 +57,59 @@ public class AlertInfo implements Serializable {
 	 */
 	private String fingerprint;
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Map<String, String> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(Map<String, String> labels) {
+		this.labels = labels;
+	}
+
+	public Map<String, String> getAnnotations() {
+		return annotations;
+	}
+
+	public void setAnnotations(Map<String, String> annotations) {
+		this.annotations = annotations;
+	}
+
+	public OffsetDateTime getStartsAt() {
+		return startsAt;
+	}
+
+	public void setStartsAt(OffsetDateTime startsAt) {
+		this.startsAt = startsAt;
+	}
+
+	public OffsetDateTime getEndsAt() {
+		return endsAt;
+	}
+
+	public void setEndsAt(OffsetDateTime endsAt) {
+		this.endsAt = endsAt;
+	}
+
+	public String getGeneratorURL() {
+		return generatorURL;
+	}
+
+	public void setGeneratorURL(String generatorURL) {
+		this.generatorURL = generatorURL;
+	}
+
+	public String getFingerprint() {
+		return fingerprint;
+	}
+
+	public void setFingerprint(String fingerprint) {
+		this.fingerprint = fingerprint;
+	}
 }

@@ -46,7 +46,7 @@ public final class StarterName {
 	public static final String FEIGN_STARTER = "taotao-cloud-starter-feign";
 	public static final String ENCRYPT_STARTER = "taotao-cloud-starter-encrypt";
 	public static final String OSS_STARTER = "taotao-cloud-starter-oss";
-	public static final String HEALTH_STARTER = "taotao-cloud-starter-health";
+	public static final String MONITOR_STARTER = "taotao-cloud-starter-monitor";
 	public static final String JOB_ELASTIC_STARTER = "taotao-cloud-starter-job-elastic";
 	public static final String JOB_XXL_STARTER = "taotao-cloud-starter-job-xxl";
 	public static final String KAFKA_STARTER = "taotao-cloud-starter-kafka";

@@ -4,7 +4,7 @@ package com.taotao.cloud.member.biz.connect.request;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.utils.io.UrlBuilder;
-import com.taotao.cloud.health.alarm.core.util.IpUtil;
+import com.taotao.cloud.monitor.alarm.core.util.IpUtil;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
