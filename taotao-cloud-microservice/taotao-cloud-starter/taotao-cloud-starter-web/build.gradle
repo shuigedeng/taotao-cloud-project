@@ -5,7 +5,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-monitor")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-metrics")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc")
@@ -26,6 +26,9 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sensitive")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dozer")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-prometheus")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-schedule")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pinyin")
 
     api "org.springframework.boot:spring-boot-starter-webflux"
     api("org.springframework.boot:spring-boot-starter-web") {
@@ -48,9 +51,6 @@ dependencies {
     api 'cn.afterturn:easypoi-base:4.4.0'
     api 'cn.afterturn:easypoi-web:4.4.0'
     api 'cn.afterturn:easypoi-annotation:4.4.0'
-
-    //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
-    api 'io.github.tokenjan:pinyin4j:2.6.1'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"

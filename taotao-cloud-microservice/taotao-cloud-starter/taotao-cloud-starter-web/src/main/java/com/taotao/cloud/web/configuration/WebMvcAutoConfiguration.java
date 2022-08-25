@@ -29,7 +29,6 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.annotation.EnableUser;
 import com.taotao.cloud.web.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
-import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.listener.RequestMappingScanListener;
 import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.properties.InterceptorProperties;
@@ -39,15 +38,6 @@ import com.taotao.cloud.web.validation.converter.String2LocalDateConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalDateTimeConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalTimeConverter;
 import com.taotao.cloud.web.validation.converter.StringToEnumConverterFactory;
-import io.prometheus.client.Counter;
-import io.prometheus.client.Gauge;
-import io.prometheus.client.Histogram;
-import io.prometheus.client.Summary;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import okhttp3.OkHttpClient;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.beans.factory.InitializingBean;
@@ -79,6 +69,12 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.List;
 
 /**
  * 自定义mvc配置
@@ -114,26 +110,6 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 	 */
 	@Autowired
 	private InterceptorProperties interceptorProperties;
-	/**
-	 * requestCounter
-	 */
-	@Autowired
-	private Counter requestCounter;
-	/**
-	 * requestLatency
-	 */
-	@Autowired
-	private Summary requestLatency;
-	/**
-	 * inprogressRequests
-	 */
-	@Autowired
-	private Gauge inprogressRequests;
-	/**
-	 * requestLatencyHistogram
-	 */
-	@Autowired
-	private Histogram requestLatencyHistogram;
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
@@ -205,17 +181,6 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 	public void addInterceptors(InterceptorRegistry registry) {
 		if (interceptorProperties.getHeader()) {
 			registry.addInterceptor(new HeaderThreadLocalInterceptor())
-				.addPathPatterns("/**")
-				.excludePathPatterns("/actuator/**");
-		}
-
-		if (interceptorProperties.getPrometheus()) {
-			registry.addInterceptor(new
-					PrometheusMetricsInterceptor(
-					requestCounter,
-					requestLatency,
-					inprogressRequests,
-					requestLatencyHistogram))
 				.addPathPatterns("/**")
 				.excludePathPatterns("/actuator/**");
 		}
@@ -354,8 +319,8 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 
 		@Override
 		public Object resolveArgument(MethodParameter methodParameter,
-			ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
-			WebDataBinderFactory webDataBinderFactory) throws Exception {
+									  ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
+									  WebDataBinderFactory webDataBinderFactory) throws Exception {
 			EnableUser user = methodParameter.getParameterAnnotation(EnableUser.class);
 			boolean value = user.value();
 			HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);

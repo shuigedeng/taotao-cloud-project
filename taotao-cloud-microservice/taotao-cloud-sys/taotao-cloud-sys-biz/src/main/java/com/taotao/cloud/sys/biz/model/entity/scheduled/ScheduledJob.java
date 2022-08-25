@@ -17,7 +17,6 @@ package com.taotao.cloud.sys.biz.model.entity.scheduled;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.schedule.enums.ScheduledType;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

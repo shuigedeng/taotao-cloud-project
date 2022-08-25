@@ -1,1 +1,2 @@
-com.taotao.cloud.prometheus.configuration.PrometheusConfiguration
+com.taotao.cloud.prometheus.configuration.PrometheusAutoConfiguration
+com.taotao.cloud.prometheus.api.config.PrometheusConfiguration

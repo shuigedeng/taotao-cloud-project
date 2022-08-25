@@ -41,8 +41,6 @@ public class InterceptorProperties {
 	private int doubtApiThreshold = 3 * 1024 * 1024;
 
 	private Boolean header = true;
-	private Boolean prometheus = true;
-
 
 	public Boolean getDoubtApi() {
 		return doubtApi;
@@ -58,14 +56,6 @@ public class InterceptorProperties {
 
 	public void setHeader(Boolean header) {
 		this.header = header;
-	}
-
-	public Boolean getPrometheus() {
-		return prometheus;
-	}
-
-	public void setPrometheus(Boolean prometheus) {
-		this.prometheus = prometheus;
 	}
 
 	public int getDoubtApiThreshold() {

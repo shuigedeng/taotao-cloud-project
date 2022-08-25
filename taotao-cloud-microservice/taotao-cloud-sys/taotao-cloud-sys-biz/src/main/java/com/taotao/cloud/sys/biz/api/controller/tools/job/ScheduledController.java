@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.api.controller.tools.job;
 
 
+import com.taotao.cloud.schedule.core.ScheduledManager;
 import com.taotao.cloud.sys.biz.service.IScheduledJobService;
-import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.AllArgsConstructor;

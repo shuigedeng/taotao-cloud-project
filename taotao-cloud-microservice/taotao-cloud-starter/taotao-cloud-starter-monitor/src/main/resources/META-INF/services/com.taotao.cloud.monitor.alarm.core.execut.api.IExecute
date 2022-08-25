@@ -1,0 +1,2 @@
+com.taotao.cloud.monitor.alarm.core.execut.spi.LogExecute
+com.taotao.cloud.monitor.alarm.core.execut.spi.NoneExecute

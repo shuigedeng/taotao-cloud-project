@@ -18,7 +18,6 @@ package com.taotao.cloud.prometheus.api.core;
 
 import com.taotao.cloud.prometheus.api.pojo.AlertMessage;
 import com.taotao.cloud.prometheus.api.pojo.TargetGroup;
-import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;
@@ -36,14 +35,18 @@ import java.util.stream.Collectors;
  *
  * @author L.cm
  */
-@AutoIgnore
 @RestController
 @RequestMapping("actuator/prometheus")
-@RequiredArgsConstructor
 public class ReactivePrometheusApi {
 	private final String activeProfile;
 	private final ReactiveDiscoveryClient discoveryClient;
 	private final ApplicationEventPublisher eventPublisher;
+
+	public ReactivePrometheusApi(String activeProfile, ReactiveDiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+		this.activeProfile = activeProfile;
+		this.discoveryClient = discoveryClient;
+		this.eventPublisher = eventPublisher;
+	}
 
 	@GetMapping("sd")
 	public Flux<TargetGroup> getList() {

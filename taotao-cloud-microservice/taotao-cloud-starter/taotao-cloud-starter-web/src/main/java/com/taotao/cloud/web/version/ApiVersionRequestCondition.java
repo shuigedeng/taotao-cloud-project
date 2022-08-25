@@ -3,6 +3,7 @@ package com.taotao.cloud.web.version;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.exception.ApiVersionDeprecatedException;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 
@@ -33,6 +34,7 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
 		this.versionPlaceholderIndex = versionPlaceholderIndex;
 	}
 
+	@NotNull
 	@Override
 	public ApiVersionRequestCondition combine(ApiVersionRequestCondition apiVersionRequestCondition) {
 		// 最近优先原则：在方法上的 {@link ApiVersion} 可覆盖在类上面的 {@link ApiVersion}
@@ -44,7 +46,7 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
     	// 校验请求url中是否包含版本信息
     	String requestURI = request.getRequestURI();
     	String[] versionPaths = StrUtil.splitToArray(requestURI, "/");
-    	double pathVersion = Double.valueOf(versionPaths[versionPlaceholderIndex].substring(1));
+    	double pathVersion = Double.parseDouble(versionPaths[versionPlaceholderIndex].substring(1));
 		
 		// pathVersion的值大于等于apiVersionValue皆可匹配，除非ApiVersion的deprecated值已被标注为true
 		double apiVersionValue = this.getApiVersion().value();
