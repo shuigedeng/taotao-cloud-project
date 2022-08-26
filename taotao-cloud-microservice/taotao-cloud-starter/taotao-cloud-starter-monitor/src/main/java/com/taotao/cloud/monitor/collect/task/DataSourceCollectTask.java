@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.lang.reflect.Field;
@@ -34,7 +36,7 @@ import javax.sql.DataSource;
  */
 public class DataSourceCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.datasource";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.datasource";
 
 	private final CollectTaskProperties properties;
 
@@ -134,7 +136,9 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 			}
 			return info;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

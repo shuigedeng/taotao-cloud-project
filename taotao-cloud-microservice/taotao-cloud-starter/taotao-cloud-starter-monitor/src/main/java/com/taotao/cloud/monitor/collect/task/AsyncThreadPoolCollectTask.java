@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.taotao.cloud.common.utils.context.ContextUtil;
@@ -22,6 +22,8 @@ import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.util.Objects;
@@ -35,7 +37,7 @@ import java.util.Objects;
  */
 public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.executor.async";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.executor.async";
 
 	private final CollectTaskProperties properties;
 
@@ -102,7 +104,9 @@ public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

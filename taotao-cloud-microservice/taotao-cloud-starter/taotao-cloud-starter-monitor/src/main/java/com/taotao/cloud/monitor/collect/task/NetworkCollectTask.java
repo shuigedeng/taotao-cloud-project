@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
-
-import static com.taotao.cloud.monitor.utils.ProcessUtils.getProcessID;
 
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 import com.taotao.cloud.monitor.utils.ProcessUtils;
+
+import static com.taotao.cloud.monitor.utils.ProcessUtils.getProcessID;
 
 /**
  * NetworkCollectTask
@@ -33,7 +35,7 @@ import com.taotao.cloud.monitor.utils.ProcessUtils;
  */
 public class NetworkCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.network";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.network";
 
 	private final CollectTaskProperties properties;
 
@@ -85,7 +87,9 @@ public class NetworkCollectTask extends AbstractCollectTask {
 					"\\$PID", getProcessID())), Long.class);
 			return ioInfo;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}
@@ -95,16 +99,13 @@ public class NetworkCollectTask extends AbstractCollectTask {
 
 		@FieldReport(name = TASK_NAME + ".process.tcp.listen.number", desc = "当前进程TCP LISTEN状态连接数")
 		private Long processTcpListenNum = 0L;
-		@FieldReport(name = TASK_NAME
-			+ ".process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
+		@FieldReport(name = TASK_NAME + ".process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
 		private Long processTcpEstablishedNum = 0L;
-		@FieldReport(name = TASK_NAME
-			+ ".process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
+		@FieldReport(name = TASK_NAME + ".process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
 		private Long processTcpTimeWaitNum = 0L;
 		@FieldReport(name = TASK_NAME + ".sys.tcp.listen.number", desc = "系统TCP LISTEN状态连接数")
 		private Long processSysTcpListenNum = 0L;
-		@FieldReport(name = TASK_NAME
-			+ ".sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
+		@FieldReport(name = TASK_NAME + ".sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
 		private Long processSysTcpEstablishedNum = 0L;
 		@FieldReport(name = TASK_NAME + ".sys.tcp.time_wait.number", desc = "系统TCP TIME_WAIT连接数")
 		private Long processSysTcpTimeWaitNum = 0L;

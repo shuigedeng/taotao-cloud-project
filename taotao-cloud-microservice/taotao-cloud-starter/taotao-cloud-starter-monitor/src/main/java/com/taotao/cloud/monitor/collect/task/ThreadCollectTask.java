@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.lang.management.ManagementFactory;
@@ -34,7 +36,7 @@ import java.util.HashMap;
  */
 public class ThreadCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.thread";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.thread";
 
 	private final ThreadMXBean threadMXBean;
 	private final CollectTaskProperties properties;
@@ -126,7 +128,9 @@ public class ThreadCollectTask extends AbstractCollectTask {
 			}
 			return threadInfo;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

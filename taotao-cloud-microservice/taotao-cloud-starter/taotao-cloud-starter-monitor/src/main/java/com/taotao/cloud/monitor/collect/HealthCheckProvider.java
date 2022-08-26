@@ -19,10 +19,26 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.monitor.Monitor;
+import com.taotao.cloud.monitor.collect.task.AsyncThreadPoolCollectTask;
+import com.taotao.cloud.monitor.collect.task.CpuCollectTask;
+import com.taotao.cloud.monitor.collect.task.DataSourceCollectTask;
+import com.taotao.cloud.monitor.collect.task.DoubtApiCollectTask;
+import com.taotao.cloud.monitor.collect.task.ElkCollectTask;
+import com.taotao.cloud.monitor.collect.task.HttpPoolCollectTask;
+import com.taotao.cloud.monitor.collect.task.LogStatisticCollectTask;
+import com.taotao.cloud.monitor.collect.task.MemoryCollectTask;
+import com.taotao.cloud.monitor.collect.task.MonitorThreadPoolCollectTask;
+import com.taotao.cloud.monitor.collect.task.MybatisCollectTask;
+import com.taotao.cloud.monitor.collect.task.NacosCollectTask;
+import com.taotao.cloud.monitor.collect.task.NetworkCollectTask;
+import com.taotao.cloud.monitor.collect.task.ThreadCollectTask;
+import com.taotao.cloud.monitor.collect.task.UnCatchExceptionCollectTask;
+import com.taotao.cloud.monitor.collect.task.WebServerCollectTask;
+import com.taotao.cloud.monitor.collect.task.XxlJobCollectTask;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.model.Report;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
-import com.taotao.cloud.monitor.properties.HealthProperties;
+import com.taotao.cloud.monitor.properties.MonitorProperties;
 import com.taotao.cloud.monitor.strategy.DefaultWarnStrategy;
 import com.taotao.cloud.monitor.strategy.WarnStrategy;
 import java.util.ArrayList;
@@ -42,7 +58,7 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	private Monitor monitor;
 	private WarnStrategy strategy;
-	private HealthProperties healthProperties;
+	private MonitorProperties monitorProperties;
 	private CollectTaskProperties collectTaskProperties;
 
 	public void registerCollectTask(AbstractCollectTask task) {
@@ -51,13 +67,13 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	public HealthCheckProvider(
 		CollectTaskProperties collectTaskProperties,
-		HealthProperties healthProperties,
+		MonitorProperties monitorProperties,
 		WarnStrategy strategy,
 		Monitor monitor) {
 		this.strategy = strategy;
 		this.close = false;
 		this.collectTaskProperties = collectTaskProperties;
-		this.healthProperties = healthProperties;
+		this.monitorProperties = monitorProperties;
 		this.monitor = monitor;
 
 		registerCollectTask(new CpuCollectTask(collectTaskProperties));
@@ -83,7 +99,7 @@ public class HealthCheckProvider implements AutoCloseable {
 		registerCollectTask(new LogStatisticCollectTask(collectTaskProperties));
 		registerCollectTask(new NacosCollectTask(collectTaskProperties));
 
-		monitor.monitorSubmit("系统任务: HealthCheckProvider 采集任务", () -> {
+		monitor.monitorSubmit("系统任务: MonitorCheckProvider 采集任务", () -> {
 			while (!monitor.monitorIsShutdown() && !close) {
 				try {
 					Report report = getReport(false);
@@ -98,7 +114,7 @@ public class HealthCheckProvider implements AutoCloseable {
 				}
 
 				try {
-					Thread.sleep(healthProperties.getTimeSpan() * 1000L);
+					Thread.sleep(monitorProperties.getTimeSpan() * 1000L);
 				} catch (Exception e) {
 					LogUtil.error(e);
 				}
@@ -118,7 +134,7 @@ public class HealthCheckProvider implements AutoCloseable {
 	public Report getReport(boolean isAnalyse) {
 		Report report = new Report()
 			.setDesc("健康检查报表")
-			.setName("taotao.cloud.health.report");
+			.setName("taotao.cloud.monitor.report");
 
 		for (AbstractCollectTask task : checkTasks) {
 			if (task.getEnabled()) {
@@ -179,12 +195,12 @@ public class HealthCheckProvider implements AutoCloseable {
 		this.close = close;
 	}
 
-	public HealthProperties getHealthProperties() {
-		return healthProperties;
+	public MonitorProperties getHealthProperties() {
+		return monitorProperties;
 	}
 
-	public void setHealthProperties(HealthProperties healthProperties) {
-		this.healthProperties = healthProperties;
+	public void setHealthProperties(MonitorProperties monitorProperties) {
+		this.monitorProperties = monitorProperties;
 	}
 
 	public Monitor getMonitor() {

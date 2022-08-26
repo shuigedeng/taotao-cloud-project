@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
+import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import com.xxl.job.core.handler.annotation.XxlJob;
 
 import java.lang.annotation.Annotation;
 import java.util.Objects;
@@ -32,10 +37,7 @@ import java.util.Objects;
  */
 public class XxlJobCollectTask extends AbstractCollectTask {
 
-	private static final String XXL_JOB_SPRING_EXECUTOR_CLASS = "com.xxl.job.core.executor.impl.XxlJobSpringExecutor";
-	private static final String XXL_JOB_CLASS = "com.xxl.job.core.handler.annotation.XxlJob";
-
-	private static final String TASK_NAME = "taotao.cloud.health.collect.xxljob";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.xxljob";
 
 	private final CollectTaskProperties properties;
 
@@ -64,46 +66,38 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	protected CollectInfo getData() {
 		try {
-			Class<?> xxlJobSpringExecutorClass = ReflectionUtil.tryClassForName(XXL_JOB_SPRING_EXECUTOR_CLASS);
-			Object xxlJobSpringExecutor = ContextUtil.getBean(xxlJobSpringExecutorClass, false);
+			XxlJobSpringExecutor xxlJobSpringExecutor = ContextUtil.getBean(XxlJobSpringExecutor.class, true);
 			if (Objects.isNull(xxlJobSpringExecutor)) {
 				return null;
 			}
 
 			JobInfo data = new JobInfo();
-			Class<?> xxlJobClass = ReflectionUtil.classForName(XXL_JOB_CLASS);
-			data.count = ContextUtil.getApplicationContext()
-				.getBeanNamesForAnnotation((Class<? extends Annotation>) xxlJobClass).length;
+			data.count = ContextUtil.getApplicationContext().getBeanNamesForAnnotation(XxlJob.class).length;
 
-			Object jobThreadRepository = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
-				"jobThreadRepository", null);
-			if (Objects.isNull(jobThreadRepository)) {
-				data.jobThreadRepository = (Integer) ReflectionUtil.callMethod(jobThreadRepository,
-					"size", null);
+			Object jobThreadRepository = ReflectionUtil.tryGetFieldValue(xxlJobSpringExecutor, "jobThreadRepository", null);
+			if (Objects.nonNull(jobThreadRepository)) {
+				data.jobThreadRepository = (Integer) ReflectionUtil.callMethod(jobThreadRepository, "size", null);
 			}
 
-			Object jobHandlerRepository = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
-				"jobHandlerRepository", null);
-			if (Objects.isNull(jobThreadRepository)) {
-				data.jobHandlerRepository = (Integer) ReflectionUtil.callMethod(jobHandlerRepository,
-					"size", null);
+			Object jobHandlerRepository = ReflectionUtil.tryGetFieldValue(xxlJobSpringExecutor, "jobHandlerRepository", null);
+			if (Objects.nonNull(jobThreadRepository)) {
+				data.jobHandlerRepository = (Integer) ReflectionUtil.callMethod(jobHandlerRepository, "size", null);
 			}
 
-			Object adminBizList = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
-				"adminBizList", null);
+			Object adminBizList = ReflectionUtil.tryGetFieldValue(xxlJobSpringExecutor, "adminBizList", null);
 			if (Objects.nonNull(adminBizList)) {
-				data.adminBizList = (Integer) ReflectionUtil.callMethod(adminBizList,
-					"size", null);
+				data.adminBizList = (Integer) ReflectionUtil.callMethod(adminBizList, "size", null);
 			}
 
-			data.logRetentionDays = ReflectionUtil.tryGetValue(xxlJobSpringExecutorClass, "logRetentionDays");
+			data.logRetentionDays = ReflectionUtil.tryGetValue(xxlJobSpringExecutor, "logRetentionDays");
 
 			return data;
 		} catch (Exception e) {
-
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

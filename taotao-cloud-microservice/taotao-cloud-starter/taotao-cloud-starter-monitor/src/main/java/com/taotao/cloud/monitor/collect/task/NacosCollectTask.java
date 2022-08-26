@@ -1,4 +1,4 @@
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.alibaba.cloud.nacos.NacosServiceManager;
@@ -10,9 +10,12 @@ import com.alibaba.nacos.client.naming.NacosNamingService;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtil;
 import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.util.List;
@@ -24,7 +27,7 @@ import java.util.Objects;
  */
 public class NacosCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.nacos";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.nacos";
 
 	private final CollectTaskProperties collectTaskProperties;
 
@@ -90,7 +93,9 @@ public class NacosCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

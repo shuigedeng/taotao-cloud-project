@@ -26,6 +26,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.function.Function;
+
 /**
  * DictServiceImpl
  *
@@ -39,6 +41,4 @@ public class FeignDictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict
 	implements IFeignDictService {
 	@Autowired
 	private IDictService dictService;
-
-
 }

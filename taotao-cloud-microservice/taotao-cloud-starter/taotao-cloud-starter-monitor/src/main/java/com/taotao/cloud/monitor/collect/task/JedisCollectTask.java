@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.exception.HealthException;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
@@ -35,10 +38,10 @@ import java.util.Objects;
  */
 public class JedisCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.jedis";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.jedis";
 
-	private CollectTaskProperties properties;
-	private Collector collector;
+	private final CollectTaskProperties properties;
+	private final Collector collector;
 
 	public JedisCollectTask(Collector collector, CollectTaskProperties properties) {
 		this.collector = collector;
@@ -92,8 +95,10 @@ public class JedisCollectTask extends AbstractCollectTask {
 				}
 				return info;
 			}
-		} catch (Exception exp) {
-			throw new HealthException(exp);
+		} catch (Exception e) {
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

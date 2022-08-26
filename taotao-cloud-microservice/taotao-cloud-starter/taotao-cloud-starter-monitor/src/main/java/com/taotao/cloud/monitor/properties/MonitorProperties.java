@@ -26,10 +26,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2021-09-10 17:05:24
  */
 @RefreshScope
-@ConfigurationProperties(prefix = HealthProperties.PREFIX)
-public class HealthProperties {
+@ConfigurationProperties(prefix = MonitorProperties.PREFIX)
+public class MonitorProperties {
 
-	public static final String PREFIX = "taotao.cloud.health";
+	public static final String PREFIX = "taotao.cloud.monitor";
 
 	/**
 	 * 是否开启健康检查

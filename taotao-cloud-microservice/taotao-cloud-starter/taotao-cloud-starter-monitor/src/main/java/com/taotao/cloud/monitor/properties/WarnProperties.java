@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = WarnProperties.PREFIX)
 public class WarnProperties {
 
-	public static final String PREFIX = "taotao.cloud.health.warn";
+	public static final String PREFIX = "taotao.cloud.monitor.warn";
 
 	private boolean enabled = true;
 

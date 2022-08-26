@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = ExportProperties.PREFIX)
 public class ExportProperties {
 
-	public static final String PREFIX = "taotao.cloud.health.export";
+	public static final String PREFIX = "taotao.cloud.monitor.export";
 
 	private boolean enabled = true;
 

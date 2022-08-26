@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
+import ch.qos.logback.core.util.Duration;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
+import net.logstash.logback.appender.LogstashTcpSocketAppender;
+import net.logstash.logback.appender.destination.PreferPrimaryDestinationConnectionStrategy;
 
 import java.util.Objects;
 
@@ -33,9 +38,7 @@ import java.util.Objects;
  */
 public class ElkCollectTask extends AbstractCollectTask {
 
-	private final static String CLASS = "net.logstash.logback.appender.LogstashTcpSocketAppender";
-
-	private static final String TASK_NAME = "taotao.cloud.health.collect.elk";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.elk";
 
 	private final CollectTaskProperties properties;
 
@@ -67,47 +70,51 @@ public class ElkCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			ElkInfo info = new ElkInfo();
-			Object appender = ContextUtil.getBean(ReflectionUtil.tryClassForName(CLASS), true);
+			LogstashTcpSocketAppender appender = ContextUtil.getBean(LogstashTcpSocketAppender.class, true);
 			if (Objects.nonNull(appender)) {
-				info.queueSize = ReflectionUtil.tryGetValue(appender, "getQueueSize");
+				info.ringBufferSize = appender.getRingBufferSize();
 				info.consecutiveDropped = ReflectionUtil.tryGetValue(appender, "consecutiveDroppedCount.get");
-				info.getDroppedWarnFrequency = ReflectionUtil.tryGetValue(appender, "getDroppedWarnFrequency");
-				info.getKeepAliveDuration = ReflectionUtil.tryGetValue(appender, "getKeepAliveDuration.getMilliseconds");
-				info.getProducerType = ReflectionUtil.tryGetValue(appender, "getProducerType.name");
-				info.getReconnectionDelay = ReflectionUtil.tryGetValue(appender, "getReconnectionDelay.getMilliseconds");
-				info.getRingBufferSize = ReflectionUtil.tryGetValue(appender, "getRingBufferSize");
-				info.getSecondaryConnectionTTL = ReflectionUtil.tryGetValue(appender, "getSecondaryConnectionTTL.getMilliseconds");
-				info.getWriteTimeout = ReflectionUtil.tryGetValue(appender, "getWriteTimeout.getMilliseconds");
-				info.getWriteBufferSize = ReflectionUtil.tryGetValue(appender, "getWriteBufferSize");
+				info.droppedWarnFrequency = appender.getDroppedWarnFrequency();
+				info.keepAliveDuration = appender.getKeepAliveDuration().getMilliseconds();
+				info.producerType = appender.getProducerType().name();
+				info.reconnectionDelay = appender.getReconnectionDelay().getMilliseconds();
+
+				Duration duration = appender.getConnectionStrategy() instanceof PreferPrimaryDestinationConnectionStrategy ? ((PreferPrimaryDestinationConnectionStrategy) appender.getConnectionStrategy()).getSecondaryConnectionTTL() : null;
+				if(Objects.nonNull(duration)){
+					info.secondaryConnectionTtl = duration.getMilliseconds();
+				}
+
+				info.writeTimeout = appender.getWriteTimeout().getMilliseconds();
+				info.writeBufferSize = appender.getWriteBufferSize();
 				return info;
 			}
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}
 
 	private static class ElkInfo implements CollectInfo {
 
-		@FieldReport(name = TASK_NAME + ".queue.size", desc = "ELK消息队列大小")
-		private Integer queueSize = 0;
-		@FieldReport(name = TASK_NAME + ".consecutive.dropped", desc = "ELK消息连续丢弃数量")
+		@FieldReport(name = TASK_NAME + ".ring.buffer.size", desc = "ELK消息队列大小")
+		private Integer ringBufferSize = 0;
+		@FieldReport(name = TASK_NAME + ".consecutive.dropped.count", desc = "ELK消息连续丢弃数量")
 		private Long consecutiveDropped = 0L;
 		@FieldReport(name = TASK_NAME + ".dropped.warn.frequency", desc = "ELK下降警告频率")
-		private Integer getDroppedWarnFrequency = 0;
+		private Integer droppedWarnFrequency = 0;
 		@FieldReport(name = TASK_NAME + ".keep.alive.duration", desc = "ELK保持活动持续时间")
-		private Long getKeepAliveDuration = 0L;
+		private Long keepAliveDuration = 0L;
 		@FieldReport(name = TASK_NAME + ".producer.type", desc = "ELK生产者类型")
-		private String getProducerType = "";
+		private String producerType = "";
 		@FieldReport(name = TASK_NAME + ".reconnection.delay", desc = "ELK在与目标的连接失败后，在尝试重新连接到该目标之前等待的时间段")
-		private Long getReconnectionDelay = 0L;
-		@FieldReport(name = TASK_NAME + ".ring.buffer.size", desc = "ELK RingBuffer大小")
-		private Integer getRingBufferSize = 0;
-		@FieldReport(name = TASK_NAME + ".secondary.connection.ttL", desc = "ELK辅助连接 TTL大小")
-		private Long getSecondaryConnectionTTL = 0L;
+		private Long reconnectionDelay = 0L;
+		@FieldReport(name = TASK_NAME + ".secondary.connection.ttl", desc = "ELK辅助连接 TTL大小")
+		private Long secondaryConnectionTtl = 0L;
 		@FieldReport(name = TASK_NAME + ".write.timeout", desc = "ELK在超时之前等待写入完成的时间段.并尝试重新连接到该目的地。")
-		private Long getWriteTimeout = 0L;
+		private Long writeTimeout = 0L;
 		@FieldReport(name = TASK_NAME + ".write.buffer.size", desc = "ELK消写入缓冲区中可用的字节数")
-		private Integer getWriteBufferSize = 0;
+		private Integer writeBufferSize = 0;
 	}
 }

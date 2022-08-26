@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.sun.management.OperatingSystemMXBean;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.lang.management.ManagementFactory;
@@ -35,7 +37,7 @@ import java.util.List;
  */
 public class MemoryCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.memory";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.memory";
 
 	private final OperatingSystemMXBean systemMXBean;
 	private final CollectTaskProperties properties;
@@ -139,7 +141,9 @@ public class MemoryCollectTask extends AbstractCollectTask {
 
 			return new MemeryInfo(jvmInfo, systemInfo);
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

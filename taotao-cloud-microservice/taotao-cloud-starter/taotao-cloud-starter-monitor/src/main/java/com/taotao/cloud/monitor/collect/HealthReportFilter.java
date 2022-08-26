@@ -19,6 +19,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.model.Report;
 import com.taotao.cloud.monitor.properties.DumpProperties;
 import java.io.IOException;

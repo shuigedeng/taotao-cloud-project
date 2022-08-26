@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.util.Objects;
@@ -33,7 +35,7 @@ import java.util.Objects;
  */
 public class MybatisCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.mybatis";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.mybatis";
 
 	private final CollectTaskProperties properties;
 
@@ -68,7 +70,7 @@ public class MybatisCollectTask extends AbstractCollectTask {
 
 			Collector collector = Collector.getCollector();
 			if (Objects.nonNull(collector)) {
-				Hook hook = collector.hook("taotao.cloud.health.mybatis.sql.hook");
+				Hook hook = collector.hook("taotao.cloud.monitor.mybatis.sql.hook");
 				info.hookCurrent = hook.getCurrent();
 				info.hookError = hook.getLastErrorPerSecond();
 				info.hookSuccess = hook.getLastSuccessPerSecond();
@@ -77,7 +79,9 @@ public class MybatisCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}
