@@ -1,22 +1,21 @@
 package com.taotao.cloud.monitor.kuding.exceptionhandle;
 
 import com.taotao.cloud.monitor.kuding.exceptionhandle.event.ExceptionNoticeEvent;
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
-import com.taotao.cloud.monitor.kuding.pojos.HttpExceptionNotice;
-import com.taotao.cloud.monitor.kuding.properties.PromethreusNoticeProperties;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.HttpExceptionNotice;
+import com.taotao.cloud.monitor.kuding.properties.NoticeProperties;
 import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeProperties;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationEventPublisher;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 
 public class ExceptionHandler {
 
-	private final PromethreusNoticeProperties noticeProperties;
+	private final NoticeProperties noticeProperties;
 
 	private final ExceptionNoticeProperties exceptionNoticeProperties;
 
@@ -29,9 +28,9 @@ public class ExceptionHandler {
 	 * @param exceptionNoticeProperties
 	 * @param applicationEventPublisher
 	 */
-	public ExceptionHandler(PromethreusNoticeProperties noticeProperties,
-							ExceptionNoticeProperties exceptionNoticeProperties,
-							ApplicationEventPublisher applicationEventPublisher) {
+	public ExceptionHandler(NoticeProperties noticeProperties,
+		ExceptionNoticeProperties exceptionNoticeProperties,
+		ApplicationEventPublisher applicationEventPublisher) {
 		super();
 		this.noticeProperties = noticeProperties;
 		this.exceptionNoticeProperties = exceptionNoticeProperties;
@@ -49,7 +48,8 @@ public class ExceptionHandler {
 			return null;
 		}
 		ExceptionNotice exceptionNotice = new ExceptionNotice(exception,
-			exceptionNoticeProperties.getIncludedTracePackage(), null, noticeProperties.getProjectEnviroment(),
+			exceptionNoticeProperties.getIncludedTracePackage(), null,
+			noticeProperties.getProjectEnviroment(),
 			String.format("%s的异常通知", noticeProperties.getProjectName()));
 		exceptionNotice.setProject(noticeProperties.getProjectName());
 		applicationEventPublisher.publishEvent(new ExceptionNoticeEvent(this, exceptionNotice));
@@ -69,7 +69,7 @@ public class ExceptionHandler {
 	}
 
 	private List<Class<? extends Throwable>> getAllExceptionClazz(RuntimeException exception) {
-		List<Class<? extends Throwable>> list = new LinkedList<Class<? extends Throwable>>();
+		List<Class<? extends Throwable>> list = new LinkedList<>();
 		list.add(exception.getClass());
 		Throwable cause = exception.getCause();
 		while (cause != null) {
@@ -91,7 +91,8 @@ public class ExceptionHandler {
 		if (containsException(ex)) {
 			return null;
 		}
-		ExceptionNotice exceptionNotice = new ExceptionNotice(ex, exceptionNoticeProperties.getIncludedTracePackage(),
+		ExceptionNotice exceptionNotice = new ExceptionNotice(ex,
+			exceptionNoticeProperties.getIncludedTracePackage(),
 			args, noticeProperties.getProjectEnviroment(),
 			String.format("%s的异常通知", noticeProperties.getProjectName()));
 		logger.debug("创建异常通知：" + method);
@@ -111,16 +112,25 @@ public class ExceptionHandler {
 	 * @param headers
 	 * @return
 	 */
-	public HttpExceptionNotice createHttpNotice(RuntimeException exception, String url, Map<String, String> param,
-                                                String requesBody, Map<String, String> headers) {
+	public HttpExceptionNotice createHttpNotice(RuntimeException exception, String url,
+		Map<String, String> param,
+		String requesBody, Map<String, String> headers) {
 		if (containsException(exception)) {
 			return null;
 		}
+
 		logger.debug("创建异常通知：" + url);
 		HttpExceptionNotice exceptionNotice = new HttpExceptionNotice(exception,
-			exceptionNoticeProperties.getIncludedTracePackage(), url, param, requesBody, headers,
-			noticeProperties.getProjectEnviroment(), String.format("%s的异常通知", noticeProperties.getProjectName()));
+			exceptionNoticeProperties.getIncludedTracePackage(),
+			url,
+			param,
+			requesBody,
+			headers,
+			noticeProperties.getProjectEnviroment(),
+			String.format("%s的异常通知",
+				noticeProperties.getProjectName()));
 		exceptionNotice.setProject(noticeProperties.getProjectName());
+
 		applicationEventPublisher.publishEvent(new ExceptionNoticeEvent(this, exceptionNotice));
 		return exceptionNotice;
 	}

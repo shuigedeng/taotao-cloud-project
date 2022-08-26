@@ -1,7 +1,7 @@
 package com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces;
 
 
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import com.taotao.cloud.monitor.kuding.pojos.ExceptionStatistics;
 
 public interface ExceptionNoticeStatisticsRepository {

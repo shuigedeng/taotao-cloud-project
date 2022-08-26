@@ -3,14 +3,14 @@ package com.taotao.cloud.monitor.kuding.config.exceptionnotice;
 import java.util.List;
 
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
-import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeFrequencyStrategy;
+import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeFrequencyStrategyProperties;
 import com.taotao.cloud.monitor.kuding.config.annos.ConditionalOnExceptionNotice;
 import com.taotao.cloud.monitor.kuding.exceptionhandle.components.InMemeryExceptionStatisticsRepository;
 import com.taotao.cloud.monitor.kuding.exceptionhandle.event.AbstractNoticeSendListener;
 import com.taotao.cloud.monitor.kuding.exceptionhandle.event.ExceptionNoticeAsyncSendListener;
 import com.taotao.cloud.monitor.kuding.exceptionhandle.event.ExceptionNoticeSendListener;
 import com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces.ExceptionNoticeStatisticsRepository;
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import org.springframework.core.task.AsyncTaskExecutor;
 
 @Configuration
 @ConditionalOnExceptionNotice
-@EnableConfigurationProperties({ ExceptionNoticeFrequencyStrategy.class })
+@EnableConfigurationProperties({ ExceptionNoticeFrequencyStrategyProperties.class })
 public class ExceptionNoticeSendConfig {
 
 	@Autowired
@@ -44,10 +44,11 @@ public class ExceptionNoticeSendConfig {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(value = "prometheus.exceptionnotice.enable-async", havingValue = "false", matchIfMissing = true)
 	public AbstractNoticeSendListener exceptionNoticeSendListener(
-			ExceptionNoticeFrequencyStrategy exceptionNoticeFrequencyStrategy,
+			ExceptionNoticeFrequencyStrategyProperties exceptionNoticeFrequencyStrategyProperties,
 			ExceptionNoticeStatisticsRepository exceptionNoticeStatisticsRepository) {
 		logger.debug("创建同步发送监听器");
-		AbstractNoticeSendListener listener = new ExceptionNoticeSendListener(exceptionNoticeFrequencyStrategy,
+		AbstractNoticeSendListener listener = new ExceptionNoticeSendListener(
+			exceptionNoticeFrequencyStrategyProperties,
 				exceptionNoticeStatisticsRepository, list);
 		return listener;
 	}
@@ -56,11 +57,12 @@ public class ExceptionNoticeSendConfig {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(value = "prometheus.exceptionnotice.enable-async", havingValue = "true")
 	public AbstractNoticeSendListener ExceptionNoticeAsyncSendListener(
-			ExceptionNoticeFrequencyStrategy exceptionNoticeFrequencyStrategy,
+			ExceptionNoticeFrequencyStrategyProperties exceptionNoticeFrequencyStrategyProperties,
 			ExceptionNoticeStatisticsRepository exceptionNoticeStatisticsRepository,
 			AsyncTaskExecutor applicationTaskExecutor) {
 		logger.debug("创建异步发送监听器");
-		AbstractNoticeSendListener listener = new ExceptionNoticeAsyncSendListener(exceptionNoticeFrequencyStrategy,
+		AbstractNoticeSendListener listener = new ExceptionNoticeAsyncSendListener(
+			exceptionNoticeFrequencyStrategyProperties,
 				exceptionNoticeStatisticsRepository, list, applicationTaskExecutor);
 		return listener;
 	}

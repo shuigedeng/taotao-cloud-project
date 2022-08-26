@@ -19,8 +19,9 @@ public abstract class PropertiesEnabledCondition extends SpringBootCondition {
 	@Override
 	public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
 		Boolean enabled = context.getEnvironment().getProperty(propName, Boolean.class);
-		if ((enabled == null && matchIfMissing) || (enabled != null && enabled))
+		if ((enabled == null && matchIfMissing) || (enabled != null && enabled)) {
 			return ConditionOutcome.match("开启通知");
+		}
 		return ConditionOutcome.noMatch("不开启通知");
 	}
 

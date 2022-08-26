@@ -2,10 +2,13 @@ package com.taotao.cloud.monitor.kuding.properties.notice;
 
 import com.taotao.cloud.monitor.kuding.properties.enums.EmailTextType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-
+@RefreshScope
 @ConfigurationProperties(prefix = "prometheus.email")
 public class EmailNoticeProperty {
+
+	public static final String PREFIX = "taotao.cloud.monitor.notice.email";
 
 	/**
 	 * 是否开启邮件通知

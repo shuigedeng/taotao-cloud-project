@@ -32,10 +32,11 @@ public class P6spyConfigLoaderBeanPostProcessor implements BeanPostProcessor, Or
 				Field[] fields = P6spyProperties.class.getDeclaredFields();
 				for (Field field : fields) {
 					ReflectionUtils.makeAccessible(field);
-					String val = (String) field.get(this.p6spyProperties);
-					if (val != null) {
+					Object val = field.get(this.p6spyProperties);
+
+					if (val instanceof String valStr) {
 						String propertyKey = String.format("%s.%s", "p6spy.config", field.getName());
-						System.setProperty(propertyKey, val);
+						System.setProperty(propertyKey, valStr);
 					}
 				}
 

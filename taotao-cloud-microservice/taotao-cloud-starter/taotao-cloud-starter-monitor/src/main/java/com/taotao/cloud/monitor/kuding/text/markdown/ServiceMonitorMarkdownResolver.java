@@ -1,6 +1,6 @@
 package com.taotao.cloud.monitor.kuding.text.markdown;
 
-import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.ServiceCheckNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ServiceCheckNotice;
 import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.ServiceHealthProblem;
 import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.ServiceInstanceLackProblem;
 import com.taotao.cloud.monitor.kuding.text.ServiceMonitorResolver;

@@ -6,8 +6,8 @@ import java.util.concurrent.ScheduledFuture;
 import com.taotao.cloud.monitor.kuding.microservice.task.ServiceNoticeTask;
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.microservice.interfaces.ServiceNoticeRepository;
-import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.ServiceCheckNotice;
-import com.taotao.cloud.monitor.kuding.properties.PromethreusNoticeProperties;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ServiceCheckNotice;
+import com.taotao.cloud.monitor.kuding.properties.NoticeProperties;
 import com.taotao.cloud.monitor.kuding.properties.servicemonitor.ServiceMonitorProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,7 +23,7 @@ public class ServiceNoticeControl implements SmartInitializingSingleton, Disposa
 
 	private final ServiceMonitorProperties serviceMonitorProperties;
 
-	private final PromethreusNoticeProperties promethreusNoticeProperties;
+	private final NoticeProperties noticeProperties;
 
 	private final TaskScheduler taskScheduler;
 
@@ -35,7 +35,7 @@ public class ServiceNoticeControl implements SmartInitializingSingleton, Disposa
 
 	/**
 	 * @param serviceMonitorProperties
-	 * @param promethreusNoticeProperties
+	 * @param noticeProperties
 	 * @param taskScheduler
 	 * @param serviceCheckNoticeRepository
 	 * @param noticeSendComponent
@@ -43,11 +43,11 @@ public class ServiceNoticeControl implements SmartInitializingSingleton, Disposa
 	 * @param result
 	 */
 	public ServiceNoticeControl(ServiceMonitorProperties serviceMonitorProperties,
-			PromethreusNoticeProperties promethreusNoticeProperties, TaskScheduler taskScheduler,
+			NoticeProperties noticeProperties, TaskScheduler taskScheduler,
 			List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents,
 			ServiceNoticeRepository serviceNoticeRepository) {
 		this.serviceMonitorProperties = serviceMonitorProperties;
-		this.promethreusNoticeProperties = promethreusNoticeProperties;
+		this.noticeProperties = noticeProperties;
 		this.taskScheduler = taskScheduler;
 		this.serviceNoticeRepository = serviceNoticeRepository;
 		this.noticeSendComponents = noticeSendComponents;
@@ -86,7 +86,8 @@ public class ServiceNoticeControl implements SmartInitializingSingleton, Disposa
 	@Override
 	public void afterSingletonsInstantiated() {
 		logger.debug("开启通知任务");
-		ServiceNoticeTask serviceNoticeTask = new ServiceNoticeTask(noticeSendComponents, promethreusNoticeProperties,
+		ServiceNoticeTask serviceNoticeTask = new ServiceNoticeTask(noticeSendComponents,
+			noticeProperties,
 				serviceNoticeRepository);
 		PeriodicTrigger trigger = new PeriodicTrigger(
 				serviceMonitorProperties.getServiceCheckNoticeInterval().toMillis());

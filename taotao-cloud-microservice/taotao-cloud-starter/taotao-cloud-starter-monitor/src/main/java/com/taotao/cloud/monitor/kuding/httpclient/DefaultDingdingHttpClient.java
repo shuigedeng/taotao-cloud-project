@@ -1,5 +1,6 @@
 package com.taotao.cloud.monitor.kuding.httpclient;
 
+import com.taotao.cloud.dingtalk.configuration.DingtalkAutoConfiguration;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -56,7 +57,7 @@ public class DefaultDingdingHttpClient implements DingdingHttpClient {
 	@Override
 	public DingDingResult doSend(DingDingNotice body) {
 		logger.debug("发送钉钉请求:" + body);
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		if (dingDingNoticeProperty.isEnableSignatureCheck()) {
 			long timestamp = System.currentTimeMillis();
 			map.put("sign", generateSign(System.currentTimeMillis(), dingDingNoticeProperty.getSignSecret()));
@@ -79,7 +80,6 @@ public class DefaultDingdingHttpClient implements DingdingHttpClient {
 	}
 
 	class GsonDecoder implements Decoder {
-
 		@Override
 		public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException {
 			return gson.fromJson(response.body().asReader(StandardCharsets.UTF_8), type);
@@ -88,7 +88,6 @@ public class DefaultDingdingHttpClient implements DingdingHttpClient {
 	}
 
 	class GsonEncoder implements Encoder {
-
 		@Override
 		public void encode(Object object, Type bodyType, RequestTemplate template) throws EncodeException {
 			template.body(gson.toJson(object).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);

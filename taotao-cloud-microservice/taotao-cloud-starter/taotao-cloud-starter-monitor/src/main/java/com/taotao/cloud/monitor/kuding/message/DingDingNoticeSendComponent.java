@@ -1,16 +1,16 @@
 package com.taotao.cloud.monitor.kuding.message;
 
-import com.taotao.cloud.monitor.kuding.properties.notice.DingDingNoticeProperty;
 import com.taotao.cloud.monitor.kuding.httpclient.DingdingHttpClient;
-import com.taotao.cloud.monitor.kuding.pojos.PromethuesNotice;
 import com.taotao.cloud.monitor.kuding.pojos.dingding.DingDingNotice;
 import com.taotao.cloud.monitor.kuding.pojos.dingding.DingDingResult;
+import com.taotao.cloud.monitor.kuding.pojos.notice.Notice;
+import com.taotao.cloud.monitor.kuding.properties.notice.DingDingNoticeProperty;
 import com.taotao.cloud.monitor.kuding.text.NoticeTextResolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-public class DingDingNoticeSendComponent<T extends PromethuesNotice> implements INoticeSendComponent<T> {
+public class DingDingNoticeSendComponent<T extends Notice> implements INoticeSendComponent<T> {
 
 	private final DingdingHttpClient httpClient;
 
@@ -24,8 +24,9 @@ public class DingDingNoticeSendComponent<T extends PromethuesNotice> implements 
 	 * @param httpClient
 	 * @param dingDingNoticeProperty
 	 */
-	public DingDingNoticeSendComponent(DingdingHttpClient httpClient, NoticeTextResolver<T> noticeResolver,
-			DingDingNoticeProperty dingDingNoticeProperty) {
+	public DingDingNoticeSendComponent(DingdingHttpClient httpClient,
+		NoticeTextResolver<T> noticeResolver,
+		DingDingNoticeProperty dingDingNoticeProperty) {
 		this.httpClient = httpClient;
 		this.noticeResolver = noticeResolver;
 		this.dingDingNoticeProperty = dingDingNoticeProperty;
@@ -42,7 +43,7 @@ public class DingDingNoticeSendComponent<T extends PromethuesNotice> implements 
 	public void send(T exceptionNotice) {
 		String noticeText = noticeResolver.resolve(exceptionNotice);
 		DingDingNotice dingDingNotice = dingDingNoticeProperty.generateDingdingNotice(noticeText,
-				exceptionNotice.getTitle());
+			exceptionNotice.getTitle());
 		DingDingResult result = httpClient.doSend(dingDingNotice);
 		logger.debug(result);
 	}

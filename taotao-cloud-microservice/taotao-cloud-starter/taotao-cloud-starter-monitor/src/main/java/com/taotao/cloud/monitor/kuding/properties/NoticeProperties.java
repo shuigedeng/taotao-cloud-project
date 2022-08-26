@@ -3,10 +3,14 @@ package com.taotao.cloud.monitor.kuding.properties;
 import com.taotao.cloud.monitor.kuding.properties.enums.ProjectEnviroment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 
-@ConfigurationProperties(prefix = "prometheus")
-public class PromethreusNoticeProperties {
+@RefreshScope
+@ConfigurationProperties(prefix = NoticeProperties.PREFIX)
+public class NoticeProperties {
+
+	public static final String PREFIX = "taotao.cloud.monitor.notice";
 
 	/**
 	 * 是否开启异常通知
@@ -16,7 +20,7 @@ public class PromethreusNoticeProperties {
 	/**
 	 * 异常工程名
 	 */
-	@Value("${prometheus.project-name:${spring.application.name:project}}")
+	@Value("${taotao.cloud.monitor.notice.project-name:${spring.application.name:project}}")
 	private String projectName;
 
 	/**

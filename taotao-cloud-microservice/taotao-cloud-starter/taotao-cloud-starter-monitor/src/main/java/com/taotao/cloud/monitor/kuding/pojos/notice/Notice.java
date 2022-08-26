@@ -1,11 +1,10 @@
-package com.taotao.cloud.monitor.kuding.pojos;
+package com.taotao.cloud.monitor.kuding.pojos.notice;
 
 import com.taotao.cloud.monitor.kuding.properties.enums.ProjectEnviroment;
-
 import java.time.LocalDateTime;
 
 
-public class PromethuesNotice {
+public class Notice {
 
 	/**
 	 * 通知标题
@@ -26,7 +25,7 @@ public class PromethuesNotice {
 	 * @param title
 	 * @param projectEnviroment
 	 */
-	public PromethuesNotice(String title, ProjectEnviroment projectEnviroment) {
+	public Notice(String title, ProjectEnviroment projectEnviroment) {
 		this.title = title;
 		this.projectEnviroment = projectEnviroment;
 	}

@@ -15,9 +15,7 @@ public class SimpleMarkdownBuilder {
 
 	public SimpleMarkdownBuilder title(String content, int level) {
 		if (level > 0 && level < 6) {
-			for (int i = 0; i < level; i++) {
-				stringBuilder.append("#");
-			}
+			stringBuilder.append("#".repeat(level));
 			stringBuilder.append(" ").append(content).append("\n\n");
 		}
 		return this;

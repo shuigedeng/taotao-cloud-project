@@ -6,7 +6,7 @@ import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.properties.enums.DingdingTextType;
 import com.taotao.cloud.monitor.kuding.properties.notice.DingDingNoticeProperty;
 import com.taotao.cloud.monitor.kuding.config.annos.ConditionalOnExceptionNotice;
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import com.taotao.cloud.monitor.kuding.text.ExceptionNoticeResolver;
 import com.taotao.cloud.monitor.kuding.text.markdown.ExceptionNoticeMarkdownMessageResolver;
 import org.apache.commons.logging.Log;
@@ -37,9 +37,10 @@ public class ExceptionNoticeDingdingSendingConfig {
 	@Bean
 	@ConditionalOnMissingBean
 	public ExceptionNoticeResolver ExceptionNoticeTextResolver(DingDingNoticeProperty dingDingNoticeProperty) {
-		if (dingDingNoticeProperty.getDingdingTextType() == DingdingTextType.MARKDOWN)
+		if (dingDingNoticeProperty.getDingdingTextType() == DingdingTextType.MARKDOWN) {
 			return new ExceptionNoticeMarkdownMessageResolver();
-		return x -> x.createText();
+		}
+		return ExceptionNotice::createText;
 	}
 
 }

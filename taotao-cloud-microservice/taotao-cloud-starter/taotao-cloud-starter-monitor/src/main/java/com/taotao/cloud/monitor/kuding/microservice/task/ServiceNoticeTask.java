@@ -5,8 +5,8 @@ import java.util.List;
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.microservice.interfaces.ServiceNoticeRepository;
 import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.MicroServiceReport;
-import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.ServiceCheckNotice;
-import com.taotao.cloud.monitor.kuding.properties.PromethreusNoticeProperties;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ServiceCheckNotice;
+import com.taotao.cloud.monitor.kuding.properties.NoticeProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -14,7 +14,7 @@ public class ServiceNoticeTask implements Runnable {
 
 	private final List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents;
 
-	private final PromethreusNoticeProperties promethreusNoticeProperties;
+	private final NoticeProperties noticeProperties;
 
 	private final Log logger = LogFactory.getLog(ServiceNoticeTask.class);
 
@@ -24,12 +24,12 @@ public class ServiceNoticeTask implements Runnable {
 	 * @param serviceCheckNoticeRepository
 	 * @param noticeSendComponent
 	 * @param reportedFilterHandler
-	 * @param promethreusNoticeProperties
+	 * @param noticeProperties
 	 */
 	public ServiceNoticeTask(List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents,
-			PromethreusNoticeProperties promethreusNoticeProperties, ServiceNoticeRepository serviceNoticeRepository) {
+			NoticeProperties noticeProperties, ServiceNoticeRepository serviceNoticeRepository) {
 		this.noticeSendComponents = noticeSendComponents;
-		this.promethreusNoticeProperties = promethreusNoticeProperties;
+		this.noticeProperties = noticeProperties;
 		this.serviceNoticeRepository = serviceNoticeRepository;
 	}
 
@@ -40,7 +40,7 @@ public class ServiceNoticeTask implements Runnable {
 			int problemCount = microServiceNotice.totalProblemCount();
 			logger.debug("prepare for notice: \n " + microServiceNotice);
 			ServiceCheckNotice serviceCheckNotice = new ServiceCheckNotice(microServiceNotice,
-					promethreusNoticeProperties.getProjectEnviroment(), "服务监控通知");
+					noticeProperties.getProjectEnviroment(), "服务监控通知");
 			serviceCheckNotice.setProblemServiceCount(problemCount);
 			noticeSendComponents.forEach(x -> x.send(serviceCheckNotice));
 		}

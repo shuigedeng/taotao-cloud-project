@@ -6,10 +6,13 @@ import java.util.List;
 
 import com.taotao.cloud.monitor.kuding.properties.enums.ListenType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-
-@ConfigurationProperties(prefix = "prometheus.exceptionnotice")
+@RefreshScope
+@ConfigurationProperties(prefix = ExceptionNoticeProperties.PREFIX)
 public class ExceptionNoticeProperties {
+
+	public static final String PREFIX = "taotao.cloud.monitor.exception";
 
 	/**
 	 * 是否开启异常通知
