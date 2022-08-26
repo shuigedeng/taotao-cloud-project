@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz;
 
-import com.taotao.cloud.sys.biz.service.IFileService;
+import com.taotao.cloud.sys.biz.service.business.IFileService;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;

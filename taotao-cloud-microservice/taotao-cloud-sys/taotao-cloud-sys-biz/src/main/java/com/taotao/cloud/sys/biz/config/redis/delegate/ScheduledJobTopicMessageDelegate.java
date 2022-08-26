@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.sys.biz.service.IScheduledJobService;
+import com.taotao.cloud.sys.biz.service.business.IScheduledJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
