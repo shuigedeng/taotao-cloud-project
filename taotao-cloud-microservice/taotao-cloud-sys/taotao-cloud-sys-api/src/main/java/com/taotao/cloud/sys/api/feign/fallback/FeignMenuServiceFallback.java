@@ -14,7 +14,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignMenuFallback implements FallbackFactory<IFeignMenuService> {
+public class FeignMenuServiceFallback implements FallbackFactory<IFeignMenuService> {
 	@Override
 	public IFeignMenuService create(Throwable throwable) {
 		return new IFeignMenuService() {

@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.feign.fallback.FeignSettingFallback;
+import com.taotao.cloud.sys.api.feign.fallback.FeignSettingServiceFallback;
 import com.taotao.cloud.sys.api.web.vo.setting.BaseSetting;
 import com.taotao.cloud.sys.api.web.vo.setting.ExperienceSettingVO;
 import com.taotao.cloud.sys.api.web.vo.setting.GoodsSettingVO;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.03
  * @since 2022-03-25 14:09:48
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignSettingFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignSettingServiceFallback.class)
 public interface IFeignSettingService {
 
 	/**

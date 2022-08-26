@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignDictFallback implements FallbackFactory<IFeignDictService> {
+public class FeignDictServiceFallback implements FallbackFactory<IFeignDictService> {
 	@Override
 	public IFeignDictService create(Throwable throwable) {
 		LogUtil.info("throwablethrowablethrowablethrowablethrowable");

@@ -4,7 +4,7 @@ dependencies {
 
     //百度云对象存储
     //https://search.maven.org/artifact/com.baidubce/bce-java-sdk
-    api('com.baidubce:bce-java-sdk:0.10.217'){
+    api('com.baidubce:bce-java-sdk:0.10.222'){
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
         exclude group: 'commons-collections', module: 'commons-collections'
         exclude group: 'commons-httpclient', module: 'commons-httpclient'

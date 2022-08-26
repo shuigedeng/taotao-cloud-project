@@ -24,7 +24,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 @RequestMapping("/async/controller")
 public class AsyncHelloController {
 
-    private List<DeferredResult<String>> deferredResultList = new ArrayList<>();
+    private final List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 
     @ResponseBody
     @GetMapping("/hello")
