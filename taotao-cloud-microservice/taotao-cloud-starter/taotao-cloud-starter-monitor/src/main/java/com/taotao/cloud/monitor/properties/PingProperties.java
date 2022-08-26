@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = PingProperties.PREFIX)
 public class PingProperties {
 
-	public static final String PREFIX = "taotao.cloud.health.ping";
+	public static final String PREFIX = "taotao.cloud.monitor.ping";
 
 	private boolean enabled = true;
 

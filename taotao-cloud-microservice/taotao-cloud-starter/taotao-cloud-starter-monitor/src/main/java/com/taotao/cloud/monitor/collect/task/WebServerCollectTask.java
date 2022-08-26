@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -38,7 +40,7 @@ import org.springframework.boot.web.server.WebServer;
  */
 public class WebServerCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.webserver";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.webserver";
 
 	private final CollectTaskProperties collectTaskProperties;
 
@@ -86,9 +88,8 @@ public class WebServerCollectTask extends AbstractCollectTask {
 						"org.apache.tomcat.util.threads.ThreadPoolExecutor");
 
 					if (executor != null && poolCls.isAssignableFrom(executor.getClass())) {
-						if (executor instanceof ThreadPoolExecutor) {
+						if (executor instanceof ThreadPoolExecutor pool) {
 							TomcatInfo tomcatInfo = new TomcatInfo();
-							ThreadPoolExecutor pool = (ThreadPoolExecutor) executor;
 
 							tomcatInfo.activeCount = pool.getActiveCount();
 							tomcatInfo.corePoolSize = pool.getCorePoolSize();
@@ -151,7 +152,9 @@ public class WebServerCollectTask extends AbstractCollectTask {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

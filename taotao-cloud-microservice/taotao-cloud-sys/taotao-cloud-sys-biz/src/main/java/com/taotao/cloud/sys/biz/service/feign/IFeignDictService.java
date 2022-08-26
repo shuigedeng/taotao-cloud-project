@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.service.feign;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
-import java.util.concurrent.Future;
+import java.util.function.Function;
 
 /**
  * ISysDictService
@@ -27,7 +27,8 @@ import java.util.concurrent.Future;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IFeignDictService extends BaseSuperService<Dict,Long> {
+public interface IFeignDictService extends BaseSuperService<Dict, Long> {
+
 
 	///**
 	// * 添加字典
@@ -82,7 +83,6 @@ public interface IFeignDictService extends BaseSuperService<Dict,Long> {
 	// * @since 2021-10-09 20:25:13
 	// */
 	//SysDict findById(Long id);
-
 
 
 }

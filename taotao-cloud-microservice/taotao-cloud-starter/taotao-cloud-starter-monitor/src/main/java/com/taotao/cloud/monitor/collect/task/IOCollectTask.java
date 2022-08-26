@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import static com.taotao.cloud.monitor.utils.ProcessUtils.getProcessID;
 
 import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 import com.taotao.cloud.monitor.utils.ProcessUtils;
@@ -37,7 +39,7 @@ import java.io.FileOutputStream;
 
 public class IOCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.io";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.io";
 
 	private final CollectTaskProperties properties;
 
@@ -93,7 +95,9 @@ public class IOCollectTask extends AbstractCollectTask {
 
 			return ioInfo;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

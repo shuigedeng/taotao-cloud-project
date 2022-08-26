@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = CollectTaskProperties.PREFIX)
 public class CollectTaskProperties {
 
-	public static final String PREFIX = "taotao.cloud.health.collect";
+	public static final String PREFIX = "taotao.cloud.monitor.collect";
 
 	private boolean uncatchEnabled = true;
 

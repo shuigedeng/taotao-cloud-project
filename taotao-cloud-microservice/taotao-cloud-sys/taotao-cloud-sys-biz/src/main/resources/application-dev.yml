@@ -1096,7 +1096,7 @@ taotao:
         enabled: false
     ip2region:
       enabled: true
-    health:
+    monitor:
       enabled: true
       dump:
         enabled: true

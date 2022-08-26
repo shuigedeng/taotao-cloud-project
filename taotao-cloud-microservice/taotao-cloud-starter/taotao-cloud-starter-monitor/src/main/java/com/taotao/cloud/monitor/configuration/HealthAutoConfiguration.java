@@ -24,7 +24,7 @@ import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.collect.HealthReportFilter;
 import com.taotao.cloud.monitor.endpoint.SystemHealthEndPoint;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
-import com.taotao.cloud.monitor.properties.HealthProperties;
+import com.taotao.cloud.monitor.properties.MonitorProperties;
 import com.taotao.cloud.monitor.strategy.WarnStrategy;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -44,8 +44,8 @@ import org.springframework.core.Ordered;
  * @since 2021-09-10 17:22:15
  */
 @AutoConfiguration(after = {CoreAutoConfiguration.class, WarnProviderAutoConfiguration.class, MonitorAutoConfiguration.class})
-@EnableConfigurationProperties({HealthProperties.class, CollectTaskProperties.class})
-@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableConfigurationProperties({MonitorProperties.class, CollectTaskProperties.class})
+@ConditionalOnProperty(prefix = MonitorProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HealthAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -57,11 +57,11 @@ public class HealthAutoConfiguration implements InitializingBean {
 	public HealthCheckProvider healthCheckProvider(
 		WarnStrategy strategy,
 		CollectTaskProperties collectTaskProperties,
-		HealthProperties healthProperties,
+		MonitorProperties monitorProperties,
 		Monitor monitor) {
 		return new HealthCheckProvider(
 			collectTaskProperties,
-			healthProperties,
+			monitorProperties,
 			strategy,
 			monitor);
 	}

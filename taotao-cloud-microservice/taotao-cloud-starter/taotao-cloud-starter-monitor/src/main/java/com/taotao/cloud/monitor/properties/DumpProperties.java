@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = DumpProperties.PREFIX)
 public class DumpProperties {
 
-	public static final String PREFIX = "taotao.cloud.health.dump";
+	public static final String PREFIX = "taotao.cloud.monitor.dump";
 
 	/**
 	 * 开启监控下载

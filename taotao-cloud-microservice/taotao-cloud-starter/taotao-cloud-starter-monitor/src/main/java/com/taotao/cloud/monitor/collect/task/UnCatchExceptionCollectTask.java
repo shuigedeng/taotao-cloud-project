@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
@@ -33,7 +35,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
  */
 public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.unCatchException";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.unCatchException";
 
 	private Throwable lastException = null;
 	private final CollectTaskProperties properties;
@@ -92,13 +94,15 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 				if (e != null) {
 					unCatchExceptionCheckTask.lastException = e;
 
-					notifyMessage(WarnTypeEnum.ERROR, "未捕获错误",
-						ExceptionUtil.trace2String(e));
+					notifyMessage(WarnTypeEnum.ERROR, "未捕获错误", ExceptionUtil.trace2String(e));
 					LogUtil.error(e, "未捕获错误");
 				}
 			} catch (Exception e2) {
-
+				if(LogUtil.isErrorEnabled()){
+					LogUtil.error(e);
+				}
 			}
+
 			if (lastUncaughtExceptionHandler != null) {
 				lastUncaughtExceptionHandler.uncaughtException(t, e);
 			}

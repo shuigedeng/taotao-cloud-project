@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
@@ -21,6 +21,8 @@ import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,7 +39,7 @@ import org.apache.http.pool.PoolStats;
  */
 public class HttpPoolCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.httpPool";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.httpPool";
 
 	private final CollectTaskProperties properties;
 
@@ -99,7 +101,9 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 			info.poolDetail = detail.toString();
 			return info;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -31,7 +34,7 @@ import java.util.Objects;
  */
 public class DoubtApiCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.doubtApi";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.doubtApi";
 
 	private final CollectTaskProperties properties;
 
@@ -65,36 +68,40 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 			DoubtApiInfo info = new DoubtApiInfo();
 			Collector collector = Collector.getCollector();
 			if (Objects.nonNull(collector)) {
-				Object doubtApiInfo = collector.value("taotao.cloud.health.doubtapi.info").get();
+				Object doubtApiInfo = collector.value("taotao.cloud.monitor.doubtapi.info").get();
 
-				//Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) doubtApiInfo;
-				//if (map != null && map.size() > 0) {
-				//	DoubtApiInterceptor.DoubtApiInfo[] copy = map.values().toArray(new DoubtApiInterceptor.DoubtApiInfo[map.values().size()]);
-				//	Arrays.sort(copy);
+				//todo此处需要修改
+				// Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) doubtApiInfo;
+				// if (map != null && map.size() > 0) {
+				// 	DoubtApiInterceptor.DoubtApiInfo[] copy = map.values().toArray(new DoubtApiInterceptor.DoubtApiInfo[map.values().size()]);
+				// 	Arrays.sort(copy);
 				//
-				//	int detailLen = Math.min(copy.length, 5);
-				//	StringBuilder sb = new StringBuilder();
+				// 	int detailLen = Math.min(copy.length, 5);
+				// 	StringBuilder sb = new StringBuilder();
 				//
-				//	for (int i = 0; i < detailLen; i++) {
-				//		DoubtApiInterceptor.DoubtApiInfo o = copy[i];
+				// 	for (int i = 0; i < detailLen; i++) {
+				// 		DoubtApiInterceptor.DoubtApiInfo o = copy[i];
 				//
-				//		long avg;
-				//		if (o.getCount() > 0) {
-				//			avg = o.getTotalIncreMem() / 1024 / 1024 / o.getCount();
-				//		} else {
-				//			avg = o.getTotalIncreMem() / 1024 / 1024;
-				//		}
-				//		sb.append(String.format("url:%s,方法:%s,平均内存增量:%s(M),调用次数:%s\r\n",
-				//			o.getUri(),
-				//			o.getMethod(),
-				//			avg, o.getCount()));
-				//	}
-				//	info.detail = sb.toString();
-				//}
+				// 		long avg;
+				// 		if (o.getCount() > 0) {
+				// 			avg = o.getTotalIncreMem() / 1024 / 1024 / o.getCount();
+				// 		} else {
+				// 			avg = o.getTotalIncreMem() / 1024 / 1024;
+				// 		}
+				// 		sb.append(String.format("url:%s,方法:%s,平均内存增量:%s(M),调用次数:%s\r\n",
+				// 			o.getUri(),
+				// 			o.getMethod(),
+				// 			avg, o.getCount()));
+				// 	}
+				// 	info.detail = sb.toString();
+				// }
+
 				return info;
 			}
-		} catch (Exception exp) {
-			LogUtil.error(exp);
+		} catch (Exception e) {
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

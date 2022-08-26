@@ -1,7 +1,10 @@
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.util.Objects;
@@ -10,12 +13,12 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 收集日志记录情况：最近一分钟增长日志条数及错误日志条数
  *
+ * @author dengtao
  * @version 2022.03
- * @date 2019-10-23
  */
 public class LogStatisticCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.logStatistic";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.logStatistic";
 
 	private final CollectTaskProperties properties;
 
@@ -50,23 +53,25 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 			Collector collector = Collector.getCollector();
 			if (Objects.nonNull(collector)) {
 				info.logerrorCount =
-					collector.value("taotao.cloud.health.collect.log.error.count").get()
+					collector.value("taotao.cloud.monitor.collect.log.error.count").get()
 						== null
 						? 0
 						: ((AtomicLong) (collector.value(
-								"taotao.cloud.health.collect.log.error.count")
+								"taotao.cloud.monitor.collect.log.error.count")
 							.get())).intValue();
 				info.logIncreCount =
-					collector.value("taotao.cloud.health.collect.log.incre.count").get()
+					collector.value("taotao.cloud.monitor.collect.log.incre.count").get()
 						== null
 						? 0
 						: ((AtomicLong) (collector.value(
-								"taotao.cloud.health.collect.log.incre.count")
+								"taotao.cloud.monitor.collect.log.incre.count")
 							.get())).intValue();
 				return info;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}

@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.monitor.collect;
+package com.taotao.cloud.monitor.collect.task;
 
 import com.sun.management.OperatingSystemMXBean;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.monitor.annotation.FieldReport;
+import com.taotao.cloud.monitor.collect.AbstractCollectTask;
+import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.lang.management.ManagementFactory;
@@ -31,7 +33,7 @@ import java.lang.management.ManagementFactory;
  */
 public class CpuCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.cpu";
+	private static final String TASK_NAME = "taotao.cloud.monitor.collect.cpu";
 	private static final String TASK_DESC = "CPU检查报表";
 
 	private final OperatingSystemMXBean systemBean;
@@ -79,7 +81,9 @@ public class CpuCollectTask extends AbstractCollectTask {
 			info.cpuCoreNumber = Runtime.getRuntime().availableProcessors();
 			return info;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			if(LogUtil.isErrorEnabled()){
+				LogUtil.error(e);
+			}
 		}
 		return null;
 	}
