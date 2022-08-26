@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignUserFallback implements FallbackFactory<IFeignUserService> {
+public class FeignUserServiceFallback implements FallbackFactory<IFeignUserService> {
 	@Override
 	public IFeignUserService create(Throwable throwable) {
 		return new IFeignUserService() {

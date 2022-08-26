@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignLogisticsFallback implements FallbackFactory<IFeignLogisticsService> {
+public class FeignLogisticsServiceFallback implements FallbackFactory<IFeignLogisticsService> {
 	@Override
 	public IFeignLogisticsService create(Throwable throwable) {
 		return new IFeignLogisticsService() {

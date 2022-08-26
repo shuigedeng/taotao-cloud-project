@@ -2,7 +2,9 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common')
 
     //https://search.maven.org/artifact/com.github.qcloudsms/qcloudsms
-    api 'com.github.qcloudsms:qcloudsms:1.0.6'
+    api('com.github.qcloudsms:qcloudsms:1.0.6') {
+        exclude group: 'org.json', module: 'json'
+    }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

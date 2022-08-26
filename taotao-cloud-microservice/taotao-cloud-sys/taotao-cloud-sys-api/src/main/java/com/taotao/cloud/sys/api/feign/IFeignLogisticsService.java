@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.feign.fallback.FeignLogisticsFallback;
+import com.taotao.cloud.sys.api.feign.fallback.FeignLogisticsServiceFallback;
 import com.taotao.cloud.sys.api.web.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.web.vo.logistics.TracesVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,7 +18,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignLogisticsFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignLogisticsServiceFallback.class)
 public interface IFeignLogisticsService {
 
 	/**

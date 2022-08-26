@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.feign.fallback.FeignMenuFallback;
+import com.taotao.cloud.sys.api.feign.fallback.FeignMenuServiceFallback;
 import com.taotao.cloud.sys.api.web.vo.menu.MenuQueryVO;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignMenuFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignMenuServiceFallback.class)
 public interface IFeignMenuService {
 
 	/**

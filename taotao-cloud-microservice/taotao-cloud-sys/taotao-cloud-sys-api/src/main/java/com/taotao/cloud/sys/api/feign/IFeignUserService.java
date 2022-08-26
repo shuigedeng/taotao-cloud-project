@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallback;
+import com.taotao.cloud.sys.api.feign.fallback.FeignUserServiceFallback;
 import com.taotao.cloud.sys.api.web.vo.user.UserQueryVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserServiceFallback.class)
 public interface IFeignUserService {
 
 	/**
