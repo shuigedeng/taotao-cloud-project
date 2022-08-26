@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
+import com.taotao.cloud.sys.biz.service.business.ISensitiveWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

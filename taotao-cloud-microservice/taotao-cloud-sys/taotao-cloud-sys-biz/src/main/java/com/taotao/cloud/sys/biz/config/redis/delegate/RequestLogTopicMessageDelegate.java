@@ -16,11 +16,9 @@
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
-import com.taotao.cloud.sys.biz.service.ILogService;
+import com.taotao.cloud.sys.biz.service.business.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 资源文件处理工具类
@@ -155,7 +156,7 @@ public class ResourceUtil {
 			return;
 		}
 		if (fileInPath instanceof String) {
-			br = new BufferedReader(new FileReader(new File((String) fileInPath)));
+			br = new BufferedReader(new FileReader((String) fileInPath));
 		} else if (fileInPath instanceof InputStream) {
 			br = new BufferedReader(new InputStreamReader((InputStream) fileInPath));
 		}
@@ -172,7 +173,7 @@ public class ResourceUtil {
 	 * 主要核心方法是使用getResource和getPath方法，这里的getResource("")里面是空字符串
 	 */
 	public void function1(String fileName) throws IOException {
-		String path = this.getClass().getClassLoader().getResource("").getPath();//注意getResource("")里面是空字符串
+		String path = this.getClass().getClassLoader().getResource(fileName).getPath();//注意getResource("")里面是空字符串
 		System.out.println(path);
 		String filePath = path + fileName;
 		System.out.println(filePath);
@@ -191,7 +192,7 @@ public class ResourceUtil {
 	public void function2(String fileName) throws IOException {
 		String path = this.getClass().getClassLoader().getResource(fileName).getPath();//注意getResource("")里面是空字符串
 		System.out.println(path);
-		String filePath = URLDecoder.decode(path, "UTF-8");//如果路径中带有中文会被URLEncoder,因此这里需要解码
+		String filePath = URLDecoder.decode(path, StandardCharsets.UTF_8);//如果路径中带有中文会被URLEncoder,因此这里需要解码
 		System.out.println(filePath);
 		getFileContent(filePath);
 	}
@@ -209,7 +210,7 @@ public class ResourceUtil {
 	public void function3(String fileName) throws IOException {
 		String path = this.getClass().getClassLoader().getResource(fileName).getFile();//注意getResource("")里面是空字符串
 		System.out.println(path);
-		String filePath = URLDecoder.decode(path, "UTF-8");//如果路径中带有中文会被URLEncoder,因此这里需要解码
+		String filePath = URLDecoder.decode(path, StandardCharsets.UTF_8);//如果路径中带有中文会被URLEncoder,因此这里需要解码
 		System.out.println(filePath);
 		getFileContent(filePath);
 	}

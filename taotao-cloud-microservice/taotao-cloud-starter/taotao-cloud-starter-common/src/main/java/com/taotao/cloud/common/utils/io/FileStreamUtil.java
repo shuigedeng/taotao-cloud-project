@@ -198,8 +198,7 @@ public class FileStreamUtil {
 
 			while (e.ready()) {
 				String entry = e.readLine();
-				if (StringUtil.isEmpty(entry)
-					&& ignoreEmpty) {
+				if (StringUtil.isEmpty(entry) && ignoreEmpty) {
 					continue;
 				}
 				lines.add(entry);

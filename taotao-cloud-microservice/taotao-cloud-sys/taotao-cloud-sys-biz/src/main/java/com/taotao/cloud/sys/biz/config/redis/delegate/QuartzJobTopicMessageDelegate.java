@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
-import com.taotao.cloud.sys.biz.service.IQuartzJobService;
+import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -11,6 +11,7 @@ import com.taotao.cloud.pinyin.spi.IPinyinToneReverse;
 import com.taotao.cloud.pinyin.spi.IPinyinToneStyle;
 import com.taotao.cloud.pinyin.support.style.PinyinToneStyles;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

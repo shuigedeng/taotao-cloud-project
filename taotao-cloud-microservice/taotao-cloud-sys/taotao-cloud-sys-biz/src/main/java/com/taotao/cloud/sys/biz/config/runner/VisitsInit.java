@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.config.runner;
 
-import com.taotao.cloud.sys.biz.service.IRegionService;
-import com.taotao.cloud.sys.biz.service.IVisitsService;
+import com.taotao.cloud.sys.biz.service.business.IRegionService;
+import com.taotao.cloud.sys.biz.service.business.IVisitsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
