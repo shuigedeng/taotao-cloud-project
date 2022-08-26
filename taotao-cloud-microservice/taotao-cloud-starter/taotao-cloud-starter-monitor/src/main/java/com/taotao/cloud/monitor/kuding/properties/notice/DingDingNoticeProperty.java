@@ -1,14 +1,17 @@
 package com.taotao.cloud.monitor.kuding.properties.notice;
 
-import com.taotao.cloud.monitor.kuding.properties.enums.DingdingTextType;
 import com.taotao.cloud.monitor.kuding.pojos.dingding.DingDingMarkdownNotice;
 import com.taotao.cloud.monitor.kuding.pojos.dingding.DingDingNotice;
 import com.taotao.cloud.monitor.kuding.pojos.dingding.DingDingTextNotice;
+import com.taotao.cloud.monitor.kuding.properties.enums.DingdingTextType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-
-@ConfigurationProperties(prefix = "prometheus.dingding")
+@RefreshScope
+@ConfigurationProperties(prefix = DingDingNoticeProperty.PREFIX)
 public class DingDingNoticeProperty {
+
+	public static final String PREFIX = "taotao.cloud.monitor.notice.dingding";
 
 	/**
 	 * 是否开启钉钉通知
@@ -126,10 +129,10 @@ public class DingDingNoticeProperty {
 
 	public DingDingNotice generateDingdingNotice(String msg, String title) {
 		switch (dingdingTextType) {
-		case MARKDOWN:
-			return new DingDingMarkdownNotice(msg, title, phoneNum);
-		case TEXT:
-			return new DingDingTextNotice(msg, phoneNum);
+			case MARKDOWN:
+				return new DingDingMarkdownNotice(msg, title, phoneNum);
+			case TEXT:
+				return new DingDingTextNotice(msg, phoneNum);
 		}
 		// never happen;
 		return null;

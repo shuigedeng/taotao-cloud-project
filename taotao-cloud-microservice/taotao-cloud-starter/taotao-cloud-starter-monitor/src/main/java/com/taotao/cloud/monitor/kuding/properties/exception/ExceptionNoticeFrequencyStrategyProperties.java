@@ -1,13 +1,15 @@
 package com.taotao.cloud.monitor.kuding.properties.exception;
 
-import java.time.Duration;
-
 import com.taotao.cloud.monitor.kuding.properties.enums.NoticeFrequencyType;
+import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
+@RefreshScope
+@ConfigurationProperties(prefix = ExceptionNoticeFrequencyStrategyProperties.PREFIX)
+public class ExceptionNoticeFrequencyStrategyProperties {
 
-@ConfigurationProperties(prefix = "prometheus.exceptionnotice.strategy")
-public class ExceptionNoticeFrequencyStrategy {
+	public static final String PREFIX = "taotao.cloud.monitor.exception.strategy";
 
 	/**
 	 * 是否开启异常通知策略
@@ -87,8 +89,10 @@ public class ExceptionNoticeFrequencyStrategy {
 
 	@Override
 	public String toString() {
-		return "ExceptionNoticeFrequencyStrategy [enabled=" + enabled + ", frequencyType=" + frequencyType
-				+ ", noticeTimeInterval=" + noticeTimeInterval + ", noticeShowCount=" + noticeShowCount + "]";
+		return "ExceptionNoticeFrequencyStrategy [enabled=" + enabled + ", frequencyType="
+			+ frequencyType
+			+ ", noticeTimeInterval=" + noticeTimeInterval + ", noticeShowCount=" + noticeShowCount
+			+ "]";
 	}
 
 }

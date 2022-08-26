@@ -4,7 +4,7 @@ import com.taotao.cloud.monitor.kuding.message.EmailNoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.properties.notice.EmailNoticeProperty;
 import com.taotao.cloud.monitor.kuding.config.annos.ConditionalOnServiceMonitor;
-import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.ServiceCheckNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ServiceCheckNotice;
 import com.taotao.cloud.monitor.kuding.text.ServiceMonitorResolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

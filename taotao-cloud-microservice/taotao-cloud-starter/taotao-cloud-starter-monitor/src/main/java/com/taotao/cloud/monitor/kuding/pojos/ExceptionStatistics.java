@@ -23,7 +23,7 @@ public class ExceptionStatistics {
 	/**
 	 * 上一次通知时的次数
 	 */
-	private Long LastNoticedCount;
+	private Long lastNoticedCount;
 
 	/**
 	 * 是否是第一次生成
@@ -32,7 +32,7 @@ public class ExceptionStatistics {
 
 	public ExceptionStatistics(String uid) {
 		this.showCount = new AtomicLong(0);
-		this.LastNoticedCount = 0L;
+		this.lastNoticedCount = 0L;
 		this.uid = uid;
 	}
 
@@ -44,7 +44,7 @@ public class ExceptionStatistics {
 	}
 
 	public void refreshShow() {
-		this.LastNoticedCount = showCount.longValue();
+		this.lastNoticedCount = showCount.longValue();
 		this.noticeTime = LocalDateTime.now();
 	}
 
@@ -94,14 +94,14 @@ public class ExceptionStatistics {
 	 * @return the lastNoticedCount
 	 */
 	public Long getLastNoticedCount() {
-		return LastNoticedCount;
+		return lastNoticedCount;
 	}
 
 	/**
 	 * @param lastNoticedCount the lastNoticedCount to set
 	 */
 	public void setLastNoticedCount(Long lastNoticedCount) {
-		LastNoticedCount = lastNoticedCount;
+		this.lastNoticedCount = lastNoticedCount;
 	}
 
 	/**
@@ -120,8 +120,9 @@ public class ExceptionStatistics {
 
 	@Override
 	public String toString() {
-		return "ExceptionStatistics [showCount=" + showCount + ", uid=" + uid + ", noticeTime=" + noticeTime
-				+ ", LastShowedCount=" + LastNoticedCount + ", firstCreated=" + firstCreated + "]";
+		return "ExceptionStatistics [showCount=" + showCount + ", uid=" + uid + ", noticeTime="
+			+ noticeTime
+			+ ", LastShowedCount=" + lastNoticedCount + ", firstCreated=" + firstCreated + "]";
 	}
 
 }

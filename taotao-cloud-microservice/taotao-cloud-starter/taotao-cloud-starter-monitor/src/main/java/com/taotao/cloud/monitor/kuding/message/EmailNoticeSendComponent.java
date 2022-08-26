@@ -3,14 +3,14 @@ package com.taotao.cloud.monitor.kuding.message;
 import java.util.regex.Pattern;
 
 import com.taotao.cloud.monitor.kuding.properties.notice.EmailNoticeProperty;
-import com.taotao.cloud.monitor.kuding.pojos.PromethuesNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.Notice;
 import com.taotao.cloud.monitor.kuding.text.NoticeTextResolver;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 
-public class EmailNoticeSendComponent<T extends PromethuesNotice> implements INoticeSendComponent<T> {
+public class EmailNoticeSendComponent<T extends Notice> implements INoticeSendComponent<T> {
 
 //	private final Log logger = LogFactory.getLog(getClass());
 

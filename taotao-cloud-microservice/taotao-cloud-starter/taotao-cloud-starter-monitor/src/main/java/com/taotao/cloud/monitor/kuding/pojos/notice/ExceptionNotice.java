@@ -1,18 +1,17 @@
-package com.taotao.cloud.monitor.kuding.pojos;
+package com.taotao.cloud.monitor.kuding.pojos.notice;
+
+import static java.util.stream.Collectors.toList;
 
 import com.taotao.cloud.monitor.kuding.properties.enums.ProjectEnviroment;
-import org.springframework.util.DigestUtils;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.util.DigestUtils;
 
-import static java.util.stream.Collectors.toList;
 
-
-public class ExceptionNotice extends PromethuesNotice {
+public class ExceptionNotice extends Notice {
 
 	/**
 	 * 工程名
@@ -54,8 +53,9 @@ public class ExceptionNotice extends PromethuesNotice {
 	 */
 	protected Long showCount = 1L;
 
-	public ExceptionNotice(Throwable ex, String filterTrace, Object[] args, ProjectEnviroment projectEnviroment,
-						   String title) {
+	public ExceptionNotice(Throwable ex, String filterTrace, Object[] args,
+		ProjectEnviroment projectEnviroment,
+		String title) {
 		super(title, projectEnviroment);
 		this.exceptionMessage = gainExceptionMessage(ex);
 		this.parames = args == null ? null : Arrays.stream(args).collect(toList());
@@ -69,7 +69,7 @@ public class ExceptionNotice extends PromethuesNotice {
 	}
 
 	public ExceptionNotice(Throwable ex, String filterTrace, Long showCount, Object[] args,
-						   ProjectEnviroment projectEnviroment, String title) {
+		ProjectEnviroment projectEnviroment, String title) {
 		super(title, projectEnviroment);
 		this.exceptionMessage = gainExceptionMessage(ex);
 		this.showCount = showCount;
@@ -94,7 +94,8 @@ public class ExceptionNotice extends PromethuesNotice {
 		return list;
 	}
 
-	public void addStackTrace(List<StackTraceElement> list, Throwable throwable, String filterTrace) {
+	public void addStackTrace(List<StackTraceElement> list, Throwable throwable,
+		String filterTrace) {
 		list.addAll(0,
 			Arrays.stream(throwable.getStackTrace())
 				.filter(x -> filterTrace == null ? true : x.getClassName().startsWith(filterTrace))
@@ -110,29 +111,36 @@ public class ExceptionNotice extends PromethuesNotice {
 	private void gainExceptionMessage(Throwable throwable, List<String> list) {
 		list.add(String.format("%s:%s", throwable.getClass().getName(), throwable.getMessage()));
 		Throwable cause = throwable.getCause();
-		if (cause != null)
+		if (cause != null) {
 			gainExceptionMessage(cause, list);
+		}
 	}
 
 	private String calUid() {
 		String md5 = DigestUtils.md5DigestAsHex(
-			String.format("%s-%s", exceptionMessage, traceInfo.size() > 0 ? traceInfo.get(0) : "").getBytes());
+			String.format("%s-%s", exceptionMessage, traceInfo.size() > 0 ? traceInfo.get(0) : "")
+				.getBytes());
 		return md5;
 	}
 
 	public String createText() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("工程信息：").append(project).append("(").append(projectEnviroment.getName()).append(")")
+		stringBuilder.append("工程信息：").append(project).append("(")
+			.append(projectEnviroment.getName()).append(")")
 			.append("\r\n");
 		stringBuilder.append("类路径：").append(classPath).append("\r\n");
 		stringBuilder.append("方法名：").append(methodName).append("\r\n");
 		if (parames != null && parames.size() > 0) {
 			stringBuilder.append("参数信息：")
-				.append(String.join(",", parames.stream().map(x -> x.toString()).collect(toList()))).append("\r\n");
+				.append(String.join(",", parames.stream().map(x -> x.toString()).collect(toList())))
+				.append("\r\n");
 		}
-		stringBuilder.append("异常信息：").append(String.join("\r\n caused by: ", exceptionMessage)).append("\r\n");
-		stringBuilder.append("异常追踪：").append("\r\n").append(String.join("\r\n", traceInfo)).append("\r\n");
-		stringBuilder.append("最后一次出现时间：").append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+		stringBuilder.append("异常信息：").append(String.join("\r\n caused by: ", exceptionMessage))
+			.append("\r\n");
+		stringBuilder.append("异常追踪：").append("\r\n").append(String.join("\r\n", traceInfo))
+			.append("\r\n");
+		stringBuilder.append("最后一次出现时间：")
+			.append(createTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
 			.append("\r\n");
 		stringBuilder.append("出现次数：").append(showCount).append("\r\n");
 		return stringBuilder.toString();
@@ -261,8 +269,10 @@ public class ExceptionNotice extends PromethuesNotice {
 
 	@Override
 	public String toString() {
-		return "ExceptionNotice [project=" + project + ", uid=" + uid + ", methodName=" + methodName + ", parames="
-			+ parames + ", classPath=" + classPath + ", exceptionMessage=" + exceptionMessage + ", traceInfo="
+		return "ExceptionNotice [project=" + project + ", uid=" + uid + ", methodName=" + methodName
+			+ ", parames="
+			+ parames + ", classPath=" + classPath + ", exceptionMessage=" + exceptionMessage
+			+ ", traceInfo="
 			+ traceInfo + ", showCount=" + showCount + ", title=" + title + ", projectEnviroment="
 			+ projectEnviroment + ", createTime=" + createTime + "]";
 	}

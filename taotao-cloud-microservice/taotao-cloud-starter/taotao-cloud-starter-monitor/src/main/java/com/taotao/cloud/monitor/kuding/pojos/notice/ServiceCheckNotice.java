@@ -1,12 +1,12 @@
-package com.taotao.cloud.monitor.kuding.pojos.servicemonitor;
+package com.taotao.cloud.monitor.kuding.pojos.notice;
 
+import com.taotao.cloud.monitor.kuding.pojos.servicemonitor.MicroServiceReport;
 import com.taotao.cloud.monitor.kuding.properties.enums.ProjectEnviroment;
-import com.taotao.cloud.monitor.kuding.pojos.PromethuesNotice;
 
 import java.time.format.DateTimeFormatter;
 
 
-public class ServiceCheckNotice extends PromethuesNotice {
+public class ServiceCheckNotice extends Notice {
 
 	private MicroServiceReport servicesReport;
 

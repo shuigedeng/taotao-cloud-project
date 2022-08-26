@@ -81,9 +81,11 @@ public class ServiceCheck {
 
 	@Override
 	public String toString() {
-		return "ServiceCheck [enabled=" + enabled + ", serviceCount=" + serviceCount + ", healthCheckUrl="
-				+ healthCheckUrl + ", healthCheckHeaders=" + healthCheckHeaders + ", checkInterval=" + checkInterval
-				+ "]";
+		return "ServiceCheck [enabled=" + enabled + ", serviceCount=" + serviceCount
+			+ ", healthCheckUrl="
+			+ healthCheckUrl + ", healthCheckHeaders=" + healthCheckHeaders + ", checkInterval="
+			+ checkInterval
+			+ "]";
 	}
 
 }

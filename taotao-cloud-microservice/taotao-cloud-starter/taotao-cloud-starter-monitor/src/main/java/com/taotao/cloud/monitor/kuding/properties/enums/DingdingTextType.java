@@ -2,7 +2,8 @@ package com.taotao.cloud.monitor.kuding.properties.enums;
 
 public enum DingdingTextType {
 
-	TEXT("text"), MARKDOWN("markdown");
+	TEXT("text"),
+	MARKDOWN("markdown");
 
 	private final String msgType;
 

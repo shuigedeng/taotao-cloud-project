@@ -1,5 +1,6 @@
-package com.taotao.cloud.monitor.kuding.pojos;
+package com.taotao.cloud.monitor.kuding.pojos.notice;
 
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import com.taotao.cloud.monitor.kuding.properties.enums.ProjectEnviroment;
 
 import static java.util.stream.Collectors.toList;

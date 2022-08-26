@@ -1,35 +1,35 @@
 package com.taotao.cloud.monitor.kuding.exceptionhandle.event;
 
+import com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces.ExceptionNoticeStatisticsRepository;
+import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
+import com.taotao.cloud.monitor.kuding.pojos.ExceptionStatistics;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeFrequencyStrategyProperties;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionStatistics;
-import com.taotao.cloud.monitor.kuding.properties.enums.NoticeFrequencyType;
-import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeFrequencyStrategy;
-import com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces.ExceptionNoticeStatisticsRepository;
 import org.springframework.context.ApplicationListener;
 
 
-public abstract class AbstractNoticeSendListener implements ApplicationListener<ExceptionNoticeEvent> {
+public abstract class AbstractNoticeSendListener implements
+	ApplicationListener<ExceptionNoticeEvent> {
 
-	private final ExceptionNoticeFrequencyStrategy exceptionNoticeFrequencyStrategy;
+	private final ExceptionNoticeFrequencyStrategyProperties exceptionNoticeFrequencyStrategyProperties;
 
 	private final ExceptionNoticeStatisticsRepository exceptionNoticeStatisticsRepository;
 
 	private final List<INoticeSendComponent<ExceptionNotice>> noticeSendComponents;
 
 	/**
-	 * @param exceptionNoticeFrequencyStrategy
+	 * @param exceptionNoticeFrequencyStrategyProperties
 	 * @param exceptionNoticeStatisticsRepository
 	 * @param noticeSendComponents
 	 */
-	public AbstractNoticeSendListener(ExceptionNoticeFrequencyStrategy exceptionNoticeFrequencyStrategy,
-			ExceptionNoticeStatisticsRepository exceptionNoticeStatisticsRepository,
-			List<INoticeSendComponent<ExceptionNotice>> noticeSendComponents) {
-		this.exceptionNoticeFrequencyStrategy = exceptionNoticeFrequencyStrategy;
+	public AbstractNoticeSendListener(
+		ExceptionNoticeFrequencyStrategyProperties exceptionNoticeFrequencyStrategyProperties,
+		ExceptionNoticeStatisticsRepository exceptionNoticeStatisticsRepository,
+		List<INoticeSendComponent<ExceptionNotice>> noticeSendComponents) {
+		this.exceptionNoticeFrequencyStrategyProperties = exceptionNoticeFrequencyStrategyProperties;
 		this.exceptionNoticeStatisticsRepository = exceptionNoticeStatisticsRepository;
 		this.noticeSendComponents = noticeSendComponents;
 	}
@@ -37,8 +37,8 @@ public abstract class AbstractNoticeSendListener implements ApplicationListener<
 	/**
 	 * @return the exceptionNoticeFrequencyStrategy
 	 */
-	public ExceptionNoticeFrequencyStrategy getExceptionNoticeFrequencyStrategy() {
-		return exceptionNoticeFrequencyStrategy;
+	public ExceptionNoticeFrequencyStrategyProperties getExceptionNoticeFrequencyStrategy() {
+		return exceptionNoticeFrequencyStrategyProperties;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public abstract class AbstractNoticeSendListener implements ApplicationListener<
 
 	public void send(ExceptionNotice notice) {
 		ExceptionStatistics statistics = exceptionNoticeStatisticsRepository.increaseOne(notice);
-		if (stratergyCheck(statistics, exceptionNoticeFrequencyStrategy)) {
+		if (strategyCheck(statistics, exceptionNoticeFrequencyStrategyProperties)) {
 			notice.setShowCount(statistics.getShowCount().longValue());
 			notice.setCreateTime(LocalDateTime.now());
 			noticeSendComponents.forEach(x -> x.send(notice));
@@ -58,20 +58,23 @@ public abstract class AbstractNoticeSendListener implements ApplicationListener<
 		}
 	}
 
-	protected boolean stratergyCheck(ExceptionStatistics exceptionStatistics,
-			ExceptionNoticeFrequencyStrategy exceptionNoticeFrequencyStrategy) {
+	protected boolean strategyCheck(ExceptionStatistics exceptionStatistics,
+		ExceptionNoticeFrequencyStrategyProperties exceptionNoticeFrequencyStrategyProperties) {
 		if (exceptionStatistics.isFirstCreated()) {
 			exceptionStatistics.setFirstCreated(false);
 			return true;
 		}
 		boolean flag = false;
-		switch (exceptionNoticeFrequencyStrategy.getFrequencyType()) {
-		case TIMEOUT:
-			Duration dur = Duration.between(exceptionStatistics.getNoticeTime(), LocalDateTime.now());
-			flag = exceptionNoticeFrequencyStrategy.getNoticeTimeInterval().compareTo(dur) < 0;
-		case SHOWCOUNT:
-			flag = exceptionStatistics.getShowCount().longValue() - exceptionStatistics.getLastNoticedCount()
-					.longValue() > exceptionNoticeFrequencyStrategy.getNoticeShowCount().longValue();
+		switch (exceptionNoticeFrequencyStrategyProperties.getFrequencyType()) {
+			case TIMEOUT:
+				Duration dur = Duration.between(exceptionStatistics.getNoticeTime(),
+					LocalDateTime.now());
+				flag = exceptionNoticeFrequencyStrategyProperties.getNoticeTimeInterval().compareTo(dur) < 0;
+			case SHOWCOUNT:
+				flag = exceptionStatistics.getShowCount().longValue()
+					- exceptionStatistics.getLastNoticedCount()
+					.longValue() > exceptionNoticeFrequencyStrategyProperties.getNoticeShowCount()
+					.longValue();
 		}
 		return flag;
 	}

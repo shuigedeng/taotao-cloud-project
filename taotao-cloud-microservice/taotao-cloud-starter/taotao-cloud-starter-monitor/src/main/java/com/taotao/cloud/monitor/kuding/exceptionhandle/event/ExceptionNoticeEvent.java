@@ -1,6 +1,6 @@
 package com.taotao.cloud.monitor.kuding.exceptionhandle.event;
 
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import org.springframework.context.ApplicationEvent;
 
 

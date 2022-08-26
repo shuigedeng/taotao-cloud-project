@@ -37,37 +37,7 @@ public class ExceptionNoticeWebListenConfig implements WebMvcConfigurer, WebMvcR
 
 	@Override
 	public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-		resolvers.add(0, ExceptionNoticeHandlerResolver());
-	}
-
-//	@Bean
-	public ExceptionNoticeHandlerResolver ExceptionNoticeHandlerResolver() {
-		ExceptionNoticeHandlerResolver exceptionNoticeResolver = new ExceptionNoticeHandlerResolver(exceptionHandler,
-				currentRequetBodyResolver(), currentRequestHeaderResolver(), exceptionNoticeProperties);
-		return exceptionNoticeResolver;
-	}
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(clearBodyInterceptor());
-	}
-
-	@Bean
-	public ClearBodyInterceptor clearBodyInterceptor() {
-		ClearBodyInterceptor bodyInterceptor = new ClearBodyInterceptor(currentRequetBodyResolver());
-		return bodyInterceptor;
-
-	}
-
-	@Bean
-	@ConditionalOnMissingBean(value = CurrentRequestHeaderResolver.class)
-	public CurrentRequestHeaderResolver currentRequestHeaderResolver() {
-		return new DefaultRequestHeaderResolver();
-	}
-
-	@Bean
-	public CurrentRequetBodyResolver currentRequetBodyResolver() {
-		return new DefaultRequestBodyResolver();
+		resolvers.add(0, exceptionNoticeHandlerResolver());
 	}
 
 	@Override
@@ -76,5 +46,38 @@ public class ExceptionNoticeWebListenConfig implements WebMvcConfigurer, WebMvcR
 		adapter.setRequestBodyAdvice(Arrays.asList(currentRequetBodyResolver()));
 		return adapter;
 	}
+
+	//@Bean
+	public ExceptionNoticeHandlerResolver exceptionNoticeHandlerResolver() {
+		return new ExceptionNoticeHandlerResolver(exceptionHandler,
+				currentRequetBodyResolver(),
+			currentRequestHeaderResolver(),
+			exceptionNoticeProperties);
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(clearBodyInterceptor());
+	}
+
+	@Bean
+	public CurrentRequetBodyResolver currentRequetBodyResolver() {
+		return new DefaultRequestBodyResolver();
+	}
+
+	@Bean
+	public ClearBodyInterceptor clearBodyInterceptor() {
+		return new ClearBodyInterceptor(currentRequetBodyResolver());
+	}
+
+	@Bean
+	@ConditionalOnMissingBean(value = CurrentRequestHeaderResolver.class)
+	public CurrentRequestHeaderResolver currentRequestHeaderResolver() {
+		return new DefaultRequestHeaderResolver();
+	}
+
+
+
+
 
 }

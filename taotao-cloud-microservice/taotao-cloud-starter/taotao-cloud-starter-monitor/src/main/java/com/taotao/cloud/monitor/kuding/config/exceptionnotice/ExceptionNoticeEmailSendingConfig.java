@@ -4,7 +4,7 @@ import com.taotao.cloud.monitor.kuding.message.EmailNoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.properties.notice.EmailNoticeProperty;
 import com.taotao.cloud.monitor.kuding.config.annos.ConditionalOnExceptionNotice;
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import com.taotao.cloud.monitor.kuding.text.NoticeTextResolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +40,6 @@ public class ExceptionNoticeEmailSendingConfig {
 	@Bean
 	@ConditionalOnMissingBean
 	public NoticeTextResolver<ExceptionNotice> ExceptionNoticeTextResolver() {
-		return x -> x.createText();
+		return ExceptionNotice::createText;
 	}
 }

@@ -4,8 +4,8 @@ import static java.util.stream.Collectors.toList;
 
 import java.time.format.DateTimeFormatter;
 
-import com.taotao.cloud.monitor.kuding.pojos.ExceptionNotice;
-import com.taotao.cloud.monitor.kuding.pojos.HttpExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
+import com.taotao.cloud.monitor.kuding.pojos.notice.HttpExceptionNotice;
 import com.taotao.cloud.monitor.kuding.text.ExceptionNoticeResolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.monitor.kuding.config.exceptionnotice;
 
-import com.taotao.cloud.monitor.kuding.properties.PromethreusNoticeProperties;
+import com.taotao.cloud.monitor.kuding.properties.NoticeProperties;
 import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeProperties;
 import com.taotao.cloud.monitor.kuding.config.annos.ConditionalOnExceptionNotice;
 import com.taotao.cloud.monitor.kuding.exceptionhandle.ExceptionHandler;
@@ -20,7 +20,7 @@ public class ExceptionNoticeConfig {
 	private final Log logger = LogFactory.getLog(ExceptionNoticeConfig.class);
 
 	@Bean
-	public ExceptionHandler exceptionHandler(PromethreusNoticeProperties noticeProperties,
+	public ExceptionHandler exceptionHandler(NoticeProperties noticeProperties,
                                              ExceptionNoticeProperties exceptionNoticeProperties,
                                              ApplicationEventPublisher applicationEventPublisher) {
 		logger.debug("创建异常处理器");

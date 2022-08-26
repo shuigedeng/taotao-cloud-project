@@ -3,12 +3,16 @@ package com.taotao.cloud.monitor.kuding.properties.servicemonitor;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-@ConfigurationProperties(prefix = "prometheus.service-monitor")
+
+@RefreshScope
+@ConfigurationProperties(ServiceMonitorProperties.PREFIX)
 public class ServiceMonitorProperties implements InitializingBean {
+
+	public static final String PREFIX = "taotao.cloud.monitor.service";
 
 	/**
 	 * 是否开启服务检查
@@ -32,7 +36,6 @@ public class ServiceMonitorProperties implements InitializingBean {
 
 	/**
 	 * 刷新全部通知的时间间隔，默认半小时
-	 * 
 	 */
 	private Duration refreshServiceCheckNoticeInterval = Duration.ofMinutes(30);
 
@@ -89,9 +92,7 @@ public class ServiceMonitorProperties implements InitializingBean {
 	}
 
 	/**
-	 * @param refreshServiceCheckNoticeInterval the
-	 *                                          refreshServiceCheckNoticeInterval to
-	 *                                          set
+	 * @param refreshServiceCheckNoticeInterval the refreshServiceCheckNoticeInterval to set
 	 */
 	public void setRefreshServiceCheckNoticeInterval(Duration refreshServiceCheckNoticeInterval) {
 		this.refreshServiceCheckNoticeInterval = refreshServiceCheckNoticeInterval;
