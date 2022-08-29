@@ -84,8 +84,6 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-
-
 		LogUtil.started(ExceptionAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
@@ -268,6 +266,12 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 		return Result.fail(ResultEnum.ERROR);
 	}
 
+	@ExceptionHandler(Exception.class)
+	public Result<String> handleThrowable(NativeWebRequest req, Throwable e) {
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
+	}
+
 	@ExceptionHandler(UndeclaredThrowableException.class)
 	public Result<String> handleUndeclaredThrowableException(NativeWebRequest req, UndeclaredThrowableException ex) {
 		printLog(req, ex);
@@ -436,7 +440,7 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	 * @param e   异常信息
 	 * @since 2021-09-02 21:27:34
 	 */
-	private void printLog(NativeWebRequest req, Exception e) {
+	private void printLog(NativeWebRequest req, Throwable e) {
 		RequestMappingHandlerMapping re = new RequestMappingHandlerMapping();
 		try {
 			HandlerExecutionChain chain = re.getHandler((HttpServletRequest) req.getNativeRequest());
