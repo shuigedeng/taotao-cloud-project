@@ -29,8 +29,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 @Async
 public class QuartzExecutionJob extends QuartzJobBean {
 
-
-
 	@Override
 	protected void executeInternal(JobExecutionContext context) {
 		//QuartzJobModel quartzJobModel = (QuartzJobModel) context.getMergedJobDataMap().get(

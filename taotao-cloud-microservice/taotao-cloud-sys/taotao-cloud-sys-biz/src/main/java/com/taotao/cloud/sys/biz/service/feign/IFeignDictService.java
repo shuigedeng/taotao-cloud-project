@@ -30,59 +30,5 @@ import java.util.function.Function;
 public interface IFeignDictService extends BaseSuperService<Dict, Long> {
 
 
-	///**
-	// * 添加字典
-	// *
-	// * @param sysDict sysDict
-	// * @return {@link SysDict }
-	// * @since 2021-10-09 20:24:04
-	// */
-	//SysDict save(SysDict sysDict);
-	//
-	///**
-	// * 查询所有字典集合
-	// *
-	// * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysDict&gt; }
-	// * @since 2021-10-09 20:24:23
-	// */
-	//List<SysDict> getAll();
-	//
-	///**
-	// * 分页查询字典集合
-	// *
-	// * @param page      page
-	// * @param pageQuery pageQuery
-	// * @return {@link Page&lt;com.taotao.cloud.sys.biz.entity.SysDict&gt; }
-	// * @since 2021-10-09 20:24:46
-	// */
-	//Page<SysDict> queryPage(Pageable page, DictPageQuery pageQuery);
-	//
-	///**
-	// * 根据主键Id删除字典
-	// *
-	// * @param id id
-	// * @return {@link Boolean }
-	// * @since 2021-10-09 20:24:59
-	// */
-	//Boolean removeById(Long id);
-	//
-	///**
-	// * 根据code删除字典
-	// *
-	// * @param code code
-	// * @return {@link Boolean }
-	// * @since 2021-10-09 20:25:07
-	// */
-	//Boolean deleteByCode(String code);
-	//
-	///**
-	// * 根据id查找字典
-	// *
-	// * @param id id
-	// * @return {@link SysDict }
-	// * @since 2021-10-09 20:25:13
-	// */
-	//SysDict findById(Long id);
-
 
 }

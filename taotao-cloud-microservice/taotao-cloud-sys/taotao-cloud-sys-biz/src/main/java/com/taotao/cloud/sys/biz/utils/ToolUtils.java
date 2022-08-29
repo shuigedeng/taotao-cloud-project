@@ -53,57 +53,57 @@ public class ToolUtils {
      * @param keywords
      */
     public static String handKeyword(String keywords) {
-        String handleKeyWords = "";
+        StringBuilder handleKeyWords = new StringBuilder();
         if (StringUtils.isNotBlank(keywords)) {
             String[] keywordArray = keywords.split(" ");
             if (keywordArray.length != 0) {
                 if (keywordArray.length != 1) {
                     for (int i = 0; i < keywordArray.length; i++) {
                         if (i == keywordArray.length - 1) {
-                            if (!keywordArray[i].equalsIgnoreCase("AND") && !keywordArray[i].equalsIgnoreCase("OR") && !keywordArray[i].equalsIgnoreCase("OR")) {
+                            if (!"AND".equalsIgnoreCase(keywordArray[i]) && !"OR".equalsIgnoreCase(keywordArray[i]) && !"OR".equalsIgnoreCase(keywordArray[i])) {
                                 if (keywordArray[i].startsWith("(")) {
                                     if (keywordArray[i].contains("NOT") || keywordArray[i].contains("not")) {
-                                        handleKeyWords += keywordArray[i].toUpperCase();
+                                        handleKeyWords.append(keywordArray[i].toUpperCase());
                                         continue;
                                     }
                                     int frontIndex = keywordArray[i].lastIndexOf("(");
-                                    handleKeyWords += keywordArray[i].substring(0, frontIndex + 1) + "\"" + keywordArray[i].substring(frontIndex + 1) + "\"";
+                                    handleKeyWords.append(keywordArray[i].substring(0, frontIndex + 1)).append("\"").append(keywordArray[i].substring(frontIndex + 1)).append("\"");
                                 } else if (keywordArray[i].endsWith(")")) {
                                     int backIndex = keywordArray[i].indexOf(")");
-                                    handleKeyWords += "\"" + keywordArray[i].substring(0, backIndex) + "\"" + keywordArray[i].substring(backIndex);
+                                    handleKeyWords.append("\"").append(keywordArray[i], 0, backIndex).append("\"").append(keywordArray[i].substring(backIndex));
                                 } else {
-                                    handleKeyWords += "\"" + keywordArray[i].toUpperCase() + "\"";
+                                    handleKeyWords.append("\"").append(keywordArray[i].toUpperCase()).append("\"");
                                 }
                             } else {
-                                handleKeyWords += keywordArray[i];
+                                handleKeyWords.append(keywordArray[i]);
                             }
                         } else {
-                            if (!keywordArray[i].equalsIgnoreCase("AND") && !keywordArray[i].equalsIgnoreCase("OR") && !keywordArray[i].equalsIgnoreCase("NOT")) {
+                            if (!"AND".equalsIgnoreCase(keywordArray[i]) && !"OR".equalsIgnoreCase(keywordArray[i]) && !"NOT".equalsIgnoreCase(keywordArray[i])) {
                                 if (keywordArray[i].startsWith("(")) {
                                     if (keywordArray[i].contains("NOT") || keywordArray[i].contains("not")) {
-                                        handleKeyWords += keywordArray[i].toUpperCase() + " ";
+                                        handleKeyWords.append(keywordArray[i].toUpperCase()).append(" ");
                                         continue;
                                     }
                                     int frontIndex = keywordArray[i].lastIndexOf("(");
-                                    handleKeyWords += keywordArray[i].substring(0, frontIndex + 1) + "\"" + keywordArray[i].substring(frontIndex + 1) + "\" ";
+                                    handleKeyWords.append(keywordArray[i], 0, frontIndex + 1).append("\"").append(keywordArray[i].substring(frontIndex + 1)).append("\" ");
                                 } else if (keywordArray[i].endsWith(")")) {
                                     int backIndex = keywordArray[i].indexOf(")");
-                                    handleKeyWords += "\"" + keywordArray[i].substring(0, backIndex) + "\"" + keywordArray[i].substring(backIndex) + " ";
+                                    handleKeyWords.append("\"").append(keywordArray[i].substring(0, backIndex)).append("\"").append(keywordArray[i].substring(backIndex)).append(" ");
                                 } else {
-                                    handleKeyWords += "\"" + keywordArray[i] + "\" ";
+                                    handleKeyWords.append("\"").append(keywordArray[i]).append("\" ");
                                 }
                             } else {
-                                handleKeyWords += keywordArray[i].toUpperCase() + " ";
+                                handleKeyWords.append(keywordArray[i].toUpperCase()).append(" ");
                             }
                         }
                     }
                 } else {
-                    handleKeyWords += "\"" + keywords + "\"";
+                    handleKeyWords.append("\"").append(keywords).append("\"");
                 }
             }
-            handleKeyWords = "(" + handleKeyWords + ")";
+            handleKeyWords = new StringBuilder("(" + handleKeyWords + ")");
     }
-        return handleKeyWords;
+        return handleKeyWords.toString();
     }
 
 
