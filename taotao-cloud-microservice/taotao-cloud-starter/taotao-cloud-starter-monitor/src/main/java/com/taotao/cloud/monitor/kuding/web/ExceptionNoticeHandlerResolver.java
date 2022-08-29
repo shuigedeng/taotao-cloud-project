@@ -35,8 +35,7 @@ public class ExceptionNoticeHandlerResolver implements HandlerExceptionResolver 
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
-		Object handler,
-		Exception ex) {
+		Object handler, Exception ex) {
 		RuntimeException e = null;
 		if (ex instanceof RuntimeException) {
 			e = (RuntimeException) ex;
@@ -58,7 +57,7 @@ public class ExceptionNoticeHandlerResolver implements HandlerExceptionResolver 
 	}
 
 	private Map<String, String> getParames(HttpServletRequest request) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		request.getParameterMap()
 			.forEach((x, y) -> map.put(x, String.join(" , ", Arrays.asList(y))));
 		return map;

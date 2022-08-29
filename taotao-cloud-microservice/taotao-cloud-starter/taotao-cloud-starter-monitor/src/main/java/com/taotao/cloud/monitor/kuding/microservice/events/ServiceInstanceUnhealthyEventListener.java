@@ -9,8 +9,6 @@ public class ServiceInstanceUnhealthyEventListener implements ApplicationListene
 
 	private final ServiceNoticeRepository serviceNoticeRepository;
 
-//	private final Log logger = LogFactory.getLog(ServiceInstanceUnhealthyEvent.class);
-
 	public ServiceInstanceUnhealthyEventListener(ServiceNoticeRepository serviceNoticeRepository) {
 		super();
 		this.serviceNoticeRepository = serviceNoticeRepository;
@@ -19,7 +17,6 @@ public class ServiceInstanceUnhealthyEventListener implements ApplicationListene
 	@Override
 	public void onApplicationEvent(ServiceInstanceUnhealthyEvent event) {
 		serviceNoticeRepository.addServiceHealthProblem(new ServiceHealthProblem(event));
-
 	}
 
 }

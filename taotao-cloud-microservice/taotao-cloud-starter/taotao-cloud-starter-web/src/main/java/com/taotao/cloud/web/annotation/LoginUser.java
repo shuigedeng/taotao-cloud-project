@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface EnableUser {
+public @interface LoginUser {
 
 	/**
 	 * 是否查询LoginUser对象所有信息，true则通过rpc接口查询

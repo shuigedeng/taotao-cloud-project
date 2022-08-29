@@ -1,8 +1,8 @@
-package com.taotao.cloud.monitor.kuding.exceptionhandle.components;
+package com.taotao.cloud.monitor.kuding.exceptionhandle.statistics;
 
 import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import com.taotao.cloud.monitor.kuding.pojos.ExceptionStatistics;
-import com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces.ExceptionNoticeStatisticsRepository;
+import com.taotao.cloud.monitor.kuding.exceptionhandle.statistics.ExceptionNoticeStatisticsRepository;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,14 +18,10 @@ public class InMemeryExceptionStatisticsRepository implements ExceptionNoticeSta
 		ExceptionStatistics exceptionStatistics = map.getOrDefault(exceptionNotice.getUid(),
 				new ExceptionStatistics(exceptionNotice.getUid()));
 		if (exceptionStatistics.isFirstCreated()) {
-			synchronized (exceptionStatistics) {
+			synchronized (this) {
 				map.merge(exceptionStatistics.getUid(), exceptionStatistics, (x, y) -> {
-					if (x == null) {
-						return y;
-					} else {
-						x.setFirstCreated(false);
-						return x;
-					}
+					x.setFirstCreated(false);
+					return x;
 				});
 			}
 		}

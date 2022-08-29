@@ -16,13 +16,13 @@ import org.springframework.context.ApplicationEventPublisher;
 
 public class ServiceExistCheckTask implements Runnable {
 
-	private final Set<String> allService = new TreeSet<String>();
+	private final Set<String> allService = new TreeSet<>();
 
 	private final DiscoveryClient discoveryClient;
 
 	private final ApplicationEventPublisher applicationEventPublisher;
 
-	private boolean autoDetected = false;
+	private boolean autoDetected;
 
 	private final Log logger = LogFactory.getLog(ServiceExistCheckTask.class);
 
@@ -60,8 +60,9 @@ public class ServiceExistCheckTask implements Runnable {
 		Set<String> additionalServices = Collections.emptySet();
 		if (autoDetected) {
 			additionalServices = existedServices.stream().filter(x -> !allService.contains(x)).collect(toSet());
-			if (additionalServices.size() > 0)
+			if (additionalServices.size() > 0) {
 				logger.info("service detected: " + additionalServices);
+			}
 			allService.addAll(additionalServices);
 		}
 		applicationEventPublisher.publishEvent(

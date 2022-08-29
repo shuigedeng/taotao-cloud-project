@@ -47,9 +47,7 @@ public class ServiceCheckControl implements DisposableBean {
 
 	@Override
 	public void destroy() throws Exception {
-		taskResultMap.forEach((x, y) -> {
-			y.cancel(false);
-		});
+		taskResultMap.forEach((x, y) -> y.cancel(false));
 	}
 
 	public synchronized void add(@NonNull String service, @NonNull ServiceCheck serviceCheck) {

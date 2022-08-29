@@ -38,11 +38,13 @@ public class EmailNoticeSendComponent<T extends Notice> implements INoticeSendCo
 		mailMessage.setFrom(fromEmail);
 		mailMessage.setTo(emailExceptionNoticeProperty.getTo());
 		String[] cc = emailExceptionNoticeProperty.getCc();
-		if (cc != null && cc.length > 0)
+		if (cc != null && cc.length > 0) {
 			mailMessage.setCc(cc);
+		}
 		String[] bcc = emailExceptionNoticeProperty.getBcc();
-		if (bcc != null && bcc.length > 0)
+		if (bcc != null && bcc.length > 0) {
 			mailMessage.setBcc(bcc);
+		}
 		mailMessage.setText(exceptionNoticeResolver.resolve(notice));
 		mailMessage
 				.setSubject(String.format("一个来自%s的提醒（%s）", notice.getTitle(), notice.getProjectEnviroment().getName()));
@@ -50,34 +52,39 @@ public class EmailNoticeSendComponent<T extends Notice> implements INoticeSendCo
 	}
 
 	private boolean isEmail(String email) {
-		if (email != null)
+		if (email != null) {
 			return Pattern.matches("^[A-Za-z0-9_\\-]+@[a-zA-Z0-9_\\-]+(\\.[a-zA-Z]{2,4})+$", email);
+		}
 		return false;
 	}
 
 	private void checkAllEmails(EmailNoticeProperty emailExceptionNoticeProperty) {
 		String fromEmail = mailProperties.getUsername();
-		if (fromEmail != null && !isEmail(fromEmail))
+		if (fromEmail != null && !isEmail(fromEmail)) {
 			throw new IllegalArgumentException("发件人邮箱错误");
+		}
 		String[] toEmail = emailExceptionNoticeProperty.getTo();
 		if (toEmail != null) {
 			for (String email : toEmail) {
-				if (!isEmail(email))
+				if (!isEmail(email)) {
 					throw new IllegalArgumentException("收件人邮箱错误");
+				}
 			}
 		}
 		String[] ccEmail = emailExceptionNoticeProperty.getCc();
 		if (ccEmail != null) {
 			for (String email : ccEmail) {
-				if (!isEmail(email))
+				if (!isEmail(email)) {
 					throw new IllegalArgumentException("抄送人邮箱错误");
+				}
 			}
 		}
 		String[] bccEmail = emailExceptionNoticeProperty.getBcc();
 		if (bccEmail != null) {
 			for (String email : bccEmail) {
-				if (!isEmail(email))
+				if (!isEmail(email)) {
 					throw new IllegalArgumentException("秘密抄送人邮箱错误");
+				}
 			}
 		}
 	}

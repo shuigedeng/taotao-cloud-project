@@ -19,9 +19,9 @@ public class ServiceInstanceLackEventListener implements ApplicationListener<Ser
 	public void onApplicationEvent(ServiceInstanceLackEvent event) {
 		Set<String> existedInstances = event.getInstanceIds();
 		int lackCount = event.getServiceCount() - existedInstances.size();
-		if (lackCount > 0 && lackCount == event.getServiceCount())
+		if (lackCount > 0 && lackCount == event.getServiceCount()) {
 			serviceNoticeRepository.addLackServices(event.getServiceName());
-		else if (lackCount > 0) {
+		} else if (lackCount > 0) {
 			serviceNoticeRepository.addServiceLackProblem(
 					new ServiceInstanceLackProblem(event.getServiceName(), event.getInstanceIds(), lackCount));
 		}

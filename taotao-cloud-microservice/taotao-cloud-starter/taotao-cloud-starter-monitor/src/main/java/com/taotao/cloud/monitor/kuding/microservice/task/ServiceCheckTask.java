@@ -27,7 +27,7 @@ public class ServiceCheckTask implements Runnable {
 
 	private final ApplicationEventPublisher applicationEventPublisher;
 
-	private Map<String, ServiceInstance> servicesMap = new HashMap<String, ServiceInstance>();
+	private Map<String, ServiceInstance> servicesMap = new HashMap<>();
 
 	public ServiceCheckTask(String serviceId, ServiceCheck serviceCheck, DiscoveryClient discoveryClient,
 			HealthCheckHandler healthCheckHandler, ApplicationEventPublisher applicationEventPublisher) {
@@ -53,10 +53,11 @@ public class ServiceCheckTask implements Runnable {
 	@Override
 	public void run() {
 		freshInstance();
-		List<ServiceHealth> list = new ArrayList<ServiceHealth>(servicesMap.size());
+		List<ServiceHealth> list = new ArrayList<>(servicesMap.size());
 		servicesMap.forEach((x, y) -> {
-			if (!healthCheckHandler.isHealthy(y, serviceCheck))
+			if (!healthCheckHandler.isHealthy(y, serviceCheck)) {
 				list.add(new ServiceHealth(y.getInstanceId(), ServiceStatus.DOWN));
+			}
 		});
 		if (list.size() > 0) {
 			applicationEventPublisher.publishEvent(new ServiceInstanceUnhealthyEvent(this, serviceId, list));

@@ -6,7 +6,7 @@ import java.util.concurrent.Executor;
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
 import com.taotao.cloud.monitor.kuding.properties.exception.ExceptionNoticeFrequencyStrategyProperties;
-import com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces.ExceptionNoticeStatisticsRepository;
+import com.taotao.cloud.monitor.kuding.exceptionhandle.statistics.ExceptionNoticeStatisticsRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

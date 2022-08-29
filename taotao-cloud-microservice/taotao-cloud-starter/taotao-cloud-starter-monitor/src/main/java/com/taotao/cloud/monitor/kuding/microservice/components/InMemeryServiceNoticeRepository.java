@@ -43,7 +43,7 @@ public class InMemeryServiceNoticeRepository implements ServiceNoticeRepository 
 
 	@Override
 	public void addLackServices(String... serviceName) {
-		Set<String> set = new HashSet<String>();
+		Set<String> set = new HashSet<>();
 		set.addAll(Arrays.asList(serviceName));
 		currentReport.putLackServices(set);
 	}

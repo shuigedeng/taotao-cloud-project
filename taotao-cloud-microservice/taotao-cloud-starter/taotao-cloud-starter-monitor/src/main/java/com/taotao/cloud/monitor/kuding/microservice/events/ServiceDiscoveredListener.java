@@ -48,9 +48,10 @@ public class ServiceDiscoveredListener implements ApplicationListener<ServiceDis
 			List<ServiceInstance> list = discoveryClient.getInstances(x);
 			ServiceCheck serviceCheck = map.getOrDefault(x, defaultServiceCheck);
 			int serviceCount = serviceCheck == defaultServiceCheck ? list.size() : serviceCheck.getServiceCount();
-			if (list.size() < serviceCount)
+			if (list.size() < serviceCount) {
 				applicationEventPublisher.publishEvent(new ServiceInstanceLackEvent(this, x, serviceCount,
 						list.stream().map(y -> y.getInstanceId()).collect(toSet())));
+			}
 			if (event.getAdditionalServices().contains(x)) {
 				serviceCheckControl.add(x, serviceCheck);
 			}

@@ -66,6 +66,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.HandlerExecutionChain;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 /**
  * 全局统一返回值 包装器
@@ -82,6 +84,8 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+
+
 		LogUtil.started(ExceptionAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
@@ -433,6 +437,15 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Exception e) {
+		RequestMappingHandlerMapping re = new RequestMappingHandlerMapping();
+		try {
+			HandlerExecutionChain chain = re.getHandler((HttpServletRequest) req.getNativeRequest());
+			Object handler = chain.getHandler();
+
+		} catch (Exception ex) {
+			LogUtil.error(e);
+		}
+
 		LogUtil.error(e);
 		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());

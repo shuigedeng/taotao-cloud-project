@@ -22,7 +22,7 @@ import com.taotao.cloud.core.configuration.MonitorAutoConfiguration;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.collect.HealthReportFilter;
-import com.taotao.cloud.monitor.endpoint.SystemHealthEndPoint;
+import com.taotao.cloud.monitor.endpoint.MonitorEndPoint;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 import com.taotao.cloud.monitor.properties.MonitorProperties;
 import com.taotao.cloud.monitor.strategy.WarnStrategy;
@@ -67,8 +67,8 @@ public class HealthAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public SystemHealthEndPoint systemHealthEndPoint(HealthCheckProvider healthCheckProvider) {
-		return new SystemHealthEndPoint(healthCheckProvider);
+	public MonitorEndPoint systemHealthEndPoint(HealthCheckProvider healthCheckProvider) {
+		return new MonitorEndPoint(healthCheckProvider);
 	}
 
 	@Bean
