@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
@@ -58,7 +58,7 @@ public class SkuPromotionRender implements ICartRenderStep {
 				PriceDetailDTO priceDetailDTO = cartSkuVO.getPriceDetailDTO();
 				priceDetailDTO.setGoodsPrice(cartSkuVO.getSubTotal());
 				priceDetailDTO.setDiscountPrice(
-					CurrencyUtil.sub(priceDetailDTO.getOriginalPrice(), cartSkuVO.getSubTotal()));
+					CurrencyUtils.sub(priceDetailDTO.getOriginalPrice(), cartSkuVO.getSubTotal()));
 			})
 		);
 	}
@@ -139,7 +139,7 @@ public class SkuPromotionRender implements ICartRenderStep {
 								promotionGoods.getPromotionType(), promotionGoods.getPromotionId());
 							cartSkuVO.setPurchasePrice(promotionGoods.getPrice());
 							cartSkuVO.setSubTotal(
-								CurrencyUtil.mul(promotionGoods.getPrice(), cartSkuVO.getNum()));
+								CurrencyUtils.mul(promotionGoods.getPrice(), cartSkuVO.getNum()));
 							cartSkuVO.getPriceDetailDTO().setGoodsPrice(cartSkuVO.getSubTotal());
 
 							cartSkuVO.getPriceDetailDTO().getJoinPromotion().add(promotionSkuVO);

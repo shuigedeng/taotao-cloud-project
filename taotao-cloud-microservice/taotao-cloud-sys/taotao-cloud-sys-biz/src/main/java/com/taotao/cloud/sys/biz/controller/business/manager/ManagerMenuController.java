@@ -20,8 +20,8 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
@@ -136,7 +136,7 @@ public class ManagerMenuController extends
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/current/user")
 	public Result<List<MenuQueryVO>> findCurrentUserResource() {
-		Set<String> roleCodes = SecurityUtil.getCurrentUser().getRoles();
+		Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return success(new ArrayList<>());
 		}
@@ -149,7 +149,7 @@ public class ManagerMenuController extends
 	@GetMapping("/current/user/tree")
 	public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
 		@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
-		Set<String> roleCodes = SecurityUtil.getCurrentUser().getRoles();
+		Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return Result.success(Collections.emptyList());
 		}
@@ -220,7 +220,7 @@ public class ManagerMenuController extends
 
 	public Result<Boolean> testSeataException(BlockException e) {
 		e.printStackTrace();
-		LogUtil.error(" 该接口已经被限流啦", e);
+		LogUtils.error(" 该接口已经被限流啦", e);
 		return Result.fail("该接口已经被限流啦");
 	}
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.redis.ratelimiter;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.spel.ExpressionEvaluator;
 import com.taotao.cloud.common.model.CharPool;
 import java.lang.reflect.Method;
@@ -72,7 +72,7 @@ public class RedisRateLimiterAspect implements ApplicationContextAware {
 		String limitParam = limiter.param();
 		// 表达式不为空
 		String rateKey;
-		if (StringUtil.isNotBlank(limitParam)) {
+		if (StringUtils.isNotBlank(limitParam)) {
 			String evalAsText = evalLimitParam(point, limitParam);
 			rateKey = limitKey + CharPool.COLON + evalAsText;
 		} else {

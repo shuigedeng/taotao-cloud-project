@@ -1,21 +1,17 @@
 package com.taotao.cloud.data.mybatis.plus.pagehelper;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 
 public class SQLFilter {
 
 	public static String sqlInject(String str) {
-		if (StringUtil.isBlank(str)) {
+		if (StringUtils.isBlank(str)) {
 			return null;
 		}        // 去掉'|"|;|\字符
-		str = StringUtil.replace(str, "'", "");
-		str = StringUtil.replace(str, "\"", "");
-		str = StringUtil.replace(str, ";", "");
-		str = StringUtil.replace(str, "\\",
+		str = StringUtils.replace(str, "'", "");
+		str = StringUtils.replace(str, "\"", "");
+		str = StringUtils.replace(str, ";", "");
+		str = StringUtils.replace(str, "\\",
 			"");        // 转换成小写
 		str = str.toLowerCase();        // 非法字符
 		String[] keywords = {"master", "truncate", "insert", "select", "delete", "update",

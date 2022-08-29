@@ -17,8 +17,8 @@ package com.taotao.cloud.captcha.service.impl;
 
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 
@@ -34,7 +34,7 @@ public class CaptchaCacheServiceRedisImpl implements CaptchaCacheService {
 	private final RedisRepository redisRepository;
 
 	public CaptchaCacheServiceRedisImpl() {
-		RedisRepository bean = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository bean = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.isNull(bean)) {
 			throw new CaptchaException("redis 未初始化");
 		}
@@ -68,7 +68,7 @@ public class CaptchaCacheServiceRedisImpl implements CaptchaCacheService {
 	@Override
 	public Long increment(String key, long val) {
 		String s = get(key);
-		if (StringUtil.isEmpty(s)) {
+		if (StringUtils.isEmpty(s)) {
 			return null;
 		}
 		Long ret = Long.parseLong(s) + val;

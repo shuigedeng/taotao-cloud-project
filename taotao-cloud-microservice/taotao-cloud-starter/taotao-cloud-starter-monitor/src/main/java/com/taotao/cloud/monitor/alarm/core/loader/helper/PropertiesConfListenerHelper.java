@@ -1,6 +1,6 @@
 package com.taotao.cloud.monitor.alarm.core.loader.helper;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.alarm.core.entity.AlarmConfig;
 import java.io.File;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class PropertiesConfListenerHelper {
 
             return true;
         } catch (Exception e) {
-            LogUtil.error("register properties change listener error! e:{}", e);
+            LogUtils.error("register properties change listener error! e:{}", e);
             return false;
         }
     }
@@ -50,7 +50,7 @@ public class PropertiesConfListenerHelper {
         public void onFileChange(File file) {
             System.out.println("change >>> " + System.currentTimeMillis());
             Map<String, AlarmConfig> ans = func.apply(file); // 如果加载失败，打印一条日志
-	        LogUtil.warn("PropertiesConfig changed! reload ans: {}", ans);
+	        LogUtils.warn("PropertiesConfig changed! reload ans: {}", ans);
         }
     }
 }

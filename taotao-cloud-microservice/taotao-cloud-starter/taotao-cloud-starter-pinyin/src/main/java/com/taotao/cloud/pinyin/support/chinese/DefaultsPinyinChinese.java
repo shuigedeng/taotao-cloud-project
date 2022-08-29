@@ -1,7 +1,7 @@
 package com.taotao.cloud.pinyin.support.chinese;
 
-import com.taotao.cloud.common.utils.lang.CharUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.CharUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.spi.IPinyinChinese;
 
 /**
@@ -19,7 +19,7 @@ public class DefaultsPinyinChinese implements IPinyinChinese {
         // 如果没有全部匹配，那么就降级为单个字的拼音处理。
 
         // 只要包含一个中文字符，则认为是
-        if(StringUtil.isEmpty(original)) {
+        if(StringUtils.isEmpty(original)) {
             return false;
         }
 
@@ -35,7 +35,7 @@ public class DefaultsPinyinChinese implements IPinyinChinese {
 
     @Override
     public boolean isChinese(char original) {
-        return CharUtil.isNotAscii(original);
+        return CharUtils.isNotAscii(original);
     }
 
     @Override

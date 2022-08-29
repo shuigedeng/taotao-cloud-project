@@ -17,7 +17,7 @@
 
 package com.taotao.cloud.xss.filter;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -40,7 +40,7 @@ public class XssHttpServletFilter implements Filter {
 		FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(request);
-		LogUtil.info("XssHttpServletFilter wrapper request for [{}].", request.getRequestURI());
+		LogUtils.info("XssHttpServletFilter wrapper request for [{}].", request.getRequestURI());
 		filterChain.doFilter(xssRequest, servletResponse);
 	}
 }

@@ -22,7 +22,7 @@ import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
@@ -62,7 +62,7 @@ public class QiniuUploadFileServiceImpl extends AbstractUploadFileService {
 			uploadFileInfo.setUrl(properties.getDomain() + "/" + uploadFileInfo.getName());
 			return uploadFileInfo;
 		} catch (IOException e) {
-			LogUtil.error("[qiniu]文件上传失败:", e);
+			LogUtils.error("[qiniu]文件上传失败:", e);
 			throw new UploadFileException("[qiniu]文件上传失败");
 		}
 	}
@@ -76,7 +76,7 @@ public class QiniuUploadFileServiceImpl extends AbstractUploadFileService {
 			uploadFileInfo.setUrl(properties.getDomain() + "/" + uploadFileInfo.getName());
 			return uploadFileInfo;
 		} catch (QiniuException e) {
-			LogUtil.error("[qiniu]文件上传失败:", e);
+			LogUtils.error("[qiniu]文件上传失败:", e);
 			throw new UploadFileException("[qiniu]文件上传失败");
 		}
 	}
@@ -86,7 +86,7 @@ public class QiniuUploadFileServiceImpl extends AbstractUploadFileService {
 		try {
 			bucketManager.delete(properties.getBucketName(), uploadFileInfo.getUrl());
 		} catch (QiniuException e) {
-			LogUtil.error("[qiniu]文件删除失败:", e);
+			LogUtils.error("[qiniu]文件删除失败:", e);
 			throw new UploadFileException("[qiniu]文件删除失败");
 		}
 		return uploadFileInfo;

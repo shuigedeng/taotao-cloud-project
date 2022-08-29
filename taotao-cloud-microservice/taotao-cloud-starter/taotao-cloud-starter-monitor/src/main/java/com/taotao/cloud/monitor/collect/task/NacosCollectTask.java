@@ -8,10 +8,10 @@ import com.alibaba.nacos.api.naming.pojo.ListView;
 import com.alibaba.nacos.api.naming.pojo.ServiceInfo;
 import com.alibaba.nacos.client.naming.NacosNamingService;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
@@ -59,20 +59,20 @@ public class NacosCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			Collector collector = Collector.getCollector();
-			NacosServiceManager nacosServiceManager = ContextUtil.getBean(NacosServiceManager.class,
+			NacosServiceManager nacosServiceManager = ContextUtils.getBean(NacosServiceManager.class,
 				false);
 			if (Objects.nonNull(collector) && Objects.nonNull(nacosServiceManager)) {
 				NacosClientInfo info = new NacosClientInfo();
 
-				NamingService namingService = ReflectionUtil.getFieldValue(nacosServiceManager,
+				NamingService namingService = ReflectionUtils.getFieldValue(nacosServiceManager,
 					"namingService");
 				NacosNamingService nacosNamingService = (NacosNamingService) namingService;
 
-				info.namespace = ReflectionUtil.getFieldValue(nacosNamingService, "namespace");
-				info.endpoint = ReflectionUtil.getFieldValue(nacosNamingService, "endpoint");
-				info.serverList = ReflectionUtil.getFieldValue(nacosNamingService, "serverList");
-				info.cacheDir = ReflectionUtil.getFieldValue(nacosNamingService, "cacheDir");
-				info.logName = ReflectionUtil.getFieldValue(nacosNamingService, "logName");
+				info.namespace = ReflectionUtils.getFieldValue(nacosNamingService, "namespace");
+				info.endpoint = ReflectionUtils.getFieldValue(nacosNamingService, "endpoint");
+				info.serverList = ReflectionUtils.getFieldValue(nacosNamingService, "serverList");
+				info.cacheDir = ReflectionUtils.getFieldValue(nacosNamingService, "cacheDir");
+				info.logName = ReflectionUtils.getFieldValue(nacosNamingService, "logName");
 
 				//HostReactor hostReactor = ReflectionUtil.getFieldValue(nacosNamingService,
 				//	"hostReactor");
@@ -83,7 +83,7 @@ public class NacosCollectTask extends AbstractCollectTask {
 				//info.serviceInfoMap = hostReactor.getServiceInfoMap();
 
 				info.instances = nacosNamingService.getAllInstances(
-					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+					PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
 					CommonConstant.SPRING_APP_NAME_KEY);
 				info.servicesOfServer = nacosNamingService.getServicesOfServer(0,
 					Integer.MAX_VALUE);
@@ -93,8 +93,8 @@ public class NacosCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

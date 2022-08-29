@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.xxl.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.TimedTaskJobHandler;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.beans.factory.InitializingBean;
@@ -23,7 +23,7 @@ public class TimeTaskAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(TimeTaskAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(TimeTaskAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 }

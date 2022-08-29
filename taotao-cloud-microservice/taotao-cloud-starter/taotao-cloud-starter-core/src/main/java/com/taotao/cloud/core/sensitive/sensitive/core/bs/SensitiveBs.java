@@ -3,7 +3,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.bs;
 import com.taotao.cloud.common.support.deepcopy.FastJsonDeepCopy;
 import com.taotao.cloud.common.support.deepcopy.IDeepCopy;
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.common.ArgUtil;
+import com.taotao.cloud.common.utils.common.ArgUtils;
 import com.taotao.cloud.core.sensitive.sensitive.api.ISensitive;
 import com.taotao.cloud.core.sensitive.sensitive.api.ISensitiveConfig;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveService;
@@ -44,7 +44,7 @@ public final class SensitiveBs {
      * @since 0.0.9
      */
     public SensitiveBs deepCopy(IDeepCopy deepCopy) {
-        ArgUtil.notNull(deepCopy, "deepCopy");
+        ArgUtils.notNull(deepCopy, "deepCopy");
 
         this.deepCopy = deepCopy;
         return this;

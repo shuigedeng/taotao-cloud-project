@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.interceptor;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.web.properties.InterceptorProperties;
 import java.util.Map;
@@ -84,7 +84,7 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 					statisticMap.put(methodPath, staticInfo);
 				}
 
-				Collector collector = ContextUtil.getBean(Collector.class, true);
+				Collector collector = ContextUtils.getBean(Collector.class, true);
 				if (Objects.nonNull(collector)) {
 					collector.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
 				}

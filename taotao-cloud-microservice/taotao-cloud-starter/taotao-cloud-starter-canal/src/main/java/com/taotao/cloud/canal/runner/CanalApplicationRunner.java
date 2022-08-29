@@ -16,7 +16,7 @@
 package com.taotao.cloud.canal.runner;
 
 import com.taotao.cloud.canal.interfaces.CanalClient;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Objects;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -43,13 +43,13 @@ public class CanalApplicationRunner implements ApplicationRunner {
 	public void run(ApplicationArguments applicationArguments) throws Exception {
 		if (Objects.nonNull(canalClient)) {
 			try {
-				LogUtil.info(" CanalClient 正在尝试开启 canal 客户端....");
+				LogUtils.info(" CanalClient 正在尝试开启 canal 客户端....");
 
 				canalClient.start();
 
-				LogUtil.info(" CanalClient 启动 canal 客户端成功....");
+				LogUtils.info(" CanalClient 启动 canal 客户端成功....");
 			} catch (Exception e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 		}
 	}

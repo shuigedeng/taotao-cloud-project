@@ -3,12 +3,10 @@ package com.taotao.cloud.member.biz.api.controller.buyer.connect;
 
 
 import cn.hutool.core.lang.UUID;
-import com.alibaba.nacos.common.utils.UuidUtils;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
@@ -24,7 +22,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,7 +102,7 @@ public class ConnectWebBindController {
 		try {
 			return Result.success(connectService.appLoginCallback(authUser, uuid));
 		} catch (Exception e) {
-			LogUtil.error("unionID登录错误", e);
+			LogUtils.error("unionID登录错误", e);
 		}
 		return null;
 	}

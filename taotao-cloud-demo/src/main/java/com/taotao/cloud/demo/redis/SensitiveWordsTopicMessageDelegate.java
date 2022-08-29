@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.demo.redis;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,6 +29,6 @@ import org.springframework.stereotype.Component;
 public class SensitiveWordsTopicMessageDelegate {
 
 	public void handleSensitiveWords(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 }

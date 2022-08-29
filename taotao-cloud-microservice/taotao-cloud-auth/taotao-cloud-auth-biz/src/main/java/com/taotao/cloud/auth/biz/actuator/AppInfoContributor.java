@@ -1,6 +1,6 @@
 package com.taotao.cloud.auth.biz.actuator;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ public class AppInfoContributor implements InfoContributor {
 
 	public AppInfoContributor(@Value("${release:1}") String release,
 		@Value("${build:7}") String build) {
-		LogUtil.debug("in AppInfoContributor release=" + release + " build=" + build);
+		LogUtils.debug("in AppInfoContributor release=" + release + " build=" + build);
 		appInfoMap.put("release", release);
 		appInfoMap.put("build", build);
 	}
@@ -29,7 +29,7 @@ public class AppInfoContributor implements InfoContributor {
 	// http://127.0.0.1:9000/springauthserver/actuator/info
 	@Override
 	public void contribute(Builder builder) {
-		LogUtil.debug("in contribute");
+		LogUtils.debug("in contribute");
 		builder.withDetails(appInfoMap);
 	}
 

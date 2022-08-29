@@ -4,8 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
@@ -98,7 +98,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	public void orderChange(OrderMessage orderMessage) {
 		//如果订单已支付
 		if (orderMessage.newStatus().equals(OrderStatusEnum.PAID)) {
-			LogUtil.info("满减活动，订单状态操作 {}", CachePrefix.ORDER.getPrefix() + orderMessage.orderSn());
+			LogUtils.info("满减活动，订单状态操作 {}", CachePrefix.ORDER.getPrefix() + orderMessage.orderSn());
 			renderGift(JSONUtil.toBean(redisRepository.get(CachePrefix.ORDER.getPrefix() + orderMessage.getOrderSn()).toString(), CartVO.class), orderMessage);
 		}
 	}
@@ -124,7 +124,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 					order.getMemberId(), "订单满优惠赠送积分" + cartVO.giftPoint());
 			}
 		} catch (Exception e) {
-			LogUtil.error("订单赠送积分异常", e);
+			LogUtils.error("订单赠送积分异常", e);
 		}
 
 
@@ -134,7 +134,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 				cartVO.giftCouponList().forEach(couponId -> memberCouponService.receiveCoupon(couponId, order.getMemberId(), order.getMemberName()));
 			}
 		} catch (Exception e) {
-			LogUtil.error("订单赠送优惠券异常", e);
+			LogUtils.error("订单赠送优惠券异常", e);
 		}
 
 		try {
@@ -143,7 +143,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 				generatorGiftOrder(cartVO.giftList(), order);
 			}
 		} catch (Exception e) {
-			LogUtil.error("订单赠送赠品异常", e);
+			LogUtils.error("订单赠送赠品异常", e);
 		}
 	}
 
@@ -160,7 +160,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 
 		//赠品判定
 		if (goodsSkus == null || goodsSkus.isEmpty()) {
-			LogUtil.error("赠品不存在：{}", skuIds);
+			LogUtils.error("赠品不存在：{}", skuIds);
 			return;
 		}
 
@@ -206,7 +206,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		BeanUtil.copyProperties(originOrder, order, "id");
 		BeanUtil.copyProperties(priceDetailDTO, order, "id");
 		//生成订单参数
-		order.setSn(IdGeneratorUtil.createStr("G"));
+		order.setSn(IdGeneratorUtils.createStr("G"));
 		order.setOrderPromotionType(OrderPromotionTypeEnum.GIFT.name());
 		order.setOrderStatus(OrderStatusEnum.UNPAID.name());
 		order.setPayStatus(PayStatusEnum.PAID.name());

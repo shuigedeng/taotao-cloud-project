@@ -1,7 +1,7 @@
 package com.taotao.cloud.sign.util;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
 import org.springframework.util.StringUtils;
 
@@ -24,7 +24,7 @@ public class CheckUtils {
 	 */
 	public static String checkAndGetKey(String k1, String k2, String keyName) {
 		if (!StringUtils.hasText(k1) && !StringUtils.hasText(k2)) {
-			LogUtil.error("{} is not configured (未配置{})", keyName, keyName);
+			LogUtils.error("{} is not configured (未配置{})", keyName, keyName);
 			throw new EncryptDtguaiException(String.format("%s is not configured (未配置%s)", keyName, keyName));
 		}
 		return StringUtils.hasText(k2) ? k2 : k1;

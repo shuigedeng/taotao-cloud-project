@@ -1,7 +1,7 @@
 package com.taotao.cloud.media.biz.media.init;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.entity.Camera;
@@ -57,7 +57,7 @@ public class InitServer implements CommandLineRunner {
         if (StrUtil.isEmpty(path)) {
             path = "";
         }
-		LogUtil.info("\n--------------------------------------------------------- \n" +
+		LogUtils.info("\n--------------------------------------------------------- \n" +
                 "\t EasyMedia is running! Access address: \n" +
                 "\t media port at : \t {} \n" +
                 "\t http port at : \t {} \n" +
@@ -85,7 +85,7 @@ public class InitServer implements CommandLineRunner {
 	public void initAutoPlay() {
 		List<Camera> selectList = cameraMapper.selectList(null);
 		if (null != selectList && !selectList.isEmpty()) {
-			LogUtil.info("已启动自动拉流！");
+			LogUtils.info("已启动自动拉流！");
 			
 			for (Camera camera : selectList) {
 				//已启用的自动拉流，不启用的不自动拉
@@ -107,7 +107,7 @@ public class InitServer implements CommandLineRunner {
 
 		}
 
-		LogUtil.info("您还可以通过restful api添加或删除流！");
+		LogUtils.info("您还可以通过restful api添加或删除流！");
 	}
 
 	/**
@@ -131,6 +131,6 @@ public class InitServer implements CommandLineRunner {
 		 */
 		String ffmpeg = Loader.load(org.bytedeco.ffmpeg.ffmpeg.class);
 		System.setProperty(MediaConstant.ffmpegPathKey, ffmpeg);
-		LogUtil.info("初始化资源成功");
+		LogUtils.info("初始化资源成功");
 	}
 }

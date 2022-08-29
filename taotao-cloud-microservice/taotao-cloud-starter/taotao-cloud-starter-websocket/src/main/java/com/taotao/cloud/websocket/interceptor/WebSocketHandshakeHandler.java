@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.websocket.interceptor;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.domain.WebSocketPrincipal;
 import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import java.security.Principal;
@@ -49,7 +49,7 @@ public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 
 		Principal principal = request.getPrincipal();
 		if (ObjectUtils.isNotEmpty(principal)) {
-			LogUtil.info("Get user principal from request, value is  [{}].",
+			LogUtils.info("Get user principal from request, value is  [{}].",
 				principal.getName());
 			return principal;
 		}
@@ -63,12 +63,12 @@ public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 				if (ObjectUtils.isEmpty(user)) {
 					user = httpServletRequest.getHeader("X-taotao-Session");
 				} else {
-					LogUtil.info(
+					LogUtils.info(
 						"Get user principal [{}] from request parameter, use parameter  [{}]..",
 						user, customWebSocketProperties.getPrincipalAttribute());
 				}
 			} else {
-				LogUtil.info(
+				LogUtils.info(
 					"Get user principal [{}] from request attribute, use attribute  [{}]..",
 					user, customWebSocketProperties.getPrincipalAttribute());
 			}
@@ -81,16 +81,16 @@ public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 				if (ObjectUtils.isEmpty(user)) {
 					user = httpSession.getId();
 				} else {
-					LogUtil.info(
+					LogUtils.info(
 						"Get user principal [{}] from httpsession, use attribute  [{}].",
 						user, customWebSocketProperties.getPrincipalAttribute());
 				}
 			} else {
-				LogUtil.error("Cannot find session from websocket request.");
+				LogUtils.error("Cannot find session from websocket request.");
 				return null;
 			}
 		} else {
-			LogUtil.info(
+			LogUtils.info(
 				"Get user principal [{}] from request header X_TAOTAO_SESSION.",
 				user);
 		}

@@ -3,12 +3,12 @@ package com.taotao.cloud.store.api.web.query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serial;
-import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -64,10 +64,10 @@ public class StorePageQuery extends PageParam {
 	    }
 	    //按时间查询
 	    if (StringUtils.isNotEmpty(startDate)) {
-	        queryWrapper.ge("create_time", DateUtil.parse(startDate));
+	        queryWrapper.ge("create_time", DateUtils.parse(startDate));
 	    }
 	    if (StringUtils.isNotEmpty(endDate)) {
-	        queryWrapper.le("create_time", DateUtil.parse(endDate));
+	        queryWrapper.le("create_time", DateUtils.parse(endDate));
 	    }
 	    return queryWrapper;
 	}

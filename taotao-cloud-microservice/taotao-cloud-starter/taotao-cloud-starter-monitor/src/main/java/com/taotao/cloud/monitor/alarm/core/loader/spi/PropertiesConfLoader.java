@@ -2,7 +2,7 @@ package com.taotao.cloud.monitor.alarm.core.loader.spi;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.alarm.core.entity.AlarmConfig;
 import com.taotao.cloud.monitor.alarm.core.loader.api.IConfLoader;
 import com.taotao.cloud.monitor.alarm.core.loader.entity.RegisterInfo;
@@ -51,7 +51,7 @@ public class PropertiesConfLoader implements IConfLoader {
         // 注册配置文件的变动
         ans = ans && PropertiesConfListenerHelper.registerConfChangeListener(file, this::init);
         if (ans) {
-            LogUtil.info("PropertiesConfLoader registerConfChangeListener success!");
+            LogUtils.info("PropertiesConfLoader registerConfChangeListener success!");
         }
         return ans;
     }
@@ -65,7 +65,7 @@ public class PropertiesConfLoader implements IConfLoader {
             String config = Joiner.on("").join(list);
             tmp = AlarmConfParse.parseConfig(config, Splitter.on(",").splitToList(registerInfo.getDefaultAlarmUsers()));
         } catch (IOException e) {
-            LogUtil.error("load config into cacheMap error! e: {}", e);
+            LogUtils.error("load config into cacheMap error! e: {}", e);
             return null;
         }
 

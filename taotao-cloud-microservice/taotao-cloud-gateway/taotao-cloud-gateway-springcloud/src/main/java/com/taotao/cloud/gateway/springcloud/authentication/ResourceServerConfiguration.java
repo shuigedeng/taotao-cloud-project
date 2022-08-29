@@ -23,10 +23,10 @@ import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.support.function.FuncUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.springcloud.exception.InvalidTokenException;
 import com.taotao.cloud.gateway.springcloud.properties.SecurityProperties;
 import java.util.List;
@@ -73,21 +73,21 @@ public class ResourceServerConfiguration {
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 
 		ServerAuthenticationEntryPoint serverAuthenticationEntryPoint = (exchange, e) -> {
-			LogUtil.error(e, "user authentication error : {}", e.getMessage());
+			LogUtils.error(e, "user authentication error : {}", e.getMessage());
 
 			if (e instanceof InvalidBearerTokenException) {
-				return ResponseUtil.fail(exchange, "无效的token");
+				return ResponseUtils.fail(exchange, "无效的token");
 			}
 
 			if (e instanceof InvalidTokenException) {
-				return ResponseUtil.fail(exchange, e.getMessage());
+				return ResponseUtils.fail(exchange, e.getMessage());
 			}
 
-			return ResponseUtil.fail(exchange, ResultEnum.UNAUTHORIZED);
+			return ResponseUtils.fail(exchange, ResultEnum.UNAUTHORIZED);
 		};
 		ServerAccessDeniedHandler serverAccessDeniedHandler = (exchange, e) -> {
-			LogUtil.error(e, "user access denied error : {}", e.getMessage());
-			return ResponseUtil.fail(exchange, ResultEnum.FORBIDDEN);
+			LogUtils.error(e, "user access denied error : {}", e.getMessage());
+			return ResponseUtils.fail(exchange, ResultEnum.FORBIDDEN);
 		};
 
 		//ServerBearerTokenAuthenticationConverter serverBearerTokenAuthenticationConverter =
@@ -200,8 +200,8 @@ public class ResourceServerConfiguration {
 								.jwsAlgorithm(SignatureAlgorithm.RS256)
 								.build();
 							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-							ContextUtil.destroySingletonBean("reactiveJwtDecoder");
-							ContextUtil.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+							ContextUtils.destroySingletonBean("reactiveJwtDecoder");
+							ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
 						}
 					});
 		}

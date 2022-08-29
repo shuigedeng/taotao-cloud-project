@@ -4,8 +4,8 @@ package com.taotao.cloud.security.jwt.utils;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.jwt.model.ContextConstants;
 import com.taotao.cloud.security.jwt.model.ExceptionCode;
 import com.taotao.cloud.security.jwt.model.Token;
@@ -123,7 +123,7 @@ public final class JwtUtil {
 		Token tokenInfo = new Token();
 		tokenInfo.setToken(builder.compact());
 		tokenInfo.setExpire(expire);
-		tokenInfo.setExpiration(DateUtil.date2LocalDateTime(exp));
+		tokenInfo.setExpiration(DateUtils.date2LocalDateTime(exp));
 		return tokenInfo;
 	}
 
@@ -144,28 +144,28 @@ public final class JwtUtil {
 			//.getBody();
 			return null;
 		} catch (ExpiredJwtException ex) {
-			LogUtil.error("token=[{}], 过期", jsonWebToken, ex);
+			LogUtils.error("token=[{}], 过期", jsonWebToken, ex);
 			//过期
 			//throw new BizException(ExceptionCode.JWT_TOKEN_EXPIRED.getCode(),
 			//		ExceptionCode.JWT_TOKEN_EXPIRED.getMsg(), ex);
 			throw new BusinessException(ExceptionCode.JWT_TOKEN_EXPIRED.getCode(),
 					ExceptionCode.JWT_TOKEN_EXPIRED.getMsg());
 		} catch (SignatureException ex) {
-			LogUtil.error("token=[{}] 签名错误", jsonWebToken, ex);
+			LogUtils.error("token=[{}] 签名错误", jsonWebToken, ex);
 			//签名错误
 			//throw new BizException(ExceptionCode.JWT_SIGNATURE.getCode(),
 			//		ExceptionCode.JWT_SIGNATURE.getMsg(), ex);
 			throw new BusinessException(ExceptionCode.JWT_SIGNATURE.getCode(),
 					ExceptionCode.JWT_SIGNATURE.getMsg());
 		} catch (IllegalArgumentException ex) {
-			LogUtil.error("token=[{}] 为空", jsonWebToken, ex);
+			LogUtils.error("token=[{}] 为空", jsonWebToken, ex);
 			//token 为空
 			//throw new BizException(ExceptionCode.JWT_ILLEGAL_ARGUMENT.getCode(),
 			//		ExceptionCode.JWT_ILLEGAL_ARGUMENT.getMsg(), ex);
 			throw new BusinessException(ExceptionCode.JWT_ILLEGAL_ARGUMENT.getCode(),
 					ExceptionCode.JWT_ILLEGAL_ARGUMENT.getMsg());
 		} catch (Exception e) {
-			LogUtil.error("token=[{}] errCode:{}, message:{}", jsonWebToken,
+			LogUtils.error("token=[{}] errCode:{}, message:{}", jsonWebToken,
 					ExceptionCode.JWT_PARSER_TOKEN_FAIL.getCode(), e.getMessage(), e);
 			//throw new BizException(JWT_PARSER_TOKEN_FAIL.getCode(), JWT_PARSER_TOKEN_FAIL.getMsg(),
 			//		e);
@@ -182,7 +182,7 @@ public final class JwtUtil {
 		if (token.startsWith(ContextConstants.BEARER_HEADER_PREFIX)) {
 			return StrUtil.subAfter(token, ContextConstants.BEARER_HEADER_PREFIX, false);
 		}
-		LogUtil.info("jsonWebToken={}", token);
+		LogUtils.info("jsonWebToken={}", token);
 		//throw BizException.wrap(ExceptionCode.JWT_PARSER_TOKEN_FAIL);
 		throw new BusinessException(ExceptionCode.JWT_PARSER_TOKEN_FAIL.name());
 	}
@@ -202,7 +202,7 @@ public final class JwtUtil {
 			String headStr = StrUtil.subAfter(token, ContextConstants.BEARER_HEADER_PREFIX, false);
 			return parseJwt(headStr, allowedClockSkewSeconds);
 		}
-		LogUtil.info("jsonWebToken={}", token);
+		LogUtils.info("jsonWebToken={}", token);
 		//throw BizException.wrap(ExceptionCode.JWT_PARSER_TOKEN_FAIL);
 		throw new BusinessException(ExceptionCode.JWT_PARSER_TOKEN_FAIL.name());
 	}

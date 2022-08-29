@@ -16,7 +16,7 @@
 package com.taotao.cloud.elasticsearch.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.elasticsearch.esearchx.EsContext;
 import com.taotao.cloud.elasticsearch.properties.ElasticsearchProperties;
 import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
@@ -59,14 +59,14 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ElasticsearchAutoConfiguration.class, StarterName.ELASTICSEARCH_STARTER);
+		LogUtils.started(ElasticsearchAutoConfiguration.class, StarterName.ELASTICSEARCH_STARTER);
 	}
 
 	@Configuration
 	public static class ElasticsearchConfig extends ElasticsearchConfiguration implements InitializingBean {
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(ElasticsearchConfig.class, StarterName.ELASTICSEARCH_STARTER);
+			LogUtils.started(ElasticsearchConfig.class, StarterName.ELASTICSEARCH_STARTER);
 		}
 
 		@Autowired

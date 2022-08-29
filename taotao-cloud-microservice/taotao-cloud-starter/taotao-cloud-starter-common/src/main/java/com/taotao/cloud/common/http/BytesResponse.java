@@ -18,8 +18,8 @@ package com.taotao.cloud.common.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.nio.charset.StandardCharsets;
 import okhttp3.*;
 import okhttp3.internal.Util;
@@ -31,7 +31,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.io.Charsets;
 
 /**
  * body 使用 bytes 避免流关闭的问题，同时为了更好的支持异步
@@ -102,34 +101,34 @@ public class BytesResponse implements ResponseSpec, Closeable {
 
 	@Override
 	public JsonNode asJsonNode() {
-		return JsonUtil.readTree(body);
+		return JsonUtils.readTree(body);
 	}
 
 	@Nullable
 	@Override
 	public <T> T asValue(Class<T> valueType) {
-		return JsonUtil.readValue(body, valueType);
+		return JsonUtils.readValue(body, valueType);
 	}
 
 	@Nullable
 	@Override
 	public <T> T asValue(TypeReference<T> typeReference) {
-		return JsonUtil.readValue(body, typeReference);
+		return JsonUtils.readValue(body, typeReference);
 	}
 
 	@Override
 	public <T> List<T> asList(Class<T> valueType) {
-		return JsonUtil.readList(body, valueType);
+		return JsonUtils.readList(body, valueType);
 	}
 
 	@Override
 	public <K, V> Map<K, V> asMap(Class<?> keyClass, Class<?> valueType) {
-		return JsonUtil.readMap(body, keyClass, valueType);
+		return JsonUtils.readMap(body, keyClass, valueType);
 	}
 
 	@Override
 	public <V> Map<String, V> asMap(Class<?> valueType) {
-		return JsonUtil.readMap(body, String.class, valueType);
+		return JsonUtils.readMap(body, String.class, valueType);
 	}
 
 	@Override
@@ -143,7 +142,7 @@ public class BytesResponse implements ResponseSpec, Closeable {
 		try {
 			return Files.write(path, body);
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -186,7 +185,7 @@ public class BytesResponse implements ResponseSpec, Closeable {
 		try {
 			return body.bytes();
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 

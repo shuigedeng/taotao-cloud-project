@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.roketmq.listener;
 
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.web.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
@@ -81,7 +81,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							Member.class);
 						memberRegisterEvent.memberRegister(member);
 					} catch (Exception e) {
-						LogUtil.error("会员{},在{}业务中，状态修改事件执行异常",
+						LogUtils.error("会员{},在{}业务中，状态修改事件执行异常",
 							new String(messageExt.getBody()),
 							memberRegisterEvent.getClass().getName(),
 							e);
@@ -97,7 +97,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							Member.class);
 						memberLoginEvent.memberLogin(member);
 					} catch (Exception e) {
-						LogUtil.error("会员{},在{}业务中，状态修改事件执行异常",
+						LogUtils.error("会员{},在{}业务中，状态修改事件执行异常",
 							new String(messageExt.getBody()),
 							memberLoginEvent.getClass().getName(),
 							e);
@@ -119,7 +119,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							new String(messageExt.getBody()), MemberPointMessageDTO.class);
 						memberPointChangeEvent.memberPointChange(memberPointMessageDTO);
 					} catch (Exception e) {
-						LogUtil.error("会员{},在{}业务中，状态修改事件执行异常",
+						LogUtils.error("会员{},在{}业务中，状态修改事件执行异常",
 							new String(messageExt.getBody()),
 							memberPointChangeEvent.getClass().getName(),
 							e);
@@ -134,7 +134,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							new String(messageExt.getBody()), MemberWithdrawalMessage.class);
 						memberWithdrawalEvent.memberWithdrawal(memberWithdrawalMessage);
 					} catch (Exception e) {
-						LogUtil.error("会员{},在{}业务中，提现事件执行异常",
+						LogUtils.error("会员{},在{}业务中，提现事件执行异常",
 							new String(messageExt.getBody()),
 							memberWithdrawalEvent.getClass().getName(),
 							e);

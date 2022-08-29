@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.api.controller.seller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.web.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
@@ -52,7 +52,7 @@ public class CategoryStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/all")
 	public Result<List<CategoryTreeVO>> getListAll() {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		//获取店铺经营范围
 		String goodsManagementCategory = storeDetailService.getStoreDetailVO(storeId).data()
 			.getGoodsManagementCategory();

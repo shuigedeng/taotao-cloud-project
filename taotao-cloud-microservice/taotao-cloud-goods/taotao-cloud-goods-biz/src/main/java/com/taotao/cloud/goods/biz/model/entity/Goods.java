@@ -7,7 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.web.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -266,22 +266,22 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 				throw new BusinessException(ResultEnum.GOODS_SKU_SN_ERROR);
 			}
 			//商品SKU价格不能小于等于0
-			if (StringUtil.isEmpty(sku.get("price").toString())
+			if (StringUtils.isEmpty(sku.get("price").toString())
 				|| Convert.toBigDecimal(sku.get("price")).compareTo(BigDecimal.ZERO) <= 0) {
 				throw new BusinessException(ResultEnum.GOODS_SKU_PRICE_ERROR);
 			}
 			//商品SKU成本价不能小于等于0
-			if (StringUtil.isEmpty(sku.get("cost").toString())
+			if (StringUtils.isEmpty(sku.get("cost").toString())
 				|| Convert.toBigDecimal(sku.get("cost")).compareTo(BigDecimal.ZERO) <= 0) {
 				throw new BusinessException(ResultEnum.GOODS_SKU_COST_ERROR);
 			}
 			//商品重量不能为负数 虚拟商品没有重量字段
-			if (sku.containsKey("weight") && (StringUtil.isEmpty(sku.get("weight").toString())
+			if (sku.containsKey("weight") && (StringUtils.isEmpty(sku.get("weight").toString())
 				|| Convert.toBigDecimal(sku.get("weight").toString()).compareTo(BigDecimal.ZERO) < 0)) {
 				throw new BusinessException(ResultEnum.GOODS_SKU_WEIGHT_ERROR);
 			}
 			//商品库存数量不能为负数
-			if (StringUtil.isEmpty(sku.get("quantity").toString())
+			if (StringUtils.isEmpty(sku.get("quantity").toString())
 				|| Convert.toInt(sku.get("quantity").toString()) < 0) {
 				throw new BusinessException(ResultEnum.GOODS_SKU_QUANTITY_ERROR);
 			}

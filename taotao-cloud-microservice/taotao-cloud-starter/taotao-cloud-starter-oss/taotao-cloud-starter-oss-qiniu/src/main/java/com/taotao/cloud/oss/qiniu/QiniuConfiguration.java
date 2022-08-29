@@ -20,7 +20,7 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.UploadFileService;
@@ -45,7 +45,7 @@ public class QiniuConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(QiniuConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(QiniuConfiguration.class, StarterName.OSS_STARTER);
 	}
 
 	private final QiniuProperties properties;

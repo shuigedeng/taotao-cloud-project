@@ -19,8 +19,8 @@ package com.taotao.cloud.logger.logging.appender;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.logging.config.MicaLoggingProperties;
 import com.taotao.cloud.logger.logging.utils.LogStashUtil;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
@@ -55,20 +55,20 @@ public class LoggingLogStashAppender implements ILoggingAppender {
 		customFields.put("profile", profile);
 		// 3. 自定义配置的字段
 		customFields.putAll(properties.getLogstash().getCustomFieldMap());
-		this.customFieldsJson = JsonUtil.toJson(customFields);
+		this.customFieldsJson = JsonUtils.toJson(customFields);
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 		this.start(context);
 	}
 
 	@Override
 	public void start(LoggerContext context) {
-		LogUtil.info("LogStash logging start.");
+		LogUtils.info("LogStash logging start.");
 		reload(context);
 	}
 
 	@Override
 	public void reset(LoggerContext context) {
-		LogUtil.info("LogStash logging reset.");
+		LogUtils.info("LogStash logging reset.");
 		reload(context);
 	}
 

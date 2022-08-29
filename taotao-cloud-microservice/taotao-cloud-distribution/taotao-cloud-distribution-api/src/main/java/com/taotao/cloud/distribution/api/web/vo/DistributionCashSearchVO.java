@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.api.web.vo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,13 +29,13 @@ public class DistributionCashSearchVO {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (StringUtil.isNotEmpty(memberName)) {
+		if (StringUtils.isNotEmpty(memberName)) {
 			queryWrapper.like("distribution_name", memberName);
 		}
-		if (StringUtil.isNotEmpty(sn)) {
+		if (StringUtils.isNotEmpty(sn)) {
 			queryWrapper.like("sn", sn);
 		}
-		if (StringUtil.isNotEmpty(distributionCashStatus)) {
+		if (StringUtils.isNotEmpty(distributionCashStatus)) {
 			queryWrapper.like("distribution_cash_status", distributionCashStatus);
 		}
 		return queryWrapper;

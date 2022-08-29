@@ -1,20 +1,17 @@
 package com.taotao.cloud.office.excel.core;
 
-import cn.hutool.core.stream.StreamUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.exception.ExcelAnalysisException;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.common.ValidatorUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Map;
 import java.util.Set;
-import org.springframework.util.StreamUtils;
 
 /**
  * Excel 导入监听
@@ -61,8 +58,8 @@ public class DefaultExcelListener<T> extends AnalysisEventListener<T> implements
             Integer columnIndex = excelDataConvertException.getColumnIndex();
             errMsg = StrUtil.format("第{}行-第{}列-表头{}: 解析异常<br/>",
                 rowIndex + 1, columnIndex + 1, headMap.get(columnIndex));
-            if (LogUtil.isDebugEnabled()) {
-	            LogUtil.error(errMsg);
+            if (LogUtils.isDebugEnabled()) {
+	            LogUtils.error(errMsg);
             }
         }
         if (exception instanceof ConstraintViolationException) {
@@ -81,7 +78,7 @@ public class DefaultExcelListener<T> extends AnalysisEventListener<T> implements
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
         this.headMap = headMap;
-	    LogUtil.debug("解析到一条表头数据: {}", JsonUtil.toJSONString(headMap));
+	    LogUtils.debug("解析到一条表头数据: {}", JsonUtils.toJSONString(headMap));
     }
 
     @Override
@@ -94,7 +91,7 @@ public class DefaultExcelListener<T> extends AnalysisEventListener<T> implements
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        LogUtil.debug("所有数据解析完成！");
+        LogUtils.debug("所有数据解析完成！");
     }
 
     @Override

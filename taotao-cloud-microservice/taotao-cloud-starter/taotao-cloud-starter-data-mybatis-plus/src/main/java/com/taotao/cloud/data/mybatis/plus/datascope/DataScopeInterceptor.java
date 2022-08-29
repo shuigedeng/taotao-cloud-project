@@ -20,7 +20,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +62,7 @@ public class DataScopeInterceptor  implements InnerInterceptor {
 		String scopeName = dataScope.getScopeName();
 		String selfScopeName = dataScope.getSelfScopeName();
 		Long userId =
-			dataScope.getUserId() == null ? SecurityUtil.getUserId() : dataScope.getUserId();
+			dataScope.getUserId() == null ? SecurityUtils.getUserId() : dataScope.getUserId();
 		List<Long> orgIds = dataScope.getOrgIds();
 		DataScopeTypeEnum dsType = DataScopeTypeEnum.SELF;
 		if (CollectionUtil.isEmpty(orgIds)) {

@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.connect.entity.enums;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,7 +47,7 @@ public enum AuthUserGender {
 	 */
 	public static AuthUserGender getWechatRealGender(String originalGender) {
 		String noGender = "0";
-		if (StringUtil.isEmpty(originalGender) || noGender.equals(originalGender)) {
+		if (StringUtils.isEmpty(originalGender) || noGender.equals(originalGender)) {
 			return AuthUserGender.UNKNOWN;
 		}
 		return getRealGender(originalGender);

@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.model.entity;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.web.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.web.vo.order.OrderVO;
@@ -172,7 +172,7 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 
 	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuSpecGalleryVO goodsSku, Member member, OrderVO order) {
 		//复制评价信息
-		BeanUtil.copyProperties(memberEvaluationDTO, this);
+		BeanUtils.copyProperties(memberEvaluationDTO, this);
 
 		//设置会员
 		this.memberId = member.getId();

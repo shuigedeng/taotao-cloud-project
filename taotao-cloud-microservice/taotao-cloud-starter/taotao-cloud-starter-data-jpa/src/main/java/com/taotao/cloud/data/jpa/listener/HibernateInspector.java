@@ -16,9 +16,9 @@
 package com.taotao.cloud.data.jpa.listener;
 
 import cn.hutool.db.sql.SqlFormatter;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
 import java.util.Objects;
 import org.hibernate.HibernateException;
@@ -45,10 +45,10 @@ public class HibernateInspector implements StatementInspector {
 
 		@Override
 		public void onSaveOrUpdate(SaveOrUpdateEvent event) {
-			Collector collector = ContextUtil.getBean(Collector.class, true);
+			Collector collector = ContextUtils.getBean(Collector.class, true);
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil
+					String replace = StringUtils
 						.nullToEmpty(SqlContextHolder.getSql())
 						.replace("\r", "")
 						.replace("\n", "");
@@ -72,11 +72,11 @@ public class HibernateInspector implements StatementInspector {
 
 		@Override
 		public void onDelete(DeleteEvent event) throws HibernateException {
-			Collector collector = ContextUtil.getBean(Collector.class, true);
+			Collector collector = ContextUtils.getBean(Collector.class, true);
 			String sql = SqlContextHolder.getSql();
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil.nullToEmpty(sql)
+					String replace = StringUtils.nullToEmpty(sql)
 						.replace("\r", "").replace("\n", "");
 					collector.hook("taotao.cloud.health.jpa.delete.sql.hook")
 						.run(replace, () -> {
@@ -98,11 +98,11 @@ public class HibernateInspector implements StatementInspector {
 		@Override
 		public void onLoad(LoadEvent event,
 			LoadType loadType) throws HibernateException {
-			Collector collector = ContextUtil.getBean(Collector.class, true);
+			Collector collector = ContextUtils.getBean(Collector.class, true);
 			String sql = SqlContextHolder.getSql();
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil.nullToEmpty(sql).replace("\r", "")
+					String replace = StringUtils.nullToEmpty(sql).replace("\r", "")
 						.replace("\n", "");
 					collector.hook("taotao.cloud.health.jpa.load.sql.hook")
 						.run(replace, () -> {
@@ -123,7 +123,7 @@ public class HibernateInspector implements StatementInspector {
 	public String inspect(String sql) {
 		this.sql = sql;
 
-		LogUtil.info(SqlFormatter.format(sql));
+		LogUtils.info(SqlFormatter.format(sql));
 
 		SqlContextHolder.setSql(sql);
 		return sql;

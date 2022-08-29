@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.utils;
 
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 
 /**
  * WarnUtils
@@ -78,15 +78,15 @@ public class WarnUtils {
 	 * @since 2021-09-02 20:59:11
 	 */
 	public static void notify(String alarmType, String title, String content, boolean isNow) {
-		Class<?> clazz = ReflectionUtil.classForName("com.taotao.cloud.health.warn.WarnProvider");
-		Object bean = ContextUtil.getBean(clazz, false);
+		Class<?> clazz = ReflectionUtils.classForName("com.taotao.cloud.health.warn.WarnProvider");
+		Object bean = ContextUtils.getBean(clazz, false);
 		if (bean != null) {
 			if (isNow) {
-				ReflectionUtil.callMethodWithParams(bean, "notifynow",
+				ReflectionUtils.callMethodWithParams(bean, "notifynow",
 					new String[]{alarmType, title, content}, String.class, String.class,
 					String.class);
 			} else {
-				ReflectionUtil.callMethodWithParams(bean, "notify",
+				ReflectionUtils.callMethodWithParams(bean, "notify",
 					new String[]{alarmType, title, content}, String.class, String.class,
 					String.class);
 			}

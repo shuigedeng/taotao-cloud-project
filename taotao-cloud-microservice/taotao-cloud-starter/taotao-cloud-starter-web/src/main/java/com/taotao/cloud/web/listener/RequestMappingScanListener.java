@@ -5,8 +5,8 @@ import static com.taotao.cloud.common.constant.CommonConstant.RESOURCE_EXPIRE;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.endpoint.RequestMappingEndPoint;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,7 +63,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 			// 获取微服务模块名称
 			String microService = env.getProperty(CommonConstant.SPRING_APP_NAME_KEY, "application");
 			if (redisService == null || applicationContext.containsBean("resourceServerConfiguration")) {
-				LogUtil.warn("[{}]忽略接口资源扫描", microService);
+				LogUtils.warn("[{}]忽略接口资源扫描", microService);
 				return;
 			}
 
@@ -130,7 +130,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 					auth = "1";
 				}
 
-				name = StringUtil.isBlank(name) ? methodName : name;
+				name = StringUtils.isBlank(name) ? methodName : name;
 				api.put("name", name);
 				api.put("notes", notes);
 				api.put("path", urls);
@@ -153,11 +153,11 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 
 			redisService.hset(RedisConstant.API_RESOURCE, microService, res, RESOURCE_EXPIRE);
 			redisService.sSetAndTime(RedisConstant.SERVICE_RESOURCE, RESOURCE_EXPIRE, microService);
-			LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]", microService, list.size(), RedisConstant.API_RESOURCE);
+			LogUtils.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]", microService, list.size(), RedisConstant.API_RESOURCE);
 
 			RequestMappingEndPoint.requestMappingHandlerMapping = res;
 		} catch (Exception e) {
-			LogUtil.error("error: {}", e.getMessage());
+			LogUtils.error("error: {}", e.getMessage());
 		}
 	}
 

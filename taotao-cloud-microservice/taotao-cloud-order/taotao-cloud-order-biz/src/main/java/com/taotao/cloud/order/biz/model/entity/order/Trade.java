@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
@@ -125,12 +125,12 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 	public Trade(TradeDTO tradeDTO) {
 	   Long originId = this.getId();
 	   if (tradeDTO.getMemberAddress() != null) {
-	       BeanUtil.copyProperties(tradeDTO.getMemberAddress(), this);
+	       BeanUtils.copyProperties(tradeDTO.getMemberAddress(), this);
 	       this.setConsigneeMobile(tradeDTO.getMemberAddress().getMobile());
 	       this.setConsigneeName(tradeDTO.getMemberAddress().getName());
 	   }
-	   BeanUtil.copyProperties(tradeDTO, this);
-	   BeanUtil.copyProperties(tradeDTO.getPriceDetailDTO(), this);
+	   BeanUtils.copyProperties(tradeDTO, this);
+	   BeanUtils.copyProperties(tradeDTO.getPriceDetailDTO(), this);
 	   this.setId(originId);
 	}
 

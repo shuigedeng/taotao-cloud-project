@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
@@ -279,7 +279,7 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 	public Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations) {
 		//禁用子分类
 		Category category = this.getById(categoryId);
-		CategoryTreeVO categoryTreeVO = BeanUtil.copy(category, CategoryTreeVO.class);
+		CategoryTreeVO categoryTreeVO = BeanUtils.copy(category, CategoryTreeVO.class);
 		List<Long> ids = new ArrayList<>();
 
 		assert categoryTreeVO != null;
@@ -329,7 +329,7 @@ public class CategoryServiceImpl extends ServiceImpl<ICategoryMapper, Category> 
 		List<Category> categories = this.list(queryWrapper);
 		List<CategoryTreeVO> categoryTreeVOList = new ArrayList<>();
 		for (Category category1 : categories) {
-			categoryTreeVOList.add(BeanUtil.copy(category1, CategoryTreeVO.class));
+			categoryTreeVOList.add(BeanUtils.copy(category1, CategoryTreeVO.class));
 		}
 		category.setChildren(categoryTreeVOList);
 		if (!categoryTreeVOList.isEmpty()) {

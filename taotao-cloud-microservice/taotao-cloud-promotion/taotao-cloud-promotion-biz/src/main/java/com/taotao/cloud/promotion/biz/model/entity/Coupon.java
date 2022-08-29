@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
@@ -129,7 +129,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 	private Integer effectiveDays;
 
 	public Coupon(CouponVO couponVO) {
-		BeanUtil.copyProperties(couponVO, this);
+		BeanUtils.copyProperties(couponVO, this);
 	}
 
 	@Override

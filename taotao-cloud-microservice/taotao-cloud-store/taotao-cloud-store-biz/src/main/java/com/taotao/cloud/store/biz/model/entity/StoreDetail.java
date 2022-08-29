@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.model.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -158,7 +158,7 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 	public StoreDetail(Store store, AdminStoreApplyDTO adminStoreApplyDTO) {
 		this.storeId = store.getId();
 		//设置店铺公司信息、设置店铺银行信息、设置店铺其他信息
-		BeanUtil.copyProperties(adminStoreApplyDTO, this);
+		BeanUtils.copyProperties(adminStoreApplyDTO, this);
 		this.settlementDay = LocalDateTime.now();
 		this.stockWarning = 10;
 	}

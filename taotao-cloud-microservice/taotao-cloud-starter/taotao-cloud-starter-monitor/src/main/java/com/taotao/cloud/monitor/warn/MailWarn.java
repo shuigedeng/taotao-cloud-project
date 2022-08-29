@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.monitor.warn;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.monitor.model.Message;
 import com.taotao.cloud.monitor.properties.WarnProperties;
 
@@ -41,39 +41,39 @@ public class MailWarn extends AbstractWarn {
 	private final boolean driverExist;
 
 	public MailWarn() {
-		this.driverExist = ReflectionUtil.tryClassForName(CLASS) != null;
+		this.driverExist = ReflectionUtils.tryClassForName(CLASS) != null;
 	}
 
 	@Override
 	public void notify(Message message) {
 		if (!driverExist) {
-			LogUtil.error("未找到MailTemplate, 不支持邮件预警");
+			LogUtils.error("未找到MailTemplate, 不支持邮件预警");
 			return;
 		}
 
-		WarnProperties warnProperties = ContextUtil.getBean(WarnProperties.class, true);
-		Object mailTemplate = ContextUtil.getBean(ReflectionUtil.tryClassForName(CLASS), true);
+		WarnProperties warnProperties = ContextUtils.getBean(WarnProperties.class, true);
+		Object mailTemplate = ContextUtils.getBean(ReflectionUtils.tryClassForName(CLASS), true);
 
 		if (Objects.nonNull(mailTemplate) && Objects.nonNull(warnProperties)) {
-			String ip = RequestUtil.getIpAddress();
+			String ip = RequestUtils.getIpAddress();
 
 			String dingDingFilterIP = warnProperties.getDingdingFilterIP();
-			if (!StringUtil.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
-				String context = StringUtil.subString3(message.getTitle(), 100)
+			if (!StringUtils.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
+				String context = StringUtils.subString3(message.getTitle(), 100)
 					+ "\n"
 					+ "详情: "
-					+ RequestUtil.getBaseUrl()
+					+ RequestUtils.getBaseUrl()
 					+ "/health/\n"
-					+ StringUtil.subString3(message.getContent(), 500);
+					+ StringUtils.subString3(message.getContent(), 500);
 
 				try {
 					List<Object> param = new ArrayList<>();
 					param.add("981376577@qq.com");
 					param.add("服务状态预警");
 					param.add(context);
-					ReflectionUtil.callMethod(mailTemplate, "sendSimpleMail", param.toArray());
+					ReflectionUtils.callMethod(mailTemplate, "sendSimpleMail", param.toArray());
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 		}

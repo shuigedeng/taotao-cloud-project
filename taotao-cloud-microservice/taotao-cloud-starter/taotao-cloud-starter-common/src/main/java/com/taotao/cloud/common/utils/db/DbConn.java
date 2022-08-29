@@ -1,9 +1,9 @@
 package com.taotao.cloud.common.utils.db;
 
 
-import com.taotao.cloud.common.utils.common.TimeWatchUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.TimeWatchUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,7 +36,7 @@ public final class DbConn implements AutoCloseable {
 
 	public DbConn() {
 		try {
-			conn = ContextUtil.getBean(DataSource.class, true).getConnection();
+			conn = ContextUtils.getBean(DataSource.class, true).getConnection();
 		} catch (Exception e) {
 			throw new DbException("获取数据库连接异常", "", e);
 		}
@@ -75,7 +75,7 @@ public final class DbConn implements AutoCloseable {
 	 */
 	@Override
 	public void close() {
-		TimeWatchUtil.print(getPrintSql(), "[db]close", () -> {
+		TimeWatchUtils.print(getPrintSql(), "[db]close", () -> {
 			try {
 				if (conn != null && !conn.isClosed()) {
 					conn.close();
@@ -93,7 +93,7 @@ public final class DbConn implements AutoCloseable {
 	 * @since 2021-09-02 20:04:33
 	 */
 	public void beginTransaction(int level) {
-		TimeWatchUtil.print(getPrintSql(), "[db]beginTransaction", () -> {
+		TimeWatchUtils.print(getPrintSql(), "[db]beginTransaction", () -> {
 			try {
 				if (conn != null) {
 					conn.setAutoCommit(false);
@@ -114,7 +114,7 @@ public final class DbConn implements AutoCloseable {
 	 * @since 2021-09-02 20:04:37
 	 */
 	public void commit() {
-		TimeWatchUtil.print(getPrintSql(), "[db]commit", () -> {
+		TimeWatchUtils.print(getPrintSql(), "[db]commit", () -> {
 			try {
 				if (conn != null) {
 					conn.commit();
@@ -132,7 +132,7 @@ public final class DbConn implements AutoCloseable {
 	 * @since 2021-09-02 20:04:39
 	 */
 	public void rollback() {
-		TimeWatchUtil.print(getPrintSql(), "[db]rollback", () -> {
+		TimeWatchUtils.print(getPrintSql(), "[db]rollback", () -> {
 			try {
 				if (conn != null) {
 					conn.rollback();
@@ -154,7 +154,7 @@ public final class DbConn implements AutoCloseable {
 	 * @since 2021-09-02 20:04:44
 	 */
 	public int executeSql(final String sql, final Object[] parameterValues) {
-		return TimeWatchUtil.print(getPrintSql(), "[db]" + sql, () -> {
+		return TimeWatchUtils.print(getPrintSql(), "[db]" + sql, () -> {
 			try {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				attachParameterObjects(statement, parameterValues);
@@ -196,7 +196,7 @@ public final class DbConn implements AutoCloseable {
 	 * @since 2021-09-02 20:04:53
 	 */
 	public ResultSet executeResultSet(final String sql, final Object[] parameterValues) {
-		return TimeWatchUtil.print(getPrintSql(), "[db]" + sql, () -> {
+		return TimeWatchUtils.print(getPrintSql(), "[db]" + sql, () -> {
 			try {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				attachParameterObjects(statement, parameterValues);
@@ -218,7 +218,7 @@ public final class DbConn implements AutoCloseable {
 	 * @since 2021-09-02 20:04:57
 	 */
 	public List<Map<String, Object>> executeList(final String sql, final Object[] parameterValues) {
-		return TimeWatchUtil.print(getPrintSql(), "[db]" + sql, () -> {
+		return TimeWatchUtils.print(getPrintSql(), "[db]" + sql, () -> {
 			try {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				attachParameterObjects(statement, parameterValues);
@@ -312,7 +312,7 @@ public final class DbConn implements AutoCloseable {
 		public DbException(String message, String sql, Exception exp) {
 			super(message, exp);
 
-			LogUtil.error("错误sql:" + sql);
+			LogUtils.error("错误sql:" + sql);
 		}
 	}
 

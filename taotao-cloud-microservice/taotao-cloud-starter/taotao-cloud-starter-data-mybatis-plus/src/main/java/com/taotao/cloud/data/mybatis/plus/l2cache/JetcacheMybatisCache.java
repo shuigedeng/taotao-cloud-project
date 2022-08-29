@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.data.mybatis.plus.l2cache;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.jetcache.enhance.JetCacheCreateCacheFactory;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -45,7 +45,7 @@ public class JetcacheMybatisCache implements Cache {
 
 	public JetcacheMybatisCache(final String id) {
 		this.id = id;
-		Object obj = ContextUtil.getBean("jetCacheCacheManager", true);
+		Object obj = ContextUtils.getBean("jetCacheCacheManager", true);
 		if (Objects.isNull(obj)) {
 			throw new RuntimeException("请开启jetCacheCacheManager");
 		}

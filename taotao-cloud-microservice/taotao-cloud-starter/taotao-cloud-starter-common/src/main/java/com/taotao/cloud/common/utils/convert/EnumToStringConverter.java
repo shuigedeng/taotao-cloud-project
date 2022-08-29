@@ -17,8 +17,8 @@
 package com.taotao.cloud.common.utils.convert;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -89,7 +89,7 @@ public class EnumToStringConverter implements ConditionalGenericConverter {
 			return null;
 		}
 		Class<?> sourceClazz = sourceType.getType();
-		AccessibleObject accessibleObject = CollectionUtil.computeIfAbsent(ENUM_CACHE_MAP,
+		AccessibleObject accessibleObject = CollectionUtils.computeIfAbsent(ENUM_CACHE_MAP,
 			sourceClazz, EnumToStringConverter::getAnnotation);
 		Class<?> targetClazz = targetType.getType();
 		// 如果为null，走默认的转换
@@ -98,12 +98,12 @@ public class EnumToStringConverter implements ConditionalGenericConverter {
 				return ((Enum) source).name();
 			}
 			int ordinal = ((Enum) source).ordinal();
-			return ConvertUtil.convert(ordinal, targetClazz);
+			return ConvertUtils.convert(ordinal, targetClazz);
 		}
 		try {
 			return EnumToStringConverter.invoke(sourceClazz, accessibleObject, source, targetClazz);
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage(), e);
+			LogUtils.error(e.getMessage(), e);
 		}
 		return null;
 	}
@@ -120,12 +120,12 @@ public class EnumToStringConverter implements ConditionalGenericConverter {
 			Method method = (Method) accessibleObject;
 			Class<?> paramType = method.getParameterTypes()[0];
 			// 类型转换
-			Object object = ConvertUtil.convert(source, paramType);
+			Object object = ConvertUtils.convert(source, paramType);
 			value = method.invoke(clazz, object);
 		}
 		if (value == null) {
 			return null;
 		}
-		return ConvertUtil.convert(value, targetClazz);
+		return ConvertUtils.convert(value, targetClazz);
 	}
 }

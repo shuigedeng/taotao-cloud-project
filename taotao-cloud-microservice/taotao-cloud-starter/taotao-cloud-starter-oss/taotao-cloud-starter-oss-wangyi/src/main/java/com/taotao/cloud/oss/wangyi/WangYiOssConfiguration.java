@@ -9,7 +9,7 @@ import com.netease.cloud.auth.BasicCredentials;
 import com.netease.cloud.auth.Credentials;
 import com.netease.cloud.services.nos.NosClient;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
@@ -40,7 +40,7 @@ public class WangYiOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(WangYiOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(WangYiOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
     public static final String DEFAULT_BEAN_NAME = "wangYiOssClient";

@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.util;
 import cn.hutool.json.JSONObject;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedInputStream;
@@ -108,12 +108,12 @@ public class WechatMediaUtil {
 			resultIn.close();
 			urlConn.disconnect();
 		} catch (Exception e) {
-			LogUtil.error("微信媒体上传失败", e);
+			LogUtils.error("微信媒体上传失败", e);
 		}
 
 		assert resultStr != null;
 		JSONObject jsonObject = new JSONObject(resultStr.toString());
-		LogUtil.info("微信媒体上传:" + jsonObject);
+		LogUtils.info("微信媒体上传:" + jsonObject);
 		//判断是否传递成功，如果token过期则重新获取
 		if (jsonObject.get("errcode") != null && ("40001").equals(jsonObject.get("errcode"))) {
 			//wechatAccessTokenUtil.removeAccessToken(ClientTypeEnum.WECHAT_MP);

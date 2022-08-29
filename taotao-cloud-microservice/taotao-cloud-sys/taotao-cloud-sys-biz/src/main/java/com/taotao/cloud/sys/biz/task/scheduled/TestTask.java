@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.task.scheduled;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.schedule.core.ScheduledManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,13 @@ public class TestTask {
 
 	@ScheduledBean(cron = "0 0/30 * * * ?")
 	public void robReceiveExpireTask() {
-		LogUtil.info(Thread.currentThread().getName() + "------------测试测试");
-		LogUtil.info(df.format(LocalDateTime.now()) + "测试测试");
+		LogUtils.info(Thread.currentThread().getName() + "------------测试测试");
+		LogUtils.info(df.format(LocalDateTime.now()) + "测试测试");
 
 		List<String> runScheduledName = scheduledManager.getRunScheduledName();
-		LogUtil.info(runScheduledName.toString());
+		LogUtils.info(runScheduledName.toString());
 
 		List<String> allSuperScheduledName = scheduledManager.getAllSuperScheduledName();
-		LogUtil.info(allSuperScheduledName.toString());
+		LogUtils.info(allSuperScheduledName.toString());
 	}
 }

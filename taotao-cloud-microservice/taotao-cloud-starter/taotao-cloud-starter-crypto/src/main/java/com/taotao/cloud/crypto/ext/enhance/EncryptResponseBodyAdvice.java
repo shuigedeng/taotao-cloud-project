@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.crypto.ext.enhance;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.crypto.ext.annotation.Crypto;
 import com.taotao.cloud.crypto.ext.processor.HttpCryptoProcessor;
 import org.apache.commons.lang3.ObjectUtils;
@@ -82,7 +82,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 		String methodName = methodParameter.getMethod().getName();
 		String className = methodParameter.getDeclaringClass().getName();
 
-		String bodyString = JsonUtil.toJson(body);
+		String bodyString = JsonUtils.toJson(body);
 		String result = httpCryptoProcessor.encrypt(sessionKey, bodyString);
 		if (StringUtils.isNotBlank(result)) {
 			log.debug("Encrypt response body for rest method [{}] in [{}] finished.",

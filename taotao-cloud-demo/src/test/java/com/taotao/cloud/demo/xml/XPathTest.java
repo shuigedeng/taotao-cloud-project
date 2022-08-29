@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.xml;
 
-import com.taotao.cloud.common.utils.common.XmlHelper;
+import com.taotao.cloud.common.utils.common.XmlUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Node;
@@ -25,23 +25,23 @@ public class XPathTest {
 				"</book>\n" +
 				"</bookstore>";
 
-		XmlHelper xmlHelper = XmlHelper.safe(xml);
-		String title1 = xmlHelper.getString("//book[1]/title");
+		XmlUtils xmlUtils = XmlUtils.safe(xml);
+		String title1 = xmlUtils.getString("//book[1]/title");
 		Assert.assertEquals(title1, "Harry Potter");
 
-		String titleLang = xmlHelper.getString("//book[2]/title/@lang");
+		String titleLang = xmlUtils.getString("//book[2]/title/@lang");
 		Assert.assertEquals(titleLang, "eng");
 
-		Number price1 = xmlHelper.getNumber("//book[1]/price");
+		Number price1 = xmlUtils.getNumber("//book[1]/price");
 		System.out.println(price1.doubleValue());
 
-		Node node = xmlHelper.getNode("//book[2]/title");
-		String titleLang2 = xmlHelper.getString(node, "@lang");
+		Node node = xmlUtils.getNode("//book[2]/title");
+		String titleLang2 = xmlUtils.getString(node, "@lang");
 		Assert.assertEquals(titleLang2, "eng");
 
 		Assert.assertEquals(titleLang, titleLang2);
 
-		boolean isEn = xmlHelper.getBoolean("//book[1]/title/@lang=\"eng\"");
+		boolean isEn = xmlUtils.getBoolean("//book[1]/title/@lang=\"eng\"");
 		System.out.println(isEn);
 	}
 }

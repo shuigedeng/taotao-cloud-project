@@ -12,8 +12,8 @@
  */
 package com.taotao.cloud.sms.common.repository;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.model.VerificationCode;
 import com.taotao.cloud.sms.common.properties.VerificationCodeMemoryRepositoryProperties;
 import org.springframework.lang.Nullable;
@@ -59,13 +59,13 @@ public class VerificationCodeMemoryRepository implements VerificationCodeReposit
 		VerificationCode verificationCode = cache.get(key);
 
 		if (verificationCode == null) {
-			LogUtil.debug("verificationCode is null, key: {}", key);
+			LogUtils.debug("verificationCode is null, key: {}", key);
 			return null;
 		}
 
 		LocalDateTime expirationTime = verificationCode.getExpirationTime();
 		if (expirationTime != null && expirationTime.isBefore(LocalDateTime.now())) {
-			LogUtil.debug("verificationCode is not null, but timeout, key: {}", key);
+			LogUtils.debug("verificationCode is not null, but timeout, key: {}", key);
 			cache.remove(key);
 			return null;
 		}
@@ -91,7 +91,7 @@ public class VerificationCodeMemoryRepository implements VerificationCodeReposit
 	}
 
 	private String key(String phone, @Nullable String identificationCode) {
-		if (StringUtil.isBlank(identificationCode)) {
+		if (StringUtils.isBlank(identificationCode)) {
 			return phone;
 		}
 
@@ -111,7 +111,7 @@ public class VerificationCodeMemoryRepository implements VerificationCodeReposit
 	private void gcHandler() {
 		LocalDateTime now = LocalDateTime.now();
 
-		boolean debug = LogUtil.isDebugEnabled();
+		boolean debug = LogUtils.isDebugEnabled();
 		Set<String> keys = cache.keySet();
 		List<String> removeKeys = debug ? new ArrayList<>(keys.size()) : null;
 
@@ -129,7 +129,7 @@ public class VerificationCodeMemoryRepository implements VerificationCodeReposit
 		});
 
 		if (debug) {
-			LogUtil.debug("gc remove keys: {}", removeKeys.size());
+			LogUtils.debug("gc remove keys: {}", removeKeys.size());
 		}
 	}
 }

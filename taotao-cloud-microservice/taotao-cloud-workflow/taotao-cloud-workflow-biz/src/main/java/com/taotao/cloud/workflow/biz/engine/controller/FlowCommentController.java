@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
 import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentListVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentPagination;
@@ -46,7 +46,7 @@ public class FlowCommentController {
     @GetMapping
     public Result list(FlowCommentPagination pagination) {
         List<FlowCommentEntity> list = flowCommentService.getlist(pagination);
-        List<FlowCommentListVO> listVO = JsonUtil.getJsonToList(list, FlowCommentListVO.class);
+        List<FlowCommentListVO> listVO = JsonUtils.getJsonToList(list, FlowCommentListVO.class);
         List<String> userId = list.stream().map(t -> t.getCreatorUserId()).collect(Collectors.toList());
         UserInfo userInfo = userProvider.get();
         List<UserEntity> userName = serviceUtil.getUserName(userId);
@@ -59,7 +59,7 @@ public class FlowCommentController {
                 commentModel.setCreatorUserHeadIcon(UploaderUtil.uploaderImg(userEntity.getHeadIcon()));
             }
         }
-        PaginationVO vo = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
+        PaginationVO vo = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
         return Result.page(listVO, vo);
     }
 
@@ -73,7 +73,7 @@ public class FlowCommentController {
     @GetMapping("/{id}")
     public Result info(@PathVariable("id") String id) {
         FlowCommentEntity entity = flowCommentService.getInfo(id);
-        FlowCommentInfoVO vo = JsonUtil.getJsonToBean(entity, FlowCommentInfoVO.class);
+        FlowCommentInfoVO vo = JsonUtils.getJsonToBean(entity, FlowCommentInfoVO.class);
         return Result.success(vo);
     }
 
@@ -86,7 +86,7 @@ public class FlowCommentController {
     @Operation("新建流程评论")
     @PostMapping
     public Result create(@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
-        FlowCommentEntity entity = JsonUtil.getJsonToBean(commentForm, FlowCommentEntity.class);
+        FlowCommentEntity entity = JsonUtils.getJsonToBean(commentForm, FlowCommentEntity.class);
         flowCommentService.create(entity);
         return Result.success(MsgCode.SU002.get());
     }
@@ -102,7 +102,7 @@ public class FlowCommentController {
     public Result update(@PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm) throws DataException {
         FlowCommentEntity info = flowCommentService.getInfo(id);
         if (info != null) {
-            FlowCommentEntity entity = JsonUtil.getJsonToBean(commentForm, FlowCommentEntity.class);
+            FlowCommentEntity entity = JsonUtils.getJsonToBean(commentForm, FlowCommentEntity.class);
             flowCommentService.update(id, entity);
             return Result.success(MsgCode.SU004.get());
         }

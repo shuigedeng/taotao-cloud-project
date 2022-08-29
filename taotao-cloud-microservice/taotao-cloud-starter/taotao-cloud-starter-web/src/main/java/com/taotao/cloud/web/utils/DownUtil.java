@@ -1,7 +1,7 @@
 package com.taotao.cloud.web.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -34,7 +34,7 @@ public class DownUtil {
 	 */
 	public static void dowloadExcel(Workbook workbook, String fileName) {
 		try {
-			HttpServletResponse response = RequestUtil.getResponse();
+			HttpServletResponse response = RequestUtils.getResponse();
 			response.setCharacterEncoding(Constants.UTF_8);
 			response.setHeader("content-Type", "application/vnd.ms-excel");
 			response.setHeader("Content-Disposition",
@@ -53,8 +53,8 @@ public class DownUtil {
 	 * @param fileName 订单信息.pdf
 	 */
 	public static void dowloadFile(File file, String fileName) {
-		HttpServletResponse response = RequestUtil.getResponse();
-		HttpServletRequest request = RequestUtil.getRequest();
+		HttpServletResponse response = RequestUtils.getResponse();
+		HttpServletRequest request = RequestUtils.getRequest();
 		try {
 			InputStream is = new FileInputStream(file);
 			BufferedInputStream bis = new BufferedInputStream(is);
@@ -93,8 +93,8 @@ public class DownUtil {
 	 * @param fileName 订单信息.pdf
 	 */
 	public static Boolean dowloadFile(String paths, String fileName) {
-		HttpServletResponse response = RequestUtil.getResponse();
-		HttpServletRequest request = RequestUtil.getRequest();
+		HttpServletResponse response = RequestUtils.getResponse();
+		HttpServletRequest request = RequestUtils.getRequest();
 		try {
 			InputStream is = new FileInputStream(paths);
 			BufferedInputStream bis = new BufferedInputStream(is);
@@ -149,7 +149,7 @@ public class DownUtil {
 	 * 设置img的response
 	 */
 	public static HttpServletResponse getResponse() {
-		HttpServletResponse response = RequestUtil.getResponse();
+		HttpServletResponse response = RequestUtils.getResponse();
 		response.setCharacterEncoding(Constants.UTF_8);
 		//设置相应类型,告诉浏览器输出的内容为图片
 		response.setContentType("image/jpeg");

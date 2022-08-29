@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;
@@ -85,10 +85,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public Boolean editStoreSetting(StoreSettingDTO storeSettingDTO) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		//修改店铺
 		Store store = storeService.getById(storeId);
-		BeanUtil.copyProperties(storeSettingDTO, store);
+		BeanUtils.copyProperties(storeSettingDTO, store);
 		boolean result = storeService.updateById(store);
 		if (result) {
 			this.updateStoreGoodsInfo(store);
@@ -110,7 +110,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public Boolean editMerchantEuid(String merchantEuid) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		Store store = storeService.getById(storeId);
 		store.setMerchantEuid(merchantEuid);
 		return storeService.updateById(store);
@@ -133,7 +133,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO() {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		return this.baseMapper.getStoreAfterSaleAddressDTO(storeId);
 	}
 
@@ -148,7 +148,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public boolean editStoreAfterSaleAddressDTO(StoreAfterSaleAddressDTO storeAfterSaleAddressDTO) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		LambdaUpdateWrapper<StoreDetail> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeName, storeAfterSaleAddressDTO.getSalesConsigneeName());
 		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeAddressId, storeAfterSaleAddressDTO.getSalesConsigneeAddressId());
@@ -161,7 +161,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public boolean updateStockWarning(Integer stockWarning) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		LambdaUpdateWrapper<StoreDetail> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.set(StoreDetail::getStockWarning, stockWarning);
 		lambdaUpdateWrapper.eq(StoreDetail::getStoreId, storeId);
@@ -180,7 +180,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 		List<StoreManagementCategoryVO> list = new ArrayList<>();
 		for (CategoryTreeVO category : categoryList) {
 			StoreManagementCategoryVO storeManagementCategoryVO = new StoreManagementCategoryVO();
-			BeanUtil.copyProperties(category, storeManagementCategoryVO);
+			BeanUtils.copyProperties(category, storeManagementCategoryVO);
 
 			for (String storeCategory : storeCategoryList) {
 				if (Long.valueOf(storeCategory).equals(category.getId())) {

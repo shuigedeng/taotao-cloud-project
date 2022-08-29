@@ -15,24 +15,24 @@
  */
 package com.taotao.cloud.web.validation.converter;
 
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT_EN;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_MONTH_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_MONTH_FORMAT_SLASH;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_YEAR_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_FORMAT_EN;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_TIME_FORMAT_EN;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_MONTH_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_MONTH_FORMAT_SLASH;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_YEAR_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.SLASH_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.SLASH_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtils.SLASH_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.SLASH_DATE_TIME_FORMAT_MATCHES;
 
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -89,7 +89,7 @@ public class String2DateConverter extends BaseDateConverter<Date> implements
 			dateFormat.setLenient(false);
 			return dateFormat.parse(dateStr);
 		} catch (ParseException e) {
-			LogUtil.error("转换日期失败, date={}, format={}", dateStr, format, e);
+			LogUtils.error("转换日期失败, date={}, format={}", dateStr, format, e);
 			throw new BaseException(e.getMessage(), e);
 		}
 	}

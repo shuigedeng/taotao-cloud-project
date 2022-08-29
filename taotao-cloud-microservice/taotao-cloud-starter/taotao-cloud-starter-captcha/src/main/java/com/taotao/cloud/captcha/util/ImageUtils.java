@@ -17,9 +17,9 @@ package com.taotao.cloud.captcha.util;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.CaptchaBaseEnum;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.common.RandomUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.RandomUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -94,7 +94,7 @@ public class ImageUtils {
 			slidingBlockCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseEnum.PIC_CLICK.getCodeValue(),
 			picClickCacheMap.keySet().toArray(new String[0]));
-		LogUtil.info("初始化底图:{}", JsonUtil.toJSONString(fileNameMap));
+		LogUtils.info("初始化底图:{}", JsonUtils.toJSONString(fileNameMap));
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class ImageUtils {
 		fileNameMap.put(CaptchaBaseEnum.PIC_CLICK.getCodeValue(),
 			picClickCacheMap.keySet().toArray(new String[0]));
 
-		LogUtil.info("自定义resource底图:{}", JsonUtil.toJSONString(fileNameMap));
+		LogUtils.info("自定义resource底图:{}", JsonUtils.toJSONString(fileNameMap));
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class ImageUtils {
 		if (null == strings || strings.length == 0) {
 			return null;
 		}
-		int randomInt = RandomUtil.randomInt(0, strings.length);
+		int randomInt = RandomUtils.randomInt(0, strings.length);
 		String s = originalCacheMap.get(strings[randomInt]);
 		return getBase64StrToImage(s);
 	}
@@ -151,7 +151,7 @@ public class ImageUtils {
 		if (null == strings || strings.length == 0) {
 			return null;
 		}
-		int randomInt = RandomUtil.randomInt(0, strings.length);
+		int randomInt = RandomUtils.randomInt(0, strings.length);
 		return slidingBlockCacheMap.get(strings[randomInt]);
 	}
 
@@ -166,7 +166,7 @@ public class ImageUtils {
 		if (null == strings || strings.length == 0) {
 			return null;
 		}
-		int randomInt = RandomUtil.randomInt(0, strings.length);
+		int randomInt = RandomUtils.randomInt(0, strings.length);
 		String s = picClickCacheMap.get(strings[randomInt]);
 		return getBase64StrToImage(s);
 	}

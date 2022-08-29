@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.support.function;
 
 
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -55,7 +55,7 @@ public class Unchecked {
 			try {
 				return function.apply(t);
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}
@@ -73,7 +73,7 @@ public class Unchecked {
 			try {
 				consumer.accept(t);
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}
@@ -91,7 +91,7 @@ public class Unchecked {
 			try {
 				return supplier.get();
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}
@@ -109,7 +109,7 @@ public class Unchecked {
 			try {
 				return predicate.test(t);
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}
@@ -126,7 +126,7 @@ public class Unchecked {
 			try {
 				runnable.run();
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}
@@ -144,7 +144,7 @@ public class Unchecked {
 			try {
 				return callable.call();
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}
@@ -162,7 +162,7 @@ public class Unchecked {
 			try {
 				return comparator.compare(o1, o2);
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		};
 	}

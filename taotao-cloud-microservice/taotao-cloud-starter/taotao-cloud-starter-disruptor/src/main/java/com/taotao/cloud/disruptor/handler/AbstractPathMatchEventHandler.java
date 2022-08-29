@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -65,7 +65,7 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	 */
 	protected boolean pathsMatch(String path, T event) {
 		String eventExp = getPathWithinEvent(event);
-		LogUtil.info("Attempting to match pattern '{}' with current Event Expression '{}'...", path,
+		LogUtils.info("Attempting to match pattern '{}' with current Event Expression '{}'...", path,
 			eventExp);
 		return pathsMatch(path, eventExp);
 	}
@@ -92,7 +92,7 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	protected boolean preHandle(T event) throws Exception {
 
 		if (this.appliedPaths == null || this.appliedPaths.isEmpty()) {
-			LogUtil.info(
+			LogUtils.info(
 				"appliedPaths property is null or empty.  This Handler will passthrough immediately.");
 			return true;
 		}
@@ -102,7 +102,7 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 			// implementation for specific checks
 			// (first match 'wins'):
 			if (pathsMatch(path, event)) {
-				LogUtil.info(
+				LogUtils.info(
 					"Current Event Expression matches pattern '{}'.  Determining handler chain execution...",
 					path);
 				return isHandlerChainContinued(event, path);
@@ -116,7 +116,7 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 	private boolean isHandlerChainContinued(T event, String path) throws Exception {
 		// isEnabled check
 		if (isEnabled(event, path)) {
-			LogUtil.info("Handler '{}' is enabled for the current event under path '{}'.  "
+			LogUtils.info("Handler '{}' is enabled for the current event under path '{}'.  "
 					+ "Delegating to subclass implementation for 'onPreHandle' check.",
 				new Object[]{getName(), path});
 			// The handler is enabled for this specific request, so delegate to
@@ -126,7 +126,7 @@ public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> ex
 			return onPreHandle(event);
 		}
 
-		LogUtil.info("Handler '{}' is disabled for the current event under path '{}'.  "
+		LogUtils.info("Handler '{}' is disabled for the current event under path '{}'.  "
 				+ "The next element in the HandlerChain will be called immediately.",
 			new Object[]{getName(), path});
 		// This handler is disabled for this specific request,

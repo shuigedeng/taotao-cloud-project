@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -45,7 +45,7 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 	   this.memberName = memberName;
 	   distributionOrderCount=0;
 	   this.distributionStatus = DistributionStatusEnum.APPLY.name();
-	   BeanUtil.copyProperties(distributionApplyDTO, this);
+	   BeanUtils.copyProperties(distributionApplyDTO, this);
 	}
 
 	/**

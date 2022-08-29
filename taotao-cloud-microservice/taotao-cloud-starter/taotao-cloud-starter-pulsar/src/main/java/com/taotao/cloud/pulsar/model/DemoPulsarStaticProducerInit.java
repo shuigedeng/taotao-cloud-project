@@ -1,7 +1,7 @@
 package com.taotao.cloud.pulsar.model;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
@@ -41,7 +41,7 @@ public class DemoPulsarStaticProducerInit {
 
 			executorService.shutdown();
 		} catch (Exception e) {
-			LogUtil.error("init pulsar producer error, exception is {}", e);
+			LogUtils.error("init pulsar producer error, exception is {}", e);
 		}
 	}
 

@@ -17,7 +17,7 @@ package com.taotao.cloud.dingtalk.model;
 
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGERDEFINITION_ERROR;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +47,7 @@ public class DingerDefinitionGeneratorFactory {
 		DingerDefinitionGenerator dingTalkDefinitionGenerator = dingTalkDefinitionGeneratorMap.get(
 			key);
 		if (dingTalkDefinitionGenerator == null) {
-			LogUtil.debug("key={}, dingTalkDefinitionGeneratorMap={}.",
+			LogUtils.debug("key={}, dingTalkDefinitionGeneratorMap={}.",
 				key, dingTalkDefinitionGeneratorMap.keySet());
 			throw new DingerException(DINGERDEFINITION_ERROR, key);
 		}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.laytpl.model;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.laytpl.exception.LayTplException;
 import com.taotao.cloud.laytpl.properties.LayTplProperties;
 import java.text.DecimalFormat;
@@ -77,7 +77,7 @@ public class FmtFunc {
 			DecimalFormat decimalFormat = new DecimalFormat(pattern);
 			return decimalFormat.format(object);
 		} else if (object instanceof Date) {
-			return DateUtil.format((Date) object, pattern);
+			return DateUtils.format((Date) object, pattern);
 		} else if (object instanceof TemporalAccessor) {
 			DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
 			return df.format((TemporalAccessor) object);

@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.common.service;
 
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sms.common.model.NoticeData;
 
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public interface NoticeService {
 	 * @since 2022-04-27 17:49:29
 	 */
 	default boolean send(NoticeData noticeData, String phone) {
-		if (StringUtil.isBlank(phone)) {
+		if (StringUtils.isBlank(phone)) {
 			return false;
 		}
 
@@ -97,7 +97,7 @@ public interface NoticeService {
 	 * @since 2022-04-27 17:49:29
 	 */
 	default void asyncSend(NoticeData noticeData, String phone) {
-		if (!StringUtil.isBlank(phone)) {
+		if (!StringUtils.isBlank(phone)) {
 			asyncSend(noticeData, Collections.singletonList(phone));
 		}
 	}

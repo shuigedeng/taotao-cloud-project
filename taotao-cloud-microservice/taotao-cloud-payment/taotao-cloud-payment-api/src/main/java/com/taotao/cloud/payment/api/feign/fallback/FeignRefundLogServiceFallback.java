@@ -1,8 +1,7 @@
 package com.taotao.cloud.payment.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.payment.api.feign.IFeignPayFlowService;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.api.feign.IFeignRefundLogService;
 import com.taotao.cloud.payment.api.vo.PayFlowVO;
 import com.taotao.cloud.payment.api.vo.RefundLogVO;
@@ -21,7 +20,7 @@ public class FeignRefundLogServiceFallback implements FallbackFactory<IFeignRefu
 
 			@Override
 			public Result<PayFlowVO> findPayFlowById(Long id) {
-				LogUtil.error("调用findPayFlowById异常：{}", throwable, id);
+				LogUtils.error("调用findPayFlowById异常：{}", throwable, id);
 				return Result.fail(null, 500);
 			}
 

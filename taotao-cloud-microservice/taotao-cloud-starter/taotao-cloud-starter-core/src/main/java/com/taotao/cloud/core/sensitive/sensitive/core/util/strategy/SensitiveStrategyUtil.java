@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.util.strategy;
 
 
 import com.taotao.cloud.common.constant.PunctuationConst;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 
 /**
  * 脱敏策略工具类
@@ -30,7 +30,7 @@ public final class SensitiveStrategyUtil {
     public static String phone(final String phone) {
         final int prefixLength = 3;
         final String middle = "****";
-        return StringUtil.buildString(phone, middle, prefixLength);
+        return StringUtils.buildString(phone, middle, prefixLength);
     }
 
     /**
@@ -39,7 +39,7 @@ public final class SensitiveStrategyUtil {
      * @return 结果
      */
     public static String email(final String email) {
-        if(StringUtil.isEmpty(email)) {
+        if(StringUtils.isEmpty(email)) {
             return null;
         }
 
@@ -50,9 +50,9 @@ public final class SensitiveStrategyUtil {
 
         if(atIndex > 0) {
             int middleLength = atIndex - prefixLength;
-            middle = StringUtil.repeat(PunctuationConst.STAR, middleLength);
+            middle = StringUtils.repeat(PunctuationConst.STAR, middleLength);
         }
-        return StringUtil.buildString(email, middle, prefixLength);
+        return StringUtils.buildString(email, middle, prefixLength);
     }
 
     /**
@@ -61,7 +61,7 @@ public final class SensitiveStrategyUtil {
      * @return 脱敏后的结果
      */
     public static String chineseName(final String chineseName) {
-        if(StringUtil.isEmpty(chineseName)) {
+        if(StringUtils.isEmpty(chineseName)) {
             return chineseName;
         }
 
@@ -91,7 +91,7 @@ public final class SensitiveStrategyUtil {
     public static String cardId(final String cardId) {
         final int prefixLength = 6;
         final String middle = "**********";
-        return StringUtil.buildString(cardId, middle, prefixLength);
+        return StringUtils.buildString(cardId, middle, prefixLength);
     }
 
 }

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
 import com.taotao.cloud.distribution.api.web.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
@@ -89,7 +89,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
             //循环店铺流水记录判断是否包含分销商品
             //包含分销商品则进行记录分销订单、计算分销总额
             for (StoreFlow storeFlow : storeFlowList) {
-                rebate = CurrencyUtil.add(rebate, storeFlow.getDistributionRebate());
+                rebate = CurrencyUtils.add(rebate, storeFlow.getDistributionRebate());
                 DistributionOrder distributionOrder = new DistributionOrder(storeFlow);
                 distributionOrder.setDistributionId(order.getDistributionId());
                 //分销员信息
@@ -163,12 +163,12 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 
             //包含分销商品则进行记录分销订单、计算分销总额
             for (DistributionOrder distributionOrder : distributionOrderList) {
-                rebate = CurrencyUtil.add(rebate, distributionOrder.getRebate());
+                rebate = CurrencyUtils.add(rebate, distributionOrder.getRebate());
             }
 
             //如果包含分销商品则记录会员的分销总额
             if (rebate != 0.0) {
-                distributionService.subCanRebate(CurrencyUtil.sub(0, rebate), order.getDistributionId());
+                distributionService.subCanRebate(CurrencyUtils.sub(0, rebate), order.getDistributionId());
             }
         }
 
@@ -199,7 +199,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
             //如果已结算则创建退款分销订单
             else {
                 //修改分销员提成金额
-                distributionService.subCanRebate(CurrencyUtil.sub(0, storeFlow.getDistributionRebate()), distributionOrder.getDistributionId());
+                distributionService.subCanRebate(CurrencyUtils.sub(0, storeFlow.getDistributionRebate()), distributionOrder.getDistributionId());
             }
         }
     }

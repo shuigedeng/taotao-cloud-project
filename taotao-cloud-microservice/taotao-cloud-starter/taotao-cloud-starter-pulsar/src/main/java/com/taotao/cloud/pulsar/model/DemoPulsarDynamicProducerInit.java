@@ -4,7 +4,7 @@ import com.github.benmanes.caffeine.cache.AsyncCacheLoader;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.RemovalListener;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import io.netty.util.HashedWheelTimer;
 import io.netty.util.Timer;
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +31,7 @@ public class DemoPulsarDynamicProducerInit {
 			.expireAfterAccess(600, TimeUnit.SECONDS)
 			.maximumSize(3000)
 			.removalListener((RemovalListener<String, Producer<byte[]>>) (topic, value, cause) -> {
-				LogUtil.info("topic {} cache removed, because of {}", topic, cause);
+				LogUtils.info("topic {} cache removed, because of {}", topic, cause);
 				if (value == null) {
 					return;
 				}
@@ -39,7 +39,7 @@ public class DemoPulsarDynamicProducerInit {
 				try {
 					value.close();
 				} catch (Exception e) {
-					LogUtil.error("close failed, ", e);
+					LogUtils.error("close failed, ", e);
 				}
 			})
 			.buildAsync(new AsyncCacheLoader<>() {
@@ -66,7 +66,7 @@ public class DemoPulsarDynamicProducerInit {
 			final Producer<byte[]> producer = builder.topic(topic).create();
 			future.complete(producer);
 		} catch (Exception e) {
-			LogUtil.error("create producer exception ", e);
+			LogUtils.error("create producer exception ", e);
 			future.completeExceptionally(e);
 		}
 		return future;
@@ -76,19 +76,19 @@ public class DemoPulsarDynamicProducerInit {
 		final CompletableFuture<Producer<byte[]>> cacheFuture = producerCache.get(topic);
 		cacheFuture.whenComplete((producer, e) -> {
 			if (e != null) {
-				LogUtil.error("create pulsar client exception ", e);
+				LogUtils.error("create pulsar client exception ", e);
 				return;
 			}
 			try {
 				producer.sendAsync(msg).whenComplete(((messageId, throwable) -> {
 					if (throwable == null) {
-						LogUtil.info("topic {} send success, msg id is {}", topic, messageId);
+						LogUtils.info("topic {} send success, msg id is {}", topic, messageId);
 						return;
 					}
-					LogUtil.error("send producer msg error ", throwable);
+					LogUtils.error("send producer msg error ", throwable);
 				}));
 			} catch (Exception ex) {
-				LogUtil.error("send async failed ", ex);
+				LogUtils.error("send async failed ", ex);
 			}
 		});
 	}
@@ -99,28 +99,28 @@ public class DemoPulsarDynamicProducerInit {
 		final CompletableFuture<Producer<byte[]>> cacheFuture = producerCache.get(topic);
 		cacheFuture.whenComplete((producer, e) -> {
 			if (e != null) {
-				LogUtil.error("create pulsar client exception ", e);
+				LogUtils.error("create pulsar client exception ", e);
 				return;
 			}
 
 			try {
 				producer.sendAsync(msg).whenComplete(((messageId, throwable) -> {
 					if (throwable == null) {
-						LogUtil.info("topic {} send success, msg id is {}", topic, messageId);
+						LogUtils.info("topic {} send success, msg id is {}", topic, messageId);
 						return;
 					}
 					if (retryTimes < maxRetryTimes) {
-						LogUtil.warn("topic {} send failed, begin to retry {} times exception is ",
+						LogUtils.warn("topic {} send failed, begin to retry {} times exception is ",
 							topic, retryTimes, throwable);
 						timer.newTimeout(
 							timeout -> DemoPulsarDynamicProducerInit.this.sendMsgWithRetry(topic,
 								msg, retryTimes + 1, maxRetryTimes), 1L << retryTimes,
 							TimeUnit.SECONDS);
 					}
-					LogUtil.error("send producer msg error ", throwable);
+					LogUtils.error("send producer msg error ", throwable);
 				}));
 			} catch (Exception ex) {
-				LogUtil.error("send async failed ", ex);
+				LogUtils.error("send async failed ", ex);
 			}
 		});
 	}

@@ -11,14 +11,13 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.extra.ftp.Ftp;
 import cn.hutool.extra.ftp.FtpMode;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
 import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.ftp.FtpOssConfig;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -87,10 +86,10 @@ public class FtpOssClient implements StandardOssClient {
 				long remoteSize = files[0].getSize();
 				long localSize = file.length();
 				if (remoteSize == localSize) {
-					LogUtil.info("要上传的文件已存在");
+					LogUtils.info("要上传的文件已存在");
 					ftpClient.disconnect();
 				} else if (remoteSize > localSize) {
-					LogUtil.info("软件中心的软件比即将上传的要大，无须上传或重新命名要上传的文件名");
+					LogUtils.info("软件中心的软件比即将上传的要大，无须上传或重新命名要上传的文件名");
 					ftpClient.disconnect();
 				}
 				if (inputStream.skip(remoteSize) == remoteSize) {
@@ -99,7 +98,7 @@ public class FtpOssClient implements StandardOssClient {
 						new String(fileName.getBytes(StandardCharsets.UTF_8),
 							StandardCharsets.ISO_8859_1), inputStream);
 					if (success) {
-						LogUtil.info("文件断点续传成功");
+						LogUtils.info("文件断点续传成功");
 						ftpClient.disconnect();
 					}
 				}
@@ -107,7 +106,7 @@ public class FtpOssClient implements StandardOssClient {
 				boolean success = ftpClient.storeFile(
 					new String(fileName.getBytes(StandardCharsets.UTF_8),
 						StandardCharsets.ISO_8859_1), inputStream);
-				LogUtil.info("文件上传" + success);
+				LogUtils.info("文件上传" + success);
 			}
 		} catch (Exception e) {
 			throw new OssException(e);
@@ -139,11 +138,11 @@ public class FtpOssClient implements StandardOssClient {
 			FTPFile[] ftpFiles = ftpClient.listFiles(key);
 
 			if (ObjectUtil.isEmpty(ftpFiles)) {
-				LogUtil.warn("目标文件不存在，请检查！");
+				LogUtils.warn("目标文件不存在，请检查！");
 				return;
 			}
 			if (ftpFiles.length != 1) {
-				LogUtil.info("目标文件有多个，请检查！");
+				LogUtils.info("目标文件有多个，请检查！");
 				return;
 			}
 			long remoteFileSize = ftpFiles[0].getSize();
@@ -151,7 +150,7 @@ public class FtpOssClient implements StandardOssClient {
 				outputStream = new FileOutputStream(localFile, true);
 				long localFileSize = localFile.length();
 				if (localFileSize >= remoteFileSize) {
-					LogUtil.info("本地文件大小大于远程文件大小，下载中止");
+					LogUtils.info("本地文件大小大于远程文件大小，下载中止");
 					return;
 				}
 				ftpClient.setRestartOffset(localFileSize);
@@ -182,12 +181,12 @@ public class FtpOssClient implements StandardOssClient {
 
 	@Override
 	public void copy(String sourceName, String targetName, Boolean isOverride) {
-		LogUtil.warn("ftp协议不支持copy命令，暂不实现");
+		LogUtils.warn("ftp协议不支持copy命令，暂不实现");
 	}
 
 	@Override
 	public void move(String sourceName, String targetName, Boolean isOverride) {
-		LogUtil.warn("ftp协议不支持move命令，暂不实现");
+		LogUtils.warn("ftp协议不支持move命令，暂不实现");
 	}
 
 	@Override
@@ -199,7 +198,7 @@ public class FtpOssClient implements StandardOssClient {
 				ftp.getClient().rename(newSourceName, newTargetName);
 			}
 		} catch (IOException e) {
-			LogUtil.error("{}重命名为{}失败,错误信息为：", newSourceName, newTargetName, e);
+			LogUtils.error("{}重命名为{}失败,错误信息为：", newSourceName, newTargetName, e);
 			throw new OssException(e);
 		}
 	}

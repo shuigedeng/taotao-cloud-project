@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -69,7 +69,7 @@ public class SensitiveJsonSerializer extends JsonSerializer<String>
 	private boolean desensitization() {
 
 		//当前用户
-		SecurityUser securityUser = SecurityUtil.getCurrentUser();
+		SecurityUser securityUser = SecurityUtils.getCurrentUser();
 
 		//默认脱敏
 		if (securityUser == null) {

@@ -23,7 +23,7 @@ import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -44,7 +44,7 @@ public class ServiceListener implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ServiceListener.class, StarterName.CORE_STARTER);
+		LogUtils.started(ServiceListener.class, StarterName.CORE_STARTER);
 	}
 
 	@Configuration
@@ -66,7 +66,7 @@ public class ServiceListener implements InitializingBean {
 						if (event instanceof NamingEvent) {
 							List<Instance> instances = ((NamingEvent) event).getInstances();
 
-							LogUtil.info("");
+							LogUtils.info("");
 
 							//Optional instanceOptional = NacosWatch.this.selectCurrentInstance(instances);
 							//instanceOptional.ifPresent((currentInstance) -> {
@@ -90,7 +90,7 @@ public class ServiceListener implements InitializingBean {
 									if (event instanceof NamingEvent) {
 										List instances = ((NamingEvent) event).getInstances();
 
-										LogUtil.info("");
+										LogUtils.info("");
 
 										//Optional instanceOptional = NacosWatch.this.selectCurrentInstance(instances);
 										//instanceOptional.ifPresent((currentInstance) -> {

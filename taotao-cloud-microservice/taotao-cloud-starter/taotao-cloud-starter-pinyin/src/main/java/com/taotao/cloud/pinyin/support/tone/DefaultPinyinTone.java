@@ -5,11 +5,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
 
-import com.taotao.cloud.common.utils.io.FileStreamUtil;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtils;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.constant.PinyinConst;
 import com.taotao.cloud.pinyin.constant.enums.PinyinToneNumEnum;
 import com.taotao.cloud.pinyin.model.CharToneInfo;
@@ -51,7 +51,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     protected List<String> getCharTones(String chinese, final IPinyinToneStyle toneStyle) {
         List<String> defaultList = getCharMap().get(chinese);
 
-        return CollectionUtil.toList(defaultList, new IHandler<String, String>() {
+        return CollectionUtils.toList(defaultList, new IHandler<String, String>() {
             @Override
             public String handle(String s) {
                 return toneStyle.style(s);
@@ -64,7 +64,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         // 大部分拼音都是单个字，不是多音字。
         // 直接在初始化的时候，设置好。
         List<String> pinyinList = getCharMap().get(segment);
-        if(CollectionUtil.isNotEmpty(pinyinList)) {
+        if(CollectionUtils.isNotEmpty(pinyinList)) {
             final String firstPinyin = pinyinList.get(0);
             return toneStyle.style(firstPinyin);
         }
@@ -80,18 +80,18 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         String phrasePinyin = getPhraseMap().get(segment);
 
         // 直接返回空
-        if(StringUtil.isEmptyTrim(phrasePinyin)) {
-            return StringUtil.EMPTY;
+        if(StringUtils.isEmptyTrim(phrasePinyin)) {
+            return StringUtils.EMPTY;
         }
 
-        String[] strings = phrasePinyin.split(StringUtil.BLANK);
+        String[] strings = phrasePinyin.split(StringUtils.BLANK);
         List<String> resultList = Lists.newArrayList();
 
         for(String string : strings) {
             final String style = toneStyle.style(string);
             resultList.add(style);
         }
-        return StringUtil.join(resultList, connector);
+        return StringUtils.join(resultList, connector);
     }
 
     /**
@@ -100,21 +100,21 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * @return map
      */
     private Map<String, List<String>> getCharMap() {
-        if(ObjectUtil.isNotNull(charMap)) {
+        if(ObjectUtils.isNotNull(charMap)) {
             return charMap;
         }
 
         synchronized (DefaultPinyinTone.class) {
-            if(ObjectUtil.isNull(charMap)) {
-                List<String> lines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
+            if(ObjectUtils.isNull(charMap)) {
+                List<String> lines = FileStreamUtils.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
                 // 自定义词库
-                List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
+                List<String> defineLines = FileStreamUtils.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
                 lines.addAll(defineLines);
                 charMap = Maps.newHashMap();
 
                 for(String line : lines) {
                     String[] strings = line.split(PunctuationConst.COLON);
-                    List<String> pinyinList = StringUtil.splitToList(strings[1]);
+                    List<String> pinyinList = StringUtils.splitToList(strings[1]);
 
                     final String word = strings[0];
                     charMap.put(word, pinyinList);
@@ -131,15 +131,15 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
      * @return map
      */
     private Map<String, String> getPhraseMap() {
-        if(ObjectUtil.isNotNull(phraseMap)) {
+        if(ObjectUtils.isNotNull(phraseMap)) {
             return phraseMap;
         }
         synchronized (DefaultPinyinTone.class) {
-            if(ObjectUtil.isNull(phraseMap)) {
+            if(ObjectUtils.isNull(phraseMap)) {
                 final long startTime = System.currentTimeMillis();
-                List<String> lines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
+                List<String> lines = FileStreamUtils.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
                 // 处理自定义字典
-                List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.
+                List<String> defineLines = FileStreamUtils.readAllLines(PinyinConst.
 	                PINYIN_DICT_PHRASE_DEFINE);
                 lines.addAll(defineLines);
                 phraseMap = Maps.newHashMap();
@@ -167,7 +167,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     @Override
     public int toneNum(String defaultPinyin) {
         //1. 获取拼音
-        if(StringUtil.isNotEmpty(defaultPinyin)) {
+        if(StringUtils.isNotEmpty(defaultPinyin)) {
             CharToneInfo toneInfo = this.getCharToneInfo(defaultPinyin);
 
             int index = toneInfo.getIndex();
@@ -199,7 +199,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
             char currentChar = tone.charAt(i);
             ToneItem toneItem = InnerToneHelper.getToneItem(currentChar);
 
-            if (ObjectUtil.isNotNull(toneItem)) {
+            if (ObjectUtils.isNotNull(toneItem)) {
                 charToneInfo.setToneItem(toneItem);
                 charToneInfo.setIndex(i);
                 break;

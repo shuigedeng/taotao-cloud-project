@@ -17,7 +17,7 @@ package com.taotao.cloud.elasticsearch.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.elasticsearch.model.AggItemVo;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
 import java.io.IOException;
@@ -181,7 +181,7 @@ public class AggregationServiceImpl implements IAggregationService {
 				)
 		).size(0);
 
-		RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
+		RestHighLevelClient client = ContextUtils.getBean(RestHighLevelClient.class, true);
 		SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 		Aggregations aggregations = response.getAggregations();
 		Map<String, Object> result = new HashMap<>(15);

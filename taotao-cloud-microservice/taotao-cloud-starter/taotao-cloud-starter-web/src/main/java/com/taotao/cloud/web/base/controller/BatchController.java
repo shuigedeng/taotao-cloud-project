@@ -18,7 +18,7 @@ package com.taotao.cloud.web.base.controller;
 import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.dto.BatchDTO;
 import com.taotao.cloud.web.base.dto.BatchDTO.BatchUpdate;
@@ -85,10 +85,10 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 			throw new BusinessException("添加数据不能为空");
 		}
 		List<T> entityList = saveDTOList.stream()
-			.filter(saveDTO -> ReflectionUtil.checkField(saveDTO.getClass(), getEntityClass()))
+			.filter(saveDTO -> ReflectionUtils.checkField(saveDTO.getClass(), getEntityClass()))
 			.map(saveDTO -> {
 				T t = ReflectUtil.newInstanceIfPossible(getEntityClass());
-				return ReflectionUtil.copyPropertiesIfRecord(t, saveDTO);
+				return ReflectionUtils.copyPropertiesIfRecord(t, saveDTO);
 			})
 			.toList();
 
@@ -120,10 +120,10 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 		}
 
 		List<T> entityList = ts.stream()
-			.filter(updateDTO -> ReflectionUtil.checkField(updateDTO.getClass(), getEntityClass()))
+			.filter(updateDTO -> ReflectionUtils.checkField(updateDTO.getClass(), getEntityClass()))
 			.map(t -> {
 				UpdateDTO updateDTO = updateDTOMap.get(t.getId());
-				return ReflectionUtil.copyPropertiesIfRecord(t, updateDTO);
+				return ReflectionUtils.copyPropertiesIfRecord(t, updateDTO);
 			}).toList();
 
 		return service().updateBatchById(entityList);

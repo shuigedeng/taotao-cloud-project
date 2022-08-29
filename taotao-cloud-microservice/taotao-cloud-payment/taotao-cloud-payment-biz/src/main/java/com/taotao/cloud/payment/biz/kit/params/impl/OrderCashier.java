@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.kit.params.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
@@ -91,7 +91,7 @@ public class OrderCashier implements CashierExecute {
 			orderService.payOrder(payParam.getSn(),
 				paymentSuccessParams.getPaymentMethod(),
 				paymentSuccessParams.getReceivableNo());
-			LogUtil.info("订单{}支付成功,金额{},方式{}", payParam.getSn(),
+			LogUtils.info("订单{}支付成功,金额{},方式{}", payParam.getSn(),
 				paymentSuccessParams.getPaymentMethod(),
 				paymentSuccessParams.getReceivableNo());
 		}

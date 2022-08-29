@@ -17,8 +17,8 @@ package com.taotao.cloud.monitor.collect.task;
 
 
 import com.sun.management.OperatingSystemMXBean;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -112,22 +112,22 @@ public class MemoryCollectTask extends AbstractCollectTask {
 					}
 
 					if (jvmGen != null && pool.getUsage() != null) {
-						ReflectionUtil.setFieldValue(
-							ReflectionUtil.findField(jvmGen.getClass(), "init"), jvmGen,
+						ReflectionUtils.setFieldValue(
+							ReflectionUtils.findField(jvmGen.getClass(), "init"), jvmGen,
 							pool.getUsage().getInit() / byteToMb);
-						ReflectionUtil.setFieldValue(
-							ReflectionUtil.findField(jvmGen.getClass(), "used"), jvmGen,
+						ReflectionUtils.setFieldValue(
+							ReflectionUtils.findField(jvmGen.getClass(), "used"), jvmGen,
 							pool.getUsage().getUsed() / byteToMb);
-						ReflectionUtil.setFieldValue(
-							ReflectionUtil.findField(jvmGen.getClass(), "max"), jvmGen,
+						ReflectionUtils.setFieldValue(
+							ReflectionUtils.findField(jvmGen.getClass(), "max"), jvmGen,
 							pool.getUsage().getMax() / byteToMb);
 						long poolUsageCommitted = pool.getUsage().getCommitted();
-						ReflectionUtil.setFieldValue(
-							ReflectionUtil.findField(jvmGen.getClass(), "committed"), jvmGen,
+						ReflectionUtils.setFieldValue(
+							ReflectionUtils.findField(jvmGen.getClass(), "committed"), jvmGen,
 							poolUsageCommitted / byteToMb);
 						if (poolUsageCommitted > 0) {
-							ReflectionUtil.setFieldValue(
-								ReflectionUtil.findField(jvmGen.getClass(), "usedRate"), jvmGen,
+							ReflectionUtils.setFieldValue(
+								ReflectionUtils.findField(jvmGen.getClass(), "usedRate"), jvmGen,
 								(pool.getUsage().getUsed() * 100 / poolUsageCommitted));
 						}
 					}
@@ -141,8 +141,8 @@ public class MemoryCollectTask extends AbstractCollectTask {
 
 			return new MemeryInfo(jvmInfo, systemInfo);
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

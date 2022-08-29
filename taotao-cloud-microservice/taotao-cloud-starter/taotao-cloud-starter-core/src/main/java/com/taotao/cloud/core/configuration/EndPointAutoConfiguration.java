@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.endpoint.CustomHealthEndPoint;
 import com.taotao.cloud.core.endpoint.RequestMappingEndPoint;
 import com.taotao.cloud.core.endpoint.indicator.CustomHealthIndicator;
@@ -45,7 +45,7 @@ public class EndPointAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EndPointAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(EndPointAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Bean

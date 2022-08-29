@@ -1,7 +1,7 @@
 package com.taotao.cloud.sign.util.security.rsa;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
 import com.taotao.cloud.sign.util.CheckUtils;
@@ -73,7 +73,7 @@ public class RsaUtil implements ISecurity {
 				.orElseThrow(() -> new EncryptDtguaiException("待加密数据为null")));
 
 		} catch (Exception e) {
-			LogUtil.error("公钥加密出错", e);
+			LogUtils.error("公钥加密出错", e);
 			throw new EncryptDtguaiException("公钥加密出错");
 		}
 	}
@@ -100,7 +100,7 @@ public class RsaUtil implements ISecurity {
 			cipher.init(Cipher.DECRYPT_MODE, pubKey);
 			return cipher.doFinal(data);
 		} catch (Exception e) {
-			LogUtil.error("公钥解密出错", e);
+			LogUtils.error("公钥解密出错", e);
 			throw new EncryptDtguaiException("公钥解密出错");
 		}
 	}
@@ -124,7 +124,7 @@ public class RsaUtil implements ISecurity {
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
 			return cipher.doFinal(data);
 		} catch (Exception e) {
-			LogUtil.error("私钥解密出错", e);
+			LogUtils.error("私钥解密出错", e);
 			throw new EncryptDtguaiException("私钥解密出错");
 		}
 
@@ -157,7 +157,7 @@ public class RsaUtil implements ISecurity {
 			cipher.init(Cipher.ENCRYPT_MODE, privateKey);
 			return null != data ? cipher.doFinal(data) : null;
 		} catch (Exception e) {
-			LogUtil.error("私钥加密出错", e);
+			LogUtils.error("私钥加密出错", e);
 			throw new EncryptDtguaiException("私钥加密出错");
 		}
 	}

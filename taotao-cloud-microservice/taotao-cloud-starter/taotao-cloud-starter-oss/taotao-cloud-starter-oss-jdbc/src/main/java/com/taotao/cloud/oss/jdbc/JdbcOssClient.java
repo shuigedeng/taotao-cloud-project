@@ -10,16 +10,13 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
 import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.jdbc.JdbcOssConstant;
-import com.taotao.cloud.oss.jdbc.JdbcOssConfig;
-import com.taotao.cloud.oss.jdbc.JdbcOssInfo;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -84,7 +81,7 @@ public class JdbcOssClient implements StandardOssClient {
 
     @Override
     public OssInfo upLoadCheckPoint(File file, String targetName) {
-        LogUtil.warn("Jdbc存储不支持断点续传上传，将使用普通上传");
+        LogUtils.warn("Jdbc存储不支持断点续传上传，将使用普通上传");
         return upLoad(FileUtil.getInputStream(file), targetName);
     }
 
@@ -101,7 +98,7 @@ public class JdbcOssClient implements StandardOssClient {
 
     @Override
     public void downLoadCheckPoint(File localFile, String targetName) {
-	    LogUtil.warn("Jdbc存储不支持断点续传下载，将使用普通下载");
+	    LogUtils.warn("Jdbc存储不支持断点续传下载，将使用普通下载");
         downLoad(FileUtil.getOutputStream(localFile), targetName);
     }
 

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.ArchivalBorrowEntity;
@@ -70,8 +70,8 @@ public class ArchivalBorrowServiceImpl extends ServiceImpl<ArchivalBorrowMapper,
 
     @Override
     public void data(String id, String data) {
-        ArchivalBorrowForm archivalBorrowForm = JsonUtil.getJsonToBean(data, ArchivalBorrowForm.class);
-        ArchivalBorrowEntity entity = JsonUtil.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowForm archivalBorrowForm = JsonUtils.getJsonToBean(data, ArchivalBorrowForm.class);
+        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

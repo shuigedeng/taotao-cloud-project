@@ -1,6 +1,6 @@
 package com.taotao.cloud.stream.framework.rocketmq;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 
@@ -15,11 +15,11 @@ public class RocketmqSendCallback implements SendCallback {
 
     @Override
     public void onSuccess(SendResult sendResult) {
-        LogUtil.info("async onSuccess SendResult={}", sendResult);
+        LogUtils.info("async onSuccess SendResult={}", sendResult);
     }
 
     @Override
     public void onException(Throwable throwable) {
-	    LogUtil.error("async onException Throwable", throwable);
+	    LogUtils.error("async onException Throwable", throwable);
     }
 }

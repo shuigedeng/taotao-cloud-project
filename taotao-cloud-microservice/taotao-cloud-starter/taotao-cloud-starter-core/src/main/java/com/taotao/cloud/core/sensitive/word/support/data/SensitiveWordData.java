@@ -2,9 +2,9 @@ package com.taotao.cloud.core.sensitive.word.support.data;
 
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.io.FileStreamUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.io.FileStreamUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.sensitive.word.api.IWordData;
 import java.util.List;
 
@@ -25,19 +25,19 @@ public class SensitiveWordData implements IWordData {
         synchronized (SensitiveWordData.class) {
             long start = System.currentTimeMillis();
             defaultLines = Lists.newArrayList();
-            defaultLines = FileStreamUtil.readAllLines("/dict.txt");
-            defaultLines.addAll(FileStreamUtil.readAllLines("/dict_en.txt"));
+            defaultLines = FileStreamUtils.readAllLines("/dict.txt");
+            defaultLines.addAll(FileStreamUtils.readAllLines("/dict_en.txt"));
 
             // 用户自定义
-            List<String> denyList = FileStreamUtil.readAllLines("/sensitive_word_deny.txt");
+            List<String> denyList = FileStreamUtils.readAllLines("/sensitive_word_deny.txt");
             defaultLines.addAll(denyList);
 
             // 移除白名单词语
-            List<String> allowList = FileStreamUtil.readAllLines("/sensitive_word_allow.txt");
-            defaultLines = CollectionUtil.difference(defaultLines, allowList);
+            List<String> allowList = FileStreamUtils.readAllLines("/sensitive_word_allow.txt");
+            defaultLines = CollectionUtils.difference(defaultLines, allowList);
 
             long end = System.currentTimeMillis();
-            LogUtil.info("Sensitive data loaded!, cost time: " + (end - start) + "ms");
+            LogUtils.info("Sensitive data loaded!, cost time: " + (end - start) + "ms");
         }
     }
 

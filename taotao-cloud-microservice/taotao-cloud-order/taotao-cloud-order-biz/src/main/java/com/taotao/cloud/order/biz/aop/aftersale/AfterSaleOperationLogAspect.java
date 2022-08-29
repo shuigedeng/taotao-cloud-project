@@ -2,9 +2,9 @@ package com.taotao.cloud.order.biz.aop.aftersale;
 
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.spel.SpelUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.spel.SpelUtils;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -34,7 +34,7 @@ public class AfterSaleOperationLogAspect {
 	@AfterReturning(returning = "rvt", pointcut = "@annotation(com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint)")
 	public void afterReturning(JoinPoint joinPoint, Object rvt) {
 		try {
-			SecurityUser securityUser = SecurityUtil.getCurrentUser();
+			SecurityUser securityUser = SecurityUtils.getCurrentUser();
 			//日志对象拼接
 			//默认操作人员，系统操作
 			String userName = "系统操作";
@@ -53,7 +53,7 @@ public class AfterSaleOperationLogAspect {
 
 			publisher.publishEvent(new AfterSaleLogEvent(afterSaleLog));
 		} catch (Exception e) {
-			LogUtil.error("售后日志错误", e);
+			LogUtils.error("售后日志错误", e);
 		}
 	}
 
@@ -68,9 +68,9 @@ public class AfterSaleOperationLogAspect {
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		AfterSaleLogPoint afterSaleLogPoint = signature.getMethod()
 			.getAnnotation(AfterSaleLogPoint.class);
-		String description = SpelUtil.compileParams(joinPoint, rvt,
+		String description = SpelUtils.compileParams(joinPoint, rvt,
 			afterSaleLogPoint.description());
-		String sn = SpelUtil.compileParams(joinPoint, rvt, afterSaleLogPoint.sn());
+		String sn = SpelUtils.compileParams(joinPoint, rvt, afterSaleLogPoint.sn());
 		result.put("description", description);
 		result.put("sn", sn);
 		return result;

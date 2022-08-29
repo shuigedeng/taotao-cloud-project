@@ -3,7 +3,7 @@ package com.taotao.cloud.distribution.api.web.query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serial;
@@ -51,13 +51,13 @@ public class DistributionOrderPageQuery extends PageParam {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = Wrappers.query();
-		queryWrapper.like(StringUtil.isNotBlank(distributionName), "distribution_name",
+		queryWrapper.like(StringUtils.isNotBlank(distributionName), "distribution_name",
 			distributionName);
-		queryWrapper.eq(StringUtil.isNotBlank(distributionOrderStatus), "distribution_order_status",
+		queryWrapper.eq(StringUtils.isNotBlank(distributionOrderStatus), "distribution_order_status",
 			distributionOrderStatus);
-		queryWrapper.eq(StringUtil.isNotBlank(orderSn), "order_sn", orderSn);
-		queryWrapper.eq(StringUtil.isNotBlank(distributionId), "distribution_id", distributionId);
-		queryWrapper.eq(StringUtil.isNotBlank(storeId), "store_id", storeId);
+		queryWrapper.eq(StringUtils.isNotBlank(orderSn), "order_sn", orderSn);
+		queryWrapper.eq(StringUtils.isNotBlank(distributionId), "distribution_id", distributionId);
+		queryWrapper.eq(StringUtils.isNotBlank(storeId), "store_id", storeId);
 		if (endTime != null && startTime != null) {
 			queryWrapper.between("create_time", startTime, endTime);
 		}

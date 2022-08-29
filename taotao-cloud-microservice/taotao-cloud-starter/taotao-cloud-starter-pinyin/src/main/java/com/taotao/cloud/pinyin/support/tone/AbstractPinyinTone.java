@@ -2,8 +2,8 @@ package com.taotao.cloud.pinyin.support.tone;
 
 
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.api.IPinyinContext;
 import com.taotao.cloud.pinyin.spi.IPinyinTone;
 import com.taotao.cloud.pinyin.spi.IPinyinToneStyle;
@@ -55,20 +55,20 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
         }
 
         String result = getPhraseTone(segment, toneStyle, connector);
-        if(StringUtil.isNotEmpty(result)) {
+        if(StringUtils.isNotEmpty(result)) {
             return result;
         }
 
         // 直接拆分为单个字，然后用空格分隔
-        List<String> chars = StringUtil.toCharStringList(segment);
-        List<String> tones = CollectionUtil.toList(chars, new IHandler<String, String>() {
+        List<String> chars = StringUtils.toCharStringList(segment);
+        List<String> tones = CollectionUtils.toList(chars, new IHandler<String, String>() {
             @Override
             public String handle(String string) {
                 return getCharToneDefault(string, toneStyle);
             }
         });
 
-        return StringUtil.join(tones, StringUtil.BLANK);
+        return StringUtils.join(tones, StringUtils.BLANK);
     }
 
     /**
@@ -82,7 +82,7 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
     private String getCharToneDefault(final String string, final IPinyinToneStyle toneStyle) {
         String pinyin = getCharTone(string, toneStyle);
 
-        if(StringUtil.isNotEmpty(pinyin)) {
+        if(StringUtils.isNotEmpty(pinyin)) {
             return pinyin;
         }
 
@@ -105,7 +105,7 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
     private List<String> getCharTonesDefault(final String chinese, final IPinyinToneStyle toneStyle) {
         List<String> toneList = getCharTones(chinese, toneStyle);
 
-        if(CollectionUtil.isNotEmpty(toneList)) {
+        if(CollectionUtils.isNotEmpty(toneList)) {
             return toneList;
         }
 

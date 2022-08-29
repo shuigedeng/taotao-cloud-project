@@ -20,7 +20,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.taotao.cloud.common.utils.common.AntiSqlFilterUtil;
+import com.taotao.cloud.common.utils.common.AntiSqlFilterUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -100,7 +100,7 @@ public record PageQuery<QueryDTO>(
 				String underlineSort = StrUtil.toUnderlineCase(filed);
 				// 除了 createTime 和 updateTime 都过滤sql关键字
 				if (!StrUtil.equalsAny(filed, "createTime", "updateTime")) {
-					underlineSort = AntiSqlFilterUtil.getSafeValue(underlineSort);
+					underlineSort = AntiSqlFilterUtils.getSafeValue(underlineSort);
 				}
 
 				if (StrUtil.equalsAny(order, "asc")) {
@@ -138,7 +138,7 @@ public record PageQuery<QueryDTO>(
 				String underlineSort = StrUtil.toUnderlineCase(filed);
 				// 除了 createTime 和 updateTime 都过滤sql关键字
 				if (!StrUtil.equalsAny(filed, "createTime", "updateTime")) {
-					underlineSort = AntiSqlFilterUtil.getSafeValue(underlineSort);
+					underlineSort = AntiSqlFilterUtils.getSafeValue(underlineSort);
 				}
 
 				if (StrUtil.equalsAny(order, "asc")) {

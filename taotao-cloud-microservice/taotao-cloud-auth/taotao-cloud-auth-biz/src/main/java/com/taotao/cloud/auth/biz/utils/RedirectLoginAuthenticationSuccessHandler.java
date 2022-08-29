@@ -1,12 +1,6 @@
 package com.taotao.cloud.auth.biz.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.http.MediaType;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -19,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collections;
 
 /**
  * @author felord.cn
@@ -49,7 +41,7 @@ public class RedirectLoginAuthenticationSuccessHandler implements Authentication
         String targetUrl = savedRequest == null ? this.redirect : savedRequest.getRedirectUrl();
         clearAuthenticationAttributes(request);
 
-	    ResponseUtil.success(response, targetUrl);
+	    ResponseUtils.success(response, targetUrl);
     }
 
     public void setRequestCache(RequestCache requestCache) {

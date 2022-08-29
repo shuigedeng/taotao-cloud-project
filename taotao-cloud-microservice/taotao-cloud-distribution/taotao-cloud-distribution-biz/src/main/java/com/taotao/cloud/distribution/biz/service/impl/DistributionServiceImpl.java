@@ -9,8 +9,8 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.web.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
@@ -62,7 +62,7 @@ public class DistributionServiceImpl extends
 	@Override
 	public Distribution getDistribution() {
 		return this.getOne(new LambdaQueryWrapper<Distribution>().eq(Distribution::getMemberId,
-			SecurityUtil.getUserId()));
+			SecurityUtils.getUserId()));
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class DistributionServiceImpl extends
 				throw new BusinessException(ResultEnum.DISTRIBUTION_IS_APPLY);
 			} else if (distribution.getDistributionStatus().equals(DistributionStatusEnum.REFUSE.name())) {
 				distribution.setDistributionStatus(DistributionStatusEnum.APPLY.name());
-				BeanUtil.copyProperties(distributionApplyDTO, distribution);
+				BeanUtils.copyProperties(distributionApplyDTO, distribution);
 				this.updateById(distribution);
 				return distribution;
 			}
@@ -150,7 +150,7 @@ public class DistributionServiceImpl extends
 	@Override
 	public void bindingDistribution(String distributionId) {
 		//判断用户是否登录，未登录不能进行绑定
-		if (SecurityUtil.getCurrentUser() == null) {
+		if (SecurityUtils.getCurrentUser() == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 
@@ -164,7 +164,7 @@ public class DistributionServiceImpl extends
 				DistributionSetting.class);
 
 			redisRepository.setExpire(
-				CachePrefix.DISTRIBUTION.getPrefix() + "_" + SecurityUtil.getUserId(),
+				CachePrefix.DISTRIBUTION.getPrefix() + "_" + SecurityUtils.getUserId(),
 				distribution.getId(),
 				distributionSetting.getDistributionDay().longValue(),
 				TimeUnit.DAYS);

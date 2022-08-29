@@ -18,7 +18,7 @@ package com.taotao.cloud.common.http;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import okhttp3.*;
 
 import javax.annotation.Nullable;
@@ -165,7 +165,7 @@ public interface ResponseSpec {
 	 * @return JsonNode
 	 */
 	default <T> T atJsonPathValue(String jsonPtrExpr, Class<T> valueType) {
-		return JsonUtil.convertValue(atJsonPath(jsonPtrExpr), valueType);
+		return JsonUtils.convertValue(atJsonPath(jsonPtrExpr), valueType);
 	}
 
 	/**
@@ -176,7 +176,7 @@ public interface ResponseSpec {
 	 * @return JsonNode
 	 */
 	default <T> T atJsonPathValue(String jsonPtrExpr, TypeReference<T> typeReference) {
-		return JsonUtil.convertValue(atJsonPath(jsonPtrExpr), typeReference);
+		return JsonUtils.convertValue(atJsonPath(jsonPtrExpr), typeReference);
 	}
 
 	/**
@@ -187,8 +187,8 @@ public interface ResponseSpec {
 	 * @return List
 	 */
 	default <T> List<T> atJsonPathList(String jsonPtrExpr, Class<T> valueType) {
-		CollectionLikeType collectionLikeType = JsonUtil.getListType(valueType);
-		return JsonUtil.convertValue(atJsonPath(jsonPtrExpr), collectionLikeType);
+		CollectionLikeType collectionLikeType = JsonUtils.getListType(valueType);
+		return JsonUtils.convertValue(atJsonPath(jsonPtrExpr), collectionLikeType);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.taotao.cloud.data.jpa.bean;
 
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
@@ -24,7 +24,7 @@ public class SnowFlakeIdGenerator implements IdentifierGenerator {
 		//final Snowflake snowflake = IdUtil.getSnowflake(1, (int) (Math.random() * 20 + 1));
 		//return snowflake.nextId();
 
-		return IdGeneratorUtil.getId();
+		return IdGeneratorUtils.getId();
 	}
 
 }

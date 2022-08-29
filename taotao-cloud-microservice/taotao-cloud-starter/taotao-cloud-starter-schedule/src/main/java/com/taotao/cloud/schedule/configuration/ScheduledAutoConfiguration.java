@@ -1,6 +1,6 @@
 package com.taotao.cloud.schedule.configuration;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.schedule.core.ScheduledApplicationRunner;
 import com.taotao.cloud.schedule.core.ScheduledConfig;
 import com.taotao.cloud.schedule.core.ScheduledManager;
@@ -56,7 +56,7 @@ public class ScheduledAutoConfiguration implements SchedulingConfigurer {
 		taskScheduler.setPoolSize(threadPoolTaskSchedulerProperties.getPoolSize());
 		taskScheduler.setRemoveOnCancelPolicy(true);
 		taskScheduler.setThreadNamePrefix(threadPoolTaskSchedulerProperties.getThreadNamePrefix());
-		taskScheduler.setErrorHandler(LogUtil::error);
+		taskScheduler.setErrorHandler(LogUtils::error);
 		taskScheduler.setWaitForTasksToCompleteOnShutdown(
 			threadPoolTaskSchedulerProperties.getWaitForTasksToCompleteOnShutdown());
 		taskScheduler.setAwaitTerminationSeconds(

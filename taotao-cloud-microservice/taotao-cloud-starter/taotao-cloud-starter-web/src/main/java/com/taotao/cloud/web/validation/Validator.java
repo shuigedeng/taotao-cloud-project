@@ -10,8 +10,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -74,7 +74,7 @@ public class Validator {
 	 * @return Validator
 	 */
 	public static Validator getValidatorAndSetParam(Object param) {
-		return ContextUtil.getBean(Validator.class, true).param(param);
+		return ContextUtils.getBean(Validator.class, true).param(param);
 	}
 
 	/**
@@ -423,10 +423,10 @@ public class Validator {
 	 * @return Validator
 	 */
 	public Validator valid(Object param, Class<?>... groups) {
-		Set<ConstraintViolation<Object>> violations = ContextUtil.getBean(
+		Set<ConstraintViolation<Object>> violations = ContextUtils.getBean(
 			javax.validation.Validator.class, true).validate(param, groups);
 		if (violations.size() > 0) {
-			LogUtil.warn("{} violations.", violations.size());
+			LogUtils.warn("{} violations.", violations.size());
 			Console.log("校验对象：{}", param);
 			JSONArray errorHints = new JSONArray();
 			violations.forEach(violation -> {
@@ -438,7 +438,7 @@ public class Validator {
 				errorHint.put("errorValue", errorValue);
 				errorHint.put("errorHintMsg", errorHintMsg);
 				errorHints.add(errorHint);
-				LogUtil.error(errorHint.toString(SerializerFeature.WriteMapNullValue));
+				LogUtils.error(errorHint.toString(SerializerFeature.WriteMapNullValue));
 			});
 
 			throw new ValidateException(errorHints.toString(SerializerFeature.WriteMapNullValue));

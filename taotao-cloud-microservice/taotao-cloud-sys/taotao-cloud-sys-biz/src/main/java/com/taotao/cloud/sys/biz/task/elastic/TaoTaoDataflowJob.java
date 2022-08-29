@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.task.elastic;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.calcite.adapter.jdbc.JdbcSchema.Foo;
 import org.apache.shardingsphere.elasticjob.api.ShardingContext;
 import org.apache.shardingsphere.elasticjob.dataflow.job.DataflowJob;
@@ -21,7 +21,7 @@ public class TaoTaoDataflowJob implements DataflowJob<Foo> {
 	@Override
 	public List<Foo> fetchData(final ShardingContext shardingContext) {
 		// 获取数据
-		LogUtil.info("MyDataflowJob *******************");
+		LogUtils.info("MyDataflowJob *******************");
 
 		return null;
 	}

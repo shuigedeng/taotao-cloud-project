@@ -18,10 +18,10 @@ package com.taotao.cloud.common.utils.convert;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.support.function.CheckedFunction;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.support.function.Unchecked;
-import com.taotao.cloud.common.utils.reflect.ClassUtil;
+import com.taotao.cloud.common.utils.reflect.ClassUtils;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,7 +62,7 @@ public class Converter implements org.springframework.cglib.core.Converter {
 			return null;
 		}
 		// 类型一样，不需要转换
-		if (ClassUtil.isAssignableValue(target, value)) {
+		if (ClassUtils.isAssignableValue(target, value)) {
 			return value;
 		}
 		try {
@@ -70,14 +70,14 @@ public class Converter implements org.springframework.cglib.core.Converter {
 				(String) fieldName);
 			// 1. 判断 sourceClazz 为 Map
 			if (Map.class.isAssignableFrom(sourceClazz)) {
-				return ConvertUtil.convert(value, targetDescriptor);
+				return ConvertUtils.convert(value, targetDescriptor);
 			} else {
 				TypeDescriptor sourceDescriptor = Converter.getTypeDescriptor(sourceClazz,
 					(String) fieldName);
-				return ConvertUtil.convert(value, sourceDescriptor, targetDescriptor);
+				return ConvertUtils.convert(value, sourceDescriptor, targetDescriptor);
 			}
 		} catch (Throwable e) {
-			LogUtil.warn("MicaConverter error", e);
+			LogUtils.warn("MicaConverter error", e);
 			return null;
 		}
 	}
@@ -93,7 +93,7 @@ public class Converter implements org.springframework.cglib.core.Converter {
 			}
 			return new TypeDescriptor(field);
 		};
-		return CollectionUtil.computeIfAbsent(TYPE_CACHE, srcCacheKey,
+		return CollectionUtils.computeIfAbsent(TYPE_CACHE, srcCacheKey,
 			Unchecked.function(uncheckedFunction));
 	}
 }

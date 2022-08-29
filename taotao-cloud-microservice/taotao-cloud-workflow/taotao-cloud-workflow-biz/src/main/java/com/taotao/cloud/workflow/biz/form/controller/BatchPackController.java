@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -49,14 +49,14 @@ public class BatchPackController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), BatchPackInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), BatchPackInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             BatchPackEntity entity = batchPackService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, BatchPackInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, BatchPackInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -73,7 +73,7 @@ public class BatchPackController {
         if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
             return Result.fail("批产数量只能输入正整数");
         }
-        BatchPackEntity entity = JsonUtil.getJsonToBean(batchPackForm, BatchPackEntity.class);
+        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
             batchPackService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -95,7 +95,7 @@ public class BatchPackController {
         if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
             return Result.fail("批产数量只能输入正整数");
         }
-        BatchPackEntity entity = JsonUtil.getJsonToBean(batchPackForm, BatchPackEntity.class);
+        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
             batchPackService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

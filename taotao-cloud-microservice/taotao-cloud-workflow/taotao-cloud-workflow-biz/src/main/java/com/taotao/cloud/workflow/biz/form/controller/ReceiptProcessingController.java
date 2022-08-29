@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -47,14 +47,14 @@ public class ReceiptProcessingController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), ReceiptProcessingInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ReceiptProcessingInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ReceiptProcessingEntity entity = receiptProcessingService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, ReceiptProcessingInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, ReceiptProcessingInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -68,7 +68,7 @@ public class ReceiptProcessingController {
     @Operation("新建收文处理表")
     @PostMapping
     public Result create(@RequestBody ReceiptProcessingForm receiptProcessingForm) throws WorkFlowException {
-        ReceiptProcessingEntity entity = JsonUtil.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
+        ReceiptProcessingEntity entity = JsonUtils.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptProcessingForm.getStatus())) {
             receiptProcessingService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -87,7 +87,7 @@ public class ReceiptProcessingController {
     @Operation("修改收文处理表")
     @PutMapping("/{id}")
     public Result update(@RequestBody ReceiptProcessingForm receiptProcessingForm, @PathVariable("id") String id) throws WorkFlowException {
-        ReceiptProcessingEntity entity = JsonUtil.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
+        ReceiptProcessingEntity entity = JsonUtils.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptProcessingForm.getStatus())) {
             receiptProcessingService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

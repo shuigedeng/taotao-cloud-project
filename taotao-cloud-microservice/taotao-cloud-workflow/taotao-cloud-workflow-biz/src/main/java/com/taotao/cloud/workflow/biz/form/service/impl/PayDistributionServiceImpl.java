@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.PayDistributionEntity;
@@ -68,8 +68,8 @@ public class PayDistributionServiceImpl extends ServiceImpl<PayDistributionMappe
 
     @Override
     public void data(String id, String data) {
-        PayDistributionForm payDistributionForm = JsonUtil.getJsonToBean(data, PayDistributionForm.class);
-        PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+        PayDistributionForm payDistributionForm = JsonUtils.getJsonToBean(data, PayDistributionForm.class);
+        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

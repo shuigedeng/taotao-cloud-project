@@ -17,9 +17,9 @@ package com.taotao.cloud.monitor.collect.task;
 
 
 import ch.qos.logback.core.util.Duration;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -70,10 +70,10 @@ public class ElkCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			ElkInfo info = new ElkInfo();
-			LogstashTcpSocketAppender appender = ContextUtil.getBean(LogstashTcpSocketAppender.class, true);
+			LogstashTcpSocketAppender appender = ContextUtils.getBean(LogstashTcpSocketAppender.class, true);
 			if (Objects.nonNull(appender)) {
 				info.ringBufferSize = appender.getRingBufferSize();
-				info.consecutiveDropped = ReflectionUtil.tryGetValue(appender, "consecutiveDroppedCount.get");
+				info.consecutiveDropped = ReflectionUtils.tryGetValue(appender, "consecutiveDroppedCount.get");
 				info.droppedWarnFrequency = appender.getDroppedWarnFrequency();
 				info.keepAliveDuration = appender.getKeepAliveDuration().getMilliseconds();
 				info.producerType = appender.getProducerType().name();
@@ -89,8 +89,8 @@ public class ElkCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

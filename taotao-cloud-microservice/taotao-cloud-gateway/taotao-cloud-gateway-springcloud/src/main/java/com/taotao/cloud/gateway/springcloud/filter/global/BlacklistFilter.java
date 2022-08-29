@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.springcloud.filter.global;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.properties.FilterProperties;
 import com.taotao.cloud.gateway.springcloud.service.ISafeRuleService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,7 +35,7 @@ public class BlacklistFilter implements WebFilter {
 		 * 是否开启黑名单
 		 * 从redis里查询黑名单是否存在
 		 */
-		LogUtil.debug("进入黑名单模式");
+		LogUtils.debug("进入黑名单模式");
 		// 检查黑名单
 		Mono<Void> result = ISafeRuleService.filterBlackList(exchange);
 		if (result != null) {

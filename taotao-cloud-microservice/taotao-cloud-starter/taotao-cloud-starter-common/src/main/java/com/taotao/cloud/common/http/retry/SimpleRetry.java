@@ -17,9 +17,9 @@
 package com.taotao.cloud.common.http.retry;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 
 /**
@@ -75,7 +75,7 @@ public final class SimpleRetry implements IRetry {
 				return retryCallback.call();
 			} catch (Throwable e) {
 				retryCount = i + 1;
-				LogUtil.warn("retry on {} times error{}.", retryCount, e.getMessage());
+				LogUtils.warn("retry on {} times error{}.", retryCount, e.getMessage());
 				lastThrowable = e;
 				if (sleepMillis > 0 && retryCount < maxAttempts) {
 					ThreadUtil.sleep(sleepMillis);
@@ -85,7 +85,7 @@ public final class SimpleRetry implements IRetry {
 		if (lastThrowable == null) {
 			lastThrowable = new IOException("retry on " + maxAttempts + " times,still fail.");
 		}
-		throw ExceptionUtil.unchecked(lastThrowable);
+		throw ExceptionUtils.unchecked(lastThrowable);
 	}
 
 }

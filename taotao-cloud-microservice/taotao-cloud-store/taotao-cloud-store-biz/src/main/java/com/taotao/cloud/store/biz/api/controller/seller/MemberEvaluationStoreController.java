@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
 import com.taotao.cloud.member.api.web.query.EvaluationPageQuery;
@@ -40,7 +40,7 @@ public class MemberEvaluationStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<PageModel<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
-		evaluationPageQuery.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
+		evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationService.queryPage(evaluationPageQuery);
 		return Result.success(PageModel.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
 	}

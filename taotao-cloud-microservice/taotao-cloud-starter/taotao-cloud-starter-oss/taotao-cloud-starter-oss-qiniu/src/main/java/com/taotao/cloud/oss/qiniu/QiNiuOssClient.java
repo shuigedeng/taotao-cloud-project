@@ -17,7 +17,7 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.storage.model.FileListing;
 import com.qiniu.storage.persistent.FileRecorder;
 import com.qiniu.util.Auth;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -70,7 +70,7 @@ public class QiNiuOssClient implements StandardOssClient {
 			uploadManager.put(is, getKey(targetName, false), getUpToken(), null, null);
 		} catch (QiniuException e) {
 			String errorMsg = String.format("%s上传失败", targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 		return getInfo(targetName, false);
@@ -95,7 +95,7 @@ public class QiNiuOssClient implements StandardOssClient {
 			uploadManager.put(file.getPath(), key, getUpToken());
 		} catch (Exception e) {
 			String errorMsg = String.format("%s上传失败", targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 		return getInfo(targetName);
@@ -109,7 +109,7 @@ public class QiNiuOssClient implements StandardOssClient {
 			HttpUtil.download(url, os, false);
 		} catch (QiniuException e) {
 			String errorMsg = String.format("%s下载失败", targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 	}
@@ -170,7 +170,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				.timeout(-1)
 				.header("Range", "bytes=" + start + "-" + end)
 				.execute();
-			LogUtil.debug("start={}, end={}", start, end);
+			LogUtils.debug("start={}, end={}", start, end);
 			return new ByteArrayInputStream(response.bodyBytes());
 		} catch (Exception e) {
 			throw new OssException(e);
@@ -183,7 +183,7 @@ public class QiNiuOssClient implements StandardOssClient {
 			bucketManager.delete(getBucket(), getKey(targetName, false));
 		} catch (QiniuException e) {
 			String errorMsg = String.format("%s删除失败", targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 	}
@@ -195,7 +195,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				getKey(targetName, false), isOverride);
 		} catch (QiniuException e) {
 			String errorMsg = String.format("%s复制失败", targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 	}
@@ -207,7 +207,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				getKey(targetName, false), isOverride);
 		} catch (QiniuException e) {
 			String errorMsg = String.format("%s移动到%s失败", sourceName, targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 	}
@@ -219,7 +219,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				isOverride);
 		} catch (QiniuException e) {
 			String errorMsg = String.format("%s重命名为%s失败", sourceName, targetName);
-			LogUtil.error(errorMsg, e);
+			LogUtils.error(errorMsg, e);
 			throw new OssException(errorMsg, e);
 		}
 	}
@@ -234,10 +234,10 @@ public class QiNiuOssClient implements StandardOssClient {
 			try {
 				listFiles = bucketManager.listFiles(getBucket(), key, "", 1000, "/");
 			} catch (QiniuException e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 
-			LogUtil.info(listFiles.toString());
+			LogUtils.info(listFiles.toString());
 			List<OssInfo> fileOssInfos = new ArrayList<>();
 			List<OssInfo> directoryInfos = new ArrayList<>();
 			if (ObjectUtil.isNotEmpty(listFiles.items)) {
@@ -302,7 +302,7 @@ public class QiNiuOssClient implements StandardOssClient {
 				ossInfo.setLastUpdateTime(putTime);
 			} catch (QiniuException e) {
 				String errorMsg = String.format("获取%s信息失败", targetName);
-				LogUtil.error(errorMsg, e);
+				LogUtils.error(errorMsg, e);
 				throw new OssException(errorMsg, e);
 			}
 		} else {

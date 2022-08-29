@@ -17,7 +17,7 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sys.biz.model.entity.config.GenConfig;
 import com.taotao.cloud.sys.biz.mapper.IGenConfigMapper;
 import com.taotao.cloud.sys.biz.service.business.IGenConfigService;
@@ -53,7 +53,7 @@ public class GenConfigServiceImpl extends ServiceImpl<IGenConfigMapper, GenConfi
 //    @CachePut(key = "#p0")
 	public GenConfig update(String tableName, GenConfig genConfig) {
 		// 如果 api 路径为空，则自动生成路径
-		if (StringUtil.isBlank(genConfig.getApiPath())) {
+		if (StringUtils.isBlank(genConfig.getApiPath())) {
 			String separator = File.separator;
 			String[] paths;
 			String symbol = "\\";

@@ -1,6 +1,6 @@
 package com.taotao.cloud.pulsar.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.pulsar.client.api.Consumer;
 import org.apache.pulsar.client.api.Message;
 import org.apache.pulsar.client.api.MessageListener;
@@ -23,7 +23,7 @@ public class MessageListenerBlockListener<T> implements MessageListener<T> {
                 if (e == null) {
                     consumer.acknowledgeAsync(msg);
                 } else {
-	                LogUtil.error("exception is ", e);
+	                LogUtils.error("exception is ", e);
                     consumer.negativeAcknowledge(msg);
                 }
             });

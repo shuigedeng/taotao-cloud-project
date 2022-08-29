@@ -17,10 +17,10 @@ package com.taotao.cloud.web.servlet.filter;
 
 
 import com.taotao.cloud.common.context.TraceContextHolder;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.common.utils.servlet.TraceUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -28,7 +28,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.MDC;
+
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -57,29 +57,29 @@ public class TraceFilter extends OncePerRequestFilter {
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return RequestUtil.excludeActuator(request);
+		return RequestUtils.excludeActuator(request);
 	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {
 		try {
-			String traceId = TraceUtil.getTraceId(request);
-			if(StringUtil.isBlank(traceId)){
-				traceId = IdGeneratorUtil.getIdStr();
+			String traceId = TraceUtils.getTraceId(request);
+			if(StringUtils.isBlank(traceId)){
+				traceId = IdGeneratorUtils.getIdStr();
 			}
 			TraceContextHolder.setTraceId(traceId);
 
-			TraceUtil.mdcTraceId(traceId);
-			TraceUtil.mdcZipkinTraceId(request);
-			TraceUtil.mdcZipkinSpanId(request);
+			TraceUtils.mdcTraceId(traceId);
+			TraceUtils.mdcZipkinTraceId(request);
+			TraceUtils.mdcZipkinSpanId(request);
 
 			filterChain.doFilter(request, response);
 		} finally {
 			TraceContextHolder.clear();
-			TraceUtil.mdcRemoveTraceId();
-			TraceUtil.mdcRemoveZipkinTraceId();
-			TraceUtil.mdcRemoveZipkinSpanId();
+			TraceUtils.mdcRemoveTraceId();
+			TraceUtils.mdcRemoveZipkinTraceId();
+			TraceUtils.mdcRemoveZipkinSpanId();
 		}
 	}
 }

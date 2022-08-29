@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.core.properties.AsyncProperties;
@@ -69,7 +69,7 @@ public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			Collector collector = Collector.getCollector();
-			AsyncProperties asyncProperties = ContextUtil.getBean(
+			AsyncProperties asyncProperties = ContextUtils.getBean(
 				AsyncProperties.class, true);
 
 			if (Objects.nonNull(collector) && Objects.nonNull(asyncProperties)) {
@@ -104,8 +104,8 @@ public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

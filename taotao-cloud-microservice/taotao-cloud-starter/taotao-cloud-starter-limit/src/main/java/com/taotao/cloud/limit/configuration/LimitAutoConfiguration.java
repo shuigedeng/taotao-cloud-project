@@ -16,7 +16,7 @@
 package com.taotao.cloud.limit.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.limit.ext.LimitProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.limit.guava.GuavaLimitAspect;
@@ -43,7 +43,7 @@ public class LimitAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LimitAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(LimitAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean

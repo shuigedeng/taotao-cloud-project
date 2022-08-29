@@ -2,8 +2,8 @@ package com.taotao.cloud.common.support.attr.impl;
 
 
 import com.taotao.cloud.common.support.attr.IAttributeContext;
-import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.common.ArgUtils;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 
 import java.util.Map;
 import java.util.Optional;
@@ -41,7 +41,7 @@ public class AttributeContext implements IAttributeContext {
 	 * @return this
 	 */
 	protected AttributeContext putAttrMap(final Map<String, ?> map) {
-		ArgUtil.notNull(map, "map");
+		ArgUtils.notNull(map, "map");
 
 		this.context.putAll(map);
 		return this;
@@ -88,7 +88,7 @@ public class AttributeContext implements IAttributeContext {
 	@Override
 	public String getAttrString(String key) {
 		Object object = getAttr(key);
-		return ObjectUtil.objectToString(object);
+		return ObjectUtils.objectToString(object);
 	}
 
 	@Override

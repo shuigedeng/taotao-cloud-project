@@ -1,6 +1,6 @@
 package com.taotao.cloud.retry.strategy;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import io.github.itning.retry.strategy.block.BlockStrategy;
 
 import java.time.Duration;
@@ -18,7 +18,7 @@ public class SpinBlockStrategy implements BlockStrategy {
 
         long start = System.currentTimeMillis();
         long end = start;
-		LogUtil.info("[SpinBlockStrategy]...begin wait.");
+		LogUtils.info("[SpinBlockStrategy]...begin wait.");
 
         while (end - start <= sleepTime) {
             end = System.currentTimeMillis();
@@ -27,7 +27,7 @@ public class SpinBlockStrategy implements BlockStrategy {
         //使用Java8新增的Duration计算时间间隔
         Duration duration = Duration.between(startTime, LocalDateTime.now());
 
-		LogUtil.info("[SpinBlockStrategy]...end wait.duration={}", duration.toMillis());
+		LogUtils.info("[SpinBlockStrategy]...end wait.duration={}", duration.toMillis());
 
     }
 }

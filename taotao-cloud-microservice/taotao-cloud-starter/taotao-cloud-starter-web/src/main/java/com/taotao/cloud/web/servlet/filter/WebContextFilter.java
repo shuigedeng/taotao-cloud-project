@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.servlet.filter;
 
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -34,16 +34,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class WebContextFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return RequestUtil.excludeActuator(request);
+		return RequestUtils.excludeActuator(request);
 	}
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {
-		RequestUtil.bindContext(request, response);
+		RequestUtils.bindContext(request, response);
 		try {
 			filterChain.doFilter(request, response);
 		} finally {
-			RequestUtil.clearContext();
+			RequestUtils.clearContext();
 		}
 	}
 

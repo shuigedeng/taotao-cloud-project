@@ -2,8 +2,8 @@ package com.taotao.cloud.pinyin.bs;
 
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.common.ArgUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.api.IPinyin;
 import com.taotao.cloud.pinyin.api.IPinyinContext;
 import com.taotao.cloud.pinyin.api.impl.Pinyin;
@@ -63,7 +63,7 @@ public final class PinyinBs {
     /**
      * 连接符号
      */
-    private String connector = StringUtil.BLANK;
+    private String connector = StringUtils.BLANK;
 
     /**
      * 拼音的反向标注
@@ -89,7 +89,7 @@ public final class PinyinBs {
      * @return this
      */
     public PinyinBs style(IPinyinToneStyle style) {
-        ArgUtil.notNull(style, "style");
+        ArgUtils.notNull(style, "style");
 
         this.style = style;
         return this;
@@ -111,7 +111,7 @@ public final class PinyinBs {
      * @return 分词
      */
     public PinyinBs segment(IPinyinSegment pinyinSegment) {
-        ArgUtil.notNull(pinyinSegment, "segment");
+        ArgUtils.notNull(pinyinSegment, "segment");
 
         this.pinyinSegment = pinyinSegment;
         return this;
@@ -123,7 +123,7 @@ public final class PinyinBs {
      * @return 结果
      */
     public PinyinBs pinyinToneReverse(IPinyinToneReverse pinyinToneReverse) {
-        ArgUtil.notNull(pinyinToneReverse, "pinyinToneReverse");
+        ArgUtils.notNull(pinyinToneReverse, "pinyinToneReverse");
 
         this.pinyinToneReverse = pinyinToneReverse;
         return this;
@@ -154,7 +154,7 @@ public final class PinyinBs {
      * @return 结果
      */
     public String toPinyin(String string) {
-        if(StringUtil.isEmpty(string)) {
+        if(StringUtils.isEmpty(string)) {
             return string;
         }
 

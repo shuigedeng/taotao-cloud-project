@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import com.taotao.cloud.sys.biz.service.business.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class RequestLogTopicMessageDelegate {
 
 	public void handleRequestLog(String message, String channel) {
 		try {
-			Log log = JsonUtil.MAPPER.readValue(message, Log.class);
+			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
 			logService.save(log);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();

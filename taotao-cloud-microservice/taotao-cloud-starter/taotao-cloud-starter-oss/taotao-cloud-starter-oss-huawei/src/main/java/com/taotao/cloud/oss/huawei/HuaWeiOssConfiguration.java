@@ -5,7 +5,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.obs.services.ObsClient;
 import com.obs.services.ObsConfiguration;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
@@ -34,7 +34,7 @@ public class HuaWeiOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HuaWeiOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(HuaWeiOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
     public static final String DEFAULT_BEAN_NAME = "huaWeiOssClient";

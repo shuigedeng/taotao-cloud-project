@@ -17,7 +17,7 @@ package com.taotao.cloud.web.base.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;
@@ -68,7 +68,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 			throw new BusinessException("未查询到数据");
 		}
 
-		return success(ReflectionUtil.copyPropertiesIfRecord(getQueryVOClass(), t));
+		return success(ReflectionUtils.copyPropertiesIfRecord(getQueryVOClass(), t));
 	}
 
 	/**
@@ -91,7 +91,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 			.ofNullable(data)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> ReflectionUtil.copyPropertiesIfRecord(getQueryVOClass(), t))
+			.map(t -> ReflectionUtils.copyPropertiesIfRecord(getQueryVOClass(), t))
 			.toList();
 		return success(result);
 	}

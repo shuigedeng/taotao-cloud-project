@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration;
 import com.taotao.cloud.core.monitor.Monitor;
@@ -50,7 +50,7 @@ public class HealthAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HealthAutoConfiguration.class, StarterName.MONITOR_STARTER);
+		LogUtils.started(HealthAutoConfiguration.class, StarterName.MONITOR_STARTER);
 	}
 
 	@Bean(destroyMethod = "close")

@@ -18,7 +18,7 @@ package com.taotao.cloud.xss.filter;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.Filter;
@@ -76,12 +76,12 @@ public class XssFilter implements Filter {
 		// 判断uri是否包含项目名称
 		String uriPath = ((HttpServletRequest) request).getRequestURI();
 		if(isIgnorePath(uriPath)){
-			LogUtil.debug("忽略过滤路径=[{}]", uriPath);
+			LogUtils.debug("忽略过滤路径=[{}]", uriPath);
 			chain.doFilter(request, response);
 			return;
 		}
 
-		LogUtil.debug("过滤器包装请求路径=[{}]", uriPath);
+		LogUtils.debug("过滤器包装请求路径=[{}]", uriPath);
 		chain.doFilter(new XssRequestWrapper((HttpServletRequest) request, ignoreParamValueList),
 				response);
 	}

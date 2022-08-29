@@ -16,8 +16,8 @@
 package com.taotao.cloud.redis.stream;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -64,7 +64,7 @@ public class RStreamListenerDetector implements BeanPostProcessor, InitializingB
 			if (listener != null) {
 				String streamKey = listener.name();
 				Assert.hasText(streamKey, "@RStreamListener name must not be empty.");
-				LogUtil.info("Found @RStreamListener on bean:{} method:{}", beanName, method);
+				LogUtils.info("Found @RStreamListener on bean:{} method:{}", beanName, method);
 
 				// 校验 method，method 入参数大于等于1
 				int paramCount = method.getParameterCount();
@@ -81,7 +81,7 @@ public class RStreamListenerDetector implements BeanPostProcessor, InitializingB
 				if (MessageModel.BROADCASTING == messageModel) {
 					broadCast(streamOffset, bean, method, listener.readRawBytes());
 				} else {
-					String groupId = StringUtil.isNotBlank(listener.group()) ? listener.group() : consumerGroup;
+					String groupId = StringUtils.isNotBlank(listener.group()) ? listener.group() : consumerGroup;
 					Consumer consumer = Consumer.from(groupId, consumerName);
 					// 如果需要，创建 group
 					createGroupIfNeed(redisTemplate, streamKey, readOffset, groupId);

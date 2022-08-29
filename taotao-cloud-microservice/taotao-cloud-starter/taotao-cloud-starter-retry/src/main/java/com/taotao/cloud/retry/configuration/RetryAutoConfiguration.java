@@ -16,7 +16,7 @@
 package com.taotao.cloud.retry.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.retry.aop.GuavaRetryingAspect;
 import com.taotao.cloud.retry.properties.RetryProperties;
 import org.springframework.beans.factory.InitializingBean;
@@ -89,7 +89,7 @@ public class RetryAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RetryAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(RetryAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	// ***********************************Guava 重试机制的实现*******************************************

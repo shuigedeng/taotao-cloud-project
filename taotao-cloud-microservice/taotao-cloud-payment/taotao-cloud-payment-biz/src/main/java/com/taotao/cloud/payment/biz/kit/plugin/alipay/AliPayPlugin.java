@@ -17,8 +17,8 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
@@ -90,17 +90,17 @@ public class AliPayPlugin implements Payment {
 		payModel.setSubject(cashierParam.getDetail());
 		payModel.setTotalAmount(cashierParam.getPrice() + "");
 		//回传数据
-		payModel.setPassbackParams(URLEncoder.createAll().encode(BeanUtil.formatKeyValuePair(payParam), StandardCharsets.UTF_8));
+		payModel.setPassbackParams(URLEncoder.createAll().encode(BeanUtils.formatKeyValuePair(payParam), StandardCharsets.UTF_8));
 		//3分钟超时
 		payModel.setTimeoutExpress("3m");
 		payModel.setOutTradeNo(outTradeNo);
 		payModel.setProductCode("QUICK_WAP_PAY");
 		try {
-			LogUtil.info("支付宝H5支付：{}", JSONUtil.toJsonStr(payModel));
+			LogUtils.info("支付宝H5支付：{}", JSONUtil.toJsonStr(payModel));
 			AliPayRequest.wapPay(response, payModel, callbackUrl(apiProperties.getBuyer(), PaymentMethodEnum.ALIPAY),
 				notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.ALIPAY));
 		} catch (Exception e) {
-			LogUtil.error("H5支付异常", e);
+			LogUtils.error("H5支付异常", e);
 			throw new BusinessException(ResultEnum.ALIPAY_EXCEPTION);
 		}
 		return null;
@@ -129,19 +129,19 @@ public class AliPayPlugin implements Payment {
 			//3分钟超时
 			payModel.setTimeoutExpress("3m");
 			//回传数据
-			payModel.setPassbackParams(URLEncoder.createAll().encode(BeanUtil.formatKeyValuePair(payParam), StandardCharsets.UTF_8));
+			payModel.setPassbackParams(URLEncoder.createAll().encode(BeanUtils.formatKeyValuePair(payParam), StandardCharsets.UTF_8));
 			payModel.setOutTradeNo(outTradeNo);
 			payModel.setProductCode("QUICK_MSECURITY_PAY");
 
-			LogUtil.info("支付宝APP支付：{}", payModel);
+			LogUtils.info("支付宝APP支付：{}", payModel);
 			String orderInfo = AliPayRequest.appPayToResponse(payModel, notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.ALIPAY)).getBody();
-			LogUtil.info("支付宝APP支付返回内容：{}", orderInfo);
+			LogUtils.info("支付宝APP支付返回内容：{}", orderInfo);
 			return Result.success(orderInfo);
 		} catch (AlipayApiException e) {
-			LogUtil.error("支付宝支付异常：", e);
+			LogUtils.error("支付宝支付异常：", e);
 			throw new BusinessException(ResultEnum.ALIPAY_EXCEPTION);
 		} catch (Exception e) {
-			LogUtil.error("支付业务异常：", e);
+			LogUtils.error("支付业务异常：", e);
 			throw new BusinessException(ResultEnum.PAY_ERROR);
 		}
 	}
@@ -162,17 +162,17 @@ public class AliPayPlugin implements Payment {
 			payModel.setTotalAmount(cashierParam.getPrice() + "");
 
 			//回传数据
-			payModel.setPassbackParams(URLEncoder.createAll().encode(BeanUtil.formatKeyValuePair(payParam), StandardCharsets.UTF_8));
+			payModel.setPassbackParams(URLEncoder.createAll().encode(BeanUtils.formatKeyValuePair(payParam), StandardCharsets.UTF_8));
 			payModel.setTimeoutExpress("3m");
 			payModel.setOutTradeNo(outTradeNo);
-			LogUtil.info("支付宝扫码：{}", payModel);
+			LogUtils.info("支付宝扫码：{}", payModel);
 			String resultStr = AliPayRequest.tradePrecreatePayToResponse(payModel, notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.ALIPAY)).getBody();
 
-			LogUtil.info("支付宝扫码交互返回：{}", resultStr);
+			LogUtils.info("支付宝扫码交互返回：{}", resultStr);
 			JSONObject jsonObject = JSONObject.parseObject(resultStr);
 			return Result.success(jsonObject.getJSONObject("alipay_trade_precreate_response").getString("qr_code"));
 		} catch (Exception e) {
-			LogUtil.error("支付业务异常：", e);
+			LogUtils.error("支付业务异常：", e);
 			throw new BusinessException(ResultEnum.PAY_ERROR);
 		}
 	}
@@ -193,7 +193,7 @@ public class AliPayPlugin implements Payment {
 		//交互退款
 		try {
 			AlipayTradeRefundResponse alipayTradeRefundResponse = AliPayApi.tradeRefundToResponse(model);
-			LogUtil.error("支付宝退款，参数：{},支付宝响应：{}", JSONUtil.toJsonStr(model), JSONUtil.toJsonStr(alipayTradeRefundResponse));
+			LogUtils.error("支付宝退款，参数：{},支付宝响应：{}", JSONUtil.toJsonStr(model), JSONUtil.toJsonStr(alipayTradeRefundResponse));
 			if (alipayTradeRefundResponse.isSuccess()) {
 				refundLog.setIsRefund(true);
 				refundLog.setReceivableNo(refundLog.getOutOrderNo());
@@ -202,7 +202,7 @@ public class AliPayPlugin implements Payment {
 			}
 			refundLogService.save(refundLog);
 		} catch (Exception e) {
-			LogUtil.error("支付退款异常：", e);
+			LogUtils.error("支付退款异常：", e);
 			throw new BusinessException(ResultEnum.PAY_ERROR);
 		}
 
@@ -215,7 +215,7 @@ public class AliPayPlugin implements Payment {
 		if (StringUtils.isNotEmpty(refundLog.getPaymentReceivableNo())) {
 			model.setTradeNo(refundLog.getPaymentReceivableNo());
 		} else {
-			LogUtil.error("退款时，支付参数为空导致异常：{}", refundLog);
+			LogUtils.error("退款时，支付参数为空导致异常：{}", refundLog);
 			throw new BusinessException(ResultEnum.ALIPAY_PARAMS_EXCEPTION);
 		}
 		try {
@@ -229,7 +229,7 @@ public class AliPayPlugin implements Payment {
 			}
 			refundLogService.save(refundLog);
 		} catch (Exception e) {
-			LogUtil.error("支付宝退款异常", e);
+			LogUtils.error("支付宝退款异常", e);
 		}
 	}
 
@@ -240,7 +240,7 @@ public class AliPayPlugin implements Payment {
 
 	@Override
 	public void callBack(HttpServletRequest request) {
-		LogUtil.info("支付同步回调：");
+		LogUtils.info("支付同步回调：");
 		callback(request);
 
 	}
@@ -248,7 +248,7 @@ public class AliPayPlugin implements Payment {
 	@Override
 	public void notify(HttpServletRequest request) {
 		verifyNotify(request);
-		LogUtil.info("支付异步通知：");
+		LogUtils.info("支付异步通知：");
 	}
 
 	/**
@@ -259,18 +259,18 @@ public class AliPayPlugin implements Payment {
 			AlipayPaymentSetting alipayPaymentSetting = alipayPaymentSetting();
 			//获取支付宝反馈信息
 			Map<String, String> map = AliPayApi.toMap(request);
-			LogUtil.info("同步回调：{}", JSONUtil.toJsonStr(map));
+			LogUtils.info("同步回调：{}", JSONUtil.toJsonStr(map));
 			boolean verifyResult = AlipaySignature.rsaCertCheckV1(map, alipayPaymentSetting.getAlipayPublicCertPath(), "UTF-8",
 				"RSA2");
 			if (verifyResult) {
-				LogUtil.info("支付回调通知：支付成功-参数：{}", map);
+				LogUtils.info("支付回调通知：支付成功-参数：{}", map);
 			} else {
-				LogUtil.info("支付回调通知：支付失败-参数：{}", map);
+				LogUtils.info("支付回调通知：支付失败-参数：{}", map);
 			}
 
 			ThreadContextHolder.getHttpResponse().sendRedirect(domainProperties.getWap() + "/pages/order/myOrder?status=0");
 		} catch (Exception e) {
-			LogUtil.error("支付回调同步通知异常", e);
+			LogUtils.error("支付回调同步通知异常", e);
 		}
 
 	}
@@ -285,7 +285,7 @@ public class AliPayPlugin implements Payment {
 			AlipayPaymentSetting alipayPaymentSetting = alipayPaymentSetting();
 			//获取支付宝反馈信息
 			Map<String, String> map = AliPayApi.toMap(request);
-			LogUtil.info("支付回调响应：{}", JSONUtil.toJsonStr(map));
+			LogUtils.info("支付回调响应：{}", JSONUtil.toJsonStr(map));
 			boolean verifyResult = AlipaySignature.rsaCertCheckV1(map, alipayPaymentSetting.getAlipayPublicCertPath(), "UTF-8",
 				"RSA2");
 			//支付完成判定
@@ -295,7 +295,7 @@ public class AliPayPlugin implements Payment {
 			}
 			String payParamStr = map.get("passback_params");
 			String payParamJson = URLDecoder.decode(payParamStr, StandardCharsets.UTF_8);
-			PayParam payParam = BeanUtil.formatKeyValuePair(payParamJson, new PayParam());
+			PayParam payParam = BeanUtils.formatKeyValuePair(payParamJson, new PayParam());
 
 			if (verifyResult) {
 				String tradeNo = map.get("trade_no");
@@ -304,12 +304,12 @@ public class AliPayPlugin implements Payment {
 					new PaymentSuccessParams(PaymentMethodEnum.ALIPAY.name(), tradeNo, totalAmount, payParam);
 
 				paymentService.success(paymentSuccessParams);
-				LogUtil.info("支付回调通知：支付成功-参数：{},回调参数:{}", map, payParam);
+				LogUtils.info("支付回调通知：支付成功-参数：{},回调参数:{}", map, payParam);
 			} else {
-				LogUtil.info("支付回调通知：支付失败-参数：{}", map);
+				LogUtils.info("支付回调通知：支付失败-参数：{}", map);
 			}
 		} catch (AlipayApiException e) {
-			LogUtil.error("支付回调通知异常", e);
+			LogUtils.error("支付回调通知异常", e);
 		}
 
 	}

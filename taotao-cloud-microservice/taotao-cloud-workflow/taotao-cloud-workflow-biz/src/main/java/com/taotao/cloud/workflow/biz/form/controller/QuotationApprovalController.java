@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -49,14 +49,14 @@ public class QuotationApprovalController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), QuotationApprovalInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), QuotationApprovalInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             QuotationApprovalEntity entity = quotationApprovalService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, QuotationApprovalInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, QuotationApprovalInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -70,7 +70,7 @@ public class QuotationApprovalController {
     @Operation("新建报价审批表")
     @PostMapping
     public Result create(@RequestBody QuotationApprovalForm quotationApprovalForm) throws WorkFlowException {
-        QuotationApprovalEntity entity = JsonUtil.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
+        QuotationApprovalEntity entity = JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(quotationApprovalForm.getStatus())) {
             quotationApprovalService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -89,7 +89,7 @@ public class QuotationApprovalController {
     @Operation("修改报价审批表")
     @PutMapping("/{id}")
     public Result update(@RequestBody QuotationApprovalForm quotationApprovalForm, @PathVariable("id") String id) throws WorkFlowException {
-        QuotationApprovalEntity entity = JsonUtil.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
+        QuotationApprovalEntity entity = JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(quotationApprovalForm.getStatus())) {
             quotationApprovalService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

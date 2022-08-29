@@ -6,9 +6,9 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
@@ -148,7 +148,7 @@ public class CartServiceImpl implements ICartService {
 					}
 
 					//计算购物车小计
-					cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+					cartSkuVO.setSubTotal(CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				} else {
 					//先清理一下 如果商品无效的话
 					cartSkuVOS.remove(cartSkuVO);
@@ -160,7 +160,7 @@ public class CartServiceImpl implements ICartService {
 					//再设置加入购物车的数量
 					this.checkSetGoodsQuantity(cartSkuVO, skuId, num);
 					//计算购物车小计
-					cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+					cartSkuVO.setSubTotal(CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 					cartSkuVOS.add(cartSkuVO);
 				}
 
@@ -168,7 +168,7 @@ public class CartServiceImpl implements ICartService {
 				cartSkuVO.setChecked(true);
 			} else {
 				tradeDTO = new TradeDTO(cartTypeEnum);
-				SecurityUser currentUser = SecurityUtil.getCurrentUser();
+				SecurityUser currentUser = SecurityUtils.getCurrentUser();
 				tradeDTO.setMemberId(currentUser.getUserId());
 				tradeDTO.setMemberName(currentUser.getUsername());
 				List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
@@ -180,7 +180,7 @@ public class CartServiceImpl implements ICartService {
 				//检测购物车数据
 				checkCart(cartTypeEnum, cartSkuVO, skuId, num);
 				//计算购物车小计
-				cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+				cartSkuVO.setSubTotal(CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				cartSkuVOS.add(cartSkuVO);
 			}
 
@@ -192,7 +192,7 @@ public class CartServiceImpl implements ICartService {
 		} catch (Exception serviceException) {
 			throw serviceException;
 		} catch (Exception e) {
-			LogUtil.error("购物车渲染异常", e);
+			LogUtils.error("购物车渲染异常", e);
 			throw new BusinessException(errorMessage);
 		}
 		return true;
@@ -208,7 +208,7 @@ public class CartServiceImpl implements ICartService {
 	private String getOriginKey(CartTypeEnum cartTypeEnum) {
 		//缓存key，默认使用购物车
 		if (cartTypeEnum != null) {
-			SecurityUser currentUser = SecurityUtil.getCurrentUser();
+			SecurityUser currentUser = SecurityUtils.getCurrentUser();
 			return cartTypeEnum.getPrefix() + currentUser.getUserId();
 		}
 		throw new BusinessException(ResultEnum.ERROR);
@@ -219,7 +219,7 @@ public class CartServiceImpl implements ICartService {
 		TradeDTO tradeDTO = (TradeDTO) redisRepository.get(this.getOriginKey(checkedWay));
 		if (tradeDTO == null) {
 			tradeDTO = new TradeDTO(checkedWay);
-			SecurityUser currentUser = SecurityUtil.getCurrentUser();
+			SecurityUser currentUser = SecurityUtils.getCurrentUser();
 			tradeDTO.setMemberId(currentUser.getUserId());
 			tradeDTO.setMemberName(currentUser.getUsername());
 		}
@@ -519,7 +519,7 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Boolean selectCoupon(String couponId, String way, boolean use) {
-		SecurityUser currentUser = SecurityUtil.getCurrentUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		//获取购物车，然后重新写入优惠券
 		CartTypeEnum cartTypeEnum = getCartType(way);
 		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
@@ -584,7 +584,7 @@ public class CartServiceImpl implements ICartService {
 			try {
 				cartTypeEnum = CartTypeEnum.valueOf(way);
 			} catch (IllegalArgumentException e) {
-				LogUtil.error("获取购物车类型出现错误：", e);
+				LogUtils.error("获取购物车类型出现错误：", e);
 			}
 		}
 		return cartTypeEnum;
@@ -623,15 +623,15 @@ public class CartServiceImpl implements ICartService {
 					.findAny();
 			//有促销金额则用促销金额，否则用商品原价
 			if (promotionOptional.isPresent()) {
-				cartPrice = CurrencyUtil.add(cartPrice,
-					CurrencyUtil.mul(promotionOptional.get().getPrice(), cartSkuVO.getNum()));
+				cartPrice = CurrencyUtils.add(cartPrice,
+					CurrencyUtils.mul(promotionOptional.get().getPrice(), cartSkuVO.getNum()));
 				skuPrice.put(cartSkuVO.getGoodsSku().getId(),
-					CurrencyUtil.mul(promotionOptional.get().getPrice(), cartSkuVO.getNum()));
+					CurrencyUtils.mul(promotionOptional.get().getPrice(), cartSkuVO.getNum()));
 			} else {
-				cartPrice = CurrencyUtil.add(cartPrice,
-					CurrencyUtil.mul(cartSkuVO.getGoodsSku().getPrice(), cartSkuVO.getNum()));
+				cartPrice = CurrencyUtils.add(cartPrice,
+					CurrencyUtils.mul(cartSkuVO.getGoodsSku().getPrice(), cartSkuVO.getNum()));
 				skuPrice.put(cartSkuVO.getGoodsSku().getId(),
-					CurrencyUtil.mul(cartSkuVO.getGoodsSku().getPrice(), cartSkuVO.getNum()));
+					CurrencyUtils.mul(cartSkuVO.getGoodsSku().getPrice(), cartSkuVO.getNum()));
 			}
 		}
 

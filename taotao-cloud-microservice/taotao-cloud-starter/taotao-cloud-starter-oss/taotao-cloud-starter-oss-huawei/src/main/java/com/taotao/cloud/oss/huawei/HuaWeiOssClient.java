@@ -15,7 +15,7 @@ import com.obs.services.model.ObjectListing;
 import com.obs.services.model.ObjectMetadata;
 import com.obs.services.model.ObsObject;
 import com.obs.services.model.UploadFileRequest;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
@@ -202,7 +202,7 @@ public class HuaWeiOssClient implements StandardOssClient {
 	            // todo 需要设置访问路径
 	            //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
             } catch (Exception e) {
-                LogUtil.error("获取{}文件属性失败", key, e);
+                LogUtils.error("获取{}文件属性失败", key, e);
             }
         } else {
             ossInfo = new DirectoryOssInfo();

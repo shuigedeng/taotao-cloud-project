@@ -19,7 +19,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -106,10 +106,10 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 	}
 
 	private String decrypt(String sessionKey, String content)  {
-		JsonNode jsonNode = JsonUtil.parse(content);
+		JsonNode jsonNode = JsonUtils.parse(content);
 		if (ObjectUtils.isNotEmpty(jsonNode)) {
 			decrypt(sessionKey, jsonNode);
-			return JsonUtil.toJson(jsonNode);
+			return JsonUtils.toJson(jsonNode);
 		}
 
 		return content;

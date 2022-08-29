@@ -21,7 +21,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.model.UploadPartRequest;
 import com.amazonaws.services.s3.model.UploadPartResult;
 import com.amazonaws.services.s3.transfer.TransferManager;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
@@ -34,7 +34,6 @@ import com.taotao.cloud.oss.common.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.common.model.upload.UploadPart;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.jd.JdOssConfig;
 
 import java.io.File;
 import java.io.InputStream;
@@ -284,7 +283,7 @@ public class JdOssClient implements StandardOssClient {
 	            // todo 需要设置访问路径
 	            //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
             } catch (Exception e) {
-                LogUtil.error("获取{}文件属性失败", key, e);
+                LogUtils.error("获取{}文件属性失败", key, e);
             }
         } else {
             ossInfo = new DirectoryOssInfo();

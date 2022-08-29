@@ -12,10 +12,9 @@ import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.alibaba.excel.write.style.column.AbstractColumnWidthStyleStrategy;
 import com.alibaba.excel.write.style.column.SimpleColumnWidthStyleStrategy;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.office.util.constant.ExportConstant;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class ExcelExportUtil<T> {
      */
     public static <T> void exportFile(String fileName, List<T> head, List<List<T>> exportData, List<String> sheetNames, HttpServletResponse response) {
         if (Objects.isNull(response) || StrUtil.isBlank(fileName) || CollUtil.isEmpty(head)) {
-	        LogUtil.info("ExcelExportUtil exportFile required param can't be empty");
+	        LogUtils.info("ExcelExportUtil exportFile required param can't be empty");
             return;
         }
         ExcelWriter writer = null;
@@ -56,7 +55,7 @@ public class ExcelExportUtil<T> {
                 writer.write(list, sheet);
             }
         } catch (Exception e) {
-	        LogUtil.error("ExcelExportUtil exportFile in error:{}", e);
+	        LogUtils.error("ExcelExportUtil exportFile in error:{}", e);
         } finally {
             if (null != writer) {
                 writer.finish();
@@ -112,7 +111,7 @@ public class ExcelExportUtil<T> {
             byte[] bytes = ResourceUtil.readBytes(filePath);
             response.getOutputStream().write(bytes);
         } catch (Exception e) {
-	        LogUtil.error("ExcelExportUtil downloadTemplate in error:{}", e);
+	        LogUtils.error("ExcelExportUtil downloadTemplate in error:{}", e);
         }
     }
 

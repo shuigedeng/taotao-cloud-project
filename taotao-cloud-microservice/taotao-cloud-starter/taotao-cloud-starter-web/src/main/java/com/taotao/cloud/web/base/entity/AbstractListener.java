@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.base.entity;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 
 import javax.annotation.PreDestroy;
 import javax.persistence.PostLoad;
@@ -22,7 +22,7 @@ public class AbstractListener {
 
 	@PrePersist
 	public void prePersist(Object object) {
-		LogUtil.info(" AbstractListener prePersis: {}", object);
+		LogUtils.info(" AbstractListener prePersis: {}", object);
 
 		// System.out.println("进行insert之前");
 		// if(entity instanceof TestEntity) {
@@ -42,37 +42,37 @@ public class AbstractListener {
 
 	@PreUpdate
 	public void preUpdate(Object object) {
-		LogUtil.info("AbstractListener preUpdate: {}", object);
+		LogUtils.info("AbstractListener preUpdate: {}", object);
 	}
 
 	@PreRemove
 	public void preRemove(Object object) {
-		LogUtil.info("AbstractListener preRemove: {}", object);
+		LogUtils.info("AbstractListener preRemove: {}", object);
 	}
 
 	@PreDestroy
 	public void preDestroy(Object object) {
-		LogUtil.info("AbstractListener preDestroy: {}", object);
+		LogUtils.info("AbstractListener preDestroy: {}", object);
 	}
 
 	@PostPersist
 	public void postPersist(Object object) {
-		LogUtil.info("AbstractListener postPersist: {}", object);
+		LogUtils.info("AbstractListener postPersist: {}", object);
 	}
 
 	@PostUpdate
 	public void postUpdate(Object object) {
-		LogUtil.info("AbstractListener postUpdate: {}", object);
+		LogUtils.info("AbstractListener postUpdate: {}", object);
 	}
 
 	@PostRemove
 	public void postRemove(Object object) {
-		LogUtil.info("AbstractListener postRemove: {}", object);
+		LogUtils.info("AbstractListener postRemove: {}", object);
 	}
 
 	@PostLoad
 	public void postLoad(Object object) {
-		LogUtil.info("AbstractListener postLoad: {}", object);
+		LogUtils.info("AbstractListener postLoad: {}", object);
 	}
 
 }

@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.model;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.annatations.Dinger;
 import com.taotao.cloud.dingtalk.entity.DingerResponse;
 import com.taotao.cloud.dingtalk.entity.MsgType;
@@ -133,7 +133,7 @@ public class DingerMessageHandler extends MultiDingerProperty
 			T dest = (T) in.readObject();
 			return dest;
 		} catch (Exception e) {
-			LogUtil.debug("copy properties error:", e);
+			LogUtils.debug("copy properties error:", e);
 			return null;
 		}
 	}

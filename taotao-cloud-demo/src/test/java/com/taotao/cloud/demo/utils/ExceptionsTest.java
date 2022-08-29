@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,11 +14,11 @@ public class ExceptionsTest {
 
 	@Test(expected = IOException.class)
 	public void testIOException() {
-		throw ExceptionUtil.unchecked(new IOException());
+		throw ExceptionUtils.unchecked(new IOException());
 	}
 
 	@Test(expected = IOException.class)
 	public void testJson() {
-		JsonUtil.readValue("`12123`", Object.class);
+		JsonUtils.readValue("`12123`", Object.class);
 	}
 }

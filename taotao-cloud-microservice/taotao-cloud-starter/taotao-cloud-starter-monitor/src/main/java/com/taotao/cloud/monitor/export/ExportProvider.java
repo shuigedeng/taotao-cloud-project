@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.export;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.model.Report;
@@ -71,7 +71,7 @@ public class ExportProvider {
 		this.isClose = false;
 
 		if (this.exportProperties.getElkEnabled()) {
-			LogstashTcpSocketAppender logstashTcpSocketAppender = ContextUtil.getBean(LogstashTcpSocketAppender.class, false);
+			LogstashTcpSocketAppender logstashTcpSocketAppender = ContextUtils.getBean(LogstashTcpSocketAppender.class, false);
 			if (Objects.nonNull(logstashTcpSocketAppender)) {
 				registerCollectTask(new ElkExport(this.exportProperties, logstashTcpSocketAppender));
 			}
@@ -82,13 +82,13 @@ public class ExportProvider {
 				try {
 					run();
 				} catch (Exception e) {
-					LogUtil.error(StarterName.MONITOR_STARTER, "run 循环上传报表出错", e);
+					LogUtils.error(StarterName.MONITOR_STARTER, "run 循环上传报表出错", e);
 				}
 
 				try {
 					Thread.sleep(this.exportProperties.getExportTimeSpan() * 1000L);
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 		});
@@ -97,7 +97,7 @@ public class ExportProvider {
 			try {
 				e.start();
 			} catch (Exception ex) {
-				LogUtil.error(StarterName.MONITOR_STARTER, e.getClass().getName() + "启动出错", ex);
+				LogUtils.error(StarterName.MONITOR_STARTER, e.getClass().getName() + "启动出错", ex);
 			}
 		}
 	}
@@ -129,7 +129,7 @@ public class ExportProvider {
 			try {
 				e.close();
 			} catch (Exception ex) {
-				LogUtil.error(ex, StarterName.MONITOR_STARTER, e.getClass().getName() + "关闭出错");
+				LogUtils.error(ex, StarterName.MONITOR_STARTER, e.getClass().getName() + "关闭出错");
 			}
 		}
 	}

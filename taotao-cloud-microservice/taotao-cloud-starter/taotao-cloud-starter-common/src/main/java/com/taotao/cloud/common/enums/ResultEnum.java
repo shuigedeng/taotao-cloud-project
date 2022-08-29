@@ -15,10 +15,6 @@
  */
 package com.taotao.cloud.common.enums;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
-
-import java.time.LocalDateTime;
-
 /**
  * 返回结果枚举 code规则 500(开始累加)  + 自增三位数(000 开始累加)
  * <p>

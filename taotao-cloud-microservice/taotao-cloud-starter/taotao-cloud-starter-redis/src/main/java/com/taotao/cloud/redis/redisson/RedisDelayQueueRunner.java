@@ -3,8 +3,8 @@ package com.taotao.cloud.redis.redisson;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import cn.hutool.core.thread.ThreadUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.redisson.handle.RedisDelayQueueHandle;
 import org.springframework.boot.CommandLineRunner;
 
@@ -74,7 +74,7 @@ public class RedisDelayQueueRunner implements CommandLineRunner {
 							}
 						}
 
-						RedisDelayQueueHandle redisDelayQueueHandle = ContextUtil.getBean(
+						RedisDelayQueueHandle redisDelayQueueHandle = ContextUtils.getBean(
 							RedisDelayQueueHandle.class,
 							queueEnum.getBeanId(),
 							true);
@@ -82,14 +82,14 @@ public class RedisDelayQueueRunner implements CommandLineRunner {
 						if (Objects.nonNull(redisDelayQueueHandle)) {
 							ThreadUtil.execute(() -> redisDelayQueueHandle.execute(value));
 							//redisDelayQueueHandle.execute(value);
-							LogUtil.info("RedisDelayQueueRunner run success");
+							LogUtils.info("RedisDelayQueueRunner run success");
 						}
 					}
 				} catch (InterruptedException e) {
-					LogUtil.error("(Redis延迟队列异常中断) {}", e.getMessage());
+					LogUtils.error("(Redis延迟队列异常中断) {}", e.getMessage());
 				}
 			});
 		}
-		LogUtil.info("(Redis延迟队列启动成功)");
+		LogUtils.info("(Redis延迟队列启动成功)");
 	}
 }

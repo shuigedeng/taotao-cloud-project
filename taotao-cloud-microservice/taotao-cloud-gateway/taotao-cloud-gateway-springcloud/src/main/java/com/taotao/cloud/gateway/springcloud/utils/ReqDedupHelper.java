@@ -1,7 +1,7 @@
 package com.taotao.cloud.gateway.springcloud.utils;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ReqDedupHelper {
 
 		String paramTreeMapJSON = JSON.toJSONString(paramTreeMap);
 		String md5deDupParam = jdkMD5(paramTreeMapJSON);
-		LogUtil.debug("md5deDupParam = {}, excludeKeys = {} {}", md5deDupParam,
+		LogUtils.debug("md5deDupParam = {}, excludeKeys = {} {}", md5deDupParam,
 			Arrays.deepToString(excludeKeys), paramTreeMapJSON);
 		return md5deDupParam;
 	}
@@ -42,7 +42,7 @@ public class ReqDedupHelper {
 			byte[] mdBytes = messageDigest.digest(src.getBytes());
 			res = DatatypeConverter.printHexBinary(mdBytes);
 		} catch (Exception e) {
-			LogUtil.error("", e);
+			LogUtils.error("", e);
 		}
 		return res;
 	}

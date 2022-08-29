@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.redis.lock;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.data.redis.connection.RedisStringCommands;
@@ -77,10 +77,10 @@ public class RedisDistributedLock {
 		// 如果获取锁失败，按照传入的重试次数进行重试
 		while ((!result) && retryTimes-- > 0) {
 			try {
-				LogUtil.debug("get redisDistributeLock failed, retrying..." + retryTimes);
+				LogUtils.debug("get redisDistributeLock failed, retrying..." + retryTimes);
 				Thread.sleep(sleepMillis);
 			} catch (InterruptedException e) {
-				LogUtil.error("Interrupted!", e);
+				LogUtils.error("Interrupted!", e);
 				Thread.currentThread().interrupt();
 			}
 			result = setRedis(key, expire);
@@ -102,7 +102,7 @@ public class RedisDistributedLock {
 			});
 			return status;
 		} catch (Exception e) {
-			LogUtil.error("set redisDistributeLock occured an exception", e);
+			LogUtils.error("set redisDistributeLock occured an exception", e);
 		}
 		return false;
 	}
@@ -126,7 +126,7 @@ public class RedisDistributedLock {
 			});
 			return result;
 		} catch (Exception e) {
-			LogUtil.error("release redisDistributeLock occured an exception", e);
+			LogUtils.error("release redisDistributeLock occured an exception", e);
 		} finally {
 			lockFlag.remove();
 		}

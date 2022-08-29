@@ -1,7 +1,7 @@
 package com.taotao.cloud.customer.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.customer.api.feign.RemoteChatbotService;
 import com.taotao.cloud.customer.api.web.vo.ChatbotVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -20,7 +20,7 @@ public class RemoteChatbotFallbackImpl implements FallbackFactory<RemoteChatbotS
 
 			@Override
 			public Result<ChatbotVO> findChatbotById(Long id) {
-				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
+				LogUtils.error("调用getMemberSecurityUser异常：{}", throwable, id);
 				return Result.fail(null, 500);
 			}
 		};

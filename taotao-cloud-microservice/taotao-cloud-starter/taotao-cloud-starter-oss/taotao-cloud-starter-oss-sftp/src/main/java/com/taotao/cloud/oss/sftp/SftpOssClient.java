@@ -11,7 +11,7 @@ import cn.hutool.extra.ssh.Sftp;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.SftpATTRS;
 import com.jcraft.jsch.SftpException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
@@ -102,12 +102,12 @@ public class SftpOssClient implements StandardOssClient {
 
     @Override
     public void copy(String sourceName, String targetName, Boolean isOverride) {
-	    LogUtil.warn("sftp协议不支持copy命令");
+	    LogUtils.warn("sftp协议不支持copy命令");
     }
 
     @Override
     public void move(String sourceName, String targetName, Boolean isOverride) {
-	    LogUtil.warn("sftp协议不支持move命令");
+	    LogUtils.warn("sftp协议不支持move命令");
     }
 
     @Override
@@ -119,7 +119,7 @@ public class SftpOssClient implements StandardOssClient {
                 sftp.getClient().rename(newSourceName, newTargetName);
             }
         } catch (SftpException e) {
-	        LogUtil.error("{}重命名为{}失败,错误信息为：", newSourceName, newTargetName, e);
+	        LogUtils.error("{}重命名为{}失败,错误信息为：", newSourceName, newTargetName, e);
         }
     }
 

@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.web.dto.cart.MemberCouponDTO;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.dto.order.PriceDetailDTO;
@@ -125,7 +125,7 @@ public class CouponRender implements ICartRenderStep {
 			tradeDTO.getCantUseCoupons().add(new MemberCouponVO(memberCoupon,
 				"优惠券使用门槛不足，还差" +
 					StringUtils.toFen(
-						CurrencyUtil.sub(memberCoupon.getConsumeThreshold(),
+						CurrencyUtils.sub(memberCoupon.getConsumeThreshold(),
 							totalPrice.getGoodsPrice())) +
 					"元"));
 		}
@@ -242,7 +242,7 @@ public class CouponRender implements ICartRenderStep {
 		BigDecimal countPrice = 0D;
 		Map<String, BigDecimal> couponMap = memberCouponDTO.getSkuDetail();
 		for (BigDecimal skuPrice : couponMap.values()) {
-			countPrice = CurrencyUtil.add(countPrice, skuPrice);
+			countPrice = CurrencyUtils.add(countPrice, skuPrice);
 		}
 
 		//接收具体优惠券信息
@@ -317,9 +317,9 @@ public class CouponRender implements ICartRenderStep {
 					PriceDetailDTO priceDetailDTO = item.getPriceDetailDTO();
 
 					// 打折金额=商品金额*折扣/10
-					BigDecimal discountCouponPrice = CurrencyUtil.mul(
+					BigDecimal discountCouponPrice = CurrencyUtils.mul(
 						priceDetailDTO.getGoodsPrice(),
-						CurrencyUtil.sub(1, CurrencyUtil.div(coupon.getDiscount(), 10, 3)));
+						CurrencyUtils.sub(1, CurrencyUtils.div(coupon.getDiscount(), 10, 3)));
 
 					//平台券则写入店铺承担优惠券比例
 					if (Boolean.TRUE.equals(coupon.getIsPlatform())) {
@@ -327,7 +327,7 @@ public class CouponRender implements ICartRenderStep {
 						priceDetailDTO.setSiteCouponPoint(coupon.getStoreCommission());
 					}
 					priceDetailDTO.setCouponPrice(
-						CurrencyUtil.add(priceDetailDTO.getCouponPrice(), discountCouponPrice));
+						CurrencyUtils.add(priceDetailDTO.getCouponPrice(), discountCouponPrice));
 
 				}
 			}

@@ -17,7 +17,7 @@ import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectListing;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.UploadFileRequest;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -128,7 +128,7 @@ public class AliOssClient implements StandardOssClient {
 		try {
 			oss.downloadFile(downloadFileRequest);
 		} catch (Throwable e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 		}
 	}
 
@@ -241,7 +241,7 @@ public class AliOssClient implements StandardOssClient {
 				ossInfo.setLength(objectMetadata.getContentLength());
 				ossInfo.setUrl(aliOssConfig.getEndpoint() + "/" + bucketName + "/" + key);
 			} catch (Exception e) {
-				LogUtil.error("获取{}文件属性失败", key, e);
+				LogUtils.error("获取{}文件属性失败", key, e);
 			}
 		} else {
 			ossInfo = new DirectoryOssInfo();

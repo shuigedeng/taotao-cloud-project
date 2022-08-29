@@ -16,8 +16,8 @@
 package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.properties.OkHttpProperties;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -60,7 +60,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(OkhttpAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(OkhttpAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Bean
@@ -220,7 +220,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 							append("&");
 					}
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 				urlBuilder.deleteCharAt(urlBuilder.length() - 1);
 			}
@@ -251,7 +251,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 			if (isJsonPost) {
 				String json = "";
 				if (paramMap != null) {
-					json = JsonUtil.toJSONString(paramMap);
+					json = JsonUtils.toJSONString(paramMap);
 				}
 				requestBody = RequestBody
 					.create(json, MediaType.parse("application/json; charset=utf-8"));
@@ -279,7 +279,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 				Response response = okHttpClient.newCall(request.build()).execute();
 				return Objects.requireNonNull(response.body()).string();
 			} catch (IOException e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 				return "请求失败：" + e.getMessage();
 			}
 		}
@@ -310,7 +310,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 			try {
 				getSemaphoreInstance().acquire();
 			} catch (InterruptedException e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 			return buffer.toString();
 		}
@@ -352,7 +352,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 						request.addHeader(entry.getKey(), entry.getValue());
 					}
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 		}
@@ -372,7 +372,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 				sc.init(null, trustAllCerts, new SecureRandom());
 				ssfFactory = sc.getSocketFactory();
 			} catch (Exception e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 			return ssfFactory;
 		}

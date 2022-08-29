@@ -19,7 +19,7 @@ import com.jdcloud.sdk.http.Protocol;
 import com.jdcloud.sdk.service.sms.client.SmsClient;
 import com.jdcloud.sdk.service.sms.model.BatchSendRequest;
 import com.jdcloud.sdk.service.sms.model.BatchSendResult;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -60,7 +60,7 @@ public class JdCloudSendHandler extends AbstractSendHandler<JdCloudProperties> {
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -91,7 +91,7 @@ public class JdCloudSendHandler extends AbstractSendHandler<JdCloudProperties> {
 		if (flag) {
 			publishSendSuccessEvent(noticeData, phones);
 		} else {
-			LogUtil.debug("send fail [code:{}, message:{}]", result.getCode(), result.getMessage());
+			LogUtils.debug("send fail [code:{}, message:{}]", result.getCode(), result.getMessage());
 			publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMessage()));
 		}
 

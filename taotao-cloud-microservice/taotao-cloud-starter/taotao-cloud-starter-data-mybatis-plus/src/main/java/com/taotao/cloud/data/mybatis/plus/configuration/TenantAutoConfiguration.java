@@ -19,7 +19,7 @@ import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
@@ -44,7 +44,7 @@ public class TenantAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(TenantAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
+		LogUtils.started(TenantAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	private final TenantProperties tenantProperties;

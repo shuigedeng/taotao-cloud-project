@@ -17,9 +17,9 @@ package com.taotao.cloud.elk.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.SecurityConstant;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -78,7 +78,7 @@ public class WebControllerAspect {
 					String inPutParam = preHandle(joinPoint, request);
 					String outPutParam = postHandle(result);
 					String ip = getRemoteHost(request);
-					LogUtil.info("【远程ip】{},【url】{},【输入】{},【输出】{},【异常】{},【耗时】{}ms",
+					LogUtils.info("【远程ip】{},【url】{},【输入】{},【输出】{},【异常】{},【耗时】{}ms",
 						ip,
 						uri,
 						inPutParam,
@@ -101,7 +101,7 @@ public class WebControllerAspect {
 
 		for (String tokenKey : TOKEN_KEYS) {
 			String token = request.getHeader(tokenKey);
-			if (StringUtil.isNotBlank(token)) {
+			if (StringUtils.isNotBlank(token)) {
 				sb.append("token:").append(token).append(",");
 				break;
 			}
@@ -112,7 +112,7 @@ public class WebControllerAspect {
 				.contains("org.springframework.web.bind.annotation")) {
 				continue;
 			}
-			sb.append(JsonUtil.toJSONString(request.getParameterMap()));
+			sb.append(JsonUtils.toJSONString(request.getParameterMap()));
 		}
 		return sb.toString();
 	}
@@ -121,19 +121,19 @@ public class WebControllerAspect {
 		if (null == retVal) {
 			return "";
 		}
-		return JsonUtil.toJSONString(retVal);
+		return JsonUtils.toJSONString(retVal);
 	}
 
 	private String getRemoteHost(HttpServletRequest request) {
 		String unknown = "unknown";
 		String ip = request.getHeader("x-forwarded-for");
-		if (StringUtil.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
+		if (StringUtils.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
 		}
-		if (StringUtil.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
+		if (StringUtils.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (StringUtil.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
+		if (StringUtils.isBlank(ip) || unknown.equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
 		return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;

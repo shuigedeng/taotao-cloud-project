@@ -25,7 +25,7 @@ import cn.hutool.system.SystemUtil;
 import com.taotao.cloud.captcha.support.core.definition.enums.CaptchaResource;
 import com.taotao.cloud.captcha.support.core.definition.enums.FontStyle;
 import com.taotao.cloud.captcha.support.core.properties.CaptchaProperties;
-import com.taotao.cloud.common.utils.io.ResourceUtil;
+import com.taotao.cloud.common.utils.io.ResourceUtils;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -113,9 +113,9 @@ public class ResourceProvider implements InitializingBean {
 	}
 
 	private static Map<String, String> getImages(String location) {
-		if (ResourceUtil.isClasspathAllUrl(location)) {
+		if (ResourceUtils.isClasspathAllUrl(location)) {
 			try {
-				Resource[] resources = ResourceUtil.getResources(location);
+				Resource[] resources = ResourceUtils.getResources(location);
 				Map<String, String> images = new ConcurrentHashMap<>();
 				if (ArrayUtils.isNotEmpty(resources)) {
 					Arrays.stream(resources).forEach(resource -> {
@@ -158,9 +158,9 @@ public class ResourceProvider implements InitializingBean {
 	}
 
 	private static Map<String, Font> getFonts(String location) {
-		if (ResourceUtil.isClasspathAllUrl(location)) {
+		if (ResourceUtils.isClasspathAllUrl(location)) {
 			try {
-				Resource[] resources = ResourceUtil.getResources(location);
+				Resource[] resources = ResourceUtils.getResources(location);
 				Map<String, Font> fonts = new ConcurrentHashMap<>();
 				if (ArrayUtils.isNotEmpty(resources)) {
 					Arrays.stream(resources).forEach(resource -> {

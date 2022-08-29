@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.monitor.collect;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.model.Message;
 import com.taotao.cloud.monitor.model.Report;
@@ -109,8 +109,8 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @since 2022-04-27 17:27:14
 	 */
 	public static void notifyMessage(WarnTypeEnum type, String subject, String content) {
-		LogUtil.warn("[warn]" + subject + "\r\n" + content);
-		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
+		LogUtils.warn("[warn]" + subject + "\r\n" + content);
+		WarnProvider warnProvider = ContextUtils.getBean(WarnProvider.class, false);
 		if (warnProvider != null) {
 			Message message = new Message();
 			message.setWarnType(type);
@@ -131,7 +131,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @since 2022-04-27 17:27:14
 	 */
 	public static void notifyMessage(Message message) {
-		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
+		WarnProvider warnProvider = ContextUtils.getBean(WarnProvider.class, false);
 		if (warnProvider != null) {
 			if (message.getWarnType() == WarnTypeEnum.ERROR) {
 				warnProvider.notifyNow(message);

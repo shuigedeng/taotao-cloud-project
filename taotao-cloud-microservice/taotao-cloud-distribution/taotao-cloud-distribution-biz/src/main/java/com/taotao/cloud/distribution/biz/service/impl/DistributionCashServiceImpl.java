@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.distribution.api.web.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
@@ -72,10 +72,10 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 				throw new BusinessException(ResultEnum.WALLET_WITHDRAWAL_INSUFFICIENT);
 			}
 			//将提现金额存入冻结金额,扣减可提现金额
-			distribution.setCanRebate(CurrencyUtil.sub(distribution.getCanRebate(), applyMoney));
+			distribution.setCanRebate(CurrencyUtils.sub(distribution.getCanRebate(), applyMoney));
 			distributionService.updateById(distribution);
 			//提现申请记录
-			DistributionCash distributionCash = new DistributionCash("D" + IdGeneratorUtil.getId(), distribution.getId(), applyMoney, distribution.getMemberName());
+			DistributionCash distributionCash = new DistributionCash("D" + IdGeneratorUtils.getId(), distribution.getId(), applyMoney, distribution.getMemberName());
 			boolean result = this.save(distributionCash);
 			if (result) {
 				//发送提现消息
@@ -136,7 +136,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 				} else {
 					memberWithdrawalMessage.setStatus(WithdrawStatusEnum.FAIL_AUDITING.name());
 					//分销员可提现金额退回
-					distribution.setCanRebate(CurrencyUtil.add(distribution.getCanRebate(), distributorCash.getPrice()));
+					distribution.setCanRebate(CurrencyUtils.add(distribution.getCanRebate(), distributorCash.getPrice()));
 					distributorCash.setDistributionCashStatus(WithdrawStatusEnum.FAIL_AUDITING.name());
 				}
 				//分销员金额相关处理

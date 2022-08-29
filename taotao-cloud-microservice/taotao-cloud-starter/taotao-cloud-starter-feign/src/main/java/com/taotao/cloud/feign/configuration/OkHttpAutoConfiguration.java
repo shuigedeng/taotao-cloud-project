@@ -17,15 +17,12 @@
 package com.taotao.cloud.feign.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.ConditionalOnFeignUseOkHttp;
 import com.taotao.cloud.feign.okhttp.OkHttpResponseInterceptor;
 import java.util.Objects;
 import okhttp3.ConnectionPool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.commons.httpclient.OkHttpClientConnectionPoolFactory;
 import org.springframework.cloud.commons.httpclient.OkHttpClientFactory;
@@ -33,7 +30,6 @@ import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.cloud.openfeign.loadbalancer.FeignLoadBalancerAutoConfiguration;
 import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
@@ -62,7 +58,7 @@ public class OkHttpAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-	    LogUtil.started(OkHttpAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	    LogUtils.started(OkHttpAutoConfiguration.class, StarterName.FEIGN_STARTER);
     }
 
     @Bean
@@ -98,7 +94,7 @@ public class OkHttpAutoConfiguration {
     @Bean
     public ClientHttpRequestFactory clientHttpRequestFactory(okhttp3.OkHttpClient okHttpClient) {
         OkHttp3ClientHttpRequestFactory factory = new OkHttp3ClientHttpRequestFactory(okHttpClient);
-        LogUtil.info("Bean [Client Http Request Factory for OkHttp] Auto Configure.");
+        LogUtils.info("Bean [Client Http Request Factory for OkHttp] Auto Configure.");
         return factory;
     }
 

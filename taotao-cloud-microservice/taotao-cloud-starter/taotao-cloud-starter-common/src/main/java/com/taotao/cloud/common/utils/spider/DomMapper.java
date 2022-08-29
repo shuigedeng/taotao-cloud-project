@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.common.utils.spider;
 
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -57,7 +57,7 @@ public class DomMapper {
 		try {
 			return DataUtil.load(inputStream, StandardCharsets.UTF_8.name(), "");
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 

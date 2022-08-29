@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskCirculateEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
@@ -60,7 +60,7 @@ public class FlowMsgUtil {
         recordEntity.setTaskId(startNode != null ? startNode.getTaskId() : "");
         //等待
         if (flowMsgModel.isWait()) {
-            ChildNodeList childNode = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig taskMsgConfig = properties.getWaitMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap = operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
@@ -86,7 +86,7 @@ public class FlowMsgUtil {
         //结束
         if (flowMsgModel.isEnd()) {
             //发起人
-            ChildNodeList childNode = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getEndMsgConfig();
             List<SentMessageForm> messageList = new ArrayList<>();
@@ -111,7 +111,7 @@ public class FlowMsgUtil {
         }
         //同意
         if (flowMsgModel.isApprove()) {
-            ChildNodeList childNode = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getApproveMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap = operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
@@ -119,7 +119,7 @@ public class FlowMsgUtil {
                 recordEntity.setTaskNodeId(key);
                 //默认获取当前节点
                 FlowTaskNodeEntity taskNode = nodeList.stream().filter(t -> t.getId().equals(key)).findFirst().orElse(null);
-                ChildNodeList taskChildNode = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList taskChildNode = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getApproveMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -141,7 +141,7 @@ public class FlowMsgUtil {
         }
         //拒绝
         if (flowMsgModel.isReject()) {
-            ChildNodeList childNode = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getRejectMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap = operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
@@ -149,7 +149,7 @@ public class FlowMsgUtil {
                 recordEntity.setTaskNodeId(key);
                 //默认获取当前节点
                 FlowTaskNodeEntity taskNode = nodeList.stream().filter(t -> t.getId().equals(key)).findFirst().orElse(null);
-                ChildNodeList taskChildNode = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList taskChildNode = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getRejectMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -171,7 +171,7 @@ public class FlowMsgUtil {
         }
         //抄送
         if (flowMsgModel.isCopy()) {
-            ChildNodeList childNode = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getCopyMsgConfig();
             Map<String, List<FlowTaskCirculateEntity>> circulateMap = circulateList.stream().collect(Collectors.groupingBy(FlowTaskCirculateEntity::getTaskNodeId));
@@ -179,7 +179,7 @@ public class FlowMsgUtil {
                 recordEntity.setTaskNodeId(key);
                 //默认获取当前节点
                 FlowTaskNodeEntity taskNode = nodeList.stream().filter(t -> t.getId().equals(key)).findFirst().orElse(null);
-                ChildNodeList taskChildNode = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList taskChildNode = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getCopyMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -188,7 +188,7 @@ public class FlowMsgUtil {
                 List<SentMessageForm> messageList = new ArrayList<>();
                 List<FlowTaskOperatorEntity> taskOperatorList = new ArrayList<>();
                 for (FlowTaskCirculateEntity circulateEntity : circulateMap.get(key)) {
-                    FlowTaskOperatorEntity operatorEntity = JsonUtil.getJsonToBean(circulateEntity, FlowTaskOperatorEntity.class);
+                    FlowTaskOperatorEntity operatorEntity = JsonUtils.getJsonToBean(circulateEntity, FlowTaskOperatorEntity.class);
                     operatorEntity.setHandleId(circulateEntity.getObjectId());
                     taskOperatorList.add(operatorEntity);
                 }
@@ -207,7 +207,7 @@ public class FlowMsgUtil {
         }
         //子流程
         if (flowMsgModel.isLaunch()) {
-            ChildNodeList childNode = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getLaunchMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap = operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
@@ -215,7 +215,7 @@ public class FlowMsgUtil {
                 recordEntity.setTaskNodeId(key);
                 //默认获取当前节点
                 FlowTaskNodeEntity taskNode = nodeList.stream().filter(t -> t.getId().equals(key)).findFirst().orElse(null);
-                ChildNodeList taskChildNode = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList taskChildNode = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getLaunchMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -275,7 +275,7 @@ public class FlowMsgUtil {
         Map<String, String> contMsg = new HashMap<>();
         for (FlowTaskOperatorEntity taskOperator : taskOperatorList) {
             FlowContModel contModel = this.flowMessage(engine, taskOperator, messageModel);
-            contMsg.put(taskOperator.getHandleId(), JsonUtil.getObjectToString(contModel));
+            contMsg.put(taskOperator.getHandleId(), JsonUtils.getObjectToString(contModel));
             userList.add(taskOperator.getHandleId());
         }
         messageModel.setUserList(userList);
@@ -452,7 +452,7 @@ public class FlowMsgUtil {
         List<String> userList = flowDelegateService.getUser(null, taskEntity.getFlowId(), operator.getHandleId()).stream().map(t -> t.getFTouserid()).collect(Collectors.toList());
         List<FlowTaskOperatorEntity> taskOperatorList = new ArrayList<>();
         for (String user : userList) {
-            FlowTaskOperatorEntity delegaOperator = JsonUtil.getJsonToBean(operator, FlowTaskOperatorEntity.class);
+            FlowTaskOperatorEntity delegaOperator = JsonUtils.getJsonToBean(operator, FlowTaskOperatorEntity.class);
             delegaOperator.setHandleId(user);
             taskOperatorList.add(delegaOperator);
         }

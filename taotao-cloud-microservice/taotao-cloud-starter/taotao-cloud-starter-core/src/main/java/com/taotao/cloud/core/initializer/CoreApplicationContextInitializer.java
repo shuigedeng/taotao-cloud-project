@@ -25,10 +25,10 @@ import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.enums.EnvironmentEnum;
 import com.taotao.cloud.core.properties.CoreProperties;
 import org.slf4j.ILoggerFactory;
@@ -52,16 +52,16 @@ public class CoreApplicationContextInitializer implements
 
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
-		LogUtil.started(CoreApplicationContextInitializer.class, StarterName.CORE_STARTER);
+		LogUtils.started(CoreApplicationContextInitializer.class, StarterName.CORE_STARTER);
 
 		if (context instanceof AnnotationConfigApplicationContext) {
 			//AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) context;
 			//annotationConfigApplicationContext.register(Config.class);
 		} else {
-			if (ContextUtil.mainClass == null) {
-				ContextUtil.mainClass = deduceMainApplicationClass();
+			if (ContextUtils.mainClass == null) {
+				ContextUtils.mainClass = deduceMainApplicationClass();
 			}
-			ContextUtil.setApplicationContext(context);
+			ContextUtils.setApplicationContext(context);
 			ConfigurableEnvironment environment = context.getEnvironment();
 
 			String applicationName = environment.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
@@ -75,7 +75,7 @@ public class CoreApplicationContextInitializer implements
 			//环境变量初始化
 			String env = environment.getProperty(CoreProperties.PREFIX + ".env", String.class);
 
-			if (!StringUtil.isEmpty(applicationName) && !StringUtil.isEmpty(env)) {
+			if (!StringUtils.isEmpty(applicationName) && !StringUtils.isEmpty(env)) {
 				optimize(environment);
 
 				setProperty(CommonConstant.SPRING_APP_NAME_KEY, applicationName,
@@ -157,7 +157,7 @@ public class CoreApplicationContextInitializer implements
 		//启动全局优化默认配置
 		double cpuCount = Runtime.getRuntime().availableProcessors();
 
-		if (ContextUtil.isWeb()) {
+		if (ContextUtils.isWeb()) {
 			//tomcat 优化 * 核心数
 			//setDefaultProperty(CoreProperties.ServerTomcatMaxThreads, ((int) (200 * cpuCount)) + "",
 			//	"[自动化调优]");
@@ -182,13 +182,13 @@ public class CoreApplicationContextInitializer implements
 	 * @since 2021-09-02 20:23:33
 	 */
 	private void setDefaultProperty(String key, String defaultPropertyValue, String message) {
-		PropertyUtil.setDefaultInitProperty(CoreApplicationContextInitializer.class,
-			PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+		PropertyUtils.setDefaultInitProperty(CoreApplicationContextInitializer.class,
+			PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
 			key, defaultPropertyValue, message);
 	}
 
 	private void setProperty(String key, String propertyValue, String message) {
-		PropertyUtil.setProperty(key, propertyValue, message);
+		PropertyUtils.setProperty(key, propertyValue, message);
 	}
 
 }

@@ -8,7 +8,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.mapper.IStoreGoodsLabelMapper;
@@ -95,7 +95,7 @@ public class StoreGoodsLabelServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//获取当前登录商家账号
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtils.getUser();
 		storeGoodsLabel.setStoreId(tokenUser.getStoreId());
 		//保存店铺分类
 		this.save(storeGoodsLabel);
@@ -108,7 +108,7 @@ public class StoreGoodsLabelServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
 		//修改当前店铺的商品分类
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtils.getUser();
 
 		LambdaUpdateWrapper<StoreGoodsLabel> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.eq(StoreGoodsLabel::getStoreId, tokenUser.getStoreId());
@@ -122,7 +122,7 @@ public class StoreGoodsLabelServiceImpl extends
 
 	@Override
 	public Boolean removeStoreGoodsLabel(Long storeLabelId) {
-		SecurityUser tokenUser = SecurityUtil.getUser();
+		SecurityUser tokenUser = SecurityUtils.getUser();
 		if (tokenUser == null || Objects.isNull(tokenUser.getStoreId())) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}

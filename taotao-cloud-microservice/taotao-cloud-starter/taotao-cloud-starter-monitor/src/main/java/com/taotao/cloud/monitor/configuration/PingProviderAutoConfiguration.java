@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.ping.PingFilter;
 import com.taotao.cloud.monitor.properties.PingProperties;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,7 +43,7 @@ public class PingProviderAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PingProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
+		LogUtils.started(PingProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
 	}
 
 	@Bean

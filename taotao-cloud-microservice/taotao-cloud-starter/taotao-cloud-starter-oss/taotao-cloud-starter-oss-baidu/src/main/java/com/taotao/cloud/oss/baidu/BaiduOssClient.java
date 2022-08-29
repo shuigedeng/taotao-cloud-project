@@ -22,8 +22,7 @@ import com.baidubce.services.bos.model.ObjectMetadata;
 import com.baidubce.services.bos.model.PartETag;
 import com.baidubce.services.bos.model.UploadPartRequest;
 import com.baidubce.services.bos.model.UploadPartResponse;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.oss.baidu.BaiduOssConfig;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
@@ -319,7 +318,7 @@ public class BaiduOssClient implements StandardOssClient {
 	            // todo 需要设置访问路径
 	            //ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
             } catch (Exception e) {
-                LogUtil.error("获取{}文件属性失败", key, e);
+                LogUtils.error("获取{}文件属性失败", key, e);
             }
         } else {
             ossInfo = new DirectoryOssInfo();

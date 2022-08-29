@@ -17,7 +17,7 @@ import com.baidubce.services.sms.SmsClient;
 import com.baidubce.services.sms.SmsClientConfiguration;
 import com.baidubce.services.sms.model.SendMessageV3Request;
 import com.baidubce.services.sms.model.SendMessageV3Response;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -61,7 +61,7 @@ public class BaiduCloudSendHandler extends AbstractSendHandler<BaiduCloudPropert
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -75,11 +75,11 @@ public class BaiduCloudSendHandler extends AbstractSendHandler<BaiduCloudPropert
 		SendMessageV3Response response = client.sendMessage(request);
 
 		if (response == null) {
-			LogUtil.debug("send fail: empty response");
+			LogUtils.debug("send fail: empty response");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("empty response"));
 			return false;
 		} else if (!response.isSuccess()) {
-			LogUtil.debug("send fail: [code:{}, message:{}]", response.getCode(),
+			LogUtils.debug("send fail: [code:{}, message:{}]", response.getCode(),
 				response.getMessage());
 			publishSendFailEvent(noticeData, phones,
 				new SendFailedException(response.getMessage()));

@@ -17,7 +17,7 @@ package com.taotao.cloud.web.base.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,9 +66,9 @@ public interface UpdateController<T extends SuperEntity<T, I>, I extends Seriali
 				throw new BusinessException("未查询到数据");
 			}
 
-			if (ReflectionUtil.checkField(updateDTO.getClass(), getEntityClass())) {
+			if (ReflectionUtils.checkField(updateDTO.getClass(), getEntityClass())) {
 				return success(
-					service().updateById(ReflectionUtil.copyPropertiesIfRecord(t, updateDTO)));
+					service().updateById(ReflectionUtils.copyPropertiesIfRecord(t, updateDTO)));
 			}
 		}
 		throw new BusinessException("通用单体更新失败");

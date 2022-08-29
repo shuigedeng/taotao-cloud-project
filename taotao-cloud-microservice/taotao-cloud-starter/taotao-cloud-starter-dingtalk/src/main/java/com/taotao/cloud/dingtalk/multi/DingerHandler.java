@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.multi;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.model.DingerConfig;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -96,7 +96,7 @@ public class DingerHandler implements AlgorithmHandler {
 				currentMinite = now;
 				counter.set(1);
 
-				LogUtil.debug("#{}-{}# 在{}分内发送了{}次, 当前分钟={}, 下一个机器人={}.",
+				LogUtils.debug("#{}-{}# 在{}分内发送了{}次, 当前分钟={}, 下一个机器人={}.",
 					algorithmId(), COUNT_THRESHOLD, currentMinite, count, now, index);
 
 //                System.out.println(String.format("#%s-%d# 在%s分内发送了%d次, 当前分钟=%s, 下一个机器人=%d.",
@@ -105,7 +105,7 @@ public class DingerHandler implements AlgorithmHandler {
 				currentMinite = now;
 				counter.set(1);
 
-				LogUtil.debug("#{}-{}# 在{}分内发送了{}次, 当前分钟={}, 当前机器人={}.",
+				LogUtils.debug("#{}-{}# 在{}分内发送了{}次, 当前分钟={}, 当前机器人={}.",
 					algorithmId(), COUNT_THRESHOLD, currentMinite, count, now, index);
 //                System.out.println(String.format("#%s-%d# 在%s分内发送了%d次, 当前分钟=%s, 当前机器人=%d.",
 //                        algorithmId(), COUNT_THRESHOLD, currentMinite, count, now, index));

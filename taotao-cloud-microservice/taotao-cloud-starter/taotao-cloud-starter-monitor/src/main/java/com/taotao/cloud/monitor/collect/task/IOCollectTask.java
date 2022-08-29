@@ -17,8 +17,8 @@ package com.taotao.cloud.monitor.collect.task;
 
 import static com.taotao.cloud.monitor.utils.ProcessUtils.getProcessID;
 
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -77,26 +77,26 @@ public class IOCollectTask extends AbstractCollectTask {
 			ioInfo.currentDirTotalSize = file.getTotalSpace() / byteToMb;
 			ioInfo.currentDir = file.getAbsolutePath();
 
-			long processReadSize = BeanUtil.convert(ProcessUtils.execCmd(
+			long processReadSize = BeanUtils.convert(ProcessUtils.execCmd(
 				"cat /proc/$PID/io |egrep -E 'read_bytes'|awk '{print $2}'"
 					.replaceAll("\\$PID", getProcessID())), Long.class);
 			ioInfo.processReadSize =
 				processReadSize > 0 ? processReadSize / byteToMb : processReadSize;
 
-			long processWriteSize = BeanUtil.convert(ProcessUtils.execCmd(
+			long processWriteSize = BeanUtils.convert(ProcessUtils.execCmd(
 				"cat /proc/$PID/io |egrep -E '^write_bytes'|awk '{print $2}'"
 					.replaceAll("\\$PID", getProcessID())), Long.class);
 			ioInfo.processWriteSize =
 				processWriteSize > 0 ? processWriteSize / byteToMb : processWriteSize;
 
-			ioInfo.processWa = BeanUtil.convert(
+			ioInfo.processWa = BeanUtils.convert(
 				ProcessUtils.execCmd("top -bn1 | sed -n '3p'|cut -d, -f5 |awk '{print $1}'"),
 				Double.class);
 
 			return ioInfo;
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;
@@ -134,7 +134,7 @@ public class IOCollectTask extends AbstractCollectTask {
 						out.write(new byte[1]);
 					}
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			} else if (f.isDirectory()) {
 				File[] files = f.listFiles();
@@ -146,7 +146,7 @@ public class IOCollectTask extends AbstractCollectTask {
 			f.delete();
 			return "清理完毕";
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			return "清理出错";
 		}
 	}

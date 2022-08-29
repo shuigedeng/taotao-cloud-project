@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.properties;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.InvalidPropertiesFormatException;
 import com.taotao.cloud.dingtalk.utils.ConfigTools;
@@ -227,7 +227,7 @@ public class DingerProperties implements InitializingBean {
 
 			Dinger dinger = entry.getValue();
 			String tokenId = dinger.getTokenId();
-			if (StringUtil.isEmpty(tokenId)) {
+			if (StringUtils.isEmpty(tokenId)) {
 				throw new InvalidPropertiesFormatException("spring.dinger.token-id is empty.");
 			}
 
@@ -239,7 +239,7 @@ public class DingerProperties implements InitializingBean {
 				dinger.secret = null;
 			}
 
-			boolean check = dinger.decrypt && StringUtil.isEmpty(dinger.decryptKey);
+			boolean check = dinger.decrypt && StringUtils.isEmpty(dinger.decryptKey);
 			if (check) {
 				throw new InvalidPropertiesFormatException(
 					"spring.dinger.decrypt is true but spring.dinger.decrypt-key is empty.");
@@ -253,7 +253,7 @@ public class DingerProperties implements InitializingBean {
 
 			if (defaultDinger == null) {
 				defaultDinger = dingerType;
-				LogUtil.debug(
+				LogUtils.debug(
 					"defaultDinger undeclared and use first dingers dingerType, defaultDinger={}.",
 					defaultDinger);
 			}

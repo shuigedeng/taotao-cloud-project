@@ -16,15 +16,14 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
-import com.taotao.cloud.monitor.exception.HealthException;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
 import java.util.Objects;
@@ -71,11 +70,11 @@ public class JedisCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
-			Object item = ContextUtil.getBean(
-				ReflectionUtil.classForName("com.yh.csx.bsf.redis.impl.RedisClusterMonitor"),
+			Object item = ContextUtils.getBean(
+				ReflectionUtils.classForName("com.yh.csx.bsf.redis.impl.RedisClusterMonitor"),
 				false);
 			if (Objects.nonNull(item)) {
-				ReflectionUtil.callMethod(item, "collect", null);
+				ReflectionUtils.callMethod(item, "collect", null);
 
 				JedisInfo info = new JedisInfo();
 				String name = "jedis.cluster";
@@ -96,8 +95,8 @@ public class JedisCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

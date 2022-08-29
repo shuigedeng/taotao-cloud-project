@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.PayDistributionEntity;
@@ -45,14 +45,14 @@ public class PayDistributionController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), PayDistributionInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), PayDistributionInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             PayDistributionEntity entity = payDistributionService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, PayDistributionInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, PayDistributionInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -66,7 +66,7 @@ public class PayDistributionController {
     @Operation("新建薪酬发放")
     @PostMapping
     public Result create(@RequestBody PayDistributionForm payDistributionForm) throws WorkFlowException {
-        PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(payDistributionForm.getStatus())) {
             payDistributionService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -85,7 +85,7 @@ public class PayDistributionController {
     @Operation("修改薪酬发放")
     @PutMapping("/{id}")
     public Result update(@RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id) throws WorkFlowException {
-        PayDistributionEntity entity = JsonUtil.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(payDistributionForm.getStatus())) {
             payDistributionService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

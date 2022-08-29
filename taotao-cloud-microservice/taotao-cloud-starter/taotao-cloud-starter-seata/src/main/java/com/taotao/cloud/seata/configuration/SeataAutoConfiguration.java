@@ -17,7 +17,7 @@ package com.taotao.cloud.seata.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.seata.properties.SeataProperties;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -56,7 +56,7 @@ public class SeataAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(SeataAutoConfiguration.class, StarterName.SEATA_STARTER);
+		LogUtils.started(SeataAutoConfiguration.class, StarterName.SEATA_STARTER);
 	}
 
 	@Bean
@@ -106,7 +106,7 @@ public class SeataAutoConfiguration implements InitializingBean {
 			try {
 				dataSource.getConnection().prepareStatement(undoLogSql).execute();
 			} catch (SQLException e) {
-				LogUtil.error("创建[seata] undo_log表错误。", e);
+				LogUtils.error("创建[seata] undo_log表错误。", e);
 			}
 		}
 	}
@@ -124,7 +124,7 @@ public class SeataAutoConfiguration implements InitializingBean {
 			String restXid = request.getHeader("xid");
 			if (StrUtil.isNotBlank(restXid)) {
 				RootContext.bind(restXid);
-				LogUtil.info("bind[" + restXid + "] to RootContext");
+				LogUtils.info("bind[" + restXid + "] to RootContext");
 			}
 			filterChain.doFilter(request, response);
 		}

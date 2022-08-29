@@ -1,10 +1,10 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
 import com.taotao.cloud.common.support.filter.IFilter;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.io.FileUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.common.CharsetUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.io.FileUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.common.CharsetUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -23,18 +23,18 @@ public class DataInitTest {
         final String targetFile = "D:\\github\\sensitive-word\\src\\main\\resources\\dict4.txt";
         final String sourceFile = "D:\\github\\sensitive-word\\src\\main\\resources\\_minganci.txt";
 
-        String string = FileUtil.getFileContent(sourceFile);
+        String string = FileUtils.getFileContent(sourceFile);
 
-        List<String> words = StringUtil.splitToList(string, "\\|");
-        FileUtil.write(targetFile, words);
+        List<String> words = StringUtils.splitToList(string, "\\|");
+        FileUtils.write(targetFile, words);
     }
 
     @Test
     @Ignore
     public void trimTest() {
         final String source = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
-        List<String> lines = FileUtil.readAllLines(source);
-        List<String> trimLines = CollectionUtil.distinct(CollectionUtil.trimCollection(lines));
+        List<String> lines = FileUtils.readAllLines(source);
+        List<String> trimLines = CollectionUtils.distinct(CollectionUtils.trimCollection(lines));
 
         final String target = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
     }
@@ -47,8 +47,8 @@ public class DataInitTest {
     private List<String> distinctLines(final String name) {
         final String dir = "D:\\github\\sensitive-word\\src\\main\\resources\\";
         final String path = dir + name;
-        List<String> lines = FileUtil.readAllLines(path);
-        return CollectionUtil.distinct(lines);
+        List<String> lines = FileUtils.readAllLines(path);
+        return CollectionUtils.distinct(lines);
     }
 
     @Test
@@ -57,16 +57,16 @@ public class DataInitTest {
         final String source = "D:\\github\\sensitive-word\\src\\main\\resources\\stopword.txt";
         final String target = "D:\\github\\sensitive-word\\src\\main\\resources\\stopword_chars.txt";
 
-        final List<String> lines = FileUtil.readAllLines(source);
+        final List<String> lines = FileUtils.readAllLines(source);
 
-        List<String> resultList = CollectionUtil.distinct(CollectionUtil.filterList(lines, new IFilter<String>() {
+        List<String> resultList = CollectionUtils.distinct(CollectionUtils.filterList(lines, new IFilter<String>() {
             @Override
             public boolean filter(String s) {
-                return CharsetUtil.isContainsChinese(s);
+                return CharsetUtils.isContainsChinese(s);
             }
         }));
         Collections.sort(resultList);
-        FileUtil.write(target, resultList);
+        FileUtils.write(target, resultList);
     }
 
     @Test
@@ -89,14 +89,14 @@ public class DataInitTest {
         allLines.addAll(distinctLines("邪教.txt"));
 
 
-        List<String> disctinct = CollectionUtil
-                .distinct(CollectionUtil.trimCollection(allLines));
+        List<String> disctinct = CollectionUtils
+                .distinct(CollectionUtils.trimCollection(allLines));
 
         Collections.sort(disctinct);
 
         final String target = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
 
-        FileUtil.write(target, disctinct);
+        FileUtils.write(target, disctinct);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class DataInitTest {
     public void oneWordTest() {
         final String source = "D:\\_github\\sensitive-word\\src\\main\\resources\\dict.txt";
 
-        List<String> lines = FileUtil.readAllLines(source);
+        List<String> lines = FileUtils.readAllLines(source);
         for(int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
             if(line.trim().length() == 1) {

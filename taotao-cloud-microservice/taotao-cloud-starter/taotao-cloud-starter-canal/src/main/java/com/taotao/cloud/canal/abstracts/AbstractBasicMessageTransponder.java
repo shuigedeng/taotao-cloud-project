@@ -24,7 +24,7 @@ import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.model.CanalMsg;
 import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.properties.CanalProperties;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
@@ -120,7 +120,7 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 							Object[] args = getInvokeArgs(method, canalMsg, rowChange);
 							method.invoke(point.getTarget(), args);
 						} catch (Exception e) {
-							LogUtil.error("{}: 委托 canal 监听器发生错误! 错误类:{}, 方法名:{}",
+							LogUtils.error("{}: 委托 canal 监听器发生错误! 错误类:{}, 方法名:{}",
 								Thread.currentThread().getName(),
 								point.getTarget().getClass().getName(), method.getName());
 						}

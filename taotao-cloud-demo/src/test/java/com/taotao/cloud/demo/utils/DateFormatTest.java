@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.support.function.Unchecked;
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,12 +58,12 @@ public class DateFormatTest {
 	}
 
 	private static String parseDate1(String dateStr) {
-		Date date = DateUtil.parse(dateStr, pattern);
-		return DateUtil.format(date, pattern);
+		Date date = DateUtils.parse(dateStr, pattern);
+		return DateUtils.format(date, pattern);
 	}
 
 	private static String parseDate2(String dateStr) throws ParseException {
 		Date date = DATE_FORMAT.parse(dateStr);
-		return DateUtil.format(date, pattern);
+		return DateUtils.format(date, pattern);
 	}
 }

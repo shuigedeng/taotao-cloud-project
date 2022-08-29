@@ -2,9 +2,9 @@ package com.taotao.cloud.member.biz.connect.request;
 
 import com.alibaba.nacos.common.utils.UuidUtils;
 import com.taotao.cloud.common.utils.io.UrlBuilder;
-import com.taotao.cloud.common.utils.io.UrlUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.io.UrlUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuth;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -74,7 +74,7 @@ public abstract class BaseAuthRequest implements AuthRequest {
 			return AuthResponse.builder().code(AuthResponseStatus.SUCCESS.getCode()).data(user)
 				.build();
 		} catch (Exception e) {
-			LogUtil.error("Failed to login with oauth authorization.", e);
+			LogUtils.error("Failed to login with oauth authorization.", e);
 			return this.responseError(e);
 		}
 	}
@@ -91,7 +91,7 @@ public abstract class BaseAuthRequest implements AuthRequest {
 		if (e instanceof AuthException) {
 			AuthException authException = ((AuthException) e);
 			errorCode = authException.getErrorCode();
-			if (StringUtil.isNotEmpty(authException.getErrorMsg())) {
+			if (StringUtils.isNotEmpty(authException.getErrorMsg())) {
 				errorMsg = authException.getErrorMsg();
 			}
 		}
@@ -176,7 +176,7 @@ public abstract class BaseAuthRequest implements AuthRequest {
 	 * @return 返回不为null的state
 	 */
 	protected String getRealState(String state) {
-		if (StringUtil.isEmpty(state)) {
+		if (StringUtils.isEmpty(state)) {
 			state = UuidUtils.generateUuid();
 		}
 		/* 缓存state 回调时候验证缓存里是否有state，如果没有的话则代表是非法访问*/
@@ -273,7 +273,7 @@ public abstract class BaseAuthRequest implements AuthRequest {
 			separator = " ";
 		}
 		String scopeStr = String.join(separator, scopes);
-		return encode ? UrlUtil.encode(scopeStr) : scopeStr;
+		return encode ? UrlUtils.encode(scopeStr) : scopeStr;
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.xxljob.core.alarm.impl;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.model.DingerSender;
@@ -50,7 +50,7 @@ public class DingDingJobAlarm implements JobAlarm {
 
 		StringBuilder str = new StringBuilder();
 		str.append("taotao-cloud-xxljob监控告警明细： \n");
-		str.append("[时间戳]: ").append(DateUtil.format(LocalDateTime.now(), DateUtil.DEFAULT_DATE_TIME_FORMAT)).append("\n");
+		str.append("[时间戳]: ").append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT)).append("\n");
 		str.append("["+I18nUtil.getString("jobinfo_field_jobgroup")+"] : ").append(group != null ? group.getTitle() : "null").append("\n");
 		str.append("["+I18nUtil.getString("jobinfo_field_id")+"] : ").append(info.getId()).append("\n");
 		str.append("["+I18nUtil.getString("jobinfo_field_jobdesc")+"] : ").append(info.getJobDesc()).append("\n");
@@ -61,7 +61,7 @@ public class DingDingJobAlarm implements JobAlarm {
 			sender.send(MessageSubType.TEXT,
 				DingerRequest.request(str.toString()));
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			alarmResult = false;
 		}
 

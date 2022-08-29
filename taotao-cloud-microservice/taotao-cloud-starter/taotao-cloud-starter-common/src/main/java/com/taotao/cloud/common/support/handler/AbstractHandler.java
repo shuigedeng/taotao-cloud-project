@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.support.handler;
 
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 
 /**
  * 抽象处理器
@@ -30,7 +30,7 @@ public abstract class AbstractHandler<T, R> implements IHandler<T, R> {
 
     @Override
     public R handle(T t) {
-        if(ObjectUtil.isNull(t)) {
+        if(ObjectUtils.isNull(t)) {
             return null;
         }
 

@@ -16,7 +16,7 @@
 package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.redis.redisson.RedisDelayQueueRunner;
 import org.redisson.api.RedissonClient;
@@ -25,7 +25,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * RedisDelayQueueAutoConfiguration
@@ -41,7 +40,7 @@ public class RedisDelayQueueAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisDelayQueueAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisDelayQueueAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Bean

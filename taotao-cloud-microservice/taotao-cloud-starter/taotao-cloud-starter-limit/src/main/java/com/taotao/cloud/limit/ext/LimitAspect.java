@@ -18,11 +18,10 @@ package com.taotao.cloud.limit.ext;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.ImmutableList;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -93,11 +92,11 @@ public class LimitAspect {
 
 		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
 		String key = switch (limitType) {
-			case IP -> RequestUtil.getHttpServletRequestIpAddress();
-			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key()) ? StringUtils.upperCase(method.getName()) : limitAnnotation.key();
+			case IP -> RequestUtils.getHttpServletRequestIpAddress();
+			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key()) ? org.apache.commons.lang.StringUtils.upperCase(method.getName()) : limitAnnotation.key();
 		};
 
-		ImmutableList<String> keys = ImmutableList.of(StringUtil.join(limitAnnotation.prefix(), key));
+		ImmutableList<String> keys = ImmutableList.of(StringUtils.join(limitAnnotation.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
@@ -109,7 +108,7 @@ public class LimitAspect {
 				throw new LimitException(ResultEnum.BLACKLIST);
 			}
 		} catch (Throwable e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new LimitException(ResultEnum.ERROR);
 		}
 	}

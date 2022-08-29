@@ -6,7 +6,7 @@ import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ZipUtil;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mongodb.helper.bean.Page;
 import java.io.BufferedReader;
 import java.io.File;
@@ -76,7 +76,7 @@ public class ImportExportUtil {
 					}
 					FileUtil.appendLines(lines,
 						path + File.separator + clazz.getSimpleName() + ".json", "UTF-8");
-					LogUtil.info(
+					LogUtils.info(
 						clazz.getSimpleName() + "表导出了" + page.getList().size() + "条数据");
 					page.setCurr(page.getCurr() + 1);
 				}
@@ -99,7 +99,7 @@ public class ImportExportUtil {
 	 */
 	public void importDb(String path) {
 		if (!FileUtil.exist(path)) {
-			LogUtil.info(path + "文件不存在");
+			LogUtils.info(path + "文件不存在");
 			return;
 		}
 		BufferedReader reader = null;
@@ -126,7 +126,7 @@ public class ImportExportUtil {
 						String json = reader.readLine();
 						if (StrUtil.isEmpty(json)) {
 							mongoTemplate.insertAll(list);
-							LogUtil.info(
+							LogUtils.info(
 								clazz.getSimpleName() + "表导入了" + list.size() + "条数据");
 							list.clear();
 							break;
@@ -134,7 +134,7 @@ public class ImportExportUtil {
 						list.add(JSONUtil.toBean(json, clazz));
 						if (list.size() == 1000) {
 							mongoTemplate.insertAll(list);
-							LogUtil.info(
+							LogUtils.info(
 								clazz.getSimpleName() + "表导入了" + list.size() + "条数据");
 							list.clear();
 						}

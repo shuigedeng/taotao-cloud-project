@@ -1,9 +1,8 @@
 package com.taotao.cloud.payment.biz.bootx.core.cashier.service;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.DesensitizedUtil;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.payment.biz.bootx.code.pay.PayChannelCode;
 import com.taotao.cloud.payment.biz.bootx.code.pay.PayModelExtraCode;
 import com.taotao.cloud.payment.biz.bootx.code.pay.PayStatusCode;
@@ -69,7 +68,7 @@ public class CashierService {
         PayParam payParam = new PayParam()
                 .setTitle(param.getTitle())
                 .setBusinessId(param.getBusinessId())
-                .setUserId(SecurityUtil.getUserIdOrDefaultId())
+                .setUserId(SecurityUtils.getUserIdOrDefaultId())
                 .setPayModeList(Collections.singletonList(payModeParam));
         PayResult payResult = payService.pay(payParam);
 
@@ -119,7 +118,7 @@ public class CashierService {
         PayParam payParam = new PayParam()
                 .setTitle(param.getTitle())
                 .setBusinessId(param.getBusinessId())
-                .setUserId(SecurityUtil.getUserIdOrDefaultId())
+                .setUserId(SecurityUtils.getUserIdOrDefaultId())
                 .setPayModeList(param.getPayModeList());
         PayResult payResult = payService.pay(payParam);
 

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.multi;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.model.DingerConfig;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class RoundRobinHandler implements AlgorithmHandler {
 			index++;
 			index = index >= size ? DEFAULT_INDEX : index;
 
-			LogUtil.debug("#{}# 当前使用第{}个机器人", algorithmId(), idx);
+			LogUtils.debug("#{}# 当前使用第{}个机器人", algorithmId(), idx);
 //            System.out.println(String.format("#%s# 当前使用第%d个机器人", algorithmId(), idx));
 		}
 

@@ -20,8 +20,8 @@ import com.taotao.cloud.canal.abstracts.AbstractCanalClient;
 import com.taotao.cloud.canal.annotation.ListenPoint;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.properties.CanalProperties;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,9 +114,9 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	 * @since 2021-09-03 20:52:24
 	 */
 	private void initListeners() {
-		LogUtil.info("{}: 监听器正在初始化....", Thread.currentThread().getName());
+		LogUtils.info("{}: 监听器正在初始化....", Thread.currentThread().getName());
 		//获取监听器
-		List<CanalEventListener> list = ContextUtil.getBeansOfType(CanalEventListener.class);
+		List<CanalEventListener> list = ContextUtils.getBeansOfType(CanalEventListener.class);
 		//若没有任何监听的，直接返回
 		if (list != null) {
 			//若存在目标监听，放入 listenerMap
@@ -124,7 +124,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
 		}
 
 		//通过注解的方式去监听的话。。
-		Map<String, Object> listenerMap = ContextUtil.getBeansWithAnnotation(
+		Map<String, Object> listenerMap = ContextUtils.getBeansWithAnnotation(
 			com.taotao.cloud.canal.annotation.CanalEventListener.class);
 
 		//也放入 map
@@ -145,11 +145,11 @@ public class SimpleCanalClient extends AbstractCanalClient {
 		}
 
 		//初始化监听结束
-		LogUtil.info("{}: 监听器初始化完成.", Thread.currentThread().getName());
+		LogUtils.info("{}: 监听器初始化完成.", Thread.currentThread().getName());
 
 		//整个项目上下文都没发现监听器。。。
-		if (LogUtil.isWarnEnabled() && listeners.isEmpty() && annoListeners.isEmpty()) {
-			LogUtil.warn("{}: 项目中没有任何监听的目标! ", Thread.currentThread().getName());
+		if (LogUtils.isWarnEnabled() && listeners.isEmpty() && annoListeners.isEmpty()) {
+			LogUtils.warn("{}: 项目中没有任何监听的目标! ", Thread.currentThread().getName());
 		}
 	}
 }

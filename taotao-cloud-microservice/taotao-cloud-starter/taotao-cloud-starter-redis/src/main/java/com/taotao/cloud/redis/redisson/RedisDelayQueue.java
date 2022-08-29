@@ -1,7 +1,7 @@
 
 package com.taotao.cloud.redis.redisson;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.redisson.api.RBlockingDeque;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RedissonClient;
@@ -36,10 +36,10 @@ public class RedisDelayQueue {
 			RBlockingDeque<Object> blockingDeque = redissonClient.getBlockingDeque(queueCode);
 			RDelayedQueue<Object> delayedQueue = redissonClient.getDelayedQueue(blockingDeque);
 			delayedQueue.offer(value, delay, timeUnit);
-			LogUtil.info("添加延时队列成功，队列键：{}，队列值：{}，延迟时间：{}", queueCode, value,
+			LogUtils.info("添加延时队列成功，队列键：{}，队列值：{}，延迟时间：{}", queueCode, value,
 				timeUnit.toSeconds(delay) + "秒");
 		} catch (Exception e) {
-			LogUtil.error("添加延时队列失败：{}", e.getMessage());
+			LogUtils.error("添加延时队列失败：{}", e.getMessage());
 			throw new RuntimeException("添加延时队列失败");
 		}
 	}

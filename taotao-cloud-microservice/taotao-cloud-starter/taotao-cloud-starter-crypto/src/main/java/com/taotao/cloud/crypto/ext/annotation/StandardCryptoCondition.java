@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.crypto.ext.annotation;
 
-import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.crypto.ext.CryptoStrategy;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class StandardCryptoCondition implements Condition {
     @SuppressWarnings("NullableProblems")
     @Override
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
-        String property = PropertyUtil.getProperty("taotao.cloud.crypto.crypto-strategy",CryptoStrategy.STANDARD.name());
+        String property = PropertyUtils.getProperty("taotao.cloud.crypto.crypto-strategy",CryptoStrategy.STANDARD.name());
         boolean result = StringUtils.isNotBlank(property) && StringUtils.equalsIgnoreCase(property, CryptoStrategy.STANDARD.name());
         log.debug("Condition [Standard Crypto] value is [{}]", result);
         return result;

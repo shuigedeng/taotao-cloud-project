@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -47,14 +47,14 @@ public class ReceiptSignController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), ReceiptSignInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ReceiptSignInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ReceiptSignEntity entity = receiptSignService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, ReceiptSignInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, ReceiptSignInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -68,7 +68,7 @@ public class ReceiptSignController {
     @Operation("新建收文签呈单")
     @PostMapping
     public Result create(@RequestBody ReceiptSignForm receiptSignForm) throws WorkFlowException {
-        ReceiptSignEntity entity = JsonUtil.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
+        ReceiptSignEntity entity = JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptSignForm.getStatus())) {
             receiptSignService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -87,7 +87,7 @@ public class ReceiptSignController {
     @Operation("修改收文签呈单")
     @PutMapping("/{id}")
     public Result update(@RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id) throws WorkFlowException {
-        ReceiptSignEntity entity = JsonUtil.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
+        ReceiptSignEntity entity = JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptSignForm.getStatus())) {
             receiptSignService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

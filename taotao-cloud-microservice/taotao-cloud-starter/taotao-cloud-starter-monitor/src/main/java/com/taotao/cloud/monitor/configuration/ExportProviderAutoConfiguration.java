@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.export.ExportProvider;
@@ -42,7 +42,7 @@ public class ExportProviderAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ExportProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
+		LogUtils.started(ExportProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "close")

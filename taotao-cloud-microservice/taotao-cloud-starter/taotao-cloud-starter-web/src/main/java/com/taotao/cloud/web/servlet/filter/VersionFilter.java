@@ -18,18 +18,15 @@ package com.taotao.cloud.web.servlet.filter;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.VersionContextHolder;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.common.utils.servlet.TraceUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import java.io.IOException;
-import java.util.Objects;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.MDC;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
 import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * 负载均衡隔离规则过滤器
@@ -42,7 +39,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class VersionFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return RequestUtil.excludeActuator(request);
+		return RequestUtils.excludeActuator(request);
 	}
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -54,12 +51,12 @@ public class VersionFilter extends OncePerRequestFilter {
 			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION_HEADER);
 			if (StrUtil.isNotEmpty(version)) {
 				VersionContextHolder.setVersion(version);
-				TraceUtil.mdcVersion(version);
+				TraceUtils.mdcVersion(version);
 			}
 			filterChain.doFilter(request, response);
 		} finally {
 			VersionContextHolder.clear();
-			TraceUtil.mdcRemoveVersion();
+			TraceUtils.mdcRemoveVersion();
 		}
 	}
 }

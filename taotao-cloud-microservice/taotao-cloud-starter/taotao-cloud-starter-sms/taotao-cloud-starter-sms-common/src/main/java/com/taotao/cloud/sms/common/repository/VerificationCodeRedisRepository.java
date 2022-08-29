@@ -14,8 +14,8 @@ package com.taotao.cloud.sms.common.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.common.model.VerificationCode;
 import org.springframework.lang.Nullable;
@@ -49,15 +49,15 @@ public class VerificationCodeRedisRepository implements VerificationCodeReposito
 		String key = key(phone, identificationCode);
 		String data = (String) redisRepository.get(key);
 
-		if (StringUtil.isBlank(data)) {
-			LogUtil.debug("json data is empty for key: {}", key);
+		if (StringUtils.isBlank(data)) {
+			LogUtils.debug("json data is empty for key: {}", key);
 			return null;
 		}
 
 		try {
 			return objectMapper.readValue(data, VerificationCode.class);
 		} catch (Exception e) {
-			LogUtil.debug(e.getMessage(), e);
+			LogUtils.debug(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -71,7 +71,7 @@ public class VerificationCodeRedisRepository implements VerificationCodeReposito
 		try {
 			value = objectMapper.writeValueAsString(verificationCode);
 		} catch (Exception e) {
-			LogUtil.debug(e.getMessage(), e);
+			LogUtils.debug(e.getMessage(), e);
 			throw new RuntimeException(e);
 		}
 
@@ -92,12 +92,12 @@ public class VerificationCodeRedisRepository implements VerificationCodeReposito
 	}
 
 	private String key(String phone, @Nullable String identificationCode) {
-		String tempIdentificationCode = StringUtil.trimToNull(identificationCode);
+		String tempIdentificationCode = StringUtils.trimToNull(identificationCode);
 
 		StringBuilder keyBuilder = new StringBuilder();
 
 		keyBuilder.append(RedisConstant.SMS_VERIFICATION_CODE_KEY_PREFIX);
-		keyBuilder.append(StringUtil.trimToNull(phone));
+		keyBuilder.append(StringUtils.trimToNull(phone));
 
 		if (tempIdentificationCode != null) {
 			keyBuilder.append(":");

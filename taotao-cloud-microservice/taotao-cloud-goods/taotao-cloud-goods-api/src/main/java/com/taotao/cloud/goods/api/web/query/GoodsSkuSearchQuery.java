@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.api.web.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class GoodsSkuSearchQuery extends GoodsPageQuery {
 	@Override
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = super.queryWrapper();
-		queryWrapper.eq(StringUtil.isNotEmpty(goodsId), "goods_id", goodsId);
+		queryWrapper.eq(StringUtils.isNotEmpty(goodsId), "goods_id", goodsId);
 		return queryWrapper;
 	}
 }

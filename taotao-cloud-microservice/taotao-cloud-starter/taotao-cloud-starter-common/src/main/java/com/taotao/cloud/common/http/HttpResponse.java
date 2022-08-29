@@ -18,8 +18,8 @@ package com.taotao.cloud.common.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import okhttp3.*;
 import okhttp3.internal.Util;
 
@@ -99,7 +99,7 @@ public class HttpResponse implements ResponseSpec, Closeable {
 		try {
 			return body.string();
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class HttpResponse implements ResponseSpec, Closeable {
 		try {
 			return body.bytes();
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -124,27 +124,27 @@ public class HttpResponse implements ResponseSpec, Closeable {
 
 	@Override
 	public JsonNode asJsonNode() {
-		return JsonUtil.readTree(asBytes());
+		return JsonUtils.readTree(asBytes());
 	}
 
 	@Override
 	public <T> T asValue(Class<T> valueType) {
-		return JsonUtil.readValue(asBytes(), valueType);
+		return JsonUtils.readValue(asBytes(), valueType);
 	}
 
 	@Override
 	public <T> T asValue(TypeReference<T> typeReference) {
-		return JsonUtil.readValue(asBytes(), typeReference);
+		return JsonUtils.readValue(asBytes(), typeReference);
 	}
 
 	@Override
 	public <T> List<T> asList(Class<T> valueType) {
-		return JsonUtil.readList(asBytes(), valueType);
+		return JsonUtils.readList(asBytes(), valueType);
 	}
 
 	@Override
 	public <K, V> Map<K, V> asMap(Class<?> keyClass, Class<?> valueType) {
-		return JsonUtil.readMap(asBytes(), keyClass, valueType);
+		return JsonUtils.readMap(asBytes(), keyClass, valueType);
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class HttpResponse implements ResponseSpec, Closeable {
 			Files.copy(this.asStream(), path);
 			return path;
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 

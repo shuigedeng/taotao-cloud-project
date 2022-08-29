@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.service.purchase.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuoted;
 import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseQuotedMapper;
 import com.taotao.cloud.order.biz.service.purchase.IPurchaseQuotedItemService;
@@ -32,7 +32,7 @@ public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper
     @Transactional(rollbackFor = Exception.class)
     public PurchaseQuotedVO addPurchaseQuoted(PurchaseQuotedVO purchaseQuotedVO) {
         PurchaseQuoted purchaseQuoted = new PurchaseQuoted();
-        BeanUtil.copyProperties(purchaseQuotedVO, purchaseQuoted);
+        BeanUtils.copyProperties(purchaseQuotedVO, purchaseQuoted);
         //添加报价单
         this.save(purchaseQuoted);
         //添加采购单子内容
@@ -53,7 +53,7 @@ public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper
         //获取报价单
         PurchaseQuotedVO purchaseQuotedVO = new PurchaseQuotedVO();
         PurchaseQuoted purchaseQuoted=this.baseMapper.selectById(id);
-        BeanUtil.copyProperties(purchaseQuoted, purchaseQuotedVO);
+        BeanUtils.copyProperties(purchaseQuoted, purchaseQuotedVO);
         //获取报价单子内容
         purchaseQuotedVO.setPurchaseQuotedItems(purchaseQuotedItemService.purchaseQuotedItemList(id));
         return purchaseQuotedVO;

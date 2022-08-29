@@ -1,6 +1,6 @@
 package com.taotao.cloud.pulsar.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -48,10 +48,10 @@ public class DemoPulsarClientInitUltimate {
 				.connectionTimeout(15, TimeUnit.SECONDS)
 				.build();
 
-			LogUtil.info("pulsar client init success");
+			LogUtils.info("pulsar client init success");
 			this.executorService.shutdown();
 		} catch (Exception e) {
-			LogUtil.error("init pulsar error, exception is ", e);
+			LogUtils.error("init pulsar error, exception is ", e);
 		}
 	}
 

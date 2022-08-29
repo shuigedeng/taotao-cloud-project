@@ -16,13 +16,13 @@
 package com.taotao.cloud.monitor.utils;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.core.enums.ExceptionTypeEnum;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.monitor.enums.WarnLevelEnum;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.model.Message;
@@ -55,7 +55,7 @@ public class ExceptionUtils {
 	public static void reportException(Message message, String applicationName) {
 		if (message.getWarnType() == WarnTypeEnum.ERROR) {
 			AtomicReference<String> title = new AtomicReference<>(message.getTitle());
-			Monitor monitorThreadPool = ContextUtil.getBean(Monitor.class,
+			Monitor monitorThreadPool = ContextUtils.getBean(Monitor.class,
 				false);
 
 			if (Objects.nonNull(monitorThreadPool)) {
@@ -73,16 +73,16 @@ public class ExceptionUtils {
 					}
 
 					param.put("exceptionContent", String.format("[%s][%s][%s]%s",
-						RequestUtil.getIpAddress(),
-						PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
-						PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+						RequestUtils.getIpAddress(),
+						PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+						PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
 						message.getContent()));
 
 					if (StringUtils.isNotBlank(applicationName)) {
 						param.put("applicationName", applicationName);
 					} else {
 						param.put("applicationName",
-							PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
+							PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
 					}
 
 					HttpClient.Params params = HttpClient
@@ -92,11 +92,11 @@ public class ExceptionUtils {
 						.add(param)
 						.build();
 
-					DefaultHttpClient defaultHttpClient = ContextUtil.getBean(
+					DefaultHttpClient defaultHttpClient = ContextUtils.getBean(
 						DefaultHttpClient.class, false);
 					if (Objects.nonNull(defaultHttpClient)) {
 						defaultHttpClient.post(
-							PropertyUtil.getPropertyCache(exceptionUrl, StringUtils.EMPTY), params);
+							PropertyUtils.getPropertyCache(exceptionUrl, StringUtils.EMPTY), params);
 					}
 				});
 			}

@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.jpush;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -57,7 +57,7 @@ public class JPushSendHandler extends AbstractSendHandler<JPushProperties> {
 		Integer templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -103,7 +103,7 @@ public class JPushSendHandler extends AbstractSendHandler<JPushProperties> {
 				return false;
 			}
 		} catch (Exception e) {
-			LogUtil.debug(e.getLocalizedMessage(), e);
+			LogUtils.debug(e.getLocalizedMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 		}
 
@@ -122,13 +122,13 @@ public class JPushSendHandler extends AbstractSendHandler<JPushProperties> {
 			httpEntity, String.class);
 
 		if (httpResponse.getBody() == null) {
-			LogUtil.debug("response body ie null");
+			LogUtils.debug("response body ie null");
 			throw new SendFailedException("response body ie null");
 		}
 
 		String responseContent = httpResponse.getBody();
 
-		LogUtil.debug("responseContent: {}", responseContent);
+		LogUtils.debug("responseContent: {}", responseContent);
 
 		return objectMapper.readValue(responseContent, clazz);
 	}

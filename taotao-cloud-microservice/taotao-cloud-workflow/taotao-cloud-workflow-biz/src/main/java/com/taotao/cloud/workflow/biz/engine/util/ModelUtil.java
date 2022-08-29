@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
 
@@ -38,7 +38,7 @@ public class ModelUtil {
         flowModel.setFlowTitle(flowTitle);
         flowModel.setFlowUrgent(flowUrgent);
         flowModel.setBillNo(billNo);
-        Map<String, Object> data = JsonUtil.entityToMap(formEntity);
+        Map<String, Object> data = JsonUtils.entityToMap(formEntity);
         flowModel.setFormData(data);
         flowModel.setFreeApproverUserId(freeApproverUserId);
         flowModel.setParentId(FlowNature.ParentId);

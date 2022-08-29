@@ -1,7 +1,7 @@
 package com.taotao.cloud.media.biz.media.thread;
 
 import cn.hutool.core.collection.CollUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.ClientType;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
@@ -178,7 +178,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 		command.add(output);
 
 		String join = CollUtil.join(command, " ");
-		LogUtil.info(join);
+		LogUtils.info(join);
 		try {
 			process = new ProcessBuilder(command).start();
 			running = true;
@@ -244,7 +244,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 					} catch (Exception e) {
 					}
 
-					LogUtil.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
+					LogUtils.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
 
 				} catch (SocketTimeoutException e1) {
 //					e1.printStackTrace();
@@ -303,7 +303,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 				while (true) {
 
 					if ((System.currentTimeMillis() - currentTimeMillis) > 15000) {
-						LogUtil.info("网络异常超时");
+						LogUtils.info("网络异常超时");
 						MediaService.cameras.remove(cameraDto.getMediaKey());
 						stopFFmpeg();
 						break;
@@ -359,7 +359,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 							break;
 						}
 						if (enableLog) {
-							LogUtil.info("output: " + line);
+							LogUtils.info("output: " + line);
 						}
 					}
 				} catch (IOException e) {
@@ -389,7 +389,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 							break;
 						}
 						if (enableLog) {
-							LogUtil.info("ffmpeg: " + line);
+							LogUtils.info("ffmpeg: " + line);
 						}
 					}
 				} catch (IOException e) {
@@ -437,7 +437,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 	public void stopFFmpeg() {
 		this.running = false;
 		this.process.destroy();
-		LogUtil.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
+		LogUtils.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
 
 		// 媒体异常时，主动断开前端长连接
 		for (Entry<String, ChannelHandlerContext> entry : wsClients.entrySet()) {
@@ -468,7 +468,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 		if (hcSize != newHcSize || wcSize != newWcSize) {
 			hcSize = newHcSize;
 			wcSize = newWcSize;
-			LogUtil.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize,
+			LogUtils.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize,
 				newWcSize);
 		}
 

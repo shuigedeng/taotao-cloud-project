@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.redis.redisson.RedisDelayQueue;
@@ -114,7 +114,7 @@ public class EmailController {
 		//quartzManager.addJob(jobModel);
 
 		List<String> runScheduledName = scheduledManager.getRunScheduledName();
-		LogUtil.info("===============: ", runScheduledName);
+		LogUtils.info("===============: ", runScheduledName);
 
 		return Result.success(true);
 	}

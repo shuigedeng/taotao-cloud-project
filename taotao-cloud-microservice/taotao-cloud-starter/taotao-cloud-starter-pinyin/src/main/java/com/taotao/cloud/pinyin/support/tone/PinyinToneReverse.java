@@ -4,14 +4,13 @@ package com.taotao.cloud.pinyin.support.tone;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.PunctuationConst;
 
-import com.taotao.cloud.common.utils.io.FileStreamUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.constant.PinyinConst;
 import com.taotao.cloud.pinyin.spi.IPinyinToneReverse;
 import com.taotao.cloud.pinyin.spi.IPinyinToneStyle;
 import com.taotao.cloud.pinyin.support.style.PinyinToneStyles;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +35,9 @@ public class PinyinToneReverse implements IPinyinToneReverse {
     private static final Map<String, List<String>> CHAR_MAP;
 
     static {
-        List<String> lines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
+        List<String> lines = FileStreamUtils.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
         // 自定义词库
-        List<String> defineLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
+        List<String> defineLines = FileStreamUtils.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
         lines.addAll(defineLines);
         CHAR_MAP = Maps.newHashMap();
 
@@ -47,7 +46,7 @@ public class PinyinToneReverse implements IPinyinToneReverse {
 
         for(String line : lines) {
             String[] strings = line.split(PunctuationConst.COLON);
-            List<String> pinyinList = StringUtil.splitToList(strings[1]);
+            List<String> pinyinList = StringUtils.splitToList(strings[1]);
             final String hanzi = strings[0];
 
             for(String pinyin : pinyinList) {

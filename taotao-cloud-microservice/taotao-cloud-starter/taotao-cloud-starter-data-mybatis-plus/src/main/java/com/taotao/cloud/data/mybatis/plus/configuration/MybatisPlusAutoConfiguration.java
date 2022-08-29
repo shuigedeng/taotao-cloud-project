@@ -30,9 +30,9 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.data.mybatis.plus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
@@ -91,7 +91,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MybatisPlusAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
+		LogUtils.started(MybatisPlusAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		}
 
 		private void fillId(MetaObject metaObject) {
-			Long id = IdGeneratorUtil.getId();
+			Long id = IdGeneratorUtils.getId();
 
 			//1. 继承了SuperEntity 若 ID 中有值，就不设置
 			if (metaObject.getOriginalObject() instanceof MpSuperEntity) {
@@ -304,7 +304,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			if (metaObject.hasGetter(autoFillProperties.getCreateByField())) {
 				Object oldVal = metaObject.getValue(autoFillProperties.getCreateByField());
 				if (oldVal == null) {
-					this.setFieldValByName(autoFillProperties.getCreateByField(), SecurityUtil.getUserIdWithAnonymous(),
+					this.setFieldValByName(autoFillProperties.getCreateByField(), SecurityUtils.getUserIdWithAnonymous(),
 						metaObject);
 				}
 			}
@@ -326,7 +326,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			}
 
 			if (entity.getCreatedBy() == null || entity.getCreatedBy().equals(0)) {
-				Object userIdVal = SecurityUtil.getUserIdWithAnonymous();
+				Object userIdVal = SecurityUtils.getUserIdWithAnonymous();
 				this.setFieldValByName(MpSuperEntity.CREATED_BY, userIdVal, metaObject);
 			}
 		}
@@ -341,7 +341,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			if (metaObject.hasGetter(autoFillProperties.getUpdateByField())) {
 				Object oldVal = metaObject.getValue(autoFillProperties.getUpdateByField());
 				if (oldVal == null) {
-					this.setFieldValByName(autoFillProperties.getUpdateByField(), SecurityUtil.getUserIdWithAnonymous(),
+					this.setFieldValByName(autoFillProperties.getUpdateByField(), SecurityUtils.getUserIdWithAnonymous(),
 						metaObject);
 				}
 			}
@@ -358,7 +358,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		private void update(MetaObject metaObject) {
 			MpSuperEntity entity = (MpSuperEntity) metaObject.getOriginalObject();
 			if (entity.getUpdatedBy() == null || entity.getUpdatedBy().equals(0)) {
-				Object userIdVal = SecurityUtil.getUserIdWithAnonymous();
+				Object userIdVal = SecurityUtils.getUserIdWithAnonymous();
 				this.setFieldValByName(MpSuperEntity.UPDATED_BY, userIdVal, metaObject);
 			}
 

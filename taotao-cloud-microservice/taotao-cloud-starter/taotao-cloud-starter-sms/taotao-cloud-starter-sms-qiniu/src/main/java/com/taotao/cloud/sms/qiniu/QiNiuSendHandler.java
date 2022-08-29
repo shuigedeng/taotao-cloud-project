@@ -15,7 +15,7 @@ package com.taotao.cloud.sms.qiniu;
 import com.qiniu.http.Response;
 import com.qiniu.sms.SmsManager;
 import com.qiniu.util.Auth;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -52,7 +52,7 @@ public class QiNiuSendHandler extends AbstractSendHandler<QiNiuProperties> {
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -66,11 +66,11 @@ public class QiNiuSendHandler extends AbstractSendHandler<QiNiuProperties> {
 				return true;
 			}
 
-			LogUtil.debug("send fail, error: {}", response.error);
+			LogUtils.debug("send fail, error: {}", response.error);
 			publishSendFailEvent(noticeData, phones, new SendFailedException(response.error));
 			return false;
 		} catch (Exception e) {
-			LogUtil.debug(e.getLocalizedMessage(), e);
+			LogUtils.debug(e.getLocalizedMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 		}
 

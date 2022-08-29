@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.support;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.entity.DingerCallback;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 
@@ -32,7 +32,7 @@ public class DefaultDingerExceptionCallback implements DingerExceptionCallback {
 	public void execute(DingerCallback dkExCallable) {
 		DingerException ex = dkExCallable.getEx();
 
-		LogUtil.error("异常静默处理:{}-{}->{}.",
+		LogUtils.error("异常静默处理:{}-{}->{}.",
 			ex.getPairs().code(),
 			ex.getPairs().desc(),
 			ex.getMessage()

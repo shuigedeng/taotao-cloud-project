@@ -24,9 +24,9 @@ import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.util.CacheUtil;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.secure.AESUtil;
-import com.taotao.cloud.common.utils.secure.MD5Util;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.secure.AESUtils;
+import com.taotao.cloud.common.utils.secure.MD5Utils;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -95,7 +95,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 				config.getProperty(CaptchaConst.ORIGINAL_PATH_PIC_CLICK));
 		}
 
-		LogUtil.info("--->>>初始化验证码底图<<<---" + captchaType());
+		LogUtils.info("--->>>初始化验证码底图<<<---" + captchaType());
 		waterMark = config.getProperty(CaptchaConst.CAPTCHA_WATER_MARK, "我的水印");
 		slipOffset = config.getProperty(CaptchaConst.CAPTCHA_SLIP_OFFSET, "5");
 		waterMarkFontStr = config.getProperty(CaptchaConst.CAPTCHA_WATER_FONT, "WenQuanZhengHei.ttf");
@@ -110,19 +110,19 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		loadWaterMarkFont();
 
 		if ("local".equals(cacheType)) {
-			LogUtil.info("初始化local缓存...");
+			LogUtils.info("初始化local缓存...");
 			CacheUtil.init(Integer.parseInt(config.getProperty(CaptchaConst.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
 				Long.parseLong(config.getProperty(CaptchaConst.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
 		}
 
 		if ("1".equals(config.getProperty(CaptchaConst.HISTORY_DATA_CLEAR_ENABLE, "0"))) {
-			LogUtil.info("历史资源清除开关...开启..." + captchaType());
+			LogUtils.info("历史资源清除开关...开启..." + captchaType());
 			Runtime.getRuntime().addShutdownHook(new Thread(() -> destroy(config)));
 		}
 
 		if ("1".equals(config.getProperty(CaptchaConst.REQ_FREQUENCY_LIMIT_ENABLE, "0"))) {
 			if (limitHandler == null) {
-				LogUtil.info("接口分钟内限流开关...开启...");
+				LogUtils.info("接口分钟内限流开关...开启...");
 				limitHandler = new FrequencyLimitHandler.DefaultLimitHandler(config, getCacheService(cacheType));
 			}
 		}
@@ -195,7 +195,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	protected String getValidateClientId(Captcha req) {
 		// 以服务端获取的客户端标识 做识别标志
 		if (StrUtil.isNotEmpty(req.getBrowserInfo())) {
-			return MD5Util.encrypt(req.getBrowserInfo());
+			return MD5Utils.encrypt(req.getBrowserInfo());
 		}
 		// 以客户端Ui组件id做识别标志
 		if (StrUtil.isNotEmpty(req.getClientUid())) {
@@ -241,7 +241,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 			}
 
 		} catch (Exception e) {
-			LogUtil.error(e, "load font error:{}", e.getMessage());
+			LogUtils.error(e, "load font error:{}", e.getMessage());
 		}
 	}
 
@@ -292,7 +292,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 * @since 2021-09-03 20:58:11
 	 */
 	public static String decrypt(String point, String key) throws Exception {
-		return AESUtil.decrypt(point, key);
+		return AESUtils.decrypt(point, key);
 	}
 
 	/**

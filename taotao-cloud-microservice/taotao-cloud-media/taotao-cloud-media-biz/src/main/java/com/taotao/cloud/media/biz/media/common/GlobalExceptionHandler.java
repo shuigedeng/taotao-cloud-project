@@ -1,6 +1,6 @@
 package com.taotao.cloud.media.biz.media.common;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(RuntimeException.class)
 	public AjaxResult globalException(HttpServletResponse response, RuntimeException ex) {
-		LogUtil.info("请求错误：" + ex.getMessage());
+		LogUtils.info("请求错误：" + ex.getMessage());
 		return AjaxResult.error(ex.getMessage());
 	}
 

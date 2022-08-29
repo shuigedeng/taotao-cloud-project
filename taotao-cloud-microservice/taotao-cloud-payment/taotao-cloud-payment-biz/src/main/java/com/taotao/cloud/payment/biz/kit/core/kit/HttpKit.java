@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.biz.kit.core.http.AbstractHttpDelegate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class HttpKit {
                 try {
                     br.close();
                 } catch (IOException e) {
-					LogUtil.error("readData错误",e);
+					LogUtils.error("readData错误",e);
                 }
             }
         }

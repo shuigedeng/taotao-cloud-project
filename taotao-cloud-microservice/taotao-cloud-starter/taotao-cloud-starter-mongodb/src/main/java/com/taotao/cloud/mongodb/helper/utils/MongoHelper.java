@@ -5,7 +5,7 @@ import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mongodb.helper.bean.CreateTime;
 import com.taotao.cloud.mongodb.helper.bean.InitValue;
 import com.taotao.cloud.mongodb.helper.bean.Page;
@@ -155,7 +155,7 @@ public class MongoHelper {
 		}
 		if (mongodbProperties.getPrint()) {
 			// 打印语句
-			LogUtil.info(log + "\n执行时间:" + queryTime + "ms");
+			LogUtils.info(log + "\n执行时间:" + queryTime + "ms");
 		}
 
 	}
@@ -197,7 +197,7 @@ public class MongoHelper {
 		}
 		if (mongodbProperties.getPrint()) {
 			// 打印语句
-			LogUtil.info(log + "\n执行时间:" + queryTime + "ms");
+			LogUtils.info(log + "\n执行时间:" + queryTime + "ms");
 		}
 
 	}
@@ -224,7 +224,7 @@ public class MongoHelper {
 		}
 		if (mongodbProperties.getPrint()) {
 			// 打印语句
-			LogUtil.info(log + "\n执行时间:" + queryTime + "ms");
+			LogUtils.info(log + "\n执行时间:" + queryTime + "ms");
 		}
 
 	}
@@ -256,7 +256,7 @@ public class MongoHelper {
 		}
 		if (mongodbProperties.getPrint()) {
 			// 打印语句
-			LogUtil.info(log + "\n执行时间:" + queryTime + "ms");
+			LogUtils.info(log + "\n执行时间:" + queryTime + "ms");
 		}
 
 	}
@@ -287,7 +287,7 @@ public class MongoHelper {
 		}
 		if (mongodbProperties.getPrint()) {
 			// 打印语句
-			LogUtil.info(log + "\n执行时间:" + queryTime + "ms");
+			LogUtils.info(log + "\n执行时间:" + queryTime + "ms");
 		}
 	}
 
@@ -320,7 +320,7 @@ public class MongoHelper {
 		}
 		if (mongodbProperties.getPrint()) {
 			// 打印语句
-			LogUtil.info(log + "\n执行时间:" + queryTime + "ms");
+			LogUtils.info(log + "\n执行时间:" + queryTime + "ms");
 		}
 	}
 

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dubbo.listener;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.Invoker;
@@ -33,11 +33,11 @@ import org.apache.dubbo.rpc.listener.InvokerListenerAdapter;
 public class CustomInvokerListener extends InvokerListenerAdapter {
 	@Override
 	public void referred(Invoker<?> invoker) throws RpcException {
-		LogUtil.info("CustomInvokerListener referred activate ------------------------------");
+		LogUtils.info("CustomInvokerListener referred activate ------------------------------");
 	}
 
 	@Override
 	public void destroyed(Invoker<?> invoker) {
-		LogUtil.info("CustomInvokerListener destroyed activate ------------------------------");
+		LogUtils.info("CustomInvokerListener destroyed activate ------------------------------");
 	}
 }

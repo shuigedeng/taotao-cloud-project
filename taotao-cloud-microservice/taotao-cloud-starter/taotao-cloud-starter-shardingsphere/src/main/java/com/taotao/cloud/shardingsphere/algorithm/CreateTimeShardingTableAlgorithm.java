@@ -2,7 +2,7 @@ package com.taotao.cloud.shardingsphere.algorithm;
 
 import cn.hutool.core.convert.Convert;
 import com.google.common.collect.Range;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
@@ -20,8 +20,8 @@ public class CreateTimeShardingTableAlgorithm implements StandardShardingAlgorit
 	public String doSharding(Collection<String> collection,
 		PreciseShardingValue<Long> preciseShardingValue) {
 		Long createTime = preciseShardingValue.getValue();
-		String monthValue = DateUtil.toString(createTime, "MM");
-		String yearValue = DateUtil.toString(createTime, "yyyy");
+		String monthValue = DateUtils.toString(createTime, "MM");
+		String yearValue = DateUtils.toString(createTime, "yyyy");
 		Integer month = Integer.valueOf(monthValue);
 		Integer year = Integer.valueOf(yearValue);
 		//tt_order_1,tt_order_2~
@@ -36,13 +36,13 @@ public class CreateTimeShardingTableAlgorithm implements StandardShardingAlgorit
 		Range<Integer> valueRange = rangeShardingValue.getValueRange();
 
 		Integer startMonth = Convert.toInt(
-			DateUtil.toString(valueRange.lowerEndpoint().longValue(), "MM"));
+			DateUtils.toString(valueRange.lowerEndpoint().longValue(), "MM"));
 		Integer endMonth = Convert.toInt(
-			DateUtil.toString(valueRange.upperEndpoint().longValue(), "MM"));
+			DateUtils.toString(valueRange.upperEndpoint().longValue(), "MM"));
 		Integer startYear = Convert.toInt(
-			DateUtil.toString(valueRange.lowerEndpoint().longValue(), "yyyy"));
+			DateUtils.toString(valueRange.lowerEndpoint().longValue(), "yyyy"));
 		Integer endYear = Convert.toInt(
-			DateUtil.toString(valueRange.upperEndpoint().longValue(), "yyyy"));
+			DateUtils.toString(valueRange.upperEndpoint().longValue(), "yyyy"));
 
 		//如果是同一年查询
 		//2020-1~2020-2

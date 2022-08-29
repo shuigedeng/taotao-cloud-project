@@ -18,7 +18,7 @@ package com.taotao.cloud.web.base.controller;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -158,7 +158,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * @since 2021-09-02 21:04:56
 	 */
 	default Long getUserId() {
-		return SecurityUtil.getUserId();
+		return SecurityUtils.getUserId();
 	}
 
 	/**
@@ -168,7 +168,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * @since 2021-09-02 21:05:02
 	 */
 	default String getTenant() {
-		return SecurityUtil.getTenant();
+		return SecurityUtils.getTenant();
 	}
 
 	/**
@@ -178,7 +178,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * @since 2021-09-02 21:05:12
 	 */
 	default String getNickname() {
-		return SecurityUtil.getCurrentUser().getNickname();
+		return SecurityUtils.getCurrentUser().getNickname();
 	}
 
 	/**
@@ -188,7 +188,7 @@ public interface BaseController<T extends SuperEntity<T, I>, I extends Serializa
 	 * @since 2021-09-02 21:05:17
 	 */
 	default String getUsername() {
-		return SecurityUtil.getUsername();
+		return SecurityUtils.getUsername();
 	}
 
 

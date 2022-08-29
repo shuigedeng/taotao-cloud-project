@@ -1,7 +1,6 @@
 package com.taotao.cloud.auth.biz.configuration;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClient;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppRequest;
@@ -9,15 +8,14 @@ import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppSessionKeyCache;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
-import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.models.CustomJwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -45,7 +43,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -62,7 +59,6 @@ import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
@@ -180,21 +176,21 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 	//private JwtTokenGenerator jwtTokenGenerator;
 
 	AuthenticationEntryPoint authenticationEntryPoint = (request, response, authException) -> {
-		LogUtil.error("用户认证失败", authException);
+		LogUtils.error("用户认证失败", authException);
 		authException.printStackTrace();
-		ResponseUtil.fail(response, exceptionMessage(authException));
+		ResponseUtils.fail(response, exceptionMessage(authException));
 	};
 	AccessDeniedHandler accessDeniedHandler = (request, response, accessDeniedException) -> {
-		LogUtil.error("用户权限不足", accessDeniedException);
-		ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
+		LogUtils.error("用户权限不足", accessDeniedException);
+		ResponseUtils.fail(response, ResultEnum.FORBIDDEN);
 	};
 	AuthenticationFailureHandler authenticationFailureHandler = (request, response, accessDeniedException) -> {
-		LogUtil.error("账号或者密码错误", accessDeniedException);
-		ResponseUtil.fail(response, "账号或者密码错误");
+		LogUtils.error("账号或者密码错误", accessDeniedException);
+		ResponseUtils.fail(response, "账号或者密码错误");
 	};
 	AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> {
-		LogUtil.error("用户认证成功", authentication);
-		ResponseUtil.success(response,
+		LogUtils.error("用户认证成功", authentication);
+		ResponseUtils.success(response,
 			tokenResponseMock((UserDetails) authentication.getPrincipal()));
 	};
 
@@ -317,11 +313,11 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 					// .loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
 					//.loginPage("/login")
 					.successHandler((request, response, authentication) -> {
-						LogUtil.info("oAuth2Login用户认证成功");
+						LogUtils.info("oAuth2Login用户认证成功");
 					})
 					// 认证失败后的处理器
 					.failureHandler((request, response, exception) -> {
-						LogUtil.info("oAuth2Login用户认证失败");
+						LogUtils.info("oAuth2Login用户认证失败");
 					})
 					// // 配置授权服务器端点信息
 					// .authorizationEndpoint(authorizationEndpointCustomizer ->
@@ -380,7 +376,7 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.claim("scope", scopes)
 			.build();
 
-		JWKSource jwkSource = ContextUtil.getBean(JWKSource.class, false);
+		JWKSource jwkSource = ContextUtils.getBean(JWKSource.class, false);
 		Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
 		return OAuth2AccessTokenResponse.withToken(jwt.getTokenValue())
 			.tokenType(OAuth2AccessToken.TokenType.BEARER)

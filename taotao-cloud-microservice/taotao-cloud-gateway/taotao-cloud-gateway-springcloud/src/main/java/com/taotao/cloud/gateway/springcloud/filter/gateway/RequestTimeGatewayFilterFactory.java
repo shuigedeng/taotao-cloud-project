@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.gateway.springcloud.filter.gateway;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.filter.gateway.RequestTimeGatewayFilterFactory.Config;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +64,7 @@ public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactor
 									.append(System.currentTimeMillis() - startTime)
 									.append("ms");
 							sb.append(" 请求参数: ").append(request.getQueryParams());
-							LogUtil.info(sb.toString());
+							LogUtils.info(sb.toString());
 						}
 					})
 			);

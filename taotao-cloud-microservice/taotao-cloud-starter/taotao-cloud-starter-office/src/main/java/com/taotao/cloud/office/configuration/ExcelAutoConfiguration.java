@@ -1,7 +1,7 @@
 package com.taotao.cloud.office.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
@@ -17,7 +17,7 @@ public class ExcelAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ExcelAutoConfiguration.class, StarterName.EXCEL_STARTER);
+		LogUtils.started(ExcelAutoConfiguration.class, StarterName.EXCEL_STARTER);
 	}
 
 }

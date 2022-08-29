@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.monitor.strategy;
 
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.monitor.collect.task.IOCollectTask;
 import com.taotao.cloud.monitor.model.Report;
 import java.util.ArrayList;
@@ -60,32 +60,32 @@ public class DefaultWarnStrategy implements WarnStrategy{
 	 */
 	public void setDefaultStrategy() {
 		rulesAnalyzer.registerRules("cpu.process",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.cpu.process", "[>0.7]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.cpu.process", "[>0.7]"));
 		rulesAnalyzer.registerRules("cpu.system",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.cpu.system", "[>0.7]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.cpu.system", "[>0.7]"));
 		rulesAnalyzer.registerRules("io.current.dir.usable.size",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.io.current.dir.usable.size",
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.io.current.dir.usable.size",
 				"[<500]"));
 		rulesAnalyzer.registerRules("memery.jvm.max",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.memery.jvm.max", "[<256]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.memery.jvm.max", "[<256]"));
 		rulesAnalyzer.registerRules("memery.system.free",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.memery.system.free",
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.memery.system.free",
 				"[<256]"));
 		rulesAnalyzer.registerRules("thread.deadlocked.count",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.thread.deadlocked.count",
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.thread.deadlocked.count",
 				"[>10]"));
 		rulesAnalyzer.registerRules("thread.total",
-			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.thread.total", "[>1000]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.thread.total", "[>1000]"));
 		rulesAnalyzer.registerRules("tomcat.threadPool.poolSize.count",
-			PropertyUtil.getPropertyCache(
+			PropertyUtils.getPropertyCache(
 				"taotao.cloud.health.strategy.tomcat.threadPool.poolSize.count",
 				"[>1000]"));
 		rulesAnalyzer.registerRules("tomcat.threadPool.active.count",
-			PropertyUtil.getPropertyCache(
+			PropertyUtils.getPropertyCache(
 				"taotao.cloud.health.strategy.tomcat.threadPool.active.count",
 				"[>200]"));
 		rulesAnalyzer.registerRules("tomcat.threadPool.queue.size",
-			PropertyUtil.getPropertyCache(
+			PropertyUtils.getPropertyCache(
 				"taotao.cloud.health.strategy.tomcat.threadPool.queue.size",
 				"[>50]"));
 
@@ -140,7 +140,7 @@ public class DefaultWarnStrategy implements WarnStrategy{
 		});
 
 		String warnInfo = warn.toString();
-		if (StringUtil.isEmpty(warnInfo)) {
+		if (StringUtils.isEmpty(warnInfo)) {
 			return "";
 		}
 		return warnInfo;

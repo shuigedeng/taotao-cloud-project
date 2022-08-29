@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
@@ -46,7 +46,7 @@ public class HttpClientAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HttpClientAutoConfiguration.class, StarterName.DINGTALK_STARTER);
+		LogUtils.started(HttpClientAutoConfiguration.class, StarterName.DINGTALK_STARTER);
 	}
 
 	@Bean(name = "dingerClientHttpRequestFactory")

@@ -3,8 +3,8 @@ package com.taotao.cloud.order.api.web.query.aftersale;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -78,34 +78,34 @@ public class AfterSalePageQuery extends PageParam {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (StringUtil.isNotEmpty(sn)) {
+		if (StringUtils.isNotEmpty(sn)) {
 			queryWrapper.like("sn", sn);
 		}
-		if (StringUtil.isNotEmpty(orderSn)) {
+		if (StringUtils.isNotEmpty(orderSn)) {
 			queryWrapper.like("order_sn", orderSn);
 		}
 
 		//按买家查询
-		if (SecurityUtil.getCurrentUser().getType() == UserEnum.MEMBER.getCode()) {
-			queryWrapper.eq("member_id", SecurityUtil.getCurrentUser().getUserId());
+		if (SecurityUtils.getCurrentUser().getType() == UserEnum.MEMBER.getCode()) {
+			queryWrapper.eq("member_id", SecurityUtils.getCurrentUser().getUserId());
 		}
 
 		//按卖家查询
-		if (SecurityUtil.getCurrentUser().getType() == UserEnum.STORE.getCode()) {
-			queryWrapper.eq("store_id", SecurityUtil.getCurrentUser().getStoreId());
+		if (SecurityUtils.getCurrentUser().getType() == UserEnum.STORE.getCode()) {
+			queryWrapper.eq("store_id", SecurityUtils.getCurrentUser().getStoreId());
 		}
 
-		if (SecurityUtil.getCurrentUser().getType() == UserEnum.MANAGER.getCode() && StringUtil.isNotEmpty(
+		if (SecurityUtils.getCurrentUser().getType() == UserEnum.MANAGER.getCode() && StringUtils.isNotEmpty(
 			storeId)) {
 			queryWrapper.eq("store_id", storeId);
 		}
-		if (StringUtil.isNotEmpty(memberName)) {
+		if (StringUtils.isNotEmpty(memberName)) {
 			queryWrapper.like("member_name", memberName);
 		}
-		if (StringUtil.isNotEmpty(storeName)) {
+		if (StringUtils.isNotEmpty(storeName)) {
 			queryWrapper.like("store_name", storeName);
 		}
-		if (StringUtil.isNotEmpty(goodsName)) {
+		if (StringUtils.isNotEmpty(goodsName)) {
 			queryWrapper.like("goods_name", goodsName);
 		}
 		//按时间查询
@@ -115,10 +115,10 @@ public class AfterSalePageQuery extends PageParam {
 		if (endDate != null) {
 			queryWrapper.le("create_time", endDate);
 		}
-		if (StringUtil.isNotEmpty(serviceStatus)) {
+		if (StringUtils.isNotEmpty(serviceStatus)) {
 			queryWrapper.eq("service_status", serviceStatus);
 		}
-		if (StringUtil.isNotEmpty(serviceType)) {
+		if (StringUtils.isNotEmpty(serviceType)) {
 			queryWrapper.eq("service_type", serviceType);
 		}
 		this.betweenWrapper(queryWrapper);
@@ -127,7 +127,7 @@ public class AfterSalePageQuery extends PageParam {
 	}
 
 	private <T> void betweenWrapper(QueryWrapper<T> queryWrapper) {
-		if (StringUtil.isNotEmpty(applyRefundPrice)) {
+		if (StringUtils.isNotEmpty(applyRefundPrice)) {
 			String[] s = applyRefundPrice.split("_");
 			if (s.length > 1) {
 				queryWrapper.ge("apply_refund_price", s[1]);
@@ -135,7 +135,7 @@ public class AfterSalePageQuery extends PageParam {
 				queryWrapper.le("apply_refund_price", s[0]);
 			}
 		}
-		if (StringUtil.isNotEmpty(actualRefundPrice)) {
+		if (StringUtils.isNotEmpty(actualRefundPrice)) {
 			String[] s = actualRefundPrice.split("_");
 			if (s.length > 1) {
 				queryWrapper.ge("actual_refund_price", s[1]);

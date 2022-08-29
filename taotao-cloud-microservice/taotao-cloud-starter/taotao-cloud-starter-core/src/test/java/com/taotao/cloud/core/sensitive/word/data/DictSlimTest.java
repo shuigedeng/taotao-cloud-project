@@ -2,9 +2,9 @@ package com.taotao.cloud.core.sensitive.word.data;
 
 import com.taotao.cloud.common.support.filter.IFilter;
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.io.FileUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.io.FileUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.core.sensitive.word.utils.NumUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,22 +31,22 @@ public class DictSlimTest {
         final String sourceFile = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
         final String targetFile = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
 
-        List<String> words = FileUtil.readAllLines(sourceFile);
+        List<String> words = FileUtils.readAllLines(sourceFile);
 
-        List<String> formats = CollectionUtil.toList(words, new IHandler<String, String>() {
+        List<String> formats = CollectionUtils.toList(words, new IHandler<String, String>() {
             @Override
             public String handle(String string) {
                 String lower = string.toLowerCase();
-                String half = StringUtil.toHalfWidth(lower);
-                String trim = StringUtil.trimAnyBlank(half);
-                String punc = StringUtil.trimAnyPunctionAndSymbol(trim);
+                String half = StringUtils.toHalfWidth(lower);
+                String trim = StringUtils.trimAnyBlank(half);
+                String punc = StringUtils.trimAnyPunctionAndSymbol(trim);
                 //return ZhConvertBootstrap.newInstance(new CharSegment()).toSimple(punc);
 	            return "";
             }
         });
 
         List<String> resultList = DataUtil.disctinctAndSort(formats);
-        FileUtil.write(targetFile, resultList);
+        FileUtils.write(targetFile, resultList);
     }
 
     /**
@@ -65,12 +65,12 @@ public class DictSlimTest {
         final String sourceFile = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
         final String targetFile = "D:\\github\\sensitive-word\\src\\main\\resources\\dict.txt";
 
-        List<String> words = FileUtil.readAllLines(sourceFile);
+        List<String> words = FileUtils.readAllLines(sourceFile);
 
-        List<String> formats = CollectionUtil.filterList(words, new IFilter<String>() {
+        List<String> formats = CollectionUtils.filterList(words, new IFilter<String>() {
             @Override
             public boolean filter(String string) {
-                return StringUtil.isDigitOrLetter(string)
+                return StringUtils.isDigitOrLetter(string)
                         || string.contains("�")
                         || string.contains("删掉")
                         || isUrl(string);
@@ -78,7 +78,7 @@ public class DictSlimTest {
         });
 
         List<String> resultList = DataUtil.disctinctAndSort(formats);
-        FileUtil.write(targetFile, resultList);
+        FileUtils.write(targetFile, resultList);
     }
 
     /**
@@ -89,14 +89,14 @@ public class DictSlimTest {
         final String sourceFile = "D:\\_github\\sensitive-word\\src\\main\\resources\\dict.txt";
         final String targetFile = "D:\\_github\\sensitive-word\\src\\main\\resources\\dict.txt";
 
-        List<String> words = FileUtil.readAllLines(sourceFile);
-        List<String> formats = CollectionUtil.toList(words, new IHandler<String, String>() {
+        List<String> words = FileUtils.readAllLines(sourceFile);
+        List<String> formats = CollectionUtils.toList(words, new IHandler<String, String>() {
             @Override
             public String handle(String s) {
                 return s.replaceAll(" ", "");
             }
         });
-        List<String> filters = CollectionUtil.filterList(formats, new IFilter<String>() {
+        List<String> filters = CollectionUtils.filterList(formats, new IFilter<String>() {
             @Override
             public boolean filter(String string) {
                 return isNumber(string);
@@ -104,7 +104,7 @@ public class DictSlimTest {
         });
 
         List<String> resultList = DataUtil.disctinctAndSort(filters);
-        FileUtil.write(targetFile, resultList);
+        FileUtils.write(targetFile, resultList);
     }
 
     /**
@@ -121,7 +121,7 @@ public class DictSlimTest {
         // 停顿词语
         String trim = string.replaceAll("加|否|与|和", "");
         String mapString = NumUtils.getMappingString(trim);
-        boolean result = StringUtil.isDigit(mapString);
+        boolean result = StringUtils.isDigit(mapString);
         if(result) {
             System.out.println(string);
         }

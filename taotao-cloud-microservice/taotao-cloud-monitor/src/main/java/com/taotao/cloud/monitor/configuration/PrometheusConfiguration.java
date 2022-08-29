@@ -20,7 +20,7 @@ import com.taotao.cloud.monitor.api.PrometheusApi;
 import com.taotao.cloud.monitor.api.ReactivePrometheusApi;
 import com.taotao.cloud.monitor.model.AlertMessage;
 import com.taotao.cloud.monitor.properties.PrometheusProperties;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -96,7 +96,7 @@ public class PrometheusConfiguration {
 		@EventListener
 		public void onAlertEvent(AlertMessage message) {
 			// 处理 alert webhook message
-			LogUtil.info(message.toString());
+			LogUtils.info(message.toString());
 		}
 
 	}

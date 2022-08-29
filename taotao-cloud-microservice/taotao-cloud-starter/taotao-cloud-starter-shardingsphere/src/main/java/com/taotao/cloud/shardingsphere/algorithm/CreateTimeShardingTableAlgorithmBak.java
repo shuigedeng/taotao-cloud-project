@@ -1,6 +1,6 @@
 package com.taotao.cloud.shardingsphere.algorithm;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
@@ -19,7 +19,7 @@ public class CreateTimeShardingTableAlgorithmBak implements StandardShardingAlgo
 	public String doSharding(Collection<String> collection,
 		PreciseShardingValue<Long> preciseShardingValue) {
 		Long createTime = preciseShardingValue.getValue();
-		String value = DateUtil.toString(createTime, "MM");
+		String value = DateUtils.toString(createTime, "MM");
 		Integer month = Integer.valueOf(value);
 		//t_order_1,t_order_2~
 		return "t_order_" + month;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.biz.service.business.IVisitsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +35,7 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
 	public Result<Boolean> create() {
-		visitsService.count(RequestUtil.getHttpServletRequest());
+		visitsService.count(RequestUtils.getHttpServletRequest());
 		return Result.success(true);
 	}
 

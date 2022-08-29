@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.web.template;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +24,6 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.springframework.util.StringUtils;
 
 /**
  * 模板访问java代码的注入类 一般通过Html或者tpl访问 如:Html.request()或者tpl.request()
@@ -42,7 +41,7 @@ public class TemplateProvider {
 	 * @since 2021-09-02 22:19:15
 	 */
 	public HttpServletRequest request() {
-		return RequestUtil.getRequest();
+		return RequestUtils.getRequest();
 	}
 
 	/**
@@ -52,7 +51,7 @@ public class TemplateProvider {
 	 * @since 2021-09-02 22:19:19
 	 */
 	public HttpServletResponse response() {
-		return RequestUtil.getResponse();
+		return RequestUtils.getResponse();
 	}
 
 	/**
@@ -62,7 +61,7 @@ public class TemplateProvider {
 	 * @since 2021-09-02 22:19:25
 	 */
 	public HttpSession session() {
-		return Objects.requireNonNull(RequestUtil.getRequest()).getSession();
+		return Objects.requireNonNull(RequestUtils.getRequest()).getSession();
 	}
 
 	/**
@@ -87,7 +86,7 @@ public class TemplateProvider {
 	public Object getattr(String key) {
 		if (key.contains(".")) {
 			Object r = null;
-			String[] path = StringUtils.split(key, ".");
+			String[] path = org.springframework.util.StringUtils.split(key, ".");
 			if (path != null && path.length > 0) {
 				for (int i = 0; i < path.length; i++) {
 					String p = path[i];
@@ -135,13 +134,13 @@ public class TemplateProvider {
 	 * @since 2021-09-02 22:20:05
 	 */
 	public String cutString(String str, int maxlen) {
-		if (StringUtil.isEmpty(str)) {
+		if (StringUtils.isEmpty(str)) {
 			return str;
 		}
 		if (str.length() <= maxlen) {
 			return str;
 		}
-		return StringUtil.subString3(str, maxlen);
+		return StringUtils.subString3(str, maxlen);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.springcloud.anti_reptile.filter;
 
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.AntiReptileProperties;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.module.VerifyImageDTO;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.rule.RuleActuator;
@@ -114,7 +114,7 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
 			String str2 = str1.replaceAll("verifyImg_value", verifyImage.getVerifyImgStr());
 			String str3 = str2.replaceAll("realRequestUri_value", requestUrl);
 
-			return ResponseUtil.writeResponseTextHtml(exchange, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED,
+			return ResponseUtils.writeResponseTextHtml(exchange, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED,
 				str3);
 		}
 		return chain.filter(exchange);

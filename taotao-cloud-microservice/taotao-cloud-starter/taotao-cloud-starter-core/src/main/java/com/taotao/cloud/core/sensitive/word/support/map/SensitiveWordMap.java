@@ -3,11 +3,11 @@ package com.taotao.cloud.core.sensitive.word.support.map;
 
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.io.FileUtil;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.io.FileUtils;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplaceContext;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
@@ -56,7 +56,7 @@ public class SensitiveWordMap implements IWordMap {
         Map newInnerWordMap = new HashMap(collection.size());
 
         for (String key : collection) {
-            if (StringUtil.isEmpty(key)) {
+            if (StringUtils.isEmpty(key)) {
                 continue;
             }
 
@@ -74,7 +74,7 @@ public class SensitiveWordMap implements IWordMap {
                 Object wordMap = currentMap.get(charKey);
 
                 // 如果集合存在
-                if (ObjectUtil.isNotNull(wordMap)) {
+                if (ObjectUtils.isNotNull(wordMap)) {
                     // 直接将获取到的 map 当前当前 map 进行继续的操作
                     currentMap = (Map) wordMap;
                 } else {
@@ -100,7 +100,7 @@ public class SensitiveWordMap implements IWordMap {
         this.innerWordMap = newInnerWordMap;
 
         long endTime = System.currentTimeMillis();
-        LogUtil.info("Init sensitive word map end! Cost time: " + (endTime - startTime) + "ms");
+        LogUtils.info("Init sensitive word map end! Cost time: " + (endTime - startTime) + "ms");
     }
 
     /**
@@ -114,7 +114,7 @@ public class SensitiveWordMap implements IWordMap {
      */
     @Override
     public boolean contains(String string, final IWordContext context) {
-        if (StringUtil.isEmpty(string)) {
+        if (StringUtils.isEmpty(string)) {
             return false;
         }
 
@@ -146,7 +146,7 @@ public class SensitiveWordMap implements IWordMap {
     public IWordResult findFirst(String string, final IWordContext context) {
         List<IWordResult> stringList = getSensitiveWords(string, ValidModeEnum.FAIL_FAST, context);
 
-        if (CollectionUtil.isEmpty(stringList)) {
+        if (CollectionUtils.isEmpty(stringList)) {
             return null;
         }
 
@@ -155,7 +155,7 @@ public class SensitiveWordMap implements IWordMap {
 
     @Override
     public String replace(String target, final ISensitiveWordReplace replace, final IWordContext context) {
-        if(StringUtil.isEmpty(target)) {
+        if(StringUtils.isEmpty(target)) {
             return target;
         }
 
@@ -173,7 +173,7 @@ public class SensitiveWordMap implements IWordMap {
     private List<IWordResult> getSensitiveWords(final String text, final ValidModeEnum modeEnum,
                                            final IWordContext context) {
         //1. 是否存在敏感词，如果比存在，直接返回空列表
-        if (StringUtil.isEmpty(text)) {
+        if (StringUtils.isEmpty(text)) {
             return Lists.newArrayList();
         }
 
@@ -219,7 +219,7 @@ public class SensitiveWordMap implements IWordMap {
     private String replaceSensitiveWord(final String target,
                                         final ISensitiveWordReplace replace,
                                         final IWordContext context) {
-        if(StringUtil.isEmpty(target)) {
+        if(StringUtils.isEmpty(target)) {
             return target;
         }
         // 用于结果构建
@@ -237,7 +237,7 @@ public class SensitiveWordMap implements IWordMap {
                 Class checkClass = checkResult.checkClass();
                 String string = target.substring(i, i+wordLength);
                 if(SensitiveCheckUrl.class.equals(checkClass)
-                    && FileUtil.isImage(string)) {
+                    && FileUtils.isImage(string)) {
                     // 直接使用原始内容，避免 markdown 图片转换失败
                     resultBuilder.append(string);
                 } else {

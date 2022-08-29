@@ -2,7 +2,7 @@ package com.taotao.cloud.common.support.proxy;
 
 
 import com.taotao.cloud.common.enums.ProxyTypeEnum;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 
 import java.lang.reflect.Proxy;
 
@@ -25,7 +25,7 @@ public class ProxyFactory {
 	 * @return 代理枚举
 	 */
 	public static ProxyTypeEnum getProxyType(final Object object) {
-		if (ObjectUtil.isNull(object)) {
+		if (ObjectUtils.isNull(object)) {
 			return ProxyTypeEnum.NONE;
 		}
 

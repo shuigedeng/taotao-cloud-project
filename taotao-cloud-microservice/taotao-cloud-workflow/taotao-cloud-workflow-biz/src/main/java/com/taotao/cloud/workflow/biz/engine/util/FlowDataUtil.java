@@ -2,7 +2,7 @@ package com.taotao.cloud.workflow.biz.engine.util;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.model.FormAllModel;
 import com.taotao.cloud.workflow.biz.model.FormColumnModel;
 import com.taotao.cloud.workflow.biz.model.FormColumnTableModel;
@@ -132,7 +132,7 @@ public class FlowDataUtil {
     //---------------------------------------------信息---------------------------------------------
 
     public Map<String, Object> info(List<FieLdsModel> fieLdslist, FlowTaskEntity entity, List<TableModel> tableList, boolean convert, DbLinkEntity link) throws WorkFlowException {
-        Map<String, Object> data = StringUtil.isNotEmpty(entity.getFlowFormContentJson()) ? JsonUtil.stringToMap(entity.getFlowFormContentJson()) : new HashMap<>(16);
+        Map<String, Object> data = StringUtil.isNotEmpty(entity.getFlowFormContentJson()) ? JsonUtils.stringToMap(entity.getFlowFormContentJson()) : new HashMap<>(16);
         DataModel dataModel = new DataModel(data, fieLdslist, tableList, entity.getId(), link, convert);
         return this.info(dataModel);
     }
@@ -371,7 +371,7 @@ public class FlowDataUtil {
                     value = new ArrayList<>();
                 } else {
                     if (isTable) {
-                        value = JsonUtil.getJsonToListMap(String.valueOf(value));
+                        value = JsonUtils.getJsonToListMap(String.valueOf(value));
                     }
                 }
                 break;
@@ -382,7 +382,7 @@ public class FlowDataUtil {
                     value = new ArrayList<>();
                 } else {
                     if (isTable) {
-                        value = JsonUtil.getJsonToList(String.valueOf(value), String.class);
+                        value = JsonUtils.getJsonToList(String.valueOf(value), String.class);
                     }
                 }
                 break;
@@ -390,9 +390,9 @@ public class FlowDataUtil {
             case JnpfKeyConsts.ADDRESS:
                 if (isTable) {
                     if (multiple) {
-                        value = JsonUtil.getJsonToBean(String.valueOf(value), String[][].class);
+                        value = JsonUtils.getJsonToBean(String.valueOf(value), String[][].class);
                     } else {
-                        value = JsonUtil.getJsonToList(String.valueOf(value), String.class);
+                        value = JsonUtils.getJsonToList(String.valueOf(value), String.class);
                     }
                 }
                 break;
@@ -402,7 +402,7 @@ public class FlowDataUtil {
             case JnpfKeyConsts.POSSELECT:
                 if (isTable) {
                     if (multiple) {
-                        value = JsonUtil.getJsonToList(String.valueOf(value), String.class);
+                        value = JsonUtils.getJsonToList(String.valueOf(value), String.class);
                     }
                 }
                 break;
@@ -431,11 +431,11 @@ public class FlowDataUtil {
                     value = new ArrayList<>();
                 } else {
                     if (isTable) {
-                        PropsBeanModel propsModel = JsonUtil.getJsonToBean(fieLdsModel.getProps().getProps(), PropsBeanModel.class);
+                        PropsBeanModel propsModel = JsonUtils.getJsonToBean(fieLdsModel.getProps().getProps(), PropsBeanModel.class);
                         if (propsModel.getMultiple()) {
-                            value = JsonUtil.getJsonToBean(String.valueOf(value), String[][].class);
+                            value = JsonUtils.getJsonToBean(String.valueOf(value), String[][].class);
                         } else {
-                            value = JsonUtil.getJsonToList(String.valueOf(value), String.class);
+                            value = JsonUtils.getJsonToList(String.valueOf(value), String.class);
                         }
                     }
                 }

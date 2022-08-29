@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.core.properties.HttpClientProperties;
@@ -46,7 +46,7 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RestTemplateAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(RestTemplateAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	/**

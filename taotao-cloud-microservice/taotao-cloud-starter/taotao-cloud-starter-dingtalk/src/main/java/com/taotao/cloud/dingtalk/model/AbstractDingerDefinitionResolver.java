@@ -19,7 +19,7 @@ package com.taotao.cloud.dingtalk.model;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGER_REPEATED_EXCEPTION;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.METHOD_DEFINITION_EXCEPTION;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.annatations.AsyncExecute;
 import com.taotao.cloud.dingtalk.annatations.DingerConfiguration;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
@@ -106,7 +106,7 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 		for (DingerType dingerType : enabledDingerTypes) {
 			DingerConfig defaultDingerConfig = defaultDingerConfigs.get(dingerType);
 			if (dingerConfiguration == null) {
-				LogUtil.debug("dinger={} not open and skip the corresponding dinger registration.",
+				LogUtils.debug("dinger={} not open and skip the corresponding dinger registration.",
 					dingerType);
 				continue;
 			}
@@ -116,7 +116,7 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 				dingerDefinitionGeneratorMap.get(key);
 			if (dingerDefinitionGeneratorClass == null) {
 //                throw new DingerException(ExceptionEnum.DINGERDEFINITIONTYPE_UNDEFINED_KEY, key);
-				LogUtil.debug("当前key=%s在DingerDefinitionType中没定义", key);
+				LogUtils.debug("当前key=%s在DingerDefinitionType中没定义", key);
 				continue;
 			}
 
@@ -128,7 +128,7 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 			);
 
 			if (dingerDefinition == null) {
-				LogUtil.debug("keyName={} dinger[{}] format is illegal.", keyName,
+				LogUtils.debug("keyName={} dinger[{}] format is illegal.", keyName,
 					dingerDefinitionKey);
 				continue;
 			}
@@ -150,7 +150,7 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 				.merge(defaultDingerConfig);
 
 			Container.INSTANCE.put(keyName, dingerDefinition);
-			LogUtil.debug("dinger definition={} has been registed.", keyName);
+			LogUtils.debug("dinger definition={} has been registed.", keyName);
 		}
 	}
 

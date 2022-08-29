@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.web.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.web.query.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.web.vo.DraftGoodsVO;
@@ -50,7 +50,7 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		draftGoodsPageQuery.setStoreId(storeId);
 		IPage<DraftGoods> draftGoods = draftGoodsService.getDraftGoods(draftGoodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsVO.class));
@@ -69,7 +69,7 @@ public class DraftGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		if (draftGoodsSkuParamsDTO.getStoreId() == null) {
 			draftGoodsSkuParamsDTO.setStoreId(storeId);
 		} else if (draftGoodsSkuParamsDTO.getStoreId() != null && !storeId.equals(

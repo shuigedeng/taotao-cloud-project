@@ -4,7 +4,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 
 /**
@@ -47,7 +47,7 @@ public class UploadDataListener implements ReadListener<UploadData> {
      */
     @Override
     public void invoke(UploadData data, AnalysisContext context) {
-        LogUtil.info("解析到一条数据:{}", JSON.toJSONString(data));
+        LogUtils.info("解析到一条数据:{}", JSON.toJSONString(data));
         cachedDataList.add(data);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (cachedDataList.size() >= BATCH_COUNT) {
@@ -66,15 +66,15 @@ public class UploadDataListener implements ReadListener<UploadData> {
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要保存数据，确保最后遗留的数据也存储到数据库
         saveData();
-        LogUtil.info("所有数据解析完成！");
+        LogUtils.info("所有数据解析完成！");
     }
 
     /**
      * 加上存储数据库
      */
     private void saveData() {
-        LogUtil.info("{}条数据，开始存储数据库！", cachedDataList.size());
+        LogUtils.info("{}条数据，开始存储数据库！", cachedDataList.size());
         uploadDAO.save(cachedDataList);
-        LogUtil.info("存储数据库成功！");
+        LogUtils.info("存储数据库成功！");
     }
 }

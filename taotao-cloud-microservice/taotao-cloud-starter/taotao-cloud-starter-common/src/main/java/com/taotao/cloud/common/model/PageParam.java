@@ -2,7 +2,7 @@ package com.taotao.cloud.common.model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -71,7 +71,7 @@ public class PageParam implements Serializable {
 		List<OrderItem> orders = new ArrayList<>();
 		orders.add(OrderItem.desc("create_time"));
 
-		if (StringUtil.isNotBlank(sort) && StringUtil.isNotBlank(order)) {
+		if (StringUtils.isNotBlank(sort) && StringUtils.isNotBlank(order)) {
 			OrderItem orderItem = "asc".equals(order) ? OrderItem.asc(sort) : OrderItem.desc(sort);
 			orders.add(orderItem);
 		}
@@ -91,7 +91,7 @@ public class PageParam implements Serializable {
 		List<Order> orders = new ArrayList<>();
 		orders.add(Order.desc("create_time"));
 
-		if (StringUtil.isNotBlank(sort) && StringUtil.isNotBlank(order)) {
+		if (StringUtils.isNotBlank(sort) && StringUtils.isNotBlank(order)) {
 			Order orderItem = "asc".equals(order) ? Order.asc(sort) : Order.desc(sort);
 			orders.add(orderItem);
 		}

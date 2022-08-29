@@ -2,7 +2,7 @@ package com.taotao.cloud.office.execl.core.dataformat;
 
 import com.alibaba.excel.EasyExcel;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
@@ -45,10 +45,10 @@ public class DateFormatTest {
             EasyExcel.read(file, DateFormatData.class, null).locale(Locale.CHINA).sheet().doReadSync();
         for (DateFormatData data : list) {
             if (data.getDateStringCn() != null && !data.getDateStringCn().equals(data.getDate())) {
-                LogUtil.info("date:cn:{},{}", data.getDateStringCn(), data.getDate());
+                LogUtils.info("date:cn:{},{}", data.getDateStringCn(), data.getDate());
             }
             if (data.getNumberStringCn() != null && !data.getNumberStringCn().equals(data.getNumber())) {
-                LogUtil.info("number:cn{},{}", data.getNumberStringCn(), data.getNumber());
+                LogUtils.info("number:cn{},{}", data.getNumberStringCn(), data.getNumber());
             }
         }
         for (DateFormatData data : list) {
@@ -62,10 +62,10 @@ public class DateFormatTest {
             EasyExcel.read(file, DateFormatData.class, null).locale(Locale.US).sheet().doReadSync();
         for (DateFormatData data : list) {
             if (data.getDateStringUs() != null && !data.getDateStringUs().equals(data.getDate())) {
-                LogUtil.info("date:us:{},{}", data.getDateStringUs(), data.getDate());
+                LogUtils.info("date:us:{},{}", data.getDateStringUs(), data.getDate());
             }
             if (data.getNumberStringUs() != null && !data.getNumberStringUs().equals(data.getNumber())) {
-                LogUtil.info("number:us{},{}", data.getNumberStringUs(), data.getNumber());
+                LogUtils.info("number:us{},{}", data.getNumberStringUs(), data.getNumber());
             }
         }
         for (DateFormatData data : list) {

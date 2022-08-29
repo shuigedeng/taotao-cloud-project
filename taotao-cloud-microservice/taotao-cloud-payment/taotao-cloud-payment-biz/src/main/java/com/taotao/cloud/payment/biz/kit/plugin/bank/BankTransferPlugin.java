@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.kit.plugin.bank;
 
 import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.Payment;
@@ -36,7 +36,7 @@ public class BankTransferPlugin implements Payment {
             refundLog.setIsRefund(true);
             refundLogService.save(refundLog);
         } catch (Exception e) {
-			LogUtil.error("线下收款错误",e);
+			LogUtils.error("线下收款错误",e);
         }
     }
 

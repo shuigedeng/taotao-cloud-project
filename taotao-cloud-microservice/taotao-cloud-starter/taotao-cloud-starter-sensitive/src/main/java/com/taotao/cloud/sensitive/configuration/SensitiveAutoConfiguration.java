@@ -16,7 +16,7 @@
 package com.taotao.cloud.sensitive.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sensitive.desensitize.DesensitizeProperties;
 import com.taotao.cloud.sensitive.word.SensitiveWordsRunner;
 import org.springframework.beans.factory.InitializingBean;
@@ -39,7 +39,7 @@ public class SensitiveAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(SensitiveAutoConfiguration.class, StarterName.ELK_STARTER);
+		LogUtils.started(SensitiveAutoConfiguration.class, StarterName.ELK_STARTER);
 	}
 
 

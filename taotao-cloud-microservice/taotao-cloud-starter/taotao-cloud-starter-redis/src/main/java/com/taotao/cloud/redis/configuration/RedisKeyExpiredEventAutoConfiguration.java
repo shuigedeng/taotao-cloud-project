@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,7 +27,7 @@ public class RedisKeyExpiredEventAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisKeyExpiredEventAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisKeyExpiredEventAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Bean
@@ -49,6 +49,6 @@ public class RedisKeyExpiredEventAutoConfiguration implements InitializingBean {
 	@Async
 	@EventListener
 	public void onRedisKeyExpiredEvent(RedisKeyExpiredEvent<Object> event) {
-		LogUtil.info(event.toString());
+		LogUtils.info(event.toString());
 	}
 }

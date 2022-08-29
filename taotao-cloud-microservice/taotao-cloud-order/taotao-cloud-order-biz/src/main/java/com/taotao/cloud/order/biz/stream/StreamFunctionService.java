@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.biz.stream;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
@@ -16,40 +16,40 @@ public class StreamFunctionService {
 	public void sendKafka(String content) {
 		boolean send = bridge.send("outputKafka-out-0", content);
 
-		LogUtil.info(String.valueOf(send));
+		LogUtils.info(String.valueOf(send));
 	}
 
 	public void sendRabbit(String content) {
 		boolean send = bridge.send("outputRabbit-out-0", content);
-		LogUtil.info(String.valueOf(send));
+		LogUtils.info(String.valueOf(send));
 	}
 
 	@Bean
 	public Consumer<String> inputKafka1() {
 		return str -> {
 			// 收到消息在这里做一些处理
-			LogUtil.info("inputKafka1 message: {}", str);
+			LogUtils.info("inputKafka1 message: {}", str);
 		};
 	}
 
 	@Bean
 	public Consumer<String> inputKafka2() {
 		return str -> {
-			LogUtil.info("inputKafka2 message: {}", str);
+			LogUtils.info("inputKafka2 message: {}", str);
 		};
 	}
 
 	@Bean
 	public Consumer<String> inputRabbit1() {
 		return str -> {
-			LogUtil.info("inputRabbit1 message: {}", str);
+			LogUtils.info("inputRabbit1 message: {}", str);
 		};
 	}
 
 	@Bean
 	public Consumer<String> inputRabbit2() {
 		return str -> {
-			LogUtil.info("inputRabbit2 message: {}", str);
+			LogUtils.info("inputRabbit2 message: {}", str);
 		};
 	}
 

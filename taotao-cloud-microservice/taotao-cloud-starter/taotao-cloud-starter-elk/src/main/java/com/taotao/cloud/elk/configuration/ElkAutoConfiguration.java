@@ -21,7 +21,7 @@ import ch.qos.logback.core.encoder.Encoder;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.elk.filter.LogStatisticsFilter;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import com.taotao.cloud.elk.properties.ElkProperties;
@@ -37,7 +37,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * ElkConfiguration
@@ -58,7 +57,7 @@ public class ElkAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ElkAutoConfiguration.class, StarterName.ELK_STARTER);
+		LogUtils.started(ElkAutoConfiguration.class, StarterName.ELK_STARTER);
 	}
 
 	@Resource

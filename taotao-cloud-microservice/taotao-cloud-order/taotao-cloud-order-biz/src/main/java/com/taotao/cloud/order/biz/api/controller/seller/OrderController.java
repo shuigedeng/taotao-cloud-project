@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.web.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.web.query.order.OrderPageQuery;
@@ -150,9 +150,9 @@ public class OrderController {
 	@GetMapping(value = "/downLoadDeliverExcel")
 	public void downLoadDeliverExcel() {
 		//获取店铺已经选择物流公司列表
-		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(SecurityUtil.getCurrentUser().getStoreId()).data();
+		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(SecurityUtils.getCurrentUser().getStoreId()).data();
 		//下载订单批量发货Excel
-		this.orderService.getBatchDeliverList(RequestUtil.getResponse(), logisticsName);
+		this.orderService.getBatchDeliverList(RequestUtils.getResponse(), logisticsName);
 	}
 
 	@Operation(summary = "上传文件进行订单批量发货", description = "上传文件进行订单批量发货")

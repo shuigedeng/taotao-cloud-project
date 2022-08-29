@@ -23,10 +23,10 @@ import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaTypeEnum;
 import com.taotao.cloud.captcha.model.Point;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.common.RandomUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.secure.AESUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.RandomUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.secure.AESUtils;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -57,7 +57,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
 	@Override
 	public void destroy(Properties config) {
-		LogUtil.info("start-clear-history-data-}", captchaType());
+		LogUtils.info("start-clear-history-data-}", captchaType());
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		//原生图片
 		BufferedImage originalImage = ImageUtils.getOriginal();
 		if (null == originalImage) {
-			LogUtil.error("滑动底图未初始化成功，请检查路径");
+			LogUtils.error("滑动底图未初始化成功，请检查路径");
 			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_BASEMAP_NULL);
 		}
 
@@ -89,7 +89,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		String jigsawImageBase64 = ImageUtils.getslidingBlock();
 		BufferedImage jigsawImage = ImageUtils.getBase64StrToImage(jigsawImageBase64);
 		if (null == jigsawImage) {
-			LogUtil.error("滑动底图未初始化成功，请检查路径");
+			LogUtils.error("滑动底图未初始化成功，请检查路径");
 			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_BASEMAP_NULL);
 		}
 
@@ -120,13 +120,13 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		String pointJson;
 
 		try {
-			point = JsonUtil.toObject(s, Point.class);
+			point = JsonUtils.toObject(s, Point.class);
 			//aes解密
 			assert point != null;
 			pointJson = decrypt(captcha.getPointJson(), point.getSecretKey());
-			point1 = JsonUtil.toObject(pointJson, Point.class);
+			point1 = JsonUtils.toObject(pointJson, Point.class);
 		} catch (Exception e) {
-			LogUtil.error("验证码坐标解析失败", e);
+			LogUtils.error("验证码坐标解析失败", e);
 			afterValidateFail(captcha);
 			throw new CaptchaException(e.getMessage());
 		}
@@ -143,10 +143,10 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		String secretKey = point.getSecretKey();
 		String value;
 		try {
-			value = Base64.getEncoder().encodeToString(AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
+			value = Base64.getEncoder().encodeToString(AESUtils.encrypt(captcha.getToken().concat("---").concat(pointJson),
 				secretKey));
 		} catch (Exception e) {
-			LogUtil.error("AES加密失败", e);
+			LogUtils.error("AES加密失败", e);
 			afterValidateFail(captcha);
 			throw new CaptchaException(e.getMessage());
 		}
@@ -173,7 +173,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			//二次校验取值后，即刻失效
 			CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
 		} catch (Exception e) {
-			LogUtil.error("验证码坐标解析失败", e);
+			LogUtils.error("验证码坐标解析失败", e);
 			throw new CaptchaException(e.getMessage());
 		}
 		return captcha;
@@ -217,10 +217,10 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				int position = 0;
 				if (originalWidth - x - 5 > jigsawWidth * 2) {
 					//在原扣图右边插入干扰图
-					position = RandomUtil.randomInt(x + jigsawWidth + 5, originalWidth - jigsawWidth);
+					position = RandomUtils.randomInt(x + jigsawWidth + 5, originalWidth - jigsawWidth);
 				} else {
 					//在原扣图左边插入干扰图
-					position = RandomUtil.randomInt(100, x - jigsawWidth - 5);
+					position = RandomUtils.randomInt(100, x - jigsawWidth - 5);
 				}
 				while (true) {
 					String s = ImageUtils.getslidingBlock();
@@ -236,7 +236,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				while (true) {
 					String s = ImageUtils.getslidingBlock();
 					if (!jigsawImageBase64.equals(s)) {
-						int randomInt = RandomUtil.randomInt(jigsawWidth, 100 - jigsawWidth);
+						int randomInt = RandomUtils.randomInt(jigsawWidth, 100 - jigsawWidth);
 						interferenceByTemplate(originalImage,
 							Objects.requireNonNull(ImageUtils.getBase64StrToImage(s)),
 							randomInt, 0);
@@ -265,15 +265,15 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			//point信息不传到前端，只做后端check校验
 			//dataVO.setPoint(point);
 			dataVO.setJigsawImageBase64(encoder.encodeToString(jigsawImages).replaceAll("\r|\n", ""));
-			dataVO.setToken(RandomUtil.randomString(16));
+			dataVO.setToken(RandomUtils.randomString(16));
 			dataVO.setSecretKey(point.getSecretKey());
 			//base64StrToImage(encoder.encodeToString(oriCopyImages), "D:\\原图.png");
 			//base64StrToImage(encoder.encodeToString(jigsawImages), "D:\\滑动.png");
 
 			//将坐标信息存入redis中
 			String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
-			CaptchaServiceFactory.getCache(cacheType).set(codeKey, JsonUtil.toJSONString(point), EXPIRESIN_SECONDS);
-			LogUtil.info("token：{},point:{}", dataVO.getToken(), JsonUtil.toJSONString(point));
+			CaptchaServiceFactory.getCache(cacheType).set(codeKey, JsonUtils.toJSONString(point), EXPIRESIN_SECONDS);
+			LogUtils.info("token：{},point:{}", dataVO.getToken(), JsonUtils.toJSONString(point));
 			return dataVO;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -310,7 +310,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		String key = null;
 		if (captchaAesStatus) {
-			key = RandomUtil.randomString(16);
+			key = RandomUtils.randomString(16);
 		}
 		return new Point(x, y, key);
 	}

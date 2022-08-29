@@ -17,7 +17,7 @@
  */
 package com.taotao.cloud.office.execl.temp.dataformat;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -343,7 +343,7 @@ public class DataFormatter1 implements Observer {
                 // Wrap and return (non-cachable - CellFormat does that)
                 return new CellFormatResultWrapper(cfmt.apply(cellValueO));
             } catch (Exception e) {
-                LogUtil.info( "Formatting failed for format " + formatStr + ", falling back", e);
+                LogUtils.info( "Formatting failed for format " + formatStr + ", falling back", e);
             }
         }
 
@@ -586,7 +586,7 @@ public class DataFormatter1 implements Observer {
         try {
             return new ExcelStyleDateFormatter(formatStr, dateSymbols);
         } catch (IllegalArgumentException iae) {
-			LogUtil.info("Formatting failed for format " + formatStr + ", falling back", iae);
+			LogUtils.info("Formatting failed for format " + formatStr + ", falling back", iae);
             // the pattern could not be parsed correctly,
             // so fall back to the default number format
             return getDefaultFormat(cellValue);
@@ -747,7 +747,7 @@ public class DataFormatter1 implements Observer {
         try {
             return new InternalDecimalFormatWithScale(format, symbols);
         } catch (IllegalArgumentException iae) {
-			LogUtil.info( "Formatting failed for format " + formatStr + ", falling back", iae);
+			LogUtils.info( "Formatting failed for format " + formatStr + ", falling back", iae);
             // the pattern could not be parsed correctly,
             // so fall back to the default number format
             return getDefaultFormat(cellValue);

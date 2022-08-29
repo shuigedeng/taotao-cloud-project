@@ -22,7 +22,7 @@ import ch.qos.logback.core.FileAppender;
 import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
-import com.taotao.cloud.common.utils.system.SystemUtil;
+import com.taotao.cloud.common.utils.system.SystemUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.logging.logback.LogbackLoggingSystemProperties;
 
@@ -59,11 +59,11 @@ public class LoggingUtil {
 											  String logErrorFile) {
 		final SizeAndTimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new SizeAndTimeBasedRollingPolicy<>();
 		rollingPolicy.setContext(context);
-		rollingPolicy.setCleanHistoryOnStart(SystemUtil.getPropToBool(LogbackLoggingSystemProperties.ROLLINGPOLICY_CLEAN_HISTORY_ON_START, false));
+		rollingPolicy.setCleanHistoryOnStart(SystemUtils.getPropToBool(LogbackLoggingSystemProperties.ROLLINGPOLICY_CLEAN_HISTORY_ON_START, false));
 		rollingPolicy.setFileNamePattern(logErrorFile + ".%d{yyyy-MM-dd}.%i.gz");
-		rollingPolicy.setMaxFileSize(FileSize.valueOf(SystemUtil.getProp(LogbackLoggingSystemProperties.ROLLINGPOLICY_MAX_FILE_SIZE, "10MB")));
-		rollingPolicy.setMaxHistory(SystemUtil.getPropToInt(LogbackLoggingSystemProperties.ROLLINGPOLICY_MAX_HISTORY, 7));
-		rollingPolicy.setTotalSizeCap(FileSize.valueOf(SystemUtil.getProp(LogbackLoggingSystemProperties.ROLLINGPOLICY_TOTAL_SIZE_CAP, "0")));
+		rollingPolicy.setMaxFileSize(FileSize.valueOf(SystemUtils.getProp(LogbackLoggingSystemProperties.ROLLINGPOLICY_MAX_FILE_SIZE, "10MB")));
+		rollingPolicy.setMaxHistory(SystemUtils.getPropToInt(LogbackLoggingSystemProperties.ROLLINGPOLICY_MAX_HISTORY, 7));
+		rollingPolicy.setTotalSizeCap(FileSize.valueOf(SystemUtils.getProp(LogbackLoggingSystemProperties.ROLLINGPOLICY_TOTAL_SIZE_CAP, "0")));
 		rollingPolicy.setParent(appender);
 		rollingPolicy.start();
 		return rollingPolicy;

@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.huaweicloud;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendClientException;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
@@ -121,7 +121,7 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -166,7 +166,7 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 				HttpMethod.POST, new HttpEntity<>(body, headers), String.class);
 
 			if (httpResponse.getBody() == null) {
-				LogUtil.debug("response body ie null");
+				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
 					new SendFailedException("response body ie null"));
 				return false;
@@ -174,7 +174,7 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 
 			String responseContent = httpResponse.getBody();
 
-			LogUtil.debug("responseContent: {}", responseContent);
+			LogUtils.debug("responseContent: {}", responseContent);
 
 			HuaWeiCloudResult result = objectMapper.readValue(responseContent,
 				HuaWeiCloudResult.class);
@@ -188,7 +188,7 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 			}
 			return succeed;
 		} catch (Exception e) {
-			LogUtil.debug(e.getLocalizedMessage(), e);
+			LogUtils.debug(e.getLocalizedMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 			return false;
 		}

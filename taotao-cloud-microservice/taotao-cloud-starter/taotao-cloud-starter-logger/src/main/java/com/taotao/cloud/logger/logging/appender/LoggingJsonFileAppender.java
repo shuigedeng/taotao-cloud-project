@@ -21,8 +21,8 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.CharPool;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.logging.config.MicaLoggingProperties;
 import com.taotao.cloud.logger.logging.utils.LogStashUtil;
 import com.taotao.cloud.logger.logging.utils.LoggingUtil;
@@ -62,20 +62,20 @@ public class LoggingJsonFileAppender implements ILoggingAppender {
 		Map<String, Object> customFields = new HashMap<>(4);
 		customFields.put("appName", appName);
 		customFields.put("profile", profile);
-		this.customFieldsJson = JsonUtil.toJson(customFields);
+		this.customFieldsJson = JsonUtils.toJson(customFields);
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 		this.start(context);
 	}
 
 	@Override
 	public void start(LoggerContext context) {
-		LogUtil.info("JsonFile logging start.");
+		LogUtils.info("JsonFile logging start.");
 		reload(context);
 	}
 
 	@Override
 	public void reset(LoggerContext context) {
-		LogUtil.info("JsonFile logging start.");
+		LogUtils.info("JsonFile logging start.");
 		reload(context);
 	}
 

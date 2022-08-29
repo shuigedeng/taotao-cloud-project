@@ -8,7 +8,7 @@ import cn.hutool.http.ContentType;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.openapi.common.constant.Constant;
 import com.taotao.cloud.openapi.common.constant.Header;
 import com.taotao.cloud.openapi.common.enums.AsymmetricCryEnum;
@@ -173,12 +173,12 @@ public class OpenApiClient {
 		this.enableCompress = enableCompress;
 
 		//初始化信息打印
-		if (LogUtil.isDebugEnabled()) {
-			LogUtil.debug("OpenApiClient init:{}", this);
+		if (LogUtils.isDebugEnabled()) {
+			LogUtils.debug("OpenApiClient init:{}", this);
 			logCryModel(this.cryModeEnum);
 		}
 		//重要日志改成info级别
-		LogUtil.info("OpenApiClient init succeed. hashcode={}", this.hashCode());
+		LogUtils.info("OpenApiClient init succeed. hashcode={}", this.hashCode());
 	}
 
 	/**
@@ -197,14 +197,14 @@ public class OpenApiClient {
 			//设置日志前缀
 			logPrefix.set(String.format("uuid=%s:", inParams.getUuid()));
 		}
-		LogUtil.debug("{}入参：{}", logPrefix.get(), inParams);
+		LogUtils.debug("{}入参：{}", logPrefix.get(), inParams);
 
 		//加密&加签
 		encryptAndSign(inParams);
 
 		//调用openapi 并 处理返回值
 		OutParams outParams = doCall(inParams);
-		LogUtil.debug("{}出参：{}", logPrefix.get(), outParams);
+		LogUtils.debug("{}出参：{}", logPrefix.get(), outParams);
 		return outParams;
 	}
 
@@ -352,7 +352,7 @@ public class OpenApiClient {
 				: body.getBytes(StandardCharsets.UTF_8));
 			inParams.setDataType(DataType.TEXT);
 		}
-		LogUtil.debug("{}请求体的数据类型为：{}", logPrefix.get(), inParams.getDataType());
+		LogUtils.debug("{}请求体的数据类型为：{}", logPrefix.get(), inParams.getDataType());
 		inParams.setMultiParam(multiParam);
 	}
 
@@ -441,7 +441,7 @@ public class OpenApiClient {
 		String url = CommonUtil.completeUrl(baseUrl, Constant.OPENAPI_PATH);
 		Map<String, String> headers = this.getHeaders(inParams);
 		byte[] bodyBytes = inParams.getBodyBytes();
-		LogUtil.debug("{}调用openapi入参:{}", logPrefix.get(), inParams);
+		LogUtils.debug("{}调用openapi入参:{}", logPrefix.get(), inParams);
 		//构造http请求对象
 		HttpRequest request = HttpRequest.post(url)
 			.setConnectionTimeout(httpConnectionTimeout * 1000)
@@ -457,8 +457,8 @@ public class OpenApiClient {
 		//执行http请求
 		HttpResponse response = request.execute();
 		OutParams outParams = getOutParams(response);
-		LogUtil.debug("{}调用openapi出参：{}", logPrefix.get(), outParams);
-		LogUtil.debug("{}响应体的数据类型为：{}", logPrefix.get(), outParams.getDataType());
+		LogUtils.debug("{}调用openapi出参：{}", logPrefix.get(), outParams);
+		LogUtils.debug("{}响应体的数据类型为：{}", logPrefix.get(), outParams.getDataType());
 		this.logCostTime("调用openapi", startTime);
 
 		if (OutParams.isSuccess(outParams)) {
@@ -562,10 +562,10 @@ public class OpenApiClient {
 			this.logCostTime("解密", startTime);
 		} catch (OpenApiClientException be) {
 			String errorMsg = "解密失败：" + be.getMessage();
-			LogUtil.error(logPrefix.get() + errorMsg, be);
+			LogUtils.error(logPrefix.get() + errorMsg, be);
 			throw new OpenApiClientException(errorMsg);
 		} catch (Exception ex) {
-			LogUtil.error(logPrefix.get() + "解密失败", ex);
+			LogUtils.error(logPrefix.get() + "解密失败", ex);
 			throw new OpenApiClientException("解密失败");
 		}
 	}
@@ -596,11 +596,11 @@ public class OpenApiClient {
 	 */
 	private void logCryModel(CryModeEnum cryModeEnum) {
 		if (cryModeEnum == CryModeEnum.SYMMETRIC_CRY) {
-			LogUtil.debug("采用非对称加密{}+对称加密{}模式", asymmetricCryEnum, symmetricCryEnum);
+			LogUtils.debug("采用非对称加密{}+对称加密{}模式", asymmetricCryEnum, symmetricCryEnum);
 		} else if (cryModeEnum == CryModeEnum.ASYMMETRIC_CRY) {
-			LogUtil.debug("仅采用非对称加密{}模式", asymmetricCryEnum);
+			LogUtils.debug("仅采用非对称加密{}模式", asymmetricCryEnum);
 		} else if (cryModeEnum == CryModeEnum.NONE) {
-			LogUtil.debug("采用不加密模式,签名用的非对称加密{}", asymmetricCryEnum);
+			LogUtils.debug("采用不加密模式,签名用的非对称加密{}", asymmetricCryEnum);
 		}
 	}
 
@@ -611,7 +611,7 @@ public class OpenApiClient {
 	 * @param startTime 操作开始时间
 	 */
 	private void logCostTime(String operate, long startTime) {
-		LogUtil.debug("{}{}耗时:{}ms", logPrefix.get(), operate,
+		LogUtils.debug("{}{}耗时:{}ms", logPrefix.get(), operate,
 			(System.nanoTime() - startTime) / 100_0000);
 	}
 

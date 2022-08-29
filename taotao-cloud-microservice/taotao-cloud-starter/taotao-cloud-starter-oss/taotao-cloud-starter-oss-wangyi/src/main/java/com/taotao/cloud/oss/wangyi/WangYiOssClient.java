@@ -26,7 +26,7 @@ import com.netease.cloud.services.nos.model.ObjectMetadata;
 import com.netease.cloud.services.nos.model.PartETag;
 import com.netease.cloud.services.nos.model.UploadPartRequest;
 import com.netease.cloud.services.nos.model.UploadPartResult;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
@@ -41,7 +41,6 @@ import com.taotao.cloud.oss.common.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.common.model.upload.UploadPart;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.wangyi.WangYiOssConfig;
 
 import java.io.File;
 import java.io.InputStream;
@@ -340,7 +339,7 @@ public class WangYiOssClient implements StandardOssClient {
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setLength(objectMetadata.getContentLength());
 			} catch (Exception e) {
-				LogUtil.error("获取{}文件属性失败", key, e);
+				LogUtils.error("获取{}文件属性失败", key, e);
 			}
 		} else {
 			ossInfo = new DirectoryOssInfo();

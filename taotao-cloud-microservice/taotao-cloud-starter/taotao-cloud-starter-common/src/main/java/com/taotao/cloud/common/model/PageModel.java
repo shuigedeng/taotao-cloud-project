@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.utils.common.OrikaUtil;
+import com.taotao.cloud.common.utils.common.OrikaUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -83,7 +83,7 @@ public record PageModel<R>(
 		List<R> collect = Optional.of(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> OrikaUtil.convert(t, rClass, configMap))
+			.map(t -> OrikaUtils.convert(t, rClass, configMap))
 			.toList();
 		return of(
 			page.getTotalElements(),
@@ -111,7 +111,7 @@ public record PageModel<R>(
 		List<R> collect = Optional.ofNullable(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> OrikaUtil.convert(t, rClass, configMap))
+			.map(t -> OrikaUtils.convert(t, rClass, configMap))
 			.toList();
 
 		return of(

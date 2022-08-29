@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.common.http;
 
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 import okhttp3.Headers;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -73,7 +73,7 @@ public class MultipartFormBuilder {
 			buffer.readFrom(stream);
 			return add(name, filename, buffer.readByteArray());
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		} finally {
 			Util.closeQuietly(stream);
 		}

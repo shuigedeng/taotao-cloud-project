@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.web.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.web.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -72,7 +72,7 @@ public class GoodsStoreController {
 	@GetMapping("/page")
 	public Result<PageModel<GoodsVO>> getByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsVO.class));
@@ -84,7 +84,7 @@ public class GoodsStoreController {
 	@GetMapping(value = "/sku/page")
 	public Result<PageModel<GoodsSkuVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
 		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
@@ -96,7 +96,7 @@ public class GoodsStoreController {
 	@GetMapping(value = "/stock/warning")
 	public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
 		//库存预警数量
 		Integer stockWarnNum = storeDetail.getStockWarning();
@@ -176,7 +176,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/{goodsId}/page")
 	public Result<List<GoodsSkuSpecGalleryVO>> getSkuByList(@PathVariable Long goodsId) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		return Result.success(goodsSkuService.getGoodsSkuVOList(goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId)
 				.eq(GoodsSku::getStoreId, storeId))));
@@ -187,7 +187,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/stocks")
 	public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		// 获取商品skuId集合
 		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::getSkuId)
 			.collect(Collectors.toList());

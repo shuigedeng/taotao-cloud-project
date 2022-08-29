@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterAspect;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterClient;
 import java.util.List;
@@ -30,7 +30,7 @@ public class RedisRateLimiterAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisRateLimiterAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisRateLimiterAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -20,7 +20,7 @@ import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.feign.annotation.FeignApi;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
@@ -110,7 +110,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@SentinelResource("test")
 	@GetMapping("/test")
 	public Dict test(@RequestParam(value = "code") String code) {
-		LogUtil.info("sldfkslfdjalsdfkjalsfdjl");
+		LogUtils.info("sldfkslfdjalsdfkjalsfdjl");
 		Dict dict = service().findByCode(code);
 
 		Future<Dict> asyncByCode = service().findAsyncByCode(code);
@@ -122,7 +122,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 			throw new RuntimeException(e);
 		}
 
-		LogUtil.info("我在等待你");
+		LogUtils.info("我在等待你");
 
 		return dict1;
 		//return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
@@ -214,16 +214,16 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 
 	@GetMapping("/webAsyncTask")
 	public WebAsyncTask<String> webAsyncTask() {
-		LogUtil.info("外部线程：" + Thread.currentThread().getName());
+		LogUtils.info("外部线程：" + Thread.currentThread().getName());
 		WebAsyncTask<String> result = new WebAsyncTask<>(60 * 1000L, () -> {
-			LogUtil.info("内部线程：" + Thread.currentThread().getName());
+			LogUtils.info("内部线程：" + Thread.currentThread().getName());
 			return "success";
 		});
 		result.onTimeout(() -> {
-			LogUtil.info("timeout callback");
+			LogUtils.info("timeout callback");
 			return "timeout callback";
 		});
-		result.onCompletion(() -> LogUtil.info("finish callback"));
+		result.onCompletion(() -> LogUtils.info("finish callback"));
 		return result;
 	}
 

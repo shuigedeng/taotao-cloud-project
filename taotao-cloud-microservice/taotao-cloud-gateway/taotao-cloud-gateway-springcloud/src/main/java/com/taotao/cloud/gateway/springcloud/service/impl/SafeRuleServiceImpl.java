@@ -4,10 +4,10 @@ import com.alibaba.csp.sentinel.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.springcloud.rule.BlackList;
 import com.taotao.cloud.gateway.springcloud.rule.RuleConstant;
 import com.taotao.cloud.gateway.springcloud.service.IRuleCacheService;
@@ -45,7 +45,7 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
 
 		try {
 			URI originUri = getOriginRequestUri(exchange);
-			String requestIp = RequestUtil.getRemoteAddr(request);
+			String requestIp = RequestUtils.getRemoteAddr(request);
 			String requestMethod = request.getMethodValue();
 			AtomicBoolean forbid = new AtomicBoolean(false);
 			// 从缓存中获取黑名单信息
@@ -53,13 +53,13 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
 			blackLists.addAll(ruleCacheService.getBlackList());
 			// 检查是否在黑名单中
 			checkBlackLists(forbid, blackLists, originUri, requestMethod);
-			LogUtil.debug("黑名单检查完成 - {}", stopwatch.stop());
+			LogUtils.debug("黑名单检查完成 - {}", stopwatch.stop());
 			if (forbid.get()) {
-				LogUtil.info("属于黑名单地址 - {}", originUri.getPath());
-				return ResponseUtil.fail(exchange, "已列入黑名单，访问受限");
+				LogUtils.info("属于黑名单地址 - {}", originUri.getPath());
+				return ResponseUtils.fail(exchange, "已列入黑名单，访问受限");
 			}
 		} catch (Exception e) {
-			LogUtil.error("黑名单检查异常: {} - {}", e.getMessage(), stopwatch.stop());
+			LogUtils.error("黑名单检查异常: {} - {}", e.getMessage(), stopwatch.stop());
 		}
 		return null;
 	}
@@ -92,10 +92,10 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
 					|| StringUtils.equalsIgnoreCase(requestMethod, blackList.getRequestMethod())) {
 					if (StringUtil.isNotBlank(blackList.getStartTime()) && StringUtil
 						.isNotBlank(blackList.getEndTime())) {
-						if (DateUtil.between(
-							DateUtil.parseLocalTime(blackList.getStartTime(),
+						if (DateUtils.between(
+							DateUtils.parseLocalTime(blackList.getStartTime(),
 								CommonConstant.DATETIME_FORMAT),
-							DateUtil.parseLocalTime(blackList.getEndTime(),
+							DateUtils.parseLocalTime(blackList.getEndTime(),
 								CommonConstant.DATETIME_FORMAT))) {
 							forbid.set(Boolean.TRUE);
 						}

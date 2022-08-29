@@ -24,8 +24,8 @@ import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.FeignApi;
 import com.taotao.cloud.feign.model.FeignExceptionResult;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -64,28 +64,28 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FeignExceptionAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(FeignExceptionAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@ExceptionHandler(BusinessException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String handleBusinessException(NativeWebRequest req, BusinessException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
+		return JsonUtils.toJSONString(new FeignExceptionResult(e.getMessage()));
 	}
 
 	@ExceptionHandler(NestedServletException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String handleNestedServletException(NativeWebRequest req, NestedServletException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
+		return JsonUtils.toJSONString(new FeignExceptionResult(e.getMessage()));
 	}
 
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String handleException(NativeWebRequest req, Exception e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult(e.getMessage()));
+		return JsonUtils.toJSONString(new FeignExceptionResult(e.getMessage()));
 	}
 
 	@ExceptionHandler(UndeclaredThrowableException.class)
@@ -94,7 +94,7 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 		printLog(req, ex);
 		Throwable e = ex.getCause();
 
-		LogUtil.error("WebmvcHandler sentinel 降级 资源名称");
+		LogUtils.error("WebmvcHandler sentinel 降级 资源名称");
 		String errMsg = e.getMessage();
 		if (e instanceof FlowException) {
 			errMsg = "被限流了";
@@ -112,13 +112,14 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 			errMsg = "限流权限控制异常";
 		}
 
-		return JsonUtil.toJSONString(new FeignExceptionResult(errMsg));
+		return JsonUtils.toJSONString(new FeignExceptionResult(errMsg));
 	}
 
 	@ExceptionHandler(BlockException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleBlockException(NativeWebRequest req, BlockException e) {
-		printLog(req, e);LogUtil.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
+		printLog(req, e);
+        LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
 		String errMsg = e.getMessage();
 		if (e instanceof FlowException) {
 			errMsg = "被限流了";
@@ -135,38 +136,38 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 		if (e instanceof AuthorityException) {
 			errMsg = "限流权限控制异常";
 		}
-		return JsonUtil.toJSONString(new FeignExceptionResult(errMsg));
+		return JsonUtils.toJSONString(new FeignExceptionResult(errMsg));
 	}
 
 	@ExceptionHandler(FlowException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleFlowException(NativeWebRequest req, FlowException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult("被限流了"));
+		return JsonUtils.toJSONString(new FeignExceptionResult("被限流了"));
 	}
 	@ExceptionHandler(DegradeException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleDegradeException(NativeWebRequest req, DegradeException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult("服务降级了"));
+		return JsonUtils.toJSONString(new FeignExceptionResult("服务降级了"));
 	}
 	@ExceptionHandler(ParamFlowException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleParamFlowException(NativeWebRequest req, ParamFlowException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult("服务热点降级了"));
+		return JsonUtils.toJSONString(new FeignExceptionResult("服务热点降级了"));
 	}
 	@ExceptionHandler(SystemBlockException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleSystemBlockException(NativeWebRequest req, SystemBlockException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult("系统过载保护"));
+		return JsonUtils.toJSONString(new FeignExceptionResult("系统过载保护"));
 	}
 	@ExceptionHandler(AuthorityException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleAuthorityException(NativeWebRequest req, AuthorityException e) {
 		printLog(req, e);
-		return JsonUtil.toJSONString(new FeignExceptionResult("限流权限控制异常"));
+		return JsonUtils.toJSONString(new FeignExceptionResult("限流权限控制异常"));
 	}
 
 	/**
@@ -254,8 +255,8 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Exception e) {
-		LogUtil.error(e);
-		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
+		LogUtils.error(e);
+		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
 	}
 }

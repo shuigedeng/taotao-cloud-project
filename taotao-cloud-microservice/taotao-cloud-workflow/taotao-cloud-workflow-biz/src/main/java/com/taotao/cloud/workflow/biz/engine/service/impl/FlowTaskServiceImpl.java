@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskCirculateEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
@@ -274,7 +274,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(sql);
         List<FlowTaskListModel> result = new LinkedList<>();
         for (FlowTaskListModel entity : data) {
-            List<Date> list = StringUtil.isNotEmpty(entity.getDescription()) ? JsonUtil.getJsonToList(entity.getDescription(), Date.class) : new ArrayList<>();
+            List<Date> list = StringUtil.isNotEmpty(entity.getDescription()) ? JsonUtils.getJsonToList(entity.getDescription(), Date.class) : new ArrayList<>();
             boolean delegate = true;
             boolean isuser = entity.getHandleId().equals(userId);
             entity.setFullName(!isuser ? entity.getFullName() + "(委托)" : entity.getFullName());
@@ -384,7 +384,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
         //返回数据
-        List<FlowTaskEntity> result = JsonUtil.getJsonToList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JsonUtils.getJsonToList(data, FlowTaskEntity.class);
         return result;
     }
 
@@ -413,7 +413,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
         //返回数据
-        List<FlowTaskEntity> result = JsonUtil.getJsonToList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JsonUtils.getJsonToList(data, FlowTaskEntity.class);
         return result;
     }
 
@@ -425,7 +425,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         dbSql.append(" AND (");
         dbSql.append("o.F_HandleId = '" + userId + "' )  Order by F_CreatorTime DESC");
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
-        List<FlowTaskEntity> result = JsonUtil.getJsonToList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JsonUtils.getJsonToList(data, FlowTaskEntity.class);
         return result;
     }
 
@@ -437,7 +437,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         dbSql.append(" AND (");
         dbSql.append("o.F_HandleId = '" + userId + "' )  Order by F_CreatorTime DESC");
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
-        List<FlowTaskEntity> result = JsonUtil.getJsonToList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JsonUtils.getJsonToList(data, FlowTaskEntity.class);
         if (result.size() > 20) {
             return result.subList(0, 20);
         }

@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.biz.connect.config.ApiProperties;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
@@ -105,7 +105,7 @@ public class ConnectUtil {
 		try {
 			httpServletResponse.sendRedirect(url);
 		} catch (Exception e) {
-			LogUtil.error("登录回调错误", e);
+			LogUtils.error("登录回调错误", e);
 		}
 	}
 

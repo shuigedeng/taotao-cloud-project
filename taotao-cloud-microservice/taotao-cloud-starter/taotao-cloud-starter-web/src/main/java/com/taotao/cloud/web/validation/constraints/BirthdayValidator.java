@@ -1,6 +1,7 @@
 package com.taotao.cloud.web.validation.constraints;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
@@ -34,10 +35,10 @@ public class BirthdayValidator implements ConstraintValidator<Birthday, Object> 
 		} else if (value instanceof Date) {
 			validValue = DateUtil.formatDate((Date) value);
 		} else if (value instanceof TemporalAccessor) {
-			validValue = com.taotao.cloud.common.utils.date.DateUtil.toDateFormatter((TemporalAccessor) value);
+			validValue = DateUtils.toDateFormatter((TemporalAccessor) value);
 		}
 		
-		if (StringUtil.isNotBlank(validValue)) {
+		if (StringUtils.isNotBlank(validValue)) {
 			return Validator.isBirthday(validValue);
 		}
 

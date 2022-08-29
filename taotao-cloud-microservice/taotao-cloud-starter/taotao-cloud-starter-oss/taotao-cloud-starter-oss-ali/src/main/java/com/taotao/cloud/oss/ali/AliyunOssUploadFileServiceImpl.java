@@ -26,7 +26,7 @@ import com.aliyun.oss.model.PartETag;
 import com.aliyun.oss.model.SetBucketAclRequest;
 import com.aliyun.oss.model.UploadPartRequest;
 import com.aliyun.oss.model.UploadPartResult;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
@@ -80,7 +80,7 @@ public class AliyunOssUploadFileServiceImpl extends AbstractUploadFileService {
 			uploadFileInfo.setUrl(properties.getUrlPrefix() + "/" + uploadFileInfo.getName());
 			return uploadFileInfo;
 		} catch (Exception e) {
-			LogUtil.error("[aliyun]文件上传失败:", e);
+			LogUtils.error("[aliyun]文件上传失败:", e);
 			throw new UploadFileException("[aliyun]文件上传失败");
 		} finally {
 			oss.shutdown();
@@ -95,7 +95,7 @@ public class AliyunOssUploadFileServiceImpl extends AbstractUploadFileService {
 			uploadFileInfo.setUrl(properties.getUrlPrefix() + "/" + uploadFileInfo.getName());
 			return uploadFileInfo;
 		} catch (Exception e) {
-			LogUtil.error("[aliyun]文件上传失败:", e);
+			LogUtils.error("[aliyun]文件上传失败:", e);
 			throw new UploadFileException("[aliyun]文件上传失败");
 		} finally {
 			oss.shutdown();
@@ -107,7 +107,7 @@ public class AliyunOssUploadFileServiceImpl extends AbstractUploadFileService {
 		try {
 			oss.deleteObject(properties.getBucketName(), uploadFileInfo.getName());
 		} catch (Exception e) {
-			LogUtil.error("[aliyun]文件删除失败:", e);
+			LogUtils.error("[aliyun]文件删除失败:", e);
 			throw new UploadFileException("[aliyun]文件删除失败");
 		} finally {
 			oss.shutdown();

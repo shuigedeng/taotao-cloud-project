@@ -1,7 +1,7 @@
 package com.taotao.cloud.schedule.core;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.schedule.exception.ScheduledException;
 import com.taotao.cloud.schedule.core.interceptor.ScheduledRunnable;
@@ -54,7 +54,7 @@ public class ScheduledManager {
 		scheduledJobModel.setCancel(false);
 		addScheduled(name, scheduledJobModel);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_UPDATE_CRON_TOPIC, scheduledJobModel);
 		}
@@ -76,7 +76,7 @@ public class ScheduledManager {
 		scheduledJobModel.setCancel(false);
 		addScheduled(name, scheduledJobModel);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_UPDATE_FIXED_DELAY_TOPIC,
 				scheduledJobModel);
@@ -99,7 +99,7 @@ public class ScheduledManager {
 		scheduledJobModel.setCancel(false);
 		addScheduled(name, scheduledJobModel);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_UPDATE_FIXED_RATE_TOPIC,
 				scheduledJobModel);
@@ -135,7 +135,7 @@ public class ScheduledManager {
 
 		ScheduledJobModel scheduledJobModel = scheduledConfig.getScheduledSource(name);
 		scheduledJobModel.setCancel(true);
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_CANCEL_TOPIC, scheduledJobModel);
 		}
@@ -188,7 +188,7 @@ public class ScheduledManager {
 
 		addScheduled(name, scheduledJobModel);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_ADD_CRON_TOPIC, scheduledJobModel);
 		}
@@ -213,7 +213,7 @@ public class ScheduledManager {
 
 		addScheduled(name, scheduledJobModel);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_ADD_FIXED_DELAY_TOPIC, scheduledJobModel);
 		}
@@ -238,7 +238,7 @@ public class ScheduledManager {
 
 		addScheduled(name, scheduledJobModel);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_ADD_FIXED_RATE_TOPIC, scheduledJobModel);
 		}
@@ -255,7 +255,7 @@ public class ScheduledManager {
 
 		ScheduledJobModel scheduledJobModel = scheduledConfig.getScheduledSource(name);
 		scheduledJobModel.setNum(scheduledJobModel.getNum() + 1);
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_RUN_ONCE_TOPIC, scheduledJobModel);
 		}
@@ -273,7 +273,7 @@ public class ScheduledManager {
 
 		ScheduledJobModel scheduledJobModel = scheduledConfig.getScheduledSource(name);
 		scheduledJobModel.setNum(scheduledJobModel.getNum() + 1);
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.SCHEDULED_RUN_ONCE_TOPIC, scheduledJobModel);
 		}

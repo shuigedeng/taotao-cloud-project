@@ -4,9 +4,9 @@ import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.TraceUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.springcloud.properties.FilterProperties;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 		String requestUrl = exchange.getRequest().getURI().getRawPath();
 		String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
 		if (StrUtil.isBlank(traceId)) {
-			traceId = TraceUtil.getTraceId();
+			traceId = TraceUtils.getTraceId();
 		}
 		StringBuilder beforeReqLog = new StringBuilder();
 
@@ -50,11 +50,11 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 		beforeReqArgs.add(traceId);
 
 		HttpHeaders headers = exchange.getRequest().getHeaders();
-		String header = JsonUtil.toJSONString(headers);
+		String header = JsonUtils.toJSONString(headers);
 		beforeReqLog.append("===> requestHeaders : {}\n");
 		beforeReqArgs.add(header);
 		beforeReqLog.append("================ TaoTao Cloud Request End =================\n");
-		LogUtil.info(beforeReqLog.toString(), beforeReqArgs.toArray());
+		LogUtils.info(beforeReqLog.toString(), beforeReqArgs.toArray());
 
 		exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
 		exchange.getAttributes().put(TAOTAO_CLOUD_TRACE_ID, traceId);
@@ -78,11 +78,11 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 			responseArgs.add(exchange.getAttribute(TAOTAO_CLOUD_TRACE_ID));
 			responseArgs.add(executeTime + "ms");
 
-			String httpHeader = JsonUtil.toJSONString(httpHeaders);
+			String httpHeader = JsonUtils.toJSONString(httpHeaders);
 			responseLog.append("===> responseHeaders : {}\n");
 			responseArgs.add(httpHeader);
 			responseLog.append("================  TaoTao Cloud Response End  =================\n");
-			LogUtil.info(responseLog.toString(), responseArgs.toArray());
+			LogUtils.info(responseLog.toString(), responseArgs.toArray());
 
 			exchange.getAttributes().remove(START_TIME);
 			exchange.getAttributes().remove(TAOTAO_CLOUD_TRACE_ID);

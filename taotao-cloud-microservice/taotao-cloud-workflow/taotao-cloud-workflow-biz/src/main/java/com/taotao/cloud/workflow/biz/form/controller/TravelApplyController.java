@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -47,14 +47,14 @@ public class TravelApplyController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), TravelApplyInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), TravelApplyInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             TravelApplyEntity entity = travelApplyService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, TravelApplyInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, TravelApplyInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -68,7 +68,7 @@ public class TravelApplyController {
     @Operation("新建出差预支申请单")
     @PostMapping
     public Result create(@RequestBody TravelApplyForm travelApplyForm) throws WorkFlowException {
-        TravelApplyEntity entity = JsonUtil.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -87,7 +87,7 @@ public class TravelApplyController {
     @Operation("修改出差预支申请单")
     @PutMapping("/{id}")
     public Result update(@RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id) throws WorkFlowException {
-        TravelApplyEntity entity = JsonUtil.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -1,6 +1,6 @@
 package com.taotao.cloud.sign.util.security;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
 import com.taotao.cloud.sign.util.CheckUtils;
@@ -45,7 +45,7 @@ public class DesUtil implements ISecurity {
 			return DesUtil.encryptMode(content, type, cipher);
 
 		} catch (Exception e) {
-			LogUtil.error("des解密异常content:{},password:{},type:{},cipherAlgorithm:{},e:{}", content,
+			LogUtils.error("des解密异常content:{},password:{},type:{},cipherAlgorithm:{},e:{}", content,
 				password, type, cipherAlgorithm, e.getMessage());
 			throw new EncryptDtguaiException("des解密异常");
 		}

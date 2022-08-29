@@ -16,12 +16,11 @@
 package com.taotao.cloud.core.nacos;
 
 import com.alibaba.cloud.nacos.NacosConfigManager;
-import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,12 +42,12 @@ public class ConfigListener implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ConfigListener.class, StarterName.CORE_STARTER);
+		LogUtils.started(ConfigListener.class, StarterName.CORE_STARTER);
 	}
 
 	@NacosConfigListener(dataId = "taotao-cloud", type = ConfigType.YAML)
 	public void onReceived(Properties value) {
-		LogUtil.info("taotao cloud on received from nacos properties data : {}", value);
+		LogUtils.info("taotao cloud on received from nacos properties data : {}", value);
 	}
 
 	@Configuration
@@ -72,7 +71,7 @@ public class ConfigListener implements InitializingBean {
 
 						@Override
 						public void receiveConfigInfo(String configInfo) {
-							LogUtil.info(
+							LogUtils.info(
 								"taotao cloud on received from nacos config info : {}",
 								configInfo);
 						}

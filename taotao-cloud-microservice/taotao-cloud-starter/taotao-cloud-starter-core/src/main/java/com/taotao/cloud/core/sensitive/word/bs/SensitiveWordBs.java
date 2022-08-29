@@ -3,8 +3,8 @@ package com.taotao.cloud.core.sensitive.word.bs;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.common.ArgUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.common.ArgUtils;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.IWordAllow;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
@@ -89,10 +89,10 @@ public class SensitiveWordBs {
      */
     List<String> getActualDenyList(List<String> denyList,
                                    List<String> allowList) {
-        if(CollectionUtil.isEmpty(denyList)) {
+        if(CollectionUtils.isEmpty(denyList)) {
             return Collections.emptyList();
         }
-        if(CollectionUtil.isEmpty(allowList)) {
+        if(CollectionUtils.isEmpty(allowList)) {
             return denyList;
         }
 
@@ -120,7 +120,7 @@ public class SensitiveWordBs {
      * @since 0.1.1
      */
     private List<String> formatWordList(List<String> list) {
-        if(CollectionUtil.isEmpty(list)) {
+        if(CollectionUtils.isEmpty(list)) {
             return list;
         }
 
@@ -165,7 +165,7 @@ public class SensitiveWordBs {
      * @since 0.0.13
      */
     public SensitiveWordBs wordDeny(IWordDeny wordDeny) {
-        ArgUtil.notNull(wordDeny, "wordDeny");
+        ArgUtils.notNull(wordDeny, "wordDeny");
         this.wordDeny = wordDeny;
         return this;
     }
@@ -177,7 +177,7 @@ public class SensitiveWordBs {
      * @since 0.0.13
      */
     public SensitiveWordBs wordAllow(IWordAllow wordAllow) {
-        ArgUtil.notNull(wordAllow, "wordAllow");
+        ArgUtils.notNull(wordAllow, "wordAllow");
         this.wordAllow = wordAllow;
         return this;
     }
@@ -358,11 +358,11 @@ public class SensitiveWordBs {
      * @since 0.0.1
      */
     public <R> List<R> findAll(final String target, final IWordResultHandler<R> handler) {
-        ArgUtil.notNull(handler, "handler");
+        ArgUtils.notNull(handler, "handler");
         statusCheck();
 
         List<IWordResult> wordResults = sensitiveWordMap.findAll(target, context);
-        return CollectionUtil.toList(wordResults, new IHandler<IWordResult, R>() {
+        return CollectionUtils.toList(wordResults, new IHandler<IWordResult, R>() {
             @Override
             public R handle(IWordResult wordResult) {
                 return handler.handle(wordResult);
@@ -381,7 +381,7 @@ public class SensitiveWordBs {
      * @since 0.0.1
      */
     public <R> R findFirst(final String target, final IWordResultHandler<R> handler) {
-        ArgUtil.notNull(handler, "handler");
+        ArgUtils.notNull(handler, "handler");
         statusCheck();
 
         IWordResult wordResult = sensitiveWordMap.findFirst(target, context);

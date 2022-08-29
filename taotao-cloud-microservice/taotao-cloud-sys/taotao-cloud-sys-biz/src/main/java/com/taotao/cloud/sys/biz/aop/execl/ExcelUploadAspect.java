@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.aop.execl;
 
 import com.alibaba.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -64,7 +64,7 @@ public class ExcelUploadAspect {
 					fail(errorMessage, batchNo);
 				}
 			} catch (Throwable e) {
-				LogUtil.error("导入失败：", e);
+				LogUtils.error("导入失败：", e);
 				// 失败，抛了异常，需要记录
 				fail(e.toString(), batchNo);
 			}
@@ -78,7 +78,7 @@ public class ExcelUploadAspect {
 		// 生成文件名称
 		String fileName = "错误日志_" +
 			//DateUtil.format(new Date(), "yyyy年MM月dd日HH时mm分ss秒") + ExportConstant.txtSuffix;
-			DateUtil.format(new Date(), "yyyy年MM月dd日HH时mm分ss秒");
+			DateUtils.format(new Date(), "yyyy年MM月dd日HH时mm分ss秒");
 		String filePath = "/home/xxx/xxx/" + fileName;
 		// 生成一个文件，写入错误数据
 		File file = new File(filePath);
@@ -87,14 +87,14 @@ public class ExcelUploadAspect {
 			outputStream = new FileOutputStream(file);
 			outputStream.write(message.getBytes());
 		} catch (Exception e) {
-			LogUtil.error("写入文件错误", e);
+			LogUtils.error("写入文件错误", e);
 		} finally {
 			try {
 				if (outputStream != null) {
 					outputStream.close();
 				}
 			} catch (Exception e) {
-				LogUtil.error("关闭错误", e);
+				LogUtils.error("关闭错误", e);
 			}
 		}
 		// 上传错误日志文件到文件服务器，我们用的是s3

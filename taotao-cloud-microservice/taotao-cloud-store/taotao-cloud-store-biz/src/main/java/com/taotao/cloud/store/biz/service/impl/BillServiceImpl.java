@@ -11,9 +11,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
 import com.taotao.cloud.order.api.web.query.order.StoreFlowQuery;
@@ -86,7 +86,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 		bill.setBankName(store.getSettlementBankBranchName());
 
 		//店铺结算单号
-		bill.setSn(IdGeneratorUtil.createStr("B"));
+		bill.setSn(IdGeneratorUtils.createStr("B"));
 
 		//入账结算信息
 		Bill orderBill = this.baseMapper.getOrderBill(new QueryWrapper<Bill>()
@@ -103,7 +103,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 			bill.setPointSettlementPrice(orderBill.getPointSettlementPrice());
 			bill.setKanjiaSettlementPrice(orderBill.getKanjiaSettlementPrice());
 			//入账金额=订单金额+积分商品+砍价商品
-			orderPrice = CurrencyUtil.add(CurrencyUtil.add(orderBill.getBillPrice(), orderBill.getPointSettlementPrice()),
+			orderPrice = CurrencyUtils.add(CurrencyUtils.add(orderBill.getBillPrice(), orderBill.getPointSettlementPrice()),
 				orderBill.getKanjiaSettlementPrice());
 		}
 
@@ -122,7 +122,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 		}
 
 		//最终结算金额=入款结算金额-退款结算金额
-		BigDecimal finalPrice = CurrencyUtil.sub(orderPrice, refundPrice);
+		BigDecimal finalPrice = CurrencyUtils.sub(orderPrice, refundPrice);
 		bill.setBillPrice(finalPrice);
 
 		//添加结算单
@@ -226,7 +226,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 		writer.setColumnWidth(11, 20);
 
 		StoreFlowQuery.BillDTO billDTO = new StoreFlowQuery.BillDTO();
-		BeanUtil.copyProperties(bill, billDTO);
+		BeanUtils.copyProperties(bill, billDTO);
 		List<StoreFlowPayDownloadVO> storeFlowList = storeFlowService.getStoreFlowPayDownloadVO(StoreFlowQuery.builder().type(FlowTypeEnum.PAY.name()).bill(billDTO).build());
 		writer.write(storeFlowList, true);
 
@@ -255,7 +255,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 		writer.setColumnWidth(12, 20);
 
 		StoreFlowQuery.BillDTO billDTO1 = new StoreFlowQuery.BillDTO();
-		BeanUtil.copyProperties(bill, billDTO1);
+		BeanUtils.copyProperties(bill, billDTO1);
 		List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList = storeFlowService.getStoreFlowRefundDownloadVO(
 			StoreFlowQuery.builder().type(FlowTypeEnum.REFUND.name()).bill(billDTO1).build()
 		);

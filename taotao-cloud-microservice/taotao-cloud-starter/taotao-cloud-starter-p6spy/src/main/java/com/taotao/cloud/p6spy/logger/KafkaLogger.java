@@ -18,9 +18,9 @@ package com.taotao.cloud.p6spy.logger;
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.FormattedLogger;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Objects;
 import org.springframework.kafka.core.KafkaTemplate;
 
@@ -38,8 +38,8 @@ public class KafkaLogger extends FormattedLogger {
 
 	public KafkaLogger() throws ClassNotFoundException {
 		try {
-			KafkaTemplate kafkaTemplate = ContextUtil.getBean(KafkaTemplate.class, true);
-			String applicationName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
+			KafkaTemplate kafkaTemplate = ContextUtils.getBean(KafkaTemplate.class, true);
+			String applicationName = PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
 			this.kafkaTemplate = kafkaTemplate;
 			this.applicationName = applicationName;
@@ -58,8 +58,8 @@ public class KafkaLogger extends FormattedLogger {
 	@Override
 	public void logText(String text) {
 		if (Objects.nonNull(kafkaTemplate)) {
-			LogUtil.info("************************");
-			LogUtil.info(text);
+			LogUtils.info("************************");
+			LogUtils.info(text);
 
 			kafkaTemplate.send("sys-sql-" + applicationName, text);
 		}

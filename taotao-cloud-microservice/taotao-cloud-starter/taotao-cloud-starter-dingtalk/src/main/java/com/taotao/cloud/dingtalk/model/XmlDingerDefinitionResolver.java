@@ -24,7 +24,7 @@ import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCE
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsGenericType;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsType;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.annatations.DingerImageText;
 import com.taotao.cloud.dingtalk.annatations.DingerLink;
 import com.taotao.cloud.dingtalk.entity.DingerMethod;
@@ -56,7 +56,7 @@ public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolve
 	public void resolver(Resource[] resources) {
 		for (Resource resource : resources) {
 			if (!resource.isReadable()) {
-				LogUtil.debug("Ignored because not readable: {} ", resource.getFilename());
+				LogUtils.debug("Ignored because not readable: {} ", resource.getFilename());
 				continue;
 			}
 			String xml;
@@ -68,7 +68,7 @@ public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolve
 			xml = transferXml(xml);
 			BeanTag dingerBean = XmlUtils.xmlToJavaBean(xml, BeanTag.class);
 			if (dingerBean == null) {
-				LogUtil.debug("dinger xml file: {} content is empty.", resource.getFilename());
+				LogUtils.debug("dinger xml file: {} content is empty.", resource.getFilename());
 				continue;
 			}
 			String namespace = dingerBean.getNamespace();
@@ -87,7 +87,7 @@ public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolve
 			for (MessageTag message : messages) {
 				String methodName = message.getIdentityId();
 				if (!dingerClassMethods.containsKey(methodName)) {
-					LogUtil.debug("namespace={}, messageId={} undefined in dingerClass.",
+					LogUtils.debug("namespace={}, messageId={} undefined in dingerClass.",
 						namespace, methodName);
 					continue;
 				}

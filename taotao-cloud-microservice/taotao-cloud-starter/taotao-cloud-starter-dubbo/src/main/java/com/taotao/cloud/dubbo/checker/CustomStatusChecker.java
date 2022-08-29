@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dubbo.checker;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.common.status.Status;
 import org.apache.dubbo.common.status.StatusChecker;
@@ -31,7 +31,7 @@ import org.apache.dubbo.common.status.StatusChecker;
 public class CustomStatusChecker implements StatusChecker {
 	@Override
 	public Status check() {
-		LogUtil.info("Dubbo CustomStatusChecker activate ---------------------------------------");
+		LogUtils.info("Dubbo CustomStatusChecker activate ---------------------------------------");
 		return new Status(Status.Level.OK, "");
 	}
 }

@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -389,7 +389,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             List<FlowEngineEntity> childList = dataList.get(entity.getEnCode()) != null ? dataList.get(entity.getEnCode()) : new ArrayList<>();
             model.setNum(childList.size());
             if (childList.size() > 0) {
-                model.setChildren(JsonUtil.getJsonToList(childList, FlowEngineListVO.class));
+                model.setChildren(JsonUtils.getJsonToList(childList, FlowEngineListVO.class));
             }
             listVOS.add(model);
         }
@@ -400,7 +400,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
     private List<FlowEngineVisibleEntity> visibleList(FlowEngineEntity entity) {
         List<FlowEngineVisibleEntity> visibleList = new ArrayList<>();
         if (entity.getFlowTemplateJson() != null) {
-            ChildNode childNode = JsonUtil.getJsonToBean(entity.getFlowTemplateJson(), ChildNode.class);
+            ChildNode childNode = JsonUtils.getJsonToBean(entity.getFlowTemplateJson(), ChildNode.class);
             Properties properties = childNode.getProperties();
             //可见的用户
             for (String user : properties.getInitiator()) {

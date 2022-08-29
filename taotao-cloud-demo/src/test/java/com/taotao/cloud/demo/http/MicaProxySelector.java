@@ -16,7 +16,7 @@
 package com.taotao.cloud.demo.http;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class MicaProxySelector extends ProxySelector {
 	@Override
 	public void connectFailed(URI uri, SocketAddress address, IOException ioe) {
 		// 注意：经过测试，此处不会触发
-		LogUtil.error("ConnectFailed uri:{}, address:{}, ioe:{}", uri, address, ioe);
+		LogUtils.error("ConnectFailed uri:{}, address:{}, ioe:{}", uri, address, ioe);
 	}
 
 	/**

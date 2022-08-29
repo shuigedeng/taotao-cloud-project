@@ -1,6 +1,6 @@
 package com.taotao.cloud.redis.delay.config;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.delay.message.DefaultRedissonMessageConverter;
 import com.taotao.cloud.redis.delay.message.MessageConverter;
 import com.taotao.cloud.redis.delay.message.QueueMessage;
@@ -55,9 +55,9 @@ public class RedissonTemplate implements BeanFactoryAware, SmartInitializingSing
 			QueueMessage<?> message = messageConverter.toMessage(payload, headers);
 			blockingQueue.offer(message);
 
-			LogUtil.info("添加队列成功，队列键：{}，队列值：{}", queueName, payload);
+			LogUtils.info("添加队列成功，队列键：{}，队列值：{}", queueName, payload);
 		} catch (Exception e) {
-			LogUtil.error("添加队列失败：{}", e.getMessage());
+			LogUtils.error("添加队列失败：{}", e.getMessage());
 			throw new RuntimeException("添加队列失败");
 		}
 	}
@@ -83,10 +83,10 @@ public class RedissonTemplate implements BeanFactoryAware, SmartInitializingSing
 			QueueMessage<?> message = messageConverter.toMessage(payload, headers);
 			delayedQueue.offer(message, delay, TimeUnit.MILLISECONDS);
 
-			LogUtil.info("添加延时队列成功，队列键：{}，队列值：{}，延迟时间：{}", queueName, payload,
+			LogUtils.info("添加延时队列成功，队列键：{}，队列值：{}，延迟时间：{}", queueName, payload,
 				TimeUnit.MILLISECONDS.toSeconds(delay) + "秒");
 		} catch (Exception e) {
-			LogUtil.error("添加延时队列失败：{}", e.getMessage());
+			LogUtils.error("添加延时队列失败：{}", e.getMessage());
 			throw new RuntimeException("添加延时队列失败");
 		}
 	}

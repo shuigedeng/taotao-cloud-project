@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.support;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 
 /**
  * 默认异步执行回调
@@ -29,7 +29,7 @@ public class DefaultDingerAsyncCallable implements DingerAsyncCallback {
 
 	@Override
 	public void execute(String dingerId, String result) {
-		LogUtil.info("dingerId=[{}], result=[{}].",
+		LogUtils.info("dingerId=[{}], result=[{}].",
 			dingerId, result);
 	}
 }

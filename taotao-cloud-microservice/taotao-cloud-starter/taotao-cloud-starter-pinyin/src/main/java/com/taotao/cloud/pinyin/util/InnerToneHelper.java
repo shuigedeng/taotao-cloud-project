@@ -1,9 +1,9 @@
 package com.taotao.cloud.pinyin.util;
 
 
-import com.taotao.cloud.common.utils.io.FileStreamUtil;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.io.FileStreamUtils;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.constant.PinyinConst;
 import com.taotao.cloud.pinyin.model.CharToneInfo;
 import com.taotao.cloud.pinyin.model.ToneItem;
@@ -24,9 +24,9 @@ public final class InnerToneHelper {
     static {
         TONE_ITEM_MAP = new HashMap<>(34);
 
-        List<String> allLines = FileStreamUtil.readAllLines(PinyinConst.PINYIN_DICT_TONE_SYSTEM);
+        List<String> allLines = FileStreamUtils.readAllLines(PinyinConst.PINYIN_DICT_TONE_SYSTEM);
         for(String line : allLines) {
-            String[] strings = line.split(StringUtil.BLANK);
+            String[] strings = line.split(StringUtils.BLANK);
             ToneItem item = ToneItem.of(strings[0].charAt(0), Integer.parseInt(strings[1]));
 
             TONE_ITEM_MAP.put(strings[2].charAt(0), item);
@@ -56,7 +56,7 @@ public final class InnerToneHelper {
             char currentChar = tone.charAt(i);
             ToneItem toneItem = InnerToneHelper.getToneItem(currentChar);
 
-            if (ObjectUtil.isNotNull(toneItem)) {
+            if (ObjectUtils.isNotNull(toneItem)) {
                 charToneInfo.setToneItem(toneItem);
                 charToneInfo.setIndex(i);
                 break;

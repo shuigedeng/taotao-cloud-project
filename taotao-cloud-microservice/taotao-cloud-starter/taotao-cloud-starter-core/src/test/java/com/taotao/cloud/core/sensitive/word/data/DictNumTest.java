@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
-import com.taotao.cloud.common.utils.io.FileUtil;
+import com.taotao.cloud.common.utils.io.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class DictNumTest {
         final String sourceFile = "D:\\_github\\sensitive-word\\src\\main\\resources\\dict.txt";
         final String targetFile = "D:\\_github\\sensitive-word\\src\\main\\resources\\dict.txt";
 
-        List<String> words = FileUtil.readAllLines(sourceFile);
+        List<String> words = FileUtils.readAllLines(sourceFile);
 //        List<String> formats = CollectionUtil.toList(words, new IHandler<String, String>() {
 //            @Override
 //            public String handle(String string) {
@@ -36,7 +36,7 @@ public class DictNumTest {
 //        });
 
         List<String> resultList = DataUtil.disctinctAndSort(words);
-        FileUtil.write(targetFile, resultList);
+        FileUtils.write(targetFile, resultList);
     }
 
 }

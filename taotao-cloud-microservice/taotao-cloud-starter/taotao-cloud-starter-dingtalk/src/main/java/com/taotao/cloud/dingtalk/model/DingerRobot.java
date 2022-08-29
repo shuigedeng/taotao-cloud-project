@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.entity.DingerResponse;
 import com.taotao.cloud.dingtalk.entity.MsgType;
@@ -103,7 +103,7 @@ public class DingerRobot extends AbstractDingerSender {
 			StringBuilder webhook = new StringBuilder();
 			webhook.append(dinger.getRobotUrl()).append("=").append(dinger.getTokenId());
 
-			LogUtil.info("dingerId={} send message and use dinger={}, tokenId={}.", dkid,
+			LogUtils.info("dingerId={} send message and use dinger={}, tokenId={}.", dkid,
 				dingerType, dinger.getTokenId());
 
 			// 处理签名问题(只支持DingTalk)
@@ -135,10 +135,10 @@ public class DingerRobot extends AbstractDingerSender {
 			String response = dingTalkManagerBuilder.getDingerHttpClient().post(
 				webhook.toString(), headers, message
 			);
-			LogUtil.info(response);
+			LogUtils.info(response);
 			return DingerResponse.success(dkid, response);
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			exceptionCallback(dkid, message, new SendMsgException(e));
 			return DingerResponse.failed(dkid, DingerResponseCodeEnum.SEND_MESSAGE_FAILED);
 		}

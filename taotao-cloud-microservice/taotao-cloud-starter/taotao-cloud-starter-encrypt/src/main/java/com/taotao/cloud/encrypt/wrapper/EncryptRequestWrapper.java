@@ -1,6 +1,6 @@
 package com.taotao.cloud.encrypt.wrapper;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import org.springframework.http.MediaType;
 
@@ -44,10 +44,10 @@ public class EncryptRequestWrapper extends HttpServletRequestWrapper {
 
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
-		LogUtil.info("接收到的请求密文：" + new String(body));
+		LogUtils.info("接收到的请求密文：" + new String(body));
 		byte[] decode = encryptHandler.decode(body);
 		String urlDecodeStr = URLDecoder.decode(new String(decode), StandardCharsets.UTF_8);
-		LogUtil.info("解密后的报文：" + urlDecodeStr);
+		LogUtils.info("解密后的报文：" + urlDecodeStr);
 		final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(urlDecodeStr.getBytes());
 		return new ServletInputStream() {
 			@Override

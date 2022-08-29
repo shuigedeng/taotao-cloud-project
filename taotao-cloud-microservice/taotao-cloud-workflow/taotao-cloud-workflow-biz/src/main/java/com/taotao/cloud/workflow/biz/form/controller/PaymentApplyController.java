@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -47,14 +47,14 @@ public class PaymentApplyController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), PaymentApplyInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), PaymentApplyInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             PaymentApplyEntity entity = paymentApplyService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, PaymentApplyInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, PaymentApplyInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -68,7 +68,7 @@ public class PaymentApplyController {
     @Operation("新建付款申请单")
     @PostMapping
     public Result create(@RequestBody PaymentApplyForm paymentApplyForm) throws WorkFlowException {
-        PaymentApplyEntity entity = JsonUtil.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
+        PaymentApplyEntity entity = JsonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(paymentApplyForm.getStatus())) {
             paymentApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -87,7 +87,7 @@ public class PaymentApplyController {
     @Operation("修改付款申请单")
     @PutMapping("/{id}")
     public Result update(@RequestBody PaymentApplyForm paymentApplyForm, @PathVariable("id") String id) throws WorkFlowException {
-        PaymentApplyEntity entity = JsonUtil.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
+        PaymentApplyEntity entity = JsonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(paymentApplyForm.getStatus())) {
             paymentApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 /**
@@ -36,13 +36,13 @@ public abstract class AbstractEnabledEventHandler<T extends DisruptorEvent> exte
 	@Override
 	public void doHandler(T event, HandlerChain<T> handlerChain) throws Exception {
 		if (!isEnabled(event)) {
-			LogUtil.debug(
+			LogUtils.debug(
 				"Handler '{}' is not enabled for the current event.  Proceeding without invoking this handler.",
 				getName());
 			// Proceed without invoking this handler...
 			handlerChain.doHandler(event);
 		} else {
-			LogUtil.info("Handler '{}' enabled.  Executing now.", getName());
+			LogUtils.info("Handler '{}' enabled.  Executing now.", getName());
 			doHandlerInternal(event, handlerChain);
 		}
 	}

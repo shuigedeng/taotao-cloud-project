@@ -4,12 +4,11 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.enums.CellDataTypeEnum;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ConverterUtils;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.office.util.constant.ImportConstant;
 import com.taotao.cloud.office.util.refactor.ThrowingConsumer;
 import com.taotao.cloud.office.util.valid.ImportValid;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class ExcelImportCommonListener<T> implements ReadListener<T> {
 
@@ -76,7 +74,7 @@ public class ExcelImportCommonListener<T> implements ReadListener<T> {
     public void onException(Exception exception, AnalysisContext context) throws Exception {
         if (exception instanceof ExcelDataConvertException) {
             ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException) exception;
-	        LogUtil.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
+	        LogUtils.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
                     excelDataConvertException.getColumnIndex(), excelDataConvertException.getCellData().getStringValue());
             if (Objects.nonNull(errorLogList)) {
                 // 记录异常日志
@@ -96,7 +94,7 @@ public class ExcelImportCommonListener<T> implements ReadListener<T> {
     @Override
     public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
         Map<Integer, String> headMapping = ConverterUtils.convertToStringMap(headMap, context);
-	    LogUtil.info("表头数据: " + StrUtil.toString(headMapping));
+	    LogUtils.info("表头数据: " + StrUtil.toString(headMapping));
         if (CollUtil.isEmpty(headMapping)) {
             errorLogList.add("The header of file can't be empty!");
         }
@@ -117,7 +115,7 @@ public class ExcelImportCommonListener<T> implements ReadListener<T> {
             relationIdField.setAccessible(Boolean.TRUE);
             relationIdField.set(t, count++);
         } catch (Exception e) {
-	        LogUtil.error("in error{}", e);
+	        LogUtils.error("in error{}", e);
             errorLogList.add("The Row Data inject relationId field in error");
         }
         // 校验导入字段

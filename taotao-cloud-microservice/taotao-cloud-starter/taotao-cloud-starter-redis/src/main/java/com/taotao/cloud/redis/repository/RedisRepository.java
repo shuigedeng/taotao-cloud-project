@@ -17,7 +17,7 @@ package com.taotao.cloud.redis.repository;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.model.CacheHashKey;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.redis.val.NullVal;
@@ -493,7 +493,7 @@ public class RedisRepository {
 	public void setExpire(final byte[] key, final byte[] value, final long time) {
 		redisTemplate.execute((RedisCallback<Long>) connection -> {
 			connection.setEx(key, time, value);
-			LogUtil.info("[redisTemplate redis]放入 缓存  url:{} ========缓存时间为{}秒", key, time);
+			LogUtils.info("[redisTemplate redis]放入 缓存  url:{} ========缓存时间为{}秒", key, time);
 			return 1L;
 		});
 	}
@@ -2641,7 +2641,7 @@ public class RedisRepository {
 	public byte[] get(final byte[] key) {
 		byte[] result = redisTemplate
 			.execute((RedisCallback<byte[]>) connection -> connection.get(key));
-		LogUtil.info("[redisTemplate redis]取出 缓存  url:{} ", key);
+		LogUtils.info("[redisTemplate redis]取出 缓存  url:{} ", key);
 		return result;
 	}
 
@@ -2679,7 +2679,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Map<String, Object> getKeysValues(final String keyPatten) {
-		LogUtil.info("[redisTemplate redis]  getValues()  patten={} ", keyPatten);
+		LogUtils.info("[redisTemplate redis]  getValues()  patten={} ", keyPatten);
 		return redisTemplate.execute((RedisCallback<Map<String, Object>>) connection -> {
 			RedisSerializer<String> serializer = getRedisSerializer();
 			Map<String, Object> maps = new HashMap<>(16);
@@ -2719,7 +2719,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void putHashValue(String key, String hashKey, Object hashValue) {
-		LogUtil.info("[redisTemplate redis]  putHashValue()  key={},hashKey={},hashValue={} ", key,
+		LogUtils.info("[redisTemplate redis]  putHashValue()  key={},hashKey={},hashValue={} ", key,
 			hashKey, hashValue);
 		opsForHash().put(key, hashKey, hashValue);
 	}
@@ -2733,7 +2733,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object getHashValues(String key, String hashKey) {
-		LogUtil.info("[redisTemplate redis]  getHashValues()  key={},hashKey={}", key, hashKey);
+		LogUtils.info("[redisTemplate redis]  getHashValues()  key={},hashKey={}", key, hashKey);
 		return opsForHash().get(key, hashKey);
 	}
 
@@ -2745,7 +2745,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void delHashValues(String key, Object... hashKeys) {
-		LogUtil.info("[redisTemplate redis]  delHashValues()  key={}", key);
+		LogUtils.info("[redisTemplate redis]  delHashValues()  key={}", key);
 		opsForHash().delete(key, hashKeys);
 	}
 
@@ -2757,7 +2757,7 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Map<String, Object> getHashValue(String key) {
-		LogUtil.info("[redisTemplate redis]  getHashValue()  key={}", key);
+		LogUtils.info("[redisTemplate redis]  getHashValue()  key={}", key);
 		return opsForHash().entries(key);
 	}
 
@@ -2995,7 +2995,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3076,7 +3076,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.hasKey(key);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3114,7 +3114,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3138,7 +3138,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3209,7 +3209,7 @@ public class RedisRepository {
 			redisTemplate.opsForHash().putAll(key, map);
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3231,7 +3231,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3250,7 +3250,7 @@ public class RedisRepository {
 			redisTemplate.opsForHash().put(key, item, value);
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3273,7 +3273,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3338,7 +3338,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForSet().members(key);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -3355,7 +3355,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForSet().isMember(key, value);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3372,7 +3372,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForSet().add(key, values);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return 0L;
 		}
 	}
@@ -3394,7 +3394,7 @@ public class RedisRepository {
 			}
 			return count;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return 0L;
 		}
 	}
@@ -3410,7 +3410,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForSet().size(key);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return 0L;
 		}
 	}
@@ -3427,7 +3427,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForSet().remove(key, values);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return 0L;
 		}
 	}
@@ -3446,7 +3446,7 @@ public class RedisRepository {
 		try {
 			return (List<T>)redisTemplate.opsForList().range(key, start, end);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -3462,7 +3462,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForList().size(key);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return 0L;
 		}
 	}
@@ -3480,7 +3480,7 @@ public class RedisRepository {
 		try {
 			return (V)redisTemplate.opsForList().index(key, index);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -3503,7 +3503,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3521,7 +3521,7 @@ public class RedisRepository {
 			redisTemplate.opsForList().rightPushAll(key, value);
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3543,7 +3543,7 @@ public class RedisRepository {
 			}
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3562,7 +3562,7 @@ public class RedisRepository {
 			redisTemplate.opsForList().set(key, index, value);
 			return true;
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -3580,7 +3580,7 @@ public class RedisRepository {
 		try {
 			return redisTemplate.opsForList().remove(key, count, value);
 		} catch (Exception e) {
-			LogUtil.error("Exception: {}", e.getMessage());
+			LogUtils.error("Exception: {}", e.getMessage());
 			return 0L;
 		}
 	}

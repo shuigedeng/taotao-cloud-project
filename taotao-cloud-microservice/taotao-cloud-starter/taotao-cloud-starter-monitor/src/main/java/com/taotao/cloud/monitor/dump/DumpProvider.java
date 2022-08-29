@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.dump;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.monitor.exception.HealthException;
 import com.taotao.cloud.monitor.utils.ProcessUtils;
 
@@ -94,7 +94,7 @@ public class DumpProvider {
 						name, name));
 					response("压缩成功,请等待耐心等待,不要重复执行!");
 				} catch (Exception exp) {
-					LogUtil.error(StarterName.MONITOR_STARTER, "zip 出错", exp);
+					LogUtils.error(StarterName.MONITOR_STARTER, "zip 出错", exp);
 					response("压缩出错:" + exp.getMessage());
 				}
 			}
@@ -119,7 +119,7 @@ public class DumpProvider {
 			lastDumpTime = System.currentTimeMillis();
 			response("dump成功,请等待耐心等待,不要重复执行!");
 		} catch (Exception exp) {
-			LogUtil.error(StarterName.MONITOR_STARTER, "dump 出错", exp);
+			LogUtils.error(StarterName.MONITOR_STARTER, "dump 出错", exp);
 			response("dump出错:" + exp.getMessage());
 		}
 	}
@@ -133,7 +133,7 @@ public class DumpProvider {
 	public void download(String name) {
 		for (File f : getList()) {
 			if (name != null && name.equals(f.getName())) {
-				HttpServletResponse response = RequestUtil.getResponse();
+				HttpServletResponse response = RequestUtils.getResponse();
 				response.reset();
 				response.setContentType("application/x-download");
 				response.addHeader("Content-Disposition", "attachment;filename=" + f.getName());
@@ -156,7 +156,7 @@ public class DumpProvider {
 						}
 					}
 				} catch (Exception exp) {
-					LogUtil.error(StarterName.MONITOR_STARTER, "download 出错",
+					LogUtils.error(StarterName.MONITOR_STARTER, "download 出错",
 						exp);
 					response("下载出错:" + exp.getMessage());
 				}
@@ -172,7 +172,7 @@ public class DumpProvider {
 	 */
 	private void response(String html) {
 		try {
-			HttpServletResponse response = RequestUtil.getResponse();
+			HttpServletResponse response = RequestUtils.getResponse();
 			response.reset();
 			response.setHeader("Content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
@@ -180,7 +180,7 @@ public class DumpProvider {
 			response.getWriter().flush();
 			response.getWriter().close();
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 		}
 	}
 }

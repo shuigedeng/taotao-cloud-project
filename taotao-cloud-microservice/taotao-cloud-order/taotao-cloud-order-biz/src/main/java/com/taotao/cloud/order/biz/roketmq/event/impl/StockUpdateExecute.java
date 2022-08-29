@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.message.OrderMessage;
@@ -103,13 +103,13 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 				Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
 				//如果库存扣减都成功，则记录成交订单
 				if (Boolean.TRUE.equals(skuResult)) {
-					LogUtil.info("库存扣减成功,参数为{};{}", keys, values);
+					LogUtils.info("库存扣减成功,参数为{};{}", keys, values);
 					//库存确认之后对结构处理
 					orderService.afterOrderConfirm(orderMessage.orderSn());
 					//成功之后，同步库存
 					synchroDB(order);
 				} else {
-					LogUtil.info("库存扣件失败，变更缓存key{} 变更缓存value{}", keys, values);
+					LogUtils.info("库存扣件失败，变更缓存key{} 变更缓存value{}", keys, values);
 					//失败之后取消订单
 					this.errorOrder(orderMessage.orderSn());
 				}
@@ -135,7 +135,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 
 					//返还失败，则记录日志
 					if (Boolean.FALSE.equals(skuResult)) {
-						LogUtil.error("库存回退异常，keys：{},回复库存值为: {}", keys, values);
+						LogUtils.error("库存回退异常，keys：{},回复库存值为: {}", keys, values);
 					}
 					rollbackOrderStock(order);
 				}
@@ -330,7 +330,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 		//商品库存，包含sku库存集合，批量更新商品库存相关
 		goodsSkuService.updateGoodsStuck(goodsSkus);
 
-		LogUtil.info("订单确认，库存同步：商品信息--{}；促销信息---{}", goodsSkus, promotionGoods);
+		LogUtils.info("订单确认，库存同步：商品信息--{}；促销信息---{}", goodsSkus, promotionGoods);
 
 	}
 
@@ -357,7 +357,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 		for (int i = 0; i < skuStocks.size(); i++) {
 			goodsSkus.get(i).setQuantity(Convert.toInt(skuStocks.get(i).toString()));
 		}
-		LogUtil.info("订单取消，库存还原：{}", goodsSkus);
+		LogUtils.info("订单取消，库存还原：{}", goodsSkus);
 
 		//批量修改商品库存
 		goodsSkuService.updateBatchById(goodsSkus);

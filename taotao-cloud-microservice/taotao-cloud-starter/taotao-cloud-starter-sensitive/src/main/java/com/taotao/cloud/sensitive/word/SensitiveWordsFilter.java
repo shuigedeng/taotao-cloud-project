@@ -1,6 +1,6 @@
 package com.taotao.cloud.sensitive.word;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.Serializable;
 import java.util.List;
 import java.util.NavigableSet;
@@ -146,7 +146,7 @@ public class SensitiveWordsFilter implements Serializable {
 	 * 初始化敏感词
 	 */
 	public static void init(List<String> words) {
-		LogUtil.info("开始初始化敏感词");
+		LogUtils.info("开始初始化敏感词");
 		nodesUpdate = new SensitiveWordsNode[DEFAULT_INITIAL_CAPACITY];
 		for (String word : words) {
 			put(word);

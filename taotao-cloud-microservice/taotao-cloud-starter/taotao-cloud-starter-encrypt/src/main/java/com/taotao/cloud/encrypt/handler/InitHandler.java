@@ -1,6 +1,6 @@
 package com.taotao.cloud.encrypt.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.encrypt.annotation.SeparateEncrypt;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -39,12 +39,12 @@ public class InitHandler {
 		try {
 			controllers = servletContext.getBeansWithAnnotation(Controller.class);
 		} catch (BeanCreationException e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		}
 		try {
 			restControllers = servletContext.getBeansWithAnnotation(RestController.class);
 		} catch (BeanCreationException e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		}
 
 		if (restControllers.size() > 0) {

@@ -12,8 +12,8 @@
  */
 package com.taotao.cloud.sms.common.web;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.model.NoticeInfo;
 import com.taotao.cloud.sms.common.model.VerifyInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ import java.lang.reflect.Method;
 public class SmsWebmvcPathAutoConfiguration {
 
 	private static String getBasePath(SmsWebmvcProperties properties) {
-		String bathPath = StringUtil.trimToNull(properties.getBasePath());
+		String bathPath = StringUtils.trimToNull(properties.getBasePath());
 
 		return bathPath == null ? SmsWebmvcProperties.DEFAULT_BASE_PATH : bathPath;
 	}
@@ -70,9 +70,9 @@ public class SmsWebmvcPathAutoConfiguration {
 					bathPath + "/verificationCode/{phone}")
 				.methods(RequestMethod.POST).build();
 			mapping.registerMapping(sendInfo, controller, sendMethod);
-			LogUtil.debug("registerMapping: {}", sendInfo);
+			LogUtils.debug("registerMapping: {}", sendInfo);
 		} else {
-			LogUtil.debug("not register: sendInfo");
+			LogUtils.debug("not register: sendInfo");
 		}
 
 		if (properties.isEnableGet()) {
@@ -82,9 +82,9 @@ public class SmsWebmvcPathAutoConfiguration {
 					bathPath + "/verificationCode/{phone}")
 				.methods(RequestMethod.GET).produces("application/json").build();
 			mapping.registerMapping(getInfo, controller, getMethod);
-			LogUtil.debug("registerMapping: {}", getInfo);
+			LogUtils.debug("registerMapping: {}", getInfo);
 		} else {
-			LogUtil.debug("not register: getInfo");
+			LogUtils.debug("not register: getInfo");
 		}
 
 		if (properties.isEnableVerify()) {
@@ -93,9 +93,9 @@ public class SmsWebmvcPathAutoConfiguration {
 			RequestMappingInfo verifyInfo = RequestMappingInfo.paths(bathPath + "/verificationCode")
 				.methods(RequestMethod.POST).build();
 			mapping.registerMapping(verifyInfo, controller, verifyMethod);
-			LogUtil.debug("registerMapping: {}", verifyInfo);
+			LogUtils.debug("registerMapping: {}", verifyInfo);
 		} else {
-			LogUtil.debug("not register: verifyInfo");
+			LogUtils.debug("not register: verifyInfo");
 		}
 
 		if (properties.isEnableNotice()) {
@@ -104,9 +104,9 @@ public class SmsWebmvcPathAutoConfiguration {
 				.methods(RequestMethod.PUT)
 				.build();
 			mapping.registerMapping(noticeInfo, controller, noticeMethod);
-			LogUtil.debug("registerMapping: {}", noticeInfo);
+			LogUtils.debug("registerMapping: {}", noticeInfo);
 		} else {
-			LogUtil.debug("not register: noticeInfo");
+			LogUtils.debug("not register: noticeInfo");
 		}
 	}
 }

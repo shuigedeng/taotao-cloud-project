@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.web.vo.MemberVO;
@@ -66,9 +66,9 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 
 	@Override
 	public StoreVO getStoreDetail() {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		StoreVO storeVO = this.baseMapper.getStoreDetail(storeId);
-		storeVO.setNickname(SecurityUtil.getCurrentUser().getNickname());
+		storeVO.setNickname(SecurityUtils.getCurrentUser().getNickname());
 		return storeVO;
 	}
 
@@ -131,7 +131,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	private Store updateStore(StoreEditDTO storeEditDTO) {
 		Store store = this.getById(storeEditDTO.getStoreId());
 		if (store != null) {
-			BeanUtil.copyProperties(storeEditDTO, store);
+			BeanUtils.copyProperties(storeEditDTO, store);
 			store.setId(storeEditDTO.getStoreId());
 			boolean result = this.updateById(store);
 			if (result) {
@@ -148,7 +148,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 */
 	private void updateStoreDetail(StoreEditDTO storeEditDTO) {
 		StoreDetail storeDetail = new StoreDetail();
-		BeanUtil.copyProperties(storeEditDTO, storeDetail);
+		BeanUtils.copyProperties(storeEditDTO, storeDetail);
 		storeDetailService.update(storeDetail, new QueryWrapper<StoreDetail>().eq("store_id", storeEditDTO.getStoreId()));
 	}
 
@@ -206,21 +206,21 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		Store store = getStoreByMember();
 		//如果没有申请过店铺，新增店铺
 		if (!Optional.ofNullable(store).isPresent()) {
-			Long userId = SecurityUtil.getCurrentUser().getUserId();
+			Long userId = SecurityUtils.getCurrentUser().getUserId();
 			MemberVO member = memberService.getById(userId);
 			store = new Store(member);
-			BeanUtil.copyProperties(storeCompanyDTO, store);
+			BeanUtils.copyProperties(storeCompanyDTO, store);
 			this.save(store);
 			StoreDetail storeDetail = new StoreDetail();
 			storeDetail.setStoreId(store.getId());
-			BeanUtil.copyProperties(storeCompanyDTO, storeDetail);
+			BeanUtils.copyProperties(storeCompanyDTO, storeDetail);
 			return storeDetailService.save(storeDetail);
 		} else {
-			BeanUtil.copyProperties(storeCompanyDTO, store);
+			BeanUtils.copyProperties(storeCompanyDTO, store);
 			this.updateById(store);
 			//判断是否存在店铺详情，如果没有则进行新建，如果存在则进行修改
 			StoreDetail storeDetail = storeDetailService.getStoreDetail(store.getId());
-			BeanUtil.copyProperties(storeCompanyDTO, storeDetail);
+			BeanUtils.copyProperties(storeCompanyDTO, storeDetail);
 			return storeDetailService.updateById(storeDetail);
 		}
 	}
@@ -231,7 +231,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		Store store = getStoreByMember();
 		StoreDetail storeDetail = storeDetailService.getStoreDetail(store.getId());
 		//设置店铺的银行信息
-		BeanUtil.copyProperties(storeBankDTO, storeDetail);
+		BeanUtils.copyProperties(storeBankDTO, storeDetail);
 		return storeDetailService.updateById(storeDetail);
 	}
 
@@ -239,12 +239,12 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	public boolean applyThirdStep(StoreOtherInfoDTO storeOtherInfoDTO) {
 		//获取当前操作的店铺
 		Store store = getStoreByMember();
-		BeanUtil.copyProperties(storeOtherInfoDTO, store);
+		BeanUtils.copyProperties(storeOtherInfoDTO, store);
 		this.updateById(store);
 
 		StoreDetail storeDetail = storeDetailService.getStoreDetail(store.getId());
 		//设置店铺的其他信息
-		BeanUtil.copyProperties(storeOtherInfoDTO, storeDetail);
+		BeanUtils.copyProperties(storeOtherInfoDTO, storeDetail);
 		//设置店铺经营范围
 		storeDetail.setGoodsManagementCategory(storeOtherInfoDTO.getGoodsManagementCategory());
 		//最后一步申请，给予店铺设置库存预警默认值
@@ -282,8 +282,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 */
 	private Store getStoreByMember() {
 		LambdaQueryWrapper<Store> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		if (SecurityUtil.getCurrentUserWithNull() != null) {
-			lambdaQueryWrapper.eq(Store::getMemberId, SecurityUtil.getUserId());
+		if (SecurityUtils.getCurrentUserWithNull() != null) {
+			lambdaQueryWrapper.eq(Store::getMemberId, SecurityUtils.getUserId());
 		}
 		return this.getOne(lambdaQueryWrapper, false);
 	}

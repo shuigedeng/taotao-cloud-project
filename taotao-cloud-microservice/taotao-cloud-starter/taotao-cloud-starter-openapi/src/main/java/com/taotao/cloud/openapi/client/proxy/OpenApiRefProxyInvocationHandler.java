@@ -1,7 +1,7 @@
 package com.taotao.cloud.openapi.client.proxy;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.openapi.client.OpenApiClient;
 import com.taotao.cloud.openapi.client.OpenApiClientBuilder;
 import com.taotao.cloud.openapi.client.annotation.OpenApiMethod;
@@ -108,7 +108,7 @@ public class OpenApiRefProxyInvocationHandler implements InvocationHandler {
 					throw new OpenApiClientException("返回失败：" + outParams.getMessage());
 				}
 			} else {
-				LogUtil.warn("{}非OpenApiMethod,不进行代理", method.getName());
+				LogUtils.warn("{}非OpenApiMethod,不进行代理", method.getName());
 			}
 		}
 		return null;

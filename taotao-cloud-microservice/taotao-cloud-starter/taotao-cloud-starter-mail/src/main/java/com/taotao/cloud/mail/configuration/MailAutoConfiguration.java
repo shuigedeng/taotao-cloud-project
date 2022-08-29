@@ -17,7 +17,7 @@ package com.taotao.cloud.mail.configuration;
 
 import cn.hutool.extra.mail.MailAccount;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mail.template.JavaMailTemplate;
 import com.taotao.cloud.mail.template.MailTemplate;
 import org.springframework.beans.factory.InitializingBean;
@@ -44,13 +44,13 @@ public class MailAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MailAutoConfiguration.class, StarterName.MAIL_STARTER);
+		LogUtils.started(MailAutoConfiguration.class, StarterName.MAIL_STARTER);
 	}
 
 	@Bean
 	@ConditionalOnBean({MailProperties.class, JavaMailSender.class})
 	public MailTemplate mailTemplate(JavaMailSender mailSender, MailProperties mailProperties) {
-		LogUtil.started(MailTemplate.class, StarterName.MAIL_STARTER);
+		LogUtils.started(MailTemplate.class, StarterName.MAIL_STARTER);
 
 		return new JavaMailTemplate(mailSender, mailProperties);
 	}

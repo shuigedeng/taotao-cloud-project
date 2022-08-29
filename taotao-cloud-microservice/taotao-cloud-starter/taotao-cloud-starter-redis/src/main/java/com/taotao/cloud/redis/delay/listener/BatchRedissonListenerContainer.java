@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.delay.listener;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.delay.message.FastJsonCodec;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
 import com.taotao.cloud.common.utils.common.ThreadFactoryCreator;
@@ -62,7 +62,7 @@ public class BatchRedissonListenerContainer extends AbstractRedissonListenerCont
 		@Override
 		public void run() {
 			if (this.status != ConsumerStatus.CREATED) {
-				LogUtil.info(
+				LogUtils.info(
 					"consumer currentThread [{}] will exit, because consumer status is {},expected is CREATED",
 					this.currentThread.getName(), this.status);
 				return;
@@ -87,10 +87,10 @@ public class BatchRedissonListenerContainer extends AbstractRedissonListenerCont
 				} catch (InterruptedException | RedisException e) {
 					//ignore
 				} catch (Exception e) {
-					LogUtil.error("error occurred while take message from redisson", e);
+					LogUtils.error("error occurred while take message from redisson", e);
 				}
 				if (this.status == ConsumerStatus.STOPPED) {
-					LogUtil.info("consumer currentThread [{}] will exit, because of STOPPED status",
+					LogUtils.info("consumer currentThread [{}] will exit, because of STOPPED status",
 						this.currentThread.getName());
 					break;
 				}
@@ -112,7 +112,7 @@ public class BatchRedissonListenerContainer extends AbstractRedissonListenerCont
 			if (message == null || message.isEmpty()) {
 				return null;
 			}
-			return message.stream().map(e-> JsonUtil.toObject(e, RedissonMessage.class)).collect(Collectors.toList());
+			return message.stream().map(e-> JsonUtils.toObject(e, RedissonMessage.class)).collect(Collectors.toList());
 		}
 
 		private void stop() {

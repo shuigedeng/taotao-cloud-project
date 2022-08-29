@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.web.vo.MemberVO;
 import com.taotao.cloud.promotion.api.web.dto.CouponActivityDTO;
@@ -59,7 +59,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 	public CouponActivityVO getCouponActivityVO(String couponActivityId) {
 		CouponActivity couponActivity = this.getById(couponActivityId);
 		CouponActivityVO couponActivityVO = new CouponActivityVO();
-		BeanUtil.copyProperties(couponActivity, couponActivityVO);
+		BeanUtils.copyProperties(couponActivity, couponActivityVO);
 		couponActivityVO.setCouponActivityItems(couponActivityItemService.getCouponActivityItemListVO(couponActivityId));
 		return couponActivityVO;
 	}

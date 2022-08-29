@@ -17,7 +17,7 @@
 package com.taotao.cloud.laytpl.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.laytpl.model.FmtFunc;
 import com.taotao.cloud.laytpl.model.LayTplTemplate;
 import com.taotao.cloud.laytpl.properties.LayTplProperties;
@@ -26,7 +26,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * laytpl 自动化配置
@@ -42,7 +41,7 @@ public class LayTplAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LayTplAutoConfiguration.class, StarterName.LAYTPL_STARTER);
+		LogUtils.started(LayTplAutoConfiguration.class, StarterName.LAYTPL_STARTER);
 	}
 
 	@Bean("fmt")

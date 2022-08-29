@@ -16,7 +16,7 @@
 package com.taotao.cloud.lock.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.lock.aop.LockAop;
 import com.taotao.cloud.lock.properties.LockProperties;
 import com.taotao.cloud.lock.support.DistributedLock;
@@ -47,7 +47,7 @@ public class LockAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LockAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(LockAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Configuration
@@ -57,7 +57,7 @@ public class LockAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(RedisLockAutoConfiguration.class, StarterName.REDIS_STARTER);
+			LogUtils.started(RedisLockAutoConfiguration.class, StarterName.REDIS_STARTER);
 		}
 
 		@Bean
@@ -75,7 +75,7 @@ public class LockAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(ZookeeperLockAutoConfiguration.class, StarterName.REDIS_STARTER);
+			LogUtils.started(ZookeeperLockAutoConfiguration.class, StarterName.REDIS_STARTER);
 		}
 
 		@Bean

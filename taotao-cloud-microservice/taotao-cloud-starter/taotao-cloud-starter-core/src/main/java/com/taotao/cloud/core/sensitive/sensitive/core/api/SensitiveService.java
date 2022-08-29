@@ -3,11 +3,11 @@ package com.taotao.cloud.core.sensitive.sensitive.core.api;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.support.deepcopy.IDeepCopy;
-import com.taotao.cloud.common.utils.collection.ArrayUtil;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.reflect.ClassTypeUtil;
-import com.taotao.cloud.common.utils.reflect.ClassUtil;
+import com.taotao.cloud.common.utils.collection.ArrayUtils;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.reflect.ClassTypeUtils;
+import com.taotao.cloud.common.utils.reflect.ClassUtils;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.Sensitive;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.metadata.SensitiveCondition;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.metadata.SensitiveStrategy;
@@ -53,7 +53,7 @@ public class SensitiveService<T> implements ISensitive<T> {
 
 	@Override
 	public String desJson(final T object, final ISensitiveConfig config) {
-		if (ObjectUtil.isNull(object)) {
+		if (ObjectUtils.isNull(object)) {
 			return JSON.toJSONString(object);
 		}
 
@@ -88,14 +88,14 @@ public class SensitiveService<T> implements ISensitive<T> {
 
 				// 处理 @SensitiveEntry 注解
 				if (SensitiveEntryUtil.hasSensitiveEntry(field)) {
-					if (ClassTypeUtil.isJavaBean(fieldTypeClass)) {
+					if (ClassTypeUtils.isJavaBean(fieldTypeClass)) {
 						// 为普通 javabean 对象
 						final Object fieldNewObject = field.get(copyObject);
 						handleClassField(context, fieldNewObject, fieldTypeClass);
-					} else if (ClassTypeUtil.isArray(fieldTypeClass)) {
+					} else if (ClassTypeUtils.isArray(fieldTypeClass)) {
 						// 为数组类型
 						Object[] arrays = (Object[]) field.get(copyObject);
-						if (ArrayUtil.isNotEmpty(arrays)) {
+						if (ArrayUtils.isNotEmpty(arrays)) {
 							Object firstArrayEntry = arrays[0];
 							final Class entryFieldClass = firstArrayEntry.getClass();
 
@@ -116,11 +116,11 @@ public class SensitiveService<T> implements ISensitive<T> {
 								field.set(copyObject, newArray);
 							}
 						}
-					} else if (ClassTypeUtil.isCollection(fieldTypeClass)) {
+					} else if (ClassTypeUtils.isCollection(fieldTypeClass)) {
 						// Collection 接口的子类
 						final Collection<Object> entryCollection = (Collection<Object>) field.get(
 							copyObject);
-						if (CollectionUtil.isNotEmpty(entryCollection)) {
+						if (CollectionUtils.isNotEmpty(entryCollection)) {
 							Object firstCollectionEntry = entryCollection.iterator().next();
 							Class collectionEntryClass = firstCollectionEntry.getClass();
 
@@ -175,7 +175,7 @@ public class SensitiveService<T> implements ISensitive<T> {
 		try {
 			//处理 @Sensitive
 			Sensitive sensitive = field.getAnnotation(Sensitive.class);
-			if (ObjectUtil.isNotNull(sensitive)) {
+			if (ObjectUtils.isNotNull(sensitive)) {
 				Class<? extends ICondition> conditionClass = sensitive.condition();
 				ICondition condition = conditionClass.getDeclaredConstructor().newInstance();
 				if (condition.valid(context)) {
@@ -187,12 +187,12 @@ public class SensitiveService<T> implements ISensitive<T> {
 
 			// 获取所有的注解
 			Annotation[] annotations = field.getAnnotations();
-			if (ArrayUtil.isNotEmpty(annotations)) {
+			if (ArrayUtils.isNotEmpty(annotations)) {
 				ICondition condition = getCondition(annotations);
-				if (ObjectUtil.isNull(condition)
+				if (ObjectUtils.isNull(condition)
 					|| condition.valid(context)) {
 					IStrategy strategy = getStrategy(annotations);
-					if (ObjectUtil.isNotNull(strategy)) {
+					if (ObjectUtils.isNotNull(strategy)) {
 						return strategy.des(entry, context);
 					}
 				}
@@ -234,12 +234,12 @@ public class SensitiveService<T> implements ISensitive<T> {
 
 			// 系统内置自定义注解的处理,获取所有的注解
 			Annotation[] annotations = field.getAnnotations();
-			if (ArrayUtil.isNotEmpty(annotations)) {
+			if (ArrayUtils.isNotEmpty(annotations)) {
 				ICondition condition = getCondition(annotations);
-				if (ObjectUtil.isNull(condition)
+				if (ObjectUtils.isNull(condition)
 					|| condition.valid(context)) {
 					IStrategy strategy = getStrategy(annotations);
-					if (ObjectUtil.isNotNull(strategy)) {
+					if (ObjectUtils.isNotNull(strategy)) {
 						final Object originalFieldVal = field.get(copyObject);
 						final Object result = strategy.des(originalFieldVal, context);
 						field.set(copyObject, result);
@@ -265,12 +265,12 @@ public class SensitiveService<T> implements ISensitive<T> {
 		for (Annotation annotation : annotations) {
 			SensitiveStrategy sensitiveStrategy = annotation.annotationType()
 				.getAnnotation(SensitiveStrategy.class);
-			if (ObjectUtil.isNotNull(sensitiveStrategy)) {
+			if (ObjectUtils.isNotNull(sensitiveStrategy)) {
 				Class<? extends IStrategy> clazz = sensitiveStrategy.value();
 				if (SensitiveStrategyBuiltIn.class.equals(clazz)) {
 					return SensitiveStrategyBuiltInUtil.require(annotation.annotationType());
 				} else {
-					return ClassUtil.newInstance(clazz);
+					return ClassUtils.newInstance(clazz);
 				}
 			}
 		}
@@ -287,9 +287,9 @@ public class SensitiveService<T> implements ISensitive<T> {
 		for (Annotation annotation : annotations) {
 			SensitiveCondition sensitiveCondition = annotation.annotationType()
 				.getAnnotation(SensitiveCondition.class);
-			if (ObjectUtil.isNotNull(sensitiveCondition)) {
+			if (ObjectUtils.isNotNull(sensitiveCondition)) {
 				Class<? extends ICondition> customClass = sensitiveCondition.value();
-				return ClassUtil.newInstance(customClass);
+				return ClassUtils.newInstance(customClass);
 			}
 		}
 		return null;
@@ -304,14 +304,14 @@ public class SensitiveService<T> implements ISensitive<T> {
 	 * @since 0.0.2
 	 */
 	private boolean needHandleEntryType(final Class fieldTypeClass) {
-		if (ClassTypeUtil.isBase(fieldTypeClass)
-			|| ClassTypeUtil.isMap(fieldTypeClass)) {
+		if (ClassTypeUtils.isBase(fieldTypeClass)
+			|| ClassTypeUtils.isMap(fieldTypeClass)) {
 			return false;
 		}
 
-		if (ClassTypeUtil.isJavaBean(fieldTypeClass)
-			|| ClassTypeUtil.isArray(fieldTypeClass)
-			|| ClassTypeUtil.isCollection(fieldTypeClass)) {
+		if (ClassTypeUtils.isJavaBean(fieldTypeClass)
+			|| ClassTypeUtils.isArray(fieldTypeClass)
+			|| ClassTypeUtils.isCollection(fieldTypeClass)) {
 			return true;
 		}
 		return false;

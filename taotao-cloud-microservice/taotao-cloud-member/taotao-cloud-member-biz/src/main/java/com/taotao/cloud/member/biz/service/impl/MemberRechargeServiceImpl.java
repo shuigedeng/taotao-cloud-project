@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.member.api.web.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
@@ -42,9 +42,9 @@ public class MemberRechargeServiceImpl extends ServiceImpl<MemberRechargeMapper,
 	@Override
 	public MemberRecharge recharge(BigDecimal price) {
 		//获取当前登录的会员
-		SecurityUser authUser = SecurityUtil.getCurrentUser();
+		SecurityUser authUser = SecurityUtils.getCurrentUser();
 		//构建sn
-		String sn = "Y" + IdGeneratorUtil.getId();
+		String sn = "Y" + IdGeneratorUtils.getId();
 		//整合充值订单数据
 		MemberRecharge recharge = new MemberRecharge(sn, authUser.getUserId(), authUser.getUsername(), price);
 		//添加预存款充值账单

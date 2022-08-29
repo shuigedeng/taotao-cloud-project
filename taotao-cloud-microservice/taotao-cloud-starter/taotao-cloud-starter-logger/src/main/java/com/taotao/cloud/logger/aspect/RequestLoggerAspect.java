@@ -28,14 +28,14 @@ import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.ip.IPUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.ip.IpUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
@@ -60,7 +60,6 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -175,7 +174,7 @@ public class RequestLoggerAspect {
 					}
 
 				} catch (ConvertException e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 
@@ -185,7 +184,7 @@ public class RequestLoggerAspect {
 			requestLogger.setConsumingTime(endTime - requestLogger.getStartTime());
 
 			if (requestOperateLog.response()) {
-				requestLogger.setResult(getText(ret == null ? StrPool.EMPTY : JsonUtil.toJSONString(ret)));
+				requestLogger.setResult(getText(ret == null ? StrPool.EMPTY : JsonUtils.toJSONString(ret)));
 			}
 
 			publisher.publishEvent(new RequestLoggerEvent(requestLogger));
@@ -203,7 +202,7 @@ public class RequestLoggerAspect {
 
 			com.taotao.cloud.logger.model.RequestLogger requestLogger = getRequestLogger();
 			requestLogger.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
-			String stackTrace = LogUtil.getStackTrace(e);
+			String stackTrace = LogUtils.getStackTrace(e);
 			requestLogger.setExDetail(stackTrace.replaceAll("\"", "'").replace("\n", ""));
 			requestLogger.setExDesc(e.getMessage().replaceAll("\"", "'").replace("\n", ""));
 
@@ -227,13 +226,13 @@ public class RequestLoggerAspect {
 
 		try {
 			if (!request.getContentType().contains(FORM_DATA_CONTENT_TYPE)) {
-				strArgs = JsonUtil.toJSONString(params);
+				strArgs = JsonUtils.toJSONString(params);
 			}
 		} catch (Exception e) {
 			try {
 				strArgs = Arrays.toString(params);
 			} catch (Exception ex) {
-				LogUtil.error("解析参数异常", ex);
+				LogUtils.error("解析参数异常", ex);
 			}
 		}
 		return strArgs;
@@ -249,10 +248,10 @@ public class RequestLoggerAspect {
 
 		requestLogger.setTraceId(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID));
 		requestLogger.setApplicationName(applicationName);
-		requestLogger.setUsername(SecurityUtil.getUsernameWithAnonymous());
-		requestLogger.setUserId(String.valueOf(SecurityUtil.getUserIdWithAnonymous()));
-		requestLogger.setClientId(SecurityUtil.getClientId());
-		String ip = RequestUtil.getRemoteAddr(request);
+		requestLogger.setUsername(SecurityUtils.getUsernameWithAnonymous());
+		requestLogger.setUserId(String.valueOf(SecurityUtils.getUserIdWithAnonymous()));
+		requestLogger.setClientId(SecurityUtils.getClientId());
+		String ip = RequestUtils.getRemoteAddr(request);
 		requestLogger.setIp(ip);
 		requestLogger.setStartTime(System.currentTimeMillis());
 		requestLogger.setUrl(URLUtil.getPath(request.getRequestURI()));
@@ -262,7 +261,7 @@ public class RequestLoggerAspect {
 		List<String> argsList = new ArrayList<>();
 		if (ArrayUtil.isNotEmpty(args)) {
 			for (Object arg : args) {
-				argsList.add(JsonUtil.toJSONString(arg));
+				argsList.add(JsonUtils.toJSONString(arg));
 			}
 		}
 		requestLogger.setArgs(argsList.toString().replaceAll("\"", "'").replace("\n", ""));
@@ -271,25 +270,25 @@ public class RequestLoggerAspect {
 
 		String name = joinPoint.getSignature().getName();
 		requestLogger.setMethodName(name);
-		requestLogger.setParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request))
+		requestLogger.setParams(JsonUtils.toJSONString(RequestUtils.getAllRequestParam(request))
 			.replaceAll("\"", "'")
 			.replace("\n", ""));
-		requestLogger.setHeaders(JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
-		requestLogger.setRequestType(LogUtil.getRequestType(name));
+		requestLogger.setHeaders(JsonUtils.toJSONString(RequestUtils.getAllRequestHeaders(request)));
+		requestLogger.setRequestType(LogUtils.getRequestType(name));
 		requestLogger.setSource(DEFAULT_SOURCE);
-		requestLogger.setCtime(DateUtil.format(LocalDateTime.now(), NORM_DATETIME_PATTERN));
-		requestLogger.setLogday(DateUtil.getCurrentDate());
+		requestLogger.setCtime(DateUtils.format(LocalDateTime.now(), NORM_DATETIME_PATTERN));
+		requestLogger.setLogday(DateUtils.getCurrentDate());
 
-		Ip2regionSearcher ip2regionSearcher = ContextUtil.getBean(Ip2regionSearcher.class, true);
+		Ip2regionSearcher ip2regionSearcher = ContextUtils.getBean(Ip2regionSearcher.class, true);
 		if (ip2regionSearcher != null) {
 			requestLogger.setLocation(ip2regionSearcher.getAddressAndIsp(ip));
 		} else {
-			requestLogger.setLocation(IPUtil.getCityInfo(ip));
+			requestLogger.setLocation(IpUtils.getCityInfo(ip));
 		}
 
 		String uaStr = request.getHeader("user-agent");
 		UserAgent userAgent = UserAgentUtil.parse(uaStr);
-		requestLogger.setOs(JsonUtil.toJSONString(userAgent));
+		requestLogger.setOs(JsonUtils.toJSONString(userAgent));
 
 		setDescription(joinPoint, requestLoggerAnnotation, requestLogger);
 		return requestLogger;
@@ -318,7 +317,7 @@ public class RequestLoggerAspect {
 		try {
 			consumer.accept("");
 		} catch (Exception e) {
-			LogUtil.error("记录操作日志异常", e);
+			LogUtils.error("记录操作日志异常", e);
 			REQUEST_LOG_THREAD_LOCAL.remove();
 		}
 	}
@@ -337,7 +336,7 @@ public class RequestLoggerAspect {
 			}
 			return annotation;
 		} catch (Exception e) {
-			LogUtil.error("获取 {}.{} 的 @RequestOperateLog 注解失败", e,
+			LogUtils.error("获取 {}.{} 的 @RequestOperateLog 注解失败", e,
 				point.getSignature().getDeclaringTypeName(),
 				point.getSignature().getName());
 			return null;
@@ -368,7 +367,7 @@ public class RequestLoggerAspect {
 		Operation operation = AnnotationUtils.findAnnotation(((MethodSignature)joinPoint.getSignature()).getMethod(), Operation.class);
 		if (operation != null) {
 			String summary = operation.summary();
-			if (StringUtil.isNotBlank(summary)) {
+			if (StringUtils.isNotBlank(summary)) {
 				controllerDescription.append("-").append(summary);
 			}
 
@@ -378,7 +377,7 @@ public class RequestLoggerAspect {
 			}
 
 			String description = operation.description();
-			if (StringUtil.isNotBlank(description)) {
+			if (StringUtils.isNotBlank(description)) {
 				controllerDescription.append("-").append(description);
 			}
 		}
@@ -391,7 +390,7 @@ public class RequestLoggerAspect {
 			controllerMethodDescription = getValBySpEl(controllerMethodDescription, methodSignature, args);
 		}
 
-		if (requestLoggerAnnotation.controllerApiValue() && StringUtil.isNotBlank(controllerDescription)) {
+		if (requestLoggerAnnotation.controllerApiValue() && StringUtils.isNotBlank(controllerDescription)) {
 			requestLogger.setDescription(controllerDescription + "-" + controllerMethodDescription);
 		} else {
 			requestLogger.setDescription(controllerDescription.toString());
@@ -418,7 +417,7 @@ public class RequestLoggerAspect {
 				return value == null ? spEl : value.toString();
 			}
 		} catch (Exception e) {
-			LogUtil.error("解析操作日志的el表达式出错", e);
+			LogUtils.error("解析操作日志的el表达式出错", e);
 		}
 		return spEl;
 	}

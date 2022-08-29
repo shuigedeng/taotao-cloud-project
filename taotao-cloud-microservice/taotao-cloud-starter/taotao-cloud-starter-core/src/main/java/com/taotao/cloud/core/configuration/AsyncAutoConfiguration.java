@@ -18,8 +18,7 @@ package com.taotao.cloud.core.configuration;
 import com.alibaba.ttl.TtlCallable;
 import com.alibaba.ttl.TtlRunnable;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.core.decorator.ContextDecorator;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.properties.AsyncProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Map;
@@ -36,7 +35,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskDecorator;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -65,12 +63,12 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(AsyncAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(AsyncAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Override
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-		return (ex, method, params) -> LogUtil
+		return (ex, method, params) -> LogUtils
 			.error(ex, "AsyncUncaughtExceptionHandler {} class: {} method: {} params: {}",
 				asyncProperties.getThreadNamePrefix(),
 				method.getDeclaringClass().getName(),
@@ -163,7 +161,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(e, "[警告] [{}] 捕获错误", asyncProperties.getThreadNamePrefix());
+				LogUtils.error(e, "[警告] [{}] 捕获错误", asyncProperties.getThreadNamePrefix());
 			}
 
 			if (lastUncaughtExceptionHandler != null) {
@@ -231,7 +229,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 			StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 2];
 
-			LogUtil.info(
+			LogUtils.info(
 				"className[{}] methodName[{}] lineNumber[{}] threadNamePrefix[{}] method[{}]  taskCount[{}] completedTaskCount[{}] activeCount[{}] queueSize[{}]",
 				stackTraceElement.getClassName(),
 				stackTraceElement.getMethodName(),

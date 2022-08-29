@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.common.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.common.model.VerificationCodeTypeGenerate;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
@@ -92,7 +92,7 @@ public class VerificationCodeAutoConfiguration {
 	public VerificationCodeRepository verificationCodeMemoryRepository(
 		VerificationCodeMemoryRepositoryProperties config) {
 		VerificationCodeRepository repository = new VerificationCodeMemoryRepository(config);
-		LogUtil.debug("create VerificationCodeRepository: Memory");
+		LogUtils.debug("create VerificationCodeRepository: Memory");
 		return repository;
 	}
 
@@ -109,7 +109,7 @@ public class VerificationCodeAutoConfiguration {
 		VerificationCodeRepository repository = new VerificationCodeRedisRepository(
 			redisRepository,
 			objectMapper);
-		LogUtil.debug("create VerificationCodeRepository: Redis");
+		LogUtils.debug("create VerificationCodeRepository: Redis");
 		return repository;
 	}
 }

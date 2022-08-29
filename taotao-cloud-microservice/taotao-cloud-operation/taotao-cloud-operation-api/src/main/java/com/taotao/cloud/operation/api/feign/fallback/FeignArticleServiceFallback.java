@@ -16,7 +16,7 @@
 package com.taotao.cloud.operation.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.operation.api.feign.IFeignArticleService;
 import com.taotao.cloud.operation.api.web.vo.ArticleVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -33,7 +33,7 @@ public class FeignArticleServiceFallback implements FallbackFactory<IFeignArticl
 		return new IFeignArticleService() {
 			@Override
 			public Result<ArticleVO> getMemberSecurityUser(Long id) {
-				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
+				LogUtils.error("调用getMemberSecurityUser异常：{}", throwable, id);
 				return Result.fail(null, 500);
 			}
 		};

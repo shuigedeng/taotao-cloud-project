@@ -19,7 +19,7 @@ package com.taotao.cloud.third.client.configuration;
 import com.dtflys.forest.springboot.annotation.ForestScan;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.third.client.properties.ForestProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -43,6 +43,6 @@ public class ForestAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ForestAutoConfiguration.class, StarterName.LAYTPL_STARTER);
+		LogUtils.started(ForestAutoConfiguration.class, StarterName.LAYTPL_STARTER);
 	}
 }

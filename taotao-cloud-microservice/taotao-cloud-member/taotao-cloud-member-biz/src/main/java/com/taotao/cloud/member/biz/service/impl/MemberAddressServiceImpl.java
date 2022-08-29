@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.mapper.MemberAddressMapper;
 import com.taotao.cloud.member.biz.service.MemberAddressService;
@@ -33,14 +33,14 @@ public class MemberAddressServiceImpl extends
 	@Override
 	public MemberAddress getMemberAddress(Long id) {
 		return this.getOne(new LambdaQueryWrapper<MemberAddress>()
-			.eq(MemberAddress::getMemberId, SecurityUtil.getUserId())
+			.eq(MemberAddress::getMemberId, SecurityUtils.getUserId())
 			.eq(MemberAddress::getId, id));
 	}
 
 	@Override
 	public MemberAddress getDefaultMemberAddress() {
 		return this.getOne(new LambdaQueryWrapper<MemberAddress>()
-			.eq(MemberAddress::getMemberId, SecurityUtil.getUserId())
+			.eq(MemberAddress::getMemberId, SecurityUtils.getUserId())
 			.eq(MemberAddress::getDefaulted, true));
 	}
 
@@ -60,7 +60,7 @@ public class MemberAddressServiceImpl extends
 		MemberAddress originalMemberAddress = this.getMemberAddress(
 			memberAddress.getId());
 
-		if (originalMemberAddress != null && originalMemberAddress.getMemberId().equals(SecurityUtil.getUserId())) {
+		if (originalMemberAddress != null && originalMemberAddress.getMemberId().equals(SecurityUtils.getUserId())) {
 			if (memberAddress.getDefaulted() == null) {
 				memberAddress.setDefaulted(false);
 			}

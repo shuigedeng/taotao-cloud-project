@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.springcloud.service.impl;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.gateway.springcloud.rule.BlackList;
 import com.taotao.cloud.gateway.springcloud.rule.RuleConstant;
 import com.taotao.cloud.gateway.springcloud.service.IRuleCacheService;
@@ -34,7 +34,7 @@ public class RuleCacheServiceImpl implements IRuleCacheService {
 		String key = StringUtils.isNotBlank(blackList.getIp()) ? RuleConstant
 			.getBlackListCacheKey(blackList.getIp())
 			: RuleConstant.getBlackListCacheKey();
-		repository.sSet(key, JsonUtil.toJSONString(blackList));
+		repository.sSet(key, JsonUtils.toJSONString(blackList));
 	}
 
 	@Override
@@ -42,6 +42,6 @@ public class RuleCacheServiceImpl implements IRuleCacheService {
 		String key = StringUtils.isNotBlank(blackList.getIp()) ? RuleConstant
 			.getBlackListCacheKey(blackList.getIp())
 			: RuleConstant.getBlackListCacheKey();
-		repository.setRemove(key, JsonUtil.toJSONString(blackList));
+		repository.setRemove(key, JsonUtils.toJSONString(blackList));
 	}
 }

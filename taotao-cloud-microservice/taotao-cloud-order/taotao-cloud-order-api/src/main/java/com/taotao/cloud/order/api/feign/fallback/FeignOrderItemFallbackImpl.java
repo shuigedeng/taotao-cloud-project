@@ -2,7 +2,7 @@ package com.taotao.cloud.order.api.feign.fallback;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.web.dto.order_item.OrderItemSaveDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
@@ -21,7 +21,7 @@ public class FeignOrderItemFallbackImpl implements FallbackFactory<IFeignOrderIt
 		return new IFeignOrderItemService() {
 			@Override
 			public Result<Boolean> saveOrderItem(OrderItemSaveDTO orderItemSaveDTO) {
-				LogUtil.error("调用saveOrderItem异常：{0}", throwable, orderItemSaveDTO);
+				LogUtils.error("调用saveOrderItem异常：{0}", throwable, orderItemSaveDTO);
 				return Result.fail(null, ResultEnum.ERROR.getCode());
 			}
 

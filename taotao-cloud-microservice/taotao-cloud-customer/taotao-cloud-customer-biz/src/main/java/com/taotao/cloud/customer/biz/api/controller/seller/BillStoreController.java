@@ -5,8 +5,8 @@ import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
@@ -49,7 +49,7 @@ public class BillStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
 	public Result<PageModel<BillListVO>> getByPage(BillPageQuery billPageQuery) {
-		billPageQuery.setStoreId(SecurityUtil.getCurrentUser().getStoreId());
+		billPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		IPage<BillListVO> billListVOIPage = billService.billPage(billPageQuery);
 		return Result.success(PageModel.convertMybatisPage(billListVOIPage, BillListVO.class));
 	}
@@ -98,7 +98,7 @@ public class BillStoreController {
 	@GetMapping(value = "/downLoad/{id}")
 	public void downLoadDeliverExcel(@PathVariable String id) {
 		OperationalJudgment.judgment(billService.getById(id));
-		HttpServletResponse response = RequestUtil.getResponse();
+		HttpServletResponse response = RequestUtils.getResponse();
 		billService.download(response, id);
 
 	}

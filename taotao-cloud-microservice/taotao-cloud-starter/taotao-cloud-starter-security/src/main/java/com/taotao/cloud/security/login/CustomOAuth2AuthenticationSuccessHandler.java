@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.security.login;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +43,7 @@ public class CustomOAuth2AuthenticationSuccessHandler implements AuthenticationS
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException, ServletException {
-		LogUtil.info("用户登录成功 {}", authentication);
+		LogUtils.info("用户登录成功 {}", authentication);
 
 		OAuth2AuthenticationToken oauth2Authentication = (OAuth2AuthenticationToken) authentication;
 

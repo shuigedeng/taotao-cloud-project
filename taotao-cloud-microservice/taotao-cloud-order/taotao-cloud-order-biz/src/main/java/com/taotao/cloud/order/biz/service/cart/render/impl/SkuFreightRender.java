@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.api.web.vo.cart.CartSkuVO;
@@ -124,8 +124,8 @@ public class SkuFreightRender implements ICartRenderStep {
 
 			//计算 续重 / 续件 价格
 			BigDecimal continuedCount = count - template.getFirstCompany();
-			return CurrencyUtil.add(finalFreight,
-				CurrencyUtil.mul(Math.ceil(continuedCount / template.getContinuedCompany()),
+			return CurrencyUtils.add(finalFreight,
+				CurrencyUtils.mul(Math.ceil(continuedCount / template.getContinuedCompany()),
 					template.getContinuedPrice()));
 		} catch (Exception e) {
 			return 0D;

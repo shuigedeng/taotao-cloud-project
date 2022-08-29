@@ -11,9 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.web.dto.order.OrderComplaintDTO;
@@ -118,7 +118,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	@Override
 	public OrderComplaint addOrderComplain(OrderComplaintDTO orderComplaintDTO) {
 		try {
-			SecurityUser currentUser = SecurityUtil.getCurrentUser();
+			SecurityUser currentUser = SecurityUtils.getCurrentUser();
 			//查询订单信息
 			OrderDetailVO orderDetailVO = orderService.queryDetail(orderComplaintDTO.getOrderSn());
 			List<OrderItemVO> orderItems = orderDetailVO.getOrderItems();
@@ -133,7 +133,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 
 			//新建交易投诉
 			OrderComplaint orderComplaint = new OrderComplaint();
-			BeanUtil.copyProperties(orderComplaintDTO, orderComplaint);
+			BeanUtils.copyProperties(orderComplaintDTO, orderComplaint);
 
 			//获取商品规格信息
 			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());

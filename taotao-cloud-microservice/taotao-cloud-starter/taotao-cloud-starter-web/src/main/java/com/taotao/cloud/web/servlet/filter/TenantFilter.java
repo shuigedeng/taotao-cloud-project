@@ -19,15 +19,15 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
-import com.taotao.cloud.common.utils.servlet.TraceUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.MDC;
+
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -41,7 +41,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class TenantFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return RequestUtil.excludeActuator(request);
+		return RequestUtils.excludeActuator(request);
 	}
 
 	@Override
@@ -57,18 +57,18 @@ public class TenantFilter extends OncePerRequestFilter {
 			//保存租户id
 			if (StringUtil.isNotBlank(tenantId)) {
 				TenantContextHolder.setTenant(tenantId);
-				TraceUtil.mdcTenantId(tenantId);
+				TraceUtils.mdcTenantId(tenantId);
 			} else {
 				if (StringUtil.isBlank(TenantContextHolder.getTenant())) {
 					TenantContextHolder.setTenant(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
-					TraceUtil.mdcTenantId(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
+					TraceUtils.mdcTenantId(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
 				}
 			}
 
 			filterChain.doFilter(request, response);
 		} finally {
 			TenantContextHolder.clear();
-			TraceUtil.mdcRemoveTenantId();
+			TraceUtils.mdcRemoveTenantId();
 		}
 	}
 }

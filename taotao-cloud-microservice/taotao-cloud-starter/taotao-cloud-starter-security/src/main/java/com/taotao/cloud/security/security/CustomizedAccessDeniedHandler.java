@@ -16,8 +16,8 @@
 package com.taotao.cloud.security.security;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +37,7 @@ public class CustomizedAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 		AccessDeniedException accessDeniedException) throws IOException {
 
-		LogUtil.error("用户权限不足", accessDeniedException);
-		ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
+		LogUtils.error("用户权限不足", accessDeniedException);
+		ResponseUtils.fail(response, ResultEnum.FORBIDDEN);
 	}
 }

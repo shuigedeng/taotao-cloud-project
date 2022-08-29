@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.biz.service.cart.render;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
@@ -123,7 +123,7 @@ public class TradeBuilder {
 						render.render(tradeDTO);
 					}
 				} catch (Exception e) {
-					LogUtil.error("购物车{}渲染异常：", render.getClass(), e);
+					LogUtils.error("购物车{}渲染异常：", render.getClass(), e);
 				}
 			}
 		}

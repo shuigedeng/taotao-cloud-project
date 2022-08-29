@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.api.controller.seller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.web.dto.StoreGoodsLabelDTO;
 import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelInfoVO;
 import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
@@ -50,7 +50,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<List<StoreGoodsLabelVO>> list() {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		return Result.success(storeGoodsLabelService.listByStoreId(storeId));
 	}
 

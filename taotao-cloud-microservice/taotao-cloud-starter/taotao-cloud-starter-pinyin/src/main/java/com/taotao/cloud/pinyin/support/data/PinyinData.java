@@ -1,7 +1,7 @@
 package com.taotao.cloud.pinyin.support.data;
 
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.spi.IPinyinData;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +30,7 @@ public class PinyinData implements IPinyinData {
     @Override
     public String shengMu(String pinyinNormal) {
         if(isZeroShengMu(pinyinNormal)) {
-            return StringUtil.EMPTY;
+            return StringUtils.EMPTY;
         }
 
         final String prefixDouble = pinyinNormal.substring(0, 2);

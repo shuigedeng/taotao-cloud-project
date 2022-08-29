@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.core.launch;
 
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
-import org.apache.commons.io.Charsets;
 
 /**
  * 替换 系统 System.err 和 System.out 为log
@@ -59,7 +58,7 @@ public class LogPrintStream extends PrintStream {
 		try {
 			return new LogPrintStream(isError);
 		} catch (UnsupportedEncodingException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -72,9 +71,9 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public void print(String s) {
 		if (error) {
-			LogUtil.error(s);
+			LogUtils.error(s);
 		} else {
-			LogUtil.info(s);
+			LogUtils.info(s);
 		}
 	}
 
@@ -96,9 +95,9 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public void println(String x) {
 		if (error) {
-			LogUtil.error(x);
+			LogUtils.error(x);
 		} else {
-			LogUtil.info(x);
+			LogUtils.info(x);
 		}
 	}
 
@@ -113,9 +112,9 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public PrintStream printf(String format, Object... args) {
 		if (error) {
-			LogUtil.error(String.format(format, args));
+			LogUtils.error(String.format(format, args));
 		} else {
-			LogUtil.info(String.format(format, args));
+			LogUtils.info(String.format(format, args));
 		}
 		return this;
 	}
@@ -132,9 +131,9 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public PrintStream printf(Locale l, String format, Object... args) {
 		if (error) {
-			LogUtil.error(String.format(l, format, args));
+			LogUtils.error(String.format(l, format, args));
 		} else {
-			LogUtil.info(String.format(l, format, args));
+			LogUtils.info(String.format(l, format, args));
 		}
 		return this;
 	}

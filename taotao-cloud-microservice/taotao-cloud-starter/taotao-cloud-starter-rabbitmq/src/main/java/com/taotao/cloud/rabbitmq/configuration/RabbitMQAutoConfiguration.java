@@ -16,7 +16,7 @@
 package com.taotao.cloud.rabbitmq.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.rabbitmq.producer.FastBuildRabbitMqProducer;
 import com.taotao.cloud.rabbitmq.properties.RabbitMQProperties;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -45,19 +45,19 @@ public class RabbitMQAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RabbitMQAutoConfiguration.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(RabbitMQAutoConfiguration.class, StarterName.RABBITMQ_STARTER);
 	}
 
 	@Bean
 	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-		LogUtil.started(RabbitTemplate.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(RabbitTemplate.class, StarterName.RABBITMQ_STARTER);
 		return new RabbitTemplate(connectionFactory);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public ConnectionFactory connectionFactory(RabbitMQProperties rabbitMqProperties) {
-		LogUtil.started(ConnectionFactory.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(ConnectionFactory.class, StarterName.RABBITMQ_STARTER);
 		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
 		connectionFactory.setAddresses(rabbitMqProperties.getAddresses());
 		connectionFactory.setUsername(rabbitMqProperties.getUsername());
@@ -70,7 +70,7 @@ public class RabbitMQAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean
 	public FastBuildRabbitMqProducer fastRabbitMqProducer(ConnectionFactory connectionFactory) {
-		LogUtil.started(FastBuildRabbitMqProducer.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(FastBuildRabbitMqProducer.class, StarterName.RABBITMQ_STARTER);
 		return new FastBuildRabbitMqProducer(connectionFactory);
 	}
 }

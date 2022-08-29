@@ -52,7 +52,7 @@ import com.nepxion.banner.DescriptionBanner;
 import com.nepxion.banner.LogoBanner;
 import com.taobao.text.Color;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.version.SpringCloudAlibabaVersion;
 import com.taotao.cloud.core.version.SpringCloudDependenciesVersion;
 import com.taotao.cloud.core.version.SpringCloudVersion;
@@ -81,7 +81,7 @@ public class BannerInitializer implements
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		LogUtil.started(BannerInitializer.class, StarterName.CORE_STARTER);
+		LogUtils.started(BannerInitializer.class, StarterName.CORE_STARTER);
 
 		if (!(applicationContext instanceof AnnotationConfigApplicationContext)) {
 			ConfigurableEnvironment environment = applicationContext.getEnvironment();

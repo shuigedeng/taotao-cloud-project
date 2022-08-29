@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.web.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.web.vo.aftersale.AfterSaleVO;
@@ -59,7 +59,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<AfterSaleVO>> getByPage(AfterSalePageQuery searchParams) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
 		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(searchParams);
 		return Result.success(PageModel.convertMybatisPage(afterSalePages, AfterSaleVO.class));
@@ -70,7 +70,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
 	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
 		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
 		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSalesToAfterSaleVOs(afterSales));

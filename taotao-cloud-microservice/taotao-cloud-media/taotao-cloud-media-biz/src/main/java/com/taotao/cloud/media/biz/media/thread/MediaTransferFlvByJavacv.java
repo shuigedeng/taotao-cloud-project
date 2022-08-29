@@ -1,6 +1,6 @@
 package com.taotao.cloud.media.biz.media.thread;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.ClientType;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.service.MediaService;
@@ -143,11 +143,11 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 
 		try {
 			grabber.start();
-			LogUtil.info("\r\n{}\r\n启动拉流器成功", cameraDto.getUrl());
+			LogUtils.info("\r\n{}\r\n启动拉流器成功", cameraDto.getUrl());
 			return grabberStatus = true;
 		} catch (Exception e) {
 			MediaService.cameras.remove(cameraDto.getMediaKey());
-			LogUtil.error("\r\n{}\r\n启动拉流器失败，网络超时或视频源不可用", cameraDto.getUrl());
+			LogUtils.error("\r\n{}\r\n启动拉流器失败，网络超时或视频源不可用", cameraDto.getUrl());
 //			e.printStackTrace();
 		}
 		return grabberStatus = false;
@@ -186,7 +186,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 				recorder.start();
 				return recorderStatus = true;
 			} catch (org.bytedeco.javacv.FrameRecorder.Exception e1) {
-				LogUtil.info("启动转码录制器失败", e1);
+				LogUtils.info("启动转码录制器失败", e1);
 				MediaService.cameras.remove(cameraDto.getMediaKey());
 				e1.printStackTrace();
 			}
@@ -198,7 +198,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 				recorder.start(grabber.getFormatContext());
 				return recorderStatus = true;
 			} catch (org.bytedeco.javacv.FrameRecorder.Exception e) {
-				LogUtil.warn("\r\n{}\r\n启动转复用录制器失败", cameraDto.getUrl());
+				LogUtils.warn("\r\n{}\r\n启动转复用录制器失败", cameraDto.getUrl());
 				// 如果转复用失败，则自动切换到转码模式
 				transferFlag = false;
 				if (recorder != null) {
@@ -208,10 +208,10 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 					}
 				}
 				if (createTransterOrRecodeRecorder()) {
-					LogUtil.error("\r\n{}\r\n切换到转码模式", cameraDto.getUrl());
+					LogUtils.error("\r\n{}\r\n切换到转码模式", cameraDto.getUrl());
 					return true;
 				}
-				LogUtil.error("\r\n{}\r\n切换转码模式失败", cameraDto.getUrl());
+				LogUtils.error("\r\n{}\r\n切换转码模式失败", cameraDto.getUrl());
 				e.printStackTrace();
 			}
 		}
@@ -249,7 +249,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 		try {
 			grabber.flush();
 		} catch (Exception e) {
-			LogUtil.info("清空拉流器缓存失败", e);
+			LogUtils.info("清空拉流器缓存失败", e);
 			e.printStackTrace();
 		}
 		if (header == null) {
@@ -283,7 +283,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 					if ((System.currentTimeMillis() - startGrab) > 5000) {
 //						doReConnect();
 //						continue;
-						LogUtil.info("\r\n{}\r\n视频流网络异常>>>", cameraDto.getUrl());
+						LogUtils.info("\r\n{}\r\n视频流网络异常>>>", cameraDto.getUrl());
 						closeMedia();
 						break;
 					}
@@ -308,7 +308,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 					if ((System.currentTimeMillis() - startGrab) > 5000) {
 //						doReConnect();
 //						continue;
-						LogUtil.info("\r\n{}\r\n视频流网络异常>>>", cameraDto.getUrl());
+						LogUtils.info("\r\n{}\r\n视频流网络异常>>>", cameraDto.getUrl());
 						closeMedia();
 						break;
 					}
@@ -359,7 +359,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 		} finally {
 			closeMedia();
 		}
-		LogUtil.info("关闭媒体流-javacv，{} ", cameraDto.getUrl());
+		LogUtils.info("关闭媒体流-javacv，{} ", cameraDto.getUrl());
 	}
 
 	/**
@@ -401,7 +401,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 		if (hcSize != newHcSize || wcSize != newWcSize) {
 			hcSize = newHcSize;
 			wcSize = newWcSize;
-			LogUtil.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize,
+			LogUtils.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize,
 				newWcSize);
 		}
 

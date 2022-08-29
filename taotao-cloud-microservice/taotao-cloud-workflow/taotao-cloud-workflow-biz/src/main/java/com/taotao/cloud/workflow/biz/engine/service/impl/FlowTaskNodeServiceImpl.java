@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
 import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskNodeMapper;
@@ -88,7 +88,7 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                     //至少2条下一节点一样,才有可能是分流
                     if (endCount.size() > 1) {
                         if (nodeNext.equals(entity.getNodeNext())) {
-                            ChildNodeList modelList = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+                            ChildNodeList modelList = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
                             //添加指向下一节点的id
                             List<String> nextEndList = endCount.stream().map(t -> t.getNodeCode()).collect(Collectors.toList());
                             nextEndList.remove(entity.getNodeCode());
@@ -101,7 +101,7 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                     }
                     //至少2条下一节点一样,才有可能是分流
                     if (nextNum.size() > 1) {
-                        ChildNodeList modelList = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+                        ChildNodeList modelList = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
                         //添加指向下一节点的id
                         List<String> nextEndList = nextNum.stream().map(t -> t.getNodeCode()).collect(Collectors.toList());
                         nextEndList.remove(entity.getNodeCode());

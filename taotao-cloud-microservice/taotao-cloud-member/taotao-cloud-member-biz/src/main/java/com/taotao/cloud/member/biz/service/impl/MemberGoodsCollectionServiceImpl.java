@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.member.api.web.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.biz.mapper.GoodsCollectionMapper;
@@ -31,7 +31,7 @@ public class MemberGoodsCollectionServiceImpl extends
 	@Override
 	public IPage<GoodsCollectionVO> goodsCollection(PageParam pageParam) {
 		QueryWrapper<GoodsCollectionVO> queryWrapper = Wrappers.query();
-		queryWrapper.eq("gc.member_id", SecurityUtil.getUserId());
+		queryWrapper.eq("gc.member_id", SecurityUtils.getUserId());
 		queryWrapper.groupBy("gc.id");
 		queryWrapper.orderByDesc("gc.create_time");
 		return this.baseMapper.goodsCollectionVOList(
@@ -41,7 +41,7 @@ public class MemberGoodsCollectionServiceImpl extends
 	@Override
 	public Boolean isCollection(Long skuId) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId());
+		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId());
 		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
 		return Optional.ofNullable(this.getOne(queryWrapper)).isPresent();
 	}
@@ -50,11 +50,11 @@ public class MemberGoodsCollectionServiceImpl extends
 	public Boolean addGoodsCollection(Long skuId) {
 		MemberGoodsCollection memberGoodsCollection = this.getOne(
 			new LambdaUpdateWrapper<MemberGoodsCollection>()
-				.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId())
+				.eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId())
 				.eq(MemberGoodsCollection::getSkuId, skuId));
 
 		if (memberGoodsCollection == null) {
-			memberGoodsCollection = new MemberGoodsCollection(SecurityUtil.getUserId(), skuId);
+			memberGoodsCollection = new MemberGoodsCollection(SecurityUtils.getUserId(), skuId);
 			return this.save(memberGoodsCollection);
 		}
 		throw new BusinessException("用户不存在");
@@ -63,7 +63,7 @@ public class MemberGoodsCollectionServiceImpl extends
 	@Override
 	public Boolean deleteGoodsCollection(Long skuId) {
 		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtil.getUserId());
+		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId());
 		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
 		return this.remove(queryWrapper);
 	}

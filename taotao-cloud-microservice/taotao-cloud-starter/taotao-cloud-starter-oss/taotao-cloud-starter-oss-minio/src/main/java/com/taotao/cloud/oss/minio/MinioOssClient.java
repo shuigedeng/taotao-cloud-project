@@ -10,7 +10,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.io.ByteStreams;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -20,7 +20,6 @@ import com.taotao.cloud.oss.common.model.download.DownloadCheckPoint;
 import com.taotao.cloud.oss.common.model.download.DownloadObjectStat;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.minio.MinioOssConfig;
 import io.minio.CopyObjectArgs;
 import io.minio.CopySource;
 import io.minio.GetObjectArgs;
@@ -284,7 +283,7 @@ public class MinioOssClient implements StandardOssClient {
 				ossInfo.setLength(Long.valueOf(headers.get(HttpHeaders.CONTENT_LENGTH)));
 				ossInfo.setUrl(minioOssConfig.getEndpoint() + "/" + bucketName + key);
 			} catch (Exception e) {
-				LogUtil.error("获取{}文件属性失败", key, e);
+				LogUtils.error("获取{}文件属性失败", key, e);
 			}
 		} else {
 			ossInfo = new DirectoryOssInfo();

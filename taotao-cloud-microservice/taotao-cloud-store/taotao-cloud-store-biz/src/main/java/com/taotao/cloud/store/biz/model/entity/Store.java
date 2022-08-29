@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.member.api.web.vo.MemberVO;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
@@ -118,7 +118,7 @@ public class Store extends BaseSuperEntity<Store, Long> {
 
 
 	public Store(MemberVO member, AdminStoreApplyDTO adminStoreApplyDTO) {
-		BeanUtil.copyProperties(adminStoreApplyDTO, this);
+		BeanUtils.copyProperties(adminStoreApplyDTO, this);
 
 		this.memberId = member.getId();
 		this.memberName = member.getUsername();

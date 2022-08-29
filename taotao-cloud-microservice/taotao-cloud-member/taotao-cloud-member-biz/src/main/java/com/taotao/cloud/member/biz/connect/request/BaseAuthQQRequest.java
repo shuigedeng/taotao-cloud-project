@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.connect.request;
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.utils.io.UrlBuilder;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
@@ -50,7 +50,7 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
 			throw new AuthException(object.getString("msg"));
 		}
 		String avatar = object.getString("figureurl_qq_2");
-		if (StringUtil.isEmpty(avatar)) {
+		if (StringUtils.isEmpty(avatar)) {
 			avatar = object.getString("figureurl_qq_1");
 		}
 
@@ -91,7 +91,7 @@ public class BaseAuthQQRequest extends BaseAuthRequest {
 		if (object.containsKey("unionid")) {
 			authToken.setUnionId(object.getString("unionid"));
 		}
-		return StringUtil.isEmpty(authToken.getUnionId()) ? authToken.getOpenId() : authToken.getUnionId();
+		return StringUtils.isEmpty(authToken.getUnionId()) ? authToken.getOpenId() : authToken.getUnionId();
 	}
 
 	/**

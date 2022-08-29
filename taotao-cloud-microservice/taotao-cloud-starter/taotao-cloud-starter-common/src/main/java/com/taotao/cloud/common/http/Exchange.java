@@ -17,8 +17,8 @@ package com.taotao.cloud.common.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -57,7 +57,7 @@ public class Exchange {
 		try (HttpResponse response = new HttpResponse(call.execute())) {
 			return func.apply(response);
 		} catch (IOException e) {
-			throw ExceptionUtil.unchecked(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -161,7 +161,7 @@ public class Exchange {
 	 * @return JsonNode
 	 */
 	public <T> T atJsonPathValue(String jsonPtrExpr, Class<T> valueType) {
-		return JsonUtil.convertValue(atJsonPath(jsonPtrExpr), valueType);
+		return JsonUtils.convertValue(atJsonPath(jsonPtrExpr), valueType);
 	}
 
 	/**

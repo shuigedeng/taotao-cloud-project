@@ -19,7 +19,7 @@ package com.taotao.cloud.xss.support;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.xss.properties.XssProperties;
 import com.taotao.cloud.xss.utils.XssUtil;
 
@@ -52,7 +52,7 @@ public class JacksonXssClean extends JsonDeserializer<String> {
 
 		if (XssHolder.isEnabled()) {
 			String value = xssCleaner.clean(XssUtil.trim(text, properties.getTrimText()));
-			LogUtil.debug("Json property value:{} cleaned up by xss, current value is:{}.", text, value);
+			LogUtils.debug("Json property value:{} cleaned up by xss, current value is:{}.", text, value);
 			return value;
 		} else {
 			return XssUtil.trim(text, properties.getTrimText());

@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.version;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -27,7 +27,7 @@ public class WebMvcRegistrationsConfig implements WebMvcRegistrations {
 			return WebMvcRegistrations.super.getRequestMappingHandlerMapping();
 		}
 
-		LogUtil.info(
+		LogUtils.info(
 			"【初始化配置-ApiVersionRequestMappingHandlerMapping】默认配置为true，当前环境为true：RESTful API接口版本控制，执行初始化 ...");
 		return new ApiVersionRequestMappingHandlerMapping(apiVersionProperties);
 	}

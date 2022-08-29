@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.xss.support;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import java.nio.charset.StandardCharsets;
 
 import com.taotao.cloud.xss.properties.XssProperties;
@@ -45,7 +45,7 @@ public class DefaultXssCleaner implements XssCleaner {
 	@Override
 	public String clean(String bodyHtml) {
 		// 1. 为空直接返回
-		if (StringUtil.isBlank(bodyHtml)) {
+		if (StringUtils.isBlank(bodyHtml)) {
 			return bodyHtml;
 		}
 

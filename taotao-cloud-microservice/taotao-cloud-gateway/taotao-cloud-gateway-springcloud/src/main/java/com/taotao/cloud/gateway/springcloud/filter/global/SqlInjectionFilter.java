@@ -24,8 +24,8 @@ package com.taotao.cloud.gateway.springcloud.filter.global;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.sql.SqlInjectionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.sql.SqlInjectionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.utils.WebFluxUtil;
 import io.netty.buffer.ByteBufAllocator;
 import java.net.URI;
@@ -66,7 +66,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-		LogUtil.debug("Global SQL Injection Filter in use!");
+		LogUtils.debug("Global SQL Injection Filter in use!");
 
 		ServerHttpRequest serverHttpRequest = exchange.getRequest();
 		HttpMethod method = serverHttpRequest.getMethod();
@@ -80,9 +80,9 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 				return chain.filter(exchange);
 			}
 
-			LogUtil.debug("The original request parameter is [{}]", rawQuery);
+			LogUtils.debug("The original request parameter is [{}]", rawQuery);
 			// 执行XSS清理
-			boolean isSQLInjection = SqlInjectionUtil.checkForGet(rawQuery);
+			boolean isSQLInjection = SqlInjectionUtils.checkForGet(rawQuery);
 
 			// 如果存在sql注入,直接拦截请求
 			if (isSQLInjection) {
@@ -104,10 +104,10 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 				boolean isSQLInjection;
 				if (WebFluxUtil.isJsonMediaType(contentType)) {
 					//如果MediaType是json才执行json方式验证
-					isSQLInjection = SqlInjectionUtil.checkForPost(bodyString);
+					isSQLInjection = SqlInjectionUtils.checkForPost(bodyString);
 				} else {
 					//form表单方式，需要走get请求
-					isSQLInjection = SqlInjectionUtil.checkForGet(bodyString);
+					isSQLInjection = SqlInjectionUtils.checkForGet(bodyString);
 				}
 
 				//  如果存在sql注入,直接拦截请求
@@ -187,7 +187,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 	}
 
 	private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
-		LogUtil.error("Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
+		LogUtils.error("Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
 		return WebFluxUtil.writeJsonResponse(exchange.getResponse(), Result.fail(ResultEnum.SQL_INJECTION_REQUEST));
 	}
 

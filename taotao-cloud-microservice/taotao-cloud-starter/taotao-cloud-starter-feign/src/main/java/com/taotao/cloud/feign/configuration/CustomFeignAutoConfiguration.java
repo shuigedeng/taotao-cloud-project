@@ -28,8 +28,8 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.FeignErrorException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.Inner;
 import com.taotao.cloud.feign.endpoint.FeignClientEndpoint;
 import com.taotao.cloud.feign.formatter.DateFormatRegister;
@@ -93,7 +93,7 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CustomFeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtils.started(CustomFeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
 	@Bean
@@ -196,7 +196,7 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 						Object object = super.decode(response, type);
 						if (object instanceof Result<?> result) {
 							if (result.code() != 200) {
-								LogUtil.error("调用Feign接口出现异常，接口:{}, 异常: {}", response.request().url(), result.errorMsg());
+								LogUtils.error("调用Feign接口出现异常，接口:{}, 异常: {}", response.request().url(), result.errorMsg());
 								throw new FeignErrorException(result.code(), result.errorMsg());
 							}
 							return result;
@@ -217,11 +217,11 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 
 			try {
 				String res = Util.toString(response.body().asReader(StandardCharsets.UTF_8));
-				LogUtil.error("feign调用异常{}", res);
-				FeignExceptionResult feignExceptionResult = JsonUtil.toObject(res, FeignExceptionResult.class);
+				LogUtils.error("feign调用异常{}", res);
+				FeignExceptionResult feignExceptionResult = JsonUtils.toObject(res, FeignExceptionResult.class);
 				errorContent = feignExceptionResult.getMsg();
 			} catch (Exception e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 			return new FeignErrorException(500, errorContent);
 		}
@@ -241,7 +241,7 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 			if (Inner.class.isInstance(methodAnnotation)) {
 				Inner inner = findMergedAnnotation(method, Inner.class);
 				if (ObjectUtils.isNotEmpty(inner)) {
-					LogUtil.debug("Found inner annotation on Feign interface, add header!");
+					LogUtils.debug("Found inner annotation on Feign interface, add header!");
 					data.template().header(CommonConstant.TAOTAO_CLOUD_FROM_INNER, "true");
 				}
 			}

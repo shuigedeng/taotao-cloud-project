@@ -9,7 +9,7 @@ import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.execl.core.large.LargeData;
 import com.taotao.cloud.common.execl.demo.write.DemoData;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +42,7 @@ public class Wirte {
 
     @Test
     public void simpleWrite() {
-        LogUtil.info("t5");
+        LogUtils.info("t5");
         // 写法1
         String fileName = TestFileUtil.getPath() + "t22" + System.currentTimeMillis() + ".xlsx";
         // 这里 需要指定写用哪个class去读，然后写到第一个sheet，名字为模板 然后文件流会自动关闭

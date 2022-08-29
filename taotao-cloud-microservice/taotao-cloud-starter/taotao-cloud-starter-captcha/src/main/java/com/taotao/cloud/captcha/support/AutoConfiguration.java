@@ -19,7 +19,7 @@ package com.taotao.cloud.captcha.support;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
 import com.taotao.cloud.captcha.support.core.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.support.core.provider.ResourceProvider;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import javax.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,14 +39,14 @@ public class AutoConfiguration {
 
 	@PostConstruct
 	public void postConstruct() {
-		LogUtil.info("Starter [Engine Captcha Starter] Auto Configure.");
+		LogUtils.info("Starter [Engine Captcha Starter] Auto Configure.");
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public ResourceProvider resourceProvider(CaptchaProperties captchaProperties) {
 		ResourceProvider resourceProvider = new ResourceProvider(captchaProperties);
-		LogUtil.info("[Resource Provider] Auto Configure.");
+		LogUtils.info("[Resource Provider] Auto Configure.");
 		return resourceProvider;
 	}
 
@@ -54,7 +54,7 @@ public class AutoConfiguration {
 	@ConditionalOnMissingBean
 	public CaptchaRendererFactory captchaRendererFactory() {
 		CaptchaRendererFactory captchaRendererFactory = new CaptchaRendererFactory();
-		LogUtil.info("Bean [Captcha Renderer Factory] Auto Configure.");
+		LogUtils.info("Bean [Captcha Renderer Factory] Auto Configure.");
 		return captchaRendererFactory;
 	}
 }

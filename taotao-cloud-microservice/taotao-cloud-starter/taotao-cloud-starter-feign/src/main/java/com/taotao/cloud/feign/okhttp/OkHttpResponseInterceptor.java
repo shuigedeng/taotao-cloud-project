@@ -16,12 +16,11 @@
 
 package com.taotao.cloud.feign.okhttp;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.MediaType;
 
@@ -47,7 +46,7 @@ public class OkHttpResponseInterceptor implements Interceptor {
             ResponseBody responseBody = response.body();
             if (responseBody != null && responseBody.contentLength() != 0 && Objects.requireNonNull(responseBody.contentType()).type().equals(MediaType.APPLICATION_JSON_VALUE)) {
                 String str = responseBody.string();
-	            LogUtil.info("sdfasdf");
+	            LogUtils.info("sdfasdf");
                 //JsonObject jsonObject = JsonParser.parseString(str).getAsJsonObject();
                 //String data = jsonObject.get("data").getAsString();
                 //if (StringUtils.isNotBlank(data)) {

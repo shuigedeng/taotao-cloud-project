@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.promotion.api.web.dto.KanjiaActivityDTO;
@@ -171,7 +171,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
         BigDecimal price = this.getKanjiaPrice(kanJiaActivityGoods, kanjiaActivity.getSurplusPrice());
         kanjiaActivityDTO.setKanjiaPrice(price);
         //计算剩余金额
-        kanjiaActivityDTO.setSurplusPrice(CurrencyUtil.sub(kanjiaActivity.getSurplusPrice(), price));
+        kanjiaActivityDTO.setSurplusPrice(CurrencyUtils.sub(kanjiaActivity.getSurplusPrice(), price));
         kanjiaActivityDTO.setKanjiaMemberId(member.getId());
         kanjiaActivityDTO.setKanjiaMemberName(member.getUsername());
         kanjiaActivityDTO.setKanjiaMemberFace(member.getFace());

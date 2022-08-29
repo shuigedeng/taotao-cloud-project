@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dubbo.treadpool;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.threadpool.ThreadPool;
@@ -38,8 +38,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CustomThreadPool implements ThreadPool {
 	@Override
 	public Executor getExecutor(URL url) {
-		LogUtil.info("Dubbo CustomThreadPool getExecutor activate ------------------------------");
-		LogUtil.info(url.toFullString());
+		LogUtils.info("Dubbo CustomThreadPool getExecutor activate ------------------------------");
+		LogUtils.info(url.toFullString());
 
 		AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor executor = new AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor();
 		executor.setCorePoolSize(10);

@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.api.controller.seller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.web.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.entity.Member;
@@ -36,7 +36,7 @@ public class StoreUserController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/info")
 	public Result<MemberVO> getUserInfo() {
-		Member member = memberService.findByUsername(SecurityUtil.getUsername());
+		Member member = memberService.findByUsername(SecurityUtils.getUsername());
 		member.setPassword(null);
 		return Result.success(IMemberMapStruct.INSTANCE.memberToMemberVO(member));
 	}

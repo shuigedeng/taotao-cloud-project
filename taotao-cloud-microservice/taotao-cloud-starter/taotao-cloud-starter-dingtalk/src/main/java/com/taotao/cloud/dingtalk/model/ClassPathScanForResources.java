@@ -17,7 +17,7 @@ package com.taotao.cloud.dingtalk.model;
 
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public final class ClassPathScanForResources {
 		try {
 			return resolver.getResources(packageSearchPath);
 		} catch (IOException ex) {
-			LogUtil.error(packageSearchPath, ex);
+			LogUtils.error(packageSearchPath, ex);
 			throw new DingerException(RESOURCE_CONFIG_EXCEPTION, packageSearchPath);
 		}
 	}
@@ -97,7 +97,7 @@ public final class ClassPathScanForResources {
 		for (Resource resource : resources) {
 			String resourceFilename = resource.getFilename();
 			if (!resource.isReadable()) {
-				LogUtil.debug("Ignored because not readable: {} ", resourceFilename);
+				LogUtils.debug("Ignored because not readable: {} ", resourceFilename);
 				continue;
 			}
 			try {
@@ -105,12 +105,12 @@ public final class ClassPathScanForResources {
 				ClassMetadata classMetadata = metadataReader.getClassMetadata();
 				Class<?> clazz = Class.forName(classMetadata.getClassName());
 				if (filterInterface && !clazz.isInterface()) {
-					LogUtil.debug("source class={} is interface and skip.", resourceFilename);
+					LogUtils.debug("source class={} is interface and skip.", resourceFilename);
 					continue;
 				}
 				classes.add(clazz);
 			} catch (IOException | ClassNotFoundException e) {
-				LogUtil.warn("resource={} read exception and message={}.", resourceFilename,
+				LogUtils.warn("resource={} read exception and message={}.", resourceFilename,
 					e.getMessage());
 				continue;
 			}

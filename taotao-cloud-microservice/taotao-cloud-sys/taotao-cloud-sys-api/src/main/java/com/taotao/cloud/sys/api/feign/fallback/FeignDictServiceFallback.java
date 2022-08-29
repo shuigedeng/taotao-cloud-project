@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import io.seata.core.context.RootContext;
@@ -18,7 +18,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 public class FeignDictServiceFallback implements FallbackFactory<IFeignDictService> {
 	@Override
 	public IFeignDictService create(Throwable throwable) {
-		LogUtil.info("throwablethrowablethrowablethrowablethrowable");
+		LogUtils.info("throwablethrowablethrowablethrowablethrowable");
 
 		return new IFeignDictService() {
 			@Override
@@ -28,7 +28,7 @@ public class FeignDictServiceFallback implements FallbackFactory<IFeignDictServi
 					try {
 						GlobalTransactionContext.reload(RootContext.getXID()).rollback();
 					} catch (TransactionException e) {
-						LogUtil.error(e);
+						LogUtils.error(e);
 					}
 				}
 

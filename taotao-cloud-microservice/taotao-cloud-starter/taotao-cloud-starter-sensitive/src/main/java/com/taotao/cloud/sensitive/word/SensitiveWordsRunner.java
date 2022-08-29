@@ -1,12 +1,11 @@
 package com.taotao.cloud.sensitive.word;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.List;
 import java.util.Objects;
 
-import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -31,7 +30,7 @@ public class SensitiveWordsRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) {
 		Object words = redisRepository.get(RedisConstant.SENSITIVE_WORDS_KEY);
 		if (Objects.nonNull(words)) {
-			LogUtil.info("系统初始化敏感词");
+			LogUtils.info("系统初始化敏感词");
 
 			List<String> sensitives = (List<String>) words;
 			if (sensitives.isEmpty()) {

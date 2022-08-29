@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.io.Closeable;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.codec.Charsets;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -254,7 +254,7 @@ public interface HttpClient extends Closeable {
 		@Override
 		public String toString() {
 			if (this.contentType == ContentType.APPLICATION_JSON) {
-				return JsonUtil.toJSONString(this.data);
+				return JsonUtils.toJSONString(this.data);
 			} else {
 				List<NameValuePair> tmp = new ArrayList<>();
 

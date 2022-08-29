@@ -3,7 +3,7 @@ package com.taotao.cloud.redis.delay.message;
 //import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.util.Map;
 import org.redisson.client.codec.StringCodec;
 import org.redisson.client.protocol.Decoder;
@@ -35,7 +35,7 @@ public class FastJsonCodec extends StringCodec {
         super(charset);
 
         this.encoder = object -> {
-            String jsonStr = JsonUtil.toJSONString(object);
+            String jsonStr = JsonUtils.toJSONString(object);
             return super.getValueEncoder().encode(jsonStr);
         };
 
@@ -43,11 +43,11 @@ public class FastJsonCodec extends StringCodec {
             byte[] result = new byte[buf.readableBytes()];
             buf.readBytes(result);
 	        String message = new String(result, StandardCharsets.UTF_8);
-	        JsonNode jsonNode = JsonUtil.parse(message);
+	        JsonNode jsonNode = JsonUtils.parse(message);
 
 	        assert jsonNode != null;
 	        String payload = jsonNode.get("payload").toString();
-	        Map<String, Object> headers = JsonUtil.readMap(jsonNode.get("headers").toString());
+	        Map<String, Object> headers = JsonUtils.readMap(jsonNode.get("headers").toString());
 
 	        //JsonNode payload = JsonUtil.parse(new String(result, StandardCharsets.UTF_8)).get("payload");
 	        //String payloadStr = payload.traverse(JsonUtil.MAPPER).readValueAs(String.class);

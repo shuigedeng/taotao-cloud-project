@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.logger.logging.config;
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.logger.logging.appender.Appender;
 import com.taotao.cloud.logger.logging.appender.ILoggingAppender;
 import com.taotao.cloud.logger.logging.appender.LoggingFileAppender;
@@ -145,7 +145,7 @@ public class MicaLoggingConfiguration {
 			Boolean lokiEnabled = environment.getProperty(MicaLoggingProperties.Loki.PREFIX + ".enabled", Boolean.class, Boolean.FALSE);
 
 			if (Appender.LOKI == appender) {
-				if (ObjectUtil.isFalse(lokiEnabled)) {
+				if (ObjectUtils.isFalse(lokiEnabled)) {
 					return ConditionOutcome.noMatch("Logging loki is not enabled.");
 				}
 				if (hasLokiDependencies(classLoader)) {
@@ -153,7 +153,7 @@ public class MicaLoggingConfiguration {
 				}
 				throw new IllegalStateException("Logging loki is enabled, please add com.github.loki4j loki-logback-appender dependencies.");
 			} else if (Appender.LOG_STASH == appender) {
-				if (ObjectUtil.isFalse(logStashEnabled)) {
+				if (ObjectUtils.isFalse(logStashEnabled)) {
 					return ConditionOutcome.noMatch("Logging logstash is not enabled.");
 				}
 				if (hasLogStashDependencies(classLoader)) {
@@ -163,7 +163,7 @@ public class MicaLoggingConfiguration {
 			} else if (Appender.FILE_JSON == appender) {
 				Boolean isUseJsonFormat = environment.getProperty(MicaLoggingProperties.Files.PREFIX + ".use-json-format", Boolean.class, Boolean.FALSE);
 				// 没有开启文件或者没有开启 json 格式化
-				if (ObjectUtil.isFalse(fileEnabled) || ObjectUtil.isFalse(isUseJsonFormat)) {
+				if (ObjectUtils.isFalse(fileEnabled) || ObjectUtils.isFalse(isUseJsonFormat)) {
 					return ConditionOutcome.noMatch("Logging json file is not enabled.");
 				}
 				if (hasLogStashDependencies(classLoader)) {
@@ -171,7 +171,7 @@ public class MicaLoggingConfiguration {
 				}
 				throw new IllegalStateException("Logging file json format is enabled, please add logstash-logback-encoder dependencies.");
 			} else if (Appender.FILE == appender) {
-				if (ObjectUtil.isFalse(fileEnabled)) {
+				if (ObjectUtils.isFalse(fileEnabled)) {
 					return ConditionOutcome.noMatch("Logging logstash is not enabled.");
 				}
 				return ConditionOutcome.match();

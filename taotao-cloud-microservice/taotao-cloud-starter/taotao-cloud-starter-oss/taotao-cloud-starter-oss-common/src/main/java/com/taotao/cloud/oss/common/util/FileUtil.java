@@ -21,8 +21,8 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.exception.UploadFileTypeException;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
@@ -32,7 +32,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -158,7 +157,7 @@ public class FileUtil {
 			file.transferTo(targetFile);
 			return path;
 		} catch (Exception e) {
-			LogUtil.error(UPLOAD_FILE_SAVE_ERROR_MESSAGE, e);
+			LogUtils.error(UPLOAD_FILE_SAVE_ERROR_MESSAGE, e);
 			return null;
 		}
 	}
@@ -261,7 +260,7 @@ public class FileUtil {
 	 */
 	public static String getExtension(MultipartFile file) {
 		String extension = cn.hutool.core.io.FileUtil.extName(file.getOriginalFilename());
-		if (StringUtil.isEmpty(extension)) {
+		if (StringUtils.isEmpty(extension)) {
 			extension = MimeTypeUtil.getExtension(Objects.requireNonNull(file.getContentType()));
 		}
 		return extension;
@@ -310,7 +309,7 @@ public class FileUtil {
 	public static byte[] getFileByteArray(File file) {
 		long fileSize = file.length();
 		if (fileSize > Integer.MAX_VALUE) {
-			LogUtil.error(UPLOAD_FILE_TOO_BIG);
+			LogUtils.error(UPLOAD_FILE_TOO_BIG);
 			return null;
 		}
 		byte[] buffer = null;
@@ -362,7 +361,7 @@ public class FileUtil {
 			multipartFile = new MockMultipartFile("file",
 				file.getName(), "text/plain", IOUtils.toByteArray(input));
 		} catch (IOException e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new RuntimeException(e);
 		}
 		return multipartFile;
@@ -373,7 +372,7 @@ public class FileUtil {
 		try {
 			FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
 		} catch (IOException e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new RuntimeException(e);
 		}
 		return file;
@@ -425,7 +424,7 @@ public class FileUtil {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error("压缩失败:{}", e.getMessage());
+			LogUtils.error("压缩失败:{}", e.getMessage());
 		}
 	}
 
@@ -529,14 +528,14 @@ public class FileUtil {
 				tempFile.mkdirs();
 			}
 			String newFileName = tempFile.getPath() + File.separator + fileName;
-			LogUtil.info("保存文件：" + newFileName);
+			LogUtils.info("保存文件：" + newFileName);
 			os = new FileOutputStream(newFileName);
 			// 开始读取
 			while ((len = inputStream.read(bs)) != -1) {
 				os.write(bs, 0, len);
 			}
 		} catch (Exception e) {
-			LogUtil.error("生成excel失败");
+			LogUtils.error("生成excel失败");
 		} finally {
 			// 完毕，关闭所有链接
 			try {
@@ -545,7 +544,7 @@ public class FileUtil {
 				}
 				inputStream.close();
 			} catch (IOException e) {
-				LogUtil.error("关闭链接失败" + e.getMessage());
+				LogUtils.error("关闭链接失败" + e.getMessage());
 			}
 		}
 	}
@@ -571,14 +570,14 @@ public class FileUtil {
 				tempFile.mkdirs();
 			}
 			String newFileName = tempFile.getPath() + File.separator + fileName;
-			LogUtil.info("保存文件：" + newFileName);
+			LogUtils.info("保存文件：" + newFileName);
 			os = new FileOutputStream(newFileName);
 			// 开始读取
 			while ((len = inputStream.read(bs)) != -1) {
 				os.write(bs, 0, len);
 			}
 		} catch (Exception e) {
-			LogUtil.error("生成excel失败");
+			LogUtils.error("生成excel失败");
 		} finally {
 			// 完毕，关闭所有链接
 			try {
@@ -587,7 +586,7 @@ public class FileUtil {
 				}
 				inputStream.close();
 			} catch (IOException e) {
-				LogUtil.error("关闭链接失败" + e.getMessage());
+				LogUtils.error("关闭链接失败" + e.getMessage());
 			}
 		}
 	}

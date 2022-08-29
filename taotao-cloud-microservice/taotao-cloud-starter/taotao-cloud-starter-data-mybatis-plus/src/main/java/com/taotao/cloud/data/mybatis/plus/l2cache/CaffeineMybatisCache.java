@@ -17,7 +17,7 @@
 package com.taotao.cloud.data.mybatis.plus.l2cache;
 
 import com.taotao.cloud.caffeine.manager.CaffeineAutoCacheManager;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -47,7 +47,7 @@ public class CaffeineMybatisCache implements Cache {
 
 	public CaffeineMybatisCache(final String id) {
 		this.id = id;
-		Object obj = ContextUtil.getBean("caffeineCacheManager", true);
+		Object obj = ContextUtils.getBean("caffeineCacheManager", true);
 		if (Objects.isNull(obj)) {
 			throw new RuntimeException("请开启caffeineCacheManager");
 		}

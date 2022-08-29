@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.monitor.collect.task;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.monitor.annotation.FieldReport;
@@ -70,7 +70,7 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
-			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class, true);
+			HttpClientManager httpClientManager = ContextUtils.getBean(HttpClientManager.class, true);
 			if(Objects.isNull(httpClientManager)){
 				return null;
 			}
@@ -83,7 +83,7 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 			HttpPoolInfo info = new HttpPoolInfo();
 			StringBuilder detail = new StringBuilder();
 			pool.forEach((id, client) -> {
-				PoolingHttpClientConnectionManager manager = ReflectionUtil.getFieldValue(client,
+				PoolingHttpClientConnectionManager manager = ReflectionUtils.getFieldValue(client,
 					"manager");
 				PoolStats stats = manager.getTotalStats();
 				info.availableCount += stats.getAvailable();
@@ -101,8 +101,8 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 			info.poolDetail = detail.toString();
 			return info;
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

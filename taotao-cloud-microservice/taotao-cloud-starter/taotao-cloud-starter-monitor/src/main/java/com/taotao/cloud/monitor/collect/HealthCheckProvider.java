@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.collect;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.collect.task.AsyncThreadPoolCollectTask;
 import com.taotao.cloud.monitor.collect.task.CpuCollectTask;
@@ -104,19 +104,19 @@ public class HealthCheckProvider implements AutoCloseable {
 				try {
 					Report report = getReport(false);
 					String text = strategy.analyseText(report);
-					if (StringUtil.isEmpty(text)) {
+					if (StringUtils.isEmpty(text)) {
 						return;
 					}
 
 					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "健康检查", text);
 				} catch (Exception e) {
-					LogUtil.warn(StarterName.MONITOR_STARTER, "run 循环采集出错", e);
+					LogUtils.warn(StarterName.MONITOR_STARTER, "run 循环采集出错", e);
 				}
 
 				try {
 					Thread.sleep(monitorProperties.getTimeSpan() * 1000L);
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 		});
@@ -144,7 +144,7 @@ public class HealthCheckProvider implements AutoCloseable {
 						report.put(task.getName(), report2.setDesc(task.getDesc()).setName(task.getName()));
 					}
 				} catch (Exception e) {
-					LogUtil.error(e,
+					LogUtils.error(e,
 						StarterName.MONITOR_STARTER + task.getName() + "采集获取报表出错");
 				}
 			}
@@ -164,7 +164,7 @@ public class HealthCheckProvider implements AutoCloseable {
 			try {
 				task.close();
 			} catch (Exception exp) {
-				LogUtil.warn(StarterName.MONITOR_STARTER, "close资源释放出错",
+				LogUtils.warn(StarterName.MONITOR_STARTER, "close资源释放出错",
 					exp);
 			}
 		}

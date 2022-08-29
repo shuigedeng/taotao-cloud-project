@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.biz.stream.consumer;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class SmsConsumerService {
 	@Bean
 	public Consumer<String> sms() {
 		return message -> {
-			LogUtil.info("接收的普通消息为：{}", message);
+			LogUtils.info("接收的普通消息为：{}", message);
 		};
 	}
 }

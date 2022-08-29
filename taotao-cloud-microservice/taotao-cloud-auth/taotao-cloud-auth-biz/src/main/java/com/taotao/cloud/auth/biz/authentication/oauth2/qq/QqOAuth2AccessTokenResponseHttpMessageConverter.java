@@ -1,6 +1,6 @@
 package com.taotao.cloud.auth.biz.authentication.oauth2.qq;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -37,7 +37,7 @@ public class QqOAuth2AccessTokenResponseHttpMessageConverter extends
 			e.printStackTrace();
 		}
 
-		LogUtil.info("qq的AccessToken响应信息：{}", response);
+		LogUtils.info("qq的AccessToken响应信息：{}", response);
 
 		// 解析响应信息类似access_token=YOUR_ACCESS_TOKEN&expires_in=3600这样的字符串
 		Map<String, Object> tokenResponseParameters = Arrays.stream(response.split("&"))

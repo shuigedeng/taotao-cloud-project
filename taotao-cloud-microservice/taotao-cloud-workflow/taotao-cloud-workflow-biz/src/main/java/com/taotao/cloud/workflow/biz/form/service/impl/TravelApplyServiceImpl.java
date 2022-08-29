@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.TravelApplyEntity;
@@ -69,8 +69,8 @@ public class TravelApplyServiceImpl extends ServiceImpl<TravelApplyMapper, Trave
 
     @Override
     public void data(String id, String data) {
-        TravelApplyForm travelApplyForm = JsonUtil.getJsonToBean(data, TravelApplyForm.class);
-        TravelApplyEntity entity = JsonUtil.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyForm travelApplyForm = JsonUtils.getJsonToBean(data, TravelApplyForm.class);
+        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -23,7 +23,7 @@ import cn.hutool.json.JSONUtil;
 import com.github.rahulsinghai.logback.kafka.KafkaAppenderConfig;
 import com.github.rahulsinghai.logback.kafka.delivery.FailedDeliveryCallback;
 import com.google.common.base.Stopwatch;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -204,7 +204,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 			}
 		} else {
 			sendErrorNum.getAndIncrement();
-			LogUtil.error("kafka producer not init");
+			LogUtils.error("kafka producer not init");
 			failedDeliveryCallback.onFailedDelivery(e, null);
 		}
 	}
@@ -218,7 +218,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		long lastMinute =lastErrorStopwatch.elapsed(TimeUnit.MINUTES);
 		long lastHour = lastErrorStopwatch.elapsed(TimeUnit.HOURS);
 
-		LogUtil.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		LogUtils.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
 		lastErrorStopwatch.reset().start();
 	}
 
@@ -231,7 +231,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		long lastMinute =lastSuccessStopwatch.elapsed(TimeUnit.MINUTES);
 		long lastHour = lastSuccessStopwatch.elapsed(TimeUnit.HOURS);
 
-		LogUtil.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "系统日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		LogUtils.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "系统日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
 		lastSuccessStopwatch.reset().start();
 	}
 

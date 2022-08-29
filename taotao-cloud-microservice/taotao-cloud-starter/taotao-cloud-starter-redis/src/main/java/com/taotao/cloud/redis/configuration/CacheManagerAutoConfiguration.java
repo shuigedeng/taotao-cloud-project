@@ -17,8 +17,8 @@ package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.properties.CacheProperties;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -68,7 +68,7 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CacheManagerAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(CacheManagerAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	private final org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties;
@@ -121,22 +121,22 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 		return new CacheErrorHandler() {
 			@Override
 			public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
-				LogUtil.error(e.getMessage(), e);
+				LogUtils.error(e.getMessage(), e);
 			}
 
 			@Override
 			public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
-				LogUtil.error(e.getMessage(), e);
+				LogUtils.error(e.getMessage(), e);
 			}
 
 			@Override
 			public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
-				LogUtil.error(e.getMessage(), e);
+				LogUtils.error(e.getMessage(), e);
 			}
 
 			@Override
 			public void handleCacheClearError(RuntimeException e, Cache cache) {
-				LogUtil.error(e.getMessage(), e);
+				LogUtils.error(e.getMessage(), e);
 			}
 		};
 	}
@@ -235,7 +235,7 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 		@Override
 		protected RedisCache createRedisCache(String name,
 			@Nullable RedisCacheConfiguration cacheConfig) {
-			if (StringUtil.isBlank(name) || !name.contains(StringPool.HASH)) {
+			if (StringUtils.isBlank(name) || !name.contains(StringPool.HASH)) {
 				return super.createRedisCache(name, cacheConfig);
 			}
 			String[] cacheArray = name.split(StringPool.HASH);

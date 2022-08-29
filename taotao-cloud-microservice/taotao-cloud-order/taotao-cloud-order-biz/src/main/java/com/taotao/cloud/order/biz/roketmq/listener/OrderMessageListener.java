@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.listener;
 
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
@@ -48,7 +48,7 @@ public class OrderMessageListener implements RocketMQListener<MessageExt> {
 		try {
 			this.orderStatusEvent(messageExt);
 		} catch (Exception e) {
-			LogUtil.error("订单状态变更事件调用异常", e);
+			LogUtils.error("订单状态变更事件调用异常", e);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class OrderMessageListener implements RocketMQListener<MessageExt> {
 					try {
 						event.orderCreate(tradeDTO);
 					} catch (Exception e) {
-						LogUtil.error("交易{}入库,在{}业务中，状态修改事件执行异常",
+						LogUtils.error("交易{}入库,在{}业务中，状态修改事件执行异常",
 							tradeDTO.getSn(),
 							event.getClass().getName(),
 							e);
@@ -89,7 +89,7 @@ public class OrderMessageListener implements RocketMQListener<MessageExt> {
 							new String(messageExt.getBody()), OrderMessage.class);
 						orderStatusChangeEvent.orderChange(orderMessage);
 					} catch (Exception e) {
-						LogUtil.error("订单{},在{}业务中，状态修改事件执行异常",
+						LogUtils.error("订单{},在{}业务中，状态修改事件执行异常",
 							new String(messageExt.getBody()),
 							orderStatusChangeEvent.getClass().getName(),
 							e);
